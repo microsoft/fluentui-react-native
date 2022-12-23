@@ -13,11 +13,31 @@ import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
+const startTrackBackgroundAnimation = (checked: boolean, animation: Animated.Value) => {
+  const toValue = checked ? 0 : 1;
+  Animated.timing(animation, {
+    toValue,
+    duration: 500,
+    useNativeDriver: false,
+  }).start();
+};
+
+const startTrackAnimation = (onInit = false, bgColor: any, animation: Animated.Value, toggled: boolean) => {
+  Animated.timing(animation, {
+    toValue: toggled ? bgColor.width - (bgColor.thumbWidth + bgColor.thumbMargin * 2) : onInit ? 0 : -(bgColor.width + bgColor.thumbWidth),
+    duration: 300,
+    useNativeDriver: true,
+  }).start();
+};
+
 export const useSwitch = (
   props: SwitchProps,
   bgColor?: { on: string; off: string; width: number; thumbWidth: number; thumbMargin: number },
 ): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
+  const [animation] = React.useState(new Animated.Value(0));
+  const [trackBackgroundAnimation] = React.useState(new Animated.Value(0));
+
   const {
     onChange,
     checked,
@@ -40,20 +60,16 @@ export const useSwitch = (
       onChange && onChange(e, checked);
       if (Platform.OS === 'android') {
         if (checked) {
-          startAnimatiobgn(checked);
-          startAnimation();
+          startTrackBackgroundAnimation(checked, trackBackgroundAnimation);
+          startTrackAnimation(false, bgColor, animation, checked);
         } else {
-          startAnimatiobgn(checked);
-          startAnimation2();
+          startTrackBackgroundAnimation(checked, trackBackgroundAnimation);
+          startTrackAnimation(false, bgColor, animation, checked);
         }
       }
     },
     [onChange],
   );
-
-  console.log('CHecked' + checked);
-  const [animation, setAnimation] = React.useState(new Animated.Value(0));
-  const [animationbg, setAnimationbg] = React.useState(new Animated.Value(0));
 
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
 
@@ -66,47 +82,20 @@ export const useSwitch = (
       ],
     },
     trackBackgroundStyle: {
-      backgroundColor: animationbg.interpolate({
+      backgroundColor: trackBackgroundAnimation.interpolate({
         inputRange: [0, 1],
         outputRange: checkedState ? [bgColor.on, bgColor.on] : [bgColor.off, bgColor.off],
       }),
     },
   };
 
-  console.log('switchAnimationStyles : ', switchAnimationStyles);
-
-  const startAnimation = () => {
-    Animated.timing(animation, {
-      toValue: bgColor.width - (bgColor.thumbWidth + bgColor.thumbMargin * 2),
-      duration: 250,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const startAnimatiobgn = (checked) => {
-    const toValue = checked ? 0 : 1;
-    Animated.timing(animationbg, {
-      toValue,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const startAnimation2 = (first = false) => {
-    Animated.timing(animation, {
-      toValue: first ? 0 : -(bgColor.width + bgColor.thumbWidth),
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
   if (Platform.OS === 'android') {
     if (checkedState) {
-      startAnimation();
-      startAnimatiobgn(true);
+      startTrackAnimation(false, bgColor, animation, checkedState);
+      startTrackBackgroundAnimation(true, trackBackgroundAnimation);
     } else {
-      startAnimation2(true);
-      startAnimatiobgn(false);
+      startTrackAnimation(true, bgColor, animation, checkedState);
+      startTrackBackgroundAnimation(false, trackBackgroundAnimation);
     }
   }
 
