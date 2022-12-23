@@ -386,7 +386,7 @@ PODS:
     - glog
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.3.3):
+  - react-native-slider (4.4.0):
     - React-Core
   - React-perflogger (0.68.5)
   - React-RCTActionSheet (0.68.5):
@@ -619,7 +619,7 @@ SPEC CHECKSUMS:
   React-jsinspector: eb202e43b3879aba9a14f3f65788aec85d4e1ea9
   React-logger: 98f663b292a60967ebbc6d803ae96c1381183b6d
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: 7d19220da2f2ae7cbb9aa80127cb73c597fa221f
+  react-native-slider: d2938a12c4e439a227c70eec65d119136eb4aeb5
   React-perflogger: 0458a87ea9a7342079e7a31b0d32b3734fb8415f
   React-RCTActionSheet: 22538001ea2926dea001111dd2846c13a0730bc9
   React-RCTAnimation: 732ce66878d4aa151d56a0d142b1105aa12fd313
