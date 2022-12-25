@@ -13,6 +13,7 @@
       commit="$CommitId$" />
   </metadata>
   <files>
-    <file src="..\dist\**" target="win32\specs" />
+    <file src="..\src\**" target="win32\specs" />
+    <file src="..\..\fluent-tester\src\TestComponents\**\consts" target="win32\specs" />
   </files>
 </package>

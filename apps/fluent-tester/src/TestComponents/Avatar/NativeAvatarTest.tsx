@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NativeAvatar, Size } from '@fluentui-react-native/experimental-avatar/';
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { NATIVE_AVATAR_TESTPAGE } from './consts';
+import { NATIVE_AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { testImageSource, rainbowGradientSource } from './testImageSources';
 import { commonTestStyles as commonStyles } from '../Common/styles';

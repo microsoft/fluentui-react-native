@@ -3,7 +3,7 @@ import {
   HOMEPAGE_BADGE_BUTTON,
   BADGE_TEST_COMPONENT,
   BADGE_SECONDARY_TEST_COMPONENT,
-} from '../../../../fluent-tester/src/TestComponents/Badge/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 export const enum BadgeComponentSelector {
