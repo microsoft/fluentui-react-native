@@ -45,34 +45,5 @@
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/focus-zone": "^0.11.13"
-  },
-  "rnx-kit": {
-    "reactNativeVersion": "0.68",
-    "kitType": "library",
-    "bundle": [
-      {
-        "id": "win32_specs",
-        "entryFile": "src/index.win32.ts",
-        "bundleOutput": "dist/win32_specs.bundle.js",
-        "sourcemapOutput": "dist/win32_specs.bundle.map",
-        "assetsDest": "dist",
-        "targets": [
-          "native"
-        ],
-        "detectCyclicDependencies": {
-          "throwOnError": true
-        },
-        "detectDuplicateDependencies": {
-          "throwOnError": false
-        },
-        "typescriptValidation": false
-      }
-    ],
-    "capabilities": [
-      "core",
-      "react",
-      "metro-config",
-      "babel-preset-react-native"
-    ]
   }
 }
