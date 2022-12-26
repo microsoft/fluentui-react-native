@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 23 Dec 2022 11:03:02 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.18.5",
+      "version": "0.18.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "7bfe8d5767a987ed2c327cd576a5296c4b116eb4",
+            "comment": "update spec for android unsupported props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Dec 2022 06:39:34 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.18.4",
       "version": "0.18.4",
