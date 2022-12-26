@@ -68,8 +68,8 @@ export const Switch = compose<SwitchType>({
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
-    const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true }, {}));
-    const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false }, {}));
+    const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true, disabled: userProps.disabled }, {}));
+    const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false, disabled: userProps.disabled }, {}));
 
     const animationConfig: IAnimationConfig = {
       toggleOnBgColor: switchOnSlot.track({}).props.style.backgroundColor,

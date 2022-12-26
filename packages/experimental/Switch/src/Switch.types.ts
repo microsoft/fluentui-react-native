@@ -183,7 +183,7 @@ export interface SwitchProps extends Omit<PressablePropsExtended, 'onPress'> {
   labelPosition?: 'before' | 'above' | 'after';
 }
 
-export type SwitchState = PressableState & { toggled?: boolean };
+export type SwitchState = PressableState & { toggled?: boolean; disabled?: boolean };
 
 export interface SwitchInfo {
   props: SwitchProps & React.ComponentPropsWithRef<any>;
