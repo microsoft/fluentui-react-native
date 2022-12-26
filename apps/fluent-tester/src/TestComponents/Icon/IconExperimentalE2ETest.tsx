@@ -3,7 +3,12 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { FontIcon, SvgIcon, Icon, FontIconProps, SvgIconProps } from '@fluentui-react-native/experimental-icon';
-import { ICON_ACCESSIBILITY_LABEL, ICON_TEST_COMPONENT, ICON_FONT_TEST_COMPONENT, ICON_SVG_TEST_COMPONENT } from '../../../../E2E/src/Icon/consts';
+import {
+  ICON_ACCESSIBILITY_LABEL,
+  ICON_TEST_COMPONENT,
+  ICON_FONT_TEST_COMPONENT,
+  ICON_SVG_TEST_COMPONENT,
+} from '../../../../E2E/src/Icon/consts';
 import TestSvg from '../../../assets/test.svg';
 
 const fontBuiltInProps: FontIconProps = {
