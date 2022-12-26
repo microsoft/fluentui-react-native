@@ -22,6 +22,7 @@ exports[`Switch Default 1`] = `
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
+  onChange={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
   onResponderGrant={[Function]}
@@ -64,24 +65,22 @@ exports[`Switch Default 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#3d3d3d",
+          "backgroundColor": "rgba(61, 61, 61, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,
-          "justifyContent": "flex-start",
-          "marginBottom": undefined,
-          "marginLeft": undefined,
           "marginRight": 8,
-          "marginTop": undefined,
           "width": 52,
         }
       }
     >
       <View
         animationClass="Ribbon_SwitchThumb"
+        collapsable={false}
         style={
           Object {
             "backgroundColor": "#ffffff",
@@ -89,6 +88,11 @@ exports[`Switch Default 1`] = `
             "elevation": 8,
             "height": 26,
             "margin": 3,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
             "width": 26,
           }
         }
@@ -120,6 +124,7 @@ exports[`Switch Disabled 1`] = `
   focusable={false}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
+  onChange={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
   onResponderGrant={[Function]}
@@ -162,24 +167,22 @@ exports[`Switch Disabled 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#3d3d3d",
+          "backgroundColor": "rgba(61, 61, 61, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,
-          "justifyContent": "flex-start",
-          "marginBottom": undefined,
-          "marginLeft": undefined,
           "marginRight": 8,
-          "marginTop": undefined,
           "width": 52,
         }
       }
     >
       <View
         animationClass="Ribbon_SwitchThumb"
+        collapsable={false}
         style={
           Object {
             "backgroundColor": "#ffffff",
@@ -187,6 +190,11 @@ exports[`Switch Disabled 1`] = `
             "elevation": 0,
             "height": 26,
             "margin": 3,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
             "width": 26,
           }
         }

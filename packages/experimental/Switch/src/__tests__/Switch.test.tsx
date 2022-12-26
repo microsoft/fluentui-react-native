@@ -3,6 +3,9 @@ import * as renderer from 'react-test-renderer';
 import { Switch } from '../Switch';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
+// mocks out setTimeout and other timer functions with mock functions , test will fail without this as we're using Animated API
+jest.useFakeTimers();
+
 it('Switch Default', () => {
   const tree = renderer.create(<Switch label="Default Switch" />).toJSON();
   expect(tree).toMatchSnapshot();
