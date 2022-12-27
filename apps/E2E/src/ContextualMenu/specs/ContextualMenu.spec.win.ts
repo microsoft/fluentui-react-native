@@ -37,8 +37,17 @@ describe('ContextualMenu Functional Tests', async () => {
   });
 
   it("Type 'SPACE' on ContextualMenu Button -> Validate that the menu opens by checking if its items are displayed", async () => {
-    /* Type a space on the ContextualMenu */
+    /* Type "space" on the ContextualMenu */
     await ContextualMenuPageObject.sendKeys(ContextualMenuPageObject._contextualMenu, [Keys.SPACE]);
+
+    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToDisplay(PAGE_TIMEOUT)).toBeTruthy();
+
+    await expect(await ContextualMenuPageObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+
+  it("Type 'ENTER' on ContextualMenu Button -> Validate that the menu opens by checking if its items are displayed", async () => {
+    /* Type "enter" on the ContextualMenu */
+    await ContextualMenuPageObject.sendKeys(ContextualMenuPageObject._contextualMenu, [Keys.ENTER]);
 
     await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToDisplay(PAGE_TIMEOUT)).toBeTruthy();
 
