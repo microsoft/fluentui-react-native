@@ -710,7 +710,7 @@ export interface AliasColorTokens {
   brandBackgroundDisabled?: ColorValue;
 
   /** @platform macOS, win32, windows */
-  brandBackgroundSelecte?: ColorValue;
+  brandBackgroundSelected?: ColorValue;
 
   /** @platform macOS, win32, windows */
   compoundBrandBackground1?: ColorValue;
@@ -756,7 +756,7 @@ export interface AliasColorTokens {
   // Stroke
 
   /** @platform android, iOS, macOS, win32, windows */
-  neutralStrokeAccessibl?: ColorValue;
+  neutralStrokeAccessible?: ColorValue;
 
   /** @platform macOS, win32, windows */
   neutralStrokeAccessibleHover?: ColorValue;
