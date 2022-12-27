@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 27 Dec 2022 19:25:09 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.7.0",
+      "version": "1.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "f1a04c796f51e982c75ca7260214962c650a7988",
+            "comment": "Activate spacing tokens page for all platforms"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Dec 2022 10:18:14 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.6.4",
       "version": "1.6.4",
