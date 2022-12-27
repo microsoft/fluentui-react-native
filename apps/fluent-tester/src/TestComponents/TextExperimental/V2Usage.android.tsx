@@ -1,1 +1,1 @@
-export {V2Usage} from './V2Usage.mobile';
+export { V2Usage } from './V2Usage.mobile';
