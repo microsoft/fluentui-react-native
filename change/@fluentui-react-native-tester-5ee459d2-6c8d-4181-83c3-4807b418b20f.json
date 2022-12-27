@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "android seperator implem , tester app changes",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
