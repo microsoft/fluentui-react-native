@@ -10,5 +10,5 @@
     },
     "types": ["webdriverio/async", "@wdio/jasmine-framework", "node", "@types/jasmine"]
   },
-  "include": ["src", "src/FocusZone/consts.ts", "src/FocusTrapZone/consts.ts", "src/Icon/consts.ts", "src/CornerRadiusTokens/consts.ts"]
+  "include": ["src"]
 }
