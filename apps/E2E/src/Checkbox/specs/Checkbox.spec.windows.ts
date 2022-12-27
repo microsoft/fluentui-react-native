@@ -1,7 +1,8 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CheckboxPageObject from '../pages/CheckboxPageObject';
+import { ComponentSelector } from '../../common/BasePage';
 import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Checkbox/consts';
-import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute } from '../../common/consts';
+import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 describe('Checkbox Testing Initialization', () => {
   it('Wait for app load', async () => {
@@ -24,30 +25,16 @@ describe('Checkbox Accessibility Testing', () => {
     await CheckboxPageObject.scrollToTestElement();
   });
 
-  it('Validate accessibilityRole is correct', async () => {
-    await expect(
-      await CheckboxPageObject.compareAttribute(CheckboxPageObject._primaryComponent, Attribute.AccessibilityRole, CHECKBOX_A11Y_ROLE),
-    ).toBeTrue();
+  it('Checkbox - Validate accessibilityRole is correct', async () => {
+    await expect(await CheckboxPageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
   });
 
-  it('Set accessibilityLabel -> Validate that accessibilityLabel is correct', async () => {
-    await expect(
-      await CheckboxPageObject.compareAttribute(
-        CheckboxPageObject._primaryComponent,
-        Attribute.AccessibilityLabel,
-        CHECKBOX_ACCESSIBILITY_LABEL,
-      ),
-    ).toBeTrue();
+  it('Checkbox - Set accessibilityLabel', async () => {
+    await expect(await CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOX_ACCESSIBILITY_LABEL);
   });
 
-  it('Do not set accessibilityLabel -> Validate that accessibilityLabel defaults to label', async () => {
-    await expect(
-      await CheckboxPageObject.compareAttribute(
-        CheckboxPageObject._secondaryComponent,
-        Attribute.AccessibilityLabel,
-        CHECKBOX_TEST_COMPONENT_LABEL,
-      ),
-    ).toBeTrue();
+  it('Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', async () => {
+    await expect(await CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL);
   });
 });
 
