@@ -37,7 +37,7 @@ export const BasicAvatar: React.FunctionComponent = () => {
         imageSource={showImage ? testImageSource : undefined}
         presence={showPresence ? 'available' : null}
         isRingVisible={showRing}
-        size={'xxLarge'}
+        size={'size72'}
       />
     </View>
   );
@@ -85,14 +85,14 @@ export const CustomizeColors: React.FunctionComponent = () => {
         customBorderImageSource={showCustomBorderImage ? rainbowGradientSource : null}
         isRingVisible={true}
         hasRingInnerGap={showRingGap}
-        size={'xxLarge'}
+        size={'size72'}
       />
     </View>
   );
 };
 
 const AvatarSizeRamp: React.FunctionComponent = () => {
-  const allSizes: Size[] = ['xSmall', 'small', 'medium', 'large', 'xLarge', 'xxLarge'];
+  const allSizes: Size[] = ['size16', 'size20', 'size24', 'size32', 'size40', 'size56', 'size72'];
 
   return (
     <Stack style={{ flexDirection: 'row' }}>

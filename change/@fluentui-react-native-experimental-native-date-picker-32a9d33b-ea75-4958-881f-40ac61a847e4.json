@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update iOS",
+  "packageName": "@fluentui-react-native/experimental-native-date-picker",
+  "email": "67026548+huwilkes@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}

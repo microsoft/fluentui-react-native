@@ -7,13 +7,14 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation RCTConvert (FRNAvatarAdditions)
 
 RCT_ENUM_CONVERTER(MSFAvatarSize, (@{
-    @"xSmall": @(MSFAvatarSizeXsmall),
-    @"small": @(MSFAvatarSizeSmall),
-    @"medium": @(MSFAvatarSizeMedium),
-    @"large": @(MSFAvatarSizeLarge),
-    @"xLarge": @(MSFAvatarSizeXlarge),
-    @"xxLarge": @(MSFAvatarSizeXxlarge),
-}), MSFAvatarSizeSmall, integerValue);
+    @"size16": @(MSFAvatarSizeSize16),
+    @"size20": @(MSFAvatarSizeSize20),
+    @"size24": @(MSFAvatarSizeSize24),
+    @"size32": @(MSFAvatarSizeSize32),
+    @"size40": @(MSFAvatarSizeSize40),
+    @"size56": @(MSFAvatarSizeSize56),
+    @"size72": @(MSFAvatarSizeSize72),
+}), MSFAvatarSizeSize24, integerValue);
 
 RCT_ENUM_CONVERTER(MSFAvatarPresence, (@{
     @"none": @(MSFAvatarPresenceNone),
