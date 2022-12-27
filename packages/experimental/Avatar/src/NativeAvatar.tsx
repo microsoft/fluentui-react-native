@@ -7,7 +7,7 @@ const avatarName = 'NativeAvatar';
 
 const NativeAvatarView = ensureNativeComponent('FRNAvatarView');
 
-export type Size = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge' | 'xxLarge';
+export type Size = 'size16' | 'size20' | 'size24' | 'size32' | 'size40' | 'size56' | 'size72' as const;
 
 export type AvatarStyle = 'default' | 'accent' | 'group' | 'outlined' | 'outlinedPrimary' | 'overflow';
 
