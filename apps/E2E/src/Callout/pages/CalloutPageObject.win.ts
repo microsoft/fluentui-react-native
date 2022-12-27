@@ -10,24 +10,34 @@ class CalloutPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async isCalloutOpen(): Promise<boolean> {
+  async didCalloutLoad(): Promise<boolean> {
     return await (await this._primaryComponent).isDisplayed();
   }
 
-  // This both opens and waits for it to go in view
-  async openCalloutAndWaitForLoad(): Promise<void> {
-    if (!(await this.isCalloutOpen())) {
-      await (await this._buttonToOpenCallout).click();
-      await this.waitForCondition(
-        async () => await this.isCalloutOpen(),
-        'Clicked the button to open the Callout, but the Callout did not open correctly.',
-      );
-    }
+  /* OVERRIDE: This must scroll to the button that opens the callout, not the callout (since it's not visible on load.) */
+  async scrollToTestElement(): Promise<void> {
+    // on win32, adding a blank value to an element automatically scrolls to it
+    await (await this._buttonToOpenCallout).addValue('');
+  }
+
+  async openCallout(): Promise<void> {
+    await (await this._buttonToOpenCallout).click();
   }
 
   async closeCallout(): Promise<void> {
     // all we have to do is click outside the callout
     await (await this._testPage).click();
+  }
+
+  async waitForCalloutComponentInView(timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
+        return await this.didCalloutLoad();
+      },
+      {
+        timeout: timeout ?? this.waitForUiEvent,
+      },
+    );
   }
 
   /*****************************************/
