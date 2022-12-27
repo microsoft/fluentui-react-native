@@ -4,7 +4,7 @@ import {
   BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED,
   HOMEPAGE_BUTTON_BUTTON,
   BUTTON_ON_PRESS_DEPRECATED,
-} from '../../../../fluent-tester/src/TestComponents/Button/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 class ButtonPageObject extends BasePage {
   /******************************************************************/

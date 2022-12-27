@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AVATAR_TESTPAGE } from './consts';
+import { AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';

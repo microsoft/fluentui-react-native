@@ -2,7 +2,7 @@ import {
   PERSONA_TESTPAGE,
   PERSONA_TEST_COMPONENT,
   HOMEPAGE_PERSONA_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/Persona/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PersonaPageObject extends BasePage {
