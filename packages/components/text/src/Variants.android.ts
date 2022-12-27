@@ -1,7 +1,5 @@
 import { Text } from './Text';
 
-// GH #2268: Remove "as any" designations once RN Core properly supports Dynamic Type scaling
-
 export const Caption1 = Text.customize({
   variant: 'caption1',
 } as any);
@@ -23,14 +21,18 @@ export const Body2 = Text.customize({
 export const Body2Strong = Text.customize({
   variant: 'body2Strong',
 } as any);
-export const Subtitle1 = null; // Not supported on iOS
-export const Subtitle1Strong = null; // Not supported on iOS
-export const Subtitle2 = null; // Not supported on iOS
-export const Subtitle2Strong = null; // Not supported on iOS
+
+export const Subtitle1 = null; // Not supported
+export const Subtitle1Strong = null; // Not supported
+export const Subtitle2 = null; // Not supported
+export const Subtitle2Strong = null; // Not supported
+
 export const Title1 = Text.customize({
   variant: 'title1',
 } as any);
-export const Title1Strong = null; // Not supported on iOS
+
+export const Title1Strong = null; // Not supported
+
 export const Title2 = Text.customize({
   variant: 'title2',
 } as any);
