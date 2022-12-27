@@ -87,7 +87,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     [radioGroupContext, componentRef],
   );
 
-  // Updates the focus
+  // Sets the focus on this Radio if this Radio is selected.
   React.useEffect(() => {
     if (value === radioGroupContext.value && !isDisabled) {
       radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
