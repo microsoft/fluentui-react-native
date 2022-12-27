@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update tester",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "67026548+huwilkes@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update Mac",
-  "packageName": "@fluentui-react-native/experimental-avatar",
-  "email": "67026548+huwilkes@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
