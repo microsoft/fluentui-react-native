@@ -26,7 +26,7 @@ describe('Callout Accessibility Testing', () => {
     await CalloutPageObject.openCalloutAndWaitForLoad();
   });
 
-  it('Validate "accessibilityRole" is correct', async () => {
+  it('Validate "accessibilityRole" prop has correct value, propagates to "ControlType" element attribute.', async () => {
     await expect(
       await CalloutPageObject.compareAttribute(CalloutPageObject._primaryComponent, Attribute.AccessibilityRole, CALLOUT_A11Y_ROLE),
     ).toBeTrue();
@@ -34,7 +34,7 @@ describe('Callout Accessibility Testing', () => {
     await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
-  it('Validate "accessibilityLabel" is correct AFTER setting "accessibilityLabel"', async () => {
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     await expect(
       await CalloutPageObject.compareAttribute(
         CalloutPageObject._primaryComponent,
@@ -57,7 +57,7 @@ describe('Callout Functional Testing', () => {
     await CalloutPageObject.openCalloutAndWaitForLoad();
   });
 
-  it('Validate that it is visible and loaded AFTER clicking a button to open the Callout', async () => {
+  it('Open Callout by clicking a button. Validate that the Callout is displayed.', async () => {
     await expect(await CalloutPageObject.isCalloutOpen()).toBeTruthy('The callout failed to visibly display.');
   });
 
