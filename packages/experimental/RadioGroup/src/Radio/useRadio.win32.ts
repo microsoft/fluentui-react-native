@@ -4,7 +4,7 @@ import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
 import { usePressableState, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState } from 'react-native';
-import type { IHandledKeyboardEvent } from '@office-iss/react-native-win32';
+import { KeyPressEvent, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
@@ -13,14 +13,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
 
   // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
   const radioGroupContext = useRadioGroupContext();
-
-  // Disables arrow up, arrow down, arrow right, and arrow left behavior on native side
-  const handledNativeKeyboardEvents: IHandledKeyboardEvent[] = [
-    { key: 'ArrowDown' },
-    { key: 'ArrowUp' },
-    { key: 'ArrowRight' },
-    { key: 'ArrowLeft' },
-  ];
 
   const {
     label,
@@ -36,7 +28,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     accessibilityPositionInSet,
     accessibilitySetSize,
     enableFocusRing,
-    keyDownEvents = handledNativeKeyboardEvents,
     ...rest
   } = props;
 
@@ -60,6 +51,55 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
     }
   }, []);
+
+  const isCircularNavigation = true;
+
+  const onInvoke = React.useCallback(
+    (e: KeyPressEvent) => {
+      if (
+        e.nativeEvent.key == 'ArrowDown' ||
+        e.nativeEvent.key == 'ArrowRight' ||
+        e.nativeEvent.key == 'ArrowUp' ||
+        e.nativeEvent.key == 'ArrowLeft'
+      ) {
+        const length = radioGroupContext.enabledValues.length;
+        const currRadioIndex = radioGroupContext.enabledValues.indexOf(radioGroupContext.value);
+        let newCurrRadioIndex;
+        if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key == 'ArrowRight') {
+          if (isCircularNavigation || !(currRadioIndex + 1 == length)) {
+            newCurrRadioIndex = (currRadioIndex + 1) % length;
+            radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
+            radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
+            radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+            componentRef?.current?.focus();
+          }
+        } else {
+          if (isCircularNavigation || !(currRadioIndex == 0)) {
+            newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
+            radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
+            radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
+            radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+            componentRef?.current?.focus();
+          }
+        }
+      }
+    },
+    [radioGroupContext, componentRef],
+  );
+
+  // Updates the focus
+  React.useEffect(() => {
+    if (value === radioGroupContext.value && !isDisabled) {
+      radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
+      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+      componentRef?.current?.focus();
+    }
+  }, [radioGroupContext]);
+
+  const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
+
+  // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
+  const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
 
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
@@ -104,7 +144,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       ...rest,
       ref: buttonRef,
       ...pressable.props,
-      keyDownEvents,
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityHint: accessibilityHint ?? subtext,
@@ -115,6 +154,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       focusable: !state.disabled,
       enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,
+      ...onKeyDownProps,
     },
     state: state,
   };

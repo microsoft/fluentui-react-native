@@ -9,7 +9,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useRadioGroup } from './useRadioGroup.win32';
 import { RadioGroupProvider } from './radioGroupContext';
 import { useRadioGroupContextValue } from './useRadioGroupContextValue';
-import { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
+// import { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the radiogroup.
@@ -76,41 +76,41 @@ export const RadioGroup = compose<RadioGroupType>({
         });
       }
 
-      const onKeyDown = (e: KeyPressEvent) => {
-        if (
-          e.nativeEvent.key == 'ArrowDown' ||
-          e.nativeEvent.key == 'ArrowRight' ||
-          e.nativeEvent.key == 'ArrowUp' ||
-          e.nativeEvent.key == 'ArrowLeft'
-        ) {
-          const length = contextValue.enabledValues.length;
-          const currRadioIndex = contextValue.enabledValues.indexOf(contextValue.value);
-          let newCurrRadioIndex;
-          if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key == 'ArrowRight') {
-            if (isCircularNavigation || !(currRadioIndex + 1 == length)) {
-              newCurrRadioIndex = (currRadioIndex + 1) % length;
-              contextValue.value = contextValue.enabledValues[newCurrRadioIndex];
-              contextValue.onChange(contextValue.value);
-              // React.useRef(children[newCurrRadioIndex])?.current?.focus();
-            }
-          } else {
-            if (isCircularNavigation || !(currRadioIndex == 0)) {
-              newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
-              // radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.values[newCurrRadioIndex]);
-              // radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-              contextValue.value = contextValue.enabledValues[newCurrRadioIndex];
-              contextValue.onChange(contextValue.value);
-            }
-          }
-        }
-      };
+      // const onKeyDown = (e: KeyPressEvent) => {
+      //   if (
+      //     e.nativeEvent.key == 'ArrowDown' ||
+      //     e.nativeEvent.key == 'ArrowRight' ||
+      //     e.nativeEvent.key == 'ArrowUp' ||
+      //     e.nativeEvent.key == 'ArrowLeft'
+      //   ) {
+      //     const length = contextValue.enabledValues.length;
+      //     const currRadioIndex = contextValue.enabledValues.indexOf(contextValue.value);
+      //     let newCurrRadioIndex;
+      //     if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key == 'ArrowRight') {
+      //       if (isCircularNavigation || !(currRadioIndex + 1 == length)) {
+      //         newCurrRadioIndex = (currRadioIndex + 1) % length;
+      //         contextValue.value = contextValue.enabledValues[newCurrRadioIndex];
+      //         contextValue.onChange(contextValue.value);
+      //         // React.useRef(children[newCurrRadioIndex])?.current?.focus();
+      //       }
+      //     } else {
+      //       if (isCircularNavigation || !(currRadioIndex == 0)) {
+      //         newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
+      //         // radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.values[newCurrRadioIndex]);
+      //         // radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+      //         contextValue.value = contextValue.enabledValues[newCurrRadioIndex];
+      //         contextValue.onChange(contextValue.value);
+      //       }
+      //     }
+      //   }
+      // };
 
       return (
         <RadioGroupProvider value={contextValue}>
           <Slots.root {...mergedProps}>
             {label && labelComponent}
             <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
-              <Slots.options onKeyDown={onKeyDown}>{children}</Slots.options>
+              <Slots.options /*onKeyDown={onKeyDown}*/>{children}</Slots.options>
             </Slots.container>
           </Slots.root>
         </RadioGroupProvider>
