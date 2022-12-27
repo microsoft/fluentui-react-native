@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CalloutPageObject from '../pages/CalloutPageObject.win';
-import { CALLOUT_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Callout/consts';
+import { CALLOUT_ACCESSIBILITY_LABEL } from '../consts';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CALLOUT_A11Y_ROLE } from '../../common/consts';
 import { ComponentSelector } from '../../common/BasePage';
 

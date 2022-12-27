@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Changing location of E2E constants from /apps/fluent-tester to /apps/E2E. This consolidates data specific to E2E testing",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}

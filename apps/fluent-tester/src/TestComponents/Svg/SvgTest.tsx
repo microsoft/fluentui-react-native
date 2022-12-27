@@ -3,7 +3,7 @@ import { StyleSheet, Switch, Text, View } from 'react-native';
 import { Separator } from '@fluentui/react-native';
 import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgUri, Use } from 'react-native-svg';
 import TestSvg from './Assets/accessible-icon-brands.svg';
-import { SVG_TESTPAGE } from './consts';
+import { SVG_TESTPAGE } from '../../../../E2E/src/Svg/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';

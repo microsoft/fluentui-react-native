@@ -12,7 +12,7 @@ import {
   FOCUSZONE_TEST_COMPONENT,
   FOCUSZONE_TWO_DIM_SWITCH,
   HOMEPAGE_FOCUSZONE_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/FocusZone/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 export const enum GridButton {

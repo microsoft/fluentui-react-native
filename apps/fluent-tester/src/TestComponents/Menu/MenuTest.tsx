@@ -12,7 +12,7 @@ import {
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { MENU_TESTPAGE } from './consts';
+import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';

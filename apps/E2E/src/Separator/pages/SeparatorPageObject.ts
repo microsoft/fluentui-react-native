@@ -2,7 +2,7 @@ import {
   SEPARATOR_TESTPAGE,
   SEPARATOR_TEST_COMPONENT,
   HOMEPAGE_SEPARATOR_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/Separator/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class SeparatorPageObject extends BasePage {
