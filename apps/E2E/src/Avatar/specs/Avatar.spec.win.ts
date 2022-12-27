@@ -1,11 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import AvatarPageObject from '../pages/AvatarPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, LINK_A11Y_ROLE, IMAGE_A11Y_ROLE } from '../../common/consts';
-import {
-  AVATAR_ACCESSIBILITY_LABEL,
-  AVATAR_ACCESSIBILITY_LABEL_BY_NAME,
-  AVATAR_ACCESSIBILITY_HINT,
-} from '../../../../fluent-tester/src/TestComponents/Avatar/consts';
+import { AVATAR_ACCESSIBILITY_LABEL, AVATAR_ACCESSIBILITY_LABEL_BY_NAME, AVATAR_ACCESSIBILITY_HINT } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Avatar Testing Initialization', function () {

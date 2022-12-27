@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CalloutPageObject from '../pages/CalloutPageObject.win';
-import { CALLOUT_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Callout/consts';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CALLOUT_A11Y_ROLE, Attribute } from '../../common/consts';
+import { CALLOUT_ACCESSIBILITY_LABEL } from '../consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CALLOUT_A11Y_ROLE } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Callout Testing Initialization', function () {

@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkPageObject from '../pages/LinkPageObject';
 import { ComponentSelector } from '../../common/BasePage';
-import { LINK_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Link/consts';
+import { LINK_ACCESSIBILITY_LABEL } from '../consts';
 import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open

@@ -3,7 +3,7 @@ import {
   CALLOUT_TEST_COMPONENT,
   HOMEPAGE_CALLOUT_BUTTON,
   BUTTON_TO_OPEN_CALLOUT,
-} from '../../../../fluent-tester/src/TestComponents/Callout/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class CalloutPageObject extends BasePage {

@@ -8,7 +8,7 @@ import {
   MENU_BUTTON_ACCESSIBILITY_LABEL,
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   MENU_BUTTON_TEST_COMPONENT_LABEL,
-} from './consts';
+} from '../../../../E2E/src/MenuButton/consts';
 
 export const E2ETestMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);

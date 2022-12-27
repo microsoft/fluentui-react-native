@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Wed, 14 Dec 2022 17:45:41 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 19:25:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.0
+
+Tue, 27 Dec 2022 19:25:09 GMT
+
+### Minor changes
+
+- Activate spacing tokens page for all platforms (adgleitm@microsoft.com)
+
+## 1.6.4
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.14
+
+## 1.6.3
+
+Thu, 22 Dec 2022 23:12:13 GMT
+
+### Patches
+
+- Add spacing E2E tests (adgleitm@microsoft.com)
+
+## 1.6.2
+
+Wed, 21 Dec 2022 10:29:07 GMT
+
+### Patches
+
+- Added E2E tests for FURN Icon. This is code of existing Icon tests. Changes will be done in separate commits (vkozlova@microsoft.com)
+
+## 1.6.1
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.13
 
 ## 1.6.0
 
