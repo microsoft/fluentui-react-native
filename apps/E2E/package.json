@@ -44,5 +44,15 @@
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/focus-zone": "^0.11.14"
+  },
+  "rnx-kit": {
+    "reactNativeVersion": "0.68",
+    "kitType": "library",
+    "capabilities": [
+      "core",
+      "react",
+      "metro-config",
+      "babel-preset-react-native"
+    ]
   }
 }
