@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 27 Dec 2022 20:49:48 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.0
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Minor changes
+
+- Clean up and overhaul Avatar and Callout tests with better errors and cleaner PageObjects (winlarry@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.15
 
 ## 1.7.1
 
