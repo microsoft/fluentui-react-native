@@ -10,7 +10,7 @@ import {
   DismissBehaviors,
   StealthButton,
 } from '@fluentui/react-native';
-import { CALLOUT_TESTPAGE } from './consts';
+import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
@@ -435,7 +435,7 @@ export const CalloutTest: React.FunctionComponent = () => {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 

@@ -3,7 +3,7 @@ import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { CHECKBOX_TESTPAGE } from './consts';
+import { CHECKBOX_TESTPAGE } from '../../../../E2E/src/Checkbox/consts';
 import { E2ECheckboxTest } from './CheckboxE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
@@ -172,10 +172,10 @@ const checkboxSections: TestSection[] = [
 
 export const CheckboxTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
+    win32Status: 'Deprecated',
+    uwpStatus: 'Deprecated',
     iosStatus: 'N/A',
-    macosStatus: 'Experimental',
+    macosStatus: 'Deprecated',
     androidStatus: 'N/A',
   };
 

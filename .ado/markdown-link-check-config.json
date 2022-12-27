@@ -8,6 +8,9 @@
     },
     {
       "pattern": "https://github.com/microsoft/fluentui-design-tokens"
+    },
+    {
+      "pattern": "^https://badge.fury.io/js/@fluentui-react-native%2Fdependency-profiles"
     }
   ],
   "timeout": "5s",

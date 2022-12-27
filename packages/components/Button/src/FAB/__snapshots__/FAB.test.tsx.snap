@@ -61,7 +61,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
-        "marginStart": 0,
+        "marginStart": 8,
         "marginTop": 0,
       }
     }
@@ -192,7 +192,7 @@ exports[`Default FAB (iOS) 1`] = `
           "margin": 0,
           "marginBottom": 0,
           "marginEnd": 0,
-          "marginStart": 0,
+          "marginStart": 8,
           "marginTop": 0,
         }
       }

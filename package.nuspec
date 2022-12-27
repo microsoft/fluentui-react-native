@@ -12,10 +12,12 @@
     <!-- iOS device ship -->
     <file src="DerivedData\Build\Products\Release-iphoneos\FRNAvatar\libFRNAvatar.a" target="Ship-iphoneos"/>
     <file src="DerivedData\Build\Products\Release-iphoneos\FRNDatePicker\libFRNDatePicker.a" target="Ship-iphoneos"/>
+    <file src="DerivedData\Build\Products\Release-iphoneos\FRNFontMetrics\libFRNFontMetrics.a" target="Ship-iphoneos"/>
 
     <!-- iOS simulator ship -->
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNAvatar\libFRNAvatar.a" target="Ship-iphonesimulator"/>
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNDatePicker\libFRNDatePicker.a" target="Ship-iphonesimulator"/>
+    <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNFontMetrics\libFRNFontMetrics.a" target="Ship-iphoneos"/>
 
     <!-- macOS ship -->
     <file src="DerivedData\Build\Products\Release\FRNAvatar\libFRNAvatar.a" target="Ship-macosx"/>
