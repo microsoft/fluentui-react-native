@@ -1,7 +1,7 @@
 import {
   HOMEPAGE_CORNERRADIUS_TESTPAGE,
   HOMEPAGE_CORNERRADIUS_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/CornerRadius/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class CornerRadiusTokensPageObject extends BasePage {

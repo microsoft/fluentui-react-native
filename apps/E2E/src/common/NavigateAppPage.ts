@@ -1,38 +1,39 @@
-import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../../fluent-tester/src/TestComponents/ActivityIndicator/consts';
-import { HOMEPAGE_AVATAR_BUTTON } from '../../../fluent-tester/src/TestComponents/Avatar/consts';
-import { HOMEPAGE_BADGE_BUTTON } from '../../../fluent-tester/src/TestComponents/Badge/consts';
-import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../fluent-tester/src/TestComponents/Checkbox/consts';
-import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
-import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../../../fluent-tester/src/TestComponents/CornerRadius/consts';
-import { HOMEPAGE_BUTTON_BUTTON } from '../../../fluent-tester/src/TestComponents/Button/consts';
-import { HOMEPAGE_CALLOUT_BUTTON } from '../../../fluent-tester/src/TestComponents/Callout/consts';
-import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../../fluent-tester/src/TestComponents/ContextualMenu/consts';
-import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../../../fluent-tester/src/TestComponents/TabsExperimental/consts';
-import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../fluent-tester/src/TestComponents/FocusTrapZone/consts';
-import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../../fluent-tester/src/TestComponents/FocusZone/consts';
-import { HOMEPAGE_ICON_BUTTON } from '../../../fluent-tester/src/TestComponents/Icon/consts';
-import { HOMEPAGE_LINK_BUTTON } from '../../../fluent-tester/src/TestComponents/Link/consts';
-import { HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from '../../../fluent-tester/src/TestComponents/LinkExperimental/consts';
-import { HOMEPAGE_MENU_BUTTON } from '../../../fluent-tester/src/TestComponents/Menu/consts';
-import { HOMEPAGE_MENUBUTTON_BUTTON } from '../../../fluent-tester/src/TestComponents/MenuButton/consts';
-import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '../../../fluent-tester/src/TestComponents/MenuButtonExperimental/consts';
-import { HOMEPAGE_PERSONA_BUTTON } from '../../../fluent-tester/src/TestComponents/Persona/consts';
-import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../../fluent-tester/src/TestComponents/PersonaCoin/consts';
-import { HOMEPAGE_PRESSABLE_BUTTON } from '../../../fluent-tester/src/TestComponents/Pressable/consts';
-import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../../fluent-tester/src/TestComponents/RadioGroup/consts';
-import { HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from '../../../fluent-tester/src/TestComponents/RadioGroupExperimental/consts';
-import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../fluent-tester/src/TestComponents/Separator/consts';
-import { HOMEPAGE_SHADOW_BUTTON } from '../../../fluent-tester/src/TestComponents/Shadow/consts';
-import { HOMEPAGE_SHIMMER_BUTTON } from '../../../fluent-tester/src/TestComponents/Shimmer/consts';
-import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../../../fluent-tester/src/TestComponents/StrokeWidth/consts';
-import { HOMEPAGE_SVG_BUTTON } from '../../../fluent-tester/src/TestComponents/Svg/consts';
-import { HOMEPAGE_SWITCH_BUTTON } from '../../../fluent-tester/src/TestComponents/Switch/consts';
-import { HOMEPAGE_TEXT_BUTTON } from '../../../fluent-tester/src/TestComponents/Text/consts';
-import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../../../fluent-tester/src/TestComponents/TextExperimental/consts';
-import { HOMEPAGE_TOKEN_BUTTON } from '../../../fluent-tester/src/TestComponents/Tokens/consts';
-import { HOMEPAGE_TABS_BUTTON } from '../../../fluent-tester/src/TestComponents/Tabs/consts';
-import { HOMEPAGE_THEME_BUTTON } from '../../../fluent-tester/src/TestComponents/Theme/consts';
-import { BASE_TESTPAGE } from '../../../fluent-tester/src/TestComponents/Common/consts';
+import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../ActivityIndicator/consts';
+import { HOMEPAGE_AVATAR_BUTTON } from '../Avatar/consts';
+import { HOMEPAGE_BADGE_BUTTON } from '../Badge/consts';
+import { HOMEPAGE_CHECKBOX_BUTTON } from '../Checkbox/consts';
+import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../CheckboxExperimental/consts';
+import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../CornerRadiusTokens/consts';
+import { HOMEPAGE_BUTTON_BUTTON } from '../Button/consts';
+import { HOMEPAGE_CALLOUT_BUTTON } from '../Callout/consts';
+import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../ContextualMenu/consts';
+import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../TabsExperimental/consts';
+import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../FocusTrapZone/consts';
+import { HOMEPAGE_FOCUSZONE_BUTTON } from '../FocusZone/consts';
+import { HOMEPAGE_ICON_BUTTON } from '../Icon/consts';
+import { HOMEPAGE_LINK_BUTTON } from '../Link/consts';
+import { HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from '../LinkExperimental/consts';
+import { HOMEPAGE_MENU_BUTTON } from '../Menu/consts';
+import { HOMEPAGE_MENUBUTTON_BUTTON } from '../MenuButton/consts';
+import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '../MenuButtonExperimental/consts';
+import { HOMEPAGE_PERSONA_BUTTON } from '../Persona/consts';
+import { HOMEPAGE_PERSONACOIN_BUTTON } from '../PersonaCoin/consts';
+import { HOMEPAGE_PRESSABLE_BUTTON } from '../Pressable/consts';
+import { HOMEPAGE_RADIOGROUP_BUTTON } from '../RadioGroup/consts';
+import { HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from '../RadioGroupExperimental/consts';
+import { HOMEPAGE_SEPARATOR_BUTTON } from '../Separator/consts';
+import { HOMEPAGE_SHADOW_BUTTON } from '../Shadow/consts';
+import { HOMEPAGE_SHIMMER_BUTTON } from '../Shimmer/consts';
+import { HOMEPAGE_SPACING_BUTTON } from '../Spacing/consts';
+import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../StrokeWidthTokens/consts';
+import { HOMEPAGE_SVG_BUTTON } from '../Svg/consts';
+import { HOMEPAGE_SWITCH_BUTTON } from '../Switch/consts';
+import { HOMEPAGE_TEXT_BUTTON } from '../Text/consts';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../TextExperimental/consts';
+import { HOMEPAGE_TOKEN_BUTTON } from '../Tokens/consts';
+import { HOMEPAGE_TABS_BUTTON } from '../Tabs/consts';
+import { HOMEPAGE_THEME_BUTTON } from '../Theme/consts';
+import { BASE_TESTPAGE } from './consts';
 import { By, BasePage } from './BasePage';
 
 class NavigateAppPage extends BasePage {
@@ -134,6 +135,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToShimmerPage() {
     await (await this.shimmerPage).click();
+  }
+
+  async clickAndGoToSpacingTokensPage() {
+    await (await this.spacingTokensPage).click();
   }
 
   async clickAndGoToStrokeWidthTokensPage() {
@@ -282,6 +287,10 @@ class NavigateAppPage extends BasePage {
 
   private get strokeWidthTokensPage() {
     return By(HOMEPAGE_STROKEWIDTH_BUTTON);
+  }
+
+  private get spacingTokensPage() {
+    return By(HOMEPAGE_SPACING_BUTTON);
   }
 
   private get svgPage() {

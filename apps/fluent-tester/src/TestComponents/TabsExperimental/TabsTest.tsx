@@ -4,7 +4,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
-import { EXPERIMENTAL_TABS_TESTPAGE } from './consts';
+import { EXPERIMENTAL_TABS_TESTPAGE } from '../../../../E2E/src/TabsExperimental/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ETestExperimentalTabs } from './TabsExperimentalE2ETest';
 import { svgProps } from '../Common/iconExamples';

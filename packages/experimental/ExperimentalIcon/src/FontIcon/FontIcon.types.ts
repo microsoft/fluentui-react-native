@@ -27,4 +27,8 @@ export interface FontIconProps extends AccessibilityProps {
    * Style object which contains TextStyle props.
    */
   style?: StyleProp<TextStyle>;
+  /**
+   * Used to locate this view in end-to-end tests.
+   */
+  testID?: string | undefined;
 }

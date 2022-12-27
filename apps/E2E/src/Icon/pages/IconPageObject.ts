@@ -3,7 +3,7 @@ import {
   ICON_TEST_COMPONENT,
   HOMEPAGE_ICON_BUTTON,
   ICON_NO_A11Y_LABEL_COMPONENT,
-} from '../../../../fluent-tester/src/TestComponents/Icon/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class IconPageObject extends BasePage {

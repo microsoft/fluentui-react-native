@@ -15,7 +15,7 @@ import {
   FOCUSZONE_GRID_AFTER,
   FOCUSZONE_GRID_BUTTON,
   FOCUSZONE_DIRECTION_PICKER,
-} from './consts';
+} from '../../../../E2E/src/FocusZone/consts';
 import { focusZoneTestStyles, GridButton } from './styles';
 
 export const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];

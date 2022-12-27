@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Tue, 27 Dec 2022 21:34:48 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.7.4",
+      "version": "0.7.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "67026548+huwilkes@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "57ea8967c48937d90b2be860eec47e981a3350f0",
+            "comment": "Update iOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 13:07:10 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.7.3",
       "version": "0.7.3",

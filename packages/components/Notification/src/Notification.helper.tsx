@@ -3,6 +3,7 @@ import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { ButtonProps, ButtonTokens, ButtonV1 as Button } from '@fluentui-react-native/button';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { NotificationProps } from './Notification.types';
 
 export type NotificationButtonColorStates = { disabledColor; pressedColor };
@@ -68,6 +69,13 @@ export const NotificationButton = stagedComponent((props: NotificationButtonProp
       },
       pressed: {
         color: props.pressedColor,
+      },
+    },
+    medium: {
+      hasContent: {
+        minWidth: 0,
+        padding: globalTokens.sizeNone,
+        paddingHorizontal: globalTokens.sizeNone,
       },
     },
   });

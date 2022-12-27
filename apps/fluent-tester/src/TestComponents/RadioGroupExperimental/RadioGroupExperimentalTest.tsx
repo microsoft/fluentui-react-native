@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RADIO_GROUP_EXPERIMENTAL_TESTPAGE } from './consts';
+import { RADIO_GROUP_EXPERIMENTAL_TESTPAGE } from '../../../../E2E/src/RadioGroupExperimental/consts';
 import { DefaultRadioGroup } from './DefaultRadioGroup';
 import { RequiredRadioGroup } from './RequiredRadioGroup';
 import { DisabledRadioGroup } from './DisabledRadioGroup';
