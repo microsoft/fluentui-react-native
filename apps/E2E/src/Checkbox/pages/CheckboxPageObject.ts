@@ -5,14 +5,21 @@ import {
   HOMEPAGE_CHECKBOX_BUTTON,
   CHECKBOX_ON_PRESS,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By, DesktopPlatform } from '../../common/BasePage';
+import { Attribute, AttributeValue } from '../../common/consts';
 
 class CheckboxPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isCheckboxChecked(): Promise<boolean> {
-    return await (await this._primaryComponent).isSelected();
+    const checkbox = await this._primaryComponent;
+    if (this.platform === DesktopPlatform.Windows) {
+      // for native windows, .isSelected() always returns false. this is a workaround
+      return (await checkbox.getAttribute(Attribute.ToggleState)) === AttributeValue.on;
+    } else {
+      return await checkbox.isSelected();
+    }
   }
 
   /* Waits for the checkbox to be checked or unchecked if the new state is true or false. Returns true if the
