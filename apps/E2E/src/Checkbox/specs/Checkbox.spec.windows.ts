@@ -24,13 +24,13 @@ describe('Checkbox Accessibility Testing', () => {
     await CheckboxPageObject.scrollToTestElement();
   });
 
-  it('Validate accessibilityRole is correct', async () => {
+  it('Validate "accessibilityRole" is correct', async () => {
     await expect(
       await CheckboxPageObject.compareAttribute(CheckboxPageObject._primaryComponent, Attribute.AccessibilityRole, CHECKBOX_A11Y_ROLE),
     ).toBeTrue();
   });
 
-  it('Set accessibilityLabel -> Validate that accessibilityLabel is correct', async () => {
+  it('Validate "accessibilityLabel" is correct AFTER setting "accessibilityLabel"', async () => {
     await expect(
       await CheckboxPageObject.compareAttribute(
         CheckboxPageObject._primaryComponent,
@@ -40,7 +40,7 @@ describe('Checkbox Accessibility Testing', () => {
     ).toBeTrue();
   });
 
-  it('Do not set accessibilityLabel -> Validate that accessibilityLabel defaults to label', async () => {
+  it('Validate "accessibilityLabel" defaults to the checkbox label AFTER NOT setting "accessibilityLabel"', async () => {
     await expect(
       await CheckboxPageObject.compareAttribute(
         CheckboxPageObject._secondaryComponent,
