@@ -28,7 +28,7 @@ class ContextualMenuPageObject extends BasePage {
       await this.sendKeys(this._contextualMenuItem, [Keys.ESCAPE]);
       await this.waitForCondition(
         async () => !(await this.contextualMenuItemDisplayed()),
-        "Pressed 'ESC' on the ContextualMenu button, but the ContextualMenu items are still displayed - the ContextMenu failed to close.",
+        "Pressed 'ESC' on the ContextualMenu item, but the ContextualMenu items are still displayed - the ContextMenu appears to still be open.",
       );
     }
   }
