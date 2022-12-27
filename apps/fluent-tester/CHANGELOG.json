@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 27 Dec 2022 20:49:48 GMT",
+      "tag": "@fluentui-react-native/tester_v0.125.1",
+      "version": "0.125.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "42089895521e54f642644f39c9e397369a4f807b",
+            "comment": "Changing location of E2E constants from /apps/fluent-tester to /apps/E2E. This consolidates data specific to E2E testing"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Dec 2022 19:25:09 GMT",
       "tag": "@fluentui-react-native/tester_v0.125.0",
       "version": "0.125.0",
