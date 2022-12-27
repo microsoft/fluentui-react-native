@@ -5,7 +5,6 @@
   "license": "MIT",
   "scripts": {
     "build": "fluentui-scripts build",
-    "bundle": "react-native rnx-bundle --dev false",
     "e2etest:ios": "wdio run wdio.conf.ios.js",
     "e2etest:macos": "wdio run wdio.conf.macos.js",
     "e2etest:windows": "rimraf errorShots/* reports/* && wdio run wdio.conf.windows.js"
