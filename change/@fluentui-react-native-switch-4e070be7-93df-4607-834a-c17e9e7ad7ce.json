@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update token values for android.",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
