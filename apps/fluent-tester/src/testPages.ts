@@ -39,7 +39,7 @@ import { TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ThemeTest } from './TestComponents/Theme';
 import { TokenTest } from './TestComponents/Tokens';
 import { ExperimentalLinkTest } from './TestComponents/LinkExperimental';
-import * as Constants from '../../E2E/src/index.win32';
+import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
   {
