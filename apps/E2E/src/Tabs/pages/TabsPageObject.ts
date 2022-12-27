@@ -8,7 +8,7 @@ import {
   FIRST_TABS_ITEM_CONTENT,
   SECOND_TABS_ITEM_CONTENT,
   THIRD_TABS_ITEM_CONTENT,
-} from '../../../../fluent-tester/src/TestComponents/Tabs/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.

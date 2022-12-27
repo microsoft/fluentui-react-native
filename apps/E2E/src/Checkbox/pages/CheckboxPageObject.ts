@@ -4,7 +4,7 @@ import {
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_CHECKBOX_BUTTON,
   CHECKBOX_ON_PRESS,
-} from '../../../../fluent-tester/src/TestComponents/Checkbox/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class CheckboxPageObject extends BasePage {

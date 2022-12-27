@@ -4,7 +4,7 @@ import {
   EXPERIMENTAL_CHECKBOX_TEST_COMPONENT,
   EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_CHECKBOX_ON_PRESS,
-} from '../../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class ExperimentalCheckboxPageObject extends BasePage {

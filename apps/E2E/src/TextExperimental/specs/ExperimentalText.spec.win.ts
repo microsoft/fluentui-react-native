@@ -5,7 +5,7 @@ import { ComponentSelector } from '../../common/BasePage';
 import {
   EXPERIMENTAL_TEXT_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_TEXT_CONTENT,
-} from '../../../../fluent-tester/src/TestComponents/TextExperimental/consts';
+} from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental Text Testing Initialization', function () {

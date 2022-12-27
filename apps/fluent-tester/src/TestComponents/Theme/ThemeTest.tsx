@@ -4,7 +4,7 @@ import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
-import { THEME_TESTPAGE } from './consts';
+import { THEME_TESTPAGE } from '../../../../E2E/src/Theme/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {

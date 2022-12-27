@@ -1,4 +1,4 @@
-import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../../../../fluent-tester/src/TestComponents/Theme/consts';
+import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class ThemePageObject extends BasePage {

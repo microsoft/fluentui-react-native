@@ -1,9 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalCheckboxPageObject from '../pages/ExperimentalCheckboxPageObject';
-import {
-  EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
-  EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL,
-} from '../../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
+import { EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL, EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL } from '../consts';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 
 describe('Experimental Checkbox Testing Initialization', () => {
