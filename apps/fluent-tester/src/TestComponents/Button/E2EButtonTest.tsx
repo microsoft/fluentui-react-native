@@ -16,7 +16,7 @@ import {
   BUTTON_PRESS_TEST_COMPONENT_LABEL,
   BUTTON_FOCUSABLE_TEST_COMPONENT,
   BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL,
-} from './consts';
+} from '../../../../E2E/src/Button/consts';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const E2EButtonExperimentalTest: React.FunctionComponent = () => {

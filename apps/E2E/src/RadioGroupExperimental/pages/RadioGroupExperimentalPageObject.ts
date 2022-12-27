@@ -1,14 +1,14 @@
 import {
   RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
-  RADIOGROUP_TEST_COMPONENT,
-  RADIOGROUP_NO_A11Y_LABEL_COMPONENT,
+  EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT,
+  EXPERIMENTAL_RADIOGROUP_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
   FIRST_RADIO,
   SECOND_RADIO,
   THIRD_RADIO,
   FOURTH_RADIO,
   FIFTH_RADIO,
-} from '../../../../fluent-tester/src/TestComponents/RadioGroupExperimental/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 import { Attribute, AttributeValue } from '../../common/consts';
 
@@ -102,11 +102,11 @@ class RadioGroupExperimentalPage extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(RADIOGROUP_TEST_COMPONENT);
+    return By(EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(RADIOGROUP_NO_A11Y_LABEL_COMPONENT);
+    return By(EXPERIMENTAL_RADIOGROUP_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {

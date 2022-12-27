@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Wed, 21 Dec 2022 10:29:07 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 20:49:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.1
+
+Tue, 27 Dec 2022 20:49:48 GMT
+
+### Patches
+
+- Changing location of E2E constants from /apps/fluent-tester to /apps/E2E. This consolidates data specific to E2E testing (safreibe@microsoft.com)
+
+## 1.7.0
+
+Tue, 27 Dec 2022 19:25:09 GMT
+
+### Minor changes
+
+- Activate spacing tokens page for all platforms (adgleitm@microsoft.com)
+
+## 1.6.4
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.14
+
+## 1.6.3
+
+Thu, 22 Dec 2022 23:12:13 GMT
+
+### Patches
+
+- Add spacing E2E tests (adgleitm@microsoft.com)
 
 ## 1.6.2
 

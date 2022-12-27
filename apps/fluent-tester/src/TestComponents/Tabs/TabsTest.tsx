@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
-import { TABS_TESTPAGE } from './consts';
+import { TABS_TESTPAGE } from '../../../../E2E/src/Tabs/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ETabsTest } from './TabsE2ETest';
 import { svgProps } from '../Common/iconExamples';

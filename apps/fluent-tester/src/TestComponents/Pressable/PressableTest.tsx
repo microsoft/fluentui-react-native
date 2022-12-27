@@ -4,7 +4,7 @@ import { Pressable } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { Square } from '../Common/Square';
 import { Alert, GestureResponderEvent, StyleSheet, View, ViewProps, ViewStyle, Text } from 'react-native';
-import { PRESSABLE_TESTPAGE } from './consts';
+import { PRESSABLE_TESTPAGE } from '../../../../E2E/src/Pressable/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const styles = StyleSheet.create({

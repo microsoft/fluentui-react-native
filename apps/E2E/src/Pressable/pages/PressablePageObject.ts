@@ -2,7 +2,7 @@ import {
   PRESSABLE_TESTPAGE,
   PRESSABLE_TEST_COMPONENT,
   HOMEPAGE_PRESSABLE_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/Pressable/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PressablePageObject extends BasePage {

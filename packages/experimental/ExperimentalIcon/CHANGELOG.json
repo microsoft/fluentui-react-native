@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-icon",
   "entries": [
     {
+      "date": "Tue, 27 Dec 2022 10:18:14 GMT",
+      "tag": "@fluentui-react-native/experimental-icon_v0.1.7",
+      "version": "0.1.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-icon",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.27",
+            "commit": "19c7982576e025a7601af0fb727ae6850b8d4aea"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Dec 2022 10:29:07 GMT",
       "tag": "@fluentui-react-native/experimental-icon_v0.1.6",
       "version": "0.1.6",
