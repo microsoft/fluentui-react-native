@@ -29,7 +29,7 @@ describe('Avatar Accessibility Testing', () => {
     await AvatarPageObject.scrollToTestElement();
   });
 
-  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
+  it('Validate "accessibilityLabel" is correct AFTER setting "accessibilityLabel"', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityLabel, AVATAR_ACCESSIBILITY_LABEL),
     ).toBeTrue();
@@ -37,7 +37,7 @@ describe('Avatar Accessibility Testing', () => {
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Set 'name' prop without setting 'accessibilityLabel' -> 'accessibilityLabel' should default to '{name}, available'", async () => {
+  it('Validate "accessibilityLabel" defaults to "{name}, available" AFTER setting "name" WITHOUT setting "accessibilityLabel"', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(
         AvatarPageObject._secondaryComponent,
@@ -49,7 +49,7 @@ describe('Avatar Accessibility Testing', () => {
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Set accessibilityHint -> Validate accessibilityHint is correct', async () => {
+  it('Validate "accessibilityHint" is correct AFTER setting "accessibilityHint"', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityHint, AVATAR_ACCESSIBILITY_HINT),
     ).toBeTrue();
@@ -57,7 +57,7 @@ describe('Avatar Accessibility Testing', () => {
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Set accessibilityRole -> Validate accessibilityRole is correct', async () => {
+  it('Validate "accessibilityRole" is correct AFTER setting "accessibilityRole"', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
     ).toBeTrue();
@@ -65,7 +65,7 @@ describe('Avatar Accessibility Testing', () => {
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do NOT set accessibilityRole -> Validate default accessibilityRole is correct', async () => {
+  it('Validate default "accessibilityRole" is correct AFTER NOT setting "accessibilityRole"', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._secondaryComponent, Attribute.AccessibilityRole, IMAGE_A11Y_ROLE),
     ).toBeTrue();
