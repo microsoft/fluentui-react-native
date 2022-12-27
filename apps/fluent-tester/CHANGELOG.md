@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 27 Dec 2022 20:49:48 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 21:34:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.125.2
+
+Tue, 27 Dec 2022 21:34:48 GMT
+
+### Patches
+
+- Update tester (67026548+huwilkes@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.17.0
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.7.4
 
 ## 0.125.1
 
