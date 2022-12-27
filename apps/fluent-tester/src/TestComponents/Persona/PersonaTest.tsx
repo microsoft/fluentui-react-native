@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
-import { PERSONA_TESTPAGE } from './consts';
+import { PERSONA_TESTPAGE } from '../../../../E2E/src/Persona/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const personaSections: TestSection[] = [
@@ -18,7 +18,7 @@ const personaSections: TestSection[] = [
 
 export const PersonaTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Deprecated',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',

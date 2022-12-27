@@ -5,13 +5,26 @@ exports[`ContextualMenu default 1`] = `
   accessibilityLabel=""
   accessibilityRole="button"
   accessible={true}
-  collapsable={false}
   enableFocusRing={true}
   focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -22,14 +35,14 @@ exports[`ContextualMenu default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "padding": 8,
+      "padding": 3,
       "width": undefined,
     }
   }

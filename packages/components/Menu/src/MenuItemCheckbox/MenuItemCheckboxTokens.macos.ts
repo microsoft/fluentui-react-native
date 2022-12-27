@@ -6,14 +6,14 @@ import { MenuItemCheckboxTokens } from './MenuItemCheckbox.types';
 export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens, Theme> = (t: Theme): MenuItemCheckboxTokens => ({
   backgroundColor: t.colors.transparentBackground,
   borderRadius: 5,
-  checkmarkPadding: globalTokens.spacing.none,
+  checkmarkPadding: globalTokens.sizeNone,
   checkmarkSize: 16,
   checkmarkVisibility: 0,
   color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
   fontSize: globalTokens.font.size300,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
-  gap: globalTokens.spacing.xs,
+  gap: globalTokens.size40,
   paddingHorizontal: 5,
   paddingVertical: 3,
   focused: {

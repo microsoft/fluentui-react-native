@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { StandardUsage } from './StandardUsage';
+import { V2Usage } from './V2Usage';
+import { MaximumFontSizeUsage } from './MaximumFontSize';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2EExperimentalTextTest } from './ExperimentalTextE2ETest';
-import { EXPERIMENTAL_TEXT_TESTPAGE } from './consts';
-import { V2Usage } from './V2Usage';
+import { EXPERIMENTAL_TEXT_TESTPAGE } from '../../../../E2E/src/TextExperimental/consts';
 
 const textSections: TestSection[] = [
   {
@@ -14,8 +15,12 @@ const textSections: TestSection[] = [
     component: StandardUsage,
   },
   {
-    name: 'V2 Usage',
+    name: 'V1/V2 Comparison',
     component: V2Usage,
+  },
+  {
+    name: 'Maximum Font Size Usage',
+    component: MaximumFontSizeUsage,
   },
   {
     name: 'Customize Usage',
@@ -33,7 +38,7 @@ const textSections: TestSection[] = [
 
 export const TextExperimentalTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',

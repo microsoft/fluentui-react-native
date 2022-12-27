@@ -8,7 +8,7 @@ import {
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   CHECKBOX_TEST_COMPONENT_LABEL,
   CHECKBOX_ACCESSIBILITY_LABEL,
-} from './consts';
+} from '../../../../E2E/src/Checkbox/consts';
 import { Stack } from '@fluentui-react-native/stack';
 
 export const E2ECheckboxTest: React.FunctionComponent = () => {

@@ -2,6 +2,7 @@
 
 exports[`Icon component tests SVG Icon 1`] = `
 <Text
+  accessible={true}
   style={
     Object {
       "color": "#f07",
