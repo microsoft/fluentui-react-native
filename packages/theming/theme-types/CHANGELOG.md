@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Fri, 04 Nov 2022 14:36:23 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.0
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Minor changes
+
+- Add MaximumFontSize test element (adgleitm@microsoft.com)
+
+## 0.26.0
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Minor changes
+
+- switch initial tokenization and tester app changes (rohanpd.work@gmail.com)
+
+## 0.25.0
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Minor changes
+
+- Allow V1 usage of V2 text variants (adgleitm@microsoft.com)
+
+## 0.24.0
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Minor changes
+
+- theme spacing tokens change (rohanpd.work@gmail.com)
 
 ## 0.23.1
 

@@ -13,6 +13,6 @@
       commit="$CommitId$" />
   </metadata>
   <files>
-    <file src="..\node_modules\**" target="win32" />
+    <file src="..\node_modules\**" target="node_modules" />
   </files>
 </package>

@@ -1,8 +1,159 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Wed, 16 Nov 2022 08:47:25 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 10:18:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.9
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.28
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.4
+- Bump @fluentui-react-native/experimental-shadow to v0.2.51
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/icon to v0.16.4
+- Bump @fluentui-react-native/interactive-hooks to v0.22.2
+- Bump @fluentui-react-native/pressable to v0.9.41
+- Bump @fluentui-react-native/theme-tokens to v0.22.3
+- Bump @fluentui-react-native/text to v0.19.1
+
+## 0.32.8
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Add maximumSize (adgleitm@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.27
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.3
+- Bump @fluentui-react-native/experimental-shadow to v0.2.50
+- Bump @fluentui-react-native/framework to v0.8.26
+- Bump @fluentui-react-native/icon to v0.16.3
+- Bump @fluentui-react-native/interactive-hooks to v0.22.1
+- Bump @fluentui-react-native/pressable to v0.9.40
+- Bump @fluentui-react-native/theme-tokens to v0.22.2
+- Bump @fluentui-react-native/theme-types to v0.27.0
+- Bump @fluentui-react-native/text to v0.19.0
+- Bump @fluentui-react-native/tokens to v0.20.0
+
+## 0.32.7
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.26
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.2
+- Bump @fluentui-react-native/experimental-shadow to v0.2.49
+- Bump @fluentui-react-native/framework to v0.8.25
+- Bump @fluentui-react-native/icon to v0.16.2
+- Bump @fluentui-react-native/interactive-hooks to v0.22.0
+- Bump @fluentui-react-native/pressable to v0.9.39
+- Bump @fluentui-react-native/theme-tokens to v0.22.1
+- Bump @fluentui-react-native/theme-types to v0.26.0
+- Bump @fluentui-react-native/text to v0.18.2
+- Bump @fluentui-react-native/tokens to v0.19.1
+
+## 0.32.6
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.25
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.1
+- Bump @fluentui-react-native/experimental-shadow to v0.2.48
+- Bump @fluentui-react-native/framework to v0.8.24
+- Bump @fluentui-react-native/icon to v0.16.1
+- Bump @fluentui-react-native/interactive-hooks to v0.21.5
+- Bump @fluentui-react-native/pressable to v0.9.38
+- Bump @fluentui-react-native/theme-tokens to v0.22.0
+- Bump @fluentui-react-native/text to v0.18.1
+
+## 0.32.5
+
+Tue, 06 Dec 2022 02:02:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.0
+- Bump @fluentui-react-native/icon to v0.16.0
+
+## 0.32.4
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Allow V1 usage of V2 text variants (adgleitm@microsoft.com)
+- Provided FAB Tokens for iOS (ayushsinghs@yahoo.in)
+- Bump @uifabricshared/foundation-compose to v1.12.24
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.23
+- Bump @fluentui-react-native/experimental-shadow to v0.2.47
+- Bump @fluentui-react-native/framework to v0.8.23
+- Bump @fluentui-react-native/icon to v0.15.5
+- Bump @fluentui-react-native/interactive-hooks to v0.21.4
+- Bump @fluentui-react-native/pressable to v0.9.37
+- Bump @fluentui-react-native/theme-tokens to v0.21.5
+- Bump @fluentui-react-native/theme-types to v0.25.0
+- Bump @fluentui-react-native/text to v0.18.0
+- Bump @fluentui-react-native/tokens to v0.19.0
+
+## 0.32.3
+
+Thu, 01 Dec 2022 03:12:19 GMT
+
+### Patches
+
+- theme spacing tokens change (rohanpd.work@gmail.com)
+- Bump @uifabricshared/foundation-compose to v1.12.23
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.22
+- Bump @fluentui-react-native/experimental-shadow to v0.2.46
+- Bump @fluentui-react-native/framework to v0.8.22
+- Bump @fluentui-react-native/icon to v0.15.4
+- Bump @fluentui-react-native/interactive-hooks to v0.21.3
+- Bump @fluentui-react-native/pressable to v0.9.36
+- Bump @fluentui-react-native/theme-tokens to v0.21.4
+- Bump @fluentui-react-native/theme-types to v0.24.0
+- Bump @fluentui-react-native/text to v0.17.1
+- Bump @fluentui-react-native/tokens to v0.18.1
+
+## 0.32.2
+
+Tue, 29 Nov 2022 15:14:15 GMT
+
+### Patches
+
+- Provided FAB Tokens for iOS (ayushsinghs@yahoo.in)
+
+## 0.32.1
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.15.3
+- Bump @fluentui-react-native/text to v0.17.0
+
+## 0.32.0
+
+Mon, 28 Nov 2022 11:51:05 GMT
+
+### Minor changes
+
+- Button/FAB Tokenization Complete (ayushsinghs@yahoo.in)
+- Bump @uifabricshared/foundation-compose to v1.12.22
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.21
+- Bump @fluentui-react-native/experimental-shadow to v0.2.45
+- Bump @fluentui-react-native/framework to v0.8.21
+- Bump @fluentui-react-native/icon to v0.15.2
+- Bump @fluentui-react-native/interactive-hooks to v0.21.2
+- Bump @fluentui-react-native/pressable to v0.9.35
+- Bump @fluentui-react-native/text to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.18.0
 
 ## 0.31.1
 

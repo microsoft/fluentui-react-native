@@ -24,6 +24,9 @@ use_test_app! do |target|
   target.app do
     platform :ios, '14.0'
 
+    # There is a bug where autolinking isn't working, do specify these manually.
+    pod 'FRNFontMetrics', :path => '../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec'
+
     script_phase name: 'Start Packager',
                  script: start_packager_script,
                  execution_position: :before_compile

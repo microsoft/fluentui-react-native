@@ -1,8 +1,66 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Wed, 16 Nov 2022 08:47:25 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 10:18:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.2
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.27
+
+## 0.22.1
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.26
+
+## 0.22.0
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Minor changes
+
+- switch ease in and out animation (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/framework to v0.8.25
+
+## 0.21.5
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.24
+
+## 0.21.4
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.23
+
+## 0.21.3
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.22
+
+## 0.21.2
+
+Mon, 28 Nov 2022 11:51:05 GMT
+
+### Patches
+
+- Fix build (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.8.21
 
 ## 0.21.1
 
