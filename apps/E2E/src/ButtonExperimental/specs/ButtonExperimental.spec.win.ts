@@ -37,7 +37,7 @@ describe('Experimental Button Accessibility Testing', async () => {
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
+  it('Validate "accessibilityLabel" is correct AFTER setting "accessibilityLabel"', async () => {
     await expect(
       await ButtonExperimentalPageObject.compareAttribute(
         ButtonExperimentalPageObject._primaryComponent,
@@ -49,7 +49,7 @@ describe('Experimental Button Accessibility Testing', async () => {
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do not set accessibilityLabel -> Validate accessibilityLabel defaults to label', async () => {
+  it('Validate "accessibilityLabel" defaults to button label AFTER NOT setting "accessibilityLabel"', async () => {
     await expect(
       await ButtonExperimentalPageObject.compareAttribute(
         ButtonExperimentalPageObject._secondaryComponent,
@@ -68,7 +68,7 @@ describe('Experimental Button Functional Testing', async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
   });
 
-  it('Click on button -> Validate onClick() callback was fired', async () => {
+  it('Validate onClick() callback was fired AFTER clicking the primary button', async () => {
     await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent);
     await expect(
       await ButtonExperimentalPageObject.didOnClickCallbackFire(
@@ -80,7 +80,7 @@ describe('Experimental Button Functional Testing', async () => {
     await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent); // Reset Button State
   });
 
-  it('Type "Enter" on button -> Validate onClick() callback was fired', async () => {
+  it('Validate onClick() callback was fired AFTER typing "Enter" on the primary button', async () => {
     await ButtonExperimentalPageObject.sendKeys(ButtonExperimentalPageObject._primaryComponent, [Keys.ENTER]);
     await expect(
       await ButtonExperimentalPageObject.didOnClickCallbackFire(
@@ -92,7 +92,7 @@ describe('Experimental Button Functional Testing', async () => {
     await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent); // Reset Button State
   });
 
-  it('Type "Space" on button -> Validate onClick() callback was fired', async () => {
+  it('Validate onClick() callback was fired AFTER typing "Space" on the primary button', async () => {
     await ButtonExperimentalPageObject.sendKeys(ButtonExperimentalPageObject._primaryComponent, [Keys.SPACE]);
     await expect(
       await ButtonExperimentalPageObject.didOnClickCallbackFire(
