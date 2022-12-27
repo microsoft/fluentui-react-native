@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 27 Dec 2022 10:18:14 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 19:25:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.0
+
+Tue, 27 Dec 2022 19:25:09 GMT
+
+### Minor changes
+
+- Activate spacing tokens page for all platforms (adgleitm@microsoft.com)
 
 ## 1.6.4
 
