@@ -1,4 +1,4 @@
-import { AliasColorTokens, Variants, VariantValue } from '@fluentui-react-native/theme-types';
+import { AliasColorTokens } from '@fluentui-react-native/theme-types';
 
 // API that translates tokens coming for android to Theme color values.
 // This is implemented in a per-plaform fashion, for each endpoint that maps to similar token sets in design - i.e. map to similar
@@ -107,32 +107,5 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
     brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
     brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
-  };
-}
-
-export function mapFontPipelineToTheme(pipelineOutput: any): Partial<Variants> {
-  return {
-    caption1: createVariantValue(pipelineOutput.caption1),
-    caption2: createVariantValue(pipelineOutput.caption2),
-    caption1Strong: createVariantValue(pipelineOutput.caption1Strong),
-    body1: createVariantValue(pipelineOutput.body1),
-    body1Strong: createVariantValue(pipelineOutput.body1Strong),
-    body2: createVariantValue(pipelineOutput.body2),
-    body2Strong: createVariantValue(pipelineOutput.body2Strong),
-    title1: createVariantValue(pipelineOutput.title1),
-    title2: createVariantValue(pipelineOutput.title2),
-    title3: createVariantValue(pipelineOutput.title3),
-    largeTitle: createVariantValue(pipelineOutput.largeTitle),
-    display: createVariantValue(pipelineOutput.display),
-  };
-}
-
-function createVariantValue(variant: any): VariantValue {
-  return {
-    face: variant.fontFamily,
-    size: variant.fontSize,
-    weight: variant.fontWeight,
-    lineHeight: variant.fontLineHeight,
-    letterSpacing: variant.fontLetterSpacing,
   };
 }
