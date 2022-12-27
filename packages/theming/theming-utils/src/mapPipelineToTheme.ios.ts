@@ -7,32 +7,31 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {
     /// Neutral background tokens
     neutralBackground1: pipelineOutput.neutralBackground1.fillColorRest,
-    neutralBackground1Hover: pipelineOutput.neutralBackground1.fillColorHover,
     neutralBackground1Pressed: pipelineOutput.neutralBackground1.fillColorPressed,
     neutralBackground1Selected: pipelineOutput.neutralBackground1.fillColorSelected,
     neutralBackground2: pipelineOutput.neutralBackground2.fillColorRest,
-    neutralBackground2Hover: pipelineOutput.neutralBackground2.fillColorHover,
     neutralBackground2Pressed: pipelineOutput.neutralBackground2.fillColorPressed,
     neutralBackground2Selected: pipelineOutput.neutralBackground2.fillColorSelected,
 
     neutralBackground3: pipelineOutput.neutralBackground3.fillColorRest,
-    neutralBackground3Hover: pipelineOutput.neutralBackground3.fillColorHover,
     neutralBackground3Pressed: pipelineOutput.neutralBackground3.fillColorPressed,
     neutralBackground3Selected: pipelineOutput.neutralBackground3.fillColorSelected,
 
     neutralBackground4: pipelineOutput.neutralBackground4.fillColorRest,
-    neutralBackground4Hover: pipelineOutput.neutralBackground4.fillColorHover,
     neutralBackground4Pressed: pipelineOutput.neutralBackground4.fillColorPressed,
     neutralBackground4Selected: pipelineOutput.neutralBackground4.fillColorSelected,
 
     neutralBackground5: pipelineOutput.neutralBackground5.fillColorRest,
-    neutralBackground5Hover: pipelineOutput.neutralBackground5.fillColorHover,
     neutralBackground5Pressed: pipelineOutput.neutralBackground5.fillColorPressed,
     neutralBackground5Selected: pipelineOutput.neutralBackground5.fillColorSelected,
 
     neutralBackground6: pipelineOutput.neutralBackground6.fillColorRest,
     neutralBackgroundInverted: pipelineOutput.neutralBackgroundInverted.fillColorRest,
     neutralBackgroundDisabled: pipelineOutput.neutralBackgroundDisabled.fillColorRest,
+
+    neutralBackgroundCanvas: pipelineOutput.neutralBackgroundCanvas.fillColorRest,
+
+    neutralBackgroundDarkStatic: pipelineOutput.neutralBackgroundDarkStatic.fillColorRest,
 
     neutralBackgroundLightStatic: pipelineOutput.neutralBackgroundLightStatic.fillColorRest,
     neutralBackgroundLightStaticDisabled: pipelineOutput.neutralBackgroundLightStaticDisabled.fillColorRest,
@@ -42,41 +41,28 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     /// Neutral foreground tokens
     neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
-    neutralForeground1Hover: pipelineOutput.neutralForeground1.fillColorHover,
-    neutralForeground1Pressed: pipelineOutput.neutralForeground1.fillColorPressed,
-    neutralForeground1Selected: pipelineOutput.neutralForeground1.fillColorSelected,
     neutralForeground2: pipelineOutput.neutralForeground2.fillColorRest,
-    neutralForeground2Hover: pipelineOutput.neutralForeground2.fillColorHover,
-    neutralForeground2Pressed: pipelineOutput.neutralForeground2.fillColorPressed,
-    neutralForeground2Selected: pipelineOutput.neutralForeground2.fillColorSelected,
-    neutralForeground2BrandHover: pipelineOutput.neutralForeground2.fillColorBrandHover,
-    neutralForeground2BrandPressed: pipelineOutput.neutralForeground2.fillColorBrandPressed,
-    neutralForeground2BrandSelected: pipelineOutput.neutralForeground2.fillColorBrandSelected,
     neutralForeground3: pipelineOutput.neutralForeground3.fillColorRest,
-    neutralForeground3Hover: pipelineOutput.neutralForeground3.fillColorHover,
-    neutralForeground3Pressed: pipelineOutput.neutralForeground3.fillColorPressed,
-    neutralForeground3Selected: pipelineOutput.neutralForeground3.fillColorSelected,
-    neutralForeground3BrandHover: pipelineOutput.neutralForeground3.fillColorBrandHover,
-    neutralForeground3BrandPressed: pipelineOutput.neutralForeground3.fillColorBrandPressed,
-    neutralForeground3BrandSelected: pipelineOutput.neutralForeground3.fillColorBrandSelected,
-    neutralForegroundInverted: pipelineOutput.neutralForegroundInverted.fillColorRest,
     neutralForegroundDisabled1: pipelineOutput.neutralForegroundDisabled1.fillColorRest,
     neutralForegroundDisabled2: pipelineOutput.neutralForegroundDisabled2.fillColorRest,
 
     neutralForegroundOnColor: pipelineOutput.neutralForegroundOnColor.fillColorRest,
 
+    neutralForegroundDarkStatic: pipelineOutput.neutralForegroundDarkStatic.fillColorRest,
+
+    neutralForegroundLightStatic: pipelineOutput.neutralForegroundLightStatic.fillColorRest,
+
     /// Neutral stroke tokens
     neutralStrokeAccessible: pipelineOutput.neutralStrokeAccessible.strokeColorRest,
-    neutralStrokeAccessibleHover: pipelineOutput.neutralStrokeAccessible.strokeColorHover,
-    neutralStrokeAccessiblePressed: pipelineOutput.neutralStrokeAccessible.strokeColorPressed,
-    neutralStrokeAccessibleSelected: pipelineOutput.neutralStrokeAccessible.strokeColorSelected,
 
     neutralStroke1: pipelineOutput.neutralStroke1.strokeColorRest,
-    neutralStroke1Hover: pipelineOutput.neutralStroke1.strokeColorHover,
-    neutralStroke1Pressed: pipelineOutput.neutralStroke1.strokeColorPressed,
-    neutralStroke1Selected: pipelineOutput.neutralStroke1.strokeColorSelected,
 
     neutralStroke2: pipelineOutput.neutralStroke2.strokeColorRest,
+
+    neutralStrokeFocus1: pipelineOutput.neutralStrokeFocus1.strokeColorRest,
+
+    neutralStrokeFocus2: pipelineOutput.neutralStrokeFocus2.strokeColorRest,
+
     neutralStrokeDisabled: pipelineOutput.neutralStrokeDisabled.strokeColorRest,
 
     /// Brand background tokens
@@ -90,9 +76,6 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     brandBackground3: pipelineOutput.brandBackground3?.fillColorRest,
     brandBackgroundTint: pipelineOutput.brandBackgroundTint.fillColorRest,
-    brandBackgroundInverted: pipelineOutput.brandBackgroundInverted.fillColorRest,
-
-    brandBackgroundInvertedDisabled: pipelineOutput.brandBackgroundInvertedDisabled.fillColorRest,
 
     /// Brand foreground tokens
     brandForeground1: pipelineOutput.brandForeground1.fillColorRest,
