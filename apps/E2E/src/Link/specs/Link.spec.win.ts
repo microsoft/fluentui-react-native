@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkPageObject from '../pages/LinkPageObject';
 import { ComponentSelector } from '../../common/BasePage';
-import { LINK_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Link/consts';
+import { LINK_ACCESSIBILITY_LABEL } from '../consts';
 import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -24,7 +24,6 @@ describe('Link Testing Initialization', function () {
 describe('Link Accessibility Testing', () => {
   it('Link - Validate accessibilityRole is correct', async () => {
     await LinkPageObject.scrollToTestElement();
-    await LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await LinkPageObject.getAccessibilityRole()).toEqual(LINK_A11Y_ROLE);
     await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
@@ -32,7 +31,6 @@ describe('Link Accessibility Testing', () => {
 
   it('Link - Set accessibilityLabel', async () => {
     await LinkPageObject.scrollToTestElement();
-    await LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await LinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(LINK_ACCESSIBILITY_LABEL);
     await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u

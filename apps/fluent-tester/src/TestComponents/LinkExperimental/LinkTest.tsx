@@ -3,10 +3,11 @@ import { Alert, View, StyleSheet, Text, TextInput } from 'react-native';
 import { Link, LinkTokens } from '@fluentui-react-native/experimental-link';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { EXPERIMENTAL_LINK_TESTPAGE } from './consts';
+import { EXPERIMENTAL_LINK_TESTPAGE } from '../../../../E2E/src/LinkExperimental/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkTest';
 import { Platform } from 'react-native';
+import { InlineLinks } from './InlineLinksTest';
 
 const DefaultLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
@@ -20,40 +21,7 @@ const DefaultLinks: React.FunctionComponent = () => {
       <Link onPress={doPress} onAccessibilityTap={doAllyTap}>
         Click to alert.
       </Link>
-      <Link disabled focusable>
-        Disabled focusable Link
-      </Link>
-    </Stack>
-  );
-};
-
-const InlineLinks: React.FunctionComponent = () => {
-  const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
-  const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
-
-  return (
-    <Stack style={stackStyle}>
-      <Text>
-        Click{' '}
-        <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-          this link
-        </Link>{' '}
-        to alert me.
-      </Text>
-      <Text>
-        This{' '}
-        <Link inline onPress={doPress} disabled focusable>
-          link
-        </Link>{' '}
-        is disabled but focusable.
-      </Text>
-      <Text>
-        Follow this{' '}
-        <Link inline url="https://www.bing.com/">
-          link
-        </Link>{' '}
-        to navigate.
-      </Text>
+      <Link disabled>Disabled Link</Link>
     </Stack>
   );
 };
@@ -61,18 +29,21 @@ const InlineLinks: React.FunctionComponent = () => {
 const SubtleLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
   const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
+  const supportsInlineLink = Platform.OS !== ('win32' as any);
 
   return (
     <Stack style={stackStyle}>
       <Link appearance="subtle" url="https://www.bing.com/">
         Click to navigate.
       </Link>
-      <Text>
-        This is inline Link.{' '}
-        <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-          Click to alert.
-        </Link>
-      </Text>
+      {supportsInlineLink && (
+        <Text>
+          This is inline Link.{' '}
+          <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
+            Click to alert.
+          </Link>
+        </Text>
+      )}
       <Link appearance="subtle" onPress={doPress} disabled>
         Disabled Link
       </Link>
@@ -203,10 +174,10 @@ const linkSections: TestSection[] = [
 
 export const ExperimentalLinkTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Experimental',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Beta',
+    macosStatus: 'Experimental',
     androidStatus: 'Experimental',
   };
 

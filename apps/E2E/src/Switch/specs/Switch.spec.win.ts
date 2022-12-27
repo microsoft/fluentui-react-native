@@ -3,7 +3,7 @@ import SwitchPageObject from '../pages/SwitchPageObject';
 import { SwitchComponentSelector } from '../pages/SwitchPageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
-import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Switch/consts';
+import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', function () {
@@ -26,7 +26,6 @@ describe('Switch Accessibility Testing', () => {
   /* Scrolls and waits for the Switch to be visible on the Test Page */
   beforeEach(async () => {
     await SwitchPageObject.scrollToTestElement();
-    await SwitchPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Switch - Validate accessibilityRole is correct', async () => {
@@ -49,7 +48,6 @@ describe('Switch Functional Testing', () => {
   /* Scrolls and waits for the Switch to be visible on the Test Page */
   beforeEach(async () => {
     await SwitchPageObject.scrollToTestElement();
-    await SwitchPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it("Click on a Switch -> Validate it toggles correctly AND calls the user's onChange", async () => {

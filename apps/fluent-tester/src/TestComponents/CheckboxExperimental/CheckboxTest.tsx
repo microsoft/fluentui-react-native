@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
+import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxExperimental/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, Platform } from 'react-native';
-import { commonTestStyles as commonStyles } from '../Common/styles';
+import { commonTestStyles as commonStyles, mobileStyles } from '../Common/styles';
 import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { Text } from '@fluentui-react-native/text';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
 
-const AndroidBasicCheckbox = () => {
+const BasicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
@@ -26,19 +26,14 @@ const AndroidBasicCheckbox = () => {
   );
 };
 
-const BasicCheckbox: React.FunctionComponent = () => {
+const DesktopSpecificCheckbox: React.FunctionComponent = () => {
   return (
-    <View>
-      <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
-      <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
-      <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked accessibilityLabel="Hello there" />
-      <Checkbox label="Disabled checkbox" disabled />
-      <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
+    <>
       <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
       <Checkbox label="A circular checkbox" shape="circular" />
       <Checkbox label="A checkbox with label placed before" labelPosition="before" />
       <Checkbox label="A required checkbox" required />
-    </View>
+    </>
   );
 };
 
@@ -54,26 +49,34 @@ const SizeCheckbox: React.FunctionComponent = () => {
 };
 
 const OtherCheckbox: React.FunctionComponent = () => {
-  const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
-  const onChangeControlled1 = React.useCallback((checked) => {
-    setCheckedControlled1(checked);
+  const [isChecked, setisChecked] = React.useState(false);
+
+  const setCheckedTrue = React.useCallback(() => {
+    setisChecked(true);
   }, []);
 
-  const [isCheckedControlled2, setCheckedControlled2] = React.useState(true);
-  const onChangeControlled2 = React.useCallback((checked) => {
-    setCheckedControlled2(checked);
+  const setCheckedFalse = React.useCallback(() => {
+    setisChecked(false);
   }, []);
+
+  const memoizedStyles = React.useMemo(() => (Platform.OS === 'android' ? { ...mobileStyles.containerSpacedEvenly, height: 150 } : {}), []);
 
   return (
-    <View>
-      <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={Boolean(isCheckedControlled1)} />
-      <Checkbox
-        label="Checkbox rendered with labelPosition 'before' (controlled)"
-        onChange={onChangeControlled2}
-        labelPosition="before"
-        checked={Boolean(isCheckedControlled2)}
-      />
-      <Checkbox label="A required checkbox with other required text" required="**" />
+    <View style={memoizedStyles}>
+      <Button onClick={setCheckedTrue} size="small">
+        Check controlled checkboxes below
+      </Button>
+      <Button onClick={setCheckedFalse} size="small">
+        Uncheck controlled checkboxes below
+      </Button>
+
+      <Checkbox label="This is a controlled Checkbox" checked={isChecked} />
+      {Platform.OS !== 'android' && (
+        <>
+          <Checkbox label="Checkbox rendered with labelPosition 'before' (controlled)" labelPosition="before" checked={isChecked} />
+          <Checkbox label="A required checkbox with other required text" required="**" />
+        </>
+      )}
     </View>
   );
 };
@@ -126,8 +129,18 @@ const TokenCheckbox: React.FunctionComponent = () => {
 
   return (
     <View>
-      <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} />
-      <CircleColorCheckbox label="A circular token-customized checkbox" shape="circular" onChange={onChangeUncontrolled} defaultChecked />
+      {Platform.OS !== 'android' && (
+        <>
+          <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} />
+          <CircleColorCheckbox
+            label="A circular token-customized checkbox"
+            shape="circular"
+            onChange={onChangeUncontrolled}
+            defaultChecked
+          />
+        </>
+      )}
+
       <BigLabelCheckbox label="A checkbox with a bold large font label" />
       <ComposedCheckbox label="A checkbox with a hot pink label and no padding" />
 
@@ -160,32 +173,37 @@ const TokenCheckbox: React.FunctionComponent = () => {
   );
 };
 
-const UnSupportedOnAndroid = () => {
-  return (
-    <Text style={{ margin: 10, fontSize: 14 }} color="red">
-      Unsupported on Android
-    </Text>
-  );
-};
-
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
     testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
-    component: Platform.OS === 'android' ? AndroidBasicCheckbox : BasicCheckbox,
+    component: BasicCheckbox,
   },
-  {
-    name: 'Size Checkboxes',
-    component: Platform.OS === 'android' ? UnSupportedOnAndroid : SizeCheckbox,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Size Checkboxes',
+      component: SizeCheckbox,
+    },
+  }),
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Desktop Specific Checkboxes',
+      component: DesktopSpecificCheckbox,
+    },
+  }),
   {
     name: 'Other Implementations',
     component: OtherCheckbox,
   },
-  {
-    name: 'Token Customized Checkboxes',
-    component: TokenCheckbox,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Token Customized Checkboxes',
+      component: TokenCheckbox,
+    },
+  }),
   {
     name: 'E2E Testing for Experimental Checkbox',
     component: E2ECheckboxExperimentalTest,
@@ -194,7 +212,7 @@ const checkboxSections: TestSection[] = [
 
 export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'N/A',
     iosStatus: 'N/A',
     macosStatus: 'Experimental',

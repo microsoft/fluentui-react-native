@@ -1,8 +1,9 @@
 import {
+  EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_TEXT_TESTPAGE,
   EXPERIMENTAL_TEXT_TEST_COMPONENT,
   HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/TextExperimental/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class ExperimentalTextPageObject extends BasePage {
@@ -19,6 +20,10 @@ class ExperimentalTextPageObject extends BasePage {
 
   get _primaryComponent() {
     return By(EXPERIMENTAL_TEXT_TEST_COMPONENT);
+  }
+
+  get _secondaryComponent() {
+    return By(EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
