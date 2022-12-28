@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "fix regression on win32",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}

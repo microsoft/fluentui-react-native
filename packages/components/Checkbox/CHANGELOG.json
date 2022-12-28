@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Wed, 28 Dec 2022 15:44:42 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "e52ba9363fd32192c6306fd6a5c227fc7e88b2a9",
+            "comment": "fix regression on win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Dec 2022 22:21:15 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.18.7",
       "version": "0.18.7",
