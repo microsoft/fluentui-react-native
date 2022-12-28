@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useKeyProps with Pressable 1`] = `
+exports[`Pressable with useKeyProps 1`] = `
 <View
   accessible={true}
   focusable={true}
