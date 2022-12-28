@@ -69,7 +69,7 @@ exports[`Switch Default 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#f0f0f0",
+          "backgroundColor": "rgba(240, 240, 240, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,
@@ -171,7 +171,7 @@ exports[`Switch Disabled 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#f0f0f0",
+          "backgroundColor": "rgba(240, 240, 240, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,
