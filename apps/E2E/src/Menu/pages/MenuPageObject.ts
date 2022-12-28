@@ -84,7 +84,7 @@ class MenuPageObject extends BasePage {
    * allows us to test whether the onClick() callback fires for click and keypress inputs across individual test cases without having to close the menu and reset the
    * label per case (as you see in the button + checkbox tests). This decreases test time and improves performance for this spec. */
   async itemOnClickHasFired(timesFired: number): Promise<boolean> {
-    return (await (await this._callbackLabel).getText()).includes(timesFired.toString());
+    return (await (await this._callbackLabel).getText()) === `onClick fired ${timesFired} times`;
   }
 
   async getMenuItem(item: MenuItem): Promise<WebdriverIO.Element> {
