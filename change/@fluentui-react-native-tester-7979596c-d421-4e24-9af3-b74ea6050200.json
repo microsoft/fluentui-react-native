@@ -1,6 +1,6 @@
 {
   "type": "minor",
-  "comment": "Add spacing E2E tests",
+  "comment": "Activate spacing tokens page for all platforms",
   "packageName": "@fluentui-react-native/tester",
   "email": "adgleitm@microsoft.com",
   "dependentChangeType": "patch"

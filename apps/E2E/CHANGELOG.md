@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Wed, 21 Dec 2022 10:29:07 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 10:18:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.4
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.14
+
+## 1.6.3
+
+Thu, 22 Dec 2022 23:12:13 GMT
+
+### Patches
+
+- Add spacing E2E tests (adgleitm@microsoft.com)
 
 ## 1.6.2
 
