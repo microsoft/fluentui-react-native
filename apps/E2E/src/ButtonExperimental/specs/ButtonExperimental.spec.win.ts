@@ -49,7 +49,7 @@ describe('Experimental Button Accessibility Testing', async () => {
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do NOT set "accessibilityLabel" prop. Validate "accessibilityLabel" value defaults to the button label.', async () => {
+  it('Do NOT set "accessibilityLabel" prop. Validate "Name" element attribute defaults to the button label.', async () => {
     await expect(
       await ButtonExperimentalPageObject.compareAttribute(
         ButtonExperimentalPageObject._secondaryComponent,
