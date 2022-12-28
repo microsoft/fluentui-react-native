@@ -25,7 +25,7 @@ describe('Experimental Checkbox Accessibility Testing', () => {
     await ExperimentalCheckboxPageObject.scrollToTestElement();
   });
 
-  it('Validate "accessibilityRole" prop has correct value, propagates to "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to Checkbox "ControlType" element attribute.', async () => {
     await expect(
       await ExperimentalCheckboxPageObject.compareAttribute(
         ExperimentalCheckboxPageObject._primaryComponent,
