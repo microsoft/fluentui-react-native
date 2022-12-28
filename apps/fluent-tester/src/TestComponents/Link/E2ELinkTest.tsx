@@ -3,7 +3,12 @@ import { Alert } from 'react-native';
 import { Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { LINK_TEST_COMPONENT, LINK_ACCESSIBILITY_LABEL, LINK_NO_A11Y_LABEL_COMPONENT, LINK_TEST_COMPONENT_LABEL } from './consts';
+import {
+  LINK_TEST_COMPONENT,
+  LINK_ACCESSIBILITY_LABEL,
+  LINK_NO_A11Y_LABEL_COMPONENT,
+  LINK_TEST_COMPONENT_LABEL,
+} from '../../../../E2E/src/Link/consts';
 
 export const LinkE2ETest: React.FunctionComponent = () => {
   const doPress = (): void => {

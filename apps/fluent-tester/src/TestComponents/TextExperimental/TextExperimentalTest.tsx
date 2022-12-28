@@ -6,7 +6,7 @@ import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2EExperimentalTextTest } from './ExperimentalTextE2ETest';
-import { EXPERIMENTAL_TEXT_TESTPAGE } from './consts';
+import { EXPERIMENTAL_TEXT_TESTPAGE } from '../../../../E2E/src/TextExperimental/consts';
 
 const textSections: TestSection[] = [
   {
@@ -15,7 +15,7 @@ const textSections: TestSection[] = [
     component: StandardUsage,
   },
   {
-    name: 'V2/V1 Comparison',
+    name: 'V1/V2 Comparison',
     component: V2Usage,
   },
   {

@@ -1,8 +1,50 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Wed, 28 Dec 2022 17:46:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.11
+
+Wed, 28 Dec 2022 17:46:01 GMT
+
+### Patches
+
+- Make Button respect accessibilityRole passed in props (email not defined)
+
+## 0.32.10
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.29
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.5
+- Bump @fluentui-react-native/experimental-shadow to v0.2.52
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/icon to v0.16.5
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/pressable to v0.9.42
+- Bump @fluentui-react-native/theme-tokens to v0.22.4
+- Bump @fluentui-react-native/theme-types to v0.27.1
+- Bump @fluentui-react-native/text to v0.19.2
+- Bump @fluentui-react-native/tokens to v0.20.1
+
+## 0.32.9
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.28
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.4
+- Bump @fluentui-react-native/experimental-shadow to v0.2.51
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/icon to v0.16.4
+- Bump @fluentui-react-native/interactive-hooks to v0.22.2
+- Bump @fluentui-react-native/pressable to v0.9.41
+- Bump @fluentui-react-native/theme-tokens to v0.22.3
+- Bump @fluentui-react-native/text to v0.19.1
 
 ## 0.32.8
 
