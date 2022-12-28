@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
+This log was last generated on Wed, 28 Dec 2022 06:51:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.3
+
+Wed, 28 Dec 2022 06:51:05 GMT
+
+### Patches
+
+- Override key handling (ruaraki@microsoft.com)
 
 ## 1.2.2
 
