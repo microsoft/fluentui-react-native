@@ -1,4 +1,4 @@
-import { SVG_TESTPAGE, SVG_TEST_COMPONENT, HOMEPAGE_SVG_BUTTON } from '../../../../fluent-tester/src/TestComponents/Svg/consts';
+import { SVG_TESTPAGE, SVG_TEST_COMPONENT, HOMEPAGE_SVG_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class SvgPageObject extends BasePage {

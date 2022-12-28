@@ -1,4 +1,4 @@
-import { SPACING_TESTPAGE, HOMEPAGE_SPACING_BUTTON } from '../../../../fluent-tester/src/TestComponents/Spacing/consts';
+import { SPACING_TESTPAGE, HOMEPAGE_SPACING_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class SpacingTokensPageObject extends BasePage {

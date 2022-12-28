@@ -1,8 +1,78 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 27 Dec 2022 10:18:14 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.126.0
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Minor changes
+
+- Clean up and overhaul Avatar and Callout tests with better errors and cleaner PageObjects (winlarry@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.15.4
+- Bump @fluentui-react-native/apple-theme to v0.17.5
+- Bump @fluentui-react-native/avatar to v1.5.4
+- Bump @fluentui-react-native/badge to v0.4.5
+- Bump @fluentui-react-native/button to v0.32.10
+- Bump @fluentui-react-native/default-theme to v0.16.19
+- Bump @fluentui-react-native/dropdown to v0.7.5
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.5
+- Bump @fluentui-react-native/experimental-avatar to v0.17.1
+- Bump @fluentui-react-native/experimental-button to v0.16.68
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.17
+- Bump @fluentui-react-native/experimental-expander to v0.5.5
+- Bump @fluentui-react-native/experimental-icon to v0.1.8
+- Bump @fluentui-react-native/experimental-link to v0.4.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.7
+- Bump @fluentui-react-native/experimental-radio-group to v0.8.9
+- Bump @fluentui-react-native/experimental-shadow to v0.2.52
+- Bump @fluentui-react-native/experimental-shimmer to v0.8.5
+- Bump @fluentui-react-native/experimental-tabs to v0.8.13
+- Bump @fluentui-react-native/experimental-text to v0.11.33
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/icon to v0.16.5
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/menu to v1.2.2
+- Bump @fluentui-react-native/separator to v0.14.1
+- Bump @fluentui-react-native/notification to v0.21.4
+- Bump @fluentui-react-native/stack to v0.7.34
+- Bump @fluentui-react-native/switch to v0.8.4
+- Bump @fluentui-react-native/text to v0.19.2
+- Bump @fluentui-react-native/theme to v0.7.13
+- Bump @fluentui-react-native/theme-tokens to v0.22.4
+- Bump @fluentui-react-native/theme-types to v0.27.1
+- Bump @fluentui-react-native/theming-utils to v0.20.2
+- Bump @fluentui-react-native/win32-theme to v0.24.6
+- Bump @fluentui/react-native to v0.34.8
+- Bump @fluentui-react-native/focus-zone to v0.11.15
+
+## 0.125.2
+
+Tue, 27 Dec 2022 21:34:48 GMT
+
+### Patches
+
+- Update tester (67026548+huwilkes@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.17.0
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.7.4
+
+## 0.125.1
+
+Tue, 27 Dec 2022 20:49:48 GMT
+
+### Patches
+
+- Changing location of E2E constants from /apps/fluent-tester to /apps/E2E. This consolidates data specific to E2E testing (safreibe@microsoft.com)
+
+## 0.125.0
+
+Tue, 27 Dec 2022 19:25:09 GMT
+
+### Minor changes
+
+- Activate spacing tokens page for all platforms (adgleitm@microsoft.com)
 
 ## 0.124.0
 

@@ -18,7 +18,7 @@ import {
   MENUITEM_FOURTH_COMPONENT,
   MENUITEM_DISABLED_COMPONENT,
   MENUITEM_CALLBACK_LABEL,
-} from './consts';
+} from '../../../../E2E/src/Menu/consts';
 
 export const E2EMenuTest: React.FunctionComponent = () => {
   const [menuOpened, setMenuOpened] = React.useState(false);
