@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
+This log was last generated on Wed, 28 Dec 2022 01:30:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.1
+
+Wed, 28 Dec 2022 01:30:07 GMT
+
+### Patches
+
+- Remove unused packages (ruaraki@microsoft.com)
 
 ## 1.8.0
 
