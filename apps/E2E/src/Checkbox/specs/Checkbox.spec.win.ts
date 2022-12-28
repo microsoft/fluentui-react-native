@@ -45,7 +45,7 @@ describe('Checkbox Accessibility Testing', () => {
     await expect(await CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do NOT set "accessibilityLabel" prop. Validate "accessibilityLabel" value defaults to the checkbox label.', async () => {
+  it('Do NOT set "accessibilityLabel" prop. Validate "Name" element attribute defaults to the checkbox label.', async () => {
     await expect(
       await CheckboxPageObject.compareAttribute(
         CheckboxPageObject._secondaryComponent,
