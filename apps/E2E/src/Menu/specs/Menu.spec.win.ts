@@ -48,7 +48,7 @@ describe('Menu Accessibility Testing', () => {
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do not set MenuItem "accessibilityLabel". Validate MenuItem "accessibilityLabel" value defaults to current MenuItem label.', async () => {
+  it('Do not set MenuItem "accessibilityLabel". Validate MenuItem "Name" element attribute defaults to current MenuItem label.', async () => {
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Third), Attribute.AccessibilityLabel, MENUITEM_TEST_LABEL),
     ).toBeTrue();
