@@ -1,4 +1,4 @@
-import { KeyboardEvent, KeyCallback, KeyPressProps } from './useKeyProps.types';
+import { KeyPressEvent, KeyCallback, KeyPressProps } from './useKeyProps.types';
 import { memoize } from '@fluentui-react-native/memo-cache';
 import * as React from 'react';
 import { isModifierKey } from './isModifierKey';
@@ -12,7 +12,7 @@ import { isModifierKey } from './isModifierKey';
  */
 export function useKeyCallback(userCallback?: KeyCallback, ...keys: string[]) {
   const onKeyEvent = React.useCallback(
-    (e: KeyboardEvent) => {
+    (e: KeyPressEvent) => {
       if (userCallback !== undefined && (keys === undefined || keys.includes(e.nativeEvent.key))) {
         userCallback(e);
         e.stopPropagation();
@@ -25,7 +25,7 @@ export function useKeyCallback(userCallback?: KeyCallback, ...keys: string[]) {
 }
 
 export function getKeyCallbackWorker(userCallback?: KeyCallback, ...keys: string[]) {
-  const onKeyEvent = (e: KeyboardEvent) => {
+  const onKeyEvent = (e: KeyPressEvent) => {
     if (userCallback !== undefined && !isModifierKey(e.nativeEvent) && (keys === undefined || keys.includes(e.nativeEvent.key))) {
       userCallback(e);
       e.stopPropagation();

@@ -19,9 +19,9 @@ interface NativeKeyEvent {
   key: string;
 }
 
-export type KeyboardEvent = NativeSyntheticEvent<NativeKeyEvent>;
+export type KeyPressEvent = NativeSyntheticEvent<NativeKeyEvent>;
 
-export type KeyCallback = (e?: KeyboardEvent) => void;
+export type KeyCallback = (e?: KeyPressEvent) => void;
 
 export type KeyPressProps = {
   onKeyDown?: KeyCallback;

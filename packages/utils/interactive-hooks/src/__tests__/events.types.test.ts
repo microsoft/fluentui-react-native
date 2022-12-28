@@ -1,5 +1,5 @@
 import { AccessibilityActionEvent, GestureResponderEvent } from 'react-native';
-import { KeyboardEvent } from '../useKeyProps.types';
+import { KeyPressEvent } from '../useKeyProps.types';
 import { isAccessibilityActionEvent, isGestureResponderEvent, isKeyPressEvent } from '../events.types';
 
 const createMockEvent = (nativeEvent) => {
@@ -44,7 +44,7 @@ const mockGestureEvent: GestureResponderEvent = createMockEvent({
   touches: [],
 });
 
-const mockKeyPressEvent: KeyboardEvent = createMockEvent({
+const mockKeyPressEvent: KeyPressEvent = createMockEvent({
   key: 'enter',
 });
 

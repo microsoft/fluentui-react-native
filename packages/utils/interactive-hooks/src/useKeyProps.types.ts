@@ -1,8 +1,8 @@
 import { NativeSyntheticEvent } from 'react-native';
 
-export type KeyboardEvent = NativeSyntheticEvent<any>;
+export type KeyPressEvent = NativeSyntheticEvent<any>;
 
-export type KeyCallback = (e?: KeyboardEvent) => void;
+export type KeyCallback = (e?: KeyPressEvent) => void;
 
 export type KeyPressProps = {
   onKeyDown?: KeyCallback;
