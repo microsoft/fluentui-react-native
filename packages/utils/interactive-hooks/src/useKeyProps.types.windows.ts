@@ -1,6 +1,6 @@
-import { IKeyPressEvent, IHandledKeyboardEvent } from 'react-native-windows';
+import { IKeyboardEvent, IHandledKeyboardEvent } from 'react-native-windows';
 
-export type KeyPressEvent = IKeyPressEvent;
+export type KeyPressEvent = IKeyboardEvent;
 
 export type KeyCallback = (e?: KeyPressEvent) => void;
 
