@@ -32,34 +32,34 @@ describe('RadioGroup/RadioButton Accessibility Testing', () => {
     await RadioGroupPageObject.scrollToTestElement();
   });
 
-  it("Validate RadioGroup's accessibilityRole is correct", async () => {
+  it('Validate RadioGroup\'s "accessibilityRole" defaults to List "ControlType" element attribute.', async () => {
     await expect(await RadioGroupPageObject.getAccessibilityRole()).toEqual(RADIOGROUP_A11Y_ROLE);
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Validate RadioButton's accessibilityRole is correct", async () => {
+  it('Validate RadioButton\'s "accessibilityRole" defaults to RadioButton "ControlType" element attribute.', async () => {
     await expect(await RadioGroupPageObject.getRadioButtonAccesibilityRole()).toEqual(RADIOBUTTON_A11Y_ROLE);
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('RadioGroup - Set accessibilityLabel', async () => {
+  it('Set RadioGroup "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     await expect(await RadioGroupPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(RADIOGROUP_ACCESSIBILITY_LABEL);
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('RadioGroup - Do not set accessibilityLabel -> Default to RadioGroup label', async () => {
+  it('Do not set RadioGroup "accessibilityLabel" prop. Validate "Name" element attribute defaults to current RadioGroup label.', async () => {
     await expect(await RadioGroupPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(RADIOGROUP_TEST_COMPONENT_LABEL);
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('RadioButton - Set accessibilityLabel', async () => {
+  it('Set RadioButton "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     await expect(await RadioGroupPageObject.getRBAccessibilityLabel(RadioButtonSelector.First)).toEqual(
       FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL,
     );
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('RadioButton - Do not set accessibilityLabel -> Default to RadioButton label', async () => {
+  it('Do not set RadioButton "accessibilityLabel" prop. Validate "Name" element attribute defaults to current RadioButton label.', async () => {
     await expect(await RadioGroupPageObject.getRBAccessibilityLabel(RadioButtonSelector.Second)).toEqual(SECOND_RADIO_BUTTON_LABEL);
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -73,7 +73,7 @@ describe('RadioGroup Functional Testing', async () => {
     await RadioGroupPageObject.resetRadioGroupSelection();
   });
 
-  it('Click on a RadioButton and ensure it changes state from unselected -> selected', async () => {
+  it('Click on a RadioButton. Validate that it changes state from unselected to selected.', async () => {
     /* Validate the RadioButton is not initially selected */
     await expect(await RadioGroupPageObject.isRadioButtonSelected(RadioButtonSelector.Second)).toBeFalsy();
 
@@ -86,7 +86,7 @@ describe('RadioGroup Functional Testing', async () => {
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Keyboard to RadioButton and check for Selection state', async () => {
+  it('Press "Arrow Key" on a RadioButton. Validate adjacent RadioButton is newly selected.', async () => {
     // Presses the ArrowDown key while the first (A) RadioButton is selected
     await RadioGroupPageObject.sendKey(Keys.ARROW_DOWN, RadioButtonSelector.First);
     await RadioGroupPageObject.waitForRadioButtonSelected(RadioButtonSelector.Second, 5000);
@@ -96,7 +96,7 @@ describe('RadioGroup Functional Testing', async () => {
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Keyboard to DISABLED RadioButton and validate it doesn't get selected", async () => {
+  it('Press "Arrow Key" on a RadioButton adjacent to a disabled RadioButton. Validate disabled RadioButton is skipped and the RadioButton after is newly selected.', async () => {
     // Presses the ArrowDown key while the second (B) RadioButton is selected
     await RadioGroupPageObject.sendKey(Keys.ARROW_DOWN, RadioButtonSelector.Second);
     await RadioGroupPageObject.waitForRadioButtonSelected(RadioButtonSelector.Fourth, 5000); // It should skip RadioButton 3 since it is disabled
