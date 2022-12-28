@@ -9,7 +9,7 @@ import {
   SWITCH_NO_A11Y_LABEL_COMPONENT,
   SWITCH_TEST_COMPONENT_LABEL,
   SWITCH_ON_PRESS,
-} from './consts';
+} from '../../../../E2E/src/Switch/consts';
 import { Platform } from 'react-native';
 
 export const E2ESwitchTest: React.FunctionComponent = () => {

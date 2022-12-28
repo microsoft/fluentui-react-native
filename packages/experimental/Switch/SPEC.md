@@ -79,11 +79,13 @@ export interface SwitchProps extends Omit<PressablePropsExtended 'onPress'> {
 
   /**
    * The Switch's text that shows when it is in a false state
+   * Note: Not supported for Android
    */
   offText?: string;
 
   /**
    * The Switch's text that shows when it is in a true state
+   * Note: Not supported for Android
    */
   onText?: string;
 
@@ -91,7 +93,7 @@ export interface SwitchProps extends Omit<PressablePropsExtended 'onPress'> {
    * Sets the position of the Switch's label. The position value 'after' is mutually
    * exclusive with the onText and offText props. This is due to variable width
    * of the text props causing the Switch's position to change when it shouldn't.
-   * For Android : 'above' is not supported
+   * Note : 'before' , 'above' are not supported on Android
    */
   labelPosition?: 'before' | 'above' | 'after';
 }
@@ -205,6 +207,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 
   /**
    * States that can be applied to a switch
+   * Note: 'hovered','focused','before','beforeContent','above' are not supported for Android
    */
   hovered?: SwitchTokens;
   focused?: SwitchTokens;

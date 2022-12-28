@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './consts';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../../../../E2E/src/TextExperimental/consts';
 
 export const StandardUsage: React.FunctionComponent = () => {
   return (

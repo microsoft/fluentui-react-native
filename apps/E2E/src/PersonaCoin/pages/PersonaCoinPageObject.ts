@@ -2,7 +2,7 @@ import {
   PERSONACOIN_TESTPAGE,
   PERSONACOIN_TEST_COMPONENT,
   HOMEPAGE_PERSONACOIN_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/PersonaCoin/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PersonaCoinPageObject extends BasePage {
