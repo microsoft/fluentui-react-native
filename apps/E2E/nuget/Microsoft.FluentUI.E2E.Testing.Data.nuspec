@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.FluentUI.E2E.Testing.Data</id>
+    <version>1.0.0</version>
+    <title>FluentUI React Native's E2E Testing Assets</title>
+    <authors>Microsoft Office CXE</authors>
+    <projectUrl>https://github.com/microsoft/fluentui-react-native.git</projectUrl>
+    <description>This package contains all E2E testing data in FURN that allows us to run UI manipulation tests with WebDriverIO and Appium.</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <repository type="git"
+      url="https://github.com/microsoft/fluentui-react-native.git"
+      commit="$CommitId$" />
+  </metadata>
+  <files>
+    <file src="..\src\**" target="E2E" />
+  </files>
+</package>

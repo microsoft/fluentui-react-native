@@ -5,14 +5,74 @@ import { FABTokens } from './FAB.types';
 
 export const defaultFABTokens: TokenSettings<FABTokens, Theme> = (t: Theme) =>
   ({
-    borderRadius: globalTokens.corner.radiusCircular,
-    minHeight: 56,
-    minWidth: 56,
-    padding: globalTokens.spacing.l,
-    hasContent: {
-      hasIconBefore: {
-        spacingIconContentBefore: globalTokens.spacing.mNudge,
+    elevation: t.shadows.shadow8.key.blur,
+    disabled: {
+      elevation: 0,
+    },
+    pressed: {
+      elevation: t.shadows.shadow2.key.blur,
+    },
+    focused: {
+      elevation: t.shadows.shadow2.key.blur,
+      borderWidth: globalTokens.stroke.width20,
+      borderInnerWidth: globalTokens.stroke.width10,
+    },
+    subtle: {
+      elevation: t.shadows.shadow8.key.blur,
+      disabled: {
+        elevation: 0,
+      },
+      pressed: {
+        elevation: t.shadows.shadow2.key.blur,
+      },
+      focused: {
+        elevation: t.shadows.shadow2.key.blur,
+        borderWidth: globalTokens.stroke.width20,
+        borderInnerWidth: globalTokens.stroke.width10,
       },
     },
-    shadowToken: t.shadows.shadow8,
+    large: {
+      borderRadius: globalTokens.corner.radiusCircular,
+      iconSize: 24,
+      minHeight: 56,
+      minWidth: 56,
+      paddingHorizontal: globalTokens.size160,
+      paddingVertical: globalTokens.size160,
+      spacingIconContentBefore: 0,
+      hasContent: {
+        borderRadius: globalTokens.corner.radiusCircular,
+        iconSize: 24,
+        fontSize: t.typography.variants.body1Strong.size,
+        fontFamily: t.typography.variants.body1Strong.face,
+        fontWeight: t.typography.variants.body1Strong.weight,
+        minHeight: 56,
+        minWidth: 56,
+        paddingStart: globalTokens.size160,
+        paddingEnd: globalTokens.size200,
+        paddingVertical: globalTokens.size160,
+        spacingIconContentBefore: globalTokens.size80,
+      },
+    },
+    small: {
+      borderRadius: globalTokens.corner.radiusCircular,
+      iconSize: 20,
+      minHeight: 44,
+      minWidth: 44,
+      paddingHorizontal: globalTokens.size120,
+      paddingVertical: globalTokens.size120,
+      spacingIconContentBefore: 0,
+      hasContent: {
+        borderRadius: globalTokens.corner.radiusCircular,
+        iconSize: 20,
+        fontSize: t.typography.variants.body2Strong.size,
+        fontFamily: t.typography.variants.body2Strong.face,
+        fontWeight: t.typography.variants.body2Strong.weight,
+        minHeight: 44,
+        minWidth: 44,
+        paddingHorizontal: globalTokens.size120,
+        paddingStart: globalTokens.size120,
+        paddingEnd: globalTokens.size160,
+        spacingIconContentBefore: globalTokens.size80,
+      },
+    },
   } as FABTokens);

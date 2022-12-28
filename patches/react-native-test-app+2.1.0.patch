@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native-test-app/windows/ReactTestApp/ReactTestApp.vcxproj b/node_modules/react-native-test-app/windows/ReactTestApp/ReactTestApp.vcxproj
+index 1acf9c3..b1cbee3 100644
+--- a/node_modules/react-native-test-app/windows/ReactTestApp/ReactTestApp.vcxproj
++++ b/node_modules/react-native-test-app/windows/ReactTestApp/ReactTestApp.vcxproj
+@@ -233,6 +233,7 @@
+     <Import Project="$(SolutionDir)packages\ReactNative.Hermes.Windows.$(HermesVersion)\build\native\ReactNative.Hermes.Windows.targets" Condition="Exists('$(SolutionDir)packages\ReactNative.Hermes.Windows.$(HermesVersion)\build\native\ReactNative.Hermes.Windows.targets') AND '$(UseHermes)' == 'true'" />
+     <Import Project="$(SolutionDir)packages\$(WinUIPackageName).$(WinUIPackageVersion)\build\native\$(WinUIPackageName).targets" Condition="Exists('$(SolutionDir)packages\$(WinUIPackageName).$(WinUIPackageVersion)\build\native\$(WinUIPackageName).targets')" />
+     <Import Project="$(SolutionDir)packages\nlohmann.json.3.10.4\build\native\nlohmann.json.targets" Condition="Exists('$(SolutionDir)packages\nlohmann.json.3.10.4\build\native\nlohmann.json.targets')" />
++    <Import Project="$(SolutionDir)\packages\Win2D.uwp.1.26.0\build\native\Win2D.uwp.targets" Condition="Exists('$(SolutionDir)\packages\Win2D.uwp.1.26.0\build\native\Win2D.uwp.targets')" />
+   </ImportGroup>
+   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+     <PropertyGroup>

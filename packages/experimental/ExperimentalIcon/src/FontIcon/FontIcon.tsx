@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { Text } from 'react-native';
 import { fontIconName, FontIconProps } from './FontIcon.types';

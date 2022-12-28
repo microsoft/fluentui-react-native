@@ -16,7 +16,7 @@ import {
   BUTTON_PRESS_TEST_COMPONENT_LABEL,
   BUTTON_FOCUSABLE_TEST_COMPONENT,
   BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL,
-} from './consts';
+} from '../../../../E2E/src/Button/consts';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
@@ -51,7 +51,7 @@ export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
         <Button testID={BUTTON_TEST_COMPONENT} onClick={onClick} accessibilityLabel={BUTTON_ACCESSIBILITY_LABEL}>
           This is a button for E2E testing
         </Button>
-        <Button testID={BUTTON_NO_A11Y_LABEL_COMPONENT} onClick={onClick}>
+        <Button testID={BUTTON_NO_A11Y_LABEL_COMPONENT} onClick={onClick} accessibilityRole="menuitem">
           {BUTTON_TEST_COMPONENT_LABEL}
         </Button>
         <Button
