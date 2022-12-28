@@ -29,7 +29,7 @@ describe('MenuButton Accessibility Testing', () => {
     await MenuButtonPageObject.scrollToTestElement(await MenuButtonPageObject._firstMenuButton);
   });
 
-  it('Validate accessibilityRole is correct', async () => {
+  it('Validate "accessibilityRole" value defaults to Button "ControlType" element attribute.', async () => {
     await expect(
       await MenuButtonPageObject.compareAttribute(MenuButtonPageObject._firstMenuButton, Attribute.AccessibilityRole, MENUBUTTON_A11Y_ROLE),
     ).toBeTrue();
@@ -37,7 +37,7 @@ describe('MenuButton Accessibility Testing', () => {
     await expect(await MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     await expect(
       await MenuButtonPageObject.compareAttribute(
         MenuButtonPageObject._firstMenuButton,
@@ -49,7 +49,7 @@ describe('MenuButton Accessibility Testing', () => {
     await expect(await MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do not set accessibilityLabel -> Validate accessibilityLabel defaults to MenuButton label', async () => {
+  it('Do not set "accessibilityLabel". Validate "Name" element attribute defaults to MenuButton label.', async () => {
     await expect(
       await MenuButtonPageObject.compareAttribute(
         MenuButtonPageObject._secondMenuButton,
@@ -70,7 +70,7 @@ describe('MenuButton Functional Testing', () => {
     await MenuButtonPageObject.sendKeys(MenuButtonPageObject._firstMenuButton, [Keys.ESCAPE]); // Reset MenuButton state for next test
   });
 
-  it('Click on first MenuButton -> Validate that its list of Menu Items display', async () => {
+  it('Click on first MenuButton. Validate that its list of Menu Items display.', async () => {
     /* Click on the MenuButton */
     await MenuButtonPageObject.click(MenuButtonPageObject._firstMenuButton);
 
@@ -79,7 +79,7 @@ describe('MenuButton Functional Testing', () => {
     await expect(await MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Type "SPACE" on first MenuButton -> Validate that its list of Menu Items display', async () => {
+  it('Type "SPACE" on first MenuButton. Validate that its list of Menu Items display.', async () => {
     /* Type a space on the MenuButton */
     await MenuButtonPageObject.sendKeys(MenuButtonPageObject._firstMenuButton, [Keys.SPACE]);
 
