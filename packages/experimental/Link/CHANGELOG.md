@@ -1,8 +1,49 @@
 # Change Log - @fluentui-react-native/experimental-link
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.3
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/tokens to v0.20.1
+- Bump @fluentui-react-native/text to v0.19.2
+
+## 0.4.2
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/interactive-hooks to v0.22.2
+- Bump @fluentui-react-native/text to v0.19.1
+
+## 0.4.1
+
+Wed, 21 Dec 2022 01:18:57 GMT
+
+### Patches
+
+- Fix Link space/enter keyboarding (ruaraki@microsoft.com)
+
+## 0.4.0
+
+Tue, 20 Dec 2022 23:10:17 GMT
+
+### Minor changes
+
+- Force win32 to not have inline links (ruaraki@microsoft.com)
+
+### Patches
+
+- Update link spec with more detail (ruaraki@microsoft.com)
 
 ## 0.3.2
 
