@@ -14,15 +14,8 @@ const PressableWithDesktopProps = (props: PressablePropsExtended) => {
   return <Pressable {...props} />;
 };
 
-it('useKeyProps is memoized', () => {
-  const onKeyUpProps1 = useKeyProps(dummyFunction, ' ', 'Enter');
-  const onKeyUpProps2 = useKeyProps(dummyFunction, ' ', 'Enter');
-  expect(onKeyUpProps1 === onKeyUpProps2).toBeTruthy();
-});
-
 it('Pressable with useKeyProps', () => {
   const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
-
   const tree = renderer.create(<PressableWithDesktopProps {...keyboardProps} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
