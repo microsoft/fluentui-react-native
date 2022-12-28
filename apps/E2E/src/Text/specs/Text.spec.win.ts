@@ -6,7 +6,7 @@ import {
   DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT,
   V1_TEXT_FIRST_ACCESSIBILITY_LABEL,
   V1_TEXT_SECOND_COMPONENT_CONTENT,
-} from '../../../../fluent-tester/src/TestComponents/Text/consts';
+} from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Text Testing Initialization', function () {

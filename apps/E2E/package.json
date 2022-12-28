@@ -1,11 +1,10 @@
 {
   "name": "@fluentui-react-native/e2e-testing",
-  "version": "1.6.4",
+  "version": "1.8.2",
   "description": "Package containing E2E testing specs",
   "license": "MIT",
   "scripts": {
     "build": "fluentui-scripts build",
-    "bundle": "react-native rnx-bundle --dev false",
     "e2etest:ios": "wdio run wdio.conf.ios.js",
     "e2etest:macos": "wdio run wdio.conf.macos.js",
     "e2etest:windows": "rimraf errorShots/* reports/* && wdio run wdio.conf.windows.js"
@@ -27,7 +26,6 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "ts-node": "^8.10.1",
-    "tsconfig-paths": "^3.9.0",
     "typescript": "4.5.4",
     "webdriverio": "7.23.0",
     "@types/jasmine": "3.5.10",
@@ -44,30 +42,11 @@
     "appium-xcuitest-driver": "4.11.1",
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
-    "@fluentui-react-native/focus-zone": "^0.11.14"
+    "@fluentui-react-native/focus-zone": "^0.11.15"
   },
   "rnx-kit": {
     "reactNativeVersion": "0.68",
     "kitType": "library",
-    "bundle": [
-      {
-        "id": "win32_specs",
-        "entryFile": "src/index.win32.ts",
-        "bundleOutput": "dist/win32_specs.bundle.js",
-        "sourcemapOutput": "dist/win32_specs.bundle.map",
-        "assetsDest": "dist",
-        "targets": [
-          "native"
-        ],
-        "detectCyclicDependencies": {
-          "throwOnError": true
-        },
-        "detectDuplicateDependencies": {
-          "throwOnError": false
-        },
-        "typescriptValidation": false
-      }
-    ],
     "capabilities": [
       "core",
       "react",

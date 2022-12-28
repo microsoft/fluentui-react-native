@@ -3,7 +3,7 @@ import {
   LINK_TEST_COMPONENT,
   HOMEPAGE_LINK_BUTTON,
   LINK_NO_A11Y_LABEL_COMPONENT,
-} from '../../../../fluent-tester/src/TestComponents/Link/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class LinkPageObject extends BasePage {

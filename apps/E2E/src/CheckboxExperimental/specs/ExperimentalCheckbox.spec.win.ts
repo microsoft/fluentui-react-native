@@ -4,7 +4,7 @@ import { ComponentSelector } from '../../common/BasePage';
 import {
   EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
   EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL,
-} from '../../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
+} from '../consts';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CHECKBOX_A11Y_ROLE, Keys } from '../../common/consts';
 
 describe('Experimental Checkbox Testing Initialization', () => {
