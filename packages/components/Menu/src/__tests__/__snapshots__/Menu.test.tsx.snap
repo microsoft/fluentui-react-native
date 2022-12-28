@@ -196,6 +196,8 @@ Array [
       accessible={false}
       focusable={false}
       onBlur={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -465,6 +467,8 @@ Array [
       accessible={false}
       focusable={false}
       onBlur={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -666,6 +670,8 @@ Array [
       accessible={false}
       focusable={false}
       onBlur={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -1067,6 +1073,8 @@ Array [
       accessible={false}
       focusable={false}
       onBlur={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -1468,6 +1476,8 @@ Array [
       accessible={false}
       focusable={false}
       onBlur={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -1869,6 +1879,8 @@ Array [
       accessible={false}
       focusable={false}
       onBlur={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -2258,6 +2270,8 @@ Array [
       accessible={false}
       focusable={false}
       onBlur={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Icon } from '@fluentui-react-native/icon';
-import { ICON_ACCESSIBILITY_LABEL } from './consts';
+import { ICON_ACCESSIBILITY_LABEL } from '../../../../E2E/src/Icon/consts';
 import { RasterImageIconProps } from '@fluentui-react-native/icon';
 import { testImage } from '../Common/iconExamples';
 

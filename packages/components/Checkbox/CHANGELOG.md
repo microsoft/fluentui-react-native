@@ -1,8 +1,43 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Wed, 21 Dec 2022 06:39:34 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.7
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/pressable to v0.9.42
+- Bump @fluentui-react-native/text to v0.19.2
+- Bump @fluentui-react-native/theme-tokens to v0.22.4
+- Bump @fluentui-react-native/tokens to v0.20.1
+- Bump @uifabricshared/foundation-compose to v1.12.29
+
+## 0.18.6
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/interactive-hooks to v0.22.2
+- Bump @fluentui-react-native/pressable to v0.9.41
+- Bump @fluentui-react-native/text to v0.19.1
+- Bump @fluentui-react-native/theme-tokens to v0.22.3
+- Bump @uifabricshared/foundation-compose to v1.12.28
+
+## 0.18.5
+
+Fri, 23 Dec 2022 11:03:02 GMT
+
+### Patches
+
+- update spec for android unsupported props (rohanpd.work@gmail.com)
 
 ## 0.18.4
 

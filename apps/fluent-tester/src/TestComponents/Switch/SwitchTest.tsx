@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { SWITCH_TESTPAGE } from './consts';
+import { SWITCH_TESTPAGE } from '../../../../E2E/src/Switch/consts';
 import { View, StyleSheet } from 'react-native';
 import { Switch } from '@fluentui-react-native/switch';
 import { E2ESwitchTest } from './E2ESwitchTest';
@@ -125,10 +125,13 @@ const toggleSections: TestSection[] = [
       component: () => <OnOffText />,
     },
   }),
-  {
-    name: 'Customized Tokens',
-    component: () => <CustomizedSwitch />,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Customized Tokens',
+      component: () => <CustomizedSwitch />,
+    },
+  }),
   {
     name: 'Switch E2E Testing',
     component: () => <E2ESwitchTest />,

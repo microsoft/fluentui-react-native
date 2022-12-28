@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BADGE_TESTPAGE } from './consts';
+import { BADGE_TESTPAGE } from '../../../../E2E/src/Badge/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { BasicBadge } from './BasicBadgeTest';
 import { CounterBadgeTest } from './CounterBadgeTest';

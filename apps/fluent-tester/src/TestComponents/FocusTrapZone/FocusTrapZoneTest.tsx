@@ -4,7 +4,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
 import { stackStyle } from '../Common/styles';
-import { FOCUSTRAPZONE_TESTPAGE } from './consts';
+import { FOCUSTRAPZONE_TESTPAGE } from '../../../../E2E/src/FocusTrapZone/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const trapZoneStyle: IFocusTrapZoneProps['style'] = {

@@ -1,4 +1,4 @@
-import { HOMEPAGE_TOKEN_BUTTON, TOKEN_TESTPAGE, TOKENS_TEST_COMPONENT } from '../../../../fluent-tester/src/TestComponents/Tokens/consts';
+import { HOMEPAGE_TOKEN_BUTTON, TOKEN_TESTPAGE, TOKENS_TEST_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class TokenPageObject extends BasePage {

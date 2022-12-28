@@ -4,7 +4,7 @@ import {
   SWITCH_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_SWITCH_BUTTON,
   SWITCH_ON_PRESS,
-} from '../../../../fluent-tester/src/TestComponents/Switch/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
