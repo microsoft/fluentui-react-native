@@ -2,7 +2,7 @@ import {
   FOCUSTRAPZONE_TESTPAGE,
   FOCUSTRAPZONE_TEST_COMPONENT,
   HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/FocusTrapZone/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class FocusTrapZonePageObject extends BasePage {

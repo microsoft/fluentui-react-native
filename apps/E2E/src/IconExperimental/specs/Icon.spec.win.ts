@@ -2,7 +2,7 @@ import NavigateAppPage from '../../common/NavigateAppPage';
 import IconPageObject from '../pages/IconPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 import { ComponentSelector } from '../../common/BasePage';
-import { ICON_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Icon/consts';
+import { ICON_ACCESSIBILITY_LABEL } from '../../Icon/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Icon Testing Initialization', function () {
