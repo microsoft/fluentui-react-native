@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
+This log was last generated on Wed, 28 Dec 2022 17:46:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.11
+
+Wed, 28 Dec 2022 17:46:01 GMT
+
+### Patches
+
+- Make Button respect accessibilityRole passed in props (email not defined)
 
 ## 0.32.10
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Rename a test button to reflect new actual usage",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

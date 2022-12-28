@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Test case for Button with accessibilityRole",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
