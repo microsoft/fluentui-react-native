@@ -1,4 +1,4 @@
-import { IKeyPressEvent, IHandledKeyPressEvent } from '@office-iss/react-native-win32';
+import { IKeyPressEvent, IHandledKeyboardEvent } from '@office-iss/react-native-win32';
 
 export type KeyPressEvent = IKeyPressEvent;
 
@@ -7,8 +7,8 @@ export type KeyCallback = (e?: KeyPressEvent) => void;
 export type KeyPressProps = {
   onKeyDown?: KeyCallback;
   validKeysDown?: string[]; // macOS
-  keyDownEvents?: IHandledKeyPressEvent[]; // win32
+  keyDownEvents?: IHandledKeyboardEvent[]; // win32
   onKeyUp?: KeyCallback;
   validKeysUp?: string[]; // macOS
-  keyUpEvents?: IHandledKeyPressEvent[]; // win32
+  keyUpEvents?: IHandledKeyboardEvent[]; // win32
 };

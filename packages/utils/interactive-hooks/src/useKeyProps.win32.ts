@@ -26,7 +26,7 @@ export function useKeyCallback(userCallback?: KeyCallback, ...keys: string[]) {
 
 export function getKeyCallbackWorker(userCallback?: KeyCallback, ...keys: string[]) {
   const onKeyEvent = (e: KeyPressEvent) => {
-    if (userCallback !== undefined && !isModifierKey(e.nativeEvent) && (keys === undefined || keys.includes(args.nativeEvent.key))) {
+    if (userCallback !== undefined && !isModifierKey(e.nativeEvent) && (keys === undefined || keys.includes(e.nativeEvent.key))) {
       userCallback(e);
       e.stopPropagation();
     }

@@ -40,7 +40,9 @@
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-macos": "^0.68.0",
+    "react-native-windows": "^0.68.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
