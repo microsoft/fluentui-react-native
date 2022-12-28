@@ -26,7 +26,7 @@ describe('Link Accessibility Testing', () => {
     await ExperimentalLinkPageObject.scrollToTestElement();
   });
 
-  it('Validate accessibilityRole is correct', async () => {
+  it('Validate "accessibilityRole" defaults to link "ControlType" element attribute.', async () => {
     await expect(
       await ExperimentalLinkPageObject.compareAttribute(
         ExperimentalLinkPageObject._primaryComponent,
@@ -38,7 +38,7 @@ describe('Link Accessibility Testing', () => {
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" propagates to "Name" element attribute.', async () => {
     await expect(
       await ExperimentalLinkPageObject.compareAttribute(
         ExperimentalLinkPageObject._primaryComponent,
