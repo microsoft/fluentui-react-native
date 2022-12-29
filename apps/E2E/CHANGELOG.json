@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 29 Dec 2022 03:47:47 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.8.3",
+      "version": "1.8.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.16",
+            "commit": "6d8afaea8495b16c2acd8aa4d1de62036110968c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 28 Dec 2022 17:46:01 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.8.2",
       "version": "1.8.2",

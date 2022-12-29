@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.28.0
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Minor changes
+
+- Define `FontWeightValue` in terms of what RN says (adam.gleitman@gmail.com)
 
 ## 0.27.1
 

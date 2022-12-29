@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Define `FontWeightValue` in terms of what RN says",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch"
-}

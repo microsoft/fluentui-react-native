@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Thu, 29 Dec 2022 03:47:47 GMT",
+      "tag": "@fluentui-react-native/link_v0.17.20",
+      "version": "0.17.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.30",
+            "commit": "6d8afaea8495b16c2acd8aa4d1de62036110968c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.4",
+            "commit": "6d8afaea8495b16c2acd8aa4d1de62036110968c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/text to v0.19.3",
+            "commit": "6d8afaea8495b16c2acd8aa4d1de62036110968c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.2",
+            "commit": "6d8afaea8495b16c2acd8aa4d1de62036110968c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Dec 2022 22:21:15 GMT",
       "tag": "@fluentui-react-native/link_v0.17.19",
       "version": "0.17.19",

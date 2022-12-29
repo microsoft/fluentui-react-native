@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Use theming-utils to fetch font alias tokens",
-  "packageName": "@fluentui-react-native/theming-utils",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch"
-}
