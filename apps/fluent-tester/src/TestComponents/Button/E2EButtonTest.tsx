@@ -51,7 +51,7 @@ export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
         <Button testID={BUTTON_TEST_COMPONENT} onClick={onClick} accessibilityLabel={BUTTON_ACCESSIBILITY_LABEL}>
           This is a button for E2E testing
         </Button>
-        <Button testID={BUTTON_NO_A11Y_LABEL_COMPONENT} onClick={onClick}>
+        <Button testID={BUTTON_NO_A11Y_LABEL_COMPONENT} onClick={onClick} accessibilityRole="menuitem">
           {BUTTON_TEST_COMPONENT_LABEL}
         </Button>
         <Button
