@@ -22,7 +22,7 @@ export const V2Usage: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        <TextV1 variant="caption2">Caption2sdkjskdj v1</TextV1>
+        <TextV1 variant="caption2">Caption2 v1</TextV1>
         <Caption2>Caption2 v2</Caption2>
         <TextV1 variant="caption1">Caption1 v1</TextV1>
         <Caption1>Caption1 v2</Caption1>
@@ -31,7 +31,7 @@ export const V2Usage: React.FunctionComponent = () => {
         <TextV1 variant="body2">Body2 v1</TextV1>
         <Body2>Body2 v2</Body2>
         <TextV1 variant="body2Strong">Body2Strong v1</TextV1>
-        <Body2Strong>Body2Strongv2 </Body2Strong>
+        <Body2Strong>Body2Strong v2</Body2Strong>
         <TextV1 variant="body1">Body1 v1</TextV1>
         <Body1>Body1 v2</Body1>
         <TextV1 variant="body1Strong">Body1Strong v1</TextV1>
