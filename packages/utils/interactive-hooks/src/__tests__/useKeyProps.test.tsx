@@ -20,6 +20,12 @@ it('Pressable with useKeyProps', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('useKeyProps called twice', () => {
+  const keyboardProps1 = useKeyProps(dummyFunction, ' ', 'Enter');
+  const keyboardProps2 = useKeyProps(dummyFunction, ' ', 'Enter');
+  expect(keyboardProps1).toBe(keyboardProps2);
+});
+
 it('Simple Pressable with useKeyProps rendering does not invalidate styling', () => {
   const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
   checkRenderConsistency(() => <PressableWithDesktopProps {...keyboardProps} />, 2);

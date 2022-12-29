@@ -119,16 +119,16 @@ export const useKeyUpProps = memoize(getKeyUpPropsWorker);
  */
 export const useKeyDownProps = memoize(getKeyDownPropsWorker);
 
+/** Exposes the behavior of useKeyProps for the current platform as a boolean */
+export const preferKeyDownForKeyEvents = Platform.select({
+  macos: true,
+  default: false,
+});
+
 /**
  * Re-usable hook for keyboard events. on macOS, this is onKeyDown, while on windows this is onKeyUp.
  * @param userCallback The function you want to be called once the key has been activated on key down
  * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
  * @returns KeyPressProps: An object containing the correct platform specific props to handle key press
  */
-export const useKeyProps = memoize(getKeyUpPropsWorker);
-
-/** Exposes the behavior of useKeyProps for the current platform as a boolean */
-export const preferKeyDownForKeyEvents = Platform.select({
-  macos: true,
-  default: false,
-});
+export const useKeyProps = preferKeyDownForKeyEvents ? useKeyDownProps : useKeyUpProps;
