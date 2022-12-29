@@ -18,9 +18,9 @@ describe('Radio component tests', () => {
     checkRenderConsistency(() => <Radio value="key1" label="Default Radio" />, 2);
   });
 
+  /* Re-render test for depth 2 is blocked and will need to be added after issue is resolved.
+  The test is blocked due to an upstream issue where the blur function in Pressable is a new instance between renders.  */
   it('Radio re-renders correctly', () => {
     checkReRender(() => <Radio value="key1" label="Render twice" />);
   });
-
-  /* Re-Render test for depth 2 is blocked and needs to be revisited later. */
 });
