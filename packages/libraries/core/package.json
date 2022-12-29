@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.34.7",
+  "version": "0.34.13",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",
@@ -28,22 +28,22 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/button": "0.32.9",
-    "@fluentui-react-native/callout": "0.21.44",
-    "@fluentui-react-native/checkbox": "0.18.6",
-    "@fluentui-react-native/contextual-menu": "0.21.6",
-    "@fluentui-react-native/focus-trap-zone": "0.9.43",
-    "@fluentui-react-native/focus-zone": "0.11.14",
-    "@fluentui-react-native/interactive-hooks": "0.22.2",
-    "@fluentui-react-native/link": "0.17.18",
-    "@fluentui-react-native/menu-button": "0.10.6",
-    "@fluentui-react-native/persona": "0.13.28",
-    "@fluentui-react-native/persona-coin": "0.12.9",
-    "@fluentui-react-native/pressable": "0.9.41",
-    "@fluentui-react-native/radio-group": "0.16.15",
-    "@fluentui-react-native/separator": "0.14.0",
-    "@fluentui-react-native/tabs": "0.11.12",
-    "@fluentui-react-native/text": "0.19.1"
+    "@fluentui-react-native/button": "0.32.13",
+    "@fluentui-react-native/callout": "0.21.46",
+    "@fluentui-react-native/checkbox": "0.19.3",
+    "@fluentui-react-native/contextual-menu": "0.21.9",
+    "@fluentui-react-native/focus-trap-zone": "0.9.45",
+    "@fluentui-react-native/focus-zone": "0.11.16",
+    "@fluentui-react-native/interactive-hooks": "0.22.4",
+    "@fluentui-react-native/link": "0.17.21",
+    "@fluentui-react-native/menu-button": "0.10.10",
+    "@fluentui-react-native/persona": "0.13.30",
+    "@fluentui-react-native/persona-coin": "0.12.11",
+    "@fluentui-react-native/pressable": "0.9.43",
+    "@fluentui-react-native/radio-group": "0.16.18",
+    "@fluentui-react-native/separator": "0.14.2",
+    "@fluentui-react-native/tabs": "0.11.15",
+    "@fluentui-react-native/text": "0.19.4"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

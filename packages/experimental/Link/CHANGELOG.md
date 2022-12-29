@@ -1,8 +1,38 @@
 # Change Log - @fluentui-react-native/experimental-link
 
-This log was last generated on Tue, 27 Dec 2022 10:18:14 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Dec 2022 08:02:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.5
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.4
+
+## 0.4.4
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/interactive-hooks to v0.22.4
+- Bump @fluentui-react-native/tokens to v0.20.2
+- Bump @fluentui-react-native/text to v0.19.3
+
+## 0.4.3
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/tokens to v0.20.1
+- Bump @fluentui-react-native/text to v0.19.2
 
 ## 0.4.2
 
