@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Use alias token definitions for iOS typography",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "adam.gleitman@gmail.com",
+  "dependentChangeType": "patch"
+}

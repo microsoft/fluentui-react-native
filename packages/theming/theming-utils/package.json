@@ -26,7 +26,8 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.27.1 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.27.1 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.20.0 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/design-tokens-win32": "^0.36.0",
