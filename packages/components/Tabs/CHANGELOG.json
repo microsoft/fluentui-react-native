@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tabs",
   "entries": [
     {
+      "date": "Thu, 29 Dec 2022 08:02:57 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.11.15",
+      "version": "0.11.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.16.7",
+            "commit": "b388c484e4b9e6c80cbbebb3be3b1a03ca919cd0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/text to v0.19.4",
+            "commit": "b388c484e4b9e6c80cbbebb3be3b1a03ca919cd0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 29 Dec 2022 03:47:47 GMT",
       "tag": "@fluentui-react-native/tabs_v0.11.14",
       "version": "0.11.14",
