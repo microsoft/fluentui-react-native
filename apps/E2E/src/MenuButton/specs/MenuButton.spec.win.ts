@@ -4,7 +4,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Keys } from '../.
 import {
   MENU_BUTTON_ACCESSIBILITY_LABEL,
   MENU_BUTTON_TEST_COMPONENT_LABEL,
-} from '../../../../fluent-tester/src/TestComponents/MenuButton/consts';
+} from '../consts';
 import { ComponentSelector } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -29,7 +29,6 @@ describe('MenuButton Accessibility Testing', () => {
   /* Scrolls and waits for the MenuButton to be visible on the Test Page */
   beforeEach(async () => {
     await MenuButtonPageObject.scrollToTestElement();
-    await MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('MenuButton - Validate accessibilityRole is correct', async () => {
@@ -52,7 +51,6 @@ describe('MenuButton Functional Testing', () => {
   /* Scrolls and waits for the MenuButton to be visible on the Test Page */
   beforeEach(async () => {
     await MenuButtonPageObject.scrollToTestElement();
-    await MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.ESCAPE); // Reset MenuButton state for next test
   });

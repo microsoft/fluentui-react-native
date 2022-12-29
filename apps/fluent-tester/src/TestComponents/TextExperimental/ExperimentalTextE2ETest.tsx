@@ -7,8 +7,8 @@ import {
   EXPERIMENTAL_TEXT_TEST_COMPONENT,
   EXPERIMENTAL_TEXT_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT,
-  EXPERIMENTAL_TEXT_TEST_COMPONENT_LABEL,
-} from './consts';
+  EXPERIMENTAL_TEXT_CONTENT,
+} from '../../../../E2E/src/TextExperimental/consts';
 
 export const E2EExperimentalTextTest: React.FunctionComponent = () => {
   return (
@@ -19,10 +19,10 @@ export const E2EExperimentalTextTest: React.FunctionComponent = () => {
           testID={EXPERIMENTAL_TEXT_TEST_COMPONENT}
           accessibilityLabel={EXPERIMENTAL_TEXT_ACCESSIBILITY_LABEL}
         >
-          Testing Text Component - AccessibilityLabel Set
+          Testing Text Component - Accessibility Label Set
         </Text>
         <Text variant="captionStandard" testID={EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT}>
-          {EXPERIMENTAL_TEXT_TEST_COMPONENT_LABEL}
+          {EXPERIMENTAL_TEXT_CONTENT}
         </Text>
       </Stack>
     </View>

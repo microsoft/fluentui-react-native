@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "additional of isMobile utils",
+  "packageName": "@fluentui-react-native/platform-utils",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}

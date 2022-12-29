@@ -1,6 +1,6 @@
 import { Text } from './Text';
 
-// TODO(#2268): Remove "as any" designations once RN Core properly supports Dynamic Type scaling
+// GH #2268: Remove "as any" designations once RN Core properly supports Dynamic Type scaling
 
 export const Caption1 = Text.customize({
   variant: 'caption1',

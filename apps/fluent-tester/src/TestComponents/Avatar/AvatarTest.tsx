@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AVATAR_TESTPAGE } from './consts';
+import { AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';
@@ -29,7 +29,7 @@ const avatarSections: TestSection[] = [
 
 export const AvatarTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
     iosStatus: 'Beta',
     macosStatus: 'Experimental',

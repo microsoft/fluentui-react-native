@@ -107,6 +107,7 @@ exports[`Button component tests Button composed 1`] = `
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
+        "maximumFontSize": undefined,
       }
     }
   >

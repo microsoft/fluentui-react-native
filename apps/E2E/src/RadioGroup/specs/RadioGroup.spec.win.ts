@@ -7,7 +7,7 @@ import {
   RADIOGROUP_TEST_COMPONENT_LABEL,
   FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL,
   SECOND_RADIO_BUTTON_LABEL,
-} from '../../../../fluent-tester/src/TestComponents/RadioGroup/consts';
+} from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('RadioGroup/RadioButton Testing Initialization', function () {
@@ -30,7 +30,6 @@ describe('RadioGroup/RadioButton Accessibility Testing', () => {
   /* Scrolls and waits for the RadioGroup to be visible on the Test Page */
   beforeEach(async () => {
     await RadioGroupPageObject.scrollToTestElement();
-    await RadioGroupPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it("Validate RadioGroup's accessibilityRole is correct", async () => {
@@ -70,7 +69,6 @@ describe('RadioGroup Functional Testing', async () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st RadioButton in the RadioGroup */
   beforeEach(async () => {
     await RadioGroupPageObject.scrollToTestElement();
-    await RadioGroupPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await RadioGroupPageObject.resetRadioGroupSelection();
   });

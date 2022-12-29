@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { STROKEWIDTH_TESTPAGE } from './consts';
+import { STROKEWIDTH_TESTPAGE } from '../../../../E2E/src/StrokeWidthTokens/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
@@ -80,7 +80,7 @@ const strokeWidthSections: TestSection[] = [
 
 export const StrokeWidthTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',

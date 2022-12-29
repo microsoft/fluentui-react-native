@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CheckboxPageObject, { CheckboxSelector } from '../pages/CheckboxPageObject';
 import { ComponentSelector } from '../../common/BasePage';
-import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Checkbox/consts';
+import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../consts';
 import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 
 describe('Checkbox Testing Initialization', () => {
@@ -24,7 +24,6 @@ describe('Checkbox Accessibility Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page */
   beforeEach(async () => {
     await CheckboxPageObject.scrollToTestElement();
-    await CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Checkbox - Validate accessibilityRole is correct', async () => {
@@ -47,7 +46,6 @@ describe('Checkbox Functional Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page AND un-checks the Checkbox */
   beforeEach(async () => {
     await CheckboxPageObject.scrollToTestElement();
-    await CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await CheckboxPageObject.toggleCheckboxToUnchecked();
   });

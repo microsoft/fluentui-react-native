@@ -1,6 +1,11 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalTextPageObject from '../pages/ExperimentalTextPageObject.win';
 import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { ComponentSelector } from '../../common/BasePage';
+import {
+  EXPERIMENTAL_TEXT_ACCESSIBILITY_LABEL,
+  EXPERIMENTAL_TEXT_CONTENT,
+} from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental Text Testing Initialization', function () {
@@ -20,11 +25,24 @@ describe('Experimental Text Testing Initialization', function () {
 });
 
 describe('Experimental Text Accessibility Testing', () => {
-  it('Text - Validate accessibilityRole is correct', async () => {
+  beforeEach(async () => {
     await ExperimentalTextPageObject.scrollToTestElement();
-    await ExperimentalTextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
 
+  it('Text - Validate accessibilityRole is correct', async () => {
     await expect(await ExperimentalTextPageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
+    await expect(await ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Text - Set accessibilityLabel', async () => {
+    await expect(await ExperimentalTextPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
+      EXPERIMENTAL_TEXT_ACCESSIBILITY_LABEL,
+    );
+    await expect(await ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Text - Do not set accessibilityLabel -> Default to content', async () => {
+    await expect(await ExperimentalTextPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(EXPERIMENTAL_TEXT_CONTENT);
     await expect(await ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT);
   });
 });

@@ -23,7 +23,6 @@ describe('ContextualMenu Functional Tests', async () => {
   /* Scrolls and waits for the ContextualMenu to be visible on the Test Page */
   beforeEach(async () => {
     await ContextualMenuPageObjectObject.scrollToTestElement();
-    await ContextualMenuPageObjectObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.ESCAPE); // Reset ContextualMenu state for next test
   });

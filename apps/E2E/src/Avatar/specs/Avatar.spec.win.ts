@@ -10,7 +10,7 @@ import {
   ACCESSIBILITY_ROLE_ATTRIBUTE,
   ACCESSIBILITY_ROLE_IMAGE,
   ACCESSIBILITY_ROLE_LINK,
-} from '../../../../fluent-tester/src/TestComponents/Avatar/consts';
+} from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Avatar Testing Initialization', function () {
@@ -32,7 +32,6 @@ describe('Avatar Testing Initialization', function () {
 describe('Avatar Accessibility Testing', () => {
   beforeEach(async () => {
     await AvatarPageObject.scrollToTestElement();
-    await AvatarPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Validate accessibilityLabel', async () => {
