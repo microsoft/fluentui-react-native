@@ -4,6 +4,10 @@ import { CustomizableComponent } from '@fluentui-react-native/use-tokens';
 import { UseTokens } from './useTokens';
 import { TokenSettings } from './useStyling';
 
+/**
+ * Utility function which can create Function components that can be tree compressed (using the stagedRender pattern),
+ * and also have customize functionality exposed to swap out tokens.
+ */
 export function compressible<TProps, TTokens>(
   fn: StagedRender<TProps>,
   useTokens: UseTokens<TTokens>,
