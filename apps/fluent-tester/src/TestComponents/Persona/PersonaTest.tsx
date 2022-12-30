@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
-import { PERSONA_TESTPAGE } from './consts';
+import { PERSONA_TESTPAGE } from '../../../../E2E/src/Persona/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const personaSections: TestSection[] = [

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
+import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxExperimental/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
@@ -59,7 +59,7 @@ const OtherCheckbox: React.FunctionComponent = () => {
     setisChecked(false);
   }, []);
 
-  const memoizedStyles = React.useMemo(() => (Platform.OS === 'android' ? { ...mobileStyles.containerSpacedEvenly, height: 200 } : {}), []);
+  const memoizedStyles = React.useMemo(() => (Platform.OS === 'android' ? { ...mobileStyles.containerSpacedEvenly, height: 150 } : {}), []);
 
   return (
     <View style={memoizedStyles}>
@@ -71,8 +71,12 @@ const OtherCheckbox: React.FunctionComponent = () => {
       </Button>
 
       <Checkbox label="This is a controlled Checkbox" checked={isChecked} />
-      <Checkbox label="Checkbox rendered with labelPosition 'before' (controlled)" labelPosition="before" checked={isChecked} />
-      <Checkbox label="A required checkbox with other required text" required="**" />
+      {Platform.OS !== 'android' && (
+        <>
+          <Checkbox label="Checkbox rendered with labelPosition 'before' (controlled)" labelPosition="before" checked={isChecked} />
+          <Checkbox label="A required checkbox with other required text" required="**" />
+        </>
+      )}
     </View>
   );
 };
@@ -193,10 +197,13 @@ const checkboxSections: TestSection[] = [
     name: 'Other Implementations',
     component: OtherCheckbox,
   },
-  {
-    name: 'Token Customized Checkboxes',
-    component: TokenCheckbox,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Token Customized Checkboxes',
+      component: TokenCheckbox,
+    },
+  }),
   {
     name: 'E2E Testing for Experimental Checkbox',
     component: E2ECheckboxExperimentalTest,
