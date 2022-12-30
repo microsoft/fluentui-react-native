@@ -12,7 +12,7 @@ import {
   FOURTH_RADIO_BUTTON,
   FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL,
   SECOND_RADIO_BUTTON_LABEL,
-} from '../../../../E2E/src/RadioGroup/consts';
+} from '../../../../E2E/src/RadioGroupLegacy/consts';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 

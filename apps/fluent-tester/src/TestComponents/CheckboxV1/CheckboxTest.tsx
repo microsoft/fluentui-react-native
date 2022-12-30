@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxExperimental/consts';
+import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxV1/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';

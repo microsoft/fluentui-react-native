@@ -8,7 +8,7 @@ import {
   ICON_TEST_COMPONENT,
   ICON_FONT_TEST_COMPONENT,
   ICON_SVG_TEST_COMPONENT,
-} from '../../../../E2E/src/Icon/consts';
+} from '../../../../E2E/src/IconLegacy/consts';
 import TestSvg from '../../../assets/test.svg';
 
 const fontBuiltInProps: FontIconProps = {

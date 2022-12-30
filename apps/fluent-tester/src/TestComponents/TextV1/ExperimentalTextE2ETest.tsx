@@ -8,7 +8,7 @@ import {
   EXPERIMENTAL_TEXT_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_TEXT_CONTENT,
-} from '../../../../E2E/src/TextExperimental/consts';
+} from '../../../../E2E/src/TextV1/consts';
 
 export const E2EExperimentalTextTest: React.FunctionComponent = () => {
   return (

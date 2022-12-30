@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
 import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
-import { BUTTON_TESTPAGE } from '../../../../E2E/src/Button/consts';
+import { BUTTON_TESTPAGE } from '../../../../E2E/src/ButtonLegacy/consts';
 import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonVariantTest } from './ButtonVariantTestSection';

@@ -15,7 +15,7 @@ import {
   THIRD_TABS_ITEM_LABEL,
   THIRD_TABS_ITEM_CONTENT,
   FIRST_TABS_ITEM_CONTENT,
-} from '../../../../E2E/src/Tabs/consts';
+} from '../../../../E2E/src/TabsLegacy/consts';
 
 export const E2ETabsTest: React.FunctionComponent = () => {
   return (

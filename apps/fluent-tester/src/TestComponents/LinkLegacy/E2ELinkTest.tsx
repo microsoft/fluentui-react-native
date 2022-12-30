@@ -8,7 +8,7 @@ import {
   LINK_ACCESSIBILITY_LABEL,
   LINK_NO_A11Y_LABEL_COMPONENT,
   LINK_TEST_COMPONENT_LABEL,
-} from '../../../../E2E/src/Link/consts';
+} from '../../../../E2E/src/LinkLegacy/consts';
 
 export const LinkE2ETest: React.FunctionComponent = () => {
   const doPress = (): void => {

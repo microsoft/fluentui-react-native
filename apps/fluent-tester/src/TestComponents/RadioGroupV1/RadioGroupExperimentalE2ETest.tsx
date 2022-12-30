@@ -13,7 +13,7 @@ import {
   FIFTH_RADIO,
   FIRST_RADIO_ACCESSIBILITY_LABEL,
   SECOND_RADIO_LABEL,
-} from '../../../../E2E/src/RadioGroupExperimental/consts';
+} from '../../../../E2E/src/RadioGroupV1/consts';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 

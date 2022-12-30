@@ -12,7 +12,7 @@ import {
   V1_TEXT_FIRST_COMPONENT,
   V1_TEXT_SECOND_COMPONENT,
   V1_TEXT_SECOND_COMPONENT_CONTENT,
-} from '../../../../E2E/src/Text/consts';
+} from '../../../../E2E/src/TextLegacy/consts';
 
 export const E2ETextTest: React.FunctionComponent = () => {
   return (

@@ -8,7 +8,7 @@ import {
   EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
   EXPERIMENTAL_CHECKBOX_ON_PRESS,
-} from '../../../../E2E/src/CheckboxExperimental/consts';
+} from '../../../../E2E/src/CheckboxV1/consts';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui/react-native';
 

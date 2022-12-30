@@ -10,7 +10,7 @@ import {
   BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED,
   BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
   BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
-} from '../../../../../E2E/src/Button/consts';
+} from '../../../../../E2E/src/ButtonLegacy/consts';
 
 export const E2EButtonTest_deprecated: React.FunctionComponent = () => {
   const [buttonPressed, setButtonPressed] = React.useState(false);
