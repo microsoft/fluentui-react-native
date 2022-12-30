@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "spec update , address pr feedbacks",
+  "packageName": "@fluentui-react-native/link",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
