@@ -25,6 +25,7 @@ export type LinkState = IPressableState & {
   inline?: boolean;
   /**
    * Specifies whether the link is subtle.
+   * Note: Not supported for Android
    * @default false
    */
   subtle?: boolean;

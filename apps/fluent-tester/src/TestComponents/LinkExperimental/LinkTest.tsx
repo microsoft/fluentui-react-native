@@ -153,7 +153,7 @@ const linkSections: TestSection[] = [
     component: InlineLinks,
   },
   Platform.select({
-    // As per design discussion , There is no use case for subtle link on Android , No tokens available for same.
+    // As per design discussion, there is no use case for subtle link on Android, no tokens available for the same.
     android: null,
     default: {
       name: 'Subtle Links',
