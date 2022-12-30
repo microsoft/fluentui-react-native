@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Fri, 30 Dec 2022 16:09:27 GMT",
+      "tag": "@fluentui-react-native/badge_v0.4.9",
+      "version": "0.4.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.55",
+            "commit": "8aefb1921c84f220ddf5c5def669c5ab9a036219"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.30",
+            "commit": "8aefb1921c84f220ddf5c5def669c5ab9a036219"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/icon to v0.16.9",
+            "commit": "8aefb1921c84f220ddf5c5def669c5ab9a036219"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/text to v0.19.6",
+            "commit": "8aefb1921c84f220ddf5c5def669c5ab9a036219"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 03:49:05 GMT",
       "tag": "@fluentui-react-native/badge_v0.4.8",
       "version": "0.4.8",
