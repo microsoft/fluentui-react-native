@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import { Separator } from '@fluentui/react-native';
 import { menuItems, iconProps } from './testData';
-import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonTestStyles';
+import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
 import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
 import { testImage } from '../Common/iconExamples';
 

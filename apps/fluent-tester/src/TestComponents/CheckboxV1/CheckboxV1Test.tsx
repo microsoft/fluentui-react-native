@@ -5,7 +5,7 @@ import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, Platform } from 'react-native';
 import { commonTestStyles as commonStyles, mobileStyles } from '../Common/styles';
-import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
+import { E2ECheckboxExperimentalTest } from './E2ECheckboxV1Test';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';

@@ -1,26 +1,14 @@
 import * as React from 'react';
 import { StandardUsage } from './StandardUsage';
-import { V2Usage } from './V2Usage';
-import { MaximumFontSizeUsage } from './MaximumFontSize';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
+import { E2ETextTest } from './TextLegacyE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { E2EExperimentalTextTest } from './ExperimentalTextE2ETest';
-import { EXPERIMENTAL_TEXT_TESTPAGE } from '../../../../E2E/src/TextV1/consts';
 
 const textSections: TestSection[] = [
   {
     name: 'Standard Usage',
-    testID: EXPERIMENTAL_TEXT_TESTPAGE,
     component: StandardUsage,
-  },
-  {
-    name: 'V1/V2 Comparison',
-    component: V2Usage,
-  },
-  {
-    name: 'Maximum Font Size Usage',
-    component: MaximumFontSizeUsage,
   },
   {
     name: 'Customize Usage',
@@ -31,21 +19,23 @@ const textSections: TestSection[] = [
     component: PressableUsage,
   },
   {
-    name: 'E2E Testing for Experimental Text',
-    component: E2EExperimentalTextTest,
+    name: 'E2E Text Tests',
+    component: E2ETextTest,
   },
 ];
 
-export const TextExperimentalTest: React.FunctionComponent = () => {
+export const TextTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Deprecated',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    androidStatus: 'Beta',
   };
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';
 
-  return <Test name="Experimental Text Test" description={description} sections={textSections} status={status} />;
+  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/text/SPEC.md';
+
+  return <Test name="Text Test" description={description} spec={spec} sections={textSections} status={status} />;
 };

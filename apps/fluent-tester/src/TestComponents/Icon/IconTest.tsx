@@ -5,9 +5,9 @@ import { Text } from '@fluentui/react-native';
 import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ICON_TESTPAGE } from '../../../../E2E/src/IconLegacy/consts';
-import { E2ETestingIcon } from './IconE2ETest';
-import { E2ETestingExperimentalIcon } from './IconExperimentalE2ETest';
-import { IconExperimental } from './IconExperimental';
+import { E2ETestingIcon } from './IconLegacyE2ETest';
+import { E2ETestingExperimentalIcon } from './IconV12ETest';
+import { IconExperimental } from './IconV1';
 import { testImage, testTtf, svgProps } from '../Common/iconExamples';
 
 const Icons: React.FunctionComponent = () => {

@@ -1,1 +1,1 @@
-export * from './RadioGroupTest';
+export * from './RadioGroupLegacyTest';

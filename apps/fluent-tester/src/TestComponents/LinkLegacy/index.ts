@@ -1,1 +1,1 @@
-export * from './LinkTest';
+export * from './LinkLegacyTest';

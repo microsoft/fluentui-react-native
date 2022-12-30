@@ -3,7 +3,7 @@ import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
 import { ContextualMenuProps } from '@fluentui/react-native';
 import { Text, View } from 'react-native';
 import { menuItems } from './testData';
-import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonTestStyles';
+import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
 import {
   EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT,
   EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,

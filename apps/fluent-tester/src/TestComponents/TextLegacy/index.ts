@@ -1,1 +1,1 @@
-export * from './TextTest';
+export * from './TextLegacyTest';

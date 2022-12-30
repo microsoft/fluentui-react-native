@@ -6,7 +6,7 @@ import { DisabledRadioGroup } from './DisabledRadioGroup';
 import { SubtextRadioGroup } from './SubtextRadioGroup';
 import { HorizontalRadioGroup } from './HorizontalRadioGroup';
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
-import { E2ERadioGroupExperimentalTest } from './RadioGroupExperimentalE2ETest';
+import { E2ERadioGroupExperimentalTest } from './RadioGroupV1E2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const radioGroupExperimentalSections: TestSection[] = [

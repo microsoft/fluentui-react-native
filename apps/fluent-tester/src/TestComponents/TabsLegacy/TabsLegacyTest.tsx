@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { View, Platform } from 'react-native';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { Button } from '@fluentui-react-native/experimental-button';
-import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
+import { Platform, View } from 'react-native';
+import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
-import { EXPERIMENTAL_TABS_TESTPAGE } from '../../../../E2E/src/TabsV1/consts';
+import { TABS_TESTPAGE } from '../../../../E2E/src/TabsLegacy/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { E2ETestExperimentalTabs } from './TabsExperimentalE2ETest';
+import { E2ETabsTest } from './TabsLegacyE2ETest';
 import { svgProps } from '../Common/iconExamples';
 
 const TabsMainTest: React.FunctionComponent = () => {
@@ -46,16 +44,22 @@ const DisabledTabs: React.FunctionComponent = () => {
 };
 
 const TabsCountIcon: React.FunctionComponent = () => {
+  const svgExample = {
+    svgSource: svgProps,
+    width: 20,
+    height: 20,
+  };
+
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
-        <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20, style: { margin: 5 } }} itemCount={23}>
+        <TabsItem headerText="Home" itemKey="A" icon={svgExample} itemCount={23}>
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem itemKey="B" icon={{ svgSource: svgProps, width: 20, height: 20 }} itemCount={0}>
+        <TabsItem itemKey="B" icon={svgExample} itemCount={0}>
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem itemKey="C" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
+        <TabsItem itemKey="C" icon={svgExample}>
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
@@ -66,16 +70,13 @@ const TabsCountIcon: React.FunctionComponent = () => {
 const TabsClickEventTest: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home_key');
 
-  const onTabsClick = React.useCallback(
-    (key: string) => {
-      setSelectedKey(key);
-    },
-    [setSelectedKey],
-  );
+  const onTabsClick = (key: string) => {
+    setSelectedKey(key);
+  };
 
   return (
     <View style={stackStyle}>
-      <Text>{'Last onTabsClick from: ' + selectedKey}</Text>
+      <Text>Last onTabsClick from: {selectedKey}</Text>
       <Tabs label="Tabs" onTabsClick={onTabsClick} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home_key">
           <Text>Tabs #1</Text>
@@ -92,27 +93,22 @@ const TabsClickEventTest: React.FunctionComponent = () => {
 };
 
 const TabsChangingViews: React.FunctionComponent = () => {
-  // If User wants to control what gets rendered example
-  const [selectedKey, setSelectedKey] = React.useState('home');
+  // If user wants to control what gets rendered example.
+  const [selectedKey, setSelectedKey] = React.useState('Tabs #1');
 
-  const onTabsClick = React.useCallback(
-    (key: string) => {
-      setSelectedKey(key);
-    },
-    [setSelectedKey],
-  );
+  const onTabsClick = (key: string) => {
+    setSelectedKey(key);
+  };
 
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
-        <TabsItem headerText="Home" itemKey="home" />
-        <TabsItem headerText="File" itemKey="file" />
-        <TabsItem headerText="Settings" itemKey="settings" />
+        <TabsItem headerText="Home" itemKey="Tabs #1" />
+        <TabsItem headerText="File" itemKey="Tabs #2" />
+        <TabsItem headerText="Settings" itemKey="Tabs #3" />
       </Tabs>
       <View style={{ marginVertical: 1 }}>
-        {selectedKey == 'home' && <Text>Tabs #1</Text>}
-        {selectedKey == 'file' && <Text>Tabs #2</Text>}
-        {selectedKey == 'settings' && <Text>Tabs #3</Text>}
+        <Text>{selectedKey}</Text>
       </View>
     </View>
   );
@@ -121,15 +117,12 @@ const TabsChangingViews: React.FunctionComponent = () => {
 const TabsRenderSeparately: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('rectangleRed');
 
-  const onTabsClick = React.useCallback(
-    (key: string) => {
-      setSelectedKey(key);
-    },
-    [setSelectedKey],
-  );
+  const onTabsClick = (key: string) => {
+    setSelectedKey(key);
+  };
 
   const getTabId = (key: string) => {
-    return `ShapeColorPivot_${key}`;
+    return `ShapeColorTabs_${key}`;
   };
 
   return (
@@ -154,16 +147,16 @@ const TabsRenderSeparately: React.FunctionComponent = () => {
 };
 
 const TabsSettingSelectedKey: React.FunctionComponent = () => {
-  // If user wants to programmatically set the selectedKey to control the view
+  // If user wants to programmatically set the tab's selectedKey with a button example.
   const [selectedKey, setSelectedKey] = React.useState('home');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
   const tabItems = ['home', 'file', 'setting'];
 
-  const goToNextTab = React.useCallback(() => {
+  const goToNextTab = () => {
     const newCurrTabItemIndex = (currTabItemIndex + 1) % 3;
     setCurrTabItemIndex(newCurrTabItemIndex);
     setSelectedKey(tabItems[newCurrTabItemIndex]);
-  }, [currTabItemIndex]);
+  };
 
   return (
     <View style={stackStyle}>
@@ -178,7 +171,36 @@ const TabsSettingSelectedKey: React.FunctionComponent = () => {
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
-      <Button onClick={goToNextTab}>View Next Tab</Button>
+      <Button content="View Next Tab" onClick={goToNextTab} />
+    </View>
+  );
+};
+
+const TabsShowHideItem: React.FunctionComponent = () => {
+  const [showFirstItem, setshowFirstItem] = React.useState(true);
+
+  const toggleShowFirstItem = React.useCallback(() => {
+    setshowFirstItem(!showFirstItem);
+  }, [showFirstItem]);
+
+  return (
+    <View style={stackStyle}>
+      <Tabs label="Tabs">
+        {showFirstItem && (
+          <TabsItem headerText="Home" itemKey="home">
+            <Text>Click the button below to show/hide this tabs item.</Text>
+            <Text>The selected item will not change when the number of tabs items changes.</Text>
+            <Text>If the selected item was removed, the new first item will be selected.</Text>
+          </TabsItem>
+        )}
+        <TabsItem headerText="File" itemKey="file">
+          <Text>Tabs #2</Text>
+        </TabsItem>
+        <TabsItem headerText="Setting" itemKey="setting">
+          <Text>Tabs #3</Text>
+        </TabsItem>
+      </Tabs>
+      <Button content={`${showFirstItem ? 'Hide' : 'Show'} First Tabs Item`} onClick={toggleShowFirstItem} />
     </View>
   );
 };
@@ -186,16 +208,13 @@ const TabsSettingSelectedKey: React.FunctionComponent = () => {
 const TabsWithFlexibility: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home');
 
-  const goHomeTab = React.useCallback(() => {
+  const goHomeTab = () => {
     setSelectedKey('home');
-  }, [setSelectedKey]);
+  };
 
-  const onTabsClick = React.useCallback(
-    (key: string) => {
-      setSelectedKey(key);
-    },
-    [setSelectedKey],
-  );
+  const onTabsClick = (key: string) => {
+    setSelectedKey(key);
+  };
 
   return (
     <View style={stackStyle}>
@@ -210,7 +229,7 @@ const TabsWithFlexibility: React.FunctionComponent = () => {
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
-      <Button onClick={goHomeTab}>View Home Tab</Button>
+      <Button content="View Home Tab" onClick={goHomeTab} />
     </View>
   );
 };
@@ -218,7 +237,7 @@ const TabsWithFlexibility: React.FunctionComponent = () => {
 const tabsSections: TestSection[] = [
   {
     name: 'Default Tabs',
-    testID: EXPERIMENTAL_TABS_TESTPAGE,
+    testID: TABS_TESTPAGE,
     component: TabsMainTest,
   },
   {
@@ -242,12 +261,16 @@ const tabsSections: TestSection[] = [
     component: TabsSettingSelectedKey,
   },
   {
+    name: 'Show/Hide Tabs item',
+    component: TabsShowHideItem,
+  },
+  {
     name: 'More Flexibility',
     component: TabsWithFlexibility,
   },
   {
-    name: 'E2E Testing Experimental Tabs',
-    component: E2ETestExperimentalTabs,
+    name: 'E2E Tabs Test',
+    component: E2ETabsTest,
   },
 ];
 
@@ -258,9 +281,9 @@ if (Platform.OS !== 'windows') {
   });
 }
 
-export const ExperimentalTabsTest: React.FunctionComponent = () => {
+export const TabsTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Production',
+    win32Status: 'Experimental',
     uwpStatus: 'Experimental',
     iosStatus: 'Backlog',
     macosStatus: 'Experimental',
@@ -269,5 +292,5 @@ export const ExperimentalTabsTest: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="Experimental Tabs Test" description={description} sections={tabsSections} status={status} />;
+  return <Test name="Tabs Test" description={description} sections={tabsSections} status={status} />;
 };

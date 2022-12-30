@@ -1,1 +1,1 @@
-export * from './TextExperimentalTest';
+export * from './TextV1Test';

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxLegacy/consts';
-import { E2ECheckboxTest } from './CheckboxE2ETest';
+import { E2ECheckboxTest } from './CheckboxLegacyE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 

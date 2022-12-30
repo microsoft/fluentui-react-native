@@ -4,7 +4,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardMenuButton } from './StandardMenuButtonTest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
 import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
-import { E2ETestMenuButton } from './MenuButtonE2ETest';
+import { E2ETestMenuButton } from './MenuButtonLegacyE2ETest';
 
 const menuButtonSections: TestSection[] = [
   {

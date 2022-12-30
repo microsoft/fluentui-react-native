@@ -1,1 +1,1 @@
-export * from './MenuButtonTest';
+export * from './MenuButtonLegacyTest';

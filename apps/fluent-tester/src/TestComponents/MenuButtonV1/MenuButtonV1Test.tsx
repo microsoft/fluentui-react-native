@@ -3,7 +3,7 @@ import { MENU_BUTTON_EXPERIMENTAL_TESTPAGE } from '../../../../E2E/src/MenuButto
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardMenuButton } from './StandardMenuButtonTest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
-import { E2ETestExperimentalMenuButton } from './ExperimentalMenuButtonE2ETest';
+import { E2ETestExperimentalMenuButton } from './MenuButtonV1E2ETest';
 import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
 
 const menuButtonSections: TestSection[] = [

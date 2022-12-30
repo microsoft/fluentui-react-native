@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { MenuButton } from '@fluentui/react-native';
 import { menuItems } from './testData';
-import { viewWrapperStyle, columnStyle, rowStyle } from './MenuButtonTestStyles';
+import { viewWrapperStyle, columnStyle, rowStyle } from './MenuButtonLegacyTestStyles';
 
 const StyledMenuButton = MenuButton.customize({
   button: {
