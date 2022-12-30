@@ -47,7 +47,7 @@ const radioGroupExperimentalSections: TestSection[] = [
   },
 ];
 
-export const RadioGroupExperimentalTest: React.FunctionComponent = () => {
+export const RadioGroupV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
@@ -61,13 +61,5 @@ export const RadioGroupExperimentalTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/RadioGroup/SPEC.md';
 
-  return (
-    <Test
-      name="Experimental RadioGroup Test"
-      description={description}
-      spec={spec}
-      sections={radioGroupExperimentalSections}
-      status={status}
-    />
-  );
+  return <Test name="RadioGroupV1 Test" description={description} spec={spec} sections={radioGroupExperimentalSections} status={status} />;
 };

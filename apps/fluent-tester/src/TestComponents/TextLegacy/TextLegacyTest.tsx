@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
-import { E2ETextTest } from './TextLegacyE2ETest';
+import { TextLegacyE2ETest } from './TextLegacyE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const textSections: TestSection[] = [
@@ -20,11 +20,11 @@ const textSections: TestSection[] = [
   },
   {
     name: 'E2E Text Tests',
-    component: E2ETextTest,
+    component: TextLegacyE2ETest,
   },
 ];
 
-export const TextTest: React.FunctionComponent = () => {
+export const TextLegacyTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Deprecated',
     uwpStatus: 'Experimental',

@@ -10,7 +10,7 @@ import {
   MENU_BUTTON_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/MenuButtonLegacy/consts';
 
-export const E2ETestMenuButton: React.FunctionComponent = () => {
+export const MenuButtonLegacyE2ETest: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const onItemClick = React.useCallback(

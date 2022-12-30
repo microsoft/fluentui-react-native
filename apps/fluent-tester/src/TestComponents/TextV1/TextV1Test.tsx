@@ -5,7 +5,7 @@ import { MaximumFontSizeUsage } from './MaximumFontSize';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { E2EExperimentalTextTest } from './TextV1E2ETest';
+import { TextV1E2ETest } from './TextV1E2ETest';
 import { TEXTV1_TESTPAGE } from '../../../../E2E/src/TextV1/consts';
 
 const textSections: TestSection[] = [
@@ -32,11 +32,11 @@ const textSections: TestSection[] = [
   },
   {
     name: 'E2E Testing for Experimental Text',
-    component: E2EExperimentalTextTest,
+    component: TextV1E2ETest,
   },
 ];
 
-export const TextExperimentalTest: React.FunctionComponent = () => {
+export const TextV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',

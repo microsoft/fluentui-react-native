@@ -10,7 +10,7 @@ import {
   LINKV1_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/LinkV1/consts';
 
-export const LinkE2ETest: React.FunctionComponent = () => {
+export const E2ELinkV1Test: React.FunctionComponent = () => {
   const doPress = (): void => {
     Alert.alert('Alert.', 'You have been alerted.');
   };

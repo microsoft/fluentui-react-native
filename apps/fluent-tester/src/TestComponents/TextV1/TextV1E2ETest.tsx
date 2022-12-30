@@ -10,7 +10,7 @@ import {
   TEXTV1_CONTENT,
 } from '../../../../E2E/src/TextV1/consts';
 
-export const E2EExperimentalTextTest: React.FunctionComponent = () => {
+export const TextV1E2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>

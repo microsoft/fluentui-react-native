@@ -16,7 +16,7 @@ import {
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 
-export const E2ERadioGroupTest: React.FunctionComponent = () => {
+export const RadioGroupLegacyE2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>

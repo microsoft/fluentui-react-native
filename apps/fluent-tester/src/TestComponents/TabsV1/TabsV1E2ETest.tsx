@@ -14,7 +14,7 @@ import {
   TABSITEMV1_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/TabsV1/consts';
 
-export const E2ETestExperimentalTabs: React.FunctionComponent = () => {
+export const TabsV1E2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <View style={stackStyle}>

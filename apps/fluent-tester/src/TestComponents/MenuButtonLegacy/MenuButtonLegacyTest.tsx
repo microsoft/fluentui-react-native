@@ -4,7 +4,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardMenuButton } from './StandardMenuButtonTest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
 import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
-import { E2ETestMenuButton } from './MenuButtonLegacyE2ETest';
+import { MenuButtonLegacyE2ETest } from './MenuButtonLegacyE2ETest';
 
 const menuButtonSections: TestSection[] = [
   {
@@ -22,11 +22,11 @@ const menuButtonSections: TestSection[] = [
   },
   {
     name: 'MenuButton for E2E Testing',
-    component: E2ETestMenuButton,
+    component: MenuButtonLegacyE2ETest,
   },
 ];
 
-export const MenuButtonTest: React.FunctionComponent = () => {
+export const MenuButtonLegacyTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Backlog',
@@ -38,5 +38,5 @@ export const MenuButtonTest: React.FunctionComponent = () => {
   const description =
     'MenuButton is a component which contains ContextualMenu and Button components. This control combines and simplifies the API for customers.\nClicking on MenuButton opens ContextualMenu. It can have Submenu. But selection checks and a beak are not implemented.';
 
-  return <Test name="MenuButton Test" description={description} sections={menuButtonSections} status={status} />;
+  return <Test name="MenuButton Legacy Test" description={description} sections={menuButtonSections} status={status} />;
 };

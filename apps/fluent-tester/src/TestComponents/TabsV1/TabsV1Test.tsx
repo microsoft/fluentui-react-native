@@ -6,7 +6,7 @@ import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
 import { TABSV1_TESTPAGE } from '../../../../E2E/src/TabsV1/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { E2ETestExperimentalTabs } from './TabsV1E2ETest';
+import { TabsV1E2ETest } from './TabsV1E2ETest';
 import { svgProps } from '../Common/iconExamples';
 
 const TabsMainTest: React.FunctionComponent = () => {
@@ -247,7 +247,7 @@ const tabsSections: TestSection[] = [
   },
   {
     name: 'E2E Testing Experimental Tabs',
-    component: E2ETestExperimentalTabs,
+    component: TabsV1E2ETest,
   },
 ];
 
@@ -258,7 +258,7 @@ if (Platform.OS !== 'windows') {
   });
 }
 
-export const ExperimentalTabsTest: React.FunctionComponent = () => {
+export const TabsV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
     uwpStatus: 'Experimental',
@@ -269,5 +269,5 @@ export const ExperimentalTabsTest: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="Experimental Tabs Test" description={description} sections={tabsSections} status={status} />;
+  return <Test name="TabsV1 Test" description={description} sections={tabsSections} status={status} />;
 };

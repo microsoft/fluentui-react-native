@@ -5,7 +5,7 @@ import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, Platform } from 'react-native';
 import { commonTestStyles as commonStyles, mobileStyles } from '../Common/styles';
-import { E2ECheckboxExperimentalTest } from './E2ECheckboxV1Test';
+import { E2ECheckboxV1Test } from './E2ECheckboxV1Test';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
@@ -205,12 +205,12 @@ const checkboxSections: TestSection[] = [
     },
   }),
   {
-    name: 'E2E Testing for Experimental Checkbox',
-    component: E2ECheckboxExperimentalTest,
+    name: 'E2E Testing for CheckboxV1',
+    component: E2ECheckboxV1Test,
   },
 ];
 
-export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
+export const CheckboxV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
     uwpStatus: 'N/A',
@@ -222,5 +222,5 @@ export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
   const description =
     'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
 
-  return <Test name="Experimental Checkbox Test" description={description} sections={checkboxSections} status={status} />;
+  return <Test name="CheckboxV1 Test" description={description} sections={checkboxSections} status={status} />;
 };

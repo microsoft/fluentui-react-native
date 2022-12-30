@@ -11,7 +11,7 @@ import {
 } from '../../../../E2E/src/CheckboxLegacy/consts';
 import { Stack } from '@fluentui-react-native/stack';
 
-export const E2ECheckboxTest: React.FunctionComponent = () => {
+export const CheckboxLegacyE2ETest: React.FunctionComponent = () => {
   const [checkboxPressed, setCheckboxPressed] = React.useState(false);
 
   const onClick = React.useCallback(

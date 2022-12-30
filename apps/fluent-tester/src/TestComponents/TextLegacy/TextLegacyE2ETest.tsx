@@ -10,7 +10,7 @@ import {
   DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT,
 } from '../../../../E2E/src/TextLegacy/consts';
 
-export const E2ETextTest: React.FunctionComponent = () => {
+export const TextLegacyE2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>

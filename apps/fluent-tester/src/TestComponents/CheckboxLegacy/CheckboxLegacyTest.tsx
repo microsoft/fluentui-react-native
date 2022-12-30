@@ -4,7 +4,7 @@ import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxLegacy/consts';
-import { E2ECheckboxTest } from './CheckboxLegacyE2ETest';
+import { CheckboxLegacyE2ETest } from './CheckboxLegacyE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
@@ -166,11 +166,11 @@ const checkboxSections: TestSection[] = [
   },
   {
     name: 'Checkbox for E2E Testing',
-    component: E2ECheckboxTest,
+    component: CheckboxLegacyE2ETest,
   },
 ];
 
-export const CheckboxTest: React.FunctionComponent = () => {
+export const CheckboxLegacyTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Deprecated',
     uwpStatus: 'Deprecated',
@@ -184,5 +184,5 @@ export const CheckboxTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Checkbox/SPEC.md';
 
-  return <Test name="Checkbox Test" description={description} spec={spec} sections={checkboxSections} status={status} />;
+  return <Test name="Checkbox Legacy Test" description={description} spec={spec} sections={checkboxSections} status={status} />;
 };

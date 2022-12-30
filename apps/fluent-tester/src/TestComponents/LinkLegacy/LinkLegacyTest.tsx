@@ -5,7 +5,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { LINK_TESTPAGE } from '../../../../E2E/src/LinkLegacy/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { LinkE2ETest } from './E2ELinkLegacyTest';
+import { E2ELinkLegacyTest } from './E2ELinkLegacyTest';
 
 const Links: React.FunctionComponent = () => {
   const doPress = (): void => {
@@ -28,11 +28,11 @@ const linkSections: TestSection[] = [
   },
   {
     name: 'Link E2E Test',
-    component: LinkE2ETest,
+    component: E2ELinkLegacyTest,
   },
 ];
 
-export const LinkTest: React.FunctionComponent = () => {
+export const LinkLegacyTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
@@ -44,5 +44,5 @@ export const LinkTest: React.FunctionComponent = () => {
   const description =
     'With a Link, users can navigate to another page, window, or Help topic; display a definition; initiate a command; or choose an option. A Link indicates that it can be clicked, typically by being displayed using the visited or unvisited link system colors. Traditionally, Links are underlined as well, but that approach is often unnecessary and falling out of favor to reduce visual clutter.\n\nA Link is the lightest weight clickable control, and is often used to reduce the visual complexity of a design.';
 
-  return <Test name="Link Test" description={description} sections={linkSections} status={status}></Test>;
+  return <Test name="Link Legacy Test" description={description} sections={linkSections} status={status}></Test>;
 };

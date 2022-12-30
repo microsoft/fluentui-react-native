@@ -17,7 +17,7 @@ import {
   FIRST_TABS_ITEM_CONTENT,
 } from '../../../../E2E/src/TabsLegacy/consts';
 
-export const E2ETabsTest: React.FunctionComponent = () => {
+export const TabsLegacyE2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <View style={stackStyle}>
