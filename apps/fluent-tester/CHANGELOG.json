@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 30 Dec 2022 23:23:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.126.10",
+      "version": "0.126.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "dc11ed5cfffaf7c50ea7252df234b80bb16d33de",
+            "comment": "Bump Spacing's status to at least Experimental everywhere"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 16:09:27 GMT",
       "tag": "@fluentui-react-native/tester_v0.126.9",
       "version": "0.126.9",
