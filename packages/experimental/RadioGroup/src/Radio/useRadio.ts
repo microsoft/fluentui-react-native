@@ -1,13 +1,7 @@
 import { RadioProps, RadioInfo } from './Radio.types';
 import * as React from 'react';
 import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
-import {
-  usePressableState,
-  useOnPressWithFocus,
-  useViewCommandFocus,
-  KeyPressEvent,
-  useKeyDownProps,
-} from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState } from 'react-native';
 
@@ -57,59 +51,10 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     }
   }, []);
 
-  const isCircularNavigation = true;
-
-  const onInvoke = React.useCallback(
-    (e: KeyPressEvent) => {
-      if (
-        e.nativeEvent.key == 'ArrowDown' ||
-        e.nativeEvent.key == 'ArrowRight' ||
-        e.nativeEvent.key == 'ArrowUp' ||
-        e.nativeEvent.key == 'ArrowLeft'
-      ) {
-        const length = radioGroupContext.enabledValues.length;
-        const currRadioIndex = radioGroupContext.enabledValues.indexOf(radioGroupContext.value);
-        let newCurrRadioIndex;
-        if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key == 'ArrowRight') {
-          if (isCircularNavigation || !(currRadioIndex + 1 == length)) {
-            newCurrRadioIndex = (currRadioIndex + 1) % length;
-            radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
-            radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
-            radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-            componentRef?.current?.focus();
-          }
-        } else {
-          if (isCircularNavigation || !(currRadioIndex == 0)) {
-            newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
-            radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
-            radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
-            radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-            componentRef?.current?.focus();
-          }
-        }
-      }
-    },
-    [radioGroupContext, componentRef],
-  );
-
-  // Sets the focus on this Radio if this Radio is selected.
-  React.useEffect(() => {
-    if (value === radioGroupContext.value && !isDisabled) {
-      radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
-      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-      componentRef?.current?.focus();
-    }
-  }, [radioGroupContext]);
-
-  const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
-
-  // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
-  const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
-
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
-  /* Radio changes selection when focus is moved between each RadioButton and on a click */
+  /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
   const pressable = usePressableState({
     ...rest,
     onPress: changeSelectionWithFocus,
@@ -159,7 +104,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       focusable: !state.disabled,
       enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,
-      ...onKeyDownProps,
     },
     state: state,
   };

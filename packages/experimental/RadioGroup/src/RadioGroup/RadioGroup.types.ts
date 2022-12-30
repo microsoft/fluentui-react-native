@@ -34,7 +34,7 @@ export interface RadioGroupState extends RadioGroupProps {
 
   /**
    * Array of enabled radio keys in the group
-   * Windows-Specific Prop.
+   * @platform win32
    */
   enabledValues?: string[];
 }

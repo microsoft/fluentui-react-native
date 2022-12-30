@@ -6,7 +6,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { stylingSettings } from './RadioGroup.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useRadioGroup } from './useRadioGroup.win32';
+import { useRadioGroup } from './useRadioGroup';
 import { RadioGroupProvider } from './radioGroupContext';
 import { useRadioGroupContextValue } from './useRadioGroupContextValue';
 
