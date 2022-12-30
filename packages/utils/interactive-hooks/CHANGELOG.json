@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 30 Dec 2022 03:49:05 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.5",
+      "version": "0.22.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "74a8dcd019534a36c7ee5b1e00b46904a42a37cb",
+            "comment": "Better types + tests for useKeyProps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 29 Dec 2022 03:47:47 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.22.4",
       "version": "0.22.4",

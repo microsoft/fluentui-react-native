@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Dec 2022 03:49:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.5
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Better types + tests for useKeyProps (sanajmi@microsoft.com)
 
 ## 0.22.4
 
