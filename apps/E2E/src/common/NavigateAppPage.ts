@@ -4,7 +4,7 @@ import { HOMEPAGE_BADGE_BUTTON } from '../Badge/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../CheckboxExperimental/consts';
 import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../CornerRadiusTokens/consts';
-import { HOMEPAGE_BUTTON_BUTTON } from '../Button/consts';
+import { HOMEPAGE_BUTTON_BUTTON } from '../ButtonLegacy/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../ContextualMenu/consts';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../TabsExperimental/consts';
