@@ -40,12 +40,7 @@ class MenuPageObject extends BasePage {
   async closeMenu(): Promise<void> {
     if (await this.menuIsExpanded()) {
       await this.sendKeys(this.getMenuItem(MenuItem.First), [Keys.ESCAPE]);
-      await this.waitForCondition(
-        async () => (await this.menuIsExpanded()) === false,
-        'Typed "ESCAPE" on MenuItem, but Menu did not close.',
-        this.waitForUiEvent,
-        500,
-      );
+      await this.waitForMenuToClose();
     }
   }
 
@@ -53,11 +48,22 @@ class MenuPageObject extends BasePage {
   async waitForMenuToOpen(errorMsg?: string): Promise<boolean> {
     await this.waitForCondition(
       async () => await this.menuIsExpanded(),
-      errorMsg ?? 'The Menu did not open: MenuItems failed to display.',
+      errorMsg ?? 'The Menu did not open: It looks like the MenuItems failed to display.',
       this.waitForUiEvent,
       500,
     );
     return await this.menuIsExpanded();
+  }
+
+  /* Same as above -> Just waits for menuitems to not be visible. */
+  async waitForMenuToClose(errorMsg?: string): Promise<boolean> {
+    await this.waitForCondition(
+      async () => !(await this.menuIsExpanded()),
+      errorMsg ?? 'The Menu did not close: It looks like the MenuItems are still displayed.',
+      this.waitForUiEvent,
+      500,
+    );
+    return !(await this.menuIsExpanded());
   }
 
   /* If the first item is displayed, then it's safe to say that the rest of the menu is expanded. */
