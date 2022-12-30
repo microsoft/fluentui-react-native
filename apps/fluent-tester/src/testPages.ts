@@ -208,7 +208,7 @@ export const tests: TestDescription[] = [
   {
     name: 'RadioGroup V1',
     component: RadioGroupV1Test,
-    testPageButton: Constants.HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
+    testPageButton: Constants.HOMEPAGE_RADIOGROUPV1_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {

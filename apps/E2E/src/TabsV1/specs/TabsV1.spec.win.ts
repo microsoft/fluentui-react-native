@@ -9,9 +9,9 @@ describe('TabsV1 Testing Initialization', function () {
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Experimental Tabs test page', async () => {
+  it('Click and navigate to TabsV1 test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToExperimentalTabsPage();
+    await NavigateAppPage.clickAndGoToTabsV1Page();
     await TabsV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await TabsV1PageObject.isPageLoaded()).toBeTruthy(TabsV1PageObject.ERRORMESSAGE_PAGELOAD);

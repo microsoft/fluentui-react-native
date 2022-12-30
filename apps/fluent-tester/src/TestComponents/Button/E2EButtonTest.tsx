@@ -19,7 +19,7 @@ import {
 } from '../../../../E2E/src/ButtonLegacy/consts';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
-export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
+export const E2EButtonTest: React.FunctionComponent = () => {
   const [buttonPressed, setButtonPressed] = React.useState(false);
   const [keyDetected, setKeyDetected] = React.useState('');
 

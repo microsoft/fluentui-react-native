@@ -24,7 +24,7 @@ const svgSrcProps: SvgIconProps = {
   height: 72,
 };
 
-export const IconExperimental: React.FunctionComponent = () => {
+export const IconV1: React.FunctionComponent = () => {
   const svgSource = useMemo(
     () => ({
       color: 'lightgreen',

@@ -9,7 +9,7 @@ import { ToggleButtonTest } from './ToggleButtonTestSection';
 import { ButtonIconTest } from '../Button/ButtonIconTestSection';
 import { ButtonSizeTest } from './ButtonSizeTestSection';
 import { ButtonShapeTest } from './ButtonShapeTestSection';
-import { E2EButtonExperimentalTest } from './E2EButtonTest';
+import { E2EButtonTest } from './E2EButtonTest';
 import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
 import { Platform } from 'react-native';
 
@@ -46,7 +46,7 @@ const buttonSections: TestSection[] = [
   },
   {
     name: 'E2E Button Testing',
-    component: E2EButtonExperimentalTest,
+    component: E2EButtonTest,
   },
   {
     name: 'Deprecated Basic Button',

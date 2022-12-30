@@ -13,7 +13,7 @@ describe('MenuButton Legacy Testing Initialization', function () {
 
   it('Click and navigate to MenuButton Legacy test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToMenuButtonPage();
+    await NavigateAppPage.clickAndGoToMenuButtonLegacyPage();
     await MenuButtonLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);

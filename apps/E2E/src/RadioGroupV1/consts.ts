@@ -1,11 +1,11 @@
-export const HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON = 'Homepage_RadioGroupV1_Button';
+export const HOMEPAGE_RADIOGROUPV1_BUTTON = 'Homepage_RadioGroupV1_Button';
 export const RADIOGROUPV1_TESTPAGE = 'RadioGroupV1_TestPage';
 
 /********************************************************************/
 /********************* E2E Testing RadioGroup 1 *********************/
 /********************************************************************/
 export const RADIOGROUPV1_TEST_COMPONENT = 'RadioGroupV1_Test_Component';
-export const EXPERIMENTAL_RADIOGROUP_ACCESSIBILITY_LABEL = 'E2E testing RadioGroup accessibility label';
+export const RADIOGROUPV1_ACCESSIBILITY_LABEL = 'E2E testing RadioGroup accessibility label';
 
 /* E2E Testing RadioButton 1 (1 of 4) */
 export const FIRST_RADIO = 'First_Radio';

@@ -246,7 +246,7 @@ const tabsSections: TestSection[] = [
     component: TabsWithFlexibility,
   },
   {
-    name: 'E2E Testing Experimental Tabs',
+    name: 'E2E Testing TabsV1',
     component: TabsV1E2ETest,
   },
 ];

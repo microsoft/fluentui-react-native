@@ -13,7 +13,7 @@ describe('TabsV1 Testing Initialization', function () {
     await TabsV1PageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToExperimentalTabsPage();
+    await NavigateAppPage.clickAndGoToTabsV1Page();
     await TabsV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await TabsV1PageObject.isPageLoaded()).toBeTruthy();

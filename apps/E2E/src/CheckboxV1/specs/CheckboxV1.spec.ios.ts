@@ -13,7 +13,7 @@ describe('CheckboxV1 Testing Initialization', () => {
     await CheckboxV1PageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxExperimentalPage();
+    await NavigateAppPage.clickAndGoToCheckboxV1Page();
     await CheckboxV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);

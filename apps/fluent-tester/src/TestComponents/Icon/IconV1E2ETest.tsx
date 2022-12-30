@@ -38,7 +38,7 @@ const svgSrcProps: SvgIconProps = {
   accessibilityLabel: ICON_ACCESSIBILITY_LABEL,
 };
 
-export const E2ETestingExperimentalIcon: React.FunctionComponent = () => {
+export const IconV1E2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <Text>Icon component</Text>

@@ -18,7 +18,7 @@ describe('RadioGroup/RadioButton Legacy Testing Initialization', function () {
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToRadioGroupPage();
+    await NavigateAppPage.clickAndGoToRadioGroupLegacyPage();
     await RadioGroupPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await RadioGroupPageObject.isPageLoaded()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_PAGELOAD);

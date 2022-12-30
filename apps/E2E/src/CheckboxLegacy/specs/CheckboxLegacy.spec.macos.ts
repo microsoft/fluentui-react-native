@@ -12,7 +12,7 @@ describe('Checkbox Legacy Testing Initialization', () => {
     await CheckboxLegacyPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxPage();
+    await NavigateAppPage.clickAndGoToCheckboxLegacyPage();
     await CheckboxLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy();

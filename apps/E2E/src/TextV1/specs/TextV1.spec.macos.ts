@@ -13,7 +13,7 @@ describe('TextV1 Testing Initialization', function () {
     await TextV1PageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToExperimentalTextPage();
+    await NavigateAppPage.clickAndGoToTextV1Page();
     await TextV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await TextV1PageObject.isPageLoaded()).toBeTruthy(TextV1PageObject.ERRORMESSAGE_PAGELOAD);

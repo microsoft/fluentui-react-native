@@ -12,7 +12,7 @@ describe('Text Legacy Testing Initialization', function () {
 
   it('Click and navigate to Text Legacy test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToTextPage();
+    await NavigateAppPage.clickAndGoToTextLegacyPage();
     await TextLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await TextLegacyPageObject.isPageLoaded()).toBeTruthy(TextLegacyPageObject.ERRORMESSAGE_PAGELOAD);

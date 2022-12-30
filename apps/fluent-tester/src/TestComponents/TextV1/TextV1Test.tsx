@@ -47,5 +47,5 @@ export const TextV1Test: React.FunctionComponent = () => {
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';
 
-  return <Test name="Experimental Text Test" description={description} sections={textSections} status={status} />;
+  return <Test name="TextV1 Test" description={description} sections={textSections} status={status} />;
 };

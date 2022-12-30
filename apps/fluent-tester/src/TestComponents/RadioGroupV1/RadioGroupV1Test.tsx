@@ -6,10 +6,10 @@ import { DisabledRadioGroup } from './DisabledRadioGroup';
 import { SubtextRadioGroup } from './SubtextRadioGroup';
 import { HorizontalRadioGroup } from './HorizontalRadioGroup';
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
-import { E2ERadioGroupExperimentalTest } from './RadioGroupV1E2ETest';
+import { RadioGroupV1E2ETest } from './RadioGroupV1E2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const radioGroupExperimentalSections: TestSection[] = [
+const radioGroupV1Sections: TestSection[] = [
   {
     name: 'Default RadioGroup Usage',
     testID: RADIOGROUPV1_TESTPAGE,
@@ -43,7 +43,7 @@ const radioGroupExperimentalSections: TestSection[] = [
   {
     name: 'RadioGroup for E2E Testing',
     testID: RADIOGROUPV1_TESTPAGE,
-    component: E2ERadioGroupExperimentalTest,
+    component: RadioGroupV1E2ETest,
   },
 ];
 
@@ -61,5 +61,5 @@ export const RadioGroupV1Test: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/RadioGroup/SPEC.md';
 
-  return <Test name="RadioGroupV1 Test" description={description} spec={spec} sections={radioGroupExperimentalSections} status={status} />;
+  return <Test name="RadioGroupV1 Test" description={description} spec={spec} sections={radioGroupV1Sections} status={status} />;
 };

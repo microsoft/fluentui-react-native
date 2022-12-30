@@ -13,7 +13,7 @@ describe('Link Legacy Testing Initialization', function () {
 
   it('Click and navigate to Link Legacy test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToLinkPage();
+    await NavigateAppPage.clickAndGoToLinkLegacyPage();
     await LinkLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await LinkLegacyPageObject.isPageLoaded()).toBeTruthy(LinkLegacyPageObject.ERRORMESSAGE_PAGELOAD);

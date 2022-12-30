@@ -13,7 +13,7 @@ describe('LinkV1 Testing Initialization', function () {
 
   it('Click and navigate to LinkV1 test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToLinkExperimentalPage();
+    await NavigateAppPage.clickAndGoToLinkV1Page();
     await LinkV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await LinkV1PageObject.isPageLoaded()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_PAGELOAD);

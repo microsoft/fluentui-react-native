@@ -13,7 +13,7 @@ describe('MenuButtonV1 Testing Initialization', function () {
 
   it('Click and navigate to MenuButtonV1 test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToExperimentalMenuButtonPage();
+    await NavigateAppPage.clickAndGoToMenuButtonV1Page();
     await MenuButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await MenuButtonV1PageObject.isPageLoaded()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_PAGELOAD);

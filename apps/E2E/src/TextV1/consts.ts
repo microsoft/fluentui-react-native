@@ -1,5 +1,5 @@
-export const HOMEPAGE_TEXTV1_BUTTON = 'Homepage_TextExperimental_Button';
-export const TEXTV1_TESTPAGE = 'TextExperimental_TestPage';
+export const HOMEPAGE_TEXTV1_BUTTON = 'Homepage_TextV1_Button';
+export const TEXTV1_TESTPAGE = 'TextV1_TestPage';
 
 /* E2E Testing TextV1 1 */
 export const TEXTV1_TEST_COMPONENT = 'TextV1_Test_Component';

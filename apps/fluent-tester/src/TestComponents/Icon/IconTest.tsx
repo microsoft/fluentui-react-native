@@ -6,8 +6,8 @@ import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluent
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ICON_TESTPAGE } from '../../../../E2E/src/IconLegacy/consts';
 import { E2ETestingIcon } from './IconLegacyE2ETest';
-import { E2ETestingExperimentalIcon } from './IconV12ETest';
-import { IconExperimental } from './IconV1';
+import { IconV1E2ETest } from './IconV1E2ETest';
+import { IconV1 } from './IconV1';
 import { testImage, testTtf, svgProps } from '../Common/iconExamples';
 
 const Icons: React.FunctionComponent = () => {
@@ -100,11 +100,11 @@ const iconSections: TestSection[] = [
   },
   {
     name: 'Default Icon',
-    component: IconExperimental,
+    component: IconV1,
   },
   {
-    name: 'Icon Experimental for E2E Testing',
-    component: E2ETestingExperimentalIcon,
+    name: 'IconV1 for E2E Testing',
+    component: IconV1E2ETest,
   },
 ];
 

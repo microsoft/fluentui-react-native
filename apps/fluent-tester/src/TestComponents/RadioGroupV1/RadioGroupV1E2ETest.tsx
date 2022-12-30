@@ -5,7 +5,7 @@ import {
   RADIOGROUPV1_TEST_COMPONENT,
   RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT,
   RADIOGROUPV1_TEST_COMPONENT_LABEL,
-  EXPERIMENTAL_RADIOGROUP_ACCESSIBILITY_LABEL,
+  RADIOGROUPV1_ACCESSIBILITY_LABEL,
   FIRST_RADIO,
   SECOND_RADIO,
   THIRD_RADIO,
@@ -17,13 +17,13 @@ import {
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 
-export const E2ERadioGroupExperimentalTest: React.FunctionComponent = () => {
+export const RadioGroupV1E2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>
         <RadioGroup
           label="RadioGroup for E2E Testing - Ally Label Set"
-          accessibilityLabel={EXPERIMENTAL_RADIOGROUP_ACCESSIBILITY_LABEL}
+          accessibilityLabel={RADIOGROUPV1_ACCESSIBILITY_LABEL}
           testID={RADIOGROUPV1_TEST_COMPONENT}
         >
           <Radio label="Option A" value="A" testID={FIRST_RADIO} accessibilityLabel={FIRST_RADIO_ACCESSIBILITY_LABEL} />
