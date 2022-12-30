@@ -1,12 +1,7 @@
-import {
-  EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT,
-  EXPERIMENTAL_TABS_TESTPAGE,
-  EXPERIMENTAL_TABS_TEST_COMPONENT,
-  HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
-} from '../consts';
+import { TABSITEMV1_TEST_COMPONENT, TABSV1_TESTPAGE, TABSV1_TEST_COMPONENT, HOMEPAGE_TABSV1_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
-class ExperimentalTabsPageObject extends BasePage {
+class TabsV1PageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -18,27 +13,27 @@ class ExperimentalTabsPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(EXPERIMENTAL_TABS_TESTPAGE);
+    return By(TABSV1_TESTPAGE);
   }
 
   get _pageName() {
-    return EXPERIMENTAL_TABS_TESTPAGE;
+    return TABSV1_TESTPAGE;
   }
 
   get _primaryComponent() {
-    return By(EXPERIMENTAL_TABS_TEST_COMPONENT);
+    return By(TABSV1_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
+    return By(HOMEPAGE_TABSV1_BUTTON);
   }
 
   /***********/
   /* TabItem *
   /***********/
   get _tabItem() {
-    return By(EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT);
+    return By(TABSITEMV1_TEST_COMPONENT);
   }
 }
 
-export default new ExperimentalTabsPageObject();
+export default new TabsV1PageObject();

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MENU_BUTTON_EXPERIMENTAL_TESTPAGE } from '../../../../E2E/src/MenuButtonV1/consts';
+import { MENUBUTTONV1_TESTPAGE } from '../../../../E2E/src/MenuButtonV1/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardMenuButton } from './StandardMenuButtonTest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
@@ -9,7 +9,7 @@ import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
 const menuButtonSections: TestSection[] = [
   {
     name: 'Standard MenuButton',
-    testID: MENU_BUTTON_EXPERIMENTAL_TESTPAGE,
+    testID: MENUBUTTONV1_TESTPAGE,
     component: StandardMenuButton,
   },
   {

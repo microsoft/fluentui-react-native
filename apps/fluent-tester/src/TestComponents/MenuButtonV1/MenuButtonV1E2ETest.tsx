@@ -5,10 +5,10 @@ import { Text, View } from 'react-native';
 import { menuItems } from './testData';
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
 import {
-  EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT,
-  EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
-  EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
-  EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
+  MENUBUTTONV1_TEST_COMPONENT,
+  MENUBUTTONV1_ACCESSIBILITY_LABEL,
+  MENUBUTTONV1_NO_A11Y_LABEL_COMPONENT,
+  MENUBUTTONV1_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/MenuButtonV1/consts';
 
 export const E2ETestExperimentalMenuButton: React.FunctionComponent = () => {
@@ -42,19 +42,19 @@ export const E2ETestExperimentalMenuButton: React.FunctionComponent = () => {
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-                testID={EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT}
-                accessibilityLabel={EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL}
+                testID={MENUBUTTONV1_TEST_COMPONENT}
+                accessibilityLabel={MENUBUTTONV1_ACCESSIBILITY_LABEL}
               />
             </View>
           </View>
           <View style={{ ...rowStyle, paddingHorizontal: 5 }}>
             <View style={columnStyle}>
               <MenuButton
-                content={EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL}
+                content={MENUBUTTONV1_TEST_COMPONENT_LABEL}
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-                testID={EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT}
+                testID={MENUBUTTONV1_NO_A11Y_LABEL_COMPONENT}
               />
             </View>
           </View>

@@ -13,7 +13,7 @@ export const enum ButtonSelector {
   PrimaryButton, //this._primaryComponent
 }
 
-class ButtonPageObject extends BasePage {
+class ButtonLegacyPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -65,4 +65,4 @@ class ButtonPageObject extends BasePage {
   }
 }
 
-export default new ButtonPageObject();
+export default new ButtonLegacyPageObject();

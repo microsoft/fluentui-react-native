@@ -1,12 +1,7 @@
-import {
-  ICON_TESTPAGE,
-  ICON_TEST_COMPONENT,
-  HOMEPAGE_ICON_BUTTON,
-  ICON_NO_A11Y_LABEL_COMPONENT,
-} from '../consts';
+import { ICON_TESTPAGE, ICON_TEST_COMPONENT, HOMEPAGE_ICON_BUTTON, ICON_NO_A11Y_LABEL_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
-class IconPageObject extends BasePage {
+class IconLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -31,4 +26,4 @@ class IconPageObject extends BasePage {
   }
 }
 
-export default new IconPageObject();
+export default new IconLegacyPageObject();

@@ -6,12 +6,12 @@ import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2EExperimentalTextTest } from './TextV1E2ETest';
-import { EXPERIMENTAL_TEXT_TESTPAGE } from '../../../../E2E/src/TextV1/consts';
+import { TEXTV1_TESTPAGE } from '../../../../E2E/src/TextV1/consts';
 
 const textSections: TestSection[] = [
   {
     name: 'Standard Usage',
-    testID: EXPERIMENTAL_TEXT_TESTPAGE,
+    testID: TEXTV1_TESTPAGE,
     component: StandardUsage,
   },
   {

@@ -1,20 +1,20 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import CheckboxPageObject from '../pages/CheckboxLegacyPageObject';
+import CheckboxLegacyPageObject from '../pages/CheckboxLegacyPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
-describe('Checkbox Testing Initialization', () => {
+describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Click and navigate to Checkbox test page', async () => {
-    await CheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+  it('Click and navigate to Checkbox Legacy test page', async () => {
+    await CheckboxLegacyPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToCheckboxPage();
-    await CheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await CheckboxLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await CheckboxPageObject.isPageLoaded()).toBeTruthy();
+    await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy();
   });
 });

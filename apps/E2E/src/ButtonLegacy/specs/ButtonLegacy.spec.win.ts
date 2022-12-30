@@ -1,73 +1,77 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ButtonPageObject, { ButtonSelector } from '../pages/ButtonLegacyPageObject';
+import ButtonLegacyPageObject, { ButtonSelector } from '../pages/ButtonLegacyPageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL_DEPRECATED, BUTTON_TEST_COMPONENT_LABEL_DEPRECATED } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Button Testing Initialization', function () {
+describe('Button Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Button test page', async () => {
+  it('Click and navigate to Button Legacy test page', async () => {
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToButtonPage();
-    await ButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await ButtonLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ButtonPageObject.isPageLoaded()).toBeTruthy(ButtonPageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonLegacyPageObject.isPageLoaded()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
-describe('Button Accessibility Testing', () => {
+describe('Button Legacy Accessibility Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
-    await ButtonPageObject.scrollToTestElement();
+    await ButtonLegacyPageObject.scrollToTestElement();
   });
 
   it('Button - Validate accessibilityRole is correct', async () => {
-    await expect(await ButtonPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
-    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonLegacyPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
+    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Button - Set accessibilityLabel', async () => {
-    await expect(await ButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL_DEPRECATED);
-    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonLegacyPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
+      BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
+    );
+    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Button - Do not set accessibilityLabel -> Default to Button label', async () => {
-    await expect(await ButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL_DEPRECATED);
-    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonLegacyPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
+      BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
+    );
+    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
-describe('Button Functional Testing', () => {
+describe('Button Legacy Functional Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
-    await ButtonPageObject.scrollToTestElement();
+    await ButtonLegacyPageObject.scrollToTestElement();
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {
-    await ButtonPageObject.clickComponent();
-    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+    await ButtonLegacyPageObject.clickComponent();
+    await expect(await ButtonLegacyPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
 
-    await ButtonPageObject.clickComponent(); // Reset Button State
+    await ButtonLegacyPageObject.clickComponent(); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
-    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.ENTER);
-    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+    await ButtonLegacyPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.ENTER);
+    await expect(await ButtonLegacyPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
 
-    await ButtonPageObject.clickComponent(); // Reset Button State
+    await ButtonLegacyPageObject.clickComponent(); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
-    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.SPACE);
-    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+    await ButtonLegacyPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.SPACE);
+    await expect(await ButtonLegacyPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });

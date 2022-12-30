@@ -13,7 +13,7 @@ export const enum CheckboxSelector {
   Primary, //this._primaryComponent
 }
 
-class CheckboxPageObject extends BasePage {
+class CheckboxLegacyPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -84,4 +84,4 @@ class CheckboxPageObject extends BasePage {
   }
 }
 
-export default new CheckboxPageObject();
+export default new CheckboxLegacyPageObject();

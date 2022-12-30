@@ -21,7 +21,7 @@ export const enum TabItemSelector {
   Third, // this._thirdTabItem
 }
 
-class TabsPageObject extends BasePage {
+class TabsLegacyPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -118,4 +118,4 @@ class TabsPageObject extends BasePage {
   }
 }
 
-export default new TabsPageObject();
+export default new TabsLegacyPageObject();

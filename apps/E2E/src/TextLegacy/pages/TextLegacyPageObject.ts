@@ -1,31 +1,16 @@
 import { Attribute } from '../../common/consts';
-import {
-  TEXT_TESTPAGE,
-  HOMEPAGE_TEXT_BUTTON,
-  V1_TEXT_FIRST_COMPONENT,
-  V1_TEXT_SECOND_COMPONENT,
-  DEPRECATED_TEXT_FIRST_COMPONENT,
-  DEPRECATED_TEXT_SECOND_COMPONENT,
-} from '../consts';
+import { TEXT_TESTPAGE, HOMEPAGE_TEXT_BUTTON, DEPRECATED_TEXT_FIRST_COMPONENT, DEPRECATED_TEXT_SECOND_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 export const enum TextComponentSelector {
-  V1_First = 0, // this._v1FirstComponent
-  V1_Second, // this.__v1SecondComponent
   Deprecated_First, // this._deprecatedFirstComponent
   Deprecated_Second, // this._deprecatedSecondComponent
 }
 
-class TextPageObject extends BasePage {
+class TextLegacyPageObject extends BasePage {
   /* Gets the UI element given the selector */
   async getTextComponent(componentSelector: TextComponentSelector): Promise<WebdriverIO.Element> {
     switch (componentSelector) {
-      case TextComponentSelector.V1_First:
-        return await this._v1FirstComponent;
-
-      case TextComponentSelector.V1_Second:
-        return await this._v1SecondComponent;
-
       case TextComponentSelector.Deprecated_First:
         return await this._deprecatedFirstComponent;
 
@@ -55,14 +40,6 @@ class TextPageObject extends BasePage {
     return TEXT_TESTPAGE;
   }
 
-  get _v1FirstComponent() {
-    return By(V1_TEXT_FIRST_COMPONENT);
-  }
-
-  get _v1SecondComponent() {
-    return By(V1_TEXT_SECOND_COMPONENT);
-  }
-
   get _deprecatedFirstComponent() {
     return By(DEPRECATED_TEXT_FIRST_COMPONENT);
   }
@@ -76,4 +53,4 @@ class TextPageObject extends BasePage {
   }
 }
 
-export default new TextPageObject();
+export default new TextLegacyPageObject();

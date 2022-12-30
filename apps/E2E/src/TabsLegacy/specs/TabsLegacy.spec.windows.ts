@@ -1,52 +1,52 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import TabsPageObject, { TabItemSelector } from '../pages/TabsLegacyPageObject';
+import TabsLegacyPageObject, { TabItemSelector } from '../pages/TabsLegacyPageObject';
 import { TAB_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT, TABITEM_A11Y_ROLE } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Tabs Testing Initialization', function () {
+describe('Tabs Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Click and navigate to Tabs test page', async () => {
+  it('Click and navigate to Tabs Legacy test page', async () => {
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToTabsPage();
-    await TabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await TabsLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await TabsPageObject.isPageLoaded()).toBeTruthy();
+    await expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy();
   });
 });
 
-describe('Tabs Accessibility Testing', () => {
+describe('Tabs Legacy Accessibility Testing', () => {
   /* Scrolls and waits for the Tabs to be visible on the Test Page */
   beforeEach(async () => {
-    await TabsPageObject.scrollToTestElement();
+    await TabsLegacyPageObject.scrollToTestElement();
   });
 
   it("Validate Tab's accessibilityRole is correct", async () => {
-    await expect(await TabsPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
+    await expect(await TabsLegacyPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
   });
 
   it("Validate TabItem's accessibilityRole is correct", async () => {
-    await expect(await TabsPageObject.getTabItemAccesibilityRole(TabItemSelector.First)).toEqual(TABITEM_A11Y_ROLE);
+    await expect(await TabsLegacyPageObject.getTabItemAccesibilityRole(TabItemSelector.First)).toEqual(TABITEM_A11Y_ROLE);
   });
 });
 
-describe('Tabs Functional Tests', () => {
+describe('Tabs Legacy Functional Tests', () => {
   /* Scrolls and waits for the Tabs to be visible on the Test Page */
   beforeEach(async () => {
-    await TabsPageObject.scrollToTestElement();
+    await TabsLegacyPageObject.scrollToTestElement();
 
     // Reset the TabGroup by putting focus on First tab item
-    await TabsPageObject.clickOnTabItem(TabItemSelector.First);
+    await TabsLegacyPageObject.clickOnTabItem(TabItemSelector.First);
   });
 
   it('Click on the second tab header and validate the correct TabItem content is shown', async () => {
-    await TabsPageObject.clickOnTabItem(TabItemSelector.Second);
-    await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
+    await TabsLegacyPageObject.clickOnTabItem(TabItemSelector.Second);
+    await TabsLegacyPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
-    await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
+    await expect(await TabsLegacyPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
   });
 
   // Keyboarding is currently not integrated for UWP tabs - Task #5758598

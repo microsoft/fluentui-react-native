@@ -3,7 +3,7 @@ import { Alert, View, StyleSheet, Text, TextInput } from 'react-native';
 import { Link, LinkTokens } from '@fluentui-react-native/experimental-link';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { EXPERIMENTAL_LINK_TESTPAGE } from '../../../../E2E/src/LinkV1/consts';
+import { LINKV1_TESTPAGE } from '../../../../E2E/src/LinkV1/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkV1Test';
 import { Platform } from 'react-native';
@@ -145,7 +145,7 @@ const CustomLinks: React.FunctionComponent = () => {
 const linkSections: TestSection[] = [
   {
     name: 'Default Links',
-    testID: EXPERIMENTAL_LINK_TESTPAGE,
+    testID: LINKV1_TESTPAGE,
     component: DefaultLinks,
   },
   {

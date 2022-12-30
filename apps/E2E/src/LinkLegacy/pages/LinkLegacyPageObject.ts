@@ -1,12 +1,7 @@
-import {
-  LINK_TESTPAGE,
-  LINK_TEST_COMPONENT,
-  HOMEPAGE_LINK_BUTTON,
-  LINK_NO_A11Y_LABEL_COMPONENT,
-} from '../consts';
+import { LINK_TESTPAGE, LINK_TEST_COMPONENT, HOMEPAGE_LINK_BUTTON, LINK_NO_A11Y_LABEL_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
-class LinkPageObject extends BasePage {
+class LinkLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -31,4 +26,4 @@ class LinkPageObject extends BasePage {
   }
 }
 
-export default new LinkPageObject();
+export default new LinkLegacyPageObject();

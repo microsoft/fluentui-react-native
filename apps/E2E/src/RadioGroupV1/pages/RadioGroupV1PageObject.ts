@@ -1,7 +1,7 @@
 import {
-  RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
-  EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT,
-  EXPERIMENTAL_RADIOGROUP_NO_A11Y_LABEL_COMPONENT,
+  RADIOGROUPV1_TESTPAGE,
+  RADIOGROUPV1_TEST_COMPONENT,
+  RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
   FIRST_RADIO,
   SECOND_RADIO,
@@ -23,7 +23,7 @@ export const enum RadioSelector {
   Fifth, // this._fifthRadio
 }
 
-class RadioGroupExperimentalPage extends BasePage {
+class RadioGroupV1Page extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -94,19 +94,19 @@ class RadioGroupExperimentalPage extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(RADIO_GROUP_EXPERIMENTAL_TESTPAGE);
+    return By(RADIOGROUPV1_TESTPAGE);
   }
 
   get _pageName() {
-    return RADIO_GROUP_EXPERIMENTAL_TESTPAGE;
+    return RADIOGROUPV1_TESTPAGE;
   }
 
   get _primaryComponent() {
-    return By(EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT);
+    return By(RADIOGROUPV1_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(EXPERIMENTAL_RADIOGROUP_NO_A11Y_LABEL_COMPONENT);
+    return By(RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
@@ -139,4 +139,4 @@ class RadioGroupExperimentalPage extends BasePage {
   }
 }
 
-export default new RadioGroupExperimentalPage();
+export default new RadioGroupV1Page();

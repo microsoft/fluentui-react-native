@@ -4,19 +4,19 @@ import { ComponentSelector } from '../../common/BasePage';
 import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 import {
   EXPERIMENTAL_RADIOGROUP_ACCESSIBILITY_LABEL,
-  EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT_LABEL,
+  RADIOGROUPV1_TEST_COMPONENT_LABEL,
   FIRST_RADIO_ACCESSIBILITY_LABEL,
   SECOND_RADIO_LABEL,
 } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('RadioGroup/Radio Testing Initialization', function () {
+describe('RadioGroupV1/RadioV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to RadioGroup test page', async () => {
+  it('Click and navigate to RadioGroupV1 test page', async () => {
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToRadioGroupExperimentalPage();
     await RadioGroupExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -26,7 +26,7 @@ describe('RadioGroup/Radio Testing Initialization', function () {
   });
 });
 
-describe('RadioGroup/Radio Accessibility Testing', () => {
+describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
   /* Scrolls and waits for the RadioGroup to be visible on the Test Page */
   beforeEach(async () => {
     await RadioGroupExperimentalPageObject.scrollToTestElement();
@@ -51,7 +51,7 @@ describe('RadioGroup/Radio Accessibility Testing', () => {
 
   it('RadioGroup - Do not set accessibilityLabel -> Default to RadioGroup label', async () => {
     await expect(await RadioGroupExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-      EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT_LABEL,
+      RADIOGROUPV1_TEST_COMPONENT_LABEL,
     );
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -69,7 +69,7 @@ describe('RadioGroup/Radio Accessibility Testing', () => {
   });
 });
 
-describe('RadioGroup Functional Testing', async () => {
+describe('RadioGroupV1 Functional Testing', async () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st Radio in the RadioGroup */
   beforeEach(async () => {
     await RadioGroupExperimentalPageObject.scrollToTestElement();

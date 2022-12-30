@@ -1,34 +1,29 @@
-import {
-  EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT,
-  EXPERIMENTAL_TEXT_TESTPAGE,
-  EXPERIMENTAL_TEXT_TEST_COMPONENT,
-  HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
-} from '../consts';
+import { TEXTV1_NO_A11Y_LABEL_COMPONENT, TEXTV1_TESTPAGE, TEXTV1_TEST_COMPONENT, HOMEPAGE_TEXTV1_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
-class ExperimentalTextPageObject extends BasePage {
+class TextV1PageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(EXPERIMENTAL_TEXT_TESTPAGE);
+    return By(TEXTV1_TESTPAGE);
   }
 
   get _pageName() {
-    return EXPERIMENTAL_TEXT_TESTPAGE;
+    return TEXTV1_TESTPAGE;
   }
 
   get _primaryComponent() {
-    return By(EXPERIMENTAL_TEXT_TEST_COMPONENT);
+    return By(TEXTV1_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT);
+    return By(TEXTV1_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
+    return By(HOMEPAGE_TEXTV1_BUTTON);
   }
 }
 
-export default new ExperimentalTextPageObject();
+export default new TextV1PageObject();

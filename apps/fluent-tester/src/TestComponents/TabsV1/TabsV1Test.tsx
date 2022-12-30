@@ -4,7 +4,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
-import { EXPERIMENTAL_TABS_TESTPAGE } from '../../../../E2E/src/TabsV1/consts';
+import { TABSV1_TESTPAGE } from '../../../../E2E/src/TabsV1/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ETestExperimentalTabs } from './TabsV1E2ETest';
 import { svgProps } from '../Common/iconExamples';
@@ -218,7 +218,7 @@ const TabsWithFlexibility: React.FunctionComponent = () => {
 const tabsSections: TestSection[] = [
   {
     name: 'Default Tabs',
-    testID: EXPERIMENTAL_TABS_TESTPAGE,
+    testID: TABSV1_TESTPAGE,
     component: TabsMainTest,
   },
   {

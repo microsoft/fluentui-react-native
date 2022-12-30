@@ -1,10 +1,10 @@
-export const HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON = 'Homepage_TextExperimental_Button';
-export const EXPERIMENTAL_TEXT_TESTPAGE = 'TextExperimental_TestPage';
+export const HOMEPAGE_TEXTV1_BUTTON = 'Homepage_TextExperimental_Button';
+export const TEXTV1_TESTPAGE = 'TextExperimental_TestPage';
 
-/* E2E Testing Experimental Text 1 */
-export const EXPERIMENTAL_TEXT_TEST_COMPONENT = 'Experimental_Text_Test_Component';
-export const EXPERIMENTAL_TEXT_ACCESSIBILITY_LABEL = 'E2E testing Experimental_Text_Test_Component accessibility label';
+/* E2E Testing TextV1 1 */
+export const TEXTV1_TEST_COMPONENT = 'TextV1_Test_Component';
+export const TEXTV1_ACCESSIBILITY_LABEL = 'E2E testing TextV1_Test_Component accessibility label';
 
-/* E2E Testing Experimental Text 2 */
-export const EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT = 'Experimental_Text_No_A11y_label_Component';
-export const EXPERIMENTAL_TEXT_CONTENT = 'Experimental Text - No Accessibility Label Set';
+/* E2E Testing TextV1 2 */
+export const TEXTV1_NO_A11Y_LABEL_COMPONENT = 'TextV1_No_A11y_label_Component';
+export const TEXTV1_CONTENT = 'TextV1 - No Accessibility Label Set';

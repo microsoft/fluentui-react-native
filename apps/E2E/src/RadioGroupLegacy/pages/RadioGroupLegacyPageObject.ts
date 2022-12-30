@@ -20,7 +20,7 @@ export const enum RadioButtonSelector {
   Fourth, // this._fourthRadioButton
 }
 
-class RadioGroupPage extends BasePage {
+class RadioGroupLegacyPage extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -118,4 +118,4 @@ class RadioGroupPage extends BasePage {
   }
 }
 
-export default new RadioGroupPage();
+export default new RadioGroupLegacyPage();

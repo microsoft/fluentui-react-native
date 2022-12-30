@@ -12,7 +12,7 @@ export const enum MenuButtonSelector {
   MenuItem1, // this._menuItem
 }
 
-class MenuButtonPageObject extends BasePage {
+class MenuButtonLegacyPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -72,4 +72,4 @@ class MenuButtonPageObject extends BasePage {
   }
 }
 
-export default new MenuButtonPageObject();
+export default new MenuButtonLegacyPageObject();

@@ -2,20 +2,20 @@ import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../ActivityIndicator/consts'
 import { HOMEPAGE_AVATAR_BUTTON } from '../Avatar/consts';
 import { HOMEPAGE_BADGE_BUTTON } from '../Badge/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../CheckboxLegacy/consts';
-import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../CheckboxV1/consts';
+import { HOMEPAGE_CHECKBOXV1_BUTTON } from '../CheckboxV1/consts';
 import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../CornerRadiusTokens/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../ButtonLegacy/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../ContextualMenu/consts';
-import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../TabsV1/consts';
+import { HOMEPAGE_TABSV1_BUTTON } from '../TabsV1/consts';
 import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../FocusTrapZone/consts';
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../IconLegacy/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../LinkLegacy/consts';
-import { HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from '../LinkV1/consts';
+import { HOMEPAGE_LINKV1_BUTTON } from '../LinkV1/consts';
 import { HOMEPAGE_MENU_BUTTON } from '../Menu/consts';
 import { HOMEPAGE_MENUBUTTON_BUTTON } from '../MenuButtonLegacy/consts';
-import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '../MenuButtonV1/consts';
+import { HOMEPAGE_MENUBUTTONV1_BUTTON } from '../MenuButtonV1/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../PersonaCoin/consts';
 import { HOMEPAGE_PRESSABLE_BUTTON } from '../Pressable/consts';
@@ -29,7 +29,7 @@ import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../StrokeWidthTokens/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../TextLegacy/consts';
-import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../TextV1/consts';
+import { HOMEPAGE_TEXTV1_BUTTON } from '../TextV1/consts';
 import { HOMEPAGE_TOKEN_BUTTON } from '../Tokens/consts';
 import { HOMEPAGE_TABS_BUTTON } from '../TabsLegacy/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../Theme/consts';
@@ -210,7 +210,7 @@ class NavigateAppPage extends BasePage {
   }
 
   private get checkboxExperimentalPage() {
-    return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
+    return By(HOMEPAGE_CHECKBOXV1_BUTTON);
   }
 
   private get contextualMenuPage() {
@@ -238,7 +238,7 @@ class NavigateAppPage extends BasePage {
   }
 
   private get linkExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_LINK_BUTTON);
+    return By(HOMEPAGE_LINKV1_BUTTON);
   }
 
   private get menuPage() {
@@ -250,7 +250,7 @@ class NavigateAppPage extends BasePage {
   }
 
   private get menuButtonExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_MENU_BUTTON);
+    return By(HOMEPAGE_MENUBUTTONV1_BUTTON);
   }
 
   private get personaPage() {
@@ -306,7 +306,7 @@ class NavigateAppPage extends BasePage {
   }
 
   private get textExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
+    return By(HOMEPAGE_TEXTV1_BUTTON);
   }
 
   private get tabsPage() {
@@ -322,7 +322,7 @@ class NavigateAppPage extends BasePage {
   }
 
   private get experimentalTabsPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
+    return By(HOMEPAGE_TABSV1_BUTTON);
   }
 
   get _pageName() {

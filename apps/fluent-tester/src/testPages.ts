@@ -87,7 +87,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Checkbox V1',
     component: ExperimentalCheckboxTest,
-    testPageButton: Constants.HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
+    testPageButton: Constants.HOMEPAGE_CHECKBOXV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
   },
   {
@@ -154,7 +154,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Link V1',
     component: ExperimentalLinkTest,
-    testPageButton: Constants.HOMEPAGE_EXPERIMENTAL_LINK_BUTTON,
+    testPageButton: Constants.HOMEPAGE_LINKV1_BUTTON,
     platforms: ['win32', 'android'],
   },
   {
@@ -172,7 +172,7 @@ export const tests: TestDescription[] = [
   {
     name: 'MenuButton V1',
     component: ExperimentalMenuButtonTest,
-    testPageButton: Constants.HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
+    testPageButton: Constants.HOMEPAGE_MENUBUTTONV1_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
@@ -262,7 +262,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Tabs V1',
     component: ExperimentalTabsTest,
-    testPageButton: Constants.HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
+    testPageButton: Constants.HOMEPAGE_TABSV1_BUTTON,
     platforms: ['macos', 'win32', 'windows'],
   },
   {
@@ -274,7 +274,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Text V1',
     component: TextExperimentalTest,
-    testPageButton: Constants.HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
+    testPageButton: Constants.HOMEPAGE_TEXTV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {

@@ -1,98 +1,94 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ButtonExperimentalPageObject from '../pages/ButtonV1PageObject';
+import ButtonV1PageObject from '../pages/ButtonV1PageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../ButtonLegacy/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Experimental Button Testing Initialization', function () {
+describe('ButtonV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Button test page', async () => {
+  it('Click and navigate to ButtonV1 test page', async () => {
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToButtonPage();
-    await ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await ButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy(ButtonExperimentalPageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ButtonV1PageObject.isPageLoaded()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
-describe('Experimental Button Accessibility Testing', async () => {
+describe('ButtonV1 Accessibility Testing', async () => {
   beforeEach(async () => {
-    await ButtonExperimentalPageObject.scrollToTestElement();
+    await ButtonV1PageObject.scrollToTestElement();
   });
 
-  it('Experimental Button - Validate accessibilityRole is correct', async () => {
+  it('ButtonV1 - Validate accessibilityRole is correct', async () => {
     await expect(
-      await ButtonExperimentalPageObject.compareAttribute(
-        ButtonExperimentalPageObject._primaryComponent,
-        Attribute.AccessibilityRole,
-        BUTTON_A11Y_ROLE,
-      ),
+      await ButtonV1PageObject.compareAttribute(ButtonV1PageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
     ).toBeTrue();
 
-    await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Experimental Button - Set accessibilityLabel', async () => {
+  it('ButtonV1 - Set accessibilityLabel', async () => {
     await expect(
-      await ButtonExperimentalPageObject.compareAttribute(
-        ButtonExperimentalPageObject._primaryComponent,
+      await ButtonV1PageObject.compareAttribute(
+        ButtonV1PageObject._primaryComponent,
         Attribute.AccessibilityLabel,
         BUTTON_ACCESSIBILITY_LABEL,
       ),
     ).toBeTrue();
 
-    await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Experimental Button - Do not set accessibilityLabel -> Default to Button label', async () => {
+  it('ButtonV1 - Do not set accessibilityLabel -> Default to Button label', async () => {
     await expect(
-      await ButtonExperimentalPageObject.compareAttribute(
-        ButtonExperimentalPageObject._secondaryComponent,
+      await ButtonV1PageObject.compareAttribute(
+        ButtonV1PageObject._secondaryComponent,
         Attribute.AccessibilityLabel,
         BUTTON_TEST_COMPONENT_LABEL,
       ),
     ).toBeTrue();
 
-    await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
-describe('Experimental Button Functional Testing', async () => {
+describe('ButtonV1 Functional Testing', async () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
-    await ButtonExperimentalPageObject.scrollToTestElement();
+    await ButtonV1PageObject.scrollToTestElement();
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {
-    await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent);
-    await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
+    await ButtonV1PageObject.click(ButtonV1PageObject._primaryComponent);
+    await expect(await ButtonV1PageObject.didOnClickCallbackFire()).toBeTruthy(
       `The primary button failed to fire an onClick callback with a mouse click.`,
     );
-    await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
 
-    await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent); // Reset Button State
+    await ButtonV1PageObject.click(ButtonV1PageObject._primaryComponent); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
-    await ButtonExperimentalPageObject.sendKeys(ButtonExperimentalPageObject._primaryComponent, [Keys.ENTER]);
-    await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
+    await ButtonV1PageObject.sendKeys(ButtonV1PageObject._primaryComponent, [Keys.ENTER]);
+    await expect(await ButtonV1PageObject.didOnClickCallbackFire()).toBeTruthy(
       `The primary button failed to fire an onClick callback with an enter keypress.`,
     );
-    await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
 
-    await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent); // Reset Button State
+    await ButtonV1PageObject.click(ButtonV1PageObject._primaryComponent); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
-    await ButtonExperimentalPageObject.sendKeys(ButtonExperimentalPageObject._primaryComponent, [Keys.SPACE]);
-    await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
+    await ButtonV1PageObject.sendKeys(ButtonV1PageObject._primaryComponent, [Keys.SPACE]);
+    await expect(await ButtonV1PageObject.didOnClickCallbackFire()).toBeTruthy(
       `The primary button failed to fire an onClick callback with a space keypress.`,
     );
-    await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

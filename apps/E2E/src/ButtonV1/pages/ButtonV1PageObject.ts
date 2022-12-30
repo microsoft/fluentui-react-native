@@ -6,7 +6,7 @@ import {
   BUTTON_ON_PRESS,
 } from '../../ButtonLegacy/consts';
 import { BasePage, By } from '../../common/BasePage';
-class ButtonExperimentalPageObject extends BasePage {
+class ButtonV1PageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -45,4 +45,4 @@ class ButtonExperimentalPageObject extends BasePage {
   }
 }
 
-export default new ButtonExperimentalPageObject();
+export default new ButtonV1PageObject();

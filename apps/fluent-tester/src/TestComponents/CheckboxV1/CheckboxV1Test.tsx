@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxV1/consts';
+import { CHECKBOXV1_TESTPAGE } from '../../../../E2E/src/CheckboxV1/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
@@ -176,7 +176,7 @@ const TokenCheckbox: React.FunctionComponent = () => {
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
-    testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
+    testID: CHECKBOXV1_TESTPAGE,
     component: BasicCheckbox,
   },
   Platform.select({

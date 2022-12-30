@@ -10,13 +10,13 @@ import {
 } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('RadioGroup/RadioButton Testing Initialization', function () {
+describe('RadioGroup/RadioButton Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to RadioGroup test page', async () => {
+  it('Click and navigate to RadioGroup Legacy test page', async () => {
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToRadioGroupPage();
     await RadioGroupPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -26,7 +26,7 @@ describe('RadioGroup/RadioButton Testing Initialization', function () {
   });
 });
 
-describe('RadioGroup/RadioButton Accessibility Testing', () => {
+describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
   /* Scrolls and waits for the RadioGroup to be visible on the Test Page */
   beforeEach(async () => {
     await RadioGroupPageObject.scrollToTestElement();
@@ -65,7 +65,7 @@ describe('RadioGroup/RadioButton Accessibility Testing', () => {
   });
 });
 
-describe('RadioGroup Functional Testing', async () => {
+describe('RadioGroup Legacy Functional Testing', async () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st RadioButton in the RadioGroup */
   beforeEach(async () => {
     await RadioGroupPageObject.scrollToTestElement();

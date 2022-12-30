@@ -1,46 +1,46 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import CheckboxPageObject from '../pages/CheckboxLegacyPageObject';
+import CheckboxLegacyPageObject from '../pages/CheckboxLegacyPageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../consts';
 import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
-describe('Checkbox Testing Initialization', () => {
+describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Click and navigate to Checkbox test page', async () => {
+  it('Click and navigate to Checkbox Legacy test page', async () => {
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToCheckboxPage();
-    await CheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await CheckboxLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await CheckboxPageObject.isPageLoaded()).toBeTruthy();
+    await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy();
   });
 });
 
-describe('Checkbox Accessibility Testing', () => {
+describe('Checkbox Legacy Accessibility Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page */
   beforeEach(async () => {
-    await CheckboxPageObject.scrollToTestElement();
+    await CheckboxLegacyPageObject.scrollToTestElement();
   });
 
   it('Checkbox - Validate accessibilityRole is correct', async () => {
-    await expect(await CheckboxPageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
+    await expect(await CheckboxLegacyPageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
   });
 
   it('Checkbox - Set accessibilityLabel', async () => {
-    await expect(await CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOX_ACCESSIBILITY_LABEL);
+    await expect(await CheckboxLegacyPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOX_ACCESSIBILITY_LABEL);
   });
 
   it('Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', async () => {
-    await expect(await CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL);
+    await expect(await CheckboxLegacyPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL);
   });
 });
 
 /* These currently don't work on UWP because element.isSelected() always returns false. I will need to debug and figure
  * out why this isn't supported on UWP, and if there's a potential workaround. Task #5747337 */
-// describe('Checkbox Functional Testing', () => {
+// describe('Checkbox Legacy Functional Testing', () => {
 //   /* Scrolls and waits for the Checkbox to be visible on the Test Page AND un-checks the Checkbox */
 //   beforeEach(() => {
 //     CheckboxPageObject.scrollToTestElement();
