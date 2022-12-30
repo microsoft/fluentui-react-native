@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { TEXT_TESTPAGE } from '../../../../E2E/src/Text/consts';
+import { TEXT_TESTPAGE } from '../../../../E2E/src/TextLegacy/consts';
 
 export const StandardUsage: React.FunctionComponent = () => {
   return (
