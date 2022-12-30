@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 30 Dec 2022 06:16:41 GMT",
+      "tag": "@fluentui-react-native/tester_v0.126.8",
+      "version": "0.126.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "793ea620bc7df9681578ffb2acec90556ef40dfe",
+            "comment": "doc and tester update for link on Android"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-link to v0.4.7",
+            "commit": "793ea620bc7df9681578ffb2acec90556ef40dfe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.34.15",
+            "commit": "793ea620bc7df9681578ffb2acec90556ef40dfe"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 03:49:05 GMT",
       "tag": "@fluentui-react-native/tester_v0.126.7",
       "version": "0.126.7",

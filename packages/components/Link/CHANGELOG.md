@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Fri, 30 Dec 2022 03:49:05 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Dec 2022 06:16:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.23
+
+Fri, 30 Dec 2022 06:16:41 GMT
+
+### Patches
+
+- spec update , address pr feedbacks (rohanpd.work@gmail.com)
 
 ## 0.17.22
 

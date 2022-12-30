@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Fri, 30 Dec 2022 06:16:41 GMT",
+      "tag": "@fluentui-react-native/link_v0.17.23",
+      "version": "0.17.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/link",
+            "commit": "793ea620bc7df9681578ffb2acec90556ef40dfe",
+            "comment": "spec update , address pr feedbacks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 03:49:05 GMT",
       "tag": "@fluentui-react-native/link_v0.17.22",
       "version": "0.17.22",
