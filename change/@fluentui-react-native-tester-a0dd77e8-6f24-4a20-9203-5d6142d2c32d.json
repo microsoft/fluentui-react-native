@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Bump Spacing's status to at least Experimental everywhere",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
