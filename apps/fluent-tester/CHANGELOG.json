@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 31 Dec 2022 00:08:14 GMT",
+      "tag": "@fluentui-react-native/tester_v0.126.11",
+      "version": "0.126.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f9e474adc47b243296aff38be440132679eeb150",
+            "comment": "Update Podfile"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.21.10",
+            "commit": "f9e474adc47b243296aff38be440132679eeb150"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 23:23:23 GMT",
       "tag": "@fluentui-react-native/tester_v0.126.10",
       "version": "0.126.10",

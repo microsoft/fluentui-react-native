@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
+This log was last generated on Sat, 31 Dec 2022 00:08:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.10
+
+Sat, 31 Dec 2022 00:08:14 GMT
+
+### Patches
+
+- Use V2 font variant for notification action button (adgleitm@microsoft.com)
 
 ## 0.21.9
 

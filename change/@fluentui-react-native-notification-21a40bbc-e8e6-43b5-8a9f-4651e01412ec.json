@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use V2 font variant for notification action button",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}

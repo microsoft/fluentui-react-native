@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 30 Dec 2022 23:23:23 GMT and should not be manually modified.
+This log was last generated on Sat, 31 Dec 2022 00:08:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.126.11
+
+Sat, 31 Dec 2022 00:08:14 GMT
+
+### Patches
+
+- Update Podfile (adgleitm@microsoft.com)
+- Bump @fluentui-react-native/notification to v0.21.10
 
 ## 0.126.10
 

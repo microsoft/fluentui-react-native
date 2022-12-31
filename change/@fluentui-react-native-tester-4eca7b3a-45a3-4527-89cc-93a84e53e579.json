@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update Podfile",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}
