@@ -9,7 +9,7 @@ function createiOSColorAliasTokensWorker(mode: AppearanceOptions): AliasColorTok
   return mapPipelineToTheme(aliasTokens);
 }
 
-export const createMacOSColorAliasTokens = memoize(createiOSColorAliasTokensWorker);
+export const createiOSColorAliasTokens = memoize(createiOSColorAliasTokensWorker);
 
 function createiOSShadowAliasTokensWorker(mode: AppearanceOptions): ThemeShadowDefinition {
   const aliasTokens = getiOSShadowTokens(mode);
