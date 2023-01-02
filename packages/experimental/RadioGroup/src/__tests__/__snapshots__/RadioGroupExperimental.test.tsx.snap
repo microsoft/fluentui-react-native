@@ -105,6 +105,11 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       value="key1"
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -226,6 +231,11 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       value="key2"
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -407,6 +417,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       value="key1"
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -528,6 +543,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       value="key2"
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}

@@ -104,6 +104,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       focusable: !state.disabled,
       enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,
+      disabled: state.disabled,
     },
     state: state,
   };

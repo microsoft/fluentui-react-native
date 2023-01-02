@@ -50,6 +50,11 @@ exports[`Radio component tests Radio default 1`] = `
   value="key1"
 >
   <View
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={false}
     collapsable={false}
     focusable={false}
@@ -174,6 +179,11 @@ exports[`Radio component tests Radio disabled 1`] = `
   value="key1"
 >
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={false}
     collapsable={false}
     focusable={false}
