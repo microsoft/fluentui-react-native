@@ -20,14 +20,6 @@ export const radioLookup = (layer: string, state: PressableState, userProps: Rad
   return state[layer] || userProps[layer] || (layer === 'labelPositionBelow' && userProps['labelPosition'] === 'below');
 };
 
-const platformBasedFilter = Platform.select({
-  android: {},
-  default: {
-    button: filterViewProps,
-    innerCircle: filterViewProps,
-  },
-});
-
 export const Radio = compose<RadioType>({
   displayName: radioName,
   ...stylingSettings,
@@ -39,7 +31,6 @@ export const Radio = compose<RadioType>({
     label: Text,
     subtext: Text,
   },
-  filters: platformBasedFilter,
   useRender: (userProps: RadioProps, useSlots: UseSlots<RadioType>) => {
     const radio = useRadio(userProps);
     const Slots = useSlots(userProps, (layer: string) => radioLookup(layer, radio.state, radio.props));
@@ -47,7 +38,7 @@ export const Radio = compose<RadioType>({
     // now return the handler for finishing render
     return (final: RadioProps) => {
       const { label, subtext, ...mergedProps } = mergeProps(radio.props, final);
-      const { onPress, accessibilityState } = mergedProps;
+      const { onPress, disabled } = mergedProps;
 
       const labelComponent = (
         <Slots.labelContent>
@@ -57,8 +48,8 @@ export const Radio = compose<RadioType>({
       );
 
       return (
-        <Slots.root {...mergedProps}>
-          <Slots.button onPress={onPress} {...accessibilityState}>
+        <Slots.root {...mergedProps} {...(Platform.OS == 'android' && { accessible: !disabled, focusable: !disabled })}>
+          <Slots.button accessible={false} onPress={onPress} disabled={disabled} focusable={false}>
             <Slots.innerCircle />
           </Slots.button>
           {labelComponent}
