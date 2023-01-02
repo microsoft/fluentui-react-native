@@ -37,6 +37,22 @@ export const useSwitch = (props: SwitchProps, animationConfig?: IAnimationConfig
     ...rest
   } = props;
 
+  const onChangeWithAnimation = React.useCallback(
+    (e: InteractionEvent, checked?: boolean) => {
+      onChange && onChange(e, checked);
+      if (isMobile) {
+        if (checked) {
+          startTrackBackgroundAnimation(checked, trackBackgroundAnimation);
+          startTrackAnimation(false, animationConfig, animation, checked);
+        } else {
+          startTrackBackgroundAnimation(checked, trackBackgroundAnimation);
+          startTrackAnimation(false, animationConfig, animation, checked);
+        }
+      }
+    },
+    [onChange, trackBackgroundAnimation, animationConfig, animation],
+  );
+
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
 
   // Function to change background slowly over time when switch is toggled.
@@ -63,22 +79,6 @@ export const useSwitch = (props: SwitchProps, animationConfig?: IAnimationConfig
       }).start();
     },
     [],
-  );
-
-  const onChangeWithAnimation = React.useCallback(
-    (e: InteractionEvent, checked?: boolean) => {
-      onChange && onChange(e, checked);
-      if (isMobile) {
-        if (checked) {
-          startTrackBackgroundAnimation(checked, trackBackgroundAnimation);
-          startTrackAnimation(false, animationConfig, animation, checked);
-        } else {
-          startTrackBackgroundAnimation(checked, trackBackgroundAnimation);
-          startTrackAnimation(false, animationConfig, animation, checked);
-        }
-      }
-    },
-    [onChange, trackBackgroundAnimation, animationConfig, animation],
   );
 
   const switchAnimationStyles = {

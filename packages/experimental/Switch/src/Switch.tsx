@@ -46,7 +46,7 @@ export const Switch = compose<SwitchType>({
     const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true }, {}));
     const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false }, {}));
 
-    // For Mobile platform we are passing extra data to useSwitch for Aninated API
+    // For Mobile platform we are passing extra data to useSwitch for Animated API
     const switchInfo = useSwitch(
       userProps,
       isMobile && {
