@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-icon
 
-This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
+This log was last generated on Mon, 02 Jan 2023 11:28:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.11
+
+Mon, 02 Jan 2023 11:28:01 GMT
+
+### Patches
+
+- Added snapshot tests for the Icon (vkozlova@microsoft.com)
 
 ## 0.1.10
 

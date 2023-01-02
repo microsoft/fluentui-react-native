@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 31 Dec 2022 00:08:14 GMT and should not be manually modified.
+This log was last generated on Mon, 02 Jan 2023 11:28:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.126.12
+
+Mon, 02 Jan 2023 11:28:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-icon to v0.1.11
 
 ## 0.126.11
 
