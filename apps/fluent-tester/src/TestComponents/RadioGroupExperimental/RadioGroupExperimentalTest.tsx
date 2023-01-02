@@ -8,6 +8,7 @@ import { HorizontalRadioGroup } from './HorizontalRadioGroup';
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
 import { E2ERadioGroupExperimentalTest } from './RadioGroupExperimentalE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { Platform } from 'react-native';
 
 const radioGroupExperimentalSections: TestSection[] = [
   {
@@ -25,21 +26,26 @@ const radioGroupExperimentalSections: TestSection[] = [
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
     component: RequiredRadioGroup,
   },
-  {
-    name: 'RadioGroup with Label Subtext',
-    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
-    component: SubtextRadioGroup,
-  },
-  {
-    name: 'Other Layouts',
-    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
-    component: HorizontalRadioGroup,
-  },
-  {
-    name: 'Customized RadioGroup Usage',
-    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
-    component: CustomizedRadioGroup,
-  },
+  ...Platform.select({
+    android: [null],
+    default: [
+      {
+        name: 'RadioGroup with Label Subtext',
+        testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+        component: SubtextRadioGroup,
+      },
+      {
+        name: 'Other Layouts',
+        testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+        component: HorizontalRadioGroup,
+      },
+      {
+        name: 'Customized RadioGroup Usage',
+        testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+        component: CustomizedRadioGroup,
+      },
+    ],
+  }),
   {
     name: 'RadioGroup for E2E Testing',
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
