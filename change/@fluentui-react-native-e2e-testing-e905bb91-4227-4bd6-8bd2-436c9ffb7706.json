@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Basic E2E setup for android",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}

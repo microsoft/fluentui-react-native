@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Mon, 02 Jan 2023 18:05:05 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.8.6",
+      "version": "1.8.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "f077f84f8fdfa9e64c41ff0d5fad07d0b5dd359b",
+            "comment": "Basic E2E setup for android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 16:09:27 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.8.5",
       "version": "1.8.5",

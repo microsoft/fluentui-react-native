@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 02 Jan 2023 11:28:01 GMT and should not be manually modified.
+This log was last generated on Mon, 02 Jan 2023 18:05:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.126.13
+
+Mon, 02 Jan 2023 18:05:06 GMT
+
+### Patches
+
+- Basic E2E setup for android (ayushsinghs@yahoo.in)
 
 ## 0.126.12
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 02 Jan 2023 18:05:06 GMT",
+      "tag": "@fluentui-react-native/tester_v0.126.13",
+      "version": "0.126.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f077f84f8fdfa9e64c41ff0d5fad07d0b5dd359b",
+            "comment": "Basic E2E setup for android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 Jan 2023 11:28:01 GMT",
       "tag": "@fluentui-react-native/tester_v0.126.12",
       "version": "0.126.12",
