@@ -22,7 +22,6 @@ exports[`Switch Default 1`] = `
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
-  onChange={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
   onResponderGrant={[Function]}
@@ -41,6 +40,20 @@ exports[`Switch Default 1`] = `
       "flexDirection": "row-reverse",
       "minHeight": undefined,
       "minWidth": undefined,
+    }
+  }
+  switchAnimationStyles={
+    Object {
+      "thumbAnimatedStyle": Object {
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+      },
+      "trackBackgroundStyle": Object {
+        "backgroundColor": "rgba(240, 240, 240, 1)",
+      },
     }
   }
 >
@@ -124,7 +137,6 @@ exports[`Switch Disabled 1`] = `
   focusable={false}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
-  onChange={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
   onResponderGrant={[Function]}
@@ -143,6 +155,20 @@ exports[`Switch Disabled 1`] = `
       "flexDirection": "row-reverse",
       "minHeight": undefined,
       "minWidth": undefined,
+    }
+  }
+  switchAnimationStyles={
+    Object {
+      "thumbAnimatedStyle": Object {
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+      },
+      "trackBackgroundStyle": Object {
+        "backgroundColor": "rgba(240, 240, 240, 1)",
+      },
     }
   }
 >
