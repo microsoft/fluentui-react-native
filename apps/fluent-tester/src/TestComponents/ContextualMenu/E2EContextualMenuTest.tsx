@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import { ButtonV1 as Button, ContextualMenu, ContextualMenuItem, Separator } from '@fluentui/react-native';
-import { CONTEXTUALMENUITEM_TEST_COMPONENT, CONTEXTUALMENU_TEST_COMPONENT } from './consts';
+import { CONTEXTUALMENUITEM_TEST_COMPONENT, CONTEXTUALMENU_TEST_COMPONENT } from '../../../../E2E/src/ContextualMenu/consts';
 import { testProps } from '../Common/TestProps';
 
 export const E2EContextualMenuTest: React.FunctionComponent = () => {

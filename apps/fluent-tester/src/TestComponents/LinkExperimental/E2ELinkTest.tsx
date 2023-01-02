@@ -8,7 +8,7 @@ import {
   EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_LINK_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_LINK_TEST_COMPONENT_LABEL,
-} from './consts';
+} from '../../../../E2E/src/LinkExperimental/consts';
 import { testProps } from '../Common/TestProps';
 
 export const LinkE2ETest: React.FunctionComponent = () => {

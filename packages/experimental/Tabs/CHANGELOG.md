@@ -1,8 +1,78 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.17
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+- Bump @fluentui-react-native/focus-zone to v0.11.18
+- Bump @fluentui-react-native/text to v0.19.6
+- Bump @fluentui-react-native/icon to v0.16.9
+
+## 0.8.16
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+- Bump @fluentui-react-native/focus-zone to v0.11.17
+- Bump @fluentui-react-native/text to v0.19.5
+- Bump @fluentui-react-native/icon to v0.16.8
+
+## 0.8.15
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.4
+- Bump @fluentui-react-native/icon to v0.16.7
+
+## 0.8.14
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/interactive-hooks to v0.22.4
+- Bump @fluentui-react-native/focus-zone to v0.11.16
+- Bump @fluentui-react-native/text to v0.19.3
+- Bump @fluentui-react-native/tokens to v0.20.2
+- Bump @fluentui-react-native/icon to v0.16.6
+
+## 0.8.13
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/focus-zone to v0.11.15
+- Bump @fluentui-react-native/text to v0.19.2
+- Bump @fluentui-react-native/tokens to v0.20.1
+- Bump @fluentui-react-native/icon to v0.16.5
+
+## 0.8.12
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/interactive-hooks to v0.22.2
+- Bump @fluentui-react-native/focus-zone to v0.11.14
+- Bump @fluentui-react-native/text to v0.19.1
+- Bump @fluentui-react-native/icon to v0.16.4
 
 ## 0.8.11
 

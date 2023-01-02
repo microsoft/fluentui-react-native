@@ -22,8 +22,9 @@ If using FURN's theming, the `Link` requires use of the `ThemeProvider` from `@f
 Basic example:
 
 ```jsx
-<Link inline url="https://www.bing.com/">Click to Navigate.</Link>
+<Link url="https://www.bing.com/">Click to Navigate.</Link>
 ```
+
 More examples on the [Test pages for Link](../../../apps/fluent-tester/src/TestComponents/LinkExperimental). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
@@ -44,46 +45,12 @@ Win32:
 </Link>
 ```
 
-![Inline Links on win32 example](./assets/Link_example_inline_win32.png)
-
-```jsx
-<>
-  <Text>
-    Click{' '}
-    <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-      this link
-    </Link>{' '}
-    to alert me.
-  </Text>
-  <Text>
-    This{' '}
-    <Link inline onPress={doPress} disabled focusable>
-      link
-    </Link>{' '}
-      is disabled but focusable.
-  </Text>
-  <Text>
-    Follow this{' '}
-    <Link inline url="https://www.bing.com/">
-      link
-    </Link>{' '}
-    to navigate.
-  </Text>
-</>
-```
-
 ![Subtle Links on win32 example](./assets/Link_example_subtle_win32.png)
 
 ```jsx
 <Link appearance="subtle" url="https://www.bing.com/">
   Click to navigate.
 </Link>
-<Text>
-  This is inline Link.{' '}
-  <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-    Click to alert.
-  </Link>
-</Text>
 <Link appearance="subtle" onPress={doPress} disabled>
   Disabled Link
 </Link>
@@ -93,7 +60,7 @@ Win32:
 
 ```jsx
 const BlueHeaderBold = Link.customize({ variant: 'headerStandard', fontWeight: '700', color: '#0229c4', textAlign: 'right' });
-<BlueHeaderBold>BlueHeaderBold</BlueHeaderBold>
+<BlueHeaderBold>BlueHeaderBold</BlueHeaderBold>;
 ```
 
 ## API
@@ -107,7 +74,9 @@ Below is the set of props the Text supports:
 ```ts
 export interface LinkProps extends IWithPressableOptions<TextProps> {
   /**
-   * link appearance
+   * The appearance of the link, either `default` or `subtle`
+   * Note: 'subtle' is not supported for Android
+   * @default default
    */
   appearance?: LinkAppearance;
   /**
@@ -120,7 +89,9 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
    */
   enableFocusRing?: boolean;
   /**
-   * link inline
+   * Whether the link is inline with text
+   * Note: Not supported for win32
+   * @default false
    */
   inline?: boolean;
   /**
@@ -130,14 +101,10 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
   url?: string;
   /**
    * Text that should show in a tooltip when the user hovers over a button.
+   * Note: Not supported for Android
    */
   tooltip?: string;
 }
-
-11/8/22 Notes:
-
-- `inline` => On win32, inline links are rendered as a Text component without a View to handle all the mouse and focus events. Text component itself should handle them in case of inline links. Native changes need to be made on the platform level to support hovered/pressed/focused states.
-
 ```
 
 ### Styling Tokens
@@ -156,6 +123,8 @@ export interface LinkTokens extends TextTokens {
 }
 ```
 
+Note: 'hovered','focused','visited','subtle' are not supported for Android
+
 ## Behaviors
 
 ### Link with url
@@ -168,10 +137,10 @@ export interface LinkTokens extends TextTokens {
 
 The following is a set of keys that interact with the `Link` component:
 
-| Key     | Description                                                     |
-| ------- | --------------------------------------------------------------- |
-| `Tab`   | If `disabled` is not set, component will gain focus.  |
-| `Space` | Nagivates to the path passed in as a `url` or executes the function passed into the `onPress` prop.           |
+| Key     | Description                                                                                         |
+| ------- | --------------------------------------------------------------------------------------------------- |
+| `Tab`   | If `disabled` is not set, component will gain focus.                                                |
+| `Space` | Nagivates to the path passed in as a `url` or executes the function passed into the `onPress` prop. |
 
 #### Cursor interaction for Link
 

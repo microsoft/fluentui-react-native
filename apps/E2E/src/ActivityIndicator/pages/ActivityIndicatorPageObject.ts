@@ -1,8 +1,4 @@
-import {
-  HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
-  ACTIVITY_INDICATOR_TESTPAGE,
-  ACTIVITY_INDICATOR_TEST_COMPONENT,
-} from '../../../../fluent-tester/src/TestComponents/ActivityIndicator/consts';
+import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON, ACTIVITY_INDICATOR_TESTPAGE, ACTIVITY_INDICATOR_TEST_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class ActivityIndicatorPageObject extends BasePage {

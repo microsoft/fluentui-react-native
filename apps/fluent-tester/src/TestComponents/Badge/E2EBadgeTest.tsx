@@ -2,7 +2,7 @@ import { Badge, PresenceBadge } from '@fluentui-react-native/badge';
 import * as React from 'react';
 import { View } from 'react-native';
 import { testProps } from '../Common/TestProps';
-import { BADGE_TEST_COMPONENT, BADGE_SECONDARY_TEST_COMPONENT } from './consts';
+import { BADGE_TEST_COMPONENT, BADGE_SECONDARY_TEST_COMPONENT } from '../../../../E2E/src/Badge/consts';
 
 export const E2EBadgeTest: React.FunctionComponent = () => {
   return (

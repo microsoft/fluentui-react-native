@@ -9,7 +9,7 @@ import {
   MENUITEM_FOURTH_COMPONENT,
   MENU_CALLBACK_RESET_BUTTON,
   MENUITEM_CALLBACK_LABEL,
-} from '../../../../fluent-tester/src/TestComponents/Menu/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 import { Keys, Attribute, AttributeValue } from '../../common/consts';
 

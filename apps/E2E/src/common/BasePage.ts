@@ -1,6 +1,5 @@
 import { Keys, ROOT_VIEW } from './consts';
-import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../../fluent-tester/src/TestComponents/Common/consts';
-import { Attribute, attributeToEnumName } from './consts';
+import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform

@@ -9,7 +9,7 @@ import {
   EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
-} from './consts';
+} from '../../../../E2E/src/MenuButtonExperimental/consts';
 import { testProps } from '../Common/TestProps';
 
 export const E2ETestExperimentalMenuButton: React.FunctionComponent = () => {

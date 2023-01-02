@@ -16,7 +16,7 @@ import {
   BUTTON_PRESS_TEST_COMPONENT_LABEL,
   BUTTON_FOCUSABLE_TEST_COMPONENT,
   BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL,
-} from './consts';
+} from '../../../../E2E/src/Button/consts';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 import { testProps } from '../Common/TestProps';
 
@@ -59,6 +59,7 @@ export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
         </Button>
         <Button
           onClick={onClick}
+          accessibilityRole="menuitem"
           /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(BUTTON_NO_A11Y_LABEL_COMPONENT)}
         >

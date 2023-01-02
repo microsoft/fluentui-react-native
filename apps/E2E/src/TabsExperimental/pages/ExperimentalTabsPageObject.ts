@@ -3,7 +3,7 @@ import {
   EXPERIMENTAL_TABS_TESTPAGE,
   EXPERIMENTAL_TABS_TEST_COMPONENT,
   HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
-} from '../../../../fluent-tester/src/TestComponents/TabsExperimental/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class ExperimentalTabsPageObject extends BasePage {

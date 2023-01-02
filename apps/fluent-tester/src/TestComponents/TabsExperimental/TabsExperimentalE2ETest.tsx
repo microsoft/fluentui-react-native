@@ -12,7 +12,7 @@ import {
   EXPERIMENTAL_TABS_ITEM_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_TABS_ITEM_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT_LABEL,
-} from './consts';
+} from '../../../../E2E/src/TabsExperimental/consts';
 import { testProps } from '../Common/TestProps';
 
 export const E2ETestExperimentalTabs: React.FunctionComponent = () => {
