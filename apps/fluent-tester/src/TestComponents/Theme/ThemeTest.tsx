@@ -6,7 +6,6 @@ import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
 import { THEME_TESTPAGE } from '../../../../E2E/src/Theme/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { testProps } from '../Common/TestProps';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -51,12 +50,7 @@ const Panel: React.FunctionComponent = () => {
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
-      <Text
-        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-        {...testProps(THEME_TESTPAGE)}
-      >
-        This is a text element
-      </Text>
+      <Text>This is a text element</Text>
       <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
     </View>
   );
@@ -109,6 +103,7 @@ const SwatchList: React.FunctionComponent = () => {
 const themeSections: TestSection[] = [
   {
     name: 'Component Examples',
+    testID: THEME_TESTPAGE,
     component: Panel,
   },
   {

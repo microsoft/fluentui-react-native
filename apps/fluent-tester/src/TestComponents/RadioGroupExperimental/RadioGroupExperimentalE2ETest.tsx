@@ -61,7 +61,12 @@ export const E2ERadioGroupExperimentalTest: React.FunctionComponent = () => {
           } /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(EXPERIMENTAL_RADIOGROUP_NO_A11Y_LABEL_COMPONENT)}
         >
-          <Radio label="Option W" value="W" testID={FIFTH_RADIO} />
+          <Radio
+            label="Option W"
+            value="W"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(FIFTH_RADIO)}
+          />
           <Radio label="Option X" value="X" />
           <Radio label="Option Y (disabled)" value="C" disabled={true} />
           <Radio label="Option Z" value="Z" />

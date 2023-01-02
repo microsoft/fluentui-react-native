@@ -11,13 +11,13 @@ import { Platform } from 'react-native';
  * @returns an object with the correct test identifier prop based on platform
  */
 export function testProps(id) {
-  if (Platform.OS === 'android') {
-    return {
+  return Platform.select({
+    android: {
       accessible: true,
       accessibilityLabel: id,
-    };
-  }
-  return {
-    testID: id,
-  };
+    },
+    default: {
+      testID: id,
+    },
+  });
 }
