@@ -4,10 +4,10 @@ import { AvatarTest, NativeAvatarTest } from './TestComponents/Avatar';
 import { BadgeTest } from './TestComponents/Badge';
 import { ButtonTest } from './TestComponents/Button';
 import { CalloutTest } from './TestComponents/Callout';
-import { CheckboxTest } from './TestComponents/Checkbox';
-import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
-import { ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
+import { CheckboxLegacyTest } from './TestComponents/CheckboxLegacy';
+import { CheckboxV1Test } from './TestComponents/CheckboxV1';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
+import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
 // import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
@@ -15,16 +15,17 @@ import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdow
 import { FocusTrapTest } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest } from './TestComponents/FocusZone';
 import { IconTest } from './TestComponents/Icon';
-import { LinkTest } from './TestComponents/Link';
+import { LinkLegacyTest } from './TestComponents/LinkLegacy';
+import { LinkV1Test } from './TestComponents/LinkV1';
 import { MenuTest } from './TestComponents/Menu';
-import { MenuButtonTest } from './TestComponents/MenuButton';
-import { ExperimentalMenuButtonTest } from './TestComponents/MenuButtonExperimental';
+import { MenuButtonLegacyTest } from './TestComponents/MenuButtonLegacy';
+import { MenuButtonV1Test } from './TestComponents/MenuButtonV1';
 import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
 import { PersonaTest } from './TestComponents/Persona';
 import { PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { PressableTest } from './TestComponents/Pressable';
-import { RadioGroupTest } from './TestComponents/RadioGroup';
-import { RadioGroupExperimentalTest } from './TestComponents/RadioGroupExperimental';
+import { RadioGroupLegacyTest } from './TestComponents/RadioGroupLegacy';
+import { RadioGroupV1Test } from './TestComponents/RadioGroupV1';
 import { SeparatorTest } from './TestComponents/Separator';
 import { ShadowTest } from './TestComponents/Shadow';
 import { ShimmerTest } from './TestComponents/Shimmer';
@@ -32,13 +33,12 @@ import { SpacingTokensTest } from './TestComponents/Spacing';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
 import { SvgTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
-import { TabsTest } from './TestComponents/Tabs';
-import { ExperimentalTabsTest } from './TestComponents/TabsExperimental';
-import { TextTest } from './TestComponents/Text';
-import { TextExperimentalTest } from './TestComponents/TextExperimental';
+import { TabsLegacyTest } from './TestComponents/TabsLegacy';
+import { TabsV1Test } from './TestComponents/TabsV1';
+import { TextLegacyTest } from './TestComponents/TextLegacy';
+import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
 import { TokenTest } from './TestComponents/Tokens';
-import { ExperimentalLinkTest } from './TestComponents/LinkExperimental';
 import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
@@ -80,14 +80,14 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'Checkbox Legacy',
-    component: CheckboxTest,
+    component: CheckboxLegacyTest,
     testPageButton: Constants.HOMEPAGE_CHECKBOX_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Checkbox V1',
-    component: ExperimentalCheckboxTest,
-    testPageButton: Constants.HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
+    component: CheckboxV1Test,
+    testPageButton: Constants.HOMEPAGE_CHECKBOXV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
   },
   {
@@ -147,14 +147,14 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'Link Legacy',
-    component: LinkTest,
+    component: LinkLegacyTest,
     testPageButton: Constants.HOMEPAGE_LINK_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Link V1',
-    component: ExperimentalLinkTest,
-    testPageButton: Constants.HOMEPAGE_EXPERIMENTAL_LINK_BUTTON,
+    component: LinkV1Test,
+    testPageButton: Constants.HOMEPAGE_LINKV1_BUTTON,
     platforms: ['win32', 'android'],
   },
   {
@@ -165,14 +165,14 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'MenuButton Legacy',
-    component: MenuButtonTest,
+    component: MenuButtonLegacyTest,
     testPageButton: Constants.HOMEPAGE_MENUBUTTON_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
     name: 'MenuButton V1',
-    component: ExperimentalMenuButtonTest,
-    testPageButton: Constants.HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
+    component: MenuButtonV1Test,
+    testPageButton: Constants.HOMEPAGE_MENUBUTTONV1_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
@@ -201,14 +201,14 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'RadioGroup Legacy',
-    component: RadioGroupTest,
+    component: RadioGroupLegacyTest,
     testPageButton: Constants.HOMEPAGE_RADIOGROUP_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
     name: 'RadioGroup V1',
-    component: RadioGroupExperimentalTest,
-    testPageButton: Constants.HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
+    component: RadioGroupV1Test,
+    testPageButton: Constants.HOMEPAGE_RADIOGROUPV1_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
@@ -255,26 +255,26 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'Tabs Legacy',
-    component: TabsTest,
+    component: TabsLegacyTest,
     testPageButton: Constants.HOMEPAGE_TABS_BUTTON,
     platforms: ['macos', 'win32', 'windows'],
   },
   {
     name: 'Tabs V1',
-    component: ExperimentalTabsTest,
-    testPageButton: Constants.HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
+    component: TabsV1Test,
+    testPageButton: Constants.HOMEPAGE_TABSV1_BUTTON,
     platforms: ['macos', 'win32', 'windows'],
   },
   {
     name: 'Text Legacy',
-    component: TextTest,
+    component: TextLegacyTest,
     testPageButton: Constants.HOMEPAGE_TEXT_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Text V1',
-    component: TextExperimentalTest,
-    testPageButton: Constants.HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
+    component: TextV1Test,
+    testPageButton: Constants.HOMEPAGE_TEXTV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
