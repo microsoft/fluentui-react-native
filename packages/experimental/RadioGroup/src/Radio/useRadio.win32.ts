@@ -64,17 +64,12 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       let newCurrRadioIndex;
       if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key === 'ArrowRight') {
         newCurrRadioIndex = (currRadioIndex + 1) % length;
-        radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
-        radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
-        radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-        componentRef?.current?.focus();
       } else if (e.nativeEvent.key === 'ArrowUp' || e.nativeEvent.key === 'ArrowLeft') {
         newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
-        radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
-        radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
-        radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-        componentRef?.current?.focus();
       }
+      radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.enabledValues[newCurrRadioIndex]);
+      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+      componentRef?.current?.focus();
     },
     [radioGroupContext, componentRef],
   );
