@@ -15,6 +15,7 @@ import {
 } from '../../../../E2E/src/RadioGroup/consts';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
+import { testProps } from '../Common/TestProps';
 
 export const E2ERadioGroupTest: React.FunctionComponent = () => {
   return (
@@ -23,19 +24,41 @@ export const E2ERadioGroupTest: React.FunctionComponent = () => {
         <RadioGroup
           label="RadioGroup for E2E Testing - Ally Label Set"
           accessibilityLabel={RADIOGROUP_ACCESSIBILITY_LABEL}
-          testID={RADIOGROUP_TEST_COMPONENT}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(RADIOGROUP_TEST_COMPONENT)}
         >
           <RadioButton
             content="Option A"
             buttonKey="A"
-            testID={FIRST_RADIO_BUTTON}
             accessibilityLabel={FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL}
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(FIRST_RADIO_BUTTON)}
           />
-          <RadioButton content={SECOND_RADIO_BUTTON_LABEL} buttonKey="B" testID={SECOND_RADIO_BUTTON} />
-          <RadioButton content="Option C (disabled)" buttonKey="C" disabled={true} testID={THIRD_RADIO_BUTTON} />
-          <RadioButton content="Option D" buttonKey="C" testID={FOURTH_RADIO_BUTTON} />
+          <RadioButton
+            content={SECOND_RADIO_BUTTON_LABEL}
+            buttonKey="B"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(SECOND_RADIO_BUTTON)}
+          />
+          <RadioButton
+            content="Option C (disabled)"
+            buttonKey="C"
+            disabled={true}
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(THIRD_RADIO_BUTTON)}
+          />
+          <RadioButton
+            content="Option D"
+            buttonKey="C"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(FOURTH_RADIO_BUTTON)}
+          />
         </RadioGroup>
-        <RadioGroup label={RADIOGROUP_TEST_COMPONENT_LABEL} testID={RADIOGROUP_NO_A11Y_LABEL_COMPONENT}>
+        <RadioGroup
+          label={RADIOGROUP_TEST_COMPONENT_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(RADIOGROUP_NO_A11Y_LABEL_COMPONENT)}
+        >
           <RadioButton content="Option W" buttonKey="W" />
           <RadioButton content="Option X" buttonKey="X" />
           <RadioButton content="Option Y (disabled)" buttonKey="C" disabled={true} />

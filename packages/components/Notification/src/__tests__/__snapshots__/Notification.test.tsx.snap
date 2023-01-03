@@ -218,8 +218,6 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "600",
-            "letterSpacing": -0.23,
-            "lineHeight": 20,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,
