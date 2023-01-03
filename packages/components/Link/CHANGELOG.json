@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Tue, 03 Jan 2023 21:35:03 GMT",
+      "tag": "@fluentui-react-native/link_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/link",
+            "commit": "2e72eb614a06d3b23aec175eaa7486ed04d7556b",
+            "comment": "Move v1 Link code into main link folder"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 16:09:27 GMT",
       "tag": "@fluentui-react-native/link_v0.17.24",
       "version": "0.17.24",

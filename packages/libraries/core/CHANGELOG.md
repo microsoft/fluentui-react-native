@@ -1,8 +1,17 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Jan 2023 21:35:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.0
+
+Tue, 03 Jan 2023 21:35:03 GMT
+
+### Minor changes
+
+- Move v1 Link code into main link folder (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/link to v0.18.0
 
 ## 0.34.16
 

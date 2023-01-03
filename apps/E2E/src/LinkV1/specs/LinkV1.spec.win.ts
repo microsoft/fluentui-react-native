@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkV1PageObject from '../pages/LinkV1PageObject';
 import { LINKV1_ACCESSIBILITY_LABEL } from '../consts';
-import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute } from '../../common/consts';
+import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, Keys } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('LinkV1 Testing Initialization', function () {
@@ -18,6 +18,37 @@ describe('LinkV1 Testing Initialization', function () {
     await expect(await LinkV1PageObject.isPageLoaded()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+});
+
+describe('Link Testing Functionality', function () {
+  /* Scrolls and waits for the Link to be visible on the Test Page */
+  beforeEach(async () => {
+    await LinkV1PageObject.scrollToTestElement();
+  });
+
+  it('Validate OnPress() callback was fired on a click', async () => {
+    await LinkV1PageObject.click(LinkV1PageObject._secondaryComponent);
+    await expect(
+      await LinkV1PageObject.didOnPressCallbackFire(`The link failed to fire an onPress callback with a mouse click.`),
+    ).toBeTruthy();
+    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Validate OnPress() callback was fired after hitting "Enter"', async () => {
+    await LinkV1PageObject.sendKeys(LinkV1PageObject._secondaryComponent, [Keys.ENTER]);
+    await expect(
+      await LinkV1PageObject.didOnPressCallbackFire(`The link failed to fire an OnPress callback with an enter keypress.`),
+    ).toBeTruthy();
+    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Validate OnPress() callback was fired after hitting "SPACE"', async () => {
+    await LinkV1PageObject.sendKeys(LinkV1PageObject._secondaryComponent, [Keys.SPACE]);
+    await expect(
+      await LinkV1PageObject.didOnPressCallbackFire(`The link failed to fire an OnPress callback with a space keypress.`),
+    ).toBeTruthy();
+    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

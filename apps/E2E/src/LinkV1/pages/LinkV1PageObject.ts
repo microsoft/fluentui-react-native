@@ -2,6 +2,20 @@ import { LINKV1_TESTPAGE, LINKV1_TEST_COMPONENT, HOMEPAGE_LINKV1_BUTTON, LINKV1_
 import { BasePage, By } from '../../common/BasePage';
 
 class LinkV1PageObject extends BasePage {
+  /******************************************************************/
+  /**************** UI Element Interaction Methods ******************/
+  /******************************************************************/
+  async didOnPressCallbackFire(errMsg: string): Promise<boolean> {
+    const callbackText = await By(LINKV1_NO_A11Y_LABEL_COMPONENT);
+    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+      timeout: this.waitForUiEvent,
+      timeoutMsg: errMsg,
+      interval: 1000,
+    });
+
+    return await callbackText.isDisplayed();
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
