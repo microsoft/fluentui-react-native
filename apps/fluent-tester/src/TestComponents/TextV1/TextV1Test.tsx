@@ -31,7 +31,7 @@ const textSections: TestSection[] = [
     component: PressableUsage,
   },
   {
-    name: 'E2E Testing for Experimental Text',
+    name: 'E2E Testing for TextV1',
     component: TextV1E2ETest,
   },
 ];
