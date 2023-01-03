@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Migrated Icon to V1",
+  "packageName": "@fluentui-react-native/icon",
+  "email": "vkozlova@microsoft.com",
+  "dependentChangeType": "patch"
+}
