@@ -1,8 +1,59 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Thu, 29 Dec 2022 17:19:10 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.34.16
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.15
+- Bump @fluentui-react-native/callout to v0.21.48
+- Bump @fluentui-react-native/checkbox to v0.19.5
+- Bump @fluentui-react-native/contextual-menu to v0.21.11
+- Bump @fluentui-react-native/focus-trap-zone to v0.9.47
+- Bump @fluentui-react-native/focus-zone to v0.11.18
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+- Bump @fluentui-react-native/link to v0.17.24
+- Bump @fluentui-react-native/menu-button to v0.10.12
+- Bump @fluentui-react-native/persona to v0.13.31
+- Bump @fluentui-react-native/persona-coin to v0.12.12
+- Bump @fluentui-react-native/pressable to v0.9.45
+- Bump @fluentui-react-native/radio-group to v0.16.20
+- Bump @fluentui-react-native/separator to v0.14.3
+- Bump @fluentui-react-native/tabs to v0.11.17
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.34.15
+
+Fri, 30 Dec 2022 06:16:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.17.23
+
+## 0.34.14
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.14
+- Bump @fluentui-react-native/callout to v0.21.47
+- Bump @fluentui-react-native/checkbox to v0.19.4
+- Bump @fluentui-react-native/contextual-menu to v0.21.10
+- Bump @fluentui-react-native/focus-trap-zone to v0.9.46
+- Bump @fluentui-react-native/focus-zone to v0.11.17
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+- Bump @fluentui-react-native/link to v0.17.22
+- Bump @fluentui-react-native/menu-button to v0.10.11
+- Bump @fluentui-react-native/pressable to v0.9.44
+- Bump @fluentui-react-native/radio-group to v0.16.19
+- Bump @fluentui-react-native/tabs to v0.11.16
+- Bump @fluentui-react-native/text to v0.19.5
 
 ## 0.34.13
 

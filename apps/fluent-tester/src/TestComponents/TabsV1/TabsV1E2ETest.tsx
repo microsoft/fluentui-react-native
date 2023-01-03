@@ -13,13 +13,25 @@ import {
   TABSITEMV1_NO_A11Y_LABEL_COMPONENT,
   TABSITEMV1_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/TabsV1/consts';
+import { testProps } from '../Common/TestProps';
 
 export const TabsV1E2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <View style={stackStyle}>
-        <Tabs label="Tabs" testID={TABSV1_TEST_COMPONENT} accessibilityLabel={TABSV1_ACCESSIBILITY_LABEL}>
-          <TabsItem headerText="Home" itemKey="A" testID={TABSITEMV1_TEST_COMPONENT} accessibilityLabel={TABSITEMV1_ACCESSIBILITY_LABEL}>
+        <Tabs
+          label="Tabs"
+          accessibilityLabel={TABSV1_ACCESSIBILITY_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(TABSV1_TEST_COMPONENT)}
+        >
+          <TabsItem
+            headerText="Home"
+            itemKey="A"
+            accessibilityLabel={TABSITEMV1_ACCESSIBILITY_LABEL}
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(TABSITEMV1_TEST_COMPONENT)}
+          >
             <Text>Tabs #1</Text>
           </TabsItem>
           <TabsItem headerText="Files" itemKey="B">
@@ -31,8 +43,17 @@ export const TabsV1E2ETest: React.FunctionComponent = () => {
         </Tabs>
       </View>
       <View style={stackStyle}>
-        <Tabs label={TABSV1_TEST_COMPONENT_LABEL} testID={TABSV1_NO_A11Y_LABEL_COMPONENT}>
-          <TabsItem headerText={TABSITEMV1_TEST_COMPONENT_LABEL} itemKey="A" testID={TABSITEMV1_NO_A11Y_LABEL_COMPONENT}>
+        <Tabs
+          label={TABSV1_TEST_COMPONENT_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(TABSV1_NO_A11Y_LABEL_COMPONENT)}
+        >
+          <TabsItem
+            headerText={TABSITEMV1_TEST_COMPONENT_LABEL}
+            itemKey="A"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(TABSITEMV1_NO_A11Y_LABEL_COMPONENT)}
+          >
             <Text>Tabs #1</Text>
           </TabsItem>
           <TabsItem headerText="Files" itemKey="B">

@@ -1,8 +1,43 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Thu, 29 Dec 2022 08:02:57 GMT and should not be manually modified.
+This log was last generated on Sat, 31 Dec 2022 00:08:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.10
+
+Sat, 31 Dec 2022 00:08:14 GMT
+
+### Patches
+
+- Use V2 font variant for notification action button (adgleitm@microsoft.com)
+
+## 0.21.9
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.15
+- Bump @fluentui-react-native/experimental-shadow to v0.2.55
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/icon to v0.16.9
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+- Bump @fluentui-react-native/pressable to v0.9.45
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.21.8
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.14
+- Bump @fluentui-react-native/experimental-shadow to v0.2.54
+- Bump @fluentui-react-native/icon to v0.16.8
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+- Bump @fluentui-react-native/pressable to v0.9.44
+- Bump @fluentui-react-native/text to v0.19.5
 
 ## 0.21.7
 

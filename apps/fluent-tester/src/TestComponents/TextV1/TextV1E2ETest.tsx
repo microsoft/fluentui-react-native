@@ -9,15 +9,25 @@ import {
   TEXTV1_NO_A11Y_LABEL_COMPONENT,
   TEXTV1_CONTENT,
 } from '../../../../E2E/src/TextV1/consts';
+import { testProps } from '../Common/TestProps';
 
 export const TextV1E2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        <Text variant="captionStandard" testID={TEXTV1_TEST_COMPONENT} accessibilityLabel={TEXTV1_ACCESSIBILITY_LABEL}>
+        <Text
+          variant="captionStandard"
+          accessibilityLabel={TEXTV1_ACCESSIBILITY_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(TEXTV1_TEST_COMPONENT)}
+        >
           Testing Text Component - Accessibility Label Set
         </Text>
-        <Text variant="captionStandard" testID={TEXTV1_NO_A11Y_LABEL_COMPONENT}>
+        <Text
+          variant="captionStandard"
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(TEXTV1_NO_A11Y_LABEL_COMPONENT)}
+        >
           {TEXTV1_CONTENT}
         </Text>
       </Stack>

@@ -82,6 +82,10 @@ class CheckboxV1PageObject extends BasePage {
   get _pageButton() {
     return By(HOMEPAGE_CHECKBOXV1_BUTTON);
   }
+
+  get _pageButtonName() {
+    return HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON;
+  }
 }
 
 export default new CheckboxV1PageObject();

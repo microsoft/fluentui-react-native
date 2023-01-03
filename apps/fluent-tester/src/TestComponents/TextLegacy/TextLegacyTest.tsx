@@ -4,10 +4,12 @@ import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { TextLegacyE2ETest } from './TextLegacyE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { TEXT_TESTPAGE } from '../../../../E2E/src/index.consts';
 
 const textSections: TestSection[] = [
   {
     name: 'Standard Usage',
+    testID: TEXT_TESTPAGE,
     component: StandardUsage,
   },
   {

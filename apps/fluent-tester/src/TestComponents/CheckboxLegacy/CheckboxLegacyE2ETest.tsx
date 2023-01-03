@@ -10,6 +10,7 @@ import {
   CHECKBOX_ACCESSIBILITY_LABEL,
 } from '../../../../E2E/src/CheckboxLegacy/consts';
 import { Stack } from '@fluentui-react-native/stack';
+import { testProps } from '../Common/TestProps';
 
 export const CheckboxLegacyE2ETest: React.FunctionComponent = () => {
   const [checkboxPressed, setCheckboxPressed] = React.useState(false);
@@ -28,11 +29,22 @@ export const CheckboxLegacyE2ETest: React.FunctionComponent = () => {
           accessibilityLabel={CHECKBOX_ACCESSIBILITY_LABEL}
           disabled={false}
           label="Testing accessibilityLabel"
-          testID={CHECKBOX_TEST_COMPONENT}
           onChange={onClick}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(CHECKBOX_TEST_COMPONENT)}
         />
-        <Checkbox label={CHECKBOX_TEST_COMPONENT_LABEL} testID={CHECKBOX_NO_A11Y_LABEL_COMPONENT} />
-        {checkboxPressed ? <Text testID={CHECKBOX_ON_PRESS}>Checkbox Selected</Text> : null}
+        <Checkbox
+          label={CHECKBOX_TEST_COMPONENT_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(CHECKBOX_NO_A11Y_LABEL_COMPONENT)}
+        />
+        {checkboxPressed ? (
+          <Text /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(CHECKBOX_ON_PRESS)}
+          >
+            Checkbox Selected
+          </Text>
+        ) : null}
       </Stack>
     </View>
   );

@@ -1,17 +1,16 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkLegacyPageObject from '../pages/LinkLegacyPageObject';
-import { ComponentSelector } from '../../common/BasePage';
 import { LINK_ACCESSIBILITY_LABEL } from '../consts';
-import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Link Legacy Testing Initialization', function () {
+describe('Link Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Link Legacy test page', async () => {
+  it('Click and navigate to Link test page', async () => {
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToLinkLegacyPage();
     await LinkLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -21,19 +20,29 @@ describe('Link Legacy Testing Initialization', function () {
   });
 });
 
-describe('Link Legacy Accessibility Testing', () => {
-  it('Link - Validate accessibilityRole is correct', async () => {
+describe('Link Accessibility Testing', () => {
+  beforeAll(async () => {
     await LinkLegacyPageObject.scrollToTestElement();
-
-    await expect(await LinkLegacyPageObject.getAccessibilityRole()).toEqual(LINK_A11Y_ROLE);
-    await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
 
-  it('Link - Set accessibilityLabel', async () => {
-    await LinkLegacyPageObject.scrollToTestElement();
+  it('Validate "accessibilityRole" defaults to Link "ControlType" element attribute.', async () => {
+    await expect(
+      await LinkLegacyPageObject.compareAttribute(LinkLegacyPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
+    ).toBeTrue();
 
-    await expect(await LinkLegacyPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(LINK_ACCESSIBILITY_LABEL);
-    await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
+    await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" propagates to "Name" element attribute.', async () => {
+    await expect(
+      await LinkLegacyPageObject.compareAttribute(
+        LinkLegacyPageObject._primaryComponent,
+        Attribute.AccessibilityLabel,
+        LINK_ACCESSIBILITY_LABEL,
+      ),
+    ).toBeTrue();
+
+    await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   // No need to test not setting a11y label. The content prop gets passed down to the child Text component. This equates to not setting the a11y label

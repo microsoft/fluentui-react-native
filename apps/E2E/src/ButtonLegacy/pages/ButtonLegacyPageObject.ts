@@ -63,6 +63,10 @@ class ButtonLegacyPageObject extends BasePage {
   get _pageButton() {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }
+
+  get _pageButtonName() {
+    return HOMEPAGE_BUTTON_BUTTON;
+  }
 }
 
 export default new ButtonLegacyPageObject();

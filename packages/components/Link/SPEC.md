@@ -75,6 +75,7 @@ Below is the set of props the Text supports:
 export interface LinkProps extends IWithPressableOptions<TextProps> {
   /**
    * The appearance of the link, either `default` or `subtle`
+   * Note: 'subtle' is not supported for Android
    * @default default
    */
   appearance?: LinkAppearance;
@@ -100,6 +101,7 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
   url?: string;
   /**
    * Text that should show in a tooltip when the user hovers over a button.
+   * Note: Not supported for Android
    */
   tooltip?: string;
 }
@@ -120,6 +122,8 @@ export interface LinkTokens extends TextTokens {
   subtle?: LinkTokens;
 }
 ```
+
+Note: 'hovered','focused','visited','subtle' are not supported for Android
 
 ## Behaviors
 

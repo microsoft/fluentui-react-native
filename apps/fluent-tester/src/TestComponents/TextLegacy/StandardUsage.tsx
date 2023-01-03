@@ -3,15 +3,12 @@ import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { TEXT_TESTPAGE } from '../../../../E2E/src/TextLegacy/consts';
 
 export const StandardUsage: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        <Text variant="captionStandard" testID={TEXT_TESTPAGE}>
-          CaptionStandard
-        </Text>
+        <Text variant="captionStandard">CaptionStandard</Text>
         <Text variant="secondaryStandard">SecondaryStandard</Text>
         <Text variant="secondarySemibold">SecondarySemibold</Text>
         <Text variant="bodyStandard">BodyStandard</Text>
