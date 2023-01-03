@@ -4,10 +4,12 @@ import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { E2ETextTest } from './TextE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { TEXT_TESTPAGE } from '../../../../E2E/src/index.consts';
 
 const textSections: TestSection[] = [
   {
     name: 'Standard Usage',
+    testID: TEXT_TESTPAGE,
     component: StandardUsage,
   },
   {
@@ -26,7 +28,7 @@ const textSections: TestSection[] = [
 
 export const TextTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Deprecated',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',

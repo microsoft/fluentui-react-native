@@ -11,10 +11,10 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   fontFamily: t.typography.families.primary,
   fontSize: globalTokens.font.size300,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
-  gap: globalTokens.spacing.xs,
+  gap: globalTokens.size40,
   paddingHorizontal: 5, // hardcoded for now to match ContextualMenu
   paddingVertical: 3, // hardcoded for now to match ContextualMenu
-  submenuIndicatorPadding: globalTokens.spacing.none,
+  submenuIndicatorPadding: globalTokens.sizeNone,
   submenuIndicatorSize: 16,
   focused: {
     backgroundColor: t.colors.menuItemBackgroundHovered,

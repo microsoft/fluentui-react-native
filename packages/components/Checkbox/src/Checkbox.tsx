@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, Pressable, View } from 'react-native';
+import { Pressable, Platform } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Checkbox.styling';
@@ -8,27 +8,17 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useCheckbox } from './useCheckbox';
 import { Svg, Path } from 'react-native-svg';
 
-const unsupportedAndroidProps: string[] = ['size', 'shape', 'required', 'labelPosition', 'tooltip'];
-
 export const Checkbox = compose<CheckboxType>({
   displayName: checkboxName,
   ...stylingSettings,
   slots: {
     root: Pressable,
-    checkbox: View,
+    checkbox: Pressable,
     checkmark: Svg,
     label: Text,
     required: Text,
   },
   useRender: (userProps: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
-    // Removal of tokens which are not supported for Android
-    {
-      Platform.OS === 'android' &&
-        unsupportedAndroidProps.map((e) => {
-          Reflect.deleteProperty(userProps, e);
-        });
-    }
-
     // configure props and state for checkbox based on user props
     const Checkbox = useCheckbox(userProps);
     // grab the styled slots
@@ -45,6 +35,7 @@ export const Checkbox = compose<CheckboxType>({
     // now return the handler for finishing render
     return (final: CheckboxProps) => {
       const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
+      const { onPress, disabled } = mergedProps;
       const labelComponent = (
         <React.Fragment>
           <Slots.label key="label">{label}</Slots.label>
@@ -61,9 +52,9 @@ export const Checkbox = compose<CheckboxType>({
       );
 
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} {...(Platform.OS == 'android' && { accessible: !disabled, focusable: !disabled })}>
           {Checkbox.state.labelIsBefore && labelComponent}
-          <Slots.checkbox>
+          <Slots.checkbox accessible={false} onPress={onPress} disabled={disabled} focusable={false}>
             <Slots.checkmark key="checkmark" viewBox="0 0 12 12">
               {checkmarkPath}
             </Slots.checkmark>

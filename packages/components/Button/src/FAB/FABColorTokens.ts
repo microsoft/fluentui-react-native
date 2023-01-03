@@ -3,27 +3,49 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { FABTokens } from './FAB.types';
 
 export const defaultFABColorTokens: TokenSettings<FABTokens, Theme> = (t: Theme): FABTokens => ({
-  // Coloring same as primary
-  backgroundColor: t.colors.brandedBackground,
-  color: t.colors.brandedContent,
-  borderColor: t.colors.brandedBorder,
-  iconColor: t.colors.brandedIcon,
+  // Default coloring same as 'primary' or 'accent'
+  backgroundColor: t.colors.brandBackground,
+  color: t.colors.neutralForegroundOnColor,
+  iconColor: t.colors.neutralForegroundOnColor,
+  rippleColor: 'transparent', //Android Only
   disabled: {
-    backgroundColor: t.colors.brandedDisabledBackground,
-    color: t.colors.brandedDisabledContent,
-    borderColor: t.colors.brandedDisabledBorder,
-    iconColor: t.colors.brandedDisabledIcon,
+    backgroundColor: t.colors.neutralBackground5,
+    color: t.colors.neutralForegroundDisabled,
+    iconColor: t.colors.neutralForegroundDisabled,
   },
   pressed: {
-    backgroundColor: t.colors.brandedPressedBackground,
-    color: t.colors.brandedPressedContent,
-    borderColor: t.colors.brandedPressedBorder,
-    iconColor: t.colors.brandedPressedIcon,
+    backgroundColor: t.colors.brandBackgroundPressed,
+    color: t.colors.neutralForegroundOnColor,
+    iconColor: t.colors.neutralForegroundOnColor,
   },
   focused: {
-    backgroundColor: t.colors.brandedFocusedBackground,
-    color: t.colors.brandedFocusedContent,
-    borderColor: t.colors.brandedFocusedBorder,
-    iconColor: t.colors.brandedFocusedIcon,
+    backgroundColor: t.colors.brandBackground,
+    color: t.colors.neutralForegroundOnColor,
+    borderColor: t.colors.strokeFocus2,
+    borderInnerColor: t.colors.strokeFocus1,
+    iconColor: t.colors.neutralForegroundOnColor,
+  },
+  subtle: {
+    backgroundColor: t.colors.neutralBackground5,
+    color: t.colors.brandForeground1,
+    iconColor: t.colors.brandForeground1,
+    rippleColor: 'transparent',
+    disabled: {
+      backgroundColor: t.colors.neutralBackgroundDisabled,
+      color: t.colors.neutralForegroundDisabled,
+      iconColor: t.colors.neutralForegroundDisabled,
+    },
+    pressed: {
+      backgroundColor: t.colors.neutralBackground1Pressed,
+      color: t.colors.brandForeground1Pressed,
+      iconColor: t.colors.brandForeground1Pressed,
+    },
+    focused: {
+      backgroundColor: t.colors.neutralBackground5,
+      color: t.colors.brandForeground1,
+      borderColor: t.colors.strokeFocus2,
+      borderInnerColor: t.colors.strokeFocus1,
+      iconColor: t.colors.brandForeground1,
+    },
   },
 });

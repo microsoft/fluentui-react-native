@@ -1,8 +1,5 @@
-import globalTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-global.json';
-
 import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
-
-const fontTokens = globalTokens.font;
+import { createFontAliasTokens } from './createFontAliasTokens.ios';
 
 // The sizes are taken for the Dynamic Type Size "Large", which is the system default
 export function appleTypography(): Typography {
@@ -50,90 +47,7 @@ export function appleTypography(): Typography {
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '600' },
       // iOS styles
-      caption2: {
-        face: fontTokens.family.base,
-        size: fontTokens.size100,
-        weight: fontTokens.weight.regular,
-        lineHeight: fontTokens.lineHeight100,
-        letterSpacing: 0,
-      },
-      caption1: {
-        face: fontTokens.family.base,
-        size: fontTokens.size200,
-        weight: fontTokens.weight.regular,
-        lineHeight: fontTokens.lineHeight200,
-        letterSpacing: -0.08,
-      },
-      caption1Strong: {
-        face: fontTokens.family.base,
-        size: fontTokens.size200,
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight200,
-        letterSpacing: -0.08,
-      },
-      body2: {
-        face: fontTokens.family.base,
-        size: fontTokens.size300,
-        weight: fontTokens.weight.regular,
-        lineHeight: fontTokens.lineHeight300,
-        letterSpacing: -0.23,
-      },
-      body2Strong: {
-        face: fontTokens.family.base,
-        size: fontTokens.size300,
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight300,
-        letterSpacing: -0.23,
-      },
-      body1: {
-        face: fontTokens.family.base,
-        size: fontTokens.size400,
-        weight: fontTokens.weight.regular,
-        lineHeight: fontTokens.lineHeight400,
-        letterSpacing: -0.43,
-      },
-      body1Strong: {
-        face: fontTokens.family.base,
-        size: fontTokens.size400,
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight400,
-        letterSpacing: -0.43,
-      },
-      title3: {
-        face: fontTokens.family.base,
-        size: fontTokens.size500,
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight500,
-        letterSpacing: -0.45,
-      },
-      title2: {
-        face: fontTokens.family.base,
-        size: fontTokens.size600,
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight600,
-        letterSpacing: -0.26,
-      },
-      title1: {
-        face: fontTokens.family.base,
-        size: fontTokens.size700,
-        weight: fontTokens.weight.bold,
-        lineHeight: fontTokens.lineHeight700,
-        letterSpacing: 0.38,
-      },
-      largeTitle: {
-        face: fontTokens.family.base,
-        size: fontTokens.size800,
-        weight: fontTokens.weight.bold,
-        lineHeight: fontTokens.lineHeight800,
-        letterSpacing: 0.4,
-      },
-      display: {
-        face: fontTokens.family.base,
-        size: fontTokens.size900,
-        weight: fontTokens.weight.bold,
-        lineHeight: fontTokens.lineHeight900,
-        letterSpacing: 0.26,
-      },
+      ...createFontAliasTokens(),
     } as Variants,
   };
 

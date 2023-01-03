@@ -95,6 +95,26 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
     *
   </Text>
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -222,6 +242,21 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
   }
 >
   <View
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -326,6 +361,12 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
     }
   }
   accessible={true}
+  android_ripple={
+    Object {
+      "color": undefined,
+      "foreground": true,
+    }
+  }
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
@@ -358,6 +399,16 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
   }
 >
   <View
+    accessible={false}
+    android_ripple={
+      Object {
+        "color": undefined,
+        "foreground": true,
+        "radius": 12,
+      }
+    }
+    focusable={false}
+    onPress={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -424,12 +475,14 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
     style={
       Object {
         "color": "#242424",
+        "dynamicTypeRamp": undefined,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
         "letterSpacing": undefined,
         "lineHeight": undefined,
         "marginStart": 8,
+        "maximumFontSize": undefined,
       }
     }
   >
@@ -496,6 +549,21 @@ exports[`Checkbox component tests Checkbox default 1`] = `
   }
 >
   <View
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -635,6 +703,21 @@ exports[`Checkbox component tests Checkbox no label 1`] = `
   }
 >
   <View
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
