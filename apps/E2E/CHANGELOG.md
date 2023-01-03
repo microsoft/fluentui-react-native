@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 02 Jan 2023 18:05:05 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Jan 2023 20:16:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.7
+
+Tue, 03 Jan 2023 20:16:36 GMT
+
+### Patches
+
+- Overhaul ContextualMenu, Link, and LinkV1 E2E tests with better errors and refactored spec code (winlarry@microsoft.com)
 
 ## 1.8.6
 

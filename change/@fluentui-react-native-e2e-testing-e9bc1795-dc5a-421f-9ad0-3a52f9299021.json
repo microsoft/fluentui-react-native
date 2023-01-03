@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Overhaul ContextualMenu, Link, and LinkV1 E2E tests with better errors and refactored spec code",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
