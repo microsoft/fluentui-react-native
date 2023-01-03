@@ -1,8 +1,67 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.5
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+- Bump @fluentui-react-native/pressable to v0.9.45
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.19.4
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+- Bump @fluentui-react-native/pressable to v0.9.44
+- Bump @fluentui-react-native/text to v0.19.5
+
+## 0.19.3
+
+Thu, 29 Dec 2022 17:19:10 GMT
+
+### Patches
+
+- fix checkbox & regression (rohanpd.work@gmail.com)
+
+## 0.19.2
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.4
+
+## 0.19.1
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/interactive-hooks to v0.22.4
+- Bump @fluentui-react-native/pressable to v0.9.43
+- Bump @fluentui-react-native/text to v0.19.3
+- Bump @fluentui-react-native/theme-tokens to v0.22.5
+- Bump @fluentui-react-native/tokens to v0.20.2
+- Bump @uifabricshared/foundation-compose to v1.12.30
+
+## 0.19.0
+
+Wed, 28 Dec 2022 15:44:42 GMT
+
+### Minor changes
+
+- fix regression on win32 (rohanpd.work@gmail.com)
 
 ## 0.18.7
 

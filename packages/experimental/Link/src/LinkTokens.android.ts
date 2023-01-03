@@ -6,7 +6,7 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
   ({
     color: t.colors.brandForeground1,
     alignSelf: 'flex-start',
-    variant: 'body1',
+    variant: 'caption1Strong',
     inline: {
       textDecorationLine: 'underline',
     },

@@ -8,6 +8,7 @@ import {
   EXPERIMENTAL_LINK_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_LINK_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/LinkExperimental/consts';
+import { testProps } from '../Common/TestProps';
 
 export const LinkE2ETest: React.FunctionComponent = () => {
   const doPress = (): void => {
@@ -18,12 +19,17 @@ export const LinkE2ETest: React.FunctionComponent = () => {
     <Stack style={stackStyle}>
       <Link
         url="https://www.bing.com/"
-        testID={EXPERIMENTAL_LINK_TEST_COMPONENT}
         accessibilityLabel={EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(EXPERIMENTAL_LINK_TEST_COMPONENT)}
       >
         Link with Accessibility Label
       </Link>
-      <Link onPress={doPress} testID={EXPERIMENTAL_LINK_NO_A11Y_LABEL_COMPONENT}>
+      <Link
+        onPress={doPress}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(EXPERIMENTAL_LINK_NO_A11Y_LABEL_COMPONENT)}
+      >
         {EXPERIMENTAL_LINK_TEST_COMPONENT_LABEL}
       </Link>
     </Stack>
