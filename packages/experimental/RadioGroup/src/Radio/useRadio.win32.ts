@@ -57,36 +57,23 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     }
   }, []);
 
-  const isCircularNavigation = true;
-
   const onInvoke = React.useCallback(
     (e: KeyPressEvent) => {
-      if (
-        e.nativeEvent.key == 'ArrowDown' ||
-        e.nativeEvent.key == 'ArrowRight' ||
-        e.nativeEvent.key == 'ArrowUp' ||
-        e.nativeEvent.key == 'ArrowLeft'
-      ) {
-        const length = radioGroupContext.enabledValues.length;
-        const currRadioIndex = radioGroupContext.enabledValues.indexOf(radioGroupContext.value);
-        let newCurrRadioIndex;
-        if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key == 'ArrowRight') {
-          if (isCircularNavigation || !(currRadioIndex + 1 == length)) {
-            newCurrRadioIndex = (currRadioIndex + 1) % length;
-            radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
-            radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
-            radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-            componentRef?.current?.focus();
-          }
-        } else {
-          if (isCircularNavigation || !(currRadioIndex == 0)) {
-            newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
-            radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
-            radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
-            radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-            componentRef?.current?.focus();
-          }
-        }
+      const length = radioGroupContext.enabledValues.length;
+      const currRadioIndex = radioGroupContext.enabledValues.indexOf(radioGroupContext.value);
+      let newCurrRadioIndex;
+      if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key === 'ArrowRight') {
+        newCurrRadioIndex = (currRadioIndex + 1) % length;
+        radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
+        radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
+        radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+        componentRef?.current?.focus();
+      } else if (e.nativeEvent.key === 'ArrowUp' || e.nativeEvent.key === 'ArrowLeft') {
+        newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
+        radioGroupContext.value = radioGroupContext.enabledValues[newCurrRadioIndex];
+        radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
+        radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+        componentRef?.current?.focus();
       }
     },
     [radioGroupContext, componentRef],
