@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 03 Jan 2023 22:50:24 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.9.0",
+      "version": "1.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "c624fd62cd3a7599fd7961f6030af2035bc431f6",
+            "comment": "Add click tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Jan 2023 20:16:36 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.8.7",
       "version": "1.8.7",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 03 Jan 2023 22:50:24 GMT",
+      "tag": "@fluentui-react-native/tester_v0.126.16",
+      "version": "0.126.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c624fd62cd3a7599fd7961f6030af2035bc431f6",
+            "comment": "Update link callback"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Jan 2023 21:35:03 GMT",
       "tag": "@fluentui-react-native/tester_v0.126.15",
       "version": "0.126.15",
