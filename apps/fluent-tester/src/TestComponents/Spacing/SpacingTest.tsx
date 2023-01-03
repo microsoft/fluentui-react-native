@@ -52,10 +52,10 @@ const BasicUsage: React.FunctionComponent = () => {
 export const SpacingTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
-    uwpStatus: 'Backlog',
+    uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    macosStatus: 'Experimental',
+    androidStatus: 'Experimental',
   };
 
   const description = 'This showcases the different spacing tokens available in Fluent UI.';

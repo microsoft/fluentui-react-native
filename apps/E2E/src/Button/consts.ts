@@ -17,7 +17,7 @@ export const BUTTON_ACCESSIBILITY_LABEL = 'E2E testing Button accessibility labe
 
 /* Test Button 2 */
 export const BUTTON_NO_A11Y_LABEL_COMPONENT = 'Button_No_A11y_label_Component';
-export const BUTTON_TEST_COMPONENT_LABEL = 'Test Button2 - No Accessibility Label'; // A component on each specific test page
+export const BUTTON_TEST_COMPONENT_LABEL = 'Test Button2 - No Accessibility Label + Custom Role'; // A component on each specific test page
 
 /* Test Button 3 */
 export const BUTTON_PRESS_TEST_COMPONENT = 'Button_Press_Test_Component';
