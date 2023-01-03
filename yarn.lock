@@ -1465,6 +1465,28 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.36.0.tgz#d0ad552c0176af5596896b96ee8029952f5f4415"
   integrity sha512-sz2a+LtcJSn1fL4mydeE8NL5kKnWfLkk5kgkRKxO3DKCMghDMf0Yp0e0+a9oHSZrFemhJv8oZSok10VKjqeWAw==
 
+"@fluentui-react-native/experimental-icon@>=0.1.11 <1.0.0":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/experimental-icon/-/experimental-icon-0.1.11.tgz#e58ebbeab9a0a5960a532dc4f6adef83dbd58e7d"
+  integrity sha512-4g5puOED+A5Oo/06tyEpmz4ciTAq8Gh1saKYFnF6iaBoQ9mE3mMxbNfVFmqYnV54zUM/3leP9xE+o8eKGTFXxg==
+  dependencies:
+    "@fluentui-react-native/adapters" "^0.10.0"
+    "@fluentui-react-native/framework" ">=0.8.30 <1.0.0"
+    react-native-svg "12.5.0"
+
+"@fluentui-react-native/icon@0.16.9", "@fluentui-react-native/icon@^0.16.9":
+  version "0.16.9"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/icon/-/icon-0.16.9.tgz#fed8234b4170ffa007263a264914ac16ba65b172"
+  integrity sha512-CxNopiZLj0EP2EKghlxLPaaAWRLV1rnXTkGLPGd3doKnz5/Cb7IYTeUY6FsCFrMZfY/hpwlMeU0nmyn3JzZYRQ==
+  dependencies:
+    "@fluentui-react-native/default-theme" ">=0.16.20 <1.0.0"
+    "@fluentui-react-native/framework" "0.8.30"
+    "@fluentui-react-native/text" "^0.19.6"
+    "@fluentui-react-native/theme-types" ">=0.28.0 <1.0.0"
+    "@fluentui-react-native/theming-utils" ">=0.21.0 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.20.2 <1.0.0"
+    react-native-svg "12.5.0"
+
 "@fortawesome/fontawesome-common-types@6.2.1":
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.2.1.tgz#411e02a820744d3f7e0d8d9df9d82b471beaa073"

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Icon, SvgIcon, FontIcon, FontIconProps } from '../';
+import { IconV1, SvgIcon, FontIcon, FontIconPropsV1 } from '../';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Path, Svg } from 'react-native-svg';
-const fontProps: FontIconProps = {
+const fontProps: FontIconPropsV1 = {
   fontFamily: 'Arial',
   codepoint: 0x2663,
   color: '#f07',
@@ -28,7 +28,7 @@ describe('Icon component tests', () => {
   });
 
   it('renders Font Icon using Icon component', () => {
-    const tree = renderer.create(<Icon fontSource={fontProps} />).toJSON();
+    const tree = renderer.create(<IconV1 fontSource={fontProps} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
@@ -38,7 +38,7 @@ describe('Icon component tests', () => {
   });
 
   it('renders SVG Icon using Icon component', () => {
-    const tree = renderer.create(<Icon svgSource={{ src: AccessTime20RegularIcon, width: 20, height: 20 }} />).toJSON();
+    const tree = renderer.create(<IconV1 svgSource={{ src: AccessTime20RegularIcon, width: 20, height: 20 }} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
