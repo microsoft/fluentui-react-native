@@ -4,7 +4,7 @@ import {
   BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED,
   HOMEPAGE_BUTTON_BUTTON,
   BUTTON_ON_PRESS_DEPRECATED,
-} from '../../../../fluent-tester/src/TestComponents/Button/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
@@ -62,6 +62,10 @@ class ButtonPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_BUTTON_BUTTON);
+  }
+
+  get _pageButtonName() {
+    return HOMEPAGE_BUTTON_BUTTON;
   }
 }
 

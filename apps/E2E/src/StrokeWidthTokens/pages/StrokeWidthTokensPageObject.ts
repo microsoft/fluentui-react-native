@@ -1,4 +1,4 @@
-import { STROKEWIDTH_TESTPAGE, HOMEPAGE_STROKEWIDTH_BUTTON } from '../../../../fluent-tester/src/TestComponents/StrokeWidth/consts';
+import { STROKEWIDTH_TESTPAGE, HOMEPAGE_STROKEWIDTH_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class StrokeWidthTokensPageObject extends BasePage {

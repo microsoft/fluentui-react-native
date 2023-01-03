@@ -8,7 +8,8 @@ import {
   MENU_BUTTON_ACCESSIBILITY_LABEL,
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   MENU_BUTTON_TEST_COMPONENT_LABEL,
-} from './consts';
+} from '../../../../E2E/src/MenuButton/consts';
+import { testProps } from '../Common/TestProps';
 
 export const E2ETestMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
@@ -41,8 +42,9 @@ export const E2ETestMenuButton: React.FunctionComponent = () => {
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-                testID={MENU_BUTTON_TEST_COMPONENT}
                 accessibilityLabel={MENU_BUTTON_ACCESSIBILITY_LABEL}
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                {...testProps(MENU_BUTTON_TEST_COMPONENT)}
               />
             </View>
           </View>
@@ -53,7 +55,8 @@ export const E2ETestMenuButton: React.FunctionComponent = () => {
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-                testID={MENU_BUTTON_NO_A11Y_LABEL_COMPONENT}
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                {...testProps(MENU_BUTTON_NO_A11Y_LABEL_COMPONENT)}
               />
             </View>
           </View>

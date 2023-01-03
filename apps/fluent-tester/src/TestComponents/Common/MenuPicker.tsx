@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Picker } from '@react-native-picker/picker';
+import { testProps } from './TestProps';
 
 /*
  * The MenuPicker was created because the RN Core Picker was deprecated (preventing us from updating to RN 0.66).
@@ -33,14 +34,20 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
 
   return (
     <Picker
-      testID={testID}
       prompt={prompt}
       selectedValue={selectedItemKey}
       onValueChange={(value: string, index: number) => onChange(value, index)}
       style={{ ...style }}
+      /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+      {...testProps(testID)}
     >
       {collection.map((item, index) => (
-        <Picker.Item label={item.label} key={index} value={item.value} testID={item.testID} />
+        <Picker.Item
+          label={item.label}
+          key={index}
+          value={item.value} /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(item.testID)}
+        />
       ))}
     </Picker>
   );

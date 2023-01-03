@@ -2,7 +2,8 @@ import * as React from 'react';
 import { ScreenRect, View } from 'react-native';
 import { ButtonV1 as Button, Callout, Text, DismissBehaviors } from '@fluentui/react-native';
 import { Switch } from '@fluentui-react-native/switch';
-import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL, CALLOUT_TEST_COMPONENT } from './consts';
+import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL, CALLOUT_TEST_COMPONENT } from '../../../../E2E/src/Callout/consts';
+import { testProps } from '../Common/TestProps';
 
 export const E2ECalloutTest: React.FunctionComponent = () => {
   const [showCallout, setShowCallout] = React.useState(false);
@@ -42,7 +43,11 @@ export const E2ECalloutTest: React.FunctionComponent = () => {
             />
           ))}
         </View>
-        <Button onClick={toggleShowCallout} testID={BUTTON_TO_OPEN_CALLOUT}>
+        <Button
+          onClick={toggleShowCallout}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(BUTTON_TO_OPEN_CALLOUT)}
+        >
           Press for Callout
         </Button>
         <Text selectable={true}>
@@ -53,7 +58,6 @@ export const E2ECalloutTest: React.FunctionComponent = () => {
 
       {showCallout && (
         <Callout
-          testID={CALLOUT_TEST_COMPONENT}
           anchorRect={myRect}
           onDismiss={onDismissCallout}
           onShow={onShowCallout}
@@ -61,6 +65,8 @@ export const E2ECalloutTest: React.FunctionComponent = () => {
           accessibilityRole="alert"
           accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
           dismissBehaviors={Object.keys(dismissBehaviors).filter((behavior) => dismissBehaviors[behavior]) as DismissBehaviors[]}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(CALLOUT_TEST_COMPONENT)}
         >
           <View style={{ padding: 20, borderWidth: 2, borderColor: 'black' }}>
             <Text>just some text so it does not take focus and is not empty.</Text>

@@ -4,7 +4,7 @@ import {
   EXPERIMENTAL_CHECKBOX_TEST_COMPONENT,
   EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_CHECKBOX_ON_PRESS,
-} from '../../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
@@ -81,6 +81,10 @@ class ExperimentalCheckboxPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
+  }
+
+  get _pageButtonName() {
+    return HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON;
   }
 }
 

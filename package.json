@@ -40,7 +40,6 @@
     "@babel/preset-typescript": "^7.8.0",
     "@rnx-kit/dep-check": "^1.10.1",
     "babel-jest": "^24.9.0",
-    "babel-plugin-module-resolver": "^4.0.0",
     "beachball": "^2.20.0",
     "lage": "^1.5.0",
     "markdown-link-check": "^3.8.7",
@@ -63,7 +62,9 @@
       "@fluentui-react-native/e2e-testing/appium-windows-driver",
       "@fluentui-react-native/e2e-testing/appium-mac2-driver",
       "@fluentui-react-native/e2e-testing/appium-xcuitest-driver",
-      "@fluentui-react-native/tester-win32/appium-windows-driver"
+      "@fluentui-react-native/tester-win32/appium-windows-driver",
+      "@fluentui-react-native/e2e-testing/appium-uiautomator2-driver",
+      "@fluentui-react-native/e2e-testing/appium-uiautomator2-server"
     ]
   },
   "resolutions": {

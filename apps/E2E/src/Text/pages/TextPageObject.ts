@@ -6,7 +6,7 @@ import {
   V1_TEXT_SECOND_COMPONENT,
   DEPRECATED_TEXT_FIRST_COMPONENT,
   DEPRECATED_TEXT_SECOND_COMPONENT,
-} from '../../../../fluent-tester/src/TestComponents/Text/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 export const enum TextComponentSelector {

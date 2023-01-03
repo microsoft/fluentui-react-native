@@ -1,6 +1,5 @@
 import { Keys, ROOT_VIEW } from './consts';
-import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../../fluent-tester/src/TestComponents/Common/consts';
-import { Attribute, attributeToEnumName } from './consts';
+import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
@@ -163,7 +162,20 @@ export abstract class BasePage {
       }
       default:
       case MobilePlatform.Android:
-        // Todo
+        /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
+         * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
+         * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
+        await browser.waitUntil(
+          async () => {
+            const buttonElementSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_BUTTONS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).setAsVerticalList().scrollIntoView(new UiSelector().description("${this._pageButtonName}"))`;
+            const pageButton = await $(`android=${buttonElementSelector}`);
+            return await pageButton.isDisplayed();
+          },
+          {
+            timeout: this.waitForUiEvent,
+            timeoutMsg: errorMsg,
+          },
+        );
         break;
     }
   }
@@ -290,6 +302,12 @@ export abstract class BasePage {
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
   abstract get _pageName(): string;
+
+  // Returns: String
+  // Returns the name of the button that navigates to the test page.
+  get _pageButtonName(): string {
+    return DUMMY_CHAR;
+  }
 
   // The scrollviewer containing the list of buttons to navigate to each test page
   get _testPageButtonScrollViewer() {

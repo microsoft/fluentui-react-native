@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { SPACING_TESTPAGE } from '../../../../E2E/src/Spacing/consts';
 
 const BasicUsage: React.FunctionComponent = () => {
   function spacingExample(tokenName: string, spacing?: number | string) {
@@ -51,10 +52,10 @@ const BasicUsage: React.FunctionComponent = () => {
 export const SpacingTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
-    uwpStatus: 'Backlog',
+    uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    macosStatus: 'Experimental',
+    androidStatus: 'Experimental',
   };
 
   const description = 'This showcases the different spacing tokens available in Fluent UI.';
@@ -62,6 +63,7 @@ export const SpacingTokensTest: React.FunctionComponent = () => {
   const spacingSections: TestSection[] = [
     {
       name: 'Basic Usage',
+      testID: SPACING_TESTPAGE,
       component: BasicUsage,
     },
   ];
