@@ -123,7 +123,7 @@ describe('RadioGroup Legacy Functional Testing', async () => {
         RadioButton.Second,
         'Clicked the second RadioButton, but it failed to be selected.',
       ),
-    ).toBeTruthy();
+    ).toBeTrue();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -138,7 +138,7 @@ describe('RadioGroup Legacy Functional Testing', async () => {
         RadioButton.Second,
         'Pressed "Down Arrow" on the first RadioButton, but the second RadioButton failed to be selected.',
       ),
-    ).toBeTruthy();
+    ).toBeTrue();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -153,7 +153,7 @@ describe('RadioGroup Legacy Functional Testing', async () => {
         RadioButton.Fourth,
         'Pressed "Down Arrow" on the second RadioButton, but the fourth RadioButton failed to be selected. The third RadioButton is disabled so it should be skipped.',
       ),
-    ).toBeTruthy(); // It should skip RadioButton 3 since it is disabled
+    ).toBeTrue(); // It should skip RadioButton 3 since it is disabled
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
