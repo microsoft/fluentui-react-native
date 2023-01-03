@@ -42,7 +42,7 @@ export const TextExperimentalTest: React.FunctionComponent = () => {
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Beta',
+    androidStatus: 'Experimental',
   };
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';

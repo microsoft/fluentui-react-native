@@ -1,8 +1,52 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 27 Dec 2022 22:21:15 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.9
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.55
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/icon to v0.16.9
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.4.8
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.54
+- Bump @fluentui-react-native/icon to v0.16.8
+- Bump @fluentui-react-native/text to v0.19.5
+
+## 0.4.7
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.16.7
+- Bump @fluentui-react-native/text to v0.19.4
+
+## 0.4.6
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.53
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/icon to v0.16.6
+- Bump @fluentui-react-native/text to v0.19.3
+- Bump @fluentui-react-native/theme-tokens to v0.22.5
+- Bump @fluentui-react-native/theme-types to v0.28.0
+- Bump @fluentui-react-native/tokens to v0.20.2
 
 ## 0.4.5
 

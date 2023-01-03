@@ -50,7 +50,7 @@ const Panel: React.FunctionComponent = () => {
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
-      <Text testID={THEME_TESTPAGE}>This is a text element</Text>
+      <Text>This is a text element</Text>
       <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
     </View>
   );
@@ -103,6 +103,7 @@ const SwatchList: React.FunctionComponent = () => {
 const themeSections: TestSection[] = [
   {
     name: 'Component Examples',
+    testID: THEME_TESTPAGE,
     component: Panel,
   },
   {

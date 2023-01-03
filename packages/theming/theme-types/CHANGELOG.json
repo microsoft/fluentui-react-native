@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Thu, 29 Dec 2022 03:47:47 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.28.0",
+      "version": "0.28.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adam.gleitman@gmail.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "6d8afaea8495b16c2acd8aa4d1de62036110968c",
+            "comment": "Define `FontWeightValue` in terms of what RN says"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Dec 2022 22:21:15 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.27.1",
       "version": "0.27.1",
