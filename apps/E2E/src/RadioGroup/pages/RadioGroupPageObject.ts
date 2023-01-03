@@ -35,7 +35,7 @@ class RadioGroupPage extends BasePage {
     return await (await this.getRadioButton(selector)).isSelected();
   }
 
-  async waitForRadioButtonSelected(selector: RadioButton, errorMsg?: string): Promise<boolean> {
+  async waitForRadioButtonSelected(selector: RadioButton, errorMsg: string): Promise<boolean> {
     await this.waitForCondition(
       async () => await this.isRadioButtonSelected(selector),
       errorMsg ?? `RadioButton ${selector} failed to be selected.`,
