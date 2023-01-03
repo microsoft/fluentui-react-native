@@ -78,7 +78,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
   // Sets the updated selected button ref and focus if this Radio is selected via arrow key.
   React.useEffect(() => {
     if (radioGroupContext.invoked && value === radioGroupContext.value && !isDisabled) {
-      // radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
       radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
       componentRef?.current?.focus();
       radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(false);
