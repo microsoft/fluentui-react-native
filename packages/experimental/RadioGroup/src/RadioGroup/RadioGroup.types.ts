@@ -15,7 +15,7 @@ export interface RadioGroupState extends RadioGroupProps {
   /**
    * Updates the selected button and calls the client’s onChange callback
    */
-  onChange?: (key: string) => void;
+  onChange?: (value: string) => void;
 
   /**
    * Updates the selected button's ref to set as the default tabbable element
@@ -37,6 +37,18 @@ export interface RadioGroupState extends RadioGroupProps {
    * @platform win32
    */
   enabledValues?: string[];
+
+  /**
+   * Updates invoked to signal that arrow key has been pressed and focus needs to be set
+   * @platform win32
+   */
+  updateInvoked?: (check: boolean) => void;
+
+  /**
+   * Signals whether arrow key has been pressed
+   * @platform win32
+   */
+  invoked?: boolean;
 }
 
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {

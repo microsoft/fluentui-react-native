@@ -65,24 +65,25 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key === 'ArrowRight') {
         newCurrRadioIndex = (currRadioIndex + 1) % length;
         radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.enabledValues[newCurrRadioIndex]);
-        radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+        radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(true);
       } else if (e.nativeEvent.key === 'ArrowUp' || e.nativeEvent.key === 'ArrowLeft') {
         newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
         radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.enabledValues[newCurrRadioIndex]);
-        radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+        radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(true);
       }
     },
-    [radioGroupContext, componentRef],
+    [radioGroupContext],
   );
 
-  // Sets the focus on this Radio if this Radio is selected.
+  // Sets the focus on this Radio if this Radio is selected via arrow key.
   React.useEffect(() => {
-    if (value === radioGroupContext.value && !isDisabled) {
-      radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
+    if (radioGroupContext.invoked && value === radioGroupContext.value && !isDisabled) {
+      // radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.value);
       radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
       componentRef?.current?.focus();
+      radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(false);
     }
-  }, [radioGroupContext.value]);
+  }, [radioGroupContext.invoked]);
 
   const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
 

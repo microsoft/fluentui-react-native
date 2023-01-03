@@ -21,6 +21,15 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     [setSelectedButtonRef],
   );
 
+  const [invoked, setInvoked] = React.useState(false);
+
+  const onInvoked = React.useCallback(
+    (check: boolean) => {
+      setInvoked(check);
+    },
+    [setInvoked],
+  );
+
   const state: RadioGroupState = {
     value: data.selectedKey,
     required: required || false,
@@ -28,6 +37,8 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     layout: layout || 'vertical',
     onChange: data.onKeySelect,
     updateSelectedButtonRef: onSelectButtonRef,
+    invoked: invoked,
+    updateInvoked: onInvoked,
   };
 
   return {
