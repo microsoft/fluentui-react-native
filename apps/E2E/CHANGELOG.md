@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 03 Jan 2023 22:50:24 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Jan 2023 23:38:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.9.1
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Rename experimental to v1, add legacy to test names (ruaraki@microsoft.com)
 
 ## 1.9.0
 

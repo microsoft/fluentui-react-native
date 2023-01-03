@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Rename experimental to v1, add legacy to test names",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

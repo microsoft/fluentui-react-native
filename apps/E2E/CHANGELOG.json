@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 03 Jan 2023 23:38:40 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.9.1",
+      "version": "1.9.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4ba3eb0acc4abbce94655bfcc8037f1656c92289",
+            "comment": "Rename experimental to v1, add legacy to test names"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Jan 2023 22:50:24 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.9.0",
       "version": "1.9.0",
