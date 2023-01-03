@@ -128,7 +128,7 @@ describe('RadioGroup Functional Testing', async () => {
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press "Arrow Key" on a RadioButton. Validate adjacent RadioButton is newly selected.', async () => {
+  it('Press forward "Arrow Key" on a RadioButton. Validate adjacent RadioButton is newly selected.', async () => {
     // Presses the ArrowDown key while the first (A) RadioButton is selected
     await RadioGroupPageObject.sendKeys(RadioGroupPageObject.getRadioButton(RadioButton.First), [Keys.ARROW_DOWN]);
 
@@ -143,7 +143,7 @@ describe('RadioGroup Functional Testing', async () => {
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press "Arrow Key" on a RadioButton adjacent to a disabled RadioButton. Validate disabled RadioButton is skipped and the RadioButton after is newly selected.', async () => {
+  it('Press forward "Arrow Key" on a RadioButton adjacent to a disabled RadioButton. Validate disabled RadioButton is skipped.', async () => {
     // Presses the ArrowDown key while the second (B) RadioButton is selected
     await RadioGroupPageObject.sendKeys(RadioGroupPageObject.getRadioButton(RadioButton.Second), [Keys.ARROW_DOWN]);
 
