@@ -69,7 +69,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       }
       radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.enabledValues[newCurrRadioIndex]);
       radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
-      componentRef?.current?.focus();
     },
     [radioGroupContext, componentRef],
   );
@@ -81,7 +80,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
       componentRef?.current?.focus();
     }
-  }, [radioGroupContext]);
+  }, [radioGroupContext.value]);
 
   const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'];
 
