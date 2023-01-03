@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import RadioGroupExperimentalPageObject, { RadioSelector } from '../pages/RadioGroupExperimentalPageObject';
-import { ComponentSelector } from '../../common/BasePage';
-import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
+import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, Attribute } from '../../common/consts';
 import {
   EXPERIMENTAL_RADIOGROUP_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT_LABEL,
@@ -33,38 +32,74 @@ describe('RadioGroup/Radio Accessibility Testing', () => {
   });
 
   it("Validate RadioGroup's accessibilityRole is correct", async () => {
-    await expect(await RadioGroupExperimentalPageObject.getAccessibilityRole()).toEqual(RADIOGROUP_A11Y_ROLE);
+    await expect(
+      await RadioGroupExperimentalPageObject.compareAttribute(
+        RadioGroupExperimentalPageObject._primaryComponent,
+        Attribute.AccessibilityRole,
+        RADIOGROUP_A11Y_ROLE,
+      ),
+    ).toBeTrue();
+
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it("Validate Radio's accessibilityRole is correct", async () => {
-    await expect(await RadioGroupExperimentalPageObject.getRadioAccesibilityRole()).toEqual(RADIOBUTTON_A11Y_ROLE);
+    await expect(
+      await RadioGroupExperimentalPageObject.compareAttribute(
+        RadioGroupExperimentalPageObject.getRadio(RadioSelector.First),
+        Attribute.AccessibilityRole,
+        RADIOBUTTON_A11Y_ROLE,
+      ),
+    ).toBeTrue();
+
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('RadioGroup - Set accessibilityLabel', async () => {
-    await expect(await RadioGroupExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
-      EXPERIMENTAL_RADIOGROUP_ACCESSIBILITY_LABEL,
-    );
+    await expect(
+      await RadioGroupExperimentalPageObject.compareAttribute(
+        RadioGroupExperimentalPageObject._primaryComponent,
+        Attribute.AccessibilityLabel,
+        EXPERIMENTAL_RADIOGROUP_ACCESSIBILITY_LABEL,
+      ),
+    ).toBeTrue();
+
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('RadioGroup - Do not set accessibilityLabel -> Default to RadioGroup label', async () => {
-    await expect(await RadioGroupExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-      EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT_LABEL,
-    );
+    await expect(
+      await RadioGroupExperimentalPageObject.compareAttribute(
+        RadioGroupExperimentalPageObject._secondaryComponent,
+        Attribute.AccessibilityLabel,
+        EXPERIMENTAL_RADIOGROUP_TEST_COMPONENT_LABEL,
+      ),
+    ).toBeTrue();
+
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Radio - Set accessibilityLabel', async () => {
-    await expect(await RadioGroupExperimentalPageObject.getRBAccessibilityLabel(RadioSelector.First)).toEqual(
-      FIRST_RADIO_ACCESSIBILITY_LABEL,
-    );
+    await expect(
+      await RadioGroupExperimentalPageObject.compareAttribute(
+        RadioGroupExperimentalPageObject.getRadio(RadioSelector.First),
+        Attribute.AccessibilityLabel,
+        FIRST_RADIO_ACCESSIBILITY_LABEL,
+      ),
+    ).toBeTrue();
+
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Radio - Do not set accessibilityLabel -> Default to RadioButton label', async () => {
-    await expect(await RadioGroupExperimentalPageObject.getRBAccessibilityLabel(RadioSelector.Second)).toEqual(SECOND_RADIO_LABEL);
+    await expect(
+      await RadioGroupExperimentalPageObject.compareAttribute(
+        RadioGroupExperimentalPageObject.getRadio(RadioSelector.Second),
+        Attribute.AccessibilityLabel,
+        SECOND_RADIO_LABEL,
+      ),
+    ).toBeTrue();
+
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 });
@@ -79,54 +114,49 @@ describe('RadioGroup Functional Testing', async () => {
 
   it('Click on a Radio and ensure it changes state from unselected -> selected', async () => {
     /* Validate the Radio is not initially selected */
-    await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.Second)).toBeFalsy();
+    await expect(await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Second)).toBeFalsy();
 
     /* Click on the Radio to select it */
-    await RadioGroupExperimentalPageObject.clickRadio(RadioSelector.Second);
-    await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Second, PAGE_TIMEOUT);
+    await RadioGroupExperimentalPageObject.click(RadioGroupExperimentalPageObject.getRadio(RadioSelector.Second));
 
     /* Validate the Radio is selected */
-    await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.Second)).toBeTruthy();
+    await expect(await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Second)).toBeTruthy();
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Keyboard to Radio and check for Selection state', async () => {
     // Presses the ArrowDown key while the first (A) Radio is selected
-    await RadioGroupExperimentalPageObject.sendKey(Keys.ARROW_DOWN, RadioSelector.First);
-    await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Second, 5000);
+    await RadioGroupExperimentalPageObject.sendKeys(RadioGroupExperimentalPageObject.getRadio(RadioSelector.First), [Keys.ARROW_DOWN]);
 
     /* Validate the Radio is selected */
-    await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.Second)).toBeTruthy();
+    await expect(await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Second)).toBeTruthy();
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it("Keyboard to DISABLED Radio and validate it doesn't get selected", async () => {
     // Presses the ArrowDown key while the second (B) Radio is selected
-    await RadioGroupExperimentalPageObject.sendKey(Keys.ARROW_DOWN, RadioSelector.Second);
-    await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Fourth, 5000); // It should skip RadioButton 3 since it is disabled
+    await RadioGroupExperimentalPageObject.sendKeys(RadioGroupExperimentalPageObject.getRadio(RadioSelector.Second), [Keys.ARROW_DOWN]);
 
     /* Validate the Radio is selected */
-    await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.Fourth)).toBeTruthy();
+    await expect(await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Fourth)).toBeTruthy();
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate circular navigation', async () => {
     // Presses the ArrowDown key while the fourth (D) Radio is selected
-    await RadioGroupExperimentalPageObject.sendKey(Keys.ARROW_DOWN, RadioSelector.Fourth);
-    await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.First, 5000); // It should go to first Radio to follow circular navigation
+    await RadioGroupExperimentalPageObject.sendKeys(RadioGroupExperimentalPageObject.getRadio(RadioSelector.Fourth), [Keys.ARROW_DOWN]);
 
     /* Validate the Radio is selected */
-    await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.First)).toBeTruthy();
+    await expect(await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.First)).toBeTruthy();
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate tab out of RadioGroup', async () => {
     // Presses the Tab key while the second (B) Radio is selected in first RadioGroup
-    await RadioGroupExperimentalPageObject.sendKey(Keys.TAB, RadioSelector.Second);
-    await RadioGroupExperimentalPageObject.waitForRadioFocused(RadioSelector.Fifth, 5000);
+    await RadioGroupExperimentalPageObject.sendKeys(RadioGroupExperimentalPageObject.getRadio(RadioSelector.Second), [Keys.TAB]);
 
     /* Validate the Radio is not focused */
-    await expect(await RadioGroupExperimentalPageObject.isRadioFocused(RadioSelector.Fifth)).toBeTruthy();
+    await expect(await RadioGroupExperimentalPageObject.waitForRadioFocused(RadioSelector.Fifth)).toBeTruthy();
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 });

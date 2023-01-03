@@ -16,7 +16,7 @@ import { Attribute, AttributeValue } from '../../common/consts';
  * The main RadioGroup we are testing has FOUR Radios. The spec file will
  * import this enum to easily write tests using these 4 radio buttons. */
 export const enum RadioSelector {
-  First = 0, // this._firstRadio
+  First = 1, // this._firstRadio
   Second, // this._secondRadio
   Third, // this._thirdRadio
   Fourth, // this._fourthRadio
@@ -27,19 +27,11 @@ class RadioGroupExperimentalPage extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  // Get Radio's accessibilityLabel
-  async getRBAccessibilityLabel(radioSelector: RadioSelector): Promise<string> {
-    return await (await this.getRadio(radioSelector)).getAttribute('Name');
-  }
 
   /* This resets the RadioGroup selection by clicking/selecting the 1st Radio in the RadioGroup.
    * Useful in beforeEach() hooks to reset the RadioGroup before additional tests */
   async resetRadioGroupSelection(): Promise<void> {
-    await (await this._firstRadio).click();
-  }
-
-  async getRadioAccesibilityRole(): Promise<string> {
-    return await (await this._firstRadio).getAttribute('ControlType');
+    await (await this.getRadio(RadioSelector.First)).click();
   }
 
   async isRadioSelected(radioSelector: RadioSelector): Promise<boolean> {
@@ -47,46 +39,40 @@ class RadioGroupExperimentalPage extends BasePage {
   }
 
   async isRadioFocused(radioSelector: RadioSelector): Promise<boolean> {
-    return (await this.getElementAttribute(await this.getRadio(radioSelector), Attribute.IsFocused)) == AttributeValue.true;
+    return this.compareAttribute(this.getRadio(radioSelector), Attribute.IsFocused, AttributeValue.true);
   }
 
-  async clickRadio(radioSelector: RadioSelector): Promise<void> {
-    await (await this.getRadio(radioSelector)).click();
+  async waitForRadioSelected(radioSelector: RadioSelector, errorMsg?: string, timeout?: number): Promise<boolean> {
+    await this.waitForCondition(
+      async () => await this.isRadioSelected(radioSelector),
+      errorMsg ?? `RadioButton #${radioSelector} failed to be selected before the timeout.`,
+      timeout,
+    );
+    return await this.isRadioSelected(radioSelector);
   }
 
-  async waitForRadioSelected(radioSelector: RadioSelector, timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isRadioSelected(radioSelector), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'Radio was not selected correctly.',
-      interval: 1000,
-    });
-  }
-
-  async waitForRadioFocused(radioSelector: RadioSelector, timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isRadioFocused(radioSelector), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'Radio was not focused correctly.',
-      interval: 1000,
-    });
-  }
-
-  /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(key: string, radioSelector: RadioSelector): Promise<void> {
-    await (await this.getRadio(radioSelector)).addValue(key);
+  async waitForRadioFocused(radioSelector: RadioSelector, errorMsg?: string, timeout?: number): Promise<boolean> {
+    await this.waitForCondition(
+      async () => await this.isRadioFocused(radioSelector),
+      errorMsg ?? `RadioButton #${radioSelector} failed to be focused before the timeout.`,
+      timeout,
+    );
+    return await this.isRadioFocused(radioSelector);
   }
 
   /* Returns the correct WebDriverIO element from the Radio Selector */
   async getRadio(radioSelector: RadioSelector): Promise<WebdriverIO.Element> {
-    if (radioSelector == RadioSelector.First) {
-      return await this._firstRadio;
-    } else if (radioSelector == RadioSelector.Second) {
-      return await this._secondRadio;
-    } else if (radioSelector == RadioSelector.Third) {
-      return await this._thirdRadio;
-    } else if (radioSelector == RadioSelector.Fourth) {
-      return await this._fourthRadio;
-    } else {
-      return await this._fifthRadio;
+    switch (radioSelector) {
+      case RadioSelector.First:
+        return By(FIRST_RADIO);
+      case RadioSelector.Second:
+        return By(SECOND_RADIO);
+      case RadioSelector.Third:
+        return By(THIRD_RADIO);
+      case RadioSelector.Fourth:
+        return By(FOURTH_RADIO);
+      case RadioSelector.Fifth:
+        return By(FIFTH_RADIO);
     }
   }
 
@@ -111,31 +97,6 @@ class RadioGroupExperimentalPage extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON);
-  }
-
-  /***************/
-  /* Radio *
-  /**************/
-
-  /* The first RadioGroup has 4 radio buttons, all listed below */
-  get _firstRadio() {
-    return By(FIRST_RADIO);
-  }
-
-  get _secondRadio() {
-    return By(SECOND_RADIO);
-  }
-
-  get _thirdRadio() {
-    return By(THIRD_RADIO);
-  }
-
-  get _fourthRadio() {
-    return By(FOURTH_RADIO);
-  }
-
-  get _fifthRadio() {
-    return By(FIFTH_RADIO);
   }
 }
 
