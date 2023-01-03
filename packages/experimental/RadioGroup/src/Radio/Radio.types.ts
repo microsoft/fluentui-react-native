@@ -1,9 +1,9 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, IColorTokens } from '@fluentui-react-native/tokens';
-import { IPressableProps } from '@fluentui-react-native/pressable';
-import { IFocusable, IPressableHooks } from '@fluentui-react-native/interactive-hooks';
-import { ColorValue } from 'react-native';
+import { IFocusable, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import { ColorValue, ViewStyle } from 'react-native';
+import { Variant } from '@fluentui-react-native/framework';
 
 export const radioName = 'Radio';
 
@@ -12,6 +12,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
    * Indicator border color
    */
   radioBorder?: ColorValue;
+
+  /**
+   * Indicator border color
+   */
+  radioBorderStyle?: ViewStyle['borderStyle'];
 
   /**
    * Inner circle color when selected
@@ -39,8 +44,75 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorderWidth?: number;
 
   /**
+   * The flex direction of the root
+   */
+  flexDirection?: ViewStyle['flexDirection'];
+
+  /**
+   * Root item alignment
+   */
+  alignItems?: ViewStyle['alignItems'];
+
+  /**
+   * The top margin
+   */
+  marginTop?: ViewStyle['marginTop'];
+
+  /**
+   * The right margin
+   */
+  marginRight?: ViewStyle['marginRight'];
+
+  /**
+   * The bottom margin
+   */
+  marginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * The left margin
+   */
+  marginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Label's top margin.
+   */
+  labelMarginTop?: ViewStyle['marginTop'];
+
+  /**
+   * Padding between label content and focus ring.
+   */
+  labelMarginRight?: ViewStyle['marginRight'];
+
+  /**
+   * Padding between label content and focus ring.
+   */
+  labelMarginLeft?: ViewStyle['marginLeft'];
+
+  /*
+   * Variant of label subtext.
+   *
+   * Should only by used if subtext prop is provided.
+   */
+  subtextVariant?: keyof Variant;
+
+  /**
+   * Padding between label and label subtext.
+   *
+   * Should only by used if subtext prop is provided.
+   */
+  subtextMarginTop?: ViewStyle['marginTop'];
+
+  /**
+   * Padding between label subtext and focus ring.
+   *
+   * Should only by used if subtext prop is provided.
+   */
+  subtextMarginBottom?: ViewStyle['marginBottom'];
+
+  /**
    * States that can be applied to a Radio
    */
+  labelPositionBelow?: RadioTokens;
   selected?: RadioTokens;
   disabled?: RadioTokens;
   hovered?: RadioTokens;
@@ -48,11 +120,16 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   pressed?: RadioTokens;
 }
 
-export interface RadioProps extends IPressableProps {
+export interface RadioProps extends PressablePropsExtended {
   /**
    * The text string for the option
    */
   label: string;
+
+  /**
+   * Label subtext for the option
+   */
+  subtext?: string;
 
   /**
    * A unique key-identifier for each option
@@ -63,6 +140,16 @@ export interface RadioProps extends IPressableProps {
    * Whether or not the radio button is selectable
    */
   disabled?: boolean;
+
+  /**
+   * The position of the label relative to the radio indicator.
+   *
+   * This defaults to 'after' unless the Radio is inside a RadioGroup with layout horizontal-stacked,
+   * in which case it defaults to 'below'
+   *
+   * @default after
+   */
+  labelPosition?: 'after' | 'below';
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
@@ -76,13 +163,18 @@ export interface RadioProps extends IPressableProps {
   enableFocusRing?: boolean;
 }
 
-export interface RadioState extends IPressableHooks<RadioProps & React.ComponentPropsWithRef<any>> {}
+export interface RadioInfo {
+  props: RadioProps & React.ComponentPropsWithRef<any>;
+  state: PressableState;
+}
 
 export interface RadioSlotProps {
   root: IViewProps;
   button: IViewProps;
   innerCircle: IViewProps;
+  labelContent: IViewProps;
   label: TextProps;
+  subtext?: TextProps;
 }
 
 export interface RadioType {

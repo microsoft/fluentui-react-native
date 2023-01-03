@@ -1,11 +1,14 @@
 *.binlog
+*.bundle
 *.hprof
+*.jsbundle
 *.xcworkspace/
 *.zip
 .DS_Store
 .gradle/
 .idea/
 .vs/
+.xcode.env
 Pods/
 build/
 dist/

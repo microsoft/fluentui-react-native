@@ -9,7 +9,8 @@ type TwoLevelPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 export interface Spacing {
   s2: string;
   s1: string;
-  m: string;
+  m?: string;
+  // m is now defined as a v2 type
   l1: string;
   l2: string;
 }
@@ -25,7 +26,7 @@ export interface Theme {
     [key: string]: object; // eslint-disable-line @typescript-eslint/ban-types
   };
   shadows: ThemeShadowDefinition;
-  spacing: Spacing;
+  readonly spacing: Spacing;
   host: {
     // appearance of the theme, this corresponds to the react-native Appearance library values, though can be overwritten
     // dynamic refers to a theme that handles it's own appearance switching, such as one that uses the PlatformColor API

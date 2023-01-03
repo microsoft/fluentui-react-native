@@ -3,8 +3,13 @@ import { StyleSheet, Switch, Text, View } from 'react-native';
 import { Separator } from '@fluentui/react-native';
 import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgUri, Use } from 'react-native-svg';
 import TestSvg from './Assets/accessible-icon-brands.svg';
-import { SVG_TESTPAGE } from './consts';
+import { SVG_TESTPAGE } from '../../../../E2E/src/Svg/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
+import { faSquareCheck } from '@fortawesome/free-solid-svg-icons/faSquareCheck';
+import { faMugHot } from '@fortawesome/free-solid-svg-icons/faMugHot';
+import { faMountainCity } from '@fortawesome/free-solid-svg-icons/faMountainCity';
 
 const styles = StyleSheet.create({
   svg: {
@@ -12,6 +17,19 @@ const styles = StyleSheet.create({
     color: 'purple',
   },
 });
+
+const FontAwesomeTest: React.FunctionComponent = () => {
+  return (
+    <React.Fragment>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <FontAwesomeIcon icon={faMugSaucer} color={'blue'} size={64} />
+        <FontAwesomeIcon icon={faSquareCheck} color={'blue'} size={64} />
+        <FontAwesomeIcon icon={faMugHot} color={'orange'} size={64} />
+        <FontAwesomeIcon icon={faMountainCity} color={'orange'} size={64} />
+      </View>
+    </React.Fragment>
+  );
+};
 
 const RectTest: React.FunctionComponent = () => {
   const [useColorA, setUseColorA] = React.useState(false);
@@ -153,6 +171,10 @@ const svgSections: TestSection[] = [
     component: RectTest,
   },
   {
+    name: 'FontAwesome Test',
+    component: FontAwesomeTest,
+  },
+  {
     name: 'Circle',
     component: CircleTest,
   },
@@ -192,11 +214,11 @@ const svgSections: TestSection[] = [
 
 export const SvgTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    win32Status: 'Production',
+    uwpStatus: 'Production',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description = 'No description.';

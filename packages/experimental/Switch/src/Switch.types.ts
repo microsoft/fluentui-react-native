@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewStyle, ColorValue, PressableProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { IViewProps } from '@fluentui-react-native/adapters';
-import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
 export const switchName = 'Switch';
 
-export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens, IShadowTokens {
   /**
    * Track color
    */
@@ -111,6 +110,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 
   /**
    * States that can be applied to a switch
+   * Note: 'hovered','focused','before','beforeContent','above' are not supported for Android
    */
   hovered?: SwitchTokens;
   focused?: SwitchTokens;
@@ -126,7 +126,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   above?: SwitchTokens;
 }
 
-export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface SwitchProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * Reference to the Switch
    */
@@ -156,11 +156,13 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
   /**
    * The Switch's text that shows when it is in a false state
+   * Note: Not supported for Android
    */
   offText?: string;
 
   /**
    * The Switch's text that shows when it is in a true state
+   * Note: Not supported for Android
    */
   onText?: string;
 
@@ -168,19 +170,20 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * The position of the label relative to the Switch. The position value 'after' is mutually
    * exclusive with the onText and offText props. This is due to variable width
    * of the text props causing the Switch's position to change when it shouldn't.
+   * Note :'before', 'above' are not supported on Android
    */
   labelPosition?: 'before' | 'above' | 'after';
 }
 
-export type SwitchState = IPressableState & { toggled?: boolean };
+export type SwitchState = PressableState & { toggled?: boolean };
 
 export interface SwitchInfo {
-  props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;
+  props: SwitchProps & React.ComponentPropsWithRef<any>;
   state: SwitchState;
 }
 
 export interface SwitchSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressableProps>;
   label: TextProps;
   track: IViewProps;
   thumb: IViewProps;

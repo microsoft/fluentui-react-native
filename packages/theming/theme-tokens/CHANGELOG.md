@@ -1,8 +1,154 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.5
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.28.0
+
+## 0.22.4
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.27.1
+
+## 0.22.3
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Update android token values. (email not defined)
+
+## 0.22.2
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.27.0
+
+## 0.22.1
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.26.0
+
+## 0.22.0
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Minor changes
+
+- Integrate shadow tokens (email not defined)
+
+## 0.21.5
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.25.0
+
+## 0.21.4
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- theme spacing tokens change (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/theme-types to v0.24.0
+
+## 0.21.3
+
+Fri, 11 Nov 2022 18:06:31 GMT
+
+### Patches
+
+- Bump all design-tokens packages to 0.29.0 (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.21.2
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- New AndroidTokens (email not defined)
+
+## 0.21.1
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.23.1
+
+## 0.21.0
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Minor changes
+
+- Snapshots (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.23.0
+
+## 0.20.1
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Add tokens-global.ios.ts (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.20.0
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Minor changes
+
+- updating new android tokens (email not defined)
+
+## 0.19.6
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.22.0
+
+## 0.19.5
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.21.0
+
+## 0.19.4
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Undo peer package change (ruaraki@microsoft.com)
+
+## 0.19.3
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Update peer dependencies to allow for other RN versions (ruaraki@microsoft.com)
 
 ## 0.19.2
 

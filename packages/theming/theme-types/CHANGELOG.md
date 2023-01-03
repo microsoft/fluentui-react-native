@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.28.0
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Minor changes
+
+- Define `FontWeightValue` in terms of what RN says (adam.gleitman@gmail.com)
+
+## 0.27.1
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- List platforms each token is defined on (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.27.0
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Minor changes
+
+- Add MaximumFontSize test element (adgleitm@microsoft.com)
+
+## 0.26.0
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Minor changes
+
+- switch initial tokenization and tester app changes (rohanpd.work@gmail.com)
+
+## 0.25.0
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Minor changes
+
+- Allow V1 usage of V2 text variants (adgleitm@microsoft.com)
+
+## 0.24.0
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Minor changes
+
+- theme spacing tokens change (rohanpd.work@gmail.com)
+
+## 0.23.1
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- missingTokens (email not defined)
+
+## 0.23.0
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Minor changes
+
+- BrandTokensIntegration (email not defined)
+
+## 0.22.0
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Minor changes
+
+- Make `Theme.spacing` read-only (adgleitm@microsoft.com)
+
+## 0.21.0
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Minor changes
+
+- Add new spacing tokens (adam.gleitman@gmail.com)
 
 ## 0.20.0
 

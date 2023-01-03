@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { View } from 'react-native';
+import { Pressable } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { compose, mergeProps, Slots, UseSlots, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -7,7 +7,7 @@ import {
   menuItemCheckboxName,
   MenuItemCheckboxProps,
   MenuItemCheckboxSlotProps,
-  MenuItemCheckboxState,
+  MenuItemCheckboxInfo,
   MenuItemCheckboxType,
 } from './MenuItemCheckbox.types';
 import { useMenuItemCheckbox } from './useMenuItemCheckbox';
@@ -19,7 +19,7 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
   displayName: menuItemCheckboxName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     checkmark: SvgXml,
     content: Text,
   },
@@ -32,7 +32,7 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
 });
 
 export const menuItemFinalRender = (
-  menuItem: MenuItemCheckboxState,
+  menuItem: MenuItemCheckboxInfo,
   Slots: Slots<MenuItemCheckboxSlotProps>,
 ): React.FunctionComponent<MenuItemCheckboxProps> => {
   return (final: MenuItemCheckboxProps, children: React.ReactNode) => {

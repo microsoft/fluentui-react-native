@@ -1,8 +1,371 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Jan 2023 23:38:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.1
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Fix some links (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/text to v0.19.7
+
+## 0.18.0
+
+Tue, 03 Jan 2023 21:35:03 GMT
+
+### Minor changes
+
+- Move v1 Link code into main link folder (ruaraki@microsoft.com)
+
+## 0.17.24
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.17.23
+
+Fri, 30 Dec 2022 06:16:41 GMT
+
+### Patches
+
+- spec update , address pr feedbacks (rohanpd.work@gmail.com)
+
+## 0.17.22
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+- Bump @fluentui-react-native/text to v0.19.5
+
+## 0.17.21
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.4
+
+## 0.17.20
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.30
+- Bump @fluentui-react-native/interactive-hooks to v0.22.4
+- Bump @fluentui-react-native/text to v0.19.3
+- Bump @fluentui-react-native/tokens to v0.20.2
+
+## 0.17.19
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.29
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/text to v0.19.2
+- Bump @fluentui-react-native/tokens to v0.20.1
+
+## 0.17.18
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.28
+- Bump @fluentui-react-native/interactive-hooks to v0.22.2
+- Bump @fluentui-react-native/text to v0.19.1
+
+## 0.17.17
+
+Wed, 21 Dec 2022 17:18:46 GMT
+
+### Patches
+
+- Update subtle example for Link (ruaraki@microsoft.com)
+
+## 0.17.16
+
+Wed, 21 Dec 2022 02:06:39 GMT
+
+### Patches
+
+- Move documentation files to new home (ruaraki@microsoft.com)
+
+## 0.17.15
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.27
+- Bump @fluentui-react-native/interactive-hooks to v0.22.1
+- Bump @fluentui-react-native/text to v0.19.0
+- Bump @fluentui-react-native/tokens to v0.20.0
+
+## 0.17.14
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.26
+- Bump @fluentui-react-native/interactive-hooks to v0.22.0
+- Bump @fluentui-react-native/text to v0.18.2
+- Bump @fluentui-react-native/tokens to v0.19.1
+
+## 0.17.13
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.25
+- Bump @fluentui-react-native/interactive-hooks to v0.21.5
+- Bump @fluentui-react-native/text to v0.18.1
+
+## 0.17.12
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.24
+- Bump @fluentui-react-native/interactive-hooks to v0.21.4
+- Bump @fluentui-react-native/text to v0.18.0
+- Bump @fluentui-react-native/tokens to v0.19.0
+
+## 0.17.11
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.23
+- Bump @fluentui-react-native/interactive-hooks to v0.21.3
+- Bump @fluentui-react-native/text to v0.17.1
+- Bump @fluentui-react-native/tokens to v0.18.1
+
+## 0.17.10
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.17.0
+
+## 0.17.9
+
+Mon, 28 Nov 2022 11:51:06 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.22
+- Bump @fluentui-react-native/interactive-hooks to v0.21.2
+- Bump @fluentui-react-native/text to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.18.0
+
+## 0.17.8
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.21
+- Bump @fluentui-react-native/interactive-hooks to v0.21.1
+- Bump @fluentui-react-native/text to v0.16.1
+
+## 0.17.7
+
+Sun, 13 Nov 2022 09:17:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.21.0
+- Bump @fluentui-react-native/text to v0.16.0
+
+## 0.17.6
+
+Fri, 11 Nov 2022 18:06:31 GMT
+
+### Patches
+
+- Bump all design-tokens packages to 0.29.0 (78454019+lyzhan7@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.12.20
+- Bump @fluentui-react-native/interactive-hooks to v0.20.2
+- Bump @fluentui-react-native/text to v0.15.15
+
+## 0.17.5
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.20.1
+
+## 0.17.4
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.19
+- Bump @fluentui-react-native/adapters to v0.10.0
+- Bump @fluentui-react-native/interactive-hooks to v0.20.0
+- Bump @fluentui-react-native/text to v0.15.14
+- Bump @fluentui-react-native/tokens to v0.17.8
+
+## 0.17.3
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.18
+- Bump @fluentui-react-native/interactive-hooks to v0.19.7
+- Bump @fluentui-react-native/text to v0.15.13
+
+## 0.17.2
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.17
+- Bump @fluentui-react-native/interactive-hooks to v0.19.6
+- Bump @fluentui-react-native/text to v0.15.12
+- Bump @fluentui-react-native/tokens to v0.17.7
+
+## 0.17.1
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.5
+
+## 0.17.0
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Minor changes
+
+- Snapshot update (email not defined)
+- Bump @uifabricshared/foundation-compose to v1.12.16
+- Bump @fluentui-react-native/interactive-hooks to v0.19.4
+- Bump @fluentui-react-native/text to v0.15.11
+- Bump @fluentui-react-native/tokens to v0.17.6
+
+## 0.16.25
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.15
+- Bump @fluentui-react-native/interactive-hooks to v0.19.3
+- Bump @fluentui-react-native/text to v0.15.10
+
+## 0.16.24
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.14
+- Bump @fluentui-react-native/interactive-hooks to v0.19.2
+- Bump @fluentui-react-native/text to v0.15.9
+
+## 0.16.23
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.1
+
+## 0.16.22
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.0
+
+## 0.16.21
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.13
+- Bump @fluentui-react-native/interactive-hooks to v0.18.15
+- Bump @fluentui-react-native/text to v0.15.8
+
+## 0.16.20
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.12
+- Bump @fluentui-react-native/adapters to v0.9.3
+- Bump @fluentui-react-native/interactive-hooks to v0.18.14
+- Bump @fluentui-react-native/text to v0.15.7
+- Bump @fluentui-react-native/tokens to v0.17.5
+
+## 0.16.19
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.11
+- Bump @fluentui-react-native/interactive-hooks to v0.18.13
+- Bump @fluentui-react-native/text to v0.15.6
+- Bump @fluentui-react-native/tokens to v0.17.4
+
+## 0.16.18
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.10
+- Bump @fluentui-react-native/interactive-hooks to v0.18.12
+- Bump @fluentui-react-native/text to v0.15.5
+- Bump @fluentui-react-native/tokens to v0.17.3
+
+## 0.16.17
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.9
+- Bump @fluentui-react-native/interactive-hooks to v0.18.11
+- Bump @fluentui-react-native/text to v0.15.4
+
+## 0.16.16
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.8
+- Bump @fluentui-react-native/interactive-hooks to v0.18.10
+- Bump @fluentui-react-native/text to v0.15.3
 
 ## 0.16.15
 

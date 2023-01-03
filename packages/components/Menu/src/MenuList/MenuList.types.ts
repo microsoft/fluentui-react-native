@@ -1,7 +1,9 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import React from 'react';
+import { ScrollViewProps } from 'react-native';
 
 export const menuListName = 'MenuList';
 
@@ -49,6 +51,8 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
 
 export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps> & { gap?: number };
+  focusZone?: FocusZoneProps; // macOS only
+  scrollView?: ScrollViewProps; // macOS only
 }
 
 export interface MenuListType {

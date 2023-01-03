@@ -39,8 +39,8 @@ RCT_CUSTOM_VIEW_PROPERTY(defaultTabbableElement, NSNumber, RCTFocusZone)
 {
 	NSNumber *tag = [RCTConvert NSNumber:json];
 	RCTUIManager *manager = [[self bridge] uiManager];
-	NSView *element = [manager viewForReactTag:tag];
-	[view setDefaultKeyView:element];
+	NSView *defaultResponder = [manager viewForReactTag:tag];
+	[view setDefaultResponder:defaultResponder];
 }
 
 - (RCTView *)view

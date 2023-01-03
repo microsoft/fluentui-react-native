@@ -60,6 +60,10 @@ export const commonTestStyles = StyleSheet.create({
     minHeight: 200,
     justifyContent: 'space-between',
   },
+  androidContainer: {
+    marginTop: 20,
+    justifyContent: 'space-between',
+  },
 });
 
 export const fluentTesterStyles = StyleSheet.create({
@@ -73,36 +77,36 @@ export const fluentTesterStyles = StyleSheet.create({
     alignItems: 'stretch',
     padding: 4,
   },
-
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-
+  headerWithBackButton: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  backButton: {
+    alignSelf: 'flex-start',
+    display: 'flex',
+  },
   testHeader: {
     marginBottom: 8,
     marginTop: 4,
   },
-
   testList: {
     minWidth: 160,
     flexShrink: 0,
     flexGrow: 0,
     flexDirection: 'row',
   },
-
   testListContainerStyle: {
     flexDirection: 'column',
     alignItems: 'stretch',
   },
-
   scrollViewStyle: {
     flexDirection: 'column',
     alignItems: 'stretch',
-    // height: 200,
-    // width: 200,
   },
-
   scrollViewContainer: {
     height: 250,
     width: 150,
@@ -110,19 +114,16 @@ export const fluentTesterStyles = StyleSheet.create({
     flexGrow: 0,
     flexDirection: 'column',
   },
-
   testListItem: {
     width: '100%',
     borderRadius: 0,
     justifyContent: 'flex-start',
   },
-
   testListSeparator: { marginHorizontal: 8 },
-
   testSection: {
-    flexGrow: 1,
+    width: '100%',
+    padding: 8,
   },
-
   noTest: {
     alignSelf: 'center',
     fontSize: 18,
@@ -148,7 +149,14 @@ export const mobileStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-
+  testVariants: {
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
   testList: {
     width: '100%',
   },
@@ -160,6 +168,12 @@ export const mobileStyles = StyleSheet.create({
   },
   testSection: {
     width: '100%',
+    marginVertical: 15,
+  },
+  containerSpacedEvenly: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
   },
 });
 

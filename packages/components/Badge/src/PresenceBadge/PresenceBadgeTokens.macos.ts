@@ -6,9 +6,9 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
   ({
     borderWidth: 1,
     borderColor: globalTokens.color.white,
-    bottom: globalTokens.spacing.none,
-    right: globalTokens.spacing.none,
-    paddingHorizontal: globalTokens.spacing.none,
+    bottom: globalTokens.sizeNone,
+    right: globalTokens.sizeNone,
+    paddingHorizontal: globalTokens.sizeNone,
     backgroundColor: globalTokens.color.white,
     tiny: {
       width: 6,
@@ -36,4 +36,23 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
       height: 28,
       borderWidth: 2,
     },
+    available: getBadgeColor('lightGreen'),
+    away: getBadgeColor('marigold'),
+    awayOutOfOffice: getBadgeColor('berry'),
+    busy: getBadgeColor('red'),
+    blocked: getBadgeColor('red'),
+    unknown: getBadgeColor('red'),
+    offline: {
+      iconColor: globalTokens.color.grey38,
+    },
+    outOfOffice: getBadgeColor('berry'),
   } as PresenceBadgeTokens);
+
+function getBadgeColor(color: string) {
+  return {
+    iconColor: globalTokens.color[color].primary,
+    outOfOffice: {
+      iconColor: globalTokens.color[color].primary,
+    },
+  };
+}

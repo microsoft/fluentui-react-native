@@ -1,8 +1,202 @@
 # Change Log - @fluentui-react-native/experimental-drawer
 
-This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.32
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.30
+
+## 0.2.31
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.29
+
+## 0.2.30
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.28
+
+## 0.2.29
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.27
+
+## 0.2.28
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.26
+
+## 0.2.27
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.25
+
+## 0.2.26
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.24
+
+## 0.2.25
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.23
+
+## 0.2.24
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.22
+
+## 0.2.23
+
+Mon, 28 Nov 2022 11:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.21
+
+## 0.2.22
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.20
+
+## 0.2.21
+
+Fri, 11 Nov 2022 18:06:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.19
+
+## 0.2.20
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.18
+
+## 0.2.19
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.17
+
+## 0.2.18
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.16
+
+## 0.2.17
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.15
+
+## 0.2.16
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.14
+
+## 0.2.15
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.13
+
+## 0.2.14
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.12
+
+## 0.2.13
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.11
+
+## 0.2.12
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.10
+
+## 0.2.11
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.9
+
+## 0.2.10
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Undo peer package change (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.8.8
+
+## 0.2.9
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Update peer dependencies to allow for other RN versions (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.8.7
 
 ## 0.2.8
 

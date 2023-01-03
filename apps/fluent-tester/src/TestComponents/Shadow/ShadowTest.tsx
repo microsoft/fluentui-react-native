@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { SHADOW_TESTPAGE } from './consts';
+import { SHADOW_TESTPAGE } from '../../../../E2E/src/Shadow/consts';
 import { ShadowDepthTestSection } from './ShadowDepthTestSection';
 import { ShadowButtonTestSection } from './ShadowButtonTestSection';
 import { ShadowWithDifferentPropsTestSection } from './ShadowWithDifferentPropsTestSection';
@@ -13,12 +13,10 @@ const shadowSections: TestSection[] = [
   },
   {
     name: 'Shadows on Button Examples',
-    testID: SHADOW_TESTPAGE,
     component: ShadowButtonTestSection,
   },
   {
     name: 'Shadows with Different Props Test',
-    testID: SHADOW_TESTPAGE,
     component: ShadowWithDifferentPropsTestSection,
   },
 ];

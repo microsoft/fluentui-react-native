@@ -4,20 +4,14 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
 <View
   accessibilityLabel="Custom FAB with no shadow(iOS)"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   iconPosition="before"
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -28,32 +22,46 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "#005a9e",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 9999,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 56,
       "minWidth": 56,
-      "padding": 16,
+      "padding": 20,
       "width": undefined,
     }
   }
 >
+  <Text
+    accessible={true}
+    style={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Arial",
+        "fontSize": 16,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    ♣
+  </Text>
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
-        "marginStart": 0,
+        "marginStart": 8,
         "marginTop": 0,
       }
     }
@@ -68,8 +76,8 @@ exports[`Default FAB (iOS) 1`] = `
   style={
     Object {
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "#005a9e",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 9999,
       "bottom": undefined,
       "display": "flex",
@@ -104,20 +112,14 @@ exports[`Default FAB (iOS) 1`] = `
   <View
     accessibilityLabel="Default FAB (iOS)"
     accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     iconPosition="before"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -128,9 +130,9 @@ exports[`Default FAB (iOS) 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#0078d4",
+        "backgroundColor": "#0f6cbd",
         "borderBottomWidth": undefined,
-        "borderColor": "#005a9e",
+        "borderColor": "#0f548c",
         "borderEndWidth": undefined,
         "borderLeftWidth": undefined,
         "borderRadius": 9999,
@@ -144,7 +146,7 @@ exports[`Default FAB (iOS) 1`] = `
         "justifyContent": "center",
         "minHeight": 56,
         "minWidth": 56,
-        "padding": 16,
+        "padding": 20,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
         "paddingHorizontal": undefined,
@@ -165,18 +167,32 @@ exports[`Default FAB (iOS) 1`] = `
     }
   >
     <Text
+      accessible={true}
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Arial",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "margin": 0,
+        }
+      }
+    >
+      ♣
+    </Text>
+    <Text
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
         Object {
           "color": "#ffffff",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 13,
           "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,
           "marginEnd": 0,
-          "marginStart": 0,
+          "marginStart": 8,
           "marginTop": 0,
         }
       }

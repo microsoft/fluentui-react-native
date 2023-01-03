@@ -5,12 +5,13 @@ import { Theme, useFluentTheme } from '@fluentui-react-native/framework';
 import { View } from 'react-native';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { mergeStyles } from '@fluentui-react-native/merge-props';
+import { shadowTestPageStyles } from './ShadowTestPageStyles';
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   const defaultShadowTestBoxPropsWithoutSpacing = {
     maxWidth: 732,
     minHeight: 64,
-    backgroundColor: t.colors.background,
+    ...shadowTestPageStyles(t).backgroundColor,
   };
   const marginTestProps = {
     marginVertical: 16,
@@ -51,7 +52,7 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
   const themedStyles = getThemedStyles(theme);
 
   return (
-    <View>
+    <View style={shadowTestPageStyles(theme).backgroundColor}>
       <Text style={themedStyles.headerTextPadding}>
         The following tests have a Shadow16 set on a child view that has some specific props.
       </Text>

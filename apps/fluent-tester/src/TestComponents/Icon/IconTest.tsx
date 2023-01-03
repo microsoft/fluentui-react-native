@@ -4,12 +4,11 @@ import { Platform, PlatformColor, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { ICON_TESTPAGE } from './consts';
-import { E2ETestingIcon } from './IconE2ETest';
-
-const testImage = require('../../FluentTester/test-data/icon_24x24.png');
-const testTtf = require('./../../../assets/Font_Awesome_900.otf');
-import TestSvg from './assets/test.svg';
+import { ICON_TESTPAGE } from '../../../../E2E/src/IconLegacy/consts';
+import { E2ETestingIcon } from './IconLegacyE2ETest';
+import { IconV1E2ETest } from './IconV1E2ETest';
+import { IconV1 } from './IconV1';
+import { testImage, testTtf, svgProps } from '../Common/iconExamples';
 
 const Icons: React.FunctionComponent = () => {
   const fontCustomFontProps: FontIconProps = {
@@ -23,11 +22,6 @@ const Icons: React.FunctionComponent = () => {
     fontFamily: 'Arial',
     codepoint: 0x2663,
     fontSize: 32,
-  };
-
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
   };
 
   // d20 icon by Lonnie Tapscott, licensed under CC BY, modified to use "currentColor"
@@ -104,11 +98,19 @@ const iconSections: TestSection[] = [
     name: 'Icon for E2E Testing',
     component: E2ETestingIcon,
   },
+  {
+    name: 'Default Icon',
+    component: IconV1,
+  },
+  {
+    name: 'IconV1 for E2E Testing',
+    component: IconV1E2ETest,
+  },
 ];
 
 export const IconTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',

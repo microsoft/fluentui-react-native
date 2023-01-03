@@ -1,26 +1,26 @@
 import { radioName, RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
-import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { defaultRadioTokens } from './RadioTokens';
+import { fontStyles, borderStyles } from '@fluentui-react-native/tokens';
 
-export const radioStates: (keyof RadioTokens)[] = ['focused', 'hovered', 'pressed', 'selected', 'disabled'];
+export const radioStates: (keyof RadioTokens)[] = ['labelPositionBelow', 'focused', 'hovered', 'pressed', 'selected', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, RadioTokens> = {
   tokens: [defaultRadioTokens, radioName],
   states: radioStates,
   slotProps: {
     root: buildProps(
-      (tokens: RadioTokens) => ({
+      (tokens: RadioTokens, theme: Theme) => ({
         style: {
           display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          minHeight: 20,
-          marginTop: 0,
-          borderRadius: tokens.borderRadius,
+          alignItems: tokens.alignItems,
+          flexDirection: tokens.flexDirection,
+          paddingHorizontal: globalTokens.size40,
+          ...borderStyles.from(tokens, theme),
         },
       }),
-      ['borderRadius'],
+      ['flexDirection', 'alignItems', ...borderStyles.keys],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
@@ -28,19 +28,19 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           backgroundColor: 'transparent',
           width: tokens.radioSize,
           height: tokens.radioSize,
-          top: 0,
-          left: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
           borderWidth: tokens.radioBorderWidth,
-          borderStyle: tokens.borderStyle,
+          borderStyle: tokens.radioBorderStyle,
           borderRadius: tokens.radioSize / 2,
           borderColor: tokens.radioBorder,
-          marginTop: globalTokens.spacing.xs,
-          marginRight: globalTokens.spacing.sNudge,
-          marginBottom: globalTokens.spacing.sNudge,
-          marginLeft: globalTokens.spacing.sNudge,
+          marginTop: tokens.marginTop,
+          marginRight: tokens.marginRight,
+          marginBottom: tokens.marginBottom,
+          marginLeft: tokens.marginLeft,
         },
       }),
-      ['radioBorderWidth', 'borderStyle', 'radioSize', 'radioBorder'],
+      ['radioBorderWidth', 'radioBorderStyle', 'radioSize', 'radioBorder', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
     ),
     innerCircle: buildProps(
       (tokens: RadioTokens) => ({
@@ -50,21 +50,43 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           height: tokens.radioInnerCircleSize,
           width: tokens.radioInnerCircleSize,
           backgroundColor: tokens.radioFill,
-          left: 4,
-          top: 4,
         },
       }),
       ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
     ),
-    label: buildProps(
+    labelContent: buildProps(
       (tokens: RadioTokens) => ({
+        style: {
+          alignSelf: 'flex-start',
+          alignItems: 'flex-start',
+          flexDirection: 'column',
+          marginRight: tokens.labelMarginRight,
+          marginLeft: tokens.labelMarginLeft,
+        },
+      }),
+      ['labelMarginRight', 'labelMarginLeft'],
+    ),
+    label: buildProps(
+      (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,
         style: {
-          marginTop: 2,
+          marginTop: tokens.labelMarginTop,
+          color: tokens.color,
+          ...fontStyles.from(tokens, theme),
+        },
+      }),
+      ['variant', 'labelMarginTop', 'color', ...fontStyles.keys],
+    ),
+    subtext: buildProps(
+      (tokens: RadioTokens) => ({
+        variant: tokens.subtextVariant,
+        style: {
+          marginTop: tokens.subtextMarginTop,
+          marginBottom: tokens.subtextMarginBottom,
           color: tokens.color,
         },
       }),
-      ['color'],
+      ['subtextMarginTop', 'subtextMarginBottom', 'color', 'subtextVariant'],
     ),
   },
 };

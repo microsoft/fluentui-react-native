@@ -9,13 +9,14 @@ export interface RadioGroupContextValue extends RadioGroupState {}
 export const RadioGroupContext = React.createContext<RadioGroupContextValue>({
   value: null,
   disabled: false,
+  layout: 'vertical',
   onChange: (/* key: string */) => {
     return;
   },
   updateSelectedButtonRef: (/* ref: React.RefObject<any>*/) => {
     return;
   },
-  buttonKeys: [],
+  values: [],
 });
 
 export const RadioGroupProvider = RadioGroupContext.Provider;

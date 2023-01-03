@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update tests after considering layout props",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

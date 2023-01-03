@@ -1,8 +1,330 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Jan 2023 23:38:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.10
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.7
+
+## 0.16.9
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.16.8
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.5
+
+## 0.16.7
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.4
+
+## 0.16.6
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.20
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/text to v0.19.3
+- Bump @fluentui-react-native/theme-types to v0.28.0
+- Bump @fluentui-react-native/theming-utils to v0.21.0
+- Bump @fluentui-react-native/tokens to v0.20.2
+
+## 0.16.5
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.19
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/text to v0.19.2
+- Bump @fluentui-react-native/theme-types to v0.27.1
+- Bump @fluentui-react-native/theming-utils to v0.20.2
+- Bump @fluentui-react-native/tokens to v0.20.1
+
+## 0.16.4
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.18
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/text to v0.19.1
+
+## 0.16.3
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.17
+- Bump @fluentui-react-native/framework to v0.8.26
+- Bump @fluentui-react-native/text to v0.19.0
+- Bump @fluentui-react-native/theme-types to v0.27.0
+- Bump @fluentui-react-native/theming-utils to v0.20.1
+- Bump @fluentui-react-native/tokens to v0.20.0
+
+## 0.16.2
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.16
+- Bump @fluentui-react-native/framework to v0.8.25
+- Bump @fluentui-react-native/text to v0.18.2
+- Bump @fluentui-react-native/theme-types to v0.26.0
+- Bump @fluentui-react-native/theming-utils to v0.20.0
+- Bump @fluentui-react-native/tokens to v0.19.1
+
+## 0.16.1
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.15
+- Bump @fluentui-react-native/framework to v0.8.24
+- Bump @fluentui-react-native/text to v0.18.1
+
+## 0.16.0
+
+Tue, 06 Dec 2022 02:02:55 GMT
+
+### Minor changes
+
+- Bump react-native-svg: 12.3.0 -> 12.5.0 (winlarry@microsoft.com)
+
+## 0.15.5
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.14
+- Bump @fluentui-react-native/framework to v0.8.23
+- Bump @fluentui-react-native/text to v0.18.0
+- Bump @fluentui-react-native/theme-types to v0.25.0
+- Bump @fluentui-react-native/theming-utils to v0.19.1
+- Bump @fluentui-react-native/tokens to v0.19.0
+
+## 0.15.4
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.13
+- Bump @fluentui-react-native/framework to v0.8.22
+- Bump @fluentui-react-native/text to v0.17.1
+- Bump @fluentui-react-native/theme-types to v0.24.0
+- Bump @fluentui-react-native/theming-utils to v0.19.0
+- Bump @fluentui-react-native/tokens to v0.18.1
+
+## 0.15.3
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.17.0
+
+## 0.15.2
+
+Mon, 28 Nov 2022 11:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.21
+- Bump @fluentui-react-native/text to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.18.0
+
+## 0.15.1
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.12
+- Bump @fluentui-react-native/framework to v0.8.20
+- Bump @fluentui-react-native/text to v0.16.1
+- Bump @fluentui-react-native/theming-utils to v0.18.3
+
+## 0.15.0
+
+Sun, 13 Nov 2022 09:17:06 GMT
+
+### Minor changes
+
+- fix double clicking on inline links (email not defined)
+- Bump @fluentui-react-native/text to v0.16.0
+
+## 0.14.1
+
+Fri, 11 Nov 2022 18:06:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.11
+- Bump @fluentui-react-native/framework to v0.8.19
+- Bump @fluentui-react-native/text to v0.15.15
+- Bump @fluentui-react-native/theming-utils to v0.18.2
+
+## 0.14.0
+
+Tue, 08 Nov 2022 22:18:43 GMT
+
+### Minor changes
+
+- update @office-iss/react-native-win32 to 0.68.8 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.8.18
+- Bump @fluentui-react-native/text to v0.15.14
+- Bump @fluentui-react-native/tokens to v0.17.8
+
+## 0.13.22
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.10
+- Bump @fluentui-react-native/framework to v0.8.17
+- Bump @fluentui-react-native/text to v0.15.13
+
+## 0.13.21
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.9
+- Bump @fluentui-react-native/framework to v0.8.16
+- Bump @fluentui-react-native/text to v0.15.12
+- Bump @fluentui-react-native/theme-types to v0.23.1
+- Bump @fluentui-react-native/theming-utils to v0.18.1
+- Bump @fluentui-react-native/tokens to v0.17.7
+
+## 0.13.20
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.8
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/text to v0.15.11
+- Bump @fluentui-react-native/theme-types to v0.23.0
+- Bump @fluentui-react-native/theming-utils to v0.18.0
+- Bump @fluentui-react-native/tokens to v0.17.6
+
+## 0.13.19
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.7
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/text to v0.15.10
+
+## 0.13.18
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.6
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/text to v0.15.9
+- Bump @fluentui-react-native/theming-utils to v0.17.0
+
+## 0.13.17
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.5
+- Bump @fluentui-react-native/framework to v0.8.12
+- Bump @fluentui-react-native/text to v0.15.8
+
+## 0.13.16
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.11
+- Bump @fluentui-react-native/text to v0.15.7
+- Bump @fluentui-react-native/tokens to v0.17.5
+
+## 0.13.15
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.4
+- Bump @fluentui-react-native/framework to v0.8.10
+- Bump @fluentui-react-native/text to v0.15.6
+- Bump @fluentui-react-native/theme-types to v0.22.0
+- Bump @fluentui-react-native/theming-utils to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.17.4
+
+## 0.13.14
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.3
+- Bump @fluentui-react-native/framework to v0.8.9
+- Bump @fluentui-react-native/text to v0.15.5
+- Bump @fluentui-react-native/theme-types to v0.21.0
+- Bump @fluentui-react-native/theming-utils to v0.16.1
+- Bump @fluentui-react-native/tokens to v0.17.3
+
+## 0.13.13
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.2
+- Bump @fluentui-react-native/framework to v0.8.8
+- Bump @fluentui-react-native/text to v0.15.4
+
+## 0.13.12
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.1
+- Bump @fluentui-react-native/framework to v0.8.7
+- Bump @fluentui-react-native/text to v0.15.3
 
 ## 0.13.11
 

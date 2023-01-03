@@ -224,7 +224,7 @@ Creates a divider element in the `MenuList`. This divider is purely visual and d
 #### MenuItem Props
 
 ```ts
-export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */

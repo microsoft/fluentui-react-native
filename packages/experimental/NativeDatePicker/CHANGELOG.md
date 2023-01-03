@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
-This log was last generated on Fri, 30 Sep 2022 00:54:35 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Dec 2022 21:34:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.4
+
+Tue, 27 Dec 2022 21:34:48 GMT
+
+### Patches
+
+- Update iOS (67026548+huwilkes@users.noreply.github.com)
+
+## 0.7.3
+
+Wed, 12 Oct 2022 13:07:10 GMT
+
+### Patches
+
+- Fix autolinking for iOS (4123478+tido64@users.noreply.github.com)
 
 ## 0.7.2
 

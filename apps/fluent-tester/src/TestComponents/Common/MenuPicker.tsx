@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Picker } from '@react-native-picker/picker';
+import { testProps } from './TestProps';
 
 /*
  * The MenuPicker was created because the RN Core Picker was deprecated (preventing us from updating to RN 0.66).
@@ -9,6 +10,7 @@ import { Picker } from '@react-native-picker/picker';
 export interface CollectionItem<T = string> {
   label: string;
   value?: T;
+  testID?: string;
 }
 
 export interface MenuPickerProps {
@@ -17,10 +19,11 @@ export interface MenuPickerProps {
   onChange?: (value: any, index?: number) => void;
   collection?: CollectionItem[];
   style?: any;
+  testID?: string;
 }
 
 export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: MenuPickerProps) => {
-  const { prompt, selected, onChange, collection, style } = props;
+  const { prompt, selected, onChange, collection, style, testID } = props;
   let selectedItemKey;
 
   collection.forEach((item) => {
@@ -35,9 +38,16 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
       selectedValue={selectedItemKey}
       onValueChange={(value: string, index: number) => onChange(value, index)}
       style={{ ...style }}
+      /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+      {...testProps(testID)}
     >
       {collection.map((item, index) => (
-        <Picker.Item label={item.label} key={index} value={item.value} />
+        <Picker.Item
+          label={item.label}
+          key={index}
+          value={item.value} /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(item.testID)}
+        />
       ))}
     </Picker>
   );

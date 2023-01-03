@@ -1,3 +1,5 @@
+import { TextStyle } from 'react-native';
+
 /**
  * A font family designation, made up of one or more font names or groupings
  * (comma-separated):
@@ -70,7 +72,7 @@ export type FontSize = keyof FontSizes | FontSizeValuePoints;
  * Smaller numbers yield a thinner, lighter font. Larger numbers yield a thicker, darker
  * font.
  */
-export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+export type FontWeightValue = TextStyle['fontWeight'];
 
 /**
  * A collection of named font weights.
@@ -102,6 +104,11 @@ export type FontLineHeight = number;
 export type FontLetterSpacing = number;
 
 /**
+ * On iOS, the Dynamic Type ramp that this variant should conform to.
+ */
+export type FontDynamicTypeRamp = string; // GH #2268: Import type from RN directly
+
+/**
  * A font variant value.
  */
 export type VariantValue = {
@@ -110,6 +117,7 @@ export type VariantValue = {
   weight: FontWeight;
   lineHeight?: FontLineHeight;
   letterSpacing?: FontLetterSpacing;
+  dynamicTypeRamp?: FontDynamicTypeRamp;
 };
 
 /**
