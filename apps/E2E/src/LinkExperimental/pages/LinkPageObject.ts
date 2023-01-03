@@ -10,11 +10,11 @@ class ExperimentalLinkPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async didOnPressCallbackFire(): Promise<boolean> {
+  async didOnPressCallbackFire(errMsg: string): Promise<boolean> {
     const callbackText = await By(EXPERIMENTAL_LINK_NO_A11Y_LABEL_COMPONENT);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
       timeout: this.waitForUiEvent,
-      timeoutMsg: 'The OnPress callback did not fire.',
+      timeoutMsg: errMsg,
       interval: 1000,
     });
 
