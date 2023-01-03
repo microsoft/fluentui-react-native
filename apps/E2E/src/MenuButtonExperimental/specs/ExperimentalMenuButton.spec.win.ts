@@ -26,7 +26,7 @@ describe('Experimental MenuButton Accessibility Testing', () => {
     await ExperimentalMenuButtonPageObject.scrollToTestElement(await ExperimentalMenuButtonPageObject._firstMenuButton);
   });
 
-  it('Validate accessibilityRole is correct', async () => {
+  it('Validate "accessibilityRole" value defaults to Button "ControlType" element attribute.', async () => {
     await expect(
       await ExperimentalMenuButtonPageObject.compareAttribute(
         ExperimentalMenuButtonPageObject._firstMenuButton,
@@ -38,7 +38,7 @@ describe('Experimental MenuButton Accessibility Testing', () => {
     await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     await expect(
       await ExperimentalMenuButtonPageObject.compareAttribute(
         ExperimentalMenuButtonPageObject._firstMenuButton,
@@ -50,7 +50,7 @@ describe('Experimental MenuButton Accessibility Testing', () => {
     await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do not set accessibilityLabel -> Validate accessibilityLabel defaults to MenuButton label', async () => {
+  it('Do not set "accessibilityLabel". Validate "Name" element attribute defaults to MenuButton label.', async () => {
     await expect(
       await ExperimentalMenuButtonPageObject.compareAttribute(
         ExperimentalMenuButtonPageObject._secondMenuButton,
