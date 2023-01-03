@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ExperimentalCheckboxPageObject from '../pages/ExperimentalCheckboxPageObject';
+import ExperimentalCheckboxPageObject from '../pages/CheckboxV1PageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 describe('Experimental Checkbox Testing Initialization', () => {
@@ -13,7 +13,7 @@ describe('Experimental Checkbox Testing Initialization', () => {
     await ExperimentalCheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxExperimentalPage();
+    await NavigateAppPage.clickAndGoToCheckboxV1Page();
     await ExperimentalCheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalCheckboxPageObject.isPageLoaded()).toBeTruthy(ExperimentalCheckboxPageObject.ERRORMESSAGE_PAGELOAD);

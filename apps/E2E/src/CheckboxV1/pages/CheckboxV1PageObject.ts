@@ -84,7 +84,7 @@ class CheckboxV1PageObject extends BasePage {
   }
 
   get _pageButtonName() {
-    return HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON;
+    return HOMEPAGE_CHECKBOXV1_BUTTON;
   }
 }
 
