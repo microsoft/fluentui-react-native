@@ -43,6 +43,10 @@ class ButtonPageObject extends BasePage {
   get _callbackText() {
     return By(BUTTON_ON_PRESS_DEPRECATED);
   }
+
+  get _pageButtonName() {
+    return HOMEPAGE_BUTTON_BUTTON;
+  }
 }
 
 export default new ButtonPageObject();
