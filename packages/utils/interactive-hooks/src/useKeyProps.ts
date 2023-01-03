@@ -41,10 +41,12 @@ function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyP
       validKeysUp: keys,
     },
     windows: {
+      /**
+       * https://github.com/microsoft/react-native-windows/issues/11049
+       * Windows doesn't filter on `key` but on `code`, which is quite different ('A' vs 'KeyA' or 'GamepadA').
+       * While this discrepancy is present, let's not specify `keyUpEvents`.
+       */
       onKeyUp: keyPressCallback(userCallback, ...keys),
-      keyUpEvents: keys.map((keyCode) => {
-        return { code: keyCode };
-      }),
     },
     // win32
     default: {
@@ -66,10 +68,12 @@ function getKeyDownPropsWorker(userCallback: KeyCallback, ...keys: string[]): Ke
       validKeysDown: keys,
     },
     windows: {
+      /**
+       * https://github.com/microsoft/react-native-windows/issues/11049
+       * Windows doesn't filter on `key` but on `code`, which is quite different ('A' vs 'KeyA' or 'GamepadA').
+       * While this discrepancy is present, let's not specify `keyDownEvents`.
+       */
       onKeyDown: keyPressCallback(userCallback, ...keys),
-      keyDownEvents: keys.map((keyCode) => {
-        return { code: keyCode };
-      }),
     },
     // win32
     default: {
