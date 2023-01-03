@@ -1,8 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkPageObject from '../pages/LinkPageObject';
-import { ComponentSelector } from '../../common/BasePage';
-import { LINK_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Link/consts';
-import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { LINK_ACCESSIBILITY_LABEL } from '../consts';
+import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Link Testing Initialization', function () {
@@ -22,18 +21,24 @@ describe('Link Testing Initialization', function () {
 });
 
 describe('Link Accessibility Testing', () => {
-  it('Link - Validate accessibilityRole is correct', async () => {
+  beforeAll(async () => {
     await LinkPageObject.scrollToTestElement();
-
-    await expect(await LinkPageObject.getAccessibilityRole()).toEqual(LINK_A11Y_ROLE);
-    await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
 
-  it('Link - Set accessibilityLabel', async () => {
-    await LinkPageObject.scrollToTestElement();
+  it('Validate "accessibilityRole" defaults to Link "ControlType" element attribute.', async () => {
+    await expect(
+      await LinkPageObject.compareAttribute(LinkPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
+    ).toBeTrue();
 
-    await expect(await LinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(LINK_ACCESSIBILITY_LABEL);
-    await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
+    await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" propagates to "Name" element attribute.', async () => {
+    await expect(
+      await LinkPageObject.compareAttribute(LinkPageObject._primaryComponent, Attribute.AccessibilityLabel, LINK_ACCESSIBILITY_LABEL),
+    ).toBeTrue();
+
+    await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT);
   });
 
   // No need to test not setting a11y label. The content prop gets passed down to the child Text component. This equates to not setting the a11y label

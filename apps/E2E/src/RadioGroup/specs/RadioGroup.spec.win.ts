@@ -7,7 +7,7 @@ import {
   RADIOGROUP_TEST_COMPONENT_LABEL,
   FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL,
   SECOND_RADIO_BUTTON_LABEL,
-} from '../../../../fluent-tester/src/TestComponents/RadioGroup/consts';
+} from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('RadioGroup/RadioButton Testing Initialization', function () {

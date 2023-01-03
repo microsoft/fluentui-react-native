@@ -1,10 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import MenuButtonPageObject, { MenuButtonSelector } from '../pages/MenuButtonPageObject.win';
+import MenuButtonPageObject from '../pages/MenuButtonPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
-import {
-  MENU_BUTTON_ACCESSIBILITY_LABEL,
-  MENU_BUTTON_TEST_COMPONENT_LABEL,
-} from '../../../../fluent-tester/src/TestComponents/MenuButton/consts';
+import { MENU_BUTTON_ACCESSIBILITY_LABEL, MENU_BUTTON_TEST_COMPONENT_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButton Testing Initialization', function () {

@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import { ButtonV1 as Button, ContextualMenu, ContextualMenuItem, Separator } from '@fluentui/react-native';
-import { CONTEXTUALMENUITEM_TEST_COMPONENT, CONTEXTUALMENU_TEST_COMPONENT } from './consts';
+import { CONTEXTUALMENUITEM_TEST_COMPONENT, CONTEXTUALMENU_TEST_COMPONENT } from '../../../../E2E/src/ContextualMenu/consts';
+import { testProps } from '../Common/TestProps';
 
 export const E2EContextualMenuTest: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
@@ -75,7 +76,12 @@ export const E2EContextualMenuTest: React.FunctionComponent = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef} testID={CONTEXTUALMENU_TEST_COMPONENT}>
+          <Button
+            onClick={toggleShowContextualMenu}
+            componentRef={stdBtnRef}
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(CONTEXTUALMENU_TEST_COMPONENT)}
+          >
             Press for ContextualMenu
           </Button>
         </View>
@@ -92,7 +98,12 @@ export const E2EContextualMenuTest: React.FunctionComponent = () => {
           shouldFocusOnContainer={focusOnContainer}
           isBeakVisible={isBeakVisible}
         >
-          <ContextualMenuItem text="MenuItem 1" itemKey="1" testID={CONTEXTUALMENUITEM_TEST_COMPONENT} />
+          <ContextualMenuItem
+            text="MenuItem 1"
+            itemKey="1"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(CONTEXTUALMENUITEM_TEST_COMPONENT)}
+          />
           <ContextualMenuItem text="MenuItem 2" itemKey="2" />
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <ContextualMenuItem text="MenuItem 4" itemKey="4" />

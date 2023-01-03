@@ -1,4 +1,4 @@
-import { SHADOW_TESTPAGE, HOMEPAGE_SHADOW_BUTTON } from '../../../../fluent-tester/src/TestComponents/Shadow/consts';
+import { SHADOW_TESTPAGE, HOMEPAGE_SHADOW_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class ShadowTestPage extends BasePage {

@@ -1,5 +1,5 @@
 import { BasePage } from '../../../common/BasePage';
-import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../../../../fluent-tester/src/TestComponents/Common/consts';
+import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../consts';
 
 class NativeTestingPageObject extends BasePage {
   async waitForScrollViewDisplayed(timeout?: number): Promise<void> {
