@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 03 Jan 2023 17:37:38 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Jan 2023 21:35:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.126.15
+
+Tue, 03 Jan 2023 21:35:03 GMT
+
+### Patches
+
+- Update package used in Link test (ruaraki@microsoft.com)
+- Bump @fluentui/react-native to v0.35.0
 
 ## 0.126.14
 
