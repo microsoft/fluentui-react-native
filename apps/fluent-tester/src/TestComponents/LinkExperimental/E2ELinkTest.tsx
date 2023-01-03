@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from '@fluentui-react-native/experimental-link';
+import { LinkV1 as Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import {
