@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Overhaul Menu E2E test with new testing methods, better test errors.",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
