@@ -1,72 +1,102 @@
-import * as React from 'react';
+import { TextTokens, TextProps } from '@fluentui-react-native/text';
+import { IFocusable, IPressableState, IWithPressableEvents, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { ViewProps } from 'react-native';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { ITextProps } from '@fluentui-react-native/text';
-import { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 
-export const linkName = 'RNFLink';
+export const linkName = 'Link';
 
-/**
- * Properties for fabric native Link
- */
-
-export type ILinkTokens = IForegroundColorTokens & FontTokens & IBorderTokens;
-
-/**
- * Because style state updates are coming from the touchable and will cause a child render the link doesn't use
- * changes in state value to trigger re-render.  The values inside inner are effectively mutable and are used
- * for per-component storage.
- */
-export type ILinkState = IPressableState & {
+export type LinkState = IPressableState & {
   /**
    * Specifies whether the link has been visited.
+   * Note: Not supported for Android
    * @default false
    */
   visited?: boolean;
-};
-
-export interface ILinkInfo {
   /**
-   * Specifies whether the link has clickable text to display.
+   * Specifies whether the link is disabled.
    * @default false
    */
-  content?: boolean;
+  disabled?: boolean;
+  /**
+   * Specifies whether the link is inline.
+   * Note: Not supported for win32
+   *
+   * @default false
+   */
+  inline?: boolean;
+  /**
+   * Specifies whether the link is subtle.
+   * Note: Not supported for Android
+   * @default false
+   */
+  subtle?: boolean;
+};
+
+/**
+ * Link tokens, these are the internally configurable values for Link elements. In particular these
+ * drive decisions on how to build the styles
+ * Note: 'hovered','focused','visited','subtle' are not supported for Android
+ */
+export interface LinkTokens extends TextTokens {
+  hovered?: LinkTokens;
+  pressed?: LinkTokens;
+  focused?: LinkTokens;
+  visited?: LinkTokens;
+  disabled?: LinkTokens;
+  inline?: LinkTokens;
+  subtle?: LinkTokens;
 }
 
-export interface ILinkOptions {
+export type LinkAppearance = 'default' | 'subtle';
+
+/**
+ * Link props, extending Text props with Pressable options
+ */
+export interface LinkProps extends IWithPressableOptions<TextProps> {
+  /**
+   * The appearance of the link, either `default` or `subtle`
+   * Note: 'subtle' is not supported for Android
+   * @default default
+   */
+  appearance?: LinkAppearance;
+  /**
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   */
+  componentRef?: React.RefObject<IFocusable>;
+  /**
+   * Whether to use native focus visuals for the component
+   * @default true
+   */
+  enableFocusRing?: boolean;
+  /**
+   * Whether the link is inline with text
+   * Note: Not supported for win32
+   * @default false
+   */
+  inline?: boolean;
   /**
    * The URL that is opened when the link is clicked.  This value supersedes the 'onPress' callback when both are present.
    * @default undefined
    */
   url?: string;
+  /**
+   * Text that should show in a tooltip when the user hovers over a button.
+   * Note: Not supported for Android
+   */
+  tooltip?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IWithLinkOptions<T extends object> = ILinkOptions & IWithPressableOptions<T>;
-
-export interface ILinkProps extends IWithLinkOptions<ITextProps> {
-  /**
-   * The visible text of the link that the user sees.
-   * @default undefined
-   */
-  content?: string;
-  /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
-   */
-  componentRef?: React.RefObject<IFocusable>;
-}
-
-export type ILinkSlotProps = {
-  root: React.PropsWithRef<ViewProps>;
-  content: ITextProps;
+export type LinkInfo = {
+  props: IWithPressableEvents<LinkProps & React.ComponentPropsWithRef<any>>;
+  state: LinkState;
 };
 
-export type ILinkRenderData = IRenderData<ILinkSlotProps, ILinkState & ILinkInfo>;
+export interface LinkSlotProps {
+  root: ViewProps;
+  content: TextProps;
+}
 
-export interface ILinkType {
-  props: ILinkProps;
-  slotProps: ILinkSlotProps;
-  tokens: ILinkTokens;
-  state: ILinkState & ILinkInfo;
+export interface LinkType {
+  props: LinkProps;
+  tokens: LinkTokens;
+  slotProps: LinkSlotProps;
 }

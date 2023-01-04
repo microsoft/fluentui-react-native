@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 03 Jan 2023 23:38:40 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.9.1",
+      "version": "1.9.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4ba3eb0acc4abbce94655bfcc8037f1656c92289",
+            "comment": "Rename experimental to v1, add legacy to test names"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Jan 2023 22:50:24 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.9.0",
+      "version": "1.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "c624fd62cd3a7599fd7961f6030af2035bc431f6",
+            "comment": "Add click tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Jan 2023 20:16:36 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.8.7",
+      "version": "1.8.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "856ff868e4d98aa676d5f5bee481f4c7cc7c1b08",
+            "comment": "Overhaul ContextualMenu, Link, and LinkV1 E2E tests with better errors and refactored spec code"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 Jan 2023 18:05:05 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.8.6",
       "version": "1.8.6",
