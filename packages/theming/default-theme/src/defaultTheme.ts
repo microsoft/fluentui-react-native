@@ -78,7 +78,6 @@ export function defaultSpacing(): Spacing {
 }
 
 export function defaultFluentTheme(): Theme {
-  console.log('defaultFluentTheme');
   return {
     colors: getStockWebPalette(),
     typography: _defaultTypography(),
