@@ -4,8 +4,8 @@ import { createFontAliasTokens } from './createFontAliasTokens';
 
 export function win32Typography(): Typography {
   const win32Dict = {
-    sizes: defaultFluentTheme.typography.sizes,
-    weights: defaultFluentTheme.typography.weights,
+    sizes: defaultFluentTheme().typography.sizes,
+    weights: defaultFluentTheme().typography.weights,
     // hard coded until we support new fontFamily format
     families: {
       primary: 'Segoe UI',

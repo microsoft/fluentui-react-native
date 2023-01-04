@@ -77,29 +77,38 @@ export function defaultSpacing(): Spacing {
   return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
 }
 
-export const defaultFluentTheme: Theme = {
-  colors: getStockWebPalette(),
-  typography: _defaultTypography(),
-  spacing: defaultSpacing(),
-  shadows: createShadowAliasTokens('light'),
-  components: {},
-  host: { appearance: 'light' },
-};
+export function defaultFluentTheme(): Theme {
+  console.log('defaultFluentTheme');
+  return {
+    colors: getStockWebPalette(),
+    typography: _defaultTypography(),
+    spacing: defaultSpacing(),
+    shadows: createShadowAliasTokens('light'),
+    components: {},
+    host: { appearance: 'light' },
+  };
+}
 
-export const defaultFluentDarkTheme: Theme = {
-  colors: getStockWebDarkPalette(),
-  typography: defaultFluentTheme.typography,
-  shadows: createShadowAliasTokens('dark'),
-  spacing: defaultFluentTheme.spacing,
-  components: {},
-  host: { appearance: 'dark' },
-};
+export function defaultFluentDarkTheme(): Theme {
+  const defaultTheme = defaultFluentTheme();
+  return {
+    colors: getStockWebDarkPalette(),
+    typography: defaultTheme.typography,
+    shadows: createShadowAliasTokens('dark'),
+    spacing: defaultTheme.spacing,
+    components: {},
+    host: { appearance: 'dark' },
+  };
+}
 
-export const defaultFluentHighConstrastTheme: Theme = {
-  colors: getStockWebHCPalette(),
-  typography: defaultFluentTheme.typography,
-  shadows: createShadowAliasTokens('highContrast'),
-  spacing: defaultFluentTheme.spacing,
-  components: {},
-  host: { appearance: 'highContrast' },
-};
+export function defaultFluentHighConstrastTheme(): Theme {
+  const defaultTheme = defaultFluentTheme();
+  return {
+    colors: getStockWebHCPalette(),
+    typography: defaultTheme.typography,
+    shadows: createShadowAliasTokens('highContrast'),
+    spacing: defaultTheme.spacing,
+    components: {},
+    host: { appearance: 'highContrast' },
+  };
+}
