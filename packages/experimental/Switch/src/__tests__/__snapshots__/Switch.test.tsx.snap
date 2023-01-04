@@ -18,12 +18,25 @@ exports[`Switch Default 1`] = `
     }
   }
   accessible={true}
-  collapsable={false}
   focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -34,20 +47,22 @@ exports[`Switch Default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "borderColor": undefined,
-      "borderRadius": undefined,
-      "borderWidth": undefined,
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderWidth": 2,
       "flexDirection": "row-reverse",
-      "minHeight": undefined,
-      "minWidth": undefined,
+      "minHeight": 28,
+      "minWidth": 40,
+      "padding": 2,
     }
   }
 >
   <Text
     style={
       Object {
-        "color": "#242424",
-        "fontSize": 13,
+        "color": "#424242",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -67,16 +82,18 @@ exports[`Switch Default 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#f0f0f0",
-          "borderRadius": 100,
+          "backgroundColor": "#ffffff",
+          "borderColor": "#616161",
+          "borderRadius": 10,
+          "borderWidth": 1,
           "flexDirection": "row",
-          "height": 32,
+          "height": 20,
           "justifyContent": "flex-start",
-          "marginBottom": undefined,
-          "marginLeft": undefined,
+          "marginBottom": 2,
+          "marginLeft": 2,
           "marginRight": 8,
-          "marginTop": undefined,
-          "width": 52,
+          "marginTop": 2,
+          "width": 40,
         }
       }
     >
@@ -84,12 +101,11 @@ exports[`Switch Default 1`] = `
         animationClass="Ribbon_SwitchThumb"
         style={
           Object {
-            "backgroundColor": "#ffffff",
-            "borderRadius": 100,
-            "elevation": 8,
-            "height": 26,
-            "margin": 3,
-            "width": 26,
+            "backgroundColor": "#616161",
+            "borderRadius": 17,
+            "height": 14,
+            "margin": 2,
+            "width": 14,
           }
         }
       />
@@ -116,12 +132,25 @@ exports[`Switch Disabled 1`] = `
     }
   }
   accessible={true}
-  collapsable={false}
   focusable={false}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -132,20 +161,22 @@ exports[`Switch Disabled 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "borderColor": undefined,
-      "borderRadius": undefined,
-      "borderWidth": undefined,
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderWidth": 2,
       "flexDirection": "row-reverse",
-      "minHeight": undefined,
-      "minWidth": undefined,
+      "minHeight": 28,
+      "minWidth": 40,
+      "padding": 2,
     }
   }
 >
   <Text
     style={
       Object {
-        "color": "#e0e0e0",
-        "fontSize": 13,
+        "color": "#424242",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -166,15 +197,17 @@ exports[`Switch Disabled 1`] = `
         Object {
           "alignItems": "center",
           "backgroundColor": "#f0f0f0",
-          "borderRadius": 100,
+          "borderColor": "#e0e0e0",
+          "borderRadius": 10,
+          "borderWidth": 1,
           "flexDirection": "row",
-          "height": 32,
+          "height": 20,
           "justifyContent": "flex-start",
-          "marginBottom": undefined,
-          "marginLeft": undefined,
+          "marginBottom": 2,
+          "marginLeft": 2,
           "marginRight": 8,
-          "marginTop": undefined,
-          "width": 52,
+          "marginTop": 2,
+          "width": 40,
         }
       }
     >
@@ -182,12 +215,11 @@ exports[`Switch Disabled 1`] = `
         animationClass="Ribbon_SwitchThumb"
         style={
           Object {
-            "backgroundColor": "#ffffff",
-            "borderRadius": 100,
-            "elevation": 0,
-            "height": 26,
-            "margin": 3,
-            "width": 26,
+            "backgroundColor": "#e0e0e0",
+            "borderRadius": 17,
+            "height": 14,
+            "margin": 2,
+            "width": 14,
           }
         }
       />
