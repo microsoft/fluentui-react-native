@@ -7,7 +7,7 @@ In the short term, the new `Link` control is named `LinkV1` while it clashes wit
 import { LinkV1 as Link } from '@fluentui-react-native/link';
 ```
 
-FURN components that have imported from experimental-text will use the above syntax to use `LinkV1`.
+FURN components that have imported from experimental-link will use the above syntax to use `LinkV1`.
 
 ## Background
 
@@ -25,7 +25,7 @@ Basic example:
 <Link url="https://www.bing.com/">Click to Navigate.</Link>
 ```
 
-More examples on the [Test pages for Link](../../../apps/fluent-tester/src/TestComponents/LinkExperimental). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for Link](../../../apps/fluent-tester/src/TestComponents/LinkV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -75,6 +75,7 @@ Below is the set of props the Text supports:
 export interface LinkProps extends IWithPressableOptions<TextProps> {
   /**
    * The appearance of the link, either `default` or `subtle`
+   * Note: 'subtle' is not supported for Android
    * @default default
    */
   appearance?: LinkAppearance;
@@ -100,6 +101,7 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
   url?: string;
   /**
    * Text that should show in a tooltip when the user hovers over a button.
+   * Note: Not supported for Android
    */
   tooltip?: string;
 }
@@ -120,6 +122,8 @@ export interface LinkTokens extends TextTokens {
   subtle?: LinkTokens;
 }
 ```
+
+Note: 'hovered','focused','visited','subtle' are not supported for Android
 
 ## Behaviors
 
