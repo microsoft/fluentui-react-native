@@ -22,28 +22,7 @@ export const isModifierKey = (nativeEvent: any): boolean => {
   );
 };
 
-/**
- * Re-usable hook for an onKeyDown event.
- * @param userCallback The function you want to be called once the key has been activated on key up
- * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
- * @returns onKeyEvent() - Callback to determine if key was pressed, if so, call userCallback
- * @deprecated use the hook `useKeyProps` instead
- */
-export function useKeyCallback(userCallback?: KeyCallback, ...keys: string[]) {
-  const onKeyEvent = React.useCallback(
-    (e: KeyPressEvent) => {
-      if (userCallback !== undefined && (keys === undefined || keys.includes(e.nativeEvent.key))) {
-        userCallback(e);
-        e.stopPropagation();
-      }
-    },
-    [keys, userCallback],
-  );
-
-  return onKeyEvent;
-}
-
-function getKeyCallbackWorker(userCallback?: KeyCallback, ...keys: string[]) {
+function keyPressCallback(userCallback?: KeyCallback, ...keys: string[]) {
   const onKeyEvent = (e: KeyPressEvent) => {
     if (userCallback !== undefined && !isModifierKey(e.nativeEvent) && (keys === undefined || keys.includes(e.nativeEvent.key))) {
       userCallback(e);
@@ -58,18 +37,20 @@ function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyP
     ios: undefined,
     android: undefined,
     macos: {
-      onKeyUp: getKeyCallbackWorker(userCallback, ...keys),
+      onKeyUp: keyPressCallback(userCallback, ...keys),
       validKeysUp: keys,
     },
     windows: {
-      onKeyUp: getKeyCallbackWorker(userCallback, ...keys),
-      keyUpEvents: keys.map((keyCode) => {
-        return { key: keyCode };
-      }),
+      /**
+       * https://github.com/microsoft/react-native-windows/issues/11049
+       * Windows doesn't filter on `key` but on `code`, which is quite different ('A' vs 'KeyA' or 'GamepadA').
+       * While this discrepancy is present, let's not specify `keyUpEvents`.
+       */
+      onKeyUp: keyPressCallback(userCallback, ...keys),
     },
     // win32
     default: {
-      onKeyUp: getKeyCallbackWorker(userCallback, ...keys),
+      onKeyUp: keyPressCallback(userCallback, ...keys),
       keyUpEvents: keys.map((keyCode) => {
         return { key: keyCode };
       }),
@@ -83,18 +64,20 @@ function getKeyDownPropsWorker(userCallback: KeyCallback, ...keys: string[]): Ke
     ios: undefined,
     android: undefined,
     macos: {
-      onKeyDown: getKeyCallbackWorker(userCallback, ...keys),
+      onKeyDown: keyPressCallback(userCallback, ...keys),
       validKeysDown: keys,
     },
     windows: {
-      onKeyDown: getKeyCallbackWorker(userCallback, ...keys),
-      keyDownEvents: keys.map((keyCode) => {
-        return { key: keyCode };
-      }),
+      /**
+       * https://github.com/microsoft/react-native-windows/issues/11049
+       * Windows doesn't filter on `key` but on `code`, which is quite different ('A' vs 'KeyA' or 'GamepadA').
+       * While this discrepancy is present, let's not specify `keyDownEvents`.
+       */
+      onKeyDown: keyPressCallback(userCallback, ...keys),
     },
     // win32
     default: {
-      onKeyDown: getKeyCallbackWorker(userCallback, ...keys),
+      onKeyDown: keyPressCallback(userCallback, ...keys),
       keyDownEvents: keys.map((keyCode) => {
         return { key: keyCode };
       }),
@@ -132,3 +115,24 @@ export const preferKeyDownForKeyEvents = Platform.select({
  * @returns KeyPressProps: An object containing the correct platform specific props to handle key press
  */
 export const useKeyProps = preferKeyDownForKeyEvents ? useKeyDownProps : useKeyUpProps;
+
+/**
+ * Re-usable hook for an onKeyDown event.
+ * @param userCallback The function you want to be called once the key has been activated on key up
+ * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
+ * @returns onKeyEvent() - Callback to determine if key was pressed, if so, call userCallback
+ * @deprecated use the hook `useKeyProps` instead
+ */
+export function useKeyCallback(userCallback?: KeyCallback, ...keys: string[]) {
+  const onKeyEvent = React.useCallback(
+    (e: KeyPressEvent) => {
+      if (userCallback !== undefined && (keys === undefined || keys.includes(e.nativeEvent.key))) {
+        userCallback(e);
+        e.stopPropagation();
+      }
+    },
+    [keys, userCallback],
+  );
+
+  return onKeyEvent;
+}
