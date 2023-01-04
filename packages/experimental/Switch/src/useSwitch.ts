@@ -17,8 +17,8 @@ const isMobile = Platform.OS === 'android' || Platform.OS == 'ios';
 
 export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
-  const [animation] = React.useState(new Animated.Value(0));
   const [trackBackgroundAnimation] = React.useState(new Animated.Value(0));
+  const animation = React.useRef(new Animated.Value(0)).current;
 
   const {
     onChange,
