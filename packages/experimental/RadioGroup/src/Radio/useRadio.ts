@@ -102,9 +102,9 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       accessibilityPositionInSet: accessibilityPositionInSet ?? radioGroupContext.values.findIndex((x) => x == value) + 1,
       accessibilitySetSize: accessibilitySetSize ?? radioGroupContext.values.length,
       focusable: !state.disabled,
+      disabled: isDisabled,
       enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,
-      disabled: state.disabled,
     },
     state: state,
   };

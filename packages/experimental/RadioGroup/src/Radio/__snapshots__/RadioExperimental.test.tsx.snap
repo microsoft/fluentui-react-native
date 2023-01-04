@@ -53,17 +53,15 @@ exports[`Radio component tests Radio default 1`] = `
   value="key1"
 >
   <View
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
     accessible={false}
-    collapsable={false}
     focusable={false}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -192,11 +190,14 @@ exports[`Radio component tests Radio disabled 1`] = `
       }
     }
     accessible={false}
-    collapsable={false}
     focusable={false}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
