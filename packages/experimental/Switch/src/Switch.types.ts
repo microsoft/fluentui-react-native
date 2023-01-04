@@ -181,6 +181,11 @@ export interface SwitchProps extends Omit<PressablePropsExtended, 'onPress'> {
    * Note :'before', 'above' are not supported on Android
    */
   labelPosition?: 'before' | 'above' | 'after';
+
+  /**
+   * Disabled state of the switch.
+   */
+  disabled?: boolean;
 }
 
 export type SwitchState = PressableState & { toggled?: boolean; disabled?: boolean };

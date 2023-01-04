@@ -91,12 +91,23 @@ export const useSwitch = (props: SwitchProps, animationConfig?: IAnimationConfig
       ],
     },
     // Interpolate over toggled on color to toggled off color and vice versa
+    // Dividing the quadrants of interpolaton because this brings good intervals changes.
     trackBackgroundStyle: {
       backgroundColor: trackBackgroundAnimation.interpolate({
-        inputRange: [0, 1],
+        inputRange: [0, 0.25, 0.75, 1],
         outputRange: checkedState
-          ? [animationConfig.toggleOnBgColor, animationConfig.toggleOnBgColor]
-          : [animationConfig.toggleOffBgColor, animationConfig.toggleOffBgColor],
+          ? [
+              animationConfig.toggleOnBgColor,
+              animationConfig.toggleOnBgColor,
+              animationConfig.toggleOffBgColor,
+              animationConfig.toggleOffBgColor,
+            ]
+          : [
+              animationConfig.toggleOnBgColor,
+              animationConfig.toggleOnBgColor,
+              animationConfig.toggleOffBgColor,
+              animationConfig.toggleOffBgColor,
+            ],
       }),
     },
   };

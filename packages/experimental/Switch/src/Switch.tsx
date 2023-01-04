@@ -43,8 +43,8 @@ export const Switch = compose<SwitchType>({
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
-    const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true }, {}));
-    const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false }, {}));
+    const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true, disabled: userProps.disabled }, {}));
+    const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false, disabled: userProps.disabled }, {}));
 
     // For Mobile platform we are passing extra data to useSwitch for Animated API
     const switchInfo = useSwitch(
