@@ -2,6 +2,7 @@ import { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleShadows } from './appleShadows.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
+import { memoize } from '@fluentui-react-native/memo-cache';
 
 export function appleSpacing(): Spacing {
   return {
@@ -71,7 +72,7 @@ export const appleComponents = {
   },
 };
 
-export function getBaseAppleThemeMacOS(): Theme {
+function getBaseAppleThemeMacOSWorker(): Theme {
   return {
     colors: fallbackApplePalette(),
     typography: fallbackAppleTypography(),
@@ -81,3 +82,5 @@ export function getBaseAppleThemeMacOS(): Theme {
     host: { appearance: 'dynamic' },
   };
 }
+
+export const getBaseAppleThemeMacOS = memoize(getBaseAppleThemeMacOSWorker);
