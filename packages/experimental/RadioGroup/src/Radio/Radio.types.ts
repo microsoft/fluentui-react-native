@@ -126,11 +126,13 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
 
   /**
    * Ripple color for Android.
+   * @platform android
    */
   rippleColor?: ColorValue;
 
   /**
    * Ripple radius for circular radio on Android.
+   * @platform android
    */
   rippleRadius?: number;
 
@@ -195,7 +197,7 @@ export interface RadioInfo {
 
 export interface RadioSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
-  button: PressableProps;
+  button: PressablePropsExtended;
   innerCircle: IViewProps;
   labelContent: IViewProps;
   label: TextProps;
