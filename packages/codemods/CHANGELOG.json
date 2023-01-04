@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/codemods",
   "entries": [
     {
+      "date": "Wed, 04 Jan 2023 02:04:50 GMT",
+      "tag": "@fluentui-react-native/codemods_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/codemods",
+            "commit": "82b813327d49becf212c7570b6bbaaac26f192eb",
+            "comment": "Build cli for codemod package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 03 Oct 2022 16:40:48 GMT",
       "tag": "@fluentui-react-native/codemods_v0.2.0",
       "version": "0.2.0",
