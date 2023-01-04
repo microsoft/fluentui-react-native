@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-icon",
   "entries": [
     {
+      "date": "Mon, 02 Jan 2023 11:28:01 GMT",
+      "tag": "@fluentui-react-native/experimental-icon_v0.1.11",
+      "version": "0.1.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/experimental-icon",
+            "commit": "a46d94d27084331021638550374fc841815cd468",
+            "comment": "Added snapshot tests for the Icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 16:09:27 GMT",
       "tag": "@fluentui-react-native/experimental-icon_v0.1.10",
       "version": "0.1.10",

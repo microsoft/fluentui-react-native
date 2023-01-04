@@ -61,14 +61,8 @@ jobs:
       # sets-up specifics for android dependency like NDK & emulator
       - template: templates/android-dep-setup.yml
 
-      - bash: |
-          echo "yarn $(platform)"
-          yarn $(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)'
-        env:
-          JAVA_HOME: $(JAVA_HOME_11_X64)
-          PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
+      # builds a debug apk and runs E2E tests on it
+      - template: templates/e2e-testing-android.yml
 
   - job: macOSPR
     displayName: macOS PR
