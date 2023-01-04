@@ -7,7 +7,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { ICON_TESTPAGE } from '../../../../E2E/src/IconLegacy/consts';
 import { E2ETestingIcon } from './IconLegacyE2ETest';
 import { IconV1E2ETest } from './IconV1E2ETest';
-import { IconV1 } from './IconV1';
+import { IconV1Test } from './IconV1';
 import { testImage, testTtf, svgProps } from '../Common/iconExamples';
 
 const Icons: React.FunctionComponent = () => {
@@ -100,7 +100,7 @@ const iconSections: TestSection[] = [
   },
   {
     name: 'Default Icon',
-    component: IconV1,
+    component: IconV1Test,
   },
   {
     name: 'IconV1 for E2E Testing',
