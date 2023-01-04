@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/focus-trap-zone
 
-This log was last generated on Tue, 27 Dec 2022 10:18:14 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.47
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+
+## 0.9.46
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+
+## 0.9.45
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.4
+
+## 0.9.44
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
 
 ## 0.9.43
 

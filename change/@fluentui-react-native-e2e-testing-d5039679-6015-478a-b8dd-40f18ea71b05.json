@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Clean up and overhaul Avatar and Callout tests with better errors and cleaner PageObjects",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
