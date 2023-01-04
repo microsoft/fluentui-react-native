@@ -52,7 +52,7 @@ exports[`Switch Default 1`] = `
         ],
       },
       "trackBackgroundStyle": Object {
-        "backgroundColor": "rgba(240, 240, 240, 1)",
+        "backgroundColor": "rgba(15, 108, 189, 1)",
       },
     }
   }
@@ -61,6 +61,7 @@ exports[`Switch Default 1`] = `
     style={
       Object {
         "color": "#242424",
+        "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
@@ -82,7 +83,7 @@ exports[`Switch Default 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(240, 240, 240, 1)",
+          "backgroundColor": "rgba(15, 108, 189, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,
@@ -167,7 +168,7 @@ exports[`Switch Disabled 1`] = `
         ],
       },
       "trackBackgroundStyle": Object {
-        "backgroundColor": "rgba(240, 240, 240, 1)",
+        "backgroundColor": "rgba(180, 214, 250, 1)",
       },
     }
   }
@@ -176,6 +177,7 @@ exports[`Switch Disabled 1`] = `
     style={
       Object {
         "color": "#e0e0e0",
+        "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
@@ -197,7 +199,7 @@ exports[`Switch Disabled 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(240, 240, 240, 1)",
+          "backgroundColor": "rgba(180, 214, 250, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,

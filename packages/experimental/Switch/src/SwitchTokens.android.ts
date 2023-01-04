@@ -9,9 +9,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   trackHeight: 32,
   trackWidth: 52,
   thumbMargin: 3,
-  fontSize: t.typography.variants.body1.size,
-  fontWeight: t.typography.variants.body1.weight,
-  fontLineHeight: t.typography.variants.body1.lineHeight,
+  variant: 'body1',
   color: t.colors.neutralForeground1,
   elevation: t.shadows.shadow8.key.blur,
 

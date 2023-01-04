@@ -81,36 +81,38 @@ export const useSwitch = (props: SwitchProps, animationConfig?: IAnimationConfig
     [],
   );
 
-  const switchAnimationStyles = {
+  const switchAnimationStyles = React.useMemo(() => {
     // transform over toggled on position to toggled off position and vice versa
-    thumbAnimatedStyle: {
-      transform: [
-        {
-          translateX: animation,
-        },
-      ],
-    },
-    // Interpolate over toggled on color to toggled off color and vice versa
-    // Dividing the quadrants of interpolaton because this brings good intervals changes.
-    trackBackgroundStyle: {
-      backgroundColor: trackBackgroundAnimation.interpolate({
-        inputRange: [0, 0.25, 0.75, 1],
-        outputRange: checkedState
-          ? [
-              animationConfig.toggleOnBgColor,
-              animationConfig.toggleOnBgColor,
-              animationConfig.toggleOffBgColor,
-              animationConfig.toggleOffBgColor,
-            ]
-          : [
-              animationConfig.toggleOnBgColor,
-              animationConfig.toggleOnBgColor,
-              animationConfig.toggleOffBgColor,
-              animationConfig.toggleOffBgColor,
-            ],
-      }),
-    },
-  };
+    return {
+      thumbAnimatedStyle: {
+        transform: [
+          {
+            translateX: animation,
+          },
+        ],
+      },
+      // Interpolate over toggled on color to toggled off color and vice versa
+      // Dividing the quadrants of interpolaton because this brings good intervals changes.
+      trackBackgroundStyle: {
+        backgroundColor: trackBackgroundAnimation.interpolate({
+          inputRange: [0, 0.25, 0.75, 1],
+          outputRange: checkedState
+            ? [
+                animationConfig.toggleOnBgColor,
+                animationConfig.toggleOnBgColor,
+                animationConfig.toggleOffBgColor,
+                animationConfig.toggleOffBgColor,
+              ]
+            : [
+                animationConfig.toggleOnBgColor,
+                animationConfig.toggleOnBgColor,
+                animationConfig.toggleOffBgColor,
+                animationConfig.toggleOffBgColor,
+              ],
+        }),
+      },
+    };
+  }, [checkedState]);
 
   //Setting the initial position of the know on track when page loads.
   if (isMobile) {
