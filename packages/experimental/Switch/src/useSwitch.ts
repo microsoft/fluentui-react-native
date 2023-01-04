@@ -6,7 +6,7 @@ import {
   useViewCommandFocus,
   InteractionEvent,
 } from '@fluentui-react-native/interactive-hooks';
-import { SwitchProps, SwitchInfo, IAnimationConfig } from './Switch.types';
+import { SwitchProps, SwitchInfo, AnimationConfig } from './Switch.types';
 import { AccessibilityState, AccessibilityActionEvent, Animated, Platform } from 'react-native';
 import { memoize } from '@fluentui-react-native/framework';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
@@ -15,7 +15,7 @@ const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
 const isMobile = Platform.OS === 'android' || Platform.OS == 'ios';
 
-export const useSwitch = (props: SwitchProps, animationConfig?: IAnimationConfig): SwitchInfo => {
+export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
   const [animation] = React.useState(new Animated.Value(0));
   const [trackBackgroundAnimation] = React.useState(new Animated.Value(0));
@@ -67,7 +67,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: IAnimationConfig
 
   // Function to transform the knob over track in animated way when switch is toggled.
   const startTrackAnimation = React.useCallback(
-    (onInit = false, animationConfig: IAnimationConfig, animation: Animated.Value, toggled: boolean) => {
+    (onInit = false, animationConfig: AnimationConfig, animation: Animated.Value, toggled: boolean) => {
       Animated.timing(animation, {
         toValue: toggled
           ? animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2)
@@ -114,7 +114,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: IAnimationConfig
     };
   }, [checkedState]);
 
-  //Setting the initial position of the know on track when page loads.
+  //Setting the initial position of the knob on track when page loads.
   if (isMobile) {
     if (checkedState) {
       startTrackAnimation(false, animationConfig, animation, checkedState);

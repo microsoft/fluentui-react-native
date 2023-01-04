@@ -126,7 +126,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   above?: SwitchTokens;
 }
 
-export interface IAnimationConfig {
+export interface AnimationConfig {
   toggleOnBgColor: string;
   toggleOffBgColor: string;
   trackWidth: number;
