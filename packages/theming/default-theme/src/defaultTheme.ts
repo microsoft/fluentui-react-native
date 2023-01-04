@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { getStockWebPalette, getStockWebDarkPalette, getStockWebHCPalette } from './defaultColors';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { createShadowAliasTokens } from './createAliasTokens';
+import { memoize } from '@fluentui-react-native/memo-cache';
 
 function _defaultTypography(): Typography {
   const defaultsDict = {
@@ -77,7 +78,7 @@ export function defaultSpacing(): Spacing {
   return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
 }
 
-export function defaultFluentTheme(): Theme {
+function defaultFluentThemeWorker(): Theme {
   return {
     colors: getStockWebPalette(),
     typography: _defaultTypography(),
@@ -88,7 +89,9 @@ export function defaultFluentTheme(): Theme {
   };
 }
 
-export function defaultFluentDarkTheme(): Theme {
+export const defaultFluentTheme = memoize(defaultFluentThemeWorker);
+
+function defaultFluentDarkThemeWorker(): Theme {
   const defaultTheme = defaultFluentTheme();
   return {
     colors: getStockWebDarkPalette(),
@@ -100,7 +103,9 @@ export function defaultFluentDarkTheme(): Theme {
   };
 }
 
-export function defaultFluentHighConstrastTheme(): Theme {
+export const defaultFluentDarkTheme = memoize(defaultFluentDarkThemeWorker);
+
+function defaultFluentHighConstrastThemeWorker(): Theme {
   const defaultTheme = defaultFluentTheme();
   return {
     colors: getStockWebHCPalette(),
@@ -111,3 +116,5 @@ export function defaultFluentHighConstrastTheme(): Theme {
     host: { appearance: 'highContrast' },
   };
 }
+
+export const defaultFluentHighConstrastTheme = memoize(defaultFluentHighConstrastThemeWorker);
