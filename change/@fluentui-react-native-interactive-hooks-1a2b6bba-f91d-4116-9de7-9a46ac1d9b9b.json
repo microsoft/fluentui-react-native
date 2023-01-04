@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix useKeyProps for Windows + more followup",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
