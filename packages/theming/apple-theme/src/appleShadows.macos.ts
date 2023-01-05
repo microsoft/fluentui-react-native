@@ -1,11 +1,7 @@
-import { ThemeShadowDefinition } from '@fluentui-react-native/theme-types';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
-import { Appearance } from 'react-native';
+import { ThemeShadowDefinition, AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { getIsHighContrast } from './appleHighContrast.macos';
 import { createMacOSShadowAliasTokens } from './createMacOSAliasTokens';
 
-export function fallbackAppleShadows(): ThemeShadowDefinition {
-  const appearance = Appearance.getColorScheme();
-  const mode = getCurrentAppearance(appearance, 'light');
+export function fallbackAppleShadows(mode: AppearanceOptions): ThemeShadowDefinition {
   return createMacOSShadowAliasTokens(mode, getIsHighContrast());
 }

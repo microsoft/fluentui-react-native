@@ -1,4 +1,4 @@
-import { Spacing, Theme } from '@fluentui-react-native/theme-types';
+import { Spacing, Theme, AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleShadows } from './appleShadows.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
@@ -72,11 +72,11 @@ export const appleComponents = {
   },
 };
 
-function getBaseAppleThemeMacOSWorker(): Theme {
+function getBaseAppleThemeMacOSWorker(mode: AppearanceOptions): Theme {
   return {
-    colors: fallbackApplePalette(),
+    colors: fallbackApplePalette(mode),
     typography: fallbackAppleTypography(),
-    shadows: fallbackAppleShadows(),
+    shadows: fallbackAppleShadows(mode),
     spacing: appleSpacing(),
     components: appleComponents,
     host: { appearance: 'dynamic' },
