@@ -33,7 +33,7 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         Attribute.AccessibilityRole,
         MENUBUTTON_A11Y_ROLE,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -45,7 +45,7 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         MENU_BUTTON_ACCESSIBILITY_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -57,7 +57,7 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         MENU_BUTTON_TEST_COMPONENT_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
