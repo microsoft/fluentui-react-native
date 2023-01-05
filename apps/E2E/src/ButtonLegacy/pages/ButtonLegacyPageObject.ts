@@ -11,7 +11,7 @@ class ButtonLegacyPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
 
-  async didOnClickCallbackFire(errorMsg?: string): Promise<boolean> {
+  async didOnClickCallbackFire(errorMsg: string): Promise<boolean> {
     const callbackText = await this._callbackText;
     await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg ?? 'The onClick callback did not fire.');
     return await callbackText.isDisplayed();

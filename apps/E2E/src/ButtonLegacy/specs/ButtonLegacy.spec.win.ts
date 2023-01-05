@@ -1,6 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ButtonLegacyPageObject from '../pages/ButtonLegacyPageObject';
-import { ComponentSelector } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL_DEPRECATED, BUTTON_TEST_COMPONENT_LABEL_DEPRECATED } from '../consts';
 
