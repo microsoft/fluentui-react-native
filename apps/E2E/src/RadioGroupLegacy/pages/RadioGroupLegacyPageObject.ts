@@ -36,10 +36,7 @@ class RadioGroupLegacyPage extends BasePage {
   }
 
   async waitForRadioButtonSelected(selector: RadioButton, errorMsg: string): Promise<boolean> {
-    await this.waitForCondition(
-      async () => await this.isRadioButtonSelected(selector),
-      errorMsg ?? `RadioButton ${selector} failed to be selected.`,
-    );
+    await this.waitForCondition(async () => await this.isRadioButtonSelected(selector), errorMsg);
     return await this.isRadioButtonSelected(selector);
   }
 

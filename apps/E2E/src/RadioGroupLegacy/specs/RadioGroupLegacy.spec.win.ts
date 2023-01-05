@@ -34,7 +34,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
   it('Validate RadioGroup\'s "accessibilityRole" defaults to List "ControlType" element attribute.', async () => {
     await expect(
       await RadioGroupPageObject.compareAttribute(RadioGroupPageObject._firstRadioGroup, Attribute.AccessibilityRole, RADIOGROUP_A11Y_ROLE),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -46,7 +46,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         Attribute.AccessibilityRole,
         RADIOBUTTON_A11Y_ROLE,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -58,7 +58,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         RADIOGROUP_ACCESSIBILITY_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -70,7 +70,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         RADIOGROUP_TEST_COMPONENT_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -82,7 +82,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -94,7 +94,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         SECOND_RADIO_BUTTON_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -123,7 +123,7 @@ describe('RadioGroup Legacy Functional Testing', async () => {
         RadioButton.Second,
         'Clicked the second RadioButton, but it failed to be selected.',
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -138,7 +138,7 @@ describe('RadioGroup Legacy Functional Testing', async () => {
         RadioButton.Second,
         'Pressed "Down Arrow" on the first RadioButton, but the second RadioButton failed to be selected.',
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -153,7 +153,7 @@ describe('RadioGroup Legacy Functional Testing', async () => {
         RadioButton.Fourth,
         'Pressed "Down Arrow" on the second RadioButton, but the fourth RadioButton failed to be selected. The third RadioButton is disabled so it should be skipped.',
       ),
-    ).toBeTrue(); // It should skip RadioButton 3 since it is disabled
+    ).toBeTruthy(); // It should skip RadioButton 3 since it is disabled
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
