@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Revert win32 submenuitem back to useAsPressable",
+  "comment": "Remove Pressable from ContextualMenuItem (and SubMenuItem)",
   "packageName": "@fluentui-react-native/contextual-menu",
   "email": "krsiler@microsoft.com",
   "dependentChangeType": "patch"
