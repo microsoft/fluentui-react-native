@@ -4,7 +4,7 @@ Icon component contains SvgIcon and FontIcon components.
 It can be used when both types of icons should be supported.
 
 ```ts
-import { Icon, FontIcon, SvgIcon } from '@fluentui-react-native/experimental-icon';
+import { IconV1, FontIcon, SvgIcon } from '@fluentui-react-native/icon';
 ```
 
 ## Sample Code

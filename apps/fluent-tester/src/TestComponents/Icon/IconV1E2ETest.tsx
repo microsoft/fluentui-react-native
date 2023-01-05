@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
-import { FontIcon, SvgIcon, Icon, FontIconProps, SvgIconProps } from '@fluentui-react-native/experimental-icon';
+import { FontIcon, SvgIcon, IconV1, FontIconPropsV1, SvgIconPropsV1 } from '@fluentui-react-native/icon';
 import {
   ICON_ACCESSIBILITY_LABEL,
   ICON_TEST_COMPONENT,
@@ -11,7 +11,7 @@ import {
 } from '../../../../E2E/src/IconLegacy/consts';
 import TestSvg from '../../../assets/test.svg';
 
-const fontBuiltInProps: FontIconProps = {
+const fontBuiltInProps: FontIconPropsV1 = {
   fontFamily: 'Arial',
   codepoint: 0x2663,
   fontSize: 100,
@@ -20,7 +20,7 @@ const fontBuiltInProps: FontIconProps = {
   accessibilityLabel: ICON_ACCESSIBILITY_LABEL,
 };
 
-const svgUriProps: SvgIconProps = {
+const svgUriProps: SvgIconPropsV1 = {
   uri: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg',
   viewBox: '0 0 1000 1000',
   width: 100,
@@ -29,7 +29,7 @@ const svgUriProps: SvgIconProps = {
   testID: ICON_TEST_COMPONENT,
 };
 
-const svgSrcProps: SvgIconProps = {
+const svgSrcProps: SvgIconPropsV1 = {
   viewBox: '0 0 500 500',
   src: TestSvg,
   width: 72,
@@ -42,7 +42,7 @@ export const IconV1E2ETest: React.FunctionComponent = () => {
   return (
     <View>
       <Text>Icon component</Text>
-      <Icon svgSource={svgUriProps} />
+      <IconV1 svgSource={svgUriProps} />
 
       <Text>SVG</Text>
       <SvgIcon {...svgSrcProps} />
