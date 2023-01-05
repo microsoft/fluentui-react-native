@@ -9,11 +9,6 @@ export const radioName = 'Radio';
 
 export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
-   * Total size of the Radio View
-   */
-  radioViewSize?: number;
-
-  /**
    * Horizontal padding of the root view
    */
   rootHorizontalPadding?: number;

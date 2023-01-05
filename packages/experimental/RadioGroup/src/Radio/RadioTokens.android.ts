@@ -16,7 +16,10 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       marginLeft: globalTokens.sizeNone,
     },
 
-    radioViewSize: 24,
+    marginTop: 24 - 20, // Size - Outer Circle Size
+    marginBottom: 24 - 20, // Size - Outer Circle Size
+    marginLeft: 24 - 20, // Size - Outer Circle Size
+    marginRight: 24 - 20, // Size - Outer Circle Size
     radioOuterCircleSize: 20,
     radioInnerCircleSize: 10,
     radioBorderStyle: 'solid',
