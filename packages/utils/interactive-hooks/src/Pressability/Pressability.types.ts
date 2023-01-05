@@ -68,12 +68,12 @@ export type PressabilityConfig = Readonly<
        * Whether a press gesture can be interrupted by a parent gesture such as a
        * scroll event. Defaults to true.
        */
-      cancelable?: PressableProps['cancelable'];
+      cancelable?: boolean;
 
       /**
        * Whether to disable initialization of the press gesture.
        */
-      disabled?: PressableProps['disabled'];
+      disabled?: boolean;
 
       /**
        * Amount to extend the `VisualRect` by to create `HitRect`.
@@ -88,23 +88,23 @@ export type PressabilityConfig = Readonly<
       /**
        * Whether to disable the systemm sound when `onPress` fires on Android.
        **/
-      android_disableSound?: PressableProps['android_disableSound'];
+      android_disableSound?: boolean;
 
       /**
        * Duration to wait after hover in before calling `onHoverIn`.
        */
-      delayHoverIn?: PressableProps['delayHoverIn'];
+      delayHoverIn?: number;
 
       /**
        * Duration to wait after hover out before calling `onHoverOut`.
        */
-      delayHoverOut?: PressableProps['delayHoverOut'];
+      delayHoverOut?: number;
 
       /**
        * Duration (in addition to `delayPressIn`) after which a press gesture is
        * considered a long press gesture. Defaults to 500 (milliseconds).
        */
-      delayLongPress?: PressableProps['delayLongPress'];
+      delayLongPress?: number;
 
       /**
        * Duration to wait after press down before calling `onPressIn`.
