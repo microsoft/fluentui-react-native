@@ -2,6 +2,7 @@ import iOSLightAliasTokens from '@fluentui-react-native/design-tokens-ios/light/
 import iOSDarkAliasTokens from '@fluentui-react-native/design-tokens-ios/dark/tokens-aliases.json';
 import iOSLightShadowTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-shadow.json';
 import iOSDarkShadowTokens from '@fluentui-react-native/design-tokens-ios/dark/tokens-shadow.json';
+
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
 
@@ -11,7 +12,7 @@ export function getAliasTokens(mode: AppearanceOptions) {
   } else if (mode === 'dark') {
     return iOSDarkAliasTokens;
   } else if (mode === 'highContrast') {
-    throw new Error('highContrast is not a valid AppearanceOptions on macOS');
+    throw new Error('highContrast is not a valid AppearanceOptions on iOS');
   } else {
     assertNever(mode);
   }
