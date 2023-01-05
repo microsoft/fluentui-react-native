@@ -5,7 +5,7 @@ import iOSDarkShadowTokens from '@fluentui-react-native/design-tokens-ios/dark/t
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
 
-export function getiOSAliasTokens(mode: AppearanceOptions) {
+export function getAliasTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
     return iOSLightAliasTokens;
   } else if (mode === 'dark') {
@@ -17,7 +17,7 @@ export function getiOSAliasTokens(mode: AppearanceOptions) {
   }
 }
 
-export function getiOSShadowTokens(mode: AppearanceOptions) {
+export function getShadowTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
     return iOSLightShadowTokens;
   } else if (mode === 'dark') {
