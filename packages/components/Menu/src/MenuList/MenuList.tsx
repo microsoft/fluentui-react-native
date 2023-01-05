@@ -56,7 +56,6 @@ export const MenuList = compose<MenuListType>({
               <Slots.focusZone
                 componentRef={focusZoneRef}
                 focusZoneDirection={'vertical'}
-                defaultTabbableElement={focusZoneRef}
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
