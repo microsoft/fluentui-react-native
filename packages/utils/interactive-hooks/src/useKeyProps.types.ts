@@ -6,7 +6,9 @@ export type KeyCallback = (e?: KeyPressEvent) => void;
 
 export type KeyPressProps = {
   onKeyDown?: KeyCallback;
-  validKeysDown?: string[];
+  validKeysDown?: string[]; // macOS
+  keyDownEvents?: any[]; // windows
   onKeyUp?: KeyCallback;
-  validKeysUp?: string[];
+  validKeysUp?: string[]; // macOS
+  keyUpEvents?: any[]; // windows
 };
