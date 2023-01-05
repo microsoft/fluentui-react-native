@@ -7,6 +7,8 @@ import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
+    requiredColor: globalTokens.color.darkRed.primary,
+    requiredPadding: globalTokens.size20,
     checkboxBorderWidth: globalTokens.stroke.width15,
     checkboxBorderRadius: globalTokens.corner.radius40,
     checkboxSize: globalTokens.size200,
@@ -26,9 +28,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxBackgroundColor: t.colors.neutralBackground1Pressed,
     },
     padding: globalTokens.size20,
-    fontSize: t.typography.variants.body1.size,
-    fontWeight: t.typography.variants.body1.weight,
-    fontLineHeight: t.typography.variants.body1.lineHeight,
+    variant: 'body1',
     checkboxBorderColor: t.colors.neutralStrokeAccessible,
     checkmarkOpacity: 0,
     disabled: {
