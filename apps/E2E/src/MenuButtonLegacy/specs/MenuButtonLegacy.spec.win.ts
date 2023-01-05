@@ -75,7 +75,9 @@ describe('MenuButton Legacy Functional Testing', () => {
     /* Click on the MenuButton */
     await MenuButtonLegacyPageObject.click(MenuButtonLegacyPageObject._firstMenuButton);
 
-    await expect(await MenuButtonLegacyPageObject.waitForMenuItemToDisplay()).toBeTruthy();
+    await expect(
+      await MenuButtonLegacyPageObject.waitForMenuItemToDisplay('Clicked MenuButton, but menu items failed to display before timeout.'),
+    ).toBeTruthy();
 
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -84,7 +86,11 @@ describe('MenuButton Legacy Functional Testing', () => {
     /* Type a space on the MenuButton */
     await MenuButtonLegacyPageObject.sendKeys(MenuButtonLegacyPageObject._firstMenuButton, [Keys.SPACE]);
 
-    await expect(await MenuButtonLegacyPageObject.waitForMenuItemToDisplay()).toBeTruthy();
+    await expect(
+      await MenuButtonLegacyPageObject.waitForMenuItemToDisplay(
+        'Pressed "SPACE" on MenuButton, but menu items failed to display before timeout.',
+      ),
+    ).toBeTruthy();
 
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });

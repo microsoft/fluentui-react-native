@@ -16,12 +16,9 @@ class MenuButtonLegacyPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async waitForMenuItemToDisplay(errorMsg?: string): Promise<boolean> {
+  async waitForMenuItemToDisplay(errorMsg: string): Promise<boolean> {
     const menuItem = await this._menuItem;
-    await this.waitForCondition(
-      async () => await menuItem.isDisplayed(),
-      errorMsg ?? 'Menu Item #1 for the first MenuButton failed to display.',
-    );
+    await this.waitForCondition(async () => await menuItem.isDisplayed(), errorMsg);
     return await menuItem.isDisplayed();
   }
 
