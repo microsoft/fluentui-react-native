@@ -32,7 +32,7 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         Attribute.AccessibilityRole,
         CHECKBOX_A11Y_ROLE,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -44,7 +44,7 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         CHECKBOX_ACCESSIBILITY_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -56,7 +56,7 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         CHECKBOX_TEST_COMPONENT_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });

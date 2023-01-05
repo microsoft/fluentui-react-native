@@ -28,7 +28,7 @@ describe('CheckboxV1 Accessibility Testing', () => {
   it('Validate "accessibilityRole" defaults to Checkbox "ControlType" element attribute.', async () => {
     await expect(
       await CheckboxV1PageObject.compareAttribute(CheckboxV1PageObject._primaryComponent, Attribute.AccessibilityRole, CHECKBOX_A11Y_ROLE),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
@@ -40,7 +40,7 @@ describe('CheckboxV1 Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         CHECKBOXV1_ACCESSIBILITY_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
@@ -52,7 +52,7 @@ describe('CheckboxV1 Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         CHECKBOXV1_TEST_COMPONENT_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
