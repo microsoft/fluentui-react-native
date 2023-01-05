@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Wed, 04 Jan 2023 16:55:53 GMT and should not be manually modified.
+This log was last generated on Thu, 05 Jan 2023 21:10:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.8
+
+Thu, 05 Jan 2023 21:10:18 GMT
+
+### Patches
+
+- fix checkbox android tokens (rohanpd.work@gmail.com)
 
 ## 0.19.7
 

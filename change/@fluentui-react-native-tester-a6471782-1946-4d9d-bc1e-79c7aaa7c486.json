@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix checkbox android tokens",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}

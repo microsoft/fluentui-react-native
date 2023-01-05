@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Thu, 05 Jan 2023 21:10:18 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.21.15",
+      "version": "0.21.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "0c4b7017d6872297523d4016d910c2a53696f587",
+            "comment": "Remove Pressable from ContextualMenuItem (and SubMenuItem)"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 05 Jan 2023 11:24:52 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.21.14",
       "version": "0.21.14",

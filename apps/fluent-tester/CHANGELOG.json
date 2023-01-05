@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 05 Jan 2023 21:10:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.126.20",
+      "version": "0.126.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "371e8e828737cabe6e7819359b6df2390c726d98",
+            "comment": "fix checkbox android tokens"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.13.26",
+            "commit": "681dfc9e0dbbd686f75c57f56c0aad9bdf346eb1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.6.16",
+            "commit": "681dfc9e0dbbd686f75c57f56c0aad9bdf346eb1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.35.4",
+            "commit": "681dfc9e0dbbd686f75c57f56c0aad9bdf346eb1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 05 Jan 2023 11:24:52 GMT",
       "tag": "@fluentui-react-native/tester_v0.126.19",
       "version": "0.126.19",

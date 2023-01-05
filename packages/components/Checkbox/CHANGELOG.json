@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Thu, 05 Jan 2023 21:10:18 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.19.8",
+      "version": "0.19.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "371e8e828737cabe6e7819359b6df2390c726d98",
+            "comment": "fix checkbox android tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Jan 2023 16:55:53 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.19.7",
       "version": "0.19.7",

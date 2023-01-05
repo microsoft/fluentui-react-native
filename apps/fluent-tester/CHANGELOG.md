@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 05 Jan 2023 11:24:52 GMT and should not be manually modified.
+This log was last generated on Thu, 05 Jan 2023 21:10:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.126.20
+
+Thu, 05 Jan 2023 21:10:19 GMT
+
+### Patches
+
+- fix checkbox android tokens (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.26
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.16
+- Bump @fluentui/react-native to v0.35.4
 
 ## 0.126.19
 

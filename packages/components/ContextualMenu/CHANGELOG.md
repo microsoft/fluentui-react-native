@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Thu, 05 Jan 2023 11:24:52 GMT and should not be manually modified.
+This log was last generated on Thu, 05 Jan 2023 21:10:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.15
+
+Thu, 05 Jan 2023 21:10:18 GMT
+
+### Patches
+
+- Remove Pressable from ContextualMenuItem (and SubMenuItem) (krsiler@microsoft.com)
 
 ## 0.21.14
 
