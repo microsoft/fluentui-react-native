@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update types in PressabilityConfig to match PressableProps",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
