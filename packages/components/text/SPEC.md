@@ -23,7 +23,8 @@ Basic example:
 ```jsx
 <Text>Hello World</Text>
 ```
-More examples on the [Test pages for Text](../../../apps/fluent-tester/src/TestComponents/TextExperimental). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+
+More examples on the [Test pages for Text](../../../apps/fluent-tester/src/TestComponents/TextV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -57,7 +58,7 @@ Win32:
 
 ```jsx
 const RedCaptionBold = Text.customize({ variant: 'captionStandard', fontWeight: '700', color: '#ff0000' });
-<RedCaptionBold>RedCaptionBold</RedCaptionBold>
+<RedCaptionBold>RedCaptionBold</RedCaptionBold>;
 ```
 
 ![Text Variants on win32 example](./assets/Text_example_variants_win32.png)
@@ -84,17 +85,11 @@ V1 `Text` component supports variant types that have preset font family, size, a
 ```jsx
 <Text variant={'bodyStandard'}>
   Press{' '}
-  <Text
-  variant={'bodyStandard'}
-  color="blue"
-  keyDownEvents={handledNativeKeyboardEvents}
-  onPress={_onPress2}
-  onKeyDown={_onKeyDown2}
-  >
-  here
+  <Text variant={'bodyStandard'} color="blue" keyDownEvents={handledNativeKeyboardEvents} onPress={_onPress2} onKeyDown={_onKeyDown2}>
+    here
   </Text>{' '}
   to view an alert.
-  </Text>
+</Text>
 ```
 
 ## API
@@ -211,10 +206,10 @@ export type TextTokens = FontTokens & IForegroundColorTokens & TextStyle;
 
 The following is a set of keys that interact with the `Text` component:
 
-| Key     | Description                                                     |
-| ------- | --------------------------------------------------------------- |
-| `Tab`   | If `onPress` or `focusable` is set, component will gain focus.  |
-| `Space` | Executes the function passed into the `onPress` prop.           |
+| Key     | Description                                                    |
+| ------- | -------------------------------------------------------------- |
+| `Tab`   | If `onPress` or `focusable` is set, component will gain focus. |
+| `Space` | Executes the function passed into the `onPress` prop.          |
 
 #### Cursor interaction for Pressable Text
 

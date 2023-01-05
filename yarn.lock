@@ -4236,10 +4236,10 @@ appium-adb@^9.10.14, appium-adb@^9.10.9:
     teen_process "^2.0.1"
     utf7 "^1.0.2"
 
-appium-android-driver@^5.7.0:
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.7.2.tgz#0ecc5fc8096d69591eb8f04e8374ef6e8a5ad9cc"
-  integrity sha512-IeDJ5ANZG7k4szOASQTRGcWBWc53nkzZBgVQQ7HAcN+hy8ZrtZYIhwxAy995j46XzVHWwpCfwJ73wX1tN8t7LA==
+appium-android-driver@^5.8.5:
+  version "5.8.5"
+  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.8.5.tgz#b84807a1772c70750acbb0837d5540c77ea146d5"
+  integrity sha512-DcCtMNcY0v30FIunMrnqKFn0ibFgOyiVWbcW474SCKT41MIOehWmC8FgzL8RoIBYIL40V3JnGhD4XwXYVcP+SQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.9"
@@ -4247,7 +4247,7 @@ appium-android-driver@^5.7.0:
     asyncbox "^2.8.0"
     axios "^1.x"
     bluebird "^3.4.7"
-    io.appium.settings "^4.2.1"
+    io.appium.settings "^5.0.0"
     jimp "^0.x"
     lodash "^4.17.4"
     lru-cache "^7.3.0"
@@ -4361,13 +4361,13 @@ appium-remote-debugger@^9.1.1:
     teen_process "^2.0.0"
 
 appium-uiautomator2-driver@^2.10.2:
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.10.2.tgz#7d9ed3143b54c2933acd4b45aa1de72e6bf87af6"
-  integrity sha512-W2kRQGfpVBriDrooBibXG0aMT5XDt1LAQTCiFkIlwum2N228G7Fx7ZElBZ4dE7b3WIfj7CMlHkTBvMwO4ONpog==
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.12.1.tgz#8048d91dd11066daccef85bc3f0f0928a3ea8d9e"
+  integrity sha512-6FLGpCuNlQbZQb1E/SPnKWGM0gwpVmKOR5tRPntmQ+0jyDQMIaROlyRhMnDqK0cfSn4Z+agxjPYzgxh1ZtqIpQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.14"
-    appium-android-driver "^5.7.0"
+    appium-android-driver "^5.8.5"
     appium-chromedriver "^5.2.1"
     appium-uiautomator2-server "^5.7.2"
     asyncbox "^2.3.1"
@@ -8559,10 +8559,10 @@ invert-kv@^3.0.0:
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-3.0.1.tgz#a93c7a3d4386a1dc8325b97da9bb1620c0282523"
   integrity sha512-CYdFeFexxhv/Bcny+Q0BfOV+ltRlJcd4BBZBYFX/O0u4npJrgZtIcjokegtiSMAvlMTJ+Koq0GBCc//3bueQxw==
 
-io.appium.settings@^4.2.1:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/io.appium.settings/-/io.appium.settings-4.2.3.tgz#224491f40e91176acc2fec0e67e8b3bda7bd2503"
-  integrity sha512-xKD/Vun4rx21h5IzugcboMuUQvBDFp0SuqsXCbcCy1WXnmkn00u85Qxk7MdfXAS4YyFbfZG21KDOqnFjivJPzQ==
+io.appium.settings@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/io.appium.settings/-/io.appium.settings-5.0.0.tgz#027f0f09d11a07b793a78ec6e7f633874926d233"
+  integrity sha512-8w/sd/BLxsoJMllx5dsx1yUVsJgDUNSTdow+luZcNQXgHsZTMWzbyTT3BMArguMe72EvjY6HegSoFxYwS3WKgA==
 
 ip@^1.1.5:
   version "1.1.8"
