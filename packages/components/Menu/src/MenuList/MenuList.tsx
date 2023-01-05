@@ -9,6 +9,7 @@ import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
+import { useMenuContext } from '../context';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;
@@ -39,6 +40,7 @@ export const MenuList = compose<MenuListType>({
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
+    const context = useMenuContext();
     const contextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList.props);
 
@@ -56,7 +58,7 @@ export const MenuList = compose<MenuListType>({
               <Slots.focusZone
                 componentRef={focusZoneRef}
                 focusZoneDirection={'vertical'}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                defaultTabbableElement={context.isSubmenu ? null : focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
               >
