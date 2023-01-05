@@ -1,5 +1,4 @@
 import { ThemeColorDefinition, AppearanceOptions } from '@fluentui-react-native/theme-types';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 import { createMacOSColorAliasTokens } from './createMacOSAliasTokens';
