@@ -55,6 +55,19 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
 
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
 
+  //Setting the initial position of the knob on track when page loads.
+  React.useEffect(() => {
+    if (isMobile) {
+      if (checkedState) {
+        startTrackAnimation(false, animationConfig, animation, checkedState);
+        startTrackBackgroundAnimation(true, trackBackgroundAnimation);
+      } else {
+        startTrackAnimation(true, animationConfig, animation, checkedState);
+        startTrackBackgroundAnimation(false, trackBackgroundAnimation);
+      }
+    }
+  }, [checkedState, animationConfig]);
+
   // Function to change background slowly over time when switch is toggled.
   const startTrackBackgroundAnimation = React.useCallback((checked: boolean, animation: Animated.Value) => {
     const toValue = checked ? 0 : 1;
@@ -113,17 +126,6 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
       },
     };
   }, [checkedState]);
-
-  //Setting the initial position of the knob on track when page loads.
-  if (isMobile) {
-    if (checkedState) {
-      startTrackAnimation(false, animationConfig, animation, checkedState);
-      startTrackBackgroundAnimation(true, trackBackgroundAnimation);
-    } else {
-      startTrackAnimation(true, animationConfig, animation, checkedState);
-      startTrackBackgroundAnimation(false, trackBackgroundAnimation);
-    }
-  }
 
   const focusRef = disabled ? null : componentRef;
 

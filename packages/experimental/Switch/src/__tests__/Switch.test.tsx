@@ -16,12 +16,6 @@ it('Switch Disabled', () => {
   expect(tree).toMatchSnapshot();
 });
 
-// Temporary commented out to check on Animation , seems AnimatedAPI brings difference in render tree.
-
-// it('Simple switch rendering does not invalidate styling', () => {
-//   checkRenderConsistency(() => <Switch label="Default Switch" />, 1);
-// });
-
 it('Switch re-renders correctly', () => {
   checkReRender(() => <Switch label="Render Twice" />, 2);
 });
