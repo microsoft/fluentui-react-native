@@ -17,7 +17,7 @@ class CheckboxV1PageObject extends BasePage {
 
   /* Waits for the checkbox to be checked or unchecked if the new state is true or false. Returns true if the
    * checkbox toggled to the new state. */
-  async waitForCheckboxToggle(newState: boolean, errorMessage?: string): Promise<boolean> {
+  async waitForCheckboxToggle(newState: boolean, errorMessage: string): Promise<boolean> {
     if ((await this.isCheckboxChecked()) !== newState) {
       await this.waitForCondition(async () => (await this.isCheckboxChecked()) === newState, errorMessage);
     }
