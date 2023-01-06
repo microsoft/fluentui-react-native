@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Show focus on Submenu item for keyboard access",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "amchiu@microsoft.com",
-  "dependentChangeType": "patch"
-}

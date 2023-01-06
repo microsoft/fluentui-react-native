@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 06 Jan 2023 12:26:31 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Jan 2023 19:49:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.13
+
+Fri, 06 Jan 2023 19:49:46 GMT
+
+### Patches
+
+- Show focus on Submenu item for keyboard access (amchiu@microsoft.com)
 
 ## 1.2.12
 

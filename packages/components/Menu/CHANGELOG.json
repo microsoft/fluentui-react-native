@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 06 Jan 2023 19:49:46 GMT",
+      "tag": "@fluentui-react-native/menu_v1.2.13",
+      "version": "1.2.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "28ba9c0affcd948c6fa672b8421b8b73d25fa371",
+            "comment": "Show focus on Submenu item for keyboard access"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Jan 2023 12:26:31 GMT",
       "tag": "@fluentui-react-native/menu_v1.2.12",
       "version": "1.2.12",
