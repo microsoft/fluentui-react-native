@@ -126,6 +126,14 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   above?: SwitchTokens;
 }
 
+export interface AnimationConfig {
+  toggleOnBgColor: string;
+  toggleOffBgColor: string;
+  trackWidth: number;
+  thumbWidth: number;
+  thumbMargin: number;
+}
+
 export interface SwitchProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * Reference to the Switch
@@ -173,9 +181,14 @@ export interface SwitchProps extends Omit<PressablePropsExtended, 'onPress'> {
    * Note :'before', 'above' are not supported on Android
    */
   labelPosition?: 'before' | 'above' | 'after';
+
+  /**
+   * Disabled state of the switch.
+   */
+  disabled?: boolean;
 }
 
-export type SwitchState = PressableState & { toggled?: boolean };
+export type SwitchState = PressableState & { toggled?: boolean; disabled?: boolean };
 
 export interface SwitchInfo {
   props: SwitchProps & React.ComponentPropsWithRef<any>;
