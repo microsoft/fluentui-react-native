@@ -141,7 +141,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -269,7 +268,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -462,7 +460,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -590,7 +587,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -788,7 +784,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -921,7 +916,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -1115,7 +1109,6 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -1243,7 +1236,6 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -1437,7 +1429,6 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "marginLeft": 0,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -1565,7 +1556,6 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "marginLeft": 0,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -1775,7 +1765,6 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }
@@ -1903,7 +1892,6 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "marginLeft": 4,
               "marginRight": 6,
               "marginTop": 6,
-              "padding": NaN,
               "width": 20,
             }
           }

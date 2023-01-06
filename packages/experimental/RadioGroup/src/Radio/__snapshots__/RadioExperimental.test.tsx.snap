@@ -82,7 +82,6 @@ exports[`Radio component tests Radio default 1`] = `
         "marginLeft": 4,
         "marginRight": 6,
         "marginTop": 6,
-        "padding": NaN,
         "width": 20,
       }
     }
@@ -218,7 +217,6 @@ exports[`Radio component tests Radio disabled 1`] = `
         "marginLeft": 4,
         "marginRight": 6,
         "marginTop": 6,
-        "padding": NaN,
         "width": 20,
       }
     }
