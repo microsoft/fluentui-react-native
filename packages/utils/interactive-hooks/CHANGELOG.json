@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Wed, 04 Jan 2023 16:55:53 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.7",
+      "version": "0.22.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "60c0e928993c257e84e6078343f34495b6738301",
+            "comment": "Fix useKeyProps for Windows + more followup"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 16:09:27 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.22.6",
       "version": "0.22.6",

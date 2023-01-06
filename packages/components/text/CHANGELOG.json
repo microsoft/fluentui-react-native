@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Wed, 04 Jan 2023 16:55:53 GMT",
+      "tag": "@fluentui-react-native/text_v0.19.8",
+      "version": "0.19.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.7",
+            "commit": "60c0e928993c257e84e6078343f34495b6738301"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Jan 2023 23:38:40 GMT",
       "tag": "@fluentui-react-native/text_v0.19.7",
       "version": "0.19.7",

@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove Pressable from ContextualMenuItem (and SubMenuItem)",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
