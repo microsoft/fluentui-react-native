@@ -15,23 +15,40 @@ const PressableWithDesktopProps = (props: PressablePropsExtended) => {
 };
 
 it('Pressable with useKeyProps', () => {
-  const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
-  const tree = renderer.create(<PressableWithDesktopProps {...keyboardProps} />).toJSON();
+  const TestComponent = () => {
+    const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
+    return <PressableWithDesktopProps {...keyboardProps} />;
+  };
+
+  const tree = renderer.create(<TestComponent />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 it('useKeyProps called twice', () => {
-  const keyboardProps1 = useKeyProps(dummyFunction, ' ', 'Enter');
-  const keyboardProps2 = useKeyProps(dummyFunction, ' ', 'Enter');
-  expect(keyboardProps1).toBe(keyboardProps2);
+  const TestComponent = () => {
+    const keyboardProps1 = useKeyProps(dummyFunction, ' ', 'Enter');
+    const keyboardProps2 = useKeyProps(dummyFunction, ' ', 'Enter');
+    expect(keyboardProps1).toBe(keyboardProps2);
+    return <PressableWithDesktopProps {...keyboardProps2} />;
+  };
+
+  const tree = renderer.create(<TestComponent />).toJSON();
+  expect(tree).toMatchSnapshot();
 });
 
-it('Simple Pressable with useKeyProps rendering does not invalidate styling', () => {
-  const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
-  checkRenderConsistency(() => <PressableWithDesktopProps {...keyboardProps} />, 2);
+it('Pressable with useKeyProps simple rendering does not invalidate styling', () => {
+  const TestComponent = () => {
+    const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
+    return <PressableWithDesktopProps {...keyboardProps} />;
+  };
+
+  checkRenderConsistency(() => <TestComponent />, 2);
 });
 
 it('Pressable with useKeyProps re-renders correctly', () => {
-  const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
-  checkReRender(() => <PressableWithDesktopProps {...keyboardProps} />, 2);
+  const TestComponent = () => {
+    const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
+    return <PressableWithDesktopProps {...keyboardProps} />;
+  };
+  checkReRender(() => <TestComponent />, 2);
 });

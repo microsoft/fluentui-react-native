@@ -5,5 +5,5 @@
     "types": ["node", "jest"]
   },
   "include": ["src"],
-  "exclude": ["src/__testfixtures__"]
+  "exclude": ["src/transforms/__testfixtures__"]
 }
