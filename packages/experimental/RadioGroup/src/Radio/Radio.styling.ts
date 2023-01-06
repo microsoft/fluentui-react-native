@@ -75,9 +75,10 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           flexDirection: 'column',
           marginRight: tokens.labelMarginRight,
           marginLeft: tokens.labelMarginLeft,
+          padding: tokens.labelPadding,
         },
       }),
-      ['labelMarginRight', 'labelMarginLeft'],
+      ['labelMarginRight', 'labelMarginLeft', 'labelPadding'],
     ),
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({

@@ -5,9 +5,11 @@ import { RadioTokens } from './Radio.types';
 
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
   ({
-    color: t.colors.neutralForeground3,
+    // Tokens for label are taken from Android List Item
+    color: t.colors.neutralForeground1,
     variant: 'body1',
     labelMarginLeft: globalTokens.size160,
+    labelPadding: globalTokens.size20,
     subtextVariant: 'caption1',
     flexDirection: 'row',
     alignItems: 'center',
@@ -36,6 +38,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       rippleColor: 'transparent',
       radioBorder: t.colors.neutralStrokeDisabled,
       radioVisibility: 0,
+      color: t.colors.neutralForegroundDisabled1,
     },
 
     selected: {
@@ -49,6 +52,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
         radioBorder: t.colors.brandBackgroundDisabled,
         radioFill: t.colors.brandForegroundDisabled2,
         radioVisibility: 1,
+        color: t.colors.neutralForegroundDisabled1,
       },
     },
   } as RadioTokens);

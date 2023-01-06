@@ -89,14 +89,19 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   labelMarginTop?: ViewStyle['marginTop'];
 
   /**
-   * Padding between label content and focus ring.
+   * Label's right margin.
    */
   labelMarginRight?: ViewStyle['marginRight'];
 
   /**
-   * Padding between label content and focus ring.
+   * Label's left margin.
    */
   labelMarginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Label's padding.
+   */
+  labelPadding?: ViewStyle['marginLeft'];
 
   /*
    * Variant of label subtext.
