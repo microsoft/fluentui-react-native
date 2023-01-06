@@ -40,8 +40,8 @@ export const MenuList = compose<MenuListType>({
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
-    const context = useMenuContext();
-    const contextValue = useMenuListContextValue(menuList);
+    const menuContext = useMenuContext();
+    const menuListContextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList.props);
 
     const focusZoneRef = React.useRef<View>();
@@ -58,7 +58,7 @@ export const MenuList = compose<MenuListType>({
               <Slots.focusZone
                 componentRef={focusZoneRef}
                 focusZoneDirection={'vertical'}
-                defaultTabbableElement={context.isSubmenu ? null : focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                defaultTabbableElement={menuContext.isSubmenu ? null : focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
               >
@@ -70,7 +70,7 @@ export const MenuList = compose<MenuListType>({
           <Slots.root>{children}</Slots.root>
         );
 
-      return <MenuListProvider value={contextValue}>{content}</MenuListProvider>;
+      return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;
     };
   },
 });
