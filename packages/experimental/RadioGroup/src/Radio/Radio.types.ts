@@ -121,12 +121,16 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
 
   /**
    * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
    * @platform android
    */
   rippleColor?: ColorValue;
 
   /**
    * Ripple radius for circular radio on Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the radius of the circular ripple shown on the radio button.
    * @platform android
    */
   rippleRadius?: number;
