@@ -58,6 +58,8 @@ export const MenuList = compose<MenuListType>({
               <Slots.focusZone
                 componentRef={focusZoneRef}
                 focusZoneDirection={'vertical'}
+                // For submenus, setting defaultTabbableElement to null will let FZ set focus on the first key view.
+                // For root menu, let's set focus on the container to block FZ setting focus on the first key view.
                 defaultTabbableElement={menuContext.isSubmenu ? null : focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
