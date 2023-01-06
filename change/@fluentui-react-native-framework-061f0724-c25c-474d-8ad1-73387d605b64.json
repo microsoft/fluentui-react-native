@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Change default theme const to a method",
+  "packageName": "@fluentui-react-native/framework",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}

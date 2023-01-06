@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { getStockWebPalette, getStockWebDarkPalette, getStockWebHCPalette } from './defaultColors';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { createShadowAliasTokens } from './createAliasTokens';
+import { memoize } from '@fluentui-react-native/memo-cache';
 
 function _defaultTypography(): Typography {
   const defaultsDict = {
@@ -77,29 +78,43 @@ export function defaultSpacing(): Spacing {
   return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
 }
 
-export const defaultFluentTheme: Theme = {
-  colors: getStockWebPalette(),
-  typography: _defaultTypography(),
-  spacing: defaultSpacing(),
-  shadows: createShadowAliasTokens('light'),
-  components: {},
-  host: { appearance: 'light' },
-};
+function defaultFluentThemeWorker(): Theme {
+  return {
+    colors: getStockWebPalette(),
+    typography: _defaultTypography(),
+    spacing: defaultSpacing(),
+    shadows: createShadowAliasTokens('light'),
+    components: {},
+    host: { appearance: 'light' },
+  };
+}
 
-export const defaultFluentDarkTheme: Theme = {
-  colors: getStockWebDarkPalette(),
-  typography: defaultFluentTheme.typography,
-  shadows: createShadowAliasTokens('dark'),
-  spacing: defaultFluentTheme.spacing,
-  components: {},
-  host: { appearance: 'dark' },
-};
+export const defaultFluentTheme = memoize(defaultFluentThemeWorker);
 
-export const defaultFluentHighConstrastTheme: Theme = {
-  colors: getStockWebHCPalette(),
-  typography: defaultFluentTheme.typography,
-  shadows: createShadowAliasTokens('highContrast'),
-  spacing: defaultFluentTheme.spacing,
-  components: {},
-  host: { appearance: 'highContrast' },
-};
+function defaultFluentDarkThemeWorker(): Theme {
+  const defaultTheme = defaultFluentTheme();
+  return {
+    colors: getStockWebDarkPalette(),
+    typography: defaultTheme.typography,
+    shadows: createShadowAliasTokens('dark'),
+    spacing: defaultTheme.spacing,
+    components: {},
+    host: { appearance: 'dark' },
+  };
+}
+
+export const defaultFluentDarkTheme = memoize(defaultFluentDarkThemeWorker);
+
+function defaultFluentHighConstrastThemeWorker(): Theme {
+  const defaultTheme = defaultFluentTheme();
+  return {
+    colors: getStockWebHCPalette(),
+    typography: defaultTheme.typography,
+    shadows: createShadowAliasTokens('highContrast'),
+    spacing: defaultTheme.spacing,
+    components: {},
+    host: { appearance: 'highContrast' },
+  };
+}
+
+export const defaultFluentHighConstrastTheme = memoize(defaultFluentHighConstrastThemeWorker);
