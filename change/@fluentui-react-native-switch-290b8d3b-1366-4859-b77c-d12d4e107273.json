@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "revert customised checked file",
+  "packageName": "@fluentui-react-native/switch",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
