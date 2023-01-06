@@ -165,6 +165,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -292,6 +293,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -484,6 +486,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -611,6 +614,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -808,6 +812,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -940,6 +945,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1133,6 +1139,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1260,6 +1267,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1453,6 +1461,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1580,6 +1589,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1789,6 +1799,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1916,6 +1927,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
