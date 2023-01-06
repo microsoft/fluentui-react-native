@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Jan 2023 12:26:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.31
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Change default theme const to a method (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.16.21
 
 ## 0.8.30
 

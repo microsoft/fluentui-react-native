@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Wed, 04 Jan 2023 16:55:53 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Jan 2023 12:26:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.9
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.31
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/interactive-hooks to v0.22.8
 
 ## 0.19.8
 
