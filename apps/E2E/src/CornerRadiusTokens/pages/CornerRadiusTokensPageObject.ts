@@ -1,5 +1,5 @@
 import { HOMEPAGE_CORNERRADIUS_TESTPAGE, HOMEPAGE_CORNERRADIUS_BUTTON } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class CornerRadiusTokensPageObject extends BasePage {
   /*****************************************/

@@ -1,5 +1,5 @@
 import { STROKEWIDTH_TESTPAGE, HOMEPAGE_STROKEWIDTH_BUTTON } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class StrokeWidthTokensPageObject extends BasePage {
   /*****************************************/
