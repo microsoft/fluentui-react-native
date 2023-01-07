@@ -11,6 +11,9 @@ export function getAliasTokens(mode: AppearanceOptions) {
   } else if (mode === 'dark') {
     return darkAliasTokens;
   }
+
+  // TODO #2492 we should be throwing an error if highContrast mode is set in Android, but currently
+  // the default theme tries to create a highContrast mode so as a workaround we return the light mode tokens.
   return lightAliasTokens;
 }
 
@@ -21,5 +24,7 @@ export function getShadowTokens(mode: AppearanceOptions) {
     return darkShadowTokens;
   }
 
+  // TODO #2492 we should be throwing an error if highContrast mode is set in Android, but currently
+  // the default theme tries to create a highContrast mode so as a workaround we return the light mode tokens.
   return lightShadowTokens;
 }

@@ -12,7 +12,9 @@ export function getAliasTokens(mode: AppearanceOptions) {
   } else if (mode === 'dark') {
     return iOSDarkAliasTokens;
   } else if (mode === 'highContrast') {
-    throw new Error('highContrast is not a valid AppearanceOptions on iOS');
+    // TODO #2492 we should be throwing an error if highContrast mode is set in iOS, but currently
+    // the default theme tries to create a highContrast mode so as a workaround we return the light mode tokens.
+    return iOSLightAliasTokens;
   } else {
     assertNever(mode);
   }
@@ -24,7 +26,9 @@ export function getShadowTokens(mode: AppearanceOptions) {
   } else if (mode === 'dark') {
     return iOSDarkShadowTokens;
   } else if (mode === 'highContrast') {
-    throw new Error('highContrast is not a valid AppearanceOptions on iOS');
+    // TODO #2492 we should be throwing an error if highContrast mode is set in iOS, but currently
+    // the default theme tries to create a highContrast mode so as a workaround we return the light mode tokens.
+    return iOSLightShadowTokens;
   } else {
     assertNever(mode);
   }
