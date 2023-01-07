@@ -53,6 +53,10 @@ class NativeTestingPageObject extends BasePage {
     throw new Error('You are trying to read the _pageButton getter for NativeTestingPageObject, which is not implemented.');
   }
 
+  get _pageButtonName(): string {
+    throw new Error('You are trying to read the _pageButtonName getter for NativeTestingPageObject, which is not implemented.');
+  }
+
   get _pageName(): string {
     throw new Error('You are trying to read the _pageName getter for NativeTestingPageObject, which is not implemented.');
   }

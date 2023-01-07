@@ -47,10 +47,6 @@ class MenuButtonLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(MENU_BUTTON_TESTPAGE);
-  }
-
   get _pageName() {
     return MENU_BUTTON_TESTPAGE;
   }
@@ -63,8 +59,8 @@ class MenuButtonLegacyPageObject extends BasePage {
     return By(MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_MENUBUTTON_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_MENUBUTTON_BUTTON;
   }
 
   get _menuItem() {
