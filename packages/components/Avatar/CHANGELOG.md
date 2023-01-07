@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Fri, 06 Jan 2023 12:26:31 GMT and should not be manually modified.
+This log was last generated on Sat, 07 Jan 2023 02:02:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.5.13
+
+Sat, 07 Jan 2023 02:02:25 GMT
+
+### Patches
+
+- Updated jest config for Avatar and Badge (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.4.14
 
 ## 1.5.12
 

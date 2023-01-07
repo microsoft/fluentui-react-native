@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Updated jest config for Avatar and Badge",
-  "packageName": "@fluentui-react-native/avatar",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}
