@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Remove need to override testPage, add pageButtonName fn",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
