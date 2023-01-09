@@ -31,11 +31,11 @@ Code
 
 Win32:
 
-![Switch with a label called Switch Test and defaultChecked set to false on win32 example](./assets/switch_sample_win32.png)
+![Switches with a label with various scenarios on win32](./assets/switch_sample_win32.png)
 
 Android :
 
-![Switch with a label called Switch Test and defaultChecked set to false on Android example](./assets/switch_sample_android.png)
+![Switches with a label with various scenarios on Android](./assets/switch_sample_android.png)
 
 ## API
 
