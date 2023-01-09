@@ -52,12 +52,12 @@ class ButtonLegacyPageObject extends BasePage {
     return BUTTON_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(BUTTON_TEST_COMPONENT_DEPRECATED);
+  get _primaryComponentName() {
+    return BUTTON_TEST_COMPONENT_DEPRECATED;
   }
 
-  get _secondaryComponent() {
-    return By(BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED);
+  get _secondaryComponentName() {
+    return BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED;
   }
 
   get _pageButton() {

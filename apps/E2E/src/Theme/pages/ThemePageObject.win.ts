@@ -13,8 +13,8 @@ class ThemePageObject extends BasePage {
     return THEME_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(THEME_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return THEME_TEST_COMPONENT;
   }
 
   get _pageButton() {

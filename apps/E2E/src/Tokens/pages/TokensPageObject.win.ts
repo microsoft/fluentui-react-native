@@ -13,8 +13,8 @@ class TokenPageObject extends BasePage {
     return TOKEN_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(TOKENS_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return TOKENS_TEST_COMPONENT;
   }
 
   get _pageButton() {

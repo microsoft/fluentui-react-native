@@ -71,12 +71,12 @@ class CheckboxV1PageObject extends BasePage {
     return CHECKBOXV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(CHECKBOXV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return CHECKBOXV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(CHECKBOXV1_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return CHECKBOXV1_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButton() {

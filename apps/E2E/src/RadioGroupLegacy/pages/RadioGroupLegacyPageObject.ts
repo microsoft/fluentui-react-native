@@ -84,12 +84,12 @@ class RadioGroupLegacyPage extends BasePage {
     return RADIOGROUP_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(RADIOGROUP_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return RADIOGROUP_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(RADIOGROUP_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return RADIOGROUP_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButton() {

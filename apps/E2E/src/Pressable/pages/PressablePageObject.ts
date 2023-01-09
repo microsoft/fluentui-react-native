@@ -1,8 +1,4 @@
-import {
-  PRESSABLE_TESTPAGE,
-  PRESSABLE_TEST_COMPONENT,
-  HOMEPAGE_PRESSABLE_BUTTON,
-} from '../consts';
+import { PRESSABLE_TESTPAGE, PRESSABLE_TEST_COMPONENT, HOMEPAGE_PRESSABLE_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PressablePageObject extends BasePage {
@@ -17,8 +13,8 @@ class PressablePageObject extends BasePage {
     return PRESSABLE_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(PRESSABLE_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return PRESSABLE_TEST_COMPONENT;
   }
 
   get _pageButton() {

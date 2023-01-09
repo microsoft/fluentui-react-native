@@ -13,8 +13,8 @@ class ActivityIndicatorPageObject extends BasePage {
     return ACTIVITY_INDICATOR_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(ACTIVITY_INDICATOR_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return ACTIVITY_INDICATOR_TEST_COMPONENT;
   }
 
   get _pageButton() {

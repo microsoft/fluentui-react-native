@@ -1,4 +1,4 @@
-import { Keys, ROOT_VIEW } from './consts';
+import { Keys, ROOT_VIEW, TESTPAGE_TESTS_SCROLLVIEWER } from './consts';
 import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
 
 const DUMMY_CHAR = '';
@@ -238,6 +238,46 @@ export abstract class BasePage {
     await FocusButton.addValue(scrollDownKeys);
   }
 
+  /* Scrolls to the specified or primary UI test element until it is displayed. */
+  async mobileScrollToTestElement(componentIdentifier?: string): Promise<void> {
+    const componentToScrollTo = componentIdentifier ?? this._primaryComponentName;
+
+    const errorMsg = 'Could not scroll to the ' + componentToScrollTo + '. Please see Pipeline artifacts for more debugging information.';
+
+    switch (this.platform) {
+      case MobilePlatform.iOS: {
+        await browser.waitUntil(
+          async () => {
+            await driver.execute('mobile: scroll', { direction: 'down' });
+            return await (await By(componentToScrollTo)).isDisplayed();
+          },
+          {
+            timeout: this.waitForUiEvent,
+            timeoutMsg: errorMsg,
+          },
+        );
+        break;
+      }
+      default:
+      case MobilePlatform.Android:
+        /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
+         * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
+         * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
+        await browser.waitUntil(
+          async () => {
+            const componentSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_TESTS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).scrollIntoView(new UiSelector().description("${componentToScrollTo}"))`;
+            const component = await $(`android=${componentSelector}`);
+            return await component.isDisplayed();
+          },
+          {
+            timeout: this.waitForUiEvent,
+            timeoutMsg: errorMsg,
+          },
+        );
+        break;
+    }
+  }
+
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
   async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number, interval?: number): Promise<void> {
@@ -283,16 +323,14 @@ export abstract class BasePage {
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
   get _primaryComponent() {
-    console.error('Each class extending BasePage must implement its own _primaryComponent method.');
-    return By(DUMMY_CHAR);
+    return By(this._primaryComponentName);
   }
 
   // Returns: UI Element
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponent() {
-    console.error('Each class extending BasePage must implement its own _secondaryComponent method.');
-    return By(DUMMY_CHAR);
+    return By(this._secondaryComponentName);
   }
 
   // Returns: UI Element
@@ -306,6 +344,21 @@ export abstract class BasePage {
   // Returns: String
   // Returns the name of the button that navigates to the test page.
   get _pageButtonName(): string {
+    return DUMMY_CHAR;
+  }
+
+  // Returns: String
+  // Returns the identifier of the primary UI element used for testing on the given test page.
+  get _primaryComponentName(): string {
+    console.error('Each class extending BasePage must implement its own _primaryComponentName method.');
+    return DUMMY_CHAR;
+  }
+
+  // Returns: String
+  // Returns the identifier of the secondary UI element used for testing on the given test page. Often times, we'll want to set a
+  // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
+  get _secondaryComponentName(): string {
+    console.error('Each class extending BasePage must implement its own _secondaryComponentName method.');
     return DUMMY_CHAR;
   }
 

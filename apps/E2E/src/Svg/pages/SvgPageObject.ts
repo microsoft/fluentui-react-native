@@ -13,8 +13,8 @@ class SvgPageObject extends BasePage {
     return SVG_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(SVG_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return SVG_TEST_COMPONENT;
   }
 
   get _pageButton() {

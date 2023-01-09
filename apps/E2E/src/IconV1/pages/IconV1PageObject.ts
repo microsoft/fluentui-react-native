@@ -13,12 +13,12 @@ class IconV1PageObject extends BasePage {
     return ICON_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(ICON_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return ICON_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(ICON_FONT_TEST_COMPONENT);
+  get _secondaryComponentName() {
+    return ICON_FONT_TEST_COMPONENT;
   }
 
   get _pageButton() {

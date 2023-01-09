@@ -55,12 +55,12 @@ class MenuButtonLegacyPageObject extends BasePage {
     return MENU_BUTTON_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(MENU_BUTTON_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return MENU_BUTTON_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return MENU_BUTTON_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButton() {

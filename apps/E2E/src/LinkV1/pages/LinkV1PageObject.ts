@@ -27,12 +27,12 @@ class LinkV1PageObject extends BasePage {
     return LINKV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(LINKV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return LINKV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(LINKV1_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return LINKV1_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButton() {

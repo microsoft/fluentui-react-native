@@ -13,12 +13,12 @@ class IconLegacyPageObject extends BasePage {
     return ICON_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(ICON_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return ICON_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(ICON_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return ICON_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButton() {

@@ -101,12 +101,12 @@ class RadioGroupV1Page extends BasePage {
     return RADIOGROUPV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(RADIOGROUPV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return RADIOGROUPV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButton() {

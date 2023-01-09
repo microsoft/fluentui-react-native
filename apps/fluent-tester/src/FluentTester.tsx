@@ -4,7 +4,7 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
-import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../E2E/src/common/consts';
+import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_TESTS_SCROLLVIEWER } from '../../E2E/src/common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
@@ -205,7 +205,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponentView: React.FunctionComponent = () => {
     return (
-      <ScrollView contentContainerStyle={fluentTesterStyles.testSection}>
+      <ScrollView
+        contentContainerStyle={fluentTesterStyles.testSection}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(TESTPAGE_TESTS_SCROLLVIEWER)}
+      >
         <TestComponent />
       </ScrollView>
     );
