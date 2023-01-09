@@ -1,4 +1,5 @@
 export const ROOT_VIEW = 'Fluent_Tester_Root_View';
+export const E2E_MODE_SWITCH = 'E2E_Mode_Switch';
 
 /* Accessibility Role Control Types - https://docs.microsoft.com/en-us/windows/win32/winauto/uiauto-controltype-ids */
 export const BUTTON_A11Y_ROLE = 'ControlType.Button';
@@ -123,4 +124,3 @@ export const BASE_TESTPAGE = 'Base_TestPage';
 
 // ScrollViewer that contains the list of test page buttons
 export const TESTPAGE_BUTTONS_SCROLLVIEWER = 'TestPage_Buttons_ScrollViewer';
-

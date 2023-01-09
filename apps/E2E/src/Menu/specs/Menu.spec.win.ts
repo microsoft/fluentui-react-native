@@ -23,6 +23,7 @@ describe('Menu Testing Initialization', function () {
 
 describe('Menu Accessibility Testing', () => {
   beforeAll(async () => {
+    await MenuPageObject.expandE2ESections();
     await MenuPageObject.scrollToTestElement(await MenuPageObject._menuTrigger);
     await MenuPageObject.openMenu();
   });

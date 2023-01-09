@@ -24,6 +24,7 @@ describe('Button Legacy Testing Initialization', function () {
 describe('Button Legacy Accessibility Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
+    await ButtonLegacyPageObject.expandE2ESections();
     await ButtonLegacyPageObject.scrollToTestElement();
   });
 

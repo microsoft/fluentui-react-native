@@ -1,4 +1,4 @@
-import { Keys, ROOT_VIEW } from './consts';
+import { E2E_MODE_SWITCH, Keys, ROOT_VIEW } from './consts';
 import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
 
 const DUMMY_CHAR = '';
@@ -71,6 +71,13 @@ export abstract class BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
+
+  async expandE2ESections(): Promise<void> {
+    const e2eSwitch = await this._e2eSwitch;
+    if (!(await e2eSwitch.isSelected())) {
+      await e2eSwitch.click();
+    }
+  }
 
   /**
    * Checks to see if an element attribute is strictly equal to an expected value the user passes in.
@@ -329,6 +336,10 @@ export abstract class BasePage {
 
   get ERRORMESSAGE_ASSERT(): string {
     return 'An assert popped up. ' + this.ERRORMESSAGE_SUFFIX;
+  }
+
+  private get _e2eSwitch(): Promise<WebdriverIO.Element> {
+    return By(E2E_MODE_SWITCH);
   }
 
   // Default timeout to wait until page is displayed (10s)

@@ -22,6 +22,7 @@ describe('ButtonV1 Testing Initialization', function () {
 
 describe('ButtonV1 Accessibility Testing', async () => {
   beforeEach(async () => {
+    await ButtonV1PageObject.expandE2ESections();
     await ButtonV1PageObject.scrollToTestElement();
   });
 

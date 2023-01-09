@@ -13,6 +13,7 @@ import { tests } from './testPages';
 import { ROOT_VIEW } from '../../E2E/src/common/consts';
 import { testProps } from './TestComponents/Common/TestProps';
 import { E2EContext } from './TestComponents';
+import { E2E_MODE_SWITCH } from '../../E2E/src/common/consts';
 
 // uncomment the below lines to enable message spy
 /**
@@ -100,6 +101,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
           checked={e2eMode}
           onChange={(_, checked) => setE2EMode(checked)}
           label="E2E Mode"
+          testID={E2E_MODE_SWITCH}
         />
         <ThemePickers />
       </View>
