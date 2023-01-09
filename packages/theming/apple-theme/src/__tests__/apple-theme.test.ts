@@ -3,7 +3,7 @@ import { createMacOSColorAliasTokens, createMacOSShadowAliasTokens } from '../cr
 import { getIsHighContrast, setIsHighContrast } from '../appleHighContrast.macos';
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 
-const macOsAliasTokensTable: [AppearanceOptions, boolean][] = [
+const macOSAliasTokensTable: [AppearanceOptions, boolean][] = [
   ['light', true],
   ['light', false],
   ['dark', true],
@@ -23,7 +23,7 @@ it('IsHighContrast test', () => {
   expect(getIsHighContrast()).toBe(true);
 });
 
-it.concurrent.each(macOsAliasTokensTable)(
+it.concurrent.each(macOSAliasTokensTable)(
   'createMacOSColorAliasTokens test mode: %s, isHighContrast: %p',
   async (mode: AppearanceOptions, isHighContrast: boolean) => {
     if (mode === 'highContrast') {
@@ -34,7 +34,7 @@ it.concurrent.each(macOsAliasTokensTable)(
   },
 );
 
-it.concurrent.each(macOsAliasTokensTable)(
+it.concurrent.each(macOSAliasTokensTable)(
   'createMacOSShadowAliasTokens test mode: %s, isHighContrast: %p',
   async (mode: AppearanceOptions, isHighContrast: boolean) => {
     if (mode === 'highContrast') {
