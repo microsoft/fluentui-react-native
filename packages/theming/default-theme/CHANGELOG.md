@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Fri, 06 Jan 2023 12:26:31 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Jan 2023 22:24:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.22
+
+Mon, 09 Jan 2023 22:24:59 GMT
+
+### Patches
+
+- Update jest.config (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.16.21
 

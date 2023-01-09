@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Mon, 09 Jan 2023 22:25:00 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.21",
+            "commit": "17bf1b56555ea10ad474c765d447718a1742b982"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.32",
+            "commit": "17bf1b56555ea10ad474c765d447718a1742b982"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.9",
+            "commit": "17bf1b56555ea10ad474c765d447718a1742b982"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/text to v0.19.10",
+            "commit": "17bf1b56555ea10ad474c765d447718a1742b982"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Jan 2023 12:26:31 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.9.3",
       "version": "0.9.3",
