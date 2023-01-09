@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Jan 2023 19:49:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.13
+
+Fri, 06 Jan 2023 19:49:46 GMT
+
+### Patches
+
+- Show focus on Submenu item for keyboard access (amchiu@microsoft.com)
+
+## 1.2.12
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.50
+- Bump @fluentui-react-native/focus-zone to v0.11.20
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/interactive-hooks to v0.22.8
+- Bump @fluentui-react-native/text to v0.19.9
+- Bump @fluentui-react-native/button to v0.32.19
+
+## 1.2.11
+
+Thu, 05 Jan 2023 11:24:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.18
+
+## 1.2.10
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.49
+- Bump @fluentui-react-native/focus-zone to v0.11.19
+- Bump @fluentui-react-native/interactive-hooks to v0.22.7
+- Bump @fluentui-react-native/text to v0.19.8
+- Bump @fluentui-react-native/button to v0.32.17
+
+## 1.2.9
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.7
+- Bump @fluentui-react-native/button to v0.32.16
 
 ## 1.2.8
 

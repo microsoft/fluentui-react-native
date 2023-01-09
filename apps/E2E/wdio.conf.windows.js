@@ -10,15 +10,15 @@ exports.config = {
   so we must specify which ones we want to test here. */
   specs: [
     'src/ActivityIndicator/specs/*.win.ts',
-    'src/Button/specs/*.win.ts',
-    'src/Checkbox/specs/*.windows.ts', // See spec file for more information
-    'src/Link/specs/*.win.ts',
+    'src/ButtonLegacy/specs/*.win.ts',
+    'src/CheckboxLegacy/specs/*.windows.ts', // See spec file for more information
+    'src/LinkLegacy/specs/*.win.ts',
     'src/PersonaCoin/specs/*.win.ts',
     'src/Pressable/specs/*.win.ts',
     'src/Separator/specs/*.win.ts',
-    'src/Tabs/specs/*.windows.ts', // See spec file for more information
-    'src/Text/specs/*.win.ts',
-    'src/TextExperimental/specs/*.win.ts',
+    'src/TabsLegacy/specs/*.windows.ts', // See spec file for more information
+    'src/TextLegacy/specs/*.win.ts',
+    'src/TextV1/specs/*.win.ts',
     'src/Theme/specs/*.win.ts',
     'src/Tokens/specs/*.win.ts',
   ],

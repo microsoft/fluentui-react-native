@@ -16,11 +16,11 @@ import {
   BUTTON_PRESS_TEST_COMPONENT_LABEL,
   BUTTON_FOCUSABLE_TEST_COMPONENT,
   BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL,
-} from '../../../../E2E/src/Button/consts';
+} from '../../../../E2E/src/ButtonLegacy/consts';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 import { testProps } from '../Common/TestProps';
 
-export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
+export const E2EButtonTest: React.FunctionComponent = () => {
   const [buttonPressed, setButtonPressed] = React.useState(false);
   const [keyDetected, setKeyDetected] = React.useState('');
 

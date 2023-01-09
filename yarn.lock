@@ -317,24 +317,24 @@
   integrity sha512-KZXo2t10+/jxmkhNXc7pZTqRvSOIvVv/+lJwHS+B2rErwOyjuVRh60yVpb7liQ1U5t7lLJ1bz+t8tSypUZdm0g==
 
 "@babel/core@^7.1.0", "@babel/core@^7.12.3", "@babel/core@^7.13.16", "@babel/core@^7.14.0", "@babel/core@^7.19.6", "@babel/core@^7.7.2", "@babel/core@^7.8.0":
-  version "7.20.7"
-  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.20.7.tgz#37072f951bd4d28315445f66e0ec9f6ae0c8c35f"
-  integrity sha512-t1ZjCluspe5DW24bn2Rr1CDb2v9rn/hROtg9a2tmd0+QYf4bsloYfLQzjG4qHPNMhWtKdGC33R5AxGR2Af2cBw==
+  version "7.20.12"
+  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.20.12.tgz#7930db57443c6714ad216953d1356dac0eb8496d"
+  integrity sha512-XsMfHovsUYHFMdrIHkZphTN/2Hzzi78R08NuHfDBehym2VsPDL6Zn/JAD/JQdnRvbSsbQc4mVaU1m6JgtTEElg==
   dependencies:
     "@ampproject/remapping" "^2.1.0"
     "@babel/code-frame" "^7.18.6"
     "@babel/generator" "^7.20.7"
     "@babel/helper-compilation-targets" "^7.20.7"
-    "@babel/helper-module-transforms" "^7.20.7"
+    "@babel/helper-module-transforms" "^7.20.11"
     "@babel/helpers" "^7.20.7"
     "@babel/parser" "^7.20.7"
     "@babel/template" "^7.20.7"
-    "@babel/traverse" "^7.20.7"
+    "@babel/traverse" "^7.20.12"
     "@babel/types" "^7.20.7"
     convert-source-map "^1.7.0"
     debug "^4.1.0"
     gensync "^1.0.0-beta.2"
-    json5 "^2.2.1"
+    json5 "^2.2.2"
     semver "^6.3.0"
 
 "@babel/generator@^7.14.0", "@babel/generator@^7.20.7", "@babel/generator@^7.4.0", "@babel/generator@^7.7.2":
@@ -446,10 +446,10 @@
   dependencies:
     "@babel/types" "^7.18.6"
 
-"@babel/helper-module-transforms@^7.18.6", "@babel/helper-module-transforms@^7.19.6", "@babel/helper-module-transforms@^7.20.7":
-  version "7.20.7"
-  resolved "https://registry.yarnpkg.com/@babel/helper-module-transforms/-/helper-module-transforms-7.20.7.tgz#7a6c9a1155bef55e914af574153069c9d9470c43"
-  integrity sha512-FNdu7r67fqMUSVuQpFQGE6BPdhJIhitoxhGzDbAXNcA07uoVG37fOiMk3OSV8rEICuyG6t8LGkd9EE64qIEoIA==
+"@babel/helper-module-transforms@^7.18.6", "@babel/helper-module-transforms@^7.19.6", "@babel/helper-module-transforms@^7.20.11":
+  version "7.20.11"
+  resolved "https://registry.yarnpkg.com/@babel/helper-module-transforms/-/helper-module-transforms-7.20.11.tgz#df4c7af713c557938c50ea3ad0117a7944b2f1b0"
+  integrity sha512-uRy78kN4psmji1s2QtbtcCSaj/LILFDp0f/ymhpQH5QY3nljUZCaNWz9X1dEj/8MBdBEFECs7yRhKn8i7NjZgg==
   dependencies:
     "@babel/helper-environment-visitor" "^7.18.9"
     "@babel/helper-module-imports" "^7.18.6"
@@ -457,7 +457,7 @@
     "@babel/helper-split-export-declaration" "^7.18.6"
     "@babel/helper-validator-identifier" "^7.19.1"
     "@babel/template" "^7.20.7"
-    "@babel/traverse" "^7.20.7"
+    "@babel/traverse" "^7.20.10"
     "@babel/types" "^7.20.7"
 
 "@babel/helper-optimise-call-expression@^7.18.6":
@@ -1363,10 +1363,10 @@
     "@babel/parser" "^7.20.7"
     "@babel/types" "^7.20.7"
 
-"@babel/traverse@^7.12.5", "@babel/traverse@^7.14.0", "@babel/traverse@^7.16.0", "@babel/traverse@^7.19.1", "@babel/traverse@^7.20.5", "@babel/traverse@^7.20.7", "@babel/traverse@^7.4.3", "@babel/traverse@^7.7.2":
-  version "7.20.7"
-  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.20.7.tgz#114f992fa989a390896ea72db5220780edab509c"
-  integrity sha512-xueOL5+ZKX2dJbg8z8o4f4uTRTqGDRjilva9D1hiRlayJbTY8jBRL+Ph67IeRTIE439/VifHk+Z4g0SwRtQE0A==
+"@babel/traverse@^7.12.5", "@babel/traverse@^7.14.0", "@babel/traverse@^7.16.0", "@babel/traverse@^7.19.1", "@babel/traverse@^7.20.10", "@babel/traverse@^7.20.12", "@babel/traverse@^7.20.5", "@babel/traverse@^7.20.7", "@babel/traverse@^7.4.3", "@babel/traverse@^7.7.2":
+  version "7.20.12"
+  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.20.12.tgz#7f0f787b3a67ca4475adef1f56cb94f6abd4a4b5"
+  integrity sha512-MsIbFN0u+raeja38qboyF8TIT7K0BFzz/Yd/77ta4MsUsmP2RAnidIlwq7d5HFQrH/OZJecGV6B71C4zAgpoSQ==
   dependencies:
     "@babel/code-frame" "^7.18.6"
     "@babel/generator" "^7.20.7"
@@ -4236,10 +4236,10 @@ appium-adb@^9.10.14, appium-adb@^9.10.9:
     teen_process "^2.0.1"
     utf7 "^1.0.2"
 
-appium-android-driver@^5.7.0:
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.7.2.tgz#0ecc5fc8096d69591eb8f04e8374ef6e8a5ad9cc"
-  integrity sha512-IeDJ5ANZG7k4szOASQTRGcWBWc53nkzZBgVQQ7HAcN+hy8ZrtZYIhwxAy995j46XzVHWwpCfwJ73wX1tN8t7LA==
+appium-android-driver@^5.8.5:
+  version "5.8.5"
+  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.8.5.tgz#b84807a1772c70750acbb0837d5540c77ea146d5"
+  integrity sha512-DcCtMNcY0v30FIunMrnqKFn0ibFgOyiVWbcW474SCKT41MIOehWmC8FgzL8RoIBYIL40V3JnGhD4XwXYVcP+SQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.9"
@@ -4247,7 +4247,7 @@ appium-android-driver@^5.7.0:
     asyncbox "^2.8.0"
     axios "^1.x"
     bluebird "^3.4.7"
-    io.appium.settings "^4.2.1"
+    io.appium.settings "^5.0.0"
     jimp "^0.x"
     lodash "^4.17.4"
     lru-cache "^7.3.0"
@@ -4361,13 +4361,13 @@ appium-remote-debugger@^9.1.1:
     teen_process "^2.0.0"
 
 appium-uiautomator2-driver@^2.10.2:
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.10.2.tgz#7d9ed3143b54c2933acd4b45aa1de72e6bf87af6"
-  integrity sha512-W2kRQGfpVBriDrooBibXG0aMT5XDt1LAQTCiFkIlwum2N228G7Fx7ZElBZ4dE7b3WIfj7CMlHkTBvMwO4ONpog==
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.12.1.tgz#8048d91dd11066daccef85bc3f0f0928a3ea8d9e"
+  integrity sha512-6FLGpCuNlQbZQb1E/SPnKWGM0gwpVmKOR5tRPntmQ+0jyDQMIaROlyRhMnDqK0cfSn4Z+agxjPYzgxh1ZtqIpQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.14"
-    appium-android-driver "^5.7.0"
+    appium-android-driver "^5.8.5"
     appium-chromedriver "^5.2.1"
     appium-uiautomator2-server "^5.7.2"
     asyncbox "^2.3.1"
@@ -8559,10 +8559,10 @@ invert-kv@^3.0.0:
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-3.0.1.tgz#a93c7a3d4386a1dc8325b97da9bb1620c0282523"
   integrity sha512-CYdFeFexxhv/Bcny+Q0BfOV+ltRlJcd4BBZBYFX/O0u4npJrgZtIcjokegtiSMAvlMTJ+Koq0GBCc//3bueQxw==
 
-io.appium.settings@^4.2.1:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/io.appium.settings/-/io.appium.settings-4.2.3.tgz#224491f40e91176acc2fec0e67e8b3bda7bd2503"
-  integrity sha512-xKD/Vun4rx21h5IzugcboMuUQvBDFp0SuqsXCbcCy1WXnmkn00u85Qxk7MdfXAS4YyFbfZG21KDOqnFjivJPzQ==
+io.appium.settings@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/io.appium.settings/-/io.appium.settings-5.0.0.tgz#027f0f09d11a07b793a78ec6e7f633874926d233"
+  integrity sha512-8w/sd/BLxsoJMllx5dsx1yUVsJgDUNSTdow+luZcNQXgHsZTMWzbyTT3BMArguMe72EvjY6HegSoFxYwS3WKgA==
 
 ip@^1.1.5:
   version "1.1.8"
@@ -9866,10 +9866,10 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
 
-json5@^2.1.3, json5@^2.2.1:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.2.tgz#64471c5bdcc564c18f7c1d4df2e2297f2457c5ab"
-  integrity sha512-46Tk9JiOL2z7ytNQWFLpj99RZkVgeHf87yGQKsIkaPz1qSH9UczKH1rO7K3wgRselo0tYMUNfecYpm/p1vC7tQ==
+json5@^2.1.3, json5@^2.2.2:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
+  integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
 jsonfile@^2.1.0:
   version "2.4.0"
@@ -12367,9 +12367,9 @@ react-native-gradle-plugin@^0.0.6:
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
 
 react-native-macos@^0.68.0:
-  version "0.68.59"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.59.tgz#47d6ef36d183bac8014b33096953cf2879a395c9"
-  integrity sha512-W5k23D9M5A0L5OG5jnOu7ZzaFU9bYEg4M8dsyi+LFdy9+6RADpoaCVbNAQ811OT6LLZtNt8RY1WlFVbOxKnzeg==
+  version "0.68.60"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.60.tgz#97c59b3e4e8b51b55658b7b25f2d2f90e29b0942"
+  integrity sha512-+9WZCrEv5F7OwCusVLtumBPkafBmBuQh+Nora0cgAGe2bcYYpyvHCIu8tHYHrG/AmQZ6rG5s8ks+lqVYXY3gLQ==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^7.0.3"
