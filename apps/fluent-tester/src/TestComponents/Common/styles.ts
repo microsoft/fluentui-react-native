@@ -89,6 +89,14 @@ export const fluentTesterStyles = StyleSheet.create({
     alignSelf: 'flex-start',
     display: 'flex',
   },
+  e2eSwitchView: {
+    display: 'flex',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginVertical: 4,
+    marginHorizontal: 8,
+  },
   testHeader: {
     marginBottom: 8,
     marginTop: 4,

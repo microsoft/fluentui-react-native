@@ -1,10 +1,9 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { Separator, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Switch } from '@fluentui-react-native/switch';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager, Switch } from 'react-native';
 import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../E2E/src/common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -96,13 +95,10 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
             {backButtonTitle}
           </Button>
         )}
-        <Switch
-          style={{ alignSelf: 'center', paddingVertical: 4, paddingHorizontal: 8 }}
-          checked={e2eMode}
-          onChange={(_, checked) => setE2EMode(checked)}
-          label="E2E Mode"
-          testID={E2E_MODE_SWITCH}
-        />
+        <View style={fluentTesterStyles.e2eSwitchView}>
+          <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
+          <Text style={{ paddingLeft: 4 }}>E2E Mode</Text>
+        </View>
         <ThemePickers />
       </View>
     </View>
