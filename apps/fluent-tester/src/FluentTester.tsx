@@ -1,6 +1,7 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { Separator, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Switch } from '@fluentui-react-native/switch';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
@@ -11,6 +12,7 @@ import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
 import { ROOT_VIEW } from '../../E2E/src/common/consts';
 import { testProps } from './TestComponents/Common/TestProps';
+import { E2EContext } from './TestComponents';
 
 // uncomment the below lines to enable message spy
 /**
@@ -64,6 +66,8 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
   const { enableSinglePaneView, enableBackButtonIOS, onBackButtonPressedIOS } = props;
   const theme = useTheme();
 
+  const { e2eMode, setE2EMode } = React.useContext(E2EContext);
+
   const headerStyle = enableSinglePaneView ? fluentTesterStyles.headerWithBackButton : fluentTesterStyles.header;
 
   const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
@@ -91,6 +95,12 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
             {backButtonTitle}
           </Button>
         )}
+        <Switch
+          style={{ alignSelf: 'center', paddingVertical: 4, paddingHorizontal: 8 }}
+          checked={e2eMode}
+          onChange={(_, checked) => setE2EMode(checked)}
+          label="E2E Mode"
+        />
         <ThemePickers />
       </View>
     </View>
@@ -106,6 +116,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
   const [onTestListView, setOnTestListView] = React.useState(true);
+  const [e2eMode, setE2EMode] = React.useState(false);
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
 
@@ -219,12 +230,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
       {...testProps(ROOT_VIEW)}
     >
-      <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
-      <HeaderSeparator />
-      <View style={fluentTesterStyles.testRoot}>
-        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-        {isTestSectionVisible && <TestComponentView />}
-      </View>
+      <E2EContext.Provider value={{ e2eMode, setE2EMode }}>
+        <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
+        <HeaderSeparator />
+        <View style={fluentTesterStyles.testRoot}>
+          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
+          {isTestSectionVisible && <TestComponentView />}
+        </View>
+      </E2EContext.Provider>
     </RootView>
   );
 };

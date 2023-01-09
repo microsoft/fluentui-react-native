@@ -8,6 +8,7 @@ import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { testProps } from './Common/TestProps';
+import { E2EContext } from './';
 
 export type TestSection = {
   name: string;
@@ -30,6 +31,7 @@ export interface TestProps {
   spec?: string;
   status: PlatformStatus;
   sections: TestSection[];
+  e2eSections?: TestSection[];
 }
 
 const definitions = {
@@ -78,10 +80,15 @@ const styles = StyleSheet.create({
   e2eFocusButton: {
     opacity: 0,
   },
+  e2eSection: {
+    marginBottom: 4,
+  },
 });
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
   const [showStatus, setShowStatus] = React.useState(false);
+
+  const { e2eMode } = React.useContext(E2EContext);
 
   const toggleSvg: React.FunctionComponent<SvgProps> = () => {
     const plusPath =
@@ -113,9 +120,26 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   };
 
   const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
+  const { e2eSections } = props;
 
   return (
     <View>
+      {e2eSections && e2eMode && (
+        <>
+          {e2eSections.map((section, i) => {
+            const { component: E2EComponent } = section;
+            return (
+              <View style={styles.e2eSection} key={i}>
+                <Text style={styles.section} variant="headerSemibold" {...testProps('E2E_Test_Section')}>
+                  {section.name}
+                </Text>
+                <E2EComponent />
+              </View>
+            );
+          })}
+        </>
+      )}
+
       <View style={styles.header}>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}

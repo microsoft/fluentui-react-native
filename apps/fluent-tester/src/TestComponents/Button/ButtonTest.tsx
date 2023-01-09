@@ -45,16 +45,19 @@ const buttonSections: TestSection[] = [
     component: ButtonHOCTest,
   },
   {
-    name: 'E2E Button Testing',
-    component: E2EButtonTest,
-  },
-  {
     name: 'Deprecated Basic Button',
     component: ButtonFocusTest_deprecated,
   },
   {
     name: 'Deprecated Icon Button',
     component: ButtonIconTest_deprecated,
+  },
+];
+
+const e2eSections = [
+  {
+    name: 'E2E Button Testing',
+    component: E2EButtonTest,
   },
   {
     name: 'Deprecated E2E Button Testing',
@@ -76,5 +79,7 @@ export const ButtonTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Button/SPEC.md';
 
-  return <Test name="Button Test" description={description} spec={spec} sections={buttonSections} status={status} />;
+  return (
+    <Test name="Button Test" description={description} spec={spec} sections={buttonSections} status={status} e2eSections={e2eSections} />
+  );
 };
