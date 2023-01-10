@@ -35,6 +35,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       flexDirection: 'column',
       alignItems: 'center',
       marginLeft: globalTokens.sizeNone,
+      rootLeftPadding: globalTokens.size60,
     },
 
     disabled: {

@@ -19,6 +19,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   rootVerticalPadding?: number;
 
   /**
+   * Left padding of the root view
+   */
+  rootLeftPadding?: number;
+
+  /**
    * Indicator border color
    */
   radioBorder?: ColorValue;

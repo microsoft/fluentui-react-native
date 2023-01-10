@@ -17,11 +17,20 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           flexDirection: tokens.flexDirection,
           paddingHorizontal: tokens.rootHorizontalPadding,
           paddingVertical: tokens.rootVerticalPadding,
+          paddingLeft: tokens.rootLeftPadding,
           ...borderStyles.from(tokens, theme),
         },
         android_ripple: { color: tokens.rippleColor },
       }),
-      ['flexDirection', 'rootHorizontalPadding', 'rootVerticalPadding', 'rippleColor', 'alignItems', ...borderStyles.keys],
+      [
+        'flexDirection',
+        'rootHorizontalPadding',
+        'rootVerticalPadding',
+        'rootLeftPadding',
+        'rippleColor',
+        'alignItems',
+        ...borderStyles.keys,
+      ],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
