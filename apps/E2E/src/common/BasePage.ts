@@ -76,6 +76,7 @@ export abstract class BasePage {
     const e2eSwitch = await this._e2eSwitch;
     if (!(await e2eSwitch.isSelected())) {
       await e2eSwitch.click();
+      await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
     }
   }
 

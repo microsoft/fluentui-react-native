@@ -14,7 +14,7 @@ export type TestSection = {
   name: string;
   testID?: string;
   component: React.FunctionComponent;
-};
+} | null;
 
 export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A' | 'Deprecated';
 export type PlatformStatus = {
@@ -124,22 +124,6 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
 
   return (
     <View>
-      {e2eSections && e2eMode && (
-        <>
-          {e2eSections.map((section, i) => {
-            const { component: E2EComponent } = section;
-            return (
-              <View style={styles.e2eSection} key={i}>
-                <Text style={styles.section} variant="headerSemibold" {...testProps('E2E_Test_Section')}>
-                  {section.name}
-                </Text>
-                <E2EComponent />
-              </View>
-            );
-          })}
-        </>
-      )}
-
       <View style={styles.header}>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
@@ -154,6 +138,24 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
       <Separator />
+      {e2eSections && e2eMode && (
+        <>
+          {e2eSections.map((section, i) => {
+            if (section === null) {
+              return null;
+            }
+            const { component: E2EComponent } = section;
+            return (
+              <View style={styles.e2eSection} key={i}>
+                <Text style={styles.section} variant="headerSemibold" {...testProps('E2E_Test_Section')}>
+                  {section.name}
+                </Text>
+                <E2EComponent />
+              </View>
+            );
+          })}
+        </>
+      )}
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>

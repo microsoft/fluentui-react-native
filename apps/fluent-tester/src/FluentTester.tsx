@@ -72,24 +72,23 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
 
   const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
 
-  const E2ESwitch = (
-    <>
-      <View style={fluentTesterStyles.e2eSwitchView}>
-        <Text style={{ paddingLeft: 4 }} variant="bodySemibold">
-          E2E Mode:
-        </Text>
-        <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
-      </View>
-    </>
-  );
-  const E2ESwitchAndroid = (
-    <>
-      <View style={fluentTesterStyles.e2eSwitchViewMobile}>
-        <Text variant="subheaderSemibold">E2E Mode:</Text>
-        <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
-      </View>
-    </>
-  );
+  const E2ESwitch = () =>
+    Platform.select({
+      android: (
+        <View style={fluentTesterStyles.e2eSwitchViewMobile}>
+          <Text variant="subheaderSemibold">E2E Mode:</Text>
+          <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
+        </View>
+      ),
+      default: (
+        <View style={fluentTesterStyles.e2eSwitchView}>
+          <Text style={{ paddingLeft: 4 }} variant="bodySemibold">
+            E2E Mode:
+          </Text>
+          <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
+        </View>
+      ),
+    });
 
   return (
     <View style={headerStyle}>
@@ -115,7 +114,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
           </Button>
         )}
         <ThemePickers />
-        {Platform.OS === 'android' ? E2ESwitchAndroid : E2ESwitch}
+        <E2ESwitch />
       </View>
     </View>
   );

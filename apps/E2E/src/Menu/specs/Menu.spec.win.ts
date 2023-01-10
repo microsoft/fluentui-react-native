@@ -8,6 +8,8 @@ describe('Menu Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+
+    await NavigateAppPage.expandE2ESections();
   });
 
   it('Click and navigate to Menu test page', async () => {
@@ -23,7 +25,6 @@ describe('Menu Testing Initialization', function () {
 
 describe('Menu Accessibility Testing', () => {
   beforeAll(async () => {
-    await MenuPageObject.expandE2ESections();
     await MenuPageObject.scrollToTestElement(await MenuPageObject._menuTrigger);
     await MenuPageObject.openMenu();
   });
