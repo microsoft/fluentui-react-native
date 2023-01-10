@@ -20,9 +20,7 @@ More examples on the [Test pages for the Switch](../../../apps/fluent-tester/src
 
 ## Visual Examples
 
-Win32:
-
-![Switch with a label called Switch Test and defaultChecked set to false on win32 example](./assets/switch_sample_win32.png)
+Code
 
 ```jsx
 <Switch defaultChecked={true} label={'Default Checked True'} />
@@ -30,6 +28,14 @@ Win32:
 <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />
 <Switch defaultChecked={false} label={'Disabled Default Checked False'} disabled />
 ```
+
+Win32:
+
+![Switches with a label with various scenarios on win32](./assets/switch_sample_win32.png)
+
+Android :
+
+![Switches with a label with various scenarios on Android](./assets/switch_sample_android.png)
 
 ## API
 
@@ -96,6 +102,12 @@ export interface SwitchProps extends Omit<PressablePropsExtended 'onPress'> {
    * Note : 'before' , 'above' are not supported on Android
    */
   labelPosition?: 'before' | 'above' | 'after';
+
+    /**
+   * Disabled state of the switch.
+   */
+  disabled?: boolean;
+
 }
 ```
 
@@ -240,17 +252,17 @@ A disabled `Switch` is non-interactive, disallowing the user to click/tap on it 
 
 A hovered `Switch` changes styling to communicate that the user has placed a cursor above it.
 
-_Note : Not supported on Android_
+_Note : Not supported on Mobile_
 
 #### Focused state
 
 A focused `Switch` changes styling to communicate that the user has placed keyboard focus on it. Specifically, a border is drawn around the control.
 
+_Note : Not supported on Mobile_
+
 #### Pressed state
 
 A pressed `Switch` changes styling to communicate that the user is currently pressing it.
-
-_Note : Not supported on Android_
 
 ### Interaction
 
