@@ -1,8 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuButtonV1PageObject from '../pages/MenuButtonV1PageObject.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE } from '../../common/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Attribute } from '../../common/consts';
 import { MENUBUTTONV1_ACCESSIBILITY_LABEL, MENUBUTTONV1_TEST_COMPONENT_LABEL } from '../consts';
-import { ComponentSelector } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButtonV1 Testing Initialization', function () {
@@ -23,26 +22,44 @@ describe('MenuButtonV1 Testing Initialization', function () {
 
 /* This will be re-enabled with a MenuButton Bug is fixed. Currently in PR - "Integrating accessibilityLabel functionality for MenuButton #1117" */
 describe('MenuButtonV1 Accessibility Testing', () => {
-  it('MenuButtonV1 - Validate accessibilityRole is correct', async () => {
-    await MenuButtonV1PageObject.scrollToTestElement();
-
-    await expect(await MenuButtonV1PageObject.getAccessibilityRole()).toEqual(MENUBUTTON_A11Y_ROLE);
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  /* Scrolls and waits for the MenuButton to be visible on the Test Page */
+  beforeEach(async () => {
+    await MenuButtonV1PageObject.scrollToTestElement(await MenuButtonV1PageObject._firstMenuButton);
   });
 
-  it('MenuButtonV1 - Set accessibilityLabel', async () => {
-    await MenuButtonV1PageObject.scrollToTestElement();
+  it('Validate "accessibilityRole" value defaults to Button "ControlType" element attribute.', async () => {
+    await expect(
+      await MenuButtonV1PageObject.compareAttribute(
+        MenuButtonV1PageObject._firstMenuButton,
+        Attribute.AccessibilityRole,
+        MENUBUTTON_A11Y_ROLE,
+      ),
+    ).toBeTruthy();
 
-    await expect(await MenuButtonV1PageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(MENUBUTTONV1_ACCESSIBILITY_LABEL);
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do not set accessibilityLabel -> Default to MenuButtonV1 label', async () => {
-    await MenuButtonV1PageObject.scrollToTestElement();
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
+    await expect(
+      await MenuButtonV1PageObject.compareAttribute(
+        MenuButtonV1PageObject._firstMenuButton,
+        Attribute.AccessibilityLabel,
+        MENUBUTTONV1_ACCESSIBILITY_LABEL,
+      ),
+    ).toBeTruthy();
 
-    await expect(await MenuButtonV1PageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-      MENUBUTTONV1_TEST_COMPONENT_LABEL,
-    );
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Do not set "accessibilityLabel". Validate "Name" element attribute defaults to MenuButton label.', async () => {
+    await expect(
+      await MenuButtonV1PageObject.compareAttribute(
+        MenuButtonV1PageObject._secondMenuButton,
+        Attribute.AccessibilityLabel,
+        MENUBUTTONV1_TEST_COMPONENT_LABEL,
+      ),
+    ).toBeTruthy();
+
+    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
