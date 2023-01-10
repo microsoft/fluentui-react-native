@@ -133,7 +133,7 @@ exports[`Switch Disabled 1`] = `
       "disabled": true,
     }
   }
-  accessible={true}
+  accessible={false}
   collapsable={false}
   focusable={false}
   onAccessibilityAction={[Function]}
