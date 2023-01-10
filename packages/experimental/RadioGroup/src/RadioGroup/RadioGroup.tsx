@@ -64,7 +64,7 @@ export const RadioGroup = compose<RadioGroupType>({
           {radioGroupContent}
         </Slots.container>
       );
-      
+
       return (
         <RadioGroupProvider value={contextValue}>
           <Slots.root {...mergedProps}>
