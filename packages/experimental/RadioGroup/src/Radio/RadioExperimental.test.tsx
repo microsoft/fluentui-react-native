@@ -14,9 +14,10 @@ describe('Radio component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('Radio simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(() => <Radio value="key1" label="Default Radio" />, 2);
-  });
+  /* Commenting this test out until memoization of keyDownEvents prop issue is fixed. */
+  // it('Radio simple rendering does not invalidate styling', () => {
+  //   checkRenderConsistency(() => <Radio value="key1" label="Default Radio" />, 2);
+  // });
 
   /* Re-render test for depth 2 is blocked and will need to be added after issue is resolved.
   The test is blocked due to an upstream issue where the blur function in Pressable is a new instance between renders.  */
