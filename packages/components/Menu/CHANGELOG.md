@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 09 Jan 2023 22:25:00 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.15
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.52
+- Bump @fluentui-react-native/focus-zone to v0.11.22
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/interactive-hooks to v0.22.10
+- Bump @fluentui-react-native/text to v0.19.11
+- Bump @fluentui-react-native/theme-tokens to v0.23.0
+- Bump @fluentui-react-native/tokens to v0.20.3
+- Bump @fluentui-react-native/button to v0.32.21
 
 ## 1.2.14
 
