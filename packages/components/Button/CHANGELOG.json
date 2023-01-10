@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 10 Jan 2023 06:54:59 GMT",
+      "tag": "@fluentui-react-native/button_v0.32.20",
+      "version": "0.32.20",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/button",
+            "commit": "99d342be0c1667499933501287cdf85434c808a0",
+            "comment": "Updated ripple documentation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 09 Jan 2023 22:25:00 GMT",
       "tag": "@fluentui-react-native/button_v0.32.20",
       "version": "0.32.20",

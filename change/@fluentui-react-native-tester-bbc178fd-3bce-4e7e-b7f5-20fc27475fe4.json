@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Removed FocusTrapTest page for Android",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "none"
-}

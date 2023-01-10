@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 10 Jan 2023 06:54:59 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.19.9",
+      "version": "0.19.9",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "99d342be0c1667499933501287cdf85434c808a0",
+            "comment": "Updated ripple documentation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 09 Jan 2023 22:25:00 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.19.9",
       "version": "0.19.9",
