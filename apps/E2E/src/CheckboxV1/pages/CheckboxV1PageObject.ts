@@ -38,9 +38,9 @@ class CheckboxV1PageObject extends BasePage {
   /* Unlike snapshot testing, we cannot spy on functions to determine if they get called or not. In order to determine if
    * the onChange() callback gets fired, we show / hide the a Text label as the callback gets fired. This way, we know that
    * the onChange() callback has fired by checking that the label element is currently displayed. */
-  async didOnChangeCallbackFire(errorMsg?: string): Promise<boolean> {
+  async didOnChangeCallbackFire(errorMsg: string): Promise<boolean> {
     const callbackText = await this._callbackText;
-    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg ?? 'The onChange callback did not fire.');
+    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
     return await callbackText.isDisplayed();
   }
 
