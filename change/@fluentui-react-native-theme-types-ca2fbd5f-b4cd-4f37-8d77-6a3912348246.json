@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Set up iOS color alias tokens",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
