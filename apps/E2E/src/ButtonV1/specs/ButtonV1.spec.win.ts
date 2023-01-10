@@ -8,6 +8,8 @@ describe('ButtonV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+
+    await NavigateAppPage.expandE2ESections();
   });
 
   it('Click and navigate to ButtonV1 test page', async () => {
@@ -22,7 +24,6 @@ describe('ButtonV1 Testing Initialization', function () {
 
 describe('ButtonV1 Accessibility Testing', async () => {
   beforeEach(async () => {
-    await ButtonV1PageObject.expandE2ESections();
     await ButtonV1PageObject.scrollToTestElement();
   });
 
