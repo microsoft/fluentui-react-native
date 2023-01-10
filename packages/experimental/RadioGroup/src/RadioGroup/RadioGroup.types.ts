@@ -28,9 +28,22 @@ export interface RadioGroupState extends RadioGroupProps {
   selectedButtonRef?: React.MutableRefObject<any>;
 
   /**
+   * Populate the values arrays
+   */
+  addRadioValue?: (value: string) => void;
+  removeRadioValue?: (value: string) => void;
+
+  /**
    * Array of radio keys in the group
    */
   values?: string[];
+
+  /**
+   * Populate the enabledValues arrays
+   * @platform win32
+   */
+  addRadioEnabledValue?: (value: string) => void;
+  removeRadioEnabledValue?: (value: string) => void;
 
   /**
    * Array of enabled radio keys in the group

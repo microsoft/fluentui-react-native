@@ -57,6 +57,26 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     }
   }, []);
 
+  // Explicitly only run on mount and unmount
+  React.useEffect(() => {
+    radioGroupContext.addRadioValue(value);
+
+    return () => {
+      radioGroupContext.removeRadioValue(value);
+    };
+  }, []);
+
+  // Explicitly only run on mount and unmount
+  React.useEffect(() => {
+    if (!isDisabled) {
+      radioGroupContext.addRadioEnabledValue(value);
+    }
+
+    return () => {
+      radioGroupContext.removeRadioEnabledValue(value);
+    };
+  }, []);
+
   const onInvoke = React.useCallback(
     (e: KeyPressEvent) => {
       const length = radioGroupContext.enabledValues.length;
