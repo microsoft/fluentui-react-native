@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/apple-theme",
-  "version": "0.17.7",
+  "version": "0.17.8",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Apple",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -31,7 +31,7 @@
     "directory": "packages/theming/apple-theme"
   },
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.16.21 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.16.22 <1.0.0",
     "@fluentui-react-native/design-tokens-ios": "^0.38.0",
     "@fluentui-react-native/design-tokens-macos": "^0.36.0",
     "@fluentui-react-native/memo-cache": "^1.1.7",

@@ -106,11 +106,27 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key1"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -149,6 +165,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -217,11 +234,27 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key2"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -260,6 +293,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -393,11 +427,27 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key1"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -436,6 +486,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -504,11 +555,27 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key2"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -547,6 +614,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -680,11 +748,32 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key1"
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -723,6 +812,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -791,11 +881,32 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key2"
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -834,6 +945,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -968,11 +1080,27 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key1"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1011,6 +1139,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1079,11 +1208,27 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key2"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1122,6 +1267,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1256,11 +1402,27 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key1"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1299,6 +1461,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1367,11 +1530,27 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key2"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1410,6 +1589,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1560,11 +1740,27 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key1"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1603,6 +1799,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
@@ -1671,11 +1868,27 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "paddingHorizontal": 4,
+            "paddingVertical": undefined,
           }
         }
         value="key2"
       >
         <View
+          accessible={false}
+          focusable={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1714,6 +1927,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
+              "padding": undefined,
             }
           }
         >
