@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Mon, 09 Jan 2023 22:25:00 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 05:10:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.13
+
+Tue, 10 Jan 2023 05:10:08 GMT
+
+### Patches
+
+- switch disable state a11y fix (rohanpd.work@gmail.com)
 
 ## 0.8.12
 

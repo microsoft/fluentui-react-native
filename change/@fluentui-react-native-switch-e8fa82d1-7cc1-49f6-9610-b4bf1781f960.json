@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "switch disable state a11y fix",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
