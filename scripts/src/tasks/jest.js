@@ -5,6 +5,7 @@ const path = require('path');
 
 exports.jest = () =>
   jestTask({
+    ...(argv().c && { config: argv().c }),
     ...(process.env.TF_BUILD && { runInBand: true }),
     ...(argv().u || argv().updateSnapshot ? { updateSnapshot: true } : undefined),
   });

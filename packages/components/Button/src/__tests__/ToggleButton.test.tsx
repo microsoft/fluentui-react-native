@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ToggleButton } from './ToggleButton';
+import { ToggleButton } from '../ToggleButton/ToggleButton';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
