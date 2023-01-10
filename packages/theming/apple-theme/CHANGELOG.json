@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Tue, 10 Jan 2023 18:57:29 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.17.9",
+      "version": "0.17.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "1653ac2a4a5188a211fca1eaec323b3d019fdb50",
+            "comment": "Update jest config platform iOS -> macOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 09 Jan 2023 22:25:00 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.17.8",
       "version": "0.17.8",

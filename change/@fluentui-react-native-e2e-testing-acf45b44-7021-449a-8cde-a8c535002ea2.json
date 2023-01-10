@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Refactor MenuButtonExperimental tests",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

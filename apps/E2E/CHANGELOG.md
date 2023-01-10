@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 10 Jan 2023 17:55:08 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 18:57:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.9.7
+
+Tue, 10 Jan 2023 18:57:29 GMT
+
+### Patches
+
+- Refactor MenuButtonExperimental tests (winlarry@microsoft.com)
 
 ## 1.9.6
 

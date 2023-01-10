@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update jest config platform iOS -> macOS",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 10 Jan 2023 18:57:29 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.9.7",
+      "version": "1.9.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "e07b3a18f5b84303edeef6c5a49a0ab0dd442272",
+            "comment": "Refactor MenuButtonExperimental tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Jan 2023 17:55:08 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.9.6",
       "version": "1.9.6",
