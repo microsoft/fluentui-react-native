@@ -1,5 +1,5 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { Separator, Text } from '@fluentui/react-native';
+import { Separator, TextV1 as Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
@@ -72,6 +72,26 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
 
   const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
 
+  const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
+  const E2ESwitch = (
+    <>
+      <View style={fluentTesterStyles.e2eSwitchView}>
+        <Text style={{ paddingLeft: 4 }} variant="bodySemibold">
+          E2E Mode:
+        </Text>
+        <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
+      </View>
+    </>
+  );
+  const E2ESwitchMobile = (
+    <>
+      <View style={fluentTesterStyles.e2eSwitchViewMobile}>
+        <Text variant="subheaderSemibold">E2E Mode:</Text>
+        <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
+      </View>
+    </>
+  );
+
   return (
     <View style={headerStyle}>
       <Text
@@ -95,11 +115,8 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
             {backButtonTitle}
           </Button>
         )}
-        <View style={fluentTesterStyles.e2eSwitchView}>
-          <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
-          <Text style={{ paddingLeft: 4 }}>E2E Mode</Text>
-        </View>
         <ThemePickers />
+        {isMobile ? E2ESwitchMobile : E2ESwitch}
       </View>
     </View>
   );
