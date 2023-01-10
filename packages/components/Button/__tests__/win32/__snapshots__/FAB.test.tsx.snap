@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom FAB with no shadow(iOS) 1`] = `null`;
+
+exports[`Default FAB (iOS) 1`] = `null`;

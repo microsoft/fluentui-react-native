@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompoundButton default 1`] = `
+<View
+  accessibilityLabel="Default Button sublabel"
+  accessibilityRole="button"
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 7,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
+      style={
+        Object {
+          "color": "#242424",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 1,
+          "marginEnd": -2,
+          "marginStart": 0,
+          "marginTop": -1,
+        }
+      }
+    >
+      Default Button
+    </Text>
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
+      style={
+        Object {
+          "color": "#424242",
+          "fontFamily": "Segoe UI",
+          "fontSize": 10,
+          "fontWeight": "600",
+          "margin": 0,
+          "marginBottom": 1,
+          "marginEnd": -2,
+          "marginStart": 0,
+          "marginTop": -1,
+        }
+      }
+    >
+      sublabel
+    </Text>
+  </View>
+</View>
+`;

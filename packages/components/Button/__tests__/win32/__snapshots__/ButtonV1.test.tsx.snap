@@ -1,0 +1,732 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component tests Button circular 1`] = `
+<View
+  accessibilityLabel="Circular Button"
+  accessibilityRole="button"
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  shape="circular"
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 9999,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Circular Button
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button composed 1`] = `
+<View
+  accessibilityLabel="Composed Button with RNText"
+  accessibilityRole="button"
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#242424",
+        "dynamicTypeRamp": undefined,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+        "maximumFontSize": undefined,
+      }
+    }
+  >
+    Composed Button with RNText
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button customized 1`] = `
+<View
+  accessibilityLabel="Custom Button"
+  accessibilityRole="button"
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "pink",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Custom Button
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button default 1`] = `
+<View
+  accessibilityLabel="Default Button"
+  accessibilityRole="button"
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Default Button
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button disabled 1`] = `
+<View
+  accessibilityLabel="Disabled Button"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
+  accessible={true}
+  enableFocusRing={true}
+  focusable={false}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f0f0f0",
+      "borderColor": "#e0e0e0",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#bdbdbd",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Disabled Button
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button large 1`] = `
+<View
+  accessibilityLabel="Large Button"
+  accessibilityRole="button"
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 40,
+      "minWidth": 96,
+      "padding": 7,
+      "paddingHorizontal": 15,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 16,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Large Button
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button primary 1`] = `
+<View
+  accessibilityLabel="Primary Button"
+  accessibilityRole="button"
+  accessible={true}
+  appearance="primary"
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0078d4",
+      "borderColor": "#0078d4",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Primary Button
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button small 1`] = `
+<View
+  accessibilityLabel="Small Button"
+  accessibilityRole="button"
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  size="small"
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Small Button
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button square 1`] = `
+<View
+  accessibilityLabel="Square Button"
+  accessibilityRole="button"
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  shape="square"
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 0,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Square Button
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button subtle 1`] = `
+<View
+  accessibilityLabel="Subtle Button"
+  accessibilityRole="button"
+  accessible={true}
+  appearance="subtle"
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      Object {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Subtle Button
+  </Text>
+</View>
+`;
