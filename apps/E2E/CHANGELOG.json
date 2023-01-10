@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 10 Jan 2023 17:55:08 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.9.6",
+      "version": "1.9.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "0704bb48dce5244b270c5585606cd158b040ad58",
+            "comment": "Refactor RadioGroup spec and PageObject code"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 09 Jan 2023 22:25:00 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.9.5",
       "version": "1.9.5",

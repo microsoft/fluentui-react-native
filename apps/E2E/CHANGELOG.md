@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 09 Jan 2023 22:25:00 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 17:55:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.9.6
+
+Tue, 10 Jan 2023 17:55:08 GMT
+
+### Patches
+
+- Refactor RadioGroup spec and PageObject code (winlarry@microsoft.com)
 
 ## 1.9.5
 
