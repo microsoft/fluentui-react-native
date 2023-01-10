@@ -72,7 +72,7 @@ export abstract class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
 
-  async expandE2ESections(): Promise<void> {
+  async enableE2ETesterMode(): Promise<void> {
     const e2eSwitch = await this._e2eSwitch;
     if (!(await e2eSwitch.isSelected())) {
       await e2eSwitch.click();
