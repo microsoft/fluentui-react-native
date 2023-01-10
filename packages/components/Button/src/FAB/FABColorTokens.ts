@@ -3,12 +3,11 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { FABTokens } from './FAB.types';
 
 export const defaultFABColorTokens: TokenSettings<FABTokens, Theme> = (t: Theme): FABTokens => ({
-  // coloring same as primary
+  // Coloring same as primary
   backgroundColor: t.colors.brandedBackground,
   color: t.colors.brandedContent,
   borderColor: t.colors.brandedBorder,
   iconColor: t.colors.brandedIcon,
-  rippleColor: t.colors.defaultPressedBackground, // Android only
   disabled: {
     backgroundColor: t.colors.brandedDisabledBackground,
     color: t.colors.brandedDisabledContent,

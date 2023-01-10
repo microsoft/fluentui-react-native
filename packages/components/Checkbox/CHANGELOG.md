@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Wed, 16 Nov 2022 08:47:25 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Nov 2022 11:51:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.5
+
+Mon, 28 Nov 2022 11:51:05 GMT
+
+### Patches
+
+- fix: android checkbox functionality (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/framework to v0.8.21
+- Bump @fluentui-react-native/interactive-hooks to v0.21.2
+- Bump @fluentui-react-native/pressable to v0.9.35
+- Bump @fluentui-react-native/text to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.18.0
+- Bump @uifabricshared/foundation-compose to v1.12.22
 
 ## 0.17.4
 

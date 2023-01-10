@@ -1,4 +1,4 @@
-import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
+import { ButtonV1 as Button, CompoundButton, FAB } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
@@ -42,6 +42,12 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
           <Button size="large" icon={iconProps} style={commonTestStyles.vmargin}>
             Large Button with icon
           </Button>
+          <FAB size="small" icon={iconProps} style={commonTestStyles.vmargin}>
+            Small FAB
+          </FAB>
+          <FAB size="large" icon={iconProps} style={commonTestStyles.vmargin}>
+            Large FAB
+          </FAB>
         </>
       )}
       <Button size="small" style={commonTestStyles.vmargin}>
@@ -53,35 +59,39 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
       <Button size="large" style={commonTestStyles.vmargin}>
         Large
       </Button>
-      <Button loading size="small" style={commonTestStyles.vmargin}>
-        Loading Button Small
-      </Button>
-      <Button loading size="medium" style={commonTestStyles.vmargin}>
-        Loading Button Medium
-      </Button>
-      <Button loading size="large" style={commonTestStyles.vmargin}>
-        Loading Button Large
-      </Button>
-      <CompoundButton secondaryContent="Small compound button" size="small" style={commonTestStyles.vmargin}>
-        Compound Button
-      </CompoundButton>
-      <CompoundButton secondaryContent="Medium compound button" size="medium" style={commonTestStyles.vmargin}>
-        Compound Button
-      </CompoundButton>
-      <CompoundButton secondaryContent="Large compound button" size="large" style={commonTestStyles.vmargin}>
-        Compound Button
-      </CompoundButton>
-      {svgIconsEnabled && (
+      {Platform.OS !== 'android' && (
         <>
-          <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="small" style={commonTestStyles.vmargin}>
-            Content
+          <Button loading size="small" style={commonTestStyles.vmargin}>
+            Loading Button Small
+          </Button>
+          <Button loading size="medium" style={commonTestStyles.vmargin}>
+            Loading Button Medium
+          </Button>
+          <Button loading size="large" style={commonTestStyles.vmargin}>
+            Loading Button Large
+          </Button>
+          <CompoundButton secondaryContent="Small compound button" size="small" style={commonTestStyles.vmargin}>
+            Compound Button
           </CompoundButton>
-          <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="medium" style={commonTestStyles.vmargin}>
-            Content
+          <CompoundButton secondaryContent="Medium compound button" size="medium" style={commonTestStyles.vmargin}>
+            Compound Button
           </CompoundButton>
-          <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="large" style={commonTestStyles.vmargin}>
-            Content
+          <CompoundButton secondaryContent="Large compound button" size="large" style={commonTestStyles.vmargin}>
+            Compound Button
           </CompoundButton>
+          {svgIconsEnabled && (
+            <>
+              <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="small" style={commonTestStyles.vmargin}>
+                Content
+              </CompoundButton>
+              <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="medium" style={commonTestStyles.vmargin}>
+                Content
+              </CompoundButton>
+              <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="large" style={commonTestStyles.vmargin}>
+                Content
+              </CompoundButton>
+            </>
+          )}
         </>
       )}
     </View>

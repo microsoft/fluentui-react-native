@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update react-native-macos",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

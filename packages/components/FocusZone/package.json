@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/focus-zone",
-  "version": "0.11.6",
+  "version": "0.11.7",
   "description": "A cross-platform FocusZone component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/component-cache": "^1.4.2",
-    "@fluentui-react-native/interactive-hooks": ">=0.21.1 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.21.2 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.11.1 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.12.1 <1.0.0"
   },

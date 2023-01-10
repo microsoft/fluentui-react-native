@@ -5,74 +5,73 @@ import { ButtonTokens } from './Button.types';
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
   ({
+    focused: {
+      borderWidth: globalTokens.stroke.width20,
+      borderInnerWidth: globalTokens.stroke.width10,
+    },
+    subtle: {
+      focused: {
+        borderWidth: globalTokens.stroke.width20,
+        borderInnerWidth: globalTokens.stroke.width10,
+      },
+    },
+    outline: {
+      borderWidth: globalTokens.stroke.width10,
+      disabled: {
+        borderWidth: globalTokens.stroke.width10,
+      },
+      pressed: {
+        borderWidth: globalTokens.stroke.width10,
+      },
+      focused: {
+        borderWidth: globalTokens.stroke.width20,
+        borderInnerWidth: globalTokens.stroke.width10,
+      },
+    },
     block: {
       width: '100%',
     },
+    large: {
+      paddingHorizontal: globalTokens.spacing.l,
+      paddingVertical: globalTokens.spacing.s,
+      borderRadius: globalTokens.corner.radius60,
+      iconSize: 20,
+      outline: {
+        borderWidth: globalTokens.stroke.width10,
+        iconSize: 20,
+      },
+      spacingIconContentBefore: globalTokens.spacing.xs,
+      spacingIconContentAfter: globalTokens.spacing.xs,
+      minHeight: 36,
+      minWidth: 36,
+    },
     medium: {
-      padding: globalTokens.spacing.xs,
-      borderWidth: globalTokens.stroke.width10,
-      iconSize: 16,
-      focused: {
-        borderWidth: 0,
-        padding: globalTokens.spacing.sNudge,
+      paddingHorizontal: globalTokens.spacing.s,
+      paddingVertical: globalTokens.spacing.xs,
+      borderRadius: globalTokens.corner.radius40,
+      iconSize: 20,
+      outline: {
+        borderWidth: globalTokens.stroke.width10,
+        iconSize: 20,
       },
-      hasContent: {
-        minWidth: 96,
-        paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width10,
-        hasIconAfter: {
-          spacingIconContentAfter: globalTokens.spacing.sNudge,
-        },
-        hasIconBefore: {
-          spacingIconContentBefore: globalTokens.spacing.sNudge,
-        },
-        focused: {
-          paddingHorizontal: globalTokens.spacing.m,
-        },
-      },
+      spacingIconContentBefore: globalTokens.spacing.xs,
+      spacingIconContentAfter: globalTokens.spacing.xs,
+      minHeight: 36,
+      minWidth: 36,
     },
     small: {
-      padding: globalTokens.spacing.xs - globalTokens.stroke.width10,
-      borderWidth: globalTokens.stroke.width10,
+      paddingHorizontal: globalTokens.spacing.xs,
+      paddingVertical: globalTokens.spacing.xxs,
+      borderRadius: globalTokens.corner.radius40,
       iconSize: 16,
-      focused: {
-        borderWidth: 0,
-        padding: globalTokens.spacing.xs,
+      outline: {
+        borderWidth: globalTokens.stroke.width10,
+        iconSize: 16,
       },
-      hasContent: {
-        minWidth: 64,
-        paddingHorizontal: globalTokens.spacing.s - globalTokens.stroke.width10,
-        hasIconAfter: {
-          spacingIconContentAfter: globalTokens.spacing.xs,
-        },
-        hasIconBefore: {
-          spacingIconContentBefore: globalTokens.spacing.xs,
-        },
-        focused: {
-          paddingHorizontal: globalTokens.spacing.s,
-        },
-      },
-    },
-    large: {
-      padding: globalTokens.spacing.s - globalTokens.stroke.width10,
-      borderWidth: globalTokens.stroke.width10,
-      iconSize: 20,
-      focused: {
-        borderWidth: 0,
-        padding: globalTokens.spacing.s,
-      },
-      hasContent: {
-        minWidth: 96,
-        paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width10,
-        hasIconAfter: {
-          spacingIconContentAfter: globalTokens.spacing.sNudge,
-        },
-        hasIconBefore: {
-          spacingIconContentBefore: globalTokens.spacing.sNudge,
-        },
-        focused: {
-          paddingHorizontal: globalTokens.spacing.l,
-        },
-      },
+      spacingIconContentBefore: globalTokens.spacing.xxs,
+      spacingIconContentAfter: globalTokens.spacing.xxs,
+      minHeight: 28,
+      minWidth: 28,
     },
     rounded: {
       borderRadius: globalTokens.corner.radius40,

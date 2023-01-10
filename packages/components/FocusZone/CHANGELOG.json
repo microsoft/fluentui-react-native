@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Mon, 28 Nov 2022 11:51:05 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.11.7",
+      "version": "0.11.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "b8b9d8fb1285fb8037949a9aa75a333ed134b751",
+            "comment": "FocusZone (macOS): move focus between first responders instead of key views"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.21.2",
+            "commit": "890ff26064088ee92d44bb8730b8629143533451"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Nov 2022 08:47:25 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.11.6",
       "version": "0.11.6",

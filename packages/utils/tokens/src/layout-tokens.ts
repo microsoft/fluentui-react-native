@@ -10,6 +10,8 @@ export interface LayoutTokens {
   padding?: ViewStyle['padding'];
   paddingHorizontal?: ViewStyle['paddingHorizontal'];
   paddingVertical?: ViewStyle['paddingVertical'];
+  paddingStart?: ViewStyle['paddingStart'];
+  paddingEnd?: ViewStyle['paddingEnd'];
 }
 
 export const layoutTokens: OperationSet<LayoutTokens, Theme> = [
@@ -19,6 +21,8 @@ export const layoutTokens: OperationSet<LayoutTokens, Theme> = [
   { source: 'padding' },
   { source: 'paddingHorizontal' },
   { source: 'paddingVertical' },
+  { source: 'paddingStart' },
+  { source: 'paddingEnd' },
 ];
 
 export const layoutStyles = tokenBuilder<LayoutTokens>(
@@ -28,4 +32,6 @@ export const layoutStyles = tokenBuilder<LayoutTokens>(
   'padding',
   'paddingHorizontal',
   'paddingVertical',
+  'paddingStart',
+  'paddingEnd',
 );

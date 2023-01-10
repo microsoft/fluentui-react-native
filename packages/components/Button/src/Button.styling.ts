@@ -1,4 +1,4 @@
-import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
+import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize, ButtonAppearance } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, FontTokens } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
@@ -11,6 +11,7 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'block',
   'primary',
   'subtle',
+  'outline',
   'hovered',
   'small',
   'medium',
@@ -30,13 +31,15 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
-    ...(Platform.OS == 'android' && {
+    ...(Platform.OS === 'android' && {
       rippleContainer: buildProps(
         (tokens: ButtonTokens) => {
           return {
             style: {
               flexDirection: 'row',
               alignSelf: 'baseline',
+              borderColor: tokens.borderInnerColor,
+              borderWidth: tokens.borderInnerWidth,
               borderRadius: tokens.borderRadius,
               overflow: 'hidden',
             },
@@ -93,6 +96,28 @@ export const getDefaultSize = (): ButtonSize => {
   }
 
   return 'medium';
+};
+
+export const getPlatformSpecificAppearance = (appearance: ButtonAppearance): ButtonAppearance => {
+  // Mobile platforms do not have seperate styling when no appearance is passed.
+  const hasDifferentDefaultAppearance = !(Platform.OS === 'android' || Platform.OS === 'ios');
+
+  switch (appearance) {
+    case 'accent': // Included to cover Mobile platform naming guidelines, maps to 'primary'.
+      return 'primary';
+
+    case 'primary':
+    case 'subtle':
+    case 'outline': // 'Outline' exists only for Mobile platforms, default picked on other platforms.
+      return appearance;
+
+    default:
+      if (hasDifferentDefaultAppearance) {
+        return null;
+      } else {
+        return 'primary';
+      }
+  }
 };
 
 export const contentStyling = (tokens: ButtonTokens, theme: Theme, contentColor: ColorValue, fontStylesTokens: FontTokens) => {

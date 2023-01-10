@@ -37,7 +37,7 @@ const useSizeClassIOS_DO_NOT_USE: () => SizeClassIOS = () => {
 
 export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (props) => {
   const sizeClass = useSizeClassIOS_DO_NOT_USE();
-  const isMobile = Platform.OS == 'android' || (Platform.OS === 'ios' && Platform.isPad === false);
+  const isMobile = Platform.OS === 'android' || (Platform.OS === 'ios' && Platform.isPad === false);
 
   // If on iPad we are presented in a Split View or Slide Over context, show the single pane view.
   const shouldShowSinglePane = isMobile || (!isMobile && sizeClass === 'compact');

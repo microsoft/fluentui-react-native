@@ -29,8 +29,8 @@ exports[`Menu component tests Menu default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
@@ -48,7 +48,7 @@ exports[`Menu component tests Menu default 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -95,8 +95,8 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
@@ -114,7 +114,7 @@ Array [
       numberOfLines={0}
       style={
         Object {
-          "color": "#323130",
+          "color": "#ffffff",
           "fontFamily": "System",
           "fontSize": 15,
           "fontWeight": "600",
@@ -303,8 +303,8 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
@@ -322,7 +322,7 @@ Array [
       numberOfLines={0}
       style={
         Object {
-          "color": "#323130",
+          "color": "#ffffff",
           "fontFamily": "System",
           "fontSize": 15,
           "fontWeight": "600",
@@ -464,8 +464,8 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
@@ -483,7 +483,7 @@ Array [
       numberOfLines={0}
       style={
         Object {
-          "color": "#323130",
+          "color": "#ffffff",
           "fontFamily": "System",
           "fontSize": 15,
           "fontWeight": "600",
@@ -810,8 +810,8 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
@@ -829,7 +829,7 @@ Array [
       numberOfLines={0}
       style={
         Object {
-          "color": "#323130",
+          "color": "#ffffff",
           "fontFamily": "System",
           "fontSize": 15,
           "fontWeight": "600",
@@ -1156,8 +1156,8 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
@@ -1175,7 +1175,7 @@ Array [
       numberOfLines={0}
       style={
         Object {
-          "color": "#323130",
+          "color": "#ffffff",
           "fontFamily": "System",
           "fontSize": 15,
           "fontWeight": "600",
@@ -1502,8 +1502,8 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
@@ -1521,7 +1521,7 @@ Array [
       numberOfLines={0}
       style={
         Object {
-          "color": "#323130",
+          "color": "#ffffff",
           "fontFamily": "System",
           "fontSize": 15,
           "fontWeight": "600",
@@ -1836,8 +1836,8 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
@@ -1855,7 +1855,7 @@ Array [
       numberOfLines={0}
       style={
         Object {
-          "color": "#323130",
+          "color": "#ffffff",
           "fontFamily": "System",
           "fontSize": 15,
           "fontWeight": "600",
