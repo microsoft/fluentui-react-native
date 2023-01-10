@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from '../Button';
+import { Button } from '../../src/Button';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Pressable, Text } from 'react-native';
