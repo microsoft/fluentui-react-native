@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add switch examples",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}

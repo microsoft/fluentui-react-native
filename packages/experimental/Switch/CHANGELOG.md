@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Tue, 10 Jan 2023 05:10:08 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 06:10:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.14
+
+Tue, 10 Jan 2023 06:10:57 GMT
+
+### Patches
+
+- add switch examples (rohanpd.work@gmail.com)
 
 ## 0.8.13
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Tue, 10 Jan 2023 06:10:57 GMT",
+      "tag": "@fluentui-react-native/switch_v0.8.14",
+      "version": "0.8.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "a7e8c44b2a6bb48013e5b6b0eab667325b352ba8",
+            "comment": "add switch examples"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Jan 2023 05:10:08 GMT",
       "tag": "@fluentui-react-native/switch_v0.8.13",
       "version": "0.8.13",
