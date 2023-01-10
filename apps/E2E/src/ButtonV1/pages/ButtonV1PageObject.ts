@@ -10,10 +10,21 @@ class ButtonV1PageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async didOnClickCallbackFire(errorMsg: string): Promise<boolean> {
-    const callbackText = await By(BUTTON_ON_PRESS);
-    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg ?? 'The onClick callback did not fire.');
+  async waitForOnClickCallbackToFire(errorMsg: string): Promise<boolean> {
+    const callbackText = await this._callbackText;
+    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
     return await callbackText.isDisplayed();
+  }
+
+  async resetTest(): Promise<void> {
+    const callbackText = await this._callbackText;
+    if (callbackText.isDisplayed()) {
+      await (await this._primaryComponent).click();
+      await this.waitForCondition(
+        async () => !(await callbackText.isDisplayed()),
+        'Could not reset test: Clicked button to toggle onClick callback text, but the text failed to hide.',
+      );
+    }
   }
 
   /*****************************************/
@@ -37,6 +48,10 @@ class ButtonV1PageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_BUTTON_BUTTON);
+  }
+
+  get _callbackText() {
+    return By(BUTTON_ON_PRESS);
   }
 }
 

@@ -64,33 +64,35 @@ describe('ButtonV1 Functional Testing', async () => {
     await ButtonV1PageObject.scrollToTestElement();
   });
 
+  afterEach(async () => {
+    await ButtonV1PageObject.resetTest();
+  });
+
   it('Click primary button. Validate onClick() callback was fired.', async () => {
     await ButtonV1PageObject.click(ButtonV1PageObject._primaryComponent);
     await expect(
-      await ButtonV1PageObject.didOnClickCallbackFire(`The primary button failed to fire an onClick callback with a mouse click.`),
+      await ButtonV1PageObject.waitForOnClickCallbackToFire(`The primary button failed to fire an onClick callback with a mouse click.`),
     ).toBeTruthy();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
-
-    await ButtonV1PageObject.click(ButtonV1PageObject._primaryComponent); // Reset Button State
   });
 
   it('Type "Enter" on primary button. Validate onClick() callback was fired.', async () => {
     await ButtonV1PageObject.sendKeys(ButtonV1PageObject._primaryComponent, [Keys.ENTER]);
     await expect(
-      await ButtonV1PageObject.didOnClickCallbackFire(`The primary button failed to fire an onClick callback with an enter keypress.`),
+      await ButtonV1PageObject.waitForOnClickCallbackToFire(
+        `The primary button failed to fire an onClick callback with an enter keypress.`,
+      ),
     ).toBeTruthy();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
-
-    await ButtonV1PageObject.click(ButtonV1PageObject._primaryComponent); // Reset Button State
   });
 
   it('Type "Space" on primary button. Validate onClick() callback was fired.', async () => {
     await ButtonV1PageObject.sendKeys(ButtonV1PageObject._primaryComponent, [Keys.SPACE]);
 
     await expect(
-      await ButtonV1PageObject.didOnClickCallbackFire(`The primary button failed to fire an onClick callback with a space keypress.`),
+      await ButtonV1PageObject.waitForOnClickCallbackToFire(`The primary button failed to fire an onClick callback with a space keypress.`),
     ).toBeTruthy();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
