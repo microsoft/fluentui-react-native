@@ -47,11 +47,27 @@ exports[`Radio component tests Radio default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
     }
   }
   value="key1"
 >
   <View
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -90,6 +106,7 @@ exports[`Radio component tests Radio default 1`] = `
         "flexDirection": "column",
         "marginLeft": 0,
         "marginRight": 2,
+        "padding": undefined,
       }
     }
   >
@@ -161,11 +178,32 @@ exports[`Radio component tests Radio disabled 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
     }
   }
   value="key1"
 >
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -204,6 +242,7 @@ exports[`Radio component tests Radio disabled 1`] = `
         "flexDirection": "column",
         "marginLeft": 0,
         "marginRight": 2,
+        "padding": undefined,
       }
     }
   >
