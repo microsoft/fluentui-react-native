@@ -64,13 +64,12 @@ export const Switch = compose<SwitchType>({
     // now return the handler for finishing render
     return (final: SwitchProps) => {
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
-      const { disabled } = mergedProps;
       const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
       return (
-        <Slots.root {...mergedProps} {...(isMobile && { accessible: !disabled, focusable: !disabled })}>
+        <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
             {/* For the Mobile platform the animated styles are applied  */}
