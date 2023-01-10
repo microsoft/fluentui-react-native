@@ -21,6 +21,9 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
 
   /**
    * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
    */
   rippleColor?: ColorValue;
 

@@ -1,6 +1,5 @@
 import { radioName, RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { defaultRadioTokens } from './RadioTokens';
 import { fontStyles, borderStyles } from '@fluentui-react-native/tokens';
 
@@ -16,31 +15,45 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           display: 'flex',
           alignItems: tokens.alignItems,
           flexDirection: tokens.flexDirection,
-          paddingHorizontal: globalTokens.size40,
+          paddingHorizontal: tokens.rootHorizontalPadding,
+          paddingVertical: tokens.rootVerticalPadding,
           ...borderStyles.from(tokens, theme),
         },
+        android_ripple: { color: tokens.rippleColor },
       }),
-      ['flexDirection', 'alignItems', ...borderStyles.keys],
+      ['flexDirection', 'rootHorizontalPadding', 'rootVerticalPadding', 'rippleColor', 'alignItems', ...borderStyles.keys],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
         style: {
           backgroundColor: 'transparent',
-          width: tokens.radioSize,
-          height: tokens.radioSize,
+          width: tokens.radioOuterCircleSize,
+          height: tokens.radioOuterCircleSize,
           alignItems: 'center',
           justifyContent: 'center',
           borderWidth: tokens.radioBorderWidth,
           borderStyle: tokens.radioBorderStyle,
-          borderRadius: tokens.radioSize / 2,
+          borderRadius: tokens.radioOuterCircleSize / 2,
           borderColor: tokens.radioBorder,
           marginTop: tokens.marginTop,
           marginRight: tokens.marginRight,
           marginBottom: tokens.marginBottom,
           marginLeft: tokens.marginLeft,
         },
+        android_ripple: { color: tokens.rippleColor, radius: tokens.rippleRadius, borderless: true },
       }),
-      ['radioBorderWidth', 'radioBorderStyle', 'radioSize', 'radioBorder', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
+      [
+        'radioBorderWidth',
+        'radioBorderStyle',
+        'radioOuterCircleSize',
+        'rippleColor',
+        'rippleRadius',
+        'radioBorder',
+        'marginTop',
+        'marginRight',
+        'marginBottom',
+        'marginLeft',
+      ],
     ),
     innerCircle: buildProps(
       (tokens: RadioTokens) => ({
@@ -62,9 +75,10 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           flexDirection: 'column',
           marginRight: tokens.labelMarginRight,
           marginLeft: tokens.labelMarginLeft,
+          padding: tokens.labelPadding,
         },
       }),
-      ['labelMarginRight', 'labelMarginLeft'],
+      ['labelMarginRight', 'labelMarginLeft', 'labelPadding'],
     ),
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({

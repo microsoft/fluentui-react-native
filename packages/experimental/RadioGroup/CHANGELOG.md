@@ -1,8 +1,85 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Thu, 29 Dec 2022 08:02:57 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 06:54:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.5
+
+Tue, 10 Jan 2023 06:54:59 GMT
+
+### Patches
+
+- Tokenize radiogroup for Android (ayushsinghs@yahoo.in)
+
+## 0.9.4
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.21
+- Bump @fluentui-react-native/framework to v0.8.32
+- Bump @fluentui-react-native/interactive-hooks to v0.22.9
+- Bump @fluentui-react-native/text to v0.19.10
+
+## 0.9.3
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.20
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/interactive-hooks to v0.22.8
+- Bump @fluentui-react-native/text to v0.19.9
+
+## 0.9.2
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.19
+- Bump @fluentui-react-native/interactive-hooks to v0.22.7
+- Bump @fluentui-react-native/text to v0.19.8
+
+## 0.9.1
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.7
+
+## 0.9.0
+
+Tue, 03 Jan 2023 17:37:38 GMT
+
+### Minor changes
+
+- adding additional snapshot tests (gulnazsayed@microsoft.com)
+
+## 0.8.13
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.18
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.8.12
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.17
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+- Bump @fluentui-react-native/text to v0.19.5
 
 ## 0.8.11
 

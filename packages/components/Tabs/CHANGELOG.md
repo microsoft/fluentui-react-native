@@ -1,8 +1,82 @@
 # Change Log - @fluentui-react-native/tabs
 
-This log was last generated on Thu, 29 Dec 2022 08:02:57 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Jan 2023 22:25:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.22
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.21
+- Bump @fluentui-react-native/icon to v0.17.2
+- Bump @fluentui-react-native/interactive-hooks to v0.22.9
+- Bump @fluentui-react-native/text to v0.19.10
+- Bump @uifabricshared/foundation-compose to v1.12.32
+
+## 0.11.21
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.20
+- Bump @fluentui-react-native/icon to v0.17.1
+- Bump @fluentui-react-native/interactive-hooks to v0.22.8
+- Bump @fluentui-react-native/text to v0.19.9
+- Bump @uifabricshared/foundation-compose to v1.12.31
+
+## 0.11.20
+
+Thu, 05 Jan 2023 11:24:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.17.0
+
+## 0.11.19
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.19
+- Bump @fluentui-react-native/icon to v0.16.11
+- Bump @fluentui-react-native/interactive-hooks to v0.22.7
+- Bump @fluentui-react-native/text to v0.19.8
+
+## 0.11.18
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.16.10
+- Bump @fluentui-react-native/text to v0.19.7
+
+## 0.11.17
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.18
+- Bump @fluentui-react-native/icon to v0.16.9
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.11.16
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.17
+- Bump @fluentui-react-native/icon to v0.16.8
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+- Bump @fluentui-react-native/text to v0.19.5
 
 ## 0.11.15
 

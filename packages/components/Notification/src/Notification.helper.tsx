@@ -60,10 +60,6 @@ export const NotificationButton = stagedComponent((props: NotificationButtonProp
       backgroundColor: 'transparent',
       color: props.color,
       iconColor: props.color,
-      fontSize: 15,
-      fontWeight: '600',
-      fontLineHeight: 20,
-      fontLetterSpacing: -0.23, // iOS only prop
       disabled: {
         color: props.disabledColor,
       },
@@ -76,6 +72,7 @@ export const NotificationButton = stagedComponent((props: NotificationButtonProp
         minWidth: 0,
         padding: globalTokens.sizeNone,
         paddingHorizontal: globalTokens.sizeNone,
+        variant: 'body2Strong',
       },
     },
   });

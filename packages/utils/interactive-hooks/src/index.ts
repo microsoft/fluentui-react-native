@@ -45,7 +45,6 @@ export type {
 export type {
   BlurEvent,
   FocusEvent,
-  KeyPressEvent,
   Layout,
   LayoutEvent,
   MouseEvent,
@@ -56,8 +55,8 @@ export type {
   TextLayout,
   TextLayoutEvent,
 } from './Pressability/CoreEventTypes';
+export type { KeyPressEvent, KeyCallback, KeyPressProps } from './useKeyProps.types';
 export { preferKeyDownForKeyEvents, useKeyCallback, useKeyDownProps, useKeyProps, useKeyUpProps } from './useKeyProps';
-export type { KeyCallback, KeyPressProps } from './useKeyProps';
 export { useOnPressWithFocus } from './useOnPressWithFocus';
 export type { OnPressCallback, OnPressWithFocusCallback } from './useOnPressWithFocus';
 export { getAccessibilityState } from './getAccessibilityState';

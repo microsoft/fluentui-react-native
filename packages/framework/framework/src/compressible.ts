@@ -1,9 +1,16 @@
 import { Theme } from '@fluentui-react-native/theme-types';
 import { stagedComponent, StagedRender } from '@fluentui-react-native/use-slot';
 import { CustomizableComponent } from '@fluentui-react-native/use-tokens';
-import { UseTokens } from './useTokens';
 import { TokenSettings } from './useStyling';
+import { UseTokens } from './useTokens';
 
+/**
+ * Utility function which can create function components that can be tree compressed (using the stagedRender pattern),
+ * and also have customize functionality.
+ * @param fn StagedRender function that defines your component
+ * @param useTokens a hook function to build a set of tokens from a passed in theme as well as a cache object
+ * @returns A tree compressed function component with the `.customize` method exposed to it
+ */
 export function compressible<TProps, TTokens>(
   fn: StagedRender<TProps>,
   useTokens: UseTokens<TTokens>,

@@ -8,13 +8,13 @@ This package supplies transforms that help with refactoring FURN code. The trans
 2. Run the transforms using the following command:
 
 ```cli
-jscodeshift -t <path to transform file> --parser=tsx --extensions=tsx <path to file to be transformed>
+npx -p @fluentui-react-native/codemods transform -t <transform_name> --path <path_to_files_to_transform>
 ```
 
 For example
 
 ```cli
-jscodeshift -t transforms/src/button-v0-to-v1.ts --parser=tsx --extensions=tsx apps/fluent-tester/src/TestComponents/Button/deprecated
+npx -p @fluentui-react-native/codemods transform -t button-v0-to-v1 --path .\apps\fluent-tester\src\TestComponents\Button\deprecated\ButtonFocusTest.tsx
 ```
 
 ## Tests

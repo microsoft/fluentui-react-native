@@ -1,8 +1,37 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Jan 2023 22:25:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.33
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.32
+- Bump @fluentui-react-native/framework to v0.8.32
+- Bump @fluentui-react-native/persona-coin to v0.12.14
+
+## 0.13.32
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.31
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/persona-coin to v0.12.13
+
+## 0.13.31
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/persona-coin to v0.12.12
 
 ## 0.13.30
 
