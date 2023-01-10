@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ButtonLegacyPageObject from '../pages/ButtonLegacyPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import ButtonV1PageObject from '../pages/ButtonV1PageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Button Testing Initialization', function () {
@@ -10,13 +10,13 @@ describe('Button Testing Initialization', function () {
   });
 
   it('Click and navigate to Button test page', async () => {
-    await ButtonLegacyPageObject.mobileScrollToComponentButton();
-    await ButtonLegacyPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await ButtonV1PageObject.mobileScrollToComponentButton();
+    await ButtonV1PageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToButtonPage();
-    await ButtonLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await ButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ButtonLegacyPageObject.isPageLoaded()).toBeTruthy();
+    await expect(await ButtonV1PageObject.isPageLoaded()).toBeTruthy();
   });
 });
