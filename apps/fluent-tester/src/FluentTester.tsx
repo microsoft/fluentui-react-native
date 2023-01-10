@@ -72,7 +72,6 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
 
   const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
 
-  const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   const E2ESwitch = (
     <>
       <View style={fluentTesterStyles.e2eSwitchView}>
@@ -83,7 +82,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
       </View>
     </>
   );
-  const E2ESwitchMobile = (
+  const E2ESwitchAndroid = (
     <>
       <View style={fluentTesterStyles.e2eSwitchViewMobile}>
         <Text variant="subheaderSemibold">E2E Mode:</Text>
@@ -116,7 +115,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
           </Button>
         )}
         <ThemePickers />
-        {isMobile ? E2ESwitchMobile : E2ESwitch}
+        {Platform.OS === 'android' ? E2ESwitchAndroid : E2ESwitch}
       </View>
     </View>
   );
