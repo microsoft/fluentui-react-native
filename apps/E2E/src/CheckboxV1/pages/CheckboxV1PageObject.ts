@@ -5,13 +5,7 @@ import {
   CHECKBOXV1_NO_A11Y_LABEL_COMPONENT,
   CHECKBOXV1_ON_PRESS,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
-
-/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
- * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
-export const enum CheckboxV1Selector {
-  Primary, //this._primaryComponent
-}
+import { BasePage, By, ComponentSelector } from '../../common/BasePage';
 
 class CheckboxV1PageObject extends BasePage {
   /******************************************************************/
@@ -48,16 +42,16 @@ class CheckboxV1PageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(selector: CheckboxV1Selector, key: string): Promise<void> {
+  async sendKey(selector: ComponentSelector, key: string): Promise<void> {
     await (await this.getCheckboxSelector(selector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Checkbox Selector */
-  async getCheckboxSelector(selector?: CheckboxV1Selector): Promise<WebdriverIO.Element> {
-    if (selector == CheckboxV1Selector.Primary) {
+  async getCheckboxSelector(selector?: ComponentSelector): Promise<WebdriverIO.Element> {
+    if (selector == ComponentSelector.Primary) {
       return await this._primaryComponent;
     }
-    return await this._primaryComponent;
+    return await this._secondaryComponent;
   }
 
   /*****************************************/
