@@ -61,18 +61,12 @@ export const useRadio = (props: RadioProps): RadioInfo => {
   React.useEffect(() => {
     radioGroupContext.addRadioValue(value);
 
-    return () => {
-      radioGroupContext.removeRadioValue(value);
-    };
-  }, []);
-
-  // Explicitly only run on mount and unmount
-  React.useEffect(() => {
     if (!isDisabled) {
       radioGroupContext.addRadioEnabledValue(value);
     }
 
     return () => {
+      radioGroupContext.removeRadioValue(value);
       radioGroupContext.removeRadioEnabledValue(value);
     };
   }, []);
