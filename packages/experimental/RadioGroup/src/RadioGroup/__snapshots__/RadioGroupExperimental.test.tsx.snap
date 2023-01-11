@@ -81,6 +81,22 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -209,6 +225,22 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -390,9 +422,9 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           ]
         }
         accessibilityLabel="RadioButton1"
-        accessibilityPositionInSet={1}
+        accessibilityPositionInSet={0}
         accessibilityRole="radio"
-        accessibilitySetSize={2}
+        accessibilitySetSize={0}
         accessibilityState={
           Object {
             "disabled": false,
@@ -402,6 +434,22 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -518,9 +566,9 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           ]
         }
         accessibilityLabel="RadioButton2"
-        accessibilityPositionInSet={2}
+        accessibilityPositionInSet={0}
         accessibilityRole="radio"
-        accessibilitySetSize={2}
+        accessibilitySetSize={0}
         accessibilityState={
           Object {
             "disabled": false,
@@ -530,6 +578,22 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -723,6 +787,22 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={false}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -754,11 +834,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         value="key1"
       >
         <View
-          accessibilityState={
-            Object {
-              "disabled": true,
-            }
-          }
           accessible={false}
           focusable={false}
           onBlur={[Function]}
@@ -856,6 +931,22 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={false}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -887,11 +978,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         value="key2"
       >
         <View
-          accessibilityState={
-            Object {
-              "disabled": true,
-            }
-          }
           accessible={false}
           focusable={false}
           onBlur={[Function]}
@@ -1055,6 +1141,22 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -1183,6 +1285,22 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -1377,6 +1495,22 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="below"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -1505,6 +1639,22 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="below"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -1715,6 +1865,22 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
@@ -1843,6 +2009,22 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
         accessible={true}
         enableFocusRing={true}
         focusable={true}
+        keyDownEvents={
+          Array [
+            Object {
+              "key": "ArrowDown",
+            },
+            Object {
+              "key": "ArrowRight",
+            },
+            Object {
+              "key": "ArrowUp",
+            },
+            Object {
+              "key": "ArrowLeft",
+            },
+          ]
+        }
         labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
