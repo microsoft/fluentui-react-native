@@ -140,7 +140,8 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       </View>
       <Separator />
       {e2eSections && e2eMode && (
-        <>
+        // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
+        <View accessible={Platform.OS !== 'ios'} {...testProps(E2E_TEST_SECTION)}>
           {e2eSections.map((section, i) => {
             if (section === null) {
               return null;
@@ -148,14 +149,14 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
             const { component: E2EComponent } = section;
             return (
               <View style={styles.e2eSection} key={i}>
-                <Text style={styles.section} variant="headerSemibold" {...testProps(E2E_TEST_SECTION)}>
+                <Text style={styles.section} variant="headerSemibold">
                   {section.name}
                 </Text>
                 <E2EComponent />
               </View>
             );
           })}
-        </>
+        </View>
       )}
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
