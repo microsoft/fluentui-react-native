@@ -90,6 +90,8 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
       ),
     });
 
+  const isMobile = ['ios', 'android'].includes(Platform.OS);
+
   return (
     <View style={headerStyle}>
       <Text
@@ -113,8 +115,9 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
             {backButtonTitle}
           </Button>
         )}
+        {!isMobile && <E2ESwitch />}
         <ThemePickers />
-        <E2ESwitch />
+        {isMobile && <E2ESwitch />}
       </View>
     </View>
   );
