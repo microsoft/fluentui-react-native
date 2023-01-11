@@ -9,7 +9,6 @@ import { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { testProps } from './Common/TestProps';
 import { E2EContext } from './';
-import { E2E_TEST_SECTION } from '../../../E2E/src/common/consts';
 
 export type TestSection = {
   name: string;
@@ -126,7 +125,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   return (
     <View>
       <View style={styles.header}>
-        <Text style={styles.name} variant="heroSemibold">
+        <Text style={styles.name} variant={e2eMode ? 'headerSemibold' : 'heroSemibold'}>
           {props.name}
         </Text>
         <Button
@@ -141,22 +140,15 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       <Separator />
       {e2eSections && e2eMode && (
         // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
-        <View accessible={Platform.OS !== 'ios'} {...testProps(E2E_TEST_SECTION)}>
+        <>
           {e2eSections.map((section, i) => {
             if (section === null) {
               return null;
             }
             const { component: E2EComponent } = section;
-            return (
-              <View style={styles.e2eSection} key={i}>
-                <Text style={styles.section} variant="headerSemibold">
-                  {section.name}
-                </Text>
-                <E2EComponent />
-              </View>
-            );
+            return <E2EComponent key={i} />;
           })}
-        </View>
+        </>
       )}
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
