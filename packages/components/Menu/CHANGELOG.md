@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 10 Jan 2023 21:36:52 GMT and should not be manually modified.
+This log was last generated on Wed, 11 Jan 2023 14:59:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.17
+
+Wed, 11 Jan 2023 14:59:31 GMT
+
+### Patches
+
+- Update MenuDivider margin (amchiu@microsoft.com)
 
 ## 1.2.16
 
