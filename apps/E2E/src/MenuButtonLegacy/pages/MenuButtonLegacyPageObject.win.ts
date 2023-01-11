@@ -16,32 +16,10 @@ class MenuButtonLegacyPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async waitForMenuItemsToOpen(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.menuItemDisplayed(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'The Menu Items did not open.',
-      interval: 1000,
-    });
-  }
-
-  /* Whether the menu item is displayed or not. It should be displayed after clicking on the MenuButton */
-  async menuItemDisplayed(): Promise<boolean> {
-    return await (await this._menuItem).isDisplayed();
-  }
-
-  /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(selector: MenuButtonSelector, key: string): Promise<void> {
-    await (await this.getMenuButtonSelector(selector)).addValue(key);
-  }
-
-  /* Returns the correct WebDriverIO element from the MenuButton Selector */
-  async getMenuButtonSelector(selector?: MenuButtonSelector): Promise<WebdriverIO.Element> {
-    if (selector == MenuButtonSelector.MenuButton) {
-      return await this._primaryComponent;
-    } else if (selector == MenuButtonSelector.MenuItem1) {
-      return await this._menuItem;
-    }
-    return await this._primaryComponent;
+  async waitForMenuItemToDisplay(errorMsg: string): Promise<boolean> {
+    const menuItem = await this._menuItem;
+    await this.waitForCondition(async () => await menuItem.isDisplayed(), errorMsg);
+    return await menuItem.isDisplayed();
   }
 
   /*****************************************/
@@ -54,13 +32,20 @@ class MenuButtonLegacyPageObject extends BasePage {
   get _pageName() {
     return MENU_BUTTON_TESTPAGE;
   }
-
   get _primaryComponentName() {
     return MENU_BUTTON_TEST_COMPONENT;
   }
 
   get _secondaryComponentName() {
     return MENU_BUTTON_NO_A11Y_LABEL_COMPONENT;
+  }
+
+  get _firstMenuButton() {
+    return By(MENU_BUTTON_TEST_COMPONENT);
+  }
+
+  get _secondMenuButton() {
+    return By(MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {

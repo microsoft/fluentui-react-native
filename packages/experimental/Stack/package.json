@@ -28,12 +28,12 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.31",
-    "@fluentui-react-native/tokens": ">=0.20.2 <1.0.0"
+    "@fluentui-react-native/framework": "0.8.33",
+    "@fluentui-react-native/tokens": ">=0.20.3 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/text": ">=0.19.9 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.11 <1.0.0",
     "@types/react-native": "^0.68.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.2",
