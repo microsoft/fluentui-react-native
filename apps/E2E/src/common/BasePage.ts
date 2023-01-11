@@ -133,8 +133,7 @@ export abstract class BasePage {
   }
 
   async sendKeys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
-    // await (await element).addValue(keys);
-    await driver.pressKeyCode(62);
+    await (await element).addValue(keys);
   }
 
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
@@ -309,6 +308,8 @@ export abstract class BasePage {
    * Unfortunately, afterEach() is designed for setup/teardown - not for determining if a test should fail or not.
    * */
   async didAssertPopup(): Promise<boolean> {
+    /* On Android, we can't get the window handles. Instead, we check if the page is still visible.
+     * In case of any error, a full page crash message is displayed and the test page is no longer accessible. */
     if (PLATFORM === MobilePlatform.Android) {
       return !(await this.isPageLoaded());
     }
