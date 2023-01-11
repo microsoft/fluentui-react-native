@@ -20,8 +20,6 @@ describe('Button Legacy Testing Initialization', function () {
 
     await expect(await ButtonLegacyPageObject.isPageLoaded()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await ButtonLegacyPageObject.waitForE2ESectionToDisplay();
-
     await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
