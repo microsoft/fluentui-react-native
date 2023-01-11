@@ -9,6 +9,7 @@ import { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { testProps } from './Common/TestProps';
 import { E2EContext } from './';
+import { E2E_TEST_SECTION } from '../../../E2E/src/common/consts';
 
 export type TestSection = {
   name: string;
@@ -147,7 +148,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
             const { component: E2EComponent } = section;
             return (
               <View style={styles.e2eSection} key={i}>
-                <Text style={styles.section} variant="headerSemibold" {...testProps('E2E_Test_Section')}>
+                <Text style={styles.section} variant="headerSemibold" {...testProps(E2E_TEST_SECTION)}>
                   {section.name}
                 </Text>
                 <E2EComponent />

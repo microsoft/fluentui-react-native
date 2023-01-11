@@ -1,5 +1,12 @@
-import { E2E_MODE_SWITCH, Keys, ROOT_VIEW } from './consts';
-import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
+import {
+  E2E_MODE_SWITCH,
+  E2E_TEST_SECTION,
+  Keys,
+  ROOT_VIEW,
+  Attribute,
+  attributeToEnumName,
+  TESTPAGE_BUTTONS_SCROLLVIEWER,
+} from './consts';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
@@ -78,6 +85,13 @@ export abstract class BasePage {
       await e2eSwitch.click();
       await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
     }
+  }
+
+  async waitForE2ESectionToDisplay(): Promise<void> {
+    await this.waitForCondition(
+      async () => await (await this._e2eSection).isDisplayed(),
+      'The E2E Section failed to display before the timeout.',
+    );
   }
 
   /**
@@ -341,6 +355,10 @@ export abstract class BasePage {
 
   private get _e2eSwitch(): Promise<WebdriverIO.Element> {
     return By(E2E_MODE_SWITCH);
+  }
+
+  private get _e2eSection(): Promise<WebdriverIO.Element> {
+    return By(E2E_TEST_SECTION);
   }
 
   // Default timeout to wait until page is displayed (10s)
