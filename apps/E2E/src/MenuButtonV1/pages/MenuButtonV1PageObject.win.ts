@@ -18,14 +18,6 @@ class MenuButtonV1PageObject extends BasePage {
     return MENUBUTTONV1_TESTPAGE;
   }
 
-  get _primaryComponentName() {
-    return MENUBUTTONV1_TEST_COMPONENT;
-  }
-
-  get _secondaryComponentName() {
-    return MENUBUTTONV1_NO_A11Y_LABEL_COMPONENT;
-  }
-
   get _firstMenuButton() {
     return By(MENUBUTTONV1_TEST_COMPONENT);
   }
