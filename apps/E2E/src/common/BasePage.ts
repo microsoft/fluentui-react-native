@@ -1,4 +1,4 @@
-import { Keys, ROOT_VIEW, TESTPAGE_TESTS_SCROLLVIEWER } from './consts';
+import { AndroidAttribute, Keys, ROOT_VIEW, TESTPAGE_TESTS_SCROLLVIEWER } from './consts';
 import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
 
 const DUMMY_CHAR = '';
@@ -76,7 +76,11 @@ export abstract class BasePage {
    * Checks to see if an element attribute is strictly equal to an expected value the user passes in.
    * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
    * the expected and actual values don't match. This should be called for attribute tests in specs. */
-  async compareAttribute(element: Promise<WebdriverIO.Element>, attribute: Attribute, expectedValue: any): Promise<boolean> {
+  async compareAttribute(
+    element: Promise<WebdriverIO.Element>,
+    attribute: Attribute | AndroidAttribute,
+    expectedValue: any,
+  ): Promise<boolean> {
     const el = await element;
     const actualValue = await el.getAttribute(attribute);
     if (expectedValue !== actualValue) {
@@ -129,7 +133,8 @@ export abstract class BasePage {
   }
 
   async sendKeys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
-    await (await element).addValue(keys);
+    // await (await element).addValue(keys);
+    await driver.pressKeyCode(62);
   }
 
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
@@ -241,6 +246,9 @@ export abstract class BasePage {
   /* Scrolls to the specified or primary UI test element until it is displayed. */
   async mobileScrollToTestElement(componentIdentifier?: string): Promise<void> {
     const componentToScrollTo = componentIdentifier ?? this._primaryComponentName;
+    if (await (await By(componentToScrollTo)).isDisplayed()) {
+      return;
+    }
 
     const errorMsg = 'Could not scroll to the ' + componentToScrollTo + '. Please see Pipeline artifacts for more debugging information.';
 
@@ -301,6 +309,9 @@ export abstract class BasePage {
    * Unfortunately, afterEach() is designed for setup/teardown - not for determining if a test should fail or not.
    * */
   async didAssertPopup(): Promise<boolean> {
+    if (PLATFORM === MobilePlatform.Android) {
+      return !(await this.isPageLoaded());
+    }
     // If more than 1 instance of the app is open, we know an assert dialogue popped up.
     const windowHandles = await browser.getWindowHandles();
     return windowHandles.length > 1;

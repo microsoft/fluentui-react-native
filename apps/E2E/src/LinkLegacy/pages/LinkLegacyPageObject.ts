@@ -13,12 +13,12 @@ class LinkLegacyPageObject extends BasePage {
     return LINK_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(LINK_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return LINK_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(LINK_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return LINK_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButton() {
