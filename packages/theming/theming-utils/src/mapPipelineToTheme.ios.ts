@@ -1,134 +1,114 @@
 import { AliasColorTokens, Variants, VariantValue } from '@fluentui-react-native/theme-types';
 import { FontStyleTokens } from '@fluentui-react-native/tokens';
 
+// API that maps tokens coming from the iOS token pipeline to Theme color values.
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {
-    neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
-    neutralForeground1Hover: pipelineOutput.neutralForeground1.fillColorHover,
-    neutralForeground1Pressed: pipelineOutput.neutralForeground1.fillColorPressed,
-    neutralForeground1Selected: pipelineOutput.neutralForeground1.fillColorSelected,
-    neutralForeground2: pipelineOutput.neutralForeground2.fillColorRest,
-    neutralForeground2Hover: pipelineOutput.neutralForeground2.fillColorHover,
-    neutralForeground2Pressed: pipelineOutput.neutralForeground2.fillColorPressed,
-    neutralForeground2Selected: pipelineOutput.neutralForeground2.fillColorSelected,
-    neutralForeground2BrandHover: pipelineOutput.neutralForeground2.fillColorBrandHover,
-    neutralForeground2BrandPressed: pipelineOutput.neutralForeground2.fillColorBrandPressed,
-    neutralForeground2BrandSelected: pipelineOutput.neutralForeground2.fillColorBrandSelected,
-    neutralForeground3: pipelineOutput.neutralForeground3.fillColorRest,
-    neutralForeground3Hover: pipelineOutput.neutralForeground3.fillColorHover,
-    neutralForeground3Pressed: pipelineOutput.neutralForeground3.fillColorPressed,
-    neutralForeground3Selected: pipelineOutput.neutralForeground3.fillColorSelected,
-    neutralForeground3BrandHover: pipelineOutput.neutralForeground3.fillColorBrandHover,
-    neutralForeground3BrandPressed: pipelineOutput.neutralForeground3.fillColorBrandPressed,
-    neutralForeground3BrandSelected: pipelineOutput.neutralForeground3.fillColorBrandSelected,
-    neutralForeground4: pipelineOutput.neutralForeground4.fillColorRest,
-    neutralForegroundDisabled: pipelineOutput.neutralForegroundDisabled.fillColorRest,
-
-    brandForegroundLink: pipelineOutput.brandForegroundLink.fillColorRest,
-    brandForegroundLinkHover: pipelineOutput.brandForegroundLink.fillColorHover,
-    brandForegroundLinkPressed: pipelineOutput.brandForegroundLink.fillColorPressed,
-    brandForegroundLinkSelected: pipelineOutput.brandForegroundLink.fillColorSelected,
-    compoundBrandForeground1: pipelineOutput.compoundBrandForeground1.fillColorRest,
-    compoundBrandForeground1Hover: pipelineOutput.compoundBrandForeground1.fillColorHover,
-    compoundBrandForeground1Pressed: pipelineOutput.compoundBrandForeground1.fillColorPressed,
-    brandForeground1: pipelineOutput.brandForeground1.fillColorRest,
-    brandForeground1Disabled: pipelineOutput.brandForeground1.fillColorDisabled,
-    brandForeground1Pressed: pipelineOutput.brandForeground1.fillColorPressed,
-    brandForeground2: pipelineOutput.brandForeground2.fillColorRest,
-
-    neutralForegroundInverted: pipelineOutput.neutralForegroundInverted.fillColorRest,
-    neutralForegroundOnBrand: pipelineOutput.neutralForegroundOnBrand.fillColorRest,
-    neutralForegroundOnBrandHover: pipelineOutput.neutralForegroundOnBrand.fillColorHover,
-    neutralForegroundOnBrandPressed: pipelineOutput.neutralForegroundOnBrand.fillColorPressed,
-    neutralForegroundOnBrandSelected: pipelineOutput.neutralForegroundOnBrand.fillColorSelected,
-    neutralForegroundInvertedLink: pipelineOutput.neutralForegroundInvertedLink.fillColorRest,
-    neutralForegroundInvertedLinkHover: pipelineOutput.neutralForegroundInvertedLink.fillColorHover,
-    neutralForegroundInvertedLinkPressed: pipelineOutput.neutralForegroundInvertedLink.fillColorPressed,
-    neutralForegroundInvertedLinkSelected: pipelineOutput.neutralForegroundInvertedLink.fillColorSelected,
+    /// Neutral background tokens
 
     neutralBackground1: pipelineOutput.neutralBackground1.fillColorRest,
-    neutralBackground1Hover: pipelineOutput.neutralBackground1.fillColorHover,
     neutralBackground1Pressed: pipelineOutput.neutralBackground1.fillColorPressed,
     neutralBackground1Selected: pipelineOutput.neutralBackground1.fillColorSelected,
+
     neutralBackground2: pipelineOutput.neutralBackground2.fillColorRest,
-    neutralBackground2Hover: pipelineOutput.neutralBackground2.fillColorHover,
     neutralBackground2Pressed: pipelineOutput.neutralBackground2.fillColorPressed,
     neutralBackground2Selected: pipelineOutput.neutralBackground2.fillColorSelected,
+
     neutralBackground3: pipelineOutput.neutralBackground3.fillColorRest,
-    neutralBackground3Hover: pipelineOutput.neutralBackground3.fillColorHover,
     neutralBackground3Pressed: pipelineOutput.neutralBackground3.fillColorPressed,
     neutralBackground3Selected: pipelineOutput.neutralBackground3.fillColorSelected,
+
     neutralBackground4: pipelineOutput.neutralBackground4.fillColorRest,
-    neutralBackground4Hover: pipelineOutput.neutralBackground4.fillColorHover,
     neutralBackground4Pressed: pipelineOutput.neutralBackground4.fillColorPressed,
     neutralBackground4Selected: pipelineOutput.neutralBackground4.fillColorSelected,
+
     neutralBackground5: pipelineOutput.neutralBackground5.fillColorRest,
-    neutralBackground5Hover: pipelineOutput.neutralBackground5.fillColorHover,
     neutralBackground5Pressed: pipelineOutput.neutralBackground5.fillColorPressed,
     neutralBackground5Selected: pipelineOutput.neutralBackground5.fillColorSelected,
+
     neutralBackground6: pipelineOutput.neutralBackground6.fillColorRest,
+
+    neutralBackgroundCanvas: pipelineOutput.neutralBackgroundCanvas.fillColorRest,
+
+    neutralBackgroundDarkStatic: pipelineOutput.neutralBackgroundDarkStatic.fillColorRest,
+
+    neutralBackgroundLightStatic: pipelineOutput.neutralBackgroundLightStatic.fillColorRest,
+
+    neutralBackgroundLightStaticDisabled: pipelineOutput.neutralBackgroundLightStaticDisabled.fillColorRest,
+
     neutralBackgroundInverted: pipelineOutput.neutralBackgroundInverted.fillColorRest,
-
-    subtleBackground: pipelineOutput.subtleBackground.fillColorRest,
-    subtleBackgroundHover: pipelineOutput.subtleBackground.fillColorHover,
-    subtleBackgroundPressed: pipelineOutput.subtleBackground.fillColorPressed,
-    subtleBackgroundSelected: pipelineOutput.subtleBackground.fillColorSelected,
-
-    transparentBackground: pipelineOutput.transparentBackground.fillColorRest,
-    transparentBackgroundHover: pipelineOutput.transparentBackground.fillColorHover,
-    transparentBackgroundPressed: pipelineOutput.transparentBackground.fillColorPressed,
-    transparentBackgroundSelected: pipelineOutput.transparentBackground.fillColorSelected,
 
     neutralBackgroundDisabled: pipelineOutput.neutralBackgroundDisabled.fillColorRest,
 
     neutralStencil1: pipelineOutput.neutralStencil1.fillColorRest,
+
     neutralStencil2: pipelineOutput.neutralStencil2.fillColorRest,
 
-    brandBackground: pipelineOutput.brandBackground.fillColorRest,
-    brandBackgroundHover: pipelineOutput.brandBackground.fillColorHover,
-    brandBackgroundPressed: pipelineOutput.brandBackground.fillColorPressed,
-    brandBackgroundDisabled: pipelineOutput.brandBackground.fillColorDisabled,
-    brandBackgroundSelected: pipelineOutput.brandBackground.fillColorSelected,
-    compoundBrandBackground1: pipelineOutput.compoundBrandBackground1.fillColorRest,
-    compoundBrandBackground1Hover: pipelineOutput.compoundBrandBackground1.fillColorHover,
-    compoundBrandBackground1Pressed: pipelineOutput.compoundBrandBackground1.fillColorPressed,
+    /// Neutral foreground tokens
 
-    brandBackgroundStatic: pipelineOutput.brandBackgroundStatic.fillColorRest,
-    brandBackground2: pipelineOutput.brandBackground2.fillColorRest,
+    neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
+
+    neutralForeground2: pipelineOutput.neutralForeground2.fillColorRest,
+
+    neutralForeground3: pipelineOutput.neutralForeground3.fillColorRest,
+
+    neutralForegroundDisabled1: pipelineOutput.neutralForegroundDisabled1.fillColorRest,
+
+    neutralForegroundDisabled2: pipelineOutput.neutralForegroundDisabled2.fillColorRest,
+
+    neutralForegroundOnColor: pipelineOutput.neutralForegroundOnColor.fillColorRest,
+
+    neutralForegroundDarkStatic: pipelineOutput.neutralForegroundDarkStatic.fillColorRest,
+
+    neutralForegroundLightStatic: pipelineOutput.neutralForegroundLightStatic.fillColorRest,
+
+    /// Neutral stroke tokens
+
+    neutralStroke1: pipelineOutput.neutralStroke1.strokeColorRest,
+
+    neutralStroke2: pipelineOutput.neutralStroke2.strokeColorRest,
 
     neutralStrokeAccessible: pipelineOutput.neutralStrokeAccessible.strokeColorRest,
-    neutralStrokeAccessibleHover: pipelineOutput.neutralStrokeAccessible.strokeColorHover,
-    neutralStrokeAccessiblePressed: pipelineOutput.neutralStrokeAccessible.strokeColorPressed,
-    neutralStrokeAccessibleSelected: pipelineOutput.neutralStrokeAccessible.strokeColorSelected,
-    neutralStroke1: pipelineOutput.neutralStroke1.strokeColorRest,
-    neutralStroke1Hover: pipelineOutput.neutralStroke1.strokeColorHover,
-    neutralStroke1Pressed: pipelineOutput.neutralStroke1.strokeColorPressed,
-    neutralStroke1Selected: pipelineOutput.neutralStroke1.strokeColorSelected,
-    neutralStroke2: pipelineOutput.neutralStroke2.strokeColorRest,
-    neutralStroke3: pipelineOutput.neutralStroke3.strokeColorRest,
-    brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
-    brandStroke2: pipelineOutput.brandStroke2.strokeColorRest,
-    compoundBrandStroke1: pipelineOutput.compoundBrandStroke1.strokeColorRest,
-    compoundBrandStroke1Hover: pipelineOutput.compoundBrandStroke1.strokeColorHover,
-    compoundBrandStroke1Pressed: pipelineOutput.compoundBrandStroke1.strokeColorPressed,
+
+    neutralStrokeFocus1: pipelineOutput.neutralStrokeFocus1.strokeColorRest,
+
+    neutralStrokeFocus2: pipelineOutput.neutralStrokeFocus2.strokeColorRest,
+
     neutralStrokeDisabled: pipelineOutput.neutralStrokeDisabled.strokeColorRest,
 
-    transparentStroke: pipelineOutput.transparentStroke.strokeColorRest,
-    transparentStrokeInteractive: pipelineOutput.transparentStroke.strokeColorHover,
-    transparentStrokeDisabled: pipelineOutput.transparentStroke.strokeColorDisabled,
+    /// Brand background tokens
 
-    strokeFocus1: pipelineOutput.strokeFocus1.strokeColorRest,
-    strokeFocus2: pipelineOutput.strokeFocus2.strokeColorRest,
+    brandBackground: pipelineOutput.brandBackground1.fillColorRest,
+    brandBackgroundPressed: pipelineOutput.brandBackground1.fillColorPressed,
+    brandBackgroundSelected: pipelineOutput.brandBackground1.fillColorSelected,
 
-    redBackground1: pipelineOutput.redBackground1.fillColorRest,
-    redBackground2: pipelineOutput.redBackground2.fillColorRest,
-    redBackground3: pipelineOutput.redBackground3.fillColorRest,
-    redForeground1: pipelineOutput.redForeground1.fillColorRest,
-    redForeground2: pipelineOutput.redBackground2.fillColorRest,
-    redForeground3: pipelineOutput.redBackground3.fillColorRest,
-    redBorderActive: pipelineOutput.redBorderActive.strokeColorRest,
-    redBorder1: pipelineOutput.redBorder1.strokeColorRest,
-    redBorder2: pipelineOutput.redBorder2.strokeColorRest,
+    brandBackground2: pipelineOutput.brandBackground2?.fillColorRest,
+    brandBackground2Pressed: pipelineOutput.brandBackground2?.fillColorPressed,
+    brandBackground2Selected: pipelineOutput.brandBackground2?.fillColorSelected,
+
+    brandBackground3: pipelineOutput.brandBackground3?.fillColorRest,
+
+    brandBackgroundTint: pipelineOutput.brandBackgroundTint.fillColorRest,
+
+    brandBackgroundDisabled: pipelineOutput.brandBackgroundDisabled.fillColorRest,
+
+    /// Brand foreground tokens
+
+    brandForeground1: pipelineOutput.brandForeground1.fillColorRest,
+    brandForeground1Pressed: pipelineOutput.brandForeground1.fillColorPressed,
+    brandForeground1Selected: pipelineOutput.brandForeground1.fillColorSelected,
+
+    brandForegroundTint: pipelineOutput.brandForegroundTint.fillColorRest,
+
+    brandForegroundDisabled1: pipelineOutput.brandForegroundDisabled1.fillColorRest,
+
+    brandForegroundDisabled2: pipelineOutput.brandForegroundDisabled2.fillColorRest,
+
+    /// Brand stroke tokens
+
+    brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
+    brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
+    brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
   };
 }
 
