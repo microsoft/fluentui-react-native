@@ -40,6 +40,7 @@ import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
 import { TokenTest } from './TestComponents/Tokens';
 import * as Constants from '../../E2E/src/index.consts';
+import { DividerTest, HOMEPAGE_DIVIDER_BUTTON } from './TestComponents/Divider';
 
 export const tests: TestDescription[] = [
   {
@@ -107,6 +108,12 @@ export const tests: TestDescription[] = [
     component: NativeDatePickerTest,
     testPageButton: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
     platforms: ['ios'],
+  },
+  {
+    name: 'Divider',
+    component: DividerTest,
+    testPageButton: HOMEPAGE_DIVIDER_BUTTON,
+    platforms: ['win32'],
   },
   {
     name: 'Dropdown',
