@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Thu, 12 Jan 2023 20:09:58 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.9.7",
+      "version": "0.9.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "f038ccbdfaf6b8d59580a59001846af2cedfde1e",
+            "comment": "adding depth 2 re-render test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Jan 2023 20:17:18 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.9.6",
       "version": "0.9.6",
