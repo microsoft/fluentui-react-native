@@ -102,12 +102,9 @@ describe('RadioGroupV1 Functional Testing', async () => {
 
   it('Click on a Radio. Validate that it changes state from unselected to selected.', async () => {
     /* Validate the Radio is not initially selected */
-    await expect(
-      await RadioGroupV1Page.waitForRadioSelected(
-        Radio.Second,
-        'Expected radio #2 to unselected at test start, but #2 was initially selected.',
-      ),
-    ).toBeFalsy();
+    await expect(await RadioGroupV1Page.isRadioSelected(Radio.Second)).toBeFalsy(
+      'Expected radio #2 to unselected at test start, but #2 was initially selected.',
+    );
 
     /* Click on the Radio to select it */
     await RadioGroupV1Page.click(RadioGroupV1Page.getRadio(Radio.Second));
@@ -165,7 +162,7 @@ describe('RadioGroupV1 Functional Testing', async () => {
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press "TAB" on a Radio. Validate Radio in the next RadioGroup is selected.', async () => {
+  it('Press "TAB" on a Radio. Validate Radio in the next RadioGroup is focused.', async () => {
     // Presses the Tab key while the second (B) Radio is selected in first RadioGroup
     await RadioGroupV1Page.sendKeys(RadioGroupV1Page.getRadio(Radio.Second), [Keys.TAB]);
 
@@ -173,7 +170,7 @@ describe('RadioGroupV1 Functional Testing', async () => {
     await expect(
       await RadioGroupV1Page.waitForRadioFocused(
         Radio.Fifth,
-        'Expected radio #5 to be selected by a "TAB" input from previous radio group, but #5 remained unselected.',
+        'Expected radio #5 to be focused by a "TAB" input from previous radio group, but #5 remained unfocused.',
       ),
     ).toBeTruthy();
 
