@@ -125,7 +125,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   return (
     <View>
       <View style={styles.header}>
-        <Text style={styles.name} variant={e2eMode ? 'headerSemibold' : 'heroSemibold'}>
+        <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
         <Button

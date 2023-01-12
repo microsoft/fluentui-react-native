@@ -81,7 +81,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
         </View>
       ),
       default: (
-        <View style={fluentTesterStyles.e2eSwitchView}>
+        <View style={fluentTesterStyles.e2eSwitchDesktopView}>
           <Text style={{ paddingLeft: 4 }} variant="bodySemibold">
             E2E Mode:
           </Text>
@@ -89,8 +89,6 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
         </View>
       ),
     });
-
-  const isMobile = ['ios', 'android'].includes(Platform.OS);
 
   return (
     <View style={headerStyle}>
@@ -103,6 +101,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
       >
         ⚛ FluentUI Tests
       </Text>
+      <E2ESwitch />
       <View style={fluentTesterStyles.header}>
         {/* On iPhone, We need a back button. Android has an OS back button, while desktop platforms have a two-pane view */}
         {Platform.OS === 'ios' && !Platform.isPad && (
@@ -115,9 +114,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
             {backButtonTitle}
           </Button>
         )}
-        {!isMobile && <E2ESwitch />}
         <ThemePickers />
-        {isMobile && <E2ESwitch />}
       </View>
     </View>
   );
