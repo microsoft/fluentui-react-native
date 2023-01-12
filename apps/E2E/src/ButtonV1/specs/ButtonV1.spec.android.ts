@@ -38,13 +38,6 @@ describe('ButtonV1 Accessibility Testing', async () => {
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
-});
-
-describe('ButtonV1 Functional Testing', async () => {
-  /* Scrolls and waits for the Button to be visible on the Test Page */
-  beforeEach(async () => {
-    await ButtonV1PageObject.mobileScrollToTestElement();
-  });
 
   it('Validate Button Class on Android', async () => {
     await expect(
@@ -52,6 +45,13 @@ describe('ButtonV1 Functional Testing', async () => {
     ).toBeTrue();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+});
+
+describe('ButtonV1 Functional Testing', async () => {
+  /* Scrolls and waits for the Button to be visible on the Test Page */
+  beforeEach(async () => {
+    await ButtonV1PageObject.mobileScrollToTestElement();
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {

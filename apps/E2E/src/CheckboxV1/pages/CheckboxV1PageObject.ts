@@ -15,6 +15,10 @@ class CheckboxV1PageObject extends BasePage {
     return await (await this._primaryComponent).isSelected();
   }
 
+  async isCheckboxCheckedAndroid(): Promise<boolean> {
+    return (await (await this._primaryComponent).getAttribute('checked')) === 'true';
+  }
+
   async waitForCheckboxChecked(timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.isCheckboxChecked(), {
       timeout: timeout ?? this.waitForUiEvent,
