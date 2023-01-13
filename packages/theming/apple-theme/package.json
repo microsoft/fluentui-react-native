@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.16.23 <1.0.0",
-    "@fluentui-react-native/design-tokens-ios": "^0.39.0",
+    "@fluentui-react-native/design-tokens-ios": "^0.40.0",
     "@fluentui-react-native/design-tokens-macos": "^0.36.0",
     "@fluentui-react-native/memo-cache": "^1.1.7",
     "@fluentui-react-native/theme": ">=0.7.16 <1.0.0",
