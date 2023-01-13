@@ -169,7 +169,7 @@ class NavigateAppPage extends BasePage {
     await (await this.themePage).click();
   }
 
-  async clickAndGoToTokensPage() {
+  async clickAndGoToColorTokensPage() {
     await (await this.tokensPage).click();
   }
 

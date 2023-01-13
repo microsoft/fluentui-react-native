@@ -11,7 +11,7 @@ describe('Color Tokens Testing Initialization', function () {
 
   it('Click and navigate to Color Tokens test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToTokensPage();
+    await NavigateAppPage.clickAndGoToColorTokensPage();
     await ColorTokenPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ColorTokenPageObject.isPageLoaded()).toBeTruthy(ColorTokenPageObject.ERRORMESSAGE_PAGELOAD);
