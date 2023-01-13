@@ -1,4 +1,4 @@
-import { HOMEPAGE_TOKEN_BUTTON, TOKEN_TESTPAGE, TOKENS_TEST_COMPONENT } from '../consts';
+import { HOMEPAGE_COLORTOKEN_BUTTON, TOKEN_TESTPAGE, TOKENS_TEST_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class TokenPageObject extends BasePage {
@@ -18,7 +18,7 @@ class TokenPageObject extends BasePage {
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_TOKEN_BUTTON);
+    return By(HOMEPAGE_COLORTOKEN_BUTTON);
   }
 }
 

@@ -1,4 +1,4 @@
-export const HOMEPAGE_TOKEN_BUTTON = 'Homepage_Token_Button';
+export const HOMEPAGE_COLORTOKEN_BUTTON = 'Homepage_ColorToken_Button';
 export const TOKEN_TESTPAGE = 'Token_TestPage';
 
 /* Test Tokens 1 */

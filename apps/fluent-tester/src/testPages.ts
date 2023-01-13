@@ -286,7 +286,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Tokens',
     component: TokenTest,
-    testPageButton: Constants.HOMEPAGE_TOKEN_BUTTON,
+    testPageButton: Constants.HOMEPAGE_COLORTOKEN_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
 ];
