@@ -16,9 +16,9 @@ class SwitchPageObject extends BasePage {
     const currState = await this.isSwitchChecked();
     if (toggleState !== currState) {
       await (await this._primaryComponent).click();
-      await this.waitForCondition(
-        async () => toggleState === (await this.isSwitchChecked()),
-        `Clicked the primary switch to turn it ${toggleState ? 'on' : 'off'}, but the switch failed to toggle.`,
+      await this.waitForSwitchStateChange(
+        toggleState,
+        `Clicked primary switch to turn it ${toggleState ? 'on' : 'off'}, but it failed to toggle.`,
       );
     }
   }

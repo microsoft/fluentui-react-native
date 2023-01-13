@@ -75,7 +75,7 @@ describe('Switch Functional Testing', () => {
 
     /* Validate the Switch is toggled ON */
     await expect(
-      await SwitchPageObject.waitForSwitchStateChange(true, 'Clicked the primary switch to turn it on, but it remained on.'),
+      await SwitchPageObject.waitForSwitchStateChange(true, 'Clicked the primary switch to turn it on, but it remained off.'),
     ).toBeTruthy();
 
     await expect(
