@@ -104,7 +104,7 @@ const themeSections: TestSection[] = [
   },
 ];
 
-export const TokenTest: React.FunctionComponent = () => {
+export const ColorTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
