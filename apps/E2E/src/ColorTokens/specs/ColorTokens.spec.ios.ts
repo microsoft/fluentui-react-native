@@ -3,13 +3,13 @@ import ColorTokenPageObject from '../pages/ColorTokensPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Tokens Testing Initialization', function () {
+describe('Color Tokens Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Tokens test page', async () => {
+  it('Click and navigate to Color Tokens test page', async () => {
     await ColorTokenPageObject.mobileScrollToComponentButton();
     await ColorTokenPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
