@@ -27,30 +27,15 @@ class SwitchPageObject extends BasePage {
     return await (await this._primaryComponent).isSelected();
   }
 
-  async waitForSwitchStateChange(newState: boolean, errorMsg: string, timeout?: number): Promise<boolean> {
-    this.waitForCondition(async () => (await this.isSwitchChecked()) === newState, errorMsg, timeout);
+  async waitForSwitchStateChange(newState: boolean, errorMsg: string): Promise<boolean> {
+    await this.waitForCondition(async () => (await this.isSwitchChecked()) === newState, errorMsg);
     return (await this.isSwitchChecked()) === newState;
   }
 
   async waitForOnChangeCallbackToFire(errorMsg: string): Promise<boolean> {
     const callbackText = await this._callbackText;
-    this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
+    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
     return await callbackText.isDisplayed();
-  }
-
-  /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(switchSelector: SwitchComponentSelector, key: string): Promise<void> {
-    await (await this.getButtonSelector(switchSelector)).addValue(key);
-  }
-
-  /* Returns the correct WebDriverIO element from the Button Selector */
-  async getButtonSelector(switchSelector?: SwitchComponentSelector): Promise<WebdriverIO.Element> {
-    if (switchSelector == SwitchComponentSelector.PrimaryComponent) {
-      return await this._primaryComponent;
-    } else if (switchSelector === SwitchComponentSelector.SecondaryComponent) {
-      return await this._secondaryComponent;
-    }
-    return await this._primaryComponent;
   }
 
   /*****************************************/

@@ -47,7 +47,7 @@ describe('Switch Accessibility Testing', () => {
     await expect(
       await SwitchPageObject.compareAttribute(
         SwitchPageObject._secondaryComponent,
-        Attribute.AccessibilityRole,
+        Attribute.AccessibilityLabel,
         SWITCH_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
@@ -89,7 +89,7 @@ describe('Switch Functional Testing', () => {
     /* Validate the Switch is toggled OFF */
     await expect(
       await SwitchPageObject.waitForSwitchStateChange(false, 'Clicked the primary switch to turn it off, but it remained on.'),
-    ).toBeFalsy();
+    ).toBeTruthy();
 
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -119,7 +119,7 @@ describe('Switch Functional Testing', () => {
     /* Validate the Switch is toggled OFF */
     await expect(
       await SwitchPageObject.waitForSwitchStateChange(false, 'Pressed "ENTER" on the primary switch to turn it off, but it remained on.'),
-    ).toBeFalsy();
+    ).toBeTruthy();
 
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -149,7 +149,7 @@ describe('Switch Functional Testing', () => {
     /* Validate the Switch is toggled OFF */
     await expect(
       await SwitchPageObject.waitForSwitchStateChange(false, 'Pressed "SPACE" on the primary switch to turn it off, but it remained on.'),
-    ).toBeFalsy();
+    ).toBeTruthy();
 
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
