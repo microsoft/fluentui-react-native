@@ -65,6 +65,10 @@ class NavigateAppPage extends BasePage {
     await (await this.checkboxV1Page).click();
   }
 
+  async clickAndGoToColorTokensPage() {
+    await (await this.colorTokensPage).click();
+  }
+
   async clickAndGoToContextualMenuPage() {
     await (await this.contextualMenuPage).click();
   }
@@ -167,10 +171,6 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToThemePage() {
     await (await this.themePage).click();
-  }
-
-  async clickAndGoToColorTokensPage() {
-    await (await this.colorTokensPage).click();
   }
 
   async clickAndGoToTabsV1Page() {
