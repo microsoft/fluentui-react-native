@@ -8,7 +8,7 @@ import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { TOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '../../../../E2E/src/ColorTokens/consts';
+import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '../../../../E2E/src/ColorTokens/consts';
 import { testProps } from '../Common/TestProps';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
@@ -53,7 +53,7 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
       <View
         style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-        {...testProps(TOKENS_TEST_COMPONENT)}
+        {...testProps(COLORTOKENS_TEST_COMPONENT)}
       />
       <Text>{p.name}</Text>
     </View>
