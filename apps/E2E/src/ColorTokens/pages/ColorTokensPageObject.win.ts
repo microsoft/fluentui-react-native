@@ -1,7 +1,7 @@
 import { HOMEPAGE_COLORTOKEN_BUTTON, COLORTOKEN_TESTPAGE, COLORTOKENS_TEST_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
-class TokenPageObject extends BasePage {
+class ColorTokenPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -22,4 +22,4 @@ class TokenPageObject extends BasePage {
   }
 }
 
-export default new TokenPageObject();
+export default new ColorTokenPageObject();
