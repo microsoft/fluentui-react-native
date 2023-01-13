@@ -16,6 +16,7 @@ describe('Switch Testing Initialization', function () {
     await SwitchPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await SwitchPageObject.isPageLoaded()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_PAGELOAD);
+
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -26,7 +27,7 @@ describe('Switch Accessibility Testing', () => {
     await SwitchPageObject.scrollToTestElement();
   });
 
-  it('Switch - Validate accessibilityRole is correct', async () => {
+  it('Validate "accessibilityRole" defaults to Button "ControlType" element attribute.', async () => {
     await expect(
       await SwitchPageObject.compareAttribute(SwitchPageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
     ).toBeTruthy();
@@ -34,7 +35,7 @@ describe('Switch Accessibility Testing', () => {
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Switch - Set accessibilityLabel', async () => {
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     await expect(
       await SwitchPageObject.compareAttribute(SwitchPageObject._primaryComponent, Attribute.AccessibilityLabel, SWITCH_ACCESSIBILITY_LABEL),
     ).toBeTruthy();
@@ -42,7 +43,7 @@ describe('Switch Accessibility Testing', () => {
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Switch - Do not set accessibilityLabel -> Default to Switch label', async () => {
+  it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to current Switch label.', async () => {
     await expect(
       await SwitchPageObject.compareAttribute(
         SwitchPageObject._secondaryComponent,
@@ -63,7 +64,7 @@ describe('Switch Functional Testing', () => {
     await SwitchPageObject.setSwitchState(false);
   });
 
-  it("Click on a Switch -> Validate it toggles correctly AND calls the user's onChange", async () => {
+  it("Click on primary Switch. Validate it toggles correctly AND calls the user's onChange() callback.", async () => {
     /* Validate the Switch is initially toggled OFF */
     await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy(
       'Primary switch should be off on test start, but it was initially on.',
@@ -93,7 +94,7 @@ describe('Switch Functional Testing', () => {
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Click the 'Enter' on a Switch and verify it toggles correctly AND calls the user's onChange", async () => {
+  it('Press "ENTER" on primary Switch. Validate it toggles correctly AND calls the user\'s onChange() callback.', async () => {
     /* Validate the Switch is initially toggled OFF */
     await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy(
       'Primary switch should be off on test start, but it was initially on.',
@@ -123,7 +124,7 @@ describe('Switch Functional Testing', () => {
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Click the 'SPACE' on a Switch and verify it toggles correctly AND calls the user's onChange", async () => {
+  it('Press "SPACE" on primary Switch. Validate it toggles correctly AND calls the user\'s onChange() callback.', async () => {
     /* Validate the Switch is initially toggled OFF */
     await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy(
       'Primary switch should be off on test start, but it was initially on.',
