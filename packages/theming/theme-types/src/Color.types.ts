@@ -876,6 +876,66 @@ export interface AliasColorTokens {
 
   /** @platform macOS, win32, windows */
   redBorder2?: ColorValue;
+
+  /** @platform ios  */
+  dangerBackground1?: ColorValue;
+
+  /** @platform ios  */
+  dangerBackground2?: ColorValue;
+
+  /** @platform ios  */
+  dangerForeground1?: ColorValue;
+
+  /** @platform ios  */
+  dangerForeground2?: ColorValue;
+
+  /** @platform ios  */
+  successBackground1?: ColorValue;
+
+  /** @platform ios  */
+  successBackground2?: ColorValue;
+
+  /** @platform ios  */
+  successForeground1?: ColorValue;
+
+  /** @platform ios  */
+  successForeground2?: ColorValue;
+
+  /** @platform ios  */
+  warningBackground1?: ColorValue;
+
+  /** @platform ios  */
+  warningBackground2?: ColorValue;
+
+  /** @platform ios  */
+  warningForeground1?: ColorValue;
+
+  /** @platform ios  */
+  warningForeground2?: ColorValue;
+
+  /** @platform ios  */
+  severeBackground1?: ColorValue;
+
+  /** @platform ios  */
+  severeBackground2?: ColorValue;
+
+  /** @platform ios  */
+  severeForeground1?: ColorValue;
+
+  /** @platform ios  */
+  severeForeground2?: ColorValue;
+
+  /** @platform ios  */
+  presenceAway?: ColorValue;
+
+  /** @platform ios  */
+  presenceDnd?: ColorValue;
+
+  /** @platform ios  */
+  presenceAvailable?: ColorValue;
+
+  /** @platform ios  */
+  presenceOof?: ColorValue;
 }
 
 /**
