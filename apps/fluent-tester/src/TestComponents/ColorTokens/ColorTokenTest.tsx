@@ -108,12 +108,12 @@ export const ColorTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
+    iosStatus: 'Experimental',
     macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description = 'Alias tokens given from token pipeline. Currently values are pulled from web. Will be used to style components.';
 
-  return <Test name="Token Test" description={description} sections={themeSections} status={status} />;
+  return <Test name="Color Tokens Test" description={description} sections={themeSections} status={status} />;
 };
