@@ -170,7 +170,7 @@ class NavigateAppPage extends BasePage {
   }
 
   async clickAndGoToColorTokensPage() {
-    await (await this.tokensPage).click();
+    await (await this.colorTokensPage).click();
   }
 
   async clickAndGoToTabsV1Page() {
@@ -317,7 +317,7 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_THEME_BUTTON);
   }
 
-  private get tokensPage() {
+  private get colorTokensPage() {
     return By(HOMEPAGE_COLORTOKEN_BUTTON);
   }
 
