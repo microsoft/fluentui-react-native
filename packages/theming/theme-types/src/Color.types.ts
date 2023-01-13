@@ -877,63 +877,85 @@ export interface AliasColorTokens {
   /** @platform macOS, win32, windows */
   redBorder2?: ColorValue;
 
+  /// Error, status, and presence tokens
+
+  // TODO #2440: Add to android
   /** @platform ios  */
   dangerBackground1?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   dangerBackground2?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   dangerForeground1?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   dangerForeground2?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   successBackground1?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   successBackground2?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   successForeground1?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   successForeground2?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   warningBackground1?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   warningBackground2?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   warningForeground1?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   warningForeground2?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   severeBackground1?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   severeBackground2?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   severeForeground1?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   severeForeground2?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   presenceAway?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   presenceDnd?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   presenceAvailable?: ColorValue;
 
+  // TODO #2440: Add to android
   /** @platform ios  */
   presenceOof?: ColorValue;
 }
