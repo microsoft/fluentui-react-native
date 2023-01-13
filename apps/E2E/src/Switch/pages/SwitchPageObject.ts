@@ -1,10 +1,4 @@
-import {
-  SWITCH_TESTPAGE,
-  SWITCH_TEST_COMPONENT,
-  SWITCH_NO_A11Y_LABEL_COMPONENT,
-  HOMEPAGE_SWITCH_BUTTON,
-  SWITCH_ON_PRESS,
-} from '../consts';
+import { SWITCH_TESTPAGE, SWITCH_TEST_COMPONENT, SWITCH_NO_A11Y_LABEL_COMPONENT, HOMEPAGE_SWITCH_BUTTON, SWITCH_ON_PRESS } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
@@ -18,32 +12,29 @@ class SwitchPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
+  async setSwitchState(toggleState: boolean) {
+    const currState = await this.isSwitchChecked();
+    if (toggleState !== currState) {
+      await (await this._primaryComponent).click();
+      await this.waitForCondition(
+        async () => toggleState === (await this.isSwitchChecked()),
+        `Clicked the primary switch to turn it ${toggleState ? 'on' : 'off'}, but the switch failed to toggle.`,
+      );
+    }
+  }
+
   async isSwitchChecked(): Promise<boolean> {
     return await (await this._primaryComponent).isSelected();
   }
 
-  async waitForSwitchChecked(timeout?: number): Promise<void> {
-    browser.waitUntil(async () => await this.isSwitchChecked(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'The Switch was not toggled correctly',
-      interval: 1000,
-    });
+  async waitForSwitchStateChange(newState: boolean, errorMsg: string, timeout?: number): Promise<boolean> {
+    this.waitForCondition(async () => (await this.isSwitchChecked()) === newState, errorMsg, timeout);
+    return (await this.isSwitchChecked()) === newState;
   }
 
-  async toggleSwitchToUnchecked(): Promise<void> {
-    if (await this.isSwitchChecked()) {
-      await (await this._primaryComponent).click();
-    }
-  }
-
-  async didOnChangeCallbackFire(): Promise<boolean> {
-    const callbackText = await By(SWITCH_ON_PRESS);
-    browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The OnChange callback did not fire.',
-      interval: 1000,
-    });
-
+  async waitForOnChangeCallbackToFire(errorMsg: string): Promise<boolean> {
+    const callbackText = await this._callbackText;
+    this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
     return await callbackText.isDisplayed();
   }
 
@@ -83,6 +74,10 @@ class SwitchPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_SWITCH_BUTTON);
+  }
+
+  get _callbackText() {
+    return By(SWITCH_ON_PRESS);
   }
 }
 
