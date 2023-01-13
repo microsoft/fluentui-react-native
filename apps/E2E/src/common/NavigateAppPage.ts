@@ -30,7 +30,7 @@ import { HOMEPAGE_SVG_BUTTON } from '../Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../TextLegacy/consts';
 import { HOMEPAGE_TEXTV1_BUTTON } from '../TextV1/consts';
-import { HOMEPAGE_TOKEN_BUTTON } from '../Tokens/consts';
+import { HOMEPAGE_TOKEN_BUTTON } from '../ColorTokens/consts';
 import { HOMEPAGE_TABS_BUTTON } from '../TabsLegacy/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../Theme/consts';
 import { BASE_TESTPAGE } from './consts';

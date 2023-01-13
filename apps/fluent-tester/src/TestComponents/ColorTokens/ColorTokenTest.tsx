@@ -8,7 +8,7 @@ import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { TOKENS_TEST_COMPONENT, TOKEN_TESTPAGE } from '../../../../E2E/src/Tokens/consts';
+import { TOKENS_TEST_COMPONENT, TOKEN_TESTPAGE } from '../../../../E2E/src/ColorTokens/consts';
 import { testProps } from '../Common/TestProps';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {

@@ -38,7 +38,7 @@ import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
-import { TokenTest } from './TestComponents/Tokens';
+import { TokenTest } from './TestComponents/ColorTokens';
 import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
