@@ -72,6 +72,8 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
 
   const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
 
+  const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
+
   const E2ESwitch = () =>
     Platform.select({
       android: (
@@ -101,8 +103,8 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
       >
         ⚛ FluentUI Tests
       </Text>
-      <E2ESwitch />
       <View style={fluentTesterStyles.header}>
+        {!isMobile && <E2ESwitch />}
         {/* On iPhone, We need a back button. Android has an OS back button, while desktop platforms have a two-pane view */}
         {Platform.OS === 'ios' && !Platform.isPad && (
           <Button
@@ -115,6 +117,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
           </Button>
         )}
         <ThemePickers />
+        {isMobile && <E2ESwitch />}
       </View>
     </View>
   );
