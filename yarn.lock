@@ -4236,10 +4236,10 @@ appium-adb@^9.10.14, appium-adb@^9.10.9:
     teen_process "^2.0.1"
     utf7 "^1.0.2"
 
-appium-android-driver@^5.8.5:
-  version "5.8.5"
-  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.8.5.tgz#b84807a1772c70750acbb0837d5540c77ea146d5"
-  integrity sha512-DcCtMNcY0v30FIunMrnqKFn0ibFgOyiVWbcW474SCKT41MIOehWmC8FgzL8RoIBYIL40V3JnGhD4XwXYVcP+SQ==
+appium-android-driver@^5.8.7:
+  version "5.8.7"
+  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.8.7.tgz#9c8a0dbcb195bf47df91caf6ea719be8b57c848f"
+  integrity sha512-wGXSVG74rSAN8U8OHXKG6rhZ9svHxS4/2H1h36KhlT7cxtlLb7k5OsxOCzGAxt1HXMeF9aGPGOceVvr/IR+zXQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.9"
@@ -4361,13 +4361,13 @@ appium-remote-debugger@^9.1.1:
     teen_process "^2.0.0"
 
 appium-uiautomator2-driver@^2.10.2:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.12.1.tgz#8048d91dd11066daccef85bc3f0f0928a3ea8d9e"
-  integrity sha512-6FLGpCuNlQbZQb1E/SPnKWGM0gwpVmKOR5tRPntmQ+0jyDQMIaROlyRhMnDqK0cfSn4Z+agxjPYzgxh1ZtqIpQ==
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.12.2.tgz#65702c5c88fae765ba658ab9e9fccc6abc37fa38"
+  integrity sha512-HnJ3K/kYEd7i4BaO1peVr43EfE/pTwLABnvZvUmPmJiIjNDRfgcm8v7tFuiZJx1y1KjFdQXwVaMAijY8w5mPpA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.14"
-    appium-android-driver "^5.8.5"
+    appium-android-driver "^5.8.7"
     appium-chromedriver "^5.2.1"
     appium-uiautomator2-server "^5.7.2"
     asyncbox "^2.3.1"
