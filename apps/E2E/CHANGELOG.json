@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Sat, 14 Jan 2023 17:43:18 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.10.0",
+      "version": "1.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "8d3c5ab137ecb78a855e2a766677c438c8e28bf7",
+            "comment": "Remove need to override testPage, add pageButtonName fn"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Jan 2023 20:17:18 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.9.8",
       "version": "1.9.8",
