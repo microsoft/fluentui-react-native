@@ -333,6 +333,10 @@ class NavigateAppPage extends BasePage {
   get _pageButton(): Promise<WebdriverIO.Element> {
     throw new Error('You are trying to read the _pageButton getter for NavigateAppPage, which is not implemented.');
   }
+
+  get _pageButtonName(): string {
+    throw new Error('You are trying to read the _pageButtonName getter for NavigateAppPage, which is not implemented.');
+  }
 }
 
 export default new NavigateAppPage();

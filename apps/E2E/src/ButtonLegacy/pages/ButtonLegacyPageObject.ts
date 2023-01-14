@@ -44,10 +44,6 @@ class ButtonLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(BUTTON_TESTPAGE);
-  }
-
   get _pageName() {
     return BUTTON_TESTPAGE;
   }
@@ -58,10 +54,6 @@ class ButtonLegacyPageObject extends BasePage {
 
   get _secondaryComponent() {
     return By(BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED);
-  }
-
-  get _pageButton() {
-    return By(HOMEPAGE_BUTTON_BUTTON);
   }
 
   get _pageButtonName() {

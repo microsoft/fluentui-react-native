@@ -57,10 +57,6 @@ class RadioGroupLegacyPage extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(RADIOGROUP_TESTPAGE);
-  }
-
   get _pageName() {
     return RADIOGROUP_TESTPAGE;
   }
@@ -73,8 +69,8 @@ class RadioGroupLegacyPage extends BasePage {
     return By(RADIOGROUP_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_RADIOGROUP_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_RADIOGROUP_BUTTON;
   }
 }
 
