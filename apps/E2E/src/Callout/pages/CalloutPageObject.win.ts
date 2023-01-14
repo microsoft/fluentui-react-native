@@ -1,9 +1,4 @@
-import {
-  CALLOUT_TESTPAGE,
-  CALLOUT_TEST_COMPONENT,
-  HOMEPAGE_CALLOUT_BUTTON,
-  BUTTON_TO_OPEN_CALLOUT,
-} from '../consts';
+import { CALLOUT_TESTPAGE, CALLOUT_TEST_COMPONENT, HOMEPAGE_CALLOUT_BUTTON, BUTTON_TO_OPEN_CALLOUT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class CalloutPageObject extends BasePage {
@@ -33,10 +28,6 @@ class CalloutPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(CALLOUT_TESTPAGE);
-  }
-
   get _pageName() {
     return CALLOUT_TESTPAGE;
   }
@@ -45,8 +36,8 @@ class CalloutPageObject extends BasePage {
     return By(CALLOUT_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_CALLOUT_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_CALLOUT_BUTTON;
   }
 
   get _buttonToOpenCallout() {

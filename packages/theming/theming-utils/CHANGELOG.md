@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.0
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Minor changes
+
+- Set up iOS color alias tokens (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.29.0
+- Bump @fluentui-react-native/tokens to v0.20.3
 
 ## 0.21.0
 

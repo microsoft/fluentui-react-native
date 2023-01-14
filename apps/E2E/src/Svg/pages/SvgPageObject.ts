@@ -5,10 +5,6 @@ class SvgPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(SVG_TESTPAGE);
-  }
-
   get _pageName() {
     return SVG_TESTPAGE;
   }
@@ -17,8 +13,8 @@ class SvgPageObject extends BasePage {
     return By(SVG_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_SVG_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_SVG_BUTTON;
   }
 }
 

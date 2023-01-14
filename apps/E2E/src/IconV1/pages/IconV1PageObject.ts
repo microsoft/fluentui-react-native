@@ -5,10 +5,6 @@ class IconV1PageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(ICON_TESTPAGE);
-  }
-
   get _pageName() {
     return ICON_TESTPAGE;
   }
@@ -21,8 +17,8 @@ class IconV1PageObject extends BasePage {
     return By(ICON_FONT_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_ICON_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_ICON_BUTTON;
   }
 }
 
