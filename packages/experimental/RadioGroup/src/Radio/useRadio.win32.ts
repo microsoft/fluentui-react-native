@@ -13,6 +13,13 @@ import { AccessibilityState } from 'react-native';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
+enum DirectionalArrowKeys {
+  ArrowUp = 'ArrowUp',
+  ArrowDown = 'ArrowDown',
+  ArrowRight = 'ArrowRight',
+  ArrowLeft = 'ArrowLeft',
+}
+
 export const useRadio = (props: RadioProps): RadioInfo => {
   const defaultComponentRef = React.useRef(null);
 
@@ -76,11 +83,11 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       const length = radioGroupContext.enabledValues.length;
       const currRadioIndex = radioGroupContext.enabledValues.indexOf(radioGroupContext.value);
       let newCurrRadioIndex;
-      if (e.nativeEvent.key === 'ArrowDown' || e.nativeEvent.key === 'ArrowRight') {
+      if (e.nativeEvent.key === DirectionalArrowKeys.ArrowDown || e.nativeEvent.key === DirectionalArrowKeys.ArrowRight) {
         newCurrRadioIndex = (currRadioIndex + 1) % length;
         radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.enabledValues[newCurrRadioIndex]);
         radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(true);
-      } else if (e.nativeEvent.key === 'ArrowUp' || e.nativeEvent.key === 'ArrowLeft') {
+      } else if (e.nativeEvent.key === DirectionalArrowKeys.ArrowUp || e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft) {
         newCurrRadioIndex = (currRadioIndex - 1 + length) % length;
         radioGroupContext.onChange && radioGroupContext.onChange(radioGroupContext.enabledValues[newCurrRadioIndex]);
         radioGroupContext.updateInvoked && radioGroupContext.updateInvoked(true);
