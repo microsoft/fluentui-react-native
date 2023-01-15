@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Apply prettier",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
