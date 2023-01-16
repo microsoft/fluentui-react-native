@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Separate shimmer tokens into file",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "none"
+}
