@@ -82,6 +82,12 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
           <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
         </View>
       ),
+      ios: (
+        <View style={fluentTesterStyles.e2eSwitchViewMobile}>
+          <Text variant="bodySemibold">E2E Mode:</Text>
+          <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
+        </View>
+      ),
       default: (
         <View style={fluentTesterStyles.e2eSwitchDesktopView}>
           <Text style={{ paddingLeft: 4 }} variant="bodySemibold">
