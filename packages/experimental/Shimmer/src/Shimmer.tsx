@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { useRef, useEffect, useMemo, useCallback } from 'react';
+import { useRef, useEffect, useMemo } from 'react';
 import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G, TransformObject } from 'react-native-svg';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
