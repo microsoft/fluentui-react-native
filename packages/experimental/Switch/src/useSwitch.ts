@@ -165,7 +165,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
 
   return {
     props: {
-      accessible: true,
+      accessible: isMobile ? !disabled : true,
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityRole: accessibilityRole ?? 'switch',
       accessibilityActions: accessibilityActionsProp,

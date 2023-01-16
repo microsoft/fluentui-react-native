@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 06 Jan 2023 12:26:31 GMT and should not be manually modified.
+This log was last generated on Sat, 14 Jan 2023 17:43:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.10.0
+
+Sat, 14 Jan 2023 17:43:18 GMT
+
+### Minor changes
+
+- Remove need to override testPage, add pageButtonName fn (ayushsinghs@yahoo.in)
+
+## 1.9.8
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.22
+
+## 1.9.7
+
+Tue, 10 Jan 2023 18:57:29 GMT
+
+### Patches
+
+- Refactor MenuButtonExperimental tests (winlarry@microsoft.com)
+
+## 1.9.6
+
+Tue, 10 Jan 2023 17:55:08 GMT
+
+### Patches
+
+- Refactor RadioGroup spec and PageObject code (winlarry@microsoft.com)
+
+## 1.9.5
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.21
 
 ## 1.9.4
 

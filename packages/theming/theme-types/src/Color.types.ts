@@ -522,6 +522,14 @@ export interface AliasColorTokens {
   /** @platform android, iOS */
   neutralForegroundOnColor?: ColorValue;
 
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralForegroundDarkStatic?: ColorValue;
+
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralForegroundLightStatic?: ColorValue;
+
   /** @platform macOS, win32, windows */
   neutralForegroundOnBrand?: ColorValue;
 
@@ -661,6 +669,14 @@ export interface AliasColorTokens {
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackground6?: ColorValue;
 
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralBackgroundCanvas?: ColorValue;
+
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralBackgroundDarkStatic?: ColorValue;
+
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackgroundInverted?: ColorValue;
 
@@ -787,6 +803,14 @@ export interface AliasColorTokens {
 
   /** @platform android, iOS, macOS, win32, windows */
   neutralStrokeDisabled?: ColorValue;
+
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralStrokeFocus1?: ColorValue;
+
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralStrokeFocus2?: ColorValue;
 
   /** @platform macOS, win32, windows */
   strokeFocus1?: ColorValue;

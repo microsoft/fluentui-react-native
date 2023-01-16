@@ -5,10 +5,6 @@ class ThemePageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(THEME_TESTPAGE);
-  }
-
   get _pageName() {
     return THEME_TESTPAGE;
   }
@@ -17,8 +13,8 @@ class ThemePageObject extends BasePage {
     return By(THEME_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_THEME_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_THEME_BUTTON;
   }
 }
 

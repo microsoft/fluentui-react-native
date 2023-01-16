@@ -89,6 +89,9 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
 
   /**
    * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
    */
   rippleColor?: ColorValue;
 }
