@@ -44,25 +44,16 @@ export const Shimmer = compose<ShimmerType>({
 
     const startValue = useRef(new Animated.Value(0)).current;
 
-    /**
-     * https://github.com/facebook/react-native/pull/29585
-     * For Animated.loop() to work with the native driver, React Native needs this fix.
-     * It's only available in React Native 0.66+, and React Native macOS 0.62+
-     * To workaround this, let's just rerun the loop everytime the animation finishes
-     */
-    const shimmerAnimation = useCallback(() => {
-      Animated.sequence([
+    const shimmerAnimation = () => {
+      Animated.loop(
         Animated.timing(startValue, {
-          toValue: 30,
+          toValue: 2,
           duration: memoizedShimmerData.duration,
           delay: memoizedShimmerData.delay,
           useNativeDriver: true,
         }),
-      ]).start(() => {
-        startValue.setValue(0);
-        shimmerAnimation();
-      });
-    }, [memoizedShimmerData.duration, memoizedShimmerData.delay]);
+      ).start();
+    };
 
     useEffect(() => {
       shimmerAnimation();
@@ -101,7 +92,13 @@ export const Shimmer = compose<ShimmerType>({
       return (
         <Slots.root {...mergedProps}>
           <Defs>
-            <AnimatedLinearGradient id="gradient" x1={startValue} y1={memoizedShimmerData.angle} x2="-1" y2="-1">
+            <AnimatedLinearGradient
+              id="gradient"
+              x1={startValue}
+              x2="-1"
+              y2="-1"
+              gradientTransform={`rotate(${memoizedShimmerData.angle})`}
+            >
               <Stop offset="10%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={memoizedShimmerData.shimmerColorOpacity} />
               <Stop
                 offset="20%"

@@ -6,7 +6,7 @@ export const defaultShimmerTokens: TokenSettings<ShimmerTokens, Theme> = (theme:
   ({
     angle: 45,
     delay: 0,
-    duration: 7000,
+    duration: 1000,
     shimmerColor: theme.colors.neutralStencil1,
     shimmerColorOpacity: 1,
     shimmerWaveColor: theme.colors.neutralStencil2,
