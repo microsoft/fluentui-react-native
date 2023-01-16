@@ -124,11 +124,6 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
   );
 });
 
-const E2EProvider: React.FunctionComponent = ({ children }) => {
-  const [e2eMode, setE2EMode] = React.useState(false);
-  return <E2EContext.Provider value={{ e2eMode, setE2EMode }}>{children}</E2EContext.Provider>;
-};
-
 // filters and sorts tests alphabetically
 const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
 const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
@@ -138,6 +133,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
   const [onTestListView, setOnTestListView] = React.useState(true);
+  const [e2eMode, setE2EMode] = React.useState(false);
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
 
@@ -251,14 +247,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
       {...testProps(ROOT_VIEW)}
     >
-      <E2EProvider>
+      <E2EContext.Provider value={{ e2eMode, setE2EMode }}>
         <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
         <HeaderSeparator />
         <View style={fluentTesterStyles.testRoot}>
           {enableSinglePaneView ? <MobileTestList /> : <TestList />}
           {isTestSectionVisible && <TestComponentView />}
         </View>
-      </E2EProvider>
+      </E2EContext.Provider>
     </RootView>
   );
 };
