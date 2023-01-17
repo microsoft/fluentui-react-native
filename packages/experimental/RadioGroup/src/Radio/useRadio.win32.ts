@@ -85,11 +85,11 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       if (e.nativeEvent.key in DirectionalArrowKeys) {
         const length = radioGroupContext.enabledValues.length;
         const previous =
-          (!isRTL && (e.nativeEvent.key === DirectionalArrowKeys.ArrowUp || e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft)) ||
-          (isRTL && (e.nativeEvent.key === DirectionalArrowKeys.ArrowDown || e.nativeEvent.key === DirectionalArrowKeys.ArrowRight));
+          e.nativeEvent.key === DirectionalArrowKeys.ArrowUp ||
+          (isRTL ? e.nativeEvent.key === DirectionalArrowKeys.ArrowRight : e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft);
         const next =
-          (isRTL && (e.nativeEvent.key === DirectionalArrowKeys.ArrowUp || e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft)) ||
-          (!isRTL && (e.nativeEvent.key === DirectionalArrowKeys.ArrowDown || e.nativeEvent.key === DirectionalArrowKeys.ArrowRight));
+          e.nativeEvent.key === DirectionalArrowKeys.ArrowDown ||
+          (isRTL ? e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft : e.nativeEvent.key === DirectionalArrowKeys.ArrowRight);
         const currRadioIndex = radioGroupContext.enabledValues.indexOf(radioGroupContext.value);
         let newCurrRadioIndex;
         if (next) {
