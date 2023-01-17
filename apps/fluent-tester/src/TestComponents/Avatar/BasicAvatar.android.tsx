@@ -8,6 +8,21 @@ export const StandardUsage: FunctionComponent = () => {
   return (
     <View style={{ paddingBottom: 40 }}>
       <View style={mobileStyles.testVariants}>
+
+        {/* // 2 rings  ( active state) variation */}
+        {/* <Avatar ringBackgroundColor={'yellow'} active="active" name="* Test Madhav *" activeAppearance="ring" size={72} /> */}
+
+        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={16} />
+        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={20} />
+        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={24} />
+        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={32} />
+
+        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={40} />
+        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={56} />
+        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={72} />
+
+      </View>
+      <View style={mobileStyles.testVariants}>
         {/* Variation - Standard */}
 
         {/* With badge. */}

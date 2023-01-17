@@ -41,6 +41,7 @@ export const Avatar = compose<AvatarType>({
     initialsBackground: View,
     icon: Icon,
     ring: View,
+    outerRing: View,
     badge: PresenceBadge,
     fallbackIcon: Svg,
   },
@@ -56,7 +57,8 @@ export const Avatar = compose<AvatarType>({
 
       return (
         <Slots.root {...mergedProps}>
-          <RingComponent>{renderAvatar(final, avatar.props, Slots, svgIconsEnabled)}</RingComponent>
+          {/* Move it under platform check */}
+          <Slots.outerRing><RingComponent>{renderAvatar(final, avatar.props, Slots, svgIconsEnabled)}</RingComponent></Slots.outerRing>
           {svgIconsEnabled && showBadge && <Slots.badge {...badge} />}
         </Slots.root>
       );

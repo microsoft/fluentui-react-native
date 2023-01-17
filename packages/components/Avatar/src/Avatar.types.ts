@@ -21,7 +21,7 @@ export const AvatarSizesForTokens = [
   'size120',
 ] as const;
 
-export const AvatarSizes = [20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120] as const;
+export const AvatarSizes = [16, 20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120] as const;
 
 /**
  * Sets color of the avatar when there is no picture. Uses fluent color names
@@ -110,7 +110,13 @@ export interface AvatarConfigurableProps {
   ringInnerGap?: number;
   ringBackgroundColor?: ColorValue;
   ringColor?: ColorValue;
+
+  /**
+   * Size of activity ring in status "active"
+   */
   ringThickness?: number;
+
+
   transparentRing?: boolean;
 
   /**
@@ -121,6 +127,13 @@ export interface AvatarConfigurableProps {
    * @defaultvalue 24
    */
   size?: AvatarSize;
+}
+
+export interface RingConfig {
+  size: number,
+  ringThickness: number,
+  innerGap: number,
+
 }
 
 export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
@@ -282,6 +295,7 @@ export interface AvatarSlotProps {
   icon: IconProps;
   fallbackIcon: SvgProps;
   ring: ViewProps;
+  outerRing?: ViewProps;
   badge: PresenceBadgeProps;
 }
 
