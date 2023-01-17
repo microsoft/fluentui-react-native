@@ -9,6 +9,7 @@ import {
   AvatarNamedColor,
   ColorSchemes,
   AvatarColorSchemes,
+  RingConfig,
 } from './Avatar.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultAvatarTokens } from './AvatarTokens';
@@ -151,9 +152,29 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             minHeight: ringConfig.size,
             ...borderStyles.from(tokens, theme),
             borderWidth: ringConfig.ringThickness,
-            backgroundColor: ringBackgroundColor || 'transparent',
             borderColor: ringColor,
+            ...getRingSpacing(tokens),
+            backgroundColor: ringBackgroundColor || 'transparent',
             aspectRatio: 1,
+
+          },
+        };
+      },
+      ['size', 'ringColor', 'ringBackgroundColor', 'ringThickness', ...borderStyles.keys],
+    ),
+    outerRing: buildProps(
+
+      (tokens: AvatarTokens, theme: Theme) => {
+        const { ringBackgroundColor } = tokens;
+        const ringConfig = getRingConfig(tokens);
+        return {
+          style: {
+            borderStyle: 'solid',
+            minWidth: ringConfig.size,
+            minHeight: ringConfig.size,
+            ...borderStyles.from(tokens, theme),
+
+            backgroundColor: ringBackgroundColor || 'transparent',
           },
         };
       },
@@ -173,15 +194,16 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
   },
 };
 
-function getRingConfig(tokens: AvatarTokens): any {
+function getRingConfig(tokens: AvatarTokens): RingConfig {
+
+  // Below change also moves under some platform check.
   const { size, ringThickness } = tokens;
-  const SMALL_SIZE = 48;
   const MEDIUM_SIZE = 71;
   const innerGap = tokens.ringInnerGap || ringThickness;
 
   const strokeSize = {
-    small: globalTokens.stroke.width20,
-    medium: globalTokens.stroke.width30,
+    small: globalTokens.stroke.width15,
+    medium: globalTokens.stroke.width20,
     large: globalTokens.stroke.width40,
   };
   if (ringThickness) {
@@ -191,11 +213,18 @@ function getRingConfig(tokens: AvatarTokens): any {
       innerGap,
     };
   } else {
-    if (size <= SMALL_SIZE) {
+    if (size == 16) {
       return {
         size: size + strokeSize.small * 4,
         ringThickness: strokeSize.small,
         innerGap: strokeSize.small,
+      };
+    }
+    if (size == 20) {
+      return {
+        size: size + strokeSize.small * 4,
+        ringThickness: strokeSize.small,
+        innerGap: strokeSize.medium,
       };
     }
     if (size <= MEDIUM_SIZE) {
@@ -210,7 +239,7 @@ function getRingConfig(tokens: AvatarTokens): any {
       ringThickness: strokeSize.large,
       innerGap: strokeSize.large,
     };
-  }
+}
 }
 
 function getIconStyles(tokens: AvatarTokens) {
@@ -222,11 +251,12 @@ function getIconStyles(tokens: AvatarTokens) {
 }
 
 function getRingSpacing(tokens: AvatarTokens) {
+
+  // Move under Platform check
   const ringConfig = getRingConfig(tokens);
   return tokens.active === 'active'
     ? {
-        marginTop: ringConfig.innerGap,
-        marginLeft: ringConfig.innerGap,
+        margin: ringConfig.innerGap,
       }
     : {};
 }

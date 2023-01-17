@@ -12,14 +12,13 @@ export const StandardUsage: FunctionComponent = () => {
         {/* // 2 rings  ( active state) variation */}
         {/* <Avatar ringBackgroundColor={'yellow'} active="active" name="* Test Madhav *" activeAppearance="ring" size={72} /> */}
 
-        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={16} />
         <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={20} />
         <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={24} />
-        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={32} />
+        <Avatar active="active" activeAppearance="ring" size={32} />
 
-        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={40} />
-        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={56} />
-        <Avatar active="active" name="* Keshav Madhav *" activeAppearance="ring" size={72} />
+        <Avatar active="active" imageUrl={steveBallmerPhotoUrl} activeAppearance="ring" size={40} />
+        <Avatar active="active" name="* Keshav Madhav *"  activeAppearance="ring" size={56} />
+        <Avatar active="active" name="* Keshav Madhav *" ringBackgroundColor={"#93a4f4"} activeAppearance="ring" size={72} />
 
       </View>
       <View style={mobileStyles.testVariants}>
