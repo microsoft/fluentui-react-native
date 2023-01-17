@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update Menu font",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "amchiu@microsoft.com",
+  "dependentChangeType": "patch"
+}

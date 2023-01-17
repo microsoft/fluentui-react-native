@@ -32,10 +32,6 @@ class TextLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(TEXT_TESTPAGE);
-  }
-
   get _pageName() {
     return TEXT_TESTPAGE;
   }
@@ -48,8 +44,8 @@ class TextLegacyPageObject extends BasePage {
     return By(DEPRECATED_TEXT_SECOND_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_TEXT_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_TEXT_BUTTON;
   }
 }
 

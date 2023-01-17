@@ -5,10 +5,6 @@ class TokenPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(TOKEN_TESTPAGE);
-  }
-
   get _pageName() {
     return TOKEN_TESTPAGE;
   }
@@ -17,8 +13,8 @@ class TokenPageObject extends BasePage {
     return By(TOKENS_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_TOKEN_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_TOKEN_BUTTON;
   }
 }
 

@@ -36,10 +36,6 @@ class ContextualMenuPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(CONTEXTUALMENU_TESTPAGE);
-  }
-
   get _pageName() {
     return CONTEXTUALMENU_TESTPAGE;
   }
@@ -48,8 +44,8 @@ class ContextualMenuPageObject extends BasePage {
     return By(CONTEXTUALMENU_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_CONTEXTUALMENU_BUTTON;
   }
 
   get _contextualMenuItem() {

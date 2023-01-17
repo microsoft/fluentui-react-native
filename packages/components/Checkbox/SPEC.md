@@ -211,6 +211,14 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   required?: boolean | string;
 
   /**
+   * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
+   */
+  rippleColor?: ColorValue;
+
+  /**
    * The shape of the checkbox. Can be either (rounded) square or circular.
    *
    * @default square

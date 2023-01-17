@@ -3,234 +3,686 @@
 exports[`createAppleTheme test 1`] = `
 Object {
   "colors": Object {
-    "accentButtonBackground": "#0078D4",
-    "accentButtonText": "white",
-    "actionLink": "#0078D4",
-    "actionLinkHovered": "#0078D4",
-    "background": "white",
-    "blockingBackground": "#DD4242",
-    "bodyDivider": "#C8C8C8",
-    "bodyFrameBackground": "white",
-    "bodyFrameDivider": "#E1E1E1",
-    "bodyStandoutBackground": "#F8F8F8",
-    "bodyText": "#212121",
-    "bodyTextChecked": "#212121",
-    "brandedBackground": "#0078D4",
+    "accentButtonBackground": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "accentButtonText": "#ffffff",
+    "actionLink": Object {
+      "semantic": Array [
+        "linkColor",
+      ],
+    },
+    "actionLinkHovered": Object {
+      "semantic": Array [
+        "linkColor",
+      ],
+    },
+    "background": Object {
+      "semantic": Array [
+        "windowBackgroundColor",
+      ],
+    },
+    "blockingBackground": Object {
+      "dynamic": Object {
+        "dark": "transparent",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#DD4242",
+      },
+    },
+    "bodyDivider": Object {
+      "semantic": Array [
+        "separatorColor",
+      ],
+    },
+    "bodyFrameBackground": Object {
+      "semantic": Array [
+        "windowBackgroundColor",
+      ],
+    },
+    "bodyFrameDivider": Object {
+      "semantic": Array [
+        "separatorColor",
+      ],
+    },
+    "bodyStandoutBackground": Object {
+      "semantic": Array [
+        "underPageBackgroundColor",
+      ],
+    },
+    "bodyText": Object {
+      "semantic": Array [
+        "labelColor",
+      ],
+    },
+    "bodyTextChecked": Object {
+      "semantic": Array [
+        "labelColor",
+      ],
+    },
+    "brandBackground": "#0078d4",
+    "brandBackground2": "#eff6fc",
+    "brandBackgroundDisabled": "#d1d1d1",
+    "brandBackgroundHover": "#106ebe",
+    "brandBackgroundPressed": "#106ebe",
+    "brandBackgroundSelected": "#005a9e",
+    "brandBackgroundStatic": "#0078d4",
+    "brandForeground1": "#0078d4",
+    "brandForeground1Disabled": "#757575",
+    "brandForeground1Pressed": "#004578",
+    "brandForeground2": "#106ebe",
+    "brandForegroundLink": "#0078d4",
+    "brandForegroundLinkHover": "#106ebe",
+    "brandForegroundLinkPressed": "#004578",
+    "brandForegroundLinkSelected": "#005a9e",
+    "brandStroke1": "#0078d4",
+    "brandStroke2": "#c7e0f4",
+    "brandedBackground": "#0078d4",
     "brandedBorder": "transparent",
-    "brandedCheckedBackground": "#0078D4",
-    "brandedCheckedContent": "white",
-    "brandedCheckedHoveredBackground": "white",
-    "brandedCheckedHoveredContent": "white",
-    "brandedContent": "white",
-    "brandedDisabledBackground": "#E1E1E1",
+    "brandedCheckedBackground": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "brandedCheckedContent": "#ffffff",
+    "brandedCheckedHoveredBackground": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "brandedCheckedHoveredContent": "#ffffff",
+    "brandedContent": "#ffffff",
+    "brandedDisabledBackground": "#f0f0f0",
     "brandedDisabledBorder": "transparent",
-    "brandedDisabledContent": "white",
-    "brandedDisabledIcon": "white",
-    "brandedFocusedBackground": "#0078D4",
+    "brandedDisabledContent": "#757575",
+    "brandedDisabledIcon": "#616161",
+    "brandedFocusedBackground": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
     "brandedFocusedBorder": "transparent",
-    "brandedFocusedContent": "white",
-    "brandedFocusedIcon": "white",
-    "brandedFocusedSecondaryContent": "white",
-    "brandedHoveredBackground": "#0078D4",
+    "brandedFocusedContent": "#ffffff",
+    "brandedFocusedIcon": "#ffffff",
+    "brandedFocusedSecondaryContent": "#ffffff",
+    "brandedHoveredBackground": "#106ebe",
     "brandedHoveredBorder": "transparent",
-    "brandedHoveredContent": "white",
-    "brandedHoveredIcon": "white",
-    "brandedHoveredSecondaryContent": "white",
-    "brandedIcon": "white",
-    "brandedPressedBackground": "#2B88D8",
+    "brandedHoveredContent": "#ffffff",
+    "brandedHoveredIcon": "#ffffff",
+    "brandedHoveredSecondaryContent": "#ffffff",
+    "brandedIcon": "#ffffff",
+    "brandedPressedBackground": "#106ebe",
     "brandedPressedBorder": "transparent",
-    "brandedPressedContent": "white",
-    "brandedPressedIcon": "white",
-    "brandedPressedSecondaryContent": "white",
-    "brandedSecondaryContent": "white",
-    "buttonBackground": "transparent",
-    "buttonBackgroundChecked": "transparent",
-    "buttonBackgroundCheckedHovered": "transparent",
-    "buttonBackgroundDisabled": "transparent",
-    "buttonBackgroundHovered": "transparent",
-    "buttonBackgroundPressed": "transparent",
-    "buttonBorder": "#2B88D8",
-    "buttonBorderDisabled": "#E1E1E1",
-    "buttonBorderFocused": "#2B88D8",
-    "buttonText": "#0078D4",
-    "buttonTextChecked": "#0078D4",
-    "buttonTextCheckedHovered": "#0078D4",
-    "buttonTextDisabled": "#ACACAC",
-    "buttonTextHovered": "#0078D4",
-    "buttonTextPressed": "#C7E0F4",
-    "checkboxBackground": "#0078D4",
-    "checkboxBackgroundDisabled": "white",
+    "brandedPressedContent": "#ffffff",
+    "brandedPressedIcon": "#ffffff",
+    "brandedPressedSecondaryContent": Object {
+      "colorWithSystemEffect": Object {
+        "baseColor": "#ffffff",
+        "systemEffect": "pressed",
+      },
+    },
+    "brandedSecondaryContent": "#ffffff",
+    "buttonBackground": "#ffffff",
+    "buttonBackgroundChecked": "#f5f5f5",
+    "buttonBackgroundCheckedHovered": "#f5f5f5",
+    "buttonBackgroundDisabled": Object {
+      "colorWithSystemEffect": Object {
+        "baseColor": "#f5f5f5",
+        "systemEffect": "disabled",
+      },
+    },
+    "buttonBackgroundHovered": "#f5f5f5",
+    "buttonBackgroundPressed": Object {
+      "colorWithSystemEffect": Object {
+        "baseColor": "#f5f5f5",
+        "systemEffect": "pressed",
+      },
+    },
+    "buttonBorder": "transparent",
+    "buttonBorderDisabled": "transparent",
+    "buttonBorderFocused": "transparent",
+    "buttonText": "#616161",
+    "buttonTextChecked": "#616161",
+    "buttonTextCheckedHovered": "#616161",
+    "buttonTextDisabled": Object {
+      "colorWithSystemEffect": Object {
+        "baseColor": "#616161",
+        "systemEffect": "disabled",
+      },
+    },
+    "buttonTextHovered": "#616161",
+    "buttonTextPressed": Object {
+      "colorWithSystemEffect": Object {
+        "baseColor": "#616161",
+        "systemEffect": "pressed",
+      },
+    },
+    "checkboxBackground": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "checkboxBackgroundDisabled": "#f0f0f0",
     "checkboxBorderColor": "#404040",
-    "checkmarkColor": "white",
-    "defaultBackground": "transparent",
-    "defaultBorder": "#2B88D8",
-    "defaultCheckedBackground": "transparent",
-    "defaultCheckedContent": "#0078D4",
-    "defaultCheckedHoveredBackground": "transparent",
-    "defaultCheckedHoveredContent": "#0078D4",
-    "defaultContent": "#0078D4",
-    "defaultDisabledBackground": "transparent",
-    "defaultDisabledBorder": "#E1E1E1",
-    "defaultDisabledContent": "#ACACAC",
-    "defaultDisabledIcon": "#ACACAC",
-    "defaultDisabledSecondaryContent": "#ACACAC",
-    "defaultFocusedBackground": "transparent",
-    "defaultFocusedBorder": "#2B88D8",
-    "defaultFocusedContent": "#0078D4",
-    "defaultFocusedIcon": "#0078D4",
-    "defaultHoveredBackground": "transparent",
-    "defaultHoveredBorder": "#2B88D8",
-    "defaultHoveredContent": "#0078D4",
-    "defaultHoveredIcon": "#0078D4",
-    "defaultHoveredSecondaryContent": "#0078D4",
-    "defaultIcon": "#0078D4",
-    "defaultPressedBackground": "transparent",
-    "defaultPressedBorder": "#DEECF9",
-    "defaultPressedContent": "#C7E0F4",
-    "defaultPressedIcon": "#C7E0F4",
-    "defaultPressedSecondaryContent": "#C7E0F4",
-    "defaultStateBackground": "white",
+    "checkmarkColor": "#ffffff",
+    "compoundBrandBackground1": "#0078d4",
+    "compoundBrandBackground1Hover": "#106ebe",
+    "compoundBrandBackground1Pressed": "#004578",
+    "compoundBrandForeground1": "#0078d4",
+    "compoundBrandForeground1Hover": "#106ebe",
+    "compoundBrandForeground1Pressed": "#004578",
+    "compoundBrandStroke1": "#0078d4",
+    "compoundBrandStroke1Hover": "#106ebe",
+    "compoundBrandStroke1Pressed": "#004578",
+    "defaultBackground": "#ffffff",
+    "defaultBorder": "#d6d6d6",
+    "defaultCheckedBackground": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "defaultCheckedContent": "#ffffff",
+    "defaultCheckedHoveredBackground": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "defaultCheckedHoveredContent": "#ffffff",
+    "defaultContent": "#000000",
+    "defaultDisabledBackground": "#ffffff",
+    "defaultDisabledBorder": "#d6d6d6",
+    "defaultDisabledContent": "#757575",
+    "defaultDisabledIcon": "#616161",
+    "defaultDisabledSecondaryContent": "#757575",
+    "defaultFocusedBackground": "#ffffff",
+    "defaultFocusedBorder": "#d6d6d6",
+    "defaultFocusedContent": "#000000",
+    "defaultFocusedIcon": "#616161",
+    "defaultHoveredBackground": "#f5f5f5",
+    "defaultHoveredBorder": "#d6d6d6",
+    "defaultHoveredContent": "#616161",
+    "defaultHoveredIcon": "#616161",
+    "defaultHoveredSecondaryContent": "#616161",
+    "defaultIcon": "#616161",
+    "defaultPressedBackground": "#ebebeb",
+    "defaultPressedBorder": "#d6d6d6",
+    "defaultPressedContent": "#000000",
+    "defaultPressedIcon": "#616161",
+    "defaultPressedSecondaryContent": "#ffffff",
+    "defaultStateBackground": Object {
+      "semantic": Array [
+        "controlBackgroundColor",
+      ],
+    },
     "disabledBackground": "#E1E1E1",
-    "disabledBodySubtext": "#ACACAC",
-    "disabledBodyText": "#ACACAC",
-    "disabledSubtext": "#ACACAC",
-    "disabledText": "#ACACAC",
-    "errorBackground": "#DD4242",
-    "errorText": "#D92C2C",
+    "disabledBodySubtext": Object {
+      "semantic": Array [
+        "quaternaryLabelColor",
+      ],
+    },
+    "disabledBodyText": Object {
+      "semantic": Array [
+        "tertiaryLabelColor",
+      ],
+    },
+    "disabledSubtext": Object {
+      "semantic": Array [
+        "quaternaryLabelColor",
+      ],
+    },
+    "disabledText": Object {
+      "semantic": Array [
+        "tertiaryLabelColor",
+      ],
+    },
+    "errorBackground": Object {
+      "dynamic": Object {
+        "dark": "transparent",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#DD4242",
+      },
+    },
+    "errorText": Object {
+      "dynamic": Object {
+        "dark": "transparent",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#D92C2C",
+      },
+    },
     "focusBorder": "transparent",
     "ghostBackground": "transparent",
     "ghostBorder": "transparent",
     "ghostCheckedBackground": "transparent",
-    "ghostCheckedContent": "#0078D4",
+    "ghostCheckedContent": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
     "ghostCheckedHoveredBackground": "transparent",
     "ghostCheckedHoveredBorder": "transparent",
-    "ghostCheckedHoveredContent": "#0078D4",
-    "ghostContent": "#0078D4",
+    "ghostCheckedHoveredContent": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostContent": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
     "ghostDisabledBackground": "transparent",
     "ghostDisabledBorder": "transparent",
-    "ghostDisabledContent": "#ACACAC",
-    "ghostDisabledIcon": "#ACACAC",
+    "ghostDisabledContent": "#757575",
+    "ghostDisabledIcon": "#757575",
     "ghostFocusedBackground": "transparent",
     "ghostFocusedBorder": "transparent",
-    "ghostFocusedContent": "#0078D4",
-    "ghostFocusedIcon": "#0078D4",
-    "ghostFocusedSecondaryContent": "#0078D4",
+    "ghostFocusedContent": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostFocusedIcon": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostFocusedSecondaryContent": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
     "ghostHoveredBackground": "transparent",
     "ghostHoveredBorder": "transparent",
-    "ghostHoveredContent": "#0078D4",
-    "ghostHoveredIcon": "#0078D4",
-    "ghostHoveredSecondaryContent": "#0078D4",
-    "ghostIcon": "#0078D4",
+    "ghostHoveredContent": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostHoveredIcon": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostHoveredSecondaryContent": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostIcon": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
     "ghostPressedBackground": "transparent",
     "ghostPressedBorder": "transparent",
-    "ghostPressedContent": "#C7E0F4",
-    "ghostPressedIcon": "#C7E0F4",
-    "ghostPressedSecondaryContent": "#C7E0F4",
-    "ghostSecondaryContent": "#0078D4",
-    "inputBackground": "white",
-    "inputBackgroundChecked": "white",
-    "inputBackgroundCheckedHovered": "white",
-    "inputBorder": "#E1E1E1",
-    "inputBorderHovered": "#E1E1E1",
-    "inputFocusBorderAlt": "#C8C8C8",
-    "inputForegroundChecked": "#0078D4",
-    "inputPlaceholderText": "#6E6E6E",
-    "inputText": "#212121",
-    "inputTextHovered": "#212121",
-    "link": "#0078D4",
-    "linkHovered": "#0078D4",
-    "linkPressed": "#2B88D8",
-    "listBackground": "white",
-    "listHeaderBackgroundHovered": "#212121",
-    "listHeaderBackgroundPressed": "#212121",
-    "listItemBackgroundChecked": "white",
-    "listItemBackgroundCheckedHovered": "white",
-    "listItemBackgroundHovered": "white",
-    "listText": "#212121",
-    "menuBackground": "white",
-    "menuDivider": "#E1E1E1",
-    "menuHeader": "#212121",
-    "menuIcon": "#6E6E6E",
-    "menuItemBackgroundHovered": "white",
-    "menuItemBackgroundPressed": "white",
-    "menuItemText": "#212121",
-    "menuItemTextHovered": "#212121",
-    "personaActivityGlow": "transparent",
-    "personaActivityRing": "white",
-    "primaryButtonBackground": "#0078D4",
-    "primaryButtonBackgroundDisabled": "#E1E1E1",
-    "primaryButtonBackgroundHovered": "#0078D4",
-    "primaryButtonBackgroundPressed": "#2B88D8",
+    "ghostPressedContent": "#004578",
+    "ghostPressedIcon": "#616161",
+    "ghostPressedSecondaryContent": Object {
+      "colorWithSystemEffect": Object {
+        "baseColor": Object {
+          "dynamic": Object {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+        "systemEffect": "deepPressed",
+      },
+    },
+    "ghostSecondaryContent": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "inputBackground": Object {
+      "semantic": Array [
+        "textBackgroundColor",
+      ],
+    },
+    "inputBackgroundChecked": Object {
+      "semantic": Array [
+        "textBackgroundColor",
+      ],
+    },
+    "inputBackgroundCheckedHovered": Object {
+      "semantic": Array [
+        "textBackgroundColor",
+      ],
+    },
+    "inputBorder": Object {
+      "semantic": Array [
+        "separatorColor",
+      ],
+    },
+    "inputBorderHovered": Object {
+      "semantic": Array [
+        "separatorColor",
+      ],
+    },
+    "inputFocusBorderAlt": Object {
+      "semantic": Array [
+        "keyboardFocusIndicatorColor",
+      ],
+    },
+    "inputForegroundChecked": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "inputPlaceholderText": Object {
+      "semantic": Array [
+        "placeholderTextColor",
+      ],
+    },
+    "inputText": Object {
+      "semantic": Array [
+        "textColor",
+      ],
+    },
+    "inputTextHovered": Object {
+      "semantic": Array [
+        "textColor",
+      ],
+    },
+    "link": Object {
+      "semantic": Array [
+        "linkColor",
+      ],
+    },
+    "linkHovered": Object {
+      "semantic": Array [
+        "linkColor",
+      ],
+    },
+    "linkPressed": Object {
+      "semantic": Array [
+        "selectedControlColor",
+      ],
+    },
+    "listBackground": "transparent",
+    "listHeaderBackgroundHovered": Object {
+      "semantic": Array [
+        "headerTextColor",
+      ],
+    },
+    "listHeaderBackgroundPressed": Object {
+      "semantic": Array [
+        "headerTextColor",
+      ],
+    },
+    "listItemBackgroundChecked": "transparent",
+    "listItemBackgroundCheckedHovered": "transparent",
+    "listItemBackgroundHovered": "transparent",
+    "listText": Object {
+      "semantic": Array [
+        "labelColor",
+      ],
+    },
+    "menuBackground": "transparent",
+    "menuDivider": Object {
+      "semantic": Array [
+        "separatorColor",
+      ],
+    },
+    "menuHeader": Object {
+      "semantic": Array [
+        "headerTextColor",
+      ],
+    },
+    "menuIcon": "#616161",
+    "menuItemBackgroundHovered": Object {
+      "semantic": Array [
+        "controlAccentColor",
+      ],
+    },
+    "menuItemBackgroundPressed": Object {
+      "colorWithSystemEffect": Object {
+        "baseColor": Object {
+          "semantic": Array [
+            "controlAccentColor",
+          ],
+        },
+        "systemEffect": "pressed",
+      },
+    },
+    "menuItemText": Object {
+      "semantic": Array [
+        "labelColor",
+      ],
+    },
+    "menuItemTextHovered": "white",
+    "neutralBackground1": "#ffffff",
+    "neutralBackground1Hover": "#f5f5f5",
+    "neutralBackground1Pressed": "#ebebeb",
+    "neutralBackground1Selected": "#ebebeb",
+    "neutralBackground2": "#ffffff",
+    "neutralBackground2Hover": "#f0f0f0",
+    "neutralBackground2Pressed": "#ebebeb",
+    "neutralBackground2Selected": "#e6e6e6",
+    "neutralBackground3": "#f5f5f5",
+    "neutralBackground3Hover": "#ebebeb",
+    "neutralBackground3Pressed": "#d6d6d6",
+    "neutralBackground3Selected": "#e0e0e0",
+    "neutralBackground4": "#f0f0f0",
+    "neutralBackground4Hover": "#fafafa",
+    "neutralBackground4Pressed": "#f5f5f5",
+    "neutralBackground4Selected": "#ffffff",
+    "neutralBackground5": "#ebebeb",
+    "neutralBackground5Hover": "#f5f5f5",
+    "neutralBackground5Pressed": "#f0f0f0",
+    "neutralBackground5Selected": "#fafafa",
+    "neutralBackground6": "#e6e6e6",
+    "neutralBackgroundDisabled": "#f0f0f0",
+    "neutralBackgroundInverted": "#616161",
+    "neutralForeground1": "#242424",
+    "neutralForeground1Hover": "#242424",
+    "neutralForeground1Pressed": "#242424",
+    "neutralForeground1Selected": "#242424",
+    "neutralForeground2": "#000000",
+    "neutralForeground2BrandHover": "#106ebe",
+    "neutralForeground2BrandPressed": "#004578",
+    "neutralForeground2BrandSelected": "#005a9e",
+    "neutralForeground2Hover": "#242424",
+    "neutralForeground2Pressed": "#242424",
+    "neutralForeground2Selected": "#242424",
+    "neutralForeground3": "#616161",
+    "neutralForeground3BrandHover": "#106ebe",
+    "neutralForeground3BrandPressed": "#004578",
+    "neutralForeground3BrandSelected": "#005a9e",
+    "neutralForeground3Hover": "#424242",
+    "neutralForeground3Pressed": "#424242",
+    "neutralForeground3Selected": "#424242",
+    "neutralForeground4": "#808080",
+    "neutralForegroundDisabled": "#757575",
+    "neutralForegroundInverted": "#ffffff",
+    "neutralForegroundInvertedLink": "#ffffff",
+    "neutralForegroundInvertedLinkHover": "#ffffff",
+    "neutralForegroundInvertedLinkPressed": "#ffffff",
+    "neutralForegroundInvertedLinkSelected": "#ffffff",
+    "neutralForegroundOnBrand": "#ffffff",
+    "neutralForegroundOnBrandHover": "#ffffff",
+    "neutralForegroundOnBrandPressed": "#ffffff",
+    "neutralForegroundOnBrandSelected": "#ffffff",
+    "neutralStencil1": "#e6e6e6",
+    "neutralStencil2": "#fafafa",
+    "neutralStroke1": "#f0f0f0",
+    "neutralStroke1Hover": "#c7c7c7",
+    "neutralStroke1Pressed": "#b3b3b3",
+    "neutralStroke1Selected": "#bdbdbd",
+    "neutralStroke2": "#d6d6d6",
+    "neutralStroke3": "#f0f0f0",
+    "neutralStrokeAccessible": "#616161",
+    "neutralStrokeAccessibleHover": "#575757",
+    "neutralStrokeAccessiblePressed": "#4d4d4d",
+    "neutralStrokeAccessibleSelected": "#0078d4",
+    "neutralStrokeDisabled": "#e0e0e0",
+    "personaActivityGlow": "#D13438",
+    "personaActivityRing": "#ffffff",
+    "primaryButtonBackground": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "primaryButtonBackgroundDisabled": "#f0f0f0",
+    "primaryButtonBackgroundHovered": Object {
+      "dynamic": Object {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "primaryButtonBackgroundPressed": "#106ebe",
     "primaryButtonBorder": "transparent",
     "primaryButtonBorderFocused": "transparent",
-    "primaryButtonText": "white",
-    "primaryButtonTextDisabled": "white",
-    "primaryButtonTextHovered": "white",
-    "primaryButtonTextPressed": "white",
-    "smallInputBorder": "#C8C8C8",
-    "subText": "#6E6E6E",
-    "successBackground": "#27AC22",
-    "variantBorder": "#E1E1E1",
-    "variantBorderHovered": "#E1E1E1",
-    "warningBackground": "#FFD335",
-    "warningHighlight": "#FFD94E",
-    "warningText": "#FFD335",
+    "primaryButtonText": "#ffffff",
+    "primaryButtonTextDisabled": "#757575",
+    "primaryButtonTextHovered": "#ffffff",
+    "primaryButtonTextPressed": "#ffffff",
+    "redBackground1": "#f9f0f2",
+    "redBackground2": "#d69ca5",
+    "redBackground3": "#750b1c",
+    "redBorder1": "#d69ca5",
+    "redBorder2": "#750b1c",
+    "redBorderActive": "#750b1c",
+    "redForeground1": "#690a19",
+    "redForeground2": "#d69ca5",
+    "redForeground3": "#750b1c",
+    "smallInputBorder": Object {
+      "semantic": Array [
+        "separatorColor",
+      ],
+    },
+    "strokeFocus1": "#ffffff",
+    "strokeFocus2": "#000000",
+    "subText": Object {
+      "semantic": Array [
+        "secondaryLabelColor",
+      ],
+    },
+    "subtleBackground": "transparent",
+    "subtleBackgroundHover": "#f5f5f5",
+    "subtleBackgroundPressed": "#e0e0e0",
+    "subtleBackgroundSelected": "#ebebeb",
+    "successBackground": Object {
+      "dynamic": Object {
+        "dark": "#0D9D3D",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#27AC22",
+      },
+    },
+    "transparentBackground": "transparent",
+    "transparentBackgroundHover": "transparent",
+    "transparentBackgroundPressed": "transparent",
+    "transparentBackgroundSelected": "transparent",
+    "transparentStroke": "transparent",
+    "transparentStrokeDisabled": "transparent",
+    "transparentStrokeInteractive": "transparent",
+    "variantBorder": Object {
+      "semantic": Array [
+        "separatorColor",
+      ],
+    },
+    "variantBorderHovered": Object {
+      "semantic": Array [
+        "separatorColor",
+      ],
+    },
+    "warningBackground": Object {
+      "dynamic": Object {
+        "dark": "#FFC328",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD335",
+      },
+    },
+    "warningHighlight": Object {
+      "dynamic": Object {
+        "dark": "#E0AB24",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD94E",
+      },
+    },
+    "warningText": Object {
+      "dynamic": Object {
+        "dark": "#FFC328",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD335",
+      },
+    },
   },
   "components": Object {
     "Button": Object {
       "content": Object {
-        "fontSize": 12,
-        "height": 18,
-      },
-      "icon": Object {
-        "style": Object {
-          "marginEnd": 8,
-        },
-      },
-      "root": Object {
-        "style": Object {
-          "margin": 8,
-        },
-      },
-      "stack": Object {
-        "style": Object {
-          "paddingHorizontal": 14,
-          "paddingVertical": 10,
-        },
-      },
-      "tokens": Object {
-        "borderRadius": 8,
-        "borderWidth": 1,
-      },
-    },
-    "Checkbox": Object {
-      "checkbox": Object {
-        "style": Object {
-          "borderRadius": 100,
-          "minHeight": 24,
-          "minWidth": 24,
-        },
-      },
-      "checkmarkIcon": Object {
-        "height": 7,
-        "style": Object {
-          "marginLeft": 8,
-          "marginRight": 7,
-          "marginVertical": 8.5,
-        },
-        "width": 8.5,
-      },
-      "root": Object {
-        "style": Object {
-          "marginVertical": 2,
-          "minHeight": 20,
-        },
-      },
-    },
-    "PrimaryButton": Object {
-      "content": Object {
         "fontSize": 15,
-        "height": 20,
       },
       "icon": Object {
         "style": Object {
@@ -244,13 +696,40 @@ Object {
       },
       "stack": Object {
         "style": Object {
-          "paddingHorizontal": 20,
-          "paddingVertical": 16,
+          "minHeight": 28,
+          "paddingVertical": 4.5,
         },
       },
       "tokens": Object {
-        "borderRadius": 8,
+        "borderRadius": 6,
         "borderWidth": 1,
+        "minHeight": 28,
+        "minWidth": 72,
+      },
+    },
+    "Checkbox": Object {
+      "_precedence": Array [
+        "disabled",
+        "boxAtEnd",
+        "checked",
+      ],
+      "checkbox": Object {
+        "style": Object {
+          "borderRadius": 3,
+          "borderStyle": "solid",
+          "borderWidth": 0.5,
+          "marginEnd": 5,
+          "minHeight": 14,
+          "minWidth": 14,
+        },
+      },
+      "checkmarkIcon": Object {
+        "height": 10,
+        "style": Object {
+          "marginHorizontal": 2,
+          "marginVertical": 2,
+        },
+        "width": 10,
       },
     },
     "RNFText": Object {
@@ -258,35 +737,9 @@ Object {
         "variant": "bodyStandard",
       },
     },
-    "StealthButton": Object {
-      "content": Object {
-        "fontSize": 15,
-        "height": 20,
-      },
-      "icon": Object {
-        "style": Object {
-          "display": "none",
-        },
-      },
-      "root": Object {
-        "style": Object {
-          "margin": 8,
-        },
-      },
-      "stack": Object {
-        "style": Object {
-          "paddingHorizontal": 12,
-          "paddingVertical": 7,
-        },
-      },
-      "tokens": Object {
-        "borderRadius": 8,
-        "borderWidth": 1,
-      },
-    },
   },
   "host": Object {
-    "appearance": "light",
+    "appearance": "dynamic",
   },
   "shadows": Object {
     "shadow16": Object {
@@ -460,9 +913,10 @@ Object {
   },
   "spacing": Object {
     "l1": "20px",
-    "l2": "32px",
-    "s1": "8px",
-    "s2": "4px",
+    "l2": "24px",
+    "m": "16px",
+    "s1": "12px",
+    "s2": "8px",
   },
   "typography": Object {
     "families": Object {
@@ -474,45 +928,33 @@ Object {
       "serif": "System",
     },
     "sizes": Object {
-      "body": 17,
-      "caption": 12,
-      "header": 17,
-      "hero": 26,
-      "heroLarge": 30,
-      "secondary": 16,
-      "subheader": 15,
+      "body": 13,
+      "caption": 10,
+      "header": 20,
+      "hero": 22,
+      "heroLarge": 26,
+      "secondary": 11,
+      "subheader": 16,
     },
     "variants": Object {
       "body1": Object {
-        "dynamicTypeRamp": "body",
-        "face": "System",
-        "letterSpacing": -0.43,
-        "lineHeight": 22,
-        "size": 17,
+        "face": "primary",
+        "size": "secondary",
         "weight": "400",
       },
       "body1Strong": Object {
-        "dynamicTypeRamp": "body",
-        "face": "System",
-        "letterSpacing": -0.43,
-        "lineHeight": 22,
-        "size": 17,
+        "face": "primary",
+        "size": "secondary",
         "weight": "600",
       },
       "body2": Object {
-        "dynamicTypeRamp": "subheadline",
-        "face": "System",
-        "letterSpacing": -0.23,
-        "lineHeight": 20,
-        "size": 15,
+        "face": "primary",
+        "size": "body",
         "weight": "400",
       },
       "body2Strong": Object {
-        "dynamicTypeRamp": "subheadline",
-        "face": "System",
-        "letterSpacing": -0.23,
-        "lineHeight": 20,
-        "size": 15,
+        "face": "primary",
+        "size": "body",
         "weight": "600",
       },
       "bodySemibold": Object {
@@ -526,40 +968,18 @@ Object {
         "weight": "400",
       },
       "caption1": Object {
-        "dynamicTypeRamp": "footnote",
-        "face": "System",
-        "letterSpacing": -0.08,
-        "lineHeight": 18,
-        "size": 13,
-        "weight": "400",
-      },
-      "caption1Strong": Object {
-        "dynamicTypeRamp": "footnote",
-        "face": "System",
-        "letterSpacing": -0.08,
-        "lineHeight": 18,
-        "size": 13,
-        "weight": "600",
-      },
-      "caption2": Object {
-        "dynamicTypeRamp": "caption1",
-        "face": "System",
-        "letterSpacing": 0,
-        "lineHeight": 16,
-        "size": 12,
-        "weight": "400",
+        "face": "primary",
+        "size": "caption",
+        "weight": "500",
       },
       "captionStandard": Object {
         "face": "primary",
         "size": "caption",
-        "weight": "400",
+        "weight": "500",
       },
       "display": Object {
-        "dynamicTypeRamp": "largeTitle",
-        "face": "System",
-        "letterSpacing": 0.26,
-        "lineHeight": 70,
-        "size": 60,
+        "face": "primary",
+        "size": "heroLarge",
         "weight": "700",
       },
       "headerSemibold": Object {
@@ -570,12 +990,12 @@ Object {
       "headerStandard": Object {
         "face": "primary",
         "size": "header",
-        "weight": "600",
+        "weight": "700",
       },
       "heroLargeSemibold": Object {
         "face": "primary",
         "size": "heroLarge",
-        "weight": "600",
+        "weight": "700",
       },
       "heroLargeStandard": Object {
         "face": "primary",
@@ -585,7 +1005,7 @@ Object {
       "heroSemibold": Object {
         "face": "primary",
         "size": "hero",
-        "weight": "600",
+        "weight": "700",
       },
       "heroStandard": Object {
         "face": "primary",
@@ -593,12 +1013,9 @@ Object {
         "weight": "400",
       },
       "largeTitle": Object {
-        "dynamicTypeRamp": "largeTitle",
-        "face": "System",
-        "letterSpacing": 0.4,
-        "lineHeight": 41,
-        "size": 34,
-        "weight": "700",
+        "face": "primary",
+        "size": "heroLarge",
+        "weight": "400",
       },
       "secondarySemibold": Object {
         "face": "primary",
@@ -620,29 +1037,35 @@ Object {
         "size": "subheader",
         "weight": "400",
       },
-      "title1": Object {
-        "dynamicTypeRamp": "title1",
-        "face": "System",
-        "letterSpacing": 0.38,
-        "lineHeight": 34,
-        "size": 28,
+      "subtitle1": Object {
+        "face": "primary",
+        "size": "header",
         "weight": "700",
       },
-      "title2": Object {
-        "dynamicTypeRamp": "title2",
-        "face": "System",
-        "letterSpacing": -0.26,
-        "lineHeight": 28,
-        "size": 22,
+      "subtitle1Strong": Object {
+        "face": "primary",
+        "size": "header",
+        "weight": "800",
+      },
+      "subtitle2": Object {
+        "face": "primary",
+        "size": "subheader",
+        "weight": "400",
+      },
+      "subtitle2Strong": Object {
+        "face": "primary",
+        "size": "subheader",
         "weight": "600",
       },
-      "title3": Object {
-        "dynamicTypeRamp": "title3",
-        "face": "System",
-        "letterSpacing": -0.45,
-        "lineHeight": 25,
-        "size": 20,
-        "weight": "600",
+      "title1": Object {
+        "face": "primary",
+        "size": "hero",
+        "weight": "400",
+      },
+      "title1Strong": Object {
+        "face": "primary",
+        "size": "hero",
+        "weight": "700",
       },
     },
     "weights": Object {

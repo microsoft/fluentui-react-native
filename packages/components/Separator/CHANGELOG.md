@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/separator
 
-This log was last generated on Fri, 06 Jan 2023 12:26:31 GMT and should not be manually modified.
+This log was last generated on Sun, 15 Jan 2023 14:58:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.7
+
+Sun, 15 Jan 2023 14:58:55 GMT
+
+### Patches
+
+- Apply prettier (ruaraki@microsoft.com)
+
+## 0.14.6
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/theme-tokens to v0.23.0
+
+## 0.14.5
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.32
 
 ## 0.14.4
 
