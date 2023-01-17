@@ -834,6 +834,11 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         value="key1"
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
           accessible={false}
           focusable={false}
           onBlur={[Function]}
@@ -978,6 +983,11 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         value="key2"
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
           accessible={false}
           focusable={false}
           onBlur={[Function]}
