@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 11 Jan 2023 14:59:31 GMT and should not be manually modified.
+This log was last generated on Tue, 17 Jan 2023 22:09:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.18
+
+Tue, 17 Jan 2023 22:09:42 GMT
+
+### Patches
+
+- Update Menu font (amchiu@microsoft.com)
 
 ## 1.2.17
 

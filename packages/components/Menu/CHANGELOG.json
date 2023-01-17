@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 17 Jan 2023 22:09:42 GMT",
+      "tag": "@fluentui-react-native/menu_v1.2.18",
+      "version": "1.2.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "350c6980ed74cd71dd6971174fc8cb834625a9c6",
+            "comment": "Update Menu font"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Jan 2023 14:59:31 GMT",
       "tag": "@fluentui-react-native/menu_v1.2.17",
       "version": "1.2.17",
