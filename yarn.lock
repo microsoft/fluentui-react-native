@@ -12025,9 +12025,9 @@ prelude-ls@~1.1.2:
   integrity sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w==
 
 prettier@^2.4.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.1.tgz#4e1fd11c34e2421bc1da9aea9bd8127cd0a35efc"
-  integrity sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.2.tgz#c4ea1b5b454d7c4b59966db2e06ed7eec5dfd160"
+  integrity sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==
 
 pretty-format@^26.0.0, pretty-format@^26.5.2, pretty-format@^26.6.2:
   version "26.6.2"
@@ -12332,9 +12332,9 @@ react-native-gradle-plugin@^0.0.6:
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
 
 react-native-macos@^0.68.0:
-  version "0.68.60"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.60.tgz#97c59b3e4e8b51b55658b7b25f2d2f90e29b0942"
-  integrity sha512-+9WZCrEv5F7OwCusVLtumBPkafBmBuQh+Nora0cgAGe2bcYYpyvHCIu8tHYHrG/AmQZ6rG5s8ks+lqVYXY3gLQ==
+  version "0.68.61"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.61.tgz#a9f7df92f4fdeeac22d74973465438909016a563"
+  integrity sha512-d3ihA5AoSXDQPCHwv5Wbxlx7U3YT7mu65VRUMlQyRgse9v7MymN71KHIJYeDNDjW3Yjdaoakw+PLyFXqvrCLoA==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^7.0.3"
