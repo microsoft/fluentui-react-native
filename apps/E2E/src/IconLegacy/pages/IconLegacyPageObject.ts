@@ -5,10 +5,6 @@ class IconLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(ICON_TESTPAGE);
-  }
-
   get _pageName() {
     return ICON_TESTPAGE;
   }
@@ -21,8 +17,8 @@ class IconLegacyPageObject extends BasePage {
     return By(ICON_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_ICON_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_ICON_BUTTON;
   }
 }
 

@@ -63,9 +63,9 @@ export const AvatarColors = [
 ] as const;
 
 export const ColorSchemes = ['neutral', 'brand', 'colorful', 'brandInverted', 'accent'] as const;
-export type AvatarSize = typeof AvatarSizes[number];
-export type AvatarNamedColor = typeof AvatarColors[number];
-export type AvatarColorSchemes = typeof ColorSchemes[number];
+export type AvatarSize = (typeof AvatarSizes)[number];
+export type AvatarNamedColor = (typeof AvatarColors)[number];
+export type AvatarColorSchemes = (typeof ColorSchemes)[number];
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';

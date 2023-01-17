@@ -10,7 +10,7 @@ import { ShadowToken } from '@fluentui-react-native/theme-types';
 
 export const notification = 'Notification';
 export const NotificationVariants = ['primary', 'neutral', 'primaryBar', 'primaryOutlineBar', 'neutralBar', 'danger', 'warning'] as const;
-export type NotificationVariant = typeof NotificationVariants[number];
+export type NotificationVariant = (typeof NotificationVariants)[number];
 
 export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens, NotificationButtonColorStates {
   primary: NotificationTokens;

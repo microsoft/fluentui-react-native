@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
+This log was last generated on Tue, 17 Jan 2023 22:09:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.126.34
+
+Tue, 17 Jan 2023 22:09:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.2.18
+
+## 0.126.33
+
+Sun, 15 Jan 2023 14:58:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.5.16
+- Bump @fluentui-react-native/badge to v0.4.17
+- Bump @fluentui-react-native/experimental-avatar to v0.17.7
+- Bump @fluentui-react-native/separator to v0.14.7
+- Bump @fluentui-react-native/notification to v0.21.17
+- Bump @fluentui/react-native to v0.35.8
+
+## 0.126.32
+
+Thu, 12 Jan 2023 20:09:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.7
+
+## 0.126.31
+
+Wed, 11 Jan 2023 14:59:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.2.17
+
+## 0.126.30
+
+Tue, 10 Jan 2023 21:36:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.2.16
 
 ## 0.126.29
 
