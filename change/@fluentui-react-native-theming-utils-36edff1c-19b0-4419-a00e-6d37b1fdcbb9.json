@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add shared colors to AliasColorTokens and mapPipelineToTheme",
-  "packageName": "@fluentui-react-native/theming-utils",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
