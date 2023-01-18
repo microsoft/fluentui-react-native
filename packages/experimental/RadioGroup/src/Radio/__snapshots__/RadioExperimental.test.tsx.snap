@@ -102,7 +102,6 @@ exports[`Radio component tests Radio default 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "alignSelf": "flex-start",
         "flexDirection": "column",
         "marginLeft": 0,
         "marginRight": 2,
@@ -238,7 +237,6 @@ exports[`Radio component tests Radio disabled 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "alignSelf": "flex-start",
         "flexDirection": "column",
         "marginLeft": 0,
         "marginRight": 2,
