@@ -4,14 +4,6 @@ class AvatarPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(AVATAR_TESTPAGE);
-  }
-
-  get _pageButton() {
-    return By(HOMEPAGE_AVATAR_BUTTON);
-  }
-
   get _pageButtonName() {
     return HOMEPAGE_AVATAR_BUTTON;
   }

@@ -5,10 +5,6 @@ class PersonaPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(PERSONA_TESTPAGE);
-  }
-
   get _pageName() {
     return PERSONA_TESTPAGE;
   }
@@ -17,8 +13,8 @@ class PersonaPageObject extends BasePage {
     return PERSONA_TEST_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_PERSONA_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_PERSONA_BUTTON;
   }
 }
 

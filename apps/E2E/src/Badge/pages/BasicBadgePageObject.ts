@@ -18,12 +18,8 @@ class BasicBadgePageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(BADGE_TESTPAGE);
-  }
-
-  get _pageButton() {
-    return By(HOMEPAGE_BADGE_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_BADGE_BUTTON;
   }
 
   get _pageName() {

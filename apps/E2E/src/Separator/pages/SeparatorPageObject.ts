@@ -5,10 +5,6 @@ class SeparatorPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(SEPARATOR_TESTPAGE);
-  }
-
   get _pageName() {
     return SEPARATOR_TESTPAGE;
   }
@@ -17,8 +13,8 @@ class SeparatorPageObject extends BasePage {
     return SEPARATOR_TEST_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_SEPARATOR_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_SEPARATOR_BUTTON;
   }
 }
 

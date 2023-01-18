@@ -5,10 +5,6 @@ class PressablePageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(PRESSABLE_TESTPAGE);
-  }
-
   get _pageName() {
     return PRESSABLE_TESTPAGE;
   }
@@ -17,8 +13,8 @@ class PressablePageObject extends BasePage {
     return PRESSABLE_TEST_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_PRESSABLE_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_PRESSABLE_BUTTON;
   }
 }
 

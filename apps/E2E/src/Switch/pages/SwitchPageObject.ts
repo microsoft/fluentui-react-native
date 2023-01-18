@@ -59,10 +59,6 @@ class SwitchPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(SWITCH_TESTPAGE);
-  }
-
   get _pageName() {
     return SWITCH_TESTPAGE;
   }
@@ -75,8 +71,8 @@ class SwitchPageObject extends BasePage {
     return SWITCH_NO_A11Y_LABEL_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_SWITCH_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_SWITCH_BUTTON;
   }
 }
 

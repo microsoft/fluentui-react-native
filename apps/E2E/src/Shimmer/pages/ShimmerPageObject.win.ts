@@ -5,10 +5,6 @@ class ShimmerPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(SHIMMER_TESTPAGE);
-  }
-
   get _pageName() {
     return SHIMMER_TESTPAGE;
   }
@@ -17,8 +13,8 @@ class ShimmerPageObject extends BasePage {
     return SHIMMER_TEST_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_SHIMMER_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_SHIMMER_BUTTON;
   }
 }
 

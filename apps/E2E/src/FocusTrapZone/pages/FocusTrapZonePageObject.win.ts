@@ -5,10 +5,6 @@ class FocusTrapZonePageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(FOCUSTRAPZONE_TESTPAGE);
-  }
-
   get _pageName() {
     return FOCUSTRAPZONE_TESTPAGE;
   }
@@ -17,8 +13,8 @@ class FocusTrapZonePageObject extends BasePage {
     return FOCUSTRAPZONE_TEST_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_FOCUSTRAPZONE_BUTTON;
   }
 }
 

@@ -330,7 +330,9 @@ export abstract class BasePage {
 
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
-  abstract get _testPage(): Promise<WebdriverIO.Element>;
+  get _testPage(): Promise<WebdriverIO.Element> {
+    return By(this._pageName);
+  }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
@@ -347,7 +349,9 @@ export abstract class BasePage {
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
-  abstract get _pageButton(): Promise<WebdriverIO.Element>;
+  get _pageButton(): Promise<WebdriverIO.Element> {
+    return By(this._pageButtonName);
+  }
 
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
@@ -355,9 +359,7 @@ export abstract class BasePage {
 
   // Returns: String
   // Returns the name of the button that navigates to the test page.
-  get _pageButtonName(): string {
-    return DUMMY_CHAR;
-  }
+  abstract get _pageButtonName(): string;
 
   // Returns: String
   // Returns the identifier of the primary UI element used for testing on the given test page.
