@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Jan 2023 19:14:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.126.36
+
+Wed, 18 Jan 2023 19:14:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.9
 
 ## 0.126.35
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 18 Jan 2023 19:14:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.126.36",
+      "version": "0.126.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.9.9",
+            "commit": "989ae06a27ee19718badb9265d85ec63d85f3ee1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Jan 2023 01:55:11 GMT",
       "tag": "@fluentui-react-native/tester_v0.126.35",
       "version": "0.126.35",
