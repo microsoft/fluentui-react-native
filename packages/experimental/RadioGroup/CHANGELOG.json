@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Wed, 18 Jan 2023 22:36:15 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.9.10",
+      "version": "0.9.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "6aa333e06fbf2ad4b5ac6d8470e26d24e7be66b6",
+            "comment": "Fixing padding for horizontal-stacked RadioGroup"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Jan 2023 19:14:23 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.9.9",
       "version": "0.9.9",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Wed, 18 Jan 2023 19:14:23 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Jan 2023 22:36:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.10
+
+Wed, 18 Jan 2023 22:36:15 GMT
+
+### Patches
+
+- Fixing padding for horizontal-stacked RadioGroup (gulnazsayed@microsoft.com)
 
 ## 0.9.9
 

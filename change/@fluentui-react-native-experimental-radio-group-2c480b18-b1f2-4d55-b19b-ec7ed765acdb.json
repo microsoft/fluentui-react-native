@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixing padding for horizontal-stacked RadioGroup",
-  "packageName": "@fluentui-react-native/experimental-radio-group",
-  "email": "gulnazsayed@microsoft.com",
-  "dependentChangeType": "patch"
-}
