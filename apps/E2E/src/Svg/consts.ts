@@ -1,4 +1,6 @@
 export const HOMEPAGE_SVG_BUTTON = 'Homepage_Svg_Button';
+export const HOMEPAGE_RNSVGIcons_BUTTON = 'Homepage_RNSVGIcons_Button';
+export const RNSVGIcons_TESTPAGE = 'RNSvgIcons_TestPage';
 export const SVG_TESTPAGE = 'Svg_TestPage';
 
 /* E2E Testing Svg 1 */
