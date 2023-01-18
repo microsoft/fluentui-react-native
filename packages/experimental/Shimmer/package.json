@@ -28,6 +28,9 @@
   "dependencies": {
     "@fluentui-react-native/framework": "0.8.34",
     "@fluentui-react-native/tokens": ">=0.20.4 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.22.1 <1.0.0",
+    "@fluentui-react-native/component-cache": "^1.4.2",
+    "@fluentui-react-native/use-styling": "^0.9.1",
     "react-native-svg": "12.5.0"
   },
   "devDependencies": {
