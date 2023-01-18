@@ -117,22 +117,19 @@ describe('RadioGroupV1 Functional Testing', async () => {
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press down "Arrow Key" on a selected Radio. Validate adjacent Radio state changes from unselected to selected.', async () => {
+  it('Navigate to unselected radio using "DOWN ARROW" key. Validate state changes from unselected to selected.', async () => {
     // Presses the ArrowDown key while the first (A) Radio is selected
     await RadioGroupV1Page.sendKeys(RadioGroupV1Page.getRadio(Radio.First), [Keys.ARROW_DOWN]);
 
     /* Validate the Radio is selected */
     await expect(
-      await RadioGroupV1Page.waitForRadioSelected(
-        Radio.Second,
-        'Expected radio #2 to be selected by a "DOWN ARROW" input from radio #1, but #2 remained unselected.',
-      ),
+      await RadioGroupV1Page.waitForRadioSelected(Radio.Second, 'Expected radio #2 to be selected by a "DOWN ARROW" input from radio #1.'),
     ).toBeTruthy();
 
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press down "Arrow Key" on a selected Radio adjacent to a disabled Radio. Validate disabled Radio is skipped.', async () => {
+  it('Navigate to unselected radio using "DOWN ARROW" key. Validate disabled Radio is skipped.', async () => {
     // Presses the ArrowDown key while the second (B) Radio is selected
     await RadioGroupV1Page.sendKeys(RadioGroupV1Page.getRadio(Radio.Second), [Keys.ARROW_DOWN]);
 
@@ -140,23 +137,20 @@ describe('RadioGroupV1 Functional Testing', async () => {
     await expect(
       await RadioGroupV1Page.waitForRadioSelected(
         Radio.Fourth,
-        'Expected radio #4 to be selected by a "DOWN ARROW" input from radio #2, but #4 remained unselected. Radio #3 (disabled) should have been skipped.',
+        'Expected radio #4 to be selected by a "DOWN ARROW" input from radio #2 and radio #3 (disabled) to be skipped.',
       ),
     ).toBeTruthy();
 
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press down "Arrow Key" on the last Radio of a RadioGroup. Validate circular navigation functions correctly.', async () => {
+  it('Press "DOWN ARROW" on the last Radio of a RadioGroup. Validate circular navigation functions correctly.', async () => {
     // Presses the ArrowDown key while the fourth (D) Radio is selected
     await RadioGroupV1Page.sendKeys(RadioGroupV1Page.getRadio(Radio.Fourth), [Keys.ARROW_DOWN]);
 
     /* Validate the Radio is selected */
     await expect(
-      await RadioGroupV1Page.waitForRadioSelected(
-        Radio.First,
-        'Expected radio #1 to be selected by a "DOWN ARROW" input from radio #4, but #1 remained unselected. Check if circular navigation is functional.',
-      ),
+      await RadioGroupV1Page.waitForRadioSelected(Radio.First, 'Expected radio #1 to be selected by a "DOWN ARROW" input from radio #4.'),
     ).toBeTruthy();
 
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
@@ -170,7 +164,7 @@ describe('RadioGroupV1 Functional Testing', async () => {
     await expect(
       await RadioGroupV1Page.waitForRadioFocused(
         Radio.Fifth,
-        'Expected radio #5 to be focused by a "TAB" input from previous radio group, but #5 remained unfocused.',
+        'Expected radio #5 to be focused by a "TAB" input from previous radio group.',
       ),
     ).toBeTruthy();
 
