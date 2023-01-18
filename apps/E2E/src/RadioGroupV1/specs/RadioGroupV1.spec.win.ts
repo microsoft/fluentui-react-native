@@ -31,7 +31,7 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
     await RadioGroupV1Page.scrollToTestElement();
   });
 
-  it('Validate RadioGroup\'s "accessibilityRole" defaults to List "ControlType" element attribute.', async () => {
+  it('Validate RadioGroup\'s "accessibilityRole" defaults to "List.ControlType".', async () => {
     await expect(
       await RadioGroupV1Page.compareAttribute(RadioGroupV1Page._primaryComponent, Attribute.AccessibilityRole, RADIOGROUP_A11Y_ROLE),
     ).toBeTruthy();
@@ -39,7 +39,7 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Validate Radio\'s "accessibilityRole" defaults to RadioButton "ControlType" element attribute.', async () => {
+  it('Validate Radio\'s "accessibilityRole" defaults to "RadioButton.ControlType".', async () => {
     await expect(
       await RadioGroupV1Page.compareAttribute(RadioGroupV1Page.getRadio(Radio.First), Attribute.AccessibilityRole, RADIOBUTTON_A11Y_ROLE),
     ).toBeTruthy();
@@ -103,7 +103,7 @@ describe('RadioGroupV1 Functional Testing', async () => {
   it('Click on a Radio. Validate that it changes state from unselected to selected.', async () => {
     /* Validate the Radio is not initially selected */
     await expect(await RadioGroupV1Page.isRadioSelected(Radio.Second)).toBeFalsy(
-      'Expected radio #2 to unselected at test start, but #2 was initially selected.',
+      'Expected radio #2 to be unselected at test start, but #2 was initially selected.',
     );
 
     /* Click on the Radio to select it */
@@ -117,7 +117,7 @@ describe('RadioGroupV1 Functional Testing', async () => {
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press forward "Arrow Key" on a selected Radio. Validate adjacent Radio state changes from unselected to selected.', async () => {
+  it('Press down "Arrow Key" on a selected Radio. Validate adjacent Radio state changes from unselected to selected.', async () => {
     // Presses the ArrowDown key while the first (A) Radio is selected
     await RadioGroupV1Page.sendKeys(RadioGroupV1Page.getRadio(Radio.First), [Keys.ARROW_DOWN]);
 
@@ -132,7 +132,7 @@ describe('RadioGroupV1 Functional Testing', async () => {
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press forward "Arrow Key" on a selected Radio adjacent to a disabled Radio. Validate disabled Radio is skipped.', async () => {
+  it('Press down "Arrow Key" on a selected Radio adjacent to a disabled Radio. Validate disabled Radio is skipped.', async () => {
     // Presses the ArrowDown key while the second (B) Radio is selected
     await RadioGroupV1Page.sendKeys(RadioGroupV1Page.getRadio(Radio.Second), [Keys.ARROW_DOWN]);
 
@@ -147,7 +147,7 @@ describe('RadioGroupV1 Functional Testing', async () => {
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press forward "Arrow Key" on the last Radio of a RadioGroup. Validate circular navigation functions correctly.', async () => {
+  it('Press down "Arrow Key" on the last Radio of a RadioGroup. Validate circular navigation functions correctly.', async () => {
     // Presses the ArrowDown key while the fourth (D) Radio is selected
     await RadioGroupV1Page.sendKeys(RadioGroupV1Page.getRadio(Radio.Fourth), [Keys.ARROW_DOWN]);
 
