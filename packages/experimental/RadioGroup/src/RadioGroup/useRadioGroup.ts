@@ -21,6 +21,51 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     [setSelectedButtonRef],
   );
 
+  const [invoked, setInvoked] = React.useState(false);
+
+  const onInvoked = React.useCallback(
+    (check: boolean) => {
+      setInvoked(check);
+    },
+    [setInvoked],
+  );
+
+  const [values, setValues] = React.useState([]);
+
+  const onAddRadioValue = React.useCallback(
+    (value: string) => {
+      values.push(value);
+      setValues(values);
+    },
+    [setValues],
+  );
+
+  const onRemoveRadioValue = React.useCallback(
+    (value: string) => {
+      values.filter((item) => item !== value);
+      setValues(values);
+    },
+    [setValues],
+  );
+
+  const [enabledValues, setEnabledValues] = React.useState([]);
+
+  const onAddRadioEnabledValue = React.useCallback(
+    (value: string) => {
+      enabledValues.push(value);
+      setEnabledValues(enabledValues);
+    },
+    [setEnabledValues],
+  );
+
+  const onRemoveRadioEnabledValue = React.useCallback(
+    (value: string) => {
+      enabledValues.filter((item) => item !== value);
+      setEnabledValues(enabledValues);
+    },
+    [setEnabledValues],
+  );
+
   const state: RadioGroupState = {
     value: data.selectedKey,
     required: required || false,
@@ -28,6 +73,14 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     layout: layout || 'vertical',
     onChange: data.onKeySelect,
     updateSelectedButtonRef: onSelectButtonRef,
+    invoked: invoked,
+    updateInvoked: onInvoked,
+    values: values,
+    enabledValues: enabledValues,
+    addRadioValue: onAddRadioValue,
+    removeRadioValue: onRemoveRadioValue,
+    addRadioEnabledValue: onAddRadioEnabledValue,
+    removeRadioEnabledValue: onRemoveRadioEnabledValue,
   };
 
   return {

@@ -22,6 +22,22 @@ exports[`Radio component tests Radio default 1`] = `
   accessible={true}
   enableFocusRing={true}
   focusable={true}
+  keyDownEvents={
+    Array [
+      Object {
+        "key": "ArrowDown",
+      },
+      Object {
+        "key": "ArrowRight",
+      },
+      Object {
+        "key": "ArrowUp",
+      },
+      Object {
+        "key": "ArrowLeft",
+      },
+    ]
+  }
   labelPosition="after"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
@@ -153,6 +169,22 @@ exports[`Radio component tests Radio disabled 1`] = `
   accessible={true}
   enableFocusRing={true}
   focusable={false}
+  keyDownEvents={
+    Array [
+      Object {
+        "key": "ArrowDown",
+      },
+      Object {
+        "key": "ArrowRight",
+      },
+      Object {
+        "key": "ArrowUp",
+      },
+      Object {
+        "key": "ArrowLeft",
+      },
+    ]
+  }
   labelPosition="after"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
