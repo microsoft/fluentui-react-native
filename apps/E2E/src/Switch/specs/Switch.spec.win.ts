@@ -27,7 +27,7 @@ describe('Switch Accessibility Testing', () => {
     await SwitchPageObject.scrollToTestElement();
   });
 
-  it('Validate "accessibilityRole" defaults to Button "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to "ControlType.Button".', async () => {
     await expect(
       await SwitchPageObject.compareAttribute(SwitchPageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
     ).toBeTruthy();
