@@ -24,7 +24,7 @@ describe('Button Testing Initialization', function () {
 
 describe('ButtonV1 Accessibility Testing', async () => {
   beforeEach(async () => {
-    await ButtonV1PageObject.mobileScrollToTestElement();
+    await ButtonV1PageObject.scrollToTestElement();
   });
 
   it('ButtonV1 - Verify accessibilityLabel', async () => {
@@ -51,7 +51,7 @@ describe('ButtonV1 Accessibility Testing', async () => {
 describe('ButtonV1 Functional Testing', async () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
-    await ButtonV1PageObject.mobileScrollToTestElement();
+    await ButtonV1PageObject.scrollToTestElement();
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {

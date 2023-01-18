@@ -213,39 +213,23 @@ export abstract class BasePage {
     });
   }
 
-  /* Scrolls to the specified or primary UI test element until it is displayed. */
-  async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
-    const ComponentToScrollTo = component ?? (await this._primaryComponent);
-    if (await ComponentToScrollTo.isDisplayed()) {
-      return;
+  /* Scrolls to the specified or primary UI test element until it is displayed.
+   * Either the component identifier or the component itself can be passed in as a parameter.
+   * On Android only the component identifier can be passed in.
+   * If no parameter is passed in, the primary component is used.
+   */
+  async scrollToTestElement(component?: WebdriverIO.Element | string): Promise<void> {
+    let componentIdentifier: string;
+    let componentToScrollTo: WebdriverIO.Element;
+
+    if (typeof component == 'string') {
+      componentIdentifier = component ?? this._primaryComponentName;
+      componentToScrollTo = await By(componentIdentifier);
+    } else {
+      componentToScrollTo = component ?? (await this._primaryComponent);
     }
 
-    // This button is at the top of every test page. It allows us to put focus in the test page pane so we can type PageDown
-    const FocusButton = await By('Focus_Button');
-    const scrollDownKeys = [Keys.PAGE_DOWN];
-    await browser.waitUntil(
-      async () => {
-        await FocusButton.addValue(scrollDownKeys);
-        scrollDownKeys.push(Keys.PAGE_DOWN);
-        return await ComponentToScrollTo.isDisplayed();
-      },
-      {
-        timeout: 30000,
-        timeoutMsg:
-          'Could not scroll to the ' +
-          this._pageName +
-          "'s main test element. Please see Pipeline artifacts for more debugging information.",
-      },
-    );
-
-    // We have this extra scroll here to ensure the whole component is visible.
-    await FocusButton.addValue(scrollDownKeys);
-  }
-
-  /* Scrolls to the specified or primary UI test element until it is displayed. */
-  async mobileScrollToTestElement(componentIdentifier?: string): Promise<void> {
-    const componentToScrollTo = componentIdentifier ?? this._primaryComponentName;
-    if (await (await By(componentToScrollTo)).isDisplayed()) {
+    if (await componentToScrollTo.isDisplayed()) {
       return;
     }
 
@@ -256,7 +240,7 @@ export abstract class BasePage {
         await browser.waitUntil(
           async () => {
             await driver.execute('mobile: scroll', { direction: 'down' });
-            return await (await By(componentToScrollTo)).isDisplayed();
+            return await componentToScrollTo.isDisplayed();
           },
           {
             timeout: this.waitForUiEvent,
@@ -265,14 +249,13 @@ export abstract class BasePage {
         );
         break;
       }
-      default:
-      case MobilePlatform.Android:
+      case MobilePlatform.Android: {
         /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
          * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
          * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
         await browser.waitUntil(
           async () => {
-            const componentSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_TESTS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).scrollIntoView(new UiSelector().description("${componentToScrollTo}"))`;
+            const componentSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_TESTS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).scrollIntoView(new UiSelector().description("${componentIdentifier}"))`;
             const component = await $(`android=${componentSelector}`);
             return await component.isDisplayed();
           },
@@ -282,6 +265,29 @@ export abstract class BasePage {
           },
         );
         break;
+      }
+      default: {
+        // This button is at the top of every test page. It allows us to put focus in the test page pane so we can type PageDown
+        const FocusButton = await By('Focus_Button');
+        const scrollDownKeys = [Keys.PAGE_DOWN];
+        await browser.waitUntil(
+          async () => {
+            await FocusButton.addValue(scrollDownKeys);
+            scrollDownKeys.push(Keys.PAGE_DOWN);
+            return await componentToScrollTo.isDisplayed();
+          },
+          {
+            timeout: 30000,
+            timeoutMsg:
+              'Could not scroll to the ' +
+              this._pageName +
+              "'s main test element. Please see Pipeline artifacts for more debugging information.",
+          },
+        );
+
+        // We have this extra scroll here to ensure the whole component is visible.
+        await FocusButton.addValue(scrollDownKeys);
+      }
     }
   }
 
