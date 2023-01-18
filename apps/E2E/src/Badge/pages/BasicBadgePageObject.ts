@@ -1,5 +1,5 @@
 import { BADGE_TESTPAGE, HOMEPAGE_BADGE_BUTTON, BADGE_TEST_COMPONENT, BADGE_SECONDARY_TEST_COMPONENT } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 export const enum BadgeComponentSelector {
   PrimaryComponent, //this._primaryComponent

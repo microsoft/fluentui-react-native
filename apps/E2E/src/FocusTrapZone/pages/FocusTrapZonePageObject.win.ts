@@ -1,5 +1,5 @@
 import { FOCUSTRAPZONE_TESTPAGE, FOCUSTRAPZONE_TEST_COMPONENT, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class FocusTrapZonePageObject extends BasePage {
   /*****************************************/

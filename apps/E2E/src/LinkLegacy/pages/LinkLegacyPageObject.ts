@@ -1,5 +1,5 @@
 import { LINK_TESTPAGE, LINK_TEST_COMPONENT, HOMEPAGE_LINK_BUTTON, LINK_NO_A11Y_LABEL_COMPONENT } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class LinkLegacyPageObject extends BasePage {
   /*****************************************/
