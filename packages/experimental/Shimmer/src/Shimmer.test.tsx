@@ -42,6 +42,11 @@ const style = { width: 300, height: 100 };
 
 describe('Shimmer component tests', () => {
   it('Shimmer default', () => {
+    const tree = renderer.create(<Shimmer elements={shimmerRects()} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Shimmer with style prop', () => {
     const tree = renderer.create(<Shimmer elements={shimmerRects()} style={style} />).toJSON();
     expect(tree).toMatchSnapshot();
   });

@@ -62,7 +62,7 @@ const RectShimmers: React.FunctionComponent<Record<string, never>> = () => {
 const RectCircleShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
-      <Shimmer elements={shimmerRectsAndCircle()} duration={3000} style={{ width: 300, height: 100 }} />
+      <Shimmer elements={shimmerRectsAndCircle()} duration={1000} delay={0} style={{ width: 300, height: 100 }} />
     </Stack>
   );
 };

@@ -42,8 +42,12 @@ export const Shimmer = compose<ShimmerType>({
       ],
     );
 
+    /* The shimmer animation is implemented using a LinearGradient which travels from left to right.
+     * Different angles are handled by rotating this gradient.
+     * The startValue is used to control the start position of the gradient animation, it is set as -1 to make sure it is starts off the screen for any angle.
+     * Similarly the endValue is set to 2 to make sure the gradient animation exits the entire screen for any angle.
+     */
     const startValue = useRef(new Animated.Value(-1)).current;
-
     const shimmerAnimation = useCallback(() => {
       Animated.loop(
         Animated.timing(startValue, {
