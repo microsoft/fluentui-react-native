@@ -5,10 +5,6 @@ class LinkLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(LINK_TESTPAGE);
-  }
-
   get _pageName() {
     return LINK_TESTPAGE;
   }
@@ -21,8 +17,8 @@ class LinkLegacyPageObject extends BasePage {
     return By(LINK_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_LINK_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_LINK_BUTTON;
   }
 }
 

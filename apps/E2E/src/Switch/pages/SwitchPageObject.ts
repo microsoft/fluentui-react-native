@@ -1,10 +1,4 @@
-import {
-  SWITCH_TESTPAGE,
-  SWITCH_TEST_COMPONENT,
-  SWITCH_NO_A11Y_LABEL_COMPONENT,
-  HOMEPAGE_SWITCH_BUTTON,
-  SWITCH_ON_PRESS,
-} from '../consts';
+import { SWITCH_TESTPAGE, SWITCH_TEST_COMPONENT, SWITCH_NO_A11Y_LABEL_COMPONENT, HOMEPAGE_SWITCH_BUTTON, SWITCH_ON_PRESS } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
@@ -65,10 +59,6 @@ class SwitchPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(SWITCH_TESTPAGE);
-  }
-
   get _pageName() {
     return SWITCH_TESTPAGE;
   }
@@ -81,8 +71,8 @@ class SwitchPageObject extends BasePage {
     return By(SWITCH_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_SWITCH_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_SWITCH_BUTTON;
   }
 }
 

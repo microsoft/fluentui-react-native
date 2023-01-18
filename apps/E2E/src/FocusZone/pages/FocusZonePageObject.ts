@@ -90,10 +90,6 @@ class FocusZonePageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(FOCUSZONE_TESTPAGE);
-  }
-
   get _pageName() {
     return FOCUSZONE_TESTPAGE;
   }
@@ -102,8 +98,8 @@ class FocusZonePageObject extends BasePage {
     return By(FOCUSZONE_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_FOCUSZONE_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_FOCUSZONE_BUTTON;
   }
 
   get _directionPicker() {
