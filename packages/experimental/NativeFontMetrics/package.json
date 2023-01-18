@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-native-font-metrics",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A temporary partial wrapper for UIFontMetrics.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",

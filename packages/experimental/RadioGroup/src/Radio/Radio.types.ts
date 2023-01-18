@@ -9,12 +9,22 @@ export const radioName = 'Radio';
 
 export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
+   * Horizontal padding of the root view
+   */
+  rootHorizontalPadding?: number;
+
+  /**
+   * Vertical padding of the root view
+   */
+  rootVerticalPadding?: number;
+
+  /**
    * Indicator border color
    */
   radioBorder?: ColorValue;
 
   /**
-   * Indicator border color
+   * Indicator border style
    */
   radioBorderStyle?: ViewStyle['borderStyle'];
 
@@ -31,7 +41,7 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   /**
    * Diameter size of the outer indicator
    */
-  radioSize?: number;
+  radioOuterCircleSize?: number;
 
   /**
    * Diameter size of the inner circle indicator
@@ -79,14 +89,19 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   labelMarginTop?: ViewStyle['marginTop'];
 
   /**
-   * Padding between label content and focus ring.
+   * Label's right margin.
    */
   labelMarginRight?: ViewStyle['marginRight'];
 
   /**
-   * Padding between label content and focus ring.
+   * Label's left margin.
    */
   labelMarginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Label's padding.
+   */
+  labelPadding?: ViewStyle['marginLeft'];
 
   /*
    * Variant of label subtext.
@@ -108,6 +123,22 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
    * Should only by used if subtext prop is provided.
    */
   subtextMarginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
+   */
+  rippleColor?: ColorValue;
+
+  /**
+   * Ripple radius for circular radio on Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the radius of the circular ripple shown on the radio button.
+   * @platform android
+   */
+  rippleRadius?: number;
 
   /**
    * States that can be applied to a Radio
@@ -169,8 +200,8 @@ export interface RadioInfo {
 }
 
 export interface RadioSlotProps {
-  root: IViewProps;
-  button: IViewProps;
+  root: React.PropsWithRef<PressablePropsExtended>;
+  button: PressablePropsExtended;
   innerCircle: IViewProps;
   labelContent: IViewProps;
   label: TextProps;

@@ -3,7 +3,7 @@ import { notification, NotificationType, NotificationProps } from './Notificatio
 import { Pressable } from '@fluentui-react-native/pressable';
 import { Platform, PressableProps, useWindowDimensions, View, ViewStyle, ViewProps } from 'react-native';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+import { Body2, Body2Strong } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
@@ -53,8 +53,8 @@ export const Notification = compose<NotificationType>({
     root: Pressable,
     icon: Icon,
     contentContainer: View,
-    title: Text,
-    message: Text,
+    title: Body2Strong,
+    message: Body2,
     action: NotificationButton,
     shadow: Shadow,
   },

@@ -85,7 +85,7 @@ CGFloat FRNBaseSizeForTextStyle(FRNTextStyle textStyle) {
     return YES;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(allScaleFactors)
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(currentScaleFactors)
 {
     NSMutableDictionary *result = [NSMutableDictionary new];
     [FRNRecognizedTextStyles() enumerateKeysAndObjectsUsingBlock:^(NSString * styleString, __unused NSNumber * boxedTextStyle, __unused BOOL * stop) {
@@ -129,7 +129,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(NSString *)styleStri
 
 - (void)onFontMetricsChanged:(NSNotification *)notification {
     if (_hasListeners) {
-        [self sendEventWithName:@"onFontMetricsChanged" body:@{@"newScaleFactors": [self allScaleFactors]}];
+        [self sendEventWithName:@"onFontMetricsChanged" body:@{@"newScaleFactors": [self currentScaleFactors]}];
     }
 }
 

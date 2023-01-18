@@ -6,24 +6,24 @@ import { CheckboxTokens } from './Checkbox.types';
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
     requiredColor: t.colors.redForeground1,
-    requiredPadding: globalTokens.spacing.s,
+    requiredPadding: globalTokens.size80,
     medium: {
       borderRadius: globalTokens.corner.radius20,
       checkboxBorderWidth: globalTokens.stroke.width10,
       checkboxBorderRadius: globalTokens.corner.radius20,
       checkboxSize: 16,
       checkmarkSize: 8,
-      spacingLabelAfter: globalTokens.spacing.m,
+      spacingLabelAfter: globalTokens.size120,
       label: {
-        padding: globalTokens.spacing.s,
+        padding: globalTokens.size80,
         borderRadius: globalTokens.corner.radius40,
-        spacingLabelAfter: globalTokens.spacing.m,
+        spacingLabelAfter: globalTokens.size120,
         labelIsBefore: {
-          spacingLabelBefore: globalTokens.spacing.m,
+          spacingLabelBefore: globalTokens.size120,
           spacingLabelAfter: 0,
         },
       },
-      padding: globalTokens.spacing.xs,
+      padding: globalTokens.size40,
       variant: 'bodyStandard',
     },
     large: {
@@ -32,17 +32,17 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxBorderRadius: globalTokens.corner.radius20,
       checkboxSize: 20,
       checkmarkSize: 10,
-      spacingLabelAfter: globalTokens.spacing.m,
+      spacingLabelAfter: globalTokens.size120,
       label: {
-        padding: globalTokens.spacing.s,
+        padding: globalTokens.size80,
         borderRadius: globalTokens.corner.radius40,
-        spacingLabelAfter: globalTokens.spacing.m,
+        spacingLabelAfter: globalTokens.size120,
         labelIsBefore: {
-          spacingLabelBefore: globalTokens.spacing.m,
+          spacingLabelBefore: globalTokens.size120,
           spacingLabelAfter: 0,
         },
       },
-      padding: globalTokens.spacing.xs,
+      padding: globalTokens.size40,
       variant: 'bodyStandard',
     },
     checkboxBackgroundColor: t.colors.neutralBackground1,

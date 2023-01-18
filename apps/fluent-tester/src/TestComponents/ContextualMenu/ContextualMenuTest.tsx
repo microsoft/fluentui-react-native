@@ -11,7 +11,7 @@ import {
   Separator,
   Checkbox,
 } from '@fluentui/react-native';
-import { CONTEXTUALMENU_TESTPAGE } from './consts';
+import { CONTEXTUALMENU_TESTPAGE } from '../../../../E2E/src/ContextualMenu/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
@@ -508,10 +508,10 @@ const contextualMenuSections: TestSection[] = [
 
 export const ContextualMenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Deprecated',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 

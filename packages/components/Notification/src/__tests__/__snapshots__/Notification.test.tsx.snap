@@ -196,9 +196,9 @@ exports[`Notification component tests Notification default 1`] = `
           "flexDirection": "row",
           "justifyContent": "center",
           "marginStart": 16,
-          "minWidth": 96,
-          "padding": 8,
-          "paddingHorizontal": 15,
+          "minWidth": 0,
+          "padding": 0,
+          "paddingHorizontal": 0,
         }
       }
     >
@@ -218,8 +218,6 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "600",
-            "letterSpacing": -0.23,
-            "lineHeight": 20,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,

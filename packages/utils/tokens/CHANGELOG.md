@@ -1,8 +1,66 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Mon, 28 Nov 2022 11:51:06 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.3
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.29.0
+
+## 0.20.2
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.28.0
+
+## 0.20.1
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.27.1
+
+## 0.20.0
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Minor changes
+
+- Add maximumSize (adgleitm@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.27.0
+
+## 0.19.1
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.26.0
+
+## 0.19.0
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Minor changes
+
+- Allow V1 usage of V2 text variants (adgleitm@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.25.0
+
+## 0.18.1
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.24.0
 
 ## 0.18.0
 

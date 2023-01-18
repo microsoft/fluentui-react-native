@@ -20,6 +20,8 @@ export const avatarStates: (keyof AvatarTokens)[] = [
   ...AvatarSizesForTokens,
   'neutral',
   'brand',
+  'brandInverted',
+  'accent',
   'circular',
   'square',
   'inactive',

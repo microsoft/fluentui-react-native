@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
 import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
-import { BUTTON_TESTPAGE } from './consts';
+import { BUTTON_TESTPAGE } from '../../../../E2E/src/ButtonLegacy/consts';
 import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonVariantTest } from './ButtonVariantTestSection';
@@ -9,7 +9,7 @@ import { ToggleButtonTest } from './ToggleButtonTestSection';
 import { ButtonIconTest } from '../Button/ButtonIconTestSection';
 import { ButtonSizeTest } from './ButtonSizeTestSection';
 import { ButtonShapeTest } from './ButtonShapeTestSection';
-import { E2EButtonExperimentalTest } from './E2EButtonTest';
+import { E2EButtonTest } from './E2EButtonTest';
 import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
 import { Platform } from 'react-native';
 
@@ -46,7 +46,7 @@ const buttonSections: TestSection[] = [
   },
   {
     name: 'E2E Button Testing',
-    component: E2EButtonExperimentalTest,
+    component: E2EButtonTest,
   },
   {
     name: 'Deprecated Basic Button',
@@ -64,10 +64,10 @@ const buttonSections: TestSection[] = [
 
 export const ButtonTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Beta',
+    macosStatus: 'Production',
     androidStatus: 'Experimental',
   };
 

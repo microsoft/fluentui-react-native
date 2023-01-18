@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BADGE_TESTPAGE } from './consts';
+import { BADGE_TESTPAGE } from '../../../../E2E/src/Badge/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { BasicBadge } from './BasicBadgeTest';
 import { CounterBadgeTest } from './CounterBadgeTest';
@@ -28,8 +28,8 @@ const badgeSections: TestSection[] = [
 
 export const BadgeTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
+    win32Status: 'Production',
+    uwpStatus: 'Backlog',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
     androidStatus: 'Backlog',

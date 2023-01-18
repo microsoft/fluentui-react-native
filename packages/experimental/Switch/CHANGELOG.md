@@ -1,8 +1,204 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Mon, 28 Nov 2022 11:51:06 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.15
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.11
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/interactive-hooks to v0.22.10
+- Bump @fluentui-react-native/tokens to v0.20.3
+
+## 0.8.14
+
+Tue, 10 Jan 2023 06:10:57 GMT
+
+### Patches
+
+- add switch examples (rohanpd.work@gmail.com)
+
+## 0.8.13
+
+Tue, 10 Jan 2023 05:10:08 GMT
+
+### Patches
+
+- switch disable state a11y fix (rohanpd.work@gmail.com)
+
+## 0.8.12
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.10
+- Bump @fluentui-react-native/framework to v0.8.32
+- Bump @fluentui-react-native/interactive-hooks to v0.22.9
+
+## 0.8.11
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- revert customised checked file (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/text to v0.19.9
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/interactive-hooks to v0.22.8
+
+## 0.8.10
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.8
+- Bump @fluentui-react-native/interactive-hooks to v0.22.7
+
+## 0.8.9
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.7
+
+## 0.8.8
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.6
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+
+## 0.8.7
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.5
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+
+## 0.8.6
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.4
+
+## 0.8.5
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.3
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/interactive-hooks to v0.22.4
+- Bump @fluentui-react-native/tokens to v0.20.2
+
+## 0.8.4
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.2
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/tokens to v0.20.1
+
+## 0.8.3
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Update token values for android. (email not defined)
+- Bump @fluentui-react-native/text to v0.19.1
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/interactive-hooks to v0.22.2
+
+## 0.8.2
+
+Fri, 23 Dec 2022 05:52:48 GMT
+
+### Patches
+
+- doc update for switch - android (rohanpd.work@gmail.com)
+
+## 0.8.1
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.0
+- Bump @fluentui-react-native/framework to v0.8.26
+- Bump @fluentui-react-native/interactive-hooks to v0.22.1
+- Bump @fluentui-react-native/tokens to v0.20.0
+
+## 0.8.0
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Minor changes
+
+- switch initial tokenization and tester app changes (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/text to v0.18.2
+- Bump @fluentui-react-native/framework to v0.8.25
+- Bump @fluentui-react-native/interactive-hooks to v0.22.0
+- Bump @fluentui-react-native/tokens to v0.19.1
+
+## 0.7.9
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.18.1
+- Bump @fluentui-react-native/framework to v0.8.24
+- Bump @fluentui-react-native/interactive-hooks to v0.21.5
+
+## 0.7.8
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.18.0
+- Bump @fluentui-react-native/framework to v0.8.23
+- Bump @fluentui-react-native/interactive-hooks to v0.21.4
+- Bump @fluentui-react-native/tokens to v0.19.0
+
+## 0.7.7
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.17.1
+- Bump @fluentui-react-native/framework to v0.8.22
+- Bump @fluentui-react-native/interactive-hooks to v0.21.3
+- Bump @fluentui-react-native/tokens to v0.18.1
+
+## 0.7.6
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.17.0
 
 ## 0.7.5
 

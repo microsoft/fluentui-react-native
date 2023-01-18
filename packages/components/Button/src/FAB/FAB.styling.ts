@@ -23,6 +23,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
               borderWidth: tokens.borderInnerWidth,
               borderRadius: tokens.borderRadius,
               overflow: 'hidden',
+              elevation: tokens.elevation,
             },
           };
         },
@@ -46,7 +47,6 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
         android_ripple: {
           color: tokens.rippleColor,
         },
-        elevation: tokens.elevation,
       }),
       ['backgroundColor', 'width', 'elevation', 'rippleColor', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),

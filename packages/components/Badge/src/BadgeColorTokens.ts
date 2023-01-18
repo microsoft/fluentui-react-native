@@ -59,7 +59,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.red.primary, colorDark: globalTokens.color.red.tint20 }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.red.primary, colorDark: globalTokens.color.red.tint30 }, t),
       },
       tint: {
         ...getTintColorProps(
@@ -78,7 +78,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.red.primary,
-            colorDark: globalTokens.color.red.tint20,
+            colorDark: globalTokens.color.red.tint30,
           },
           t,
         ),
@@ -94,7 +94,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.darkOrange.primary, colorDark: globalTokens.color.orange.tint20 }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.darkOrange.primary, colorDark: globalTokens.color.darkOrange.tint30 }, t),
       },
       tint: {
         ...getTintColorProps(
@@ -113,7 +113,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.darkOrange.primary,
-            colorDark: globalTokens.color.orange.tint20,
+            colorDark: globalTokens.color.darkOrange.tint30,
           },
           t,
         ),
@@ -165,7 +165,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.green.primary, colorDark: globalTokens.color.green.tint20 }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.green.primary, colorDark: globalTokens.color.green.tint40 }, t),
       },
       tint: {
         ...getTintColorProps(
@@ -184,7 +184,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.green.primary,
-            colorDark: globalTokens.color.green.tint20,
+            colorDark: globalTokens.color.green.tint40,
           },
           t,
         ),

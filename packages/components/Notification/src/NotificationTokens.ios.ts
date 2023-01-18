@@ -105,8 +105,8 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontSize: 15,
     fontWeight: '400',
     minHeight: 52,
-    padding: globalTokens.spacing.m,
-    paddingVertical: globalTokens.spacing.s,
+    padding: globalTokens.size160,
+    paddingVertical: globalTokens.size120,
     shadowToken: notificationShadowStyle,
     isBar: {
       borderRadius: 0,

@@ -61,6 +61,8 @@ function HelloWorldApp() {
 export default HelloWorldApp;
 ```
 
+If you run into an error that says `pragma and pragmaFrag cannot be set when runtime is automatic`, you can try [switching to classic runtime](https://babeljs.io/docs/en/babel-preset-react/#both-runtimes).
+
 ## Documentation
 
 ### Components and Controls

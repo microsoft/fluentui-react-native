@@ -5,6 +5,7 @@ import { RadioTokens } from './Radio.types';
 
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
   ({
+    rootHorizontalPadding: globalTokens.size40,
     borderColor: t.colors.transparentStroke,
     borderStyle: 'solid',
     borderWidth: globalTokens.stroke.width10,
@@ -15,25 +16,25 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioBorderStyle: 'solid',
     radioBorder: t.colors.neutralStrokeAccessible,
     color: t.colors.neutralForeground3,
-    radioSize: 20,
+    radioOuterCircleSize: 20,
     radioInnerCircleSize: 10,
-    labelMarginTop: globalTokens.spacing.xs + 1,
-    labelMarginRight: globalTokens.spacing.xxs,
-    labelMarginLeft: globalTokens.spacing.none,
+    labelMarginTop: globalTokens.size40 + 1,
+    labelMarginRight: globalTokens.size20,
+    labelMarginLeft: globalTokens.sizeNone,
     subtextVariant: 'caption1',
-    subtextMarginTop: globalTokens.spacing.xxs,
-    subtextMarginBottom: globalTokens.spacing.xxs,
-    marginTop: globalTokens.spacing.sNudge,
-    marginRight: globalTokens.spacing.sNudge,
-    marginBottom: globalTokens.spacing.sNudge,
-    marginLeft: globalTokens.spacing.xs,
+    subtextMarginTop: globalTokens.size20,
+    subtextMarginBottom: globalTokens.size20,
+    marginTop: globalTokens.size60,
+    marginRight: globalTokens.size60,
+    marginBottom: globalTokens.size60,
+    marginLeft: globalTokens.size40,
     flexDirection: 'row',
     alignItems: 'flex-start',
 
     labelPositionBelow: {
       flexDirection: 'column',
       alignItems: 'center',
-      marginLeft: globalTokens.spacing.none,
+      marginLeft: globalTokens.sizeNone,
     },
 
     disabled: {

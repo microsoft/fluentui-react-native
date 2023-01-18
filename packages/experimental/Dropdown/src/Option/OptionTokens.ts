@@ -11,8 +11,8 @@ export const defaultOptionTokens: TokenSettings<OptionTokens> = (t: Theme): Opti
   minHeight: 32,
   minWidth: 160,
   maxWidth: 300,
-  paddingHorizontal: globalTokens.spacing.sNudge,
-  spacingContentIcon: globalTokens.spacing.xs,
+  paddingHorizontal: globalTokens.size60,
+  spacingContentIcon: globalTokens.size40,
   variant: 'body1',
   hovered: {
     backgroundColor: t.colors.neutralBackground1Hover,

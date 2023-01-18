@@ -1,8 +1,204 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Mon, 28 Nov 2022 11:51:06 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.28
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.10
+- Bump @fluentui-react-native/framework to v0.8.33
+
+## 0.13.27
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.9
+- Bump @fluentui-react-native/framework to v0.8.32
+
+## 0.13.26
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.8
+- Bump @fluentui-react-native/framework to v0.8.31
+
+## 0.13.25
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.7
+
+## 0.13.24
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.6
+
+## 0.13.23
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.5
+- Bump @fluentui-react-native/framework to v0.8.30
+
+## 0.13.22
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.4
+
+## 0.13.21
+
+Thu, 29 Dec 2022 17:19:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.3
+
+## 0.13.20
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.2
+
+## 0.13.19
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.1
+- Bump @fluentui-react-native/framework to v0.8.29
+
+## 0.13.18
+
+Wed, 28 Dec 2022 15:44:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.19.0
+
+## 0.13.17
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.18.7
+- Bump @fluentui-react-native/framework to v0.8.28
+
+## 0.13.16
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.18.6
+- Bump @fluentui-react-native/framework to v0.8.27
+
+## 0.13.15
+
+Fri, 23 Dec 2022 11:03:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.18.5
+
+## 0.13.14
+
+Wed, 21 Dec 2022 06:39:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.18.4
+
+## 0.13.13
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.18.3
+- Bump @fluentui-react-native/framework to v0.8.26
+
+## 0.13.12
+
+Tue, 13 Dec 2022 23:18:04 GMT
+
+### Patches
+
+- Fix typos (ruaraki@microsoft.com)
+
+## 0.13.11
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.18.2
+- Bump @fluentui-react-native/framework to v0.8.25
+
+## 0.13.10
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.18.1
+- Bump @fluentui-react-native/framework to v0.8.24
+
+## 0.13.9
+
+Tue, 06 Dec 2022 02:02:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.18.0
+
+## 0.13.8
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.17.8
+- Bump @fluentui-react-native/framework to v0.8.23
+
+## 0.13.7
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.17.7
+- Bump @fluentui-react-native/framework to v0.8.22
+
+## 0.13.6
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.17.6
 
 ## 0.13.5
 

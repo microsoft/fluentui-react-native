@@ -6,9 +6,9 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
   ({
     borderWidth: 1,
     borderColor: globalTokens.color.white,
-    bottom: globalTokens.spacing.none,
-    right: globalTokens.spacing.none,
-    paddingHorizontal: globalTokens.spacing.none,
+    bottom: globalTokens.sizeNone,
+    right: globalTokens.sizeNone,
+    paddingHorizontal: globalTokens.sizeNone,
     backgroundColor: globalTokens.color.white,
     tiny: {
       width: 6,

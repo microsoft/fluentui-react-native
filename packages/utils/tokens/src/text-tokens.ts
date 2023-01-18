@@ -14,17 +14,25 @@ export interface FontStyleTokens {
   fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
   fontLineHeight?: TextStyle['lineHeight'];
   fontLetterSpacing?: TextStyle['letterSpacing'];
+  // Props below are used on iOS only. GH #2268: Import these from RN directly
+  fontDynamicTypeRamp?: string;
+  fontMaximumSize?: number;
 }
 
 export type FontTokens = FontStyleTokens & FontVariantTokens;
 
 export const fontStyles: TokenBuilder<FontTokens> = {
-  from: ({ fontFamily, fontLetterSpacing, fontLineHeight, fontSize, fontWeight, variant }: FontTokens, { typography }: Theme) => {
+  from: (
+    { fontDynamicTypeRamp, fontFamily, fontLetterSpacing, fontLineHeight, fontMaximumSize, fontSize, fontWeight, variant }: FontTokens,
+    { typography }: Theme,
+  ) => {
     const { families, sizes, weights, variants } = typography;
     if (
+      fontDynamicTypeRamp !== undefined ||
       fontFamily !== undefined ||
       fontLetterSpacing !== undefined ||
       fontLineHeight !== undefined ||
+      fontMaximumSize !== undefined ||
       fontSize !== undefined ||
       fontWeight !== undefined ||
       variant !== undefined
@@ -35,12 +43,23 @@ export const fontStyles: TokenBuilder<FontTokens> = {
         fontWeight: weights[fontWeight] ?? fontWeight ?? weights[variants[variant]?.weight] ?? variants[variant]?.weight,
         lineHeight: fontLineHeight ?? variants[variant]?.lineHeight,
         letterSpacing: fontLetterSpacing ?? variants[variant]?.letterSpacing,
+        dynamicTypeRamp: fontDynamicTypeRamp ?? variants[variant]?.dynamicTypeRamp,
+        maximumFontSize: fontMaximumSize,
       };
     }
 
     return {};
   },
-  keys: ['fontFamily', 'fontLineHeight', 'fontLetterSpacing', 'fontSize', 'fontWeight', 'variant'],
+  keys: [
+    'fontDynamicTypeRamp',
+    'fontFamily',
+    'fontLineHeight',
+    'fontLetterSpacing',
+    'fontMaximumSize',
+    'fontSize',
+    'fontWeight',
+    'variant',
+  ],
 };
 
 function _buildTextStyles(tokens: FontTokens, theme: Theme): ITextProps {

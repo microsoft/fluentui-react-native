@@ -1,8 +1,117 @@
 # Change Log - @fluentui-react-native/separator
 
-This log was last generated on Mon, 28 Nov 2022 11:51:06 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.6
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/theme-tokens to v0.23.0
+
+## 0.14.5
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.32
+
+## 0.14.4
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.31
+
+## 0.14.3
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.30
+
+## 0.14.2
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/theme-tokens to v0.22.5
+
+## 0.14.1
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/theme-tokens to v0.22.4
+
+## 0.14.0
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Minor changes
+
+- android seperator implem , tester app changes (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/theme-tokens to v0.22.3
+
+## 0.13.9
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.26
+
+## 0.13.8
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.25
+
+## 0.13.7
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.24
+
+## 0.13.6
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.23
+
+## 0.13.5
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.22
+
+## 0.13.4
+
+Tue, 29 Nov 2022 20:39:50 GMT
+
+### Patches
+
+- Update config (ruaraki@microsoft.com)
 
 ## 0.13.3
 

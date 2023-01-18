@@ -1,291 +1,292 @@
 import { TestDescription } from './TestComponents';
-import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
-import { AvatarTest, NativeAvatarTest, HOMEPAGE_AVATAR_BUTTON, HOMEPAGE_NATIVE_AVATAR_BUTTON } from './TestComponents/Avatar';
-import { BadgeTest, HOMEPAGE_BADGE_BUTTON } from './TestComponents/Badge';
-import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
-import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
-import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
-import { CornerRadiusTokensTest, HOMEPAGE_CORNERRADIUS_BUTTON } from './TestComponents/CornerRadius';
-import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
-import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
+import { ActivityIndicatorTest } from './TestComponents/ActivityIndicator';
+import { AvatarTest, NativeAvatarTest } from './TestComponents/Avatar';
+import { BadgeTest } from './TestComponents/Badge';
+import { ButtonTest } from './TestComponents/Button';
+import { CalloutTest } from './TestComponents/Callout';
+import { CheckboxLegacyTest } from './TestComponents/CheckboxLegacy';
+import { CheckboxV1Test } from './TestComponents/CheckboxV1';
+import { ContextualMenuTest } from './TestComponents/ContextualMenu';
+import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
-// import { DrawerTest, HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
-// import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
-import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
-import { FocusZoneTest, HOMEPAGE_FOCUSZONE_BUTTON } from './TestComponents/FocusZone';
-import { IconTest, HOMEPAGE_ICON_BUTTON } from './TestComponents/Icon';
-import { LinkTest, HOMEPAGE_LINK_BUTTON } from './TestComponents/Link';
-import { MenuTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/Menu';
-import { MenuButtonTest, HOMEPAGE_MENUBUTTON_BUTTON } from './TestComponents/MenuButton';
-import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
+// import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
+// import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
+import { FocusTrapTest } from './TestComponents/FocusTrapZone';
+import { FocusZoneTest } from './TestComponents/FocusZone';
+import { IconTest } from './TestComponents/Icon';
+import { LinkLegacyTest } from './TestComponents/LinkLegacy';
+import { LinkV1Test } from './TestComponents/LinkV1';
+import { MenuTest } from './TestComponents/Menu';
+import { MenuButtonLegacyTest } from './TestComponents/MenuButtonLegacy';
+import { MenuButtonV1Test } from './TestComponents/MenuButtonV1';
 import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
-import { PersonaTest, HOMEPAGE_PERSONA_BUTTON } from './TestComponents/Persona';
-import { PersonaCoinTest, HOMEPAGE_PERSONACOIN_BUTTON } from './TestComponents/PersonaCoin';
-import { PressableTest, HOMEPAGE_PRESSABLE_BUTTON } from './TestComponents/Pressable';
-import { RadioGroupTest, HOMEPAGE_RADIOGROUP_BUTTON } from './TestComponents/RadioGroup';
-import { RadioGroupExperimentalTest, HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from './TestComponents/RadioGroupExperimental';
-import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './TestComponents/Separator';
-import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
-import { ShimmerTest, HOMEPAGE_SHIMMER_BUTTON } from './TestComponents/Shimmer';
-import { SpacingTokensTest, HOMEPAGE_SPACING_BUTTON } from './TestComponents/Spacing';
-import { StrokeWidthTest, HOMEPAGE_STROKEWIDTH_BUTTON } from './TestComponents/StrokeWidth';
-import { SvgTest, HOMEPAGE_SVG_BUTTON } from './TestComponents/Svg';
-import { SwitchTest, HOMEPAGE_SWITCH_BUTTON } from './TestComponents/Switch';
-import { TabsTest, HOMEPAGE_TABS_BUTTON } from './TestComponents/Tabs';
-import { ExperimentalTabsTest, HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from './TestComponents/TabsExperimental';
-import { TextTest, HOMEPAGE_TEXT_BUTTON } from './TestComponents/Text';
-import { TextExperimentalTest, HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './TestComponents/TextExperimental';
-import { ThemeTest, HOMEPAGE_THEME_BUTTON } from './TestComponents/Theme';
-import { TokenTest, HOMEPAGE_TOKEN_BUTTON } from './TestComponents/Tokens';
-import { ExperimentalLinkTest, HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from './TestComponents/LinkExperimental';
+import { PersonaTest } from './TestComponents/Persona';
+import { PersonaCoinTest } from './TestComponents/PersonaCoin';
+import { PressableTest } from './TestComponents/Pressable';
+import { RadioGroupLegacyTest } from './TestComponents/RadioGroupLegacy';
+import { RadioGroupV1Test } from './TestComponents/RadioGroupV1';
+import { SeparatorTest } from './TestComponents/Separator';
+import { ShadowTest } from './TestComponents/Shadow';
+import { ShimmerTest } from './TestComponents/Shimmer';
+import { SpacingTokensTest } from './TestComponents/Spacing';
+import { StrokeWidthTest } from './TestComponents/StrokeWidth';
+import { SvgTest } from './TestComponents/Svg';
+import { SwitchTest } from './TestComponents/Switch';
+import { TabsLegacyTest } from './TestComponents/TabsLegacy';
+import { TabsV1Test } from './TestComponents/TabsV1';
+import { TextLegacyTest } from './TestComponents/TextLegacy';
+import { TextV1Test } from './TestComponents/TextV1';
+import { ThemeTest } from './TestComponents/Theme';
+import { TokenTest } from './TestComponents/Tokens';
+import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator',
     component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+    testPageButton: Constants.HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Avatar',
     component: AvatarTest,
-    testPage: HOMEPAGE_AVATAR_BUTTON,
+    testPageButton: Constants.HOMEPAGE_AVATAR_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Avatar (Native)',
     component: NativeAvatarTest,
-    testPage: HOMEPAGE_NATIVE_AVATAR_BUTTON,
+    testPageButton: Constants.HOMEPAGE_NATIVE_AVATAR_BUTTON,
     platforms: ['ios', 'macos'],
   },
   {
     name: 'Badge',
     component: BadgeTest,
-    testPage: HOMEPAGE_BADGE_BUTTON,
+    testPageButton: Constants.HOMEPAGE_BADGE_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Button',
     component: ButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTON,
+    testPageButton: Constants.HOMEPAGE_BUTTON_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Callout',
     component: CalloutTest,
-    testPage: HOMEPAGE_CALLOUT_BUTTON,
+    testPageButton: Constants.HOMEPAGE_CALLOUT_BUTTON,
     platforms: ['android', 'macos', 'win32'],
   },
   {
-    name: 'Checkbox',
-    component: CheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_BUTTON,
+    name: 'Checkbox Legacy',
+    component: CheckboxLegacyTest,
+    testPageButton: Constants.HOMEPAGE_CHECKBOX_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'Checkbox (Experimental)',
-    component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
+    name: 'Checkbox V1',
+    component: CheckboxV1Test,
+    testPageButton: Constants.HOMEPAGE_CHECKBOXV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
   },
   {
     name: 'ContextualMenu',
     component: ContextualMenuTest,
-    testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
+    testPageButton: Constants.HOMEPAGE_CONTEXTUALMENU_BUTTON,
     platforms: ['android', 'macos', 'win32'],
   },
   {
     name: 'Corner Radius Tokens',
     component: CornerRadiusTokensTest,
-    testPage: HOMEPAGE_CORNERRADIUS_BUTTON,
+    testPageButton: Constants.HOMEPAGE_CORNERRADIUS_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Date Picker (Native)',
     component: NativeDatePickerTest,
-    testPage: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
+    testPageButton: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
     platforms: ['ios'],
   },
   {
     name: 'Dropdown',
     component: DropdownTest,
-    testPage: HOMEPAGE_DROPDOWN_BUTTON,
+    testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
     platforms: ['macos', 'win32'],
   },
   // {
   //   name: 'Drawer',
   //   component: DrawerTest,
-  //   testPage: HOMEPAGE_DRAWER_BUTTON,
+  //   testPage: Constants.HOMEPAGE_DRAWER_BUTTON,
   //   platforms: ['android'],
   // },
   // GH##1027 Temporarily disabling while the test doesn't load
   // {
   //   name: 'Expander',
   //   component: ExpanderTest,
-  //   testPage: HOMEPAGE_EXPANDER_BUTTON,
+  //   testPage: Constants.HOMEPAGE_EXPANDER_BUTTON,
   //   platforms: ['windows'],
   // },
   {
     name: 'Focus Trap Zone',
     component: FocusTrapTest,
-    testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-    platforms: ['android', 'win32'],
+    testPageButton: Constants.HOMEPAGE_FOCUSTRAPZONE_BUTTON,
+    platforms: ['win32'],
   },
   {
     name: 'FocusZone',
     component: FocusZoneTest,
-    testPage: HOMEPAGE_FOCUSZONE_BUTTON,
+    testPageButton: Constants.HOMEPAGE_FOCUSZONE_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
     name: 'Icon',
     component: IconTest,
-    testPage: HOMEPAGE_ICON_BUTTON,
+    testPageButton: Constants.HOMEPAGE_ICON_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
-    name: 'Link',
-    component: LinkTest,
-    testPage: HOMEPAGE_LINK_BUTTON,
+    name: 'Link Legacy',
+    component: LinkLegacyTest,
+    testPageButton: Constants.HOMEPAGE_LINK_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'Link (Experimental)',
-    component: ExperimentalLinkTest,
-    testPage: HOMEPAGE_EXPERIMENTAL_LINK_BUTTON,
-    platforms: ['win32'],
+    name: 'Link V1',
+    component: LinkV1Test,
+    testPageButton: Constants.HOMEPAGE_LINKV1_BUTTON,
+    platforms: ['win32', 'android'],
   },
   {
     name: 'Menu',
     component: MenuTest,
-    testPage: HOMEPAGE_MENU_BUTTON,
+    testPageButton: Constants.HOMEPAGE_MENU_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
-    name: 'MenuButton',
-    component: MenuButtonTest,
-    testPage: HOMEPAGE_MENUBUTTON_BUTTON,
+    name: 'MenuButton Legacy',
+    component: MenuButtonLegacyTest,
+    testPageButton: Constants.HOMEPAGE_MENUBUTTON_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
-    name: 'MenuButton (Experimental)',
-    component: ExperimentalMenuButtonTest,
-    testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
+    name: 'MenuButton V1',
+    component: MenuButtonV1Test,
+    testPageButton: Constants.HOMEPAGE_MENUBUTTONV1_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
     name: 'Notification',
     component: NotificationTest,
-    testPage: HOMEPAGE_NOTIFICATION_BUTTON,
+    testPageButton: HOMEPAGE_NOTIFICATION_BUTTON,
     platforms: ['android', 'ios'],
   },
   {
     name: 'Persona',
     component: PersonaTest,
-    testPage: HOMEPAGE_PERSONA_BUTTON,
+    testPageButton: Constants.HOMEPAGE_PERSONA_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'PersonaCoin',
     component: PersonaCoinTest,
-    testPage: HOMEPAGE_PERSONACOIN_BUTTON,
+    testPageButton: Constants.HOMEPAGE_PERSONACOIN_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Pressable',
     component: PressableTest,
-    testPage: HOMEPAGE_PRESSABLE_BUTTON,
+    testPageButton: Constants.HOMEPAGE_PRESSABLE_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'RadioGroup',
-    component: RadioGroupTest,
-    testPage: HOMEPAGE_RADIOGROUP_BUTTON,
+    name: 'RadioGroup Legacy',
+    component: RadioGroupLegacyTest,
+    testPageButton: Constants.HOMEPAGE_RADIOGROUP_BUTTON,
     platforms: ['macos', 'win32'],
   },
   {
-    name: 'RadioGroup (Experimental)',
-    component: RadioGroupExperimentalTest,
-    testPage: HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
-    platforms: ['macos', 'win32'],
+    name: 'RadioGroup V1',
+    component: RadioGroupV1Test,
+    testPageButton: Constants.HOMEPAGE_RADIOGROUPV1_BUTTON,
+    platforms: ['android', 'macos', 'win32'],
   },
   {
     name: 'Separator',
     component: SeparatorTest,
-    testPage: HOMEPAGE_SEPARATOR_BUTTON,
+    testPageButton: Constants.HOMEPAGE_SEPARATOR_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Shadow',
     component: ShadowTest,
-    testPage: HOMEPAGE_SHADOW_BUTTON,
+    testPageButton: Constants.HOMEPAGE_SHADOW_BUTTON,
     platforms: ['ios', 'macos', 'win32'],
   },
   {
     name: 'Shimmer',
     component: ShimmerTest,
-    testPage: HOMEPAGE_SHIMMER_BUTTON,
+    testPageButton: Constants.HOMEPAGE_SHIMMER_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Spacing Tokens',
     component: SpacingTokensTest,
-    testPage: HOMEPAGE_SPACING_BUTTON,
-    platforms: ['ios'],
+    testPageButton: Constants.HOMEPAGE_SPACING_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Stroke Width Tokens',
     component: StrokeWidthTest,
-    testPage: HOMEPAGE_STROKEWIDTH_BUTTON,
+    testPageButton: Constants.HOMEPAGE_STROKEWIDTH_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Svg',
     component: SvgTest,
-    testPage: HOMEPAGE_SVG_BUTTON,
+    testPageButton: Constants.HOMEPAGE_SVG_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Switch',
     component: SwitchTest,
-    testPage: HOMEPAGE_SWITCH_BUTTON,
-    platforms: ['win32'],
-  },
-  {
-    name: 'Tabs',
-    component: TabsTest,
-    testPage: HOMEPAGE_TABS_BUTTON,
-    platforms: ['macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Tabs (Experimental)',
-    component: ExperimentalTabsTest,
-    testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
-    platforms: ['macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Text',
-    component: TextTest,
-    testPage: HOMEPAGE_TEXT_BUTTON,
+    testPageButton: Constants.HOMEPAGE_SWITCH_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'Text (Experimental)',
-    component: TextExperimentalTest,
-    testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
+    name: 'Tabs Legacy',
+    component: TabsLegacyTest,
+    testPageButton: Constants.HOMEPAGE_TABS_BUTTON,
+    platforms: ['macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Tabs V1',
+    component: TabsV1Test,
+    testPageButton: Constants.HOMEPAGE_TABSV1_BUTTON,
+    platforms: ['macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Text Legacy',
+    component: TextLegacyTest,
+    testPageButton: Constants.HOMEPAGE_TEXT_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Text V1',
+    component: TextV1Test,
+    testPageButton: Constants.HOMEPAGE_TEXTV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Theme',
     component: ThemeTest,
-    testPage: HOMEPAGE_THEME_BUTTON,
+    testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Tokens',
     component: TokenTest,
-    testPage: HOMEPAGE_TOKEN_BUTTON,
+    testPageButton: Constants.HOMEPAGE_TOKEN_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
 ];

@@ -8,7 +8,22 @@ export const textName = 'Text';
  * Text tokens, these are the internally configurable values for Text elements. In particular these
  * drive decisions on how to build the styles
  */
-export type TextTokens = Omit<FontTokens, 'fontFamily'> & IForegroundColorTokens & Omit<TextStyle, 'fontSize' | 'fontWeight' | 'color'>;
+export type TextTokens = Omit<FontTokens, 'fontFamily'> &
+  IForegroundColorTokens &
+  Omit<TextStyle, 'fontSize' | 'fontWeight' | 'color'> & {
+    // GH #2268: Remove these once RN Core properly supports Dynamic Type scaling
+    /**
+     * (iOS only) The Dynamic Type ramp that a Text element should follow as the user changes their
+     * preferred content size.
+     */
+    dynamicTypeRamp?: string;
+
+    /**
+     * (iOS only) The maximum font size that a Text element will grow to as the user changes their
+     * preferred content size.
+     */
+    maximumFontSize?: number;
+  };
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify';
 export type TextFont = 'base' | 'monospace' | 'numeric';

@@ -13,15 +13,13 @@ exports[`FocusZone No Props One child 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -29,29 +27,31 @@ exports[`FocusZone No Props One child 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;
@@ -63,15 +63,13 @@ exports[`FocusZone No Props Three children 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -79,42 +77,42 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -122,42 +120,42 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -165,29 +163,31 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;
@@ -199,15 +199,13 @@ exports[`FocusZone No Props Two children 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -215,42 +213,42 @@ exports[`FocusZone No Props Two children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -258,29 +256,31 @@ exports[`FocusZone No Props Two children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;
@@ -295,15 +295,13 @@ exports[`FocusZone With Props All Props 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -311,42 +309,42 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -354,42 +352,42 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -397,29 +395,31 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;
@@ -431,15 +431,13 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -447,42 +445,42 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -490,42 +488,42 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -533,29 +531,31 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;
@@ -568,15 +568,13 @@ exports[`FocusZone With Props disabled Prop 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -584,42 +582,42 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -627,42 +625,42 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -670,29 +668,31 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;
@@ -705,15 +705,13 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -721,42 +719,42 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -764,42 +762,42 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -807,29 +805,31 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;
@@ -841,15 +841,13 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -857,42 +855,42 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -900,42 +898,42 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -943,29 +941,31 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;
@@ -978,15 +978,13 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -994,42 +992,42 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1037,42 +1035,42 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
   <View
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackground",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
     onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1080,29 +1078,31 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "backgroundColor": "#2196F3",
-          "borderRadius": 2,
-          "elevation": 4,
-        },
-      ]
+      Object {
+        "opacity": 1,
+      }
     }
   >
-    <Text
+    <View
       style={
         Array [
-          Object {
-            "color": "white",
-            "fontWeight": "500",
-            "margin": 8,
-            "textAlign": "center",
-          },
+          undefined,
         ]
       }
     >
-      BUTTON
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        button
+      </Text>
+    </View>
   </View>
 </RCTFocusZone>
 `;

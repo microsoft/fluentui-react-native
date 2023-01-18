@@ -1,12 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Link all props 1`] = `
+exports[`Link component tests Default Link 1`] = `
 <View
   accessibilityRole="link"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   cursor="pointer"
+  disabled={false}
+  enableFocusRing={true}
   focusable={true}
-  onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -19,41 +25,42 @@ exports[`Link all props 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "flex-start",
-      "display": "flex",
+      "alignSelf": "flex-start",
     }
   }
-  url="https://www.bing.com"
+  tooltip="https://www.bing.com"
 >
   <Text
+    ellipsizeMode="tail"
+    focusable={false}
+    numberOfLines={0}
     style={
       Object {
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 2,
+        "alignSelf": "flex-start",
         "color": "#0f6cbd",
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
-        "fontWeight": "400",
         "margin": 0,
-        "textAlign": "center",
-        "textDecorationLine": "underline",
+        "variant": "caption1Strong",
       }
     }
   >
-    Link all props
+    Link to Bing
   </Text>
 </View>
 `;
 
-exports[`Link with child 1`] = `
+exports[`Link component tests Default Link as a pressable 1`] = `
 <View
   accessibilityRole="link"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   cursor="pointer"
+  disabled={false}
+  enableFocusRing={true}
   focusable={true}
-  onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -66,31 +73,112 @@ exports[`Link with child 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "flex-start",
-      "display": "flex",
+      "alignSelf": "flex-start",
     }
   }
-  url="https://www.bing.com"
 >
   <Text
+    ellipsizeMode="tail"
+    focusable={false}
+    numberOfLines={0}
     style={
       Object {
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 2,
+        "alignSelf": "flex-start",
         "color": "#0f6cbd",
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
-        "fontWeight": "400",
         "margin": 0,
-        "textAlign": "center",
-        "textDecorationLine": "underline",
+        "variant": "caption1Strong",
       }
     }
   >
-    Link with child
+    Link to Bing
   </Text>
-  <View />
+</View>
+`;
+
+exports[`Link component tests Inline Link 1`] = `
+<Text
+  accessibilityRole="link"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  cursor="pointer"
+  disabled={false}
+  ellipsizeMode="tail"
+  enableFocusRing={true}
+  focusable={true}
+  numberOfLines={0}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignSelf": "flex-start",
+      "color": "#0f6cbd",
+      "margin": 0,
+      "textDecorationLine": "underline",
+      "variant": "caption1Strong",
+    }
+  }
+  tooltip="https://www.bing.com"
+>
+  Link to Bing
+</Text>
+`;
+
+exports[`Link component tests Subtle Link 1`] = `
+<View
+  accessibilityRole="link"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  appearance="subtle"
+  cursor="pointer"
+  disabled={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignSelf": "flex-start",
+    }
+  }
+  tooltip="https://www.bing.com"
+>
+  <Text
+    ellipsizeMode="tail"
+    focusable={false}
+    numberOfLines={0}
+    style={
+      Object {
+        "alignSelf": "flex-start",
+        "color": "#0f6cbd",
+        "margin": 0,
+        "variant": "caption1Strong",
+      }
+    }
+  >
+    Link to Bing
+  </Text>
 </View>
 `;

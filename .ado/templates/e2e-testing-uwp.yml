@@ -59,7 +59,7 @@ steps:
 
   - script: |
       yarn e2etest:windows
-    workingDirectory: apps\fluent-tester
+    workingDirectory: apps\E2E
     displayName: 'run E2E UWP tests'
     condition: succeeded()
 
@@ -70,4 +70,4 @@ steps:
       applicationType: UWP
       platform: windows
       buildArtifacts: variables['task.Build.status']
-      directory: $(Build.SourcesDirectory)/apps/fluent-tester
+      directory: $(Build.SourcesDirectory)/apps/E2E

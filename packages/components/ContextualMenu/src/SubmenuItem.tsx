@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { I18nManager, Platform, Pressable, View } from 'react-native';
+import { I18nManager, Platform, View } from 'react-native';
 import {
   SubmenuItemSlotProps,
   SubmenuItemState,
@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { usePressableState, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useKeyDownProps, useViewCommandFocus, useAsPressable } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon, SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
 import { Svg, G, Path, SvgProps } from 'react-native-svg';
@@ -63,7 +63,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       }
     }, [context, disabled, itemKey, onClick]);
 
-    const pressable = usePressableState({
+    const pressable = useAsPressable({
       ...rest,
       onPress: onItemPress,
       onHoverIn: onItemHoverIn,
@@ -74,8 +74,8 @@ export const SubmenuItem = compose<SubmenuItemType>({
     /**
      * GH #1267
      * We want onMouseEnter to fire right away to set focus, and then Pressable's onHoverIn to fire after a delay to show the submenu.
-     * To achieve this, we override the onMouseEnter handler returned by usePressableState, and replace it with our own. Inside our own
-     * onMouseEnter handler, we call usePressableState's onMouseEnter handler, which incorporates the delay passed to delayHoverIn
+     * To achieve this, we override the onMouseEnter handler returned by useAsPressable, and replace it with our own. Inside our own
+     * onMouseEnter handler, we call useAsPressable's onMouseEnter handler, which incorporates the delay passed to delayHoverIn
      * In the future, we can avoid needing to override onMouseEnter by handling submenu rendering internally rather than depending on the
      * client to conditionally render it with onHoverIn.
      */
@@ -188,7 +188,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     );
   },
   slots: {
-    root: Pressable,
+    root: View,
     startstack: View,
     icon: Icon as React.ComponentType,
     content: Text,

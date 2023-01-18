@@ -8,6 +8,11 @@ export {
   PrimaryButton,
   StealthButton,
   buttonName,
+  compoundButtonName,
+  fabName,
+  toggleButtonName,
+  useButton,
+  useToggleButton,
 } from '@fluentui-react-native/button';
 export type {
   ButtonAppearance,
@@ -20,6 +25,15 @@ export type {
   ButtonInfo,
   ButtonTokens,
   ButtonType,
+  CompoundButtonProps,
+  CompoundButtonSlotProps,
+  CompoundButtonTokens,
+  CompoundButtonType,
+  FABSize,
+  FABSlotProps,
+  FABProps,
+  FABTokens,
+  FABType,
   IButtonInfo,
   IButtonProps,
   IButtonRenderData,
@@ -27,6 +41,11 @@ export type {
   IButtonState,
   IButtonTokens,
   IButtonType,
+  ToggleButtonProps,
+  ToggleButtonSlotProps,
+  ToggleButtonInfo,
+  ToggleButtonTokens,
+  ToggleButtonType,
 } from '@fluentui-react-native/button';
 
 export { Callout, calloutName } from '@fluentui-react-native/callout';
@@ -41,7 +60,7 @@ export type {
   RestoreFocusEvent,
 } from '@fluentui-react-native/callout';
 
-export { Checkbox, checkboxName, CheckboxV1, checkboxNameV1 } from '@fluentui-react-native/checkbox';
+export { Checkbox, checkboxName, CheckboxV1, checkboxNameV1, useCheckbox } from '@fluentui-react-native/checkbox';
 export type {
   CheckboxInfo,
   CheckboxProps,
@@ -114,7 +133,18 @@ export type {
   NavigateAtEnd,
 } from '@fluentui-react-native/focus-zone';
 
-export { Link, linkName, useAsLink } from '@fluentui-react-native/link';
+export {
+  Link,
+  linkName,
+  useAsLink,
+  linkNameV1,
+  linkStylingSettings,
+  useLink,
+  LinkV1,
+  linkLookup,
+  linkStates,
+  defaultLinkTokens,
+} from '@fluentui-react-native/link';
 export type {
   ILinkHooks,
   ILinkInfo,
@@ -126,6 +156,12 @@ export type {
   ILinkTokens,
   ILinkType,
   IWithLinkOptions,
+  LinkTokens,
+  LinkProps,
+  LinkAppearance,
+  LinkState,
+  LinkSlotProps,
+  LinkType,
 } from '@fluentui-react-native/link';
 
 export { Persona, personaName } from '@fluentui-react-native/persona';
@@ -183,6 +219,8 @@ export type {
   TextProps,
   TextTokens,
   Caption1,
+  Caption1Strong,
+  Caption2,
   Body1,
   Body1Strong,
   Body2,
@@ -193,6 +231,8 @@ export type {
   Subtitle2Strong,
   Title1,
   Title1Strong,
+  Title2,
+  Title3,
   LargeTitle,
   Display,
   ITextProps,
@@ -200,6 +240,11 @@ export type {
 } from '@fluentui-react-native/text';
 
 export {
+  getAccessibilityState,
+  isAccessibilityActionEvent,
+  isGestureResponderEvent,
+  isKeyPressEvent,
+  isMouseEvent,
   normalizeRect,
   preferKeyDownForKeyEvents,
   useAsPressable,
@@ -225,6 +270,7 @@ export type {
   IFocusState,
   IFocusable,
   IHoverState,
+  InteractionEvent,
   IPressState,
   IPressableHooks,
   IPressableOptions,

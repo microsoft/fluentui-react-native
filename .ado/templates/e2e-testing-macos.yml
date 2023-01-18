@@ -13,7 +13,7 @@ steps:
 
   - script: |
       yarn e2etest:macos
-    workingDirectory: apps/fluent-tester
+    workingDirectory: apps/E2E
     displayName: 'run E2E macos tests'
     condition: succeeded()
 
@@ -22,4 +22,4 @@ steps:
       applicationType: macos
       platform: 'macos'
       buildArtifacts: variables['task.Build.status']
-      directory: $(Build.SourcesDirectory)/apps/fluent-tester
+      directory: $(Build.SourcesDirectory)/apps/E2E

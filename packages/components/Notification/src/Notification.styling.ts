@@ -58,10 +58,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            fontSize: 15,
-            fontWeight: '600',
-            letterSpacing: -0.24, // iOS only prop
-            lineHeight: 20,
           },
         };
       },

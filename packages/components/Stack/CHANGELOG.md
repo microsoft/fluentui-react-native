@@ -1,8 +1,181 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Mon, 28 Nov 2022 11:51:06 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.43
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.33
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/tokens to v0.20.3
+- Bump @uifabricshared/foundation-tokens to v0.12.19
+- Bump @fluentui-react-native/text to v0.19.11
+
+## 0.7.42
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.32
+- Bump @fluentui-react-native/framework to v0.8.32
+- Bump @fluentui-react-native/text to v0.19.10
+
+## 0.7.41
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.31
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/text to v0.19.9
+
+## 0.7.40
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.8
+
+## 0.7.39
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.7
+
+## 0.7.38
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.7.37
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.5
+
+## 0.7.36
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.4
+
+## 0.7.35
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.30
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/tokens to v0.20.2
+- Bump @uifabricshared/foundation-tokens to v0.12.18
+- Bump @fluentui-react-native/text to v0.19.3
+
+## 0.7.34
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.29
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/tokens to v0.20.1
+- Bump @uifabricshared/foundation-tokens to v0.12.17
+- Bump @fluentui-react-native/text to v0.19.2
+
+## 0.7.33
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.28
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/text to v0.19.1
+
+## 0.7.32
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.27
+- Bump @fluentui-react-native/framework to v0.8.26
+- Bump @fluentui-react-native/tokens to v0.20.0
+- Bump @uifabricshared/foundation-tokens to v0.12.16
+- Bump @fluentui-react-native/text to v0.19.0
+
+## 0.7.31
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.26
+- Bump @fluentui-react-native/framework to v0.8.25
+- Bump @fluentui-react-native/tokens to v0.19.1
+- Bump @uifabricshared/foundation-tokens to v0.12.15
+- Bump @fluentui-react-native/text to v0.18.2
+
+## 0.7.30
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.25
+- Bump @fluentui-react-native/framework to v0.8.24
+- Bump @fluentui-react-native/text to v0.18.1
+
+## 0.7.29
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.24
+- Bump @fluentui-react-native/framework to v0.8.23
+- Bump @fluentui-react-native/tokens to v0.19.0
+- Bump @uifabricshared/foundation-tokens to v0.12.14
+- Bump @fluentui-react-native/text to v0.18.0
+
+## 0.7.28
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.23
+- Bump @fluentui-react-native/framework to v0.8.22
+- Bump @fluentui-react-native/tokens to v0.18.1
+- Bump @uifabricshared/foundation-tokens to v0.12.13
+- Bump @fluentui-react-native/text to v0.17.1
+
+## 0.7.27
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.17.0
 
 ## 0.7.26
 

@@ -17,7 +17,7 @@ exports[`Badge component tests Badge all props 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 24,
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "position": "relative",
       "right": 0,
       "width": undefined,
@@ -42,14 +42,15 @@ exports[`Badge component tests Badge all props 1`] = `
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
-        "marginEnd": 4,
+        "marginEnd": 2,
       }
     }
   >
@@ -73,7 +74,7 @@ exports[`Badge component tests Badge tokens 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 24,
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "position": "relative",
       "right": 0,
       "width": undefined,
@@ -84,11 +85,12 @@ exports[`Badge component tests Badge tokens 1`] = `
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -114,7 +116,7 @@ exports[`Badge component tests Empty Badge 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 24,
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "position": "relative",
       "right": 0,
       "width": undefined,
@@ -140,7 +142,7 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "right": 0,
       "width": undefined,
     }
@@ -163,11 +165,12 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -197,7 +200,7 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "right": 0,
       "width": undefined,
     }
@@ -206,11 +209,12 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -240,7 +244,7 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "right": 0,
       "width": undefined,
     }
@@ -249,11 +253,12 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -284,7 +289,7 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "right": 0,
       "width": undefined,
     }
@@ -293,11 +298,12 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -327,7 +333,7 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "right": 0,
       "width": undefined,
     }
@@ -336,11 +342,12 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -371,13 +378,13 @@ exports[`PresenceBadge component tests PresenceBadge props 1`] = `
       "borderColor": "#ffffff",
       "borderRadius": 9999,
       "borderWidth": 2,
-      "bottom": -4,
+      "bottom": -2,
       "flexDirection": "row",
       "height": 24,
       "justifyContent": "center",
-      "paddingHorizontal": 8,
+      "paddingHorizontal": 4,
       "position": "relative",
-      "right": -4,
+      "right": -2,
       "width": 24,
     }
   }

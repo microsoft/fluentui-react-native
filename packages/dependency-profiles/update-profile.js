@@ -52,13 +52,17 @@ const { major, minor } = semver.coerce(devDependencies['react-native']);
 
 let profiles;
 
+// When updating FURN to a new react-native version, save the profile for
+// the current react-native version in index.js to a new file under src named
+// "furn-profile-X.Y.js" and add that profile here. For example:
+//
+// profiles = {
+//   [`${major}.${minor}`]: packages,
+//   ...require('./src/furn-profile-0.68.js')
+// };
+
 profiles = {
   [`${major}.${minor}`]: packages,
-  // When updating FURN to a new version of react-native, save the profile for
-  // the latest react-native version in index.js to a new file and add that
-  // profile here. For example:
-  //
-  // ...require('./src/furn-profile-0.68.js')
 };
 
 const source = [

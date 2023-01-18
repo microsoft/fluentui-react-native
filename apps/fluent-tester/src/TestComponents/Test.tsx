@@ -7,6 +7,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
+import { testProps } from './Common/TestProps';
 
 export type TestSection = {
   name: string;
@@ -14,7 +15,7 @@ export type TestSection = {
   component: React.FunctionComponent;
 };
 
-export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A';
+export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A' | 'Deprecated';
 export type PlatformStatus = {
   win32Status: Status;
   uwpStatus: Status;
@@ -37,6 +38,7 @@ const definitions = {
   Experimental: 'Control code checked into repo, but not ready for partner use.',
   Backlog: 'Control is in plan and on our backlog to deliver.',
   'N/A': 'Control is not in current plan.',
+  Deprecated: 'Control is being deprecated.',
 };
 
 const styles = StyleSheet.create({
@@ -118,8 +120,12 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
-        <Button testID="Focus_Button" style={styles.e2eFocusButton}>
-          E2E Testing Button
+        <Button
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps('Focus_Button')}
+          style={styles.e2eFocusButton}
+        >
+          E2E Button
         </Button>
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
@@ -171,7 +177,12 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         const TestComponent = section.component;
         return (
           <View key={index}>
-            <Text style={styles.section} variant="headerSemibold" testID={section.testID}>
+            <Text
+              style={styles.section}
+              variant="headerSemibold"
+              /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+              {...testProps(section.testID)}
+            >
               {section.name}
             </Text>
             <Separator />

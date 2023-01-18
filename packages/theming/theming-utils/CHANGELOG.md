@@ -1,8 +1,70 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 16 Nov 2022 08:47:25 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.0
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Minor changes
+
+- Set up iOS color alias tokens (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.29.0
+- Bump @fluentui-react-native/tokens to v0.20.3
+
+## 0.21.0
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Minor changes
+
+- Use theming-utils to fetch font alias tokens (adam.gleitman@gmail.com)
+- Bump @fluentui-react-native/theme-types to v0.28.0
+- Bump @fluentui-react-native/tokens to v0.20.2
+
+## 0.20.2
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.27.1
+
+## 0.20.1
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.27.0
+
+## 0.20.0
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Minor changes
+
+- switch initial tokenization and tester app changes (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/theme-types to v0.26.0
+
+## 0.19.1
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.25.0
+
+## 0.19.0
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Minor changes
+
+- theme spacing tokens change (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/theme-types to v0.24.0
 
 ## 0.18.3
 

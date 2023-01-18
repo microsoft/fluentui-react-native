@@ -61,14 +61,8 @@ jobs:
       # sets-up specifics for android dependency like NDK & emulator
       - template: templates/android-dep-setup.yml
 
-      - bash: |
-          echo "yarn $(platform)"
-          yarn $(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)'
-        env:
-          JAVA_HOME: $(JAVA_HOME_11_X64)
-          PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
+      # builds a debug apk and runs E2E tests on it
+      - template: templates/e2e-testing-android.yml
 
   - job: macOSPR
     displayName: macOS PR
@@ -145,8 +139,7 @@ jobs:
   # Windows bundling and end to end testing
   - job: WindowsPR
     displayName: Windows PR
-    pool:
-      vmImage: 'windows-2019'
+    pool: rnw-pool-4
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -155,6 +148,7 @@ jobs:
     steps:
       - checkout: self
         persistCredentials: true
+        fetchDepth: 5
 
       # yarn and minimal build to get set up
       - template: templates/setup-repo-min-build.yml

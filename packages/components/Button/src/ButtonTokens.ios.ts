@@ -9,68 +9,68 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       width: '100%',
     },
     medium: {
-      padding: globalTokens.spacing.xs,
+      padding: globalTokens.size80,
       borderWidth: globalTokens.stroke.width10,
       iconSize: 16,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.spacing.sNudge,
+        padding: globalTokens.size100,
       },
       hasContent: {
         minWidth: 96,
-        paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width10,
+        paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.spacing.sNudge,
+          spacingIconContentAfter: globalTokens.size100,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.spacing.sNudge,
+          spacingIconContentBefore: globalTokens.size100,
         },
         focused: {
-          paddingHorizontal: globalTokens.spacing.m,
+          paddingHorizontal: globalTokens.size160,
         },
       },
     },
     small: {
-      padding: globalTokens.spacing.xs - globalTokens.stroke.width10,
+      padding: globalTokens.size80 - globalTokens.stroke.width10,
       borderWidth: globalTokens.stroke.width10,
       iconSize: 16,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.spacing.xs,
+        padding: globalTokens.size80,
       },
       hasContent: {
         minWidth: 64,
-        paddingHorizontal: globalTokens.spacing.s - globalTokens.stroke.width10,
+        paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.spacing.xs,
+          spacingIconContentAfter: globalTokens.size80,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.spacing.xs,
+          spacingIconContentBefore: globalTokens.size80,
         },
         focused: {
-          paddingHorizontal: globalTokens.spacing.s,
+          paddingHorizontal: globalTokens.size120,
         },
       },
     },
     large: {
-      padding: globalTokens.spacing.s - globalTokens.stroke.width10,
+      padding: globalTokens.size120 - globalTokens.stroke.width10,
       borderWidth: globalTokens.stroke.width10,
       iconSize: 20,
       focused: {
         borderWidth: 0,
-        padding: globalTokens.spacing.s,
+        padding: globalTokens.size120,
       },
       hasContent: {
         minWidth: 96,
-        paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width10,
+        paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
         hasIconAfter: {
-          spacingIconContentAfter: globalTokens.spacing.sNudge,
+          spacingIconContentAfter: globalTokens.size100,
         },
         hasIconBefore: {
-          spacingIconContentBefore: globalTokens.spacing.sNudge,
+          spacingIconContentBefore: globalTokens.size100,
         },
         focused: {
-          paddingHorizontal: globalTokens.spacing.l,
+          paddingHorizontal: globalTokens.size160,
         },
       },
     },

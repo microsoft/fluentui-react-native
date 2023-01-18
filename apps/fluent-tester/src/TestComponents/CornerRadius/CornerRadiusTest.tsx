@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HOMEPAGE_CORNERRADIUS_TESTPAGE } from './consts';
+import { HOMEPAGE_CORNERRADIUS_TESTPAGE } from '../../../../E2E/src/CornerRadiusTokens/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
@@ -74,7 +74,7 @@ const cornerRadiusSections: TestSection[] = [
 
 export const CornerRadiusTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',

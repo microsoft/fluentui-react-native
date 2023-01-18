@@ -4,7 +4,7 @@ import { FocusZone, FocusZoneDirection, Text, useOnPressWithFocus } from '@fluen
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Checkbox, CheckboxProps } from '@fluentui-react-native/experimental-checkbox';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { FOCUSZONE_TESTPAGE } from './consts';
+import { FOCUSZONE_TESTPAGE } from '../../../../E2E/src/FocusZone/consts';
 import { focusZoneTestStyles, SubheaderText } from './styles';
 import { FocusZone2D, FocusZoneDirections, FocusZoneListWrapper, GridOfButtons } from './FocusZoneE2ETest';
 import { MenuPicker, CollectionItem } from '../Common/MenuPicker';

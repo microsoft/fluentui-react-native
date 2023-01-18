@@ -48,6 +48,8 @@ The Avatar supports color variants when displaying initials or an icon:
 
 - Neutral - Gray (default).
 - Brand - Brand colors from the theme
+- Brand Inverted - Inverted brand colors. Only supported for android.
+- Accent - Only supported for android.
 - Colorful - Pick from a list of pre-defined Avatar colors. The color will be assigned based on a hash of the name (to "randomly" assign a person a color). The color name (like darkRed) can also be specified explicitly in case the use case requires a different algorithm to pick the color.
 
 ### Icon

@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 import { compose, mergeProps, stagedComponent, UseSlots, withSlots } from '@fluentui-react-native/framework';
 import { menuListName, MenuListProps, MenuListType } from './MenuList.types';
 import { stylingSettings } from './MenuList.styling';
@@ -9,6 +9,7 @@ import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
+import { useMenuContext } from '../context';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;
@@ -34,11 +35,13 @@ export const MenuList = compose<MenuListType>({
   ...stylingSettings,
   slots: {
     root: MenuStack,
+    ...(Platform.OS === 'macos' && { scrollView: ScrollView }),
     ...(Platform.OS === 'macos' && { focusZone: FocusZone }),
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
-    const contextValue = useMenuListContextValue(menuList);
+    const menuContext = useMenuContext();
+    const menuListContextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList.props);
 
     const focusZoneRef = React.useRef<View>();
@@ -51,23 +54,25 @@ export const MenuList = compose<MenuListType>({
       const content =
         Platform.OS === 'macos' ? (
           <Slots.root>
-            <Slots.focusZone
-              componentRef={focusZoneRef}
-              focusZoneDirection={'vertical'}
-              defaultTabbableElement={focusZoneRef}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
-              enableFocusRing={false}
-              forceFocusMacOS={true}
-            >
-              {children}
-            </Slots.focusZone>
+            <Slots.scrollView>
+              <Slots.focusZone
+                componentRef={focusZoneRef}
+                focusZoneDirection={'vertical'}
+                // For submenus, setting defaultTabbableElement to null will let FZ set focus on the first key view.
+                // For root menu, let's set focus on the container to block FZ setting focus on the first key view.
+                defaultTabbableElement={menuContext.isSubmenu ? null : focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
+                enableFocusRing={false}
+              >
+                {children}
+              </Slots.focusZone>
+            </Slots.scrollView>
           </Slots.root>
         ) : (
           <Slots.root>{children}</Slots.root>
         );
 
-      return <MenuListProvider value={contextValue}>{content}</MenuListProvider>;
+      return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;
     };
   },
 });

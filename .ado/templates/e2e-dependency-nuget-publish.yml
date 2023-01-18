@@ -46,7 +46,7 @@ steps:
 
   # Push the NuGet package
   - task: NuGetCommand@2
-    displayName: 'NuGet push'
+    displayName: 'NuGet push WebDriverIO/Appium dependencies'
     inputs:
       command: push
       packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.WebDriverIO.Appium.Deps.nupkg'
