@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Thu, 12 Jan 2023 20:09:58 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.8
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.23
+- Bump @fluentui-react-native/framework to v0.8.34
+- Bump @fluentui-react-native/interactive-hooks to v0.22.11
+- Bump @fluentui-react-native/text to v0.19.12
+- Bump @fluentui-react-native/theme-tokens to v0.23.1
+- Bump @fluentui-react-native/tokens to v0.20.4
 
 ## 0.9.7
 

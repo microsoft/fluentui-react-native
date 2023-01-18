@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.1
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Add shared colors to AliasColorTokens and mapPipelineToTheme (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.29.1
+- Bump @fluentui-react-native/tokens to v0.20.4
 
 ## 0.22.0
 
