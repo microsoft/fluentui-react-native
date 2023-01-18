@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 18 Jan 2023 19:59:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.126.36",
+      "version": "0.126.36",
+      "comments": {
+        "none": [
+          {
+            "author": "mischreiber@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "099c16c70f7bae459b0c64d29d7ba6c2187affa0",
+            "comment": "Updating README for iOS Fluent Tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Jan 2023 19:14:23 GMT",
       "tag": "@fluentui-react-native/tester_v0.126.36",
       "version": "0.126.36",
