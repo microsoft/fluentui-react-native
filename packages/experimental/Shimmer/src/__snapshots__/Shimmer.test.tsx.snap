@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Shimmer component tests renders Shimmer 1`] = `
+<RNSVGSvgView
+  accessibilityRole="progressbar"
+  accessible={true}
+  angle={45}
+  bbHeight={100}
+  bbWidth={300}
+  delay={0}
+  duration={1000}
+  focusable={false}
+  shimmerColor="#e6e6e6"
+  shimmerColorOpacity={1}
+  shimmerWaveColor="#fafafa"
+  shimmerWaveColorOpacity={1}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "borderWidth": 0,
+      },
+      Object {
+        "height": 100,
+        "width": 300,
+      },
+      Object {
+        "flex": 0,
+        "height": 100,
+        "width": 300,
+      },
+    ]
+  }
+>
+  <RNSVGGroup>
+    <RNSVGDefs>
+      <RNSVGLinearGradient
+        gradient={
+          Array [
+            0.1,
+            -1644826,
+            0.2,
+            -328966,
+            0.3,
+            -1644826,
+          ]
+        }
+        gradientTransform={
+          Array [
+            0.7071067811865476,
+            0.7071067811865475,
+            -0.7071067811865475,
+            0.7071067811865476,
+            0,
+            0,
+          ]
+        }
+        gradientUnits={0}
+        name="gradient"
+        x1={-1}
+        x2="-1"
+        y1="0%"
+        y2="0%"
+      />
+      <RNSVGClipPath
+        name="shimmerView"
+      >
+        <RNSVGRect
+          height={20}
+          rx={3}
+          ry={3}
+          width={100}
+          x={90}
+          y={70}
+        />
+        <RNSVGRect
+          height={20}
+          rx={3}
+          ry={3}
+          width={150}
+          x={90}
+          y={42}
+        />
+        <RNSVGRect
+          height={20}
+          rx={3}
+          ry={3}
+          width={200}
+          x={90}
+          y={15}
+        />
+      </RNSVGClipPath>
+    </RNSVGDefs>
+    <RNSVGGroup
+      matrix={
+        Array [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+        ]
+      }
+    >
+      <RNSVGRect
+        clipPath="shimmerView"
+        fill={
+          Array [
+            1,
+            "gradient",
+          ]
+        }
+        height={100}
+        propList={
+          Array [
+            "fill",
+          ]
+        }
+        width={300}
+        x="0"
+        y="0"
+      />
+    </RNSVGGroup>
+  </RNSVGGroup>
+</RNSVGSvgView>
+`;

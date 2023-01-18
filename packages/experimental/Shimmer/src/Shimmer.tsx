@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { useRef, useEffect, useMemo } from 'react';
+import { useRef, useEffect, useMemo, useCallback } from 'react';
 import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G, TransformObject } from 'react-native-svg';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
@@ -21,8 +21,8 @@ export const Shimmer = compose<ShimmerType>({
     const memoizedShimmerData = useMemo(
       () => ({
         angle: props.angle ? props.angle : tokens['angle'],
-        containerWidth: props?.style['width'] ? props?.style['width'] : '100%',
-        containerHeight: props?.style['height'] ? props?.style['height'] : '100%',
+        containerWidth: props?.style?.['width'] ? props?.style['width'] : '100%',
+        containerHeight: props?.style?.['height'] ? props?.style['height'] : '100%',
         delay: props.delay ? props.delay : tokens['delay'],
         duration: props.duration ? props.duration : tokens['duration'],
         shimmerColor: props.shimmerColor ? props.shimmerColor : tokens['shimmerColor'],
@@ -42,9 +42,9 @@ export const Shimmer = compose<ShimmerType>({
       ],
     );
 
-    const startValue = useRef(new Animated.Value(0)).current;
+    const startValue = useRef(new Animated.Value(-1)).current;
 
-    const shimmerAnimation = () => {
+    const shimmerAnimation = useCallback(() => {
       Animated.loop(
         Animated.timing(startValue, {
           toValue: 2,
@@ -53,7 +53,7 @@ export const Shimmer = compose<ShimmerType>({
           useNativeDriver: true,
         }),
       ).start();
-    };
+    }, [memoizedShimmerData.delay, memoizedShimmerData.duration]);
 
     useEffect(() => {
       shimmerAnimation();
@@ -92,13 +92,7 @@ export const Shimmer = compose<ShimmerType>({
       return (
         <Slots.root {...mergedProps}>
           <Defs>
-            <AnimatedLinearGradient
-              id="gradient"
-              x1={startValue}
-              x2="-1"
-              y2="-1"
-              gradientTransform={`rotate(${memoizedShimmerData.angle})`}
-            >
+            <AnimatedLinearGradient id="gradient" x1={startValue} x2="-1" gradientTransform={`rotate(${memoizedShimmerData.angle})`}>
               <Stop offset="10%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={memoizedShimmerData.shimmerColorOpacity} />
               <Stop
                 offset="20%"

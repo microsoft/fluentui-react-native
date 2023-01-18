@@ -1,5 +1,5 @@
 import { ViewProps } from 'react-native';
-import { ShimmerProps, ShimmerTokens } from './Shimmer.types';
+import { ShimmerElementTypes, ShimmerTokens } from './Shimmer.types';
 
 export interface ClippingMaskProps extends ShimmerTokens {
   /**
@@ -26,7 +26,14 @@ export interface ShimmerWaveProps extends ShimmerTokens {
   viewBoxWidth: number;
 }
 
-export interface ShimmerSlotProps extends ShimmerProps {
+export interface ShimmerProps extends ViewProps, ShimmerTokens {
+  /**
+   * Shimmer shapes that define the masking effect of the Shimmer control.
+   */
+  elements?: Array<ShimmerElementTypes>;
+}
+
+export interface ShimmerSlotProps {
   root: ViewProps;
   clippingMask: ClippingMaskProps;
   shimmerWave: ShimmerWaveProps;

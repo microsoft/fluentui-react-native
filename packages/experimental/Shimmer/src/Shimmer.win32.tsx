@@ -3,8 +3,8 @@ import { compose, mergeProps, UseSlots } from '@fluentui-react-native/framework'
 import { View } from 'react-native';
 import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg, SvgProps } from 'react-native-svg';
 import { stylingSettings } from './Shimmer.styling.win32';
-import { ShimmerElementTypes, shimmerName, ShimmerProps } from './Shimmer.types';
-import { ClippingMaskProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
+import { ShimmerElementTypes, shimmerName } from './Shimmer.types';
+import { ClippingMaskProps, ShimmerProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
 import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
 import { withSlots } from '@fluentui-react-native/framework';
