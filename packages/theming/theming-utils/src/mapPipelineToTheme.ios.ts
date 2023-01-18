@@ -109,6 +109,33 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
     brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
     brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
+
+    /// Error, status, and presence tokens
+
+    dangerBackground1: pipelineOutput.dangerBackground1.fillColorRest,
+    dangerBackground2: pipelineOutput.dangerBackground2.fillColorRest,
+    dangerForeground1: pipelineOutput.dangerForeground1.fillColorRest,
+    dangerForeground2: pipelineOutput.dangerForeground2.fillColorRest,
+
+    successBackground1: pipelineOutput.successBackground1.fillColorRest,
+    successBackground2: pipelineOutput.successBackground2.fillColorRest,
+    successForeground1: pipelineOutput.successForeground1.fillColorRest,
+    successForeground2: pipelineOutput.successForeground2.fillColorRest,
+
+    warningBackground1: pipelineOutput.warningBackground1.fillColorRest,
+    warningBackground2: pipelineOutput.warningBackground2.fillColorRest,
+    warningForeground1: pipelineOutput.warningForeground1.fillColorRest,
+    warningForeground2: pipelineOutput.warningForeground2.fillColorRest,
+
+    severeBackground1: pipelineOutput.severeBackground1.fillColorRest,
+    severeBackground2: pipelineOutput.severeBackground2.fillColorRest,
+    severeForeground1: pipelineOutput.severeForeground1.fillColorRest,
+    severeForeground2: pipelineOutput.severeForeground1.fillColorRest,
+
+    presenceAway: pipelineOutput.presenceAway.fillColorRest,
+    presenceDnd: pipelineOutput.presenceDnd.fillColorRest,
+    presenceAvailable: pipelineOutput.presenceAvailable.fillColorRest,
+    presenceOof: pipelineOutput.presenceOof.fillColorRest,
   };
 }
 
