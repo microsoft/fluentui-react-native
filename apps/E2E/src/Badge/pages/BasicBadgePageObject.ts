@@ -1,9 +1,4 @@
-import {
-  BADGE_TESTPAGE,
-  HOMEPAGE_BADGE_BUTTON,
-  BADGE_TEST_COMPONENT,
-  BADGE_SECONDARY_TEST_COMPONENT,
-} from '../consts';
+import { BADGE_TESTPAGE, HOMEPAGE_BADGE_BUTTON, BADGE_TEST_COMPONENT, BADGE_SECONDARY_TEST_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 export const enum BadgeComponentSelector {
@@ -23,12 +18,8 @@ class BasicBadgePageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(BADGE_TESTPAGE);
-  }
-
-  get _pageButton() {
-    return By(HOMEPAGE_BADGE_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_BADGE_BUTTON;
   }
 
   get _pageName() {

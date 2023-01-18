@@ -19,10 +19,6 @@ class LinkV1PageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(LINKV1_TESTPAGE);
-  }
-
   get _pageName() {
     return LINKV1_TESTPAGE;
   }
@@ -35,8 +31,8 @@ class LinkV1PageObject extends BasePage {
     return By(LINKV1_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_LINKV1_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_LINKV1_BUTTON;
   }
 }
 

@@ -10,10 +10,6 @@ class MenuButtonV1PageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(MENUBUTTONV1_TESTPAGE);
-  }
-
   get _pageName() {
     return MENUBUTTONV1_TESTPAGE;
   }
@@ -26,8 +22,8 @@ class MenuButtonV1PageObject extends BasePage {
     return By(MENUBUTTONV1_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_MENUBUTTONV1_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_MENUBUTTONV1_BUTTON;
   }
 }
 

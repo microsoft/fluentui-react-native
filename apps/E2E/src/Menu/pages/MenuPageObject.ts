@@ -116,10 +116,6 @@ class MenuPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(MENU_TESTPAGE);
-  }
-
   get _pageName() {
     return MENU_TESTPAGE;
   }
@@ -128,8 +124,8 @@ class MenuPageObject extends BasePage {
     return By(MENUTRIGGER_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_MENU_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_MENU_BUTTON;
   }
 
   get _callbackResetButton() {
