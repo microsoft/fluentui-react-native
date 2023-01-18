@@ -36,14 +36,14 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         AndroidAttribute.AccessibilityLabel,
         RADIOGROUPV1_TEST_COMPONENT,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate Radio Group Class on Android', async () => {
     await expect(
       await RadioGroupV1Page.compareAttribute(RadioGroupV1Page._firstRadio, AndroidAttribute.Class, ANDROID_RADIOBUTTON),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });

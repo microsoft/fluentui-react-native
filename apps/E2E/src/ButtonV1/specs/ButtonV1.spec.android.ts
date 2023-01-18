@@ -34,7 +34,7 @@ describe('ButtonV1 Accessibility Testing', async () => {
         AndroidAttribute.AccessibilityLabel,
         BUTTON_TEST_COMPONENT,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
@@ -42,7 +42,7 @@ describe('ButtonV1 Accessibility Testing', async () => {
   it('Validate Button Class on Android', async () => {
     await expect(
       await ButtonV1PageObject.compareAttribute(ButtonV1PageObject._primaryComponent, AndroidAttribute.Class, ANDROID_BUTTON),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });

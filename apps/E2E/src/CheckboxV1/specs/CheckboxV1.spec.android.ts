@@ -35,7 +35,7 @@ describe('CheckboxV1 Accessibility Testing', () => {
         AndroidAttribute.AccessibilityLabel,
         CHECKBOXV1_TEST_COMPONENT,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
@@ -43,7 +43,7 @@ describe('CheckboxV1 Accessibility Testing', () => {
   it('Validate Checkbox Class on Android', async () => {
     await expect(
       await CheckboxV1PageObject.compareAttribute(CheckboxV1PageObject._primaryComponent, AndroidAttribute.Class, ANDROID_CHECKBOX),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
