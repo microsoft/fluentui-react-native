@@ -30,12 +30,14 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     marginLeft: globalTokens.size40,
     flexDirection: 'row',
     alignItems: 'flex-start',
+    labelAlignItems: 'flex-start',
 
     labelPositionBelow: {
       flexDirection: 'column',
       alignItems: 'center',
-      marginLeft: globalTokens.sizeNone,
-      rootLeftPadding: globalTokens.size80,
+      labelAlignItems: 'center',
+      labelMarginLeft: globalTokens.size20,
+      marginLeft: globalTokens.size60,
     },
 
     disabled: {
