@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Wed, 18 Jan 2023 01:55:11 GMT",
+      "tag": "@fluentui-react-native/switch_v0.8.16",
+      "version": "0.8.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.19.12",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.34",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.11",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.4",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Jan 2023 20:17:18 GMT",
       "tag": "@fluentui-react-native/switch_v0.8.15",
       "version": "0.8.15",

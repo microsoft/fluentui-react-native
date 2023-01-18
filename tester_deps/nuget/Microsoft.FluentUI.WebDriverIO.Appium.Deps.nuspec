@@ -13,6 +13,10 @@
       commit="$CommitId$" />
   </metadata>
   <files>
-    <file src="..\node_modules\**" target="node_modules" />
+    <file
+      src="..\node_modules\**"
+      exclude="..\node_modules\appium-windows-driver\node_modules\teen_process\node_modules\@babel\runtime\helpers\classCheckPrivateStaticFieldDescriptor.js"
+      target="node_modules"
+    />
   </files>
 </package>
