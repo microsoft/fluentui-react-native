@@ -25,7 +25,7 @@ describe('ButtonV1 Accessibility Testing', async () => {
     await ButtonV1PageObject.scrollToTestElement();
   });
 
-  it('Validate "accessibilityRole" value defaults to Button "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" value defaults to "ControlType.Button".', async () => {
     await expect(
       await ButtonV1PageObject.compareAttribute(ButtonV1PageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
     ).toBeTruthy();

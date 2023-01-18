@@ -26,7 +26,7 @@ describe('Button Legacy Accessibility Testing', () => {
     await ButtonLegacyPageObject.scrollToTestElement();
   });
 
-  it('Validate "accessibilityRole" defaults to Button "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to "ControlType.Button".', async () => {
     await expect(
       await ButtonLegacyPageObject.compareAttribute(
         ButtonLegacyPageObject._primaryComponent,
