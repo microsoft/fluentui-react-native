@@ -11,10 +11,10 @@ export const BadgeSizes = ['tiny', 'extraSmall', 'small', 'medium', 'large', 'ex
 export const BadgeAppearances = ['filled', 'outline', 'tint', 'ghost'] as const;
 export const BadgeShapes = ['rounded', 'circular', 'square'] as const;
 export const BadgeColors = ['brand', 'danger', 'important', 'informative', 'severe', 'subtle', 'success', 'warning'] as const;
-export type BadgeNamedColor = typeof BadgeColors[number];
-export type BadgeSize = typeof BadgeSizes[number];
-export type BadgeAppearance = typeof BadgeAppearances[number];
-export type BadgeShape = typeof BadgeShapes[number];
+export type BadgeNamedColor = (typeof BadgeColors)[number];
+export type BadgeSize = (typeof BadgeSizes)[number];
+export type BadgeAppearance = (typeof BadgeAppearances)[number];
+export type BadgeShape = (typeof BadgeShapes)[number];
 export type BadgeColor = BadgeNamedColor | ColorValue;
 export type BadgeIconPosition = 'before' | 'after';
 

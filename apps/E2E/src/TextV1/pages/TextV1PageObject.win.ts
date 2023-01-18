@@ -5,10 +5,6 @@ class TextV1PageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(TEXTV1_TESTPAGE);
-  }
-
   get _pageName() {
     return TEXTV1_TESTPAGE;
   }
@@ -21,8 +17,8 @@ class TextV1PageObject extends BasePage {
     return By(TEXTV1_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_TEXTV1_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_TEXTV1_BUTTON;
   }
 }
 

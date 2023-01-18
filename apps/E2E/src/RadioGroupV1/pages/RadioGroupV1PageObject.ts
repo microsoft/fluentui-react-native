@@ -93,10 +93,6 @@ class RadioGroupV1Page extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(RADIOGROUPV1_TESTPAGE);
-  }
-
   get _pageName() {
     return RADIOGROUPV1_TESTPAGE;
   }
@@ -109,8 +105,8 @@ class RadioGroupV1Page extends BasePage {
     return By(RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_RADIOGROUPV1_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_RADIOGROUPV1_BUTTON;
   }
 
   /***************/

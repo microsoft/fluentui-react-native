@@ -1,18 +1,10 @@
-import {
-  PERSONACOIN_TESTPAGE,
-  PERSONACOIN_TEST_COMPONENT,
-  HOMEPAGE_PERSONACOIN_BUTTON,
-} from '../consts';
+import { PERSONACOIN_TESTPAGE, PERSONACOIN_TEST_COMPONENT, HOMEPAGE_PERSONACOIN_BUTTON } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PersonaCoinPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(PERSONACOIN_TESTPAGE);
-  }
-
   get _pageName() {
     return PERSONACOIN_TESTPAGE;
   }
@@ -21,8 +13,8 @@ class PersonaCoinPageObject extends BasePage {
     return By(PERSONACOIN_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_PERSONACOIN_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_PERSONACOIN_BUTTON;
   }
 }
 
