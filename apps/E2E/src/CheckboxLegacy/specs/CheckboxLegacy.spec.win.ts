@@ -25,7 +25,7 @@ describe('Checkbox Legacy Accessibility Testing', () => {
     await CheckboxLegacyPageObject.scrollToTestElement();
   });
 
-  it('Validate "accessibilityRole" defaults to Checkbox "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to "ControlType.Checkbox".', async () => {
     await expect(
       await CheckboxLegacyPageObject.compareAttribute(
         CheckboxLegacyPageObject._primaryComponent,
