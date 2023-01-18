@@ -139,5 +139,5 @@ export const BASE_TESTPAGE = 'Base_TestPage';
 // ScrollViewer that contains the list of test page buttons
 export const TESTPAGE_BUTTONS_SCROLLVIEWER = 'TestPage_Buttons_ScrollViewer';
 
-// ScrollViewer that contains the list of test page buttons
-export const TESTPAGE_TESTS_SCROLLVIEWER = 'TestPage_Tests_ScrollViewer';
+// ScrollViewer that contains the content of each test page
+export const TESTPAGE_CONTENT_SCROLLVIEWER = 'TestPage_Content_ScrollViewer';

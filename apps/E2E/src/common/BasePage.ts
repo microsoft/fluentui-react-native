@@ -1,4 +1,4 @@
-import { AndroidAttribute, Keys, ROOT_VIEW, TESTPAGE_TESTS_SCROLLVIEWER } from './consts';
+import { AndroidAttribute, Keys, ROOT_VIEW, TESTPAGE_CONTENT_SCROLLVIEWER } from './consts';
 import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
 
 const DUMMY_CHAR = '';
@@ -222,11 +222,15 @@ export abstract class BasePage {
     let componentIdentifier: string;
     let componentToScrollTo: WebdriverIO.Element;
 
-    if (typeof component == 'string') {
-      componentIdentifier = component ?? this._primaryComponentName;
+    if (typeof component == 'undefined') {
+      componentIdentifier = this._primaryComponentName;
+      componentToScrollTo = await this._primaryComponent;
+    } else if (typeof component == 'string') {
+      componentIdentifier = component;
       componentToScrollTo = await By(componentIdentifier);
     } else {
-      componentToScrollTo = component ?? (await this._primaryComponent);
+      componentIdentifier = null;
+      componentToScrollTo = component;
     }
 
     if (await componentToScrollTo.isDisplayed()) {
@@ -255,7 +259,7 @@ export abstract class BasePage {
          * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
         await browser.waitUntil(
           async () => {
-            const componentSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_TESTS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).scrollIntoView(new UiSelector().description("${componentIdentifier}"))`;
+            const componentSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_CONTENT_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).scrollIntoView(new UiSelector().description("${componentIdentifier}"))`;
             const component = await $(`android=${componentSelector}`);
             return await component.isDisplayed();
           },
