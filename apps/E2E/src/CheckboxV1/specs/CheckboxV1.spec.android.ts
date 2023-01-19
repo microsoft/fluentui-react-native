@@ -25,7 +25,7 @@ describe('CheckboxV1 Testing Initialization', () => {
 describe('CheckboxV1 Accessibility Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page */
   beforeEach(async () => {
-    await CheckboxV1PageObject.scrollToTestElement();
+    await CheckboxV1PageObject.mobileScrollToTestElement();
   });
 
   it('CheckboxV1 - Verify accessibilityLabel', async () => {
@@ -52,7 +52,7 @@ describe('CheckboxV1 Accessibility Testing', () => {
 describe('CheckboxV1 Functional Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page AND un-checks the Checkbox */
   beforeEach(async () => {
-    await CheckboxV1PageObject.scrollToTestElement();
+    await CheckboxV1PageObject.mobileScrollToTestElement();
   });
 
   it("Click on a Checkbox -> Validate it toggles correctly AND calls the user's onChange", async () => {

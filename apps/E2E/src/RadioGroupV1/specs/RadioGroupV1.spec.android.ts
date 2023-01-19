@@ -26,7 +26,7 @@ describe('RadioGroupV1/RadioV1 Testing Initialization', function () {
 describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
   /* Scrolls and waits for the RadioGroup to be visible on the Test Page */
   beforeEach(async () => {
-    await RadioGroupV1Page.scrollToTestElement();
+    await RadioGroupV1Page.mobileScrollToTestElement();
   });
 
   it('RadioGroup - Verify accessibilityLabel', async () => {
@@ -52,7 +52,7 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
 describe('RadioGroupV1 Functional Testing', async () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st Radio in the RadioGroup */
   beforeEach(async () => {
-    await RadioGroupV1Page.scrollToTestElement();
+    await RadioGroupV1Page.mobileScrollToTestElement();
 
     await RadioGroupV1Page.resetRadioGroupSelection();
   });
