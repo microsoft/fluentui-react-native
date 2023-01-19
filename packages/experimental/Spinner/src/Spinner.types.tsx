@@ -21,12 +21,10 @@ export type SpinnerStatus = 'active' | 'inactive';
 export interface SpinnerTokens {
   /**
    * Spinner element color
-   * @defaultValue 'BDBDBD' for light mode, '666666' for dark mode
    */
   trackColor?: string;
   /**
    * Spinner element color
-   * @defaultValue 'BDBDBD' for light mode, '666666' for dark mode
    */
   tailColor?: string;
   /**
