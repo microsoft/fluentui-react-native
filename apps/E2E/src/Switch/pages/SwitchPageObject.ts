@@ -12,48 +12,30 @@ class SwitchPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
+  async setSwitchState(toggleState: boolean) {
+    const currState = await this.isSwitchChecked();
+    if (toggleState !== currState) {
+      await (await this._primaryComponent).click();
+      await this.waitForSwitchStateChange(
+        toggleState,
+        `Clicked primary switch to turn it ${toggleState ? 'on' : 'off'}, but it failed to toggle.`,
+      );
+    }
+  }
+
   async isSwitchChecked(): Promise<boolean> {
     return await (await this._primaryComponent).isSelected();
   }
 
-  async waitForSwitchChecked(timeout?: number): Promise<void> {
-    browser.waitUntil(async () => await this.isSwitchChecked(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'The Switch was not toggled correctly',
-      interval: 1000,
-    });
+  async waitForSwitchStateChange(newState: boolean, errorMsg: string): Promise<boolean> {
+    await this.waitForCondition(async () => (await this.isSwitchChecked()) === newState, errorMsg);
+    return (await this.isSwitchChecked()) === newState;
   }
 
-  async toggleSwitchToUnchecked(): Promise<void> {
-    if (await this.isSwitchChecked()) {
-      await (await this._primaryComponent).click();
-    }
-  }
-
-  async didOnChangeCallbackFire(): Promise<boolean> {
-    const callbackText = await By(SWITCH_ON_PRESS);
-    browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The OnChange callback did not fire.',
-      interval: 1000,
-    });
-
+  async waitForOnChangeCallbackToFire(errorMsg: string): Promise<boolean> {
+    const callbackText = await this._callbackText;
+    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
     return await callbackText.isDisplayed();
-  }
-
-  /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(switchSelector: SwitchComponentSelector, key: string): Promise<void> {
-    await (await this.getButtonSelector(switchSelector)).addValue(key);
-  }
-
-  /* Returns the correct WebDriverIO element from the Button Selector */
-  async getButtonSelector(switchSelector?: SwitchComponentSelector): Promise<WebdriverIO.Element> {
-    if (switchSelector == SwitchComponentSelector.PrimaryComponent) {
-      return await this._primaryComponent;
-    } else if (switchSelector === SwitchComponentSelector.SecondaryComponent) {
-      return await this._secondaryComponent;
-    }
-    return await this._primaryComponent;
   }
 
   /*****************************************/
@@ -73,6 +55,10 @@ class SwitchPageObject extends BasePage {
 
   get _pageButtonName() {
     return HOMEPAGE_SWITCH_BUTTON;
+  }
+
+  get _callbackText() {
+    return By(SWITCH_ON_PRESS);
   }
 }
 
