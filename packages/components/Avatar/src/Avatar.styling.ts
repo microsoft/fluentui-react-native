@@ -11,6 +11,7 @@ import {
   AvatarColorSchemes,
   RingConfig,
 } from './Avatar.types';
+import { Platform } from 'react-native';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultAvatarTokens } from './AvatarTokens';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
@@ -156,14 +157,12 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             ...getRingSpacing(tokens),
             backgroundColor: ringBackgroundColor || 'transparent',
             aspectRatio: 1,
-
           },
         };
       },
       ['size', 'ringColor', 'ringBackgroundColor', 'ringThickness', ...borderStyles.keys],
     ),
     outerRing: buildProps(
-
       (tokens: AvatarTokens, theme: Theme) => {
         const { ringBackgroundColor } = tokens;
         const ringConfig = getRingConfig(tokens);
@@ -195,51 +194,87 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
 };
 
 function getRingConfig(tokens: AvatarTokens): RingConfig {
-
-  // Below change also moves under some platform check.
   const { size, ringThickness } = tokens;
-  const MEDIUM_SIZE = 71;
+  const SMALL_SIZE = 48;
   const innerGap = tokens.ringInnerGap || ringThickness;
 
-  const strokeSize = {
-    small: globalTokens.stroke.width15,
-    medium: globalTokens.stroke.width20,
-    large: globalTokens.stroke.width40,
-  };
-  if (ringThickness) {
-    return {
-      size: size + ringThickness * 2 + innerGap * 2,
-      ringThickness,
-      innerGap,
+  if (Platform.OS === 'android') {
+    const LARGE_SIZE = 71;
+    const strokeSize = {
+      small: globalTokens.stroke.width15,
+      medium: globalTokens.stroke.width20,
+      large: globalTokens.stroke.width40,
     };
+
+    if (ringThickness) {
+      return {
+        size: size + ringThickness * 2 + innerGap * 2,
+        ringThickness,
+        innerGap,
+      };
+    } else {
+      if (size == 16) {
+        return {
+          size: size + strokeSize.small * 4,
+          ringThickness: strokeSize.small,
+          innerGap: strokeSize.small,
+        };
+      }
+      if (size == 20) {
+        return {
+          size: size + strokeSize.small * 4,
+          ringThickness: strokeSize.small,
+          innerGap: strokeSize.medium,
+        };
+      }
+      if (size <= LARGE_SIZE) {
+        return {
+          size: size + strokeSize.medium * 4,
+          ringThickness: strokeSize.medium,
+          innerGap: strokeSize.medium,
+        };
+      }
+      return {
+        size: size + strokeSize.large * 4,
+        ringThickness: strokeSize.large,
+        innerGap: strokeSize.large,
+      };
+    }
   } else {
-    if (size == 16) {
-      return {
-        size: size + strokeSize.small * 4,
-        ringThickness: strokeSize.small,
-        innerGap: strokeSize.small,
-      };
-    }
-    if (size == 20) {
-      return {
-        size: size + strokeSize.small * 4,
-        ringThickness: strokeSize.small,
-        innerGap: strokeSize.medium,
-      };
-    }
-    if (size <= MEDIUM_SIZE) {
-      return {
-        size: size + strokeSize.medium * 4,
-        ringThickness: strokeSize.medium,
-        innerGap: strokeSize.medium,
-      };
-    }
-    return {
-      size: size + strokeSize.large * 4,
-      ringThickness: strokeSize.large,
-      innerGap: strokeSize.large,
+    const MEDIUM_SIZE = 71;
+    const strokeSize = {
+      small: globalTokens.stroke.width20,
+      medium: globalTokens.stroke.width30,
+      large: globalTokens.stroke.width40,
     };
-}
+    if (ringThickness) {
+      return {
+        size: size + ringThickness * 2 + innerGap * 2,
+        ringThickness,
+        innerGap,
+      };
+    } else {
+      if (size <= SMALL_SIZE) {
+        return {
+          size: size + strokeSize.small * 4,
+          ringThickness: strokeSize.small,
+          innerGap: strokeSize.small,
+        };
+      }
+      if (size <= MEDIUM_SIZE) {
+        return {
+          size: size + strokeSize.medium * 4,
+          ringThickness: strokeSize.medium,
+          innerGap: strokeSize.medium,
+        };
+      }
+      return {
+        size: size + strokeSize.large * 4,
+        ringThickness: strokeSize.large,
+        innerGap: strokeSize.large,
+      };
+    }
+  }
 }
 
 function getIconStyles(tokens: AvatarTokens) {
@@ -251,12 +286,15 @@ function getIconStyles(tokens: AvatarTokens) {
 }
 
 function getRingSpacing(tokens: AvatarTokens) {
-
-  // Move under Platform check
   const ringConfig = getRingConfig(tokens);
   return tokens.active === 'active'
-    ? {
-        margin: ringConfig.innerGap,
-      }
+    ? Platform.OS === 'android'
+      ? {
+          marginTop: ringConfig.innerGap,
+          marginLeft: ringConfig.innerGap,
+        }
+      : {
+          margin: ringConfig.innerGap,
+        }
     : {};
 }

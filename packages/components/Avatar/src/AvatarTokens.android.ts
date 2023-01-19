@@ -13,11 +13,10 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
   fontSize: globalTokens.font.size200,
   size: 56,
   iconSize: 16,
-  iconColor: t.colors.neutralForeground3,
+  iconColor: t.colors.neutralForeground2,
   ringBackgroundColor: t.colors.neutralBackground1,
-  ringColor: t.colors.neutralBackground,
-  borderColor: t.colors.neutralStroke1,
-
+  ringColor: t.colors.neutralStroke1,
+  borderColor: 'white',
   circular: {
     borderRadius: globalTokens.corner.radiusCircular,
   },
@@ -26,35 +25,50 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     badgeSize: 'small',
     iconSize: 12,
     fontSize: globalTokens.font.size100,
-    fontWeight: globalTokens.font.weight.regular
+    fontWeight: globalTokens.font.weight.regular,
+    square: {
+      borderRadius: globalTokens.corner.radius20,
+    },
   },
   size20: {
     size: 20,
     badgeSize: 'small',
     iconSize: 16,
     fontSize: globalTokens.font.size100,
-    fontWeight: globalTokens.font.weight.regular
+    fontWeight: globalTokens.font.weight.regular,
+    square: {
+      borderRadius: globalTokens.corner.radius40,
+    },
   },
   size24: {
     size: 24,
     badgeSize: 'small',
     iconSize: 16,
     fontSize: globalTokens.font.size100,
-    fontWeight: globalTokens.font.weight.regular
+    fontWeight: globalTokens.font.weight.regular,
+    square: {
+      borderRadius: globalTokens.corner.radius40,
+    },
   },
   size32: {
     size: 32,
     badgeSize: 'small',
     iconSize: 20,
     fontSize: globalTokens.font.size200,
-    fontWeight: globalTokens.font.weight.regular
+    fontWeight: globalTokens.font.weight.regular,
+    square: {
+      borderRadius: globalTokens.corner.radius40,
+    },
   },
   size40: {
     size: 40,
     badgeSize: 'medium',
     iconSize: 24,
     fontSize: globalTokens.font.size300,
-    fontWeight: globalTokens.font.weight.regular
+    fontWeight: globalTokens.font.weight.regular,
+    square: {
+      borderRadius: globalTokens.corner.radius80,
+    },
   },
   size56: {
     size: 56,
@@ -62,14 +76,20 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     iconSize: 32,
     fontSize: globalTokens.font.size500,
     fontWeight: globalTokens.font.weight.medium,
+    square: {
+      borderRadius: globalTokens.corner.radius80,
+    },
   },
   size72: {
     size: 72,
-    badgeSize: 'large', // Presence Badge
+    badgeSize: 'large',
     iconSize: 48,
     fontSize: globalTokens.font.size700,
     fontWeight: globalTokens.font.weight.medium,
- },
+    square: {
+      borderRadius: globalTokens.corner.radius120,
+    },
+  },
   neutral: {
     color: t.colors.neutralForeground3,
     iconColor: t.colors.neutralForeground3,
@@ -88,7 +108,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
   },
   accent: {
     backgroundColor: t.colors.brandBackgroundTint,
-    iconColor: t.colors.brandForegroundTint,
+    iconColor: t.colors.brandForeground1,
     ringColor: t.colors.brandStroke1,
   },
   darkRed: getColorProps('darkRed', t),
@@ -142,10 +162,10 @@ function getColorProps(color: string, theme: Theme) {
       };
     case 'dark':
       return {
-        backgroundColor: globalTokens.color[color].shade30,
-        color: globalTokens.color[color].tint40,
-        iconColor: globalTokens.color[color].tint40,
-        ringColor: globalTokens.color[color].tint30,
+        backgroundColor: globalTokens.color[color].tint40,
+        color: globalTokens.color[color].shade30,
+        iconColor: globalTokens.color[color].shade30,
+        ringColor: globalTokens.color[color].tint20,
       };
   }
 }
