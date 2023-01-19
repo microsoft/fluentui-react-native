@@ -6,42 +6,27 @@ export const defaultDividerTokens: TokenSettings<DividerTokens, Theme> = (theme:
   ({
     // base tokens
     alignment: 'center',
-    contentMarginHorizontal: 8,
-    contentMarginVertical: 0,
-    insetStyleProp: 'paddingHorizontal',
-    insetSize: 0,
-    lineBeforeFlex: 1,
-    lineAfterFlex: 1,
-    lineStyleProp: 'borderTopWidth',
+    flexAfter: 1,
+    flexBefore: 1,
+    insetSize: 16,
     minWidth: 0,
     minHeight: 0,
-    rootFlexDirection: 'row',
     thickness: 1,
     // for aligning the divider if alignContent !== 'center'
     alignStart: {
       alignment: 'flex-start',
-      lineBeforeFlex: 0,
+      flexBefore: 0,
     },
     alignEnd: {
       alignment: 'flex-end',
-      lineAfterFlex: 0,
-    },
-    // default insetSize if user specifies an inset
-    inset: {
-      insetSize: 16,
+      flexAfter: 0,
     },
     // vertical style overrides
-    vertical: {
-      contentMarginHorizontal: 0,
-      contentMarginVertical: 8,
-      insetStyleProp: 'paddingVertical',
-      lineStyleProp: 'borderLeftWidth',
-      rootFlexDirection: 'column',
+    isVertical: {
       minHeight: 24,
-      height: '100%',
     },
     hasChildren: {
-      vertical: {
+      isVertical: {
         minHeight: 84,
       },
     },

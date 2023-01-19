@@ -1,13 +1,12 @@
 import { divider, DividerTokens, DividerSlotProps, DividerProps } from './Divider.types';
-import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { Theme, UseStylingOptions, buildProps, layoutStyles } from '@fluentui-react-native/framework';
 import { defaultDividerTokens } from './DividerTokens';
 
 export const dividerStates: (keyof DividerTokens)[] = [
   'alignStart',
   'alignEnd',
   'hasChildren',
-  'vertical',
-  'inset',
+  'isVertical',
   'default',
   'subtle',
   'brand',
@@ -16,61 +15,61 @@ export const dividerStates: (keyof DividerTokens)[] = [
 
 export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, DividerTokens> = {
   tokens: [defaultDividerTokens, divider],
-  tokensThatAreAlsoProps: ['color'],
+  tokensThatAreAlsoProps: ['color', 'inset', 'vertical'],
   states: dividerStates,
   slotProps: {
-    root: buildProps((tokens: DividerTokens) => {
-      const ret: any = {
+    root: buildProps(
+      (tokens: DividerTokens, theme: Theme) => ({
         style: {
           alignItems: 'center',
           justifyContent: tokens.alignment,
           display: 'flex',
-          flexDirection: tokens.rootFlexDirection,
-          height: tokens.height,
-          minHeight: tokens.minHeight,
-          minWidth: tokens.minWidth,
-          maxHeight: tokens.maxHeight,
-          maxWidth: tokens.maxWidth,
-          [tokens.insetStyleProp]: tokens.insetSize,
+          flexDirection: tokens.vertical ? 'column' : 'row',
+          ...layoutStyles.from(tokens, theme),
+          ...(tokens.vertical
+            ? {
+                paddingVertical: tokens.inset ? tokens.insetSize : 0,
+                height: '100%',
+              }
+            : {
+                paddingHorizontal: tokens.inset ? tokens.insetSize : 0,
+              }),
         },
-      };
-      console.log(tokens);
-      console.log(ret);
-      return ret;
-    }, []),
+      }),
+      ['inset', 'vertical'],
+    ),
     beforeLine: buildProps(
       (tokens: DividerTokens) => ({
         style: {
           flexBasis: 8,
-          flex: tokens.lineBeforeFlex,
+          flex: tokens.flexBefore,
           borderColor: tokens.color || tokens.lineColor,
           borderStyle: 'solid',
-          [tokens.lineStyleProp]: tokens.thickness,
+          [tokens.vertical ? 'borderLeftWidth' : 'borderTopWidth']: tokens.thickness,
         },
       }),
-      ['color'],
+      ['color', 'vertical'],
     ),
     afterLine: buildProps(
       (tokens: DividerTokens) => ({
         style: {
           flexBasis: 8,
-          flex: tokens.lineAfterFlex,
+          flex: tokens.flexAfter,
           borderColor: tokens.color || tokens.lineColor,
           borderStyle: 'solid',
-          [tokens.lineStyleProp]: tokens.thickness,
+          [tokens.vertical ? 'borderLeftWidth' : 'borderTopWidth']: tokens.thickness,
         },
       }),
-      ['color'],
+      ['color', 'vertical'],
     ),
     wrapper: buildProps(
       (tokens: DividerTokens) => ({
         style: {
           flex: 0,
-          paddingHorizontal: tokens.contentMarginHorizontal,
-          paddingVertical: tokens.contentMarginVertical,
+          [tokens.vertical ? 'paddingVertical' : 'paddingHorizontal']: 8,
         },
       }),
-      [],
+      ['vertical'],
     ),
     text: buildProps(
       (tokens: DividerTokens) => ({
@@ -82,9 +81,8 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
     ),
     icon: buildProps(
       (tokens: DividerTokens) => ({
-        style: {
-          color: tokens.color || tokens.contentColor,
-        },
+        color: tokens.color || tokens.contentColor,
+        style: { color: tokens.color || tokens.contentColor },
       }),
       ['color'],
     ),

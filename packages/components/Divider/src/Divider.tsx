@@ -4,7 +4,7 @@ import { divider, DividerType, DividerProps } from './Divider.types';
 import { stylingSettings } from './Divider.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
-import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { IconV1 as Icon, createIconProps } from '@fluentui-react-native/icon';
 import { useDivider } from './useDivider';
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the divider.
@@ -19,7 +19,8 @@ export const dividerLookup = (layer: string, userProps: DividerProps): boolean =
     layer === userProps['appearance'] ||
     (layer === 'alignStart' && userProps['alignContent'] === 'start') ||
     (layer === 'alignEnd' && userProps['alignContent'] === 'end') ||
-    (layer === 'hasChildren' && (userProps['text'] ?? userProps['icon']))
+    (layer === 'hasChildren' && (userProps['text'] ?? userProps['icon'])) ||
+    (layer === 'isVertical' && userProps['vertical'])
   );
 };
 
