@@ -198,7 +198,45 @@ function getRingConfig(tokens: AvatarTokens): RingConfig {
   const SMALL_SIZE = 48;
   const innerGap = tokens.ringInnerGap || ringThickness;
 
-  if (Platform.OS === 'android') {
+  const isAndroid = Platform.OS === 'android';
+
+  if (!isAndroid) {
+    const MEDIUM_SIZE = 71;
+
+    const strokeSize = {
+      small: globalTokens.stroke.width20,
+      medium: globalTokens.stroke.width30,
+      large: globalTokens.stroke.width40,
+    };
+    if (ringThickness) {
+      return {
+        size: size + ringThickness * 2 + innerGap * 2,
+        ringThickness,
+        innerGap,
+      };
+    } else {
+      if (size <= SMALL_SIZE) {
+        return {
+          size: size + strokeSize.small * 4,
+          ringThickness: strokeSize.small,
+          innerGap: strokeSize.small,
+        };
+      }
+      if (size <= MEDIUM_SIZE) {
+        return {
+          size: size + strokeSize.medium * 4,
+          ringThickness: strokeSize.medium,
+          innerGap: strokeSize.medium,
+        };
+      }
+      return {
+        size: size + strokeSize.large * 4,
+        ringThickness: strokeSize.large,
+        innerGap: strokeSize.large,
+      };
+    }
+  }
+  else {
     const LARGE_SIZE = 71;
     const strokeSize = {
       small: globalTokens.stroke.width15,
@@ -240,40 +278,6 @@ function getRingConfig(tokens: AvatarTokens): RingConfig {
         innerGap: strokeSize.large,
       };
     }
-  } else {
-    const MEDIUM_SIZE = 71;
-    const strokeSize = {
-      small: globalTokens.stroke.width20,
-      medium: globalTokens.stroke.width30,
-      large: globalTokens.stroke.width40,
-    };
-    if (ringThickness) {
-      return {
-        size: size + ringThickness * 2 + innerGap * 2,
-        ringThickness,
-        innerGap,
-      };
-    } else {
-      if (size <= SMALL_SIZE) {
-        return {
-          size: size + strokeSize.small * 4,
-          ringThickness: strokeSize.small,
-          innerGap: strokeSize.small,
-        };
-      }
-      if (size <= MEDIUM_SIZE) {
-        return {
-          size: size + strokeSize.medium * 4,
-          ringThickness: strokeSize.medium,
-          innerGap: strokeSize.medium,
-        };
-      }
-      return {
-        size: size + strokeSize.large * 4,
-        ringThickness: strokeSize.large,
-        innerGap: strokeSize.large,
-      };
-    }
   }
 }
 
@@ -290,11 +294,11 @@ function getRingSpacing(tokens: AvatarTokens) {
   return tokens.active === 'active'
     ? Platform.OS === 'android'
       ? {
-          marginTop: ringConfig.innerGap,
-          marginLeft: ringConfig.innerGap,
-        }
+        marginTop: ringConfig.innerGap,
+        marginLeft: ringConfig.innerGap,
+      }
       : {
-          margin: ringConfig.innerGap,
-        }
+        margin: ringConfig.innerGap,
+      }
     : {};
 }
