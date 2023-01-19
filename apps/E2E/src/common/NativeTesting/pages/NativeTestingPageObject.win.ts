@@ -23,7 +23,7 @@ class NativeTestingPageObject extends BasePage {
     let foundValidButton = false;
 
     // Ensure the testID (maps 1:1 to automationId) properties of the button children match the defined testing format
-    const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
+    const reg = new RegExp('Homepage_[a-zA-Z1-9]*_Button');
 
     // Iterate through children. Validate at least one valid button exists as a child to the ScrollView.
     // If automationId is found in the wrong format, return false.
@@ -51,6 +51,10 @@ class NativeTestingPageObject extends BasePage {
 
   get _pageButton(): Promise<WebdriverIO.Element> {
     throw new Error('You are trying to read the _pageButton getter for NativeTestingPageObject, which is not implemented.');
+  }
+
+  get _pageButtonName(): string {
+    throw new Error('You are trying to read the _pageButtonName getter for NativeTestingPageObject, which is not implemented.');
   }
 
   get _pageName(): string {

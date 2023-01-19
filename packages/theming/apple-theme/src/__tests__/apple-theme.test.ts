@@ -1,9 +1,14 @@
-import { createAppleTheme } from '../createAppleTheme';
 import { createMacOSColorAliasTokens, createMacOSShadowAliasTokens } from '../createMacOSAliasTokens';
 import { getIsHighContrast, setIsHighContrast } from '../appleHighContrast.macos';
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
+import { createAppleTheme } from '../createAppleTheme';
 
-const macOsAliasTokensTable: [AppearanceOptions, boolean][] = [
+// For some reason the automatically mocked AccessibilityInfo object is the react-native version, not the
+// react-native-macos version, which doesn't contain the isHighContrastEnabled function that is accessed in
+// createAppleTheme. Use the actual module instead
+jest.dontMock('react-native-macos/Libraries/Components/AccessibilityInfo/AccessibilityInfo');
+
+const macOSAliasTokensTable: [AppearanceOptions, boolean][] = [
   ['light', true],
   ['light', false],
   ['dark', true],
@@ -23,7 +28,7 @@ it('IsHighContrast test', () => {
   expect(getIsHighContrast()).toBe(true);
 });
 
-it.concurrent.each(macOsAliasTokensTable)(
+it.concurrent.each(macOSAliasTokensTable)(
   'createMacOSColorAliasTokens test mode: %s, isHighContrast: %p',
   async (mode: AppearanceOptions, isHighContrast: boolean) => {
     if (mode === 'highContrast') {
@@ -34,7 +39,7 @@ it.concurrent.each(macOsAliasTokensTable)(
   },
 );
 
-it.concurrent.each(macOsAliasTokensTable)(
+it.concurrent.each(macOSAliasTokensTable)(
   'createMacOSShadowAliasTokens test mode: %s, isHighContrast: %p',
   async (mode: AppearanceOptions, isHighContrast: boolean) => {
     if (mode === 'highContrast') {

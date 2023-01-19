@@ -26,7 +26,7 @@ Basic examples:
 <Checkbox label="Controlled Checkbox" onChange={onChangeFunction} checked={checked} />
 ```
 
-More examples on the [Test pages for the Checkbox](../../../apps/fluent-tester/src/TestComponents/CheckboxExperimental). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Checkbox](../../../apps/fluent-tester/src/TestComponents/CheckboxV1). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -209,6 +209,14 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * Also sets accessibility state to have screen reader announce required state.
    */
   required?: boolean | string;
+
+  /**
+   * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
+   */
+  rippleColor?: ColorValue;
 
   /**
    * The shape of the checkbox. Can be either (rounded) square or circular.

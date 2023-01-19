@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/e2e-testing",
-  "version": "1.8.5",
+  "version": "1.10.1",
   "description": "Package containing E2E testing specs",
   "license": "MIT",
   "scripts": {
     "build": "fluentui-scripts build",
+    "e2etest:android": "wdio run wdio.conf.android.js",
     "e2etest:ios": "wdio run wdio.conf.ios.js",
     "e2etest:macos": "wdio run wdio.conf.macos.js",
     "e2etest:windows": "rimraf errorShots/* reports/* && wdio run wdio.conf.windows.js"
@@ -40,9 +41,10 @@
     "appium-mac2-driver": "1.4.0",
     "appium-windows-driver": "2.0.7",
     "appium-xcuitest-driver": "4.11.1",
+    "appium-uiautomator2-driver": "^2.10.2",
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
-    "@fluentui-react-native/focus-zone": "^0.11.18"
+    "@fluentui-react-native/focus-zone": "^0.11.23"
   },
   "rnx-kit": {
     "reactNativeVersion": "0.68",

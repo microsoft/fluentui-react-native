@@ -2,6 +2,126 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Wed, 18 Jan 2023 01:55:11 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.12.16",
+      "version": "0.12.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.34",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.34",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.23.1",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.4",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.12.20",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Jan 2023 20:17:18 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.12.15",
+      "version": "0.12.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.33",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.33",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.23.0",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.3",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.12.19",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Jan 2023 22:25:00 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.12.14",
+      "version": "0.12.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.32",
+            "commit": "17bf1b56555ea10ad474c765d447718a1742b982"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.32",
+            "commit": "17bf1b56555ea10ad474c765d447718a1742b982"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Jan 2023 12:26:31 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.12.13",
+      "version": "0.12.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.31",
+            "commit": "984ee826e94da2e7dabf162d02007727adba53ac"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.31",
+            "commit": "984ee826e94da2e7dabf162d02007727adba53ac"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 16:09:27 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.12.12",
       "version": "0.12.12",

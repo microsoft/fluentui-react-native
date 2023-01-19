@@ -88,6 +88,20 @@ First check that iOS configs in wdio.conf.ios.js are updated to match your dev e
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
+## Android Steps
+
+1. Follow step #1 from "Win32 Steps" section above.
+2. Start the server
+   - (from fluentui-react-native) `cd apps/fluent-tester`
+   - (from fluentui-react-native/apps/fluent-tester) `yarn start`
+3. Install and run the app from a new command prompt
+   - (from fluentui-react-native) `cd apps/fluent-tester`
+   - (from fluentui-react-native/apps/fluent-tester) `yarn android`
+4. Open a new command prompt and run the E2E tests
+   - (from fluentui-react-native/apps/E2E) `yarn e2etest:android`
+
+_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
+
 # Authoring E2E Test
 
 You just added a new component to FURN... Awesome! Now we need to make sure we have proper regression testing to make sure we put the safest product out there (don't worry, it's not as hard as it sounds). Here's what we have to do:
@@ -145,9 +159,14 @@ class CheckboxPageObject extends BasePage {
     this._testPage.click();
   }
 
-  // This function selects a UI element with the prop `testID = CHECKBOX_TESTPAGE`
-  get _checkboxComponent() {
-    return By(CHECKBOX_TESTPAGE);
+  // This function gives the identifier of the test page's first section. This is used to test page load.
+  get _pageName() {
+    return CHECKBOX_TESTPAGE;
+  }
+
+  // This function gives the identifier of the button that navigates to the component's test page.
+  get _pageButtonName() {
+    return HOMEPAGE_CHECKBOX_BUTTON;
   }
 }
 
@@ -164,21 +183,22 @@ For example, a common task we want to perform is selecting a UI element and gett
 
 - In order for a Page Object to access a component from the test page, you must use [selectors](https://webdriver.io/docs/selectors.html). The WebDriver Protocol provides several selector strategies to query an element.
 
-- If [testID](https://reactnative.dev/docs/next/view#testid) is specified in React Native app for Windows, the locator strategy should choose accessibility id.
-  A unique accessiblity id/testID per Window is recommended for React Native Windows E2E testing when authoring the test app and test cases.
+- The underlying Android test drivers use [accessibilityLabel](https://reactnative.dev/docs/accessibility#accessibilitylabel) to find elements. However, all other platforms use [testID](https://reactnative.dev/docs/next/view#testid). Because of this, we're adding the testProps function that takes in a unique identifier and returns the correct prop based on the platform (testID for Win32, Windows, macOS, iOS; accessibilityId for Android).
+  If explict accessibilityLabel is being used for other platforms, apply testProps after it to override it for Android.
 
-- To use this, we must add a prop to our component or UI element in question called “testID”. In our test page, set the “testID” for the component, and we can then select it in our Page Object using the imported **_By_** method above from a base class.
+- If testProps is specified, the locator strategy should choose accessibility id.
+  A unique accessiblity id/testID per Window is recommended for E2E testing when authoring the test app and test cases.
+
+- To use this, we must add a prop to our component or UI element in question called "testProps". In our test page, set the “testProps” for the component after accessibilityLabel prop (if present), and we can then select it in our Page Object using the imported **_By_** method above from a base class.
 
 ## Setup your Component Test Page in the Test App
 
 In order to test the component, we need a test page in FURNs test app. Once you create that, you'll want to create a separate file for E2E testing (see pattern used by all other controls). Create
-an example and set `testID = {your_components_constant}` on your new control. Now, our automation framework can select this component using the constant you passed in to `testID`.
+an example and set `...{testProps(your_components_constant)}` on your new control. Now, our automation framework can select this component using the constant you passed in to `testProps`.
 
 ## Add to NavigateAppPage.ts
 
 This page object is responsible for navigating through the app to each test page. Here, you'll want to add integration for your new component. (Easily reproducible by looking at other components in the file).
-
-**If testID doesn't exist on your component, simply add it to your component's \_types.ts\_ file.**
 
 ## Write a Test Spec
 
