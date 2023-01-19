@@ -7,6 +7,7 @@ export interface LayoutTokens {
   minWidth?: ViewStyle['minWidth'];
   maxWidth?: ViewStyle['maxWidth'];
   minHeight?: ViewStyle['minHeight'];
+  maxHeight?: ViewStyle['maxHeight'];
   padding?: ViewStyle['padding'];
   paddingHorizontal?: ViewStyle['paddingHorizontal'];
   paddingVertical?: ViewStyle['paddingVertical'];

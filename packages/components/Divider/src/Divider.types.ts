@@ -1,4 +1,4 @@
-import { ViewStyle, ViewProps } from 'react-native';
+import { ViewStyle, ViewProps, ColorValue } from 'react-native';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { IForegroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { TextProps } from '@fluentui-react-native/text';
@@ -10,46 +10,50 @@ export type DividerInsetSize = typeof DividerInsetSizes[number];
 
 export interface DividerProps {
   alignContent?: 'start' | 'center' | 'end';
+  appearance?: 'default' | 'subtle' | 'brand' | 'strong';
+  color?: ColorValue;
   icon?: IconSourcesType;
   inset?: boolean;
   text?: string;
   vertical?: boolean;
 }
 
-export interface DividerTokens extends LayoutTokens, IForegroundColorTokens {
+export interface DividerCoreTokens extends LayoutTokens, IForegroundColorTokens {
   alignment?: ViewStyle['justifyContent'];
-  appearance?: 'default' | 'subtle' | 'brand' | 'strong';
+  color?: ColorValue;
+  contentColor?: ColorValue;
   contentMarginHorizontal?: number;
   contentMarginVertical?: number;
+  height?: ViewStyle['height'];
+  insetStyleProp?: 'paddingHorizontal' | 'paddingVertical';
   insetSize?: DividerInsetSize;
   lineAfterFlex?: number;
   lineBeforeFlex?: number;
+  lineColor?: ColorValue;
+  lineStyleProp?: 'borderTopWidth' | 'borderLeftWidth';
   rootFlexDirection?: ViewStyle['flexDirection'];
   thickness?: number;
+}
+
+export interface DividerTokens extends DividerCoreTokens {
   /* States for the divider */
   alignStart?: DividerTokens;
   alignEnd?: DividerTokens;
   hasChildren?: DividerTokens;
-  hasInset?: DividerTokens;
+  inset?: DividerTokens;
   vertical?: DividerTokens;
-}
-
-export interface DividerState {
-  alignStart?: boolean;
-  alignEnd?: boolean;
-  hasChildren?: boolean;
-  vertical?: boolean;
-}
-
-export interface DividerInfo {
-  state: DividerState;
-  props: DividerProps;
+  /* States related to the appearance prop */
+  default?: DividerTokens;
+  subtle?: DividerTokens;
+  brand?: DividerTokens;
+  strong?: DividerTokens;
 }
 
 export interface DividerSlotProps {
   root: ViewProps;
   beforeLine: ViewProps;
   afterLine: ViewProps;
+  wrapper: ViewProps;
   text: TextProps;
   icon: IconProps;
 }
