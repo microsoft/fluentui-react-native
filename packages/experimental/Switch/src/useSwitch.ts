@@ -58,25 +58,33 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
   //Setting the initial position of the knob on track when page loads.
   React.useEffect(() => {
     if (isMobile) {
-      if (checkedState) {
-        startTrackAnimation(false, animationConfig, animation, checkedState);
-        startTrackBackgroundAnimation(true, trackBackgroundAnimation);
-      } else {
-        startTrackAnimation(true, animationConfig, animation, checkedState);
-        startTrackBackgroundAnimation(false, trackBackgroundAnimation);
-      }
+      Animated.timing(animation, {
+        toValue: checkedState ? animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2) : 0,
+        duration: 0,
+        useNativeDriver: false,
+      }).start();
+
+      const toValue = checkedState ? 0 : 1;
+      Animated.timing(trackBackgroundAnimation, {
+        toValue,
+        duration: 0,
+        useNativeDriver: false,
+      }).start();
     }
-  }, [checkedState, animationConfig]);
+  }, []);
 
   // Function to change background slowly over time when switch is toggled.
-  const startTrackBackgroundAnimation = React.useCallback((checked: boolean, animation: Animated.Value) => {
-    const toValue = checked ? 0 : 1;
-    Animated.timing(animation, {
-      toValue,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-  }, []);
+  const startTrackBackgroundAnimation = React.useCallback(
+    (checked: boolean, animation: Animated.Value) => {
+      const toValue = checked ? 0 : 1;
+      Animated.timing(animation, {
+        toValue,
+        duration: 500,
+        useNativeDriver: false,
+      }).start();
+    },
+    [animation, checked],
+  );
 
   // Function to transform the knob over track in animated way when switch is toggled.
   const startTrackAnimation = React.useCallback(
@@ -86,12 +94,12 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
           ? animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2)
           : onInit
           ? 0
-          : -(animationConfig.trackWidth + animationConfig.thumbWidth),
+          : -(animationConfig.trackWidth / 2 - animationConfig.thumbWidth),
         duration: 300,
         useNativeDriver: false,
       }).start();
     },
-    [],
+    [animation, animationConfig],
   );
 
   const switchAnimationStyles = React.useMemo(() => {
