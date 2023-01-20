@@ -16,8 +16,8 @@ class TabsV1PageObject extends BasePage {
     return TABSV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(TABSV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return TABSV1_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

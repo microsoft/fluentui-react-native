@@ -1,5 +1,5 @@
 import { ICON_TESTPAGE, ICON_TEST_COMPONENT, HOMEPAGE_ICON_BUTTON, ICON_FONT_TEST_COMPONENT } from '../../IconLegacy/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class IconV1PageObject extends BasePage {
   /*****************************************/
@@ -9,12 +9,12 @@ class IconV1PageObject extends BasePage {
     return ICON_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(ICON_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return ICON_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(ICON_FONT_TEST_COMPONENT);
+  get _secondaryComponentName() {
+    return ICON_FONT_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

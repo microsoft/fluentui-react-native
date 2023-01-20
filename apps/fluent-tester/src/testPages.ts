@@ -32,7 +32,7 @@ import { ShadowTest } from './TestComponents/Shadow';
 import { ShimmerTest } from './TestComponents/Shimmer';
 import { SpacingTokensTest } from './TestComponents/Spacing';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
-import { SvgTest } from './TestComponents/Svg';
+import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
 import { TabsLegacyTest } from './TestComponents/TabsLegacy';
 import { TabsV1Test } from './TestComponents/TabsV1';
@@ -248,9 +248,15 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'Svg',
+    name: 'Svg rendering',
     component: SvgTest,
     testPageButton: Constants.HOMEPAGE_SVG_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32'],
+  },
+  {
+    name: 'Svg Icon packages',
+    component: RNSVGIconsTest,
+    testPageButton: Constants.HOMEPAGE_RNSVGIcons_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {

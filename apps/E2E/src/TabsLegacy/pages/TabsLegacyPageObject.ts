@@ -79,8 +79,8 @@ class TabsLegacyPageObject extends BasePage {
     return TABS_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(TABS_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return TABS_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

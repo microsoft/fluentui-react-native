@@ -94,8 +94,8 @@ class FocusZonePageObject extends BasePage {
     return FOCUSZONE_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(FOCUSZONE_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return FOCUSZONE_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

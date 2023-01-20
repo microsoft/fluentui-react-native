@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Add shared colors to AliasColorTokens and mapPipelineToTheme",
+  "comment": "Update all design-tokens packages to 0.42.0",
   "packageName": "@fluentui-react-native/apple-theme",
   "email": "78454019+lyzhan7@users.noreply.github.com",
   "dependentChangeType": "patch"
