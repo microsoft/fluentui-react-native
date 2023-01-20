@@ -56,11 +56,14 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(COLORTOKENS_TEST_COMPONENT)}
       />
-      <View>
-        <Text>{p.colorName + ' (' + p.colorValue?.toString() + ')'}</Text>
-      </View>
+      <Text>{p.colorName + ' (' + p.colorValue?.toString() + ')'}</Text>
     </View>
   );
+};
+
+const getSwatch = (item) => {
+  const { colorValue, colorName } = item;
+  return <ColorToken key={colorName} colorValue={colorValue} colorName={colorName} />;
 };
 
 const AliasColorTokensSwatchList: React.FunctionComponent = () => {
@@ -90,10 +93,7 @@ const AliasColorTokensSwatchList: React.FunctionComponent = () => {
 
   const aliasColorTokensAsArray = React.useMemo(flattenArray, [flattenArray]);
 
-  const renderSwatch = React.useCallback((item) => {
-    const { colorName, colorValue } = item;
-    return <ColorToken key={colorName} colorName={colorName} colorValue={colorValue} />;
-  }, []);
+  const renderSwatch = React.useCallback(getSwatch, []);
 
   return (
     <View style={commonTestStyles.view}>
@@ -118,10 +118,7 @@ const globalNeutralColorTokensAsArray = globalNeutralColorNamesSortedDarkToLight
 });
 
 const GlobalNeutralColorTokensSwatchList: React.FunctionComponent = () => {
-  const renderSwatch = React.useCallback((item) => {
-    const { colorValue, colorName } = item;
-    return <ColorToken key={colorName} colorValue={colorValue} colorName={colorName} />;
-  }, []);
+  const renderSwatch = React.useCallback(getSwatch, []);
 
   return (
     <View style={commonTestStyles.view}>
@@ -148,10 +145,7 @@ const globalSharedColorTokensAsArray = globalSharedColorNames
   .reduce((accumulator, sharedColor) => accumulator.concat(sharedColor));
 
 const GlobalSharedColorTokensSwatchList: React.FunctionComponent = () => {
-  const renderSwatch = React.useCallback((item) => {
-    const { colorValue, colorName } = item;
-    return <ColorToken key={colorName} colorValue={colorValue} colorName={colorName} />;
-  }, []);
+  const renderSwatch = React.useCallback(getSwatch, []);
 
   return (
     <View style={commonTestStyles.view}>
