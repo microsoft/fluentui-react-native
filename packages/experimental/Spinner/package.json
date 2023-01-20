@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-react-native/experimental-spinner",
+  "name": "@fluentui-react-native/spinner",
   "version": "0.0.1",
   "description": "A cross-platform Fluent spinner component",
   "main": "src/index.ts",
