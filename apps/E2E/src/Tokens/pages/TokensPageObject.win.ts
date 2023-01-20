@@ -1,5 +1,5 @@
 import { HOMEPAGE_TOKEN_BUTTON, TOKEN_TESTPAGE, TOKENS_TEST_COMPONENT } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class TokenPageObject extends BasePage {
   /*****************************************/
@@ -9,8 +9,8 @@ class TokenPageObject extends BasePage {
     return TOKEN_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(TOKENS_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return TOKENS_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

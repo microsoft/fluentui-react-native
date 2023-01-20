@@ -56,17 +56,6 @@ export const RadioGroup = compose<RadioGroupType>({
         </Slots.label>
       );
 
-      // Populate the buttonKeys array
-      if (children) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - TODO, fix typing error
-        contextValue.values = React.Children.map(children, (child: React.ReactChild) => {
-          if (React.isValidElement(child)) {
-            return child.props.value;
-          }
-        });
-      }
-
       const isFocusZoneImplemented = ['macos', 'win32'].includes(Platform.OS as string);
 
       const radioGroupContent = <Slots.options>{children}</Slots.options>;

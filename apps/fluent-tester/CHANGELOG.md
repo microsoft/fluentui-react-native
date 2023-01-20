@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 01:45:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.127.0
+
+Fri, 20 Jan 2023 01:45:16 GMT
+
+### Minor changes
+
+- Add test page as a playground for various icon packages available on the internet. (warleu@microsoft.com)
+
+## 0.126.37
+
+Wed, 18 Jan 2023 22:36:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.10
+
+## 0.126.36
+
+Wed, 18 Jan 2023 19:14:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.9
 
 ## 0.126.35
 
