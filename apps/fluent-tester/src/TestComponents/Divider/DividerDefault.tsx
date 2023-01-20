@@ -2,7 +2,7 @@ import { Divider } from '@fluentui-react-native/divider';
 import * as React from 'react';
 import { View } from 'react-native';
 
-const DividerWithInset = Divider.customize({ inset: true, insetSize: 56, thickness: 3 });
+const DividerWithInset = Divider.customize({ insetSize: 56, thickness: 3 });
 
 export const DividerDefault: React.FunctionComponent = () => {
   return (
@@ -18,9 +18,9 @@ export const DividerDefault: React.FunctionComponent = () => {
           },
         }}
       />
-      <Divider inset appearance="brand" alignContent="start" text="Goodbye World" />
+      <Divider insetSize={16} appearance="brand" alignContent="start" text="Goodbye World" />
       <View style={{ borderStyle: 'solid', borderWidth: 1, borderColor: '#606060', marginVertical: 8, height: 200 }}>
-        <Divider vertical inset alignContent="end" text="Hello World!" />
+        <Divider vertical insetSize={16} alignContent="end" text="Hello World!" />
       </View>
       <View style={{ borderStyle: 'solid', borderWidth: 1, borderColor: '#606060', marginVertical: 8, height: 20 }}>
         <Divider appearance="strong" alignContent="end" vertical text="Hi!" />

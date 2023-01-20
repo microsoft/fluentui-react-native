@@ -9,7 +9,7 @@ export const defaultDividerTokens: TokenSettings<DividerTokens, Theme> = (theme:
     contentPadding: 8,
     flexAfter: 1,
     flexBefore: 1,
-    insetSize: 16,
+    insetSize: 0,
     minWidth: 0,
     minHeight: 0,
     thickness: 1,

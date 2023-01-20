@@ -15,7 +15,7 @@ export const dividerStates: (keyof DividerTokens)[] = [
 
 export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, DividerTokens> = {
   tokens: [defaultDividerTokens, divider],
-  tokensThatAreAlsoProps: ['color', 'inset', 'vertical'],
+  tokensThatAreAlsoProps: ['color', 'insetSize', 'vertical'],
   states: dividerStates,
   slotProps: {
     root: buildProps(
@@ -28,15 +28,15 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
           ...layoutStyles.from(tokens, theme),
           ...(tokens.vertical
             ? {
-                paddingVertical: tokens.inset ? tokens.insetSize : 0,
+                paddingVertical: tokens.insetSize,
                 height: '100%',
               }
             : {
-                paddingHorizontal: tokens.inset ? tokens.insetSize : 0,
+                paddingHorizontal: tokens.insetSize,
               }),
         },
       }),
-      ['inset', 'vertical'],
+      ['insetSize', 'vertical'],
     ),
     beforeLine: buildProps(
       (tokens: DividerTokens) => ({

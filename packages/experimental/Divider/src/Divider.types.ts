@@ -13,7 +13,7 @@ export type DividerAppearance = 'default' | 'subtle' | 'brand' | 'strong';
 
 export interface DividerCoreProps {
   color?: ColorValue;
-  inset?: boolean;
+  insetSize?: DividerInsetSize;
   vertical?: boolean;
 }
 
@@ -30,7 +30,6 @@ export interface DividerTokens extends DividerCoreProps, LayoutTokens {
   contentPadding?: string | number;
   flexAfter?: number;
   flexBefore?: number;
-  insetSize?: DividerInsetSize;
   lineColor?: ColorValue;
   thickness?: number;
   /* States */
