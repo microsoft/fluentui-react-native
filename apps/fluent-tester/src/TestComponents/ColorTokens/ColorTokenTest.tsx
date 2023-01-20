@@ -29,10 +29,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 5,
   },
-  pickerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
   stackStyle: {
     borderWidth: 2,
     padding: 12,
@@ -40,41 +36,49 @@ const styles = StyleSheet.create({
   },
 });
 
-const getSwatchColorStyle = (name: string, color: ColorValue): ViewStyle => {
-  styles[name] = styles[name] || { backgroundColor: color };
-  return styles[name];
+const getSwatchColorStyle = (colorName: string, colorValue: ColorValue): ViewStyle => {
+  styles[colorName] = styles[colorName] || { backgroundColor: colorValue };
+  return styles[colorName];
 };
 
-type ColorTokenProps = { color: ColorValue; name: string };
+type ColorTokenProps = { colorValue: ColorValue; colorName: string };
 const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps) => {
+  if (p.colorValue === undefined) {
+    console.warn('Color token ' + p.colorName + ' is undefined');
+  }
+
   const themedStyles = getThemedStyles(useTheme());
   return (
     <View style={styles.swatchItem}>
       <View
-        style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]}
+        style={[getSwatchColorStyle(p.colorName, p.colorValue), themedStyles.swatch]}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(COLORTOKENS_TEST_COMPONENT)}
       />
-      <Text>{p.name}</Text>
+      <View>
+        <Text>{p.colorName + ' (' + p.colorValue?.toString() + ')'}</Text>
+      </View>
     </View>
   );
 };
 
-const AliasTokensSwatchList: React.FunctionComponent = () => {
+const AliasColorTokensSwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
+
   const isOfficeTheme =
     theme.name === 'White' ||
     theme.name === 'Colorful' ||
     theme.name === 'DarkGray' ||
     theme.name === 'Black' ||
     theme.name === 'HighContrast';
+
   const aliasColorTokens = isOfficeTheme
     ? createOfficeAliasTokens(theme.name)
     : createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
 
   const aggregator = React.useCallback(
-    (key: string) => {
-      return { key: key + ' (' + (aliasColorTokens[key] as string) + ')', color: aliasColorTokens[key] };
+    (colorName: string) => {
+      return { colorName: colorName, colorValue: aliasColorTokens[colorName] };
     },
     [aliasColorTokens],
   );
@@ -83,15 +87,16 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
     return Object.keys(aliasColorTokens).map(aggregator);
   }, [aliasColorTokens, aggregator]);
 
-  const aliasTokensAsArray = React.useMemo(flattenArray, [flattenArray]);
+  const aliasColorTokensAsArray = React.useMemo(flattenArray, [flattenArray]);
+
   const renderSwatch = React.useCallback((item) => {
-    const { color, key } = item;
-    return <ColorToken key={key} color={color} name={key} />;
+    const { colorName, colorValue } = item;
+    return <ColorToken key={colorName} colorName={colorName} colorValue={colorValue} />;
   }, []);
+
   return (
     <View style={commonTestStyles.view}>
-      <Text>Alias Color Tokens from Token Pipeline</Text>
-      <View style={styles.stackStyle}>{aliasTokensAsArray.map((item) => renderSwatch(item))}</View>
+      <View style={styles.stackStyle}>{aliasColorTokensAsArray.map((item) => renderSwatch(item))}</View>
     </View>
   );
 };
@@ -100,7 +105,7 @@ const themeSections: TestSection[] = [
   {
     name: 'Alias Color Tokens',
     testID: COLORTOKEN_TESTPAGE,
-    component: () => <AliasTokensSwatchList />,
+    component: () => <AliasColorTokensSwatchList />,
   },
 ];
 
@@ -113,7 +118,7 @@ export const ColorTokensTest: React.FunctionComponent = () => {
     androidStatus: 'Experimental',
   };
 
-  const description = 'Alias tokens given from token pipeline. Currently values are pulled from web. Will be used to style components.';
+  const description = 'Alias and global tokens given from token pipeline. Used to style components.';
 
   return <Test name="Color Tokens Test" description={description} sections={themeSections} status={status} />;
 };
