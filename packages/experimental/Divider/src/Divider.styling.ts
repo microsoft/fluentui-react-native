@@ -22,7 +22,7 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
       (tokens: DividerTokens, theme: Theme) => ({
         style: {
           alignItems: 'center',
-          justifyContent: tokens.alignment,
+          justifyContent: 'center',
           display: 'flex',
           flexDirection: tokens.vertical ? 'column' : 'row',
           ...layoutStyles.from(tokens, theme),

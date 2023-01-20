@@ -5,7 +5,6 @@ import { DividerTokens } from './Divider.types';
 export const defaultDividerTokens: TokenSettings<DividerTokens, Theme> = (theme: Theme) =>
   ({
     // base tokens
-    alignment: 'center',
     contentPadding: 0,
     flexAfter: 1,
     flexBefore: 1,
@@ -15,11 +14,9 @@ export const defaultDividerTokens: TokenSettings<DividerTokens, Theme> = (theme:
     thickness: 1,
     // for aligning the divider if alignContent !== 'center'
     alignStart: {
-      alignment: 'flex-start',
       flexBefore: 0,
     },
     alignEnd: {
-      alignment: 'flex-end',
       flexAfter: 0,
     },
     // vertical style overrides
