@@ -55,7 +55,7 @@ const radioGroupV1Sections: TestSection[] = [
 
 export const RadioGroupV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Backlog',
