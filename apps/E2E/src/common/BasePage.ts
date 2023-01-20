@@ -162,7 +162,20 @@ export abstract class BasePage {
       }
       default:
       case MobilePlatform.Android:
-        // Todo
+        /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
+         * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
+         * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
+        await browser.waitUntil(
+          async () => {
+            const buttonElementSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_BUTTONS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).setAsVerticalList().scrollIntoView(new UiSelector().description("${this._pageButtonName}"))`;
+            const pageButton = await $(`android=${buttonElementSelector}`);
+            return await pageButton.isDisplayed();
+          },
+          {
+            timeout: this.waitForUiEvent,
+            timeoutMsg: errorMsg,
+          },
+        );
         break;
     }
   }
@@ -265,7 +278,9 @@ export abstract class BasePage {
 
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
-  abstract get _testPage(): Promise<WebdriverIO.Element>;
+  get _testPage(): Promise<WebdriverIO.Element> {
+    return By(this._pageName);
+  }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
@@ -284,11 +299,17 @@ export abstract class BasePage {
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
-  abstract get _pageButton(): Promise<WebdriverIO.Element>;
+  get _pageButton(): Promise<WebdriverIO.Element> {
+    return By(this._pageButtonName);
+  }
 
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
   abstract get _pageName(): string;
+
+  // Returns: String
+  // Returns the name of the button that navigates to the test page.
+  abstract get _pageButtonName(): string;
 
   // The scrollviewer containing the list of buttons to navigate to each test page
   get _testPageButtonScrollViewer() {

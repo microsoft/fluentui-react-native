@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Wed, 18 Jan 2023 01:55:11 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.11",
+      "version": "0.22.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.34",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Jan 2023 20:17:18 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.10",
+      "version": "0.22.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.33",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Jan 2023 22:25:00 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.9",
+      "version": "0.22.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.32",
+            "commit": "17bf1b56555ea10ad474c765d447718a1742b982"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Jan 2023 12:26:31 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.8",
+      "version": "0.22.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.31",
+            "commit": "984ee826e94da2e7dabf162d02007727adba53ac"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Jan 2023 16:55:53 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.7",
+      "version": "0.22.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "60c0e928993c257e84e6078343f34495b6738301",
+            "comment": "Fix useKeyProps for Windows + more followup"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Dec 2022 16:09:27 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.22.6",
       "version": "0.22.6",

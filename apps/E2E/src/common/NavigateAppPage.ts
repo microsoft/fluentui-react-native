@@ -1,26 +1,26 @@
 import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../ActivityIndicator/consts';
 import { HOMEPAGE_AVATAR_BUTTON } from '../Avatar/consts';
 import { HOMEPAGE_BADGE_BUTTON } from '../Badge/consts';
-import { HOMEPAGE_CHECKBOX_BUTTON } from '../Checkbox/consts';
-import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../CheckboxExperimental/consts';
+import { HOMEPAGE_CHECKBOX_BUTTON } from '../CheckboxLegacy/consts';
+import { HOMEPAGE_CHECKBOXV1_BUTTON } from '../CheckboxV1/consts';
 import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../CornerRadiusTokens/consts';
-import { HOMEPAGE_BUTTON_BUTTON } from '../Button/consts';
+import { HOMEPAGE_BUTTON_BUTTON } from '../ButtonLegacy/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../ContextualMenu/consts';
-import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../TabsExperimental/consts';
+import { HOMEPAGE_TABSV1_BUTTON } from '../TabsV1/consts';
 import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../FocusTrapZone/consts';
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../FocusZone/consts';
-import { HOMEPAGE_ICON_BUTTON } from '../Icon/consts';
-import { HOMEPAGE_LINK_BUTTON } from '../Link/consts';
-import { HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from '../LinkExperimental/consts';
+import { HOMEPAGE_ICON_BUTTON } from '../IconLegacy/consts';
+import { HOMEPAGE_LINK_BUTTON } from '../LinkLegacy/consts';
+import { HOMEPAGE_LINKV1_BUTTON } from '../LinkV1/consts';
 import { HOMEPAGE_MENU_BUTTON } from '../Menu/consts';
-import { HOMEPAGE_MENUBUTTON_BUTTON } from '../MenuButton/consts';
-import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '../MenuButtonExperimental/consts';
+import { HOMEPAGE_MENUBUTTON_BUTTON } from '../MenuButtonLegacy/consts';
+import { HOMEPAGE_MENUBUTTONV1_BUTTON } from '../MenuButtonV1/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../PersonaCoin/consts';
 import { HOMEPAGE_PRESSABLE_BUTTON } from '../Pressable/consts';
-import { HOMEPAGE_RADIOGROUP_BUTTON } from '../RadioGroup/consts';
-import { HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from '../RadioGroupExperimental/consts';
+import { HOMEPAGE_RADIOGROUP_BUTTON } from '../RadioGroupLegacy/consts';
+import { HOMEPAGE_RADIOGROUPV1_BUTTON } from '../RadioGroupV1/consts';
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../Separator/consts';
 import { HOMEPAGE_SHADOW_BUTTON } from '../Shadow/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../Shimmer/consts';
@@ -28,10 +28,10 @@ import { HOMEPAGE_SPACING_BUTTON } from '../Spacing/consts';
 import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../StrokeWidthTokens/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../Switch/consts';
-import { HOMEPAGE_TEXT_BUTTON } from '../Text/consts';
-import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../TextExperimental/consts';
+import { HOMEPAGE_TEXT_BUTTON } from '../TextLegacy/consts';
+import { HOMEPAGE_TEXTV1_BUTTON } from '../TextV1/consts';
 import { HOMEPAGE_TOKEN_BUTTON } from '../Tokens/consts';
-import { HOMEPAGE_TABS_BUTTON } from '../Tabs/consts';
+import { HOMEPAGE_TABS_BUTTON } from '../TabsLegacy/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../Theme/consts';
 import { BASE_TESTPAGE } from './consts';
 import { By, BasePage } from './BasePage';
@@ -57,12 +57,12 @@ class NavigateAppPage extends BasePage {
     await (await this.calloutPage).click();
   }
 
-  async clickAndGoToCheckboxPage() {
-    await (await this.checkboxPage).click();
+  async clickAndGoToCheckboxLegacyPage() {
+    await (await this.checkboxLegacyPage).click();
   }
 
-  async clickAndGoToCheckboxExperimentalPage() {
-    await (await this.checkboxExperimentalPage).click();
+  async clickAndGoToCheckboxV1Page() {
+    await (await this.checkboxV1Page).click();
   }
 
   async clickAndGoToContextualMenuPage() {
@@ -85,24 +85,24 @@ class NavigateAppPage extends BasePage {
     await (await this.iconPage).click();
   }
 
-  async clickAndGoToLinkPage() {
-    await (await this.linkPage).click();
+  async clickAndGoToLinkLegacyPage() {
+    await (await this.linkLegacyPage).click();
   }
 
-  async clickAndGoToLinkExperimentalPage() {
-    await (await this.linkExperimentalPage).click();
+  async clickAndGoToLinkV1Page() {
+    await (await this.linkV1Page).click();
   }
 
   async clickAndGoToMenuPage() {
     await (await this.menuPage).click();
   }
 
-  async clickAndGoToMenuButtonPage() {
-    await (await this.menuButtonPage).click();
+  async clickAndGoToMenuButtonLegacyPage() {
+    await (await this.menuButtonLegacyPage).click();
   }
 
-  async clickAndGoToExperimentalMenuButtonPage() {
-    await (await this.menuButtonExperimentalPage).click();
+  async clickAndGoToMenuButtonV1Page() {
+    await (await this.menuButtonV1Page).click();
   }
 
   async clickAndGoToPersonaPage() {
@@ -117,12 +117,12 @@ class NavigateAppPage extends BasePage {
     await (await this.pressablePage).click();
   }
 
-  async clickAndGoToRadioGroupPage() {
-    await (await this.radioGroupPage).click();
+  async clickAndGoToRadioGroupLegacyPage() {
+    await (await this.radioGroupLegacyPage).click();
   }
 
-  async clickAndGoToRadioGroupExperimentalPage() {
-    await (await this.radioGroupExperimentalPage).click();
+  async clickAndGoToRadioGroupV1Page() {
+    await (await this.radioGroupV1Page).click();
   }
 
   async clickAndGoToSeparatorPage() {
@@ -153,16 +153,16 @@ class NavigateAppPage extends BasePage {
     await (await this.switchPage).click();
   }
 
-  async clickAndGoToTextPage() {
-    await (await this.textPage).click();
+  async clickAndGoToTextLegacyPage() {
+    await (await this.textLegacyPage).click();
   }
 
-  async clickAndGoToExperimentalTextPage() {
-    await (await this.textExperimentalPage).click();
+  async clickAndGoToTextV1Page() {
+    await (await this.textV1Page).click();
   }
 
-  async clickAndGoToTabsPage() {
-    await (await this.tabsPage).click();
+  async clickAndGoToTabsLegacyPage() {
+    await (await this.tabsLegacyPage).click();
   }
 
   async clickAndGoToThemePage() {
@@ -173,8 +173,8 @@ class NavigateAppPage extends BasePage {
     await (await this.tokensPage).click();
   }
 
-  async clickAndGoToExperimentalTabsPage() {
-    await (await this.experimentalTabsPage).click();
+  async clickAndGoToTabsV1Page() {
+    await (await this.tabsV1Page).click();
   }
 
   /*
@@ -205,12 +205,12 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_CALLOUT_BUTTON);
   }
 
-  private get checkboxPage() {
+  private get checkboxLegacyPage() {
     return By(HOMEPAGE_CHECKBOX_BUTTON);
   }
 
-  private get checkboxExperimentalPage() {
-    return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
+  private get checkboxV1Page() {
+    return By(HOMEPAGE_CHECKBOXV1_BUTTON);
   }
 
   private get contextualMenuPage() {
@@ -233,24 +233,24 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_ICON_BUTTON);
   }
 
-  private get linkPage() {
+  private get linkLegacyPage() {
     return By(HOMEPAGE_LINK_BUTTON);
   }
 
-  private get linkExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_LINK_BUTTON);
+  private get linkV1Page() {
+    return By(HOMEPAGE_LINKV1_BUTTON);
   }
 
   private get menuPage() {
     return By(HOMEPAGE_MENU_BUTTON);
   }
 
-  private get menuButtonPage() {
+  private get menuButtonLegacyPage() {
     return By(HOMEPAGE_MENUBUTTON_BUTTON);
   }
 
-  private get menuButtonExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_MENU_BUTTON);
+  private get menuButtonV1Page() {
+    return By(HOMEPAGE_MENUBUTTONV1_BUTTON);
   }
 
   private get personaPage() {
@@ -265,12 +265,12 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_PRESSABLE_BUTTON);
   }
 
-  private get radioGroupPage() {
+  private get radioGroupLegacyPage() {
     return By(HOMEPAGE_RADIOGROUP_BUTTON);
   }
 
-  private get radioGroupExperimentalPage() {
-    return By(HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON);
+  private get radioGroupV1Page() {
+    return By(HOMEPAGE_RADIOGROUPV1_BUTTON);
   }
 
   private get separatorPage() {
@@ -301,15 +301,15 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_SWITCH_BUTTON);
   }
 
-  private get textPage() {
+  private get textLegacyPage() {
     return By(HOMEPAGE_TEXT_BUTTON);
   }
 
-  private get textExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
+  private get textV1Page() {
+    return By(HOMEPAGE_TEXTV1_BUTTON);
   }
 
-  private get tabsPage() {
+  private get tabsLegacyPage() {
     return By(HOMEPAGE_TABS_BUTTON);
   }
 
@@ -321,8 +321,8 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_TOKEN_BUTTON);
   }
 
-  private get experimentalTabsPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
+  private get tabsV1Page() {
+    return By(HOMEPAGE_TABSV1_BUTTON);
   }
 
   get _pageName() {
@@ -332,6 +332,10 @@ class NavigateAppPage extends BasePage {
 
   get _pageButton(): Promise<WebdriverIO.Element> {
     throw new Error('You are trying to read the _pageButton getter for NavigateAppPage, which is not implemented.');
+  }
+
+  get _pageButtonName(): string {
+    throw new Error('You are trying to read the _pageButtonName getter for NavigateAppPage, which is not implemented.');
   }
 }
 

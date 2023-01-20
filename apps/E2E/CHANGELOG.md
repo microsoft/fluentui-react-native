@@ -1,8 +1,112 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 30 Dec 2022 16:09:27 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.10.1
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.23
+
+## 1.10.0
+
+Sat, 14 Jan 2023 17:43:18 GMT
+
+### Minor changes
+
+- Remove need to override testPage, add pageButtonName fn (ayushsinghs@yahoo.in)
+
+## 1.9.8
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.22
+
+## 1.9.7
+
+Tue, 10 Jan 2023 18:57:29 GMT
+
+### Patches
+
+- Refactor MenuButtonExperimental tests (winlarry@microsoft.com)
+
+## 1.9.6
+
+Tue, 10 Jan 2023 17:55:08 GMT
+
+### Patches
+
+- Refactor RadioGroup spec and PageObject code (winlarry@microsoft.com)
+
+## 1.9.5
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.21
+
+## 1.9.4
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.20
+
+## 1.9.3
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.19
+
+## 1.9.2
+
+Wed, 04 Jan 2023 01:18:14 GMT
+
+### Patches
+
+- Overhaul Menu E2E test with new testing methods, better test errors. (winlarry@microsoft.com)
+
+## 1.9.1
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Rename experimental to v1, add legacy to test names (ruaraki@microsoft.com)
+
+## 1.9.0
+
+Tue, 03 Jan 2023 22:50:24 GMT
+
+### Minor changes
+
+- Add click tests (ruaraki@microsoft.com)
+
+## 1.8.7
+
+Tue, 03 Jan 2023 20:16:36 GMT
+
+### Patches
+
+- Overhaul ContextualMenu, Link, and LinkV1 E2E tests with better errors and refactored spec code (winlarry@microsoft.com)
+
+## 1.8.6
+
+Mon, 02 Jan 2023 18:05:05 GMT
+
+### Patches
+
+- Basic E2E setup for android (ayushsinghs@yahoo.in)
 
 ## 1.8.5
 

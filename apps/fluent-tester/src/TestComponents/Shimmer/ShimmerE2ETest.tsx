@@ -4,16 +4,18 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { shimmerRectsAndRect } from './ShimmerTestElementSets';
 import { SHIMMER_TEST_COMPONENT } from '../../../../E2E/src/Shimmer/consts';
+import { testProps } from '../Common/TestProps';
 
 export const E2ETestingShimmer: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
       <Shimmer
-        testID={SHIMMER_TEST_COMPONENT}
         elements={shimmerRectsAndRect()}
         duration={2000}
         delay={1000}
         style={{ width: 300, height: 100 }}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(SHIMMER_TEST_COMPONENT)}
       />
     </Stack>
   );

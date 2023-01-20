@@ -2,6 +2,108 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Wed, 18 Jan 2023 01:55:11 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.12.34",
+      "version": "1.12.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.24",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.29.1",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.12.20",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.17.16",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Jan 2023 20:17:18 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.12.33",
+      "version": "1.12.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.23",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.29.0",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.12.19",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.17.15",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Jan 2023 22:25:00 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.12.32",
+      "version": "1.12.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.22",
+            "commit": "17bf1b56555ea10ad474c765d447718a1742b982"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Jan 2023 12:26:31 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.12.31",
+      "version": "1.12.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-compose",
+            "commit": "984ee826e94da2e7dabf162d02007727adba53ac",
+            "comment": "Change default theme const to a method"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.21",
+            "commit": "984ee826e94da2e7dabf162d02007727adba53ac"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 29 Dec 2022 03:47:47 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.12.30",
       "version": "1.12.30",
