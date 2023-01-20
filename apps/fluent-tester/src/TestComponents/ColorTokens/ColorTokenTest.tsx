@@ -10,6 +10,7 @@ import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '../../../../E2E/src/ColorTokens/consts';
 import { testProps } from '../Common/TestProps';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -101,11 +102,44 @@ const AliasColorTokensSwatchList: React.FunctionComponent = () => {
   );
 };
 
+const globalNeutralColorNamesSortedDarkToLight = Object.keys(globalTokens.color)
+  .filter((globalColorName) => globalColorName.includes('grey') || globalColorName === 'black' || globalColorName === 'white')
+  .sort((color1, color2) => {
+    const color1hex = globalTokens.color[color1];
+    const color2hex = globalTokens.color[color2];
+    return color1hex === color2hex ? 0 : color1hex < color2hex ? -1 : 1;
+  });
+
+const globalNeutralColorTokensAsArray = globalNeutralColorNamesSortedDarkToLight.map((colorName: string) => {
+  return {
+    colorName: colorName,
+    colorValue: globalTokens.color[colorName],
+  };
+});
+
+const GlobalNeutralColorTokensSwatchList: React.FunctionComponent = () => {
+  const renderSwatch = React.useCallback((item) => {
+    const { colorValue, colorName } = item;
+    return <ColorToken key={colorName} colorValue={colorValue} colorName={colorName} />;
+  }, []);
+
+  return (
+    <View style={commonTestStyles.view}>
+      <View style={styles.stackStyle}>{globalNeutralColorTokensAsArray.map((item) => renderSwatch(item))}</View>
+    </View>
+  );
+};
+
 const themeSections: TestSection[] = [
   {
     name: 'Alias Color Tokens',
     testID: COLORTOKEN_TESTPAGE,
     component: () => <AliasColorTokensSwatchList />,
+  },
+  {
+    name: 'Global Color Tokens - Neutral Colors',
+    testID: COLORTOKEN_TESTPAGE,
+    component: () => <GlobalNeutralColorTokensSwatchList />,
   },
 ];
 
