@@ -162,7 +162,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       },
       ['size', 'ringColor', 'ringBackgroundColor', 'ringThickness', ...borderStyles.keys],
     ),
-    outerRing: buildProps(
+    ...(Platform.OS === 'android' && {
+        outerRing : buildProps(
       (tokens: AvatarTokens, theme: Theme) => {
         const { ringBackgroundColor } = tokens;
         const ringConfig = getRingConfig(tokens);
@@ -178,7 +179,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
         };
       },
       ['size', 'ringColor', 'ringBackgroundColor', 'ringThickness', ...borderStyles.keys],
-    ),
+    )}),
     badge: buildProps(
       (tokens: AvatarTokens) => {
         return {
