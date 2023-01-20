@@ -31,9 +31,13 @@ More examples on the [Test pages for RadioGroup](../../../apps/fluent-tester/src
 
 Win32:
 
-image.png
+![Uncontrolled RadioGroup Example on Win32](./assets/uncontrolled_radiogroup.png)
 
 ```tsx
+const onChange = React.useCallback((key: string) => {
+  console.log(key);
+}, []);
+
 const radiogroup = (
   <RadioGroup label="Uncontrolled RadioGroup" defaultValue="X" onChange={onChange}>
     <Radio label="Option W" value="W" />
@@ -45,6 +49,10 @@ const radiogroup = (
 ```
 
 ### Controlled RadioGroup
+
+Win32:
+
+![Controlled RadioGroup Example on Win32](./assets/controlled_radiogroup.png)
 
 ```tsx
 const [selectedKey, setSelectedKey] = React.useState('C');
@@ -65,6 +73,10 @@ const radiogroup = (
 
 ### Disabled RadioGroup
 
+Win32:
+
+![Disabled RadioGroup Example on Win32](./assets/disabled_radiogroup.png)
+
 ```tsx
 const onChange = React.useCallback((key: string) => {
   console.log(key);
@@ -81,6 +93,10 @@ const radiogroup = (
 ```
 
 ### Disabled Radio
+
+Win32:
+
+![Disabled Radio Example on Win32](./assets/disabled_item.png)
 
 ```tsx
 const onChange = React.useCallback((key: string) => {
@@ -99,6 +115,10 @@ const radiogroup = (
 
 ### Required RadioGroup
 
+Win32:
+
+![Required RadioGroup Example on Win32](./assets/required_radiogroup.png)
+
 ```tsx
 const onChange = React.useCallback((key: string) => {
   console.log(key);
@@ -114,88 +134,200 @@ const radiogroup = (
 );
 ```
 
-## Visual Examples
+### Label Subtext
 
 Win32:
 
-![Button with text on win32 example](./assets/button_example_win32.png)
+![Label Subtext RadioGroup Example on Win32](./assets/subtext_radiogroup.png)
 
 ```tsx
-<Button>Text</Button>
+const onChange = React.useCallback((key: string) => {
+  console.log(key);
+}, []);
+
+const radiogroup = (
+  <RadioGroup label="Select a fruit:" defaultValue="Pear" onChange={onChange}>
+    <Radio label="Apple" subtext="This is a type of fruit" value="Apple" />
+    <Radio label="Pear" subtext="This is a type of fruit" value="Pear" />
+    <Radio label="Banana" subtext="This is a type of fruit" value="Banana" />
+    <Radio label="Tomato" subtext="This is a type of fruit" value="Tomato" />
+  </RadioGroup>
+);
 ```
 
-![Button with text and primary appearance on win32 example](./assets/button_primary_example_win32.png)
+### Horizontal RadioGroup
+
+Win32:
+
+![Horizontal RadioGroup Example on Win32](./assets/horizontal_radiogroup.png)
 
 ```tsx
-<Button appearance="primary">Text</Button>
+const onChange = React.useCallback((key: string) => {
+  console.log(key);
+}, []);
+
+const radiogroup = (
+  <RadioGroup layout={'horizontal'} label="Horizontal RadioGroup" defaultValue="Pear" onChange={onChange}>
+    <Radio label="Apple" value="Apple" />
+    <Radio label="Pear" value="Pear" />
+    <Radio label="Banana" value="Banana" />
+    <Radio label="Orange" value="Orange" />
+  </RadioGroup>
+);
+```
+
+### Horizontal-Stacked RadioGroup
+
+Win32:
+
+![Horizontal-Stacked RadioGroup Example on Win32](./assets/horizontal_stacked_radiogroup.png)
+
+```tsx
+const onChange = React.useCallback((key: string) => {
+  console.log(key);
+}, []);
+
+const radiogroup = (
+  <RadioGroup layout={'horizontal-stacked'} label="Horizontal-Stacked RadioGroup" defaultValue="Pear" onChange={onChange}>
+    <Radio label="Apple" value="Apple" />
+    <Radio label="Pear" value="Pear" />
+    <Radio label="Banana" value="Banana" />
+    <Radio label="Orange" value="Orange" />
+  </RadioGroup>
+);
 ```
 
 ## Variants
 
-### Appearance
+### Disabled
 
-The `Button` component has several apparance variants depending on where it's being used:
+The `RadioGroup` component or a singular `Radio` button can appear disabled when the "disabled" prop is passed in as true.
 
-- The default `Button` is rendered with its default styling indicating a trigger for an action.
-- appearance="primary": The `Button` is styled to emphasize that it represents the primary action.
-- appearance="subtle": The `Button` is styled to blend into its background to become less emphasized.
+### Required
 
-### Icon
+The `RadioGroup` component can visually appear required when the "required" prop is passed in as true. The RadioGroup will have a red "\*" next to the label to signify a selection must be made. It is up to the user to add additional functionality to ensure a selection is made.
 
-The `Button` component can include an `icon` that appears before or after its `children`. If an `icon` is provided without any other `children` passed into `Button`, then the `Button` becomes an icon-only `Button`.
+### Subtext
 
-### Shape
+The `Radio` component can have a subtext label that will appear below the primary label.
 
-- shape="rounded": The button as rounded corners. This is the default if shape is not set.
-- shape="circular": The button has completely round corners. A button of equal width and height will be a circle.
-- shape="square": The button has right-angle corners.
+### Layout
 
-### Sizes
+The `RadioGroup` component can have different layouts.
 
-The `Button` component supports different sizing with at least three different sizes: `small`, `medium`, and `large`. `Small` is the default on `win32`, `medium` is the default on other platforms.
-
-### Block
-
-The `Button` component can completely fill the width of its container.
-
-### Loading
-
-The `Button` component can be loading if it's waiting for another action to occur before allowing itself to be interacted with.
+- layout="vertical": Radios appear vertically in the group. This is the default if layout is not set.
+- shape="horizontal": Radios appear horizontal in the group.
+- shape="horizontal-stacked": Radios appear horizontal in the group and the label is below the indicator.
 
 ## API
 
 ### Slots
 
-The `Button` component has three slots, or parts. The slots behave as follows:
+The `RadioGroup` component has six slots, or parts. The slots behave as follows:
 
-- `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
-- `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
-- `content` - If specified, renders the first entry of `children` as text.
-- `rippleContainer` - A wrapper view to support curved border in ripple for Android.
+- `root` - The outer container representing the `RadioGroup` itself.
+- `label` - If specified, a wrapper view to support a group label and required visual indicator.
+- `labelText` - If specified, renders a text for the group label before the `children`.
+- `required` - If specified, render a red "\*" text adjacent to the group label.
+- `options` - A wrapper view that wraps everything passed via the `children` prop.
+- `container` - A FocusZone wrapper view that wraps the `options` slot that wraps the children.
 
-The slots can be modified using the `compose` function on the `Button`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
+The `Radio` component has six slots, or parts. The slots behave as follows:
+
+- `root` - The outer container representing the `Radio` itself.
+- `button` - A pressable view that represents the outer circle of the indicator button and wraps the inner circle of the indicator button.
+- `innerCircle` - A wrapper view that represents the inner circle of the indicator button.
+- `labelContent` - A wrapper view that contains the description of the Radio, wrapping both the label and label subtext.
+- `label` - Renders the primary label of the Radio.
+- `subtext` - If specified, renders the label subtext.
+
+The slots can be modified using the `compose` function on the `RadioGroup` or `Radio`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
 
 ### Props
 
-Below is the set of props the button supports:
+Below is the set of props `RadioGroup` supports:
 
 ```ts
-export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
+export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
   /**
-   * A button can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary': Emphasizes the button as a primary action.
-   * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
+   * Descriptive label for the RadioGroup. This will be displayed as the title of the radio group to the user.
    */
-  appearance?: 'primary' | 'subtle';
+  label?: string;
 
   /**
-   * A button can fill the width of its container.
-   * @default false
+   * The key of the RadioButton that will initially be selected.
+   *
+   * This is mutually-exclusive if radiogroup is disabled or radio button is disabled.
    */
-  block?: boolean;
+  defaultValue?: string;
 
   /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   * The key of the selected option. If you provide this, you must maintain selection state by observing
+   * onChange events and passing a new value in when changed. This overrides defaultSelectedKey
+   * and makes the RadioGroup a controlled component.
+   */
+  value?: string;
+
+  /**
+   * Require a selection in this group. Adds the 'required' prop to all child Radio items.
+   */
+  required?: boolean;
+
+  /**
+   * Sets the RadioGroup to disabled if true
+   */
+  disabled?: boolean;
+
+  /**
+   * The position of the label relative to the indicator.
+   *
+   * @default vertical
+   */
+  layout?: 'vertical' | 'horizontal' | 'horizontal-stacked';
+
+  /**
+   * Callback for receiving a notification when the choice has been changed
+   */
+  onChange?: (key: string) => void;
+}
+```
+
+Below is the set of props `Radio` supports:
+
+```ts
+export interface RadioProps extends PressablePropsExtended {
+  /**
+   * The text string for the option
+   */
+  label: string;
+
+  /**
+   * Label subtext for the option
+   */
+  subtext?: string;
+
+  /**
+   * A unique key-identifier for each option
+   */
+  value: string;
+
+  /**
+   * Whether or not the radio button is selectable
+   */
+  disabled?: boolean;
+
+  /**
+   * The position of the label relative to the radio indicator.
+   *
+   * This defaults to 'after' unless the Radio is inside a RadioGroup with layout horizontal-stacked,
+   * in which case it defaults to 'below'
+   *
+   * @default after
+   */
+  labelPosition?: 'after' | 'below';
+
+  /**
+   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
 
@@ -204,175 +336,240 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
    * @default true
    */
   enableFocusRing?: boolean;
-
-  /**
-   * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
-   * `iconPosition` prop.
-   */
-  icon?: IconSourcesType;
-
-  /**
-   * Button contains only icon, there's no text content
-   * Must be set for button to style correctly when button has not content.
-   */
-  iconOnly?: boolean;
-
-  /**
-   * A button can format its icon to appear before or after its content.
-   * @default 'before'
-   */
-  iconPosition?: 'before' | 'after';
-
-  /**
-   * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
-   * be interacted with.
-   * @default false
-   */
-  loading?: boolean;
-
-  /**
-   * A callback to call on button click event
-   */
-  onClick?: (e: InteractionEvent) => void;
-
-  /**
-   * A button can be rounded, circular, or square.
-   * @default 'rounded'
-   */
-  shape?: 'rounded' | 'circular' | 'square';
-
-  /**
-   * A button supports different sizes.
-   * @default 'medium'
-   */
-  size?: 'small' | 'medium' | 'large';
-
-  /**
-   * Text that should show in a tooltip when the user hovers over a button.
-   */
-  tooltip?: string;
 }
 ```
 
 ### Styling Tokens
 
-Tokens can be used to customize the styling of the control by using the `customize` function on the `Button`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Button` has the following tokens:
+Tokens can be used to customize the styling of the control by using the `customize` function on the `RadioGroup` or `Radio`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md).
+
+The `RadioGroup` has the following tokens:
 
 ```ts
-export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {
   /**
-   * Focused State on Android has inner and outer borders.
-   * Outer Border is equivalent to the border tokens from IBorders.
+   * Color of required indicator
    */
-  borderInnerColor?: ColorValue;
-  borderInnerRadius?: number;
-  borderInnerStyle?: ViewStyle['borderStyle'];
-  borderInnerWidth?: number;
+  requiredColor?: ColorValue;
 
   /**
-   * The icon color.
+   * Amount of padding between the end of the label and the start of the required text
    */
-  iconColor?: ColorValue;
+  requiredPadding?: ViewStyle['padding'];
 
   /**
-   * The size of the icon.
+   * The flex direction of the Radios
    */
-  iconSize?: number;
+  flexDirection?: ViewStyle['flexDirection'];
 
   /**
-   * The weight of the lines used when drawing the icon.
+   * States that can be applied to a RadioGroup
    */
-  iconWeight?: number;
+  disabled?: RadioGroupTokens;
+  isHorizontal?: RadioGroupTokens;
+}
+```
+
+The `Radio` has the following tokens:
+
+```ts
+export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+  /**
+   * Horizontal padding of the root view
+   */
+  rootHorizontalPadding?: number;
 
   /**
-   * An object describing the shadow of the button.
+   * Vertical padding of the root view
    */
-  shadowToken?: ShadowToken;
+  rootVerticalPadding?: number;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels.
+   * Indicator border color
    */
-  spacingIconContentBefore?: number;
+  radioBorder?: ColorValue;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels.
+   * Indicator border style
    */
-  spacingIconContentAfter?: number;
+  radioBorderStyle?: ViewStyle['borderStyle'];
 
   /**
-   * The width of the button.
+   * Inner circle color when selected
    */
-  width?: ViewStyle['width'];
+  radioFill?: ColorValue;
 
   /**
-   * States that can be applied to a button.
-   * These can be used to modify styles of the button when under the specified state.
+   * Visibility of the radio inner circle from 0 to 1
    */
-  hovered?: ButtonTokens;
-  focused?: ButtonTokens;
-  pressed?: ButtonTokens;
-  disabled?: ButtonTokens;
-  hasContent?: ButtonTokens;
-  hasIconAfter?: ButtonTokens;
-  hasIconBefore?: ButtonTokens;
-  primary?: ButtonTokens;
-  subtle?: ButtonTokens;
-  block?: ButtonTokens;
-  small?: ButtonTokens;
-  medium?: ButtonTokens;
-  large?: ButtonTokens;
-  rounded?: ButtonTokens;
-  circular?: ButtonTokens;
-  square?: ButtonTokens;
+  radioVisibility?: number;
+
+  /**
+   * Diameter size of the outer indicator
+   */
+  radioOuterCircleSize?: number;
+
+  /**
+   * Diameter size of the inner circle indicator
+   */
+  radioInnerCircleSize?: number;
+
+  /**
+   * Border width of Radio
+   */
+  radioBorderWidth?: number;
+
+  /**
+   * The flex direction of the root
+   */
+  flexDirection?: ViewStyle['flexDirection'];
+
+  /**
+   * Root item alignment
+   */
+  alignItems?: ViewStyle['alignItems'];
+
+  /**
+   * The top margin
+   */
+  marginTop?: ViewStyle['marginTop'];
+
+  /**
+   * The right margin
+   */
+  marginRight?: ViewStyle['marginRight'];
+
+  /**
+   * The bottom margin
+   */
+  marginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * The left margin
+   */
+  marginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Label item alignment
+   */
+  labelAlignItems?: ViewStyle['alignItems'];
+
+  /**
+   * Label's top margin.
+   */
+  labelMarginTop?: ViewStyle['marginTop'];
+
+  /**
+   * Label's right margin.
+   */
+  labelMarginRight?: ViewStyle['marginRight'];
+
+  /**
+   * Label's left margin.
+   */
+  labelMarginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Label's padding.
+   */
+  labelPadding?: ViewStyle['marginLeft'];
+
+  /*
+   * Variant of label subtext.
+   *
+   * Should only by used if subtext prop is provided.
+   */
+  subtextVariant?: keyof Variant;
+
+  /**
+   * Padding between label and label subtext.
+   *
+   * Should only by used if subtext prop is provided.
+   */
+  subtextMarginTop?: ViewStyle['marginTop'];
+
+  /**
+   * Padding between label subtext and focus ring.
+   *
+   * Should only by used if subtext prop is provided.
+   */
+  subtextMarginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
+   */
+  rippleColor?: ColorValue;
+
+  /**
+   * Ripple radius for circular radio on Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the radius of the circular ripple shown on the radio button.
+   * @platform android
+   */
+  rippleRadius?: number;
+
+  /**
+   * States that can be applied to a Radio
+   */
+  labelPositionBelow?: RadioTokens;
+  selected?: RadioTokens;
+  disabled?: RadioTokens;
+  hovered?: RadioTokens;
+  focused?: RadioTokens;
+  pressed?: RadioTokens;
 }
 ```
 
 ## Behaviors
 
+The user will have the opportunity to select from a group of radio buttons. The user may only select one. Selecting a different option will deselect the previously selected option. Initially, the default option (usually the first) is selected.
+
 ### States
 
-The following section describes the different states which `Button` can be in as a result of interaction.
+The following section describes the different states which `RadioGroup` and `Radio` can be in as a result of interaction.
 
-#### Enabled and Disabled states
+#### Enabled and Disabled States
 
-An enabled `Button` communicates interaction by having styling that invites the user to click/tap on it to trigger an action.
+An enabled `RadioGroup` or `Radio` communicates interaction by having styling that invites the user to click/tap on it to trigger an action.
 
-A disabled `Button` is non-interactive, disallowing the user to click/tap on it to trigger an action.
+A disabled `RadioGroup` or `Radio` is non-interactive, disallowing the user to click/tap on it to trigger an action.
 
-#### Hovered state
+#### Hovered State
 
-A hovered `Button` changes styling to communicate that the user has placed a cursor above it.
+A hovered `Radio` changes styling to communicate that the user has placed a cursor above it.
 
-#### Focused state
+#### Focused State
 
-A focused `Button` changes styling to communicate that the user has placed keyboard focus on it. This styling is usually the same to the one in the hovered state plus extra styling on the outline to indicate keyboard focus has been placed on the component.
+A focused `Radio` changes styling to communicate that the user has placed keyboard focus on it. This styling is similar to the one in the hovered state plus extra styling on the outline to indicate keyboard focus has been placed on the component.
 
-#### Pressed state
+#### Pressed State
 
-A pressed `Button` changes styling to communicate that the user is currently pressing it.
-
-#### Loading state
-
-A loading `Button` renders a `loader` before all the other content to indicate that it is waiting for another action before allowing itself to be interacted with.
+A pressed `Radio` changes styling to communicate that the user is currently pressing it.
 
 ### Interaction
 
-#### Keyboard interaction
+#### Keyboard Interaction
 
-The following is a set of keys that interact with the `Button` component:
+`RadioGroup` uses existing `FocusZone` that complies with standard Win32 keyboard interaction guidelines. The following is a set of keys that interact with the `RadioGroup` component children:
 
-| Key     | Description                                           |
-| ------- | ----------------------------------------------------- |
-| `Enter` | Executes the function passed into the `onClick` prop. |
-| `Space` | Executes the function passed into the `onClick` prop. |
+| Key             | Description                                                                                                                                                                |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Tab/Tab+Shift` | Moves focus in and out of a RadioGroup. If Radio is checked, focus is set on selected Radio. If there are no checked Radios, focus is set on the first Radio in the group. |
+| `Space`         | Checks the focused Radio if not already checked.                                                                                                                           |
+| `Up/Left`       | Navigates up the list in a circular fashion. For RTL, `Left` navigates down.                                                                                               |
+| `Down/Right`    | Navigates down the list in a circular fashion. For RTL, `Right` navigates up.                                                                                              |
 
-It is possible to override key behaviors by specifying `onKeyUp` or `onKeyDown`, depending on what `preferKeyDownForKeyEvents` from the `@fluentui-react-native/interactive-hooks` package indicates. Providing the callback this way will prevent the default behaviors noted above -- you will need to handle `Enter` and `Space` in the provided callback if the default behavior is desired.
+It is possible to override key behaviors by specifying `onKeyUp` or `onKeyDown`, depending on what `preferKeyDownForKeyEvents` from the `@fluentui-react-native/interactive-hooks` package indicates. Providing the callback this way will prevent the default behaviors noted above -- you will need to handle `Up/Left` and `Down/Right` in the provided callback if the default behavior is desired.
 
-#### Cursor interaction
+#### Mouse Interaction
 
-- Cursor moves onto botton: Should immediately change the styling of the `Button` so that it appears to be hovered.
-- Cursor moves out of botton: Should immediately remove the hovered styling of the `Button`.
-- Mouse click: Should execute the `Button` and move focus to its target.
+- Cursor moves onto `Radio`: Should immediately change the styling of the `Radio` so that it appears to be hovered.
+- Cursor moves out of `Radio`: Should immediately remove the hovered styling of the `Radio`.
+- Mouse down: Shows a pressed state on `Radio`, but does not immediately select `Radio`.
+- Mouse up: Should execute the `Radio` onChange and move focus to its target.
 
 #### Touch interaction
 
@@ -382,8 +579,11 @@ The same behavior as above translated for touch events. This means that there is
 
 ### Expected behavior
 
-- Should default to adding `role="button"` to the root slot.
-- Should mix in the accessibility props expected for a `button` component.
+- Should default to adding `role="radiogroup"` and `role="radio"` to the root slot.
+- Should mix in the accessibility props expected for a `RadioGroup` and `Radio` component.
 - Should be keyboard tabbable and focusable.
+- Narration when focus is set.
+  - Mouse/Tabbing: "Option A, Radio Button, Selected, Required, 1 of 4"
+  - Keyboard Arrows: “Radio Button, Non-Selected, Required, 1 of 4, Option A”
 
-See [`useButton` hook](./src/useButton.ts) for details on accessibility props
+See [`useRadioGroup` hook](./src/RadioGroup/useRadioGroup.ts) and [`useRadio` hook](./src/Radio/useRadio.ts) for details on accessibility props
