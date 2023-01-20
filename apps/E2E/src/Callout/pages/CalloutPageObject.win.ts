@@ -32,8 +32,8 @@ class CalloutPageObject extends BasePage {
     return CALLOUT_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(CALLOUT_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return CALLOUT_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

@@ -28,12 +28,12 @@ class ButtonV1PageObject extends BasePage {
     return BUTTON_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(BUTTON_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return BUTTON_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(BUTTON_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return BUTTON_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButtonName() {

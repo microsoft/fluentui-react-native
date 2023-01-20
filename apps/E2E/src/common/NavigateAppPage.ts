@@ -6,6 +6,7 @@ import { HOMEPAGE_CHECKBOXV1_BUTTON } from '../CheckboxV1/consts';
 import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../CornerRadiusTokens/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../ButtonLegacy/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../Callout/consts';
+import { HOMEPAGE_COLORTOKEN_BUTTON } from '../ColorTokens/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../ContextualMenu/consts';
 import { HOMEPAGE_TABSV1_BUTTON } from '../TabsV1/consts';
 import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../FocusTrapZone/consts';
@@ -26,11 +27,10 @@ import { HOMEPAGE_SHADOW_BUTTON } from '../Shadow/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../Shimmer/consts';
 import { HOMEPAGE_SPACING_BUTTON } from '../Spacing/consts';
 import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../StrokeWidthTokens/consts';
-import { HOMEPAGE_SVG_BUTTON } from '../Svg/consts';
+import { HOMEPAGE_SVG_BUTTON, HOMEPAGE_RNSVGIcons_BUTTON } from '../Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../TextLegacy/consts';
 import { HOMEPAGE_TEXTV1_BUTTON } from '../TextV1/consts';
-import { HOMEPAGE_TOKEN_BUTTON } from '../Tokens/consts';
 import { HOMEPAGE_TABS_BUTTON } from '../TabsLegacy/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../Theme/consts';
 import { BASE_TESTPAGE } from './consts';
@@ -63,6 +63,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToCheckboxV1Page() {
     await (await this.checkboxV1Page).click();
+  }
+
+  async clickAndGoToColorTokensPage() {
+    await (await this.colorTokensPage).click();
   }
 
   async clickAndGoToContextualMenuPage() {
@@ -149,6 +153,10 @@ class NavigateAppPage extends BasePage {
     await (await this.svgPage).click();
   }
 
+  async clickAndGoToRNSvgIconsPage() {
+    await (await this.rnSvgIconsPage).click();
+  }
+
   async clickAndGoToSwitchPage() {
     await (await this.switchPage).click();
   }
@@ -167,10 +175,6 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToThemePage() {
     await (await this.themePage).click();
-  }
-
-  async clickAndGoToTokensPage() {
-    await (await this.tokensPage).click();
   }
 
   async clickAndGoToTabsV1Page() {
@@ -211,6 +215,10 @@ class NavigateAppPage extends BasePage {
 
   private get checkboxV1Page() {
     return By(HOMEPAGE_CHECKBOXV1_BUTTON);
+  }
+
+  private get colorTokensPage() {
+    return By(HOMEPAGE_COLORTOKEN_BUTTON);
   }
 
   private get contextualMenuPage() {
@@ -297,6 +305,10 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_SVG_BUTTON);
   }
 
+  private get rnSvgIconsPage() {
+    return By(HOMEPAGE_RNSVGIcons_BUTTON);
+  }
+
   private get switchPage() {
     return By(HOMEPAGE_SWITCH_BUTTON);
   }
@@ -315,10 +327,6 @@ class NavigateAppPage extends BasePage {
 
   private get themePage() {
     return By(HOMEPAGE_THEME_BUTTON);
-  }
-
-  private get tokensPage() {
-    return By(HOMEPAGE_TOKEN_BUTTON);
   }
 
   private get tabsV1Page() {

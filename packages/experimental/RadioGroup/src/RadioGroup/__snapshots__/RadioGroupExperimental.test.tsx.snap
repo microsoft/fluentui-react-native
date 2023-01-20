@@ -177,7 +177,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -321,7 +320,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -530,7 +528,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -674,7 +671,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -888,7 +884,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -1037,7 +1032,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -1247,7 +1241,6 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -1391,7 +1384,6 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -1578,7 +1570,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "height": 20,
               "justifyContent": "center",
               "marginBottom": 6,
-              "marginLeft": 0,
+              "marginLeft": 6,
               "marginRight": 6,
               "marginTop": 6,
               "width": 20,
@@ -1600,10 +1592,9 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         <View
           style={
             Object {
-              "alignItems": "flex-start",
-              "alignSelf": "flex-start",
+              "alignItems": "center",
               "flexDirection": "column",
-              "marginLeft": 0,
+              "marginLeft": 2,
               "marginRight": 2,
               "padding": undefined,
             }
@@ -1722,7 +1713,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "height": 20,
               "justifyContent": "center",
               "marginBottom": 6,
-              "marginLeft": 0,
+              "marginLeft": 6,
               "marginRight": 6,
               "marginTop": 6,
               "width": 20,
@@ -1744,10 +1735,9 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         <View
           style={
             Object {
-              "alignItems": "flex-start",
-              "alignSelf": "flex-start",
+              "alignItems": "center",
               "flexDirection": "column",
-              "marginLeft": 0,
+              "marginLeft": 2,
               "marginRight": 2,
               "padding": undefined,
             }
@@ -1971,7 +1961,6 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,
@@ -2115,7 +2104,6 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 2,

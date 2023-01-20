@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.11
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.24
+- Bump @fluentui-react-native/framework to v0.8.35
+- Bump @fluentui-react-native/interactive-hooks to v0.22.12
+- Bump @fluentui-react-native/text to v0.19.13
+- Bump @fluentui-react-native/theme-tokens to v0.23.2
+
+## 0.9.10
+
+Wed, 18 Jan 2023 22:36:15 GMT
+
+### Patches
+
+- Fixing padding for horizontal-stacked RadioGroup (gulnazsayed@microsoft.com)
+
+## 0.9.9
+
+Wed, 18 Jan 2023 19:14:23 GMT
+
+### Patches
+
+- moving keyboarding logic to js for narrator state change bug (gulnazsayed@microsoft.com)
 
 ## 0.9.8
 
