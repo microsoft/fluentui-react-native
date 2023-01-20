@@ -50,7 +50,7 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
             : { borderTopWidth: tokens.thickness, marginRight: tokens.contentPadding }),
         },
       }),
-      ['color', 'vertical'],
+      ['color', 'contentPadding', 'flexBefore', 'lineColor', 'thickness', 'vertical'],
     ),
     afterLine: buildProps(
       (tokens: DividerTokens) => ({
@@ -64,15 +64,7 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
             : { borderTopWidth: tokens.thickness, marginLeft: tokens.contentPadding }),
         },
       }),
-      ['color', 'vertical'],
-    ),
-    wrapper: buildProps(
-      (tokens: DividerTokens) => ({
-        style: {
-          [tokens.vertical ? 'paddingVertical' : 'paddingHorizontal']: 8,
-        },
-      }),
-      ['vertical'],
+      ['color', 'contentPadding', 'flexAfter', 'lineColor', 'thickness', 'vertical'],
     ),
     text: buildProps(
       (tokens: DividerTokens) => ({
@@ -81,7 +73,7 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
           color: tokens.color || tokens.contentColor,
         },
       }),
-      ['color'],
+      ['color', 'contentColor'],
     ),
     icon: buildProps(
       (tokens: DividerTokens) => ({
@@ -90,7 +82,7 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
           flex: 0,
         },
       }),
-      ['color'],
+      ['color', 'contentColor'],
     ),
   },
 };

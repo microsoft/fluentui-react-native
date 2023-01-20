@@ -31,7 +31,6 @@ export const Divider = compose<DividerType>({
     root: View,
     beforeLine: View,
     afterLine: View,
-    wrapper: View,
     text: Text,
     icon: Icon,
   },
