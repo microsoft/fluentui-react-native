@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/framework": "0.8.31",
+    "@fluentui-react-native/text": ">=0.19.12 <1.0.0",
     "assert-never": "^1.2.1",
     "react-native-svg": "12.5.0"
   },
