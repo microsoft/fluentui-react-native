@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 20 Jan 2023 21:49:21 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.11.2",
+      "version": "1.11.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "60e16b9f691f3a595291da3cf6da8fb9e44baf33",
+            "comment": "Rename tokens test to color tokens test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 20 Jan 2023 18:06:46 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.11.1",
       "version": "1.11.1",

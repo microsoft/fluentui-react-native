@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Fri, 20 Jan 2023 21:49:21 GMT",
+      "tag": "@fluentui-react-native/text_v0.19.14",
+      "version": "0.19.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "deddda487f4054e6d16f9fca34cedd2b8547da65",
+            "comment": "Move Text part of typography docs to Text README"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 20 Jan 2023 18:06:46 GMT",
       "tag": "@fluentui-react-native/text_v0.19.13",
       "version": "0.19.13",

@@ -1,8 +1,23 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.11
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.24
+- Bump @fluentui-react-native/checkbox to v0.19.13
+- Bump @fluentui-react-native/contextual-menu to v0.21.20
+- Bump @fluentui-react-native/link to v0.18.9
+- Bump @fluentui-react-native/menu-button to v0.10.21
+- Bump @fluentui-react-native/radio-group to v0.16.28
+- Bump @fluentui-react-native/tabs to v0.11.26
+- Bump @fluentui-react-native/text to v0.19.14
 
 ## 0.35.10
 

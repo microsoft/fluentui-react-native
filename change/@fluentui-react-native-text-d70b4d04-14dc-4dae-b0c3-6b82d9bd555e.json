@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Move Text part of typography docs to Text README",
-  "packageName": "@fluentui-react-native/text",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}

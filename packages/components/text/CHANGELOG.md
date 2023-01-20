@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.14
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Move Text part of typography docs to Text README (adgleitm@microsoft.com)
 
 ## 0.19.13
 

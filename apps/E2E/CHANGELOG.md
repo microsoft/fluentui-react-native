@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.2
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Rename tokens test to color tokens test (78454019+lyzhan7@users.noreply.github.com)
 
 ## 1.11.1
 
