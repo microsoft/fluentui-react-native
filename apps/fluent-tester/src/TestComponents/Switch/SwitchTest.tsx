@@ -132,9 +132,12 @@ const toggleSections: TestSection[] = [
       component: () => <CustomizedSwitch />,
     },
   }),
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Switch E2E Testing',
-    component: () => <E2ESwitchTest />,
+    component: E2ESwitchTest,
   },
 ];
 
@@ -151,5 +154,7 @@ export const SwitchTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/Switch/SPEC.md';
 
-  return <Test name="Switch Test" description={description} spec={spec} sections={toggleSections} status={status} />;
+  return (
+    <Test name="Switch Test" description={description} spec={spec} sections={toggleSections} status={status} e2eSections={e2eSections} />
+  );
 };

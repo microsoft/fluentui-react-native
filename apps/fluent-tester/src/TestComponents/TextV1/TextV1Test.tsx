@@ -30,6 +30,9 @@ const textSections: TestSection[] = [
     name: 'Pressable Usage',
     component: PressableUsage,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'E2E Testing for TextV1',
     component: TextV1E2ETest,
@@ -47,5 +50,5 @@ export const TextV1Test: React.FunctionComponent = () => {
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';
 
-  return <Test name="TextV1 Test" description={description} sections={textSections} status={status} />;
+  return <Test name="TextV1 Test" description={description} sections={textSections} status={status} e2eSections={e2eSections} />;
 };

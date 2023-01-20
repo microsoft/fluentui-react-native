@@ -292,7 +292,7 @@ const menuSections: TestSection[] = [
   },
 ];
 
-const e2eSections = [
+const e2eSections: TestSection[] = [
   {
     name: 'Menu E2E',
     component: E2EMenuTest,

@@ -20,6 +20,9 @@ const textSections: TestSection[] = [
     name: 'Pressable Usage',
     component: PressableUsage,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'E2E Text Tests',
     component: TextLegacyE2ETest,
@@ -39,5 +42,5 @@ export const TextLegacyTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/text/SPEC.md';
 
-  return <Test name="Text Test" description={description} spec={spec} sections={textSections} status={status} />;
+  return <Test name="Text Test" description={description} spec={spec} sections={textSections} status={status} e2eSections={e2eSections} />;
 };

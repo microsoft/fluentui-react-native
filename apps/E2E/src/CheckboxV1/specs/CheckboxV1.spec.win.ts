@@ -8,6 +8,8 @@ describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+
+    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to CheckboxV1 test page', async () => {

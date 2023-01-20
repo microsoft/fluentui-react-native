@@ -268,6 +268,9 @@ const tabsSections: TestSection[] = [
     name: 'More Flexibility',
     component: TabsWithFlexibility,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'E2E Tabs Test',
     component: TabsLegacyE2ETest,
@@ -292,5 +295,5 @@ export const TabsLegacyTest: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="Tabs Legacy Test" description={description} sections={tabsSections} status={status} />;
+  return <Test name="Tabs Legacy Test" description={description} sections={tabsSections} status={status} e2eSections={e2eSections} />;
 };

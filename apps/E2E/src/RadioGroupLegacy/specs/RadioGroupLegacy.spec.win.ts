@@ -14,6 +14,8 @@ describe('RadioGroup/RadioButton Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+
+    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {

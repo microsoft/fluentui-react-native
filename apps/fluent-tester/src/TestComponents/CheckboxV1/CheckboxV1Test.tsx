@@ -204,6 +204,9 @@ const checkboxSections: TestSection[] = [
       component: TokenCheckbox,
     },
   }),
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'E2E Testing for CheckboxV1',
     component: E2ECheckboxV1Test,
@@ -222,5 +225,5 @@ export const CheckboxV1Test: React.FunctionComponent = () => {
   const description =
     'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
 
-  return <Test name="CheckboxV1 Test" description={description} sections={checkboxSections} status={status} />;
+  return <Test name="CheckboxV1 Test" description={description} sections={checkboxSections} status={status} e2eSections={e2eSections} />;
 };
