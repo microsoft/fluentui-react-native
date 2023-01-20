@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update all design-tokens packages to 0.42.0",
+  "packageName": "@fluentui-react-native/theming-utils",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
