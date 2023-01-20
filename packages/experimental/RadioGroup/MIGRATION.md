@@ -69,7 +69,7 @@ Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guid
 
 ## Porting from FluentUI v9 Button
 
-The FURN button cannot be used in place of a FluentUI button - these buttons are intended to be used on their respective platforms. See [this porting guide](../../../docs/pages/Guides/PortingFromFluentUI.md) for general guidance on coming from FluentUI to FURN.
+The FURN RadioGroup cannot be used in place of a FluentUI RadioGroup - these buttons are intended to be used on their respective platforms. See [this porting guide](../../../docs/pages/Guides/PortingFromFluentUI.md) for general guidance on coming from FluentUI to FURN.
 
 ### Props that remain as is
 
