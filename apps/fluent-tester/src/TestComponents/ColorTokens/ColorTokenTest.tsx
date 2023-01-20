@@ -8,7 +8,7 @@ import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { TOKENS_TEST_COMPONENT, TOKEN_TESTPAGE } from '../../../../E2E/src/Tokens/consts';
+import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '../../../../E2E/src/ColorTokens/consts';
 import { testProps } from '../Common/TestProps';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
@@ -53,7 +53,7 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
       <View
         style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-        {...testProps(TOKENS_TEST_COMPONENT)}
+        {...testProps(COLORTOKENS_TEST_COMPONENT)}
       />
       <Text>{p.name}</Text>
     </View>
@@ -99,21 +99,21 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
 const themeSections: TestSection[] = [
   {
     name: 'Alias Color Tokens',
-    testID: TOKEN_TESTPAGE,
+    testID: COLORTOKEN_TESTPAGE,
     component: () => <AliasTokensSwatchList />,
   },
 ];
 
-export const TokenTest: React.FunctionComponent = () => {
+export const ColorTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
+    iosStatus: 'Experimental',
     macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description = 'Alias tokens given from token pipeline. Currently values are pulled from web. Will be used to style components.';
 
-  return <Test name="Token Test" description={description} sections={themeSections} status={status} />;
+  return <Test name="Color Tokens Test" description={description} sections={themeSections} status={status} />;
 };

@@ -6,6 +6,7 @@ import { ButtonTest } from './TestComponents/Button';
 import { CalloutTest } from './TestComponents/Callout';
 import { CheckboxLegacyTest } from './TestComponents/CheckboxLegacy';
 import { CheckboxV1Test } from './TestComponents/CheckboxV1';
+import { ColorTokensTest } from './TestComponents/ColorTokens';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
@@ -38,7 +39,6 @@ import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
-import { TokenTest } from './TestComponents/Tokens';
 import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
@@ -89,6 +89,12 @@ export const tests: TestDescription[] = [
     component: CheckboxV1Test,
     testPageButton: Constants.HOMEPAGE_CHECKBOXV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
+  },
+  {
+    name: 'Color Tokens',
+    component: ColorTokensTest,
+    testPageButton: Constants.HOMEPAGE_COLORTOKEN_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'ContextualMenu',
@@ -287,12 +293,6 @@ export const tests: TestDescription[] = [
     name: 'Theme',
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Tokens',
-    component: TokenTest,
-    testPageButton: Constants.HOMEPAGE_TOKEN_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
 ];
