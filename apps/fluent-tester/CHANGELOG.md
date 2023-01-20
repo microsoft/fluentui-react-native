@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 18 Jan 2023 22:36:15 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 01:45:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.127.0
+
+Fri, 20 Jan 2023 01:45:16 GMT
+
+### Minor changes
+
+- Add test page as a playground for various icon packages available on the internet. (warleu@microsoft.com)
 
 ## 0.126.37
 

@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add test page as a playground for various icon packages available on the internet.",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "warleu@microsoft.com",
-  "dependentChangeType": "none"
-}

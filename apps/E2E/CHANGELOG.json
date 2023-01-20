@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 20 Jan 2023 01:45:16 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.11.0",
+      "version": "1.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "287147ff03792336ae676bba5f9d28e9555c92d9",
+            "comment": "Update Switch E2E tests with better error messages + refactored code"
+          }
+        ],
+        "none": [
+          {
+            "author": "warleu@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "8e5bba552d55c1fd9e96ccdf4898af86c4c66a31",
+            "comment": "Add test page as a playground for various icon packages available on the internet."
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Jan 2023 01:55:11 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.10.1",
       "version": "1.10.1",
