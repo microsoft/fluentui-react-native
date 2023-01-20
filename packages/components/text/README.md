@@ -2,7 +2,7 @@
 
 A cross-platform Text component using the Fluent Design System.
 
-Text elements can be specified either by passing a `variant` [typography token](/docs/pages/Theming/Tokens/Basics.md#typography) into a `TextV1` element or by using predefined JSX types. For example:
+Text elements can be specified either by passing a `variant` [typography token](../../../docs/pages/Theming/Tokens/Basics.md#typography) into a `TextV1` element or by using predefined JSX types. For example:
 
 ```tsx
 import { Body1, TextV1 } from '@fluentui-react-native/text';
