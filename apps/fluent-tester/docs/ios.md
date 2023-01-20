@@ -13,16 +13,16 @@ yarn
 yarn build
 ```
 
-2. Then go into `apps/fluent-tester/ios` folder and run pod install to pull in the project-level Cocoapod dependencies defined in the podfile, and to generate a valid xcworkspace:
+2. Then go into `apps/fluent-tester/ios` folder and run `pod install` to pull in the project-level Cocoapod dependencies defined in the podfile, and to generate a valid xcworkspace:
 
 ```sh
-apps/fluent-tester/ios
+cd apps/fluent-tester/ios
 pod install
 ```
 
 Note: if you get the error: "CocoaPods could not find compatible versions for pod "MicrosoftFluentUI"," you may need to run `pod install --repo-update`.
 
-3. Return to the ios directory and run yarn ios to launch the FluentUI Tester app:
+3. Return to the `fluentui-tester` directory and run `yarn ios` to launch the FluentUI Tester app:
 
 ```sh
 cd ..

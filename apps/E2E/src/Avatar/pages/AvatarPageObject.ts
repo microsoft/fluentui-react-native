@@ -1,22 +1,9 @@
-import {
-  AVATAR_TESTPAGE,
-  HOMEPAGE_AVATAR_BUTTON,
-  AVATAR_TEST_COMPONENT,
-  AVATAR_SECONDARY_TEST_COMPONENT,
-} from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { AVATAR_TESTPAGE, HOMEPAGE_AVATAR_BUTTON, AVATAR_TEST_COMPONENT, AVATAR_SECONDARY_TEST_COMPONENT } from '../consts';
+import { BasePage } from '../../common/BasePage';
 class AvatarPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(AVATAR_TESTPAGE);
-  }
-
-  get _pageButton() {
-    return By(HOMEPAGE_AVATAR_BUTTON);
-  }
-
   get _pageButtonName() {
     return HOMEPAGE_AVATAR_BUTTON;
   }
@@ -25,12 +12,12 @@ class AvatarPageObject extends BasePage {
     return AVATAR_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(AVATAR_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return AVATAR_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(AVATAR_SECONDARY_TEST_COMPONENT);
+  get _secondaryComponentName() {
+    return AVATAR_SECONDARY_TEST_COMPONENT;
   }
 }
 

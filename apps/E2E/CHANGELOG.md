@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 10 Jan 2023 20:17:18 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.2
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Rename tokens test to color tokens test (78454019+lyzhan7@users.noreply.github.com)
+
+## 1.11.1
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.24
+
+## 1.11.0
+
+Fri, 20 Jan 2023 01:45:16 GMT
+
+### Minor changes
+
+- Update Switch E2E tests with better error messages + refactored code (winlarry@microsoft.com)
+
+## 1.10.1
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.23
+
+## 1.10.0
+
+Sat, 14 Jan 2023 17:43:18 GMT
+
+### Minor changes
+
+- Remove need to override testPage, add pageButtonName fn (ayushsinghs@yahoo.in)
 
 ## 1.9.8
 
