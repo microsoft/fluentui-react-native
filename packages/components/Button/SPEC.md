@@ -166,6 +166,14 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
   onClick?: (e: InteractionEvent) => void;
 
   /**
+   * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
+   */
+  rippleColor?: ColorValue;
+
+  /**
    * A button can be rounded, circular, or square.
    * Not supported from Fluent Android, renders as-is.
    * @default 'rounded'

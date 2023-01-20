@@ -31,7 +31,7 @@ import { ShadowTest } from './TestComponents/Shadow';
 import { ShimmerTest } from './TestComponents/Shimmer';
 import { SpacingTokensTest } from './TestComponents/Spacing';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
-import { SvgTest } from './TestComponents/Svg';
+import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
 import { TabsLegacyTest } from './TestComponents/TabsLegacy';
 import { TabsV1Test } from './TestComponents/TabsV1';
@@ -131,7 +131,7 @@ export const tests: TestDescription[] = [
     name: 'Focus Trap Zone',
     component: FocusTrapTest,
     testPageButton: Constants.HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-    platforms: ['android', 'win32'],
+    platforms: ['win32'],
   },
   {
     name: 'FocusZone',
@@ -209,7 +209,7 @@ export const tests: TestDescription[] = [
     name: 'RadioGroup V1',
     component: RadioGroupV1Test,
     testPageButton: Constants.HOMEPAGE_RADIOGROUPV1_BUTTON,
-    platforms: ['macos', 'win32'],
+    platforms: ['android', 'macos', 'win32'],
   },
   {
     name: 'Separator',
@@ -242,9 +242,15 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'Svg',
+    name: 'Svg rendering',
     component: SvgTest,
     testPageButton: Constants.HOMEPAGE_SVG_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32'],
+  },
+  {
+    name: 'Svg Icon packages',
+    component: RNSVGIconsTest,
+    testPageButton: Constants.HOMEPAGE_RNSVGIcons_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {

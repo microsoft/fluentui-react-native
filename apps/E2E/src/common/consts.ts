@@ -15,6 +15,13 @@ export const TAB_A11Y_ROLE = 'ControlType.Tab';
 export const TABITEM_A11Y_ROLE = 'ControlType.TabItem';
 export const TEXT_A11Y_ROLE = 'ControlType.Text';
 
+/* Android Widget Class Types - https://developer.android.com/reference/android/widget/package-summary#classes */
+export const ANDROID_BUTTON = 'android.widget.Button';
+export const ANDROID_CHECKBOX = 'android.widget.CheckBox';
+export const ANDROID_IMAGE = 'android.widget.ImageView';
+export const ANDROID_TEXT = 'android.widget.TextView';
+export const ANDROID_RADIOBUTTON = 'android.widget.RadioButton';
+
 /* Jasmine Timeouts */
 export const BOOT_APP_TIMEOUT = 60000;
 export const PAGE_TIMEOUT = 15000;
@@ -30,6 +37,14 @@ export const enum Attribute {
   IsTogglePatternAvailable = 'IsTogglePatternAvailable',
   TestID = 'AutomationId',
   ToggleState = 'Toggle.ToggleState',
+}
+
+/* Android Element Attributes - https://github.com/appium/appium-uiautomator2-driver#element-attributes */
+export const enum AndroidAttribute {
+  AccessibilityLabel = 'content-desc',
+  Class = 'class',
+  Clickable = 'clickable',
+  Checked = 'checked',
 }
 
 export const attributeToEnumName = {
@@ -124,3 +139,5 @@ export const BASE_TESTPAGE = 'Base_TestPage';
 // ScrollViewer that contains the list of test page buttons
 export const TESTPAGE_BUTTONS_SCROLLVIEWER = 'TestPage_Buttons_ScrollViewer';
 
+// ScrollViewer that contains the content of each test page
+export const TESTPAGE_CONTENT_SCROLLVIEWER = 'TestPage_Content_ScrollViewer';

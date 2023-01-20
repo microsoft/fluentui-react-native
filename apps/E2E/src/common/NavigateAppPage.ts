@@ -26,7 +26,7 @@ import { HOMEPAGE_SHADOW_BUTTON } from '../Shadow/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../Shimmer/consts';
 import { HOMEPAGE_SPACING_BUTTON } from '../Spacing/consts';
 import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../StrokeWidthTokens/consts';
-import { HOMEPAGE_SVG_BUTTON } from '../Svg/consts';
+import { HOMEPAGE_SVG_BUTTON, HOMEPAGE_RNSVGIcons_BUTTON } from '../Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../TextLegacy/consts';
 import { HOMEPAGE_TEXTV1_BUTTON } from '../TextV1/consts';
@@ -147,6 +147,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToSvgPage() {
     await (await this.svgPage).click();
+  }
+
+  async clickAndGoToRNSvgIconsPage() {
+    await (await this.rnSvgIconsPage).click();
   }
 
   async clickAndGoToSwitchPage() {
@@ -297,6 +301,10 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_SVG_BUTTON);
   }
 
+  private get rnSvgIconsPage() {
+    return By(HOMEPAGE_RNSVGIcons_BUTTON);
+  }
+
   private get switchPage() {
     return By(HOMEPAGE_SWITCH_BUTTON);
   }
@@ -332,6 +340,10 @@ class NavigateAppPage extends BasePage {
 
   get _pageButton(): Promise<WebdriverIO.Element> {
     throw new Error('You are trying to read the _pageButton getter for NavigateAppPage, which is not implemented.');
+  }
+
+  get _pageButtonName(): string {
+    throw new Error('You are trying to read the _pageButtonName getter for NavigateAppPage, which is not implemented.');
   }
 }
 

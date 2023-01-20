@@ -5,13 +5,7 @@ import {
   CHECKBOXV1_NO_A11Y_LABEL_COMPONENT,
   CHECKBOXV1_ON_PRESS,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
-
-/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
- * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
-export const enum CheckboxV1Selector {
-  Primary, //this._primaryComponent
-}
+import { BasePage, By, ComponentSelector } from '../../common/BasePage';
 
 class CheckboxV1PageObject extends BasePage {
   /******************************************************************/
@@ -19,6 +13,10 @@ class CheckboxV1PageObject extends BasePage {
   /******************************************************************/
   async isCheckboxChecked(): Promise<boolean> {
     return await (await this._primaryComponent).isSelected();
+  }
+
+  async isCheckboxCheckedAndroid(): Promise<boolean> {
+    return (await (await this._primaryComponent).getAttribute('checked')) === 'true';
   }
 
   async waitForCheckboxChecked(timeout?: number): Promise<void> {
@@ -48,39 +46,31 @@ class CheckboxV1PageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(selector: CheckboxV1Selector, key: string): Promise<void> {
+  async sendKey(selector: ComponentSelector, key: string): Promise<void> {
     await (await this.getCheckboxSelector(selector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Checkbox Selector */
-  async getCheckboxSelector(selector?: CheckboxV1Selector): Promise<WebdriverIO.Element> {
-    if (selector == CheckboxV1Selector.Primary) {
+  async getCheckboxSelector(selector?: ComponentSelector): Promise<WebdriverIO.Element> {
+    if (selector == ComponentSelector.Primary) {
       return await this._primaryComponent;
     }
-    return await this._primaryComponent;
+    return await this._secondaryComponent;
   }
 
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(CHECKBOXV1_TESTPAGE);
-  }
-
   get _pageName() {
     return CHECKBOXV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(CHECKBOXV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return CHECKBOXV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(CHECKBOXV1_NO_A11Y_LABEL_COMPONENT);
-  }
-
-  get _pageButton() {
-    return By(HOMEPAGE_CHECKBOXV1_BUTTON);
+  get _secondaryComponentName() {
+    return CHECKBOXV1_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButtonName() {

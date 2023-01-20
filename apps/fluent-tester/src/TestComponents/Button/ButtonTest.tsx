@@ -40,26 +40,34 @@ const buttonSections: TestSection[] = [
     name: 'Sizes',
     component: ButtonSizeTest,
   },
-  {
-    name: 'Customize, Compose, and Ref',
-    component: ButtonHOCTest,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Customize, Compose, and Ref',
+      component: ButtonHOCTest,
+    },
+  }),
   {
     name: 'E2E Button Testing',
     component: E2EButtonTest,
   },
-  {
-    name: 'Deprecated Basic Button',
-    component: ButtonFocusTest_deprecated,
-  },
-  {
-    name: 'Deprecated Icon Button',
-    component: ButtonIconTest_deprecated,
-  },
-  {
-    name: 'Deprecated E2E Button Testing',
-    component: E2EButtonTest_deprecated,
-  },
+  ...Platform.select({
+    android: [null], //Following sections are not supported from Fluent Android
+    default: [
+      {
+        name: 'Deprecated Basic Button',
+        component: ButtonFocusTest_deprecated,
+      },
+      {
+        name: 'Deprecated Icon Button',
+        component: ButtonIconTest_deprecated,
+      },
+      {
+        name: 'Deprecated E2E Button Testing',
+        component: E2EButtonTest_deprecated,
+      },
+    ],
+  }),
 ];
 
 export const ButtonTest: React.FunctionComponent = () => {

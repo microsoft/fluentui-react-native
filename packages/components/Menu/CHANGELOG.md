@@ -1,8 +1,75 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 06 Jan 2023 19:49:46 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.19
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.53
+- Bump @fluentui-react-native/focus-zone to v0.11.23
+- Bump @fluentui-react-native/framework to v0.8.34
+- Bump @fluentui-react-native/interactive-hooks to v0.22.11
+- Bump @fluentui-react-native/text to v0.19.12
+- Bump @fluentui-react-native/theme-tokens to v0.23.1
+- Bump @fluentui-react-native/tokens to v0.20.4
+- Bump @fluentui-react-native/button to v0.32.22
+
+## 1.2.18
+
+Tue, 17 Jan 2023 22:09:42 GMT
+
+### Patches
+
+- Update Menu font (amchiu@microsoft.com)
+
+## 1.2.17
+
+Wed, 11 Jan 2023 14:59:31 GMT
+
+### Patches
+
+- Update MenuDivider margin (amchiu@microsoft.com)
+
+## 1.2.16
+
+Tue, 10 Jan 2023 21:36:52 GMT
+
+### Patches
+
+- Fix MenuDividerTokens import (amchiu@microsoft.com)
+
+## 1.2.15
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.52
+- Bump @fluentui-react-native/focus-zone to v0.11.22
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/interactive-hooks to v0.22.10
+- Bump @fluentui-react-native/text to v0.19.11
+- Bump @fluentui-react-native/theme-tokens to v0.23.0
+- Bump @fluentui-react-native/tokens to v0.20.3
+- Bump @fluentui-react-native/button to v0.32.21
+
+## 1.2.14
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.51
+- Bump @fluentui-react-native/focus-zone to v0.11.21
+- Bump @fluentui-react-native/framework to v0.8.32
+- Bump @fluentui-react-native/interactive-hooks to v0.22.9
+- Bump @fluentui-react-native/text to v0.19.10
+- Bump @fluentui-react-native/button to v0.32.20
 
 ## 1.2.13
 

@@ -17,6 +17,12 @@ export const RadioGroupContext = React.createContext<RadioGroupContextValue>({
     return;
   },
   values: [],
+  enabledValues: [],
+  invoked: false,
+  addRadioValue: (/* value: string */) => false,
+  removeRadioValue: (/* value: string */) => false,
+  addRadioEnabledValue: (/* value: string  */) => false,
+  removeRadioEnabledValue: (/* value: string */) => false,
 });
 
 export const RadioGroupProvider = RadioGroupContext.Provider;

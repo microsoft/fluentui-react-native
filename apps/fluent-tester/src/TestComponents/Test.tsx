@@ -125,7 +125,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
           {...testProps('Focus_Button')}
           style={styles.e2eFocusButton}
         >
-          E2E Testing Button
+          E2E Button
         </Button>
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
