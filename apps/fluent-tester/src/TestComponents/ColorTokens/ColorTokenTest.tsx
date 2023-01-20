@@ -130,6 +130,36 @@ const GlobalNeutralColorTokensSwatchList: React.FunctionComponent = () => {
   );
 };
 
+const globalSharedColorNames = Object.keys(globalTokens.color).filter((key) => globalTokens.color[key].primary !== undefined);
+const globalSharedColorVariantsSortedDarkToLight = Object.keys(globalTokens.color.red).sort((color1, color2) => {
+  const color1hex = globalTokens.color.red[color1];
+  const color2hex = globalTokens.color.red[color2];
+  return color1hex === color2hex ? 0 : color1hex < color2hex ? -1 : 1;
+});
+const globalSharedColorTokensAsArray = globalSharedColorNames
+  .map((sharedColorName) => {
+    return globalSharedColorVariantsSortedDarkToLight.map((variant) => {
+      return {
+        colorName: sharedColorName + '.' + variant,
+        colorValue: globalTokens.color[sharedColorName][variant],
+      };
+    });
+  })
+  .reduce((accumulator, sharedColor) => accumulator.concat(sharedColor));
+
+const GlobalSharedColorTokensSwatchList: React.FunctionComponent = () => {
+  const renderSwatch = React.useCallback((item) => {
+    const { colorValue, colorName } = item;
+    return <ColorToken key={colorName} colorValue={colorValue} colorName={colorName} />;
+  }, []);
+
+  return (
+    <View style={commonTestStyles.view}>
+      <View style={styles.stackStyle}>{globalSharedColorTokensAsArray.map((item) => renderSwatch(item))}</View>
+    </View>
+  );
+};
+
 const themeSections: TestSection[] = [
   {
     name: 'Alias Color Tokens',
@@ -140,6 +170,11 @@ const themeSections: TestSection[] = [
     name: 'Global Color Tokens - Neutral Colors',
     testID: COLORTOKEN_TESTPAGE,
     component: () => <GlobalNeutralColorTokensSwatchList />,
+  },
+  {
+    name: 'Global Color Tokens - Shared Colors',
+    testID: COLORTOKEN_TESTPAGE,
+    component: () => <GlobalSharedColorTokensSwatchList />,
   },
 ];
 
