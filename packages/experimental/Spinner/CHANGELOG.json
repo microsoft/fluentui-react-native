@@ -1,0 +1,32 @@
+{
+  "name": "@fluentui-react-native/spinner",
+  "entries": [
+    {
+      "date": "Fri, 20 Jan 2023 19:02:20 GMT",
+      "tag": "@fluentui-react-native/spinner_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/spinner",
+            "commit": "8a0759e04bc6ecc28f9d6b98488c13dcb97f8397",
+            "comment": "define spinner props and slots"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.35",
+            "commit": "60e16b9f691f3a595291da3cf6da8fb9e44baf33"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/text to v0.19.13",
+            "commit": "60e16b9f691f3a595291da3cf6da8fb9e44baf33"
+          }
+        ]
+      }
+    }
+  ]
+}
