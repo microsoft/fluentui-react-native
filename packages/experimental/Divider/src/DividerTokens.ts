@@ -6,7 +6,7 @@ export const defaultDividerTokens: TokenSettings<DividerTokens, Theme> = (theme:
   ({
     // base tokens
     alignment: 'center',
-    contentPadding: 8,
+    contentPadding: 0,
     flexAfter: 1,
     flexBefore: 1,
     insetSize: 0,
@@ -27,6 +27,7 @@ export const defaultDividerTokens: TokenSettings<DividerTokens, Theme> = (theme:
       minHeight: 24,
     },
     hasChildren: {
+      contentPadding: 8,
       isVertical: {
         minHeight: 84,
       },
