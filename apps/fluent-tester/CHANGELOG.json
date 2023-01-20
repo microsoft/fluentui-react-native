@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 20 Jan 2023 04:45:05 GMT",
+      "tag": "@fluentui-react-native/tester_v0.127.0",
+      "version": "0.127.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "124829284fbb060fcf908c024969dc98569b7f39",
+            "comment": "Added E2 test section scroll"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 20 Jan 2023 01:45:16 GMT",
       "tag": "@fluentui-react-native/tester_v0.127.0",
       "version": "0.127.0",
