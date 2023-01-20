@@ -45,7 +45,9 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
           flex: tokens.flexBefore,
           borderColor: tokens.color || tokens.lineColor,
           borderStyle: 'solid',
-          [tokens.vertical ? 'borderLeftWidth' : 'borderTopWidth']: tokens.thickness,
+          ...(tokens.vertical
+            ? { borderLeftWidth: tokens.thickness, marginBottom: tokens.contentPadding }
+            : { borderTopWidth: tokens.thickness, marginRight: tokens.contentPadding }),
         },
       }),
       ['color', 'vertical'],
@@ -57,7 +59,9 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
           flex: tokens.flexAfter,
           borderColor: tokens.color || tokens.lineColor,
           borderStyle: 'solid',
-          [tokens.vertical ? 'borderLeftWidth' : 'borderTopWidth']: tokens.thickness,
+          ...(tokens.vertical
+            ? { borderLeftWidth: tokens.thickness, marginTop: tokens.contentPadding }
+            : { borderTopWidth: tokens.thickness, marginLeft: tokens.contentPadding }),
         },
       }),
       ['color', 'vertical'],
@@ -65,7 +69,6 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
     wrapper: buildProps(
       (tokens: DividerTokens) => ({
         style: {
-          flex: 0,
           [tokens.vertical ? 'paddingVertical' : 'paddingHorizontal']: 8,
         },
       }),
@@ -74,6 +77,7 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
     text: buildProps(
       (tokens: DividerTokens) => ({
         style: {
+          flex: 0,
           color: tokens.color || tokens.contentColor,
         },
       }),
@@ -82,7 +86,9 @@ export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, 
     icon: buildProps(
       (tokens: DividerTokens) => ({
         color: tokens.color || tokens.contentColor,
-        style: { color: tokens.color || tokens.contentColor },
+        style: {
+          flex: 0,
+        },
       }),
       ['color'],
     ),

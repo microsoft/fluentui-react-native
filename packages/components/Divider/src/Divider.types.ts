@@ -11,22 +11,23 @@ export type DividerInsetSize = typeof DividerInsetSizes[number];
 export type DividerAlignment = 'start' | 'center' | 'end';
 export type DividerAppearance = 'default' | 'subtle' | 'brand' | 'strong';
 
-export interface DividerSharedPropsAndTokens {
+export interface DividerCoreProps {
   color?: ColorValue;
   inset?: boolean;
   vertical?: boolean;
 }
 
-export interface DividerProps extends DividerSharedPropsAndTokens {
+export interface DividerProps extends DividerCoreProps {
   alignContent?: DividerAlignment;
   appearance?: DividerAppearance;
   icon?: IconSourcesType;
   text?: string;
 }
 
-export interface DividerTokens extends DividerSharedPropsAndTokens, LayoutTokens {
+export interface DividerTokens extends DividerCoreProps, LayoutTokens {
   alignment?: ViewStyle['justifyContent'];
   contentColor?: ColorValue;
+  contentPadding?: string | number;
   flexAfter?: number;
   flexBefore?: number;
   insetSize?: DividerInsetSize;

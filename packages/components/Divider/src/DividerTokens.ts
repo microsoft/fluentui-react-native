@@ -6,6 +6,7 @@ export const defaultDividerTokens: TokenSettings<DividerTokens, Theme> = (theme:
   ({
     // base tokens
     alignment: 'center',
+    contentPadding: 8,
     flexAfter: 1,
     flexBefore: 1,
     insetSize: 16,
