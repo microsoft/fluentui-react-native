@@ -13,4 +13,6 @@ const moreText = <Body1>Here is some more body text</Body1>;
 
 The former is better if you want to have more fine control over the appearance of your text, while the latter is better if you're looking for the simplest way to add a pre-styled text component.
 
+See [SPEC.md](./SPEC.md) for more implementation details.
+
 Text V1 supported platforms: win32
