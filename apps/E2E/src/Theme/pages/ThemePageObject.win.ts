@@ -1,5 +1,5 @@
 import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class ThemePageObject extends BasePage {
   /*****************************************/
@@ -9,8 +9,8 @@ class ThemePageObject extends BasePage {
     return THEME_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(THEME_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return THEME_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

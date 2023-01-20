@@ -1,5 +1,5 @@
 import { SEPARATOR_TESTPAGE, SEPARATOR_TEST_COMPONENT, HOMEPAGE_SEPARATOR_BUTTON } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class SeparatorPageObject extends BasePage {
   /*****************************************/
@@ -9,8 +9,8 @@ class SeparatorPageObject extends BasePage {
     return SEPARATOR_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(SEPARATOR_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return SEPARATOR_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

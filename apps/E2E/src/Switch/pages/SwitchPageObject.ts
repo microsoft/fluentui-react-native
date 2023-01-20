@@ -45,12 +45,12 @@ class SwitchPageObject extends BasePage {
     return SWITCH_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(SWITCH_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return SWITCH_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(SWITCH_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return SWITCH_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _pageButtonName() {

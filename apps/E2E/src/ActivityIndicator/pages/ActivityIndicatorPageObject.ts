@@ -1,5 +1,5 @@
 import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON, ACTIVITY_INDICATOR_TESTPAGE, ACTIVITY_INDICATOR_TEST_COMPONENT } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class ActivityIndicatorPageObject extends BasePage {
   /*****************************************/
@@ -9,8 +9,8 @@ class ActivityIndicatorPageObject extends BasePage {
     return ACTIVITY_INDICATOR_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(ACTIVITY_INDICATOR_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return ACTIVITY_INDICATOR_TEST_COMPONENT;
   }
 
   get _pageButtonName() {
