@@ -61,7 +61,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
       radioBorderWidth,
       radioVisibility,
       radioBorder,
-      // radioOuterCircleSize,
+      radioOuterCircleSize,
       radioInnerCircleSize,
       color,
       marginTop,

@@ -9,6 +9,7 @@ import { CheckboxV1Test } from './TestComponents/CheckboxV1';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
+import { DividerTest, HOMEPAGE_DIVIDER_BUTTON } from './TestComponents/Divider';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
 // import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
@@ -40,7 +41,6 @@ import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
 import { TokenTest } from './TestComponents/Tokens';
 import * as Constants from '../../E2E/src/index.consts';
-import { DividerTest, HOMEPAGE_DIVIDER_BUTTON } from './TestComponents/Divider';
 
 export const tests: TestDescription[] = [
   {

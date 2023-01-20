@@ -1,11 +1,14 @@
 {
   "name": "@fluentui-react-native/divider",
   "version": "0.1.0",
-  "description": "add component-description",
+  "description": "A cross-platform Divider component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
-  "private": true,
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",
@@ -20,13 +23,13 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/components/ComponentTemplate"
+    "directory": "packages/experimental/Divider"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.7.17",
-    "@fluentui-react-native/text": ">=0.12.1 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.11.8 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.8.2 <1.0.0"
+    "@fluentui-react-native/framework": "0.8.33",
+    "@fluentui-react-native/text": ">=0.19.11 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.20.3 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.9.1 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
