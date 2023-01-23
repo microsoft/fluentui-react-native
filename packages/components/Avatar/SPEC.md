@@ -69,9 +69,9 @@ Here are the requirements from Web spec:
 2. If 2 words provided, pull first letter of both words.
 3. If 2+ words provided, pull first letter of first word and last word.
 4. Ignore suffixes (i.e. Jr, III).
-5. Ignore words in parantheses Ignore special characters i.e. parantheses, dashes If numeric, fall back to Icon If first character is not alphabetic, fall back to icon.
+5. Ignore words in parantheses Ignore special characters i.e. parantheses, dashes If numeric, fall back to Icon. If first character is not alphabetic, fall back to icon.
 
-But requirements are still being discussed. This area will be updated once we come up with final solition. There are different implementations in different teams.
+But requirements are still being discussed. This area will be updated once we come up with final solution. There are different implementations in different teams.
 
 ### Name
 
@@ -98,6 +98,8 @@ The `Avatar` component has the following slots:
 - `icon` - If specified, renders an `icon` if there's no `image` or `initials`.
 - `initialsBackground` - It's a wrapper for initials and icon.
 - `ring` - If specified, renders the ring for the `Avatar` when active prop is set to `active`.
+- `ring` - If specified, renders the ring for the `Avatar` when active prop is set to `active`.
+- `outerRing` - If specified, renders an additional ring for the `Avatar` when active prop is set to `active`. Only android.
 - `badge` - If specified, renders presence badge. Example: `badge={{ status: 'outOfOffice' }}.`.
 
 The slots can be modified using the `compose` function on the `Avatar`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
@@ -222,20 +224,34 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
    */
   inactive?: AvatarTokens;
 
-  /**
-   * Avatar sizes:
-   */
+  size16?: AvatarTokens;
   size20?: AvatarTokens;
   size24?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size28?: AvatarTokens;
+
   size32?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size36?: AvatarTokens;
+
   size40?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size48?: AvatarTokens;
+
   size56?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size64?: AvatarTokens;
+
   size72?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size96?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size120?: AvatarTokens;
 
   /**
@@ -284,15 +300,15 @@ The following section describes the different states which `Avatar` can be in as
 
 #### showRing state
 
-Ring is shown when `showRing` is set to true
+Ring is shown when `showRing` is set to true.
 
 #### transparentRing state
 
-Makes ring transparent
+Makes ring transparent.
 
 #### showBadge state
 
-showBadge is set to true when `active` prop is `unset` or undefined
+showBadge is set to true when `active` prop is `unset` or undefined.
 
 ### Interaction
 
