@@ -14,7 +14,7 @@ export const StandardUsage: FunctionComponent = () => {
   };
 
   return (
-    <View style={{ paddingBottom: 10, paddingTop: 5 }}>
+    <View style={mobileStyles.pageStyle}>
       <Switch label={'Show Activity Ring'} defaultChecked={true} onChange={toggleActivityState} />
 
       <View style={mobileStyles.testVariants}>

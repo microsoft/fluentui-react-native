@@ -230,7 +230,10 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
   /**
    * Avatar sizes:
    */
+
+  /** Only applicable for @platform android */
   size16?: AvatarTokens;
+
   size20?: AvatarTokens;
   size24?: AvatarTokens;
 

@@ -156,7 +156,9 @@ export const mobileStyles = StyleSheet.create({
     paddingBottom: 5,
     flex: 1,
     justifyContent: 'space-evenly',
-    // backgroundColor:'#f8dadb'
+  },
+  pageStyle: {
+    padding: 5,
   },
   testList: {
     width: '100%',
