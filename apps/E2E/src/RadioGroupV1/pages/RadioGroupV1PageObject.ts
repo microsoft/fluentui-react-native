@@ -93,24 +93,20 @@ class RadioGroupV1Page extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(RADIOGROUPV1_TESTPAGE);
-  }
-
   get _pageName() {
     return RADIOGROUPV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(RADIOGROUPV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return RADIOGROUPV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_RADIOGROUPV1_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_RADIOGROUPV1_BUTTON;
   }
 
   /***************/

@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Removed win32 extenstion from ShimmerPageObj and added android tests\"",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}

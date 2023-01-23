@@ -75,20 +75,16 @@ class TabsLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(TABS_TESTPAGE);
-  }
-
   get _pageName() {
     return TABS_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(TABS_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return TABS_TEST_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_TABS_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_TABS_BUTTON;
   }
 
   /* The first tab group has 3 Tab item headers, all listed below */

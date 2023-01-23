@@ -9,6 +9,7 @@ import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
+import { useMenuContext } from '../context';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;
@@ -39,7 +40,8 @@ export const MenuList = compose<MenuListType>({
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
-    const contextValue = useMenuListContextValue(menuList);
+    const menuContext = useMenuContext();
+    const menuListContextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList.props);
 
     const focusZoneRef = React.useRef<View>();
@@ -56,8 +58,9 @@ export const MenuList = compose<MenuListType>({
               <Slots.focusZone
                 componentRef={focusZoneRef}
                 focusZoneDirection={'vertical'}
-                defaultTabbableElement={focusZoneRef}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // For submenus, setting defaultTabbableElement to null will let FZ set focus on the first key view.
+                // For root menu, let's set focus on the container to block FZ setting focus on the first key view.
+                defaultTabbableElement={menuContext.isSubmenu ? null : focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
               >
@@ -69,7 +72,7 @@ export const MenuList = compose<MenuListType>({
           <Slots.root>{children}</Slots.root>
         );
 
-      return <MenuListProvider value={contextValue}>{content}</MenuListProvider>;
+      return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;
     };
   },
 });

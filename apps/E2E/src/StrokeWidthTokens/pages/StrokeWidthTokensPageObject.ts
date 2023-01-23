@@ -1,20 +1,16 @@
 import { STROKEWIDTH_TESTPAGE, HOMEPAGE_STROKEWIDTH_BUTTON } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class StrokeWidthTokensPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(STROKEWIDTH_TESTPAGE);
-  }
-
   get _pageName() {
     return STROKEWIDTH_TESTPAGE;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_STROKEWIDTH_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_STROKEWIDTH_BUTTON;
   }
 }
 

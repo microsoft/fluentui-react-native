@@ -1,23 +1,16 @@
-import {
-  HOMEPAGE_CORNERRADIUS_TESTPAGE,
-  HOMEPAGE_CORNERRADIUS_BUTTON,
-} from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { HOMEPAGE_CORNERRADIUS_TESTPAGE, HOMEPAGE_CORNERRADIUS_BUTTON } from '../consts';
+import { BasePage } from '../../common/BasePage';
 
 class CornerRadiusTokensPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(HOMEPAGE_CORNERRADIUS_TESTPAGE);
-  }
-
   get _pageName() {
     return HOMEPAGE_CORNERRADIUS_TESTPAGE;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_CORNERRADIUS_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_CORNERRADIUS_BUTTON;
   }
 }
 

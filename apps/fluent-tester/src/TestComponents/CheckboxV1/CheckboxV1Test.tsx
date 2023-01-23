@@ -22,6 +22,7 @@ const BasicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked accessibilityLabel="Hello there" />
       <Checkbox label="Disabled checkbox" disabled />
       <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
+      <Checkbox label="A required checkbox" required />
     </View>
   );
 };
@@ -32,7 +33,6 @@ const DesktopSpecificCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
       <Checkbox label="A circular checkbox" shape="circular" />
       <Checkbox label="A checkbox with label placed before" labelPosition="before" />
-      <Checkbox label="A required checkbox" required />
     </>
   );
 };

@@ -1,5 +1,8 @@
 import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
+import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { Appearance } from 'react-native';
 import { ApplePalette } from './appleColors.types.ios';
+import { createiOSColorAliasTokens } from './createiOSAliasTokens';
 
 function getFluentUIAppleLightPalette(): ApplePalette {
   return {
@@ -215,7 +218,14 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
 export function paletteFromAppleColors(isLightMode: boolean): ThemeColorDefinition {
   const fluentApple = isLightMode ? getFluentUIAppleLightPalette() : getFluentUIAppleDarkPalette();
 
+  const appearance = Appearance.getColorScheme();
+  const mode = getCurrentAppearance(appearance, 'light');
+
   return {
+    /* Color Alias Tokens */
+
+    ...createiOSColorAliasTokens(mode),
+
     /* PaletteBackgroundColors & PaletteTextColors */
 
     background: fluentApple.surfacePrimary,

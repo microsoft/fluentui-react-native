@@ -1,11 +1,10 @@
 /** @jsx withSlots */
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { radioName, RadioType, RadioProps } from './Radio.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Radio.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useRadio } from './useRadio';
-import { filterViewProps } from '@fluentui-react-native/adapters';
 import { PressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
@@ -25,15 +24,11 @@ export const Radio = compose<RadioType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
-    button: View,
+    button: Pressable,
     innerCircle: View,
     labelContent: View,
     label: Text,
     subtext: Text,
-  },
-  filters: {
-    button: filterViewProps,
-    innerCircle: filterViewProps,
   },
   useRender: (userProps: RadioProps, useSlots: UseSlots<RadioType>) => {
     const radio = useRadio(userProps);
@@ -42,6 +37,7 @@ export const Radio = compose<RadioType>({
     // now return the handler for finishing render
     return (final: RadioProps) => {
       const { label, subtext, ...mergedProps } = mergeProps(radio.props, final);
+      const { onPress, disabled } = mergedProps;
 
       const labelComponent = (
         <Slots.labelContent>
@@ -51,8 +47,8 @@ export const Radio = compose<RadioType>({
       );
 
       return (
-        <Slots.root {...mergedProps}>
-          <Slots.button>
+        <Slots.root {...mergedProps} {...(Platform.OS == 'android' && { accessible: !disabled, focusable: !disabled })}>
+          <Slots.button accessible={false} onPress={onPress} disabled={disabled} focusable={false}>
             <Slots.innerCircle />
           </Slots.button>
           {labelComponent}

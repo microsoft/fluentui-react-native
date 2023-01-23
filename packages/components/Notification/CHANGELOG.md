@@ -1,8 +1,125 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Tue, 03 Jan 2023 23:38:40 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.20
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.24
+- Bump @fluentui-react-native/icon to v0.17.6
+- Bump @fluentui-react-native/text to v0.19.14
+
+## 0.21.19
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.23
+- Bump @fluentui-react-native/experimental-shadow to v0.2.61
+- Bump @fluentui-react-native/framework to v0.8.35
+- Bump @fluentui-react-native/icon to v0.17.5
+- Bump @fluentui-react-native/interactive-hooks to v0.22.12
+- Bump @fluentui-react-native/pressable to v0.9.51
+- Bump @fluentui-react-native/text to v0.19.13
+- Bump @fluentui-react-native/theme-tokens to v0.23.2
+
+## 0.21.18
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.22
+- Bump @fluentui-react-native/experimental-shadow to v0.2.60
+- Bump @fluentui-react-native/framework to v0.8.34
+- Bump @fluentui-react-native/icon to v0.17.4
+- Bump @fluentui-react-native/interactive-hooks to v0.22.11
+- Bump @fluentui-react-native/pressable to v0.9.50
+- Bump @fluentui-react-native/text to v0.19.12
+- Bump @fluentui-react-native/theme-tokens to v0.23.1
+- Bump @fluentui-react-native/theme-types to v0.29.1
+- Bump @fluentui-react-native/tokens to v0.20.4
+
+## 0.21.17
+
+Sun, 15 Jan 2023 14:58:55 GMT
+
+### Patches
+
+- Apply prettier (ruaraki@microsoft.com)
+
+## 0.21.16
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.21
+- Bump @fluentui-react-native/experimental-shadow to v0.2.59
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/icon to v0.17.3
+- Bump @fluentui-react-native/interactive-hooks to v0.22.10
+- Bump @fluentui-react-native/pressable to v0.9.49
+- Bump @fluentui-react-native/text to v0.19.11
+- Bump @fluentui-react-native/theme-tokens to v0.23.0
+- Bump @fluentui-react-native/theme-types to v0.29.0
+- Bump @fluentui-react-native/tokens to v0.20.3
+
+## 0.21.15
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.20
+- Bump @fluentui-react-native/experimental-shadow to v0.2.58
+- Bump @fluentui-react-native/framework to v0.8.32
+- Bump @fluentui-react-native/icon to v0.17.2
+- Bump @fluentui-react-native/interactive-hooks to v0.22.9
+- Bump @fluentui-react-native/pressable to v0.9.48
+- Bump @fluentui-react-native/text to v0.19.10
+
+## 0.21.14
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.19
+- Bump @fluentui-react-native/experimental-shadow to v0.2.57
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/icon to v0.17.1
+- Bump @fluentui-react-native/interactive-hooks to v0.22.8
+- Bump @fluentui-react-native/pressable to v0.9.47
+- Bump @fluentui-react-native/text to v0.19.9
+
+## 0.21.13
+
+Thu, 05 Jan 2023 11:24:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.18
+- Bump @fluentui-react-native/icon to v0.17.0
+
+## 0.21.12
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.17
+- Bump @fluentui-react-native/experimental-shadow to v0.2.56
+- Bump @fluentui-react-native/icon to v0.16.11
+- Bump @fluentui-react-native/interactive-hooks to v0.22.7
+- Bump @fluentui-react-native/pressable to v0.9.46
+- Bump @fluentui-react-native/text to v0.19.8
 
 ## 0.21.11
 

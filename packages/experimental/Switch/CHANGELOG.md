@@ -1,8 +1,94 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Tue, 03 Jan 2023 23:38:40 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.18
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.14
+
+## 0.8.17
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.13
+- Bump @fluentui-react-native/framework to v0.8.35
+- Bump @fluentui-react-native/interactive-hooks to v0.22.12
+
+## 0.8.16
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.12
+- Bump @fluentui-react-native/framework to v0.8.34
+- Bump @fluentui-react-native/interactive-hooks to v0.22.11
+- Bump @fluentui-react-native/tokens to v0.20.4
+
+## 0.8.15
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.11
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/interactive-hooks to v0.22.10
+- Bump @fluentui-react-native/tokens to v0.20.3
+
+## 0.8.14
+
+Tue, 10 Jan 2023 06:10:57 GMT
+
+### Patches
+
+- add switch examples (rohanpd.work@gmail.com)
+
+## 0.8.13
+
+Tue, 10 Jan 2023 05:10:08 GMT
+
+### Patches
+
+- switch disable state a11y fix (rohanpd.work@gmail.com)
+
+## 0.8.12
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.10
+- Bump @fluentui-react-native/framework to v0.8.32
+- Bump @fluentui-react-native/interactive-hooks to v0.22.9
+
+## 0.8.11
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- revert customised checked file (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/text to v0.19.9
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/interactive-hooks to v0.22.8
+
+## 0.8.10
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.8
+- Bump @fluentui-react-native/interactive-hooks to v0.22.7
 
 ## 0.8.9
 

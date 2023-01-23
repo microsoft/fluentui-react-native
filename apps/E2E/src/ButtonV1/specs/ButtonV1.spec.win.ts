@@ -28,7 +28,7 @@ describe('ButtonV1 Accessibility Testing', async () => {
   it('ButtonV1 - Validate accessibilityRole is correct', async () => {
     await expect(
       await ButtonV1PageObject.compareAttribute(ButtonV1PageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
@@ -40,7 +40,7 @@ describe('ButtonV1 Accessibility Testing', async () => {
         Attribute.AccessibilityLabel,
         BUTTON_ACCESSIBILITY_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
@@ -52,7 +52,7 @@ describe('ButtonV1 Accessibility Testing', async () => {
         Attribute.AccessibilityLabel,
         BUTTON_TEST_COMPONENT_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
