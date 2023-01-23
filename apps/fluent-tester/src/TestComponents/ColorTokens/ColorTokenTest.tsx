@@ -45,7 +45,7 @@ const getSwatchColorStyle = (colorName: string, colorValue: ColorValue): ViewSty
 type ColorTokenProps = { colorValue: ColorValue; colorName: string };
 const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps) => {
   if (p.colorValue === undefined) {
-    console.warn('Color token ' + p.colorName + ' is undefined');
+    console.log('Color token ' + p.colorName + ' is undefined');
   }
 
   const themedStyles = getThemedStyles(useTheme());
