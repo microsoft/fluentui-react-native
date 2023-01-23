@@ -59,7 +59,7 @@ export const RadioGroupV1Test: React.FunctionComponent = () => {
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =
