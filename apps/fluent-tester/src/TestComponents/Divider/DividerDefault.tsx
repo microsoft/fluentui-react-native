@@ -17,7 +17,7 @@ export const DividerDefault: React.FunctionComponent = () => {
     <Stack style={commonTestStyles.stack}>
       <Divider />
       <CustomText>Regular divider with no content above.</CustomText>
-      <DividerWithInset color="purple" text="Colored divider with text + inset." />
+      <DividerWithInset color="purple">Colored divider with text + inset.</DividerWithInset>
       <Divider
         color="blue"
         icon={{
@@ -29,7 +29,9 @@ export const DividerDefault: React.FunctionComponent = () => {
         }}
       />
       <CustomText>Colored divider with an icon above.</CustomText>
-      <Divider insetSize={16} appearance="brand" alignContent="start" text="Start-aligned branded divider w inset" />
+      <Divider insetSize={16} appearance="brand" alignContent="start">
+        Start-aligned branded divider w inset
+      </Divider>
       <View
         style={{
           borderStyle: 'solid',
@@ -45,7 +47,9 @@ export const DividerDefault: React.FunctionComponent = () => {
         <CustomText>Vertical divider with an inset to my left.</CustomText>
       </View>
       <View style={dividerTestStyles.setHeightView}>
-        <Divider appearance="strong" alignContent="end" vertical text="End-aligned vertical divider." />
+        <Divider appearance="strong" alignContent="end" vertical>
+          End-aligned vertical divider.
+        </Divider>
       </View>
     </Stack>
   );

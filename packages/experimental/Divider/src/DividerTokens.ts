@@ -1,4 +1,5 @@
 import { Theme } from '@fluentui-react-native/framework';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { DividerTokens } from './Divider.types';
 
@@ -21,10 +22,10 @@ export const defaultDividerTokens: TokenSettings<DividerTokens, Theme> = (theme:
     },
     // vertical style overrides
     isVertical: {
-      minHeight: 24,
+      minHeight: globalTokens.size240,
     },
-    hasChildren: {
-      contentPadding: 8,
+    hasContent: {
+      contentPadding: globalTokens.size80,
       isVertical: {
         minHeight: 84,
       },

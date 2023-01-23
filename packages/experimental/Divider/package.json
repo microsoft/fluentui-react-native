@@ -30,6 +30,7 @@
     "@fluentui-react-native/icon": "^0.17.3",
     "@fluentui-react-native/text": ">=0.19.11 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.20.3 <1.0.0",
+    "@fluentui-react-native/theme-tokens": "^0.23.2",
     "@fluentui-react-native/use-styling": ">=0.9.1 <1.0.0"
   },
   "devDependencies": {

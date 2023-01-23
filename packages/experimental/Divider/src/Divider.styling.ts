@@ -1,11 +1,11 @@
-import { divider, DividerTokens, DividerSlotProps, DividerProps } from './Divider.types';
+import { dividerName, DividerTokens, DividerSlotProps, DividerProps } from './Divider.types';
 import { Theme, UseStylingOptions, buildProps, layoutStyles } from '@fluentui-react-native/framework';
 import { defaultDividerTokens } from './DividerTokens';
 
 export const dividerStates: (keyof DividerTokens)[] = [
   'alignStart',
   'alignEnd',
-  'hasChildren',
+  'hasContent',
   'isVertical',
   'default',
   'subtle',
@@ -14,7 +14,7 @@ export const dividerStates: (keyof DividerTokens)[] = [
 ];
 
 export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, DividerTokens> = {
-  tokens: [defaultDividerTokens, divider],
+  tokens: [defaultDividerTokens, dividerName],
   tokensThatAreAlsoProps: ['color', 'insetSize', 'vertical'],
   states: dividerStates,
   slotProps: {

@@ -3,7 +3,7 @@ import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { LayoutTokens } from '@fluentui-react-native/tokens';
 import { TextProps } from '@fluentui-react-native/text';
 
-export const divider = 'Divider';
+export const dividerName = 'Divider';
 
 export const DividerInsetSizes = [0, 16, 56, 68, 72, 108] as const;
 export type DividerInsetSize = typeof DividerInsetSizes[number];
@@ -36,13 +36,9 @@ export interface DividerProps extends DividerCoreProps {
    */
   appearance?: DividerAppearance;
   /**
-   * Pass an icon source to render an icon as content in the divider. Mutually exclusive with text.
+   * Pass an icon source to render an icon as content in the divider. Mutually exclusive with passing text as a child.
    */
   icon?: IconSourcesType;
-  /**
-   * Pass a string to render text as content in the divider. Mutually exclusive with icon. If both are set, text will render over the icon.
-   */
-  text?: string;
 }
 
 export interface DividerTokens extends DividerCoreProps, LayoutTokens {
@@ -75,7 +71,7 @@ export interface DividerTokens extends DividerCoreProps, LayoutTokens {
    */
   alignStart?: DividerTokens;
   alignEnd?: DividerTokens;
-  hasChildren?: DividerTokens;
+  hasContent?: DividerTokens;
   isVertical?: DividerTokens;
   default?: DividerTokens;
   subtle?: DividerTokens;
