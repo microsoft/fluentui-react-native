@@ -9,8 +9,6 @@ describe('TextV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to TextV1 test page', async () => {
@@ -19,6 +17,9 @@ describe('TextV1 Testing Initialization', function () {
     await TextV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await TextV1PageObject.isPageLoaded()).toBeTruthy(TextV1PageObject.ERRORMESSAGE_PAGELOAD);
+
+    await TextV1PageObject.enableE2ETesterMode();
+
     await expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

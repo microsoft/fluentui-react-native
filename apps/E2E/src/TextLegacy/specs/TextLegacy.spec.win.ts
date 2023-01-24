@@ -8,8 +8,6 @@ describe('Text Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to Text Legacy test page', async () => {
@@ -18,6 +16,9 @@ describe('Text Legacy Testing Initialization', function () {
     await TextLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await TextLegacyPageObject.isPageLoaded()).toBeTruthy(TextLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await TextLegacyPageObject.enableE2ETesterMode();
+
     await expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
