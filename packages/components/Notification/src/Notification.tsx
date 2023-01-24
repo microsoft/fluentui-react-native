@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { Platform, PressableProps, useWindowDimensions, View, ViewStyle, ViewProps } from 'react-native';
+import { PressableProps, useWindowDimensions, View, ViewStyle, ViewProps } from 'react-native';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { Body2, Body2Strong } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
@@ -9,30 +9,8 @@ import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-rea
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
+import { useHorizontalSizeClass, SizeClassIOS } from '@fluentui-react-native/experimental-appearance-additions';
 
-type SizeClassIOS = 'regular' | 'compact' | undefined;
-
-/**
- * Hook that "guesses" our Size Class on iOS based on our window width.
- * Note: this is hacky and should not be used.
- *
- * For more information about Size Classes, see the following:
- * https://developer.apple.com/documentation/uikit/uitraitcollection
- * https://developer.apple.com/design/human-interface-guidelines/foundations/layout/#platform-considerations
- * @returns SizeClassIOS: enum determining our size class
- */
-const useSizeClassIOS_DO_NOT_USE: () => SizeClassIOS = () => {
-  const width = useWindowDimensions().width;
-  if (Platform.OS === 'ios') {
-    if (Platform.isPad && width > 375) {
-      return 'regular';
-    } else {
-      return 'compact';
-    }
-  } else {
-    return undefined;
-  }
-};
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
  *
@@ -62,7 +40,7 @@ export const Notification = compose<NotificationType>({
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
     const width = useWindowDimensions().width / 2;
-    const sizeClass = useSizeClassIOS_DO_NOT_USE();
+    const sizeClass = useHorizontalSizeClass();
     const onActionPress = userProps.onActionPress;
 
     const rootStyle = getRootStyle(isBar, width, sizeClass);
