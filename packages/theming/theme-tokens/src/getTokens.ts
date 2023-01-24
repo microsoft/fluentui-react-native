@@ -13,6 +13,8 @@ export function getAliasTokens(mode: AppearanceOptions) {
     return lightAliasTokens;
   } else if (mode === 'dark') {
     return darkAliasTokens;
+  } else if (mode === 'darkElevated') {
+    return darkAliasTokens;
   } else if (mode === 'highContrast') {
     return hcAliasTokens;
   } else {
