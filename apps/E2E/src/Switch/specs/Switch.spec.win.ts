@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import SwitchPageObject from '../pages/SwitchPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -11,13 +11,7 @@ describe('Switch Testing Initialization', function () {
   });
 
   it('Click and navigate to Switch test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToSwitchPage();
-    await SwitchPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await SwitchPageObject.isPageLoaded()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await SwitchPageObject.enableE2ETesterMode();
+    await SwitchPageObject.navigateToPageAndLoadTests(true);
 
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

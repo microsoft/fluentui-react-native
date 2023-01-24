@@ -10,13 +10,7 @@ describe('ContextualMenu Testing Initialization', function () {
   });
 
   it('Click and navigate to ContextualMenu test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToContextualMenuPage();
-    await ContextualMenuPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await ContextualMenuPageObject.isPageLoaded()).toBeTruthy(ContextualMenuPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await ContextualMenuPageObject.enableE2ETesterMode();
+    await ContextualMenuPageObject.navigateToPageAndLoadTests(true);
 
     await expect(await ContextualMenuPageObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

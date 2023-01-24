@@ -10,13 +10,7 @@ describe('Tabs Legacy Testing Initialization', function () {
   });
 
   it('Click and navigate to Tabs Legacy test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToTabsLegacyPage();
-    await TabsLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy();
-
-    await TabsLegacyPageObject.enableE2ETesterMode();
+    await TabsLegacyPageObject.navigateToPageAndLoadTests(true);
   });
 });
 

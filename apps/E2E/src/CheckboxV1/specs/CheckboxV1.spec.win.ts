@@ -11,13 +11,7 @@ describe('CheckboxV1 Testing Initialization', () => {
   });
 
   it('Click and navigate to CheckboxV1 test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxV1Page();
-    await CheckboxV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
-
-    await CheckboxV1PageObject.enableE2ETesterMode();
+    await CheckboxV1PageObject.navigateToPageAndLoadTests(true);
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

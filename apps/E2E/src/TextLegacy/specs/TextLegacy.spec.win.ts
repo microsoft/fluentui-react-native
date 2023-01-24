@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import TextLegacyPageObject, { TextComponentSelector } from '../pages/TextLegacyPageObject';
-import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { TEXT_A11Y_ROLE, BOOT_APP_TIMEOUT } from '../../common/consts';
 import { DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL, DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -11,13 +11,7 @@ describe('Text Legacy Testing Initialization', function () {
   });
 
   it('Click and navigate to Text Legacy test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToTextLegacyPage();
-    await TextLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await TextLegacyPageObject.isPageLoaded()).toBeTruthy(TextLegacyPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await TextLegacyPageObject.enableE2ETesterMode();
+    await TextLegacyPageObject.navigateToPageAndLoadTests(true);
 
     await expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

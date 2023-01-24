@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ButtonV1PageObject from '../pages/ButtonV1PageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../ButtonLegacy/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -12,12 +12,7 @@ describe('ButtonV1 Testing Initialization', function () {
 
   it('Click and navigate to ButtonV1 test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToButtonPage();
-    await ButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await ButtonV1PageObject.isPageLoaded()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
-
-    await ButtonV1PageObject.enableE2ETesterMode();
+    await ButtonV1PageObject.navigateToPageAndLoadTests(true);
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

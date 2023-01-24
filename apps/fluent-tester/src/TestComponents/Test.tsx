@@ -155,7 +155,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         {props.e2eSections && (
           <View style={styles.e2eSwitch}>
             <Text style={styles.e2eSwitchLabel} {...(isMobile ? {} : { variant: 'body1Strong' })}>
-              Show E2E
+              E2E Mode
             </Text>
             <Switch onValueChange={setShowE2E} value={showE2E} {...testProps(E2E_MODE_SWITCH)} />
           </View>

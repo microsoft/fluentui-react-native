@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuButtonV1PageObject from '../pages/MenuButtonV1PageObject.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Attribute } from '../../common/consts';
+import { BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Attribute } from '../../common/consts';
 import { MENUBUTTONV1_ACCESSIBILITY_LABEL, MENUBUTTONV1_TEST_COMPONENT_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -11,13 +11,7 @@ describe('MenuButtonV1 Testing Initialization', function () {
   });
 
   it('Click and navigate to MenuButtonV1 test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToMenuButtonV1Page();
-    await MenuButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await MenuButtonV1PageObject.isPageLoaded()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
-
-    await MenuButtonV1PageObject.enableE2ETesterMode();
+    await MenuButtonV1PageObject.navigateToPageAndLoadTests(true);
 
     await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

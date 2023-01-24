@@ -11,13 +11,7 @@ describe('Checkbox Legacy Testing Initialization', () => {
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxLegacyPage();
-    await CheckboxLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await CheckboxLegacyPageObject.enableE2ETesterMode();
+    await CheckboxLegacyPageObject.navigateToPageAndLoadTests(true);
 
     await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

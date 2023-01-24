@@ -12,12 +12,7 @@ describe('Menu Testing Initialization', function () {
 
   it('Click and navigate to Menu test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToMenuPage();
-    await MenuPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await MenuPageObject.isPageLoaded()).toBeTruthy(MenuPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await MenuPageObject.enableE2ETesterMode();
+    await MenuPageObject.navigateToPageAndLoadTests(true);
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

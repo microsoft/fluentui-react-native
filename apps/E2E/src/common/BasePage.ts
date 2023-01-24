@@ -80,6 +80,24 @@ export abstract class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
 
+  /**
+   * For any given page object, this method automates navigating to the page, waiting for it to load, and revealing its E2E components.
+   * This also contains error checking through its waiters, removing the extra 'expect()' calls during test setup.
+   */
+  async navigateToPageAndLoadTests(showE2ESection = false) {
+    // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
+    if (this.platform === MobilePlatform.Android || this.platform === MobilePlatform.iOS) {
+      await this.mobileScrollToComponentButton();
+    }
+
+    await (await this._pageButton).click();
+    await this.waitForPageDisplayed();
+
+    if (showE2ESection) {
+      await this.enableE2ETesterMode();
+    }
+  }
+
   async enableE2ETesterMode(): Promise<void> {
     const e2eSwitch = await this._e2eSwitch;
     switch (this.platform) {

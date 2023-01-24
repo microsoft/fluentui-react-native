@@ -2,7 +2,7 @@ import NavigateAppPage from '../../common/NavigateAppPage';
 import CheckboxLegacyPageObject from '../pages/CheckboxLegacyPageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../consts';
-import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { CHECKBOX_A11Y_ROLE, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
@@ -11,13 +11,7 @@ describe('Checkbox Legacy Testing Initialization', () => {
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxLegacyPage();
-    await CheckboxLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy();
-
-    await CheckboxLegacyPageObject.enableE2ETesterMode();
+    await CheckboxLegacyPageObject.navigateToPageAndLoadTests(true);
   });
 });
 

@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import TextV1PageObject from '../pages/TextV1PageObject.win';
-import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { TEXT_A11Y_ROLE, BOOT_APP_TIMEOUT } from '../../common/consts';
 import { ComponentSelector } from '../../common/BasePage';
 import { TEXTV1_ACCESSIBILITY_LABEL, TEXTV1_CONTENT } from '../consts';
 
@@ -12,13 +12,7 @@ describe('TextV1 Testing Initialization', function () {
   });
 
   it('Click and navigate to TextV1 test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToTextV1Page();
-    await TextV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await TextV1PageObject.isPageLoaded()).toBeTruthy(TextV1PageObject.ERRORMESSAGE_PAGELOAD);
-
-    await TextV1PageObject.enableE2ETesterMode();
+    await TextV1PageObject.navigateToPageAndLoadTests(true);
 
     await expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

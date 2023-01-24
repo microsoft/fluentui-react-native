@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CalloutPageObject from '../pages/CalloutPageObject.win';
 import { CALLOUT_ACCESSIBILITY_LABEL } from '../consts';
-import { Attribute, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CALLOUT_A11Y_ROLE } from '../../common/consts';
+import { Attribute, BOOT_APP_TIMEOUT, CALLOUT_A11Y_ROLE } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Callout Testing Initialization', function () {
@@ -12,12 +12,7 @@ describe('Callout Testing Initialization', function () {
 
   it('Click and navigate to Callout test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCalloutPage();
-    await CalloutPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await CalloutPageObject.enableE2ETesterMode();
+    await CalloutPageObject.navigateToPageAndLoadTests(true);
 
     await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

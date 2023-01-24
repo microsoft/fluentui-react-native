@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import RadioGroupPageObject, { RadioButton } from '../pages/RadioGroupLegacyPageObject';
-import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, Attribute } from '../../common/consts';
+import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, BOOT_APP_TIMEOUT, Keys, Attribute } from '../../common/consts';
 import {
   RADIOGROUP_ACCESSIBILITY_LABEL,
   RADIOGROUP_TEST_COMPONENT_LABEL,
@@ -16,13 +16,7 @@ describe('RadioGroup/RadioButton Legacy Testing Initialization', function () {
   });
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToRadioGroupLegacyPage();
-    await RadioGroupPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await RadioGroupPageObject.isPageLoaded()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await RadioGroupPageObject.enableE2ETesterMode();
+    await RadioGroupPageObject.navigateToPageAndLoadTests(true);
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
