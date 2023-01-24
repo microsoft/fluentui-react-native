@@ -41,6 +41,7 @@ export const Avatar = compose<AvatarType>({
     initialsBackground: View,
     icon: Icon,
     ring: View,
+    outerRing: View,
     badge: PresenceBadge,
     fallbackIcon: Svg,
   },
@@ -53,10 +54,17 @@ export const Avatar = compose<AvatarType>({
       const { badge, ...mergedProps } = avatar.props;
       const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
       const RingComponent = showRing && !transparentRing ? Slots.ring : Fragment;
+      const hasOuterRing = Platform.OS === 'android';
 
       return (
         <Slots.root {...mergedProps}>
-          <RingComponent>{renderAvatar(final, avatar.props, Slots, svgIconsEnabled)}</RingComponent>
+          {hasOuterRing ? (
+            <Slots.outerRing>
+              <RingComponent>{renderAvatar(final, avatar.props, Slots, svgIconsEnabled)}</RingComponent>
+            </Slots.outerRing>
+          ) : (
+            <RingComponent>{renderAvatar(final, avatar.props, Slots, svgIconsEnabled)}</RingComponent>
+          )}
           {svgIconsEnabled && showBadge && <Slots.badge {...badge} />}
         </Slots.root>
       );

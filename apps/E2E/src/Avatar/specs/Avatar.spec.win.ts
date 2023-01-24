@@ -28,7 +28,7 @@ describe('Avatar Accessibility Testing', () => {
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityLabel, AVATAR_ACCESSIBILITY_LABEL),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -40,7 +40,7 @@ describe('Avatar Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         AVATAR_ACCESSIBILITY_LABEL_BY_NAME,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -48,7 +48,7 @@ describe('Avatar Accessibility Testing', () => {
   it('Set "accessibilityHint". Validate "accessibilityHint" value propagates to "HelpText" element attribute.', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityHint, AVATAR_ACCESSIBILITY_HINT),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -56,7 +56,7 @@ describe('Avatar Accessibility Testing', () => {
   it('Set "accessibilityRole" prop. Validate "accessibilityRole" value propagates to "ControlType" attribute.', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -64,7 +64,7 @@ describe('Avatar Accessibility Testing', () => {
   it('Do NOT set "accessibilityRole". Validate "accessibilityRole" value defaults to "Image" ControlType.', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._secondaryComponent, Attribute.AccessibilityRole, IMAGE_A11Y_ROLE),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });

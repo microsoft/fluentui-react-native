@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import CheckboxV1PageObject, { CheckboxV1Selector } from '../pages/CheckboxV1PageObject';
+import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import { CHECKBOXV1_TEST_COMPONENT_LABEL, CHECKBOXV1_ACCESSIBILITY_LABEL } from '../consts';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CHECKBOX_A11Y_ROLE, Keys } from '../../common/consts';
@@ -27,22 +27,16 @@ describe('CheckboxV1 Accessibility Testing', () => {
   });
 
   it('CheckboxV1 - Validate accessibilityRole is correct', async () => {
-    await CheckboxV1PageObject.scrollToTestElement();
-
     await expect(await CheckboxV1PageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('CheckboxV1 - Set accessibilityLabel', async () => {
-    await CheckboxV1PageObject.scrollToTestElement();
-
     await expect(await CheckboxV1PageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOXV1_ACCESSIBILITY_LABEL);
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('CheckboxV1 - Do not set accessibilityLabel -> Default to Checkbox label', async () => {
-    await CheckboxV1PageObject.scrollToTestElement();
-
     await expect(await CheckboxV1PageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOXV1_TEST_COMPONENT_LABEL);
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
@@ -78,7 +72,7 @@ describe('CheckboxV1 Functional Testing', () => {
 
   it('Click the "SPACE" on a Checkbox and verify it toggles', async () => {
     /* Presses the "space bar" to select the Checkbox */
-    await CheckboxV1PageObject.sendKey(CheckboxV1Selector.Primary, Keys.SPACE);
+    await CheckboxV1PageObject.sendKey(ComponentSelector.Primary, Keys.SPACE);
     await CheckboxV1PageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
     /* Validate the Checkbox is selected */

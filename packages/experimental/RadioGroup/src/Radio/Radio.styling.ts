@@ -70,15 +70,14 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     labelContent: buildProps(
       (tokens: RadioTokens) => ({
         style: {
-          alignSelf: 'flex-start',
-          alignItems: 'flex-start',
+          alignItems: tokens.labelAlignItems,
           flexDirection: 'column',
           marginRight: tokens.labelMarginRight,
           marginLeft: tokens.labelMarginLeft,
           padding: tokens.labelPadding,
         },
       }),
-      ['labelMarginRight', 'labelMarginLeft', 'labelPadding'],
+      ['labelAlignItems', 'labelMarginRight', 'labelMarginLeft', 'labelPadding'],
     ),
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({
