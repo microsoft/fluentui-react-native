@@ -7,8 +7,6 @@ describe('ContextualMenu Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to ContextualMenu test page', async () => {
@@ -17,6 +15,9 @@ describe('ContextualMenu Testing Initialization', function () {
     await ContextualMenuPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ContextualMenuPageObject.isPageLoaded()).toBeTruthy(ContextualMenuPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await ContextualMenuPageObject.enableE2ETesterMode();
+
     await expect(await ContextualMenuPageObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

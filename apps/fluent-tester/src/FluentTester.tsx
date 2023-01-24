@@ -3,7 +3,7 @@ import { Separator, TextV1 as Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager, Switch } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
 import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../E2E/src/common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -11,8 +11,6 @@ import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
 import { ROOT_VIEW } from '../../E2E/src/common/consts';
 import { testProps } from './TestComponents/Common/TestProps';
-import { E2EContext } from './TestComponents';
-import { E2E_MODE_SWITCH } from '../../E2E/src/common/consts';
 
 // uncomment the below lines to enable message spy
 /**
@@ -66,37 +64,9 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
   const { enableSinglePaneView, enableBackButtonIOS, onBackButtonPressedIOS } = props;
   const theme = useTheme();
 
-  const { e2eMode, setE2EMode } = React.useContext(E2EContext);
-
   const headerStyle = enableSinglePaneView ? fluentTesterStyles.headerWithBackButton : fluentTesterStyles.header;
 
   const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
-
-  const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
-
-  const E2ESwitch = () =>
-    Platform.select({
-      android: (
-        <View style={fluentTesterStyles.e2eSwitchViewMobile}>
-          <Text variant="subheaderSemibold">E2E Mode:</Text>
-          <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
-        </View>
-      ),
-      ios: (
-        <View style={fluentTesterStyles.e2eSwitchViewMobile}>
-          <Text variant="bodySemibold">E2E Mode:</Text>
-          <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
-        </View>
-      ),
-      default: (
-        <View style={fluentTesterStyles.e2eSwitchDesktopView}>
-          <Text style={{ paddingLeft: 4 }} variant="bodySemibold">
-            E2E Mode:
-          </Text>
-          <Switch onValueChange={(value) => setE2EMode(value)} value={e2eMode} testID={E2E_MODE_SWITCH} />
-        </View>
-      ),
-    });
 
   return (
     <View style={headerStyle}>
@@ -110,7 +80,6 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
         ⚛ FluentUI Tests
       </Text>
       <View style={fluentTesterStyles.header}>
-        {!isMobile && <E2ESwitch />}
         {/* On iPhone, We need a back button. Android has an OS back button, while desktop platforms have a two-pane view */}
         {Platform.OS === 'ios' && !Platform.isPad && (
           <Button
@@ -123,7 +92,6 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
           </Button>
         )}
         <ThemePickers />
-        {isMobile && <E2ESwitch />}
       </View>
     </View>
   );
@@ -138,7 +106,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
   const [onTestListView, setOnTestListView] = React.useState(true);
-  const [e2eMode, setE2EMode] = React.useState(false);
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
 
@@ -252,14 +219,12 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
       {...testProps(ROOT_VIEW)}
     >
-      <E2EContext.Provider value={{ e2eMode, setE2EMode }}>
-        <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
-        <HeaderSeparator />
-        <View style={fluentTesterStyles.testRoot}>
-          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-          {isTestSectionVisible && <TestComponentView />}
-        </View>
-      </E2EContext.Provider>
+      <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
+      <HeaderSeparator />
+      <View style={fluentTesterStyles.testRoot}>
+        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
+        {isTestSectionVisible && <TestComponentView />}
+      </View>
     </RootView>
   );
 };

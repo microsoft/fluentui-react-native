@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, Switch, View } from 'react-native';
 import { Text, ToggleButton, Separator, Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
@@ -8,7 +8,7 @@ import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { testProps } from './Common/TestProps';
-import { E2EContext } from './';
+import { E2E_MODE_SWITCH } from '../../../E2E/src/index.consts';
 
 export type TestSection = {
   name: string;
@@ -46,6 +46,7 @@ const definitions = {
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
+    flex: 1,
   },
   definitionHeader: {
     marginTop: 12,
@@ -83,12 +84,25 @@ const styles = StyleSheet.create({
   e2eSection: {
     marginBottom: 4,
   },
+  e2eSwitch: {
+    display: 'flex',
+    flexDirection: Platform.select({
+      android: 'column',
+      ios: 'column',
+      default: 'row',
+    }),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  e2eSwitchLabel: {
+    marginRight: 4,
+    textAlignVertical: 'center',
+  },
 });
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
   const [showStatus, setShowStatus] = React.useState(false);
-
-  const { e2eMode } = React.useContext(E2EContext);
+  const [showE2E, setShowE2E] = React.useState(false);
 
   const toggleSvg: React.FunctionComponent<SvgProps> = () => {
     const plusPath =
@@ -135,10 +149,18 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         >
           E2E Testing Button
         </Button>
+        {props.e2eSections && (
+          <View style={styles.e2eSwitch}>
+            <Text style={styles.e2eSwitchLabel} variant="body1Strong">
+              Show E2E
+            </Text>
+            <Switch testID={E2E_MODE_SWITCH} onValueChange={setShowE2E} value={showE2E} />
+          </View>
+        )}
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
       <Separator />
-      {e2eSections && e2eMode && (
+      {e2eSections && showE2E && (
         // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
         <>
           {e2eSections.map((section, i) => {

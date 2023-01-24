@@ -9,8 +9,6 @@ describe('Button Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to Button Legacy test page', async () => {
@@ -19,6 +17,8 @@ describe('Button Legacy Testing Initialization', function () {
     await ButtonLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ButtonLegacyPageObject.isPageLoaded()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await ButtonLegacyPageObject.enableE2ETesterMode();
 
     await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });

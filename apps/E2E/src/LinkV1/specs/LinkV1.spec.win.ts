@@ -8,8 +8,6 @@ describe('LinkV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to LinkV1 test page', async () => {
@@ -18,6 +16,8 @@ describe('LinkV1 Testing Initialization', function () {
     await LinkV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await LinkV1PageObject.isPageLoaded()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_PAGELOAD);
+
+    await LinkV1PageObject.enableE2ETesterMode();
 
     await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

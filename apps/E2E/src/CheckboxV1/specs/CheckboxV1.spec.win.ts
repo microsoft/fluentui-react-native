@@ -8,8 +8,6 @@ describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to CheckboxV1 test page', async () => {
@@ -18,6 +16,9 @@ describe('CheckboxV1 Testing Initialization', () => {
     await CheckboxV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
+
+    await CheckboxV1PageObject.enableE2ETesterMode();
+
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

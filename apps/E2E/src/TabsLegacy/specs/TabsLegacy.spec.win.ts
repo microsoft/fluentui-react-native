@@ -7,8 +7,6 @@ describe('Tabs Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to Tabs Legacy test page', async () => {
@@ -17,6 +15,9 @@ describe('Tabs Legacy Testing Initialization', function () {
     await TabsLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await TabsLegacyPageObject.enableE2ETesterMode();
+
     await expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

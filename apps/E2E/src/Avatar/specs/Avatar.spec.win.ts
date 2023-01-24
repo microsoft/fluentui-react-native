@@ -8,8 +8,6 @@ describe('Avatar Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to Avatar test page', async () => {
@@ -18,6 +16,9 @@ describe('Avatar Testing Initialization', function () {
     await AvatarPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await AvatarPageObject.enableE2ETesterMode();
+
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 });

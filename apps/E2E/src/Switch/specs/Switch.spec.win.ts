@@ -10,8 +10,6 @@ describe('Switch Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to Switch test page', async () => {
@@ -20,6 +18,9 @@ describe('Switch Testing Initialization', function () {
     await SwitchPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await SwitchPageObject.isPageLoaded()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await SwitchPageObject.enableE2ETesterMode();
+
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

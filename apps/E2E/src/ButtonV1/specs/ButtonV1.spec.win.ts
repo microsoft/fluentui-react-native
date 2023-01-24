@@ -8,8 +8,6 @@ describe('ButtonV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to ButtonV1 test page', async () => {
@@ -18,6 +16,9 @@ describe('ButtonV1 Testing Initialization', function () {
     await ButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ButtonV1PageObject.isPageLoaded()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
+
+    await ButtonV1PageObject.enableE2ETesterMode();
+
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

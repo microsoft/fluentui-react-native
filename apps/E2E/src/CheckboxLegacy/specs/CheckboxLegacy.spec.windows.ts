@@ -8,8 +8,6 @@ describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
@@ -18,6 +16,8 @@ describe('Checkbox Legacy Testing Initialization', () => {
     await CheckboxLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy();
+
+    await CheckboxLegacyPageObject.enableE2ETesterMode();
   });
 });
 

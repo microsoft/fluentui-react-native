@@ -9,8 +9,6 @@ describe('MenuButton Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to MenuButton Legacy test page', async () => {
@@ -19,6 +17,9 @@ describe('MenuButton Legacy Testing Initialization', function () {
     await MenuButtonLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await MenuButtonLegacyPageObject.enableE2ETesterMode();
+
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

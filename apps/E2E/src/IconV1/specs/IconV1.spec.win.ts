@@ -9,8 +9,6 @@ describe('IconV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to IconV1 test page', async () => {
@@ -19,6 +17,9 @@ describe('IconV1 Testing Initialization', function () {
     await IconV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await IconV1PageObject.isPageLoaded()).toBeTruthy(IconV1PageObject.ERRORMESSAGE_PAGELOAD);
+
+    await IconV1PageObject.enableE2ETesterMode();
+
     await expect(await IconV1PageObject.didAssertPopup()).toBeFalsy(IconV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

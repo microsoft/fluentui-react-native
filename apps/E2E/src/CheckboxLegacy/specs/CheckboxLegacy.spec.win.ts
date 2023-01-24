@@ -8,8 +8,6 @@ describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
@@ -18,6 +16,9 @@ describe('Checkbox Legacy Testing Initialization', () => {
     await CheckboxLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await CheckboxLegacyPageObject.enableE2ETesterMode();
+
     await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

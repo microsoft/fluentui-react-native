@@ -8,8 +8,6 @@ describe('Callout Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-
-    await NavigateAppPage.enableE2ETesterMode();
   });
 
   it('Click and navigate to Callout test page', async () => {
@@ -18,6 +16,9 @@ describe('Callout Testing Initialization', function () {
     await CalloutPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
+
+    await CalloutPageObject.enableE2ETesterMode();
+
     await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
