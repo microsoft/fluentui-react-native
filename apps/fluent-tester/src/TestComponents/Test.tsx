@@ -46,7 +46,7 @@ const definitions = {
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
-    flex: 1,
+    flex: Platform.select({ ios: 0, android: 0, default: 1 }),
   },
   definitionHeader: {
     marginTop: 12,
