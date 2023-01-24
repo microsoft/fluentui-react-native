@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix build failing on radiogroup android tests",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
