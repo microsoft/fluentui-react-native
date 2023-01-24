@@ -22,6 +22,22 @@ exports[`Radio component tests Radio default 1`] = `
   accessible={true}
   enableFocusRing={true}
   focusable={true}
+  keyDownEvents={
+    Array [
+      Object {
+        "key": "ArrowDown",
+      },
+      Object {
+        "key": "ArrowRight",
+      },
+      Object {
+        "key": "ArrowUp",
+      },
+      Object {
+        "key": "ArrowLeft",
+      },
+    ]
+  }
   labelPosition="after"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
@@ -47,11 +63,27 @@ exports[`Radio component tests Radio default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
     }
   }
   value="key1"
 >
   <View
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -86,10 +118,10 @@ exports[`Radio component tests Radio default 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "alignSelf": "flex-start",
         "flexDirection": "column",
         "marginLeft": 0,
         "marginRight": 2,
+        "padding": undefined,
       }
     }
   >
@@ -136,6 +168,22 @@ exports[`Radio component tests Radio disabled 1`] = `
   accessible={true}
   enableFocusRing={true}
   focusable={false}
+  keyDownEvents={
+    Array [
+      Object {
+        "key": "ArrowDown",
+      },
+      Object {
+        "key": "ArrowRight",
+      },
+      Object {
+        "key": "ArrowUp",
+      },
+      Object {
+        "key": "ArrowLeft",
+      },
+    ]
+  }
   labelPosition="after"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
@@ -161,11 +209,32 @@ exports[`Radio component tests Radio disabled 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
     }
   }
   value="key1"
 >
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -200,10 +269,10 @@ exports[`Radio component tests Radio disabled 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "alignSelf": "flex-start",
         "flexDirection": "column",
         "marginLeft": 0,
         "marginRight": 2,
+        "padding": undefined,
       }
     }
   >

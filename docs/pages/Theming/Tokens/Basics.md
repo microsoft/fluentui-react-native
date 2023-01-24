@@ -137,15 +137,4 @@ const strokeSize = {
 
 ### Typography
 
-In FURN, typography alias tokens can be passed into a `TextV1` element or wrapped using a JSX type. For example:
-
-```tsx
-import { Body1, TextV1 } from '@fluentui-react-native/text';
-
-const myText = <TextV1 variant="body1">Here is some body text</TextV1>;
-const moreText = <Body1>Here is some more body text</Body1>;
-```
-
-The former is better if you want to have more fine control over the appearance of your text, while the latter is better if you're looking for the simplest way to add a pre-styled text component.
-
 Given a `Theme` object named `theme`, you can get the available variants and their tokens by calling `theme.typography.variants`. The different text variants available on each platform can be found in the `Variants.platform.ts` files in `packages/components/text/src`. Note that not all variants are available on every platform, although most of them are.

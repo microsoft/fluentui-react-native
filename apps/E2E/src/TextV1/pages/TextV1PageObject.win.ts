@@ -1,28 +1,24 @@
 import { TEXTV1_NO_A11Y_LABEL_COMPONENT, TEXTV1_TESTPAGE, TEXTV1_TEST_COMPONENT, HOMEPAGE_TEXTV1_BUTTON } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage } from '../../common/BasePage';
 
 class TextV1PageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(TEXTV1_TESTPAGE);
-  }
-
   get _pageName() {
     return TEXTV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(TEXTV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return TEXTV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(TEXTV1_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return TEXTV1_NO_A11Y_LABEL_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_TEXTV1_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_TEXTV1_BUTTON;
   }
 }
 

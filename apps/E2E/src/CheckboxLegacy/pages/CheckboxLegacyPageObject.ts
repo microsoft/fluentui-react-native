@@ -54,24 +54,20 @@ class CheckboxLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(CHECKBOX_TESTPAGE);
-  }
-
   get _pageName() {
     return CHECKBOX_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(CHECKBOX_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return CHECKBOX_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(CHECKBOX_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return CHECKBOX_NO_A11Y_LABEL_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_CHECKBOX_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_CHECKBOX_BUTTON;
   }
 
   get _callbackText() {

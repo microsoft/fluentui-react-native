@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 18 Jan 2023 01:55:11 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.17.16",
+      "version": "0.17.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-ramp",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.29.1",
+            "commit": "f7626f6eb1f6c267c40c60c9aef8b8cd899a046b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Jan 2023 20:17:18 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.17.15",
+      "version": "0.17.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-ramp",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.29.0",
+            "commit": "bd23a4ac5dd35729323268e384aeb1e970fce4ac"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 29 Dec 2022 03:47:47 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.17.14",
       "version": "0.17.14",

@@ -5,5 +5,5 @@ import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
  * @deprecated
  */
 export function getBaselinePlatformTheme(): ITheme {
-  return defaultFluentTheme;
+  return defaultFluentTheme();
 }

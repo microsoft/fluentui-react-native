@@ -21,11 +21,11 @@ beforeAll(() => {
 });
 
 it('defaultFluentTheme test', () => {
-  expect(defaultFluentTheme).toMatchSnapshot();
+  expect(defaultFluentTheme()).toMatchSnapshot();
 });
 
 it('defaultFluentDarkTheme test', () => {
-  expect(defaultFluentDarkTheme).toMatchSnapshot();
+  expect(defaultFluentDarkTheme()).toMatchSnapshot();
 });
 
 describe('createDefaultTheme test', () => {

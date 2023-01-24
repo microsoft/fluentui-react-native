@@ -24,6 +24,10 @@ class CheckboxV1PageObject extends BasePage {
     return (await this.isCheckboxChecked()) === newState;
   }
 
+  async isCheckboxCheckedAndroid(): Promise<boolean> {
+    return (await (await this._primaryComponent).getAttribute('checked')) === 'true';
+  }
+
   /* Toggles the checkbox to the checked if newState == true or unchecked if newState == false. */
   async toggleCheckbox(newState: boolean) {
     if ((await this.isCheckboxChecked()) !== newState) {
@@ -47,24 +51,16 @@ class CheckboxV1PageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(CHECKBOXV1_TESTPAGE);
-  }
-
   get _pageName() {
     return CHECKBOXV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(CHECKBOXV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return CHECKBOXV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(CHECKBOXV1_NO_A11Y_LABEL_COMPONENT);
-  }
-
-  get _pageButton() {
-    return By(HOMEPAGE_CHECKBOXV1_BUTTON);
+  get _secondaryComponentName() {
+    return CHECKBOXV1_NO_A11Y_LABEL_COMPONENT;
   }
 
   get _callbackText() {
