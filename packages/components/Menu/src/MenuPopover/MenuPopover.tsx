@@ -4,11 +4,11 @@ import { Callout } from '@fluentui-react-native/callout';
 import { menuPopoverName, MenuPopoverProps, MenuPopoverTokens } from './MenuPopover.types';
 import { useMenuPopover } from './useMenuPopover';
 import { useMenuPopoverTokens } from './MenuPopoverTokens';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
-    const { directionalHint, gapSpace, maxHeight, maxWidth, minPadding, borderWidth, borderColor, backgroundColor } = props;
+    const { directionalHint, gapSpace, maxHeight, maxWidth, minPadding, minWidth, borderWidth, borderColor, backgroundColor } = props;
     const state = useMenuPopover(props);
     const theme = useFluentTheme();
     let [tokens, cache] = useTokens(theme);
@@ -19,6 +19,7 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
       maxHeight,
       maxWidth,
       minPadding,
+      minWidth,
       borderWidth,
       borderColor,
       backgroundColor,
@@ -26,7 +27,18 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
 
     return (final: MenuPopoverProps, children: React.ReactNode) => {
       const mergedProps = mergeProps(tokens, state.props, final);
-      const content = React.createElement(View, state.innerView, children);
+      const innerViewProps =
+        //For windows platforms, styling needs to be set on container view instead of the callout itself for the scrollview to reflect correct width and height
+        Platform.OS === 'windows' || Platform.OS === ('win32' as any)
+          ? {
+              ...state.innerView,
+              style: {
+                maxHeight: mergedProps.maxHeight,
+                minWidth: mergedProps.minWidth
+              },
+            }
+          : state.innerView;
+      const content = React.createElement(View, innerViewProps, children);
       return <Callout {...mergedProps}>{content}</Callout>;
     };
   },

@@ -35,7 +35,7 @@ export const MenuList = compose<MenuListType>({
   ...stylingSettings,
   slots: {
     root: MenuStack,
-    ...(Platform.OS === 'macos' && { scrollView: ScrollView }),
+    scrollView: ScrollView,
     ...(Platform.OS === 'macos' && { focusZone: FocusZone }),
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
@@ -68,7 +68,14 @@ export const MenuList = compose<MenuListType>({
               </Slots.focusZone>
             </Slots.scrollView>
           </Slots.root>
-        ) : (
+        ) :
+        userProps.hasMaxHeight ?
+        (
+          <Slots.root>
+            <Slots.scrollView>{children}</Slots.scrollView>
+          </Slots.root>
+        ) :
+        (
           <Slots.root>{children}</Slots.root>
         );
 
