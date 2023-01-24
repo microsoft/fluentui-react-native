@@ -7,6 +7,7 @@ import { SvgProps } from 'react-native-svg';
 
 export const AvatarName = 'Avatar';
 export const AvatarSizesForTokens = [
+  'size16',
   'size20',
   'size24',
   'size28',
@@ -21,7 +22,7 @@ export const AvatarSizesForTokens = [
   'size120',
 ] as const;
 
-export const AvatarSizes = [20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120] as const;
+export const AvatarSizes = [16, 20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120] as const;
 
 /**
  * Sets color of the avatar when there is no picture. Uses fluent color names
@@ -63,9 +64,9 @@ export const AvatarColors = [
 ] as const;
 
 export const ColorSchemes = ['neutral', 'brand', 'colorful', 'brandInverted', 'accent'] as const;
-export type AvatarSize = typeof AvatarSizes[number];
-export type AvatarNamedColor = typeof AvatarColors[number];
-export type AvatarColorSchemes = typeof ColorSchemes[number];
+export type AvatarSize = (typeof AvatarSizes)[number];
+export type AvatarNamedColor = (typeof AvatarColors)[number];
+export type AvatarColorSchemes = (typeof ColorSchemes)[number];
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
@@ -109,8 +110,17 @@ export interface AvatarConfigurableProps {
    */
   ringInnerGap?: number;
   ringBackgroundColor?: ColorValue;
+
+  /**
+   * Color for the Activity Ring in status "active"
+   */
   ringColor?: ColorValue;
+
+  /**
+   * Size of activity ring in status "active"
+   */
   ringThickness?: number;
+
   transparentRing?: boolean;
 
   /**
@@ -187,6 +197,7 @@ export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
 export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
   /**
    * Avatar opacity which is changed depending on `active` prop.
+   * Not applicable for - @platform android
    */
   avatarOpacity?: number;
 
@@ -219,17 +230,37 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
   /**
    * Avatar sizes:
    */
+
+  /** Only applicable for @platform android */
+  size16?: AvatarTokens;
+
   size20?: AvatarTokens;
   size24?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size28?: AvatarTokens;
+
   size32?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size36?: AvatarTokens;
+
   size40?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size48?: AvatarTokens;
+
   size56?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size64?: AvatarTokens;
+
   size72?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size96?: AvatarTokens;
+
+  /** Not applicable for @platform android */
   size120?: AvatarTokens;
 
   /**
@@ -282,6 +313,7 @@ export interface AvatarSlotProps {
   icon: IconProps;
   fallbackIcon: SvgProps;
   ring: ViewProps;
+  outerRing?: ViewProps; // Android Only.
   badge: PresenceBadgeProps;
 }
 
@@ -301,4 +333,10 @@ export interface AvatarType {
   slotProps: AvatarSlotProps;
   tokens: AvatarTokens;
   state: AvatarState;
+}
+
+export interface RingConfig {
+  size: number;
+  ringThickness: number;
+  innerGap: number;
 }

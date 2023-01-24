@@ -38,6 +38,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
         ((isRtl && e.nativeEvent.key === 'ArrowLeft') || (!isRtl && e.nativeEvent.key === 'ArrowRight'));
 
       if (!disabled && (!isArrowKey || isArrowOpen)) {
+        componentRef?.current?.blur();
         onClick?.(e);
       }
 
@@ -51,7 +52,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
         onArrowClose?.(e);
       }
     },
-    [disabled, hasSubmenu, onArrowClose, onClick, setOpen, shouldPersist],
+    [componentRef, disabled, hasSubmenu, onArrowClose, onClick, setOpen, shouldPersist],
   );
 
   const pressable = usePressableState({ ...rest, onPress: onInvoke });

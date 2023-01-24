@@ -42,11 +42,26 @@ exports[`Switch Default 1`] = `
       "minWidth": undefined,
     }
   }
+  switchAnimationStyles={
+    Object {
+      "thumbAnimatedStyle": Object {
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+      },
+      "trackBackgroundStyle": Object {
+        "backgroundColor": "rgba(15, 108, 189, 1)",
+      },
+    }
+  }
 >
   <Text
     style={
       Object {
         "color": "#242424",
+        "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
@@ -64,24 +79,22 @@ exports[`Switch Default 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#f0f0f0",
+          "backgroundColor": "rgba(15, 108, 189, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,
-          "justifyContent": "flex-start",
-          "marginBottom": undefined,
-          "marginLeft": undefined,
           "marginRight": 8,
-          "marginTop": undefined,
           "width": 52,
         }
       }
     >
       <View
         animationClass="Ribbon_SwitchThumb"
+        collapsable={false}
         style={
           Object {
             "backgroundColor": "#ffffff",
@@ -89,6 +102,11 @@ exports[`Switch Default 1`] = `
             "elevation": 8,
             "height": 26,
             "margin": 3,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
             "width": 26,
           }
         }
@@ -115,7 +133,7 @@ exports[`Switch Disabled 1`] = `
       "disabled": true,
     }
   }
-  accessible={true}
+  accessible={false}
   collapsable={false}
   focusable={false}
   onAccessibilityAction={[Function]}
@@ -140,11 +158,26 @@ exports[`Switch Disabled 1`] = `
       "minWidth": undefined,
     }
   }
+  switchAnimationStyles={
+    Object {
+      "thumbAnimatedStyle": Object {
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+      },
+      "trackBackgroundStyle": Object {
+        "backgroundColor": "rgba(240, 240, 240, 1)",
+      },
+    }
+  }
 >
   <Text
     style={
       Object {
         "color": "#e0e0e0",
+        "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
@@ -162,24 +195,22 @@ exports[`Switch Disabled 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#f0f0f0",
+          "backgroundColor": "rgba(240, 240, 240, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,
-          "justifyContent": "flex-start",
-          "marginBottom": undefined,
-          "marginLeft": undefined,
           "marginRight": 8,
-          "marginTop": undefined,
           "width": 52,
         }
       }
     >
       <View
         animationClass="Ribbon_SwitchThumb"
+        collapsable={false}
         style={
           Object {
             "backgroundColor": "#ffffff",
@@ -187,6 +218,11 @@ exports[`Switch Disabled 1`] = `
             "elevation": 0,
             "height": 26,
             "margin": 3,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
             "width": 26,
           }
         }
