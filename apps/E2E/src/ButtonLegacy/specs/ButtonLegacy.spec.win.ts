@@ -69,6 +69,10 @@ describe('Button Legacy Functional Testing', () => {
     await ButtonLegacyPageObject.scrollToTestElement();
   });
 
+  afterEach(async () => {
+    await ButtonLegacyPageObject.resetTest();
+  });
+
   it('Click primary button. Validate onClick() callback was fired.', async () => {
     await ButtonLegacyPageObject.click(ButtonLegacyPageObject._primaryComponent);
     await expect(
@@ -76,8 +80,6 @@ describe('Button Legacy Functional Testing', () => {
     ).toBeTruthy();
 
     await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
-
-    await ButtonLegacyPageObject.clickComponent(); // Reset Button State
   });
 
   it('Type "Enter" on primary button. Validate onClick() callback was fired.', async () => {
@@ -88,8 +90,6 @@ describe('Button Legacy Functional Testing', () => {
       ),
     ).toBeTruthy();
     await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
-
-    await ButtonLegacyPageObject.clickComponent(); // Reset Button State
   });
 
   it('Type "Space" on primary button. Validate onClick() callback was fired.', async () => {

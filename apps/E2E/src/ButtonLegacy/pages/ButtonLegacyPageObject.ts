@@ -17,6 +17,17 @@ class ButtonLegacyPageObject extends BasePage {
     return await callbackText.isDisplayed();
   }
 
+  async resetTest(): Promise<void> {
+    const callbackText = await this._callbackText;
+    if (callbackText.isDisplayed()) {
+      await (await this._primaryComponent).click();
+      await this.waitForCondition(
+        async () => !(await callbackText.isDisplayed()),
+        'Could not reset test: Clicked button to toggle onClick callback text, but the text failed to hide.',
+      );
+    }
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
