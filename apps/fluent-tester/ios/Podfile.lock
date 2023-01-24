@@ -10,7 +10,9 @@ PODS:
     - React-jsi (= 0.68.5)
     - ReactCommon/turbomodule/core (= 0.68.5)
   - fmt (6.2.1)
-  - FRNAvatar (0.17.2):
+  - FRNAppearanceAdditions (0.1.0):
+    - React
+  - FRNAvatar (0.17.6):
     - MicrosoftFluentUI (= 0.10.0)
     - React
   - FRNDatePicker (0.7.4):
@@ -456,7 +458,7 @@ PODS:
     - React-jsi (= 0.68.5)
     - React-logger (= 0.68.5)
     - React-perflogger (= 0.68.5)
-  - ReactTestApp-DevSupport (2.1.1):
+  - ReactTestApp-DevSupport (2.2.4):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -471,6 +473,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/React/FBReactNativeSpec`)
+  - FRNAppearanceAdditions (from `../../../packages/experimental/AppearanceAdditions/FRNAppearanceAdditions.podspec`)
   - FRNAvatar (from `../../../packages/experimental/Avatar`)
   - FRNDatePicker (from `../../../packages/experimental/NativeDatePicker`)
   - FRNFontMetrics (from `../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec`)
@@ -524,6 +527,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native/React/FBReactNativeSpec"
+  FRNAppearanceAdditions:
+    :path: "../../../packages/experimental/AppearanceAdditions/FRNAppearanceAdditions.podspec"
   FRNAvatar:
     :path: "../../../packages/experimental/Avatar"
   FRNDatePicker:
@@ -603,7 +608,8 @@ SPEC CHECKSUMS:
   FBLazyVector: 2b47ff52037bd9ae07cc9b051c9975797814b736
   FBReactNativeSpec: dd89c4a5591e20015aa55c6efbf9c7740a83efbf
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAvatar: 6b0c2d8a484aa0829f64397cf23ef5c56feefa63
+  FRNAppearanceAdditions: 88e8fdc98e8aef994df9ab0b04fc652c59a3b351
+  FRNAvatar: 8a93b612c82321d8dcebabbcaf738a6c29022fa0
   FRNDatePicker: 009ab6e4e003a9e5d720fb4aea27b94e6cc8a946
   FRNFontMetrics: c756b9bb1627909a7673b68caf7a7b14239c212e
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
@@ -635,12 +641,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: 9819a3bf6230e4b2a99877c21268b0b2416157a1
   React-runtimeexecutor: b1f1995089b90696dbc2a7ffe0059a80db5c8eb1
   ReactCommon: 149e2c0acab9bac61378da0db5b2880a1b5ff59b
-  ReactTestApp-DevSupport: 7ca8e4d798fce59f47adedd8f05a94d41d312921
+  ReactTestApp-DevSupport: 9d0767a4ae28efedbab6a281f880353288838339
   ReactTestApp-Resources: ecba662266ac5af3e30e1e3004c0fa8c0298b61a
   RNCPicker: 0bf8ef8f7800524f32d2bb2a8bcadd53eda0ecd1
   RNSVG: 6adc5c52d2488a476248413064b7f2832e639057
   Yoga: c4d61225a466f250c35c1ee78d2d0b3d41fe661c
 
-PODFILE CHECKSUM: 819f14a4e3e6e335a0b1993fe37edad50db02d86
+PODFILE CHECKSUM: b9fd154312c68d8d92a9ba6e8a2cac9fcf88b104
 
 COCOAPODS: 1.11.3
