@@ -82,9 +82,21 @@ export abstract class BasePage {
 
   async enableE2ETesterMode(): Promise<void> {
     const e2eSwitch = await this._e2eSwitch;
-    if (!(await e2eSwitch.isSelected())) {
-      await e2eSwitch.click();
-      await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
+    switch (this.platform) {
+      case MobilePlatform.Android:
+        if ((await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'false') {
+          await e2eSwitch.click();
+          await this.waitForCondition(
+            async () => (await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'true',
+            'Clicked the E2E Mode Switch, but it failed to toggle.',
+          );
+        }
+        break;
+      default:
+        if (!(await e2eSwitch.isSelected())) {
+          await e2eSwitch.click();
+          await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
+        }
     }
   }
 

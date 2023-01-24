@@ -18,7 +18,7 @@ describe('RadioGroupV1/RadioV1 Testing Initialization', function () {
     await NavigateAppPage.clickAndGoToRadioGroupV1Page();
     await RadioGroupV1Page.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await RadioGroupV1Page.isPageLoaded()).toBeTruthy(RadioGroupV1Page.ERRORMESSAGE_PAGELOAD);
+    await RadioGroupV1Page.enableE2ETesterMode();
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

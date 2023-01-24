@@ -18,7 +18,8 @@ describe('CheckboxV1 Testing Initialization', () => {
     await NavigateAppPage.clickAndGoToCheckboxV1Page();
     await CheckboxV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
+    await CheckboxV1PageObject.enableE2ETesterMode();
+    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

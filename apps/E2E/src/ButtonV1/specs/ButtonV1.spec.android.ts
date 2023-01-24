@@ -7,7 +7,7 @@ import { BUTTON_TEST_COMPONENT } from '../../ButtonLegacy/consts';
 describe('Button Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_ASSERT);
   });
 
   it('Click and navigate to Button test page', async () => {
@@ -18,7 +18,8 @@ describe('Button Testing Initialization', function () {
     await NavigateAppPage.clickAndGoToButtonPage();
     await ButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ButtonV1PageObject.isPageLoaded()).toBeTruthy();
+    await ButtonV1PageObject.enableE2ETesterMode();
+    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

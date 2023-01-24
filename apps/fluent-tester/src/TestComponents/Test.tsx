@@ -157,7 +157,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
             <Text style={styles.e2eSwitchLabel} {...(isMobile ? {} : { variant: 'body1Strong' })}>
               Show E2E
             </Text>
-            <Switch testID={E2E_MODE_SWITCH} onValueChange={setShowE2E} value={showE2E} />
+            <Switch onValueChange={setShowE2E} value={showE2E} {...testProps(E2E_MODE_SWITCH)} />
           </View>
         )}
         {props.spec && <Link url={props.spec} content="SPEC" />}
