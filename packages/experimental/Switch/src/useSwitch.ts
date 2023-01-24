@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  usePressableState,
-  useKeyProps,
-  useOnPressWithFocus,
-  useViewCommandFocus,
-  InteractionEvent,
-} from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo, AnimationConfig } from './Switch.types';
 import { AccessibilityState, AccessibilityActionEvent, Animated, Platform } from 'react-native';
 import { memoize } from '@fluentui-react-native/framework';
@@ -19,7 +13,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
   const defaultComponentRef = React.useRef(null);
   const [trackBackgroundAnimation] = React.useState(new Animated.Value(0));
   const animation = React.useRef(new Animated.Value(0)).current;
-
+  const [isInit, setIsInit] = React.useState(true);
   const {
     onChange,
     checked,
@@ -37,62 +31,27 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
     ...rest
   } = props;
 
-  const onChangeWithAnimation = React.useCallback(
-    (e: InteractionEvent, checked?: boolean) => {
-      onChange && onChange(e, checked);
-      if (isMobile) {
-        if (checked) {
-          startTrackBackgroundAnimation(checked, trackBackgroundAnimation);
-          startTrackAnimation(false, animationConfig, animation, checked);
-        } else {
-          startTrackBackgroundAnimation(checked, trackBackgroundAnimation);
-          startTrackAnimation(false, animationConfig, animation, checked);
-        }
-      }
-    },
-    [onChange, trackBackgroundAnimation, animationConfig, animation],
-  );
-
-  const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
+  const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChange);
 
   //Setting the initial position of the knob on track when page loads.
   React.useEffect(() => {
     if (isMobile) {
-      if (checkedState) {
-        startTrackAnimation(false, animationConfig, animation, checkedState);
-        startTrackBackgroundAnimation(true, trackBackgroundAnimation);
-      } else {
-        startTrackAnimation(true, animationConfig, animation, checkedState);
-        startTrackBackgroundAnimation(false, trackBackgroundAnimation);
-      }
-    }
-  }, [checkedState, animationConfig]);
-
-  // Function to change background slowly over time when switch is toggled.
-  const startTrackBackgroundAnimation = React.useCallback((checked: boolean, animation: Animated.Value) => {
-    const toValue = checked ? 0 : 1;
-    Animated.timing(animation, {
-      toValue,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-  }, []);
-
-  // Function to transform the knob over track in animated way when switch is toggled.
-  const startTrackAnimation = React.useCallback(
-    (onInit = false, animationConfig: AnimationConfig, animation: Animated.Value, toggled: boolean) => {
       Animated.timing(animation, {
-        toValue: toggled
-          ? animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2)
-          : onInit
-          ? 0
-          : -(animationConfig.trackWidth + animationConfig.thumbWidth),
-        duration: 300,
+        toValue: checkedState ? animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2) : 0,
+        duration: isInit ? 0 : 300,
         useNativeDriver: false,
       }).start();
-    },
-    [],
-  );
+
+      const toValue = checkedState ? 0 : 1;
+      Animated.timing(trackBackgroundAnimation, {
+        toValue,
+        duration: isInit ? 0 : 500,
+        useNativeDriver: false,
+      }).start();
+
+      setIsInit(false);
+    }
+  }, [checked, checkedState]);
 
   const switchAnimationStyles = React.useMemo(() => {
     // transform over toggled on position to toggled off position and vice versa
@@ -165,7 +124,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
 
   return {
     props: {
-      accessible: true,
+      accessible: isMobile ? !disabled : true,
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityRole: accessibilityRole ?? 'switch',
       accessibilityActions: accessibilityActionsProp,

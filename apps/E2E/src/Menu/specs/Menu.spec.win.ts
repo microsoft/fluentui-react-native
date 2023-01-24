@@ -33,7 +33,7 @@ describe('Menu Accessibility Testing', () => {
     // The popover is where we can find the a11y role of menu
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.First), Attribute.AccessibilityRole, MENUITEM_A11Y_ROLE),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -45,7 +45,7 @@ describe('Menu Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         MENUITEM_ACCESSIBILITY_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -53,7 +53,7 @@ describe('Menu Accessibility Testing', () => {
   it('Do not set MenuItem "accessibilityLabel". Validate MenuItem "Name" element attribute defaults to current MenuItem label.', async () => {
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Third), Attribute.AccessibilityLabel, MENUITEM_TEST_LABEL),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -61,13 +61,13 @@ describe('Menu Accessibility Testing', () => {
   it('Toggle Menu by click. Validate "ExpandCollapseState" element attribute correctly changes.', async () => {
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject._menuTrigger, Attribute.ExpandCollapseState, AttributeValue.expanded),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await MenuPageObject.closeMenu();
 
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject._menuTrigger, Attribute.ExpandCollapseState, AttributeValue.collapsed),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -144,17 +144,17 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.First), [Keys.DOWN]);
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Second), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.Second), [Keys.UP]);
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.First), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.First), [Keys.UP]);
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Fourth), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -165,12 +165,12 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.Third), [Keys.TAB]);
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Fourth), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.Fourth), [Keys.TAB]);
     await expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.First), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });

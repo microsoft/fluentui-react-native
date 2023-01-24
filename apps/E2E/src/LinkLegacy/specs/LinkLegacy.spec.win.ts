@@ -31,7 +31,7 @@ describe('Link Accessibility Testing', () => {
   it('Validate "accessibilityRole" defaults to Link "ControlType" element attribute.', async () => {
     await expect(
       await LinkLegacyPageObject.compareAttribute(LinkLegacyPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -43,7 +43,7 @@ describe('Link Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         LINK_ACCESSIBILITY_LABEL,
       ),
-    ).toBeTrue();
+    ).toBeTruthy();
 
     await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT);
   });

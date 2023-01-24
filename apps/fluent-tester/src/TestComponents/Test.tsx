@@ -147,7 +147,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
           {...testProps('Focus_Button')}
           style={styles.e2eFocusButton}
         >
-          E2E Testing Button
+          E2E Button
         </Button>
         {props.e2eSections && (
           <View style={styles.e2eSwitch}>

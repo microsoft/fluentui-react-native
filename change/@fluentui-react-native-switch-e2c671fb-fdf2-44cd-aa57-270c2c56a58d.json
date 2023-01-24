@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "switch initial animation fix",
+  "packageName": "@fluentui-react-native/switch",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}

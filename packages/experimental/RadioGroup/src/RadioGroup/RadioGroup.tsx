@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { radioGroupName, RadioGroupType, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
@@ -56,24 +56,20 @@ export const RadioGroup = compose<RadioGroupType>({
         </Slots.label>
       );
 
-      // Populate the buttonKeys array
-      if (children) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - TODO, fix typing error
-        contextValue.values = React.Children.map(children, (child: React.ReactChild) => {
-          if (React.isValidElement(child)) {
-            return child.props.value;
-          }
-        });
-      }
+      const isFocusZoneImplemented = ['macos', 'win32'].includes(Platform.OS as string);
+
+      const radioGroupContent = <Slots.options>{children}</Slots.options>;
+      const radioGroupContentWithFocusZone = (
+        <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
+          {radioGroupContent}
+        </Slots.container>
+      );
 
       return (
         <RadioGroupProvider value={contextValue}>
           <Slots.root {...mergedProps}>
             {label && labelComponent}
-            <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
-              <Slots.options>{children}</Slots.options>
-            </Slots.container>
+            {isFocusZoneImplemented ? radioGroupContentWithFocusZone : radioGroupContent}
           </Slots.root>
         </RadioGroupProvider>
       );

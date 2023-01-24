@@ -1,8 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import SwitchPageObject from '../pages/SwitchPageObject';
-import { SwitchComponentSelector } from '../pages/SwitchPageObject';
-import { ComponentSelector } from '../../common/BasePage';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -31,18 +29,31 @@ describe('Switch Accessibility Testing', () => {
     await SwitchPageObject.scrollToTestElement();
   });
 
-  it('Switch - Validate accessibilityRole is correct', async () => {
-    await expect(await SwitchPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
+  it('Validate "accessibilityRole" defaults to "ControlType.Button".', async () => {
+    await expect(
+      await SwitchPageObject.compareAttribute(SwitchPageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
+    ).toBeTruthy();
+
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Switch - Set accessibilityLabel', async () => {
-    await expect(await SwitchPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(SWITCH_ACCESSIBILITY_LABEL);
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
+    await expect(
+      await SwitchPageObject.compareAttribute(SwitchPageObject._primaryComponent, Attribute.AccessibilityLabel, SWITCH_ACCESSIBILITY_LABEL),
+    ).toBeTruthy();
+
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Switch - Do not set accessibilityLabel -> Default to Switch label', async () => {
-    await expect(await SwitchPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(SWITCH_TEST_COMPONENT_LABEL);
+  it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to current Switch label.', async () => {
+    await expect(
+      await SwitchPageObject.compareAttribute(
+        SwitchPageObject._secondaryComponent,
+        Attribute.AccessibilityLabel,
+        SWITCH_TEST_COMPONENT_LABEL,
+      ),
+    ).toBeTruthy();
+
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 });
@@ -51,67 +62,97 @@ describe('Switch Functional Testing', () => {
   /* Scrolls and waits for the Switch to be visible on the Test Page */
   beforeEach(async () => {
     await SwitchPageObject.scrollToTestElement();
+
+    await SwitchPageObject.setSwitchState(false);
   });
 
-  it("Click on a Switch -> Validate it toggles correctly AND calls the user's onChange", async () => {
+  it("Click on primary Switch. Validate it toggles correctly AND calls the user's onChange() callback.", async () => {
     /* Validate the Switch is initially toggled OFF */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
+    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy(
+      'Primary switch should be off on test start, but it was initially on.',
+    );
 
     /* Click on the Switch to toggle on */
-    await SwitchPageObject.clickComponent();
-    await SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
-
-    await expect(await SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
+    await SwitchPageObject.click(SwitchPageObject._primaryComponent);
 
     /* Validate the Switch is toggled ON */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeTruthy();
+    await expect(
+      await SwitchPageObject.waitForSwitchStateChange(true, 'Clicked the primary switch to turn it on, but it remained off.'),
+    ).toBeTruthy();
 
-    await SwitchPageObject.clickComponent();
+    await expect(
+      await SwitchPageObject.waitForOnChangeCallbackToFire(
+        'Expected the switch onChange callback to fire by click, but the callback failed to fire.',
+      ),
+    ).toBeTruthy();
+
+    await SwitchPageObject.click(SwitchPageObject._primaryComponent);
 
     /* Validate the Switch is toggled OFF */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
+    await expect(
+      await SwitchPageObject.waitForSwitchStateChange(false, 'Clicked the primary switch to turn it off, but it remained on.'),
+    ).toBeTruthy();
+
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Click the 'Enter' on a Switch and verify it toggles correctly AND calls the user's onChange", async () => {
+  it('Press "ENTER" on primary Switch. Validate it toggles correctly AND calls the user\'s onChange() callback.', async () => {
     /* Validate the Switch is initially toggled OFF */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
+    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy(
+      'Primary switch should be off on test start, but it was initially on.',
+    );
 
-    /* Presses the "Enter" to select the Switch */
-    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.ENTER);
-    await SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
-
-    await expect(await SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
+    /* Presses "Enter" to select the Switch */
+    await SwitchPageObject.sendKeys(SwitchPageObject._primaryComponent, [Keys.ENTER]);
 
     /* Validate the Switch is toggled ON */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeTruthy();
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+    await expect(
+      await SwitchPageObject.waitForSwitchStateChange(true, 'Pressed "ENTER" on the primary switch to turn it on, but it remained off.'),
+    ).toBeTruthy();
 
-    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.ENTER);
+    await expect(
+      await SwitchPageObject.waitForOnChangeCallbackToFire(
+        'Expected the switch onChange callback to fire by "ENTER" input, but the callback failed to fire.',
+      ),
+    ).toBeTruthy();
+
+    await SwitchPageObject.sendKeys(SwitchPageObject._primaryComponent, [Keys.ENTER]);
 
     /* Validate the Switch is toggled OFF */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
+    await expect(
+      await SwitchPageObject.waitForSwitchStateChange(false, 'Pressed "ENTER" on the primary switch to turn it off, but it remained on.'),
+    ).toBeTruthy();
+
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Click the 'SPACE' on a Switch and verify it toggles correctly AND calls the user's onChange", async () => {
+  it('Press "SPACE" on primary Switch. Validate it toggles correctly AND calls the user\'s onChange() callback.', async () => {
     /* Validate the Switch is initially toggled OFF */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
+    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy(
+      'Primary switch should be off on test start, but it was initially on.',
+    );
 
-    /* Presses the "space bar" to select the Switch */
-    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.SPACE);
-    await SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
-
-    await expect(await SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
+    /* Presses "SPACE" to select the Switch */
+    await SwitchPageObject.sendKeys(SwitchPageObject._primaryComponent, [Keys.SPACE]);
 
     /* Validate the Switch is toggled ON */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeTruthy();
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+    await expect(
+      await SwitchPageObject.waitForSwitchStateChange(true, 'Pressed "SPACE" on the primary switch to turn it on, but it remained off.'),
+    ).toBeTruthy();
 
-    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.SPACE);
+    await expect(
+      await SwitchPageObject.waitForOnChangeCallbackToFire(
+        'Expected the switch onChange callback to fire by "SPACE" input, but the callback failed to fire.',
+      ),
+    ).toBeTruthy();
+
+    await SwitchPageObject.sendKeys(SwitchPageObject._primaryComponent, [Keys.SPACE]);
 
     /* Validate the Switch is toggled OFF */
-    await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
+    await expect(
+      await SwitchPageObject.waitForSwitchStateChange(false, 'Pressed "SPACE" on the primary switch to turn it off, but it remained on.'),
+    ).toBeTruthy();
+
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 });

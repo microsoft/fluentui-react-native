@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
+This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.2
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Update all design-tokens packages to 0.42.0 (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.23.1
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Add shared colors to AliasColorTokens and mapPipelineToTheme (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.29.1
+
+## 0.23.0
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Minor changes
+
+- Bump iOS token packages to include iOS color alias tokens (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.29.0
 
 ## 0.22.5
 

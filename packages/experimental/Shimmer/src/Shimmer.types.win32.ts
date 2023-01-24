@@ -26,7 +26,7 @@ export interface ShimmerWaveProps extends ShimmerTokens {
   viewBoxWidth: number;
 }
 
-export interface ShimmerSlotProps extends ShimmerProps {
+export interface ShimmerSlotProps {
   root: ViewProps;
   clippingMask: ClippingMaskProps;
   shimmerWave: ShimmerWaveProps;

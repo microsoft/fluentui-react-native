@@ -1,4 +1,13 @@
-import { E2E_MODE_SWITCH, Keys, ROOT_VIEW, Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
+import {
+  AndroidAttribute,
+  Attribute,
+  attributeToEnumName,
+  E2E_MODE_SWITCH,
+  Keys,
+  ROOT_VIEW,
+  TESTPAGE_BUTTONS_SCROLLVIEWER,
+  TESTPAGE_CONTENT_SCROLLVIEWER,
+} from './consts';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
@@ -83,7 +92,11 @@ export abstract class BasePage {
    * Checks to see if an element attribute is strictly equal to an expected value the user passes in.
    * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
    * the expected and actual values don't match. This should be called for attribute tests in specs. */
-  async compareAttribute(element: Promise<WebdriverIO.Element>, attribute: Attribute, expectedValue: any): Promise<boolean> {
+  async compareAttribute(
+    element: Promise<WebdriverIO.Element>,
+    attribute: Attribute | AndroidAttribute,
+    expectedValue: any,
+  ): Promise<boolean> {
     const el = await element;
     const actualValue = await el.getAttribute(attribute);
     if (expectedValue !== actualValue) {
@@ -245,6 +258,48 @@ export abstract class BasePage {
     await FocusButton.addValue(scrollDownKeys);
   }
 
+  /* Scrolls to the specified or primary UI test element until it is displayed. */
+  async mobileScrollToTestElement(componentIdentifier?: string): Promise<void> {
+    const componentToScrollTo = componentIdentifier ?? this._primaryComponentName;
+    if (await (await By(componentToScrollTo)).isDisplayed()) {
+      return;
+    }
+
+    const errorMsg = 'Could not scroll to the ' + componentToScrollTo + '. Please see Pipeline artifacts for more debugging information.';
+
+    switch (this.platform) {
+      case MobilePlatform.iOS: {
+        await browser.waitUntil(
+          async () => {
+            await driver.execute('mobile: scroll', { direction: 'down' });
+            return await (await By(componentToScrollTo)).isDisplayed();
+          },
+          {
+            timeout: this.waitForUiEvent,
+            timeoutMsg: errorMsg,
+          },
+        );
+        break;
+      }
+      case MobilePlatform.Android:
+        /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
+         * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
+         * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
+        await browser.waitUntil(
+          async () => {
+            const componentSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_CONTENT_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).scrollIntoView(new UiSelector().description("${componentIdentifier}"))`;
+            const component = await $(`android=${componentSelector}`);
+            return await component.isDisplayed();
+          },
+          {
+            timeout: this.waitForUiEvent,
+            timeoutMsg: errorMsg,
+          },
+        );
+        break;
+    }
+  }
+
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
   async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number, interval?: number): Promise<void> {
@@ -268,6 +323,11 @@ export abstract class BasePage {
    * Unfortunately, afterEach() is designed for setup/teardown - not for determining if a test should fail or not.
    * */
   async didAssertPopup(): Promise<boolean> {
+    /* On Android, we can't get the window handles. Instead, we check if the page is still visible.
+     * In case of any error, a full page crash message is displayed and the test page is no longer accessible. */
+    if (PLATFORM === MobilePlatform.Android) {
+      return !(await this.isPageLoaded());
+    }
     // If more than 1 instance of the app is open, we know an assert dialogue popped up.
     const windowHandles = await browser.getWindowHandles();
     return windowHandles.length > 1;
@@ -285,26 +345,28 @@ export abstract class BasePage {
 
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
-  abstract get _testPage(): Promise<WebdriverIO.Element>;
+  get _testPage(): Promise<WebdriverIO.Element> {
+    return By(this._pageName);
+  }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
   get _primaryComponent() {
-    console.error('Each class extending BasePage must implement its own _primaryComponent method.');
-    return By(DUMMY_CHAR);
+    return By(this._primaryComponentName);
   }
 
   // Returns: UI Element
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponent() {
-    console.error('Each class extending BasePage must implement its own _secondaryComponent method.');
-    return By(DUMMY_CHAR);
+    return By(this._secondaryComponentName);
   }
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
-  abstract get _pageButton(): Promise<WebdriverIO.Element>;
+  get _pageButton(): Promise<WebdriverIO.Element> {
+    return By(this._pageButtonName);
+  }
 
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
@@ -312,7 +374,20 @@ export abstract class BasePage {
 
   // Returns: String
   // Returns the name of the button that navigates to the test page.
-  get _pageButtonName(): string {
+  abstract get _pageButtonName(): string;
+
+  // Returns: String
+  // Returns the identifier of the primary UI element used for testing on the given test page.
+  get _primaryComponentName(): string {
+    console.error('Each class extending BasePage must implement its own _primaryComponentName method.');
+    return DUMMY_CHAR;
+  }
+
+  // Returns: String
+  // Returns the identifier of the secondary UI element used for testing on the given test page. Often times, we'll want to set a
+  // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
+  get _secondaryComponentName(): string {
+    console.error('Each class extending BasePage must implement its own _secondaryComponentName method.');
     return DUMMY_CHAR;
   }
 
