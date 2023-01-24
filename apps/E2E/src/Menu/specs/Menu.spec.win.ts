@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuPageObject, { MenuItem } from '../pages/MenuPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE, AttributeValue, Attribute } from '../../common/consts';
+import { BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE, AttributeValue, Attribute } from '../../common/consts';
 import { MENUITEM_ACCESSIBILITY_LABEL, MENUITEM_TEST_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
