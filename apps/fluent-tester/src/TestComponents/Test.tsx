@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
   e2eSwitch: {
     display: 'flex',
     flexDirection: Platform.select({
-      android: 'column',
       ios: 'column',
       default: 'row',
     }),
@@ -136,22 +135,26 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
   const { e2eSections } = props;
 
+  const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
+
   return (
     <View>
       <View style={styles.header}>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
-        <Button
-          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-          {...testProps('Focus_Button')}
-          style={styles.e2eFocusButton}
-        >
-          E2E Button
-        </Button>
+        {!isMobile && (
+          <Button
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps('Focus_Button')}
+            style={styles.e2eFocusButton}
+          >
+            E2E Button
+          </Button>
+        )}
         {props.e2eSections && (
           <View style={styles.e2eSwitch}>
-            <Text style={styles.e2eSwitchLabel} variant="body1Strong">
+            <Text style={styles.e2eSwitchLabel} {...(isMobile ? {} : { variant: 'body1Strong' })}>
               Show E2E
             </Text>
             <Switch testID={E2E_MODE_SWITCH} onValueChange={setShowE2E} value={showE2E} />

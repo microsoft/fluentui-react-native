@@ -11,15 +11,15 @@ const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
   return {
     pickerRoot: {
       flexDirection: 'row',
+      width: '100%',
     },
     picker: {
       flexDirection: 'column',
       alignItems: 'center',
+      width: '50%',
       padding: 4,
     },
     dropdown: {
-      height: 30,
-      width: 120,
       fontSize: 12,
       color: t.colors.bodyText,
     },
@@ -27,6 +27,7 @@ const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
       borderStyle: 'solid',
       borderColor: t.colors.disabledBodyText,
       borderWidth: 1,
+      width: '100%',
     },
   };
 });
