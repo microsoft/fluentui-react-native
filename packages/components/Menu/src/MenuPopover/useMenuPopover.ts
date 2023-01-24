@@ -23,7 +23,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
 
   const { onKeyDown: onKeyDownProp, onKeyUp: onKeyUpProp } = props;
 
-  const onDismiss = React.useCallback(() => setOpen(undefined, false /* isOpen */), [setOpen]);
+  const onDismiss = props.onDismiss ?? React.useCallback(() => setOpen(undefined, false /* isOpen */), [setOpen]);
   const dismissBehaviors = isControlled ? controlledDismissBehaviors : undefined;
   const directionalHint = getDirectionalHint(isSubmenu, I18nManager.isRTL);
 
@@ -101,7 +101,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
     props: {
       accessibilityRole,
       target: triggerRef,
-      onDismiss: props.onDismiss ?? onDismiss,
+      onDismiss: onDismiss,
       onShow: props.onShow,
       directionalHint,
       dismissBehaviors,
