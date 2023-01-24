@@ -104,7 +104,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
     props: {
       accessibilityRole,
       target: triggerRef,
-      onDismiss: onDismiss,
+      onDismiss,
       onShow: props.onShow,
       directionalHint,
       dismissBehaviors,
