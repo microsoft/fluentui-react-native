@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "support menu scroll in win32",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
