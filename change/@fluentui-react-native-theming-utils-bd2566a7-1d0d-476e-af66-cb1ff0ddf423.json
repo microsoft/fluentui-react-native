@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "adding shared colors android",
+  "packageName": "@fluentui-react-native/theming-utils",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
