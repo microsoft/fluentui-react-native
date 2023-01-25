@@ -1,12 +1,10 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import CheckboxLegacyPageObject from '../pages/CheckboxLegacyPageObject';
 import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../consts';
-import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, Attribute } from '../../common/consts';
+import { CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 
 describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await CheckboxLegacyPageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {

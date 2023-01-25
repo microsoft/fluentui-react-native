@@ -1,12 +1,10 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 import { CHECKBOXV1_TEST_COMPONENT_LABEL, CHECKBOXV1_ACCESSIBILITY_LABEL } from '../consts';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 
 describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await CheckboxV1PageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to CheckboxV1 test page', async () => {

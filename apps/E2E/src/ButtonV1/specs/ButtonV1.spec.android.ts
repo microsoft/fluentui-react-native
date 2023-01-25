@@ -1,24 +1,16 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, AndroidAttribute, ANDROID_BUTTON } from '../../common/consts';
+import { AndroidAttribute, ANDROID_BUTTON } from '../../common/consts';
 import ButtonV1PageObject from '../pages/ButtonV1PageObject';
 import { BUTTON_TEST_COMPONENT } from '../../ButtonLegacy/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Button Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_ASSERT);
+    await ButtonV1PageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to Button test page', async () => {
-    await ButtonV1PageObject.mobileScrollToComponentButton();
-    await ButtonV1PageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await ButtonV1PageObject.navigateToPageAndLoadTests(true);
 
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToButtonPage();
-    await ButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await ButtonV1PageObject.enableE2ETesterMode();
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

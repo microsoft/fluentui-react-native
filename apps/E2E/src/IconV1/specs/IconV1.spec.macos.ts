@@ -1,21 +1,14 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import IconV1PageObject from '../pages/IconV1PageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('IconV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
+    await IconV1PageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to IconV1 test page', async () => {
-    await IconV1PageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await IconV1PageObject.navigateToPageAndLoadTests();
 
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToIconPage();
-    await IconV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await IconV1PageObject.isPageLoaded()).toBeTruthy();
+    await expect(await IconV1PageObject.didAssertPopup()).toBeFalsy(IconV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

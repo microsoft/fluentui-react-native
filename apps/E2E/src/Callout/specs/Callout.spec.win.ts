@@ -1,13 +1,11 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import CalloutPageObject from '../pages/CalloutPageObject.win';
 import { CALLOUT_ACCESSIBILITY_LABEL } from '../consts';
-import { Attribute, BOOT_APP_TIMEOUT, CALLOUT_A11Y_ROLE } from '../../common/consts';
+import { Attribute, CALLOUT_A11Y_ROLE } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Callout Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await CalloutPageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to Callout test page', async () => {

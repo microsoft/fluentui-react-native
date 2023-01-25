@@ -1,15 +1,14 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import FocusZonePageObject, { GridButton, GridFocusZoneOption } from '../pages/FocusZonePageObject';
-import { BOOT_APP_TIMEOUT, Keys, Attribute, AttributeValue } from '../../common/consts';
+import { Keys, Attribute, AttributeValue } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('FocusZone Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await FocusZonePageObject.waitForInitialPageToDisplay();
   });
 
-  it('Click and navigate to FocusZone test page', async () => {
+  it('Click and navigate to FocusTrapZone test page', async () => {
+    /* Click on component button to navigate to test page */
     await FocusZonePageObject.navigateToPageAndLoadTests(true);
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
