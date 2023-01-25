@@ -24,7 +24,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
   const { onKeyDown: onKeyDownProp, onKeyUp: onKeyUpProp } = props;
 
   const onDismiss = React.useCallback(() => {
-    props.onDismiss();
+    props.onDismiss?.();
     setOpen(undefined, false /* isOpen */), [setOpen];
   }, [props.onDismiss, setOpen]);
   const dismissBehaviors = isControlled ? controlledDismissBehaviors : undefined;
