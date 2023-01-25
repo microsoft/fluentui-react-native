@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Wed, 25 Jan 2023 21:31:18 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.0",
+      "version": "1.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "59844a6c45d5e48c4feb3650e3f4599ee4e9ad72",
+            "comment": "Removed win32 extenstion from ShimmerPageObj and added android tests\""
+          },
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "f4c332065f929c27b43b78676e6fb4fc6c1854ee",
+            "comment": "Update RadioGroupV1 E2E tests with better errors + use of refactored methods"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.25",
+            "commit": "391f3d691e286300dfad37cad539bed54d4436b4"
+          }
+        ],
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "99479c5a45dba159d35305e2d21ae58d1038a17b",
+            "comment": "Overhaul Checkbox tests with better errors, refactored code"
+          },
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "ff11fb0c2bcc3bcd1c072b124e9e22af4b407405",
+            "comment": "Fix build failing on radiogroup android tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 20 Jan 2023 21:49:21 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.11.2",
       "version": "1.11.2",
