@@ -1,6 +1,6 @@
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { spinnerName, SpinnerProps, SpinnerSlotProps, SpinnerTokens } from './Spinner.types';
-import { defaultActivityIndicatorTokens } from './SpinnerTokens';
+import { defaultSpinnerTokens } from './SpinnerTokens';
 
 export const diameterSizeMap: { [key: string]: number } = {
   xxSmall: 12,
@@ -18,7 +18,7 @@ export const lineThicknessSizeMap: { [key: string]: number } = {
 };
 
 export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, SpinnerTokens> = {
-  tokens: [defaultActivityIndicatorTokens, spinnerName],
+  tokens: [defaultSpinnerTokens, spinnerName],
   tokensThatAreAlsoProps: 'all',
   slotProps: {
     root: buildProps(

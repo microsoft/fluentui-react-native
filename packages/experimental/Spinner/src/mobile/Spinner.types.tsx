@@ -4,7 +4,7 @@ import { ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-nati
 
 export const spinnerName = 'Spinner';
 /**
- * Specifies the possible sizes of the ActivityIndicator.
+ * Specifies the possible sizes of the Spinner.
  */
 export type SpinnerSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 

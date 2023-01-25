@@ -1,12 +1,12 @@
 /** @jsx withSlots */
 import { useRef, useEffect, useCallback } from 'react';
-import { Animated, ColorValue, Easing, View, Text } from 'react-native';
+import { Animated, ColorValue, Easing, View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { spinnerName, SpinnerProps, SpinnerType } from './mobile/Spinner.types';
 import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './mobile/Spinner.styling';
 
-const getActivityIndicatorPath = (diameter: number, width: number, color: ColorValue) => {
+const getSpinnerPath = (diameter: number, width: number, color: ColorValue) => {
   const start = {
     x: width / 2,
     y: diameter / 2,
@@ -88,7 +88,7 @@ export const Spinner = compose<SpinnerType>({
       outputRange: ['0deg', '359deg'],
     });
 
-    const path = getActivityIndicatorPath(
+    const path = getSpinnerPath(
       diameterSizeMap[slotProps.root.size],
       lineThicknessSizeMap[slotProps.root.lineThickness],
       slotProps.root.spinnerColor,

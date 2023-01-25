@@ -3,7 +3,7 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { SpinnerTokens } from './Spinner.types';
 import { Appearance } from 'react-native';
 
-export const defaultActivityIndicatorTokens: TokenSettings<SpinnerTokens, Theme> = () =>
+export const defaultSpinnerTokens: TokenSettings<SpinnerTokens, Theme> = () =>
   ({
     spinnerColor: Appearance.getColorScheme() === 'light' ? '#BDBDBD' : '#666666',
     lineThickness: 'medium',
