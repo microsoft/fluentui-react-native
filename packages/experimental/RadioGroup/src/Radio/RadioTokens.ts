@@ -22,7 +22,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     labelMarginRight: globalTokens.size20,
     labelMarginLeft: globalTokens.sizeNone,
     subtextVariant: 'caption1',
-    subtextMarginTop: globalTokens.size20,
+    subtextMarginTop: globalTokens.sizeNone,
     subtextMarginBottom: globalTokens.size40 + 1,
     marginTop: globalTokens.size60,
     marginRight: globalTokens.size60,
