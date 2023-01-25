@@ -1,29 +1,29 @@
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { activityIndicatorName, ActivityIndicatorProps, ActivityIndicatorSlotProps, ActivityIndicatorTokens } from './Spinner.types';
+import { spinnerName, SpinnerProps, SpinnerSlotProps, SpinnerTokens } from './Spinner.types';
 import { defaultActivityIndicatorTokens } from './SpinnerTokens';
 
 export const diameterSizeMap: { [key: string]: number } = {
-  xSmall: 12,
-  small: 16,
+  xxSmall: 12,
+  xsmall: 16,
   medium: 24,
   large: 32,
   xLarge: 36,
 };
 export const lineThicknessSizeMap: { [key: string]: number } = {
-  xSmall: 1,
-  small: 1,
+  xxSmall: 1,
+  xsmall: 1,
   medium: 2,
   large: 3,
   xLarge: 4,
 };
 
-export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, ActivityIndicatorSlotProps, ActivityIndicatorTokens> = {
-  tokens: [defaultActivityIndicatorTokens, activityIndicatorName],
+export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, SpinnerTokens> = {
+  tokens: [defaultActivityIndicatorTokens, spinnerName],
   tokensThatAreAlsoProps: 'all',
   slotProps: {
     root: buildProps(
-      (tokens: ActivityIndicatorTokens) => ({
-        activityIndicatorColor: tokens.activityIndicatorColor,
+      (tokens: SpinnerTokens) => ({
+        spinnerColor: tokens.spinnerColor,
         size: tokens.size,
         lineThickness: tokens.lineThickness != 'medium' ? tokens.lineThickness : tokens.size,
         accessibilityLabel: 'spinner',
@@ -33,10 +33,10 @@ export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, Activity
           height: diameterSizeMap[tokens.size],
         },
       }),
-      ['activityIndicatorColor', 'lineThickness', 'size'],
+      ['spinnerColor', 'lineThickness', 'size'],
     ),
     svg: buildProps(
-      (tokens: ActivityIndicatorTokens) => ({
+      (tokens: SpinnerTokens) => ({
         width: diameterSizeMap[tokens.size],
         height: diameterSizeMap[tokens.size],
       }),

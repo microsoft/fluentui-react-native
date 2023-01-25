@@ -3,7 +3,7 @@ import { useRef, useEffect, useCallback } from 'react';
 import { Animated, ColorValue, Easing, View, Text } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
-import { activityIndicatorName, ActivityIndicatorProps, ActivityIndicatorType } from './mobile/Spinner.types';
+import { spinnerName, SpinnerProps, SpinnerType } from './mobile/Spinner.types';
 import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './mobile/Spinner.styling';
 
 const getActivityIndicatorPath = (diameter: number, width: number, color: ColorValue) => {
@@ -19,14 +19,14 @@ const getActivityIndicatorPath = (diameter: number, width: number, color: ColorV
 
 export const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 const useStyling = buildUseStyling(stylingSettings);
-export const Spinner = compose<ActivityIndicatorType>({
-  displayName: activityIndicatorName,
+export const Spinner = compose<SpinnerType>({
+  displayName: spinnerName,
   ...stylingSettings,
   slots: {
     root: View,
     svg: AnimatedSvg,
   },
-  useRender: (props: ActivityIndicatorProps, useSlots: UseSlots<ActivityIndicatorType>) => {
+  useRender: (props: SpinnerProps, useSlots: UseSlots<SpinnerType>) => {
     const Slots = useSlots(props);
     const slotProps = useStyling(props);
 
@@ -91,7 +91,7 @@ export const Spinner = compose<ActivityIndicatorType>({
     const path = getActivityIndicatorPath(
       diameterSizeMap[slotProps.root.size],
       lineThicknessSizeMap[slotProps.root.lineThickness],
-      slotProps.root.activityIndicatorColor,
+      slotProps.root.spinnerColor,
     );
 
     // perspective is needed for animations to work on Android. See https://reactnative.dev/docs/animations#bear-in-mind
@@ -107,7 +107,7 @@ export const Spinner = compose<ActivityIndicatorType>({
       },
       accessibilityState: { busy: animating },
     };
-    return (rest: ActivityIndicatorProps) => {
+    return (rest: SpinnerProps) => {
       const { ...mergedProps } = mergeProps(props, rest, otherRootProps);
       return (
         <Slots.root {...mergedProps}>

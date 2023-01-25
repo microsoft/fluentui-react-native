@@ -2,49 +2,49 @@ import { Animated, ColorValue } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 import { ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-native';
 
-export const activityIndicatorName = 'Spinner';
+export const spinnerName = 'Spinner';
 /**
  * Specifies the possible sizes of the ActivityIndicator.
  */
-export type ActivityIndicatorSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
+export type SpinnerSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 
-export interface ActivityIndicatorTokens {
+export interface SpinnerTokens {
   /**
-   * ActivityIndicator element color
+   * Spinner element color
    * @defaultValue 'grey56' for light mode, 'grey72' for dark mode
    */
-  activityIndicatorColor?: ColorValue;
+  spinnerColor?: ColorValue;
   /**
-   * Line thickness of the ActivityIndicator
+   * Line thickness of the Spinner
    * @defaultValue 'medium' or what size is set to
    */
-  lineThickness?: ActivityIndicatorSize;
+  lineThickness?: SpinnerSize;
   /**
-   * Size of the ActivityIndicator view
+   * Size of the Spinner view
    * @defaultValue 'medium'
    */
-  size?: ActivityIndicatorSize;
+  size?: SpinnerSize;
 }
 
-export interface ActivityIndicatorProps extends ActivityIndicatorTokens, Omit<CoreActivityIndicatorProps, 'size'> {
+export interface SpinnerProps extends SpinnerTokens, Omit<CoreActivityIndicatorProps, 'size'> {
   /**
-   * ActivityIndicator animating or not
+   * Spinner animating or not
    * @defaultValue 'true'
    */
   animating?: boolean;
   /**
-   * ActivityIndicator hidden when not animating or not hidden
+   * Spinner hidden when not animating or not hidden
    * @defaultValue 'true'
    */
   hidesWhenStopped?: boolean;
 }
 
-export interface ActivityIndicatorSlotProps {
-  root: ActivityIndicatorProps;
+export interface SpinnerSlotProps {
+  root: SpinnerProps;
   svg: Animated.AnimatedProps<SvgProps>;
 }
-export interface ActivityIndicatorType {
-  props: ActivityIndicatorProps;
-  slotProps: ActivityIndicatorSlotProps;
-  tokens: ActivityIndicatorTokens;
+export interface SpinnerType {
+  props: SpinnerProps;
+  slotProps: SpinnerSlotProps;
+  tokens: SpinnerTokens;
 }
