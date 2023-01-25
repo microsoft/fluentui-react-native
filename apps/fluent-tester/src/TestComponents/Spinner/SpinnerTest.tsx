@@ -3,7 +3,7 @@ import { Text } from '@fluentui-react-native/text';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
+import { SPINNER_TESTPAGE } from '../../../../E2E/src/Spinner/consts';
 import { View, Switch } from 'react-native';
 import { Spinner } from '@fluentui-react-native/spinner';
 
@@ -30,10 +30,10 @@ const BasicSpinnerTest: React.FunctionComponent = () => {
   );
 };
 
-const activityIndicatorSections: TestSection[] = [
+const spinnerSections: TestSection[] = [
   {
-    name: 'Base ActivityIndicator',
-    testID: ACTIVITY_INDICATOR_TESTPAGE,
+    name: 'Base Spinner',
+    testID: SPINNER_TESTPAGE,
     component: BasicSpinnerTest,
   },
 ];
@@ -50,5 +50,5 @@ export const SpinnerTest: React.FunctionComponent = () => {
   const description =
     'SpinnerTest is a visual representation that data is being loaded. It is implemented with a View wrapping an Animated SVG. The View is to ensure that AccessibilityRole works. AccessibilityRole currently does not work on SVGs.';
 
-  return <Test name="SpinnerTest Test" description={description} sections={activityIndicatorSections} status={status}></Test>;
+  return <Test name="SpinnerTest Test" description={description} sections={spinnerSections} status={status}></Test>;
 };

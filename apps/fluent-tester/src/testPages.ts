@@ -245,7 +245,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Spinner V1',
     component: SpinnerTest,
-    testPageButton: Constants.HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+    testPageButton: Constants.HOMEPAGE_SPINNER_BUTTON,
     platforms: ['android'],
   },
   {
