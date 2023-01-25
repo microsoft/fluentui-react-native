@@ -86,10 +86,7 @@ const styles = StyleSheet.create({
   },
   e2eSwitch: {
     display: 'flex',
-    flexDirection: Platform.select({
-      ios: 'column',
-      default: 'row',
-    }),
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
