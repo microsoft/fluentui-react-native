@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "refector and setup e2e",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
