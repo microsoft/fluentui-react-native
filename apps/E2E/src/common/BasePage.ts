@@ -69,7 +69,7 @@ export type Platform = MobilePlatform | DesktopPlatform;
  *********************************************************************************************************/
 
 export abstract class BasePage {
-  private platform?: Platform;
+  protected platform?: Platform;
 
   constructor() {
     if (PLATFORM) {

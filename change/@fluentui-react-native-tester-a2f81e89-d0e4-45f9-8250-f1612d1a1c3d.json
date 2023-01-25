@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Shimmer fixes, snapshot test & android tester changes",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "none"
-}

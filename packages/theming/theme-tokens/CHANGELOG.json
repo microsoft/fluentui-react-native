@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Wed, 25 Jan 2023 21:31:17 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.24.0",
+      "version": "0.24.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "391f3d691e286300dfad37cad539bed54d4436b4",
+            "comment": "Adding shared colors android"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme-tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.30.0",
+            "commit": "391f3d691e286300dfad37cad539bed54d4436b4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 20 Jan 2023 18:06:46 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.23.2",
       "version": "0.23.2",
