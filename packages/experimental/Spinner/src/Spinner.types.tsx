@@ -55,7 +55,6 @@ export interface SpinnerProps extends ViewProps, SpinnerTokens {
    * @defaultValue 'active'
    */
   status?: SpinnerStatus;
-  S;
   /**
    * Spinner label
    */

@@ -43,7 +43,8 @@
     "@fluentui-react-native/radio-group": "0.16.28",
     "@fluentui-react-native/separator": "0.14.9",
     "@fluentui-react-native/tabs": "0.11.26",
-    "@fluentui-react-native/text": "0.19.14"
+    "@fluentui-react-native/text": "0.19.14",
+    "@fluentui-react-native/spinner": "0.1.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

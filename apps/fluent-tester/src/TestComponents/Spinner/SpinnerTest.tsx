@@ -5,6 +5,7 @@ import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
 import { View, Switch } from 'react-native';
+import { Spinner } from '@fluentui-react-native/spinner';
 
 const BasicSpinnerTest: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
@@ -23,7 +24,7 @@ const BasicSpinnerTest: React.FunctionComponent = () => {
             <Switch value={hidesWhenStopped} onValueChange={setHidesWhenStopped} />
           </View>
         </View>
-        {/* <Spinner animating={animating} hidesWhenStopped={hidesWhenStopped} /> */}
+        <Spinner animating={animating} hidesWhenStopped={hidesWhenStopped} />
       </View>
     </Stack>
   );
