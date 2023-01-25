@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add retractable E2E sections to tester component pages",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
