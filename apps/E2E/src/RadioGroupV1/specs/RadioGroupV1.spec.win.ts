@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import RadioGroupV1Page, { Radio } from '../pages/RadioGroupV1PageObject';
-import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, Attribute } from '../../common/consts';
+import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, BOOT_APP_TIMEOUT, Keys, Attribute } from '../../common/consts';
 import {
   RADIOGROUPV1_ACCESSIBILITY_LABEL,
   RADIOGROUPV1_TEST_COMPONENT_LABEL,
