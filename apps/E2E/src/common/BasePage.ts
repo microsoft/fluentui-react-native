@@ -2,6 +2,8 @@ import {
   AndroidAttribute,
   Attribute,
   attributeToEnumName,
+  BASE_TESTPAGE,
+  BOOT_APP_TIMEOUT,
   E2E_MODE_SWITCH,
   Keys,
   ROOT_VIEW,
@@ -81,8 +83,12 @@ export abstract class BasePage {
   /******************************************************************/
 
   /**
-   * For any given page object, this method automates navigating to the page, waiting for it to load, and revealing its E2E components.
-   * This also contains error checking through its waiters, removing the extra 'expect()' calls during test setup.
+   * For any given page object, this method automates:
+   *  - Navigating to the page by clicking its component button
+   *  - Waiting for the component page to load
+   *  - Revealing its E2E components IF a boolean flag is passed into the method
+   *
+   * This also contains error checking through its waiters, removing the extra `expect()` calls during test setup.
    */
   async navigateToPageAndLoadTests(showE2ESection = false) {
     // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
@@ -248,7 +254,11 @@ export abstract class BasePage {
     });
   }
 
-  /* @deprecated, only use `scrollToTestElement()` instead */
+  async waitForInitialPageToDisplay(): Promise<void> {
+    await this.waitForCondition(async () => await (await this._initialPage).isDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
+  }
+
+  /** @deprecated, only use `scrollToTestElement()` instead */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
     console.warn('`waitForPrimaryElementDisplayed` is deprecated. Only use `scrollToTestElement` in your spec to improve performance.');
     await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
@@ -426,6 +436,11 @@ export abstract class BasePage {
     return By(TESTPAGE_BUTTONS_SCROLLVIEWER);
   }
 
+  // The title element of the initial test page shown when starting the app.
+  get _initialPage() {
+    return By(BASE_TESTPAGE);
+  }
+
   /****************** Error Messages ******************/
   get ERRORMESSAGE_SUFFIX(): string {
     return 'Please review logs and error screenshots for more information.';
@@ -447,6 +462,6 @@ export abstract class BasePage {
     return By(E2E_MODE_SWITCH);
   }
 
-  // Default timeout to wait until page is displayed (10s)
+  // Default timeout to wait until page is displayed (25s)
   waitForUiEvent = 25000;
 }
