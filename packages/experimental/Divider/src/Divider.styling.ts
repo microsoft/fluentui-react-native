@@ -1,88 +1,83 @@
-import { dividerName, DividerTokens, DividerSlotProps, DividerProps } from './Divider.types';
-import { Theme, UseStylingOptions, buildProps, layoutStyles } from '@fluentui-react-native/framework';
-import { defaultDividerTokens } from './DividerTokens';
+import { Theme } from '@fluentui-react-native/framework';
+import { layoutStyles } from '@fluentui-react-native/tokens';
+import { DividerTokens, DividerSlotProps, DividerAppearance } from './Divider.types';
 
-export const dividerStates: (keyof DividerTokens)[] = [
-  'alignStart',
-  'alignEnd',
-  'hasContent',
-  'isVertical',
-  'default',
-  'subtle',
-  'brand',
-  'strong',
-];
-
-export const stylingSettings: UseStylingOptions<DividerProps, DividerSlotProps, DividerTokens> = {
-  tokens: [defaultDividerTokens, dividerName],
-  tokensThatAreAlsoProps: ['color', 'insetSize', 'vertical'],
-  states: dividerStates,
-  slotProps: {
-    root: buildProps(
-      (tokens: DividerTokens, theme: Theme) => ({
-        style: {
-          alignItems: 'center',
-          justifyContent: 'center',
-          display: 'flex',
-          flexDirection: tokens.vertical ? 'column' : 'row',
-          ...layoutStyles.from(tokens, theme),
-          ...(tokens.vertical
-            ? {
-                paddingVertical: tokens.insetSize,
-                height: '100%',
-              }
-            : {
-                paddingHorizontal: tokens.insetSize,
-              }),
-        },
-      }),
-      ['insetSize', 'vertical'],
-    ),
-    beforeLine: buildProps(
-      (tokens: DividerTokens) => ({
-        style: {
-          flexBasis: 8,
-          flex: tokens.flexBefore,
-          borderColor: tokens.color || tokens.lineColor,
-          borderStyle: 'solid',
-          ...(tokens.vertical
-            ? { borderLeftWidth: tokens.thickness, marginBottom: tokens.contentPadding }
-            : { borderTopWidth: tokens.thickness, marginRight: tokens.contentPadding }),
-        },
-      }),
-      ['color', 'contentPadding', 'flexBefore', 'lineColor', 'thickness', 'vertical'],
-    ),
-    afterLine: buildProps(
-      (tokens: DividerTokens) => ({
-        style: {
-          flexBasis: 8,
-          flex: tokens.flexAfter,
-          borderColor: tokens.color || tokens.lineColor,
-          borderStyle: 'solid',
-          ...(tokens.vertical
-            ? { borderLeftWidth: tokens.thickness, marginTop: tokens.contentPadding }
-            : { borderTopWidth: tokens.thickness, marginLeft: tokens.contentPadding }),
-        },
-      }),
-      ['color', 'contentPadding', 'flexAfter', 'lineColor', 'thickness', 'vertical'],
-    ),
-    text: buildProps(
-      (tokens: DividerTokens) => ({
-        style: {
-          flex: 0,
-          color: tokens.color || tokens.contentColor,
-        },
-      }),
-      ['color', 'contentColor'],
-    ),
-    icon: buildProps(
-      (tokens: DividerTokens) => ({
+export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme): DividerSlotProps => {
+  return {
+    root: {
+      style: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex',
+        flexDirection: tokens.vertical ? 'column' : 'row',
+        ...layoutStyles.from(tokens, theme),
+        ...(tokens.vertical
+          ? {
+              paddingVertical: tokens.insetSize,
+              height: '100%',
+            }
+          : {
+              paddingHorizontal: tokens.insetSize,
+            }),
+      },
+    },
+    beforeLine: {
+      style: {
+        flexBasis: 8,
+        flex: tokens.flexBefore,
+        borderColor: tokens.color || tokens.lineColor,
+        borderStyle: 'solid',
+        ...(tokens.vertical ? { borderLeftWidth: tokens.thickness } : { borderTopWidth: tokens.thickness }),
+      },
+    },
+    afterLine: {
+      style: {
+        flexBasis: 8,
+        flex: tokens.flexAfter,
+        borderColor: tokens.color || tokens.lineColor,
+        borderStyle: 'solid',
+        ...(tokens.vertical ? { borderLeftWidth: tokens.thickness } : { borderTopWidth: tokens.thickness }),
+      },
+    },
+    wrapper: {
+      style: {
+        flex: 0,
+        ...(tokens.vertical ? { paddingVertical: tokens.contentPadding } : { paddingHorizontal: tokens.contentPadding }),
+      },
+    },
+    text: {
+      style: {
         color: tokens.color || tokens.contentColor,
-        style: {
-          flex: 0,
-        },
-      }),
-      ['color', 'contentColor'],
-    ),
-  },
+      },
+    },
+    icon: {
+      color: tokens.color || tokens.contentColor,
+    },
+  };
+};
+
+export const colorsFromAppearance = (appearance: DividerAppearance, theme: Theme): Pick<DividerTokens, 'contentColor' | 'lineColor'> => {
+  switch (appearance) {
+    case 'default':
+      return {
+        contentColor: theme.colors.neutralForeground2,
+        lineColor: theme.colors.neutralStroke2,
+      };
+    case 'subtle':
+      return {
+        contentColor: theme.colors.neutralForeground3,
+        lineColor: theme.colors.neutralStroke3,
+      };
+    case 'brand':
+      return {
+        contentColor: theme.colors.brandForeground1,
+        lineColor: theme.colors.brandStroke1,
+      };
+    case 'strong': {
+      return {
+        contentColor: theme.colors.neutralForeground1,
+        lineColor: theme.colors.neutralStroke1,
+      };
+    }
+  }
 };

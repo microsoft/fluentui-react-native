@@ -1,63 +1,79 @@
 /** @jsx withSlots */
-import { View } from 'react-native';
-import { dividerName, DividerType, DividerProps } from './Divider.types';
-import { stylingSettings } from './Divider.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { Text } from '@fluentui-react-native/text';
-import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import { useDivider } from './useDivider';
+/** @jsxFrag */
+import { View, ViewProps } from 'react-native';
+import { dividerName, DividerProps, DividerTokens } from './Divider.types';
+import { withSlots, compressible, UseTokens, useSlot, useFluentTheme, patchTokens, mergeStyles } from '@fluentui-react-native/framework';
+import { Text, TextProps } from '@fluentui-react-native/text';
+import { Icon, IconProps, createIconProps } from '@fluentui-react-native/icon';
 import React from 'react';
-/**
- * A function which determines if a set of styles should be applied to the component given the current state and props of the divider.
- *
- * @param layer The name of the state that is being checked for
- * @param userProps The props that were passed into the divider
- * @returns Whether the styles that are assigned to the layer should be applied to the divider
- */
-export const dividerLookup = (layer: string, userProps: DividerProps): boolean => {
-  return (
-    userProps[layer] ||
-    layer === userProps['appearance'] ||
-    (layer === 'alignStart' && userProps['alignContent'] === 'start') ||
-    (layer === 'alignEnd' && userProps['alignContent'] === 'end') ||
-    (layer === 'hasContent' && (userProps['children'] ?? userProps['icon'])) ||
-    (layer === 'isVertical' && userProps['vertical'])
-  );
-};
+import { useDividerTokens } from './DividerTokens';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { colorsFromAppearance, getDividerSlotProps } from './Divider.styling';
 
-export const Divider = compose<DividerType>({
-  displayName: dividerName,
-  ...stylingSettings,
-  slots: {
-    root: View,
-    beforeLine: View,
-    afterLine: View,
-    text: Text,
-    icon: Icon,
-  },
-  useRender: (userProps: DividerProps, useSlots: UseSlots<DividerType>) => {
-    const props = useDivider(userProps);
-    const Slots = useSlots(userProps, (layer) => dividerLookup(layer, props));
+export const Divider = compressible<DividerProps, DividerTokens>((props: DividerProps, useTokens: UseTokens<DividerTokens>) => {
+  const theme = useFluentTheme();
+  const { color, insetSize, vertical } = props;
+  let [tokens, cache] = useTokens(theme);
+  // call patch function
+  [tokens, cache] = patchTokens(tokens, cache, {
+    color,
+    insetSize,
+    vertical,
+    ...colorsFromAppearance(props.appearance, theme),
+    contentPadding: globalTokens.size80,
+    flexAfter: props.alignContent === 'end' ? 0 : 1,
+    flexBefore: props.alignContent === 'start' ? 0 : 1,
+    minHeight: props.vertical ? globalTokens.size240 : 0,
+  });
+  // get slot props from these tokens
+  const {
+    root: rootProps,
+    beforeLine: beforeLineProps,
+    afterLine: afterLineProps,
+    wrapper: wrapperProps,
+    text: textProps,
+    icon: iconProps,
+  } = React.useMemo(() => getDividerSlotProps(tokens, theme), [tokens, theme]);
+  // build slots
+  const RootSlot = useSlot<ViewProps>(View, rootProps);
+  const BeforeLineSlot = useSlot<ViewProps>(View, beforeLineProps);
+  const AfterLineSlot = useSlot<ViewProps>(View, afterLineProps);
+  const WrapperSlot = useSlot<ViewProps>(View, wrapperProps);
+  const TextSlot = useSlot<TextProps>(Text, textProps);
+  const IconSlot = useSlot<IconProps>(Icon, iconProps);
 
-    return (final: DividerProps, ...children: React.ReactNode[]) => {
-      const mergedProps = mergeProps(userProps, final);
+  return (final: DividerProps, ...children: React.ReactNode[]) => {
+    props = { ...props, ...final };
+    // change root style if there is a text child
+    let textContent: string;
+    React.Children.forEach(children, (child) => {
+      if (typeof child === 'string') {
+        textContent = child;
+      }
+    });
 
-      let textContent: string;
-      React.Children.forEach(children, (child) => {
-        if (typeof child === 'string') {
-          textContent = child;
-        }
-      });
-      const hasContent = textContent !== undefined || props.icon !== undefined;
+    const hasContent = textContent !== undefined || props.icon !== undefined;
 
-      return (
-        <Slots.root {...mergedProps}>
-          <Slots.beforeLine />
-          {textContent && <Slots.text>{textContent}</Slots.text>}
-          {props.icon && !textContent && <Slots.icon {...createIconProps(props.icon)} />}
-          {hasContent && <Slots.afterLine />}
-        </Slots.root>
-      );
+    // This style must be set here because we need to know if text content is passed in the final render
+    const mergedProps = {
+      ...rootProps,
+      style: mergeStyles(rootProps, props.vertical && textContent ? { minHeight: 84 } : {}),
     };
-  },
-});
+
+    return (
+      <RootSlot {...mergedProps}>
+        <BeforeLineSlot />
+        {hasContent && (
+          <>
+            <WrapperSlot>
+              {textContent && <TextSlot>{textContent}</TextSlot>}
+              {props.icon && !textContent && <IconSlot {...createIconProps(props.icon)} />}
+            </WrapperSlot>
+            <AfterLineSlot />
+          </>
+        )}
+      </RootSlot>
+    );
+  };
+}, useDividerTokens);
+Divider.displayName = dividerName;

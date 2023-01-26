@@ -66,23 +66,13 @@ export interface DividerTokens extends DividerCoreProps, LayoutTokens {
    * The thickness of the Divider lines.
    */
   thickness?: number;
-  /**
-   * -- States applied to the Divider --
-   */
-  alignStart?: DividerTokens;
-  alignEnd?: DividerTokens;
-  hasContent?: DividerTokens;
-  isVertical?: DividerTokens;
-  default?: DividerTokens;
-  subtle?: DividerTokens;
-  brand?: DividerTokens;
-  strong?: DividerTokens;
 }
 
 export interface DividerSlotProps {
   root: ViewProps;
   beforeLine: ViewProps;
   afterLine: ViewProps;
+  wrapper: ViewProps;
   text: TextProps;
   icon: IconProps;
 }
