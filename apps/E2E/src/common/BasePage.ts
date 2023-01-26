@@ -114,8 +114,8 @@ export abstract class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    const onPage = (await (await this._testPage).isDisplayed()) || (await (await this._primaryComponent).isDisplayed());
-    return onPage;
+    //const onPage = (await (await this._testPage).isDisplayed()) || (await (await this._primaryComponent).isDisplayed());
+    return false;
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
@@ -363,7 +363,7 @@ export abstract class BasePage {
   // Returns: String
   // Returns the identifier of the primary UI element used for testing on the given test page.
   get _primaryComponentName(): string {
-    console.error('Each class extending BasePage must implement its own _primaryComponentName method.');
+    console.warn('Each class extending BasePage must implement its own _primaryComponentName method.');
     return DUMMY_CHAR;
   }
 
@@ -371,7 +371,7 @@ export abstract class BasePage {
   // Returns the identifier of the secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponentName(): string {
-    console.error('Each class extending BasePage must implement its own _secondaryComponentName method.');
+    console.warn('Each class extending BasePage must implement its own _secondaryComponentName method.');
     return DUMMY_CHAR;
   }
 
