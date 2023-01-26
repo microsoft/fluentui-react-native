@@ -89,20 +89,20 @@ export type ShimmerElementTypes = ShimmerCircleElement | ShimmerRectElement;
 export interface ShimmerTokens extends IBackgroundColorTokens {
   /**
    * Specifies the Shimmer effect angle in degrees (produced by a gradient)
-   * @defaultValue 0
+   * @defaultValue 45 on Android, 0 on other platforms
    */
   angle?: number;
 
   /**
    * Specifies the animation delay time in milliseconds
-   * @defaultValue 0
+   * @defaultValue 500 on win32, 0 on other platforms
    */
   delay?: number;
 
   /**
    * Specifies the time required to traverse the control in milliseconds
    *
-   * @defaultValue 2000
+   * @defaultValue 1000 on Android, 2000 on win32, 7000 on other platforms
    */
   duration?: number;
 
@@ -121,7 +121,7 @@ export interface ShimmerTokens extends IBackgroundColorTokens {
   /**
    * Color you see when the shimmer wave is not animating.
    *
-   * @defaultValue theme.colors.bodyFrameDivider
+   * @defaultValue theme.colors.neutralStencil1 on Android, theme.colors.bodyFrameDivider on win32, #E1E1E1/#404040 on other platforms for light/dark theme
    */
   shimmerColor?: ColorValue;
 
@@ -129,13 +129,14 @@ export interface ShimmerTokens extends IBackgroundColorTokens {
    * Defines the tip color of the wave which has a linear gradient.
    * from shimmerColor to shimmerWaveColor to shimmerColor.
    *
-   * @defaultValue '#E1E1E1'
+   * @defaultValue theme.colors.neutralStencil2 on Android, #E1E1E1 on win32, white/black on other platforms for light/dark theme
    */
   shimmerWaveColor?: ColorValue;
 
   /**
    * Width of the Shimmer wave.
    * @defaultValue '100%' of the 'width' property
+   * @platform win32
    */
   shimmerWaveWidth?: number | string;
 }
