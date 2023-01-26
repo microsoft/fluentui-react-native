@@ -162,12 +162,10 @@ const themeSections: TestSection[] = [
   },
   {
     name: 'Global Color Tokens - Neutral Colors',
-    testID: COLORTOKEN_TESTPAGE,
     component: () => <GlobalNeutralColorTokensSwatchList />,
   },
   {
     name: 'Global Color Tokens - Shared Colors',
-    testID: COLORTOKEN_TESTPAGE,
     component: () => <GlobalSharedColorTokensSwatchList />,
   },
 ];
