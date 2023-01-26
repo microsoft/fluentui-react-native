@@ -371,7 +371,7 @@ export abstract class BasePage {
   // Returns the identifier of the secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponentName(): string {
-    console.warn('Please verify whether or not your page object should implement secondaryComponentName.');
+    console.warn('Please verify whether or not your page object should implement _secondaryComponentName.');
     return DUMMY_CHAR;
   }
 
