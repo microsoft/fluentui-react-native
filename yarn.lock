@@ -1445,10 +1445,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/design-tokens-android@^0.42.0":
-  version "0.42.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.42.0.tgz#5b4c24bbd248219e17908e6cd24f54d799a1fffc"
-  integrity sha512-pF8kUUURH5vzMGLL5gsx6rM8e5dsLemo17230SRIxxWVvLGkbO8RRoo5kU9Nxi1yuUfaNvWylt3kLlfoeC5flw==
+"@fluentui-react-native/design-tokens-android@^0.43.0":
+  version "0.43.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.43.0.tgz#e8dbd668ff86716d11c37a93408f721e88bf64e3"
+  integrity sha512-33W/1MRSYW8fKHHBcf0XsZp551thsY1tV40WclNai0JZW0er7CwBx4+s1/Vv2VSm6MVFotQjAFGmyQaVDzKpqQ==
 
 "@fluentui-react-native/design-tokens-ios@^0.42.0":
   version "0.42.0"
@@ -2493,9 +2493,9 @@
     wcwidth "^1.0.1"
 
 "@react-native-community/slider@^4.2.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.4.0.tgz#06c6ad76fa1bcc1c5d4188d1969c226eb26e3255"
-  integrity sha512-Pvj6NI65tq7KQxvuFenJHgQ0pdm2OXdVYQg9Sx4PCsifHbsDF/BBT4hoV8RjQhaDfil9Kbu/HRI/uXG9QUfXtw==
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.4.1.tgz#368faef3c2aac2097bbfda0a143283f3731a312c"
+  integrity sha512-CLzwZyLlWfDYN4xj6Wwqm+HisF6dd+rq9pk6Cp+Auw0bm4eb4GLQNc29ILh051xHMe5Dhrd9+NBrbvaEujevkA==
 
 "@react-native-menu/menu@^0.1.2":
   version "0.1.2"

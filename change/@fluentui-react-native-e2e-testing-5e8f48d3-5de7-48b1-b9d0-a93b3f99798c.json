@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Overhaul Checkbox tests with better errors, refactored code",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
