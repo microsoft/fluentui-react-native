@@ -140,7 +140,7 @@ export interface ShimmerTokens extends IBackgroundColorTokens {
   shimmerWaveWidth?: number | string;
 }
 
-export interface ShimmerSlotProps extends ShimmerProps {
+export interface ShimmerSlotProps {
   root: SvgProps;
 }
 
@@ -148,7 +148,7 @@ export interface ShimmerProps extends ViewProps, ShimmerTokens {
   /**
    * Shimmer shapes that define the masking effect of the Shimmer control.
    */
-  elements?: Array<ShimmerElementTypes>;
+  elements: Array<ShimmerElementTypes>;
 }
 
 export interface ShimmerType {

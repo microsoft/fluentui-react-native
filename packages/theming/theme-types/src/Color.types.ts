@@ -669,12 +669,10 @@ export interface AliasColorTokens {
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackground6?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform iOS */
+  /** @platform iOS, android */
   neutralBackgroundCanvas?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform iOS */
+  /** @platform iOS, android */
   neutralBackgroundDarkStatic?: ColorValue;
 
   /** @platform android, iOS, macOS, win32, windows */
@@ -804,12 +802,10 @@ export interface AliasColorTokens {
   /** @platform android, iOS, macOS, win32, windows */
   neutralStrokeDisabled?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform iOS */
+  /** @platform iOS, android */
   neutralStrokeFocus1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform iOS */
+  /** @platform iOS, android */
   neutralStrokeFocus2?: ColorValue;
 
   /** @platform macOS, win32, windows */
@@ -879,84 +875,64 @@ export interface AliasColorTokens {
 
   /// Error, status, and presence tokens
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   dangerBackground1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   dangerBackground2?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   dangerForeground1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   dangerForeground2?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   successBackground1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   successBackground2?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android */
   successForeground1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   successForeground2?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   warningBackground1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   warningBackground2?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   warningForeground1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   warningForeground2?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   severeBackground1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   severeBackground2?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   severeForeground1?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   severeForeground2?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   presenceAway?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   presenceDnd?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   presenceAvailable?: ColorValue;
 
-  // TODO #2440: Add to android
-  /** @platform ios  */
+  /** @platform iOS, android  */
   presenceOof?: ColorValue;
 }
 
