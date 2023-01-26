@@ -110,16 +110,16 @@ const globalNeutralColorNamesSortedDarkToLight = Object.keys(globalTokens.color)
     return color1hex === color2hex ? 0 : color1hex < color2hex ? -1 : 1;
   });
 
-const globalNeutralColorTokensAsArray = globalNeutralColorNamesSortedDarkToLight.map((colorName: string) => {
-  return {
-    colorName: colorName,
-    colorValue: globalTokens.color[colorName],
-  };
-});
+// const globalNeutralColorTokensAsArray = globalNeutralColorNamesSortedDarkToLight.map((colorName: string) => {
+//   return {
+//     colorName: colorName,
+//     colorValue: globalTokens.color[colorName],
+//   };
+// });
 
 const GlobalNeutralColorTokensSwatchList: React.FunctionComponent = () => {
   //const renderSwatch = React.useCallback(getSwatch, []);
-  console.log(globalNeutralColorTokensAsArray);
+  console.log(globalNeutralColorNamesSortedDarkToLight);
 
   return (
     <View style={commonTestStyles.view}>
