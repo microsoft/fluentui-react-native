@@ -118,11 +118,12 @@ const globalNeutralColorTokensAsArray = globalNeutralColorNamesSortedDarkToLight
 });
 
 const GlobalNeutralColorTokensSwatchList: React.FunctionComponent = () => {
-  const renderSwatch = React.useCallback(getSwatch, []);
+  //const renderSwatch = React.useCallback(getSwatch, []);
+  console.log(globalNeutralColorTokensAsArray);
 
   return (
     <View style={commonTestStyles.view}>
-      <View style={styles.stackStyle}>{renderSwatch(globalNeutralColorTokensAsArray[0])}</View>
+      {/* <View style={styles.stackStyle}>{renderSwatch(globalNeutralColorTokensAsArray[0])}</View> */}
     </View>
   );
 };
