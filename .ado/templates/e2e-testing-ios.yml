@@ -18,7 +18,7 @@ steps:
     condition: succeeded()
 
   - script: |
-      dir
+      ls
     workingDirectory: apps/E2E/errorShots
     displayName: "See if error shot is getting created"
 
