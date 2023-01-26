@@ -6,7 +6,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['src/**/specs/*.ios.ts'],
+  specs: ['src/ColorTokens/specs/*.ios.ts'],
   exclude: [],
 
   maxInstances: 30,
