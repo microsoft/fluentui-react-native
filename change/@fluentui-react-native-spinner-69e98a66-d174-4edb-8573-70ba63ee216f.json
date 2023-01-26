@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "define spinner props and slots",
-  "packageName": "@fluentui-react-native/spinner",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

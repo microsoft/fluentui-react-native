@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Rename tokens test to color tokens test",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

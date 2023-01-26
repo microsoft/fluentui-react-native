@@ -11,7 +11,7 @@ exports.config = {
   specs: [
     'src/ActivityIndicator/specs/*.win.ts',
     'src/ButtonLegacy/specs/*.win.ts',
-    'src/CheckboxLegacy/specs/*.windows.ts', // See spec file for more information
+    'src/CheckboxLegacy/specs/*.win.ts', // See spec file for more information
     'src/LinkLegacy/specs/*.win.ts',
     'src/PersonaCoin/specs/*.win.ts',
     'src/Pressable/specs/*.win.ts',

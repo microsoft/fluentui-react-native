@@ -1,8 +1,31 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
+This log was last generated on Wed, 25 Jan 2023 21:31:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.0
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Minor changes
+
+- Removed win32 extenstion from ShimmerPageObj and added android tests" (ayushsinghs@yahoo.in)
+- Update RadioGroupV1 E2E tests with better errors + use of refactored methods (winlarry@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.25
+
+### Patches
+
+- Overhaul Checkbox tests with better errors, refactored code (winlarry@microsoft.com)
+- Fix build failing on radiogroup android tests (winlarry@microsoft.com)
+
+## 1.11.2
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Rename tokens test to color tokens test (78454019+lyzhan7@users.noreply.github.com)
 
 ## 1.11.1
 
