@@ -1,5 +1,5 @@
 import { ViewProps, ColorValue } from 'react-native';
-import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import { IconPropsV1 } from '@fluentui-react-native/icon';
 import { LayoutTokens } from '@fluentui-react-native/tokens';
 import { TextProps } from '@fluentui-react-native/text';
 
@@ -41,7 +41,7 @@ export interface DividerProps extends DividerCoreProps {
   /**
    * Pass an icon source to render an icon as content in the divider. Mutually exclusive with passing text as a child.
    */
-  icon?: IconSourcesType;
+  icon?: IconPropsV1;
 }
 
 export interface DividerTokens extends DividerCoreProps, LayoutTokens {
@@ -79,7 +79,7 @@ export interface DividerSlotProps {
   afterLine: ViewProps;
   wrapper: ViewProps;
   text: TextProps;
-  icon: IconProps;
+  icon: IconPropsV1;
 }
 
 export interface DividerType {

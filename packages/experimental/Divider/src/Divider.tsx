@@ -4,14 +4,14 @@ import { View, ViewProps } from 'react-native';
 import { dividerName, DividerProps, DividerTokens } from './Divider.types';
 import { withSlots, compressible, UseTokens, useSlot, useFluentTheme, patchTokens, mergeStyles } from '@fluentui-react-native/framework';
 import { Text, TextProps } from '@fluentui-react-native/text';
-import { Icon, IconProps, createIconProps } from '@fluentui-react-native/icon';
+import { IconV1, IconPropsV1 } from '@fluentui-react-native/icon';
 import React from 'react';
 import { useDividerTokens } from './DividerTokens';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { colorsFromAppearance, getDividerSlotProps } from './Divider.styling';
 
 export const Divider = compressible<DividerProps, DividerTokens>((props: DividerProps, useTokens: UseTokens<DividerTokens>) => {
-  const { alignContent = 'center', appearance = 'default', color, insetSize = 0, vertical = false } = props;
+  const { alignContent = 'center', appearance = 'default', color, icon, insetSize = 0, vertical = false } = props;
 
   const theme = useFluentTheme();
   let [tokens, cache] = useTokens(theme);
@@ -36,7 +36,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
     wrapper: wrapperProps,
     text: textProps,
     icon: iconProps,
-  } = React.useMemo(() => getDividerSlotProps(tokens, theme), [tokens, theme]);
+  } = React.useMemo(() => getDividerSlotProps(tokens, theme, icon), [tokens, theme, icon]);
 
   // build slots
   const RootSlot = useSlot<ViewProps>(View, rootProps);
@@ -44,7 +44,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   const AfterLineSlot = useSlot<ViewProps>(View, afterLineProps);
   const WrapperSlot = useSlot<ViewProps>(View, wrapperProps);
   const TextSlot = useSlot<TextProps>(Text, textProps);
-  const IconSlot = useSlot<IconProps>(Icon, iconProps);
+  const IconSlot = useSlot<IconPropsV1>(IconV1, iconProps);
 
   return (final: DividerProps, ...children: React.ReactNode[]) => {
     props = { ...props, ...final };
@@ -71,7 +71,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
           <>
             <WrapperSlot>
               {textContent && <TextSlot>{textContent}</TextSlot>}
-              {props.icon && !textContent && <IconSlot {...createIconProps(props.icon)} />}
+              {props.icon && !textContent && <IconSlot />}
             </WrapperSlot>
             <AfterLineSlot />
           </>

@@ -1,8 +1,27 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { layoutStyles } from '@fluentui-react-native/tokens';
 import { DividerTokens, DividerSlotProps, DividerAppearance } from './Divider.types';
+import { IconPropsV1 } from '@fluentui-react-native/icon';
 
-export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme): DividerSlotProps => {
+export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: IconPropsV1): DividerSlotProps => {
+  let iconProps: IconPropsV1 = {};
+  if (icon) {
+    if (icon.fontSource) {
+      iconProps = {
+        fontSource: {
+          ...icon.fontSource,
+          color: tokens.color || tokens.contentColor,
+        },
+      };
+    } else if (icon.svgSource) {
+      iconProps = {
+        svgSource: {
+          ...icon.svgSource,
+          color: tokens.color || tokens.contentColor,
+        },
+      };
+    }
+  }
   return {
     root: {
       style: {
@@ -50,9 +69,7 @@ export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme): Divide
         color: tokens.color || tokens.contentColor,
       },
     },
-    icon: {
-      color: tokens.color || tokens.contentColor,
-    },
+    icon: iconProps,
   };
 };
 
