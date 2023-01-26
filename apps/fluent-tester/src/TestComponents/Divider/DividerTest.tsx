@@ -20,7 +20,7 @@ export const DividerTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'component-description';
+  const description = 'A Divider is a visual separator that can contain content (text or an icon). Dividers can be horizontal or vertical.';
 
   return <Test name="Divider Test" description={description} sections={dividerSections} status={status}></Test>;
 };
