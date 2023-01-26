@@ -1,4 +1,4 @@
-export interface IAppearanceAdditions {
+export interface AppearanceAdditions {
   readonly horizontalSizeClass: SizeClass;
   readonly userInterfaceLevel: UserInterfaceLevel;
 }

@@ -2,13 +2,13 @@ import { NativeEventEmitter } from 'react-native';
 import NativeAppearanceAdditions from './NativeAppearanceAdditions.ios';
 import {
   HorizontalSizeClassKey,
-  IAppearanceAdditions,
+  AppearanceAdditions,
   SizeClass,
   UserInterfaceLevel,
   UserInterfaceLevelKey,
 } from './NativeAppearanceAdditions.types';
 
-class AppearanceAdditionsImpl implements IAppearanceAdditions {
+class AppearanceAdditionsImpl implements AppearanceAdditions {
   _horizontalSizeClass: SizeClass;
   _userInterfaceLevel: UserInterfaceLevel;
 
@@ -29,4 +29,4 @@ class AppearanceAdditionsImpl implements IAppearanceAdditions {
   }
 }
 
-export const appearanceAdditions = new AppearanceAdditionsImpl() as IAppearanceAdditions;
+export const appearanceAdditions = new AppearanceAdditionsImpl() as AppearanceAdditions;
