@@ -5,21 +5,26 @@ steps:
   # E2E testing failures. Thus, if this variable != "Success", we know the build failed, and to not run the reporting tasks.
   - task: PowerShell@2
     inputs:
-      targetType: 'inline'
+      targetType: "inline"
       script: |
         Write-Host "##vso[task.setvariable variable=task.Build.status]Success"
     condition: succeeded()
-    displayName: 'Create success build variable'
+    displayName: "Create success build variable"
 
   - script: |
       yarn e2etest:ios
     workingDirectory: apps/E2E
-    displayName: 'run E2E iOS tests'
+    displayName: "run E2E iOS tests"
     condition: succeeded()
+
+  - script: |
+      dir
+    workingDirectory: apps/E2E/errorShots
+    displayName: "See if error shot is getting created"
 
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: ios
-      platform: 'ios'
+      platform: "ios"
       buildArtifacts: variables['task.Build.status']
       directory: $(Build.SourcesDirectory)/apps/E2E
