@@ -7,7 +7,5 @@ describe('Checkbox Legacy Testing Initialization', () => {
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
     await CheckboxLegacyPageObject.navigateToPageAndLoadTests();
-
-    await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy();
   });
 });

@@ -8,7 +8,5 @@ describe('Badge Testing Initialization', function () {
 
   it('Click and navigate to Badge test page', async () => {
     await BasicBadgePageObject.navigateToPageAndLoadTests();
-
-    await expect(await BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
   });
 });

@@ -1,13 +1,11 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkV1PageObject from '../pages/LinkV1PageObject';
 import { LINKV1_ACCESSIBILITY_LABEL } from '../consts';
-import { LINK_A11Y_ROLE, BOOT_APP_TIMEOUT, Attribute, Keys } from '../../common/consts';
+import { LINK_A11Y_ROLE, Attribute, Keys } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('LinkV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await LinkV1PageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to LinkV1 test page', async () => {

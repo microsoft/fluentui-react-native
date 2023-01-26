@@ -1,13 +1,11 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuButtonLegacyPageObject from '../pages/MenuButtonLegacyPageObject.win';
-import { BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { MENUBUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { MENU_BUTTON_ACCESSIBILITY_LABEL, MENU_BUTTON_TEST_COMPONENT_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButton Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await MenuButtonLegacyPageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to MenuButton test page', async () => {

@@ -1,21 +1,14 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import SpacingTokensPageObject from '../pages/SpacingTokensPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Spacing Tokens Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
+    await SpacingTokensPageObject.waitForInitialPageToDisplay();
   });
 
-  it('Click and navigate to Spacing tokens test page', async () => {
-    await SpacingTokensPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+  it('Click and navigate to Spacing Tokens test page', async () => {
+    await SpacingTokensPageObject.navigateToPageAndLoadTests();
 
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToSpacingTokensPage();
-    await SpacingTokensPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await SpacingTokensPageObject.isPageLoaded()).toBeTruthy();
+    await expect(await SpacingTokensPageObject.didAssertPopup()).toBeFalsy(SpacingTokensPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

@@ -1,12 +1,10 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import TabsV1PageObject from '../pages/TabsV1PageObject';
-import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('TabsV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await TabsV1PageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to TabsV1 test page', async () => {

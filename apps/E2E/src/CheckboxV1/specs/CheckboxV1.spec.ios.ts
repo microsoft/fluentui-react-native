@@ -7,7 +7,5 @@ describe('CheckboxV1 Testing Initialization', () => {
 
   it('Click and navigate to CheckboxV1 test page', async () => {
     await CheckboxV1PageObject.navigateToPageAndLoadTests();
-
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

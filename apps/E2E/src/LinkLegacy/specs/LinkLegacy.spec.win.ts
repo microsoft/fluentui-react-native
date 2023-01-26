@@ -1,23 +1,15 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkLegacyPageObject from '../pages/LinkLegacyPageObject';
 import { LINK_ACCESSIBILITY_LABEL } from '../consts';
-import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute } from '../../common/consts';
+import { LINK_A11Y_ROLE, Attribute } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Link Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await LinkLegacyPageObject.waitForInitialPageToDisplay();
   });
 
-  it('Click and navigate to Link test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToLinkLegacyPage();
-    await LinkLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await LinkLegacyPageObject.isPageLoaded()).toBeTruthy(LinkLegacyPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await LinkLegacyPageObject.enableE2ETesterMode();
+  it('Click and navigate to Link Legacy test page', async () => {
+    await LinkLegacyPageObject.navigateToPageAndLoadTests(true);
 
     await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

@@ -1,13 +1,12 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import TextLegacyPageObject, { TextComponentSelector } from '../pages/TextLegacyPageObject';
-import { TEXT_A11Y_ROLE, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { TEXT_A11Y_ROLE } from '../../common/consts';
 import { DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL, DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT } from '../consts';
+import TabsLegacyPageObject from 'src/TabsLegacy/pages/TabsLegacyPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Text Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await TabsLegacyPageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to Text Legacy test page', async () => {

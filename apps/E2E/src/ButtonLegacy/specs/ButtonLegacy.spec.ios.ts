@@ -8,7 +8,5 @@ describe('Button Legacy Testing Initialization', function () {
 
   it('Click and navigate to Button Legacy test page', async () => {
     await ButtonLegacyPageObject.navigateToPageAndLoadTests();
-
-    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });

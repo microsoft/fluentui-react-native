@@ -1,13 +1,11 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import SwitchPageObject from '../pages/SwitchPageObject';
-import { BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await SwitchPageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to Switch test page', async () => {

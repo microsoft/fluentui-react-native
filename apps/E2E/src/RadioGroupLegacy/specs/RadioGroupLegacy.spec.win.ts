@@ -1,6 +1,5 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import RadioGroupPageObject, { RadioButton } from '../pages/RadioGroupLegacyPageObject';
-import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, BOOT_APP_TIMEOUT, Keys, Attribute } from '../../common/consts';
+import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import {
   RADIOGROUP_ACCESSIBILITY_LABEL,
   RADIOGROUP_TEST_COMPONENT_LABEL,
@@ -11,8 +10,7 @@ import {
 // Before testing begins, allow up to 60 seconds for app to open
 describe('RadioGroup/RadioButton Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await RadioGroupPageObject.waitForInitialPageToDisplay();
   });
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {
