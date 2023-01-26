@@ -7,6 +7,6 @@ describe('Tabs Legacy Testing Initialization', function () {
   });
 
   it('Click and navigate to Tabs Legacy test page', async () => {
-    await TabsLegacyPageObject.navigateToPageAndLoadTests(true);
+    await TabsLegacyPageObject.navigateToPageAndLoadTests();
   });
 });
