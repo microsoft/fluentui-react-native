@@ -7,7 +7,7 @@ export function createAndroidTheme(options: ThemeOptions = {}): ThemeReference {
   const themeRef = new ThemeReference({} as Theme, () => {
     // Stub out HC and darkElevated on Android
     const current =
-      options.appearance == 'dynamic' || options.appearance == 'highContrast' || options.appearance == 'darkElevated'
+      options.appearance === 'dynamic' || options.appearance === 'highContrast' || options.appearance === 'darkElevated'
         ? (Appearance && Appearance.getColorScheme()) || 'light'
         : options.appearance;
     return getAndroidTheme(current);

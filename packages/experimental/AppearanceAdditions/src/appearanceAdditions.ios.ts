@@ -7,6 +7,7 @@ import {
   UserInterfaceLevel,
   UserInterfaceLevelKey,
 } from './NativeAppearanceAdditions.types';
+import { memoize } from '@fluentui-react-native/framework';
 
 class AppearanceAdditionsImpl implements AppearanceAdditions {
   _horizontalSizeClass: SizeClass;
@@ -29,4 +30,8 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
   }
 }
 
-export const appearanceAdditions = new AppearanceAdditionsImpl() as AppearanceAdditions;
+function getAppearanceAdditionsWorker() {
+  return new AppearanceAdditionsImpl() as AppearanceAdditions;
+}
+
+export const appearanceAdditions = memoize(getAppearanceAdditionsWorker);

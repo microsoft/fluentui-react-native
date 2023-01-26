@@ -15,7 +15,7 @@ export function useHorizontalSizeClass(): SizeClass {
 
   const subscription = useMemo(
     () => ({
-      getCurrentValue: () => appearanceAdditions.horizontalSizeClass,
+      getCurrentValue: () => appearanceAdditions().horizontalSizeClass,
       subscribe: (callback) => {
         const appearanceSubscription = eventEmitter.addListener('appearanceChanged', callback);
         return () => {
