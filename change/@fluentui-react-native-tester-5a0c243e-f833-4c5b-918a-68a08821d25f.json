@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Adding a new native module, `AppearanceAdditions`",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "mischreiber@microsoft.com",
-  "dependentChangeType": "patch"
-}

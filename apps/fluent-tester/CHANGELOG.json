@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 26 Jan 2023 17:47:06 GMT",
+      "tag": "@fluentui-react-native/tester_v0.128.1",
+      "version": "0.128.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "mischreiber@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "6b1449d565c2e0597204e4a8cfb2355e34c01fc7",
+            "comment": "Adding a new native module, `AppearanceAdditions`"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.2.23",
+            "commit": "6b1449d565c2e0597204e4a8cfb2355e34c01fc7"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Jan 2023 21:31:17 GMT",
       "tag": "@fluentui-react-native/tester_v0.128.0",
       "version": "0.128.0",

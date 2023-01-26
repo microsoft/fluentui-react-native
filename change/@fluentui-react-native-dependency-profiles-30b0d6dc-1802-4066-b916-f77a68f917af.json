@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update lock files",
-  "packageName": "@fluentui-react-native/dependency-profiles",
-  "email": "mischreiber@microsoft.com",
-  "dependentChangeType": "patch"
-}

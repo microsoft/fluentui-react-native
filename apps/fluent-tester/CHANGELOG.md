@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 25 Jan 2023 21:31:17 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Jan 2023 17:47:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.128.1
+
+Thu, 26 Jan 2023 17:47:06 GMT
+
+### Patches
+
+- Adding a new native module, `AppearanceAdditions` (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.2.23
 
 ## 0.128.0
 

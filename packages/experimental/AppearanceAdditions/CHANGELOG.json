@@ -1,4 +1,20 @@
 {
   "name": "@fluentui-react-native/experimental-appearance-additions",
-  "entries": []
+  "entries": [
+    {
+      "date": "Thu, 26 Jan 2023 17:47:06 GMT",
+      "tag": "@fluentui-react-native/experimental-appearance-additions_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "mischreiber@microsoft.com",
+            "package": "@fluentui-react-native/experimental-appearance-additions",
+            "commit": "6b1449d565c2e0597204e4a8cfb2355e34c01fc7",
+            "comment": "Adding a new native module, `AppearanceAdditions`"
+          }
+        ]
+      }
+    }
+  ]
 }
