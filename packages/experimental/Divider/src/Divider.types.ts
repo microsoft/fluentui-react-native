@@ -7,7 +7,6 @@ export const dividerName = 'Divider';
 
 export const DividerInsetSizes = [0, 16, 56, 68, 72, 108] as const;
 export type DividerInsetSize = typeof DividerInsetSizes[number];
-
 export type DividerAlignment = 'start' | 'center' | 'end';
 export type DividerAppearance = 'default' | 'subtle' | 'brand' | 'strong';
 
@@ -17,11 +16,11 @@ export interface DividerCoreProps {
    */
   color?: ColorValue;
   /**
-   * The size of the Divider inset - the margin before the start and after the end of the divider.
+   * The size of the Divider inset - the margin before the start and after the end of the divider. Default: `0`
    */
   insetSize?: DividerInsetSize;
   /**
-   * Whether the divider is rendered as a horizontal line or a vertical line.
+   * Whether the divider is rendered as a horizontal line or a vertical line. Default: `false`
    */
   vertical?: boolean;
 }
@@ -43,27 +42,27 @@ export interface DividerProps extends DividerCoreProps {
 
 export interface DividerTokens extends DividerCoreProps, LayoutTokens {
   /**
-   * The color of the content passed into the divider. This is overriden if the 'color' prop / token is set.
+   * The color of the content passed into the divider. This is overriden if the `color` prop / token is set.
    */
   contentColor?: ColorValue;
   /**
-   * The padding of divider content between the start and end lines. This should not be set if content isn't being passed into the divider.
+   * The padding of divider content between the start and end lines. Default = `8`.
    */
   contentPadding?: string | number;
   /**
-   * The flex value of the line after content, set to 0 if 'alignContent' = 'end'.
+   * The flex value of the line after content, set to 0 if `alignContent` = `end`.
    */
   flexAfter?: number;
   /**
-   * The flex value of the line before content, set to 0 if 'alignContent' = 'start'.
+   * The flex value of the line before content, set to 0 if `alignContent` = `start`.
    */
   flexBefore?: number;
   /**
-   * Color of the divider lines. This is overriden if the 'color' prop / token is set.
+   * Color of the divider lines. This is overriden if the `color` prop / token is set.
    */
   lineColor?: ColorValue;
   /**
-   * The thickness of the Divider lines.
+   * The thickness of the Divider lines Default: `1px`.
    */
   thickness?: number;
 }
