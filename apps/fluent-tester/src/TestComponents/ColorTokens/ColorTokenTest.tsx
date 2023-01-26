@@ -110,20 +110,19 @@ const globalNeutralColorNamesSortedDarkToLight = Object.keys(globalTokens.color)
     return color1hex === color2hex ? 0 : color1hex < color2hex ? -1 : 1;
   });
 
-// const globalNeutralColorTokensAsArray = globalNeutralColorNamesSortedDarkToLight.map((colorName: string) => {
-//   return {
-//     colorName: colorName,
-//     colorValue: globalTokens.color[colorName],
-//   };
-// });
+const globalNeutralColorTokensAsArray = globalNeutralColorNamesSortedDarkToLight.map((colorName: string) => {
+  return {
+    colorName: colorName,
+    colorValue: globalTokens.color[colorName],
+  };
+});
 
 const GlobalNeutralColorTokensSwatchList: React.FunctionComponent = () => {
-  //const renderSwatch = React.useCallback(getSwatch, []);
-  console.log(globalNeutralColorNamesSortedDarkToLight);
+  const renderSwatch = React.useCallback(getSwatch, []);
 
   return (
     <View style={commonTestStyles.view}>
-      {/* <View style={styles.stackStyle}>{renderSwatch(globalNeutralColorTokensAsArray[0])}</View> */}
+      <View style={styles.stackStyle}>{globalNeutralColorTokensAsArray.map((item) => renderSwatch(item))}</View>
     </View>
   );
 };
@@ -150,7 +149,7 @@ const GlobalSharedColorTokensSwatchList: React.FunctionComponent = () => {
 
   return (
     <View style={commonTestStyles.view}>
-      <View style={styles.stackStyle}>{globalSharedColorTokensAsArray.map((item) => renderSwatch(item))}</View>
+      <View style={styles.stackStyle}>{renderSwatch(globalSharedColorTokensAsArray[0])}</View>
     </View>
   );
 };
