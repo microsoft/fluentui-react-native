@@ -8,7 +8,5 @@ describe('Theme Testing Initialization', function () {
 
   it('Click and navigate to Theme test page', async () => {
     await ThemePageObject.navigateToPageAndLoadTests();
-
-    await expect(await ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

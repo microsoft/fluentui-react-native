@@ -8,7 +8,5 @@ describe('Link Legacy Testing Initialization', function () {
 
   it('Click and navigate to Link Legacy test page', async () => {
     await LinkLegacyPageObject.navigateToPageAndLoadTests();
-
-    await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

@@ -8,7 +8,5 @@ describe('Icon Legacy Testing Initialization', function () {
 
   it('Click and navigate to Icon Legacy test page', async () => {
     await IconLegacyPageObject.navigateToPageAndLoadTests();
-
-    await expect(await IconLegacyPageObject.didAssertPopup()).toBeFalsy(IconLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

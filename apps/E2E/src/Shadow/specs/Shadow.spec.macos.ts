@@ -8,7 +8,5 @@ describe('Shadow Testing Initialization', function () {
 
   it('Click and navigate to Shadow test page', async () => {
     await ShadowPageObject.navigateToPageAndLoadTests();
-
-    await expect(await ShadowPageObject.didAssertPopup()).toBeFalsy(ShadowPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

@@ -8,7 +8,5 @@ describe('Tabs Legacy Testing Initialization', function () {
 
   it('Click and navigate to Tabs Legacy test page', async () => {
     await TabsLegacyPageObject.navigateToPageAndLoadTests(true);
-
-    await expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

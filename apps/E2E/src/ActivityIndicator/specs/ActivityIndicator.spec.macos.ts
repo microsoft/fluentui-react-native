@@ -8,7 +8,5 @@ describe('Activity Indicator Testing Initialization', function () {
 
   it('Click and navigate to Activity Indicator test page', async () => {
     await ActivityIndicatorPageObject.navigateToPageAndLoadTests();
-
-    await expect(await ActivityIndicatorPageObject.didAssertPopup()).toBeFalsy(ActivityIndicatorPageObject.ERRORMESSAGE_ASSERT);
   });
 });

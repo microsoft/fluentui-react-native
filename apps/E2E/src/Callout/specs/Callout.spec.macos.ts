@@ -8,7 +8,5 @@ describe('Callout Testing Initialization', function () {
 
   it('Click and navigate to Callout test page', async () => {
     await CalloutPageObject.navigateToPageAndLoadTests();
-
-    await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

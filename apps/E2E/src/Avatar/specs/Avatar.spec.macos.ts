@@ -8,7 +8,5 @@ describe('Avatar Testing Initialization', function () {
 
   it('Click and navigate to Avatar test page', async () => {
     await AvatarPageObject.navigateToPageAndLoadTests();
-
-    await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 });

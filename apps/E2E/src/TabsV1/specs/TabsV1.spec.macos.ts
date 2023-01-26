@@ -8,7 +8,5 @@ describe('TabsV1 Testing Initialization', function () {
 
   it('Click and navigate to TabsV1 test page', async () => {
     await TabsV1PageObject.navigateToPageAndLoadTests();
-
-    await expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

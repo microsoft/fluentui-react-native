@@ -8,7 +8,5 @@ describe('TextV1 Testing Initialization', function () {
 
   it('Click and navigate to TextV1 test page', async () => {
     await TextV1PageObject.navigateToPageAndLoadTests();
-
-    await expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

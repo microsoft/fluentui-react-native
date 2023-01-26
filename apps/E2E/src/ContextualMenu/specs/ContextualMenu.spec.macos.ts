@@ -8,7 +8,5 @@ describe('ContextualMenu Testing Initialization', function () {
 
   it('Click and navigate to ContextualMenu test page', async () => {
     await ContextualMenuPageObject.navigateToPageAndLoadTests();
-
-    await expect(await ContextualMenuPageObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

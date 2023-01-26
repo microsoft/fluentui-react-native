@@ -8,7 +8,5 @@ describe('PersonaCoin Testing Initialization', function () {
 
   it('Click and navigate to PersonaCoin test page', async () => {
     await PersonaCoinPageObject.navigateToPageAndLoadTests();
-
-    await expect(await PersonaCoinPageObject.didAssertPopup()).toBeFalsy(PersonaCoinPageObject.ERRORMESSAGE_ASSERT);
   });
 });

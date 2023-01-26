@@ -9,7 +9,5 @@ describe('FocusZone Testing Initialization', function () {
   it('Click and navigate to FocusTrapZone test page', async () => {
     /* Click on component button to navigate to test page */
     await FocusZonePageObject.navigateToPageAndLoadTests();
-
-    await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

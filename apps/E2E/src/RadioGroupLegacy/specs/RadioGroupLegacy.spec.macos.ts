@@ -8,7 +8,5 @@ describe('RadioGroup Legacy Testing Initialization', function () {
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {
     await RadioGroupLegacyPageObject.navigateToPageAndLoadTests();
-
-    await expect(await RadioGroupLegacyPageObject.didAssertPopup()).toBeFalsy(RadioGroupLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

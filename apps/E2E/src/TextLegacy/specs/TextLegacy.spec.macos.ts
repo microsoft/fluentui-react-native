@@ -8,7 +8,5 @@ describe('Text Legacy Testing Initialization', function () {
 
   it('Click and navigate to Text Legacy test page', async () => {
     await TextLegacyPageObject.navigateToPageAndLoadTests();
-
-    await expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

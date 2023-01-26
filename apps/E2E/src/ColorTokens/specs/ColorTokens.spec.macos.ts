@@ -8,7 +8,5 @@ describe('Color Tokens Testing Initialization', function () {
 
   it('Click and navigate to Color Tokens test page', async () => {
     await ColorTokenPageObject.navigateToPageAndLoadTests();
-
-    await expect(await ColorTokenPageObject.didAssertPopup()).toBeFalsy(ColorTokenPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

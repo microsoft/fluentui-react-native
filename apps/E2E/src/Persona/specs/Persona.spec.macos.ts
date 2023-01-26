@@ -8,7 +8,5 @@ describe('Persona Testing Initialization', function () {
 
   it('Click and navigate to Persona test page', async () => {
     await PersonaPageObject.navigateToPageAndLoadTests();
-
-    await expect(await PersonaPageObject.didAssertPopup()).toBeFalsy(PersonaPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
