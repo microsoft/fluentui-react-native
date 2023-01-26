@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 25 Jan 2023 21:31:18 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.17.17",
+      "version": "0.17.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-ramp",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.30.0",
+            "commit": "391f3d691e286300dfad37cad539bed54d4436b4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Jan 2023 01:55:11 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.17.16",
       "version": "0.17.16",
