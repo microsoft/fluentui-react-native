@@ -14,7 +14,6 @@ describe('Color Tokens Testing Initialization', function () {
     await NavigateAppPage.clickAndGoToColorTokensPage();
     await ColorTokenPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ColorTokenPageObject.isPageLoaded()).toBeTruthy(ColorTokenPageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await ColorTokenPageObject.didAssertPopup()).toBeFalsy(ColorTokenPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(false).toBeTruthy();
   });
 });

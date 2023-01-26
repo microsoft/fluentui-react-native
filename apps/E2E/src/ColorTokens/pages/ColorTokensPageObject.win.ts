@@ -1,4 +1,4 @@
-import { HOMEPAGE_COLORTOKEN_BUTTON } from '../consts';
+import { HOMEPAGE_COLORTOKEN_BUTTON, COLORTOKEN_TESTPAGE } from '../consts';
 import { BasePage } from '../../common/BasePage';
 
 class ColorTokenPageObject extends BasePage {
@@ -7,7 +7,7 @@ class ColorTokenPageObject extends BasePage {
   /*****************************************/
 
   get _pageName() {
-    return 'Hi';
+    return COLORTOKEN_TESTPAGE;
   }
 
   get _pageButtonName() {
