@@ -11,9 +11,7 @@ import { assertNever } from 'assert-never';
 export function getAliasTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
     return lightAliasTokens;
-  } else if (mode === 'dark') {
-    return darkAliasTokens;
-  } else if (mode === 'darkElevated') {
+  } else if (mode === 'dark' || mode === 'darkElevated') {
     return darkAliasTokens;
   } else if (mode === 'highContrast') {
     return hcAliasTokens;

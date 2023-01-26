@@ -220,7 +220,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
 
   const appearance = Appearance.getColorScheme();
   let mode = getCurrentAppearance(appearance, 'light');
-  if (mode === 'dark' && isElevated === true) {
+  if (mode === 'dark' && isElevated) {
     mode = 'darkElevated';
   }
 
