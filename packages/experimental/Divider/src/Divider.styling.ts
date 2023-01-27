@@ -46,7 +46,9 @@ export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: 
         flex: tokens.flexBefore,
         borderColor: tokens.color || tokens.lineColor,
         borderStyle: 'solid',
-        ...(tokens.vertical ? { borderLeftWidth: tokens.thickness } : { borderTopWidth: tokens.thickness }),
+        ...(tokens.vertical
+          ? { borderLeftWidth: tokens.thickness, minHeight: tokens.minLineSize }
+          : { borderTopWidth: tokens.thickness, minWidth: tokens.minLineSize }),
       },
     },
     afterLine: {
@@ -55,7 +57,9 @@ export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: 
         flex: tokens.flexAfter,
         borderColor: tokens.color || tokens.lineColor,
         borderStyle: 'solid',
-        ...(tokens.vertical ? { borderLeftWidth: tokens.thickness } : { borderTopWidth: tokens.thickness }),
+        ...(tokens.vertical
+          ? { borderLeftWidth: tokens.thickness, minHeight: tokens.minLineSize }
+          : { borderTopWidth: tokens.thickness, minWidth: tokens.minLineSize }),
       },
     },
     wrapper: {
