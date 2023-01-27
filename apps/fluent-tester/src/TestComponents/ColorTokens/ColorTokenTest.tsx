@@ -55,7 +55,10 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(COLORTOKENS_TEST_COMPONENT)}
       />
-      <Text>{p.name}</Text>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', flex: 1 }}>
+        <Text style={{ paddingRight: 5 }}>{p.colorName}</Text>
+        <Text>{'(' + p.colorValue?.toString() + ')'}</Text>
+      </View>
     </View>
   );
 };
