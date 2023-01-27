@@ -1,16 +1,18 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, ColorValue } from 'react-native';
+import { View, ViewStyle, StyleSheet, ColorValue, Platform } from 'react-native';
 import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import { commonTestStyles } from '../Common/styles';
-import { Text } from '@fluentui/react-native';
+import { Text, ToggleButton } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '../../../../E2E/src/ColorTokens/consts';
 import { testProps } from '../Common/TestProps';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import Svg, { G, Path, SvgProps } from 'react-native-svg';
+import { SvgIconProps } from '@fluentui-react-native/icon';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -36,6 +38,12 @@ const styles = StyleSheet.create({
     padding: 12,
     margin: 8,
     overflow: 'hidden',
+  },
+  statusView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    margin: 8,
   },
 });
 
@@ -149,9 +157,47 @@ const globalSharedColorTokensAsArray = globalSharedColorNames
 const GlobalSharedColorTokensSwatchList: React.FunctionComponent = () => {
   const renderSwatch = React.useCallback(getSwatch, []);
 
+  const [showGlobalSharedColors, setShowGlobalSharedColors] = React.useState(false);
+
+  const toggleSvg: React.FunctionComponent<SvgProps> = () => {
+    const plusPath =
+      'M6.5 1.75C6.5 1.33579 6.16421 1 5.75 1C5.33579 1 5 1.33579 5 1.75V5H1.75C1.33579 5 1 5.33579 1 5.75C1 6.16421 1.33579 6.5 1.75 6.5H5V9.75C5 10.1642 5.33579 10.5 5.75 10.5C6.16421 10.5 6.5 10.1642 6.5 9.75V6.5H9.75C10.1642 6.5 10.5 6.16421 10.5 5.75C10.5 5.33579 10.1642 5 9.75 5H6.5V1.75Z';
+    const minusPath = 'M2.75 5.25h6.5s0.75 0 0.75 0.75v0s0 0.75 -0.75 0.75h-6.5s-0.75 0 -0.75 -0.75v0s0 -0.75 0.75 -0.75';
+
+    const path = showGlobalSharedColors ? minusPath : plusPath;
+    return (
+      <Svg>
+        <G>
+          <Path d={path} fill="black" />
+        </G>
+      </Svg>
+    );
+  };
+  const svgProps: SvgIconProps = {
+    src: toggleSvg,
+  };
+
+  const plusCodepoint = 0x2795;
+  const minusCodepoint = 0x2796;
+  const fontIconProps = {
+    codepoint: showGlobalSharedColors ? minusCodepoint : plusCodepoint,
+    fontSize: 10,
+  };
+
+  const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
+
+  console.log(showGlobalSharedColors);
   return (
-    <View style={commonTestStyles.view}>
-      <View style={styles.stackStyle}>{globalSharedColorTokensAsArray.map((item) => renderSwatch(item))}</View>
+    <View>
+      <View style={styles.statusView}>
+        <Text variant="headerStandard">Show global shared color tokens</Text>
+        <ToggleButton iconOnly={true} icon={toggleIconProps} onClick={() => setShowGlobalSharedColors(!showGlobalSharedColors)} />
+      </View>
+      {showGlobalSharedColors && (
+        <View style={commonTestStyles.view}>
+          <View style={styles.stackStyle}>{globalSharedColorTokensAsArray.map((item) => renderSwatch(item))}</View>
+        </View>
+      )}
     </View>
   );
 };
