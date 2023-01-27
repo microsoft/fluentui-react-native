@@ -44,7 +44,7 @@
     "@fluentui-react-native/separator": "0.14.10",
     "@fluentui-react-native/tabs": "0.11.27",
     "@fluentui-react-native/text": "0.19.15",
-     "@fluentui-react-native/spinner": "0.1.1"
+    "@fluentui-react-native/spinner": "^0.1.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
