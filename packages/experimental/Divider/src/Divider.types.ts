@@ -17,12 +17,12 @@ export interface DividerCoreProps {
   color?: ColorValue;
   /**
    * The size of the Divider inset - the margin before the start and after the end of the divider.
-   * Default: `0`
+   * @default 0
    */
   insetSize?: DividerInsetSize;
   /**
    * Whether the divider is rendered as a horizontal line or a vertical line.
-   * Default: `false`
+   * @default false
    */
   vertical?: boolean;
 }
@@ -30,12 +30,12 @@ export interface DividerCoreProps {
 export interface DividerProps extends DividerCoreProps {
   /**
    * If a text or icon is passed, this dictates where content appears in the divider: at the start, centered, or towards the end.
-   * Default: `center`
+   * @default 'center'
    */
   alignContent?: DividerAlignment;
   /**
    * If no color is passed, the divider and its content are colored using different theme tokens depending on the value of this prop.
-   * Default: `default`
+   * @default 'default'
    */
   appearance?: DividerAppearance;
   /**
@@ -51,15 +51,17 @@ export interface DividerTokens extends DividerCoreProps, LayoutTokens {
   contentColor?: ColorValue;
   /**
    * The padding of divider content between the start and end lines.
-   * Default = `8`.
+   * @default 8
    */
   contentPadding?: string | number;
   /**
    * The flex value of the line after content, set to 0 if `alignContent` = `end`.
+   * @default 1
    */
   flexAfter?: number;
   /**
    * The flex value of the line before content, set to 0 if `alignContent` = `start`.
+   * @default 1
    */
   flexBefore?: number;
   /**
@@ -68,12 +70,12 @@ export interface DividerTokens extends DividerCoreProps, LayoutTokens {
   lineColor?: ColorValue;
   /**
    * The minimum size of a line shrunken by a non-centered divider.
-   * Default: `8`
+   * @default 8
    */
   minLineSize?: number;
   /**
    * The thickness of the Divider lines
-   * Default: `1`.
+   * @default 1
    */
   thickness?: number;
 }

@@ -1,35 +1,47 @@
+import { useMemo } from 'react';
+import { ViewProps } from 'react-native';
 import { Theme } from '@fluentui-react-native/framework';
-import { layoutStyles } from '@fluentui-react-native/tokens';
-import { DividerTokens, DividerSlotProps, DividerAppearance } from './Divider.types';
-import { IconPropsV1 } from '@fluentui-react-native/icon';
+import { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
+import { TextProps } from '@fluentui-react-native/text';
+import { DividerTokens, DividerAppearance } from './Divider.types';
 
-export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: IconPropsV1): DividerSlotProps => {
-  let iconProps: IconPropsV1 = {};
-  if (icon) {
-    if (icon.fontSource) {
-      iconProps = {
-        fontSource: {
-          ...icon.fontSource,
-          color: tokens.color || tokens.contentColor,
-        },
-      };
-    } else if (icon.svgSource) {
-      iconProps = {
-        svgSource: {
-          ...icon.svgSource,
-          color: tokens.color || tokens.contentColor,
-        },
-      };
-    }
+const getIconProps = (tokens: DividerTokens, icon: IconProps): IconProps => {
+  if (icon.fontSource) {
+    return {
+      fontSource: {
+        ...icon.fontSource,
+        color: tokens.color || tokens.contentColor,
+      },
+    };
+  } else if (icon.svgSource) {
+    return {
+      svgSource: {
+        ...icon.svgSource,
+        color: tokens.color || tokens.contentColor,
+      },
+    };
+  } else {
+    throw new Error('IconProps require either a fontSource or svgSource; neither has been passed.');
   }
-  return {
-    root: {
+};
+
+export const useDividerSlotProps = (tokens: DividerTokens, icon?: IconProps) => {
+  const rootProps: ViewProps = useMemo(
+    () => ({
       style: {
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
         flexDirection: tokens.vertical ? 'column' : 'row',
-        ...layoutStyles.from(tokens, theme),
+        minWidth: tokens.minWidth,
+        maxWidth: tokens.maxWidth,
+        minHeight: tokens.minHeight,
+        maxHeight: tokens.maxHeight,
+        padding: tokens.padding,
+        paddingStart: tokens.paddingStart,
+        paddingEnd: tokens.paddingEnd,
+        paddingHorizontal: tokens.paddingHorizontal,
+        paddingVertical: tokens.paddingVertical,
         ...(tokens.vertical
           ? {
               paddingVertical: tokens.insetSize,
@@ -39,8 +51,24 @@ export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: 
               paddingHorizontal: tokens.insetSize,
             }),
       },
-    },
-    beforeLine: {
+    }),
+    [
+      tokens.vertical,
+      tokens.insetSize,
+      tokens.minHeight,
+      tokens.maxHeight,
+      tokens.minWidth,
+      tokens.maxWidth,
+      tokens.padding,
+      tokens.paddingHorizontal,
+      tokens.paddingVertical,
+      tokens.paddingStart,
+      tokens.paddingEnd,
+    ],
+  );
+
+  const beforeLineProps: ViewProps = useMemo(
+    () => ({
       style: {
         flexBasis: tokens.minLineSize,
         flex: tokens.flexBefore,
@@ -50,8 +78,12 @@ export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: 
           ? { borderLeftWidth: tokens.thickness, minHeight: tokens.minLineSize }
           : { borderTopWidth: tokens.thickness, minWidth: tokens.minLineSize }),
       },
-    },
-    afterLine: {
+    }),
+    [tokens.color, tokens.flexBefore, tokens.lineColor, tokens.minLineSize, tokens.thickness, tokens.vertical],
+  );
+
+  const afterLineProps: ViewProps = useMemo(
+    () => ({
       style: {
         flexBasis: tokens.minLineSize,
         flex: tokens.flexAfter,
@@ -61,20 +93,33 @@ export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: 
           ? { borderLeftWidth: tokens.thickness, minHeight: tokens.minLineSize }
           : { borderTopWidth: tokens.thickness, minWidth: tokens.minLineSize }),
       },
-    },
-    wrapper: {
+    }),
+    [tokens.color, tokens.flexAfter, tokens.lineColor, tokens.minLineSize, tokens.thickness, tokens.vertical],
+  );
+
+  const wrapperProps: ViewProps = useMemo(
+    () => ({
       style: {
         flex: 0,
         ...(tokens.vertical ? { paddingVertical: tokens.contentPadding } : { paddingHorizontal: tokens.contentPadding }),
       },
-    },
-    text: {
+    }),
+    [tokens.contentPadding, tokens.vertical],
+  );
+
+  const textProps: TextProps = useMemo(
+    () => ({
       style: {
         color: tokens.color || tokens.contentColor,
       },
-    },
-    icon: iconProps,
-  };
+    }),
+    [tokens.color, tokens.contentColor],
+  );
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const iconProps: IconProps = useMemo(() => (icon ? getIconProps(tokens, icon) : {}), [icon, tokens.color, tokens.contentColor]);
+
+  return { rootProps, beforeLineProps, afterLineProps, wrapperProps, textProps, iconProps };
 };
 
 export const colorsFromAppearance = (appearance: DividerAppearance, theme: Theme): Pick<DividerTokens, 'contentColor' | 'lineColor'> => {
