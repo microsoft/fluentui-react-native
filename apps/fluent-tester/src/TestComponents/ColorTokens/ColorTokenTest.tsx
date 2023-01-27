@@ -31,19 +31,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5,
-    overflow: 'hidden',
   },
   stackStyle: {
     borderWidth: 2,
     padding: 12,
     margin: 8,
-    overflow: 'hidden',
   },
   statusView: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     margin: 8,
+  },
+  // Needed to ensure that with the button is toggled on, the top of the newly shown
+  // content is visible so the user knows to scroll down
+  toggleButtonAreaPadding: {
+    paddingBottom: 10,
   },
 });
 
@@ -55,7 +58,7 @@ const getSwatchColorStyle = (colorName: string, colorValue: ColorValue): ViewSty
 type ColorTokenProps = { colorValue: ColorValue; colorName: string };
 const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps) => {
   if (p.colorValue === undefined) {
-    console.log('Color token ' + p.colorName + ' is undefined');
+    console.warn('Color token ' + p.colorName + ' is undefined');
   }
 
   const themedStyles = getThemedStyles(useTheme());
@@ -75,6 +78,8 @@ const getSwatch = (item) => {
   const { colorValue, colorName } = item;
   return <ColorToken key={colorName} colorValue={colorValue} colorName={colorName} />;
 };
+
+/// Alias color tokens
 
 const AliasColorTokensSwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
@@ -106,11 +111,13 @@ const AliasColorTokensSwatchList: React.FunctionComponent = () => {
   const renderSwatch = React.useCallback(getSwatch, []);
 
   return (
-    <View style={commonTestStyles.view} removeClippedSubviews={true}>
+    <View style={commonTestStyles.view}>
       <View style={styles.stackStyle}>{aliasColorTokensAsArray.map((item) => renderSwatch(item))}</View>
     </View>
   );
 };
+
+/// Global color tokens - neutral
 
 const globalNeutralColorNamesSortedDarkToLight = Object.keys(globalTokens.color)
   .filter((globalColorName) => globalColorName.includes('grey') || globalColorName === 'black' || globalColorName === 'white')
@@ -136,6 +143,8 @@ const GlobalNeutralColorTokensSwatchList: React.FunctionComponent = () => {
     </View>
   );
 };
+
+/// Global color tokens - shared
 
 const globalSharedColorNames = Object.keys(globalTokens.color).filter((key) => globalTokens.color[key].primary !== undefined);
 const globalSharedColorVariantsSortedDarkToLight = Object.keys(globalTokens.color.red).sort((color1, color2) => {
@@ -173,24 +182,20 @@ const GlobalSharedColorTokensSwatchList: React.FunctionComponent = () => {
       </Svg>
     );
   };
-  const svgProps: SvgIconProps = {
-    src: toggleSvg,
-  };
 
+  const svgProps: SvgIconProps = { src: toggleSvg };
   const plusCodepoint = 0x2795;
   const minusCodepoint = 0x2796;
   const fontIconProps = {
     codepoint: showGlobalSharedColors ? minusCodepoint : plusCodepoint,
     fontSize: 10,
   };
-
   const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
 
-  console.log(showGlobalSharedColors);
   return (
-    <View>
+    <View style={styles.toggleButtonAreaPadding}>
       <View style={styles.statusView}>
-        <Text variant="headerStandard">Show global shared color tokens</Text>
+        <Text variant="subheaderStandard">Show color tokens</Text>
         <ToggleButton iconOnly={true} icon={toggleIconProps} onClick={() => setShowGlobalSharedColors(!showGlobalSharedColors)} />
       </View>
       {showGlobalSharedColors && (

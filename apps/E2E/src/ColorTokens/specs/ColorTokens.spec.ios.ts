@@ -10,12 +10,13 @@ describe('Color Tokens Testing Initialization', function () {
   });
 
   it('Click and navigate to Color Tokens test page', async () => {
+    await expect(false).toBeTruthy();
     await ColorTokenPageObject.mobileScrollToComponentButton();
     await ColorTokenPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToColorTokensPage();
-    await ColorTokenPageObject.waitForPageDisplayed(PAGE_TIMEOUT * 2);
+    await ColorTokenPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ColorTokenPageObject.isPageLoaded()).toBeTruthy(ColorTokenPageObject.ERRORMESSAGE_PAGELOAD);
   });
