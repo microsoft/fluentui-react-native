@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove `useSizeClassIOS_DO_NOT_USE`",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "mischreiber@microsoft.com",
+  "dependentChangeType": "patch"
+}
