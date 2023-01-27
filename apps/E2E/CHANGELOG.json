@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 27 Jan 2023 21:31:18 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.2",
+      "version": "1.12.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "1d0f9e478022dc4d699616ba87f3d98fc7d66b51",
+            "comment": "Change console.error -> console.warn in BasePage"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Jan 2023 17:47:06 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.12.1",
       "version": "1.12.1",
