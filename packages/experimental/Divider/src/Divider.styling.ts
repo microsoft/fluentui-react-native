@@ -42,7 +42,7 @@ export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: 
     },
     beforeLine: {
       style: {
-        flexBasis: 8,
+        flexBasis: tokens.minLineSize,
         flex: tokens.flexBefore,
         borderColor: tokens.color || tokens.lineColor,
         borderStyle: 'solid',
@@ -51,7 +51,7 @@ export const getDividerSlotProps = (tokens: DividerTokens, theme: Theme, icon?: 
     },
     afterLine: {
       style: {
-        flexBasis: 8,
+        flexBasis: tokens.minLineSize,
         flex: tokens.flexAfter,
         borderColor: tokens.color || tokens.lineColor,
         borderStyle: 'solid',

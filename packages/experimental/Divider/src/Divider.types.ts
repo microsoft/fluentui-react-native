@@ -67,8 +67,13 @@ export interface DividerTokens extends DividerCoreProps, LayoutTokens {
    */
   lineColor?: ColorValue;
   /**
+   * The minimum size of a line shrunken by a non-centered divider.
+   * Default: `8`
+   */
+  minLineSize?: number;
+  /**
    * The thickness of the Divider lines
-   * Default: `1px`.
+   * Default: `1`.
    */
   thickness?: number;
 }
