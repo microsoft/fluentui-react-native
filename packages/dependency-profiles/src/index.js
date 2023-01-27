@@ -138,10 +138,6 @@ module.exports = {
       "name": "@fluentui-react-native/experimental-appearance-additions",
       "version": "0.2.0"
     },
-    "@fluentui-react-native/experimental-appearance-additions": {
-      "name": "@fluentui-react-native/experimental-appearance-additions",
-      "version": "0.1.0"
-    },
     "@fluentui-react-native/experimental-avatar": {
       "name": "@fluentui-react-native/experimental-avatar",
       "version": "0.17.10"
