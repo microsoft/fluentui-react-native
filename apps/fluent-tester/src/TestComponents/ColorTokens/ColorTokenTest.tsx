@@ -29,11 +29,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5,
+    overflow: 'hidden',
   },
   stackStyle: {
     borderWidth: 2,
     padding: 12,
     margin: 8,
+    overflow: 'hidden',
   },
 });
 
@@ -96,7 +98,7 @@ const AliasColorTokensSwatchList: React.FunctionComponent = () => {
   const renderSwatch = React.useCallback(getSwatch, []);
 
   return (
-    <View style={commonTestStyles.view}>
+    <View style={commonTestStyles.view} removeClippedSubviews={true}>
       <View style={styles.stackStyle}>{aliasColorTokensAsArray.map((item) => renderSwatch(item))}</View>
     </View>
   );
@@ -149,7 +151,7 @@ const GlobalSharedColorTokensSwatchList: React.FunctionComponent = () => {
 
   return (
     <View style={commonTestStyles.view}>
-      <View style={styles.stackStyle}>{renderSwatch(globalSharedColorTokensAsArray[0])}</View>
+      <View style={styles.stackStyle}>{globalSharedColorTokensAsArray.map((item) => renderSwatch(item))}</View>
     </View>
   );
 };
