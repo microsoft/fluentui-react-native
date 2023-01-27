@@ -21,6 +21,7 @@ steps:
       ls
     workingDirectory: apps/E2E/errorShots
     displayName: "See if error shot is getting created"
+    condition: succeededOrFailed()
 
   - template: e2e-publish-artifacts.yml
     parameters:
