@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/apple-theme",
-  "version": "0.18.4",
-  "description": "A FluentUI React Native theme that pulls constants from FluentUI Apple",
+  "name": "@fluentui-react-native/experimental-appearance-additions",
+  "version": "0.2.0",
+  "description": "A module to expose callbacks for additional traitCollection changes.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
@@ -16,10 +16,8 @@
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
-    "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "fluentui-scripts dev",
-    "start-test": "fluentui-scripts jest-watch",
+    "depcheck": "fluentui-scripts depcheck",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "prettier": "fluentui-scripts prettier",
@@ -28,32 +26,20 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/theming/apple-theme"
-  },
-  "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.16.26 <1.0.0",
-    "@fluentui-react-native/design-tokens-ios": "^0.42.0",
-    "@fluentui-react-native/design-tokens-macos": "^0.42.0",
-    "@fluentui-react-native/memo-cache": "^1.1.7",
-    "@fluentui-react-native/theme": ">=0.7.18 <1.0.0",
-    "@fluentui-react-native/theme-tokens": "^0.24.0",
-    "@fluentui-react-native/theme-types": ">=0.30.0 <1.0.0",
-    "@fluentui-react-native/theming-utils": "^0.23.0",
-    "assert-never": "^1.2.1"
+    "directory": "packages/experimental/AppearanceAdditions"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@types/react": "^17.0.2",
     "@types/react-native": "^0.68.0",
+    "@types/use-subscription": "1.0.0",
     "react": "17.0.2",
     "react-native": "^0.68.0",
-    "react-native-macos": "^0.68.0"
+    "use-subscription": ">=1.0.0 <1.6.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-macos": "^0.68.0"
+    "react-native": "^0.68.0"
   },
   "rnx-kit": {
     "reactNativeVersion": "^0.68",
@@ -61,9 +47,7 @@
     "kitType": "library",
     "capabilities": [
       "core",
-      "core-android",
       "core-ios",
-      "core-macos",
       "react"
     ]
   }

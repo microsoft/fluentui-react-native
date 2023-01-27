@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 25 Jan 2023 21:31:18 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Jan 2023 17:47:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.23
+
+Thu, 26 Jan 2023 17:47:06 GMT
+
+### Patches
+
+- Fix MenuPopover props not getting called (email not defined)
 
 ## 1.2.22
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Thu, 26 Jan 2023 18:46:08 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.18.4",
+      "version": "0.18.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "f5de30163225faeaea00d33d1738b2f2fba685c6",
+            "comment": "Memoize theme creation for android, ios, macOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Jan 2023 21:31:18 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.18.3",
       "version": "0.18.3",
