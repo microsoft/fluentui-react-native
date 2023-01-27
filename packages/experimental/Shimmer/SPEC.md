@@ -97,6 +97,87 @@ The slots can be modified using the `compose` function on the `Shimmer`. For mor
 Below is the set of props the Shimmer supports:
 
 ```ts
+export interface ShimmerCircleElement {
+  /**
+   * Shimmer element type.
+   */
+  type: 'circle';
+
+  /**
+   * Radius of the circle element.
+   * @defaultValue 12
+   */
+  radius?: number;
+
+  /**
+   * Note: cx and cy should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.
+   * Note: The behavior of element intersections is undefined.  https://www.github.com/Microsoft/fluentui-react-native Issue #866
+   */
+
+  /**
+   * The x-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
+   */
+  cx: number;
+
+  /**
+   * The y-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
+   */
+  cy: number;
+}
+
+/**
+ * Properties necessary to define a rectangular Shimmer element.
+ */
+export interface ShimmerRectElement {
+  /**
+   * Shimmer element type.
+   */
+  type: 'rect';
+
+  /**
+   * Width of the rect.
+   * @defaultValue 100%
+   */
+  width?: number;
+
+  /**
+   * Height of the rect.
+   * @defaultValue 16
+   */
+  height?: number;
+
+  /**
+   * Border radius for the x-axis of a rounded rect.
+   * @defaultValue 0
+   */
+  borderRadiusX?: number;
+
+  /**
+   * Border radius for the y-axis of a rounded rect.
+   * @defaultValue 0
+   */
+  borderRadiusY?: number;
+
+  /**
+   * Note: x and y should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.
+   * Note: The behavior of element intersections is undefined.  https://www.github.com/Microsoft/fluentui-react-native Issue #866
+   */
+
+  /**
+   * The x-axis position of the rect element's top-left corner in the Shimmer relative to the origin [top-left, (0,0)].
+   */
+  x: number;
+
+  /**
+   * The y-axis position of the rect element's top-left corner in the Shimmer relative to the origin [top-left, (0,0)].
+   */
+  y: number;
+}
+
+export type ShimmerElementTypes = ShimmerCircleElement | ShimmerRectElement;
+```
+
+```ts
 export interface ShimmerProps extends ViewProps {
   /**
    * Shimmer shapes that define the masking effect of the Shimmer control.
@@ -104,21 +185,27 @@ export interface ShimmerProps extends ViewProps {
   elements: Array<ShimmerElementTypes>;
 
   /**
-   * Specifies the Shimmer effect angle in degrees (produced by a gradient)
-   * @defaultValue 45 on Android, 0 on other platforms
+   * Specifies the Shimmer effect angle in degrees (produced by a gradient).
+   *
+   * @defaultValue 45 on @platform Android
+   * @defaultValue 0 on other platforms.
    */
   angle?: number;
 
   /**
-   * Specifies the animation delay time in milliseconds
-   * @defaultValue 500 on win32, 0 on other platforms
+   * Specifies the animation delay time in milliseconds.
+   *
+   * @defaultValue 500 on @platform win32
+   * @defaultValue 0 on other platforms.
    */
   delay?: number;
 
   /**
-   * Specifies the time required to traverse the control in milliseconds
+   * Specifies the time required to traverse the control in milliseconds.
    *
-   * @defaultValue 1000 on Android, 2000 on win32, 7000 on other platforms
+   * @defaultValue 1000 on @platform Android
+   * @defaultValue 2000 on @platform win32
+   * @defaultValue 7000 on other platforms.
    */
   duration?: number;
 
@@ -137,7 +224,9 @@ export interface ShimmerProps extends ViewProps {
   /**
    * Color you see when the shimmer wave is not animating.
    *
-   * @defaultValue theme.colors.neutralStencil1 on Android, theme.colors.bodyFrameDivider on win32, #E1E1E1/#404040 on other platforms for light/dark theme
+   * @defaultValue theme.colors.neutralStencil1 on @platform Android
+   * @defaultValue theme.colors.bodyFrameDivider on @platform win32
+   * @defaultValue #E1E1E1/#404040 for light/dark theme on other platforms.
    */
   shimmerColor?: ColorValue;
 
@@ -145,12 +234,15 @@ export interface ShimmerProps extends ViewProps {
    * Defines the tip color of the wave which has a linear gradient.
    * from shimmerColor to shimmerWaveColor to shimmerColor.
    *
-   * @defaultValue theme.colors.neutralStencil2 on Android, #E1E1E1 on win32, white/black on other platforms for light/dark theme
+   * @defaultValue theme.colors.neutralStencil2 on @platform Android
+   * @defaultValue #E1E1E1 on @platform win32
+   * @defaultValue white/black for light/dark theme on other platforms.
    */
   shimmerWaveColor?: ColorValue;
 
   /**
    * Width of the Shimmer wave.
+   *
    * @defaultValue '100%' of the 'width' property
    * @platform win32
    */
