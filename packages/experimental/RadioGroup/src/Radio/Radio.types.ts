@@ -183,6 +183,7 @@ export interface RadioProps extends PressablePropsExtended {
    * This defaults to 'after' unless the Radio is inside a RadioGroup with layout horizontal-stacked,
    * in which case it defaults to 'below'
    *
+   * 'below' is not supported from Fluent Android, renders as-is.
    * @default after
    */
   labelPosition?: 'after' | 'below';
