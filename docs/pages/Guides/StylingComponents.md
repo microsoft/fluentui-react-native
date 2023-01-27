@@ -1,16 +1,20 @@
 # How to Style Components with Customize
-TODO
+You can use the `customize` API to modify the tokens that are part of the component. If you have your own design guidelines that diverge from our default component API, you can call `customize()` to override the styles.
 
-Pull info from links below and include some examples
+Example:
+```ts
+const PinkButton = Button.customize({
+    backgroundColor: 'pink',
+  })
+<PinkButton>Pink Button</PinkButton>
+```
 
-https://github.com/microsoft/fluentui-react-native/blob/main/docs/pages/Theming/Tokens/Overrides.md#overriding-component-tokens
-
-https://github.com/microsoft/fluentui-react-native/blob/main/docs/pages/Theming/Tokens/Overrides.md#overriding-component-tokens
-
-
+More information of Customize can be found here: [Customize API](../../../packages/framework/composition/README.md#customize)
 
 # Why use Customize instead of style = {{...}}
-TODO
+In FURN, we a token-style approach to styling our components. A token is a semantic representation of a style proerty. It allows you to customize the control directly, without needing to understand the details of the implementation.
+
+Using inline `styles={}` hurts performance. On the other hand, tokens are cached with `customize`. Since token values do not change on subsequent instances of the customized component, it wouldn't try to reassign tokens for every Instance, and is therefore a an optimized alternative to inlines `styles`.
 
 # Commom Issues when styling components with Customize
 
@@ -84,4 +88,17 @@ TODO
     },
   });
 ```
-##
+## Overriding both default and state tokens in one customized component
+
+Components have tokens set for states which override default tokens. These can also be customized.
+
+```ts
+const CustomRadioButton = RadioButton.customize({
+    backgroundColor: '#000000',
+    borderColor: '#000000',
+    selected: {
+      backgroundColor: '#005A9E',
+      borderColor: '#005A9E'
+    }
+  });
+```
