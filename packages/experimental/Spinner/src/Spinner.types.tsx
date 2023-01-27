@@ -59,6 +59,16 @@ export interface SpinnerProps extends ViewProps, SpinnerTokens {
    * Spinner label
    */
   label?: string;
+  /**
+   * Spinner animating or not
+   * @defaultValue 'true'
+   */
+  animating?: boolean;
+  /**
+   * Spinner hidden when not animating or not hidden
+   * @defaultValue 'true'
+   */
+  hidesWhenStopped?: boolean;
 }
 
 export interface SpinnerSvgProps extends SpinnerTokens {
