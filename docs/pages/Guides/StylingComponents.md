@@ -1,7 +1,9 @@
 # How to Style Components with Customize
+
 You can use the `customize` API to modify the tokens that are part of the component. If you have your own design guidelines that diverge from our default component API, you can call `customize()` to override the styles.
 
 Example:
+
 ```ts
 const PinkButton = Button.customize({
     backgroundColor: 'pink',
@@ -12,20 +14,21 @@ const PinkButton = Button.customize({
 More information of Customize can be found here: [Customize API](../../../packages/framework/composition/README.md#customize)
 
 # Why use Customize instead of style = {{...}}
-In FURN, we a token-style approach to styling our components. A token is a semantic representation of a style proerty. It allows you to customize the control directly, without needing to understand the details of the implementation.
 
-Using inline `styles={}` hurts performance. On the other hand, tokens are cached with `customize`. Since token values do not change on subsequent instances of the customized component, it wouldn't try to reassign tokens for every Instance, and is therefore a an optimized alternative to inlines `styles`.
+In FURN, we use a token-style approach to styling our components. Token is a semantic representation of a style proerty. It allows you to customize the control directly, without needing to understand the details of the implementation.
+
+Using inline `styles={}` is poor for performance. On the other hand, tokens can be cached. Since token values do not change on multiple instances of a customized component, token values can be caches on the first instance, and is therefore a more optimized alternative.
 
 # Commom Issues when styling components with Customize
 
 ## State Precedence
 
-  If a state has a lower precedence than another state, tokens set for that state may be overridden by tokens set on a state with a higher precedence.
+If a state has lower precedence than another, tokens set for that given state may be overridden by those set on a state with higher precedence.
 
-  For example, the following buttonStates list states in order of precedence (low to high).
+For example, look at the following `buttonStates` list in order of precedence (low to high).
 
-  ```ts
-  export const buttonStates: (keyof ButtonTokens)[] = [
+```ts
+export const buttonStates: (keyof ButtonTokens)[] = [
   'primary',
   'subtle',
   'hovered',
@@ -36,69 +39,74 @@ Using inline `styles={}` hurts performance. On the other hand, tokens are cached
   'focused',
   'pressed',
   'disabled',
-  ];
+];
 ```
-  In the following code bit below, the variant value has been set on `subtle` state, but this change was not being reflected on render.
+
+In the following code bit below, the variant value has been set for `subtle` state, but this value was not being reflected on render.
 
 ```ts
-  const CustomizedButton = Button.customize({
-    subtle: {
-      backgroundColor: 'transparent',
-      color: props.color,
-      iconColor: props.color,
+const CustomizedButton = Button.customize({
+  subtle: {
+    backgroundColor: 'transparent',
+    color: props.color,
+    iconColor: props.color,
+    variant: 'body2Strong',
+    disabled: {
+      color: props.disabledColor,
+    },
+    pressed: {
+      color: props.pressedColor,
+    },
+  },
+  medium: {
+    hasContent: {
+      minWidth: 0,
+      padding: globalTokens.sizeNone,
+      paddingHorizontal: globalTokens.sizeNone,
+    },
+  },
+});
+```
+
+States with higher precedence -- `small`, `medium`, and `large` -- override the variant with their own designated value. In order to avoid this issue, the `variant` token value must be set on a state with higher precedence.
+
+The given issue was resolved by setting the variant value when `medium` and `hasContent` states are both true.
+
+```ts
+const CustomizedButton = Button.customize({
+  subtle: {
+    backgroundColor: 'transparent',
+    color: props.color,
+    iconColor: props.color,
+    disabled: {
+      color: props.disabledColor,
+    },
+    pressed: {
+      color: props.pressedColor,
+    },
+  },
+  medium: {
+    hasContent: {
+      minWidth: 0,
+      padding: globalTokens.sizeNone,
+      paddingHorizontal: globalTokens.sizeNone,
       variant: 'body2Strong',
-      disabled: {
-        color: props.disabledColor,
-      },
-      pressed: {
-        color: props.pressedColor,
-      },
     },
-    medium: {
-      hasContent: {
-        minWidth: 0,
-        padding: globalTokens.sizeNone,
-        paddingHorizontal: globalTokens.sizeNone,
-      },
-    },
-  });
+  },
+});
 ```
- Other states with higher precedence -- `small`, `medium`, and `large` -- were overriding the variant value with their own designated value. In order to avoid this issue, the `variant` token value needs to be set on a higher precedent state. This issue was resolved by setting the variant value on state with higher precedent, in this case when `medium` and `hasContent` states are both true.
 
-```ts
-  const CustomizedButton = Button.customize({
-    subtle: {
-      backgroundColor: 'transparent',
-      color: props.color,
-      iconColor: props.color,
-      disabled: {
-        color: props.disabledColor,
-      },
-      pressed: {
-        color: props.pressedColor,
-      },
-    },
-    medium: {
-      hasContent: {
-        minWidth: 0,
-        padding: globalTokens.sizeNone,
-        paddingHorizontal: globalTokens.sizeNone,
-        variant: 'body2Strong',
-      },
-    },
-  });
-```
 ## Overriding both default and state tokens in one customized component
 
 Components have tokens set for states which override default tokens. These can also be customized.
 
 ```ts
 const CustomRadioButton = RadioButton.customize({
-    backgroundColor: '#000000',
-    borderColor: '#000000',
-    selected: {
-      backgroundColor: '#005A9E',
-      borderColor: '#005A9E'
-    }
-  });
+  backgroundColor: '#000000',
+  borderColor: '#000000',
+  selected: {
+    backgroundColor: '#005A9E',
+    borderColor: '#005A9E',
+  },
+});
 ```
