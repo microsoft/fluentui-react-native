@@ -112,3 +112,46 @@ const CustomRadioButton = RadioButton.customize({
 ```
 
 More information on overriding tokens can be found here: [Overrides](../../../\docs\pages\Theming\Tokens\Overrides.md)
+
+## Using Customize with Compose
+
+You may have a scenario where you need to modify the styling and the options that build the component itself. You can achieve this by using both `compose` and `customize` or you can include style customizations in `compose` directly.
+
+Example using both `compose` and `customize`:
+
+```ts
+const ComposedButton = Button.compose({
+  slotProps: {
+    root: buildProps(
+      (tokens: ButtonTokens) => ({
+        style: {
+          backgroundColor: tokens.backgroundColor,
+        },
+      }),
+      ['backgroundColor'],
+    ),
+  },
+});
+
+const CustomizedButton = ComposedButton.customize({
+  subtle: { hovered: { backgroundColor: 'red' } },
+});
+```
+
+Example only using `compose`:
+
+```ts
+const ComposedButton = Button.compose({
+  tokens: [{ subtle: { hovered: { backgroundColor: 'red', color: 'green' } } }],
+  slotProps: {
+    root: buildProps(
+      (tokens: ButtonTokens) => ({
+        style: {
+          backgroundColor: tokens.backgroundColor,
+        },
+      }),
+      ['backgroundColor'],
+    ),
+  },
+});
+```
