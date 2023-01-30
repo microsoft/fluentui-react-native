@@ -124,6 +124,8 @@ const globalNeutralColorNamesSortedDarkToLight = Object.keys(globalTokens.color)
   .sort((color1, color2) => {
     const color1hex = globalTokens.color[color1];
     const color2hex = globalTokens.color[color2];
+    // All global color tokens are hex based colors, so we can make the assumption that ordering the hex values alphabetically
+    // will order the colors from dark to light
     return color1hex === color2hex ? 0 : color1hex < color2hex ? -1 : 1;
   });
 
@@ -150,6 +152,8 @@ const globalSharedColorNames = Object.keys(globalTokens.color).filter((key) => g
 const globalSharedColorVariantsSortedDarkToLight = Object.keys(globalTokens.color.red).sort((color1, color2) => {
   const color1hex = globalTokens.color.red[color1];
   const color2hex = globalTokens.color.red[color2];
+  // All global color tokens are hex based colors, so we can make the assumption that ordering the hex values alphabetically
+  // will order the colors from dark to light
   return color1hex === color2hex ? 0 : color1hex < color2hex ? -1 : 1;
 });
 const globalSharedColorTokensAsArray = globalSharedColorNames
