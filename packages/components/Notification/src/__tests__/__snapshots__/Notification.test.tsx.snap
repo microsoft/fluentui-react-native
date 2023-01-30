@@ -33,11 +33,11 @@ exports[`Notification component tests Notification default 1`] = `
       "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 8,
+        "height": 0,
         "width": 0,
       },
-      "shadowOpacity": 0.14,
-      "shadowRadius": 4,
+      "shadowOpacity": 0.12,
+      "shadowRadius": 1,
       "start": undefined,
       "top": undefined,
       "width": 375,
@@ -92,11 +92,11 @@ exports[`Notification component tests Notification default 1`] = `
         "paddingVertical": 12,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 8,
           "width": 0,
         },
-        "shadowOpacity": 0.12,
-        "shadowRadius": 0.5,
+        "shadowOpacity": 0.14,
+        "shadowRadius": 8,
         "width": 375,
       }
     }
