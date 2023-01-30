@@ -2,13 +2,6 @@ import { TABSITEMV1_TEST_COMPONENT, TABSV1_TESTPAGE, TABSV1_TEST_COMPONENT, HOME
 import { BasePage, By } from '../../common/BasePage';
 
 class TabsV1PageObject extends BasePage {
-  /******************************************************************/
-  /**************** UI Element Interaction Methods ******************/
-  /******************************************************************/
-  async getTabItemAccesibilityRole(): Promise<string> {
-    return await (await this._tabItem).getAttribute('ControlType');
-  }
-
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
