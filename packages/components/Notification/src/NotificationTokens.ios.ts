@@ -8,31 +8,6 @@ import { DynamicColorIOS } from 'react-native';
  * Fluent 2 colors are not yet in the token pipeline for iOS so DynamicColorIOS is necessary for dark mode
  */
 const notificationColors = {
-  brandBackground4: DynamicColorIOS({
-    light: '#EBF3FC',
-    dark: '#082338',
-  }),
-  brandForeground4: DynamicColorIOS({
-    light: '#0F6CBD',
-    dark: '#77B7F7',
-  }),
-  foregroundDisabled2: DynamicColorIOS({
-    light: '#FFFFFF',
-    dark: '#3D3D3D',
-  }),
-  PaletteRedForeground1: DynamicColorIOS({
-    light: '#9F282C',
-    dark: '#E37D81',
-  }),
-  PaletteYellowBackground1: DynamicColorIOS({
-    light: '#FFFBD6',
-    dark: '#4C4400',
-  }),
-  PaletteYellowForeground1: DynamicColorIOS({
-    light: '#4C4400',
-    dark: '#FDEE65',
-  }),
-
   /**
    * None of the foreground tokens above have pressed versions so the foreground color with an alpha value is used.
    * The FluentUI Apple NotificationView was used to color match.
@@ -77,21 +52,21 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       shadowToken: undefined,
     },
     primary: {
-      backgroundColor: notificationColors.brandBackground4,
-      color: notificationColors.brandForeground4,
+      backgroundColor: t.colors.brandBackgroundTint,
+      color: t.colors.brandForegroundTint,
       disabledColor: t.colors.brandForegroundDisabled1,
       pressedColor: notificationColors.primaryPressed,
     },
     neutral: {
       backgroundColor: t.colors.neutralBackground4,
       color: t.colors.neutralForeground2,
-      disabledColor: notificationColors.foregroundDisabled2,
+      disabledColor: t.colors.neutralForegroundDisabled2,
       pressedColor: notificationColors.neutralPressed,
     },
     primaryBar: {
-      backgroundColor: notificationColors.brandBackground4,
+      backgroundColor: t.colors.brandBackgroundTint,
       borderWidth: 0,
-      color: notificationColors.brandForeground4,
+      color: t.colors.brandForegroundTint,
       disabledColor: t.colors.brandForegroundDisabled1,
       pressedColor: notificationColors.primaryPressed,
     },
@@ -106,17 +81,17 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       backgroundColor: t.colors.neutralBackground5,
       borderWidth: 0,
       color: t.colors.neutralForeground2,
-      disabledColor: notificationColors.foregroundDisabled2,
+      disabledColor: t.colors.neutralForegroundDisabled2,
       pressedColor: notificationColors.neutralPressed,
     },
     danger: {
       backgroundColor: t.colors.dangerBackground1,
-      color: notificationColors.PaletteRedForeground1,
+      color: t.colors.dangerForeground1,
       pressedColor: notificationColors.dangerPressed,
     },
     warning: {
-      backgroundColor: notificationColors.PaletteYellowBackground1,
-      color: notificationColors.PaletteYellowForeground1,
+      backgroundColor: t.colors.warningBackground1,
+      color: t.colors.warningForeground1,
       pressedColor: notificationColors.warningPressed,
     },
   } as NotificationTokens);

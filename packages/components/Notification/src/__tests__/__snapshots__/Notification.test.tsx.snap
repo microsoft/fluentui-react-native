@@ -5,14 +5,7 @@ exports[`Notification component tests Notification default 1`] = `
   style={
     Object {
       "alignSelf": "center",
-      "backgroundColor": Object {
-        "dynamic": Object {
-          "dark": "#082338",
-          "highContrastDark": undefined,
-          "highContrastLight": undefined,
-          "light": "#EBF3FC",
-        },
-      },
+      "backgroundColor": "#cfe4fa",
       "borderColor": "transparent",
       "borderRadius": 12,
       "bottom": undefined,
@@ -59,14 +52,7 @@ exports[`Notification component tests Notification default 1`] = `
       Object {
         "alignItems": undefined,
         "alignSelf": "center",
-        "backgroundColor": Object {
-          "dynamic": Object {
-            "dark": "#082338",
-            "highContrastDark": undefined,
-            "highContrastLight": undefined,
-            "light": "#EBF3FC",
-          },
-        },
+        "backgroundColor": "#cfe4fa",
         "borderBottomWidth": undefined,
         "borderColor": "transparent",
         "borderEndWidth": undefined,
@@ -117,14 +103,7 @@ exports[`Notification component tests Notification default 1`] = `
         style={
           Object {
             "alignSelf": "flex-start",
-            "color": Object {
-              "dynamic": Object {
-                "dark": "#77B7F7",
-                "highContrastDark": undefined,
-                "highContrastLight": undefined,
-                "light": "#0F6CBD",
-              },
-            },
+            "color": "#0f548c",
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "400",
@@ -143,16 +122,7 @@ exports[`Notification component tests Notification default 1`] = `
       accessible={true}
       appearance="subtle"
       collapsable={false}
-      color={
-        Object {
-          "dynamic": Object {
-            "dark": "#77B7F7",
-            "highContrastDark": undefined,
-            "highContrastLight": undefined,
-            "light": "#0F6CBD",
-          },
-        }
-      }
+      color="#0f548c"
       disabledColor="#2886de"
       enableFocusRing={true}
       focusable={true}
@@ -202,14 +172,7 @@ exports[`Notification component tests Notification default 1`] = `
         numberOfLines={0}
         style={
           Object {
-            "color": Object {
-              "dynamic": Object {
-                "dark": "#77B7F7",
-                "highContrastDark": undefined,
-                "highContrastLight": undefined,
-                "light": "#0F6CBD",
-              },
-            },
+            "color": "#0f548c",
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "600",
