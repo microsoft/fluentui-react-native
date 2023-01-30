@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-tabs",
-  "version": "0.8.27",
+  "version": "0.8.28",
   "description": "A cross-platform Experimental Tabs component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,13 +26,13 @@
     "directory": "packages/experimental/Tabs"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.8.36",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.13 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.11.25 <1.0.0",
-    "@fluentui-react-native/text": ">=0.19.15 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.20.5 <1.0.0",
+    "@fluentui-react-native/framework": "0.8.37",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.14 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.11.26 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.16 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.20.6 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.1 <1.0.0",
-    "@fluentui-react-native/icon": "0.17.7",
+    "@fluentui-react-native/icon": "0.17.8",
     "@fluentui-react-native/adapters": "0.10.0",
     "tslib": "^2.3.1"
   },

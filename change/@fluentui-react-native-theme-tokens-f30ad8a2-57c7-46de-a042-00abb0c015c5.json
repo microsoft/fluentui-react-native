@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add `darkElevated` theme",
-  "packageName": "@fluentui-react-native/theme-tokens",
-  "email": "mischreiber@microsoft.com",
-  "dependentChangeType": "patch"
-}
