@@ -45,6 +45,7 @@
     "@fluentui-react-native/default-theme": ">=0.16.26 <1.0.0",
     "@fluentui-react-native/dropdown": ">=0.7.20 <1.0.0",
     "@fluentui-react-native/experimental-activity-indicator": ">=0.7.13 <1.0.0",
+    "@fluentui-react-native/experimental-appearance-additions": "^0.2.0",
     "@fluentui-react-native/experimental-avatar": ">=0.17.10 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.16.83",
     "@fluentui-react-native/experimental-checkbox": "0.13.32",
