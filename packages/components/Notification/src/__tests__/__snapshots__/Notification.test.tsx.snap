@@ -14,6 +14,7 @@ exports[`Notification component tests Notification default 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
+      "alignSelf": "center",
       "backgroundColor": Object {
         "dynamic": Object {
           "dark": "#082338",
@@ -30,8 +31,17 @@ exports[`Notification component tests Notification default 1`] = `
       "justifyContent": "space-between",
       "marginHorizontal": 16,
       "minHeight": 52,
-      "padding": 16,
-      "paddingVertical": 12,
+      "right": undefined,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 8,
+        "width": 0,
+      },
+      "shadowOpacity": 0.14,
+      "shadowRadius": 4,
+      "start": undefined,
+      "top": undefined,
+      "width": 375,
     }
   }
 >
@@ -124,19 +134,47 @@ exports[`Notification component tests Notification default 1`] = `
     }
     style={
       Object {
-        "alignItems": "center",
+        "alignItems": undefined,
         "alignSelf": "center",
-        "backgroundColor": "transparent",
-        "borderColor": "#ffffff",
-        "borderRadius": 4,
+        "backgroundColor": Object {
+          "dynamic": Object {
+            "dark": "#082338",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#EBF3FC",
+          },
+        },
+        "borderBottomWidth": undefined,
+        "borderColor": "transparent",
+        "borderEndWidth": undefined,
+        "borderLeftWidth": undefined,
+        "borderRadius": 12,
+        "borderRightWidth": undefined,
+        "borderStartWidth": undefined,
+        "borderTopWidth": undefined,
         "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
-        "justifyContent": "center",
-        "marginStart": 16,
-        "minWidth": 0,
-        "padding": 0,
-        "paddingHorizontal": 0,
+        "flexWrap": undefined,
+        "justifyContent": "space-between",
+        "minHeight": 52,
+        "padding": 16,
+        "paddingBottom": undefined,
+        "paddingEnd": undefined,
+        "paddingHorizontal": undefined,
+        "paddingLeft": undefined,
+        "paddingRight": undefined,
+        "paddingStart": undefined,
+        "paddingTop": undefined,
+        "paddingVertical": 12,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0.12,
+        "shadowRadius": 0.5,
+        "width": 375,
       }
     }
   >

@@ -168,7 +168,7 @@ exports[`Switch Disabled 1`] = `
         ],
       },
       "trackBackgroundStyle": Object {
-        "backgroundColor": "rgba(180, 214, 250, 1)",
+        "backgroundColor": "rgba(240, 240, 240, 1)",
       },
     }
   }
@@ -199,7 +199,7 @@ exports[`Switch Disabled 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(180, 214, 250, 1)",
+          "backgroundColor": "rgba(240, 240, 240, 1)",
           "borderRadius": 100,
           "flexDirection": "row",
           "height": 32,

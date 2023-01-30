@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.28
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.37
+- Bump @fluentui-react-native/interactive-hooks to v0.22.14
+- Bump @fluentui-react-native/focus-zone to v0.11.26
+- Bump @fluentui-react-native/text to v0.19.16
+- Bump @fluentui-react-native/tokens to v0.20.6
+- Bump @fluentui-react-native/icon to v0.17.8
+
+## 0.8.27
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.36
+- Bump @fluentui-react-native/interactive-hooks to v0.22.13
+- Bump @fluentui-react-native/focus-zone to v0.11.25
+- Bump @fluentui-react-native/text to v0.19.15
+- Bump @fluentui-react-native/tokens to v0.20.5
+- Bump @fluentui-react-native/icon to v0.17.7
 
 ## 0.8.26
 

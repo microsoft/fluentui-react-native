@@ -151,11 +151,14 @@ export const mobileStyles = StyleSheet.create({
   },
   testVariants: {
     flexDirection: 'row',
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     paddingTop: 10,
     paddingBottom: 5,
     flex: 1,
     justifyContent: 'space-evenly',
+  },
+  pageStyle: {
+    padding: 5,
   },
   testList: {
     width: '100%',

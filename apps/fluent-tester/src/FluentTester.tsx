@@ -31,7 +31,7 @@ interface HeaderProps {
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   return {
     root: {
-      backgroundColor: t.colors.background,
+      backgroundColor: t.colors.neutralBackground1,
       flex: 1,
       flexGrow: 1,
       flexDirection: 'column',
