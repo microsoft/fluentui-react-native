@@ -162,8 +162,11 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       </View>
       <Separator />
       {e2eSections && showE2E && (
-        // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
-        <View accessible={Platform.OS !== 'ios'} {...testProps(E2E_TEST_SECTION)}>
+        // We can check if the E2E section renders by checking if the "E2E Tests" header has rendered for each spec
+        <>
+          <Text variant="headerSemibold" {...testProps(E2E_TEST_SECTION)}>
+            E2E Tests
+          </Text>
           {e2eSections.map((section, i) => {
             if (section === null) {
               return null;
@@ -171,7 +174,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
             const { component: E2EComponent } = section;
             return <E2EComponent key={i} />;
           })}
-        </View>
+        </>
       )}
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
