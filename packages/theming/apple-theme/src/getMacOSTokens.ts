@@ -16,7 +16,7 @@ export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boo
     } else {
       return macOSLightAliasTokens;
     }
-  } else if (mode === 'dark') {
+  } else if (mode === 'dark' || mode === 'darkElevated') {
     if (isHighContrast) {
       return macOSDarkHCAliasTokens;
     } else {
@@ -36,7 +36,7 @@ export function getMacOSShadowTokens(mode: AppearanceOptions, isHighContrast: bo
     } else {
       return macOSLightShadowTokens;
     }
-  } else if (mode === 'dark') {
+  } else if (mode === 'dark' || mode === 'darkElevated') {
     if (isHighContrast) {
       return macOSDarkHCShadowTokens;
     } else {
