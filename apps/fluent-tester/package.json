@@ -94,7 +94,7 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/focus-zone": "^0.11.26",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@rnx-kit/cli": "^0.14.8",
+    "@rnx-kit/cli": "^0.16.2",
     "@rnx-kit/metro-config": "^1.3.1",
     "flow-bin": "^0.113.0",
     "metro-config": "^0.67.0",
@@ -122,13 +122,20 @@
           "macos",
           "windows"
         ],
-        "detectCyclicDependencies": {
-          "throwOnError": true
-        },
-        "detectDuplicateDependencies": {
-          "throwOnError": false
-        },
-        "typescriptValidation": false,
+        "plugins": [
+          [
+            "@rnx-kit/metro-plugin-cyclic-dependencies-detector",
+            {
+              "throwOnError": true
+            }
+          ],
+          [
+            "@rnx-kit/metro-plugin-duplicates-checker",
+            {
+              "throwOnError": false
+            }
+          ]
+        ],
         "platforms": {
           "android": {
             "bundleOutput": "dist/index.android.bundle",
