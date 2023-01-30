@@ -65,12 +65,20 @@
     ]
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "metro-config",
-      "metro-react-native-babel-transformer"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native",
+        "./align-deps-preset.js"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "jest",
+        "metro-config",
+        "metro-react-native-babel-transformer"
+      ]
+    }
   }
 }

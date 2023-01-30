@@ -47,15 +47,21 @@
     "react-native-windows": "^0.68.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "core-windows",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "core-windows",
+        "react"
+      ]
+    }
   }
 }

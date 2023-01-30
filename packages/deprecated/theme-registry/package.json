@@ -40,14 +40,20 @@
     "react-native": "^0.68.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68.0",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios"
+      ]
+    }
   },
   "peerDependencies": {
     "react": "17.0.2",
