@@ -87,7 +87,7 @@ export abstract class BasePage {
    * For any given page object, this method automates:
    *  - Navigating to the page by clicking its component button
    *  - Waiting for the component page to load
-   *  - Optionally showing its E2E Section
+   *  - Optionally expanding its E2E sections IF a boolean flag is passed.
    *
    * This also contains error checking through its waiters, removing the extra `expect()` calls during test setup.
    *
