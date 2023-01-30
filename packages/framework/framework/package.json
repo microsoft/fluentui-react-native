@@ -47,12 +47,10 @@
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
     "react-native": "^0.68.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-dom": "17.0.2",
     "react-native": "^0.68.0"
   },
   "author": "",
@@ -70,8 +68,7 @@
         "core",
         "core-android",
         "core-ios",
-        "react",
-        "react-dom"
+        "react"
       ]
     }
   }

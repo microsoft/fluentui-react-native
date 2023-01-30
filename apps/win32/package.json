@@ -33,7 +33,6 @@
   "dependencies": {
     "@fluentui-react-native/tester": "^0.128.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
     "react-native": "^0.68.0",
     "react-native-svg": "^12.3.0",
     "tslib": "^2.3.1"
