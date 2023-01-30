@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Mon, 30 Jan 2023 15:17:32 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "4de4c2b37c835ebd9af015ff767f9dd68452f786",
+            "comment": "Migrate to align-deps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 03 Oct 2022 16:40:48 GMT",
       "tag": "@uifabricshared/theme-registry_v0.9.0",
       "version": "0.9.0",
