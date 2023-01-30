@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
   },
   // Needed to ensure that with the button is toggled on, the top of the newly shown
   // content is visible so the user knows to scroll down
-  toggleButtonAreaPadding: {
-    paddingBottom: 10,
-  },
+  toggleButtonAreaPadding: { paddingBottom: 10 },
+  colorDescriptionStyle: { flexDirection: 'row', flexWrap: 'wrap', flex: 1 },
+  colorDescriptionNamePadding: { paddingRight: 5 },
 });
 
 const getSwatchColorStyle = (colorName: string, colorValue: ColorValue): ViewStyle => {
@@ -69,8 +69,8 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(COLORTOKENS_TEST_COMPONENT)}
       />
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', flex: 1 }}>
-        <Text style={{ paddingRight: 5 }}>{p.colorName}</Text>
+      <View style={styles.colorDescriptionStyle}>
+        <Text style={styles.colorDescriptionNamePadding}>{p.colorName}</Text>
         <Text>{'(' + p.colorValue?.toString() + ')'}</Text>
       </View>
     </View>

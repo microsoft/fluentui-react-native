@@ -10,9 +10,9 @@ PODS:
     - React-jsi (= 0.68.5)
     - ReactCommon/turbomodule/core (= 0.68.5)
   - fmt (6.2.1)
-  - FRNAppearanceAdditions (0.1.0):
+  - FRNAppearanceAdditions (0.2.1):
     - React
-  - FRNAvatar (0.17.10):
+  - FRNAvatar (0.17.11):
     - MicrosoftFluentUI (= 0.10.0)
     - React
   - FRNDatePicker (0.7.4):
@@ -391,7 +391,7 @@ PODS:
     - glog
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.4.0):
+  - react-native-slider (4.4.1):
     - React-Core
   - React-perflogger (0.68.5)
   - React-RCTActionSheet (0.68.5):
@@ -608,8 +608,8 @@ SPEC CHECKSUMS:
   FBLazyVector: 2b47ff52037bd9ae07cc9b051c9975797814b736
   FBReactNativeSpec: dd89c4a5591e20015aa55c6efbf9c7740a83efbf
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAppearanceAdditions: 88e8fdc98e8aef994df9ab0b04fc652c59a3b351
-  FRNAvatar: cbb9afacb90bcee65673e6d7a32eb63a900131eb
+  FRNAppearanceAdditions: 92b1b582e42f2ae92d0a236f6de6b21f47617b95
+  FRNAvatar: 22717e2003b22e4736cf0ad84bbe23f4e24f0fc8
   FRNDatePicker: 009ab6e4e003a9e5d720fb4aea27b94e6cc8a946
   FRNFontMetrics: c756b9bb1627909a7673b68caf7a7b14239c212e
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
@@ -628,7 +628,7 @@ SPEC CHECKSUMS:
   React-jsinspector: eb202e43b3879aba9a14f3f65788aec85d4e1ea9
   React-logger: 98f663b292a60967ebbc6d803ae96c1381183b6d
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: d2938a12c4e439a227c70eec65d119136eb4aeb5
+  react-native-slider: a0d45ce5ea1be39f149954cae4367afff44d5a32
   React-perflogger: 0458a87ea9a7342079e7a31b0d32b3734fb8415f
   React-RCTActionSheet: 22538001ea2926dea001111dd2846c13a0730bc9
   React-RCTAnimation: 732ce66878d4aa151d56a0d142b1105aa12fd313
@@ -642,7 +642,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: b1f1995089b90696dbc2a7ffe0059a80db5c8eb1
   ReactCommon: 149e2c0acab9bac61378da0db5b2880a1b5ff59b
   ReactTestApp-DevSupport: 1646ce70be36400a60ca18608284f3f7099a35c1
-  ReactTestApp-Resources: ecba662266ac5af3e30e1e3004c0fa8c0298b61a
+  ReactTestApp-Resources: 8c0164a3cc5052418c92018e2af0e05d564aa307
   RNCPicker: 0bf8ef8f7800524f32d2bb2a8bcadd53eda0ecd1
   RNSVG: 6adc5c52d2488a476248413064b7f2832e639057
   Yoga: c4d61225a466f250c35c1ee78d2d0b3d41fe661c
