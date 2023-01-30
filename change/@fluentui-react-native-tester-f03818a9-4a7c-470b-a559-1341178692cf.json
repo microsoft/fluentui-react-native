@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix jest test with better mocking and `memoize`",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "mischreiber@microsoft.com",
+  "dependentChangeType": "patch"
+}

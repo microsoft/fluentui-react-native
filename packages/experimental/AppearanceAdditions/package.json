@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/framework": "0.8.36",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@types/react-native": "^0.68.0",
     "@types/use-subscription": "1.0.0",

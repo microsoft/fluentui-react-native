@@ -34,6 +34,7 @@
     "@fluentui-react-native/default-theme": ">=0.16.26 <1.0.0",
     "@fluentui-react-native/design-tokens-ios": "^0.42.0",
     "@fluentui-react-native/design-tokens-macos": "^0.42.0",
+    "@fluentui-react-native/experimental-appearance-additions": "^0.2.0",
     "@fluentui-react-native/memo-cache": "^1.1.7",
     "@fluentui-react-native/theme": ">=0.7.18 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.24.0",

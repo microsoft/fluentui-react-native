@@ -4,6 +4,7 @@ exports[`Notification component tests Notification default 1`] = `
 <View
   style={
     Object {
+      "alignSelf": "center",
       "backgroundColor": Object {
         "dynamic": Object {
           "dark": "#082338",
@@ -39,6 +40,7 @@ exports[`Notification component tests Notification default 1`] = `
       "shadowRadius": 4,
       "start": undefined,
       "top": undefined,
+      "width": 375,
     }
   }
 >
@@ -56,6 +58,7 @@ exports[`Notification component tests Notification default 1`] = `
     style={
       Object {
         "alignItems": undefined,
+        "alignSelf": "center",
         "backgroundColor": Object {
           "dynamic": Object {
             "dark": "#082338",
@@ -94,6 +97,7 @@ exports[`Notification component tests Notification default 1`] = `
         },
         "shadowOpacity": 0.12,
         "shadowRadius": 0.5,
+        "width": 375,
       }
     }
   >
