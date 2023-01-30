@@ -5,6 +5,7 @@ import {
   BASE_TESTPAGE,
   BOOT_APP_TIMEOUT,
   E2E_MODE_SWITCH,
+  E2E_TEST_SECTION,
   Keys,
   ROOT_VIEW,
   TESTPAGE_BUTTONS_SCROLLVIEWER,
@@ -86,9 +87,14 @@ export abstract class BasePage {
    * For any given page object, this method automates:
    *  - Navigating to the page by clicking its component button
    *  - Waiting for the component page to load
-   *  - Revealing its E2E components IF a boolean flag is passed into the method
+   *  - Optionally showing its E2E Section
    *
    * This also contains error checking through its waiters, removing the extra `expect()` calls during test setup.
+   *
+   * @param {boolean} showE2ESection (default = `false`) Some pages have E2E tests that only check if the component causes
+   * an assert while others have dedicated sections with components specifically designated for a11y or functional testing.
+   * The latter renders a switch that will make the E2E test sections visible. To automate this during E2E testing, pass `true`
+   * for this parameter.
    */
   async navigateToPageAndLoadTests(showE2ESection = false) {
     // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
@@ -107,6 +113,8 @@ export abstract class BasePage {
   async enableE2ETesterMode(): Promise<void> {
     const e2eSwitch = await this._e2eSwitch;
     switch (this.platform) {
+      // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
+      // different on android because .isSelected() doesn't function as expected on the platform.
       case MobilePlatform.Android:
         if ((await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'false') {
           await e2eSwitch.click();
@@ -122,6 +130,10 @@ export abstract class BasePage {
           await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
         }
     }
+    await this.waitForCondition(
+      async () => await (await this._e2eSection).isDisplayed(),
+      'Pressed E2E Mode Switch, but E2E Test Sections failed to display before the timeout.',
+    );
   }
 
   /**
@@ -254,6 +266,7 @@ export abstract class BasePage {
     });
   }
 
+  /** Waits for the tester app to load by checking if the startup page loads. If the app doesn't load before the timeout, it causes the test to fail. */
   async waitForInitialPageToDisplay(): Promise<void> {
     await this.waitForCondition(async () => await (await this._initialPage).isDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
   }
@@ -460,6 +473,10 @@ export abstract class BasePage {
 
   private get _e2eSwitch(): Promise<WebdriverIO.Element> {
     return By(E2E_MODE_SWITCH);
+  }
+
+  private get _e2eSection(): Promise<WebdriverIO.Element> {
+    return By(E2E_TEST_SECTION);
   }
 
   // Default timeout to wait until page is displayed (25s)

@@ -8,7 +8,7 @@ import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { testProps } from './Common/TestProps';
-import { E2E_MODE_SWITCH } from '../../../E2E/src/index.consts';
+import { E2E_MODE_SWITCH, E2E_TEST_SECTION } from '../../../E2E/src/index.consts';
 
 export type TestSection = {
   name: string;
@@ -163,7 +163,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       <Separator />
       {e2eSections && showE2E && (
         // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
-        <>
+        <View accessible={Platform.OS !== 'ios'} {...testProps(E2E_TEST_SECTION)}>
           {e2eSections.map((section, i) => {
             if (section === null) {
               return null;
@@ -171,7 +171,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
             const { component: E2EComponent } = section;
             return <E2EComponent key={i} />;
           })}
-        </>
+        </View>
       )}
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
