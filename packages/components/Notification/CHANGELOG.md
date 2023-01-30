@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 22:56:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.23
+
+Mon, 30 Jan 2023 22:56:35 GMT
+
+### Patches
+
+- Update notification to use shadow16 in ios file (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.21.22
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Mon, 30 Jan 2023 22:56:35 GMT",
+      "tag": "@fluentui-react-native/notification_v0.21.23",
+      "version": "0.21.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "7a2e24296fe9af7ae2cb07b165d3b63d2d5037e0",
+            "comment": "Update notification to use shadow16 in ios file"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 15:17:31 GMT",
       "tag": "@fluentui-react-native/notification_v0.21.22",
       "version": "0.21.22",
