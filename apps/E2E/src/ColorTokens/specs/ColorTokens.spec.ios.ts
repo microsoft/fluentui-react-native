@@ -10,7 +10,6 @@ describe('Color Tokens Testing Initialization', function () {
   });
 
   it('Click and navigate to Color Tokens test page', async () => {
-    await expect(false).toBeTruthy();
     await ColorTokenPageObject.mobileScrollToComponentButton();
     await ColorTokenPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
