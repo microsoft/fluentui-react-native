@@ -34,8 +34,8 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
   ({
     backgroundColor: t.colors.background,
     borderColor: 'transparent',
-    borderRadius: 12,
-    borderWidth: 1,
+    borderRadius: globalTokens.corner.radius120,
+    borderWidth: globalTokens.stroke.width10,
     color: t.colors.brandForeground1,
     fontFamily: 'primary',
     fontLetterSpacing: -0.24,
@@ -47,7 +47,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     paddingVertical: globalTokens.size120,
     shadowToken: t.shadows.shadow16,
     isBar: {
-      borderRadius: 0,
+      borderRadius: globalTokens.corner.radiusNone,
       fontWeight: '400',
       shadowToken: undefined,
     },
@@ -65,7 +65,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     },
     primaryBar: {
       backgroundColor: t.colors.brandBackgroundTint,
-      borderWidth: 0,
+      borderWidth: globalTokens.stroke.widthNone,
       color: t.colors.brandForegroundTint,
       disabledColor: t.colors.brandForegroundDisabled1,
       pressedColor: notificationColors.primaryPressed,
@@ -79,7 +79,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     },
     neutralBar: {
       backgroundColor: t.colors.neutralBackground5,
-      borderWidth: 0,
+      borderWidth: globalTokens.stroke.widthNone,
       color: t.colors.neutralForeground2,
       disabledColor: t.colors.neutralForegroundDisabled2,
       pressedColor: notificationColors.neutralPressed,
