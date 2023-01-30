@@ -193,12 +193,13 @@ For example, a common task we want to perform is selecting a UI element and gett
 
 ## Setup your Component Test Page in the Test App
 
-In order to test the component, we need a test page in FURNs test app. Once you create that, you'll want to create a separate file for E2E testing (see pattern used by all other controls). Create
-an example and set `...{testProps(your_components_constant)}` on your new control. Now, our automation framework can select this component using the constant you passed in to `testProps`.
+In order to test the component, we need a test page in FURNs test app. Once you create that, you'll want to create a separate file for E2E testing (see pattern used by all other controls). Create an example and set `...{testProps(your_components_constant)}` on your new control. Now, our automation framework can select this component using the constant you passed in to `testProps`.
 
-## Add to NavigateAppPage.ts
+## Creating an E2E section on your Component Test Page
 
-This page object is responsible for navigating through the app to each test page. Here, you'll want to add integration for your new component. (Easily reproducible by looking at other components in the file).
+For components with tests beyond the baseline crash tests, you will want to create a dedicated page section with components specifically design to test accessibility and functionality. This will get exported in that separate E2E testing file.
+
+In the main file where tests get exported, the `<Test />` component that gets exported should take in a prop called `e2eSections`. If you have a dedicated test section for E2E testing, pass the section into that prop. For most users, this section will be hidden, but we can automate the test app to reveal this at the top of each page. The reason why we hide this at the top of each page is because we want to reduce the amount of time it takes to load each component into view. By removing scrolling from the equation, we save on E2E test time.
 
 ## Write a Test Spec
 
@@ -210,9 +211,7 @@ Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTest
 ```
 describe('Click on each test page and check if it renders', function() {
   it('Checkbox Test Page', () => {
-    NavigateAppPage.clickAndGoToCheckboxPage();
-    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
-  });
+    CheckboxPageObject.navigateToPageAndLoadTests(true); // check true if you have a dedicated section for E2E tests
 });
 ```
 
