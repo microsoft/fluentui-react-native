@@ -102,7 +102,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     minHeight: 52,
     padding: globalTokens.size160,
     paddingVertical: globalTokens.size120,
-    shadowToken: t.colors.shadow16,
+    shadowToken: t.shadows.shadow16,
     isBar: {
       borderRadius: 0,
       fontWeight: '400',

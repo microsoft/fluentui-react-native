@@ -2,16 +2,6 @@
 
 exports[`Notification component tests Notification default 1`] = `
 <View
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onPress={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "center",
@@ -25,20 +15,29 @@ exports[`Notification component tests Notification default 1`] = `
       },
       "borderColor": "transparent",
       "borderRadius": 12,
-      "borderWidth": 1,
+      "bottom": undefined,
+      "end": undefined,
       "flex": 1,
-      "flexDirection": "row",
       "justifyContent": "space-between",
+      "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
       "marginHorizontal": 16,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "minHeight": 52,
       "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 8,
+        "height": 0,
         "width": 0,
       },
-      "shadowOpacity": 0.14,
-      "shadowRadius": 4,
+      "shadowOpacity": 0.12,
+      "shadowRadius": 1,
       "start": undefined,
       "top": undefined,
       "width": 375,
@@ -46,92 +45,16 @@ exports[`Notification component tests Notification default 1`] = `
   }
 >
   <View
-    accessible={true}
-    style={
-      Object {
-        "flex": 1,
-        "flexDirection": "column",
-        "justifyContent": "center",
-      }
-    }
-  >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "alignSelf": "flex-start",
-          "color": Object {
-            "dynamic": Object {
-              "dark": "#77B7F7",
-              "highContrastDark": undefined,
-              "highContrastLight": undefined,
-              "light": "#0F6CBD",
-            },
-          },
-          "fontFamily": "System",
-          "fontSize": 15,
-          "fontWeight": "400",
-          "letterSpacing": -0.24,
-          "lineHeight": 20,
-          "margin": 0,
-        }
-      }
-    >
-      Mail Archived
-    </Text>
-  </View>
-  <View
-    accessibilityLabel="Undo"
-    accessibilityRole="button"
-    accessible={true}
-    appearance="subtle"
-    collapsable={false}
-    color={
-      Object {
-        "dynamic": Object {
-          "dark": "#77B7F7",
-          "highContrastDark": undefined,
-          "highContrastLight": undefined,
-          "light": "#0F6CBD",
-        },
-      }
-    }
-    disabledColor={
-      Object {
-        "dynamic": Object {
-          "dark": "#2886DE",
-          "highContrastDark": undefined,
-          "highContrastLight": undefined,
-          "light": "#2886DE",
-        },
-      }
-    }
-    enableFocusRing={true}
-    focusable={true}
-    minWidth={0}
-    onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    padding={0}
-    paddingHorizontal={0}
-    pressedColor={
-      Object {
-        "dynamic": Object {
-          "dark": "#77B7F756",
-          "highContrastDark": undefined,
-          "highContrastLight": undefined,
-          "light": "#0F6CBD30",
-        },
-      }
-    }
     style={
       Object {
         "alignItems": undefined,
@@ -153,7 +76,7 @@ exports[`Notification component tests Notification default 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": 1,
-        "display": "flex",
+        "flex": 1,
         "flexDirection": "row",
         "flexWrap": undefined,
         "justifyContent": "space-between",
@@ -169,41 +92,147 @@ exports[`Notification component tests Notification default 1`] = `
         "paddingVertical": 12,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 8,
           "width": 0,
         },
-        "shadowOpacity": 0.12,
-        "shadowRadius": 0.5,
+        "shadowOpacity": 0.14,
+        "shadowRadius": 8,
         "width": 375,
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
+    <View
+      accessible={true}
       style={
         Object {
-          "color": Object {
-            "dynamic": Object {
-              "dark": "#77B7F7",
-              "highContrastDark": undefined,
-              "highContrastLight": undefined,
-              "light": "#0F6CBD",
-            },
-          },
-          "fontFamily": "System",
-          "fontSize": 15,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
         }
       }
     >
-      Undo
-    </Text>
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "alignSelf": "flex-start",
+            "color": Object {
+              "dynamic": Object {
+                "dark": "#77B7F7",
+                "highContrastDark": undefined,
+                "highContrastLight": undefined,
+                "light": "#0F6CBD",
+              },
+            },
+            "fontFamily": "System",
+            "fontSize": 15,
+            "fontWeight": "400",
+            "letterSpacing": -0.24,
+            "lineHeight": 20,
+            "margin": 0,
+          }
+        }
+      >
+        Mail Archived
+      </Text>
+    </View>
+    <View
+      accessibilityLabel="Undo"
+      accessibilityRole="button"
+      accessible={true}
+      appearance="subtle"
+      collapsable={false}
+      color={
+        Object {
+          "dynamic": Object {
+            "dark": "#77B7F7",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0F6CBD",
+          },
+        }
+      }
+      disabledColor={
+        Object {
+          "dynamic": Object {
+            "dark": "#2886DE",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#2886DE",
+          },
+        }
+      }
+      enableFocusRing={true}
+      focusable={true}
+      minWidth={0}
+      onAccessibilityTap={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      padding={0}
+      paddingHorizontal={0}
+      pressedColor={
+        Object {
+          "dynamic": Object {
+            "dark": "#77B7F756",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0F6CBD30",
+          },
+        }
+      }
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "transparent",
+          "borderColor": "#ffffff",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginStart": 16,
+          "minWidth": 0,
+          "padding": 0,
+          "paddingHorizontal": 0,
+        }
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "color": Object {
+              "dynamic": Object {
+                "dark": "#77B7F7",
+                "highContrastDark": undefined,
+                "highContrastLight": undefined,
+                "light": "#0F6CBD",
+              },
+            },
+            "fontFamily": "System",
+            "fontSize": 15,
+            "fontWeight": "600",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        Undo
+      </Text>
+    </View>
   </View>
 </View>
 `;
