@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 20:48:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.129.0
+
+Mon, 30 Jan 2023 20:48:57 GMT
+
+### Minor changes
+
+- Add global colors to tester (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.128.3
 

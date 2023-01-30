@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 30 Jan 2023 20:48:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.129.0",
+      "version": "0.129.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "8122cfed9aaaca2d7f9a76b30691584ffe38c359",
+            "comment": "Add global colors to tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 16:05:07 GMT",
       "tag": "@fluentui-react-native/tester_v0.128.3",
       "version": "0.128.3",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Mon, 30 Jan 2023 20:48:57 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.0",
+      "version": "1.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "8122cfed9aaaca2d7f9a76b30691584ffe38c359",
+            "comment": "Try doubling color tokens page timeout time"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 16:05:07 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
       "version": "1.12.3",

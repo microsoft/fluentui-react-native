@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Try doubling color tokens page timeout time",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
