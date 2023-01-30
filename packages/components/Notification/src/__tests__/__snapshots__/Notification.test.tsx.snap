@@ -153,16 +153,7 @@ exports[`Notification component tests Notification default 1`] = `
           },
         }
       }
-      disabledColor={
-        Object {
-          "dynamic": Object {
-            "dark": "#2886DE",
-            "highContrastDark": undefined,
-            "highContrastLight": undefined,
-            "light": "#2886DE",
-          },
-        }
-      }
+      disabledColor="#2886de"
       enableFocusRing={true}
       focusable={true}
       minWidth={0}
