@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Mon, 30 Jan 2023 16:05:07 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
+      "version": "1.12.3",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "607343e29ed8ceaea88fb7658f3aba46fb47a018",
+            "comment": "Bump `@rnx-kit/cli` to 0.16"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 15:17:30 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
       "version": "1.12.3",
