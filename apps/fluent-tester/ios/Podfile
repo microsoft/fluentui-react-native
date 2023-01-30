@@ -24,7 +24,8 @@ use_test_app! do |target|
   target.app do
     platform :ios, '14.0'
 
-    # There is a bug where autolinking isn't working, do specify these manually.
+    # There is a bug where autolinking isn't working, so specify these manually.
+    pod 'FRNAppearanceAdditions', :path => '../../../packages/experimental/AppearanceAdditions/FRNAppearanceAdditions.podspec'
     pod 'FRNFontMetrics', :path => '../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec'
 
     script_phase name: 'Start Packager',

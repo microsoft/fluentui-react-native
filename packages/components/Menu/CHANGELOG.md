@@ -1,8 +1,31 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 25 Jan 2023 21:31:18 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.24
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.56
+- Bump @fluentui-react-native/focus-zone to v0.11.26
+- Bump @fluentui-react-native/framework to v0.8.37
+- Bump @fluentui-react-native/interactive-hooks to v0.22.14
+- Bump @fluentui-react-native/text to v0.19.16
+- Bump @fluentui-react-native/theme-tokens to v0.24.1
+- Bump @fluentui-react-native/tokens to v0.20.6
+- Bump @fluentui-react-native/button to v0.32.26
+
+## 1.2.23
+
+Thu, 26 Jan 2023 17:47:06 GMT
+
+### Patches
+
+- Fix MenuPopover props not getting called (email not defined)
 
 ## 1.2.22
 

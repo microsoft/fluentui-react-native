@@ -1,8 +1,30 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Wed, 25 Jan 2023 21:31:18 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.5
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Add `darkElevated` theme (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.16.27
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.2.1
+- Bump @fluentui-react-native/theme to v0.7.19
+- Bump @fluentui-react-native/theme-tokens to v0.24.1
+- Bump @fluentui-react-native/theme-types to v0.30.1
+- Bump @fluentui-react-native/theming-utils to v0.23.1
+
+## 0.18.4
+
+Thu, 26 Jan 2023 18:46:08 GMT
+
+### Patches
+
+- Memoize theme creation for android, ios, macOS (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.18.3
 
