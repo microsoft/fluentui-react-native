@@ -2580,6 +2580,11 @@
   resolved "https://registry.yarnpkg.com/@react-native/polyfills/-/polyfills-2.0.0.tgz#4c40b74655c83982c8cf47530ee7dc13d957b6aa"
   integrity sha512-K0aGNn1TjalKj+65D7ycc1//H9roAQ51GJVk5ZJQFb2teECGmzd86bYDC0aYdbRf7gtovescq4Zt6FR0tgXiHQ==
 
+"@rnx-kit/align-deps@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/align-deps/-/align-deps-2.1.1.tgz#f36f7512b4f0215b5664eb81fedbb2a9ffbb7d77"
+  integrity sha512-O6FXwL/TLUdpcbDB5rBaggOgxpAN6wKLqTd1+h0bYa31sQ2KlOBPlTwdK9N0M7TrbMu5nDqjeeIRYlpOmHyBtA==
+
 "@rnx-kit/babel-preset-metro-react-native@^1.1.4":
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.1.4.tgz#7c526987208547614f7fc43ed6e001b183083dd7"
@@ -2630,7 +2635,7 @@
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.13.5":
+"@rnx-kit/dep-check@^1.13.5":
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.14.0.tgz#208f8695616179a2042c87096d9eca17db1f0a74"
   integrity sha512-NGlSI+AEYcrzmCcwjUbtrsWTp9RR16sReq7jEjKblv1o/XgmOMXA6MZ87lj6VL28EUorbBXebQnRrA8E9Hza4A==
@@ -12414,7 +12419,7 @@ react-native-svg-transformer@^1.0.0:
     "@svgr/plugin-svgo" "^6.1.2"
     path-dirname "^1.0.2"
 
-react-native-svg@12.5.0, react-native-svg@^12.5.0:
+react-native-svg@^12.3.0, react-native-svg@^12.5.0:
   version "12.5.0"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.5.0.tgz#61e4395eb5eb52bbd0511b3c227473f7dbf98a16"
   integrity sha512-xVMA6QjwU2E30DHLzjmewjHSmby4mMMlUaiKnFCYPWpsezsaB3zHS7eURwKNJLmcRYOPi3f6aBhxvFTNj/5j/A==

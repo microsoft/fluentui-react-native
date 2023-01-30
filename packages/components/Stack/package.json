@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/text": ">=0.19.16 <1.0.0",
     "@types/react-native": "^0.68.0",
-    "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.2",
     "react-native": "^0.68.0"
   },
@@ -49,14 +49,20 @@
   "author": "",
   "license": "MIT",
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
   }
 }

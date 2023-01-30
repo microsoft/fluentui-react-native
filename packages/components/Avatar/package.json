@@ -35,8 +35,7 @@
     "@fluentui-react-native/icon": "^0.17.8",
     "@fluentui-react-native/theme-tokens": "^0.24.1",
     "@fluentui-react-native/tokens": "^0.20.6",
-    "@fluentui-react-native/use-styling": "^0.9.1",
-    "react-native-svg": "12.5.0"
+    "@fluentui-react-native/use-styling": "^0.9.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
@@ -44,22 +43,30 @@
     "@office-iss/react-native-win32": "^0.68.0",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react",
-      "svg"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react",
+        "svg"
+      ]
+    }
   }
 }

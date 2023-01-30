@@ -62,8 +62,8 @@
     "@fluentui-react-native/interactive-hooks": ">=0.22.14 <1.0.0",
     "@fluentui-react-native/menu": "^1.2.24",
     "@fluentui-react-native/merge-props": ">=0.5.1 <1.0.0",
-    "@fluentui-react-native/separator": "^0.14.11",
     "@fluentui-react-native/notification": "0.21.22",
+    "@fluentui-react-native/separator": "^0.14.11",
     "@fluentui-react-native/stack": ">=0.7.48 <1.0.0",
     "@fluentui-react-native/switch": "^0.8.20",
     "@fluentui-react-native/text": ">=0.19.16 <1.0.0",
@@ -80,19 +80,19 @@
     "@react-native-community/slider": "^4.2.0",
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^2.2.1",
+    "@warren-ms/react-native-icons": "^0.0.13",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
     "react-native": "^0.68.0",
     "react-native-macos": "^0.68.0",
-    "react-native-svg": "12.5.0",
+    "react-native-svg": "^12.3.0",
     "react-native-windows": "^0.68.0",
-    "tslib": "^2.3.1",
-    "@warren-ms/react-native-icons": "^0.0.13"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/focus-zone": "^0.11.26",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@rnx-kit/cli": "^0.14.8",
     "@rnx-kit/metro-config": "^1.3.1",
@@ -101,8 +101,7 @@
     "metro-react-native-babel-preset": "^0.67.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^2.0.2",
-    "react-test-renderer": "17.0.2",
-    "@fluentui-react-native/focus-zone": "^0.11.26"
+    "react-test-renderer": "17.0.2"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.68.0"
@@ -111,7 +110,6 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
     "kitType": "app",
     "bundle": [
       {
@@ -152,17 +150,25 @@
         }
       }
     ],
-    "capabilities": [
-      "core-android",
-      "core-ios",
-      "core-macos",
-      "core-windows",
-      "babel-preset-react-native",
-      "metro-config",
-      "react",
-      "react-dom",
-      "svg"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native",
+        "@fluentui-react-native/scripts/align-deps-preset.js"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core-android",
+        "core-ios",
+        "core-macos",
+        "core-windows",
+        "babel-preset-react-native",
+        "metro-config",
+        "react",
+        "svg"
+      ]
+    }
   },
   "depcheck": {
     "ignoreMatches": [
