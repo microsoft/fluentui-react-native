@@ -110,3 +110,5 @@ const CustomRadioButton = RadioButton.customize({
   },
 });
 ```
+
+More information on overriding tokens can be found here: [Overrides](../../../\docs\pages\Theming\Tokens\Overrides.md)
