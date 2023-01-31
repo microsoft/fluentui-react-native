@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import TextV1PageObject from '../pages/TextV1PageObject.win';
-import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { ComponentSelector } from '../../common/BasePage';
+import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute } from '../../common/consts';
 import { TEXTV1_ACCESSIBILITY_LABEL, TEXTV1_CONTENT } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -26,18 +25,27 @@ describe('TextV1 Accessibility Testing', () => {
     await TextV1PageObject.scrollToTestElement();
   });
 
-  it('Text - Validate accessibilityRole is correct', async () => {
-    await expect(await TextV1PageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
+  it('Validate "accessibilityRole" defaults to "ControlType.Text".', async () => {
+    await expect(
+      await TextV1PageObject.compareAttribute(TextV1PageObject._primaryComponent, Attribute.AccessibilityRole, TEXT_A11Y_ROLE),
+    ).toBeTruthy();
+
     await expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Text - Set accessibilityLabel', async () => {
-    await expect(await TextV1PageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(TEXTV1_ACCESSIBILITY_LABEL);
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
+    await expect(
+      await TextV1PageObject.compareAttribute(TextV1PageObject._primaryComponent, Attribute.AccessibilityLabel, TEXTV1_ACCESSIBILITY_LABEL),
+    ).toBeTruthy();
+
     await expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Text - Do not set accessibilityLabel -> Default to content', async () => {
-    await expect(await TextV1PageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(TEXTV1_CONTENT);
+  it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to text content.', async () => {
+    await expect(
+      await TextV1PageObject.compareAttribute(TextV1PageObject._secondaryComponent, Attribute.AccessibilityLabel, TEXTV1_CONTENT),
+    ).toBeTruthy();
+
     await expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
