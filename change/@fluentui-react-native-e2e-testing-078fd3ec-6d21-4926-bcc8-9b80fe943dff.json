@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update Text and TextV1 E2E tests with better names + errors",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
