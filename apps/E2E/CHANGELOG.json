@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 31 Jan 2023 00:18:04 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.1",
+      "version": "1.13.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "0d9250f23248cd003962d189234ec563b2accbb1",
+            "comment": "Use better test names + new e2e methods on IconV1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 20:48:57 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.13.0",
       "version": "1.13.0",

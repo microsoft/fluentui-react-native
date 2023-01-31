@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 30 Jan 2023 20:48:57 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Jan 2023 00:18:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.13.1
+
+Tue, 31 Jan 2023 00:18:04 GMT
+
+### Patches
+
+- Use better test names + new e2e methods on IconV1 (winlarry@microsoft.com)
 
 ## 1.13.0
 

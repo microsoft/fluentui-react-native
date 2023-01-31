@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use better test names + new e2e methods on IconV1",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
