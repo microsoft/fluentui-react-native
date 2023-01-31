@@ -9,7 +9,7 @@ describe('IconV1 Testing Initialization', function () {
   });
 
   it('Click and navigate to IconV1 test page', async () => {
-    await IconV1PageObject.navigateToPageAndLoadTests();
+    await IconV1PageObject.navigateToPageAndLoadTests(true);
 
     await expect(await IconV1PageObject.didAssertPopup()).toBeFalsy(IconV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
