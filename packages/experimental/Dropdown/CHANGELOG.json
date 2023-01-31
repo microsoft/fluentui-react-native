@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Mon, 30 Jan 2023 15:17:30 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.7.21",
+      "version": "0.7.21",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "4de4c2b37c835ebd9af015ff767f9dd68452f786",
+            "comment": "Migrate to align-deps"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 07:12:38 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.7.21",
+      "version": "0.7.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/button to v0.32.26",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.56",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.37",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.14",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/text to v0.19.16",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.24.1",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Jan 2023 21:31:18 GMT",
       "tag": "@fluentui-react-native/dropdown_v0.7.20",
       "version": "0.7.20",

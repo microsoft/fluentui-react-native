@@ -6,6 +6,7 @@ const defaultAppearance = 'light';
 const themeOptions: ThemeOptions[][] = [
   [{ appearance: 'light', defaultAppearance: defaultAppearance }],
   [{ appearance: 'dark', defaultAppearance: defaultAppearance }],
+  [{ appearance: 'darkElevated', defaultAppearance: defaultAppearance }],
   [{ appearance: 'highContrast', defaultAppearance: defaultAppearance }],
   [{ appearance: 'dynamic', defaultAppearance: defaultAppearance }],
 ];

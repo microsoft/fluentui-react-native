@@ -13,6 +13,8 @@ export function createDefaultTheme(options: ThemeOptions = {}): ThemeReference {
         return defaultFluentTheme();
       case 'dark':
         return defaultFluentDarkTheme();
+      case 'darkElevated':
+        return defaultFluentDarkTheme();
       case 'highContrast':
         return defaultFluentHighConstrastTheme();
       default:

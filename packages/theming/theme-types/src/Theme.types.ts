@@ -48,7 +48,7 @@ export type PartialTheme = Omit<TwoLevelPartial<Theme>, 'shadows' | 'typography'
   host?: TwoLevelPartial<Theme['host']>;
 };
 
-export type AppearanceOptions = 'light' | 'dark' | 'highContrast';
+export type AppearanceOptions = 'light' | 'dark' | 'darkElevated' | 'highContrast';
 
 export interface ThemeOptions {
   /**

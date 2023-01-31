@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Wed, 25 Jan 2023 21:31:17 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.30.1
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Add `darkElevated` theme (mischreiber@microsoft.com)
 
 ## 0.30.0
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Change console.error -> console.warn in BasePage",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

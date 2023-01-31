@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 25 Jan 2023 21:31:17 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.1
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.30.1
+- Bump @fluentui-react-native/tokens to v0.20.6
 
 ## 0.23.0
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/styling-utils",
   "entries": [
     {
+      "date": "Mon, 30 Jan 2023 15:17:31 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.4.4",
+      "version": "0.4.4",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "4de4c2b37c835ebd9af015ff767f9dd68452f786",
+            "comment": "Migrate to align-deps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Oct 2022 17:24:49 GMT",
       "tag": "@fluentui-react-native/styling-utils_v0.4.4",
       "version": "0.4.4",
