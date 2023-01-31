@@ -3,7 +3,9 @@ import { AliasColorTokens, Variants, VariantValue } from '@fluentui-react-native
 // API that maps tokens coming from the android token pipeline to Theme color values.
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {
-    neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
+    // neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
+    neutralForeground1: 'red',
+
     neutralForeground1Hover: pipelineOutput.neutralForeground1.fillColorHover,
     neutralForeground1Pressed: pipelineOutput.neutralForeground1.fillColorPressed,
     neutralForeground1Selected: pipelineOutput.neutralForeground1.fillColorSelected,
@@ -75,7 +77,10 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     neutralStrokeDisabled: pipelineOutput.neutralStrokeDisabled.strokeColorRest,
 
     //Brand tokens.
-    brandBackground: pipelineOutput.brandBackground1.fillColorRest,
+    brandBackground: 'green',
+
+    // brandBackground: pipelineOutput.brandBackground1.fillColorRest,
+
     brandBackgroundPressed: pipelineOutput.brandBackground1.fillColorPressed,
     brandBackgroundSelected: pipelineOutput.brandBackground1.fillColorSelected,
     brandBackgroundDisabled: pipelineOutput.brandBackgroundDisabled.fillColorRest,
@@ -97,7 +102,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandForegroundDisabled1: pipelineOutput.brandForegroundDisabled1.fillColorRest,
     brandForegroundDisabled2: pipelineOutput.brandForegroundDisabled2.fillColorRest,
 
-    brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
+    brandStroke1: 'orange',
     brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
     brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
   };
