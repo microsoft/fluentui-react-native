@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 31 Jan 2023 01:29:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.129.2",
+      "version": "0.129.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f235e0a03a7142a3fad343b64ed89a77fb9fe661",
+            "comment": "Make color description wrap"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 22:56:35 GMT",
       "tag": "@fluentui-react-native/tester_v0.129.1",
       "version": "0.129.1",

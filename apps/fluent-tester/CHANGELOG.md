@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 30 Jan 2023 22:56:35 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Jan 2023 01:29:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.129.2
+
+Tue, 31 Jan 2023 01:29:51 GMT
+
+### Patches
+
+- Make color description wrap (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.129.1
 

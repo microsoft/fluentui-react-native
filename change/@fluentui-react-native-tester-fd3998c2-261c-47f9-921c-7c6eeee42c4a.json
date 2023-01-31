@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Make color description wrap",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
