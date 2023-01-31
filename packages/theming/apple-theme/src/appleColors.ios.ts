@@ -96,10 +96,6 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     surfaceTertiary: '#F1F1F1', //= UIColor(light: gray50, dark: gray900, darkElevated: gray800)
     surfaceQuaternary: '#E1E1E1', //= UIColor(light: gray100, dark: gray600)
 
-    dividerOnPrimary: '#E1E1E1', //= UIColor(light: gray100, dark: gray800, darkElevated: gray700)
-    dividerOnSecondary: '#C8C8C8', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
-    dividerOnTertiary: '#C8C8C8', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
-
     buttonBackground: 'transparent',
     buttonBackgroundFilledPressed: '#2B88D8', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
     buttonBackgroundFilledDisabled: '#E1E1E1', //surfaceQuaternary
@@ -201,10 +197,6 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     surfaceTertiary: '#212121', //= UIColor(light: gray50, dark: gray900, darkElevated: gray800)
     surfaceQuaternary: '#404040', //= UIColor(light: gray100, dark: gray600)
 
-    dividerOnPrimary: '#292929', //= UIColor(light: gray100, dark: gray800, darkElevated: gray700)
-    dividerOnSecondary: '#303030', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
-    dividerOnTertiary: '#303030', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
-
     buttonBackground: 'transparent',
     buttonBackgroundFilledPressed: '#004C87', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
     buttonBackgroundFilledDisabled: '#404040', //surfaceQuaternary
@@ -224,21 +216,23 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     mode = 'darkElevated';
   }
 
+  const fluent2AliasColorTokens = createiOSColorAliasTokens(mode);
+
   return {
     /* Color Alias Tokens */
 
-    ...createiOSColorAliasTokens(mode),
+    ...fluent2AliasColorTokens,
 
     /* PaletteBackgroundColors & PaletteTextColors */
 
     background: fluentApple.surfacePrimary,
     bodyStandoutBackground: fluentApple.surfaceSecondary,
     bodyFrameBackground: fluentApple.surfacePrimary,
-    bodyFrameDivider: fluentApple.dividerOnPrimary,
+    bodyFrameDivider: fluent2AliasColorTokens.neutralStroke2,
     bodyText: fluentApple.textPrimary,
     bodyTextChecked: fluentApple.textPrimary,
     subText: fluentApple.textSecondary,
-    bodyDivider: fluentApple.dividerOnSecondary,
+    bodyDivider: fluent2AliasColorTokens.neutralStroke1,
 
     disabledBackground: fluentApple.gray100,
     disabledText: fluentApple.textDisabled,
@@ -247,8 +241,8 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     disabledBodySubtext: fluentApple.textDisabled,
 
     focusBorder: 'transparent',
-    variantBorder: fluentApple.dividerOnPrimary,
-    variantBorderHovered: fluentApple.dividerOnPrimary,
+    variantBorder: fluent2AliasColorTokens.neutralStroke2,
+    variantBorderHovered: fluent2AliasColorTokens.neutralStroke2,
     defaultStateBackground: fluentApple.surfacePrimary,
 
     errorText: fluentApple.dangerPrimary,
@@ -259,14 +253,14 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     warningHighlight: fluentApple.warningTint10,
     successBackground: fluentApple.successTint10,
 
-    inputBorder: fluentApple.dividerOnPrimary,
-    inputBorderHovered: fluentApple.dividerOnPrimary,
+    inputBorder: fluent2AliasColorTokens.neutralStroke2,
+    inputBorderHovered: fluent2AliasColorTokens.neutralStroke2,
     inputBackground: fluentApple.surfacePrimary,
     inputBackgroundChecked: fluentApple.surfacePrimary,
     inputBackgroundCheckedHovered: fluentApple.surfacePrimary,
     inputForegroundChecked: fluentApple.communicationBlue,
-    inputFocusBorderAlt: fluentApple.dividerOnSecondary,
-    smallInputBorder: fluentApple.dividerOnSecondary,
+    inputFocusBorderAlt: fluent2AliasColorTokens.neutralStroke1,
+    smallInputBorder: fluent2AliasColorTokens.neutralStroke1,
     inputText: fluentApple.textPrimary,
     inputTextHovered: fluentApple.textPrimary,
     inputPlaceholderText: fluentApple.textSecondary,
@@ -304,7 +298,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     accentButtonText: fluentApple.buttonTitleWithFilledBackground,
 
     menuBackground: fluentApple.surfacePrimary,
-    menuDivider: fluentApple.dividerOnPrimary,
+    menuDivider: fluent2AliasColorTokens.neutralStroke2,
     menuIcon: fluentApple.iconPrimary,
     menuHeader: fluentApple.textDominant,
     menuItemBackgroundHovered: fluentApple.surfacePrimary,

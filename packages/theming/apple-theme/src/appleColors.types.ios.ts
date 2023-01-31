@@ -116,10 +116,6 @@ interface FluentAppleSemanticColors {
   surfaceTertiary: ColorValue; //= UIColor(light: gray50, dark: gray900, darkElevated: gray800)
   /** also used for disabled background color */
   surfaceQuaternary: ColorValue; //= UIColor(light: gray100, dark: gray600)
-
-  dividerOnPrimary: ColorValue; //= UIColor(light: gray100, dark: gray800, darkElevated: gray700)
-  dividerOnSecondary: ColorValue; //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
-  dividerOnTertiary: ColorValue; //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
 }
 
 /** FluentUI Apple Colors defined for the iOS Button */
