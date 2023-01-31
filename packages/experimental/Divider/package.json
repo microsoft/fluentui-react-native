@@ -45,5 +45,22 @@
     "react-native": "^0.68.0"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
+  }
 }

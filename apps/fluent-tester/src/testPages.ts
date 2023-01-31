@@ -119,7 +119,7 @@ export const tests: TestDescription[] = [
     name: 'Divider',
     component: DividerTest,
     testPageButton: HOMEPAGE_DIVIDER_BUTTON,
-    platforms: ['win32'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Dropdown',

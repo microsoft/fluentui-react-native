@@ -8,7 +8,7 @@ import { Text, TextProps } from '@fluentui-react-native/text';
 import { IconV1 as Icon, IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import { useDividerTokens } from './DividerTokens';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { colorsFromAppearance, useDividerSlotProps } from './Divider.styling';
+import { colorsFromPropsAndTheme, useDividerSlotProps } from './Divider.styling';
 
 export const Divider = compressible<DividerProps, DividerTokens>((props: DividerProps, useTokens: UseTokens<DividerTokens>) => {
   const { alignContent = 'center', appearance = 'default', color, icon, insetSize = 0, vertical = false } = props;
@@ -18,18 +18,17 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
 
   // call patch function to manually change token values from props (this is done by the lookup function in compose components)
   [tokens, cache] = patchTokens(tokens, cache, {
-    color,
-    insetSize,
-    vertical,
-    ...colorsFromAppearance(appearance, theme),
-    contentPadding: globalTokens.size80,
     flexAfter: alignContent === 'end' ? 0 : 1,
     flexBefore: alignContent === 'start' ? 0 : 1,
     minHeight: props.vertical ? globalTokens.size240 : 0,
+    ...colorsFromPropsAndTheme({ appearance, color }, theme),
   });
 
   // get slot props from these tokens
-  const { rootProps, beforeLineProps, afterLineProps, wrapperProps, textProps, iconProps } = useDividerSlotProps(tokens, icon);
+  const { rootProps, beforeLineProps, afterLineProps, wrapperProps, textProps, iconProps } = useDividerSlotProps(
+    { icon, insetSize, vertical },
+    tokens,
+  );
 
   // build slots
   const RootSlot = useSlot<ViewProps>(View, rootProps);

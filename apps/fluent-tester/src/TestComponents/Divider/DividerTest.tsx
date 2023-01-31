@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { Divider } from '@fluentui-react-native/divider';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -70,9 +70,12 @@ export const DividersWithIcons: React.FunctionComponent = () => (
   <Stack style={commonTestStyles.stack}>
     <Divider appearance="brand" icon={{ fontSource: { fontFamily: 'Arial', codepoint: 0x2663, fontSize: 32 } }} />
     <CustomText align="center">
-      Above is a branded Divider with a font icon as content. Below me is a branded divider with an svg icon as content.
+      Above is a branded Divider with a font icon as content. Below me is a branded divider with an svg icon as content - this will not show
+      on UWP.
     </CustomText>
-    <Divider appearance="brand" icon={{ svgSource: { viewBox: '0 0 500 500', src: TestSvg, width: 32, height: 32 } }} />
+    {Platform.OS !== 'windows' && (
+      <Divider appearance="brand" icon={{ svgSource: { viewBox: '0 0 500 500', src: TestSvg, width: 32, height: 32 } }} />
+    )}
   </Stack>
 );
 
@@ -105,7 +108,8 @@ export const DividerTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'A Divider is a visual separator that can contain content (text or an icon). Dividers can be horizontal or vertical.';
+  const description =
+    'A Divider is a visual separator that can contain content (text or an icon). Dividers can be horizontal or vertical. As of now, the component is being designed for win32 only.';
 
   return <Test name="Divider Test" description={description} sections={dividerSections} status={status}></Test>;
 };

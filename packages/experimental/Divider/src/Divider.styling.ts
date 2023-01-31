@@ -1,23 +1,23 @@
 import { useMemo } from 'react';
-import { ViewProps } from 'react-native';
+import { ViewProps, ColorValue } from 'react-native';
 import { Theme } from '@fluentui-react-native/framework';
 import { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import { TextProps } from '@fluentui-react-native/text';
-import { DividerTokens, DividerAppearance } from './Divider.types';
+import { DividerTokens, DividerProps } from './Divider.types';
 
-const getIconProps = (tokens: DividerTokens, icon: IconProps): IconProps => {
+const getIconProps = (contentColor: ColorValue, icon: IconProps): IconProps => {
   if (icon.fontSource) {
     return {
       fontSource: {
         ...icon.fontSource,
-        color: tokens.color || tokens.contentColor,
+        color: contentColor,
       },
     };
   } else if (icon.svgSource) {
     return {
       svgSource: {
         ...icon.svgSource,
-        color: tokens.color || tokens.contentColor,
+        color: contentColor,
       },
     };
   } else {
@@ -25,14 +25,13 @@ const getIconProps = (tokens: DividerTokens, icon: IconProps): IconProps => {
   }
 };
 
-export const useDividerSlotProps = (tokens: DividerTokens, icon?: IconProps) => {
+export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens) => {
   const rootProps: ViewProps = useMemo(
     () => ({
       style: {
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
-        flexDirection: tokens.vertical ? 'column' : 'row',
         minWidth: tokens.minWidth,
         maxWidth: tokens.maxWidth,
         minHeight: tokens.minHeight,
@@ -42,19 +41,21 @@ export const useDividerSlotProps = (tokens: DividerTokens, icon?: IconProps) => 
         paddingEnd: tokens.paddingEnd,
         paddingHorizontal: tokens.paddingHorizontal,
         paddingVertical: tokens.paddingVertical,
-        ...(tokens.vertical
+        ...(props.vertical
           ? {
-              paddingVertical: tokens.insetSize,
+              flexDirection: 'column',
+              paddingVertical: props.insetSize,
               height: '100%',
             }
           : {
-              paddingHorizontal: tokens.insetSize,
+              flexDirection: 'row',
+              paddingHorizontal: props.insetSize,
             }),
       },
     }),
     [
-      tokens.vertical,
-      tokens.insetSize,
+      props.vertical,
+      props.insetSize,
       tokens.minHeight,
       tokens.maxHeight,
       tokens.minWidth,
@@ -72,14 +73,14 @@ export const useDividerSlotProps = (tokens: DividerTokens, icon?: IconProps) => 
       style: {
         flexBasis: tokens.minLineSize,
         flex: tokens.flexBefore,
-        borderColor: tokens.color || tokens.lineColor,
+        borderColor: tokens.lineColor,
         borderStyle: 'solid',
-        ...(tokens.vertical
+        ...(props.vertical
           ? { borderLeftWidth: tokens.thickness, minHeight: tokens.minLineSize }
           : { borderTopWidth: tokens.thickness, minWidth: tokens.minLineSize }),
       },
     }),
-    [tokens.color, tokens.flexBefore, tokens.lineColor, tokens.minLineSize, tokens.thickness, tokens.vertical],
+    [tokens.flexBefore, tokens.lineColor, tokens.minLineSize, tokens.thickness, props.vertical],
   );
 
   const afterLineProps: ViewProps = useMemo(
@@ -87,43 +88,55 @@ export const useDividerSlotProps = (tokens: DividerTokens, icon?: IconProps) => 
       style: {
         flexBasis: tokens.minLineSize,
         flex: tokens.flexAfter,
-        borderColor: tokens.color || tokens.lineColor,
+        borderColor: tokens.lineColor,
         borderStyle: 'solid',
-        ...(tokens.vertical
+        ...(props.vertical
           ? { borderLeftWidth: tokens.thickness, minHeight: tokens.minLineSize }
           : { borderTopWidth: tokens.thickness, minWidth: tokens.minLineSize }),
       },
     }),
-    [tokens.color, tokens.flexAfter, tokens.lineColor, tokens.minLineSize, tokens.thickness, tokens.vertical],
+    [tokens.flexAfter, tokens.lineColor, tokens.minLineSize, tokens.thickness, props.vertical],
   );
 
   const wrapperProps: ViewProps = useMemo(
     () => ({
       style: {
         flex: 0,
-        ...(tokens.vertical ? { paddingVertical: tokens.contentPadding } : { paddingHorizontal: tokens.contentPadding }),
+        ...(props.vertical ? { paddingVertical: tokens.contentPadding } : { paddingHorizontal: tokens.contentPadding }),
       },
     }),
-    [tokens.contentPadding, tokens.vertical],
+    [tokens.contentPadding, props.vertical],
   );
 
   const textProps: TextProps = useMemo(
     () => ({
       style: {
-        color: tokens.color || tokens.contentColor,
+        color: tokens.contentColor,
       },
     }),
-    [tokens.color, tokens.contentColor],
+    [tokens.contentColor],
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const iconProps: IconProps = useMemo(() => (icon ? getIconProps(tokens, icon) : {}), [icon, tokens.color, tokens.contentColor]);
+  const iconProps: IconProps = useMemo(
+    () => (props.icon ? getIconProps(tokens.contentColor, props.icon) : {}),
+    [props.icon, tokens.contentColor],
+  );
 
   return { rootProps, beforeLineProps, afterLineProps, wrapperProps, textProps, iconProps };
 };
 
-export const colorsFromAppearance = (appearance: DividerAppearance, theme: Theme): Pick<DividerTokens, 'contentColor' | 'lineColor'> => {
-  switch (appearance) {
+/**
+ * Helper function to set color tokens on divider. Fills tokens either (1) by using a passed color prop or (2) using the appearance
+ * prop and grabbing the correct color tokens, which change based on set appearance, from the current theme.
+ */
+export const colorsFromPropsAndTheme = (props: DividerProps, theme: Theme): Pick<DividerTokens, 'contentColor' | 'lineColor'> => {
+  if (props.color) {
+    return {
+      contentColor: props.color,
+      lineColor: props.color,
+    };
+  }
+  switch (props.appearance) {
     case 'default':
       return {
         contentColor: theme.colors.neutralForeground2,

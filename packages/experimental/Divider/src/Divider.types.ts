@@ -6,15 +6,29 @@ import { TextProps } from '@fluentui-react-native/text';
 export const dividerName = 'Divider';
 
 export const DividerInsetSizes = [0, 16, 56, 68, 72, 108] as const;
-export type DividerInsetSize = typeof DividerInsetSizes[number];
+export type DividerInsetSize = (typeof DividerInsetSizes)[number];
 export type DividerAlignment = 'start' | 'center' | 'end';
 export type DividerAppearance = 'default' | 'subtle' | 'brand' | 'strong';
 
-export interface DividerCoreProps {
+export interface DividerProps {
+  /**
+   * If a text or icon is passed, this dictates where content appears in the divider: at the start, centered, or towards the end.
+   * @default 'center'
+   */
+  alignContent?: DividerAlignment;
+  /**
+   * If no color is passed, the divider and its content are colored using different theme tokens depending on the value of this prop.
+   * @default 'default'
+   */
+  appearance?: DividerAppearance;
   /**
    * Colors both the divider lines and the content itself, overriding the colors provided by the appearance prop.
    */
   color?: ColorValue;
+  /**
+   * Pass an icon source to render an icon as content in the divider. Mutually exclusive with passing text as a child.
+   */
+  icon?: IconPropsV1;
   /**
    * The size of the Divider inset - the margin before the start and after the end of the divider.
    * @default 0
@@ -27,24 +41,7 @@ export interface DividerCoreProps {
   vertical?: boolean;
 }
 
-export interface DividerProps extends DividerCoreProps {
-  /**
-   * If a text or icon is passed, this dictates where content appears in the divider: at the start, centered, or towards the end.
-   * @default 'center'
-   */
-  alignContent?: DividerAlignment;
-  /**
-   * If no color is passed, the divider and its content are colored using different theme tokens depending on the value of this prop.
-   * @default 'default'
-   */
-  appearance?: DividerAppearance;
-  /**
-   * Pass an icon source to render an icon as content in the divider. Mutually exclusive with passing text as a child.
-   */
-  icon?: IconPropsV1;
-}
-
-export interface DividerTokens extends DividerCoreProps, LayoutTokens {
+export interface DividerTokens extends LayoutTokens {
   /**
    * The color of the content passed into the divider. This is overriden if the `color` prop / token is set.
    */
