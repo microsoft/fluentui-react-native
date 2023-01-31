@@ -1,7 +1,7 @@
 import { TestDescription } from './TestComponents';
 import { ActivityIndicatorTest } from './TestComponents/ActivityIndicator';
-import { AvatarTest, NativeAvatarTest } from './TestComponents/Avatar';
-import { BadgeTest } from './TestComponents/Badge';
+import { AvatarTest } from './TestComponents/Avatar';
+// import { BadgeTest } from './TestComponents/Badge';
 import { ButtonTest } from './TestComponents/Button';
 import { CalloutTest } from './TestComponents/Callout';
 import { CheckboxLegacyTest } from './TestComponents/CheckboxLegacy';
@@ -43,6 +43,12 @@ import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
   {
+    name: 'Theme',
+    component: ThemeTest,
+    testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
     name: 'ActivityIndicator',
     component: ActivityIndicatorTest,
     testPageButton: Constants.HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
@@ -54,18 +60,18 @@ export const tests: TestDescription[] = [
     testPageButton: Constants.HOMEPAGE_AVATAR_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
-  {
-    name: 'Avatar (Native)',
-    component: NativeAvatarTest,
-    testPageButton: Constants.HOMEPAGE_NATIVE_AVATAR_BUTTON,
-    platforms: ['ios', 'macos'],
-  },
-  {
-    name: 'Badge',
-    component: BadgeTest,
-    testPageButton: Constants.HOMEPAGE_BADGE_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  },
+  // {
+  //   name: 'Avatar (Native)',
+  //   component: NativeAvatarTest,
+  //   testPageButton: Constants.HOMEPAGE_NATIVE_AVATAR_BUTTON,
+  //   platforms: ['ios', 'macos'],
+  // },
+  // {
+  //   name: 'Badge',
+  //   component: BadgeTest,
+  //   testPageButton: Constants.HOMEPAGE_BADGE_BUTTON,
+  //   platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  // },
   {
     name: 'Button',
     component: ButtonTest,
@@ -272,6 +278,12 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32', 'windows'],
   },
   {
+    name: 'TestingTheme',
+    component: ThemeTest,
+    testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
     name: 'Tabs V1',
     component: TabsV1Test,
     testPageButton: Constants.HOMEPAGE_TABSV1_BUTTON,
@@ -288,11 +300,5 @@ export const tests: TestDescription[] = [
     component: TextV1Test,
     testPageButton: Constants.HOMEPAGE_TEXTV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Theme',
-    component: ThemeTest,
-    testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  },
+  }
 ];
