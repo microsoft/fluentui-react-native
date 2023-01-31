@@ -86,11 +86,6 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     textDisabled: '#ACACAC', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
     textOnAccent: 'white', //= UIColor(light: .white, dark: .black)
 
-    iconPrimary: '#6E6E6E', //= UIColor(light: gray500, lightHighContrast: gray700, dark: .white)
-    iconSecondary: '#919191', //= UIColor(light: gray400, lightHighContrast: gray600, dark: gray500, darkHighContrast: gray300, darkElevated: gray400)
-    iconDisabled: '#ACACAC', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-    iconOnAccent: 'white', //= UIColor(light: .white, dark: .black)
-
     buttonBackground: 'transparent',
     buttonBackgroundFilledPressed: '#2B88D8', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
     buttonBackgroundFilledDisabled: '#E1E1E1', //neutralBackgroundDisabled
@@ -181,11 +176,6 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     textSecondary: '#919191', //= UIColor(light: gray500, lightHighContrast: gray700, dark: gray400, darkHighContrast: gray200)
     textDisabled: '#404040', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
     textOnAccent: 'black', //= UIColor(light: .white, dark: .black)
-
-    iconPrimary: '#303030', //= UIColor(light: gray500, lightHighContrast: gray700, dark: .white)
-    iconSecondary: '#404040', //= UIColor(light: gray400, lightHighContrast: gray600, dark: gray500, darkHighContrast: gray300, darkElevated: gray400)
-    iconDisabled: '#6E6E6E', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-    iconOnAccent: 'black', //= UIColor(light: .white, dark: .black)
 
     buttonBackground: 'transparent',
     buttonBackgroundFilledPressed: '#004C87', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
@@ -289,7 +279,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
 
     menuBackground: fluent2AliasColorTokens.neutralBackground1,
     menuDivider: fluent2AliasColorTokens.neutralStroke2,
-    menuIcon: fluentApple.iconPrimary,
+    menuIcon: fluent2AliasColorTokens.neutralForeground3,
     menuHeader: fluentApple.textDominant,
     menuItemBackgroundHovered: fluent2AliasColorTokens.neutralBackground1,
     menuItemBackgroundPressed: fluent2AliasColorTokens.neutralBackground1,
@@ -424,7 +414,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     checkboxBackground: fluentApple.communicationBlue,
     checkboxBackgroundDisabled: fluent2AliasColorTokens.neutralBackground1,
     checkboxBorderColor: fluentApple.gray600,
-    checkmarkColor: fluentApple.iconOnAccent,
+    checkmarkColor: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     personaActivityGlow: fluentApple.buttonBackground,
     personaActivityRing: fluent2AliasColorTokens.neutralBackground1,

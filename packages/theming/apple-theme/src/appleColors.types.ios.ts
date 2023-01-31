@@ -96,15 +96,6 @@ interface FluentAppleSemanticColors {
   textDisabled: ColorValue; //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
   /** text appears on top of the surface that uses `Colors.primary` as background color */
   textOnAccent: ColorValue; //= UIColor(light: .white, dark: .black)
-
-  /** icon used as call-to-actions without a label attached. They need to reach a minimum contrast ratio 4.5:1 to its background */
-  iconPrimary: ColorValue; //= UIColor(light: gray500, lightHighContrast: gray700, dark: .white)
-  /** icon that are attached to a label and are only used for decorative purposes */
-  iconSecondary: ColorValue; //= UIColor(light: gray400, lightHighContrast: gray600, dark: gray500, darkHighContrast: gray300, darkElevated: gray400)
-  /** icon color used in disabled state */
-  iconDisabled: ColorValue; //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-  /** icon appears on top of surfaces that uses `Colors.primary` as background color */
-  iconOnAccent: ColorValue; //= UIColor(light: .white, dark: .black)
 }
 
 /** FluentUI Apple Colors defined for the iOS Button */
