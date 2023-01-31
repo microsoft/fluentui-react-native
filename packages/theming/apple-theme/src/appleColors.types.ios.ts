@@ -83,10 +83,10 @@ interface FluentAppleSemanticColors {
    * text color should not be lower than `gray500` in light mode to achieve 4.5:1 minimum contrast ratio in `.white` background
    * text color should not be higher than `gray400` in dark mode to achieve 4.5:1 minimum contrast ratio in `.black` background
    * when determining high contrast color, add 200 in light mode and substract 200 in dark mode from the default color.
-   * text color used for main level in the screen. eg. title in dialog, title in navigationbar with `surfacePrimary`, etc
+   * text color used for main level in the screen. eg. title in dialog, title in navigationbar with `neutralBackground1`, etc
    */
 
-  /** text color used for main level in the screen. eg. title in dialog, title in navigationbar with `surfacePrimary`, etc */
+  /** text color used for main level in the screen. eg. title in dialog, title in navigationbar with `neutralBackground1`, etc */
   textDominant: ColorValue; //= UIColor(light: gray900, lightHighContrast: .black, dark: .white)
   /** text color used for titles */
   textPrimary: ColorValue; //= UIColor(light: gray900, lightHighContrast: .black, dark: gray100, darkHighContrast: .white)
@@ -105,17 +105,6 @@ interface FluentAppleSemanticColors {
   iconDisabled: ColorValue; //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
   /** icon appears on top of surfaces that uses `Colors.primary` as background color */
   iconOnAccent: ColorValue; //= UIColor(light: .white, dark: .black)
-
-  /**
-   * In Dark mode, our system use two sets of background colors -- called base and elevated -- to enhance the perception of depth when one dark interface is layered above another.
-   * The dark base colors are darker, making background interface appear to recede, and the elevate colors are lighter, making foreground interfaces appear to advance
-   */
-
-  surfacePrimary: ColorValue; //= UIColor(light: .white, dark: .black, darkElevated: gray950)
-  surfaceSecondary: ColorValue; //= UIColor(light: gray25, dark: gray950, darkElevated: gray900)
-  surfaceTertiary: ColorValue; //= UIColor(light: gray50, dark: gray900, darkElevated: gray800)
-  /** also used for disabled background color */
-  surfaceQuaternary: ColorValue; //= UIColor(light: gray100, dark: gray600)
 }
 
 /** FluentUI Apple Colors defined for the iOS Button */
