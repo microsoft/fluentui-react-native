@@ -26,14 +26,16 @@ const Panel: React.FunctionComponent = () => {
   return (
     <View style={themedStyles.rootView}>
       <Text
-        style={{ color: theme.colors.neutralForeground1, fontSize: 30 }}>RN Text</Text>
-      {/* Expected this to show blue text, but just showed normal RN default style text */}
+        style={{ color: theme.colors.primaryButtonText, fontSize: 30 }}>RN Text</Text>
+
       <Text style={themedStyles.swatch} >Styled Text</Text>
 
       <Text style={{ color: theme2.colors.brandStroke1}} >Styled Text</Text>
 
 
-      {/* <Text style={{ fontVariant: theme.typography.variants.body1 }}> RN Text </Text> */}
+      {/* <Text style={{ fontVariant: theme.typography.variants.body1 }}> RN Text </Text>
+        // The style types are not 1-1 for typography, so no straight way to map.
+      */}
     </View >
 
   );
