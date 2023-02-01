@@ -1,7 +1,51 @@
-import { TABSITEMV1_TEST_COMPONENT, TABSV1_TESTPAGE, TABSV1_TEST_COMPONENT, HOMEPAGE_TABSV1_BUTTON } from '../consts';
+import {
+  TABSV1_TESTPAGE,
+  TABSV1_TEST_COMPONENT,
+  HOMEPAGE_TABSV1_BUTTON,
+  TABSITEMV1_ITEM_1,
+  TABSITEMV1_ITEM_2,
+  TABSITEMV1_ITEM_3,
+  TABSITEMV1_CONTENT_1,
+  TABSITEMV1_CONTENT_2,
+  TABSITEMV1_CONTENT_3,
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
+export const enum TabItem {
+  First = 1,
+  Second,
+  Third,
+}
+
 class TabsV1PageObject extends BasePage {
+  async waitForTabItemContentToLoad(selector: TabItem, errorMsg: string): Promise<boolean> {
+    const content = await this.getTabItemContent(selector);
+    await this.waitForCondition(async () => await content.isDisplayed(), errorMsg);
+    return await content.isDisplayed();
+  }
+
+  async getTabItem(selector: TabItem): Promise<WebdriverIO.Element> {
+    switch (selector) {
+      case TabItem.First:
+        return await By(TABSITEMV1_ITEM_1);
+      case TabItem.Second:
+        return await By(TABSITEMV1_ITEM_2);
+      case TabItem.Third:
+        return await By(TABSITEMV1_ITEM_3);
+    }
+  }
+
+  async getTabItemContent(selector: TabItem): Promise<WebdriverIO.Element> {
+    switch (selector) {
+      case TabItem.First:
+        return await By(TABSITEMV1_CONTENT_1);
+      case TabItem.Second:
+        return await By(TABSITEMV1_CONTENT_2);
+      case TabItem.Third:
+        return await By(TABSITEMV1_CONTENT_3);
+    }
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -15,13 +59,6 @@ class TabsV1PageObject extends BasePage {
 
   get _pageButtonName() {
     return HOMEPAGE_TABSV1_BUTTON;
-  }
-
-  /***********/
-  /* TabItem *
-  /***********/
-  get _tabItem() {
-    return By(TABSITEMV1_TEST_COMPONENT);
   }
 }
 
