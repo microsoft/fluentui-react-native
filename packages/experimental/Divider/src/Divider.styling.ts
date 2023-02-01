@@ -112,6 +112,7 @@ export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens) 
     () => ({
       style: {
         color: tokens.contentColor,
+        textAlign: 'center',
       },
     }),
     [tokens.contentColor],
