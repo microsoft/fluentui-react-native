@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Enable @typescript-eslint/consistent-type-imports",
-  "packageName": "@fluentui-react-native/pressable",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
