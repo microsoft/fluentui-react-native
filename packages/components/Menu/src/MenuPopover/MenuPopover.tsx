@@ -9,7 +9,7 @@ import { useMenuContext } from '../context';
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
-    const { directionalHint, gapSpace, maxHeight, maxWidth, minPadding, minWidth, borderWidth, borderColor, backgroundColor } = props;
+    const { directionalHint, gapSpace, maxHeight, maxWidth, minPadding, borderWidth, borderColor, backgroundColor } = props;
     const state = useMenuPopover(props);
     const theme = useFluentTheme();
     const context = useMenuContext();
@@ -23,7 +23,6 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
       maxHeight,
       maxWidth,
       minPadding,
-      minWidth,
       borderWidth,
       borderColor,
       backgroundColor,
@@ -38,7 +37,6 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
               ...state.innerView,
               style: {
                 maxHeight: mergedProps.maxHeight,
-                minWidth: mergedProps.minWidth,
               },
             }
           : state.innerView;

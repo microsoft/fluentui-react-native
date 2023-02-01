@@ -8,6 +8,7 @@ export const defaultMenuListTokens: TokenSettings<MenuListTokens, Theme> = (t: T
   minWidth: 160,
   maxWidth: 300,
   backgroundColor: t.colors.neutralBackground1,
+  /* To account for the width of the vertical scrollView. With the default minWidth, some content may be cut off */
   hasMaxHeight: {
     minWidth: 175,
   },
