@@ -25,7 +25,8 @@ const buttonSections: TestSection[] = [
     component: ButtonIconTest,
   },
   ...Platform.select({
-    android: [null], //Following sections are not supported from Fluent Android
+    ios: [],
+    android: [], //Following sections are not supported from Fluent Android
     default: [
       {
         name: 'Toggle Button',
@@ -53,7 +54,7 @@ const buttonSections: TestSection[] = [
     component: E2EButtonTest,
   },
   ...Platform.select({
-    android: [null], //Following sections are not supported from Fluent Android
+    android: [], //Following sections are not supported from Fluent Android
     default: [
       {
         name: 'Deprecated Basic Button',
