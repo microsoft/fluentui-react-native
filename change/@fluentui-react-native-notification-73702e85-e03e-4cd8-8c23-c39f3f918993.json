@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Replace hardcoded colors with alias color tokens",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Wed, 01 Feb 2023 18:58:56 GMT",
+      "tag": "@fluentui-react-native/notification_v0.21.24",
+      "version": "0.21.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "6594eb5835dde4891d146f673b5edb86029c39f6",
+            "comment": "Replace hardcoded colors with alias color tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 22:56:35 GMT",
       "tag": "@fluentui-react-native/notification_v0.21.23",
       "version": "0.21.23",
