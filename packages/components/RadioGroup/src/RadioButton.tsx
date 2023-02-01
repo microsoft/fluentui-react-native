@@ -8,7 +8,7 @@ import { radioButtonName } from './RadioButton.types';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import type { ISlots} from '@uifabricshared/foundation-composable';
+import type { ISlots } from '@uifabricshared/foundation-composable';
 import { withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';

@@ -2,11 +2,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType} from './Checkbox.types';
+import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType } from './Checkbox.types';
 import { checkboxName } from './Checkbox.types';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
-import type { ISlots} from '@uifabricshared/foundation-composable';
+import type { ISlots } from '@uifabricshared/foundation-composable';
 import { withSlots } from '@uifabricshared/foundation-composable';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings, checkboxSelectActionLabel } from './Checkbox.settings';

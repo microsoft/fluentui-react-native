@@ -2,7 +2,7 @@
 import { View } from 'react-native';
 import type { SeparatorProps, SeparatorType } from './Separator.types';
 import { separatorName } from './Separator.types';
-import type { UseSlots} from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { stylingSettings } from './Separator.styling';
 

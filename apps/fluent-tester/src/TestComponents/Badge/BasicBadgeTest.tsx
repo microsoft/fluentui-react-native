@@ -8,14 +8,9 @@ import type {
   BadgeSize,
   BadgeIconPosition,
   BadgeProps,
-  BadgeTokens} from '@fluentui-react-native/badge';
-import {
-  Badge,
-  BadgeAppearances,
-  BadgeColors,
-  BadgeShapes,
-  BadgeSizes
+  BadgeTokens,
 } from '@fluentui-react-native/badge';
+import { Badge, BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from '@fluentui-react-native/badge';
 import { StyledPicker } from '../Common/StyledPicker';
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import { ToggleButton } from '@fluentui/react-native';

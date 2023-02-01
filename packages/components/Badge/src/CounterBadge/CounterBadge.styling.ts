@@ -1,4 +1,4 @@
-import type { CounterBadgeTokens, CounterBadgeProps, CounterBadgeSlotProps} from './CounterBadge.types';
+import type { CounterBadgeTokens, CounterBadgeProps, CounterBadgeSlotProps } from './CounterBadge.types';
 import { counterBadgeName } from './CounterBadge.types';
 import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';

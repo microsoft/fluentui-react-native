@@ -1,6 +1,6 @@
 import type { RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
 import { radioName } from './Radio.types';
-import type { Theme, UseStylingOptions} from '@fluentui-react-native/framework';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { defaultRadioTokens } from './RadioTokens';
 import { fontStyles, borderStyles } from '@fluentui-react-native/tokens';

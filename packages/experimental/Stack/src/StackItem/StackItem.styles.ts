@@ -1,6 +1,6 @@
-import type { StackItemTokens, StackItemProps, StackItemSlotProps} from './StackItem.types';
+import type { StackItemTokens, StackItemProps, StackItemSlotProps } from './StackItem.types';
 import { stackItemName } from './StackItem.types';
-import type { UseStylingOptions} from '@fluentui-react-native/framework';
+import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { getMemoCache } from '@fluentui-react-native/framework';
 import type { ViewStyle, ViewProps } from 'react-native';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { NotificationVariant} from '@fluentui-react-native/notification';
+import type { NotificationVariant } from '@fluentui-react-native/notification';
 import { Notification, NotificationVariants } from '@fluentui-react-native/notification';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';

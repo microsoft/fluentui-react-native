@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
 import { Button } from '@fluentui-react-native/experimental-button';
-import type { UseSlots} from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots } from '@fluentui-react-native/framework';
 import { stylingSettings } from './MenuButton.styling';
 import { renderContextualMenu } from './renderContextualMenu';

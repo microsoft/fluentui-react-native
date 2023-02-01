@@ -4,7 +4,7 @@ import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import type { ISlots} from '@uifabricshared/foundation-composable';
+import type { ISlots } from '@uifabricshared/foundation-composable';
 import { withSlots } from '@uifabricshared/foundation-composable';
 import { RadioGroupContext } from './RadioGroup';
 import type { IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonType } from './RadioButton.types';

@@ -1,5 +1,5 @@
 import { Checkbox } from '@fluentui/react-native';
-import type { Theme} from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
 import { View, TextInput } from 'react-native';

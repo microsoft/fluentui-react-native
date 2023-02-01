@@ -6,10 +6,9 @@ import type {
   OfficeThemingModule,
   CxxException,
   PlatformDefaultsChangedCallback,
-  PlatformDefaultsChangedArgs} from '@fluentui-react-native/win32-theme';
-import {
-  createPartialOfficeTheme
+  PlatformDefaultsChangedArgs,
 } from '@fluentui-react-native/win32-theme';
+import { createPartialOfficeTheme } from '@fluentui-react-native/win32-theme';
 
 type PaletteCache = { [key: string]: OfficePalette };
 

@@ -1,6 +1,6 @@
 import type { ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize, ButtonAppearance } from './Button.types';
 import { buttonName } from './Button.types';
-import type { Theme, UseStylingOptions} from '@fluentui-react-native/framework';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import type { FontTokens } from '@fluentui-react-native/tokens';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';

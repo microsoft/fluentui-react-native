@@ -1,4 +1,4 @@
-import type { TextStyle} from 'react-native';
+import type { TextStyle } from 'react-native';
 import { Image, Platform } from 'react-native';
 import { getMemoCache } from '@fluentui-react-native/framework';
 import type { FontIconProps } from './FontIcon.types';

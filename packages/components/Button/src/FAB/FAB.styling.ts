@@ -1,6 +1,6 @@
 import type { FABProps, FABSlotProps, FABTokens } from './FAB.types';
 import { fabName } from './FAB.types';
-import type { Theme, UseStylingOptions} from '@fluentui-react-native/framework';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';

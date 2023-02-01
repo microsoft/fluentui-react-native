@@ -6,7 +6,7 @@ import type { ThemeNames } from './applyTheme';
 import { themeChoices } from './applyTheme';
 import type { OfficeBrand } from './applyBrand';
 import { brandOptions } from './applyBrand';
-import type { Theme} from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import type { PickerProps } from '@react-native-picker/picker';

@@ -2,7 +2,7 @@
 import type { UseTokens } from './useTokens';
 import { buildUseTokens } from './useTokens';
 import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
-import type { TextProps, TextStyle} from 'react-native';
+import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
 import { compressible } from './compressible';
 import type { Theme } from '@fluentui-react-native/theme-types';

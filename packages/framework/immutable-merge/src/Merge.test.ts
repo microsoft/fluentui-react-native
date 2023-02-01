@@ -1,4 +1,4 @@
-import type { MergeOptions} from './Merge';
+import type { MergeOptions } from './Merge';
 import { immutableMerge, immutableMergeCore, processImmutable } from './Merge';
 
 interface IFakeStyle {

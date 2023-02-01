@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import type { FocusZoneDirection} from '@fluentui/react-native';
+import type { FocusZoneDirection } from '@fluentui/react-native';
 import { FocusZone, MenuButton, Text } from '@fluentui/react-native';
 import { Switch } from '@fluentui-react-native/switch';
 import type { ButtonProps } from '@fluentui-react-native/button';

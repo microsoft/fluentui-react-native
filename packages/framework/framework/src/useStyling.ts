@@ -8,11 +8,9 @@ import type {
   TokenSettings as TokenSettingsBase,
   UseStylingOptions as UseStylingOptionsBase,
   UseStyling,
-  BuildPropsBase} from '@fluentui-react-native/use-styling';
-import {
-  buildUseStyling as buildUseStylingBase,
-  buildProps as buildPropsBase
+  BuildPropsBase,
 } from '@fluentui-react-native/use-styling';
+import { buildUseStyling as buildUseStylingBase, buildProps as buildPropsBase } from '@fluentui-react-native/use-styling';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { themeHelper } from './themeHelper';
 

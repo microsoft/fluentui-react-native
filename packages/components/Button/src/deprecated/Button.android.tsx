@@ -5,7 +5,7 @@ import type { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, I
 import { buttonName } from './Button.types';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
-import type { ISlots} from '@uifabricshared/foundation-composable';
+import type { ISlots } from '@uifabricshared/foundation-composable';
 import { withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './Button.settings';

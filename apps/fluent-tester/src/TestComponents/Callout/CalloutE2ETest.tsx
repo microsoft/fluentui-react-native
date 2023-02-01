@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ScreenRect} from 'react-native';
+import type { ScreenRect } from 'react-native';
 import { View } from 'react-native';
 import type { DismissBehaviors } from '@fluentui/react-native';
 import { ButtonV1 as Button, Callout, Text } from '@fluentui/react-native';

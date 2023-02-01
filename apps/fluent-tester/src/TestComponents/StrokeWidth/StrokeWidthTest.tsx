@@ -7,7 +7,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { Text } from '@fluentui/react-native';
-import type { Theme} from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/framework';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';

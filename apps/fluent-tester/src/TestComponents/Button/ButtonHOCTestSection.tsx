@@ -3,7 +3,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
-import type { InteractionEvent} from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { isGestureResponderEvent } from '@fluentui-react-native/interactive-hooks';
 import { svgProps } from '../Common/iconExamples';
 

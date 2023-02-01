@@ -1,10 +1,10 @@
 import * as React from 'react';
-import type { IPressableState} from '@fluentui-react-native/interactive-hooks';
+import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { useFocusState, useHoverState, usePressState } from '@fluentui-react-native/interactive-hooks';
 import { Pressable } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { Square } from '../Common/Square';
-import type { GestureResponderEvent, ViewProps, ViewStyle} from 'react-native';
+import type { GestureResponderEvent, ViewProps, ViewStyle } from 'react-native';
 import { Alert, StyleSheet, View, Text } from 'react-native';
 import { PRESSABLE_TESTPAGE } from '../../../../E2E/src/Pressable/consts';
 import type { TestSection, PlatformStatus } from '../Test';

@@ -1,4 +1,4 @@
-import type { CacheEntry} from './getCacheEntry';
+import type { CacheEntry } from './getCacheEntry';
 import { getCacheEntry } from './getCacheEntry';
 
 export type ValueFactory<T> = () => T;

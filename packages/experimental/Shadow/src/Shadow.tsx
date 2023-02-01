@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
-import type { ShadowProps} from './Shadow.types';
+import type { ShadowProps } from './Shadow.types';
 import { shadowName } from './Shadow.types';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { getShadowTokenStyleSet } from './shadowStyle';

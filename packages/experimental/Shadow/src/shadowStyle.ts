@@ -1,6 +1,6 @@
 import { memoize } from '@fluentui-react-native/framework';
 import type { ShadowToken } from '@fluentui-react-native/theme-types';
-import type { ColorValue} from 'react-native';
+import type { ColorValue } from 'react-native';
 import { Platform } from 'react-native';
 
 /**

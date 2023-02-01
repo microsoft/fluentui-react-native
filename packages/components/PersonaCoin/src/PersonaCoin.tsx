@@ -5,10 +5,9 @@ import type {
   IPersonaCoinType,
   IPersonaCoinSlotProps,
   IPersonaCoinRenderData,
-  IPersonaCoinState} from './PersonaCoin.types';
-import {
-  personaCoinName,
+  IPersonaCoinState,
 } from './PersonaCoin.types';
+import { personaCoinName } from './PersonaCoin.types';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';

@@ -1,4 +1,4 @@
-import type { Theme, UseStylingOptions} from '@fluentui-react-native/framework';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultMenuListTokens } from './MenuListTokens';

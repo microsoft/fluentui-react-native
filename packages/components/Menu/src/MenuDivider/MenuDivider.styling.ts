@@ -1,4 +1,4 @@
-import type { UseStylingOptions} from '@fluentui-react-native/framework';
+import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { defaultMenuDividerTokens } from './MenuDividerTokens';
 import type { MenuDividerProps, MenuDividerTokens, MenuDividerSlotProps } from './MenuDivider.types';

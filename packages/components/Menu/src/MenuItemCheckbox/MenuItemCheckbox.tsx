@@ -1,17 +1,16 @@
 /** @jsx withSlots */
 import { Pressable } from 'react-native';
 import { SvgXml } from 'react-native-svg';
-import type { Slots, UseSlots} from '@fluentui-react-native/framework';
+import type { Slots, UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import type {
   MenuItemCheckboxProps,
   MenuItemCheckboxSlotProps,
   MenuItemCheckboxInfo,
-  MenuItemCheckboxType} from './MenuItemCheckbox.types';
-import {
-  menuItemCheckboxName
+  MenuItemCheckboxType,
 } from './MenuItemCheckbox.types';
+import { menuItemCheckboxName } from './MenuItemCheckbox.types';
 import { useMenuItemCheckbox } from './useMenuItemCheckbox';
 import { stylingSettings } from './MenuItemCheckbox.styling';
 import { getAccessibilityLabel } from '../MenuItem/MenuItem';

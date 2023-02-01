@@ -7,7 +7,7 @@ import { useWindowDimensions, View } from 'react-native';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { Body2, Body2Strong } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
-import type { UseSlots} from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, memoize } from '@fluentui-react-native/framework';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import type { StackItemType, StackItemProps } from './StackItem.types';
 import { stackItemName } from './StackItem.types';
-import type { UseSlots} from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { View } from 'react-native';
 import { stylingSettings } from './StackItem.styles';

@@ -1,11 +1,5 @@
-import type {
-  PresenceBadgeTokens,
-  PresenceBadgeSlotProps,
-  PresenceBadgeProps} from './PresenceBadge.types';
-import {
-  presenceBadgeName,
-  PresenceBadgeStatuses,
-} from './PresenceBadge.types';
+import type { PresenceBadgeTokens, PresenceBadgeSlotProps, PresenceBadgeProps } from './PresenceBadge.types';
+import { presenceBadgeName, PresenceBadgeStatuses } from './PresenceBadge.types';
 import type { BadgeConfigurableProps } from '../Badge.types';
 import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';

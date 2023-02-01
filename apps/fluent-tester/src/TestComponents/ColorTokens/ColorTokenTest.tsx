@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ViewStyle, ColorValue} from 'react-native';
+import type { ViewStyle, ColorValue } from 'react-native';
 import { View, StyleSheet, Platform } from 'react-native';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';

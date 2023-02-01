@@ -7,19 +7,18 @@ import type {
   ContextualMenuType,
   ContextualMenuRenderData,
   ContextualMenuContext,
-  ContextualMenuState} from './ContextualMenu.types';
-import {
-  contextualMenuName
+  ContextualMenuState,
 } from './ContextualMenu.types';
+import { contextualMenuName } from './ContextualMenu.types';
 import { settings } from './ContextualMenu.settings';
-import type { IUseComposeStyling} from '@uifabricshared/foundation-compose';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
-import type { IFocusable} from '@fluentui-react-native/interactive-hooks';
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
-import type { ISlots} from '@uifabricshared/foundation-composable';
+import type { ISlots } from '@uifabricshared/foundation-composable';
 import { withSlots } from '@uifabricshared/foundation-composable';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 

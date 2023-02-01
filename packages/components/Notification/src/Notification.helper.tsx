@@ -1,10 +1,10 @@
 import React from 'react';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';
-import type { ButtonProps, ButtonTokens} from '@fluentui-react-native/button';
+import type { ButtonProps, ButtonTokens } from '@fluentui-react-native/button';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
-import type { SvgIconProps} from '@fluentui-react-native/icon';
+import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/icon';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { NotificationProps } from './Notification.types';

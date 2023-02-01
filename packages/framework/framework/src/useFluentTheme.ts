@@ -1,5 +1,5 @@
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
-import type { Theme} from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
 
 /**

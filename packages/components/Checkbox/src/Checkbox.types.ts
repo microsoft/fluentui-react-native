@@ -1,6 +1,12 @@
 import type * as React from 'react';
 import type { ColorValue, ViewStyle } from 'react-native';
-import type { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type {
+  FontTokens,
+  IBorderTokens,
+  IForegroundColorTokens,
+  IBackgroundColorTokens,
+  LayoutTokens,
+} from '@fluentui-react-native/tokens';
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 import type { SvgProps } from 'react-native-svg';

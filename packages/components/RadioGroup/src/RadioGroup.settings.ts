@@ -1,5 +1,5 @@
 import type { IComposeSettings } from '@uifabricshared/foundation-compose';
-import type { IRadioGroupType} from './RadioGroup.types';
+import type { IRadioGroupType } from './RadioGroup.types';
 import { radioGroupName } from './RadioGroup.types';
 
 export const settings: IComposeSettings<IRadioGroupType> = [

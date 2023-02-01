@@ -1,4 +1,4 @@
-import type { InteractionEvent} from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { isMouseEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
 import { Platform } from 'react-native';

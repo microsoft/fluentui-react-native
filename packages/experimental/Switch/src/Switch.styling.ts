@@ -1,6 +1,6 @@
 import type { SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch.types';
 import { switchName } from './Switch.types';
-import type { UseStylingOptions, Theme} from '@fluentui-react-native/framework';
+import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultSwitchTokens } from './SwitchTokens';

@@ -1,6 +1,12 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, IColorTokens } from '@fluentui-react-native/tokens';
+import type {
+  FontTokens,
+  IForegroundColorTokens,
+  IBackgroundColorTokens,
+  IBorderTokens,
+  IColorTokens,
+} from '@fluentui-react-native/tokens';
 import type { IFocusable, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ColorValue, ViewStyle } from 'react-native';
 import type { Variant } from '@fluentui-react-native/framework';

@@ -5,7 +5,7 @@ import { View, I18nManager } from 'react-native';
 import type { BadgeType, BadgeProps } from './Badge.types';
 import { badgeName } from './Badge.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import type { UseSlots} from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { stylingSettings } from './Badge.styling';

@@ -6,13 +6,12 @@ import type {
   ContextualMenuItemState,
   ContextualMenuItemProps,
   ContextualMenuItemRenderData,
-  ContextualMenuItemType} from './ContextualMenuItem.types';
-import {
-  contextualMenuItemName
+  ContextualMenuItemType,
 } from './ContextualMenuItem.types';
+import { contextualMenuItemName } from './ContextualMenuItem.types';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
-import type { ISlots} from '@uifabricshared/foundation-composable';
+import type { ISlots } from '@uifabricshared/foundation-composable';
 import { withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
