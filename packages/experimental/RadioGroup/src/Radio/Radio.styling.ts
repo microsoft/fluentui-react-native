@@ -105,24 +105,3 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     ),
   },
 };
-
-// export const contentStyling = (tokens: RadioTokens, theme: Theme, contentColor: ColorValue, fontStylesTokens: FontTokens) => {
-//   const textAdjustment = getTextMarginAdjustment();
-//   const spacingIconContentBefore = tokens.spacingIconContentBefore
-//     ? {
-//         marginStart: textAdjustment.marginStart + tokens.spacingIconContentBefore,
-//       }
-//     : {};
-//   const spacingIconContentAfter = tokens.spacingIconContentAfter
-//     ? {
-//         marginEnd: textAdjustment.marginEnd + tokens.spacingIconContentAfter,
-//       }
-//     : {};
-//   return {
-//     color: contentColor,
-//     ...getTextMarginAdjustment(),
-//     ...spacingIconContentBefore,
-//     ...spacingIconContentAfter,
-//     ...fontStyles.from(fontStylesTokens, theme),
-//   };
-// };
