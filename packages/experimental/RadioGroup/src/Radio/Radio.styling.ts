@@ -2,6 +2,7 @@ import { radioName, RadioTokens, RadioSlotProps, RadioProps } from './Radio.type
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultRadioTokens } from './RadioTokens';
 import { fontStyles, borderStyles } from '@fluentui-react-native/tokens';
+import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
 export const radioStates: (keyof RadioTokens)[] = ['labelPositionBelow', 'focused', 'hovered', 'pressed', 'selected', 'disabled'];
 
@@ -18,6 +19,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           paddingHorizontal: tokens.rootHorizontalPadding,
           paddingVertical: tokens.rootVerticalPadding,
           ...borderStyles.from(tokens, theme),
+          ...getTextMarginAdjustment(),
         },
         android_ripple: { color: tokens.rippleColor },
       }),
@@ -103,3 +105,24 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     ),
   },
 };
+
+// export const contentStyling = (tokens: RadioTokens, theme: Theme, contentColor: ColorValue, fontStylesTokens: FontTokens) => {
+//   const textAdjustment = getTextMarginAdjustment();
+//   const spacingIconContentBefore = tokens.spacingIconContentBefore
+//     ? {
+//         marginStart: textAdjustment.marginStart + tokens.spacingIconContentBefore,
+//       }
+//     : {};
+//   const spacingIconContentAfter = tokens.spacingIconContentAfter
+//     ? {
+//         marginEnd: textAdjustment.marginEnd + tokens.spacingIconContentAfter,
+//       }
+//     : {};
+//   return {
+//     color: contentColor,
+//     ...getTextMarginAdjustment(),
+//     ...spacingIconContentBefore,
+//     ...spacingIconContentAfter,
+//     ...fontStyles.from(fontStylesTokens, theme),
+//   };
+// };
