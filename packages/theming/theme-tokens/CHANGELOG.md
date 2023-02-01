@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.1
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Add `darkElevated` theme (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.30.1
+
+## 0.24.0
+
+Wed, 25 Jan 2023 21:31:17 GMT
+
+### Minor changes
+
+- Adding shared colors android (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.30.0
+
+## 0.23.2
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Update all design-tokens packages to 0.42.0 (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.23.1
 

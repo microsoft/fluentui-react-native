@@ -88,21 +88,27 @@ export type ShimmerElementTypes = ShimmerCircleElement | ShimmerRectElement;
 
 export interface ShimmerTokens extends IBackgroundColorTokens {
   /**
-   * Specifies the Shimmer effect angle in degrees (produced by a gradient)
-   * @defaultValue 0
+   * Specifies the Shimmer effect angle in degrees (produced by a gradient).
+   *
+   * @defaultValue 45 on @platform Android
+   * @defaultValue 0 on other platforms.
    */
   angle?: number;
 
   /**
-   * Specifies the animation delay time in milliseconds
-   * @defaultValue 0
+   * Specifies the animation delay time in milliseconds.
+   *
+   * @defaultValue 500 on @platform win32
+   * @defaultValue 0 on other platforms.
    */
   delay?: number;
 
   /**
-   * Specifies the time required to traverse the control in milliseconds
+   * Specifies the time required to traverse the control in milliseconds.
    *
-   * @defaultValue 2000
+   * @defaultValue 1000 on @platform Android
+   * @defaultValue 2000 on @platform win32
+   * @defaultValue 7000 on other platforms.
    */
   duration?: number;
 
@@ -121,7 +127,9 @@ export interface ShimmerTokens extends IBackgroundColorTokens {
   /**
    * Color you see when the shimmer wave is not animating.
    *
-   * @defaultValue theme.colors.bodyFrameDivider
+   * @defaultValue theme.colors.neutralStencil1 on @platform Android
+   * @defaultValue theme.colors.bodyFrameDivider on @platform win32
+   * @defaultValue #E1E1E1/#404040 for light/dark theme on other platforms.
    */
   shimmerColor?: ColorValue;
 
@@ -129,18 +137,22 @@ export interface ShimmerTokens extends IBackgroundColorTokens {
    * Defines the tip color of the wave which has a linear gradient.
    * from shimmerColor to shimmerWaveColor to shimmerColor.
    *
-   * @defaultValue '#E1E1E1'
+   * @defaultValue theme.colors.neutralStencil2 on @platform Android
+   * @defaultValue #E1E1E1 on @platform win32
+   * @defaultValue white/black for light/dark theme on other platforms.
    */
   shimmerWaveColor?: ColorValue;
 
   /**
    * Width of the Shimmer wave.
+   *
    * @defaultValue '100%' of the 'width' property
+   * @platform win32
    */
   shimmerWaveWidth?: number | string;
 }
 
-export interface ShimmerSlotProps extends ShimmerProps {
+export interface ShimmerSlotProps {
   root: SvgProps;
 }
 
@@ -148,7 +160,7 @@ export interface ShimmerProps extends ViewProps, ShimmerTokens {
   /**
    * Shimmer shapes that define the masking effect of the Shimmer control.
    */
-  elements?: Array<ShimmerElementTypes>;
+  elements: Array<ShimmerElementTypes>;
 }
 
 export interface ShimmerType {

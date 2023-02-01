@@ -4,6 +4,12 @@ import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
 describe('Notification component tests', () => {
+  beforeAll(() => {
+    jest.mock('@fluentui-react-native/experimental-appearance-additions', () => ({
+      useHorizontalSizeClass: 'regular',
+    }));
+  });
+
   it('Notification default', () => {
     const tree = renderer
       .create(

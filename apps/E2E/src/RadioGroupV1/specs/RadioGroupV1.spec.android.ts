@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import RadioGroupV1Page, { RadioSelector } from '../pages/RadioGroupV1PageObject';
+import RadioGroupV1Page, { Radio } from '../pages/RadioGroupV1PageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, AndroidAttribute, ANDROID_RADIOBUTTON } from '../../common/consts';
 import { RADIOGROUPV1_TEST_COMPONENT } from '../consts';
 
@@ -42,7 +42,7 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
 
   it('Validate Radio Group Class on Android', async () => {
     await expect(
-      await RadioGroupV1Page.compareAttribute(RadioGroupV1Page._firstRadio, AndroidAttribute.Class, ANDROID_RADIOBUTTON),
+      await RadioGroupV1Page.compareAttribute(RadioGroupV1Page.getRadio(Radio.First), AndroidAttribute.Class, ANDROID_RADIOBUTTON),
     ).toBeTruthy();
 
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
@@ -59,14 +59,13 @@ describe('RadioGroupV1 Functional Testing', async () => {
 
   it('Click on a Radio and ensure it changes state from unselected -> selected', async () => {
     /* Validate the Radio is not initially selected */
-    await expect(await RadioGroupV1Page.isRadioSelected(RadioSelector.Second)).toBeFalsy();
+    await expect(await RadioGroupV1Page.isRadioSelected(Radio.Second)).toBeFalsy();
 
     /* Click on the Radio to select it */
-    await RadioGroupV1Page.clickRadio(RadioSelector.Second);
-    await RadioGroupV1Page.waitForRadioSelected(RadioSelector.Second, PAGE_TIMEOUT);
+    await RadioGroupV1Page.click(RadioGroupV1Page.getRadio(Radio.Second));
 
     /* Validate the Radio is selected */
-    await expect(await RadioGroupV1Page.isRadioSelected(RadioSelector.Second)).toBeTruthy();
+    await expect(await RadioGroupV1Page.waitForRadioSelected(Radio.Second, 'Expected radio #2 to be selected by click.')).toBeTruthy();
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 });

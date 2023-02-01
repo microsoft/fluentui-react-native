@@ -6,6 +6,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { shimmerBorderRadiusTests, shimmerRectsAndRect, shimmerRectsAndCircle } from './ShimmerTestElementSets';
 import { E2ETestingShimmer } from './ShimmerE2ETest';
+import { Platform } from 'react-native';
 
 const TestCompareCustomizeShimmer = Shimmer.customize({
   shimmerWaveColor: 'blue',
@@ -53,7 +54,7 @@ export const RoundedCornerClipCheckShimmer: React.FunctionComponent = () => {
 const RectShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
-      <Shimmer elements={shimmerRectsAndRect()} duration={2000} delay={1000} style={{ width: 300, height: 100 }} />
+      <Shimmer elements={shimmerRectsAndRect()} style={{ width: 300, height: 100 }} />
     </Stack>
   );
 };
@@ -61,7 +62,7 @@ const RectShimmers: React.FunctionComponent<Record<string, never>> = () => {
 const RectCircleShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
-      <Shimmer elements={shimmerRectsAndCircle()} duration={3000} style={{ width: 300, height: 100 }} />
+      <Shimmer elements={shimmerRectsAndCircle()} duration={3000} delay={1000} style={{ width: 300, height: 100 }} />
     </Stack>
   );
 };
@@ -94,16 +95,21 @@ const shimmerSections: TestSection[] = [
     testID: SHIMMER_TESTPAGE,
     component: RectCircleShimmers,
   },
-  {
-    name: 'Border Radius Tests',
-    testID: SHIMMER_TESTPAGE,
-    component: ShimmerBorderRadii,
-  },
-  {
-    name: 'Customized Shimmer',
-    testID: SHIMMER_TESTPAGE,
-    component: CustomizedShimmer,
-  },
+  ...Platform.select({
+    android: [null],
+    default: [
+      {
+        name: 'Border Radius Tests',
+        testID: SHIMMER_TESTPAGE,
+        component: ShimmerBorderRadii,
+      },
+      {
+        name: 'Customized Shimmer',
+        testID: SHIMMER_TESTPAGE,
+        component: CustomizedShimmer,
+      },
+    ],
+  }),
   {
     name: 'Shimmer for E2E Testing',
     component: E2ETestingShimmer,

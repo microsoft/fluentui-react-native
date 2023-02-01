@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Wed, 18 Jan 2023 01:55:11 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.14
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.37
+- Bump @fluentui-react-native/tokens to v0.20.6
+- Bump @fluentui-react-native/theming-utils to v0.23.1
+
+## 0.8.13
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.36
+- Bump @fluentui-react-native/tokens to v0.20.5
+- Bump @fluentui-react-native/theming-utils to v0.23.0
+
+## 0.8.12
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.35
 
 ## 0.8.11
 

@@ -1,8 +1,79 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 20 Jan 2023 01:45:16 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Jan 2023 00:18:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.13.1
+
+Tue, 31 Jan 2023 00:18:04 GMT
+
+### Patches
+
+- Use better test names + new e2e methods on IconV1 (winlarry@microsoft.com)
+
+## 1.13.0
+
+Mon, 30 Jan 2023 20:48:57 GMT
+
+### Minor changes
+
+- Try doubling color tokens page timeout time (78454019+lyzhan7@users.noreply.github.com)
+
+## 1.12.3
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.26
+
+## 1.12.2
+
+Fri, 27 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Change console.error -> console.warn in BasePage (winlarry@microsoft.com)
+
+## 1.12.1
+
+Thu, 26 Jan 2023 17:47:06 GMT
+
+### Patches
+
+- Overhaul Button tests with better errors, refactored code (winlarry@microsoft.com)
+
+## 1.12.0
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Minor changes
+
+- Removed win32 extenstion from ShimmerPageObj and added android tests" (ayushsinghs@yahoo.in)
+- Update RadioGroupV1 E2E tests with better errors + use of refactored methods (winlarry@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.25
+
+### Patches
+
+- Overhaul Checkbox tests with better errors, refactored code (winlarry@microsoft.com)
+- Fix build failing on radiogroup android tests (winlarry@microsoft.com)
+
+## 1.11.2
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Rename tokens test to color tokens test (78454019+lyzhan7@users.noreply.github.com)
+
+## 1.11.1
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.24
 
 ## 1.11.0
 
