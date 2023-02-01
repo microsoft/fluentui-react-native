@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add eslint to packages missing a config",
+  "packageName": "@fluentui-react-native/codemods",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
