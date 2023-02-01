@@ -64,8 +64,18 @@ export const StandardUsage: FunctionComponent = () => {
       </View>
 
       <View style={mobileStyles.testVariants}>
-        {/* Variation - Standard */}
+        {/* Variation - Image with Badge */}
+        <Avatar size={16} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={20} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={24} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={32} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={40} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={56} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={72} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
+      </View>
 
+      <View style={mobileStyles.testVariants}>
+        {/* Variation - Standard */}
         <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={16} avatarColor={'brand'} />
         <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={20} avatarColor={'brand'} />
         <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={24} avatarColor={'brand'} />

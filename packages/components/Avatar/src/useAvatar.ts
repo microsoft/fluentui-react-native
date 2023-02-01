@@ -1,4 +1,4 @@
-import { ImageProps, ImageSourcePropType } from 'react-native';
+import { ImageProps, ImageSourcePropType, Platform } from 'react-native';
 import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize, AvatarColor } from './Avatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles, multiWordTitles } from './titles';
@@ -71,6 +71,12 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
       },
       ...restIconProps,
     };
+  }
+
+  const disableRingAndBadge = Platform.OS === 'android' && size === 16;
+  if (disableRingAndBadge) {
+    state.showRing = false;
+    state.showBadge = false;
   }
 
   return {

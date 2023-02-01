@@ -19,14 +19,14 @@ export function getRingConfig(tokens: AvatarTokens): RingConfig {
       innerGap,
     };
   } else {
-    if (size == 16) {
+    if (size <= 16) {
       return {
         size: size + strokeSize.small * 4,
         ringThickness: strokeSize.small,
         innerGap: strokeSize.small,
       };
     }
-    if (size == 20) {
+    if (size <= 20) {
       return {
         size: size + strokeSize.small * 4,
         ringThickness: strokeSize.small,
