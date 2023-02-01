@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MenuButtonItemProps } from '..';
+import type { MenuButtonItemProps } from '..';
 import { MenuButton } from '..';
 import * as renderer from 'react-test-renderer';
 

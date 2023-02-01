@@ -1,4 +1,4 @@
-import { Theme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/theme-types';
 
 const black = 'black';
 const neutralDark = '#201f1e';

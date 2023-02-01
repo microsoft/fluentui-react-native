@@ -4,7 +4,7 @@ import iOSDarkElevatedAliasTokens from '@fluentui-react-native/design-tokens-ios
 import iOSLightShadowTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-shadow.json';
 import iOSDarkShadowTokens from '@fluentui-react-native/design-tokens-ios/dark/tokens-shadow.json';
 
-import { AppearanceOptions } from '@fluentui-react-native/theme-types';
+import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
 
 export function getAliasTokens(mode: AppearanceOptions) {

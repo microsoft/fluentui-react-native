@@ -1,5 +1,6 @@
 import React from 'react';
-import { menuName, MenuProps } from './Menu.types';
+import type { MenuProps } from './Menu.types';
+import { menuName } from './Menu.types';
 import { stagedComponent } from '@fluentui-react-native/framework';
 import { useMenu } from './useMenu';
 import { useMenuContextValue } from './useMenuContextValue';

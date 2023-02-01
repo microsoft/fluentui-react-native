@@ -4,8 +4,9 @@ import { Text, ToggleButton, Separator, Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import Svg, { G, Path, SvgProps } from 'react-native-svg';
-import { SvgIconProps } from '@fluentui-react-native/icon';
+import type { SvgProps } from 'react-native-svg';
+import Svg, { G, Path } from 'react-native-svg';
+import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { testProps } from './Common/TestProps';
 

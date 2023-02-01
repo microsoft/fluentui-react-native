@@ -1,4 +1,4 @@
-import { IComponentSettings } from '@uifabricshared/foundation-settings';
+import type { IComponentSettings } from '@uifabricshared/foundation-settings';
 
 /**
  * A function which takes a theme and produces a settings object.  Used as one of the inputs for customization.

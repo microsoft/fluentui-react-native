@@ -5,8 +5,10 @@ import { SvgXml } from 'react-native-svg';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { testerTheme } from './CustomThemes';
-import { themeChoices, ThemeNames } from './applyTheme';
-import { brandOptions, OfficeBrand } from './applyBrand';
+import type { ThemeNames } from './applyTheme';
+import { themeChoices } from './applyTheme';
+import type { OfficeBrand } from './applyBrand';
+import { brandOptions } from './applyBrand';
 
 export const themePickerStyles = StyleSheet.create({
   pickerRoot: {

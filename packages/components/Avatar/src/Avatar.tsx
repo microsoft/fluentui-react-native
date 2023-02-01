@@ -81,6 +81,8 @@ function renderAvatar(final: AvatarProps, avatarProps: AvatarProps, Slots: Slots
       {initials ? (
         <Slots.initials accessible={false}>{initials}</Slots.initials>
       ) : avatarProps.icon ? (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore - TODO, fix typing error
         <Slots.icon {...icon} accessible={false} />
       ) : (
         svgIconsEnabled && <Slots.fallbackIcon viewBox="0 0 14 16">{getFallbackIconPath()}</Slots.fallbackIcon>

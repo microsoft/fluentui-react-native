@@ -1,4 +1,5 @@
-import { mount, ReactWrapper } from 'enzyme';
+import type { ReactWrapper } from 'enzyme';
+import { mount } from 'enzyme';
 
 export type JSXProducer = () => JSX.Element;
 
