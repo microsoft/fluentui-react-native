@@ -25,13 +25,11 @@ class TabsLegacyPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async didTabItemContentLoad(tabItemSelector: TabItem): Promise<boolean> {
-    return await (await this.getTabItemContent(tabItemSelector)).isDisplayed();
-  }
 
   async waitForTabItemContentToLoad(tabItemSelector: TabItem, errorMsg: string): Promise<boolean> {
-    await this.waitForCondition(async () => await this.didTabItemContentLoad(tabItemSelector), errorMsg);
-    return await this.didTabItemContentLoad(tabItemSelector);
+    const content = await this.getTabItemContent(tabItemSelector);
+    await this.waitForCondition(async () => await content.isDisplayed(), errorMsg);
+    return await content.isDisplayed();
   }
 
   /* Returns the correct WebDriverIO element from the TabItem Selector */
