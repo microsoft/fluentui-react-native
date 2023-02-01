@@ -45,7 +45,7 @@ describe('IconV1 Accessibility Testing', () => {
     await expect(
       await IconV1PageObject.compareAttribute(IconV1PageObject._primaryComponent, Attribute.AccessibilityRole, IMAGE_A11Y_ROLE),
     ).toBeTruthy();
-    await expect(await IconV1PageObject.getAccessibilityRole()).toEqual('ControlType.Image');
+
     await expect(await IconV1PageObject.didAssertPopup()).toBeFalsy(IconV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

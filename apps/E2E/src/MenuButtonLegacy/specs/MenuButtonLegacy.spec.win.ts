@@ -26,7 +26,7 @@ describe('MenuButton Legacy Accessibility Testing', () => {
     await MenuButtonLegacyPageObject.scrollToTestElement(await MenuButtonLegacyPageObject._firstMenuButton);
   });
 
-  it('Validate "accessibilityRole" value defaults to Button "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" value defaults to "ControlType.Button".', async () => {
     await expect(
       await MenuButtonLegacyPageObject.compareAttribute(
         MenuButtonLegacyPageObject._firstMenuButton,

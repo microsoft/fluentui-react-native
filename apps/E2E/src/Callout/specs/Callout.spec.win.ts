@@ -26,7 +26,7 @@ describe('Callout Accessibility Testing', () => {
     await CalloutPageObject.openCalloutAndWaitForLoad();
   });
 
-  it('Validate "accessibilityRole" prop has correct value, propagates to "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to "ControlType.Group".', async () => {
     await expect(
       await CalloutPageObject.compareAttribute(CalloutPageObject._primaryComponent, Attribute.AccessibilityRole, CALLOUT_A11Y_ROLE),
     ).toBeTruthy();

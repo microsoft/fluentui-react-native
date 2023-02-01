@@ -31,7 +31,7 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
     await RadioGroupV1Page.scrollToTestElement();
   });
 
-  it('Validate RadioGroup\'s "accessibilityRole" defaults to "List.ControlType".', async () => {
+  it('Validate RadioGroup\'s "accessibilityRole" defaults to "ControlType.List".', async () => {
     await expect(
       await RadioGroupV1Page.compareAttribute(RadioGroupV1Page._primaryComponent, Attribute.AccessibilityRole, RADIOGROUP_A11Y_ROLE),
     ).toBeTruthy();
@@ -39,7 +39,7 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
     await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
-  it('Validate Radio\'s "accessibilityRole" defaults to "RadioButton.ControlType".', async () => {
+  it('Validate Radio\'s "accessibilityRole" defaults to "ControlType.RadioButton".', async () => {
     await expect(
       await RadioGroupV1Page.compareAttribute(RadioGroupV1Page.getRadio(Radio.First), Attribute.AccessibilityRole, RADIOBUTTON_A11Y_ROLE),
     ).toBeTruthy();

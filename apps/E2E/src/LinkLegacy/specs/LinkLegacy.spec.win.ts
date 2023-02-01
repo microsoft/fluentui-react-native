@@ -25,7 +25,7 @@ describe('Link Accessibility Testing', () => {
     await LinkLegacyPageObject.scrollToTestElement();
   });
 
-  it('Validate "accessibilityRole" defaults to Link "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to "ControlType.HyperLink".', async () => {
     await expect(
       await LinkLegacyPageObject.compareAttribute(LinkLegacyPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
     ).toBeTruthy();

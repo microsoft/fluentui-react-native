@@ -95,21 +95,6 @@ export abstract class BasePage {
     return true;
   }
 
-  async getAccessibilityRole(): Promise<string> {
-    return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
-  }
-
-  /* Gets the accessibility label of an UI element given the selector */
-  async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
-    switch (componentSelector) {
-      case ComponentSelector.Primary:
-        return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityLabel);
-
-      case ComponentSelector.Secondary:
-        return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityLabel);
-    }
-  }
-
   /* Returns true if the test page has loaded. To determine if it's loaded, each test page has a specific UI element we attempt to locate.
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
@@ -121,10 +106,6 @@ export abstract class BasePage {
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
   async isButtonInView(): Promise<boolean> {
     return await (await this._pageButton).isDisplayed();
-  }
-
-  async clickComponent(): Promise<void> {
-    await (await this._primaryComponent).click();
   }
 
   /* The goal of click() and sendKeys() is to be generally used across all pageobjects to reduce code repetition in similar methods. */
@@ -399,4 +380,39 @@ export abstract class BasePage {
 
   // Default timeout to wait until page is displayed (10s)
   waitForUiEvent = 25000;
+
+  /************************/
+  /** Deprecated Methods **/
+  /************************/
+
+  /** @deprecated Use the `click` method defined in BasePage. */
+  async clickComponent(): Promise<void> {
+    console.warn('`clickComponent` is deprecated. Please use the `click` method in BasePage instead.');
+    await (await this._primaryComponent).click();
+  }
+
+  /** @deprecated, Use `compareAttribute` for testing attribute values in E2E tests or `getElementAttribute` to retrieve an attribute from an element. */
+  async getAccessibilityRole(): Promise<string> {
+    console.warn(
+      '`getAccessibilityRole` is deprecated. Please use `compareAttribute` for value comparison in a spec or `getElementAttribute` to retrieve the accessibilityRole for the primary component.',
+    );
+    return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
+  }
+
+  /**
+   * @deprecated Use `compareAttribute` for testing attribute values in E2E tests or `getElementAttribute` to retrieve an attribute from an element.
+   * Gets the accessibility label of an UI element given the selector
+   */
+  async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
+    console.warn(
+      '`getAccessibilityLabel` is deprecated. Please use `compareAttribute` for value comparison in a spec or `getElementAttribute` to retrieve the accessibilityLabel for the given element.',
+    );
+    switch (componentSelector) {
+      case ComponentSelector.Primary:
+        return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityLabel);
+
+      case ComponentSelector.Secondary:
+        return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityLabel);
+    }
+  }
 }
