@@ -1,9 +1,11 @@
 /** @jsx withSlots */
 import { Image, View, Text, Platform } from 'react-native';
 import { Fragment } from 'react';
-import { AvatarProps, AvatarType, AvatarName, AvatarState, AvatarSlotProps } from './Avatar.types';
+import type { AvatarProps, AvatarType, AvatarState, AvatarSlotProps } from './Avatar.types';
+import { AvatarName } from './Avatar.types';
 import { stylingSettings } from './Avatar.styling';
-import { compose, UseSlots, mergeProps, withSlots, Slots } from '@fluentui-react-native/framework';
+import type { UseSlots, Slots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useAvatar } from './useAvatar';
 import { PresenceBadge } from '@fluentui-react-native/badge';
 import { Icon } from '@fluentui-react-native/icon';
