@@ -2789,15 +2789,6 @@
     semver "^7.0.0"
     typescript "^4.0.0"
 
-"@rnx-kit/metro-resolver-symlinks@^0.1.25":
-  version "0.1.25"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-resolver-symlinks/-/metro-resolver-symlinks-0.1.25.tgz#c19e2d5b1990f4454129fb1817df7c79826883cb"
-  integrity sha512-kpBb3DfohDHCxR/ZzbpCpHZFiQMfkkNfmDIEdPdWmrXfJRW01ELi056N8GIyEZzJWx9i2R8G6xztJE4/jgOKZA==
-  dependencies:
-    "@rnx-kit/tools-node" "^1.3.0"
-    "@rnx-kit/tools-react-native" "^1.2.3"
-    enhanced-resolve "^5.8.3"
-
 "@rnx-kit/metro-serializer-esbuild@^0.1.18":
   version "0.1.20"
   resolved "https://registry.yarnpkg.com/@rnx-kit/metro-serializer-esbuild/-/metro-serializer-esbuild-0.1.20.tgz#ac258315c9fe1c10900307752e978965bf9d65ba"
