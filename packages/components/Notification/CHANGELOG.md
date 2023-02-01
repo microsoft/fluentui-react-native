@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Mon, 30 Jan 2023 22:56:35 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Feb 2023 18:58:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.24
+
+Wed, 01 Feb 2023 18:58:56 GMT
+
+### Patches
+
+- Replace hardcoded colors with alias color tokens (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.21.23
 
