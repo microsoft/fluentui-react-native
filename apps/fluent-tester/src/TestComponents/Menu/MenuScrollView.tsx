@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ButtonV1 as Button } from '@fluentui/react-native';
-import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList, MenuItemCheckbox } from '@fluentui-react-native/menu';
+import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { TextInput, StyleSheet, View } from 'react-native';
@@ -58,7 +58,7 @@ export const MenuScrollView: React.FunctionComponent = () => {
             <Button>Custom height</Button>
           </MenuTrigger>
           <MenuPopover maxHeight={maxHeight}>
-            <MenuList hasMaxHeight>{menuItems}</MenuList>
+            <MenuList>{menuItems}</MenuList>
           </MenuPopover>
         </Menu>
       </View>
@@ -73,8 +73,8 @@ export const MenuScrollView: React.FunctionComponent = () => {
           <MenuTrigger>
             <Button>Mutable Menu: MaxHeight 250 </Button>
           </MenuTrigger>
-          <MenuPopover maxHeight={250}>
-            <MenuList hasMaxHeight>{data}</MenuList>
+          <MenuPopover maxHeight={500}>
+            <MenuList>{data}</MenuList>
           </MenuPopover>
         </Menu>
       </View>
@@ -82,15 +82,14 @@ export const MenuScrollView: React.FunctionComponent = () => {
         <MenuTrigger>
           <Button>Height: 100</Button>
         </MenuTrigger>
-        <MenuPopover maxHeight={100} minWidth={300}>
-          <MenuList hasMaxHeight>
-            <MenuItem>MenuItem 1MenuItem 1MenuItem 1MenuItem 1MenuItem</MenuItem>
+        <MenuPopover maxHeight={100}>
+          <MenuList>
+            <MenuItem>MenuItem1MenuItem1MenuItem1MenuItem</MenuItem>
             <MenuItem>MenuItem 2</MenuItem>
             <MenuItem>MenuItem 3</MenuItem>
             <MenuItem>MenuItem 4</MenuItem>
             <MenuItem>MenuItem 5</MenuItem>
-            <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark</MenuItemCheckbox>
+            <MenuItem>MenuItem 6</MenuItem>
           </MenuList>
         </MenuPopover>
       </Menu>

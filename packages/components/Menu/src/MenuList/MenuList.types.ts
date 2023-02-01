@@ -12,6 +12,7 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * Space between items in pixels
    */
   gap?: number;
+  hasMaxHeight?: MenuListTokens;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
@@ -36,7 +37,6 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
    * @param checked Array of all currently checked values
    */
   onCheckedChange?: (e: InteractionEvent, checked: string[]) => void;
-  hasMaxHeight?: boolean;
 }
 
 export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onCheckedChange'> {
@@ -48,6 +48,7 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   selectRadio?: (e: InteractionEvent, name: string) => void;
   addRadioItem: (name: string) => void;
   removeRadioItem: (name: string) => void;
+  hasMaxHeight?: boolean;
 }
 
 export interface MenuListSlotProps {

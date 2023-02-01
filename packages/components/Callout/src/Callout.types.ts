@@ -96,10 +96,6 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
    * Defines the minimum padding between the Callout and the display edges.
    */
   minPadding?: number;
-  /**
-   * Defines a minimum width for the Callout.
-   */
-  minWidth?: number;
 }
 
 export interface ICalloutProps extends IViewProps, ICalloutTokens {

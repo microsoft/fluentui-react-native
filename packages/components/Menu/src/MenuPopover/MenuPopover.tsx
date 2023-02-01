@@ -5,13 +5,17 @@ import { menuPopoverName, MenuPopoverProps, MenuPopoverTokens } from './MenuPopo
 import { useMenuPopover } from './useMenuPopover';
 import { useMenuPopoverTokens } from './MenuPopoverTokens';
 import { Platform, View } from 'react-native';
+import { useMenuContext } from '../context';
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
     const { directionalHint, gapSpace, maxHeight, maxWidth, minPadding, minWidth, borderWidth, borderColor, backgroundColor } = props;
     const state = useMenuPopover(props);
     const theme = useFluentTheme();
+    const context = useMenuContext();
     let [tokens, cache] = useTokens(theme);
+
+    context.hasMaxHeight = maxHeight != undefined;
 
     [tokens, cache] = patchTokens(tokens, cache, {
       directionalHint,
@@ -34,7 +38,7 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
               ...state.innerView,
               style: {
                 maxHeight: mergedProps.maxHeight,
-                minWidth: mergedProps.minWidth
+                minWidth: mergedProps.minWidth,
               },
             }
           : state.innerView;

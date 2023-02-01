@@ -2,7 +2,7 @@
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import { compose, mergeProps, stagedComponent, UseSlots, withSlots } from '@fluentui-react-native/framework';
-import { menuListName, MenuListProps, MenuListType } from './MenuList.types';
+import { menuListName, MenuListProps, MenuListState, MenuListType } from './MenuList.types';
 import { stylingSettings } from './MenuList.styling';
 import { MenuListProvider } from '../context/menuListContext';
 import { useMenuList } from './useMenuList';
@@ -30,6 +30,9 @@ const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap
 });
 MenuStack.displayName = 'MenuStack';
 
+export const menuListLookup = (layer: string, state: MenuListState, userProps: MenuListProps): boolean => {
+  return state[layer] || userProps[layer] || layer === 'hasMaxHeight' || layer === userProps['minWidth'];
+};
 export const MenuList = compose<MenuListType>({
   displayName: menuListName,
   ...stylingSettings,
@@ -42,7 +45,7 @@ export const MenuList = compose<MenuListType>({
     const menuList = useMenuList(userProps);
     const menuContext = useMenuContext();
     const menuListContextValue = useMenuListContextValue(menuList);
-    const Slots = useSlots(menuList.props);
+    const Slots = useSlots(menuList.props, (layer) => menuListLookup(layer, menuList, userProps));
 
     const focusZoneRef = React.useRef<View>();
 
@@ -68,14 +71,11 @@ export const MenuList = compose<MenuListType>({
               </Slots.focusZone>
             </Slots.scrollView>
           </Slots.root>
-        ) :
-        userProps.hasMaxHeight ?
-        (
+        ) : menuContext.hasMaxHeight ? (
           <Slots.root>
             <Slots.scrollView>{children}</Slots.scrollView>
           </Slots.root>
-        ) :
-        (
+        ) : (
           <Slots.root>{children}</Slots.root>
         );
 
