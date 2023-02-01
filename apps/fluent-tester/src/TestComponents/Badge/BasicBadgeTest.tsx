@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Platform, Text, Image } from 'react-native';
-import {
-  Badge,
+import type {
   BadgeAppearance,
-  BadgeAppearances,
   BadgeColor,
-  BadgeColors,
   BadgeShape,
-  BadgeShapes,
   BadgeSize,
-  BadgeSizes,
   BadgeIconPosition,
   BadgeProps,
-  BadgeTokens,
+  BadgeTokens} from '@fluentui-react-native/badge';
+import {
+  Badge,
+  BadgeAppearances,
+  BadgeColors,
+  BadgeShapes,
+  BadgeSizes
 } from '@fluentui-react-native/badge';
 import { StyledPicker } from '../Common/StyledPicker';
 import { satyaPhotoUrl } from './../PersonaCoin/styles';

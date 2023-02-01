@@ -1,18 +1,22 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, ColorValue, Platform } from 'react-native';
-import { useTheme, Theme } from '@fluentui-react-native/theme-types';
+import type { ViewStyle, ColorValue} from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
+import type { Theme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text, ToggleButton } from '@fluentui/react-native';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '../../../../E2E/src/ColorTokens/consts';
 import { testProps } from '../Common/TestProps';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import Svg, { G, Path, SvgProps } from 'react-native-svg';
-import { SvgIconProps } from '@fluentui-react-native/icon';
+import type { SvgProps } from 'react-native-svg';
+import Svg, { G, Path } from 'react-native-svg';
+import type { SvgIconProps } from '@fluentui-react-native/icon';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {

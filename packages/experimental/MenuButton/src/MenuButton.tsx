@@ -1,12 +1,14 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
 import { Button } from '@fluentui-react-native/experimental-button';
-import { compose, UseSlots, withSlots } from '@fluentui-react-native/framework';
+import type { UseSlots} from '@fluentui-react-native/framework';
+import { compose, withSlots } from '@fluentui-react-native/framework';
 import { stylingSettings } from './MenuButton.styling';
 import { renderContextualMenu } from './renderContextualMenu';
 import { SvgXml } from 'react-native-svg';
 
-import { menuButtonName, MenuButtonProps, MenuButtonType } from './MenuButton.types';
+import type { MenuButtonProps, MenuButtonType } from './MenuButton.types';
+import { menuButtonName } from './MenuButton.types';
 
 const defaultIconColor = '#616161';
 const primaryIconColor = '#ffffff';

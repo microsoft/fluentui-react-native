@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
-import { MenuPickerProps, CollectionItem } from './MenuPicker';
+import type { MenuPickerProps, CollectionItem } from './MenuPicker';
+export type { MenuPickerProps, CollectionItem } from './MenuPicker';
 import { ButtonV1 as Button, Text } from '@fluentui/react-native';
 import { SvgXml } from 'react-native-svg';
 

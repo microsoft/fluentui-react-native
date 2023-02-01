@@ -1,5 +1,7 @@
-import { tabsName, TabsTokens, TabsSlotProps, TabsProps } from './Tabs.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import type { TabsTokens, TabsSlotProps, TabsProps } from './Tabs.types';
+import { tabsName } from './Tabs.types';
+import type { Theme, UseStylingOptions} from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { fontStyles } from '@fluentui-react-native/tokens';
 import { defaultTabsTokens } from './TabsTokens';
 import { getRootMargins, getLabelMargins, getStackMargins } from './TabsMargins';

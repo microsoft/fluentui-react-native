@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { AccessibilityActionEvent, AccessibilityState, I18nManager, Platform } from 'react-native';
-import { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
+import type { AccessibilityActionEvent, AccessibilityState} from 'react-native';
+import { I18nManager, Platform } from 'react-native';
+import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
 import { memoize } from '@fluentui-react-native/framework';
-import {
+import type {
   InteractionEvent,
-  KeyPressEvent,
+  KeyPressEvent} from '@fluentui-react-native/interactive-hooks';
+import {
   usePressableState,
   useKeyDownProps,
   useOnPressWithFocus,

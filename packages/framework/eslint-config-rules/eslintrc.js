@@ -13,6 +13,12 @@ module.exports = {
     'no-prototype-builtins': 'off',
     'no-undef': 'off',
     'react/display-name': 'off',
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      {
+        disallowTypeAnnotations: false,
+      },
+    ],
   },
   overrides: [
     {

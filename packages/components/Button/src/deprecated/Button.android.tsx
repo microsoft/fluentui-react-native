@@ -1,9 +1,12 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
-import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import type { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, IButtonType } from './Button.types';
+import { buttonName } from './Button.types';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import type { ISlots} from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './Button.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';

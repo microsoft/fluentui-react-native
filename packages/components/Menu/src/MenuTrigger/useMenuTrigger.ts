@@ -1,7 +1,8 @@
 import { useMenuContext } from '../context/menuContext';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
-import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
+import type { AccessibilityActionEvent, AccessibilityActionName} from 'react-native';
+import { Platform } from 'react-native';
 import React from 'react';
 import { hoverDelayDefault } from '../consts';
 import { useMergedRefs } from './useMergeRefs';

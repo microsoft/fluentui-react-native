@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { AccessibilityState, I18nManager, Platform } from 'react-native';
-import { MenuItemProps, MenuItemInfo } from './MenuItem.types';
+import type { AccessibilityState} from 'react-native';
+import { I18nManager, Platform } from 'react-native';
+import type { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
+import type {
+  InteractionEvent} from '@fluentui-react-native/interactive-hooks';
 import {
-  InteractionEvent,
   isKeyPressEvent,
   usePressableState,
   useKeyDownProps,

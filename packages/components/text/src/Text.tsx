@@ -1,18 +1,20 @@
 /** @jsx withSlots */
+import type {
+  UseTokens,
+  FontWeightValue} from '@fluentui-react-native/framework';
 import {
   fontStyles,
   withSlots,
-  UseTokens,
   useFluentTheme,
   mergeStyles,
   compressible,
-  patchTokens,
-  FontWeightValue,
+  patchTokens
 } from '@fluentui-react-native/framework';
 import { useKeyProps } from '@fluentui-react-native/interactive-hooks';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
-import { textName, TextProps, TextTokens } from './Text.types';
+import type { TextProps, TextTokens } from './Text.types';
+import { textName } from './Text.types';
 import { useTextTokens } from './TextTokens';
 import React from 'react';
 import { useFontMetricsScaleFactors } from '@fluentui-react-native/experimental-native-font-metrics';

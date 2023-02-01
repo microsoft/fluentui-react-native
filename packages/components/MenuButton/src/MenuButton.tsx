@@ -2,21 +2,24 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
-import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
+import type { IUseComposeStyling} from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import type { ISlots} from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { SvgXml } from 'react-native-svg';
 import { defaultIconColor, primaryIconColor } from './MenuButton.style';
 
-import {
-  MenuButtonName,
+import type {
   MenuButtonProps,
   MenuButtonSlotProps,
   MenuButtonType,
   MenuButtonRenderData,
   MenuButtonState,
-  MenuButtonItemProps,
+  MenuButtonItemProps} from './MenuButton.types';
+import {
+  MenuButtonName
 } from './MenuButton.types';
 
 export const MenuButton = compose<MenuButtonType>({

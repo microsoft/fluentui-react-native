@@ -1,12 +1,13 @@
 import * as React from 'react';
+import type {
+  IFocusable} from '@fluentui-react-native/interactive-hooks';
 import {
   usePressableState,
   useKeyProps,
   useOnPressWithFocus,
-  useViewCommandFocus,
-  IFocusable,
+  useViewCommandFocus
 } from '@fluentui-react-native/interactive-hooks';
-import { TabsItemProps, TabsItemInfo } from './TabsItem.types';
+import type { TabsItemProps, TabsItemInfo } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
 /**

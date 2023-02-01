@@ -1,9 +1,12 @@
 /** @jsx withSlots */
-import { Children, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { Children } from 'react';
 import { View, I18nManager } from 'react-native';
-import { badgeName, BadgeType, BadgeProps } from './Badge.types';
+import type { BadgeType, BadgeProps } from './Badge.types';
+import { badgeName } from './Badge.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { compose, withSlots, UseSlots, mergeProps } from '@fluentui-react-native/framework';
+import type { UseSlots} from '@fluentui-react-native/framework';
+import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { stylingSettings } from './Badge.styling';
 import { useBadge } from './useBadge';

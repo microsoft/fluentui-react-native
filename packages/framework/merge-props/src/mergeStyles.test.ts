@@ -1,6 +1,6 @@
 import { flattenStyle, mergeAndFlattenStyles, mergeStyles } from './mergeStyles';
-import { StyleProp } from './mergeStyles.types';
-import { ColorValue } from 'react-native';
+import type { StyleProp } from './mergeStyles.types';
+import type { ColorValue } from 'react-native';
 
 interface IFakeStyle {
   backgroundColor?: ColorValue;

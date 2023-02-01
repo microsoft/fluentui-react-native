@@ -1,5 +1,7 @@
-import { toggleButtonName, ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import type { ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
+import { toggleButtonName } from './ToggleButton.types';
+import type { Theme, UseStylingOptions} from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonColorTokens } from '../ButtonColorTokens';
 import { buttonStates, contentStyling } from '../Button.styling';

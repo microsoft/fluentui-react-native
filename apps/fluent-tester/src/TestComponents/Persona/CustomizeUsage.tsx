@@ -3,7 +3,8 @@ import { View, Text, Switch, TextInput } from 'react-native';
 import { Persona } from '@fluentui/react-native';
 import { michaelImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { Theme, useTheme } from '@fluentui-react-native/theme-types';
+import type { Theme} from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import { Slider } from '../Common/Slider';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 

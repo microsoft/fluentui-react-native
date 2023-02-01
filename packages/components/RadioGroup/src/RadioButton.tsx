@@ -3,10 +3,13 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import type { IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
+import { radioButtonName } from './RadioButton.types';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import type { ISlots} from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';

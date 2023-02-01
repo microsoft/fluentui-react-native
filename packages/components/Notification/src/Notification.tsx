@@ -1,15 +1,19 @@
 /** @jsx withSlots */
-import { notification, NotificationType, NotificationProps } from './Notification.types';
+import type { NotificationType, NotificationProps } from './Notification.types';
+import { notification } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { PressableProps, useWindowDimensions, View, ViewStyle, ViewProps } from 'react-native';
+import type { PressableProps, ViewStyle, ViewProps } from 'react-native';
+import { useWindowDimensions, View } from 'react-native';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { Body2, Body2Strong } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
-import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { UseSlots} from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, memoize } from '@fluentui-react-native/framework';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
-import { useHorizontalSizeClass, SizeClassIOS } from '@fluentui-react-native/experimental-appearance-additions';
+import type { SizeClassIOS } from '@fluentui-react-native/experimental-appearance-additions';
+import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.

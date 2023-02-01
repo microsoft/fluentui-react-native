@@ -1,4 +1,4 @@
-import { AccessibilityProps, ColorValue, TextStyle, StyleProp } from 'react-native';
+import type { AccessibilityProps, ColorValue, TextStyle, StyleProp } from 'react-native';
 
 export const fontIconName = 'FontIcon';
 
