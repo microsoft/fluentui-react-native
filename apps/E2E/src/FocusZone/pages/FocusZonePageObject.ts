@@ -15,7 +15,7 @@ import {
   HOMEPAGE_FOCUSZONE_BUTTON,
 } from '../consts';
 
-export type GridButton = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+export type GridButton = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 type GridFocusZoneOption = 'SetDirection' | 'Set2DNavigation' | 'SetCircularNavigation' | 'UseDefaultTabbableElement' | 'Disable';
 

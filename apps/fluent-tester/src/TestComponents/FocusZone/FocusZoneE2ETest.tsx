@@ -69,7 +69,7 @@ export const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props
                   style={focusZoneTestStyles.focusZoneButton}
                   componentRef={gridIndex === props.tabbableIdx ? props.tabRef : undefined}
                   /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-                  {...testProps(props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex.toString() as GridButtonIndex) : undefined)}
+                  {...testProps(props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex as GridButtonIndex) : undefined)}
                 >
                   <Text>{gridIndex}</Text>
                 </GridButton>
