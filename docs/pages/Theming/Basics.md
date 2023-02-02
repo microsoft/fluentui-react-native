@@ -57,7 +57,7 @@ import { Text } from 'react-native';
 export const AppContent = () => {
   const theme = useFluentTheme();
 
-  return <Text color={theme.colors.bodyText}>Hello World!</Text>;
+  return <Text style={{ color: theme.colors.bodyText }}>Hello World!</Text>;
 };
 ```
 

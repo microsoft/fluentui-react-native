@@ -1,4 +1,4 @@
-import { Transform, JSCodeshift, FileInfo, API, Options } from 'jscodeshift';
+import type { Transform, JSCodeshift, FileInfo, API, Options } from 'jscodeshift';
 
 export const transform: Transform = (fileInfo: FileInfo, api: API, options: Options) => {
   const j: JSCodeshift = api.jscodeshift;

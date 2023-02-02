@@ -49,7 +49,7 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.2",
     "rimraf": "^3.0.2",
-    "typescript": "4.5.4",
+    "typescript": "4.9.4",
     "workspace-tools": "^0.26.3"
   },
   "bundlesize": [
@@ -65,12 +65,20 @@
     ]
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "metro-config",
-      "metro-react-native-babel-transformer"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native",
+        "./align-deps-preset.js"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "jest",
+        "metro-config",
+        "metro-react-native-babel-transformer"
+      ]
+    }
   }
 }

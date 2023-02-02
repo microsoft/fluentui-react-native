@@ -5,7 +5,8 @@ import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle, separatorStackStyle } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
 import { SEPARATOR_TESTPAGE } from '../../../../E2E/src/Separator/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const BlueSeparator = Separator.customize({ color: 'blue' });
 const RedSeparator = Separator.customize({ color: 'red' });

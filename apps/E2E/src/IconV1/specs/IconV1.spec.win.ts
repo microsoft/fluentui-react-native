@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import IconV1PageObject from '../pages/IconV1PageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { ComponentSelector } from '../../common/BasePage';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, IMAGE_A11Y_ROLE } from '../../common/consts';
 import { ICON_ACCESSIBILITY_LABEL } from '../../IconLegacy/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -26,17 +25,26 @@ describe('IconV1 Accessibility Testing', () => {
     await IconV1PageObject.scrollToTestElement();
   });
 
-  it('Validate accessibilityLabel for SVG Icon', async () => {
-    await expect(await IconV1PageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(ICON_ACCESSIBILITY_LABEL);
+  it('Set SVG Icon "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
+    await expect(
+      await IconV1PageObject.compareAttribute(IconV1PageObject._primaryComponent, Attribute.AccessibilityLabel, ICON_ACCESSIBILITY_LABEL),
+    ).toBeTruthy();
+
     await expect(await IconV1PageObject.didAssertPopup()).toBeFalsy(IconV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Validate accessibilityLabel for Font Icon', async () => {
-    await expect(await IconV1PageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(ICON_ACCESSIBILITY_LABEL);
+  it('Set Font Icon "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
+    await expect(
+      await IconV1PageObject.compareAttribute(IconV1PageObject._secondaryComponent, Attribute.AccessibilityLabel, ICON_ACCESSIBILITY_LABEL),
+    ).toBeTruthy();
+
     await expect(await IconV1PageObject.didAssertPopup()).toBeFalsy(IconV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Validate accessibilityRole for SVG Icon', async () => {
+  it('Validate IconV1\'s "accessibilityRole" defaults to "ControlType.Image".', async () => {
+    await expect(
+      await IconV1PageObject.compareAttribute(IconV1PageObject._primaryComponent, Attribute.AccessibilityRole, IMAGE_A11Y_ROLE),
+    ).toBeTruthy();
     await expect(await IconV1PageObject.getAccessibilityRole()).toEqual('ControlType.Image');
     await expect(await IconV1PageObject.didAssertPopup()).toBeFalsy(IconV1PageObject.ERRORMESSAGE_ASSERT);
   });

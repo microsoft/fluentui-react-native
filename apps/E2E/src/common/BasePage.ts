@@ -1,4 +1,5 @@
-import { AndroidAttribute, Keys, ROOT_VIEW, TESTPAGE_CONTENT_SCROLLVIEWER } from './consts';
+import type { AndroidAttribute } from './consts';
+import { Keys, ROOT_VIEW, TESTPAGE_CONTENT_SCROLLVIEWER } from './consts';
 import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
 
 const DUMMY_CHAR = '';
@@ -10,7 +11,7 @@ let rootView: WebdriverIO.Element | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
-  if (PLATFORM === DesktopPlatform.Windows) {
+  if (PLATFORM === 'windows') {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
     return await $('~' + identifier);
   }
@@ -35,23 +36,15 @@ async function QueryWithChaining(identifier) {
 /* The values in this enum map to the UI components we want to test in our app. We use this to
 make the communication from our spec document to our page object easier. Please read below to
 see why we have Primary/Secondary components. */
-export const enum ComponentSelector {
-  Primary = 0, // this._primaryComponent
-  Secondary, // this._secondaryComponent
-}
+type ComponentSelector =
+  | 'Primary' // this._primaryComponent
+  | 'Secondary'; // this._secondaryComponent
 
-export const enum MobilePlatform {
-  iOS = 'ios',
-  Android = 'android',
-}
+type MobilePlatform = 'android' | 'ios';
 
-export const enum DesktopPlatform {
-  Win32 = 'win32',
-  Windows = 'windows',
-  macOS = 'macos',
-}
+type DesktopPlatform = 'win32' | 'windows' | 'macos';
 
-export type Platform = MobilePlatform | DesktopPlatform;
+type Platform = MobilePlatform | DesktopPlatform;
 
 /****************************** IMPORTANT! PLEASE READ! **************************************************
  * Every component's page object extends this. We can assume each test page will interact with at least
@@ -102,10 +95,10 @@ export abstract class BasePage {
   /* Gets the accessibility label of an UI element given the selector */
   async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
     switch (componentSelector) {
-      case ComponentSelector.Primary:
+      case 'Primary':
         return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityLabel);
 
-      case ComponentSelector.Secondary:
+      case 'Secondary':
         return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityLabel);
     }
   }
@@ -151,7 +144,7 @@ export abstract class BasePage {
       'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.";
 
     switch (this.platform) {
-      case MobilePlatform.iOS: {
+      case 'ios': {
         await browser.waitUntil(
           async () => {
             await driver.execute('mobile: scroll', { direction: 'down' });
@@ -165,7 +158,7 @@ export abstract class BasePage {
         break;
       }
       default:
-      case MobilePlatform.Android:
+      case 'android':
         /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
          * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
          * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
@@ -252,7 +245,7 @@ export abstract class BasePage {
     const errorMsg = 'Could not scroll to the ' + componentToScrollTo + '. Please see Pipeline artifacts for more debugging information.';
 
     switch (this.platform) {
-      case MobilePlatform.iOS: {
+      case 'ios': {
         await browser.waitUntil(
           async () => {
             await driver.execute('mobile: scroll', { direction: 'down' });
@@ -265,7 +258,7 @@ export abstract class BasePage {
         );
         break;
       }
-      case MobilePlatform.Android:
+      case 'android':
         /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
          * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
          * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
@@ -309,7 +302,7 @@ export abstract class BasePage {
   async didAssertPopup(): Promise<boolean> {
     /* On Android, we can't get the window handles. Instead, we check if the page is still visible.
      * In case of any error, a full page crash message is displayed and the test page is no longer accessible. */
-    if (PLATFORM === MobilePlatform.Android) {
+    if (PLATFORM === 'android') {
       return !(await this.isPageLoaded());
     }
     // If more than 1 instance of the app is open, we know an assert dialogue popped up.
@@ -363,7 +356,7 @@ export abstract class BasePage {
   // Returns: String
   // Returns the identifier of the primary UI element used for testing on the given test page.
   get _primaryComponentName(): string {
-    console.error('Each class extending BasePage must implement its own _primaryComponentName method.');
+    console.warn('Please verify whether or not your page object should implement _primaryComponentName.');
     return DUMMY_CHAR;
   }
 
@@ -371,7 +364,7 @@ export abstract class BasePage {
   // Returns the identifier of the secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponentName(): string {
-    console.error('Each class extending BasePage must implement its own _secondaryComponentName method.');
+    console.warn('Please verify whether or not your page object should implement _secondaryComponentName.');
     return DUMMY_CHAR;
   }
 

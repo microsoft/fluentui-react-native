@@ -1,5 +1,5 @@
-import { SvgIconProps } from './SvgIcon/SvgIcon.types';
-import { FontIconProps } from './FontIcon/FontIcon.types';
+import type { SvgIconProps } from './SvgIcon/SvgIcon.types';
+import type { FontIconProps } from './FontIcon/FontIcon.types';
 
 export interface IconProps {
   /*

@@ -3,8 +3,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import {
-  radioGroupName,
+import type {
   IRadioGroupType,
   IRadioGroupProps,
   IRadioGroupState,
@@ -12,8 +11,11 @@ import {
   IRadioGroupRenderData,
   IRadioGroupContext,
 } from './RadioGroup.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { radioGroupName } from './RadioGroup.types';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './RadioGroup.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
@@ -78,6 +80,8 @@ export const RadioGroup = compose<IRadioGroupType>({
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore - TODO, fix typing error
           return child.props.buttonKey;
         }
       });

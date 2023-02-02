@@ -1,4 +1,4 @@
-import { TextProps, ViewProps } from 'react-native';
+import type { TextProps, ViewProps } from 'react-native';
 
 export const spinnerName = 'Spinner';
 /**

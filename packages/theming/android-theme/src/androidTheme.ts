@@ -1,9 +1,10 @@
-import { Spacing, Theme } from '@fluentui-react-native/theme-types';
+import type { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { getFluentUIAndroidPalette } from './colorsSemantic';
 import { paletteFromAndroidColors } from './colorsTokens';
 import { androidTypography } from './androidTypography';
 import { getAndroidPalette } from './colorsBase';
 import { androidShadows } from './androidShadows';
+import { memoize } from '@fluentui-react-native/memo-cache';
 
 export function androidSpacing(): Spacing {
   return {
@@ -35,7 +36,7 @@ export const androidComponents = {
   },
 };
 
-export function getAndroidTheme(appearance: 'light' | 'dark'): Theme {
+function getAndroidThemeWorker(appearance: 'light' | 'dark'): Theme {
   return {
     colors: paletteFromAndroidColors(getFluentUIAndroidPalette(getAndroidPalette(appearance))),
     typography: androidTypography(),
@@ -45,3 +46,5 @@ export function getAndroidTheme(appearance: 'light' | 'dark'): Theme {
     host: { appearance },
   };
 }
+
+export const getAndroidTheme = memoize(getAndroidThemeWorker);
