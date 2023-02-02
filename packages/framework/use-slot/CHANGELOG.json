@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slot",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 01:29:39 GMT",
+      "tag": "@fluentui-react-native/use-slot_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/use-slot",
+            "commit": "ac679ca51704ba5c2d2cc2385a71694b69735a1d",
+            "comment": "Add eslint to packages missing a config"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Feb 2023 22:33:17 GMT",
       "tag": "@fluentui-react-native/use-slot_v0.3.2",
       "version": "0.3.2",

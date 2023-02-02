@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/use-styling
 
-This log was last generated on Wed, 01 Feb 2023 22:33:17 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 01:29:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.3
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Add eslint to packages missing a config (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/use-tokens to v0.3.3
 
 ## 0.9.2
 

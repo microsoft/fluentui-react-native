@@ -13,7 +13,7 @@
  * as we only support rounded rects and circles, with a circle being a rounded rect of borderRadius=length/2=width/2.
  */
 
-import { ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types';
+import type { ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types';
 
 // Note for explicit clarity: length and width represent the full length and width of the rect, and not
 // the straight edge segments (i.e. length - 2*borderRadius).

@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Wed, 01 Feb 2023 22:33:15 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 01:29:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.3
+
+Thu, 02 Feb 2023 01:29:38 GMT
+
+### Patches
+
+- Add eslint to packages missing a config (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/badge to v0.4.24
+- Bump @fluentui-react-native/framework to v0.8.39
+- Bump @fluentui-react-native/icon to v0.17.10
+- Bump @fluentui-react-native/use-styling to v0.9.3
 
 ## 1.6.2
 
