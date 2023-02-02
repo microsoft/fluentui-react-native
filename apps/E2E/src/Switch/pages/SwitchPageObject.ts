@@ -1,12 +1,5 @@
-import { SWITCH_TESTPAGE, SWITCH_TEST_COMPONENT, SWITCH_NO_A11Y_LABEL_COMPONENT, HOMEPAGE_SWITCH_BUTTON, SWITCH_ON_PRESS } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
-
-/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
- * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
-export const enum SwitchComponentSelector {
-  PrimaryComponent, //this._primaryComponent
-  SecondaryComponent, // this._secondaryComponent
-}
+import { HOMEPAGE_SWITCH_BUTTON, SWITCH_NO_A11Y_LABEL_COMPONENT, SWITCH_ON_PRESS, SWITCH_TESTPAGE, SWITCH_TEST_COMPONENT } from '../consts';
 
 class SwitchPageObject extends BasePage {
   /******************************************************************/

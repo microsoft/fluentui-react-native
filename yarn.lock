@@ -2729,10 +2729,10 @@
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/eslint-plugin@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.3.0.tgz#3976bd59c95d55d90c330488ab47acc17331caa5"
-  integrity sha512-LdbQGk5hAZ7jR3m6AYyY6W6+dhP+ybciwZcAN5PbOK2d9qAWQJbl3aOPHygHTJdO1kDZlAvM5sFpSjxHfwZfVw==
+"@rnx-kit/eslint-plugin@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.4.0.tgz#4d5ff71cded1780d3a126d86015a5c2cfa996454"
+  integrity sha512-jYuzCywyNzJcFoDMUOWlghdx2ua9v9/QZe8xwSRlbGbBfHBRKJhEJxF+ZA4sw04emZW84y80dTtpRq9d8gI1dA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.0.0"
     "@typescript-eslint/parser" "^5.0.0"

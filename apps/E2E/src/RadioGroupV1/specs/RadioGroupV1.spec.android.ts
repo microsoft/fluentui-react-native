@@ -1,13 +1,13 @@
+import { AndroidAttribute, ANDROID_RADIOBUTTON, BOOT_APP_TIMEOUT, PAGE_TIMEOUT } from '../../common/consts';
 import NavigateAppPage from '../../common/NavigateAppPage';
-import RadioGroupV1Page, { Radio } from '../pages/RadioGroupV1PageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, AndroidAttribute, ANDROID_RADIOBUTTON } from '../../common/consts';
 import { RADIOGROUPV1_TEST_COMPONENT } from '../consts';
+import RadioGroupV1Page from '../pages/RadioGroupV1PageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('RadioGroupV1/RadioV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to RadioGroupV1 test page', async () => {
@@ -18,8 +18,8 @@ describe('RadioGroupV1/RadioV1 Testing Initialization', function () {
     await NavigateAppPage.clickAndGoToRadioGroupV1Page();
     await RadioGroupV1Page.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await RadioGroupV1Page.isPageLoaded()).toBeTruthy(RadioGroupV1Page.ERRORMESSAGE_PAGELOAD);
-    await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(await RadioGroupV1Page.isPageLoaded()).toBeTruthy(RadioGroupV1Page.ERRORMESSAGE_PAGELOAD);
+    expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -30,22 +30,22 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
   });
 
   it('RadioGroup - Verify accessibilityLabel', async () => {
-    await expect(
+    expect(
       await RadioGroupV1Page.compareAttribute(
         RadioGroupV1Page._primaryComponent,
         AndroidAttribute.AccessibilityLabel,
         RADIOGROUPV1_TEST_COMPONENT,
       ),
     ).toBeTruthy();
-    await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate Radio Group Class on Android', async () => {
-    await expect(
-      await RadioGroupV1Page.compareAttribute(RadioGroupV1Page.getRadio(Radio.First), AndroidAttribute.Class, ANDROID_RADIOBUTTON),
+    expect(
+      await RadioGroupV1Page.compareAttribute(RadioGroupV1Page.getRadio('First'), AndroidAttribute.Class, ANDROID_RADIOBUTTON),
     ).toBeTruthy();
 
-    await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -59,13 +59,13 @@ describe('RadioGroupV1 Functional Testing', async () => {
 
   it('Click on a Radio and ensure it changes state from unselected -> selected', async () => {
     /* Validate the Radio is not initially selected */
-    await expect(await RadioGroupV1Page.isRadioSelected(Radio.Second)).toBeFalsy();
+    expect(await RadioGroupV1Page.isRadioSelected('Second')).toBeFalsy();
 
     /* Click on the Radio to select it */
-    await RadioGroupV1Page.click(RadioGroupV1Page.getRadio(Radio.Second));
+    await RadioGroupV1Page.click(RadioGroupV1Page.getRadio('Second'));
 
     /* Validate the Radio is selected */
-    await expect(await RadioGroupV1Page.waitForRadioSelected(Radio.Second, 'Expected radio #2 to be selected by click.')).toBeTruthy();
-    await expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1Page.waitForRadioSelected('Second', 'Expected radio #2 to be selected by click.')).toBeTruthy();
+    expect(await RadioGroupV1Page.didAssertPopup()).toBeFalsy(RadioGroupV1Page.ERRORMESSAGE_ASSERT);
   });
 });
