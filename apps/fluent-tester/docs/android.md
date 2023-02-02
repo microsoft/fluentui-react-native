@@ -43,7 +43,7 @@ adb reverse tcp:8081 tcp:8081
 yarn start
 ```
 
-- APKs: The emulator is running on arm64 so any APKs that need to be installed need to be for arm64. Here is a [link](https://www.apkmirror.com/apk/google-inc/android-accessibility-suite/android-accessibility-suite-9-1-0-358315219-release/android-accessibility-suite-9-1-0-358315219-android-apk-download/) to the accessibility APK which includes TalkBack (voiceover)
+- APKs: The emulator is running on arm64 so any APKs that need to be installed need to be for arm64. Here is a [link](https://www.apkmirror.com/apk/google-inc/android-accessibility-suite/android-accessibility-suite-13-1-0-501229322-release/android-accessibility-suite-13-1-0-501229322-2-android-apk-download/) to the accessibility APK which includes TalkBack (voiceover)
   - The ADB location is not automatically detected on the emulator so you need to manually set it.
     1.  Go to expanded settings (three dots on the side) -> settings
     2.  Turn off "Use detected ADB location"
