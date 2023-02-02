@@ -63,11 +63,13 @@ export interface SpinnerProps extends ViewProps, SpinnerTokens {
   /**
    * Spinner animating or not
    * @defaultValue 'true'
+   * @platform android
    */
   animating?: boolean;
   /**
    * Spinner hidden when not animating or not hidden
    * @defaultValue 'true'
+   * @platform android
    */
   hidesWhenStopped?: boolean;
 }

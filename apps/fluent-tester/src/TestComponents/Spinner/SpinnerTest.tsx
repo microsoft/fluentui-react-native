@@ -33,7 +33,7 @@ const BasicSpinnerTest: React.FunctionComponent = () => {
 
 const spinnerSections: TestSection[] = [
   {
-    name: 'Base Spinner',
+    name: 'Basic Spinner',
     testID: SPINNER_TESTPAGE,
     component: BasicSpinnerTest,
   },
@@ -45,7 +45,7 @@ export const SpinnerTest: React.FunctionComponent = () => {
     uwpStatus: 'Backlog',
     iosStatus: 'Beta',
     macosStatus: 'Backlog',
-    androidStatus: 'Beta',
+    androidStatus: 'Backlog',
   };
 
   const description =
