@@ -1,4 +1,5 @@
-import { useSlot, ComposableFunction, SlotFn, NativeReactType } from '@fluentui-react-native/use-slot';
+import type { ComposableFunction, SlotFn, NativeReactType } from '@fluentui-react-native/use-slot';
+import { useSlot } from '@fluentui-react-native/use-slot';
 
 // type AsObject<T> = T extends object ? T : never
 
@@ -18,6 +19,7 @@ export function buildUseSlots<TSlotProps>(options: UseSlotOptions<TSlotProps>): 
   const { slots, filters = {}, useStyling } = options;
   return (...args: any[]) => {
     // get the baseline slot props to render with the slots
+    // eslint-disable-next-line @typescript-eslint/ban-types
     const slotProps: TSlotProps = typeof useStyling === 'function' ? (useStyling as Function)(...args) : ((useStyling || {}) as TSlotProps);
 
     // build up a set of slots closures and store them in props

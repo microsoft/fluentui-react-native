@@ -1,12 +1,12 @@
+import { BasePage, By } from '../../common/BasePage';
+import { Attribute, AttributeValue } from '../../common/consts';
 import {
+  CHECKBOX_NO_A11Y_LABEL_COMPONENT,
+  CHECKBOX_ON_PRESS,
   CHECKBOX_TESTPAGE,
   CHECKBOX_TEST_COMPONENT,
-  CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_CHECKBOX_BUTTON,
-  CHECKBOX_ON_PRESS,
 } from '../consts';
-import { BasePage, By, DesktopPlatform } from '../../common/BasePage';
-import { Attribute, AttributeValue } from '../../common/consts';
 
 class CheckboxLegacyPageObject extends BasePage {
   /******************************************************************/
@@ -14,7 +14,7 @@ class CheckboxLegacyPageObject extends BasePage {
   /******************************************************************/
   async isCheckboxChecked(): Promise<boolean> {
     const checkbox = await this._primaryComponent;
-    if (this.platform === DesktopPlatform.Windows) {
+    if (this.platform === 'windows') {
       // for native windows, .isSelected() always returns false. this is a workaround
       return (await checkbox.getAttribute(Attribute.ToggleState)) === AttributeValue.on;
     } else {

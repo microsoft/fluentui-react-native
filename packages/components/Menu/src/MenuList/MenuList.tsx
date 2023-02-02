@@ -1,13 +1,15 @@
 /** @jsx withSlots */
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
-import { compose, mergeProps, stagedComponent, UseSlots, withSlots } from '@fluentui-react-native/framework';
-import { menuListName, MenuListProps, MenuListType } from './MenuList.types';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, stagedComponent, withSlots } from '@fluentui-react-native/framework';
+import type { MenuListProps, MenuListType } from './MenuList.types';
+import { menuListName } from './MenuList.types';
 import { stylingSettings } from './MenuList.styling';
 import { MenuListProvider } from '../context/menuListContext';
 import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
-import { IViewProps } from '@fluentui-react-native/adapters';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { useMenuContext } from '../context';
 

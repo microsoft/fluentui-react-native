@@ -5,7 +5,8 @@ import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
 import { TABSV1_TESTPAGE } from '../../../../E2E/src/TabsV1/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { TabsV1E2ETest } from './TabsV1E2ETest';
 import { svgProps } from '../Common/iconExamples';
 

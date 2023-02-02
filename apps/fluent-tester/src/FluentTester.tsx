@@ -1,4 +1,4 @@
-import { Theme } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/framework';
 import { Separator, TextV1 as Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';

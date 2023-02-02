@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Wed, 01 Feb 2023 22:33:14 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910",
+            "comment": "Enable @typescript-eslint/consistent-type-imports"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 15:17:29 GMT",
       "tag": "@fluentui-react-native/adapters_v0.10.0",
       "version": "0.10.0",

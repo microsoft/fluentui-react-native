@@ -1,14 +1,10 @@
 import * as React from 'react';
-import { AccessibilityState, I18nManager, Platform } from 'react-native';
-import { MenuItemProps, MenuItemInfo } from './MenuItem.types';
+import type { AccessibilityState } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
+import type { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
-import {
-  InteractionEvent,
-  isKeyPressEvent,
-  usePressableState,
-  useKeyDownProps,
-  useViewCommandFocus,
-} from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { isKeyPressEvent, usePressableState, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';

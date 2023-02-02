@@ -1,5 +1,5 @@
-import { ButtonInfo } from '..';
-import { ButtonSlotProps, ButtonTokens, ButtonProps } from '../Button.types';
+import type { ButtonInfo } from '..';
+import type { ButtonSlotProps, ButtonTokens, ButtonProps } from '../Button.types';
 
 export const toggleButtonName = 'ToggleButton';
 

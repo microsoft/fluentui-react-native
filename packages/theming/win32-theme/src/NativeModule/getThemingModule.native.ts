@@ -1,5 +1,6 @@
-import { OfficeThemingModule } from './officeThemingModule';
-import { NativeEventEmitter, TurboModuleRegistry, EventSubscriptionVendor, TurboModule } from 'react-native';
+import type { OfficeThemingModule } from './officeThemingModule';
+import type { EventSubscriptionVendor, TurboModule } from 'react-native';
+import { NativeEventEmitter, TurboModuleRegistry } from 'react-native';
 import { fallbackGetPalette, fallbackOfficeModule } from './fallbackOfficeModule';
 
 /**

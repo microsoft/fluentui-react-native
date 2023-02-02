@@ -7,7 +7,8 @@ import { SubtextRadioGroup } from './SubtextRadioGroup';
 import { HorizontalRadioGroup } from './HorizontalRadioGroup';
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
 import { RadioGroupV1E2ETest } from './RadioGroupV1E2ETest';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { Platform } from 'react-native';
 
 const radioGroupV1Sections: TestSection[] = [

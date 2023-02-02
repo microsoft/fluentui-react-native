@@ -3,7 +3,8 @@ import { Platform, View } from 'react-native';
 import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from '../../../../E2E/src/TabsLegacy/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { TabsLegacyE2ETest } from './TabsLegacyE2ETest';
 import { svgProps } from '../Common/iconExamples';
 

@@ -13,7 +13,8 @@ import {
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
 import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';

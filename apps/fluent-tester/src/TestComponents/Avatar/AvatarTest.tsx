@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';
 import { E2EAvatarTest } from './E2EAvatarTest';

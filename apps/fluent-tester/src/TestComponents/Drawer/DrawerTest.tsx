@@ -7,7 +7,8 @@ import { Drawer } from '@fluentui-react-native/experimental-drawer';
 import { Stack } from '@fluentui-react-native/stack';
 import { Icon } from '@fluentui-react-native/icon';
 import { DRAWER_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { svgProps } from '../Common/iconExamples';
 
 const BasicDrawer: React.FunctionComponent = () => {
