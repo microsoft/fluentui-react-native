@@ -1,8 +1,8 @@
 import React from 'react';
 import { I18nManager, Platform } from 'react-native';
-import { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
+import type { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
 import { useMenuContext } from '../context/menuContext';
-import { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
+import type { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
 
 const controlledDismissBehaviors = ['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[];
 

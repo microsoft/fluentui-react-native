@@ -3,7 +3,8 @@
 import { ThemeProvider } from '@fluentui-react-native/theme';
 import * as React from 'react';
 import { Platform } from 'react-native';
-import { FluentTester, FluentTesterProps } from './FluentTester';
+import type { FluentTesterProps } from './FluentTester';
+import { FluentTester } from './FluentTester';
 import { testerTheme } from './theme/index';
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
 

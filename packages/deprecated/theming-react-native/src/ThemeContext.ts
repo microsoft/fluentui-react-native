@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeRegistry } from './Theme.types';
+import type { ThemeRegistry } from './Theme.types';
 /**
  * @deprecated
  */

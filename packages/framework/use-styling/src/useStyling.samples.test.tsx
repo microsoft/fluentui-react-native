@@ -1,5 +1,7 @@
-import { ThemeHelper, buildUseStyling, UseStylingOptions } from './buildUseStyling';
-import { TextProps, Text, View, ColorValue } from 'react-native';
+import type { ThemeHelper, UseStylingOptions } from './buildUseStyling';
+import { buildUseStyling } from './buildUseStyling';
+import type { TextProps, ColorValue } from 'react-native';
+import { Text, View } from 'react-native';
 import { buildProps } from './buildProps';
 import toJson from 'enzyme-to-json';
 import * as React from 'react';

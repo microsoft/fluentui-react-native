@@ -2,7 +2,7 @@
  * A collection of internal types from react-native that are not currently exposed in TypeScript
  */
 
-import * as React from 'react';
+import type * as React from 'react';
 
 export type Rect = Readonly<{
   bottom?: number;

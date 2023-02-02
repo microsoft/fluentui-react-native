@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Make color description wrap",
+  "comment": "Remove section containing dead link",
   "packageName": "@fluentui-react-native/tester",
   "email": "78454019+lyzhan7@users.noreply.github.com",
   "dependentChangeType": "patch"

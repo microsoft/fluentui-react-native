@@ -2665,12 +2665,7 @@
   resolved "https://registry.yarnpkg.com/@react-native/assets/-/assets-1.0.0.tgz#c6f9bf63d274bafc8e970628de24986b30a55c8e"
   integrity sha512-KrwSpS1tKI70wuKl68DwJZYEvXktDHdZMG0k2AXD/rJVSlB23/X2CB2cutVR0HwNMJIal9HOUOBB2rVfa6UGtQ==
 
-"@react-native/normalize-color@*":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@react-native/normalize-color/-/normalize-color-2.1.0.tgz#939b87a9849e81687d3640c5efa2a486ac266f91"
-  integrity sha512-Z1jQI2NpdFJCVgpY+8Dq/Bt3d+YUi1928Q+/CZm/oh66fzM0RUl54vvuXlPJKybH4pdCZey1eDTPaLHkMPNgWA==
-
-"@react-native/normalize-color@2.0.0":
+"@react-native/normalize-color@*", "@react-native/normalize-color@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/normalize-color/-/normalize-color-2.0.0.tgz#da955909432474a9a0fe1cbffc66576a0447f567"
   integrity sha512-Wip/xsc5lw8vsBlmY2MO/gFLp3MvuZ2baBZjDeTjjndMgM0h5sxz7AZR62RDPGgstp8Np7JzjvVqVT7tpFZqsw==
@@ -2734,10 +2729,10 @@
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/eslint-plugin@^0.2.8":
-  version "0.2.13"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.13.tgz#47aa9cc9678fe70f75031a1b7b0ae7d61ec8f543"
-  integrity sha512-AyKJNyLr0P+zJZ3ctpAoRTeZ5ysHQlq12oVv0SYz4B8bkDd2JSAfCja3iMqmAbpstvkCAHEwMuaZ1jCVwgqO9w==
+"@rnx-kit/eslint-plugin@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.3.0.tgz#3976bd59c95d55d90c330488ab47acc17331caa5"
+  integrity sha512-LdbQGk5hAZ7jR3m6AYyY6W6+dhP+ybciwZcAN5PbOK2d9qAWQJbl3aOPHygHTJdO1kDZlAvM5sFpSjxHfwZfVw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.0.0"
     "@typescript-eslint/parser" "^5.0.0"
@@ -2795,9 +2790,9 @@
     typescript "^4.0.0"
 
 "@rnx-kit/metro-serializer-esbuild@^0.1.18":
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-serializer-esbuild/-/metro-serializer-esbuild-0.1.18.tgz#5d1ed049545880bf551f03c0e4deef494a711fa6"
-  integrity sha512-DalhbnThVa0nd3R2TSSx4wBro3fUqH8SWM1moDBTHH3VJM4HDyy3Y0nRuDgCLAeqDZHgKA7F1r+Us2rOIbh8kQ==
+  version "0.1.20"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-serializer-esbuild/-/metro-serializer-esbuild-0.1.20.tgz#ac258315c9fe1c10900307752e978965bf9d65ba"
+  integrity sha512-v1s05pTVzgYQoPjfVMhnYRUmtuYp06GX1yg7+9ohO+ioSuCyRSZj3vgtSWIzr8MtWLvC23j4qqbOR7IxIHNGcg==
   dependencies:
     "@rnx-kit/console" "^1.0.11"
     "@rnx-kit/tools-node" "^1.3.0"
@@ -2822,9 +2817,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/third-party-notices@^1.3.0":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/third-party-notices/-/third-party-notices-1.3.1.tgz#64919a73081ed60f370a66179b88127c285954ad"
-  integrity sha512-OYNkVMws85mLaVzPXZq9Xo5hWD8qSijldGGhpetCdIuXyjTobnZy4moISahb60H+iREDEdg/rVTgQbHKzIvBZA==
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/third-party-notices/-/third-party-notices-1.3.2.tgz#dce0554efb007be054832f6e75b3eb17fb97f5b1"
+  integrity sha512-28j3ASHrT8arntS8HpZD6A1I4NbIkXREx8UjPiZghUn4pvt9tvZEGonD18ZJBifOX2KMhlooXvZEtv3p7a9OtQ==
   dependencies:
     "@rnx-kit/console" "^1.0.11"
     "@rnx-kit/tools-node" "^1.2.7"
@@ -12379,9 +12374,9 @@ react-native-gradle-plugin@^0.0.6:
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
 
 react-native-macos@^0.68.0:
-  version "0.68.63"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.63.tgz#40d9527eea7e5ddc810e4957732e713ce291d1cb"
-  integrity sha512-0Jz8dtycakadCXJoD+jc02aflfYP9rCZ9p42EsuxI8H/UOFrstvS2C7NYi/7HHSswuIWaNwpPvqnlXHZNGM7tw==
+  version "0.68.64"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.64.tgz#b4985652a6fa9ab38bbd3d1508f95d435dc38ea3"
+  integrity sha512-A/62QnW816ar6zCN7s5PgDhYBTnlSwRqt/DpRQn/yo3UZSlepWpRtuGsow+K3HEevEmGGdyCVdDci8oNwvINYw==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^7.0.3"
@@ -12428,9 +12423,9 @@ react-native-svg-transformer@^1.0.0:
     path-dirname "^1.0.2"
 
 react-native-svg@^12.3.0, react-native-svg@^12.5.0:
-  version "12.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.5.0.tgz#61e4395eb5eb52bbd0511b3c227473f7dbf98a16"
-  integrity sha512-xVMA6QjwU2E30DHLzjmewjHSmby4mMMlUaiKnFCYPWpsezsaB3zHS7eURwKNJLmcRYOPi3f6aBhxvFTNj/5j/A==
+  version "12.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.5.1.tgz#7dfd9daf2f8ed7843c0f3e7a16af193bd5f9b287"
+  integrity sha512-c374ENsq2MWCfr+7jC7TGwSeOAuC1Dp0osh2pw8PjpYFxmmB/toFIwcnCLz+SgBd6iLJClRhbATealqM05HOGg==
   dependencies:
     css-select "^5.1.0"
     css-tree "^1.1.3"
@@ -14169,10 +14164,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@4.5.4, typescript@^4.0.0:
-  version "4.5.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.4.tgz#a17d3a0263bf5c8723b9c52f43c5084edf13c2e8"
-  integrity sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==
+typescript@4.9.4, typescript@^4.0.0:
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
+  integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
 
 typical@^2.6.1:
   version "2.6.1"

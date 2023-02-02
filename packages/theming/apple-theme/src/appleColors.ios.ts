@@ -1,8 +1,8 @@
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
+import type { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { Appearance } from 'react-native';
-import { ApplePalette } from './appleColors.types.ios';
+import type { ApplePalette } from './appleColors.types.ios';
 import { createiOSColorAliasTokens } from './createiOSAliasTokens';
 
 function getFluentUIAppleLightPalette(): ApplePalette {

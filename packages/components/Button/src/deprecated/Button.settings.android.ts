@@ -1,5 +1,6 @@
-import { buttonName, IButtonType } from './Button.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
+import type { IButtonType } from './Button.types';
+import { buttonName } from './Button.types';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
 /**
