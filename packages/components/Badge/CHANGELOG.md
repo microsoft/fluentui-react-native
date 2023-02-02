@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Feb 2023 22:33:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.23
+
+Wed, 01 Feb 2023 22:33:15 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.10.1
+- Bump @fluentui-react-native/experimental-shadow to v0.2.64
+- Bump @fluentui-react-native/framework to v0.8.38
+- Bump @fluentui-react-native/icon to v0.17.9
+- Bump @fluentui-react-native/text to v0.19.17
+- Bump @fluentui-react-native/theme-tokens to v0.24.2
+- Bump @fluentui-react-native/theme-types to v0.30.2
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @fluentui-react-native/use-styling to v0.9.2
 
 ## 0.4.22
 

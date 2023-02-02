@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/spinner",
   "entries": [
     {
+      "date": "Wed, 01 Feb 2023 22:33:17 GMT",
+      "tag": "@fluentui-react-native/spinner_v0.1.4",
+      "version": "0.1.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.4.3",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.38",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/text to v0.19.17",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 15:17:31 GMT",
       "tag": "@fluentui-react-native/spinner_v0.1.3",
       "version": "0.1.3",

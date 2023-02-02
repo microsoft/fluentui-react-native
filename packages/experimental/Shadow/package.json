@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-shadow",
-  "version": "0.2.63",
+  "version": "0.2.64",
   "description": "A cross-platform Shadow component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,9 +26,9 @@
     "directory": "packages/experimental/Shadow"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.8.37",
-    "@fluentui-react-native/pressable": "0.9.53",
-    "@fluentui-react-native/theme-types": "0.30.1"
+    "@fluentui-react-native/framework": "0.8.38",
+    "@fluentui-react-native/pressable": "0.9.54",
+    "@fluentui-react-native/theme-types": "0.30.2"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

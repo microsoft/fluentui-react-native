@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Feb 2023 22:33:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.31
+
+Wed, 01 Feb 2023 22:33:16 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.12.38
+- Bump @fluentui-react-native/adapters to v0.10.1
+- Bump @fluentui-react-native/component-cache to v1.4.3
+- Bump @fluentui-react-native/focus-zone to v0.11.27
+- Bump @fluentui-react-native/interactive-hooks to v0.22.15
+- Bump @fluentui-react-native/pressable to v0.9.54
+- Bump @fluentui-react-native/text to v0.19.17
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @uifabricshared/foundation-composable to v0.11.2
+- Bump @uifabricshared/foundation-settings to v0.12.2
 
 ## 0.16.30
 

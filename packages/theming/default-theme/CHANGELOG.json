@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/default-theme",
   "entries": [
     {
+      "date": "Wed, 01 Feb 2023 22:33:15 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.16.28",
+      "version": "0.16.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910",
+            "comment": "Enable @typescript-eslint/consistent-type-imports"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.8",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.24.2",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.30.2",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.7.20",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.2",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 15:17:30 GMT",
       "tag": "@fluentui-react-native/default-theme_v0.16.27",
       "version": "0.16.27",
