@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 01:29:38 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.5.16",
+      "version": "0.5.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "ac679ca51704ba5c2d2cc2385a71694b69735a1d",
+            "comment": "Add eslint to packages missing a config"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-expander",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.39",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Feb 2023 22:33:17 GMT",
       "tag": "@fluentui-react-native/experimental-expander_v0.5.15",
       "version": "0.5.15",

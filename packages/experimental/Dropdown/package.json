@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/dropdown",
-  "version": "0.7.22",
+  "version": "0.7.23",
   "description": "A cross-platform Dropdown component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,11 +27,11 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.10.1 <1.0.0",
-    "@fluentui-react-native/button": ">=0.32.27 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.21.57 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.38",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.15 <1.0.0",
-    "@fluentui-react-native/text": ">=0.19.17 <1.0.0",
+    "@fluentui-react-native/button": ">=0.32.28 <1.0.0",
+    "@fluentui-react-native/callout": ">=0.21.58 <1.0.0",
+    "@fluentui-react-native/framework": "0.8.39",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.16 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.18 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.24.2"
   },
   "devDependencies": {

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
-This log was last generated on Tue, 27 Dec 2022 21:34:48 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 01:29:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.5
+
+Thu, 02 Feb 2023 01:29:38 GMT
+
+### Patches
+
+- Add eslint to packages missing a config (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.7.4
 

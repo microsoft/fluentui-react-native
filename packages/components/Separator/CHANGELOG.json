@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 01:29:39 GMT",
+      "tag": "@fluentui-react-native/separator_v0.14.13",
+      "version": "0.14.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/separator",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.39",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/separator",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.9.3",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Feb 2023 22:33:16 GMT",
       "tag": "@fluentui-react-native/separator_v0.14.12",
       "version": "0.14.12",
