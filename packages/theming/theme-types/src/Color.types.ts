@@ -12,7 +12,7 @@
  * `{semantic: "windowBackgroundColor"}`
  */
 
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 export type ThemeColorDefinition = Palette & {
   background: ColorValue;

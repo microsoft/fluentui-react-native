@@ -1,5 +1,5 @@
-import { IThemeRegistry, IProcessTheme } from '@uifabricshared/theme-registry';
-import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
+import type { IThemeRegistry, IProcessTheme } from '@uifabricshared/theme-registry';
+import type { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 
 /**
  * @deprecated

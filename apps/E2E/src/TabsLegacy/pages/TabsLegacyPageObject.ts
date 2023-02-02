@@ -15,11 +15,10 @@ import { BasePage, By } from '../../common/BasePage';
  * The spec file should import this enum and use it when wanting to interact with different elements on the page.
  * The main Tab group we are testing has THREE tab items. The spec file will
  * import this enum to easily write tests using these 3 tab items */
-export const enum TabItem {
-  First = 0, // this._firstTabItem
-  Second, // this._secondTabItem
-  Third, // this._thirdTabItem
-}
+type TabItem =
+  | 'First' // this._firstTabItem
+  | 'Second' // this._secondTabItem
+  | 'Third'; // this._thirdTabItem
 
 class TabsLegacyPageObject extends BasePage {
   /******************************************************************/
@@ -35,11 +34,11 @@ class TabsLegacyPageObject extends BasePage {
   /* Returns the correct WebDriverIO element from the TabItem Selector */
   async getTabItem(tabItemSelector: TabItem): Promise<WebdriverIO.Element> {
     switch (tabItemSelector) {
-      case TabItem.First:
+      case 'First':
         return await By(FIRST_TABS_ITEM);
-      case TabItem.Second:
+      case 'Second':
         return await By(SECOND_TABS_ITEM);
-      case TabItem.Third:
+      case 'Third':
         return await By(THIRD_TABS_ITEM);
     }
   }
@@ -47,11 +46,11 @@ class TabsLegacyPageObject extends BasePage {
   /* Returns the correct WebDriverIO element from the TabItem Selector */
   async getTabItemContent(tabItemSelector: TabItem): Promise<WebdriverIO.Element> {
     switch (tabItemSelector) {
-      case TabItem.First:
+      case 'First':
         return await By(FIRST_TABS_ITEM_CONTENT);
-      case TabItem.Second:
+      case 'Second':
         return await By(SECOND_TABS_ITEM_CONTENT);
-      case TabItem.Third:
+      case 'Third':
         return await By(THIRD_TABS_ITEM_CONTENT);
     }
   }

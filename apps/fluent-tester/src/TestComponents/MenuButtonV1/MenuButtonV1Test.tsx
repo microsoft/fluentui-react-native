@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { MENUBUTTONV1_TESTPAGE } from '../../../../E2E/src/MenuButtonV1/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { StandardMenuButton } from './StandardMenuButtonTest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
 import { MenuButtonV1E2ETest } from './MenuButtonV1E2ETest';

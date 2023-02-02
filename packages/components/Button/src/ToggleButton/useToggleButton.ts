@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { ToggleButtonProps, ToggleButtonInfo } from './ToggleButton.types';
+import type { ToggleButtonProps, ToggleButtonInfo } from './ToggleButton.types';
 import { useButton } from '../useButton';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState } from 'react-native';
+import type { AccessibilityState } from 'react-native';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 

@@ -2,6 +2,108 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 01:29:39 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.15.30",
+      "version": "0.15.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.29",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.24.16",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 01 Feb 2023 22:33:17 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.15.29",
+      "version": "0.15.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910",
+            "comment": "Enable @typescript-eslint/consistent-type-imports"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.28",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.24.15",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theme-registry to v0.9.1",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.17.19",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 15:17:33 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.15.28",
+      "version": "0.15.28",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "4de4c2b37c835ebd9af015ff767f9dd68452f786",
+            "comment": "Migrate to align-deps"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 07:12:38 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.15.28",
+      "version": "0.15.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.27",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.24.14",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.17.18",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Jan 2023 21:31:18 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.15.27",
       "version": "0.15.27",

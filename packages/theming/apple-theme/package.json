@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/apple-theme",
-  "version": "0.18.4",
+  "version": "0.18.7",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Apple",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -31,14 +31,15 @@
     "directory": "packages/theming/apple-theme"
   },
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.16.26 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.16.29 <1.0.0",
     "@fluentui-react-native/design-tokens-ios": "^0.42.0",
     "@fluentui-react-native/design-tokens-macos": "^0.42.0",
-    "@fluentui-react-native/memo-cache": "^1.1.7",
-    "@fluentui-react-native/theme": ">=0.7.18 <1.0.0",
-    "@fluentui-react-native/theme-tokens": "^0.24.0",
-    "@fluentui-react-native/theme-types": ">=0.30.0 <1.0.0",
-    "@fluentui-react-native/theming-utils": "^0.23.0",
+    "@fluentui-react-native/experimental-appearance-additions": "^0.2.3",
+    "@fluentui-react-native/memo-cache": "^1.1.8",
+    "@fluentui-react-native/theme": ">=0.7.21 <1.0.0",
+    "@fluentui-react-native/theme-tokens": "^0.24.2",
+    "@fluentui-react-native/theme-types": ">=0.30.2 <1.0.0",
+    "@fluentui-react-native/theming-utils": "^0.23.2",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
@@ -56,15 +57,21 @@
     "react-native-macos": "^0.68.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "core-macos",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "core-macos",
+        "react"
+      ]
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Theme, Spacing } from '@fluentui-react-native/theme-types';
+import type { Theme, Spacing } from '@fluentui-react-native/theme-types';
 import { paletteFromAppleColors } from './appleColors.ios';
 import { appleTypography } from './appleTypography.ios';
 import { iOSShadows } from './appleShadows.ios';
@@ -128,9 +128,9 @@ const appleComponents = {
   },
 };
 
-function getBaseAppleThemeIOSWorker(isLightMode: boolean): Theme {
+function getBaseAppleThemeIOSWorker(isLightMode: boolean, isElevated: boolean): Theme {
   return {
-    colors: paletteFromAppleColors(isLightMode),
+    colors: paletteFromAppleColors(isLightMode, isElevated),
     typography: appleTypography(),
     shadows: iOSShadows(),
     spacing: appleSpacing(),

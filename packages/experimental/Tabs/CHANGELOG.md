@@ -1,8 +1,50 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Wed, 25 Jan 2023 21:31:18 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 01:29:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.30
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.39
+- Bump @fluentui-react-native/interactive-hooks to v0.22.16
+- Bump @fluentui-react-native/focus-zone to v0.11.28
+- Bump @fluentui-react-native/text to v0.19.18
+- Bump @fluentui-react-native/use-styling to v0.9.3
+- Bump @fluentui-react-native/icon to v0.17.10
+
+## 0.8.29
+
+Wed, 01 Feb 2023 22:33:15 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.8.38
+- Bump @fluentui-react-native/interactive-hooks to v0.22.15
+- Bump @fluentui-react-native/focus-zone to v0.11.27
+- Bump @fluentui-react-native/text to v0.19.17
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @fluentui-react-native/use-styling to v0.9.2
+- Bump @fluentui-react-native/icon to v0.17.9
+- Bump @fluentui-react-native/adapters to v0.10.1
+
+## 0.8.28
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.37
+- Bump @fluentui-react-native/interactive-hooks to v0.22.14
+- Bump @fluentui-react-native/focus-zone to v0.11.26
+- Bump @fluentui-react-native/text to v0.19.16
+- Bump @fluentui-react-native/tokens to v0.20.6
+- Bump @fluentui-react-native/icon to v0.17.8
 
 ## 0.8.27
 

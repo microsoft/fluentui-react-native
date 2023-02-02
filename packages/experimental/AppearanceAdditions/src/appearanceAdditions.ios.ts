@@ -1,12 +1,8 @@
 import { NativeEventEmitter } from 'react-native';
 import NativeAppearanceAdditions from './NativeAppearanceAdditions.ios';
-import {
-  HorizontalSizeClassKey,
-  AppearanceAdditions,
-  SizeClass,
-  UserInterfaceLevel,
-  UserInterfaceLevelKey,
-} from './NativeAppearanceAdditions.types';
+import type { AppearanceAdditions, SizeClass, UserInterfaceLevel } from './NativeAppearanceAdditions.types';
+import { HorizontalSizeClassKey, UserInterfaceLevelKey } from './NativeAppearanceAdditions.types';
+import { memoize } from '@fluentui-react-native/framework';
 
 class AppearanceAdditionsImpl implements AppearanceAdditions {
   _horizontalSizeClass: SizeClass;
@@ -29,4 +25,8 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
   }
 }
 
-export const appearanceAdditions = new AppearanceAdditionsImpl() as AppearanceAdditions;
+function getAppearanceAdditionsWorker() {
+  return new AppearanceAdditionsImpl() as AppearanceAdditions;
+}
+
+export const appearanceAdditions = memoize(getAppearanceAdditionsWorker);

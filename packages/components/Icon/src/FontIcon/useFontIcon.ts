@@ -1,6 +1,7 @@
-import { TextStyle, Image, Platform } from 'react-native';
+import type { TextStyle } from 'react-native';
+import { Image, Platform } from 'react-native';
 import { getMemoCache } from '@fluentui-react-native/framework';
-import { FontIconProps } from './FontIcon.types';
+import type { FontIconProps } from './FontIcon.types';
 
 export const useFontIcon = (props: FontIconProps): FontIconProps => {
   const { accessible, color, fontSrcFile, fontFamily, fontSize, ...rest } = props;

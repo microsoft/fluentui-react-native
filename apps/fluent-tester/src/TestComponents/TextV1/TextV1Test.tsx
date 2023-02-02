@@ -4,7 +4,8 @@ import { V2Usage } from './V2Usage';
 import { MaximumFontSizeUsage } from './MaximumFontSize';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { TextV1E2ETest } from './TextV1E2ETest';
 import { TEXTV1_TESTPAGE } from '../../../../E2E/src/TextV1/consts';
 

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { ColorValue } from 'react-native';
-import { XmlProps } from 'react-native-svg';
+import type * as React from 'react';
+import type { ColorValue } from 'react-native';
+import type { XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { TextProps } from '@fluentui-react-native/text';
-import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
-import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { TextProps } from '@fluentui-react-native/text';
+import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const menuItemName = 'MenuItem';
 

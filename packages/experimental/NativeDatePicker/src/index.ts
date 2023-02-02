@@ -1,1 +1,1 @@
-export * from './NativeDatePicker';
+export { NativeDatePicker } from './NativeDatePicker';

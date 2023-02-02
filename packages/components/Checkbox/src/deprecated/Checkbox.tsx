@@ -2,9 +2,12 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType, checkboxName } from './Checkbox.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType } from './Checkbox.types';
+import { checkboxName } from './Checkbox.types';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -17,7 +20,7 @@ import {
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { IPressableProps } from '@fluentui-react-native/pressable';
+import type { IPressableProps } from '@fluentui-react-native/pressable';
 
 /**
  * @deprecated This will be removed when the package moves to 1.0.0.

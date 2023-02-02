@@ -1,4 +1,4 @@
-import { PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type { PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 
 export const dropdownName = 'Dropdown';
 

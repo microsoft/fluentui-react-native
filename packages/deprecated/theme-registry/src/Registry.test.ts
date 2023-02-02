@@ -1,7 +1,7 @@
 import { createThemeRegistry } from './Registry';
-import { IThemeRegistry } from './Registry.types';
+import type { IThemeRegistry } from './Registry.types';
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 interface IFakeStyle {
   textColor?: string;

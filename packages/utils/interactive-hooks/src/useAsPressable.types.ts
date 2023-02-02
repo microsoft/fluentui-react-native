@@ -1,4 +1,4 @@
-import { PressabilityConfig, PressabilityEventHandlers } from './Pressability/Pressability.types';
+import type { PressabilityConfig, PressabilityEventHandlers } from './Pressability/Pressability.types';
 
 export type IPressState = {
   pressed?: boolean;
