@@ -1,9 +1,12 @@
 /** @jsx withSlots */
 import { useRef, useEffect, useCallback } from 'react';
-import { Animated, ColorValue, Easing, View } from 'react-native';
+import type { ColorValue } from 'react-native';
+import { Animated, Easing, View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
-import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
-import { spinnerName, SpinnerProps, SpinnerType } from './mobile/Spinner.types';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
+import type { SpinnerProps, SpinnerType } from './mobile/Spinner.types';
+import { spinnerName } from './mobile/Spinner.types';
 import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './mobile/Spinner.styling';
 
 const getSpinnerPath = (diameter: number, width: number, color: ColorValue) => {

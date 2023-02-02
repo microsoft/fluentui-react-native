@@ -1,6 +1,6 @@
-import { Animated, ColorValue } from 'react-native';
-import { SvgProps } from 'react-native-svg';
-import { ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-native';
+import type { Animated, ColorValue } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
+import type { ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-native';
 
 export const spinnerName = 'Spinner';
 /**

@@ -1,6 +1,6 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { SpinnerTokens } from './Spinner.types';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+import type { SpinnerTokens } from './Spinner.types';
 import { Appearance } from 'react-native';
 
 export const defaultSpinnerTokens: TokenSettings<SpinnerTokens, Theme> = () =>
