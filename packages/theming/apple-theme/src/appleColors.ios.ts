@@ -180,10 +180,10 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     bodyDivider: fluent2AliasColorTokens.neutralStroke1,
 
     disabledBackground: globalTokens.color.grey88,
-    disabledText: fluentApple.textDisabled,
-    disabledBodyText: fluentApple.textDisabled,
-    disabledSubtext: fluentApple.textDisabled,
-    disabledBodySubtext: fluentApple.textDisabled,
+    disabledText: fluent2AliasColorTokens.neutralForegroundDisabled1,
+    disabledBodyText: fluent2AliasColorTokens.neutralForegroundDisabled1,
+    disabledSubtext: fluent2AliasColorTokens.neutralForegroundDisabled1,
+    disabledBodySubtext: fluent2AliasColorTokens.neutralForegroundDisabled1,
 
     focusBorder: 'transparent',
     variantBorder: fluent2AliasColorTokens.neutralStroke2,
