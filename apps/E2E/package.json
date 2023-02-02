@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "fluentui-scripts build",
+    "lint": "fluentui-scripts eslint",
     "e2etest:android": "wdio run wdio.conf.android.js",
     "e2etest:ios": "wdio run wdio.conf.ios.js",
     "e2etest:macos": "wdio run wdio.conf.macos.js",

@@ -2592,9 +2592,9 @@
     wcwidth "^1.0.1"
 
 "@react-native-community/slider@^4.2.0":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.4.1.tgz#368faef3c2aac2097bbfda0a143283f3731a312c"
-  integrity sha512-CLzwZyLlWfDYN4xj6Wwqm+HisF6dd+rq9pk6Cp+Auw0bm4eb4GLQNc29ILh051xHMe5Dhrd9+NBrbvaEujevkA==
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.4.2.tgz#1fea0eb3ae31841fe87bd6c4fc67569066e9cf4b"
+  integrity sha512-D9bv+3Vd2gairAhnRPAghwccgEmoM7g562pm8i4qB3Esrms5mggF81G3UvCyc0w3jjtFHh8dpQkfEoKiP0NW/Q==
 
 "@react-native-menu/menu@^0.1.2":
   version "0.1.2"
@@ -2746,10 +2746,10 @@
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/eslint-plugin@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.3.0.tgz#3976bd59c95d55d90c330488ab47acc17331caa5"
-  integrity sha512-LdbQGk5hAZ7jR3m6AYyY6W6+dhP+ybciwZcAN5PbOK2d9qAWQJbl3aOPHygHTJdO1kDZlAvM5sFpSjxHfwZfVw==
+"@rnx-kit/eslint-plugin@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.4.0.tgz#4d5ff71cded1780d3a126d86015a5c2cfa996454"
+  integrity sha512-jYuzCywyNzJcFoDMUOWlghdx2ua9v9/QZe8xwSRlbGbBfHBRKJhEJxF+ZA4sw04emZW84y80dTtpRq9d8gI1dA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.0.0"
     "@typescript-eslint/parser" "^5.0.0"
@@ -2793,9 +2793,9 @@
     "@rnx-kit/tools-node" "^1.2.7"
 
 "@rnx-kit/metro-plugin-typescript@^0.3.0":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-plugin-typescript/-/metro-plugin-typescript-0.3.1.tgz#1e30850455bc28dd5ac73670135739ff1e252a23"
-  integrity sha512-KIFyEfU047mztQV+P3d8kthBYV4Pz8E5h7F5bzvbb2aVSyaiXDD8HN5GIt6dX2wvYiNEqCqkKg+zuEE6VTGjCA==
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-plugin-typescript/-/metro-plugin-typescript-0.3.2.tgz#f3b2b42c7b77348959c4cd8173698a0e48449ac4"
+  integrity sha512-VHQpKRdSgbYPOeHsRmkLwMHTvCzVui6RrxHiTaz9RZjn0tX/2GKnQFa7sMu9VwI6AWKXZlPovIjey3Myjz0b3w==
   dependencies:
     "@rnx-kit/config" "^0.6.1"
     "@rnx-kit/tools-node" "^1.3.1"
@@ -3566,9 +3566,9 @@
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
 "@types/react-native@^0.68.0":
-  version "0.68.10"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.10.tgz#211b9e05d0f97c3f7239081634aa643bec85c6f9"
-  integrity sha512-BFmi9wERGJutVg0rgkS63gV2w8yPoug2PeF3SmeOkW3c5TbfFLI74iPpAMu/wxcJSnlEuwkMp6RXatZZe8fulg==
+  version "0.68.11"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.11.tgz#2b8592f5cdb819079b11e2ac3f772db01514e3a7"
+  integrity sha512-YdwPWo59uCiPK9Dnx2V/rmGKpFzhmp/frD9nhJI/gT10iQnYEf1LqNUdItXqnqswz9WAOoAkYnparth8rJ4xQw==
   dependencies:
     "@types/react" "^17"
 
