@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 15:15:38 GMT",
+      "tag": "@fluentui-react-native/tester_v0.129.6",
+      "version": "0.129.6",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "90b6f344dc1923ae62255d11019fa593e220e587",
+            "comment": "Enable `@rnx-kit/no-const-enum`"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Feb 2023 02:18:52 GMT",
       "tag": "@fluentui-react-native/tester_v0.129.6",
       "version": "0.129.6",
