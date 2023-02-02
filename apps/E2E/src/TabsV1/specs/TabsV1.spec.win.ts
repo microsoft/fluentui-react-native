@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import TabsV1PageObject, { TabItem } from '../pages/TabsV1PageObject';
+import TabsV1PageObject from '../pages/TabsV1PageObject';
 import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT, Attribute, Keys } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -30,7 +30,7 @@ describe('TabsV1 Accessibility Testing', () => {
 
   it('Validate TabItem\'s "accessibilityRole" defaults to "ControlType.TabItem".', async () => {
     await expect(
-      await TabsV1PageObject.compareAttribute(TabsV1PageObject.getTabItem(TabItem.First), Attribute.AccessibilityRole, TABITEM_A11Y_ROLE),
+      await TabsV1PageObject.compareAttribute(TabsV1PageObject.getTabItem('First'), Attribute.AccessibilityRole, TABITEM_A11Y_ROLE),
     ).toBeTruthy();
 
     await expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT);
@@ -43,15 +43,15 @@ describe('TabsV1 Functional Tests', () => {
     await TabsV1PageObject.scrollToTestElement();
 
     // Reset the TabGroup by putting focus on First tab item
-    await TabsV1PageObject.click(TabsV1PageObject.getTabItem(TabItem.First));
+    await TabsV1PageObject.click(TabsV1PageObject.getTabItem('First'));
   });
 
   it('Click on the second tab header. Validate the second TabItem content is shown.', async () => {
-    await TabsV1PageObject.click(TabsV1PageObject.getTabItem(TabItem.Second));
+    await TabsV1PageObject.click(TabsV1PageObject.getTabItem('Second'));
 
     await expect(
       await TabsV1PageObject.waitForTabItemContentToLoad(
-        TabItem.Second,
+        'Second',
         "Expected the second tab item's content to show by clicking the second tab item.",
       ),
     ).toBeTruthy();
@@ -60,41 +60,41 @@ describe('TabsV1 Functional Tests', () => {
 
   it('Input the following arrow keys on the tabs: Right -> Down -> Left -> Up. Validate the correct TabItem content gets shown.', async () => {
     /* At First tab element, press Right Arrow to navigate to the Second tab element */
-    await TabsV1PageObject.sendKeys(TabsV1PageObject.getTabItem(TabItem.First), [Keys.ARROW_RIGHT]);
+    await TabsV1PageObject.sendKeys(TabsV1PageObject.getTabItem('First'), [Keys.ARROW_RIGHT]);
 
     await expect(
       await TabsV1PageObject.waitForTabItemContentToLoad(
-        TabItem.Second,
+        'Second',
         'Expected the second tab item\'s content to show by pressing "Right Arrow" on the first tab item.',
       ),
     ).toBeTruthy();
 
     /* At Second tab element, press Down Arrow to navigate to the Third tab element */
-    await TabsV1PageObject.sendKeys(TabsV1PageObject.getTabItem(TabItem.Second), [Keys.ARROW_DOWN]);
+    await TabsV1PageObject.sendKeys(TabsV1PageObject.getTabItem('Second'), [Keys.ARROW_DOWN]);
 
     await expect(
       await TabsV1PageObject.waitForTabItemContentToLoad(
-        TabItem.Third,
+        'Third',
         'Expected the third tab item\'s content to show by pressing "Down Arrow" on the second tab item.',
       ),
     ).toBeTruthy();
 
     /* At Third tab element, press Left Arrow to navigate to the Second tab element */
-    await TabsV1PageObject.sendKeys(TabsV1PageObject.getTabItem(TabItem.Third), [Keys.ARROW_LEFT]);
+    await TabsV1PageObject.sendKeys(TabsV1PageObject.getTabItem('Third'), [Keys.ARROW_LEFT]);
 
     await expect(
       await TabsV1PageObject.waitForTabItemContentToLoad(
-        TabItem.Second,
+        'Second',
         'Expected the second tab item\'s content to show by pressing "Left Arrow" on the third tab item.',
       ),
     ).toBeTruthy();
 
     /* At Second tab element, press Up Arrow to navigate to the First tab element */
-    await TabsV1PageObject.sendKeys(TabsV1PageObject.getTabItem(TabItem.Second), [Keys.ARROW_UP]);
+    await TabsV1PageObject.sendKeys(TabsV1PageObject.getTabItem('Second'), [Keys.ARROW_UP]);
 
     await expect(
       await TabsV1PageObject.waitForTabItemContentToLoad(
-        TabItem.First,
+        'First',
         'Expected the first tab item\'s content to show by pressing "Up Arrow" on the first tab item.',
       ),
     ).toBeTruthy();

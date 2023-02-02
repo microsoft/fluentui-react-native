@@ -11,11 +11,7 @@ import {
 } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
-export const enum TabItem {
-  First = 1,
-  Second,
-  Third,
-}
+export type TabItem = 'First' | 'Second' | 'Third';
 
 class TabsV1PageObject extends BasePage {
   async waitForTabItemContentToLoad(selector: TabItem, errorMsg: string): Promise<boolean> {
@@ -26,22 +22,22 @@ class TabsV1PageObject extends BasePage {
 
   async getTabItem(selector: TabItem): Promise<WebdriverIO.Element> {
     switch (selector) {
-      case TabItem.First:
+      case 'First':
         return await By(TABSITEMV1_ITEM_1);
-      case TabItem.Second:
+      case 'Second':
         return await By(TABSITEMV1_ITEM_2);
-      case TabItem.Third:
+      case 'Third':
         return await By(TABSITEMV1_ITEM_3);
     }
   }
 
   async getTabItemContent(selector: TabItem): Promise<WebdriverIO.Element> {
     switch (selector) {
-      case TabItem.First:
+      case 'First':
         return await By(TABSITEMV1_CONTENT_1);
-      case TabItem.Second:
+      case 'Second':
         return await By(TABSITEMV1_CONTENT_2);
-      case TabItem.Third:
+      case 'Third':
         return await By(TABSITEMV1_CONTENT_3);
     }
   }
