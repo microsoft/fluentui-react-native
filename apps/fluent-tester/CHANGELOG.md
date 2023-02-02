@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 02 Feb 2023 01:29:39 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 02:18:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.129.6
+
+Thu, 02 Feb 2023 02:18:52 GMT
+
+### Patches
+
+- Remove section containing dead link (78454019+lyzhan7@users.noreply.github.com)
+- Fix some type errors when running TS type check for win32 platform (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.8.17
 
 ## 0.129.5
 

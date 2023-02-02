@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix some type errors when running TS type check for win32 platform",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

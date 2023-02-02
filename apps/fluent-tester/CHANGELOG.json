@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 02:18:52 GMT",
+      "tag": "@fluentui-react-native/tester_v0.129.6",
+      "version": "0.129.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "577c02ea7474e2151306e348c1f446b1e69bfe7d",
+            "comment": "Remove section containing dead link"
+          },
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5",
+            "comment": "Fix some type errors when running TS type check for win32 platform"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shimmer to v0.8.17",
+            "commit": "577c02ea7474e2151306e348c1f446b1e69bfe7d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Feb 2023 01:29:39 GMT",
       "tag": "@fluentui-react-native/tester_v0.129.5",
       "version": "0.129.5",

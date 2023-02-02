@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Thu, 02 Feb 2023 01:29:39 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 02:18:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.17
+
+Thu, 02 Feb 2023 02:18:52 GMT
+
+### Patches
+
+- Fix some type errors when running TS type check for win32 platform (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.8.16
 

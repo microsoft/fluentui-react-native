@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 02:18:52 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.8.17",
+      "version": "0.8.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5",
+            "comment": "Fix some type errors when running TS type check for win32 platform"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Feb 2023 01:29:39 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.8.16",
       "version": "0.8.16",
