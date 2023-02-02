@@ -77,27 +77,6 @@ interface FluentUIApplePalette {
   warningTint40: ColorValue;
 }
 
-/** A set of colors that define semantic colors in FluentUI Apple */
-interface FluentAppleSemanticColors {
-  /**
-   * text color should not be lower than `gray500` in light mode to achieve 4.5:1 minimum contrast ratio in `.white` background
-   * text color should not be higher than `gray400` in dark mode to achieve 4.5:1 minimum contrast ratio in `.black` background
-   * when determining high contrast color, add 200 in light mode and substract 200 in dark mode from the default color.
-   * text color used for main level in the screen. eg. title in dialog, title in navigationbar with `neutralBackground1`, etc
-   */
-
-  /** text color used for main level in the screen. eg. title in dialog, title in navigationbar with `neutralBackground1`, etc */
-  textDominant: ColorValue; //= UIColor(light: gray900, lightHighContrast: .black, dark: .white)
-  /** text color used for titles */
-  textPrimary: ColorValue; //= UIColor(light: gray900, lightHighContrast: .black, dark: gray100, darkHighContrast: .white)
-  /** text color used for subtitles */
-  textSecondary: ColorValue; //= UIColor(light: gray500, lightHighContrast: gray700, dark: gray400, darkHighContrast: gray200)
-  /** text color used in disabled state */
-  textDisabled: ColorValue; //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-  /** text appears on top of the surface that uses `Colors.primary` as background color */
-  textOnAccent: ColorValue; //= UIColor(light: .white, dark: .black)
-}
-
 /** FluentUI Apple Colors defined for the iOS Button */
 interface FluentAppleButtonColors {
   buttonBackground: ColorValue;
@@ -108,4 +87,4 @@ interface FluentAppleButtonColors {
   buttonTitleWithFilledBackground: ColorValue;
 }
 
-export type ApplePalette = FluentUIApplePalette & FluentAppleSemanticColors & FluentAppleButtonColors;
+export type ApplePalette = FluentUIApplePalette & FluentAppleButtonColors;

@@ -80,18 +80,12 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     warningTint30: '#FFF2C3',
     warningTint40: '#FFF8DF',
 
-    textDominant: '#212121', //= UIColor(light: gray900, lightHighContrast: .black, dark: .white)
-    textPrimary: '#212121', //= UIColor(light: gray900, lightHighContrast: .black, dark: gray100, darkHighContrast: .white)
-    textSecondary: '#6E6E6E', //= UIColor(light: gray500, lightHighContrast: gray700, dark: gray400, darkHighContrast: gray200)
-    textDisabled: '#ACACAC', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-    textOnAccent: 'white', //= UIColor(light: .white, dark: .black)
-
     buttonBackground: 'transparent',
     buttonBackgroundFilledPressed: '#2B88D8', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
     buttonBackgroundFilledDisabled: '#E1E1E1', //neutralBackgroundDisabled
     buttonBorderDisabled: '#E1E1E1', //neutralBackgroundDisabled
     buttonTitleDisabled: '#ACACAC', //textDisabled
-    buttonTitleWithFilledBackground: 'white', //textOnAccent
+    buttonTitleWithFilledBackground: 'white', //neutralForegroundOnColor
   };
 }
 
@@ -171,18 +165,12 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     warningTint30: '#4D3A0C',
     warningTint40: '#291F07',
 
-    textDominant: 'white', //= UIColor(light: gray900, lightHighContrast: .black, dark: .white)
-    textPrimary: '#E1E1E1', //= UIColor(light: gray900, lightHighContrast: .black, dark: gray100, darkHighContrast: .white)
-    textSecondary: '#919191', //= UIColor(light: gray500, lightHighContrast: gray700, dark: gray400, darkHighContrast: gray200)
-    textDisabled: '#404040', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-    textOnAccent: 'black', //= UIColor(light: .white, dark: .black)
-
     buttonBackground: 'transparent',
     buttonBackgroundFilledPressed: '#004C87', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
     buttonBackgroundFilledDisabled: '#404040', //neutralBackgroundDisabled
     buttonBorderDisabled: '#404040', //neutralBackgroundDisabled
     buttonTitleDisabled: '#404040', //textDisabled
-    buttonTitleWithFilledBackground: 'black', //textOnAccent
+    buttonTitleWithFilledBackground: 'black', //neutralForegroundOnColor
   };
 }
 
@@ -209,9 +197,9 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     bodyStandoutBackground: fluent2AliasColorTokens.neutralBackground4,
     bodyFrameBackground: fluent2AliasColorTokens.neutralBackground1,
     bodyFrameDivider: fluent2AliasColorTokens.neutralStroke2,
-    bodyText: fluentApple.textPrimary,
-    bodyTextChecked: fluentApple.textPrimary,
-    subText: fluentApple.textSecondary,
+    bodyText: fluent2AliasColorTokens.neutralForeground1,
+    bodyTextChecked: fluent2AliasColorTokens.neutralForeground1,
+    subText: fluent2AliasColorTokens.neutralForeground3,
     bodyDivider: fluent2AliasColorTokens.neutralStroke1,
 
     disabledBackground: fluentApple.gray100,
@@ -241,9 +229,9 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     inputForegroundChecked: fluentApple.communicationBlue,
     inputFocusBorderAlt: fluent2AliasColorTokens.neutralStroke1,
     smallInputBorder: fluent2AliasColorTokens.neutralStroke1,
-    inputText: fluentApple.textPrimary,
-    inputTextHovered: fluentApple.textPrimary,
-    inputPlaceholderText: fluentApple.textSecondary,
+    inputText: fluent2AliasColorTokens.neutralForeground1,
+    inputTextHovered: fluent2AliasColorTokens.neutralForeground1,
+    inputPlaceholderText: fluent2AliasColorTokens.neutralForeground3,
 
     // Default values without any style
     // on FluentUI Apple iOS, this is the buttonStyle "Secondary Outline"
@@ -280,20 +268,20 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     menuBackground: fluent2AliasColorTokens.neutralBackground1,
     menuDivider: fluent2AliasColorTokens.neutralStroke2,
     menuIcon: fluent2AliasColorTokens.neutralForeground3,
-    menuHeader: fluentApple.textDominant,
+    menuHeader: fluent2AliasColorTokens.neutralForeground1,
     menuItemBackgroundHovered: fluent2AliasColorTokens.neutralBackground1,
     menuItemBackgroundPressed: fluent2AliasColorTokens.neutralBackground1,
-    menuItemText: fluentApple.textPrimary,
-    menuItemTextHovered: fluentApple.textPrimary,
+    menuItemText: fluent2AliasColorTokens.neutralForeground1,
+    menuItemTextHovered: fluent2AliasColorTokens.neutralForeground1,
 
     listBackground: fluent2AliasColorTokens.neutralBackground1,
-    listText: fluentApple.textPrimary,
+    listText: fluent2AliasColorTokens.neutralForeground1,
     listItemBackgroundHovered: fluent2AliasColorTokens.neutralBackground1,
     listItemBackgroundChecked: fluent2AliasColorTokens.neutralBackground1,
     listItemBackgroundCheckedHovered: fluent2AliasColorTokens.neutralBackground1,
 
-    listHeaderBackgroundHovered: fluentApple.textDominant,
-    listHeaderBackgroundPressed: fluentApple.textDominant,
+    listHeaderBackgroundHovered: fluent2AliasColorTokens.neutralForeground1,
+    listHeaderBackgroundPressed: fluent2AliasColorTokens.neutralForeground1,
 
     actionLink: fluentApple.communicationBlue,
     actionLinkHovered: fluentApple.communicationBlue,
