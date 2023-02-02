@@ -1,24 +1,23 @@
+import { BasePage, By } from '../../common/BasePage';
 import {
+  FIRST_RADIO_BUTTON,
+  FOURTH_RADIO_BUTTON,
+  HOMEPAGE_RADIOGROUP_BUTTON,
+  RADIOGROUP_NO_A11Y_LABEL_COMPONENT,
   RADIOGROUP_TESTPAGE,
   RADIOGROUP_TEST_COMPONENT,
-  RADIOGROUP_NO_A11Y_LABEL_COMPONENT,
-  HOMEPAGE_RADIOGROUP_BUTTON,
-  FIRST_RADIO_BUTTON,
   SECOND_RADIO_BUTTON,
   THIRD_RADIO_BUTTON,
-  FOURTH_RADIO_BUTTON,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The main RadioGroup we are testing has FOUR RadioButtons. The spec file will
  * import this enum to easily write tests using these 4 radio buttons. */
-export const enum RadioButton {
-  First = 1, // this._firstRadioButton
-  Second, // this._secondRadioButton
-  Third, // this._thirdRadioButton
-  Fourth, // this._fourthRadioButton
-}
+type RadioButton =
+  | 'First' // this._firstRadioButton
+  | 'Second' // this._secondRadioButton
+  | 'Third' // this._thirdRadioButton
+  | 'Fourth'; // this._fourthRadioButton
 
 class RadioGroupLegacyPage extends BasePage {
   /******************************************************************/
@@ -28,7 +27,7 @@ class RadioGroupLegacyPage extends BasePage {
   /* This resets the RadioGroup selection by clicking/selecting the 1st RadioButton in the RadioGroup.
    * Useful in beforeEach() hooks to reset the RadioGroup before additional tests */
   async resetRadioGroupSelection(): Promise<void> {
-    await (await this.getRadioButton(RadioButton.First)).click();
+    await (await this.getRadioButton('First')).click();
   }
 
   async isRadioButtonSelected(selector: RadioButton): Promise<boolean> {
@@ -43,13 +42,13 @@ class RadioGroupLegacyPage extends BasePage {
   /* Returns the correct WebDriverIO element from the RadioButton Selector */
   async getRadioButton(selector: RadioButton): Promise<WebdriverIO.Element> {
     switch (selector) {
-      case RadioButton.First:
+      case 'First':
         return await By(FIRST_RADIO_BUTTON);
-      case RadioButton.Second:
+      case 'Second':
         return await By(SECOND_RADIO_BUTTON);
-      case RadioButton.Third:
+      case 'Third':
         return await By(THIRD_RADIO_BUTTON);
-      case RadioButton.Fourth:
+      case 'Fourth':
         return await By(FOURTH_RADIO_BUTTON);
     }
   }
