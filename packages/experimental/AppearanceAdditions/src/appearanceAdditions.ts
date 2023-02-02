@@ -1,5 +1,5 @@
 import { memoize } from '@fluentui-react-native/framework';
-import { AppearanceAdditions } from './NativeAppearanceAdditions.types';
+import type { AppearanceAdditions } from './NativeAppearanceAdditions.types';
 
 // Default values for non-iOS clients.
 function getAppearanceAdditionsWorker() {

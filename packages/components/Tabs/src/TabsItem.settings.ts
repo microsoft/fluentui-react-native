@@ -1,6 +1,7 @@
-import { tabsItemName, TabsItemType } from './TabsItem.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { TabsItemType } from './TabsItem.types';
+import { tabsItemName } from './TabsItem.types';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 

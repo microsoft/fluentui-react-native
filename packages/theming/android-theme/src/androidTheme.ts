@@ -1,4 +1,4 @@
-import { Spacing, Theme } from '@fluentui-react-native/theme-types';
+import type { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { getFluentUIAndroidPalette } from './colorsSemantic';
 import { paletteFromAndroidColors } from './colorsTokens';
 import { androidTypography } from './androidTypography';

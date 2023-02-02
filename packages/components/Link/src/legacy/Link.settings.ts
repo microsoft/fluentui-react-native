@@ -1,6 +1,7 @@
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { linkName, ILinkType } from './Link.types';
-import { IViewProps } from '@fluentui-react-native/adapters';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+import type { ILinkType } from './Link.types';
+import { linkName } from './Link.types';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export const settings: IComposeSettings<ILinkType> = [
   {

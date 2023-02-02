@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ViewProps, View, StyleProp, ViewStyle, ColorValue } from 'react-native';
+import type { ViewProps, StyleProp, ViewStyle, ColorValue } from 'react-native';
+import { View } from 'react-native';
 
 export interface ISquareProps extends ViewProps {
   color?: ColorValue;

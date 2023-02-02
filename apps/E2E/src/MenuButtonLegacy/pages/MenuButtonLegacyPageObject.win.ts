@@ -1,16 +1,11 @@
+import { BasePage, By } from '../../common/BasePage';
 import {
-  MENU_BUTTON_TESTPAGE,
-  MENU_BUTTON_TEST_COMPONENT,
   HOMEPAGE_MENUBUTTON_BUTTON,
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
+  MENU_BUTTON_TESTPAGE,
+  MENU_BUTTON_TEST_COMPONENT,
   MENU_ITEM_1_COMPONENT,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
-
-export const enum MenuButtonSelector {
-  MenuButton = 0, // this._primarySelector
-  MenuItem1, // this._menuItem
-}
 
 class MenuButtonLegacyPageObject extends BasePage {
   /******************************************************************/

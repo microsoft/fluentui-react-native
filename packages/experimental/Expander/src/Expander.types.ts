@@ -1,4 +1,4 @@
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 export const expanderName = 'Expander';
 
@@ -96,7 +96,7 @@ export interface ExpanderTokens {
   /**
    * Header border thickness
    */
-  headerBorderThickness?: Number;
+  headerBorderThickness?: number;
   /**
    * Content background color
    */
@@ -132,7 +132,7 @@ export interface ExpanderTokens {
   /**
    * Chevron border thickness
    */
-  chevronBorderThickness?: Number;
+  chevronBorderThickness?: number;
   /**
    * Chevron border color at rest
    */

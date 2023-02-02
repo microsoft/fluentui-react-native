@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { ICON_ACCESSIBILITY_LABEL } from '../../../../E2E/src/IconLegacy/consts';
-import { RasterImageIconProps } from '@fluentui-react-native/icon';
+import type { RasterImageIconProps } from '@fluentui-react-native/icon';
 import { testImage } from '../Common/iconExamples';
 
 export const E2ETestingIcon: React.FunctionComponent = () => {

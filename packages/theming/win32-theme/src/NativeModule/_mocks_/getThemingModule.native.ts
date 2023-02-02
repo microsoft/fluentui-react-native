@@ -1,5 +1,5 @@
 import { fallbackOfficeModule } from '../fallbackOfficeModule';
-import { OfficeThemingModule } from '../officeThemingModule';
+import type { OfficeThemingModule } from '../officeThemingModule';
 
 /**
  * implementations for react-native-web, where the native module will not exist. In this case just use the full fallback implementation
