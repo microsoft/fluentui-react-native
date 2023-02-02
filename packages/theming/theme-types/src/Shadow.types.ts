@@ -1,4 +1,4 @@
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 /**
  * Base structure of a shadow style, which has x and y offset, blur amount, and color specified

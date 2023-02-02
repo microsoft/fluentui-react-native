@@ -1,6 +1,5 @@
 import { TEXT_TESTPAGE, HOMEPAGE_TEXT_BUTTON, DEPRECATED_TEXT_FIRST_COMPONENT, DEPRECATED_TEXT_SECOND_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
-
 class TextLegacyPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/

@@ -26,6 +26,7 @@ export const ANDROID_RADIOBUTTON = 'android.widget.RadioButton';
 export const BOOT_APP_TIMEOUT = 60000;
 export const PAGE_TIMEOUT = 15000;
 
+// eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum Attribute {
   AccessibilityHint = 'HelpText',
   AccessibilityLabel = 'Name',
@@ -40,6 +41,7 @@ export const enum Attribute {
 }
 
 /* Android Element Attributes - https://github.com/appium/appium-uiautomator2-driver#element-attributes */
+// eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum AndroidAttribute {
   AccessibilityLabel = 'content-desc',
   Class = 'class',
@@ -60,6 +62,7 @@ export const attributeToEnumName = {
   [Attribute.ToggleState]: 'ToggleState',
 };
 
+// eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum AttributeValue {
   on = '1',
   off = '0',
@@ -70,6 +73,7 @@ export const enum AttributeValue {
 }
 
 /* Keyboard Key Constants */
+// eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum Keys {
   NULL = '\uE000',
   CANCEL = '\uE001', // ^break

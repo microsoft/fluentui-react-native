@@ -2,6 +2,27 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Wed, 01 Feb 2023 22:33:17 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910",
+            "comment": "Enable @typescript-eslint/consistent-type-imports"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theme-registry",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.8",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Jan 2023 15:17:32 GMT",
       "tag": "@uifabricshared/theme-registry_v0.9.0",
       "version": "0.9.0",

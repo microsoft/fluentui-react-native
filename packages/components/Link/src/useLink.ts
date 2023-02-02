@@ -6,7 +6,7 @@ import {
   useViewCommandFocus,
   getAccessibilityState,
 } from '@fluentui-react-native/interactive-hooks';
-import { LinkProps, LinkInfo } from './Link.types';
+import type { LinkProps, LinkInfo } from './Link.types';
 import { Linking, Platform } from 'react-native';
 
 /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/

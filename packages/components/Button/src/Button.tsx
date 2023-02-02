@@ -2,13 +2,15 @@
 import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { buttonName, ButtonType, ButtonProps } from './Button.types';
+import type { ButtonType, ButtonProps } from './Button.types';
+import { buttonName } from './Button.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize, getPlatformSpecificAppearance } from './Button.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import { IPressableState } from '@fluentui-react-native/interactive-hooks';
+import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { extractOuterStylePropsAndroid } from './ExtractStyle.android';
 
 /**

@@ -1,5 +1,7 @@
-import { tabsItemName, TabsItemSlotProps, TabsItemTokens, TabsItemProps } from './TabsItem.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import type { TabsItemSlotProps, TabsItemTokens, TabsItemProps } from './TabsItem.types';
+import { tabsItemName } from './TabsItem.types';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { tabsItemStates, defaultTabsItemTokens } from './TabsItemTokens';
 

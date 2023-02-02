@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-radio-group",
-  "version": "0.9.14",
+  "version": "0.9.16",
   "description": "A cross-platform RadioGroup component using the Fluent Design System. Currently only implemented in win32.",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,14 +26,14 @@
     "directory": "packages/experimental/RadioGroup"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.11.26 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.37",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.14 <1.0.0",
-    "@fluentui-react-native/text": ">=0.19.16 <1.0.0",
-    "@fluentui-react-native/theme-tokens": ">=0.24.1 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.20.6 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.9.1 <1.0.0",
+    "@fluentui-react-native/adapters": ">=0.10.1 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.11.28 <1.0.0",
+    "@fluentui-react-native/framework": "0.8.39",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.16 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.18 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.24.2 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.20.7 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.9.3 <1.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

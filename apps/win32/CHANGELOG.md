@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Mon, 30 Jan 2023 22:56:35 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 20:52:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.31.76
+
+Thu, 02 Feb 2023 20:52:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.7
+
+## 0.31.75
+
+Thu, 02 Feb 2023 02:18:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.6
+
+## 0.31.74
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.5
+
+## 0.31.73
+
+Wed, 01 Feb 2023 22:33:16 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/tester to v0.129.4
+
+## 0.31.72
+
+Wed, 01 Feb 2023 18:58:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.3
+
+## 0.31.71
+
+Tue, 31 Jan 2023 01:29:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.2
 
 ## 0.31.70
 

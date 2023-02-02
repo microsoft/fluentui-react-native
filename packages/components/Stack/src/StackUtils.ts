@@ -1,4 +1,4 @@
-import { Theme } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/framework';
 
 /**
  * Functions used by Stack components to simplify style-related computations

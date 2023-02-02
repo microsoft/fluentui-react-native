@@ -1,5 +1,7 @@
-import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps } from './CompoundButton.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import type { CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps } from './CompoundButton.types';
+import { compoundButtonName } from './CompoundButton.types';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonColorTokens } from '../ButtonColorTokens';
 import { buttonStates, contentStyling } from '../Button.styling';

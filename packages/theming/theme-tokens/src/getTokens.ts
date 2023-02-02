@@ -5,7 +5,7 @@ import darkShadowTokens from '@fluentui-react-native/design-tokens-windows/dark/
 import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
 
 import { hcAliasTokens } from './highContrast/tokens-alias';
-import { AppearanceOptions } from '@fluentui-react-native/theme-types';
+import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
 
 export function getAliasTokens(mode: AppearanceOptions) {

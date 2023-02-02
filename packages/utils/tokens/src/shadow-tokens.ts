@@ -1,6 +1,6 @@
-import { ColorValue } from 'react-native';
-import { OperationSet } from './token.types';
-import { Theme } from '@fluentui-react-native/theme-types';
+import type { ColorValue } from 'react-native';
+import type { OperationSet } from './token.types';
+import type { Theme } from '@fluentui-react-native/theme-types';
 import { tokenBuilder } from './tokenBuilder';
 
 export interface IShadowTokens {

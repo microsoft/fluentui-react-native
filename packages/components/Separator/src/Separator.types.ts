@@ -1,4 +1,4 @@
-import { ViewProps, ColorValue } from 'react-native';
+import type { ViewProps, ColorValue } from 'react-native';
 
 export const separatorName = 'Separator';
 
