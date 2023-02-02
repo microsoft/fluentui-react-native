@@ -2,6 +2,132 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 01:29:39 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.3",
+      "version": "1.13.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.28",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 01 Feb 2023 22:33:15 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.2",
+      "version": "1.13.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910",
+            "comment": "Enable @typescript-eslint/consistent-type-imports"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.27",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 31 Jan 2023 00:18:04 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.1",
+      "version": "1.13.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "0d9250f23248cd003962d189234ec563b2accbb1",
+            "comment": "Use better test names + new e2e methods on IconV1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 20:48:57 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.0",
+      "version": "1.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "8122cfed9aaaca2d7f9a76b30691584ffe38c359",
+            "comment": "Try doubling color tokens page timeout time"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 16:05:07 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
+      "version": "1.12.3",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "607343e29ed8ceaea88fb7658f3aba46fb47a018",
+            "comment": "Bump `@rnx-kit/cli` to 0.16"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 15:17:30 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
+      "version": "1.12.3",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4de4c2b37c835ebd9af015ff767f9dd68452f786",
+            "comment": "Migrate to align-deps"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 07:12:38 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
+      "version": "1.12.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.26",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Jan 2023 21:31:18 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.2",
+      "version": "1.12.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "1d0f9e478022dc4d699616ba87f3d98fc7d66b51",
+            "comment": "Change console.error -> console.warn in BasePage"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Jan 2023 17:47:06 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.12.1",
       "version": "1.12.1",

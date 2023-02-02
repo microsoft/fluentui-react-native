@@ -1,8 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { FocusZoneDirection, FocusZone, MenuButton, Text } from '@fluentui/react-native';
+import type { FocusZoneDirection } from '@fluentui/react-native';
+import { FocusZone, MenuButton, Text } from '@fluentui/react-native';
 import { Switch } from '@fluentui-react-native/switch';
-import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
+import type { ButtonProps } from '@fluentui-react-native/button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { commonTestStyles } from '../Common/styles';
 import {
   FOCUSZONE_TEST_COMPONENT,

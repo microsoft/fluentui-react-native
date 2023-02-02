@@ -1,8 +1,35 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Wed, 25 Jan 2023 21:31:18 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 01:29:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.16
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.39
+
+## 0.22.15
+
+Wed, 01 Feb 2023 22:33:16 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.10.1
+- Bump @fluentui-react-native/framework to v0.8.38
+- Bump @fluentui-react-native/memo-cache to v1.1.8
+
+## 0.22.14
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.37
 
 ## 0.22.13
 

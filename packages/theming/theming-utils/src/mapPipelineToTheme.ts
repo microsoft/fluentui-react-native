@@ -1,4 +1,4 @@
-import { AliasColorTokens, Variants } from '@fluentui-react-native/theme-types';
+import type { AliasColorTokens, Variants } from '@fluentui-react-native/theme-types';
 
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {

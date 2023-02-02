@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import { View } from 'react-native';
-import { compoundButtonName, CompoundButtonType } from './CompoundButton.types';
+import type { CompoundButtonType } from './CompoundButton.types';
+import { compoundButtonName } from './CompoundButton.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { compose } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';

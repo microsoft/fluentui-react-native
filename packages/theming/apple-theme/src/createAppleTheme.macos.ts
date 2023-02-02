@@ -1,5 +1,5 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { Theme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/theme-types';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { Appearance } from 'react-native';
 import { getBaseAppleThemeMacOS } from './appleTheme.macos';

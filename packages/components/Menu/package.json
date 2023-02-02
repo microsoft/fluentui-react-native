@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/menu",
-  "version": "1.2.23",
+  "version": "1.2.26",
   "description": "A cross-platform Menu component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,44 +26,51 @@
     "directory": "packages/components/menu"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.21.55 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.11.25 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.36",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.13 <1.0.0",
-    "@fluentui-react-native/text": ">=0.19.15 <1.0.0",
-    "@fluentui-react-native/theme-tokens": ">=0.24.0 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.20.5 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.9.1 <1.0.0",
-    "react-native-svg": "12.5.0",
+    "@fluentui-react-native/adapters": ">=0.10.1 <1.0.0",
+    "@fluentui-react-native/callout": ">=0.21.58 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.11.28 <1.0.0",
+    "@fluentui-react-native/framework": "0.8.39",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.16 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.18 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.24.2 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.20.7 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.9.3 <1.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/button": ">=0.32.25 <1.0.0",
+    "@fluentui-react-native/button": ">=0.32.28 <1.0.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@office-iss/react-native-win32": "^0.68.0",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "author": "",
   "license": "MIT",
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react",
-      "svg"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react",
+        "svg"
+      ]
+    }
   }
 }

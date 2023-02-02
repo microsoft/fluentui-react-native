@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-appearance-additions",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "description": "A module to expose callbacks for additional traitCollection changes.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/framework": "0.8.39",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@types/react-native": "^0.68.0",
     "@types/use-subscription": "1.0.0",
@@ -42,13 +43,19 @@
     "react-native": "^0.68.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-ios",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-ios",
+        "react"
+      ]
+    }
   }
 }

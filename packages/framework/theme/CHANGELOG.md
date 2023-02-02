@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/theme
 
-This log was last generated on Wed, 25 Jan 2023 21:31:18 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 01:29:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.21
+
+Thu, 02 Feb 2023 01:29:38 GMT
+
+### Patches
+
+- Add eslint to packages missing a config (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.7.20
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.1.8
+- Bump @fluentui-react-native/theme-types to v0.30.2
+
+## 0.7.19
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.30.1
 
 ## 0.7.18
 

@@ -1,4 +1,5 @@
-import { getMemoCache, GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import { getMemoCache } from '@fluentui-react-native/memo-cache';
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 
 /** A function to generate tokens based on a theme */

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { findNodeHandle, UIManager, View } from 'react-native';
+import type { View } from 'react-native';
+import { findNodeHandle, UIManager } from 'react-native';
 
 import { setAndForwardRef } from './setAndForwardRef';
 
