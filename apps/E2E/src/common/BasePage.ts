@@ -91,10 +91,10 @@ export abstract class BasePage {
    *
    * This also contains error checking through its waiters, removing the extra `expect()` calls during test setup.
    *
-   * @param {boolean} showE2ESection (default = `false`) Some pages have E2E tests that only check if the component causes
-   * an assert while others have dedicated sections with components specifically designated for a11y or functional testing.
-   * The latter renders a switch that will make the E2E test sections visible. To automate this during E2E testing, pass `true`
-   * for this parameter.
+   * @param {boolean} showE2ESection Some components' E2E tests check only if the test page loads correctly or not. Others
+   * (majority), perform UI manipulation tests on UI components on the test page. In these scenarios, these UI components have their
+   * own section on the test page (by default, it's hidden so partners don't see it). If this parameter is true, this method opens up
+   * that testing section.
    */
   async navigateToPageAndLoadTests(showE2ESection = false) {
     // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
@@ -103,7 +103,13 @@ export abstract class BasePage {
     }
 
     await (await this._pageButton).click();
-    await this.waitForPageDisplayed();
+    // Wait for page to load
+    await this.waitForCondition(
+      async () => await this.isPageLoaded(),
+      this._pageName + ' did not render correctly. Please see /errorShots for more information.',
+      this.waitForUiEvent,
+      1500,
+    );
 
     if (showE2ESection) {
       await this.enableE2ETesterMode();
@@ -182,11 +188,6 @@ export abstract class BasePage {
     return onPage;
   }
 
-  /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
-  async isButtonInView(): Promise<boolean> {
-    return await (await this._pageButton).isDisplayed();
-  }
-
   async clickComponent(): Promise<void> {
     await (await this._primaryComponent).click();
   }
@@ -246,24 +247,6 @@ export abstract class BasePage {
         );
         break;
     }
-  }
-
-  /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
-  async waitForPageDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isPageLoaded(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
-      interval: 1500,
-    });
-  }
-
-  /* Waits for the test page's button to be displayed. If the button doesn't load before the timeout, it causes the test to fail. */
-  async waitForButtonDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isButtonInView(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
-      interval: 1500,
-    });
   }
 
   /** Waits for the tester app to load by checking if the startup page loads. If the app doesn't load before the timeout, it causes the test to fail. */
