@@ -25,9 +25,9 @@ export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, 
   slotProps: {
     root: buildProps(
       (tokens: SpinnerTokens) => ({
-        spinnerColor: tokens.spinnerColor,
+        trackColor: tokens.trackColor,
         size: tokens.size,
-        lineThickness: tokens.lineThickness != 'medium' ? tokens.lineThickness : tokens.size,
+        lineThickness: tokens.size != 'medium' ? tokens.size : tokens.size,
         accessibilityLabel: 'spinner',
         accessible: true,
         style: {
@@ -35,7 +35,7 @@ export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, 
           height: diameterSizeMap[tokens.size],
         },
       }),
-      ['spinnerColor', 'lineThickness', 'size'],
+      ['trackColor', 'size'],
     ),
     svg: buildProps(
       (tokens: SpinnerTokens) => ({

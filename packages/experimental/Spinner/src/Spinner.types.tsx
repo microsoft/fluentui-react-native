@@ -1,4 +1,5 @@
-import type { TextProps, ViewProps } from 'react-native';
+import type { Animated, TextProps, ViewProps } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
 
 export const spinnerName = 'Spinner';
 /**
@@ -81,11 +82,12 @@ export interface SpinnerSvgProps extends SpinnerTokens {
 }
 
 export interface SpinnerSlotProps {
-  root: ViewProps;
-  track: SpinnerSvgProps;
-  tail: SpinnerSvgProps;
-  tailContainer: SpinnerSvgProps;
+  root: SpinnerProps; //SpinnerProps extends ViewProps which is required for win32 native module.
+  track?: SpinnerSvgProps;
+  tail?: SpinnerSvgProps;
+  tailContainer?: SpinnerSvgProps;
   label?: TextProps;
+  svg?: Animated.AnimatedProps<SvgProps>;
 }
 export interface SpinnerType {
   props: SpinnerProps;

@@ -5,9 +5,9 @@ import { Animated, Easing, View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
-import type { SpinnerProps, SpinnerType } from './mobile/Spinner.types';
-import { spinnerName } from './mobile/Spinner.types';
-import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './mobile/Spinner.styling';
+import type { SpinnerProps, SpinnerType } from './Spinner.types';
+import { spinnerName } from './Spinner.types';
+import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './Spinner.styling';
 
 const getSpinnerPath = (diameter: number, width: number, color: ColorValue) => {
   const start = {
@@ -91,11 +91,7 @@ export const Spinner = compose<SpinnerType>({
       outputRange: ['0deg', '359deg'],
     });
 
-    const path = getSpinnerPath(
-      diameterSizeMap[slotProps.root.size],
-      lineThicknessSizeMap[slotProps.root.lineThickness],
-      slotProps.root.spinnerColor,
-    );
+    const path = getSpinnerPath(diameterSizeMap[slotProps.root.size], lineThicknessSizeMap[slotProps.root.size], slotProps.root.trackColor);
 
     // perspective is needed for animations to work on Android. See https://reactnative.dev/docs/animations#bear-in-mind
     const animatedSvgProps = {
