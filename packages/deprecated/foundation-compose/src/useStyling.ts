@@ -42,7 +42,7 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
   lookupOverride?: IOverrideLookup,
 ): IWithTokens<TSlotProps, TTokens> {
   // get the theme value from the context (or the default theme if it is not set)
-  const theme = useTheme() || defaultFluentTheme();
+  const theme = useTheme() || defaultFluentTheme;
 
   // resolve the array of settings for these options
   lookupOverride = lookupOverride || props;

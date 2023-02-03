@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 03 Feb 2023 00:10:56 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.14.0",
+      "version": "1.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "0bad6b5cb3e1ed19b51ce4a1fe56367cf260e45f",
+            "comment": "Update Text and TextV1 E2E tests with better names + errors"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Feb 2023 15:15:38 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.13.3",
       "version": "1.13.3",
