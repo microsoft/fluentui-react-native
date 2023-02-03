@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Revert \"Change default theme from a const object to a function that returns the object #2483\"",
+  "packageName": "@fluentui-react-native/default-theme",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}

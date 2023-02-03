@@ -1,4 +1,4 @@
-import { TEXT_A11Y_ROLE } from '../../common/consts';
+import { TEXT_A11Y_ROLE, Attribute } from '../../common/consts';
 import { TEXTV1_ACCESSIBILITY_LABEL, TEXTV1_CONTENT } from '../consts';
 import TextV1PageObject from '../pages/TextV1PageObject.win';
 
@@ -20,18 +20,27 @@ describe('TextV1 Accessibility Testing', () => {
     await TextV1PageObject.scrollToTestElement();
   });
 
-  it('Text - Validate accessibilityRole is correct', async () => {
-    expect(await TextV1PageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
+  it('Validate "accessibilityRole" defaults to "ControlType.Text".', async () => {
+    expect(
+      await TextV1PageObject.compareAttribute(TextV1PageObject._primaryComponent, Attribute.AccessibilityRole, TEXT_A11Y_ROLE),
+    ).toBeTruthy();
+
     expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Text - Set accessibilityLabel', async () => {
-    expect(await TextV1PageObject.getAccessibilityLabel('Primary')).toEqual(TEXTV1_ACCESSIBILITY_LABEL);
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
+    expect(
+      await TextV1PageObject.compareAttribute(TextV1PageObject._primaryComponent, Attribute.AccessibilityLabel, TEXTV1_ACCESSIBILITY_LABEL),
+    ).toBeTruthy();
+
     expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Text - Do not set accessibilityLabel -> Default to content', async () => {
-    expect(await TextV1PageObject.getAccessibilityLabel('Secondary')).toEqual(TEXTV1_CONTENT);
+  it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to text content.', async () => {
+    expect(
+      await TextV1PageObject.compareAttribute(TextV1PageObject._secondaryComponent, Attribute.AccessibilityLabel, TEXTV1_CONTENT),
+    ).toBeTruthy();
+
     expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

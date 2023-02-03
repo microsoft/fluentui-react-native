@@ -1,4 +1,4 @@
-import { PAGE_TIMEOUT, TABITEM_A11Y_ROLE, TAB_A11Y_ROLE } from '../../common/consts';
+import { TABITEM_A11Y_ROLE, TAB_A11Y_ROLE, Attribute } from '../../common/consts';
 import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -20,12 +20,20 @@ describe('Tabs Legacy Accessibility Testing', () => {
     await TabsLegacyPageObject.scrollToTestElement();
   });
 
-  it("Validate Tab's accessibilityRole is correct", async () => {
-    expect(await TabsLegacyPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
+  it('Validate Tab\'s "accessibilityRole" defaults to "ControlType.Tab".', async () => {
+    expect(
+      await TabsLegacyPageObject.compareAttribute(TabsLegacyPageObject._primaryComponent, Attribute.AccessibilityRole, TAB_A11Y_ROLE),
+    ).toBeTruthy();
+
+    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Validate TabItem's accessibilityRole is correct", async () => {
-    expect(await TabsLegacyPageObject.getTabItemAccesibilityRole('First')).toEqual(TABITEM_A11Y_ROLE);
+  it('Validate TabItem\'s "accessibilityRole" defaults to "ControlType.TabItem".', async () => {
+    expect(
+      await TabsLegacyPageObject.compareAttribute(TabsLegacyPageObject.getTabItem('First'), Attribute.AccessibilityRole, TABITEM_A11Y_ROLE),
+    ).toBeTruthy();
+
+    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -35,14 +43,19 @@ describe('Tabs Legacy Functional Tests', () => {
     await TabsLegacyPageObject.scrollToTestElement();
 
     // Reset the TabGroup by putting focus on First tab item
-    await TabsLegacyPageObject.clickOnTabItem('First');
+    await TabsLegacyPageObject.click(TabsLegacyPageObject.getTabItem('First'));
   });
 
-  it('Click on the second tab header and validate the correct TabItem content is shown', async () => {
-    await TabsLegacyPageObject.clickOnTabItem('Second');
-    await TabsLegacyPageObject.waitForTabsItemsToOpen('Second', PAGE_TIMEOUT);
+  it('Click on the second tab header. Validate the second TabItem content is shown.', async () => {
+    await TabsLegacyPageObject.click(TabsLegacyPageObject.getTabItem('Second'));
 
-    expect(await TabsLegacyPageObject.didTabItemContentLoad('Second')).toBeTruthy();
+    expect(
+      await TabsLegacyPageObject.waitForTabItemContentToLoad(
+        'Second',
+        "Expected the second tab item's content to show by clicking the second tab item.",
+      ),
+    ).toBeTruthy();
+    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   // Keyboarding is currently not integrated for UWP tabs - Task #5758598

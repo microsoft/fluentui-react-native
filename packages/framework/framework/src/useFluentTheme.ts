@@ -8,5 +8,5 @@ import { useTheme } from '@fluentui-react-native/theme-types';
  * @returns - a valid Theme object
  */
 export function useFluentTheme(): Theme {
-  return useTheme() || defaultFluentTheme();
+  return useTheme() || defaultFluentTheme;
 }

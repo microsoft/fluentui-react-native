@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Thu, 02 Feb 2023 20:52:52 GMT",
+      "tag": "@fluentui-react-native/button_v0.32.29",
+      "version": "0.32.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "b909a3761139bc14ac1b1cc648860230c18154f8",
+            "comment": "Remove compound button from iOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Feb 2023 01:29:39 GMT",
       "tag": "@fluentui-react-native/button_v0.32.28",
       "version": "0.32.28",

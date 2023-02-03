@@ -1,4 +1,4 @@
-import { TEXT_A11Y_ROLE } from '../../common/consts';
+import { TEXT_A11Y_ROLE, Attribute } from '../../common/consts';
 import { DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL, DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT } from '../consts';
 import TextLegacyPageObject from '../pages/TextLegacyPageObject';
 
@@ -20,18 +20,39 @@ describe('Text Legacy Accessibility Testing', () => {
     await TextLegacyPageObject.scrollToTestElement(await TextLegacyPageObject._deprecatedFirstComponent);
   });
 
-  it('Text Legacy - Validate accessibilityRole is correct', async () => {
-    expect(await TextLegacyPageObject.getTextAccessibilityRole('Deprecated_First')).toEqual(TEXT_A11Y_ROLE);
+  it('Validate "accessibilityRole" defaults to "ControlType.Text".', async () => {
+    expect(
+      await TextLegacyPageObject.compareAttribute(
+        TextLegacyPageObject._deprecatedFirstComponent,
+        Attribute.AccessibilityRole,
+        TEXT_A11Y_ROLE,
+      ),
+    ).toBeTruthy();
+
     expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Text Legacy - Set accessibilityLabel', async () => {
-    expect(await TextLegacyPageObject.getTextAccessibilityLabel('Deprecated_First')).toEqual(DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL);
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
+    expect(
+      await TextLegacyPageObject.compareAttribute(
+        TextLegacyPageObject._deprecatedFirstComponent,
+        Attribute.AccessibilityLabel,
+        DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL,
+      ),
+    ).toBeTruthy();
+
     expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Text Legacy - Do not set accessibilityLabel -> Default to content', async () => {
-    expect(await TextLegacyPageObject.getTextAccessibilityLabel('Deprecated_Second')).toEqual(DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT);
+  it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to text content.', async () => {
+    expect(
+      await TextLegacyPageObject.compareAttribute(
+        TextLegacyPageObject._deprecatedSecondComponent,
+        Attribute.AccessibilityLabel,
+        DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT,
+      ),
+    ).toBeTruthy();
+
     expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });

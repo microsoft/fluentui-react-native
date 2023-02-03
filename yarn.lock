@@ -251,9 +251,9 @@
     tslib "^2.0.0"
 
 "@azure/core-paging@^1.1.1":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@azure/core-paging/-/core-paging-1.4.0.tgz#b04a73ad18149733a848c3089a5e5ed144592338"
-  integrity sha512-tabFtZTg8D9XqZKEfNUOGh63SuYeOxmvH4GDcOJN+R1bZWZ1FZskctgY9Pmuwzhn+0Xvq9rmimK9hsvtLkeBsw==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@azure/core-paging/-/core-paging-1.5.0.tgz#5a5b09353e636072e6a7fc38f7879e11d0afb15f"
+  integrity sha512-zqWdVIt+2Z+3wqxEOGzR5hXFZ8MGKK52x4vFLw8n58pR6ZfKRx3EXYTxTaYxYHc/PexPUTyimcTWFJbji9Z6Iw==
   dependencies:
     tslib "^2.2.0"
 
@@ -7718,9 +7718,9 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
 
 fast-xml-parser@^4.0.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.1.0.tgz#a510932dfe900f22e9bea44d5daf02dcca8c0350"
-  integrity sha512-IuFUr5zpPwsoy6NRtgLK1pEuJe89Sd0gYS0U4dIP5tRbpzALraOcxJVQT6ZBNheMVdX7nBkNpeagHVpOYnLcmQ==
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.1.1.tgz#28c878b7f1eb4555fa898f1c715adf9d4007306e"
+  integrity sha512-4gAP5PvNyrqePBOIIcpaEeE+nKBry1n6qTQiJsE59sLP0OC+YwhU7/XVmLLEMexbiluFQX1yEYm82Pk9B7xEiw==
   dependencies:
     strnum "^1.0.5"
 
@@ -7909,9 +7909,9 @@ flow-bin@^0.113.0:
   integrity sha512-76uE2LGNe50wm+Jup8Np4FBcMbyy5V2iE+K25PPIYLaEMGHrL1jnQfP9L0hTzA5oh2ZJlexRLMlaPqIYIKH9nw==
 
 flow-parser@0.*:
-  version "0.199.0"
-  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.199.0.tgz#9116829fa05eae02692e4c5660c174cdd4d78096"
-  integrity sha512-uVwOr6tjQAA0zkbObPx3FJAYEtDcA0ZKBEHhXSUTKzH2BLpTMBvgtlLurUeV/EsjbqpPCkwznV29vj8Kr01qpQ==
+  version "0.199.1"
+  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.199.1.tgz#d2e37d3ccd3a4301738a429079a41320a54ada57"
+  integrity sha512-Mt+GFUQYij3miM7Z6o8E3aHTGXZKSOhvlCFgdQRoi6fkWfhyijnoX51zpOxM5PmZuiV6gallWhDZzwOsWxRutg==
 
 flow-parser@^0.121.0:
   version "0.121.0"

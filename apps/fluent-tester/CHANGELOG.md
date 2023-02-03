@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 02 Feb 2023 02:18:52 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 20:52:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.129.7
+
+Thu, 02 Feb 2023 20:52:52 GMT
+
+### Patches
+
+- Remove compound button from iOS (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.32.29
+- Bump @fluentui-react-native/dropdown to v0.7.24
+- Bump @fluentui-react-native/experimental-button to v0.16.87
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.26
+- Bump @fluentui-react-native/menu to v1.2.27
+- Bump @fluentui-react-native/notification to v0.21.27
+- Bump @fluentui/react-native to v0.35.16
 
 ## 0.129.6
 
