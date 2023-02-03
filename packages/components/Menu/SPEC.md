@@ -119,7 +119,7 @@ All options in a `Menu` component can be disabled and should provide a visible i
 
 A `Menu` can be made scrollable to show a long list of menu items by setting the `maxHeight` prop on `MenuPopover`. If the user never sets `maxHeight` and content does overflow, overflowing menu items would simply be cut off. Omitting the `maxHeight` prop will be render a non-scrollable menu.
 
-Width of a default menu is 160px, but a scrollable menu has a minWidth of 175px to account for the width of the vertical scrollview. If your menuItems’ content require a larger minWidth, you’d have to set a larger minWidth on the `<MenuList>`.
+(Win32) Width of a default menu is 160px, but a scrollable menu has a minWidth of 175px to account for the width of the vertical scrollview. If your menuItems’ content require a larger minWidth, you’d have to set a larger minWidth on the `<MenuList>`.
 
 ```ts
 <Menu>
