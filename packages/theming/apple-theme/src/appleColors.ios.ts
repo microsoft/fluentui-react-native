@@ -5,6 +5,7 @@ import { Appearance } from 'react-native';
 import type { ApplePalette } from './appleColors.types.ios';
 import { createiOSColorAliasTokens } from './createiOSAliasTokens';
 
+//TODO: remove and replace with Fluent 2 alias color tokens
 function getFluentUIAppleLightPalette(): ApplePalette {
   return {
     communicationBlue: '#0078D4',
@@ -20,15 +21,13 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     warningPrimary: '#FFD335',
     warningTint10: '#FFD94E',
 
-    buttonBackground: 'transparent',
     buttonBackgroundFilledPressed: '#2B88D8', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
-    buttonBackgroundFilledDisabled: '#E1E1E1', //neutralBackgroundDisabled
     buttonBorderDisabled: '#E1E1E1', //neutralBackgroundDisabled
     buttonTitleDisabled: '#ACACAC', //textDisabled
-    buttonTitleWithFilledBackground: 'white', //neutralForegroundOnColor
   };
 }
 
+//TODO: remove and replace with Fluent 2 alias color tokens
 function getFluentUIAppleDarkPalette(): ApplePalette {
   return {
     communicationBlue: '#0086F0',
@@ -44,12 +43,9 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     warningPrimary: '#FFC328',
     warningTint10: '#E0AB24',
 
-    buttonBackground: 'transparent',
     buttonBackgroundFilledPressed: '#004C87', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
-    buttonBackgroundFilledDisabled: '#404040', //neutralBackgroundDisabled
     buttonBorderDisabled: '#404040', //neutralBackgroundDisabled
     buttonTitleDisabled: '#404040', //textDisabled
-    buttonTitleWithFilledBackground: 'black', //neutralForegroundOnColor
   };
 }
 
@@ -81,7 +77,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     subText: fluent2AliasColorTokens.neutralForeground3,
     bodyDivider: fluent2AliasColorTokens.neutralStroke1,
 
-    disabledBackground: globalTokens.color.grey88,
+    disabledBackground: fluent2AliasColorTokens.neutralBackgroundDisabled,
     disabledText: fluent2AliasColorTokens.neutralForegroundDisabled1,
     disabledBodyText: fluent2AliasColorTokens.neutralForegroundDisabled1,
     disabledSubtext: fluent2AliasColorTokens.neutralForegroundDisabled1,
@@ -105,7 +101,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     inputBackground: fluent2AliasColorTokens.neutralBackground1,
     inputBackgroundChecked: fluent2AliasColorTokens.neutralBackground1,
     inputBackgroundCheckedHovered: fluent2AliasColorTokens.neutralBackground1,
-    inputForegroundChecked: fluentApple.communicationBlue,
+    inputForegroundChecked: fluent2AliasColorTokens.neutralForegroundOnColor,
     inputFocusBorderAlt: fluent2AliasColorTokens.neutralStroke1,
     smallInputBorder: fluent2AliasColorTokens.neutralStroke1,
     inputText: fluent2AliasColorTokens.neutralForeground1,
@@ -133,16 +129,16 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     primaryButtonBackground: fluentApple.communicationBlue,
     primaryButtonBackgroundHovered: fluentApple.communicationBlue,
     primaryButtonBackgroundPressed: fluentApple.buttonBackgroundFilledPressed,
-    primaryButtonBackgroundDisabled: fluentApple.buttonBackgroundFilledDisabled,
+    primaryButtonBackgroundDisabled: fluent2AliasColorTokens.neutralBackgroundDisabled,
     primaryButtonBorder: 'transparent',
     primaryButtonBorderFocused: 'transparent',
-    primaryButtonText: fluentApple.buttonTitleWithFilledBackground,
-    primaryButtonTextHovered: fluentApple.buttonTitleWithFilledBackground,
-    primaryButtonTextPressed: fluentApple.buttonTitleWithFilledBackground,
-    primaryButtonTextDisabled: fluentApple.buttonTitleWithFilledBackground,
+    primaryButtonText: fluent2AliasColorTokens.neutralForegroundOnColor,
+    primaryButtonTextHovered: fluent2AliasColorTokens.neutralForegroundOnColor,
+    primaryButtonTextPressed: fluent2AliasColorTokens.neutralForegroundOnColor,
+    primaryButtonTextDisabled: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     accentButtonBackground: fluentApple.communicationBlue,
-    accentButtonText: fluentApple.buttonTitleWithFilledBackground,
+    accentButtonText: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     menuBackground: fluent2AliasColorTokens.neutralBackground1,
     menuDivider: fluent2AliasColorTokens.neutralStroke2,
@@ -224,28 +220,28 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
 
     brandedBackground: fluentApple.communicationBlue,
     brandedBorder: 'transparent',
-    brandedContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedIcon: fluentApple.buttonTitleWithFilledBackground,
+    brandedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     brandedHoveredBackground: fluentApple.communicationBlue,
     brandedHoveredBorder: 'transparent',
-    brandedHoveredContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedHoveredIcon: fluentApple.buttonTitleWithFilledBackground,
+    brandedHoveredContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedHoveredIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     brandedFocusedBackground: fluentApple.communicationBlue,
     brandedFocusedBorder: 'transparent',
-    brandedFocusedContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedFocusedIcon: fluentApple.buttonTitleWithFilledBackground,
+    brandedFocusedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedFocusedIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     brandedPressedBackground: fluentApple.buttonBackgroundFilledPressed,
     brandedPressedBorder: 'transparent',
-    brandedPressedContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedPressedIcon: fluentApple.buttonTitleWithFilledBackground,
+    brandedPressedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedPressedIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
 
-    brandedDisabledBackground: fluentApple.buttonBackgroundFilledDisabled,
+    brandedDisabledBackground: fluent2AliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
-    brandedDisabledContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedDisabledIcon: fluentApple.buttonTitleWithFilledBackground,
+    brandedDisabledContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedDisabledIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     defaultCheckedBackground: 'transparent',
     defaultCheckedContent: fluentApple.communicationBlue,
@@ -253,9 +249,9 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     defaultCheckedHoveredContent: fluentApple.communicationBlue,
 
     brandedCheckedBackground: fluentApple.communicationBlue,
-    brandedCheckedContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedCheckedHoveredBackground: fluentApple.buttonTitleWithFilledBackground,
-    brandedCheckedHoveredContent: fluentApple.buttonTitleWithFilledBackground,
+    brandedCheckedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedCheckedHoveredBackground: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedCheckedHoveredContent: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: fluentApple.communicationBlue,
@@ -269,10 +265,10 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     ghostHoveredSecondaryContent: fluentApple.communicationBlue,
     ghostPressedSecondaryContent: fluentApple.communicationBlueTint20,
 
-    brandedSecondaryContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedFocusedSecondaryContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedHoveredSecondaryContent: fluentApple.buttonTitleWithFilledBackground,
-    brandedPressedSecondaryContent: fluentApple.buttonTitleWithFilledBackground,
+    brandedSecondaryContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedFocusedSecondaryContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedHoveredSecondaryContent: fluent2AliasColorTokens.neutralForegroundOnColor,
+    brandedPressedSecondaryContent: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     defaultDisabledSecondaryContent: fluentApple.buttonTitleDisabled,
     defaultHoveredSecondaryContent: fluentApple.communicationBlue,
@@ -283,7 +279,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     checkboxBorderColor: globalTokens.color.grey26,
     checkmarkColor: fluent2AliasColorTokens.neutralForegroundOnColor,
 
-    personaActivityGlow: fluentApple.buttonBackground,
+    personaActivityGlow: 'transparent',
     personaActivityRing: fluent2AliasColorTokens.neutralBackground1,
   };
 }

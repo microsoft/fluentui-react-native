@@ -1,5 +1,6 @@
 import type { ColorValue } from 'react-native';
 
+// TODO: remove and replace with Fluent 2 alias color tokens
 /** Palette of colors defined in FluentUI Apple */
 interface FluentUIApplePalette {
   communicationBlue: ColorValue;
@@ -16,14 +17,12 @@ interface FluentUIApplePalette {
   warningTint10: ColorValue;
 }
 
+// TODO: remove and replace with Fluent 2 alias color tokens
 /** FluentUI Apple Colors defined for the iOS Button */
 interface FluentAppleButtonColors {
-  buttonBackground: ColorValue;
   buttonBackgroundFilledPressed: ColorValue;
-  buttonBackgroundFilledDisabled: ColorValue;
   buttonBorderDisabled: ColorValue;
   buttonTitleDisabled: ColorValue;
-  buttonTitleWithFilledBackground: ColorValue;
 }
 
 export type ApplePalette = FluentUIApplePalette & FluentAppleButtonColors;
