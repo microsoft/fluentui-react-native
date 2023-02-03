@@ -32,7 +32,7 @@ export const createMyCustomTheme = () => {
   // create the reference
   const themeRef = new ThemeReference(
     // base it on the default fluent theme
-    defaultFluentTheme(),
+    defaultFluentTheme,
     // mix in some constant values to override
     {
       colors: {

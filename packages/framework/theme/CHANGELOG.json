@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Fri, 03 Feb 2023 01:49:36 GMT",
+      "tag": "@fluentui-react-native/theme_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/theme",
+            "commit": "952938b8a8daeea93be04aedace1a43fb5c29747",
+            "comment": "Revert \"Change default theme from a const object to a function that returns the object #2483\""
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Feb 2023 01:29:38 GMT",
       "tag": "@fluentui-react-native/theme_v0.7.21",
       "version": "0.7.21",
