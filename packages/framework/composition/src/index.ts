@@ -1,1 +1,2 @@
-export * from './composeFactory';
+export { composeFactory } from './composeFactory';
+export type { ComposeFactoryComponent, ComposeFactoryOptions, UseStyledSlots } from './composeFactory';

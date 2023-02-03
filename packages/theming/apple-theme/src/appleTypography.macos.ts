@@ -1,4 +1,4 @@
-import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+import type { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
 
 /**
  * The Typography is designed to match the styles defined in the Apple HIG:

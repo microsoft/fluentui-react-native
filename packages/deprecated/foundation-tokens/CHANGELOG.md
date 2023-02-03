@@ -1,8 +1,27 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Feb 2023 01:29:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.24
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Add eslint to packages missing a config (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.12.23
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/merge-props to v0.5.2
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @uifabricshared/foundation-settings to v0.12.2
+- Bump @fluentui-react-native/memo-cache to v1.1.8
 
 ## 0.12.22
 

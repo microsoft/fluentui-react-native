@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
-import { FontIcon, SvgIcon, IconV1, FontIconPropsV1, SvgIconPropsV1 } from '@fluentui-react-native/icon';
+import type { FontIconPropsV1, SvgIconPropsV1 } from '@fluentui-react-native/icon';
+import { FontIcon, SvgIcon, IconV1 } from '@fluentui-react-native/icon';
 import {
   ICON_ACCESSIBILITY_LABEL,
   ICON_TEST_COMPONENT,

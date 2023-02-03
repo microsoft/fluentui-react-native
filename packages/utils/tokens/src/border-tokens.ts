@@ -1,6 +1,6 @@
-import { ViewStyle, ColorValue } from 'react-native';
-import { OperationSet } from './token.types';
-import { Theme } from '@fluentui-react-native/theme-types';
+import type { ViewStyle, ColorValue } from 'react-native';
+import type { OperationSet } from './token.types';
+import type { Theme } from '@fluentui-react-native/theme-types';
 import { getPaletteFromTheme } from './color-tokens';
 import { tokenBuilder } from './tokenBuilder';
 

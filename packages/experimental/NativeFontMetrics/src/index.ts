@@ -1,1 +1,1 @@
-export * from './useFontMetrics';
+export { useFontMetricsScaleFactors } from './useFontMetrics';

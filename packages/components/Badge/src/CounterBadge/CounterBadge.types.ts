@@ -1,5 +1,5 @@
-import { BadgeCoreProps, BadgeSlotProps } from '../';
-import { BadgeTokens, BadgeProps } from '../Badge.types';
+import type { BadgeCoreProps, BadgeSlotProps } from '../';
+import type { BadgeTokens, BadgeProps } from '../Badge.types';
 
 export const counterBadgeName = 'CounterBadge';
 

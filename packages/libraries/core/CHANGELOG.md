@@ -1,8 +1,86 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.17
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.30
+- Bump @fluentui-react-native/callout to v0.21.59
+- Bump @fluentui-react-native/checkbox to v0.19.18
+- Bump @fluentui-react-native/contextual-menu to v0.21.25
+- Bump @fluentui-react-native/focus-trap-zone to v0.9.58
+- Bump @fluentui-react-native/focus-zone to v0.11.29
+- Bump @fluentui-react-native/interactive-hooks to v0.22.17
+- Bump @fluentui-react-native/link to v0.18.14
+- Bump @fluentui-react-native/menu-button to v0.10.27
+- Bump @fluentui-react-native/persona to v0.13.41
+- Bump @fluentui-react-native/persona-coin to v0.12.22
+- Bump @fluentui-react-native/pressable to v0.9.56
+- Bump @fluentui-react-native/radio-group to v0.16.33
+- Bump @fluentui-react-native/separator to v0.14.14
+- Bump @fluentui-react-native/tabs to v0.11.31
+- Bump @fluentui-react-native/text to v0.19.19
+
+## 0.35.16
+
+Thu, 02 Feb 2023 20:52:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.29
+- Bump @fluentui-react-native/menu-button to v0.10.26
+
+## 0.35.15
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.28
+- Bump @fluentui-react-native/callout to v0.21.58
+- Bump @fluentui-react-native/checkbox to v0.19.17
+- Bump @fluentui-react-native/contextual-menu to v0.21.24
+- Bump @fluentui-react-native/focus-trap-zone to v0.9.57
+- Bump @fluentui-react-native/focus-zone to v0.11.28
+- Bump @fluentui-react-native/interactive-hooks to v0.22.16
+- Bump @fluentui-react-native/link to v0.18.13
+- Bump @fluentui-react-native/menu-button to v0.10.25
+- Bump @fluentui-react-native/persona to v0.13.40
+- Bump @fluentui-react-native/persona-coin to v0.12.21
+- Bump @fluentui-react-native/pressable to v0.9.55
+- Bump @fluentui-react-native/radio-group to v0.16.32
+- Bump @fluentui-react-native/separator to v0.14.13
+- Bump @fluentui-react-native/tabs to v0.11.30
+- Bump @fluentui-react-native/text to v0.19.18
+
+## 0.35.14
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.27
+- Bump @fluentui-react-native/callout to v0.21.57
+- Bump @fluentui-react-native/checkbox to v0.19.16
+- Bump @fluentui-react-native/contextual-menu to v0.21.23
+- Bump @fluentui-react-native/focus-trap-zone to v0.9.56
+- Bump @fluentui-react-native/focus-zone to v0.11.27
+- Bump @fluentui-react-native/interactive-hooks to v0.22.15
+- Bump @fluentui-react-native/link to v0.18.12
+- Bump @fluentui-react-native/menu-button to v0.10.24
+- Bump @fluentui-react-native/persona to v0.13.39
+- Bump @fluentui-react-native/persona-coin to v0.12.20
+- Bump @fluentui-react-native/pressable to v0.9.54
+- Bump @fluentui-react-native/radio-group to v0.16.31
+- Bump @fluentui-react-native/separator to v0.14.12
+- Bump @fluentui-react-native/tabs to v0.11.29
+- Bump @fluentui-react-native/text to v0.19.17
 
 ## 0.35.13
 

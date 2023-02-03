@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GestureResponderEvent } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
 export type OnPressCallback = (args: GestureResponderEvent) => void;
 export type OnPressWithFocusCallback = (args: GestureResponderEvent) => void;

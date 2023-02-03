@@ -1,11 +1,13 @@
 /** @jsx withSlots */
 import { Platform, Pressable, View } from 'react-native';
-import { radioName, RadioType, RadioProps } from './Radio.types';
+import type { RadioType, RadioProps } from './Radio.types';
+import { radioName } from './Radio.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Radio.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useRadio } from './useRadio';
-import { PressableState } from '@fluentui-react-native/interactive-hooks';
+import type { PressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Radio.
