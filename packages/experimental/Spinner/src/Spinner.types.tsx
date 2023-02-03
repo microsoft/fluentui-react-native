@@ -13,7 +13,7 @@ export type SpinnerLabelPosition = 'above' | 'below' | 'before' | 'after';
 /**
  * Specifies the possible sizes of the Spinner.
  */
-export type SpinnerSize = 'tiny' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'huge';
+export type SpinnerSize = 'tiny' | 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'huge';
 /**
  * Specifies the possible status of the Spinner.
  */

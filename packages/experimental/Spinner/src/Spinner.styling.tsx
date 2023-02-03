@@ -5,18 +5,18 @@ import { spinnerName } from './Spinner.types';
 import { defaultSpinnerTokens } from './SpinnerTokens';
 
 export const diameterSizeMap: { [key: string]: number } = {
-  xxSmall: 12,
-  xsmall: 16,
+  'xx-small': 12,
+  'x-small': 16,
   medium: 24,
-  large: 32,
-  xLarge: 36,
+  large: 28,
+  'x-large': 36,
 };
 export const lineThicknessSizeMap: { [key: string]: number } = {
-  xxSmall: 1,
-  xsmall: 1,
+  'xx-small': 1,
+  'x-small': 1,
   medium: 2,
   large: 3,
-  xLarge: 4,
+  'x-large': 4,
 };
 
 export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, SpinnerTokens> = {

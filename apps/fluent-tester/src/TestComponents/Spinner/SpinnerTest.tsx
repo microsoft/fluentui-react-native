@@ -31,11 +31,30 @@ const BasicSpinnerTest: React.FunctionComponent = () => {
   );
 };
 
+const SpinnerSizeTest: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <View style={commonStyles.root}>
+        <Spinner size="xx-small" />
+        <Spinner size="x-small" />
+        <Spinner size="medium" />
+        <Spinner size="large" />
+        <Spinner size="x-large" />
+      </View>
+    </Stack>
+  );
+};
+
 const spinnerSections: TestSection[] = [
   {
     name: 'Basic Spinner',
     testID: SPINNER_TESTPAGE,
     component: BasicSpinnerTest,
+  },
+  {
+    name: 'Spinner Size Test',
+    testID: SPINNER_TESTPAGE,
+    component: SpinnerSizeTest,
   },
 ];
 
