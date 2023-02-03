@@ -49,7 +49,7 @@ export const SpinnerTest: React.FunctionComponent = () => {
   };
 
   const description =
-    'SpinnerTest is a visual representation that data is being loaded. It is implemented with a View wrapping an Animated SVG. The View is to ensure that AccessibilityRole works. AccessibilityRole currently does not work on SVGs.';
+    'Spinner is a visual representation that data is being loaded. It is implemented with a View wrapping an Animated SVG. The View is to ensure that AccessibilityRole works. AccessibilityRole currently does not work on SVGs.';
 
-  return <Test name="SpinnerTest Test" description={description} sections={spinnerSections} status={status}></Test>;
+  return <Test name="Spinner Test" description={description} sections={spinnerSections} status={status}></Test>;
 };
