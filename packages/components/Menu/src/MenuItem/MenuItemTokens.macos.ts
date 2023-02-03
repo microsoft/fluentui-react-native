@@ -14,6 +14,7 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   gap: globalTokens.size40,
   paddingHorizontal: 5, // hardcoded for now to match ContextualMenu
   paddingVertical: 3, // hardcoded for now to match ContextualMenu
+  submenuIndicatorColor: t.colors.neutralForeground2,
   submenuIndicatorPadding: globalTokens.sizeNone,
   submenuIndicatorSize: 16,
   focused: {
