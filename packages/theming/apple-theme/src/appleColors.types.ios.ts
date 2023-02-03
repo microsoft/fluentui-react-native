@@ -21,7 +21,6 @@ interface FluentUIApplePalette {
 /** FluentUI Apple Colors defined for the iOS Button */
 interface FluentAppleButtonColors {
   buttonBackgroundFilledPressed: ColorValue;
-  buttonBorderDisabled: ColorValue;
   buttonTitleDisabled: ColorValue;
 }
 

@@ -22,7 +22,6 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     warningTint10: '#FFD94E',
 
     buttonBackgroundFilledPressed: '#2B88D8', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
-    buttonBorderDisabled: '#E1E1E1', //neutralBackgroundDisabled
     buttonTitleDisabled: '#ACACAC', //textDisabled
   };
 }
@@ -44,7 +43,6 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     warningTint10: '#E0AB24',
 
     buttonBackgroundFilledPressed: '#004C87', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
-    buttonBorderDisabled: '#404040', //neutralBackgroundDisabled
     buttonTitleDisabled: '#404040', //textDisabled
   };
 }
@@ -123,7 +121,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     buttonTextCheckedHovered: fluentApple.communicationBlue,
     buttonTextPressed: fluentApple.communicationBlueTint20,
     buttonTextDisabled: fluentApple.buttonTitleDisabled,
-    buttonBorderDisabled: fluentApple.buttonBorderDisabled,
+    buttonBorderDisabled: fluent2AliasColorTokens.neutralBackgroundDisabled,
     buttonBorderFocused: fluentApple.communicationBlueTint10,
 
     primaryButtonBackground: fluentApple.communicationBlue,
@@ -189,7 +187,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     defaultPressedIcon: fluentApple.communicationBlueTint20,
 
     defaultDisabledBackground: 'transparent',
-    defaultDisabledBorder: fluentApple.buttonBorderDisabled,
+    defaultDisabledBorder: fluent2AliasColorTokens.neutralBackgroundDisabled,
     defaultDisabledContent: fluentApple.buttonTitleDisabled,
     defaultDisabledIcon: fluentApple.buttonTitleDisabled,
 
