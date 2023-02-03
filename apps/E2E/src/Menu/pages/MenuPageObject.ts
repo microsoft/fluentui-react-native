@@ -1,24 +1,19 @@
-import {
-  MENU_TESTPAGE,
-  MENUTRIGGER_TEST_COMPONENT,
-  MENUITEM_NO_A11Y_LABEL_COMPONENT,
-  HOMEPAGE_MENU_BUTTON,
-  MENUITEM_TEST_COMPONENT,
-  MENUITEM_DISABLED_COMPONENT,
-  MENUITEM_FOURTH_COMPONENT,
-  MENU_CALLBACK_RESET_BUTTON,
-  MENUITEM_CALLBACK_LABEL,
-} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 import { Keys } from '../../common/consts';
+import {
+  HOMEPAGE_MENU_BUTTON,
+  MENUITEM_CALLBACK_LABEL,
+  MENUITEM_DISABLED_COMPONENT,
+  MENUITEM_FOURTH_COMPONENT,
+  MENUITEM_NO_A11Y_LABEL_COMPONENT,
+  MENUITEM_TEST_COMPONENT,
+  MENUTRIGGER_TEST_COMPONENT,
+  MENU_CALLBACK_RESET_BUTTON,
+  MENU_TESTPAGE,
+} from '../consts';
 
 /** Allows a caller to get specific menu items using .getMenuItem() */
-export const enum MenuItem {
-  First,
-  Second,
-  Third,
-  Fourth,
-}
+type MenuItem = 'First' | 'Second' | 'Third' | 'Fourth';
 
 class MenuPageObject extends BasePage {
   /******************************************************************/
@@ -39,7 +34,7 @@ class MenuPageObject extends BasePage {
 
   async closeMenu(): Promise<void> {
     if (await this.menuIsExpanded()) {
-      await this.sendKeys(this.getMenuItem(MenuItem.First), [Keys.ESCAPE]);
+      await this.sendKeys(this.getMenuItem('First'), [Keys.ESCAPE]);
       await this.waitForMenuToClose();
     }
   }
@@ -68,7 +63,7 @@ class MenuPageObject extends BasePage {
 
   /* If the first item is displayed, then it's safe to say that the rest of the menu is expanded. */
   async menuIsExpanded(): Promise<boolean> {
-    const menuItem = await this.getMenuItem(MenuItem.First);
+    const menuItem = await this.getMenuItem('First');
     if (menuItem.error) {
       // Not displayed because the item can't be found by appium
       return false;
@@ -95,13 +90,13 @@ class MenuPageObject extends BasePage {
 
   async getMenuItem(item: MenuItem): Promise<WebdriverIO.Element> {
     switch (item) {
-      case MenuItem.First:
+      case 'First':
         return await By(MENUITEM_TEST_COMPONENT);
-      case MenuItem.Second:
+      case 'Second':
         return await By(MENUITEM_DISABLED_COMPONENT);
-      case MenuItem.Third:
+      case 'Third':
         return await By(MENUITEM_NO_A11Y_LABEL_COMPONENT);
-      case MenuItem.Fourth:
+      case 'Fourth':
         return await By(MENUITEM_FOURTH_COMPONENT);
     }
   }

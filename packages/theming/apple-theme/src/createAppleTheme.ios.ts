@@ -1,6 +1,6 @@
 import { NativeAppearanceAdditions } from '@fluentui-react-native/experimental-appearance-additions';
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { Theme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/theme-types';
 import { Appearance, NativeEventEmitter } from 'react-native';
 import { getBaseAppleThemeIOS } from './appleTheme.ios';
 

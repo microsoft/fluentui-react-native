@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/memo-cache
 
-This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Feb 2023 22:33:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.8
+
+Wed, 01 Feb 2023 22:33:16 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
 
 ## 1.1.7
 

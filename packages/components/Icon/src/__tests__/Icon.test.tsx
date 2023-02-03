@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { IconV1, SvgIcon, FontIcon, FontIconPropsV1 } from '../';
+import type { FontIconPropsV1 } from '../';
+import { IconV1, SvgIcon, FontIcon } from '../';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Path, Svg } from 'react-native-svg';

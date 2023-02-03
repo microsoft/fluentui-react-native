@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-shimmer",
-  "version": "0.8.14",
+  "version": "0.8.18",
   "description": "A cross-platform Fluent Shimmer component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,11 +26,11 @@
     "directory": "packages/experimental/Shimmer"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.8.37",
-    "@fluentui-react-native/tokens": ">=0.20.6 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.23.1 <1.0.0",
-    "@fluentui-react-native/component-cache": "^1.4.2",
-    "@fluentui-react-native/use-styling": "^0.9.1"
+    "@fluentui-react-native/framework": "0.9.0",
+    "@fluentui-react-native/tokens": ">=0.20.7 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.23.2 <1.0.0",
+    "@fluentui-react-native/component-cache": "^1.4.3",
+    "@fluentui-react-native/use-styling": "^0.9.3"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

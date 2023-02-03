@@ -1,4 +1,4 @@
-import { IComponentSettings } from './Settings.types';
+import type { IComponentSettings } from './Settings.types';
 import { resolveSettingsOverrides } from './Settings';
 
 interface IProps {

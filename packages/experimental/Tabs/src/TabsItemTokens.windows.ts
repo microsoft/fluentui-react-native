@@ -1,6 +1,6 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { TabsItemTokens } from '.';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+import type { TabsItemTokens } from '.';
 
 export const tabsItemStates: (keyof TabsItemTokens)[] = ['hovered', 'selected', 'disabled'];
 

@@ -1,5 +1,7 @@
-import { checkboxName, CheckboxTokens, CheckboxSlotProps, CheckboxProps, CheckboxSize } from './Checkbox.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import type { CheckboxTokens, CheckboxSlotProps, CheckboxProps, CheckboxSize } from './Checkbox.types';
+import { checkboxName } from './Checkbox.types';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultCheckboxTokens } from './CheckboxTokens';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
