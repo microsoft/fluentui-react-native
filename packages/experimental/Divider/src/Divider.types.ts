@@ -6,7 +6,7 @@ import { TextProps } from '@fluentui-react-native/text';
 export const dividerName = 'Divider';
 
 export const DividerInsetSizes = [0, 16, 56, 68, 72, 108] as const;
-export type DividerInsetSize = (typeof DividerInsetSizes)[number];
+export type DividerInsetSize = typeof DividerInsetSizes[number];
 export type DividerAlignment = 'start' | 'center' | 'end';
 export type DividerAppearance = 'default' | 'subtle' | 'brand' | 'strong';
 
@@ -43,12 +43,12 @@ export interface DividerProps {
 
 export interface DividerTokens extends LayoutTokens {
   /**
-   * The color of the content passed into the divider. This is overriden if the `color` prop / token is set.
+   * The color of the content passed into the divider. This is overriden if the `color` prop is set.
    */
   contentColor?: ColorValue;
   /**
    * The padding of divider content between the start and end lines.
-   * @default 8
+   * @default 12
    */
   contentPadding?: string | number;
   /**
@@ -62,7 +62,7 @@ export interface DividerTokens extends LayoutTokens {
    */
   flexBefore?: number;
   /**
-   * Color of the divider lines. This is overriden if the `color` prop / token is set.
+   * Color of the divider lines. This is overriden if the `color` prop is set.
    */
   lineColor?: ColorValue;
   /**

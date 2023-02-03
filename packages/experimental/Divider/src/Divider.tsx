@@ -4,7 +4,7 @@ import React from 'react';
 import { View, ViewProps } from 'react-native';
 import { dividerName, DividerProps, DividerTokens } from './Divider.types';
 import { withSlots, compressible, UseTokens, useSlot, useFluentTheme, patchTokens, mergeStyles } from '@fluentui-react-native/framework';
-import { Text, TextProps } from '@fluentui-react-native/text';
+import { TextV1 as Text, TextProps } from '@fluentui-react-native/text';
 import { IconV1 as Icon, IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import { useDividerTokens } from './DividerTokens';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
@@ -16,11 +16,12 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   const theme = useFluentTheme();
   let [tokens, cache] = useTokens(theme);
 
-  // call patch function to manually change token values from props (this is done by the lookup function in compose components)
+  // We want to patch our initial tokens from useTokens() with the token values below because they are dependent on the above props.
+  // With compressible, we can also access our tokens at the final rendering stage, which we will need to correctly set our divider height.
   [tokens, cache] = patchTokens(tokens, cache, {
     flexAfter: alignContent === 'end' ? 0 : 1,
     flexBefore: alignContent === 'start' ? 0 : 1,
-    minHeight: props.vertical ? globalTokens.size240 : 0,
+    minHeight: vertical ? globalTokens.size240 : 0,
     ...colorsFromPropsAndTheme({ appearance, color }, theme),
   });
 
@@ -39,7 +40,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   const IconSlot = useSlot<IconProps>(Icon, iconProps);
 
   return (final: DividerProps, ...children: React.ReactNode[]) => {
-    props = { ...props, ...final };
+    props = { alignContent, appearance, color, icon, insetSize, vertical, ...final };
     // change root style if there is a text child
     let textContent: string;
     React.Children.forEach(children, (child) => {
@@ -50,7 +51,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
 
     const hasContent = textContent !== undefined || props.icon !== undefined;
 
-    // This style must be set here because we need to know if text content is passed in the final render
+    // This style must be set here because we need to know if text content is passed in the final render to set the height correctly
     const mergedProps = {
       ...rootProps,
       style: mergeStyles(rootProps, props.vertical && textContent ? { minHeight: 84 } : {}),
