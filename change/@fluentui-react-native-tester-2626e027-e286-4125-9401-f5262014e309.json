@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add testIDs for TabsV1 functional testing",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

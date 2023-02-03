@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 03 Feb 2023 01:49:36 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.15.0",
+      "version": "1.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "83735cdac7bd038933e31191400008b3187e3eb1",
+            "comment": "Refactor TabsLegacy and TabsV1 E2E tests to have better names + error outputs"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.29",
+            "commit": "83735cdac7bd038933e31191400008b3187e3eb1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Feb 2023 00:10:56 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.14.0",
       "version": "1.14.0",
