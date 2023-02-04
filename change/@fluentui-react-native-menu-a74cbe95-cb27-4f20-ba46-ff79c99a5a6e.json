@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "macOS: Update submenu indicator color",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "amchiu@microsoft.com",
+  "dependentChangeType": "patch"
+}

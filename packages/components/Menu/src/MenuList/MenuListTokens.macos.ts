@@ -4,7 +4,7 @@ import type { TokenSettings } from '@fluentui-react-native/use-styling';
 import type { MenuListTokens } from './MenuList.types';
 
 export const defaultMenuListTokens: TokenSettings<MenuListTokens, Theme> = (t: Theme): MenuListTokens => ({
-  padding: 5, // hardcoded for now to match ContextualMenu
+  padding: 5, // hardcoded for now to match NSMenu
   backgroundColor: t.colors.transparentBackground,
   gap: globalTokens.size20,
 });
