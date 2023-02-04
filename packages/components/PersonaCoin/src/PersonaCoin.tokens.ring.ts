@@ -1,7 +1,7 @@
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { ViewProps } from 'react-native';
-import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { Theme } from '@fluentui-react-native/framework';
+import type { ViewProps } from 'react-native';
+import type { IPersonaCoinTokens } from './PersonaCoin.types';
+import type { Theme } from '@fluentui-react-native/framework';
 import { getRingThickness, calculateEffectiveSizes } from './PersonaCoin.helpers';
 
 const _ringProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'size', 'ring'];

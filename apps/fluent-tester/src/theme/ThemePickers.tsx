@@ -2,9 +2,11 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
-import { themeChoices, ThemeNames } from './applyTheme';
-import { brandOptions, OfficeBrand } from './applyBrand';
-import { ThemeOptions } from '@fluentui-react-native/theme-types';
+import type { ThemeNames } from './applyTheme';
+import { themeChoices } from './applyTheme';
+import type { OfficeBrand } from './applyBrand';
+import { brandOptions } from './applyBrand';
+import type { ThemeOptions } from '@fluentui-react-native/theme-types';
 import { MenuPicker } from '../TestComponents/Common/MenuPicker';
 
 export const themePickerStyles = StyleSheet.create({

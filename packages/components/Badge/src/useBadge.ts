@@ -1,4 +1,4 @@
-import { BadgeProps } from './Badge.types';
+import type { BadgeProps } from './Badge.types';
 
 export const useBadge = (props: BadgeProps): BadgeProps => {
   if (!props) return {};

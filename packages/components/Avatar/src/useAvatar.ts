@@ -1,6 +1,7 @@
-import { ImageProps, ImageSourcePropType } from 'react-native';
-import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize, AvatarColor } from './Avatar.types';
-import { PresenceBadgeProps } from '@fluentui-react-native/badge';
+import type { ImageProps, ImageSourcePropType } from 'react-native';
+import type { AvatarProps, AvatarInfo, AvatarState, AvatarSize, AvatarColor } from './Avatar.types';
+import { AvatarColors } from './Avatar.types';
+import type { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles, multiWordTitles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
 import { createIconProps } from '@fluentui-react-native/icon';

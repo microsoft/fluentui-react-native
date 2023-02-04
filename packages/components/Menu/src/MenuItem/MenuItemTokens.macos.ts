@@ -1,7 +1,7 @@
-import { FontWeightValue, Theme } from '@fluentui-react-native/framework';
+import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { MenuItemTokens } from './MenuItem.types';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+import type { MenuItemTokens } from './MenuItem.types';
 
 export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: Theme): MenuItemTokens => ({
   backgroundColor: t.colors.transparentBackground,

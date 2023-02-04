@@ -2,10 +2,12 @@
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { CompoundButtonProps, compoundButtonName, CompoundButtonType } from './CompoundButton.types';
+import type { CompoundButtonProps, CompoundButtonType } from './CompoundButton.types';
+import { compoundButtonName } from './CompoundButton.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './CompoundButton.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { buttonLookup } from '../Button';

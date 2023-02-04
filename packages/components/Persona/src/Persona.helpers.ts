@@ -1,5 +1,5 @@
-import { PersonaSize } from '@fluentui-react-native/persona-coin';
-import { FontTokens } from '@fluentui-react-native/tokens';
+import type { PersonaSize } from '@fluentui-react-native/persona-coin';
+import type { FontTokens } from '@fluentui-react-native/tokens';
 
 type IPersonaFontTable = { [key in PersonaSize]: FontTokens };
 

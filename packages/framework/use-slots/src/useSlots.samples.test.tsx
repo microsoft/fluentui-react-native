@@ -4,7 +4,7 @@ import { mergeProps } from '@fluentui-react-native/merge-props';
 import { buildUseSlots } from './buildUseSlots';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 
 // types for web
 type TextProps = { style?: CSSProperties };

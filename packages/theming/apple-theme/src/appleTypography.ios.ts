@@ -1,4 +1,4 @@
-import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+import type { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
 import { createFontAliasTokens } from './createFontAliasTokens.ios';
 
 // The sizes are taken for the Dynamic Type Size "Large", which is the system default

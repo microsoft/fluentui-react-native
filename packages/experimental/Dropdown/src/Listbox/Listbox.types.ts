@@ -1,5 +1,5 @@
 import type { ICalloutProps } from '@fluentui-react-native/callout';
-import { IPressableHooks } from '@fluentui-react-native/interactive-hooks';
+import type { IPressableHooks } from '@fluentui-react-native/interactive-hooks';
 
 export const listboxName = 'Listbox';
 

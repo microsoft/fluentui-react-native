@@ -1,4 +1,4 @@
-import { SizeClass, UserInterfaceLevel } from './NativeAppearanceAdditions.types';
+import type { SizeClass, UserInterfaceLevel } from './NativeAppearanceAdditions.types';
 
 export const NativeAppearanceAdditions = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -3,7 +3,8 @@ import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
 import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
 import { BUTTON_TESTPAGE } from '../../../../E2E/src/ButtonLegacy/consts';
 import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { ButtonVariantTest } from './ButtonVariantTestSection';
 import { ToggleButtonTest } from './ToggleButtonTestSection';
 import { ButtonIconTest } from '../Button/ButtonIconTestSection';
@@ -24,7 +25,9 @@ const buttonSections: TestSection[] = [
     component: ButtonIconTest,
   },
   ...Platform.select({
-    android: [null], //Following sections are not supported from Fluent Android
+    // The following sections are not supported for iOS or Android
+    ios: [],
+    android: [],
     default: [
       {
         name: 'Toggle Button',
@@ -52,7 +55,7 @@ const buttonSections: TestSection[] = [
     component: E2EButtonTest,
   },
   ...Platform.select({
-    android: [null], //Following sections are not supported from Fluent Android
+    android: [], // Following sections are not supported from Fluent Android
     default: [
       {
         name: 'Deprecated Basic Button',

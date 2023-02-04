@@ -1,5 +1,5 @@
-import { SvgProps } from 'react-native-svg';
-import { AccessibilityProps, ImageProps, ImageStyle, StyleProp, TextStyle, ColorValue } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
+import type { AccessibilityProps, ImageProps, ImageStyle, StyleProp, TextStyle, ColorValue } from 'react-native';
 export const iconName = 'Icon';
 
 export interface FontIconProps {
