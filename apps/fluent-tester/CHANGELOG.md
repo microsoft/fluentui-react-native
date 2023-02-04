@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
+This log was last generated on Sat, 04 Feb 2023 00:37:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.129.9
+
+Sat, 04 Feb 2023 00:37:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.21.29
 
 ## 0.129.8
 

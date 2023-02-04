@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.129.8",
+  "version": "0.129.9",
   "description": "A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -62,7 +62,7 @@
     "@fluentui-react-native/interactive-hooks": ">=0.22.17 <1.0.0",
     "@fluentui-react-native/menu": "^1.2.28",
     "@fluentui-react-native/merge-props": ">=0.5.2 <1.0.0",
-    "@fluentui-react-native/notification": "0.21.28",
+    "@fluentui-react-native/notification": "0.21.29",
     "@fluentui-react-native/separator": "^0.14.14",
     "@fluentui-react-native/stack": ">=0.7.51 <1.0.0",
     "@fluentui-react-native/switch": "^0.8.23",

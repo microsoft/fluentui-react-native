@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove tokens that no longer affect the component",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
