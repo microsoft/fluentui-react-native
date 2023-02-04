@@ -83,7 +83,7 @@ export const MenuScrollView: React.FunctionComponent = () => {
           <Button>Height: 100</Button>
         </MenuTrigger>
         <MenuPopover maxHeight={100}>
-          <MenuList minWidth={300}>
+          <MenuList>
             <MenuItem>MenuItem1MenuItem1MenuItem1MenuItem</MenuItem>
             <MenuItem>MenuItem 2</MenuItem>
             <MenuItem>MenuItem 3</MenuItem>
