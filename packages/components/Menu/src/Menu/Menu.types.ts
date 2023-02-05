@@ -1,6 +1,6 @@
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import type React from 'react';
-import { View } from 'react-native';
+import type { View } from 'react-native';
 import type { MenuListProps } from '../MenuList/MenuList.types';
 
 export const menuName = 'Menu';
