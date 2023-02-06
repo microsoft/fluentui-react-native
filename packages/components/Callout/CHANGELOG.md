@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Feb 2023 05:53:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.0
+
+Mon, 06 Feb 2023 05:53:20 GMT
+
+### Minor changes
+
+- support menu scroll in win32 (email not defined)
 
 ## 0.21.59
 
