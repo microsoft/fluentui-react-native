@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Feb 2023 05:53:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.129.10
+
+Mon, 06 Feb 2023 05:53:21 GMT
+
+### Patches
+
+- support menu scroll in win32 (email not defined)
+- Bump @fluentui-react-native/dropdown to v0.7.26
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.28
+- Bump @fluentui-react-native/menu to v1.3.0
+- Bump @fluentui/react-native to v0.35.18
+
+## 0.129.9
+
+Sat, 04 Feb 2023 00:37:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.21.29
 
 ## 0.129.8
 

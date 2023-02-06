@@ -12,6 +12,7 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * Space between items in pixels
    */
   gap?: number;
+  hasMaxHeight?: MenuListTokens;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
@@ -47,12 +48,13 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   selectRadio?: (e: InteractionEvent, name: string) => void;
   addRadioItem: (name: string) => void;
   removeRadioItem: (name: string) => void;
+  hasMaxHeight?: boolean;
 }
 
 export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps> & { gap?: number };
   focusZone?: FocusZoneProps; // macOS only
-  scrollView?: ScrollViewProps; // macOS only
+  scrollView?: ScrollViewProps;
 }
 
 export interface MenuListType {

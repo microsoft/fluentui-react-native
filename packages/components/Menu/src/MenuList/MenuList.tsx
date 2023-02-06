@@ -3,7 +3,7 @@ import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, stagedComponent, withSlots } from '@fluentui-react-native/framework';
-import type { MenuListProps, MenuListType } from './MenuList.types';
+import type { MenuListProps, MenuListState, MenuListType } from './MenuList.types';
 import { menuListName } from './MenuList.types';
 import { stylingSettings } from './MenuList.styling';
 import { MenuListProvider } from '../context/menuListContext';
@@ -32,19 +32,22 @@ const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap
 });
 MenuStack.displayName = 'MenuStack';
 
+export const menuListLookup = (layer: string, state: MenuListState, userProps: MenuListProps): boolean => {
+  return state[layer] || userProps[layer] || layer === 'hasMaxHeight' || layer === userProps['minWidth'];
+};
 export const MenuList = compose<MenuListType>({
   displayName: menuListName,
   ...stylingSettings,
   slots: {
     root: MenuStack,
-    ...(Platform.OS === 'macos' && { scrollView: ScrollView }),
+    scrollView: ScrollView,
     ...(Platform.OS === 'macos' && { focusZone: FocusZone }),
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
     const menuContext = useMenuContext();
     const menuListContextValue = useMenuListContextValue(menuList);
-    const Slots = useSlots(menuList.props);
+    const Slots = useSlots(menuList.props, (layer) => menuListLookup(layer, menuList, userProps));
 
     const focusZoneRef = React.useRef<View>();
 
@@ -69,6 +72,10 @@ export const MenuList = compose<MenuListType>({
                 {children}
               </Slots.focusZone>
             </Slots.scrollView>
+          </Slots.root>
+        ) : menuContext.hasMaxHeight ? (
+          <Slots.root>
+            <Slots.scrollView>{children}</Slots.scrollView>
           </Slots.root>
         ) : (
           <Slots.root>{children}</Slots.root>

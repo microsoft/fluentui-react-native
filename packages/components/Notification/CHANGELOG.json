@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Sat, 04 Feb 2023 00:37:18 GMT",
+      "tag": "@fluentui-react-native/notification_v0.21.29",
+      "version": "0.21.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "6b30f917064d73e6b7186baeb28a64e29553a0c7",
+            "comment": "Remove tokens that no longer affect the component"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Feb 2023 01:49:36 GMT",
       "tag": "@fluentui-react-native/notification_v0.21.28",
       "version": "0.21.28",
