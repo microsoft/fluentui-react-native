@@ -6,7 +6,7 @@ import type { TextProps } from '@fluentui-react-native/text';
 export const dividerName = 'Divider';
 
 export const DividerInsetSizes = [0, 16, 56, 68, 72, 108] as const;
-export type DividerInsetSize = typeof DividerInsetSizes[number];
+export type DividerInsetSize = (typeof DividerInsetSizes)[number];
 export type DividerAlignment = 'start' | 'center' | 'end';
 export type DividerAppearance = 'default' | 'subtle' | 'brand' | 'strong';
 
