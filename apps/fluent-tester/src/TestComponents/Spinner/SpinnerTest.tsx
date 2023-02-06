@@ -31,6 +31,11 @@ const BasicSpinnerTest: React.FunctionComponent = () => {
   );
 };
 
+const CustomisedSpinner = Spinner.customize({
+  trackColor: 'red',
+  size: 'x-small',
+});
+
 const SpinnerSizeTest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
@@ -55,6 +60,11 @@ const spinnerSections: TestSection[] = [
     name: 'Spinner Size Test',
     testID: SPINNER_TESTPAGE,
     component: SpinnerSizeTest,
+  },
+  {
+    name: 'Customized Spinner Test',
+    testID: SPINNER_TESTPAGE,
+    component: () => <CustomisedSpinner />,
   },
 ];
 

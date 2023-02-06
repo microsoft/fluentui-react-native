@@ -4,7 +4,7 @@ import type { ColorValue } from 'react-native';
 import { Animated, Easing, View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
 import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './Spinner.styling';
@@ -21,7 +21,6 @@ const getSpinnerPath = (diameter: number, width: number, color: ColorValue) => {
 };
 
 export const AnimatedSvg = Animated.createAnimatedComponent(Svg);
-const useStyling = buildUseStyling(stylingSettings);
 export const Spinner = compose<SpinnerType>({
   displayName: spinnerName,
   ...stylingSettings,
@@ -31,8 +30,6 @@ export const Spinner = compose<SpinnerType>({
   },
   useRender: (props: SpinnerProps, useSlots: UseSlots<SpinnerType>) => {
     const Slots = useSlots(props);
-    const slotProps = useStyling(props);
-
     const animating = props.animating != undefined ? props.animating : true;
     const hidesWhenStopped = props.hidesWhenStopped != undefined ? props.hidesWhenStopped : true;
     // React Native ActivityIndicator still takes up space when hidden, so to perfectly match would use opacity
@@ -84,7 +81,11 @@ export const Spinner = compose<SpinnerType>({
       outputRange: ['0deg', '359deg'],
     });
 
-    const path = getSpinnerPath(diameterSizeMap[slotProps.root.size], lineThicknessSizeMap[slotProps.root.size], slotProps.root.trackColor);
+    const path = getSpinnerPath(
+      diameterSizeMap[Slots.root({}).props.size],
+      lineThicknessSizeMap[Slots.root({}).props.size],
+      Slots.root({}).props.trackColor,
+    );
 
     // perspective is needed for animations to work on Android. See https://reactnative.dev/docs/animations#bear-in-mind
     const animatedSvgProps = {
