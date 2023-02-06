@@ -43,22 +43,15 @@ export const Spinner = compose<SpinnerType>({
 
     const rotationAnimation = useRef<Animated.CompositeAnimation | undefined>(undefined);
 
-    /**
-     * https://github.com/facebook/react-native/pull/29585
-     * For Animated.loop() to work with the native driver, React Native needs this fix.
-     * It's only available in React Native 0.66+, and React Native macOS 0.62+
-     * To workaround this, let's just rerun the loop everytime the animation finishes
-     */
     const startRotation = useCallback(() => {
-      if (rotationAnimation.current) {
-        rotationAngle.setValue(0);
-        rotationAnimation.current.reset();
-        rotationAnimation.current.start((result: Animated.EndResult) => {
-          if (result.finished) {
-            startRotation();
-          }
-        });
-      }
+      Animated.loop(
+        Animated.timing(rotationAngle, {
+          toValue: 360,
+          duration: 750,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }),
+      ).start();
     }, [rotationAngle, animating]);
 
     const stopRotation = () => {
@@ -69,14 +62,14 @@ export const Spinner = compose<SpinnerType>({
 
     useEffect(() => {
       if (rotationAnimation.current === undefined) {
-        rotationAnimation.current = Animated.sequence([
+        Animated.loop(
           Animated.timing(rotationAngle, {
-            toValue: 359,
+            toValue: 360,
             duration: 750,
-            useNativeDriver: true,
             easing: Easing.linear,
+            useNativeDriver: true,
           }),
-        ]);
+        ).start();
       }
 
       if (animating) {
