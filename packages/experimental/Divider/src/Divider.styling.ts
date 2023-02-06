@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { ViewProps, ColorValue } from 'react-native';
-import { Theme } from '@fluentui-react-native/framework';
-import { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
-import { TextProps } from '@fluentui-react-native/text';
-import { DividerTokens, DividerProps } from './Divider.types';
+import type { ViewProps, ColorValue } from 'react-native';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
+import type { TextProps } from '@fluentui-react-native/text';
+import type { DividerTokens, DividerProps } from './Divider.types';
 
 const getIconProps = (contentColor: ColorValue, icon: IconProps): IconProps => {
   if (icon.fontSource) {

@@ -1,12 +1,12 @@
-import { ViewProps, ColorValue } from 'react-native';
-import { IconPropsV1 } from '@fluentui-react-native/icon';
-import { LayoutTokens } from '@fluentui-react-native/tokens';
-import { TextProps } from '@fluentui-react-native/text';
+import type { ViewProps, ColorValue } from 'react-native';
+import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
+import type { LayoutTokens } from '@fluentui-react-native/tokens';
+import type { TextProps } from '@fluentui-react-native/text';
 
 export const dividerName = 'Divider';
 
 export const DividerInsetSizes = [0, 16, 56, 68, 72, 108] as const;
-export type DividerInsetSize = (typeof DividerInsetSizes)[number];
+export type DividerInsetSize = typeof DividerInsetSizes[number];
 export type DividerAlignment = 'start' | 'center' | 'end';
 export type DividerAppearance = 'default' | 'subtle' | 'brand' | 'strong';
 
@@ -28,7 +28,7 @@ export interface DividerProps {
   /**
    * Pass an icon source to render an icon as content in the divider. Mutually exclusive with passing text as a child.
    */
-  icon?: IconPropsV1;
+  icon?: IconProps;
   /**
    * The size of the Divider inset - the margin before the start and after the end of the divider.
    * @default 0
