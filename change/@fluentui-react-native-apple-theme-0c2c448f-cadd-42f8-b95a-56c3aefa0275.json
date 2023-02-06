@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove old fluent1 apple hardcoded colors",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

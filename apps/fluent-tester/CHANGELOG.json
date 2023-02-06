@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 06 Feb 2023 23:47:00 GMT",
+      "tag": "@fluentui-react-native/tester_v0.129.11",
+      "version": "0.129.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/apple-theme to v0.18.9",
+            "commit": "faf7bc2cb2c950e413e18347ba5020bdecc8992f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Feb 2023 05:53:21 GMT",
       "tag": "@fluentui-react-native/tester_v0.129.10",
       "version": "0.129.10",
