@@ -32,23 +32,15 @@ const notificationColors = {
 
 export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme> = (t: Theme) =>
   ({
-    backgroundColor: t.colors.background,
     borderColor: 'transparent',
     borderRadius: globalTokens.corner.radius120,
     borderWidth: globalTokens.stroke.width10,
-    color: t.colors.brandForeground1,
-    fontFamily: 'primary',
-    fontLetterSpacing: -0.24,
-    fontLineHeight: 20,
-    fontSize: 15,
-    fontWeight: '400',
     minHeight: 52,
     padding: globalTokens.size160,
     paddingVertical: globalTokens.size120,
     shadowToken: t.shadows.shadow16,
     isBar: {
       borderRadius: globalTokens.corner.radiusNone,
-      fontWeight: '400',
       shadowToken: undefined,
     },
     primary: {

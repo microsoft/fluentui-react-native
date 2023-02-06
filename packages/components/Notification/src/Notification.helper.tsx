@@ -9,7 +9,7 @@ import { createIconProps } from '@fluentui-react-native/icon';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { NotificationProps } from './Notification.types';
 
-export type NotificationButtonColorStates = { disabledColor; pressedColor };
+export type NotificationButtonColorStates = { disabledColor?; pressedColor? };
 
 type NotificationButtonProps = ButtonProps & ButtonTokens & NotificationButtonColorStates;
 

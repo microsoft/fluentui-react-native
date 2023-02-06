@@ -120,5 +120,6 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     selectRadio,
     addRadioItem,
     removeRadioItem,
+    hasMaxHeight: context.hasMaxHeight,
   };
 };
