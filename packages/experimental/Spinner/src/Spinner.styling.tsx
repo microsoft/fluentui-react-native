@@ -8,7 +8,7 @@ export const diameterSizeMap: { [key: string]: number } = {
   'xx-small': 12,
   'x-small': 16,
   medium: 24,
-  large: 28,
+  large: 32,
   'x-large': 36,
 };
 export const lineThicknessSizeMap: { [key: string]: number } = {
