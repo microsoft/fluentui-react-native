@@ -5,8 +5,11 @@ import { defaultMenuListTokens } from './MenuListTokens';
 import type { MenuListProps, MenuListTokens, MenuListSlotProps } from './MenuList.types';
 import { menuListName } from './MenuList.types';
 
+export const menuListStates: (keyof MenuListTokens)[] = ['hasMaxHeight'];
+
 export const stylingSettings: UseStylingOptions<MenuListProps, MenuListSlotProps, MenuListTokens> = {
   tokens: [defaultMenuListTokens, menuListName],
+  states: menuListStates,
   slotProps: {
     root: buildProps(
       (tokens: MenuListTokens, theme: Theme) => ({

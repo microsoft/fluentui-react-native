@@ -22,6 +22,7 @@ export const MenuContext = React.createContext<MenuContextValue>({
   setOpen: () => false,
   shouldFocusOnContainer: false,
   triggerRef: null,
+  hasMaxHeight: false,
 });
 
 export const MenuProvider = MenuContext.Provider;

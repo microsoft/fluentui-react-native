@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Feb 2023 05:53:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.0
+
+Mon, 06 Feb 2023 05:53:20 GMT
+
+### Minor changes
+
+- support menu scroll in win32 (email not defined)
+- Bump @fluentui-react-native/callout to v0.22.0
+
+### Patches
+
+- macOS: Update submenu indicator color (amchiu@microsoft.com)
 
 ## 1.2.28
 

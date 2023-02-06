@@ -44,4 +44,5 @@ export interface MenuState extends MenuProps {
   setOpen: (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void;
   shouldFocusOnContainer: boolean;
   triggerRef: React.RefObject<View>;
+  hasMaxHeight?: boolean;
 }
