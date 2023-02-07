@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add ability to get accessibilityContrast from traitcollection",
+  "packageName": "@fluentui-react-native/experimental-appearance-additions",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
