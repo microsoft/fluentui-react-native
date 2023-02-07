@@ -6,7 +6,7 @@ import { memoize } from '@fluentui-react-native/framework';
 import type { InteractionEvent, KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyDownProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { useMenuListContext } from '../context/menuListContext';
-import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
+import { disabledTriggerKeys, submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
 import { useMenuContext } from '../context/menuContext';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
@@ -90,7 +90,7 @@ export const useMenuCheckboxInteraction = (
     [disabled, isSubmenu, onArrowClose, toggleCallback],
   );
 
-  const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
+  const keys = disabled ? disabledTriggerKeys : isSubmenu ? submenuTriggerKeys : triggerKeys;
   const onKeyProps = useKeyDownProps(onKeysPressed, ...keys);
 
   const accessibilityActionsProp = accessibilityActions
