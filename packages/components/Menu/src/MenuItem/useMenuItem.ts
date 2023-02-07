@@ -9,8 +9,9 @@ import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
 
+export const disabledTriggerKeys = ['ArrowLeft', 'ArrowRight'];
 export const triggerKeys = [' ', 'Enter'];
-export const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
+export const submenuTriggerKeys = [...triggerKeys, ...disabledTriggerKeys];
 
 export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
@@ -53,7 +54,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
 
   const pressable = usePressableState({ ...rest, onPress: onInvoke });
   const itemRef = useViewCommandFocus(componentRef);
-  const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
+  const keys = disabled ? disabledTriggerKeys : isSubmenu ? submenuTriggerKeys : triggerKeys;
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
