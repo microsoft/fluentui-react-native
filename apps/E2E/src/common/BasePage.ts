@@ -96,12 +96,7 @@ export abstract class BasePage {
 
     await (await this._pageButton).click();
     // Wait for page to load
-    await this.waitForCondition(
-      async () => await this.isPageLoaded(),
-      this._pageName + ' did not render correctly. Please see /errorShots for more information.',
-      this.waitForUiEvent,
-      1500,
-    );
+    await this.waitForCondition(async () => await this.isPageLoaded(), this.ERRORMESSAGE_PAGELOAD, this.waitForUiEvent, 1500);
 
     if (showE2ESection) {
       await this.enableE2ETesterMode();
