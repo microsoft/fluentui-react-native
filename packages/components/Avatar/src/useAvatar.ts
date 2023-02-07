@@ -1,4 +1,5 @@
 import type { ImageProps, ImageSourcePropType } from 'react-native';
+import { Platform } from 'react-native';
 import type { AvatarProps, AvatarInfo, AvatarState, AvatarSize, AvatarColor } from './Avatar.types';
 import { AvatarColors } from './Avatar.types';
 import type { PresenceBadgeProps } from '@fluentui-react-native/badge';
