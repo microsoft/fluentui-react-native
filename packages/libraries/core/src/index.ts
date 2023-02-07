@@ -216,7 +216,6 @@ export type { SeparatorProps, SeparatorTokens, SeparatorType } from '@fluentui-r
 
 export { Text, textName, TextV1, textNameV1 } from '@fluentui-react-native/text';
 
-export { Spinner } from '@fluentui-react-native/spinner';
 export type {
   TextProps,
   TextTokens,
