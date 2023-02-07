@@ -52,11 +52,7 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
           color: tokens.submenuIndicatorColor,
           height: tokens.submenuIndicatorSize,
           width: tokens.submenuIndicatorSize,
-          viewBox:
-            '0 0 ' +
-            (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2) +
-            ' ' +
-            (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2),
+          viewBox: '0 0 ' + tokens.submenuIndicatorSize + ' ' + tokens.submenuIndicatorSize,
         };
       },
       ['submenuIndicatorColor', 'submenuIndicatorPadding', 'submenuIndicatorSize'],
