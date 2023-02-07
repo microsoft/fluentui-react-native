@@ -20,9 +20,9 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     circular: {
       borderRadius: globalTokens.corner.radiusCircular,
     },
+    // Badge and Ring is not shown for size 16 on Android.
     size16: {
       size: 16,
-      badgeSize: 'small',
       iconSize: 12,
       fontSize: globalTokens.font.size100,
       fontWeight: globalTokens.font.weight.regular,
@@ -33,6 +33,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size20: {
       size: 20,
       badgeSize: 'small',
+      badgeX: 0,
+      badgeY: -3,
       iconSize: 16,
       fontSize: globalTokens.font.size100,
       fontWeight: globalTokens.font.weight.regular,
@@ -43,6 +45,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size24: {
       size: 24,
       badgeSize: 'small',
+      badgeX: -1,
+      badgeY: -1,
       iconSize: 16,
       fontSize: globalTokens.font.size100,
       fontWeight: globalTokens.font.weight.regular,
@@ -53,6 +57,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size32: {
       size: 32,
       badgeSize: 'small',
+      badgeX: 0,
+      badgeY: 0,
       iconSize: 20,
       fontSize: globalTokens.font.size200,
       fontWeight: globalTokens.font.weight.regular,
@@ -63,6 +69,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size40: {
       size: 40,
       badgeSize: 'medium',
+      badgeX: 0,
+      badgeY: 0,
       iconSize: 24,
       fontSize: globalTokens.font.size300,
       fontWeight: globalTokens.font.weight.regular,
@@ -73,6 +81,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size56: {
       size: 56,
       badgeSize: 'medium',
+      badgeX: -2,
+      badgeY: 2,
       iconSize: 32,
       fontSize: globalTokens.font.size500,
       fontWeight: globalTokens.font.weight.medium,
@@ -83,6 +93,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size72: {
       size: 72,
       badgeSize: 'large',
+      badgeX: -3,
+      badgeY: 3,
       iconSize: 48,
       fontSize: globalTokens.font.size700,
       fontWeight: globalTokens.font.weight.medium,

@@ -280,7 +280,6 @@ export interface PresenceBadgeProps extends BadgeCoreProps {
 export interface PresenceBadgeTokens extends BadgeCoreTokens {
   available?: PresenceBadgeTokens;
   away?: PresenceBadgeTokens;
-  awayOutOfOffice?: PresenceBadgeTokens;
   offline?: PresenceBadgeTokens;
   outOfOffice?: PresenceBadgeTokens;
   doNotDisturb?: PresenceBadgeTokens;

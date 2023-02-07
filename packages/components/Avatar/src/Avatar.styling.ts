@@ -187,6 +187,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           status: tokens.badgeStatus,
           position: 'absolute',
           outOfOffice: tokens.outOfOffice,
+          right: -tokens.badgeX, // -ve sign flips x-axis based on design assumption
+          bottom: tokens.badgeY,
         };
       },
       ['badgeSize', 'badgeStatus'],

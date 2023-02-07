@@ -14,7 +14,7 @@ export const prensenceBadgeLookup = (layer: string, userProps: PresenceBadgeProp
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['status'] ||
-    (userProps['status'] === 'away' && userProps.outOfOffice && layer === 'awayOutOfOffice')
+    (userProps['outOfOffice'] && layer === 'outOfOffice')
   );
 };
 

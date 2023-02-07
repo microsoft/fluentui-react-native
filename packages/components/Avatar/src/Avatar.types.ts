@@ -207,6 +207,16 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
   badgeSize?: BadgeSize;
 
   /**
+   * The x position of presence badge.
+   */
+  badgeX?: number;
+
+  /**
+   * The y position of presence badge.
+   */
+  badgeY?: number;
+
+  /**
    * The icon color.
    */
   iconColor?: ColorValue;

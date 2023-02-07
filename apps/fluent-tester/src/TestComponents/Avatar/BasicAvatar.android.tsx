@@ -1,21 +1,31 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { Avatar } from '@fluentui-react-native/avatar';
 import { View } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { mobileStyles } from '../Common/styles';
 import { Switch } from '@fluentui-react-native/switch';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { StyledPicker } from '../Common/StyledPicker';
+import { PresenceBadgeStatus, PresenceBadgeStatuses } from '@fluentui-react-native/badge';
 
 export const StandardUsage: FunctionComponent = () => {
+  const [status, setStatus] = React.useState<PresenceBadgeStatus>('available');
   const [activityRing, setActivityRing] = React.useState(true);
+  const [outOfOffice, setOutOfOffice] = React.useState(false);
 
+  const onStatusChange = useCallback((value) => setStatus(value), []);
   const toggleActivityState = (_e: InteractionEvent, isActive: boolean) => {
     setActivityRing(isActive);
+  };
+  const toggleOutOfOffice = (_e: InteractionEvent, isActive: boolean) => {
+    setOutOfOffice(isActive);
   };
 
   return (
     <View style={mobileStyles.pageStyle}>
       <Switch label={'Show Activity Ring'} defaultChecked={true} onChange={toggleActivityState} />
+      <Switch label={'Out of Office'} defaultChecked={false} onChange={toggleOutOfOffice} />
+      <StyledPicker prompt="Status" selected={status} onChange={onStatusChange} collection={PresenceBadgeStatuses} />
 
       <View style={mobileStyles.testVariants}>
         {/* Variation  - Initials. */}
@@ -64,14 +74,15 @@ export const StandardUsage: FunctionComponent = () => {
       </View>
 
       <View style={mobileStyles.testVariants}>
-        {/* Variation - Image with Badge */}
-        <Avatar size={16} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={20} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={24} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={32} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={40} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={56} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={72} badge={{ status: 'available' }} imageUrl={steveBallmerPhotoUrl} />
+        {/* Variation - Image with Badge */
+        /* Badge and Ring is not shown for size 16 on Android. */}
+        <Avatar size={16} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={20} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={24} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={32} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={40} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={56} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar size={72} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
       </View>
 
       <View style={mobileStyles.testVariants}>
@@ -83,6 +94,17 @@ export const StandardUsage: FunctionComponent = () => {
         <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={40} avatarColor={'brand'} />
         <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={56} avatarColor={'brand'} />
         <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={72} avatarColor={'brand'} />
+      </View>
+
+      <View style={mobileStyles.testVariants}>
+        {/* Variation - Standard */}
+        <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={16} avatarColor={'brand'} />
+        <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={20} avatarColor={'brand'} />
+        <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={24} avatarColor={'brand'} />
+        <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={32} avatarColor={'brand'} />
+        <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={40} avatarColor={'brand'} />
+        <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={56} avatarColor={'brand'} />
+        <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={72} avatarColor={'brand'} />
       </View>
 
       <View style={mobileStyles.testVariants}>
