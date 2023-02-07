@@ -200,6 +200,11 @@ Array [
       onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
+      style={
+        Object {
+          "maxHeight": undefined,
+        }
+      }
     >
       <View
         style={
@@ -207,7 +212,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 128,
+            "minWidth": 175,
             "paddingVertical": 4,
           }
         }
@@ -471,6 +476,11 @@ Array [
       onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
+      style={
+        Object {
+          "maxHeight": undefined,
+        }
+      }
     >
       <View
         style={
@@ -478,7 +488,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 128,
+            "minWidth": 175,
             "paddingVertical": 4,
           }
         }
@@ -674,6 +684,11 @@ Array [
       onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
+      style={
+        Object {
+          "maxHeight": undefined,
+        }
+      }
     >
       <View
         style={
@@ -681,7 +696,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 128,
+            "minWidth": 175,
             "paddingVertical": 4,
           }
         }
@@ -1077,6 +1092,11 @@ Array [
       onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
+      style={
+        Object {
+          "maxHeight": undefined,
+        }
+      }
     >
       <View
         style={
@@ -1084,7 +1104,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 128,
+            "minWidth": 175,
             "paddingVertical": 4,
           }
         }
@@ -1480,6 +1500,11 @@ Array [
       onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
+      style={
+        Object {
+          "maxHeight": undefined,
+        }
+      }
     >
       <View
         style={
@@ -1487,7 +1512,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 128,
+            "minWidth": 175,
             "paddingVertical": 4,
           }
         }
@@ -1883,6 +1908,11 @@ Array [
       onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
+      style={
+        Object {
+          "maxHeight": undefined,
+        }
+      }
     >
       <View
         style={
@@ -1890,7 +1920,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 128,
+            "minWidth": 175,
             "paddingVertical": 4,
           }
         }
@@ -2274,6 +2304,11 @@ Array [
       onKeyUp={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
+      style={
+        Object {
+          "maxHeight": undefined,
+        }
+      }
     >
       <View
         style={
@@ -2281,7 +2316,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 128,
+            "minWidth": 175,
             "paddingVertical": 4,
           }
         }
