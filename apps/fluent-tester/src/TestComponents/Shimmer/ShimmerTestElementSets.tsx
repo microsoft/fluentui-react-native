@@ -1,4 +1,4 @@
-import { ShimmerRectElement, ShimmerCircleElement } from '@fluentui-react-native/experimental-shimmer';
+import type { ShimmerRectElement, ShimmerCircleElement } from '@fluentui-react-native/experimental-shimmer';
 
 export function shimmerRects(): Array<ShimmerRectElement | ShimmerCircleElement> {
   return [

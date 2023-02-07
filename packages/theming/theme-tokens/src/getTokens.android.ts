@@ -3,7 +3,7 @@ import darkAliasTokens from '@fluentui-react-native/design-tokens-android/dark/t
 import lightShadowTokens from '@fluentui-react-native/design-tokens-android/light/tokens-shadow.json';
 import darkShadowTokens from '@fluentui-react-native/design-tokens-android/dark/tokens-shadow.json';
 
-import { AppearanceOptions } from '@fluentui-react-native/theme-types';
+import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
 
 export function getAliasTokens(mode: AppearanceOptions) {
   if (mode === 'light') {

@@ -1,7 +1,8 @@
 import { Button } from '@fluentui-react-native/button';
 import { NativeDatePicker } from '@fluentui-react-native/experimental-native-date-picker';
 import { NATIVEDATEPICKER_TESTPAGE } from './consts';
-import { PlatformStatus, Test, TestSection } from '../Test';
+import type { PlatformStatus, TestSection } from '../Test';
+import { Test } from '../Test';
 import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';

@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.15.0
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Minor changes
+
+- Refactor TabsLegacy and TabsV1 E2E tests to have better names + error outputs (winlarry@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.29
+
+## 1.14.0
+
+Fri, 03 Feb 2023 00:10:56 GMT
+
+### Minor changes
+
+- Update Text and TextV1 E2E tests with better names + errors (winlarry@microsoft.com)
+
+## 1.13.3
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.28
+
+## 1.13.2
+
+Wed, 01 Feb 2023 22:33:15 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.27
+
+## 1.13.1
+
+Tue, 31 Jan 2023 00:18:04 GMT
+
+### Patches
+
+- Use better test names + new e2e methods on IconV1 (winlarry@microsoft.com)
+
+## 1.13.0
+
+Mon, 30 Jan 2023 20:48:57 GMT
+
+### Minor changes
+
+- Try doubling color tokens page timeout time (78454019+lyzhan7@users.noreply.github.com)
 
 ## 1.12.3
 

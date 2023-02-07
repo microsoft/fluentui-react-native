@@ -1,9 +1,13 @@
-import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize, ButtonAppearance } from './Button.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles, FontTokens } from '@fluentui-react-native/tokens';
+import type { ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize, ButtonAppearance } from './Button.types';
+import { buttonName } from './Button.types';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
+import type { FontTokens } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
 import { defaultButtonColorTokens } from './ButtonColorTokens';
-import { Platform, ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
+import { Platform } from 'react-native';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 import { defaultButtonFontTokens } from './ButtonFontTokens';
 

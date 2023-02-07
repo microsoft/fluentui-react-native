@@ -1,10 +1,11 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { Avatar } from '@fluentui-react-native/avatar';
 import { View } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { mobileStyles } from '../Common/styles';
 import { Switch } from '@fluentui-react-native/switch';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { StyledPicker } from '../Common/StyledPicker';
 import { PresenceBadgeStatus, PresenceBadgeStatuses } from '@fluentui-react-native/badge';
 
@@ -13,7 +14,7 @@ export const StandardUsage: FunctionComponent = () => {
   const [activityRing, setActivityRing] = React.useState(true);
   const [outOfOffice, setOutOfOffice] = React.useState(false);
 
-  const onStatusChange = useCallback((value) => setStatus(value), []);
+  const onStatusChange = React.useCallback((value) => setStatus(value), []);
   const toggleActivityState = (_e: InteractionEvent, isActive: boolean) => {
     setActivityRing(isActive);
   };

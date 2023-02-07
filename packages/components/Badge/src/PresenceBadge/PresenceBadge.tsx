@@ -1,7 +1,9 @@
 /** @jsx withSlots */
 import { View } from 'react-native';
-import { presenceBadgeName, PresenceBadgeType, PresenceBadgeProps, PresenceBadgeStatus } from './PresenceBadge.types';
-import { compose, withSlots, mergeProps, UseSlots } from '@fluentui-react-native/framework';
+import type { PresenceBadgeType, PresenceBadgeProps, PresenceBadgeStatus } from './PresenceBadge.types';
+import { presenceBadgeName } from './PresenceBadge.types';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { presenceIconPaths } from './presenceIconPaths';
 import { Svg, Path } from 'react-native-svg';
 import { stylingSettings } from './PresenceBadge.styling';

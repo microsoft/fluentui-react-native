@@ -1,8 +1,51 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Feb 2023 23:46:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.9
+
+Mon, 06 Feb 2023 23:46:59 GMT
+
+### Patches
+
+- Remove old fluent1 apple hardcoded colors (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.18.8
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.17.0
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.2.4
+- Bump @fluentui-react-native/theme to v0.8.0
+
+## 0.18.7
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.29
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.2.3
+- Bump @fluentui-react-native/theme to v0.7.21
+
+## 0.18.6
+
+Wed, 01 Feb 2023 22:33:15 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.16.28
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.2.2
+- Bump @fluentui-react-native/memo-cache to v1.1.8
+- Bump @fluentui-react-native/theme to v0.7.20
+- Bump @fluentui-react-native/theme-tokens to v0.24.2
+- Bump @fluentui-react-native/theme-types to v0.30.2
+- Bump @fluentui-react-native/theming-utils to v0.23.2
 
 ## 0.18.5
 

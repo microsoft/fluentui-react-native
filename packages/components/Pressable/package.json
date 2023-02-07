@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/pressable",
-  "version": "0.9.53",
+  "version": "0.9.56",
   "description": "A cross-platform Pressable component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,10 +26,10 @@
     "directory": "packages/components/Pressable"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.14 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.11.1 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.12.1 <1.0.0"
+    "@fluentui-react-native/adapters": ">=0.10.1 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.17 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.11.2 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.12.2 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
@@ -45,14 +45,20 @@
   "author": "",
   "license": "MIT",
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
   }
 }

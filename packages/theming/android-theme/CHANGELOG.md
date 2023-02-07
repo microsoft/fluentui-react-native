@@ -1,8 +1,37 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Mon, 30 Jan 2023 07:12:38 GMT and should not be manually modified.
+This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.5
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.8.0
+
+## 0.16.4
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.7.21
+
+## 0.16.3
+
+Wed, 01 Feb 2023 22:33:14 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-tokens to v0.24.2
+- Bump @fluentui-react-native/theme-types to v0.30.2
+- Bump @fluentui-react-native/theme to v0.7.20
+- Bump @fluentui-react-native/theming-utils to v0.23.2
+- Bump @fluentui-react-native/memo-cache to v1.1.8
 
 ## 0.16.2
 

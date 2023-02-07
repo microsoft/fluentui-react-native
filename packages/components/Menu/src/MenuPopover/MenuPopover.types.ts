@@ -1,5 +1,5 @@
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
 
 export const menuPopoverName = 'MenuPopover';
 

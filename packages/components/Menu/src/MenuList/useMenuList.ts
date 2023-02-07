@@ -1,7 +1,7 @@
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
 import { useMenuContext } from '../context/menuContext';
-import { MenuListProps, MenuListState } from './MenuList.types';
+import type { MenuListProps, MenuListState } from './MenuList.types';
 
 // Track the radio items so we know what to clear selection from when selectRadio is called
 // Purposefully left out of the hook because
@@ -120,5 +120,6 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     selectRadio,
     addRadioItem,
     removeRadioItem,
+    hasMaxHeight: context.hasMaxHeight,
   };
 };

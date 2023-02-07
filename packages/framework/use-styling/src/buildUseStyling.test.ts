@@ -1,4 +1,5 @@
-import { buildUseStyling, ThemeHelper, UseStylingOptions } from './buildUseStyling';
+import type { ThemeHelper, UseStylingOptions } from './buildUseStyling';
+import { buildUseStyling } from './buildUseStyling';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
 import { buildProps } from './buildProps';
 

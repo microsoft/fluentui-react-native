@@ -1,10 +1,12 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
-import { tabsName, TabsType, TabsProps, TabsContextData } from './Tabs.types';
+import type { TabsType, TabsProps, TabsContextData } from './Tabs.types';
+import { tabsName } from './Tabs.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Tabs.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useTabs } from './useTabs';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 
@@ -55,9 +57,15 @@ export const Tabs = compose<TabsType>({
         tabs.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
             // Sets default selected tabItem.
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore - TODO, fix typing error
             if (tabs.state?.context.selectedKey == null && !child.props.disabled) {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore - TODO, fix typing error
               tabs.state.context.selectedKey = child.props.itemKey;
             }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore - TODO, fix typing error
             return child.props.itemKey;
           }
         });
