@@ -83,7 +83,7 @@ export interface DividerSlotProps {
   afterLine: ViewProps;
   wrapper: ViewProps;
   text: TextProps;
-  icon: IconPropsV1;
+  icon: IconProps;
 }
 
 export interface DividerType {

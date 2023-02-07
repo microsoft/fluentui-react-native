@@ -4,7 +4,8 @@ import { Divider } from '@fluentui-react-native/divider';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { DIVIDER_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
 import { commonTestStyles } from '../Common/styles';
 import TestSvg from '../../../assets/test.svg';
 
