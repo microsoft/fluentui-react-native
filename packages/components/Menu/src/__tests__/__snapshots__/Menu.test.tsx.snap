@@ -299,10 +299,10 @@ Array [
           keyDownEvents={
             Array [
               Object {
-                "key": " ",
+                "key": "ArrowLeft",
               },
               Object {
-                "key": "Enter",
+                "key": "ArrowRight",
               },
             ]
           }
@@ -863,10 +863,10 @@ Array [
           keyDownEvents={
             Array [
               Object {
-                "key": " ",
+                "key": "ArrowLeft",
               },
               Object {
-                "key": "Enter",
+                "key": "ArrowRight",
               },
             ]
           }
