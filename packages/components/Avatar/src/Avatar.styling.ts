@@ -189,7 +189,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           bottom: tokens.badgeY,
         };
       },
-      ['badgeSize', 'badgeStatus'],
+      ['badgeSize', 'badgeStatus', 'badgeX', 'badgeY', 'outOfOffice'],
     ),
   },
 };
