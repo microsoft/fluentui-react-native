@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-appearance-additions",
   "entries": [
     {
+      "date": "Wed, 08 Feb 2023 01:38:39 GMT",
+      "tag": "@fluentui-react-native/experimental-appearance-additions_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-appearance-additions",
+            "commit": "da95fca5314190f415c8f2b1b853533689dc345b",
+            "comment": "Add ability to get accessibilityContrast from traitcollection"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Feb 2023 01:49:36 GMT",
       "tag": "@fluentui-react-native/experimental-appearance-additions_v0.2.4",
       "version": "0.2.4",
