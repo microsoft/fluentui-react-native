@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Text } from '@fluentui-react-native/text';
+import { Text, TextV1 } from '@fluentui-react-native/text';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import { stackStyle, commonTestStyles as commonStyles, commonTestStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 import { SPINNER_TESTPAGE } from '../../../../E2E/src/Spinner/consts';
@@ -33,18 +33,34 @@ const BasicSpinnerTest: React.FunctionComponent = () => {
 
 const CustomisedSpinner = Spinner.customize({
   trackColor: 'red',
-  size: 'x-small',
+  size: 'medium',
 });
 
 const SpinnerSizeTest: React.FunctionComponent = () => {
+  const memoizedStyles = React.useMemo(() => ({ ...commonTestStyles.androidContainer, height: 250 }), []);
   return (
     <Stack style={stackStyle}>
-      <View style={commonStyles.root}>
-        <Spinner size="xx-small" />
-        <Spinner size="x-small" />
-        <Spinner size="medium" />
-        <Spinner size="large" />
-        <Spinner size="x-large" />
+      <View style={memoizedStyles}>
+        <View>
+          <TextV1>xx-small</TextV1>
+          <Spinner size="xx-small" />
+        </View>
+        <View>
+          <TextV1>x-small</TextV1>
+          <Spinner size="x-small" />
+        </View>
+        <View>
+          <TextV1>medium</TextV1>
+          <Spinner size="medium" />
+        </View>
+        <View>
+          <TextV1>large</TextV1>
+          <Spinner size="large" />
+        </View>
+        <View>
+          <TextV1>x-large</TextV1>
+          <Spinner size="x-large" />
+        </View>
       </View>
     </Stack>
   );
