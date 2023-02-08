@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Android Presence badge changes",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "none"
+}
