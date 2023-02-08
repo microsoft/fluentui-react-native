@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "macOS: Only show scroll indicators if maxHeight/maxWidth is specified",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

@@ -59,7 +59,10 @@ export const MenuList = compose<MenuListType>({
       const content =
         Platform.OS === 'macos' ? (
           <Slots.root>
-            <Slots.scrollView>
+            <Slots.scrollView
+              showsVerticalScrollIndicator={menuContext.hasMaxHeight}
+              showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
+            >
               <Slots.focusZone
                 componentRef={focusZoneRef}
                 focusZoneDirection={'vertical'}
