@@ -83,8 +83,10 @@ The Avatar supports a circular and square (with rounded corners) shape.
 
 ### Sizes
 
-`Avatar` supports next sizes: `20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120`.
-Default size for win32 is 24.
+`Avatar` supports the following sizes: `20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120`.
+Android only supports the following sizes: `16, 20, 24, 32, 40, 56, 72`. Neither ring nor badge is displayed for Size 16.
+
+Default size is 24.
 
 ## API
 
@@ -202,6 +204,16 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
    * The size of presence badge.
    */
   badgeSize?: BadgeSize;
+
+  /**
+   * The x position of presence badge.
+   */
+  badgeX?: number;
+
+  /**
+   * The y position of presence badge.
+   */
+  badgeY?: number;
 
   /**
    * The icon color.

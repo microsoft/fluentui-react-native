@@ -9,8 +9,10 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     paddingHorizontal: globalTokens.sizeNone,
     backgroundColor: t.colors.neutralBackground1,
     position: 'relative',
-    bottom: -1,
+    bottom: 0,
     right: 0,
+    width: 12,
+    height: 12,
 
     // 'tiny', 'extraSmall', 'extraLarge' are not supported on Android.
     small: {
