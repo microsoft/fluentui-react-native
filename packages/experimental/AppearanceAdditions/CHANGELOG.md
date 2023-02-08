@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
-This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Feb 2023 01:38:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Wed, 08 Feb 2023 01:38:39 GMT
+
+### Minor changes
+
+- Add ability to get accessibilityContrast from traitcollection (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.2.4
 
