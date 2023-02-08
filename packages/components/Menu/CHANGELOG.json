@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 08 Feb 2023 19:29:35 GMT",
+      "tag": "@fluentui-react-native/menu_v1.3.1",
+      "version": "1.3.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "94412e5bb6ae6b9fe29ddbcdbc0af40c91691272",
+            "comment": "macOS: Only show scroll indicators if maxHeight/maxWidth is specified"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Feb 2023 05:53:20 GMT",
       "tag": "@fluentui-react-native/menu_v1.3.0",
       "version": "1.3.0",
