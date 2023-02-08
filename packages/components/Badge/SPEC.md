@@ -267,7 +267,7 @@ Presence badge represents user's availability.
 
 ### PresenceBadge Props
 
-PresenceBadge on Android supports only sizes: `small, medium and large `.
+Presence badge on Android supports only sizes: `small, medium and large `.
 
 ```ts
 export interface PresenceBadgeProps extends BadgeCoreProps {
