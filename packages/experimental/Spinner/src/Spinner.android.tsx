@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { useRef, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import type { ColorValue } from 'react-native';
 import { Animated, Easing, View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
@@ -32,13 +32,8 @@ export const Spinner = compose<SpinnerType>({
     const Slots = useSlots(props);
     const animating = props.animating != undefined ? props.animating : true;
     const hidesWhenStopped = props.hidesWhenStopped != undefined ? props.hidesWhenStopped : true;
-    // React Native ActivityIndicator still takes up space when hidden, so to perfectly match would use opacity
-    // hiding opacity makes the screen reader on iOS and Android skip over it
     const hideOpacity = animating == false && hidesWhenStopped == true ? 0 : 1;
-
-    const rotationAngle = useRef(new Animated.Value(0)).current;
-
-    const rotationAnimation = useRef<Animated.CompositeAnimation | undefined>(undefined);
+    const rotationAngle = new Animated.Value(0);
 
     const startRotation = useCallback(() => {
       Animated.loop(
@@ -52,22 +47,18 @@ export const Spinner = compose<SpinnerType>({
     }, [rotationAngle, animating]);
 
     const stopRotation = () => {
-      if (rotationAnimation.current) {
-        rotationAnimation.current.stop();
-      }
+      rotationAngle.stopAnimation();
     };
 
     useEffect(() => {
-      if (rotationAnimation.current === undefined) {
-        Animated.loop(
-          Animated.timing(rotationAngle, {
-            toValue: 360,
-            duration: 750,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-        ).start();
-      }
+      Animated.loop(
+        Animated.timing(rotationAngle, {
+          toValue: 360,
+          duration: 750,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }),
+      ).start();
 
       if (animating) {
         startRotation();
