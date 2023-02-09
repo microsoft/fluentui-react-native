@@ -92,7 +92,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['variant', 'labelMarginTop', 'color', ...fontStyles.keys],
+      ['variant', 'labelMarginVertical', 'color', ...fontStyles.keys],
     ),
     subtext: buildProps(
       (tokens: RadioTokens) => ({

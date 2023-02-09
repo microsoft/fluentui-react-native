@@ -35,7 +35,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [marginRight, setMarginRight] = React.useState<number>(6);
   const [marginBottom, setMarginBottom] = React.useState<number>(6);
   const [marginLeft, setMarginLeft] = React.useState<number>(4);
-  const [labelMarginTop, setLabelMarginTop] = React.useState<number>(5);
+  const [labelMarginVertical, setLabelMarginVertical] = React.useState<number>(4);
   const [labelMarginRight, setLabelMarginRight] = React.useState<number>(2);
   const [labelMarginLeft, setLabelMarginLeft] = React.useState<number>(0);
   const [subtextMarginTop, setSubtextMarginTop] = React.useState<number>(2);
@@ -68,7 +68,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
       marginRight,
       marginBottom,
       marginLeft,
-      labelMarginTop,
+      labelMarginVertical,
       labelMarginRight,
       labelMarginLeft,
       subtextMarginTop,
@@ -135,7 +135,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
     marginRight,
     marginBottom,
     marginLeft,
-    labelMarginTop,
+    labelMarginVertical,
     labelMarginRight,
     labelMarginLeft,
     subtextMarginTop,
@@ -312,12 +312,12 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
             }}
           />
           <TextInput
-            accessibilityLabel="Radio label margin top"
+            accessibilityLabel="Radio label margin vertical"
             style={commonStyles.textBox}
-            placeholder="marginTop"
+            placeholder="marginVertical"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setLabelMarginTop(parseInt(e.nativeEvent.text.toString()));
+              setLabelMarginVertical(parseInt(e.nativeEvent.text.toString()));
             }}
           />
           <TextInput
