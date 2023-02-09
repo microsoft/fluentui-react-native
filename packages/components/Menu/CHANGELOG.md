@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 09 Feb 2023 17:10:01 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Feb 2023 22:42:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.0
+
+Thu, 09 Feb 2023 22:42:47 GMT
+
+### Minor changes
+
+- support minwidth for menu (email not defined)
+- Bump @fluentui-react-native/callout to v0.23.0
 
 ## 1.3.3
 
