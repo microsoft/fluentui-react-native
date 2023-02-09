@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Moving Button E2E tests to the bottom of the page",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

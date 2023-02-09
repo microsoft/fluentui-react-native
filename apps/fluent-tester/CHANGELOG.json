@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 09 Feb 2023 19:43:53 GMT",
+      "tag": "@fluentui-react-native/tester_v0.130.0",
+      "version": "0.130.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4f6c3f5cfa9eb7b5a6f20db63199bdbce70ba232",
+            "comment": "Moving Button E2E tests to the bottom of the page"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Feb 2023 17:10:01 GMT",
       "tag": "@fluentui-react-native/tester_v0.129.15",
       "version": "0.129.15",

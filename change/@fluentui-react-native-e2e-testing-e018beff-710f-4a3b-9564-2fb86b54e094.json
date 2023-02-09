@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Removing async() from describe blocks",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

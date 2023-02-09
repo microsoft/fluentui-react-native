@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 09 Feb 2023 19:43:53 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.16.0",
+      "version": "1.16.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4f6c3f5cfa9eb7b5a6f20db63199bdbce70ba232",
+            "comment": "Removing async() from describe blocks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Feb 2023 01:49:36 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.15.0",
       "version": "1.15.0",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 09 Feb 2023 17:10:01 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Feb 2023 19:43:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.130.0
+
+Thu, 09 Feb 2023 19:43:53 GMT
+
+### Minor changes
+
+- Moving Button E2E tests to the bottom of the page (safreibe@microsoft.com)
 
 ## 0.129.15
 
