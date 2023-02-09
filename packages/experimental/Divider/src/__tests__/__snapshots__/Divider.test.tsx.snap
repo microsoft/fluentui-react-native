@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider component tests Divider default 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 0,
+      "minWidth": 0,
+      "paddingHorizontal": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#e0e0e0",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 0,
+        "paddingHorizontal": 12,
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
+      style={
+        Object {
+          "color": "#424242",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+          "textAlign": "center",
+        }
+      }
+    >
+      Your component
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#e0e0e0",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
