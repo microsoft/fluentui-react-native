@@ -4,7 +4,7 @@ import { DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL, DEPRECATED_TEXT_SECOND_COMPO
 import TextLegacyPageObject from '../pages/TextLegacyPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Text Legacy Testing Initialization', function () {
+describe('Text Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
