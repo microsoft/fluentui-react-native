@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "support minwidth for menu",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
