@@ -74,6 +74,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         style: {
           alignItems: tokens.labelAlignItems,
           flexDirection: 'column',
+          marginTop: 1,
           marginRight: tokens.labelMarginRight,
           marginLeft: tokens.labelMarginLeft,
           padding: tokens.labelPadding,
@@ -85,7 +86,8 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,
         style: {
-          marginTop: tokens.labelMarginTop,
+          marginVertical: tokens.labelMarginVertical,
+          marginHorizontal: 2,
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
@@ -98,6 +100,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         style: {
           marginTop: tokens.subtextMarginTop,
           marginBottom: tokens.subtextMarginBottom,
+          marginHorizontal: 2,
           color: tokens.color,
         },
       }),

@@ -18,7 +18,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     color: t.colors.neutralForeground3,
     radioOuterCircleSize: 20,
     radioInnerCircleSize: 10,
-    labelMarginTop: globalTokens.size40 + 1,
+    labelMarginVertical: globalTokens.size40,
     labelMarginRight: globalTokens.size20,
     labelMarginLeft: globalTokens.sizeNone,
     subtextVariant: 'caption1',
@@ -76,7 +76,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     },
 
     focused: {
-      borderColor: t.colors.focusBorder,
+      // borderColor: t.colors.focusBorder,
 
       selected: {
         // Checked, Focused
