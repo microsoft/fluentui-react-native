@@ -121,5 +121,6 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     addRadioItem,
     removeRadioItem,
     hasMaxHeight: context.hasMaxHeight,
+    hasMaxWidth: context.hasMaxWidth,
   };
 };

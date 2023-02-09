@@ -1,4 +1,4 @@
-import type { SizeClass, UserInterfaceLevel } from './NativeAppearanceAdditions.types';
+import type { AccessibilityContrastOption, SizeClass, UserInterfaceLevel } from './NativeAppearanceAdditions.types';
 
 export const NativeAppearanceAdditions = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -13,7 +13,10 @@ export const NativeAppearanceAdditions = {
     console.warn('NativeAppearanceAdditions is only available on iOS');
     return 'base' as UserInterfaceLevel;
   },
+  accessibilityContrastOption: () => {
+    console.warn('NativeAppearanceAdditions is only available on iOS');
+    return 'normal' as AccessibilityContrastOption;
+  },
 };
 
-// export default NativeFontMetrics;
 export default NativeAppearanceAdditions;

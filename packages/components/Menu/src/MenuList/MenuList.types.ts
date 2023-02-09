@@ -53,6 +53,7 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   addRadioItem: (name: string) => void;
   removeRadioItem: (name: string) => void;
   hasMaxHeight?: boolean;
+  hasMaxWidth?: boolean;
 }
 
 export interface MenuListSlotProps {
