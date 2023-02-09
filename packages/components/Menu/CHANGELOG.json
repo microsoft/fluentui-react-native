@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Thu, 09 Feb 2023 17:10:01 GMT",
+      "tag": "@fluentui-react-native/menu_v1.3.3",
+      "version": "1.3.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "45ec15bee779228352575ebbea9efba4c20b33aa",
+            "comment": "Fix Menu keyboard navigation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Feb 2023 02:18:16 GMT",
       "tag": "@fluentui-react-native/menu_v1.3.2",
       "version": "1.3.2",
