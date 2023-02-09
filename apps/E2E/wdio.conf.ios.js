@@ -137,7 +137,7 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test, context, results) {
+  afterTest: (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
     console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
 

@@ -92,7 +92,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (/*config, capabilities, specs*/) {
+  beforeSession: (/*config, capabilities, specs*/) => {
     fs.mkdirSync('./errorShots', { recursive: true });
     process.env['E2ETEST_PLATFORM'] = 'macos';
   },
@@ -154,7 +154,7 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test, context, results) {
+  afterTest: (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
     console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
 
