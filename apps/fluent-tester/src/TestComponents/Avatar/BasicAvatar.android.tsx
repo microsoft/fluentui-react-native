@@ -7,7 +7,8 @@ import { mobileStyles } from '../Common/styles';
 import { Switch } from '@fluentui-react-native/switch';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { StyledPicker } from '../Common/StyledPicker';
-import { PresenceBadgeStatus, PresenceBadgeStatuses } from '@fluentui-react-native/badge';
+import type { PresenceBadgeStatus } from '@fluentui-react-native/badge';
+import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
 
 export const StandardUsage: FunctionComponent = () => {
   const [status, setStatus] = React.useState<PresenceBadgeStatus>('available');
