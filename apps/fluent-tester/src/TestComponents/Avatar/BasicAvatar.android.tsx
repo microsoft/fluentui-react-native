@@ -12,7 +12,7 @@ import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
 
 export const StandardUsage: FunctionComponent = () => {
   const [status, setStatus] = React.useState<PresenceBadgeStatus>('available');
-  const [activityRing, setActivityRing] = React.useState(true);
+  const [activityRing, setActivityRing] = React.useState(false);
   const [outOfOffice, setOutOfOffice] = React.useState(false);
 
   const onStatusChange = React.useCallback((value) => setStatus(value), []);
@@ -25,8 +25,8 @@ export const StandardUsage: FunctionComponent = () => {
 
   return (
     <View style={mobileStyles.pageStyle}>
-      <Switch label={'Show Activity Ring'} defaultChecked={true} onChange={toggleActivityState} />
-      <Switch label={'Out of Office'} defaultChecked={false} onChange={toggleOutOfOffice} />
+      <Switch label={'Show Activity Ring'} defaultChecked={activityRing} onChange={toggleActivityState} />
+      <Switch label={'Out of Office'} defaultChecked={outOfOffice} onChange={toggleOutOfOffice} />
       <StyledPicker prompt="Status" selected={status} onChange={onStatusChange} collection={PresenceBadgeStatuses} />
 
       <View style={mobileStyles.testVariants}>
@@ -77,7 +77,7 @@ export const StandardUsage: FunctionComponent = () => {
 
       <View style={mobileStyles.testVariants}>
         {/* Variation - Image with Badge */
-        /* Badge and Ring is not shown for size 16 on Android. */}
+        /* Badge is not shown for size 16 on Android. */}
         <Avatar size={16} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
         <Avatar size={20} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
         <Avatar size={24} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />

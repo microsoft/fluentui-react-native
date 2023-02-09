@@ -2,8 +2,9 @@ import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { RingConfig, AvatarTokens } from './Avatar.types';
 
 export function getRingConfig(tokens: AvatarTokens): RingConfig {
-  const { size, ringThickness } = tokens;
-  const innerGap = tokens.ringInnerGap || ringThickness;
+  const { size } = tokens;
+  let { ringThickness } = tokens;
+  let innerGap = tokens.ringInnerGap || ringThickness;
 
   const LARGE_SIZE = 71;
   const strokeSize = {
@@ -20,30 +21,22 @@ export function getRingConfig(tokens: AvatarTokens): RingConfig {
     };
   } else {
     if (size <= 16) {
-      return {
-        size: size + strokeSize.small * 4,
-        ringThickness: strokeSize.small,
-        innerGap: strokeSize.small,
-      };
-    }
-    if (size <= 20) {
-      return {
-        size: size + strokeSize.small * 4,
-        ringThickness: strokeSize.small,
-        innerGap: strokeSize.medium,
-      };
-    }
-    if (size <= LARGE_SIZE) {
-      return {
-        size: size + strokeSize.medium * 4,
-        ringThickness: strokeSize.medium,
-        innerGap: strokeSize.medium,
-      };
+      ringThickness = strokeSize.small;
+      innerGap = strokeSize.small;
+    } else if (size <= 20) {
+      ringThickness = strokeSize.small;
+      innerGap = strokeSize.medium;
+    } else if (size <= LARGE_SIZE) {
+      ringThickness = strokeSize.medium;
+      innerGap = strokeSize.medium;
+    } else {
+      ringThickness = strokeSize.large;
+      innerGap = strokeSize.large;
     }
     return {
-      size: size + strokeSize.large * 4,
-      ringThickness: strokeSize.large,
-      innerGap: strokeSize.large,
+      ringThickness,
+      innerGap,
+      size: size + ringThickness * 2 + innerGap * 2,
     };
   }
 }
@@ -63,4 +56,8 @@ export function getRingSpacing(tokens: AvatarTokens) {
         margin: ringConfig.innerGap,
       }
     : {};
+}
+
+export function getFallbackIconPath() {
+  return 'M7 0C4.79086 0 3 1.79086 3 4C3 6.20914 4.79086 8 7 8C9.20914 8 11 6.20914 11 4C11 1.79086 9.20914 0 7 0ZM2.00873 9C0.903151 9 0 9.88687 0 11C0 12.6912 0.83281 13.9663 2.13499 14.7966C3.41697 15.614 5.14526 16 7 16C8.85474 16 10.583 15.614 11.865 14.7966C13.1672 13.9663 14 12.6912 14 11C14 9.89557 13.1045 9.00001 12 9.00001L2.00873 9Z';
 }

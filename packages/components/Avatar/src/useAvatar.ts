@@ -75,9 +75,8 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     };
   }
 
-  const disableRingAndBadge = Platform.OS === 'android' && size === 16;
-  if (disableRingAndBadge) {
-    state.showRing = false;
+  const disableBadge = Platform.OS === 'android' && size === 16;
+  if (disableBadge) {
     state.showBadge = false;
   }
 

@@ -84,7 +84,7 @@ The Avatar supports a circular and square (with rounded corners) shape.
 ### Sizes
 
 `Avatar` supports the following sizes: `20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120`.
-Android only supports the following sizes: `16, 20, 24, 32, 40, 56, 72`. Neither ring nor badge is displayed for Size 16.
+Android only supports the following sizes: `16, 20, 24, 32, 40, 56, 72`. Badge is not displayed for Size 16.
 
 Default size is 24.
 

@@ -20,7 +20,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     circular: {
       borderRadius: globalTokens.corner.radiusCircular,
     },
-    // Badge and Ring is not shown for size 16 on Android.
+    // Badge is not shown for size 16 on Android.
     size16: {
       size: 16,
       iconSize: 12,
