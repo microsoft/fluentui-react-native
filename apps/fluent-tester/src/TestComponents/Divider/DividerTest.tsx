@@ -102,10 +102,10 @@ const dividerSections: TestSection[] = [
 
 export const DividerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Beta',
+    win32Status: 'Experimental',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Backlog',
+    macosStatus: 'Backlog',
     androidStatus: 'Backlog',
   };
 
