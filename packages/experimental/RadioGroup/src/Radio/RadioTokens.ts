@@ -76,8 +76,6 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     },
 
     focused: {
-      // borderColor: t.colors.focusBorder,
-
       selected: {
         // Checked, Focused
         radioVisibility: 1,
