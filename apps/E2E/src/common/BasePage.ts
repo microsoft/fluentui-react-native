@@ -94,15 +94,23 @@ export abstract class BasePage {
     return await (await this._pageButton).isDisplayed();
   }
 
-  /* The goal of click() and sendKeys() is to be generally used across all pageobjects to reduce code repetition in similar methods. */
+  /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
   async click(element: Promise<WebdriverIO.Element>): Promise<void> {
     await (await element).click();
   }
 
+  /** Given a WebdriverIO element promise, send the passed in list of keys as keyboard inputs. Use this across all PageObject methods and test specs.
+   *
+   * Common examples:
+   * - Press enter on a button control: ButtonPageObject.sendKeys(ButtonPageObject.button, [KEY_ENTER])
+   * - Shift tab to the previous element: FocusZonePageObject.sendKeys(FocusZonePageObject.beforeButton, [KEY_SHIFT, KEY_TAB])
+   * - Escape out of a menu: MenuPageObject.sendKeys(MenuPageObject.item1, [KEY_ESCAPE])
+   */
   async sendKeys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
     await (await element).addValue(keys);
   }
 
+  /** Short-hand method for PageObjects to get an element attribute during testing, with attribute being type-enforced. */
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
     return await element.getAttribute(attribute);
   }
