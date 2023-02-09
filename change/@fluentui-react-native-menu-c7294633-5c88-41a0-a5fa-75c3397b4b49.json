@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update submenuIndicatorPadding",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "amchiu@microsoft.com",
-  "dependentChangeType": "patch"
-}
