@@ -102,7 +102,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  // before: function () {
+  // before: () => {
   // },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -115,7 +115,7 @@ exports.config = {
    * Hook that gets executed before the suite starts
    * @param {Object} suite suite details
    */
-  beforeSuite: async function () {
+  beforeSuite: async () => {
     // Unlike other platforms, the appium Mac2 driver doesn't have a command to maximize the app.
     // Because of this, we look up the maximize window button directly through it's XCUI identifier and click it.
     let fluentTesterWindow = null;

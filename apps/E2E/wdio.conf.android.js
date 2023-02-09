@@ -101,7 +101,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  // before: function () {
+  // before: () => {
   // },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -114,7 +114,7 @@ exports.config = {
    * Hook that gets executed before the suite starts
    * @param {Object} suite suite details
    */
-  // beforeSuite: async function () {
+  // beforeSuite: async () => {
   // },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
