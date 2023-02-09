@@ -13,7 +13,7 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
   minHeight: 32,
-  minWidth: 160,
+  minWidth: 128,
   maxWidth: 300,
   padding: globalTokens.size60,
   submenuIndicatorColor: t.colors.neutralForeground2,
