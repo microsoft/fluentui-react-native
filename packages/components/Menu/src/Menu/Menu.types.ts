@@ -44,4 +44,5 @@ export interface MenuState extends MenuProps {
   shouldFocusOnContainer: boolean;
   triggerRef: React.RefObject<React.Component>;
   hasMaxHeight?: boolean;
+  hasMaxWidth?: boolean;
 }

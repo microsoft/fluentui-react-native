@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 09 Feb 2023 02:18:16 GMT",
+      "tag": "@fluentui-react-native/tester_v0.129.14",
+      "version": "0.129.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.3.2",
+            "commit": "45469ad3f3a8c3adb3d936b4485e8917964dc842"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 08 Feb 2023 19:29:35 GMT",
+      "tag": "@fluentui-react-native/tester_v0.129.13",
+      "version": "0.129.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.3.1",
+            "commit": "94412e5bb6ae6b9fe29ddbcdbc0af40c91691272"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 08 Feb 2023 01:38:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.129.12",
+      "version": "0.129.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/apple-theme to v0.18.10",
+            "commit": "da95fca5314190f415c8f2b1b853533689dc345b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-appearance-additions to v0.3.0",
+            "commit": "da95fca5314190f415c8f2b1b853533689dc345b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.21.30",
+            "commit": "da95fca5314190f415c8f2b1b853533689dc345b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Feb 2023 23:47:00 GMT",
       "tag": "@fluentui-react-native/tester_v0.129.11",
       "version": "0.129.11",
