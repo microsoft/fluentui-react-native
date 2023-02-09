@@ -12,6 +12,8 @@ import TestSvg from '../../../assets/test.svg';
 const CustomDivider = Divider.customize({ thickness: 3, paddingVertical: 4 });
 const CustomText = Text.customize({ margin: 8 });
 
+const RedDivider = Divider.customize({ contentColor: 'red', lineColor: 'red' });
+
 const dividerTestStyles = StyleSheet.create({
   verticalDividerContainer: {
     marginVertical: 8,
@@ -26,9 +28,7 @@ export const HorizontalDividers: React.FunctionComponent = () => (
     <Divider />
     <CustomText>Regular divider with no content above.</CustomText>
     <Divider>Divider with text content.</Divider>
-    <Divider insetSize={16} color="purple">
-      Colored divider with text + inset.
-    </Divider>
+    <Divider insetSize={16}>Colored divider with text + inset.</Divider>
     <CustomDivider alignContent="start">I am a start-aligned divider with a thickness = 3</CustomDivider>
     <CustomDivider alignContent="end">I am a end-aligned divider with a thickness = 3</CustomDivider>
   </Stack>
@@ -42,10 +42,10 @@ export const VerticalDividers: React.FunctionComponent = () => (
       <CustomText>Divider with an inset {'->'}</CustomText>
       <Divider vertical insetSize={16} />
       <CustomDivider vertical>Thick divider with text</CustomDivider>
-      <Divider color="red" vertical alignContent="start">
+      <RedDivider vertical alignContent="start">
         Start-aligned divider
-      </Divider>
-      <Divider color="blue" vertical alignContent="end">
+      </RedDivider>
+      <Divider vertical alignContent="end">
         End-aligned divider
       </Divider>
     </View>

@@ -22,10 +22,6 @@ export interface DividerProps {
    */
   appearance?: DividerAppearance;
   /**
-   * Colors both the divider lines and the content itself, overriding the colors provided by the appearance prop.
-   */
-  color?: ColorValue;
-  /**
    * Pass an icon source to render an icon as content in the divider. Mutually exclusive with passing text as a child.
    */
   icon?: IconProps;

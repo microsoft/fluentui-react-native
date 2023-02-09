@@ -13,10 +13,17 @@ import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import { useDividerTokens } from './DividerTokens';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { colorsFromPropsAndTheme, useDividerSlotProps } from './Divider.styling';
+import { colorsFromAppearance, useDividerSlotProps } from './Divider.styling';
 
 export const Divider = compressible<DividerProps, DividerTokens>((props: DividerProps, useTokens: UseTokens<DividerTokens>) => {
-  const { alignContent = 'center', appearance = 'default', color, icon, insetSize = 0, vertical = false } = props;
+  // Set default values for props
+  props = {
+    alignContent: 'center',
+    appearance: 'default',
+    insetSize: 0,
+    vertical: false,
+    ...props,
+  };
 
   const theme = useFluentTheme();
   let [tokens, cache] = useTokens(theme);
@@ -24,17 +31,14 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   // We want to patch our initial tokens from useTokens() with the token values below because they are dependent on the above props.
   // With compressible, we can also access our tokens at the final rendering stage, which we will need to correctly set our divider height.
   [tokens, cache] = patchTokens(tokens, cache, {
-    flexAfter: alignContent === 'end' ? 0 : 1,
-    flexBefore: alignContent === 'start' ? 0 : 1,
-    minHeight: vertical ? globalTokens.size240 : 0,
-    ...colorsFromPropsAndTheme({ appearance, color }, theme),
+    flexAfter: props.alignContent === 'end' ? 0 : 1,
+    flexBefore: props.alignContent === 'start' ? 0 : 1,
+    minHeight: props.vertical ? globalTokens.size240 : 0,
+    ...colorsFromAppearance(props.appearance, tokens, theme),
   });
 
   // get slot props from these tokens
-  const { rootProps, beforeLineProps, afterLineProps, wrapperProps, textProps, iconProps } = useDividerSlotProps(
-    { icon, insetSize, vertical },
-    tokens,
-  );
+  const { rootProps, beforeLineProps, afterLineProps, wrapperProps, textProps, iconProps } = useDividerSlotProps(props, tokens);
 
   // build slots
   const RootSlot = useSlot<ViewProps>(View, rootProps);
@@ -45,7 +49,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   const IconSlot = useSlot<IconProps>(Icon, iconProps);
 
   return (final: DividerProps, ...children: React.ReactNode[]) => {
-    props = { alignContent, appearance, color, icon, insetSize, vertical, ...final };
+    final = { ...props, ...final };
     // change root style if there is a text child
     let textContent: string;
     React.Children.forEach(children, (child) => {
@@ -59,7 +63,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
     // This style must be set here because we need to know if text content is passed in the final render to set the height correctly
     const mergedProps = {
       ...rootProps,
-      style: mergeStyles(rootProps, props.vertical && textContent ? { minHeight: 84 } : {}),
+      style: mergeStyles(rootProps.style, props.vertical && textContent ? { minHeight: 84 } : {}),
     };
 
     return (

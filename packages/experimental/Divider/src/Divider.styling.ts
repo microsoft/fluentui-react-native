@@ -3,7 +3,7 @@ import type { ViewProps, ColorValue } from 'react-native';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { DividerTokens, DividerProps } from './Divider.types';
+import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
 
 const getIconProps = (contentColor: ColorValue, icon: IconProps): IconProps => {
   if (icon.fontSource) {
@@ -127,36 +127,34 @@ export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens) 
 };
 
 /**
- * Helper function to set color tokens on divider. Fills tokens either (1) by using a passed color prop or (2) using the appearance
- * prop and grabbing the correct color tokens, which change based on set appearance, from the current theme.
+ * Helper function to set color tokens on divider. If no color tokens are passed in, then the appearance prop will be used to provide colors
+ * for the line and content
  */
-export const colorsFromPropsAndTheme = (props: DividerProps, theme: Theme): Pick<DividerTokens, 'contentColor' | 'lineColor'> => {
-  if (props.color) {
-    return {
-      contentColor: props.color,
-      lineColor: props.color,
-    };
-  }
-  switch (props.appearance) {
+export const colorsFromAppearance = (
+  appearance: DividerAppearance,
+  tokens: DividerTokens,
+  theme: Theme,
+): Pick<DividerTokens, 'contentColor' | 'lineColor'> => {
+  switch (appearance) {
     case 'default':
       return {
-        contentColor: theme.colors.neutralForeground2,
-        lineColor: theme.colors.neutralStroke2,
+        contentColor: tokens.contentColor ?? theme.colors.neutralForeground2,
+        lineColor: tokens.lineColor ?? theme.colors.neutralStroke2,
       };
     case 'subtle':
       return {
-        contentColor: theme.colors.neutralForeground3,
-        lineColor: theme.colors.neutralStroke3,
+        contentColor: tokens.contentColor ?? theme.colors.neutralForeground3,
+        lineColor: tokens.lineColor ?? theme.colors.neutralStroke3,
       };
     case 'brand':
       return {
-        contentColor: theme.colors.brandForeground1,
-        lineColor: theme.colors.brandStroke1,
+        contentColor: tokens.contentColor ?? theme.colors.brandForeground1,
+        lineColor: tokens.lineColor ?? theme.colors.brandStroke1,
       };
     case 'strong': {
       return {
-        contentColor: theme.colors.neutralForeground1,
-        lineColor: theme.colors.neutralStroke1,
+        contentColor: tokens.contentColor ?? theme.colors.neutralForeground1,
+        lineColor: tokens.lineColor ?? theme.colors.neutralStroke1,
       };
     }
   }
