@@ -33,13 +33,6 @@ async function QueryWithChaining(identifier) {
   return queryResult;
 }
 
-/* The values in this enum map to the UI components we want to test in our app. We use this to
-make the communication from our spec document to our page object easier. Please read below to
-see why we have Primary/Secondary components. */
-type ComponentSelector =
-  | 'Primary' // this._primaryComponent
-  | 'Secondary'; // this._secondaryComponent
-
 type MobilePlatform = 'android' | 'ios';
 
 type DesktopPlatform = 'win32' | 'windows' | 'macos';
@@ -172,17 +165,6 @@ export abstract class BasePage {
     await browser.waitUntil(async () => await this.isButtonInView(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
-      interval: 1500,
-    });
-  }
-
-  /* @deprecated, only use `scrollToTestElement()` instead */
-  async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    console.warn('`waitForPrimaryElementDisplayed` is deprecated. Only use `scrollToTestElement` in your spec to improve performance.');
-    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg:
-        'The UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
       interval: 1500,
     });
   }
@@ -373,39 +355,4 @@ export abstract class BasePage {
 
   // Default timeout to wait until page is displayed (10s)
   waitForUiEvent = 25000;
-
-  /************************/
-  /** Deprecated Methods **/
-  /************************/
-
-  /** @deprecated Use the `click` method defined in BasePage. */
-  async clickComponent(): Promise<void> {
-    console.warn('`clickComponent` is deprecated. Please use the `click` method in BasePage instead.');
-    await (await this._primaryComponent).click();
-  }
-
-  /** @deprecated, Use `compareAttribute` for testing attribute values in E2E tests or `getElementAttribute` to retrieve an attribute from an element. */
-  async getAccessibilityRole(): Promise<string> {
-    console.warn(
-      '`getAccessibilityRole` is deprecated. Please use `compareAttribute` for value comparison in a spec or `getElementAttribute` to retrieve the accessibilityRole for the primary component.',
-    );
-    return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
-  }
-
-  /**
-   * @deprecated Use `compareAttribute` for testing attribute values in E2E tests or `getElementAttribute` to retrieve an attribute from an element.
-   * Gets the accessibility label of an UI element given the selector
-   */
-  async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
-    console.warn(
-      '`getAccessibilityLabel` is deprecated. Please use `compareAttribute` for value comparison in a spec or `getElementAttribute` to retrieve the accessibilityLabel for the given element.',
-    );
-    switch (componentSelector) {
-      case 'Primary':
-        return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityLabel);
-
-      case 'Secondary':
-        return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityLabel);
-    }
-  }
 }
