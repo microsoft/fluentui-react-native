@@ -212,7 +212,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -261,7 +261,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
@@ -329,7 +329,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
@@ -488,7 +488,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -537,7 +537,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
@@ -696,7 +696,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -1104,7 +1104,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -1512,7 +1512,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -1920,7 +1920,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -2316,7 +2316,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -2365,7 +2365,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
@@ -2451,7 +2451,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
