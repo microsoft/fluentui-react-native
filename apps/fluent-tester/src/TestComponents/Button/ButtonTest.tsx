@@ -50,10 +50,6 @@ const buttonSections: TestSection[] = [
       component: ButtonHOCTest,
     },
   }),
-  {
-    name: 'E2E Button Testing',
-    component: E2EButtonTest,
-  },
   ...Platform.select({
     android: [], // Following sections are not supported from Fluent Android
     default: [
@@ -71,6 +67,10 @@ const buttonSections: TestSection[] = [
       },
     ],
   }),
+  {
+    name: 'E2E Button Testing',
+    component: E2EButtonTest,
+  },
 ];
 
 export const ButtonTest: React.FunctionComponent = () => {
