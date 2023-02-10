@@ -1,1 +1,1 @@
-export { ActivityIndicator } from './Spinner';
+export { Spinner } from './Spinner';

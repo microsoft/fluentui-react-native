@@ -40,6 +40,7 @@ import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
 import * as Constants from '../../E2E/src/index.consts';
+import { SpinnerTest } from './TestComponents/Spinner';
 
 export const tests: TestDescription[] = [
   {
@@ -240,6 +241,12 @@ export const tests: TestDescription[] = [
     component: SpacingTokensTest,
     testPageButton: Constants.HOMEPAGE_SPACING_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Spinner V1',
+    component: SpinnerTest,
+    testPageButton: Constants.HOMEPAGE_SPINNER_BUTTON,
+    platforms: ['android'],
   },
   {
     name: 'Stroke Width Tokens',
