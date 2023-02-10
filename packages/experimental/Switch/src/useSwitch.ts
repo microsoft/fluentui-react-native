@@ -34,15 +34,12 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
   } = props;
 
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChange);
+  const thumbTranslateValue = animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2);
   //Setting the initial position of the knob on track when page loads.
   React.useEffect(() => {
     if (isMobile) {
       Animated.timing(animation, {
-        toValue: checkedState
-          ? isRTL
-            ? -(animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2))
-            : animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2)
-          : 0,
+        toValue: checkedState ? (isRTL ? -thumbTranslateValue : thumbTranslateValue) : 0,
         duration: isInit ? 0 : 300,
         useNativeDriver: false,
       }).start();
