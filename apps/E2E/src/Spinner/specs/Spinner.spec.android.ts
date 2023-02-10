@@ -1,6 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import SpinnerPageObject from '../pages/SpinnerPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Spinner Testing Initialization', function () {
