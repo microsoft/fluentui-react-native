@@ -67,6 +67,8 @@ export interface MenuItemState extends PressableState {
    * If the menu item is a trigger for a submenu
    */
   hasSubmenu?: boolean;
+
+  hasTooltips?: boolean;
 }
 
 export interface MenuItemInfo {

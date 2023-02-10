@@ -38,6 +38,7 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
       (tokens: MenuItemTokens, theme: Theme) => {
         return {
           color: tokens.color,
+          wrap: false,
           style: {
             flexGrow: 1,
             ...fontStyles.from(tokens, theme),
