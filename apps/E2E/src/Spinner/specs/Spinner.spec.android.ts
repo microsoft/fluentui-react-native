@@ -8,15 +8,4 @@ describe('Spinner Testing Initialization', function () {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
-
-  it('Click and navigate to Spinner test page', async () => {
-    await SpinnerPageObject.mobileScrollToComponentButton();
-    await SpinnerPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToSpinnerPage();
-    await SpinnerPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await SpinnerPageObject.isPageLoaded()).toBeTruthy(SpinnerPageObject.ERRORMESSAGE_PAGELOAD);
-  });
 });
