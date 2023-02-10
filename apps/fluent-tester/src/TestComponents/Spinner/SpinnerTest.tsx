@@ -7,6 +7,7 @@ import { Test } from '../Test';
 import { SPINNER_TESTPAGE } from '../../../../E2E/src/Spinner/consts';
 import { View, Switch } from 'react-native';
 import { Spinner } from '@fluentui-react-native/spinner';
+import { E2ETestingSpinner } from './SpinnerE2ETest';
 
 const BasicSpinnerTest: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
@@ -74,13 +75,15 @@ const spinnerSections: TestSection[] = [
   },
   {
     name: 'Spinner Size Test',
-    testID: SPINNER_TESTPAGE,
     component: SpinnerSizeTest,
   },
   {
     name: 'Customized Spinner Test',
-    testID: SPINNER_TESTPAGE,
     component: () => <CustomisedSpinner />,
+  },
+  {
+    name: 'Spinner for E2E Testing',
+    component: () => <E2ETestingSpinner />,
   },
 ];
 

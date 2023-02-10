@@ -28,7 +28,6 @@ export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, 
         trackColor: tokens.trackColor,
         size: tokens.size,
         lineThickness: tokens.size != 'medium' ? tokens.size : tokens.size,
-        accessibilityLabel: 'progressbar',
         accessibilityRole: 'progressbar',
         accessible: true,
         style: {
