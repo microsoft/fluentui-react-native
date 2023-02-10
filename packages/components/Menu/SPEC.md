@@ -144,6 +144,10 @@ If your menuItems’ content require a larger minWidth, you’d have to set a la
 </Menu>
 ```
 
+### Automatic tooltip generation for MenuItems
+
+You can set the `hasTooltips` prop on the `Menu` to have it automatically generate tooltips for each MenuItem automatically based on its child text. This can be used to ensure that text is fully accessible for programmatically generated items.
+
 ## API
 
 ### Menu
@@ -218,6 +222,14 @@ export type MenuListProps = {
    * States that menu items can contain selectable items and reserves space for item alignment
    */
   hasCheckmarks?: boolean;
+
+  /**
+   * States that menu items all have tooltips with its text by default.
+   *
+   * This option is useful for programmatically generated items to provide
+   * text for options that end up having tuncated text.
+   */
+  hasTooltips?: boolean;
 
   /**
    * Callback when checked items change
