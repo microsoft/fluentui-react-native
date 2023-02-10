@@ -6,10 +6,12 @@ import { LINK_A11Y_ROLE, Attribute, Keys } from '../../common/consts';
 describe('LinkV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await LinkV1PageObject.waitForInitialPageToDisplay();
+    expect(await LinkV1PageObject.isInitialPageDisplayed()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to LinkV1 test page', async () => {
     await LinkV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await LinkV1PageObject.isPageLoaded()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

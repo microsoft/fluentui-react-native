@@ -5,10 +5,12 @@ import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
 describe('Tabs Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await TabsLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await TabsLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Tabs Legacy test page', async () => {
     await TabsLegacyPageObject.navigateToPageAndLoadTests(true);
+    expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
     expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

@@ -6,11 +6,13 @@ import { AVATAR_ACCESSIBILITY_LABEL, AVATAR_ACCESSIBILITY_LABEL_BY_NAME, AVATAR_
 describe('Avatar Testing Initialization', function () {
   it('Wait for app load', async () => {
     await AvatarPageObject.waitForInitialPageToDisplay();
+    expect(await AvatarPageObject.isInitialPageDisplayed()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Avatar test page', async () => {
     /* Click on component button to navigate to test page */
     await AvatarPageObject.navigateToPageAndLoadTests(true);
+    expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });

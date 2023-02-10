@@ -5,10 +5,12 @@ import { PAGE_TIMEOUT, Keys } from '../../common/consts';
 describe('ContextualMenu Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ContextualMenuPageObject.waitForInitialPageToDisplay();
+    expect(await ContextualMenuPageObject.isInitialPageDisplayed()).toBeTruthy(ContextualMenuPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to ContextualMenu test page', async () => {
     await ContextualMenuPageObject.navigateToPageAndLoadTests(true);
+    expect(await ContextualMenuPageObject.isPageLoaded()).toBeTruthy(ContextualMenuPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await ContextualMenuPageObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

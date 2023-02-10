@@ -4,10 +4,12 @@ import ShadowPageObject from '../pages/ShadowPageObject';
 describe('Shadow Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ShadowPageObject.waitForInitialPageToDisplay();
+    expect(await ShadowPageObject.isInitialPageDisplayed()).toBeTruthy(ShadowPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Shadow test page', async () => {
     await ShadowPageObject.navigateToPageAndLoadTests();
+    expect(await ShadowPageObject.isPageLoaded()).toBeTruthy(ShadowPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await ShadowPageObject.didAssertPopup()).toBeFalsy(ShadowPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

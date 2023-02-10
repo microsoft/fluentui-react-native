@@ -4,9 +4,11 @@ import AvatarPageObject from '../pages/AvatarPageObject';
 describe('Avatar Testing Initialization', function () {
   it('Wait for app load', async () => {
     await AvatarPageObject.waitForInitialPageToDisplay();
+    expect(await AvatarPageObject.isInitialPageDisplayed()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Avatar test page', async () => {
     await AvatarPageObject.navigateToPageAndLoadTests();
+    expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

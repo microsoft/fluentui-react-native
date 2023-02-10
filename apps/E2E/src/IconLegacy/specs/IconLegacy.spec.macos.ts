@@ -4,9 +4,11 @@ import IconLegacyPageObject from '../pages/IconLegacyPageObject';
 describe('Icon Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await IconLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await IconLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(IconLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Icon Legacy test page', async () => {
     await IconLegacyPageObject.navigateToPageAndLoadTests();
+    expect(await IconLegacyPageObject.isPageLoaded()).toBeTruthy(IconLegacyPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

@@ -11,10 +11,12 @@ import RadioGroupV1PageObject from '../pages/RadioGroupV1PageObject';
 describe('RadioGroupV1/RadioV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await RadioGroupV1PageObject.waitForInitialPageToDisplay();
+    expect(await RadioGroupV1PageObject.isInitialPageDisplayed()).toBeTruthy(RadioGroupV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to RadioGroupV1 test page', async () => {
     await RadioGroupV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await RadioGroupV1PageObject.isPageLoaded()).toBeTruthy(RadioGroupV1PageObject.ERRORMESSAGE_PAGELOAD);
 
     expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

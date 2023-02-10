@@ -4,9 +4,11 @@ import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
 describe('Tabs Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await TabsLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await TabsLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Tabs Legacy test page', async () => {
     await TabsLegacyPageObject.navigateToPageAndLoadTests();
+    expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

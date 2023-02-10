@@ -6,11 +6,13 @@ import MenuPageObject from '../pages/MenuPageObject';
 describe('Menu Testing Initialization', function () {
   it('Wait for app load', async () => {
     await MenuPageObject.waitForInitialPageToDisplay();
+    expect(await MenuPageObject.isInitialPageDisplayed()).toBeTruthy(MenuPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Menu test page', async () => {
     /* Click on component button to navigate to test page */
     await MenuPageObject.navigateToPageAndLoadTests(true);
+    expect(await MenuPageObject.isPageLoaded()).toBeTruthy(MenuPageObject.ERRORMESSAGE_PAGELOAD);
 
     expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

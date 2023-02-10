@@ -4,10 +4,12 @@ import ThemePageObject from '../pages/ThemePageObject.win';
 describe('Theme Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ThemePageObject.waitForInitialPageToDisplay();
+    expect(await ThemePageObject.isInitialPageDisplayed()).toBeTruthy(ThemePageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Theme test page', async () => {
     await ThemePageObject.navigateToPageAndLoadTests();
+    expect(await ThemePageObject.isPageLoaded()).toBeTruthy(ThemePageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

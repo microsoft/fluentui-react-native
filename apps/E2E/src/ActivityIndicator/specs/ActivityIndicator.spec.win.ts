@@ -4,10 +4,12 @@ import ActivityIndicatorPageObject from '../pages/ActivityIndicatorPageObject';
 describe('Activity Indicator Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ActivityIndicatorPageObject.waitForInitialPageToDisplay();
+    expect(await ActivityIndicatorPageObject.isInitialPageDisplayed()).toBeTruthy(ActivityIndicatorPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Activity Indicator test page', async () => {
     await ActivityIndicatorPageObject.navigateToPageAndLoadTests();
+    expect(await ActivityIndicatorPageObject.isPageLoaded()).toBeTruthy(ActivityIndicatorPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await ActivityIndicatorPageObject.didAssertPopup()).toBeFalsy(ActivityIndicatorPageObject.ERRORMESSAGE_ASSERT);
   });

@@ -4,9 +4,11 @@ import TextV1PageObject from '../pages/TextV1PageObject.win';
 describe('TextV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await TextV1PageObject.waitForInitialPageToDisplay();
+    expect(await TextV1PageObject.isInitialPageDisplayed()).toBeTruthy(TextV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to TextV1 test page', async () => {
     await TextV1PageObject.navigateToPageAndLoadTests();
+    expect(await TextV1PageObject.isPageLoaded()).toBeTruthy(TextV1PageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

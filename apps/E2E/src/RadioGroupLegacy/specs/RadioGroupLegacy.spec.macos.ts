@@ -4,9 +4,11 @@ import RadioGroupLegacyPageObject from '../pages/RadioGroupLegacyPageObject';
 describe('RadioGroup Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await RadioGroupLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await RadioGroupLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(RadioGroupLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {
     await RadioGroupLegacyPageObject.navigateToPageAndLoadTests();
+    expect(await RadioGroupLegacyPageObject.isPageLoaded()).toBeTruthy(RadioGroupLegacyPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

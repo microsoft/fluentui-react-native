@@ -5,11 +5,13 @@ import FocusZonePageObject from '../pages/FocusZonePageObject';
 describe('FocusZone Testing Initialization', function () {
   it('Wait for app load', async () => {
     await FocusZonePageObject.waitForInitialPageToDisplay();
+    expect(await FocusZonePageObject.isInitialPageDisplayed()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to FocusTrapZone test page', async () => {
     /* Click on component button to navigate to test page */
     await FocusZonePageObject.navigateToPageAndLoadTests(true);
+    expect(await FocusZonePageObject.isPageLoaded()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

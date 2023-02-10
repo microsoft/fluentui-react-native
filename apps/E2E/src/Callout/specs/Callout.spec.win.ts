@@ -6,11 +6,13 @@ import { Attribute, CALLOUT_A11Y_ROLE } from '../../common/consts';
 describe('Callout Testing Initialization', function () {
   it('Wait for app load', async () => {
     await CalloutPageObject.waitForInitialPageToDisplay();
+    expect(await CalloutPageObject.isInitialPageDisplayed()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Callout test page', async () => {
     /* Click on component button to navigate to test page */
     await CalloutPageObject.navigateToPageAndLoadTests(true);
+    expect(await CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

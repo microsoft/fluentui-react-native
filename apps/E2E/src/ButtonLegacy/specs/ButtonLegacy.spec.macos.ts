@@ -4,9 +4,11 @@ import ButtonLegacyPageObject from '../pages/ButtonLegacyPageObject';
 describe('Button Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ButtonLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await ButtonLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Button Legacy test page', async () => {
     await ButtonLegacyPageObject.navigateToPageAndLoadTests();
+    expect(await ButtonLegacyPageObject.isPageLoaded()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

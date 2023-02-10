@@ -6,10 +6,12 @@ import { MENUBUTTONV1_ACCESSIBILITY_LABEL, MENUBUTTONV1_TEST_COMPONENT_LABEL } f
 describe('MenuButtonV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await MenuButtonV1PageObject.waitForInitialPageToDisplay();
+    expect(await MenuButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to MenuButtonV1 test page', async () => {
     await MenuButtonV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await MenuButtonV1PageObject.isPageLoaded()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

@@ -6,10 +6,12 @@ import { MENU_BUTTON_ACCESSIBILITY_LABEL, MENU_BUTTON_TEST_COMPONENT_LABEL } fro
 describe('MenuButton Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await MenuButtonLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await MenuButtonLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to MenuButton test page', async () => {
     await MenuButtonLegacyPageObject.navigateToPageAndLoadTests(true);
+    expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

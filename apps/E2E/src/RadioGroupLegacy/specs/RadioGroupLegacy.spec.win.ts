@@ -11,10 +11,12 @@ import RadioGroupPageObject from '../pages/RadioGroupLegacyPageObject';
 describe('RadioGroup/RadioButton Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await RadioGroupPageObject.waitForInitialPageToDisplay();
+    expect(await RadioGroupPageObject.isInitialPageDisplayed()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {
     await RadioGroupPageObject.navigateToPageAndLoadTests(true);
+    expect(await RadioGroupPageObject.isPageLoaded()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

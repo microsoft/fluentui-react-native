@@ -6,10 +6,12 @@ import TextLegacyPageObject from '../pages/TextLegacyPageObject';
 describe('Text Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await TextLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await TextLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(TextLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Text Legacy test page', async () => {
     await TextLegacyPageObject.navigateToPageAndLoadTests(true);
+    expect(await TextLegacyPageObject.isPageLoaded()).toBeTruthy(TextLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
     expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

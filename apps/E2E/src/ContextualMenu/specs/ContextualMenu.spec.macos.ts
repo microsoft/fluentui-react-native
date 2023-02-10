@@ -4,9 +4,11 @@ import ContextualMenuPageObject from '../pages/ContextualMenuPageObject.win';
 describe('ContextualMenu Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ContextualMenuPageObject.waitForInitialPageToDisplay();
+    expect(await ContextualMenuPageObject.isInitialPageDisplayed()).toBeTruthy(ContextualMenuPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to ContextualMenu test page', async () => {
     await ContextualMenuPageObject.navigateToPageAndLoadTests();
+    expect(await ContextualMenuPageObject.isPageLoaded()).toBeTruthy(ContextualMenuPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

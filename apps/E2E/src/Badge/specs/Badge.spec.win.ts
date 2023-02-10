@@ -4,10 +4,12 @@ import BasicBadgePageObject from '../pages/BasicBadgePageObject';
 describe('Badge Testing Initialization', function () {
   it('Wait for app load', async () => {
     await BasicBadgePageObject.waitForInitialPageToDisplay();
+    expect(await BasicBadgePageObject.isInitialPageDisplayed()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Badge test page', async () => {
     await BasicBadgePageObject.navigateToPageAndLoadTests();
+    expect(await BasicBadgePageObject.isPageLoaded()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
   });

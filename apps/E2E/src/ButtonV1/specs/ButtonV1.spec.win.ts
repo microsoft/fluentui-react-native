@@ -6,11 +6,13 @@ import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../B
 describe('ButtonV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ButtonV1PageObject.waitForInitialPageToDisplay();
+    expect(await ButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to ButtonV1 test page', async () => {
     /* Click on component button to navigate to test page */
     await ButtonV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await ButtonV1PageObject.isPageLoaded()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

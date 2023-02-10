@@ -6,11 +6,13 @@ import { BUTTON_ACCESSIBILITY_LABEL_DEPRECATED, BUTTON_TEST_COMPONENT_LABEL_DEPR
 describe('Button Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ButtonLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await ButtonLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Button Legacy test page', async () => {
     /* Click on component button to navigate to test page */
     await ButtonLegacyPageObject.navigateToPageAndLoadTests(true);
+    expect(await ButtonLegacyPageObject.isPageLoaded()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });

@@ -6,10 +6,12 @@ import { BUTTON_TEST_COMPONENT } from '../../ButtonLegacy/consts';
 describe('Button Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ButtonV1PageObject.waitForInitialPageToDisplay();
+    expect(await ButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Button test page', async () => {
     await ButtonV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await ButtonV1PageObject.isPageLoaded()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });

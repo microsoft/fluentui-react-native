@@ -4,10 +4,12 @@ import PressablePageObject from '../pages/PressablePageObject';
 describe('Pressable Testing Initialization', function () {
   it('Wait for app load', async () => {
     await PressablePageObject.waitForInitialPageToDisplay();
+    expect(await PressablePageObject.isInitialPageDisplayed()).toBeTruthy(PressablePageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Pressable test page', async () => {
     await PressablePageObject.navigateToPageAndLoadTests();
+    expect(await PressablePageObject.isPageLoaded()).toBeTruthy(PressablePageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await PressablePageObject.didAssertPopup()).toBeFalsy(PressablePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

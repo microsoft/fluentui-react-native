@@ -4,9 +4,11 @@ import PersonaPageObject from '../pages/PersonaPageObject';
 describe('Persona Testing Initialization', function () {
   it('Wait for app load', async () => {
     await PersonaPageObject.waitForInitialPageToDisplay();
+    expect(await PersonaPageObject.isInitialPageDisplayed()).toBeTruthy(PersonaPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Persona test page', async () => {
     await PersonaPageObject.navigateToPageAndLoadTests();
+    expect(await PersonaPageObject.isPageLoaded()).toBeTruthy(PersonaPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

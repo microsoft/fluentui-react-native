@@ -5,10 +5,12 @@ import { Attribute, Keys, TAB_A11Y_ROLE, TABITEM_A11Y_ROLE } from '../../common/
 describe('TabsV1 Testing Initialization', function () {
   it('Wait for app load', async () => {
     await TabsV1PageObject.waitForInitialPageToDisplay();
+    expect(await TabsV1PageObject.isInitialPageDisplayed()).toBeTruthy(TabsV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to TabsV1 test page', async () => {
     await TabsV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await TabsV1PageObject.isPageLoaded()).toBeTruthy(TabsV1PageObject.ERRORMESSAGE_PAGELOAD);
 
     expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

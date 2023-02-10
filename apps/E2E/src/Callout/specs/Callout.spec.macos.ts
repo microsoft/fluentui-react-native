@@ -4,9 +4,11 @@ import CalloutPageObject from '../pages/CalloutPageObject.win';
 describe('Callout Testing Initialization', function () {
   it('Wait for app load', async () => {
     await CalloutPageObject.waitForInitialPageToDisplay();
+    expect(await CalloutPageObject.isInitialPageDisplayed()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Callout test page', async () => {
     await CalloutPageObject.navigateToPageAndLoadTests();
+    expect(await CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

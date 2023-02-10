@@ -4,9 +4,11 @@ import ShimmerPageObject from '../pages/ShimmerPageObject';
 describe('Shimmer Testing Initialization', function () {
   it('Wait for app load', async () => {
     await ShimmerPageObject.waitForInitialPageToDisplay();
+    expect(await ShimmerPageObject.isInitialPageDisplayed()).toBeTruthy(ShimmerPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Shimmer test page', async () => {
     await ShimmerPageObject.navigateToPageAndLoadTests();
+    expect(await ShimmerPageObject.isPageLoaded()).toBeTruthy(ShimmerPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

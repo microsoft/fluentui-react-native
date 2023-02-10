@@ -6,10 +6,12 @@ import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../cons
 describe('Switch Testing Initialization', function () {
   it('Wait for app load', async () => {
     await SwitchPageObject.waitForInitialPageToDisplay();
+    expect(await SwitchPageObject.isInitialPageDisplayed()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Switch test page', async () => {
     await SwitchPageObject.navigateToPageAndLoadTests(true);
+    expect(await SwitchPageObject.isPageLoaded()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

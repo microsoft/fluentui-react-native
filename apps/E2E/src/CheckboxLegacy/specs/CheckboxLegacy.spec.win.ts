@@ -5,10 +5,12 @@ import { CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await CheckboxLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await CheckboxLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
     await CheckboxLegacyPageObject.navigateToPageAndLoadTests(true);
+    expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

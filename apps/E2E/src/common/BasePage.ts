@@ -238,7 +238,11 @@ export abstract class BasePage {
 
   /** Waits for the tester app to load by checking if the startup page loads. If the app doesn't load before the timeout, it causes the test to fail. */
   async waitForInitialPageToDisplay(): Promise<void> {
-    await this.waitForCondition(async () => await (await this._initialPage).isDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
+    await this.waitForCondition(async () => await this.isInitialPageDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
+  }
+
+  async isInitialPageDisplayed(): Promise<boolean> {
+    return await (await this._initialPage).isDisplayed();
   }
 
   /** @deprecated, only use `scrollToTestElement()` instead */

@@ -4,10 +4,12 @@ import MenuButtonLegacyPageObject from '../pages/MenuButtonLegacyPageObject.win'
 describe('MenuButton Legacy Testing Initialization', function () {
   it('Wait for app load', async () => {
     await MenuButtonLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await MenuButtonLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to MenuButton Legacy test page', async () => {
     await MenuButtonLegacyPageObject.navigateToPageAndLoadTests();
+    expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
   });
