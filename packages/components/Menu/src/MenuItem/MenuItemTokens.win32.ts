@@ -13,7 +13,7 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
   minHeight: 24,
-  minWidth: 160,
+  minWidth: 128,
   maxWidth: 300,
   padding: globalTokens.size40,
   paddingHorizontal: globalTokens.size80,

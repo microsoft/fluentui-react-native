@@ -37,6 +37,10 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
    * @param checked Array of all currently checked values
    */
   onCheckedChange?: (e: InteractionEvent, checked: string[]) => void;
+  /**
+   * Defines a minumum width for the Menu.
+   */
+  minWidth?: number | string;
 }
 
 export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onCheckedChange'> {
@@ -49,6 +53,7 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   addRadioItem: (name: string) => void;
   removeRadioItem: (name: string) => void;
   hasMaxHeight?: boolean;
+  hasMaxWidth?: boolean;
 }
 
 export interface MenuListSlotProps {

@@ -1,8 +1,52 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 08 Feb 2023 01:38:39 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Feb 2023 22:42:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.131.0
+
+Thu, 09 Feb 2023 22:42:47 GMT
+
+### Minor changes
+
+- support minwidth for menu (email not defined)
+- Bump @fluentui-react-native/dropdown to v0.7.27
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.29
+- Bump @fluentui-react-native/menu to v1.4.0
+- Bump @fluentui/react-native to v0.35.19
+
+## 0.130.0
+
+Thu, 09 Feb 2023 19:43:53 GMT
+
+### Minor changes
+
+- Moving Button E2E tests to the bottom of the page (safreibe@microsoft.com)
+
+## 0.129.15
+
+Thu, 09 Feb 2023 17:10:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.3.3
+
+## 0.129.14
+
+Thu, 09 Feb 2023 02:18:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.3.2
+
+## 0.129.13
+
+Wed, 08 Feb 2023 19:29:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.3.1
 
 ## 0.129.12
 

@@ -11,13 +11,14 @@ import { useMenuContext } from '../context';
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
-    const { directionalHint, gapSpace, maxHeight, maxWidth, minPadding, borderWidth, borderColor, backgroundColor } = props;
+    const { directionalHint, gapSpace, maxHeight, maxWidth, minWidth, minPadding, borderWidth, borderColor, backgroundColor } = props;
     const state = useMenuPopover(props);
     const theme = useFluentTheme();
     const context = useMenuContext();
     let [tokens, cache] = useTokens(theme);
 
     context.hasMaxHeight = maxHeight != undefined;
+    context.minWidth = minWidth ?? context.minWidth;
 
     [tokens, cache] = patchTokens(tokens, cache, {
       directionalHint,

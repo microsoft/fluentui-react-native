@@ -33,7 +33,7 @@ const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap
 MenuStack.displayName = 'MenuStack';
 
 export const menuListLookup = (layer: string, state: MenuListState, userProps: MenuListProps): boolean => {
-  return state[layer] || userProps[layer] || layer === 'hasMaxHeight' || layer === userProps['minWidth'];
+  return state[layer] || userProps[layer] || layer === 'hasMaxHeight';
 };
 export const MenuList = compose<MenuListType>({
   displayName: menuListName,
@@ -59,7 +59,10 @@ export const MenuList = compose<MenuListType>({
       const content =
         Platform.OS === 'macos' ? (
           <Slots.root>
-            <Slots.scrollView>
+            <Slots.scrollView
+              showsVerticalScrollIndicator={menuContext.hasMaxHeight}
+              showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
+            >
               <Slots.focusZone
                 componentRef={focusZoneRef}
                 focusZoneDirection={'vertical'}
@@ -74,11 +77,11 @@ export const MenuList = compose<MenuListType>({
             </Slots.scrollView>
           </Slots.root>
         ) : menuContext.hasMaxHeight ? (
-          <Slots.root>
+          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
             <Slots.scrollView>{children}</Slots.scrollView>
           </Slots.root>
         ) : (
-          <Slots.root>{children}</Slots.root>
+          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>{children}</Slots.root>
         );
 
       return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;
