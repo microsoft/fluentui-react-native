@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Thu, 09 Feb 2023 22:42:47 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Feb 2023 13:12:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.36.0
+
+Fri, 10 Feb 2023 13:12:36 GMT
+
+### Minor changes
+
+- move to spinner (rohanpd.work@gmail.com)
 
 ## 0.35.19
 

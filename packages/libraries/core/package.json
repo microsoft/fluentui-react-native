@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.35.19",
+  "version": "0.36.0",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",

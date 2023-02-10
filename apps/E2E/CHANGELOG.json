@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 10 Feb 2023 13:12:36 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.17.0",
+      "version": "1.17.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "65eb8220287075b3d00f6ae1ced24d9154b55168",
+            "comment": "refector and setup e2e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Feb 2023 19:43:53 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.16.0",
       "version": "1.16.0",

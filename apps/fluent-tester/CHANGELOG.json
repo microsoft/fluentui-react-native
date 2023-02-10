@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 10 Feb 2023 13:12:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.132.0",
+      "version": "0.132.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "65eb8220287075b3d00f6ae1ced24d9154b55168",
+            "comment": "complete spinner strcuture for mobile"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.36.0",
+            "commit": "65eb8220287075b3d00f6ae1ced24d9154b55168"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/spinner to v0.2.0",
+            "commit": "65eb8220287075b3d00f6ae1ced24d9154b55168"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 10 Feb 2023 12:22:56 GMT",
       "tag": "@fluentui-react-native/tester_v0.131.1",
       "version": "0.131.1",

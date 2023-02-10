@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Fri, 10 Feb 2023 13:12:36 GMT",
+      "tag": "@fluentui/react-native_v0.36.0",
+      "version": "0.36.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui/react-native",
+            "commit": "65eb8220287075b3d00f6ae1ced24d9154b55168",
+            "comment": "move to spinner"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Feb 2023 22:42:47 GMT",
       "tag": "@fluentui/react-native_v0.35.19",
       "version": "0.35.19",

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "move to spinner",
-  "packageName": "@fluentui/react-native",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
