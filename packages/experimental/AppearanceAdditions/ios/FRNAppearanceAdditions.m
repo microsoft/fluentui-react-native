@@ -104,6 +104,13 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 
 - (void)startObserving {
     _hasListeners = YES;
+    
+    UITraitCollection *rootViewTraitCollection = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] traitCollection];
+    
+    _horizontalSizeClass = RCTHorizontalSizeClassPreference(rootViewTraitCollection);
+    _userInterfaceLevel = RCTUserInterfaceLevelPreference(rootViewTraitCollection);
+    _accessibilityContrastOption = RCTAccessibilityContrastPreference(rootViewTraitCollection);
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
                                                  name:RCTUserInterfaceStyleDidChangeNotification
@@ -119,16 +126,10 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getInitialTraitCollection)
 {
-    UITraitCollection *rootViewTraitCollection = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] traitCollection];
-    
-    _horizontalSizeClass = RCTHorizontalSizeClassPreference(rootViewTraitCollection);
-    _userInterfaceLevel = RCTUserInterfaceLevelPreference(rootViewTraitCollection);
-    _accessibilityContrastOption = RCTAccessibilityContrastPreference(rootViewTraitCollection);
-    
     return @{
         @"horizontalSizeClass": _horizontalSizeClass,
-        @"userInterfaceLevel": RCTUserInterfaceLevelPreference(nil),
-        @"accessibilityContrastOption": RCTAccessibilityContrastPreference(nil),
+        @"userInterfaceLevel": _userInterfaceLevel,
+        @"accessibilityContrastOption": _accessibilityContrastOption,
     };
 }
 
