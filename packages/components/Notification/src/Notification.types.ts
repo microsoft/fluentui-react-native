@@ -13,14 +13,14 @@ export const NotificationVariants = ['primary', 'neutral', 'primaryBar', 'primar
 export type NotificationVariant = (typeof NotificationVariants)[number];
 
 export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens, NotificationButtonColorStates {
-  primary: NotificationTokens;
-  neutral: NotificationTokens;
-  primaryBar: NotificationTokens;
-  primaryOutlineBar: NotificationTokens;
-  neutralBar: NotificationTokens;
-  danger: NotificationTokens;
-  warning: NotificationTokens;
-  isBar: NotificationTokens;
+  primary?: NotificationTokens;
+  neutral?: NotificationTokens;
+  primaryBar?: NotificationTokens;
+  primaryOutlineBar?: NotificationTokens;
+  neutralBar?: NotificationTokens;
+  danger?: NotificationTokens;
+  warning?: NotificationTokens;
+  isBar?: NotificationTokens;
   shadowToken?: ShadowToken;
 }
 

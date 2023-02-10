@@ -26,6 +26,7 @@ export * from './Separator/consts';
 export * from './Shadow/consts';
 export * from './Shimmer/consts';
 export * from './Spacing/consts';
+export * from './Spinner/consts';
 export * from './StrokeWidthTokens/consts';
 export * from './Svg/consts';
 export * from './Switch/consts';

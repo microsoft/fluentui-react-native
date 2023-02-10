@@ -115,6 +115,35 @@ A `Menu` can be divided into sections using dividers. The `Menu` does not suppor
 
 All options in a `Menu` component can be disabled and should provide a visible indication for this purpose. Although disabled actions cannot be invoked, they are keyboard focusable for the purposes of accessibility.
 
+### Scrollable menu
+
+A `Menu` can be made scrollable to show a long list of menu items by setting the `maxHeight` prop on `MenuPopover`. If the user never sets `maxHeight` and content does overflow, overflowing menu items would simply be cut off. Omitting the `maxHeight` prop will be render a non-scrollable menu.
+
+When menu items end up being wider than the default width, scrollable menu will wrap content between words. For longer text without space, it will do an ellipsis with a tail.
+
+If your menuItems’ content require a larger minWidth, you’d have to set a larger minWidth on the `<MenuPopover>`. **Menu's width does not expand dynamically and you will have to specify a larger minwidth. (NOT SUPPORTED YET)**
+
+```ts
+<Menu>
+  <MenuTrigger>
+    <Button>Click to open Scrollable menu</Button>
+  </MenuTrigger>
+  <MenuPopover maxHeight={100}>
+    <MenuList>
+      <MenuItem>MenuItem 1</MenuItem>
+      <MenuItem>MenuItem 2</MenuItem>
+      <MenuItem>MenuItem 3</MenuItem>
+      <MenuItem>MenuItem 4</MenuItem>
+      <MenuItem>MenuItem 5</MenuItem>
+      <MenuItem>MenuItem 6</MenuItem>
+      <MenuItem>MenuItem 7</MenuItem>
+      <MenuItem>MenuItem 8</MenuItem>
+      <MenuItem>MenuItem 9</MenuItem>
+    </MenuList>
+  </MenuPopover>
+</Menu>
+```
+
 ## API
 
 ### Menu

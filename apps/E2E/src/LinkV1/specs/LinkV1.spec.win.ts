@@ -4,7 +4,7 @@ import { LINKV1_ACCESSIBILITY_LABEL } from '../consts';
 import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, Keys } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('LinkV1 Testing Initialization', function () {
+describe('LinkV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
@@ -46,7 +46,7 @@ describe('LinkV1 Accessibility Testing', () => {
   // on a Text component which we have testing for in our Text component spec
 });
 
-describe('Link Testing Functionality', function () {
+describe('Link Testing Functionality', () => {
   /* Scrolls and waits for the Link to be visible on the Test Page */
   beforeEach(async () => {
     await LinkV1PageObject.scrollToTestElement();

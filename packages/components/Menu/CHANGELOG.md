@@ -1,8 +1,67 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 02 Feb 2023 20:52:52 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Feb 2023 22:42:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.0
+
+Thu, 09 Feb 2023 22:42:47 GMT
+
+### Minor changes
+
+- support minwidth for menu (email not defined)
+- Bump @fluentui-react-native/callout to v0.23.0
+
+## 1.3.3
+
+Thu, 09 Feb 2023 17:10:01 GMT
+
+### Patches
+
+- Fix Menu keyboard navigation (email not defined)
+
+## 1.3.2
+
+Thu, 09 Feb 2023 02:18:16 GMT
+
+### Patches
+
+- Update submenuIndicatorPadding (amchiu@microsoft.com)
+
+## 1.3.1
+
+Wed, 08 Feb 2023 19:29:35 GMT
+
+### Patches
+
+- macOS: Only show scroll indicators if maxHeight/maxWidth is specified (email not defined)
+
+## 1.3.0
+
+Mon, 06 Feb 2023 05:53:20 GMT
+
+### Minor changes
+
+- support menu scroll in win32 (email not defined)
+- Bump @fluentui-react-native/callout to v0.22.0
+
+### Patches
+
+- macOS: Update submenu indicator color (amchiu@microsoft.com)
+
+## 1.2.28
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.59
+- Bump @fluentui-react-native/focus-zone to v0.11.29
+- Bump @fluentui-react-native/framework to v0.9.0
+- Bump @fluentui-react-native/interactive-hooks to v0.22.17
+- Bump @fluentui-react-native/text to v0.19.19
+- Bump @fluentui-react-native/button to v0.32.30
 
 ## 1.2.27
 

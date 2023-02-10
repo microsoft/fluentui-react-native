@@ -4,7 +4,7 @@ import { TEXTV1_ACCESSIBILITY_LABEL, TEXTV1_CONTENT } from '../consts';
 import TextV1PageObject from '../pages/TextV1PageObject.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('TextV1 Testing Initialization', function () {
+describe('TextV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
