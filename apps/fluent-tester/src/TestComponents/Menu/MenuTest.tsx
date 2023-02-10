@@ -144,7 +144,7 @@ const MenuSubMenu: React.FunctionComponent = () => {
         <MenuTrigger>
           <Button>Test</Button>
         </MenuTrigger>
-        <MenuPopover maxWidth={160}>
+        <MenuPopover>
           <MenuList>
             <MenuItem>A MenuItem</MenuItem>
             <Submenu />
