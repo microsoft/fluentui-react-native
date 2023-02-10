@@ -4,7 +4,7 @@ import { RADIOGROUPV1_TEST_COMPONENT } from '../consts';
 import RadioGroupV1Page from '../pages/RadioGroupV1PageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('RadioGroupV1/RadioV1 Testing Initialization', function () {
+describe('RadioGroupV1/RadioV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);

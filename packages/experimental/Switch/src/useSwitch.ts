@@ -2,13 +2,14 @@ import * as React from 'react';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import type { SwitchProps, SwitchInfo, AnimationConfig } from './Switch.types';
 import type { AccessibilityState, AccessibilityActionEvent } from 'react-native';
-import { Animated, Platform } from 'react-native';
+import { Animated, Platform, I18nManager } from 'react-native';
 import { memoize } from '@fluentui-react-native/framework';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
 const isMobile = Platform.OS === 'android' || Platform.OS == 'ios';
+const isRTL = I18nManager.isRTL;
 
 export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
@@ -33,12 +34,12 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
   } = props;
 
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChange);
-
+  const thumbTranslateValue = animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2);
   //Setting the initial position of the knob on track when page loads.
   React.useEffect(() => {
     if (isMobile) {
       Animated.timing(animation, {
-        toValue: checkedState ? animationConfig.trackWidth - (animationConfig.thumbWidth + animationConfig.thumbMargin * 2) : 0,
+        toValue: checkedState ? (isRTL ? -thumbTranslateValue : thumbTranslateValue) : 0,
         duration: isInit ? 0 : 300,
         useNativeDriver: false,
       }).start();

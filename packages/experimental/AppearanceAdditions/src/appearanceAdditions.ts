@@ -6,6 +6,7 @@ function getAppearanceAdditionsWorker() {
   return {
     horizontalSizeClass: 'regular',
     userInterfaceLevel: 'base',
+    accessibilityContrastOption: 'normal',
   } as AppearanceAdditions;
 }
 

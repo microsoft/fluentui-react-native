@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.35.18",
+  "version": "0.36.0",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",
@@ -29,14 +29,14 @@
   },
   "dependencies": {
     "@fluentui-react-native/button": "0.32.30",
-    "@fluentui-react-native/callout": "0.22.0",
+    "@fluentui-react-native/callout": "0.23.0",
     "@fluentui-react-native/checkbox": "0.19.18",
-    "@fluentui-react-native/contextual-menu": "0.21.26",
+    "@fluentui-react-native/contextual-menu": "0.21.27",
     "@fluentui-react-native/focus-trap-zone": "0.9.58",
     "@fluentui-react-native/focus-zone": "0.11.29",
     "@fluentui-react-native/interactive-hooks": "0.22.17",
     "@fluentui-react-native/link": "0.18.14",
-    "@fluentui-react-native/menu-button": "0.10.28",
+    "@fluentui-react-native/menu-button": "0.10.29",
     "@fluentui-react-native/persona": "0.13.41",
     "@fluentui-react-native/persona-coin": "0.12.22",
     "@fluentui-react-native/pressable": "0.9.56",

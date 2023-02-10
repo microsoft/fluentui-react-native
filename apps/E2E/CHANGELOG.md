@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Feb 2023 13:12:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.17.0
+
+Fri, 10 Feb 2023 13:12:36 GMT
+
+### Minor changes
+
+- refector and setup e2e (rohanpd.work@gmail.com)
+
+## 1.16.0
+
+Thu, 09 Feb 2023 19:43:53 GMT
+
+### Minor changes
+
+- Removing async() from describe blocks (safreibe@microsoft.com)
 
 ## 1.15.0
 

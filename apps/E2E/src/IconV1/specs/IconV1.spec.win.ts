@@ -4,7 +4,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, IMAGE_A11Y_ROLE } from '../.
 import { ICON_ACCESSIBILITY_LABEL } from '../../IconLegacy/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('IconV1 Testing Initialization', function () {
+describe('IconV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);

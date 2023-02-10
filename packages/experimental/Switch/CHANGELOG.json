@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Fri, 10 Feb 2023 12:22:56 GMT",
+      "tag": "@fluentui-react-native/switch_v0.8.24",
+      "version": "0.8.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "0b9955a8be1975499c2001c80d94c74d479705db",
+            "comment": "fix rtl switch issue"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Feb 2023 01:49:36 GMT",
       "tag": "@fluentui-react-native/switch_v0.8.23",
       "version": "0.8.23",

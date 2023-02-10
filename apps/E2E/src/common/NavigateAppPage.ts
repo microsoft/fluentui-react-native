@@ -26,6 +26,7 @@ import { HOMEPAGE_SEPARATOR_BUTTON } from '../Separator/consts';
 import { HOMEPAGE_SHADOW_BUTTON } from '../Shadow/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../Shimmer/consts';
 import { HOMEPAGE_SPACING_BUTTON } from '../Spacing/consts';
+import { HOMEPAGE_SPINNER_BUTTON } from '../Spinner/consts';
 import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../StrokeWidthTokens/consts';
 import { HOMEPAGE_SVG_BUTTON, HOMEPAGE_RNSVGIcons_BUTTON } from '../Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../Switch/consts';
@@ -145,6 +146,10 @@ class NavigateAppPage extends BasePage {
     await (await this.spacingTokensPage).click();
   }
 
+  async clickAndGoToSpinnerPage() {
+    await (await this.spinnerPage).click();
+  }
+
   async clickAndGoToStrokeWidthTokensPage() {
     await (await this.strokeWidthTokensPage).click();
   }
@@ -191,6 +196,10 @@ class NavigateAppPage extends BasePage {
 
   private get activityIndicatorPage() {
     return By(HOMEPAGE_ACTIVITY_INDICATOR_BUTTON);
+  }
+
+  private get spinnerPage() {
+    return By(HOMEPAGE_SPINNER_BUTTON);
   }
 
   private get avatarPage() {

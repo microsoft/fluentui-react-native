@@ -1,8 +1,73 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Mon, 06 Feb 2023 23:47:00 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Feb 2023 13:12:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.3
+
+Fri, 10 Feb 2023 13:12:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.132.0
+
+## 0.32.2
+
+Fri, 10 Feb 2023 12:22:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.131.1
+
+## 0.32.1
+
+Thu, 09 Feb 2023 22:42:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.131.0
+
+## 0.32.0
+
+Thu, 09 Feb 2023 19:43:53 GMT
+
+### Minor changes
+
+- Moving Button E2E tests to the bottom of the page (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.130.0
+
+## 0.31.84
+
+Thu, 09 Feb 2023 17:10:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.15
+
+## 0.31.83
+
+Thu, 09 Feb 2023 02:18:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.14
+
+## 0.31.82
+
+Wed, 08 Feb 2023 19:29:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.13
+
+## 0.31.81
+
+Wed, 08 Feb 2023 01:38:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.129.12
 
 ## 0.31.80
 

@@ -215,6 +215,7 @@ export { Separator, separatorName } from '@fluentui-react-native/separator';
 export type { SeparatorProps, SeparatorTokens, SeparatorType } from '@fluentui-react-native/separator';
 
 export { Text, textName, TextV1, textNameV1 } from '@fluentui-react-native/text';
+
 export type {
   TextProps,
   TextTokens,
