@@ -124,15 +124,6 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 
 #pragma mark - Event processing
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getInitialTraitCollection)
-{
-    return @{
-        @"horizontalSizeClass": _horizontalSizeClass,
-        @"userInterfaceLevel": _userInterfaceLevel,
-        @"accessibilityContrastOption": _accessibilityContrastOption,
-    };
-}
-
 - (void)appearanceChanged:(NSNotification *)notification {
     if (_hasListeners) {
         UITraitCollection *traitCollection = [[notification userInfo] valueForKey:RCTUserInterfaceStyleDidChangeNotificationTraitCollectionKey];
