@@ -3,7 +3,7 @@ import { CALLOUT_ACCESSIBILITY_LABEL } from '../consts';
 import { Attribute, CALLOUT_A11Y_ROLE } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Callout Testing Initialization', function () {
+describe('Callout Testing Initialization', () => {
   it('Wait for app load', async () => {
     await CalloutPageObject.waitForInitialPageToDisplay();
     expect(await CalloutPageObject.isInitialPageDisplayed()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_APPLOAD);

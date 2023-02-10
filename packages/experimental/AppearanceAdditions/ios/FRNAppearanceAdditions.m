@@ -8,6 +8,8 @@ NSString *const FRNAppearanceSizeClassCompact = @"compact";
 NSString *const FRNAppearanceSizeClassRegular = @"regular";
 NSString *const FRNUserInterfaceLevelBase = @"base";
 NSString *const FRNUserInterfaceLevelElevated = @"elevated";
+NSString *const FRNAccessibilityContrastNormal = @"normal";
+NSString *const FRNAccessibilityContrastHigh = @"high";
 
 NSString *RCTHorizontalSizeClassPreference(UITraitCollection *traitCollection) {
     static NSDictionary *sizeClasses;
@@ -42,17 +44,38 @@ NSString *RCTUserInterfaceLevelPreference(UITraitCollection *traitCollection) {
 
     traitCollection = traitCollection ?: [UITraitCollection currentTraitCollection];
 
-    NSString *sizeClass = userInterfaceLevels[@(traitCollection.userInterfaceLevel)];
-    if (sizeClass == nil) {
-        sizeClass = FRNUserInterfaceLevelBase;
+    NSString *userInterfaceLevel = userInterfaceLevels[@(traitCollection.userInterfaceLevel)];
+    if (userInterfaceLevel == nil) {
+        userInterfaceLevel = FRNUserInterfaceLevelBase;
     }
-    return sizeClass;
+    return userInterfaceLevel;
+}
+
+NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection) {
+    static NSDictionary *accessibilityContrastOptions;
+    static dispatch_once_t onceToken;
+
+    dispatch_once(&onceToken, ^{
+        accessibilityContrastOptions = @{
+        @(UIAccessibilityContrastNormal) : FRNAccessibilityContrastNormal,
+        @(UIAccessibilityContrastHigh) : FRNAccessibilityContrastHigh,
+      };
+    });
+
+    traitCollection = traitCollection ?: [UITraitCollection currentTraitCollection];
+
+    NSString *accessibilityContrastOption = accessibilityContrastOptions[@(traitCollection.accessibilityContrast)];
+    if (accessibilityContrastOption == nil) {
+        accessibilityContrastOption = FRNAccessibilityContrastNormal;
+    }
+    return accessibilityContrastOption;
 }
 
 @implementation FRNAppearanceAdditions {
     BOOL _hasListeners;
     NSString *_horizontalSizeClass;
     NSString *_userInterfaceLevel;
+    NSString *_accessibilityContrastOption;
 }
 
 + (BOOL)requiresMainQueueSetup {
@@ -69,6 +92,11 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel)
     return _userInterfaceLevel;
 }
 
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
+{
+    return _accessibilityContrastOption;
+}
+
 #pragma mark - RCTEventEmitter
 
 - (NSArray<NSString *> *)supportedEvents {
@@ -79,6 +107,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel)
     _hasListeners = YES;
     _horizontalSizeClass = RCTHorizontalSizeClassPreference(nil);
     _userInterfaceLevel = RCTUserInterfaceLevelPreference(nil);
+    _accessibilityContrastOption = RCTAccessibilityContrastPreference(nil);
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
                                                  name:RCTUserInterfaceStyleDidChangeNotification
@@ -101,14 +130,19 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel)
 
         NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference(traitCollection);
         NSString *userInterfaceLevel = RCTUserInterfaceLevelPreference(traitCollection);
+        NSString *accessibilityContrastOption = RCTAccessibilityContrastPreference(traitCollection);
+
         if (![horizontalSizeClass isEqualToString:_horizontalSizeClass] ||
-            ![userInterfaceLevel isEqualToString:_userInterfaceLevel]) {
+            ![userInterfaceLevel isEqualToString:_userInterfaceLevel] ||
+            ![accessibilityContrastOption isEqualToString:_accessibilityContrastOption]) {
             _horizontalSizeClass = horizontalSizeClass;
             _userInterfaceLevel = userInterfaceLevel;
+            _accessibilityContrastOption = accessibilityContrastOption;
             [self sendEventWithName:@"appearanceChanged"
                                body:@{
                                         @"horizontalSizeClass": _horizontalSizeClass,
-                                        @"userInterfaceLevel": _userInterfaceLevel
+                                        @"userInterfaceLevel": _userInterfaceLevel,
+                                        @"accessibilityContrastOption": _accessibilityContrastOption,
                                     }];
         }
     }

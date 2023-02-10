@@ -9,7 +9,7 @@ import { spinnerName } from './Spinner.types';
 import { RCTNativeAnimatedSpinner } from './consts.win32';
 
 /* TODO: Implement Spinner with following slots */
-export const ActivityIndicator = compose<SpinnerType>({
+export const Spinner = compose<SpinnerType>({
   displayName: spinnerName,
   slots: {
     root: View,

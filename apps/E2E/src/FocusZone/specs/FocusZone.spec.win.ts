@@ -2,7 +2,7 @@ import { Attribute, AttributeValue, Keys } from '../../common/consts';
 import FocusZonePageObject from '../pages/FocusZonePageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('FocusZone Testing Initialization', function () {
+describe('FocusZone Testing Initialization', () => {
   it('Wait for app load', async () => {
     await FocusZonePageObject.waitForInitialPageToDisplay();
     expect(await FocusZonePageObject.isInitialPageDisplayed()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_APPLOAD);

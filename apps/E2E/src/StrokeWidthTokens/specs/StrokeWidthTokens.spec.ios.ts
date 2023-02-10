@@ -1,7 +1,7 @@
 import StrokeWidthTokensPageObject from '../pages/StrokeWidthTokensPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Stroke Width Tokens Testing Initialization', function () {
+describe('Stroke Width Tokens Testing Initialization', () => {
   it('Wait for app load', async () => {
     await StrokeWidthTokensPageObject.waitForInitialPageToDisplay();
     expect(await StrokeWidthTokensPageObject.isInitialPageDisplayed()).toBeTruthy(StrokeWidthTokensPageObject.ERRORMESSAGE_APPLOAD);

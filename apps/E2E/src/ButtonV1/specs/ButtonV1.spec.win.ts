@@ -3,7 +3,7 @@ import { BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../ButtonLegacy/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('ButtonV1 Testing Initialization', function () {
+describe('ButtonV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await ButtonV1PageObject.waitForInitialPageToDisplay();
     expect(await ButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_APPLOAD);
@@ -18,7 +18,7 @@ describe('ButtonV1 Testing Initialization', function () {
   });
 });
 
-describe('ButtonV1 Accessibility Testing', async () => {
+describe('ButtonV1 Accessibility Testing', () => {
   beforeEach(async () => {
     await ButtonV1PageObject.scrollToTestElement();
   });
@@ -56,7 +56,7 @@ describe('ButtonV1 Accessibility Testing', async () => {
   });
 });
 
-describe('ButtonV1 Functional Testing', async () => {
+describe('ButtonV1 Functional Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonV1PageObject.scrollToTestElement();

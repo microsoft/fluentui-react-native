@@ -1,7 +1,7 @@
 import AvatarPageObject from '../pages/AvatarPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Avatar Testing Initialization', function () {
+describe('Avatar Testing Initialization', () => {
   it('Wait for app load', async () => {
     await AvatarPageObject.waitForInitialPageToDisplay();
     expect(await AvatarPageObject.isInitialPageDisplayed()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_APPLOAD);

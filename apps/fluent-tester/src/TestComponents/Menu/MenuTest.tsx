@@ -32,7 +32,7 @@ const MenuDefault: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItem disabled>A second disabled plain MenuItem</MenuItem>
+            <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem>A third plain MenuItem</MenuItem>
           </MenuList>
         </MenuPopover>

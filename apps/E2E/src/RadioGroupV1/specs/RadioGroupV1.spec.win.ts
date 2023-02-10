@@ -8,7 +8,7 @@ import {
 import RadioGroupV1PageObject from '../pages/RadioGroupV1PageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('RadioGroupV1/RadioV1 Testing Initialization', function () {
+describe('RadioGroupV1/RadioV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await RadioGroupV1PageObject.waitForInitialPageToDisplay();
     expect(await RadioGroupV1PageObject.isInitialPageDisplayed()).toBeTruthy(RadioGroupV1PageObject.ERRORMESSAGE_APPLOAD);
@@ -101,7 +101,7 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
   });
 });
 
-describe('RadioGroupV1 Functional Testing', async () => {
+describe('RadioGroupV1 Functional Testing', () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st Radio in the RadioGroup */
   beforeEach(async () => {
     await RadioGroupV1PageObject.scrollToTestElement();

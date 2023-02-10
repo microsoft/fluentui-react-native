@@ -2,7 +2,7 @@ import ContextualMenuPageObject from '../pages/ContextualMenuPageObject.win';
 import { PAGE_TIMEOUT, Keys } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('ContextualMenu Testing Initialization', function () {
+describe('ContextualMenu Testing Initialization', () => {
   it('Wait for app load', async () => {
     await ContextualMenuPageObject.waitForInitialPageToDisplay();
     expect(await ContextualMenuPageObject.isInitialPageDisplayed()).toBeTruthy(ContextualMenuPageObject.ERRORMESSAGE_APPLOAD);
@@ -16,7 +16,7 @@ describe('ContextualMenu Testing Initialization', function () {
   });
 });
 
-describe('ContextualMenu Functional Tests', async () => {
+describe('ContextualMenu Functional Tests', () => {
   /* Scrolls and waits for the ContextualMenu to be visible on the Test Page */
   beforeEach(async () => {
     await ContextualMenuPageObject.scrollToTestElement(await ContextualMenuPageObject._contextualMenu);

@@ -2,7 +2,7 @@ import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
 import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Tabs Legacy Testing Initialization', function () {
+describe('Tabs Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await TabsLegacyPageObject.waitForInitialPageToDisplay();
     expect(await TabsLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_APPLOAD);

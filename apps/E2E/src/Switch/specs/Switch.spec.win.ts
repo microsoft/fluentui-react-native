@@ -3,7 +3,7 @@ import { BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Switch Testing Initialization', function () {
+describe('Switch Testing Initialization', () => {
   it('Wait for app load', async () => {
     await SwitchPageObject.waitForInitialPageToDisplay();
     expect(await SwitchPageObject.isInitialPageDisplayed()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_APPLOAD);

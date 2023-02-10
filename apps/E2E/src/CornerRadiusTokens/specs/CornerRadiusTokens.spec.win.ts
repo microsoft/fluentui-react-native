@@ -1,7 +1,7 @@
 import CornerRadiusTokensPageObject from '../pages/CornerRadiusTokensPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('CornerRadiusTokens Testing Initialization', function () {
+describe('CornerRadiusTokens Testing Initialization', () => {
   it('Wait for app load', async () => {
     await CornerRadiusTokensPageObject.waitForInitialPageToDisplay();
     expect(await CornerRadiusTokensPageObject.isInitialPageDisplayed()).toBeTruthy(CornerRadiusTokensPageObject.ERRORMESSAGE_APPLOAD);

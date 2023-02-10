@@ -3,7 +3,7 @@ import { LINKV1_ACCESSIBILITY_LABEL } from '../consts';
 import { LINK_A11Y_ROLE, Attribute, Keys } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('LinkV1 Testing Initialization', function () {
+describe('LinkV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await LinkV1PageObject.waitForInitialPageToDisplay();
     expect(await LinkV1PageObject.isInitialPageDisplayed()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_APPLOAD);
@@ -17,7 +17,7 @@ describe('LinkV1 Testing Initialization', function () {
   });
 });
 
-describe('Link Testing Functionality', function () {
+describe('Link Testing Functionality', () => {
   /* Scrolls and waits for the Link to be visible on the Test Page */
   beforeEach(async () => {
     await LinkV1PageObject.scrollToTestElement();

@@ -3,7 +3,7 @@ import { BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL_DEPRECATED, BUTTON_TEST_COMPONENT_LABEL_DEPRECATED } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Button Legacy Testing Initialization', function () {
+describe('Button Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await ButtonLegacyPageObject.waitForInitialPageToDisplay();
     expect(await ButtonLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_APPLOAD);

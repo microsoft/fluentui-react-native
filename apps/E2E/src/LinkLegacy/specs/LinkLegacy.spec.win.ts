@@ -3,7 +3,7 @@ import { LINK_ACCESSIBILITY_LABEL } from '../consts';
 import { LINK_A11Y_ROLE, Attribute } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Link Testing Initialization', function () {
+describe('Link Testing Initialization', () => {
   it('Wait for app load', async () => {
     await LinkLegacyPageObject.waitForInitialPageToDisplay();
     expect(await LinkLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(LinkLegacyPageObject.ERRORMESSAGE_APPLOAD);

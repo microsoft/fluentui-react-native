@@ -98,7 +98,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (/* config, capabilities, specs */) {
+  beforeSession: (/* config, capabilities, specs */) => {
     fs.mkdirSync('./errorShots', { recursive: true });
     process.env['E2ETEST_PLATFORM'] = 'win32';
   },
@@ -108,7 +108,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: async function () {
+  before: async () => {
     await browser.maximizeWindow();
   },
   /**
@@ -144,7 +144,7 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: async function (test, context, results) {
+  afterTest: async (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
     console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
 
@@ -218,7 +218,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (/* exitCode, config, capabilities, results */) {
+  onComplete: (/* exitCode, config, capabilities, results */) => {
     console.log('<<< TESTING FINISHED >>>');
   },
   /**

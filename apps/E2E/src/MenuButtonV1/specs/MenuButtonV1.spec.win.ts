@@ -3,7 +3,7 @@ import { MENUBUTTON_A11Y_ROLE, Attribute } from '../../common/consts';
 import { MENUBUTTONV1_ACCESSIBILITY_LABEL, MENUBUTTONV1_TEST_COMPONENT_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('MenuButtonV1 Testing Initialization', function () {
+describe('MenuButtonV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await MenuButtonV1PageObject.waitForInitialPageToDisplay();
     expect(await MenuButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_APPLOAD);

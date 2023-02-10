@@ -8,7 +8,7 @@ import {
 import RadioGroupPageObject from '../pages/RadioGroupLegacyPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('RadioGroup/RadioButton Legacy Testing Initialization', function () {
+describe('RadioGroup/RadioButton Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
     await RadioGroupPageObject.waitForInitialPageToDisplay();
     expect(await RadioGroupPageObject.isInitialPageDisplayed()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_APPLOAD);
@@ -97,7 +97,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
   });
 });
 
-describe('RadioGroup Legacy Functional Testing', async () => {
+describe('RadioGroup Legacy Functional Testing', () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st RadioButton in the RadioGroup */
   beforeEach(async () => {
     await RadioGroupPageObject.scrollToTestElement(await RadioGroupPageObject._firstRadioGroup);

@@ -1,7 +1,7 @@
 import TextV1PageObject from '../pages/TextV1PageObject.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('TextV1 Testing Initialization', function () {
+describe('TextV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
     await TextV1PageObject.waitForInitialPageToDisplay();
     expect(await TextV1PageObject.isInitialPageDisplayed()).toBeTruthy(TextV1PageObject.ERRORMESSAGE_APPLOAD);
