@@ -7,6 +7,7 @@ export interface LayoutTokens {
   minWidth?: ViewStyle['minWidth'];
   maxWidth?: ViewStyle['maxWidth'];
   minHeight?: ViewStyle['minHeight'];
+  maxHeight?: ViewStyle['maxHeight'];
   padding?: ViewStyle['padding'];
   paddingHorizontal?: ViewStyle['paddingHorizontal'];
   paddingVertical?: ViewStyle['paddingVertical'];
@@ -18,6 +19,7 @@ export const layoutTokens: OperationSet<LayoutTokens, Theme> = [
   { source: 'minWidth' },
   { source: 'maxWidth' },
   { source: 'minHeight' },
+  { source: 'maxHeight' },
   { source: 'padding' },
   { source: 'paddingHorizontal' },
   { source: 'paddingVertical' },
@@ -29,6 +31,7 @@ export const layoutStyles = tokenBuilder<LayoutTokens>(
   'minWidth',
   'maxWidth',
   'minHeight',
+  'maxHeight',
   'padding',
   'paddingHorizontal',
   'paddingVertical',

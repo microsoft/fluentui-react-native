@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add Divider test page",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

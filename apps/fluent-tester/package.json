@@ -43,6 +43,7 @@
     "@fluentui-react-native/badge": ">=0.4.25 <1.0.0",
     "@fluentui-react-native/button": ">=0.32.30 <1.0.0",
     "@fluentui-react-native/default-theme": ">=0.17.0 <1.0.0",
+    "@fluentui-react-native/divider": "^0.1.0",
     "@fluentui-react-native/dropdown": ">=0.7.27 <1.0.0",
     "@fluentui-react-native/experimental-activity-indicator": ">=0.7.17 <1.0.0",
     "@fluentui-react-native/experimental-appearance-additions": "^0.3.0",
