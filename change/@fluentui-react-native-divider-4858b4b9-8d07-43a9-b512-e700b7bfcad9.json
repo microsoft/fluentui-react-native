@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Implement win32 DividerV1 component",
-  "packageName": "@fluentui-react-native/divider",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
