@@ -268,8 +268,8 @@ Array [
           }
         >
           <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
+            ellipsizeMode="clip"
+            numberOfLines={1}
             onAccessibilityTap={[Function]}
             style={
               Object {
@@ -336,8 +336,8 @@ Array [
           }
         >
           <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
+            ellipsizeMode="clip"
+            numberOfLines={1}
             onAccessibilityTap={[Function]}
             style={
               Object {
@@ -544,8 +544,8 @@ Array [
           }
         >
           <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
+            ellipsizeMode="clip"
+            numberOfLines={1}
             onAccessibilityTap={[Function]}
             style={
               Object {
@@ -2372,8 +2372,8 @@ Array [
           }
         >
           <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
+            ellipsizeMode="clip"
+            numberOfLines={1}
             onAccessibilityTap={[Function]}
             style={
               Object {
@@ -2458,8 +2458,8 @@ Array [
           }
         >
           <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
+            ellipsizeMode="clip"
+            numberOfLines={1}
             onAccessibilityTap={[Function]}
             style={
               Object {
