@@ -4,6 +4,6 @@ import SpinnerPageObject from '../pages/SpinnerPageObject';
 describe('Spinner Testing Initialization', () => {
   it('Wait for app load', async () => {
     await SpinnerPageObject.waitForInitialPageToDisplay();
-    expect(await SpinnerPageObject.isPageLoaded()).toBeTruthy(SpinnerPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await SpinnerPageObject.isInitialPageDisplayed()).toBeTruthy(SpinnerPageObject.ERRORMESSAGE_APPLOAD);
   });
 });
