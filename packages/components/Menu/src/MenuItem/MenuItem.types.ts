@@ -68,6 +68,9 @@ export interface MenuItemState extends PressableState {
    */
   hasSubmenu?: boolean;
 
+  /**
+   * States that menu items all have tooltips with its text by default.
+   */
   hasTooltips?: boolean;
 }
 
