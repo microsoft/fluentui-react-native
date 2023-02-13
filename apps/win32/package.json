@@ -54,7 +54,7 @@
     "@wdio/local-runner": "7.23.0",
     "@wdio/spec-reporter": "7.23.0",
     "allure-commandline": "2.13.0",
-    "appium": "2.0.0-beta.41",
+    "appium": "2.0.0-beta.47",
     "appium-windows-driver": "2.0.7",
     "metro-config": "^0.67.0",
     "metro-react-native-babel-preset": "^0.67.0",
