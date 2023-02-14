@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Copy Android tokens to iOS",
+  "packageName": "@fluentui-react-native/switch",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch"
+}
