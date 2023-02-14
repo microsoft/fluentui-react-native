@@ -33,10 +33,7 @@ jobs:
     displayName: NPM Publish
     pool: Azure-Pipelines-EO-Ubuntu20.04-Office
     steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '14.x'
-        displayName: 'Install Node.js'
+      - template: templates/setup-repo.yml
 
       - script: |
           git config user.name "UI-Fabric-RN-Bot"
