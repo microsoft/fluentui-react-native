@@ -33,13 +33,6 @@ async function QueryWithChaining(identifier) {
   return queryResult;
 }
 
-/* The values in this enum map to the UI components we want to test in our app. We use this to
-make the communication from our spec document to our page object easier. Please read below to
-see why we have Primary/Secondary components. */
-type ComponentSelector =
-  | 'Primary' // this._primaryComponent
-  | 'Secondary'; // this._secondaryComponent
-
 type MobilePlatform = 'android' | 'ios';
 
 type DesktopPlatform = 'win32' | 'windows' | 'macos';
@@ -88,21 +81,6 @@ export abstract class BasePage {
     return true;
   }
 
-  async getAccessibilityRole(): Promise<string> {
-    return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
-  }
-
-  /* Gets the accessibility label of an UI element given the selector */
-  async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
-    switch (componentSelector) {
-      case 'Primary':
-        return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityLabel);
-
-      case 'Secondary':
-        return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityLabel);
-    }
-  }
-
   /* Returns true if the test page has loaded. To determine if it's loaded, each test page has a specific UI element we attempt to locate.
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
@@ -116,19 +94,23 @@ export abstract class BasePage {
     return await (await this._pageButton).isDisplayed();
   }
 
-  async clickComponent(): Promise<void> {
-    await (await this._primaryComponent).click();
-  }
-
-  /* The goal of click() and sendKeys() is to be generally used across all pageobjects to reduce code repetition in similar methods. */
+  /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
   async click(element: Promise<WebdriverIO.Element>): Promise<void> {
     await (await element).click();
   }
 
+  /** Given a WebdriverIO element promise, send the passed in list of keys as keyboard inputs. Use this across all PageObject methods and test specs.
+   *
+   * Common examples:
+   * - Press enter on a button control: ButtonPageObject.sendKeys(ButtonPageObject.button, [KEY_ENTER])
+   * - Shift tab to the previous element: FocusZonePageObject.sendKeys(FocusZonePageObject.beforeButton, [KEY_SHIFT, KEY_TAB])
+   * - Escape out of a menu: MenuPageObject.sendKeys(MenuPageObject.item1, [KEY_ESCAPE])
+   */
   async sendKeys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
     await (await element).addValue(keys);
   }
 
+  /** Short-hand method for PageObjects to get an element attribute during testing, with attribute being type-enforced. */
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
     return await element.getAttribute(attribute);
   }
@@ -191,17 +173,6 @@ export abstract class BasePage {
     await browser.waitUntil(async () => await this.isButtonInView(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
-      interval: 1500,
-    });
-  }
-
-  /* @deprecated, only use `scrollToTestElement()` instead */
-  async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    console.warn('`waitForPrimaryElementDisplayed` is deprecated. Only use `scrollToTestElement` in your spec to improve performance.');
-    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg:
-        'The UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
       interval: 1500,
     });
   }

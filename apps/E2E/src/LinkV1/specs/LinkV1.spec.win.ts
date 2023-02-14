@@ -21,6 +21,31 @@ describe('LinkV1 Testing Initialization', () => {
   });
 });
 
+describe('LinkV1 Accessibility Testing', () => {
+  beforeAll(async () => {
+    await LinkV1PageObject.scrollToTestElement();
+  });
+
+  it('Validate "accessibilityRole" defaults to "ControlType.HyperLink".', async () => {
+    await expect(
+      await LinkV1PageObject.compareAttribute(LinkV1PageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
+    ).toBeTruthy();
+
+    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" propagates to "Name" element attribute.', async () => {
+    await expect(
+      await LinkV1PageObject.compareAttribute(LinkV1PageObject._primaryComponent, Attribute.AccessibilityLabel, LINKV1_ACCESSIBILITY_LABEL),
+    ).toBeTruthy();
+
+    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  // No need to test not setting a11y label. The content prop gets passed down to the child Text component. This equates to not setting the a11y label
+  // on a Text component which we have testing for in our Text component spec
+});
+
 describe('Link Testing Functionality', () => {
   /* Scrolls and waits for the Link to be visible on the Test Page */
   beforeEach(async () => {
@@ -50,29 +75,4 @@ describe('Link Testing Functionality', () => {
     ).toBeTruthy();
     await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
   });
-});
-
-describe('LinkV1 Accessibility Testing', () => {
-  beforeAll(async () => {
-    await LinkV1PageObject.scrollToTestElement();
-  });
-
-  it('Validate "accessibilityRole" defaults to Link "ControlType" element attribute.', async () => {
-    await expect(
-      await LinkV1PageObject.compareAttribute(LinkV1PageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
-    ).toBeTruthy();
-
-    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
-  });
-
-  it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" propagates to "Name" element attribute.', async () => {
-    await expect(
-      await LinkV1PageObject.compareAttribute(LinkV1PageObject._primaryComponent, Attribute.AccessibilityLabel, LINKV1_ACCESSIBILITY_LABEL),
-    ).toBeTruthy();
-
-    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
-  });
-
-  // No need to test not setting a11y label. The content prop gets passed down to the child Text component. This equates to not setting the a11y label
-  // on a Text component which we have testing for in our Text component spec
 });
