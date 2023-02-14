@@ -1,4 +1,6 @@
 export const ROOT_VIEW = 'Fluent_Tester_Root_View';
+export const E2E_MODE_SWITCH = 'E2E_Mode_Switch';
+export const E2E_TEST_SECTION = 'E2E_Test_Section';
 
 /* Accessibility Role Control Types - https://docs.microsoft.com/en-us/windows/win32/winauto/uiauto-controltype-ids */
 export const BUTTON_A11Y_ROLE = 'ControlType.Button';

@@ -1,20 +1,17 @@
-import { Attribute, AttributeValue, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE, PAGE_TIMEOUT } from '../../common/consts';
-import NavigateAppPage from '../../common/NavigateAppPage';
+import { Attribute, AttributeValue, Keys, MENUITEM_A11Y_ROLE } from '../../common/consts';
 import { MENUITEM_ACCESSIBILITY_LABEL, MENUITEM_TEST_LABEL } from '../consts';
 import MenuPageObject from '../pages/MenuPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Menu Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await MenuPageObject.waitForInitialPageToDisplay();
+    expect(await MenuPageObject.isInitialPageDisplayed()).toBeTruthy(MenuPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Menu test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToMenuPage();
-    await MenuPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
+    await MenuPageObject.navigateToPageAndLoadTests(true);
     expect(await MenuPageObject.isPageLoaded()).toBeTruthy(MenuPageObject.ERRORMESSAGE_PAGELOAD);
 
     expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up

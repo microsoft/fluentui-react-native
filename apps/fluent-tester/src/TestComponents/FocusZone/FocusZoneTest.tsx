@@ -188,6 +188,9 @@ const focusZoneSections: TestSection[] = [
     name: 'Nested FocusZone',
     component: NestedFocusZone,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: '2D Navigation + E2E Testing',
     component: FocusZone2D,
@@ -203,5 +206,7 @@ export const FocusZoneTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  return <Test name="FocusZone Test" description={'No description.'} sections={focusZoneSections} status={status} />;
+  return (
+    <Test name="FocusZone Test" description={'No description.'} sections={focusZoneSections} status={status} e2eSections={e2eSections} />
+  );
 };

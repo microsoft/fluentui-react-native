@@ -1,6 +1,16 @@
-import type { AndroidAttribute } from './consts';
-import { Keys, ROOT_VIEW, TESTPAGE_CONTENT_SCROLLVIEWER } from './consts';
-import { Attribute, attributeToEnumName, TESTPAGE_BUTTONS_SCROLLVIEWER } from './consts';
+import {
+  AndroidAttribute,
+  Attribute,
+  attributeToEnumName,
+  BASE_TESTPAGE,
+  BOOT_APP_TIMEOUT,
+  E2E_MODE_SWITCH,
+  E2E_TEST_SECTION,
+  Keys,
+  ROOT_VIEW,
+  TESTPAGE_BUTTONS_SCROLLVIEWER,
+  TESTPAGE_CONTENT_SCROLLVIEWER,
+} from './consts';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
@@ -57,6 +67,60 @@ export abstract class BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
+
+  /**
+   * For any given page object, this method automates:
+   *  - Navigating to the page by clicking its component button
+   *  - Waiting for the component page to load
+   *  - Optionally expanding its E2E sections IF a boolean flag is passed.
+   *
+   * This also contains error checking through its waiters, removing the extra `expect()` calls during test setup.
+   *
+   * @param {boolean} showE2ESection Some components' E2E tests check only if the test page loads correctly or not. Others
+   * (majority), perform UI manipulation tests on UI components on the test page. In these scenarios, these UI components have their
+   * own section on the test page (by default, it's hidden so partners don't see it). If this parameter is true, this method opens up
+   * that testing section.
+   */
+  async navigateToPageAndLoadTests(showE2ESection = false) {
+    // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
+    if (this.platform === 'android' || this.platform === 'ios') {
+      await this.mobileScrollToComponentButton();
+    }
+
+    await (await this._pageButton).click();
+    // Wait for page to load
+    await this.waitForCondition(async () => await this.isPageLoaded(), this.ERRORMESSAGE_PAGELOAD, this.waitForUiEvent, 1500);
+
+    if (showE2ESection) {
+      await this.enableE2ETesterMode();
+    }
+  }
+
+  async enableE2ETesterMode(): Promise<void> {
+    const e2eSwitch = await this._e2eSwitch;
+    switch (this.platform) {
+      // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
+      // different on android because .isSelected() doesn't function as expected on the platform.
+      case 'android':
+        if ((await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'false') {
+          await e2eSwitch.click();
+          await this.waitForCondition(
+            async () => (await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'true',
+            'Clicked the E2E Mode Switch, but it failed to toggle.',
+          );
+        }
+        break;
+      default:
+        if (!(await e2eSwitch.isSelected())) {
+          await e2eSwitch.click();
+          await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
+        }
+    }
+    await this.waitForCondition(
+      async () => await (await this._e2eSection).isDisplayed(),
+      'Pressed E2E Mode Switch, but E2E Test Sections failed to display before the timeout.',
+    );
+  }
 
   /**
    * Checks to see if an element attribute is strictly equal to an expected value the user passes in.
@@ -159,22 +223,13 @@ export abstract class BasePage {
     }
   }
 
-  /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
-  async waitForPageDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isPageLoaded(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
-      interval: 1500,
-    });
+  /** Waits for the tester app to load by checking if the startup page loads. If the app doesn't load before the timeout, it causes the test to fail. */
+  async waitForInitialPageToDisplay(): Promise<void> {
+    await this.waitForCondition(async () => await this.isInitialPageDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
   }
 
-  /* Waits for the test page's button to be displayed. If the button doesn't load before the timeout, it causes the test to fail. */
-  async waitForButtonDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isButtonInView(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
-      interval: 1500,
-    });
+  async isInitialPageDisplayed(): Promise<boolean> {
+    return await (await this._initialPage).isDisplayed();
   }
 
   /* Scrolls to the specified or primary UI test element until it is displayed. */
@@ -344,6 +399,11 @@ export abstract class BasePage {
     return By(TESTPAGE_BUTTONS_SCROLLVIEWER);
   }
 
+  // The title element of the initial test page shown when starting the app.
+  get _initialPage() {
+    return By(BASE_TESTPAGE);
+  }
+
   /****************** Error Messages ******************/
   get ERRORMESSAGE_SUFFIX(): string {
     return 'Please review logs and error screenshots for more information.';
@@ -361,6 +421,14 @@ export abstract class BasePage {
     return 'An assert popped up. ' + this.ERRORMESSAGE_SUFFIX;
   }
 
-  // Default timeout to wait until page is displayed (10s)
+  private get _e2eSwitch(): Promise<WebdriverIO.Element> {
+    return By(E2E_MODE_SWITCH);
+  }
+
+  private get _e2eSection(): Promise<WebdriverIO.Element> {
+    return By(E2E_TEST_SECTION);
+  }
+
+  // Default timeout to wait until page is displayed (25s)
   waitForUiEvent = 25000;
 }

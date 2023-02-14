@@ -291,6 +291,9 @@ const menuSections: TestSection[] = [
     name: 'Menu Refs',
     component: MenuTriggerChildRef,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Menu E2E',
     component: E2EMenuTest,
@@ -311,5 +314,5 @@ export const MenuTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Menu/SPEC.md';
 
-  return <Test name="Menu Test" description={description} spec={spec} sections={menuSections} status={status} />;
+  return <Test name="Menu Test" description={description} spec={spec} sections={menuSections} status={status} e2eSections={e2eSections} />;
 };

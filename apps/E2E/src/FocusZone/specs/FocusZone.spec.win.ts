@@ -1,21 +1,19 @@
-import { Attribute, AttributeValue, BOOT_APP_TIMEOUT, Keys, PAGE_TIMEOUT } from '../../common/consts';
-import NavigateAppPage from '../../common/NavigateAppPage';
+import { Attribute, AttributeValue, Keys } from '../../common/consts';
 import FocusZonePageObject from '../pages/FocusZonePageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('FocusZone Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await FocusZonePageObject.waitForInitialPageToDisplay();
+    expect(await FocusZonePageObject.isInitialPageDisplayed()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to FocusZone test page', async () => {
+  it('Click and navigate to FocusTrapZone test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToFocusZonePage();
-    await FocusZonePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
+    await FocusZonePageObject.navigateToPageAndLoadTests(true);
     expect(await FocusZonePageObject.isPageLoaded()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_PAGELOAD);
-    expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+
+    await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
