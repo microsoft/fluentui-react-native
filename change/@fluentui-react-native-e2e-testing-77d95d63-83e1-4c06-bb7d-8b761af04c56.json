@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Homogenized e2e test names across different components, deprecated unused methods.",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

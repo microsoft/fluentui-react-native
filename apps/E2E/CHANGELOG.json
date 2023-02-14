@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 14 Feb 2023 02:41:04 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.18.0",
+      "version": "1.18.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "31684b3f201039932ba8860cd4f627c8a3d9f79b",
+            "comment": "Homogenized e2e test names across different components, deprecated unused methods."
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.17.1",
       "version": "1.17.1",
