@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Passing in the minWidth token to the patch function",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

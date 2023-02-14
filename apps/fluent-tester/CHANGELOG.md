@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Feb 2023 01:26:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.133.1
+
+Tue, 14 Feb 2023 01:26:19 GMT
+
+### Patches
+
+- Passing in the minWidth token to the patch function (email not defined)
+- Bump @fluentui-react-native/menu to v1.4.2
 
 ## 0.133.0
 
