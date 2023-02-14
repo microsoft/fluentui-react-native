@@ -11,5 +11,5 @@ steps:
     displayName: 'Install Nuget'
 
   - script: |
-      yarn
+      yarn install  --frozen-lockfile
     displayName: 'yarn install'
