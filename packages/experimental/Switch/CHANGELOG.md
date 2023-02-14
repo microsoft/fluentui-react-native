@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Feb 2023 22:22:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.26
+
+Tue, 14 Feb 2023 22:22:51 GMT
+
+### Patches
+
+- Copy Android tokens to iOS (saadnajmi2@gmail.com)
 
 ## 0.8.25
 

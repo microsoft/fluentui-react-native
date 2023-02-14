@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Copy Android tokens to iOS",
-  "packageName": "@fluentui-react-native/experimental-radio-group",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch"
-}

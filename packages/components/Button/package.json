@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/button",
-  "version": "0.32.31",
+  "version": "0.32.32",
   "description": "A cross-platform Button component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -29,7 +29,7 @@
     "@uifabricshared/foundation-compose": "^1.13.1",
     "@fluentui-react-native/adapters": ">=0.10.1 <1.0.0",
     "@fluentui-react-native/experimental-activity-indicator": "^0.7.18",
-    "@fluentui-react-native/experimental-shadow": "0.2.67",
+    "@fluentui-react-native/experimental-shadow": "0.2.68",
     "@fluentui-react-native/framework": "0.9.1",
     "@fluentui-react-native/icon": "0.17.12",
     "@fluentui-react-native/interactive-hooks": ">=0.22.18 <1.0.0",

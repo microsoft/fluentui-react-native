@@ -1,8 +1,30 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 14 Feb 2023 21:33:24 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Feb 2023 22:22:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.1
+
+Tue, 14 Feb 2023 22:22:51 GMT
+
+### Patches
+
+- Copy Android tokens to iOS (saadnajmi2@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.6.6
+- Bump @fluentui-react-native/badge to v0.4.27
+- Bump @fluentui-react-native/button to v0.32.32
+- Bump @fluentui-react-native/dropdown to v0.7.29
+- Bump @fluentui-react-native/experimental-button to v0.16.90
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.38
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.31
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.19
+- Bump @fluentui-react-native/experimental-shadow to v0.2.68
+- Bump @fluentui-react-native/experimental-shimmer to v0.8.20
+- Bump @fluentui-react-native/menu to v1.4.3
+- Bump @fluentui-react-native/notification to v0.21.32
+- Bump @fluentui-react-native/switch to v0.8.26
+- Bump @fluentui/react-native to v0.36.2
 
 ## 0.134.0
 
