@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 14 Feb 2023 01:26:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.133.1",
+      "version": "0.133.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/tester",
+            "commit": "9819cc1a92b357f894f3f8fb2b0b2ac3c31e9713",
+            "comment": "Passing in the minWidth token to the patch function"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.4.2",
+            "commit": "9819cc1a92b357f894f3f8fb2b0b2ac3c31e9713"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/tester_v0.133.0",
       "version": "0.133.0",

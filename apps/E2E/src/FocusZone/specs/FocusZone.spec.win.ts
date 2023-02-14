@@ -32,7 +32,7 @@ describe('FocusZone Functional Testing', () => {
     await FocusZonePageObject.resetTest();
   });
 
-  it('Navigate bidirectional focuszone by arrow keys - switches focus correctly', async () => {
+  it('Navigate bidirectional focuszone using arrow keys. Validate focus switches correctly.', async () => {
     // move to 2 with right arrow
     await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_RIGHT]);
     expect(
@@ -48,7 +48,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Navigate horizontal focuszone by arrow keys - switches focus correctly', async () => {
+  it('Navigate horizontal focuszone using arrow keys. Validate focus switches correctly.', async () => {
     await FocusZonePageObject.configureGridFocusZone('SetDirection', 'horizontal');
     // move to 2 with right arrow
     await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_RIGHT]);
@@ -71,7 +71,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Navigates vertical focuszone by arrow keys - switches focus correctly', async () => {
+  it('Navigates vertical focuszone using arrow keys. Validate focus switches correctly.', async () => {
     await FocusZonePageObject.configureGridFocusZone('SetDirection', 'vertical');
 
     // move to 2 with down arrow
@@ -95,7 +95,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Navigates none-direction focuszone by arrow keys - doesn't switch focus", async () => {
+  it('Navigates none-direction focuszone using arrow keys. Validate focus does not switch.', async () => {
     await FocusZonePageObject.configureGridFocusZone('SetDirection', 'none');
 
     // none of these key commands should move
@@ -122,7 +122,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Navigates bi-directional focuszone with 2d navigation - switches focus correctly', async () => {
+  it('Navigates bi-directional focuszone with 2d navigation. Validate focus switches correctly.', async () => {
     await FocusZonePageObject.configureGridFocusZone('Set2DNavigation', true);
 
     await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_DOWN]);
@@ -138,7 +138,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Navigates focuszone with circular navigation off - doesn't switch focus", async () => {
+  it("Navigates focuszone with circular navigation off. Validate focus between start and end doesn't switch.", async () => {
     await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_LEFT]);
     expect(
       await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(1), Attribute.IsFocused, AttributeValue.true),
@@ -152,7 +152,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Navigates focuszone with circular navigation on - switches focus correctly', async () => {
+  it('Navigates focuszone with circular navigation on. Validate focus between start and end switches.', async () => {
     await FocusZonePageObject.configureGridFocusZone('SetCircularNavigation', true);
 
     await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_LEFT]);
@@ -168,7 +168,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Navigates disabled focuszone by arrow keys - doesn't switch focus", async () => {
+  it('Navigates disabled focuszone by arrow keys. Validate focus switches correctly.', async () => {
     await FocusZonePageObject.configureGridFocusZone('Disable', true);
 
     // none of these key commands should move
@@ -195,7 +195,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Tabs in and out of the FocusZone - switches focus correctly', async () => {
+  it('Tabs in and out of the FocusZone. Validate focus switches correctly.', async () => {
     await FocusZonePageObject.sendKeys(FocusZonePageObject._beforeButton, [Keys.TAB]);
     expect(
       await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(1), Attribute.IsFocused, AttributeValue.true),
@@ -219,7 +219,7 @@ describe('FocusZone Functional Testing', () => {
     expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Tabs in and out of the FocusZone with a defaultTabbableElement set - switches focus correctly', async () => {
+  it('Tabs in and out of the FocusZone with a defaultTabbableElement set. Validate focus switches to the defaultTabbableElement.', async () => {
     // This sets the defaultTabbableElement prop of the FocusZone to be grid button #4. Whenever a user tabs into the zone, button 4 should always be the first to be selected.
     await FocusZonePageObject.configureGridFocusZone('UseDefaultTabbableElement', true);
 
