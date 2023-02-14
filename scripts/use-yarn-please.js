@@ -28,7 +28,6 @@ To learn more about all the commands that this monorepo supports, see the wiki:
 };
 
 if (path.basename(npmPath) !== 'yarn.js') {
-  console.log(path.basename(npmPath));
   console.error(Strings.useYarnInstead);
 
   if (!detectYarnInstallation()) {
