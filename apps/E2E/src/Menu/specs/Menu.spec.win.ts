@@ -24,7 +24,7 @@ describe('Menu Accessibility Testing', () => {
     await MenuPageObject.openMenu();
   });
 
-  it('Validate MenuItem "accessibilityRole" defaults to MenuItem "ControlType" element attribute.', async () => {
+  it('Validate MenuItem "accessibilityRole" defaults to "ControlType.MenuItem".', async () => {
     // The popover is where we can find the a11y role of menu
     expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('First'), Attribute.AccessibilityRole, MENUITEM_A11Y_ROLE),
@@ -90,7 +90,7 @@ describe('Menu Functional Testing', () => {
     expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press "Space" on MenuTrigger -> Validate Menu is opened by checking if MenuItems are visible.', async () => {
+  it('Press "Space" on MenuTrigger. Validate Menu is opened by checking if MenuItems are visible.', async () => {
     await MenuPageObject.sendKeys(MenuPageObject._menuTrigger, [Keys.SPACE]);
     expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
 

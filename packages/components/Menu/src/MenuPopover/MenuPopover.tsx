@@ -25,6 +25,7 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
       gapSpace,
       maxHeight,
       maxWidth,
+      minWidth,
       minPadding,
       borderWidth,
       borderColor,

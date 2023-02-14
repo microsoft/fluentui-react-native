@@ -125,7 +125,7 @@ const Submenu: React.FunctionComponent = () => {
       <MenuTrigger>
         <MenuItem>A second MenuItem</MenuItem>
       </MenuTrigger>
-      <MenuPopover>
+      <MenuPopover minWidth={230}>
         <MenuList>
           <MenuItemCheckbox name={'a'}>A nested MenuItemCheckbox</MenuItemCheckbox>
           <MenuItem>A nested MenuItem</MenuItem>

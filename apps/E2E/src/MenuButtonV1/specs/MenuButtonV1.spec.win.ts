@@ -24,7 +24,7 @@ describe('MenuButtonV1 Accessibility Testing', () => {
     await MenuButtonV1PageObject.scrollToTestElement(await MenuButtonV1PageObject._firstMenuButton);
   });
 
-  it('Validate "accessibilityRole" value defaults to Button "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" value defaults to "ControlType.Button".', async () => {
     await expect(
       await MenuButtonV1PageObject.compareAttribute(
         MenuButtonV1PageObject._firstMenuButton,

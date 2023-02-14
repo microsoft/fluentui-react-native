@@ -28,7 +28,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
     await RadioGroupPageObject.scrollToTestElement(await RadioGroupPageObject._firstRadioGroup);
   });
 
-  it('Validate RadioGroup\'s "accessibilityRole" defaults to List "ControlType" element attribute.', async () => {
+  it('Validate RadioGroup\'s "accessibilityRole" defaults to "ControlType.List".', async () => {
     expect(
       await RadioGroupPageObject.compareAttribute(RadioGroupPageObject._firstRadioGroup, Attribute.AccessibilityRole, RADIOGROUP_A11Y_ROLE),
     ).toBeTruthy();
@@ -36,7 +36,7 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
     expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Validate RadioButton\'s "accessibilityRole" defaults to RadioButton "ControlType" element attribute.', async () => {
+  it('Validate RadioButton\'s "accessibilityRole" defaults to "ControlType.RadioButton".', async () => {
     expect(
       await RadioGroupPageObject.compareAttribute(
         RadioGroupPageObject.getRadioButton('First'),
