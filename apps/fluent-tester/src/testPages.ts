@@ -223,7 +223,7 @@ export const tests: TestDescription[] = [
     name: 'RadioGroup V1',
     component: RadioGroupV1Test,
     testPageButton: Constants.HOMEPAGE_RADIOGROUPV1_BUTTON,
-    platforms: ['android', 'macos', 'win32'],
+    platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Separator',
