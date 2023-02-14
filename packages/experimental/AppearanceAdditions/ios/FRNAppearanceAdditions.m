@@ -105,14 +105,22 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 - (void)startObserving {
     _hasListeners = YES;
     
-    // [UITraitCollection currentTraitCollection] never returns the correct trait collection, presumably because FRNAppearanceAdditions isn't a view
-    // so it never gets updated with the right traitCollection (which happens when a view gets added to the view hierachy). In order
-    // to get the right trait collection we need to access the root view.
-    UITraitCollection *rootViewTraitCollection = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] traitCollection];
+    // Note that [UITraitCollection currentTraitCollection] always returns the same default trait collection,
+    // presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
+    // (which happens when a view gets added to the view hierachy). In order to get the right trait collection,
+    // we need to access a view that's been added to the view hierarchy
+    UIViewController *viewControllerWithInitialTraitCollection = RCTPresentedViewController();
+    UITraitCollection *initialTraitCollection;
     
-    _horizontalSizeClass = RCTHorizontalSizeClassPreference(rootViewTraitCollection);
-    _userInterfaceLevel = RCTUserInterfaceLevelPreference(rootViewTraitCollection);
-    _accessibilityContrastOption = RCTAccessibilityContrastPreference(rootViewTraitCollection);
+    if (viewControllerWithInitialTraitCollection != nil) {
+        initialTraitCollection = [viewControllerWithInitialTraitCollection traitCollection];
+    } else {
+        initialTraitCollection = [UITraitCollection currentTraitCollection];
+    }
+    
+    _horizontalSizeClass = RCTHorizontalSizeClassPreference(initialTraitCollection);
+    _userInterfaceLevel = RCTUserInterfaceLevelPreference(initialTraitCollection);
+    _accessibilityContrastOption = RCTAccessibilityContrastPreference(initialTraitCollection);
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
