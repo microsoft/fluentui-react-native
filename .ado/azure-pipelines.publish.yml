@@ -40,7 +40,10 @@ jobs:
           git config user.email "uifrnbot@microsoft.com"
           git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
         displayName: Git Authentication
-      - template: templates/yarn-install.yml
+
+      - script: |
+          yarn
+        displayName: 'yarn install'
 
       - script: |
           yarn buildci
