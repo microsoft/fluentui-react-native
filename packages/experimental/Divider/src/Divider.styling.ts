@@ -52,7 +52,7 @@ export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens) 
             }
           : {
               flexDirection: 'row',
-              ...(isMobile ? { paddingStart: props.insetSize } : { paddingHorizontal: props.insetSize }), // insetSize ono iOS and Android is on start only.
+              ...(isMobile ? { paddingStart: props.insetSize } : { paddingHorizontal: props.insetSize }), // insetSize on iOS and Android is on start only.
             }),
       },
     }),
