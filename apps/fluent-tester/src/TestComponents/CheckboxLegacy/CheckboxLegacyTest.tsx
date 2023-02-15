@@ -166,6 +166,9 @@ const checkboxSections: TestSection[] = [
     name: 'Token Customized Checkboxes',
     component: TokenCheckbox,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Checkbox for E2E Testing',
     component: CheckboxLegacyE2ETest,
@@ -186,5 +189,14 @@ export const CheckboxLegacyTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Checkbox/SPEC.md';
 
-  return <Test name="Checkbox Legacy Test" description={description} spec={spec} sections={checkboxSections} status={status} />;
+  return (
+    <Test
+      name="Checkbox Legacy Test"
+      description={description}
+      spec={spec}
+      sections={checkboxSections}
+      status={status}
+      e2eSections={e2eSections}
+    />
+  );
 };
