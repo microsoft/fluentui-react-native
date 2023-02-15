@@ -8,6 +8,13 @@
   "eslint.enable": true,
   "eslint.workingDirectories": [{ "mode": "auto" }], // infer working directory based on .eslintrc/package.json location
 
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.js": "${capture}.js.map, ${capture}.d.ts, ${capture}.d.ts.map",
+    "*.ts": "${capture}.android.tsx, ${capture}.ios.tsx, ${capture}.macos.tsx, ${capture}.windows.tsx, ${capture}.win32.tsx, ${capture}.android.ts, ${capture}.ios.ts, ${capture}.macos.ts, ${capture}.windows.ts, ${capture}.win32.ts",
+    "*.tsx": "${capture}.android.tsx, ${capture}.ios.tsx, ${capture}.macos.tsx, ${capture}.windows.tsx, ${capture}.win32.tsx, ${capture}.android.ts, ${capture}.ios.ts, ${capture}.macos.ts, ${capture}.windows.ts, ${capture}.win32.ts"
+  },
+
   "files.trimTrailingWhitespace": true,
   "files.associations": {
     "**/package.json.hbs": "json",
