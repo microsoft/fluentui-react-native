@@ -14,25 +14,30 @@ export interface DividerProps {
   /**
    * If a text or icon is passed, this dictates where content appears in the divider: at the start, centered, or towards the end.
    * @default 'center'
+   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   alignContent?: DividerAlignment;
   /**
    * If no color is passed, the divider and its content are colored using different theme tokens depending on the value of this prop.
    * @default 'default'
+   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   appearance?: DividerAppearance;
   /**
    * Pass an icon source to render an icon as content in the divider. Mutually exclusive with passing text as a child.
+   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   icon?: IconProps;
   /**
    * The size of the Divider inset - the margin before the start and after the end of the divider.
    * @default 0
+   * Note : For mobile platforms, the insetSize prop is only applied to start of the component.
    */
   insetSize?: DividerInsetSize;
   /**
    * Whether the divider is rendered as a horizontal line or a vertical line.
    * @default false
+   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   vertical?: boolean;
 }
