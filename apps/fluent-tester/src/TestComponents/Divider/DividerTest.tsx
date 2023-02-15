@@ -3,7 +3,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 import { Divider } from '@fluentui-react-native/divider';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { DIVIDER_TESTPAGE } from './consts';
+import { DIVIDER_TESTPAGE } from '../../../../E2E/src/Divider/consts';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
 import { commonTestStyles } from '../Common/styles';
