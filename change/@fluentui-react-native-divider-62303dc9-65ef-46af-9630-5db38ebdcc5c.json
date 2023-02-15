@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "impl mobile divider",
-  "packageName": "@fluentui-react-native/divider",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}

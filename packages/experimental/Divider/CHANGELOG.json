@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/divider",
   "entries": [
     {
+      "date": "Wed, 15 Feb 2023 18:30:10 GMT",
+      "tag": "@fluentui-react-native/divider_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/divider",
+            "commit": "ba4cab7eef8759aee74cb0d4ca31d2b8360e3724",
+            "comment": "impl mobile divider"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 15 Feb 2023 00:51:10 GMT",
       "tag": "@fluentui-react-native/divider_v0.2.1",
       "version": "0.2.1",
