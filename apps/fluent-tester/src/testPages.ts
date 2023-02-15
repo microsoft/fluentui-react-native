@@ -117,7 +117,7 @@ export const tests: TestDescription[] = [
     platforms: ['ios'],
   },
   {
-    name: 'Divider V1',
+    name: 'Divider',
     component: DividerTest,
     testPageButton: HOMEPAGE_DIVIDER_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],

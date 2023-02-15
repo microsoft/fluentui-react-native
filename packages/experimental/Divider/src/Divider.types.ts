@@ -45,36 +45,30 @@ export interface DividerProps {
 export interface DividerTokens extends LayoutTokens {
   /**
    * The color of the content passed into the divider. This is overriden if the `color` prop is set.
-   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   contentColor?: ColorValue;
   /**
    * The padding of divider content between the start and end lines.
    * @default 12
-   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   contentPadding?: string | number;
   /**
    * The flex value of the line after content, set to 0 if `alignContent` = `end`.
    * @default 1
-   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   flexAfter?: number;
   /**
    * The flex value of the line before content, set to 0 if `alignContent` = `start`.
    * @default 1
-   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   flexBefore?: number;
   /**
    * Color of the divider lines. This is overriden if the `color` prop is set.
-   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   lineColor?: ColorValue;
   /**
    * The minimum size of a line shrunken by a non-centered divider.
    * @default 8
-   * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   minLineSize?: number;
   /**
