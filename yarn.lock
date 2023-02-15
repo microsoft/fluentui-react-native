@@ -3879,9 +3879,9 @@
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
 "@types/react-native@^0.68.0":
-  version "0.68.11"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.11.tgz#2b8592f5cdb819079b11e2ac3f772db01514e3a7"
-  integrity sha512-YdwPWo59uCiPK9Dnx2V/rmGKpFzhmp/frD9nhJI/gT10iQnYEf1LqNUdItXqnqswz9WAOoAkYnparth8rJ4xQw==
+  version "0.68.12"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.12.tgz#f951c8abd6bb11b9219bd43a835fc4dc31ac6025"
+  integrity sha512-DoyobAXG48Q/Z+eW+o6i5hHr0b7LbzE6CgMRA6NQ46C81WMfbp6nh7MwTtFg/Wudil6E6zkLtyYcttgeAim6MQ==
   dependencies:
     "@types/react" "^17"
 
