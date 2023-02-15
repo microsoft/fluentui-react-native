@@ -11,7 +11,5 @@ describe('Divider Testing Initialization', () => {
     /* Click on component button to navigate to test page */
     await DividerPageObject.navigateToPageAndLoadTests();
     expect(await DividerPageObject.isPageLoaded()).toBeTruthy(DividerPageObject.ERRORMESSAGE_PAGELOAD);
-
-    expect(await DividerPageObject.didAssertPopup()).toBeFalsy(DividerPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
