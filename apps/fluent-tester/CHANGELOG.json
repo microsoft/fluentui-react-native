@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 15 Feb 2023 00:51:10 GMT",
+      "tag": "@fluentui-react-native/tester_v0.134.2",
+      "version": "0.134.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/divider to v0.2.1",
+            "commit": "4ea4d97ea0fa8cea2a682c43823c0e2c850e5066"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Feb 2023 22:22:51 GMT",
       "tag": "@fluentui-react-native/tester_v0.134.1",
       "version": "0.134.1",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Appearance prop correctly affects color",
-  "packageName": "@fluentui-react-native/divider",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
