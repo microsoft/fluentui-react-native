@@ -15,9 +15,10 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     variant: 'subheaderStandard',
     radioBorderStyle: 'solid',
     radioBorder: t.colors.neutralStrokeAccessible,
-    color: t.colors.neutralForeground3,
-    radioOuterCircleSize: 20,
-    radioInnerCircleSize: 10,
+    color: t.colors.neutralForeground1,
+    radioOuterCircleSize: 16,
+    radioInnerCircleSize: 8,
+    radioOuterCircleBackground: t.colors.neutralBackground1,
     labelMarginVertical: globalTokens.size40,
     labelMarginRight: globalTokens.size20,
     labelMarginLeft: globalTokens.sizeNone,
@@ -42,36 +43,43 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
 
     disabled: {
       // Unchecked, Disabled
-      radioBorder: t.colors.neutralForegroundDisabled,
+      radioOuterCircleBackground: t.colors.neutralBackgroundDisabled,
+      radioBorder: t.colors.neutralStrokeDisabled,
       color: t.colors.neutralForegroundDisabled,
       radioVisibility: 0,
     },
 
     hovered: {
       // Unchecked, Hover
+      radioOuterCircleBackground: t.colors.neutralBackground1,
       radioBorder: t.colors.neutralStrokeAccessibleHover,
-      color: t.colors.neutralForeground2,
+      color: t.colors.neutralForeground1,
 
       selected: {
         // Checked, Hover
+        radioOuterCircleBackground: t.colors.brandBackgroundHover,
         radioBorder: t.colors.compoundBrandStroke1Hover,
-        radioFill: t.colors.compoundBrandBackground1Hover,
-        color: t.colors.neutralForeground2,
+        radioFill: t.colors.neutralForegroundOnBrand,
+        color: t.colors.neutralForeground1,
         radioVisibility: 1,
+        radioInnerCircleSize: 10,
       },
     },
 
     pressed: {
       // Unchecked, Pressed
+      radioOuterCircleBackground: t.colors.neutralBackground1,
       radioBorder: t.colors.neutralStrokeAccessiblePressed,
       color: t.colors.neutralForeground1,
 
       selected: {
         // Checked, Pressed
+        radioOuterCircleBackground: t.colors.brandBackgroundPressed,
         radioBorder: t.colors.compoundBrandStroke1Pressed,
-        radioFill: t.colors.compoundBrandBackground1Pressed,
+        radioFill: t.colors.neutralForegroundOnBrand,
         color: t.colors.neutralForeground1,
         radioVisibility: 1,
+        radioInnerCircleSize: 6,
       },
     },
 
@@ -84,9 +92,10 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
 
     selected: {
       // Checked, Rest
+      radioOuterCircleBackground: t.colors.brandBackground,
       radioBorder: t.colors.compoundBrandStroke1,
-      radioFill: t.colors.compoundBrandStroke1,
-      color: t.colors.neutralForeground3,
+      radioFill: t.colors.neutralForegroundOnBrand,
+      color: t.colors.neutralForeground1,
       radioVisibility: 1,
 
       disabled: {

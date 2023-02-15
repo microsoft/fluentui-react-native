@@ -28,7 +28,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     button: buildProps(
       (tokens: RadioTokens) => ({
         style: {
-          backgroundColor: 'transparent',
+          backgroundColor: tokens.radioOuterCircleBackground,
           width: tokens.radioOuterCircleSize,
           height: tokens.radioOuterCircleSize,
           alignItems: 'center',
@@ -45,6 +45,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         android_ripple: { color: tokens.rippleColor, radius: tokens.rippleRadius, borderless: true },
       }),
       [
+        'radioOuterCircleBackground',
         'radioBorderWidth',
         'radioBorderStyle',
         'radioOuterCircleSize',
@@ -74,7 +75,6 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         style: {
           alignItems: tokens.labelAlignItems,
           flexDirection: 'column',
-          marginTop: 1,
           marginRight: tokens.labelMarginRight,
           marginLeft: tokens.labelMarginLeft,
           padding: tokens.labelPadding,

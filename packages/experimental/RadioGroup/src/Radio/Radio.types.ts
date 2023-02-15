@@ -54,6 +54,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorderWidth?: number;
 
   /**
+   * Background color of outer circle
+   */
+  radioOuterCircleBackground?: ColorValue;
+
+  /**
    * The flex direction of the root
    */
   flexDirection?: ViewStyle['flexDirection'];
