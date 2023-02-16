@@ -3884,9 +3884,9 @@
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
 "@types/react-native@^0.68.0":
-  version "0.68.11"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.11.tgz#2b8592f5cdb819079b11e2ac3f772db01514e3a7"
-  integrity sha512-YdwPWo59uCiPK9Dnx2V/rmGKpFzhmp/frD9nhJI/gT10iQnYEf1LqNUdItXqnqswz9WAOoAkYnparth8rJ4xQw==
+  version "0.68.12"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.12.tgz#f951c8abd6bb11b9219bd43a835fc4dc31ac6025"
+  integrity sha512-DoyobAXG48Q/Z+eW+o6i5hHr0b7LbzE6CgMRA6NQ46C81WMfbp6nh7MwTtFg/Wudil6E6zkLtyYcttgeAim6MQ==
   dependencies:
     "@types/react" "^17"
 
@@ -5766,9 +5766,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.31.8"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.8.tgz#8b6a4ae25bd0ba6385639cead5739d7fedd08d0a"
-  integrity sha512-YRbyThROPH1kYRTf9nOKVl+iP8n6XhSm5hB5/L9wwzVXvQ2Iku/yu+r79D0h4Ga1duA3FfsLCL3n5Q81/rezwg==
+  version "2.31.9"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.9.tgz#a0a11584c8227510e85bff744daf4e751ad00be4"
+  integrity sha512-O7NJc246hCAn6JMZBugG6RjYw6OeCPuC/HEXdm4Wu3NQNvODbwsSE8hLHeJLVgUXVk9R+gTKZHmGdWXv5QCP7g==
   dependencies:
     cosmiconfig "^7.0.0"
     execa "^5.0.0"
@@ -12978,9 +12978,9 @@ react-native-test-app@^2.0.2:
     yargs "^16.0.0"
 
 react-native-windows@^0.68.0:
-  version "0.68.26"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.26.tgz#4900b03ab3545d061044c55da68a7501ebaa8153"
-  integrity sha512-61G2IQ/dXgN9mhvCRR2PXoipKQzcIBNA92TGhslo2NrDqXtzoU4R/MFNqRlCBDGhcHLTYdSGaEGoYekbUKIHrQ==
+  version "0.68.27"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.27.tgz#74c3de5f7a3ada50395cc095b50cbd38c5123f93"
+  integrity sha512-RSGJ82dyu3TcrrCosYcvTJ7yxXvSVn2ud9bpyk7TuZAJOYIWSasfB57tpokrw2ZgswkeAMIsE/KSHBHVqWBN5Q==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"

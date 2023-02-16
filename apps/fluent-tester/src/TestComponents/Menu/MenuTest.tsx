@@ -17,6 +17,7 @@ import { StyleSheet } from 'react-native';
 import { E2EMenuTest } from './E2EMenuTest';
 import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
+import { MenuTooltips } from './MenuTooltips';
 import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
 import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
 import { stackStyle } from '../Common/styles';
@@ -124,7 +125,7 @@ const Submenu: React.FunctionComponent = () => {
   return (
     <Menu>
       <MenuTrigger>
-        <MenuItem>A second MenuItem</MenuItem>
+        <MenuItem>A second MenuItem trigger</MenuItem>
       </MenuTrigger>
       <MenuPopover minWidth={230}>
         <MenuList>
@@ -267,6 +268,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu open controlled',
     component: MenuControlledOpen,
+  },
+  {
+    name: 'Menu with tooltips on items',
+    component: MenuTooltips,
   },
   {
     name: 'Menu Submenu',

@@ -26,7 +26,7 @@ export const MenuItem = compose<MenuItemType>({
     const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer] || userProps[layer]);
 
     return (final: MenuItemProps, children: React.ReactNode) => {
-      const { accessibilityLabel, ...mergedProps } = mergeProps(menuItem.props, final);
+      const { accessibilityLabel, tooltip, ...mergedProps } = mergeProps(menuItem.props, final);
       const chevronXml = I18nManager.isRTL
         ? `
           <svg>
@@ -39,11 +39,12 @@ export const MenuItem = compose<MenuItemType>({
 
       // We only automatically support the one child string.
       const label = getAccessibilityLabel(accessibilityLabel, children[0]);
+      const tooltipResult = getTooltip(tooltip, menuItem.state.hasTooltips, children[0]);
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           {menuItem.state.hasCheckmarks && <Slots.checkmark />}
-          {children && <Slots.content>{children}</Slots.content>}
+          {children && <Slots.content tooltip={tooltipResult}>{children}</Slots.content>}
           {menuItem.state.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
         </Slots.root>
       );
@@ -60,6 +61,19 @@ const getAccessibilityLabelWorker = (accessibilityLabel: string, child: React.Re
     return child;
   }
 
-  return '';
+  return undefined;
 };
 export const getAccessibilityLabel = memoize(getAccessibilityLabelWorker);
+
+const getTooltipWorker = (tooltip: string, hasTooltips: boolean, child: React.ReactNode) => {
+  if (tooltip !== undefined) {
+    return tooltip;
+  }
+
+  if (hasTooltips && typeof child === 'string') {
+    return child;
+  }
+
+  return undefined;
+};
+export const getTooltip = memoize(getTooltipWorker);

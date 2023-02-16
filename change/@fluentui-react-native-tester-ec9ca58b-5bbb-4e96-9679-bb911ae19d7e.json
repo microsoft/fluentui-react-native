@@ -1,7 +1,7 @@
 {
   "type": "patch",
-  "comment": "Copy Android tokens to iOS",
+  "comment": "Add hasTooltips as MenuList prop",
   "packageName": "@fluentui-react-native/tester",
-  "email": "saadnajmi2@gmail.com",
+  "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"
 }

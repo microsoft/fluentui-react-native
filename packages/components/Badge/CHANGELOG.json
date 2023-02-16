@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Tue, 14 Feb 2023 22:22:51 GMT",
+      "tag": "@fluentui-react-native/badge_v0.4.27",
+      "version": "0.4.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.68",
+            "commit": "c1495153e7ee9eeb66cfc822c9f73436bbf2e7df"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/badge_v0.4.26",
       "version": "0.4.26",

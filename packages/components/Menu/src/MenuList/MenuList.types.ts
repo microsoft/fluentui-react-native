@@ -32,6 +32,14 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
   hasCheckmarks?: boolean;
 
   /**
+   * States that menu items all have tooltips with its text by default.
+   *
+   * This option is useful for programmatically generated items to provide
+   * text for options that end up having tuncated text.
+   */
+  hasTooltips?: boolean;
+
+  /**
    * Callback when checked items change
    *
    * @param checked Array of all currently checked values

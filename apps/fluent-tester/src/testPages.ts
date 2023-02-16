@@ -9,7 +9,7 @@ import { CheckboxV1Test } from './TestComponents/CheckboxV1';
 import { ColorTokensTest } from './TestComponents/ColorTokens';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
-import { DividerTest, HOMEPAGE_DIVIDER_BUTTON } from './TestComponents/Divider';
+import { DividerTest } from './TestComponents/Divider';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
 // import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
@@ -119,7 +119,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Divider',
     component: DividerTest,
-    testPageButton: HOMEPAGE_DIVIDER_BUTTON,
+    testPageButton: Constants.HOMEPAGE_DIVIDER_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {

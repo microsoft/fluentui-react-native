@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Tue, 14 Feb 2023 22:22:51 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.6.6",
+      "version": "1.6.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "c1495153e7ee9eeb66cfc822c9f73436bbf2e7df",
+            "comment": "Copy Android tokens to iOS"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.4.27",
+            "commit": "c1495153e7ee9eeb66cfc822c9f73436bbf2e7df"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/avatar_v1.6.5",
       "version": "1.6.5",

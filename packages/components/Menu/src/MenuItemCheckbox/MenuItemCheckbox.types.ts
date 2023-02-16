@@ -43,7 +43,7 @@ export interface MenuItemCheckboxProps extends MenuItemProps {
 }
 export interface MenuItemCheckboxInfo {
   props: MenuItemCheckboxProps & React.ComponentPropsWithRef<any>;
-  state: PressableState;
+  state: PressableState & { hasTooltips: boolean };
 }
 
 export interface MenuItemCheckboxSlotProps {
