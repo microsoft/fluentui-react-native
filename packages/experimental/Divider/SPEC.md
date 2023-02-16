@@ -4,6 +4,12 @@
 
 The `Divider` component represents a visual separator on a given page. On desktop platforms, a `Divider` can be horizontal or vertical, and it can contain content, text or an icon, for aesthetic purposes.
 
+Note:
+
+For mobile platforms, only horizontal `Divider` is supported.
+
+Content, text or an icon are also not supported on mobile platforms.
+
 ## Sample Code
 
 ### Basic Divider
