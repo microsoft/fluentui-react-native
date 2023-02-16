@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 16 Feb 2023 00:29:35 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.20.0",
+      "version": "1.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "5e59f352a31631da1693f9960eec1c6c8ee69821",
+            "comment": "Add Divider E2E tests for desktop platforms"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Feb 2023 21:33:24 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.19.0",
       "version": "1.19.0",

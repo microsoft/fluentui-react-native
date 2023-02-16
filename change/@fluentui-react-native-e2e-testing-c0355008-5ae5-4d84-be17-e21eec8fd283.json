@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add Divider E2E tests for desktop platforms",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

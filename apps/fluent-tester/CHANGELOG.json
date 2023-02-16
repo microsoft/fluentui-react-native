@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 16 Feb 2023 00:29:35 GMT",
+      "tag": "@fluentui-react-native/tester_v0.134.4",
+      "version": "0.134.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "5e59f352a31631da1693f9960eec1c6c8ee69821",
+            "comment": "Add Divider E2E tests for desktop platforms"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 15 Feb 2023 18:30:10 GMT",
       "tag": "@fluentui-react-native/tester_v0.134.3",
       "version": "0.134.3",

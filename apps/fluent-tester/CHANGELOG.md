@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 15 Feb 2023 18:30:10 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Feb 2023 00:29:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.4
+
+Thu, 16 Feb 2023 00:29:35 GMT
+
+### Patches
+
+- Add Divider E2E tests for desktop platforms (winlarry@microsoft.com)
 
 ## 0.134.3
 
