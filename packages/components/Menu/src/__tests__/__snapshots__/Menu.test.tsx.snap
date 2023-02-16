@@ -296,16 +296,7 @@ Array [
           accessible={true}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
+          keyDownEvents={Array []}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
@@ -860,16 +851,7 @@ Array [
           accessible={true}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
+          keyDownEvents={Array []}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
@@ -2414,16 +2396,16 @@ Array [
           keyDownEvents={
             Array [
               Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-              Object {
                 "key": "ArrowLeft",
               },
               Object {
                 "key": "ArrowRight",
+              },
+              Object {
+                "key": " ",
+              },
+              Object {
+                "key": "Enter",
               },
             ]
           }

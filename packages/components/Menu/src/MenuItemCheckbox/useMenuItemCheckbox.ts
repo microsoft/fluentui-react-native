@@ -90,7 +90,7 @@ export const useMenuCheckboxInteraction = (
     [disabled, isSubmenu, onArrowClose, toggleCallback],
   );
 
-  const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
+  const keys = disabled ? [] : isSubmenu ? submenuTriggerKeys : triggerKeys;
   const onKeyProps = useKeyDownProps(onKeysPressed, ...keys);
 
   const accessibilityActionsProp = accessibilityActions
