@@ -1,6 +1,6 @@
+import { getMemoCache } from '@fluentui-react-native/memo-cache';
 import type { ViewStyle, TextStyle, ImageStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
-import { getMemoCache } from '@fluentui-react-native/memo-cache';
 
 /**
  * Signature for inputs and outputs for StyleSheet.create.  This is a collection of named styles which can

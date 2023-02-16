@@ -1,6 +1,7 @@
-import * as React from 'react';
-import type { ThemeReference } from './themeReference';
 import { ThemeContext } from '@fluentui-react-native/theme-types';
+import * as React from 'react';
+
+import type { ThemeReference } from './themeReference';
 
 export interface ThemeProviderProps extends React.PropsWithChildren<Record<string, unknown>> {
   /**

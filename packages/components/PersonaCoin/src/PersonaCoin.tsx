@@ -6,10 +6,9 @@ import { withSlots } from '@uifabricshared/foundation-composable';
 import { compose } from '@uifabricshared/foundation-compose';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-
 import { Image, View, Text } from 'react-native';
-import { getPresenceIconSource } from './PersonaCoin.helpers';
 
+import { getPresenceIconSource } from './PersonaCoin.helpers';
 import { settings } from './PersonaCoin.settings';
 import { buildIconStyles } from './PersonaCoin.tokens.icon';
 import { buildInitialsStyles } from './PersonaCoin.tokens.initials';

@@ -11,6 +11,7 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import * as React from 'react';
 import { View } from 'react-native';
 
+import { CMContext } from './ContextualMenu';
 import { settings } from './ContextualMenuItem.settings';
 import type {
   ContextualMenuItemSlotProps,
@@ -23,7 +24,6 @@ import { contextualMenuItemName } from './ContextualMenuItem.types';
 
 
 
-import { CMContext } from './ContextualMenu';
 
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({

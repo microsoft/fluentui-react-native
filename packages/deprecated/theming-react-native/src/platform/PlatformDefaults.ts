@@ -1,6 +1,7 @@
-import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import { createThemeRegistry } from '@uifabricshared/theme-registry';
 import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
+
+import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import type { IThemingModuleHelper } from '../NativeModule';
 
 /**

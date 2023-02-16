@@ -11,16 +11,17 @@ import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import * as React from 'react';
 import { I18nManager, Platform, View } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
+import { Svg, G, Path } from 'react-native-svg';
+
+import { CMContext } from './ContextualMenu';
+import { settings } from './SubmenuItem.settings';
 import type { SubmenuItemSlotProps, SubmenuItemState, SubmenuItemProps, SubmenuItemRenderData, SubmenuItemType } from './SubmenuItem.types';
 import { submenuItemName } from './SubmenuItem.types';
 
-import { settings } from './SubmenuItem.settings';
 
 
-import { CMContext } from './ContextualMenu';
 
-import type { SvgProps } from 'react-native-svg';
-import { Svg, G, Path } from 'react-native-svg';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,

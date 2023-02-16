@@ -1,7 +1,8 @@
 import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+
 import { Avatar } from '..';
 import { getInitials } from '../useAvatar';
-import * as renderer from 'react-test-renderer';
 
 const alphabeticalTestNames = [
   'Marie',

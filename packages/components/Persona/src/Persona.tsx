@@ -10,8 +10,6 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { View, Text } from 'react-native';
 
 import { settings } from './Persona.settings';
-
-
 import { buildCoinStyle } from './Persona.tokens.coin';
 import { buildRootStyle } from './Persona.tokens.root';
 import { buildStackStyle } from './Persona.tokens.stack';

@@ -7,15 +7,15 @@ import { compose, mergeProps, withSlots, memoize } from '@fluentui-react-native/
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { Pressable } from '@fluentui-react-native/pressable';
+import { Body2, Body2Strong } from '@fluentui-react-native/text';
 import type { PressableProps, ViewStyle, ViewProps } from 'react-native';
-
 import { useWindowDimensions, View } from 'react-native';
+
+import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
+import { stylingSettings } from './Notification.styling';
 import type { NotificationType, NotificationProps } from './Notification.types';
 import { notification } from './Notification.types';
-import { Body2, Body2Strong } from '@fluentui-react-native/text';
 
-import { stylingSettings } from './Notification.styling';
-import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 
 
 /**

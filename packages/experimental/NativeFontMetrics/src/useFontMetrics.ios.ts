@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { NativeEventEmitter } from 'react-native';
 import { useSubscription } from 'use-subscription';
+
 import { fontMetrics } from './fontMetrics';
 import NativeFontMetrics from './NativeFontMetrics';
 import type { ScaleFactors } from './NativeFontMetrics.types';

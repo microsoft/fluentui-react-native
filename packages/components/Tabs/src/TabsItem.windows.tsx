@@ -14,8 +14,6 @@ import { Pressable, View } from 'react-native';
 
 import { TabsContext } from './Tabs';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
-
-
 import type { TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
 import { tabsItemName } from './TabsItem.types';
 

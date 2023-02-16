@@ -1,5 +1,8 @@
-import type { ISlotProps } from '@uifabricshared/foundation-settings';
+import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
 import { mergeProps } from '@fluentui-react-native/merge-props';
+import type { ISlotProps } from '@uifabricshared/foundation-settings';
+
+import type { ITokenPropInfo, ICachedPropHandlers } from './Token.internal';
 import type {
   ITargetHasToken,
   IStyleFactoryOperation,
@@ -8,8 +11,7 @@ import type {
   IStyleFinalizer,
   IStyleFactoryFunction,
 } from './Token.types';
-import type { ITokenPropInfo, ICachedPropHandlers } from './Token.internal';
-import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+
 
 interface ITokensForSlot<TProps, TTokens, TTheme> {
   toStyle: IStyleFactoryOperation<TTokens, TTheme>[];

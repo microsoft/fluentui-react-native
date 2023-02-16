@@ -1,9 +1,10 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { defaultFluentDarkTheme, defaultFluentHighConstrastTheme, defaultFluentTheme } from './defaultTheme';
-import { Appearance } from 'react-native';
 import type { Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import assertNever from 'assert-never';
+import { Appearance } from 'react-native';
+
+import { defaultFluentDarkTheme, defaultFluentHighConstrastTheme, defaultFluentTheme } from './defaultTheme';
 
 export function createDefaultTheme(options: ThemeOptions = {}): ThemeReference {
   const themeRef = new ThemeReference({} as Theme, () => {

@@ -1,9 +1,10 @@
 /** @jsx withSlots */
 import { withSlots, stagedComponent } from '@fluentui-react-native/use-slot';
-import * as renderer from 'react-test-renderer';
-import { buildUseSlots } from './buildUseSlots';
 import type { ViewProps, TextProps } from 'react-native';
 import { View, Text } from 'react-native';
+import * as renderer from 'react-test-renderer';
+
+import { buildUseSlots } from './buildUseSlots';
 
 type SlotProps1 = {
   outer: ViewProps;

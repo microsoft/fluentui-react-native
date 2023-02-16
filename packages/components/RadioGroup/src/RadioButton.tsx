@@ -15,10 +15,6 @@ import { View } from 'react-native';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import type { IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { radioButtonName } from './RadioButton.types';
-
-
-
-
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({

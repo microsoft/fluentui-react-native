@@ -1,9 +1,9 @@
 /** @jsx withSlots */
+import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { ImageURISource, ViewProps, ColorValue } from 'react-native';
 import { NativeModules } from 'react-native';
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
 const avatarName = 'NativeAvatar';
 

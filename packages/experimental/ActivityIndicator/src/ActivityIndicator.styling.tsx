@@ -1,7 +1,9 @@
 import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
+import assertNever from 'assert-never';
 import type { ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-native';
 import { Appearance } from 'react-native';
+
 import type {
   ActivityIndicatorProps,
   FluentActivityIndicatorSlotProps,
@@ -10,7 +12,6 @@ import type {
   ActivityIndicatorSize,
 } from './ActivityIndicator.types';
 import { activityIndicatorName } from './ActivityIndicator.types';
-import assertNever from 'assert-never';
 
 export const diameterSizeMap: { [key: string]: number } = {
   xSmall: 12,

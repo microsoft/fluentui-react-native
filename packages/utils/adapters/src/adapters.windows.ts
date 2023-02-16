@@ -1,6 +1,7 @@
-import type { IViewWindowsProps } from 'react-native-windows';
 import type { TextProps } from 'react-native';
 import type { ImageProps } from 'react-native';
+import type { IViewWindowsProps } from 'react-native-windows';
+
 import type { IFilterMask } from './filter.types';
 
 // export core interface types from RN

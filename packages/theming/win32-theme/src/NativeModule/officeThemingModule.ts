@@ -1,5 +1,5 @@
-import type { NativeModule, ColorValue } from 'react-native';
 import type { OfficePalette, Typography } from '@fluentui-react-native/theme-types';
+import type { NativeModule, ColorValue } from 'react-native';
 
 export type PlatformDefaultsChangedArgs = { hostThemeSetting: string };
 export type PlatformDefaultsChangedCallback = (args?: PlatformDefaultsChangedArgs) => void;

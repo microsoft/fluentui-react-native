@@ -1,8 +1,9 @@
+import { memoize } from '@fluentui-react-native/framework';
 import { NativeEventEmitter } from 'react-native';
+
 import NativeAppearanceAdditions from './NativeAppearanceAdditions.ios';
 import type { AppearanceAdditions, SizeClass, UserInterfaceLevel, AccessibilityContrastOption } from './NativeAppearanceAdditions.types';
 import { HorizontalSizeClassKey, UserInterfaceLevelKey, AccessibilityContrastOptionKey } from './NativeAppearanceAdditions.types';
-import { memoize } from '@fluentui-react-native/framework';
 
 class AppearanceAdditionsImpl implements AppearanceAdditions {
   _horizontalSizeClass: SizeClass;

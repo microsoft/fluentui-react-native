@@ -1,6 +1,6 @@
+import type { AppearanceOptions, ThemeOptions } from '@fluentui-react-native/theme-types';
 import { Appearance } from 'react-native';
 import { AppTheme } from 'react-native-windows';
-import type { AppearanceOptions, ThemeOptions } from '@fluentui-react-native/theme-types';
 
 export function getCurrentAppearance(appearance: ThemeOptions['appearance'], fallback: AppearanceOptions): AppearanceOptions {
   if (appearance === undefined) {

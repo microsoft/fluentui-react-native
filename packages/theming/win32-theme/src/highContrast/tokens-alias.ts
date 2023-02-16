@@ -1,5 +1,5 @@
-import { PlatformColor } from 'react-native';
 import aliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json';
+import { PlatformColor } from 'react-native';
 
 export const hcAliasTokens = processAliasTokens(aliasTokens);
 

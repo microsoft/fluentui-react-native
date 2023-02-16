@@ -11,10 +11,11 @@ import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
+
+import { settings } from './Button.settings';
 import type { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, IButtonType } from './Button.types';
 import { buttonName } from './Button.types';
 
-import { settings } from './Button.settings';
 
 
 /**

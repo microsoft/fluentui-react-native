@@ -1,9 +1,11 @@
-import * as React from 'react';
-import type { IThemeProviderProps } from './ThemeProvider.types';
-import { useThemeRegistry, ThemeRegistryContext } from './ThemeContext';
 import type { IThemeEventListener } from '@uifabricshared/theme-registry';
-import { getThemeRegistry } from './Global';
 import { ThemeContext } from '@uifabricshared/theming-ramp';
+import * as React from 'react';
+
+import { getThemeRegistry } from './Global';
+import { useThemeRegistry, ThemeRegistryContext } from './ThemeContext';
+import type { IThemeProviderProps } from './ThemeProvider.types';
+
 
 /**
  * @deprecated
