@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 14 Feb 2023 22:22:51 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Feb 2023 22:05:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.4
+
+Thu, 16 Feb 2023 22:05:56 GMT
+
+### Patches
+
+- Add hasTooltips as MenuList prop (ruaraki@microsoft.com)
 
 ## 1.4.3
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Thu, 16 Feb 2023 22:05:56 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.4",
+      "version": "1.4.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "7e8e4f84d7e66d9497e5c7f4328695748be061f8",
+            "comment": "Add hasTooltips as MenuList prop"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Feb 2023 22:22:51 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.3",
       "version": "1.4.3",

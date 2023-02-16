@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 16 Feb 2023 00:29:35 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Feb 2023 22:05:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.5
+
+Thu, 16 Feb 2023 22:05:56 GMT
+
+### Patches
+
+- Add hasTooltips as MenuList prop (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.4.4
 
 ## 0.134.4
 
