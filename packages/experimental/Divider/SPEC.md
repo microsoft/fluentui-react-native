@@ -79,7 +79,7 @@ The `Divider` uses 6 total slots:
 - `text` [TextV1] If text is passed as a child, this renders inside `wrapper`.
 - `icon` [IconV1] If the `icon` prop is set, an icon will render inside `wrapper`. If text is also passed while the `icon` prop is set, then this slot will not render.
 
-These slots can be modified using the `compose` function on `Divider`. For more information on using the compose API, please see [this page](https://github.com/microsoft/fluentui-react-native/blob/main/packages/framework/composition/README.md).
+Because the Divider is built using the `compressible` framework, these slots are currently not able to be modified.
 
 ### Props
 
