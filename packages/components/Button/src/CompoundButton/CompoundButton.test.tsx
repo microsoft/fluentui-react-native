@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { CompoundButton } from './CompoundButton';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as React from 'react';
 import * as renderer from 'react-test-renderer';
+
+import { CompoundButton } from './CompoundButton';
 
 it('CompoundButton default', () => {
   const tree = renderer.create(<CompoundButton secondaryContent="sublabel">Default Button</CompoundButton>).toJSON();

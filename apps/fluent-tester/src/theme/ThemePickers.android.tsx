@@ -1,14 +1,15 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { lightnessOptions, testerTheme } from './CustomThemes';
-import type { ThemeNames } from './applyTheme';
-import { themeChoices } from './applyTheme';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/framework';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import type { PickerProps } from '@react-native-picker/picker';
 import { Picker } from '@react-native-picker/picker';
+import * as React from 'react';
+import { View } from 'react-native';
+
+import { themeChoices } from './applyTheme';
+import type { ThemeNames } from './applyTheme';
+import { lightnessOptions, testerTheme } from './CustomThemes';
 
 const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
   return {

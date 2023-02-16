@@ -1,11 +1,12 @@
-import * as React from 'react';
 import { Text } from '@fluentui/react-native';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useFluentTheme } from '@fluentui-react-native/framework';
-import { View } from 'react-native';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { mergeStyles } from '@fluentui-react-native/merge-props';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { shadowTestPageStyles } from './ShadowTestPageStyles';
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {

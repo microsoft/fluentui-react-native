@@ -1,6 +1,7 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
 import type { ButtonTokens } from './Button.types';
 
 export const defaultButtonFontTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>

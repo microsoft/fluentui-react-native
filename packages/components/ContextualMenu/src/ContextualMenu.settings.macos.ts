@@ -1,7 +1,8 @@
-import type { ContextualMenuType } from './ContextualMenu.types';
-import { contextualMenuName } from './ContextualMenu.types';
 import type { IComposeSettings } from '@uifabricshared/foundation-compose';
 import { I18nManager } from 'react-native';
+
+import type { ContextualMenuType } from './ContextualMenu.types';
+import { contextualMenuName } from './ContextualMenu.types';
 
 export const settings: IComposeSettings<ContextualMenuType> = [
   {

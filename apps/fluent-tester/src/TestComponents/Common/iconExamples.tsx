@@ -1,5 +1,6 @@
-import { Platform } from 'react-native';
 import type { SvgIconProps, FontIconProps, IconProps } from '@fluentui-react-native/icon';
+import { Platform } from 'react-native';
+
 import TestSvg from '../../../assets/test.svg';
 
 export const svgProps: SvgIconProps = {

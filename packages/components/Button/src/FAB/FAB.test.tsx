@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { FAB } from './FAB';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as React from 'react';
 import * as renderer from 'react-test-renderer';
+
+import { FAB } from './FAB';
 
 const fontBuiltInProps = {
   fontFamily: 'Arial',

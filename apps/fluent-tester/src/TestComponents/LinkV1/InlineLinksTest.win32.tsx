@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { TextV1 as Text } from '@fluentui/react-native';
+import * as React from 'react';
 
 // Platform.select not available for win32
 // Forking test instead

@@ -1,6 +1,6 @@
-import type { SvgProps } from 'react-native-svg';
-import type { ColorValue, ViewProps } from 'react-native';
 import type { IBackgroundColorTokens } from '@fluentui-react-native/tokens';
+import type { ColorValue, ViewProps } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
 
 export const shimmerName = 'Shimmer';
 

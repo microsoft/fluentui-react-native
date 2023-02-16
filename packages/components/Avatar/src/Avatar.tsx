@@ -1,15 +1,17 @@
 /** @jsx withSlots */
-import { Image, View, Text, Platform } from 'react-native';
-import { Fragment } from 'react';
-import type { AvatarProps, AvatarType, AvatarState, AvatarSlotProps } from './Avatar.types';
-import { AvatarName } from './Avatar.types';
-import { stylingSettings } from './Avatar.styling';
+import { PresenceBadge } from '@fluentui-react-native/badge';
 import type { UseSlots, Slots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { useAvatar } from './useAvatar';
-import { PresenceBadge } from '@fluentui-react-native/badge';
 import { Icon } from '@fluentui-react-native/icon';
+import { Fragment } from 'react';
+import { Image, View, Text, Platform } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
+
+import { stylingSettings } from './Avatar.styling';
+import type { AvatarProps, AvatarType, AvatarState, AvatarSlotProps } from './Avatar.types';
+import { AvatarName } from './Avatar.types';
+import { useAvatar } from './useAvatar';
+
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the avatar.

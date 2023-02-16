@@ -1,7 +1,9 @@
+import { Text } from '@fluentui/react-native';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
+import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
-import { stackStyle } from '../Common/styles';
+
 import {
   CHECKBOXV1_TEST_COMPONENT,
   CHECKBOXV1_ACCESSIBILITY_LABEL,
@@ -9,8 +11,7 @@ import {
   CHECKBOXV1_TEST_COMPONENT_LABEL,
   CHECKBOXV1_ON_PRESS,
 } from '../../../../E2E/src/CheckboxV1/consts';
-import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui/react-native';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const E2ECheckboxV1Test: React.FunctionComponent = () => {

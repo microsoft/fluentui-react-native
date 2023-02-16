@@ -1,6 +1,17 @@
 /** @jsx withSlots */
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { settings } from './ContextualMenuItem.settings';
 import type {
   ContextualMenuItemSlotProps,
   ContextualMenuItemState,
@@ -9,17 +20,11 @@ import type {
   ContextualMenuItemType,
 } from './ContextualMenuItem.types';
 import { contextualMenuItemName } from './ContextualMenuItem.types';
-import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { compose } from '@uifabricshared/foundation-compose';
-import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
-import { Text } from '@fluentui-react-native/text';
-import { settings } from './ContextualMenuItem.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+
+
+
 import { CMContext } from './ContextualMenu';
-import { Icon, createIconProps } from '@fluentui-react-native/icon';
+
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,

@@ -1,6 +1,6 @@
-import MenuButtonV1PageObject from '../pages/MenuButtonV1PageObject.win';
 import { MENUBUTTON_A11Y_ROLE, Attribute } from '../../common/consts';
 import { MENUBUTTONV1_ACCESSIBILITY_LABEL, MENUBUTTONV1_TEST_COMPONENT_LABEL } from '../consts';
+import MenuButtonV1PageObject from '../pages/MenuButtonV1PageObject.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButtonV1 Testing Initialization', () => {

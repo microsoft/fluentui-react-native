@@ -1,6 +1,6 @@
-import IconV1PageObject from '../pages/IconV1PageObject';
 import { Attribute, IMAGE_A11Y_ROLE } from '../../common/consts';
 import { ICON_ACCESSIBILITY_LABEL } from '../../IconLegacy/consts';
+import IconV1PageObject from '../pages/IconV1PageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('IconV1 Testing Initialization', () => {

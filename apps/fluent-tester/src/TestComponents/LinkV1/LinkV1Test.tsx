@@ -1,15 +1,18 @@
-import * as React from 'react';
-import { Alert, View, StyleSheet, Text, TextInput } from 'react-native';
 import type { LinkTokens } from '@fluentui/react-native';
 import { LinkV1 as Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import * as React from 'react';
+import { Alert, View, StyleSheet, Text, TextInput } from 'react-native';
+import { Platform } from 'react-native';
+
+import { E2ELinkV1Test } from './E2ELinkV1Test';
+import { InlineLinks } from './InlineLinksTest';
 import { LINKV1_TESTPAGE } from '../../../../E2E/src/LinkV1/consts';
+import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { E2ELinkV1Test } from './E2ELinkV1Test';
-import { Platform } from 'react-native';
-import { InlineLinks } from './InlineLinksTest';
+
+
 
 const DefaultLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);

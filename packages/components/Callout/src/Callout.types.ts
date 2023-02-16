@@ -1,9 +1,9 @@
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import type { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
 import type * as React from 'react';
 import type { ScreenRect, ViewStyle } from 'react-native';
-import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { IRenderData } from '@uifabricshared/foundation-composable';
-import type { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 export const calloutName = 'Callout';
 
 /**

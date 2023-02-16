@@ -9,7 +9,6 @@ import { CheckboxV1Test } from './TestComponents/CheckboxV1';
 import { ColorTokensTest } from './TestComponents/ColorTokens';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
-import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { DividerTest, HOMEPAGE_DIVIDER_BUTTON } from './TestComponents/Divider';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
 // import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
@@ -22,6 +21,7 @@ import { LinkV1Test } from './TestComponents/LinkV1';
 import { MenuTest } from './TestComponents/Menu';
 import { MenuButtonLegacyTest } from './TestComponents/MenuButtonLegacy';
 import { MenuButtonV1Test } from './TestComponents/MenuButtonV1';
+import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
 import { PersonaTest } from './TestComponents/Persona';
 import { PersonaCoinTest } from './TestComponents/PersonaCoin';
@@ -32,6 +32,7 @@ import { SeparatorTest } from './TestComponents/Separator';
 import { ShadowTest } from './TestComponents/Shadow';
 import { ShimmerTest } from './TestComponents/Shimmer';
 import { SpacingTokensTest } from './TestComponents/Spacing';
+import { SpinnerTest } from './TestComponents/Spinner';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
 import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
@@ -41,7 +42,6 @@ import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
 import * as Constants from '../../E2E/src/index.consts';
-import { SpinnerTest } from './TestComponents/Spinner';
 
 export const tests: TestDescription[] = [
   {

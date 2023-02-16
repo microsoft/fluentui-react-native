@@ -1,13 +1,14 @@
-import * as React from 'react';
-import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
-import { I18nManager, Platform } from 'react-native';
-import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
 import { memoize } from '@fluentui-react-native/framework';
 import type { InteractionEvent, KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyDownProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import * as React from 'react';
+import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
+
+import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
+import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
-import { useMenuContext } from '../context/menuContext';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 

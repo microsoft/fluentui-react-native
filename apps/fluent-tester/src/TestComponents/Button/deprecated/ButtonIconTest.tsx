@@ -3,8 +3,9 @@ import { Button, Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { stackStyle } from '../../Common/styles';
+
 import { testImage, svgProps } from '../../Common/iconExamples';
+import { stackStyle } from '../../Common/styles';
 
 const CustomizedIconButton = Button.customize({
   tokens: { iconColor: 'red' },

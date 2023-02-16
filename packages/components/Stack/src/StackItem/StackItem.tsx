@@ -1,11 +1,12 @@
-import type * as React from 'react';
-import type { IStackItemProps, IStackItemType } from './StackItem.types';
-import { stackItemName } from './StackItem.types';
-import { compose } from '@uifabricshared/foundation-compose';
-import { View } from 'react-native';
 import { filterViewProps } from '@fluentui-react-native/adapters';
+import { compose } from '@uifabricshared/foundation-compose';
+import type * as React from 'react';
+import { View } from 'react-native';
+
 import { settings } from './StackItem.settings';
 import { stackItemTokenProcessor } from './StackItem.tokens';
+import { stackItemName } from './StackItem.types';
+import type { IStackItemProps, IStackItemType } from './StackItem.types';
 
 export const StackItem: React.FunctionComponent<IStackItemProps> = compose<IStackItemType>({
   displayName: stackItemName,

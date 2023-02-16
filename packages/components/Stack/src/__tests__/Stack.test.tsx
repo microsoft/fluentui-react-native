@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { Stack } from '..';
 import { Text } from '@fluentui-react-native/text';
+import * as React from 'react';
 import * as renderer from 'react-test-renderer';
+
+import { Stack } from '..';
 
 it('Stack with tokens', () => {
   const tree = renderer

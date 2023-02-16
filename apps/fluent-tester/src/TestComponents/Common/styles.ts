@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
 import type { IStackProps } from '@fluentui-react-native/stack';
+import { StyleSheet } from 'react-native';
 
 export const commonTestStyles = StyleSheet.create({
   root: {

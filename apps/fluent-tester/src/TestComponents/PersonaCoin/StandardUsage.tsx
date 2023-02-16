@@ -1,12 +1,14 @@
-import * as React from 'react';
 import type { PersonaSize, PersonaCoinFluentColor, PersonaPresence } from '@fluentui/react-native';
 import { PersonaCoin } from '@fluentui/react-native';
-import { StyledPicker } from '../Common/StyledPicker';
+import { useTheme } from '@fluentui-react-native/theme-types';
+import * as React from 'react';
 import type { ColorValue } from 'react-native';
 import { Switch, View, Text } from 'react-native';
+
 import { satyaPhotoUrl, undefinedText } from './styles';
+import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
+
 
 type WithUndefined<T> = T | typeof undefinedText;
 

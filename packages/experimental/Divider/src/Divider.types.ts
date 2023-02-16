@@ -1,7 +1,7 @@
-import type { ViewProps, ColorValue } from 'react-native';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
-import type { LayoutTokens } from '@fluentui-react-native/tokens';
 import type { TextProps } from '@fluentui-react-native/text';
+import type { LayoutTokens } from '@fluentui-react-native/tokens';
+import type { ViewProps, ColorValue } from 'react-native';
 
 export const dividerName = 'Divider';
 

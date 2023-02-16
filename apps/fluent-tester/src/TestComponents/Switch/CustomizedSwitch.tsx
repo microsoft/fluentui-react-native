@@ -1,8 +1,9 @@
-import * as React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import type { SwitchTokens } from '@fluentui-react-native/switch';
 import { Switch } from '@fluentui-react-native/switch';
+import * as React from 'react';
+import { View, TextInput, StyleSheet } from 'react-native';
+
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
 const styles = StyleSheet.create({

@@ -1,9 +1,10 @@
-import * as React from 'react';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import * as React from 'react';
+
+import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from '../MenuItemCheckbox/MenuItemCheckbox.types';
 import { useMenuCheckboxInteraction } from '../MenuItemCheckbox/useMenuItemCheckbox';
-import { useMenuContext } from '../context/menuContext';
 
 export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckboxInfo => {
   const { disabled, name, persistOnClick } = props;

@@ -1,6 +1,7 @@
 import type { AccessibilityActionEvent, GestureResponderEvent } from 'react-native';
-import type { KeyPressEvent } from '../useKeyProps.types';
+
 import { isAccessibilityActionEvent, isGestureResponderEvent, isKeyPressEvent } from '../events.types';
+import type { KeyPressEvent } from '../useKeyProps.types';
 
 const createMockEvent = (nativeEvent) => {
   return {

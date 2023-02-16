@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { Radio } from './Radio';
-import * as renderer from 'react-test-renderer';
 import { /* checkRenderConsistency,*/ checkReRender } from '@fluentui-react-native/test-tools';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+
+import { Radio } from './Radio';
 
 describe('Radio component tests', () => {
   it('Radio default', () => {

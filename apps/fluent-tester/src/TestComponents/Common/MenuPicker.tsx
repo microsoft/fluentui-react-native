@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { testProps } from './TestProps';
+import * as React from 'react';
+
 import type { CollectionItem, MenuPickerProps } from './MenuPicker.types';
+import { testProps } from './TestProps';
 export { CollectionItem, MenuPickerProps };
 
 /*

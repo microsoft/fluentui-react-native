@@ -1,14 +1,15 @@
 /** @jsx withSlots */
-import * as React from 'react';
-import StackItem from './StackItem/StackItem';
-import type { StackProps, StackType, StackTokens } from './Stack.types';
-import { stackName } from './Stack.types';
-import type { ViewProps } from 'react-native';
-import { View } from 'react-native';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
+import * as React from 'react';
+import { View } from 'react-native';
+import type { ViewProps } from 'react-native';
+
 import { stylingSettings } from './Stack.styling';
+import { stackName } from './Stack.types';
+import type { StackProps, StackType, StackTokens } from './Stack.types';
+import StackItem from './StackItem/StackItem';
 
 // Needed for TS to understand that __jsiExecutorDescription exists.
 declare global {

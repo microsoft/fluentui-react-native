@@ -1,13 +1,14 @@
-import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
 import { Divider } from '@fluentui-react-native/divider';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+import * as React from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
+
 import { DIVIDER_TESTPAGE } from './consts';
+import TestSvg from '../../../assets/test.svg';
+import { commonTestStyles } from '../Common/styles';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
-import { commonTestStyles } from '../Common/styles';
-import TestSvg from '../../../assets/test.svg';
 
 const CustomDivider = Divider.customize({ thickness: 3, paddingVertical: 4 });
 const CustomText = Text.customize({ margin: 8 });

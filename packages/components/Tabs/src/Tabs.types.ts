@@ -1,10 +1,10 @@
-import type * as React from 'react';
-import type { ITextProps } from '@fluentui-react-native/text';
-import type { IRenderData } from '@uifabricshared/foundation-composable';
-import type { IForegroundColorTokens, FontTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import type { View, ViewProps } from 'react-native';
 import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { ITextProps } from '@fluentui-react-native/text';
+import type { IForegroundColorTokens, FontTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
+import type * as React from 'react';
+import type { View, ViewProps } from 'react-native';
 
 export const tabsName = 'Tabs';
 

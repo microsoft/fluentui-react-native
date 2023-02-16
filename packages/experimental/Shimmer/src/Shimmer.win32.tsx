@@ -1,18 +1,19 @@
 /** @jsx withSlots */
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { withSlots } from '@fluentui-react-native/framework';
+import { assertNever } from 'assert-never';
 import { View } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg } from 'react-native-svg';
+
+import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { stylingSettings } from './Shimmer.styling.win32';
 import type { ShimmerElementTypes, ShimmerProps, ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types.shared';
 export { ShimmerCircleElement, ShimmerRectElement };
 import { shimmerName } from './Shimmer.types.shared';
 import type { ClippingMaskProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
-import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
-import { withSlots } from '@fluentui-react-native/framework';
-import { assertNever } from 'assert-never';
 
 const clippingMask: React.FunctionComponent<ClippingMaskProps> = (props: ClippingMaskProps) => {
   /**

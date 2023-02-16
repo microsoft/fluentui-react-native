@@ -1,16 +1,17 @@
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as React from 'react';
 import type { AccessibilityActionName } from 'react-native';
 import * as renderer from 'react-test-renderer';
+
 import { Menu } from '../Menu/Menu';
-import { checkReRender } from '@fluentui-react-native/test-tools';
-import MenuTrigger from '../MenuTrigger/MenuTrigger';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import MenuPopover from '../MenuPopover/MenuPopover';
-import { MenuList } from '../MenuList/MenuList';
+import { MenuDivider } from '../MenuDivider/MenuDivider';
 import { MenuItem } from '../MenuItem/MenuItem';
 import { MenuItemCheckbox } from '../MenuItemCheckbox/MenuItemCheckbox';
-import { MenuDivider } from '../MenuDivider/MenuDivider';
 import { MenuItemRadio } from '../MenuItemRadio/MenuItemRadio';
+import { MenuList } from '../MenuList/MenuList';
+import MenuPopover from '../MenuPopover/MenuPopover';
+import MenuTrigger from '../MenuTrigger/MenuTrigger';
 
 describe('Menu component tests', () => {
   it('Menu default', () => {

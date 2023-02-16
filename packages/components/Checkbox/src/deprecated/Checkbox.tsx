@@ -1,17 +1,5 @@
 /** @jsx withSlots */
-import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
-import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType } from './Checkbox.types';
-import { checkboxName } from './Checkbox.types';
-import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { compose } from '@uifabricshared/foundation-compose';
-import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import {
   useAsToggle,
   useAsPressable,
@@ -19,8 +7,23 @@ import {
   useKeyProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
-import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 import type { IPressableProps } from '@fluentui-react-native/pressable';
+import { Text } from '@fluentui-react-native/text';
+import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { backgroundColorTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import * as React from 'react';
+import { View } from 'react-native';
+import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType } from './Checkbox.types';
+import { checkboxName } from './Checkbox.types';
+
+
+import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
+
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 /**
  * @deprecated This will be removed when the package moves to 1.0.0.

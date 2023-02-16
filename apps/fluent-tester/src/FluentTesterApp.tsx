@@ -1,12 +1,13 @@
 'use strict';
 
+import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
 import { ThemeProvider } from '@fluentui-react-native/theme';
 import * as React from 'react';
 import { Platform } from 'react-native';
+
 import type { FluentTesterProps } from './FluentTester';
 import { FluentTester } from './FluentTester';
 import { testerTheme } from './theme/index';
-import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
 
 export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (props) => {
   const sizeClass = useHorizontalSizeClass();

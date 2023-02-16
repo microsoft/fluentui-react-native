@@ -1,8 +1,9 @@
+import type { PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type { TextProps } from '@fluentui-react-native/text';
 import type * as React from 'react';
 import type { ColorValue } from 'react-native';
 import type { XmlProps } from 'react-native-svg';
-import type { TextProps } from '@fluentui-react-native/text';
-import type { PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+
 import type { MenuItemProps, MenuItemTokens } from '../MenuItem/MenuItem.types';
 
 export const menuItemCheckboxName = 'MenuItemCheckbox';

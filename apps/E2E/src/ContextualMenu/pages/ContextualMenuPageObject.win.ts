@@ -1,11 +1,11 @@
+import { BasePage, By } from '../../common/BasePage';
+import { Keys } from '../../common/consts';
 import {
   CONTEXTUALMENU_TESTPAGE,
   CONTEXTUALMENU_TEST_COMPONENT,
   HOMEPAGE_CONTEXTUALMENU_BUTTON,
   CONTEXTUALMENUITEM_TEST_COMPONENT,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
-import { Keys } from '../../common/consts';
 
 class ContextualMenuPageObject extends BasePage {
   /******************************************************************/

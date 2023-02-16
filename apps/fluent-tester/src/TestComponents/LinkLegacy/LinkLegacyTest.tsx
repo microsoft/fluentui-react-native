@@ -1,12 +1,13 @@
-import * as React from 'react';
-import { Alert } from 'react-native';
 import { Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+import * as React from 'react';
+import { Alert } from 'react-native';
+
+import { E2ELinkLegacyTest } from './E2ELinkLegacyTest';
 import { LINK_TESTPAGE } from '../../../../E2E/src/LinkLegacy/consts';
+import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { E2ELinkLegacyTest } from './E2ELinkLegacyTest';
 
 const Links: React.FunctionComponent = () => {
   const doPress = (): void => {

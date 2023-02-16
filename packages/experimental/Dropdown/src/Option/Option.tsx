@@ -5,6 +5,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import React from 'react';
 import { View } from 'react-native';
 import { Path, Svg } from 'react-native-svg';
+
 import { stylingSettings } from './Option.styling';
 import type { OptionProps, OptionType } from './Option.types';
 import { optionName } from './Option.types';

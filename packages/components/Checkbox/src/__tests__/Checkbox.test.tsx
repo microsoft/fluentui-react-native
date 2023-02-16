@@ -1,11 +1,12 @@
-import * as React from 'react';
-import { Checkbox } from '../Checkbox';
-import * as renderer from 'react-test-renderer';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as React from 'react';
 import type { AccessibilityActionName } from 'react-native';
 import { Text, View } from 'react-native';
 import { Svg } from 'react-native-svg';
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import * as renderer from 'react-test-renderer';
+
+import { Checkbox } from '../Checkbox';
 
 function onChange(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);

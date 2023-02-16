@@ -1,4 +1,3 @@
-import React from 'react';
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import {
   Menu,
@@ -11,16 +10,18 @@ import {
   MenuDivider,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
-import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
-import type { TestSection, PlatformStatus } from '../Test';
-import { Test } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { E2EMenuTest } from './E2EMenuTest';
-import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
-import { MenuTriggerChildRef } from './MenuRefs';
+import React from 'react';
 import { StyleSheet } from 'react-native';
+
+import { E2EMenuTest } from './E2EMenuTest';
+import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
+import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
+import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
+import { stackStyle } from '../Common/styles';
+import { Test } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (

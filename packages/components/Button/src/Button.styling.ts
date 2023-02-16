@@ -1,15 +1,16 @@
-import type { ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize, ButtonAppearance } from './Button.types';
-import { buttonName } from './Button.types';
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import type { FontTokens } from '@fluentui-react-native/tokens';
+import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { defaultButtonTokens } from './ButtonTokens';
-import { defaultButtonColorTokens } from './ButtonColorTokens';
+import type { FontTokens } from '@fluentui-react-native/tokens';
 import type { ColorValue } from 'react-native';
 import { Platform } from 'react-native';
-import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+
+import { buttonName } from './Button.types';
+import type { ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize, ButtonAppearance } from './Button.types';
+import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { defaultButtonFontTokens } from './ButtonFontTokens';
+import { defaultButtonTokens } from './ButtonTokens';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'block',

@@ -6,8 +6,9 @@ import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import type { TouchableHighlightProps, ViewProps } from 'react-native';
 import { TouchableHighlight, View } from 'react-native';
-import { stackStyle } from '../Common/styles';
+
 import { FOCUSTRAPZONE_TESTPAGE } from '../../../../E2E/src/FocusTrapZone/consts';
+import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 

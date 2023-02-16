@@ -1,5 +1,6 @@
-import * as React from 'react';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import * as React from 'react';
+
 import type { ButtonProps, ButtonInfo } from './Button.types';
 
 export const useButton = (props: ButtonProps): ButtonInfo => {

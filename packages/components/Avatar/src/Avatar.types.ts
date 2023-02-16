@@ -1,8 +1,8 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
-import type { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
 import type { PresenceBadgeProps, BadgeSize, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
+import type { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
 export const AvatarName = 'Avatar';

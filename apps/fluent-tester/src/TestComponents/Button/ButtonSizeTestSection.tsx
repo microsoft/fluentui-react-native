@@ -1,8 +1,9 @@
 import { ButtonV1 as Button, CompoundButton, FAB } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
+
 import { iconProps } from '../Common/iconExamples';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 

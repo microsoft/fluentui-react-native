@@ -1,7 +1,8 @@
-import type { SubmenuType } from './Submenu.types';
-import { submenuName } from './Submenu.types';
 import type { IComposeSettings } from '@uifabricshared/foundation-compose';
 import { I18nManager } from 'react-native';
+
+import type { SubmenuType } from './Submenu.types';
+import { submenuName } from './Submenu.types';
 
 export const settings: IComposeSettings<SubmenuType> = [
   {

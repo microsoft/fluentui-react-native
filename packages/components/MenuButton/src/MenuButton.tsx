@@ -1,16 +1,16 @@
 /** @jsx withSlots */
-import React, { useRef, useState, useCallback } from 'react';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
-import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import React, { useRef, useState, useCallback } from 'react';
 import { SvgXml } from 'react-native-svg';
-import { defaultIconColor, primaryIconColor } from './MenuButton.style';
 
+import { defaultIconColor, primaryIconColor } from './MenuButton.style';
 import type {
   MenuButtonProps,
   MenuButtonSlotProps,

@@ -1,10 +1,10 @@
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger } from '@fluentui-react-native/menu';
+import { Stack } from '@fluentui-react-native/stack';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import * as React from 'react';
 import { View } from 'react-native';
-import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger } from '@fluentui-react-native/menu';
+
 import {
   MENUITEM_ACCESSIBILITY_LABEL,
   MENUITEM_NO_A11Y_LABEL_COMPONENT,
@@ -19,6 +19,7 @@ import {
   MENUITEM_DISABLED_COMPONENT,
   MENUITEM_CALLBACK_LABEL,
 } from '../../../../E2E/src/Menu/consts';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const E2EMenuTest: React.FunctionComponent = () => {

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   useAsPressable,
   useKeyProps,
@@ -6,8 +5,11 @@ import {
   useViewCommandFocus,
   getAccessibilityState,
 } from '@fluentui-react-native/interactive-hooks';
-import type { LinkProps, LinkInfo } from './Link.types';
+import * as React from 'react';
 import { Linking, Platform } from 'react-native';
+
+import type { LinkProps, LinkInfo } from './Link.types';
+
 
 /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/
 const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');

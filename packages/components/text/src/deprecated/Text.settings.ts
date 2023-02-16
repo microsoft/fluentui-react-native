@@ -1,7 +1,8 @@
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+import type { TextStyle } from 'react-native';
+
 import type { ITextType } from './Text.types';
 import { textName } from './Text.types';
-import type { TextStyle } from 'react-native';
-import type { IComposeSettings } from '@uifabricshared/foundation-compose';
 
 export const settings: IComposeSettings<ITextType> = [
   {

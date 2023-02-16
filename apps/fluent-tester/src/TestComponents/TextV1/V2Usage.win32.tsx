@@ -1,7 +1,4 @@
-import * as React from 'react';
-import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
 import {
   Body1,
   Body1Strong,
@@ -17,6 +14,11 @@ import {
   Title1,
   Title1Strong,
 } from '@fluentui-react-native/text';
+import * as React from 'react';
+import { View } from 'react-native';
+
+import { stackStyle } from '../Common/styles';
+
 
 export const V2Usage: React.FunctionComponent = () => {
   return (

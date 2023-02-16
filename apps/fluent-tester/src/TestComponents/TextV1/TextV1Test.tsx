@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { StandardUsage } from './StandardUsage';
-import { V2Usage } from './V2Usage';
-import { MaximumFontSizeUsage } from './MaximumFontSize';
+
 import { CustomizeUsage } from './CustomizeUsage';
+import { MaximumFontSizeUsage } from './MaximumFontSize';
 import { PressableUsage } from './PressableUsage';
+import { StandardUsage } from './StandardUsage';
+import { TextV1E2ETest } from './TextV1E2ETest';
+import { V2Usage } from './V2Usage';
+import { TEXTV1_TESTPAGE } from '../../../../E2E/src/TextV1/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { TextV1E2ETest } from './TextV1E2ETest';
-import { TEXTV1_TESTPAGE } from '../../../../E2E/src/TextV1/consts';
 
 const textSections: TestSection[] = [
   {

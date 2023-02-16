@@ -1,13 +1,15 @@
-import * as React from 'react';
-import { Text, TextV1 } from '@fluentui-react-native/text';
+import { Spinner } from '@fluentui-react-native/spinner';
 import { Stack } from '@fluentui-react-native/stack';
+import { Text, TextV1 } from '@fluentui-react-native/text';
+import * as React from 'react';
+import { View, Switch } from 'react-native';
+
+import { E2ETestingSpinner } from './SpinnerE2ETest';
+import { SPINNER_TESTPAGE } from '../../../../E2E/src/Spinner/consts';
 import { stackStyle, commonTestStyles as commonStyles, commonTestStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { SPINNER_TESTPAGE } from '../../../../E2E/src/Spinner/consts';
-import { View, Switch } from 'react-native';
-import { Spinner } from '@fluentui-react-native/spinner';
-import { E2ETestingSpinner } from './SpinnerE2ETest';
+
 
 const BasicSpinnerTest: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);

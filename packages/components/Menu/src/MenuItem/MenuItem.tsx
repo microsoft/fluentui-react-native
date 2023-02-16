@@ -1,14 +1,16 @@
 /** @jsx withSlots */
-import { I18nManager, Pressable, View } from 'react-native';
-import { SvgXml } from 'react-native-svg';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, memoize, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+import React from 'react';
+import { I18nManager, Pressable, View } from 'react-native';
+import { SvgXml } from 'react-native-svg';
+
+import { stylingSettings } from './MenuItem.styling';
 import type { MenuItemProps, MenuItemType } from './MenuItem.types';
 import { menuItemName } from './MenuItem.types';
 import { useMenuItem } from './useMenuItem';
-import { stylingSettings } from './MenuItem.styling';
-import React from 'react';
+
 
 export const MenuItem = compose<MenuItemType>({
   displayName: menuItemName,

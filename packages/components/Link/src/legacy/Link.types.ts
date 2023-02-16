@@ -1,9 +1,9 @@
+import type { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import type { ITextProps } from '@fluentui-react-native/text';
+import type { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
 import type * as React from 'react';
 import type { ViewProps } from 'react-native';
-import type { IRenderData } from '@uifabricshared/foundation-composable';
-import type { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import type { ITextProps } from '@fluentui-react-native/text';
-import type { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 
 export const linkName = 'RNFLink';
 

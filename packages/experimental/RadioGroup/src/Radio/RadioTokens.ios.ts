@@ -1,6 +1,7 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import type { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
 import type { RadioTokens } from './Radio.types';
 
 // A copy of RadioTokens.android.ts, these are expected to change in the future.

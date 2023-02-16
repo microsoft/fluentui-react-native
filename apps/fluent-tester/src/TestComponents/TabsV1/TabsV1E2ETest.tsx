@@ -1,8 +1,8 @@
+import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import * as React from 'react';
 import { View } from 'react-native';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
-import { stackStyle } from '../Common/styles';
+
 import {
   TABSV1_TEST_COMPONENT,
   TABSV1_ACCESSIBILITY_LABEL,
@@ -18,6 +18,7 @@ import {
   TABSITEMV1_NO_A11Y_LABEL_COMPONENT,
   TABSITEMV1_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/TabsV1/consts';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const TabsV1E2ETest: React.FunctionComponent = () => {

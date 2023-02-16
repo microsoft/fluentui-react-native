@@ -1,10 +1,10 @@
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { IFocusable, PressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { TextProps } from '@fluentui-react-native/text';
+import type { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import type * as React from 'react';
 import type { ViewStyle, ColorValue } from 'react-native';
-import type { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import type { IFocusable, PressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
-import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
-import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { TextProps } from '@fluentui-react-native/text';
 
 export const tabsItemName = 'TabsItem';
 

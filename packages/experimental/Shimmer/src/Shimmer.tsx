@@ -1,14 +1,17 @@
 /** @jsx withSlots */
-import { useRef, useEffect, useMemo, useCallback } from 'react';
-import type { TransformObject } from 'react-native-svg';
-import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G } from 'react-native-svg';
-import type { ShimmerProps, ShimmerType } from './Shimmer.types';
-import { shimmerName } from './Shimmer.types';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
-import { Animated, I18nManager } from 'react-native';
-import { stylingSettings } from './Shimmer.styling';
 import assertNever from 'assert-never';
+import { useRef, useEffect, useMemo, useCallback } from 'react';
+import { Animated, I18nManager } from 'react-native';
+import type { TransformObject } from 'react-native-svg';
+import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G } from 'react-native-svg';
+
+import { stylingSettings } from './Shimmer.styling';
+import type { ShimmerProps, ShimmerType } from './Shimmer.types';
+import { shimmerName } from './Shimmer.types';
+
+
 
 const useStyling = buildUseStyling(stylingSettings);
 export const Shimmer = compose<ShimmerType>({

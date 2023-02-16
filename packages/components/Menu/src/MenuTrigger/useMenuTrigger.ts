@@ -1,11 +1,12 @@
-import { useMenuContext } from '../context/menuContext';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import type { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
+import React from 'react';
 import type { AccessibilityActionEvent, AccessibilityActionName } from 'react-native';
 import { Platform } from 'react-native';
-import React from 'react';
-import { hoverDelayDefault } from '../consts';
+
+import type { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
 import { useMergedRefs } from './useMergeRefs';
+import { hoverDelayDefault } from '../consts';
+import { useMenuContext } from '../context/menuContext';
 
 const baseAccessibilityActions =
   Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];

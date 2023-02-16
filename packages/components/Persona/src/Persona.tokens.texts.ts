@@ -1,11 +1,12 @@
-import type { TextStyle } from 'react-native';
 import type { ITextProps } from '@fluentui-react-native/adapters';
-import { styleFunction } from '@uifabricshared/foundation-tokens';
-import type { IPersonaTokens } from './Persona.types';
 import type { Theme } from '@fluentui-react-native/framework';
-import type { FontTokens } from '@fluentui-react-native/tokens';
 import type { PersonaSize } from '@fluentui-react-native/persona-coin';
+import type { FontTokens } from '@fluentui-react-native/tokens';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
+import type { TextStyle } from 'react-native';
+
 import { getTextFont, getSecondaryFont, getTertiaryFont, getOptionalFont } from './Persona.helpers';
+import type { IPersonaTokens } from './Persona.types';
 
 function buildTextStyleHelper(
   verticalGap: number | undefined,
