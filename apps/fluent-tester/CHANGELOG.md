@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 17 Feb 2023 01:34:44 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Feb 2023 06:30:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.7
+
+Fri, 17 Feb 2023 06:30:14 GMT
+
+### Patches
+
+- Update native modules to FUA 0.13 (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.17.16
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.7.6
 
 ## 0.134.6
 

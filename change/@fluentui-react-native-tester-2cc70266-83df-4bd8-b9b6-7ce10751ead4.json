@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update native modules to FUA 0.13",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "mischreiber@microsoft.com",
-  "dependentChangeType": "patch"
-}
