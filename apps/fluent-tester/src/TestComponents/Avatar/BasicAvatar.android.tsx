@@ -8,7 +8,6 @@ import { View } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { mobileStyles } from '../Common/styles';
 
-
 export const StandardUsage: FunctionComponent = () => {
   const [activityRing, setActivityRing] = React.useState(true);
 

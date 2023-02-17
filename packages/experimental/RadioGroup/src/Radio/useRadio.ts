@@ -6,7 +6,6 @@ import type { AccessibilityState } from 'react-native';
 import type { RadioProps, RadioInfo } from './Radio.types';
 import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
 
-
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
 export const useRadio = (props: RadioProps): RadioInfo => {

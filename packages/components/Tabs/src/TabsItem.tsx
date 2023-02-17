@@ -17,7 +17,6 @@ import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import type { TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
 import { tabsItemName } from './TabsItem.types';
 
-
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
 

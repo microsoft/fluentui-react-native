@@ -11,7 +11,6 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 export const BasicAvatar: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showPresence, setShowPresence] = React.useState(false);

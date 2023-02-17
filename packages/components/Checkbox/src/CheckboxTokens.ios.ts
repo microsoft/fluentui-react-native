@@ -5,7 +5,6 @@ import { Platform } from 'react-native';
 
 import type { CheckboxTokens } from './Checkbox.types';
 
-
 // A copy of CheckboxTokens.android.ts, these are expected to change in the future.
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>

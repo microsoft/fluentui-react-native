@@ -5,7 +5,6 @@ import type { ViewStyle } from 'react-native';
 
 import type { IPersonaTokens } from './Persona.types';
 
-
 const _rootKeyProps: (keyof IPersonaTokens)[] = ['coinSize', 'size'];
 
 function _buildRootStyle(tokenProps: IPersonaTokens): IViewProps {

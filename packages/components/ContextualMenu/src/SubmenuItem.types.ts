@@ -6,7 +6,6 @@ import type * as React from 'react';
 
 import type { ContextualMenuItemProps, ContextualMenuItemTokens, ContextualMenuItemState } from './ContextualMenuItem.types';
 
-
 export const submenuItemName = 'SubmenuItem';
 export interface SubmenuItemTokens extends ContextualMenuItemTokens {
   chevronColor?: string;

@@ -16,8 +16,6 @@ import { settings } from './Button.settings';
 import type { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, IButtonType } from './Button.types';
 import { buttonName } from './Button.types';
 
-
-
 /**
  * @deprecated This component is deprecated in favor of ButtonV1. This Button will be removed when the package moves to 1.0.0.
  * At that point, ButtonV1 will be renamed to Button. Please see MIGRATION.md for details on how to move to the new Button.

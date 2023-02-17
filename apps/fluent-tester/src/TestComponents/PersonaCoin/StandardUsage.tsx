@@ -9,7 +9,6 @@ import { satyaPhotoUrl, undefinedText } from './styles';
 import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-
 type WithUndefined<T> = T | typeof undefinedText;
 
 const allSizes: WithUndefined<PersonaSize>[] = [

@@ -6,7 +6,6 @@ import { Text, View } from 'react-native';
 
 import { stackStyle } from '../Common/styles';
 
-
 const maximumFontSizeStyle = { maximumFontSize: 36 };
 
 const CappedTitle2 = Title2.customize(maximumFontSizeStyle);

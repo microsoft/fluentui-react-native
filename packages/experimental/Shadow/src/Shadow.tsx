@@ -9,7 +9,6 @@ import type { ShadowProps } from './Shadow.types';
 import { shadowName } from './Shadow.types';
 import { getShadowTokenStyleSet } from './shadowStyle';
 
-
 export const Shadow = stagedComponent((props: ShadowProps) => {
   return (final: ShadowProps, children: React.ReactNode) => {
     if (!props.shadowToken) {

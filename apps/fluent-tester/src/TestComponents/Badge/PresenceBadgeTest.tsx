@@ -7,7 +7,6 @@ import { View, Platform, Text } from 'react-native';
 
 import { StyledPicker } from '../Common/StyledPicker';
 
-
 const badgeSizes: BadgeSize[] = [...BadgeSizes];
 export const PresenceBadgeTest: React.FunctionComponent = () => {
   const [size, setSize] = useState<BadgeSize>('medium');

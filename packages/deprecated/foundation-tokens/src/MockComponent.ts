@@ -8,7 +8,6 @@ import { processTokens } from './Token';
 import { buildComponentTokens } from './Token.function';
 import type { ITargetHasToken, IComponentTokens, IStyleFactories } from './Token.types';
 
-
 export type ICSSStyle = React.CSSProperties;
 
 export interface IMockBaseProps {

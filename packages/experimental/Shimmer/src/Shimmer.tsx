@@ -11,8 +11,6 @@ import { stylingSettings } from './Shimmer.styling';
 import type { ShimmerProps, ShimmerType } from './Shimmer.types';
 import { shimmerName } from './Shimmer.types';
 
-
-
 const useStyling = buildUseStyling(stylingSettings);
 export const Shimmer = compose<ShimmerType>({
   displayName: shimmerName,

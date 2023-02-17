@@ -6,7 +6,6 @@ import type { SeparatorProps, SeparatorPropTokens, SeparatorTokens, SeperatorSlo
 import { separatorName } from './Separator.types';
 import { defaultSeparatorTokens } from './SeparatorTokens';
 
-
 const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 const tokensThatAreAlsoProps: (keyof SeparatorPropTokens)[] = ['vertical', 'insetSpacing'];
 export const stylingSettings: UseStylingOptions<SeparatorProps, SeperatorSlotProps, SeparatorTokens> = {

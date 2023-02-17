@@ -7,7 +7,6 @@ import { AvatarColors } from './Avatar.types';
 import { getHashCodeWeb } from './getHashCode';
 import { titles, multiWordTitles } from './titles';
 
-
 /**
  * Re-usable hook for FURN Avatar.
  * This hook configures Avatar props and state for FURN Avatar.

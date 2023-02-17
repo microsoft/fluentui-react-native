@@ -8,8 +8,6 @@ import { buildProps } from './buildProps';
 import type { ThemeHelper, UseStylingOptions } from './buildUseStyling';
 import { buildUseStyling } from './buildUseStyling';
 
-
-
 /**
  * Sample super simple theming implementation, shared by all the samples. This is intended to be illustrative,
  * not to be production ready theming code

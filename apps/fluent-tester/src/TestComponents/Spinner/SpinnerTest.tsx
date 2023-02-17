@@ -10,7 +10,6 @@ import { stackStyle, commonTestStyles as commonStyles, commonTestStyles } from '
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 const BasicSpinnerTest: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
   const [hidesWhenStopped, setHidesWhenStopped] = React.useState(true);

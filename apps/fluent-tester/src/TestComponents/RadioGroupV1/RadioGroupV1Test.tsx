@@ -12,7 +12,6 @@ import { RADIOGROUPV1_TESTPAGE } from '../../../../E2E/src/RadioGroupV1/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 const radioGroupV1Sections: TestSection[] = [
   {
     name: 'Default RadioGroup Usage',

@@ -15,7 +15,6 @@ import { settings } from './Link.settings';
 import type { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, ILinkType } from './Link.types';
 import { linkName } from './Link.types';
 
-
 export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
 
 export function useAsLink(userProps: IWithLinkOptions<IViewProps>, ref: React.RefObject<any>): ILinkHooks {

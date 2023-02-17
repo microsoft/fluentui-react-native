@@ -18,7 +18,6 @@ import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import { svgProps, iconProps } from '../Common/iconExamples';
 import { StyledPicker } from '../Common/StyledPicker';
 
-
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];
 const badgeSizes: BadgeSize[] = [...BadgeSizes];

@@ -22,10 +22,6 @@ import type {
 } from './ContextualMenuItem.types';
 import { contextualMenuItemName } from './ContextualMenuItem.types';
 
-
-
-
-
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,
   usePrepareProps: (userProps: ContextualMenuItemProps, useStyling: IUseComposeStyling<ContextualMenuItemType>) => {

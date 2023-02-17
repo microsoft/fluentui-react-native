@@ -13,7 +13,6 @@ import type { BadgeType, BadgeProps } from './Badge.types';
 import { badgeName } from './Badge.types';
 import { useBadge } from './useBadge';
 
-
 export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
   return (
     userProps[layer] ||

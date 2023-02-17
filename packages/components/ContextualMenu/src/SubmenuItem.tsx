@@ -19,10 +19,6 @@ import { settings } from './SubmenuItem.settings';
 import type { SubmenuItemSlotProps, SubmenuItemState, SubmenuItemProps, SubmenuItemRenderData, SubmenuItemType } from './SubmenuItem.types';
 import { submenuItemName } from './SubmenuItem.types';
 
-
-
-
-
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
   usePrepareProps: (userProps: SubmenuItemProps, useStyling: IUseComposeStyling<SubmenuItemType>) => {

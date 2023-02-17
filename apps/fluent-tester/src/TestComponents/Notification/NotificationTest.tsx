@@ -12,7 +12,6 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 const svgProps: SvgIconProps = {
   src: PlayButton,
 };

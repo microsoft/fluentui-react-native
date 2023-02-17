@@ -17,7 +17,6 @@ import {
   standardCaptionTokens,
 } from './MockTokens';
 
-
 export type IMockTextProps = IMockTextTokens & IMockForegroundColorTokens & IMockBaseProps;
 export type IMockViewProps = IMockBaseProps;
 export type IMockImageProps = IMockBaseProps;

@@ -13,7 +13,6 @@ import { compoundButtonName } from './CompoundButton.types';
 import { buttonLookup } from '../Button';
 import { useButton } from '../useButton';
 
-
 export const CompoundButton = compose<CompoundButtonType>({
   displayName: compoundButtonName,
   ...stylingSettings,

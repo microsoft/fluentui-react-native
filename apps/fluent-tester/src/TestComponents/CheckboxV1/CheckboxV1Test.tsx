@@ -13,8 +13,6 @@ import { commonTestStyles as commonStyles, mobileStyles } from '../Common/styles
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
-
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }

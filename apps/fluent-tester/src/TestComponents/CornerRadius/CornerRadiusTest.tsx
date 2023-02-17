@@ -11,7 +11,6 @@ import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 interface CornerRadiusTestComponentProps {
   name: string;
   cornerRadius: number;

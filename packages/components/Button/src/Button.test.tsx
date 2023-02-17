@@ -6,7 +6,6 @@ import * as renderer from 'react-test-renderer';
 
 import { Button } from './Button';
 
-
 describe('Button component tests', () => {
   it('Button default', () => {
     const tree = renderer.create(<Button>Default Button</Button>).toJSON();

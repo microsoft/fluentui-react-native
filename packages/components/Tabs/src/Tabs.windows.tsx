@@ -15,9 +15,6 @@ import { settings } from './Tabs.settings';
 import type { TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
 import { tabsName } from './Tabs.types';
 
-
-
-
 export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
   onTabsClick: (/* key: string */) => {

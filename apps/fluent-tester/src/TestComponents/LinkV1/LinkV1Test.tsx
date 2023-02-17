@@ -12,8 +12,6 @@ import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
-
 const DefaultLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
   const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);

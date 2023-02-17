@@ -6,7 +6,6 @@ import type { RadioGroupTokens, RadioGroupSlotProps, RadioGroupProps } from './R
 import { radioGroupName } from './RadioGroup.types';
 import { defaultRadioGroupTokens } from './RadioGroupTokens';
 
-
 export const radioGroupStates: (keyof RadioGroupTokens)[] = ['isHorizontal', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotProps, RadioGroupTokens> = {

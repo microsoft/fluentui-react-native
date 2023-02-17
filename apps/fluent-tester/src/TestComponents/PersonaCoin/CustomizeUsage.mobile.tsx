@@ -8,7 +8,6 @@ import type { undefinedText } from './styles';
 import { steveBallmerPhotoUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-
 type WithUndefined<T> = T | typeof undefinedText;
 
 const styles = StyleSheet.create({ slider: { ...commonStyles.vmargin, flex: 1 } });

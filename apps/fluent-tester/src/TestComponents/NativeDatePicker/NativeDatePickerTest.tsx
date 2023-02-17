@@ -10,8 +10,6 @@ import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { PlatformStatus, TestSection } from '../Test';
 import { Test } from '../Test';
 
-
-
 const NativeDatePickerMainTest: React.FunctionComponent = () => {
   const [startDate, setStartDate] = React.useState<Date>(new Date());
   const [endDate, setEndDate] = React.useState<Date>(null);

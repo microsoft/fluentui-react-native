@@ -5,7 +5,6 @@ import * as React from 'react';
 import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
 import type { ITheme } from './Theme.types';
 
-
 /**
  * props for the ThemeLayer
  * @deprecated

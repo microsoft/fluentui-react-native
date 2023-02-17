@@ -14,7 +14,6 @@ import { counterBadgeName } from './CounterBadge.types';
 import { useCounterBadge } from './useCounterBadge';
 import { badgeLookup } from '../Badge';
 
-
 export const CounterBadge = compose<CounterBadgeType>({
   displayName: counterBadgeName,
   ...stylingSettings,

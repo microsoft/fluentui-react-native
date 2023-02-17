@@ -8,7 +8,6 @@ import { AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 const avatarSections: TestSection[] = [
   {
     name: 'Standard Usage',

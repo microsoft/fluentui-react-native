@@ -19,7 +19,6 @@ import { testProps } from '../Common/TestProps';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
     swatch: {

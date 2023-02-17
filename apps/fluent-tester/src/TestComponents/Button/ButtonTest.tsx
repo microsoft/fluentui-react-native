@@ -15,7 +15,6 @@ import { ButtonIconTest } from '../Button/ButtonIconTestSection';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 const buttonSections: TestSection[] = [
   {
     name: 'Button Variants',

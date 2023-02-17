@@ -6,7 +6,6 @@ import { Alert, Linking, View } from 'react-native';
 
 import { stackStyle } from '../Common/styles';
 
-
 export const PressableUsage: React.FunctionComponent = () => {
   const _onPress = (): void => {
     Linking.openURL('https://www.microsoft.com');

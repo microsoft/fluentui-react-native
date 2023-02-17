@@ -8,7 +8,6 @@ import { Platform, View } from 'react-native';
 import { svgProps } from '../Common/iconExamples';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 
-
 const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
 const CustomButton = Button.customize({ backgroundColor: 'pink' });
 const CustomIconButton = Button.customize({ iconColor: 'yellow' });

@@ -19,7 +19,6 @@ import { View } from 'react-native';
 
 import { stackStyle } from '../Common/styles';
 
-
 export const V2Usage: React.FunctionComponent = () => {
   return (
     <View>

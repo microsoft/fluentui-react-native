@@ -16,8 +16,6 @@ import { stylingSettings } from './Notification.styling';
 import type { NotificationType, NotificationProps } from './Notification.types';
 import { notification } from './Notification.types';
 
-
-
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
  *

@@ -16,8 +16,6 @@ import { dividerName } from './Divider.types';
 import type { DividerProps, DividerTokens } from './Divider.types';
 import { useDividerTokens } from './DividerTokens';
 
-
-
 export const Divider = compressible<DividerProps, DividerTokens>((props: DividerProps, useTokens: UseTokens<DividerTokens>) => {
   // Set default values for props
   props = {

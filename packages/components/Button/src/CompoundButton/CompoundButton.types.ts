@@ -4,7 +4,6 @@ import type { ViewProps, ColorValue } from 'react-native';
 
 import type { ButtonSlotProps, ButtonTokens, ButtonProps } from '../Button.types';
 
-
 export const compoundButtonName = 'CompoundButton';
 
 export interface CompoundButtonTokens extends ButtonTokens {

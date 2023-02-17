@@ -11,7 +11,6 @@ import type { AccessibilityActionEvent, AccessibilityState } from 'react-native'
 
 import type { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
 
-
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
 /**

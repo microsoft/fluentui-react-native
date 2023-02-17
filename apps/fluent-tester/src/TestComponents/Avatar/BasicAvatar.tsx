@@ -12,7 +12,6 @@ import { svgProps } from '../Common/iconExamples';
 import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-
 type WithUndefined<T> = T | typeof undefinedText;
 
 const avatarActive: AvatarActive[] = ['unset', 'active', 'inactive'];

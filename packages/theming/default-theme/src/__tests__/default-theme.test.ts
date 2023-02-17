@@ -4,7 +4,6 @@ import { createColorAliasTokens, createShadowAliasTokens } from '../createAliasT
 import { createDefaultTheme } from '../createDefaultTheme';
 import { defaultFluentTheme, defaultFluentDarkTheme } from '../defaultTheme';
 
-
 const defaultThemeOptions: ThemeOptions[][] = [
   [{ appearance: 'light', defaultAppearance: 'light' }],
   [{ appearance: 'dark', defaultAppearance: 'light' }],

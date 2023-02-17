@@ -12,7 +12,6 @@ import type {
   IStyleFactoryFunction,
 } from './Token.types';
 
-
 interface ITokensForSlot<TProps, TTokens, TTheme> {
   toStyle: IStyleFactoryOperation<TTokens, TTheme>[];
   toTokens: IStyleFactoryOperation<TTokens, TTheme>[];

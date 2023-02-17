@@ -6,7 +6,6 @@ import type { ViewStyle } from 'react-native';
 import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 import type { IPersonaCoinTokens } from './PersonaCoin.types';
 
-
 const nameMap: { [key: string]: string } = {
   start: 'flex-start',
   center: 'center',

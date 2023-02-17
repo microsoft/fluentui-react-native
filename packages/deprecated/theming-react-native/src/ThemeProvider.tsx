@@ -6,7 +6,6 @@ import { getThemeRegistry } from './Global';
 import { useThemeRegistry, ThemeRegistryContext } from './ThemeContext';
 import type { IThemeProviderProps } from './ThemeProvider.types';
 
-
 /**
  * @deprecated
  */

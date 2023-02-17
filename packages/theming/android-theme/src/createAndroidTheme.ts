@@ -4,7 +4,6 @@ import { Appearance } from 'react-native';
 
 import { getAndroidTheme } from './androidTheme';
 
-
 export function createAndroidTheme(options: ThemeOptions = {}): ThemeReference {
   const themeRef = new ThemeReference({} as Theme, () => {
     // Stub out HC and darkElevated on Android

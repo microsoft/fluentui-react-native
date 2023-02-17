@@ -8,7 +8,6 @@ import { Text, View } from 'react-native';
 
 import { buildUseTokens } from './buildUseTokens';
 
-
 /**
  * Sample super simple theming implementation, shared by all the samples. This is intended to be illustrative,
  * not to be production ready theming code

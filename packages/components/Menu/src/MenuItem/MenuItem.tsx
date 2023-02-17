@@ -11,7 +11,6 @@ import type { MenuItemProps, MenuItemType } from './MenuItem.types';
 import { menuItemName } from './MenuItem.types';
 import { useMenuItem } from './useMenuItem';
 
-
 export const MenuItem = compose<MenuItemType>({
   displayName: menuItemName,
   ...stylingSettings,

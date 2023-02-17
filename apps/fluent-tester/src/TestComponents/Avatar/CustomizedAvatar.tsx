@@ -9,7 +9,6 @@ import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { svgProps } from '../Common/iconExamples';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-
 const styles = StyleSheet.create({
   avatarTestCaseContainer: { marginLeft: 20 },
   avatarTokenOptions: { flexDirection: 'row' },

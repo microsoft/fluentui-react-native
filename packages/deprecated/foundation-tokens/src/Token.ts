@@ -4,7 +4,6 @@ import type { ISlotProps, IComponentSettings } from '@uifabricshared/foundation-
 import type { ITokenPropInfo } from './Token.internal';
 import type { IComponentTokens } from './Token.types';
 
-
 /**
  * Take the input props and props from settings and return a merged set of token props (a single source
  * of truth) as well as an abbreviated collection with tokens that have been overridden from the user

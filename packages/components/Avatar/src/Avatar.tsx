@@ -12,7 +12,6 @@ import type { AvatarProps, AvatarType, AvatarState, AvatarSlotProps } from './Av
 import { AvatarName } from './Avatar.types';
 import { useAvatar } from './useAvatar';
 
-
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the avatar.
  *

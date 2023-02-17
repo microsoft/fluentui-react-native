@@ -10,7 +10,6 @@ import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 const TestCompareCustomizeShimmer = Shimmer.customize({
   shimmerWaveColor: 'blue',
   shimmerColor: 'orange',

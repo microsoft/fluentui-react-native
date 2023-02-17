@@ -23,9 +23,6 @@ import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
 import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType } from './Checkbox.types';
 import { checkboxName } from './Checkbox.types';
 
-
-
-
 /**
  * @deprecated This will be removed when the package moves to 1.0.0.
  * Please see MIGRATION.md for details on how to move to the new Checkbox.

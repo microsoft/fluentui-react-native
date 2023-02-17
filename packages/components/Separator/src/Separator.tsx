@@ -7,7 +7,6 @@ import { stylingSettings } from './Separator.styling';
 import type { SeparatorProps, SeparatorType } from './Separator.types';
 import { separatorName } from './Separator.types';
 
-
 const propMask = { vertical: undefined };
 
 export const Separator = compose<SeparatorType>({

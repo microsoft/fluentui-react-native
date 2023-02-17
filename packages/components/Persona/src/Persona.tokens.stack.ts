@@ -6,9 +6,6 @@ import type { ViewStyle } from 'react-native';
 import { getHorizontalGap } from './Persona.helpers';
 import type { IPersonaTokens } from './Persona.types';
 
-
-
-
 const _stackKeyProps: (keyof IPersonaTokens)[] = ['size', 'horizontalGap'];
 
 function _buildStackStyle(tokenProps: IPersonaTokens): IViewProps {

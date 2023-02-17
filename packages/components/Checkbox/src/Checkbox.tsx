@@ -11,7 +11,6 @@ import type { CheckboxType, CheckboxProps } from './Checkbox.types';
 import { checkboxName } from './Checkbox.types';
 import { useCheckbox } from './useCheckbox';
 
-
 export const Checkbox = compose<CheckboxType>({
   displayName: checkboxName,
   ...stylingSettings,

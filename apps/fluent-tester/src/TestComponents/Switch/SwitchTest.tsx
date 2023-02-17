@@ -12,8 +12,6 @@ import { commonTestStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
-
 const styles = StyleSheet.create({
   square: {
     backgroundColor: 'red',

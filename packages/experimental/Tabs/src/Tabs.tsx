@@ -11,7 +11,6 @@ import type { TabsType, TabsProps, TabsContextData } from './Tabs.types';
 import { tabsName } from './Tabs.types';
 import { useTabs } from './useTabs';
 
-
 export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
   onTabsClick: (/* key: string */) => {

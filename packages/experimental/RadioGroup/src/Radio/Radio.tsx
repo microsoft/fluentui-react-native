@@ -10,7 +10,6 @@ import type { RadioType, RadioProps } from './Radio.types';
 import { radioName } from './Radio.types';
 import { useRadio } from './useRadio';
 
-
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Radio.
  *

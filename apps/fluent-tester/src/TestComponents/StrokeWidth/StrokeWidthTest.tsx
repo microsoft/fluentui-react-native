@@ -13,7 +13,6 @@ import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   const isLightMode = getCurrentAppearance(t.host.appearance, 'light') === 'light';
   return {

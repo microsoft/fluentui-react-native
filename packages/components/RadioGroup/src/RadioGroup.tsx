@@ -22,7 +22,6 @@ import type {
 } from './RadioGroup.types';
 import { radioGroupName } from './RadioGroup.types';
 
-
 export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   selectedKey: null,
   onChange: (/* key: string */) => {
