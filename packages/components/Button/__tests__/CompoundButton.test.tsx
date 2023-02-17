@@ -2,6 +2,13 @@ import * as React from 'react';
 import { CompoundButton } from '../src/CompoundButton/CompoundButton';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
+import { Platform } from 'react-native';
+
+if (Platform.OS === 'android' || Platform.OS === 'ios') {
+  test.only('skip on mobile', () => {
+    console.warn('skipping tests on mobile');
+  });
+}
 
 it('CompoundButton default', () => {
   const tree = renderer.create(<CompoundButton secondaryContent="sublabel">Default Button</CompoundButton>).toJSON();

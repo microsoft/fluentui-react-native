@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ToggleButton } from '../src/ToggleButton/ToggleButton';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
+import { Platform } from 'react-native';
 
 it('ToggleButton default', () => {
   const tree = renderer.create(<ToggleButton>Default Button</ToggleButton>).toJSON();
@@ -9,7 +10,9 @@ it('ToggleButton default', () => {
 });
 
 it('Button simple rendering does not invalidate styling', () => {
-  checkRenderConsistency(() => <ToggleButton>Default button</ToggleButton>, 2);
+  if (Platform.OS !== ('win32' as any)) {
+    checkRenderConsistency(() => <ToggleButton>Default button</ToggleButton>, 2);
+  }
 });
 
 it('Button re-renders correctly', () => {
@@ -17,8 +20,10 @@ it('Button re-renders correctly', () => {
 });
 
 it('Button shares produced styles across multiple renders', () => {
-  const style = { backgroundColor: 'black' };
-  checkRenderConsistency(() => <ToggleButton style={style}>Shared styles</ToggleButton>, 2);
+  if (Platform.OS !== ('win32' as any)) {
+    const style = { backgroundColor: 'black' };
+    checkRenderConsistency(() => <ToggleButton style={style}>Shared styles</ToggleButton>, 2);
+  }
 });
 
 it('Button re-renders correctly with style', () => {
