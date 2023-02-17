@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FAB } from '../../src/FAB/FAB';
+import { FAB } from '../src/FAB/FAB';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 

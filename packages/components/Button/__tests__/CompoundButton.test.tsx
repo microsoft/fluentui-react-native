@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CompoundButton } from '../../src/CompoundButton/CompoundButton';
+import { CompoundButton } from '../src/CompoundButton/CompoundButton';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
