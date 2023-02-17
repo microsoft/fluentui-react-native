@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 17 Feb 2023 01:34:44 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Feb 2023 22:33:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.6
+
+Fri, 17 Feb 2023 22:33:14 GMT
+
+### Patches
+
+- Always pass in a ref to FocusZone (email not defined)
 
 ## 1.4.5
 
