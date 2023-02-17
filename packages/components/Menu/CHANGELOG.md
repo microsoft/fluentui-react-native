@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 16 Feb 2023 22:05:56 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Feb 2023 01:34:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.5
+
+Fri, 17 Feb 2023 01:34:44 GMT
+
+### Patches
+
+- Remove enter and space key triggers from disabled menu items (email not defined)
 
 ## 1.4.4
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/divider
 
-This log was last generated on Wed, 15 Feb 2023 18:30:10 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Feb 2023 01:34:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.3
+
+Fri, 17 Feb 2023 01:34:44 GMT
+
+### Patches
+
+- Update SPEC.md documentation for Divider (winlarry@microsoft.com)
 
 ## 0.2.2
 
