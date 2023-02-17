@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add mobile e2e tests for Divider",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
