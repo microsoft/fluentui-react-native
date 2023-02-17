@@ -1,2 +1,2 @@
 # Don't include test files in package
-__tests__
+__tests__/
