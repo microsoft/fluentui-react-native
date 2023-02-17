@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AccessibilityActionName } from 'react-native';
+import type { AccessibilityActionName } from 'react-native';
 import * as renderer from 'react-test-renderer';
 import { Menu } from '../Menu/Menu';
 import { checkReRender } from '@fluentui-react-native/test-tools';

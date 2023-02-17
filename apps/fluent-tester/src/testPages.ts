@@ -1,4 +1,4 @@
-import { TestDescription } from './TestComponents';
+import type { TestDescription } from './TestComponents';
 import { ActivityIndicatorTest } from './TestComponents/ActivityIndicator';
 import { AvatarTest, NativeAvatarTest } from './TestComponents/Avatar';
 import { BadgeTest } from './TestComponents/Badge';
@@ -6,9 +6,11 @@ import { ButtonTest } from './TestComponents/Button';
 import { CalloutTest } from './TestComponents/Callout';
 import { CheckboxLegacyTest } from './TestComponents/CheckboxLegacy';
 import { CheckboxV1Test } from './TestComponents/CheckboxV1';
+import { ColorTokensTest } from './TestComponents/ColorTokens';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
+import { DividerTest } from './TestComponents/Divider';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
 // import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
@@ -31,15 +33,15 @@ import { ShadowTest } from './TestComponents/Shadow';
 import { ShimmerTest } from './TestComponents/Shimmer';
 import { SpacingTokensTest } from './TestComponents/Spacing';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
-import { SvgTest } from './TestComponents/Svg';
+import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
 import { TabsLegacyTest } from './TestComponents/TabsLegacy';
 import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
-import { TokenTest } from './TestComponents/Tokens';
 import * as Constants from '../../E2E/src/index.consts';
+import { SpinnerTest } from './TestComponents/Spinner';
 
 export const tests: TestDescription[] = [
   {
@@ -91,6 +93,12 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
   },
   {
+    name: 'Color Tokens',
+    component: ColorTokensTest,
+    testPageButton: Constants.HOMEPAGE_COLORTOKEN_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
     name: 'ContextualMenu',
     component: ContextualMenuTest,
     testPageButton: Constants.HOMEPAGE_CONTEXTUALMENU_BUTTON,
@@ -107,6 +115,12 @@ export const tests: TestDescription[] = [
     component: NativeDatePickerTest,
     testPageButton: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
     platforms: ['ios'],
+  },
+  {
+    name: 'Divider',
+    component: DividerTest,
+    testPageButton: Constants.HOMEPAGE_DIVIDER_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Dropdown',
@@ -131,7 +145,7 @@ export const tests: TestDescription[] = [
     name: 'Focus Trap Zone',
     component: FocusTrapTest,
     testPageButton: Constants.HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-    platforms: ['android', 'win32'],
+    platforms: ['win32'],
   },
   {
     name: 'FocusZone',
@@ -209,7 +223,7 @@ export const tests: TestDescription[] = [
     name: 'RadioGroup V1',
     component: RadioGroupV1Test,
     testPageButton: Constants.HOMEPAGE_RADIOGROUPV1_BUTTON,
-    platforms: ['macos', 'win32'],
+    platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Separator',
@@ -236,15 +250,27 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
+    name: 'Spinner V1',
+    component: SpinnerTest,
+    testPageButton: Constants.HOMEPAGE_SPINNER_BUTTON,
+    platforms: ['android'],
+  },
+  {
     name: 'Stroke Width Tokens',
     component: StrokeWidthTest,
     testPageButton: Constants.HOMEPAGE_STROKEWIDTH_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'Svg',
+    name: 'Svg rendering',
     component: SvgTest,
     testPageButton: Constants.HOMEPAGE_SVG_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32'],
+  },
+  {
+    name: 'Svg Icon packages',
+    component: RNSVGIconsTest,
+    testPageButton: Constants.HOMEPAGE_RNSVGIcons_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
@@ -281,12 +307,6 @@ export const tests: TestDescription[] = [
     name: 'Theme',
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Tokens',
-    component: TokenTest,
-    testPageButton: Constants.HOMEPAGE_TOKEN_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
 ];

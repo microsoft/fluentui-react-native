@@ -1,7 +1,7 @@
 import { defaultFluentTheme, defaultFluentDarkTheme } from '../defaultTheme';
 import { createDefaultTheme } from '../createDefaultTheme';
 import { createColorAliasTokens, createShadowAliasTokens } from '../createAliasTokens';
-import { ThemeOptions, AppearanceOptions } from '@fluentui-react-native/theme-types';
+import type { ThemeOptions, AppearanceOptions } from '@fluentui-react-native/theme-types';
 
 const defaultThemeOptions: ThemeOptions[][] = [
   [{ appearance: 'light', defaultAppearance: 'light' }],

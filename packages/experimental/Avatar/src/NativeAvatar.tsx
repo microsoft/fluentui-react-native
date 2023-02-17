@@ -1,6 +1,8 @@
 /** @jsx withSlots */
-import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { ImageURISource, NativeModules, ViewProps, ColorValue } from 'react-native';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import type { ImageURISource, ViewProps, ColorValue } from 'react-native';
+import { NativeModules } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
 const avatarName = 'NativeAvatar';
@@ -8,7 +10,7 @@ const avatarName = 'NativeAvatar';
 const NativeAvatarView = ensureNativeComponent('FRNAvatarView');
 
 export const Sizes = ['size16', 'size20', 'size24', 'size32', 'size40', 'size56', 'size72'] as const;
-export type Size = typeof Sizes[number];
+export type Size = (typeof Sizes)[number];
 
 export type AvatarStyle = 'default' | 'accent' | 'group' | 'outlined' | 'outlinedPrimary' | 'overflow';
 

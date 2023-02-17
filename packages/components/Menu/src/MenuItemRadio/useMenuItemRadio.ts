@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { useMenuListContext } from '../context/menuListContext';
-import { MenuItemCheckboxProps, MenuItemCheckboxInfo } from '../MenuItemCheckbox/MenuItemCheckbox.types';
+import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from '../MenuItemCheckbox/MenuItemCheckbox.types';
 import { useMenuCheckboxInteraction } from '../MenuItemCheckbox/useMenuItemCheckbox';
 import { useMenuContext } from '../context/menuContext';
 

@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Feb 2023 22:33:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.30.2
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.30.1
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Add `darkElevated` theme (mischreiber@microsoft.com)
+
+## 0.30.0
+
+Wed, 25 Jan 2023 21:31:17 GMT
+
+### Minor changes
+
+- Adding shared colors android (email not defined)
+
+## 0.29.1
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Add shared colors to AliasColorTokens and mapPipelineToTheme (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.29.0
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Minor changes
+
+- Set up iOS color alias tokens (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.28.0
 

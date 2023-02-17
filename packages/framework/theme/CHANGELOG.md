@@ -1,8 +1,73 @@
 # Change Log - @fluentui-react-native/theme
 
-This log was last generated on Thu, 29 Dec 2022 03:47:47 GMT and should not be manually modified.
+This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Minor changes
+
+- Revert "Change default theme from a const object to a function that returns the object #2483" (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.7.21
+
+Thu, 02 Feb 2023 01:29:38 GMT
+
+### Patches
+
+- Add eslint to packages missing a config (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.7.20
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.1.8
+- Bump @fluentui-react-native/theme-types to v0.30.2
+
+## 0.7.19
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.30.1
+
+## 0.7.18
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.30.0
+
+## 0.7.17
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.29.1
+
+## 0.7.16
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.29.0
+
+## 0.7.15
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Change default theme const to a method (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.7.14
 

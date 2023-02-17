@@ -1,10 +1,10 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { Separator, Text } from '@fluentui/react-native';
+import type { Theme } from '@fluentui-react-native/framework';
+import { Separator, TextV1 as Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
-import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../E2E/src/common/consts';
+import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVIEWER } from '../../E2E/src/common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
@@ -31,7 +31,7 @@ interface HeaderProps {
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   return {
     root: {
-      backgroundColor: t.colors.background,
+      backgroundColor: t.colors.neutralBackground1,
       flex: 1,
       flexGrow: 1,
       flexDirection: 'column',
@@ -205,7 +205,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponentView: React.FunctionComponent = () => {
     return (
-      <ScrollView contentContainerStyle={fluentTesterStyles.testSection}>
+      <ScrollView
+        contentContainerStyle={fluentTesterStyles.testSection}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(TESTPAGE_CONTENT_SCROLLVIEWER)}
+      >
         <TestComponent />
       </ScrollView>
     );

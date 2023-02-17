@@ -1,8 +1,6 @@
-import { AliasColorTokens, Variants, VariantValue } from '@fluentui-react-native/theme-types';
+import type { AliasColorTokens, Variants, VariantValue } from '@fluentui-react-native/theme-types';
 
-// API that translates tokens coming for android to Theme color values.
-// This is implemented in a per-plaform fashion, for each endpoint that maps to similar token sets in design - i.e. map to similar
-// pipeline output.
+// API that maps tokens coming from the android token pipeline to Theme color values.
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {
     neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
@@ -59,6 +57,8 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     neutralBackground6: pipelineOutput.neutralBackground6.fillColorRest,
     neutralBackgroundInverted: pipelineOutput.neutralBackgroundInverted.fillColorRest,
     neutralBackgroundDisabled: pipelineOutput.neutralBackgroundDisabled.fillColorRest,
+    neutralBackgroundCanvas: pipelineOutput.neutralBackgroundCanvas.fillColorRest,
+    neutralBackgroundDarkStatic: pipelineOutput.neutralBackgroundDarkStatic.fillColorRest,
 
     neutralStencil1: pipelineOutput.neutralStencil1.fillColorRest,
     neutralStencil2: pipelineOutput.neutralStencil2.fillColorRest,
@@ -70,6 +70,8 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     neutralStroke1: pipelineOutput.neutralStroke1.strokeColorRest,
     neutralStroke1Hover: pipelineOutput.neutralStroke1.strokeColorHover,
+    neutralStrokeFocus1: pipelineOutput.neutralStrokeFocus1.strokeColorRest,
+    neutralStrokeFocus2: pipelineOutput.neutralStrokeFocus2.strokeColorRest,
     neutralStroke1Pressed: pipelineOutput.neutralStroke1.strokeColorPressed,
     neutralStroke1Selected: pipelineOutput.neutralStroke1.strokeColorSelected,
 
@@ -102,6 +104,33 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
     brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
     brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
+
+    /// Error, status, and presence tokens
+
+    dangerBackground1: pipelineOutput.dangerBackground1.fillColorRest,
+    dangerBackground2: pipelineOutput.dangerBackground2.fillColorRest,
+    dangerForeground1: pipelineOutput.dangerForeground1.fillColorRest,
+    dangerForeground2: pipelineOutput.dangerForeground2.fillColorRest,
+
+    successBackground1: pipelineOutput.successBackground1.fillColorRest,
+    successBackground2: pipelineOutput.successBackground2.fillColorRest,
+    successForeground1: pipelineOutput.successForeground1.fillColorRest,
+    successForeground2: pipelineOutput.successForeground2.fillColorRest,
+
+    warningBackground1: pipelineOutput.warningBackground1.fillColorRest,
+    warningBackground2: pipelineOutput.warningBackground2.fillColorRest,
+    warningForeground1: pipelineOutput.warningForeground1.fillColorRest,
+    warningForeground2: pipelineOutput.warningForeground2.fillColorRest,
+
+    severeBackground1: pipelineOutput.severeBackground1.fillColorRest,
+    severeBackground2: pipelineOutput.severeBackground2.fillColorRest,
+    severeForeground1: pipelineOutput.severeForeground1.fillColorRest,
+    severeForeground2: pipelineOutput.severeForeground1.fillColorRest,
+
+    presenceAway: pipelineOutput.presenceAway.fillColorRest,
+    presenceDnd: pipelineOutput.presenceDnd.fillColorRest,
+    presenceAvailable: pipelineOutput.presenceAvailable.fillColorRest,
+    presenceOof: pipelineOutput.presenceOof.fillColorRest,
   };
 }
 

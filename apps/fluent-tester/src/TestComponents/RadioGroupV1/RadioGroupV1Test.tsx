@@ -7,7 +7,9 @@ import { SubtextRadioGroup } from './SubtextRadioGroup';
 import { HorizontalRadioGroup } from './HorizontalRadioGroup';
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
 import { RadioGroupV1E2ETest } from './RadioGroupV1E2ETest';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
+import { Platform } from 'react-native';
 
 const radioGroupV1Sections: TestSection[] = [
   {
@@ -25,21 +27,29 @@ const radioGroupV1Sections: TestSection[] = [
     testID: RADIOGROUPV1_TESTPAGE,
     component: RequiredRadioGroup,
   },
-  {
-    name: 'RadioGroup with Label Subtext',
-    testID: RADIOGROUPV1_TESTPAGE,
-    component: SubtextRadioGroup,
-  },
-  {
-    name: 'Other Layouts',
-    testID: RADIOGROUPV1_TESTPAGE,
-    component: HorizontalRadioGroup,
-  },
-  {
-    name: 'Customized RadioGroup Usage',
-    testID: RADIOGROUPV1_TESTPAGE,
-    component: CustomizedRadioGroup,
-  },
+  ...Platform.select({
+    android: [null],
+    default: [
+      {
+        name: 'RadioGroup with Label Subtext',
+        testID: RADIOGROUPV1_TESTPAGE,
+        component: SubtextRadioGroup,
+      },
+      {
+        name: 'Other Layouts',
+        testID: RADIOGROUPV1_TESTPAGE,
+        component: HorizontalRadioGroup,
+      },
+      {
+        name: 'Customized RadioGroup Usage',
+        testID: RADIOGROUPV1_TESTPAGE,
+        component: CustomizedRadioGroup,
+      },
+    ],
+  }),
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'RadioGroup for E2E Testing',
     testID: RADIOGROUPV1_TESTPAGE,
@@ -49,11 +59,11 @@ const radioGroupV1Sections: TestSection[] = [
 
 export const RadioGroupV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =
@@ -61,5 +71,14 @@ export const RadioGroupV1Test: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/RadioGroup/SPEC.md';
 
-  return <Test name="RadioGroupV1 Test" description={description} spec={spec} sections={radioGroupV1Sections} status={status} />;
+  return (
+    <Test
+      name="RadioGroupV1 Test"
+      description={description}
+      spec={spec}
+      sections={radioGroupV1Sections}
+      status={status}
+      e2eSections={e2eSections}
+    />
+  );
 };

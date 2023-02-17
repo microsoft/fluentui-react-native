@@ -1,10 +1,10 @@
-import { ViewProps, ColorValue } from 'react-native';
+import type { ViewProps, ColorValue } from 'react-native';
 
 export const separatorName = 'Separator';
 
 export const SeparatorInsetSpacings = [0, 16, 56, 68, 72, 108] as const;
 
-export type SeparatorInsetSpacing = typeof SeparatorInsetSpacings[number];
+export type SeparatorInsetSpacing = (typeof SeparatorInsetSpacings)[number];
 
 export interface SeparatorPropTokens {
   /**

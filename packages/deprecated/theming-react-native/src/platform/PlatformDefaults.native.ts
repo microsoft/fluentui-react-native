@@ -1,4 +1,5 @@
-import { ThemingModuleHelper, IThemingModuleHelper } from '../NativeModule';
+import type { IThemingModuleHelper } from '../NativeModule';
+import { ThemingModuleHelper } from '../NativeModule';
 import { createThemeRegistry } from '@uifabricshared/theme-registry';
 import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
 

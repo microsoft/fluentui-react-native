@@ -1,20 +1,20 @@
-import { ColorValue, FlexStyle } from 'react-native';
-import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
-import { ShadowProps } from '@fluentui-react-native/experimental-shadow';
-import { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { ColorValue, FlexStyle } from 'react-native';
+import type { TextProps } from '@fluentui-react-native/text';
+import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { ShadowProps } from '@fluentui-react-native/experimental-shadow';
+import type { ShadowToken } from '@fluentui-react-native/theme-types';
 
 export const badgeName = 'Badge';
 export const BadgeSizes = ['tiny', 'extraSmall', 'small', 'medium', 'large', 'extraLarge'] as const;
 export const BadgeAppearances = ['filled', 'outline', 'tint', 'ghost'] as const;
 export const BadgeShapes = ['rounded', 'circular', 'square'] as const;
 export const BadgeColors = ['brand', 'danger', 'important', 'informative', 'severe', 'subtle', 'success', 'warning'] as const;
-export type BadgeNamedColor = typeof BadgeColors[number];
-export type BadgeSize = typeof BadgeSizes[number];
-export type BadgeAppearance = typeof BadgeAppearances[number];
-export type BadgeShape = typeof BadgeShapes[number];
+export type BadgeNamedColor = (typeof BadgeColors)[number];
+export type BadgeSize = (typeof BadgeSizes)[number];
+export type BadgeAppearance = (typeof BadgeAppearances)[number];
+export type BadgeShape = (typeof BadgeShapes)[number];
 export type BadgeColor = BadgeNamedColor | ColorValue;
 export type BadgeIconPosition = 'before' | 'after';
 

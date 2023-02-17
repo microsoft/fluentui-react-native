@@ -1,8 +1,193 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Wed, 04 Jan 2023 16:55:53 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Feb 2023 22:22:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.19
+
+Tue, 14 Feb 2023 22:22:51 GMT
+
+### Patches
+
+- Copy Android tokens to iOS (saadnajmi2@gmail.com)
+
+## 0.9.18
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.30
+- Bump @fluentui-react-native/framework to v0.9.1
+- Bump @fluentui-react-native/interactive-hooks to v0.22.18
+- Bump @fluentui-react-native/text to v0.19.20
+- Bump @fluentui-react-native/tokens to v0.20.8
+
+## 0.9.17
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.29
+- Bump @fluentui-react-native/framework to v0.9.0
+- Bump @fluentui-react-native/interactive-hooks to v0.22.17
+- Bump @fluentui-react-native/text to v0.19.19
+
+## 0.9.16
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.28
+- Bump @fluentui-react-native/framework to v0.8.39
+- Bump @fluentui-react-native/interactive-hooks to v0.22.16
+- Bump @fluentui-react-native/text to v0.19.18
+- Bump @fluentui-react-native/use-styling to v0.9.3
+
+## 0.9.15
+
+Wed, 01 Feb 2023 22:33:15 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.10.1
+- Bump @fluentui-react-native/focus-zone to v0.11.27
+- Bump @fluentui-react-native/framework to v0.8.38
+- Bump @fluentui-react-native/interactive-hooks to v0.22.15
+- Bump @fluentui-react-native/text to v0.19.17
+- Bump @fluentui-react-native/theme-tokens to v0.24.2
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @fluentui-react-native/use-styling to v0.9.2
+
+## 0.9.14
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.26
+- Bump @fluentui-react-native/framework to v0.8.37
+- Bump @fluentui-react-native/interactive-hooks to v0.22.14
+- Bump @fluentui-react-native/text to v0.19.16
+- Bump @fluentui-react-native/theme-tokens to v0.24.1
+- Bump @fluentui-react-native/tokens to v0.20.6
+
+## 0.9.13
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.25
+- Bump @fluentui-react-native/framework to v0.8.36
+- Bump @fluentui-react-native/interactive-hooks to v0.22.13
+- Bump @fluentui-react-native/text to v0.19.15
+- Bump @fluentui-react-native/theme-tokens to v0.24.0
+- Bump @fluentui-react-native/tokens to v0.20.5
+
+## 0.9.12
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.14
+
+## 0.9.11
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.24
+- Bump @fluentui-react-native/framework to v0.8.35
+- Bump @fluentui-react-native/interactive-hooks to v0.22.12
+- Bump @fluentui-react-native/text to v0.19.13
+- Bump @fluentui-react-native/theme-tokens to v0.23.2
+
+## 0.9.10
+
+Wed, 18 Jan 2023 22:36:15 GMT
+
+### Patches
+
+- Fixing padding for horizontal-stacked RadioGroup (gulnazsayed@microsoft.com)
+
+## 0.9.9
+
+Wed, 18 Jan 2023 19:14:23 GMT
+
+### Patches
+
+- moving keyboarding logic to js for narrator state change bug (gulnazsayed@microsoft.com)
+
+## 0.9.8
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.23
+- Bump @fluentui-react-native/framework to v0.8.34
+- Bump @fluentui-react-native/interactive-hooks to v0.22.11
+- Bump @fluentui-react-native/text to v0.19.12
+- Bump @fluentui-react-native/theme-tokens to v0.23.1
+- Bump @fluentui-react-native/tokens to v0.20.4
+
+## 0.9.7
+
+Thu, 12 Jan 2023 20:09:58 GMT
+
+### Patches
+
+- adding depth 2 re-render test (gulnazsayed@microsoft.com)
+
+## 0.9.6
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.22
+- Bump @fluentui-react-native/framework to v0.8.33
+- Bump @fluentui-react-native/interactive-hooks to v0.22.10
+- Bump @fluentui-react-native/text to v0.19.11
+- Bump @fluentui-react-native/theme-tokens to v0.23.0
+- Bump @fluentui-react-native/tokens to v0.20.3
+
+## 0.9.5
+
+Tue, 10 Jan 2023 06:54:59 GMT
+
+### Patches
+
+- Tokenize radiogroup for Android (ayushsinghs@yahoo.in)
+
+## 0.9.4
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.21
+- Bump @fluentui-react-native/framework to v0.8.32
+- Bump @fluentui-react-native/interactive-hooks to v0.22.9
+- Bump @fluentui-react-native/text to v0.19.10
+
+## 0.9.3
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.20
+- Bump @fluentui-react-native/framework to v0.8.31
+- Bump @fluentui-react-native/interactive-hooks to v0.22.8
+- Bump @fluentui-react-native/text to v0.19.9
 
 ## 0.9.2
 

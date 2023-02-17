@@ -7,12 +7,6 @@ import {
 } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
 
-/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
- * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
-export const enum CheckboxV1Selector {
-  Primary, //this._primaryComponent
-}
-
 class CheckboxV1PageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
@@ -21,66 +15,56 @@ class CheckboxV1PageObject extends BasePage {
     return await (await this._primaryComponent).isSelected();
   }
 
-  async waitForCheckboxChecked(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isCheckboxChecked(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'The Checkbox was not toggled correctly',
-      interval: 1000,
-    });
+  /* Waits for the checkbox to be checked or unchecked if the new state is true or false. Returns true if the
+   * checkbox toggled to the new state. */
+  async waitForCheckboxToggle(newState: boolean, errorMessage: string): Promise<boolean> {
+    if ((await this.isCheckboxChecked()) !== newState) {
+      await this.waitForCondition(async () => (await this.isCheckboxChecked()) === newState, errorMessage);
+    }
+    return (await this.isCheckboxChecked()) === newState;
   }
 
-  /* Useful in beforeEach() hook to reset the checkbox before every test */
-  async toggleCheckboxToUnchecked(): Promise<void> {
-    if (await this.isCheckboxChecked()) {
-      await (await this._primaryComponent).click();
+  async isCheckboxCheckedAndroid(): Promise<boolean> {
+    return (await (await this._primaryComponent).getAttribute('checked')) === 'true';
+  }
+
+  /* Toggles the checkbox to the checked if newState == true or unchecked if newState == false. */
+  async toggleCheckbox(newState: boolean) {
+    if ((await this.isCheckboxChecked()) !== newState) {
+      await this.click(this._primaryComponent);
+      await this.waitForCheckboxToggle(
+        newState,
+        `Clicked the primary checkbox to turn it ${newState ? 'on' : 'off'}, but it failed to change states.`,
+      );
     }
   }
 
-  async didOnChangeCallbackFire(): Promise<boolean> {
-    const callbackText = await By(CHECKBOXV1_ON_PRESS);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The OnChange callback did not fire.',
-      interval: 1000,
-    });
-
+  /* Unlike snapshot testing, we cannot spy on functions to determine if they get called or not. In order to determine if
+   * the onChange() callback gets fired, we show / hide the a Text label as the callback gets fired. This way, we know that
+   * the onChange() callback has fired by checking that the label element is currently displayed. */
+  async didOnChangeCallbackFire(errorMsg: string): Promise<boolean> {
+    const callbackText = await this._callbackText;
+    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
     return await callbackText.isDisplayed();
-  }
-
-  /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(selector: CheckboxV1Selector, key: string): Promise<void> {
-    await (await this.getCheckboxSelector(selector)).addValue(key);
-  }
-
-  /* Returns the correct WebDriverIO element from the Checkbox Selector */
-  async getCheckboxSelector(selector?: CheckboxV1Selector): Promise<WebdriverIO.Element> {
-    if (selector == CheckboxV1Selector.Primary) {
-      return await this._primaryComponent;
-    }
-    return await this._primaryComponent;
   }
 
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(CHECKBOXV1_TESTPAGE);
-  }
-
   get _pageName() {
     return CHECKBOXV1_TESTPAGE;
   }
 
-  get _primaryComponent() {
-    return By(CHECKBOXV1_TEST_COMPONENT);
+  get _primaryComponentName() {
+    return CHECKBOXV1_TEST_COMPONENT;
   }
 
-  get _secondaryComponent() {
-    return By(CHECKBOXV1_NO_A11Y_LABEL_COMPONENT);
+  get _secondaryComponentName() {
+    return CHECKBOXV1_NO_A11Y_LABEL_COMPONENT;
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_CHECKBOXV1_BUTTON);
+  get _callbackText() {
+    return By(CHECKBOXV1_ON_PRESS);
   }
 
   get _pageButtonName() {

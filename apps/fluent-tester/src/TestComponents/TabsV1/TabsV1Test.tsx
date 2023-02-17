@@ -5,7 +5,8 @@ import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
 import { TABSV1_TESTPAGE } from '../../../../E2E/src/TabsV1/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { TabsV1E2ETest } from './TabsV1E2ETest';
 import { svgProps } from '../Common/iconExamples';
 
@@ -245,10 +246,6 @@ const tabsSections: TestSection[] = [
     name: 'More Flexibility',
     component: TabsWithFlexibility,
   },
-  {
-    name: 'E2E Testing TabsV1',
-    component: TabsV1E2ETest,
-  },
 ];
 
 if (Platform.OS !== 'windows') {
@@ -257,6 +254,13 @@ if (Platform.OS !== 'windows') {
     component: TabsCountIcon,
   });
 }
+
+const e2eSections: TestSection[] = [
+  {
+    name: 'E2E Testing TabsV1',
+    component: TabsV1E2ETest,
+  },
+];
 
 export const TabsV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
@@ -269,5 +273,5 @@ export const TabsV1Test: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="TabsV1 Test" description={description} sections={tabsSections} status={status} />;
+  return <Test name="TabsV1 Test" description={description} sections={tabsSections} status={status} e2eSections={e2eSections} />;
 };

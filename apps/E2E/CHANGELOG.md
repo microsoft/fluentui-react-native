@@ -1,8 +1,225 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Wed, 04 Jan 2023 16:55:53 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Feb 2023 00:29:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.20.0
+
+Thu, 16 Feb 2023 00:29:35 GMT
+
+### Minor changes
+
+- Add Divider E2E tests for desktop platforms (winlarry@microsoft.com)
+
+## 1.19.0
+
+Tue, 14 Feb 2023 21:33:24 GMT
+
+### Minor changes
+
+- Add retractable E2E sections to tester component pages (winlarry@microsoft.com)
+
+## 1.18.0
+
+Tue, 14 Feb 2023 02:41:04 GMT
+
+### Minor changes
+
+- Homogenized e2e test names across different components, deprecated unused methods. (winlarry@microsoft.com)
+
+## 1.17.1
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.30
+
+## 1.17.0
+
+Fri, 10 Feb 2023 13:12:36 GMT
+
+### Minor changes
+
+- refector and setup e2e (rohanpd.work@gmail.com)
+
+## 1.16.0
+
+Thu, 09 Feb 2023 19:43:53 GMT
+
+### Minor changes
+
+- Removing async() from describe blocks (safreibe@microsoft.com)
+
+## 1.15.0
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Minor changes
+
+- Refactor TabsLegacy and TabsV1 E2E tests to have better names + error outputs (winlarry@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.29
+
+## 1.14.0
+
+Fri, 03 Feb 2023 00:10:56 GMT
+
+### Minor changes
+
+- Update Text and TextV1 E2E tests with better names + errors (winlarry@microsoft.com)
+
+## 1.13.3
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.28
+
+## 1.13.2
+
+Wed, 01 Feb 2023 22:33:15 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.27
+
+## 1.13.1
+
+Tue, 31 Jan 2023 00:18:04 GMT
+
+### Patches
+
+- Use better test names + new e2e methods on IconV1 (winlarry@microsoft.com)
+
+## 1.13.0
+
+Mon, 30 Jan 2023 20:48:57 GMT
+
+### Minor changes
+
+- Try doubling color tokens page timeout time (78454019+lyzhan7@users.noreply.github.com)
+
+## 1.12.3
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.26
+
+## 1.12.2
+
+Fri, 27 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Change console.error -> console.warn in BasePage (winlarry@microsoft.com)
+
+## 1.12.1
+
+Thu, 26 Jan 2023 17:47:06 GMT
+
+### Patches
+
+- Overhaul Button tests with better errors, refactored code (winlarry@microsoft.com)
+
+## 1.12.0
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Minor changes
+
+- Removed win32 extenstion from ShimmerPageObj and added android tests" (ayushsinghs@yahoo.in)
+- Update RadioGroupV1 E2E tests with better errors + use of refactored methods (winlarry@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.25
+
+### Patches
+
+- Overhaul Checkbox tests with better errors, refactored code (winlarry@microsoft.com)
+- Fix build failing on radiogroup android tests (winlarry@microsoft.com)
+
+## 1.11.2
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Rename tokens test to color tokens test (78454019+lyzhan7@users.noreply.github.com)
+
+## 1.11.1
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.24
+
+## 1.11.0
+
+Fri, 20 Jan 2023 01:45:16 GMT
+
+### Minor changes
+
+- Update Switch E2E tests with better error messages + refactored code (winlarry@microsoft.com)
+
+## 1.10.1
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.23
+
+## 1.10.0
+
+Sat, 14 Jan 2023 17:43:18 GMT
+
+### Minor changes
+
+- Remove need to override testPage, add pageButtonName fn (ayushsinghs@yahoo.in)
+
+## 1.9.8
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.22
+
+## 1.9.7
+
+Tue, 10 Jan 2023 18:57:29 GMT
+
+### Patches
+
+- Refactor MenuButtonExperimental tests (winlarry@microsoft.com)
+
+## 1.9.6
+
+Tue, 10 Jan 2023 17:55:08 GMT
+
+### Patches
+
+- Refactor RadioGroup spec and PageObject code (winlarry@microsoft.com)
+
+## 1.9.5
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.21
+
+## 1.9.4
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.20
 
 ## 1.9.3
 

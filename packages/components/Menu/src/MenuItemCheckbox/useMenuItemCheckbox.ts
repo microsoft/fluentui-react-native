@@ -1,15 +1,10 @@
 import * as React from 'react';
-import { AccessibilityActionEvent, AccessibilityState, I18nManager, Platform } from 'react-native';
-import { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
+import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
+import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
 import { memoize } from '@fluentui-react-native/framework';
-import {
-  InteractionEvent,
-  KeyPressEvent,
-  usePressableState,
-  useKeyDownProps,
-  useOnPressWithFocus,
-  useViewCommandFocus,
-} from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent, KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useKeyDownProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { useMenuListContext } from '../context/menuListContext';
 import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
 import { useMenuContext } from '../context/menuContext';
@@ -68,7 +63,7 @@ export const useMenuCheckboxInteraction = (
 
   const isSubmenu = useMenuContext().isSubmenu;
 
-  const { checked, onArrowClose } = useMenuListContext();
+  const { checked, hasTooltips, onArrowClose } = useMenuListContext();
   const isChecked = checked?.[name];
 
   // Ensure focus is placed on checkbox after click
@@ -95,7 +90,7 @@ export const useMenuCheckboxInteraction = (
     [disabled, isSubmenu, onArrowClose, toggleCallback],
   );
 
-  const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
+  const keys = disabled ? [] : isSubmenu ? submenuTriggerKeys : triggerKeys;
   const onKeyProps = useKeyDownProps(onKeysPressed, ...keys);
 
   const accessibilityActionsProp = accessibilityActions
@@ -119,6 +114,7 @@ export const useMenuCheckboxInteraction = (
     ...pressable.state,
     checked: isChecked,
     disabled,
+    hasTooltips,
   };
 
   return {

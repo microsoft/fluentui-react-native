@@ -1,10 +1,14 @@
 /** @jsx withSlots */
-import { compose, mergeProps, UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { View } from 'react-native';
-import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg, SvgProps } from 'react-native-svg';
+import type { SvgProps } from 'react-native-svg';
+import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg } from 'react-native-svg';
 import { stylingSettings } from './Shimmer.styling.win32';
-import { ShimmerElementTypes, shimmerName, ShimmerProps } from './Shimmer.types';
-import { ClippingMaskProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
+import type { ShimmerElementTypes, ShimmerProps, ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types.shared';
+export { ShimmerCircleElement, ShimmerRectElement };
+import { shimmerName } from './Shimmer.types.shared';
+import type { ClippingMaskProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
 import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
 import { withSlots } from '@fluentui-react-native/framework';
@@ -82,10 +86,10 @@ export const Shimmer = compose<ShimmerType>({
   },
 
   useRender: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
+    const Slots = useSlots(props);
+
     return (rest: ShimmerProps) => {
       const { elements, ...mergedProps } = mergeProps(props, rest);
-      const Slots = useSlots(mergedProps);
-
       /**
        * Generate a clip path from the provided element shapes, with their path parameter strings generated from their corresponding properties.
        * Ideally this would be better possible with functions from the shape elements themselves and not to rely on our own calculations.

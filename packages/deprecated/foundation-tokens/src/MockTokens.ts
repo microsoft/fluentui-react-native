@@ -1,6 +1,6 @@
-import { IMockTheme } from './MockTheme';
-import { IStyleFactoryOperation, ILookupThemePart } from './Token.types';
-import { ColorValue } from 'react-native';
+import type { IMockTheme } from './MockTheme';
+import type { IStyleFactoryOperation, ILookupThemePart } from './Token.types';
+import type { ColorValue } from 'react-native';
 
 export interface IMockTextTokens {
   fontSize?: string | number;

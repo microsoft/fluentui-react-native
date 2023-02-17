@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/text",
-  "version": "0.19.8",
+  "version": "0.19.20",
   "description": "A cross-platform Text component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,13 +26,13 @@
     "directory": "packages/components/text"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.12.30",
-    "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/experimental-native-font-metrics": "^0.3.0",
-    "@fluentui-react-native/framework": "0.8.30",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.7 <1.0.0",
-    "@fluentui-react-native/theme-tokens": ">=0.22.5 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.20.2 <1.0.0",
+    "@uifabricshared/foundation-compose": "^1.13.1",
+    "@fluentui-react-native/adapters": ">=0.10.1 <1.0.0",
+    "@fluentui-react-native/experimental-native-font-metrics": "^0.3.1",
+    "@fluentui-react-native/framework": "0.9.1",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.18 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.24.2 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.20.8 <1.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
@@ -50,14 +50,20 @@
   "author": "",
   "license": "MIT",
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
   }
 }

@@ -12,7 +12,7 @@
  * `{semantic: "windowBackgroundColor"}`
  */
 
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 export type ThemeColorDefinition = Palette & {
   background: ColorValue;
@@ -522,6 +522,14 @@ export interface AliasColorTokens {
   /** @platform android, iOS */
   neutralForegroundOnColor?: ColorValue;
 
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralForegroundDarkStatic?: ColorValue;
+
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralForegroundLightStatic?: ColorValue;
+
   /** @platform macOS, win32, windows */
   neutralForegroundOnBrand?: ColorValue;
 
@@ -661,6 +669,12 @@ export interface AliasColorTokens {
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackground6?: ColorValue;
 
+  /** @platform iOS, android */
+  neutralBackgroundCanvas?: ColorValue;
+
+  /** @platform iOS, android */
+  neutralBackgroundDarkStatic?: ColorValue;
+
   /** @platform android, iOS, macOS, win32, windows */
   neutralBackgroundInverted?: ColorValue;
 
@@ -788,6 +802,12 @@ export interface AliasColorTokens {
   /** @platform android, iOS, macOS, win32, windows */
   neutralStrokeDisabled?: ColorValue;
 
+  /** @platform iOS, android */
+  neutralStrokeFocus1?: ColorValue;
+
+  /** @platform iOS, android */
+  neutralStrokeFocus2?: ColorValue;
+
   /** @platform macOS, win32, windows */
   strokeFocus1?: ColorValue;
 
@@ -852,6 +872,68 @@ export interface AliasColorTokens {
 
   /** @platform macOS, win32, windows */
   redBorder2?: ColorValue;
+
+  /// Error, status, and presence tokens
+
+  /** @platform iOS, android  */
+  dangerBackground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  dangerBackground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  dangerForeground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  dangerForeground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  successBackground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  successBackground2?: ColorValue;
+
+  /** @platform iOS, android */
+  successForeground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  successForeground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  warningBackground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  warningBackground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  warningForeground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  warningForeground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  severeBackground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  severeBackground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  severeForeground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  severeForeground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  presenceAway?: ColorValue;
+
+  /** @platform iOS, android  */
+  presenceDnd?: ColorValue;
+
+  /** @platform iOS, android  */
+  presenceAvailable?: ColorValue;
+
+  /** @platform iOS, android  */
+  presenceOof?: ColorValue;
 }
 
 /**

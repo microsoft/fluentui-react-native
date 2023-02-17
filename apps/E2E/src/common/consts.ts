@@ -1,4 +1,6 @@
 export const ROOT_VIEW = 'Fluent_Tester_Root_View';
+export const E2E_MODE_SWITCH = 'E2E_Mode_Switch';
+export const E2E_TEST_SECTION = 'E2E_Test_Section';
 
 /* Accessibility Role Control Types - https://docs.microsoft.com/en-us/windows/win32/winauto/uiauto-controltype-ids */
 export const BUTTON_A11Y_ROLE = 'ControlType.Button';
@@ -15,10 +17,18 @@ export const TAB_A11Y_ROLE = 'ControlType.Tab';
 export const TABITEM_A11Y_ROLE = 'ControlType.TabItem';
 export const TEXT_A11Y_ROLE = 'ControlType.Text';
 
+/* Android Widget Class Types - https://developer.android.com/reference/android/widget/package-summary#classes */
+export const ANDROID_BUTTON = 'android.widget.Button';
+export const ANDROID_CHECKBOX = 'android.widget.CheckBox';
+export const ANDROID_IMAGE = 'android.widget.ImageView';
+export const ANDROID_TEXT = 'android.widget.TextView';
+export const ANDROID_RADIOBUTTON = 'android.widget.RadioButton';
+
 /* Jasmine Timeouts */
 export const BOOT_APP_TIMEOUT = 60000;
 export const PAGE_TIMEOUT = 15000;
 
+// eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum Attribute {
   AccessibilityHint = 'HelpText',
   AccessibilityLabel = 'Name',
@@ -30,6 +40,15 @@ export const enum Attribute {
   IsTogglePatternAvailable = 'IsTogglePatternAvailable',
   TestID = 'AutomationId',
   ToggleState = 'Toggle.ToggleState',
+}
+
+/* Android Element Attributes - https://github.com/appium/appium-uiautomator2-driver#element-attributes */
+// eslint-disable-next-line @rnx-kit/no-const-enum
+export const enum AndroidAttribute {
+  AccessibilityLabel = 'content-desc',
+  Class = 'class',
+  Clickable = 'clickable',
+  Checked = 'checked',
 }
 
 export const attributeToEnumName = {
@@ -45,6 +64,7 @@ export const attributeToEnumName = {
   [Attribute.ToggleState]: 'ToggleState',
 };
 
+// eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum AttributeValue {
   on = '1',
   off = '0',
@@ -55,6 +75,7 @@ export const enum AttributeValue {
 }
 
 /* Keyboard Key Constants */
+// eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum Keys {
   NULL = '\uE000',
   CANCEL = '\uE001', // ^break
@@ -124,3 +145,5 @@ export const BASE_TESTPAGE = 'Base_TestPage';
 // ScrollViewer that contains the list of test page buttons
 export const TESTPAGE_BUTTONS_SCROLLVIEWER = 'TestPage_Buttons_ScrollViewer';
 
+// ScrollViewer that contains the content of each test page
+export const TESTPAGE_CONTENT_SCROLLVIEWER = 'TestPage_Content_ScrollViewer';

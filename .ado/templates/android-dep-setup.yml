@@ -10,7 +10,7 @@ steps:
         echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;default;x86_64'
 
         # Create emulator
-        echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n android_emulator -d 19 --package 'system-images;android-27;default;x86_64'
+        echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n android_emulator -d 34 --package 'system-images;android-27;default;x86_64'
 
          # list emulator
         echo "Available emulator"

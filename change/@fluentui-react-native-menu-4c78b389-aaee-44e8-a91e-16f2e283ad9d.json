@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove enter and space key triggers from disabled menu items",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

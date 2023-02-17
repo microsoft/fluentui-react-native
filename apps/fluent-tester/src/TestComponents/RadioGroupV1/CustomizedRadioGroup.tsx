@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
-import { RadioGroup, Radio, RadioGroupTokens, RadioTokens } from '@fluentui-react-native/experimental-radio-group';
+import type { RadioGroupTokens, RadioTokens } from '@fluentui-react-native/experimental-radio-group';
+import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
 const styles = StyleSheet.create({
@@ -27,7 +28,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [radioBorderWidth, setRadioBorderWidth] = React.useState<number>(1);
   const [radioVisibility, setRadioVisibility] = React.useState<number>(1);
   const [radioBorder, setRadioBorder] = React.useState<string>('black');
-  const [radioSize, setRadioSize] = React.useState<number>(20);
+  const [radioOuterCircleSize, setRadioOuterCircleSize] = React.useState<number>(20);
   const [radioInnerCircleSize, setRadioInnerCircleSize] = React.useState<number>(10);
   const [radioFill, setRadioFill] = React.useState<string>('blue');
   const [color, setColor] = React.useState<string>('black');
@@ -61,7 +62,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
       radioBorderWidth,
       radioVisibility,
       radioBorder,
-      radioSize,
+      radioOuterCircleSize,
       radioInnerCircleSize,
       color,
       marginTop,
@@ -127,7 +128,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
     radioBorderWidth,
     radioVisibility,
     radioBorder,
-    radioSize,
+    radioOuterCircleSize,
     radioInnerCircleSize,
     radioFill,
     color,
@@ -239,10 +240,10 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
           <TextInput
             accessibilityLabel="Radio button size"
             style={commonStyles.textBox}
-            placeholder="radioSize"
+            placeholder="radioOuterCircleSize"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setRadioSize(parseInt(e.nativeEvent.text.toString()));
+              setRadioOuterCircleSize(parseInt(e.nativeEvent.text.toString()));
             }}
           />
           <TextInput
