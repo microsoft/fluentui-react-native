@@ -1,0 +1,2 @@
+# Don't include test files in package
+__tests__
