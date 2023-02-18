@@ -581,3 +581,346 @@ exports[`Button component tests Button subtle 1`] = `
   </Text>
 </View>
 `;
+
+exports[`Button default 1`] = `
+<View
+  accessibilityLabel="Default Button"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minHeight": 24,
+          "minWidth": 32,
+          "paddingEnd": 6,
+          "paddingStart": 6,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "System",
+            "fontSize": 13,
+            "fontWeight": "400",
+            "margin": 0,
+            "marginEnd": 2,
+            "marginStart": 2,
+          }
+        }
+      >
+        Default Button
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Custom FAB with no shadow(iOS) 1`] = `
+<View
+  accessibilityLabel="Custom FAB with no shadow(iOS)"
+  accessibilityRole="button"
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  iconPosition="before"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
+      "borderRadius": 9999,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 56,
+      "minWidth": 56,
+      "padding": 20,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    style={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Arial",
+        "fontSize": 16,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    ♣
+  </Text>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 13,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 8,
+        "marginTop": 0,
+      }
+    }
+  >
+    Custom FAB with no shadow(iOS)
+  </Text>
+</View>
+`;
+
+exports[`Default FAB (iOS) 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
+      "borderRadius": 9999,
+      "bottom": undefined,
+      "display": "flex",
+      "end": undefined,
+      "justifyContent": "center",
+      "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
+      "minHeight": 56,
+      "minWidth": 56,
+      "right": undefined,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
+      "width": undefined,
+    }
+  }
+>
+  <View
+    accessibilityLabel="Default FAB (iOS)"
+    accessibilityRole="button"
+    accessible={true}
+    collapsable={false}
+    enableFocusRing={true}
+    focusable={true}
+    iconPosition="before"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "backgroundColor": "#0f6cbd",
+        "borderBottomWidth": undefined,
+        "borderColor": "#0f548c",
+        "borderEndWidth": undefined,
+        "borderLeftWidth": undefined,
+        "borderRadius": 9999,
+        "borderRightWidth": undefined,
+        "borderStartWidth": undefined,
+        "borderTopWidth": undefined,
+        "borderWidth": undefined,
+        "display": "flex",
+        "flexDirection": "row",
+        "flexWrap": undefined,
+        "justifyContent": "center",
+        "minHeight": 56,
+        "minWidth": 56,
+        "padding": 20,
+        "paddingBottom": undefined,
+        "paddingEnd": undefined,
+        "paddingHorizontal": undefined,
+        "paddingLeft": undefined,
+        "paddingRight": undefined,
+        "paddingStart": undefined,
+        "paddingTop": undefined,
+        "paddingVertical": undefined,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 4,
+        "width": undefined,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Arial",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "margin": 0,
+        }
+      }
+    >
+      ♣
+    </Text>
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 13,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 8,
+          "marginTop": 0,
+        }
+      }
+    >
+      Default FAB (iOS)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`ToggleButton default 1`] = `
+<View
+  accessibilityActions={
+    Array [
+      Object {
+        "name": "Toggle",
+      },
+    ]
+  }
+  accessibilityLabel="Default Button"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "checked": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 8,
+      "paddingHorizontal": 15,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 15,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
+      }
+    }
+  >
+    Default Button
+  </Text>
+</View>
+`;
