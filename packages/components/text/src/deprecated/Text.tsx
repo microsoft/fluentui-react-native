@@ -1,4 +1,5 @@
-import { textName, ITextType } from './Text.types';
+import type { ITextType } from './Text.types';
+import { textName } from './Text.types';
 import { compose } from '@uifabricshared/foundation-compose';
 import { Text as RNText } from 'react-native';
 import { filterTextProps } from '@fluentui-react-native/adapters';

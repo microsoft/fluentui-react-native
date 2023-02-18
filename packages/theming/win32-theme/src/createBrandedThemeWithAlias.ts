@@ -1,6 +1,6 @@
-import { Theme, PartialTheme, AliasColorTokens } from '@fluentui-react-native/theme-types';
+import type { Theme, PartialTheme, AliasColorTokens } from '@fluentui-react-native/theme-types';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 export function createBrandedThemeWithAlias(themeName: string, theme: Theme): PartialTheme {
   if (themeName === 'HighContrast' || !theme.host.colors) {

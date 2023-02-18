@@ -1,8 +1,8 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { TextProps } from '@fluentui-react-native/text';
-import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
-import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import { ColorValue, ViewStyle } from 'react-native';
+import type { TextProps } from '@fluentui-react-native/text';
+import type { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
+import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import type { ColorValue, ViewStyle } from 'react-native';
 
 export const radioGroupName = 'RadioGroup';
 
@@ -15,7 +15,7 @@ export interface RadioGroupState extends RadioGroupProps {
   /**
    * Updates the selected button and calls the client’s onChange callback
    */
-  onChange?: (key: string) => void;
+  onChange?: (value: string) => void;
 
   /**
    * Updates the selected button's ref to set as the default tabbable element
@@ -28,9 +28,40 @@ export interface RadioGroupState extends RadioGroupProps {
   selectedButtonRef?: React.MutableRefObject<any>;
 
   /**
-   * Array of radio keys in the group
+   * Populate the values array (all Radio keys) at mount and un-mount
+   */
+  addRadioValue?: (value: string) => void;
+  removeRadioValue?: (value: string) => void;
+
+  /**
+   * Array of all Radio keys in the RadioGroup
    */
   values?: string[];
+
+  /**
+   * Populate the enabledValues array (only enabled/valid Radio keys) at mount and un-mount
+   * @platform win32
+   */
+  addRadioEnabledValue?: (value: string) => void;
+  removeRadioEnabledValue?: (value: string) => void;
+
+  /**
+   * Array of enabled Radio keys in the RadioGroup
+   * @platform win32
+   */
+  enabledValues?: string[];
+
+  /**
+   * Updates invoked to signal that arrow key has been pressed and focus needs to be set
+   * @platform win32
+   */
+  updateInvoked?: (check: boolean) => void;
+
+  /**
+   * Signals whether arrow key has been pressed
+   * @platform win32
+   */
+  invoked?: boolean;
 }
 
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {
@@ -88,6 +119,7 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
 
   /**
    * The position of the label relative to the indicator.
+   * 'horizontal' and 'horizontal-stacked' are not supported from Fluent Android, renders as-is.
    *
    * @default vertical
    */

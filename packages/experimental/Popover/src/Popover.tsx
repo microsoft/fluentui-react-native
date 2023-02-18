@@ -1,6 +1,8 @@
 /** @jsx withSlots */
-import { popoverName, PopoverProps, PopoverTokens } from './Popover.types';
-import { compressible, buildUseTokens, UseTokens } from '@fluentui-react-native/framework';
+import type { PopoverProps, PopoverTokens } from './Popover.types';
+import { popoverName } from './Popover.types';
+import type { UseTokens } from '@fluentui-react-native/framework';
+import { compressible, buildUseTokens } from '@fluentui-react-native/framework';
 
 const usePopoverTokens = buildUseTokens<PopoverTokens>(() => ({}), popoverName);
 

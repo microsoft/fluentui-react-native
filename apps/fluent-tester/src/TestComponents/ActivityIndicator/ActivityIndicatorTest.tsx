@@ -3,8 +3,9 @@ import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { ACTIVITY_INDICATOR_TESTPAGE } from './consts';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
+import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
 import { View, Switch } from 'react-native';
 
 const BasicActivityIndicator: React.FunctionComponent = () => {

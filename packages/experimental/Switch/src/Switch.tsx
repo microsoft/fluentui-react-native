@@ -1,9 +1,11 @@
 /** @jsx withSlots */
-import { View, AccessibilityInfo, Pressable } from 'react-native';
+import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
+import type { SwitchType, SwitchState, SwitchProps } from './Switch.types';
+import { switchName } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
 
 /**
@@ -29,19 +31,34 @@ export const switchLookup = (layer: string, state: SwitchState, userProps: Switc
   );
 };
 
+const isMobile = Platform.OS === 'android' || Platform.OS == 'ios';
+
 export const Switch = compose<SwitchType>({
   displayName: switchName,
   ...stylingSettings,
   slots: {
     root: Pressable,
     label: Text,
-    track: View,
-    thumb: View,
+    track: Animated.View, // Conversion from View to Animated.View for Animated API to work
+    thumb: Animated.View,
     toggleContainer: View,
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
-    const switchInfo = useSwitch(userProps);
+    const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true, disabled: userProps.disabled }, {}));
+    const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false, disabled: userProps.disabled }, {}));
+
+    // For Mobile platform we are passing extra data to useSwitch for Animated API
+    const switchInfo = useSwitch(
+      userProps,
+      isMobile && {
+        toggleOnBgColor: switchOnSlot.track({}).props.style.backgroundColor,
+        toggleOffBgColor: switchOffSlot.track({}).props.style.backgroundColor,
+        trackWidth: switchOnSlot.track({}).props.style.width,
+        thumbWidth: switchOnSlot.thumb({}).props.style.width,
+        thumbMargin: switchOnSlot.thumb({}).props.style.margin,
+      },
+    );
 
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
@@ -53,13 +70,13 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
-
       return (
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
-            <Slots.track>
-              <Slots.thumb {...thumbAnimation} />
+            {/* For the Mobile platform the animated styles are applied  */}
+            <Slots.track {...(isMobile && { style: switchInfo.props.switchAnimationStyles.trackBackgroundStyle })}>
+              <Slots.thumb {...thumbAnimation} {...(isMobile && { style: switchInfo.props.switchAnimationStyles.thumbAnimatedStyle })} />
             </Slots.track>
             {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>

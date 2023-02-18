@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, ColorValue } from 'react-native';
-import { useTheme, Theme } from '@fluentui-react-native/theme-types';
+import type { ViewStyle, ColorValue } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import type { Theme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
-import { THEME_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { THEME_TESTPAGE } from '../../../../E2E/src/Theme/consts';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -50,7 +53,7 @@ const Panel: React.FunctionComponent = () => {
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
-      <Text testID={THEME_TESTPAGE}>This is a text element</Text>
+      <Text>This is a text element</Text>
       <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
     </View>
   );
@@ -103,6 +106,7 @@ const SwatchList: React.FunctionComponent = () => {
 const themeSections: TestSection[] = [
   {
     name: 'Component Examples',
+    testID: THEME_TESTPAGE,
     component: Panel,
   },
   {

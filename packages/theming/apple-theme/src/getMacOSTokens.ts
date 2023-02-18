@@ -6,7 +6,7 @@ import macOSLightShadowTokens from '@fluentui-react-native/design-tokens-macos/l
 import macOSDarkShadowTokens from '@fluentui-react-native/design-tokens-macos/dark/tokens-shadow.json';
 import macOSLightHCShadowTokens from '@fluentui-react-native/design-tokens-macos/hclight/tokens-shadow.json';
 import macOSDarkHCShadowTokens from '@fluentui-react-native/design-tokens-macos/hcdark/tokens-shadow.json';
-import { AppearanceOptions } from '@fluentui-react-native/theme-types';
+import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
 
 export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boolean) {
@@ -16,7 +16,7 @@ export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boo
     } else {
       return macOSLightAliasTokens;
     }
-  } else if (mode === 'dark') {
+  } else if (mode === 'dark' || mode === 'darkElevated') {
     if (isHighContrast) {
       return macOSDarkHCAliasTokens;
     } else {
@@ -36,7 +36,7 @@ export function getMacOSShadowTokens(mode: AppearanceOptions, isHighContrast: bo
     } else {
       return macOSLightShadowTokens;
     }
-  } else if (mode === 'dark') {
+  } else if (mode === 'dark' || mode === 'darkElevated') {
     if (isHighContrast) {
       return macOSDarkHCShadowTokens;
     } else {

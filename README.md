@@ -67,11 +67,11 @@ If you run into an error that says `pragma and pragmaFrag cannot be set when run
 
 ### Components and Controls
 
-Our component documentation is hosted on the [FluentUI documentation](https://developer.microsoft.com/fluentui).
+Our component documentation can be found in SPEC.md files for each component. The current list can be found in our [Wiki's sidebar](https://github.com/microsoft/fluentui-react-native/wiki). They will be uploaded to a website at a future time.
 
 #### Expanding Component documentation
 
-The FluentUI website is built out of the [FluentUI repository](https://github.com/microsoft/fluentui/tree/master/apps/public-docsite). React-Native components and controls are documented in a 'cross' (cross-platform) directory in each component page directory, e.g. [Button 'cross' directory](https://github.com/microsoft/fluentui/tree/master/apps/public-docsite/src/pages/Controls/ButtonPage/docs/cross). The FluentUI website can be run locally to verify changes, and should reflect the current state of controls that have established the _v1_ set of properties on any one platform.
+Our SPEC.md files should reflect the current state of controls that have established the _v1_ set of properties on any one platform.
 
 Since the FluentUI React Native controls are cross-platform, but represented by a single page, it's important to distinguish platform differences and limitations. Examples include:
 
@@ -82,15 +82,15 @@ Since the FluentUI React Native controls are cross-platform, but represented by 
 
 ### Theming framework
 
-Our FluentUI framework documentation is found in this repository alongside the implementation.
+Documentation for Theming can be found in our docs file, or for more in depth documentation, along side the implementation.
 
-- [Theming Overview](./packages/deprecated/theming-react-native/README.md)
-- [StyleSheets](./packages/framework/themed-stylesheet/README.md)
-- [Customizing Theme Settings](./packages/deprecated/themed-settings/README.md)
-- [Theme Registry](./packages/deprecated/theme-registry/README.md)
-- [Tokens](./packages/deprecated/foundation-tokens/README.md)
-- [Settings and Slots](./packages/deprecated/foundation-settings/README.md)
-- [Compose](./packages/deprecated/foundation-compose/README.md) and [Composable](./packages/deprecated/foundation-composable/README.md)
+- [Theming Overview](./docs/pages/Theming/Basics.md)
+- [StyleSheets](./docs/pages/Theming/ThemedStylesheet.md)
+- [Customizing Theme Settings](./docs/pages/Theming/CustomTheme.md)
+- [Theme Reference](./packages/framework/theme/README.md)
+- [Tokens](./packages/framework/use-tokens/README.md)
+- [Slots](./packages/framework/use-slots/README.md)
+- [Customize and Compose](./packages/framework/composition/README.md)
 
 ## Developing in the repo
 

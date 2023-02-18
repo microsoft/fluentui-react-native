@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/default-theme",
-  "version": "0.16.17",
+  "version": "0.17.1",
   "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",
@@ -31,16 +31,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.1.7",
-    "@fluentui-react-native/theme-tokens": "^0.22.2",
-    "@fluentui-react-native/theme-types": ">=0.27.0 <1.0.0",
-    "@fluentui-react-native/theme": ">=0.7.12 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.20.1 <1.0.0",
+    "@fluentui-react-native/memo-cache": "^1.1.8",
+    "@fluentui-react-native/theme-tokens": "^0.24.2",
+    "@fluentui-react-native/theme-types": ">=0.30.2 <1.0.0",
+    "@fluentui-react-native/theme": ">=0.8.0 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.23.3 <1.0.0",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@office-iss/react-native-win32": "^0.68.0",
     "@types/react": "^17.0.2",
     "react": "17.0.2",
     "react-native": "^0.68.0"
@@ -50,14 +51,20 @@
     "react-native": "^0.68.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { CounterBadgeProps, CounterBadgeInfo } from './CounterBadge.types';
+import type { CounterBadgeProps, CounterBadgeInfo } from './CounterBadge.types';
 
 export const useCounterBadge = (props: CounterBadgeProps): CounterBadgeInfo => {
   const DEFAULT_OVERFLOW_COUNT = 99;

@@ -1,4 +1,4 @@
-import { ITheme } from '../Theme.types';
+import type { ITheme } from '../Theme.types';
 
 /**
  * @deprecated

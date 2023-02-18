@@ -3,26 +3,18 @@ import {
   CONTEXTUALMENU_TEST_COMPONENT,
   HOMEPAGE_CONTEXTUALMENU_BUTTON,
   CONTEXTUALMENUITEM_TEST_COMPONENT,
-} from '../../../../fluent-tester/src/TestComponents/ContextualMenu/consts';
+} from '../consts';
 import { BasePage, By } from '../../common/BasePage';
-
-/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
- * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
-export const enum ContextualMenuSelector {
-  ContextualMenu = 0, //this._primaryComponent
-  ContextualMenuItem, //this._contextualMenuItem
-}
+import { Keys } from '../../common/consts';
 
 class ContextualMenuPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async waitForContextualMenuItemsToOpen(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.contextualMenuItemDisplayed(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'The Contextual Menu Items did not open.',
-      interval: 1000,
-    });
+  /* Waits for the MenuItems to be displayed and returns true / false whether that occurs. */
+  async waitForContextualMenuItemsToDisplay(timeout?: number): Promise<boolean> {
+    await this.waitForCondition(async () => this.contextualMenuItemDisplayed(), 'The Contextual Menu Items did not display.', timeout);
+    return await this.contextualMenuItemDisplayed();
   }
 
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */
@@ -30,39 +22,30 @@ class ContextualMenuPageObject extends BasePage {
     return await (await this._contextualMenuItem).isDisplayed();
   }
 
-  /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(contextualMenuSelector: ContextualMenuSelector, key: string): Promise<void> {
-    await (await this.getContextualMenuSelector(contextualMenuSelector)).addValue(key);
-  }
-
-  /* Returns the correct WebDriverIO element from the ContextualMenuSelector string */
-  async getContextualMenuSelector(contextualMenuSelector?: ContextualMenuSelector): Promise<WebdriverIO.Element> {
-    if (contextualMenuSelector == ContextualMenuSelector.ContextualMenu) {
-      return await this._primaryComponent;
-    } else if (contextualMenuSelector == ContextualMenuSelector.ContextualMenuItem) {
-      return await this._contextualMenuItem;
-    } else {
-      return await this._primaryComponent;
+  /* Closes the ContextualMenu by sending an ESCAPE key input to the menu button */
+  async closeContextualMenu(): Promise<void> {
+    if (await this.contextualMenuItemDisplayed()) {
+      await this.sendKeys(this._contextualMenuItem, [Keys.ESCAPE]);
+      await this.waitForCondition(
+        async () => !(await this.contextualMenuItemDisplayed()),
+        "Pressed 'ESC' on the ContextualMenu item, but the ContextualMenu items are still displayed - the ContextMenu appears to still be open.",
+      );
     }
   }
 
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
-  get _testPage() {
-    return By(CONTEXTUALMENU_TESTPAGE);
-  }
-
   get _pageName() {
     return CONTEXTUALMENU_TESTPAGE;
   }
 
-  get _primaryComponent() {
+  get _contextualMenu() {
     return By(CONTEXTUALMENU_TEST_COMPONENT);
   }
 
-  get _pageButton() {
-    return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
+  get _pageButtonName() {
+    return HOMEPAGE_CONTEXTUALMENU_BUTTON;
   }
 
   get _contextualMenuItem() {

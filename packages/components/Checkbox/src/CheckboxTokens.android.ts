@@ -1,29 +1,34 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { CheckboxTokens } from './Checkbox.types';
+import type { CheckboxTokens } from './Checkbox.types';
 
-// No Tokens for Sizes , hovered, pressed and circular checkbox as they're not supported for Android Platform
+// No Tokens for Sizes , hovered and circular checkbox as they're not supported for Android Platform
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
+    requiredColor: globalTokens.color.darkRed.primary,
+    requiredPadding: globalTokens.size20,
     checkboxBorderWidth: globalTokens.stroke.width15,
     checkboxBorderRadius: globalTokens.corner.radius40,
-    checkboxSize: globalTokens.font.size600,
-    checkmarkSize: globalTokens.font.size100,
+    checkboxSize: globalTokens.size200,
+    checkmarkSize: globalTokens.size120,
+    rippleColor: '#D4D4D4',
     label: {
+      // Tokens taken from Android List Item
       color: t.colors.neutralForeground1,
-      padding: globalTokens.size120,
-      paddingHorizontal: globalTokens.size160,
-      borderRadius: globalTokens.corner.radius40,
+      padding: globalTokens.size20,
       spacingLabelAfter: globalTokens.size160,
       labelIsBefore: {
         spacingLabelBefore: globalTokens.size120,
         spacingLabelAfter: 0,
       },
     },
-    padding: globalTokens.size80,
-    fontSize: t.typography.sizes.body,
+    pressed: {
+      checkboxBackgroundColor: t.colors.neutralBackground1Pressed,
+    },
+    padding: globalTokens.size20,
+    variant: 'body1',
     checkboxBorderColor: t.colors.neutralStrokeAccessible,
     checkmarkOpacity: 0,
     disabled: {

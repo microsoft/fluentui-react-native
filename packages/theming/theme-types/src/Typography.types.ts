@@ -1,3 +1,5 @@
+import type { TextStyle } from 'react-native';
+
 /**
  * A font family designation, made up of one or more font names or groupings
  * (comma-separated):
@@ -70,7 +72,7 @@ export type FontSize = keyof FontSizes | FontSizeValuePoints;
  * Smaller numbers yield a thinner, lighter font. Larger numbers yield a thicker, darker
  * font.
  */
-export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+export type FontWeightValue = TextStyle['fontWeight'];
 
 /**
  * A collection of named font weights.

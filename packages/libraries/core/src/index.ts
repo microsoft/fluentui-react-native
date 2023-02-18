@@ -133,7 +133,18 @@ export type {
   NavigateAtEnd,
 } from '@fluentui-react-native/focus-zone';
 
-export { Link, linkName, useAsLink } from '@fluentui-react-native/link';
+export {
+  Link,
+  linkName,
+  useAsLink,
+  linkNameV1,
+  linkStylingSettings,
+  useLink,
+  LinkV1,
+  linkLookup,
+  linkStates,
+  defaultLinkTokens,
+} from '@fluentui-react-native/link';
 export type {
   ILinkHooks,
   ILinkInfo,
@@ -145,6 +156,12 @@ export type {
   ILinkTokens,
   ILinkType,
   IWithLinkOptions,
+  LinkTokens,
+  LinkProps,
+  LinkAppearance,
+  LinkState,
+  LinkSlotProps,
+  LinkType,
 } from '@fluentui-react-native/link';
 
 export { Persona, personaName } from '@fluentui-react-native/persona';
@@ -198,6 +215,7 @@ export { Separator, separatorName } from '@fluentui-react-native/separator';
 export type { SeparatorProps, SeparatorTokens, SeparatorType } from '@fluentui-react-native/separator';
 
 export { Text, textName, TextV1, textNameV1 } from '@fluentui-react-native/text';
+
 export type {
   TextProps,
   TextTokens,

@@ -1,2 +1,2 @@
 export * from './SvgTest';
-export * from './consts';
+export * from './RNSVGIcons';

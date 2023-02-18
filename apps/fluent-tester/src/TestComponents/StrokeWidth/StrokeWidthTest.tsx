@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { STROKEWIDTH_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { STROKEWIDTH_TESTPAGE } from '../../../../E2E/src/StrokeWidthTokens/consts';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { Text } from '@fluentui/react-native';
-import { Theme, useFluentTheme } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/framework';
+import { useFluentTheme } from '@fluentui-react-native/framework';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/avatar",
-  "version": "1.5.2",
+  "version": "1.6.6",
   "description": "A cross-platform Avatar component using the Fluent Design System",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -29,36 +29,44 @@
     "directory": "packages/components/Avatar"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.10.0",
-    "@fluentui-react-native/badge": "^0.4.3",
-    "@fluentui-react-native/framework": "0.8.26",
-    "@fluentui-react-native/icon": "^0.16.3",
-    "@fluentui-react-native/theme-tokens": "^0.22.2",
-    "@fluentui-react-native/tokens": "^0.20.0",
-    "@fluentui-react-native/use-styling": "^0.9.1",
-    "react-native-svg": "12.5.0"
+    "@fluentui-react-native/adapters": "^0.10.1",
+    "@fluentui-react-native/badge": "^0.4.27",
+    "@fluentui-react-native/framework": "0.9.1",
+    "@fluentui-react-native/icon": "^0.17.12",
+    "@fluentui-react-native/theme-tokens": "^0.24.2",
+    "@fluentui-react-native/tokens": "^0.20.8",
+    "@fluentui-react-native/use-styling": "^0.9.3"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@office-iss/react-native-win32": "^0.68.0",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react",
-      "svg"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react",
+        "svg"
+      ]
+    }
   }
 }

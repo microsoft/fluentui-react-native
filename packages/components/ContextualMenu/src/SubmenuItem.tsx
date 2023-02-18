@@ -1,24 +1,22 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { I18nManager, Platform, View } from 'react-native';
-import {
-  SubmenuItemSlotProps,
-  SubmenuItemState,
-  SubmenuItemProps,
-  SubmenuItemRenderData,
-  submenuItemName,
-  SubmenuItemType,
-} from './SubmenuItem.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import type { SubmenuItemSlotProps, SubmenuItemState, SubmenuItemProps, SubmenuItemRenderData, SubmenuItemType } from './SubmenuItem.types';
+import { submenuItemName } from './SubmenuItem.types';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useKeyDownProps, useViewCommandFocus, useAsPressable } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
-import { Icon, SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
-import { Svg, G, Path, SvgProps } from 'react-native-svg';
+import type { SvgIconProps } from '@fluentui-react-native/icon';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import type { SvgProps } from 'react-native-svg';
+import { Svg, G, Path } from 'react-native-svg';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
@@ -74,8 +72,8 @@ export const SubmenuItem = compose<SubmenuItemType>({
     /**
      * GH #1267
      * We want onMouseEnter to fire right away to set focus, and then Pressable's onHoverIn to fire after a delay to show the submenu.
-     * To achieve this, we override the onMouseEnter handler returned by usePressableState, and replace it with our own. Inside our own
-     * onMouseEnter handler, we call usePressableState's onMouseEnter handler, which incorporates the delay passed to delayHoverIn
+     * To achieve this, we override the onMouseEnter handler returned by useAsPressable, and replace it with our own. Inside our own
+     * onMouseEnter handler, we call useAsPressable's onMouseEnter handler, which incorporates the delay passed to delayHoverIn
      * In the future, we can avoid needing to override onMouseEnter by handling submenu rendering internally rather than depending on the
      * client to conditionally render it with onHoverIn.
      */

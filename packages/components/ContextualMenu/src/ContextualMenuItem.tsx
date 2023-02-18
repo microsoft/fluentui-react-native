@@ -1,21 +1,23 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
-import {
+import { View } from 'react-native';
+import type {
   ContextualMenuItemSlotProps,
   ContextualMenuItemState,
   ContextualMenuItemProps,
   ContextualMenuItemRenderData,
-  contextualMenuItemName,
   ContextualMenuItemType,
 } from './ContextualMenuItem.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { contextualMenuItemName } from './ContextualMenuItem.types';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { usePressableState, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 
@@ -63,7 +65,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       }
     }, [componentRef, disabled, context]);
 
-    const pressable = usePressableState({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
     const onKeyUpProps = useKeyProps(onItemClick, ' ', 'Enter');
 
@@ -79,8 +81,8 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     /**
      * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
      * onMouseLeave is overridden to explicitly call onBlur to simulate removing focus
-     * To achieve this, we override the onMouseLeave handler returned by usePressableState, and replace it with our own. Inside our own
-     * onMouseLeave handler, we call usePressableState's onMouseLEave handler,
+     * To achieve this, we override the onMouseLeave handler returned by useAsPressable, and replace it with our own. Inside our own
+     * onMouseLeave handler, we call useAsPressable's onMouseLEave handler,
      */
     const { onBlur, onMouseLeave, ...restPressableProps } = pressable.props;
     const onMouseLeaveModified = React.useCallback(
@@ -138,7 +140,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     );
   },
   slots: {
-    root: Pressable,
+    root: View,
     stack: { slotType: View },
     icon: { slotType: Icon as React.ComponentType },
     content: Text,

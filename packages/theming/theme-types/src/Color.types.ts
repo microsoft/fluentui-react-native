@@ -12,7 +12,7 @@
  * `{semantic: "windowBackgroundColor"}`
  */
 
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 export type ThemeColorDefinition = Palette & {
   background: ColorValue;
@@ -451,153 +451,489 @@ export interface ControlColorTokens {
 }
 
 export interface AliasColorTokens {
-  neutralForeground1: ColorValue;
-  neutralForeground1Hover: ColorValue;
-  neutralForeground1Pressed: ColorValue;
-  neutralForeground1Selected: ColorValue;
-  neutralForeground2: ColorValue;
-  neutralForeground2Hover: ColorValue;
-  neutralForeground2Pressed: ColorValue;
-  neutralForeground2Selected: ColorValue;
-  neutralForeground2BrandHover: ColorValue;
-  neutralForeground2BrandPressed: ColorValue;
-  neutralForeground2BrandSelected: ColorValue;
-  neutralForeground3: ColorValue;
-  neutralForeground3Hover: ColorValue;
-  neutralForeground3Pressed: ColorValue;
-  neutralForeground3Selected: ColorValue;
-  neutralForeground3BrandHover: ColorValue;
-  neutralForeground3BrandPressed: ColorValue;
-  neutralForeground3BrandSelected: ColorValue;
+  /// Foreground colors
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralForeground1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground1Hover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground1Pressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground1Selected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralForeground2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground2Hover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground2Pressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground2Selected?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground2BrandHover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground2BrandPressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground2BrandSelected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralForeground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground3Hover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground3Pressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground3Selected?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground3BrandHover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground3BrandPressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground3BrandSelected?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForeground4?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralForegroundDisabled?: ColorValue;
+
+  /** @platform android, iOS */
   neutralForegroundDisabled1?: ColorValue;
+
+  /** @platform android, iOS */
   neutralForegroundDisabled2?: ColorValue;
+
+  /** @platform android, iOS */
   neutralForegroundOnColor?: ColorValue;
 
-  neutralForeground4?: ColorValue;
-  neutralForegroundDisabled?: ColorValue;
-  brandForegroundLink?: ColorValue;
-  brandForegroundLinkHover?: ColorValue;
-  brandForegroundLinkPressed?: ColorValue;
-  brandForegroundLinkSelected?: ColorValue;
-  compoundBrandForeground1?: ColorValue;
-  compoundBrandForeground1Hover?: ColorValue;
-  compoundBrandForeground1Pressed?: ColorValue;
-  neutralForegroundInverted: ColorValue;
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralForegroundDarkStatic?: ColorValue;
 
-  brandForeground1: ColorValue;
-  brandForeground1Disabled?: ColorValue;
-  brandForeground1Pressed: ColorValue;
-  brandForeground1Selected?: ColorValue;
-  brandForegroundTint?: ColorValue;
-  brandForegroundDisabled1?: ColorValue;
-  brandForegroundDisabled2?: ColorValue;
+  // TODO #2440: Add to android
+  /** @platform iOS */
+  neutralForegroundLightStatic?: ColorValue;
 
-  brandForeground2?: ColorValue;
-
+  /** @platform macOS, win32, windows */
   neutralForegroundOnBrand?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   neutralForegroundOnBrandHover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   neutralForegroundOnBrandPressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   neutralForegroundOnBrandSelected?: ColorValue;
 
+  // TODO: remove definition from Android
+  /** @platform android, macOS, win32, windows */
+  neutralForegroundInverted?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   neutralForegroundInvertedLink?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   neutralForegroundInvertedLinkHover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   neutralForegroundInvertedLinkPressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   neutralForegroundInvertedLinkSelected?: ColorValue;
 
-  neutralBackground1: ColorValue;
-  neutralBackground1Hover: ColorValue;
-  neutralBackground1Pressed: ColorValue;
-  neutralBackground1Selected: ColorValue;
-  neutralBackground2: ColorValue;
-  neutralBackground2Hover: ColorValue;
-  neutralBackground2Pressed: ColorValue;
-  neutralBackground2Selected: ColorValue;
-  neutralBackground3: ColorValue;
-  neutralBackground3Hover: ColorValue;
-  neutralBackground3Pressed: ColorValue;
-  neutralBackground3Selected: ColorValue;
-  neutralBackground4: ColorValue;
-  neutralBackground4Hover: ColorValue;
-  neutralBackground4Pressed: ColorValue;
-  neutralBackground4Selected: ColorValue;
-  neutralBackground5: ColorValue;
-  neutralBackground5Hover: ColorValue;
-  neutralBackground5Pressed: ColorValue;
-  neutralBackground5Selected: ColorValue;
-  neutralBackground6: ColorValue;
-  neutralBackgroundInverted: ColorValue;
+  /** @platform macOS, win32, windows */
+  brandForegroundLink?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  brandForegroundLinkHover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  brandForegroundLinkPressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  brandForegroundLinkSelected?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  compoundBrandForeground1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  compoundBrandForeground1Hover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  compoundBrandForeground1Pressed?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  brandForeground1?: ColorValue;
+
+  /** @platform android, iOS, macOS */
+  brandForeground1Pressed?: ColorValue;
+
+  /** @platform android, iOS, macOS */
+  brandForeground1Selected?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  brandForeground2?: ColorValue;
+
+  /** @platform android, iOS */
+  brandForegroundTint?: ColorValue;
+
+  // TODO: rename to brandForegroundDisabled1
+  /** @platform android, iOS */
+  brandForeground1Disabled?: ColorValue;
+
+  /** @platform android, iOS */
+  brandForegroundDisabled1?: ColorValue;
+
+  /** @platform android, iOS */
+  brandForegroundDisabled2?: ColorValue;
+
+  // Background colors
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralBackground1Hover?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground1Pressed?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground1Selected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralBackground2Hover?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground2Pressed?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground2Selected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralBackground3Hover?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground3Pressed?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground3Selected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground4?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralBackground4Hover?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground4Pressed?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground4Selected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground5?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralBackground5Hover?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground5Pressed?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground5Selected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackground6?: ColorValue;
+
+  /** @platform iOS, android */
+  neutralBackgroundCanvas?: ColorValue;
+
+  /** @platform iOS, android */
+  neutralBackgroundDarkStatic?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackgroundInverted?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralBackgroundDisabled?: ColorValue;
+
+  /** @platform android, iOS */
   neutralBackgroundLightStatic?: ColorValue;
+
+  /** @platform android, iOS */
   neutralBackgroundLightStaticDisabled?: ColorValue;
 
+  /** @platform macOS, win32, windows */
   subtleBackground?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   subtleBackgroundHover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   subtleBackgroundPressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   subtleBackgroundSelected?: ColorValue;
 
+  /** @platform macOS, win32, windows */
   transparentBackground?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   transparentBackgroundHover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   transparentBackgroundPressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   transparentBackgroundSelected?: ColorValue;
 
-  neutralBackgroundDisabled: ColorValue;
+  /** @platform macOS, win32, windows */
+  brandBackground?: ColorValue;
 
-  neutralStencil1: ColorValue;
-  neutralStencil2: ColorValue;
-
-  neutralStrokeAccessible: ColorValue;
-  neutralStrokeAccessibleHover: ColorValue;
-  neutralStrokeAccessiblePressed: ColorValue;
-  neutralStrokeAccessibleSelected: ColorValue;
-  neutralStroke1: ColorValue;
-  neutralStroke1Hover: ColorValue;
-  neutralStroke1Pressed: ColorValue;
-  neutralStroke1Selected: ColorValue;
-  neutralStroke2: ColorValue;
-  neutralStroke3?: ColorValue;
-
-  neutralStrokeDisabled: ColorValue;
-
-  strokeFocus1?: ColorValue;
-  strokeFocus2?: ColorValue;
-
-  brandBackground: ColorValue;
+  /** @platform macOS, win32, windows */
   brandBackgroundHover?: ColorValue;
-  brandBackgroundPressed: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  brandBackgroundPressed?: ColorValue;
+
+  /** @platform macOS */
   brandBackgroundDisabled?: ColorValue;
-  brandBackgroundSelected: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  brandBackgroundSelected?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   compoundBrandBackground1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   compoundBrandBackground1Hover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   compoundBrandBackground1Pressed?: ColorValue;
+
+  /** @platform macOS, win32, windows  */
   brandBackgroundStatic?: ColorValue;
-  brandBackground2: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  brandBackground2?: ColorValue;
+
+  /** @platform android, iOS */
   brandBackground2Pressed?: ColorValue;
+
+  /** @platform android, iOS */
   brandBackground2Selected?: ColorValue;
 
+  /** @platform android, iOS */
   brandBackground3?: ColorValue;
+
+  /** @platform android, iOS */
   brandBackgroundTint?: ColorValue;
+
+  // TODO #2440: remove from Android and delete token defintion
+  /** @platform android */
   brandBackgroundInverted?: ColorValue;
+
+  // TODO #2440: remove from Android and delete token defintion
+  /** @platform android */
   brandBackgroundInvertedDisabled?: ColorValue;
 
-  brandStroke1: ColorValue;
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralStencil1?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralStencil2?: ColorValue;
+
+  // Stroke
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralStrokeAccessible?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralStrokeAccessibleHover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralStrokeAccessiblePressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralStrokeAccessibleSelected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralStroke1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralStroke1Hover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralStroke1Pressed?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralStroke1Selected?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralStroke2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  neutralStroke3?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  neutralStrokeDisabled?: ColorValue;
+
+  /** @platform iOS, android */
+  neutralStrokeFocus1?: ColorValue;
+
+  /** @platform iOS, android */
+  neutralStrokeFocus2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  strokeFocus1?: ColorValue;
+
+  /** @platform macOS, win32, windows*/
+  strokeFocus2?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows */
+  brandStroke1?: ColorValue;
+
+  /** @platform android, iOS, macOS */
   brandStroke1Pressed?: ColorValue;
+
+  /** @platform android, iOS, macOS */
   brandStroke1Selected?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   brandStroke2?: ColorValue;
 
+  /** @platform macOS, win32, windows */
   compoundBrandStroke1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   compoundBrandStroke1Hover?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   compoundBrandStroke1Pressed?: ColorValue;
+
+  /** @platform windows */
   transparentStroke?: ColorValue;
+
+  /** @platform  */
   transparentStrokeInteractive?: ColorValue;
+
+  /** @platform  */
   transparentStrokeDisabled?: ColorValue;
+
+  /// Red
+
+  /** @platform macOS, win32, windows */
   redBackground1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   redBackground2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   redBackground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   redForeground1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   redForeground2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   redForeground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   redBorderActive?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   redBorder1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
   redBorder2?: ColorValue;
+
+  /// Error, status, and presence tokens
+
+  /** @platform iOS, android  */
+  dangerBackground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  dangerBackground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  dangerForeground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  dangerForeground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  successBackground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  successBackground2?: ColorValue;
+
+  /** @platform iOS, android */
+  successForeground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  successForeground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  warningBackground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  warningBackground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  warningForeground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  warningForeground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  severeBackground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  severeBackground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  severeForeground1?: ColorValue;
+
+  /** @platform iOS, android  */
+  severeForeground2?: ColorValue;
+
+  /** @platform iOS, android  */
+  presenceAway?: ColorValue;
+
+  /** @platform iOS, android  */
+  presenceDnd?: ColorValue;
+
+  /** @platform iOS, android  */
+  presenceAvailable?: ColorValue;
+
+  /** @platform iOS, android  */
+  presenceOof?: ColorValue;
 }
 
 /**

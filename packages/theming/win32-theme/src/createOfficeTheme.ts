@@ -1,8 +1,8 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { getThemingModule } from './NativeModule/getThemingModule';
-import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
-import { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
+import type { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
+import type { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
 import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from './createOfficeAliasTokens';
 import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';

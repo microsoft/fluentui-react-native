@@ -1,9 +1,15 @@
-import * as React from 'react';
-import { ColorValue, ViewStyle } from 'react-native';
-import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type * as React from 'react';
+import type { ColorValue, ViewStyle } from 'react-native';
+import type {
+  FontTokens,
+  IBorderTokens,
+  IForegroundColorTokens,
+  IBackgroundColorTokens,
+  LayoutTokens,
+} from '@fluentui-react-native/tokens';
+import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
-import { SvgProps } from 'react-native-svg';
+import type { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
 export type CheckboxSize = 'medium' | 'large';
@@ -74,6 +80,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   /**
    * States that can be applied to a checkbox
    * These can be used to modify styles of the Checkbox when under the specified state.
+   * Note: 'hovered','focused','circular','labelIsBefore','large' are not supported for Android
    */
   disabled?: CheckboxTokens;
   label?: CheckboxTokens;
@@ -85,6 +92,14 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   circular?: CheckboxTokens;
   medium?: CheckboxTokens;
   large?: CheckboxTokens;
+
+  /**
+   * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
+   */
+  rippleColor?: ColorValue;
 }
 
 export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
@@ -123,7 +138,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 
   /**
    * Allows you to set the checkbox to be at the before (start) or after (end) the label
-   *
+   * Note: 'before' is not supported for Android
    * @default after
    */
   labelPosition?: 'before' | 'after';
@@ -143,7 +158,8 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * The shape of the checkbox. Can be either (rounded) square or circular.
    *
    * @default square
-   * @platform Android, iOS, windows, win32
+   * @platform iOS, windows, win32
+   * Note : 'circular' is not supported on Android
    */
   shape?: CheckboxShape;
 
@@ -155,6 +171,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 
   /**
    * Provides a tooltip while hovering over Checkbox component
+   * Note: Not supported for Android
    */
   tooltip?: string;
 }
@@ -172,6 +189,7 @@ export interface CheckboxState extends PressableState {
 
   /**
    * Determines position of Checkbox. True if labelPosition is set to 'before'
+   * Note : Not supported on Android
    */
   labelIsBefore?: boolean;
 }
@@ -183,7 +201,7 @@ export interface CheckboxInfo {
 
 export interface CheckboxSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
-  checkbox: IViewProps;
+  checkbox: PressablePropsExtended;
   checkmark: SvgProps;
   label: ITextProps;
   required: ITextProps;

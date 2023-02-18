@@ -1,2 +1,1 @@
-export * from './Switch';
-export * from './consts';
+export * from './SwitchTest';

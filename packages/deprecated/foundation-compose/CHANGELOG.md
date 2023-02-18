@@ -1,8 +1,150 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.13.1
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.17.1
+- Bump @uifabricshared/foundation-tokens to v0.12.25
+
+## 1.13.0
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Minor changes
+
+- Revert "Change default theme from a const object to a function that returns the object #2483" (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.17.0
+
+## 1.12.39
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.29
+- Bump @uifabricshared/foundation-tokens to v0.12.24
+
+## 1.12.38
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.28
+- Bump @fluentui-react-native/immutable-merge to v1.1.8
+- Bump @fluentui-react-native/memo-cache to v1.1.8
+- Bump @fluentui-react-native/theme-types to v0.30.2
+- Bump @uifabricshared/themed-settings to v0.9.2
+- Bump @uifabricshared/foundation-composable to v0.11.2
+- Bump @uifabricshared/foundation-settings to v0.12.2
+- Bump @uifabricshared/foundation-tokens to v0.12.23
+- Bump @uifabricshared/theming-ramp to v0.17.19
+
+## 1.12.37
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.27
+- Bump @fluentui-react-native/theme-types to v0.30.1
+- Bump @uifabricshared/foundation-tokens to v0.12.22
+- Bump @uifabricshared/theming-ramp to v0.17.18
+
+## 1.12.36
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.26
+- Bump @fluentui-react-native/theme-types to v0.30.0
+- Bump @uifabricshared/foundation-tokens to v0.12.21
+- Bump @uifabricshared/theming-ramp to v0.17.17
+
+## 1.12.35
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.25
+
+## 1.12.34
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.24
+- Bump @fluentui-react-native/theme-types to v0.29.1
+- Bump @uifabricshared/foundation-tokens to v0.12.20
+- Bump @uifabricshared/theming-ramp to v0.17.16
+
+## 1.12.33
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.23
+- Bump @fluentui-react-native/theme-types to v0.29.0
+- Bump @uifabricshared/foundation-tokens to v0.12.19
+- Bump @uifabricshared/theming-ramp to v0.17.15
+
+## 1.12.32
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.22
+
+## 1.12.31
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Change default theme const to a method (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.16.21
+
+## 1.12.30
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.20
+- Bump @fluentui-react-native/theme-types to v0.28.0
+- Bump @uifabricshared/foundation-tokens to v0.12.18
+- Bump @uifabricshared/theming-ramp to v0.17.14
+
+## 1.12.29
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.19
+- Bump @fluentui-react-native/theme-types to v0.27.1
+- Bump @uifabricshared/foundation-tokens to v0.12.17
+- Bump @uifabricshared/theming-ramp to v0.17.13
+
+## 1.12.28
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.18
 
 ## 1.12.27
 

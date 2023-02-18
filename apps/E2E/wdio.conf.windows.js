@@ -10,15 +10,15 @@ exports.config = {
   so we must specify which ones we want to test here. */
   specs: [
     'src/ActivityIndicator/specs/*.win.ts',
-    'src/Button/specs/*.win.ts',
-    'src/Checkbox/specs/*.windows.ts', // See spec file for more information
-    'src/Link/specs/*.win.ts',
+    'src/ButtonLegacy/specs/*.win.ts',
+    'src/CheckboxLegacy/specs/*.win.ts', // See spec file for more information
+    'src/LinkLegacy/specs/*.win.ts',
     'src/PersonaCoin/specs/*.win.ts',
     'src/Pressable/specs/*.win.ts',
     'src/Separator/specs/*.win.ts',
-    'src/Tabs/specs/*.windows.ts', // See spec file for more information
-    'src/Text/specs/*.win.ts',
-    'src/TextExperimental/specs/*.win.ts',
+    'src/TabsLegacy/specs/*.windows.ts', // See spec file for more information
+    'src/TextLegacy/specs/*.win.ts',
+    'src/TextV1/specs/*.win.ts',
     'src/Theme/specs/*.win.ts',
     'src/Tokens/specs/*.win.ts',
   ],
@@ -112,7 +112,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (/* config, capabilities, specs */) {
+  beforeSession: (/* config, capabilities, specs */) => {
     fs.mkdirSync('./errorShots', { recursive: true });
     process.env['E2ETEST_PLATFORM'] = 'windows';
   },
@@ -122,7 +122,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: async function () {
+  before: async () => {
     await browser.maximizeWindow();
   },
   /**
@@ -158,7 +158,7 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test, context, results) {
+  afterTest: (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
     console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
 
@@ -217,7 +217,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (/* exitCode, config, capabilities, results */) {
+  onComplete: (/* exitCode, config, capabilities, results */) => {
     console.log('<<< TESTING FINISHED >>>');
   },
   /**

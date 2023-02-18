@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-react-native/text';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
-import { IconProps } from '@fluentui-react-native/icon';
+import type * as React from 'react';
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
+import type { ITextProps } from '@fluentui-react-native/text';
+import type { IPressableProps } from '@fluentui-react-native/pressable';
+import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import type { IconProps } from '@fluentui-react-native/icon';
 
 export const contextualMenuItemName = 'ContextualMenuItem';
 
@@ -46,7 +47,7 @@ export interface ContextualMenuItemTokens extends FontTokens, IForegroundColorTo
   iconWeight?: number;
 }
 
-export interface ContextualMenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
+export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'> {
   /*
    ** A unique key-identifier for each menu item
    */
@@ -79,7 +80,7 @@ export interface ContextualMenuItemProps extends Omit<PressablePropsExtended, 'o
 }
 
 export interface ContextualMenuItemSlotProps {
-  root: React.PropsWithRef<PressablePropsExtended>;
+  root: React.PropsWithRef<IViewProps>;
   stack: IViewProps;
   icon: IconProps;
   content: ITextProps;

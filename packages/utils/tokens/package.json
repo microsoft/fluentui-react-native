@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tokens",
-  "version": "0.20.0",
+  "version": "0.20.8",
   "description": "Token interface parts and helpers",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,8 +26,8 @@
     "directory": "packages/utils/tokens"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/theme-types": ">=0.27.0 <1.0.0",
+    "@fluentui-react-native/adapters": ">=0.10.1 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.30.2 <1.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
@@ -44,13 +44,19 @@
   "author": "",
   "license": "MIT",
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios"
+      ]
+    }
   }
 }

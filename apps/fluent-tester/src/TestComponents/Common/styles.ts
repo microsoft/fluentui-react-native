@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { IStackProps } from '@fluentui-react-native/stack';
+import type { IStackProps } from '@fluentui-react-native/stack';
 
 export const commonTestStyles = StyleSheet.create({
   root: {
@@ -151,11 +151,14 @@ export const mobileStyles = StyleSheet.create({
   },
   testVariants: {
     flexDirection: 'row',
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     paddingTop: 10,
     paddingBottom: 5,
     flex: 1,
     justifyContent: 'space-evenly',
+  },
+  pageStyle: {
+    padding: 5,
   },
   testList: {
     width: '100%',
@@ -165,6 +168,15 @@ export const mobileStyles = StyleSheet.create({
     height: 'auto',
     fontSize: 18,
     paddingVertical: 8,
+  },
+  testSection: {
+    width: '100%',
+    marginVertical: 15,
+  },
+  containerSpacedEvenly: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
   },
 });
 

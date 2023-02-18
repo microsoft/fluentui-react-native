@@ -1,20 +1,36 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, IColorTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
-import { ColorValue, ViewStyle } from 'react-native';
-import { Variant } from '@fluentui-react-native/framework';
+import type { TextProps } from '@fluentui-react-native/text';
+import type {
+  FontTokens,
+  IForegroundColorTokens,
+  IBackgroundColorTokens,
+  IBorderTokens,
+  IColorTokens,
+} from '@fluentui-react-native/tokens';
+import type { IFocusable, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type { ColorValue, ViewStyle } from 'react-native';
+import type { Variant } from '@fluentui-react-native/framework';
 
 export const radioName = 'Radio';
 
 export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+  /**
+   * Horizontal padding of the root view
+   */
+  rootHorizontalPadding?: number;
+
+  /**
+   * Vertical padding of the root view
+   */
+  rootVerticalPadding?: number;
+
   /**
    * Indicator border color
    */
   radioBorder?: ColorValue;
 
   /**
-   * Indicator border color
+   * Indicator border style
    */
   radioBorderStyle?: ViewStyle['borderStyle'];
 
@@ -31,7 +47,7 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   /**
    * Diameter size of the outer indicator
    */
-  radioSize?: number;
+  radioOuterCircleSize?: number;
 
   /**
    * Diameter size of the inner circle indicator
@@ -74,19 +90,29 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   marginLeft?: ViewStyle['marginLeft'];
 
   /**
+   * Label item alignment
+   */
+  labelAlignItems?: ViewStyle['alignItems'];
+
+  /**
    * Label's top margin.
    */
   labelMarginTop?: ViewStyle['marginTop'];
 
   /**
-   * Padding between label content and focus ring.
+   * Label's right margin.
    */
   labelMarginRight?: ViewStyle['marginRight'];
 
   /**
-   * Padding between label content and focus ring.
+   * Label's left margin.
    */
   labelMarginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Label's padding.
+   */
+  labelPadding?: ViewStyle['marginLeft'];
 
   /*
    * Variant of label subtext.
@@ -108,6 +134,22 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
    * Should only by used if subtext prop is provided.
    */
   subtextMarginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
+   */
+  rippleColor?: ColorValue;
+
+  /**
+   * Ripple radius for circular radio on Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the radius of the circular ripple shown on the radio button.
+   * @platform android
+   */
+  rippleRadius?: number;
 
   /**
    * States that can be applied to a Radio
@@ -147,6 +189,7 @@ export interface RadioProps extends PressablePropsExtended {
    * This defaults to 'after' unless the Radio is inside a RadioGroup with layout horizontal-stacked,
    * in which case it defaults to 'below'
    *
+   * 'below' is not supported from Fluent Android, renders as-is.
    * @default after
    */
   labelPosition?: 'after' | 'below';
@@ -169,8 +212,8 @@ export interface RadioInfo {
 }
 
 export interface RadioSlotProps {
-  root: IViewProps;
-  button: IViewProps;
+  root: React.PropsWithRef<PressablePropsExtended>;
+  button: PressablePropsExtended;
   innerCircle: IViewProps;
   labelContent: IViewProps;
   label: TextProps;

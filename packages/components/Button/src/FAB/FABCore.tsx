@@ -1,13 +1,15 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
-import { fabName, FABProps, FABType } from './FAB.types';
+import type { FABProps, FABType } from './FAB.types';
+import { fabName } from './FAB.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './FAB.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import { IPressableState } from '@fluentui-react-native/interactive-hooks';
+import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import { extractOuterStylePropsAndroid } from '../ExtractStyle.android';
 

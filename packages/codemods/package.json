@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/codemods",
-  "version": "0.2.8",
+  "version": "0.3.6",
   "description": "Transform files to make refactoring FURN code easier",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -8,7 +8,11 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "bin": {
+    "transform": "./transform.js"
+  },
   "scripts": {
+    "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
@@ -22,16 +26,22 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/codemods"
   },
+  "dependencies": {
+    "jscodeshift": "^0.13.1",
+    "yargs": "^17.0.0"
+  },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@types/jscodeshift": "^0.11.5",
-    "jscodeshift": "^0.13.1"
+    "@types/jscodeshift": "^0.11.5"
   },
   "depcheck": {
+    "ignoreMatches": [
+      ".bin"
+    ],
     "ignorePatterns": [
-      "src/__testfixtures__/*"
+      "src/transforms/__testfixtures__/*"
     ]
   }
 }

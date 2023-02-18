@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { ButtonProps, ButtonInfo } from './Button.types';
+import type { ButtonProps, ButtonInfo } from './Button.types';
 
 export const useButton = (props: ButtonProps): ButtonInfo => {
   const defaultComponentRef = React.useRef(null);
-  const { onClick, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, focusable, ...rest } = props;
+  const { onClick, accessibilityRole, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, focusable, ...rest } = props;
   const isDisabled = !!disabled || !!loading;
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
@@ -24,7 +24,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
        */
       ...(isDisabled && { disabled: isDisabled }),
       accessible: true,
-      accessibilityRole: 'button',
+      accessibilityRole: accessibilityRole || 'button',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
       accessibilityLabel: props.accessibilityLabel,
       enableFocusRing: enableFocusRing ?? true,

@@ -1,8 +1,11 @@
-import { checkboxName, CheckboxTokens, CheckboxSlotProps, CheckboxProps, CheckboxSize } from './Checkbox.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import type { CheckboxTokens, CheckboxSlotProps, CheckboxProps, CheckboxSize } from './Checkbox.types';
+import { checkboxName } from './Checkbox.types';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultCheckboxTokens } from './CheckboxTokens';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+import { Platform } from 'react-native';
 
 export const checkboxStates: (keyof CheckboxTokens)[] = [
   'medium',
@@ -16,6 +19,8 @@ export const checkboxStates: (keyof CheckboxTokens)[] = [
   'checked',
   'disabled',
 ];
+
+const hasPresetRententionForA11y = Platform.OS === 'android';
 
 export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps, CheckboxTokens> = {
   tokens: [defaultCheckboxTokens, checkboxName],
@@ -33,8 +38,9 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           paddingHorizontal: tokens.paddingHorizontal,
           ...borderStyles.from(tokens, theme),
         },
+        android_ripple: { color: tokens.rippleColor, foreground: true },
       }),
-      ['backgroundColor', 'padding', ...borderStyles.keys],
+      ['backgroundColor', 'padding', ...borderStyles.keys, 'rippleColor'],
     ),
     label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
@@ -54,8 +60,12 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           alignItems: 'center',
           justifyContent: 'center',
         },
+        ...(hasPresetRententionForA11y && {
+          pressRetentionOffset: typeof tokens.padding === 'number' ? tokens.padding : parseFloat(tokens.padding), /// Retention of the press area outside of the checkbox equal to padding to match accessibility requirement
+        }),
+        android_ripple: { color: tokens.rippleColor, radius: tokens.checkmarkSize, foreground: true },
       }),
-      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize'],
+      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize', 'rippleColor'],
     ),
     checkmark: buildProps(
       (tokens: CheckboxTokens) => ({

@@ -9,8 +9,9 @@ import {
   SWITCH_NO_A11Y_LABEL_COMPONENT,
   SWITCH_TEST_COMPONENT_LABEL,
   SWITCH_ON_PRESS,
-} from './consts';
+} from '../../../../E2E/src/Switch/consts';
 import { Platform } from 'react-native';
+import { testProps } from '../Common/TestProps';
 
 export const E2ESwitchTest: React.FunctionComponent = () => {
   const [switchPressed, setSwitchSwitchPressed] = React.useState(false);
@@ -29,9 +30,26 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
 
   return (
     <Stack style={memoizedStyles}>
-      <Switch testID={SWITCH_TEST_COMPONENT} label={'Switch Test'} onChange={onToggle} accessibilityLabel={SWITCH_ACCESSIBILITY_LABEL} />
-      {switchPressed ? <TextV1 testID={SWITCH_ON_PRESS}>Switch Toggled On</TextV1> : null}
-      <Switch label={SWITCH_TEST_COMPONENT_LABEL} testID={SWITCH_NO_A11Y_LABEL_COMPONENT} />
+      <Switch
+        label={'Switch Test'}
+        onChange={onToggle}
+        accessibilityLabel={SWITCH_ACCESSIBILITY_LABEL}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(SWITCH_TEST_COMPONENT)}
+      />
+      {switchPressed ? (
+        <TextV1
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(SWITCH_ON_PRESS)}
+        >
+          Switch Toggled On
+        </TextV1>
+      ) : null}
+      <Switch
+        label={SWITCH_TEST_COMPONENT_LABEL}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(SWITCH_NO_A11Y_LABEL_COMPONENT)}
+      />
     </Stack>
   );
 };

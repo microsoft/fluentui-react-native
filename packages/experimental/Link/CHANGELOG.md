@@ -1,8 +1,224 @@
 # Change Log - @fluentui-react-native/experimental-link
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.24
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.15
+
+## 0.4.23
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.14
+
+## 0.4.22
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.13
+
+## 0.4.21
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.12
+
+## 0.4.20
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.11
+
+## 0.4.19
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.10
+
+## 0.4.18
+
+Fri, 20 Jan 2023 21:49:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.9
+
+## 0.4.17
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.8
+
+## 0.4.16
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.7
+
+## 0.4.15
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.6
+
+## 0.4.14
+
+Tue, 10 Jan 2023 01:11:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.5
+
+## 0.4.13
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.4
+
+## 0.4.12
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.3
+
+## 0.4.11
+
+Wed, 04 Jan 2023 16:55:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.2
+
+## 0.4.10
+
+Tue, 03 Jan 2023 23:38:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.1
+
+## 0.4.9
+
+Tue, 03 Jan 2023 21:35:03 GMT
+
+### Patches
+
+- Move v1 Link code into main link folder (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/link to v0.18.0
+
+## 0.4.8
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.30
+- Bump @fluentui-react-native/interactive-hooks to v0.22.6
+- Bump @fluentui-react-native/text to v0.19.6
+
+## 0.4.7
+
+Fri, 30 Dec 2022 06:16:41 GMT
+
+### Patches
+
+- doc and tester update for link on Android (rohanpd.work@gmail.com)
+
+## 0.4.6
+
+Fri, 30 Dec 2022 03:49:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.5
+- Bump @fluentui-react-native/text to v0.19.5
+
+## 0.4.5
+
+Thu, 29 Dec 2022 08:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.4
+
+## 0.4.4
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.29
+- Bump @fluentui-react-native/interactive-hooks to v0.22.4
+- Bump @fluentui-react-native/tokens to v0.20.2
+- Bump @fluentui-react-native/text to v0.19.3
+
+## 0.4.3
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.28
+- Bump @fluentui-react-native/interactive-hooks to v0.22.3
+- Bump @fluentui-react-native/tokens to v0.20.1
+- Bump @fluentui-react-native/text to v0.19.2
+
+## 0.4.2
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.27
+- Bump @fluentui-react-native/interactive-hooks to v0.22.2
+- Bump @fluentui-react-native/text to v0.19.1
+
+## 0.4.1
+
+Wed, 21 Dec 2022 01:18:57 GMT
+
+### Patches
+
+- Fix Link space/enter keyboarding (ruaraki@microsoft.com)
+
+## 0.4.0
+
+Tue, 20 Dec 2022 23:10:17 GMT
+
+### Minor changes
+
+- Force win32 to not have inline links (ruaraki@microsoft.com)
+
+### Patches
+
+- Update link spec with more detail (ruaraki@microsoft.com)
 
 ## 0.3.2
 

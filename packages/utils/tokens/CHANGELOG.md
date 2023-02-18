@@ -1,8 +1,74 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.8
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Add maxHeight token to layout tokens (winlarry@microsoft.com)
+
+## 0.20.7
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.10.1
+- Bump @fluentui-react-native/theme-types to v0.30.2
+
+## 0.20.6
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.30.1
+
+## 0.20.5
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.30.0
+
+## 0.20.4
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.29.1
+
+## 0.20.3
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.29.0
+
+## 0.20.2
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.28.0
+
+## 0.20.1
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.27.1
 
 ## 0.20.0
 

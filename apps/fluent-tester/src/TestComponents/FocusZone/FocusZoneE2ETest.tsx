@@ -1,21 +1,25 @@
+import type { ButtonProps } from '@fluentui-react-native/button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Switch } from '@fluentui-react-native/switch';
+import type { FocusZoneDirection } from '@fluentui/react-native';
+import { FocusZone, MenuButton, Text } from '@fluentui/react-native';
 import React from 'react';
 import { View } from 'react-native';
-import { FocusZoneDirection, FocusZone, MenuButton, Text } from '@fluentui/react-native';
-import { Switch } from '@fluentui-react-native/switch';
-import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
-import { commonTestStyles } from '../Common/styles';
 import {
-  FOCUSZONE_TEST_COMPONENT,
-  FOCUSZONE_DIRECTION_ID,
-  FOCUSZONE_TWO_DIM_SWITCH,
-  FOCUSZONE_DISABLED_SWITCH,
   FOCUSZONE_CIRCLE_NAV_SWITCH,
   FOCUSZONE_DEFAULT_TABBABLE_SWITCH,
-  FOCUSZONE_GRID_BEFORE,
-  FOCUSZONE_GRID_AFTER,
-  FOCUSZONE_GRID_BUTTON,
+  FOCUSZONE_DIRECTION_ID,
   FOCUSZONE_DIRECTION_PICKER,
-} from './consts';
+  FOCUSZONE_DISABLED_SWITCH,
+  FOCUSZONE_GRID_AFTER,
+  FOCUSZONE_GRID_BEFORE,
+  FOCUSZONE_GRID_BUTTON,
+  FOCUSZONE_TEST_COMPONENT,
+  FOCUSZONE_TWO_DIM_SWITCH,
+} from '../../../../E2E/src/FocusZone/consts';
+import type { GridButton as GridButtonIndex } from '../../../../E2E/src/FocusZone/pages/FocusZonePageObject';
+import { commonTestStyles } from '../Common/styles';
+import { testProps } from '../Common/TestProps';
 import { focusZoneTestStyles, GridButton } from './styles';
 
 export const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
@@ -28,9 +32,17 @@ export const FocusZoneListWrapper: React.FunctionComponent<FocusZoneListWrapperP
   const buttonProps: ButtonProps = { children: 'Click to Focus', style: focusZoneTestStyles.listWrapperButton };
   return (
     <>
-      <Button {...buttonProps} testID={beforeID} />
+      <Button
+        {...buttonProps}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(beforeID)}
+      />
       {children}
-      <Button {...buttonProps} testID={afterID} />
+      <Button
+        {...buttonProps}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(afterID)}
+      />
     </>
   );
 };
@@ -53,10 +65,11 @@ export const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props
               const gridIndex = heightIndex * props.gridWidth + widthIndex + 1;
               return (
                 <GridButton
-                  testID={props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex) : undefined}
                   key={widthIndex}
                   style={focusZoneTestStyles.focusZoneButton}
                   componentRef={gridIndex === props.tabbableIdx ? props.tabRef : undefined}
+                  /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                  {...testProps(props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex as GridButtonIndex) : undefined)}
                 >
                   <Text>{gridIndex}</Text>
                 </GridButton>
@@ -81,11 +94,14 @@ export const FocusZone2D: React.FunctionComponent = () => {
   return (
     <View style={commonTestStyles.root}>
       <View style={commonTestStyles.settings}>
-        <Text variant="subheaderSemibold" testID={FOCUSZONE_TEST_COMPONENT}>
+        <Text
+          variant="subheaderSemibold"
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(FOCUSZONE_TEST_COMPONENT)}
+        >
           FocusZone Direction
         </Text>
         <MenuButton
-          testID={FOCUSZONE_DIRECTION_PICKER}
           content={`Current direction: ${direction}`}
           menuItems={FocusZoneDirections.map((dir) => ({
             itemKey: dir,
@@ -93,20 +109,36 @@ export const FocusZone2D: React.FunctionComponent = () => {
             testID: FOCUSZONE_DIRECTION_ID(dir),
           }))}
           onItemClick={(dir) => setDirection(dir as FocusZoneDirection)}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(FOCUSZONE_DIRECTION_PICKER)}
         />
-        <Switch testID={FOCUSZONE_TWO_DIM_SWITCH} label="2D Navigation" checked={is2DNav} onChange={(_, checked) => set2dNav(checked)} />
-        <Switch testID={FOCUSZONE_DISABLED_SWITCH} label="Disabled" checked={isDisabled} onChange={(_, checked) => setDisabled(checked)} />
         <Switch
-          testID={FOCUSZONE_CIRCLE_NAV_SWITCH}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(FOCUSZONE_TWO_DIM_SWITCH)}
+          label="2D Navigation"
+          checked={is2DNav}
+          onChange={(_, checked) => set2dNav(checked)}
+        />
+        <Switch
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(FOCUSZONE_DISABLED_SWITCH)}
+          label="Disabled"
+          checked={isDisabled}
+          onChange={(_, checked) => setDisabled(checked)}
+        />
+        <Switch
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(FOCUSZONE_CIRCLE_NAV_SWITCH)}
           label="Circular Navigation"
           checked={isCircularNav}
           onChange={(_, checked) => setIsCircularNav(checked)}
         />
         <Switch
-          testID={FOCUSZONE_DEFAULT_TABBABLE_SWITCH}
           label="Use Default Tabbable Element"
           checked={useDeffaultTabbableElement}
           onChange={(_, checked) => setUseDeffaultTabbableElement(checked)}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(FOCUSZONE_DEFAULT_TABBABLE_SWITCH)}
         />
       </View>
 

@@ -3,9 +3,12 @@ import * as React from 'react';
 import { Pressable, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import type { TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
+import { tabsName } from './Tabs.types';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { filterViewProps } from '@fluentui-react-native/adapters';
@@ -108,9 +111,15 @@ export const Tabs = compose<TabsType>({
       // Generates array of keys and enabled keys.
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore - TODO, fix typing error
           if (!child.props.disabled) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore - TODO, fix typing error
             enabledKeys.push(child.props.itemKey);
           }
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore - TODO, fix typing error
           return child.props.itemKey;
         }
       });

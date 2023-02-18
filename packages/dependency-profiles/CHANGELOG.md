@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
-This log was last generated on Mon, 05 Dec 2022 22:48:51 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Jan 2023 17:47:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.66
+
+Thu, 26 Jan 2023 17:47:06 GMT
+
+### Patches
+
+- Update lock files (mischreiber@microsoft.com)
 
 ## 0.1.42
 

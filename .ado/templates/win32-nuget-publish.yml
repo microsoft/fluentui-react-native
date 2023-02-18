@@ -24,10 +24,10 @@ steps:
 
   # Pack the NuGet package
   - task: CmdLine@1
-    displayName: 'Create NuGet package for win32 test specs.'
+    displayName: 'Create NuGet package for E2E testing directory'
     inputs:
       filename: nuget
-      arguments: 'pack Microsoft.FluentUI.Win32.E2E.Testing.Specs.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+      arguments: 'pack Microsoft.FluentUI.E2E.Testing.Data.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
       workingFolder: 'apps/E2E/nuget'
 
   - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
@@ -54,8 +54,8 @@ steps:
 
   # Push the NuGet package
   - task: NuGetCommand@2
-    displayName: 'NuGet push Win32 test specs'
+    displayName: 'NuGet push E2E testing package'
     inputs:
       command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.Win32.E2E.Testing.Specs.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.E2E.Testing.Data.nupkg'
       publishVstsFeed: Office

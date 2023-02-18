@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { Text } from 'react-native';
-import { Button, Separator } from '@fluentui/react-native';
+import { Separator } from '@fluentui-react-native/separator';
+import { ButtonV1 } from '@fluentui-react-native/button';
+import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle, separatorStackStyle } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
-import { SEPARATOR_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { SEPARATOR_TESTPAGE } from '../../../../E2E/src/Separator/consts';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const BlueSeparator = Separator.customize({ color: 'blue' });
 const RedSeparator = Separator.customize({ color: 'red' });
@@ -13,23 +15,23 @@ const SeparatorMainTest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle} gap={5}>
       <Stack gap={4} style={separatorStackStyle}>
-        <Button content="Button4" />
+        <ButtonV1>Button1</ButtonV1>
         <BlueSeparator vertical />
-        <Button content="Button5" />
+        <ButtonV1>Button2</ButtonV1>
         <RedSeparator vertical />
-        <Button content="Button6" />
+        <ButtonV1>Button3 </ButtonV1>
         <Separator />
       </Stack>
       <Text>This is a text element</Text>
       <Separator />
-      <Button content="This button has longer text" />
+      <ButtonV1>This button has longer text</ButtonV1>
     </Stack>
   );
 };
 
 const separatorSections: TestSection[] = [
   {
-    name: 'Basic Button',
+    name: 'Basic Seperator',
     testID: SEPARATOR_TESTPAGE,
     component: SeparatorMainTest,
   },
@@ -41,7 +43,7 @@ export const SeparatorTest: React.FunctionComponent = () => {
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Beta',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =

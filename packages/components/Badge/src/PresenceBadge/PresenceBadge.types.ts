@@ -1,10 +1,10 @@
-import { SvgProps } from 'react-native-svg';
-import { BadgeCoreProps, BadgeSlotProps } from '../';
-import { BadgeCoreTokens, BadgeConfigurableProps } from '../Badge.types';
+import type { SvgProps } from 'react-native-svg';
+import type { BadgeCoreProps, BadgeSlotProps } from '../';
+import type { BadgeCoreTokens, BadgeConfigurableProps } from '../Badge.types';
 
 export const presenceBadgeName = 'PresenceBadge';
 export const PresenceBadgeStatuses = ['doNotDisturb', 'busy', 'unknown', 'blocked', 'outOfOffice', 'away', 'available', 'offline'] as const;
-export type PresenceBadgeStatus = typeof PresenceBadgeStatuses[number];
+export type PresenceBadgeStatus = (typeof PresenceBadgeStatuses)[number];
 
 export interface PresenceBadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   available?: PresenceBadgeTokens;

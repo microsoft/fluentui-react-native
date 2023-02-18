@@ -1,8 +1,159 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.1
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.17.1
+- Bump @fluentui-react-native/tokens to v0.20.8
+
+## 0.9.0
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Minor changes
+
+- Revert "Change default theme from a const object to a function that returns the object #2483" (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.17.0
+
+## 0.8.39
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/composition to v0.8.3
+- Bump @fluentui-react-native/default-theme to v0.16.29
+- Bump @fluentui-react-native/use-styling to v0.9.3
+- Bump @fluentui-react-native/use-slot to v0.3.3
+- Bump @fluentui-react-native/use-slots to v0.7.3
+- Bump @fluentui-react-native/use-tokens to v0.3.3
+
+## 0.8.38
+
+Wed, 01 Feb 2023 22:33:15 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/composition to v0.8.2
+- Bump @fluentui-react-native/default-theme to v0.16.28
+- Bump @fluentui-react-native/immutable-merge to v1.1.8
+- Bump @fluentui-react-native/merge-props to v0.5.2
+- Bump @fluentui-react-native/theme-types to v0.30.2
+- Bump @fluentui-react-native/use-styling to v0.9.2
+- Bump @fluentui-react-native/use-slot to v0.3.2
+- Bump @fluentui-react-native/use-slots to v0.7.2
+- Bump @fluentui-react-native/use-tokens to v0.3.2
+- Bump @fluentui-react-native/memo-cache to v1.1.8
+- Bump @fluentui-react-native/tokens to v0.20.7
+
+## 0.8.37
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.27
+- Bump @fluentui-react-native/theme-types to v0.30.1
+- Bump @fluentui-react-native/tokens to v0.20.6
+
+## 0.8.36
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.26
+- Bump @fluentui-react-native/theme-types to v0.30.0
+- Bump @fluentui-react-native/tokens to v0.20.5
+
+## 0.8.35
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.25
+
+## 0.8.34
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.24
+- Bump @fluentui-react-native/theme-types to v0.29.1
+- Bump @fluentui-react-native/tokens to v0.20.4
+
+## 0.8.33
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.23
+- Bump @fluentui-react-native/theme-types to v0.29.0
+- Bump @fluentui-react-native/tokens to v0.20.3
+
+## 0.8.32
+
+Mon, 09 Jan 2023 22:25:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.22
+
+## 0.8.31
+
+Fri, 06 Jan 2023 12:26:31 GMT
+
+### Patches
+
+- Change default theme const to a method (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.16.21
+
+## 0.8.30
+
+Fri, 30 Dec 2022 16:09:27 GMT
+
+### Patches
+
+- Update Compressible documentation (sanajmi@microsoft.com)
+
+## 0.8.29
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.20
+- Bump @fluentui-react-native/theme-types to v0.28.0
+- Bump @fluentui-react-native/tokens to v0.20.2
+
+## 0.8.28
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.19
+- Bump @fluentui-react-native/theme-types to v0.27.1
+- Bump @fluentui-react-native/tokens to v0.20.1
+
+## 0.8.27
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.18
 
 ## 0.8.26
 

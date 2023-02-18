@@ -1,8 +1,85 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Feb 2023 22:33:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.2
+
+Wed, 01 Feb 2023 22:33:16 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.30.2
+
+## 0.24.1
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Add `darkElevated` theme (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.30.1
+
+## 0.24.0
+
+Wed, 25 Jan 2023 21:31:17 GMT
+
+### Minor changes
+
+- Adding shared colors android (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.30.0
+
+## 0.23.2
+
+Fri, 20 Jan 2023 18:06:46 GMT
+
+### Patches
+
+- Update all design-tokens packages to 0.42.0 (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.23.1
+
+Wed, 18 Jan 2023 01:55:11 GMT
+
+### Patches
+
+- Add shared colors to AliasColorTokens and mapPipelineToTheme (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.29.1
+
+## 0.23.0
+
+Tue, 10 Jan 2023 20:17:18 GMT
+
+### Minor changes
+
+- Bump iOS token packages to include iOS color alias tokens (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.29.0
+
+## 0.22.5
+
+Thu, 29 Dec 2022 03:47:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.28.0
+
+## 0.22.4
+
+Tue, 27 Dec 2022 22:21:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.27.1
+
+## 0.22.3
+
+Tue, 27 Dec 2022 10:18:14 GMT
+
+### Patches
+
+- Update android token values. (email not defined)
 
 ## 0.22.2
 

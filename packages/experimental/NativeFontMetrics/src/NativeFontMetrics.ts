@@ -1,4 +1,4 @@
-import { TextStyle } from './NativeFontMetrics.types';
+import type { TextStyle } from './NativeFontMetrics.types';
 
 const NativeFontMetrics = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
