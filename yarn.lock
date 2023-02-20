@@ -5761,9 +5761,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.31.9"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.9.tgz#a0a11584c8227510e85bff744daf4e751ad00be4"
-  integrity sha512-O7NJc246hCAn6JMZBugG6RjYw6OeCPuC/HEXdm4Wu3NQNvODbwsSE8hLHeJLVgUXVk9R+gTKZHmGdWXv5QCP7g==
+  version "2.31.10"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.10.tgz#6252352c1ab4395f50e6aca1e49e695aa78387f6"
+  integrity sha512-niUkGlEsV2PsC0URKYb5d5lMFcfOxlSPApxGE7yQdNOGg1MD6lTaycDZTlNNuUZBgTqjy3XoEU919lZRTfyN0g==
   dependencies:
     cosmiconfig "^7.0.0"
     execa "^5.0.0"
@@ -5775,7 +5775,7 @@ beachball@^2.20.0:
     semver "^7.0.0"
     toposort "^2.0.2"
     uuid "^9.0.0"
-    workspace-tools "^0.29.0"
+    workspace-tools "^0.30.0"
     yargs-parser "^21.0.0"
 
 big-integer@1.6.x:
@@ -12916,9 +12916,9 @@ react-native-svg@^12.3.0, react-native-svg@^12.5.0:
     css-tree "^1.1.3"
 
 react-native-test-app@^2.0.2:
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.3.7.tgz#d98233e6cfcc7b5d2a15306c55c45a3f9c51d12b"
-  integrity sha512-YoAqbGtRuEGfKhskCsgbAOz+zCHCYBSP5gNmpsRdcaHe+nZ63dOre8zndsRNyHKSq1Phao4tZNqXr1F54PjXLQ==
+  version "2.3.9"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.3.9.tgz#0ef3ad1a01fbaf1bcd0d00c65f0624e21cc428cd"
+  integrity sha512-tDZdmbh8vJrnMNFAPIRZhk3hLC61BUGJ4HDMFvi/07q49UsBpJOsNeJEFEDpB2nQGQAQvZTQR9DesWXmkqle7g==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
@@ -15271,6 +15271,18 @@ workspace-tools@^0.29.0:
     js-yaml "^4.1.0"
     micromatch "^4.0.0"
 
+workspace-tools@^0.30.0:
+  version "0.30.0"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.30.0.tgz#93103df09a66d5a4260bf65005b8f9924e439cf1"
+  integrity sha512-vQrzjAFvQYI2Zg9kFAo43aIgQNX5VSTtWLvOxCKhgjKnPdyLMXcPNxPTCKu3v+tjDW+YJNXUAigVv+pykrwOsQ==
+  dependencies:
+    "@yarnpkg/lockfile" "^1.1.0"
+    git-url-parse "^13.0.0"
+    globby "^11.0.0"
+    jju "^1.4.0"
+    js-yaml "^4.1.0"
+    micromatch "^4.0.0"
+
 wrap-ansi@7.0.0, wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
@@ -15535,9 +15547,9 @@ yargs@^16.0.0, yargs@^16.1.0, yargs@^16.1.1, yargs@^16.2.0:
     yargs-parser "^20.2.2"
 
 yargs@^17.0.0:
-  version "17.6.2"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.6.2.tgz#2e23f2944e976339a1ee00f18c77fedee8332541"
-  integrity sha512-1/9UrdHjDZc0eOU0HxOHoS78C69UD3JRMvzlJ7S79S2nTaWRA/whGCTV8o9e/N/1Va9YIV7Q4sOxD8VV4pCWOw==
+  version "17.7.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.0.tgz#b21e9af1e0a619a2a9c67b1133219b2975a07985"
+  integrity sha512-dwqOPg5trmrre9+v8SUo2q/hAwyKoVfu8OC1xPHKJGNdxAvPl4sKxL4vBnh3bQz/ZvvGAFeA5H3ou2kcOY8sQQ==
   dependencies:
     cliui "^8.0.1"
     escalade "^3.1.1"

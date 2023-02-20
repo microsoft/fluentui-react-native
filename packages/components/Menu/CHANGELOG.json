@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 17 Feb 2023 22:33:14 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.6",
+      "version": "1.4.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "a7fa78532987ad6b04c2ad93584b1b7be0493b58",
+            "comment": "Always pass in a ref to FocusZone"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Feb 2023 01:34:44 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.5",
       "version": "1.4.5",
