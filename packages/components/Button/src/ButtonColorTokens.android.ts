@@ -8,7 +8,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
      * 'primary', 'accent' and if no appearance is mentioned, picks this.
      */
     backgroundColor: t.colors.brandBackground,
-    rippleColor: 'transparent',
+    rippleColor: '#D4D4D4',
     color: t.colors.neutralForegroundOnColor,
     iconColor: t.colors.neutralForegroundOnColor,
     disabled: {
@@ -30,7 +30,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     },
     subtle: {
       backgroundColor: 'transparent',
-      rippleColor: 'transparent',
+      rippleColor: '#D4D4D4',
       color: t.colors.brandForeground1,
       iconColor: t.colors.brandForeground1,
       disabled: {
@@ -53,7 +53,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     },
     outline: {
       backgroundColor: 'transparent',
-      rippleColor: 'transparent',
+      rippleColor: '#D4D4D4',
       color: t.colors.brandForeground1,
       iconColor: t.colors.brandForeground1,
       borderColor: t.colors.brandStroke1,
