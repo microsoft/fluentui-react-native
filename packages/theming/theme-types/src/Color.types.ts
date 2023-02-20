@@ -19,6 +19,8 @@ export type ThemeColorDefinition = Palette & {
   bodyText: ColorValue;
   subText: ColorValue;
   disabledText: ColorValue;
+
+  // There is this alias value exisitng to take custom color names.
   [key: string]: ColorValue;
 };
 

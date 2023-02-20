@@ -1,6 +1,8 @@
 'use strict';
 
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { createAndroidTheme } from '@fluentui-react-native/android-theme';
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { Theme } from '@fluentui-react-native/framework';
 import * as React from 'react';
 import { Platform, useWindowDimensions } from 'react-native';
 import { FluentTester, FluentTesterProps } from './FluentTester';
@@ -41,6 +43,22 @@ export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (prop
 
   // If on iPad we are presented in a Split View or Slide Over context, show the single pane view.
   const shouldShowSinglePane = isMobile || (!isMobile && sizeClass === 'compact');
+  // ankraj - create a custom theme here. Try using the themeRecipes in it.
+// Is there still the need for brand API thing to simplify overriding brand tokens?
+// There seems 2 parts of the sceanrios here - new colors, and exisitng brand  colors.
+git branch --sho
+  const theme = new ThemeReference(
+  createAndroidTheme(),
+  () => {
+  return {{ colors: { buttonBackground: 'red' }}}}, // overrides the buttonBackground color token, all other colors are kept in tact
+  (theme: Theme) => {
+    return {
+      { colors: { neutralBackground1: theme.colors.buttonBackground }}, // This is now red, because theme has previous recipe applied. This also addded a new color in
+                                                                          // theme.color.
+      { spacing: s1: '10px' }
+    }},
+  // other recipes
+);
 
   return (
     <ThemeProvider theme={testerTheme}>
