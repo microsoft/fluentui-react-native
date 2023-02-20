@@ -6,11 +6,13 @@ import { defaultShimmerTokens } from './ShimmerTokens';
 
 export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, ShimmerTokens> = {
   tokens: [defaultShimmerTokens, shimmerName],
+  tokensThatAreAlsoProps: 'all',
   slotProps: {
     root: buildProps(
       (tokens: ShimmerTokens) => ({
         accessibilityRole: 'progressbar',
         accessible: true,
+        style: { overflow: 'hidden', backgroundColor: tokens.backgroundColor },
         angle: tokens.angle,
         delay: tokens.delay,
         duration: tokens.duration,
@@ -19,7 +21,16 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
         shimmerWaveColor: tokens.shimmerWaveColor,
         shimmerWaveColorOpacity: tokens.shimmerWaveColorOpacity,
       }),
-      ['angle', 'delay', 'duration', 'shimmerColor', 'shimmerColorOpacity', 'shimmerWaveColor', 'shimmerWaveColorOpacity'],
+      [
+        'angle',
+        'delay',
+        'duration',
+        'shimmerColor',
+        'shimmerColorOpacity',
+        'shimmerWaveColor',
+        'shimmerWaveColorOpacity',
+        'backgroundColor',
+      ],
     ),
   },
 };
