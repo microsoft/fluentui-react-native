@@ -10,14 +10,14 @@ import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
 
 export const triggerKeys = [' ', 'Enter'];
-export const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
+export const submenuTriggerKeys = ['ArrowLeft', 'ArrowRight', ...triggerKeys];
 
 export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
   const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
-  const { hasCheckmarks, onArrowClose } = useMenuListContext();
+  const { hasCheckmarks, hasTooltips, onArrowClose } = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
   const shouldPersist = persistOnClick ?? persistOnItemClick;
 
@@ -53,7 +53,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
 
   const pressable = usePressableState({ ...rest, onPress: onInvoke });
   const itemRef = useViewCommandFocus(componentRef);
-  const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
+  const keys = disabled ? [] : isSubmenu ? submenuTriggerKeys : triggerKeys;
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
@@ -83,6 +83,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
       ...pressable.state,
       hasSubmenu,
       hasCheckmarks,
+      hasTooltips,
     },
   };
 };

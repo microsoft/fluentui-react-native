@@ -33,7 +33,7 @@ const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap
 MenuStack.displayName = 'MenuStack';
 
 export const menuListLookup = (layer: string, state: MenuListState, userProps: MenuListProps): boolean => {
-  return state[layer] || userProps[layer] || layer === 'hasMaxHeight' || layer === userProps['minWidth'];
+  return state[layer] || userProps[layer] || layer === 'hasMaxHeight';
 };
 export const MenuList = compose<MenuListType>({
   displayName: menuListName,
@@ -66,9 +66,7 @@ export const MenuList = compose<MenuListType>({
               <Slots.focusZone
                 componentRef={focusZoneRef}
                 focusZoneDirection={'vertical'}
-                // For submenus, setting defaultTabbableElement to null will let FZ set focus on the first key view.
-                // For root menu, let's set focus on the container to block FZ setting focus on the first key view.
-                defaultTabbableElement={menuContext.isSubmenu ? null : focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                defaultTabbableElement={focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
               >
@@ -77,11 +75,11 @@ export const MenuList = compose<MenuListType>({
             </Slots.scrollView>
           </Slots.root>
         ) : menuContext.hasMaxHeight ? (
-          <Slots.root>
+          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
             <Slots.scrollView>{children}</Slots.scrollView>
           </Slots.root>
         ) : (
-          <Slots.root>{children}</Slots.root>
+          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>{children}</Slots.root>
         );
 
       return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;

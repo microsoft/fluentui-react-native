@@ -212,7 +212,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -261,7 +261,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
@@ -296,16 +296,7 @@ Array [
           accessible={true}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
+          keyDownEvents={Array []}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
@@ -329,7 +320,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
@@ -488,7 +479,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -537,7 +528,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
@@ -696,7 +687,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -860,16 +851,7 @@ Array [
           accessible={true}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
+          keyDownEvents={Array []}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
@@ -1104,7 +1086,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -1512,7 +1494,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -1920,7 +1902,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -2316,7 +2298,7 @@ Array [
             "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
-            "minWidth": 175,
+            "minWidth": 140,
             "paddingVertical": 4,
           }
         }
@@ -2365,7 +2347,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }
@@ -2414,16 +2396,16 @@ Array [
           keyDownEvents={
             Array [
               Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-              Object {
                 "key": "ArrowLeft",
               },
               Object {
                 "key": "ArrowRight",
+              },
+              Object {
+                "key": " ",
+              },
+              Object {
+                "key": "Enter",
               },
             ]
           }
@@ -2451,7 +2433,7 @@ Array [
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 24,
-              "minWidth": 160,
+              "minWidth": 128,
               "padding": 4,
               "paddingHorizontal": 8,
             }

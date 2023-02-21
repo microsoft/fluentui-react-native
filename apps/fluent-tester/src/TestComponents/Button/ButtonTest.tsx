@@ -50,10 +50,6 @@ const buttonSections: TestSection[] = [
       component: ButtonHOCTest,
     },
   }),
-  {
-    name: 'E2E Button Testing',
-    component: E2EButtonTest,
-  },
   ...Platform.select({
     android: [], // Following sections are not supported from Fluent Android
     default: [
@@ -65,12 +61,23 @@ const buttonSections: TestSection[] = [
         name: 'Deprecated Icon Button',
         component: ButtonIconTest_deprecated,
       },
-      {
-        name: 'Deprecated E2E Button Testing',
-        component: E2EButtonTest_deprecated,
-      },
     ],
   }),
+  {
+    name: 'E2E Button Testing',
+    component: E2EButtonTest,
+  },
+];
+
+const e2eSections: TestSection[] = [
+  {
+    name: 'E2E Button Testing',
+    component: E2EButtonTest,
+  },
+  {
+    name: 'Deprecated E2E Button Testing',
+    component: E2EButtonTest_deprecated,
+  },
 ];
 
 export const ButtonTest: React.FunctionComponent = () => {
@@ -87,5 +94,7 @@ export const ButtonTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Button/SPEC.md';
 
-  return <Test name="Button Test" description={description} spec={spec} sections={buttonSections} status={status} />;
+  return (
+    <Test name="Button Test" description={description} spec={spec} sections={buttonSections} status={status} e2eSections={e2eSections} />
+  );
 };

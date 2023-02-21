@@ -59,6 +59,9 @@ const radioGroupSections: TestSection[] = [
     testID: RADIOGROUP_TESTPAGE,
     component: BasicRadioGroup,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'RadioGroup for E2E Testing',
     component: RadioGroupLegacyE2ETest,
@@ -76,5 +79,7 @@ export const RadioGroupLegacyTest: React.FunctionComponent = () => {
 
   const description = 'No description.';
 
-  return <Test name="RadioGroup Legacy Test" description={description} sections={radioGroupSections} status={status} />;
+  return (
+    <Test name="RadioGroup Legacy Test" description={description} sections={radioGroupSections} status={status} e2eSections={e2eSections} />
+  );
 };

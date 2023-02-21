@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Wed, 01 Feb 2023 22:33:17 GMT and should not be manually modified.
+This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.8
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Add maxHeight token to layout tokens (winlarry@microsoft.com)
 
 ## 0.20.7
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
-This log was last generated on Wed, 08 Feb 2023 01:38:39 GMT and should not be manually modified.
+This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.1
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.1
 
 ## 0.3.0
 
