@@ -1,4 +1,4 @@
-import { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
 
 /**
  * Informs the framework of any tokens that also appear as props for the component.

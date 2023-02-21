@@ -1,4 +1,5 @@
-import { NativeReactType, renderSlot } from './renderSlot';
+import type { NativeReactType } from './renderSlot';
+import { renderSlot } from './renderSlot';
 
 /**
  * This function is required for any module that uses slots.

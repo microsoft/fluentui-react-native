@@ -3,7 +3,8 @@ import { Platform, View } from 'react-native';
 import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from '../../../../E2E/src/TabsLegacy/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { TabsLegacyE2ETest } from './TabsLegacyE2ETest';
 import { svgProps } from '../Common/iconExamples';
 
@@ -268,6 +269,9 @@ const tabsSections: TestSection[] = [
     name: 'More Flexibility',
     component: TabsWithFlexibility,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'E2E Tabs Test',
     component: TabsLegacyE2ETest,
@@ -292,5 +296,5 @@ export const TabsLegacyTest: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="Tabs Legacy Test" description={description} sections={tabsSections} status={status} />;
+  return <Test name="Tabs Legacy Test" description={description} sections={tabsSections} status={status} e2eSections={e2eSections} />;
 };

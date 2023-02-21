@@ -1,6 +1,6 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { TabsTokens } from '.';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+import type { TabsTokens } from '.';
 
 export const defaultTabsTokens: TokenSettings<TabsTokens, Theme> = (t: Theme) =>
   ({

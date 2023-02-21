@@ -1,23 +1,20 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import MenuPageObject, { MenuItem } from '../pages/MenuPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE, AttributeValue, Attribute } from '../../common/consts';
+import { Attribute, AttributeValue, Keys, MENUITEM_A11Y_ROLE } from '../../common/consts';
 import { MENUITEM_ACCESSIBILITY_LABEL, MENUITEM_TEST_LABEL } from '../consts';
+import MenuPageObject from '../pages/MenuPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Menu Testing Initialization', function () {
+describe('Menu Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await MenuPageObject.waitForInitialPageToDisplay();
+    expect(await MenuPageObject.isInitialPageDisplayed()).toBeTruthy(MenuPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Menu test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToMenuPage();
-    await MenuPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await MenuPageObject.navigateToPageAndLoadTests(true);
+    expect(await MenuPageObject.isPageLoaded()).toBeTruthy(MenuPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await MenuPageObject.isPageLoaded()).toBeTruthy(MenuPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -27,47 +24,47 @@ describe('Menu Accessibility Testing', () => {
     await MenuPageObject.openMenu();
   });
 
-  it('Validate MenuItem "accessibilityRole" defaults to MenuItem "ControlType" element attribute.', async () => {
+  it('Validate MenuItem "accessibilityRole" defaults to "ControlType.MenuItem".', async () => {
     // The popover is where we can find the a11y role of menu
-    await expect(
-      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.First), Attribute.AccessibilityRole, MENUITEM_A11Y_ROLE),
+    expect(
+      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('First'), Attribute.AccessibilityRole, MENUITEM_A11Y_ROLE),
     ).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set MenuItem "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
-    await expect(
+    expect(
       await MenuPageObject.compareAttribute(
-        MenuPageObject.getMenuItem(MenuItem.First),
+        MenuPageObject.getMenuItem('First'),
         Attribute.AccessibilityLabel,
         MENUITEM_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set MenuItem "accessibilityLabel". Validate MenuItem "Name" element attribute defaults to current MenuItem label.', async () => {
-    await expect(
-      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Third), Attribute.AccessibilityLabel, MENUITEM_TEST_LABEL),
+    expect(
+      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('Third'), Attribute.AccessibilityLabel, MENUITEM_TEST_LABEL),
     ).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Toggle Menu by click. Validate "ExpandCollapseState" element attribute correctly changes.', async () => {
-    await expect(
+    expect(
       await MenuPageObject.compareAttribute(MenuPageObject._menuTrigger, Attribute.ExpandCollapseState, AttributeValue.expanded),
     ).toBeTruthy();
 
     await MenuPageObject.closeMenu();
 
-    await expect(
+    expect(
       await MenuPageObject.compareAttribute(MenuPageObject._menuTrigger, Attribute.ExpandCollapseState, AttributeValue.collapsed),
     ).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -81,106 +78,106 @@ describe('Menu Functional Testing', () => {
 
   it('Click MenuTrigger. Validate Menu is opened by checking if MenuItems are visible.', async () => {
     await MenuPageObject.click(MenuPageObject._menuTrigger);
-    await expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
+    expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Press "Enter" on MenuTrigger. Validate Menu is opened by checking if MenuItems are visible.', async () => {
     await MenuPageObject.sendKeys(MenuPageObject._menuTrigger, [Keys.ENTER]);
-    await expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
+    expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press "Space" on MenuTrigger -> Validate Menu is opened by checking if MenuItems are visible.', async () => {
+  it('Press "Space" on MenuTrigger. Validate Menu is opened by checking if MenuItems are visible.', async () => {
     await MenuPageObject.sendKeys(MenuPageObject._menuTrigger, [Keys.SPACE]);
-    await expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
+    expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Press "Space", Press "Enter", and "Click" on MenuItem. Validate that onClick() callback fires correctly.', async () => {
     await MenuPageObject.openMenu();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.First), [Keys.SPACE]);
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('First'), [Keys.SPACE]);
     await MenuPageObject.waitForItemCallbackToFire(1);
-    await expect(await MenuPageObject.itemOnClickHasFired(1)).toBeTruthy('Space input failed to fire MenuItem onClick callback');
+    expect(await MenuPageObject.itemOnClickHasFired(1)).toBeTruthy('Space input failed to fire MenuItem onClick callback');
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.First), [Keys.ENTER]);
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('First'), [Keys.ENTER]);
     await MenuPageObject.waitForItemCallbackToFire(2);
-    await expect(await MenuPageObject.itemOnClickHasFired(2)).toBeTruthy('Enter input failed to fire MenuItem onClick callback');
+    expect(await MenuPageObject.itemOnClickHasFired(2)).toBeTruthy('Enter input failed to fire MenuItem onClick callback');
 
-    await MenuPageObject.click(MenuPageObject.getMenuItem(MenuItem.First));
+    await MenuPageObject.click(MenuPageObject.getMenuItem('First'));
     await MenuPageObject.waitForItemCallbackToFire(3);
-    await expect(await MenuPageObject.itemOnClickHasFired(3)).toBeTruthy('Click input failed to fire MenuItem onClick callback');
+    expect(await MenuPageObject.itemOnClickHasFired(3)).toBeTruthy('Click input failed to fire MenuItem onClick callback');
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Press "Space", Press "Enter", and "Click" on disabled MenuItem. Validate that onClick() callback does not fire.', async () => {
     await MenuPageObject.openMenu();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.Second), [Keys.SPACE]);
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Second'), [Keys.SPACE]);
     await MenuPageObject.waitForItemCallbackToFire(0);
-    await expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Space input fired disabled MenuItem onClick callback');
+    expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Space input fired disabled MenuItem onClick callback');
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.Second), [Keys.ENTER]);
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Second'), [Keys.ENTER]);
     await MenuPageObject.waitForItemCallbackToFire(0);
-    await expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Enter input fired disabled MenuItem onClick callback');
+    expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Enter input fired disabled MenuItem onClick callback');
 
-    await MenuPageObject.click(MenuPageObject.getMenuItem(MenuItem.Second));
+    await MenuPageObject.click(MenuPageObject.getMenuItem('Second'));
     await MenuPageObject.waitForItemCallbackToFire(0);
-    await expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Click input fired disabled MenuItem onClick callback');
+    expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Click input fired disabled MenuItem onClick callback');
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Press "Up" + "Down" to navigate between MenuItems. Validate that focus switches correctly between MenuItems.', async () => {
     await MenuPageObject.openMenu();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.First), [Keys.DOWN]);
-    await expect(
-      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Second), Attribute.IsFocused, AttributeValue.true),
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('First'), [Keys.DOWN]);
+    expect(
+      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('Second'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.Second), [Keys.UP]);
-    await expect(
-      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.First), Attribute.IsFocused, AttributeValue.true),
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Second'), [Keys.UP]);
+    expect(
+      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('First'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.First), [Keys.UP]);
-    await expect(
-      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Fourth), Attribute.IsFocused, AttributeValue.true),
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('First'), [Keys.UP]);
+    expect(
+      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('Fourth'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Press "Tab" to navigate between MenuItems. Validate that focus switches correctly between MenuItems.', async () => {
     await MenuPageObject.openMenu();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.Third), [Keys.TAB]);
-    await expect(
-      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.Fourth), Attribute.IsFocused, AttributeValue.true),
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Third'), [Keys.TAB]);
+    expect(
+      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('Fourth'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.Fourth), [Keys.TAB]);
-    await expect(
-      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem(MenuItem.First), Attribute.IsFocused, AttributeValue.true),
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Fourth'), [Keys.TAB]);
+    expect(
+      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('First'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Press "Escape" on MenuItem. Validate that Menu closes by checking if MenuItems are not visible.', async () => {
     await MenuPageObject.openMenu();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem(MenuItem.First), [Keys.ESCAPE]);
-    await expect(await MenuPageObject.menuIsExpanded()).toBeFalsy(
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('First'), [Keys.ESCAPE]);
+    expect(await MenuPageObject.menuIsExpanded()).toBeFalsy(
       'Expected the Menu to close, but its MenuItems are still displayed - the menu appears to still be open.',
     );
 
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 });

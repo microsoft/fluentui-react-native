@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/tabs
 
-This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
+This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.32
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.30
+- Bump @fluentui-react-native/icon to v0.17.12
+- Bump @fluentui-react-native/interactive-hooks to v0.22.18
+- Bump @fluentui-react-native/text to v0.19.20
+- Bump @fluentui-react-native/tokens to v0.20.8
+- Bump @uifabricshared/foundation-compose to v1.13.1
+
+## 0.11.31
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.29
+- Bump @fluentui-react-native/icon to v0.17.11
+- Bump @fluentui-react-native/interactive-hooks to v0.22.17
+- Bump @fluentui-react-native/text to v0.19.19
+- Bump @uifabricshared/foundation-compose to v1.13.0
+
+## 0.11.30
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.28
+- Bump @fluentui-react-native/icon to v0.17.10
+- Bump @fluentui-react-native/interactive-hooks to v0.22.16
+- Bump @fluentui-react-native/text to v0.19.18
+- Bump @uifabricshared/foundation-compose to v1.12.39
+
+## 0.11.29
+
+Wed, 01 Feb 2023 22:33:16 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.10.1
+- Bump @fluentui-react-native/focus-zone to v0.11.27
+- Bump @fluentui-react-native/icon to v0.17.9
+- Bump @fluentui-react-native/interactive-hooks to v0.22.15
+- Bump @fluentui-react-native/text to v0.19.17
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @uifabricshared/foundation-composable to v0.11.2
+- Bump @uifabricshared/foundation-compose to v1.12.38
+- Bump @uifabricshared/foundation-settings to v0.12.2
+
+## 0.11.28
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.26
+- Bump @fluentui-react-native/icon to v0.17.8
+- Bump @fluentui-react-native/interactive-hooks to v0.22.14
+- Bump @fluentui-react-native/text to v0.19.16
+- Bump @fluentui-react-native/tokens to v0.20.6
+- Bump @uifabricshared/foundation-compose to v1.12.37
+
+## 0.11.27
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.25
+- Bump @fluentui-react-native/icon to v0.17.7
+- Bump @fluentui-react-native/interactive-hooks to v0.22.13
+- Bump @fluentui-react-native/text to v0.19.15
+- Bump @fluentui-react-native/tokens to v0.20.5
+- Bump @uifabricshared/foundation-compose to v1.12.36
 
 ## 0.11.26
 

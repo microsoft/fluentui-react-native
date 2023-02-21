@@ -1,5 +1,5 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { Separator, Text } from '@fluentui/react-native';
+import type { Theme } from '@fluentui-react-native/framework';
+import { Separator, TextV1 as Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
@@ -31,7 +31,7 @@ interface HeaderProps {
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   return {
     root: {
-      backgroundColor: t.colors.background,
+      backgroundColor: t.colors.neutralBackground1,
       flex: 1,
       flexGrow: 1,
       flexDirection: 'column',

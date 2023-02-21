@@ -3,7 +3,8 @@ import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { stackStyle } from '../Common/styles';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { SPACING_TESTPAGE } from '../../../../E2E/src/Spacing/consts';
 
 const BasicUsage: React.FunctionComponent = () => {

@@ -3,7 +3,8 @@ import { Expander } from '@fluentui-react-native/experimental-expander';
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { EXPANDER_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
 

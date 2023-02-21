@@ -1,4 +1,4 @@
-import { PartialTheme, Theme } from '@fluentui-react-native/theme-types';
+import type { PartialTheme, Theme } from '@fluentui-react-native/theme-types';
 import { getCurrentBrandAliasTokens } from '@fluentui-react-native/win32-theme';
 
 export type OfficeBrand = 'Default' | 'Office' | 'Word' | 'Excel' | 'Powerpoint' | 'Outlook';
@@ -123,7 +123,7 @@ const brandColors: BrandRamps = {
 
 export const brandOptions = Object.keys(brandColors).map((brand) => ({ label: brand, value: brand }));
 
-export const applyBrand = (parent: Theme, themeName: string, currentBrand: string): PartialTheme => {
+export const applyBrand = (parent: Theme, currentBrand: string): PartialTheme => {
   if (parent.name === 'HighContrast') {
     return {};
   }
@@ -164,7 +164,7 @@ export const applyBrand = (parent: Theme, themeName: string, currentBrand: strin
           brandedPressedBackground: ramp.App8,
           brandedPressedBorder: ramp.App7,
           defaultCheckedHoveredBackground: ramp.App1,
-          ...getCurrentBrandAliasTokens(themeName, ramp.AppPrimary),
+          ...getCurrentBrandAliasTokens(parent.name, ramp.AppPrimary),
         },
       }
     : {};

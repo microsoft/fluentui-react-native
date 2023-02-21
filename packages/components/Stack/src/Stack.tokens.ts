@@ -1,7 +1,7 @@
-import { Alignment, IStackTokens } from './Stack.types';
+import type { Alignment, IStackTokens } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
-import { ViewStyle, ViewProps } from 'react-native';
-import { Theme } from '@fluentui-react-native/framework';
+import type { ViewStyle, ViewProps } from 'react-native';
+import type { Theme } from '@fluentui-react-native/framework';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 const nameMap: { [key: string]: Alignment } = {

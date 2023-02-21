@@ -1,7 +1,7 @@
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { TextProps } from 'react-native';
-import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { Theme } from '@fluentui-react-native/framework';
+import type { TextProps } from 'react-native';
+import type { IPersonaCoinTokens } from './PersonaCoin.types';
+import type { Theme } from '@fluentui-react-native/framework';
 import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 
 const _initialsKeyProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'initialsSize', 'size'];

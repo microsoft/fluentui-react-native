@@ -2,7 +2,8 @@ import * as React from 'react';
 import { PersonaCoin } from '@fluentui/react-native';
 import { Switch, View, Text, TextInput, StyleSheet } from 'react-native';
 import Slider from '@react-native-community/slider';
-import { steveBallmerPhotoUrl, undefinedText } from './styles';
+import type { undefinedText } from './styles';
+import { steveBallmerPhotoUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 

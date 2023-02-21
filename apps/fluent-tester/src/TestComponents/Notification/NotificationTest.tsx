@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { Notification, NotificationVariant, NotificationVariants } from '@fluentui-react-native/notification';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { NotificationVariant } from '@fluentui-react-native/notification';
+import { Notification, NotificationVariants } from '@fluentui-react-native/notification';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { Animated, StyleSheet, Switch, TextInput, View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { SvgIconProps } from '@fluentui-react-native/icon';
+import type { SvgIconProps } from '@fluentui-react-native/icon';
 import PlayButton from './assets/play_button.svg';
 
 const svgProps: SvgIconProps = {

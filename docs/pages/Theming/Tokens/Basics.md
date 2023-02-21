@@ -31,9 +31,51 @@ const foreground = theme.colors.neutralForeground1;
 
 ## Types of tokens
 
-### Color [in progress]
+### Color
 
-TO DO - recommended usage is through alias tokens rather than global
+The recommended usage of color is by accessing alias color tokens through the theme, rather than referencing global tokens directly.
+
+An example of usage is in our Notification component, where we use multiple alias color tokens for the different Notification variants.
+
+```ts
+import type { Theme } from '@fluentui-react-native/framework';
+
+export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme> = (t: Theme) =>
+  ({
+    backgroundColor: t.colors.neutralBackground1,
+    color: t.colors.brandForeground1,
+    primary: {
+      backgroundColor: t.colors.brandBackgroundTint,
+      color: t.colors.brandForegroundTint,
+      disabledColor: t.colors.brandForegroundDisabled1,
+      ...
+    },
+    neutral: {
+      backgroundColor: t.colors.neutralBackground4,
+      color: t.colors.neutralForeground2,
+      disabledColor: t.colors.neutralForegroundDisabled2,
+      ...
+    },
+    danger: {
+      backgroundColor: t.colors.dangerBackground1,
+      color: t.colors.dangerForeground1,
+      ...
+    },
+    warning: {
+      backgroundColor: t.colors.warningBackground1,
+      color: t.colors.warningForeground1,
+      ...
+    },
+    ...
+  })
+} as NotificationTokens);
+
+```
+
+Notes about alias color tokens:
+
+- Different platforms can have different sets of alias tokens; however, the entire set of alias tokens are all defined in the same interface. See (Color.types.ts)[https://github.com/microsoft/fluentui-react-native/blob/main/packages/theming/theme-types/src/Color.types.ts#L453] for this interface and which platforms define which alias tokens.
+- As a result, if an alias token is referenced that does not exist for that platform, there won't be any compile-time or run-time errors. Instead, the color shown will default to black.
 
 Special case: if accessing a specific color, you can find it in the `globalTokens.color` property.
 
@@ -51,6 +93,8 @@ const colorTableFluent: { [P in PersonaCoinFluentColor]: string } = {
   ...
 };
 ```
+
+[TODO: documentation on branding colors]
 
 ### Corner Radius
 

@@ -1,4 +1,4 @@
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 /** Palette of Apple Platform Colors, defined at https://developer.apple.com/documentation/appkit/nscolor/ui_element_colors */
 export interface AppleSemanticPalette {

@@ -2,7 +2,8 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from '../../../../E2E/src/RadioGroupLegacy/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { RadioGroupLegacyE2ETest } from './RadioGroupLegacyE2ETest';
 
 const BasicRadioGroup: React.FunctionComponent = () => {
@@ -58,6 +59,9 @@ const radioGroupSections: TestSection[] = [
     testID: RADIOGROUP_TESTPAGE,
     component: BasicRadioGroup,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'RadioGroup for E2E Testing',
     component: RadioGroupLegacyE2ETest,
@@ -75,5 +79,7 @@ export const RadioGroupLegacyTest: React.FunctionComponent = () => {
 
   const description = 'No description.';
 
-  return <Test name="RadioGroup Legacy Test" description={description} sections={radioGroupSections} status={status} />;
+  return (
+    <Test name="RadioGroup Legacy Test" description={description} sections={radioGroupSections} status={status} e2eSections={e2eSections} />
+  );
 };

@@ -1,8 +1,18 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Fri, 30 Sep 2022 00:54:37 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Feb 2023 22:33:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/immutable-merge to v1.1.8
+- Bump @fluentui-react-native/merge-props to v0.5.2
 
 ## 0.12.1
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { I18nManager, Platform } from 'react-native';
-import { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
+import type { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
 import { useMenuContext } from '../context/menuContext';
-import { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
+import type { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
 
 const controlledDismissBehaviors = ['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[];
 
@@ -23,7 +23,10 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
 
   const { onKeyDown: onKeyDownProp, onKeyUp: onKeyUpProp } = props;
 
-  const onDismiss = React.useCallback(() => setOpen(undefined, false /* isOpen */), [setOpen]);
+  const onDismiss = React.useCallback(() => {
+    props.onDismiss?.();
+    setOpen(undefined, false /* isOpen */), [setOpen];
+  }, [props.onDismiss, setOpen]);
   const dismissBehaviors = isControlled ? controlledDismissBehaviors : undefined;
   const directionalHint = getDirectionalHint(isSubmenu, I18nManager.isRTL);
 
@@ -102,6 +105,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
       accessibilityRole,
       target: triggerRef,
       onDismiss,
+      onShow: props.onShow,
       directionalHint,
       dismissBehaviors,
       doNotTakePointerCapture,

@@ -151,7 +151,7 @@ Page Objects should be put in apps/E2E/src/_ *ComponentToBeTested* _/pages/.
 
 In most cases, you can copy/paste ButtonPageObject.ts and simply change all instances of Button to your new component.
 
-```
+```ts
 // CheckboxPageObject.win.ts
 class CheckboxPageObject extends BasePage {
   // This function clicks on the Checkbox component you selected below
@@ -189,16 +189,47 @@ For example, a common task we want to perform is selecting a UI element and gett
 - If testProps is specified, the locator strategy should choose accessibility id.
   A unique accessiblity id/testID per Window is recommended for E2E testing when authoring the test app and test cases.
 
-- To use this, we must add a prop to our component or UI element in question called "testProps". In our test page, set the “testProps” for the component after accessibilityLabel prop (if present), and we can then select it in our Page Object using the imported **_By_** method above from a base class.
+- To use this, we must add a prop to our component or UI element in question called `testProps`. In our test page, set the `testProps` for the component after accessibilityLabel prop (if present), and we can then select it in our Page Object using the imported **_By_** method above from a base class.
 
 ## Setup your Component Test Page in the Test App
 
-In order to test the component, we need a test page in FURNs test app. Once you create that, you'll want to create a separate file for E2E testing (see pattern used by all other controls). Create
-an example and set `...{testProps(your_components_constant)}` on your new control. Now, our automation framework can select this component using the constant you passed in to `testProps`.
+In order to test the component, we need a test page in FURNs test app. Looking at existing test pages, each test page is made up of one or more sections showing off different use cases of the component. These sections are rendered using the `<Test />` component.
 
-## Add to NavigateAppPage.ts
+```tsx
+const checkboxSections: TestSection[] = [
+  {
+    name: 'Basic Checkboxes', // This is the title of said section, rendered before the contents.
+    component: BasicCheckbox, // Pass a React Component to render below the title.
+    testID: CHECKBOXV1_TESTPAGE, // You can optionally add a `testID` to the title so we can find and interact with the element during automation. Attach to check if the page renders.
+  },
+  {
+    name: 'Size Checkboxes',
+    component: SizeCheckbox,
+  },
+];
 
-This page object is responsible for navigating through the app to each test page. Here, you'll want to add integration for your new component. (Easily reproducible by looking at other components in the file).
+export const CheckboxTest = () => {
+  return <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status} />;
+};
+```
+
+When building the test page, make sure to do the following:
+
+- Pass a `testID` to the first test section. The `testID` should equal the `_pageName` const set in the component's page object because during each test, we initially check if the page loads by checking if the element with a `testID = _pageName` is visible.
+- If your component needs dedicated accessibility or functionality tests, create a dedicated `TestSection` with elements designated for use during automated E2E testing. These elements should have a `testID` assigned by passing `{...testProps(your_components_constant)}` to the props of the component so we can use our Page Object to interact with the component. Once your section is built, pass the section to the `<Test />` element via the `e2eSections` prop. The reason the E2E section is separate from the regular test sections is because these need to be rendered at the very top of the test page to reduce the time it takes for an E2E component to load into view for each test. They are also initially hidden for aesthetic purposes and get revealed during automation.
+
+```tsx
+const e2eSections: TestSection = [
+  {
+    name: 'E2E Testing for CheckboxV1',
+    component: E2ECheckboxV1Test,
+  },
+];
+
+export const CheckboxTest = () => {
+  return <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status} e2eSections={e2eSections} />;
+};
+```
 
 ## Write a Test Spec
 
@@ -210,9 +241,7 @@ Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTest
 ```
 describe('Click on each test page and check if it renders', function() {
   it('Checkbox Test Page', () => {
-    NavigateAppPage.clickAndGoToCheckboxPage();
-    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
-  });
+    CheckboxPageObject.navigateToPageAndLoadTests(true); // pass true if you have a dedicated section for E2E tests
 });
 ```
 

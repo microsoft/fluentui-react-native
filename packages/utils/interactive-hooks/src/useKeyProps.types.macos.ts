@@ -1,4 +1,4 @@
-import { NativeSyntheticEvent } from 'react-native';
+import type { NativeSyntheticEvent } from 'react-native';
 
 // React Native macOS doesn't have typescript types yet, so define the type here.
 interface NativeKeyEvent {

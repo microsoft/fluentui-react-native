@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/default-theme",
-  "version": "0.16.25",
+  "version": "0.17.1",
   "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",
@@ -31,11 +31,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.1.7",
-    "@fluentui-react-native/theme-tokens": "^0.23.2",
-    "@fluentui-react-native/theme-types": ">=0.29.1 <1.0.0",
-    "@fluentui-react-native/theme": ">=0.7.17 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.22.2 <1.0.0",
+    "@fluentui-react-native/memo-cache": "^1.1.8",
+    "@fluentui-react-native/theme-tokens": "^0.24.2",
+    "@fluentui-react-native/theme-types": ">=0.30.2 <1.0.0",
+    "@fluentui-react-native/theme": ">=0.8.0 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.23.3 <1.0.0",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
@@ -51,14 +51,20 @@
     "react-native": "^0.68.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
   }
 }
