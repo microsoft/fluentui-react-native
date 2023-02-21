@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 17 Feb 2023 18:14:14 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.20.1",
+      "version": "1.20.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "acd9f272f7a5660c30f0ca4717b69a78b59470db",
+            "comment": "Add mobile e2e tests for Divider"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Feb 2023 00:29:35 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.20.0",
+      "version": "1.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "5e59f352a31631da1693f9960eec1c6c8ee69821",
+            "comment": "Add Divider E2E tests for desktop platforms"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Feb 2023 21:33:24 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.19.0",
+      "version": "1.19.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "3181888de02a56fffd116abb0a5414a7e3e8a484",
+            "comment": "Add retractable E2E sections to tester component pages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Feb 2023 02:41:04 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.18.0",
       "version": "1.18.0",

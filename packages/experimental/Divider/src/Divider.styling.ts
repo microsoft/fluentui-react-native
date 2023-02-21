@@ -1,9 +1,12 @@
 import { useMemo } from 'react';
 import type { ViewProps, ColorValue } from 'react-native';
+import { Platform } from 'react-native';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
+
+const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 
 const getIconProps = (contentColor: ColorValue, icon: IconProps): IconProps => {
   if (icon.fontSource) {
@@ -49,7 +52,7 @@ export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens) 
             }
           : {
               flexDirection: 'row',
-              paddingHorizontal: props.insetSize,
+              ...(isMobile ? { paddingStart: props.insetSize } : { paddingHorizontal: props.insetSize }), // insetSize on iOS and Android is on start only.
             }),
       },
     }),

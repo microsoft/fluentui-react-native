@@ -1,98 +1,98 @@
 PODS:
   - boost (1.76.0)
   - DoubleConversion (1.1.6)
-  - FBLazyVector (0.68.5)
-  - FBReactNativeSpec (0.68.5):
+  - FBLazyVector (0.68.6)
+  - FBReactNativeSpec (0.68.6):
     - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTRequired (= 0.68.5)
-    - RCTTypeSafety (= 0.68.5)
-    - React-Core (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
+    - RCTRequired (= 0.68.6)
+    - RCTTypeSafety (= 0.68.6)
+    - React-Core (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
   - fmt (6.2.1)
-  - FRNAppearanceAdditions (0.1.0):
+  - FRNAppearanceAdditions (0.3.1):
     - React
-  - FRNAvatar (0.17.10):
-    - MicrosoftFluentUI (= 0.10.0)
+  - FRNAvatar (0.17.15):
+    - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNDatePicker (0.7.4):
-    - MicrosoftFluentUI (= 0.10.0)
+  - FRNDatePicker (0.7.5):
+    - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNFontMetrics (0.3.0):
+  - FRNFontMetrics (0.3.1):
     - React
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.10.0):
-    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.10.0)
-    - MicrosoftFluentUI/Appearance_mac (= 0.10.0)
-    - MicrosoftFluentUI/Avatar_ios (= 0.10.0)
-    - MicrosoftFluentUI/AvatarGroup_ios (= 0.10.0)
-    - MicrosoftFluentUI/AvatarView_mac (= 0.10.0)
-    - MicrosoftFluentUI/BadgeField_ios (= 0.10.0)
-    - MicrosoftFluentUI/BadgeView_mac (= 0.10.0)
-    - MicrosoftFluentUI/BarButtonItems_ios (= 0.10.0)
-    - MicrosoftFluentUI/BottomCommanding_ios (= 0.10.0)
-    - MicrosoftFluentUI/BottomSheet_ios (= 0.10.0)
-    - MicrosoftFluentUI/Button_ios (= 0.10.0)
-    - MicrosoftFluentUI/Button_mac (= 0.10.0)
-    - MicrosoftFluentUI/Calendar_ios (= 0.10.0)
-    - MicrosoftFluentUI/Card_ios (= 0.10.0)
-    - MicrosoftFluentUI/CardNudge_ios (= 0.10.0)
-    - MicrosoftFluentUI/CommandBar_ios (= 0.10.0)
-    - MicrosoftFluentUI/Core_ios (= 0.10.0)
-    - MicrosoftFluentUI/Core_mac (= 0.10.0)
-    - MicrosoftFluentUI/DatePicker_mac (= 0.10.0)
-    - MicrosoftFluentUI/Divider_ios (= 0.10.0)
-    - MicrosoftFluentUI/DotView_ios (= 0.10.0)
-    - MicrosoftFluentUI/Drawer_ios (= 0.10.0)
-    - MicrosoftFluentUI/DynamicColor_mac (= 0.10.0)
-    - MicrosoftFluentUI/EasyTapButton_ios (= 0.10.0)
-    - MicrosoftFluentUI/HUD_ios (= 0.10.0)
-    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.10.0)
-    - MicrosoftFluentUI/Label_ios (= 0.10.0)
-    - MicrosoftFluentUI/Link_mac (= 0.10.0)
-    - MicrosoftFluentUI/Navigation_ios (= 0.10.0)
-    - MicrosoftFluentUI/Notification_ios (= 0.10.0)
-    - MicrosoftFluentUI/Obscurable_ios (= 0.10.0)
-    - MicrosoftFluentUI/OtherCells_ios (= 0.10.0)
-    - MicrosoftFluentUI/PeoplePicker_ios (= 0.10.0)
-    - MicrosoftFluentUI/PersonaButton_ios (= 0.10.0)
-    - MicrosoftFluentUI/PersonaButtonCarousel_ios (= 0.10.0)
-    - MicrosoftFluentUI/PillButtonBar_ios (= 0.10.0)
-    - MicrosoftFluentUI/PopupMenu_ios (= 0.10.0)
-    - MicrosoftFluentUI/Presenters_ios (= 0.10.0)
-    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.10.0)
-    - MicrosoftFluentUI/SegmentedControl_ios (= 0.10.0)
-    - MicrosoftFluentUI/Separator_ios (= 0.10.0)
-    - MicrosoftFluentUI/Separator_mac (= 0.10.0)
-    - MicrosoftFluentUI/Shimmer_ios (= 0.10.0)
-    - MicrosoftFluentUI/TabBar_ios (= 0.10.0)
-    - MicrosoftFluentUI/TableView_ios (= 0.10.0)
-    - MicrosoftFluentUI/Tooltip_ios (= 0.10.0)
-    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.10.0)
-    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.10.0)
-    - MicrosoftFluentUI/Utilities_ios (= 0.10.0)
-  - MicrosoftFluentUI/ActivityIndicator_ios (0.10.0):
+  - MicrosoftFluentUI (0.13.1):
+    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.13.1)
+    - MicrosoftFluentUI/Appearance_mac (= 0.13.1)
+    - MicrosoftFluentUI/Avatar_ios (= 0.13.1)
+    - MicrosoftFluentUI/AvatarGroup_ios (= 0.13.1)
+    - MicrosoftFluentUI/AvatarView_mac (= 0.13.1)
+    - MicrosoftFluentUI/BadgeField_ios (= 0.13.1)
+    - MicrosoftFluentUI/BadgeView_mac (= 0.13.1)
+    - MicrosoftFluentUI/BarButtonItems_ios (= 0.13.1)
+    - MicrosoftFluentUI/BottomCommanding_ios (= 0.13.1)
+    - MicrosoftFluentUI/BottomSheet_ios (= 0.13.1)
+    - MicrosoftFluentUI/Button_ios (= 0.13.1)
+    - MicrosoftFluentUI/Button_mac (= 0.13.1)
+    - MicrosoftFluentUI/Calendar_ios (= 0.13.1)
+    - MicrosoftFluentUI/Card_ios (= 0.13.1)
+    - MicrosoftFluentUI/CardNudge_ios (= 0.13.1)
+    - MicrosoftFluentUI/CommandBar_ios (= 0.13.1)
+    - MicrosoftFluentUI/Core_ios (= 0.13.1)
+    - MicrosoftFluentUI/Core_mac (= 0.13.1)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.13.1)
+    - MicrosoftFluentUI/Divider_ios (= 0.13.1)
+    - MicrosoftFluentUI/DotView_ios (= 0.13.1)
+    - MicrosoftFluentUI/Drawer_ios (= 0.13.1)
+    - MicrosoftFluentUI/DynamicColor_mac (= 0.13.1)
+    - MicrosoftFluentUI/EasyTapButton_ios (= 0.13.1)
+    - MicrosoftFluentUI/HUD_ios (= 0.13.1)
+    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.13.1)
+    - MicrosoftFluentUI/Label_ios (= 0.13.1)
+    - MicrosoftFluentUI/Link_mac (= 0.13.1)
+    - MicrosoftFluentUI/Navigation_ios (= 0.13.1)
+    - MicrosoftFluentUI/Notification_ios (= 0.13.1)
+    - MicrosoftFluentUI/Obscurable_ios (= 0.13.1)
+    - MicrosoftFluentUI/OtherCells_ios (= 0.13.1)
+    - MicrosoftFluentUI/PeoplePicker_ios (= 0.13.1)
+    - MicrosoftFluentUI/PersonaButton_ios (= 0.13.1)
+    - MicrosoftFluentUI/PersonaButtonCarousel_ios (= 0.13.1)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.13.1)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.13.1)
+    - MicrosoftFluentUI/Presenters_ios (= 0.13.1)
+    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.13.1)
+    - MicrosoftFluentUI/SegmentedControl_ios (= 0.13.1)
+    - MicrosoftFluentUI/Separator_ios (= 0.13.1)
+    - MicrosoftFluentUI/Separator_mac (= 0.13.1)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.13.1)
+    - MicrosoftFluentUI/TabBar_ios (= 0.13.1)
+    - MicrosoftFluentUI/TableView_ios (= 0.13.1)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.13.1)
+    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.13.1)
+    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.13.1)
+    - MicrosoftFluentUI/Utilities_ios (= 0.13.1)
+  - MicrosoftFluentUI/ActivityIndicator_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Avatar_ios (0.10.0):
+  - MicrosoftFluentUI/Avatar_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/AvatarGroup_ios (0.10.0):
+  - MicrosoftFluentUI/AvatarGroup_ios (0.13.1):
     - MicrosoftFluentUI/Avatar_ios
-  - MicrosoftFluentUI/BadgeField_ios (0.10.0):
+  - MicrosoftFluentUI/BadgeField_ios (0.13.1):
     - MicrosoftFluentUI/Label_ios
-  - MicrosoftFluentUI/BarButtonItems_ios (0.10.0):
+  - MicrosoftFluentUI/BarButtonItems_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/BottomCommanding_ios (0.10.0):
+  - MicrosoftFluentUI/BottomCommanding_ios (0.13.1):
     - MicrosoftFluentUI/BottomSheet_ios
     - MicrosoftFluentUI/OtherCells_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TabBar_ios
     - MicrosoftFluentUI/TableView_ios
-  - MicrosoftFluentUI/BottomSheet_ios (0.10.0):
+  - MicrosoftFluentUI/BottomSheet_ios (0.13.1):
     - MicrosoftFluentUI/Obscurable_ios
     - MicrosoftFluentUI/ResizingHandleView_ios
-  - MicrosoftFluentUI/Button_ios (0.10.0):
+  - MicrosoftFluentUI/Button_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Calendar_ios (0.10.0):
+  - MicrosoftFluentUI/Calendar_ios (0.13.1):
     - MicrosoftFluentUI/BarButtonItems_ios
     - MicrosoftFluentUI/DotView_ios
     - MicrosoftFluentUI/Label_ios
@@ -100,88 +100,88 @@ PODS:
     - MicrosoftFluentUI/SegmentedControl_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TwoLineTitleView_ios
-  - MicrosoftFluentUI/Card_ios (0.10.0):
+  - MicrosoftFluentUI/Card_ios (0.13.1):
     - MicrosoftFluentUI/Label_ios
-  - MicrosoftFluentUI/CardNudge_ios (0.10.0):
+  - MicrosoftFluentUI/CardNudge_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/CommandBar_ios (0.10.0):
+  - MicrosoftFluentUI/CommandBar_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Core_ios (0.10.0)
-  - MicrosoftFluentUI/Divider_ios (0.10.0):
+  - MicrosoftFluentUI/Core_ios (0.13.1)
+  - MicrosoftFluentUI/Divider_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/DotView_ios (0.10.0):
+  - MicrosoftFluentUI/DotView_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Drawer_ios (0.10.0):
+  - MicrosoftFluentUI/Drawer_ios (0.13.1):
     - MicrosoftFluentUI/Obscurable_ios
     - MicrosoftFluentUI/ResizingHandleView_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TouchForwardingView_ios
-  - MicrosoftFluentUI/EasyTapButton_ios (0.10.0):
+  - MicrosoftFluentUI/EasyTapButton_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/HUD_ios (0.10.0):
+  - MicrosoftFluentUI/HUD_ios (0.13.1):
     - MicrosoftFluentUI/ActivityIndicator_ios
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/TouchForwardingView_ios
-  - MicrosoftFluentUI/IndeterminateProgressBar_ios (0.10.0):
+  - MicrosoftFluentUI/IndeterminateProgressBar_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Label_ios (0.10.0):
+  - MicrosoftFluentUI/Label_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Navigation_ios (0.10.0):
+  - MicrosoftFluentUI/Navigation_ios (0.13.1):
     - MicrosoftFluentUI/ActivityIndicator_ios
     - MicrosoftFluentUI/Avatar_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TwoLineTitleView_ios
-  - MicrosoftFluentUI/Notification_ios (0.10.0):
+  - MicrosoftFluentUI/Notification_ios (0.13.1):
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/Obscurable_ios
-  - MicrosoftFluentUI/Obscurable_ios (0.10.0):
+  - MicrosoftFluentUI/Obscurable_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/OtherCells_ios (0.10.0):
+  - MicrosoftFluentUI/OtherCells_ios (0.13.1):
     - MicrosoftFluentUI/ActivityIndicator_ios
     - MicrosoftFluentUI/TableView_ios
-  - MicrosoftFluentUI/PeoplePicker_ios (0.10.0):
+  - MicrosoftFluentUI/PeoplePicker_ios (0.13.1):
     - MicrosoftFluentUI/Avatar_ios
     - MicrosoftFluentUI/BadgeField_ios
     - MicrosoftFluentUI/OtherCells_ios
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/PersonaButton_ios (0.10.0):
+  - MicrosoftFluentUI/PersonaButton_ios (0.13.1):
     - MicrosoftFluentUI/Avatar_ios
-  - MicrosoftFluentUI/PersonaButtonCarousel_ios (0.10.0):
+  - MicrosoftFluentUI/PersonaButtonCarousel_ios (0.13.1):
     - MicrosoftFluentUI/PersonaButton_ios
-  - MicrosoftFluentUI/PillButtonBar_ios (0.10.0):
+  - MicrosoftFluentUI/PillButtonBar_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/PopupMenu_ios (0.10.0):
+  - MicrosoftFluentUI/PopupMenu_ios (0.13.1):
     - MicrosoftFluentUI/Drawer_ios
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TableView_ios
-  - MicrosoftFluentUI/Presenters_ios (0.10.0):
+  - MicrosoftFluentUI/Presenters_ios (0.13.1):
     - MicrosoftFluentUI/Obscurable_ios
-  - MicrosoftFluentUI/ResizingHandleView_ios (0.10.0):
+  - MicrosoftFluentUI/ResizingHandleView_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/SegmentedControl_ios (0.10.0):
+  - MicrosoftFluentUI/SegmentedControl_ios (0.13.1):
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/Separator_ios (0.10.0):
+  - MicrosoftFluentUI/Separator_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Shimmer_ios (0.10.0):
+  - MicrosoftFluentUI/Shimmer_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
     - MicrosoftFluentUI/Utilities_ios
-  - MicrosoftFluentUI/TabBar_ios (0.10.0):
+  - MicrosoftFluentUI/TabBar_ios (0.13.1):
     - MicrosoftFluentUI/Avatar_ios
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/TableView_ios (0.10.0):
+  - MicrosoftFluentUI/TableView_ios (0.13.1):
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/Tooltip_ios (0.10.0):
+  - MicrosoftFluentUI/Tooltip_ios (0.13.1):
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/TouchForwardingView_ios
-  - MicrosoftFluentUI/TouchForwardingView_ios (0.10.0):
+  - MicrosoftFluentUI/TouchForwardingView_ios (0.13.1):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/TwoLineTitleView_ios (0.10.0):
+  - MicrosoftFluentUI/TwoLineTitleView_ios (0.13.1):
     - MicrosoftFluentUI/EasyTapButton_ios
     - MicrosoftFluentUI/Label_ios
-  - MicrosoftFluentUI/Utilities_ios (0.10.0)
+  - MicrosoftFluentUI/Utilities_ios (0.13.1)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -193,278 +193,278 @@ PODS:
     - DoubleConversion
     - fmt (~> 6.2.1)
     - glog
-  - RCTRequired (0.68.5)
-  - RCTTypeSafety (0.68.5):
-    - FBLazyVector (= 0.68.5)
+  - RCTRequired (0.68.6)
+  - RCTTypeSafety (0.68.6):
+    - FBLazyVector (= 0.68.6)
     - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTRequired (= 0.68.5)
-    - React-Core (= 0.68.5)
-  - React (0.68.5):
-    - React-Core (= 0.68.5)
-    - React-Core/DevSupport (= 0.68.5)
-    - React-Core/RCTWebSocket (= 0.68.5)
-    - React-RCTActionSheet (= 0.68.5)
-    - React-RCTAnimation (= 0.68.5)
-    - React-RCTBlob (= 0.68.5)
-    - React-RCTImage (= 0.68.5)
-    - React-RCTLinking (= 0.68.5)
-    - React-RCTNetwork (= 0.68.5)
-    - React-RCTSettings (= 0.68.5)
-    - React-RCTText (= 0.68.5)
-    - React-RCTVibration (= 0.68.5)
-  - React-callinvoker (0.68.5)
-  - React-Codegen (0.68.5):
-    - FBReactNativeSpec (= 0.68.5)
+    - RCTRequired (= 0.68.6)
+    - React-Core (= 0.68.6)
+  - React (0.68.6):
+    - React-Core (= 0.68.6)
+    - React-Core/DevSupport (= 0.68.6)
+    - React-Core/RCTWebSocket (= 0.68.6)
+    - React-RCTActionSheet (= 0.68.6)
+    - React-RCTAnimation (= 0.68.6)
+    - React-RCTBlob (= 0.68.6)
+    - React-RCTImage (= 0.68.6)
+    - React-RCTLinking (= 0.68.6)
+    - React-RCTNetwork (= 0.68.6)
+    - React-RCTSettings (= 0.68.6)
+    - React-RCTText (= 0.68.6)
+    - React-RCTVibration (= 0.68.6)
+  - React-callinvoker (0.68.6)
+  - React-Codegen (0.68.6):
+    - FBReactNativeSpec (= 0.68.6)
     - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTRequired (= 0.68.5)
-    - RCTTypeSafety (= 0.68.5)
-    - React-Core (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-Core (0.68.5):
+    - RCTRequired (= 0.68.6)
+    - RCTTypeSafety (= 0.68.6)
+    - React-Core (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-Core (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Core/Default (= 0.68.5)
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-Core/Default (= 0.68.6)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/CoreModulesHeaders (0.68.5):
-    - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
-    - Yoga
-  - React-Core/Default (0.68.5):
-    - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
-    - Yoga
-  - React-Core/DevSupport (0.68.5):
-    - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Core/Default (= 0.68.5)
-    - React-Core/RCTWebSocket (= 0.68.5)
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-jsinspector (= 0.68.5)
-    - React-perflogger (= 0.68.5)
-    - Yoga
-  - React-Core/RCTActionSheetHeaders (0.68.5):
+  - React-Core/CoreModulesHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTAnimationHeaders (0.68.5):
+  - React-Core/Default (0.68.6):
+    - glog
+    - RCT-Folly (= 2021.06.28.00-v2)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
+    - Yoga
+  - React-Core/DevSupport (0.68.6):
+    - glog
+    - RCT-Folly (= 2021.06.28.00-v2)
+    - React-Core/Default (= 0.68.6)
+    - React-Core/RCTWebSocket (= 0.68.6)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-jsinspector (= 0.68.6)
+    - React-perflogger (= 0.68.6)
+    - Yoga
+  - React-Core/RCTActionSheetHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTBlobHeaders (0.68.5):
+  - React-Core/RCTAnimationHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTImageHeaders (0.68.5):
+  - React-Core/RCTBlobHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTLinkingHeaders (0.68.5):
+  - React-Core/RCTImageHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTNetworkHeaders (0.68.5):
+  - React-Core/RCTLinkingHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTSettingsHeaders (0.68.5):
+  - React-Core/RCTNetworkHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTTextHeaders (0.68.5):
+  - React-Core/RCTSettingsHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTVibrationHeaders (0.68.5):
+  - React-Core/RCTTextHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
     - React-Core/Default
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-Core/RCTWebSocket (0.68.5):
+  - React-Core/RCTVibrationHeaders (0.68.6):
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Core/Default (= 0.68.5)
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsiexecutor (= 0.68.5)
-    - React-perflogger (= 0.68.5)
+    - React-Core/Default
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
     - Yoga
-  - React-CoreModules (0.68.5):
+  - React-Core/RCTWebSocket (0.68.6):
+    - glog
     - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.5)
-    - React-Codegen (= 0.68.5)
-    - React-Core/CoreModulesHeaders (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-RCTImage (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-cxxreact (0.68.5):
+    - React-Core/Default (= 0.68.6)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsiexecutor (= 0.68.6)
+    - React-perflogger (= 0.68.6)
+    - Yoga
+  - React-CoreModules (0.68.6):
+    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCTTypeSafety (= 0.68.6)
+    - React-Codegen (= 0.68.6)
+    - React-Core/CoreModulesHeaders (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-RCTImage (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-cxxreact (0.68.6):
     - boost (= 1.76.0)
     - DoubleConversion
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
-    - React-callinvoker (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-jsinspector (= 0.68.5)
-    - React-logger (= 0.68.5)
-    - React-perflogger (= 0.68.5)
-    - React-runtimeexecutor (= 0.68.5)
-  - React-jsi (0.68.5):
+    - React-callinvoker (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-jsinspector (= 0.68.6)
+    - React-logger (= 0.68.6)
+    - React-perflogger (= 0.68.6)
+    - React-runtimeexecutor (= 0.68.6)
+  - React-jsi (0.68.6):
     - boost (= 1.76.0)
     - DoubleConversion
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
-    - React-jsi/Default (= 0.68.5)
-  - React-jsi/Default (0.68.5):
+    - React-jsi/Default (= 0.68.6)
+  - React-jsi/Default (0.68.6):
     - boost (= 1.76.0)
     - DoubleConversion
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
-  - React-jsiexecutor (0.68.5):
+  - React-jsiexecutor (0.68.6):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-perflogger (= 0.68.5)
-  - React-jsinspector (0.68.5)
-  - React-logger (0.68.5):
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-perflogger (= 0.68.6)
+  - React-jsinspector (0.68.6)
+  - React-logger (0.68.6):
     - glog
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.4.0):
+  - react-native-slider (4.4.2):
     - React-Core
-  - React-perflogger (0.68.5)
-  - React-RCTActionSheet (0.68.5):
-    - React-Core/RCTActionSheetHeaders (= 0.68.5)
-  - React-RCTAnimation (0.68.5):
+  - React-perflogger (0.68.6)
+  - React-RCTActionSheet (0.68.6):
+    - React-Core/RCTActionSheetHeaders (= 0.68.6)
+  - React-RCTAnimation (0.68.6):
     - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.5)
-    - React-Codegen (= 0.68.5)
-    - React-Core/RCTAnimationHeaders (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-RCTBlob (0.68.5):
+    - RCTTypeSafety (= 0.68.6)
+    - React-Codegen (= 0.68.6)
+    - React-Core/RCTAnimationHeaders (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-RCTBlob (0.68.6):
     - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Codegen (= 0.68.5)
-    - React-Core/RCTBlobHeaders (= 0.68.5)
-    - React-Core/RCTWebSocket (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-RCTNetwork (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-RCTImage (0.68.5):
+    - React-Codegen (= 0.68.6)
+    - React-Core/RCTBlobHeaders (= 0.68.6)
+    - React-Core/RCTWebSocket (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-RCTNetwork (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-RCTImage (0.68.6):
     - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.5)
-    - React-Codegen (= 0.68.5)
-    - React-Core/RCTImageHeaders (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-RCTNetwork (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-RCTLinking (0.68.5):
-    - React-Codegen (= 0.68.5)
-    - React-Core/RCTLinkingHeaders (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-RCTNetwork (0.68.5):
+    - RCTTypeSafety (= 0.68.6)
+    - React-Codegen (= 0.68.6)
+    - React-Core/RCTImageHeaders (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-RCTNetwork (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-RCTLinking (0.68.6):
+    - React-Codegen (= 0.68.6)
+    - React-Core/RCTLinkingHeaders (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-RCTNetwork (0.68.6):
     - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.5)
-    - React-Codegen (= 0.68.5)
-    - React-Core/RCTNetworkHeaders (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-RCTSettings (0.68.5):
+    - RCTTypeSafety (= 0.68.6)
+    - React-Codegen (= 0.68.6)
+    - React-Core/RCTNetworkHeaders (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-RCTSettings (0.68.6):
     - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.5)
-    - React-Codegen (= 0.68.5)
-    - React-Core/RCTSettingsHeaders (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-RCTText (0.68.5):
-    - React-Core/RCTTextHeaders (= 0.68.5)
-  - React-RCTVibration (0.68.5):
+    - RCTTypeSafety (= 0.68.6)
+    - React-Codegen (= 0.68.6)
+    - React-Core/RCTSettingsHeaders (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-RCTText (0.68.6):
+    - React-Core/RCTTextHeaders (= 0.68.6)
+  - React-RCTVibration (0.68.6):
     - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Codegen (= 0.68.5)
-    - React-Core/RCTVibrationHeaders (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - ReactCommon/turbomodule/core (= 0.68.5)
-  - React-runtimeexecutor (0.68.5):
-    - React-jsi (= 0.68.5)
-  - ReactCommon/turbomodule/core (0.68.5):
+    - React-Codegen (= 0.68.6)
+    - React-Core/RCTVibrationHeaders (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - ReactCommon/turbomodule/core (= 0.68.6)
+  - React-runtimeexecutor (0.68.6):
+    - React-jsi (= 0.68.6)
+  - ReactCommon/turbomodule/core (0.68.6):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2021.06.28.00-v2)
-    - React-callinvoker (= 0.68.5)
-    - React-Core (= 0.68.5)
-    - React-cxxreact (= 0.68.5)
-    - React-jsi (= 0.68.5)
-    - React-logger (= 0.68.5)
-    - React-perflogger (= 0.68.5)
-  - ReactTestApp-DevSupport (2.3.2):
+    - React-callinvoker (= 0.68.6)
+    - React-Core (= 0.68.6)
+    - React-cxxreact (= 0.68.6)
+    - React-jsi (= 0.68.6)
+    - React-logger (= 0.68.6)
+    - React-perflogger (= 0.68.6)
+  - ReactTestApp-DevSupport (2.3.7):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
   - RNCPicker (2.4.8):
     - React-Core
-  - RNSVG (12.5.0):
+  - RNSVG (12.5.1):
     - React-Core
   - Yoga (1.14.0)
 
@@ -605,47 +605,47 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
-  FBLazyVector: 2b47ff52037bd9ae07cc9b051c9975797814b736
-  FBReactNativeSpec: dd89c4a5591e20015aa55c6efbf9c7740a83efbf
+  FBLazyVector: 74b042924fe14da854ac4e87cefc417f583b22b1
+  FBReactNativeSpec: e783d9621f5f6b3fa7ee812a932ad51852ae42a7
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAppearanceAdditions: 88e8fdc98e8aef994df9ab0b04fc652c59a3b351
-  FRNAvatar: cbb9afacb90bcee65673e6d7a32eb63a900131eb
-  FRNDatePicker: 009ab6e4e003a9e5d720fb4aea27b94e6cc8a946
-  FRNFontMetrics: c756b9bb1627909a7673b68caf7a7b14239c212e
+  FRNAppearanceAdditions: 3b63bdc4a950d2c82c952c93c31296f2b56d7fc9
+  FRNAvatar: 963fe8b6f953a95c09066562fc6ddff3c2e7e1b7
+  FRNDatePicker: ed586a0eb1d0277d4cd0e29f5f98c68f213ded08
+  FRNFontMetrics: 381a8bfd71f14b2c4718b5120db5f57455b648a8
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
-  MicrosoftFluentUI: f6db695718efb93f4ca9bdc366c00b80a1f91dba
+  MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
-  RCTRequired: 0f06b6068f530932d10e1a01a5352fad4eaacb74
-  RCTTypeSafety: b0ee81f10ef1b7d977605a2b266823dabd565e65
-  React: 3becd12bd51ea8a43bdde7e09d0f40fba7820e03
-  React-callinvoker: 11abfff50e6bf7a55b3a90b4dc2187f71f224593
-  React-Codegen: f8946ce0768fb8e92e092e30944489c4b2955b2d
-  React-Core: 203cdb6ee2657b198d97d41031c249161060e6ca
-  React-CoreModules: 6eb0c06a4a223fde2cb6a8d0f44f58b67e808942
-  React-cxxreact: afb0c6c07d19adbd850747fedeac20c6832d40b9
-  React-jsi: 14d37a6db2af2c1a49f6f5c2e4ee667c364ae45c
-  React-jsiexecutor: 45c0496ca8cef6b02d9fa0274c25cf458fe91a56
-  React-jsinspector: eb202e43b3879aba9a14f3f65788aec85d4e1ea9
-  React-logger: 98f663b292a60967ebbc6d803ae96c1381183b6d
+  RCTRequired: 92cbd71369a2de6add25fd2403ac39838f1b694f
+  RCTTypeSafety: 494e8af41d7410ed0b877210859ee3984f37e6b4
+  React: 59989499c0e8926a90d34a9ae0bdb2d1b5b53406
+  React-callinvoker: 8187db1c71cf2c1c66e8f7328a0cf77a2b255d94
+  React-Codegen: e806dc2f10ddae645d855cb58acf73ce41eb8ea5
+  React-Core: fc7339b493e368ae079850a4721bdf716cf3dba2
+  React-CoreModules: 2f54f6bbf2764044379332089fcbdaf79197021e
+  React-cxxreact: ee119270006794976e1ab271f0111a5a88b16bcf
+  React-jsi: ec691b2a475d13b1fd39f697145a526eeeb6661c
+  React-jsiexecutor: b4ce4afc5dd9c8fdd2ac59049ccf420f288ecef7
+  React-jsinspector: e396d5e56af08fce39f50571726b68a40f1e302d
+  React-logger: cec52b3f8fb0be0d47b2cb75dec69de60f2de3b6
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: d2938a12c4e439a227c70eec65d119136eb4aeb5
-  React-perflogger: 0458a87ea9a7342079e7a31b0d32b3734fb8415f
-  React-RCTActionSheet: 22538001ea2926dea001111dd2846c13a0730bc9
-  React-RCTAnimation: 732ce66878d4aa151d56a0d142b1105aa12fd313
-  React-RCTBlob: 9cb9e3e9a41d27be34aaf89b0e0f52c7ca415d57
-  React-RCTImage: 6bd16627eb9c4bb79903c4cdec7c551266ee1a5b
-  React-RCTLinking: e9edfc8919c8fa9a3f3c7b34362811f58a2ebba4
-  React-RCTNetwork: 880eccd21bbe2660a0b63da5ccba75c46eceeaa6
-  React-RCTSettings: 8c85d8188c97d6c6bd470af6631a6c4555b79bb3
-  React-RCTText: bbd275ee287730c5acbab1aadc0db39c25c5c64e
-  React-RCTVibration: 9819a3bf6230e4b2a99877c21268b0b2416157a1
-  React-runtimeexecutor: b1f1995089b90696dbc2a7ffe0059a80db5c8eb1
-  ReactCommon: 149e2c0acab9bac61378da0db5b2880a1b5ff59b
-  ReactTestApp-DevSupport: 1646ce70be36400a60ca18608284f3f7099a35c1
+  react-native-slider: 33b8d190b59d4f67a541061bb91775d53d617d9d
+  React-perflogger: 46620fc6d1c3157b60ed28434e08f7fd7f3f3353
+  React-RCTActionSheet: b1f7e72a0ba760ec684df335c61f730b5179f5ff
+  React-RCTAnimation: d73b62d42867ab608dfb10e100d8b91106275b18
+  React-RCTBlob: b5f59693721d50967c35598158e6ca01b474c7de
+  React-RCTImage: 37cf34d0c2fbef2e0278d42a7c5e8ea06a9fed6b
+  React-RCTLinking: a11dced20019cf1c2ec7fd120f18b08f2851f79e
+  React-RCTNetwork: ba097188e5eac42e070029e7cedd9b978940833a
+  React-RCTSettings: 147073708a1c1bde521cf3af045a675682772726
+  React-RCTText: 23f76ebfb2717d181476432e5ecf1c6c4a104c5e
+  React-RCTVibration: be5f18ffc644f96f904e0e673ab639ca5d673ee8
+  React-runtimeexecutor: d5498cfb7059bf8397b6416db4777843f3f4c1e7
+  ReactCommon: 1974dab5108c79b40199f12a4833d2499b9f6303
+  ReactTestApp-DevSupport: 64fa48ee0faae120b9f11444be21ab2814a5c1fa
   ReactTestApp-Resources: ecba662266ac5af3e30e1e3004c0fa8c0298b61a
   RNCPicker: 0bf8ef8f7800524f32d2bb2a8bcadd53eda0ecd1
-  RNSVG: 6adc5c52d2488a476248413064b7f2832e639057
-  Yoga: c4d61225a466f250c35c1ee78d2d0b3d41fe661c
+  RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
+  Yoga: 7929b92b1828675c1bebeb114dae8cb8fa7ef6a3
 
 PODFILE CHECKSUM: b9fd154312c68d8d92a9ba6e8a2cac9fcf88b104
 

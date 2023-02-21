@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/divider",
   "entries": [
     {
+      "date": "Fri, 17 Feb 2023 01:34:44 GMT",
+      "tag": "@fluentui-react-native/divider_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/divider",
+            "commit": "0340ca1e7dff01aa00d6a7240fc7b06c9787c3e8",
+            "comment": "Update SPEC.md documentation for Divider"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Feb 2023 18:30:10 GMT",
+      "tag": "@fluentui-react-native/divider_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/divider",
+            "commit": "ba4cab7eef8759aee74cb0d4ca31d2b8360e3724",
+            "comment": "impl mobile divider"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Feb 2023 00:51:10 GMT",
+      "tag": "@fluentui-react-native/divider_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/divider",
+            "commit": "4ea4d97ea0fa8cea2a682c43823c0e2c850e5066",
+            "comment": "Appearance prop correctly affects color"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/divider_v0.2.0",
       "version": "0.2.0",

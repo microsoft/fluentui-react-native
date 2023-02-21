@@ -21,6 +21,7 @@ import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTrig
 import { MenuTriggerChildRef } from './MenuRefs';
 import { StyleSheet } from 'react-native';
 import { MenuScrollView } from './MenuScrollView';
+import { MenuTooltips } from './MenuTooltips';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -123,7 +124,7 @@ const Submenu: React.FunctionComponent = () => {
   return (
     <Menu>
       <MenuTrigger>
-        <MenuItem>A second MenuItem</MenuItem>
+        <MenuItem>A second MenuItem trigger</MenuItem>
       </MenuTrigger>
       <MenuPopover minWidth={230}>
         <MenuList>
@@ -268,6 +269,10 @@ const menuSections: TestSection[] = [
     component: MenuControlledOpen,
   },
   {
+    name: 'Menu with tooltips on items',
+    component: MenuTooltips,
+  },
+  {
     name: 'Menu Submenu',
     component: MenuSubMenu,
   },
@@ -291,6 +296,9 @@ const menuSections: TestSection[] = [
     name: 'Menu Refs',
     component: MenuTriggerChildRef,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Menu E2E',
     component: E2EMenuTest,
@@ -311,5 +319,5 @@ export const MenuTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Menu/SPEC.md';
 
-  return <Test name="Menu Test" description={description} spec={spec} sections={menuSections} status={status} />;
+  return <Test name="Menu Test" description={description} spec={spec} sections={menuSections} status={status} e2eSections={e2eSections} />;
 };

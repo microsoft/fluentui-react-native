@@ -3,12 +3,14 @@ import { Platform, StyleSheet, View } from 'react-native';
 import { Divider } from '@fluentui-react-native/divider';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { DIVIDER_TESTPAGE } from './consts';
+import { DIVIDER_TESTPAGE } from '../../../../E2E/src/Divider/consts';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
 import { commonTestStyles } from '../Common/styles';
 import TestSvg from '../../../assets/test.svg';
+import { CustomisedMobileDividers, MobileDividers } from './MobileDividerTest';
 
+const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 const CustomDivider = Divider.customize({ thickness: 3, paddingVertical: 4 });
 const CustomText = Text.customize({ margin: 8 });
 
@@ -100,17 +102,37 @@ const dividerSections: TestSection[] = [
   },
 ];
 
+const mobileDividerSections: TestSection[] = [
+  {
+    name: 'Mobile Dividers',
+    testID: DIVIDER_TESTPAGE,
+    component: MobileDividers,
+  },
+  {
+    name: 'Customised Mobile Dividers',
+    testID: DIVIDER_TESTPAGE,
+    component: CustomisedMobileDividers,
+  },
+];
+
 export const DividerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
+    iosStatus: 'Experimental',
     macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
-  const description =
-    'A Divider is a visual separator that can contain content (text or an icon). Dividers can be horizontal or vertical. As of now, the component is being designed for win32 only.';
+  const description = 'A Divider is a visual separator that can contain content (text or an icon). Dividers can be horizontal or vertical';
+  const mobileDescription = 'A Divider is a visual horizontal separator that seperates content/sections';
 
-  return <Test name="Divider Test" description={description} sections={dividerSections} status={status}></Test>;
+  return (
+    <Test
+      name="Divider Test"
+      description={isMobile ? mobileDescription : description}
+      sections={isMobile ? mobileDividerSections : dividerSections}
+      status={status}
+    ></Test>
+  );
 };

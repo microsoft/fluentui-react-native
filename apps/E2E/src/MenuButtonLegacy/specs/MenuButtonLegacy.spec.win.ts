@@ -1,21 +1,18 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuButtonLegacyPageObject from '../pages/MenuButtonLegacyPageObject.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { MENUBUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { MENU_BUTTON_ACCESSIBILITY_LABEL, MENU_BUTTON_TEST_COMPONENT_LABEL } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButton Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await MenuButtonLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await MenuButtonLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to MenuButton test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToMenuButtonLegacyPage();
-    await MenuButtonLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await MenuButtonLegacyPageObject.navigateToPageAndLoadTests(true);
+    expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

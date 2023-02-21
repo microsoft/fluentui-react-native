@@ -7,8 +7,6 @@ import { ButtonV1 as Button } from '@fluentui/react-native';
 import { testerTheme } from './CustomThemes';
 import type { ThemeNames } from './applyTheme';
 import { themeChoices } from './applyTheme';
-import type { OfficeBrand } from './applyBrand';
-import { brandOptions } from './applyBrand';
 
 export const themePickerStyles = StyleSheet.create({
   pickerRoot: {
@@ -94,10 +92,6 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });
 
 export const ThemePickers: React.FunctionComponent = () => {
-  const onBrandChange = React.useCallback((newBrand: string) => {
-    testerTheme.brand = newBrand as OfficeBrand;
-  }, []);
-
   const onThemeSelected = React.useCallback((newTheme: string) => {
     testerTheme.themeName = newTheme as ThemeNames;
   }, []);
@@ -107,11 +101,6 @@ export const ThemePickers: React.FunctionComponent = () => {
       <View style={themePickerStyles.picker}>
         <PickerLabel>Theme: </PickerLabel>
         <PartPicker initial={testerTheme.themeName} onChange={onThemeSelected} contents={themeChoices} />
-      </View>
-
-      <View style={themePickerStyles.picker}>
-        <PickerLabel>Brand: </PickerLabel>
-        <PartPicker initial={testerTheme.brand} onChange={onBrandChange} contents={brandOptions} />
       </View>
     </View>
   );

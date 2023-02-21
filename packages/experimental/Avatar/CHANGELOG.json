@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Fri, 17 Feb 2023 06:30:14 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.17.16",
+      "version": "0.17.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "mischreiber@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "607657baed4ed6c5a0eb5b4f567a0697ae4e85ba",
+            "comment": "Update native modules to FUA 0.13"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.17.15",
       "version": "0.17.15",

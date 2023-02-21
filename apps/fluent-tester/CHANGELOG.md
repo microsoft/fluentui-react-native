@@ -1,8 +1,107 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 14 Feb 2023 01:26:19 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Feb 2023 17:18:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.9
+
+Tue, 21 Feb 2023 17:18:05 GMT
+
+### Patches
+
+- Fix brand for Office Theme (ruaraki@microsoft.com)
+
+## 0.134.8
+
+Fri, 17 Feb 2023 22:33:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.4.6
+
+## 0.134.7
+
+Fri, 17 Feb 2023 06:30:14 GMT
+
+### Patches
+
+- Update native modules to FUA 0.13 (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.17.16
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.7.6
+
+## 0.134.6
+
+Fri, 17 Feb 2023 01:34:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/divider to v0.2.3
+- Bump @fluentui-react-native/menu to v1.4.5
+
+## 0.134.5
+
+Thu, 16 Feb 2023 22:05:56 GMT
+
+### Patches
+
+- Add hasTooltips as MenuList prop (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.4.4
+
+## 0.134.4
+
+Thu, 16 Feb 2023 00:29:35 GMT
+
+### Patches
+
+- Add Divider E2E tests for desktop platforms (winlarry@microsoft.com)
+
+## 0.134.3
+
+Wed, 15 Feb 2023 18:30:10 GMT
+
+### Patches
+
+- impl mobile divider (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/divider to v0.2.2
+
+## 0.134.2
+
+Wed, 15 Feb 2023 00:51:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/divider to v0.2.1
+
+## 0.134.1
+
+Tue, 14 Feb 2023 22:22:51 GMT
+
+### Patches
+
+- Copy Android tokens to iOS (saadnajmi2@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.6.6
+- Bump @fluentui-react-native/badge to v0.4.27
+- Bump @fluentui-react-native/button to v0.32.32
+- Bump @fluentui-react-native/dropdown to v0.7.29
+- Bump @fluentui-react-native/experimental-button to v0.16.90
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.38
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.31
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.19
+- Bump @fluentui-react-native/experimental-shadow to v0.2.68
+- Bump @fluentui-react-native/experimental-shimmer to v0.8.20
+- Bump @fluentui-react-native/menu to v1.4.3
+- Bump @fluentui-react-native/notification to v0.21.32
+- Bump @fluentui-react-native/switch to v0.8.26
+- Bump @fluentui/react-native to v0.36.2
+
+## 0.134.0
+
+Tue, 14 Feb 2023 21:33:24 GMT
+
+### Minor changes
+
+- Add retractable E2E sections to tester component pages (winlarry@microsoft.com)
 
 ## 0.133.1
 

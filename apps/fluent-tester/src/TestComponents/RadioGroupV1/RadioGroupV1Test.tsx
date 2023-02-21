@@ -47,6 +47,9 @@ const radioGroupV1Sections: TestSection[] = [
       },
     ],
   }),
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'RadioGroup for E2E Testing',
     testID: RADIOGROUPV1_TESTPAGE,
@@ -68,5 +71,14 @@ export const RadioGroupV1Test: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/RadioGroup/SPEC.md';
 
-  return <Test name="RadioGroupV1 Test" description={description} spec={spec} sections={radioGroupV1Sections} status={status} />;
+  return (
+    <Test
+      name="RadioGroupV1 Test"
+      description={description}
+      spec={spec}
+      sections={radioGroupV1Sections}
+      status={status}
+      e2eSections={e2eSections}
+    />
+  );
 };

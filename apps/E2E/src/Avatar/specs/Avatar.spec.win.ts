@@ -1,21 +1,19 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import AvatarPageObject from '../pages/AvatarPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, LINK_A11Y_ROLE, IMAGE_A11Y_ROLE } from '../../common/consts';
+import { Attribute, LINK_A11Y_ROLE, IMAGE_A11Y_ROLE } from '../../common/consts';
 import { AVATAR_ACCESSIBILITY_LABEL, AVATAR_ACCESSIBILITY_LABEL_BY_NAME, AVATAR_ACCESSIBILITY_HINT } from '../consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Avatar Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await AvatarPageObject.waitForInitialPageToDisplay();
+    expect(await AvatarPageObject.isInitialPageDisplayed()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Avatar test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToAvatarPage();
-    await AvatarPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await AvatarPageObject.navigateToPageAndLoadTests(true);
+    expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 });

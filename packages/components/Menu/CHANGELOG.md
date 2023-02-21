@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 14 Feb 2023 01:26:19 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Feb 2023 22:33:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.6
+
+Fri, 17 Feb 2023 22:33:14 GMT
+
+### Patches
+
+- Always pass in a ref to FocusZone (email not defined)
+
+## 1.4.5
+
+Fri, 17 Feb 2023 01:34:44 GMT
+
+### Patches
+
+- Remove enter and space key triggers from disabled menu items (email not defined)
+
+## 1.4.4
+
+Thu, 16 Feb 2023 22:05:56 GMT
+
+### Patches
+
+- Add hasTooltips as MenuList prop (ruaraki@microsoft.com)
+
+## 1.4.3
+
+Tue, 14 Feb 2023 22:22:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.32
 
 ## 1.4.2
 
