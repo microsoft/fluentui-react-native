@@ -43,9 +43,13 @@ exports[`Divider component tests Divider default 1`] = `
           "color": "#424242",
           "fontFamily": "Segoe UI",
           "fontSize": 12,
+          "fontStyle": undefined,
           "fontWeight": "400",
+          "letterSpacing": undefined,
+          "lineHeight": undefined,
           "margin": 0,
           "textAlign": "center",
+          "textDecorationLine": undefined,
         }
       }
     >

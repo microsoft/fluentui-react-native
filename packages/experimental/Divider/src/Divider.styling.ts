@@ -113,12 +113,24 @@ export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens) 
 
   const textProps: TextProps = useMemo(
     () => ({
-      style: {
-        color: tokens.contentColor,
-        textAlign: 'center',
-      },
+      align: 'center',
+      color: tokens.contentColor,
+      italic: tokens.textItalic,
+      size: tokens.textSize,
+      strikethrough: tokens.textStrikethrough,
+      underline: tokens.textUnderline,
+      variant: tokens.textVariant,
+      weight: tokens.textWeight,
     }),
-    [tokens.contentColor],
+    [
+      tokens.contentColor,
+      tokens.textItalic,
+      tokens.textSize,
+      tokens.textStrikethrough,
+      tokens.textUnderline,
+      tokens.textVariant,
+      tokens.textWeight,
+    ],
   );
 
   const iconProps: IconProps = useMemo(
