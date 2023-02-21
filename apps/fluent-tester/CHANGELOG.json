@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 21 Feb 2023 17:18:05 GMT",
+      "tag": "@fluentui-react-native/tester_v0.134.9",
+      "version": "0.134.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "1a272bfc784ec2c3f1b289d8971543c2cfecbe6f",
+            "comment": "Fix brand for Office Theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Feb 2023 22:33:14 GMT",
       "tag": "@fluentui-react-native/tester_v0.134.8",
       "version": "0.134.8",

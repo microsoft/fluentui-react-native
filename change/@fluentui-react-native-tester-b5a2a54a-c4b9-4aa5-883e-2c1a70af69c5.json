@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix brand for Office Theme",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

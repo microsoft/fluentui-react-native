@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 17 Feb 2023 22:33:14 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Feb 2023 17:18:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.9
+
+Tue, 21 Feb 2023 17:18:05 GMT
+
+### Patches
+
+- Fix brand for Office Theme (ruaraki@microsoft.com)
 
 ## 0.134.8
 
