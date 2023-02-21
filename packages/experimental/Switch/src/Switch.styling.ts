@@ -20,6 +20,8 @@ export const switchStates: (keyof SwitchTokens)[] = [
   'disabled',
 ];
 
+const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
+
 export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, SwitchTokens> = {
   tokens: [defaultSwitchTokens, switchName],
   states: switchStates,
@@ -103,6 +105,7 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
+          ...(isMobile && { flexShrink: 1 }),
           ...fontStyles.from(tokens, theme),
         },
       }),
