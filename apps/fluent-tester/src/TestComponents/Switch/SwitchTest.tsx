@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { SWITCH_TESTPAGE } from '../../../../E2E/src/Switch/consts';
 import { View, StyleSheet } from 'react-native';
 import { Switch } from '@fluentui-react-native/switch';
 import { E2ESwitchTest } from './E2ESwitchTest';
 import { commonTestStyles } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { CustomizedSwitch } from './CustomizedSwitch';
 import { Platform } from 'react-native';
 
@@ -132,9 +133,12 @@ const toggleSections: TestSection[] = [
       component: () => <CustomizedSwitch />,
     },
   }),
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Switch E2E Testing',
-    component: () => <E2ESwitchTest />,
+    component: E2ESwitchTest,
   },
 ];
 
@@ -151,5 +155,7 @@ export const SwitchTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/Switch/SPEC.md';
 
-  return <Test name="Switch Test" description={description} spec={spec} sections={toggleSections} status={status} />;
+  return (
+    <Test name="Switch Test" description={description} spec={spec} sections={toggleSections} status={status} e2eSections={e2eSections} />
+  );
 };

@@ -1,11 +1,13 @@
 import { Checkbox } from '@fluentui/react-native';
-import { Theme, useTheme } from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxLegacy/consts';
 import { CheckboxLegacyE2ETest } from './CheckboxLegacyE2ETest';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 function onChangeUncontrolled(isChecked: boolean) {
@@ -164,6 +166,9 @@ const checkboxSections: TestSection[] = [
     name: 'Token Customized Checkboxes',
     component: TokenCheckbox,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Checkbox for E2E Testing',
     component: CheckboxLegacyE2ETest,
@@ -184,5 +189,14 @@ export const CheckboxLegacyTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Checkbox/SPEC.md';
 
-  return <Test name="Checkbox Legacy Test" description={description} spec={spec} sections={checkboxSections} status={status} />;
+  return (
+    <Test
+      name="Checkbox Legacy Test"
+      description={description}
+      spec={spec}
+      sections={checkboxSections}
+      status={status}
+      e2eSections={e2eSections}
+    />
+  );
 };

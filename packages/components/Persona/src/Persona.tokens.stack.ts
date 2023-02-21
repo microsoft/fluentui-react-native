@@ -1,7 +1,7 @@
-import { ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { IPersonaTokens } from './Persona.types';
-import { Theme } from '@fluentui-react-native/framework';
+import type { IPersonaTokens } from './Persona.types';
+import type { Theme } from '@fluentui-react-native/framework';
 import { getHorizontalGap } from './Persona.helpers';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 

@@ -16,12 +16,15 @@ export const MenuContext = React.createContext<MenuContextValue>({
   checked: [],
   defaultChecked: [],
   hasCheckmarks: false,
+  hasTooltips: false,
   isSubmenu: false,
   open: false,
   onCheckedChange: () => false,
   setOpen: () => false,
   shouldFocusOnContainer: false,
   triggerRef: null,
+  hasMaxHeight: false,
+  hasMaxWidth: false,
 });
 
 export const MenuProvider = MenuContext.Provider;

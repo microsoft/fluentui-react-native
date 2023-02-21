@@ -2,8 +2,10 @@
 import * as React from 'react';
 import { Platform, PlatformColor, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
-import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
+import { Icon } from '@fluentui-react-native/icon';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { ICON_TESTPAGE } from '../../../../E2E/src/IconLegacy/consts';
 import { E2ETestingIcon } from './IconLegacyE2ETest';
 import { IconV1E2ETest } from './IconV1E2ETest';
@@ -102,6 +104,9 @@ const iconSections: TestSection[] = [
     name: 'Default Icon',
     component: IconV1Test,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'IconV1 for E2E Testing',
     component: IconV1E2ETest,
@@ -119,5 +124,5 @@ export const IconTest: React.FunctionComponent = () => {
 
   const description = 'Icons are styled images that can be fonts, svgs, or bitmaps';
 
-  return <Test name="Icon Test" description={description} sections={iconSections} status={status}></Test>;
+  return <Test name="Icon Test" description={description} sections={iconSections} status={status} e2eSections={e2eSections}></Test>;
 };

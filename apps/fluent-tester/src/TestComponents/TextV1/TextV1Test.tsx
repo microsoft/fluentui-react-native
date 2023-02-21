@@ -4,7 +4,8 @@ import { V2Usage } from './V2Usage';
 import { MaximumFontSizeUsage } from './MaximumFontSize';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { TextV1E2ETest } from './TextV1E2ETest';
 import { TEXTV1_TESTPAGE } from '../../../../E2E/src/TextV1/consts';
 
@@ -30,6 +31,9 @@ const textSections: TestSection[] = [
     name: 'Pressable Usage',
     component: PressableUsage,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'E2E Testing for TextV1',
     component: TextV1E2ETest,
@@ -47,5 +51,5 @@ export const TextV1Test: React.FunctionComponent = () => {
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';
 
-  return <Test name="TextV1 Test" description={description} sections={textSections} status={status} />;
+  return <Test name="TextV1 Test" description={description} sections={textSections} status={status} e2eSections={e2eSections} />;
 };

@@ -1,8 +1,17 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Feb 2023 22:33:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.1
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/immutable-merge to v1.1.8
 
 ## 0.9.0
 

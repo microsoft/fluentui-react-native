@@ -1,4 +1,4 @@
-import { TextStyle } from 'react-native';
+import type { TextStyle } from 'react-native';
 
 /**
  * A font family designation, made up of one or more font names or groupings

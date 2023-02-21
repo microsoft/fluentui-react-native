@@ -1,7 +1,7 @@
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
 import { useMenuContext } from '../context/menuContext';
-import { MenuListProps, MenuListState } from './MenuList.types';
+import type { MenuListProps, MenuListState } from './MenuList.types';
 
 // Track the radio items so we know what to clear selection from when selectRadio is called
 // Purposefully left out of the hook because
@@ -20,7 +20,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
 
   // MenuList v2 needs to be able to be standalone, but this is not in scope for v1
   // Assuming that checked information will come from parent Menu
-  const { defaultChecked, onCheckedChange: onCheckedChangeOriginal, checked: checkedOriginal, isSubmenu, setOpen } = context;
+  const { defaultChecked, onCheckedChange: onCheckedChangeOriginal, checked: checkedOriginal, isSubmenu, setOpen, triggerRef } = context;
 
   // Convert passed in array to map so that i's easier to look up checked state
   const checkedMap = React.useMemo(() => {
@@ -105,8 +105,9 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
       }
 
       setOpen(e, false /* isOpen */, false /* bubble */);
+      triggerRef?.current?.focus();
     },
-    [isSubmenu, setOpen],
+    [isSubmenu, setOpen, triggerRef],
   );
 
   return {
@@ -120,5 +121,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     selectRadio,
     addRadioItem,
     removeRadioItem,
+    hasMaxHeight: context.hasMaxHeight,
+    hasMaxWidth: context.hasMaxWidth,
   };
 };

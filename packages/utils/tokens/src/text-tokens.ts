@@ -1,8 +1,8 @@
-import { TextStyle } from 'react-native';
-import { ITextProps } from '@fluentui-react-native/adapters';
-import { Theme, Typography } from '@fluentui-react-native/theme-types';
+import type { TextStyle } from 'react-native';
+import type { ITextProps } from '@fluentui-react-native/adapters';
+import type { Theme, Typography } from '@fluentui-react-native/theme-types';
 import { styleFunction } from './token.function';
-import { TokenBuilder } from './tokenBuilder';
+import type { TokenBuilder } from './tokenBuilder';
 
 export interface FontVariantTokens {
   variant?: keyof Typography['variants'];

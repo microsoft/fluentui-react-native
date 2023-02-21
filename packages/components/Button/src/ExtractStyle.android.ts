@@ -1,5 +1,5 @@
 import { memoize } from '@fluentui-react-native/framework';
-import { ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 /**
  * React Native's Pressable does not support curved edges.

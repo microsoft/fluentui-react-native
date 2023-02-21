@@ -1,21 +1,15 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import FocusZonePageObject from '../pages/FocusZonePageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('FocusZone Testing Initialization', function () {
+describe('FocusZone Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
+    await FocusZonePageObject.waitForInitialPageToDisplay();
+    expect(await FocusZonePageObject.isInitialPageDisplayed()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to FocusZone test page', async () => {
-    await FocusZonePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
+  it('Click and navigate to FocusTrapZone test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToFocusZonePage();
-    await FocusZonePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await FocusZonePageObject.isPageLoaded()).toBeTruthy();
+    await FocusZonePageObject.navigateToPageAndLoadTests();
+    expect(await FocusZonePageObject.isPageLoaded()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

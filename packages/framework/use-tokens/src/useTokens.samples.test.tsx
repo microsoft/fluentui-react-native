@@ -1,4 +1,5 @@
-import { TextProps, Text, View } from 'react-native';
+import type { TextProps } from 'react-native';
+import { Text, View } from 'react-native';
 import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { mount } from 'enzyme';

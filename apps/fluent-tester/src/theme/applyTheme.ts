@@ -1,4 +1,4 @@
-import { PartialTheme, Theme, ThemeOptions } from '@fluentui-react-native/framework';
+import type { PartialTheme, Theme, ThemeOptions } from '@fluentui-react-native/framework';
 import { createOfficeTheme, getThemingModule } from '@fluentui-react-native/win32-theme';
 
 export type ThemeNames = 'Default' | 'Office' | 'Caterpillar' | 'Apple';
@@ -55,7 +55,13 @@ const themingModule = getThemingModule()[0];
 export function applyTheme(parent: Theme, name: ThemeNames, appearance: ThemeOptions['appearance']): PartialTheme {
   switch (name) {
     case 'Office':
+<<<<<<< HEAD
       return themingModule ? createOfficeTheme({ appearance, paletteName: 'LowerRibbon_FluentSV' }).theme : {};
+||||||| f939a999b
+      return themingModule ? createOfficeTheme({ appearance, paletteName: 'WhiteColors' }).theme : {};
+=======
+      return themingModule ? createOfficeTheme({ appearance, paletteName: 'Dialogs_FluentSV' }).theme : {};
+>>>>>>> 8c7680d94c8ff5ca3d800ba0d1d0a92147e15af4
     case 'Caterpillar':
       return applyCaterpillarTheme(parent);
     default:

@@ -1,5 +1,6 @@
-import * as React from 'react';
-import { IStackItemProps, stackItemName, IStackItemType } from './StackItem.types';
+import type * as React from 'react';
+import type { IStackItemProps, IStackItemType } from './StackItem.types';
+import { stackItemName } from './StackItem.types';
 import { compose } from '@uifabricshared/foundation-compose';
 import { View } from 'react-native';
 import { filterViewProps } from '@fluentui-react-native/adapters';

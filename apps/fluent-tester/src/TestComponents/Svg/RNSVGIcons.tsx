@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { RNSVGIcons_TESTPAGE } from '../../../../E2E/src/Svg/consts';
 import { /* Text, */ View } from 'react-native';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
 import { faSquareCheck } from '@fortawesome/free-solid-svg-icons/faSquareCheck';

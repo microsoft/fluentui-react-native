@@ -1,20 +1,17 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 import { CHECKBOXV1_TEST_COMPONENT_LABEL, CHECKBOXV1_ACCESSIBILITY_LABEL } from '../consts';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 
 describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await CheckboxV1PageObject.waitForInitialPageToDisplay();
+    expect(await CheckboxV1PageObject.isInitialPageDisplayed()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to CheckboxV1 test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxV1Page();
-    await CheckboxV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await CheckboxV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -25,7 +22,7 @@ describe('CheckboxV1 Accessibility Testing', () => {
     await CheckboxV1PageObject.scrollToTestElement();
   });
 
-  it('Validate "accessibilityRole" defaults to Checkbox "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to "ControlType.Checkbox".', async () => {
     await expect(
       await CheckboxV1PageObject.compareAttribute(CheckboxV1PageObject._primaryComponent, Attribute.AccessibilityRole, CHECKBOX_A11Y_ROLE),
     ).toBeTruthy();

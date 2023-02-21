@@ -1,6 +1,9 @@
-import React, { useState, useCallback, FunctionComponent } from 'react';
-import { AvatarSize, AvatarSizes, AvatarColor, AvatarColors, Avatar, AvatarActive } from '@fluentui-react-native/avatar';
-import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
+import type { FunctionComponent } from 'react';
+import React, { useState, useCallback } from 'react';
+import type { AvatarSize, AvatarColor, AvatarActive } from '@fluentui-react-native/avatar';
+import { AvatarSizes, AvatarColors, Avatar } from '@fluentui-react-native/avatar';
+import type { PresenceBadgeStatus } from '@fluentui-react-native/badge';
+import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
 import { View, Text, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';

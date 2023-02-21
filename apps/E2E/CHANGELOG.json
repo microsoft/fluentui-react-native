@@ -2,6 +2,344 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 17 Feb 2023 18:14:14 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.20.1",
+      "version": "1.20.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "acd9f272f7a5660c30f0ca4717b69a78b59470db",
+            "comment": "Add mobile e2e tests for Divider"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Feb 2023 00:29:35 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.20.0",
+      "version": "1.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "5e59f352a31631da1693f9960eec1c6c8ee69821",
+            "comment": "Add Divider E2E tests for desktop platforms"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Feb 2023 21:33:24 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.19.0",
+      "version": "1.19.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "3181888de02a56fffd116abb0a5414a7e3e8a484",
+            "comment": "Add retractable E2E sections to tester component pages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Feb 2023 02:41:04 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.18.0",
+      "version": "1.18.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "31684b3f201039932ba8860cd4f627c8a3d9f79b",
+            "comment": "Homogenized e2e test names across different components, deprecated unused methods."
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 11 Feb 2023 01:32:30 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.17.1",
+      "version": "1.17.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.30",
+            "commit": "271dc7378669e31e355a4ca8f131a96872d8049a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Feb 2023 13:12:36 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.17.0",
+      "version": "1.17.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "65eb8220287075b3d00f6ae1ced24d9154b55168",
+            "comment": "refector and setup e2e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Feb 2023 19:43:53 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.16.0",
+      "version": "1.16.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4f6c3f5cfa9eb7b5a6f20db63199bdbce70ba232",
+            "comment": "Removing async() from describe blocks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 03 Feb 2023 01:49:36 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.15.0",
+      "version": "1.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "83735cdac7bd038933e31191400008b3187e3eb1",
+            "comment": "Refactor TabsLegacy and TabsV1 E2E tests to have better names + error outputs"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.29",
+            "commit": "83735cdac7bd038933e31191400008b3187e3eb1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 03 Feb 2023 00:10:56 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.14.0",
+      "version": "1.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "0bad6b5cb3e1ed19b51ce4a1fe56367cf260e45f",
+            "comment": "Update Text and TextV1 E2E tests with better names + errors"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Feb 2023 15:15:38 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.3",
+      "version": "1.13.3",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "90b6f344dc1923ae62255d11019fa593e220e587",
+            "comment": "Enable `@rnx-kit/no-const-enum`"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Feb 2023 01:29:39 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.3",
+      "version": "1.13.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.28",
+            "commit": "8babef935750d57271f466a1c446e6531ee1b0a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 01 Feb 2023 22:33:15 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.2",
+      "version": "1.13.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910",
+            "comment": "Enable @typescript-eslint/consistent-type-imports"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.27",
+            "commit": "2d0138c80d7512b905fcf32583760bec2b911910"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 31 Jan 2023 00:18:04 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.1",
+      "version": "1.13.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "0d9250f23248cd003962d189234ec563b2accbb1",
+            "comment": "Use better test names + new e2e methods on IconV1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 20:48:57 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.13.0",
+      "version": "1.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "8122cfed9aaaca2d7f9a76b30691584ffe38c359",
+            "comment": "Try doubling color tokens page timeout time"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 16:05:07 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
+      "version": "1.12.3",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "607343e29ed8ceaea88fb7658f3aba46fb47a018",
+            "comment": "Bump `@rnx-kit/cli` to 0.16"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 15:17:30 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
+      "version": "1.12.3",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4de4c2b37c835ebd9af015ff767f9dd68452f786",
+            "comment": "Migrate to align-deps"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 07:12:38 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.3",
+      "version": "1.12.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.26",
+            "commit": "f6f403b2efe86a229448a618b043601ceefd9a5f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Jan 2023 21:31:18 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.2",
+      "version": "1.12.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "1d0f9e478022dc4d699616ba87f3d98fc7d66b51",
+            "comment": "Change console.error -> console.warn in BasePage"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Jan 2023 17:47:06 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.1",
+      "version": "1.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "f0cc7743370d53aabe24898bc2de5630379a84c4",
+            "comment": "Overhaul Button tests with better errors, refactored code"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Jan 2023 21:31:18 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.12.0",
+      "version": "1.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "59844a6c45d5e48c4feb3650e3f4599ee4e9ad72",
+            "comment": "Removed win32 extenstion from ShimmerPageObj and added android tests\""
+          },
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "f4c332065f929c27b43b78676e6fb4fc6c1854ee",
+            "comment": "Update RadioGroupV1 E2E tests with better errors + use of refactored methods"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.25",
+            "commit": "391f3d691e286300dfad37cad539bed54d4436b4"
+          }
+        ],
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "99479c5a45dba159d35305e2d21ae58d1038a17b",
+            "comment": "Overhaul Checkbox tests with better errors, refactored code"
+          },
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "ff11fb0c2bcc3bcd1c072b124e9e22af4b407405",
+            "comment": "Fix build failing on radiogroup android tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 20 Jan 2023 21:49:21 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.11.2",
       "version": "1.11.2",
