@@ -26,6 +26,7 @@ export interface SpinnerTokens {
   trackColor?: string;
   /**
    * Spinner element color
+   * Note: This is not supported on mobile platforms
    */
   tailColor?: string;
   /**
@@ -39,11 +40,13 @@ export interface SpinnerProps extends ViewProps, SpinnerTokens {
   /**
    * Spinner appearnace
    * @defaultValue 'primary'
+   * Note: This is not supported on mobile platforms
    */
   appearance?: SpinnerAppearance;
   /**
    * Spinner label position
    * @defaultValue 'after'
+   * Note: This is not supported on mobile platforms
    */
   labelPosition?: SpinnerLabelPosition;
   /**
@@ -58,14 +61,9 @@ export interface SpinnerProps extends ViewProps, SpinnerTokens {
   status?: SpinnerStatus;
   /**
    * Spinner label
+   * Note: This is not supported on mobile platforms
    */
   label?: string;
-  /**
-   * Spinner animating or not
-   * @defaultValue 'true'
-   * @platform android
-   */
-  animating?: boolean;
   /**
    * Spinner hidden when not animating or not hidden
    * @defaultValue 'true'
