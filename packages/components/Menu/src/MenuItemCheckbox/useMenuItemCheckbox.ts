@@ -63,7 +63,7 @@ export const useMenuCheckboxInteraction = (
 
   const isSubmenu = useMenuContext().isSubmenu;
 
-  const { checked, onArrowClose } = useMenuListContext();
+  const { checked, hasTooltips, onArrowClose } = useMenuListContext();
   const isChecked = checked?.[name];
 
   // Ensure focus is placed on checkbox after click
@@ -90,7 +90,7 @@ export const useMenuCheckboxInteraction = (
     [disabled, isSubmenu, onArrowClose, toggleCallback],
   );
 
-  const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
+  const keys = disabled ? [] : isSubmenu ? submenuTriggerKeys : triggerKeys;
   const onKeyProps = useKeyDownProps(onKeysPressed, ...keys);
 
   const accessibilityActionsProp = accessibilityActions
@@ -114,6 +114,7 @@ export const useMenuCheckboxInteraction = (
     ...pressable.state,
     checked: isChecked,
     disabled,
+    hasTooltips,
   };
 
   return {

@@ -20,12 +20,15 @@ const avatarSections: TestSection[] = [
         name: 'Customize Usage',
         component: CustomizeUsage,
       },
-      {
-        name: 'Avatar E2E',
-        component: E2EAvatarTest,
-      },
     ],
   }),
+];
+
+const e2eSections: TestSection[] = [
+  {
+    name: 'Avatar E2E',
+    component: E2EAvatarTest,
+  },
 ];
 
 export const AvatarTest: React.FunctionComponent = () => {
@@ -42,5 +45,7 @@ export const AvatarTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Avatar/SPEC.md';
 
-  return <Test name="Avatar Test" description={description} spec={spec} sections={avatarSections} status={status} />;
+  return (
+    <Test name="Avatar Test" description={description} spec={spec} sections={avatarSections} status={status} e2eSections={e2eSections} />
+  );
 };

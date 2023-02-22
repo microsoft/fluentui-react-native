@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/experimental-shadow",
   "entries": [
     {
+      "date": "Tue, 14 Feb 2023 22:22:51 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.68",
+      "version": "0.2.68",
+      "comments": {
+        "patch": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "commit": "c1495153e7ee9eeb66cfc822c9f73436bbf2e7df",
+            "comment": "Copy Android tokens to iOS"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 11 Feb 2023 01:32:30 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.67",
+      "version": "0.2.67",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.1",
+            "commit": "271dc7378669e31e355a4ca8f131a96872d8049a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.57",
+            "commit": "271dc7378669e31e355a4ca8f131a96872d8049a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Feb 2023 01:49:36 GMT",
       "tag": "@fluentui-react-native/experimental-shadow_v0.2.66",
       "version": "0.2.66",

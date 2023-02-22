@@ -2,6 +2,48 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Sat, 11 Feb 2023 01:32:30 GMT",
+      "tag": "@fluentui-react-native/callout_v0.23.1",
+      "version": "0.23.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.18",
+            "commit": "271dc7378669e31e355a4ca8f131a96872d8049a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.8",
+            "commit": "271dc7378669e31e355a4ca8f131a96872d8049a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.13.1",
+            "commit": "271dc7378669e31e355a4ca8f131a96872d8049a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Feb 2023 22:42:47 GMT",
+      "tag": "@fluentui-react-native/callout_v0.23.0",
+      "version": "0.23.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/callout",
+            "commit": "ecf9681b9f078ec6f3f6f79b447ea5f104c0c3c1",
+            "comment": "support minwidth for menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Feb 2023 05:53:20 GMT",
       "tag": "@fluentui-react-native/callout_v0.22.0",
       "version": "0.22.0",

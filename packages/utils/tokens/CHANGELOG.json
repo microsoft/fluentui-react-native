@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Sat, 11 Feb 2023 01:32:30 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.20.8",
+      "version": "0.20.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "271dc7378669e31e355a4ca8f131a96872d8049a",
+            "comment": "Add maxHeight token to layout tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Feb 2023 22:33:17 GMT",
       "tag": "@fluentui-react-native/tokens_v0.20.7",
       "version": "0.20.7",

@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 03 Feb 2023 01:49:36 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Feb 2023 18:14:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.20.1
+
+Fri, 17 Feb 2023 18:14:14 GMT
+
+### Patches
+
+- Add mobile e2e tests for Divider (winlarry@microsoft.com)
+
+## 1.20.0
+
+Thu, 16 Feb 2023 00:29:35 GMT
+
+### Minor changes
+
+- Add Divider E2E tests for desktop platforms (winlarry@microsoft.com)
+
+## 1.19.0
+
+Tue, 14 Feb 2023 21:33:24 GMT
+
+### Minor changes
+
+- Add retractable E2E sections to tester component pages (winlarry@microsoft.com)
+
+## 1.18.0
+
+Tue, 14 Feb 2023 02:41:04 GMT
+
+### Minor changes
+
+- Homogenized e2e test names across different components, deprecated unused methods. (winlarry@microsoft.com)
+
+## 1.17.1
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.30
+
+## 1.17.0
+
+Fri, 10 Feb 2023 13:12:36 GMT
+
+### Minor changes
+
+- refector and setup e2e (rohanpd.work@gmail.com)
+
+## 1.16.0
+
+Thu, 09 Feb 2023 19:43:53 GMT
+
+### Minor changes
+
+- Removing async() from describe blocks (safreibe@microsoft.com)
 
 ## 1.15.0
 

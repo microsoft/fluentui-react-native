@@ -418,6 +418,9 @@ const calloutSections: TestSection[] = [
     name: 'Customized Usage',
     component: CustomCallout,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'E2E Testing Callout',
     component: E2ECalloutTest,
@@ -435,5 +438,5 @@ export const CalloutTest: React.FunctionComponent = () => {
 
   const description = 'A callout is an anchored tip that can be used to teach people or guide them through the app without blocking them.';
 
-  return <Test name="Callout Test" description={description} sections={calloutSections} status={status}></Test>;
+  return <Test name="Callout Test" description={description} sections={calloutSections} status={status} e2eSections={e2eSections}></Test>;
 };

@@ -1,20 +1,17 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
 import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
-import { TAB_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT, TABITEM_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Tabs Legacy Testing Initialization', function () {
+describe('Tabs Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await TabsLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await TabsLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Tabs Legacy test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToTabsLegacyPage();
-    await TabsLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
+    await TabsLegacyPageObject.navigateToPageAndLoadTests(true);
     expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+
     expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

@@ -32,11 +32,23 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
   hasCheckmarks?: boolean;
 
   /**
+   * States that menu items all have tooltips with its text by default.
+   *
+   * This option is useful for programmatically generated items to provide
+   * text for options that end up having tuncated text.
+   */
+  hasTooltips?: boolean;
+
+  /**
    * Callback when checked items change
    *
    * @param checked Array of all currently checked values
    */
   onCheckedChange?: (e: InteractionEvent, checked: string[]) => void;
+  /**
+   * Defines a minumum width for the Menu.
+   */
+  minWidth?: number | string;
 }
 
 export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onCheckedChange'> {
@@ -49,6 +61,7 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   addRadioItem: (name: string) => void;
   removeRadioItem: (name: string) => void;
   hasMaxHeight?: boolean;
+  hasMaxWidth?: boolean;
 }
 
 export interface MenuListSlotProps {
