@@ -1,5 +1,5 @@
 import { NativeEventEmitter } from 'react-native';
-import NativeAppearanceAdditions from './NativeAppearanceAdditions.ios';
+import NativeAppearanceAdditions from './NativeAppearanceAdditions';
 import type { AppearanceAdditions, SizeClass, UserInterfaceLevel, AccessibilityContrastOption } from './NativeAppearanceAdditions.types';
 import { HorizontalSizeClassKey, UserInterfaceLevelKey, AccessibilityContrastOptionKey } from './NativeAppearanceAdditions.types';
 import { memoize } from '@fluentui-react-native/framework';
@@ -22,6 +22,10 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
   }
 
   constructor() {
+    this._horizontalSizeClass = NativeAppearanceAdditions.horizontalSizeClass();
+    this._userInterfaceLevel = NativeAppearanceAdditions.userInterfaceLevel();
+    this._accessibilityContrastOption = NativeAppearanceAdditions.accessibilityContrastOption();
+
     const eventEmitter = new NativeEventEmitter(NativeAppearanceAdditions as any);
     eventEmitter.addListener('appearanceChanged', (newValue) => {
       this._horizontalSizeClass = newValue[HorizontalSizeClassKey];
