@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Wed, 22 Feb 2023 20:36:09 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.18.12",
+      "version": "0.18.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/experimental-appearance-additions to v0.3.2",
+            "commit": "6e9df161e484ad940eb26832701b3762518dd665"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.18.11",
       "version": "0.18.11",

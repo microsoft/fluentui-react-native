@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-appearance-additions",
   "entries": [
     {
+      "date": "Wed, 22 Feb 2023 20:36:09 GMT",
+      "tag": "@fluentui-react-native/experimental-appearance-additions_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-appearance-additions",
+            "commit": "6e9df161e484ad940eb26832701b3762518dd665",
+            "comment": "Create method to initialize trait collection from root view"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/experimental-appearance-additions_v0.3.1",
       "version": "0.3.1",

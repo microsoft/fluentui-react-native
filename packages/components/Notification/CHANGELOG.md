@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Tue, 14 Feb 2023 22:22:51 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Feb 2023 20:36:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.33
+
+Wed, 22 Feb 2023 20:36:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.3.2
 
 ## 0.21.32
 
