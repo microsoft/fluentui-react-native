@@ -92,6 +92,8 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
   return {
     inner: {
       style: {
+        // Only add the prop if it is defined, otherwise every prop will be added and be set to
+        // undefined, which can cause unexpected behaviour with some of the styles
         ...(borderBottomWidth && { borderBottomWidth }),
         ...(borderEndWidth && { borderEndWidth }),
         ...(borderLeftWidth && { borderLeftWidth }),
