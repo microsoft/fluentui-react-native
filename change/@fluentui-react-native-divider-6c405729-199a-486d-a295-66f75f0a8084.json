@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add more snapshot testing examples",
-  "packageName": "@fluentui-react-native/divider",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
