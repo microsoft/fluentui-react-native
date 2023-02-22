@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/divider",
   "entries": [
     {
+      "date": "Wed, 22 Feb 2023 18:07:14 GMT",
+      "tag": "@fluentui-react-native/divider_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/divider",
+            "commit": "ffe9122b5e6f7d93f7efbff5a77fa8efd15db6f3",
+            "comment": "Add more snapshot testing examples"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Feb 2023 01:34:44 GMT",
       "tag": "@fluentui-react-native/divider_v0.2.3",
       "version": "0.2.3",
