@@ -58,8 +58,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             justifyContent: 'center',
             flexDirection: 'row',
             alignSelf: 'flex-start',
-            minWidth: avatarSize,
-            minHeight: avatarSize,
+            width: avatarSize,
+            height: avatarSize,
             opacity: avatarOpacity,
             aspectRatio: 1,
           },
@@ -90,8 +90,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
         return {
           style: {
             ...borderStyles.from(tokens, theme),
-            minWidth: size,
-            minHeight: size,
+            width: size,
+            height: size,
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: _avatarColor,
@@ -110,8 +110,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
         return {
           style: {
             borderRadius: borderRadius,
-            minWidth: size,
-            minHeight: size,
+            width: size,
+            height: size,
             borderWidth: borderWidth,
             borderColor: borderColor,
             ...getRingSpacing(tokens),
@@ -146,8 +146,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
         return {
           style: {
             borderStyle: 'solid',
-            minWidth: ringConfig.size,
-            minHeight: ringConfig.size,
+            width: ringConfig.size,
+            height: ringConfig.size,
             ...borderStyles.from(tokens, theme),
             borderWidth: ringConfig.ringThickness,
             borderColor: ringColor,
@@ -167,8 +167,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           return {
             style: {
               borderStyle: 'solid',
-              minWidth: ringConfig.size,
-              minHeight: ringConfig.size,
+              width: ringConfig.size,
+              height: ringConfig.size,
               ...borderStyles.from(tokens, theme),
 
               backgroundColor: ringBackgroundColor || 'transparent',
