@@ -15,7 +15,9 @@
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "lint": "fluentui-scripts eslint",
-    "test": "fluentui-scripts jest",
+    "test": "yarn test-ios && yarn test-win32",
+    "test-ios": "fluentui-scripts jest -c __tests__/iOS/jest.config.ios.js",
+    "test-win32": "fluentui-scripts jest -c __tests__/win32/jest.config.win32.js",
     "update-snapshots": "fluentui-scripts jest -u",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
