@@ -60,6 +60,7 @@ export const MenuList = compose<MenuListType>({
         Platform.OS === 'macos' ? (
           <Slots.root>
             <Slots.scrollView
+              accessibilityRole="menu"
               showsVerticalScrollIndicator={menuContext.hasMaxHeight}
               showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
             >
