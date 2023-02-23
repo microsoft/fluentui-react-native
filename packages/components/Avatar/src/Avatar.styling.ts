@@ -169,7 +169,6 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
               minWidth: ringConfig.size,
               minHeight: ringConfig.size,
               ...borderStyles.from(tokens, theme),
-
               backgroundColor: ringBackgroundColor || 'transparent',
             },
           };
@@ -184,8 +183,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           status: tokens.badgeStatus,
           position: 'absolute',
           outOfOffice: tokens.outOfOffice,
-          right: tokens.badgeX ? -tokens.badgeX : 0, // -ve sign flips x-axis based on design assumption
-          bottom: tokens.badgeY ? tokens.badgeY : 0,
+          right: tokens.badgeX !== undefined ? tokens.badgeX : undefined,
+          bottom: tokens.badgeY !== undefined ? tokens.badgeY : undefined,
         };
       },
       ['badgeSize', 'badgeStatus', 'badgeX', 'badgeY', 'outOfOffice'],
