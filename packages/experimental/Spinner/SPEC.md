@@ -62,11 +62,11 @@ Users can control the `Spinner` size from the configuration below :
 
 | Size     | Diameter (height/width) | Line Thickness   |
 | -------- | ----------------------- | ---------------- |
-| xx-small | 12                      | 1 (stokeWidth10) |
-| x-small  | 16                      | 1 (stokeWidth10) |
-| medium   | 24                      | 2 (stokeWidth20) |
+| xx-small | 12 (iconSize120)        | 1 (stokeWidth10) |
+| x-small  | 16 (iconSize160)        | 1 (stokeWidth10) |
+| medium   | 24 (iconSize240)        | 2 (stokeWidth20) |
 | large    | 32                      | 3 (stokeWidth30) |
-| x-large  | 36                      | 4 (stokeWidth40) |
+| x-large  | 40 (iconSize360)        | 4 (stokeWidth40) |
 
 #### Label Postion
 
