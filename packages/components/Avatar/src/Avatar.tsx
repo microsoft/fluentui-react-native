@@ -57,7 +57,7 @@ export const Avatar = compose<AvatarType>({
       const { badge, ...mergedProps } = avatar.props;
       const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
       const RingComponent = showRing && !transparentRing ? Slots.ring : Fragment;
-      const hasOuterRing = Platform.OS === 'android';
+      const hasOuterRing = Platform.OS === 'android' && showRing && !transparentRing;
 
       return (
         <Slots.root {...mergedProps}>
