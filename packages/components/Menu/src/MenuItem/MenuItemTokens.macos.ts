@@ -14,7 +14,7 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   gap: globalTokens.size40,
   paddingHorizontal: 5, // hardcoded for now to match NSMenu
   paddingVertical: 3, // hardcoded for now to match NSMenu
-  submenuIndicatorColor: t.colors.neutralForeground2,
+  submenuIndicatorColor: t.colors.neutralForeground1,
   submenuIndicatorPadding: globalTokens.sizeNone,
   submenuIndicatorSize: 16,
   focused: {
