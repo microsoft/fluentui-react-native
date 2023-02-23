@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Thu, 23 Feb 2023 06:19:03 GMT",
+      "tag": "@fluentui-react-native/button_v0.32.32",
+      "version": "0.32.32",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/button",
+            "commit": "f55f1e92d4a29e88a7be12559554dc78d4b0f945",
+            "comment": "Fix icon accessible in button/fab"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Feb 2023 22:22:51 GMT",
       "tag": "@fluentui-react-native/button_v0.32.32",
       "version": "0.32.32",

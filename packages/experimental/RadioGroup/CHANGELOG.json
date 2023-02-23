@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Thu, 23 Feb 2023 06:19:03 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.9.19",
+      "version": "0.9.19",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "f55f1e92d4a29e88a7be12559554dc78d4b0f945",
+            "comment": "Ripple color change"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Feb 2023 22:22:51 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.9.19",
       "version": "0.9.19",

@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Fix icon accessible in button/fab",
-  "packageName": "@fluentui-react-native/button",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "none"
-}
