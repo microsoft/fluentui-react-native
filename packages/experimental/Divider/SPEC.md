@@ -191,13 +191,13 @@ type DividerFontTokens = {
    */
   fontLetterSpacing?: number;
   /**
-   * Render an underline, a strikethrough-line, or both with the text.
-   */
-  fontDecorationLine?: 'normal' | 'underline' | 'line-through' | 'underline line-through';
-  /**
    * Use to make text italic.
    */
   fontStyle?: 'normal' | 'italic';
+  /**
+   * Render an underline, a strikethrough-line, or both with the text.
+   */
+  textDecorationLine?: 'normal' | 'underline' | 'line-through' | 'underline line-through';
   /**
    * Pass a variant type in to use a preset set of Fluent text styles for different purposes (e.g. styling a header, a caption).
    *

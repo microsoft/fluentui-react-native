@@ -14,19 +14,21 @@ export interface FontStyleTokens {
   fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
   fontLineHeight?: TextStyle['lineHeight'];
   fontLetterSpacing?: TextStyle['letterSpacing'];
-  fontDecorationLine?: TextStyle['textDecorationLine'];
   fontStyle?: TextStyle['fontStyle'];
   // Props below are used on iOS only. GH #2268: Import these from RN directly
   fontDynamicTypeRamp?: string;
   fontMaximumSize?: number;
 }
 
-export type FontTokens = FontStyleTokens & FontVariantTokens;
+export interface FontDecorationTokens {
+  textDecorationLine?: TextStyle['textDecorationLine'];
+}
+
+export type FontTokens = FontStyleTokens & FontVariantTokens & FontDecorationTokens;
 
 export const fontStyles: TokenBuilder<FontTokens> = {
   from: (
     {
-      fontDecorationLine,
       fontDynamicTypeRamp,
       fontFamily,
       fontLetterSpacing,
@@ -35,6 +37,7 @@ export const fontStyles: TokenBuilder<FontTokens> = {
       fontSize,
       fontStyle,
       fontWeight,
+      textDecorationLine,
       variant,
     }: FontTokens,
     { typography }: Theme,
@@ -59,14 +62,13 @@ export const fontStyles: TokenBuilder<FontTokens> = {
         letterSpacing: fontLetterSpacing ?? variants[variant]?.letterSpacing,
         dynamicTypeRamp: fontDynamicTypeRamp ?? variants[variant]?.dynamicTypeRamp,
         maximumFontSize: fontMaximumSize,
-        textDecorationLine: fontDecorationLine,
+        textDecorationLine,
       };
     }
 
     return {};
   },
   keys: [
-    'fontDecorationLine',
     'fontDynamicTypeRamp',
     'fontFamily',
     'fontLineHeight',
@@ -76,6 +78,7 @@ export const fontStyles: TokenBuilder<FontTokens> = {
     'fontStyle',
     'fontWeight',
     'variant',
+    'textDecorationLine',
   ],
 };
 
