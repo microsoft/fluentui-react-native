@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Make menu container VO accessible",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "amchiu@microsoft.com",
+  "dependentChangeType": "patch"
+}
