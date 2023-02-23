@@ -37,7 +37,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
 
     disabled: {
       // Unselected, Disabled
-      rippleColor: 'transparent',
+      rippleColor: '#D4D4D4',
       radioBorder: t.colors.neutralStrokeDisabled,
       radioVisibility: 0,
       color: t.colors.neutralForegroundDisabled1,

@@ -32,11 +32,11 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <Button appearance="subtle" disabled style={commonTestStyles.vmargin}>
         Subtle Disabled
       </Button>
-      <FAB icon={iconProps} iconOnly disabled style={commonTestStyles.vmargin} />
+      <FAB icon={iconProps} iconOnly disabled style={commonTestStyles.vmargin} accessibilityLabel="FAB" />
       <FAB icon={iconProps} style={commonTestStyles.vmargin} showContent={showFABText} onClick={flipFABcontent}>
         Click Me!
       </FAB>
-      <FAB appearance="subtle" iconOnly disabled icon={iconProps} style={commonTestStyles.vmargin} />
+      <FAB appearance="subtle" iconOnly disabled icon={iconProps} style={commonTestStyles.vmargin} accessibilityLabel="FAB" />
       <FAB appearance="subtle" icon={iconProps} style={commonTestStyles.vmargin} showContent={showFABText} onClick={flipFABcontent}>
         Click Me!
       </FAB>
