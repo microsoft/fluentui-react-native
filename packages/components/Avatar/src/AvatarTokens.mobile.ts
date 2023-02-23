@@ -119,7 +119,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       ringColor: t.colors.brandStroke1,
     },
     accent: {
-      backgroundColor: t.colors.brandBackgroundTint,
+      backgroundColor: t.host.appearance === 'light' ? t.colors.brandBackgroundTint : t.colors.neutralBackground1,
       iconColor: t.colors.brandForeground1,
       ringColor: t.colors.brandStroke1,
     },

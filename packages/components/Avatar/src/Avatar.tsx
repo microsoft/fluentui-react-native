@@ -90,7 +90,7 @@ function renderAvatar(final: AvatarProps, avatarProps: AvatarProps, Slots: Slots
       ) : (
         svgIconsEnabled && (
           <Slots.fallbackIcon viewBox="0 0 14 16">
-            <Path fill="currentColor" d={getFallbackIconPath()}></Path>
+            <Path fill="currentColor" d={getFallbackIconPath(avatarProps.avatarColor)}></Path>
           </Slots.fallbackIcon>
         )
       )}
