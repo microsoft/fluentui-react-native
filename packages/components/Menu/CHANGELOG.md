@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 17 Feb 2023 22:33:14 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Feb 2023 22:09:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.7
+
+Thu, 23 Feb 2023 22:09:20 GMT
+
+### Patches
+
+- Update MenuItem text color (email not defined)
 
 ## 1.4.6
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Thu, 23 Feb 2023 22:09:20 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.7",
+      "version": "1.4.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "d846d4d4fea37c57ed9af07c3fbb778905e66f77",
+            "comment": "Update MenuItem text color"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Feb 2023 22:33:14 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.6",
       "version": "1.4.6",
