@@ -14,6 +14,8 @@ export interface FontStyleTokens {
   fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
   fontLineHeight?: TextStyle['lineHeight'];
   fontLetterSpacing?: TextStyle['letterSpacing'];
+  fontDecorationLine?: TextStyle['textDecorationLine'];
+  fontStyle?: TextStyle['fontStyle'];
   // Props below are used on iOS only. GH #2268: Import these from RN directly
   fontDynamicTypeRamp?: string;
   fontMaximumSize?: number;
@@ -23,7 +25,18 @@ export type FontTokens = FontStyleTokens & FontVariantTokens;
 
 export const fontStyles: TokenBuilder<FontTokens> = {
   from: (
-    { fontDynamicTypeRamp, fontFamily, fontLetterSpacing, fontLineHeight, fontMaximumSize, fontSize, fontWeight, variant }: FontTokens,
+    {
+      fontDecorationLine,
+      fontDynamicTypeRamp,
+      fontFamily,
+      fontLetterSpacing,
+      fontLineHeight,
+      fontMaximumSize,
+      fontSize,
+      fontStyle,
+      fontWeight,
+      variant,
+    }: FontTokens,
     { typography }: Theme,
   ) => {
     const { families, sizes, weights, variants } = typography;
@@ -40,23 +53,27 @@ export const fontStyles: TokenBuilder<FontTokens> = {
       return {
         fontFamily: families[fontFamily] ?? fontFamily ?? families[variants[variant]?.face] ?? variants[variant]?.face,
         fontSize: sizes[fontSize] ?? fontSize ?? sizes[variants[variant]?.size] ?? variants[variant]?.size,
+        fontStyle: fontStyle,
         fontWeight: weights[fontWeight] ?? fontWeight ?? weights[variants[variant]?.weight] ?? variants[variant]?.weight,
         lineHeight: fontLineHeight ?? variants[variant]?.lineHeight,
         letterSpacing: fontLetterSpacing ?? variants[variant]?.letterSpacing,
         dynamicTypeRamp: fontDynamicTypeRamp ?? variants[variant]?.dynamicTypeRamp,
         maximumFontSize: fontMaximumSize,
+        textDecorationLine: fontDecorationLine,
       };
     }
 
     return {};
   },
   keys: [
+    'fontDecorationLine',
     'fontDynamicTypeRamp',
     'fontFamily',
     'fontLineHeight',
     'fontLetterSpacing',
     'fontMaximumSize',
     'fontSize',
+    'fontStyle',
     'fontWeight',
     'variant',
   ],

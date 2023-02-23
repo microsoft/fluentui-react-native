@@ -1,6 +1,6 @@
 import type { ViewProps, ColorValue } from 'react-native';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
-import type { LayoutTokens } from '@fluentui-react-native/tokens';
+import type { LayoutTokens, FontTokens } from '@fluentui-react-native/tokens';
 import type { TextProps } from '@fluentui-react-native/text';
 
 export const dividerName = 'Divider';
@@ -42,7 +42,7 @@ export interface DividerProps {
   vertical?: boolean;
 }
 
-export interface DividerTokens extends LayoutTokens {
+export interface DividerTokens extends LayoutTokens, Omit<FontTokens, 'fontDynamicTypeRamp' | 'fontMaximumSize'> {
   /**
    * The color of the content passed into the divider. This is overriden if the `color` prop is set.
    */
@@ -71,31 +71,6 @@ export interface DividerTokens extends LayoutTokens {
    * @default 8
    */
   minLineSize?: number;
-  /**
-   * If text is rendered in the divider, this flag controls whether it is italicized or not.
-   */
-  textItalic?: TextProps['italic'];
-  /**
-   * If text is rendered in the divider, this controls its size.
-   */
-  textSize?: TextProps['size'];
-  /**
-   * If text is rendered in the divider, this flag, if true, renders a strikethrough line.
-   */
-  textStrikethrough?: TextProps['strikethrough'];
-  /**
-   * If text is rendered in the divider, this flag, if true, renders an underline.
-   */
-  textUnderline?: TextProps['underline'];
-  /**
-   * If text is rendered in the divider, this will render the text as the given Typography variant.
-   * @default 'secondaryStandard
-   */
-  textVariant?: TextProps['variant'];
-  /**
-   * If text is rendered in the divider, this controls its weight (how bold it appears).
-   */
-  textWeight?: TextProps['weight'];
   /**
    * The thickness of the Divider lines
    * @default 1

@@ -16,8 +16,8 @@ const CustomText = Text.customize({ margin: 8 });
 
 const ColoredDivider = Divider.customize({ contentColor: '#bf5700', lineColor: '#bf5700' });
 const ThickDivider = Divider.customize({ thickness: 3 });
-const TextVariantDivider = Divider.customize({ textVariant: 'subtitle2Strong' });
-const StyledTextDivider = Divider.customize({ textSize: 100, textItalic: true, textUnderline: true });
+const TextVariantDivider = Divider.customize({ variant: 'subtitle2Strong' });
+const StyledTextDivider = Divider.customize({ fontSize: 10, fontStyle: 'italic', fontDecorationLine: 'underline' });
 
 const dividerTestStyles = StyleSheet.create({
   verticalDividerContainer: {

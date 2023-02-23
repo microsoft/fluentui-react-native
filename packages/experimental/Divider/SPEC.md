@@ -124,7 +124,7 @@ export interface DividerProps {
 Tokens can be used to customize the styling of the control by using the customize function on the `Divider`. For more information on using the customize API, please see [this page](https://github.com/microsoft/fluentui-react-native/blob/main/packages/framework/composition/README.md). The `Divider` has the following tokens:
 
 ```tsx
-export interface DividerTokens extends LayoutTokens {
+export interface DividerTokens extends LayoutTokens, Omit<FontTokens, 'fontDynamicTypeRamp' | 'fontMaximumSize'> {
   /**
    * The color of the content passed into the divider. This is overriden if the `color` prop is set.
    */
@@ -154,34 +154,80 @@ export interface DividerTokens extends LayoutTokens {
    */
   minLineSize?: number;
   /**
-   * If text is rendered in the divider, this flag controls whether it is italicized or not.
-   */
-  textItalic?: TextProps['italic'];
-  /**
-   * If text is rendered in the divider, this controls its size.
-   */
-  textSize?: TextProps['size'];
-  /**
-   * If text is rendered in the divider, this flag, if true, renders a strikethrough line.
-   */
-  textStrikethrough?: TextProps['strikethrough'];
-  /**
-   * If text is rendered in the divider, this flag, if true, renders an underline.
-   */
-  textUnderline?: TextProps['underline'];
-  /**
-   * If text is rendered in the divider, this will render the text as the given Typography variant.
-   * @default 'secondaryStandard
-   */
-  textVariant?: TextProps['variant'];
-  /**
-   * If text is rendered in the divider, this controls its weight (how bold it appears).
-   */
-  textWeight?: TextProps['weight'];
-  /**
    * The thickness of the Divider lines
    * @default 1
    */
   thickness?: number;
 }
+```
+
+In addition to the tokens listed here, Divider also has tokens to control text and layout styling.
+
+#### Text Tokens
+
+If text is passed into the divider, the following tokens can be used to add styling to the text.
+
+```tsx
+// not an actual type - these are the properties DividerTokens inherit
+type DividerFontTokens = {
+  /**
+   * Change the font family of the passed text
+   */
+  fontFamily?: string;
+  /**
+   * Increase or decrease the size of the passed text.
+   */
+  fontSize?: keyof Typography['sizes'] | TextStyle['fontSize'];
+  /**
+   * Make text bolder or thinner.
+   */
+  fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
+  /**
+   * Change the height of each line of text rendered.
+   */
+  fontLineHeight?: number;
+  /**
+   * Add spacing between each character within the text string.
+   */
+  fontLetterSpacing?: number;
+  /**
+   * Render an underline, a strikethrough-line, or both with the text.
+   */
+  fontDecorationLine?: 'normal' | 'underline' | 'line-through' | 'underline line-through';
+  /**
+   * Use to make text italic.
+   */
+  fontStyle?: 'normal' | 'italic';
+  /**
+   * Pass a variant type in to use a preset set of Fluent text styles for different purposes (e.g. styling a header, a caption).
+   *
+   * If you specify a variant while modifying a text style (e.g. passing a variant while also passing a custom fontSize), your styles will take precedence.
+   */
+  variant?: Variants;
+};
+```
+
+#### Layout Tokens
+
+To apply margins / padding to the divider, adjust these tokens.
+
+```tsx
+// not an actual type - these are the properties DividerTokens inherit
+type DividerLayoutTokens = {
+  /**
+   * Adjust the tokens below to set ceilings and floors on the divider width and height.
+   */
+  minWidth?: string | number;
+  maxWidth?: string | number;
+  minHeight?: string | number;
+  maxHeight?: string | number;
+  /**
+   * Adjust the tokens below to set custom spacing for the divider (if inset is not enough).
+   */
+  padding?: string | number;
+  paddingHorizontal?: string | number;
+  paddingVertical?: string | number;
+  paddingStart?: string | number;
+  paddingEnd?: string | number;
+};
 ```

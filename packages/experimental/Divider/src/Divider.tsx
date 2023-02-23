@@ -38,7 +38,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   });
 
   // get slot props from these tokens
-  const { rootProps, beforeLineProps, afterLineProps, wrapperProps, textProps, iconProps } = useDividerSlotProps(props, tokens);
+  const { rootProps, beforeLineProps, afterLineProps, wrapperProps, textProps, iconProps } = useDividerSlotProps(props, tokens, theme);
 
   // build slots
   const RootSlot = useSlot<ViewProps>(View, rootProps);
