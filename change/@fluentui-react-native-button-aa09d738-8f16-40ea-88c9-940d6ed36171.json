@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix snapshot tests failing new FontToken props",
-  "packageName": "@fluentui-react-native/button",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

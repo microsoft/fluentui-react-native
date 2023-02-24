@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add examples for customized dividers",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

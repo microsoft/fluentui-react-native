@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix underline styling not applying as a result of FontToken changes",
-  "packageName": "@fluentui-react-native/link",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
