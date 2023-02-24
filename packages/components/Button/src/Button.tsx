@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
