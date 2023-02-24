@@ -15,8 +15,6 @@ import { defaultButtonTokens } from './ButtonTokens';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'block',
-  'primary',
-  'subtle',
   'outline',
   'hovered',
   'small',
@@ -25,6 +23,8 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'hasContent',
   'hasIconAfter',
   'hasIconBefore',
+  'primary',
+  'subtle',
   'rounded',
   'circular',
   'square',
@@ -37,23 +37,21 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
-    ...(Platform.OS === 'android' && {
-      rippleContainer: buildProps(
-        (tokens: ButtonTokens) => {
-          return {
-            style: {
-              flexDirection: 'row',
-              alignSelf: 'baseline',
-              borderColor: tokens.borderInnerColor,
-              borderWidth: tokens.borderInnerWidth,
-              borderRadius: tokens.borderRadius,
-              overflow: 'hidden',
-            },
-          };
-        },
-        ['borderRadius'],
-      ),
-    }),
+    rippleContainer: buildProps(
+      (tokens: ButtonTokens) => {
+        return {
+          style: {
+            flexDirection: 'row',
+            alignSelf: 'baseline',
+            width: tokens.width,
+            borderColor: tokens.borderInnerColor,
+            borderWidth: tokens.borderInnerWidth,
+            borderRadius: tokens.borderInnerRadius,
+          },
+        };
+      },
+      ['borderRadius'],
+    ),
     root: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {

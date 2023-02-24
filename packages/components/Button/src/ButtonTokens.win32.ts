@@ -37,10 +37,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       padding: globalTokens.size40 - globalTokens.stroke.width10,
       borderWidth: globalTokens.stroke.width10,
       iconSize: 16,
-      focused: {
-        borderWidth: 0,
-        padding: globalTokens.size40,
-      },
       hasContent: {
         minWidth: 64,
         minHeight: 32,
@@ -51,8 +47,17 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         hasIconBefore: {
           spacingIconContentBefore: globalTokens.size40,
         },
-        focused: {
-          paddingHorizontal: globalTokens.size80,
+        primary: {
+          focused: {
+            padding: globalTokens.size40 - globalTokens.stroke.width20,
+            paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
+            borderWidth: 1,
+            borderInnerWidth: 1,
+            borderInnerRadius: 4,
+            borderRadius: 3,
+            minWidth: 62,
+            minHeight: 30,
+          },
         },
       },
     },

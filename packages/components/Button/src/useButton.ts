@@ -3,6 +3,7 @@ import * as React from 'react';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 import type { ButtonProps, ButtonInfo } from './Button.types';
+import { Platform } from 'react-native';
 
 export const useButton = (props: ButtonProps): ButtonInfo => {
   const defaultComponentRef = React.useRef(null);
@@ -14,6 +15,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   const pressable = usePressableState({ ...rest, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
+  const useTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary';
 
   return {
     props: {
@@ -29,7 +31,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
       accessibilityRole: accessibilityRole || 'button',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
       accessibilityLabel: props.accessibilityLabel,
-      enableFocusRing: enableFocusRing ?? true,
+      enableFocusRing: enableFocusRing ?? !useTwoToneFocusBorder,
       focusable: focusable ?? !isDisabled,
       ref: useViewCommandFocus(componentRef),
       iconPosition: props.iconPosition || 'before',

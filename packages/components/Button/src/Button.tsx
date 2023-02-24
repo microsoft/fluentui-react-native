@@ -89,7 +89,7 @@ export const Button = compose<ButtonType>({
         </React.Fragment>
       );
 
-      const hasRipple = Platform.OS === 'android';
+      const hasRipple = true;
       if (hasRipple) {
         const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
