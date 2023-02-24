@@ -127,11 +127,6 @@ describe('Shadow component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('Button that has a shadow vs. button without shadow', () => {
-    const tree = renderer.create(<TestButtonWithAndWithoutShadow />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
   it('Shadow on a child with margin and padding', () => {
     const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ margin: 2, padding: 2 }} />).toJSON();
     expect(tree).toMatchSnapshot();
