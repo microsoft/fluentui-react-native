@@ -5,7 +5,6 @@ import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
 
 const backgroundColor = { backgroundColor: 'red' };
 interface ShadowTestProps {
@@ -33,20 +32,6 @@ const TestPressableWithAndWithoutShadow: React.FunctionComponent = () => {
       </Shadow>
       <View>
         <Pressable style={backgroundColor} />
-      </View>
-    </View>
-  );
-};
-
-const TestButtonWithAndWithoutShadow: React.FunctionComponent = () => {
-  const theme = useFluentTheme();
-  return (
-    <View>
-      <Shadow shadowToken={theme.shadows['shadow16']}>
-        <Button>Button with shadow</Button>
-      </Shadow>
-      <View>
-        <Button>Button without shadow</Button>
       </View>
     </View>
   );
