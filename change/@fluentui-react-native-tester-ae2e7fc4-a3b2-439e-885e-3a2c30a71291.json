@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update shadow component to only set a style prop if it is defined",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

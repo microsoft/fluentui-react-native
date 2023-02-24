@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Fri, 24 Feb 2023 20:39:58 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 23:53:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.71
+
+Fri, 24 Feb 2023 23:53:36 GMT
+
+### Patches
+
+- Update shadow component to only set a style prop if it is defined (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.2.70
 

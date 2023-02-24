@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 24 Feb 2023 20:39:59 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 23:53:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.16
+
+Fri, 24 Feb 2023 23:53:36 GMT
+
+### Patches
+
+- Update shadow component to only set a style prop if it is defined (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/avatar to v1.6.9
+- Bump @fluentui-react-native/badge to v0.4.30
+- Bump @fluentui-react-native/button to v0.32.35
+- Bump @fluentui-react-native/dropdown to v0.7.32
+- Bump @fluentui-react-native/experimental-button to v0.16.93
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.34
+- Bump @fluentui-react-native/experimental-shadow to v0.2.71
+- Bump @fluentui-react-native/menu to v1.4.11
+- Bump @fluentui-react-native/notification to v0.21.36
+- Bump @fluentui/react-native to v0.36.5
 
 ## 0.134.15
 
