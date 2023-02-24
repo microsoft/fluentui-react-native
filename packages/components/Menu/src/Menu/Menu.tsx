@@ -28,7 +28,7 @@ export const Menu = stagedComponent((props: MenuProps) => {
     return (
       <MenuProvider value={contextValue}>
         {menuTrigger}
-        {state.open && menuPopover}
+        {state.open && state.shouldFocusOnContainer !== undefined && menuPopover}
       </MenuProvider>
     );
   };
