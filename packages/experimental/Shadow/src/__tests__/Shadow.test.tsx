@@ -25,12 +25,17 @@ const TestShadow: React.FunctionComponent<ShadowTestProps> = (props: ShadowTestP
   );
 };
 
-const TestPressableWithShadow: React.FunctionComponent = () => {
+const TestPressableWithAndWithoutShadow: React.FunctionComponent = () => {
   const theme = useFluentTheme();
   return (
-    <Shadow shadowToken={theme.shadows['shadow16']}>
-      <Pressable style={backgroundColor} />
-    </Shadow>
+    <View>
+      <Shadow shadowToken={theme.shadows['shadow16']}>
+        <Pressable style={backgroundColor} />
+      </Shadow>
+      <View>
+        <Pressable style={backgroundColor} />
+      </View>
+    </View>
   );
 };
 
@@ -117,8 +122,8 @@ describe('Shadow component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('Pressable that has a shadow', () => {
-    const tree = renderer.create(<TestPressableWithShadow />).toJSON();
+  it('Pressable that has a shadow vs. pressable without shadow', () => {
+    const tree = renderer.create(<TestPressableWithAndWithoutShadow />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
