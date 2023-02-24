@@ -1,6 +1,6 @@
 if (__DEV__) {
   console.warn(
-    'The @fluentui-react-native/exprimental-button package is deprecated. The contents of this package have been moved to @fluentui-react-native/button. If you need to use the Button component from this package, please use ButtonV1 from @fluentui-react-native/button.',
+    'The @fluentui-react-native/experimental-button package is deprecated. The contents of this package have been moved to @fluentui-react-native/button. If you need to use the Button component from this package, please use ButtonV1 from @fluentui-react-native/button.',
   );
 }
 
