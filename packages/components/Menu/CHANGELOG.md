@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 24 Feb 2023 02:22:40 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 03:20:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.9
+
+Fri, 24 Feb 2023 03:20:53 GMT
+
+### Patches
+
+- Make menu container VO accessible (amchiu@microsoft.com)
 
 ## 1.4.8
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 24 Feb 2023 03:20:53 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.9",
+      "version": "1.4.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "6377d71ad783bb48310d842ef05de87bf0915b09",
+            "comment": "Make menu container VO accessible"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 02:22:40 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.8",
       "version": "1.4.8",
