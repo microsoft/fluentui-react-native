@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/divider
 
-This log was last generated on Wed, 15 Feb 2023 18:30:10 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 02:22:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Minor changes
+
+- Added styling tokens for styling Divider text (winlarry@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.9.2
+- Bump @fluentui-react-native/icon to v0.17.13
+- Bump @fluentui-react-native/text to v0.19.21
+- Bump @fluentui-react-native/tokens to v0.20.9
+
+## 0.2.4
+
+Wed, 22 Feb 2023 18:07:14 GMT
+
+### Patches
+
+- Add more snapshot testing examples (winlarry@microsoft.com)
+
+## 0.2.3
+
+Fri, 17 Feb 2023 01:34:44 GMT
+
+### Patches
+
+- Update SPEC.md documentation for Divider (winlarry@microsoft.com)
 
 ## 0.2.2
 

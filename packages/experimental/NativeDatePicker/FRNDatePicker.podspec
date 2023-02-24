@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "14.0"
   s.ios.source_files      = "ios/*.{swift,h,m}"
-  s.ios.dependency 'MicrosoftFluentUI', '0.10.0'
+  s.ios.dependency 'MicrosoftFluentUI', '0.13.1'
 
 end

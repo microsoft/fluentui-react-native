@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 16 Feb 2023 00:29:35 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 02:22:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.20.2
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.31
+
+## 1.20.1
+
+Fri, 17 Feb 2023 18:14:14 GMT
+
+### Patches
+
+- Add mobile e2e tests for Divider (winlarry@microsoft.com)
 
 ## 1.20.0
 

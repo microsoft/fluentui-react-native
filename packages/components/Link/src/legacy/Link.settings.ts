@@ -13,6 +13,7 @@ export const settings: IComposeSettings<ILinkType> = [
       borderStyle: 'solid',
       borderWidth: 2,
       borderRadius: 4,
+      textDecorationLine: 'underline',
     },
     root: {
       accessible: true,

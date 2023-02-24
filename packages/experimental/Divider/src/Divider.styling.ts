@@ -6,6 +6,7 @@ import type { ViewProps, ColorValue } from 'react-native';
 import { Platform } from 'react-native';
 
 import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
+import { fontStyles } from '@fluentui-react-native/tokens';
 
 const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 
@@ -29,7 +30,7 @@ const getIconProps = (contentColor: ColorValue, icon: IconProps): IconProps => {
   }
 };
 
-export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens) => {
+export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens, theme: Theme) => {
   const rootProps: ViewProps = useMemo(
     () => ({
       style: {
@@ -115,11 +116,13 @@ export const useDividerSlotProps = (props: DividerProps, tokens: DividerTokens) 
   const textProps: TextProps = useMemo(
     () => ({
       style: {
-        color: tokens.contentColor,
         textAlign: 'center',
+        color: tokens.contentColor,
+        ...fontStyles.from(tokens, theme),
       },
+      variant: tokens.variant,
     }),
-    [tokens.contentColor],
+    [tokens, theme],
   );
 
   const iconProps: IconProps = useMemo(

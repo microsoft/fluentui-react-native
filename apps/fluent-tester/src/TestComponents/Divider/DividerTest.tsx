@@ -12,15 +12,23 @@ import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
 
 const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
-const CustomDivider = Divider.customize({ thickness: 3, paddingVertical: 4 });
+const PaddedDivider = Divider.customize({ paddingVertical: 4, thickness: 2 });
 const CustomText = Text.customize({ margin: 8 });
 
-const RedDivider = Divider.customize({ contentColor: 'red', lineColor: 'red' });
+const ColoredDivider = Divider.customize({ contentColor: '#bf5700', lineColor: '#bf5700' });
+const ThickDivider = Divider.customize({ thickness: 3 });
+const TextVariantDivider = Divider.customize({ variant: 'subtitle2Strong' });
+const StyledTextDivider = Divider.customize({ fontSize: 10, fontStyle: 'italic', textDecorationLine: 'underline' });
 
 const dividerTestStyles = StyleSheet.create({
   verticalDividerContainer: {
     marginVertical: 8,
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  horizontalDividerContainer: {
+    height: 120,
+    flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
 });
@@ -31,9 +39,9 @@ export const HorizontalDividers: React.FunctionComponent = () => (
     <Divider />
     <CustomText>Regular divider with no content above.</CustomText>
     <Divider>Divider with text content.</Divider>
-    <Divider insetSize={16}>Colored divider with text + inset.</Divider>
-    <CustomDivider alignContent="start">I am a start-aligned divider with a thickness = 3</CustomDivider>
-    <CustomDivider alignContent="end">I am a end-aligned divider with a thickness = 3</CustomDivider>
+    <Divider insetSize={16}>Divider with text + inset.</Divider>
+    <PaddedDivider alignContent="start">I am a start-aligned divider</PaddedDivider>
+    <PaddedDivider alignContent="end">I am a end-aligned divider</PaddedDivider>
   </Stack>
 );
 
@@ -44,10 +52,10 @@ export const VerticalDividers: React.FunctionComponent = () => (
       <Divider vertical />
       <CustomText>Divider with an inset {'->'}</CustomText>
       <Divider vertical insetSize={16} />
-      <CustomDivider vertical>Thick divider with text</CustomDivider>
-      <RedDivider vertical alignContent="start">
+      <PaddedDivider vertical>Divider with text</PaddedDivider>
+      <Divider vertical alignContent="start">
         Start-aligned divider
-      </RedDivider>
+      </Divider>
       <Divider vertical alignContent="end">
         End-aligned divider
       </Divider>
@@ -63,10 +71,10 @@ export const VerticalDividers: React.FunctionComponent = () => (
 
 export const DividersWithAppearance: React.FunctionComponent = () => (
   <Stack style={commonTestStyles.stack}>
-    <CustomDivider appearance="default">Default divider</CustomDivider>
-    <CustomDivider appearance="subtle">Subtle divider</CustomDivider>
-    <CustomDivider appearance="brand">Branded divider</CustomDivider>
-    <CustomDivider appearance="strong">Strong divider</CustomDivider>
+    <PaddedDivider appearance="default">Default divider</PaddedDivider>
+    <PaddedDivider appearance="subtle">Subtle divider</PaddedDivider>
+    <PaddedDivider appearance="brand">Branded divider</PaddedDivider>
+    <PaddedDivider appearance="strong">Strong divider</PaddedDivider>
   </Stack>
 );
 
@@ -83,6 +91,23 @@ export const DividersWithIcons: React.FunctionComponent = () => (
   </Stack>
 );
 
+export const CustomDividers: React.FunctionComponent = () => (
+  <Stack style={commonTestStyles.stack}>
+    <View style={dividerTestStyles.horizontalDividerContainer}>
+      <ColoredDivider>Divider with color</ColoredDivider>
+      <ThickDivider>Divider with thickness</ThickDivider>
+      <TextVariantDivider>Divider with text variant</TextVariantDivider>
+      <StyledTextDivider>Divider with text styling</StyledTextDivider>
+    </View>
+    <View style={dividerTestStyles.verticalDividerContainer}>
+      <ColoredDivider vertical>Divider with color</ColoredDivider>
+      <ThickDivider vertical>Divider with thickness</ThickDivider>
+      <TextVariantDivider vertical>Divider with text variant</TextVariantDivider>
+      <StyledTextDivider vertical>Divider with text styling</StyledTextDivider>
+    </View>
+  </Stack>
+);
+
 const dividerSections: TestSection[] = [
   {
     name: 'Horizontal Dividers',
@@ -96,6 +121,10 @@ const dividerSections: TestSection[] = [
   {
     name: 'Divider Appearances',
     component: DividersWithAppearance,
+  },
+  {
+    name: 'Custom Dividers',
+    component: CustomDividers,
   },
   {
     name: 'Dividers with Icons',

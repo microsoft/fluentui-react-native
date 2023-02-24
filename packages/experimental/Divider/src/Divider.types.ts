@@ -1,4 +1,5 @@
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
+import type { LayoutTokens, FontTokens } from '@fluentui-react-native/tokens';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
 import type { ViewProps, ColorValue } from 'react-native';
@@ -42,7 +43,7 @@ export interface DividerProps {
   vertical?: boolean;
 }
 
-export interface DividerTokens extends LayoutTokens {
+export interface DividerTokens extends LayoutTokens, Omit<FontTokens, 'fontDynamicTypeRamp' | 'fontMaximumSize'> {
   /**
    * The color of the content passed into the divider. This is overriden if the `color` prop is set.
    */

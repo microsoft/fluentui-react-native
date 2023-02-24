@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Fri, 24 Feb 2023 02:22:40 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.20.9",
+      "version": "0.20.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "a266ece54bfecbd7edd912a26f46dae655bf48ef",
+            "comment": "Add fontStyle and textDecorationLine to FontStyleTokens interface"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 11 Feb 2023 01:32:30 GMT",
       "tag": "@fluentui-react-native/tokens_v0.20.8",
       "version": "0.20.8",
