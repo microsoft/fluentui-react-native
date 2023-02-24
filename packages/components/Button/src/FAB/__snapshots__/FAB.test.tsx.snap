@@ -90,7 +90,6 @@ exports[`Default FAB (iOS) 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
-      "width": undefined,
     }
   }
 >
@@ -131,7 +130,6 @@ exports[`Default FAB (iOS) 1`] = `
         },
         "shadowOpacity": 0.14,
         "shadowRadius": 4,
-        "width": undefined,
       }
     }
   >

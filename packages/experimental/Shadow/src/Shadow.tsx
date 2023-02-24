@@ -39,6 +39,12 @@ const getStylePropsForShadowViews = memoize(getStylePropsForShadowViewsWorker);
 function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shadowToken: ShadowToken) {
   const shadowTokenStyleSet = getShadowTokenStyleSet(shadowToken);
 
+  if (__DEV__) {
+    if (!childStyleProps.backgroundColor) {
+      console.warn('The View that the Shadow is set on must have a background color set');
+    }
+  }
+
   const {
     borderBottomWidth,
     borderEndWidth,
@@ -83,69 +89,64 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
     ...restOfChildStyleProps
   } = childStyleProps;
 
-  if (__DEV__) {
-    if (!childStyleProps.backgroundColor) {
-      console.warn('The View that the Shadow is set on must have a background color set');
-    }
-  }
+  // Remove undefined properties, otherwise every prop will be added and be set to
+  // undefined, which can cause unexpected behaviour with some of the styles
+  const innerStyle = removeUndefinedProperties({
+    borderBottomWidth,
+    borderEndWidth,
+    borderLeftWidth,
+    borderRightWidth,
+    borderStartWidth,
+    borderTopWidth,
+    borderWidth,
 
-  return {
-    inner: {
-      style: {
-        // Only add the prop if it is defined, otherwise every prop will be added and be set to
-        // undefined, which can cause unexpected behaviour with some of the styles
-        ...(borderBottomWidth && { borderBottomWidth }),
-        ...(borderEndWidth && { borderEndWidth }),
-        ...(borderLeftWidth && { borderLeftWidth }),
-        ...(borderRightWidth && { borderRightWidth }),
-        ...(borderStartWidth && { borderStartWidth }),
-        ...(borderTopWidth && { borderTopWidth }),
-        ...(borderWidth && { borderWidth }),
+    padding,
+    paddingBottom,
+    paddingEnd,
+    paddingHorizontal,
+    paddingLeft,
+    paddingRight,
+    paddingStart,
+    paddingTop,
+    paddingVertical,
 
-        ...(padding && { padding }),
-        ...(paddingBottom && { paddingBottom }),
-        ...(paddingEnd && { paddingEnd }),
-        ...(paddingHorizontal && { paddingHorizontal }),
-        ...(paddingLeft && { paddingLeft }),
-        ...(paddingRight && { paddingRight }),
-        ...(paddingStart && { paddingStart }),
-        ...(paddingTop && { paddingTop }),
-        ...(paddingVertical && { paddingVertical }),
+    alignItems,
 
-        ...(alignItems && { alignItems }),
+    flexWrap,
+    flexDirection,
 
-        ...(flexWrap && { flexWrap }),
-        ...(flexDirection && { flexDirection }),
+    ...shadowTokenStyleSet.key,
+    ...restOfChildStyleProps,
+  });
 
-        ...shadowTokenStyleSet.key,
-        ...restOfChildStyleProps,
-      },
-    },
-    outer: {
-      style: {
-        ...(margin && { margin }),
-        ...(marginBottom && { marginBottom }),
-        ...(marginEnd && { marginEnd }),
-        ...(marginHorizontal && { marginHorizontal }),
-        ...(marginLeft && { marginLeft }),
-        ...(marginRight && { marginRight }),
-        ...(marginStart && { marginStart }),
-        ...(marginTop && { marginTop }),
-        ...(marginVertical && { marginVertical }),
+  const outerStyle = removeUndefinedProperties({
+    margin,
+    marginBottom,
+    marginEnd,
+    marginHorizontal,
+    marginLeft,
+    marginRight,
+    marginStart,
+    marginTop,
+    marginVertical,
 
-        ...(start && { start }),
-        ...(end && { end }),
-        ...(left && { left }),
-        ...(right && { right }),
-        ...(top && { top }),
-        ...(bottom && { bottom }),
+    start,
+    end,
+    left,
+    right,
+    top,
+    bottom,
 
-        ...shadowTokenStyleSet.ambient,
-        ...restOfChildStyleProps,
-      },
-    },
-  };
+    ...shadowTokenStyleSet.ambient,
+    ...restOfChildStyleProps,
+  });
+
+  return { inner: { style: innerStyle }, outer: { style: outerStyle } };
 }
+
+const removeUndefinedProperties = (object: any) => {
+  return Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null));
+};
 
 Shadow.displayName = shadowName;
 
