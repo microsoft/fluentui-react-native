@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Order imports",
-  "packageName": "@fluentui-react-native/use-tokens",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

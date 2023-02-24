@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Fri, 24 Feb 2023 20:39:58 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.8.22",
+      "version": "0.8.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2",
+            "comment": "Order imports"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.3",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.10",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.5",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.4.4",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.9.4",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 02:22:40 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.8.21",
       "version": "0.8.21",

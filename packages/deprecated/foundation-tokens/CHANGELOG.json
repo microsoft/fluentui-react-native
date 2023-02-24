@@ -2,6 +2,39 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Fri, 24 Feb 2023 20:40:00 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.12.27",
+      "version": "0.12.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-tokens",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2",
+            "comment": "Order imports"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-tokens",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.5.3",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-tokens",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.10",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-tokens",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.12.3",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 02:22:40 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.12.26",
       "version": "0.12.26",

@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Fri, 24 Feb 2023 20:39:57 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.6.8",
+      "version": "1.6.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2",
+            "comment": "Order imports"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/adapters to v0.10.2",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.4.29",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.3",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.14",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.24.3",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.10",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.9.4",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 02:22:40 GMT",
       "tag": "@fluentui-react-native/avatar_v1.6.7",
       "version": "1.6.7",

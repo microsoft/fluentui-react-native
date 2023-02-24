@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Fri, 24 Feb 2023 02:22:40 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 20:39:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.3
+
+Fri, 24 Feb 2023 20:39:58 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/composition to v0.8.4
+- Bump @fluentui-react-native/default-theme to v0.17.3
+- Bump @fluentui-react-native/merge-props to v0.5.3
+- Bump @fluentui-react-native/theme-types to v0.30.3
+- Bump @fluentui-react-native/use-styling to v0.9.4
+- Bump @fluentui-react-native/use-slot to v0.3.4
+- Bump @fluentui-react-native/use-slots to v0.7.4
+- Bump @fluentui-react-native/use-tokens to v0.3.4
+- Bump @fluentui-react-native/tokens to v0.20.10
 
 ## 0.9.2
 
