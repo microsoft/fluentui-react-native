@@ -1,5 +1,6 @@
-import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 import type { ColorValue } from 'react-native';
+
+import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 
 import { createThemeRegistry } from './Registry';
 import type { IThemeRegistry } from './Registry.types';

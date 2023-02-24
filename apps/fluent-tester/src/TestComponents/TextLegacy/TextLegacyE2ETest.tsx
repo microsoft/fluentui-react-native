@@ -1,7 +1,8 @@
-import { Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { Text } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
 
 import {
   DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL,

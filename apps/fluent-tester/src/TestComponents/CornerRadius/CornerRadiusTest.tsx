@@ -1,10 +1,11 @@
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Stack } from '@fluentui-react-native/stack';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
-import * as React from 'react';
-import { View } from 'react-native';
 
 import { HOMEPAGE_CORNERRADIUS_TESTPAGE } from '../../../../E2E/src/CornerRadiusTokens/consts';
 import { stackStyle } from '../Common/styles';

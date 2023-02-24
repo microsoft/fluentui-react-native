@@ -1,7 +1,8 @@
-import { Text } from '@fluentui-react-native/experimental-text';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { Text } from '@fluentui-react-native/experimental-text';
+import { Stack } from '@fluentui-react-native/stack';
 
 import {
   TEXTV1_TEST_COMPONENT,

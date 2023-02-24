@@ -1,8 +1,9 @@
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as React from 'react';
 import type { AccessibilityActionName } from 'react-native';
 import { Text, View } from 'react-native';
+
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Svg } from 'react-native-svg';
 import * as renderer from 'react-test-renderer';
 

@@ -1,6 +1,7 @@
-import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
 
 export const RequiredRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function

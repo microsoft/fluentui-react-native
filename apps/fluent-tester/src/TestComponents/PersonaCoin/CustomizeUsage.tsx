@@ -1,10 +1,11 @@
+import * as React from 'react';
+import { Switch, View, Text, TextInput } from 'react-native';
+
 import type { IconAlignment } from '@fluentui/react-native';
 import { PersonaCoin } from '@fluentui/react-native';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import * as React from 'react';
-import { Switch, View, Text, TextInput } from 'react-native';
 
 import { steveBallmerPhotoUrl } from './styles';
 import { AlignmentPicker } from '../Common/AlignmentPicker';

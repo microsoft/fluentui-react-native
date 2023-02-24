@@ -1,6 +1,7 @@
-import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
+
+import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 
 import { TabsLegacyE2ETest } from './TabsLegacyE2ETest';
 import { TABS_TESTPAGE } from '../../../../E2E/src/TabsLegacy/consts';

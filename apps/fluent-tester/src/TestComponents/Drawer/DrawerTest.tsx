@@ -1,10 +1,11 @@
+import * as React from 'react';
+import { View, Text } from 'react-native';
+
 import { Link } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Drawer } from '@fluentui-react-native/experimental-drawer';
 import { Icon } from '@fluentui-react-native/icon';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
-import { View, Text } from 'react-native';
 
 import { DRAWER_TESTPAGE } from './consts';
 import { svgProps } from '../Common/iconExamples';

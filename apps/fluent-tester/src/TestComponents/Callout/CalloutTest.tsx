@@ -1,8 +1,9 @@
-import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
-import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
 import * as React from 'react';
 import type { ScreenRect } from 'react-native';
 import { Text, View, Switch, ScrollView } from 'react-native';
+
+import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
+import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';

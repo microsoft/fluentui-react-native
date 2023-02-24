@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { /* Text, */ View } from 'react-native';
+
 import { faMountainCity } from '@fortawesome/free-solid-svg-icons/faMountainCity';
 import { faMugHot } from '@fortawesome/free-solid-svg-icons/faMugHot';
 import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
@@ -505,8 +508,6 @@ import {
   ArrowCircleUpLeft20Filled,
   ArrowCircleUpLeft20Regular,
 } from '@warren-ms/react-native-icons';
-import * as React from 'react';
-import { /* Text, */ View } from 'react-native';
 
 import { RNSVGIcons_TESTPAGE } from '../../../../E2E/src/Svg/consts';
 import type { TestSection, PlatformStatus } from '../Test';

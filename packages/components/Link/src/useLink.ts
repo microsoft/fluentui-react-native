@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { Linking, Platform } from 'react-native';
+
 import {
   useAsPressable,
   useKeyProps,
@@ -5,8 +8,6 @@ import {
   useViewCommandFocus,
   getAccessibilityState,
 } from '@fluentui-react-native/interactive-hooks';
-import * as React from 'react';
-import { Linking, Platform } from 'react-native';
 
 import type { LinkProps, LinkInfo } from './Link.types';
 

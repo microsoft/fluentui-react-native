@@ -1,7 +1,8 @@
-import { RadioButton, RadioGroup } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { RadioButton, RadioGroup } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
 
 import {
   RADIOGROUP_TEST_COMPONENT,

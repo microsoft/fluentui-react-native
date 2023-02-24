@@ -1,7 +1,8 @@
-import { Separator } from '@fluentui/react-native';
-import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
+
+import { Separator } from '@fluentui/react-native';
+import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
 
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
 import { menuItems, iconProps } from './testData';

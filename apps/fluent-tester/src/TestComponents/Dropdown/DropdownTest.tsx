@@ -1,6 +1,7 @@
+import * as React from 'react';
+
 import { Option, Dropdown } from '@fluentui-react-native/dropdown';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
 
 import { DROPDOWN_TESTPAGE } from './consts';
 import { stackStyle } from '../Common/styles';

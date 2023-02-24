@@ -1,6 +1,7 @@
+import type { ScrollViewProps, ViewProps } from 'react-native';
+
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
-import type { ScrollViewProps, ViewProps } from 'react-native';
 
 import type { ContextualMenuProps, ContextualMenuTokens, ContextualMenuState } from './ContextualMenu.types';
 

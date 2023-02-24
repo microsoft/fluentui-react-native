@@ -1,12 +1,13 @@
-import type { Theme } from '@fluentui-react-native/framework';
-import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
-import type { TextProps } from '@fluentui-react-native/text';
 import { useMemo } from 'react';
 import type { ViewProps, ColorValue } from 'react-native';
 import { Platform } from 'react-native';
 
-import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
+import type { TextProps } from '@fluentui-react-native/text';
 import { fontStyles } from '@fluentui-react-native/tokens';
+
+import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
 
 const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 

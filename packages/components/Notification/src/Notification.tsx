@@ -1,4 +1,7 @@
 /** @jsx withSlots */
+import type { PressableProps, ViewStyle, ViewProps } from 'react-native';
+import { useWindowDimensions, View } from 'react-native';
+
 import type { SizeClassIOS } from '@fluentui-react-native/experimental-appearance-additions';
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
@@ -8,8 +11,6 @@ import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { Pressable } from '@fluentui-react-native/pressable';
 import { Body2, Body2Strong } from '@fluentui-react-native/text';
-import type { PressableProps, ViewStyle, ViewProps } from 'react-native';
-import { useWindowDimensions, View } from 'react-native';
 
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 import { stylingSettings } from './Notification.styling';

@@ -1,4 +1,7 @@
 /** @jsx withSlots */
+import { Image } from 'react-native';
+import type { ImageResolvedAssetSource } from 'react-native';
+
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import type { IconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/icon';
@@ -8,8 +11,6 @@ import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { Image } from 'react-native';
-import type { ImageResolvedAssetSource } from 'react-native';
 
 import type {
   MenuButtonProps,

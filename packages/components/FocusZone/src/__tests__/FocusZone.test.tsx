@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button } from 'react-native';
+
 import * as renderer from 'react-test-renderer';
 
 import { FocusZone } from '..';

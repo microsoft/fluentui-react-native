@@ -1,12 +1,13 @@
 /** @jsx withSlots */
+import * as React from 'react';
+import { Platform, Pressable, View } from 'react-native';
+
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { Platform, Pressable, View } from 'react-native';
 
 import { stylingSettings } from './FAB.styling';
 import type { FABProps, FABType } from './FAB.types';

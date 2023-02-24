@@ -1,9 +1,10 @@
+import * as React from 'react';
+import { Text, View, Switch, Platform } from 'react-native';
+
 import type { ContextualMenuProps } from '@fluentui/react-native';
 import { Separator } from '@fluentui/react-native';
 import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
 import type { IconSourcesType } from '@fluentui-react-native/icon';
-import * as React from 'react';
-import { Text, View, Switch, Platform } from 'react-native';
 
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
 import { menuItems, iconProps } from './testData';

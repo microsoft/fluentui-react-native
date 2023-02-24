@@ -1,6 +1,7 @@
+import type { ViewStyle, ViewProps } from 'react-native';
+
 import type { IBackgroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
-import type { ViewStyle, ViewProps } from 'react-native';
 
 import type { IStackItemProps } from './StackItem/StackItem.types';
 

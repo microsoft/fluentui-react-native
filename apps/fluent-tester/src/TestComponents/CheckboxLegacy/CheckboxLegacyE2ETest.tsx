@@ -1,7 +1,8 @@
-import { Checkbox, Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { Checkbox, Text } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
 
 import {
   CHECKBOX_TEST_COMPONENT,

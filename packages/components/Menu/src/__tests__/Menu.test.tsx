@@ -1,7 +1,8 @@
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as React from 'react';
 import type { AccessibilityActionName } from 'react-native';
+
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Menu } from '../Menu/Menu';

@@ -1,8 +1,9 @@
 /** @jsx withSlots */
+import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-native';
+
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
-import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-native';
 
 import { stylingSettings } from './Switch.styling';
 import type { SwitchType, SwitchState, SwitchProps } from './Switch.types';

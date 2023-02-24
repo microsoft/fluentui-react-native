@@ -1,9 +1,10 @@
+import React, { useState, useMemo } from 'react';
+import { View, Text, TextInput, Platform, StyleSheet } from 'react-native';
+
 import { ToggleButton } from '@fluentui/react-native';
 import type { AvatarSize } from '@fluentui-react-native/avatar';
 import { Avatar } from '@fluentui-react-native/avatar';
 import type { FontWeight } from '@fluentui-react-native/theme-types';
-import React, { useState, useMemo } from 'react';
-import { View, Text, TextInput, Platform, StyleSheet } from 'react-native';
 
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { svgProps } from '../Common/iconExamples';

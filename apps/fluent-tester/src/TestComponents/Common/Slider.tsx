@@ -1,8 +1,9 @@
-import { Separator, Pressable } from '@fluentui/react-native';
-import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import * as React from 'react';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, UIManager, Text, findNodeHandle, View } from 'react-native';
+
+import { Separator, Pressable } from '@fluentui/react-native';
+import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 const thumbSize = 20;
 const defaultMaximumValue = 100;

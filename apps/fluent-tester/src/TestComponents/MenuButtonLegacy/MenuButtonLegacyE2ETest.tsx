@@ -1,7 +1,8 @@
-import type { ContextualMenuProps } from '@fluentui/react-native';
-import { MenuButton } from '@fluentui/react-native';
 import * as React from 'react';
 import { Text, View } from 'react-native';
+
+import type { ContextualMenuProps } from '@fluentui/react-native';
+import { MenuButton } from '@fluentui/react-native';
 
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonLegacyTestStyles';
 import { menuItems } from './testData';

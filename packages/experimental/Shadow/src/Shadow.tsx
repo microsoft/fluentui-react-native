@@ -1,9 +1,10 @@
-import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
-import { memoize } from '@fluentui-react-native/framework';
-import type { ShadowToken } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
 import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
+
+import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
+import { memoize } from '@fluentui-react-native/framework';
+import type { ShadowToken } from '@fluentui-react-native/theme-types';
 
 import type { ShadowProps } from './Shadow.types';
 import { shadowName } from './Shadow.types';

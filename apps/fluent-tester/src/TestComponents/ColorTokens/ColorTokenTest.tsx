@@ -1,3 +1,7 @@
+import * as React from 'react';
+import type { ViewStyle, ColorValue } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
+
 import { Text, ToggleButton } from '@fluentui/react-native';
 import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
@@ -7,9 +11,6 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
-import * as React from 'react';
-import type { ViewStyle, ColorValue } from 'react-native';
-import { View, StyleSheet, Platform } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';
 

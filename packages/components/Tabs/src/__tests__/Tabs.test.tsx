@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import * as renderer from 'react-test-renderer';
 
 import { Tabs, TabsItem } from '..';

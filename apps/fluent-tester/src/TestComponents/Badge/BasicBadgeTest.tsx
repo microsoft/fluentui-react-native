@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import React, { useState, useCallback, useMemo } from 'react';
+import { View, Platform, Text, Image } from 'react-native';
+
 import { ToggleButton } from '@fluentui/react-native';
 import type {
   BadgeAppearance,
@@ -11,8 +14,6 @@ import type {
 } from '@fluentui-react-native/badge';
 import { Badge, BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from '@fluentui-react-native/badge';
 import { useFluentTheme } from '@fluentui-react-native/framework';
-import React, { useState, useCallback, useMemo } from 'react';
-import { View, Platform, Text, Image } from 'react-native';
 
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import { svgProps, iconProps } from '../Common/iconExamples';

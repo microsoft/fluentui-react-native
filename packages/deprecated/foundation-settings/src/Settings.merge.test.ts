@@ -1,5 +1,6 @@
-import type { StyleProp } from '@fluentui-react-native/merge-props';
 import type { ColorValue } from 'react-native';
+
+import type { StyleProp } from '@fluentui-react-native/merge-props';
 
 import { mergeSettings } from './Settings';
 import type { IComponentSettings } from './Settings.types';

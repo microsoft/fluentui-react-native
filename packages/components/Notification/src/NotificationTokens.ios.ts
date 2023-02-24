@@ -1,7 +1,8 @@
+import { DynamicColorIOS } from 'react-native';
+
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
-import { DynamicColorIOS } from 'react-native';
 
 import type { NotificationTokens } from './Notification.types';
 

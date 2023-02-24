@@ -1,11 +1,12 @@
 /** @jsx withSlots */
+import React from 'react';
+import { View } from 'react-native';
+
 import type { ButtonProps } from '@fluentui-react-native/button';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { buildUseTokens, compressible, useSlot, withSlots } from '@fluentui-react-native/framework';
 import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
-import React from 'react';
-import { View } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 import { Path, Svg } from 'react-native-svg';
 

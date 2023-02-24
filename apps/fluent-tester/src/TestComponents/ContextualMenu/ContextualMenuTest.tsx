@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import * as React from 'react';
+import { Text, View, Switch } from 'react-native';
+
 import {
   Text as FURNText,
   ButtonV1 as Button,
@@ -9,8 +12,6 @@ import {
   Separator,
   Checkbox,
 } from '@fluentui/react-native';
-import * as React from 'react';
-import { Text, View, Switch } from 'react-native';
 
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 import { CONTEXTUALMENU_TESTPAGE } from '../../../../E2E/src/ContextualMenu/consts';

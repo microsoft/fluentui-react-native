@@ -1,9 +1,10 @@
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { View } from 'react-native';
 
 import {
   MENUITEM_ACCESSIBILITY_LABEL,

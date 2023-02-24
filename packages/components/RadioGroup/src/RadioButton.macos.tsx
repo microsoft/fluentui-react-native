@@ -1,11 +1,12 @@
 /** @jsx withSlots */
+import * as React from 'react';
+
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import type { ISlots } from '@uifabricshared/foundation-composable';
 import { withSlots } from '@uifabricshared/foundation-composable';
 import { compose } from '@uifabricshared/foundation-compose';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import * as React from 'react';
 
 import type { IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonType } from './RadioButton.types';
 import { radioButtonName } from './RadioButton.types';

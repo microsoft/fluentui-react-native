@@ -1,6 +1,7 @@
+import type { TextProps } from 'react-native';
+
 import type { Theme } from '@fluentui-react-native/framework';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import type { TextProps } from 'react-native';
 
 import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 import type { IPersonaCoinTokens } from './PersonaCoin.types';

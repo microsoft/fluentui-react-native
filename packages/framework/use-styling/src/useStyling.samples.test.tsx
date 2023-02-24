@@ -1,8 +1,9 @@
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import type { TextProps, ColorValue } from 'react-native';
 import { Text, View } from 'react-native';
+
+import { mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { buildProps } from './buildProps';
 import type { ThemeHelper, UseStylingOptions } from './buildUseStyling';

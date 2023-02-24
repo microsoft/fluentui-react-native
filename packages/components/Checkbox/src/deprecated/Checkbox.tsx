@@ -1,4 +1,7 @@
 /** @jsx withSlots */
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import {
   useAsToggle,
@@ -16,8 +19,6 @@ import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import * as React from 'react';
-import { View } from 'react-native';
 
 import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
 import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType } from './Checkbox.types';

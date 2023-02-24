@@ -1,10 +1,11 @@
 /** @jsx withSlots */
+import * as React from 'react';
+import { Pressable, View } from 'react-native';
+
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { Pressable, View } from 'react-native';
 
 import { stylingSettings } from './Tabs.styling';
 import type { TabsType, TabsProps, TabsContextData } from './Tabs.types';

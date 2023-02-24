@@ -1,6 +1,7 @@
+import { Appearance } from 'react-native';
+
 import { ThemeReference } from '@fluentui-react-native/theme';
 import type { Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
-import { Appearance } from 'react-native';
 
 import { getAndroidTheme } from './androidTheme';
 

@@ -1,7 +1,8 @@
 /** @jsx withSlots */
+import { View } from 'react-native';
+
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
-import { View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 
 import { stylingSettings } from './PresenceBadge.styling';

@@ -1,10 +1,11 @@
 /** @jsx withSlots */
+import { Fragment } from 'react';
+import { Image, View, Text, Platform } from 'react-native';
+
 import { PresenceBadge } from '@fluentui-react-native/badge';
 import type { UseSlots, Slots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
-import { Fragment } from 'react';
-import { Image, View, Text, Platform } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 
 import { stylingSettings } from './Avatar.styling';

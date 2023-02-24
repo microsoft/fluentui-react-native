@@ -1,8 +1,9 @@
+import React from 'react';
+import { Platform, View } from 'react-native';
+
 import { Callout } from '@fluentui-react-native/callout';
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { compressible, mergeProps, patchTokens, useFluentTheme } from '@fluentui-react-native/framework';
-import React from 'react';
-import { Platform, View } from 'react-native';
 
 import type { MenuPopoverProps, MenuPopoverTokens } from './MenuPopover.types';
 import { menuPopoverName } from './MenuPopover.types';

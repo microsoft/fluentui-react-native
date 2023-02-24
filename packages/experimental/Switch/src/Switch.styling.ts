@@ -1,7 +1,8 @@
+import { Platform } from 'react-native';
+
 import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { Platform } from 'react-native';
 
 import { switchName } from './Switch.types';
 import type { SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch.types';

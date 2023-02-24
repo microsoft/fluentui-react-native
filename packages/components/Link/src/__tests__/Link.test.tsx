@@ -1,6 +1,7 @@
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as React from 'react';
 import { Alert } from 'react-native';
+
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Link } from '../Link';

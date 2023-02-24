@@ -1,5 +1,6 @@
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { ImageURISource } from 'react-native';
+
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 import type {
   PersonaSize,

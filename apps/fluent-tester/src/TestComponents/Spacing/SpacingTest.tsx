@@ -1,7 +1,8 @@
-import { Stack } from '@fluentui-react-native/stack';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import * as React from 'react';
 import { Text, View } from 'react-native';
+
+import { Stack } from '@fluentui-react-native/stack';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 import { SPACING_TESTPAGE } from '../../../../E2E/src/Spacing/consts';
 import { stackStyle } from '../Common/styles';

@@ -1,3 +1,6 @@
+import React from 'react';
+import { StyleSheet } from 'react-native';
+
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import {
   Menu,
@@ -11,8 +14,6 @@ import {
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import React from 'react';
-import { StyleSheet } from 'react-native';
 
 import { E2EMenuTest } from './E2EMenuTest';
 import { MenuTriggerChildRef } from './MenuRefs';

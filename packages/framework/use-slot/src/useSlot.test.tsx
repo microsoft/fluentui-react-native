@@ -1,10 +1,11 @@
 /** @jsx withSlots */
-import { mergeStyles } from '@fluentui-react-native/merge-props';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
+
+import { mergeStyles } from '@fluentui-react-native/merge-props';
+import { mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import type { NativeReactType } from './renderSlot';
 import { stagedComponent } from './stagedComponent';

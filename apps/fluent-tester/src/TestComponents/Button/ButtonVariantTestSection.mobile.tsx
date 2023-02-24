@@ -1,6 +1,7 @@
-import { Button, FAB } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { Button, FAB } from '@fluentui-react-native/experimental-button';
 
 import { iconProps } from '../Common/iconExamples';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';

@@ -1,5 +1,6 @@
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as React from 'react';
+
+import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Divider } from '../Divider';

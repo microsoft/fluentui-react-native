@@ -1,8 +1,9 @@
 /** @jsx withSlots */
+import * as React from 'react';
+
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import * as React from 'react';
 
 import type { DrawerTokens, DrawerProps, DrawerType } from './Drawer.types';
 import { drawerName } from './Drawer.types';

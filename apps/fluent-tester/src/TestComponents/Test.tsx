@@ -1,10 +1,11 @@
+import * as React from 'react';
+import { Platform, StyleSheet, Switch, View } from 'react-native';
+
 import { Text, ToggleButton, Separator, Link } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { Stack } from '@fluentui-react-native/stack';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import * as React from 'react';
-import { Platform, StyleSheet, Switch, View } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';
 

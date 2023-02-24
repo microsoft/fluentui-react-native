@@ -1,8 +1,9 @@
+import * as React from 'react';
+import { View, Platform } from 'react-native';
+
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { View, Platform } from 'react-native';
 
 import { TabsV1E2ETest } from './TabsV1E2ETest';
 import { TABSV1_TESTPAGE } from '../../../../E2E/src/TabsV1/consts';

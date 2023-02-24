@@ -1,8 +1,9 @@
+import * as React from 'react';
+import { Text, View } from 'react-native';
+
 import { Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { Caption1, Title2, Title3 } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { Text, View } from 'react-native';
 
 import { stackStyle } from '../Common/styles';
 

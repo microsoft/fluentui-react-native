@@ -1,7 +1,8 @@
-import { ToggleButton } from '@fluentui/react-native';
-import { Checkbox } from '@fluentui/react-native';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+
+import { ToggleButton } from '@fluentui/react-native';
+import { Checkbox } from '@fluentui/react-native';
 
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 

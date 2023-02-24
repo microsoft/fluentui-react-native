@@ -1,9 +1,10 @@
+import * as React from 'react';
+import { Switch, View } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import type { Size } from '@fluentui-react-native/experimental-avatar/';
 import { NativeAvatar } from '@fluentui-react-native/experimental-avatar/';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
-import { Switch, View } from 'react-native';
 
 import { testImageSource, rainbowGradientSource } from './testImageSources';
 import { NATIVE_AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';

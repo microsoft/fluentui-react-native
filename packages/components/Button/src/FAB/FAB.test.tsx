@@ -1,5 +1,6 @@
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as React from 'react';
+
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { FAB } from './FAB';

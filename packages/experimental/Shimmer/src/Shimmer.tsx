@@ -1,9 +1,10 @@
 /** @jsx withSlots */
+import { useRef, useEffect, useMemo, useCallback } from 'react';
+import { Animated, I18nManager } from 'react-native';
+
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import assertNever from 'assert-never';
-import { useRef, useEffect, useMemo, useCallback } from 'react';
-import { Animated, I18nManager } from 'react-native';
 import type { TransformObject } from 'react-native-svg';
 import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G } from 'react-native-svg';
 

@@ -1,6 +1,7 @@
+import * as React from 'react';
+
 import type { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { ThemeContext } from '@uifabricshared/theming-ramp';
-import * as React from 'react';
 
 import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
 import type { ITheme } from './Theme.types';

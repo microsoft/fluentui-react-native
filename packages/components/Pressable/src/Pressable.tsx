@@ -10,11 +10,12 @@
  */
 'use strict';
 
+import { View } from 'react-native';
+
 import { useAsPressable } from '@fluentui-react-native/interactive-hooks';
 import type { IUseStyling } from '@uifabricshared/foundation-composable';
 import { composable } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { View } from 'react-native';
 
 import type { IPressableProps, IPressableType } from './Pressable.props';
 

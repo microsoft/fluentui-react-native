@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import * as React from 'react';
+import { Platform, PlatformColor, View } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import type { RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import { Icon } from '@fluentui-react-native/icon';
-import * as React from 'react';
-import { Platform, PlatformColor, View } from 'react-native';
 
 import { E2ETestingIcon } from './IconLegacyE2ETest';
 import { IconV1Test } from './IconV1';

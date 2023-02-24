@@ -1,7 +1,8 @@
-import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
+import { Stack } from '@fluentui-react-native/stack';
 
 import {
   RADIOGROUPV1_TEST_COMPONENT,

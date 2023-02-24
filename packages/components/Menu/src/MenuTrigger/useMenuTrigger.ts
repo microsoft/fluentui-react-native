@@ -1,7 +1,8 @@
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
 import type { AccessibilityActionEvent, AccessibilityActionName } from 'react-native';
 import { Platform } from 'react-native';
+
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
 import { useMergedRefs } from './useMergeRefs';

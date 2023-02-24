@@ -1,5 +1,6 @@
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import * as React from 'react';
+
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';

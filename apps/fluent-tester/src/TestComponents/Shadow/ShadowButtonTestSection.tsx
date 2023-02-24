@@ -1,7 +1,8 @@
-import { FAB, Text } from '@fluentui/react-native';
-import { useFluentTheme } from '@fluentui-react-native/framework';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
+
+import { FAB, Text } from '@fluentui/react-native';
+import { useFluentTheme } from '@fluentui-react-native/framework';
 
 import { shadowTestPageStyles } from './ShadowTestPageStyles';
 import { iconProps } from '../Common/iconExamples';

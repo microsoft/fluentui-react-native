@@ -1,4 +1,7 @@
 /** @jsx withSlots */
+import * as React from 'react';
+import { I18nManager, Platform, View } from 'react-native';
+
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { useKeyDownProps, useViewCommandFocus, useAsPressable } from '@fluentui-react-native/interactive-hooks';
@@ -9,8 +12,6 @@ import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import * as React from 'react';
-import { I18nManager, Platform, View } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 import { Svg, G, Path } from 'react-native-svg';
 

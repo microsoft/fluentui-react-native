@@ -1,8 +1,9 @@
+import * as React from 'react';
+import { View, Switch } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import { Expander } from '@fluentui-react-native/experimental-expander';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
-import { View, Switch } from 'react-native';
 
 import { EXPANDER_TESTPAGE } from './consts';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';

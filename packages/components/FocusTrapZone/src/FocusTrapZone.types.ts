@@ -1,6 +1,7 @@
+import type * as React from 'react';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
-import type * as React from 'react';
 
 export type IFocusTrapZoneProps<TBase = IViewProps> = TBase & {
   /**

@@ -1,6 +1,7 @@
+import * as React from 'react';
+
 import { Spinner } from '@fluentui-react-native/spinner';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
 
 import { SPINNER_TEST_COMPONENT } from '../../../../E2E/src/Spinner/consts';
 import { stackStyle } from '../Common/styles';

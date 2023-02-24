@@ -1,5 +1,6 @@
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { ColorValue, ImageStyle, StyleProp } from 'react-native';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { SvgProps } from 'react-native-svg';
 
 export const svgIconName = 'SvgIcon';

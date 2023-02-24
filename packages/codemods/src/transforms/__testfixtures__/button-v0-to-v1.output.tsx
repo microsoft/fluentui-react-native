@@ -1,8 +1,9 @@
+import * as React from 'react';
+
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
 
 export const ButtonFocusTest_deprecated: React.FunctionComponent = () => {
   const [state, setState] = React.useState({

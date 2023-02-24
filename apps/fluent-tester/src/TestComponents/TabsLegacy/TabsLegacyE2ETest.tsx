@@ -1,6 +1,7 @@
-import { Tabs, TabsItem, Text } from '@fluentui/react-native';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { Tabs, TabsItem, Text } from '@fluentui/react-native';
 
 import {
   TABS_TEST_COMPONENT,

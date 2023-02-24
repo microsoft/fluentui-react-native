@@ -1,11 +1,12 @@
+import * as React from 'react';
+import { View, TextInput, Platform } from 'react-native';
+
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import * as React from 'react';
-import { View, TextInput, Platform } from 'react-native';
 
 import { E2ECheckboxV1Test } from './E2ECheckboxV1Test';
 import { CHECKBOXV1_TESTPAGE } from '../../../../E2E/src/CheckboxV1/consts';

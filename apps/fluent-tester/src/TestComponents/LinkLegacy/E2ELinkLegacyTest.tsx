@@ -1,7 +1,8 @@
-import { Link } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { Alert } from 'react-native';
+
+import { Link } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
 
 import {
   LINK_TEST_COMPONENT,

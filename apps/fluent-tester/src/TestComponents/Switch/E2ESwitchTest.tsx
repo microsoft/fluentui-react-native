@@ -1,8 +1,9 @@
+import * as React from 'react';
+import { Platform } from 'react-native';
+
 import { Stack } from '@fluentui-react-native/stack';
 import { Switch } from '@fluentui-react-native/switch';
 import { TextV1 } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { Platform } from 'react-native';
 
 import {
   SWITCH_TEST_COMPONENT,

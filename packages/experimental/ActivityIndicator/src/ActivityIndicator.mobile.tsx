@@ -1,8 +1,9 @@
 /** @jsx withSlots */
-import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { useRef, useEffect, useCallback } from 'react';
 import { Animated, Easing, View } from 'react-native';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Svg, Path } from 'react-native-svg';
 
 import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './ActivityIndicator.styling';

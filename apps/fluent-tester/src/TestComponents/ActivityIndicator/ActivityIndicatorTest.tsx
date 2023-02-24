@@ -1,8 +1,9 @@
+import * as React from 'react';
+import { View, Switch } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
-import { View, Switch } from 'react-native';
 
 import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';

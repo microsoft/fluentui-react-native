@@ -1,14 +1,14 @@
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
+
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { SvgXml } from 'react-native-svg';
-import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
-import { ButtonV1 as Button } from '@fluentui/react-native';
-import { testerTheme } from './CustomThemes';
+
 import type { ThemeNames } from './applyTheme';
 import { themeChoices } from './applyTheme';
+import { testerTheme } from './CustomThemes';
 
 export const themePickerStyles = StyleSheet.create({
   pickerRoot: {

@@ -1,7 +1,8 @@
+import { Text as RNText } from 'react-native';
+
 import { filterTextProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
 import { compose } from '@uifabricshared/foundation-compose';
-import { Text as RNText } from 'react-native';
 
 import { settings } from './Text.settings';
 import { textName } from './Text.types';

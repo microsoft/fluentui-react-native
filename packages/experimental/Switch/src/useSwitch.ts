@@ -1,9 +1,10 @@
-import { memoize } from '@fluentui-react-native/framework';
-import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 import * as React from 'react';
 import type { AccessibilityState, AccessibilityActionEvent } from 'react-native';
 import { Animated, Platform, I18nManager } from 'react-native';
+
+import { memoize } from '@fluentui-react-native/framework';
+import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { SwitchProps, SwitchInfo, AnimationConfig } from './Switch.types';
 

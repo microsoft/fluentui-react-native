@@ -1,4 +1,7 @@
 /** @jsx withSlots */
+import * as React from 'react';
+import { Pressable, View } from 'react-native';
+
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
@@ -9,8 +12,6 @@ import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import * as React from 'react';
-import { Pressable, View } from 'react-native';
 
 import { settings } from './Button.settings';
 import type { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, IButtonType } from './Button.types';

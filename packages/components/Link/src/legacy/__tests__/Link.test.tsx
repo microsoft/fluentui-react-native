@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
 import * as renderer from 'react-test-renderer';
 
 import { Link } from '../Link';

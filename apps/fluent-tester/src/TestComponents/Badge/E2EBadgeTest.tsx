@@ -1,6 +1,7 @@
-import { Badge, PresenceBadge } from '@fluentui-react-native/badge';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { Badge, PresenceBadge } from '@fluentui-react-native/badge';
 
 import { BADGE_TEST_COMPONENT, BADGE_SECONDARY_TEST_COMPONENT } from '../../../../E2E/src/Badge/consts';
 import { testProps } from '../Common/TestProps';

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Button, Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { Button, Text } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
 
 import {
   BUTTON_TEST_COMPONENT_DEPRECATED,

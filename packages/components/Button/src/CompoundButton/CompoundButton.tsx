@@ -1,11 +1,12 @@
 /** @jsx withSlots */
+import * as React from 'react';
+import { Pressable, View } from 'react-native';
+
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { Pressable, View } from 'react-native';
 
 import { stylingSettings } from './CompoundButton.styling';
 import type { CompoundButtonProps, CompoundButtonType } from './CompoundButton.types';

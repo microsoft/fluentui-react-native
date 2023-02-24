@@ -1,7 +1,8 @@
+import * as React from 'react';
+
 import { Button } from '@fluentui/react-native';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
 
 import { stackStyle } from '../../Common/styles';
 

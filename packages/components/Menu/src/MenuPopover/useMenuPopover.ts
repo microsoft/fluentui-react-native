@@ -1,6 +1,7 @@
-import type { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
 import React from 'react';
 import { I18nManager, Platform } from 'react-native';
+
+import type { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
 
 import type { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
 import { useMenuContext } from '../context/menuContext';

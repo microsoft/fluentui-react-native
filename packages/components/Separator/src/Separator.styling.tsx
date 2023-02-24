@@ -1,6 +1,7 @@
+import { Platform } from 'react-native';
+
 import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import { Platform } from 'react-native';
 
 import type { SeparatorProps, SeparatorPropTokens, SeparatorTokens, SeperatorSlotProps } from './Separator.types';
 import { separatorName } from './Separator.types';

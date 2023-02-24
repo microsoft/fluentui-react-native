@@ -1,6 +1,7 @@
+import type { ViewProps, ColorValue } from 'react-native';
+
 import type { TextProps } from '@fluentui-react-native/text';
 import type { FontTokens } from '@fluentui-react-native/tokens';
-import type { ViewProps, ColorValue } from 'react-native';
 
 import type { ButtonSlotProps, ButtonTokens, ButtonProps } from '../Button.types';
 

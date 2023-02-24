@@ -1,8 +1,9 @@
+import * as React from 'react';
+import { View, Switch } from 'react-native';
+
 import { Spinner } from '@fluentui-react-native/spinner';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text, TextV1 } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { View, Switch } from 'react-native';
 
 import { E2ETestingSpinner } from './SpinnerE2ETest';
 import { SPINNER_TESTPAGE } from '../../../../E2E/src/Spinner/consts';

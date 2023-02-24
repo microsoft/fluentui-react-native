@@ -1,8 +1,9 @@
+import type { ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-native';
+import { Appearance } from 'react-native';
+
 import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import assertNever from 'assert-never';
-import type { ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-native';
-import { Appearance } from 'react-native';
 
 import type {
   ActivityIndicatorProps,

@@ -1,4 +1,6 @@
 /** @jsx withSlots */
+import { Image, View, Text } from 'react-native';
+
 import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens } from '@fluentui-react-native/tokens';
 import type { ISlots, IRenderData } from '@uifabricshared/foundation-composable';
@@ -6,7 +8,6 @@ import { withSlots } from '@uifabricshared/foundation-composable';
 import { compose } from '@uifabricshared/foundation-compose';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { Image, View, Text } from 'react-native';
 
 import { getPresenceIconSource } from './PersonaCoin.helpers';
 import { settings } from './PersonaCoin.settings';

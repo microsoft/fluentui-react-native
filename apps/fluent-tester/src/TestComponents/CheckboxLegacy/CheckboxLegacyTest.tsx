@@ -1,9 +1,10 @@
+import * as React from 'react';
+import { View, TextInput } from 'react-native';
+
 import { Checkbox } from '@fluentui/react-native';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import * as React from 'react';
-import { View, TextInput } from 'react-native';
 
 import { CheckboxLegacyE2ETest } from './CheckboxLegacyE2ETest';
 import { CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxLegacy/consts';

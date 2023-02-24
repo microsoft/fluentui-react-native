@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import React, { useState, useCallback } from 'react';
+import { View, Platform, Text } from 'react-native';
+
 import { ToggleButton } from '@fluentui/react-native';
 import type { BadgeSize } from '@fluentui-react-native/badge';
 import { PresenceBadge, BadgeSizes } from '@fluentui-react-native/badge';
-import React, { useState, useCallback } from 'react';
-import { View, Platform, Text } from 'react-native';
 
 import { StyledPicker } from '../Common/StyledPicker';
 

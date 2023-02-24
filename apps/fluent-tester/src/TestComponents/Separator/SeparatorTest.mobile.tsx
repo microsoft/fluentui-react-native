@@ -1,7 +1,8 @@
+import * as React from 'react';
+
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Separator } from '@fluentui-react-native/separator';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
 
 import { SEPARATOR_TESTPAGE } from '../../../../E2E/src/Separator/consts';
 import { commonTestStyles, mobileStyles } from '../Common/styles';

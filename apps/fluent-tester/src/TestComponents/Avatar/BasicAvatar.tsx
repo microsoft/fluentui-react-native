@@ -1,11 +1,12 @@
+import React, { useState, useCallback } from 'react';
+import type { FunctionComponent } from 'react';
+import { View, Text, Platform } from 'react-native';
+
 import { ToggleButton } from '@fluentui/react-native';
 import type { AvatarSize, AvatarColor, AvatarActive } from '@fluentui-react-native/avatar';
 import { AvatarSizes, AvatarColors, Avatar } from '@fluentui-react-native/avatar';
 import type { PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
-import React, { useState, useCallback } from 'react';
-import type { FunctionComponent } from 'react';
-import { View, Text, Platform } from 'react-native';
 
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { svgProps } from '../Common/iconExamples';

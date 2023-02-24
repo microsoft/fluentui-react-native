@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
-import * as React from 'react';
-import { View } from 'react-native';
 
 import {
   BUTTON_TEST_COMPONENT,

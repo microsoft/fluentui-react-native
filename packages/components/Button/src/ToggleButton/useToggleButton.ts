@@ -1,7 +1,8 @@
-import { memoize } from '@fluentui-react-native/framework';
-import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 import * as React from 'react';
 import type { AccessibilityState } from 'react-native';
+
+import { memoize } from '@fluentui-react-native/framework';
+import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { ToggleButtonProps, ToggleButtonInfo } from './ToggleButton.types';
 import { useButton } from '../useButton';

@@ -1,7 +1,8 @@
-import { Link } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { Alert } from 'react-native';
+
+import { Link } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
 
 import { E2ELinkLegacyTest } from './E2ELinkLegacyTest';
 import { LINK_TESTPAGE } from '../../../../E2E/src/LinkLegacy/consts';

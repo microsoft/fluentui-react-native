@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { Stack } from '@fluentui-react-native/stack';
 import {
   Body1,
@@ -14,8 +17,6 @@ import {
   Title2,
   Title3,
 } from '@fluentui-react-native/text';
-import * as React from 'react';
-import { View } from 'react-native';
 
 import { stackStyle } from '../Common/styles';
 

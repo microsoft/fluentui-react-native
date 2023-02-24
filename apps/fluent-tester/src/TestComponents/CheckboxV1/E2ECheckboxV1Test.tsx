@@ -1,8 +1,9 @@
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
-import { View } from 'react-native';
 
 import {
   CHECKBOXV1_TEST_COMPONENT,

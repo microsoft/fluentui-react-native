@@ -1,7 +1,8 @@
-import { Icon } from '@fluentui-react-native/icon';
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as React from 'react';
 import { Pressable, Text } from 'react-native';
+
+import { Icon } from '@fluentui-react-native/icon';
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Button } from './Button';

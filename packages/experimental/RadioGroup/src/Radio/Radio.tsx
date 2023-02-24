@@ -1,9 +1,10 @@
 /** @jsx withSlots */
+import { Platform, Pressable, View } from 'react-native';
+
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { PressableState } from '@fluentui-react-native/interactive-hooks';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { Platform, Pressable, View } from 'react-native';
 
 import { stylingSettings } from './Radio.styling';
 import type { RadioType, RadioProps } from './Radio.types';

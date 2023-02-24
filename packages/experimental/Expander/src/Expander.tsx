@@ -1,8 +1,9 @@
 /** @jsx withSlots */
+import * as React from 'react';
+
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import type { UseSlots} from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, buildProps } from '@fluentui-react-native/framework';
-import * as React from 'react';
 
 import type { ExpanderType, ExpanderProps, ExpanderViewProps } from './Expander.types';
 import { expanderName } from './Expander.types';

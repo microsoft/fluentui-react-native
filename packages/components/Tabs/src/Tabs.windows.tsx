@@ -1,4 +1,7 @@
 /** @jsx withSlots */
+import * as React from 'react';
+import { Pressable, View } from 'react-native';
+
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { useSelectedKey, usePressableState } from '@fluentui-react-native/interactive-hooks';
 import { Text } from '@fluentui-react-native/text';
@@ -8,8 +11,6 @@ import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import * as React from 'react';
-import { Pressable, View } from 'react-native';
 
 import { settings } from './Tabs.settings';
 import type { TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
