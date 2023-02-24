@@ -11,5 +11,6 @@ export const useDividerTokens = buildUseTokens<DividerTokens>(() => ({
   minLineSize: globalTokens.size80,
   minWidth: 0,
   minHeight: 0,
+  textVariant: 'secondaryStandard',
   thickness: 1,
 }));
