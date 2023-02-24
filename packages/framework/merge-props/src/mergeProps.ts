@@ -1,5 +1,6 @@
 import type { MergeOptions } from '@fluentui-react-native/immutable-merge';
 import { immutableMergeCore } from '@fluentui-react-native/immutable-merge';
+
 import { mergeStyles } from './mergeStyles';
 
 /**

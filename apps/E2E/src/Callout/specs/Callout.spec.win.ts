@@ -1,6 +1,6 @@
-import CalloutPageObject from '../pages/CalloutPageObject.win';
-import { CALLOUT_ACCESSIBILITY_LABEL } from '../consts';
 import { Attribute, CALLOUT_A11Y_ROLE } from '../../common/consts';
+import { CALLOUT_ACCESSIBILITY_LABEL } from '../consts';
+import CalloutPageObject from '../pages/CalloutPageObject.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Callout Testing Initialization', () => {

@@ -1,6 +1,7 @@
-import path from 'path';
-import yargs from 'yargs';
 import { execSync } from 'child_process';
+import path from 'path';
+
+import yargs from 'yargs';
 
 const transformerDirectory = path.join(__dirname, 'transforms');
 const jscodeshiftExecutable = require.resolve('.bin/jscodeshift');

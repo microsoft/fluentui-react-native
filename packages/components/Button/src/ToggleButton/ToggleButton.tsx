@@ -1,16 +1,18 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Pressable } from 'react-native';
+
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import type { ToggleButtonProps, ToggleButtonType } from './ToggleButton.types';
-import { toggleButtonName } from './ToggleButton.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings } from './ToggleButton.styling';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import { buttonLookup } from '../Button';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { stylingSettings } from './ToggleButton.styling';
+import type { ToggleButtonProps, ToggleButtonType } from './ToggleButton.types';
+import { toggleButtonName } from './ToggleButton.types';
 import { useToggleButton } from './useToggleButton';
+import { buttonLookup } from '../Button';
 
 export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,

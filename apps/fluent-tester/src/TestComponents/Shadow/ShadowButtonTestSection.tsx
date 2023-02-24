@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
+
 import { FAB, Text } from '@fluentui/react-native';
-import { stackStyle } from '../Common/styles';
-import { shadowTestPageStyles } from './ShadowTestPageStyles';
-import { useFluentTheme } from '@fluentui-react-native/framework';
-import { iconProps } from '../Common/iconExamples';
-import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
+import { useFluentTheme } from '@fluentui-react-native/framework';
+
+import { shadowTestPageStyles } from './ShadowTestPageStyles';
+import { iconProps } from '../Common/iconExamples';
+import { stackStyle } from '../Common/styles';
 
 const styles = StyleSheet.create({ marginBetweenComponentsWithShadow: { margin: 10 } });
 

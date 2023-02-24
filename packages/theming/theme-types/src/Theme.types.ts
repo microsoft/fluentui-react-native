@@ -1,8 +1,9 @@
+import type { ColorValue } from 'react-native';
+
 import type { ThemeColorDefinition } from './Color.types';
 import type { OfficePalette } from './palette.types';
-import type { Typography, PartialTypography } from './Typography.types';
-import type { ColorValue } from 'react-native';
 import type { PartialShadowDefinition, ThemeShadowDefinition } from './Shadow.types';
+import type { Typography, PartialTypography } from './Typography.types';
 
 type TwoLevelPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 

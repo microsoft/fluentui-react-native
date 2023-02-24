@@ -1,11 +1,13 @@
 /** @jsx withSlots */
-import { withSlots } from '@fluentui-react-native/use-slot';
-import * as renderer from 'react-test-renderer';
-import type { UseStyledSlots } from './composeFactory';
-import { composeFactory } from './composeFactory';
 import type { ViewProps, TextProps, ColorValue } from 'react-native';
 import { View, Text } from 'react-native';
+
+import { withSlots } from '@fluentui-react-native/use-slot';
 import type { ThemeHelper } from '@fluentui-react-native/use-styling';
+import * as renderer from 'react-test-renderer';
+
+import type { UseStyledSlots } from './composeFactory';
+import { composeFactory } from './composeFactory';
 
 type Theme = {
   values: {

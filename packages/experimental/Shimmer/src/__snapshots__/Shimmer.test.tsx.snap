@@ -21,6 +21,9 @@ exports[`Shimmer component tests Shimmer default 1`] = `
         "borderWidth": 0,
       },
       Object {
+        "overflow": "hidden",
+      },
+      Object {
         "flex": 0,
         "height": "100%",
         "width": "100%",
@@ -53,7 +56,7 @@ exports[`Shimmer component tests Shimmer default 1`] = `
         }
         gradientUnits={0}
         name="gradient"
-        x1={-1}
+        x1={-2}
         x2="-1"
         y1="0%"
         y2="0%"
@@ -144,6 +147,7 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
       },
       Object {
         "height": 100,
+        "overflow": "hidden",
         "width": 300,
       },
       Object {
@@ -179,7 +183,7 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
         }
         gradientUnits={0}
         name="gradient"
-        x1={-1}
+        x1={-2}
         x2="-1"
         y1="0%"
         y2="0%"

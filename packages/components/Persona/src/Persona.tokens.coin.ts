@@ -1,8 +1,9 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { styleFunction } from '@uifabricshared/foundation-tokens';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IPersonaCoinTokens } from '@fluentui-react-native/persona-coin';
 import { buildRootStyles as buildPersonaCoinRootStyle } from '@fluentui-react-native/persona-coin';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
+
 import type { IPersonaTokens } from './Persona.types';
 
 const _coinStyleKeys: (keyof IPersonaTokens)[] = [

@@ -1,5 +1,5 @@
-import { HOMEPAGE_SPINNER_BUTTON, SPINNER_TESTPAGE, SPINNER_TEST_COMPONENT } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { HOMEPAGE_SPINNER_BUTTON, SPINNER_TESTPAGE, SPINNER_TEST_COMPONENT } from '../consts';
 
 class SpinnerPageObject extends BasePage {
   /*****************************************/

@@ -1,5 +1,6 @@
 import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
+
 import type { SpinnerProps, SpinnerSlotProps, SpinnerTokens } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
 import { defaultSpinnerTokens } from './SpinnerTokens';

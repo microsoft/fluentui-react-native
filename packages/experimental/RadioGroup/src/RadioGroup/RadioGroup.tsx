@@ -1,15 +1,17 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import type { RadioGroupType, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
-import { radioGroupName } from './RadioGroup.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { stylingSettings } from './RadioGroup.styling';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { useRadioGroup } from './useRadioGroup';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { stylingSettings } from './RadioGroup.styling';
+import type { RadioGroupType, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
+import { radioGroupName } from './RadioGroup.types';
 import { RadioGroupProvider } from './radioGroupContext';
+import { useRadioGroup } from './useRadioGroup';
 import { useRadioGroupContextValue } from './useRadioGroupContextValue';
 
 /**

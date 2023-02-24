@@ -1,9 +1,11 @@
 import type { ViewStyle } from 'react-native';
-import { styleFunction } from '@uifabricshared/foundation-tokens';
-import type { IPersonaTokens } from './Persona.types';
-import type { Theme } from '@fluentui-react-native/framework';
-import { getHorizontalGap } from './Persona.helpers';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { Theme } from '@fluentui-react-native/framework';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
+
+import { getHorizontalGap } from './Persona.helpers';
+import type { IPersonaTokens } from './Persona.types';
 
 const _stackKeyProps: (keyof IPersonaTokens)[] = ['size', 'horizontalGap'];
 

@@ -1,5 +1,5 @@
-import { PRESSABLE_TESTPAGE, PRESSABLE_TEST_COMPONENT, HOMEPAGE_PRESSABLE_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { PRESSABLE_TESTPAGE, PRESSABLE_TEST_COMPONENT, HOMEPAGE_PRESSABLE_BUTTON } from '../consts';
 
 class PressablePageObject extends BasePage {
   /*****************************************/

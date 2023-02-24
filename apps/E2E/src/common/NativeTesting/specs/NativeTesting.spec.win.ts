@@ -1,5 +1,5 @@
-import NativeTestingPageObject from '../pages/NativeTestingPageObject.win';
 import { PAGE_TIMEOUT } from '../../../common/consts';
+import NativeTestingPageObject from '../pages/NativeTestingPageObject.win';
 
 describe('Native Safety Check Testing Initialization', () => {
   it('Wait for app load', async () => {

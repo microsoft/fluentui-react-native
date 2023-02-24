@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import type { MenuTriggerProps } from './MenuTrigger.types';
 import { menuTriggerName } from './MenuTrigger.types';
 import { useMenuTrigger } from './useMenuTrigger';

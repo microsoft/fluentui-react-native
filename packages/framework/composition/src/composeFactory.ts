@@ -1,11 +1,11 @@
-import type { UseStylingOptions, TokenSettings, ThemeHelper, HasLayer } from '@fluentui-react-native/use-styling';
-import { buildUseStyling } from '@fluentui-react-native/use-styling';
+import type { MergeOptions } from '@fluentui-react-native/immutable-merge';
+import { immutableMergeCore } from '@fluentui-react-native/immutable-merge';
 import type { ComposableFunction } from '@fluentui-react-native/use-slot';
 import { stagedComponent } from '@fluentui-react-native/use-slot';
 import type { UseSlotOptions, Slots } from '@fluentui-react-native/use-slots';
 import { buildUseSlots } from '@fluentui-react-native/use-slots';
-import type { MergeOptions } from '@fluentui-react-native/immutable-merge';
-import { immutableMergeCore } from '@fluentui-react-native/immutable-merge';
+import { buildUseStyling } from '@fluentui-react-native/use-styling';
+import type { UseStylingOptions, TokenSettings, ThemeHelper, HasLayer } from '@fluentui-react-native/use-styling';
 
 export type UseStyledSlots<TProps, TSlotProps> = (props: TProps, lookup?: HasLayer) => Slots<TSlotProps>;
 

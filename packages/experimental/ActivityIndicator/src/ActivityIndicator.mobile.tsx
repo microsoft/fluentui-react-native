@@ -1,12 +1,14 @@
 /** @jsx withSlots */
 import { useRef, useEffect, useCallback } from 'react';
 import { Animated, Easing, View } from 'react-native';
-import { Svg, Path } from 'react-native-svg';
+
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
+import { Svg, Path } from 'react-native-svg';
+
+import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './ActivityIndicator.styling';
 import type { ActivityIndicatorProps, FluentActivityIndicatorType } from './ActivityIndicator.types';
 import { activityIndicatorName } from './ActivityIndicator.types';
-import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './ActivityIndicator.styling';
 
 const getActivityIndicatorPath = (diameter: number, width: number, color: string) => {
   const start = {

@@ -1,13 +1,15 @@
 import * as React from 'react';
+
 import { LinkV1 as Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+
 import {
   LINKV1_TEST_COMPONENT,
   LINKV1_ACCESSIBILITY_LABEL,
   LINKV1_NO_A11Y_LABEL_COMPONENT,
   LINKV1_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/LinkV1/consts';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const E2ELinkV1Test: React.FunctionComponent = () => {
