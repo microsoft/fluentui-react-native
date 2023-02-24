@@ -37,11 +37,12 @@
         "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"]],
         "pathGroups": [
           {
-            "pattern": "@fluentui-react-native/**",
-            "group": "parent",
+            "pattern": "react+(|-native)",
+            "group": "external",
             "position": "before"
           }
         ],
+        "pathGroupsExcludedImportTypes": ["react"],
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
