@@ -3,17 +3,19 @@
 import React from 'react';
 import { View } from 'react-native';
 import type { ViewProps } from 'react-native';
-import { dividerName } from './Divider.types';
-import type { DividerProps, DividerTokens } from './Divider.types';
+
 import { withSlots, compressible, useSlot, useFluentTheme, patchTokens, mergeStyles } from '@fluentui-react-native/framework';
 import type { UseTokens } from '@fluentui-react-native/framework';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import type { TextProps } from '@fluentui-react-native/text';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
-import { useDividerTokens } from './DividerTokens';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+import type { TextProps } from '@fluentui-react-native/text';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
 import { colorsFromAppearance, useDividerSlotProps } from './Divider.styling';
+import { dividerName } from './Divider.types';
+import type { DividerProps, DividerTokens } from './Divider.types';
+import { useDividerTokens } from './DividerTokens';
 
 export const Divider = compressible<DividerProps, DividerTokens>((props: DividerProps, useTokens: UseTokens<DividerTokens>) => {
   // Set default values for props

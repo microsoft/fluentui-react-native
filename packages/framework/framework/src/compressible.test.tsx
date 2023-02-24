@@ -1,16 +1,18 @@
 /** @jsx withSlots */
-import type { UseTokens } from './useTokens';
-import { buildUseTokens } from './useTokens';
-import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
+import * as React from 'react';
 import type { TextProps, TextStyle } from 'react-native';
 import { Text, View } from 'react-native';
-import { compressible } from './compressible';
-import type { Theme } from '@fluentui-react-native/theme-types';
+
 import { mergeStyles } from '@fluentui-react-native/merge-props';
+import type { Theme } from '@fluentui-react-native/theme-types';
 import { useSlot, withSlots } from '@fluentui-react-native/use-slot';
-import * as React from 'react';
-import toJson from 'enzyme-to-json';
+import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
 import { mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
+
+import { compressible } from './compressible';
+import { buildUseTokens } from './useTokens';
+import type { UseTokens } from './useTokens';
 
 type Variant = 'normal' | 'header' | 'caption';
 interface VariantTextTokens {

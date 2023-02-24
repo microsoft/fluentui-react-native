@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Text } from '../Text';
-import * as renderer from 'react-test-renderer';
+
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { Text } from '../Text';
 
 describe('Text component tests', () => {
   it('Text default', () => {

@@ -1,5 +1,5 @@
-import { PERSONA_TESTPAGE, PERSONA_TEST_COMPONENT, HOMEPAGE_PERSONA_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { PERSONA_TESTPAGE, PERSONA_TEST_COMPONENT, HOMEPAGE_PERSONA_BUTTON } from '../consts';
 
 class PersonaPageObject extends BasePage {
   /*****************************************/

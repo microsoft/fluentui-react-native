@@ -1,8 +1,10 @@
-import { Button, FAB } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { View } from 'react-native';
-import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
+
+import { Button, FAB } from '@fluentui-react-native/experimental-button';
+
 import { iconProps } from '../Common/iconExamples';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 export const ButtonVariantTest: React.FunctionComponent = () => {
   const [showFABText, setShowFABText] = React.useState(true);

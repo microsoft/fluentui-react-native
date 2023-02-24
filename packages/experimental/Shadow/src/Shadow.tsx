@@ -1,12 +1,14 @@
 import * as React from 'react';
 import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
-import type { ShadowProps } from './Shadow.types';
-import { shadowName } from './Shadow.types';
+
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
-import { getShadowTokenStyleSet } from './shadowStyle';
 import { memoize } from '@fluentui-react-native/framework';
 import type { ShadowToken } from '@fluentui-react-native/theme-types';
+
+import type { ShadowProps } from './Shadow.types';
+import { shadowName } from './Shadow.types';
+import { getShadowTokenStyleSet } from './shadowStyle';
 
 export const Shadow = stagedComponent((props: ShadowProps) => {
   return (final: ShadowProps, children: React.ReactNode) => {

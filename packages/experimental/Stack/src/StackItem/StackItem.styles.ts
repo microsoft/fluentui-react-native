@@ -1,8 +1,10 @@
-import type { StackItemTokens, StackItemProps, StackItemSlotProps } from './StackItem.types';
-import { stackItemName } from './StackItem.types';
+import type { ViewStyle, ViewProps } from 'react-native';
+
 import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { getMemoCache } from '@fluentui-react-native/framework';
-import type { ViewStyle, ViewProps } from 'react-native';
+
+import { stackItemName } from './StackItem.types';
+import type { StackItemTokens, StackItemProps, StackItemSlotProps } from './StackItem.types';
 
 // styles are keyed on token values and are independent of themes or variants so just use a common cache
 const localCache = getMemoCache<ViewProps>();

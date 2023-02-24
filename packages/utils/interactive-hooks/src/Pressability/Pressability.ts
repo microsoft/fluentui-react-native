@@ -10,9 +10,11 @@
 
 'use strict';
 
-import invariant from 'invariant';
 import type * as React from 'react';
 import { Platform, UIManager } from 'react-native';
+
+import invariant from 'invariant';
+
 import type { BlurEvent, FocusEvent, MouseEvent, PressEvent } from './CoreEventTypes';
 import { isHoverEnabled } from './HoverState';
 import type { HostComponent, Rect } from './InternalTypes';

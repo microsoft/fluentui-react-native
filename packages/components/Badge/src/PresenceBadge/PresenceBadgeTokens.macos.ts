@@ -1,5 +1,6 @@
 import type { TokenSettings } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
 import type { PresenceBadgeTokens } from './PresenceBadge.types';
 
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (): PresenceBadgeTokens =>

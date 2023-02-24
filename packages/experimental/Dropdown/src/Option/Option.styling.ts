@@ -1,5 +1,6 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { borderStyles, buildProps, fontStyles, layoutStyles } from '@fluentui-react-native/framework';
+
 import type { OptionProps, OptionSlotProps, OptionTokens } from './Option.types';
 import { optionName } from './Option.types';
 import { defaultOptionTokens } from './OptionTokens';

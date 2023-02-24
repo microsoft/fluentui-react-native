@@ -1,17 +1,19 @@
 /** @jsx withSlots */
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
-import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, stagedComponent, withSlots } from '@fluentui-react-native/framework';
-import type { MenuListProps, MenuListState, MenuListType } from './MenuList.types';
-import { menuListName } from './MenuList.types';
-import { stylingSettings } from './MenuList.styling';
-import { MenuListProvider } from '../context/menuListContext';
-import { useMenuList } from './useMenuList';
-import { useMenuListContextValue } from './useMenuListContextValue';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, stagedComponent, withSlots } from '@fluentui-react-native/framework';
+
+import { stylingSettings } from './MenuList.styling';
+import type { MenuListProps, MenuListState, MenuListType } from './MenuList.types';
+import { menuListName } from './MenuList.types';
+import { useMenuList } from './useMenuList';
+import { useMenuListContextValue } from './useMenuListContextValue';
 import { useMenuContext } from '../context';
+import { MenuListProvider } from '../context/menuListContext';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import type { INativeSlotType } from './Composable.types';
+
 import type { ISlotFn } from './Composable.slots';
+import type { INativeSlotType } from './Composable.types';
 
 /**
  * Renders a slot

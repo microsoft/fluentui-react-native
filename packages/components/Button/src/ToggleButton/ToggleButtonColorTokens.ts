@@ -1,5 +1,6 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
 import type { ToggleButtonTokens } from './ToggleButton.types';
 
 export const defaultToggleButtonColorTokens: TokenSettings<ToggleButtonTokens, Theme> = (t: Theme): ToggleButtonTokens => ({

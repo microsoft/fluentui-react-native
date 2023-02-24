@@ -1,6 +1,8 @@
 import * as React from 'react';
-import type { SlotFn, NativeReactType } from './renderSlot';
+
 import { mergeProps } from '@fluentui-react-native/merge-props';
+
+import type { SlotFn, NativeReactType } from './renderSlot';
 import type { ComposableFunction, StagedRender } from './stagedComponent';
 
 /**

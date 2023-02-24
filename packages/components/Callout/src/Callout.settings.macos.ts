@@ -1,6 +1,7 @@
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
 import type { ICalloutType } from './Callout.types';
 import { calloutName } from './Callout.types';
-import type { IComposeSettings } from '@uifabricshared/foundation-compose';
 
 export const settings: IComposeSettings<ICalloutType> = [
   {

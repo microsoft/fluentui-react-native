@@ -1,5 +1,5 @@
-import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../consts';
 
 class ThemePageObject extends BasePage {
   /*****************************************/

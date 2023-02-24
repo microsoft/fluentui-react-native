@@ -1,4 +1,5 @@
 import { requireNativeComponent } from 'react-native';
+
 import { ensureNativeComponent } from './ensureNativeComponent';
 
 describe('ensureNativeComponent test suite', () => {

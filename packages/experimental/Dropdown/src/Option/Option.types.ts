@@ -1,8 +1,9 @@
+import type { ColorValue } from 'react-native';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/framework';
 import type { IFocusable, IPressableHooks, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { ColorValue } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
 export const optionName = 'Option';

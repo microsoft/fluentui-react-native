@@ -1,8 +1,10 @@
 import * as React from 'react';
+
 import { Option, Dropdown } from '@fluentui-react-native/dropdown';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+
 import { DROPDOWN_TESTPAGE } from './consts';
+import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 

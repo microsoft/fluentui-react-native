@@ -5,6 +5,7 @@ import type {
   StyleFactoryFunctionRaw,
   StyleFactoryOperation,
 } from '@fluentui-react-native/tokens';
+
 import type { ICachedPropHandlers } from './Token.internal';
 
 export type ILookupThemePart<TTheme> = LookupThemePart<TTheme>;

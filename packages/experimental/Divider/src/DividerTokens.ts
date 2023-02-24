@@ -1,6 +1,7 @@
 import { buildUseTokens } from '@fluentui-react-native/framework';
-import type { DividerTokens } from './Divider.types';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
+import type { DividerTokens } from './Divider.types';
 
 export const useDividerTokens = buildUseTokens<DividerTokens>(() => ({
   // base tokens

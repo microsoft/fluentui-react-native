@@ -1,6 +1,6 @@
-import SwitchPageObject from '../pages/SwitchPageObject';
 import { BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../consts';
+import SwitchPageObject from '../pages/SwitchPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', () => {

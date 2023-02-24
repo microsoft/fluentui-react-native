@@ -1,4 +1,5 @@
 import type { Animated, ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-native';
+
 import type { SvgProps } from 'react-native-svg';
 
 export const activityIndicatorName = 'ActivityIndicator';

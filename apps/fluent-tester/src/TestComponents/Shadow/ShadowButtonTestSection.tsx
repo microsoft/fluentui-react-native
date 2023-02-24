@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
+
 import { FAB, Text } from '@fluentui/react-native';
-import { commonTestStyles, stackStyle } from '../Common/styles';
-import { shadowTestPageStyles } from './ShadowTestPageStyles';
 import { useFluentTheme } from '@fluentui-react-native/framework';
+
+import { shadowTestPageStyles } from './ShadowTestPageStyles';
 import { iconProps } from '../Common/iconExamples';
+import { commonTestStyles, stackStyle } from '../Common/styles';
 
 const CustomFABNoShadow = FAB.customize({ shadowToken: undefined });
 const CustomFABShadow64 = FAB.customize({

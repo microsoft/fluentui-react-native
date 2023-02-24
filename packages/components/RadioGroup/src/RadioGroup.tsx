@@ -1,8 +1,18 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
+
 import { FocusZone } from '@fluentui-react-native/focus-zone';
+import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { settings } from './RadioGroup.settings';
 import type {
   IRadioGroupType,
   IRadioGroupProps,
@@ -12,14 +22,6 @@ import type {
   IRadioGroupContext,
 } from './RadioGroup.types';
 import { radioGroupName } from './RadioGroup.types';
-import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { compose } from '@uifabricshared/foundation-compose';
-import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
-import { settings } from './RadioGroup.settings';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   selectedKey: null,

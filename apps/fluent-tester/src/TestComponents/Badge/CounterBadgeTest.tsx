@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import { View, Platform, Text } from 'react-native';
+
 import { CounterBadge } from '@fluentui-react-native/badge';
+
 import { iconProps } from '../Common/iconExamples';
 
 export const CounterBadgeTest: React.FunctionComponent = () => {

@@ -1,6 +1,7 @@
 import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
 import type { MenuItemCheckboxTokens } from './MenuItemCheckbox.types';
 
 export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens, Theme> = (t: Theme): MenuItemCheckboxTokens => ({
