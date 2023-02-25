@@ -7,8 +7,8 @@ import { testContentRootViewStyle } from '../Common/styles';
 export const ButtonVariantTest: React.FunctionComponent = () => {
   return (
     <View style={testContentRootViewStyle}>
-      <View style={{ height: 32, width: 64, borderWidth: 1, borderColor: 'black', flexDirection: 'row', alignSelf: 'baseline' }}>
-        <View style={{ borderWidth: 1, borderColor: 'white', backgroundColor: 'navy' }}>
+      <View style={{ borderWidth: 1, borderColor: 'black', flexDirection: 'row', alignSelf: 'baseline' }}>
+        <View style={{ borderWidth: 1, borderColor: 'white', backgroundColor: 'navy', minHeight: 28, minWidth: 60 }}>
           <Text style={{ color: 'white' }}>Testing</Text>
         </View>
       </View>
