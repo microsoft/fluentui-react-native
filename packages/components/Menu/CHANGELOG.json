@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Sat, 25 Feb 2023 01:17:04 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.12",
+      "version": "1.4.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "276aac8c5e989c0d7af12391950bdacd7a38d509",
+            "comment": "Only open menu when shouldFocusOnContainer is defined"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 23:53:36 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.11",
       "version": "1.4.11",

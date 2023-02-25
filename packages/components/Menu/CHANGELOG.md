@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 24 Feb 2023 23:53:36 GMT and should not be manually modified.
+This log was last generated on Sat, 25 Feb 2023 01:17:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.12
+
+Sat, 25 Feb 2023 01:17:04 GMT
+
+### Patches
+
+- Only open menu when shouldFocusOnContainer is defined (ruaraki@microsoft.com)
 
 ## 1.4.11
 
