@@ -57,7 +57,7 @@ const useMenuOpenState = (
   const { defaultOpen, onOpenChange, open } = props;
   const initialState = typeof defaultOpen !== 'undefined' ? defaultOpen : !!open;
   const [openInternal, setOpenInternal] = React.useState<boolean>(initialState);
-  const [shouldFocusOnContainer, setShouldFocusOnContainer] = React.useState<boolean>(false);
+  const [shouldFocusOnContainer, setShouldFocusOnContainer] = React.useState<boolean | undefined>(undefined);
 
   const state = isControlled ? open : openInternal;
 
@@ -68,12 +68,16 @@ const useMenuOpenState = (
         setOpenInternal(isOpen);
       }
 
-      if (isOpen && Platform.OS === ('win32' as any) && isMouseEvent(e)) {
-        setShouldFocusOnContainer(true);
+      if (isOpen) {
+        if (Platform.OS === ('win32' as any) && isMouseEvent(e)) {
+          setShouldFocusOnContainer(true);
+        } else {
+          setShouldFocusOnContainer(false);
+        }
       }
 
       if (!isOpen) {
-        setShouldFocusOnContainer(false);
+        setShouldFocusOnContainer(undefined);
         lastCloseTimestamp = Date.now();
       }
 
