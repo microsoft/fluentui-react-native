@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Override onHoverOut to call onBlur",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
