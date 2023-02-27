@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fixed pressed state bug",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "gulnazsayed@microsoft.com",
+  "dependentChangeType": "patch"
+}
