@@ -12,7 +12,6 @@ import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { StyledPicker } from '../Common/StyledPicker';
 import { mobileStyles } from '../Common/styles';
 
-
 export const StandardUsage: FunctionComponent = () => {
   const [status, setStatus] = React.useState<PresenceBadgeStatus>('available');
   const [activityRing, setActivityRing] = React.useState(false);
