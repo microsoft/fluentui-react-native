@@ -23,8 +23,7 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['badgeColor'] ||
-    (I18nManager.isRTL && layer === 'rtl') ||
-    (layer === 'shadowToken' && (!userProps.appearance || userProps.appearance === 'filled' || userProps.appearance === 'tint'))
+    (I18nManager.isRTL && layer === 'rtl')
   );
 };
 
@@ -44,27 +43,33 @@ export const Badge = compose<BadgeType>({
     const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps));
 
     return (final: BadgeProps, ...children: ReactNode[]) => {
-      const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge, final);
+      const { icon, iconPosition, size, appearance, ...mergedProps } = mergeProps(badge, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size !== 'tiny';
-      return (
-        <Slots.shadow>
-          <Slots.root {...mergedProps}>
-            {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
-            {showContent &&
-              Children.map(children, (child, i) =>
-                typeof child === 'string' ? (
-                  <Slots.text accessible={false} key={`text-${i}`}>
-                    {child}
-                  </Slots.text>
-                ) : (
-                  child
-                ),
-              )}
-            {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
-          </Slots.root>
-        </Slots.shadow>
+      const showOptionalShadow = appearance === 'filled' || appearance === 'tint';
+
+      const badgeWithoutShadow = (
+        <Slots.root {...mergedProps}>
+          {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+          {showContent &&
+            Children.map(children, (child, i) =>
+              typeof child === 'string' ? (
+                <Slots.text accessible={false} key={`text-${i}`}>
+                  {child}
+                </Slots.text>
+              ) : (
+                child
+              ),
+            )}
+          {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
+        </Slots.root>
       );
+
+      if (showOptionalShadow) {
+        return <Slots.shadow>{badgeWithoutShadow}</Slots.shadow>;
+      } else {
+        return badgeWithoutShadow;
+      }
     };
   },
 });
