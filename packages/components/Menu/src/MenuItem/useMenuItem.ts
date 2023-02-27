@@ -55,7 +55,10 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const { onBlur, onHoverOut, ...restPressableProps } = pressable.props;
   const onHoverOutModified = React.useCallback(
     (e) => {
-      onBlur(e);
+      // Focus is removed on macOS while win32 keeps it
+      if (Platform.OS === 'macos') {
+        onBlur(e);
+      }
       onHoverOut && onHoverOut(e);
     },
     [onBlur, onHoverOut],
