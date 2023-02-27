@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "fixed pressed state bug",
+  "comment": "polish bug fixes",
   "packageName": "@fluentui-react-native/tester",
   "email": "gulnazsayed@microsoft.com",
   "dependentChangeType": "patch"
