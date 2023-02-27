@@ -7,11 +7,12 @@ import type { UseSlots, Slots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
 import { Svg, Path } from 'react-native-svg';
-import { getFallbackIconPath } from './stylingUtils';
+
 
 import { stylingSettings } from './Avatar.styling';
 import type { AvatarProps, AvatarType, AvatarState, AvatarSlotProps } from './Avatar.types';
 import { AvatarName } from './Avatar.types';
+import { getFallbackIconPath } from './stylingUtils';
 import { useAvatar } from './useAvatar';
 
 /**
