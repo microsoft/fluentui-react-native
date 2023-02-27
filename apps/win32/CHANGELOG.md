@@ -1,8 +1,81 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 17 Feb 2023 22:33:14 GMT and should not be manually modified.
+This log was last generated on Sat, 25 Feb 2023 01:17:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.23
+
+Sat, 25 Feb 2023 01:17:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.134.17
+
+## 0.32.22
+
+Fri, 24 Feb 2023 23:53:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.134.16
+
+## 0.32.21
+
+Fri, 24 Feb 2023 20:39:59 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/tester to v0.134.15
+
+## 0.32.20
+
+Fri, 24 Feb 2023 03:20:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.134.14
+
+## 0.32.19
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.134.13
+
+## 0.32.18
+
+Thu, 23 Feb 2023 22:09:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.134.12
+
+## 0.32.17
+
+Wed, 22 Feb 2023 20:36:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.134.11
+
+## 0.32.16
+
+Wed, 22 Feb 2023 18:07:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.134.10
+
+## 0.32.15
+
+Tue, 21 Feb 2023 17:18:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.134.9
 
 ## 0.32.14
 

@@ -1,7 +1,8 @@
-import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
-import { Separator } from '@fluentui/react-native';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { Separator } from '@fluentui/react-native';
+import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
 
 export const DefaultRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function

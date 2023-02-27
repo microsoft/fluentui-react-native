@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { SvgUri } from 'react-native-svg';
+
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
+import { SvgUri } from 'react-native-svg';
+
 import type { SvgIconProps } from './SvgIcon.types';
 import { svgIconName } from './SvgIcon.types';
 import { useSvgIcon } from './useSvgIcon';

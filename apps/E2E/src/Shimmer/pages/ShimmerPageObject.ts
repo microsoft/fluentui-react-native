@@ -1,5 +1,5 @@
-import { HOMEPAGE_SHIMMER_BUTTON, SHIMMER_TESTPAGE, SHIMMER_TEST_COMPONENT } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { HOMEPAGE_SHIMMER_BUTTON, SHIMMER_TESTPAGE, SHIMMER_TEST_COMPONENT } from '../consts';
 
 class ShimmerPageObject extends BasePage {
   /*****************************************/

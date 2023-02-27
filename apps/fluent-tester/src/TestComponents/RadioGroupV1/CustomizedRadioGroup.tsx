@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
+
 import type { RadioGroupTokens, RadioTokens } from '@fluentui-react-native/experimental-radio-group';
 import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
+
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
 const styles = StyleSheet.create({

@@ -1,4 +1,5 @@
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
+
 import { buildProps } from './buildProps';
 
 type ITheme = { foo?: string; bar?: string };

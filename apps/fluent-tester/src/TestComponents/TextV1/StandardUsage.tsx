@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+
 import { HOMEPAGE_TEXTV1_BUTTON } from '../../../../E2E/src/TextV1/consts';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const StandardUsage: React.FunctionComponent = () => {

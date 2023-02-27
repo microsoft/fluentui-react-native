@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 

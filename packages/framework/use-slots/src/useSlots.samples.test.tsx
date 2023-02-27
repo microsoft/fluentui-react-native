@@ -1,10 +1,12 @@
 /** @jsx withSlots */
-import { withSlots, stagedComponent } from '@fluentui-react-native/use-slot';
-import { mergeProps } from '@fluentui-react-native/merge-props';
-import { buildUseSlots } from './buildUseSlots';
-import toJson from 'enzyme-to-json';
-import { mount } from 'enzyme';
 import type { CSSProperties } from 'react';
+
+import { mergeProps } from '@fluentui-react-native/merge-props';
+import { withSlots, stagedComponent } from '@fluentui-react-native/use-slot';
+import { mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
+
+import { buildUseSlots } from './buildUseSlots';
 
 // types for web
 type TextProps = { style?: CSSProperties };

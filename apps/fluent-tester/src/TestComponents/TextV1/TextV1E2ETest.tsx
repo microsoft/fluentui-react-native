@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+
 import {
   TEXTV1_TEST_COMPONENT,
   TEXTV1_ACCESSIBILITY_LABEL,
   TEXTV1_NO_A11Y_LABEL_COMPONENT,
   TEXTV1_CONTENT,
 } from '../../../../E2E/src/TextV1/consts';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const TextV1E2ETest: React.FunctionComponent = () => {

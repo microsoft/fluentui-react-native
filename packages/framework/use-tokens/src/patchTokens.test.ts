@@ -1,5 +1,6 @@
-import { patchTokens } from './patchTokens';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
+
+import { patchTokens } from './patchTokens';
 
 interface Tokens {
   uno?: string;

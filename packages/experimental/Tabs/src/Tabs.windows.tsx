@@ -1,12 +1,14 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import type { TabsType, TabsProps, TabsContextData } from './Tabs.types';
-import { tabsName } from './Tabs.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings } from './Tabs.styling';
+
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { stylingSettings } from './Tabs.styling';
+import type { TabsType, TabsProps, TabsContextData } from './Tabs.types';
+import { tabsName } from './Tabs.types';
 import { useTabs } from './useTabs';
 
 export const TabsContext = React.createContext<TabsContextData>({

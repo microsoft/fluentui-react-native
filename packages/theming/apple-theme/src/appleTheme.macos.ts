@@ -1,8 +1,9 @@
+import { memoize } from '@fluentui-react-native/memo-cache';
 import type { Spacing, Theme, AppearanceOptions } from '@fluentui-react-native/theme-types';
+
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleShadows } from './appleShadows.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
-import { memoize } from '@fluentui-react-native/memo-cache';
 
 export function appleSpacing(): Spacing {
   return {

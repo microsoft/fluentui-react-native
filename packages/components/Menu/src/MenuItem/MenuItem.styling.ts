@@ -1,9 +1,10 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
-import { defaultMenuItemTokens } from './MenuItemTokens';
+
 import type { MenuItemProps, MenuItemTokens, MenuItemSlotProps } from './MenuItem.types';
 import { menuItemName } from './MenuItem.types';
+import { defaultMenuItemTokens } from './MenuItemTokens';
 
 export const menuItemStates: (keyof MenuItemTokens)[] = ['hovered', 'focused', 'pressed', 'disabled'];
 

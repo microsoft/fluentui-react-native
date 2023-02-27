@@ -1,6 +1,7 @@
-import type { IPartialTheme, ITheme, ThemeRegistry } from './Theme.types';
-import { createPlatformThemeRegistry } from './platform';
 import type { IProcessTheme, IThemeEventListener, IThemeRegistry } from '@uifabricshared/theme-registry';
+
+import { createPlatformThemeRegistry } from './platform';
+import type { IPartialTheme, ITheme, ThemeRegistry } from './Theme.types';
 
 export { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 export type IThemeDefinition = IPartialTheme | IProcessTheme<ITheme, IPartialTheme>;

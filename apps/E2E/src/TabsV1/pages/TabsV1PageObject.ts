@@ -1,3 +1,4 @@
+import { BasePage, By } from '../../common/BasePage';
 import {
   TABSV1_TESTPAGE,
   TABSV1_TEST_COMPONENT,
@@ -9,7 +10,6 @@ import {
   TABSITEMV1_CONTENT_2,
   TABSITEMV1_CONTENT_3,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
 
 export type TabItem = 'First' | 'Second' | 'Third';
 

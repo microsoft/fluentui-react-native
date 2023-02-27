@@ -15,6 +15,7 @@
  */
 
 import type * as React from 'react';
+
 import type { HostComponent } from './InternalTypes';
 
 export type SyntheticEvent<T> = Readonly<{

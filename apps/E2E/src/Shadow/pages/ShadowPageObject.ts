@@ -1,5 +1,5 @@
-import { SHADOW_TESTPAGE, HOMEPAGE_SHADOW_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { SHADOW_TESTPAGE, HOMEPAGE_SHADOW_BUTTON } from '../consts';
 
 class ShadowTestPage extends BasePage {
   /*****************************************/

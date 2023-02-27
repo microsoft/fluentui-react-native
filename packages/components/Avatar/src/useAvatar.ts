@@ -1,10 +1,12 @@
 import type { ImageProps, ImageSourcePropType } from 'react-native';
+
+import type { PresenceBadgeProps } from '@fluentui-react-native/badge';
+import { createIconProps } from '@fluentui-react-native/icon';
+
 import type { AvatarProps, AvatarInfo, AvatarState, AvatarSize, AvatarColor } from './Avatar.types';
 import { AvatarColors } from './Avatar.types';
-import type { PresenceBadgeProps } from '@fluentui-react-native/badge';
-import { titles, multiWordTitles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
-import { createIconProps } from '@fluentui-react-native/icon';
+import { titles, multiWordTitles } from './titles';
 
 /**
  * Re-usable hook for FURN Avatar.

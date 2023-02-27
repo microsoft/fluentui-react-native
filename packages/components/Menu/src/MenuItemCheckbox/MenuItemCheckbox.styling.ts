@@ -1,9 +1,10 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
-import { defaultMenuItemCheckboxTokens } from './MenuItemCheckboxTokens';
+
 import type { MenuItemCheckboxProps, MenuItemCheckboxTokens, MenuItemCheckboxSlotProps } from './MenuItemCheckbox.types';
 import { menuItemCheckboxName } from './MenuItemCheckbox.types';
+import { defaultMenuItemCheckboxTokens } from './MenuItemCheckboxTokens';
 
 export const menuItemCheckboxStates: (keyof MenuItemCheckboxTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
 

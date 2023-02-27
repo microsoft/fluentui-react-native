@@ -1,7 +1,9 @@
 import * as React from 'react';
+
+import * as renderer from 'react-test-renderer';
+
 import type { MenuButtonItemProps } from '..';
 import { MenuButton } from '..';
-import * as renderer from 'react-test-renderer';
 
 it('ContextualMenu default', () => {
   const menuItems: MenuButtonItemProps[] = [
