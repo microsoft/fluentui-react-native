@@ -52,6 +52,20 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   );
 
   const pressable = usePressableState({ ...rest, onPress: onInvoke });
+  const { onBlur, onHoverOut, ...restPressableProps } = pressable.props;
+  const onHoverOutModified = React.useCallback(
+    (e) => {
+      onBlur(e);
+      onHoverOut && onHoverOut(e);
+    },
+    [onBlur, onHoverOut],
+  );
+
+  const pressablePropsModified = {
+    onBlur,
+    onHoverOut: onHoverOutModified,
+    ...restPressableProps,
+  };
   const itemRef = useViewCommandFocus(componentRef);
   const keys = disabled ? [] : isSubmenu ? submenuTriggerKeys : triggerKeys;
 
@@ -62,7 +76,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
 
   return {
     props: {
-      ...pressable.props,
+      ...pressablePropsModified,
       accessible: true,
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
@@ -100,8 +114,6 @@ export const useHoverFocusEffect = (hovered: boolean, componentRef: React.Mutabl
   React.useLayoutEffect(() => {
     if (hovered) {
       componentRef?.current?.focus();
-    } else {
-      componentRef?.current?.blur();
     }
   }, [hovered, componentRef]);
 };
