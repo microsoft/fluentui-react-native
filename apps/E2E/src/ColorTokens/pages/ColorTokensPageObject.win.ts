@@ -1,5 +1,5 @@
-import { HOMEPAGE_COLORTOKEN_BUTTON, COLORTOKEN_TESTPAGE } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { HOMEPAGE_COLORTOKEN_BUTTON, COLORTOKEN_TESTPAGE } from '../consts';
 
 class ColorTokenPageObject extends BasePage {
   /*****************************************/

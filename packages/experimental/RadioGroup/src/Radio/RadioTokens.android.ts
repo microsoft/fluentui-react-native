@@ -1,6 +1,7 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import type { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
 import type { RadioTokens } from './Radio.types';
 
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
@@ -35,7 +36,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
 
     disabled: {
       // Unselected, Disabled
-      rippleColor: 'transparent',
+      rippleColor: '#D4D4D4',
       radioBorder: t.colors.neutralStrokeDisabled,
       radioVisibility: 0,
       color: t.colors.neutralForegroundDisabled1,

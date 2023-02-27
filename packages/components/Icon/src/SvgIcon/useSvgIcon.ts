@@ -1,5 +1,7 @@
 import type { ImageStyle } from 'react-native';
+
 import { getMemoCache, mergeStyles } from '@fluentui-react-native/framework';
+
 import type { SvgIconProps } from './SvgIcon.types';
 
 const rasterImageStyleCache = getMemoCache<ImageStyle>();

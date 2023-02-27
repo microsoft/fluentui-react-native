@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Badge, CounterBadge, PresenceBadge } from '../';
-import * as renderer from 'react-test-renderer';
+
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { Badge, CounterBadge, PresenceBadge } from '../';
 
 describe('Badge component tests', () => {
   const fontBuiltInProps = {

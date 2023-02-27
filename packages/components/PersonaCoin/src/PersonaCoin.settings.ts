@@ -1,7 +1,8 @@
 import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import { convertCoinColorFluent } from './PersonaCoin.helpers';
 import type { IPersonaCoinType } from './PersonaCoin.types';
 import { personaCoinName } from './PersonaCoin.types';
-import { convertCoinColorFluent } from './PersonaCoin.helpers';
 
 export const settings: IComposeSettings<IPersonaCoinType> = [
   {

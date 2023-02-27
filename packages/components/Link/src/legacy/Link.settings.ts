@@ -1,7 +1,8 @@
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
 import type { ILinkType } from './Link.types';
 import { linkName } from './Link.types';
-import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export const settings: IComposeSettings<ILinkType> = [
   {
@@ -12,6 +13,7 @@ export const settings: IComposeSettings<ILinkType> = [
       borderStyle: 'solid',
       borderWidth: 2,
       borderRadius: 4,
+      textDecorationLine: 'underline',
     },
     root: {
       accessible: true,

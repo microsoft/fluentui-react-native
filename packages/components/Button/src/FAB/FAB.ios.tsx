@@ -1,1 +1,1 @@
-export { FAB } from './FABCore';
+export { FAB } from './FAB.mobile';

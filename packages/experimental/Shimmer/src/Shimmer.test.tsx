@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import * as renderer from 'react-test-renderer';
+
 import { Shimmer } from './Shimmer';
 import type { ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types';
 

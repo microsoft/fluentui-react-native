@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/component-cache
 
-This log was last generated on Wed, 01 Feb 2023 22:33:15 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 20:39:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.4
+
+Fri, 24 Feb 2023 20:39:57 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
 
 ## 1.4.3
 

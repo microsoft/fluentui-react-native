@@ -1,5 +1,5 @@
-import { PERSONACOIN_TESTPAGE, PERSONACOIN_TEST_COMPONENT, HOMEPAGE_PERSONACOIN_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { PERSONACOIN_TESTPAGE, PERSONACOIN_TEST_COMPONENT, HOMEPAGE_PERSONACOIN_BUTTON } from '../consts';
 
 class PersonaCoinPageObject extends BasePage {
   /*****************************************/

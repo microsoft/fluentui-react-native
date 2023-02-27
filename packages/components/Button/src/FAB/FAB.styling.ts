@@ -1,12 +1,14 @@
-import type { FABProps, FABSlotProps, FABTokens } from './FAB.types';
-import { fabName } from './FAB.types';
+import { Platform } from 'react-native';
+
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
-import { Platform } from 'react-native';
-import { defaultFABTokens } from './FABTokens';
+import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
+
+import { fabName } from './FAB.types';
+import type { FABProps, FABSlotProps, FABTokens } from './FAB.types';
 import { defaultFABColorTokens } from './FABColorTokens';
+import { defaultFABTokens } from './FABTokens';
 
 export const FABStates: (keyof FABTokens)[] = ['focused', 'pressed', 'subtle', 'disabled', 'large', 'small', 'hasContent'];
 

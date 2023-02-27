@@ -1,4 +1,5 @@
 import { NativeEventEmitter } from 'react-native';
+
 import NativeFontMetrics from './NativeFontMetrics';
 import type { FontMetrics, ScaleFactors } from './NativeFontMetrics.types';
 

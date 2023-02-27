@@ -1,4 +1,5 @@
 import type { TextProps, TextPropsIOS, ViewProps, ViewPropsIOS, ImageProps, ImagePropsIOS } from 'react-native';
+
 import type { IFilterMask } from './filter.types';
 
 // export core interface types

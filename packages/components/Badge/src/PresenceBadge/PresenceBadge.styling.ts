@@ -1,12 +1,13 @@
-import type { PresenceBadgeTokens, PresenceBadgeSlotProps, PresenceBadgeProps } from './PresenceBadge.types';
-import { presenceBadgeName, PresenceBadgeStatuses } from './PresenceBadge.types';
-import type { BadgeConfigurableProps } from '../Badge.types';
 import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles } from '@fluentui-react-native/tokens';
-import { defaultBadgeTokens } from '../BadgeTokens';
+
+import { presenceBadgeName, PresenceBadgeStatuses } from './PresenceBadge.types';
+import type { PresenceBadgeTokens, PresenceBadgeSlotProps, PresenceBadgeProps } from './PresenceBadge.types';
 import { defaultPresenceBadgeTokens } from './PresenceBadgeTokens';
 import { coreBadgeStates, getBadgePosition } from '../Badge.styling';
+import type { BadgeConfigurableProps } from '../Badge.types';
+import { defaultBadgeTokens } from '../BadgeTokens';
 
 export const badgeStates: (keyof PresenceBadgeTokens)[] = [...coreBadgeStates, ...PresenceBadgeStatuses];
 const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['position'];

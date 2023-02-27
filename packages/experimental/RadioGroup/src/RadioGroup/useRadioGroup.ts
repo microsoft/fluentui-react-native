@@ -1,9 +1,11 @@
 import * as React from 'react';
-import type { RadioGroupInfo, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
-import { useSelectedKey as useValue } from '@fluentui-react-native/interactive-hooks';
 import type { View } from 'react-native';
-import { memoize } from '@fluentui-react-native/framework';
 import type { AccessibilityState } from 'react-native';
+
+import { memoize } from '@fluentui-react-native/framework';
+import { useSelectedKey as useValue } from '@fluentui-react-native/interactive-hooks';
+
+import type { RadioGroupInfo, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
 
 export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
   const { value, defaultValue, disabled, required, layout, onChange, isCircularNavigation, accessibilityLabel, label, accessibilityState } =

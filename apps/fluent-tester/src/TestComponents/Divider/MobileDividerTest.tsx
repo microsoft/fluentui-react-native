@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
+
 import { Divider } from '@fluentui-react-native/divider';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 import { commonTestStyles } from '../Common/styles';
-import { StyleSheet, View } from 'react-native';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 const CustomizedText = Text.customize({
   textAlign: 'right',

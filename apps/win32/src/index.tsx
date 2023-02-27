@@ -1,7 +1,8 @@
 'use strict';
 
-import { FluentTesterApp } from '@fluentui-react-native/tester';
 import { AppRegistry } from 'react-native';
+
+import { FluentTesterApp } from '@fluentui-react-native/tester';
 
 AppRegistry.registerComponent('FluentTester', () => FluentTesterApp);
 

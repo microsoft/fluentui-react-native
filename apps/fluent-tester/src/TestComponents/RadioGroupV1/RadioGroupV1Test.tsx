@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { RADIOGROUPV1_TESTPAGE } from '../../../../E2E/src/RadioGroupV1/consts';
-import { DefaultRadioGroup } from './DefaultRadioGroup';
-import { RequiredRadioGroup } from './RequiredRadioGroup';
-import { DisabledRadioGroup } from './DisabledRadioGroup';
-import { SubtextRadioGroup } from './SubtextRadioGroup';
-import { HorizontalRadioGroup } from './HorizontalRadioGroup';
+import { Platform } from 'react-native';
+
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
+import { DefaultRadioGroup } from './DefaultRadioGroup';
+import { DisabledRadioGroup } from './DisabledRadioGroup';
+import { HorizontalRadioGroup } from './HorizontalRadioGroup';
 import { RadioGroupV1E2ETest } from './RadioGroupV1E2ETest';
+import { RequiredRadioGroup } from './RequiredRadioGroup';
+import { SubtextRadioGroup } from './SubtextRadioGroup';
+import { RADIOGROUPV1_TESTPAGE } from '../../../../E2E/src/RadioGroupV1/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { Platform } from 'react-native';
 
 const radioGroupV1Sections: TestSection[] = [
   {

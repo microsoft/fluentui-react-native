@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
+
 import {
   Text as FURNText,
   ButtonV1 as Button,
@@ -11,11 +12,12 @@ import {
   Separator,
   Checkbox,
 } from '@fluentui/react-native';
+
+import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 import { CONTEXTUALMENU_TESTPAGE } from '../../../../E2E/src/ContextualMenu/consts';
+import { svgProps, fontProps, testImage } from '../Common/iconExamples';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { svgProps, fontProps, testImage } from '../Common/iconExamples';
-import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 
 const ContextualMenuMainTest: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);

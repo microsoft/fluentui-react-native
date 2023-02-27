@@ -1,8 +1,10 @@
-import type { Theme } from '@fluentui-react-native/framework';
-import type { TokenSettings } from '@fluentui-react-native/use-styling';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import type { CheckboxTokens } from './Checkbox.types';
 import { Platform } from 'react-native';
+
+import type { Theme } from '@fluentui-react-native/framework';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { CheckboxTokens } from './Checkbox.types';
 
 // A copy of CheckboxTokens.android.ts, these are expected to change in the future.
 

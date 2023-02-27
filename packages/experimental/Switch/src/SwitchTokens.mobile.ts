@@ -1,5 +1,6 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
 import type { SwitchTokens } from './Switch.types';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({

@@ -1,3 +1,7 @@
+import type { ImageURISource } from 'react-native';
+
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
 import type {
   PersonaSize,
   PersonaCoinColor,
@@ -6,8 +10,6 @@ import type {
   IPersonaCoinTokens,
   RingThickness,
 } from './PersonaCoin.types';
-import type { ImageURISource } from 'react-native';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 const presenceIconCache: { [key in PersonaPresence]: ImageURISource } = {
   none: { uri: '' },

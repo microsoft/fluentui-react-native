@@ -1,7 +1,8 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import type { ShimmerTokens } from './Shimmer.types';
-import type { TokenSettings } from '@fluentui-react-native/use-styling';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { ShimmerTokens } from './Shimmer.types';
 
 export const defaultShimmerTokens: TokenSettings<ShimmerTokens, Theme> = (theme: Theme) =>
   ({

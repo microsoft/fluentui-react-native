@@ -1,5 +1,5 @@
-import { SEPARATOR_TESTPAGE, SEPARATOR_TEST_COMPONENT, HOMEPAGE_SEPARATOR_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { SEPARATOR_TESTPAGE, SEPARATOR_TEST_COMPONENT, HOMEPAGE_SEPARATOR_BUTTON } from '../consts';
 
 class SeparatorPageObject extends BasePage {
   /*****************************************/

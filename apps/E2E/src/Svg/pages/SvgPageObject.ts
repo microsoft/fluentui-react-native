@@ -1,5 +1,5 @@
-import { SVG_TESTPAGE, SVG_TEST_COMPONENT, HOMEPAGE_SVG_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { SVG_TESTPAGE, SVG_TEST_COMPONENT, HOMEPAGE_SVG_BUTTON } from '../consts';
 
 class SvgPageObject extends BasePage {
   /*****************************************/

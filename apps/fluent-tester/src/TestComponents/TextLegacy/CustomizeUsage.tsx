@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { Stack } from '@fluentui-react-native/stack';
+
 import { Text } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
+
 import { stackStyle } from '../Common/styles';
 
 const RedCaptionBold = Text.customize({ tokens: { variant: 'captionStandard', fontWeight: '700', color: '#ff0000' } });

@@ -1,8 +1,10 @@
 import * as React from 'react';
-import * as renderer from 'react-test-renderer';
 import { Pressable } from 'react-native';
-import { useKeyProps } from '../useKeyProps';
+
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { useKeyProps } from '../useKeyProps';
 import type { PressablePropsExtended } from '../usePressableState.types';
 
 const dummyFunction = () => {

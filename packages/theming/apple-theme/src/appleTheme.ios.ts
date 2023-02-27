@@ -1,8 +1,9 @@
-import type { Theme, Spacing } from '@fluentui-react-native/theme-types';
-import { paletteFromAppleColors } from './appleColors.ios';
-import { appleTypography } from './appleTypography.ios';
-import { iOSShadows } from './appleShadows.ios';
 import { memoize } from '@fluentui-react-native/memo-cache';
+import type { Theme, Spacing } from '@fluentui-react-native/theme-types';
+
+import { paletteFromAppleColors } from './appleColors.ios';
+import { iOSShadows } from './appleShadows.ios';
+import { appleTypography } from './appleTypography.ios';
 
 function appleSpacing(): Spacing {
   return {
