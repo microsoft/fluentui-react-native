@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "useViewCommandFocus does not need to replace focus/blur methods except on win32",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
