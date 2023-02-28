@@ -92,13 +92,6 @@ const edgeCaseData = [
   ['1x1', 'X'],
 ];
 
-describe('Avatar rendering', () => {
-  it('renders Avatar', () => {
-    const tree = renderer.create(<Avatar />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-});
-
 describe('getInitials method', () => {
   it.each(emptyData)("returns an empty string for '%s'", (text, expected) => {
     expect(getInitials(text)).toBe(expected);
@@ -138,5 +131,32 @@ describe('resolveColorfulToSpecificColor method', () => {
   });
   it('Id = x', () => {
     expect(resolveColorfulToSpecificColor('x', undefined)).toBe('darkRed');
+  });
+});
+
+describe('Avatar component tests', () => {
+  it('Avatar default', () => {
+    const tree = renderer.create(<Avatar />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Avatar circular', () => {
+    const tree = renderer.create(<Avatar shape="circular" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Avatar square', () => {
+    const tree = renderer.create(<Avatar shape="square" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Avatar badge', () => {
+    const tree = renderer.create(<Avatar badge={{ status: 'available', outOfOffice: false }} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Avatar ring', () => {
+    const tree = renderer.create(<Avatar active="active" activeAppearance="ring" />).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
