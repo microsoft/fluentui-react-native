@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 28 Feb 2023 12:20:28 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Feb 2023 20:13:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.20
+
+Tue, 28 Feb 2023 20:13:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/divider to v0.3.2
 
 ## 0.134.19
 
