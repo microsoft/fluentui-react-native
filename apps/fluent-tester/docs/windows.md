@@ -16,7 +16,8 @@
 ## Running the App
 
 1. Run `yarn` from the root of the repo
-2. From this directory, simply `yarn windows`
+2. From this directory, run `yarn install-windows-test-app`
+3. From this directory, simply `yarn windows`
 
 ## Debugging
 
