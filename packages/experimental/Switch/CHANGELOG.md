@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Fri, 24 Feb 2023 20:39:59 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Feb 2023 11:24:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.29
+
+Tue, 28 Feb 2023 11:24:37 GMT
+
+### Patches
+
+- fix switch font ally (rohanpd.work@gmail.com)
 
 ## 0.8.28
 
