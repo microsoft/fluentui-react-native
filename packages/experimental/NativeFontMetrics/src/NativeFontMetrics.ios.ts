@@ -1,5 +1,6 @@
 import { NativeModules } from 'react-native';
-import { ScaleFactors, TextStyle } from './NativeFontMetrics.types';
+
+import type { ScaleFactors, TextStyle } from './NativeFontMetrics.types';
 
 export const NativeFontMetrics = NativeModules.FRNFontMetrics;
 

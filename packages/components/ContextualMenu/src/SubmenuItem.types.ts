@@ -1,9 +1,11 @@
-import * as React from 'react';
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-react-native/text';
-import { ContextualMenuItemProps, ContextualMenuItemTokens, ContextualMenuItemState } from './ContextualMenuItem.types';
-import { IconProps } from '@fluentui-react-native/icon';
+import type * as React from 'react';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IconProps } from '@fluentui-react-native/icon';
+import type { ITextProps } from '@fluentui-react-native/text';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
+
+import type { ContextualMenuItemProps, ContextualMenuItemTokens, ContextualMenuItemState } from './ContextualMenuItem.types';
 
 export const submenuItemName = 'SubmenuItem';
 export interface SubmenuItemTokens extends ContextualMenuItemTokens {

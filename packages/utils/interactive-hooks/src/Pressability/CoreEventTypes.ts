@@ -14,8 +14,9 @@
  * Adapted from the flow code inside the react native project
  */
 
-import * as React from 'react';
-import { HostComponent } from './InternalTypes';
+import type * as React from 'react';
+
+import type { HostComponent } from './InternalTypes';
 
 export type SyntheticEvent<T> = Readonly<{
   bubbles?: boolean;

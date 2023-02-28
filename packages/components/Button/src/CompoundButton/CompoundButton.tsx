@@ -1,14 +1,18 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
+
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { CompoundButtonProps, compoundButtonName, CompoundButtonType } from './CompoundButton.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings } from './CompoundButton.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useButton } from '../useButton';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { stylingSettings } from './CompoundButton.styling';
+import type { CompoundButtonProps, CompoundButtonType } from './CompoundButton.types';
+import { compoundButtonName } from './CompoundButton.types';
 import { buttonLookup } from '../Button';
+import { useButton } from '../useButton';
 
 export const CompoundButton = compose<CompoundButtonType>({
   displayName: compoundButtonName,

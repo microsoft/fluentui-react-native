@@ -1,12 +1,15 @@
+import * as React from 'react';
+import { Switch, View } from 'react-native';
+
+import { Text } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/button';
 import { NativeDatePicker } from '@fluentui-react-native/experimental-native-date-picker';
-import { NATIVEDATEPICKER_TESTPAGE } from './consts';
-import { PlatformStatus, Test, TestSection } from '../Test';
-import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
+
+import { NATIVEDATEPICKER_TESTPAGE } from './consts';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { Switch, View } from 'react-native';
-import { Text } from '@fluentui/react-native';
+import type { PlatformStatus, TestSection } from '../Test';
+import { Test } from '../Test';
 
 const NativeDatePickerMainTest: React.FunctionComponent = () => {
   const [startDate, setStartDate] = React.useState<Date>(new Date());

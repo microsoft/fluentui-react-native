@@ -1,4 +1,6 @@
-import { ViewStyle, TextStyle, ImageStyle, StyleSheet } from 'react-native';
+import type { ViewStyle, TextStyle, ImageStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
 
 /**

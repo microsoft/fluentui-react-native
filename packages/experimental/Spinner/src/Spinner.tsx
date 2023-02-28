@@ -1,13 +1,17 @@
 /** @jsx withSlots */
 import { View } from 'react-native';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Svg } from 'react-native-svg';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { spinnerName, SpinnerProps, SpinnerType } from './Spinner.types';
+
 import { RCTNativeAnimatedSpinner } from './consts.win32';
+import type { SpinnerProps, SpinnerType } from './Spinner.types';
+import { spinnerName } from './Spinner.types';
 
 /* TODO: Implement Spinner with following slots */
-export const ActivityIndicator = compose<SpinnerType>({
+export const Spinner = compose<SpinnerType>({
   displayName: spinnerName,
   slots: {
     root: View,

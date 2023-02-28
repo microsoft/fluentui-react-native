@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Expander } from '@fluentui-react-native/experimental-expander';
-import { Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { EXPANDER_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
+
+import { Text } from '@fluentui/react-native';
+import { Expander } from '@fluentui-react-native/experimental-expander';
+import { Stack } from '@fluentui-react-native/stack';
+
+import { EXPANDER_TESTPAGE } from './consts';
+import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const CustomizedExpander = Expander.customize({
   headerBackground: '#9c9c9c',

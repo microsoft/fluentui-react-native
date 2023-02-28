@@ -1,8 +1,11 @@
-import { IComponentSettings, mergeSettings } from '@uifabricshared/foundation-settings';
-import { ISettingsEntry, ISettingsFromTheme } from './CustomSettings.types';
-import { mergeBaseSettings, getThemedSettings } from './CustomSettings';
+import type { ColorValue } from 'react-native';
+
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
-import { ColorValue } from 'react-native';
+import type { IComponentSettings } from '@uifabricshared/foundation-settings';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { mergeBaseSettings, getThemedSettings } from './CustomSettings';
+import type { ISettingsEntry, ISettingsFromTheme } from './CustomSettings.types';
 
 interface IMockTheme {
   palette: {

@@ -1,8 +1,12 @@
 /** @jsx withSlots */
 import { View } from 'react-native';
-import { separatorName, SeparatorProps, SeparatorType } from './Separator.types';
-import { compose, UseSlots, withSlots, mergeProps } from '@fluentui-react-native/framework';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
+
 import { stylingSettings } from './Separator.styling';
+import type { SeparatorProps, SeparatorType } from './Separator.types';
+import { separatorName } from './Separator.types';
 
 const propMask = { vertical: undefined };
 

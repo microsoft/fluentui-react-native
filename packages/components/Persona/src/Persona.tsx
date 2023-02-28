@@ -1,17 +1,22 @@
 /** @jsx withSlots */
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { IPersonaType, personaName, IPersonaSlotProps, IPersonaProps, IPersonaRenderData } from './Persona.types';
-import { settings } from './Persona.settings';
 import { View, Text } from 'react-native';
+
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { PersonaCoin } from '@fluentui-react-native/persona-coin';
-import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { buildRootStyle } from './Persona.tokens.root';
-import { buildTextStyle, buildTertiaryStyle, buildOptionalStyle, buildSecondaryStyle } from './Persona.tokens.texts';
-import { buildCoinStyle } from './Persona.tokens.coin';
 import { foregroundColorTokens } from '@fluentui-react-native/tokens';
+import type { ISlots, IRenderData } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { settings } from './Persona.settings';
+import { buildCoinStyle } from './Persona.tokens.coin';
+import { buildRootStyle } from './Persona.tokens.root';
 import { buildStackStyle } from './Persona.tokens.stack';
+import { buildTextStyle, buildTertiaryStyle, buildOptionalStyle, buildSecondaryStyle } from './Persona.tokens.texts';
+import { personaName } from './Persona.types';
+import type { IPersonaType, IPersonaSlotProps, IPersonaProps, IPersonaRenderData } from './Persona.types';
 
 function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling<IPersonaType>): IRenderData<IPersonaSlotProps> {
   const {

@@ -1,13 +1,14 @@
-import { ThemeReference } from '@fluentui-react-native/theme';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
-import { getThemingModule } from './NativeModule/getThemingModule';
-import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
-import { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
-import { createPartialOfficeTheme } from './createPartialOfficeTheme';
-import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from './createOfficeAliasTokens';
-import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';
+import { ThemeReference } from '@fluentui-react-native/theme';
+import type { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
+
 import { createAliasesFromPalette } from './createAliasesFromPalette';
+import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';
+import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from './createOfficeAliasTokens';
+import { createPartialOfficeTheme } from './createPartialOfficeTheme';
 import { win32Typography } from './getThemeTypography';
+import { getThemingModule } from './NativeModule/getThemingModule';
+import type { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
   const exception = palette as CxxException;

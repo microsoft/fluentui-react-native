@@ -1,19 +1,23 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, Switch, View } from 'react-native';
+
 import { Text, ToggleButton, Separator, Link } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from './Common/styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
-import Svg, { G, Path, SvgProps } from 'react-native-svg';
-import { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
+import type { SvgIconProps } from '@fluentui-react-native/icon';
+import { Stack } from '@fluentui-react-native/stack';
+import { useTheme } from '@fluentui-react-native/theme-types';
+import type { SvgProps } from 'react-native-svg';
+import Svg, { G, Path } from 'react-native-svg';
+
+import { stackStyle } from './Common/styles';
 import { testProps } from './Common/TestProps';
+import { E2E_MODE_SWITCH, E2E_TEST_SECTION } from '../../../E2E/src/index.consts';
 
 export type TestSection = {
   name: string;
   testID?: string;
   component: React.FunctionComponent;
-};
+} | null;
 
 export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A' | 'Deprecated';
 export type PlatformStatus = {
@@ -30,6 +34,7 @@ export interface TestProps {
   spec?: string;
   status: PlatformStatus;
   sections: TestSection[];
+  e2eSections?: TestSection[];
 }
 
 const definitions = {
@@ -44,6 +49,7 @@ const definitions = {
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
+    flex: Platform.select({ ios: 0, android: 0, default: 1 }),
   },
   definitionHeader: {
     marginTop: 12,
@@ -57,6 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   section: {
     marginTop: 12,
@@ -78,10 +85,24 @@ const styles = StyleSheet.create({
   e2eFocusButton: {
     opacity: 0,
   },
+  e2eSection: {
+    marginBottom: 4,
+  },
+  e2eSwitch: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  e2eSwitchLabel: {
+    marginRight: 4,
+    textAlignVertical: 'center',
+  },
 });
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
   const [showStatus, setShowStatus] = React.useState(false);
+  const [showE2E, setShowE2E] = React.useState(false);
 
   const toggleSvg: React.FunctionComponent<SvgProps> = () => {
     const plusPath =
@@ -113,6 +134,9 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   };
 
   const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
+  const { e2eSections } = props;
+
+  const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
 
   return (
     <View>
@@ -120,16 +144,41 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
-        <Button
-          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-          {...testProps('Focus_Button')}
-          style={styles.e2eFocusButton}
-        >
-          E2E Button
-        </Button>
+        {!isMobile && (
+          <Button
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps('Focus_Button')}
+            style={styles.e2eFocusButton}
+          >
+            E2E Button
+          </Button>
+        )}
+        {props.e2eSections && (
+          <View style={styles.e2eSwitch}>
+            <Text style={styles.e2eSwitchLabel} {...(isMobile ? {} : { variant: 'body1Strong' })}>
+              E2E Mode
+            </Text>
+            <Switch onValueChange={setShowE2E} value={showE2E} {...testProps(E2E_MODE_SWITCH)} />
+          </View>
+        )}
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
       <Separator />
+      {e2eSections && showE2E && (
+        // We can check if the E2E section renders by checking if the "E2E Tests" header has rendered for each spec
+        <>
+          <Text variant="headerSemibold" {...testProps(E2E_TEST_SECTION)}>
+            E2E Tests
+          </Text>
+          {e2eSections.map((section, i) => {
+            if (section === null) {
+              return null;
+            }
+            const { component: E2EComponent } = section;
+            return <E2EComponent key={i} />;
+          })}
+        </>
+      )}
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>

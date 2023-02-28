@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { HOMEPAGE_CORNERRADIUS_TESTPAGE } from '../../../../E2E/src/CornerRadiusTokens/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
 import { View } from 'react-native';
-import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
 import { Text } from '@fluentui/react-native';
 import { useFluentTheme } from '@fluentui-react-native/framework';
+import { Stack } from '@fluentui-react-native/stack';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+
+import { HOMEPAGE_CORNERRADIUS_TESTPAGE } from '../../../../E2E/src/CornerRadiusTokens/consts';
+import { stackStyle } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 interface CornerRadiusTestComponentProps {
   name: string;

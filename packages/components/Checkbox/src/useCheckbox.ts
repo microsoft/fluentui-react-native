@@ -1,4 +1,7 @@
 import * as React from 'react';
+import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
+
+import { memoize } from '@fluentui-react-native/framework';
 import {
   usePressableState,
   useKeyProps,
@@ -6,9 +9,8 @@ import {
   useViewCommandFocus,
   useAsToggleWithEvent,
 } from '@fluentui-react-native/interactive-hooks';
-import { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
-import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityActionEvent, AccessibilityState } from 'react-native';
+
+import type { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 

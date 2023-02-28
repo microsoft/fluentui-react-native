@@ -1,6 +1,7 @@
 import React from 'react';
-import { MenuContextValue } from '../context/menuContext';
-import { MenuState } from './Menu.types';
+
+import type { MenuState } from './Menu.types';
+import type { MenuContextValue } from '../context/menuContext';
 
 export const useMenuContextValue = (state: MenuState): MenuContextValue => {
   const [triggerHoverOutTimer, setTriggerHoverOutTimer] = React.useState<NodeJS.Timeout | undefined>();

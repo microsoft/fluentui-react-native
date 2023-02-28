@@ -1,5 +1,7 @@
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { TabsType, tabsName } from './Tabs.types';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import type { TabsType } from './Tabs.types';
+import { tabsName } from './Tabs.types';
 
 export const settings: IComposeSettings<TabsType> = [
   {

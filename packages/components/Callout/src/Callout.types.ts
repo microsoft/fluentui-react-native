@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { ScreenRect, ViewStyle } from 'react-native';
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import type * as React from 'react';
+import type { ScreenRect, ViewStyle } from 'react-native';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import type { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
 export const calloutName = 'Callout';
 
 /**
@@ -91,6 +92,11 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
    * Defines a maximum width for the Callout.
    */
   maxWidth?: number | string;
+
+  /**
+   * Defines a minimum width for the Callout.
+   */
+  minWidth?: number | string;
 
   /**
    * Defines the minimum padding between the Callout and the display edges.

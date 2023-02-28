@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { MenuPicker } from './MenuPicker';
-import { ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
+
 import { useTheme } from '@fluentui-react-native/theme-types';
+
+import { MenuPicker } from './MenuPicker';
 import { commonTestStyles as commonStyles } from './styles';
 
 export const StyledPicker = (props) => {

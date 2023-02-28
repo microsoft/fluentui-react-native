@@ -1,5 +1,7 @@
-import { submenuItemName, SubmenuItemType } from './SubmenuItem.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import type { SubmenuItemType } from './SubmenuItem.types';
+import { submenuItemName } from './SubmenuItem.types';
 
 export const settings: IComposeSettings<SubmenuItemType> = [
   {

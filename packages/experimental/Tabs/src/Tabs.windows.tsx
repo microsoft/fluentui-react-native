@@ -1,10 +1,14 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { tabsName, TabsType, TabsProps, TabsContextData } from './Tabs.types';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { stylingSettings } from './Tabs.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { TabsType, TabsProps, TabsContextData } from './Tabs.types';
+import { tabsName } from './Tabs.types';
 import { useTabs } from './useTabs';
 
 export const TabsContext = React.createContext<TabsContextData>({
@@ -80,6 +84,8 @@ export const Tabs = compose<TabsType>({
         // @ts-ignore - TODO, fix typing error
         tabs.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore - TODO, fix typing error
             return child.props.itemKey;
           }
         });
@@ -87,7 +93,11 @@ export const Tabs = compose<TabsType>({
         // @ts-ignore - TODO, fix typing error
         tabs.state.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore - TODO, fix typing error
             if (!child.props.disabled) {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore - TODO, fix typing error
               return child.props.itemKey;
             }
           }

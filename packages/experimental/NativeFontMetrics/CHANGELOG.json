@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/experimental-native-font-metrics",
   "entries": [
     {
+      "date": "Fri, 24 Feb 2023 20:39:58 GMT",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2",
+            "comment": "Order imports"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Feb 2023 01:29:38 GMT",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "ac679ca51704ba5c2d2cc2385a71694b69735a1d",
+            "comment": "Add eslint to packages missing a config"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Jan 2023 15:17:30 GMT",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "4de4c2b37c835ebd9af015ff767f9dd68452f786",
+            "comment": "Migrate to align-deps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Nov 2022 19:49:35 GMT",
       "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.3.0",
       "version": "0.3.0",

@@ -1,6 +1,9 @@
-import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import type { UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
+
+import type { MenuDividerProps, MenuDividerTokens, MenuDividerSlotProps } from './MenuDivider.types';
+import { menuDividerName } from './MenuDivider.types';
 import { defaultMenuDividerTokens } from './MenuDividerTokens';
-import { menuDividerName, MenuDividerProps, MenuDividerTokens, MenuDividerSlotProps } from './MenuDivider.types';
 
 export const stylingSettings: UseStylingOptions<MenuDividerProps, MenuDividerSlotProps, MenuDividerTokens> = {
   tokens: [defaultMenuDividerTokens, menuDividerName],

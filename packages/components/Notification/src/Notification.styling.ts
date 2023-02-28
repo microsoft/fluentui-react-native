@@ -1,6 +1,9 @@
-import { notification, NotificationTokens, NotificationSlotProps, NotificationProps } from './Notification.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
+
+import { notification } from './Notification.types';
+import type { NotificationTokens, NotificationSlotProps, NotificationProps } from './Notification.types';
 import { defaultNotificationTokens } from './NotificationTokens';
 
 export const notificationStates: (keyof NotificationTokens)[] = [

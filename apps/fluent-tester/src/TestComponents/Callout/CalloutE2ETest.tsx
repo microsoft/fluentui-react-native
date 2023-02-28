@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { ScreenRect, View } from 'react-native';
-import { ButtonV1 as Button, Callout, Text, DismissBehaviors } from '@fluentui/react-native';
+import type { ScreenRect } from 'react-native';
+import { View } from 'react-native';
+
+import type { DismissBehaviors } from '@fluentui/react-native';
+import { ButtonV1 as Button, Callout, Text } from '@fluentui/react-native';
 import { Switch } from '@fluentui-react-native/switch';
+
 import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL, CALLOUT_TEST_COMPONENT } from '../../../../E2E/src/Callout/consts';
 import { testProps } from '../Common/TestProps';
 

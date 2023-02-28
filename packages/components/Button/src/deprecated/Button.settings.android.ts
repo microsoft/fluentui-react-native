@@ -1,6 +1,8 @@
-import { buttonName, IButtonType } from './Button.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import type { IButtonType } from './Button.types';
+import { buttonName } from './Button.types';
 
 /**
  * @deprecated This will be removed when the package moves to 1.0.0.

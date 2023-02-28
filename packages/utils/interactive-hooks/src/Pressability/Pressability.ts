@@ -10,13 +10,16 @@
 
 'use strict';
 
-import invariant from 'invariant';
-import * as React from 'react';
+import type * as React from 'react';
 import { Platform, UIManager } from 'react-native';
-import { BlurEvent, FocusEvent, MouseEvent, PressEvent } from './CoreEventTypes';
+
+import invariant from 'invariant';
+
+import type { BlurEvent, FocusEvent, MouseEvent, PressEvent } from './CoreEventTypes';
 import { isHoverEnabled } from './HoverState';
-import { HostComponent, normalizeRect, Rect } from './InternalTypes';
-import { PressabilityConfig, PressabilityEventHandlers } from './Pressability.types';
+import type { HostComponent, Rect } from './InternalTypes';
+import { normalizeRect } from './InternalTypes';
+import type { PressabilityConfig, PressabilityEventHandlers } from './Pressability.types';
 
 type TouchState =
   | 'NOT_RESPONDER'

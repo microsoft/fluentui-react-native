@@ -1,26 +1,28 @@
-import { PressableProps } from 'react-native';
-import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
-import { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
-import { ButtonProps } from '@fluentui-react-native/button';
-import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { NotificationButtonColorStates } from './Notification.helper';
-import { ShadowProps } from '@fluentui-react-native/experimental-shadow';
-import { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { PressableProps } from 'react-native';
+
+import type { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
+import type { ButtonProps } from '@fluentui-react-native/button';
+import type { ShadowProps } from '@fluentui-react-native/experimental-shadow';
+import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+
+import type { NotificationButtonColorStates } from './Notification.helper';
 
 export const notification = 'Notification';
 export const NotificationVariants = ['primary', 'neutral', 'primaryBar', 'primaryOutlineBar', 'neutralBar', 'danger', 'warning'] as const;
 export type NotificationVariant = (typeof NotificationVariants)[number];
 
 export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens, NotificationButtonColorStates {
-  primary: NotificationTokens;
-  neutral: NotificationTokens;
-  primaryBar: NotificationTokens;
-  primaryOutlineBar: NotificationTokens;
-  neutralBar: NotificationTokens;
-  danger: NotificationTokens;
-  warning: NotificationTokens;
-  isBar: NotificationTokens;
+  primary?: NotificationTokens;
+  neutral?: NotificationTokens;
+  primaryBar?: NotificationTokens;
+  primaryOutlineBar?: NotificationTokens;
+  neutralBar?: NotificationTokens;
+  danger?: NotificationTokens;
+  warning?: NotificationTokens;
+  isBar?: NotificationTokens;
   shadowToken?: ShadowToken;
 }
 

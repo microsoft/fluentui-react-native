@@ -1,4 +1,6 @@
-import { FocusZoneDirection } from '@fluentui-react-native/focus-zone';
+import type { FocusZoneDirection } from '@fluentui-react-native/focus-zone';
+
+import { BasePage, By } from '../../common/BasePage';
 import {
   FOCUSZONE_CIRCLE_NAV_SWITCH,
   FOCUSZONE_DEFAULT_TABBABLE_SWITCH,
@@ -13,62 +15,39 @@ import {
   FOCUSZONE_TWO_DIM_SWITCH,
   HOMEPAGE_FOCUSZONE_BUTTON,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
 
-export const enum GridButton {
-  One = 1,
-  Two,
-  Three,
-  Four,
-  Five,
-  Six,
-  Seven,
-  Eight,
-  Nine,
-}
+export type GridButton = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
-export const enum GridFocusZoneOption {
-  SetDirection = 0,
-  Set2DNavigation,
-  SetCircularNavigation,
-  UseDefaultTabbableElement,
-  Disable,
-}
-
-type BooleanGridFocusZoneOption =
-  | GridFocusZoneOption.UseDefaultTabbableElement
-  | GridFocusZoneOption.Set2DNavigation
-  | GridFocusZoneOption.SetCircularNavigation
-  | GridFocusZoneOption.Disable;
+type GridFocusZoneOption = 'SetDirection' | 'Set2DNavigation' | 'SetCircularNavigation' | 'UseDefaultTabbableElement' | 'Disable';
 
 class FocusZonePageObject extends BasePage {
   async resetTest() {
-    await this.configureGridFocusZone(GridFocusZoneOption.SetDirection, 'bidirectional');
-    await this.configureGridFocusZone(GridFocusZoneOption.Set2DNavigation, false);
-    await this.configureGridFocusZone(GridFocusZoneOption.SetCircularNavigation, false);
-    await this.configureGridFocusZone(GridFocusZoneOption.Disable, false);
+    await this.configureGridFocusZone('SetDirection', 'bidirectional');
+    await this.configureGridFocusZone('Set2DNavigation', false);
+    await this.configureGridFocusZone('SetCircularNavigation', false);
+    await this.configureGridFocusZone('Disable', false);
   }
 
-  async configureGridFocusZone(option: GridFocusZoneOption.SetDirection, direction: FocusZoneDirection);
-  async configureGridFocusZone(option: BooleanGridFocusZoneOption, value: boolean);
+  async configureGridFocusZone(option: 'SetDirection', direction: FocusZoneDirection);
+  async configureGridFocusZone(option: GridFocusZoneOption, value: boolean);
   async configureGridFocusZone(option: GridFocusZoneOption, arg: any): Promise<void> {
     let switchElement: WebdriverIO.Element;
     switch (option) {
-      case GridFocusZoneOption.SetDirection:
+      case 'SetDirection':
         await (await this._directionPicker).click();
         await browser.waitUntil(async () => await (await this._getGridFocusZoneMenuOption(arg)).isDisplayed());
         await (await this._getGridFocusZoneMenuOption(arg)).click();
         return;
-      case GridFocusZoneOption.Set2DNavigation:
+      case 'Set2DNavigation':
         switchElement = await this._twoDimSwitch;
         break;
-      case GridFocusZoneOption.SetCircularNavigation:
+      case 'SetCircularNavigation':
         switchElement = await this._circleNavSwitch;
         break;
-      case GridFocusZoneOption.UseDefaultTabbableElement:
+      case 'UseDefaultTabbableElement':
         switchElement = await this._defaultTabbableElementSwitch;
         break;
-      case GridFocusZoneOption.Disable:
+      case 'Disable':
         switchElement = await this._disabledSwitch;
         break;
       default:

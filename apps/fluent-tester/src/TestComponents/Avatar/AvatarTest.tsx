@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Platform } from 'react-native';
+
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';
 import { E2EAvatarTest } from './E2EAvatarTest';
-import { Platform } from 'react-native';
+import { AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const avatarSections: TestSection[] = [
   {
@@ -19,12 +21,15 @@ const avatarSections: TestSection[] = [
         name: 'Customize Usage',
         component: CustomizeUsage,
       },
-      {
-        name: 'Avatar E2E',
-        component: E2EAvatarTest,
-      },
     ],
   }),
+];
+
+const e2eSections: TestSection[] = [
+  {
+    name: 'Avatar E2E',
+    component: E2EAvatarTest,
+  },
 ];
 
 export const AvatarTest: React.FunctionComponent = () => {
@@ -41,5 +46,7 @@ export const AvatarTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Avatar/SPEC.md';
 
-  return <Test name="Avatar Test" description={description} spec={spec} sections={avatarSections} status={status} />;
+  return (
+    <Test name="Avatar Test" description={description} spec={spec} sections={avatarSections} status={status} e2eSections={e2eSections} />
+  );
 };

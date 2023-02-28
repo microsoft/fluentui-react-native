@@ -1,12 +1,16 @@
-import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
 import * as React from 'react';
 import { findNodeHandle, Platform } from 'react-native';
-import { settings } from './Callout.settings';
-import { calloutName, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
+
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { settings } from './Callout.settings';
+import type { ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
+import { calloutName } from './Callout.types';
 
 const NativeCalloutView = Platform.select({
   macos: ensureNativeComponent('FRNCallout'),

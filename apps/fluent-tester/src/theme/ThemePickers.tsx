@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import { TextV1 as Text } from '@fluentui-react-native/text';
+import type { ThemeOptions } from '@fluentui-react-native/theme-types';
+
+import { themeChoices } from './applyTheme';
+import type { ThemeNames } from './applyTheme';
 import { lightnessOptions, testerTheme } from './CustomThemes';
-import { themeChoices, ThemeNames } from './applyTheme';
-import { brandOptions, OfficeBrand } from './applyBrand';
-import { ThemeOptions } from '@fluentui-react-native/theme-types';
 import { MenuPicker } from '../TestComponents/Common/MenuPicker';
 
 export const themePickerStyles = StyleSheet.create({
@@ -50,10 +52,6 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });
 
 export const ThemePickers: React.FunctionComponent = () => {
-  const onBrandChange = React.useCallback((newBrand: string) => {
-    testerTheme.brand = newBrand as OfficeBrand;
-  }, []);
-
   const onThemeSelected = React.useCallback((newTheme: string) => {
     testerTheme.themeName = newTheme as ThemeNames;
   }, []);
@@ -72,11 +70,6 @@ export const ThemePickers: React.FunctionComponent = () => {
       <View style={themePickerStyles.picker}>
         <PickerLabel>Light/Dark: </PickerLabel>
         <PartPicker initial={testerTheme.appearance} onChange={onAppearanceChange} contents={lightnessOptions} />
-      </View>
-
-      <View style={themePickerStyles.picker}>
-        <PickerLabel>Brand: </PickerLabel>
-        <PartPicker initial={testerTheme.brand} onChange={onBrandChange} contents={brandOptions} />
       </View>
     </View>
   );

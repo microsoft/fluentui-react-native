@@ -1,7 +1,8 @@
-import { UseSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+
 import { useMenuItemRadio } from './useMenuItemRadio';
 import { MenuItemCheckbox, menuItemFinalRender } from '../MenuItemCheckbox/MenuItemCheckbox';
-import { MenuItemCheckboxProps, MenuItemCheckboxType } from '../MenuItemCheckbox/MenuItemCheckbox.types';
+import type { MenuItemCheckboxProps, MenuItemCheckboxType } from '../MenuItemCheckbox/MenuItemCheckbox.types';
 
 export const menuItemRadioName = 'MenuItemRadio';
 

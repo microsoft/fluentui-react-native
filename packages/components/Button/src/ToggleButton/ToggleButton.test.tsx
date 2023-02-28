@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { ToggleButton } from './ToggleButton';
+
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
+
+import { ToggleButton } from './ToggleButton';
 
 it('ToggleButton default', () => {
   const tree = renderer.create(<ToggleButton>Default Button</ToggleButton>).toJSON();

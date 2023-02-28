@@ -1,5 +1,6 @@
 import { Image } from 'react-native';
-import { RasterImageIconProps, IconProps } from './Icon.types';
+
+import type { RasterImageIconProps, IconProps } from './Icon.types';
 
 // this hook creates icon props from given source
 export function createIconProps(src: number | string | IconProps): IconProps {

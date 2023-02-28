@@ -1,7 +1,8 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { AvatarTokens } from '.';
+import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { AvatarTokens } from '.';
 
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({

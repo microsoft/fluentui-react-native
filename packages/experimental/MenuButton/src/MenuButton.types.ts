@@ -1,7 +1,7 @@
-import { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@fluentui-react-native/contextual-menu';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { ButtonProps } from '@fluentui-react-native/experimental-button';
-import { SvgProps, XmlProps } from 'react-native-svg';
+import type { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@fluentui-react-native/contextual-menu';
+import type { ButtonProps } from '@fluentui-react-native/experimental-button';
+import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type { SvgProps, XmlProps } from 'react-native-svg';
 
 export const menuButtonName = 'MenuButton';
 

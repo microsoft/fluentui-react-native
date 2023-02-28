@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import * as React from 'react';
-import { View } from 'react-native';
-import { stackStyle } from '../Common/styles';
+import type { IViewWin32Props } from '@office-iss/react-native-win32';
+
 import {
   BUTTON_TEST_COMPONENT,
   BUTTON_ON_PRESS,
@@ -17,7 +19,7 @@ import {
   BUTTON_FOCUSABLE_TEST_COMPONENT,
   BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/ButtonLegacy/consts';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const E2EButtonTest: React.FunctionComponent = () => {

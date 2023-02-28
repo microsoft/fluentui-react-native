@@ -1,14 +1,19 @@
 /** @jsx withSlots */
-import React, { Children, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { Children } from 'react';
 import { View } from 'react-native';
-import { counterBadgeName, CounterBadgeType, CounterBadgeProps } from './CounterBadge.types';
-import { compose, withSlots, mergeProps, UseSlots } from '@fluentui-react-native/framework';
-import { stylingSettings } from './CounterBadge.styling';
-import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import { badgeLookup } from '../Badge';
-import { useCounterBadge } from './useCounterBadge';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { stylingSettings } from './CounterBadge.styling';
+import type { CounterBadgeType, CounterBadgeProps } from './CounterBadge.types';
+import { counterBadgeName } from './CounterBadge.types';
+import { useCounterBadge } from './useCounterBadge';
+import { badgeLookup } from '../Badge';
 
 export const CounterBadge = compose<CounterBadgeType>({
   displayName: counterBadgeName,

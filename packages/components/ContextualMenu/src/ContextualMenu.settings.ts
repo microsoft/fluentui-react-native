@@ -1,5 +1,7 @@
-import { contextualMenuName, ContextualMenuType } from './ContextualMenu.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import type { ContextualMenuType } from './ContextualMenu.types';
+import { contextualMenuName } from './ContextualMenu.types';
 
 export const settings: IComposeSettings<ContextualMenuType> = [
   {

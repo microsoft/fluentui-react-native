@@ -1,12 +1,17 @@
-import React, { useState, useCallback, FunctionComponent } from 'react';
-import { AvatarSize, AvatarSizes, AvatarColor, AvatarColors, Avatar, AvatarActive } from '@fluentui-react-native/avatar';
-import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
+import React, { useState, useCallback } from 'react';
+import type { FunctionComponent } from 'react';
 import { View, Text, Platform } from 'react-native';
+
+import { ToggleButton } from '@fluentui/react-native';
+import type { AvatarSize, AvatarColor, AvatarActive } from '@fluentui-react-native/avatar';
+import { AvatarSizes, AvatarColors, Avatar } from '@fluentui-react-native/avatar';
+import type { PresenceBadgeStatus } from '@fluentui-react-native/badge';
+import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
+
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
-import { commonTestStyles as commonStyles } from '../Common/styles';
 import { svgProps } from '../Common/iconExamples';
 import { StyledPicker } from '../Common/StyledPicker';
-import { ToggleButton } from '@fluentui/react-native';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 
 type WithUndefined<T> = T | typeof undefinedText;
 

@@ -1,8 +1,9 @@
+import type { ColorValue, ViewStyle } from 'react-native';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { TextProps } from '@fluentui-react-native/text';
-import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
-import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import { ColorValue, ViewStyle } from 'react-native';
+import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import type { TextProps } from '@fluentui-react-native/text';
+import type { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 
 export const radioGroupName = 'RadioGroup';
 
@@ -119,6 +120,7 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
 
   /**
    * The position of the label relative to the indicator.
+   * 'horizontal' and 'horizontal-stacked' are not supported from Fluent Android, renders as-is.
    *
    * @default vertical
    */

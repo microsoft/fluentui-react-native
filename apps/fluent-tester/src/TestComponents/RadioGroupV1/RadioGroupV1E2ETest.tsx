@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
 import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
+import { Stack } from '@fluentui-react-native/stack';
+
 import {
   RADIOGROUPV1_TEST_COMPONENT,
   RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT,
@@ -14,7 +17,6 @@ import {
   FIRST_RADIO_ACCESSIBILITY_LABEL,
   SECOND_RADIO_LABEL,
 } from '../../../../E2E/src/RadioGroupV1/consts';
-import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 

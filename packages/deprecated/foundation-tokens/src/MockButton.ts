@@ -1,17 +1,21 @@
-import {
+import type { IComponentSettings } from '@uifabricshared/foundation-settings';
+
+import type { IMockBaseProps } from './MockComponent';
+import { mockCreate, stockFakeComponent } from './MockComponent';
+import type {
   IMockTextTokens,
   IMockColorTokens,
   IMockBorderTokens,
   IMockForegroundColorTokens,
   IMockCaptionTextTokens,
+} from './MockTokens';
+import {
   standardTextTokens,
   standardForegroundColorTokens,
   standardBackgroundColorTokens,
   standardBorderTokens,
   standardCaptionTokens,
 } from './MockTokens';
-import { IMockBaseProps, mockCreate, stockFakeComponent } from './MockComponent';
-import { IComponentSettings } from '@uifabricshared/foundation-settings';
 
 export type IMockTextProps = IMockTextTokens & IMockForegroundColorTokens & IMockBaseProps;
 export type IMockViewProps = IMockBaseProps;

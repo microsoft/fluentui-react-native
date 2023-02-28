@@ -4,41 +4,22 @@ exports[`Notification component tests Notification default 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": Object {
-        "dynamic": Object {
-          "dark": "#082338",
-          "highContrastDark": undefined,
-          "highContrastLight": undefined,
-          "light": "#EBF3FC",
-        },
-      },
+      "alignSelf": "center",
+      "backgroundColor": "#cfe4fa",
       "borderColor": "transparent",
       "borderRadius": 12,
-      "bottom": undefined,
-      "end": undefined,
       "flex": 1,
       "justifyContent": "space-between",
-      "left": undefined,
-      "margin": undefined,
-      "marginBottom": undefined,
-      "marginEnd": undefined,
       "marginHorizontal": 16,
-      "marginLeft": undefined,
-      "marginRight": undefined,
-      "marginStart": undefined,
-      "marginTop": undefined,
-      "marginVertical": undefined,
       "minHeight": 52,
-      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 8,
+        "height": 0,
         "width": 0,
       },
-      "shadowOpacity": 0.14,
-      "shadowRadius": 4,
-      "start": undefined,
-      "top": undefined,
+      "shadowOpacity": 0.12,
+      "shadowRadius": 1,
+      "width": 375,
     }
   }
 >
@@ -55,45 +36,25 @@ exports[`Notification component tests Notification default 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": undefined,
-        "backgroundColor": Object {
-          "dynamic": Object {
-            "dark": "#082338",
-            "highContrastDark": undefined,
-            "highContrastLight": undefined,
-            "light": "#EBF3FC",
-          },
-        },
-        "borderBottomWidth": undefined,
+        "alignSelf": "center",
+        "backgroundColor": "#cfe4fa",
         "borderColor": "transparent",
-        "borderEndWidth": undefined,
-        "borderLeftWidth": undefined,
         "borderRadius": 12,
-        "borderRightWidth": undefined,
-        "borderStartWidth": undefined,
-        "borderTopWidth": undefined,
         "borderWidth": 1,
         "flex": 1,
         "flexDirection": "row",
-        "flexWrap": undefined,
         "justifyContent": "space-between",
         "minHeight": 52,
         "padding": 16,
-        "paddingBottom": undefined,
-        "paddingEnd": undefined,
-        "paddingHorizontal": undefined,
-        "paddingLeft": undefined,
-        "paddingRight": undefined,
-        "paddingStart": undefined,
-        "paddingTop": undefined,
         "paddingVertical": 12,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 8,
           "width": 0,
         },
-        "shadowOpacity": 0.12,
-        "shadowRadius": 0.5,
+        "shadowOpacity": 0.14,
+        "shadowRadius": 8,
+        "width": 375,
       }
     }
   >
@@ -113,19 +74,10 @@ exports[`Notification component tests Notification default 1`] = `
         style={
           Object {
             "alignSelf": "flex-start",
-            "color": Object {
-              "dynamic": Object {
-                "dark": "#77B7F7",
-                "highContrastDark": undefined,
-                "highContrastLight": undefined,
-                "light": "#0F6CBD",
-              },
-            },
+            "color": "#0f548c",
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "400",
-            "letterSpacing": -0.24,
-            "lineHeight": 20,
             "margin": 0,
           }
         }
@@ -139,26 +91,8 @@ exports[`Notification component tests Notification default 1`] = `
       accessible={true}
       appearance="subtle"
       collapsable={false}
-      color={
-        Object {
-          "dynamic": Object {
-            "dark": "#77B7F7",
-            "highContrastDark": undefined,
-            "highContrastLight": undefined,
-            "light": "#0F6CBD",
-          },
-        }
-      }
-      disabledColor={
-        Object {
-          "dynamic": Object {
-            "dark": "#2886DE",
-            "highContrastDark": undefined,
-            "highContrastLight": undefined,
-            "light": "#2886DE",
-          },
-        }
-      }
+      color="#0f548c"
+      disabledColor="#2886de"
       enableFocusRing={true}
       focusable={true}
       minWidth={0}
@@ -207,14 +141,7 @@ exports[`Notification component tests Notification default 1`] = `
         numberOfLines={0}
         style={
           Object {
-            "color": Object {
-              "dynamic": Object {
-                "dark": "#77B7F7",
-                "highContrastDark": undefined,
-                "highContrastLight": undefined,
-                "light": "#0F6CBD",
-              },
-            },
+            "color": "#0f548c",
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "600",

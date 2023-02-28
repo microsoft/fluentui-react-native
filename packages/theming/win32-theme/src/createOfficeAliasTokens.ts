@@ -1,7 +1,8 @@
-import { getOfficeAliasTokens, getOfficeShadowTokens } from './getOfficeTokens';
-import { AliasColorTokens, ThemeShadowDefinition } from '@fluentui-react-native/theme-types';
 import { memoize } from '@fluentui-react-native/memo-cache';
+import type { AliasColorTokens, ThemeShadowDefinition } from '@fluentui-react-native/theme-types';
 import { mapPipelineToShadow, mapPipelineToTheme } from '@fluentui-react-native/theming-utils';
+
+import { getOfficeAliasTokens, getOfficeShadowTokens } from './getOfficeTokens';
 
 function createOfficeColorAliasTokensWorker(officeTheme: string): AliasColorTokens {
   const aliasTokens = getOfficeAliasTokens(officeTheme);

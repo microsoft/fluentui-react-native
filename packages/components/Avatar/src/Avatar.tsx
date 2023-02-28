@@ -1,13 +1,17 @@
 /** @jsx withSlots */
-import { Image, View, Text, Platform } from 'react-native';
 import { Fragment } from 'react';
-import { AvatarProps, AvatarType, AvatarName, AvatarState, AvatarSlotProps } from './Avatar.types';
-import { stylingSettings } from './Avatar.styling';
-import { compose, UseSlots, mergeProps, withSlots, Slots } from '@fluentui-react-native/framework';
-import { useAvatar } from './useAvatar';
+import { Image, View, Text, Platform } from 'react-native';
+
 import { PresenceBadge } from '@fluentui-react-native/badge';
+import type { UseSlots, Slots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
 import { Svg, Path } from 'react-native-svg';
+
+import { stylingSettings } from './Avatar.styling';
+import type { AvatarProps, AvatarType, AvatarState, AvatarSlotProps } from './Avatar.types';
+import { AvatarName } from './Avatar.types';
+import { useAvatar } from './useAvatar';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the avatar.
@@ -81,6 +85,8 @@ function renderAvatar(final: AvatarProps, avatarProps: AvatarProps, Slots: Slots
       {initials ? (
         <Slots.initials accessible={false}>{initials}</Slots.initials>
       ) : avatarProps.icon ? (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore - TODO, fix typing error
         <Slots.icon {...icon} accessible={false} />
       ) : (
         svgIconsEnabled && <Slots.fallbackIcon viewBox="0 0 14 16">{getFallbackIconPath()}</Slots.fallbackIcon>

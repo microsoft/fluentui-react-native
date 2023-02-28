@@ -1,8 +1,12 @@
-import { ButtonV1 as Button, CompoundButton, FAB } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
+
+import { ButtonV1 as Button, CompoundButton, FAB } from '@fluentui/react-native';
+
 import { iconProps } from '../Common/iconExamples';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
+
+const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 
 export const ButtonSizeTest: React.FunctionComponent = () => {
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
@@ -61,7 +65,7 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
       <Button size="large" style={commonTestStyles.vmargin}>
         Large
       </Button>
-      {Platform.OS !== 'android' && (
+      {!isMobile && (
         <>
           <Button loading size="small" style={commonTestStyles.vmargin}>
             Loading Button Small

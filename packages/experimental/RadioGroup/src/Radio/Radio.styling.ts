@@ -1,7 +1,10 @@
-import { radioName, RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { defaultRadioTokens } from './RadioTokens';
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { fontStyles, borderStyles } from '@fluentui-react-native/tokens';
+
+import type { RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
+import { radioName } from './Radio.types';
+import { defaultRadioTokens } from './RadioTokens';
 
 export const radioStates: (keyof RadioTokens)[] = ['labelPositionBelow', 'focused', 'hovered', 'pressed', 'selected', 'disabled'];
 

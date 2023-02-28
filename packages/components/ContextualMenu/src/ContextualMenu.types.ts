@@ -1,8 +1,9 @@
-import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ScrollViewProps } from 'react-native';
-import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import type { ScrollViewProps } from 'react-native';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
+import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const contextualMenuName = 'ContextualMenu';
 export interface ContextualMenuContext {

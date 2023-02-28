@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/codemods",
   "entries": [
     {
+      "date": "Fri, 24 Feb 2023 20:39:57 GMT",
+      "tag": "@fluentui-react-native/codemods_v0.3.7",
+      "version": "0.3.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/codemods",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2",
+            "comment": "Order imports"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Feb 2023 01:29:38 GMT",
+      "tag": "@fluentui-react-native/codemods_v0.3.6",
+      "version": "0.3.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/codemods",
+            "commit": "ac679ca51704ba5c2d2cc2385a71694b69735a1d",
+            "comment": "Add eslint to packages missing a config"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Jan 2023 02:04:50 GMT",
       "tag": "@fluentui-react-native/codemods_v0.3.0",
       "version": "0.3.0",

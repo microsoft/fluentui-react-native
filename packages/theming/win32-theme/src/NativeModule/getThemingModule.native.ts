@@ -1,6 +1,8 @@
-import { OfficeThemingModule } from './officeThemingModule';
-import { NativeEventEmitter, TurboModuleRegistry, EventSubscriptionVendor, TurboModule } from 'react-native';
+import type { EventSubscriptionVendor, TurboModule } from 'react-native';
+import { NativeEventEmitter, TurboModuleRegistry } from 'react-native';
+
 import { fallbackGetPalette, fallbackOfficeModule } from './fallbackOfficeModule';
+import type { OfficeThemingModule } from './officeThemingModule';
 
 /**
  *  If we have a userAgent string, let's assume we're web debugging.  __DEV__ is for developer bundles.  Currently,

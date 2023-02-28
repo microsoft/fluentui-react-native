@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { TextInput, StyleSheet, View } from 'react-native';
+
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
+
 import { stackStyle } from '../Common/styles';
-import { TextInput, StyleSheet, View } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
 const styles = StyleSheet.create({
@@ -71,24 +73,25 @@ export const MenuScrollView: React.FunctionComponent = () => {
         </Button>
         <Menu>
           <MenuTrigger>
-            <Button>Mutable Menu</Button>
+            <Button>Mutable Menu: MaxHeight 250 </Button>
           </MenuTrigger>
-          <MenuPopover>
+          <MenuPopover maxHeight={250}>
             <MenuList>{data}</MenuList>
           </MenuPopover>
         </Menu>
       </View>
       <Menu>
         <MenuTrigger>
-          <Button>Height: 100</Button>
+          <Button>Height: 100 minWidth: 250</Button>
         </MenuTrigger>
-        <MenuPopover maxHeight={100}>
+        <MenuPopover maxHeight={100} minWidth={250}>
           <MenuList>
             <MenuItem>MenuItem 1</MenuItem>
             <MenuItem>MenuItem 2</MenuItem>
             <MenuItem>MenuItem 3</MenuItem>
             <MenuItem>MenuItem 4</MenuItem>
             <MenuItem>MenuItem 5</MenuItem>
+            <MenuItem>MenuItem 6</MenuItem>
           </MenuList>
         </MenuPopover>
       </Menu>

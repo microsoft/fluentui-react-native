@@ -1,11 +1,12 @@
-import {
+import type {
   LookupThemePart,
   OperationSet,
   StyleFactoryFunction,
   StyleFactoryFunctionRaw,
   StyleFactoryOperation,
 } from '@fluentui-react-native/tokens';
-import { ICachedPropHandlers } from './Token.internal';
+
+import type { ICachedPropHandlers } from './Token.internal';
 
 export type ILookupThemePart<TTheme> = LookupThemePart<TTheme>;
 export type IStyleFactoryOperation<TTokens, TTheme> = StyleFactoryOperation<TTokens, TTheme>;

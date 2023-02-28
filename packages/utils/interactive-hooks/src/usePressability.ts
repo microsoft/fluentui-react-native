@@ -10,9 +10,10 @@
 
 'use strict';
 
-import { PressabilityConfig, PressabilityEventHandlers } from './Pressability/Pressability.types';
-import { Pressability } from './Pressability/Pressability';
 import { useEffect, useRef } from 'react';
+
+import { Pressability } from './Pressability/Pressability';
+import type { PressabilityConfig, PressabilityEventHandlers } from './Pressability/Pressability.types';
 
 export function usePressability(config: PressabilityConfig): PressabilityEventHandlers {
   const pressabilityRef = useRef<Pressability>(null);

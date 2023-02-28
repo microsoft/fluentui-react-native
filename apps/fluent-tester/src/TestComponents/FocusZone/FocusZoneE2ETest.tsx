@@ -1,22 +1,27 @@
 import React from 'react';
 import { View } from 'react-native';
-import { FocusZoneDirection, FocusZone, MenuButton, Text } from '@fluentui/react-native';
+
+import type { FocusZoneDirection } from '@fluentui/react-native';
+import { FocusZone, MenuButton, Text } from '@fluentui/react-native';
+import type { ButtonProps } from '@fluentui-react-native/button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Switch } from '@fluentui-react-native/switch';
-import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
-import { commonTestStyles } from '../Common/styles';
+
+import { focusZoneTestStyles, GridButton } from './styles';
 import {
-  FOCUSZONE_TEST_COMPONENT,
-  FOCUSZONE_DIRECTION_ID,
-  FOCUSZONE_TWO_DIM_SWITCH,
-  FOCUSZONE_DISABLED_SWITCH,
   FOCUSZONE_CIRCLE_NAV_SWITCH,
   FOCUSZONE_DEFAULT_TABBABLE_SWITCH,
-  FOCUSZONE_GRID_BEFORE,
-  FOCUSZONE_GRID_AFTER,
-  FOCUSZONE_GRID_BUTTON,
+  FOCUSZONE_DIRECTION_ID,
   FOCUSZONE_DIRECTION_PICKER,
+  FOCUSZONE_DISABLED_SWITCH,
+  FOCUSZONE_GRID_AFTER,
+  FOCUSZONE_GRID_BEFORE,
+  FOCUSZONE_GRID_BUTTON,
+  FOCUSZONE_TEST_COMPONENT,
+  FOCUSZONE_TWO_DIM_SWITCH,
 } from '../../../../E2E/src/FocusZone/consts';
-import { focusZoneTestStyles, GridButton } from './styles';
+import type { GridButton as GridButtonIndex } from '../../../../E2E/src/FocusZone/pages/FocusZonePageObject';
+import { commonTestStyles } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
@@ -66,7 +71,7 @@ export const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props
                   style={focusZoneTestStyles.focusZoneButton}
                   componentRef={gridIndex === props.tabbableIdx ? props.tabRef : undefined}
                   /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-                  {...testProps(props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex) : undefined)}
+                  {...testProps(props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex as GridButtonIndex) : undefined)}
                 >
                   <Text>{gridIndex}</Text>
                 </GridButton>

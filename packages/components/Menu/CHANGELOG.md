@@ -1,8 +1,263 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
+This log was last generated on Sat, 25 Feb 2023 01:17:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.12
+
+Sat, 25 Feb 2023 01:17:04 GMT
+
+### Patches
+
+- Only open menu when shouldFocusOnContainer is defined (ruaraki@microsoft.com)
+
+## 1.4.11
+
+Fri, 24 Feb 2023 23:53:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.35
+
+## 1.4.10
+
+Fri, 24 Feb 2023 20:39:59 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.10.2
+- Bump @fluentui-react-native/callout to v0.23.3
+- Bump @fluentui-react-native/focus-zone to v0.11.32
+- Bump @fluentui-react-native/framework to v0.9.3
+- Bump @fluentui-react-native/interactive-hooks to v0.22.20
+- Bump @fluentui-react-native/text to v0.19.22
+- Bump @fluentui-react-native/theme-tokens to v0.24.3
+- Bump @fluentui-react-native/tokens to v0.20.10
+- Bump @fluentui-react-native/use-styling to v0.9.4
+- Bump @fluentui-react-native/button to v0.32.34
+
+## 1.4.9
+
+Fri, 24 Feb 2023 03:20:53 GMT
+
+### Patches
+
+- Make menu container VO accessible (amchiu@microsoft.com)
+
+## 1.4.8
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.2
+- Bump @fluentui-react-native/focus-zone to v0.11.31
+- Bump @fluentui-react-native/framework to v0.9.2
+- Bump @fluentui-react-native/interactive-hooks to v0.22.19
+- Bump @fluentui-react-native/text to v0.19.21
+- Bump @fluentui-react-native/tokens to v0.20.9
+- Bump @fluentui-react-native/button to v0.32.33
+
+## 1.4.7
+
+Thu, 23 Feb 2023 22:09:20 GMT
+
+### Patches
+
+- Update MenuItem text color (email not defined)
+
+## 1.4.6
+
+Fri, 17 Feb 2023 22:33:14 GMT
+
+### Patches
+
+- Always pass in a ref to FocusZone (email not defined)
+
+## 1.4.5
+
+Fri, 17 Feb 2023 01:34:44 GMT
+
+### Patches
+
+- Remove enter and space key triggers from disabled menu items (email not defined)
+
+## 1.4.4
+
+Thu, 16 Feb 2023 22:05:56 GMT
+
+### Patches
+
+- Add hasTooltips as MenuList prop (ruaraki@microsoft.com)
+
+## 1.4.3
+
+Tue, 14 Feb 2023 22:22:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.32
+
+## 1.4.2
+
+Tue, 14 Feb 2023 01:26:19 GMT
+
+### Patches
+
+- Passing in the minWidth token to the patch function (email not defined)
+
+## 1.4.1
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.1
+- Bump @fluentui-react-native/focus-zone to v0.11.30
+- Bump @fluentui-react-native/framework to v0.9.1
+- Bump @fluentui-react-native/interactive-hooks to v0.22.18
+- Bump @fluentui-react-native/text to v0.19.20
+- Bump @fluentui-react-native/tokens to v0.20.8
+- Bump @fluentui-react-native/button to v0.32.31
+
+## 1.4.0
+
+Thu, 09 Feb 2023 22:42:47 GMT
+
+### Minor changes
+
+- support minwidth for menu (email not defined)
+- Bump @fluentui-react-native/callout to v0.23.0
+
+## 1.3.3
+
+Thu, 09 Feb 2023 17:10:01 GMT
+
+### Patches
+
+- Fix Menu keyboard navigation (email not defined)
+
+## 1.3.2
+
+Thu, 09 Feb 2023 02:18:16 GMT
+
+### Patches
+
+- Update submenuIndicatorPadding (amchiu@microsoft.com)
+
+## 1.3.1
+
+Wed, 08 Feb 2023 19:29:35 GMT
+
+### Patches
+
+- macOS: Only show scroll indicators if maxHeight/maxWidth is specified (email not defined)
+
+## 1.3.0
+
+Mon, 06 Feb 2023 05:53:20 GMT
+
+### Minor changes
+
+- support menu scroll in win32 (email not defined)
+- Bump @fluentui-react-native/callout to v0.22.0
+
+### Patches
+
+- macOS: Update submenu indicator color (amchiu@microsoft.com)
+
+## 1.2.28
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.59
+- Bump @fluentui-react-native/focus-zone to v0.11.29
+- Bump @fluentui-react-native/framework to v0.9.0
+- Bump @fluentui-react-native/interactive-hooks to v0.22.17
+- Bump @fluentui-react-native/text to v0.19.19
+- Bump @fluentui-react-native/button to v0.32.30
+
+## 1.2.27
+
+Thu, 02 Feb 2023 20:52:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.29
+
+## 1.2.26
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.58
+- Bump @fluentui-react-native/focus-zone to v0.11.28
+- Bump @fluentui-react-native/framework to v0.8.39
+- Bump @fluentui-react-native/interactive-hooks to v0.22.16
+- Bump @fluentui-react-native/text to v0.19.18
+- Bump @fluentui-react-native/use-styling to v0.9.3
+- Bump @fluentui-react-native/button to v0.32.28
+
+## 1.2.25
+
+Wed, 01 Feb 2023 22:33:16 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.10.1
+- Bump @fluentui-react-native/callout to v0.21.57
+- Bump @fluentui-react-native/focus-zone to v0.11.27
+- Bump @fluentui-react-native/framework to v0.8.38
+- Bump @fluentui-react-native/interactive-hooks to v0.22.15
+- Bump @fluentui-react-native/text to v0.19.17
+- Bump @fluentui-react-native/theme-tokens to v0.24.2
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @fluentui-react-native/use-styling to v0.9.2
+- Bump @fluentui-react-native/button to v0.32.27
+
+## 1.2.24
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.56
+- Bump @fluentui-react-native/focus-zone to v0.11.26
+- Bump @fluentui-react-native/framework to v0.8.37
+- Bump @fluentui-react-native/interactive-hooks to v0.22.14
+- Bump @fluentui-react-native/text to v0.19.16
+- Bump @fluentui-react-native/theme-tokens to v0.24.1
+- Bump @fluentui-react-native/tokens to v0.20.6
+- Bump @fluentui-react-native/button to v0.32.26
+
+## 1.2.23
+
+Thu, 26 Jan 2023 17:47:06 GMT
+
+### Patches
+
+- Fix MenuPopover props not getting called (email not defined)
+
+## 1.2.22
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.55
+- Bump @fluentui-react-native/focus-zone to v0.11.25
+- Bump @fluentui-react-native/framework to v0.8.36
+- Bump @fluentui-react-native/interactive-hooks to v0.22.13
+- Bump @fluentui-react-native/text to v0.19.15
+- Bump @fluentui-react-native/theme-tokens to v0.24.0
+- Bump @fluentui-react-native/tokens to v0.20.5
+- Bump @fluentui-react-native/button to v0.32.25
 
 ## 1.2.21
 

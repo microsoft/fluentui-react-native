@@ -1,5 +1,7 @@
-import { stackName, IStackType } from './Stack.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import type { IStackType } from './Stack.types';
+import { stackName } from './Stack.types';
 
 export const settings: IComposeSettings<IStackType> = [
   {

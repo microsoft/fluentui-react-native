@@ -1,24 +1,18 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, AndroidAttribute, ANDROID_CHECKBOX } from '../../common/consts';
-
+import { AndroidAttribute, ANDROID_CHECKBOX } from '../../common/consts';
 import { CHECKBOXV1_TEST_COMPONENT } from '../consts';
+import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 
 describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await CheckboxV1PageObject.waitForInitialPageToDisplay();
+    expect(await CheckboxV1PageObject.isInitialPageDisplayed()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to CheckboxV1 test page', async () => {
-    await CheckboxV1PageObject.mobileScrollToComponentButton();
-    await CheckboxV1PageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await CheckboxV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
 
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxV1Page();
-    await CheckboxV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    await expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -60,14 +54,14 @@ describe('CheckboxV1 Functional Testing', () => {
     await expect(await CheckboxV1PageObject.isCheckboxCheckedAndroid()).toBeFalsy();
 
     /* Click on the Checkbox to toggle on */
-    await CheckboxV1PageObject.clickComponent();
+    await CheckboxV1PageObject.click(CheckboxV1PageObject._primaryComponent);
 
-    expect(await CheckboxV1PageObject.didOnChangeCallbackFire()).toBeTruthy();
+    expect(await CheckboxV1PageObject.didOnChangeCallbackFire('Callback failed to fire via click.')).toBeTruthy();
 
     /* Validate the Checkbox is toggled ON */
     expect(await CheckboxV1PageObject.isCheckboxCheckedAndroid()).toBeTruthy();
 
-    await CheckboxV1PageObject.clickComponent();
+    await CheckboxV1PageObject.click(CheckboxV1PageObject._primaryComponent);
 
     /* Validate the Checkbox is toggled OFF */
     expect(await CheckboxV1PageObject.isCheckboxCheckedAndroid()).toBeFalsy();

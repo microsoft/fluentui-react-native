@@ -1,8 +1,20 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View, ScrollView, Platform } from 'react-native';
-import {
-  contextualMenuName,
+
+import { Callout } from '@fluentui-react-native/callout';
+import { FocusZone } from '@fluentui-react-native/focus-zone';
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { settings } from './ContextualMenu.settings';
+import type {
   ContextualMenuProps,
   ContextualMenuSlotProps,
   ContextualMenuType,
@@ -10,14 +22,7 @@ import {
   ContextualMenuContext,
   ContextualMenuState,
 } from './ContextualMenu.types';
-import { settings } from './ContextualMenu.settings';
-import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { IFocusable, useSelectedKey } from '@fluentui-react-native/interactive-hooks';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { Callout } from '@fluentui-react-native/callout';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { FocusZone } from '@fluentui-react-native/focus-zone';
+import { contextualMenuName } from './ContextualMenu.types';
 
 export const CMContext = React.createContext<ContextualMenuContext>({
   selectedKey: null,

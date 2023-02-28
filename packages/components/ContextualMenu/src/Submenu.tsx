@@ -1,16 +1,22 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View, ScrollView, Platform, I18nManager } from 'react-native';
-import { submenuName, SubmenuProps, SubmenuSlotProps, SubmenuType, SubmenuRenderData, SubmenuState } from './Submenu.types';
-import { settings } from './Submenu.settings';
-import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { IFocusable, useKeyDownProps, useSelectedKey } from '@fluentui-react-native/interactive-hooks';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+
 import { Callout } from '@fluentui-react-native/callout';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { CMContext } from './ContextualMenu';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import { useKeyDownProps, useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { CMContext } from './ContextualMenu';
+import { settings } from './Submenu.settings';
+import type { SubmenuProps, SubmenuSlotProps, SubmenuType, SubmenuRenderData, SubmenuState } from './Submenu.types';
+import { submenuName } from './Submenu.types';
 
 export const Submenu = compose<SubmenuType>({
   displayName: submenuName,

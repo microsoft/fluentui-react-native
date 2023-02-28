@@ -1,13 +1,17 @@
 import * as React from 'react';
 import { Alert, View, StyleSheet, Text, TextInput } from 'react-native';
-import { LinkV1 as Link, LinkTokens } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { LINKV1_TESTPAGE } from '../../../../E2E/src/LinkV1/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { E2ELinkV1Test } from './E2ELinkV1Test';
 import { Platform } from 'react-native';
+
+import type { LinkTokens } from '@fluentui/react-native';
+import { LinkV1 as Link } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
+
+import { E2ELinkV1Test } from './E2ELinkV1Test';
 import { InlineLinks } from './InlineLinksTest';
+import { LINKV1_TESTPAGE } from '../../../../E2E/src/LinkV1/consts';
+import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const DefaultLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
@@ -167,7 +171,9 @@ const linkSections: TestSection[] = [
       component: CustomLinks,
     },
   }),
+];
 
+const e2eSections: TestSection[] = [
   {
     name: 'Link E2E Test',
     component: E2ELinkV1Test,
@@ -186,5 +192,5 @@ export const LinkV1Test: React.FunctionComponent = () => {
   const description =
     'With a Link, users can navigate to another page, window, or Help topic; display a definition; initiate a command; or choose an option. A Link indicates that it can be clicked, typically by being displayed using the visited or unvisited link system colors. Traditionally, Links are underlined as well, but that approach is often unnecessary and falling out of favor to reduce visual clutter.\n\nA Link is the lightest weight clickable control, and is often used to reduce the visual complexity of a design.';
 
-  return <Test name="LinkV1 Test" description={description} sections={linkSections} status={status}></Test>;
+  return <Test name="LinkV1 Test" description={description} sections={linkSections} status={status} e2eSections={e2eSections}></Test>;
 };

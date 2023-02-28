@@ -1,17 +1,21 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { Text } from '@fluentui-react-native/text';
-import { settings } from './Button.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+
 import { filterViewProps } from '@fluentui-react-native/adapters';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { useAsPressable, useKeyProps, useViewCommandFocus, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
-import { useAsPressable, useKeyProps, useViewCommandFocus, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks';
-import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { settings } from './Button.settings';
+import type { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, IButtonType } from './Button.types';
+import { buttonName } from './Button.types';
 
 /**
  * @deprecated This component is deprecated in favor of ButtonV1. This Button will be removed when the package moves to 1.0.0.

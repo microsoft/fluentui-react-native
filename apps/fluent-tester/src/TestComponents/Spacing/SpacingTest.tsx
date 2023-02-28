@@ -1,10 +1,13 @@
-import { Stack } from '@fluentui-react-native/stack';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { stackStyle } from '../Common/styles';
-import { Test, TestSection, PlatformStatus } from '../Test';
+
+import { Stack } from '@fluentui-react-native/stack';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
 import { SPACING_TESTPAGE } from '../../../../E2E/src/Spacing/consts';
+import { stackStyle } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const BasicUsage: React.FunctionComponent = () => {
   function spacingExample(tokenName: string, spacing?: number | string) {

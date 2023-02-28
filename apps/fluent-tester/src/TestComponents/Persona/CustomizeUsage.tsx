@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { View, Text, Switch, TextInput } from 'react-native';
+
 import { Persona } from '@fluentui/react-native';
-import { michaelImageUrl } from './styles';
-import { commonTestStyles as commonStyles } from '../Common/styles';
-import { Theme, useTheme } from '@fluentui-react-native/theme-types';
-import { Slider } from '../Common/Slider';
+import type { Theme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+
+import { michaelImageUrl } from './styles';
+import { Slider } from '../Common/Slider';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   return { textbox: { ...commonStyles.textBox, borderColor: t.colors.inputBorder } };

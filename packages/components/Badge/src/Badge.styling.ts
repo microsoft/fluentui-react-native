@@ -1,21 +1,12 @@
-import {
-  badgeName,
-  BadgeCoreTokens,
-  BadgeTokens,
-  BadgeSlotProps,
-  BadgeProps,
-  BadgeConfigurableProps,
-  BadgeColors,
-  BadgeNamedColor,
-  BadgeSizes,
-  BadgeShapes,
-  BadgeAppearances,
-} from './Badge.types';
-import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
+import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { defaultBadgeTokens } from './BadgeTokens';
+
+import { badgeName, BadgeColors, BadgeSizes, BadgeShapes, BadgeAppearances } from './Badge.types';
+import type { BadgeCoreTokens, BadgeTokens, BadgeSlotProps, BadgeProps, BadgeConfigurableProps, BadgeNamedColor } from './Badge.types';
 import { defaultBadgeColorTokens } from './BadgeColorTokens';
 import { badgeFontTokens } from './BadgeFontTokens';
+import { defaultBadgeTokens } from './BadgeTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
 export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances, 'rtl', 'shadowToken'];

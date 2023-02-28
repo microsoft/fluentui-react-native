@@ -1,10 +1,14 @@
 import * as React from 'react';
-import { View, ViewStyle } from 'react-native';
-import { ShadowProps, shadowName } from './Shadow.types';
+import type { ViewStyle } from 'react-native';
+import { View } from 'react-native';
+
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
-import { getShadowTokenStyleSet } from './shadowStyle';
 import { memoize } from '@fluentui-react-native/framework';
-import { ShadowToken } from '@fluentui-react-native/theme-types';
+import type { ShadowToken } from '@fluentui-react-native/theme-types';
+
+import type { ShadowProps } from './Shadow.types';
+import { shadowName } from './Shadow.types';
+import { getShadowTokenStyleSet } from './shadowStyle';
 
 export const Shadow = stagedComponent((props: ShadowProps) => {
   return (final: ShadowProps, children: React.ReactNode) => {
@@ -36,6 +40,12 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
 const getStylePropsForShadowViews = memoize(getStylePropsForShadowViewsWorker);
 function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shadowToken: ShadowToken) {
   const shadowTokenStyleSet = getShadowTokenStyleSet(shadowToken);
+
+  if (__DEV__) {
+    if (!childStyleProps.backgroundColor) {
+      console.warn('The View that the Shadow is set on must have a background color set');
+    }
+  }
 
   const {
     borderBottomWidth,
@@ -81,67 +91,64 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
     ...restOfChildStyleProps
   } = childStyleProps;
 
-  if (__DEV__) {
-    if (!childStyleProps.backgroundColor) {
-      console.warn('The View that the Shadow is set on must have a background color set');
-    }
-  }
+  // Remove undefined properties, otherwise every prop will be added and be set to
+  // undefined, which can cause unexpected behaviour with some of the styles
+  const innerStyle = removeUndefinedProperties({
+    borderBottomWidth,
+    borderEndWidth,
+    borderLeftWidth,
+    borderRightWidth,
+    borderStartWidth,
+    borderTopWidth,
+    borderWidth,
 
-  return {
-    inner: {
-      style: {
-        borderBottomWidth,
-        borderEndWidth,
-        borderLeftWidth,
-        borderRightWidth,
-        borderStartWidth,
-        borderTopWidth,
-        borderWidth,
+    padding,
+    paddingBottom,
+    paddingEnd,
+    paddingHorizontal,
+    paddingLeft,
+    paddingRight,
+    paddingStart,
+    paddingTop,
+    paddingVertical,
 
-        padding,
-        paddingBottom,
-        paddingEnd,
-        paddingHorizontal,
-        paddingLeft,
-        paddingRight,
-        paddingStart,
-        paddingTop,
-        paddingVertical,
+    alignItems,
 
-        alignItems,
+    flexWrap,
+    flexDirection,
 
-        flexWrap,
-        flexDirection,
+    ...shadowTokenStyleSet.key,
+    ...restOfChildStyleProps,
+  });
 
-        ...shadowTokenStyleSet.key,
-        ...restOfChildStyleProps,
-      },
-    },
-    outer: {
-      style: {
-        margin,
-        marginBottom,
-        marginEnd,
-        marginHorizontal,
-        marginLeft,
-        marginRight,
-        marginStart,
-        marginTop,
-        marginVertical,
+  const outerStyle = removeUndefinedProperties({
+    margin,
+    marginBottom,
+    marginEnd,
+    marginHorizontal,
+    marginLeft,
+    marginRight,
+    marginStart,
+    marginTop,
+    marginVertical,
 
-        start,
-        end,
-        left,
-        right,
-        top,
-        bottom,
+    start,
+    end,
+    left,
+    right,
+    top,
+    bottom,
 
-        ...shadowTokenStyleSet.ambient,
-        ...restOfChildStyleProps,
-      },
-    },
-  };
+    ...shadowTokenStyleSet.ambient,
+    ...restOfChildStyleProps,
+  });
+
+  return { inner: { style: innerStyle }, outer: { style: outerStyle } };
 }
+
+const removeUndefinedProperties = (object: any) => {
+  return Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null));
+};
 
 Shadow.displayName = shadowName;
 

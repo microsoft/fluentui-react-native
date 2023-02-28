@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { View, ScrollView, Pressable } from 'react-native';
-import { FocusZone, FocusZoneDirection, Text, useOnPressWithFocus } from '@fluentui/react-native';
+
+import type { FocusZoneDirection } from '@fluentui/react-native';
+import { FocusZone, Text, useOnPressWithFocus } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Checkbox, CheckboxProps } from '@fluentui-react-native/experimental-checkbox';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { FOCUSZONE_TESTPAGE } from '../../../../E2E/src/FocusZone/consts';
-import { focusZoneTestStyles, SubheaderText } from './styles';
+import type { CheckboxProps } from '@fluentui-react-native/experimental-checkbox';
+import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
+
 import { FocusZone2D, FocusZoneDirections, FocusZoneListWrapper, GridOfButtons } from './FocusZoneE2ETest';
-import { MenuPicker, CollectionItem } from '../Common/MenuPicker';
+import { focusZoneTestStyles, SubheaderText } from './styles';
+import { FOCUSZONE_TESTPAGE } from '../../../../E2E/src/FocusZone/consts';
+import type { CollectionItem } from '../Common/MenuPicker';
+import { MenuPicker } from '../Common/MenuPicker';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const directionCollection: CollectionItem[] = FocusZoneDirections.map((dir) => ({ label: dir, value: dir }));
 
@@ -184,6 +190,9 @@ const focusZoneSections: TestSection[] = [
     name: 'Nested FocusZone',
     component: NestedFocusZone,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: '2D Navigation + E2E Testing',
     component: FocusZone2D,
@@ -199,5 +208,7 @@ export const FocusZoneTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  return <Test name="FocusZone Test" description={'No description.'} sections={focusZoneSections} status={status} />;
+  return (
+    <Test name="FocusZone Test" description={'No description.'} sections={focusZoneSections} status={status} e2eSections={e2eSections} />
+  );
 };

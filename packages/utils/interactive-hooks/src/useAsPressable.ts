@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { PressableFocusProps, PressableHoverProps, PressablePressProps } from './Pressability/Pressability.types';
-import {
+
+import type { PressableFocusProps, PressableHoverProps, PressablePressProps } from './Pressability/Pressability.types';
+import type {
   IPressableHooks,
   IWithPressableOptions,
   IPressState,

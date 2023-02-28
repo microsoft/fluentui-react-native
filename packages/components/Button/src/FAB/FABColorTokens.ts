@@ -1,13 +1,14 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { FABTokens } from './FAB.types';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { FABTokens } from './FAB.types';
 
 export const defaultFABColorTokens: TokenSettings<FABTokens, Theme> = (t: Theme): FABTokens => ({
   // Default coloring same as 'primary' or 'accent'
   backgroundColor: t.colors.brandBackground,
   color: t.colors.neutralForegroundOnColor,
   iconColor: t.colors.neutralForegroundOnColor,
-  rippleColor: 'transparent', //Android Only
+  rippleColor: '#D4D4D4', //Android Only
   disabled: {
     backgroundColor: t.colors.neutralBackground5,
     color: t.colors.neutralForegroundDisabled,
@@ -29,7 +30,7 @@ export const defaultFABColorTokens: TokenSettings<FABTokens, Theme> = (t: Theme)
     backgroundColor: t.colors.neutralBackground5,
     color: t.colors.brandForeground1,
     iconColor: t.colors.brandForeground1,
-    rippleColor: 'transparent',
+    rippleColor: '#D4D4D4',
     disabled: {
       backgroundColor: t.colors.neutralBackgroundDisabled,
       color: t.colors.neutralForegroundDisabled,

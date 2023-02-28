@@ -1,4 +1,6 @@
-import { FocusZoneDirection } from '@fluentui-react-native/focus-zone';
+import type { FocusZoneDirection } from '@fluentui-react-native/focus-zone';
+
+import type { GridButton } from './pages/FocusZonePageObject';
 
 export const HOMEPAGE_FOCUSZONE_BUTTON = 'Homepage_FocusZone_Button';
 export const FOCUSZONE_TESTPAGE = 'FocusZone_TestPage';
@@ -14,7 +16,7 @@ export const FOCUSZONE_GRID_BEFORE = 'FocusZone_Grid_Before';
 export const FOCUSZONE_GRID_AFTER = 'FocusZone_Grid_After';
 
 /* Grid Button Test IDs */
-export const FOCUSZONE_GRID_BUTTON = (idx: number) => `FocusZone_GridButton_${idx}`;
+export const FOCUSZONE_GRID_BUTTON = (idx: GridButton) => `FocusZone_GridButton_${idx}`;
 
 export const FOCUSZONE_TWO_DIM_SWITCH = 'FocusZone_2D_Switch';
 export const FOCUSZONE_DISABLED_SWITCH = 'FocusZone_Disabled_Switch';

@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { IThemeEventListener } from '@uifabricshared/theme-registry';
-import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
-import { ITheme } from './Theme.types';
+
+import type { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { ThemeContext } from '@uifabricshared/theming-ramp';
+
+import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
+import type { ITheme } from './Theme.types';
 
 /**
  * props for the ThemeLayer

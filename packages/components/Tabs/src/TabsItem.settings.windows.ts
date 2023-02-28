@@ -1,6 +1,8 @@
-import { tabsItemName, TabsItemType } from './TabsItem.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import type { TabsItemType } from './TabsItem.types';
+import { tabsItemName } from './TabsItem.types';
 
 export const settings: IComposeSettings<TabsItemType> = [
   {

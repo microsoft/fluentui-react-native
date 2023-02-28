@@ -1,9 +1,13 @@
-import { Alignment, StackSlotProps, StackTokens, StackProps, stackName, StackTokenProps } from './Stack.types';
-import { parseGap, parsePadding } from './StackUtils';
-import { ViewStyle, ViewProps } from 'react-native';
-import { Theme } from '@fluentui-react-native/framework';
-import { UseStylingOptions, buildProps, GetMemoValue } from '@fluentui-react-native/framework';
+import type { ViewStyle, ViewProps } from 'react-native';
+
+import type { Theme } from '@fluentui-react-native/framework';
+import type { UseStylingOptions, GetMemoValue } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles } from '@fluentui-react-native/tokens';
+
+import { stackName } from './Stack.types';
+import type { Alignment, StackSlotProps, StackTokens, StackProps, StackTokenProps } from './Stack.types';
+import { parseGap, parsePadding } from './StackUtils';
 
 const nameMap: { [key: string]: Alignment } = {
   start: 'flex-start',

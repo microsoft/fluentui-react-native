@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { NativeAvatar, Size } from '@fluentui-react-native/experimental-avatar/';
-import { Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
-import { NATIVE_AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { testImageSource, rainbowGradientSource } from './testImageSources';
-import { commonTestStyles as commonStyles } from '../Common/styles';
 import { Switch, View } from 'react-native';
+
+import { Text } from '@fluentui/react-native';
+import type { Size } from '@fluentui-react-native/experimental-avatar/';
+import { NativeAvatar } from '@fluentui-react-native/experimental-avatar/';
+import { Stack } from '@fluentui-react-native/stack';
+
+import { testImageSource, rainbowGradientSource } from './testImageSources';
+import { NATIVE_AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
+import { commonTestStyles as commonStyles } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 export const BasicAvatar: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);

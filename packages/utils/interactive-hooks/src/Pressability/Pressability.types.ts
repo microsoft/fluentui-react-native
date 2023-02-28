@@ -1,6 +1,7 @@
-import { RectOrSize } from './InternalTypes';
-import { BlurEvent, FocusEvent, PressEvent, MouseEvent } from './CoreEventTypes';
-import { ViewProps, PressableProps } from 'react-native';
+import type { ViewProps, PressableProps } from 'react-native';
+
+import type { BlurEvent, FocusEvent, PressEvent, MouseEvent } from './CoreEventTypes';
+import type { RectOrSize } from './InternalTypes';
 
 export type PressablePressProps = {
   /**

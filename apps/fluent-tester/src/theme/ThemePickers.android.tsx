@@ -1,26 +1,30 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
+import type { Theme } from '@fluentui-react-native/framework';
+import { useTheme } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { lightnessOptions, testerTheme } from './CustomThemes';
-import { themeChoices, ThemeNames } from './applyTheme';
-import { brandOptions, OfficeBrand } from './applyBrand';
-import { Theme, useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { Picker, PickerProps } from '@react-native-picker/picker';
+import type { PickerProps } from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
+
+import { themeChoices } from './applyTheme';
+import type { ThemeNames } from './applyTheme';
+import { lightnessOptions, testerTheme } from './CustomThemes';
 
 const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
   return {
     pickerRoot: {
       flexDirection: 'row',
+      width: '100%',
     },
     picker: {
       flexDirection: 'column',
       alignItems: 'center',
+      width: '50%',
       padding: 4,
     },
     dropdown: {
-      height: 30,
-      width: 120,
       fontSize: 12,
       color: t.colors.bodyText,
     },
@@ -28,6 +32,7 @@ const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
       borderStyle: 'solid',
       borderColor: t.colors.disabledBodyText,
       borderWidth: 1,
+      width: '100%',
     },
   };
 });
@@ -35,10 +40,6 @@ const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
 const PickerLabel = Text.customize({ variant: 'subheaderSemibold' });
 
 export const ThemePickers: React.FunctionComponent = () => {
-  const onBrandChange = React.useCallback((newBrand: string) => {
-    testerTheme.brand = newBrand as OfficeBrand;
-  }, []);
-
   const onThemeSelected = React.useCallback((newTheme: string) => {
     testerTheme.themeName = newTheme as ThemeNames;
   }, []);
@@ -82,11 +83,6 @@ export const ThemePickers: React.FunctionComponent = () => {
       <View style={themedPickerStyles.picker}>
         <PickerLabel>Light/Dark: </PickerLabel>
         <Dropdown initial={testerTheme.appearance} onValueChange={onAppearanceChange} options={lightnessOptions} />
-      </View>
-
-      <View style={themedPickerStyles.picker}>
-        <PickerLabel>Brand: </PickerLabel>
-        <Dropdown initial={testerTheme.brand} onValueChange={onBrandChange} options={brandOptions} />
       </View>
     </View>
   );

@@ -1,6 +1,7 @@
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
-import { StyleProp } from './mergeStyles.types';
+
+import type { StyleProp } from './mergeStyles.types';
 
 /**
  * Take a react-native style, which may be a recursive array, and return as a flattened

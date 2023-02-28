@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
 import { Text } from '@fluentui/react-native';
 import { Shadow, getShadowTokenStyleSet } from '@fluentui-react-native/experimental-shadow';
-import { ShadowToken, Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
+import type { ShadowToken, Theme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+
 import { shadowTestPageStyles } from './ShadowTestPageStyles';
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {

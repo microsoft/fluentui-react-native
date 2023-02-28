@@ -1,10 +1,14 @@
 /** @jsx withSlots */
-import * as React from 'react';
+import type * as React from 'react';
 import { Pressable } from 'react-native';
-import { fabName, FABProps, FABType } from './FAB.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { compose, UseSlots } from '@fluentui-react-native/framework';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import type { FABProps, FABType } from './FAB.types';
+import { fabName } from './FAB.types';
 
 export const FAB = compose<FABType>({
   displayName: fabName,

@@ -1,10 +1,13 @@
-import { TextProps, Text, View } from 'react-native';
-import toJson from 'enzyme-to-json';
 import * as React from 'react';
-import { mount } from 'enzyme';
-import { buildUseTokens } from './buildUseTokens';
-import { mergeStyles } from '@fluentui-react-native/merge-props';
+import type { TextProps } from 'react-native';
+import { Text, View } from 'react-native';
+
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
+import { mergeStyles } from '@fluentui-react-native/merge-props';
+import { mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
+
+import { buildUseTokens } from './buildUseTokens';
 
 /**
  * Sample super simple theming implementation, shared by all the samples. This is intended to be illustrative,

@@ -1,5 +1,7 @@
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { checkboxName, ICheckboxType } from './Checkbox.types';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import type { ICheckboxType } from './Checkbox.types';
+import { checkboxName } from './Checkbox.types';
 
 export const checkboxSelectActionLabel = 'Toggle the Checkbox';
 

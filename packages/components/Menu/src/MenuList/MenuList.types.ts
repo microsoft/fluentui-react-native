@@ -1,9 +1,10 @@
+import type React from 'react';
+import type { ScrollViewProps } from 'react-native';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import React from 'react';
-import { ScrollViewProps } from 'react-native';
+import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import type { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const menuListName = 'MenuList';
 
@@ -12,6 +13,7 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * Space between items in pixels
    */
   gap?: number;
+  hasMaxHeight?: MenuListTokens;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
@@ -31,11 +33,23 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
   hasCheckmarks?: boolean;
 
   /**
+   * States that menu items all have tooltips with its text by default.
+   *
+   * This option is useful for programmatically generated items to provide
+   * text for options that end up having tuncated text.
+   */
+  hasTooltips?: boolean;
+
+  /**
    * Callback when checked items change
    *
    * @param checked Array of all currently checked values
    */
   onCheckedChange?: (e: InteractionEvent, checked: string[]) => void;
+  /**
+   * Defines a minumum width for the Menu.
+   */
+  minWidth?: number | string;
 }
 
 export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onCheckedChange'> {
@@ -47,12 +61,14 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   selectRadio?: (e: InteractionEvent, name: string) => void;
   addRadioItem: (name: string) => void;
   removeRadioItem: (name: string) => void;
+  hasMaxHeight?: boolean;
+  hasMaxWidth?: boolean;
 }
 
 export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps> & { gap?: number };
   focusZone?: FocusZoneProps; // macOS only
-  scrollView?: ScrollViewProps; // macOS only
+  scrollView?: ScrollViewProps;
 }
 
 export interface MenuListType {

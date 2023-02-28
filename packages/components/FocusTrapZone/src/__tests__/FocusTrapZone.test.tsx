@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { FocusTrapZone } from '..';
+
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import * as renderer from 'react-test-renderer';
-import { IFocusable } from '@fluentui-react-native/interactive-hooks';
+
+import { FocusTrapZone } from '..';
 
 it('FocusTrapZone default props', () => {
   const tree = renderer.create(<FocusTrapZone />).toJSON();

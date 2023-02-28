@@ -1,7 +1,9 @@
 export * from './MenuPicker.desktop';
 import * as React from 'react';
 import { Button, Text, View, StyleSheet } from 'react-native';
-import { MenuPickerProps, CollectionItem } from './MenuPicker';
+
+import type { MenuPickerProps, CollectionItem } from './MenuPicker.types';
+export { MenuPickerProps, CollectionItem };
 
 export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: MenuPickerProps) => {
   const { prompt, onChange, collection } = props;

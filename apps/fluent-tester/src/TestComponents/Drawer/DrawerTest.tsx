@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { stackStyle } from '../Common/styles';
 import { View, Text } from 'react-native';
+
 import { Link } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Drawer } from '@fluentui-react-native/experimental-drawer';
-import { Stack } from '@fluentui-react-native/stack';
 import { Icon } from '@fluentui-react-native/icon';
+import { Stack } from '@fluentui-react-native/stack';
+
 import { DRAWER_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
 import { svgProps } from '../Common/iconExamples';
+import { stackStyle } from '../Common/styles';
+import { Test } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
 
 const BasicDrawer: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);

@@ -1,9 +1,11 @@
-import * as React from 'react';
-import { ColorValue } from 'react-native';
-import { XmlProps } from 'react-native-svg';
-import { TextProps } from '@fluentui-react-native/text';
-import { PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
-import { MenuItemProps, MenuItemTokens } from '../MenuItem/MenuItem.types';
+import type * as React from 'react';
+import type { ColorValue } from 'react-native';
+
+import type { PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type { TextProps } from '@fluentui-react-native/text';
+import type { XmlProps } from 'react-native-svg';
+
+import type { MenuItemProps, MenuItemTokens } from '../MenuItem/MenuItem.types';
 
 export const menuItemCheckboxName = 'MenuItemCheckbox';
 
@@ -42,7 +44,7 @@ export interface MenuItemCheckboxProps extends MenuItemProps {
 }
 export interface MenuItemCheckboxInfo {
   props: MenuItemCheckboxProps & React.ComponentPropsWithRef<any>;
-  state: PressableState;
+  state: PressableState & { hasTooltips: boolean };
 }
 
 export interface MenuItemCheckboxSlotProps {

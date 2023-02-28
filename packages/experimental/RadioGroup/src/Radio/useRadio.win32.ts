@@ -1,15 +1,13 @@
-import { RadioProps, RadioInfo } from './Radio.types';
 import * as React from 'react';
-import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
-import {
-  usePressableState,
-  useOnPressWithFocus,
-  useViewCommandFocus,
-  KeyPressEvent,
-  useKeyDownProps,
-} from '@fluentui-react-native/interactive-hooks';
+import type { AccessibilityState } from 'react-native';
+import { I18nManager } from 'react-native';
+
 import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState, I18nManager } from 'react-native';
+import type { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useOnPressWithFocus, useViewCommandFocus, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
+
+import type { RadioProps, RadioInfo } from './Radio.types';
+import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 

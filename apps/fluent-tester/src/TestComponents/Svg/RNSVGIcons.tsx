@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { RNSVGIcons_TESTPAGE } from '../../../../E2E/src/Svg/consts';
 import { /* Text, */ View } from 'react-native';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
+import { faMountainCity } from '@fortawesome/free-solid-svg-icons/faMountainCity';
+import { faMugHot } from '@fortawesome/free-solid-svg-icons/faMugHot';
 import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
 import { faSquareCheck } from '@fortawesome/free-solid-svg-icons/faSquareCheck';
-import { faMugHot } from '@fortawesome/free-solid-svg-icons/faMugHot';
-import { faMountainCity } from '@fortawesome/free-solid-svg-icons/faMountainCity';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   AccessTime20Filled,
   AccessTime20Regular,
@@ -509,6 +508,10 @@ import {
   ArrowCircleUpLeft20Filled,
   ArrowCircleUpLeft20Regular,
 } from '@warren-ms/react-native-icons';
+
+import { RNSVGIcons_TESTPAGE } from '../../../../E2E/src/Svg/consts';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const FontAwesomeTest: React.FunctionComponent = () => {
   return (

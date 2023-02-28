@@ -1,8 +1,89 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 20:39:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.3
+
+Fri, 24 Feb 2023 20:39:57 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.17.3
+- Bump @fluentui-react-native/win32-theme to v0.25.3
+- Bump @uifabricshared/theme-registry to v0.9.2
+- Bump @uifabricshared/theming-ramp to v0.17.20
+
+## 0.16.2
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.17.2
+- Bump @fluentui-react-native/win32-theme to v0.25.2
+
+## 0.16.1
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.17.1
+- Bump @fluentui-react-native/win32-theme to v0.25.1
+
+## 0.16.0
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Minor changes
+
+- Revert "Change default theme from a const object to a function that returns the object #2483" (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.17.0
+- Bump @fluentui-react-native/win32-theme to v0.25.0
+
+## 0.15.30
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.29
+- Bump @fluentui-react-native/win32-theme to v0.24.16
+
+## 0.15.29
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.16.28
+- Bump @fluentui-react-native/win32-theme to v0.24.15
+- Bump @uifabricshared/theme-registry to v0.9.1
+- Bump @uifabricshared/theming-ramp to v0.17.19
+
+## 0.15.28
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.27
+- Bump @fluentui-react-native/win32-theme to v0.24.14
+- Bump @uifabricshared/theming-ramp to v0.17.18
+
+## 0.15.27
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.26
+- Bump @fluentui-react-native/win32-theme to v0.24.13
+- Bump @uifabricshared/theming-ramp to v0.17.17
 
 ## 0.15.26
 

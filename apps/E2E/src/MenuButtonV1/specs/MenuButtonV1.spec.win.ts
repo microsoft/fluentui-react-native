@@ -1,21 +1,18 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import MenuButtonV1PageObject from '../pages/MenuButtonV1PageObject.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Attribute } from '../../common/consts';
+import { MENUBUTTON_A11Y_ROLE, Attribute } from '../../common/consts';
 import { MENUBUTTONV1_ACCESSIBILITY_LABEL, MENUBUTTONV1_TEST_COMPONENT_LABEL } from '../consts';
+import MenuButtonV1PageObject from '../pages/MenuButtonV1PageObject.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('MenuButtonV1 Testing Initialization', function () {
+describe('MenuButtonV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await MenuButtonV1PageObject.waitForInitialPageToDisplay();
+    expect(await MenuButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to MenuButtonV1 test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToMenuButtonV1Page();
-    await MenuButtonV1PageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await MenuButtonV1PageObject.navigateToPageAndLoadTests(true);
+    expect(await MenuButtonV1PageObject.isPageLoaded()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await MenuButtonV1PageObject.isPageLoaded()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -27,7 +24,7 @@ describe('MenuButtonV1 Accessibility Testing', () => {
     await MenuButtonV1PageObject.scrollToTestElement(await MenuButtonV1PageObject._firstMenuButton);
   });
 
-  it('Validate "accessibilityRole" value defaults to Button "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" value defaults to "ControlType.Button".', async () => {
     await expect(
       await MenuButtonV1PageObject.compareAttribute(
         MenuButtonV1PageObject._firstMenuButton,

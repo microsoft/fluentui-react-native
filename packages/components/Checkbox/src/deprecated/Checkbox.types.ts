@@ -1,11 +1,12 @@
-import * as React from 'react';
-// import { IPressableProps } from '@fluentui-react-native/pressable';
-import { IPressableState, IFocusable } from '@fluentui-react-native/interactive-hooks';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-react-native/text';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type * as React from 'react';
+import type { ColorValue } from 'react-native';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { ColorValue } from 'react-native';
+import type { IPressableState, IFocusable } from '@fluentui-react-native/interactive-hooks';
+// import { IPressableProps } from '@fluentui-react-native/pressable';
+import type { ITextProps } from '@fluentui-react-native/text';
+import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 /**
  * @deprecated This will be removed when the package moves to 1.0.0.

@@ -1,8 +1,11 @@
-import { InteractionEvent, isMouseEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
 import { Platform } from 'react-native';
+
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { isMouseEvent } from '@fluentui-react-native/interactive-hooks';
+
+import type { MenuProps, MenuState } from './Menu.types';
 import { useMenuContext } from '../context/menuContext';
-import { MenuProps, MenuState } from './Menu.types';
 
 // Due to how events get fired we get double notifications
 // for the same event causing us to immediately reopen
@@ -54,7 +57,7 @@ const useMenuOpenState = (
   const { defaultOpen, onOpenChange, open } = props;
   const initialState = typeof defaultOpen !== 'undefined' ? defaultOpen : !!open;
   const [openInternal, setOpenInternal] = React.useState<boolean>(initialState);
-  const [shouldFocusOnContainer, setShouldFocusOnContainer] = React.useState<boolean>(false);
+  const [shouldFocusOnContainer, setShouldFocusOnContainer] = React.useState<boolean | undefined>(undefined);
 
   const state = isControlled ? open : openInternal;
 
@@ -65,12 +68,16 @@ const useMenuOpenState = (
         setOpenInternal(isOpen);
       }
 
-      if (isOpen && Platform.OS === ('win32' as any) && isMouseEvent(e)) {
-        setShouldFocusOnContainer(true);
+      if (isOpen) {
+        if (Platform.OS === ('win32' as any) && isMouseEvent(e)) {
+          setShouldFocusOnContainer(true);
+        } else {
+          setShouldFocusOnContainer(false);
+        }
       }
 
       if (!isOpen) {
-        setShouldFocusOnContainer(false);
+        setShouldFocusOnContainer(undefined);
         lastCloseTimestamp = Date.now();
       }
 

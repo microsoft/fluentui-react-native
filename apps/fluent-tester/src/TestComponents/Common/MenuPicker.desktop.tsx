@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
-import { MenuPickerProps, CollectionItem } from './MenuPicker';
+
 import { ButtonV1 as Button, Text } from '@fluentui/react-native';
+import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { SvgXml } from 'react-native-svg';
+
+import type { MenuPickerProps, CollectionItem } from './MenuPicker.types';
+
+export { MenuPickerProps, CollectionItem };
 
 const chevronXml = `
 <svg width="12" height="16" viewBox="0 0 11 6" color="#000">

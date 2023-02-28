@@ -1,23 +1,27 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import {
+
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { CMContext } from './ContextualMenu';
+import { settings } from './ContextualMenuItem.settings';
+import type {
   ContextualMenuItemSlotProps,
   ContextualMenuItemState,
   ContextualMenuItemProps,
   ContextualMenuItemRenderData,
-  contextualMenuItemName,
   ContextualMenuItemType,
 } from './ContextualMenuItem.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { Text } from '@fluentui-react-native/text';
-import { settings } from './ContextualMenuItem.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { CMContext } from './ContextualMenu';
-import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { contextualMenuItemName } from './ContextualMenuItem.types';
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,

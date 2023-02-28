@@ -1,6 +1,7 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { CompoundButtonTokens } from './CompoundButton.types';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { CompoundButtonTokens } from './CompoundButton.types';
 
 export const defaultCompoundButtonFontTokens: TokenSettings<CompoundButtonTokens, Theme> = (_t: Theme): CompoundButtonTokens => ({
   medium: {

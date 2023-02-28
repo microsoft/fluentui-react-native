@@ -1,10 +1,12 @@
-import { IMockTheme } from './MockTheme';
-import { ITargetHasToken, IComponentTokens, IStyleFactories } from './Token.types';
-import { mergeSettings, ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
-import { StyleProp } from '@fluentui-react-native/merge-props';
+import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { StyleProp } from '@fluentui-react-native/merge-props';
+import type { ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import type { IMockTheme } from './MockTheme';
 import { processTokens } from './Token';
 import { buildComponentTokens } from './Token.function';
-import { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { ITargetHasToken, IComponentTokens, IStyleFactories } from './Token.types';
 
 export type ICSSStyle = React.CSSProperties;
 

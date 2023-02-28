@@ -1,4 +1,4 @@
-import { TestDescription } from './TestComponents';
+import type { TestDescription } from './TestComponents';
 import { ActivityIndicatorTest } from './TestComponents/ActivityIndicator';
 import { AvatarTest, NativeAvatarTest } from './TestComponents/Avatar';
 import { BadgeTest } from './TestComponents/Badge';
@@ -9,7 +9,7 @@ import { CheckboxV1Test } from './TestComponents/CheckboxV1';
 import { ColorTokensTest } from './TestComponents/ColorTokens';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
-import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
+import { DividerTest } from './TestComponents/Divider';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
 // import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
@@ -21,6 +21,7 @@ import { LinkV1Test } from './TestComponents/LinkV1';
 import { MenuTest } from './TestComponents/Menu';
 import { MenuButtonLegacyTest } from './TestComponents/MenuButtonLegacy';
 import { MenuButtonV1Test } from './TestComponents/MenuButtonV1';
+import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
 import { PersonaTest } from './TestComponents/Persona';
 import { PersonaCoinTest } from './TestComponents/PersonaCoin';
@@ -31,6 +32,7 @@ import { SeparatorTest } from './TestComponents/Separator';
 import { ShadowTest } from './TestComponents/Shadow';
 import { ShimmerTest } from './TestComponents/Shimmer';
 import { SpacingTokensTest } from './TestComponents/Spacing';
+import { SpinnerTest } from './TestComponents/Spinner';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
 import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
@@ -54,109 +56,115 @@ export const tests: TestDescription[] = [
     testPageButton: Constants.HOMEPAGE_AVATAR_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
+  {
+    name: 'Avatar (Native)',
+    component: NativeAvatarTest,
+    testPageButton: Constants.HOMEPAGE_NATIVE_AVATAR_BUTTON,
+    platforms: ['ios', 'macos'],
+  },
+  {
+    name: 'Badge',
+    component: BadgeTest,
+    testPageButton: Constants.HOMEPAGE_BADGE_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Button',
+    component: ButtonTest,
+    testPageButton: Constants.HOMEPAGE_BUTTON_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Callout',
+    component: CalloutTest,
+    testPageButton: Constants.HOMEPAGE_CALLOUT_BUTTON,
+    platforms: ['android', 'macos', 'win32'],
+  },
+  {
+    name: 'Checkbox Legacy',
+    component: CheckboxLegacyTest,
+    testPageButton: Constants.HOMEPAGE_CHECKBOX_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Checkbox V1',
+    component: CheckboxV1Test,
+    testPageButton: Constants.HOMEPAGE_CHECKBOXV1_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
+  },
+  {
+    name: 'Color Tokens',
+    component: ColorTokensTest,
+    testPageButton: Constants.HOMEPAGE_COLORTOKEN_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'ContextualMenu',
+    component: ContextualMenuTest,
+    testPageButton: Constants.HOMEPAGE_CONTEXTUALMENU_BUTTON,
+    platforms: ['android', 'macos', 'win32'],
+  },
+  {
+    name: 'Corner Radius Tokens',
+    component: CornerRadiusTokensTest,
+    testPageButton: Constants.HOMEPAGE_CORNERRADIUS_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Date Picker (Native)',
+    component: NativeDatePickerTest,
+    testPageButton: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
+    platforms: ['ios'],
+  },
+  {
+    name: 'Divider',
+    component: DividerTest,
+    testPageButton: Constants.HOMEPAGE_DIVIDER_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Dropdown',
+    component: DropdownTest,
+    testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
+    platforms: ['macos', 'win32'],
+  },
   // {
-  //   name: 'Avatar (Native)',
-  //   component: NativeAvatarTest,
-  //   testPageButton: Constants.HOMEPAGE_NATIVE_AVATAR_BUTTON,
-  //   platforms: ['ios', 'macos'],
+  //   name: 'Drawer',
+  //   component: DrawerTest,
+  //   testPage: Constants.HOMEPAGE_DRAWER_BUTTON,
+  //   platforms: ['android'],
   // },
+  // GH##1027 Temporarily disabling while the test doesn't load
   // {
-  //   name: 'Badge',
-  //   component: BadgeTest,
-  //   testPageButton: Constants.HOMEPAGE_BADGE_BUTTON,
-  //   platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  //   name: 'Expander',
+  //   component: ExpanderTest,
+  //   testPage: Constants.HOMEPAGE_EXPANDER_BUTTON,
+  //   platforms: ['windows'],
   // },
-  // {
-  //   name: 'Button',
-  //   component: ButtonTest,
-  //   testPageButton: Constants.HOMEPAGE_BUTTON_BUTTON,
-  //   platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  // },
-  // {
-  //   name: 'Callout',
-  //   component: CalloutTest,
-  //   testPageButton: Constants.HOMEPAGE_CALLOUT_BUTTON,
-  //   platforms: ['android', 'macos', 'win32'],
-  // },
-  // {
-  //   name: 'Checkbox Legacy',
-  //   component: CheckboxLegacyTest,
-  //   testPageButton: Constants.HOMEPAGE_CHECKBOX_BUTTON,
-  //   platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  // },
-  // {
-  //   name: 'Checkbox V1',
-  //   component: CheckboxV1Test,
-  //   testPageButton: Constants.HOMEPAGE_CHECKBOXV1_BUTTON,
-  //   platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
-  // },
-  // {
-  //   name: 'Color Tokens',
-  //   component: ColorTokensTest,
-  //   testPageButton: Constants.HOMEPAGE_COLORTOKEN_BUTTON,
-  //   platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  // },
-  // {
-  //   name: 'ContextualMenu',
-  //   component: ContextualMenuTest,
-  //   testPageButton: Constants.HOMEPAGE_CONTEXTUALMENU_BUTTON,
-  //   platforms: ['android', 'macos', 'win32'],
-  // },
-  // {
-  //   name: 'Corner Radius Tokens',
-  //   component: CornerRadiusTokensTest,
-  //   testPageButton: Constants.HOMEPAGE_CORNERRADIUS_BUTTON,
-  //   platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  // },
-  // {
-  //   name: 'Date Picker (Native)',
-  //   component: NativeDatePickerTest,
-  //   testPageButton: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
-  //   platforms: ['ios'],
-  // },
-  // {
-  //   name: 'Dropdown',
-  //   component: DropdownTest,
-  //   testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
-  //   platforms: ['macos', 'win32'],
-  // },
-  // // {
-  // //   name: 'Drawer',
-  // //   component: DrawerTest,
-  // //   testPage: Constants.HOMEPAGE_DRAWER_BUTTON,
-  // //   platforms: ['android'],
-  // // },
-  // // GH##1027 Temporarily disabling while the test doesn't load
-  // // {
-  // //   name: 'Expander',
-  // //   component: ExpanderTest,
-  // //   testPage: Constants.HOMEPAGE_EXPANDER_BUTTON,
-  // //   platforms: ['windows'],
-  // // },
-  // {
-  //   name: 'Focus Trap Zone',
-  //   component: FocusTrapTest,
-  //   testPageButton: Constants.HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-  //   platforms: ['win32'],
-  // },
-  // {
-  //   name: 'FocusZone',
-  //   component: FocusZoneTest,
-  //   testPageButton: Constants.HOMEPAGE_FOCUSZONE_BUTTON,
-  //   platforms: ['macos', 'win32'],
-  // },
-  // {
-  //   name: 'Icon',
-  //   component: IconTest,
-  //   testPageButton: Constants.HOMEPAGE_ICON_BUTTON,
-  //   platforms: ['android', 'ios', 'macos', 'win32'],
-  // },
-  // {
-  //   name: 'Link Legacy',
-  //   component: LinkLegacyTest,
-  //   testPageButton: Constants.HOMEPAGE_LINK_BUTTON,
-  //   platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  // },
+  {
+    name: 'Focus Trap Zone',
+    component: FocusTrapTest,
+    testPageButton: Constants.HOMEPAGE_FOCUSTRAPZONE_BUTTON,
+    platforms: ['win32'],
+  },
+  {
+    name: 'FocusZone',
+    component: FocusZoneTest,
+    testPageButton: Constants.HOMEPAGE_FOCUSZONE_BUTTON,
+    platforms: ['macos', 'win32'],
+  },
+  {
+    name: 'Icon',
+    component: IconTest,
+    testPageButton: Constants.HOMEPAGE_ICON_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32'],
+  },
+  {
+    name: 'Link Legacy',
+    component: LinkLegacyTest,
+    testPageButton: Constants.HOMEPAGE_LINK_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
   {
     name: 'Link V1',
     component: LinkV1Test,
@@ -215,7 +223,7 @@ export const tests: TestDescription[] = [
     name: 'RadioGroup V1',
     component: RadioGroupV1Test,
     testPageButton: Constants.HOMEPAGE_RADIOGROUPV1_BUTTON,
-    platforms: ['android', 'macos', 'win32'],
+    platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Separator',
@@ -240,6 +248,12 @@ export const tests: TestDescription[] = [
     component: SpacingTokensTest,
     testPageButton: Constants.HOMEPAGE_SPACING_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Spinner V1',
+    component: SpinnerTest,
+    testPageButton: Constants.HOMEPAGE_SPINNER_BUTTON,
+    platforms: ['android'],
   },
   {
     name: 'Stroke Width Tokens',
@@ -290,7 +304,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'AnkitaTheme',
+    name: 'Theme',
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],

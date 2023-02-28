@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import type { View } from 'react-native';
+
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
-import { TabsProps, TabsState, TabsInfo } from './Tabs.types';
+
+import type { TabsProps, TabsState, TabsInfo } from './Tabs.types';
 
 /**
  * Re-usable hook for Tabs.

@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import type { MenuListState } from '../MenuList/MenuList.types';
 
 /**
@@ -6,12 +7,14 @@ import type { MenuListState } from '../MenuList/MenuList.types';
  */
 export type MenuListContextValue = Omit<MenuListState, 'props'> & {
   hasCheckmarks: boolean;
+  hasTooltips: boolean;
 };
 
 export const MenuListContext = React.createContext<MenuListContextValue>({
   isCheckedControlled: false,
   checked: {},
   hasCheckmarks: false,
+  hasTooltips: false,
   onCheckedChange: () => false,
   onArrowClose: () => false,
   addRadioItem: () => false,

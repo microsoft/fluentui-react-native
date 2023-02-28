@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useCallback } from 'react';
 import { View, Platform, Text } from 'react-native';
-import { PresenceBadge, BadgeSize, BadgeSizes } from '@fluentui-react-native/badge';
-import { StyledPicker } from '../Common/StyledPicker';
+
 import { ToggleButton } from '@fluentui/react-native';
+import type { BadgeSize } from '@fluentui-react-native/badge';
+import { PresenceBadge, BadgeSizes } from '@fluentui-react-native/badge';
+
+import { StyledPicker } from '../Common/StyledPicker';
 
 const badgeSizes: BadgeSize[] = [...BadgeSizes];
 export const PresenceBadgeTest: React.FunctionComponent = () => {

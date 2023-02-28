@@ -1,21 +1,19 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import AvatarPageObject from '../pages/AvatarPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, LINK_A11Y_ROLE, IMAGE_A11Y_ROLE } from '../../common/consts';
+import { Attribute, LINK_A11Y_ROLE, IMAGE_A11Y_ROLE } from '../../common/consts';
 import { AVATAR_ACCESSIBILITY_LABEL, AVATAR_ACCESSIBILITY_LABEL_BY_NAME, AVATAR_ACCESSIBILITY_HINT } from '../consts';
+import AvatarPageObject from '../pages/AvatarPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Avatar Testing Initialization', function () {
+describe('Avatar Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await AvatarPageObject.waitForInitialPageToDisplay();
+    expect(await AvatarPageObject.isInitialPageDisplayed()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Avatar test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToAvatarPage();
-    await AvatarPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await AvatarPageObject.navigateToPageAndLoadTests(true);
+    expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 });
@@ -53,7 +51,7 @@ describe('Avatar Accessibility Testing', () => {
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Set "accessibilityRole" prop. Validate "accessibilityRole" value propagates to "ControlType" attribute.', async () => {
+  it('Set "accessibilityRole" prop. Validate "accessibilityRole" propagates to "ControlType" element attribute.', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
     ).toBeTruthy();
@@ -61,7 +59,7 @@ describe('Avatar Accessibility Testing', () => {
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do NOT set "accessibilityRole". Validate "accessibilityRole" value defaults to "Image" ControlType.', async () => {
+  it('Do NOT set "accessibilityRole". Validate "accessibilityRole" defaults to "ControlType.Image".', async () => {
     await expect(
       await AvatarPageObject.compareAttribute(AvatarPageObject._secondaryComponent, Attribute.AccessibilityRole, IMAGE_A11Y_ROLE),
     ).toBeTruthy();

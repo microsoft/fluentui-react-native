@@ -1,11 +1,12 @@
-import * as React from 'react';
-import { ViewProps } from 'react-native';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-react-native/text';
-import { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import type * as React from 'react';
+import type { ViewProps } from 'react-native';
+
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import type { IPressableProps } from '@fluentui-react-native/pressable';
+import type { ITextProps } from '@fluentui-react-native/text';
+import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IPressableProps } from '@fluentui-react-native/pressable';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const radioButtonName = 'RadioButton';
 

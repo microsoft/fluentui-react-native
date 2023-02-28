@@ -1,11 +1,10 @@
-import NavigateAppPage from '../../NavigateAppPage';
+import { PAGE_TIMEOUT } from '../../../common/consts';
 import NativeTestingPageObject from '../pages/NativeTestingPageObject.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../../common/consts';
 
 describe('Native Safety Check Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await NativeTestingPageObject.waitForInitialPageToDisplay();
+    expect(await NativeTestingPageObject.isInitialPageDisplayed()).toBeTruthy(NativeTestingPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   // The ScrollView in testing is the one that contains all the buttons that navigate to each component's

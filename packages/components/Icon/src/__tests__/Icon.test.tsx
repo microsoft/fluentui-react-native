@@ -1,8 +1,12 @@
 import * as React from 'react';
-import { IconV1, SvgIcon, FontIcon, FontIconPropsV1 } from '../';
-import * as renderer from 'react-test-renderer';
+
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Path, Svg } from 'react-native-svg';
+import * as renderer from 'react-test-renderer';
+
+import type { FontIconPropsV1 } from '../';
+import { IconV1, SvgIcon, FontIcon } from '../';
+
 const fontProps: FontIconPropsV1 = {
   fontFamily: 'Arial',
   codepoint: 0x2663,

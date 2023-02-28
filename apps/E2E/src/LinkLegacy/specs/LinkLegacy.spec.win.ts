@@ -1,21 +1,18 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import LinkLegacyPageObject from '../pages/LinkLegacyPageObject';
+import { LINK_A11Y_ROLE, Attribute } from '../../common/consts';
 import { LINK_ACCESSIBILITY_LABEL } from '../consts';
-import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute } from '../../common/consts';
+import LinkLegacyPageObject from '../pages/LinkLegacyPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Link Testing Initialization', function () {
+describe('Link Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await LinkLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await LinkLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(LinkLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Link test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToLinkLegacyPage();
-    await LinkLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+  it('Click and navigate to Link Legacy test page', async () => {
+    await LinkLegacyPageObject.navigateToPageAndLoadTests(true);
+    expect(await LinkLegacyPageObject.isPageLoaded()).toBeTruthy(LinkLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await LinkLegacyPageObject.isPageLoaded()).toBeTruthy(LinkLegacyPageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -25,7 +22,7 @@ describe('Link Accessibility Testing', () => {
     await LinkLegacyPageObject.scrollToTestElement();
   });
 
-  it('Validate "accessibilityRole" defaults to Link "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to "ControlType.HyperLink".', async () => {
     await expect(
       await LinkLegacyPageObject.compareAttribute(LinkLegacyPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
     ).toBeTruthy();

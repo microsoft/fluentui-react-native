@@ -1,7 +1,8 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
+import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { CheckboxTokens } from './Checkbox.types';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { CheckboxTokens } from './Checkbox.types';
 
 // No Tokens for Sizes , hovered and circular checkbox as they're not supported for Android Platform
 

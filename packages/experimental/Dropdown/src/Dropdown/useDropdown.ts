@@ -1,4 +1,4 @@
-import { DropdownInfo, DropdownProps } from './Dropdown.types';
+import type { DropdownInfo, DropdownProps } from './Dropdown.types';
 
 export const useDropdown = (_props: DropdownProps): DropdownInfo => {
   return {

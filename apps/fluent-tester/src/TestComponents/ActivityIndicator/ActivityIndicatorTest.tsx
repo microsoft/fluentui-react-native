@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
 import { View, Switch } from 'react-native';
+
+import { Text } from '@fluentui/react-native';
+import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
+import { Stack } from '@fluentui-react-native/stack';
+
+import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
+import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const BasicActivityIndicator: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);

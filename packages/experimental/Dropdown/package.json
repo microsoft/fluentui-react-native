@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/dropdown",
-  "version": "0.7.19",
+  "version": "0.7.32",
   "description": "A cross-platform Dropdown component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,14 +26,13 @@
     "directory": "packages/experimental/dropdown"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/button": ">=0.32.24 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.21.54 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.35",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.12 <1.0.0",
-    "@fluentui-react-native/text": ">=0.19.14 <1.0.0",
-    "@fluentui-react-native/theme-tokens": "^0.23.2",
-    "react-native-svg": "12.5.0"
+    "@fluentui-react-native/adapters": ">=0.10.2 <1.0.0",
+    "@fluentui-react-native/button": ">=0.32.35 <1.0.0",
+    "@fluentui-react-native/callout": ">=0.23.3 <1.0.0",
+    "@fluentui-react-native/framework": "0.9.3",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.20 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.22 <1.0.0",
+    "@fluentui-react-native/theme-tokens": "^0.24.3"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
@@ -41,23 +40,32 @@
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "author": "",
   "license": "MIT",
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react",
+        "svg"
+      ]
+    }
   }
 }

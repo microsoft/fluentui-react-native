@@ -1,26 +1,30 @@
 /** @jsx withSlots */
 import { Image, View, Text } from 'react-native';
-import {
+
+import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
+import { foregroundColorTokens } from '@fluentui-react-native/tokens';
+import type { ISlots, IRenderData } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import { compose } from '@uifabricshared/foundation-compose';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { getPresenceIconSource } from './PersonaCoin.helpers';
+import { settings } from './PersonaCoin.settings';
+import { buildIconStyles } from './PersonaCoin.tokens.icon';
+import { buildInitialsStyles } from './PersonaCoin.tokens.initials';
+import { buildInitialsBackgroundStyles } from './PersonaCoin.tokens.initialsBackground';
+import { buildPhotoStyles } from './PersonaCoin.tokens.photo';
+import { buildGlowStyles, buildRingStyles } from './PersonaCoin.tokens.ring';
+import { buildRootStyles } from './PersonaCoin.tokens.root';
+import { personaCoinName } from './PersonaCoin.types';
+import type {
   IPersonaCoinProps,
   IPersonaCoinType,
   IPersonaCoinSlotProps,
   IPersonaCoinRenderData,
   IPersonaCoinState,
-  personaCoinName,
 } from './PersonaCoin.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
-import { settings } from './PersonaCoin.settings';
-import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { getPresenceIconSource } from './PersonaCoin.helpers';
-import { foregroundColorTokens } from '@fluentui-react-native/tokens';
-import { buildRootStyles } from './PersonaCoin.tokens.root';
-import { buildInitialsStyles } from './PersonaCoin.tokens.initials';
-import { buildInitialsBackgroundStyles } from './PersonaCoin.tokens.initialsBackground';
-import { buildPhotoStyles } from './PersonaCoin.tokens.photo';
-import { buildIconStyles } from './PersonaCoin.tokens.icon';
-import { buildGlowStyles, buildRingStyles } from './PersonaCoin.tokens.ring';
 
 function usePrepareForProps(
   props: IPersonaCoinProps,

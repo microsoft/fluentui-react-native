@@ -1,19 +1,19 @@
-import {
-  AvatarName,
+import { Platform } from 'react-native';
+
+import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
+import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
+
+import type {
   AvatarTokens,
   AvatarConfigurableProps,
   AvatarSlotProps,
   AvatarProps,
-  AvatarColors,
-  AvatarSizesForTokens,
   AvatarNamedColor,
-  ColorSchemes,
   AvatarColorSchemes,
 } from './Avatar.types';
-import { Platform } from 'react-native';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { AvatarName, AvatarColors, AvatarSizesForTokens, ColorSchemes } from './Avatar.types';
 import { defaultAvatarTokens } from './AvatarTokens';
-import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { getRingConfig, getRingSpacing, getIconStyles } from './stylingUtils';
 
 export const avatarStates: (keyof AvatarTokens)[] = [

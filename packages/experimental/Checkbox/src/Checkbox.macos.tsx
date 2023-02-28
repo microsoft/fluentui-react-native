@@ -1,8 +1,10 @@
 /** @jsx withSlots */
-import { checkboxName, CheckboxTokens, CheckboxProps, CheckboxState } from '@fluentui-react-native/checkbox';
-import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { CheckboxTokens, CheckboxProps, CheckboxState } from '@fluentui-react-native/checkbox';
+import { checkboxName } from '@fluentui-react-native/checkbox';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { IViewProps } from '@fluentui-react-native/adapters';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, buildProps } from '@fluentui-react-native/framework';
 
 const NativeCheckboxView = ensureNativeComponent('FRNCheckboxView');
 

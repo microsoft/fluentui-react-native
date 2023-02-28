@@ -1,12 +1,8 @@
-import {
-  IComponentSettings,
-  mergeSettings,
-  IOverrideLookup,
-  getActiveOverrides,
-  resolveSettingsOverrides,
-} from '@uifabricshared/foundation-settings';
-import { IGetSettingsFromTheme, ISettingsEntry } from './CustomSettings.types';
-import { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { IComponentSettings, IOverrideLookup } from '@uifabricshared/foundation-settings';
+import { mergeSettings, getActiveOverrides, resolveSettingsOverrides } from '@uifabricshared/foundation-settings';
+
+import type { IGetSettingsFromTheme, ISettingsEntry } from './CustomSettings.types';
 
 /**
  * Merges the various settings for a component together

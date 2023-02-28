@@ -1,10 +1,19 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
+
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import {
-  radioGroupName,
+import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { settings } from './RadioGroup.settings';
+import type {
   IRadioGroupType,
   IRadioGroupProps,
   IRadioGroupState,
@@ -12,12 +21,7 @@ import {
   IRadioGroupRenderData,
   IRadioGroupContext,
 } from './RadioGroup.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { settings } from './RadioGroup.settings';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { radioGroupName } from './RadioGroup.types';
 
 export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   selectedKey: null,
@@ -78,6 +82,8 @@ export const RadioGroup = compose<IRadioGroupType>({
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore - TODO, fix typing error
           return child.props.buttonKey;
         }
       });

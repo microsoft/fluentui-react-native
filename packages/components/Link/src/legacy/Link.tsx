@@ -1,16 +1,20 @@
 /** @jsx withSlots */
 import * as React from 'react';
-
 import { Linking, View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
-import { settings } from './Link.settings';
-import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { IViewProps } from '@fluentui-react-native/adapters';
+
+import { settings } from './Link.settings';
+import type { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, ILinkType } from './Link.types';
+import { linkName } from './Link.types';
 
 export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
 

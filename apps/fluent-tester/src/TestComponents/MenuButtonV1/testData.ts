@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { MenuButtonItemProps } from '@fluentui/react-native';
+import type { MenuButtonItemProps } from '@fluentui/react-native';
+
 import { testImage, svgProps } from '../Common/iconExamples';
 
 export const menuItems: MenuButtonItemProps[] = [

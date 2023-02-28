@@ -1,8 +1,84 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 20:39:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.18
+
+Fri, 24 Feb 2023 20:39:58 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/component-cache to v1.4.4
+- Bump @fluentui-react-native/framework to v0.9.3
+
+## 0.17.17
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.2
+
+## 0.17.16
+
+Fri, 17 Feb 2023 06:30:14 GMT
+
+### Patches
+
+- Update native modules to FUA 0.13 (mischreiber@microsoft.com)
+
+## 0.17.15
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.1
+
+## 0.17.14
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.0
+
+## 0.17.13
+
+Thu, 02 Feb 2023 01:29:38 GMT
+
+### Patches
+
+- Add eslint to packages missing a config (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.8.39
+
+## 0.17.12
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.4.3
+- Bump @fluentui-react-native/framework to v0.8.38
+
+## 0.17.11
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.37
+
+## 0.17.10
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.36
 
 ## 0.17.9
 

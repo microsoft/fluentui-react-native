@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { RadioGroupState } from './RadioGroup.types';
+
+import type { RadioGroupState } from './RadioGroup.types';
 
 /**
  * Context shared between RadioGroup and its children Radio components

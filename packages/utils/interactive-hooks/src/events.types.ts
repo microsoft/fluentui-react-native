@@ -1,5 +1,6 @@
-import { AccessibilityActionEvent, GestureResponderEvent, MouseEvent } from 'react-native';
-import { KeyPressEvent } from './useKeyProps.types';
+import type { AccessibilityActionEvent, GestureResponderEvent, MouseEvent } from 'react-native';
+
+import type { KeyPressEvent } from './useKeyProps.types';
 
 export type InteractionEvent = GestureResponderEvent | MouseEvent | KeyPressEvent | AccessibilityActionEvent;
 

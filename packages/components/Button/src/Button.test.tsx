@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Button } from './Button';
-import * as renderer from 'react-test-renderer';
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Pressable, Text } from 'react-native';
+
 import { Icon } from '@fluentui-react-native/icon';
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { Button } from './Button';
 
 describe('Button component tests', () => {
   it('Button default', () => {

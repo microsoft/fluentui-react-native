@@ -1,7 +1,8 @@
-import { createMacOSColorAliasTokens, createMacOSShadowAliasTokens } from '../createMacOSAliasTokens';
+import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
+
 import { getIsHighContrast, setIsHighContrast } from '../appleHighContrast.macos';
-import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { createAppleTheme } from '../createAppleTheme';
+import { createMacOSColorAliasTokens, createMacOSShadowAliasTokens } from '../createMacOSAliasTokens';
 
 // For some reason the automatically mocked AccessibilityInfo object is the react-native version, not the
 // react-native-macos version, which doesn't contain the isHighContrastEnabled function that is accessed in

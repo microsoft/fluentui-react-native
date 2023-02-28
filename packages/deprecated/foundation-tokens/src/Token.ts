@@ -1,7 +1,8 @@
-import { IComponentTokens } from './Token.types';
-import { ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
-import { ITokenPropInfo } from './Token.internal';
-import { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
+
+import type { ITokenPropInfo } from './Token.internal';
+import type { IComponentTokens } from './Token.types';
 
 /**
  * Take the input props and props from settings and return a merged set of token props (a single source

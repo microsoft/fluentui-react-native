@@ -1,8 +1,10 @@
+import type { ImageProps } from 'react-native';
+
+import type { Theme } from '@fluentui-react-native/framework';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { ImageProps } from 'react-native';
-import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { Theme } from '@fluentui-react-native/framework';
+
 import { calculateEffectiveSizes } from './PersonaCoin.helpers';
+import type { IPersonaCoinTokens } from './PersonaCoin.types';
 
 const _iconKeyProps: (keyof IPersonaCoinTokens)[] = ['iconSize', 'size', 'coinSize'];
 

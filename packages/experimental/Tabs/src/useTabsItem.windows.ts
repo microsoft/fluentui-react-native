@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import { usePressableState, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { TabsItemProps, TabsItemInfo, TabsItemState } from './TabsItem.types';
+
 import { TabsContext } from './Tabs';
+import type { TabsItemProps, TabsItemInfo, TabsItemState } from './TabsItem.types';
 
 /**
  * Re-usable hook for TabsItem.

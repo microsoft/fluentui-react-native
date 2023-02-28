@@ -1,6 +1,7 @@
-import { ButtonSlotProps, ButtonCoreTokens, ButtonCoreProps } from '../Button.types';
-import { ShadowProps } from '@fluentui-react-native/experimental-shadow';
-import { IconSourcesType } from '@fluentui-react-native/icon';
+import type { ShadowProps } from '@fluentui-react-native/experimental-shadow';
+import type { IconSourcesType } from '@fluentui-react-native/icon';
+
+import type { ButtonSlotProps, ButtonCoreTokens, ButtonCoreProps } from '../Button.types';
 
 export const fabName = 'FAB';
 export type FABSize = 'small' | 'large';

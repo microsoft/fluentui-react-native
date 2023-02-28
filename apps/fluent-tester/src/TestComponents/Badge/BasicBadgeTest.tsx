@@ -1,25 +1,23 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Platform, Text, Image } from 'react-native';
-import {
-  Badge,
+
+import { ToggleButton } from '@fluentui/react-native';
+import type {
   BadgeAppearance,
-  BadgeAppearances,
   BadgeColor,
-  BadgeColors,
   BadgeShape,
-  BadgeShapes,
   BadgeSize,
-  BadgeSizes,
   BadgeIconPosition,
   BadgeProps,
   BadgeTokens,
 } from '@fluentui-react-native/badge';
-import { StyledPicker } from '../Common/StyledPicker';
-import { satyaPhotoUrl } from './../PersonaCoin/styles';
-import { ToggleButton } from '@fluentui/react-native';
+import { Badge, BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from '@fluentui-react-native/badge';
 import { useFluentTheme } from '@fluentui-react-native/framework';
+
+import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import { svgProps, iconProps } from '../Common/iconExamples';
+import { StyledPicker } from '../Common/StyledPicker';
 
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];

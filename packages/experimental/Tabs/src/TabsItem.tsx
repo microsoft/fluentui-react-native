@@ -1,13 +1,17 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
-import { tabsItemName, TabItemType, TabsItemProps } from './TabsItem.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings } from './TabsItem.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useTabsItem } from './useTabsItem';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { TabsContext } from './Tabs';
+import { stylingSettings } from './TabsItem.styling';
+import type { TabItemType, TabsItemProps } from './TabsItem.types';
+import { tabsItemName } from './TabsItem.types';
+import { useTabsItem } from './useTabsItem';
 
 export const TabsItem = compose<TabItemType>({
   displayName: tabsItemName,

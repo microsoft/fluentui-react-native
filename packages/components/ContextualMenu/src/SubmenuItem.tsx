@@ -1,24 +1,24 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { I18nManager, Platform, View } from 'react-native';
-import {
-  SubmenuItemSlotProps,
-  SubmenuItemState,
-  SubmenuItemProps,
-  SubmenuItemRenderData,
-  submenuItemName,
-  SubmenuItemType,
-} from './SubmenuItem.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { Text } from '@fluentui-react-native/text';
-import { settings } from './SubmenuItem.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import type { SvgIconProps } from '@fluentui-react-native/icon';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { useKeyDownProps, useViewCommandFocus, useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+import type { SvgProps } from 'react-native-svg';
+import { Svg, G, Path } from 'react-native-svg';
+
 import { CMContext } from './ContextualMenu';
-import { Icon, SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
-import { Svg, G, Path, SvgProps } from 'react-native-svg';
+import { settings } from './SubmenuItem.settings';
+import type { SubmenuItemSlotProps, SubmenuItemState, SubmenuItemProps, SubmenuItemRenderData, SubmenuItemType } from './SubmenuItem.types';
+import { submenuItemName } from './SubmenuItem.types';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,

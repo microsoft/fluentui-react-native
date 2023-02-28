@@ -1,12 +1,16 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Pressable, Platform } from 'react-native';
-import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings, getDefaultSize } from './Checkbox.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useCheckbox } from './useCheckbox';
 import { Svg, Path } from 'react-native-svg';
+
+import { stylingSettings, getDefaultSize } from './Checkbox.styling';
+import type { CheckboxType, CheckboxProps } from './Checkbox.types';
+import { checkboxName } from './Checkbox.types';
+import { useCheckbox } from './useCheckbox';
 
 export const Checkbox = compose<CheckboxType>({
   displayName: checkboxName,

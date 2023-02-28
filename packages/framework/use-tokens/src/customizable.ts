@@ -1,5 +1,6 @@
-import React from 'react';
-import { TokenSettings, UseTokens } from './buildUseTokens';
+import type React from 'react';
+
+import type { TokenSettings, UseTokens } from './buildUseTokens';
 
 /**
  * A component implementation, with a use tokens hook passed in. Implementing it this way allows the useTokens hook to be

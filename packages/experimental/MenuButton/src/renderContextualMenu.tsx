@@ -1,7 +1,10 @@
 /* @jsxFrag React.Fragment */
 import * as React from 'react';
-import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu, ContextualMenuProps } from '@fluentui-react-native/contextual-menu';
-import { MenuButtonItemProps } from './MenuButton.types';
+
+import type { ContextualMenuProps } from '@fluentui-react-native/contextual-menu';
+import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
+
+import type { MenuButtonItemProps } from './MenuButton.types';
 
 export const renderContextualMenu = (contextualMenu: ContextualMenuProps, menuItems: MenuButtonItemProps[]): JSX.Element => {
   return (

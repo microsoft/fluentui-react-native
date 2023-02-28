@@ -1,8 +1,109 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Fri, 20 Jan 2023 21:49:21 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 20:39:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.54
+
+Fri, 24 Feb 2023 20:39:59 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.13.3
+- Bump @fluentui-react-native/adapters to v0.10.2
+- Bump @fluentui-react-native/framework to v0.9.3
+- Bump @fluentui-react-native/tokens to v0.20.10
+- Bump @uifabricshared/foundation-composable to v0.11.3
+- Bump @uifabricshared/foundation-settings to v0.12.3
+- Bump @uifabricshared/foundation-tokens to v0.12.27
+- Bump @fluentui-react-native/text to v0.19.22
+
+## 0.7.53
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.2
+- Bump @fluentui-react-native/framework to v0.9.2
+- Bump @fluentui-react-native/tokens to v0.20.9
+- Bump @uifabricshared/foundation-tokens to v0.12.26
+- Bump @fluentui-react-native/text to v0.19.21
+
+## 0.7.52
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.1
+- Bump @fluentui-react-native/framework to v0.9.1
+- Bump @fluentui-react-native/tokens to v0.20.8
+- Bump @uifabricshared/foundation-tokens to v0.12.25
+- Bump @fluentui-react-native/text to v0.19.20
+
+## 0.7.51
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.0
+- Bump @fluentui-react-native/framework to v0.9.0
+- Bump @fluentui-react-native/text to v0.19.19
+
+## 0.7.50
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.39
+- Bump @fluentui-react-native/framework to v0.8.39
+- Bump @uifabricshared/foundation-tokens to v0.12.24
+- Bump @fluentui-react-native/text to v0.19.18
+
+## 0.7.49
+
+Wed, 01 Feb 2023 22:33:16 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.12.38
+- Bump @fluentui-react-native/adapters to v0.10.1
+- Bump @fluentui-react-native/framework to v0.8.38
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @uifabricshared/foundation-composable to v0.11.2
+- Bump @uifabricshared/foundation-settings to v0.12.2
+- Bump @uifabricshared/foundation-tokens to v0.12.23
+- Bump @fluentui-react-native/text to v0.19.17
+
+## 0.7.48
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.37
+- Bump @fluentui-react-native/framework to v0.8.37
+- Bump @fluentui-react-native/tokens to v0.20.6
+- Bump @uifabricshared/foundation-tokens to v0.12.22
+- Bump @fluentui-react-native/text to v0.19.16
+
+## 0.7.47
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.36
+- Bump @fluentui-react-native/framework to v0.8.36
+- Bump @fluentui-react-native/tokens to v0.20.5
+- Bump @uifabricshared/foundation-tokens to v0.12.21
+- Bump @fluentui-react-native/text to v0.19.15
 
 ## 0.7.46
 

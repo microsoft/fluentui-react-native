@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
+
 import {
   Text as FURNText,
   ButtonV1 as Button,
@@ -11,10 +12,12 @@ import {
   Separator,
   Checkbox,
 } from '@fluentui/react-native';
-import { CONTEXTUALMENU_TESTPAGE } from '../../../../E2E/src/ContextualMenu/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { svgProps, fontProps, testImage } from '../Common/iconExamples';
+
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
+import { CONTEXTUALMENU_TESTPAGE } from '../../../../E2E/src/ContextualMenu/consts';
+import { svgProps, fontProps, testImage } from '../Common/iconExamples';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const ContextualMenuMainTest: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
@@ -500,6 +503,9 @@ const contextualMenuSections: TestSection[] = [
     name: 'ContextalMenu with ScrollView',
     component: ScrollViewContextualMenu,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'ContextualMenu E2E Test',
     component: E2EContextualMenuTest,
@@ -518,5 +524,13 @@ export const ContextualMenuTest: React.FunctionComponent = () => {
   const description =
     'ContextualMenus are lists of commands that are based on the context of selection, mouse hover or keyboard focus. They are one of the most effective and highly used command surfaces, and can be used in a variety of places.\n\nThere are variants that originate from a command bar, or from cursor or focus. Those that come from CommandBars use a beak that is horizontally centered on the button. Ones that come from right click and menu button do not have a beak, but appear to the right and below the cursor. ContextualMenus can have submenus from commands, show selection checks, and icons.\n\nOrganize commands in groups divided by rules. This helps users remember command locations, or find less used commands based on proximity to others. One should also group sets of mutually exclusive or multiple selectable options. Use icons sparingly, for high value commands, and don’t mix icons with selection checks, as it makes parsing commands difficult. Avoid submenus of submenus as they can be difficult to invoke or remember.';
 
-  return <Test name="ContextualMenu Test" description={description} sections={contextualMenuSections} status={status}></Test>;
+  return (
+    <Test
+      name="ContextualMenu Test"
+      description={description}
+      sections={contextualMenuSections}
+      status={status}
+      e2eSections={e2eSections}
+    ></Test>
+  );
 };

@@ -1,8 +1,10 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { IPersonaCoinTokens } from '@fluentui-react-native/persona-coin';
+import { buildRootStyles as buildPersonaCoinRootStyle } from '@fluentui-react-native/persona-coin';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { Theme } from '@fluentui-react-native/framework';
-import { buildRootStyles as buildPersonaCoinRootStyle, IPersonaCoinTokens } from '@fluentui-react-native/persona-coin';
-import { IPersonaTokens } from './Persona.types';
+
+import type { IPersonaTokens } from './Persona.types';
 
 const _coinStyleKeys: (keyof IPersonaTokens)[] = [
   'coinSize',

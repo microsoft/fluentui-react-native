@@ -1,7 +1,9 @@
-import { Theme, Spacing } from '@fluentui-react-native/theme-types';
+import { memoize } from '@fluentui-react-native/memo-cache';
+import type { Theme, Spacing } from '@fluentui-react-native/theme-types';
+
 import { paletteFromAppleColors } from './appleColors.ios';
-import { appleTypography } from './appleTypography.ios';
 import { iOSShadows } from './appleShadows.ios';
+import { appleTypography } from './appleTypography.ios';
 
 function appleSpacing(): Spacing {
   return {
@@ -127,9 +129,9 @@ const appleComponents = {
   },
 };
 
-export function getBaseAppleThemeIOS(isLightMode: boolean): Theme {
+function getBaseAppleThemeIOSWorker(isLightMode: boolean, isElevated: boolean): Theme {
   return {
-    colors: paletteFromAppleColors(isLightMode),
+    colors: paletteFromAppleColors(isLightMode, isElevated),
     typography: appleTypography(),
     shadows: iOSShadows(),
     spacing: appleSpacing(),
@@ -137,3 +139,5 @@ export function getBaseAppleThemeIOS(isLightMode: boolean): Theme {
     host: { appearance: isLightMode ? 'light' : 'dark' },
   };
 }
+
+export const getBaseAppleThemeIOS = memoize(getBaseAppleThemeIOSWorker);

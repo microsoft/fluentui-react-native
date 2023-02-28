@@ -1,4 +1,5 @@
-import { getCacheEntry, CacheEntry } from './getCacheEntry';
+import type { CacheEntry } from './getCacheEntry';
+import { getCacheEntry } from './getCacheEntry';
 
 interface TestObj {
   id: number;

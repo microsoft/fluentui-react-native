@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { Persona, PersonaSize } from '@fluentui/react-native';
-import { satyaImageUrl } from './styles';
-import { commonTestStyles as commonStyles } from '../Common/styles';
 import { View, Text, Switch } from 'react-native';
-import { undefinedText } from '../PersonaCoin/styles';
+
+import type { PersonaSize } from '@fluentui/react-native';
+import { Persona } from '@fluentui/react-native';
+
+import { satyaImageUrl } from './styles';
 import { MenuPicker } from '../Common/MenuPicker';
+import { commonTestStyles as commonStyles } from '../Common/styles';
+import { undefinedText } from '../PersonaCoin/styles';
 
 type WithUndefined<T> = T | typeof undefinedText;
 

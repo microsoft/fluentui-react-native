@@ -1,6 +1,9 @@
 import React from 'react';
-import { menuName, MenuProps } from './Menu.types';
+
 import { stagedComponent } from '@fluentui-react-native/framework';
+
+import type { MenuProps } from './Menu.types';
+import { menuName } from './Menu.types';
 import { useMenu } from './useMenu';
 import { useMenuContextValue } from './useMenuContextValue';
 import { MenuProvider } from '../context/menuContext';
@@ -25,7 +28,9 @@ export const Menu = stagedComponent((props: MenuProps) => {
     return (
       <MenuProvider value={contextValue}>
         {menuTrigger}
-        {state.open && menuPopover}
+        {/* GH#2661: Make sure that shouldFocusOnContainer is defined before initializing
+            the popover so that focus is put in the correct place */}
+        {state.open && state.shouldFocusOnContainer !== undefined && menuPopover}
       </MenuProvider>
     );
   };

@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { BADGE_TESTPAGE } from '../../../../E2E/src/Badge/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+
 import { BasicBadge } from './BasicBadgeTest';
 import { CounterBadgeTest } from './CounterBadgeTest';
-import { PresenceBadgeTest } from './PresenceBadgeTest';
 import { E2EBadgeTest } from './E2EBadgeTest';
+import { PresenceBadgeTest } from './PresenceBadgeTest';
+import { BADGE_TESTPAGE } from '../../../../E2E/src/Badge/consts';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const badgeSections: TestSection[] = [
   {

@@ -1,21 +1,18 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import TabsLegacyPageObject, { TabItemSelector } from '../pages/TabsLegacyPageObject';
-import { TAB_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT, TABITEM_A11Y_ROLE, Keys } from '../../common/consts';
+import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Tabs Legacy Testing Initialization', function () {
+describe('Tabs Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await TabsLegacyPageObject.waitForInitialPageToDisplay();
+    expect(await TabsLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Tabs Legacy test page', async () => {
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToTabsLegacyPage();
-    await TabsLegacyPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await TabsLegacyPageObject.navigateToPageAndLoadTests(true);
+    expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -25,14 +22,20 @@ describe('Tabs Legacy Accessibility Testing', () => {
     await TabsLegacyPageObject.scrollToTestElement();
   });
 
-  it("Validate Tab's accessibilityRole is correct", async () => {
-    await expect(await TabsLegacyPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
-    await expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
+  it('Validate Tab\'s "accessibilityRole" defaults to "ControlType.Tab".', async () => {
+    expect(
+      await TabsLegacyPageObject.compareAttribute(TabsLegacyPageObject._primaryComponent, Attribute.AccessibilityRole, TAB_A11Y_ROLE),
+    ).toBeTruthy();
+
+    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Validate TabItem's accessibilityRole is correct", async () => {
-    await expect(await TabsLegacyPageObject.getTabItemAccesibilityRole(TabItemSelector.First)).toEqual(TABITEM_A11Y_ROLE);
-    await expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
+  it('Validate TabItem\'s "accessibilityRole" defaults to "ControlType.TabItem".', async () => {
+    expect(
+      await TabsLegacyPageObject.compareAttribute(TabsLegacyPageObject.getTabItem('First'), Attribute.AccessibilityRole, TABITEM_A11Y_ROLE),
+    ).toBeTruthy();
+
+    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -42,41 +45,61 @@ describe('Tabs Legacy Functional Tests', () => {
     await TabsLegacyPageObject.scrollToTestElement();
 
     // Reset the TabGroup by putting focus on First tab item
-    await TabsLegacyPageObject.clickOnTabItem(TabItemSelector.First);
+    await TabsLegacyPageObject.click(TabsLegacyPageObject.getTabItem('First'));
   });
 
-  it('Click on the second tab header and validate the correct TabItem content is shown', async () => {
-    await TabsLegacyPageObject.clickOnTabItem(TabItemSelector.Second);
-    await TabsLegacyPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
+  it('Click on the second tab header. Validate the second TabItem content is shown.', async () => {
+    await TabsLegacyPageObject.click(TabsLegacyPageObject.getTabItem('Second'));
 
-    await expect(await TabsLegacyPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
-    await expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
+    expect(
+      await TabsLegacyPageObject.waitForTabItemContentToLoad(
+        'Second',
+        "Expected the second tab item's content to show by clicking the second tab item.",
+      ),
+    ).toBeTruthy();
+    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Keyboarding: Arrow Navigation: Right -> Down -> Left -> Up -> Validate the correct TabItem content is shown', async () => {
+  it('Input the following arrow keys on the tabs: Right -> Down -> Left -> Up. Validate the correct TabItem content gets shown.', async () => {
     /* At First tab element, press Right Arrow to navigate to the Second tab element */
-    await TabsLegacyPageObject.sendKey(Keys.ARROW_RIGHT, TabItemSelector.First);
-    await TabsLegacyPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
+    await TabsLegacyPageObject.sendKeys(TabsLegacyPageObject.getTabItem('First'), [Keys.ARROW_RIGHT]);
 
-    await expect(await TabsLegacyPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
+    expect(
+      await TabsLegacyPageObject.waitForTabItemContentToLoad(
+        'Second',
+        'Expected the second tab item\'s content to show by pressing "Right Arrow" on the first tab item.',
+      ),
+    ).toBeTruthy();
 
     /* At Second tab element, press Down Arrow to navigate to the Third tab element */
-    await TabsLegacyPageObject.sendKey(Keys.ARROW_DOWN, TabItemSelector.Second);
-    await TabsLegacyPageObject.waitForTabsItemsToOpen(TabItemSelector.Third, PAGE_TIMEOUT);
+    await TabsLegacyPageObject.sendKeys(TabsLegacyPageObject.getTabItem('Second'), [Keys.ARROW_DOWN]);
 
-    await expect(await TabsLegacyPageObject.didTabItemContentLoad(TabItemSelector.Third)).toBeTruthy();
+    expect(
+      await TabsLegacyPageObject.waitForTabItemContentToLoad(
+        'Third',
+        'Expected the third tab item\'s content to show by pressing "Down Arrow" on the second tab item.',
+      ),
+    ).toBeTruthy();
 
     /* At Third tab element, press Left Arrow to navigate to the Second tab element */
-    await TabsLegacyPageObject.sendKey(Keys.ARROW_LEFT, TabItemSelector.Third);
-    await TabsLegacyPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
+    await TabsLegacyPageObject.sendKeys(TabsLegacyPageObject.getTabItem('Third'), [Keys.ARROW_LEFT]);
 
-    await expect(await TabsLegacyPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
+    expect(
+      await TabsLegacyPageObject.waitForTabItemContentToLoad(
+        'Second',
+        'Expected the second tab item\'s content to show by pressing "Left Arrow" on the third tab item.',
+      ),
+    ).toBeTruthy();
 
     /* At Second tab element, press Up Arrow to navigate to the First tab element */
-    await TabsLegacyPageObject.sendKey(Keys.ARROW_UP, TabItemSelector.Second);
-    await TabsLegacyPageObject.waitForTabsItemsToOpen(TabItemSelector.First, PAGE_TIMEOUT);
+    await TabsLegacyPageObject.sendKeys(TabsLegacyPageObject.getTabItem('Second'), [Keys.ARROW_UP]);
 
-    await expect(await TabsLegacyPageObject.didTabItemContentLoad(TabItemSelector.First)).toBeTruthy();
-    await expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
+    expect(
+      await TabsLegacyPageObject.waitForTabItemContentToLoad(
+        'First',
+        'Expected the first tab item\'s content to show by pressing "Up Arrow" on the first tab item.',
+      ),
+    ).toBeTruthy();
+    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });

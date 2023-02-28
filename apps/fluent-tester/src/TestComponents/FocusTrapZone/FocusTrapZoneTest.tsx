@@ -1,11 +1,17 @@
-import { FocusTrapZone, IFocusTrapZoneProps, Text } from '@fluentui/react-native';
-import { KeyPressEvent, useFocusState } from '@fluentui-react-native/interactive-hooks';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
-import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
-import { stackStyle } from '../Common/styles';
+import type { TouchableHighlightProps, ViewProps } from 'react-native';
+import { TouchableHighlight, View } from 'react-native';
+
+import type { IFocusTrapZoneProps } from '@fluentui/react-native';
+import { FocusTrapZone, Text } from '@fluentui/react-native';
+import type { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
+import { useFocusState } from '@fluentui-react-native/interactive-hooks';
+import { Stack } from '@fluentui-react-native/stack';
+
 import { FOCUSTRAPZONE_TESTPAGE } from '../../../../E2E/src/FocusTrapZone/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { stackStyle } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const trapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,

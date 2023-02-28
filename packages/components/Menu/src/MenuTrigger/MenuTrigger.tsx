@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { menuTriggerName, MenuTriggerProps } from './MenuTrigger.types';
+
+import type { MenuTriggerProps } from './MenuTrigger.types';
+import { menuTriggerName } from './MenuTrigger.types';
 import { useMenuTrigger } from './useMenuTrigger';
 import { MenuTriggerProvider } from '../context/menuTriggerContext';
 

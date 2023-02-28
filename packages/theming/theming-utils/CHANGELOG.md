@@ -1,8 +1,63 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 20:40:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.5
+
+Fri, 24 Feb 2023 20:40:00 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.30.3
+- Bump @fluentui-react-native/tokens to v0.20.10
+
+## 0.23.4
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.20.9
+
+## 0.23.3
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.20.8
+
+## 0.23.2
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Enable @typescript-eslint/consistent-type-imports (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.30.2
+- Bump @fluentui-react-native/tokens to v0.20.7
+
+## 0.23.1
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.30.1
+- Bump @fluentui-react-native/tokens to v0.20.6
+
+## 0.23.0
+
+Wed, 25 Jan 2023 21:31:17 GMT
+
+### Minor changes
+
+- adding shared colors android (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.30.0
+- Bump @fluentui-react-native/tokens to v0.20.5
 
 ## 0.22.2
 

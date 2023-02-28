@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-tokens",
-  "version": "0.12.20",
+  "version": "0.12.27",
   "description": "Core tokens package",
   "repository": {
     "type": "git",
@@ -31,12 +31,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/merge-props": ">=0.5.1 <1.0.0",
-    "@fluentui-react-native/tokens": "0.20.4",
-    "@uifabricshared/foundation-settings": ">=0.12.1 <1.0.0"
+    "@fluentui-react-native/merge-props": ">=0.5.3 <1.0.0",
+    "@fluentui-react-native/tokens": "0.20.10",
+    "@uifabricshared/foundation-settings": ">=0.12.3 <1.0.0"
   },
   "devDependencies": {
-    "@fluentui-react-native/memo-cache": "^1.1.7",
+    "@fluentui-react-native/memo-cache": "^1.1.8",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@types/jest": "^26.0.0",
     "@types/react-native": "^0.68.0",
@@ -48,13 +48,19 @@
     "react-native": "^0.68.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios"
+      ]
+    }
   }
 }

@@ -1,6 +1,7 @@
-import { FontTokens, FontVariantTokens, IForegroundColorTokens } from '@fluentui-react-native/framework';
-import { ITextProps } from '@fluentui-react-native/adapters';
-import { ColorValue, TextStyle } from 'react-native';
+import type { ColorValue, TextStyle } from 'react-native';
+
+import type { ITextProps } from '@fluentui-react-native/adapters';
+import type { FontTokens, FontVariantTokens, IForegroundColorTokens } from '@fluentui-react-native/framework';
 
 export const textName = 'Text';
 

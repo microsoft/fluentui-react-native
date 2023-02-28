@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { Separator, ContextualMenuProps } from '@fluentui/react-native';
 import { Text, View, Switch, Platform } from 'react-native';
-import { menuItems, iconProps } from './testData';
-import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
-import { IconSourcesType } from '@fluentui-react-native/icon';
+
+import type { ContextualMenuProps } from '@fluentui/react-native';
+import { Separator } from '@fluentui/react-native';
 import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
+import type { IconSourcesType } from '@fluentui-react-native/icon';
+
+import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
+import { menuItems, iconProps } from './testData';
 import { testImage } from '../Common/iconExamples';
 
 export const StandardMenuButton: React.FunctionComponent = () => {

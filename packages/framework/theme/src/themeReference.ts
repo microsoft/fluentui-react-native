@@ -1,4 +1,5 @@
-import { Theme, PartialTheme } from '@fluentui-react-native/theme-types';
+import type { Theme, PartialTheme } from '@fluentui-react-native/theme-types';
+
 import { mergeTheme } from './mergeTheme';
 
 /**

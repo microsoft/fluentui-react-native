@@ -1,5 +1,7 @@
-import { Theme } from '@fluentui-react-native/theme-types';
-import { composeFactory, ComposeFactoryOptions, ComposeFactoryComponent, UseStyledSlots } from '@fluentui-react-native/composition';
+import type { ComposeFactoryOptions, ComposeFactoryComponent, UseStyledSlots } from '@fluentui-react-native/composition';
+import { composeFactory } from '@fluentui-react-native/composition';
+import type { Theme } from '@fluentui-react-native/theme-types';
+
 import { themeHelper } from './themeHelper';
 
 /**

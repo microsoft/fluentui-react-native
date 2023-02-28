@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { MenuButtonItemProps } from '@fluentui/react-native';
+import type { MenuButtonItemProps } from '@fluentui/react-native';
+
 import { MENU_ITEM_1_COMPONENT } from '../../../../E2E/src/MenuButtonLegacy/consts';
 import { svgProps, testImage } from '../Common/iconExamples';
 

@@ -1,6 +1,7 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { ButtonTokens } from './Button.types';
+import type { Theme } from '@fluentui-react-native/framework';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { ButtonTokens } from './Button.types';
 
 export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
@@ -8,7 +9,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
      * 'primary', 'accent' and if no appearance is mentioned, picks this.
      */
     backgroundColor: t.colors.brandBackground,
-    rippleColor: 'transparent',
+    rippleColor: '#D4D4D4',
     color: t.colors.neutralForegroundOnColor,
     iconColor: t.colors.neutralForegroundOnColor,
     disabled: {
@@ -30,7 +31,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     },
     subtle: {
       backgroundColor: 'transparent',
-      rippleColor: 'transparent',
+      rippleColor: '#D4D4D4',
       color: t.colors.brandForeground1,
       iconColor: t.colors.brandForeground1,
       disabled: {
@@ -53,7 +54,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     },
     outline: {
       backgroundColor: 'transparent',
-      rippleColor: 'transparent',
+      rippleColor: '#D4D4D4',
       color: t.colors.brandForeground1,
       iconColor: t.colors.brandForeground1,
       borderColor: t.colors.brandStroke1,

@@ -1,7 +1,9 @@
-import { IStackItemTokens } from './StackItem.types';
+import type { ViewStyle, ViewProps } from 'react-native';
+
+import type { Theme } from '@fluentui-react-native/framework';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { Theme } from '@fluentui-react-native/framework';
-import { ViewStyle, ViewProps } from 'react-native';
+
+import type { IStackItemTokens } from './StackItem.types';
 
 const alignMap: { [key: string]: ViewStyle['alignSelf'] } = {
   start: 'flex-start',

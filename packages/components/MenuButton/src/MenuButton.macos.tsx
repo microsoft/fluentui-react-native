@@ -1,13 +1,18 @@
 /** @jsx withSlots */
-import { Image, ImageResolvedAssetSource } from 'react-native';
-import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import { Image } from 'react-native';
+import type { ImageResolvedAssetSource } from 'react-native';
+
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { IconProps, createIconProps } from '@fluentui-react-native/icon';
-import {
-  MenuButtonName,
+import type { IconProps } from '@fluentui-react-native/icon';
+import { createIconProps } from '@fluentui-react-native/icon';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import type {
   MenuButtonProps,
   MenuButtonSlotProps,
   MenuButtonType,
@@ -15,6 +20,7 @@ import {
   MenuButtonState,
   MenuButtonItemProps,
 } from './MenuButton.types';
+import { MenuButtonName } from './MenuButton.types';
 
 const NativeMenuButton = ensureNativeComponent('FRNMenuButton');
 

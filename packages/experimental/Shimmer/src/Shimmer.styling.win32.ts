@@ -1,6 +1,9 @@
-import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { shimmerName, ShimmerProps, ShimmerTokens } from './Shimmer.types';
-import { ShimmerSlotProps } from './Shimmer.types.win32';
+import type { UseStylingOptions } from '@fluentui-react-native/framework';
+import { buildProps } from '@fluentui-react-native/framework';
+
+import type { ShimmerProps, ShimmerTokens } from './Shimmer.types';
+import { shimmerName } from './Shimmer.types';
+import type { ShimmerSlotProps } from './Shimmer.types.win32';
 import { defaultShimmerTokens } from './ShimmerTokens.win32';
 
 /**

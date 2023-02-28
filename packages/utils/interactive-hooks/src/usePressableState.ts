@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {
+
+import type {
   HoverState,
   FocusState,
   PressState,

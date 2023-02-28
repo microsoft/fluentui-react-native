@@ -1,15 +1,20 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
-import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { settings } from './Tabs.settings';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
+
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey, usePressableState } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { settings } from './Tabs.settings';
+import type { TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
+import { tabsName } from './Tabs.types';
 
 export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
@@ -122,6 +127,8 @@ export const Tabs = compose<TabsType>({
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore - TODO, fix typing error
           return child.props.itemKey;
         }
       });
@@ -129,7 +136,11 @@ export const Tabs = compose<TabsType>({
       // @ts-ignore - TODO, fix typing error
       renderData.state.info.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore - TODO, fix typing error
           if (!child.props.disabled) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore - TODO, fix typing error
             return child.props.itemKey;
           }
         }

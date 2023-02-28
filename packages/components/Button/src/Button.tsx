@@ -1,15 +1,19 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
+
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { buttonName, ButtonType, ButtonProps } from './Button.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings, getDefaultSize, getPlatformSpecificAppearance } from './Button.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useButton } from './useButton';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import { IPressableState } from '@fluentui-react-native/interactive-hooks';
+import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { stylingSettings, getDefaultSize, getPlatformSpecificAppearance } from './Button.styling';
+import { buttonName } from './Button.types';
+import type { ButtonType, ButtonProps } from './Button.types';
 import { extractOuterStylePropsAndroid } from './ExtractStyle.android';
+import { useButton } from './useButton';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the button.
@@ -77,7 +81,7 @@ export const Button = compose<ButtonType>({
       const buttonContent = (
         <React.Fragment>
           {loading && <ActivityIndicator />}
-          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} accessible={false} />}
           {React.Children.map(children, (child) =>
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
           )}

@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { ViewStyle, ColorValue, PressableProps } from 'react-native';
-import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
-import { IViewProps } from '@fluentui-react-native/adapters';
+import type * as React from 'react';
+import type { ViewStyle, ColorValue, PressableProps } from 'react-native';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type { TextProps } from '@fluentui-react-native/text';
+import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const switchName = 'Switch';
 

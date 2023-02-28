@@ -1,5 +1,6 @@
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { RingConfig, AvatarTokens } from './Avatar.types';
+
+import type { RingConfig, AvatarTokens } from './Avatar.types';
 
 export function getRingConfig(tokens: AvatarTokens): RingConfig {
   const { size, ringThickness } = tokens;

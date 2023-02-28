@@ -1,10 +1,13 @@
-import { ButtonV1 as Button } from '@fluentui/react-native';
-import { TextV1 as Text } from '@fluentui-react-native/text';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { commonTestStyles, stackStyle } from '../Common/styles';
-import { InteractionEvent, isGestureResponderEvent } from '@fluentui-react-native/interactive-hooks';
+
+import { ButtonV1 as Button } from '@fluentui/react-native';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { isGestureResponderEvent } from '@fluentui-react-native/interactive-hooks';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { svgProps } from '../Common/iconExamples';
+import { commonTestStyles, stackStyle } from '../Common/styles';
 
 const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
 const CustomButton = Button.customize({ backgroundColor: 'pink' });

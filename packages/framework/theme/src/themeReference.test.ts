@@ -1,6 +1,7 @@
-import { Theme, Spacing, PartialTheme } from '@fluentui-react-native/theme-types';
-import { ThemeReference } from './themeReference';
 import { mockTheme } from '@fluentui-react-native/test-tools';
+import type { Theme, Spacing, PartialTheme } from '@fluentui-react-native/theme-types';
+
+import { ThemeReference } from './themeReference';
 
 const themeBase = mockTheme;
 

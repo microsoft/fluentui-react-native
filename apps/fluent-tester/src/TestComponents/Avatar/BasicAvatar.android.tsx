@@ -1,10 +1,13 @@
-import React, { FunctionComponent } from 'react';
-import { Avatar } from '@fluentui-react-native/avatar';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { View } from 'react-native';
+
+import { Avatar } from '@fluentui-react-native/avatar';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { Switch } from '@fluentui-react-native/switch';
+
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { mobileStyles } from '../Common/styles';
-import { Switch } from '@fluentui-react-native/switch';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const StandardUsage: FunctionComponent = () => {
   const [activityRing, setActivityRing] = React.useState(true);

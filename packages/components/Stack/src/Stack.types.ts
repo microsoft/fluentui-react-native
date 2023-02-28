@@ -1,7 +1,9 @@
-import { IStackItemProps } from './StackItem/StackItem.types';
-import { ViewStyle, ViewProps } from 'react-native';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IBackgroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
+import type { ViewStyle, ViewProps } from 'react-native';
+
+import type { IBackgroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
+
+import type { IStackItemProps } from './StackItem/StackItem.types';
 
 export const stackName = 'RNFStack';
 

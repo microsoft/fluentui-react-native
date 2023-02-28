@@ -1,11 +1,12 @@
-import * as React from 'react';
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-react-native/text';
-import { IPressableProps } from '@fluentui-react-native/pressable';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { IconProps } from '@fluentui-react-native/icon';
+import type * as React from 'react';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IconProps } from '@fluentui-react-native/icon';
+import type { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import type { IPressableProps } from '@fluentui-react-native/pressable';
+import type { ITextProps } from '@fluentui-react-native/text';
+import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const contextualMenuItemName = 'ContextualMenuItem';
 

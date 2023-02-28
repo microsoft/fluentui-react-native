@@ -1,6 +1,7 @@
-import { IPartialTheme, ITheme, ThemeRegistry } from './Theme.types';
+import type { IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
+
 import { createPlatformThemeRegistry } from './platform';
-import { IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
+import type { IPartialTheme, ITheme, ThemeRegistry } from './Theme.types';
 
 let _registry: ThemeRegistry;
 

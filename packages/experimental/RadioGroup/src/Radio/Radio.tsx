@@ -1,11 +1,15 @@
 /** @jsx withSlots */
 import { Platform, Pressable, View } from 'react-native';
-import { radioName, RadioType, RadioProps } from './Radio.types';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import type { PressableState } from '@fluentui-react-native/interactive-hooks';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { stylingSettings } from './Radio.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import type { RadioType, RadioProps } from './Radio.types';
+import { radioName } from './Radio.types';
 import { useRadio } from './useRadio';
-import { PressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Radio.
@@ -38,6 +42,7 @@ export const Radio = compose<RadioType>({
     return (final: RadioProps) => {
       const { label, subtext, ...mergedProps } = mergeProps(radio.props, final);
       const { onPress, disabled } = mergedProps;
+      const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 
       const labelComponent = (
         <Slots.labelContent>
@@ -47,7 +52,7 @@ export const Radio = compose<RadioType>({
       );
 
       return (
-        <Slots.root {...mergedProps} {...(Platform.OS == 'android' && { accessible: !disabled, focusable: !disabled })}>
+        <Slots.root {...mergedProps} {...(isMobile && { accessible: !disabled, focusable: !disabled })}>
           <Slots.button accessible={false} onPress={onPress} disabled={disabled} focusable={false}>
             <Slots.innerCircle />
           </Slots.button>

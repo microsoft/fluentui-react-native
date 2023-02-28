@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { StandardUsage } from './StandardUsage';
+
 import { CustomizeUsage } from './CustomizeUsage';
+import { StandardUsage } from './StandardUsage';
 import { PERSONACOIN_TESTPAGE } from '../../../../E2E/src/PersonaCoin/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const personaCoinSections: TestSection[] = [
   {

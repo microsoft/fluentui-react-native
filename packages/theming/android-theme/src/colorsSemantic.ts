@@ -1,5 +1,6 @@
-import { ColorValue } from 'react-native';
-import { AndroidBaseColorsPalette } from './colorsBase';
+import type { ColorValue } from 'react-native';
+
+import type { AndroidBaseColorsPalette } from './colorsBase';
 export interface SemanticPalette {
   // Texts
   textDominant: ColorValue;

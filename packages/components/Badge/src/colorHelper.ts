@@ -1,5 +1,6 @@
-import { ColorValue } from 'react-native';
-import { Theme } from '@fluentui-react-native/framework';
+import type { ColorValue } from 'react-native';
+
+import type { Theme } from '@fluentui-react-native/framework';
 
 export type BadgeColors = {
   backgroundColor?: ColorValue;

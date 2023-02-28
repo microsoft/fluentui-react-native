@@ -1,9 +1,16 @@
-import * as React from 'react';
-import { ColorValue, ViewStyle } from 'react-native';
-import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type * as React from 'react';
+import type { ColorValue, ViewStyle } from 'react-native';
+
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
-import { SvgProps } from 'react-native-svg';
+import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type {
+  FontTokens,
+  IBorderTokens,
+  IForegroundColorTokens,
+  IBackgroundColorTokens,
+  LayoutTokens,
+} from '@fluentui-react-native/tokens';
+import type { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
 export type CheckboxSize = 'medium' | 'large';

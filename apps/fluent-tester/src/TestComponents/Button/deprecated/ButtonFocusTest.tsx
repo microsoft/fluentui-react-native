@@ -1,8 +1,9 @@
-import { Button } from '@fluentui/react-native';
-import { IFocusable } from '@fluentui-react-native/interactive-hooks';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
-import { findNodeHandle } from 'react-native';
+
+import { Button } from '@fluentui/react-native';
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import { Stack } from '@fluentui-react-native/stack';
+
 import { stackStyle } from '../../Common/styles';
 
 export const ButtonFocusTest_deprecated: React.FunctionComponent = () => {
@@ -14,8 +15,6 @@ export const ButtonFocusTest_deprecated: React.FunctionComponent = () => {
   const onFocus = React.useCallback(() => {
     setState({ focused: !state.focused });
     if (buttonRef.current && !state.focused) {
-      const node = findNodeHandle(buttonRef.current);
-      console.log(node);
       buttonRef.current.focus();
     }
   }, [state, setState]);

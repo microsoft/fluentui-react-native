@@ -1,9 +1,11 @@
-import { ButtonV1 as Button } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
-import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import { testImage, svgProps, iconProps } from '../Common/iconExamples';
+
+import { ButtonV1 as Button } from '@fluentui/react-native';
 import { SvgXml } from 'react-native-svg';
+
+import { testImage, svgProps, iconProps } from '../Common/iconExamples';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 const styles = StyleSheet.create({
   chevron: { paddingStart: 4 },

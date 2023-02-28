@@ -1,5 +1,6 @@
-import { IButtonType } from '../Button.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
+import type { IButtonType } from '../Button.types';
 
 export const settings: IComposeSettings<IButtonType> = [
   {

@@ -1,21 +1,19 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import CalloutPageObject from '../pages/CalloutPageObject.win';
+import { Attribute, CALLOUT_A11Y_ROLE } from '../../common/consts';
 import { CALLOUT_ACCESSIBILITY_LABEL } from '../consts';
-import { Attribute, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CALLOUT_A11Y_ROLE } from '../../common/consts';
+import CalloutPageObject from '../pages/CalloutPageObject.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Callout Testing Initialization', function () {
+describe('Callout Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await CalloutPageObject.waitForInitialPageToDisplay();
+    expect(await CalloutPageObject.isInitialPageDisplayed()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Callout test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCalloutPage();
-    await CalloutPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await CalloutPageObject.navigateToPageAndLoadTests(true);
+    expect(await CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -26,7 +24,7 @@ describe('Callout Accessibility Testing', () => {
     await CalloutPageObject.openCalloutAndWaitForLoad();
   });
 
-  it('Validate "accessibilityRole" prop has correct value, propagates to "ControlType" element attribute.', async () => {
+  it('Validate "accessibilityRole" defaults to "ControlType.Group".', async () => {
     await expect(
       await CalloutPageObject.compareAttribute(CalloutPageObject._primaryComponent, Attribute.AccessibilityRole, CALLOUT_A11Y_ROLE),
     ).toBeTruthy();

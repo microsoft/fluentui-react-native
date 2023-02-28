@@ -1,4 +1,6 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
+
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import {
   Menu,
@@ -11,15 +13,17 @@ import {
   MenuDivider,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
-import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { E2EMenuTest } from './E2EMenuTest';
-import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
 import { MenuTriggerChildRef } from './MenuRefs';
-import { StyleSheet } from 'react-native';
 import { MenuScrollView } from './MenuScrollView';
+import { MenuTooltips } from './MenuTooltips';
+import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
+import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
+import { stackStyle } from '../Common/styles';
+import { Test } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -31,7 +35,7 @@ const MenuDefault: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItem disabled>A second disabled plain MenuItem</MenuItem>
+            <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem>A third plain MenuItem</MenuItem>
           </MenuList>
         </MenuPopover>
@@ -122,9 +126,9 @@ const Submenu: React.FunctionComponent = () => {
   return (
     <Menu>
       <MenuTrigger>
-        <MenuItem>A second MenuItem</MenuItem>
+        <MenuItem>A second MenuItem trigger</MenuItem>
       </MenuTrigger>
-      <MenuPopover>
+      <MenuPopover minWidth={230}>
         <MenuList>
           <MenuItemCheckbox name={'a'}>A nested MenuItemCheckbox</MenuItemCheckbox>
           <MenuItem>A nested MenuItem</MenuItem>
@@ -267,6 +271,10 @@ const menuSections: TestSection[] = [
     component: MenuControlledOpen,
   },
   {
+    name: 'Menu with tooltips on items',
+    component: MenuTooltips,
+  },
+  {
     name: 'Menu Submenu',
     component: MenuSubMenu,
   },
@@ -290,6 +298,9 @@ const menuSections: TestSection[] = [
     name: 'Menu Refs',
     component: MenuTriggerChildRef,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Menu E2E',
     component: E2EMenuTest,
@@ -310,5 +321,5 @@ export const MenuTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Menu/SPEC.md';
 
-  return <Test name="Menu Test" description={description} spec={spec} sections={menuSections} status={status} />;
+  return <Test name="Menu Test" description={description} spec={spec} sections={menuSections} status={status} e2eSections={e2eSections} />;
 };

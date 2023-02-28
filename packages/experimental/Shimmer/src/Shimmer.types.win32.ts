@@ -1,5 +1,8 @@
-import { ViewProps } from 'react-native';
-import { ShimmerProps, ShimmerTokens } from './Shimmer.types';
+import type { ViewProps } from 'react-native';
+
+import type { ShimmerProps, ShimmerTokens } from './Shimmer.types.shared';
+export { ShimmerProps, ShimmerTokens };
+export { shimmerName, ShimmerRectElement, ShimmerElementTypes, ShimmerCircleElement } from './Shimmer.types.shared';
 
 export interface ClippingMaskProps extends ShimmerTokens {
   /**

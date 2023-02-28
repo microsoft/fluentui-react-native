@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-native-font-metrics",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "A temporary partial wrapper for UIFontMetrics.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -42,13 +42,19 @@
     "react-native": "^0.68.0"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
     "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-ios",
-      "react"
-    ]
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-ios",
+        "react"
+      ]
+    }
   }
 }

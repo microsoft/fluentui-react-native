@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import * as renderer from 'react-test-renderer';
+
 import { Shimmer } from './Shimmer';
-import { ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types';
+import type { ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types';
 
 // mocks out setTimeout and other timer functions with mock functions, test will fail without this as we're using Animated API
 jest.useFakeTimers();

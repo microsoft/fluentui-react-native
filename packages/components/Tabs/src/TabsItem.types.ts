@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { ViewProps } from 'react-native';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IFocusable, PressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
-import { ITextProps } from '@fluentui-react-native/text';
-import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
-import { FontTokens, IBackgroundColorTokens, IBorderTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
+import type * as React from 'react';
+import type { ViewProps } from 'react-native';
+
+import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { IFocusable, PressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { ITextProps } from '@fluentui-react-native/text';
+import type { FontTokens, IBackgroundColorTokens, IBorderTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
+import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const tabsItemName = 'TabsItem';
 

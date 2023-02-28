@@ -1,4 +1,4 @@
-import { StyleFactoryFunction, StyleFactoryFunctionRaw } from './token.types';
+import type { StyleFactoryFunction, StyleFactoryFunctionRaw } from './token.types';
 
 /**
  * Helper to make it easy to create a style factory function.  Function statics are super convenient

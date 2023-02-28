@@ -1,11 +1,16 @@
 /** @jsx withSlots */
 import { useRef, useEffect, useMemo, useCallback } from 'react';
-import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G, TransformObject } from 'react-native-svg';
-import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
-import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Animated, I18nManager } from 'react-native';
-import { stylingSettings } from './Shimmer.styling';
+
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import assertNever from 'assert-never';
+import type { TransformObject } from 'react-native-svg';
+import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G } from 'react-native-svg';
+
+import { stylingSettings } from './Shimmer.styling';
+import type { ShimmerProps, ShimmerType } from './Shimmer.types';
+import { shimmerName } from './Shimmer.types';
 
 const useStyling = buildUseStyling(stylingSettings);
 export const Shimmer = compose<ShimmerType>({
@@ -16,6 +21,7 @@ export const Shimmer = compose<ShimmerType>({
   },
   useRender: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Slots = useSlots(props);
+    props = mergeProps(props, Slots.root({}).props);
     const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
     const memoizedShimmerData = useMemo(
@@ -44,14 +50,14 @@ export const Shimmer = compose<ShimmerType>({
 
     /* The shimmer animation is implemented using a LinearGradient which travels from left to right.
      * Different angles are handled by rotating this gradient.
-     * The startValue is used to control the start position of the gradient animation, it is set as -1 to make sure it is starts off the screen for any angle.
-     * Similarly the endValue is set to 2 to make sure the gradient animation exits the entire screen for any angle.
+     * The startValue is used to control the start position of the gradient animation, it is set as -2 to make sure it is starts off the screen for any angle.
+     * Similarly the endValue is set to 3 to make sure the gradient animation exits the entire screen for any angle.
      */
-    const startValue = useRef(new Animated.Value(-1)).current;
+    const startValue = useRef(new Animated.Value(-2)).current;
     const shimmerAnimation = useCallback(() => {
       Animated.loop(
         Animated.timing(startValue, {
-          toValue: 2,
+          toValue: 3,
           duration: memoizedShimmerData.duration,
           delay: memoizedShimmerData.delay,
           useNativeDriver: true,

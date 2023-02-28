@@ -1,5 +1,5 @@
-import { Button } from '../Button';
 import { settings } from './PrimaryButton.settings';
+import { Button } from '../Button';
 
 /**
  * @deprecated This component is deprecated in favor of ButtonV1. The PrimaryButton will be removed when the package moves to 1.0.0.

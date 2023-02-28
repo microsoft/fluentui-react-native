@@ -1,20 +1,16 @@
 import * as React from 'react';
-import { ScreenRect, Text, View, Switch, ScrollView } from 'react-native';
-import {
-  Button,
-  Callout,
-  Separator,
-  IFocusable,
-  Pressable,
-  RestoreFocusEvent,
-  DismissBehaviors,
-  StealthButton,
-} from '@fluentui/react-native';
-import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import type { ScreenRect } from 'react-native';
+import { Text, View, Switch, ScrollView } from 'react-native';
+
+import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
+import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
+
 import { E2ECalloutTest } from './CalloutE2ETest';
-import { fluentTesterStyles } from '../Common/styles';
+import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
 import { MenuPicker } from '../Common/MenuPicker';
+import { fluentTesterStyles } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const StandardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
@@ -424,6 +420,9 @@ const calloutSections: TestSection[] = [
     name: 'Customized Usage',
     component: CustomCallout,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'E2E Testing Callout',
     component: E2ECalloutTest,
@@ -441,5 +440,5 @@ export const CalloutTest: React.FunctionComponent = () => {
 
   const description = 'A callout is an anchored tip that can be used to teach people or guide them through the app without blocking them.';
 
-  return <Test name="Callout Test" description={description} sections={calloutSections} status={status}></Test>;
+  return <Test name="Callout Test" description={description} sections={calloutSections} status={status} e2eSections={e2eSections}></Test>;
 };

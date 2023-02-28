@@ -1,4 +1,5 @@
-import { requireNativeComponent, HostComponent } from 'react-native';
+import type { HostComponent } from 'react-native';
+import { requireNativeComponent } from 'react-native';
 
 const cache: { [key: string]: HostComponent<any> } = {};
 

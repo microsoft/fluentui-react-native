@@ -1,5 +1,6 @@
-import { OfficePalette } from '@fluentui-react-native/theme-types';
-import { OfficeThemingModule } from './officeThemingModule';
+import type { OfficePalette } from '@fluentui-react-native/theme-types';
+
+import type { OfficeThemingModule } from './officeThemingModule';
 
 const whiteColorsPalette: OfficePalette = {
   Bkg: '#FFFFFF',

@@ -1,17 +1,19 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
+
+import { ButtonShapeTest } from './ButtonShapeTestSection';
+import { ButtonSizeTest } from './ButtonSizeTestSection';
+import { ButtonVariantTest } from './ButtonVariantTestSection';
 import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
 import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
-import { BUTTON_TESTPAGE } from '../../../../E2E/src/ButtonLegacy/consts';
 import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { ButtonVariantTest } from './ButtonVariantTestSection';
-import { ToggleButtonTest } from './ToggleButtonTestSection';
-import { ButtonIconTest } from '../Button/ButtonIconTestSection';
-import { ButtonSizeTest } from './ButtonSizeTestSection';
-import { ButtonShapeTest } from './ButtonShapeTestSection';
 import { E2EButtonTest } from './E2EButtonTest';
+import { ToggleButtonTest } from './ToggleButtonTestSection';
+import { BUTTON_TESTPAGE } from '../../../../E2E/src/ButtonLegacy/consts';
 import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
-import { Platform } from 'react-native';
+import { ButtonIconTest } from '../Button/ButtonIconTestSection';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const buttonSections: TestSection[] = [
   {
@@ -24,7 +26,9 @@ const buttonSections: TestSection[] = [
     component: ButtonIconTest,
   },
   ...Platform.select({
-    android: [null], //Following sections are not supported from Fluent Android
+    // The following sections are not supported for iOS or Android
+    ios: [],
+    android: [],
     default: [
       {
         name: 'Toggle Button',
@@ -47,12 +51,8 @@ const buttonSections: TestSection[] = [
       component: ButtonHOCTest,
     },
   }),
-  {
-    name: 'E2E Button Testing',
-    component: E2EButtonTest,
-  },
   ...Platform.select({
-    android: [null], //Following sections are not supported from Fluent Android
+    android: [], // Following sections are not supported from Fluent Android
     default: [
       {
         name: 'Deprecated Basic Button',
@@ -62,12 +62,23 @@ const buttonSections: TestSection[] = [
         name: 'Deprecated Icon Button',
         component: ButtonIconTest_deprecated,
       },
-      {
-        name: 'Deprecated E2E Button Testing',
-        component: E2EButtonTest_deprecated,
-      },
     ],
   }),
+  {
+    name: 'E2E Button Testing',
+    component: E2EButtonTest,
+  },
+];
+
+const e2eSections: TestSection[] = [
+  {
+    name: 'E2E Button Testing',
+    component: E2EButtonTest,
+  },
+  {
+    name: 'Deprecated E2E Button Testing',
+    component: E2EButtonTest_deprecated,
+  },
 ];
 
 export const ButtonTest: React.FunctionComponent = () => {
@@ -84,5 +95,7 @@ export const ButtonTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Button/SPEC.md';
 
-  return <Test name="Button Test" description={description} spec={spec} sections={buttonSections} status={status} />;
+  return (
+    <Test name="Button Test" description={description} spec={spec} sections={buttonSections} status={status} e2eSections={e2eSections} />
+  );
 };

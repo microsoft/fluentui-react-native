@@ -1,5 +1,6 @@
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { PressableProps } from 'react-native';
+import type { PressableProps } from 'react-native';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export type PressState = {
   pressed?: boolean;

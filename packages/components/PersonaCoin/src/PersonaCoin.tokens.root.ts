@@ -1,9 +1,11 @@
-import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { ViewStyle } from 'react-native';
-import { calculateEffectiveSizes } from './PersonaCoin.helpers';
-import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { Theme } from '@fluentui-react-native/framework';
+import type { ViewStyle } from 'react-native';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { Theme } from '@fluentui-react-native/framework';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
+
+import { calculateEffectiveSizes } from './PersonaCoin.helpers';
+import type { IPersonaCoinTokens } from './PersonaCoin.types';
 
 const nameMap: { [key: string]: string } = {
   start: 'flex-start',

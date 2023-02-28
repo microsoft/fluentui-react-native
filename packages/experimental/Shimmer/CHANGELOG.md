@@ -1,8 +1,106 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Fri, 20 Jan 2023 18:06:46 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Feb 2023 20:39:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.22
+
+Fri, 24 Feb 2023 20:39:58 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.9.3
+- Bump @fluentui-react-native/tokens to v0.20.10
+- Bump @fluentui-react-native/theming-utils to v0.23.5
+- Bump @fluentui-react-native/component-cache to v1.4.4
+- Bump @fluentui-react-native/use-styling to v0.9.4
+
+## 0.8.21
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.2
+- Bump @fluentui-react-native/tokens to v0.20.9
+- Bump @fluentui-react-native/theming-utils to v0.23.4
+
+## 0.8.20
+
+Tue, 14 Feb 2023 22:22:51 GMT
+
+### Patches
+
+- Copy Android tokens to iOS (saadnajmi2@gmail.com)
+
+## 0.8.19
+
+Sat, 11 Feb 2023 01:32:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.1
+- Bump @fluentui-react-native/tokens to v0.20.8
+- Bump @fluentui-react-native/theming-utils to v0.23.3
+
+## 0.8.18
+
+Fri, 03 Feb 2023 01:49:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.0
+
+## 0.8.17
+
+Thu, 02 Feb 2023 02:18:52 GMT
+
+### Patches
+
+- Fix some type errors when running TS type check for win32 platform (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.8.16
+
+Thu, 02 Feb 2023 01:29:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.39
+- Bump @fluentui-react-native/use-styling to v0.9.3
+
+## 0.8.15
+
+Wed, 01 Feb 2023 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.38
+- Bump @fluentui-react-native/tokens to v0.20.7
+- Bump @fluentui-react-native/theming-utils to v0.23.2
+- Bump @fluentui-react-native/component-cache to v1.4.3
+- Bump @fluentui-react-native/use-styling to v0.9.2
+
+## 0.8.14
+
+Mon, 30 Jan 2023 07:12:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.37
+- Bump @fluentui-react-native/tokens to v0.20.6
+- Bump @fluentui-react-native/theming-utils to v0.23.1
+
+## 0.8.13
+
+Wed, 25 Jan 2023 21:31:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.36
+- Bump @fluentui-react-native/tokens to v0.20.5
+- Bump @fluentui-react-native/theming-utils to v0.23.0
 
 ## 0.8.12
 
