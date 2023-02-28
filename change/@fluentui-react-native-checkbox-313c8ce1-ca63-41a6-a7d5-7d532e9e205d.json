@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix checkbox focus issues on windows",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
