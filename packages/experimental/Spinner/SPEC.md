@@ -19,8 +19,8 @@ The `Spinner` is an outline of a circle which animates around itself, to visuall
 <>
   <Spinner /> // This is a spinner with default size as 'medium'
   <Spinner size="x-small" /> // Spinner with a defined size
-  <Spinner status={status} /> // status property depicts it is animating or not
-  <Spinner hidesWhenStopped={hidesWhenStopped} /> // hidesWhenStopped boolean property decides it will be hidden or not when stopped
+  <Spinner status={status} /> // 'status' property depicts it is rotating or not
+  <Spinner hidesWhenStopped={hidesWhenStopped} /> // 'hidesWhenStopped' boolean property decides it will be hidden or not when stopped
 </>
 ```
 
