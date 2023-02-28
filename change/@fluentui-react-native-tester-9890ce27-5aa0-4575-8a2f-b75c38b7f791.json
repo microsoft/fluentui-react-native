@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update spinner docs & fix props",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
