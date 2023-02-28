@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Switch } from 'react-native';
 
+import type { SpinnerStatus } from '@fluentui-react-native/spinner';
 import { Spinner } from '@fluentui-react-native/spinner';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text, TextV1 } from '@fluentui-react-native/text';
@@ -12,7 +13,7 @@ import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
 const BasicSpinnerTest: React.FunctionComponent = () => {
-  const [animating, setAnimating] = React.useState(true);
+  const [status, setStatus] = React.useState<SpinnerStatus>('active');
   const [hidesWhenStopped, setHidesWhenStopped] = React.useState(true);
 
   return (
@@ -21,14 +22,19 @@ const BasicSpinnerTest: React.FunctionComponent = () => {
         <View style={commonStyles.settings}>
           <View style={commonStyles.switch}>
             <Text>Animating</Text>
-            <Switch value={animating} onValueChange={setAnimating} />
+            <Switch
+              value={status === 'active'}
+              onValueChange={(value) => {
+                value ? setStatus('active') : setStatus('inactive');
+              }}
+            />
           </View>
           <View style={commonStyles.switch}>
             <Text>HidesWhenStopped</Text>
             <Switch value={hidesWhenStopped} onValueChange={setHidesWhenStopped} />
           </View>
         </View>
-        <Spinner animating={animating} hidesWhenStopped={hidesWhenStopped} />
+        <Spinner status={status} hidesWhenStopped={hidesWhenStopped} />
       </View>
     </Stack>
   );
