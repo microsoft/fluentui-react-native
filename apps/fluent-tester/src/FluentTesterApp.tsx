@@ -6,7 +6,7 @@ import { Theme } from '@fluentui-react-native/framework';
 import * as React from 'react';
 import { Platform, useWindowDimensions } from 'react-native';
 import { FluentTester, FluentTesterProps } from './FluentTester';
-import { testerTheme } from './theme/index';
+// import { testerTheme } from './theme/index';
 
 type SizeClassIOS = 'regular' | 'compact' | undefined;
 
@@ -44,24 +44,61 @@ export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (prop
   // If on iPad we are presented in a Split View or Slide Over context, show the single pane view.
   const shouldShowSinglePane = isMobile || (!isMobile && sizeClass === 'compact');
   // ankraj - create a custom theme here. Try using the themeRecipes in it.
-// Is there still the need for brand API thing to simplify overriding brand tokens?
-// There seems 2 parts of the sceanrios here - new colors, and exisitng brand  colors.
-git branch --sho
-  const theme = new ThemeReference(
-  createAndroidTheme(),
-  () => {
-  return {{ colors: { buttonBackground: 'red' }}}}, // overrides the buttonBackground color token, all other colors are kept in tact
-  (theme: Theme) => {
-    return {
-      { colors: { neutralBackground1: theme.colors.buttonBackground }}, // This is now red, because theme has previous recipe applied. This also addded a new color in
-                                                                          // theme.color.
-      { spacing: s1: '10px' }
-    }},
-  // other recipes
-);
+
+  // Is there still the need for brand API thing to simplify overriding brand tokens?
+
+  // There seems 2 parts of the sceanrios here - new colors, and exisitng brand  colors.
+
+  const customTheme = new ThemeReference(
+    createAndroidTheme(),
+    () => {
+
+      return {
+        colors: { buttonBackground: 'red' } // overrides the buttonBackground color token, all other colors are kept in tact
+      }
+    },
+    (theme: Theme) => {
+      return {
+        colors: {
+          neutralBackground1: theme.colors.buttonBackground,
+          myCustomeHostColor: 'pink',
+          myCustomBackgroundColor: 'purple',
+          hostBrandColor: "yellow",
+
+        }, // This is now red, because theme has previous recipe applied
+        spacing: {
+          s1: '10px' // should not be oveeriden here, only global overridess.
+        }
+        // spacing: : '10px'
+      }
+    }
+    ,
+    () => {
+      return {
+        colors: {
+          yellowBrandColor: 'yellow',
+          hostBrandColor: "green"
+        }
+      }
+    },
+    // other recipes
+  );
+
+  //   const theme = new ThemeReference(
+  //   createAndroidTheme(),
+  //   () => {
+  //   return {{ colors: { buttonBackground: 'red' }}}}, // overrides the buttonBackground color token, all other colors are kept in tact
+  //   (theme: Theme) => {
+  //     return {
+  //       { colors: { neutralBackground1: theme.colors.buttonBackground }}, // This is now red, because theme has previous recipe applied. This also addded a new color in
+  //                                                                           // theme.color.
+  //       { spacing: s1: '10px' }
+  //     }},
+  //   // other recipes
+  // );
 
   return (
-    <ThemeProvider theme={testerTheme}>
+    <ThemeProvider theme={customTheme}>
       <FluentTester enableSinglePaneView={shouldShowSinglePane} {...props} />
     </ThemeProvider>
   );
