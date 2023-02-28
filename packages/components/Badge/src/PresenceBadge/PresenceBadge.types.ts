@@ -1,4 +1,5 @@
 import type { SvgProps } from 'react-native-svg';
+
 import type { BadgeCoreProps, BadgeSlotProps } from '../';
 import type { BadgeCoreTokens, BadgeConfigurableProps } from '../Badge.types';
 

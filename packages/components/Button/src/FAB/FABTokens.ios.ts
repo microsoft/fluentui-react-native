@@ -1,6 +1,7 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
 import type { FABTokens } from './FAB.types';
 
 export const defaultFABTokens: TokenSettings<FABTokens, Theme> = (t: Theme) =>

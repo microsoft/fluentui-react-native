@@ -1,7 +1,8 @@
+import { getMemoCache } from '@fluentui-react-native/memo-cache';
+
 import type { IButtonSettings } from './MockButton';
 import { MockButton } from './MockButton';
 import { theme } from './MockTheme';
-import { getMemoCache } from '@fluentui-react-native/memo-cache';
 
 const b1: IButtonSettings = {
   tokens: {

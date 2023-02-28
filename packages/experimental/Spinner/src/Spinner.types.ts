@@ -1,4 +1,5 @@
 import type { Animated, TextProps, ViewProps } from 'react-native';
+
 import type { SvgProps } from 'react-native-svg';
 
 export const spinnerName = 'Spinner';

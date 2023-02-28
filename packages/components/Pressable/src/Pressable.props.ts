@@ -1,5 +1,6 @@
 import type * as React from 'react';
 import type { ViewStyle, StyleProp } from 'react-native';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IWithPressableOptions, IPressableState } from '@fluentui-react-native/interactive-hooks';
 

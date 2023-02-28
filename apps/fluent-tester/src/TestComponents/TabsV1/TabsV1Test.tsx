@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { View, Platform } from 'react-native';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
-import { stackStyle } from '../Common/styles';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { TabsV1E2ETest } from './TabsV1E2ETest';
 import { TABSV1_TESTPAGE } from '../../../../E2E/src/TabsV1/consts';
+import { svgProps } from '../Common/iconExamples';
+import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { TabsV1E2ETest } from './TabsV1E2ETest';
-import { svgProps } from '../Common/iconExamples';
 
 const TabsMainTest: React.FunctionComponent = () => {
   return (

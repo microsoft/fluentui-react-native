@@ -1,8 +1,10 @@
 import * as React from 'react';
+
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
 import { RadioGroup } from './RadioGroup';
 import { Radio } from '../Radio/Radio';
-import * as renderer from 'react-test-renderer';
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
 jest.useFakeTimers();
 

@@ -1,12 +1,13 @@
-import type { CounterBadgeTokens, CounterBadgeProps, CounterBadgeSlotProps } from './CounterBadge.types';
-import { counterBadgeName } from './CounterBadge.types';
 import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles } from '@fluentui-react-native/tokens';
-import { defaultBadgeTokens } from '../BadgeTokens';
-import { defaultBadgeColorTokens } from '../BadgeColorTokens';
-import { badgeStates, getBadgePosition } from '../Badge.styling';
+
+import { counterBadgeName } from './CounterBadge.types';
+import type { CounterBadgeTokens, CounterBadgeProps, CounterBadgeSlotProps } from './CounterBadge.types';
 import { counterBadgeTokens } from './CounterBadgeTokens';
+import { badgeStates, getBadgePosition } from '../Badge.styling';
+import { defaultBadgeColorTokens } from '../BadgeColorTokens';
+import { defaultBadgeTokens } from '../BadgeTokens';
 
 export const counterBadgeStates: (keyof CounterBadgeTokens)[] = [...badgeStates, 'dot'];
 const tokensThatAreAlsoProps: (keyof CounterBadgeTokens)[] = ['shadowToken'];

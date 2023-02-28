@@ -1,11 +1,12 @@
 import * as React from 'react';
+
+import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
+import { MenuButtonV1E2ETest } from './MenuButtonV1E2ETest';
+import { NestedMenuButton } from './NestedMenuButtonTest';
+import { StandardMenuButton } from './StandardMenuButtonTest';
 import { MENUBUTTONV1_TESTPAGE } from '../../../../E2E/src/MenuButtonV1/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { StandardMenuButton } from './StandardMenuButtonTest';
-import { NestedMenuButton } from './NestedMenuButtonTest';
-import { MenuButtonV1E2ETest } from './MenuButtonV1E2ETest';
-import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
 
 const menuButtonSections: TestSection[] = [
   {

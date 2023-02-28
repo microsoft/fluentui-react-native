@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Separator } from '..';
+
 import * as renderer from 'react-test-renderer';
+
+import { Separator } from '..';
 
 it('Separator default', () => {
   const tree = renderer.create(<Separator />).toJSON();

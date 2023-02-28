@@ -1,10 +1,12 @@
 /** @jsx withSlots */
-import type { CheckboxTokens, CheckboxProps, CheckboxState } from './Checkbox.types';
-import { checkboxName } from './Checkbox.types';
+import { View } from 'react-native';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose } from '@fluentui-react-native/framework';
-import type { IViewProps } from '@fluentui-react-native/adapters';
-import { View } from 'react-native';
+
+import type { CheckboxTokens, CheckboxProps, CheckboxState } from './Checkbox.types';
+import { checkboxName } from './Checkbox.types';
 
 interface CheckboxSlotPropsMacOS {
   root: React.PropsWithRef<IViewProps>;

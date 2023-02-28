@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
+
 import { Stack } from '@fluentui-react-native/stack';
 import { Switch } from '@fluentui-react-native/switch';
 import { TextV1 } from '@fluentui-react-native/text';
-import { stackStyle, commonTestStyles } from '../Common/styles';
+
 import {
   SWITCH_TEST_COMPONENT,
   SWITCH_ACCESSIBILITY_LABEL,
@@ -10,7 +12,7 @@ import {
   SWITCH_TEST_COMPONENT_LABEL,
   SWITCH_ON_PRESS,
 } from '../../../../E2E/src/Switch/consts';
-import { Platform } from 'react-native';
+import { stackStyle, commonTestStyles } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const E2ESwitchTest: React.FunctionComponent = () => {

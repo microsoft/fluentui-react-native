@@ -1,5 +1,6 @@
-import type { Typography, Variants } from '@fluentui-react-native/theme-types';
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
+import type { Typography, Variants } from '@fluentui-react-native/theme-types';
+
 import { createFontAliasTokens } from './createFontAliasTokens';
 
 export function win32Typography(): Typography {

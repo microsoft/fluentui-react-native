@@ -1,13 +1,15 @@
+import { Platform } from 'react-native';
+
+import { createAndroidTheme } from '@fluentui-react-native/android-theme';
 import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { Platform } from 'react-native';
+import type { ThemeOptions } from '@fluentui-react-native/theme-types';
+
 import type { OfficeBrand } from './applyBrand';
 import { applyBrand } from './applyBrand';
 import type { ThemeNames } from './applyTheme';
 import { applyTheme } from './applyTheme';
-import { createAndroidTheme } from '@fluentui-react-native/android-theme';
-import type { ThemeOptions } from '@fluentui-react-native/theme-types';
 
 const themeOptions: ThemeOptions = { paletteName: 'TaskPane', appearance: 'dynamic' };
 

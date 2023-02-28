@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { Text, View } from 'react-native';
+
 import type { ContextualMenuProps } from '@fluentui/react-native';
 import { MenuButton } from '@fluentui/react-native';
-import { Text, View } from 'react-native';
-import { menuItems } from './testData';
+
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonLegacyTestStyles';
+import { menuItems } from './testData';
 import {
   MENU_BUTTON_TEST_COMPONENT,
   MENU_BUTTON_ACCESSIBILITY_LABEL,

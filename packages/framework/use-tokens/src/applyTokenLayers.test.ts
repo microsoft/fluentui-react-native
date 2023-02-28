@@ -1,5 +1,6 @@
-import { applyTokenLayers } from './applyTokenLayers';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
+
+import { applyTokenLayers } from './applyTokenLayers';
 
 type Tokens = {
   a?: string;

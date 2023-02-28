@@ -1,10 +1,11 @@
 import * as React from 'react';
+
+import { ShadowButtonTestSection } from './ShadowButtonTestSection';
+import { ShadowDepthTestSection } from './ShadowDepthTestSection';
+import { ShadowWithDifferentPropsTestSection } from './ShadowWithDifferentPropsTestSection';
+import { SHADOW_TESTPAGE } from '../../../../E2E/src/Shadow/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { SHADOW_TESTPAGE } from '../../../../E2E/src/Shadow/consts';
-import { ShadowDepthTestSection } from './ShadowDepthTestSection';
-import { ShadowButtonTestSection } from './ShadowButtonTestSection';
-import { ShadowWithDifferentPropsTestSection } from './ShadowWithDifferentPropsTestSection';
 
 const shadowSections: TestSection[] = [
   {

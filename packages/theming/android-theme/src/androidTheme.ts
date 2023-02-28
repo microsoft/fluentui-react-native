@@ -1,10 +1,11 @@
+import { memoize } from '@fluentui-react-native/memo-cache';
 import type { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { getFluentUIAndroidPalette } from './colorsSemantic';
-import { paletteFromAndroidColors } from './colorsTokens';
+
+import { androidShadows } from './androidShadows';
 import { androidTypography } from './androidTypography';
 import { getAndroidPalette } from './colorsBase';
-import { androidShadows } from './androidShadows';
-import { memoize } from '@fluentui-react-native/memo-cache';
+import { getFluentUIAndroidPalette } from './colorsSemantic';
+import { paletteFromAndroidColors } from './colorsTokens';
 
 export function androidSpacing(): Spacing {
   return {

@@ -1,5 +1,5 @@
-import { SPACING_TESTPAGE, HOMEPAGE_SPACING_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { SPACING_TESTPAGE, HOMEPAGE_SPACING_BUTTON } from '../consts';
 
 class SpacingTokensPageObject extends BasePage {
   /*****************************************/

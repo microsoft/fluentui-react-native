@@ -1,14 +1,16 @@
+import * as React from 'react';
+import { View, TextInput } from 'react-native';
+
 import { Checkbox } from '@fluentui/react-native';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import * as React from 'react';
-import { View, TextInput } from 'react-native';
-import { commonTestStyles as commonStyles } from '../Common/styles';
-import { CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxLegacy/consts';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+
 import { CheckboxLegacyE2ETest } from './CheckboxLegacyE2ETest';
+import { CHECKBOX_TESTPAGE } from '../../../../E2E/src/CheckboxLegacy/consts';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);

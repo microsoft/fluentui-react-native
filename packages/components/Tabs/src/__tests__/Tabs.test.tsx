@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Tabs, TabsItem } from '..';
+
 import * as renderer from 'react-test-renderer';
+
+import { Tabs, TabsItem } from '..';
 
 it('Tabs default props', () => {
   const tree = renderer

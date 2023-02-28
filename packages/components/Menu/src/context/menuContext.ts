@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import type { MenuState } from '../Menu/Menu.types';
 
 /**
@@ -21,7 +22,7 @@ export const MenuContext = React.createContext<MenuContextValue>({
   open: false,
   onCheckedChange: () => false,
   setOpen: () => false,
-  shouldFocusOnContainer: false,
+  shouldFocusOnContainer: undefined,
   triggerRef: null,
   hasMaxHeight: false,
   hasMaxWidth: false,

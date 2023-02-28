@@ -1,5 +1,5 @@
-import { LINKV1_TESTPAGE, LINKV1_TEST_COMPONENT, HOMEPAGE_LINKV1_BUTTON, LINKV1_NO_A11Y_LABEL_COMPONENT } from '../consts';
 import { BasePage, By } from '../../common/BasePage';
+import { LINKV1_TESTPAGE, LINKV1_TEST_COMPONENT, HOMEPAGE_LINKV1_BUTTON, LINKV1_NO_A11Y_LABEL_COMPONENT } from '../consts';
 
 class LinkV1PageObject extends BasePage {
   /******************************************************************/

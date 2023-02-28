@@ -1,7 +1,9 @@
-import { Checkbox, Text } from '@fluentui/react-native';
 import * as React from 'react';
 import { View } from 'react-native';
-import { stackStyle } from '../Common/styles';
+
+import { Checkbox, Text } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
+
 import {
   CHECKBOX_TEST_COMPONENT,
   CHECKBOX_ON_PRESS,
@@ -9,7 +11,7 @@ import {
   CHECKBOX_TEST_COMPONENT_LABEL,
   CHECKBOX_ACCESSIBILITY_LABEL,
 } from '../../../../E2E/src/CheckboxLegacy/consts';
-import { Stack } from '@fluentui-react-native/stack';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const CheckboxLegacyE2ETest: React.FunctionComponent = () => {

@@ -22,8 +22,6 @@ NSString *RCTHorizontalSizeClassPreference(UITraitCollection *traitCollection) {
       };
     });
 
-    traitCollection = traitCollection ?: [UITraitCollection currentTraitCollection];
-
     NSString *sizeClass = sizeClasses[@(traitCollection.horizontalSizeClass)];
     if (sizeClass == nil) {
         sizeClass = [traitCollection userInterfaceIdiom] == UIUserInterfaceIdiomPhone ? FRNAppearanceSizeClassCompact : FRNAppearanceSizeClassRegular;
@@ -42,8 +40,6 @@ NSString *RCTUserInterfaceLevelPreference(UITraitCollection *traitCollection) {
       };
     });
 
-    traitCollection = traitCollection ?: [UITraitCollection currentTraitCollection];
-
     NSString *userInterfaceLevel = userInterfaceLevels[@(traitCollection.userInterfaceLevel)];
     if (userInterfaceLevel == nil) {
         userInterfaceLevel = FRNUserInterfaceLevelBase;
@@ -61,8 +57,6 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
         @(UIAccessibilityContrastHigh) : FRNAccessibilityContrastHigh,
       };
     });
-
-    traitCollection = traitCollection ?: [UITraitCollection currentTraitCollection];
 
     NSString *accessibilityContrastOption = accessibilityContrastOptions[@(traitCollection.accessibilityContrast)];
     if (accessibilityContrastOption == nil) {
@@ -103,11 +97,31 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
     return @[ @"appearanceChanged" ];
 }
 
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
+
 - (void)startObserving {
     _hasListeners = YES;
-    _horizontalSizeClass = RCTHorizontalSizeClassPreference(nil);
-    _userInterfaceLevel = RCTUserInterfaceLevelPreference(nil);
-    _accessibilityContrastOption = RCTAccessibilityContrastPreference(nil);
+    
+    // Note that [UITraitCollection currentTraitCollection] always returns the same default trait collection,
+    // presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
+    // (which happens when a view gets added to the view hierachy). In order to get the right trait collection,
+    // we need to access a view that's been added to the view hierarchy
+    UIViewController *viewControllerWithInitialTraitCollection = RCTPresentedViewController();
+    UITraitCollection *initialTraitCollection;
+    
+    if (viewControllerWithInitialTraitCollection != nil) {
+        initialTraitCollection = [viewControllerWithInitialTraitCollection traitCollection];
+    } else {
+        initialTraitCollection = [UITraitCollection currentTraitCollection];
+    }
+    
+    _horizontalSizeClass = RCTHorizontalSizeClassPreference(initialTraitCollection);
+    _userInterfaceLevel = RCTUserInterfaceLevelPreference(initialTraitCollection);
+    _accessibilityContrastOption = RCTAccessibilityContrastPreference(initialTraitCollection);
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
                                                  name:RCTUserInterfaceStyleDidChangeNotification

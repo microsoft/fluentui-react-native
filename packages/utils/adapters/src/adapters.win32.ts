@@ -1,5 +1,7 @@
-import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
 import type { ImageProps } from 'react-native';
+
+import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
+
 import type { IFilterMask } from './filter.types';
 
 // export core interface types
