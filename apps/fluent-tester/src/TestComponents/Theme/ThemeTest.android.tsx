@@ -3,9 +3,10 @@ import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { THEME_TESTPAGE } from '../../../../E2E/src/Theme/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Text, View } from 'react-native';
+import { Text as TextRN, View } from 'react-native';
+import { Text } from '@fluentui/react-native';
 
-import { useFluentTheme } from '@fluentui-react-native/framework'
+import { useFluentTheme } from '@fluentui-react-native/framework';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -13,7 +14,7 @@ const getThemedStyles = themedStyleSheet((theme: Theme) => {
       color: theme.colors.neutralForeground1,
     },
     rootView: {
-      backgroundColor: theme.colors.brandBackground
+      backgroundColor: theme.colors.brandBackground,
     },
   };
 });
@@ -25,34 +26,29 @@ const Panel: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Text
-        style={{ color: theme.colors.buttonBackground }}>Overriden buttonBackground color.</Text>
-      <Text
-        style={{ color: theme.colors.neutralBackground1 }}>Overriden color access in theme.</Text>
-      <Text
-        style={{ color: theme.colors.myCustomeHostColor }}>Custom background Color myCustomeHostColor</Text>
+      <Text style={{ color: theme.colors.buttonBackgroundChecked }}>buttonBackgroundChecked styled text</Text>
 
-      <Text style={{ color: theme2.colors.myCustomBackgroundColor }} >myCustomBackgroundColor styled tex</Text>
-      <Text style={{ color: theme2.colors.hostBrandColor }} >hostBrandColor styled tex</Text>
-      <Text style={{ color: theme2.colors.yellowBrandColor }} >yellowBrandColor styled tex</Text>
+      <Text style={{ color: theme.colors.neutralForeground1 }}>neutralForeground1 styled text</Text>
 
-      <Text style={themedStyles.swatch} >Styled Text</Text>
+      <Text style={{ color: theme2.colors.hostColorPink }}>hostColorPink styled text</Text>
 
-      {/* <Text style={{ fontVariant: theme.typography.variants.body1 }}> RN Text </Text>
-        // The style types are not 1-1 for typography, so no straight way to map.
-      */}
-    </View >
+      <Text style={{ color: theme2.colors.hostColorButtonBackground }}>hostColorButtonBackground styled text</Text>
 
+      <Text style={{ color: theme2.colors.hostColorBrandText }}>hostColorBrandText styled text</Text>
+
+      <TextRN style={{ color: theme2.colors.yellowBrandColor }}>yellowBrandColor styled text</TextRN>
+
+      <TextRN style={themedStyles.swatch}>Styled RN Text</TextRN>
+    </View>
   );
 };
-
 
 const themeSections: TestSection[] = [
   {
     name: 'Component Examples',
     testID: THEME_TESTPAGE,
     component: Panel,
-  }
+  },
 ];
 
 export const ThemeTest: React.FunctionComponent = () => {

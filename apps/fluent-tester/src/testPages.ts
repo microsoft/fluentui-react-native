@@ -304,7 +304,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'Theme',
+    name: 'ATheme',
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
