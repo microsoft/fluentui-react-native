@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -89,7 +89,7 @@ export const Button = compose<ButtonType>({
         </React.Fragment>
       );
 
-      const hasRipple = true;
+      const hasRipple = Platform.OS === 'android';
       if (hasRipple) {
         const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
@@ -104,6 +104,22 @@ export const Button = compose<ButtonType>({
         return (
           <Slots.root {...mergedProps} accessibilityLabel={label}>
             {buttonContent}
+            {button.state.focused && (
+              <View
+                style={{
+                  position: 'absolute',
+                  width: button.state.x - 2,
+                  height: button.state.y - 2,
+                  borderWidth: 1,
+                  borderColor: 'white',
+                  borderRadius: 3,
+                  flexDirection: 'row',
+                  top: 0,
+                }}
+                accessible={false}
+                focusable={false}
+              />
+            )}
           </Slots.root>
         );
       }

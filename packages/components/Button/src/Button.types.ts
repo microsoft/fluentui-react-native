@@ -168,7 +168,7 @@ export interface ButtonProps extends ButtonCoreProps {
 
 export interface ButtonInfo {
   props: ButtonProps & React.ComponentPropsWithRef<any>;
-  state: PressableState;
+  state: PressableState & { x?: number; y?: number };
 }
 
 export interface ButtonSlotProps {

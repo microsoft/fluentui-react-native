@@ -1,17 +1,7 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
 
-import { ButtonShapeTest } from './ButtonShapeTestSection';
-import { ButtonSizeTest } from './ButtonSizeTestSection';
 import { ButtonVariantTest } from './ButtonVariantTestSection';
-import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
-import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
-import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
-import { E2EButtonTest } from './E2EButtonTest';
-import { ToggleButtonTest } from './ToggleButtonTestSection';
 import { BUTTON_TESTPAGE } from '../../../../E2E/src/ButtonLegacy/consts';
-import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
-import { ButtonIconTest } from '../Button/ButtonIconTestSection';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 

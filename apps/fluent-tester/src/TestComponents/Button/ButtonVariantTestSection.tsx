@@ -1,5 +1,6 @@
+import { ButtonV1 } from '@fluentui-react-native/button';
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import { testContentRootViewStyle } from '../Common/styles';
 
@@ -7,11 +8,7 @@ import { testContentRootViewStyle } from '../Common/styles';
 export const ButtonVariantTest: React.FunctionComponent = () => {
   return (
     <View style={testContentRootViewStyle}>
-      <View style={{ borderWidth: 1, borderColor: 'black', flexDirection: 'row', backgroundColor: 'red', alignSelf: 'baseline' }}>
-        <View style={{ borderWidth: 1, borderColor: 'white', backgroundColor: 'navy', minHeight: 28, minWidth: 60 }}>
-          <Text style={{ color: 'white' }}>Testing</Text>
-        </View>
-      </View>
+      <ButtonV1 appearance="primary">A test</ButtonV1>
     </View>
   );
 };

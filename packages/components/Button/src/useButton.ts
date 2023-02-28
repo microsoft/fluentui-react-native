@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import {
+  usePressableState,
+  useKeyProps,
+  useOnPressWithFocus,
+  useViewCommandFocus,
+  LayoutEvent,
+} from '@fluentui-react-native/interactive-hooks';
 
 import type { ButtonProps, ButtonInfo } from './Button.types';
 import { Platform } from 'react-native';
@@ -8,6 +14,7 @@ import { Platform } from 'react-native';
 export const useButton = (props: ButtonProps): ButtonInfo => {
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityRole, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, focusable, ...rest } = props;
+
   const isDisabled = !!disabled || !!loading;
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
@@ -16,6 +23,15 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
   const useTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary';
+  const [baseHeight, setBaseHeight] = React.useState<number | undefined>(undefined);
+  const [baseWidth, setBaseWidth] = React.useState<number | undefined>(undefined);
+  const onLayout = React.useCallback(
+    (e: LayoutEvent) => {
+      setBaseHeight(e.nativeEvent.layout.height);
+      setBaseWidth(e.nativeEvent.layout.width);
+    },
+    [setBaseHeight, setBaseWidth],
+  );
 
   return {
     props: {
@@ -36,7 +52,8 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
       ref: useViewCommandFocus(componentRef),
       iconPosition: props.iconPosition || 'before',
       loading,
+      onLayout,
     },
-    state: pressable.state,
+    state: { ...pressable.state, x: baseWidth, y: baseHeight },
   };
 };
