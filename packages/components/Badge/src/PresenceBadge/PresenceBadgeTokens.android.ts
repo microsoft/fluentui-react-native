@@ -9,6 +9,7 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     borderColor: t.colors.neutralBackground1,
     paddingHorizontal: globalTokens.sizeNone,
     backgroundColor: t.colors.neutralBackground1,
+    // position is overriden through Avatar Tokens for Android since same badge size requires different positioning for different Avatar sizes.
     position: 'relative',
     bottom: 0,
     right: 0,

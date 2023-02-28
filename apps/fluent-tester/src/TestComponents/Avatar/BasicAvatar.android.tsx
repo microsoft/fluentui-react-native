@@ -101,7 +101,8 @@ export const StandardUsage: FunctionComponent = () => {
       </View>
 
       <View style={mobileStyles.testVariants}>
-        {/* Variation - Standard */}
+        {/* Variation - Standard with Badge */
+        /* Badge is not shown for size 16 on Android. */}
         <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={16} avatarColor={'brand'} />
         <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={20} avatarColor={'brand'} />
         <Avatar badge={{ status: status, outOfOffice: outOfOffice }} size={24} avatarColor={'brand'} />

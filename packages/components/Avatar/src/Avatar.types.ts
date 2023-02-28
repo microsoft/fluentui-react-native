@@ -209,11 +209,15 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
 
   /**
    * The x position of presence badge.
+   * This is used to override the default position of the badge picked from presenceBadge tokens.
+   * 0 aligns the badge (including its margin) to the right edge of the avatar.
    */
   badgeX?: number;
 
   /**
    * The y position of presence badge.
+   * This is used to override the default position of the badge picked from presenceBadge tokens.
+   * 0 aligns the badge (including its margin) to the bottom edge of the avatar.
    */
   badgeY?: number;
 

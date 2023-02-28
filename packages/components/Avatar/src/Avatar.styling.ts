@@ -185,6 +185,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           status: tokens.badgeStatus,
           position: 'absolute',
           outOfOffice: tokens.outOfOffice,
+          // badgeX and badgeY, when present, override the default badge position picked from presenceBadge tokens. This check prevents unnecessary overrides.
           right: tokens.badgeX !== undefined ? tokens.badgeX : undefined,
           bottom: tokens.badgeY !== undefined ? tokens.badgeY : undefined,
         };
