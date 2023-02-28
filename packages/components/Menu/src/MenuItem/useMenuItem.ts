@@ -22,7 +22,8 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const shouldPersist = persistOnClick ?? persistOnItemClick;
 
   const hasSubmenu = isSubmenu && isTrigger;
-
+  const pressable = usePressableState({ ...rest });
+  const { onBlur, onHoverOut, onPress, ...restPressableProps } = pressable.props;
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
       const isRtl = I18nManager.isRTL;
@@ -34,7 +35,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
         ((isRtl && e.nativeEvent.key === 'ArrowLeft') || (!isRtl && e.nativeEvent.key === 'ArrowRight'));
 
       if (!disabled && (!isArrowKey || isArrowOpen)) {
-        componentRef?.current?.blur();
+        onBlur();
         onClick?.(e);
       }
 
@@ -48,11 +49,9 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
         onArrowClose?.(e);
       }
     },
-    [componentRef, disabled, hasSubmenu, onArrowClose, onClick, setOpen, shouldPersist],
+    [disabled, hasSubmenu, onArrowClose, onBlur, onClick, setOpen, shouldPersist],
   );
 
-  const pressable = usePressableState({ ...rest, onPress: onInvoke });
-  const { onBlur, onHoverOut, ...restPressableProps } = pressable.props;
   const onHoverOutModified = React.useCallback(
     (e) => {
       // Focus is removed on macOS while win32 keeps it
@@ -67,6 +66,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const pressablePropsModified = {
     onBlur,
     onHoverOut: onHoverOutModified,
+    onPress: onInvoke,
     ...restPressableProps,
   };
   const itemRef = useViewCommandFocus(componentRef);
