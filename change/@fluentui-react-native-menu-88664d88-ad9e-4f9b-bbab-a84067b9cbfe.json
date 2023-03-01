@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add 'Escape' to list of keys stopping event propagation in MenuPopover key handlers.",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

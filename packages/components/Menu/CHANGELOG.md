@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 28 Feb 2023 21:34:10 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Mar 2023 23:22:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.14
+
+Wed, 01 Mar 2023 23:22:12 GMT
+
+### Patches
+
+- Add 'Escape' to list of keys stopping event propagation in MenuPopover key handlers. (winlarry@microsoft.com)
 
 ## 1.4.13
 
