@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Wed, 01 Mar 2023 05:47:50 GMT",
+      "tag": "@fluentui-react-native/badge_v0.4.31",
+      "version": "0.4.31",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/badge",
+            "commit": "43eab1fe18c1c5ba3ad390795476bc82209895df",
+            "comment": "Android Presence badge changes"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Feb 2023 21:34:10 GMT",
       "tag": "@fluentui-react-native/badge_v0.4.31",
       "version": "0.4.31",
