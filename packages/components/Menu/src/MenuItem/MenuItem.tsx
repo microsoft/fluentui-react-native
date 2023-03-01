@@ -48,10 +48,12 @@ export const MenuItem = compose<MenuItemType>({
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           {menuItem.state.hasCheckmarks && <Slots.checkmark />}
-          {icon && icon.source && <Slots.imgIcon {...icon} />}
-          {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon {...icon} />}
-          {/* Reuse checkmark slot if no icon is passed in but we need to align everything since checkmark slot is a placeholder */}
-          {!icon && menuItem.state.hasIcons && <Slots.iconPlaceholder />}
+          {(icon || menuItem.state.hasIcons) && (
+            <Slots.iconPlaceholder>
+              {icon && icon.source && <Slots.imgIcon {...icon} />}
+              {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon {...icon} />}
+            </Slots.iconPlaceholder>
+          )}
           {children && <Slots.content tooltip={tooltipResult}>{children}</Slots.content>}
           {menuItem.state.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
         </Slots.root>

@@ -55,9 +55,12 @@ export const menuItemFinalRender = (
     return (
       <Slots.root {...mergedProps} accessibilityLabel={label}>
         <Slots.checkmark xml={checkmarkXml} />
-        {icon && icon.source && <Slots.imgIcon {...icon} />}
-        {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon {...icon} />}
-        {!icon && menuItem.state.hasIcons && <Slots.iconPlaceholder />}
+        {(icon || menuItem.state.hasIcons) && (
+          <Slots.iconPlaceholder>
+            {icon && icon.source && <Slots.imgIcon {...icon} />}
+            {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon {...icon} />}
+          </Slots.iconPlaceholder>
+        )}
         {children && <Slots.content tooltip={tooltipResult}>{children}</Slots.content>}
       </Slots.root>
     );

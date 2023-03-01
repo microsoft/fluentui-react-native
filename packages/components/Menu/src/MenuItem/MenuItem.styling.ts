@@ -52,6 +52,8 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
         style: {
           height: tokens.iconSize,
           width: tokens.iconSize,
+          alignItems: 'center',
+          justifyContent: 'center',
           marginEnd: tokens.gap,
         },
       }),
@@ -59,12 +61,12 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
     ),
     imgIcon: buildProps(
       (tokens: MenuItemTokens) => ({
-        style: { tintColor: tokens.iconColor, height: tokens.iconSize, width: tokens.iconSize, marginEnd: tokens.gap },
+        style: { tintColor: tokens.iconColor, height: tokens.iconSize, width: tokens.iconSize },
       }),
       ['gap', 'iconColor', 'iconSize'],
     ),
     fontOrSvgIcon: buildProps(
-      (tokens: MenuItemTokens) => ({ color: tokens.iconColor, size: tokens.iconSize, style: { marginEnd: tokens.gap } }),
+      (tokens: MenuItemTokens) => ({ color: tokens.iconColor, size: tokens.iconSize }),
       ['gap', 'iconColor', 'iconSize'],
     ),
     submenuIndicator: buildProps(

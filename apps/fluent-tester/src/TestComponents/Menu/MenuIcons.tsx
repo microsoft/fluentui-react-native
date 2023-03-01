@@ -5,7 +5,7 @@ import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Menu, MenuItem, MenuItemCheckbox, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 
-import { testImage, svgProps, iconProps } from '../Common/iconExamples';
+import { testImage, svgProps } from '../Common/iconExamples';
 import { stackStyle } from '../Common/styles';
 
 const fontBuiltInProps = {
@@ -17,14 +17,16 @@ const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.O
 export const MenuIcons: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Menu hasIcons>
+      <Menu hasCheckmarks hasIcons>
         <MenuTrigger>
           <Button>Items with icons</Button>
         </MenuTrigger>
         <MenuPopover maxWidth={160}>
           <MenuList>
             <MenuItem icon={{ source: testImage }}>Option 1 image icon</MenuItem>
-            <MenuItem icon={{ fontSource: fontBuiltInProps }}>Option 2 font icon</MenuItem>
+            <MenuItem icon={{ fontSource: { ...fontBuiltInProps, style: { textAlign: 'center', marginTop: -1 } } }}>
+              Option 2 font icon
+            </MenuItem>
             {svgIconsEnabled && <MenuItem icon={{ svgSource: svgProps }}>Option 3 svg icon</MenuItem>}
             <MenuItem>Option 4 no icon</MenuItem>
             <MenuItemCheckbox icon={{ source: testImage }} name="Option4">

@@ -51,19 +51,21 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
         style: {
           height: tokens.iconSize,
           width: tokens.iconSize,
+          alignItems: 'center',
+          justifyContent: 'center',
           marginEnd: tokens.gap,
         },
       }),
       ['checkmarkSize', 'gap'],
     ),
     imgIcon: buildProps(
-      (tokens: MenuItemTokens) => ({
-        style: { tintColor: tokens.iconColor, height: tokens.iconSize, width: tokens.iconSize, marginEnd: tokens.gap },
+      (tokens: MenuItemCheckboxTokens) => ({
+        style: { tintColor: tokens.iconColor, height: tokens.iconSize, width: tokens.iconSize },
       }),
       ['gap', 'iconColor', 'iconSize'],
     ),
     fontOrSvgIcon: buildProps(
-      (tokens: MenuItemTokens) => ({ color: tokens.iconColor, size: tokens.iconSize, style: { marginEnd: tokens.gap } }),
+      (tokens: MenuItemCheckboxTokens) => ({ color: tokens.iconColor, size: tokens.iconSize }),
       ['gap', 'iconColor', 'iconSize'],
     ),
   },
