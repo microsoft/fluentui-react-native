@@ -11,6 +11,7 @@ import TestSvg from '../../../assets/test.svg';
 import { commonTestStyles } from '../Common/styles';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
+import { BugBashDivider } from './BugBashDividerTest';
 
 const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 const PaddedDivider = Divider.customize({ paddingVertical: 4, thickness: 2 });
@@ -111,8 +112,12 @@ export const CustomDividers: React.FunctionComponent = () => (
 
 const dividerSections: TestSection[] = [
   {
-    name: 'Horizontal Dividers',
+    name: 'Bug Bash Divider Section',
     testID: DIVIDER_TESTPAGE,
+    component: BugBashDivider,
+  },
+  {
+    name: 'Horizontal Dividers',
     component: HorizontalDividers,
   },
   {
