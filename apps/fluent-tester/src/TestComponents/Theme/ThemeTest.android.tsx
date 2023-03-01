@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Theme, useTheme } from '@fluentui-react-native/theme-types';
+import { Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { THEME_TESTPAGE } from '../../../../E2E/src/Theme/consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Text as TextRN, View } from 'react-native';
+import { Text as TextRN, View, ColorValue, ViewStyle } from 'react-native';
 import { Text } from '@fluentui/react-native';
-
+import { commonTestStyles } from '../Common/styles';
+import { StyleSheet } from 'react-native';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
@@ -19,9 +20,31 @@ const getThemedStyles = themedStyleSheet((theme: Theme) => {
   };
 });
 
+const styles = StyleSheet.create({
+  swatchItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  panel: {
+    ...commonTestStyles.view,
+    borderWidth: 2,
+    padding: 12,
+    margin: 8,
+  },
+  pickerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  stackStyle: {
+    borderWidth: 2,
+    padding: 12,
+    margin: 8,
+  },
+});
+
 const Panel: React.FunctionComponent = () => {
   const theme = useFluentTheme();
-  const theme2 = useTheme();
   const themedStyles = getThemedStyles(theme);
 
   return (
@@ -30,24 +53,71 @@ const Panel: React.FunctionComponent = () => {
 
       <Text style={{ color: theme.colors.neutralForeground1 }}>neutralForeground1 styled text</Text>
 
-      <Text style={{ color: theme2.colors.hostColorPink }}>hostColorPink styled text</Text>
+      <Text style={{ color: theme.colors.hostColorPink }}>hostColorPink styled text</Text>
 
-      <Text style={{ color: theme2.colors.hostColorButtonBackground }}>hostColorButtonBackground styled text</Text>
+      <Text style={{ color: theme.colors.hostColorButtonBackground }}>hostColorButtonBackground styled text</Text>
 
-      <Text style={{ color: theme2.colors.hostColorBrandText }}>hostColorBrandText styled text</Text>
+      <Text style={{ color: theme.colors.hostColorBrandText }}>hostColorBrandText styled text</Text>
 
-      <TextRN style={{ color: theme2.colors.yellowBrandColor }}>yellowBrandColor styled text</TextRN>
+      <TextRN style={{ color: theme.colors.yellowBrandColor }}>yellowBrandColor styled text</TextRN>
 
       <TextRN style={themedStyles.swatch}>Styled RN Text</TextRN>
     </View>
   );
 };
 
+const getSwatchColorStyle = (name: string, color: ColorValue): ViewStyle => {
+  styles[name] = styles[name] || { backgroundColor: color };
+  return styles[name];
+};
+
+type SemanticColorProps = { color: ColorValue; name: string };
+const SemanticColor: React.FunctionComponent<SemanticColorProps> = (p: SemanticColorProps) => {
+  const themedStyles = getThemedStyles(useFluentTheme());
+  return (
+    <View style={styles.swatchItem}>
+      <View style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]} />
+      <Text>{p.name}</Text>
+    </View>
+  );
+};
+
+const SwatchList: React.FunctionComponent = () => {
+  const theme = useFluentTheme();
+  const palette = theme.colors;
+
+  const aggregator = React.useCallback(
+    (key: string) => {
+      return { key: key + ' (' + (palette[key] as string) + ')', color: palette[key] };
+    },
+    [palette],
+  );
+
+  const flattenArray = React.useCallback(() => {
+    return Object.keys(palette).sort().map(aggregator);
+  }, [palette, aggregator]);
+
+  const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
+  const renderSwatch = React.useCallback((item) => {
+    const { color, key } = item;
+    return <SemanticColor key={key} color={color} name={key} />;
+  }, []);
+  return (
+    <View style={commonTestStyles.view}>
+      <Text>getColorsAndroid(theme: ITheme).palette</Text>
+      <View style={styles.stackStyle}>{paletteAsArray.map((item) => renderSwatch(item))}</View>
+    </View>
+  );
+};
 const themeSections: TestSection[] = [
   {
     name: 'Component Examples',
     testID: THEME_TESTPAGE,
     component: Panel,
+  },
+  {
+    name: 'Theme.colors',
+    component: () => <SwatchList />,
   },
 ];
 
@@ -57,7 +127,7 @@ export const ThemeTest: React.FunctionComponent = () => {
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    androidStatus: 'Beta',
   };
 
   const description =
