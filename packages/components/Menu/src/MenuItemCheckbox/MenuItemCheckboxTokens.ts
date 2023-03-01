@@ -15,6 +15,8 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   fontSize: globalTokens.font.size300,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
+  iconColor: t.colors.neutralForeground2,
+  iconSize: 16,
   minHeight: 32,
   minWidth: 160,
   maxWidth: 300,
@@ -22,6 +24,7 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   hovered: {
     backgroundColor: t.colors.neutralBackground1Hover,
     color: t.colors.neutralForeground2Hover,
+    iconColor: t.colors.neutralForeground2Hover,
     checked: {
       checkmarkColor: t.colors.neutralForeground2Hover,
       checkmarkVisibility: 1,
@@ -30,6 +33,7 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
     color: t.colors.neutralForeground2Pressed,
+    iconColor: t.colors.neutralForeground2Pressed,
     checked: {
       checkmarkColor: t.colors.neutralForeground2Pressed,
       checkmarkVisibility: 1,
@@ -38,6 +42,7 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   disabled: {
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForegroundDisabled,
+    iconColor: t.colors.neutralForegroundDisabled,
     checked: {
       checkmarkColor: t.colors.neutralForegroundDisabled,
       checkmarkVisibility: 1,
