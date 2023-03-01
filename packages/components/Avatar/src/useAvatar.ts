@@ -1,4 +1,5 @@
 import type { ImageProps, ImageSourcePropType } from 'react-native';
+import { Platform } from 'react-native';
 
 import type { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { createIconProps } from '@fluentui-react-native/icon';
@@ -74,6 +75,11 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
       },
       ...restIconProps,
     };
+  }
+
+  const disableBadge = Platform.OS === 'android' && size === 16;
+  if (disableBadge) {
+    state.showBadge = false;
   }
 
   return {

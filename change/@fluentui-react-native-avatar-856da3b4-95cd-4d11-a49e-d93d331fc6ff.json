@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Complete presence badge styling",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
