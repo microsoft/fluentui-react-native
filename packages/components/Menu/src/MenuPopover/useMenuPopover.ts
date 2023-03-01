@@ -67,6 +67,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
         case 'Tab':
         case 'Home':
         case 'End':
+        case 'Escape':
           e.stopPropagation();
       }
     },
@@ -85,6 +86,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
         case 'Tab':
         case 'Home':
         case 'End':
+        case 'Escape':
           e.stopPropagation();
       }
     },
