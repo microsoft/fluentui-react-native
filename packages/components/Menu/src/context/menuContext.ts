@@ -17,6 +17,7 @@ export const MenuContext = React.createContext<MenuContextValue>({
   checked: [],
   defaultChecked: [],
   hasCheckmarks: false,
+  hasIcons: false,
   hasTooltips: false,
   isSubmenu: false,
   open: false,
