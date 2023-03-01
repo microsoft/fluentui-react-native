@@ -30,6 +30,7 @@
     "@fluentui-react-native/callout": ">=0.23.3 <1.0.0",
     "@fluentui-react-native/focus-zone": ">=0.11.32 <1.0.0",
     "@fluentui-react-native/framework": "0.9.3",
+    "@fluentui-react-native/icon": "^0.17.14",
     "@fluentui-react-native/interactive-hooks": ">=0.22.20 <1.0.0",
     "@fluentui-react-native/text": ">=0.19.22 <1.0.0",
     "@fluentui-react-native/theme-tokens": ">=0.24.3 <1.0.0",
