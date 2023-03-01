@@ -24,6 +24,7 @@ import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
 import { stackStyle } from '../Common/styles';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
+import { MenuIcons } from './MenuIcons';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -273,6 +274,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu with tooltips on items',
     component: MenuTooltips,
+  },
+  {
+    name: 'Menu with icons',
+    component: MenuIcons,
   },
   {
     name: 'Menu Submenu',
