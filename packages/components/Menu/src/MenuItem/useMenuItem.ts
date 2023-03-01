@@ -35,7 +35,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
         ((isRtl && e.nativeEvent.key === 'ArrowLeft') || (!isRtl && e.nativeEvent.key === 'ArrowRight'));
 
       if (!disabled && (!isArrowKey || isArrowOpen)) {
-        onBlur();
+        onBlur(e);
         onClick?.(e);
       }
 
