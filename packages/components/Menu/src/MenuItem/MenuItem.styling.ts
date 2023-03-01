@@ -47,6 +47,26 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
       },
       ['color', ...fontStyles.keys],
     ),
+    iconPlaceholder: buildProps(
+      (tokens: MenuItemTokens) => ({
+        style: {
+          height: tokens.iconSize,
+          width: tokens.iconSize,
+          marginEnd: tokens.gap,
+        },
+      }),
+      ['checkmarkSize', 'gap'],
+    ),
+    imgIcon: buildProps(
+      (tokens: MenuItemTokens) => ({
+        style: { tintColor: tokens.iconColor, height: tokens.iconSize, width: tokens.iconSize, marginEnd: tokens.gap },
+      }),
+      ['gap', 'iconColor', 'iconSize'],
+    ),
+    fontOrSvgIcon: buildProps(
+      (tokens: MenuItemTokens) => ({ color: tokens.iconColor, size: tokens.iconSize, style: { marginEnd: tokens.gap } }),
+      ['gap', 'iconColor', 'iconSize'],
+    ),
     submenuIndicator: buildProps(
       (tokens: MenuItemTokens) => {
         return {
