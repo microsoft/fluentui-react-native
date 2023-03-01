@@ -17,7 +17,7 @@ const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.O
 export const MenuIcons: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Menu hasCheckmarks hasIcons>
+      <Menu hasIcons>
         <MenuTrigger>
           <Button>Items with icons</Button>
         </MenuTrigger>
