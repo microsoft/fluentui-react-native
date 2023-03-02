@@ -16,6 +16,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { E2EMenuTest } from './E2EMenuTest';
+import { MenuIcons } from './MenuIcons';
 import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
 import { MenuTooltips } from './MenuTooltips';
@@ -24,7 +25,6 @@ import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
 import { stackStyle } from '../Common/styles';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
-import { MenuIcons } from './MenuIcons';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
