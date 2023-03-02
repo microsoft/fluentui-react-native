@@ -56,7 +56,7 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
 
   return (
     <View style={shadowTestPageStyles(theme).backgroundColor}>
-      <Text style={themedStyles.headerTextPadding}>
+      {/* <Text style={themedStyles.headerTextPadding}>
         The following tests have a Shadow16 set on a child view that has some specific props.
       </Text>
       <View>
@@ -111,7 +111,7 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
             <Text variant="bodySemibold">flexWrap: wrap</Text>
           </View>
         </Shadow>
-      </View>
+      </View> */}
     </View>
   );
 };

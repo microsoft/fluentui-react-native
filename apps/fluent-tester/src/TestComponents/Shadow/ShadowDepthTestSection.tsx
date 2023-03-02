@@ -58,7 +58,7 @@ export const ShadowDepthTestSection: React.FunctionComponent = () => {
 
   return (
     <View style={backgroundViewStyle}>
-      <ShadowTestBox shadowDepthText="Shadow 2" shadowToken={theme.shadows.shadow2} />
+      {/* <ShadowTestBox shadowDepthText="Shadow 2" shadowToken={theme.shadows.shadow2} />
       <ShadowTestBox shadowDepthText="Shadow 4" shadowToken={theme.shadows.shadow4} />
       <ShadowTestBox shadowDepthText="Shadow 8" shadowToken={theme.shadows.shadow8} />
       <ShadowTestBox shadowDepthText="Shadow 16" shadowToken={theme.shadows.shadow16} />
@@ -69,7 +69,7 @@ export const ShadowDepthTestSection: React.FunctionComponent = () => {
       <ShadowTestBox shadowDepthText="Brand Shadow 8" shadowToken={theme.shadows.shadow8brand} isBrand={true} />
       <ShadowTestBox shadowDepthText="Brand Shadow 16" shadowToken={theme.shadows.shadow16brand} isBrand={true} />
       <ShadowTestBox shadowDepthText="Brand Shadow 28" shadowToken={theme.shadows.shadow28brand} isBrand={true} />
-      <ShadowTestBox shadowDepthText="Brand Shadow 64" shadowToken={theme.shadows.shadow64brand} isBrand={true} />
+      <ShadowTestBox shadowDepthText="Brand Shadow 64" shadowToken={theme.shadows.shadow64brand} isBrand={true} /> */}
     </View>
   );
 };
