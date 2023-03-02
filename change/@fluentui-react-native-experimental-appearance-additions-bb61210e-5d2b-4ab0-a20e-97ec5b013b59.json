@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Support multiple trait collections on js side",
+  "packageName": "@fluentui-react-native/experimental-appearance-additions",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
