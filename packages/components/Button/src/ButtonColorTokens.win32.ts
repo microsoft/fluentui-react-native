@@ -109,6 +109,7 @@ const highContrastColors = {
   color: PlatformColor('ButtonText'),
   iconColor: PlatformColor('ButtonText'),
   disabled: {
+    backgroundColor: PlatformColor('ButtonFace'),
     borderColor: PlatformColor('GrayText'),
     color: PlatformColor('GrayText'),
     iconColor: PlatformColor('GrayText'),
