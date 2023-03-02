@@ -37,6 +37,7 @@
     "@fluentui-react-native/styling-utils": ">=0.4.4 <1.0.0",
     "@fluentui-react-native/theme-tokens": ">=0.24.3 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.30.3 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.23.5 <1.0.0",
     "@fluentui-react-native/text": ">=0.19.23 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.20.10 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.4 <1.0.0",
