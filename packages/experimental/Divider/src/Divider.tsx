@@ -35,7 +35,7 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   [tokens, cache] = patchTokens(tokens, cache, {
     flexAfter: props.alignContent === 'end' ? 0 : 1,
     flexBefore: props.alignContent === 'start' ? 0 : 1,
-    minHeight: props.vertical ? globalTokens.size240 : 0,
+    minHeight: props.vertical ? globalTokens.size200 : 0,
     ...colorsFromAppearance(props.appearance, tokens, theme),
   });
 
