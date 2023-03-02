@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Tue, 28 Feb 2023 21:34:10 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Mar 2023 19:11:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.16
+
+Thu, 02 Mar 2023 19:11:57 GMT
+
+### Patches
+
+- Change icon to accept color and size to make it more compatible to styling (ruaraki@microsoft.com)
 
 ## 0.17.15
 

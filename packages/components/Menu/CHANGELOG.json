@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Thu, 02 Mar 2023 19:11:57 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.15",
+      "version": "1.4.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "da29d8e517ff5aa9e203506bffe7366ec3d967b6",
+            "comment": "Add icon support to menu items"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.16",
+            "commit": "da29d8e517ff5aa9e203506bffe7366ec3d967b6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.32.37",
+            "commit": "da29d8e517ff5aa9e203506bffe7366ec3d967b6"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Mar 2023 23:22:12 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.14",
       "version": "1.4.14",

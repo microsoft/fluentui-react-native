@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Thu, 02 Mar 2023 19:11:57 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.7.34",
+      "version": "0.7.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/button to v0.32.37",
+            "commit": "da29d8e517ff5aa9e203506bffe7366ec3d967b6"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Feb 2023 21:34:10 GMT",
       "tag": "@fluentui-react-native/dropdown_v0.7.33",
       "version": "0.7.33",

@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 01 Mar 2023 23:22:12 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Mar 2023 19:11:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.24
+
+Thu, 02 Mar 2023 19:11:57 GMT
+
+### Patches
+
+- Add test (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.7.1
+- Bump @fluentui-react-native/badge to v0.4.32
+- Bump @fluentui-react-native/button to v0.32.37
+- Bump @fluentui-react-native/divider to v0.3.4
+- Bump @fluentui-react-native/dropdown to v0.7.34
+- Bump @fluentui-react-native/experimental-button to v0.16.95
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.36
+- Bump @fluentui-react-native/experimental-tabs to v0.8.36
+- Bump @fluentui-react-native/icon to v0.17.16
+- Bump @fluentui-react-native/menu to v1.4.15
+- Bump @fluentui-react-native/notification to v0.21.38
+- Bump @fluentui/react-native to v0.36.7
 
 ## 0.134.23
 

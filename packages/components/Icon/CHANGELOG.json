@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Thu, 02 Mar 2023 19:11:57 GMT",
+      "tag": "@fluentui-react-native/icon_v0.17.16",
+      "version": "0.17.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/icon",
+            "commit": "da29d8e517ff5aa9e203506bffe7366ec3d967b6",
+            "comment": "Change icon to accept color and size to make it more compatible to styling"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Feb 2023 21:34:10 GMT",
       "tag": "@fluentui-react-native/icon_v0.17.15",
       "version": "0.17.15",
