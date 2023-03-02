@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/spinner
 
-This log was last generated on Tue, 28 Feb 2023 12:20:28 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Feb 2023 21:34:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.5
+
+Tue, 28 Feb 2023 21:34:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.19.23
 
 ## 0.2.4
 
