@@ -71,7 +71,6 @@ function getPresenceIconPathBySize(size: BadgeSize): PresenceBadgeIconPath {
 }
 
 export function getIconPath(status: PresenceBadgeStatus, isOutOfOffice: boolean, size: BadgeSize): string {
-  console.log(size);
   const presenceIconPaths: PresenceBadgeIconPath = getPresenceIconPathBySize(size);
   switch (status) {
     case 'available':
