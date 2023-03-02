@@ -9,7 +9,7 @@ import type { SizeClass } from './NativeAppearanceAdditions.types';
 
 const eventEmitter = NativeAppearanceAdditions ? new NativeEventEmitter(NativeAppearanceAdditions as any) : undefined;
 
-export function useHorizontalSizeClass(): SizeClass {
+export function useHorizontalSizeClass(rootTag: number): SizeClass {
   if (!eventEmitter) {
     return 'regular';
   }
@@ -18,7 +18,7 @@ export function useHorizontalSizeClass(): SizeClass {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const subscription = useMemo(
     () => ({
-      getCurrentValue: () => appearanceAdditions().horizontalSizeClass,
+      getCurrentValue: () => appearanceAdditions().horizontalSizeClassForRootTag(rootTag),
       subscribe: (callback) => {
         const appearanceSubscription = eventEmitter.addListener('appearanceChanged', callback);
         return () => {

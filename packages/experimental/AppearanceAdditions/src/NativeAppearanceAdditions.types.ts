@@ -1,8 +1,10 @@
 export interface AppearanceAdditions {
-  readonly horizontalSizeClass: SizeClass;
-  readonly userInterfaceLevel: UserInterfaceLevel;
-  readonly accessibilityContrastOption: AccessibilityContrastOption;
+  horizontalSizeClassForRootTag(rootTag: number): SizeClass;
+  userInterfaceLevelForRootTag(rootTag: number): UserInterfaceLevel;
+  accessibilityContrastOptionForRootTag(rootTag: number): AccessibilityContrastOption;
 }
+
+export const RootTagKey = 'rootTag';
 
 export const HorizontalSizeClassKey = 'horizontalSizeClass';
 export type SizeClass = 'compact' | 'regular';
