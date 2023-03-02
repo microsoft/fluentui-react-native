@@ -49,8 +49,8 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
     iconPlaceholder: buildProps(
       (tokens: MenuItemCheckboxTokens) => ({
         style: {
-          height: tokens.iconSize,
-          width: tokens.iconSize,
+          minHeight: tokens.iconSize,
+          minWidth: tokens.iconSize,
           alignItems: 'center',
           justifyContent: 'center',
           marginEnd: tokens.gap,

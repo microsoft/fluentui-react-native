@@ -50,8 +50,8 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
     iconPlaceholder: buildProps(
       (tokens: MenuItemTokens) => ({
         style: {
-          height: tokens.iconSize,
-          width: tokens.iconSize,
+          minHeight: tokens.iconSize,
+          minWidth: tokens.iconSize,
           alignItems: 'center',
           justifyContent: 'center',
           marginEnd: tokens.gap,
