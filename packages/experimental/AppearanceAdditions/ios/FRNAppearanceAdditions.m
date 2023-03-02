@@ -3,6 +3,7 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTConstants.h>
 #import <React/RCTUtils.h>
+#import <React/UIView+React.h>
 
 NSString *const FRNAppearanceSizeClassCompact = @"compact";
 NSString *const FRNAppearanceSizeClassRegular = @"regular";
@@ -67,9 +68,10 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
 
 @implementation FRNAppearanceAdditions {
     BOOL _hasListeners;
-    NSString *_horizontalSizeClass;
-    NSString *_userInterfaceLevel;
-    NSString *_accessibilityContrastOption;
+    
+    NSMutableDictionary<NSNumber *, NSString *> * _rootTagHorizontalSizeClassMap;
+    NSMutableDictionary<NSNumber *, NSString *> * _rootTagUserInterfaceLevelMap;
+    NSMutableDictionary<NSNumber *, NSString *> * _rootTagAccessibilityContrastMap;
 }
 
 + (BOOL)requiresMainQueueSetup {
@@ -78,17 +80,17 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass)
 {
-    return _horizontalSizeClass;
+    return _rootTagHorizontalSizeClassMap;
 }
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel)
 {
-    return _userInterfaceLevel;
+    return _rootTagUserInterfaceLevelMap;
 }
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 {
-    return _accessibilityContrastOption;
+    return _rootTagAccessibilityContrastMap;
 }
 
 #pragma mark - RCTEventEmitter
@@ -105,22 +107,23 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 - (void)startObserving {
     _hasListeners = YES;
     
-    // Note that [UITraitCollection currentTraitCollection] always returns the same default trait collection,
-    // presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
-    // (which happens when a view gets added to the view hierachy). In order to get the right trait collection,
-    // we need to access a view that's been added to the view hierarchy
-    UIViewController *viewControllerWithInitialTraitCollection = RCTPresentedViewController();
-    UITraitCollection *initialTraitCollection;
+    _rootTagHorizontalSizeClassMap = [NSMutableDictionary new];
+    _rootTagUserInterfaceLevelMap = [NSMutableDictionary new];
+    _rootTagAccessibilityContrastMap = [NSMutableDictionary new];
     
-    if (viewControllerWithInitialTraitCollection != nil) {
-        initialTraitCollection = [viewControllerWithInitialTraitCollection traitCollection];
-    } else {
-        initialTraitCollection = [UITraitCollection currentTraitCollection];
+    for (UIWindow *window in RCTSharedApplication().windows)
+    {
+        NSNumber *rootTag = [[[window rootViewController] view] reactTag];
+        
+        if (rootTag != nil)
+        {
+            UITraitCollection *windowTraitCollection = [window traitCollection];
+            
+            _rootTagHorizontalSizeClassMap[rootTag] = RCTHorizontalSizeClassPreference(windowTraitCollection);
+            _rootTagUserInterfaceLevelMap[rootTag] = RCTUserInterfaceLevelPreference(windowTraitCollection);
+            _rootTagAccessibilityContrastMap[rootTag] = RCTAccessibilityContrastPreference(windowTraitCollection);
+        }
     }
-    
-    _horizontalSizeClass = RCTHorizontalSizeClassPreference(initialTraitCollection);
-    _userInterfaceLevel = RCTUserInterfaceLevelPreference(initialTraitCollection);
-    _accessibilityContrastOption = RCTAccessibilityContrastPreference(initialTraitCollection);
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
@@ -145,18 +148,23 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
         NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference(traitCollection);
         NSString *userInterfaceLevel = RCTUserInterfaceLevelPreference(traitCollection);
         NSString *accessibilityContrastOption = RCTAccessibilityContrastPreference(traitCollection);
+        
+        NSNumber *rootTag = [[[notification object] contentView] reactTag];
 
-        if (![horizontalSizeClass isEqualToString:_horizontalSizeClass] ||
-            ![userInterfaceLevel isEqualToString:_userInterfaceLevel] ||
-            ![accessibilityContrastOption isEqualToString:_accessibilityContrastOption]) {
-            _horizontalSizeClass = horizontalSizeClass;
-            _userInterfaceLevel = userInterfaceLevel;
-            _accessibilityContrastOption = accessibilityContrastOption;
+        if (![horizontalSizeClass isEqualToString: _rootTagHorizontalSizeClassMap[rootTag]] ||
+            ![userInterfaceLevel isEqualToString:_rootTagUserInterfaceLevelMap[rootTag]] ||
+            ![accessibilityContrastOption isEqualToString:_rootTagAccessibilityContrastMap[rootTag]]) {
+            
+            _rootTagHorizontalSizeClassMap[rootTag] = horizontalSizeClass;
+            _rootTagUserInterfaceLevelMap[rootTag] = userInterfaceLevel;
+            _rootTagAccessibilityContrastMap[rootTag] = accessibilityContrastOption;
+            
             [self sendEventWithName:@"appearanceChanged"
                                body:@{
-                                        @"horizontalSizeClass": _horizontalSizeClass,
-                                        @"userInterfaceLevel": _userInterfaceLevel,
-                                        @"accessibilityContrastOption": _accessibilityContrastOption,
+                                        @"rootTag": rootTag,
+                                        @"horizontalSizeClass": horizontalSizeClass,
+                                        @"userInterfaceLevel": userInterfaceLevel,
+                                        @"accessibilityContrastOption": accessibilityContrastOption,
                                     }];
         }
     }
