@@ -21,7 +21,7 @@ export const MenuIcons: React.FunctionComponent = () => {
         <MenuTrigger>
           <Button>Items with icons</Button>
         </MenuTrigger>
-        <MenuPopover maxWidth={160}>
+        <MenuPopover>
           <MenuList>
             <MenuItem icon={{ source: testImage }}>Option 1 image icon</MenuItem>
             <MenuItem icon={{ fontSource: { ...fontBuiltInProps, style: { textAlign: 'center', marginTop: -1 } } }}>
