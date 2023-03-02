@@ -13,6 +13,8 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   fontSize: globalTokens.font.size200,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
+  iconColor: t.colors.neutralForeground1,
+  iconSize: 16,
   minHeight: 24,
   minWidth: 128,
   maxWidth: 300,
@@ -24,21 +26,25 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   hovered: {
     backgroundColor: t.colors.neutralBackground1Hover,
     color: t.colors.neutralForeground1Hover,
+    iconColor: t.colors.neutralForeground1Hover,
     submenuIndicatorColor: t.colors.neutralForeground1Hover,
   },
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
     color: t.colors.neutralForeground1Pressed,
+    iconColor: t.colors.neutralForeground1Pressed,
     submenuIndicatorColor: t.colors.neutralForeground1Pressed,
   },
   disabled: {
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForegroundDisabled,
+    iconColor: t.colors.neutralForegroundDisabled,
     submenuIndicatorColor: t.colors.neutralForegroundDisabled,
   },
   focused: {
     backgroundColor: t.colors.neutralBackground1Hover,
     color: t.colors.neutralForeground1Hover,
+    iconColor: t.colors.neutralForeground1Hover,
     submenuIndicatorColor: t.colors.neutralForeground1Hover,
   },
 });
