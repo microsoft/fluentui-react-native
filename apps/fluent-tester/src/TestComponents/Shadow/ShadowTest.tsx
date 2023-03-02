@@ -1,26 +1,26 @@
 import * as React from 'react';
 
 import { ShadowButtonTestSection } from './ShadowButtonTestSection';
-import { ShadowDepthTestSection } from './ShadowDepthTestSection';
-import { ShadowWithDifferentPropsTestSection } from './ShadowWithDifferentPropsTestSection';
-import { SHADOW_TESTPAGE } from '../../../../E2E/src/Shadow/consts';
+// import { ShadowDepthTestSection } from './ShadowDepthTestSection';
+// import { ShadowWithDifferentPropsTestSection } from './ShadowWithDifferentPropsTestSection';
+// import { SHADOW_TESTPAGE } from '../../../../E2E/src/Shadow/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
 const shadowSections: TestSection[] = [
-  {
-    name: 'Shadow Depth Ramp',
-    testID: SHADOW_TESTPAGE,
-    component: ShadowDepthTestSection,
-  },
+  // {
+  //   name: 'Shadow Depth Ramp',
+  //   testID: SHADOW_TESTPAGE,
+  //   component: ShadowDepthTestSection,
+  // },
   {
     name: 'Shadows on Button Examples',
     component: ShadowButtonTestSection,
   },
-  {
-    name: 'Shadows with Different Props Test',
-    component: ShadowWithDifferentPropsTestSection,
-  },
+  // {
+  //   name: 'Shadows with Different Props Test',
+  //   component: ShadowWithDifferentPropsTestSection,
+  // },
 ];
 
 export const ShadowTest: React.FunctionComponent = () => {

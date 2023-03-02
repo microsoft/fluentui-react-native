@@ -4,9 +4,9 @@ import { Platform, View, StyleSheet, Pressable } from 'react-native';
 import { FAB, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
-import { useFluentTheme } from '@fluentui-react-native/framework';
+import { useTheme } from '@fluentui-react-native/framework';
 
-import { shadowTestPageStyles } from './ShadowTestPageStyles';
+// import { shadowTestPageStyles } from './ShadowTestPageStyles';
 import { iconProps } from '../Common/iconExamples';
 import { stackStyle } from '../Common/styles';
 
@@ -20,59 +20,38 @@ const CustomFABShadow64 = FAB.customize({
 const platformSupportsShadow = Platform.OS !== 'android';
 const platformSupportsFAB = Platform.OS === 'ios' || Platform.OS === 'android';
 
+export const ShadowBlockTest: React.FunctionComponent = () => {
+  const t = useTheme();
+  const [focused, setFocused] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
+
+  return (
+    <Shadow shadowToken={hovered ? t.shadows.shadow8 : undefined}>
+      <Pressable
+        onHoverIn={() => setHovered(true)}
+        onHoverOut={() => setHovered(false)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+      >
+        <View style={{ borderWidth: focused ? 3 : 1, borderColor: 'black', backgroundColor: 'red', margin: 10, width: 300 }}>
+          <Text>hover = {hovered.valueOf().toString()}</Text>
+          <Text>focus = {focused.valueOf().toString()}</Text>
+        </View>
+      </Pressable>
+    </Shadow>
+  );
+};
+
 export const ShadowButtonTestSection: React.FunctionComponent = () => {
-  const t = useFluentTheme();
-  const [hovered1, setHovered1] = React.useState(false);
-  const [hovered2, setHovered2] = React.useState(false);
-  const [hovered3, setHovered3] = React.useState(false);
+  const t = useTheme();
 
   if (platformSupportsShadow) {
     return (
       <View>
-        <Shadow shadowToken={hovered1 ? t.shadows.shadow8 : undefined}>
-          <Pressable
-            onHoverIn={() => {
-              console.log('on hover in 1');
-              setHovered1(true);
-            }}
-            onHoverOut={() => {
-              console.log('on hover out 1');
-              setHovered1(false);
-            }}
-          >
-            <View style={{ width: 50, height: 50, backgroundColor: 'red', margin: 10 }}></View>
-          </Pressable>
-        </Shadow>
-        <Shadow shadowToken={hovered2 ? t.shadows.shadow8 : undefined}>
-          <Pressable
-            onHoverIn={() => {
-              console.log('on hover in 2');
-              setHovered2(true);
-            }}
-            onHoverOut={() => {
-              console.log('on hover out 2');
-              setHovered2(false);
-            }}
-          >
-            <View style={{ width: 50, height: 50, backgroundColor: 'red', margin: 10 }}></View>
-          </Pressable>
-        </Shadow>
-        <Shadow shadowToken={hovered3 ? t.shadows.shadow8 : undefined}>
-          <Pressable
-            onHoverIn={() => {
-              console.log('on hover in 3');
-              setHovered3(true);
-            }}
-            onHoverOut={() => {
-              console.log('on hover out 3');
-              setHovered3(false);
-            }}
-          >
-            <View style={{ width: 50, height: 50, backgroundColor: 'red', margin: 10 }}></View>
-          </Pressable>
-        </Shadow>
-
-        {/* {platformSupportsShadow && platformSupportsFAB && (
+        <ShadowBlockTest />
+        <ShadowBlockTest />
+        <ShadowBlockTest />
+        {platformSupportsShadow && platformSupportsFAB && (
           <View style={stackStyle}>
             <FAB icon={iconProps} style={styles.marginBetweenComponentsWithShadow}>
               FAB with default shadow
@@ -94,7 +73,7 @@ export const ShadowButtonTestSection: React.FunctionComponent = () => {
               <Button style={styles.marginBetweenComponentsWithShadow}>Button without shadow</Button>
             </View>
           </View>
-        )} */}
+        )}
       </View>
     );
   } else {
