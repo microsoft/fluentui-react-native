@@ -19,6 +19,7 @@ export function setIsHighContrast(_isHighContrast: boolean) {
  *
  * @param t The Theme object. Required on win32.
  */
-export function isHighContrast(_t?: Theme) {
+export function isHighContrast(_t?: Theme): boolean {
   // noop, stub for mobile;
+  return false;
 }
