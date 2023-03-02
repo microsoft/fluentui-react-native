@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Tue, 28 Feb 2023 21:34:10 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.21",
+      "version": "0.22.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "593573fd9af7744bf4c0e843f36f3bbaea888106",
+            "comment": "useViewCommandFocus does not need to replace focus/blur methods except on win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:58 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.22.20",
       "version": "0.22.20",

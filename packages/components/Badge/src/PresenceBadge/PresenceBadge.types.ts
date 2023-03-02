@@ -4,13 +4,12 @@ import type { BadgeCoreProps, BadgeSlotProps } from '../';
 import type { BadgeCoreTokens, BadgeConfigurableProps } from '../Badge.types';
 
 export const presenceBadgeName = 'PresenceBadge';
-export const PresenceBadgeStatuses = ['doNotDisturb', 'busy', 'unknown', 'blocked', 'outOfOffice', 'away', 'available', 'offline'] as const;
+export const PresenceBadgeStatuses = ['doNotDisturb', 'busy', 'unknown', 'blocked', 'away', 'available', 'offline', 'outOfOffice'] as const;
 export type PresenceBadgeStatus = (typeof PresenceBadgeStatuses)[number];
 
 export interface PresenceBadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   available?: PresenceBadgeTokens;
   away?: PresenceBadgeTokens;
-  awayOutOfOffice?: PresenceBadgeTokens;
   offline?: PresenceBadgeTokens;
   outOfOffice?: PresenceBadgeTokens;
   doNotDisturb?: PresenceBadgeTokens;

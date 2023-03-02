@@ -44,8 +44,12 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       right: -globalTokens.size20,
     },
     available: getBadgeColor('lightGreen', t),
-    away: getBadgeColor('marigold', t),
-    awayOutOfOffice: getBadgeColor('berry', t),
+    away: {
+      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color['marigold'].primary,
+      outOfOffice: {
+        iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color['berry'].primary,
+      },
+    },
     busy: getBadgeColor('red', t),
     blocked: getBadgeColor('red', t),
     unknown: getBadgeColor('red', t),
