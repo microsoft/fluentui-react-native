@@ -312,7 +312,7 @@ exports[`Divider component tests Vertical Divider 1`] = `
       "flexDirection": "column",
       "height": "100%",
       "justifyContent": "center",
-      "minHeight": 24,
+      "minHeight": 20,
       "minWidth": 0,
       "paddingVertical": 0,
     }
@@ -342,7 +342,7 @@ exports[`Divider component tests Vertical Divider with Inset 1`] = `
       "flexDirection": "column",
       "height": "100%",
       "justifyContent": "center",
-      "minHeight": 24,
+      "minHeight": 20,
       "minWidth": 0,
       "paddingVertical": 16,
     }

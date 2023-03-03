@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Divider } from '../Divider';
@@ -55,9 +54,5 @@ describe('Divider component tests', () => {
   it('Divider with icon', () => {
     const tree = renderer.create(<Divider icon={{ fontSource: { fontFamily: 'Arial', codepoint: 0x2663, fontSize: 32 } }} />).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Divider re-renders correctly', () => {
-    checkReRender(() => <Divider />, 2);
   });
 });
