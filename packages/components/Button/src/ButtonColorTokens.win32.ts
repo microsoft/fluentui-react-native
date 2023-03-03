@@ -116,19 +116,16 @@ const highContrastColors = {
   },
   hovered: {
     backgroundColor: PlatformColor('Highlight'),
-    borderColor: PlatformColor('HighlightText'),
     color: PlatformColor('HighlightText'),
     iconColor: PlatformColor('HighlightText'),
   },
   pressed: {
     backgroundColor: PlatformColor('Highlight'),
-    borderColor: PlatformColor('HighlightText'),
     color: PlatformColor('HighlightText'),
     iconColor: PlatformColor('HighlightText'),
   },
   focused: {
     backgroundColor: PlatformColor('Highlight'),
-    borderColor: PlatformColor('HighlightText'),
     color: PlatformColor('HighlightText'),
     iconColor: PlatformColor('HighlightText'),
   },

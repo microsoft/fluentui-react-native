@@ -33,7 +33,6 @@ export const defaultToggleButtonColorTokens: TokenSettings<ToggleButtonTokens, T
 const highContrastColors = {
   checked: {
     backgroundColor: PlatformColor('Highlight'),
-    borderColor: PlatformColor('HighlightText'),
     color: PlatformColor('HighlightText'),
     iconColor: PlatformColor('HighlightText'),
   },
