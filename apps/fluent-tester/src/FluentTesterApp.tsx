@@ -2,9 +2,11 @@
 
 import * as React from 'react';
 import { Platform } from 'react-native';
-import { Theme } from '@fluentui-react-native/framework';
+
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
+import type { Theme } from '@fluentui-react-native/framework';
 import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+
 import type { FluentTesterProps } from './FluentTester';
 import { FluentTester } from './FluentTester';
 import { testerTheme } from './theme/index';
@@ -20,16 +22,16 @@ export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (prop
     testerTheme,
     () => {
       return {
-        colors: { brandBackground2: 'red' }, // overrides the buttonBackground color token, all other colors are kept in-tact
+        colors: { brandBackground2: 'red' }, // Overrides the buttonBackground color token, all other colors are kept in-tact.
       };
     },
     (theme: Theme) => {
       return {
         colors: {
-          neutralForeground1: theme.colors.brandBackground2, // neutralBackground1 is 'red' in theme here because of previous recipe applied..
-          hostColorPink: 'pink', // new custom color key.
-          hostColorBrandText: 'purple', // new custom color key.
-          hostColorButtonBackground: 'yellow', // new custom color key.
+          neutralForeground1: theme.colors.brandBackground2, // neutralBackground1 is 'red' in theme here because of previous recipe applied.
+          hostColorPink: 'pink', // New custom color key.
+          hostColorBrandText: 'purple', // New custom color key.
+          hostColorButtonBackground: 'yellow', // New custom color key.
         },
         spacing: {
           s1: '10px',
@@ -37,16 +39,17 @@ export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (prop
       };
     },
     () => {
-      // another recipe.
+      // Any other recipe.
       return {
         colors: {
-          yellowBrandColor: 'yellow', // new custom color key.
+          yellowBrandColor: 'yellow', // New custom color key.
           hostColorButtonBackground: 'green', // Overrides custom color key 'hostColorButtonBackground' - it is green in theme now.
         },
       };
     },
   );
 
+  // Use the custom colors for Android and iOS.
   const fluentTesterTheme: ThemeReference = isMobile ? customTheme : testerTheme;
 
   return (

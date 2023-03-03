@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { Theme } from '@fluentui-react-native/theme-types';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { THEME_TESTPAGE } from '../../../../E2E/src/Theme/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
-import { Text as TextRN, View, ColorValue, ViewStyle } from 'react-native';
-import { Text } from '@fluentui/react-native';
-import { commonTestStyles } from '../Common/styles';
+import type { ColorValue, ViewStyle } from 'react-native';
+import { Text as TextRN, View } from 'react-native';
 import { StyleSheet } from 'react-native';
+
+import { Text } from '@fluentui/react-native';
 import { useFluentTheme } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/theme-types';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+
+import { THEME_TESTPAGE } from '../../../../E2E/src/Theme/consts';
+import { commonTestStyles } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
