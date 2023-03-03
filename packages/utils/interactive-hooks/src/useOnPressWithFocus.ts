@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { GestureResponderEvent} from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 import { Platform } from 'react-native';
 
 export type OnPressCallback = (args: GestureResponderEvent) => void;
@@ -20,7 +20,7 @@ export function useOnPressWithFocus(focusRef: React.RefObject<any>, userCallback
 
       const platformSupportsFocus = ['windows', 'win32', 'macos'].includes(Platform.OS as string);
       if (platformSupportsFocus) {
-        focusRef?.current?.focus?.();
+        focusRef?.current?.focus();
       }
     },
     [userCallback, focusRef],
