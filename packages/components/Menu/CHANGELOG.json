@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 03 Mar 2023 15:38:20 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.17",
+      "version": "1.4.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "1a29b5bc54d319fdfb1104fd6eba77345521b151",
+            "comment": "Delay triggerHoverOut timeouts"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Mar 2023 06:47:26 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.16",
       "version": "1.4.16",
