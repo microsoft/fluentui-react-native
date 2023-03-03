@@ -35,7 +35,6 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   [tokens, cache] = patchTokens(tokens, cache, {
     flexAfter: props.alignContent === 'end' ? 0 : 1,
     flexBefore: props.alignContent === 'start' ? 0 : 1,
-    minHeight: props.vertical ? globalTokens.size200 : 0,
     ...colorsFromAppearance(props.appearance, tokens, theme),
   });
 
@@ -63,9 +62,13 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
     const hasContent = textContent !== undefined || props.icon !== undefined;
 
     // This style must be set here because we need to know if text content is passed in the final render to set the height correctly
+    let minHeight = 0;
+    if (props.vertical) {
+      minHeight = hasContent ? 84 : globalTokens.size200;
+    }
     const mergedRootProps = {
       ...rootProps,
-      style: mergeStyles(rootProps.style, props.vertical && hasContent ? { minHeight: 84 } : {}),
+      style: mergeStyles(rootProps.style, { minHeight }),
     };
 
     // If there's no content, then the before line should always take up the full width / height of the root slot
