@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-drawer",
   "entries": [
     {
+      "date": "Fri, 03 Mar 2023 06:47:26 GMT",
+      "tag": "@fluentui-react-native/experimental-drawer_v0.2.46",
+      "version": "0.2.46",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-drawer",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.4",
+            "commit": "4659b74650377d2f746a81a321346a481816a5af"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:58 GMT",
       "tag": "@fluentui-react-native/experimental-drawer_v0.2.45",
       "version": "0.2.45",

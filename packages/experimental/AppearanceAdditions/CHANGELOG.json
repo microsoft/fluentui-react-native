@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-appearance-additions",
   "entries": [
     {
+      "date": "Fri, 03 Mar 2023 06:47:26 GMT",
+      "tag": "@fluentui-react-native/experimental-appearance-additions_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-appearance-additions",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.4",
+            "commit": "4659b74650377d2f746a81a321346a481816a5af"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:58 GMT",
       "tag": "@fluentui-react-native/experimental-appearance-additions_v0.3.4",
       "version": "0.3.4",

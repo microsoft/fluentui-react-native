@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Fri, 03 Mar 2023 06:47:26 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.11.55",
+      "version": "0.11.55",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/text to v0.19.24",
+            "commit": "4659b74650377d2f746a81a321346a481816a5af"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Feb 2023 21:34:10 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.11.54",
       "version": "0.11.54",
