@@ -19,7 +19,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
   const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
-  const { hasCheckmarks, hasTooltips, onArrowClose, setIsMenuItemHovered } = useMenuListContext();
+  const { hasCheckmarks, hasIcons, hasTooltips, onArrowClose, setIsMenuItemHovered } = useMenuListContext();
   const menuListContext = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
   const shouldPersist = persistOnClick ?? persistOnItemClick;
@@ -99,6 +99,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
     state: {
       ...pressable.state,
       hasSubmenu,
+      hasIcons,
       hasCheckmarks,
       hasTooltips,
     },

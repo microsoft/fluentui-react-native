@@ -65,7 +65,7 @@ export const useMenuCheckboxInteraction = (
 
   const isSubmenu = useMenuContext().isSubmenu;
 
-  const { checked, hasTooltips, onArrowClose, setIsMenuItemHovered } = useMenuListContext();
+  const { checked, hasIcons, hasTooltips, onArrowClose, setIsMenuItemHovered } = useMenuListContext();
   const menuListContext = useMenuListContext();
   const isChecked = checked?.[name];
 
@@ -118,6 +118,7 @@ export const useMenuCheckboxInteraction = (
     ...pressable.state,
     checked: isChecked,
     disabled,
+    hasIcons,
     hasTooltips,
   };
 

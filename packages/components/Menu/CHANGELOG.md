@@ -1,8 +1,63 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 28 Feb 2023 21:34:10 GMT and should not be manually modified.
+This log was last generated on Sat, 04 Mar 2023 00:02:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.18
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.6
+- Bump @fluentui-react-native/focus-zone to v0.11.35
+- Bump @fluentui-react-native/icon to v0.17.18
+- Bump @fluentui-react-native/interactive-hooks to v0.22.23
+- Bump @fluentui-react-native/text to v0.19.25
+- Bump @fluentui-react-native/button to v0.32.39
+
+## 1.4.17
+
+Fri, 03 Mar 2023 15:38:20 GMT
+
+### Patches
+
+- Delay triggerHoverOut timeouts (amchiu@microsoft.com)
+
+## 1.4.16
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.5
+- Bump @fluentui-react-native/focus-zone to v0.11.34
+- Bump @fluentui-react-native/framework to v0.9.4
+- Bump @fluentui-react-native/icon to v0.17.17
+- Bump @fluentui-react-native/interactive-hooks to v0.22.22
+- Bump @fluentui-react-native/text to v0.19.24
+- Bump @fluentui-react-native/theme-tokens to v0.24.4
+- Bump @fluentui-react-native/tokens to v0.20.11
+- Bump @fluentui-react-native/button to v0.32.38
+
+## 1.4.15
+
+Thu, 02 Mar 2023 19:11:57 GMT
+
+### Patches
+
+- Add icon support to menu items (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.17.16
+- Bump @fluentui-react-native/button to v0.32.37
+
+## 1.4.14
+
+Wed, 01 Mar 2023 23:22:12 GMT
+
+### Patches
+
+- Add 'Escape' to list of keys stopping event propagation in MenuPopover key handlers. (winlarry@microsoft.com)
 
 ## 1.4.13
 

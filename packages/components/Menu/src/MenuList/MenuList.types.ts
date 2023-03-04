@@ -33,6 +33,11 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
   hasCheckmarks?: boolean;
 
   /**
+   * States that menu items can contain icons and reserves space for item alignment
+   */
+  hasIcons?: boolean;
+
+  /**
    * States that menu items all have tooltips with its text by default.
    *
    * This option is useful for programmatically generated items to provide
