@@ -9,7 +9,7 @@ import { usePressableState, useKeyDownProps, useOnPressWithFocus, useViewCommand
 import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
-import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
+import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect, useRemoveHoverEffect } from '../MenuItem/useMenuItem';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -65,7 +65,8 @@ export const useMenuCheckboxInteraction = (
 
   const isSubmenu = useMenuContext().isSubmenu;
 
-  const { checked, hasTooltips, onArrowClose } = useMenuListContext();
+  const { checked, hasTooltips, onArrowClose, setIsMenuItemHovered } = useMenuListContext();
+  const menuListContext = useMenuListContext();
   const isChecked = checked?.[name];
 
   // Ensure focus is placed on checkbox after click
@@ -110,7 +111,8 @@ export const useMenuCheckboxInteraction = (
     [disabled, toggleCallback, onAccessibilityAction],
   );
 
-  useHoverFocusEffect(pressable.state.hovered, componentRef);
+  useHoverFocusEffect(pressable.state.hovered, componentRef, setIsMenuItemHovered);
+  useRemoveHoverEffect(pressable.state.hovered, menuListContext.isMenuItemHovered, pressable.props.onHoverOut);
 
   const state = {
     ...pressable.state,
@@ -119,9 +121,22 @@ export const useMenuCheckboxInteraction = (
     hasTooltips,
   };
 
+  const onFocusOverride = React.useCallback(
+    (e) => {
+      pressable.props.onFocus(e);
+      // if it's not a hover focus
+      if (!pressable.state.focused && !pressable.state.hovered) {
+        // remove hover state from everywhere else
+        setIsMenuItemHovered(false);
+      }
+    },
+    [pressable, setIsMenuItemHovered],
+  );
+
   return {
     props: {
       ...pressable.props,
+      onFocus: onFocusOverride,
       accessible: true,
       accessibilityActions: accessibilityActionsProp,
       accessibilityLabel,

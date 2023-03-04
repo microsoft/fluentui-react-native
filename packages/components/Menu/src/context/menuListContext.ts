@@ -19,6 +19,8 @@ export const MenuListContext = React.createContext<MenuListContextValue>({
   onArrowClose: () => false,
   addRadioItem: () => false,
   removeRadioItem: () => false,
+  isMenuItemHovered: undefined,
+  setIsMenuItemHovered: () => undefined,
 });
 
 export const MenuListProvider = MenuListContext.Provider;

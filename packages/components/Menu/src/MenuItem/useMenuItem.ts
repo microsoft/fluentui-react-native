@@ -19,7 +19,8 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
   const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
-  const { hasCheckmarks, hasTooltips, onArrowClose } = useMenuListContext();
+  const { hasCheckmarks, hasTooltips, onArrowClose, setIsMenuItemHovered } = useMenuListContext();
+  const menuListContext = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
   const shouldPersist = persistOnClick ?? persistOnItemClick;
 
@@ -60,11 +61,25 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
 
-  useHoverFocusEffect(pressable.state.hovered, componentRef);
+  useHoverFocusEffect(pressable.state.hovered, componentRef, setIsMenuItemHovered);
+  useRemoveHoverEffect(pressable.state.hovered, menuListContext.isMenuItemHovered, pressable.props.onHoverOut);
+
+  const onFocusOverride = React.useCallback(
+    (e) => {
+      pressable.props.onFocus(e);
+      // if it's not a hover focus
+      if (!pressable.state.focused && !pressable.state.hovered) {
+        // remove hover state from everywhere else
+        setIsMenuItemHovered(false);
+      }
+    },
+    [pressable, setIsMenuItemHovered],
+  );
 
   return {
     props: {
       ...pressable.props,
+      onFocus: onFocusOverride,
       accessible: true,
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
@@ -98,12 +113,23 @@ function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: Acc
   return { disabled };
 }
 
-export const useHoverFocusEffect = (hovered: boolean, componentRef: React.MutableRefObject<any>) => {
+export const useHoverFocusEffect = (hovered: boolean, componentRef: React.MutableRefObject<any>, setIsMenuItemHovered: any) => {
   React.useLayoutEffect(() => {
     if (hovered) {
       componentRef?.current?.focus();
+      setIsMenuItemHovered(true);
     } else {
       componentRef?.current?.blur();
+      setIsMenuItemHovered(undefined);
     }
-  }, [hovered, componentRef]);
+  }, [hovered, componentRef, setIsMenuItemHovered]);
+};
+
+export const useRemoveHoverEffect = (hovered: boolean, isMenuItemHovered: boolean, onHoverOut: any) => {
+  React.useLayoutEffect(() => {
+    if (hovered && isMenuItemHovered != undefined && !isMenuItemHovered) {
+      // remove Focus from this menuITem
+      onHoverOut();
+    }
+  }, [hovered, isMenuItemHovered, onHoverOut]);
 };

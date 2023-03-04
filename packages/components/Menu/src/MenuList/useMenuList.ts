@@ -23,6 +23,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   // MenuList v2 needs to be able to be standalone, but this is not in scope for v1
   // Assuming that checked information will come from parent Menu
   const { defaultChecked, onCheckedChange: onCheckedChangeOriginal, checked: checkedOriginal, isSubmenu, setOpen, triggerRef } = context;
+  const [isMenuItemHovered, setIsMenuItemHovered] = React.useState<boolean | undefined>(undefined);
 
   // Convert passed in array to map so that i's easier to look up checked state
   const checkedMap = React.useMemo(() => {
@@ -125,5 +126,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     removeRadioItem,
     hasMaxHeight: context.hasMaxHeight,
     hasMaxWidth: context.hasMaxWidth,
+    isMenuItemHovered,
+    setIsMenuItemHovered,
   };
 };
