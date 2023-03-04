@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/checkbox",
-  "version": "0.19.24",
+  "version": "0.19.25",
   "description": "A cross-platform Checkbox component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -28,10 +28,10 @@
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.10.2 <1.0.0",
     "@fluentui-react-native/framework": "0.9.4",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.22 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.9.61 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.23 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.9.62 <1.0.0",
     "@fluentui-react-native/styling-utils": ">=0.4.4 <1.0.0",
-    "@fluentui-react-native/text": ">=0.19.24 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.25 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.24.4",
     "@fluentui-react-native/tokens": ">=0.20.11 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.4 <1.0.0",

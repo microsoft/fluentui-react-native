@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Sat, 04 Mar 2023 00:02:26 GMT",
+      "tag": "@fluentui-react-native/stack_v0.7.57",
+      "version": "0.7.57",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/text to v0.19.25",
+            "commit": "888d0ceb90a25d267654b74902dee81f5b4c8052"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Mar 2023 06:47:26 GMT",
       "tag": "@fluentui-react-native/stack_v0.7.56",
       "version": "0.7.56",
