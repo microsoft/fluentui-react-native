@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 03 Mar 2023 15:38:20 GMT and should not be manually modified.
+This log was last generated on Sat, 04 Mar 2023 00:02:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.18
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.6
+- Bump @fluentui-react-native/focus-zone to v0.11.35
+- Bump @fluentui-react-native/icon to v0.17.18
+- Bump @fluentui-react-native/interactive-hooks to v0.22.23
+- Bump @fluentui-react-native/text to v0.19.25
+- Bump @fluentui-react-native/button to v0.32.39
 
 ## 1.4.17
 

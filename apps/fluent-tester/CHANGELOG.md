@@ -1,8 +1,37 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 03 Mar 2023 15:38:20 GMT and should not be manually modified.
+This log was last generated on Sat, 04 Mar 2023 00:02:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.27
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.7.3
+- Bump @fluentui-react-native/badge to v0.4.34
+- Bump @fluentui-react-native/button to v0.32.39
+- Bump @fluentui-react-native/divider to v0.3.6
+- Bump @fluentui-react-native/dropdown to v0.7.36
+- Bump @fluentui-react-native/experimental-button to v0.16.97
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.43
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.38
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.24
+- Bump @fluentui-react-native/experimental-shadow to v0.2.74
+- Bump @fluentui-react-native/experimental-tabs to v0.8.38
+- Bump @fluentui-react-native/experimental-text to v0.11.56
+- Bump @fluentui-react-native/icon to v0.17.18
+- Bump @fluentui-react-native/interactive-hooks to v0.22.23
+- Bump @fluentui-react-native/menu to v1.4.18
+- Bump @fluentui-react-native/notification to v0.21.40
+- Bump @fluentui-react-native/stack to v0.7.57
+- Bump @fluentui-react-native/switch to v0.8.32
+- Bump @fluentui-react-native/text to v0.19.25
+- Bump @fluentui/react-native to v0.36.9
+- Bump @fluentui-react-native/spinner to v0.2.7
+- Bump @fluentui-react-native/focus-zone to v0.11.35
 
 ## 0.134.26
 
