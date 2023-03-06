@@ -62,24 +62,26 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
     const hasContent = textContent !== undefined || props.icon !== undefined;
 
     // This style must be set here because we need to know if text content is passed in the final render to set the height correctly
-    let minHeight = 0;
-    if (props.vertical) {
-      minHeight = hasContent ? 84 : globalTokens.size200;
+    let finalRootProps = rootProps;
+
+    if (!tokens.minHeight) {
+      let minHeight = 0;
+      if (props.vertical) {
+        minHeight = hasContent ? 84 : globalTokens.size200;
+      }
+      finalRootProps = { ...rootProps, style: mergeStyles(rootProps.style, { minHeight }) };
     }
-    const mergedRootProps = {
-      ...rootProps,
-      style: mergeStyles(rootProps.style, { minHeight }),
-    };
 
     // If there's no content, then the before line should always take up the full width / height of the root slot
-    const mergedBeforeProps = {
-      ...beforeLineProps,
-      style: mergeStyles(beforeLineProps.style, !hasContent ? { flex: 1 } : {}),
-    };
+    let finalBeforeLineProps = beforeLineProps;
+
+    if (!hasContent) {
+      finalBeforeLineProps = { ...beforeLineProps, style: mergeStyles(beforeLineProps.style, { flex: 1 }) };
+    }
 
     return (
-      <RootSlot {...mergedRootProps}>
-        <BeforeLineSlot {...mergedBeforeProps} />
+      <RootSlot {...finalRootProps}>
+        <BeforeLineSlot {...finalBeforeLineProps} />
         {hasContent && (
           <>
             <WrapperSlot>
