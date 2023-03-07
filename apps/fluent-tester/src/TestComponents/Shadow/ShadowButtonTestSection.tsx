@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform, View, StyleSheet, Pressable } from 'react-native';
 
-import { FAB, Text } from '@fluentui/react-native';
+import { FAB, Text, usePressableState } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import { useTheme } from '@fluentui-react-native/framework';
@@ -22,20 +22,16 @@ const platformSupportsFAB = Platform.OS === 'ios' || Platform.OS === 'android';
 
 export const ShadowBlockTest: React.FunctionComponent = () => {
   const t = useTheme();
-  const [focused, setFocused] = React.useState(false);
-  const [hovered, setHovered] = React.useState(false);
+  const pressable = usePressableState({});
 
   return (
-    <Shadow shadowToken={hovered ? t.shadows.shadow8 : undefined}>
-      <Pressable
-        onHoverIn={() => setHovered(true)}
-        onHoverOut={() => setHovered(false)}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-      >
-        <View style={{ borderWidth: focused ? 3 : 1, borderColor: 'black', backgroundColor: 'red', margin: 10, width: 300 }}>
-          <Text>hover = {hovered.valueOf().toString()}</Text>
-          <Text>focus = {focused.valueOf().toString()}</Text>
+    <Shadow shadowToken={pressable.state.hovered ? t.shadows.shadow8 : undefined}>
+      <Pressable {...pressable.props}>
+        <View
+          style={{ borderWidth: pressable.state.focused ? 3 : 1, borderColor: 'black', backgroundColor: 'red', margin: 10, width: 300 }}
+        >
+          <Text>hover = {pressable.state.hovered?.valueOf().toString()}</Text>
+          <Text>focus = {pressable.state.focused?.valueOf().toString()}</Text>
         </View>
       </Pressable>
     </Shadow>
