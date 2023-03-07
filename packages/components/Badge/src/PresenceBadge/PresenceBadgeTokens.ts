@@ -1,5 +1,6 @@
 import type { TokenSettings, Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
 import type { PresenceBadgeTokens } from './PresenceBadge.types';
 
@@ -66,8 +67,4 @@ function getBadgeColor(color: string, t: Theme) {
       iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color[color].primary,
     },
   };
-}
-
-function isHighContrast(t: Theme) {
-  return t.host.appearance === 'highContrast';
 }

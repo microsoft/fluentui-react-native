@@ -33,6 +33,7 @@
     "@fluentui-react-native/styling-utils": ">=0.4.4 <1.0.0",
     "@fluentui-react-native/text": ">=0.19.25 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.24.4",
+    "@fluentui-react-native/theming-utils": ">=0.23.6 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.20.11 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.4 <1.0.0",
     "@uifabricshared/foundation-compose": "^1.13.4",
