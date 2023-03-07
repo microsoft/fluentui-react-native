@@ -1,7 +1,9 @@
-import { ThemeReference } from '@fluentui-react-native/theme';
-import { getAndroidTheme } from './androidTheme';
 import { Appearance } from 'react-native';
+
+import { ThemeReference } from '@fluentui-react-native/theme';
 import type { Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
+
+import { getAndroidTheme } from './androidTheme';
 
 export function createAndroidTheme(options: ThemeOptions = {}): ThemeReference {
   const themeRef = new ThemeReference({} as Theme, () => {

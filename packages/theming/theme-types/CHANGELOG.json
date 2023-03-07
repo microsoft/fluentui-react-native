@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Fri, 03 Mar 2023 06:47:25 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.30.4",
+      "version": "0.30.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "4659b74650377d2f746a81a321346a481816a5af",
+            "comment": "Comment"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 24 Feb 2023 20:40:00 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.30.3",
+      "version": "0.30.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "743bd1507af336a62946361f3fe3c800ae5bd4c2",
+            "comment": "Order imports"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Feb 2023 22:33:17 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.30.2",
       "version": "0.30.2",

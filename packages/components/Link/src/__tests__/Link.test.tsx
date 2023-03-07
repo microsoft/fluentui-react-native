@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Alert } from 'react-native';
-import { Link } from '../Link';
-import * as renderer from 'react-test-renderer';
+
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { Link } from '../Link';
 
 describe('Link component tests', () => {
   it('Default Link', () => {

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import type { AccessibilityState } from 'react-native';
 import { I18nManager, Platform } from 'react-native';
-import type { MenuItemProps, MenuItemInfo } from './MenuItem.types';
+
 import { memoize } from '@fluentui-react-native/framework';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { isKeyPressEvent, usePressableState, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+
+import type { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
@@ -17,7 +19,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
   const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
-  const { hasCheckmarks, hasTooltips, onArrowClose } = useMenuListContext();
+  const { hasCheckmarks, hasIcons, hasTooltips, onArrowClose } = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
   const shouldPersist = persistOnClick ?? persistOnItemClick;
 
@@ -82,6 +84,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
     state: {
       ...pressable.state,
       hasSubmenu,
+      hasIcons,
       hasCheckmarks,
       hasTooltips,
     },

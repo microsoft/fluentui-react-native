@@ -1,17 +1,8 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
-import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType } from './Checkbox.types';
-import { checkboxName } from './Checkbox.types';
-import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { compose } from '@uifabricshared/foundation-compose';
-import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
+
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import {
   useAsToggle,
   useAsPressable,
@@ -19,8 +10,19 @@ import {
   useKeyProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
-import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 import type { IPressableProps } from '@fluentui-react-native/pressable';
+import { Text } from '@fluentui-react-native/text';
+import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { backgroundColorTokens } from '@fluentui-react-native/tokens';
+import type { ISlots } from '@uifabricshared/foundation-composable';
+import { withSlots } from '@uifabricshared/foundation-composable';
+import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+
+import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
+import type { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType } from './Checkbox.types';
+import { checkboxName } from './Checkbox.types';
 
 /**
  * @deprecated This will be removed when the package moves to 1.0.0.
@@ -98,6 +100,7 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
         focusable: focusable ?? !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
+        enableFocusRing: false,
         ...onKeyProps,
       },
       // Temporary checkmark until SVG functionality

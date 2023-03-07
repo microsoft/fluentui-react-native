@@ -1,5 +1,5 @@
-import TabsV1PageObject from '../pages/TabsV1PageObject';
 import { Attribute, Keys, TAB_A11Y_ROLE, TABITEM_A11Y_ROLE } from '../../common/consts';
+import TabsV1PageObject from '../pages/TabsV1PageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('TabsV1 Testing Initialization', () => {

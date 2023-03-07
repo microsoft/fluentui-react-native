@@ -1,3 +1,4 @@
+import { BasePage, By } from '../../common/BasePage';
 import {
   BUTTON_TESTPAGE,
   BUTTON_TEST_COMPONENT_DEPRECATED,
@@ -5,7 +6,6 @@ import {
   HOMEPAGE_BUTTON_BUTTON,
   BUTTON_ON_PRESS_DEPRECATED,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
 class ButtonLegacyPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/

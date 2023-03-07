@@ -1,4 +1,7 @@
-export const presenceIconPaths = {
+import type { PresenceBadgeIconPath, PresenceBadgeStatus } from './PresenceBadge.types';
+import type { BadgeSize } from '../Badge.types';
+
+export const presenceIconPaths: PresenceBadgeIconPath = {
   available: 'M8 16A8 8 0 108 0a8 8 0 000 16zm3.7-9.3l-4 4a1 1 0 01-1.41 0l-2-2a1 1 0 111.42-1.4L7 8.58l3.3-3.3a1 1 0 011.4 1.42z',
   away: 'M8 16A8 8 0 108 0a8 8 0 000 16zm.5-11.5v3.02l2.12 1.7a1 1 0 11-1.24 1.56l-2.5-2A1 1 0 016.5 8V4.5a1 1 0 012 0z',
   busy: 'M16 8A8 8 0 110 8a8 8 0 0116 0z',
@@ -13,3 +16,26 @@ export const presenceIconPaths = {
   availableOutOfOffice:
     'M11.7 6.7a1 1 0 00-1.4-1.4L7 8.58l-1.3-1.3a1 1 0 00-1.4 1.42l2 2a1 1 0 001.4 0l4-4zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-6a6 6 0 100 12A6 6 0 008 2z',
 };
+
+// Mobile requires different svgs based on BadgeSize, _size is not used for other platforms.
+export function getIconPath(status: PresenceBadgeStatus, isOutOfOffice: boolean, _size?: BadgeSize): string {
+  switch (status) {
+    case 'available':
+    default:
+      return isOutOfOffice ? presenceIconPaths.availableOutOfOffice : presenceIconPaths.available;
+    case 'away':
+      return isOutOfOffice ? presenceIconPaths.outOfOffice : presenceIconPaths.away;
+    case 'busy':
+      return isOutOfOffice ? presenceIconPaths.unknown : presenceIconPaths.busy;
+    case 'doNotDisturb':
+      return isOutOfOffice ? presenceIconPaths.doNotDisturbOutOfOffice : presenceIconPaths.doNotDisturb;
+    case 'offline':
+      return presenceIconPaths.offline;
+    case 'outOfOffice':
+      return presenceIconPaths.outOfOffice;
+    case 'unknown':
+      return presenceIconPaths.unknown;
+    case 'blocked':
+      return presenceIconPaths.blocked;
+  }
+}

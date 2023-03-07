@@ -1,5 +1,5 @@
-import { ICON_TESTPAGE, ICON_TEST_COMPONENT, HOMEPAGE_ICON_BUTTON, ICON_NO_A11Y_LABEL_COMPONENT } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { ICON_TESTPAGE, ICON_TEST_COMPONENT, HOMEPAGE_ICON_BUTTON, ICON_NO_A11Y_LABEL_COMPONENT } from '../consts';
 
 class IconLegacyPageObject extends BasePage {
   /*****************************************/

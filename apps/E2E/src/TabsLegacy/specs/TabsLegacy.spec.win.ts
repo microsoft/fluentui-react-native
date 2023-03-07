@@ -1,5 +1,5 @@
-import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
 import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Tabs Legacy Testing Initialization', () => {

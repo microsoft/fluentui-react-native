@@ -2,6 +2,7 @@ import type { Theme } from '@fluentui-react-native/theme-types';
 import type { StagedRender } from '@fluentui-react-native/use-slot';
 import { stagedComponent } from '@fluentui-react-native/use-slot';
 import type { CustomizableComponent } from '@fluentui-react-native/use-tokens';
+
 import type { TokenSettings } from './useStyling';
 import type { UseTokens } from './useTokens';
 

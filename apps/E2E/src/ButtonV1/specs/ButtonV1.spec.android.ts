@@ -1,6 +1,6 @@
+import { BUTTON_TEST_COMPONENT } from '../../ButtonLegacy/consts';
 import { AndroidAttribute, ANDROID_BUTTON } from '../../common/consts';
 import ButtonV1PageObject from '../pages/ButtonV1PageObject';
-import { BUTTON_TEST_COMPONENT } from '../../ButtonLegacy/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Button Testing Initialization', () => {

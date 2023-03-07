@@ -3,10 +3,11 @@ Disclaimer: these styles do not follow a specific figma design, but are
 meant to be placeholders until new designs are developed
 */
 
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
 import type { TabsItemType } from './TabsItem.types';
 import { tabsItemName } from './TabsItem.types';
-import type { IComposeSettings } from '@uifabricshared/foundation-compose';
-import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 

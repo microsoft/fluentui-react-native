@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { TextV1 as Text } from '@fluentui/react-native';
 
 // Platform.select not available for win32

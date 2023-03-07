@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
 import { Button } from '@fluentui-react-native/experimental-button';
-import type { MenuAction } from '@react-native-menu/menu';
-import { MenuView } from '@react-native-menu/menu';
-import { testerTheme } from './CustomThemes';
-import type { ThemeNames } from './applyTheme';
-import { themeChoices } from './applyTheme';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { MenuView } from '@react-native-menu/menu';
+import type { MenuAction } from '@react-native-menu/menu';
+
+import { themeChoices } from './applyTheme';
+import type { ThemeNames } from './applyTheme';
+import { testerTheme } from './CustomThemes';
 
 export const themePickerStyles = themedStyleSheet((t: Theme) => {
   // picker, pickerItem, dropdown used in iOS dark mode

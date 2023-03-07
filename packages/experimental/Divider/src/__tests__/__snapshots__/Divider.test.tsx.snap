@@ -1,6 +1,155 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Divider component tests Branded Divider 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 0,
+      "minWidth": 0,
+      "paddingHorizontal": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#0078d4",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Divider component tests Custom Divider 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 0,
+      "minWidth": 0,
+      "paddingHorizontal": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "red",
+        "borderStyle": "solid",
+        "borderTopWidth": 3,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
+
 exports[`Divider component tests Divider default 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 0,
+      "minWidth": 0,
+      "paddingHorizontal": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#e0e0e0",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Divider component tests Divider with icon 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 0,
+      "minWidth": 0,
+      "paddingHorizontal": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#e0e0e0",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 0,
+        "paddingHorizontal": 12,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      style={
+        Object {
+          "color": "#424242",
+          "fontFamily": "Arial",
+          "fontSize": 32,
+        }
+      }
+    >
+      ♣
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#e0e0e0",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Divider component tests Divider with text 1`] = `
 <View
   style={
     Object {
@@ -49,7 +198,7 @@ exports[`Divider component tests Divider default 1`] = `
         }
       }
     >
-      Your component
+      Lorem Ipsum
     </Text>
   </View>
   <View
@@ -61,6 +210,153 @@ exports[`Divider component tests Divider default 1`] = `
         "flex": 1,
         "flexBasis": 8,
         "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Divider component tests Horizontal Divider with Inset 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 0,
+      "minWidth": 0,
+      "paddingHorizontal": 16,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#e0e0e0",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Divider component tests Strong Divider 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 0,
+      "minWidth": 0,
+      "paddingHorizontal": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#d1d1d1",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Divider component tests Subtle Divider 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 0,
+      "minWidth": 0,
+      "paddingHorizontal": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#f0f0f0",
+        "borderStyle": "solid",
+        "borderTopWidth": 1,
+        "flex": 1,
+        "flexBasis": 8,
+        "minWidth": 8,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Divider component tests Vertical Divider 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "minHeight": 24,
+      "minWidth": 0,
+      "paddingVertical": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#e0e0e0",
+        "borderLeftWidth": 1,
+        "borderStyle": "solid",
+        "flex": 1,
+        "flexBasis": 8,
+        "minHeight": 8,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Divider component tests Vertical Divider with Inset 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "minHeight": 24,
+      "minWidth": 0,
+      "paddingVertical": 16,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#e0e0e0",
+        "borderLeftWidth": 1,
+        "borderStyle": "solid",
+        "flex": 1,
+        "flexBasis": 8,
+        "minHeight": 8,
       }
     }
   />

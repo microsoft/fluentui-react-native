@@ -1,10 +1,12 @@
+import { Appearance } from 'react-native';
+
 import { ThemeReference } from '@fluentui-react-native/theme';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
-import { Appearance } from 'react-native';
-import { getBaseAppleThemeMacOS } from './appleTheme.macos';
 import { AccessibilityInfo } from 'react-native-macos';
+
 import { setIsHighContrast } from './appleHighContrast.macos';
+import { getBaseAppleThemeMacOS } from './appleTheme.macos';
 
 let appleThemeReference: ThemeReference;
 

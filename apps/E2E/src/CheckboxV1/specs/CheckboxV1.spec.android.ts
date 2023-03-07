@@ -1,6 +1,6 @@
-import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 import { AndroidAttribute, ANDROID_CHECKBOX } from '../../common/consts';
 import { CHECKBOXV1_TEST_COMPONENT } from '../consts';
+import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 
 describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {

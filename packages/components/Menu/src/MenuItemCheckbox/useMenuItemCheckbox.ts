@@ -1,13 +1,15 @@
 import * as React from 'react';
 import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
 import { I18nManager, Platform } from 'react-native';
-import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
+
 import { memoize } from '@fluentui-react-native/framework';
 import type { InteractionEvent, KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyDownProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+
+import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
+import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
-import { useMenuContext } from '../context/menuContext';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -63,7 +65,7 @@ export const useMenuCheckboxInteraction = (
 
   const isSubmenu = useMenuContext().isSubmenu;
 
-  const { checked, hasTooltips, onArrowClose } = useMenuListContext();
+  const { checked, hasIcons, hasTooltips, onArrowClose } = useMenuListContext();
   const isChecked = checked?.[name];
 
   // Ensure focus is placed on checkbox after click
@@ -114,6 +116,7 @@ export const useMenuCheckboxInteraction = (
     ...pressable.state,
     checked: isChecked,
     disabled,
+    hasIcons,
     hasTooltips,
   };
 

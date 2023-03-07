@@ -1,10 +1,12 @@
 import type * as React from 'react';
-import type { ColorValue } from 'react-native';
-import type { XmlProps } from 'react-native-svg';
+import type { ColorValue, ImageProps } from 'react-native';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { TextProps } from '@fluentui-react-native/text';
+import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
+import type { TextProps } from '@fluentui-react-native/text';
 import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { XmlProps } from 'react-native-svg';
 
 export const menuItemName = 'MenuItem';
 
@@ -18,6 +20,9 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
    * Space between parts of the item control in pixels
    */
   gap?: number;
+
+  iconColor?: ColorValue;
+  iconSize?: number;
 
   /**
    * Color of the indicator that shows that an item has a submenu
@@ -49,6 +54,11 @@ export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
    */
   componentRef?: React.RefObject<IFocusable>;
 
+  /*
+   * Source URL or name of the icon to show on the Button.
+   */
+  icon?: IconProps | ImageProps;
+
   /**
    * A callback to call on button click event
    */
@@ -62,6 +72,7 @@ export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
 
 export interface MenuItemState extends PressableState {
   hasCheckmarks?: boolean;
+  hasIcons?: boolean;
 
   /**
    * If the menu item is a trigger for a submenu
@@ -83,6 +94,9 @@ export interface MenuItemSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
   content?: TextProps;
   checkmark?: React.PropsWithRef<IViewProps>;
+  iconPlaceholder?: React.PropsWithRef<IViewProps>;
+  imgIcon?: ImageProps;
+  fontOrSvgIcon?: IconProps;
   submenuIndicator?: XmlProps;
 }
 

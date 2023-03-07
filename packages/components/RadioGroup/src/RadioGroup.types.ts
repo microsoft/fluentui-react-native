@@ -1,9 +1,10 @@
 import type * as React from 'react';
+
+import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { ITextProps } from '@fluentui-react-native/text';
+import type { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
-import type { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
-import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 
 export const radioGroupName = 'RadioGroup';
 

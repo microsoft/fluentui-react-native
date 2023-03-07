@@ -1,8 +1,10 @@
+import { DynamicColorIOS } from 'react-native';
+
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
 import type { NotificationTokens } from './Notification.types';
-import { DynamicColorIOS } from 'react-native';
 
 /**
  * Fluent 2 colors are not yet in the token pipeline for iOS so DynamicColorIOS is necessary for dark mode

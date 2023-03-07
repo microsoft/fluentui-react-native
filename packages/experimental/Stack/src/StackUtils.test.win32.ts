@@ -1,5 +1,6 @@
-import { parseGap, parsePadding } from './StackUtils';
 import type { Theme } from '@fluentui-react-native/framework';
+
+import { parseGap, parsePadding } from './StackUtils';
 
 describe('StackUtils', () => {
   describe('parseGap', () => {

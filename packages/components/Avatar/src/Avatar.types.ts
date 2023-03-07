@@ -1,8 +1,9 @@
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
-import type { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
+
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { PresenceBadgeProps, BadgeSize, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
 import type { SvgProps } from 'react-native-svg';
 
 export const AvatarName = 'Avatar';
@@ -205,6 +206,20 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
    * The size of presence badge.
    */
   badgeSize?: BadgeSize;
+
+  /**
+   * The x position of presence badge.
+   * This is used to override the default position of the badge picked from presenceBadge tokens.
+   * 0 aligns the badge (including its margin) to the right edge of the avatar.
+   */
+  badgeX?: number;
+
+  /**
+   * The y position of presence badge.
+   * This is used to override the default position of the badge picked from presenceBadge tokens.
+   * 0 aligns the badge (including its margin) to the bottom edge of the avatar.
+   */
+  badgeY?: number;
 
   /**
    * The icon color.

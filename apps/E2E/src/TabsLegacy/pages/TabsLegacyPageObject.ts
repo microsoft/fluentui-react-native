@@ -1,3 +1,4 @@
+import { BasePage, By } from '../../common/BasePage';
 import {
   TABS_TESTPAGE,
   TABS_TEST_COMPONENT,
@@ -9,7 +10,6 @@ import {
   SECOND_TABS_ITEM_CONTENT,
   THIRD_TABS_ITEM_CONTENT,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page.

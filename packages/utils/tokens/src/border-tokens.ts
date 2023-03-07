@@ -1,7 +1,9 @@
 import type { ViewStyle, ColorValue } from 'react-native';
-import type { OperationSet } from './token.types';
+
 import type { Theme } from '@fluentui-react-native/theme-types';
+
 import { getPaletteFromTheme } from './color-tokens';
+import type { OperationSet } from './token.types';
 import { tokenBuilder } from './tokenBuilder';
 
 export interface IBorderTokens {

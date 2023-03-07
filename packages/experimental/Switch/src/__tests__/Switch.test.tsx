@@ -1,7 +1,9 @@
 import * as React from 'react';
-import * as renderer from 'react-test-renderer';
-import { Switch } from '../Switch';
+
 import { checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { Switch } from '../Switch';
 
 // mocks out setTimeout and other timer functions with mock functions , test will fail without this as we're using Animated API
 jest.useFakeTimers();

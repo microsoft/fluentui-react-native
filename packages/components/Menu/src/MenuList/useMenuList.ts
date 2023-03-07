@@ -1,7 +1,9 @@
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
-import { useMenuContext } from '../context/menuContext';
+
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+
 import type { MenuListProps, MenuListState } from './MenuList.types';
+import { useMenuContext } from '../context/menuContext';
 
 // Track the radio items so we know what to clear selection from when selectRadio is called
 // Purposefully left out of the hook because
@@ -109,6 +111,12 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     },
     [isSubmenu, setOpen, triggerRef],
   );
+
+  React.useEffect(() => {
+    return function cleanup() {
+      clearTimeout(context.triggerHoverOutTimer);
+    };
+  });
 
   return {
     props: {

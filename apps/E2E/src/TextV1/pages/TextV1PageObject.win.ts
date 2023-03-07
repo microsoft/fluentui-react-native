@@ -1,5 +1,5 @@
-import { TEXTV1_NO_A11Y_LABEL_COMPONENT, TEXTV1_TESTPAGE, TEXTV1_TEST_COMPONENT, HOMEPAGE_TEXTV1_BUTTON } from '../consts';
 import { BasePage } from '../../common/BasePage';
+import { TEXTV1_NO_A11Y_LABEL_COMPONENT, TEXTV1_TESTPAGE, TEXTV1_TEST_COMPONENT, HOMEPAGE_TEXTV1_BUTTON } from '../consts';
 
 class TextV1PageObject extends BasePage {
   /*****************************************/

@@ -1,10 +1,12 @@
 import type { ImageProps, ImageSourcePropType } from 'react-native';
+import { Platform } from 'react-native';
+
+import { createIconProps } from '@fluentui-react-native/icon';
+
 import type { AvatarProps, AvatarInfo, AvatarState, AvatarSize, AvatarColor } from './Avatar.types';
 import { AvatarColors } from './Avatar.types';
-import type { PresenceBadgeProps } from '@fluentui-react-native/badge';
-import { titles, multiWordTitles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
-import { createIconProps } from '@fluentui-react-native/icon';
+import { titles, multiWordTitles } from './titles';
 
 /**
  * Re-usable hook for FURN Avatar.
@@ -36,11 +38,6 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const showRing = active === 'active' && activeAppearance === 'ring';
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
   const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
-
-  const badgeProps: PresenceBadgeProps = {
-    size: 'small',
-    ...badge,
-  };
 
   const state: AvatarState = {
     showRing,
@@ -74,6 +71,11 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     };
   }
 
+  const disableBadge = Platform.OS === 'android' && size === 16;
+  if (disableBadge) {
+    state.showBadge = false;
+  }
+
   return {
     props: {
       accessible: true,
@@ -82,7 +84,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
       active,
       activeAppearance,
       avatarColor: avatarColor === 'colorful' ? resolveColorfulToSpecificColor(idForColor, name) : avatarColor,
-      badge: badgeProps,
+      badge: badge,
       badgeStatus: badge?.status,
       initials: initials || getInitials(name),
       icon: iconProps,

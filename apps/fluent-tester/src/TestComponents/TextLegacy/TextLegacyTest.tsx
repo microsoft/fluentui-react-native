@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { StandardUsage } from './StandardUsage';
+
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
+import { StandardUsage } from './StandardUsage';
 import { TextLegacyE2ETest } from './TextLegacyE2ETest';
+import { TEXT_TESTPAGE } from '../../../../E2E/src/index.consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { TEXT_TESTPAGE } from '../../../../E2E/src/index.consts';
 
 const textSections: TestSection[] = [
   {

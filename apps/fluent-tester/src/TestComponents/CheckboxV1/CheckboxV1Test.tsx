@@ -1,16 +1,18 @@
 import * as React from 'react';
-import { CHECKBOXV1_TESTPAGE } from '../../../../E2E/src/CheckboxV1/consts';
-import type { TestSection, PlatformStatus } from '../Test';
-import { Test } from '../Test';
+import { View, TextInput, Platform } from 'react-native';
+
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { View, TextInput, Platform } from 'react-native';
-import { commonTestStyles as commonStyles, mobileStyles } from '../Common/styles';
-import { E2ECheckboxV1Test } from './E2ECheckboxV1Test';
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+
+import { E2ECheckboxV1Test } from './E2ECheckboxV1Test';
+import { CHECKBOXV1_TESTPAGE } from '../../../../E2E/src/CheckboxV1/consts';
+import { commonTestStyles as commonStyles, mobileStyles } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);

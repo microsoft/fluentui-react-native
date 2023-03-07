@@ -1,8 +1,10 @@
-import type { Alignment, IStackTokens } from './Stack.types';
-import { parseGap, parsePadding } from './StackUtils';
 import type { ViewStyle, ViewProps } from 'react-native';
+
 import type { Theme } from '@fluentui-react-native/framework';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
+
+import type { Alignment, IStackTokens } from './Stack.types';
+import { parseGap, parsePadding } from './StackUtils';
 
 const nameMap: { [key: string]: Alignment } = {
   start: 'flex-start',

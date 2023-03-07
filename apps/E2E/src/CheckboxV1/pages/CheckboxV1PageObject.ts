@@ -1,3 +1,4 @@
+import { BasePage, By } from '../../common/BasePage';
 import {
   HOMEPAGE_CHECKBOXV1_BUTTON,
   CHECKBOXV1_TESTPAGE,
@@ -5,7 +6,6 @@ import {
   CHECKBOXV1_NO_A11Y_LABEL_COMPONENT,
   CHECKBOXV1_ON_PRESS,
 } from '../consts';
-import { BasePage, By } from '../../common/BasePage';
 
 class CheckboxV1PageObject extends BasePage {
   /******************************************************************/
