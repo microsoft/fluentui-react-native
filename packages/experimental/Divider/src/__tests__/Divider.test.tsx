@@ -4,7 +4,7 @@ import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Divider } from '../Divider';
-import { DividerProps } from '../Divider.types';
+import type { DividerProps } from '../Divider.types';
 
 describe('Divider component tests', () => {
   it('Divider default', () => {

@@ -6,8 +6,8 @@ import { memoize, mergeStyles } from '@fluentui-react-native/framework';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
-import { fontStyles } from '@fluentui-react-native/tokens';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { fontStyles } from '@fluentui-react-native/tokens';
 
 import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
 
