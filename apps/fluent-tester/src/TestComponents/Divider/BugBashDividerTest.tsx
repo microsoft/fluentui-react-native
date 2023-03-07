@@ -8,7 +8,6 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { commonTestStyles } from '../Common/styles';
 import type { DividerAlignment, DividerAppearance, DividerProps, DividerTokens } from '@fluentui-react-native/divider';
-import { defaultTokens } from '@fluentui-react-native/divider/src/DividerTokens';
 import { IconPropsV1 } from '@fluentui-react-native/icon';
 
 import TestSvg from '../../../assets/test.svg';
