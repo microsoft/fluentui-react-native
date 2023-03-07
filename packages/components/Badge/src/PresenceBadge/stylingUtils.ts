@@ -17,7 +17,7 @@ export const presenceIconPaths: PresenceBadgeIconPath = {
     'M11.7 6.7a1 1 0 00-1.4-1.4L7 8.58l-1.3-1.3a1 1 0 00-1.4 1.42l2 2a1 1 0 001.4 0l4-4zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-6a6 6 0 100 12A6 6 0 008 2z',
 };
 
-// Mobile requires different svgs based on BadgeSize, not used for other platforms.
+// Mobile requires different svgs based on BadgeSize, _size is not used for other platforms.
 export function getIconPath(status: PresenceBadgeStatus, isOutOfOffice: boolean, _size?: BadgeSize): string {
   switch (status) {
     case 'available':
