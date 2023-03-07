@@ -328,7 +328,7 @@ export const BugBashDivider: React.FunctionComponent = () => {
           <Radio label="Italic" value="italic" />
         </RadioGroup>
         <RadioGroup layout="horizontal" label="Text Decoration Line" onChange={onTextDecorationLineBlur}>
-          <Radio label="Normal" value="normal" />
+          <Radio label="None" value="none" />
           <Radio label="Underline" value="underline" />
           <Radio label="Line-through" value="line-through" />
           <Radio label="Underline Line-through" value="underline line-through" />
