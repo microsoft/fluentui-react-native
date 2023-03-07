@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add separate svgs feature",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}

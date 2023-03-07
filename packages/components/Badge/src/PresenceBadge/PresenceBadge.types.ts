@@ -7,6 +7,10 @@ export const presenceBadgeName = 'PresenceBadge';
 export const PresenceBadgeStatuses = ['doNotDisturb', 'busy', 'unknown', 'blocked', 'away', 'available', 'offline', 'outOfOffice'] as const;
 export type PresenceBadgeStatus = (typeof PresenceBadgeStatuses)[number];
 
+export const PresenceBadgeIcons = [...PresenceBadgeStatuses, 'availableOutOfOffice', 'doNotDisturbOutOfOffice'] as const;
+export type PresenceBadgeIconTypes = (typeof PresenceBadgeIcons)[number];
+export type PresenceBadgeIconPath = { [key in PresenceBadgeIconTypes]: string };
+
 export interface PresenceBadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   available?: PresenceBadgeTokens;
   away?: PresenceBadgeTokens;

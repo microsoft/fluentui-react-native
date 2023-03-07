@@ -6,6 +6,7 @@ import type { AvatarTokens } from '.';
 
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({
+    badgeSize: 'small',
     color: t.colors.neutralForeground3,
     backgroundColor: t.colors.neutralBackground6,
     avatarOpacity: 1,
