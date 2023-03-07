@@ -58,17 +58,17 @@ export const MenuList = compose<MenuListType>({
     }, []);
 
     return (_final: MenuListProps, children: React.ReactNode) => {
-      const childrenWithSet = React.Children.map(children, (child, index: number) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            accessibilityPositionInSet: index, // win32
+      const filteredChildren = React.Children.toArray(children).filter((child) => React.isValidElement(child));
+      const childrenWithSet = filteredChildren.map((child, index: number) => {
+        return React.cloneElement(
+          child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
+          {
+            accessibilityPositionInSet: index + 1, // win32
             accessibilityPosInSet: index, // windows
-            accessibilitySetSize: React.Children.toArray(children).length, //win32
-            accessibilitySizeOfSet: React.Children.toArray(children).length, //windows
-          } as any);
-        }
-
-        return child;
+            accessibilitySetSize: filteredChildren.length, //win32
+            accessibilitySizeOfSet: filteredChildren.length, //windows
+          } as any,
+        );
       });
 
       const content =
