@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Repoint current implementations of isHighContrast to new function",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
