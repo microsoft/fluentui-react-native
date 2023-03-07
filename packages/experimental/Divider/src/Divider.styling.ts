@@ -1,11 +1,13 @@
 import { useMemo } from 'react';
-import type { ViewProps, ColorValue } from 'react-native';
+import type { ViewProps, ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { Platform } from 'react-native';
 
+import { memoize, mergeStyles } from '@fluentui-react-native/framework';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
 import { fontStyles } from '@fluentui-react-native/tokens';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 import type { DividerTokens, DividerProps, DividerAppearance } from './Divider.types';
 
@@ -167,3 +169,28 @@ export const colorsFromAppearance = (
     }
   }
 };
+
+/**
+ * At the second render stage, if the minHeight token isn't set, we calculate and memoize a default value based on whether the
+ * Divider is vertical and has content.
+ */
+export const getRootStyle = memoize(getRootStyleWorker);
+function getRootStyleWorker(rootStyle: StyleProp<ViewStyle>, isVertical: boolean, hasContent: boolean): StyleProp<ViewStyle> {
+  let minHeight = 0;
+  if (isVertical) {
+    minHeight = hasContent ? 84 : globalTokens.size200;
+  }
+  return mergeStyles(rootStyle, { minHeight });
+}
+
+/**
+ * At the second render stage, if there is not content passed, we override the existing beforeLine style to make the line take up
+ * the entirity of root.
+ */
+export const getBeforeLineStyle = memoize(getBeforeLineStyleWorker);
+function getBeforeLineStyleWorker(beforeLineStyle: StyleProp<ViewStyle>, hasContent: boolean): StyleProp<ViewStyle> {
+  if (!hasContent) {
+    return mergeStyles(beforeLineStyle, { flex: 1 });
+  }
+  return beforeLineStyle;
+}

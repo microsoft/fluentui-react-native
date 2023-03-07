@@ -10,9 +10,8 @@ import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import type { TextProps } from '@fluentui-react-native/text';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
-import { colorsFromAppearance, useDividerSlotProps } from './Divider.styling';
+import { colorsFromAppearance, getBeforeLineStyle, getRootStyle, useDividerSlotProps } from './Divider.styling';
 import { dividerName } from './Divider.types';
 import type { DividerProps, DividerTokens } from './Divider.types';
 import { useDividerTokens } from './DividerTokens';
@@ -65,19 +64,11 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
     let finalRootProps = rootProps;
 
     if (!tokens.minHeight) {
-      let minHeight = 0;
-      if (props.vertical) {
-        minHeight = hasContent ? 84 : globalTokens.size200;
-      }
-      finalRootProps = { ...rootProps, style: mergeStyles(rootProps.style, { minHeight }) };
+      finalRootProps = { ...rootProps, style: getRootStyle(rootProps.style, final.vertical, hasContent) };
     }
 
-    // If there's no content, then the before line should always take up the full width / height of the root slot
-    let finalBeforeLineProps = beforeLineProps;
-
-    if (!hasContent) {
-      finalBeforeLineProps = { ...beforeLineProps, style: mergeStyles(beforeLineProps.style, { flex: 1 }) };
-    }
+    // If there's no content, then we change the beforeLine style to have a flex of 1 because it will always
+    const finalBeforeLineProps = { ...beforeLineProps, style: getBeforeLineStyle(beforeLineProps.style, hasContent) };
 
     return (
       <RootSlot {...finalRootProps}>
