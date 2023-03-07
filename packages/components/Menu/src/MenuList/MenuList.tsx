@@ -58,19 +58,6 @@ export const MenuList = compose<MenuListType>({
     }, []);
 
     return (_final: MenuListProps, children: React.ReactNode) => {
-      const childrenWithSet = React.Children.map(children, (child, index: number) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            accessibilityPositionInSet: index, // win32
-            accessibilityPosInSet: index, // windows
-            accessibilitySetSize: React.Children.toArray(children).length, //win32
-            accessibilitySizeOfSet: React.Children.toArray(children).length, //windows
-          } as any);
-        }
-
-        return child;
-      });
-
       const content =
         Platform.OS === 'macos' ? (
           <Slots.root>
@@ -86,16 +73,16 @@ export const MenuList = compose<MenuListType>({
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
               >
-                {childrenWithSet}
+                {children}
               </Slots.focusZone>
             </Slots.scrollView>
           </Slots.root>
         ) : menuContext.hasMaxHeight ? (
           <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
-            <Slots.scrollView>{childrenWithSet}</Slots.scrollView>
+            <Slots.scrollView>{children}</Slots.scrollView>
           </Slots.root>
         ) : (
-          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>{childrenWithSet}</Slots.root>
+          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>{children}</Slots.root>
         );
 
       return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;
