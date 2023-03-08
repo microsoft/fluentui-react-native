@@ -1,4 +1,5 @@
 import { NativeEventEmitter } from 'react-native';
+import type { RootTag } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
 
@@ -31,13 +32,13 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
     });
   }
 
-  horizontalSizeClassForRootTag(rootTag: number): SizeClass {
+  horizontalSizeClassForRootTag(rootTag: RootTag): SizeClass {
     return this._rootTagHorizontalSizeClassMap[rootTag];
   }
-  userInterfaceLevelForRootTag(rootTag: number): UserInterfaceLevel {
+  userInterfaceLevelForRootTag(rootTag: RootTag): UserInterfaceLevel {
     return this._rootTagUserInterfaceLevelMap[rootTag];
   }
-  accessibilityContrastOptionForRootTag(rootTag: number): AccessibilityContrastOption {
+  accessibilityContrastOptionForRootTag(rootTag: RootTag): AccessibilityContrastOption {
     return this._rootTagAccessibilityContrastOptionMap[rootTag];
   }
 }

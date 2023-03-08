@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMemo } from 'react';
 import { NativeEventEmitter, RootTagContext } from 'react-native';
+import type { RootTag } from 'react-native';
 
 import { useSubscription } from 'use-subscription';
 
@@ -10,7 +11,7 @@ import type { SizeClass } from './NativeAppearanceAdditions.types';
 
 const eventEmitter = NativeAppearanceAdditions ? new NativeEventEmitter(NativeAppearanceAdditions as any) : undefined;
 
-export function useHorizontalSizeClass(_rootTag: number): SizeClass {
+export function useHorizontalSizeClass(_rootTag: RootTag): SizeClass {
   const rootTag = React.useContext(RootTagContext);
 
   if (!eventEmitter) {

@@ -1,7 +1,9 @@
+import type { RootTag } from 'react-native';
+
 export interface AppearanceAdditions {
-  horizontalSizeClassForRootTag(rootTag: number): SizeClass;
-  userInterfaceLevelForRootTag(rootTag: number): UserInterfaceLevel;
-  accessibilityContrastOptionForRootTag(rootTag: number): AccessibilityContrastOption;
+  horizontalSizeClassForRootTag(rootTag: RootTag): SizeClass;
+  userInterfaceLevelForRootTag(rootTag: RootTag): UserInterfaceLevel;
+  accessibilityContrastOptionForRootTag(rootTag: RootTag): AccessibilityContrastOption;
 }
 
 export const RootTagKey = 'rootTag';
