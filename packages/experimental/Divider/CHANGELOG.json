@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/divider",
   "entries": [
     {
+      "date": "Wed, 08 Mar 2023 23:41:31 GMT",
+      "tag": "@fluentui-react-native/divider_v0.3.8",
+      "version": "0.3.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/divider",
+            "commit": "78019ce95025fd67471daaa7c50087cc2b12fc8e",
+            "comment": "Fix incorrect min-height default token value"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Mar 2023 20:54:15 GMT",
       "tag": "@fluentui-react-native/divider_v0.3.7",
       "version": "0.3.7",
