@@ -38,15 +38,39 @@ export const ShadowBlockTest: React.FunctionComponent = () => {
   );
 };
 
+export const ViewBlockTest: React.FunctionComponent = () => {
+  const pressable = usePressableState({});
+
+  const pressableComponent = (
+    <Pressable {...pressable.props}>
+      <View
+        style={{ borderWidth: pressable.state.focused ? 3 : 1, borderColor: 'black', backgroundColor: 'orange', margin: 10, width: 300 }}
+      >
+        <Text>hover = {pressable.state.hovered?.valueOf().toString()}</Text>
+        <Text>focus = {pressable.state.focused?.valueOf().toString()}</Text>
+      </View>
+    </Pressable>
+  );
+
+  if (pressable.state.hovered) {
+    return <View>{pressableComponent}</View>;
+  } else {
+    return pressableComponent;
+  }
+};
+
 export const ShadowButtonTestSection: React.FunctionComponent = () => {
   const t = useTheme();
 
   if (platformSupportsShadow) {
     return (
       <View>
+        {/* <ShadowBlockTest />
         <ShadowBlockTest />
-        <ShadowBlockTest />
-        <ShadowBlockTest />
+        <ShadowBlockTest /> */}
+        <ViewBlockTest />
+        <ViewBlockTest />
+        <ViewBlockTest />
         {platformSupportsShadow && platformSupportsFAB && (
           <View style={stackStyle}>
             <FAB icon={iconProps} style={styles.marginBetweenComponentsWithShadow}>
