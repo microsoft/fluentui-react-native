@@ -78,17 +78,17 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
     return YES;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass)
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagHorizontalSizeClassMap)
 {
     return _rootTagHorizontalSizeClassMap;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel)
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagUserInterfaceLevelMap)
 {
     return _rootTagUserInterfaceLevelMap;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagAccessibilityContrastOptionMap)
 {
     return _rootTagAccessibilityContrastMap;
 }

@@ -17,9 +17,9 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
   _rootTagAccessibilityContrastOptionMap: { [key: number]: AccessibilityContrastOption } = {};
 
   constructor() {
-    this._rootTagHorizontalSizeClassMap = NativeAppearanceAdditions.horizontalSizeClass();
-    this._rootTagUserInterfaceLevelMap = NativeAppearanceAdditions.userInterfaceLevel();
-    this._rootTagAccessibilityContrastOptionMap = NativeAppearanceAdditions.accessibilityContrastOption();
+    this._rootTagHorizontalSizeClassMap = NativeAppearanceAdditions.rootTagHorizontalSizeClassMap();
+    this._rootTagUserInterfaceLevelMap = NativeAppearanceAdditions.rootTagUserInterfaceLevelMap();
+    this._rootTagAccessibilityContrastOptionMap = NativeAppearanceAdditions.rootTagAccessibilityContrastOptionMap();
 
     const eventEmitter = new NativeEventEmitter(NativeAppearanceAdditions as any);
     eventEmitter.addListener('appearanceChanged', (newValue) => {

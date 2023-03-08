@@ -3,15 +3,15 @@ export const NativeAppearanceAdditions = {
   addListener: (_: string) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   removeListeners: (_: number) => {},
-  horizontalSizeClass: () => {
+  rootTagHorizontalSizeClassMap: () => {
     console.warn('NativeAppearanceAdditions is only available on iOS');
     return {};
   },
-  userInterfaceLevel: () => {
+  rootTagUserInterfaceLevelMap: () => {
     console.warn('NativeAppearanceAdditions is only available on iOS');
     return {};
   },
-  accessibilityContrastOption: () => {
+  rootTagAccessibilityContrastOptionMap: () => {
     console.warn('NativeAppearanceAdditions is only available on iOS');
     return {};
   },
