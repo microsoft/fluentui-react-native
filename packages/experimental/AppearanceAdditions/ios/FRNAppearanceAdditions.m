@@ -4,6 +4,7 @@
 #import <React/RCTConstants.h>
 #import <React/RCTUtils.h>
 #import <React/UIView+React.h>
+#import <React/RCTRootView.h>
 
 NSString *const FRNAppearanceSizeClassCompact = @"compact";
 NSString *const FRNAppearanceSizeClassRegular = @"regular";
@@ -142,14 +143,19 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagAccessibilityContrastOptionMap)
     if (_hasListeners) {
         UITraitCollection *traitCollection = [[notification userInfo] valueForKey:RCTUserInterfaceStyleDidChangeNotificationTraitCollectionKey];
         if (![traitCollection isKindOfClass:[UITraitCollection class]]) {
-            traitCollection = nil;
+            return;
+        }
+        
+        RCTRootView *rootView = [notification object];
+        if (![rootView isKindOfClass:[RCTRootView class]]) {
+            return;
         }
 
         NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference(traitCollection);
         NSString *userInterfaceLevel = RCTUserInterfaceLevelPreference(traitCollection);
         NSString *accessibilityContrastOption = RCTAccessibilityContrastPreference(traitCollection);
         
-        NSNumber *rootTag = [[[notification object] contentView] reactTag];
+        NSNumber *rootTag = [[rootView contentView] reactTag];
 
         if (![horizontalSizeClass isEqualToString: _rootTagHorizontalSizeClassMap[rootTag]] ||
             ![userInterfaceLevel isEqualToString:_rootTagUserInterfaceLevelMap[rootTag]] ||
