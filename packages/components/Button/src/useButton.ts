@@ -1,15 +1,12 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 
-import {
-  usePressableState,
-  useKeyProps,
-  useOnPressWithFocus,
-  useViewCommandFocus,
-  LayoutEvent,
-} from '@fluentui-react-native/interactive-hooks';
+import { useFluentTheme } from '@fluentui-react-native/framework';
+import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
 import type { ButtonProps, ButtonInfo } from './Button.types';
-import { Platform } from 'react-native';
 
 export const useButton = (props: ButtonProps): ButtonInfo => {
   const defaultComponentRef = React.useRef(null);
@@ -22,7 +19,10 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   const pressable = usePressableState({ ...rest, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
-  const useTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary';
+
+  const theme = useFluentTheme();
+  const useTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary' && !isHighContrast(theme);
+
   const [baseHeight, setBaseHeight] = React.useState<number | undefined>(undefined);
   const [baseWidth, setBaseWidth] = React.useState<number | undefined>(undefined);
   const onLayout = React.useCallback(
@@ -54,6 +54,6 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
       loading,
       onLayout,
     },
-    state: { ...pressable.state, x: baseWidth, y: baseHeight },
+    state: { ...pressable.state, width: baseWidth, height: baseHeight, useTwoToneBorder: useTwoToneFocusBorder },
   };
 };

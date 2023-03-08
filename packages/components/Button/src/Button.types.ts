@@ -168,7 +168,7 @@ export interface ButtonProps extends ButtonCoreProps {
 
 export interface ButtonInfo {
   props: ButtonProps & React.ComponentPropsWithRef<any>;
-  state: PressableState & { x?: number; y?: number };
+  state: PressableState & { width?: number; height?: number; useTwoToneBorder?: boolean };
 }
 
 export interface ButtonSlotProps {

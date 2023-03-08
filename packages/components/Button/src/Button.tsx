@@ -90,6 +90,7 @@ export const Button = compose<ButtonType>({
       );
 
       const hasRipple = Platform.OS === 'android';
+      const hasTwoToneFocusBorder = Platform.OS === ('win32' as any);
       if (hasRipple) {
         const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
@@ -100,26 +101,31 @@ export const Button = compose<ButtonType>({
             </Slots.root>
           </Slots.rippleContainer>
         );
-      } else {
+      } else if (hasTwoToneFocusBorder) {
         return (
           <Slots.root {...mergedProps} accessibilityLabel={label}>
             {buttonContent}
-            {button.state.focused && (
+            {button.state.focused && button.state.useTwoToneBorder && (
               <View
                 style={{
                   position: 'absolute',
-                  width: button.state.x - 2,
-                  height: button.state.y - 2,
+                  width: button.state.width - 2,
+                  height: button.state.height - 2,
                   borderWidth: 1,
                   borderColor: 'white',
                   borderRadius: 3,
                   flexDirection: 'row',
-                  top: 0,
                 }}
                 accessible={false}
                 focusable={false}
               />
             )}
+          </Slots.root>
+        );
+      } else {
+        return (
+          <Slots.root {...mergedProps} accessibilityLabel={label}>
+            {buttonContent}
           </Slots.root>
         );
       }
