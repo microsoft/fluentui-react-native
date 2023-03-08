@@ -113,10 +113,19 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
           <CompoundButton secondaryContent="Small compound button" size="small" style={commonTestStyles.vmargin}>
             Compound Button
           </CompoundButton>
+          <CompoundButton appearance="primary" secondaryContent="Small compound button" size="small" style={commonTestStyles.vmargin}>
+            Compound Button
+          </CompoundButton>
           <CompoundButton secondaryContent="Medium compound button" size="medium" style={commonTestStyles.vmargin}>
             Compound Button
           </CompoundButton>
+          <CompoundButton appearance="primary" secondaryContent="Medium compound button" size="medium" style={commonTestStyles.vmargin}>
+            Compound Button
+          </CompoundButton>
           <CompoundButton secondaryContent="Large compound button" size="large" style={commonTestStyles.vmargin}>
+            Compound Button
+          </CompoundButton>
+          <CompoundButton appearance="primary" secondaryContent="Large compound button" size="large" style={commonTestStyles.vmargin}>
             Compound Button
           </CompoundButton>
           {svgIconsEnabled && (
