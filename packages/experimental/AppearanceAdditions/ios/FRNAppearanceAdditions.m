@@ -79,18 +79,15 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
     return YES;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagHorizontalSizeClassMap)
-{
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagHorizontalSizeClassMap) {
     return _rootTagHorizontalSizeClassMap;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagUserInterfaceLevelMap)
-{
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagUserInterfaceLevelMap) {
     return _rootTagUserInterfaceLevelMap;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagAccessibilityContrastOptionMap)
-{
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagAccessibilityContrastOptionMap) {
     return _rootTagAccessibilityContrastMap;
 }
 
@@ -100,8 +97,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagAccessibilityContrastOptionMap)
     return @[ @"appearanceChanged" ];
 }
 
-- (dispatch_queue_t)methodQueue
-{
+- (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
@@ -112,12 +108,10 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagAccessibilityContrastOptionMap)
     _rootTagUserInterfaceLevelMap = [NSMutableDictionary new];
     _rootTagAccessibilityContrastMap = [NSMutableDictionary new];
     
-    for (UIWindow *window in RCTSharedApplication().windows)
-    {
+    for (UIWindow *window in RCTSharedApplication().windows) {
         NSNumber *rootTag = [[[window rootViewController] view] reactTag];
         
-        if (rootTag != nil)
-        {
+        if (rootTag != nil) {
             UITraitCollection *windowTraitCollection = [window traitCollection];
             
             _rootTagHorizontalSizeClassMap[rootTag] = RCTHorizontalSizeClassPreference(windowTraitCollection);
