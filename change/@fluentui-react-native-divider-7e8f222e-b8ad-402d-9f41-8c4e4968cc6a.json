@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix incorrect min-height default token value",
+  "packageName": "@fluentui-react-native/divider",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

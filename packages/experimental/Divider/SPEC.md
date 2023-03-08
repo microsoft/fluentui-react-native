@@ -219,6 +219,12 @@ type DividerLayoutTokens = {
    */
   minWidth?: string | number;
   maxWidth?: string | number;
+  /**
+   * For minHeight, there are different default values:
+   * @default 0 for horizontal dividers
+   * @default 20 for vertical dividers without children
+   * @default 84 for vertical dividers with children
+   */
   minHeight?: string | number;
   maxHeight?: string | number;
   /**
