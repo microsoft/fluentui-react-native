@@ -1,4 +1,5 @@
 import type { Theme } from '@fluentui-react-native/framework';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { SwitchTokens } from './Switch.types';
@@ -94,7 +95,3 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     focusStrokeColor: t.colors.strokeFocus2,
   },
 });
-
-function isHighContrast(t: Theme) {
-  return t.name === 'HighContrast';
-}

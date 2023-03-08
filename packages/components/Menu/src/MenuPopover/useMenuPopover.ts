@@ -7,6 +7,7 @@ import type { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
 import { useMenuContext } from '../context/menuContext';
 
 const controlledDismissBehaviors = ['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[];
+const stopPropagationKeys = ['ArrowUp', 'ArrowDown', 'Tab', 'Home', 'End', 'Escape'] as const;
 
 export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
   const context = useMenuContext();
@@ -61,13 +62,8 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
 
       // Mark key events that move selection as handled.
       // These key events are handled on the native side.
-      switch (e.nativeEvent.key) {
-        case 'ArrowUp':
-        case 'ArrowDown':
-        case 'Tab':
-        case 'Home':
-        case 'End':
-          e.stopPropagation();
+      if (stopPropagationKeys.includes(e.nativeEvent.key)) {
+        e.stopPropagation();
       }
     },
     [onKeyDownProp],
@@ -79,13 +75,8 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
 
       // Mark key events that move selection as handled.
       // These key events are handled on the native side.
-      switch (e.nativeEvent.key) {
-        case 'ArrowUp':
-        case 'ArrowDown':
-        case 'Tab':
-        case 'Home':
-        case 'End':
-          e.stopPropagation();
+      if (stopPropagationKeys.includes(e.nativeEvent.key)) {
+        e.stopPropagation();
       }
     },
     [onKeyUpProp],
