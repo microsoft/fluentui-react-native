@@ -64,10 +64,6 @@ const buttonSections: TestSection[] = [
       },
     ],
   }),
-  {
-    name: 'E2E Button Testing',
-    component: E2EButtonTest,
-  },
 ];
 
 const e2eSections: TestSection[] = [
