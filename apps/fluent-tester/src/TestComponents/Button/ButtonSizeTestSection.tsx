@@ -25,7 +25,24 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
           />
           <Button
             iconOnly
+            size="small"
+            appearance="primary"
+            icon={iconProps}
+            accessibilityLabel="Small size button with accessibility icon"
+            style={commonTestStyles.vmargin}
+            tooltip="button tooltip"
+          />
+          <Button
+            iconOnly
             size="medium"
+            icon={iconProps}
+            accessibilityLabel="Medium size button with accessibility icon"
+            style={commonTestStyles.vmargin}
+          />
+          <Button
+            iconOnly
+            size="medium"
+            appearance="primary"
             icon={iconProps}
             accessibilityLabel="Medium size button with accessibility icon"
             style={commonTestStyles.vmargin}
@@ -37,13 +54,30 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
             accessibilityLabel="Large size button with accessibility icon"
             style={commonTestStyles.vmargin}
           />
+          <Button
+            iconOnly
+            size="large"
+            appearance="primary"
+            icon={iconProps}
+            accessibilityLabel="Large size button with accessibility icon"
+            style={commonTestStyles.vmargin}
+          />
           <Button size="small" icon={iconProps} style={commonTestStyles.vmargin}>
+            Small Button with icon
+          </Button>
+          <Button size="small" appearance="primary" icon={iconProps} style={commonTestStyles.vmargin}>
             Small Button with icon
           </Button>
           <Button size="medium" icon={iconProps} style={commonTestStyles.vmargin}>
             Medium Button with icon
           </Button>
+          <Button size="medium" appearance="primary" icon={iconProps} style={commonTestStyles.vmargin}>
+            Medium Button with icon
+          </Button>
           <Button size="large" icon={iconProps} style={commonTestStyles.vmargin}>
+            Large Button with icon
+          </Button>
+          <Button size="large" appearance="primary" icon={iconProps} style={commonTestStyles.vmargin}>
             Large Button with icon
           </Button>
           {Platform.OS == 'android' && (
