@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 08 Mar 2023 02:06:17 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.21",
+      "version": "1.4.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "f083e73f8a3b0555484c1e30070fd6e8cd7a017c",
+            "comment": "remove hover state styling from menuItems"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Mar 2023 20:54:15 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.20",
       "version": "1.4.20",

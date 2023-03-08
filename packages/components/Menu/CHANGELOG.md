@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Mar 2023 02:06:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.21
+
+Wed, 08 Mar 2023 02:06:17 GMT
+
+### Patches
+
+- remove hover state styling from menuItems (email not defined)
 
 ## 1.4.20
 
