@@ -23,12 +23,6 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   submenuIndicatorColor: t.colors.neutralForeground1,
   submenuIndicatorPadding: globalTokens.size20,
   submenuIndicatorSize: 16,
-  hovered: {
-    backgroundColor: t.colors.neutralBackground1Hover,
-    color: t.colors.neutralForeground1Hover,
-    iconColor: t.colors.neutralForeground1Hover,
-    submenuIndicatorColor: t.colors.neutralForeground1Hover,
-  },
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
     color: t.colors.neutralForeground1Pressed,
