@@ -15,6 +15,8 @@ import { defaultButtonTokens } from './ButtonTokens';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'block',
+  'primary',
+  'subtle',
   'outline',
   'hovered',
   'small',
@@ -23,8 +25,6 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'hasContent',
   'hasIconAfter',
   'hasIconBefore',
-  'primary',
-  'subtle',
   'rounded',
   'circular',
   'square',
