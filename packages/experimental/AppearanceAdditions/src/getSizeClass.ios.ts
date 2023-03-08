@@ -1,5 +1,6 @@
+import React from 'react';
 import { useMemo } from 'react';
-import { NativeEventEmitter } from 'react-native';
+import { NativeEventEmitter, RootTagContext } from 'react-native';
 
 import { useSubscription } from 'use-subscription';
 
@@ -9,7 +10,9 @@ import type { SizeClass } from './NativeAppearanceAdditions.types';
 
 const eventEmitter = NativeAppearanceAdditions ? new NativeEventEmitter(NativeAppearanceAdditions as any) : undefined;
 
-export function useHorizontalSizeClass(rootTag: number): SizeClass {
+export function useHorizontalSizeClass(_rootTag: number): SizeClass {
+  const rootTag = React.useContext(RootTagContext);
+
   if (!eventEmitter) {
     return 'regular';
   }
@@ -26,7 +29,7 @@ export function useHorizontalSizeClass(rootTag: number): SizeClass {
         };
       },
     }),
-    [],
+    [rootTag],
   );
 
   // Early return on eventEmitter will either always or never return within a single instance

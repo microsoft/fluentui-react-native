@@ -1,7 +1,6 @@
 /** @jsx withSlots */
-import { useContext } from 'react';
 import type { PressableProps, ViewStyle, ViewProps } from 'react-native';
-import { useWindowDimensions, View, RootTagContext } from 'react-native';
+import { useWindowDimensions, View } from 'react-native';
 
 import type { SizeClassIOS } from '@fluentui-react-native/experimental-appearance-additions';
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
@@ -47,8 +46,7 @@ export const Notification = compose<NotificationType>({
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
     const width = useWindowDimensions().width / 2;
-    const rootTag = useContext(RootTagContext);
-    const sizeClass = useHorizontalSizeClass(rootTag);
+    const sizeClass = useHorizontalSizeClass();
     const onActionPress = userProps.onActionPress;
 
     const rootStyle = getRootStyle(isBar, width, sizeClass);
