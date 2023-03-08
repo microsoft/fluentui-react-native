@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/divider
 
-This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Mar 2023 23:41:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.8
+
+Wed, 08 Mar 2023 23:41:31 GMT
+
+### Patches
+
+- Fix incorrect min-height default token value (winlarry@microsoft.com)
 
 ## 0.3.7
 
