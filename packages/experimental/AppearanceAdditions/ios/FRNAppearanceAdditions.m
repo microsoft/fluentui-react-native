@@ -70,9 +70,9 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
 @implementation FRNAppearanceAdditions {
     BOOL _hasListeners;
     
-    NSMutableDictionary<NSNumber *, NSString *> * _rootTagHorizontalSizeClassMap;
-    NSMutableDictionary<NSNumber *, NSString *> * _rootTagUserInterfaceLevelMap;
-    NSMutableDictionary<NSNumber *, NSString *> * _rootTagAccessibilityContrastMap;
+    NSMutableDictionary<id<NSCopying>, NSString *> * _rootTagHorizontalSizeClassMap;
+    NSMutableDictionary<id<NSCopying>, NSString *> * _rootTagUserInterfaceLevelMap;
+    NSMutableDictionary<id<NSCopying>, NSString *> * _rootTagAccessibilityContrastMap;
 }
 
 + (BOOL)requiresMainQueueSetup {
@@ -109,7 +109,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagAccessibilityContrastOptionMap) {
     _rootTagAccessibilityContrastMap = [NSMutableDictionary new];
     
     for (UIWindow *window in RCTSharedApplication().windows) {
-        NSNumber *rootTag = [[[window rootViewController] view] reactTag];
+        id<NSCopying> rootTag = [[[window rootViewController] view] reactTag];
         
         if (rootTag != nil) {
             UITraitCollection *windowTraitCollection = [window traitCollection];
@@ -149,7 +149,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(rootTagAccessibilityContrastOptionMap) {
         NSString *userInterfaceLevel = RCTUserInterfaceLevelPreference(traitCollection);
         NSString *accessibilityContrastOption = RCTAccessibilityContrastPreference(traitCollection);
         
-        NSNumber *rootTag = [[rootView contentView] reactTag];
+        id<NSCopying> rootTag = [[rootView contentView] reactTag];
 
         if (![horizontalSizeClass isEqualToString: _rootTagHorizontalSizeClassMap[rootTag]] ||
             ![userInterfaceLevel isEqualToString:_rootTagUserInterfaceLevelMap[rootTag]] ||
