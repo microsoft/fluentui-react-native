@@ -14,8 +14,12 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       borderWidth: globalTokens.stroke.width10,
       iconSize: 16,
       focused: {
-        borderWidth: 2,
         padding: globalTokens.size80,
+      },
+      primary: {
+        focused: {
+          borderWidth: globalTokens.stroke.width20,
+        },
       },
       hasContent: {
         minWidth: 96,
@@ -38,8 +42,12 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       borderWidth: globalTokens.stroke.width10,
       iconSize: 16,
       focused: {
-        borderWidth: 2,
         padding: globalTokens.size40,
+      },
+      primary: {
+        focused: {
+          borderWidth: globalTokens.stroke.width20,
+        },
       },
       hasContent: {
         minWidth: 64,
@@ -58,8 +66,12 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       borderWidth: globalTokens.stroke.width10,
       iconSize: 20,
       focused: {
-        borderWidth: 2,
         padding: globalTokens.size100,
+      },
+      primary: {
+        focused: {
+          borderWidth: globalTokens.stroke.width20,
+        },
       },
       hasContent: {
         minWidth: 96,
