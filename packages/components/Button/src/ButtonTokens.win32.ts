@@ -20,6 +20,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       primary: {
         focused: {
           borderWidth: globalTokens.stroke.width20,
+          padding: globalTokens.size80 - globalTokens.stroke.width20,
         },
       },
       hasContent: {
@@ -36,6 +37,12 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
           padding: globalTokens.size60,
           paddingHorizontal: globalTokens.size120,
         },
+        primary: {
+          focused: {
+            padding: globalTokens.size60 - globalTokens.stroke.width20,
+            paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
+          },
+        },
       },
     },
     small: {
@@ -49,6 +56,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       primary: {
         focused: {
           borderWidth: globalTokens.stroke.width20,
+          padding: globalTokens.size40 - globalTokens.stroke.width20,
         },
       },
       hasContent: {
@@ -60,6 +68,14 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         },
         hasIconBefore: {
           spacingIconContentBefore: globalTokens.size40,
+        },
+        focused: {
+          paddingHorizontal: globalTokens.size80,
+        },
+        primary: {
+          focused: {
+            paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
+          },
         },
       },
     },
@@ -74,6 +90,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       primary: {
         focused: {
           borderWidth: globalTokens.stroke.width20,
+          padding: globalTokens.size100 - globalTokens.stroke.width20,
         },
       },
       hasContent: {
@@ -90,6 +107,12 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         focused: {
           padding: globalTokens.size80,
           paddingHorizontal: globalTokens.size160,
+        },
+        primary: {
+          focused: {
+            padding: globalTokens.size80 - globalTokens.stroke.width20,
+            paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
+          },
         },
       },
     },
