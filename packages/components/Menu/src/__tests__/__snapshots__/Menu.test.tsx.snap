@@ -67,6 +67,7 @@ exports[`Menu component tests Menu default 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
@@ -156,6 +157,7 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
@@ -245,6 +247,7 @@ exports[`Menu component tests Menu open 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
@@ -334,6 +337,7 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
@@ -423,6 +427,7 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
@@ -512,6 +517,7 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
@@ -601,6 +607,7 @@ exports[`Menu component tests Menu open radio 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
@@ -690,6 +697,7 @@ exports[`Menu component tests Menu submenu 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}

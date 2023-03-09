@@ -1,9 +1,10 @@
 /** @jsx withSlots */
 import React from 'react';
-import { I18nManager, Pressable, View } from 'react-native';
+import { I18nManager, Image, Pressable, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, memoize, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { SvgXml } from 'react-native-svg';
 
@@ -19,6 +20,9 @@ export const MenuItem = compose<MenuItemType>({
     root: Pressable,
     checkmark: View,
     content: Text,
+    iconPlaceholder: View,
+    imgIcon: Image,
+    fontOrSvgIcon: Icon,
     submenuIndicator: SvgXml,
   },
   useRender: (userProps: MenuItemProps, useSlots: UseSlots<MenuItemType>) => {
@@ -26,7 +30,7 @@ export const MenuItem = compose<MenuItemType>({
     const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer] || userProps[layer]);
 
     return (final: MenuItemProps, children: React.ReactNode) => {
-      const { accessibilityLabel, tooltip, ...mergedProps } = mergeProps(menuItem.props, final);
+      const { accessibilityLabel, icon, tooltip, ...mergedProps } = mergeProps(menuItem.props, final);
       const chevronXml = I18nManager.isRTL
         ? `
           <svg>
@@ -44,6 +48,12 @@ export const MenuItem = compose<MenuItemType>({
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           {menuItem.state.hasCheckmarks && <Slots.checkmark />}
+          {(icon || menuItem.state.hasIcons) && (
+            <Slots.iconPlaceholder>
+              {icon && icon.source && <Slots.imgIcon {...icon} />}
+              {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon {...icon} />}
+            </Slots.iconPlaceholder>
+          )}
           {children && <Slots.content tooltip={tooltipResult}>{children}</Slots.content>}
           {menuItem.state.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
         </Slots.root>
