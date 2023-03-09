@@ -1,5 +1,4 @@
 /** @jsx withSlots */
-import * as React from 'react';
 import { TextInput, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
