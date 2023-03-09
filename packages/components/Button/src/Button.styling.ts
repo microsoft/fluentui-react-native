@@ -44,10 +44,10 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
             style: {
               flexDirection: 'row',
               alignSelf: 'baseline',
-              width: tokens.width,
               borderColor: tokens.borderInnerColor,
               borderWidth: tokens.borderInnerWidth,
-              borderRadius: tokens.borderInnerRadius,
+              borderRadius: tokens.borderRadius,
+              overflow: 'hidden',
             },
           };
         },
