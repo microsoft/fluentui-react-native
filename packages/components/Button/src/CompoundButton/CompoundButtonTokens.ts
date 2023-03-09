@@ -10,22 +10,11 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
     focused: {
       padding: globalTokens.size120,
     },
-    primary: {
-      focused: {
-        borderWidth: globalTokens.stroke.width20,
-        padding: globalTokens.size120 - globalTokens.stroke.width20,
-      },
-    },
     hasContent: {
       paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
       minWidth: 96,
       focused: {
         paddingHorizontal: globalTokens.size120,
-      },
-      primary: {
-        focused: {
-          paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
-        },
       },
       hasIconAfter: {
         spacingIconContentAfter: globalTokens.size120,
@@ -40,22 +29,11 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
     focused: {
       padding: globalTokens.size80,
     },
-    primary: {
-      focused: {
-        borderWidth: globalTokens.stroke.width20,
-        padding: globalTokens.size80 - globalTokens.stroke.width20,
-      },
-    },
     hasContent: {
       paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width10,
       minWidth: 64,
       focused: {
         paddingHorizontal: globalTokens.size80,
-      },
-      primary: {
-        focused: {
-          paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
-        },
       },
       hasIconAfter: {
         spacingIconContentAfter: globalTokens.size80,
@@ -70,22 +48,11 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
     focused: {
       padding: globalTokens.size160,
     },
-    primary: {
-      focused: {
-        borderWidth: globalTokens.stroke.width20,
-        padding: globalTokens.size160 - globalTokens.stroke.width20,
-      },
-    },
     hasContent: {
       paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
       minWidth: 96,
       focused: {
         paddingHorizontal: globalTokens.size160,
-      },
-      primary: {
-        focused: {
-          paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
-        },
       },
       hasIconAfter: {
         spacingIconContentAfter: globalTokens.size160,
