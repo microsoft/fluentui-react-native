@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -23,6 +23,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     content: Text,
     secondaryContent: Text,
     contentContainer: View,
+    focusInnerBorder: Platform.OS === ('win32' as any) && View,
   },
   useRender: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
@@ -72,6 +73,13 @@ export const CompoundButton = compose<CompoundButtonType>({
             {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
           </Slots.contentContainer>
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {button.state.focused && button.state.useTwoToneBorder && (
+            <Slots.focusInnerBorder
+              style={{ width: button.state.width - 2, height: button.state.height - 2 }}
+              accessible={false}
+              focusable={false}
+            />
+          )}
         </Slots.root>
       );
     };

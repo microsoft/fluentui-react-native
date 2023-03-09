@@ -44,7 +44,8 @@ export const Button = compose<ButtonType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
-    rippleContainer: View,
+    rippleContainer: Platform.OS === 'android' && View,
+    focusInnerBorder: Platform.OS === ('win32' as any) && View,
     icon: Icon,
     content: Text,
   },
@@ -90,7 +91,6 @@ export const Button = compose<ButtonType>({
       );
 
       const hasRipple = Platform.OS === 'android';
-      const hasTwoToneFocusBorder = Platform.OS === ('win32' as any);
       if (hasRipple) {
         const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
@@ -101,31 +101,20 @@ export const Button = compose<ButtonType>({
             </Slots.root>
           </Slots.rippleContainer>
         );
-      } else if (hasTwoToneFocusBorder) {
+      } else {
         return (
           <Slots.root {...mergedProps} accessibilityLabel={label}>
             {buttonContent}
             {button.state.focused && button.state.useTwoToneBorder && (
-              <View
+              <Slots.focusInnerBorder
                 style={{
-                  position: 'absolute',
                   width: button.state.width - 2,
                   height: button.state.height - 2,
-                  borderWidth: 1,
-                  borderColor: 'white',
-                  borderRadius: 3,
-                  flexDirection: 'row',
                 }}
                 accessible={false}
                 focusable={false}
               />
             )}
-          </Slots.root>
-        );
-      } else {
-        return (
-          <Slots.root {...mergedProps} accessibilityLabel={label}>
-            {buttonContent}
           </Slots.root>
         );
       }

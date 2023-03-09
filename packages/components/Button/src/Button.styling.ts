@@ -53,22 +53,25 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       ['borderRadius'],
     ),
     root: buildProps(
-      (tokens: ButtonTokens, theme: Theme) => ({
-        style: {
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          justifyContent: 'center',
-          width: tokens.width,
-          backgroundColor: tokens.backgroundColor,
-          ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
-        },
-        android_ripple: {
-          color: tokens.rippleColor,
-        },
-      }),
+      (tokens: ButtonTokens, theme: Theme) => {
+        console.log(tokens.borderWidth);
+        return {
+          style: {
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            alignSelf: 'flex-start',
+            justifyContent: 'center',
+            width: tokens.width,
+            backgroundColor: tokens.backgroundColor,
+            ...borderStyles.from(tokens, theme),
+            ...layoutStyles.from(tokens, theme),
+          },
+          android_ripple: {
+            color: tokens.rippleColor,
+          },
+        };
+      },
       ['backgroundColor', 'width', 'rippleColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     content: buildProps(
@@ -88,6 +91,17 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
         width: tokens.iconSize,
       }),
       ['iconColor', 'iconSize'],
+    ),
+    focusInnerBorder: buildProps(
+      (tokens: ButtonTokens) => ({
+        style: {
+          position: 'absolute',
+          borderWidth: tokens.borderInnerWidth,
+          borderColor: tokens.borderInnerColor,
+          borderRadius: tokens.borderInnerRadius,
+        },
+      }),
+      ['borderInnerWidth', 'borderInnerColor', 'borderInnerRadius'],
     ),
   },
 };

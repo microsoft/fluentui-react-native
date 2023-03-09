@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -21,6 +21,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     root: Pressable,
     icon: Icon,
     content: Text,
+    focusInnerBorder: Platform.OS === ('win32' as any) && View,
   },
   useRender: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
     const iconProps = createIconProps(userProps.icon);
@@ -60,6 +61,13 @@ export const ToggleButton = compose<ToggleButtonType>({
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
           )}
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {toggleButton.state.focused && toggleButton.state.useTwoToneBorder && (
+            <Slots.focusInnerBorder
+              style={{ width: toggleButton.state.width - 2, height: toggleButton.state.height - 2 }}
+              accessible={false}
+              focusable={false}
+            />
+          )}
         </Slots.root>
       );
     };

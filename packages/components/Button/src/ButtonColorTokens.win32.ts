@@ -67,6 +67,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         backgroundColor: t.colors.brandBackgroundHover,
         color: t.colors.neutralForegroundOnBrandHover,
         borderColor: t.colors.strokeFocus2,
+        borderInnerColor: t.colors.strokeFocus1,
         iconColor: t.colors.neutralForegroundOnBrandHover,
       },
     },
