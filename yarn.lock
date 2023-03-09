@@ -1637,6 +1637,24 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.42.0.tgz#6b7ca87ed30a92634e72cbe8fc1280fd21db50b8"
   integrity sha512-hBPCikSDJ3Rgw+mAbTgnNB83dn3SeSKPo4XNli22tbV08fN8P5mEaEg8Uw0cbVMN3D138ykNeAaK/lZjO9KIqA==
 
+"@fluentui-react-native/framework@0.7.17":
+  version "0.7.17"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.7.17.tgz#b8451227d15640bfcc73b002f7b3f3c19079faf6"
+  integrity sha512-AzI+2c9CbH1+oq1FMYdKzm6GxRup8jj4Gvk+3brECYaKPMHIC+w4iyBPkHdICayc3Iug+N7vlWxduhfaEearaw==
+  dependencies:
+    "@fluentui-react-native/composition" ">=0.7.6 <1.0.0"
+    "@fluentui-react-native/default-theme" ">=0.9.11 <1.0.0"
+    "@fluentui-react-native/immutable-merge" "^1.1.6"
+    "@fluentui-react-native/memo-cache" "^1.1.7"
+    "@fluentui-react-native/merge-props" ">=0.4.2 <1.0.0"
+    "@fluentui-react-native/theme-types" ">=0.14.0 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.11.8 <1.0.0"
+    "@fluentui-react-native/use-slot" ">=0.2.5 <1.0.0"
+    "@fluentui-react-native/use-slots" ">=0.6.5 <1.0.0"
+    "@fluentui-react-native/use-styling" ">=0.8.2 <1.0.0"
+    "@fluentui-react-native/use-tokens" ">=0.2.2 <1.0.0"
+    tslib "^2.3.1"
+
 "@fortawesome/fontawesome-common-types@6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.3.0.tgz#51f734e64511dbc3674cd347044d02f4dd26e86b"
