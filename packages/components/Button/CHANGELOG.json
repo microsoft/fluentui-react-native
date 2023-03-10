@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Fri, 10 Mar 2023 00:08:36 GMT",
+      "tag": "@fluentui-react-native/button_v0.32.41",
+      "version": "0.32.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "5eff9145563e7d829c47da74544e0581225c6d2c",
+            "comment": "Remove button text and after-icon from UIA tree"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Mar 2023 20:54:15 GMT",
       "tag": "@fluentui-react-native/button_v0.32.40",
       "version": "0.32.40",
