@@ -110,12 +110,14 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
     for (UIWindow *window in RCTSharedApplication().windows) {
         RCTRootView *rootView = (RCTRootView *)[[window rootViewController] view];
         
-        if ([[rootView bridge] bundleURL] == [[self bridge] bundleURL]) {
-            UITraitCollection *windowTraitCollection = [window traitCollection];
-            
-            _horizontalSizeClass = RCTHorizontalSizeClassPreference(windowTraitCollection);
-            _userInterfaceLevel = RCTUserInterfaceLevelPreference(windowTraitCollection);
-            _accessibilityContrastOption = RCTAccessibilityContrastPreference(windowTraitCollection);
+        if ([rootView isKindOfClass:[RCTRootView class]]) {
+            if ([[rootView bridge] bundleURL] == [[self bridge] bundleURL]) {
+                UITraitCollection *windowTraitCollection = [window traitCollection];
+                
+                _horizontalSizeClass = RCTHorizontalSizeClassPreference(windowTraitCollection);
+                _userInterfaceLevel = RCTUserInterfaceLevelPreference(windowTraitCollection);
+                _accessibilityContrastOption = RCTAccessibilityContrastPreference(windowTraitCollection);
+            }
         }
     }
     
@@ -136,6 +138,10 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
     if (_hasListeners) {
         RCTBridge *currentBridge = [self bridge];
         RCTBridge *notificationBridge = [[notification object] bridge];
+        
+        if (![notificationBridge isKindOfClass:[RCTBridge class]]) {
+            return;
+        }
         
         // Don't send the appearanceChanged event if the notification didn't originate from the same react native instance
         if ([currentBridge bundleURL] != [notificationBridge bundleURL]) {
