@@ -175,7 +175,7 @@ export const tests: TestDescription[] = [
     name: 'Menu',
     component: MenuTest,
     testPageButton: Constants.HOMEPAGE_MENU_BUTTON,
-    platforms: ['macos', 'win32'],
+    platforms: ['macos', 'win32', 'android'],
   },
   {
     name: 'MenuButton Legacy',
