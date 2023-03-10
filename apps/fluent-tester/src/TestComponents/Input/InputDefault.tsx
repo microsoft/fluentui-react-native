@@ -6,7 +6,7 @@ import { Input } from '@fluentui-react-native/input';
 export const InputDefault: React.FunctionComponent = () => {
   return (
     <View>
-      <Input />
+      <Input label="Label" assistiveText="Assistive Text" secondaryText="Secondary" />
     </View>
   );
 };

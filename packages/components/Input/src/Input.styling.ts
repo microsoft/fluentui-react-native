@@ -1,6 +1,7 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
 
 import { input } from './Input.types';
 import type { InputTokens, InputSlotProps, InputProps } from './Input.types';
@@ -13,47 +14,108 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
       (tokens: InputTokens, theme: Theme) => ({
         style: {
           display: 'flex',
-          alignItems: 'flex-start',
-          flexDirection: 'column',
+          alignItems: 'center',
+          flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
           backgroundColor: tokens.backgroundColor,
+          paddingHorizontal: tokens.paddingHorizontal,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'paddingHorizontal', ...borderStyles.keys, ...layoutStyles.keys],
     ),
+    contentContainer: {
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        alignSelf: 'flex-start',
+        justifyContent: 'center',
+      },
+    },
     inputWrapper: buildProps(
-      (tokens: InputTokens, theme: Theme) => ({
+      (tokens: InputTokens) => ({
         style: {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          backgroundColor: tokens.backgroundColor,
-          ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
+          marginVertical: tokens.inputVerticalMargin,
         },
       }),
-      ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
+      ['inputVerticalMargin'],
+    ),
+    input: buildProps(
+      (tokens: InputTokens, theme: Theme) => ({
+        style: {
+          ...fontStyles.from(tokens.inputTextFont, theme),
+          ...getTextMarginAdjustment(),
+          padding: 0, // Required to override default padding
+          margin: 0, // Required to override default margin
+        },
+      }),
+      [...fontStyles.keys],
+    ),
+    secondaryText: buildProps(
+      (tokens: InputTokens, theme: Theme) => ({
+        style: {
+          ...fontStyles.from(tokens.inputTextFont, theme),
+          ...getTextMarginAdjustment(),
+          marginStart: tokens.spacingInputSecondary,
+        },
+      }),
+      ['spacingInputSecondary', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: InputTokens) => ({
         color: tokens.iconColor,
         height: tokens.iconSize,
         width: tokens.iconSize,
+        style: {
+          marginEnd: tokens.spacingIconContent,
+        },
       }),
-      ['iconColor', 'iconSize'],
+      ['iconSize', 'iconColor', 'spacingIconContent'],
     ),
     dismissIcon: buildProps(
       (tokens: InputTokens) => ({
         color: tokens.dismissIconColor,
         height: tokens.dismissIconSize,
         width: tokens.dismissIconSize,
+        style: {
+          marginStart: tokens.spacingDismissIconStart,
+        },
       }),
-      ['iconColor', 'iconSize'],
+      ['iconColor', 'iconSize', 'spacingDismissIconStart'],
+    ),
+    label: buildProps(
+      (tokens: InputTokens, theme: Theme) => {
+        return {
+          style: {
+            ...fontStyles.from(tokens, theme),
+            ...getTextMarginAdjustment(),
+            color: tokens.color,
+            marginTop: tokens.labelTopMargin,
+          },
+        };
+      },
+      ['color', 'labelTopMargin', ...fontStyles.keys],
+    ),
+    assistiveText: buildProps(
+      (tokens: InputTokens, theme: Theme) => {
+        return {
+          style: {
+            ...fontStyles.from(tokens.assistiveTextFont, theme),
+            ...getTextMarginAdjustment(),
+            color: tokens.assistiveTextColor,
+            marginVertical: tokens.assistiveTextVerticalMargin,
+          },
+        };
+      },
+      ['assistiveTextColor', 'assistiveTextFont'],
     ),
   },
 };

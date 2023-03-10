@@ -2,15 +2,11 @@ import type { ColorValue, TextInputProps, ViewProps } from 'react-native';
 
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const input = 'Input';
-/**
- * This type is an example. Feel free to remove it.
- */
-export type TextSize = 'small' | 'medium' | 'large';
 
-export interface InputTokens extends LayoutTokens, IBorderTokens, IColorTokens {
+export interface InputTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens {
   /**
    * The icon color.
    */
@@ -30,6 +26,51 @@ export interface InputTokens extends LayoutTokens, IBorderTokens, IColorTokens {
    * The size of the dismiss icon.
    */
   dismissIconSize?: number;
+
+  /**
+   * The color of the assistive text.
+   */
+  assistiveTextColor?: ColorValue;
+
+  /**
+   * The font style of the assistive text.
+   */
+  assistiveTextFont?: FontTokens;
+
+  /**
+   * The font style of the input box.
+   */
+  inputTextFont?: FontTokens;
+
+  /**
+   * The space between the icon and the rest of the content.
+   */
+  spacingIconContent?: number;
+
+  /**
+   * The space between the input and the secondary text.
+   */
+  spacingInputSecondary?: number;
+
+  /**
+   * The space between the dismiss icon and the left content.
+   */
+  spacingDismissIconStart?: number;
+
+  /**
+   * The input's vertical margin.
+   */
+  inputVerticalMargin?: number;
+
+  /**
+   * The assistive text's vertical margin.
+   */
+  assistiveTextVerticalMargin?: number;
+
+  /**
+   * The label's top margin.
+   */
+  labelTopMargin?: number;
 }
 
 export interface InputProps {
@@ -37,8 +78,10 @@ export interface InputProps {
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
-  textSize?: TextSize;
-  text?: string;
+  label?: string;
+  assistiveText?: string;
+  secondaryText?: string;
+  placeholder?: string;
 }
 
 export interface InputSlotProps {
@@ -47,6 +90,7 @@ export interface InputSlotProps {
   input: TextInputProps;
   inputWrapper: ViewProps;
   icon: IconProps;
+  contentContainer: ViewProps;
   dismissIcon: IconProps;
   assistiveText: TextProps;
   secondaryText: TextProps;
