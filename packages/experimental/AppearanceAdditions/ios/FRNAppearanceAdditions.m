@@ -3,6 +3,8 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTConstants.h>
 #import <React/RCTUtils.h>
+#import <React/UIView+React.h>
+#import <React/RCTRootView.h>
 
 NSString *const FRNAppearanceSizeClassCompact = @"compact";
 NSString *const FRNAppearanceSizeClassRegular = @"regular";
@@ -105,22 +107,17 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 - (void)startObserving {
     _hasListeners = YES;
     
-    // Note that [UITraitCollection currentTraitCollection] always returns the same default trait collection,
-    // presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
-    // (which happens when a view gets added to the view hierachy). In order to get the right trait collection,
-    // we need to access a view that's been added to the view hierarchy
-    UIViewController *viewControllerWithInitialTraitCollection = RCTPresentedViewController();
-    UITraitCollection *initialTraitCollection;
-    
-    if (viewControllerWithInitialTraitCollection != nil) {
-        initialTraitCollection = [viewControllerWithInitialTraitCollection traitCollection];
-    } else {
-        initialTraitCollection = [UITraitCollection currentTraitCollection];
+    for (UIWindow *window in RCTSharedApplication().windows) {
+        RCTRootView *rootView = (RCTRootView *)[[window rootViewController] view];
+        
+        if ([[rootView bridge] bundleURL] == [[self bridge] bundleURL]) {
+            UITraitCollection *windowTraitCollection = [window traitCollection];
+            
+            _horizontalSizeClass = RCTHorizontalSizeClassPreference(windowTraitCollection);
+            _userInterfaceLevel = RCTUserInterfaceLevelPreference(windowTraitCollection);
+            _accessibilityContrastOption = RCTAccessibilityContrastPreference(windowTraitCollection);
+        }
     }
-    
-    _horizontalSizeClass = RCTHorizontalSizeClassPreference(initialTraitCollection);
-    _userInterfaceLevel = RCTUserInterfaceLevelPreference(initialTraitCollection);
-    _accessibilityContrastOption = RCTAccessibilityContrastPreference(initialTraitCollection);
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
@@ -137,9 +134,17 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 
 - (void)appearanceChanged:(NSNotification *)notification {
     if (_hasListeners) {
+        RCTBridge *currentBridge = [self bridge];
+        RCTBridge *notificationBridge = [[notification object] bridge];
+        
+        // Don't send the appearanceChanged event if the notification didn't originate from the same react native instance
+        if ([currentBridge bundleURL] != [notificationBridge bundleURL]) {
+            return;
+        }
+        
         UITraitCollection *traitCollection = [[notification userInfo] valueForKey:RCTUserInterfaceStyleDidChangeNotificationTraitCollectionKey];
         if (![traitCollection isKindOfClass:[UITraitCollection class]]) {
-            traitCollection = nil;
+            return;
         }
 
         NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference(traitCollection);
