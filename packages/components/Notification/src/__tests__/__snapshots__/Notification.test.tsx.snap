@@ -137,6 +137,7 @@ exports[`Notification component tests Notification default 1`] = `
       }
     >
       <Text
+        accessible={false}
         ellipsizeMode="tail"
         numberOfLines={0}
         style={

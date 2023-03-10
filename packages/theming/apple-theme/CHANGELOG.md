@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Fri, 03 Mar 2023 06:47:26 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.16
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Repoint current implementations of isHighContrast to new function (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.17.5
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.3.6
+- Bump @fluentui-react-native/theming-utils to v0.23.7
 
 ## 0.18.15
 

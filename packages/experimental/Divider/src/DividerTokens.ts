@@ -10,6 +10,5 @@ export const useDividerTokens = buildUseTokens<DividerTokens>(() => ({
   flexBefore: 1,
   minLineSize: globalTokens.size80,
   minWidth: 0,
-  minHeight: 0,
   thickness: 1,
 }));

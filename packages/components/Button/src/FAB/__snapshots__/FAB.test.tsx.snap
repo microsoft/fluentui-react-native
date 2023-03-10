@@ -50,6 +50,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     ♣
   </Text>
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -148,6 +149,7 @@ exports[`Default FAB (iOS) 1`] = `
       ♣
     </Text>
     <Text
+      accessible={false}
       ellipsizeMode="tail"
       numberOfLines={0}
       style={

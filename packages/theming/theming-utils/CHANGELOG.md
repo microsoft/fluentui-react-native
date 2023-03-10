@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Fri, 03 Mar 2023 06:47:26 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.7
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Add HC util function (ruaraki@microsoft.com)
 
 ## 0.23.6
 

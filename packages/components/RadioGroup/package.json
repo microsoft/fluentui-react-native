@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/radio-group",
-  "version": "0.16.39",
+  "version": "0.16.40",
   "description": "A cross-platform Radio Group component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,13 +26,13 @@
     "directory": "packages/components/RadioGroup"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.13.4",
+    "@uifabricshared/foundation-compose": "^1.13.5",
     "@fluentui-react-native/adapters": ">=0.10.2 <1.0.0",
     "@fluentui-react-native/component-cache": "^1.4.4",
-    "@fluentui-react-native/focus-zone": ">=0.11.35 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.23 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.9.62 <1.0.0",
-    "@fluentui-react-native/text": ">=0.19.25 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.11.36 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.24 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.9.63 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.26 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.20.11 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.11.3 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.12.3 <1.0.0"

@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Sat, 04 Mar 2023 00:02:26 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.1
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Repoint current implementations of isHighContrast to new function (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.5.1
+- Bump @fluentui-react-native/framework to v0.9.5
+- Bump @fluentui-react-native/icon to v0.17.19
+- Bump @fluentui-react-native/theming-utils to v0.23.7
+
+## 1.8.0
+
+Tue, 07 Mar 2023 07:23:34 GMT
+
+### Minor changes
+
+- Add separate svgs feature (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/badge to v0.5.0
 
 ## 1.7.3
 
