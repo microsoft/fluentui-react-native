@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 08 Mar 2023 23:41:31 GMT",
+      "tag": "@fluentui-react-native/tester_v0.134.32",
+      "version": "0.134.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "78019ce95025fd67471daaa7c50087cc2b12fc8e",
+            "comment": "Update divider test page"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/divider to v0.3.8",
+            "commit": "78019ce95025fd67471daaa7c50087cc2b12fc8e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 08 Mar 2023 02:06:17 GMT",
+      "tag": "@fluentui-react-native/tester_v0.134.31",
+      "version": "0.134.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.4.21",
+            "commit": "f083e73f8a3b0555484c1e30070fd6e8cd7a017c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Mar 2023 20:54:15 GMT",
       "tag": "@fluentui-react-native/tester_v0.134.30",
       "version": "0.134.30",

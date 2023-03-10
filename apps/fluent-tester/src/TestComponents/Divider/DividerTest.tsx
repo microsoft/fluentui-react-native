@@ -63,9 +63,9 @@ export const VerticalDividers: React.FunctionComponent = () => (
     </View>
     <Divider />
     <View style={dividerTestStyles.verticalDividerContainer}>
-      <CustomText>The divider to the right of me should have a min height of 24px</CustomText>
+      <CustomText>The divider to the right of me should have a min height of 20px</CustomText>
       <Divider vertical />
-      <CustomText>The divider to the left of me should have a min height of 24px</CustomText>
+      <CustomText>The divider to the left of me should have a min height of 20px</CustomText>
     </View>
   </Stack>
 );

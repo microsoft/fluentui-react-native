@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.134.30"
+      "version": "0.134.32"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.32.37"
+      "version": "0.32.39"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -56,7 +56,7 @@ module.exports = {
     },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
-      "version": "1.4.20"
+      "version": "1.4.21"
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
@@ -152,7 +152,7 @@ module.exports = {
     },
     "@fluentui-react-native/divider": {
       "name": "@fluentui-react-native/divider",
-      "version": "0.3.7"
+      "version": "0.3.8"
     },
     "@fluentui-react-native/experimental-drawer": {
       "name": "@fluentui-react-native/experimental-drawer",
