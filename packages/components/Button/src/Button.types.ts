@@ -166,9 +166,17 @@ export interface ButtonProps extends ButtonCoreProps {
   loading?: boolean;
 }
 
+interface ButtonState {
+  height?: number;
+  width?: number;
+
+  // win32 only. Whether the component should use a tone-tone focus border instead of single-tone
+  useTwoToneBorder?: boolean;
+}
+
 export interface ButtonInfo {
   props: ButtonProps & React.ComponentPropsWithRef<any>;
-  state: PressableState & { width?: number; height?: number; useTwoToneBorder?: boolean };
+  state: PressableState & ButtonState;
 }
 
 export interface ButtonSlotProps {

@@ -11,7 +11,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './CompoundButton.styling';
 import type { CompoundButtonProps, CompoundButtonType } from './CompoundButton.types';
 import { compoundButtonName } from './CompoundButton.types';
-import { buttonLookup } from '../Button';
+import { buttonLookup, getFocusBorderStyle } from '../Button';
 import { useButton } from '../useButton';
 
 export const CompoundButton = compose<CompoundButtonType>({
@@ -75,7 +75,7 @@ export const CompoundButton = compose<CompoundButtonType>({
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
           {button.state.focused && button.state.useTwoToneBorder && (
             <Slots.focusInnerBorder
-              style={{ width: button.state.width - 2, height: button.state.height - 2 }}
+              style={getFocusBorderStyle(button.state.height, button.state.width)}
               accessible={false}
               focusable={false}
             />
