@@ -12,7 +12,7 @@ import { stylingSettings } from './ToggleButton.styling';
 import type { ToggleButtonProps, ToggleButtonType } from './ToggleButton.types';
 import { toggleButtonName } from './ToggleButton.types';
 import { useToggleButton } from './useToggleButton';
-import { buttonLookup } from '../Button';
+import { buttonLookup, getFocusBorderStyle } from '../Button';
 
 export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,
@@ -69,7 +69,7 @@ export const ToggleButton = compose<ToggleButtonType>({
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} accessible={false} />}
           {toggleButton.state.focused && toggleButton.state.useTwoToneBorder && (
             <Slots.focusInnerBorder
-              style={{ width: toggleButton.state.width - 2, height: toggleButton.state.height - 2 }}
+              style={getFocusBorderStyle(toggleButton.state.height, toggleButton.state.width)}
               accessible={false}
               focusable={false}
             />

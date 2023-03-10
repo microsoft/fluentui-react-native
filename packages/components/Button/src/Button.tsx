@@ -125,7 +125,7 @@ export const Button = compose<ButtonType>({
   },
 });
 
-const getFocusBorderStyleWorker = (width, height) => {
+const getFocusBorderStyleWorker = (height: number, width: number) => {
   const adjustment = 2; // width of border * 2
 
   return {
