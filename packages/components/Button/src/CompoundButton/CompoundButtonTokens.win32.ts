@@ -1,16 +1,17 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { CompoundButtonTokens } from './CompoundButton.types';
 
-export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Theme> = (): CompoundButtonTokens => ({
+export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Theme> = (theme: Theme): CompoundButtonTokens => ({
   medium: {
     padding: globalTokens.size120 - globalTokens.stroke.width10,
     focused: {
       padding: globalTokens.size120,
     },
-    primary: {
+    primary: !isHighContrast(theme) && {
       focused: {
         borderWidth: globalTokens.stroke.width20,
         padding: globalTokens.size120 - globalTokens.stroke.width20,
@@ -28,7 +29,7 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       focused: {
         paddingHorizontal: globalTokens.size120,
       },
-      primary: {
+      primary: !isHighContrast(theme) && {
         focused: {
           paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
         },
@@ -52,7 +53,7 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       borderWidth: 0,
       padding: globalTokens.size80,
     },
-    primary: {
+    primary: !isHighContrast(theme) && {
       focused: {
         borderWidth: globalTokens.stroke.width20,
         padding: globalTokens.size80 - globalTokens.stroke.width20,
@@ -70,7 +71,7 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       focused: {
         paddingHorizontal: globalTokens.size80,
       },
-      primary: {
+      primary: !isHighContrast(theme) && {
         focused: {
           paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
         },
@@ -93,7 +94,7 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
     focused: {
       padding: globalTokens.size160,
     },
-    primary: {
+    primary: !isHighContrast(theme) && {
       focused: {
         borderWidth: globalTokens.stroke.width20,
         padding: globalTokens.size160 - globalTokens.stroke.width20,
@@ -111,7 +112,7 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       focused: {
         paddingHorizontal: globalTokens.size160,
       },
-      primary: {
+      primary: !isHighContrast(theme) && {
         focused: {
           paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
         },

@@ -1,10 +1,11 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
 
-export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
+export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: Theme) =>
   ({
     borderWidth: globalTokens.stroke.width10,
     borderInnerWidth: globalTokens.stroke.width10,
@@ -18,7 +19,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         borderWidth: 0,
         padding: globalTokens.size80,
       },
-      primary: {
+      primary: !isHighContrast(theme) && {
         focused: {
           borderWidth: globalTokens.stroke.width20,
           padding: globalTokens.size80 - globalTokens.stroke.width20,
@@ -44,7 +45,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
           padding: globalTokens.size60,
           paddingHorizontal: globalTokens.size120,
         },
-        primary: {
+        primary: !isHighContrast(theme) && {
           focused: {
             padding: globalTokens.size60 - globalTokens.stroke.width20,
             paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width20,
@@ -65,7 +66,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         borderWidth: 0,
         padding: globalTokens.size40,
       },
-      primary: {
+      primary: !isHighContrast(theme) && {
         focused: {
           borderWidth: globalTokens.stroke.width20,
           padding: globalTokens.size40 - globalTokens.stroke.width20,
@@ -90,7 +91,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         focused: {
           paddingHorizontal: globalTokens.size80,
         },
-        primary: {
+        primary: !isHighContrast(theme) && {
           focused: {
             paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width20,
           },
@@ -109,7 +110,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         borderWidth: 0,
         padding: globalTokens.size100,
       },
-      primary: {
+      primary: !isHighContrast(theme) && {
         focused: {
           borderWidth: globalTokens.stroke.width20,
           padding: globalTokens.size100 - globalTokens.stroke.width20,
@@ -136,7 +137,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
           padding: globalTokens.size80,
           paddingHorizontal: globalTokens.size160,
         },
-        primary: {
+        primary: !isHighContrast(theme) && {
           focused: {
             padding: globalTokens.size80 - globalTokens.stroke.width20,
             paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width20,
