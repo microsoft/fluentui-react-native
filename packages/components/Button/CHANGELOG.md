@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Mar 2023 00:08:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.41
+
+Fri, 10 Mar 2023 00:08:36 GMT
+
+### Patches
+
+- Remove button text and after-icon from UIA tree (winlarry@microsoft.com)
 
 ## 0.32.40
 

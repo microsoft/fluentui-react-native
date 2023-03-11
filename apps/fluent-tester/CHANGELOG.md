@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 08 Mar 2023 23:41:31 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Mar 2023 00:08:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.33
+
+Fri, 10 Mar 2023 00:08:36 GMT
+
+### Patches
+
+- Remove duplicate Button test section. (winlarry@microsoft.com)
+- Bump @fluentui-react-native/button to v0.32.41
+- Bump @fluentui-react-native/dropdown to v0.7.38
+- Bump @fluentui-react-native/experimental-button to v0.16.99
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.40
+- Bump @fluentui-react-native/menu to v1.4.22
+- Bump @fluentui-react-native/notification to v0.21.42
+- Bump @fluentui/react-native to v0.36.11
 
 ## 0.134.32
 

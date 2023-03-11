@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update snapshots",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
