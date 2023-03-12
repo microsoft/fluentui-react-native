@@ -25,10 +25,9 @@ export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (prop
         colors: { brandBackground2: 'red' }, // Overrides the buttonBackground color token, all other colors are kept in-tact.
       };
     },
-    (theme: Theme) => {
+    () => {
       return {
         colors: {
-          neutralForeground1: theme.colors.brandBackground2, // neutralBackground1 is 'red' in theme here because of previous recipe applied.
           hostColorPink: 'pink', // New custom color key.
           hostColorBrandText: 'purple', // New custom color key.
           hostColorButtonBackground: 'yellow', // New custom color key.
