@@ -4,7 +4,6 @@ import * as React from 'react';
 import { Platform } from 'react-native';
 
 import { useHorizontalSizeClass } from '@fluentui-react-native/experimental-appearance-additions';
-import type { Theme } from '@fluentui-react-native/framework';
 import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
 
 import type { FluentTesterProps } from './FluentTester';
