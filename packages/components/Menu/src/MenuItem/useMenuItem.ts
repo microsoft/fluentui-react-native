@@ -10,6 +10,7 @@ import type { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
+import { useMenuItemRefMountUnmount } from '../MenuList/useMenuList';
 
 export const triggerKeys = [' ', 'Enter'];
 export const submenuTriggerKeys = ['ArrowLeft', 'ArrowRight', ...triggerKeys];
@@ -61,6 +62,8 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
 
   useHoverFocusEffect(pressable.state.hovered, componentRef);
+
+  useMenuItemRefMountUnmount(componentRef);
 
   return {
     props: {

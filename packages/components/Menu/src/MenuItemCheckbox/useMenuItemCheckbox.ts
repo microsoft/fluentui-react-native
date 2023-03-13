@@ -10,6 +10,7 @@ import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemChec
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
+import { useMenuItemRefMountUnmount } from '../MenuList/useMenuList';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -110,6 +111,7 @@ export const useMenuCheckboxInteraction = (
     [disabled, toggleCallback, onAccessibilityAction],
   );
 
+  useMenuItemRefMountUnmount(componentRef);
   useHoverFocusEffect(pressable.state.hovered, componentRef);
 
   const state = {

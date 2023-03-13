@@ -1,9 +1,11 @@
 import React from 'react';
+import type { View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { MenuListProps, MenuListState } from './MenuList.types';
 import { useMenuContext } from '../context/menuContext';
+import { useMenuListContext } from '../context/menuListContext';
 
 // Track the radio items so we know what to clear selection from when selectRadio is called
 // Purposefully left out of the hook because
@@ -112,6 +114,25 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     [isSubmenu, setOpen, triggerRef],
   );
 
+  const [menuItemRefs, setMenuItemRefs] = React.useState<React.RefObject<View>[]>([]);
+  const addMenuItemRef = React.useCallback((ref: React.RefObject<View>) => setMenuItemRefs((prev) => [...prev, ref]), [setMenuItemRefs]);
+  const removeMenuItemRef = React.useCallback(
+    (ref: React.RefObject<View>) => setMenuItemRefs((prev) => prev.filter((item) => item !== ref)),
+    [setMenuItemRefs],
+  );
+
+  const onListKeyDown = (e: InteractionEvent) => {
+    let ref: React.RefObject<View> | null;
+    if (e.nativeEvent.key === 'Home') {
+      ref = menuItemRefs[0];
+    } else if (e.nativeEvent.key === 'End') {
+      ref = menuItemRefs[menuItemRefs.length - 1];
+    }
+    if (ref) {
+      ref.current.focus();
+    }
+  };
+
   React.useEffect(() => {
     return function cleanup() {
       clearTimeout(context.triggerHoverOutTimer);
@@ -129,7 +150,19 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     selectRadio,
     addRadioItem,
     removeRadioItem,
+    addMenuItemRef,
+    removeMenuItemRef,
+    onListKeyDown,
     hasMaxHeight: context.hasMaxHeight,
     hasMaxWidth: context.hasMaxWidth,
   };
+};
+
+export const useMenuItemRefMountUnmount = (ref: React.RefObject<View>) => {
+  const { addMenuItemRef, removeMenuItemRef } = useMenuListContext();
+  React.useEffect(() => {
+    addMenuItemRef(ref);
+    return () => removeMenuItemRef(ref);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };
