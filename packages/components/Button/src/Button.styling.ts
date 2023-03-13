@@ -15,19 +15,19 @@ import { defaultButtonTokens } from './ButtonTokens';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'block',
-  'primary',
-  'subtle',
-  'outline',
-  'hovered',
   'small',
   'medium',
   'large',
   'hasContent',
   'hasIconAfter',
   'hasIconBefore',
+  'primary',
+  'subtle',
+  'outline',
   'rounded',
   'circular',
   'square',
+  'hovered',
   'focused',
   'pressed',
   'disabled',
@@ -90,6 +90,17 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
         width: tokens.iconSize,
       }),
       ['iconColor', 'iconSize'],
+    ),
+    focusInnerBorder: buildProps(
+      (tokens: ButtonTokens) => ({
+        style: {
+          position: 'absolute',
+          borderWidth: tokens.borderInnerWidth,
+          borderColor: tokens.borderInnerColor,
+          borderRadius: tokens.borderInnerRadius,
+        },
+      }),
+      ['borderInnerWidth', 'borderInnerColor', 'borderInnerRadius'],
     ),
   },
 };

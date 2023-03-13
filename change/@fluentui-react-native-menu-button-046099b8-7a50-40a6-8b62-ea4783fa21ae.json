@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Code cleanup",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
