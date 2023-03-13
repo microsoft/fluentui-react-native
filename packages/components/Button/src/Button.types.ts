@@ -166,7 +166,7 @@ export interface ButtonProps extends ButtonCoreProps {
   loading?: boolean;
 }
 
-interface ButtonState {
+interface ButtonState extends PressableState {
   measuredHeight?: number;
   measuredWidth?: number;
 
@@ -176,7 +176,7 @@ interface ButtonState {
 
 export interface ButtonInfo {
   props: ButtonProps & React.ComponentPropsWithRef<any>;
-  state: PressableState & ButtonState;
+  state: ButtonState;
 }
 
 export interface ButtonSlotProps {
