@@ -47,7 +47,7 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
             }
           : state.innerView;
       const content = React.createElement(View, innerViewProps, children);
-      return <Callout {...mergedProps}>{content}</Callout>;
+      return Platform.OS === 'android' ? <View {...mergedProps}>{content}</View> : <Callout {...mergedProps}>{content}</Callout>;
     };
   },
   useMenuPopoverTokens,

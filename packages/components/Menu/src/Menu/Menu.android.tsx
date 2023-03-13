@@ -15,7 +15,7 @@ enum States {
   Shown,
 }
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
-const SCREEN_INDENT = 8;
+const SCREEN_INDENT = 16;
 export const Menu = stagedComponent((props: MenuProps) => {
   const _container = useRef<View>(null);
   const [menuState, setMenuState] = React.useState<States>(States.Hidden);
@@ -111,8 +111,8 @@ export const Menu = stagedComponent((props: MenuProps) => {
     transforms.push({
       translateY: Animated.multiply(menuSizeAnimation.y, -1),
     });
-    setTop(windowHeight - SCREEN_INDENT);
-    setTop(Math.min(windowHeight - SCREEN_INDENT, top + buttonHeight));
+    // setTop(windowHeight - SCREEN_INDENT);
+    // setTop(Math.min(windowHeight - SCREEN_INDENT, top + buttonHeight));
   } else if (top < SCREEN_INDENT) {
     setTop(SCREEN_INDENT);
   }
