@@ -167,8 +167,8 @@ export interface ButtonProps extends ButtonCoreProps {
 }
 
 interface ButtonState {
-  height?: number;
-  width?: number;
+  measuredHeight?: number;
+  measuredWidth?: number;
 
   // win32 only. Whether the component should use a tone-tone focus border instead of single-tone
   useTwoToneBorder?: boolean;

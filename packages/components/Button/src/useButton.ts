@@ -54,6 +54,6 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
       loading,
       onLayout,
     },
-    state: { ...pressable.state, width: baseWidth, height: baseHeight, useTwoToneBorder: useTwoToneFocusBorder },
+    state: { ...pressable.state, measuredWidth: baseWidth, measuredHeight: baseHeight, useTwoToneBorder: useTwoToneFocusBorder },
   };
 };
