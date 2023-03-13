@@ -21,16 +21,20 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 
   const theme = useFluentTheme();
-  const useTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary' && !isHighContrast(theme);
+  const shouldUseTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary' && !isHighContrast(theme);
 
   const [baseHeight, setBaseHeight] = React.useState<number | undefined>(undefined);
   const [baseWidth, setBaseWidth] = React.useState<number | undefined>(undefined);
   const onLayout = React.useCallback(
     (e: LayoutEvent) => {
-      setBaseHeight(e.nativeEvent.layout.height);
-      setBaseWidth(e.nativeEvent.layout.width);
+      // Only run when shouldUseTwoToneFocusBorder so that state update doesn't
+      // affect platforms that don't need it.
+      if (shouldUseTwoToneFocusBorder) {
+        setBaseHeight(e.nativeEvent.layout.height);
+        setBaseWidth(e.nativeEvent.layout.width);
+      }
     },
-    [setBaseHeight, setBaseWidth],
+    [setBaseHeight, setBaseWidth, shouldUseTwoToneFocusBorder],
   );
 
   return {
@@ -47,13 +51,18 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
       accessibilityRole: accessibilityRole || 'button',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
       accessibilityLabel: props.accessibilityLabel,
-      enableFocusRing: enableFocusRing ?? !useTwoToneFocusBorder,
+      enableFocusRing: enableFocusRing ?? !shouldUseTwoToneFocusBorder,
       focusable: focusable ?? !isDisabled,
       ref: useViewCommandFocus(componentRef),
       iconPosition: props.iconPosition || 'before',
       loading,
       onLayout,
     },
-    state: { ...pressable.state, measuredWidth: baseWidth, measuredHeight: baseHeight, useTwoToneBorder: useTwoToneFocusBorder },
+    state: {
+      ...pressable.state,
+      measuredWidth: baseWidth,
+      measuredHeight: baseHeight,
+      shouldUseTwoToneFocusBorder: shouldUseTwoToneFocusBorder,
+    },
   };
 };

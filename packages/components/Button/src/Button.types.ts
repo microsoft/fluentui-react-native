@@ -171,7 +171,7 @@ interface ButtonState {
   measuredWidth?: number;
 
   // win32 only. Whether the component should use a tone-tone focus border instead of single-tone
-  useTwoToneBorder?: boolean;
+  shouldUseTwoToneFocusBorder?: boolean;
 }
 
 export interface ButtonInfo {

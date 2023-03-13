@@ -83,7 +83,7 @@ export const CompoundButton = compose<CompoundButtonType>({
             )}
           </Slots.contentContainer>
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} accessible={false} />}
-          {button.state.focused && button.state.useTwoToneBorder && (
+          {button.state.focused && button.state.shouldUseTwoToneFocusBorder && (
             <Slots.focusInnerBorder
               style={getFocusBorderStyle(button.state.measuredHeight, button.state.measuredWidth)}
               accessible={false}
