@@ -5,6 +5,7 @@
 #import <React/RCTUtils.h>
 #import <React/UIView+React.h>
 #import <React/RCTRootView.h>
+#import <React/RCTBridge+Private.h>
 
 NSString *const FRNAppearanceSizeClassCompact = @"compact";
 NSString *const FRNAppearanceSizeClassRegular = @"regular";
@@ -111,7 +112,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
         RCTRootView *rootView = (RCTRootView *)[[window rootViewController] view];
         
         if ([rootView isKindOfClass:[RCTRootView class]]) {
-            if ([[rootView bridge] bundleURL] == [[self bridge] bundleURL]) {
+            if ([[rootView bridge] isEqual:[[self bridge] parentBridge]]) {
                 UITraitCollection *windowTraitCollection = [window traitCollection];
                 
                 _horizontalSizeClass = RCTHorizontalSizeClassPreference(windowTraitCollection);
@@ -136,15 +137,14 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 
 - (void)appearanceChanged:(NSNotification *)notification {
     if (_hasListeners) {
-        RCTBridge *currentBridge = [self bridge];
         RCTBridge *notificationBridge = [[notification object] bridge];
-        
         if (![notificationBridge isKindOfClass:[RCTBridge class]]) {
             return;
         }
         
         // Don't send the appearanceChanged event if the notification didn't originate from the same react native instance
-        if ([currentBridge bundleURL] != [notificationBridge bundleURL]) {
+        RCTBridge *currentBridge = [[self bridge] parentBridge];
+        if (![currentBridge isEqual:notificationBridge]) {
             return;
         }
         
