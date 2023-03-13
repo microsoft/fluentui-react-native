@@ -79,18 +79,15 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
     return YES;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass)
-{
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass) {
     return _horizontalSizeClass;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel)
-{
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel) {
     return _userInterfaceLevel;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
-{
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption) {
     return _accessibilityContrastOption;
 }
 
@@ -100,8 +97,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
     return @[ @"appearanceChanged" ];
 }
 
-- (dispatch_queue_t)methodQueue
-{
+- (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
