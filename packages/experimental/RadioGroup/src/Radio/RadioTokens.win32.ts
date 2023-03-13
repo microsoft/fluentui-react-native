@@ -1,7 +1,8 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { RadioTokens } from './Radio.types';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { RadioTokens } from './Radio.types';
 
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
   ({
@@ -19,14 +20,15 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioOuterCircleSize: 16,
     radioInnerCircleSize: 8,
     radioOuterCircleBackground: t.colors.neutralBackground1,
-    labelMarginVertical: globalTokens.size40,
-    labelMarginRight: globalTokens.size20,
+    labelPadding: globalTokens.size20,
+    labelMarginVertical: globalTokens.size20,
+    labelMarginRight: globalTokens.sizeNone,
     labelMarginLeft: globalTokens.sizeNone,
     subtextVariant: 'caption1',
     subtextMarginTop: globalTokens.sizeNone,
     subtextMarginBottom: globalTokens.size40 + 1,
     marginTop: globalTokens.size60,
-    marginRight: globalTokens.size60,
+    marginRight: globalTokens.size40,
     marginBottom: globalTokens.size60,
     marginLeft: globalTokens.size40,
     flexDirection: 'row',
@@ -37,9 +39,9 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       flexDirection: 'column',
       alignItems: 'center',
       labelAlignItems: 'center',
-      labelMarginLeft: globalTokens.size20,
+      labelMarginRight: globalTokens.sizeNone,
       labelMarginVertical: globalTokens.size20,
-      labelPadding: globalTokens.size20,
+      // labelPadding: globalTokens.size20,
       marginLeft: globalTokens.size60,
     },
 
