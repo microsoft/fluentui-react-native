@@ -27,12 +27,12 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.10.2 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.11.32 <1.0.0",
-    "@fluentui-react-native/framework": "0.9.3",
-    "@fluentui-react-native/interactive-hooks": ">=0.22.20 <1.0.0",
-    "@fluentui-react-native/text": ">=0.19.22 <1.0.0",
-    "@fluentui-react-native/theme-tokens": ">=0.24.3 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.20.10 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.11.36 <1.0.0",
+    "@fluentui-react-native/framework": "0.9.5",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.24 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.26 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.24.4 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.20.11 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.4 <1.0.0",
     "tslib": "^2.3.1"
   },
