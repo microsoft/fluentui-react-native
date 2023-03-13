@@ -87,6 +87,84 @@ exports[`Divider component tests Divider default 1`] = `
 </View>
 `;
 
+exports[`Divider component tests Divider with all props + tokens set 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "maxHeight": 200,
+      "maxWidth": 200,
+      "minHeight": 40,
+      "minWidth": 10,
+      "padding": 10,
+      "paddingEnd": 10,
+      "paddingHorizontal": 10,
+      "paddingStart": 10,
+      "paddingVertical": 16,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "blue",
+        "borderLeftWidth": 2,
+        "borderStyle": "solid",
+        "flex": 0,
+        "flexBasis": 10,
+        "minHeight": 10,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 0,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
+      style={
+        Object {
+          "color": "red",
+          "fontFamily": "System",
+          "fontSize": 10,
+          "fontStyle": "italic",
+          "fontWeight": "600",
+          "letterSpacing": 0.1,
+          "lineHeight": 2,
+          "margin": 0,
+          "textAlign": "center",
+          "textDecorationLine": "line-through",
+        }
+      }
+    >
+      Hello
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "blue",
+        "borderLeftWidth": 2,
+        "borderStyle": "solid",
+        "flex": 1,
+        "flexBasis": 10,
+        "minHeight": 10,
+      }
+    }
+  />
+</View>
+`;
+
 exports[`Divider component tests Divider with icon 1`] = `
 <View
   style={
@@ -312,7 +390,7 @@ exports[`Divider component tests Vertical Divider 1`] = `
       "flexDirection": "column",
       "height": "100%",
       "justifyContent": "center",
-      "minHeight": 24,
+      "minHeight": 20,
       "minWidth": 0,
       "paddingVertical": 0,
     }
@@ -342,7 +420,7 @@ exports[`Divider component tests Vertical Divider with Inset 1`] = `
       "flexDirection": "column",
       "height": "100%",
       "justifyContent": "center",
-      "minHeight": 24,
+      "minHeight": 20,
       "minWidth": 0,
       "paddingVertical": 16,
     }

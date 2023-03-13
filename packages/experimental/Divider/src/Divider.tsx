@@ -4,15 +4,14 @@ import React from 'react';
 import { View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
-import { withSlots, compressible, useSlot, useFluentTheme, patchTokens, mergeStyles } from '@fluentui-react-native/framework';
+import { withSlots, compressible, useSlot, useFluentTheme, patchTokens } from '@fluentui-react-native/framework';
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import type { TextProps } from '@fluentui-react-native/text';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
-import { colorsFromAppearance, useDividerSlotProps } from './Divider.styling';
+import { colorsFromAppearance, getBeforeLineStyle, getRootStyle, useDividerSlotProps } from './Divider.styling';
 import { dividerName } from './Divider.types';
 import type { DividerProps, DividerTokens } from './Divider.types';
 import { useDividerTokens } from './DividerTokens';
@@ -35,7 +34,6 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
   [tokens, cache] = patchTokens(tokens, cache, {
     flexAfter: props.alignContent === 'end' ? 0 : 1,
     flexBefore: props.alignContent === 'start' ? 0 : 1,
-    minHeight: props.vertical ? globalTokens.size240 : 0,
     ...colorsFromAppearance(props.appearance, tokens, theme),
   });
 
@@ -63,20 +61,17 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
     const hasContent = textContent !== undefined || props.icon !== undefined;
 
     // This style must be set here because we need to know if text content is passed in the final render to set the height correctly
-    const mergedRootProps = {
-      ...rootProps,
-      style: mergeStyles(rootProps.style, props.vertical && hasContent ? { minHeight: 84 } : {}),
-    };
+    let finalRootProps = rootProps;
+    if (!tokens.minHeight) {
+      finalRootProps = { ...rootProps, style: getRootStyle(rootProps.style, final.vertical, hasContent) };
+    }
 
-    // If there's no content, then the before line should always take up the full width / height of the root slot
-    const mergedBeforeProps = {
-      ...beforeLineProps,
-      style: mergeStyles(beforeLineProps.style, !hasContent ? { flex: 1 } : {}),
-    };
+    // We patch the beforeLine styling if no content is passed because it should always take up the full width / height of the root container (afterLine is not rendered).
+    const finalBeforeLineProps = { ...beforeLineProps, style: getBeforeLineStyle(beforeLineProps.style, hasContent) };
 
     return (
-      <RootSlot {...mergedRootProps}>
-        <BeforeLineSlot {...mergedBeforeProps} />
+      <RootSlot {...finalRootProps}>
+        <BeforeLineSlot {...finalBeforeLineProps} />
         {hasContent && (
           <>
             <WrapperSlot>

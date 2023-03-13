@@ -1,10 +1,17 @@
+import { PlatformColor } from 'react-native';
+
 import type { Theme } from '@fluentui-react-native/framework';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
 
-export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
-  ({
+export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) => {
+  if (isHighContrast(t)) {
+    return highContrastColors;
+  }
+
+  return {
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForeground1,
     borderColor: t.colors.neutralStroke1,
@@ -93,4 +100,33 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.neutralForeground1Hover,
       },
     },
-  } as ButtonTokens);
+  } as ButtonTokens;
+};
+
+const highContrastColors = {
+  backgroundColor: PlatformColor('ButtonFace'),
+  borderColor: PlatformColor('ButtonText'),
+  color: PlatformColor('ButtonText'),
+  iconColor: PlatformColor('ButtonText'),
+  disabled: {
+    backgroundColor: PlatformColor('ButtonFace'),
+    borderColor: PlatformColor('GrayText'),
+    color: PlatformColor('GrayText'),
+    iconColor: PlatformColor('GrayText'),
+  },
+  hovered: {
+    backgroundColor: PlatformColor('Highlight'),
+    color: PlatformColor('HighlightText'),
+    iconColor: PlatformColor('HighlightText'),
+  },
+  pressed: {
+    backgroundColor: PlatformColor('Highlight'),
+    color: PlatformColor('HighlightText'),
+    iconColor: PlatformColor('HighlightText'),
+  },
+  focused: {
+    backgroundColor: PlatformColor('Highlight'),
+    color: PlatformColor('HighlightText'),
+    iconColor: PlatformColor('HighlightText'),
+  },
+};

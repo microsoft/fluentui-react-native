@@ -112,6 +112,12 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     [isSubmenu, setOpen, triggerRef],
   );
 
+  React.useEffect(() => {
+    return function cleanup() {
+      clearTimeout(context.triggerHoverOutTimer);
+    };
+  });
+
   return {
     props: {
       ...context,

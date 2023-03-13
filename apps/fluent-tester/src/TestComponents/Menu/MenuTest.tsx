@@ -16,6 +16,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { E2EMenuTest } from './E2EMenuTest';
+import { MenuIcons } from './MenuIcons';
 import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
 import { MenuTooltips } from './MenuTooltips';
@@ -273,6 +274,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu with tooltips on items',
     component: MenuTooltips,
+  },
+  {
+    name: 'Menu with icons',
+    component: MenuIcons,
   },
   {
     name: 'Menu Submenu',

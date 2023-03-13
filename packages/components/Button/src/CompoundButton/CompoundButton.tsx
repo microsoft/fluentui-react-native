@@ -64,14 +64,24 @@ export const CompoundButton = compose<CompoundButtonType>({
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           {loading && <ActivityIndicator />}
-          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} accessible={false} />}
           <Slots.contentContainer>
             {React.Children.map(children, (child) =>
-              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+              typeof child === 'string' ? (
+                <Slots.content accessible={false} key="content">
+                  {child}
+                </Slots.content>
+              ) : (
+                child
+              ),
             )}
-            {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
+            {secondaryContent && (
+              <Slots.secondaryContent accessible={false} key="secondaryContent">
+                {secondaryContent}
+              </Slots.secondaryContent>
+            )}
           </Slots.contentContainer>
-          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} accessible={false} />}
         </Slots.root>
       );
     };

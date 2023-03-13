@@ -13,6 +13,8 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   fontSize: 13, // aligning with NSMenu font size
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
+  iconColor: t.colors.neutralForeground1,
+  iconSize: 16,
   paddingHorizontal: 5, // hardcoded for now to match NSMenu
   paddingVertical: 3, // hardcoded for now to match NSMenu
   submenuIndicatorColor: t.colors.neutralForeground1,
@@ -21,13 +23,16 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   focused: {
     backgroundColor: t.colors.menuItemBackgroundHovered,
     color: t.colors.menuItemTextHovered,
+    iconColor: t.colors.menuItemTextHovered,
   },
   pressed: {
     backgroundColor: t.colors.menuItemBackgroundPressed,
     color: t.colors.menuItemTextHovered,
+    iconColor: t.colors.menuItemTextHovered,
   },
   disabled: {
     backgroundColor: t.colors.menuBackground,
     color: t.colors.disabledText,
+    iconColor: t.colors.disabledText,
   },
 });
