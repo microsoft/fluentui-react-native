@@ -5763,9 +5763,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.31.11"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.11.tgz#66cb7f27c6045186af41ad1c7bd8a783c1308877"
-  integrity sha512-FQh5bwTLN4ZcTQS8AMS4YgHq9AdtrHw1TKp2YR5X+kSL1tZZST/BQNpnSqO10r9U+5Gcn7X1zSMXOZoCZH1kiA==
+  version "2.31.12"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.12.tgz#eb0127deb6d2125dfdfbda5ef3b73c4fdd12c913"
+  integrity sha512-fxhuCkacaFHBJLyvdn06cx5UKYpPwC5YbgftHLmhvTDFK0dP4KMOMRxQqoN/7t4sdxqaSopUxG8iI3WsDlTXwA==
   dependencies:
     cosmiconfig "^7.0.0"
     execa "^5.0.0"
@@ -10236,9 +10236,9 @@ just-scripts@^1.8.0:
     yargs-parser "^20.2.3"
 
 "just-task@>=1.5.0 <2.0.0", just-task@^1.4.2:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/just-task/-/just-task-1.7.1.tgz#1a6af5d1f93903e5cbfe0ea2237fe7b31067f9fc"
-  integrity sha512-vIpMsIX6oCdzgIehqtRwgYTBrXhCzn3Vi6Oqk4MNd5wC82XPRBHcs4ykdSy7plpKfSr2Br26BjsiN5+hJFq2xA==
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/just-task/-/just-task-1.7.2.tgz#facb831d460e78bfa07532f6c7dc95e1ccca6913"
+  integrity sha512-QqDsKT6Z0mDeNeDcZp8VJOBcKdltgaPSOMZNXZvArvJcWTeiewzBAkqYoUsQofxNwaYLL9vYnbV3VLfmsaSzuQ==
   dependencies:
     "@rushstack/package-deps-hash" "^3.2.5"
     bach "^2.0.0"

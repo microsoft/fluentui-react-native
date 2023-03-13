@@ -62,12 +62,11 @@ export const Divider = compressible<DividerProps, DividerTokens>((props: Divider
 
     // This style must be set here because we need to know if text content is passed in the final render to set the height correctly
     let finalRootProps = rootProps;
-
     if (!tokens.minHeight) {
       finalRootProps = { ...rootProps, style: getRootStyle(rootProps.style, final.vertical, hasContent) };
     }
 
-    // If there's no content, then we change the beforeLine style to have a flex of 1 because it will always
+    // We patch the beforeLine styling if no content is passed because it should always take up the full width / height of the root container (afterLine is not rendered).
     const finalBeforeLineProps = { ...beforeLineProps, style: getBeforeLineStyle(beforeLineProps.style, hasContent) };
 
     return (
