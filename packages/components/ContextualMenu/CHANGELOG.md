@@ -1,8 +1,71 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 24 Feb 2023 20:39:57 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.35
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.7
+- Bump @fluentui-react-native/focus-zone to v0.11.36
+- Bump @fluentui-react-native/icon to v0.17.19
+- Bump @fluentui-react-native/interactive-hooks to v0.22.24
+- Bump @fluentui-react-native/text to v0.19.26
+- Bump @uifabricshared/foundation-compose to v1.13.5
+- Bump @fluentui-react-native/pressable to v0.9.63
+
+## 0.21.34
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.6
+- Bump @fluentui-react-native/focus-zone to v0.11.35
+- Bump @fluentui-react-native/icon to v0.17.18
+- Bump @fluentui-react-native/interactive-hooks to v0.22.23
+- Bump @fluentui-react-native/text to v0.19.25
+- Bump @fluentui-react-native/pressable to v0.9.62
+
+## 0.21.33
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.5
+- Bump @fluentui-react-native/focus-zone to v0.11.34
+- Bump @fluentui-react-native/icon to v0.17.17
+- Bump @fluentui-react-native/interactive-hooks to v0.22.22
+- Bump @fluentui-react-native/text to v0.19.24
+- Bump @fluentui-react-native/tokens to v0.20.11
+- Bump @uifabricshared/foundation-compose to v1.13.4
+- Bump @fluentui-react-native/pressable to v0.9.61
+
+## 0.21.32
+
+Thu, 02 Mar 2023 19:11:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.17.16
+
+## 0.21.31
+
+Tue, 28 Feb 2023 21:34:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.4
+- Bump @fluentui-react-native/focus-zone to v0.11.33
+- Bump @fluentui-react-native/icon to v0.17.15
+- Bump @fluentui-react-native/interactive-hooks to v0.22.21
+- Bump @fluentui-react-native/text to v0.19.23
+- Bump @fluentui-react-native/pressable to v0.9.60
 
 ## 0.21.30
 

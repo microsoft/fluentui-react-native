@@ -114,12 +114,6 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
 
   const ref = useMergedRefs(triggerRef, childComponentRef);
 
-  React.useEffect(() => {
-    return function cleanup() {
-      clearTimeout(triggerHoverOutTimer);
-    };
-  });
-
   return {
     props: {
       onClick,

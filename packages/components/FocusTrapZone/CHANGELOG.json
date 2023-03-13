@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/focus-trap-zone",
   "entries": [
     {
+      "date": "Tue, 07 Mar 2023 20:54:15 GMT",
+      "tag": "@fluentui-react-native/focus-trap-zone_v0.9.65",
+      "version": "0.9.65",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-trap-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.24",
+            "commit": "6c33cfe45061ab74b7eee11b78341c74f88f9473"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 04 Mar 2023 00:02:26 GMT",
+      "tag": "@fluentui-react-native/focus-trap-zone_v0.9.64",
+      "version": "0.9.64",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-trap-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.23",
+            "commit": "888d0ceb90a25d267654b74902dee81f5b4c8052"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 03 Mar 2023 06:47:26 GMT",
+      "tag": "@fluentui-react-native/focus-trap-zone_v0.9.63",
+      "version": "0.9.63",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-trap-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.22",
+            "commit": "4659b74650377d2f746a81a321346a481816a5af"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Feb 2023 21:34:10 GMT",
+      "tag": "@fluentui-react-native/focus-trap-zone_v0.9.62",
+      "version": "0.9.62",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-trap-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.21",
+            "commit": "175d5c71de6bd6cd59fab8bffee463ff1e595b2f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:58 GMT",
       "tag": "@fluentui-react-native/focus-trap-zone_v0.9.61",
       "version": "0.9.61",

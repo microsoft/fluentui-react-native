@@ -51,6 +51,7 @@ exports[`ContextualMenu default 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
