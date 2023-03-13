@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 10 Mar 2023 00:08:36 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Mar 2023 22:51:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.42
+
+Mon, 13 Mar 2023 22:51:11 GMT
+
+### Patches
+
+- Fix focus border for primary button on win32 (ruaraki@microsoft.com)
 
 ## 0.32.41
 
