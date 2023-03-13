@@ -1,8 +1,6 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { fontStyles, borderStyles } from '@fluentui-react-native/tokens';
-import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
-
 import type { RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
 import { radioName } from './Radio.types';
 import { defaultRadioTokens } from './RadioTokens';
@@ -22,7 +20,6 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           paddingHorizontal: tokens.rootHorizontalPadding,
           paddingVertical: tokens.rootVerticalPadding,
           ...borderStyles.from(tokens, theme),
-          ...getTextMarginAdjustment(),
         },
         android_ripple: { color: tokens.rippleColor },
       }),
@@ -81,6 +78,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginRight: tokens.labelMarginRight,
           marginLeft: tokens.labelMarginLeft,
           padding: tokens.labelPadding,
+          paddingRight: 0,
         },
       }),
       ['labelAlignItems', 'labelMarginRight', 'labelMarginLeft', 'labelPadding'],
