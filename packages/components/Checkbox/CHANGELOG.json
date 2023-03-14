@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 14 Mar 2023 03:45:40 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.19.27",
+      "version": "0.19.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "d09bb7f2f4e4a9d196ffd37543889ef554719597",
+            "comment": "make checkbox a11y annouce null/undefined state"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Mar 2023 20:54:15 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.19.26",
       "version": "0.19.26",

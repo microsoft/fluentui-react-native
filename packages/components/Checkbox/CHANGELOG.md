@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 03:45:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.27
+
+Tue, 14 Mar 2023 03:45:40 GMT
+
+### Patches
+
+- make checkbox a11y annouce null/undefined state (rohanpd.work@gmail.com)
 
 ## 0.19.26
 
