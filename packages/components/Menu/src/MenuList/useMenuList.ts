@@ -1,9 +1,10 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import type { View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
-import type { MenuListProps, MenuListState } from './MenuList.types';
+import type { MenuListProps, MenuListState, TrackedMenuItem } from './MenuList.types';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 
@@ -18,6 +19,9 @@ const addRadioItem = (name: string) => {
 const removeRadioItem = (name: string) => {
   radioItems.filter((item) => item !== name);
 };
+
+const platformsWithoutFocusOnDisabled = ['ios', 'macos', 'win32'];
+const handledKeys = ['Home', 'End'];
 
 export const useMenuList = (_props: MenuListProps): MenuListState => {
   const context = useMenuContext();
@@ -114,22 +118,38 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     [isSubmenu, setOpen, triggerRef],
   );
 
-  const [menuItemRefs, setMenuItemRefs] = React.useState<React.RefObject<View>[]>([]);
-  const addMenuItemRef = React.useCallback((ref: React.RefObject<View>) => setMenuItemRefs((prev) => [...prev, ref]), [setMenuItemRefs]);
-  const removeMenuItemRef = React.useCallback(
-    (ref: React.RefObject<View>) => setMenuItemRefs((prev) => prev.filter((item) => item !== ref)),
-    [setMenuItemRefs],
+  // Handle 'Home' and 'End' keypresses here. Native menus allow 'Home' and 'End' keypresses to jump to the
+  // start and end of each menu list. We need to keep track of all MenuItems in our list, and we need access to
+  // (1) the item's ref to focus on and (2) whether the item is disabled or not as different platforms allow
+  // and don't allow focus for disabled items.
+  const trackedMenuItems = React.useMemo<TrackedMenuItem[]>(() => [], []);
+  const trackMenuItem = React.useCallback((item: TrackedMenuItem) => trackedMenuItems.push(item), [trackedMenuItems]);
+  const untrackMenuItem = React.useCallback(
+    (item: TrackedMenuItem) =>
+      trackedMenuItems.splice(
+        trackedMenuItems.findIndex((x) => x.ref === item.ref),
+        1,
+      ),
+    [trackedMenuItems],
   );
 
   const onListKeyDown = (e: InteractionEvent) => {
-    let ref: React.RefObject<View> | null;
-    if (e.nativeEvent.key === 'Home') {
-      ref = menuItemRefs[0];
-    } else if (e.nativeEvent.key === 'End') {
-      ref = menuItemRefs[menuItemRefs.length - 1];
-    }
-    if (ref) {
-      ref.current.focus();
+    const key = e.nativeEvent.key;
+    if (handledKeys.includes(key)) {
+      // For iOS and macOS, 'Home' and 'End' must set focus on the first and last enabled item.
+      // For other platforms, we can just jump to the first and last keys.
+      let increment: number, idx: number;
+      if (key === 'Home') {
+        increment = 1;
+        idx = 0;
+      } else if (key === 'End') {
+        increment = -1;
+        idx = trackedMenuItems.length - 1;
+      }
+      while (platformsWithoutFocusOnDisabled.includes(Platform.OS) && trackedMenuItems[idx].disabled) {
+        idx += increment;
+      }
+      trackedMenuItems[idx].ref.current.focus();
     }
   };
 
@@ -150,19 +170,27 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     selectRadio,
     addRadioItem,
     removeRadioItem,
-    addMenuItemRef,
-    removeMenuItemRef,
+    trackMenuItem,
+    untrackMenuItem,
     onListKeyDown,
     hasMaxHeight: context.hasMaxHeight,
     hasMaxWidth: context.hasMaxWidth,
   };
 };
 
-export const useMenuItemRefMountUnmount = (ref: React.RefObject<View>) => {
-  const { addMenuItemRef, removeMenuItemRef } = useMenuListContext();
+export const useMenuItemTracking = (ref: React.RefObject<View>, disabled: boolean) => {
+  const { trackMenuItem, untrackMenuItem } = useMenuListContext();
+  const item = React.useMemo(
+    () => ({
+      ref,
+      disabled,
+    }),
+    [ref, disabled],
+  );
+
   React.useEffect(() => {
-    addMenuItemRef(ref);
-    return () => removeMenuItemRef(ref);
+    trackMenuItem(item);
+    return () => untrackMenuItem(item);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

@@ -66,8 +66,8 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   selectRadio?: (e: InteractionEvent, name: string) => void;
   addRadioItem: (name: string) => void;
   removeRadioItem: (name: string) => void;
-  addMenuItemRef: (ref: React.RefObject<View>) => void;
-  removeMenuItemRef: (ref: React.RefObject<View>) => void;
+  trackMenuItem: (item: TrackedMenuItem) => void;
+  untrackMenuItem: (item: TrackedMenuItem) => void;
   onListKeyDown: (e: InteractionEvent) => void;
   hasMaxHeight?: boolean;
   hasMaxWidth?: boolean;
@@ -83,4 +83,9 @@ export interface MenuListType {
   props: MenuListProps;
   tokens: MenuListTokens;
   slotProps: MenuListSlotProps;
+}
+
+export interface TrackedMenuItem {
+  ref: React.RefObject<View>;
+  disabled: boolean;
 }

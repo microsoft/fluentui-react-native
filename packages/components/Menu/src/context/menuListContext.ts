@@ -21,8 +21,8 @@ export const MenuListContext = React.createContext<MenuListContextValue>({
   onArrowClose: () => false,
   addRadioItem: () => false,
   removeRadioItem: () => false,
-  addMenuItemRef: () => false,
-  removeMenuItemRef: () => false,
+  trackMenuItem: () => false,
+  untrackMenuItem: () => false,
   onListKeyDown: () => false,
 });
 
