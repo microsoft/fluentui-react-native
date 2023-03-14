@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 13 Mar 2023 22:51:11 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 03:45:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.36
+
+Tue, 14 Mar 2023 03:45:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.45
+- Bump @fluentui/react-native to v0.36.13
 
 ## 0.134.35
 
