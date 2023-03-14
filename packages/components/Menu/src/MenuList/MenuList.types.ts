@@ -14,6 +14,7 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    */
   gap?: number;
   hasMaxHeight?: MenuListTokens;
+  cornerRadius?: number;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {

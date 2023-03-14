@@ -48,6 +48,7 @@ export const Menu = stagedComponent((props: MenuProps) => {
                   onLayout={state.onMenuLayout}
                   style={[styles.shadowMenuContainer, state.shadowMenuContainerStyle, { maxHeight: state.maxMenuHeight }]}
                 >
+                  {console.log(state.menuHeight)}
                   {state.menuHeight > state.maxMenuHeight ? (
                     <ScrollView>{menuPopover}</ScrollView>
                   ) : (

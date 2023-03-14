@@ -36,25 +36,23 @@ const MenuDefault: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <Stack style={stackStyle}>
-      <Menu>
-        <MenuTrigger>
-          <Button>Test</Button>
-        </MenuTrigger>
-        <MenuPopover>
-          <MenuList>
-            <MenuDivider />
-            <MenuItemCheckbox />
-            <RadioGroup value={selected} onChange={onChange}>
-              <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />
-              <Radio label="Option X" value="X" />
-              <Radio label="Option Y" value="Y" />
-              <Radio label="Option Z" value="Z" />
-            </RadioGroup>
-          </MenuList>
-        </MenuPopover>
-      </Menu>
-    </Stack>
+    <Menu>
+      <MenuTrigger>
+        <Button>Test</Button>
+      </MenuTrigger>
+      <MenuPopover>
+        <MenuList>
+          <MenuDivider />
+          <MenuItemCheckbox />
+          <RadioGroup value={selected} onChange={onChange}>
+            <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />
+            <Radio label="Option X" value="X" />
+            <Radio label="Option Y" value="Y" />
+            <Radio label="Option Z" value="Z" />
+          </RadioGroup>
+        </MenuList>
+      </MenuPopover>
+    </Menu>
   );
 };
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Dimensions, Easing, I18nManager, LayoutChangeEvent, StatusBar, View } from 'react-native';
+import type { LayoutChangeEvent, View } from 'react-native';
+import { Animated, Dimensions, Easing, I18nManager, StatusBar } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { MenuProps, MenuState } from './Menu.types';
 import { useMenuContext } from '../context/menuContext';
-import { useMenuContextValue } from './useMenuContextValue';
 // Due to how events get fired we get double notifications
 // for the same event causing us to immediately reopen
 // a menu when we close it. Adding in a delay to prevent
@@ -53,7 +53,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const hide = () => {
     Animated.timing(opacityAnimation, {
       toValue: 0,
-      duration: 100,
+      duration: 250,
       easing: EASING,
       useNativeDriver: false,
     }).start(() => {
@@ -92,13 +92,13 @@ export const useMenu = (props: MenuProps): MenuState => {
     Animated.parallel([
       Animated.timing(menuSizeAnimation, {
         toValue: { x: width, y: height },
-        duration: 100,
+        duration: 250,
         easing: EASING,
         useNativeDriver: false,
       }),
       Animated.timing(opacityAnimation, {
         toValue: 1,
-        duration: 100,
+        duration: 250,
         easing: EASING,
         useNativeDriver: false,
       }),
@@ -148,8 +148,7 @@ export const useMenu = (props: MenuProps): MenuState => {
     // Switch left to right for rtl devices
     ...(isRTL ? { right: left } : { left }),
   };
-  const menuState1 = menuState;
-  const animationStarted = menuState1 === States.Animating;
+  const animationStarted = menuState === States.Animating;
   const { testID } = props;
   // Default behavior for submenu is to open on hover
   // the ...props line below will override this behavior for a submenu
@@ -183,6 +182,7 @@ export const useMenu = (props: MenuProps): MenuState => {
     testID,
   };
 };
+
 const useMenuOpenState = (
   isControlled: boolean,
   props: MenuProps,

@@ -12,12 +12,12 @@ import { useMenuContext } from '../context/menuContext';
 // this behavior.
 const delayOpen = 150;
 let lastCloseTimestamp = -1;
-export const useMenu = (props: MenuProps, hide?, show?): MenuState => {
+export const useMenu = (props: MenuProps): MenuState => {
   const triggerRef = React.useRef();
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
   const isOpenControlled = typeof props.open !== 'undefined';
-  const [open, shouldFocusOnContainer, setOpen] = useMenuOpenState(isOpenControlled, props, context.setOpen, hide, show);
+  const [open, shouldFocusOnContainer, setOpen] = useMenuOpenState(isOpenControlled, props, context.setOpen);
   const [checked, onCheckedChange] = useMenuCheckedState(props);
   // Default behavior for submenu is to open on hover
   // the ...props line below will override this behavior for a submenu
@@ -46,8 +46,6 @@ const useMenuOpenState = (
   isControlled: boolean,
   props: MenuProps,
   parentSetOpen: (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void,
-  hide,
-  show,
 ): [boolean, boolean, (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void] => {
   const { defaultOpen, onOpenChange, open } = props;
   const initialState = typeof defaultOpen !== 'undefined' ? defaultOpen : !!open;
@@ -64,14 +62,12 @@ const useMenuOpenState = (
         if (Platform.OS === ('win32' as any) && isMouseEvent(e)) {
           setShouldFocusOnContainer(true);
         } else {
-          show();
           setShouldFocusOnContainer(false);
         }
       }
       if (!isOpen) {
         setShouldFocusOnContainer(undefined);
         lastCloseTimestamp = Date.now();
-        hide();
       }
       if (onOpenChange && openPrev !== isOpen) {
         onOpenChange(e, isOpen);

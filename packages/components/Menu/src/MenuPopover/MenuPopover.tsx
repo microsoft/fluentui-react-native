@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 
 import { Callout } from '@fluentui-react-native/callout';
 import type { UseTokens } from '@fluentui-react-native/framework';
@@ -10,6 +10,7 @@ import { menuPopoverName } from './MenuPopover.types';
 import { useMenuPopoverTokens } from './MenuPopoverTokens';
 import { useMenuPopover } from './useMenuPopover';
 import { useMenuContext } from '../context';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {

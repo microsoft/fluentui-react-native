@@ -44,15 +44,15 @@ export interface MenuState extends MenuProps {
   hasMaxHeight?: boolean;
   hasMaxWidth?: boolean;
 
-  setAnchorHeight;
-  setAnchorWidth;
-  shadowMenuContainerStyle;
-  _container;
-  onRequestClose;
-  onMenuLayout;
-  menuHeight;
-  maxMenuHeight;
-  animationStarted;
-  menuSize;
-  testID;
+  setAnchorHeight?;
+  setAnchorWidth?;
+  shadowMenuContainerStyle?;
+  _container?;
+  onRequestClose?;
+  onMenuLayout?;
+  menuHeight?;
+  maxMenuHeight?;
+  animationStarted?;
+  menuSize?;
+  testID?;
 }
