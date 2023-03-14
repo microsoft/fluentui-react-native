@@ -43,4 +43,16 @@ export interface MenuState extends MenuProps {
   triggerRef: React.RefObject<View>;
   hasMaxHeight?: boolean;
   hasMaxWidth?: boolean;
+
+  setAnchorHeight;
+  setAnchorWidth;
+  shadowMenuContainerStyle;
+  _container;
+  onRequestClose;
+  onMenuLayout;
+  menuHeight;
+  maxMenuHeight;
+  animationStarted;
+  menuSize;
+  testID;
 }
