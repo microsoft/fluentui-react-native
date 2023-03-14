@@ -28,6 +28,7 @@ export interface FontFamilies {
   secondary: FontFamilyValue;
   cursive: FontFamilyValue;
   monospace: FontFamilyValue;
+  numeric: FontFamilyValue;
   sansSerif: FontFamilyValue;
   serif: FontFamilyValue;
 }
