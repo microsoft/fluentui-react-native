@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import type { LayoutChangeEvent } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { LayoutChangeEvent, ScrollView } from 'react-native';
 import { Animated, Easing, Modal, TouchableWithoutFeedback, View, StyleSheet, I18nManager, StatusBar, Dimensions } from 'react-native';
 
 import { stagedComponent } from '@fluentui-react-native/framework';
@@ -19,8 +19,9 @@ const SCREEN_INDENT = 16;
 export const Menu = stagedComponent((props: MenuProps) => {
   const _container = useRef<View>(null);
   const [menuState, setMenuState] = React.useState<States>(States.Hidden);
-  const [buttonHeight, setButtonHeight] = React.useState<number>(0);
-  const [buttonWidth, setButtonWidth] = React.useState<number>(0);
+  const [anchorHeight, setAnchorHeight] = React.useState<number>(0);
+  const [maxMenuHeight, setMaxMenuHeight] = useState(300);
+  const [anchorWidth, setAnchorWidth] = React.useState<number>(0);
   const [left, setLeft] = React.useState<number>(0);
   const [menuHeight, setMenuHeight] = React.useState<number>(0);
   const [menuWidth, setMenuWidth] = React.useState<number>(0);
@@ -40,6 +41,7 @@ export const Menu = stagedComponent((props: MenuProps) => {
       hide();
     }
   }, [props.visible]);
+
   const onMenuLayout = (e: LayoutChangeEvent) => {
     if (menuState === States.Animating) {
       return;
@@ -65,8 +67,8 @@ export const Menu = stagedComponent((props: MenuProps) => {
   };
   const show = () => {
     _container.current?.measureInWindow((left, top, buttonWidth, buttonHeight) => {
-      setButtonHeight(buttonHeight);
-      setButtonWidth(buttonWidth);
+      setAnchorHeight(buttonHeight);
+      setAnchorWidth(buttonWidth);
       setLeft(left);
       setMenuState(States.Shown);
       setTop(top + buttonHeight);
@@ -98,24 +100,29 @@ export const Menu = stagedComponent((props: MenuProps) => {
   };
   // Adjust position of menu
   const transforms = [];
-  if ((isRTL && left + buttonWidth - menuWidth > SCREEN_INDENT) || (!isRTL && left + menuWidth > windowWidth - SCREEN_INDENT)) {
+  if ((isRTL && left + anchorWidth - menuWidth > SCREEN_INDENT) || (!isRTL && left + menuWidth > windowWidth - SCREEN_INDENT)) {
     transforms.push({
       translateX: Animated.multiply(menuSizeAnimation.x, -1),
     });
-    setLeft(Math.min(windowWidth - SCREEN_INDENT, left + buttonWidth));
+    setLeft(Math.min(windowWidth - SCREEN_INDENT, left + anchorWidth));
   } else if (left < SCREEN_INDENT) {
     setLeft(SCREEN_INDENT);
   }
   // Flip by Y axis if menu hits bottom screen border
-  if (top > windowHeight - menuHeight - SCREEN_INDENT) {
-    transforms.push({
-      translateY: Animated.multiply(menuSizeAnimation.y, -1),
-    });
-    // setTop(windowHeight - SCREEN_INDENT);
-    // setTop(Math.min(windowHeight - SCREEN_INDENT, top + buttonHeight));
+  if (top + menuHeight + SCREEN_INDENT > windowHeight) {
+    if (menuHeight > maxMenuHeight) {
+      transforms.push({
+        translateY: Animated.multiply(menuSizeAnimation.y, -1),
+      });
+    } else {
+      transforms.push({
+        translateY: Animated.multiply(menuSizeAnimation.y, -1),
+      });
+    }
   } else if (top < SCREEN_INDENT) {
     setTop(SCREEN_INDENT);
   }
+
   const shadowMenuContainerStyle = {
     opacity: opacityAnimation,
     transform: transforms,
@@ -140,7 +147,15 @@ export const Menu = stagedComponent((props: MenuProps) => {
     const menuPopover = childrenArray[1];
     return (
       <MenuProvider value={contextValue}>
-        {menuTrigger}
+        <View
+          onLayout={(event) => {
+            const { height, width } = event.nativeEvent.layout;
+            setAnchorHeight(height);
+            setAnchorWidth(width);
+          }}
+        >
+          {menuTrigger}
+        </View>
         <View ref={_container} collapsable={false} testID={testID}>
           <Modal
             visible={state.open}
@@ -150,8 +165,16 @@ export const Menu = stagedComponent((props: MenuProps) => {
           >
             <TouchableWithoutFeedback onPress={onRequestClose} accessible={false}>
               <View style={StyleSheet.absoluteFill}>
-                <Animated.View onLayout={onMenuLayout} style={[styles.shadowMenuContainer, shadowMenuContainerStyle, style]}>
-                  <Animated.View style={[styles.menuContainer, animationStarted && menuSize]}>{menuPopover}</Animated.View>
+                <Animated.View
+                  onLayout={onMenuLayout}
+                  style={[styles.shadowMenuContainer, shadowMenuContainerStyle, { maxHeight: maxMenuHeight }]}
+                >
+                  {console.log('menuHeight', menuHeight)}
+                  {menuHeight > maxMenuHeight ? (
+                    <ScrollView>{menuPopover}</ScrollView>
+                  ) : (
+                    <Animated.View style={[styles.menuContainer, animationStarted && menuSize]}>{menuPopover}</Animated.View>
+                  )}
                 </Animated.View>
               </View>
             </TouchableWithoutFeedback>

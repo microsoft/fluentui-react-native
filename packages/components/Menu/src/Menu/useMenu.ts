@@ -12,7 +12,7 @@ import { useMenuContext } from '../context/menuContext';
 // this behavior.
 const delayOpen = 150;
 let lastCloseTimestamp = -1;
-export const useMenu = (props: MenuProps, hide, show): MenuState => {
+export const useMenu = (props: MenuProps, hide?, show?): MenuState => {
   const triggerRef = React.useRef();
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
