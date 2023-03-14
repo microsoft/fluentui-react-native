@@ -2,6 +2,45 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Tue, 14 Mar 2023 20:50:45 GMT",
+      "tag": "@fluentui-react-native/link_v0.18.22",
+      "version": "0.18.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.13.6",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.6",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.25",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/text to v0.19.27",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.12",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Mar 2023 20:54:15 GMT",
       "tag": "@fluentui-react-native/link_v0.18.21",
       "version": "0.18.21",
