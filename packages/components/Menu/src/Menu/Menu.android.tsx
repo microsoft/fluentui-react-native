@@ -10,6 +10,7 @@ import { useMenu } from './useMenu';
 import { useMenuContextValue } from './useMenuContextValue';
 import { MenuProvider } from '../context/menuContext';
 
+const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 export const Menu = stagedComponent((props: MenuProps) => {
   const state = useMenu(props);
   const contextValue = useMenuContextValue(state);
@@ -46,11 +47,12 @@ export const Menu = stagedComponent((props: MenuProps) => {
               <View style={StyleSheet.absoluteFill}>
                 <Animated.View
                   onLayout={state.onMenuLayout}
-                  style={[styles.shadowMenuContainer, state.shadowMenuContainerStyle, { maxHeight: state.maxMenuHeight }]}
+                  style={[styles.shadowMenuContainer, state.shadowMenuContainerStyle, { maxHeight: 500 }]}
                 >
-                  {console.log(state.menuHeight)}
-                  {state.menuHeight > state.maxMenuHeight ? (
-                    <ScrollView>{menuPopover}</ScrollView>
+                  {state.menuHeight > 250 ? (
+                    <AnimatedScrollView style={[styles.menuContainer, state.animationStarted && state.menuSize]}>
+                      {menuPopover}
+                    </AnimatedScrollView>
                   ) : (
                     <Animated.View style={[styles.menuContainer, state.animationStarted && state.menuSize]}>{menuPopover}</Animated.View>
                   )}

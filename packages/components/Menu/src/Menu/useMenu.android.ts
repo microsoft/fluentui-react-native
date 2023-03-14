@@ -30,7 +30,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const _container = useRef<View>(null);
   const [menuState, setMenuState] = React.useState<States>(States.Hidden);
   const [anchorHeight, setAnchorHeight] = React.useState<number>(0);
-  const [maxMenuHeight, setMaxMenuHeight] = useState(300);
+  const [maxMenuHeight] = useState(250);
   const [anchorWidth, setAnchorWidth] = React.useState<number>(0);
   const [left, setLeft] = React.useState<number>(0);
   const [menuHeight, setMenuHeight] = React.useState<number>(0);
