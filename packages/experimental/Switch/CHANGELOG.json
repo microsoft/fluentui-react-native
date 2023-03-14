@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Tue, 14 Mar 2023 18:43:07 GMT",
+      "tag": "@fluentui-react-native/switch_v0.8.34",
+      "version": "0.8.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "9ae770e1cbdaa193f281a5d2d29a0c437f4cc962",
+            "comment": "Fix customizeable accessible"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Mar 2023 20:54:15 GMT",
       "tag": "@fluentui-react-native/switch_v0.8.33",
       "version": "0.8.33",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Tue, 07 Mar 2023 20:54:15 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 18:43:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.34
+
+Tue, 14 Mar 2023 18:43:07 GMT
+
+### Patches
+
+- Fix customizeable accessible (ruaraki@microsoft.com)
 
 ## 0.8.33
 

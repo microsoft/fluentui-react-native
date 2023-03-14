@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix customizeable accessible",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
