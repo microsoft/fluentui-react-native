@@ -18,6 +18,7 @@ import { titles, multiWordTitles } from './titles';
 export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const {
     avatarColor,
+    accessible,
     active,
     accessibilityLabel,
     accessibilityRole,
@@ -78,7 +79,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
 
   return {
     props: {
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityLabel: accessibilityLabel || accessibilityText,
       accessibilityRole: accessibilityRole ?? 'image',
       active,
