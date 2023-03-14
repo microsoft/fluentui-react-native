@@ -1,5 +1,5 @@
 {
-  "type": "patch",
+  "type": "minor",
   "comment": "Add numeric font family type",
   "packageName": "@fluentui-react-native/theme-types",
   "email": "ruaraki@microsoft.com",
