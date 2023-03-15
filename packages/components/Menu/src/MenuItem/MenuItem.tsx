@@ -54,7 +54,11 @@ export const MenuItem = compose<MenuItemType>({
               {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon {...icon} />}
             </Slots.iconPlaceholder>
           )}
-          {children && <Slots.content tooltip={tooltipResult}>{children}</Slots.content>}
+          {children && (
+            <Slots.content tooltip={tooltipResult} accessible={false}>
+              {children}
+            </Slots.content>
+          )}
           {menuItem.state.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
         </Slots.root>
       );
