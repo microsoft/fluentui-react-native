@@ -14,6 +14,7 @@ import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { useMenuContext } from '../context';
 import { MenuListProvider } from '../context/menuListContext';
+import { MenuDivider } from '../MenuDivider';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;
@@ -58,17 +59,27 @@ export const MenuList = compose<MenuListType>({
     }, []);
 
     return (_final: MenuListProps, children: React.ReactNode) => {
-      const filteredChildren = React.Children.toArray(children).filter((child) => React.isValidElement(child));
-      const childrenWithSet = filteredChildren.map((child, index: number) => {
-        return React.cloneElement(
-          child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
-          {
-            accessibilityPositionInSet: index + 1, // win32
-            accessibilityPosInSet: index, // windows
-            accessibilitySetSize: filteredChildren.length, //win32
-            accessibilitySizeOfSet: filteredChildren.length, //windows
-          } as any,
-        );
+      const itemCount = React.Children.toArray(children).filter(
+        (child) => React.isValidElement(child) && child.type !== MenuDivider,
+      ).length;
+      let itemPosition = 0;
+
+      const childrenWithSet = React.Children.toArray(children).map((child) => {
+        if (React.isValidElement(child)) {
+          if ((child as any).type !== MenuDivider) {
+            itemPosition++;
+          }
+
+          return React.cloneElement(
+            child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
+            {
+              accessibilityPositionInSet: child.props.accessibilityPositionInSet ?? itemPosition, // win32
+              accessibilitySetSize: child.props.accessibilitySetSize ?? itemCount, //win32
+            } as any,
+          );
+        }
+
+        return child;
       });
 
       const content =

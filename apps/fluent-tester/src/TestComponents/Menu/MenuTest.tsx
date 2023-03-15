@@ -11,6 +11,7 @@ import {
   MenuPopover,
   MenuList,
   MenuDivider,
+  MenuProps,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -123,9 +124,9 @@ const MenuRadioItem: React.FunctionComponent = () => {
   );
 };
 
-const Submenu: React.FunctionComponent = () => {
+const Submenu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
   return (
-    <Menu>
+    <Menu {...props}>
       <MenuTrigger>
         <MenuItem>A second MenuItem trigger</MenuItem>
       </MenuTrigger>
@@ -249,6 +250,31 @@ const MenuCustomized: React.FunctionComponent = () => {
   );
 };
 
+const MenuNofM: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem>A plain MenuItem</MenuItem>
+            <MenuItem disabled>A disabled MenuItem</MenuItem>
+            <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
+            <MenuDivider />
+            <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />
+            <MenuItem disabled accessibilitySetSize={2}>
+              A disabled MenuItem
+            </MenuItem>
+            <MenuItem>A plain MenuItem</MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',
@@ -302,6 +328,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Refs',
     component: MenuTriggerChildRef,
+  },
+  {
+    name: 'Menu N of M Override',
+    component: MenuNofM,
   },
 ];
 
