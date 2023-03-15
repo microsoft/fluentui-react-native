@@ -26,6 +26,7 @@ export function androidTypography(): Typography {
       secondary: 'System',
       cursive: 'cursive',
       monospace: 'monospace',
+      numeric: 'numeric',
       sansSerif: 'sans-serif',
       serif: 'serif',
     },

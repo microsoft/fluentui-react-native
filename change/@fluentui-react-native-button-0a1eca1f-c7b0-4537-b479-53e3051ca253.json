@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove button text and after-icon from UIA tree",
-  "packageName": "@fluentui-react-native/button",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -15,6 +15,7 @@ export const useTabs = (props: TabsProps): TabsInfo => {
   const defaultComponentRef = React.useRef(null);
   const focusZoneRef = React.useRef(null);
   const {
+    accessible,
     componentRef = defaultComponentRef,
     selectedKey,
     getTabId,
@@ -55,7 +56,7 @@ export const useTabs = (props: TabsProps): TabsInfo => {
   return {
     props: {
       ...props,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityRole: 'tablist',
       componentRef: componentRef,
       isCircularNavigation: isCircularNavigation ?? false,

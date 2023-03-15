@@ -8,8 +8,19 @@ import { useSelectedKey as useValue } from '@fluentui-react-native/interactive-h
 import type { RadioGroupInfo, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
 
 export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
-  const { value, defaultValue, disabled, required, layout, onChange, isCircularNavigation, accessibilityLabel, label, accessibilityState } =
-    props;
+  const {
+    accessible,
+    value,
+    defaultValue,
+    disabled,
+    required,
+    layout,
+    onChange,
+    isCircularNavigation,
+    accessibilityLabel,
+    label,
+    accessibilityState,
+  } = props;
 
   // This hook updates the selected Radio and calls the customer's onClick function. This gets called after a button is pressed.
   const data = useValue(value || defaultValue || null, onChange);
@@ -90,7 +101,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
       ...props,
       required,
       layout,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityRole: 'radiogroup',
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityState: getAccessibilityState(state.disabled, state.required, accessibilityState),
