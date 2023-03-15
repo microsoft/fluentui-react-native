@@ -26,6 +26,7 @@ function _defaultTypography(): Typography {
       secondary: 'Segoe UI',
       cursive: 'System',
       monospace: 'System',
+      numeric: 'System',
       sansSerif: 'System',
       serif: 'System',
     },
@@ -66,6 +67,7 @@ function _defaultTypography(): Typography {
       secondary: 'System',
       cursive: 'System',
       monospace: 'System',
+      numeric: 'System',
       sansSerif: 'System',
       serif: 'System',
     };

@@ -19,6 +19,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
   const animation = React.useRef(new Animated.Value(0)).current;
   const [isInit, setIsInit] = React.useState(true);
   const {
+    accessible,
     onChange,
     checked,
     defaultChecked,
@@ -128,7 +129,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
 
   return {
     props: {
-      accessible: isMobile ? !disabled : true,
+      accessible: accessible ?? (isMobile ? !disabled : true),
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityRole: accessibilityRole ?? 'switch',
       accessibilityActions: accessibilityActionsProp,

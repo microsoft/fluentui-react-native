@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/divider
 
-This log was last generated on Sat, 11 Mar 2023 01:50:21 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.10
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.6
+- Bump @fluentui-react-native/icon to v0.17.20
+- Bump @fluentui-react-native/text to v0.19.27
+- Bump @fluentui-react-native/tokens to v0.20.12
+- Bump @fluentui-react-native/theme-tokens to v0.24.5
 
 ## 0.3.9
 

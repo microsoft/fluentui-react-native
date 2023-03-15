@@ -59,7 +59,7 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   shadowToken?: ShadowToken;
 
   /**
-   * Focused State on Android has inner and outer borders.
+   * Focused State on Android and win32 primary has inner and outer borders.
    * Outer Border is equivalent to the border tokens from IBorders.
    */
   borderInnerColor?: ColorValue;
@@ -166,14 +166,23 @@ export interface ButtonProps extends ButtonCoreProps {
   loading?: boolean;
 }
 
+interface ButtonState extends PressableState {
+  measuredHeight?: number;
+  measuredWidth?: number;
+
+  // win32 only. Whether the component should use a tone-tone focus border instead of single-tone
+  shouldUseTwoToneFocusBorder?: boolean;
+}
+
 export interface ButtonInfo {
   props: ButtonProps & React.ComponentPropsWithRef<any>;
-  state: PressableState;
+  state: ButtonState;
 }
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
   rippleContainer?: IViewProps; // Android only
+  focusInnerBorder?: IViewProps; // Win32 only
   icon: IconProps;
   content: TextProps;
 }

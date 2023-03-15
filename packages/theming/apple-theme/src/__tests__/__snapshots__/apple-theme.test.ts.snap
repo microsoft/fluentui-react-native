@@ -922,6 +922,7 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
+      "numeric": "System",
       "primary": "System",
       "sansSerif": "System",
       "secondary": "System",
