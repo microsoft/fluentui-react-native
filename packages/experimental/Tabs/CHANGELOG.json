@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Tue, 14 Mar 2023 20:50:45 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.8.41",
+      "version": "0.8.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.6",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.25",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.37",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/text to v0.19.27",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.12",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.20",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Mar 2023 18:43:06 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.8.40",
+      "version": "0.8.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "commit": "9ae770e1cbdaa193f281a5d2d29a0c437f4cc962",
+            "comment": "Fix customizeable accessible"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Mar 2023 20:54:15 GMT",
       "tag": "@fluentui-react-native/experimental-tabs_v0.8.39",
       "version": "0.8.39",

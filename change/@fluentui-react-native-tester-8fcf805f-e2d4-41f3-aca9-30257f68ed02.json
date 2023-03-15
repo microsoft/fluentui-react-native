@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove duplicate Button test section.",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

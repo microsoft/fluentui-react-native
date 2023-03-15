@@ -23,6 +23,7 @@ exports[`ContextualMenu default 1`] = `
   onFocus={[Function]}
   onKeyDown={[Function]}
   onKeyUp={[Function]}
+  onLayout={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onResponderGrant={[Function]}

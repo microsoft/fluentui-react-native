@@ -2,6 +2,60 @@
   "name": "@fluentui-react-native/divider",
   "entries": [
     {
+      "date": "Tue, 14 Mar 2023 20:50:45 GMT",
+      "tag": "@fluentui-react-native/divider_v0.3.10",
+      "version": "0.3.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.6",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.20",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/text to v0.19.27",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.12",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.24.5",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 11 Mar 2023 01:50:21 GMT",
+      "tag": "@fluentui-react-native/divider_v0.3.9",
+      "version": "0.3.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/divider",
+            "commit": "ee5daee045facf178bef7eb3cfe16b7231bb0ebe",
+            "comment": "Update component documentation and code comments."
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 08 Mar 2023 23:41:31 GMT",
       "tag": "@fluentui-react-native/divider_v0.3.8",
       "version": "0.3.8",
