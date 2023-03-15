@@ -1,6 +1,6 @@
 import type { ImageProps, ImageSourcePropType } from 'react-native';
+import { Platform } from 'react-native';
 
-import type { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { createIconProps } from '@fluentui-react-native/icon';
 
 import type { AvatarProps, AvatarInfo, AvatarState, AvatarSize, AvatarColor } from './Avatar.types';
@@ -18,6 +18,7 @@ import { titles, multiWordTitles } from './titles';
 export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const {
     avatarColor,
+    accessible,
     active,
     accessibilityLabel,
     accessibilityRole,
@@ -38,11 +39,6 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const showRing = active === 'active' && activeAppearance === 'ring';
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
   const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
-
-  const badgeProps: PresenceBadgeProps = {
-    size: 'small',
-    ...badge,
-  };
 
   const state: AvatarState = {
     showRing,
@@ -76,15 +72,20 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     };
   }
 
+  const disableBadge = Platform.OS === 'android' && size === 16;
+  if (disableBadge) {
+    state.showBadge = false;
+  }
+
   return {
     props: {
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityLabel: accessibilityLabel || accessibilityText,
       accessibilityRole: accessibilityRole ?? 'image',
       active,
       activeAppearance,
       avatarColor: avatarColor === 'colorful' ? resolveColorfulToSpecificColor(idForColor, name) : avatarColor,
-      badge: badgeProps,
+      badge: badge,
       badgeStatus: badge?.status,
       initials: initials || getInitials(name),
       icon: iconProps,

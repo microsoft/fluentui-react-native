@@ -8,10 +8,7 @@ export const useDividerTokens = buildUseTokens<DividerTokens>(() => ({
   contentPadding: globalTokens.size120,
   flexAfter: 1,
   flexBefore: 1,
-  insetSize: 0,
   minLineSize: globalTokens.size80,
   minWidth: 0,
-  minHeight: 0,
-  textVariant: 'secondaryStandard',
   thickness: 1,
 }));

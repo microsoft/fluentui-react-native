@@ -94,13 +94,13 @@ export interface DividerProps {
    */
   alignContent?: DividerAlignment;
   /**
-   * If no color is passed, the divider and its content are colored using different theme tokens depending on the value of this prop.
+   * If no color tokens are set, the divider and its content are colored using different theme tokens depending on the value of this prop.
    * @default 'default'
    * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   appearance?: DividerAppearance;
   /**
-   * Pass an icon source to render an icon as content in the divider. Mutually exclusive with passing text as a child.
+   * Pass an icon source to render an icon as content in the divider. Will not render if text is passed via children.
    * Note: This prop is not supported on mobile platforms(Android & iOS).
    */
   icon?: IconProps;
@@ -126,7 +126,7 @@ Tokens can be used to customize the styling of the control by using the customiz
 ```tsx
 export interface DividerTokens extends LayoutTokens, Omit<FontTokens, 'fontDynamicTypeRamp' | 'fontMaximumSize'> {
   /**
-   * The color of the content passed into the divider. This is overriden if the `color` prop is set.
+   * The color of the content passed into the divider.
    */
   contentColor?: ColorValue;
   /**
@@ -145,7 +145,7 @@ export interface DividerTokens extends LayoutTokens, Omit<FontTokens, 'fontDynam
    */
   flexBefore?: number;
   /**
-   * Color of the divider lines. This is overriden if the `color` prop is set.
+   * Color of the divider lines.
    */
   lineColor?: ColorValue;
   /**
@@ -219,6 +219,12 @@ type DividerLayoutTokens = {
    */
   minWidth?: string | number;
   maxWidth?: string | number;
+  /**
+   * For minHeight, there are different default values:
+   * @default 0 for horizontal dividers
+   * @default 20 for vertical dividers without children
+   * @default 84 for vertical dividers with children
+   */
   minHeight?: string | number;
   maxHeight?: string | number;
   /**
