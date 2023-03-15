@@ -43,10 +43,9 @@ export const Badge = compose<BadgeType>({
     const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps));
 
     return (final: BadgeProps, ...children: ReactNode[]) => {
-      const { icon, iconPosition, size, appearance, ...mergedProps } = mergeProps(badge, final);
+      const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size !== 'tiny';
-
       return (
         <Slots.shadow>
           <Slots.root {...mergedProps}>
