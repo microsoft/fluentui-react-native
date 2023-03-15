@@ -474,6 +474,7 @@ Object {
     "families": Object {
       "cursive": "cursive",
       "monospace": "monospace",
+      "numeric": "numeric",
       "primary": "sans-serif",
       "primaryLight": "sans-serif-light",
       "primarySemibold": "sans-serif-medium",
@@ -1110,6 +1111,7 @@ Object {
     "families": Object {
       "cursive": "cursive",
       "monospace": "monospace",
+      "numeric": "numeric",
       "primary": "sans-serif",
       "primaryLight": "sans-serif-light",
       "primarySemibold": "sans-serif-medium",
@@ -1746,6 +1748,7 @@ Object {
     "families": Object {
       "cursive": "cursive",
       "monospace": "monospace",
+      "numeric": "numeric",
       "primary": "sans-serif",
       "primaryLight": "sans-serif-light",
       "primarySemibold": "sans-serif-medium",
@@ -2382,6 +2385,7 @@ Object {
     "families": Object {
       "cursive": "cursive",
       "monospace": "monospace",
+      "numeric": "numeric",
       "primary": "sans-serif",
       "primaryLight": "sans-serif-light",
       "primarySemibold": "sans-serif-medium",
@@ -3018,6 +3022,7 @@ Object {
     "families": Object {
       "cursive": "cursive",
       "monospace": "monospace",
+      "numeric": "numeric",
       "primary": "sans-serif",
       "primaryLight": "sans-serif-light",
       "primarySemibold": "sans-serif-medium",
@@ -3654,6 +3659,7 @@ Object {
     "families": Object {
       "cursive": "cursive",
       "monospace": "monospace",
+      "numeric": "numeric",
       "primary": "sans-serif",
       "primaryLight": "sans-serif-light",
       "primarySemibold": "sans-serif-medium",
@@ -4290,6 +4296,7 @@ Object {
     "families": Object {
       "cursive": "cursive",
       "monospace": "monospace",
+      "numeric": "numeric",
       "primary": "sans-serif",
       "primaryLight": "sans-serif-light",
       "primarySemibold": "sans-serif-medium",

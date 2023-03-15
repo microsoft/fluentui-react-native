@@ -74,5 +74,16 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
       }),
       ['iconColor', 'iconSize'],
     ),
+    focusInnerBorder: buildProps(
+      (tokens: CompoundButtonTokens) => ({
+        style: {
+          position: 'absolute',
+          borderWidth: tokens.borderInnerWidth,
+          borderColor: tokens.borderInnerColor,
+          borderRadius: tokens.borderInnerRadius,
+        },
+      }),
+      ['borderInnerWidth', 'borderInnerColor', 'borderInnerRadius'],
+    ),
   },
 };

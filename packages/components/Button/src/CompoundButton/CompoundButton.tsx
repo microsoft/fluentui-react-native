@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -11,7 +11,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './CompoundButton.styling';
 import type { CompoundButtonProps, CompoundButtonType } from './CompoundButton.types';
 import { compoundButtonName } from './CompoundButton.types';
-import { buttonLookup } from '../Button';
+import { buttonLookup, getFocusBorderStyle } from '../Button';
 import { useButton } from '../useButton';
 
 export const CompoundButton = compose<CompoundButtonType>({
@@ -23,6 +23,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     content: Text,
     secondaryContent: Text,
     contentContainer: View,
+    focusInnerBorder: Platform.OS === ('win32' as any) && View,
   },
   useRender: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
@@ -82,6 +83,13 @@ export const CompoundButton = compose<CompoundButtonType>({
             )}
           </Slots.contentContainer>
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} accessible={false} />}
+          {button.state.focused && button.state.shouldUseTwoToneFocusBorder && (
+            <Slots.focusInnerBorder
+              style={getFocusBorderStyle(button.state.measuredHeight, button.state.measuredWidth)}
+              accessible={false}
+              focusable={false}
+            />
+          )}
         </Slots.root>
       );
     };
