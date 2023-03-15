@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Wed, 15 Mar 2023 07:15:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.39
+
+Wed, 15 Mar 2023 07:15:41 GMT
+
+### Patches
+
+- fix neutralforeground1 (rohanpd.work@gmail.com)
 
 ## 0.134.38
 

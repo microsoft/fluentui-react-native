@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 15 Mar 2023 07:15:41 GMT",
+      "tag": "@fluentui-react-native/tester_v0.134.39",
+      "version": "0.134.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c0f08a95e8cea6811d6acf5db3a11874add22588",
+            "comment": "fix neutralforeground1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/tester_v0.134.38",
       "version": "0.134.38",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix neutralforeground1",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
