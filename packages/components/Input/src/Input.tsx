@@ -20,7 +20,7 @@ import { useInput } from './useInput';
  * @returns Whether the styles that are assigned to the layer should be applied to the input
  */
 export const inputLookup = (layer: string, userProps: InputProps): boolean => {
-  return userProps[layer] || layer === userProps['textSize'];
+  return userProps[layer];
 };
 
 const svgUriProps: SvgIconProps = {
