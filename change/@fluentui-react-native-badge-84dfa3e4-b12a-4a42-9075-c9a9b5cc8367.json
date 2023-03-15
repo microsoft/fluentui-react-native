@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Only show the optional shadow on filled/tinted badge variants",
+  "comment": "Remove check for appearance variant on shadow token layer",
   "packageName": "@fluentui-react-native/badge",
   "email": "78454019+lyzhan7@users.noreply.github.com",
   "dependentChangeType": "patch"
