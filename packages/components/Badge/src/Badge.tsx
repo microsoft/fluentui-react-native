@@ -46,30 +46,25 @@ export const Badge = compose<BadgeType>({
       const { icon, iconPosition, size, appearance, ...mergedProps } = mergeProps(badge, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size !== 'tiny';
-      const showOptionalShadow = appearance === 'filled' || appearance === 'tint';
 
-      const badgeWithoutShadow = (
-        <Slots.root {...mergedProps}>
-          {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
-          {showContent &&
-            Children.map(children, (child, i) =>
-              typeof child === 'string' ? (
-                <Slots.text accessible={false} key={`text-${i}`}>
-                  {child}
-                </Slots.text>
-              ) : (
-                child
-              ),
-            )}
-          {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
-        </Slots.root>
+      return (
+        <Slots.shadow>
+          <Slots.root {...mergedProps}>
+            {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+            {showContent &&
+              Children.map(children, (child, i) =>
+                typeof child === 'string' ? (
+                  <Slots.text accessible={false} key={`text-${i}`}>
+                    {child}
+                  </Slots.text>
+                ) : (
+                  child
+                ),
+              )}
+            {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
+          </Slots.root>
+        </Slots.shadow>
       );
-
-      if (showOptionalShadow) {
-        return <Slots.shadow>{badgeWithoutShadow}</Slots.shadow>;
-      } else {
-        return badgeWithoutShadow;
-      }
     };
   },
 });
