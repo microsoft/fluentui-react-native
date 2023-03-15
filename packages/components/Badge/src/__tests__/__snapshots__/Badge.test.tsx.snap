@@ -2,6 +2,7 @@
 
 exports[`Badge component tests Badge all props 1`] = `
 <View
+  appearance="outline"
   shape="rounded"
   style={
     Object {
@@ -149,6 +150,7 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
   }
 >
   <View
+    appearance="filled"
     style={
       Object {
         "alignItems": "center",
