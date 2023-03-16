@@ -29,7 +29,7 @@ export const useMenu = (props: MenuProps): MenuState => {
 
   const _container = useRef<View>(null);
   const [menuState, setMenuState] = React.useState<States>(States.Hidden);
-  const [anchorHeight, setAnchorHeight] = React.useState<number>(0);
+  const [, setAnchorHeight] = React.useState<number>(0);
   const [maxMenuHeight] = useState(250);
   const [anchorWidth, setAnchorWidth] = React.useState<number>(0);
   const [left, setLeft] = React.useState<number>(0);
@@ -92,13 +92,13 @@ export const useMenu = (props: MenuProps): MenuState => {
     Animated.parallel([
       Animated.timing(menuSizeAnimation, {
         toValue: { x: width, y: height },
-        duration: 250,
+        duration: 100,
         easing: EASING,
         useNativeDriver: false,
       }),
       Animated.timing(opacityAnimation, {
         toValue: 1,
-        duration: 250,
+        duration: 100,
         easing: EASING,
         useNativeDriver: false,
       }),
@@ -193,7 +193,7 @@ const useMenuOpenState = (
   const { defaultOpen, onOpenChange, open } = props;
   const initialState = typeof defaultOpen !== 'undefined' ? defaultOpen : !!open;
   const [openInternal, setOpenInternal] = React.useState<boolean>(initialState);
-  const [shouldFocusOnContainer, setShouldFocusOnContainer] = React.useState<boolean | undefined>(undefined);
+  const [shouldFocusOnContainer] = React.useState<boolean | undefined>(undefined);
   const state = isControlled ? open : openInternal;
   const setOpen = React.useCallback(
     (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => {

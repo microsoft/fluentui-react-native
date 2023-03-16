@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui/react-native';
@@ -35,9 +35,9 @@ const MenuDefault: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItem disabled>A disabled MenuItem</MenuItem>
-            <MenuItem>A third plain MenuItem</MenuItem>
+            <MenuItem>Apple</MenuItem>
+            <MenuItem disabled>Disabled Mango</MenuItem>
+            <MenuItem>Orange</MenuItem>
           </MenuList>
         </MenuPopover>
       </Menu>
