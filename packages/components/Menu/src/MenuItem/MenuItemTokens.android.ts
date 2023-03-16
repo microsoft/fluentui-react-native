@@ -5,34 +5,38 @@ import type { TokenSettings } from '@fluentui-react-native/use-styling';
 import type { MenuItemTokens } from './MenuItem.types';
 
 export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: Theme): MenuItemTokens => ({
-  backgroundColor: t.colors.transparentBackground,
-  borderRadius: 5, // hardcoded for now to match NSMenu
-  checkmarkSize: 16,
+  backgroundColor: t.colors.neutralBackground1,
+  borderRadius: globalTokens.corner.radius80,
   color: t.colors.neutralForeground1,
   fontFamily: t.typography.families.primary,
-  fontSize: 13, // aligning with NSMenu font size
+  fontSize: globalTokens.font.size300,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
-  iconColor: t.colors.neutralForeground1,
-  iconSize: 16,
-  paddingHorizontal: 5, // hardcoded for now to match NSMenu
-  paddingVertical: 3, // hardcoded for now to match NSMenu
-  submenuIndicatorColor: t.colors.neutralForeground1,
+  iconColor: t.colors.neutralForeground2,
+  minHeight: 48,
+  variant: 'body1',
+  minWidth: 128,
+  maxWidth: 300,
+  padding: globalTokens.size60,
+  submenuIndicatorColor: t.colors.neutralForeground2,
   submenuIndicatorPadding: globalTokens.sizeNone,
   submenuIndicatorSize: 16,
-  focused: {
-    backgroundColor: t.colors.menuItemBackgroundHovered,
-    color: t.colors.menuItemTextHovered,
-    iconColor: t.colors.menuItemTextHovered,
+  hovered: {
+    backgroundColor: t.colors.neutralBackground1Hover,
+    color: t.colors.neutralForeground2Hover,
+    iconColor: t.colors.neutralForeground2Hover,
+    submenuIndicatorColor: t.colors.neutralForeground2Hover,
   },
   pressed: {
-    backgroundColor: t.colors.menuItemBackgroundPressed,
-    color: t.colors.menuItemTextHovered,
-    iconColor: t.colors.menuItemTextHovered,
+    backgroundColor: t.colors.neutralBackground1Pressed,
+    color: t.colors.neutralForeground2Pressed,
+    iconColor: t.colors.neutralForeground2Pressed,
+    submenuIndicatorColor: t.colors.neutralForeground2Pressed,
   },
   disabled: {
-    backgroundColor: t.colors.menuBackground,
-    color: t.colors.disabledText,
-    iconColor: t.colors.disabledText,
+    backgroundColor: t.colors.neutralBackground1,
+    color: t.colors.neutralForegroundDisabled,
+    iconColor: t.colors.neutralForegroundDisabled,
+    submenuIndicatorColor: t.colors.neutralForegroundDisabled,
   },
 });

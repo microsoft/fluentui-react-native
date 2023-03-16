@@ -25,34 +25,23 @@ import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
 import { stackStyle } from '../Common/styles';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
-import { Divider } from '@fluentui-react-native/divider';
-import Checkbox from '@fluentui-react-native/checkbox/lib/Checkbox';
-import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
 
 const MenuDefault: React.FunctionComponent = () => {
-  const [selected, setSelected] = useState('W');
-  const onChange = React.useCallback((key: string) => {
-    setSelected(key);
-  }, []);
-
   return (
-    <Menu>
-      <MenuTrigger>
-        <Button>Test</Button>
-      </MenuTrigger>
-      <MenuPopover>
-        <MenuList>
-          <MenuDivider />
-          <MenuItemCheckbox />
-          <RadioGroup value={selected} onChange={onChange}>
-            <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />
-            <Radio label="Option X" value="X" />
-            <Radio label="Option Y" value="Y" />
-            <Radio label="Option Z" value="Z" />
-          </RadioGroup>
-        </MenuList>
-      </MenuPopover>
-    </Menu>
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem>A plain MenuItem</MenuItem>
+            <MenuItem disabled>A disabled MenuItem</MenuItem>
+            <MenuItem>A third plain MenuItem</MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
   );
 };
 
