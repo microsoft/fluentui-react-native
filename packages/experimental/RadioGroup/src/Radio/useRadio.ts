@@ -28,7 +28,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     componentRef = defaultComponentRef,
     accessibilityPositionInSet,
     accessibilitySetSize,
-    enableFocusRing,
     ...rest
   } = props;
 
@@ -105,7 +104,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       accessibilitySetSize: accessibilitySetSize ?? radioGroupContext.values.length,
       focusable: !state.disabled,
       disabled: isDisabled,
-      enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,
     },
     state: state,
