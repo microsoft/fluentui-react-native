@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui/react-native';
+import type {
+  MenuProps} from '@fluentui-react-native/menu';
 import {
   Menu,
   MenuItem,
@@ -10,8 +12,7 @@ import {
   MenuTrigger,
   MenuPopover,
   MenuList,
-  MenuDivider,
-  MenuProps,
+  MenuDivider
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
