@@ -1,6 +1,6 @@
-import type { ITheme, IPartialTheme, OfficePalette as IOfficePalette } from '@uifabricshared/theming-ramp';
-import type { IProcessTheme } from '@uifabricshared/theme-registry';
 import type { PlatformDefaultsChangedCallback } from '@fluentui-react-native/win32-theme';
+import type { IProcessTheme } from '@uifabricshared/theme-registry';
+import type { ITheme, IPartialTheme, OfficePalette as IOfficePalette } from '@uifabricshared/theming-ramp';
 
 /**
  * @deprecated

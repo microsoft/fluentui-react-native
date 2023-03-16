@@ -1240,6 +1240,7 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
+      "numeric": "System",
       "primary": "Segoe UI",
       "sansSerif": "System",
       "secondary": "Segoe UI",
@@ -1868,6 +1869,7 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
+      "numeric": "System",
       "primary": "Segoe UI",
       "sansSerif": "System",
       "secondary": "Segoe UI",
@@ -2908,6 +2910,7 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
+      "numeric": "System",
       "primary": "Segoe UI",
       "sansSerif": "System",
       "secondary": "Segoe UI",
@@ -3536,6 +3539,7 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
+      "numeric": "System",
       "primary": "Segoe UI",
       "sansSerif": "System",
       "secondary": "Segoe UI",
@@ -4164,6 +4168,7 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
+      "numeric": "System",
       "primary": "Segoe UI",
       "sansSerif": "System",
       "secondary": "Segoe UI",
@@ -5311,6 +5316,7 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
+      "numeric": "System",
       "primary": "Segoe UI",
       "sansSerif": "System",
       "secondary": "Segoe UI",
@@ -5939,6 +5945,7 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
+      "numeric": "System",
       "primary": "Segoe UI",
       "sansSerif": "System",
       "secondary": "Segoe UI",

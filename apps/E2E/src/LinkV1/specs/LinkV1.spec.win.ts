@@ -1,6 +1,6 @@
-import LinkV1PageObject from '../pages/LinkV1PageObject';
-import { LINKV1_ACCESSIBILITY_LABEL } from '../consts';
 import { LINK_A11Y_ROLE, Attribute, Keys } from '../../common/consts';
+import { LINKV1_ACCESSIBILITY_LABEL } from '../consts';
+import LinkV1PageObject from '../pages/LinkV1PageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('LinkV1 Testing Initialization', () => {

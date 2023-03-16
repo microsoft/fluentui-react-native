@@ -1,6 +1,7 @@
-import { createAndroidTheme } from '../createAndroidTheme';
-import { getAndroidTheme } from '../androidTheme';
 import type { ThemeOptions } from '@fluentui-react-native/theme-types';
+
+import { getAndroidTheme } from '../androidTheme';
+import { createAndroidTheme } from '../createAndroidTheme';
 
 const defaultAppearance = 'light';
 const themeOptions: ThemeOptions[][] = [

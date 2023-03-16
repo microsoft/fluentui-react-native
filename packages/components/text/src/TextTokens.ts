@@ -1,4 +1,5 @@
 import { buildUseTokens } from '@fluentui-react-native/framework';
+
 import type { TextTokens } from './Text.types';
 import { textName } from './Text.types';
 

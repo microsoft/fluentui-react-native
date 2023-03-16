@@ -2,12 +2,14 @@
 import { useEffect, useCallback } from 'react';
 import type { ColorValue } from 'react-native';
 import { Animated, Easing, View } from 'react-native';
-import { Svg, Path } from 'react-native-svg';
-import type { UseSlots } from '@fluentui-react-native/framework';
+
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { Svg, Path } from 'react-native-svg';
+
+import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './Spinner.styling';
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
-import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './Spinner.styling';
 
 const getSpinnerPath = (diameter: number, width: number, color: ColorValue) => {
   const start = {
@@ -30,9 +32,9 @@ export const Spinner = compose<SpinnerType>({
   },
   useRender: (props: SpinnerProps, useSlots: UseSlots<SpinnerType>) => {
     const Slots = useSlots(props);
-    const animating = props.animating != undefined ? props.animating : true;
+    const status = props.status !== undefined ? props.status : 'active';
     const hidesWhenStopped = props.hidesWhenStopped != undefined ? props.hidesWhenStopped : true;
-    const hideOpacity = animating == false && hidesWhenStopped == true ? 0 : 1;
+    const hideOpacity = status === 'inactive' && hidesWhenStopped == true ? 0 : 1;
     const rotationAngle = new Animated.Value(0);
 
     const startRotation = useCallback(() => {
@@ -44,7 +46,7 @@ export const Spinner = compose<SpinnerType>({
           useNativeDriver: true,
         }),
       ).start();
-    }, [rotationAngle, animating]);
+    }, [rotationAngle, status]);
 
     const stopRotation = () => {
       rotationAngle.stopAnimation();
@@ -60,12 +62,12 @@ export const Spinner = compose<SpinnerType>({
         }),
       ).start();
 
-      if (animating) {
+      if (status === 'active') {
         startRotation();
       } else {
         stopRotation();
       }
-    }, [animating, hidesWhenStopped, rotationAngle]);
+    }, [status, hidesWhenStopped, rotationAngle]);
 
     const interpolateSpin = rotationAngle.interpolate({
       inputRange: [0, 359],
@@ -89,7 +91,7 @@ export const Spinner = compose<SpinnerType>({
       style: {
         opacity: hideOpacity,
       },
-      accessibilityState: { busy: animating },
+      accessibilityState: { busy: status === 'active' },
     };
     return (rest: SpinnerProps) => {
       const { ...mergedProps } = mergeProps(props, rest, otherRootProps);

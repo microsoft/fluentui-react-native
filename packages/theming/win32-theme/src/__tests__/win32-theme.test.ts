@@ -1,10 +1,10 @@
+import { createBrandedThemeWithAlias, getCurrentBrandAliasTokens } from '../createBrandedThemeWithAlias';
+import { createFontAliasTokens } from '../createFontAliasTokens';
+import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from '../createOfficeAliasTokens';
 import { createOfficeTheme } from '../createOfficeTheme';
 import { createPartialOfficeTheme } from '../createPartialOfficeTheme';
-import { fallbackGetPalette, fallbackOfficeModule, getThemingModule } from '../NativeModule/index';
-import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from '../createOfficeAliasTokens';
-import { createFontAliasTokens } from '../createFontAliasTokens';
-import { createBrandedThemeWithAlias, getCurrentBrandAliasTokens } from '../createBrandedThemeWithAlias';
 import { win32Typography } from '../getThemeTypography';
+import { fallbackGetPalette, fallbackOfficeModule, getThemingModule } from '../NativeModule/index';
 
 const officeThemes = ['White', 'Colorful', 'DarkGray', 'Black', 'HighContrast'];
 const appPrimaries = ['#185abd', '#107c41', '#d83b01', '#80397b', '#0078d4', '#c43e1c'];

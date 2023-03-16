@@ -1,15 +1,17 @@
 import * as React from 'react';
-import type { TestSection, PlatformStatus } from '../Test';
-import { Test } from '../Test';
-import { SWITCH_TESTPAGE } from '../../../../E2E/src/Switch/consts';
 import { View, StyleSheet } from 'react-native';
-import { Switch } from '@fluentui-react-native/switch';
-import { E2ESwitchTest } from './E2ESwitchTest';
-import { commonTestStyles } from '../Common/styles';
+import { Platform } from 'react-native';
+
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { Switch } from '@fluentui-react-native/switch';
+
 import { CustomizedSwitch } from './CustomizedSwitch';
-import { Platform } from 'react-native';
+import { E2ESwitchTest } from './E2ESwitchTest';
+import { SWITCH_TESTPAGE } from '../../../../E2E/src/Switch/consts';
+import { commonTestStyles } from '../Common/styles';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const styles = StyleSheet.create({
   square: {

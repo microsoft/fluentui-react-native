@@ -2,15 +2,17 @@
 import type { ReactNode } from 'react';
 import { Children } from 'react';
 import { View, I18nManager } from 'react-native';
-import type { BadgeType, BadgeProps } from './Badge.types';
-import { badgeName } from './Badge.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { stylingSettings } from './Badge.styling';
+import type { BadgeType, BadgeProps } from './Badge.types';
+import { badgeName } from './Badge.types';
 import { useBadge } from './useBadge';
-import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
   return (
@@ -21,8 +23,7 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['badgeColor'] ||
-    (I18nManager.isRTL && layer === 'rtl') ||
-    (layer === 'shadowToken' && (!userProps.appearance || userProps.appearance === 'filled' || userProps.appearance === 'tint'))
+    (I18nManager.isRTL && layer === 'rtl')
   );
 };
 

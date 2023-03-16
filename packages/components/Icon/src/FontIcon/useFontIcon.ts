@@ -1,15 +1,20 @@
 import type { TextStyle } from 'react-native';
 import { Image, Platform } from 'react-native';
-import { getMemoCache } from '@fluentui-react-native/framework';
+
+import { getMemoCache, mergeStyles } from '@fluentui-react-native/framework';
+
 import type { FontIconProps } from './FontIcon.types';
 
 export const useFontIcon = (props: FontIconProps): FontIconProps => {
-  const { accessible, color, fontSrcFile, fontFamily, fontSize, ...rest } = props;
+  const { accessible, color, fontSrcFile, fontFamily, fontSize, style: styleOrig, ...rest } = props;
 
   const style: TextStyle = fontStyleMemoCache(
     { fontFamily: fontSrcFile != undefined ? fontFamilyFromFontSrcFile(fontSrcFile, fontFamily) : fontFamily, fontSize, color },
     [color, fontSize, fontFamily],
   )[0];
+
+  mergeStyles(style, styleOrig);
+
   return {
     accessible: accessible ?? true,
     style,

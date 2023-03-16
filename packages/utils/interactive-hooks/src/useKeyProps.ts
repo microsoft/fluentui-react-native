@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
+
 import { memoize } from '@fluentui-react-native/memo-cache';
+
 import type { KeyCallback, KeyPressEvent, KeyPressProps } from './useKeyProps.types';
 
 /**

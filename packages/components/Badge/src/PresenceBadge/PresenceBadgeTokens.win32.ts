@@ -1,5 +1,7 @@
 import type { TokenSettings, Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
+
 import type { PresenceBadgeTokens } from './PresenceBadge.types';
 
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t: Theme): PresenceBadgeTokens =>
@@ -43,8 +45,12 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       right: -globalTokens.size20,
     },
     available: getBadgeColor('lightGreen', t),
-    away: getBadgeColor('marigold', t),
-    awayOutOfOffice: getBadgeColor('berry', t),
+    away: {
+      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color['marigold'].primary,
+      outOfOffice: {
+        iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color['berry'].primary,
+      },
+    },
     busy: getBadgeColor('red', t),
     blocked: getBadgeColor('red', t),
     unknown: getBadgeColor('red', t),
@@ -62,8 +68,4 @@ function getBadgeColor(color: string, t: Theme) {
       iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color[color].primary,
     },
   };
-}
-
-function isHighContrast(t: Theme) {
-  return t.name === 'HighContrast';
 }

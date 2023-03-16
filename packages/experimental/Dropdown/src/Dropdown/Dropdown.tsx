@@ -1,17 +1,19 @@
 /** @jsx withSlots */
+import React from 'react';
+import { View } from 'react-native';
+
 import type { ButtonProps } from '@fluentui-react-native/button';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { buildUseTokens, compressible, useSlot, withSlots } from '@fluentui-react-native/framework';
-import React from 'react';
-import { View } from 'react-native';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import type { SvgProps } from 'react-native-svg';
 import { Path, Svg } from 'react-native-svg';
+
 import type { DropdownProps, DropdownTokens } from './Dropdown.types';
 import { dropdownName } from './Dropdown.types';
 import type { ListboxProps } from '../Listbox';
 import { Listbox } from '../Listbox';
-import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownProps, _useTokens: UseTokens<DropdownTokens>) => {
   const [isOpen, setOpen] = React.useState(false);

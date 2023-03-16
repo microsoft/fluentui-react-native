@@ -1,8 +1,62 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.6
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.18.0
+- Bump @fluentui-react-native/theme-types to v0.31.0
+- Bump @fluentui-react-native/tokens to v0.20.12
+
+## 0.9.5
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.17.5
+
+## 0.9.4
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.17.4
+- Bump @fluentui-react-native/theme-types to v0.30.4
+- Bump @fluentui-react-native/tokens to v0.20.11
+
+## 0.9.3
+
+Fri, 24 Feb 2023 20:39:58 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/composition to v0.8.4
+- Bump @fluentui-react-native/default-theme to v0.17.3
+- Bump @fluentui-react-native/merge-props to v0.5.3
+- Bump @fluentui-react-native/theme-types to v0.30.3
+- Bump @fluentui-react-native/use-styling to v0.9.4
+- Bump @fluentui-react-native/use-slot to v0.3.4
+- Bump @fluentui-react-native/use-slots to v0.7.4
+- Bump @fluentui-react-native/use-tokens to v0.3.4
+- Bump @fluentui-react-native/tokens to v0.20.10
+
+## 0.9.2
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.17.2
+- Bump @fluentui-react-native/tokens to v0.20.9
 
 ## 0.9.1
 

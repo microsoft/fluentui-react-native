@@ -1,9 +1,10 @@
-import type { IFocusTrapZoneProps, IFocusTrapZoneSlotProps, IFocusTrapZoneType } from './FocusTrapZone.types';
+import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import type { IUseStyling } from '@uifabricshared/foundation-composable';
 import { composable } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+
+import type { IFocusTrapZoneProps, IFocusTrapZoneSlotProps, IFocusTrapZoneType } from './FocusTrapZone.types';
 
 const RCTFocusTrapZone = ensureNativeComponent('RCTFocusTrapZone');
 

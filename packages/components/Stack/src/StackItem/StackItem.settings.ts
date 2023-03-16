@@ -1,4 +1,5 @@
 import type { IComposeSettings } from '@uifabricshared/foundation-compose';
+
 import type { IStackItemType } from './StackItem.types';
 import { stackItemName } from './StackItem.types';
 

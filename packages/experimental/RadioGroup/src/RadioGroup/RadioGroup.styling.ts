@@ -1,9 +1,10 @@
-import type { RadioGroupTokens, RadioGroupSlotProps, RadioGroupProps } from './RadioGroup.types';
-import { radioGroupName } from './RadioGroup.types';
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
-import { defaultRadioGroupTokens } from './RadioGroupTokens';
 import { fontStyles } from '@fluentui-react-native/tokens';
+
+import type { RadioGroupTokens, RadioGroupSlotProps, RadioGroupProps } from './RadioGroup.types';
+import { radioGroupName } from './RadioGroup.types';
+import { defaultRadioGroupTokens } from './RadioGroupTokens';
 
 export const radioGroupStates: (keyof RadioGroupTokens)[] = ['isHorizontal', 'disabled'];
 

@@ -1,10 +1,12 @@
 import type { Theme } from '@fluentui-react-native/framework';
-import type { TokenSettings } from '@fluentui-react-native/use-styling';
-import type { AvatarTokens } from '.';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import type { TokenSettings } from '@fluentui-react-native/use-styling';
+
+import type { AvatarTokens } from '.';
 
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({
+    badgeSize: 'small',
     color: t.colors.neutralForeground3,
     backgroundColor: t.colors.neutralBackground5,
     avatarOpacity: 1,
@@ -20,9 +22,9 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     circular: {
       borderRadius: globalTokens.corner.radiusCircular,
     },
+    // Badge is not shown for size 16 on Android.
     size16: {
       size: 16,
-      badgeSize: 'small',
       iconSize: 12,
       fontSize: globalTokens.font.size100,
       fontWeight: globalTokens.font.weight.regular,
@@ -33,6 +35,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size20: {
       size: 20,
       badgeSize: 'small',
+      badgeY: -3 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 0 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
       iconSize: 16,
       fontSize: globalTokens.font.size100,
       fontWeight: globalTokens.font.weight.regular,
@@ -43,6 +47,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size24: {
       size: 24,
       badgeSize: 'small',
+      badgeY: -1 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 1 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
       iconSize: 16,
       fontSize: globalTokens.font.size100,
       fontWeight: globalTokens.font.weight.regular,
@@ -53,6 +59,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size32: {
       size: 32,
       badgeSize: 'small',
+      badgeY: 0 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 0 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
       iconSize: 20,
       fontSize: globalTokens.font.size200,
       fontWeight: globalTokens.font.weight.regular,
@@ -63,6 +71,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size40: {
       size: 40,
       badgeSize: 'medium',
+      badgeY: 0 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 0 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
       iconSize: 24,
       fontSize: globalTokens.font.size300,
       fontWeight: globalTokens.font.weight.regular,
@@ -73,6 +83,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size56: {
       size: 56,
       badgeSize: 'medium',
+      badgeY: 2 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 2 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
       iconSize: 32,
       fontSize: globalTokens.font.size500,
       fontWeight: globalTokens.font.weight.medium,
@@ -83,6 +95,8 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     size72: {
       size: 72,
       badgeSize: 'large',
+      badgeY: 3 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
+      badgeX: 3 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
       iconSize: 48,
       fontSize: globalTokens.font.size700,
       fontWeight: globalTokens.font.weight.medium,
@@ -107,7 +121,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       ringColor: t.colors.brandStroke1,
     },
     accent: {
-      backgroundColor: t.colors.brandBackgroundTint,
+      backgroundColor: t.host.appearance === 'light' ? t.colors.brandBackgroundTint : t.colors.neutralBackground1,
       iconColor: t.colors.brandForeground1,
       ringColor: t.colors.brandStroke1,
     },

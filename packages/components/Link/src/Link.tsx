@@ -1,13 +1,15 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import type { LinkType, LinkProps, LinkState } from './Link.types';
-import { linkName } from './Link.types';
+
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { useLink } from './useLink';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { stylingSettings } from './Link.styling';
+import type { LinkType, LinkProps, LinkState } from './Link.types';
+import { linkName } from './Link.types';
+import { useLink } from './useLink';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the link.

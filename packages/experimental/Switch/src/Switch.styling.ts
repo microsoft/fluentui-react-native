@@ -1,10 +1,12 @@
-import type { SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch.types';
-import { switchName } from './Switch.types';
+import { Platform } from 'react-native';
+
 import type { UseStylingOptions, Theme } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
+
+import { switchName } from './Switch.types';
+import type { SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch.types';
 import { defaultSwitchTokens } from './SwitchTokens';
-import { Platform } from 'react-native';
 
 export const switchStates: (keyof SwitchTokens)[] = [
   'toggleOn',
@@ -19,6 +21,8 @@ export const switchStates: (keyof SwitchTokens)[] = [
   'pressed',
   'disabled',
 ];
+
+const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 
 export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, SwitchTokens> = {
   tokens: [defaultSwitchTokens, switchName],
@@ -103,6 +107,7 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
+          ...(isMobile && { flexShrink: 1 }),
           ...fontStyles.from(tokens, theme),
         },
       }),

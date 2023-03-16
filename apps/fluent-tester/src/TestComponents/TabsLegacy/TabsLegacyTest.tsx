@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
+
 import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
-import { stackStyle } from '../Common/styles';
+
+import { TabsLegacyE2ETest } from './TabsLegacyE2ETest';
 import { TABS_TESTPAGE } from '../../../../E2E/src/TabsLegacy/consts';
+import { svgProps } from '../Common/iconExamples';
+import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { TabsLegacyE2ETest } from './TabsLegacyE2ETest';
-import { svgProps } from '../Common/iconExamples';
 
 const TabsMainTest: React.FunctionComponent = () => {
   return (

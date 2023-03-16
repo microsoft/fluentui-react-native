@@ -1,6 +1,6 @@
-import ButtonV1PageObject from '../pages/ButtonV1PageObject';
-import { BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../ButtonLegacy/consts';
+import { BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import ButtonV1PageObject from '../pages/ButtonV1PageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('ButtonV1 Testing Initialization', () => {

@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import type { SwitchProps, SwitchInfo, AnimationConfig } from './Switch.types';
 import type { AccessibilityState, AccessibilityActionEvent } from 'react-native';
 import { Animated, Platform, I18nManager } from 'react-native';
+
 import { memoize } from '@fluentui-react-native/framework';
+import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
+
+import type { SwitchProps, SwitchInfo, AnimationConfig } from './Switch.types';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -17,6 +19,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
   const animation = React.useRef(new Animated.Value(0)).current;
   const [isInit, setIsInit] = React.useState(true);
   const {
+    accessible,
     onChange,
     checked,
     defaultChecked,
@@ -126,7 +129,7 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
 
   return {
     props: {
-      accessible: isMobile ? !disabled : true,
+      accessible: accessible ?? (isMobile ? !disabled : true),
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityRole: accessibilityRole ?? 'switch',
       accessibilityActions: accessibilityActionsProp,

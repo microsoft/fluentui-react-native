@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { View, ScrollView, Pressable } from 'react-native';
+
 import type { FocusZoneDirection } from '@fluentui/react-native';
 import { FocusZone, Text, useOnPressWithFocus } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { CheckboxProps } from '@fluentui-react-native/experimental-checkbox';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
-import type { TestSection, PlatformStatus } from '../Test';
-import { Test } from '../Test';
-import { FOCUSZONE_TESTPAGE } from '../../../../E2E/src/FocusZone/consts';
-import { focusZoneTestStyles, SubheaderText } from './styles';
+
 import { FocusZone2D, FocusZoneDirections, FocusZoneListWrapper, GridOfButtons } from './FocusZoneE2ETest';
+import { focusZoneTestStyles, SubheaderText } from './styles';
+import { FOCUSZONE_TESTPAGE } from '../../../../E2E/src/FocusZone/consts';
 import type { CollectionItem } from '../Common/MenuPicker';
 import { MenuPicker } from '../Common/MenuPicker';
+import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
 const directionCollection: CollectionItem[] = FocusZoneDirections.map((dir) => ({ label: dir, value: dir }));
 

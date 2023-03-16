@@ -1,6 +1,8 @@
 import * as React from 'react';
 import type { View } from 'react-native';
+
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+
 import type { TabsProps, TabsState, TabsInfo } from './Tabs.types';
 
 /**
@@ -12,7 +14,7 @@ import type { TabsProps, TabsState, TabsInfo } from './Tabs.types';
  */
 export const useTabs = (props: TabsProps): TabsInfo => {
   const defaultComponentRef = React.useRef(null);
-  const { componentRef = defaultComponentRef, selectedKey, getTabId, onTabsClick, defaultSelectedKey } = props;
+  const { accessible, componentRef = defaultComponentRef, selectedKey, getTabId, onTabsClick, defaultSelectedKey } = props;
 
   const data = useSelectedKey(selectedKey || defaultSelectedKey || null, onTabsClick);
 
@@ -54,7 +56,7 @@ export const useTabs = (props: TabsProps): TabsInfo => {
   return {
     props: {
       ...props,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityRole: 'tablist',
       componentRef: componentRef,
       defaultTabbableElement: selectedTabsItemRef,

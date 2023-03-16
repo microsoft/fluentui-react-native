@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
 import { Tabs, TabsItem, Text } from '@fluentui/react-native';
-import { stackStyle } from '../Common/styles';
+
 import {
   TABS_TEST_COMPONENT,
   TABS_ACCESSIBILITY_LABEL,
@@ -16,6 +17,7 @@ import {
   THIRD_TABS_ITEM_CONTENT,
   FIRST_TABS_ITEM_CONTENT,
 } from '../../../../E2E/src/TabsLegacy/consts';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const TabsLegacyE2ETest: React.FunctionComponent = () => {

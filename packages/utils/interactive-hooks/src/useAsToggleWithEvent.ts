@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import type { InteractionEvent } from '.';
 
 export type OnToggleWithEventCallback = (e: InteractionEvent, value?: boolean) => void;

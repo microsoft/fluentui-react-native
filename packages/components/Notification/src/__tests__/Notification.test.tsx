@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Notification } from '../Notification';
-import * as renderer from 'react-test-renderer';
+
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { Notification } from '../Notification';
 
 describe('Notification component tests', () => {
   beforeAll(() => {

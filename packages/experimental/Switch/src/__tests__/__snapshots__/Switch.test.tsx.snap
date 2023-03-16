@@ -61,6 +61,7 @@ exports[`Switch Default 1`] = `
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
@@ -177,6 +178,7 @@ exports[`Switch Disabled 1`] = `
     style={
       Object {
         "color": "#e0e0e0",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",

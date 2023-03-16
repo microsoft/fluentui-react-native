@@ -1,9 +1,10 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { layoutStyles } from '@fluentui-react-native/tokens';
-import { defaultMenuListTokens } from './MenuListTokens';
+
 import type { MenuListProps, MenuListTokens, MenuListSlotProps } from './MenuList.types';
 import { menuListName } from './MenuList.types';
+import { defaultMenuListTokens } from './MenuListTokens';
 
 export const menuListStates: (keyof MenuListTokens)[] = ['hasMaxHeight'];
 

@@ -1,4 +1,7 @@
 import * as React from 'react';
+import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
+
+import { memoize } from '@fluentui-react-native/framework';
 import {
   usePressableState,
   useKeyProps,
@@ -6,9 +9,8 @@ import {
   useViewCommandFocus,
   useAsToggleWithEvent,
 } from '@fluentui-react-native/interactive-hooks';
+
 import type { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
-import { memoize } from '@fluentui-react-native/framework';
-import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -105,6 +107,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
 
 const getAccessibilityState = memoize(getAccessibilityStateWorker);
 function getAccessibilityStateWorker(disabled: boolean, checked: boolean, required: boolean, accessibilityState?: AccessibilityState) {
+  checked = checked ?? false; // Make the value of checked as false when checked is undefined or null for screen reader to announce 'unchecked'
   if (accessibilityState) {
     return { disabled, checked, required, ...accessibilityState };
   }

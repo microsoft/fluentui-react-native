@@ -1,11 +1,13 @@
 import * as React from 'react';
-import type { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
-import type { ImageStyle, TextStyle } from 'react-native';
 import { Image, Platform, View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
+import type { ImageStyle, TextStyle } from 'react-native';
+
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
+import { Text } from '@fluentui-react-native/text';
 import { SvgUri } from 'react-native-svg';
+
+import type { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
 
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
 

@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Button, Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
-import { stackStyle } from '../../Common/styles';
+
+import { Button, Text } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
+
 import {
   BUTTON_TEST_COMPONENT_DEPRECATED,
   BUTTON_ON_PRESS_DEPRECATED,
@@ -11,6 +12,7 @@ import {
   BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
   BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
 } from '../../../../../E2E/src/ButtonLegacy/consts';
+import { stackStyle } from '../../Common/styles';
 import { testProps } from '../../Common/TestProps';
 
 export const E2EButtonTest_deprecated: React.FunctionComponent = () => {

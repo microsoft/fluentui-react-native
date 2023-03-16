@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Badge, CounterBadge, PresenceBadge } from '../';
-import * as renderer from 'react-test-renderer';
+
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { Badge, CounterBadge, PresenceBadge } from '../';
 
 describe('Badge component tests', () => {
   const fontBuiltInProps = {
@@ -32,6 +34,14 @@ describe('Badge component tests', () => {
       borderWidth: 4,
     });
     const tree = renderer.create(<BadgeStyled>Badge Tokens</BadgeStyled>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Filled badge with shadow', () => {
+    const BadgeWithShadow = Badge.customize({
+      shadowToken: { ambient: { x: 0, y: 0, blur: 8, color: '#00000033' }, key: { x: 0, y: 32, blur: 64, color: '#0000003d' } },
+    });
+    const tree = renderer.create(<BadgeWithShadow appearance="filled">Badge with shadow</BadgeWithShadow>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

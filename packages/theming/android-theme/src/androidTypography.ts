@@ -1,4 +1,5 @@
 import type { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+
 import { createFontAliasTokens } from './createFontAliasTokens';
 
 export function androidTypography(): Typography {
@@ -25,6 +26,7 @@ export function androidTypography(): Typography {
       secondary: 'System',
       cursive: 'cursive',
       monospace: 'monospace',
+      numeric: 'numeric',
       sansSerif: 'sans-serif',
       serif: 'serif',
     },

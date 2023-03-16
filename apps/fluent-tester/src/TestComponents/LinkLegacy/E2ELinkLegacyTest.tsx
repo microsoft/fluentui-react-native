@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { Alert } from 'react-native';
+
 import { Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+
 import {
   LINK_TEST_COMPONENT,
   LINK_ACCESSIBILITY_LABEL,
   LINK_NO_A11Y_LABEL_COMPONENT,
   LINK_TEST_COMPONENT_LABEL,
 } from '../../../../E2E/src/LinkLegacy/consts';
+import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const E2ELinkLegacyTest: React.FunctionComponent = () => {

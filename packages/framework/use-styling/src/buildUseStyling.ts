@@ -1,8 +1,9 @@
 import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
-import type { TokensThatAreAlsoProps, BuildSlotProps } from './buildProps';
-import { refinePropsFunctions } from './buildProps';
 import type { HasLayer, TokenSettings } from '@fluentui-react-native/use-tokens';
 import { applyPropsToTokens, applyTokenLayers, buildUseTokens } from '@fluentui-react-native/use-tokens';
+
+import type { TokensThatAreAlsoProps, BuildSlotProps } from './buildProps';
+import { refinePropsFunctions } from './buildProps';
 
 /**
  * Options used to build up a useStyling hook

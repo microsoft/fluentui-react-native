@@ -1,5 +1,6 @@
 import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
+
 import type { SpinnerProps, SpinnerSlotProps, SpinnerTokens } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
 import { defaultSpinnerTokens } from './SpinnerTokens';
@@ -9,7 +10,7 @@ export const diameterSizeMap: { [key: string]: number } = {
   'x-small': 16,
   medium: 24,
   large: 32,
-  'x-large': 36,
+  'x-large': 40,
 };
 export const lineThicknessSizeMap: { [key: string]: number } = {
   'xx-small': 1,

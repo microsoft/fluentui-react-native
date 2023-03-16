@@ -1,16 +1,18 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
+
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import type { CompoundButtonProps, CompoundButtonType } from './CompoundButton.types';
-import { compoundButtonName } from './CompoundButton.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings } from './CompoundButton.styling';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { useButton } from '../useButton';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import { buttonLookup } from '../Button';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { stylingSettings } from './CompoundButton.styling';
+import type { CompoundButtonProps, CompoundButtonType } from './CompoundButton.types';
+import { compoundButtonName } from './CompoundButton.types';
+import { buttonLookup, getFocusBorderStyle } from '../Button';
+import { useButton } from '../useButton';
 
 export const CompoundButton = compose<CompoundButtonType>({
   displayName: compoundButtonName,
@@ -21,6 +23,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     content: Text,
     secondaryContent: Text,
     contentContainer: View,
+    focusInnerBorder: Platform.OS === ('win32' as any) && View,
   },
   useRender: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
@@ -62,14 +65,31 @@ export const CompoundButton = compose<CompoundButtonType>({
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           {loading && <ActivityIndicator />}
-          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} accessible={false} />}
           <Slots.contentContainer>
             {React.Children.map(children, (child) =>
-              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+              typeof child === 'string' ? (
+                <Slots.content accessible={false} key="content">
+                  {child}
+                </Slots.content>
+              ) : (
+                child
+              ),
             )}
-            {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
+            {secondaryContent && (
+              <Slots.secondaryContent accessible={false} key="secondaryContent">
+                {secondaryContent}
+              </Slots.secondaryContent>
+            )}
           </Slots.contentContainer>
-          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} accessible={false} />}
+          {button.state.focused && button.state.shouldUseTwoToneFocusBorder && (
+            <Slots.focusInnerBorder
+              style={getFocusBorderStyle(button.state.measuredHeight, button.state.measuredWidth)}
+              accessible={false}
+              focusable={false}
+            />
+          )}
         </Slots.root>
       );
     };

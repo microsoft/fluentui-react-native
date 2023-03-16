@@ -1,7 +1,3 @@
-import type { ITheme, OfficePalette } from '@uifabricshared/theming-ramp';
-import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
-import type { IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
-import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import type {
   OfficeThemingModule,
   CxxException,
@@ -9,6 +5,11 @@ import type {
   PlatformDefaultsChangedArgs,
 } from '@fluentui-react-native/win32-theme';
 import { createPartialOfficeTheme } from '@fluentui-react-native/win32-theme';
+import type { ITheme, OfficePalette } from '@uifabricshared/theming-ramp';
+import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
+
+import type { IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
+import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 
 type PaletteCache = { [key: string]: OfficePalette };
 

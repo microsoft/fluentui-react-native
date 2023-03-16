@@ -1,8 +1,66 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Sat, 11 Feb 2023 01:32:30 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.25
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.6
+
+## 0.22.24
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.5
+
+## 0.22.23
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Only call focus if the platform supports it. (sanajmi@microsoft.com)
+
+## 0.22.22
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.4
+
+## 0.22.21
+
+Tue, 28 Feb 2023 21:34:10 GMT
+
+### Patches
+
+- useViewCommandFocus does not need to replace focus/blur methods except on win32 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.22.20
+
+Fri, 24 Feb 2023 20:39:58 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.10.2
+- Bump @fluentui-react-native/framework to v0.9.3
+
+## 0.22.19
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.2
 
 ## 0.22.18
 

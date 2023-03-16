@@ -1,4 +1,5 @@
 import type { ImageProps, TextProps, ViewProps } from 'react-native-macos';
+
 import type { IFilterMask } from './filter.types';
 
 // export core interface types

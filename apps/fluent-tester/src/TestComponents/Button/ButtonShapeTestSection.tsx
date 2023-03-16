@@ -1,6 +1,8 @@
-import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
+
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 export const ButtonShapeTest: React.FunctionComponent = () => {
@@ -31,6 +33,15 @@ export const ButtonShapeTest: React.FunctionComponent = () => {
         Compound Button
       </CompoundButton>
       <CompoundButton secondaryContent="circular" shape="circular" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
+      <CompoundButton appearance="primary" secondaryContent="rounded" shape="rounded" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
+      <CompoundButton appearance="primary" secondaryContent="square" shape="square" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
+      <CompoundButton appearance="primary" secondaryContent="circular" shape="circular" style={commonTestStyles.vmargin}>
         Compound Button
       </CompoundButton>
     </View>

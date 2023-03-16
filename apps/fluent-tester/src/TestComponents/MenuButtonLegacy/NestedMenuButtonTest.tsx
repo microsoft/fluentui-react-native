@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
+
 import { Separator, MenuButton } from '@fluentui/react-native';
-import { menuItems, iconProps } from './testData';
+
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonLegacyTestStyles';
+import { menuItems, iconProps } from './testData';
 import { testImage } from '../Common/iconExamples';
 
 export const NestedMenuButton: React.FunctionComponent = () => {

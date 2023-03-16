@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
+
 import { stackStyle } from '../Common/styles';
 
 export const MenuTriggerChildRef: React.FunctionComponent = () => {

@@ -1,6 +1,7 @@
 export * from './MenuPicker.desktop';
 import * as React from 'react';
 import { Button, Text, View, StyleSheet } from 'react-native';
+
 import type { MenuPickerProps, CollectionItem } from './MenuPicker.types';
 export { MenuPickerProps, CollectionItem };
 

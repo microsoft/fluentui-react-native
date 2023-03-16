@@ -1,8 +1,124 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Tue, 14 Feb 2023 22:22:51 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.43
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.21.36
+- Bump @fluentui-react-native/experimental-button to v0.16.102
+- Bump @fluentui-react-native/framework to v0.9.6
+- Bump @fluentui-react-native/tokens to v0.20.12
+
+## 0.6.42
+
+Tue, 14 Mar 2023 18:43:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.16.101
+
+## 0.6.41
+
+Mon, 13 Mar 2023 22:51:11 GMT
+
+### Patches
+
+- Update snapshots (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.16.100
+
+## 0.6.40
+
+Fri, 10 Mar 2023 00:08:36 GMT
+
+### Patches
+
+- Update snapshots (winlarry@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.16.99
+
+## 0.6.39
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.21.35
+- Bump @fluentui-react-native/experimental-button to v0.16.98
+- Bump @fluentui-react-native/framework to v0.9.5
+
+## 0.6.38
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.21.34
+- Bump @fluentui-react-native/experimental-button to v0.16.97
+
+## 0.6.37
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.21.33
+- Bump @fluentui-react-native/experimental-button to v0.16.96
+- Bump @fluentui-react-native/framework to v0.9.4
+- Bump @fluentui-react-native/tokens to v0.20.11
+
+## 0.6.36
+
+Thu, 02 Mar 2023 19:11:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.21.32
+- Bump @fluentui-react-native/experimental-button to v0.16.95
+
+## 0.6.35
+
+Tue, 28 Feb 2023 21:34:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.21.31
+- Bump @fluentui-react-native/experimental-button to v0.16.94
+
+## 0.6.34
+
+Fri, 24 Feb 2023 23:53:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.16.93
+
+## 0.6.33
+
+Fri, 24 Feb 2023 20:39:58 GMT
+
+### Patches
+
+- Order imports (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/contextual-menu to v0.21.30
+- Bump @fluentui-react-native/experimental-button to v0.16.92
+- Bump @fluentui-react-native/framework to v0.9.3
+- Bump @fluentui-react-native/tokens to v0.20.10
+
+## 0.6.32
+
+Fri, 24 Feb 2023 02:22:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.21.29
+- Bump @fluentui-react-native/experimental-button to v0.16.91
+- Bump @fluentui-react-native/framework to v0.9.2
+- Bump @fluentui-react-native/tokens to v0.20.9
 
 ## 0.6.31
 

@@ -1,4 +1,5 @@
 import type { FocusZoneDirection } from '@fluentui-react-native/focus-zone';
+
 import { BasePage, By } from '../../common/BasePage';
 import {
   FOCUSZONE_CIRCLE_NAV_SWITCH,

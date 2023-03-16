@@ -1,6 +1,6 @@
-import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
-import { CHECKBOXV1_TEST_COMPONENT_LABEL, CHECKBOXV1_ACCESSIBILITY_LABEL } from '../consts';
 import { CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { CHECKBOXV1_TEST_COMPONENT_LABEL, CHECKBOXV1_ACCESSIBILITY_LABEL } from '../consts';
+import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 
 describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {

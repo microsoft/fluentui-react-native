@@ -1,8 +1,10 @@
 import * as React from 'react';
+
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import type { TabsItemProps, TabsItemInfo } from './TabsItem.types';
+
 import { TabsContext } from './Tabs';
+import type { TabsItemProps, TabsItemInfo } from './TabsItem.types';
 
 /**
  * Re-usable hook for TabsItem.
@@ -13,7 +15,17 @@ import { TabsContext } from './Tabs';
  */
 export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   const defaultComponentRef = React.useRef<IFocusable>(null);
-  const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
+  const {
+    accessibilityLabel,
+    accessible,
+    headerText,
+    componentRef = defaultComponentRef,
+    itemKey,
+    disabled,
+    itemCount,
+    icon,
+    ...rest
+  } = props;
   // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
   const info = React.useContext(TabsContext);
 
@@ -59,7 +71,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   return {
     props: {
       ...pressable.props,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityRole: 'tab',
       accessibilityLabel: accessibilityLabel || headerText,
       focusable: !disabled ?? true,

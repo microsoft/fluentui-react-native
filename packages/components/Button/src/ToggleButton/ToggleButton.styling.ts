@@ -1,13 +1,14 @@
-import type { ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
-import { toggleButtonName } from './ToggleButton.types';
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { defaultButtonColorTokens } from '../ButtonColorTokens';
-import { buttonStates, contentStyling } from '../Button.styling';
+
+import { toggleButtonName } from './ToggleButton.types';
+import type { ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
 import { defaultToggleButtonColorTokens } from './ToggleButtonColorTokens';
-import { defaultButtonTokens } from '../ButtonTokens';
+import { buttonStates, contentStyling } from '../Button.styling';
+import { defaultButtonColorTokens } from '../ButtonColorTokens';
 import { defaultButtonFontTokens } from '../ButtonFontTokens';
+import { defaultButtonTokens } from '../ButtonTokens';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, defaultToggleButtonColorTokens, toggleButtonName],
@@ -46,6 +47,17 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
         width: tokens.iconSize,
       }),
       ['iconColor', 'iconSize'],
+    ),
+    focusInnerBorder: buildProps(
+      (tokens: ToggleButtonTokens) => ({
+        style: {
+          position: 'absolute',
+          borderWidth: tokens.borderInnerWidth,
+          borderColor: tokens.borderInnerColor,
+          borderRadius: tokens.borderInnerRadius,
+        },
+      }),
+      ['borderInnerWidth', 'borderInnerColor', 'borderInnerRadius'],
     ),
   },
 };

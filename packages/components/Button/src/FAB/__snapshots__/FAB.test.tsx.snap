@@ -12,6 +12,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -36,7 +37,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
   }
 >
   <Text
-    accessible={true}
+    accessible={false}
     style={
       Object {
         "color": "#fff",
@@ -50,6 +51,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     ♣
   </Text>
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -79,23 +81,10 @@ exports[`Default FAB (iOS) 1`] = `
       "backgroundColor": "#0f6cbd",
       "borderColor": "#0f548c",
       "borderRadius": 9999,
-      "bottom": undefined,
       "display": "flex",
-      "end": undefined,
       "justifyContent": "center",
-      "left": undefined,
-      "margin": undefined,
-      "marginBottom": undefined,
-      "marginEnd": undefined,
-      "marginHorizontal": undefined,
-      "marginLeft": undefined,
-      "marginRight": undefined,
-      "marginStart": undefined,
-      "marginTop": undefined,
-      "marginVertical": undefined,
       "minHeight": 56,
       "minWidth": 56,
-      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -103,9 +92,6 @@ exports[`Default FAB (iOS) 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
-      "start": undefined,
-      "top": undefined,
-      "width": undefined,
     }
   }
 >
@@ -120,6 +106,7 @@ exports[`Default FAB (iOS) 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onLayout={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -131,30 +118,14 @@ exports[`Default FAB (iOS) 1`] = `
         "alignItems": "center",
         "alignSelf": "flex-start",
         "backgroundColor": "#0f6cbd",
-        "borderBottomWidth": undefined,
         "borderColor": "#0f548c",
-        "borderEndWidth": undefined,
-        "borderLeftWidth": undefined,
         "borderRadius": 9999,
-        "borderRightWidth": undefined,
-        "borderStartWidth": undefined,
-        "borderTopWidth": undefined,
-        "borderWidth": undefined,
         "display": "flex",
         "flexDirection": "row",
-        "flexWrap": undefined,
         "justifyContent": "center",
         "minHeight": 56,
         "minWidth": 56,
         "padding": 20,
-        "paddingBottom": undefined,
-        "paddingEnd": undefined,
-        "paddingHorizontal": undefined,
-        "paddingLeft": undefined,
-        "paddingRight": undefined,
-        "paddingStart": undefined,
-        "paddingTop": undefined,
-        "paddingVertical": undefined,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 4,
@@ -162,12 +133,11 @@ exports[`Default FAB (iOS) 1`] = `
         },
         "shadowOpacity": 0.14,
         "shadowRadius": 4,
-        "width": undefined,
       }
     }
   >
     <Text
-      accessible={true}
+      accessible={false}
       style={
         Object {
           "color": "#fff",
@@ -181,6 +151,7 @@ exports[`Default FAB (iOS) 1`] = `
       ♣
     </Text>
     <Text
+      accessible={false}
       ellipsizeMode="tail"
       numberOfLines={0}
       style={

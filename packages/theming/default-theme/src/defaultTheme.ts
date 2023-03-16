@@ -1,8 +1,10 @@
-import type { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
 import { Platform } from 'react-native';
-import { getStockWebPalette, getStockWebDarkPalette, getStockWebHCPalette } from './defaultColors';
+
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import type { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
+
 import { createShadowAliasTokens } from './createAliasTokens';
+import { getStockWebPalette, getStockWebDarkPalette, getStockWebHCPalette } from './defaultColors';
 
 function _defaultTypography(): Typography {
   const defaultsDict = {
@@ -24,6 +26,7 @@ function _defaultTypography(): Typography {
       secondary: 'Segoe UI',
       cursive: 'System',
       monospace: 'System',
+      numeric: 'System',
       sansSerif: 'System',
       serif: 'System',
     },
@@ -64,6 +67,7 @@ function _defaultTypography(): Typography {
       secondary: 'System',
       cursive: 'System',
       monospace: 'System',
+      numeric: 'System',
       sansSerif: 'System',
       serif: 'System',
     };

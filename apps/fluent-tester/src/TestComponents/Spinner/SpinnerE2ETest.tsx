@@ -1,9 +1,11 @@
 import * as React from 'react';
+
 import { Spinner } from '@fluentui-react-native/spinner';
 import { Stack } from '@fluentui-react-native/stack';
+
+import { SPINNER_TEST_COMPONENT } from '../../../../E2E/src/Spinner/consts';
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
-import { SPINNER_TEST_COMPONENT } from '../../../../E2E/src/Spinner/consts';
 
 export const E2ETestingSpinner: React.FunctionComponent<Record<string, never>> = () => {
   return (

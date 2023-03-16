@@ -1,9 +1,10 @@
+import type React from 'react';
+import type { ScrollViewProps } from 'react-native';
+
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import type { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import type React from 'react';
-import type { ScrollViewProps } from 'react-native';
 
 export const menuListName = 'MenuList';
 
@@ -30,6 +31,11 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
    * States that menu items can contain selectable items and reserves space for item alignment
    */
   hasCheckmarks?: boolean;
+
+  /**
+   * States that menu items can contain icons and reserves space for item alignment
+   */
+  hasIcons?: boolean;
 
   /**
    * States that menu items all have tooltips with its text by default.
