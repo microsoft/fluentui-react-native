@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Thu, 16 Mar 2023 18:23:39 GMT",
+      "tag": "@fluentui-react-native/badge_v0.5.3",
+      "version": "0.5.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "ba2096774b5f9086417b75100d6f61d0dc617014",
+            "comment": "Remove check for appearance variant on shadow token layer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/badge_v0.5.2",
       "version": "0.5.2",

@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 16 Mar 2023 18:23:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.134.40",
+      "version": "0.134.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ba2096774b5f9086417b75100d6f61d0dc617014",
+            "comment": "Add warning on badge tester badge when shadow shouldn't be applied"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.8.4",
+            "commit": "93e8a195075c3bcf9bfca7ca5c11eb781de63050"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.5.3",
+            "commit": "93e8a195075c3bcf9bfca7ca5c11eb781de63050"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 15 Mar 2023 07:15:41 GMT",
       "tag": "@fluentui-react-native/tester_v0.134.39",
       "version": "0.134.39",

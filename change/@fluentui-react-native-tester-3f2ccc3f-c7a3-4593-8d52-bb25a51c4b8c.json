@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add warning on badge tester badge when shadow shouldn't be applied",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
