@@ -20,7 +20,7 @@ const removeRadioItem = (name: string) => {
   radioItems.filter((item) => item !== name);
 };
 
-const platformsWithoutFocusOnDisabled = ['ios', 'macos', 'win32'];
+const platformsWithoutFocusOnDisabled = ['ios', 'macos'];
 const handledKeys = ['Home', 'End'];
 
 export const useMenuList = (_props: MenuListProps): MenuListState => {
@@ -122,6 +122,9 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   // start and end of each menu list. We need to keep track of all MenuItems in our list, and we need access to
   // (1) the item's ref to focus on and (2) whether the item is disabled or not as different platforms allow
   // and don't allow focus for disabled items.
+
+  // Instead of calling useState to instantiate an array, we call useMemo because we don't want to re-render the
+  // MenuList on adding / removing items.
   const trackedMenuItems = React.useMemo<TrackedMenuItem[]>(() => [], []);
   const trackMenuItem = React.useCallback((item: TrackedMenuItem) => trackedMenuItems.push(item), [trackedMenuItems]);
   const untrackMenuItem = React.useCallback(
@@ -149,7 +152,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
       while (platformsWithoutFocusOnDisabled.includes(Platform.OS) && trackedMenuItems[idx].disabled) {
         idx += increment;
       }
-      trackedMenuItems[idx].ref.current.focus();
+      trackedMenuItems[idx].ref.current?.focus();
     }
   };
 
@@ -178,6 +181,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   };
 };
 
+// Hook called in individual MenuItems to keep track of their refs - this is for "Home" and "End" functionality.
 export const useMenuItemTracking = (ref: React.RefObject<View>, disabled: boolean) => {
   const { trackMenuItem, untrackMenuItem } = useMenuListContext();
   const item = React.useMemo(
@@ -188,6 +192,7 @@ export const useMenuItemTracking = (ref: React.RefObject<View>, disabled: boolea
     [ref, disabled],
   );
 
+  // We only want to call this once - when the item initially renders.
   React.useEffect(() => {
     trackMenuItem(item);
     return () => untrackMenuItem(item);
