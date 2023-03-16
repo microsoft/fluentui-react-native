@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Mar 2023 18:23:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.3
+
+Thu, 16 Mar 2023 18:23:39 GMT
+
+### Patches
+
+- Remove check for appearance variant on shadow token layer (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.5.2
 

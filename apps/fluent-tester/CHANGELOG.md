@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 15 Mar 2023 07:15:41 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Mar 2023 18:23:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.40
+
+Thu, 16 Mar 2023 18:23:39 GMT
+
+### Patches
+
+- Add warning on badge tester badge when shadow shouldn't be applied (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/avatar to v1.8.4
+- Bump @fluentui-react-native/badge to v0.5.3
 
 ## 0.134.39
 
