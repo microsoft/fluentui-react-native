@@ -47,15 +47,19 @@ export const MenuItem = compose<MenuItemType>({
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {menuItem.state.hasCheckmarks && <Slots.checkmark />}
+          {menuItem.state.hasCheckmarks && <Slots.checkmark accessible={false} />}
           {(icon || menuItem.state.hasIcons) && (
-            <Slots.iconPlaceholder>
-              {icon && icon.source && <Slots.imgIcon {...icon} />}
-              {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon {...icon} />}
+            <Slots.iconPlaceholder accessible={false}>
+              {icon && icon.source && <Slots.imgIcon accessible={false} {...icon} />}
+              {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon accessible={false} {...icon} />}
             </Slots.iconPlaceholder>
           )}
-          {children && <Slots.content tooltip={tooltipResult}>{children}</Slots.content>}
-          {menuItem.state.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
+          {children && (
+            <Slots.content accessible={false} tooltip={tooltipResult}>
+              {children}
+            </Slots.content>
+          )}
+          {menuItem.state.hasSubmenu && <Slots.submenuIndicator accessible={false} xml={chevronXml} />}
         </Slots.root>
       );
     };
