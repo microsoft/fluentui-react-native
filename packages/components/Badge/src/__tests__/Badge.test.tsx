@@ -37,6 +37,14 @@ describe('Badge component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Filled badge with shadow', () => {
+    const BadgeWithShadow = Badge.customize({
+      shadowToken: { ambient: { x: 0, y: 0, blur: 8, color: '#00000033' }, key: { x: 0, y: 32, blur: 64, color: '#0000003d' } },
+    });
+    const tree = renderer.create(<BadgeWithShadow appearance="filled">Badge with shadow</BadgeWithShadow>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Check checkRenderConsistency for Badge', () => {
     checkRenderConsistency(() => <Badge />, 2);
   });
