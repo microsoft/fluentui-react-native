@@ -40,12 +40,12 @@ export const Radio = compose<RadioType>({
 
     // now return the handler for finishing render
     return (final: RadioProps) => {
-      const { label, subtext, enableFocusRing, ...mergedProps } = mergeProps(radio.props, final);
+      const { label, subtext, ...mergedProps } = mergeProps(radio.props, final);
       const { onPress, disabled, onPressIn, onPressOut } = mergedProps;
       const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 
       const labelComponent = (
-        <Slots.labelContent enableFocusRing>
+        <Slots.labelContent>
           <Slots.label>{label}</Slots.label>
           {!!subtext && <Slots.subtext>{subtext}</Slots.subtext>}
         </Slots.labelContent>
