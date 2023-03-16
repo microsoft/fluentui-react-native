@@ -77,9 +77,3 @@ steps:
       platform: windows
       buildArtifacts: variables['task.Build.status']
       directory: $(Build.SourcesDirectory)/apps/E2E
-
-  - script: |
-      yarn appium driver uninstall windows
-    workingDirectory: apps/E2E
-    displayName: 'Uninstall appium driver'
-    condition: succeeded()
