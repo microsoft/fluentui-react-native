@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 16 Mar 2023 18:23:39 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Mar 2023 21:46:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.134.41
+
+Thu, 16 Mar 2023 21:46:56 GMT
+
+### Patches
+
+- Implement n of m on menuitems (krsiler@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.4.26
+- Bump @fluentui-react-native/win32-theme to v0.25.7
 
 ## 0.134.40
 

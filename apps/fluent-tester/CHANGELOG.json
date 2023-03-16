@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 16 Mar 2023 21:46:56 GMT",
+      "tag": "@fluentui-react-native/tester_v0.134.41",
+      "version": "0.134.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "93e8a195075c3bcf9bfca7ca5c11eb781de63050",
+            "comment": "Implement n of m on menuitems"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.4.26",
+            "commit": "124fa9e36989035c4ebb848de1c727b0893eaceb"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.25.7",
+            "commit": "124fa9e36989035c4ebb848de1c727b0893eaceb"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Mar 2023 18:23:39 GMT",
       "tag": "@fluentui-react-native/tester_v0.134.40",
       "version": "0.134.40",

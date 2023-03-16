@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Thu, 16 Mar 2023 21:46:56 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.25.7",
+      "version": "0.25.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "124fa9e36989035c4ebb848de1c727b0893eaceb",
+            "comment": "Have a way to query theme state over multiple instances of the win32 theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.25.6",
       "version": "0.25.6",
