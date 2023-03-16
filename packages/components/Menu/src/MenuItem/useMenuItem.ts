@@ -18,7 +18,7 @@ export const submenuTriggerKeys = ['ArrowLeft', 'ArrowRight', ...triggerKeys];
 export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
+  const { accessible, onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
   const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
   const { hasCheckmarks, hasIcons, hasTooltips, onArrowClose } = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
@@ -69,7 +69,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   return {
     props: {
       ...pressable.props,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),

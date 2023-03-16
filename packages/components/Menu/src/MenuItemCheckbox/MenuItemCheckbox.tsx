@@ -54,14 +54,18 @@ export const menuItemFinalRender = (
 
     return (
       <Slots.root {...mergedProps} accessibilityLabel={label}>
-        <Slots.checkmark xml={checkmarkXml} />
+        <Slots.checkmark accessible={false} xml={checkmarkXml} />
         {(icon || menuItem.state.hasIcons) && (
-          <Slots.iconPlaceholder>
-            {icon && icon.source && <Slots.imgIcon {...icon} />}
-            {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon {...icon} />}
+          <Slots.iconPlaceholder accessible={false}>
+            {icon && icon.source && <Slots.imgIcon accessible={false} {...icon} />}
+            {icon && (icon.svgSource || icon.fontSource) && <Slots.fontOrSvgIcon accessible={false} {...icon} />}
           </Slots.iconPlaceholder>
         )}
-        {children && <Slots.content tooltip={tooltipResult}>{children}</Slots.content>}
+        {children && (
+          <Slots.content accessible={false} tooltip={tooltipResult}>
+            {children}
+          </Slots.content>
+        )}
       </Slots.root>
     );
   };

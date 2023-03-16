@@ -57,6 +57,7 @@ export const useMenuCheckboxInteraction = (
     accessibilityActions,
     accessibilityLabel,
     accessibilityState,
+    accessible,
     componentRef = defaultComponentRef,
     disabled,
     name,
@@ -127,7 +128,7 @@ export const useMenuCheckboxInteraction = (
   return {
     props: {
       ...pressable.props,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityActions: accessibilityActionsProp,
       accessibilityLabel,
       accessibilityRole: 'menuitem',

@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Implement n of m on menuitems",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
