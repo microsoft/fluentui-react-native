@@ -2,6 +2,7 @@ import type { EventSubscriptionVendor, TurboModule } from 'react-native';
 import { NativeEventEmitter, TurboModuleRegistry } from 'react-native';
 
 import { fallbackGetPalette, fallbackOfficeModule } from './fallbackOfficeModule';
+import { setCurrentHostThemeSetting } from './hostThemeSetting';
 import type { OfficeThemingModule } from './officeThemingModule';
 
 /**
@@ -21,6 +22,12 @@ export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | u
   const module = TurboModuleRegistry.get<ITurboModuleRegistry>('Theming');
   // if the native module exists return the module + an emitter for it
   if (module) {
+    if (!isInstantiated) {
+      // We need to store the host theme so that when themes are created
+      // they can use this information.
+      setCurrentHostThemeSetting(module.initialHostThemeSetting);
+      isInstantiated = true;
+    }
     // mock getPalette if it should be disabled, otherwise return the module directly
     return [disableGetPalette() ? { ...module, getPalette: fallbackGetPalette } : module, new NativeEventEmitter(module)];
   }
@@ -28,3 +35,5 @@ export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | u
   // otherwise use the fallback module
   return [fallbackOfficeModule, undefined];
 }
+
+let isInstantiated = false;
