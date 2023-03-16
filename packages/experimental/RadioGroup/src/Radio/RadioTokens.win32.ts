@@ -9,7 +9,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     rootHorizontalPadding: globalTokens.size40,
     borderColor: t.colors.background,
     borderStyle: 'solid',
-    borderWidth: globalTokens.stroke.width10,
+    borderWidth: globalTokens.stroke.width20,
     borderRadius: globalTokens.corner.radius40,
     radioBorderWidth: globalTokens.stroke.width10,
     radioVisibility: 0,
@@ -20,7 +20,6 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioOuterCircleSize: 16,
     radioInnerCircleSize: 8,
     radioOuterCircleBackground: t.colors.neutralBackground1,
-    labelPadding: globalTokens.size20,
     labelMarginVertical: globalTokens.size20,
     labelMarginRight: globalTokens.sizeNone,
     labelMarginLeft: globalTokens.sizeNone,
@@ -41,8 +40,9 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       labelAlignItems: 'center',
       labelMarginRight: globalTokens.sizeNone,
       labelMarginVertical: globalTokens.size20,
-      // labelPadding: globalTokens.size20,
+      labelPadding: globalTokens.size20,
       marginLeft: globalTokens.size60,
+      marginRight: globalTokens.size60,
     },
 
     disabled: {
@@ -88,6 +88,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     },
 
     focused: {
+      borderColor: t.colors.strokeFocus2,
       selected: {
         // Checked, Focused
         radioVisibility: 1,

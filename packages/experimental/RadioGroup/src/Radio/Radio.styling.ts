@@ -13,18 +13,17 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
   states: radioStates,
   slotProps: {
     root: buildProps(
-      (tokens: RadioTokens, theme: Theme) => ({
+      (tokens: RadioTokens) => ({
         style: {
           display: 'flex',
           alignItems: tokens.alignItems,
           flexDirection: tokens.flexDirection,
           paddingHorizontal: tokens.rootHorizontalPadding,
           paddingVertical: tokens.rootVerticalPadding,
-          ...borderStyles.from(tokens, theme),
         },
         android_ripple: { color: tokens.rippleColor },
       }),
-      ['flexDirection', 'rootHorizontalPadding', 'rootVerticalPadding', 'rippleColor', 'alignItems', ...borderStyles.keys],
+      ['flexDirection', 'rootHorizontalPadding', 'rootVerticalPadding', 'rippleColor', 'alignItems'],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
@@ -72,7 +71,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
     ),
     labelContent: buildProps(
-      (tokens: RadioTokens) => ({
+      (tokens: RadioTokens, theme: Theme) => ({
         style: {
           alignItems: tokens.labelAlignItems,
           flexDirection: 'column',
@@ -80,9 +79,10 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginLeft: tokens.labelMarginLeft,
           padding: tokens.labelPadding,
           paddingRight: 0,
+          ...borderStyles.from(tokens, theme),
         },
       }),
-      ['labelAlignItems', 'labelMarginRight', 'labelMarginLeft', 'labelPadding'],
+      ['labelAlignItems', 'labelMarginRight', 'labelMarginLeft', 'labelPadding', ...borderStyles.keys],
     ),
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({
