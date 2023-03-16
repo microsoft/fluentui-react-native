@@ -35,10 +35,10 @@ export const Input = compose<InputType>({
   slots: {
     root: View,
     icon: Icon,
-    contentContainer: View,
-    label: Text,
-    input: TextInput,
     inputWrapper: View,
+    label: Text,
+    input: View,
+    textInput: TextInput,
     dismissIcon: Icon,
     assistiveText: Text,
     secondaryText: Text,
@@ -52,16 +52,16 @@ export const Input = compose<InputType>({
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.icon {...iconProps} />
-          <Slots.contentContainer>
-            <Slots.label>{label}</Slots.label>
-            <Slots.inputWrapper>
-              <Slots.input placeholder="Input Text" multiline={true} />
+          <Slots.label>{label}</Slots.label>
+          <Slots.inputWrapper>
+            <Slots.icon {...iconProps} />
+            <Slots.input>
+              <Slots.textInput placeholder="Input Text" multiline={true} />
               <Slots.secondaryText>{secondaryText}</Slots.secondaryText>
               <Slots.dismissIcon {...iconProps} />
-            </Slots.inputWrapper>
-            <Slots.assistiveText>{assistiveText}</Slots.assistiveText>
-          </Slots.contentContainer>
+            </Slots.input>
+          </Slots.inputWrapper>
+          <Slots.assistiveText>{assistiveText}</Slots.assistiveText>
         </Slots.root>
       );
     };

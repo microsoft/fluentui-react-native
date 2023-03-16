@@ -14,8 +14,8 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
       (tokens: InputTokens, theme: Theme) => ({
         style: {
           display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
+          alignItems: 'flex-start',
+          flexDirection: 'column',
           alignSelf: 'flex-start',
           justifyContent: 'center',
           backgroundColor: tokens.backgroundColor,
@@ -26,16 +26,16 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
       }),
       ['backgroundColor', 'paddingHorizontal', ...borderStyles.keys, ...layoutStyles.keys],
     ),
-    contentContainer: {
+    inputWrapper: {
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
-        flexDirection: 'column',
+        alignItems: 'center',
+        flexDirection: 'row',
         alignSelf: 'flex-start',
         justifyContent: 'center',
       },
     },
-    inputWrapper: buildProps(
+    input: buildProps(
       (tokens: InputTokens) => ({
         style: {
           display: 'flex',
@@ -43,12 +43,12 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          marginVertical: tokens.inputVerticalMargin,
+          marginVertical: tokens.spacingInputVertical,
         },
       }),
-      ['inputVerticalMargin'],
+      ['spacingInputVertical'],
     ),
-    input: buildProps(
+    textInput: buildProps(
       (tokens: InputTokens, theme: Theme) => ({
         style: {
           ...fontStyles.from(tokens.inputTextFont, theme),
@@ -57,7 +57,7 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           margin: 0, // Required to override default margin
         },
       }),
-      [...fontStyles.keys],
+      ['inputTextFont', ...fontStyles.keys],
     ),
     secondaryText: buildProps(
       (tokens: InputTokens, theme: Theme) => ({
@@ -67,7 +67,7 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           marginStart: tokens.spacingInputSecondary,
         },
       }),
-      ['spacingInputSecondary', ...fontStyles.keys],
+      ['inputTextFont', 'spacingInputSecondary', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: InputTokens) => ({
@@ -98,11 +98,12 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
             ...fontStyles.from(tokens, theme),
             ...getTextMarginAdjustment(),
             color: tokens.color,
-            marginTop: tokens.labelTopMargin,
+            marginTop: tokens.spacingLabelTop,
+            marginStart: tokens.spacingLabelStart,
           },
         };
       },
-      ['color', 'labelTopMargin', ...fontStyles.keys],
+      ['color', 'spacingLabelTop', ...fontStyles.keys],
     ),
     assistiveText: buildProps(
       (tokens: InputTokens, theme: Theme) => {
@@ -111,11 +112,12 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
             ...fontStyles.from(tokens.assistiveTextFont, theme),
             ...getTextMarginAdjustment(),
             color: tokens.assistiveTextColor,
-            marginVertical: tokens.assistiveTextVerticalMargin,
+            marginVertical: tokens.spacingAssistiveTextVertical,
+            marginStart: tokens.spacingAssistiveTextStart,
           },
         };
       },
-      ['assistiveTextColor', 'assistiveTextFont'],
+      ['assistiveTextColor', 'assistiveTextFont', 'spacingAssistiveTextVertical', 'spacingAssistiveTextStart', ...fontStyles.keys],
     ),
   },
 };

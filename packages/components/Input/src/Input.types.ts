@@ -60,17 +60,27 @@ export interface InputTokens extends LayoutTokens, IBorderTokens, IColorTokens, 
   /**
    * The input's vertical margin.
    */
-  inputVerticalMargin?: number;
+  spacingInputVertical?: number;
 
   /**
    * The assistive text's vertical margin.
    */
-  assistiveTextVerticalMargin?: number;
+  spacingAssistiveTextVertical?: number;
+
+  /**
+   * The assistive text's start margin. Used to align it with input box.
+   */
+  spacingAssistiveTextStart?: number;
+
+  /**
+   * The label's start margin. Used to align it with input box.
+   */
+  spacingLabelStart?: number;
 
   /**
    * The label's top margin.
    */
-  labelTopMargin?: number;
+  spacingLabelTop?: number;
 }
 
 export interface InputProps {
@@ -87,10 +97,10 @@ export interface InputProps {
 export interface InputSlotProps {
   root: ViewProps;
   label: TextProps;
-  input: TextInputProps;
-  inputWrapper: ViewProps;
+  textInput: TextInputProps;
+  input: ViewProps;
   icon: IconProps;
-  contentContainer: ViewProps;
+  inputWrapper: ViewProps;
   dismissIcon: IconProps;
   assistiveText: TextProps;
   secondaryText: TextProps;
