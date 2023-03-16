@@ -4,7 +4,7 @@ import { Platform, Pressable, View } from 'react-native';
 
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, memoize, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -44,7 +44,8 @@ export const Button = compose<ButtonType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
-    rippleContainer: View,
+    rippleContainer: Platform.OS === 'android' && View,
+    focusInnerBorder: Platform.OS === ('win32' as any) && View,
     icon: Icon,
     content: Text,
   },
@@ -110,9 +111,26 @@ export const Button = compose<ButtonType>({
         return (
           <Slots.root {...mergedProps} accessibilityLabel={label}>
             {buttonContent}
+            {button.state.focused && button.state.shouldUseTwoToneFocusBorder && (
+              <Slots.focusInnerBorder
+                style={getFocusBorderStyle(button.state.measuredHeight, button.state.measuredWidth)}
+                accessible={false}
+                focusable={false}
+              />
+            )}
           </Slots.root>
         );
       }
     };
   },
 });
+
+const getFocusBorderStyleWorker = (height: number, width: number) => {
+  const adjustment = 2; // width of border * 2
+
+  return {
+    height: height - adjustment,
+    width: width - adjustment,
+  };
+};
+export const getFocusBorderStyle = memoize(getFocusBorderStyleWorker);

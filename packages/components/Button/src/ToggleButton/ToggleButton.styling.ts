@@ -48,5 +48,16 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
       }),
       ['iconColor', 'iconSize'],
     ),
+    focusInnerBorder: buildProps(
+      (tokens: ToggleButtonTokens) => ({
+        style: {
+          position: 'absolute',
+          borderWidth: tokens.borderInnerWidth,
+          borderColor: tokens.borderInnerColor,
+          borderRadius: tokens.borderInnerRadius,
+        },
+      }),
+      ['borderInnerWidth', 'borderInnerColor', 'borderInnerRadius'],
+    ),
   },
 };
