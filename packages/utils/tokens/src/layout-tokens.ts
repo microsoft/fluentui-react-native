@@ -7,6 +7,7 @@ import { tokenBuilder } from './tokenBuilder';
 
 export interface LayoutTokens {
   width?: ViewStyle['width'];
+  height?: ViewStyle['height'];
   minWidth?: ViewStyle['minWidth'];
   maxWidth?: ViewStyle['maxWidth'];
   minHeight?: ViewStyle['minHeight'];
@@ -20,6 +21,7 @@ export interface LayoutTokens {
 
 export const layoutTokens: OperationSet<LayoutTokens, Theme> = [
   { source: 'width' },
+  { source: 'height' },
   { source: 'minWidth' },
   { source: 'maxWidth' },
   { source: 'minHeight' },
@@ -33,6 +35,7 @@ export const layoutTokens: OperationSet<LayoutTokens, Theme> = [
 
 export const layoutStyles = tokenBuilder<LayoutTokens>(
   'width',
+  'height',
   'minWidth',
   'maxWidth',
   'minHeight',
