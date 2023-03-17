@@ -35,7 +35,6 @@ it('createFontAliasTokens test', () => {
 });
 
 it('createOfficeTheme test', () => {
-  setCurrentHostThemeSetting('White');
   const officeTheme = createOfficeTheme({ paletteName: 'TaskPane', appearance: 'light' }).theme;
   expect(officeTheme).toMatchSnapshot();
 });
