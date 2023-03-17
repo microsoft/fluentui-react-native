@@ -40,6 +40,7 @@ export const Checkbox = compose<CheckboxType>({
     return (final: CheckboxProps) => {
       const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
       const { onPress, disabled } = mergedProps;
+      const makeCheckRootAccessible = disabled === true;
       const labelComponent = (
         <React.Fragment>
           <Slots.label key="label">{label}</Slots.label>
@@ -56,7 +57,10 @@ export const Checkbox = compose<CheckboxType>({
       );
 
       return (
-        <Slots.root {...mergedProps} {...(Platform.OS == 'android' && { accessible: !disabled, focusable: !disabled })}>
+        <Slots.root
+          {...mergedProps}
+          {...(Platform.OS == 'android' && makeCheckRootAccessible && { accessible: !disabled, focusable: !disabled })}
+        >
           {Checkbox.state.labelIsBefore && labelComponent}
           <Slots.checkbox accessible={false} onPress={onPress} disabled={disabled} focusable={false}>
             <Slots.checkmark key="checkmark" viewBox="0 0 12 12">

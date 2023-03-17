@@ -5,12 +5,10 @@ import type { TokenSettings } from '@fluentui-react-native/use-styling';
 import type { MenuItemTokens } from './MenuItem.types';
 
 export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: Theme): MenuItemTokens => ({
-  checkmarkSize: 16,
-  borderRadius: 8,
   color: t.colors.neutralForeground1,
   variant: 'body1',
   paddingHorizontal: 16,
-  paddingVertical: 12,
+  paddingVertical: 6,
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
     color: t.colors.menuItemTextHovered,

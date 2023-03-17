@@ -45,10 +45,7 @@ export const Menu = stagedComponent((props: MenuProps) => {
           >
             <TouchableWithoutFeedback onPress={state.onRequestClose} accessible={false}>
               <View style={StyleSheet.absoluteFill}>
-                <Animated.View
-                  onLayout={state.onMenuLayout}
-                  style={[styles.shadowMenuContainer, state.shadowMenuContainerStyle, { maxHeight: 500 }]}
-                >
+                <Animated.View onLayout={state.onMenuLayout} style={[styles.shadowMenuContainer, state.shadowMenuContainerStyle]}>
                   {state.menuHeight > 250 ? (
                     <AnimatedScrollView style={[styles.menuContainer, state.animationStarted && state.menuSize]}>
                       {menuPopover}
@@ -68,6 +65,11 @@ export const Menu = stagedComponent((props: MenuProps) => {
 const styles = StyleSheet.create({
   shadowMenuContainer: {
     position: 'absolute',
+    borderRadius: 8,
+    maxHeight: 400,
+    
+    // Shadow
+    elevation: 16,
   },
   menuContainer: {
     overflow: 'hidden',
