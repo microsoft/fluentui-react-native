@@ -104,7 +104,12 @@ const iconSections: TestSection[] = [
     ],
   }),
   {
+    name: 'Icon for E2E Testing',
+    component: E2ETestingIcon,
+  },
+  {
     name: 'Default Icon',
+    testID: ICON_TESTPAGE,
     component: IconV1Test,
   },
 ];
@@ -113,11 +118,7 @@ const e2eSections: TestSection[] = [
   {
     name: 'IconV1 for E2E Testing',
     component: IconV1E2ETest,
-  },
-  {
-    name: 'Icon for E2E Testing',
-    component: E2ETestingIcon,
-  },
+  }
 ];
 
 export const IconTest: React.FunctionComponent = () => {
