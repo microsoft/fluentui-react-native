@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 17 Mar 2023 18:39:51 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.21.1",
+      "version": "1.21.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4b07fa13ee8b829a0f509c99a042b24c450a1bbd",
+            "comment": "Update appium beta version to version that doesn't use jsdoc"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Mar 2023 14:13:25 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.21.0",
       "version": "1.21.0",

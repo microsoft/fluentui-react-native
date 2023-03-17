@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 17 Mar 2023 14:13:25 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Mar 2023 18:39:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.50
+
+Fri, 17 Mar 2023 18:39:51 GMT
+
+### Patches
+
+- Update appium beta version to version that doesn't use jsdoc (ruaraki@microsoft.com)
 
 ## 0.32.49
 

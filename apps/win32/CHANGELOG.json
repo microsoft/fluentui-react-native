@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Fri, 17 Mar 2023 18:39:51 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.32.50",
+      "version": "0.32.50",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "4b07fa13ee8b829a0f509c99a042b24c450a1bbd",
+            "comment": "Update appium beta version to version that doesn't use jsdoc"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Mar 2023 14:13:25 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.32.49",
       "version": "0.32.49",
