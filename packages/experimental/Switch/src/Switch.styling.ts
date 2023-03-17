@@ -34,14 +34,13 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           alignItems: 'center',
           flexDirection: tokens.flexDirection,
           alignSelf: 'flex-start',
-          width: tokens.width,
           borderColor: tokens.focusStrokeColor,
           borderWidth: tokens.focusBorderWidth,
           borderRadius: tokens.focusBorderRadius,
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['flexDirection', 'focusStrokeColor', 'focusBorderWidth', 'focusBorderRadius', 'width', ...layoutStyles.keys],
+      ['flexDirection', 'focusStrokeColor', 'focusBorderWidth', 'focusBorderRadius', ...layoutStyles.keys],
     ),
     toggleContainer: buildProps(
       (tokens: SwitchTokens) => ({
