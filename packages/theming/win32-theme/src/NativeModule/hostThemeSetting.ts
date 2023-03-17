@@ -10,10 +10,6 @@
 let currentHostThemeSetting: string = '';
 
 export const getCurrentHostThemeSetting = () => {
-  if (currentHostThemeSetting.length === 0) {
-    throw new Error('Host theme was never set');
-  }
-
   return currentHostThemeSetting;
 };
 
