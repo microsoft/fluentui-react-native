@@ -118,7 +118,7 @@ const e2eSections: TestSection[] = [
   {
     name: 'IconV1 for E2E Testing',
     component: IconV1E2ETest,
-  }
+  },
 ];
 
 export const IconTest: React.FunctionComponent = () => {
