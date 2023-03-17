@@ -13,6 +13,10 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * Space between items in pixels
    */
   gap?: number;
+
+  /**
+   * States of the list control
+   */
   hasMaxHeight?: MenuListTokens;
 }
 
