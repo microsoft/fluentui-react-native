@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Sat, 18 Mar 2023 17:22:31 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.25.9",
+      "version": "0.25.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.18.1",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.9",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Mar 2023 20:54:52 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.25.8",
       "version": "0.25.8",

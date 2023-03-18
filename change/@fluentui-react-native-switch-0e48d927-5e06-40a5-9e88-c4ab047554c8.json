@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Apply 'width' token to switch root",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
