@@ -7,6 +7,7 @@ import { defaultMenuDividerTokens } from './MenuDividerTokens';
 
 export const stylingSettings: UseStylingOptions<MenuDividerProps, MenuDividerSlotProps, MenuDividerTokens> = {
   tokens: [defaultMenuDividerTokens, menuDividerName],
+  tokensThatAreAlsoProps: ['insetSize'],
   slotProps: {
     root: buildProps(
       (tokens: MenuDividerTokens) => ({

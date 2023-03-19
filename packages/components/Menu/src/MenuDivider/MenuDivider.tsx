@@ -19,7 +19,7 @@ export const MenuDivider = compose<MenuDividerType>({
     const Slots = useSlots(userProps);
 
     return (final: MenuDividerProps) => {
-      if (Platform.OS === 'android') return <Divider />;
+      if (Platform.OS === 'android') return <Divider insetSize={userProps.insetSize} />;
 
       return <Slots.root {...final} />;
     };

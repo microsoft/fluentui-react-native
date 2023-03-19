@@ -36,6 +36,7 @@ const MenuDefault: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>Apple</MenuItem>
+            <MenuDivider insetSize={30} />
             <MenuItem disabled>Disabled Mango</MenuItem>
             <MenuItem>Orange</MenuItem>
           </MenuList>
