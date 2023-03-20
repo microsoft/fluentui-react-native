@@ -12,6 +12,7 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   gap: globalTokens.size40,
   iconColor: t.colors.neutralForeground2,
   iconSize: globalTokens.size200,
+  maxWidth: 300,
   paddingVertical: globalTokens.size60,
   paddingHorizontal: globalTokens.size160,
   checkmarkPadding: globalTokens.sizeNone,
