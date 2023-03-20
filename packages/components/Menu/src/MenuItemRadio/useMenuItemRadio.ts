@@ -24,6 +24,8 @@ export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckbox
           setOpen(e, false /*isOpen*/, true /*bubble*/);
         }
       }
+
+      e.stopPropagation();
     },
     [disabled, name, selectRadio, setOpen, shouldPersist],
   );

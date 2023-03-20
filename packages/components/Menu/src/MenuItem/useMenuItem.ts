@@ -49,6 +49,8 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
       if (isArrowClose) {
         onArrowClose?.(e);
       }
+
+      e.stopPropagation();
     },
     [componentRef, disabled, hasSubmenu, onArrowClose, onClick, setOpen, shouldPersist],
   );

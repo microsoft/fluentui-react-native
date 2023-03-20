@@ -24,6 +24,8 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
       if (!disabled) {
         onCheckedChange(e, name, !checked);
       }
+
+      e.stopPropagation();
     },
     [checked, disabled, name, onCheckedChange],
   );
@@ -89,6 +91,8 @@ export const useMenuCheckboxInteraction = (
       if (isArrowClose) {
         onArrowClose?.(e);
       }
+
+      e.stopPropagation();
     },
     [disabled, isSubmenu, onArrowClose, toggleCallback],
   );
@@ -107,6 +111,8 @@ export const useMenuCheckboxInteraction = (
         }
         onAccessibilityAction && onAccessibilityAction(event);
       }
+
+      event.stopPropagation();
     },
     [disabled, toggleCallback, onAccessibilityAction],
   );
