@@ -11,6 +11,7 @@ import { useMenuContextValue } from './useMenuContextValue';
 import { MenuProvider } from '../context/menuContext';
 
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
+
 export const Menu = stagedComponent((props: MenuProps) => {
   const state = useMenu(props);
   const contextValue = useMenuContextValue(state);
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderRadius: 8,
     maxHeight: 400,
-    
+
     // Shadow
     elevation: 16,
   },
