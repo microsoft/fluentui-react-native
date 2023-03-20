@@ -26,6 +26,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
   const isOpenControlled = typeof props.open !== 'undefined';
+  const [checked, onCheckedChange] = useMenuCheckedState(props);
 
   const _container = useRef<View>(null);
   const [menuState, setMenuState] = React.useState<States>(States.Hidden);
@@ -175,6 +176,8 @@ export const useMenu = (props: MenuProps): MenuState => {
     _container,
     onRequestClose,
     onMenuLayout,
+    checked,
+    onCheckedChange,
     menuHeight,
     maxMenuHeight,
     animationStarted,
@@ -220,4 +223,21 @@ const useMenuOpenState = (
     [state, isControlled, onOpenChange, parentSetOpen, show, hide],
   );
   return [state, shouldFocusOnContainer, setOpen];
+};
+
+const useMenuCheckedState = (props: MenuProps): [string[], (e: InteractionEvent, checked: string[]) => void] => {
+  const { checked, defaultChecked, onCheckedChange: onCheckedChangeOriginal } = props;
+  const [checkedInternal, setCheckedInternal] = React.useState(defaultChecked ?? checked ?? []);
+  const isControlled = typeof checked !== 'undefined';
+  const state = isControlled ? checked : checkedInternal;
+  const onCheckedChange = React.useCallback(
+    (e: InteractionEvent, checked: string[]) => {
+      if (!isControlled) {
+        setCheckedInternal(checked);
+      }
+      onCheckedChangeOriginal?.(e, checked);
+    },
+    [isControlled, setCheckedInternal, onCheckedChangeOriginal],
+  );
+  return [state, onCheckedChange];
 };
