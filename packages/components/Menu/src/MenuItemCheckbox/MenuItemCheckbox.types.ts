@@ -32,6 +32,39 @@ export interface MenuItemCheckboxTokens
   iconSize?: number;
 
   /**
+   * Color of the background of the box containing the checkmark.
+   */
+  checkboxBackgroundColor?: ColorValue;
+
+  /**
+   * Color of the border of the box containing the checkmark.
+   */
+  checkboxBorderColor?: ColorValue;
+
+  /**
+   * Border radius of the box containing the checkmark.
+   */
+  checkboxBorderRadius?: number;
+
+  /**
+   * Width of the border around the box containing the checkmark.
+   */
+  checkboxBorderWidth?: number;
+
+  /**
+   * Height and width of the box containing the checkmark.
+   */
+  checkboxSize?: number;
+
+  /**
+   * Ripple color for Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the color of the ripple.
+   * @platform android
+   */
+  rippleColor?: ColorValue;
+
+  /**
    * States of the item control
    */
   checked?: MenuItemCheckboxTokens;
@@ -54,6 +87,7 @@ export interface MenuItemCheckboxInfo {
 
 export interface MenuItemCheckboxSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
+  checkbox?: PressablePropsExtended;
   checkmark?: XmlProps;
   content?: TextProps;
   iconPlaceholder?: React.PropsWithRef<IViewProps>;

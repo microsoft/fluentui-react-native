@@ -58,7 +58,9 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItemCheckbox name="itemOne">A MenuItem with checkmark</MenuItemCheckbox>
+            <MenuItemCheckbox disabled name="itemOne">
+              A MenuItem with checkmark
+            </MenuItemCheckbox>
             <MenuDivider />
             <MenuItemCheckbox name="itemTwo">Another MenuItem with checkmark</MenuItemCheckbox>
           </MenuList>
@@ -71,9 +73,8 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark</MenuItemCheckbox>
-            <MenuItemCheckbox disabled name="itemThree">
-              A disabled MenuItem with checkmark
+            <MenuItemCheckbox disabled name="itemTwo">
+              A MenuItem with checkmark
             </MenuItemCheckbox>
             <MenuItemCheckbox name="itemFour">A MenuItem with checkmark</MenuItemCheckbox>
           </MenuList>
@@ -88,9 +89,6 @@ const MenuCheckmarks: React.FunctionComponent = () => {
             <MenuItem>A plain MenuItem</MenuItem>
             <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark</MenuItemCheckbox>
             <MenuItemCheckbox name="itemThree">A MenuItem with checkmark</MenuItemCheckbox>
-            <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark</MenuItemCheckbox>
-            <MenuItemCheckbox name="itemThree">A MenuItem with checkmark</MenuItemCheckbox>
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -99,7 +97,7 @@ const MenuCheckmarks: React.FunctionComponent = () => {
 };
 
 const MenuRadioItem: React.FunctionComponent = () => {
-  const [checked, setChecked] = React.useState(['itemOne']);
+  const [checked, setChecked] = React.useState(['itemOnwe']);
   const onCheckedChange = React.useCallback(
     (_e, checkedChange) => {
       setChecked(checkedChange);
