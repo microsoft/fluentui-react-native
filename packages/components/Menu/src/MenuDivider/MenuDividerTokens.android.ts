@@ -7,6 +7,5 @@ import type { MenuDividerTokens } from './MenuDivider.types';
 export const defaultMenuDividerTokens: TokenSettings<MenuDividerTokens, Theme> = (t: Theme): MenuDividerTokens => ({
   backgroundColor: t.colors.neutralStroke2,
   height: globalTokens.stroke.width10,
-  marginVertical: globalTokens.size40,
   insetSize: 0,
 });

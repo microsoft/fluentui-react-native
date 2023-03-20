@@ -10,7 +10,7 @@ import { stackStyle } from '../Common/styles';
 
 const fontBuiltInProps = {
   fontFamily: 'Arial',
-  codepoint: 0x2663,
+  codepoint: 0x2664,
 };
 const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
