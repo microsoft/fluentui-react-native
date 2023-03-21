@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Trigger manual bump (no changes)",
-  "packageName": "@fluentui-react-native/experimental-text",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
