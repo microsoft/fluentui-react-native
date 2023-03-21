@@ -58,6 +58,29 @@ export const MenuList = compose<MenuListType>({
     }, []);
 
     return (_final: MenuListProps, children: React.ReactNode) => {
+      const itemCount = React.Children.toArray(children).filter(
+        (child) => React.isValidElement(child) && (child as any).type.displayName !== 'MenuDivider',
+      ).length;
+      let itemPosition = 0;
+
+      const childrenWithSet = React.Children.toArray(children).map((child) => {
+        if (React.isValidElement(child)) {
+          if ((child as any).type.displayName !== 'MenuDivider') {
+            itemPosition++;
+          }
+
+          return React.cloneElement(
+            child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
+            {
+              accessibilityPositionInSet: child.props.accessibilityPositionInSet ?? itemPosition, // win32
+              accessibilitySetSize: child.props.accessibilitySetSize ?? itemCount, //win32
+            } as any,
+          );
+        }
+
+        return child;
+      });
+
       const content =
         Platform.OS === 'macos' ? (
           <Slots.root>
@@ -73,16 +96,16 @@ export const MenuList = compose<MenuListType>({
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
               >
-                {children}
+                {childrenWithSet}
               </Slots.focusZone>
             </Slots.scrollView>
           </Slots.root>
         ) : menuContext.hasMaxHeight ? (
           <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
-            <Slots.scrollView>{children}</Slots.scrollView>
+            <Slots.scrollView>{childrenWithSet}</Slots.scrollView>
           </Slots.root>
         ) : (
-          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>{children}</Slots.root>
+          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>{childrenWithSet}</Slots.root>
         );
 
       return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;

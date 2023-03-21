@@ -4,6 +4,7 @@ import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from '../
 import { createOfficeTheme } from '../createOfficeTheme';
 import { createPartialOfficeTheme } from '../createPartialOfficeTheme';
 import { win32Typography } from '../getThemeTypography';
+import { setCurrentHostThemeSetting } from '../NativeModule/hostThemeSetting';
 import { fallbackGetPalette, fallbackOfficeModule, getThemingModule } from '../NativeModule/index';
 
 const officeThemes = ['White', 'Colorful', 'DarkGray', 'Black', 'HighContrast'];
@@ -39,6 +40,7 @@ it('createOfficeTheme test', () => {
 });
 
 it.concurrent.each(officeThemes)('createBrandedThemeWithAlias test themeName: %s', async (themeName: string) => {
+  setCurrentHostThemeSetting('Colorful');
   const officeTheme = createOfficeTheme({ paletteName: 'TaskPane', appearance: 'light' }).theme;
   const brandedTheme = createBrandedThemeWithAlias(themeName, officeTheme);
   expect(brandedTheme).toMatchSnapshot();
