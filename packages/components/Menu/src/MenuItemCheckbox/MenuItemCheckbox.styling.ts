@@ -50,6 +50,40 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
         ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize', 'rippleColor'],
       ),
     }),
+    ...(Platform.OS === 'android' && {
+      radioButton: buildProps(
+        (tokens: MenuItemCheckboxTokens) => ({
+          style: {
+            backgroundColor: 'transparent',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginEnd: tokens.paddingHorizontal,
+            width: tokens.radioOuterCircleSize,
+            height: tokens.radioOuterCircleSize,
+            borderWidth: tokens.radioBorderWidth,
+            borderStyle: tokens.radioBorderStyle,
+            borderRadius: tokens.radioOuterCircleSize / 2,
+            borderColor: tokens.radioBorder,
+          },
+          android_ripple: { color: tokens.rippleColor, radius: tokens.rippleRadius, borderless: true },
+        }),
+        ['radioBorderWidth', 'radioBorderStyle', 'radioOuterCircleSize', 'rippleColor', 'rippleRadius', 'radioBorder'],
+      ),
+    }),
+    ...(Platform.OS === 'android' && {
+      radioInnerCircle: buildProps(
+        (tokens: MenuItemCheckboxTokens) => ({
+          style: {
+            opacity: tokens.radioVisibility,
+            borderRadius: tokens.radioInnerCircleSize / 2,
+            height: tokens.radioInnerCircleSize,
+            width: tokens.radioInnerCircleSize,
+            backgroundColor: tokens.radioFill,
+          },
+        }),
+        ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
+      ),
+    }),
     checkmark: buildProps(
       (tokens: MenuItemCheckboxTokens) => ({
         opacity: tokens.checkmarkVisibility,

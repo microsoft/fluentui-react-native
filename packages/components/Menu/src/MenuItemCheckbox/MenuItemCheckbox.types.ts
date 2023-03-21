@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ColorValue, ImageProps } from 'react-native';
+import type { ColorValue, ImageProps, ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
@@ -65,6 +65,49 @@ export interface MenuItemCheckboxTokens
   rippleColor?: ColorValue;
 
   /**
+   * Indicator border color
+   */
+  radioBorder?: ColorValue;
+
+  /**
+   * Indicator border style
+   */
+  radioBorderStyle?: ViewStyle['borderStyle'];
+
+  /**
+   * Inner circle color when selected
+   */
+  radioFill?: ColorValue;
+
+  /**
+   * Visibility of the radio inner circle from 0 to 1
+   */
+  radioVisibility?: number;
+
+  /**
+   * Diameter size of the outer indicator
+   */
+  radioOuterCircleSize?: number;
+
+  /**
+   * Diameter size of the inner circle indicator
+   */
+  radioInnerCircleSize?: number;
+
+  /**
+   * Border width of Radio
+   */
+  radioBorderWidth?: number;
+
+  /**
+   * Ripple radius for circular radio on Android.
+   *
+   * A ripple animation is shown on click for Android. This sets the radius of the circular ripple shown on the radio button.
+   * @platform android
+   */
+  rippleRadius?: number;
+
+  /**
    * States of the item control
    */
   checked?: MenuItemCheckboxTokens;
@@ -88,6 +131,8 @@ export interface MenuItemCheckboxInfo {
 export interface MenuItemCheckboxSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
   checkbox?: PressablePropsExtended;
+  radioButton?: PressablePropsExtended;
+  radioInnerCircle?: React.PropsWithRef<IViewProps>;
   checkmark?: XmlProps;
   content?: TextProps;
   iconPlaceholder?: React.PropsWithRef<IViewProps>;

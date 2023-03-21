@@ -25,6 +25,8 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
   slots: {
     root: Pressable,
     ...(Platform.OS === 'android' && { checkbox: Pressable }),
+    radioInnerCircle: View,
+    radioButton: Pressable,
     checkmark: SvgXml,
     content: Text,
     iconPlaceholder: View,
@@ -64,35 +66,9 @@ export const menuItemFinalRender = (
       <Slots.root {...mergedProps} accessibilityLabel={label}>
         {Platform.OS === 'android' ? (
           isRadio ? (
-            <Pressable
-              style={{
-                backgroundColor: 'transparent',
-                width: 20,
-                height: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderWidth: 1.5,
-                borderStyle: 'solid',
-                borderRadius: 10,
-                borderColor: 'red',
-              }}
-              accessible={false}
-              focusable={false}
-            >
-              {mergedProps.accessibilityState.checked ? (
-                <View
-                  style={{
-                    opacity: 1,
-                    borderRadius: 5,
-                    height: 10,
-                    width: 10,
-                    backgroundColor: 'black',
-                  }}
-                />
-              ) : (
-                <View></View>
-              )}
-            </Pressable>
+            <Slots.radioButton>
+              <Slots.radioInnerCircle />
+            </Slots.radioButton>
           ) : (
             <Slots.checkbox accessible={false} focusable={false}>
               <Slots.checkmark xml={androidCheckmarkPath} />

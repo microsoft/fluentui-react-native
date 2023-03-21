@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import {
@@ -190,7 +190,7 @@ const MenuControlledOpen: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A MenuItem</MenuItem>
-            <Submenu />
+            {Platform.OS !== 'android' && <Submenu />}
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -263,26 +263,35 @@ const menuSections: TestSection[] = [
     name: 'Menu Radioitem',
     component: MenuRadioItem,
   },
-  {
-    name: 'Menu open on hover',
-    component: MenuOpenOnHover,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu open on hover',
+      component: MenuOpenOnHover,
+    },
+  }),
   {
     name: 'Menu open controlled',
     component: MenuControlledOpen,
   },
-  {
-    name: 'Menu with tooltips on items',
-    component: MenuTooltips,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu with tooltips on items',
+      component: MenuTooltips,
+    },
+  }),
   {
     name: 'Menu with icons',
     component: MenuIcons,
   },
-  {
-    name: 'Menu Submenu',
-    component: MenuSubMenu,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Submenu',
+      component: MenuSubMenu,
+    },
+  }),
   {
     name: 'Menu with ScrollView',
     component: MenuScrollView,
@@ -291,18 +300,24 @@ const menuSections: TestSection[] = [
     name: 'Menu Trigger onClick Override',
     component: MenuTriggerOnClickCallback,
   },
-  {
-    name: 'Menu Trigger Hover Override',
-    component: MenuTriggerHoverCallback,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Trigger Hover Override',
+      component: MenuTriggerHoverCallback,
+    },
+  }),
   {
     name: 'Menu Customized',
     component: MenuCustomized,
   },
-  {
-    name: 'Menu Refs',
-    component: MenuTriggerChildRef,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Refs',
+      component: MenuTriggerChildRef,
+    },
+  }),
 ];
 
 const e2eSections: TestSection[] = [
@@ -318,7 +333,7 @@ export const MenuTest: React.FunctionComponent = () => {
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
     macosStatus: 'Beta',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =

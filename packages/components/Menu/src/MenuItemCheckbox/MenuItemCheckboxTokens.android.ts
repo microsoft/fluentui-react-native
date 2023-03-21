@@ -20,6 +20,17 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   checkboxBorderRadius: globalTokens.corner.radius40,
   checkboxSize: globalTokens.size200,
   checkboxBorderColor: t.colors.neutralStrokeAccessible,
+
+  radioOuterCircleSize: globalTokens.size200,
+  radioInnerCircleSize: globalTokens.size100,
+  radioBorderStyle: 'solid',
+  radioBorderWidth: globalTokens.stroke.width15,
+  rippleRadius: globalTokens.size160,
+
+  // Unselected, Rest
+  radioBorder: t.colors.neutralStrokeAccessible,
+  radioVisibility: 0,
+
   rippleColor: '#D4D4D4',
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
@@ -29,12 +40,22 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
     checkboxBorderColor: t.colors.neutralStrokeDisabled,
     color: t.colors.neutralForegroundDisabled1,
     iconColor: t.colors.neutralForegroundDisabled,
+    // Unselected, Disabled
+    rippleColor: '#D4D4D4',
+    radioBorder: t.colors.neutralStrokeDisabled,
+    radioVisibility: 0,
     checked: {
       checkboxBackgroundColor: t.colors.brandBackgroundDisabled,
       checkmarkVisibility: 1,
+      radioBorder: t.colors.brandBackgroundDisabled,
+      radioFill: t.colors.brandForegroundDisabled2,
+      radioVisibility: 1,
     },
   },
   checked: {
+    radioBorder: t.colors.brandBackground,
+    radioFill: t.colors.brandForeground1,
+    radioVisibility: 1,
     checkmarkVisibility: 1,
     checkboxBackgroundColor: t.colors.brandBackground,
     checkboxBorderWidth: globalTokens.stroke.widthNone,
