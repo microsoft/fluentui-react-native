@@ -7,7 +7,7 @@ import type { RadioTokens } from './Radio.types';
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
   ({
     rootHorizontalPadding: globalTokens.size40,
-    borderColor: t.colors.background,
+    borderColor: t.colors.transparentStroke,
     borderStyle: 'solid',
     borderWidth: globalTokens.stroke.width10,
     borderRadius: globalTokens.corner.radius40,
