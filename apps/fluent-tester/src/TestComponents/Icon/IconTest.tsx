@@ -7,8 +7,8 @@ import type { RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentu
 import { Icon } from '@fluentui-react-native/icon';
 
 import { E2ETestingIcon } from './IconLegacyE2ETest';
-import { IconV1Test } from './IconV1';
 import { IconV1E2ETest } from './IconV1E2ETest';
+import { IconV1Test } from './IconV1Test';
 import { ICON_TESTPAGE } from '../../../../E2E/src/IconLegacy/consts';
 import { testImage, testTtf, svgProps } from '../Common/iconExamples';
 import type { TestSection, PlatformStatus } from '../Test';
@@ -93,17 +93,23 @@ const Icons: React.FunctionComponent = () => {
 };
 
 const iconSections: TestSection[] = [
-  {
-    name: 'Icon',
-    testID: ICON_TESTPAGE,
-    component: Icons,
-  },
+  ...Platform.select({
+    android: [null],
+    default: [
+      {
+        name: 'Icon',
+        testID: ICON_TESTPAGE,
+        component: Icons,
+      },
+    ],
+  }),
   {
     name: 'Icon for E2E Testing',
     component: E2ETestingIcon,
   },
   {
     name: 'Default Icon',
+    testID: ICON_TESTPAGE,
     component: IconV1Test,
   },
 ];
@@ -121,7 +127,7 @@ export const IconTest: React.FunctionComponent = () => {
     uwpStatus: 'Backlog',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description = 'Icons are styled images that can be fonts, svgs, or bitmaps';
