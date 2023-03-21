@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/stack",
   "version": "0.7.60",
-  "description": " A cross-platform opinionated Fluent Text component",
+  "description": "A cross-platform opinionated Fluent Text component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

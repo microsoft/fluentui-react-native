@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/win32-theme",
   "version": "0.25.9",
-  "description": " Win32 office theme that works with the theming native module",
+  "description": "Win32 office theme that works with the theming native module",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",

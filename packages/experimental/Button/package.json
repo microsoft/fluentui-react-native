@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/experimental-button",
   "version": "0.16.104",
-  "description": " A cross-platform Button component using the Fluent Design System",
+  "description": "A cross-platform Button component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

@@ -1,7 +1,7 @@
 {
   "name": "@uifabricshared/foundation-tokens",
   "version": "0.12.30",
-  "description": " Core tokens package",
+  "description": "Core tokens package",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",

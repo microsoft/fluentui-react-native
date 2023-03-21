@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/icon",
   "version": "0.17.22",
-  "description": " A cross-platform Icon component",
+  "description": "A cross-platform Icon component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

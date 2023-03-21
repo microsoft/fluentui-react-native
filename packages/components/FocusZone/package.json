@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/focus-zone",
   "version": "0.11.38",
-  "description": " A cross-platform FocusZone component using the Fluent Design System",
+  "description": "A cross-platform FocusZone component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

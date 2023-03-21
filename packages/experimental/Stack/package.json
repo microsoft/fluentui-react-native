@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/experimental-stack",
   "version": "0.1.0",
-  "description": " A cross-platform opinionated Fluent Text component",
+  "description": "A cross-platform opinionated Fluent Text component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

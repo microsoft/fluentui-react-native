@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/experimental-appearance-additions",
   "version": "0.3.8",
-  "description": " A module to expose callbacks for additional traitCollection changes.",
+  "description": "A module to expose callbacks for additional traitCollection changes.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",

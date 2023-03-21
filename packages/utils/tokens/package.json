@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/tokens",
   "version": "0.20.13",
-  "description": " Token interface parts and helpers",
+  "description": "Token interface parts and helpers",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
