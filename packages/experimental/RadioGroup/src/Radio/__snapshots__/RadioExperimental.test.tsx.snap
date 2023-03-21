@@ -20,7 +20,6 @@ exports[`Radio component tests Radio default 1`] = `
     }
   }
   accessible={true}
-  enableFocusRing={true}
   focusable={true}
   keyDownEvents={
     Array [
@@ -114,7 +113,7 @@ exports[`Radio component tests Radio default 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "borderColor": "#ffffff",
+        "borderColor": "transparent",
         "borderRadius": 4,
         "borderStyle": "solid",
         "borderWidth": 2,
@@ -168,7 +167,6 @@ exports[`Radio component tests Radio disabled 1`] = `
     }
   }
   accessible={true}
-  enableFocusRing={true}
   focusable={false}
   keyDownEvents={
     Array [
@@ -267,7 +265,7 @@ exports[`Radio component tests Radio disabled 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "borderColor": "#ffffff",
+        "borderColor": "transparent",
         "borderRadius": 4,
         "borderStyle": "solid",
         "borderWidth": 2,

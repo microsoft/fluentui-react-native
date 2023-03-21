@@ -79,7 +79,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -173,7 +172,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -224,7 +223,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -318,7 +316,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -434,7 +432,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -528,7 +525,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -579,7 +576,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -673,7 +669,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -789,7 +785,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={false}
         keyDownEvents={
           Array [
@@ -888,7 +883,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -939,7 +934,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={false}
         keyDownEvents={
           Array [
@@ -1038,7 +1032,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1155,7 +1149,6 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -1249,7 +1242,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1300,7 +1293,6 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -1394,7 +1386,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1511,7 +1503,6 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -1605,7 +1596,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1656,7 +1647,6 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -1750,7 +1740,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1883,7 +1873,6 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -1977,7 +1966,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -2028,7 +2017,6 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           }
         }
         accessible={true}
-        enableFocusRing={true}
         focusable={true}
         keyDownEvents={
           Array [
@@ -2122,7 +2110,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "#ffffff",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
