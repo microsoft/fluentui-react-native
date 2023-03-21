@@ -263,7 +263,7 @@ const MenuNofM: React.FunctionComponent = () => {
             <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
             <MenuDivider />
-            <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />
+            {Platform.OS !== 'android' && <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />}
             <MenuItem disabled accessibilitySetSize={2}>
               A disabled MenuItem
             </MenuItem>
