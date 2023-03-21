@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 21 Mar 2023 17:43:32 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.32.53",
+      "version": "0.32.53",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "f21c6d04916d6850f0ce574132ddfdc3e11e08fa",
+            "comment": "Revert \"Update appium and node version (#2620)\""
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 18 Mar 2023 17:22:31 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.32.52",
       "version": "0.32.52",

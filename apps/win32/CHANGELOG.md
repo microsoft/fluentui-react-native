@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Sat, 18 Mar 2023 17:22:31 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Mar 2023 17:43:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.53
+
+Tue, 21 Mar 2023 17:43:32 GMT
+
+### Patches
+
+- Revert "Update appium and node version (#2620)" (krsiler@microsoft.com)
 
 ## 0.32.52
 
