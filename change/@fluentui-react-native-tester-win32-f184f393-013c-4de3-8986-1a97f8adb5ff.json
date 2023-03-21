@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Revert \"Update appium and node version (#2620)\"",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
