@@ -11,6 +11,7 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   paddingVertical: globalTokens.size60,
   iconColor: t.colors.neutralForeground3,
   iconSize: globalTokens.size240,
+  marginEndForCheckedAndroid: globalTokens.size360,
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
   },
