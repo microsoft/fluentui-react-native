@@ -42,6 +42,7 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
 export const menuItemFinalRender = (
   menuItem: MenuItemCheckboxInfo,
   Slots: Slots<MenuItemCheckboxSlotProps>,
+  isRadio: boolean = false,
 ): React.FunctionComponent<MenuItemCheckboxProps> => {
   return (final: MenuItemCheckboxProps, children: React.ReactNode) => {
     const { accessibilityLabel, icon, tooltip, ...mergedProps } = mergeProps(menuItem.props, final);
@@ -62,9 +63,41 @@ export const menuItemFinalRender = (
     return (
       <Slots.root {...mergedProps} accessibilityLabel={label}>
         {Platform.OS === 'android' ? (
-          <Slots.checkbox accessible={false} focusable={false}>
-            <Slots.checkmark xml={androidCheckmarkPath} />
-          </Slots.checkbox>
+          isRadio ? (
+            <Pressable
+              style={{
+                backgroundColor: 'transparent',
+                width: 20,
+                height: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderWidth: 1.5,
+                borderStyle: 'solid',
+                borderRadius: 10,
+                borderColor: 'red',
+              }}
+              accessible={false}
+              focusable={false}
+            >
+              {mergedProps.accessibilityState.checked ? (
+                <View
+                  style={{
+                    opacity: 1,
+                    borderRadius: 5,
+                    height: 10,
+                    width: 10,
+                    backgroundColor: 'black',
+                  }}
+                />
+              ) : (
+                <View></View>
+              )}
+            </Pressable>
+          ) : (
+            <Slots.checkbox accessible={false} focusable={false}>
+              <Slots.checkmark xml={androidCheckmarkPath} />
+            </Slots.checkbox>
+          )
         ) : (
           <Slots.checkmark xml={checkmarkXml} />
         )}

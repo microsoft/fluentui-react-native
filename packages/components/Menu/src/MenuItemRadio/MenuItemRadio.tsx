@@ -12,6 +12,6 @@ export const MenuItemRadio = MenuItemCheckbox.compose({
     const menuItem = useMenuItemRadio(userProps);
     const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer]);
 
-    return menuItemFinalRender(menuItem, Slots);
+    return menuItemFinalRender(menuItem, Slots, true);
   },
 });
