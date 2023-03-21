@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/experimental-shimmer",
   "version": "0.8.26",
-  "description": "A cross-platform Fluent Shimmer component",
+  "description": " A cross-platform Fluent Shimmer component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

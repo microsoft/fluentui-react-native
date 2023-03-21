@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/tester",
   "version": "0.135.2",
-  "description": "A test app to test FluentUI React Native Components during development",
+  "description": " A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",

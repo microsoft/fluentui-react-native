@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/notification",
   "version": "0.21.47",
-  "description": "add component-description",
+  "description": " add component-description",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

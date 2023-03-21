@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/experimental-activity-indicator",
   "version": "0.7.24",
-  "description": "A cross-platform Fluent Activity Indicator component",
+  "description": " A cross-platform Fluent Activity Indicator component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

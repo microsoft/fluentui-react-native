@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/persona-coin",
   "version": "0.12.29",
-  "description": "A cross-platform PersonaCoin component using the Fluent Design System",
+  "description": " A cross-platform PersonaCoin component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
