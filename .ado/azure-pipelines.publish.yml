@@ -33,17 +33,17 @@ jobs:
     displayName: NPM Publish
     pool: Azure-Pipelines-EO-Ubuntu20.04-Office
     steps:
-      - template: templates/setup-repo.yml
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.x'
+        displayName: 'Install Node.js'
 
       - script: |
           git config user.name "UI-Fabric-RN-Bot"
           git config user.email "uifrnbot@microsoft.com"
           git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
         displayName: Git Authentication
-
-      - script: |
-          yarn
-        displayName: 'yarn install'
+      - template: templates/yarn-install.yml
 
       - script: |
           yarn buildci
