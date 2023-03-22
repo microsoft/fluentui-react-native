@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Tue, 21 Mar 2023 21:53:45 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Mar 2023 18:48:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.36.19
+
+Wed, 22 Mar 2023 18:48:13 GMT
+
+### Patches
+
+- Move switch package from experimental to components folder (winlarry@microsoft.com)
 
 ## 0.36.18
 

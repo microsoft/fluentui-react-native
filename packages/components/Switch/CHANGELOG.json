@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Wed, 22 Mar 2023 18:48:13 GMT",
+      "tag": "@fluentui-react-native/switch_v0.8.37",
+      "version": "0.8.37",
+      "comments": {
+        "none": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "d591cbb8748de53916524020fb2034879adb2030",
+            "comment": "Move switch package from experimental to components folder"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:44 GMT",
       "tag": "@fluentui-react-native/switch_v0.8.37",
       "version": "0.8.37",

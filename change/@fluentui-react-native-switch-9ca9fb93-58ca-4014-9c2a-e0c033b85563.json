@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Move switch package from experimental to components folder",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "none"
-}
