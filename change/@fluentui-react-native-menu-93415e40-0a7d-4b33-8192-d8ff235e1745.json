@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Revert n of m implementation for submenus",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
