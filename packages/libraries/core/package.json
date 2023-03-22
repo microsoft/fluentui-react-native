@@ -41,7 +41,6 @@
     "@fluentui-react-native/persona-coin": "0.12.29",
     "@fluentui-react-native/pressable": "0.9.65",
     "@fluentui-react-native/radio-group": "0.16.42",
-    "@fluentui-react-native/switch": "0.8.36",
     "@fluentui-react-native/separator": "0.14.21",
     "@fluentui-react-native/tabs": "0.11.42",
     "@fluentui-react-native/text": "0.19.28"

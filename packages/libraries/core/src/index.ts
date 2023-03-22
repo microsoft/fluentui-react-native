@@ -214,9 +214,6 @@ export type {
 export { Separator, separatorName } from '@fluentui-react-native/separator';
 export type { SeparatorProps, SeparatorTokens, SeparatorType } from '@fluentui-react-native/separator';
 
-export { Switch, useSwitch } from '@fluentui-react-native/switch';
-export type { SwitchTokens, SwitchProps, SwitchState, SwitchSlotProps, SwitchType } from '@fluentui-react-native/switch';
-
 export { Text, textName, TextV1, textNameV1 } from '@fluentui-react-native/text';
 
 export type {
