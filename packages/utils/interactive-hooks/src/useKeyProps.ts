@@ -5,23 +5,30 @@ import { memoize } from '@fluentui-react-native/memo-cache';
 
 import type { KeyCallback, KeyPressEvent, KeyPressProps } from './useKeyProps.types';
 
+const shouldExcludeAllModifierKeys = Platform.OS === 'macos';
+
 /**
- * Verifies if nativeEvent contains modifier key.
+ * Verifies if nativeEvent contains modifier key. The modifier keys that should
+ * be taken into account differ based on platform
  * @param nativeEvent
  * @returns `true` if one or more of modifier keys are `true`
  */
-export const isModifierKey = (nativeEvent: any): boolean => {
-  return (
-    nativeEvent &&
-    (nativeEvent.alt ||
-      nativeEvent.altKey ||
-      nativeEvent.ctrl ||
-      nativeEvent.ctrlKey ||
-      nativeEvent.meta ||
-      nativeEvent.metaKey ||
-      nativeEvent.shift ||
-      nativeEvent.shiftKey)
-  );
+const isModifierKey = (nativeEvent: any): boolean => {
+  if (shouldExcludeAllModifierKeys) {
+    return (
+      nativeEvent &&
+      (nativeEvent.alt ||
+        nativeEvent.altKey ||
+        nativeEvent.ctrl ||
+        nativeEvent.ctrlKey ||
+        nativeEvent.meta ||
+        nativeEvent.metaKey ||
+        nativeEvent.shift ||
+        nativeEvent.shiftKey)
+    );
+  } else {
+    return nativeEvent && (nativeEvent.alt || nativeEvent.altKey || nativeEvent.meta || nativeEvent.metaKey);
+  }
 };
 
 function keyPressCallback(userCallback?: KeyCallback, ...keys: string[]) {
