@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/experimental-link
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Mar 2023 21:53:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.33
+
+Tue, 21 Mar 2023 21:53:46 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @fluentui-react-native/link to v0.18.24
+
+## 0.4.32
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.23
 
 ## 0.4.31
 

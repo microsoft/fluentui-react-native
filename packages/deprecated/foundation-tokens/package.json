@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-tokens",
-  "version": "0.12.29",
+  "version": "0.12.31",
   "description": "Core tokens package",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/merge-props": ">=0.5.3 <1.0.0",
-    "@fluentui-react-native/tokens": "0.20.12",
+    "@fluentui-react-native/tokens": "0.20.14",
     "@uifabricshared/foundation-settings": ">=0.12.3 <1.0.0"
   },
   "devDependencies": {

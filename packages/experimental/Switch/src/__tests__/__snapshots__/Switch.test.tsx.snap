@@ -38,8 +38,6 @@ exports[`Switch Default 1`] = `
       "borderRadius": undefined,
       "borderWidth": undefined,
       "flexDirection": "row-reverse",
-      "minHeight": undefined,
-      "minWidth": undefined,
     }
   }
   switchAnimationStyles={
@@ -155,8 +153,6 @@ exports[`Switch Disabled 1`] = `
       "borderRadius": undefined,
       "borderWidth": undefined,
       "flexDirection": "row-reverse",
-      "minHeight": undefined,
-      "minWidth": undefined,
     }
   }
   switchAnimationStyles={
