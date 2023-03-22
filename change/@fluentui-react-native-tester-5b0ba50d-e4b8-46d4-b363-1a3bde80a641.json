@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update switch spec link",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
