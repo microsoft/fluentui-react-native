@@ -5,23 +5,30 @@ import { memoize } from '@fluentui-react-native/memo-cache';
 
 import type { KeyCallback, KeyPressEvent, KeyPressProps } from './useKeyProps.types';
 
+const shouldAllowShiftCtrlKeys = Platform.OS === ('win32' as any);
+
 /**
- * Verifies if nativeEvent contains modifier key.
+ * Verifies if nativeEvent contains modifier key. The modifier keys that should
+ * be taken into account differ based on platform
  * @param nativeEvent
  * @returns `true` if one or more of modifier keys are `true`
  */
-export const isModifierKey = (nativeEvent: any): boolean => {
-  return (
-    nativeEvent &&
-    (nativeEvent.alt ||
-      nativeEvent.altKey ||
-      nativeEvent.ctrl ||
-      nativeEvent.ctrlKey ||
-      nativeEvent.meta ||
-      nativeEvent.metaKey ||
-      nativeEvent.shift ||
-      nativeEvent.shiftKey)
-  );
+const isModifierKey = (nativeEvent: any): boolean => {
+  if (shouldAllowShiftCtrlKeys) {
+    return nativeEvent && (nativeEvent.alt || nativeEvent.altKey || nativeEvent.meta || nativeEvent.metaKey);
+  } else {
+    return (
+      nativeEvent &&
+      (nativeEvent.alt ||
+        nativeEvent.altKey ||
+        nativeEvent.ctrl ||
+        nativeEvent.ctrlKey ||
+        nativeEvent.meta ||
+        nativeEvent.metaKey ||
+        nativeEvent.shift ||
+        nativeEvent.shiftKey)
+    );
+  }
 };
 
 function keyPressCallback(userCallback?: KeyCallback, ...keys: string[]) {

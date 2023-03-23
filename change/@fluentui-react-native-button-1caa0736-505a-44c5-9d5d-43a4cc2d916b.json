@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add more guards to handling key press behavior",
+  "packageName": "@fluentui-react-native/button",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
