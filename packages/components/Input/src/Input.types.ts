@@ -1,12 +1,14 @@
-import type { ColorValue, TextInputProps, ViewProps } from 'react-native';
+import type { ColorValue, TextInputProps, ViewProps, KeyboardTypeOptions } from 'react-native';
 
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
+import type { FocusState } from '@fluentui-react-native/interactive-hooks/lib/usePressableState.types';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const input = 'Input';
 
-export interface InputTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens {
+export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens {
   /**
    * The icon color.
    */
@@ -41,6 +43,36 @@ export interface InputTokens extends LayoutTokens, IBorderTokens, IColorTokens, 
    * The font style of the input box.
    */
   inputTextFont?: FontTokens;
+
+  /**
+   * The color of the input text.
+   */
+  inputTextColor?: ColorValue;
+
+  /**
+   * The font style of the secondary text.
+   */
+  secondaryTextFont?: FontTokens;
+
+  /**
+   * The color of the secondary text.
+   */
+  secondaryTextColor?: ColorValue;
+
+  /**
+   * The width of the divider.
+   */
+  strokeWidth?: FontTokens;
+
+  /**
+   * The color of the divider.
+   */
+  strokeColor?: ColorValue;
+
+  /**
+   * The color of the cursor.
+   */
+  cursorColor?: ColorValue;
 
   /**
    * The space between the icon and the rest of the content.
@@ -83,15 +115,37 @@ export interface InputTokens extends LayoutTokens, IBorderTokens, IColorTokens, 
   spacingLabelTop?: number;
 }
 
-export interface InputProps {
+export interface InputTokens extends InputCoreTokens {
+  /**
+   * States that can be applied to a button.
+   */
+  hasIcon?: InputTokens;
+  error?: InputTokens;
+  focused?: InputTokens;
+}
+
+export interface InputProps extends PressableFocusProps {
   /*
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
+  dismissIcon?: IconSourcesType;
   label?: string;
   assistiveText?: string;
   secondaryText?: string;
   placeholder?: string;
+  textInputProps?: TextInputProps;
+  error?: string;
+
+  value?: string;
+  defaultValue?: string;
+  type?: KeyboardTypeOptions | undefined;
+  onChange?: (text: string) => void;
+}
+
+export interface InputInfo {
+  props: InputProps & React.ComponentPropsWithRef<any>;
+  state: FocusState;
 }
 
 export interface InputSlotProps {

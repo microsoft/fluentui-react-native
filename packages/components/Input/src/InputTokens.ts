@@ -5,17 +5,12 @@ import type { InputTokens } from './Input.types';
 
 export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) =>
   ({
-    backgroundColor: t.colors.ghostBackground,
-    color: t.colors.brandBackground,
-    borderColor: t.colors.brandBackground,
-    iconColor: 'black',
     iconSize: 24,
-    dismissIconColor: 'black',
-    dismissIconSize: 24,
-    variant: 'caption2',
-    assistiveTextColor: 'red',
-    assistiveTextFont: 'caption2',
-    inputTextFont: 'body1',
+    hasIcon: {
+      //spacingIconContent + iconSize
+      spacingAssistiveTextStart: 16 + 24,
+      spacingLabelStart: 16 + 24,
+    },
     spacingIconContent: 16,
     paddingHorizontal: 16,
     spacingInputVertical: 12,
@@ -23,6 +18,45 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
     spacingLabelTop: 12,
     spacingInputSecondary: 8,
     spacingDismissIconStart: 8,
-    spacingAssistiveTextStart: 16 + 24,
-    spacingLabelStart: 16 + 24,
+    spacingAssistiveTextStart: 0,
+    spacingLabelStart: 0,
+    dismissIconSize: 24,
+    strokeWidth: 0.5, // change to tokens
+
+    backgroundColor: t.colors.neutralBackground1,
+    strokeColor: t.colors.neutralStroke1,
+    iconColor: t.colors.neutralForeground2,
+    dismissIconColor: t.colors.neutralForeground2,
+    variant: 'caption2', // label font
+    color: t.colors.neutralForeground2, //label color
+    assistiveTextColor: t.colors.neutralForeground2,
+    assistiveTextFont: 'caption2',
+    inputTextFont: 'body1',
+    inputTextColor: t.colors.neutralForeground2,
+    secondaryTextFont: 'body1',
+    secondaryTextColor: t.colors.neutralForeground2,
+
+    error: {
+      backgroundColor: t.colors.neutralBackground1,
+      strokeColor: t.colors.dangerForeground1,
+      iconColor: t.colors.neutralForeground2,
+      dismissIconColor: t.colors.neutralForeground2,
+      color: t.colors.dangerForeground1,
+      assistiveTextColor: t.colors.dangerForeground1,
+      inputTextColor: t.colors.neutralForeground1,
+      secondaryTextColor: t.colors.neutralForeground2,
+      cursorColor: t.colors.neutralForeground3,
+    },
+
+    focused: {
+      backgroundColor: t.colors.neutralBackground1,
+      strokeColor: t.colors.brandStroke1,
+      iconColor: t.colors.brandForeground1,
+      dismissIconColor: t.colors.neutralForeground2,
+      color: t.colors.brandForeground1,
+      assistiveTextColor: t.colors.neutralForeground2,
+      inputTextColor: t.colors.neutralForeground2,
+      secondaryTextColor: t.colors.neutralForeground2,
+      cursorColor: t.colors.neutralForeground3,
+    },
   } as InputTokens);

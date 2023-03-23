@@ -1,10 +1,12 @@
 /** @jsx withSlots */
+import { Fragment } from 'react';
 import { TextInput, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import type { IconSourcesType, SvgIconProps } from '@fluentui-react-native/icon';
+import { createIconProps } from '@fluentui-react-native/icon';
 import { Icon } from '@fluentui-react-native/icon';
+import type { IFocusState } from '@fluentui-react-native/interactive-hooks';
 import { Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './Input.styling';
@@ -19,15 +21,9 @@ import { useInput } from './useInput';
  * @param userProps The props that were passed into the input
  * @returns Whether the styles that are assigned to the layer should be applied to the input
  */
-export const inputLookup = (layer: string, userProps: InputProps): boolean => {
-  return userProps[layer];
+export const inputLookup = (layer: string, state: IFocusState, userProps: InputProps): boolean => {
+  return state[layer] || userProps[layer] || (layer === 'hasIcon' && userProps.icon) || (layer === 'error' && !!userProps.error);
 };
-
-const svgUriProps: SvgIconProps = {
-  uri: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg',
-  viewBox: '0 0 1000 1000',
-};
-const iconProps: IconSourcesType = { svgSource: { ...svgUriProps }, color: 'red' };
 
 export const Input = compose<InputType>({
   displayName: input,
@@ -44,24 +40,30 @@ export const Input = compose<InputType>({
     secondaryText: Text,
   },
   useRender: (userProps: InputProps, useSlots: UseSlots<InputType>) => {
-    const inputProps = useInput(userProps);
-    const Slots = useSlots(userProps, (layer) => inputLookup(layer, userProps));
+    const input = useInput(userProps);
+    const iconProps = createIconProps(userProps.icon);
+    const dismissIconProps = createIconProps(userProps.dismissIcon);
+    const Slots = useSlots(userProps, (layer) => inputLookup(layer, input.state, userProps));
 
     return (final: InputProps) => {
-      const { label, secondaryText, assistiveText, ...mergedProps } = mergeProps(inputProps, final);
+      const { label, secondaryText, placeholder, assistiveText, icon, dismissIcon, textInputProps, error, ...mergedProps } = mergeProps(
+        input.props,
+        final,
+      );
+      const IconWrapper = icon ? Slots.inputWrapper : Fragment;
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.label>{label}</Slots.label>
-          <Slots.inputWrapper>
-            <Slots.icon {...iconProps} />
+          {label && <Slots.label>{label}</Slots.label>}
+          <IconWrapper>
+            {icon && <Slots.icon {...iconProps} />}
             <Slots.input>
-              <Slots.textInput placeholder="Input Text" multiline={true} />
-              <Slots.secondaryText>{secondaryText}</Slots.secondaryText>
-              <Slots.dismissIcon {...iconProps} />
+              <Slots.textInput placeholder={placeholder} {...textInputProps} />
+              {secondaryText && <Slots.secondaryText>{secondaryText}</Slots.secondaryText>}
+              {dismissIcon && <Slots.dismissIcon {...dismissIconProps} />}
             </Slots.input>
-          </Slots.inputWrapper>
-          <Slots.assistiveText>{assistiveText}</Slots.assistiveText>
+          </IconWrapper>
+          {assistiveText && <Slots.assistiveText>{error ? error : assistiveText}</Slots.assistiveText>}
         </Slots.root>
       );
     };

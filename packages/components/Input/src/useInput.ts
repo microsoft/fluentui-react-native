@@ -1,11 +1,9 @@
-import type { InputProps } from './Input.types';
+import { usePressableState } from '@fluentui-react-native/interactive-hooks';
 
-export const useInput = (props: InputProps): InputProps => {
-  const { label: text = 'Default text', ...rest } = props;
-  // write your code here
+import type { InputProps, InputInfo } from './Input.types';
 
-  return {
-    label: text,
-    ...rest,
-  };
+export const useInput = (props: InputProps): InputInfo => {
+  const { label, secondaryText, assistiveText, onBlur, onFocus, ...rest } = props;
+  const pressable = usePressableState({ onBlur, onFocus });
+  return { props: { ...pressable.props, label, secondaryText, assistiveText, ...rest }, state: pressable.state };
 };

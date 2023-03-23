@@ -7,8 +7,11 @@ import { input } from './Input.types';
 import type { InputTokens, InputSlotProps, InputProps } from './Input.types';
 import { defaultInputTokens } from './InputTokens';
 
+export const inputStates: (keyof InputTokens)[] = ['hasIcon', 'error', 'focused'];
+
 export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, InputTokens> = {
   tokens: [defaultInputTokens, input],
+  states: inputStates,
   slotProps: {
     root: buildProps(
       (tokens: InputTokens, theme: Theme) => ({
@@ -43,31 +46,36 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          marginVertical: tokens.spacingInputVertical,
+          paddingVertical: tokens.spacingInputVertical,
+          borderBottomColor: tokens.strokeColor,
+          borderBottomWidth: tokens.strokeWidth,
         },
       }),
-      ['spacingInputVertical'],
+      ['strokeColor', 'strokeWidth', 'spacingInputVertical'],
     ),
     textInput: buildProps(
       (tokens: InputTokens, theme: Theme) => ({
+        selectionColor: tokens.cursorColor,
         style: {
           ...fontStyles.from(tokens.inputTextFont, theme),
           ...getTextMarginAdjustment(),
           padding: 0, // Required to override default padding
           margin: 0, // Required to override default margin
+          color: tokens.inputTextColor,
         },
       }),
-      ['inputTextFont', ...fontStyles.keys],
+      ['cursorColor', 'inputTextColor', 'inputTextFont', ...fontStyles.keys],
     ),
     secondaryText: buildProps(
       (tokens: InputTokens, theme: Theme) => ({
         style: {
-          ...fontStyles.from(tokens.inputTextFont, theme),
+          ...fontStyles.from(tokens.secondaryTextFont, theme),
           ...getTextMarginAdjustment(),
           marginStart: tokens.spacingInputSecondary,
+          color: tokens.secondaryTextColor,
         },
       }),
-      ['inputTextFont', 'spacingInputSecondary', ...fontStyles.keys],
+      ['secondaryTextFont', 'spacingInputSecondary', 'secondaryTextColor', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: InputTokens) => ({
@@ -112,7 +120,7 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
             ...fontStyles.from(tokens.assistiveTextFont, theme),
             ...getTextMarginAdjustment(),
             color: tokens.assistiveTextColor,
-            marginVertical: tokens.spacingAssistiveTextVertical,
+            paddingVertical: tokens.spacingAssistiveTextVertical,
             marginStart: tokens.spacingAssistiveTextStart,
           },
         };
