@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 23 Mar 2023 18:29:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.136.3",
+      "version": "0.136.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7805c3f32b8f6626b1c97bc2fa7f268dc0c3ebfc",
+            "comment": "Move divider package from experimental to components"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 13:35:57 GMT",
       "tag": "@fluentui-react-native/tester_v0.136.2",
       "version": "0.136.2",

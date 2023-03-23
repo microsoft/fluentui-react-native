@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Move divider package from experimental to components",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

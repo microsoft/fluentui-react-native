@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Move divider package from experimental to components",
-  "packageName": "@fluentui-react-native/divider",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "none"
-}

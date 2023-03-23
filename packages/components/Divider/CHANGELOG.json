@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/divider",
   "entries": [
     {
+      "date": "Thu, 23 Mar 2023 18:29:45 GMT",
+      "tag": "@fluentui-react-native/divider_v0.3.13",
+      "version": "0.3.13",
+      "comments": {
+        "none": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/divider",
+            "commit": "7805c3f32b8f6626b1c97bc2fa7f268dc0c3ebfc",
+            "comment": "Move divider package from experimental to components"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:46 GMT",
       "tag": "@fluentui-react-native/divider_v0.3.13",
       "version": "0.3.13",

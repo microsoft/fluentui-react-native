@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.136.2"
+      "version": "0.136.3"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.32.57"
+      "version": "0.32.58"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -37,6 +37,10 @@ module.exports = {
     "@fluentui-react-native/contextual-menu": {
       "name": "@fluentui-react-native/contextual-menu",
       "version": "0.21.39"
+    },
+    "@fluentui-react-native/divider": {
+      "name": "@fluentui-react-native/divider",
+      "version": "0.3.13"
     },
     "@fluentui-react-native/focus-trap-zone": {
       "name": "@fluentui-react-native/focus-trap-zone",
@@ -153,10 +157,6 @@ module.exports = {
     "@fluentui-react-native/experimental-checkbox": {
       "name": "@fluentui-react-native/experimental-checkbox",
       "version": "0.13.48"
-    },
-    "@fluentui-react-native/divider": {
-      "name": "@fluentui-react-native/divider",
-      "version": "0.3.13"
     },
     "@fluentui-react-native/experimental-drawer": {
       "name": "@fluentui-react-native/experimental-drawer",
