@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 21 Mar 2023 21:53:45 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Mar 2023 13:35:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.136.2
+
+Thu, 23 Mar 2023 13:35:57 GMT
+
+### Patches
+
+- Add test to catch render error for custom menutrigger (krsiler@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.4.31
+
+## 0.136.1
+
+Thu, 23 Mar 2023 06:05:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.4.30
+
+## 0.136.0
+
+Wed, 22 Mar 2023 18:48:13 GMT
+
+### Minor changes
+
+- Update switch spec link (winlarry@microsoft.com)
+- Bump @fluentui/react-native to v0.36.19
 
 ## 0.135.3
 

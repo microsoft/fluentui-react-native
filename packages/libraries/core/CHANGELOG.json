@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 22 Mar 2023 18:48:13 GMT",
+      "tag": "@fluentui/react-native_v0.36.19",
+      "version": "0.36.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui/react-native",
+            "commit": "d591cbb8748de53916524020fb2034879adb2030",
+            "comment": "Move switch package from experimental to components folder"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:45 GMT",
       "tag": "@fluentui/react-native_v0.36.18",
       "version": "0.36.18",

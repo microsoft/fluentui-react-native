@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.135.3"
+      "version": "0.136.2"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.32.54"
+      "version": "0.32.57"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -56,7 +56,7 @@ module.exports = {
     },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
-      "version": "1.4.29"
+      "version": "1.4.31"
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
@@ -89,6 +89,10 @@ module.exports = {
     "@fluentui-react-native/stack": {
       "name": "@fluentui-react-native/stack",
       "version": "0.7.61"
+    },
+    "@fluentui-react-native/switch": {
+      "name": "@fluentui-react-native/switch",
+      "version": "0.8.37"
     },
     "@fluentui-react-native/tabs": {
       "name": "@fluentui-react-native/tabs",
@@ -202,10 +206,6 @@ module.exports = {
       "name": "@fluentui-react-native/spinner",
       "version": "0.2.11"
     },
-    "@fluentui-react-native/switch": {
-      "name": "@fluentui-react-native/switch",
-      "version": "0.8.37"
-    },
     "@fluentui-react-native/experimental-tabs": {
       "name": "@fluentui-react-native/experimental-tabs",
       "version": "0.8.44"
@@ -264,7 +264,7 @@ module.exports = {
     },
     "@fluentui/react-native": {
       "name": "@fluentui/react-native",
-      "version": "0.36.18"
+      "version": "0.36.19"
     },
     "@fluentui-react-native/android-theme": {
       "name": "@fluentui-react-native/android-theme",
