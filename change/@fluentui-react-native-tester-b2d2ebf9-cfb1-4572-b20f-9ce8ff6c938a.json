@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add test to catch render error for custom menutrigger",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
