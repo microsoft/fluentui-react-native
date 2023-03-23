@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Thu, 23 Mar 2023 06:05:12 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.30",
+      "version": "1.4.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "6821628b9c22887c01da2224c8c76558158a8939",
+            "comment": "Update Menu documentation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:47 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.29",
       "version": "1.4.29",
