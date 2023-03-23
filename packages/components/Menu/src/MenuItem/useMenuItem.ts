@@ -104,7 +104,11 @@ export const useHoverFocusEffect = (hovered: boolean, componentRef: React.Mutabl
     if (hovered) {
       componentRef?.current?.focus();
     } else {
-      //componentRef?.current?.blur();
+      // Since MenuList uses FocusZone on macOS, we need to handle the .blur() logic there in order to
+      // get keyboard navigation to work properly.
+      if (Platform.OS != 'macos') {
+        componentRef?.current?.blur();
+      }
     }
   }, [hovered, componentRef]);
 };
