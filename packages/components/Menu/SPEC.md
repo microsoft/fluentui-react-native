@@ -219,6 +219,11 @@ export type MenuListProps = {
   defaultChecked?: string[];
 
   /**
+   * States that menu items can contain icons and reserves space for item alignment
+   */
+  hasIcons?: boolean;
+
+  /**
    * States that menu items can contain selectable items and reserves space for item alignment
    */
   hasCheckmarks?: boolean;
@@ -249,6 +254,11 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * Space between items in pixels
    */
   gap?: number;
+
+  /**
+   * States of the list control
+   */
+  hasMaxHeight?: MenuListTokens;
 }
 ```
 
@@ -270,6 +280,11 @@ export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+
+  /*
+   * Source URL or name of the icon to show on the Button.
+   */
+  icon?: IconProps | ImageProps;
 
   /**
    * A callback to call on button click event
@@ -296,6 +311,16 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
    * Space between parts of the item control in pixels
    */
   gap?: number;
+
+  /**
+   * Color of the icon
+   */
+  iconColor?: ColorValue;
+
+  /**
+   * Size of the icon. Pixels for SVG and points for font icon.
+   */
+  iconSize?: number;
 
   /**
    * Color of the indicator that shows that an item has a submenu
@@ -327,6 +352,9 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
 - `root` - The outer container representing the `MenuItem` itself that wraps everything passed via the `children` prop.
 - `content` - If specified, renders the `content` prop as text.
 - `checkmark` - If specified, renders space such that the `content` aligns with other items which have checkmarks. Only used when the `Menu` has `hasCheckmarks`.
+- `iconPlaceholder` - If specified, renders space for an icon before the content. Could be blank or contain an icon. Used when the `Menu` has `hasIcons`.
+- `imgIcon` - If specified, renders an `Image` as an icon.
+- `fontOrSvgIcon` - If specified, renders an `Icon` which supports font or SVG icons.
 - `submenuIndicator` - If specified, renders an SVG which indicates that the `MenuItem` is a trigger for a nested `Menu`.
 
 ### MenuItemCheckbox/Radio
@@ -341,6 +369,11 @@ export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewPr
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+
+  /*
+   * Source URL or name of the icon to show on the Button.
+   */
+  icon?: IconProps | ImageProps;
 
   /**
    * Identifier for the control
@@ -384,6 +417,16 @@ export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorde
   gap?: number;
 
   /**
+   * Color of the icon
+   */
+  iconColor?: ColorValue;
+
+  /**
+   * Size of the icon. Pixels for SVG and points for font icon.
+   */
+  iconSize?: number;
+
+  /**
    * States of the item control
    */
   checked?: MenuItemCheckboxTokens;
@@ -399,6 +442,9 @@ export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorde
 - `root` - The outer container representing the `MenuItem` itself that wraps everything passed via the `children` prop.
 - `content` - If specified, renders the `content` prop as text.
 - `checkmark` - If specified, renders an SVG which indicates that the `MenuItem` is selected.
+- `iconPlaceholder` - If specified, renders space for an icon before the content. Could be blank or contain an icon. Used when the `Menu` has `hasIcons`.
+- `imgIcon` - If specified, renders an `Image` as an icon.
+- `fontOrSvgIcon` - If specified, renders an `Icon` which supports font or SVG icons.
 
 ## Behaviors
 
