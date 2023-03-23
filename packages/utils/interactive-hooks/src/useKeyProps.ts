@@ -5,7 +5,7 @@ import { memoize } from '@fluentui-react-native/memo-cache';
 
 import type { KeyCallback, KeyPressEvent, KeyPressProps } from './useKeyProps.types';
 
-const shouldExcludeAllModifierKeys = Platform.OS === 'macos';
+const shouldAllowShiftCtrlKeys = Platform.OS === ('win32' as any);
 
 /**
  * Verifies if nativeEvent contains modifier key. The modifier keys that should
@@ -14,7 +14,9 @@ const shouldExcludeAllModifierKeys = Platform.OS === 'macos';
  * @returns `true` if one or more of modifier keys are `true`
  */
 const isModifierKey = (nativeEvent: any): boolean => {
-  if (shouldExcludeAllModifierKeys) {
+  if (shouldAllowShiftCtrlKeys) {
+    return nativeEvent && (nativeEvent.alt || nativeEvent.altKey || nativeEvent.meta || nativeEvent.metaKey);
+  } else {
     return (
       nativeEvent &&
       (nativeEvent.alt ||
@@ -26,8 +28,6 @@ const isModifierKey = (nativeEvent: any): boolean => {
         nativeEvent.shift ||
         nativeEvent.shiftKey)
     );
-  } else {
-    return nativeEvent && (nativeEvent.alt || nativeEvent.altKey || nativeEvent.meta || nativeEvent.metaKey);
   }
 };
 

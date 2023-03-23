@@ -32,14 +32,14 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   } = props;
 
   const isDisabled = !!disabled || !!loading;
-  const [isKeyPressed, setIsKeyPressed] = React.useState<boolean>(false);
+  const [isProcessingKeyboardInvocation, setIsProcessingKeyboardInvocation] = React.useState<boolean>(false);
 
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
   const onClickWithFocus = useOnPressWithFocus(focusRef, onClick);
   const onBlurInner = React.useCallback(
     (e) => {
-      setIsKeyPressed(false);
+      setIsProcessingKeyboardInvocation(false);
       onBlur?.(e);
     },
     [onBlur],
@@ -48,8 +48,8 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
 
   const onKeyDownInner = React.useCallback(
     (e) => {
-      if ((!disabled && e.nativeEvent.key === 'Enter') || e.nativeEvent.key === ' ') {
-        setIsKeyPressed(true);
+      if (!disabled && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
+        setIsProcessingKeyboardInvocation(true);
       }
       onKeyDown?.(e);
     },
@@ -57,12 +57,12 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   );
   const onKeyPress = React.useCallback(
     (e) => {
-      if (isKeyPressed) {
+      if (isProcessingKeyboardInvocation) {
         onClick?.(e);
-        setIsKeyPressed(false);
+        setIsProcessingKeyboardInvocation(false);
       }
     },
-    [isKeyPressed, onClick],
+    [isProcessingKeyboardInvocation, onClick],
   );
   const onKeyProps = useKeyProps(shouldOnlyFireIfPressed ? onKeyPress : onClick, ' ', 'Enter');
 
@@ -108,7 +108,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     },
     state: {
       ...pressable.state,
-      pressed: pressable.state.pressed || isKeyPressed,
+      pressed: pressable.state.pressed || isProcessingKeyboardInvocation,
       measuredWidth: baseWidth,
       measuredHeight: baseHeight,
       shouldUseTwoToneFocusBorder: shouldUseTwoToneFocusBorder,
