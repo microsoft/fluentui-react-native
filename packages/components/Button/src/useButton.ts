@@ -14,6 +14,7 @@ import type { ButtonProps, ButtonInfo } from './Button.types';
 // and then releasing Enter, or the Menu reopening since it closes
 // onKeyDown while the Button operates onKeyUp.
 const shouldOnlyFireIfPressed = Platform.OS === ('win32' as any);
+let isProcessingKeyboardInvocation = false;
 
 export const useButton = (props: ButtonProps): ButtonInfo => {
   const defaultComponentRef = React.useRef(null);
@@ -31,14 +32,13 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   } = props;
 
   const isDisabled = !!disabled || !!loading;
-  const [isProcessingKeyboardInvocation, setIsProcessingKeyboardInvocation] = React.useState<boolean>(false);
 
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
   const onClickWithFocus = useOnPressWithFocus(focusRef, onClick);
   const onBlurInner = React.useCallback(
     (e) => {
-      setIsProcessingKeyboardInvocation(false);
+      isProcessingKeyboardInvocation = false;
       onBlur?.(e);
     },
     [onBlur],
@@ -48,7 +48,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   const onKeyDown = React.useCallback(
     (e) => {
       if (!disabled && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
-        setIsProcessingKeyboardInvocation(true);
+        isProcessingKeyboardInvocation = true;
       }
     },
     [disabled],
@@ -57,10 +57,10 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     (e) => {
       if (isProcessingKeyboardInvocation) {
         onClick?.(e);
-        setIsProcessingKeyboardInvocation(false);
+        isProcessingKeyboardInvocation = false;
       }
     },
-    [isProcessingKeyboardInvocation, onClick],
+    [onClick],
   );
   const onKeyProps = useKeyProps(shouldOnlyFireIfPressed ? onKeyPress : onClick, ' ', 'Enter');
 
@@ -106,7 +106,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     },
     state: {
       ...pressable.state,
-      pressed: pressable.state.pressed || isProcessingKeyboardInvocation,
+      pressed: pressable.state.pressed,
       measuredWidth: baseWidth,
       measuredHeight: baseHeight,
       shouldUseTwoToneFocusBorder: shouldUseTwoToneFocusBorder,
