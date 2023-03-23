@@ -104,7 +104,7 @@ export const useHoverFocusEffect = (hovered: boolean, componentRef: React.Mutabl
     if (hovered) {
       componentRef?.current?.focus();
     } else {
-      componentRef?.current?.blur();
+      //componentRef?.current?.blur();
     }
   }, [hovered, componentRef]);
 };
