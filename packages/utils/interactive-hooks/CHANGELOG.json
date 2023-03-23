@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Thu, 23 Mar 2023 20:49:23 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.28",
+      "version": "0.22.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "58c71da6843a333d3b6faca82a851916205a4fd0",
+            "comment": "Change modifier key handling"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:47 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.22.27",
       "version": "0.22.27",
