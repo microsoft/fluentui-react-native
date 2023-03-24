@@ -102,14 +102,35 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       }),
       ['color', ...fontStyles.keys],
     ),
-    onOffText: buildProps(
+    onOffTextContainer: buildProps(
+      () => ({
+        style: {
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+        },
+      }),
+      [],
+    ),
+    onText: buildProps(
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
+          height: tokens.onTextHeight,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['color', 'onTextHeight', ...fontStyles.keys],
+    ),
+    offText: buildProps(
+      (tokens: SwitchTokens, theme: Theme) => ({
+        style: {
+          color: tokens.color,
+          height: tokens.offTextHeight,
+          ...fontStyles.from(tokens, theme),
+        },
+      }),
+      ['color', 'offTextHeight', ...fontStyles.keys],
     ),
   },
 };

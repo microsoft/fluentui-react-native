@@ -44,7 +44,9 @@ export const Switch = compose<SwitchType>({
     track: Animated.View, // Conversion from View to Animated.View for Animated API to work
     thumb: Animated.View,
     toggleContainer: View,
-    onOffText: Text,
+    onOffTextContainer: View,
+    onText: Text,
+    offText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
     const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true, disabled: userProps.disabled }, {}));
@@ -68,7 +70,6 @@ export const Switch = compose<SwitchType>({
     // now return the handler for finishing render
     return (final: SwitchProps) => {
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
-      const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
@@ -80,7 +81,12 @@ export const Switch = compose<SwitchType>({
             <Slots.track {...(isMobile && { style: switchInfo.props.switchAnimationStyles.trackBackgroundStyle })}>
               <Slots.thumb {...thumbAnimation} {...(isMobile && { style: switchInfo.props.switchAnimationStyles.thumbAnimatedStyle })} />
             </Slots.track>
-            {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
+            {displayOnOffText && (
+              <Slots.onOffTextContainer>
+                <Slots.onText>{onText}</Slots.onText>
+                <Slots.offText>{offText}</Slots.offText>
+              </Slots.onOffTextContainer>
+            )}
           </Slots.toggleContainer>
         </Slots.root>
       );

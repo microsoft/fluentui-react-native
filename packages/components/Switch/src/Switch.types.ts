@@ -109,6 +109,9 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    */
   toggleContainerFlexDirection?: ViewStyle['flexDirection'];
 
+  onTextHeight?: number;
+  offTextHeight?: number;
+
   /**
    * States that can be applied to a switch
    * Note: 'hovered','focused','before','beforeContent','above' are not supported for Android
@@ -202,7 +205,9 @@ export interface SwitchSlotProps {
   track: IViewProps;
   thumb: IViewProps;
   toggleContainer: IViewProps;
-  onOffText: TextProps;
+  onOffTextContainer: IViewProps;
+  onText: TextProps;
+  offText: TextProps;
 }
 
 export interface SwitchType {
