@@ -21,7 +21,14 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
    */
   gap?: number;
 
+  /**
+   * Color of the icon
+   */
   iconColor?: ColorValue;
+
+  /**
+   * Size of the icon. Pixels for SVG and points for font icon.
+   */
   iconSize?: number;
 
   /**
@@ -76,7 +83,14 @@ export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
 }
 
 export interface MenuItemState extends PressableState {
+  /**
+   * Whether Menu has other items that are checkbox or radio.
+   */
   hasCheckmarks?: boolean;
+
+  /**
+   * Whether Menu has items with icons.
+   */
   hasIcons?: boolean;
 
   /**

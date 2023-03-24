@@ -24,7 +24,7 @@ yarn bundle
 yarn run-win32
 ```
 
-5. You will see FluentUI Tester show up in a new window.
+5. You will see the FluentUI Tester show up in a new window.
 
 ![ReactTest image debug menu location](./../../assets/fluent_tester_radiogroup.png)
 
