@@ -308,39 +308,6 @@ const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
   );
 };
 
-const CustomMenuTrigger: React.FunctionComponent = () => {
-  return (
-    <View style={{ borderColor: 'purple', borderWidth: 3 }}>
-      <MenuTrigger>
-        <Button>Test</Button>
-      </MenuTrigger>
-    </View>
-  );
-};
-
-const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
-  return (
-    <Stack style={stackStyle}>
-      <Menu>
-        <CustomMenuTrigger />
-        <MenuPopover>
-          <MenuList>
-            <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItem disabled>A disabled MenuItem</MenuItem>
-            <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
-            <MenuDivider />
-            <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />
-            <MenuItem disabled accessibilitySetSize={2}>
-              A disabled MenuItem
-            </MenuItem>
-            <MenuItem>A plain MenuItem</MenuItem>
-          </MenuList>
-        </MenuPopover>
-      </Menu>
-    </Stack>
-  );
-};
-
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',

@@ -1,6 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
-import { Animated, Modal, TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
 import { stagedComponent } from '@fluentui-react-native/framework';
 
@@ -9,8 +8,6 @@ import { menuName } from './Menu.types';
 import { useMenu } from './useMenu';
 import { useMenuContextValue } from './useMenuContextValue';
 import { MenuProvider } from '../context/menuContext';
-
-const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
 export const Menu = stagedComponent((props: MenuProps) => {
   const state = useMenu(props);
@@ -38,43 +35,12 @@ export const Menu = stagedComponent((props: MenuProps) => {
           {menuTrigger}
         </View>
         <View ref={state._container} collapsable={false} testID={state.testID}>
-          <Modal
-            visible={state.open}
-            onRequestClose={state.onRequestClose}
-            supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
-            transparent
-          >
-            <TouchableWithoutFeedback onPress={state.onRequestClose} accessible={false}>
-              <View style={StyleSheet.absoluteFill}>
-                <Animated.View onLayout={state.onMenuLayout} style={[styles.shadowMenuContainer, state.shadowMenuContainerStyle]}>
-                  {state.menuHeight > 250 ? (
-                    <AnimatedScrollView style={[styles.menuContainer, state.animationStarted && state.menuSize]}>
-                      {menuPopover}
-                    </AnimatedScrollView>
-                  ) : (
-                    <Animated.View style={[styles.menuContainer, state.animationStarted && state.menuSize]}>{menuPopover}</Animated.View>
-                  )}
-                </Animated.View>
-              </View>
-            </TouchableWithoutFeedback>
-          </Modal>
+          {state.open && menuPopover}
         </View>
       </MenuProvider>
     );
   };
 });
-const styles = StyleSheet.create({
-  shadowMenuContainer: {
-    position: 'absolute',
-    borderRadius: 8,
-    maxHeight: 400,
 
-    // Shadow
-    elevation: 16,
-  },
-  menuContainer: {
-    overflow: 'hidden',
-  },
-});
 Menu.displayName = menuName;
 export default Menu;
