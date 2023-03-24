@@ -189,39 +189,6 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return NO;
 }
 
--(id)init
-{
-	self = [super init];
-	if (self != nil)
-	{
-		trackingArea = [[NSTrackingArea alloc] initWithRect:self.bounds options:NSTrackingActiveInActiveApp | NSTrackingMouseEnteredAndExited owner:self userInfo:nil];
-		[self addTrackingArea:trackingArea];
-	}
-	return self;
-}
-
--(void)updateTrackingAreas
-{
-	[super updateTrackingAreas];
-	if (trackingArea != nil)
-	{
-		[self removeTrackingArea:trackingArea];
-	}
-
-	trackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds] options:NSTrackingActiveInActiveApp | NSTrackingMouseEnteredAndExited owner:self userInfo:nil];
-	[self addTrackingArea:trackingArea];
-}
-
-- (void)mouseExited:(NSEvent *)event
-{
-	[super mouseExited:event];
-	NSView *viewWithFocus = GetFirstResponder([self window]);
-	if (viewWithFocus != nil)
-	{
-		[viewWithFocus resignFirstResponder];
-	}
-}
-
 /// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
 - (BOOL)acceptsFirstResponder
 {

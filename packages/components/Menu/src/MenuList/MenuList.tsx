@@ -83,7 +83,7 @@ export const MenuList = compose<MenuListType>({
 
       const content =
         Platform.OS === 'macos' ? (
-          <Slots.root>
+          <Slots.root onMouseLeave={() => focusZoneRef.current.focus()}>
             <Slots.scrollView
               accessibilityRole="menu"
               showsVerticalScrollIndicator={menuContext.hasMaxHeight}
