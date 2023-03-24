@@ -331,6 +331,7 @@ const CustomSvgInputTest: React.FunctionComponent = () => {
 const svgSections: TestSection[] = [
   {
     name: 'Fancy Svg',
+    testID: SVG_TESTPAGE,
     component: FancySvgTest,
   },
   {
@@ -339,7 +340,6 @@ const svgSections: TestSection[] = [
   },
   {
     name: 'Rect',
-    testID: SVG_TESTPAGE,
     component: RectTest,
   },
   {
