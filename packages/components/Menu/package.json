@@ -33,6 +33,7 @@
     "@fluentui-react-native/icon": "^0.17.22",
     "@fluentui-react-native/interactive-hooks": ">=0.22.26 <1.0.0",
     "@fluentui-react-native/text": ">=0.19.28 <1.0.0",
+    "@fluentui-react-native/divider": "^0.3.12",
     "@fluentui-react-native/theme-tokens": ">=0.24.5 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.20.13 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.4 <1.0.0",
