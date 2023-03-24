@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Mar 2023 15:52:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.33
+
+Fri, 24 Mar 2023 15:52:40 GMT
+
+### Patches
+
+- Fix for keyboard focus is lost when hovering out of a menu (email not defined)
 
 ## 1.4.32
 

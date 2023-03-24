@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 24 Mar 2023 15:52:40 GMT",
+      "tag": "@fluentui-react-native/menu_v1.4.33",
+      "version": "1.4.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "245ddf4ec0020cd5413542be9b884010fff41e86",
+            "comment": "Fix for keyboard focus is lost when hovering out of a menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/menu_v1.4.32",
       "version": "1.4.32",
