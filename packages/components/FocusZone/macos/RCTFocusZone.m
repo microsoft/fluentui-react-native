@@ -19,9 +19,6 @@ typedef BOOL (^IsViewLeadingCandidateForNextFocus)(NSView *candidateView);
 static const CGFloat FocusZoneBuffer = 3;
 
 @implementation RCTFocusZone
-{
-	NSTrackingArea *trackingArea;
-}
 
 static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
 {
