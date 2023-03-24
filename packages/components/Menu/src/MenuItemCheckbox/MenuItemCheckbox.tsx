@@ -66,11 +66,11 @@ export const menuItemFinalRender = (
       <Slots.root {...mergedProps} accessibilityLabel={label}>
         {Platform.OS === 'android' ? (
           isRadio ? (
-            <Slots.radioButton>
+            <Slots.radioButton onPress={mergedProps.onPress} accessible={false} focusable={false}>
               <Slots.radioInnerCircle />
             </Slots.radioButton>
           ) : (
-            <Slots.checkbox accessible={false} focusable={false}>
+            <Slots.checkbox onPress={mergedProps.onPress} accessible={false} focusable={false}>
               <Slots.checkmark xml={androidCheckmarkPath} />
             </Slots.checkbox>
           )
