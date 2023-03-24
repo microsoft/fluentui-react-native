@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "On/off text renders with labelPosition=before",
+  "packageName": "@fluentui-react-native/switch",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
