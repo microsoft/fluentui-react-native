@@ -59,4 +59,27 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       secondaryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
     },
+
+    filled: {
+      backgroundColor: t.colors.neutralBackground1,
+      strokeColor: t.colors.neutralStroke1,
+      iconColor: t.colors.neutralForeground2,
+      dismissIconColor: t.colors.neutralForeground2,
+      color: t.colors.neutralForeground2,
+      assistiveTextColor: t.colors.neutralForeground2,
+      inputTextColor: t.colors.neutralForeground1,
+      secondaryTextColor: t.colors.neutralForeground2,
+    },
+
+    typing: {
+      backgroundColor: t.colors.neutralbackground1,
+      strokeColor: t.colors.brandStroke1,
+      iconColor: t.colors.brandForeground1,
+      dismissIconColor: t.colors.neutralForeground2,
+      color: t.colors.brandForeground1,
+      assistiveTextColor: t.colors.neutralForeground2,
+      inputTextColor: t.colors.neutralForeground1,
+      secondaryTextColor: t.colors.neutralForeground2,
+      cursorColor: t.colors.neutralForeground3,
+    },
   } as InputTokens);

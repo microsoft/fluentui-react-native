@@ -15,7 +15,7 @@ export const filledIconProps: IconProps = { svgSource: { src: FilledSvg, viewBox
 export const InputDefault: React.FunctionComponent = () => {
   return (
     <View>
-      <Input />
+      <Input value="Value prop passed!" />
       <Input placeholder="Enter text here!" />
       <Input placeholder="Enter text here!" dismissIcon={dismissIconProps} secondaryText="Secondary" />
       <Input dismissIcon={dismissIconProps} label="Label" assistiveText="Assistive Text" secondaryText="Secondary" />
@@ -27,7 +27,6 @@ export const InputDefault: React.FunctionComponent = () => {
         label="Label"
         assistiveText="Assistive Text"
         secondaryText="Secondary"
-        onFocus={() => console.log('Do this on focus')}
       />
       <Input
         icon={outlineIconProps}
@@ -36,6 +35,10 @@ export const InputDefault: React.FunctionComponent = () => {
         label="Label"
         assistiveText="Assistive Text"
         secondaryText="Secondary"
+        defaultValue="Default value!"
+        onChange={(text) => console.log('Text changed to: ' + text)}
+        onFocus={() => console.log('Do this on focus')}
+        onBlur={() => console.log('Do this on blur')}
       />
     </View>
   );

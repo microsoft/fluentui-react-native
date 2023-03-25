@@ -122,6 +122,8 @@ export interface InputTokens extends InputCoreTokens {
   hasIcon?: InputTokens;
   error?: InputTokens;
   focused?: InputTokens;
+  typing?: InputTokens;
+  filled?: InputTokens;
 }
 
 export interface InputProps extends PressableFocusProps {
@@ -145,7 +147,7 @@ export interface InputProps extends PressableFocusProps {
 
 export interface InputInfo {
   props: InputProps & React.ComponentPropsWithRef<any>;
-  state: FocusState;
+  state: FocusState & { text: string };
 }
 
 export interface InputSlotProps {

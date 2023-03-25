@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component tests Input default 1`] = `
+<View
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  setText={[Function]}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "borderBottomColor": "#d1d1d1",
+        "borderBottomWidth": 0.5,
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "paddingVertical": 12,
+      }
+    }
+  >
+    <TextInput
+      defaultValue=" "
+      onChangeText={[Function]}
+      style={
+        Object {
+          "color": "#242424",
+          "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
+          "marginTop": 0,
+          "padding": 0,
+        }
+      }
+    />
+  </View>
+</View>
+`;

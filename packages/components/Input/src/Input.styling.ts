@@ -7,7 +7,7 @@ import { input } from './Input.types';
 import type { InputTokens, InputSlotProps, InputProps } from './Input.types';
 import { defaultInputTokens } from './InputTokens';
 
-export const inputStates: (keyof InputTokens)[] = ['hasIcon', 'error', 'focused'];
+export const inputStates: (keyof InputTokens)[] = ['hasIcon', 'filled', 'focused', 'typing', 'error'];
 
 export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, InputTokens> = {
   tokens: [defaultInputTokens, input],

@@ -6,7 +6,7 @@ import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { createIconProps } from '@fluentui-react-native/icon';
 import { Icon } from '@fluentui-react-native/icon';
-import type { IFocusState } from '@fluentui-react-native/interactive-hooks';
+import type { FocusState } from '@fluentui-react-native/interactive-hooks/lib/usePressableState.types';
 import { Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './Input.styling';
@@ -21,8 +21,15 @@ import { useInput } from './useInput';
  * @param userProps The props that were passed into the input
  * @returns Whether the styles that are assigned to the layer should be applied to the input
  */
-export const inputLookup = (layer: string, state: IFocusState, userProps: InputProps): boolean => {
-  return state[layer] || userProps[layer] || (layer === 'hasIcon' && userProps.icon) || (layer === 'error' && !!userProps.error);
+export const inputLookup = (layer: string, state: FocusState & { text: string }, userProps: InputProps): boolean => {
+  return (
+    (layer === 'focused' && state.focused && !state.text) ||
+    (layer === 'filled' && !state.focused && !!state.text) ||
+    (layer === 'typing' && state.focused && !!state.text) ||
+    userProps[layer] ||
+    (layer === 'hasIcon' && userProps.icon) ||
+    (layer === 'error' && !!userProps.error)
+  );
 };
 
 export const Input = compose<InputType>({
@@ -46,10 +53,20 @@ export const Input = compose<InputType>({
     const Slots = useSlots(userProps, (layer) => inputLookup(layer, input.state, userProps));
 
     return (final: InputProps) => {
-      const { label, secondaryText, placeholder, assistiveText, icon, dismissIcon, textInputProps, error, ...mergedProps } = mergeProps(
-        input.props,
-        final,
-      );
+      const {
+        label,
+        secondaryText,
+        placeholder,
+        assistiveText,
+        icon,
+        dismissIcon,
+        textInputProps,
+        error,
+        onChange,
+        defaultValue,
+        value,
+        ...mergedProps
+      } = mergeProps(input.props, final);
       const IconWrapper = icon ? Slots.inputWrapper : Fragment;
 
       return (
@@ -58,7 +75,17 @@ export const Input = compose<InputType>({
           <IconWrapper>
             {icon && <Slots.icon {...iconProps} />}
             <Slots.input>
-              <Slots.textInput placeholder={placeholder} {...textInputProps} />
+              <Slots.textInput
+                placeholder={placeholder}
+                defaultValue={defaultValue}
+                value={input.state.text}
+                {...(value && { value: value, editable: false })}
+                {...textInputProps}
+                onChangeText={(text) => {
+                  input.props.setText(text);
+                  onChange && onChange(text);
+                }}
+              />
               {secondaryText && <Slots.secondaryText>{secondaryText}</Slots.secondaryText>}
               {dismissIcon && <Slots.dismissIcon {...dismissIconProps} />}
             </Slots.input>
