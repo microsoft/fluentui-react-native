@@ -78,11 +78,10 @@ export const Input = compose<InputType>({
               <Slots.textInput
                 placeholder={placeholder}
                 defaultValue={defaultValue}
-                value={input.state.text}
-                {...(value && { value: value, editable: false })}
+                value={value ? value : input.state.text}
                 {...textInputProps}
                 onChangeText={(text) => {
-                  input.props.setText(text);
+                  !value && input.props.setText(text);
                   onChange && onChange(text);
                 }}
               />

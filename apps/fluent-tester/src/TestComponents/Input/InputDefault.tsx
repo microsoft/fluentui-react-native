@@ -18,7 +18,13 @@ export const InputDefault: React.FunctionComponent = () => {
       <Input value="Value prop passed!" />
       <Input placeholder="Enter text here!" />
       <Input placeholder="Enter text here!" dismissIcon={dismissIconProps} secondaryText="Secondary" />
-      <Input dismissIcon={dismissIconProps} label="Label" assistiveText="Assistive Text" secondaryText="Secondary" />
+      <Input
+        placeholder="Enter text here!"
+        dismissIcon={dismissIconProps}
+        label="Label"
+        assistiveText="Assistive Text"
+        secondaryText="Secondary"
+      />
       <Input
         error="Error occured!"
         icon={outlineIconProps}
