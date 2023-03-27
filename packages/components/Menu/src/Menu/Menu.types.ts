@@ -1,41 +1,49 @@
 import type React from 'react';
-import type { View } from 'react-native';
+import type { Animated, LayoutChangeEvent, View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { MenuListProps } from '../MenuList/MenuList.types';
+
 export const menuName = 'Menu';
+
 export interface MenuProps extends MenuListProps {
   /**
    * Whether the popup is open on mount
    */
   defaultOpen?: boolean;
+
   /**
    * How much delay to have between hover in and showing the menu, in ms.
    */
   hoverDelay?: number;
+
   /**
    * Whether the popup is open
    */
   open?: boolean;
+
   /**
    * Call back when the component requests to change value
    */
   onOpenChange?: (e: InteractionEvent, isOpen: boolean) => void;
+
   /*
    * Opens the menu on hovering over the trigger
    */
   openOnHover?: boolean;
+
   /**
    * Do not dismiss the menu when a menu item is clicked
    */
   persistOnItemClick?: boolean;
-  children?: React.ReactNode;
-  onRequestClose?(): void;
-  animationDuration?: number;
-  testID?: string;
-  visible?: boolean;
 }
+
+export type MenuSizeType = {
+  width: Animated.Value;
+  height: Animated.Value;
+};
+
 export interface MenuState extends MenuProps {
   isControlled: boolean;
   isSubmenu: boolean;
@@ -45,16 +53,21 @@ export interface MenuState extends MenuProps {
   triggerRef: React.RefObject<View>;
   hasMaxHeight?: boolean;
   hasMaxWidth?: boolean;
+  setAnchorHeight?: (value: null | number | ((prevState: null | number) => null | number)) => void;
+  setAnchorWidth?: (value: null | number | ((prevState: null | number) => null | number)) => void;
+  shadowMenuContainerStyle?: object;
+  _container?: React.MutableRefObject<View>;
+  onRequestClose?: (e: InteractionEvent) => void;
+  onMenuLayout?: (e: LayoutChangeEvent) => void;
+  menuHeight?: number;
+  maxMenuHeight?: number;
+  animationStarted?: boolean;
+  menuSize?: MenuSizeType;
+  testID?: string;
+}
 
-  setAnchorHeight?;
-  setAnchorWidth?;
-  shadowMenuContainerStyle?;
-  _container?;
-  onRequestClose?;
-  onMenuLayout?;
-  menuHeight?;
-  maxMenuHeight?;
-  animationStarted?;
-  menuSize?;
-  testID?;
+export enum AndroidMenuStates {
+  Hidden,
+  Animating,
+  Shown,
 }

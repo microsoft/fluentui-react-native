@@ -15,7 +15,20 @@ const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
-    const { directionalHint, gapSpace, maxHeight, maxWidth, minWidth, minPadding, borderWidth, borderColor, backgroundColor } = props;
+    const {
+      directionalHint,
+      gapSpace,
+      maxHeight,
+      maxWidth,
+      minWidth,
+      minPadding,
+      borderWidth,
+      borderColor,
+      backgroundColor,
+      elevation,
+      cornerRadius,
+    } = props;
+
     const state = useMenuPopover(props);
     const theme = useFluentTheme();
     const context = useMenuContext();
@@ -29,6 +42,8 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
       gapSpace,
       maxHeight,
       maxWidth,
+      cornerRadius,
+      elevation,
       minWidth,
       minPadding,
       borderWidth,
@@ -60,14 +75,24 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
           >
             <TouchableWithoutFeedback onPress={context.onRequestClose} accessible={false}>
               <View style={StyleSheet.absoluteFill}>
-                <Animated.View onLayout={context.onMenuLayout} style={[styles.shadowMenuContainer, context.shadowMenuContainerStyle]}>
-                  {console.log('context.menuHeight', context.menuHeight)}
-                  {context.menuHeight > 200 ? (
-                    <AnimatedScrollView style={[styles.menuContainer, context.animationStarted && context.menuSize]}>
-                      {children}
-                    </AnimatedScrollView>
+                <Animated.View
+                  onLayout={context.onMenuLayout}
+                  style={[
+                    context.shadowMenuContainerStyle,
+                    {
+                      maxHeight: mergedProps.maxHeight ? tokens.maxHeight : mergedProps.maxHeight,
+                      maxWidth: tokens.maxWidth,
+                      position: 'absolute',
+                      borderRadius: tokens.cornerRadius,
+                      elevation: tokens.elevation,
+                      overflow: 'hidden',
+                    },
+                  ]}
+                >
+                  {context.menuHeight > tokens.maxHeight || context.menuHeight > mergedProps.maxHeight ? (
+                    <AnimatedScrollView style={[context.animationStarted && context.menuSize]}>{children}</AnimatedScrollView>
                   ) : (
-                    <Animated.View style={[styles.menuContainer, context.animationStarted && context.menuSize]}>{children}</Animated.View>
+                    <Animated.View style={[context.animationStarted && context.menuSize]}>{children}</Animated.View>
                   )}
                 </Animated.View>
               </View>
@@ -81,20 +106,6 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   },
   useMenuPopoverTokens,
 );
-
-const styles = StyleSheet.create({
-  shadowMenuContainer: {
-    position: 'absolute',
-    borderRadius: 8,
-    maxHeight: 200,
-
-    // Shadow
-    elevation: 16,
-  },
-  menuContainer: {
-    overflow: 'hidden',
-  },
-});
 
 MenuPopover.displayName = menuPopoverName;
 

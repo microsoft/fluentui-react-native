@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import type { LayoutChangeEvent, View } from 'react-native';
 import { Animated, Dimensions, Easing, I18nManager, StatusBar } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { MenuProps, MenuState } from './Menu.types';
+import { AndroidMenuStates } from './Menu.types';
 import { useMenuContext } from '../context/menuContext';
 // Due to how events get fired we get double notifications
 // for the same event causing us to immediately reopen
@@ -13,11 +14,6 @@ import { useMenuContext } from '../context/menuContext';
 const delayOpen = 150;
 let lastCloseTimestamp = -1;
 
-enum States {
-  Hidden,
-  Animating,
-  Shown,
-}
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const SCREEN_INDENT = 16;
 
@@ -29,7 +25,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const [checked, onCheckedChange] = useMenuCheckedState(props);
 
   const _container = useRef<View>(null);
-  const [menuState, setMenuState] = React.useState<States>(States.Hidden);
+  const [menuState, setMenuState] = React.useState<AndroidMenuStates>(AndroidMenuStates.Hidden);
   const [, setAnchorHeight] = React.useState<number>(0);
   const [maxMenuHeight] = useState(250);
   const [anchorWidth, setAnchorWidth] = React.useState<number>(0);
@@ -39,76 +35,6 @@ export const useMenu = (props: MenuProps): MenuState => {
   const [top, setTop] = React.useState<number>(0);
   const [menuSizeAnimation, setMenuSizeAnimation] = React.useState<Animated.ValueXY>(new Animated.ValueXY({ x: 0, y: 0 }));
   const [opacityAnimation, setOpacityAnimation] = React.useState<Animated.Value>(new Animated.Value(0));
-
-  const show = React.useCallback(() => {
-    _container.current?.measureInWindow((left, top, buttonWidth, buttonHeight) => {
-      setAnchorHeight(buttonHeight);
-      setAnchorWidth(buttonWidth);
-      setLeft(left);
-      setMenuState(States.Shown);
-      setTop(top + buttonHeight);
-    });
-    console.log('open');
-  }, []);
-
-  const hide = () => {
-    Animated.timing(opacityAnimation, {
-      toValue: 0,
-      duration: 250,
-      easing: EASING,
-      useNativeDriver: false,
-    }).start(() => {
-      // Reset state
-      setMenuState(States.Hidden);
-      setMenuSizeAnimation(new Animated.ValueXY({ x: 0, y: 0 }));
-      setOpacityAnimation(new Animated.Value(0));
-    });
-    console.log('hide');
-  };
-
-  const [open, shouldFocusOnContainer, setOpen] = useMenuOpenState(isOpenControlled, props, context.setOpen, hide, show);
-
-  useEffect(() => {
-    if (!props.visible) {
-      return;
-    }
-    show();
-  }, [props.visible]);
-  useEffect(() => {
-    if (props.visible) {
-      show();
-    } else {
-      hide();
-    }
-  }, [props.visible]);
-
-  const onMenuLayout = (e: LayoutChangeEvent) => {
-    if (menuState === States.Animating) {
-      return;
-    }
-    const { width, height } = e.nativeEvent.layout;
-    setMenuHeight(height);
-    setMenuWidth(width);
-    setMenuState(States.Animating);
-    Animated.parallel([
-      Animated.timing(menuSizeAnimation, {
-        toValue: { x: width, y: height },
-        duration: 100,
-        easing: EASING,
-        useNativeDriver: false,
-      }),
-      Animated.timing(opacityAnimation, {
-        toValue: 1,
-        duration: 100,
-        easing: EASING,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  };
-
-  const onRequestClose = (e) => {
-    setOpen(e, false, false);
-  };
   const { isRTL } = I18nManager;
   const dimensions = Dimensions.get('window');
   const { width: windowWidth } = dimensions;
@@ -117,40 +43,127 @@ export const useMenu = (props: MenuProps): MenuState => {
     width: menuSizeAnimation.x,
     height: menuSizeAnimation.y,
   };
+
+  const show = React.useCallback(() => {
+    _container.current?.measureInWindow((left, top, buttonWidth, buttonHeight) => {
+      setAnchorHeight(buttonHeight);
+      setAnchorWidth(buttonWidth);
+      setLeft(left);
+      setMenuState(AndroidMenuStates.Shown);
+      setTop(top + buttonHeight);
+    });
+  }, []);
+
+  const hide = React.useCallback(() => {
+    Animated.timing(opacityAnimation, {
+      toValue: 0,
+      duration: 250,
+      easing: EASING,
+      useNativeDriver: false,
+    }).start(() => {
+      // Reset state
+      setMenuState(AndroidMenuStates.Hidden);
+      setMenuSizeAnimation(new Animated.ValueXY({ x: 0, y: 0 }));
+      setOpacityAnimation(new Animated.Value(0));
+    });
+  }, [opacityAnimation]);
+
+  const [open, shouldFocusOnContainer, setOpen] = useMenuOpenState(isOpenControlled, props, context.setOpen, hide, show);
+
+  useEffect(() => {
+    if (props.open) {
+      show();
+    }
+  }, [props.open]);
+
+  const onMenuLayout = React.useCallback(
+    (e: LayoutChangeEvent) => {
+      if (menuState === AndroidMenuStates.Animating) {
+        return;
+      }
+      const { width, height } = e.nativeEvent.layout;
+      setMenuHeight(height);
+      setMenuWidth(width);
+      setMenuState(AndroidMenuStates.Animating);
+      Animated.parallel([
+        Animated.timing(menuSizeAnimation, {
+          toValue: { x: width, y: height },
+          duration: 100,
+          easing: EASING,
+          useNativeDriver: false,
+        }),
+        Animated.timing(opacityAnimation, {
+          toValue: 1,
+          duration: 100,
+          easing: EASING,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    },
+    [menuSizeAnimation, menuState, opacityAnimation],
+  );
+
+  const onRequestClose = React.useCallback(
+    (e: InteractionEvent) => {
+      setOpen(e, false, false);
+    },
+    [setOpen],
+  );
+
   // Adjust position of menu
   const transforms = [];
-  if ((isRTL && left + anchorWidth - menuWidth > SCREEN_INDENT) || (!isRTL && left + menuWidth > windowWidth - SCREEN_INDENT)) {
-    transforms.push({
-      translateX: Animated.multiply(menuSizeAnimation.x, -1),
-    });
-    setLeft(Math.min(windowWidth - SCREEN_INDENT, left + anchorWidth));
-  } else if (left < SCREEN_INDENT) {
-    setLeft(SCREEN_INDENT);
-  }
-  // Flip by Y axis if menu hits bottom screen border
-  if (top + menuHeight + SCREEN_INDENT > windowHeight) {
-    if (menuHeight > maxMenuHeight) {
-      transforms.push({
-        translateY: Animated.multiply(menuSizeAnimation.y, -1),
-      });
-    } else {
-      transforms.push({
-        translateY: Animated.multiply(menuSizeAnimation.y, -1),
-      });
-    }
-  } else if (top < SCREEN_INDENT) {
-    setTop(SCREEN_INDENT);
-  }
 
-  const shadowMenuContainerStyle = {
-    opacity: opacityAnimation,
-    transform: transforms,
+  useMemo(() => {
+    if ((isRTL && left + anchorWidth - menuWidth > SCREEN_INDENT) || (!isRTL && left + menuWidth > windowWidth - SCREEN_INDENT)) {
+      transforms.push({
+        translateX: Animated.multiply(menuSizeAnimation.x, -1),
+      });
+      setLeft(Math.min(windowWidth - SCREEN_INDENT, left + anchorWidth));
+    } else if (left < SCREEN_INDENT) {
+      setLeft(SCREEN_INDENT);
+    }
+    // Flip by Y axis if menu hits bottom screen border
+    if (top + menuHeight + SCREEN_INDENT > windowHeight) {
+      if (menuHeight > maxMenuHeight) {
+        transforms.push({
+          translateY: Animated.multiply(menuSizeAnimation.y, -1),
+        });
+      } else {
+        transforms.push({
+          translateY: Animated.multiply(menuSizeAnimation.y, -1),
+        });
+      }
+    } else if (top < SCREEN_INDENT) {
+      setTop(SCREEN_INDENT);
+    }
+  }, [
+    anchorWidth,
+    isRTL,
+    left,
+    maxMenuHeight,
+    menuHeight,
+    menuSizeAnimation.x,
+    menuSizeAnimation.y,
+    menuWidth,
     top,
-    // Switch left to right for rtl devices
-    ...(isRTL ? { right: left } : { left }),
-  };
-  const animationStarted = menuState === States.Animating;
+    transforms,
+    windowHeight,
+    windowWidth,
+  ]);
+
+  const shadowMenuContainerStyle = useMemo(() => {
+    return {
+      opacity: opacityAnimation,
+      transform: transforms,
+      top,
+      // Switch left to right for rtl devices
+      ...(isRTL ? { right: left } : { left }),
+    };
+  }, [isRTL, left, opacityAnimation, top, transforms]);
+
+  const animationStarted = menuState === AndroidMenuStates.Animating;
   const { testID } = props;
+
   // Default behavior for submenu is to open on hover
   // the ...props line below will override this behavior for a submenu
   // or apply openOnHover if passed into a root Menu.
@@ -190,13 +203,13 @@ const useMenuOpenState = (
   isControlled: boolean,
   props: MenuProps,
   parentSetOpen: (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void,
-  hide,
-  show,
+  hide: () => void,
+  show: () => void,
 ): [boolean, boolean, (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void] => {
   const { defaultOpen, onOpenChange, open } = props;
   const initialState = typeof defaultOpen !== 'undefined' ? defaultOpen : !!open;
   const [openInternal, setOpenInternal] = React.useState<boolean>(initialState);
-  const [shouldFocusOnContainer] = React.useState<boolean | undefined>(undefined);
+  const [shouldFocusOnContainer, setShouldFocusOnContainer] = React.useState<boolean | undefined>(undefined);
   const state = isControlled ? open : openInternal;
   const setOpen = React.useCallback(
     (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => {
@@ -206,10 +219,10 @@ const useMenuOpenState = (
       }
       if (isOpen) {
         show();
-        // setShouldFocusOnContainer(false);
+        setShouldFocusOnContainer(true);
       }
       if (!isOpen) {
-        // setShouldFocusOnContainer(undefined);
+        setShouldFocusOnContainer(undefined);
         lastCloseTimestamp = Date.now();
         hide();
       }

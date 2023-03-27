@@ -5,9 +5,34 @@ export const menuPopoverName = 'MenuPopover';
 
 // Support for anchorRect and beakWidth will come at a later time.
 // Omitting dismissBehaviors as it doesn't seem to make sense as a token
-export type MenuPopoverTokens = Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' | 'dismissBehaviors'>;
+export type MenuPopoverTokens =
+  | Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' | 'dismissBehaviors'> & {
+      /**
+       * The props for the corner radius for the Modal MenuPopover
+       * @platform android
+       */
+      cornerRadius?: number;
 
-export type MenuPopoverProps = ICalloutProps;
+      /**
+       * Shadown elevation for the Modal MenuPopover
+       * @platform android
+       */
+      elevation?: number;
+    };
+
+export type MenuPopoverProps = ICalloutProps & {
+  /**
+   * The props for the corner radius for the Modal MenuPopover
+   * @platform android
+   */
+  cornerRadius?: number;
+
+  /**
+   * Shadown elevation for the Modal MenuPopover
+   * @platform android
+   */
+  elevation?: number;
+};
 
 export interface MenuPopoverState {
   props: ICalloutProps;
