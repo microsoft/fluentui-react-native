@@ -138,7 +138,6 @@ export interface InputProps extends PressableFocusProps {
   placeholder?: string;
   textInputProps?: TextInputProps;
   error?: string;
-
   value?: string;
   defaultValue?: string;
   type?: KeyboardTypeOptions | undefined;

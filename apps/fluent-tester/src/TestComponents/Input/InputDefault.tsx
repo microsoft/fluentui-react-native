@@ -16,8 +16,8 @@ export const InputDefault: React.FunctionComponent = () => {
   return (
     <View>
       <Input value="Value prop passed!" />
-      <Input placeholder="Enter text here!" />
-      <Input placeholder="Enter text here!" dismissIcon={dismissIconProps} secondaryText="Secondary" />
+      <Input placeholder="Enter text here!" type="decimal-pad" />
+      <Input placeholder="Enter text here!" dismissIcon={dismissIconProps} secondaryText="Secondary" type="email-address" />
       <Input
         placeholder="Enter text here!"
         dismissIcon={dismissIconProps}

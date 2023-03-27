@@ -65,6 +65,7 @@ export const Input = compose<InputType>({
         onChange,
         defaultValue,
         value,
+        type,
         ...mergedProps
       } = mergeProps(input.props, final);
       const IconWrapper = icon ? Slots.inputWrapper : Fragment;
@@ -76,6 +77,7 @@ export const Input = compose<InputType>({
             {icon && <Slots.icon {...iconProps} />}
             <Slots.input>
               <Slots.textInput
+                keyboardType={type}
                 placeholder={placeholder}
                 defaultValue={defaultValue}
                 value={value ? value : input.state.text}
