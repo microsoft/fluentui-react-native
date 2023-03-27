@@ -25,8 +25,8 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
   slots: {
     root: Pressable,
     ...(Platform.OS === 'android' && { checkbox: Pressable }),
-    radioInnerCircle: View,
-    radioButton: Pressable,
+    ...(Platform.OS === 'android' && { radioInnerCircle: View }),
+    ...(Platform.OS === 'android' && { radioButton: Pressable }),
     checkmark: SvgXml,
     content: Text,
     iconPlaceholder: View,
