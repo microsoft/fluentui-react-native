@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { Fragment } from 'react';
-import { TextInput, View } from 'react-native';
+import { Pressable, TextInput, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
@@ -42,6 +42,7 @@ export const Input = compose<InputType>({
     label: Text,
     input: View,
     textInput: TextInput,
+    dismissPressable: Pressable,
     dismissIcon: Icon,
     assistiveText: Text,
     secondaryText: Text,
@@ -66,6 +67,7 @@ export const Input = compose<InputType>({
         defaultValue,
         value,
         type,
+        onPress,
         ...mergedProps
       } = mergeProps(input.props, final);
       const IconWrapper = icon ? Slots.inputWrapper : Fragment;
@@ -87,8 +89,12 @@ export const Input = compose<InputType>({
                   onChange && onChange(text);
                 }}
               />
-              {secondaryText && <Slots.secondaryText>{secondaryText}</Slots.secondaryText>}
-              {dismissIcon && <Slots.dismissIcon {...dismissIconProps} />}
+              {secondaryText && <Slots.secondaryText accessible={false}>{secondaryText}</Slots.secondaryText>}
+              {dismissIcon && (
+                <Slots.dismissPressable onPress={(e) => (onPress ? onPress(e) : input.props.setText(''))}>
+                  <Slots.dismissIcon {...dismissIconProps} accessible={false} />
+                </Slots.dismissPressable>
+              )}
             </Slots.input>
           </IconWrapper>
           {assistiveText && <Slots.assistiveText>{error ? error : assistiveText}</Slots.assistiveText>}

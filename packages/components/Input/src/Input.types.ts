@@ -1,8 +1,8 @@
 import type { ColorValue, TextInputProps, ViewProps, KeyboardTypeOptions } from 'react-native';
 
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
-import type { PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
-import type { FocusState } from '@fluentui-react-native/interactive-hooks/lib/usePressableState.types';
+import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
+import type { FocusState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks/lib/usePressableState.types';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
@@ -131,7 +131,7 @@ export interface InputProps extends PressableFocusProps {
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
-  dismissIcon?: IconSourcesType;
+  dismissIcon?: IconSourcesType | undefined;
   label?: string;
   assistiveText?: string;
   secondaryText?: string;
@@ -142,6 +142,7 @@ export interface InputProps extends PressableFocusProps {
   defaultValue?: string;
   type?: KeyboardTypeOptions | undefined;
   onChange?: (text: string) => void;
+  onPress?: (e: InteractionEvent) => void;
 }
 
 export interface InputInfo {
@@ -159,6 +160,7 @@ export interface InputSlotProps {
   dismissIcon: IconProps;
   assistiveText: TextProps;
   secondaryText: TextProps;
+  dismissPressable: React.PropsWithRef<PressablePropsExtended>;
 }
 
 export interface InputType {

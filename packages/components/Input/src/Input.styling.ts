@@ -88,17 +88,6 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
       }),
       ['iconSize', 'iconColor', 'spacingIconContent'],
     ),
-    dismissIcon: buildProps(
-      (tokens: InputTokens) => ({
-        color: tokens.dismissIconColor,
-        height: tokens.dismissIconSize,
-        width: tokens.dismissIconSize,
-        style: {
-          marginStart: tokens.spacingDismissIconStart,
-        },
-      }),
-      ['iconColor', 'iconSize', 'spacingDismissIconStart'],
-    ),
     label: buildProps(
       (tokens: InputTokens, theme: Theme) => {
         return {
@@ -126,6 +115,26 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
         };
       },
       ['assistiveTextColor', 'assistiveTextFont', 'spacingAssistiveTextVertical', 'spacingAssistiveTextStart', ...fontStyles.keys],
+    ),
+    dismissPressable: buildProps(
+      (tokens: InputTokens) => ({
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginStart: tokens.spacingDismissIconStart,
+        },
+      }),
+      ['spacingDismissIconStart'],
+    ),
+    dismissIcon: buildProps(
+      (tokens: InputTokens) => ({
+        color: tokens.dismissIconColor,
+        height: tokens.dismissIconSize,
+        width: tokens.dismissIconSize,
+      }),
+      ['iconColor', 'iconSize'],
     ),
   },
 };
