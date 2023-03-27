@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "polish bug fixes",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "gulnazsayed@microsoft.com",
+  "dependentChangeType": "patch"
+}

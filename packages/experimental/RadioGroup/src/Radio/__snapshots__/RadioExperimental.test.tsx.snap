@@ -20,7 +20,6 @@ exports[`Radio component tests Radio default 1`] = `
     }
   }
   accessible={true}
-  enableFocusRing={true}
   focusable={true}
   keyDownEvents={
     Array [
@@ -56,10 +55,6 @@ exports[`Radio component tests Radio default 1`] = `
   style={
     Object {
       "alignItems": "flex-start",
-      "borderColor": "transparent",
-      "borderRadius": 4,
-      "borderStyle": "solid",
-      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "paddingHorizontal": 4,
@@ -87,18 +82,18 @@ exports[`Radio component tests Radio default 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "transparent",
+        "backgroundColor": "#ffffff",
         "borderColor": "#616161",
-        "borderRadius": 10,
+        "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "height": 20,
+        "height": 16,
         "justifyContent": "center",
         "marginBottom": 6,
         "marginLeft": 4,
-        "marginRight": 6,
+        "marginRight": 4,
         "marginTop": 6,
-        "width": 20,
+        "width": 16,
       }
     }
   >
@@ -106,10 +101,10 @@ exports[`Radio component tests Radio default 1`] = `
       style={
         Object {
           "backgroundColor": undefined,
-          "borderRadius": 5,
-          "height": 10,
+          "borderRadius": 4,
+          "height": 8,
           "opacity": 0,
-          "width": 10,
+          "width": 8,
         }
       }
     />
@@ -118,10 +113,15 @@ exports[`Radio component tests Radio default 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
+        "borderColor": "transparent",
+        "borderRadius": 4,
+        "borderStyle": "solid",
+        "borderWidth": 2,
         "flexDirection": "column",
         "marginLeft": 0,
-        "marginRight": 2,
+        "marginRight": 0,
         "padding": undefined,
+        "paddingRight": 0,
       }
     }
   >
@@ -131,12 +131,13 @@ exports[`Radio component tests Radio default 1`] = `
       onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#616161",
+          "color": "#242424",
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "400",
           "margin": 0,
-          "marginTop": 5,
+          "marginHorizontal": 2,
+          "marginVertical": 2,
         }
       }
     >
@@ -166,7 +167,6 @@ exports[`Radio component tests Radio disabled 1`] = `
     }
   }
   accessible={true}
-  enableFocusRing={true}
   focusable={false}
   keyDownEvents={
     Array [
@@ -202,10 +202,6 @@ exports[`Radio component tests Radio disabled 1`] = `
   style={
     Object {
       "alignItems": "flex-start",
-      "borderColor": "transparent",
-      "borderRadius": 4,
-      "borderStyle": "solid",
-      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "paddingHorizontal": 4,
@@ -238,18 +234,18 @@ exports[`Radio component tests Radio disabled 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "transparent",
-        "borderColor": "#bdbdbd",
-        "borderRadius": 10,
+        "backgroundColor": "#f0f0f0",
+        "borderColor": "#e0e0e0",
+        "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "height": 20,
+        "height": 16,
         "justifyContent": "center",
         "marginBottom": 6,
         "marginLeft": 4,
-        "marginRight": 6,
+        "marginRight": 4,
         "marginTop": 6,
-        "width": 20,
+        "width": 16,
       }
     }
   >
@@ -257,10 +253,10 @@ exports[`Radio component tests Radio disabled 1`] = `
       style={
         Object {
           "backgroundColor": undefined,
-          "borderRadius": 5,
-          "height": 10,
+          "borderRadius": 4,
+          "height": 8,
           "opacity": 0,
-          "width": 10,
+          "width": 8,
         }
       }
     />
@@ -269,10 +265,15 @@ exports[`Radio component tests Radio disabled 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
+        "borderColor": "transparent",
+        "borderRadius": 4,
+        "borderStyle": "solid",
+        "borderWidth": 2,
         "flexDirection": "column",
         "marginLeft": 0,
-        "marginRight": 2,
+        "marginRight": 0,
         "padding": undefined,
+        "paddingRight": 0,
       }
     }
   >
@@ -287,7 +288,8 @@ exports[`Radio component tests Radio disabled 1`] = `
           "fontSize": 16,
           "fontWeight": "400",
           "margin": 0,
-          "marginTop": 5,
+          "marginHorizontal": 2,
+          "marginVertical": 2,
         }
       }
     >
