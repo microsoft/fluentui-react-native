@@ -13,23 +13,22 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
   states: radioStates,
   slotProps: {
     root: buildProps(
-      (tokens: RadioTokens, theme: Theme) => ({
+      (tokens: RadioTokens) => ({
         style: {
           display: 'flex',
           alignItems: tokens.alignItems,
           flexDirection: tokens.flexDirection,
           paddingHorizontal: tokens.rootHorizontalPadding,
           paddingVertical: tokens.rootVerticalPadding,
-          ...borderStyles.from(tokens, theme),
         },
         android_ripple: { color: tokens.rippleColor },
       }),
-      ['flexDirection', 'rootHorizontalPadding', 'rootVerticalPadding', 'rippleColor', 'alignItems', ...borderStyles.keys],
+      ['flexDirection', 'rootHorizontalPadding', 'rootVerticalPadding', 'rippleColor', 'alignItems'],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
         style: {
-          backgroundColor: 'transparent',
+          backgroundColor: tokens.radioOuterCircleBackground,
           width: tokens.radioOuterCircleSize,
           height: tokens.radioOuterCircleSize,
           alignItems: 'center',
@@ -46,6 +45,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         android_ripple: { color: tokens.rippleColor, radius: tokens.rippleRadius, borderless: true },
       }),
       [
+        'radioOuterCircleBackground',
         'radioBorderWidth',
         'radioBorderStyle',
         'radioOuterCircleSize',
@@ -71,27 +71,30 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
     ),
     labelContent: buildProps(
-      (tokens: RadioTokens) => ({
+      (tokens: RadioTokens, theme: Theme) => ({
         style: {
           alignItems: tokens.labelAlignItems,
           flexDirection: 'column',
           marginRight: tokens.labelMarginRight,
           marginLeft: tokens.labelMarginLeft,
           padding: tokens.labelPadding,
+          paddingRight: 0,
+          ...borderStyles.from(tokens, theme),
         },
       }),
-      ['labelAlignItems', 'labelMarginRight', 'labelMarginLeft', 'labelPadding'],
+      ['labelAlignItems', 'labelMarginRight', 'labelMarginLeft', 'labelPadding', ...borderStyles.keys],
     ),
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,
         style: {
-          marginTop: tokens.labelMarginTop,
+          marginVertical: tokens.labelMarginVertical,
+          marginHorizontal: 2,
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['variant', 'labelMarginTop', 'color', ...fontStyles.keys],
+      ['variant', 'labelMarginVertical', 'color', ...fontStyles.keys],
     ),
     subtext: buildProps(
       (tokens: RadioTokens) => ({
@@ -99,6 +102,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         style: {
           marginTop: tokens.subtextMarginTop,
           marginBottom: tokens.subtextMarginBottom,
+          marginHorizontal: 2,
           color: tokens.color,
         },
       }),

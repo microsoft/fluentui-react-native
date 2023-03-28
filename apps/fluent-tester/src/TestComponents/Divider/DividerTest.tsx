@@ -157,12 +157,14 @@ export const DividerTest: React.FunctionComponent = () => {
 
   const description = 'A Divider is a visual separator that can contain content (text or an icon). Dividers can be horizontal or vertical';
   const mobileDescription = 'A Divider is a visual horizontal separator that seperates content/sections';
+  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Divider/SPEC.md';
 
   return (
     <Test
       name="Divider Test"
       description={isMobile ? mobileDescription : description}
       sections={isMobile ? mobileDividerSections : dividerSections}
+      spec={spec}
       status={status}
     ></Test>
   );

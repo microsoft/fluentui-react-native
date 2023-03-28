@@ -8,7 +8,15 @@ steps:
   - checkout: self
     persistCredentials: true
 
-  - template: setup-repo.yml
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "14.x"
+    displayName: "Install Node.js"
+
+  - task: NuGetToolInstaller@0
+    inputs:
+      versionSpec: "5.6.0"
+    displayName: "Install Nuget"
 
   - script: |
       yarn
