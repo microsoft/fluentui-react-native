@@ -60,6 +60,7 @@
     "@fluentui-react-native/experimental-text": ">=0.11.61 <1.0.0",
     "@fluentui-react-native/framework": ">=0.9.8 <1.0.0",
     "@fluentui-react-native/icon": "0.17.24",
+    "@fluentui-react-native/input": "^0.1.0",
     "@fluentui-react-native/interactive-hooks": ">=0.22.28 <1.0.0",
     "@fluentui-react-native/menu": "^1.4.33",
     "@fluentui-react-native/merge-props": ">=0.5.3 <1.0.0",
