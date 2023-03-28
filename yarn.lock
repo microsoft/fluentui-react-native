@@ -3945,9 +3945,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^17", "@types/react@^17.0.2":
-  version "17.0.53"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.53.tgz#10d4d5999b8af3d6bc6a9369d7eb953da82442ab"
-  integrity sha512-1yIpQR2zdYu1Z/dc1OxC+MA6GR240u3gcnP4l6mvj/PJiVaqHsQPmWttsvHsfnhfPbU2FuGmo0wSITPygjBmsw==
+  version "17.0.54"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.54.tgz#3ce9ab14e10e6bd1b02e3953b0c9d41e8161e0d7"
+  integrity sha512-yBon9aJ+pVyP0dzfs4sR2DOseDi6fDnZQHqFaprzDzFgxDLkUhL/Frjf2egvpdlVtssWH8k3YAgvaGQXFu+4Kw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
