@@ -67,7 +67,7 @@ export const Input = compose<InputType>({
         defaultValue,
         value,
         type,
-        onPress,
+        accessoryButtonOnPress,
         ...mergedProps
       } = mergeProps(input.props, final);
       const IconWrapper = icon ? Slots.inputWrapper : Fragment;
@@ -91,7 +91,9 @@ export const Input = compose<InputType>({
               />
               {secondaryText && <Slots.secondaryText accessible={false}>{secondaryText}</Slots.secondaryText>}
               {dismissIcon && (
-                <Slots.dismissPressable onPress={(e) => (onPress ? onPress(e) : input.props.setText(''))}>
+                <Slots.dismissPressable
+                  onTouchStart={(e) => (accessoryButtonOnPress ? accessoryButtonOnPress(e) : input.props.setText(''))}
+                >
                   <Slots.dismissIcon {...dismissIconProps} accessible={false} />
                 </Slots.dismissPressable>
               )}

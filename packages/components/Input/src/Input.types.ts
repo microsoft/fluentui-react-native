@@ -142,7 +142,7 @@ export interface InputProps extends PressableFocusProps {
   defaultValue?: string;
   type?: KeyboardTypeOptions | undefined;
   onChange?: (text: string) => void;
-  onPress?: (e: InteractionEvent) => void;
+  accessoryButtonOnPress?: (e: InteractionEvent) => void;
 }
 
 export interface InputInfo {
