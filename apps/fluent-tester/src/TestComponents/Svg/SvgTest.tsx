@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+
 import { ButtonV1 as Button, ToggleButton } from '@fluentui/react-native';
 import { Separator } from '@fluentui/react-native';
 import {
@@ -20,9 +21,12 @@ import {
   Use,
   parse,
 } from 'react-native-svg';
+
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from '../../../../E2E/src/Svg/consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+
 const styles = StyleSheet.create({
   svg: {
     backgroundColor: 'green',
@@ -295,7 +299,7 @@ const CustomSvgInputTest: React.FunctionComponent = () => {
   return (
     <View>
       <Text>
-        Paste an svg in here and click Draw to try it out. The way it uses rnsvg's parse function to attempt to validate svg may cause
+        Paste an svg in here and click Draw to try it out. The way it uses rnsvg&apos;s parse function to attempt to validate svg may cause
         asserts and crashes if the svg is invalid. Looking for another solution for this, but this is still useful in its current state.
       </Text>
       <TextInput
