@@ -66,39 +66,40 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
       const content = React.createElement(View, innerViewProps, children);
 
       return Platform.OS === 'android' ? (
-        <>
-          <Modal
-            visible={context.open}
-            onRequestClose={context.onRequestClose}
-            supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
-            transparent
-          >
-            <TouchableWithoutFeedback onPress={context.onRequestClose} accessible={false}>
-              <View style={StyleSheet.absoluteFill}>
-                <Animated.View
-                  onLayout={context.onMenuLayout}
-                  style={[
-                    context.shadowMenuContainerStyle,
-                    {
-                      maxHeight: mergedProps.maxHeight ? tokens.maxHeight : mergedProps.maxHeight,
-                      maxWidth: tokens.maxWidth,
-                      position: 'absolute',
-                      borderRadius: tokens.cornerRadius,
-                      elevation: tokens.elevation,
-                      overflow: 'hidden',
-                    },
-                  ]}
-                >
-                  {context.menuHeight > tokens.maxHeight || context.menuHeight > mergedProps.maxHeight ? (
-                    <AnimatedScrollView style={[context.animationStarted && context.menuSize]}>{children}</AnimatedScrollView>
-                  ) : (
-                    <Animated.View style={[context.animationStarted && context.menuSize]}>{children}</Animated.View>
-                  )}
-                </Animated.View>
-              </View>
-            </TouchableWithoutFeedback>
-          </Modal>
-        </>
+        <Modal
+          {...mergedProps}
+          visible={context.open}
+          onRequestClose={context.onRequestClose}
+          supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
+          transparent
+        >
+          <TouchableWithoutFeedback onPress={context.onRequestClose} accessible={false}>
+            <View style={[StyleSheet.absoluteFill]}>
+              {console.log('MEGED', tokens.maxHeight, context.menuHeight)}
+              <Animated.View
+                onLayout={context.onMenuLayout}
+                style={[
+                  context.shadowMenuContainerStyle,
+                  {
+                    maxHeight: mergedProps.maxHeight ? mergedProps.maxHeight : tokens.maxHeight,
+                    maxWidth: tokens.maxWidth,
+                    position: 'absolute',
+                    borderRadius: tokens.cornerRadius,
+                    elevation: tokens.elevation,
+                    overflow: 'hidden',
+                  },
+                ]}
+              >
+                {context.menuHeight + tokens.minPadding >= tokens.maxHeight ||
+                context.menuHeight + tokens.minPadding >= mergedProps.maxHeight ? (
+                  <AnimatedScrollView style={[context.animationStarted && context.menuSize]}>{children}</AnimatedScrollView>
+                ) : (
+                  <Animated.View style={[context.animationStarted && context.menuSize]}>{children}</Animated.View>
+                )}
+              </Animated.View>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
       ) : (
         <Callout {...mergedProps}>{content}</Callout>
       );
