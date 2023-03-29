@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { Fragment } from 'react';
-import { Pressable, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, TextInput, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
@@ -36,7 +36,7 @@ export const Input = compose<InputType>({
   displayName: input,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: ScrollView,
     icon: Icon,
     inputWrapper: View,
     label: Text,
@@ -68,12 +68,13 @@ export const Input = compose<InputType>({
         value,
         type,
         accessoryButtonOnPress,
+        keyboardShouldPersistTaps,
         ...mergedProps
       } = mergeProps(input.props, final);
       const IconWrapper = icon ? Slots.inputWrapper : Fragment;
 
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} keyboardShouldPersistTaps={keyboardShouldPersistTaps ? keyboardShouldPersistTaps : 'handled'}>
           {label && <Slots.label>{label}</Slots.label>}
           <IconWrapper>
             {icon && <Slots.icon {...iconProps} />}

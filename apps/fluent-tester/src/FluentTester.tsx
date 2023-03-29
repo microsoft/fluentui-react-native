@@ -208,6 +208,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const TestComponentView: React.FunctionComponent = () => {
     return (
       <ScrollView
+        keyboardShouldPersistTaps="handled"
         contentContainerStyle={fluentTesterStyles.testSection}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(TESTPAGE_CONTENT_SCROLLVIEWER)}

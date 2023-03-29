@@ -1,4 +1,4 @@
-import type { ColorValue, TextInputProps, ViewProps, KeyboardTypeOptions } from 'react-native';
+import type { ColorValue, TextInputProps, ViewProps, ScrollViewProps, KeyboardTypeOptions } from 'react-native';
 
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
@@ -117,7 +117,7 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
 
 export interface InputTokens extends InputCoreTokens {
   /**
-   * States that can be applied to a button.
+   * States that can be applied to an input.
    */
   hasIcon?: InputTokens;
   error?: InputTokens;
@@ -128,12 +128,12 @@ export interface InputTokens extends InputCoreTokens {
 
 export interface InputProps extends PressableFocusProps {
   /*
-   * Source URL or name of the icon to show on the Button.
+   * Source URL or name of the icon to show on the input.
    */
   icon?: IconSourcesType;
 
   /*
-   * Source URL or name of the icon to show on the Button.
+   * Source URL or name of the icon to show on the input.
    */
   accessoryIcon?: IconSourcesType | undefined;
 
@@ -200,6 +200,17 @@ export interface InputProps extends PressableFocusProps {
    * A callback to call on accessoryIcon click event.
    */
   accessoryButtonOnPress?: (e: InteractionEvent) => void;
+
+  /**
+   * Determines when the keyboard should stay visible after a tap.
+   * - 'never', tapping outside of the focused text input when the keyboard is up dismisses the keyboard. When this happens, children won't receive the tap.
+   * - 'always', the keyboard will not dismiss automatically, and the scroll view will not catch taps, but children of the scroll view can catch taps.
+   * - 'handled', the keyboard will not dismiss automatically when the tap was handled by a children, (or captured by an ancestor).
+   * - false, deprecated, use 'never' instead
+   * - true, deprecated, use 'always' instead
+   * @default always
+   */
+  keyboardShouldPersistTaps?: boolean | 'always' | 'never' | 'handled' | undefined;
 }
 
 export interface InputInfo {
@@ -208,7 +219,7 @@ export interface InputInfo {
 }
 
 export interface InputSlotProps {
-  root: ViewProps;
+  root: ScrollViewProps;
   label: TextProps;
   textInput: TextInputProps;
   input: ViewProps;
