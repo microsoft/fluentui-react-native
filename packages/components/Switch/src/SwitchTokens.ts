@@ -22,8 +22,6 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   trackMarginLeft: 2,
   trackMarginRight: 2,
   thumbMargin: 2,
-  onOpacity: 0,
-  offOpacity: 0,
 
   beforeContent: {
     trackMarginLeft: 8,

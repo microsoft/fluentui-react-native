@@ -109,6 +109,9 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    */
   toggleContainerFlexDirection?: ViewStyle['flexDirection'];
 
+  /**
+   * Height of the on / off texts respectively
+   */
   onTextHeight?: number;
   offTextHeight?: number;
 
