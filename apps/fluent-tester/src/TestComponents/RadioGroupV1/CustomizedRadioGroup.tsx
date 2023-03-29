@@ -30,8 +30,8 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [radioBorderWidth, setRadioBorderWidth] = React.useState<number>(1);
   const [radioVisibility, setRadioVisibility] = React.useState<number>(1);
   const [radioBorder, setRadioBorder] = React.useState<string>('black');
-  const [radioOuterCircleSize, setRadioOuterCircleSize] = React.useState<number>(20);
-  const [radioInnerCircleSize, setRadioInnerCircleSize] = React.useState<number>(10);
+  const [radioOuterCircleSize, setRadioOuterCircleSize] = React.useState<number>(16);
+  const [radioInnerCircleSize, setRadioInnerCircleSize] = React.useState<number>(8);
   const [radioFill, setRadioFill] = React.useState<string>('blue');
   const [color, setColor] = React.useState<string>('black');
   const [marginTop, setMarginTop] = React.useState<number>(6);
