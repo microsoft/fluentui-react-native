@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Fix default avatar rendering and e2e section",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
