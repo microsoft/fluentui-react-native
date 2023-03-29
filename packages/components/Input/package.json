@@ -5,7 +5,6 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
-  "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",
