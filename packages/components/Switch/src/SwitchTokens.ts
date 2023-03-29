@@ -51,7 +51,6 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     thumbColor: t.colors.neutralForegroundInverted,
     borderColor: t.colors.compoundBrandBackground1,
     justifyContent: 'flex-end',
-    offTextHeight: 0,
     hovered: {
       trackColor: t.colors.compoundBrandBackground1Hover,
       thumbColor: t.colors.neutralForegroundInvertedLink,
@@ -74,7 +73,6 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     thumbColor: t.colors.neutralStrokeAccessible,
     borderColor: t.colors.neutralStrokeAccessible,
     justifyContent: 'flex-start',
-    onTextHeight: 0,
     hovered: {
       trackColor: t.colors.neutralForegroundInvertedLinkHover,
       thumbColor: t.colors.neutralStrokeAccessibleHover,

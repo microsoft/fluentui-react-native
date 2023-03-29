@@ -35,7 +35,6 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   toggleOn: {
     trackColor: t.colors.brandBackground,
     thumbColor: t.colors.neutralBackgroundLightStatic,
-    offTextHeight: 0,
     pressed: {
       thumbSize: 24,
       thumbMargin: 4,
@@ -50,7 +49,6 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   toggleOff: {
     trackColor: t.colors.neutralBackground5,
     thumbColor: t.colors.neutralBackgroundLightStatic,
-    onTextHeight: 0,
     pressed: {
       thumbSize: 24,
       thumbMargin: 4,

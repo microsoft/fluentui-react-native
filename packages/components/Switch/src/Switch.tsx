@@ -1,9 +1,11 @@
 /** @jsx withSlots */
+import type { StyleProp } from 'react-native';
 import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, memoize, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
+import type { TextStyle } from '@office-iss/react-native-win32';
 
 import { stylingSettings } from './Switch.styling';
 import type { SwitchType, SwitchState, SwitchProps } from './Switch.types';
@@ -45,8 +47,7 @@ export const Switch = compose<SwitchType>({
     thumb: Animated.View,
     toggleContainer: View,
     onOffTextContainer: View,
-    onText: Text,
-    offText: Text,
+    onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
     const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true, disabled: userProps.disabled }, {}));
@@ -70,9 +71,31 @@ export const Switch = compose<SwitchType>({
     // now return the handler for finishing render
     return (final: SwitchProps) => {
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
-      const displayOnOffText = !!offText || !!onText;
+      const isToggled = switchInfo.state.toggled;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
+
+      /**
+       * We render on/off text two ways. If the onText and offText are different lengths, this can cause unwanted shifting of the
+       * track, if labelPosition = "after", or the label, if labelPosition = "above". In this case, we prevent shifting by rendering
+       * both texts and setting the correct text height to zero depending on the switch's toggled state.
+       *
+       * If labelPosition = "before", none of the other slots will shift, so we can just render one onOffText slot and toggle the displayed
+       * text.
+       */
+      const displayOnOffText = !!offText || !!onText;
+      let onOffTextJsx = null;
+      if (displayOnOffText && labelPosition !== 'before') {
+        onOffTextJsx = (
+          <Slots.onOffTextContainer>
+            <Slots.onOffText style={getOnOffTextStyle('on', isToggled)}>{onText}</Slots.onOffText>
+            <Slots.onOffText style={getOnOffTextStyle('off', isToggled)}>{offText}</Slots.onOffText>
+          </Slots.onOffTextContainer>
+        );
+      } else if (displayOnOffText) {
+        onOffTextJsx = <Slots.onOffText>{isToggled ? onText : offText}</Slots.onOffText>;
+      }
+
       return (
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
@@ -81,15 +104,15 @@ export const Switch = compose<SwitchType>({
             <Slots.track {...(isMobile && { style: switchInfo.props.switchAnimationStyles.trackBackgroundStyle })}>
               <Slots.thumb {...thumbAnimation} {...(isMobile && { style: switchInfo.props.switchAnimationStyles.thumbAnimatedStyle })} />
             </Slots.track>
-            {displayOnOffText && (
-              <Slots.onOffTextContainer>
-                <Slots.onText>{onText}</Slots.onText>
-                <Slots.offText>{offText}</Slots.offText>
-              </Slots.onOffTextContainer>
-            )}
+            {onOffTextJsx}
           </Slots.toggleContainer>
         </Slots.root>
       );
     };
   },
 });
+
+const onOffTextStyleWorker = (text: 'on' | 'off', isOn: boolean): StyleProp<TextStyle> => ({
+  height: (text === 'on' && isOn) || (text === 'off' && !isOn) ? undefined : 0,
+});
+const getOnOffTextStyle = memoize(onOffTextStyleWorker);

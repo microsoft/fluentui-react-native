@@ -112,25 +112,14 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       }),
       [],
     ),
-    onText: buildProps(
+    onOffText: buildProps(
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
-          height: tokens.onTextHeight,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', 'onTextHeight', ...fontStyles.keys],
-    ),
-    offText: buildProps(
-      (tokens: SwitchTokens, theme: Theme) => ({
-        style: {
-          color: tokens.color,
-          height: tokens.offTextHeight,
-          ...fontStyles.from(tokens, theme),
-        },
-      }),
-      ['color', 'offTextHeight', ...fontStyles.keys],
+      ['color', ...fontStyles.keys],
     ),
   },
 };
