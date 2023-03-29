@@ -1,15 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Input component tests Input default 1`] = `
-<View
-  onBlur={[Function]}
-  onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-  setText={[Function]}
-  style={
+<RCTScrollView
+  contentContainerStyle={
     Object {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
@@ -20,36 +13,46 @@ exports[`Input component tests Input default 1`] = `
       "paddingHorizontal": 16,
     }
   }
+  keyboardShouldPersistTaps="handled"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  setText={[Function]}
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderBottomColor": "#d1d1d1",
-        "borderBottomWidth": 0.5,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "paddingVertical": 12,
-      }
-    }
-  >
-    <TextInput
-      onChangeText={[Function]}
+  <View>
+    <View
       style={
         Object {
-          "color": "#616161",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-          "padding": 0,
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderBottomColor": "#d1d1d1",
+          "borderBottomWidth": 0.5,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "paddingVertical": 12,
         }
       }
-      value=""
-    />
+    >
+      <TextInput
+        onChangeText={[Function]}
+        style={
+          Object {
+            "color": "#616161",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+            "padding": 0,
+          }
+        }
+        value=""
+      />
+    </View>
   </View>
-</View>
+</RCTScrollView>
 `;
