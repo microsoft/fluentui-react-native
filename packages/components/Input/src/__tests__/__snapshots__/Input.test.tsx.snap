@@ -36,11 +36,10 @@ exports[`Input component tests Input default 1`] = `
     }
   >
     <TextInput
-      defaultValue=" "
       onChangeText={[Function]}
       style={
         Object {
-          "color": "#242424",
+          "color": "#616161",
           "margin": 0,
           "marginBottom": 0,
           "marginEnd": 0,
@@ -49,6 +48,7 @@ exports[`Input component tests Input default 1`] = `
           "padding": 0,
         }
       }
+      value=""
     />
   </View>
 </View>
