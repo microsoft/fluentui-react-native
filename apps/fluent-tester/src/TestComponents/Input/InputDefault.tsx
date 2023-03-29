@@ -17,10 +17,10 @@ export const InputDefault: React.FunctionComponent = () => {
     <View>
       <Input value="Value prop passed!" />
       <Input placeholder="Enter text here!" type="decimal-pad" />
-      <Input placeholder="Enter text here!" dismissIcon={undefined} secondaryText="Secondary" type="email-address" />
+      <Input placeholder="Enter text here!" accessoryIcon={undefined} secondaryText="Secondary" type="email-address" />
       <Input
         placeholder="Enter text here!"
-        dismissIcon={dismissIconProps}
+        accessoryIcon={dismissIconProps}
         label="Label"
         assistiveText="Assistive Text"
         secondaryText="Secondary"
@@ -29,7 +29,7 @@ export const InputDefault: React.FunctionComponent = () => {
         error="Error occured!"
         icon={outlineIconProps}
         placeholder="Enter text here!"
-        dismissIcon={dismissIconProps}
+        accessoryIcon={dismissIconProps}
         label="Label"
         assistiveText="Assistive Text"
         secondaryText="Secondary"
@@ -37,7 +37,7 @@ export const InputDefault: React.FunctionComponent = () => {
       <Input
         icon={outlineIconProps}
         placeholder="Enter text here!"
-        dismissIcon={dismissIconProps}
+        accessoryIcon={dismissIconProps}
         label="Label"
         assistiveText="Assistive Text"
         secondaryText="Secondary"

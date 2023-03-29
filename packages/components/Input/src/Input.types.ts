@@ -22,12 +22,12 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
   /**
    * The dismiss icon color.
    */
-  dismissIconColor?: ColorValue;
+  accessoryIconColor?: ColorValue;
 
   /**
    * The size of the dismiss icon.
    */
-  dismissIconSize?: number;
+  accessoryIconSize?: number;
 
   /**
    * The color of the assistive text.
@@ -62,7 +62,7 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
   /**
    * The width of the divider.
    */
-  strokeWidth?: FontTokens;
+  strokeWidth?: number;
 
   /**
    * The color of the divider.
@@ -87,7 +87,7 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
   /**
    * The space between the dismiss icon and the left content.
    */
-  spacingDismissIconStart?: number;
+  spacingAccessoryIconStart?: number;
 
   /**
    * The input's vertical margin.
@@ -131,17 +131,74 @@ export interface InputProps extends PressableFocusProps {
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
-  dismissIcon?: IconSourcesType | undefined;
+
+  /*
+   * Source URL or name of the icon to show on the Button.
+   */
+  accessoryIcon?: IconSourcesType | undefined;
+
+  /**
+   * Label to display on top of the input.
+   */
   label?: string;
+
+  /**
+   * Assistive text to display on the bottom of the input.
+   */
   assistiveText?: string;
+
+  /**
+   * Secondary text to display on the right of the input.
+   */
   secondaryText?: string;
+
+  /**
+   * Placeholder to display in the input.
+   */
   placeholder?: string;
-  textInputProps?: TextInputProps;
+
+  /**
+   * These props facilitate behaviour changes of the text field.
+   */
+  textInputProps?: Omit<TextInputProps, 'defaultValue' | 'value' | 'keyboardType' | 'onChangeText' | 'onBlur' | 'onFocus'>;
+
+  /**
+   * Optional string that triggers error state when non-empty.
+   * Error message replaces the assistive text and is displayed on the bottom of the input.
+   */
   error?: string;
+
+  /**
+   * The value to show for the text input.
+   * Turns it into a controlled component.
+   * To prevent editting, use textInputProps and set editable as false.
+   */
   value?: string;
+
+  /**
+   * Provides an initial value that will change when the user starts typing.
+   */
   defaultValue?: string;
+
+  /**
+   * Determines which keyboard to open.
+   * enum("default", 'numeric', 'email-address', "ascii-capable", 'numbers-and-punctuation', 'url', 'number-pad', 'phone-pad', 'name-phone-pad',
+   * 'decimal-pad', 'twitter', 'web-search', 'visible-password')
+   * Determines which keyboard to open, e.g.numeric.
+   * The following values work across platforms: - default - numeric - email-address - phone-pad
+   * The following values work on iOS: - ascii-capable - numbers-and-punctuation - url - number-pad - name-phone-pad - decimal-pad - twitter - web-search
+   * The following values work on Android: - visible-password
+   */
   type?: KeyboardTypeOptions | undefined;
+
+  /**
+   * Callback that is called when the text input's text changes.
+   */
   onChange?: (text: string) => void;
+
+  /**
+   * A callback to call on accessoryIcon click event.
+   */
   accessoryButtonOnPress?: (e: InteractionEvent) => void;
 }
 
@@ -157,10 +214,10 @@ export interface InputSlotProps {
   input: ViewProps;
   icon: IconProps;
   inputWrapper: ViewProps;
-  dismissIcon: IconProps;
+  accessoryIcon: IconProps;
   assistiveText: TextProps;
   secondaryText: TextProps;
-  dismissPressable: React.PropsWithRef<PressablePropsExtended>;
+  accessoryIconPressable: React.PropsWithRef<PressablePropsExtended>;
 }
 
 export interface InputType {

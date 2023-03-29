@@ -116,23 +116,23 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
       },
       ['assistiveTextColor', 'assistiveTextFont', 'spacingAssistiveTextVertical', 'spacingAssistiveTextStart', ...fontStyles.keys],
     ),
-    dismissPressable: buildProps(
+    accessoryIconPressable: buildProps(
       (tokens: InputTokens) => ({
         style: {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           justifyContent: 'center',
-          marginStart: tokens.spacingDismissIconStart,
+          marginStart: tokens.spacingAccessoryIconStart,
         },
       }),
-      ['spacingDismissIconStart'],
+      ['spacingAccessoryIconStart'],
     ),
-    dismissIcon: buildProps(
+    accessoryIcon: buildProps(
       (tokens: InputTokens) => ({
-        color: tokens.dismissIconColor,
-        height: tokens.dismissIconSize,
-        width: tokens.dismissIconSize,
+        color: tokens.accessoryIconColor,
+        height: tokens.accessoryIconSize,
+        width: tokens.accessoryIconSize,
       }),
       ['iconColor', 'iconSize'],
     ),

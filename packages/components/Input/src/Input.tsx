@@ -42,15 +42,15 @@ export const Input = compose<InputType>({
     label: Text,
     input: View,
     textInput: TextInput,
-    dismissPressable: Pressable,
-    dismissIcon: Icon,
+    accessoryIconPressable: Pressable,
+    accessoryIcon: Icon,
     assistiveText: Text,
     secondaryText: Text,
   },
   useRender: (userProps: InputProps, useSlots: UseSlots<InputType>) => {
     const input = useInput(userProps);
     const iconProps = createIconProps(userProps.icon);
-    const dismissIconProps = createIconProps(userProps.dismissIcon);
+    const accessoryIconProps = createIconProps(userProps.accessoryIcon);
     const Slots = useSlots(userProps, (layer) => inputLookup(layer, input.state, userProps));
 
     return (final: InputProps) => {
@@ -60,7 +60,7 @@ export const Input = compose<InputType>({
         placeholder,
         assistiveText,
         icon,
-        dismissIcon,
+        accessoryIcon,
         textInputProps,
         error,
         onChange,
@@ -90,12 +90,12 @@ export const Input = compose<InputType>({
                 }}
               />
               {secondaryText && <Slots.secondaryText accessible={false}>{secondaryText}</Slots.secondaryText>}
-              {dismissIcon && (
-                <Slots.dismissPressable
+              {accessoryIcon && (
+                <Slots.accessoryIconPressable
                   onTouchStart={(e) => (accessoryButtonOnPress ? accessoryButtonOnPress(e) : input.props.setText(''))}
                 >
-                  <Slots.dismissIcon {...dismissIconProps} accessible={false} />
-                </Slots.dismissPressable>
+                  <Slots.accessoryIcon {...accessoryIconProps} accessible={false} />
+                </Slots.accessoryIconPressable>
               )}
             </Slots.input>
           </IconWrapper>
