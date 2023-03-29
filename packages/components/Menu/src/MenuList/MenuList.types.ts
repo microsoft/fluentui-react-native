@@ -13,6 +13,10 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * Space between items in pixels
    */
   gap?: number;
+
+  /**
+   * States of the list control
+   */
   hasMaxHeight?: MenuListTokens;
 }
 
@@ -31,6 +35,11 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
    * States that menu items can contain selectable items and reserves space for item alignment
    */
   hasCheckmarks?: boolean;
+
+  /**
+   * States that menu items can contain icons and reserves space for item alignment
+   */
+  hasIcons?: boolean;
 
   /**
    * States that menu items all have tooltips with its text by default.

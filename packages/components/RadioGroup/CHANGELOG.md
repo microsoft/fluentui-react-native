@@ -1,8 +1,106 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Fri, 24 Feb 2023 20:39:59 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.44
+
+Thu, 23 Mar 2023 20:49:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.40
+- Bump @fluentui-react-native/interactive-hooks to v0.22.28
+- Bump @fluentui-react-native/pressable to v0.9.67
+- Bump @fluentui-react-native/text to v0.19.30
+
+## 0.16.43
+
+Tue, 21 Mar 2023 21:53:47 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.13.8
+- Bump @fluentui-react-native/focus-zone to v0.11.39
+- Bump @fluentui-react-native/interactive-hooks to v0.22.27
+- Bump @fluentui-react-native/pressable to v0.9.66
+- Bump @fluentui-react-native/text to v0.19.29
+- Bump @fluentui-react-native/tokens to v0.20.14
+
+## 0.16.42
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.7
+- Bump @fluentui-react-native/focus-zone to v0.11.38
+- Bump @fluentui-react-native/interactive-hooks to v0.22.26
+- Bump @fluentui-react-native/pressable to v0.9.65
+- Bump @fluentui-react-native/text to v0.19.28
+- Bump @fluentui-react-native/tokens to v0.20.13
+
+## 0.16.41
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.6
+- Bump @fluentui-react-native/focus-zone to v0.11.37
+- Bump @fluentui-react-native/interactive-hooks to v0.22.25
+- Bump @fluentui-react-native/pressable to v0.9.64
+- Bump @fluentui-react-native/text to v0.19.27
+- Bump @fluentui-react-native/tokens to v0.20.12
+
+## 0.16.40
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.5
+- Bump @fluentui-react-native/focus-zone to v0.11.36
+- Bump @fluentui-react-native/interactive-hooks to v0.22.24
+- Bump @fluentui-react-native/pressable to v0.9.63
+- Bump @fluentui-react-native/text to v0.19.26
+
+## 0.16.39
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.35
+- Bump @fluentui-react-native/interactive-hooks to v0.22.23
+- Bump @fluentui-react-native/pressable to v0.9.62
+- Bump @fluentui-react-native/text to v0.19.25
+
+## 0.16.38
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.4
+- Bump @fluentui-react-native/focus-zone to v0.11.34
+- Bump @fluentui-react-native/interactive-hooks to v0.22.22
+- Bump @fluentui-react-native/pressable to v0.9.61
+- Bump @fluentui-react-native/text to v0.19.24
+- Bump @fluentui-react-native/tokens to v0.20.11
+
+## 0.16.37
+
+Tue, 28 Feb 2023 21:34:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.33
+- Bump @fluentui-react-native/interactive-hooks to v0.22.21
+- Bump @fluentui-react-native/pressable to v0.9.60
+- Bump @fluentui-react-native/text to v0.19.23
 
 ## 0.16.36
 

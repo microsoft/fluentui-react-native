@@ -1,8 +1,97 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 24 Feb 2023 20:39:58 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.21.5
+
+Thu, 23 Mar 2023 20:49:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.40
+
+## 1.21.4
+
+Tue, 21 Mar 2023 21:53:46 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.39
+
+## 1.21.3
+
+Tue, 21 Mar 2023 17:43:32 GMT
+
+### Patches
+
+- Revert "Update appium and node version (#2620)" (krsiler@microsoft.com)
+
+## 1.21.2
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.38
+
+## 1.21.1
+
+Fri, 17 Mar 2023 18:39:51 GMT
+
+### Patches
+
+- Update appium beta version to version that doesn't use jsdoc (ruaraki@microsoft.com)
+
+## 1.21.0
+
+Fri, 17 Mar 2023 14:13:25 GMT
+
+### Minor changes
+
+- IconTests (email not defined)
+
+## 1.20.8
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.37
+
+## 1.20.7
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.36
+
+## 1.20.6
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.35
+
+## 1.20.5
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.34
+
+## 1.20.4
+
+Tue, 28 Feb 2023 21:34:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.33
 
 ## 1.20.3
 
