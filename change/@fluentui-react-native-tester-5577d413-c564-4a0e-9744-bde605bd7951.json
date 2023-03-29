@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Fix version",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
