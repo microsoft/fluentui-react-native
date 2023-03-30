@@ -56,6 +56,7 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
     textInput: buildProps(
       (tokens: InputTokens, theme: Theme) => ({
         selectionColor: tokens.cursorColor,
+        placeholderTextColor: tokens.inputTextColor,
         style: {
           ...fontStyles.from(tokens.inputTextFont, theme),
           ...getTextMarginAdjustment(),

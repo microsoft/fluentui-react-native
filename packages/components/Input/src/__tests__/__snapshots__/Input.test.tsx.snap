@@ -39,6 +39,7 @@ exports[`Input component tests Input default 1`] = `
     >
       <TextInput
         onChangeText={[Function]}
+        placeholderTextColor="#616161"
         style={
           Object {
             "color": "#616161",

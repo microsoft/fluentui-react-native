@@ -77,7 +77,7 @@ export const Input = compose<InputType>({
         <Slots.root {...mergedProps} keyboardShouldPersistTaps={keyboardShouldPersistTaps ? keyboardShouldPersistTaps : 'handled'}>
           {label && <Slots.label>{label}</Slots.label>}
           <IconWrapper>
-            {icon && <Slots.icon {...iconProps} />}
+            {icon && <Slots.icon {...iconProps} accessible={false} />}
             <Slots.input>
               <Slots.textInput
                 keyboardType={type}
@@ -90,9 +90,10 @@ export const Input = compose<InputType>({
                   onChange && onChange(text);
                 }}
               />
-              {secondaryText && <Slots.secondaryText accessible={false}>{secondaryText}</Slots.secondaryText>}
+              {secondaryText && <Slots.secondaryText>{secondaryText}</Slots.secondaryText>}
               {accessoryIcon && (
                 <Slots.accessoryIconPressable
+                  accessibilityRole="button"
                   onTouchStart={(e) => (accessoryButtonOnPress ? accessoryButtonOnPress(e) : input.props.setText(''))}
                 >
                   <Slots.accessoryIcon {...accessoryIconProps} accessible={false} />
