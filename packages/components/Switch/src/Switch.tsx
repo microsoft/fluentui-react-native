@@ -71,30 +71,9 @@ export const Switch = compose<SwitchType>({
     // now return the handler for finishing render
     return (final: SwitchProps) => {
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
-      const isToggled = switchInfo.state.toggled;
+      const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
-
-      /**
-       * We render on/off text two ways. If the onText and offText are different lengths, this can cause unwanted shifting of the
-       * track, if labelPosition = "after", or the label, if labelPosition = "above". In this case, we prevent shifting by rendering
-       * both texts and setting the correct text height to zero depending on the switch's toggled state.
-       *
-       * If labelPosition = "before", none of the other slots will shift, so we can just render one onOffText slot and toggle the displayed
-       * text.
-       */
-      const displayOnOffText = !!offText || !!onText;
-      let onOffTextJsx = null;
-      if (displayOnOffText && labelPosition !== 'before') {
-        onOffTextJsx = (
-          <Slots.onOffTextContainer>
-            <Slots.onOffText style={getOnOffTextStyle('on', isToggled)}>{onText}</Slots.onOffText>
-            <Slots.onOffText style={getOnOffTextStyle('off', isToggled)}>{offText}</Slots.onOffText>
-          </Slots.onOffTextContainer>
-        );
-      } else if (displayOnOffText) {
-        onOffTextJsx = <Slots.onOffText>{isToggled ? onText : offText}</Slots.onOffText>;
-      }
 
       return (
         <Slots.root {...mergedProps}>
@@ -104,7 +83,17 @@ export const Switch = compose<SwitchType>({
             <Slots.track {...(isMobile && { style: switchInfo.props.switchAnimationStyles.trackBackgroundStyle })}>
               <Slots.thumb {...thumbAnimation} {...(isMobile && { style: switchInfo.props.switchAnimationStyles.thumbAnimatedStyle })} />
             </Slots.track>
-            {onOffTextJsx}
+            {displayOnOffText && (
+              /**
+               * If the onText and offText are different lengths, this can cause unwanted shifting of the track, if labelPosition = "after",
+               * or the label, if labelPosition = "above". We fix this by rendering both texts and setting the height of the text to hide to
+               * zero. This way, even when not visible, the hidden text still takes up its width to prevent shifting.
+               */
+              <Slots.onOffTextContainer>
+                <Slots.onOffText style={getOnOffTextStyle('on', switchInfo.state.toggled)}>{onText}</Slots.onOffText>
+                <Slots.onOffText style={getOnOffTextStyle('off', switchInfo.state.toggled)}>{offText}</Slots.onOffText>
+              </Slots.onOffTextContainer>
+            )}
           </Slots.toggleContainer>
         </Slots.root>
       );
