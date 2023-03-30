@@ -150,7 +150,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -192,11 +192,11 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -294,7 +294,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -336,11 +336,11 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -503,7 +503,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -545,11 +545,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -647,7 +647,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -689,11 +689,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -861,7 +861,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -903,11 +903,11 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               Object {
                 "color": "#bdbdbd",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -1010,7 +1010,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -1052,11 +1052,11 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               Object {
                 "color": "#bdbdbd",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -1220,7 +1220,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -1262,11 +1262,11 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -1364,7 +1364,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -1406,11 +1406,11 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -1572,7 +1572,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "borderWidth": 1,
               "height": 16,
               "justifyContent": "center",
-              "marginBottom": 6,
+              "marginBottom": 0,
               "marginLeft": 6,
               "marginRight": 6,
               "marginTop": 6,
@@ -1616,7 +1616,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
@@ -1716,7 +1716,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "borderWidth": 1,
               "height": 16,
               "justifyContent": "center",
-              "marginBottom": 6,
+              "marginBottom": 0,
               "marginLeft": 6,
               "marginRight": 6,
               "marginTop": 6,
@@ -1760,7 +1760,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
@@ -1944,7 +1944,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -1986,11 +1986,11 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -2088,7 +2088,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "justifyContent": "center",
               "marginBottom": 6,
               "marginLeft": 4,
-              "marginRight": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -2130,11 +2130,11 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
-                "fontSize": 16,
+                "fontSize": 12,
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >

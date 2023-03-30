@@ -91,7 +91,7 @@ exports[`Radio component tests Radio default 1`] = `
         "justifyContent": "center",
         "marginBottom": 6,
         "marginLeft": 4,
-        "marginRight": 4,
+        "marginRight": 0,
         "marginTop": 6,
         "width": 16,
       }
@@ -133,11 +133,11 @@ exports[`Radio component tests Radio default 1`] = `
         Object {
           "color": "#242424",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 12,
           "fontWeight": "400",
           "margin": 0,
           "marginHorizontal": 2,
-          "marginVertical": 2,
+          "marginVertical": 4,
         }
       }
     >
@@ -243,7 +243,7 @@ exports[`Radio component tests Radio disabled 1`] = `
         "justifyContent": "center",
         "marginBottom": 6,
         "marginLeft": 4,
-        "marginRight": 4,
+        "marginRight": 0,
         "marginTop": 6,
         "width": 16,
       }
@@ -285,11 +285,11 @@ exports[`Radio component tests Radio disabled 1`] = `
         Object {
           "color": "#bdbdbd",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 12,
           "fontWeight": "400",
           "margin": 0,
           "marginHorizontal": 2,
-          "marginVertical": 2,
+          "marginVertical": 4,
         }
       }
     >
