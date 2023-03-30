@@ -14,7 +14,7 @@ import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
-import type { IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from '../RadioButton.types';
+import type { IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { radioButtonName } from './RadioButton.types';
 import { RadioGroupContext } from './RadioGroup';
 
