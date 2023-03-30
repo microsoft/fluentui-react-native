@@ -1,7 +1,7 @@
 import type { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-import type { IRadioButtonType } from './RadioButton.types';
-import { radioButtonName } from './RadioButton.types';
+import type { IRadioButtonType } from '../RadioButton.types';
+import { radioButtonName } from '../RadioButton.types';
 
 const radioButtonSize = 20;
 const radioButtonRadius = radioButtonSize / 2;

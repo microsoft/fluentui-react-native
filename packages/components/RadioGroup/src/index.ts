@@ -1,4 +1,4 @@
-export { RadioButton } from './RadioButton';
+export { RadioButton } from './legacy/RadioButton';
 export { radioButtonName } from './RadioButton.types';
 export type {
   IRadioButtonProps,
