@@ -3,7 +3,7 @@ import * as React from 'react';
 import { /* checkRenderConsistency,*/ checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
-import { Radio } from './Radio';
+import { Radio } from '../Radio';
 
 describe('Radio component tests', () => {
   it('Radio default', () => {
