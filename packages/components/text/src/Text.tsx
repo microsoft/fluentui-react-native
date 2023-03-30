@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React from 'react';
-import { I18nManager, Platform, Text as RNText } from 'react-native';
+import { I18nManager, Platform, Text as RNText, View } from 'react-native';
 
 import { useFontMetricsScaleFactors } from '@fluentui-react-native/experimental-native-font-metrics';
 import type { UseTokens, FontWeightValue } from '@fluentui-react-native/framework';
@@ -155,9 +155,11 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     delete (mergedProps.style as TextTokens).maximumFontSize;
 
     return (
-      <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
-        {children}
-      </RNText>
+      <View style={{ flexShrink: 1 }}>
+        <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
+          {children}
+        </RNText>
+      </View>
     );
   };
 }, useTextTokens);
