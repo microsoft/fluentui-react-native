@@ -11,21 +11,9 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
   _userInterfaceLevel: UserInterfaceLevel;
   _accessibilityContrastOption: AccessibilityContrastOption;
 
-  get horizontalSizeClass(): SizeClass {
-    return this._horizontalSizeClass;
-  }
-
-  get userInterfaceLevel(): UserInterfaceLevel {
-    return this._userInterfaceLevel;
-  }
-
-  get accessibilityContrastOption(): AccessibilityContrastOption {
-    return this._accessibilityContrastOption;
-  }
-
   constructor() {
-    this._horizontalSizeClass = NativeAppearanceAdditions.horizontalSizeClass();
-    this._userInterfaceLevel = NativeAppearanceAdditions.userInterfaceLevel();
+    this._horizontalSizeClass = NativeAppearanceAdditions.horizontalSizeClass(null);
+    this._userInterfaceLevel = NativeAppearanceAdditions.userInterfaceLevel(null);
     this._accessibilityContrastOption = NativeAppearanceAdditions.accessibilityContrastOption();
 
     const eventEmitter = new NativeEventEmitter(NativeAppearanceAdditions as any);
@@ -34,6 +22,24 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
       this._userInterfaceLevel = newValue[UserInterfaceLevelKey];
       this._accessibilityContrastOption = newValue[AccessibilityContrastOptionKey];
     });
+  }
+
+  horizontalSizeClass(viewTag = null): SizeClass {
+    if (!viewTag) {
+      return this._horizontalSizeClass;
+    }
+    return NativeAppearanceAdditions.horizontalSizeClass(viewTag);
+  }
+
+  userInterfaceLevel(viewTag = null): UserInterfaceLevel {
+    if (!viewTag) {
+      return this._userInterfaceLevel;
+    }
+    return NativeAppearanceAdditions.userInterfaceLevel(viewTag);
+  }
+
+  accessibilityContrastOption(): AccessibilityContrastOption {
+    return this._accessibilityContrastOption;
   }
 }
 

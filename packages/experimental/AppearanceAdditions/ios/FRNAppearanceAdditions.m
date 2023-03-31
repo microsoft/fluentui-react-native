@@ -1,4 +1,5 @@
 #import "FRNAppearanceAdditions.h"
+#import "RCTUIManager.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTConstants.h>
@@ -79,11 +80,25 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
     return YES;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass:(id)viewTag) {
+    RCTExecuteOnMainQueue(^{
+        if ([viewTag isKindOfClass:[NSNumber class]]) {
+            UIView *view = [[[self bridge] uiManager] viewForReactTag:viewTag];
+            NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
+            self->_horizontalSizeClass = horizontalSizeClass;
+        }
+    });
     return _horizontalSizeClass;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel:(id)viewTag) {
+    RCTExecuteOnMainQueue(^{
+        if ([viewTag isKindOfClass:[NSNumber class]]) {
+            UIView *view = [[[self bridge] uiManager] viewForReactTag:viewTag];
+            NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
+            self->_horizontalSizeClass = horizontalSizeClass;
+        }
+    });
     return _userInterfaceLevel;
 }
 
@@ -103,20 +118,6 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption) {
 
 - (void)startObserving {
     _hasListeners = YES;
-    
-    for (UIWindow *window in RCTSharedApplication().windows) {
-        RCTRootView *rootView = (RCTRootView *)[[window rootViewController] view];
-        
-        if ([rootView isKindOfClass:[RCTRootView class]]) {
-            if ([[rootView bridge] isEqual:[[self bridge] parentBridge]]) {
-                UITraitCollection *windowTraitCollection = [window traitCollection];
-                
-                _horizontalSizeClass = RCTHorizontalSizeClassPreference(windowTraitCollection);
-                _userInterfaceLevel = RCTUserInterfaceLevelPreference(windowTraitCollection);
-                _accessibilityContrastOption = RCTAccessibilityContrastPreference(windowTraitCollection);
-            }
-        }
-    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
