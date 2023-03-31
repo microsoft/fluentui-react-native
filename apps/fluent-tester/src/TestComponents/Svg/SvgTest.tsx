@@ -195,10 +195,20 @@ const CustomSvgInputTest: React.FunctionComponent = () => {
   <rect width="48" height="48" fill="red"/>
   </svg>
 `;
+
+  const textInputStyle = { height: 256, width: 1024, borderColor: 'gray', borderWidth: 1, fontSize: 16 };
   const [inputText, setInputText] = useState<string>(defaultxml);
   const [svgText, setSvgText] = useState<string>(defaultxml);
   const [dataText, setDataText] = useState<string>('click draw to see parsed data');
   const [showParse, setShowParsed] = useState<boolean>(false);
+
+  const handleChangeText = React.useCallback(
+    (text: string) => {
+      setInputText(text);
+    },
+    [setInputText],
+  );
+
   return (
     <View>
       <Text>
@@ -209,10 +219,8 @@ const CustomSvgInputTest: React.FunctionComponent = () => {
         multiline={true}
         accessibilityLabel="Custom svg text input"
         value={inputText}
-        style={{ height: 256, width: 1024, borderColor: 'gray', borderWidth: 1, fontSize: 16 }}
-        onChangeText={(text) => {
-          setInputText(text);
-        }}
+        style={textInputStyle}
+        onChangeText={handleChangeText}
       />
       <View style={{ flexDirection: 'row' }}>
         <Button
