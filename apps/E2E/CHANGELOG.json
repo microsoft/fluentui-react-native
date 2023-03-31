@@ -2,6 +2,102 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 23 Mar 2023 20:49:23 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.21.5",
+      "version": "1.21.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.40",
+            "commit": "58c71da6843a333d3b6faca82a851916205a4fd0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Mar 2023 21:53:46 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.21.4",
+      "version": "1.21.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.39",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Mar 2023 17:43:32 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.21.3",
+      "version": "1.21.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "f21c6d04916d6850f0ce574132ddfdc3e11e08fa",
+            "comment": "Revert \"Update appium and node version (#2620)\""
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Mar 2023 17:22:31 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.21.2",
+      "version": "1.21.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.38",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Mar 2023 18:39:51 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.21.1",
+      "version": "1.21.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4b07fa13ee8b829a0f509c99a042b24c450a1bbd",
+            "comment": "Update appium beta version to version that doesn't use jsdoc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Mar 2023 14:13:25 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.21.0",
+      "version": "1.21.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "7d5d72719836693db47a35fdbd4c03f92fe2c8ca",
+            "comment": "IconTests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.20.8",
       "version": "1.20.8",

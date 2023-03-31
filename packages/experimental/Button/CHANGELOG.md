@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.106
+
+Thu, 23 Mar 2023 20:49:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.48
+
+## 0.16.105
+
+Tue, 21 Mar 2023 21:53:46 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @fluentui-react-native/button to v0.32.47
+
+## 0.16.104
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.46
+
+## 0.16.103
+
+Fri, 17 Mar 2023 14:13:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.45
 
 ## 0.16.102
 

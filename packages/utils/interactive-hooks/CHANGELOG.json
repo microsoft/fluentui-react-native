@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Thu, 23 Mar 2023 20:49:23 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.28",
+      "version": "0.22.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "58c71da6843a333d3b6faca82a851916205a4fd0",
+            "comment": "Change modifier key handling"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Mar 2023 21:53:47 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.27",
+      "version": "0.22.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.8",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Mar 2023 17:22:31 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.26",
+      "version": "0.22.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.7",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.22.25",
       "version": "0.22.25",

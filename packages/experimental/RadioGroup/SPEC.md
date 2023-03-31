@@ -333,12 +333,6 @@ export interface RadioProps extends PressablePropsExtended {
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
-
-  /**
-   * Whether to use native focus visuals for the component
-   * @default true
-   */
-  enableFocusRing?: boolean;
 }
 ```
 

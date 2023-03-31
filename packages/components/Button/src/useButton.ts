@@ -8,14 +8,23 @@ import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
 import type { ButtonProps, ButtonInfo } from './Button.types';
 
+// On win32 we don't want to fire the onClick event if the Button
+// hasn't received a key down event first. This prevents behavior
+// like the button firing after you tab to it white Enter is pressed
+// and then releasing Enter, or the Menu reopening since it closes
+// onKeyDown while the Button operates onKeyUp.
+const shouldOnlyFireIfPressed = Platform.OS === ('win32' as any);
+let isProcessingKeyboardInvocation = false;
+
 export const useButton = (props: ButtonProps): ButtonInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
-    onClick,
     accessible,
     accessibilityRole,
     componentRef = defaultComponentRef,
     disabled,
+    onBlur,
+    onClick,
     loading,
     enableFocusRing,
     focusable,
@@ -23,16 +32,42 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   } = props;
 
   const isDisabled = !!disabled || !!loading;
+
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
   const onClickWithFocus = useOnPressWithFocus(focusRef, onClick);
-  const pressable = usePressableState({ ...rest, onPress: onClickWithFocus });
-  const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
+  const onBlurInner = React.useCallback(
+    (e) => {
+      isProcessingKeyboardInvocation = false;
+      onBlur?.(e);
+    },
+    [onBlur],
+  );
+  const pressable = usePressableState({ ...rest, onPress: onClickWithFocus, onBlur: shouldOnlyFireIfPressed ? onBlurInner : onBlur });
+
+  const onKeyDown = React.useCallback(
+    (e) => {
+      if (!disabled && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
+        isProcessingKeyboardInvocation = true;
+      }
+    },
+    [disabled],
+  );
+  const onKeyPress = React.useCallback(
+    (e) => {
+      if (isProcessingKeyboardInvocation) {
+        onClick?.(e);
+        isProcessingKeyboardInvocation = false;
+      }
+    },
+    [onClick],
+  );
+  const onKeyProps = useKeyProps(shouldOnlyFireIfPressed ? onKeyPress : onClick, ' ', 'Enter');
+
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 
   const theme = useFluentTheme();
   const shouldUseTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary' && !isHighContrast(theme);
-
   const [baseHeight, setBaseHeight] = React.useState<number | undefined>(undefined);
   const [baseWidth, setBaseWidth] = React.useState<number | undefined>(undefined);
   const onLayout = React.useCallback(
@@ -49,7 +84,8 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
 
   return {
     props: {
-      ...onKeyUpProps,
+      ...onKeyProps,
+      ...(Platform.OS === ('win32' as any) && { onKeyDown: onKeyDown }),
       ...pressable.props, // allow user key events to override those set by us
       /**
        * https://github.com/facebook/react-native/issues/34986
@@ -70,6 +106,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     },
     state: {
       ...pressable.state,
+      pressed: pressable.state.pressed,
       measuredWidth: baseWidth,
       measuredHeight: baseHeight,
       shouldUseTwoToneFocusBorder: shouldUseTwoToneFocusBorder,

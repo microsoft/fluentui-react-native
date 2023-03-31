@@ -2,6 +2,150 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Thu, 23 Mar 2023 20:49:23 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.8.45",
+      "version": "0.8.45",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.28",
+            "commit": "58c71da6843a333d3b6faca82a851916205a4fd0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.40",
+            "commit": "58c71da6843a333d3b6faca82a851916205a4fd0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/text to v0.19.30",
+            "commit": "58c71da6843a333d3b6faca82a851916205a4fd0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.24",
+            "commit": "58c71da6843a333d3b6faca82a851916205a4fd0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Mar 2023 21:53:46 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.8.44",
+      "version": "0.8.44",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.8",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.27",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.39",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/text to v0.19.29",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.14",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.23",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Mar 2023 17:22:31 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.8.43",
+      "version": "0.8.43",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.7",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.26",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.38",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/text to v0.19.28",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.13",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.22",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Mar 2023 14:13:25 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.8.42",
+      "version": "0.8.42",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.21",
+            "commit": "7d5d72719836693db47a35fdbd4c03f92fe2c8ca"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/experimental-tabs_v0.8.41",
       "version": "0.8.41",

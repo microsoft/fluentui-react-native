@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui/react-native';
+import type { MenuProps } from '@fluentui-react-native/menu';
 import {
   Menu,
   MenuItem,
@@ -123,9 +124,9 @@ const MenuRadioItem: React.FunctionComponent = () => {
   );
 };
 
-const Submenu: React.FunctionComponent = () => {
+const Submenu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
   return (
-    <Menu>
+    <Menu {...props}>
       <MenuTrigger>
         <MenuItem>A second MenuItem trigger</MenuItem>
       </MenuTrigger>
@@ -249,6 +250,64 @@ const MenuCustomized: React.FunctionComponent = () => {
   );
 };
 
+const MenuNofM: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem>A plain MenuItem</MenuItem>
+            <MenuItem disabled>A disabled MenuItem</MenuItem>
+            <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
+            <MenuDivider />
+            <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />
+            <MenuItem disabled accessibilitySetSize={2}>
+              A disabled MenuItem
+            </MenuItem>
+            <MenuItem>A plain MenuItem</MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
+const CustomMenuTrigger: React.FunctionComponent = () => {
+  return (
+    <View style={{ borderColor: 'purple', borderWidth: 3 }}>
+      <MenuTrigger>
+        <Button>Test</Button>
+      </MenuTrigger>
+    </View>
+  );
+};
+
+const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <CustomMenuTrigger />
+        <MenuPopover>
+          <MenuList>
+            <MenuItem>A plain MenuItem</MenuItem>
+            <MenuItem disabled>A disabled MenuItem</MenuItem>
+            <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
+            <MenuDivider />
+            <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />
+            <MenuItem disabled accessibilitySetSize={2}>
+              A disabled MenuItem
+            </MenuItem>
+            <MenuItem>A plain MenuItem</MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',
@@ -302,6 +361,14 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Refs',
     component: MenuTriggerChildRef,
+  },
+  {
+    name: 'Menu N of M Override',
+    component: MenuNofM,
+  },
+  {
+    name: 'Menu with custom MenuTrigger',
+    component: MenuWithCustomMenuTrigger,
   },
 ];
 

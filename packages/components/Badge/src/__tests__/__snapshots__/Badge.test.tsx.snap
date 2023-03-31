@@ -125,6 +125,77 @@ exports[`Badge component tests Empty Badge 1`] = `
 />
 `;
 
+exports[`Badge component tests Filled badge with shadow 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0078d4",
+      "borderColor": "transparent",
+      "borderRadius": 9999,
+      "bottom": 0,
+      "justifyContent": "center",
+      "minHeight": 24,
+      "minWidth": 24,
+      "position": "relative",
+      "right": 0,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 8,
+    }
+  }
+>
+  <View
+    appearance="filled"
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "backgroundColor": "#0078d4",
+        "borderColor": "transparent",
+        "borderRadius": 9999,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "minHeight": 24,
+        "minWidth": 24,
+        "paddingHorizontal": 4,
+        "position": "relative",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 32,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 64,
+      }
+    }
+  >
+    <Text
+      accessible={false}
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+        }
+      }
+    >
+      Badge with shadow
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`CounterBadge component tests CounterBadge all props 1`] = `
 <View
   appearance="ghost"

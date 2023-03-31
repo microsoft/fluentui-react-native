@@ -28,7 +28,14 @@ export interface MenuItemCheckboxTokens
    */
   checkmarkVisibility?: number;
 
+  /**
+   * Color of the icon
+   */
   iconColor?: ColorValue;
+
+  /**
+   * Size of the icon. Pixels for SVG and points for font icon.
+   */
   iconSize?: number;
 
   /**
@@ -47,6 +54,7 @@ export interface MenuItemCheckboxProps extends MenuItemProps {
    */
   name: string;
 }
+
 export interface MenuItemCheckboxInfo {
   props: MenuItemCheckboxProps & React.ComponentPropsWithRef<any>;
   state: PressableState & { hasIcons: boolean; hasTooltips: boolean };
