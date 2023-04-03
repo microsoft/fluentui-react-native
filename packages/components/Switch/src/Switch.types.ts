@@ -202,6 +202,7 @@ export interface SwitchSlotProps {
   track: IViewProps;
   thumb: IViewProps;
   toggleContainer: IViewProps;
+  onOffTextContainer: IViewProps;
   onOffText: TextProps;
 }
 

@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 28 Mar 2023 12:35:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.137.0",
+      "version": "0.137.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/tester",
+            "commit": "9fcc6e9f7e8991de128b30c72303933c2e549b81",
+            "comment": "Fix version"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 27 Mar 2023 21:16:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.136.6",
+      "version": "0.136.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "33c4253041b0a3b5b32e27fb01f97fce7601d3a3",
+            "comment": "polish bug fixes"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.9.31",
+            "commit": "33c4253041b0a3b5b32e27fb01f97fce7601d3a3"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Mar 2023 15:52:40 GMT",
       "tag": "@fluentui-react-native/tester_v0.136.5",
       "version": "0.136.5",
