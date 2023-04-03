@@ -80,6 +80,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           padding: tokens.labelPadding,
           paddingRight: 0,
           ...borderStyles.from(tokens, theme),
+          flexShrink: 1,
         },
       }),
       ['labelAlignItems', 'labelMarginRight', 'labelMarginLeft', 'labelPadding', ...borderStyles.keys],
