@@ -50,7 +50,7 @@ jobs:
         displayName: 'install npm 8.10.0'
 
       - script: |
-          npm publish ----dry-run
+          npm publish --dry-run
         workingDirectory: packages/components/Button
         displayName: publish dry-run
 
