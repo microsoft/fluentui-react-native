@@ -8,6 +8,7 @@ import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from './c
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
 import { win32Typography } from './getThemeTypography';
 import { getThemingModule } from './NativeModule/getThemingModule';
+import { getCurrentHostThemeSetting, setCurrentHostThemeSetting } from './NativeModule/hostThemeSetting';
 import type { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
@@ -26,7 +27,7 @@ function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette
  */
 export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
   const [module, emitter] = getThemingModule();
-  const ref = { module, emitter, themeName: module.initialHostThemeSetting || '' };
+  const ref = { module, emitter, themeName: getCurrentHostThemeSetting() || '' };
   const { paletteName } = options;
 
   const themeRef = new ThemeReference(
@@ -74,6 +75,7 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
   // set up the callback for theme changes on the native side
   const onPlatformDefaultsChanged = (args: PlatformDefaultsChangedArgs) => {
     ref.themeName = (args && args.hostThemeSetting) || ref.themeName;
+    setCurrentHostThemeSetting(ref.themeName);
     themeRef.invalidate();
   };
   emitter && emitter.addListener('onPlatformDefaultsChanged', onPlatformDefaultsChanged);

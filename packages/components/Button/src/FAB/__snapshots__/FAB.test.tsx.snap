@@ -12,6 +12,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -50,7 +51,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     ♣
   </Text>
   <Text
-    accessibilityRole="text"
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -106,6 +107,7 @@ exports[`Default FAB (iOS) 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onLayout={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -150,7 +152,7 @@ exports[`Default FAB (iOS) 1`] = `
       ♣
     </Text>
     <Text
-      accessibilityRole="text"
+      accessible={false}
       ellipsizeMode="tail"
       numberOfLines={0}
       style={

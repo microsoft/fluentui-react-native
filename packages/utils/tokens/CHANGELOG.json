@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Tue, 21 Mar 2023 21:53:45 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.20.14",
+      "version": "0.20.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6",
+            "comment": "Trigger manual bump (no changes)"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Mar 2023 17:22:31 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.20.13",
+      "version": "0.20.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf",
+            "comment": "Add 'width' to layout-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Mar 2023 20:50:45 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.20.12",
+      "version": "0.20.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.31.0",
+            "commit": "b2d39b11dbaa12600bd96a9d54e0ebd013d9597f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 03 Mar 2023 06:47:26 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.20.11",
+      "version": "0.20.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.30.4",
+            "commit": "4659b74650377d2f746a81a321346a481816a5af"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:40:00 GMT",
       "tag": "@fluentui-react-native/tokens_v0.20.10",
       "version": "0.20.10",

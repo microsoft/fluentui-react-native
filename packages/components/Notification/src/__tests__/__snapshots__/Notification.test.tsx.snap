@@ -102,6 +102,7 @@ exports[`Notification component tests Notification default 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -139,7 +140,7 @@ exports[`Notification component tests Notification default 1`] = `
       }
     >
       <Text
-        accessibilityRole="text"
+        accessible={false}
         ellipsizeMode="tail"
         numberOfLines={0}
         style={

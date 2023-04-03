@@ -15,7 +15,17 @@ import type { TabsItemProps, TabsItemInfo } from './TabsItem.types';
  */
 export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   const defaultComponentRef = React.useRef<IFocusable>(null);
-  const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
+  const {
+    accessibilityLabel,
+    accessible,
+    headerText,
+    componentRef = defaultComponentRef,
+    itemKey,
+    disabled,
+    itemCount,
+    icon,
+    ...rest
+  } = props;
   // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
   const info = React.useContext(TabsContext);
 
@@ -61,7 +71,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   return {
     props: {
       ...pressable.props,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityRole: 'tab',
       accessibilityLabel: accessibilityLabel || headerText,
       focusable: !disabled ?? true,

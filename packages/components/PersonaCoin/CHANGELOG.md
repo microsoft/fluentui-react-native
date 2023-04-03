@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Fri, 24 Feb 2023 20:39:59 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Mar 2023 21:53:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.30
+
+Tue, 21 Mar 2023 21:53:47 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.13.8
+- Bump @fluentui-react-native/framework to v0.9.8
+- Bump @fluentui-react-native/tokens to v0.20.14
+- Bump @uifabricshared/foundation-tokens to v0.12.31
+
+## 0.12.29
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.7
+- Bump @fluentui-react-native/framework to v0.9.7
+- Bump @fluentui-react-native/tokens to v0.20.13
+- Bump @uifabricshared/foundation-tokens to v0.12.30
+
+## 0.12.28
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.6
+- Bump @fluentui-react-native/framework to v0.9.6
+- Bump @fluentui-react-native/theme-tokens to v0.24.5
+- Bump @fluentui-react-native/tokens to v0.20.12
+- Bump @uifabricshared/foundation-tokens to v0.12.29
+
+## 0.12.27
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.5
+- Bump @fluentui-react-native/framework to v0.9.5
+
+## 0.12.26
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.13.4
+- Bump @fluentui-react-native/framework to v0.9.4
+- Bump @fluentui-react-native/theme-tokens to v0.24.4
+- Bump @fluentui-react-native/tokens to v0.20.11
+- Bump @uifabricshared/foundation-tokens to v0.12.28
 
 ## 0.12.25
 

@@ -1,8 +1,131 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Wed, 01 Mar 2023 05:47:50 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.8
+
+Thu, 23 Mar 2023 20:49:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.5.7
+- Bump @fluentui-react-native/icon to v0.17.24
+
+## 1.8.7
+
+Tue, 21 Mar 2023 21:53:45 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.5.6
+- Bump @fluentui-react-native/framework to v0.9.8
+- Bump @fluentui-react-native/icon to v0.17.23
+- Bump @fluentui-react-native/theming-utils to v0.23.10
+- Bump @fluentui-react-native/tokens to v0.20.14
+
+## 1.8.6
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.5.5
+- Bump @fluentui-react-native/framework to v0.9.7
+- Bump @fluentui-react-native/icon to v0.17.22
+- Bump @fluentui-react-native/theming-utils to v0.23.9
+- Bump @fluentui-react-native/tokens to v0.20.13
+
+## 1.8.5
+
+Fri, 17 Mar 2023 14:13:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.5.4
+- Bump @fluentui-react-native/icon to v0.17.21
+
+## 1.8.4
+
+Thu, 16 Mar 2023 18:23:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.5.3
+
+## 1.8.3
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.5.2
+- Bump @fluentui-react-native/framework to v0.9.6
+- Bump @fluentui-react-native/icon to v0.17.20
+- Bump @fluentui-react-native/theme-tokens to v0.24.5
+- Bump @fluentui-react-native/theming-utils to v0.23.8
+- Bump @fluentui-react-native/tokens to v0.20.12
+
+## 1.8.2
+
+Tue, 14 Mar 2023 18:43:06 GMT
+
+### Patches
+
+- Fix customizeable accessible (ruaraki@microsoft.com)
+
+## 1.8.1
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Repoint current implementations of isHighContrast to new function (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.5.1
+- Bump @fluentui-react-native/framework to v0.9.5
+- Bump @fluentui-react-native/icon to v0.17.19
+- Bump @fluentui-react-native/theming-utils to v0.23.7
+
+## 1.8.0
+
+Tue, 07 Mar 2023 07:23:34 GMT
+
+### Minor changes
+
+- Add separate svgs feature (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/badge to v0.5.0
+
+## 1.7.3
+
+Sat, 04 Mar 2023 00:02:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.4.34
+- Bump @fluentui-react-native/icon to v0.17.18
+
+## 1.7.2
+
+Fri, 03 Mar 2023 06:47:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.4.33
+- Bump @fluentui-react-native/framework to v0.9.4
+- Bump @fluentui-react-native/icon to v0.17.17
+- Bump @fluentui-react-native/theme-tokens to v0.24.4
+- Bump @fluentui-react-native/tokens to v0.20.11
+
+## 1.7.1
+
+Thu, 02 Mar 2023 19:11:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.4.32
+- Bump @fluentui-react-native/icon to v0.17.16
 
 ## 1.7.0
 
