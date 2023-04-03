@@ -126,12 +126,14 @@ exports[`Radio component tests Radio default 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#616161",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "400",
@@ -277,12 +279,14 @@ exports[`Radio component tests Radio disabled 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#bdbdbd",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "400",

@@ -31,12 +31,14 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "600",
@@ -185,12 +187,14 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -328,12 +332,14 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -382,12 +388,14 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "600",
@@ -536,12 +544,14 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -679,12 +689,14 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -733,12 +745,14 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#bdbdbd",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "600",
@@ -892,12 +906,14 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#bdbdbd",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -1040,12 +1056,14 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#bdbdbd",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -1095,12 +1113,14 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "600",
@@ -1249,12 +1269,14 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -1392,12 +1414,14 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -1447,12 +1471,14 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "600",
@@ -1601,12 +1627,14 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -1744,12 +1772,14 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -1798,12 +1828,14 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "600",
@@ -1814,12 +1846,14 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       Required RadioGroup
     </Text>
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#750b1c",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "600",
@@ -1969,12 +2003,14 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -2112,12 +2148,14 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           }
         >
           <Text
+            accessibilityRole="text"
             ellipsizeMode="tail"
             numberOfLines={0}
             onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 16,
                 "fontWeight": "400",

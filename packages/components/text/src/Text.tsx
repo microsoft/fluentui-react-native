@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React from 'react';
-import { I18nManager, Platform, Text as RNText, View } from 'react-native';
+import { I18nManager, Platform, Text as RNText } from 'react-native';
 
 import { useFontMetricsScaleFactors } from '@fluentui-react-native/experimental-native-font-metrics';
 import type { UseTokens, FontWeightValue } from '@fluentui-react-native/framework';
@@ -96,6 +96,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // now build the text style from tokens that can be shared between different Text instances
   const [tokenStyle] = cache(
     () => ({
+      flexShrink: 1, // Fixes bug in RN where text does not wrap correctly.  RN bug #1438
       margin: 0,
       color: tokens.color,
       fontStyle: tokens.fontStyle,
@@ -147,7 +148,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
       onPress,
       numberOfLines: truncate || !wrap ? 1 : 0,
-      style: mergeStyles({ flexShrink: 1 }, tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
+      style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
 
     // GH #2268: RN Text doesn't recognize these properties yet, so don't let them leak through or RN will complain about invalid props

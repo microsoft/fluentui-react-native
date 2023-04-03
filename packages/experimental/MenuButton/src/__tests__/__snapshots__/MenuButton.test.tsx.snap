@@ -51,12 +51,14 @@ exports[`ContextualMenu default 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",

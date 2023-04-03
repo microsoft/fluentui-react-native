@@ -67,12 +67,14 @@ exports[`Menu component tests Menu default 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -156,12 +158,14 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -245,12 +249,14 @@ exports[`Menu component tests Menu open 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -334,12 +340,14 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -423,12 +431,14 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -512,12 +522,14 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -601,12 +613,14 @@ exports[`Menu component tests Menu open radio 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -690,12 +704,14 @@ exports[`Menu component tests Menu submenu 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",

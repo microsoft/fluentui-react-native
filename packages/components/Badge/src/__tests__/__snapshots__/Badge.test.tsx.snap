@@ -39,6 +39,7 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
@@ -46,6 +47,7 @@ exports[`Badge component tests Badge all props 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -82,6 +84,7 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
@@ -89,6 +92,7 @@ exports[`Badge component tests Badge tokens 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -163,12 +167,14 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     ♣
   </Text>
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontStyle": undefined,
@@ -207,12 +213,14 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontStyle": undefined,
@@ -251,12 +259,14 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontStyle": undefined,
@@ -296,12 +306,14 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontStyle": undefined,
@@ -340,12 +352,14 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontStyle": undefined,
