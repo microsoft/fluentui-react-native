@@ -147,7 +147,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
       onPress,
       numberOfLines: truncate || !wrap ? 1 : 0,
-      style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
+      style: mergeStyles({ flexShrink: 1 }, tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
 
     // GH #2268: RN Text doesn't recognize these properties yet, so don't let them leak through or RN will complain about invalid props
@@ -155,11 +155,9 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     delete (mergedProps.style as TextTokens).maximumFontSize;
 
     return (
-      <View style={{ flexShrink: 1 }}>
-        <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
-          {children}
-        </RNText>
-      </View>
+      <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
+        {children}
+      </RNText>
     );
   };
 }, useTextTokens);
