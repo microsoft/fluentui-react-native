@@ -50,6 +50,7 @@ exports[`ToggleButton default 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}

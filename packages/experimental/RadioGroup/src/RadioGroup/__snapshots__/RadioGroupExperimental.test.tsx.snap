@@ -194,6 +194,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -339,6 +340,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -551,6 +553,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -696,6 +699,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -1278,6 +1282,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -1423,6 +1428,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -1636,6 +1642,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -1781,6 +1788,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -2012,6 +2020,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",
@@ -2157,6 +2166,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
             style={
               Object {
                 "color": "#242424",
+                "flexShrink": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 12,
                 "fontWeight": "400",

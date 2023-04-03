@@ -129,12 +129,14 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "red",
+          "flexShrink": 1,
           "fontFamily": "System",
           "fontSize": 10,
           "fontStyle": "italic",
