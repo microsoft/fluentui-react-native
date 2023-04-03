@@ -6,21 +6,26 @@ import type { AvatarTokens } from '.';
 
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({
-    badgeSize: 'small',
     color: t.colors.neutralForeground3,
     backgroundColor: t.colors.neutralBackground5,
     avatarOpacity: 1,
     fontFamily: t.typography.variants.body1.face,
-    fontWeight: globalTokens.font.weight.semibold,
-    fontSize: globalTokens.font.size200,
-    size: 56,
-    iconSize: 16,
     iconColor: t.colors.neutralForeground2,
     ringBackgroundColor: t.colors.neutralBackground1,
     ringColor: t.colors.neutralStroke1,
     borderColor: 'white',
     circular: {
       borderRadius: globalTokens.corner.radiusCircular,
+    },
+    size: 24,
+    badgeSize: 'small',
+    badgeY: -1 - globalTokens.stroke.width20, // width20 subtracted to accomodate border width of presence badge
+    badgeX: 1 - globalTokens.stroke.width20, // sign negated to flip x-axis based on design assumption
+    iconSize: 16,
+    fontSize: globalTokens.font.size100,
+    fontWeight: globalTokens.font.weight.regular,
+    square: {
+      borderRadius: globalTokens.corner.radius40,
     },
     // Badge is not shown for size 16 on Android.
     size16: {
