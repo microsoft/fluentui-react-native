@@ -5,7 +5,7 @@ import { Animated, Easing, View } from 'react-native';
 
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { Svg, Path } from 'react-native-svg';
+import { Path, Svg } from 'react-native-svg';
 
 import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './Spinner.styling';
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
