@@ -36,6 +36,24 @@ jobs:
           yarn check-for-changed-files
         displayName: 'verify API and Ensure Changed Files'
 
+      - script: |
+          npm -v
+        displayName: 'npm version'
+
+      - script: |
+          npm publish --dry-run
+        workingDirectory: packages/components/Button
+        displayName: publish dry-run
+
+      - script: |
+          npm install -g npm@8.10.0
+        displayName: 'install npm 8.10.0'
+
+      - script: |
+          npm publish ----dry-run
+        workingDirectory: packages/components/Button
+        displayName: publish dry-run
+
   - job: AndroidPR
     displayName: Android PR
     pool:
