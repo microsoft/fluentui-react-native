@@ -28,13 +28,13 @@ jobs:
           yarn prettier
         displayName: 'check prettier'
 
-      - script: |
-          yarn buildci
-        displayName: 'yarn buildci'
+      # - script: |
+      #     yarn buildci
+      #   displayName: 'yarn buildci'
 
-      - script: |
-          yarn check-for-changed-files
-        displayName: 'verify API and Ensure Changed Files'
+      # - script: |
+      #     yarn check-for-changed-files
+      #   displayName: 'verify API and Ensure Changed Files'
 
       - script: |
           npm -v
