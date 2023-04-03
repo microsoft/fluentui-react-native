@@ -140,6 +140,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // return a continuation function that allows this text to be compressed
   return (extra: TextProps, children: React.ReactNode) => {
     const mergedProps: TextProps = {
+      accessibilityRole: 'text',
       ...rest,
       ...keyProps,
       ...filteredProps,
