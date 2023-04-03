@@ -1,9 +1,13 @@
 # This template install dependencies, builds, and bundles this repo
 steps:
+  # - task: NodeTool@0
+  #   inputs:
+  #     versionSource: 'fromFile'
+  #     versionFilePath: '.node-version'
   - task: NodeTool@0
     inputs:
-      versionSource: 'fromFile'
-      versionFilePath: '.node-version'
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
 
   - task: NuGetToolInstaller@0
     inputs:
