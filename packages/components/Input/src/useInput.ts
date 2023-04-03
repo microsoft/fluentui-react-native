@@ -5,7 +5,21 @@ import { usePressableState } from '@fluentui-react-native/interactive-hooks';
 import type { InputProps, InputInfo } from './Input.types';
 
 export const useInput = (props: InputProps): InputInfo => {
-  const { label, secondaryText, assistiveText, onBlur, onFocus, onChange, accessoryButtonOnPress, value, defaultValue, ...rest } = props;
+  const {
+    type,
+    label,
+    secondaryText,
+    assistiveText,
+    onBlur,
+    onFocus,
+    onChange,
+    accessoryButtonOnPress,
+    value,
+    defaultValue,
+    textInputProps,
+    placeholder,
+    ...rest
+  } = props;
   const pressable = usePressableState({ onBlur, onFocus });
   const [text, setText] = React.useState<string>(defaultValue ? defaultValue : '');
   return {
@@ -18,7 +32,18 @@ export const useInput = (props: InputProps): InputInfo => {
       onChange,
       accessoryButtonOnPress,
       value,
-      defaultValue,
+      // Directly applied onto the TextInput
+      textInputProps: {
+        ...textInputProps,
+        keyboardType: type,
+        placeholder,
+        defaultValue,
+        value: value ? value : text,
+        onChangeText: (text) => {
+          !value && setText(text);
+          onChange && onChange(text);
+        },
+      },
       ...rest,
     },
     state: { ...pressable.state, text: value ? value : text },

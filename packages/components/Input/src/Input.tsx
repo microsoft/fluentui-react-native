@@ -57,18 +57,14 @@ export const Input = compose<InputType>({
       const {
         label,
         secondaryText,
-        placeholder,
         assistiveText,
         icon,
         accessoryIcon,
         textInputProps,
         error,
-        onChange,
-        defaultValue,
-        value,
-        type,
         accessoryButtonOnPress,
         keyboardShouldPersistTaps,
+        onChange, // Remove out of mergedProps
         ...mergedProps
       } = mergeProps(input.props, final);
       const IconWrapper = icon ? Slots.inputWrapper : Fragment;
@@ -79,17 +75,7 @@ export const Input = compose<InputType>({
           <IconWrapper>
             {icon && <Slots.icon {...iconProps} accessible={false} />}
             <Slots.input>
-              <Slots.textInput
-                keyboardType={type}
-                placeholder={placeholder}
-                defaultValue={defaultValue}
-                value={value ? value : input.state.text}
-                {...textInputProps}
-                onChangeText={(text) => {
-                  !value && input.props.setText(text);
-                  onChange && onChange(text);
-                }}
-              />
+              <Slots.textInput {...textInputProps} />
               {secondaryText && <Slots.secondaryText>{secondaryText}</Slots.secondaryText>}
               {accessoryIcon && (
                 <Slots.accessoryIconPressable

@@ -15,6 +15,7 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
   slotProps: {
     root: buildProps(
       (tokens: InputTokens, theme: Theme) => ({
+        scrollEnabled: false,
         contentContainerStyle: {
           display: 'flex',
           alignItems: 'flex-start',

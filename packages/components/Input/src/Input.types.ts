@@ -160,7 +160,7 @@ export interface InputProps extends PressableFocusProps {
   /**
    * These props facilitate behaviour changes of the text field.
    */
-  textInputProps?: Omit<TextInputProps, 'defaultValue' | 'value' | 'keyboardType' | 'onChangeText' | 'onBlur' | 'onFocus'>;
+  textInputProps?: Omit<TextInputProps, 'defaultValue' | 'value' | 'keyboardType' | 'onChangeText' | 'onBlur' | 'onFocus' | 'placeholder'>;
 
   /**
    * Optional string that triggers error state when non-empty.

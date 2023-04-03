@@ -27,6 +27,7 @@ export const InputDefault: React.FunctionComponent = () => {
       />
       <Input
         error="Error occured!"
+        defaultValue="Error has been set!"
         icon={outlineIconProps}
         placeholder="Enter text here!"
         accessoryIcon={dismissIconProps}
