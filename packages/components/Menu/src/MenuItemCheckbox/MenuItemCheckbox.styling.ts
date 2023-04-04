@@ -100,6 +100,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
         style: {
           flexGrow: 1,
           color: tokens.color,
+          ...(Platform.OS === 'android' && { flexShrink: 1 }),
           ...fontStyles.from(tokens, theme),
         },
       }),
