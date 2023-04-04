@@ -80,10 +80,10 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
     return YES;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass:(id)viewTag) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass:(id)reactTag) {
     RCTUnsafeExecuteOnMainQueueSync(^{
-        if ([viewTag isKindOfClass:[NSNumber class]]) {
-            UIView *view = [[[self bridge] uiManager] viewForReactTag:viewTag];
+        if ([reactTag isKindOfClass:[NSNumber class]]) {
+            UIView *view = [[[self bridge] uiManager] viewForReactTag:reactTag];
             NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
             self->_horizontalSizeClass = horizontalSizeClass;
         }
@@ -91,10 +91,10 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass:(id)viewTag) {
     return _horizontalSizeClass;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel:(id)viewTag) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel:(id)reactTag) {
     RCTUnsafeExecuteOnMainQueueSync(^{
-        if ([viewTag isKindOfClass:[NSNumber class]]) {
-            UIView *view = [[[self bridge] uiManager] viewForReactTag:viewTag];
+        if ([reactTag isKindOfClass:[NSNumber class]]) {
+            UIView *view = [[[self bridge] uiManager] viewForReactTag:reactTag];
             NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
             self->_horizontalSizeClass = horizontalSizeClass;
         }
@@ -118,7 +118,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption) {
 
 - (void)startObserving {
     _hasListeners = YES;
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
                                                  name:RCTUserInterfaceStyleDidChangeNotification
@@ -138,13 +138,13 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption) {
         if (![notificationBridge isKindOfClass:[RCTBridge class]]) {
             return;
         }
-        
+
         // Don't send the appearanceChanged event if the notification didn't originate from the same react native instance
         RCTBridge *currentBridge = [[self bridge] parentBridge];
         if (![currentBridge isEqual:notificationBridge]) {
             return;
         }
-        
+
         UITraitCollection *traitCollection = [[notification userInfo] valueForKey:RCTUserInterfaceStyleDidChangeNotificationTraitCollectionKey];
         if (![traitCollection isKindOfClass:[UITraitCollection class]]) {
             return;

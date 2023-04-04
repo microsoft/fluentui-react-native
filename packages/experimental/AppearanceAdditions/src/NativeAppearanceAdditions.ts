@@ -1,5 +1,3 @@
-import type { RootTag } from 'react-native';
-
 import type { AccessibilityContrastOption, SizeClass, UserInterfaceLevel } from './NativeAppearanceAdditions.types';
 
 export const NativeAppearanceAdditions = {
@@ -7,11 +5,11 @@ export const NativeAppearanceAdditions = {
   addListener: (_: string) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   removeListeners: (_: number) => {},
-  horizontalSizeClass: (_: RootTag) => {
+  horizontalSizeClass: (_: number) => {
     console.warn('NativeAppearanceAdditions is only available on iOS');
     return 'regular' as SizeClass;
   },
-  userInterfaceLevel: (_: RootTag) => {
+  userInterfaceLevel: (_: number) => {
     console.warn('NativeAppearanceAdditions is only available on iOS');
     return 'base' as UserInterfaceLevel;
   },

@@ -24,18 +24,18 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
     });
   }
 
-  horizontalSizeClass(viewTag = null): SizeClass {
-    if (!viewTag) {
+  horizontalSizeClass(reactTag = null): SizeClass {
+    if (!reactTag) {
       return this._horizontalSizeClass;
     }
-    return NativeAppearanceAdditions.horizontalSizeClass(viewTag);
+    return NativeAppearanceAdditions.horizontalSizeClass(reactTag);
   }
 
-  userInterfaceLevel(viewTag = null): UserInterfaceLevel {
-    if (!viewTag) {
+  userInterfaceLevel(reactTag = null): UserInterfaceLevel {
+    if (!reactTag) {
       return this._userInterfaceLevel;
     }
-    return NativeAppearanceAdditions.userInterfaceLevel(viewTag);
+    return NativeAppearanceAdditions.userInterfaceLevel(reactTag);
   }
 
   accessibilityContrastOption(): AccessibilityContrastOption {
