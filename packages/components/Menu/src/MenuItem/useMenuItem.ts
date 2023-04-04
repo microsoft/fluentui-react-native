@@ -18,7 +18,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { accessible, onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
-  const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
+  const { isSubmenu, persistOnItemClick, setOpen, setControlledOpen } = useMenuContext();
   const { hasCheckmarks, hasIcons, hasTooltips, onArrowClose } = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
   const shouldPersist = persistOnClick ?? persistOnItemClick;
@@ -28,7 +28,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
       const isRtl = I18nManager.isRTL;
-
+      setControlledOpen && setControlledOpen(false);
       const isArrowKey = isKeyPressEvent(e) && (e.nativeEvent.key === 'ArrowLeft' || e.nativeEvent.key === 'ArrowRight');
       const isArrowOpen =
         hasSubmenu &&

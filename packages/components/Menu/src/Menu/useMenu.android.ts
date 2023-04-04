@@ -103,12 +103,10 @@ export const useMenu = (props: MenuProps): MenuState => {
     [menuSizeAnimation, menuState, opacityAnimation],
   );
 
-  const onRequestClose = React.useCallback(
-    (e: InteractionEvent) => {
-      setOpen(e, false, false);
-    },
-    [setOpen],
-  );
+  const onRequestClose = (e: InteractionEvent) => {
+    setOpen(e, false, false);
+    props.setControlledOpen && props.setControlledOpen(false);
+  };
 
   // Adjust position of menu
   const transforms = [];
@@ -233,7 +231,7 @@ const useMenuOpenState = (
         parentSetOpen(e, isOpen, bubble);
       }
     },
-    [state, isControlled, onOpenChange, parentSetOpen, show, hide],
+    [state, onOpenChange, parentSetOpen, show, hide],
   );
   return [state, shouldFocusOnContainer, setOpen];
 };

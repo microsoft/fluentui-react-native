@@ -27,6 +27,7 @@ export const MenuContext = React.createContext<MenuContextValue>({
   triggerRef: null,
   hasMaxHeight: false,
   hasMaxWidth: false,
+  setControlledOpen: () => false,
 });
 
 export const MenuProvider = MenuContext.Provider;

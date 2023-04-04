@@ -75,7 +75,6 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
         >
           <TouchableWithoutFeedback onPress={context.onRequestClose} accessible={false}>
             <View style={[StyleSheet.absoluteFill]}>
-              {console.log('MEGED', tokens.maxHeight, context.menuHeight)}
               <Animated.View
                 onLayout={context.onMenuLayout}
                 style={[

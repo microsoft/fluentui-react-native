@@ -184,7 +184,7 @@ const MenuControlledOpen: React.FunctionComponent = () => {
   return (
     <Stack style={rootStackStyle.root}>
       <Button onClick={() => setOpen(!open)}>Toggle open</Button>
-      <Menu open={open}>
+      <Menu setControlledOpen={setOpen} open={open}>
         <MenuTrigger>
           <Button>Test</Button>
         </MenuTrigger>
