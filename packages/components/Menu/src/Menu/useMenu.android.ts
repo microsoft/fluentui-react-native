@@ -36,7 +36,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const [menuSizeAnimation, setMenuSizeAnimation] = React.useState<Animated.ValueXY>(new Animated.ValueXY({ x: 0, y: 0 }));
   const [opacityAnimation, setOpacityAnimation] = React.useState<Animated.Value>(new Animated.Value(0));
   const { isRTL } = I18nManager;
-  const dimensions = Dimensions.get('window');
+  const dimensions = Dimensions.get('screen');
   const { width: windowWidth } = dimensions;
   const windowHeight = dimensions.height - (StatusBar.currentHeight || 0);
   const menuSize = {
@@ -116,7 +116,6 @@ export const useMenu = (props: MenuProps): MenuState => {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
-      setLeft(Math.min(windowWidth - SCREEN_INDENT, left + anchorWidth));
     } else if (left < SCREEN_INDENT) {
       setLeft(SCREEN_INDENT);
     }
