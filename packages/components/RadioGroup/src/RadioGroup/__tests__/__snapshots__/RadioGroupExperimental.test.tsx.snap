@@ -33,12 +33,11 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#323130",
+          "color": "#242424",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontWeight": "600",
           "margin": 0,
         }
@@ -47,64 +46,67 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       Uncontrolled RadioGroup
     </Text>
   </View>
-  <RCTFocusZone
-    navigateAtEnd="NavigateWrap"
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+      }
+    }
   >
     <View
-      style={
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio1"
+      accessibilityPositionInSet={1}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
         Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "space-around",
+          "disabled": false,
+          "selected": false,
         }
       }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key1"
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio1"
-        accessibilityPositionInSet={1}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
-        accessibilityState={
-          Object {
-            "disabled": false,
-            "selected": false,
-          }
-        }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
-            Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
-        }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -113,142 +115,115 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#616161",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key1"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#ffffff",
-              "borderColor": "#616161",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": undefined,
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 0,
+              "width": 10,
             }
           }
-        >
-          <View
-            style={
-              Object {
-                "backgroundColor": undefined,
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 0,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            Radio1
-          </Text>
-        </View>
+        />
       </View>
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio2"
-        accessibilityPositionInSet={2}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
-        accessibilityState={
+        style={
           Object {
-            "disabled": false,
-            "selected": true,
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
           }
         }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
             Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
+            }
+          }
+        >
+          Radio1
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio2"
+      accessibilityPositionInSet={2}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "selected": true,
         }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key2"
+    >
+      <View
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -257,99 +232,65 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#0f6cbd",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key2"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": "#0f6cbd",
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 1,
+              "width": 10,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
+          }
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
             }
           }
         >
-          <View
-            style={
-              Object {
-                "backgroundColor": "#ffffff",
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 1,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            Radio2
-          </Text>
-        </View>
+          Radio2
+        </Text>
       </View>
     </View>
-  </RCTFocusZone>
+  </View>
 </View>
 `;
 
@@ -386,12 +327,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#323130",
+          "color": "#242424",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontWeight": "600",
           "margin": 0,
         }
@@ -400,64 +340,67 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       Uncontrolled RadioGroup
     </Text>
   </View>
-  <RCTFocusZone
-    navigateAtEnd="NavigateWrap"
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+      }
+    }
   >
     <View
-      style={
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="RadioButton1"
+      accessibilityPositionInSet={0}
+      accessibilityRole="radio"
+      accessibilitySetSize={0}
+      accessibilityState={
         Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "space-around",
+          "disabled": false,
+          "selected": false,
         }
       }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key1"
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="RadioButton1"
-        accessibilityPositionInSet={0}
-        accessibilityRole="radio"
-        accessibilitySetSize={0}
-        accessibilityState={
-          Object {
-            "disabled": false,
-            "selected": false,
-          }
-        }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
-            Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
-        }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -466,142 +409,115 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#616161",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key1"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#ffffff",
-              "borderColor": "#616161",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": undefined,
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 0,
+              "width": 10,
             }
           }
-        >
-          <View
-            style={
-              Object {
-                "backgroundColor": undefined,
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 0,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            RadioButton1
-          </Text>
-        </View>
+        />
       </View>
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="RadioButton2"
-        accessibilityPositionInSet={0}
-        accessibilityRole="radio"
-        accessibilitySetSize={0}
-        accessibilityState={
+        style={
           Object {
-            "disabled": false,
-            "selected": true,
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
           }
         }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
             Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
+            }
+          }
+        >
+          RadioButton1
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="RadioButton2"
+      accessibilityPositionInSet={0}
+      accessibilityRole="radio"
+      accessibilitySetSize={0}
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "selected": true,
         }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key2"
+    >
+      <View
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -610,99 +526,65 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#0f6cbd",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key2"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": "#0f6cbd",
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 1,
+              "width": 10,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
+          }
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
             }
           }
         >
-          <View
-            style={
-              Object {
-                "backgroundColor": "#ffffff",
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 1,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            RadioButton2
-          </Text>
-        </View>
+          RadioButton2
+        </Text>
       </View>
     </View>
-  </RCTFocusZone>
+  </View>
 </View>
 `;
 
@@ -739,12 +621,11 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#bdbdbd",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontWeight": "600",
           "margin": 0,
         }
@@ -753,64 +634,72 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       Disabled RadioGroup
     </Text>
   </View>
-  <RCTFocusZone
-    navigateAtEnd="NavigateWrap"
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+      }
+    }
   >
     <View
-      style={
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio1"
+      accessibilityPositionInSet={1}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
         Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "space-around",
+          "disabled": true,
+          "selected": false,
         }
       }
+      accessible={false}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={false}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key1"
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio1"
-        accessibilityPositionInSet={1}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
         accessibilityState={
           Object {
             "disabled": true,
-            "selected": false,
           }
         }
-        accessible={true}
+        accessible={false}
+        collapsable={false}
         focusable={false}
-        keyDownEvents={
-          Array [
-            Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
-        }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -819,147 +708,120 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#e0e0e0",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key1"
       >
         <View
-          accessibilityState={
-            Object {
-              "disabled": true,
-            }
-          }
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#f0f0f0",
-              "borderColor": "#e0e0e0",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": undefined,
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 0,
+              "width": 10,
             }
           }
-        >
-          <View
-            style={
-              Object {
-                "backgroundColor": undefined,
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 0,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#bdbdbd",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            Radio1
-          </Text>
-        </View>
+        />
       </View>
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
+        style={
+          Object {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
+          }
         }
-        accessibilityLabel="Radio2"
-        accessibilityPositionInSet={2}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#bdbdbd",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
+            }
+          }
+        >
+          Radio1
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio2"
+      accessibilityPositionInSet={2}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
+        Object {
+          "disabled": true,
+          "selected": false,
+        }
+      }
+      accessible={false}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={false}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key2"
+    >
+      <View
         accessibilityState={
           Object {
             "disabled": true,
-            "selected": false,
           }
         }
-        accessible={true}
+        accessible={false}
+        collapsable={false}
         focusable={false}
-        keyDownEvents={
-          Array [
-            Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
-        }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -968,104 +830,65 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#e0e0e0",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key2"
       >
         <View
-          accessibilityState={
-            Object {
-              "disabled": true,
-            }
-          }
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#f0f0f0",
-              "borderColor": "#e0e0e0",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": undefined,
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 0,
+              "width": 10,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
+          }
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#bdbdbd",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
             }
           }
         >
-          <View
-            style={
-              Object {
-                "backgroundColor": undefined,
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 0,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#bdbdbd",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            Radio2
-          </Text>
-        </View>
+          Radio2
+        </Text>
       </View>
     </View>
-  </RCTFocusZone>
+  </View>
 </View>
 `;
 
@@ -1103,12 +926,11 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#323130",
+          "color": "#242424",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontWeight": "600",
           "margin": 0,
         }
@@ -1117,64 +939,67 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       Horizontal RadioGroup
     </Text>
   </View>
-  <RCTFocusZone
-    navigateAtEnd="NavigateWrap"
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+      }
+    }
   >
     <View
-      style={
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio1"
+      accessibilityPositionInSet={1}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
         Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "space-around",
+          "disabled": false,
+          "selected": false,
         }
       }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key1"
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio1"
-        accessibilityPositionInSet={1}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
-        accessibilityState={
-          Object {
-            "disabled": false,
-            "selected": false,
-          }
-        }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
-            Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
-        }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1183,142 +1008,115 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#616161",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key1"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#ffffff",
-              "borderColor": "#616161",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": undefined,
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 0,
+              "width": 10,
             }
           }
-        >
-          <View
-            style={
-              Object {
-                "backgroundColor": undefined,
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 0,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            Radio1
-          </Text>
-        </View>
+        />
       </View>
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio2"
-        accessibilityPositionInSet={2}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
-        accessibilityState={
+        style={
           Object {
-            "disabled": false,
-            "selected": true,
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
           }
         }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
             Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
+            }
+          }
+        >
+          Radio1
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio2"
+      accessibilityPositionInSet={2}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "selected": true,
         }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key2"
+    >
+      <View
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1327,99 +1125,65 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#0f6cbd",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key2"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": "#0f6cbd",
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 1,
+              "width": 10,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
+          }
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
             }
           }
         >
-          <View
-            style={
-              Object {
-                "backgroundColor": "#ffffff",
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 1,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            Radio2
-          </Text>
-        </View>
+          Radio2
+        </Text>
       </View>
     </View>
-  </RCTFocusZone>
+  </View>
 </View>
 `;
 
@@ -1457,12 +1221,11 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#323130",
+          "color": "#242424",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontWeight": "600",
           "margin": 0,
         }
@@ -1471,64 +1234,67 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       Horizontal-Stacked RadioGroup
     </Text>
   </View>
-  <RCTFocusZone
-    navigateAtEnd="NavigateWrap"
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+      }
+    }
   >
     <View
-      style={
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio1"
+      accessibilityPositionInSet={1}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
         Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "space-around",
+          "disabled": false,
+          "selected": false,
         }
       }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="below"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key1"
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio1"
-        accessibilityPositionInSet={1}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
-        accessibilityState={
-          Object {
-            "disabled": false,
-            "selected": false,
-          }
-        }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
-            Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
-        }
-        labelPosition="below"
-        onAccessibilityAction={[Function]}
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1538,141 +1304,114 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         style={
           Object {
             "alignItems": "center",
-            "display": "flex",
-            "flexDirection": "column",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "backgroundColor": undefined,
+            "borderColor": "#616161",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 0,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key1"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#ffffff",
-              "borderColor": "#616161",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 0,
-              "marginLeft": 6,
-              "marginRight": 6,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": undefined,
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 0,
+              "width": 10,
             }
           }
-        >
-          <View
-            style={
-              Object {
-                "backgroundColor": undefined,
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 0,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": 2,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 2,
-              }
-            }
-          >
-            Radio1
-          </Text>
-        </View>
+        />
       </View>
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio2"
-        accessibilityPositionInSet={2}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
-        accessibilityState={
+        style={
           Object {
-            "disabled": false,
-            "selected": true,
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
           }
         }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
             Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
+            }
+          }
+        >
+          Radio1
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio2"
+      accessibilityPositionInSet={2}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "selected": true,
         }
-        labelPosition="below"
-        onAccessibilityAction={[Function]}
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="below"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key2"
+    >
+      <View
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1682,98 +1421,64 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         style={
           Object {
             "alignItems": "center",
-            "display": "flex",
-            "flexDirection": "column",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "backgroundColor": undefined,
+            "borderColor": "#0f6cbd",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 0,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key2"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 0,
-              "marginLeft": 6,
-              "marginRight": 6,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": "#0f6cbd",
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 1,
+              "width": 10,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
+          }
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
             }
           }
         >
-          <View
-            style={
-              Object {
-                "backgroundColor": "#ffffff",
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 1,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": 2,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 2,
-              }
-            }
-          >
-            Radio2
-          </Text>
-        </View>
+          Radio2
+        </Text>
       </View>
     </View>
-  </RCTFocusZone>
+  </View>
 </View>
 `;
 
@@ -1810,12 +1515,11 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#323130",
+          "color": "#242424",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontWeight": "600",
           "margin": 0,
         }
@@ -1826,79 +1530,81 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#750b1c",
           "fontFamily": "Segoe UI",
-          "fontSize": 16,
+          "fontSize": 13,
           "fontWeight": "600",
           "margin": 0,
-          "paddingStart": 4,
+          "paddingStart": 2,
         }
       }
     >
       *
     </Text>
   </View>
-  <RCTFocusZone
-    navigateAtEnd="NavigateWrap"
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+      }
+    }
   >
     <View
-      style={
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio1"
+      accessibilityPositionInSet={1}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
         Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "space-around",
+          "disabled": false,
+          "selected": false,
         }
       }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key1"
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio1"
-        accessibilityPositionInSet={1}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
-        accessibilityState={
-          Object {
-            "disabled": false,
-            "selected": false,
-          }
-        }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
-            Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
-        }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1907,142 +1613,115 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#616161",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key1"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#ffffff",
-              "borderColor": "#616161",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": undefined,
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 0,
+              "width": 10,
             }
           }
-        >
-          <View
-            style={
-              Object {
-                "backgroundColor": undefined,
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 0,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            Radio1
-          </Text>
-        </View>
+        />
       </View>
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Select",
-            },
-          ]
-        }
-        accessibilityLabel="Radio2"
-        accessibilityPositionInSet={2}
-        accessibilityRole="radio"
-        accessibilitySetSize={2}
-        accessibilityState={
+        style={
           Object {
-            "disabled": false,
-            "selected": true,
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
           }
         }
-        accessible={true}
-        focusable={true}
-        keyDownEvents={
-          Array [
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
             Object {
-              "key": "ArrowDown",
-            },
-            Object {
-              "key": "ArrowRight",
-            },
-            Object {
-              "key": "ArrowUp",
-            },
-            Object {
-              "key": "ArrowLeft",
-            },
-          ]
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
+            }
+          }
+        >
+          Radio1
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
+      accessibilityLabel="Radio2"
+      accessibilityPositionInSet={2}
+      accessibilityRole="radio"
+      accessibilitySetSize={2}
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "selected": true,
         }
-        labelPosition="after"
-        onAccessibilityAction={[Function]}
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      labelPosition="after"
+      onAccessibilityAction={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "paddingHorizontal": undefined,
+          "paddingVertical": undefined,
+        }
+      }
+      value="key2"
+    >
+      <View
+        accessible={false}
+        collapsable={false}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -2051,98 +1730,64 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "flex-start",
-            "display": "flex",
-            "flexDirection": "row",
-            "paddingHorizontal": 4,
-            "paddingVertical": undefined,
+            "alignItems": "center",
+            "backgroundColor": undefined,
+            "borderColor": "#0f6cbd",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1.5,
+            "height": 20,
+            "justifyContent": "center",
+            "marginBottom": 4,
+            "marginLeft": 4,
+            "marginRight": 4,
+            "marginTop": 4,
+            "width": 20,
           }
         }
-        value="key2"
       >
         <View
-          accessible={false}
-          focusable={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
-              "borderRadius": 8,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "height": 16,
-              "justifyContent": "center",
-              "marginBottom": 6,
-              "marginLeft": 4,
-              "marginRight": 0,
-              "marginTop": 6,
-              "width": 16,
+              "backgroundColor": "#0f6cbd",
+              "borderRadius": 5,
+              "height": 10,
+              "opacity": 1,
+              "width": 10,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "marginLeft": 16,
+            "marginRight": undefined,
+            "padding": 2,
+            "paddingRight": 0,
+          }
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#242424",
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginHorizontal": 2,
             }
           }
         >
-          <View
-            style={
-              Object {
-                "backgroundColor": "#ffffff",
-                "borderRadius": 4,
-                "height": 8,
-                "opacity": 1,
-                "width": 8,
-              }
-            }
-          />
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 2,
-              "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 0,
-              "padding": undefined,
-              "paddingRight": 0,
-            }
-          }
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
-            style={
-              Object {
-                "color": "#242424",
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
-                "fontWeight": "400",
-                "margin": 0,
-                "marginHorizontal": 2,
-                "marginVertical": 4,
-              }
-            }
-          >
-            Radio2
-          </Text>
-        </View>
+          Radio2
+        </Text>
       </View>
     </View>
-  </RCTFocusZone>
+  </View>
 </View>
 `;
