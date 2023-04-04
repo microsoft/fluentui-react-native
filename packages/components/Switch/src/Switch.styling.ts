@@ -102,6 +102,16 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       }),
       ['color', ...fontStyles.keys],
     ),
+    onOffTextContainer: buildProps(
+      () => ({
+        style: {
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+        },
+      }),
+      [],
+    ),
     onOffText: buildProps(
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {

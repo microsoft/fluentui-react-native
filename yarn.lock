@@ -3931,9 +3931,9 @@
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
 "@types/react-native@^0.68.0":
-  version "0.68.13"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.13.tgz#00efe2bc73d1ea8a58a9e1f2e87d4ce91e38f2c1"
-  integrity sha512-HKwqB2+xLIYazWYWBkcz7+XHUnFASQLONTE4+ErDlviE4KGf4/ppbao30zqAlYyEye/3e0QuvNTwkvUNDELWPw==
+  version "0.68.14"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.14.tgz#4f43f21d2b9e506ea0b0d0b14eb2276c575d5622"
+  integrity sha512-yoGSvqpgiBjrDA1ttNvvL2947b9foWzBswtSth7fusbJCXSSvwHyoQMchlCKWclMJOIvIEaPW1LmZDNvvirl0g==
   dependencies:
     "@types/react" "^17"
 
@@ -3945,9 +3945,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^17", "@types/react@^17.0.2":
-  version "17.0.53"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.53.tgz#10d4d5999b8af3d6bc6a9369d7eb953da82442ab"
-  integrity sha512-1yIpQR2zdYu1Z/dc1OxC+MA6GR240u3gcnP4l6mvj/PJiVaqHsQPmWttsvHsfnhfPbU2FuGmo0wSITPygjBmsw==
+  version "17.0.56"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.56.tgz#16f54a0b0a4820065b8296f1dd6da80791fcf964"
+  integrity sha512-Z13f9Qz7Hg8f2g2NsBjiJSVWmON2b3K8RIqFK8mMKCIgvD0CD0ZChTukz87H3lI28X3ukXoNFGzo3ZW1ICTtPA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -4759,10 +4759,10 @@ appium-adb@^9.10.14, appium-adb@^9.10.9:
     teen_process "^2.0.1"
     utf7 "^1.0.2"
 
-appium-android-driver@^5.8.7:
-  version "5.8.9"
-  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.8.9.tgz#cdeb838c5ff3b4420cc0d51adb07d10d9c293966"
-  integrity sha512-gVA/hiHYzJpyVqyhubN11K72evEcBssWmqvBR9McRRNEg3ieik+jiqWD/lZDwmT535y1Iaa+dH/8g7xlfNUsuw==
+appium-android-driver@^5.8.10:
+  version "5.8.12"
+  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.8.12.tgz#0ac7aed55f6c6b8f460ba4293a9f022008379b29"
+  integrity sha512-FptP5BmiSneIlodyt+H9N+QRshJrhrB6HnQIcCzIfCQ8WPRNmRGYpPOcokGqVkccz4JgUDEmN4IhKAojeH1MDg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.9"
@@ -4784,10 +4784,10 @@ appium-android-driver@^5.8.7:
     teen_process "^2.0.0"
     ws "^8.0.0"
 
-appium-chromedriver@^5.2.0, appium-chromedriver@^5.2.16:
-  version "5.2.17"
-  resolved "https://registry.yarnpkg.com/appium-chromedriver/-/appium-chromedriver-5.2.17.tgz#f3b05bf00ef0d9a86c0e49eb24eb3a3826d939c6"
-  integrity sha512-QBXuuu+UmdrZmN1Gu7+ewhP6dHJO0Ptjmpc7CwUeBjvtuETWxXso+BH6in+dI0vzMNIxmq9uB4TMdiAO5S0gxQ==
+appium-chromedriver@^5.2.0, appium-chromedriver@^5.3.1:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/appium-chromedriver/-/appium-chromedriver-5.3.2.tgz#17018c33c9eebe0ca904a79a3f6d80125b27a7ca"
+  integrity sha512-eJdQTiz5oA7xxRnAw4F+yXVsxXRCwHE67p7x8+afzVEcuISNO8ElcgxlHLHxCu3nwANHEsPLJ6AtZc4REDAhRg==
   dependencies:
     "@appium/base-driver" "^9.1.0"
     "@appium/support" "^3.0.0"
@@ -4902,14 +4902,14 @@ appium-remote-debugger@^9.1.1:
     teen_process "^2.0.0"
 
 appium-uiautomator2-driver@^2.10.2:
-  version "2.12.4"
-  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.12.4.tgz#6f3d89c7f553dabc380b2e87eea12283358640a1"
-  integrity sha512-JFZyfupyfkSCnb1hcHHDZ1VJn+JggN7ilBMAm4dzlQ4mE/G9v/kSg/X+97DWYbohUsjzemqR8gFhcy7iZJVafg==
+  version "2.12.7"
+  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.12.7.tgz#2a2f79bf78ada931c13ded748cf79228a65a7e38"
+  integrity sha512-PO1tSvbYfEcrWwWaeaXqKfewcjJPUdLNpk93OrME2fVPy1VovvEE2PiGeBbP4pBx9mlUKEFi4P9mcjO75X3ZPA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.14"
-    appium-android-driver "^5.8.7"
-    appium-chromedriver "^5.2.16"
+    appium-android-driver "^5.8.10"
+    appium-chromedriver "^5.3.1"
     appium-uiautomator2-server "^5.7.2"
     asyncbox "^2.3.1"
     axios "^1.x"
@@ -5472,9 +5472,9 @@ axios@1.2.3:
     proxy-from-env "^1.1.0"
 
 axios@^1.x:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.2.tgz#7ac517f0fa3ec46e0e636223fd973713a09c72b3"
-  integrity sha512-1M3O703bYqYuPhbHeya5bnhpYVsDDRyQSabNja04mZtboLNSuZ4YrltestrLXfHgmzua4TpUqRiVKbiQuo2epw==
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.4.tgz#f5760cefd9cfb51fd2481acf88c05f67c4523024"
+  integrity sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"

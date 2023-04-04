@@ -1,9 +1,11 @@
 /** @jsx withSlots */
+import type { StyleProp } from 'react-native';
 import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, memoize, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
+import type { TextStyle } from '@office-iss/react-native-win32';
 
 import { stylingSettings } from './Switch.styling';
 import type { SwitchType, SwitchState, SwitchProps } from './Switch.types';
@@ -44,6 +46,7 @@ export const Switch = compose<SwitchType>({
     track: Animated.View, // Conversion from View to Animated.View for Animated API to work
     thumb: Animated.View,
     toggleContainer: View,
+    onOffTextContainer: View,
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
@@ -68,10 +71,10 @@ export const Switch = compose<SwitchType>({
     // now return the handler for finishing render
     return (final: SwitchProps) => {
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
-      const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
+
       return (
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
@@ -80,10 +83,25 @@ export const Switch = compose<SwitchType>({
             <Slots.track {...(isMobile && { style: switchInfo.props.switchAnimationStyles.trackBackgroundStyle })}>
               <Slots.thumb {...thumbAnimation} {...(isMobile && { style: switchInfo.props.switchAnimationStyles.thumbAnimatedStyle })} />
             </Slots.track>
-            {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
+            {displayOnOffText && (
+              /**
+               * If the onText and offText are different lengths, this can cause unwanted shifting of the track, if labelPosition = "after",
+               * or the label, if labelPosition = "above". We fix this by rendering both texts and setting the height of the text to hide to
+               * zero. This way, even when not visible, the hidden text still takes up its width to prevent shifting.
+               */
+              <Slots.onOffTextContainer>
+                <Slots.onOffText style={getOnOffTextStyle('on', switchInfo.state.toggled)}>{onText}</Slots.onOffText>
+                <Slots.onOffText style={getOnOffTextStyle('off', switchInfo.state.toggled)}>{offText}</Slots.onOffText>
+              </Slots.onOffTextContainer>
+            )}
           </Slots.toggleContainer>
         </Slots.root>
       );
     };
   },
 });
+
+const onOffTextStyleWorker = (text: 'on' | 'off', isOn: boolean): StyleProp<TextStyle> => ({
+  height: (text === 'on' && isOn) || (text === 'off' && !isOn) ? undefined : 0,
+});
+const getOnOffTextStyle = memoize(onOffTextStyleWorker);

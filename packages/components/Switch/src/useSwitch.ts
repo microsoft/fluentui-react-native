@@ -97,16 +97,6 @@ export const useSwitch = (props: SwitchProps, animationConfig?: AnimationConfig)
     console.warn("The props 'defaultChecked' and 'checked' are mutually exclusive. Use only one of the props, do not use both.");
   }
 
-  if (labelPosition === 'after' || labelPosition === undefined) {
-    if (__DEV__ && (!!props.onText || !!props.offText)) {
-      console.warn(
-        "The prop labelPosition's value of \"after\" and the props 'onText' or 'offText' are mutually exclusive. Try setting 'labelPosition' value to \"before\" or \"above\" instead.",
-      );
-    }
-    props.onText = null;
-    props.offText = null;
-  }
-
   const onClickWithFocus = useOnPressWithFocus(focusRef, toggleCallback);
   const pressable = usePressableState({ ...rest, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');

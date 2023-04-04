@@ -25,6 +25,7 @@ export const E2EAvatarTest: React.FunctionComponent = () => {
       <Avatar
         name="Richard"
         badge={{ status: 'available' }}
+        avatarColor={'colorful'}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(AVATAR_SECONDARY_TEST_COMPONENT)}
       />
