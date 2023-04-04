@@ -8,9 +8,20 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { E2ETestingSpinner } from './SpinnerE2ETest';
 import { SPINNER_TESTPAGE } from '../../../../E2E/src/Spinner/consts';
-import { stackStyle /*commonTestStyles as commonStyles*/ } from '../Common/styles';
+import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
+
+const BasicSpinnerTest: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <View style={commonStyles.root}>
+        <View style={commonStyles.settings}></View>
+        <Spinner />
+      </View>
+    </Stack>
+  );
+};
 
 const SpinnerSizeTest: React.FunctionComponent = () => {
   return (
@@ -51,8 +62,12 @@ const SpinnerSizeTest: React.FunctionComponent = () => {
 
 const spinnerSections: TestSection[] = [
   {
-    name: 'Spinner Size Test',
+    name: 'Basic Spinner Test',
     testID: SPINNER_TESTPAGE,
+    component: BasicSpinnerTest,
+  },
+  {
+    name: 'Spinner Size Test',
     component: SpinnerSizeTest,
   },
   {

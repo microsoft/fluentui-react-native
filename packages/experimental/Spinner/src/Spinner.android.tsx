@@ -7,9 +7,10 @@ import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { Path, Svg } from 'react-native-svg';
 
-import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './Spinner.styling';
+import { stylingSettings } from './Spinner.styling';
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
+import { diameterSizeMap, lineThicknessSizeMap } from './SpinnerTokens.win32';
 
 const getSpinnerPath = (diameter: number, width: number, color: ColorValue) => {
   const start = {

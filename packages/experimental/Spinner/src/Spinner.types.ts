@@ -4,6 +4,7 @@ export {
   SpinnerLabelPosition,
   SpinnerSize,
   SpinnerStatus,
+  SpinnerState,
   SpinnerTokens,
   SpinnerProps,
   SpinnerSlotProps,

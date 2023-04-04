@@ -9,10 +9,11 @@ import { Path, Svg } from 'react-native-svg';
 import type { SvgProps } from 'react-native-svg';
 
 import { RCTNativeAnimatedSpinner } from './consts.win32';
-import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './Spinner.styling.win32';
+import { stylingSettings } from './Spinner.styling.win32';
 import { spinnerName } from './Spinner.types';
 import type { SpinnerProps, SpinnerType, SpinnerSvgProps } from './Spinner.types.win32';
-
+import { diameterSizeMap, lineThicknessSizeMap, getDefaultSize } from './SpinnerTokens.win32';
+import { useSpinner } from './useSpinner';
 // TODO: getTailPath, tailSvg
 
 const getTrackPath = (diameter: number, width: number, color: ColorValue) => {
@@ -39,7 +40,7 @@ const trackSvg: React.FunctionComponent<SpinnerSvgProps> = (props: SpinnerSvgPro
 };
 
 export const spinnerLookup = (layer: string, userProps: SpinnerProps): boolean => {
-  return layer === userProps['appearance'];
+  return layer === userProps['appearance'] || layer === userProps['size'] || (!userProps['size'] && layer === getDefaultSize());
 };
 
 export const Spinner = compose<SpinnerType>({
@@ -53,13 +54,14 @@ export const Spinner = compose<SpinnerType>({
     label: Text,
   },
   useRender: (props: SpinnerProps, useSlots: UseSlots<SpinnerType>) => {
-    const Slots = useSlots(props, (layer) => spinnerLookup(layer, props));
+    const spinnerProps = useSpinner(props);
+    const Slots = useSlots(spinnerProps, (layer) => spinnerLookup(layer, props));
 
-    return (rest: SpinnerProps) => {
-      const { ...mergedProps } = mergeProps(props, rest);
+    return (final: SpinnerProps) => {
+      const { ...mergedProps } = mergeProps(spinnerProps, final);
       return (
         <Slots.root {...mergedProps}>
-          <Slots.track viewBoxHeight={diameterSizeMap[props.size]} viewBoxWidth={diameterSizeMap[props.size]} />
+          <Slots.track />
         </Slots.root>
       );
     };

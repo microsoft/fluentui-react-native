@@ -10,8 +10,8 @@ export interface SpinnerSvgProps extends SpinnerTokens {
    * The height and width of the viewBox are internal props used by the SVG to size themselves and
    * set up their viewBox to establish coordinate space for DPI scaling purposes.
    */
-  viewBoxHeight: number;
-  viewBoxWidth: number;
+  viewBoxHeight?: number;
+  viewBoxWidth?: number;
 }
 
 export interface SpinnerSlotProps {

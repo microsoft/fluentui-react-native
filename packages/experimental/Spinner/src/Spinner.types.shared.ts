@@ -78,6 +78,8 @@ export interface SpinnerProps extends ViewProps {
   hidesWhenStopped?: boolean;
 }
 
+export type SpinnerState = SpinnerProps;
+
 export interface SpinnerSlotProps {
   root: SpinnerProps;
   svg?: Animated.AnimatedProps<SvgProps>;
