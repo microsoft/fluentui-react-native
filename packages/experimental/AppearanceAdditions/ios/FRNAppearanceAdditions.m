@@ -81,7 +81,7 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
 }
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass:(id)viewTag) {
-    RCTExecuteOnMainQueue(^{
+    RCTUnsafeExecuteOnMainQueueSync(^{
         if ([viewTag isKindOfClass:[NSNumber class]]) {
             UIView *view = [[[self bridge] uiManager] viewForReactTag:viewTag];
             NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
@@ -92,7 +92,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass:(id)viewTag) {
 }
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel:(id)viewTag) {
-    RCTExecuteOnMainQueue(^{
+    RCTUnsafeExecuteOnMainQueueSync(^{
         if ([viewTag isKindOfClass:[NSNumber class]]) {
             UIView *view = [[[self bridge] uiManager] viewForReactTag:viewTag];
             NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
