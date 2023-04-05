@@ -80,14 +80,20 @@ export const Input = compose<InputType>({
               {accessoryIcon && (
                 <Slots.accessoryIconPressable
                   accessibilityRole="button"
-                  onTouchStart={(e) => (accessoryButtonOnPress ? accessoryButtonOnPress(e) : input.props.setText(''))}
+                  onTouchStart={(e) => {
+                    if (accessoryButtonOnPress) accessoryButtonOnPress(e);
+                    else {
+                      input.props.setText('');
+                      onChange && onChange('');
+                    }
+                  }}
                 >
                   <Slots.accessoryIcon {...accessoryIconProps} accessible={false} />
                 </Slots.accessoryIconPressable>
               )}
             </Slots.input>
           </IconWrapper>
-          {assistiveText && <Slots.assistiveText>{error ? error : assistiveText}</Slots.assistiveText>}
+          {(assistiveText || error != undefined) && <Slots.assistiveText>{error ? error : assistiveText}</Slots.assistiveText>}
         </Slots.root>
       );
     };

@@ -13,10 +13,14 @@ export const outlineIconProps: IconProps = { svgSource: { src: OutlineSvg, viewB
 export const filledIconProps: IconProps = { svgSource: { src: FilledSvg, viewBox: '0 0 20 20' } };
 
 export const InputDefault: React.FunctionComponent = () => {
+  const [error, setError] = React.useState<string>('');
+  const [controlText, setControlText] = React.useState<string>('Controls other text input!');
+
   return (
     <View>
-      <Input value="Value prop passed!" />
-      <Input placeholder="Enter text here!" type="decimal-pad" />
+      <Input onChange={(text) => setControlText(text)} defaultValue={controlText} />
+      <Input value={'Controlled text - ' + controlText} />
+      <Input placeholder="Enter text here!" type="decimal-pad" accessoryIcon={null} />
       <Input placeholder="Enter text here!" accessoryIcon={undefined} secondaryText="Secondary" type="email-address" />
       <Input
         placeholder="Enter text here!"
@@ -26,26 +30,15 @@ export const InputDefault: React.FunctionComponent = () => {
         secondaryText="Secondary"
       />
       <Input
-        error="Error occured!"
-        defaultValue="Error has been set!"
+        error={error}
         icon={outlineIconProps}
-        placeholder="Enter text here!"
+        placeholder="Only text up to 5 characters!"
         accessoryIcon={dismissIconProps}
         label="Label"
-        assistiveText="Assistive Text"
-        secondaryText="Secondary"
-      />
-      <Input
-        icon={outlineIconProps}
-        placeholder="Enter text here!"
-        accessoryIcon={dismissIconProps}
-        label="Label"
-        assistiveText="Assistive Text"
-        secondaryText="Secondary"
-        defaultValue="Default value!"
-        onChange={(text) => console.log('Text changed to: ' + text)}
-        onFocus={() => console.log('Do this on focus')}
-        onBlur={() => console.log('Do this on blur')}
+        onChange={(text) => {
+          if (text.length > 5) setError('Text must be less than 5 characters!');
+          else setError('');
+        }}
       />
     </View>
   );
