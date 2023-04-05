@@ -181,10 +181,17 @@ const rootStackStyle = StyleSheet.create({ root: { ...(stackStyle as object), fl
 
 const MenuControlledOpen: React.FunctionComponent = () => {
   const [open, setOpen] = React.useState<boolean>(false);
+
+  const onOpenChange = () => {
+    setOpen(false);
+  };
+
   return (
     <Stack style={rootStackStyle.root}>
       <Button onClick={() => setOpen(!open)}>Toggle open</Button>
-      <Menu setControlledOpen={setOpen} open={open}>
+      {/* For Android Platform the Controlled trigger becomes unavailable because of the screen we show on the screen click on which closes the Menu , Hence we need to make the state change based on open change */}
+
+      <Menu {...(Platform.OS === 'android' && { onOpenChange })} open={open}>
         <MenuTrigger>
           <Button>Test</Button>
         </MenuTrigger>
