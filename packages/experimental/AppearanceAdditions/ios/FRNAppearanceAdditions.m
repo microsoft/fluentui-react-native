@@ -118,11 +118,37 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption) {
 
 - (void)startObserving {
     _hasListeners = YES;
+    
+    UITraitCollection *attemptedInitialTraitCollection = [self attemptTraitCollectionInitialization];
+
+    _horizontalSizeClass = RCTHorizontalSizeClassPreference(attemptedInitialTraitCollection);
+    _userInterfaceLevel = RCTUserInterfaceLevelPreference(attemptedInitialTraitCollection);
+    _accessibilityContrastOption = RCTAccessibilityContrastPreference(attemptedInitialTraitCollection);
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
                                                  name:RCTUserInterfaceStyleDidChangeNotification
                                                object:nil];
+}
+
+/**
+ When this native module is first initialized, we don't have access to the information necessary to consistently retrieve all the right traits.
+ We should still attempt to initialize the traits with the right values with the information we do have access to.
+ 
+ The traits retrieved from RCTPresentedViewController() should be correct for non-multiwindow scenarios.
+ 
+ The traits retrived from [UITraitCollection currentTraitCollection] will always be the same default trait collection,
+ presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
+ (which happens when a view gets added to the view hierachy).
+ */
+-(UITraitCollection *)attemptTraitCollectionInitialization {
+    UIViewController *presentedViewControllerTraitCollection = RCTPresentedViewController();
+
+    if (presentedViewControllerTraitCollection != nil) {
+        return [presentedViewControllerTraitCollection traitCollection];
+    } else {
+        return [UITraitCollection currentTraitCollection];
+    }
 }
 
 - (void)stopObserving {
