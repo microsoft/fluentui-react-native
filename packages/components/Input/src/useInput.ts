@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { usePressableState } from '@fluentui-react-native/interactive-hooks';
 
+import DismissSvg from './assets/dismissIcon.svg'; // Default accessory icon
 import type { InputProps, InputInfo } from './Input.types';
 
 export const useInput = (props: InputProps): InputInfo => {
@@ -13,8 +14,9 @@ export const useInput = (props: InputProps): InputInfo => {
     onBlur,
     onFocus,
     onChange,
-    accessoryButtonOnPress,
     value,
+    accessoryIcon = value ? undefined : { svgSource: { src: DismissSvg, viewBox: '0 0 20 20' } },
+    accessoryButtonOnPress,
     defaultValue,
     textInputProps,
     placeholder,
@@ -30,6 +32,7 @@ export const useInput = (props: InputProps): InputInfo => {
       assistiveText,
       setText,
       onChange,
+      accessoryIcon,
       accessoryButtonOnPress,
       value,
       // Directly applied onto the TextInput

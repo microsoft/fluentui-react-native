@@ -28,7 +28,7 @@ export const inputLookup = (layer: string, state: FocusState & { text: string },
     (layer === 'typing' && state.focused && !!state.text) ||
     userProps[layer] ||
     (layer === 'hasIcon' && userProps.icon) ||
-    (layer === 'error' && !!userProps.error)
+    (layer === 'error' && !!userProps.error && !!state.text)
   );
 };
 
@@ -49,8 +49,8 @@ export const Input = compose<InputType>({
   },
   useRender: (userProps: InputProps, useSlots: UseSlots<InputType>) => {
     const input = useInput(userProps);
-    const iconProps = createIconProps(userProps.icon);
-    const accessoryIconProps = createIconProps(userProps.accessoryIcon);
+    const iconProps = createIconProps(input.props.icon);
+    const accessoryIconProps = createIconProps(input.props.accessoryIcon);
     const Slots = useSlots(userProps, (layer) => inputLookup(layer, input.state, userProps));
 
     return (final: InputProps) => {

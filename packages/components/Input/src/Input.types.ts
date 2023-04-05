@@ -133,9 +133,13 @@ export interface InputProps extends PressableFocusProps {
   icon?: IconSourcesType;
 
   /*
-   * Source URL or name of the icon to show on the input.
+   * Source URL or name of the accessory icon to show on the input.
+   * Shown while input has text in it. Not shown while input is used as a control component.
+   *
+   * @default - dismiss icon is shown.
+   * Set as null to disabled this icon.
    */
-  accessoryIcon?: IconSourcesType | undefined;
+  accessoryIcon?: IconSourcesType | null;
 
   /**
    * Label to display on top of the input.
