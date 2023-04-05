@@ -25,8 +25,6 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
   slots: {
     root: Pressable,
     ...(Platform.OS === 'android' && { checkbox: Pressable }),
-    ...(Platform.OS === 'android' && { radioInnerCircle: View }),
-    ...(Platform.OS === 'android' && { radioButton: Pressable }),
     checkmark: SvgXml,
     content: Text,
     iconPlaceholder: View,
@@ -44,7 +42,6 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
 export const menuItemFinalRender = (
   menuItem: MenuItemCheckboxInfo,
   Slots: Slots<MenuItemCheckboxSlotProps>,
-  isRadio: boolean = false,
 ): React.FunctionComponent<MenuItemCheckboxProps> => {
   return (final: MenuItemCheckboxProps, children: React.ReactNode) => {
     const { accessibilityLabel, icon, tooltip, ...mergedProps } = mergeProps(menuItem.props, final);
@@ -65,15 +62,9 @@ export const menuItemFinalRender = (
     return (
       <Slots.root {...mergedProps} accessibilityLabel={label}>
         {Platform.OS === 'android' ? (
-          isRadio ? (
-            <Slots.radioButton onPress={mergedProps.onPress} accessible={false} focusable={false}>
-              <Slots.radioInnerCircle />
-            </Slots.radioButton>
-          ) : (
-            <Slots.checkbox onPress={mergedProps.onPress} accessible={false} focusable={false}>
-              <Slots.checkmark xml={androidCheckmarkPath} />
-            </Slots.checkbox>
-          )
+          <Slots.checkbox onPress={mergedProps.onPress} accessible={false} focusable={false}>
+            <Slots.checkmark xml={androidCheckmarkPath} />
+          </Slots.checkbox>
         ) : (
           <Slots.checkmark accessible={false} xml={checkmarkXml} />
         )}
