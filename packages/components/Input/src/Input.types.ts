@@ -147,6 +147,11 @@ export interface InputProps extends PressableFocusProps {
   accessoryIcon?: IconSourcesType | null;
 
   /**
+   * A callback to call on accessoryIcon click event.
+   */
+  accessoryButtonOnPress?: (e: InteractionEvent) => void;
+
+  /**
    * Label to display on top of the input.
    */
   label?: string;
@@ -204,11 +209,6 @@ export interface InputProps extends PressableFocusProps {
    * Callback that is called when the text input's text changes.
    */
   onChange?: (text: string) => void;
-
-  /**
-   * A callback to call on accessoryIcon click event.
-   */
-  accessoryButtonOnPress?: (e: InteractionEvent) => void;
 
   /**
    * Determines when the keyboard should stay visible after a tap.
