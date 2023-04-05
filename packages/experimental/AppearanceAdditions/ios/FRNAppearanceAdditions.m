@@ -95,8 +95,8 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel:(id)reactTag) {
     RCTUnsafeExecuteOnMainQueueSync(^{
         if ([reactTag isKindOfClass:[NSNumber class]]) {
             UIView *view = [[[self bridge] uiManager] viewForReactTag:reactTag];
-            NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
-            self->_horizontalSizeClass = horizontalSizeClass;
+            NSString *userInterfaceLevel = RCTUserInterfaceLevelPreference([view traitCollection]);
+            self->_userInterfaceLevel = userInterfaceLevel;
         }
     });
     return _userInterfaceLevel;
