@@ -32,9 +32,9 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
 
     const eventEmitter = new NativeEventEmitter(NativeAppearanceAdditions as any);
     eventEmitter.addListener('appearanceChanged', (newValue) => {
-      this._horizontalSizeClass = newValue[HorizontalSizeClassKey];
-      this._userInterfaceLevel = newValue[UserInterfaceLevelKey];
-      this._accessibilityContrastOption = newValue[AccessibilityContrastOptionKey];
+      this._horizontalSizeClass = newValue[HorizontalSizeClassKey] ?? this._horizontalSizeClass;
+      this._userInterfaceLevel = newValue[UserInterfaceLevelKey] ?? this._userInterfaceLevel;
+      this._accessibilityContrastOption = newValue[AccessibilityContrastOptionKey] ?? this._accessibilityContrastOption;
     });
   }
 }
