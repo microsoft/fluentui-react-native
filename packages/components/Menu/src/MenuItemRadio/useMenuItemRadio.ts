@@ -13,7 +13,7 @@ export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckbox
   const listContext = useMenuListContext();
   const selectRadio = listContext.selectRadio;
   const setOpen = context.setOpen;
-  let shouldPersist = context.persistOnItemClick;
+  let shouldPersist = context.persistOnItemClick || context.isControlled; // Don't close the Menu if it is controlled Menu if MenuItemRadio is clicked
   shouldPersist = persistOnClick ?? shouldPersist;
 
   const toggleChecked = React.useCallback(

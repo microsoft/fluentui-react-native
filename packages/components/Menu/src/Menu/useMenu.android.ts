@@ -26,7 +26,6 @@ export const useMenu = (props: MenuProps): MenuState => {
 
   const _container = useRef<View>(null);
   const [menuState, setMenuState] = React.useState<AndroidMenuStates>(AndroidMenuStates.Hidden);
-  const [, setAnchorHeight] = React.useState<number>(0);
   const [maxMenuHeight] = useState(250);
   const [anchorWidth, setAnchorWidth] = React.useState<number>(0);
   const [left, setLeft] = React.useState<number>(0);
@@ -46,7 +45,6 @@ export const useMenu = (props: MenuProps): MenuState => {
 
   const show = React.useCallback(() => {
     _container.current?.measureInWindow((left, top, buttonWidth, buttonHeight) => {
-      setAnchorHeight(buttonHeight);
       setAnchorWidth(buttonWidth);
       setLeft(left);
       setMenuState(AndroidMenuStates.Shown);
@@ -105,7 +103,6 @@ export const useMenu = (props: MenuProps): MenuState => {
 
   const onRequestClose = (e: InteractionEvent) => {
     setOpen(e, false, false);
-    props.setControlledOpen && props.setControlledOpen(false);
   };
 
   // Adjust position of menu
@@ -180,7 +177,6 @@ export const useMenu = (props: MenuProps): MenuState => {
     isSubmenu,
     isControlled: isOpenControlled,
     parentPopoverHoverOutTimer,
-    setAnchorHeight,
     setAnchorWidth,
     shadowMenuContainerStyle,
     _container,

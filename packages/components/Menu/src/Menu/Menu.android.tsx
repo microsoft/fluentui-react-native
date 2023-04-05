@@ -12,7 +12,6 @@ import { MenuProvider } from '../context/menuContext';
 export const Menu = stagedComponent((props: MenuProps) => {
   const state = useMenu(props);
   const contextValue = useMenuContextValue(state);
-  contextValue.setControlledOpen = props.setControlledOpen;
 
   return (_rest: MenuProps, children: React.ReactNode) => {
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
@@ -28,8 +27,7 @@ export const Menu = stagedComponent((props: MenuProps) => {
       <MenuProvider value={contextValue}>
         <View
           onLayout={(event) => {
-            const { height, width } = event.nativeEvent.layout;
-            state.setAnchorHeight(height);
+            const { width } = event.nativeEvent.layout;
             state.setAnchorWidth(width);
           }}
         >

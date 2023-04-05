@@ -24,10 +24,6 @@ export interface MenuProps extends MenuListProps {
   open?: boolean;
 
   /**
-   *  Call back when the component request value change via controlled state variable
-   */
-  setControlledOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-  /**
    * Call back when the component requests to change value
    */
   onOpenChange?: (e: InteractionEvent, isOpen: boolean) => void;
@@ -51,14 +47,12 @@ export type MenuSizeType = {
 export interface MenuState extends MenuProps {
   isControlled: boolean;
   isSubmenu: boolean;
-  setControlledOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   parentPopoverHoverOutTimer?: NodeJS.Timeout;
   setOpen: (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void;
   shouldFocusOnContainer: boolean;
   triggerRef: React.RefObject<View>;
   hasMaxHeight?: boolean;
   hasMaxWidth?: boolean;
-  setAnchorHeight?: (value: null | number | ((prevState: null | number) => null | number)) => void;
   setAnchorWidth?: (value: null | number | ((prevState: null | number) => null | number)) => void;
   shadowMenuContainerStyle?: object;
   _container?: React.MutableRefObject<View>;
