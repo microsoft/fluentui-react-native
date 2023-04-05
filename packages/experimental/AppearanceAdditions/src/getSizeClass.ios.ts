@@ -20,7 +20,7 @@ export function useHorizontalSizeClass(): SizeClass {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const subscription = useMemo(
     () => ({
-      getCurrentValue: () => appearanceAdditions().horizontalSizeClass(rootTag),
+      getCurrentValue: () => appearanceAdditions(rootTag).horizontalSizeClass,
       subscribe: (callback) => {
         const appearanceSubscription = eventEmitter.addListener('appearanceChanged', callback);
         return () => {

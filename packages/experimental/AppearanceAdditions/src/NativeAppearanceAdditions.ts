@@ -5,11 +5,14 @@ export const NativeAppearanceAdditions = {
   addListener: (_: string) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   removeListeners: (_: number) => {},
-  horizontalSizeClass: (_: number) => {
+  initializeTraitCollection: (_: number) => {
+    console.warn('NativeAppearanceAdditions is only available on iOS');
+  },
+  horizontalSizeClass: () => {
     console.warn('NativeAppearanceAdditions is only available on iOS');
     return 'regular' as SizeClass;
   },
-  userInterfaceLevel: (_: number) => {
+  userInterfaceLevel: () => {
     console.warn('NativeAppearanceAdditions is only available on iOS');
     return 'base' as UserInterfaceLevel;
   },

@@ -80,25 +80,31 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
     return YES;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass:(id)reactTag) {
+/**
+ * When initializing this native module, not all the information required to consistently get all correct initial traits is accessible.
+ * In order to ensure that the correct traits are always be returned the first time they are reuqested, a react tag for a view in that window can
+ * be provided to the native module.
+ *
+ * This initialization step may be needed when accessing traits that can be different in different windows, which include horizontal size class and user interface level.
+ * This initialization step is not necessary if the only traits that are accessed are system wide traits common to all windows, such as  accessibility contrast.
+ */
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(initializeTraitCollection:(id)reactTag) {
     RCTUnsafeExecuteOnMainQueueSync(^{
         if ([reactTag isKindOfClass:[NSNumber class]]) {
             UIView *view = [[[self bridge] uiManager] viewForReactTag:reactTag];
-            NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
-            self->_horizontalSizeClass = horizontalSizeClass;
+            self->_horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
+            self->_userInterfaceLevel = RCTUserInterfaceLevelPreference([view traitCollection]);
+            self->_accessibilityContrastOption = RCTAccessibilityContrastPreference([view traitCollection]);
         }
     });
+    return nil;
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass) {
     return _horizontalSizeClass;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel:(id)reactTag) {
-    RCTUnsafeExecuteOnMainQueueSync(^{
-        if ([reactTag isKindOfClass:[NSNumber class]]) {
-            UIView *view = [[[self bridge] uiManager] viewForReactTag:reactTag];
-            NSString *userInterfaceLevel = RCTUserInterfaceLevelPreference([view traitCollection]);
-            self->_userInterfaceLevel = userInterfaceLevel;
-        }
-    });
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel) {
     return _userInterfaceLevel;
 }
 

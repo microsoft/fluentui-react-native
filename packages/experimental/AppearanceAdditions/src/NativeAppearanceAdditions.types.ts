@@ -1,7 +1,7 @@
 export interface AppearanceAdditions {
-  horizontalSizeClass(reactTag): SizeClass;
-  userInterfaceLevel(reactTag): UserInterfaceLevel;
-  accessibilityContrastOption(reactTag): AccessibilityContrastOption;
+  readonly horizontalSizeClass: SizeClass;
+  readonly userInterfaceLevel: UserInterfaceLevel;
+  readonly accessibilityContrastOption: AccessibilityContrastOption;
 }
 
 export const HorizontalSizeClassKey = 'horizontalSizeClass';

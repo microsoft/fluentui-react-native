@@ -11,9 +11,23 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
   _userInterfaceLevel: UserInterfaceLevel;
   _accessibilityContrastOption: AccessibilityContrastOption;
 
-  constructor() {
-    this._horizontalSizeClass = NativeAppearanceAdditions.horizontalSizeClass(null);
-    this._userInterfaceLevel = NativeAppearanceAdditions.userInterfaceLevel(null);
+  get horizontalSizeClass(): SizeClass {
+    return this._horizontalSizeClass;
+  }
+
+  get userInterfaceLevel(): UserInterfaceLevel {
+    return this._userInterfaceLevel;
+  }
+
+  get accessibilityContrastOption(): AccessibilityContrastOption {
+    return this._accessibilityContrastOption;
+  }
+
+  constructor(reactTag: number = null) {
+    NativeAppearanceAdditions.initializeTraitCollection(reactTag);
+
+    this._horizontalSizeClass = NativeAppearanceAdditions.horizontalSizeClass();
+    this._userInterfaceLevel = NativeAppearanceAdditions.userInterfaceLevel();
     this._accessibilityContrastOption = NativeAppearanceAdditions.accessibilityContrastOption();
 
     const eventEmitter = new NativeEventEmitter(NativeAppearanceAdditions as any);
@@ -23,28 +37,10 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
       this._accessibilityContrastOption = newValue[AccessibilityContrastOptionKey];
     });
   }
-
-  horizontalSizeClass(reactTag = null): SizeClass {
-    if (!reactTag) {
-      return this._horizontalSizeClass;
-    }
-    return NativeAppearanceAdditions.horizontalSizeClass(reactTag);
-  }
-
-  userInterfaceLevel(reactTag = null): UserInterfaceLevel {
-    if (!reactTag) {
-      return this._userInterfaceLevel;
-    }
-    return NativeAppearanceAdditions.userInterfaceLevel(reactTag);
-  }
-
-  accessibilityContrastOption(): AccessibilityContrastOption {
-    return this._accessibilityContrastOption;
-  }
 }
 
-function getAppearanceAdditionsWorker() {
-  return new AppearanceAdditionsImpl() as AppearanceAdditions;
+function getAppearanceAdditionsWorker(reactTag: number) {
+  return new AppearanceAdditionsImpl(reactTag) as AppearanceAdditions;
 }
 
 export const appearanceAdditions = memoize(getAppearanceAdditionsWorker);
