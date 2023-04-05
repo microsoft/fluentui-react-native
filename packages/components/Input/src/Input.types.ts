@@ -1,4 +1,4 @@
-import type { ColorValue, TextInputProps, ViewProps, ScrollViewProps, KeyboardTypeOptions } from 'react-native';
+import type { ColorValue, TextInputProps, ViewStyle, ViewProps, ScrollViewProps, KeyboardTypeOptions } from 'react-native';
 
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
@@ -131,6 +131,11 @@ export interface InputProps extends PressableFocusProps {
    * Source URL or name of the icon to show on the input.
    */
   icon?: IconSourcesType;
+
+  /**
+   * The width of the button.
+   */
+  width?: ViewStyle['width'];
 
   /*
    * Source URL or name of the accessory icon to show on the input.

@@ -50,6 +50,7 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           paddingVertical: tokens.spacingInputVertical,
           borderBottomColor: tokens.strokeColor,
           borderBottomWidth: tokens.strokeWidth,
+          flex: 1,
         },
       }),
       ['strokeColor', 'strokeWidth', 'spacingInputVertical'],
@@ -64,6 +65,8 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           padding: 0, // Required to override default padding
           margin: 0, // Required to override default margin
           color: tokens.inputTextColor,
+          flexShrink: 1,
+          flexGrow: 1,
         },
       }),
       ['cursorColor', 'inputTextColor', 'inputTextFont', ...fontStyles.keys],
