@@ -1,10 +1,14 @@
 {
   "name": "@fluentui-react-native/input",
   "version": "0.1.0",
-  "description": "add component-description",
+  "description": "A cross-platform Text input component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",
@@ -19,7 +23,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/components/ComponentTemplate"
+    "directory": "packages/components/Input"
   },
   "dependencies": {
     "@fluentui-react-native/framework": "0.7.17",
@@ -42,5 +46,22 @@
     "react-native": "^0.68.0"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
+  }
 }
