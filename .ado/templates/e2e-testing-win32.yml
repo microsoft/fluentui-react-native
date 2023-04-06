@@ -26,6 +26,12 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
+      yarn appium driver install --source=npm appium-windows-driver
+    workingDirectory: apps/win32
+    displayName: 'Install appium driver'
+    condition: succeeded()
+
+  - script: |
       yarn e2etest
     workingDirectory: apps/win32
     displayName: 'run E2E Win32 tests'
@@ -37,3 +43,9 @@ steps:
       platform: 'win32'
       buildArtifacts: variables['task.Build.status']
       directory: $(Build.SourcesDirectory)/apps/win32
+
+  - script: |
+      yarn appium driver uninstall windows
+    workingDirectory: apps/win32
+    displayName: 'Uninstall appium driver'
+    condition: succeeded()

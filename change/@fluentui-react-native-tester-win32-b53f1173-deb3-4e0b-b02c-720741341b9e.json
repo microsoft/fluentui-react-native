@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update appium beta version to version that doesn't use jsdoc",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
