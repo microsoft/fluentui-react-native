@@ -147,7 +147,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption) {
  presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
  (which happens when a view gets added to the view hierachy).
  */
--(UITraitCollection *)attemptTraitCollectionInitialization {
+- (UITraitCollection *)attemptTraitCollectionInitialization {
     UIViewController *presentedViewControllerTraitCollection = RCTPresentedViewController();
 
     if (presentedViewControllerTraitCollection != nil) {
