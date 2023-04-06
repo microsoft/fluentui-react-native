@@ -32,9 +32,13 @@ jobs:
           yarn prettier
         displayName: 'check prettier'
 
+      # - script: |
+      #     yarn buildci
+      #   displayName: 'yarn buildci'
+
       - script: |
-          yarn buildci
-        displayName: 'yarn buildci'
+          yarn buildci --to @fluentui-react-native/button
+        displayName: 'yarn buildci (button)'
 
       - script: |
           yarn check-for-changed-files
