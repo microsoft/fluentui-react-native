@@ -222,7 +222,7 @@ const useMenuOpenState = (
       if (onOpenChange && openPrev !== isOpen) {
         onOpenChange(e, isOpen);
       }
-      if (bubble && parentSetOpen) {
+      if (bubble && parentSetOpen && !isControlled) {
         parentSetOpen(e, isOpen, bubble);
       }
     },

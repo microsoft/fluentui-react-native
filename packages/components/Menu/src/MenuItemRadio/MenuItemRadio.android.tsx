@@ -7,9 +7,9 @@ import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
+import { stylingSettings } from './MenuItemRadio.styling.android';
 import { useMenuItemRadio } from './useMenuItemRadio';
 import { getAccessibilityLabel, getTooltip } from '../MenuItem/MenuItem';
-import { stylingSettings } from '../MenuItemRadio/MenuItemRadio.styling';
 import type {
   MenuItemRadioProps,
   MenuItemRadioSlotProps,

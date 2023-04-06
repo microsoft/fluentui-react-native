@@ -20,19 +20,7 @@ export type MenuPopoverTokens =
       elevation?: number;
     };
 
-export type MenuPopoverProps = ICalloutProps & {
-  /**
-   * The props for the corner radius for the Modal MenuPopover
-   * @platform android
-   */
-  cornerRadius?: number;
-
-  /**
-   * Shadown elevation for the Modal MenuPopover
-   * @platform android
-   */
-  elevation?: number;
-};
+export type MenuPopoverProps = ICalloutProps;
 
 export interface MenuPopoverState {
   props: ICalloutProps;

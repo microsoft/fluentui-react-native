@@ -15,19 +15,7 @@ const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
-    const {
-      directionalHint,
-      gapSpace,
-      maxHeight,
-      maxWidth,
-      minWidth,
-      minPadding,
-      borderWidth,
-      borderColor,
-      backgroundColor,
-      elevation,
-      cornerRadius,
-    } = props;
+    const { directionalHint, gapSpace, maxHeight, maxWidth, minWidth, minPadding, borderWidth, borderColor, backgroundColor } = props;
 
     const state = useMenuPopover(props);
     const theme = useFluentTheme();
@@ -42,8 +30,6 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
       gapSpace,
       maxHeight,
       maxWidth,
-      cornerRadius,
-      elevation,
       minWidth,
       minPadding,
       borderWidth,
