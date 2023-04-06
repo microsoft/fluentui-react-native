@@ -21,6 +21,10 @@ jobs:
       - template: templates/setup-repo.yml
 
       - script: |
+          npm -v
+        displayName: 'npm version'
+
+      - script: |
           yarn checkchange
         displayName: 'check change'
 
@@ -37,17 +41,13 @@ jobs:
         displayName: 'verify API and Ensure Changed Files'
 
       - script: |
-          npm -v
-        displayName: 'npm version'
-
-      - script: |
           npm publish --dry-run
         workingDirectory: packages/components/Button
         displayName: publish dry-run
 
       - script: |
-          npm install -g npm@8.10.0
-        displayName: 'install npm 8.10.0'
+          npm install -g npm@9.5.0
+        displayName: 'install npm 9.5.0'
 
       - script: |
           npm publish --dry-run
