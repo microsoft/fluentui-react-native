@@ -1,7 +1,6 @@
 import React from 'react';
-import { Animated, Modal, Platform, TouchableWithoutFeedback, View, StyleSheet, ScrollView } from 'react-native';
+import { Platform, View } from 'react-native';
 
-import { Callout } from '@fluentui-react-native/callout';
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { compressible, mergeProps, patchTokens, useFluentTheme } from '@fluentui-react-native/framework';
 
@@ -10,13 +9,11 @@ import { menuPopoverName } from './MenuPopover.types';
 import { useMenuPopoverTokens } from './MenuPopoverTokens';
 import { useMenuPopover } from './useMenuPopover';
 import { useMenuContext } from '../context';
-
-const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
+import { MenuCallout } from '../MenuCallout';
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
     const { directionalHint, gapSpace, maxHeight, maxWidth, minWidth, minPadding, borderWidth, borderColor, backgroundColor } = props;
-
     const state = useMenuPopover(props);
     const theme = useFluentTheme();
     const context = useMenuContext();
@@ -50,49 +47,15 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
             }
           : state.innerView;
       const content = React.createElement(View, innerViewProps, children);
-
-      return Platform.OS === 'android' ? (
-        <Modal
-          {...mergedProps}
-          visible={context.open}
-          onRequestClose={context.onRequestClose}
-          supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
-          transparent
-        >
-          <TouchableWithoutFeedback onPress={context.onRequestClose} accessible={false}>
-            <View style={[StyleSheet.absoluteFill]}>
-              <Animated.View
-                onLayout={context.onMenuLayout}
-                style={[
-                  context.shadowMenuContainerStyle,
-                  {
-                    maxHeight: mergedProps.maxHeight ? mergedProps.maxHeight : tokens.maxHeight,
-                    maxWidth: tokens.maxWidth,
-                    position: 'absolute',
-                    borderRadius: tokens.cornerRadius,
-                    elevation: tokens.elevation,
-                    overflow: 'hidden',
-                  },
-                ]}
-              >
-                {context.menuHeight + tokens.minPadding >= tokens.maxHeight ||
-                context.menuHeight + tokens.minPadding >= mergedProps.maxHeight ? (
-                  <AnimatedScrollView style={[context.animationStarted && context.menuSize]}>{children}</AnimatedScrollView>
-                ) : (
-                  <Animated.View style={[context.animationStarted && context.menuSize]}>{children}</Animated.View>
-                )}
-              </Animated.View>
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal>
-      ) : (
-        <Callout {...mergedProps}>{content}</Callout>
+      return (
+        <MenuCallout tokens={tokens} {...mergedProps}>
+          {content}
+        </MenuCallout>
       );
     };
   },
   useMenuPopoverTokens,
 );
-
 MenuPopover.displayName = menuPopoverName;
 
 export default MenuPopover;
