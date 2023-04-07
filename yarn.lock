@@ -4480,8 +4480,8 @@ appium-uiautomator2-driver@^2.12.3:
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.10.14"
-    appium-android-driver "^5.8.10"
-    appium-chromedriver "^5.3.1"
+    appium-android-driver "^5.8.7"
+    appium-chromedriver "^5.2.16"
     appium-uiautomator2-server "^5.7.2"
     asyncbox "^2.3.1"
     axios "^1.x"
@@ -5768,7 +5768,7 @@ cliui@^7.0.2:
     strip-ansi "^6.0.0"
     wrap-ansi "^7.0.0"
 
-cliui@^8.0.1:
+cliui@^8.0.0, cliui@^8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-8.0.1.tgz#0c04b075db02cbfe60dc8e6cf2f5486b1a3608aa"
   integrity sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==
@@ -10607,7 +10607,7 @@ minimatch@~3.0.2:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6:
+minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6, minimist@^1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
@@ -12006,18 +12006,19 @@ react-native-svg@^12.3.0, react-native-svg@^12.5.0:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
-react-native-test-app@^2.0.2:
-  version "2.3.13"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.3.13.tgz#1681f691f953b4b1a6b01ca39349fe459846ea3e"
-  integrity sha512-0etn7YpU/3Ubxu0kjHfZ5bCXrEXV191eTwGIKLj7eKiM+yQNtLpD3PqaWBbO1zdz8MQbKDkotk2Dqq91hXPVuA==
+react-native-test-app@^2.3.16:
+  version "2.3.16"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.3.16.tgz#9ee48ccd62ad2a3f425d75d010de3ce0e0b127d4"
+  integrity sha512-NdLRhZqPdj1dNJTOlCo2Ezu2hdoU3YolrrTHokbWA7vPNMTCbdj0SltWg6gS6f+Bz1Z+ToBDOkhPt+Llj2s2Rg==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
+    cliui "^8.0.0"
     fast-xml-parser "^4.0.0"
+    minimist "^1.2.8"
     prompts "^2.4.0"
     semver "^7.3.5"
     uuid "^8.3.2"
-    yargs "^16.0.0"
 
 react-native-windows@^0.68.0:
   version "0.68.30"
