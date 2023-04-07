@@ -86,7 +86,7 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
  * be provided to the native module.
  *
  * This initialization step may be needed when accessing traits that can be different in different windows, which include horizontal size class and user interface level.
- * This initialization step is not necessary if the only traits that are accessed are system wide traits common to all windows, such as  accessibility contrast.
+ * This initialization step is not necessary if the only traits that are accessed are system wide traits common to all windows, such as accessibility contrast.
  */
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(initializeTraitCollection:(id)reactTag) {
     RCTUnsafeExecuteOnMainQueueSync(^{
@@ -143,7 +143,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption) {
  
  The traits retrieved from RCTPresentedViewController() should be correct for non-multiwindow scenarios.
  
- The traits retrived from [UITraitCollection currentTraitCollection] will always be the same default trait collection,
+ The traits retrieved from [UITraitCollection currentTraitCollection] will always be the same default trait collection,
  presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
  (which happens when a view gets added to the view hierachy).
  */
