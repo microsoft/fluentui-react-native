@@ -2,10 +2,12 @@ import type * as React from 'react';
 import type { ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { DividerInsetSize } from '@fluentui-react-native/divider';
 import type { IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const menuDividerName = 'MenuDivider';
+
+export const DividerInsetSizes = [0, 16, 56, 68, 72, 108] as const;
+export type DividerInsetSize = (typeof DividerInsetSizes)[number];
 
 export type MenuDividerTokens = IBackgroundColorTokens & {
   height?: number;
