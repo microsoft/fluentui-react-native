@@ -51,12 +51,12 @@
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@office-iss/react-native-win32": "^0.68.0",
     "@types/react-native": "^0.68.0",
-    "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react": "18.2.0",
+    "react-native": "^0.71.0"
   },
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react": "18.2.0",
+    "react-native": "^0.71.0"
   },
   "author": "",
   "license": "MIT",
@@ -67,7 +67,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.68"
+        "react-native@0.71"
       ],
       "capabilities": [
         "core",

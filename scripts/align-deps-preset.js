@@ -11,4 +11,16 @@ module.exports = {
       devOnly: true,
     },
   },
+  0.71: {
+    jest: {
+      name: 'jest',
+      version: '^27.0.0',
+      devOnly: true,
+    },
+    'test-app': {
+      name: 'react-native-test-app',
+      version: '^2.3.16',
+      devOnly: true,
+    },
+  },
 };

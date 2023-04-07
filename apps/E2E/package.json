@@ -21,8 +21,8 @@
     "dist/*"
   ],
   "dependencies": {
-    "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react": "18.2.0",
+    "react-native": "^0.71.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
@@ -44,8 +44,8 @@
     "appium-uiautomator2-driver": "^2.12.3",
     "appium-windows-driver": "2.3.5",
     "appium-xcuitest-driver": "4.16.12",
-    "metro-config": "^0.67.0",
-    "metro-react-native-babel-preset": "^0.67.0",
+    "metro-config": "^0.73.7",
+    "metro-react-native-babel-preset": "^0.73.7",
     "ts-node": "^8.10.1",
     "typescript": "4.9.4",
     "webdriverio": "7.30.1"
@@ -57,7 +57,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.68"
+        "react-native@0.71"
       ],
       "capabilities": [
         "core",
