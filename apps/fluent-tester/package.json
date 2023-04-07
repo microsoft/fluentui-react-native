@@ -175,7 +175,9 @@
         "babel-preset-react-native",
         "metro-config",
         "react",
-        "svg"
+        "react-test-renderer",
+        "svg",
+        "test-app"
       ]
     }
   },
