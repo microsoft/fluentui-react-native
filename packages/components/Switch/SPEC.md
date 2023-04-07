@@ -2,7 +2,7 @@
 
 ## Background
 
-The `Switch` componentt allows users to toggle between two mutually exclusive states.
+The `Switch` component allows users to toggle between two mutually exclusive states.
 
 ## Requirements
 
