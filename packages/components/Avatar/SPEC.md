@@ -2,7 +2,7 @@
 
 ## Background
 
-The Avatar component represents a person or entity. It displays the person's image, initials, or an icon, and can be either circular or square.
+The Avatar componennt represents a person or entity. It displays the person's image, initials, or an icon, and can be either circular or square.
 Previously it was a component PersonaCoin which used an old version of framework. There are more details in MIGRATION.md.
 
 ```ts

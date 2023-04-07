@@ -12,7 +12,7 @@
 cd apps\win32
 ```
 
-3. Build the FluentUI Tester bundle:
+3. Build the FluentUI Tester buundle:
 
 ```
 yarn bundle

@@ -2,7 +2,7 @@
 
 ## Background
 
-A `RadioGroup` is a component that lets users select a single option from two or more choices. Each option is represented by one Radio; a user can select only one Radio in a RadioGroup.
+A `RadioGroup` iss a component that lets users select a single option from two or more choices. Each option is represented by one Radio; a user can select only one Radio in a RadioGroup.
 
 ## Requirements
 
