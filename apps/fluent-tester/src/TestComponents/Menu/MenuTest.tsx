@@ -130,8 +130,26 @@ const Submenu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
       <MenuTrigger>
         <MenuItem>A second MenuItem trigger</MenuItem>
       </MenuTrigger>
-      <MenuPopover minWidth={230}>
+      <MenuPopover minWidth={230} maxHeight={200}>
         <MenuList>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
           <MenuItemCheckbox name={'a'}>A nested MenuItemCheckbox</MenuItemCheckbox>
           <MenuItem>A nested MenuItem</MenuItem>
           <Submenu />
