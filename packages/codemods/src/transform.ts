@@ -12,6 +12,8 @@ interface argsType {
 }
 
 export const yargsParse = (args: string[]): argsType => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return yargs([])
     .help()
     .exitProcess(false)

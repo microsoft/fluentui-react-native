@@ -8,6 +8,8 @@ export type IViewProps = ViewProps;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   acceptsFirstMouse: true,
   acceptsKeyboardFocus: true,
   accessible: true,
@@ -77,6 +79,8 @@ const _textMask: IFilterMask<ITextProps> = {
   dataDetectorType: true,
   disabled: true,
   ellipsizeMode: true,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   enableFocusRing: true,
   lineBreakMode: true,
   maxFontSizeMultiplier: true,
@@ -139,6 +143,8 @@ const _imageMask: IFilterMask<IImageProps> = {
   source: true,
   style: true,
   testID: true,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   tooltip: true,
 };
 
