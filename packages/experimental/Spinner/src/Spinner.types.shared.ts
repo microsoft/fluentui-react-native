@@ -40,9 +40,24 @@ export interface SpinnerTokens {
    * @defaultValue 'false'
    */
   inverted?: SpinnerTokens;
+  width?: number;
+  height?: number;
+  /**
+   * Sizes of the Spinner
+   */
+  'x-small'?: SpinnerTokens;
+  small?: SpinnerTokens;
+  medium?: SpinnerTokens;
+  large?: SpinnerTokens;
+  'x-large'?: SpinnerTokens;
+  /* win32 specific */
+  tiny?: SpinnerTokens;
+  huge?: SpinnerTokens;
+  /* mobile specific */
+  'xx-small'?: SpinnerTokens;
 }
 
-export interface SpinnerProps extends ViewProps {
+export interface SpinnerProps extends ViewProps, SpinnerTokens {
   /**
    * Spinner appearnace
    * @defaultValue 'primary'

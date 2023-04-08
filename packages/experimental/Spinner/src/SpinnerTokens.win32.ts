@@ -38,6 +38,41 @@ export const getDefaultSize = (): SpinnerSize => {
 
 export const defaultSpinnerTokens: TokenSettings<SpinnerTokens, Theme> = (t: Theme) =>
   ({
+    tiny: {
+      size: 'tiny',
+      width: diameterSizeMap['tiny'],
+      height: diameterSizeMap['tiny'],
+    },
+    'x-small': {
+      size: 'x-small',
+      width: diameterSizeMap['x-small'],
+      height: diameterSizeMap['x-small'],
+    },
+    small: {
+      size: 'small',
+      width: diameterSizeMap['small'],
+      height: diameterSizeMap['small'],
+    },
+    medium: {
+      size: 'medium',
+      width: diameterSizeMap['medium'],
+      height: diameterSizeMap['medium'],
+    },
+    large: {
+      size: 'large',
+      width: diameterSizeMap['large'],
+      height: diameterSizeMap['large'],
+    },
+    'x-large': {
+      size: 'x-large',
+      width: diameterSizeMap['x-large'],
+      height: diameterSizeMap['x-large'],
+    },
+    huge: {
+      size: 'huge',
+      width: diameterSizeMap['huge'],
+      height: diameterSizeMap['huge'],
+    },
     tailColor: t.colors.brandStroke1,
     trackColor: t.colors.brandStroke2,
     inverted: {

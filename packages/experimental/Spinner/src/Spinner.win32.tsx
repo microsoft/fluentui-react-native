@@ -30,9 +30,12 @@ const getTrackPath = (diameter: number, width: number, color: ColorValue) => {
 
 /* Track is a full circle with a transparent fill */
 const trackSvg: React.FunctionComponent<SpinnerSvgProps> = (props: SpinnerSvgProps) => {
-  const { size, trackColor, viewBoxHeight, viewBoxWidth } = props;
+  const { size, trackColor } = props;
   const svgProps: SvgProps = {
-    style: { height: viewBoxHeight, width: viewBoxWidth },
+    style: {
+      height: diameterSizeMap[size],
+      width: diameterSizeMap[size],
+    },
   };
   const path = getTrackPath(diameterSizeMap[size] - lineThicknessSizeMap[size], lineThicknessSizeMap[size], trackColor);
 
@@ -40,7 +43,12 @@ const trackSvg: React.FunctionComponent<SpinnerSvgProps> = (props: SpinnerSvgPro
 };
 
 export const spinnerLookup = (layer: string, userProps: SpinnerProps): boolean => {
-  return layer === userProps['appearance'] || layer === userProps['size'] || (!userProps['size'] && layer === getDefaultSize());
+  return (
+    userProps[layer] ||
+    layer === userProps['appearance'] ||
+    layer === userProps['size'] ||
+    (!userProps['size'] && layer === getDefaultSize())
+  );
 };
 
 export const Spinner = compose<SpinnerType>({
@@ -55,7 +63,7 @@ export const Spinner = compose<SpinnerType>({
   },
   useRender: (props: SpinnerProps, useSlots: UseSlots<SpinnerType>) => {
     const spinnerProps = useSpinner(props);
-    const Slots = useSlots(spinnerProps, (layer) => spinnerLookup(layer, props));
+    const Slots = useSlots(spinnerProps, (layer) => spinnerLookup(layer, spinnerProps));
 
     return (final: SpinnerProps) => {
       const { ...mergedProps } = mergeProps(spinnerProps, final);

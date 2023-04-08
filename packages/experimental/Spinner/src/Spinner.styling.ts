@@ -3,7 +3,7 @@ import { buildProps } from '@fluentui-react-native/framework';
 
 import type { SpinnerProps, SpinnerSlotProps, SpinnerTokens } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
-import { defaultSpinnerTokens, diameterSizeMap } from './SpinnerTokens';
+import { defaultSpinnerTokens } from './SpinnerTokens';
 
 export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, SpinnerTokens> = {
   tokens: [defaultSpinnerTokens, spinnerName],
@@ -14,21 +14,19 @@ export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, 
         trackColor: tokens.trackColor,
         size: tokens.size,
         lineThickness: tokens.size != 'medium' ? tokens.size : tokens.size,
-        accessibilityRole: 'progressbar',
-        accessible: true,
         style: {
-          width: diameterSizeMap[tokens.size],
-          height: diameterSizeMap[tokens.size],
+          width: tokens.width,
+          height: tokens.height,
         },
       }),
       ['trackColor', 'size'],
     ),
     svg: buildProps(
       (tokens: SpinnerTokens) => ({
-        width: diameterSizeMap[tokens.size],
-        height: diameterSizeMap[tokens.size],
+        width: tokens.width,
+        height: tokens.height,
       }),
-      ['size'],
+      ['width', 'height'],
     ),
   },
 };

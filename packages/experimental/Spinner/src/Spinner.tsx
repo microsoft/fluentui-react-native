@@ -7,6 +7,7 @@ import { Svg } from 'react-native-svg';
 
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
+import { useSpinner } from './useSpinner';
 
 export const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 export const Spinner = compose<SpinnerType>({
@@ -16,10 +17,11 @@ export const Spinner = compose<SpinnerType>({
     svg: AnimatedSvg,
   },
   useRender: (props: SpinnerProps, useSlots: UseSlots<SpinnerType>) => {
-    const Slots = useSlots(props);
+    const spinnerProps = useSpinner(props);
+    const Slots = useSlots(spinnerProps);
 
     return (rest: SpinnerProps) => {
-      const { ...mergedProps } = mergeProps(props, rest);
+      const { ...mergedProps } = mergeProps(spinnerProps, rest);
       return <Slots.root {...mergedProps}></Slots.root>;
     };
   },
