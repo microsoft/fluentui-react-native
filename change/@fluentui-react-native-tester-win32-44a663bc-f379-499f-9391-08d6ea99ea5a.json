@@ -1,7 +1,7 @@
 {
   "type": "patch",
-  "comment": "Trigger manual bump (no changes)",
+  "comment": "align-deps: Fix warnigns and issues",
   "packageName": "@fluentui-react-native/tester-win32",
-  "email": "krsiler@microsoft.com",
+  "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
 }

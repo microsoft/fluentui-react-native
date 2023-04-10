@@ -1,7 +1,7 @@
 {
   "type": "minor",
-  "comment": "Fix default avatar rendering and e2e section",
+  "comment": "add tracker svg for win32",
   "packageName": "@fluentui-react-native/tester",
-  "email": "ayushsinghs@yahoo.in",
+  "email": "email not defined",
   "dependentChangeType": "patch"
 }

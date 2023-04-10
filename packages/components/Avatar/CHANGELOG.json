@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Mon, 10 Apr 2023 16:10:15 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.8.10",
+      "version": "1.8.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea",
+            "comment": "fix npm publish pipeline"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "c54c613a1657dfa8f246dd1cbf75913b2a41f28b",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "faad4581da53ac8993dc495e5819d0cfde2dc522",
+            "comment": "Fix default avatar rendering and e2e section"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/avatar_v1.8.8",
       "version": "1.8.8",

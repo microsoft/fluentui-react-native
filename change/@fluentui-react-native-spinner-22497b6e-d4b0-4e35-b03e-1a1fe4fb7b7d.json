@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add tracker svg for win32",
+  "packageName": "@fluentui-react-native/spinner",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

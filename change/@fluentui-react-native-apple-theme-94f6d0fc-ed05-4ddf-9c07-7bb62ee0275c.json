@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add trait collection support for multiwindow",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
