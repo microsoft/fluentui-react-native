@@ -21,7 +21,7 @@ export const InputDefault: React.FunctionComponent = () => {
       <Input onChange={(text) => setControlText(text)} defaultValue={controlText} />
       <Input value={'Controlled text - ' + controlText} />
       <Input placeholder="Enter text here!" type="decimal-pad" accessoryIcon={null} />
-      <Input placeholder="Enter text here!" accessoryIcon={undefined} secondaryText="Secondary" type="email-address" />
+      <Input placeholder="Custom dismiss icon" accessoryIcon={outlineIconProps} secondaryText="Secondary" type="email-address" />
       <Input
         placeholder="Enter text here!"
         accessoryIcon={dismissIconProps}
@@ -33,7 +33,6 @@ export const InputDefault: React.FunctionComponent = () => {
         error={error}
         icon={outlineIconProps}
         placeholder="Only text up to 5 characters!"
-        accessoryIcon={dismissIconProps}
         label="Label"
         onChange={(text) => {
           if (text.length > 5) setError('Text must be less than 5 characters!');
