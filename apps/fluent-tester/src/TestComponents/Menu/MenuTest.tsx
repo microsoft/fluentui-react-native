@@ -86,8 +86,8 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark</MenuItemCheckbox>
-            <MenuItemCheckbox name="itemThree">A MenuItem with checkmark</MenuItemCheckbox>
+            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark without alignment</MenuItemCheckbox>
+            <MenuItemCheckbox name="itemThree">A MenuItem with checkmark without alignment</MenuItemCheckbox>
           </MenuList>
         </MenuPopover>
       </Menu>

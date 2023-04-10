@@ -2,9 +2,9 @@ import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
-import type { MenuItemCheckboxTokens } from '../MenuItemCheckbox';
+import type { MenuItemRadioTokens } from './MenuItemRadio.types';
 
-export const defaultMenuItemRadioTokens: TokenSettings<MenuItemCheckboxTokens, Theme> = (t: Theme): MenuItemCheckboxTokens => ({
+export const defaultMenuItemRadioTokens: TokenSettings<MenuItemRadioTokens, Theme> = (t: Theme): MenuItemRadioTokens => ({
   checkmarkSize: globalTokens.size120,
   color: t.colors.neutralForeground1,
   variant: 'body1',

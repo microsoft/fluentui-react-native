@@ -28,6 +28,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const [menuState, setMenuState] = React.useState<AndroidMenuStates>(AndroidMenuStates.Hidden);
   const [maxMenuHeight] = useState(250);
   const [anchorWidth, setAnchorWidth] = React.useState<number>(0);
+
   const [left, setLeft] = React.useState<number>(0);
   const [menuHeight, setMenuHeight] = React.useState<number>(0);
   const [menuWidth, setMenuWidth] = React.useState<number>(0);

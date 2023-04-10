@@ -7,16 +7,16 @@ import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/t
 import type { MenuItemRadioProps, MenuItemRadioSlotProps } from './MenuItemRadio.types';
 import { menuItemRadioName } from './MenuItemRadio.types';
 import { defaultMenuItemRadioTokens } from './MenuItemRadioTokens';
-import type { MenuItemCheckboxTokens } from '../MenuItemCheckbox';
+import type { MenuItemRadioTokens } from '../MenuItemRadio/MenuItemRadio.types';
 
-export const menuItemRadioStates: (keyof MenuItemCheckboxTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
+export const menuItemRadioStates: (keyof MenuItemRadioTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
 
-export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadioSlotProps, MenuItemCheckboxTokens> = {
+export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadioSlotProps, MenuItemRadioTokens> = {
   tokens: [defaultMenuItemRadioTokens, menuItemRadioName],
   states: menuItemRadioStates,
   slotProps: {
     root: buildProps(
-      (tokens: MenuItemCheckboxTokens, theme: Theme) => ({
+      (tokens: MenuItemRadioTokens, theme: Theme) => ({
         style: {
           alignItems: 'center',
           backgroundColor: tokens.backgroundColor,
@@ -30,7 +30,7 @@ export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadi
     ),
 
     radioButton: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({
+      (tokens: MenuItemRadioTokens) => ({
         style: {
           backgroundColor: 'transparent',
           alignItems: 'center',
@@ -49,7 +49,7 @@ export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadi
     ),
 
     radioInnerCircle: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({
+      (tokens: MenuItemRadioTokens) => ({
         style: {
           opacity: tokens.radioVisibility,
           borderRadius: tokens.radioInnerCircleSize / 2,
@@ -62,7 +62,7 @@ export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadi
     ),
 
     content: buildProps(
-      (tokens: MenuItemCheckboxTokens, theme: Theme) => ({
+      (tokens: MenuItemRadioTokens, theme: Theme) => ({
         style: {
           flexGrow: 1,
           color: tokens.color,
@@ -73,7 +73,7 @@ export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadi
       ['color', ...fontStyles.keys],
     ),
     iconPlaceholder: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({
+      (tokens: MenuItemRadioTokens) => ({
         style: {
           minHeight: tokens.iconSize,
           minWidth: tokens.iconSize,
@@ -85,13 +85,13 @@ export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadi
       ['checkmarkSize', 'gap'],
     ),
     imgIcon: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({
+      (tokens: MenuItemRadioTokens) => ({
         style: { tintColor: tokens.iconColor, height: tokens.iconSize, width: tokens.iconSize },
       }),
       ['gap', 'iconColor', 'iconSize'],
     ),
     fontOrSvgIcon: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({ color: tokens.iconColor, size: tokens.iconSize }),
+      (tokens: MenuItemRadioTokens) => ({ color: tokens.iconColor, size: tokens.iconSize }),
       ['gap', 'iconColor', 'iconSize'],
     ),
   },

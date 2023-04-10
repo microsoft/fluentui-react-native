@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ColorValue, ImageProps, ViewStyle } from 'react-native';
+import type { ColorValue, ImageProps } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
@@ -75,72 +75,6 @@ export interface MenuItemCheckboxTokens
    * @platform android
    */
   rippleColor?: ColorValue;
-
-  /**
-   * Color of the background of the box containing the radio.
-   * @platform android
-   */
-  radioBackgroundColor?: ColorValue;
-
-  /**
-   * Color of the border of the box containing the radio.
-   * @platform android
-   */
-  radioBorderColor?: ColorValue;
-
-  /**
-   * Border radius of the box containing the radio.
-   * @platform android
-   */
-  radioBorderRadius?: number;
-
-  /**
-   * Height and width of the box containing the radio.
-   * @platform android
-   */
-  radioSize?: number;
-
-  /**
-   * Indicator  radio border color
-   * @platform android
-   */
-  radioBorder?: ColorValue;
-
-  /**
-   * Indicator radio border style
-   * @platform android
-   */
-  radioBorderStyle?: ViewStyle['borderStyle'];
-
-  /**
-   * Inner circle color when selected
-   * @platform android
-   */
-  radioFill?: ColorValue;
-
-  /**
-   * Visibility of the radio inner circle from 0 to 1
-   * @platform android
-   */
-  radioVisibility?: number;
-
-  /**
-   * Diameter size of the outer indicator
-   * @platform android
-   */
-  radioOuterCircleSize?: number;
-
-  /**
-   * Diameter size of the inner circle indicator
-   * @platform android
-   */
-  radioInnerCircleSize?: number;
-
-  /**
-   * Border width of Radio
-   * @platform android
-   */
-  radioBorderWidth?: number;
 
   /**
    * Ripple radius for circular radio on Android.

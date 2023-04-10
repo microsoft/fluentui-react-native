@@ -10,14 +10,13 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './MenuItemRadio.styling.android';
 import { useMenuItemRadio } from './useMenuItemRadio';
 import { getAccessibilityLabel, getTooltip } from '../MenuItem/MenuItem';
+import { menuItemRadioName } from '../MenuItemRadio/MenuItemRadio.types';
 import type {
   MenuItemRadioProps,
   MenuItemRadioSlotProps,
   MenuItemRadioInfo,
   MenuItemRadioType,
 } from '../MenuItemRadio/MenuItemRadio.types';
-
-export const menuItemRadioName = 'MenuItemRadio';
 
 export const MenuItemRadio = compose<MenuItemRadioType>({
   displayName: menuItemRadioName,
