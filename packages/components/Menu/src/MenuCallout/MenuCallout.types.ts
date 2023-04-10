@@ -7,13 +7,13 @@ export const menuCalloutName = 'MenuCallout';
 export type MenuCalloutTokens =
   | Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' | 'dismissBehaviors'> & {
       /**
-       * The props for the corner radius for the Modal MenuPopover
+       * The token for the corner radius for the Modal MenuPopover
        * @platform android
        */
       cornerRadius?: number;
 
       /**
-       * Shadown elevation for the Modal MenuPopover
+       * Shadown elevation token for the Modal MenuPopover
        * @platform android
        */
       elevation?: number;
