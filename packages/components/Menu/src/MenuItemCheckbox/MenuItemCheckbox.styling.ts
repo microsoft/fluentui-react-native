@@ -9,7 +9,7 @@ import { menuItemCheckboxName } from './MenuItemCheckbox.types';
 import { defaultMenuItemCheckboxTokens } from './MenuItemCheckboxTokens';
 
 export const menuItemCheckboxStates: (keyof MenuItemCheckboxTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
-const hasPresetRententionForA11y = Platform.OS === 'android';
+const hasPressRententionForA11y = Platform.OS === 'android';
 
 export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemCheckboxSlotProps, MenuItemCheckboxTokens> = {
   tokens: [defaultMenuItemCheckboxTokens, menuItemCheckboxName],
@@ -42,7 +42,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
             alignItems: 'center',
             justifyContent: 'center',
           },
-          ...(hasPresetRententionForA11y && {
+          ...(hasPressRententionForA11y && {
             pressRetentionOffset: typeof tokens.padding === 'number' ? tokens.padding : parseFloat(tokens.padding), /// Retention of the press area outside of the checkbox equal to padding to match accessibility requirement
           }),
           android_ripple: { color: tokens.rippleColor, radius: tokens.checkmarkSize, foreground: true },
