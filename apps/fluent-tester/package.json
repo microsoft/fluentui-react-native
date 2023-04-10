@@ -39,7 +39,7 @@
   "dependencies": {
     "@fluentui-react-native/android-theme": ">=0.17.2 <1.0.0",
     "@fluentui-react-native/apple-theme": ">=0.19.2 <1.0.0",
-    "@fluentui-react-native/avatar": "^1.8.8",
+    "@fluentui-react-native/avatar": "^1.8.9",
     "@fluentui-react-native/badge": ">=0.5.7 <1.0.0",
     "@fluentui-react-native/button": ">=0.32.48 <1.0.0",
     "@fluentui-react-native/default-theme": ">=0.18.2 <1.0.0",
