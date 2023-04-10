@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Mon, 27 Mar 2023 21:16:26 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Apr 2023 16:10:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.32
+
+Mon, 10 Apr 2023 16:10:16 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- fixed radio variant and radio gap (gulnazsayed@microsoft.com)
 
 ## 0.9.31
 

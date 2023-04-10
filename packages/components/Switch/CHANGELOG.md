@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Apr 2023 16:10:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.39
+
+Mon, 10 Apr 2023 16:10:16 GMT
+
+### Patches
+
+- On/off text renders with labelPosition=before (winlarry@microsoft.com)
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Update Switch docs to reflect latest changes (winlarry@microsoft.com)
 
 ## 0.8.38
 

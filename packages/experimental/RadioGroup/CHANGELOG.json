@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Mon, 10 Apr 2023 16:10:16 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.9.32",
+      "version": "0.9.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "c54c613a1657dfa8f246dd1cbf75913b2a41f28b",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "87e30e155a892299464f3e33b3f2285524b8762c",
+            "comment": "fixed radio variant and radio gap"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 27 Mar 2023 21:16:26 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.9.31",
       "version": "0.9.31",

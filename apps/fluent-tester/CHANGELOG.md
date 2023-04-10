@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 28 Mar 2023 12:35:36 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Apr 2023 16:10:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.138.0
+
+Mon, 10 Apr 2023 16:10:16 GMT
+
+### Minor changes
+
+- Fix default avatar rendering and e2e section (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/apple-theme to v0.20.0
+- Bump @fluentui-react-native/avatar to v1.8.10
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.4.0
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.32
+- Bump @fluentui-react-native/notification to v0.21.50
+- Bump @fluentui-react-native/switch to v0.8.39
+
+### Patches
+
+- Add new example for Switch on/off text section (winlarry@microsoft.com)
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- fix npm publish pipeline (krsiler@microsoft.com)
 
 ## 0.137.0
 

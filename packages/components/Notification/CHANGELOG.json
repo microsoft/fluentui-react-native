@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Mon, 10 Apr 2023 16:10:16 GMT",
+      "tag": "@fluentui-react-native/notification_v0.21.50",
+      "version": "0.21.50",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-appearance-additions to v0.4.0",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/notification_v0.21.49",
       "version": "0.21.49",

@@ -2,6 +2,77 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 10 Apr 2023 16:10:16 GMT",
+      "tag": "@fluentui-react-native/tester_v0.138.0",
+      "version": "0.138.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d71d0c8daddac17c1abdd03b31ea979354f85668",
+            "comment": "Add new example for Switch on/off text section"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c54c613a1657dfa8f246dd1cbf75913b2a41f28b",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea",
+            "comment": "fix npm publish pipeline"
+          }
+        ],
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "faad4581da53ac8993dc495e5819d0cfde2dc522",
+            "comment": "Fix default avatar rendering and e2e section"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/apple-theme to v0.20.0",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.8.10",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-appearance-additions to v0.4.0",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.9.32",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.21.50",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/switch to v0.8.39",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Mar 2023 12:35:36 GMT",
       "tag": "@fluentui-react-native/tester_v0.137.0",
       "version": "0.137.0",
