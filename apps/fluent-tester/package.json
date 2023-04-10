@@ -65,6 +65,7 @@
     "@fluentui-react-native/merge-props": ">=0.5.3 <1.0.0",
     "@fluentui-react-native/notification": "0.21.50",
     "@fluentui-react-native/separator": "^0.14.22",
+    "@fluentui-react-native/spinner": "^0.2.12",
     "@fluentui-react-native/stack": ">=0.7.62 <1.0.0",
     "@fluentui-react-native/switch": "^0.8.39",
     "@fluentui-react-native/text": ">=0.19.30 <1.0.0",
@@ -81,7 +82,6 @@
     "@react-native-community/slider": "^4.2.0",
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^2.2.1",
-    "@fluentui-react-native/spinner": "^0.2.12",
     "@warren-ms/react-native-icons": "^0.0.13",
     "react": "17.0.2",
     "react-native": "^0.68.0",
@@ -102,7 +102,7 @@
     "metro-config": "^0.67.0",
     "metro-react-native-babel-preset": "^0.67.0",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^2.0.2",
+    "react-native-test-app": "^2.3.16",
     "react-test-renderer": "17.0.2"
   },
   "peerDependencies": {
@@ -175,7 +175,9 @@
         "babel-preset-react-native",
         "metro-config",
         "react",
-        "svg"
+        "react-test-renderer",
+        "svg",
+        "test-app"
       ]
     }
   },

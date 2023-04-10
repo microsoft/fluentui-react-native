@@ -105,11 +105,12 @@
         "react-native@0.68"
       ],
       "capabilities": [
+        "babel-preset-react-native",
         "core",
-        "react",
-        "svg",
         "metro-config",
-        "babel-preset-react-native"
+        "react",
+        "react-test-renderer",
+        "svg"
       ]
     }
   }
