@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Mon, 10 Apr 2023 19:48:24 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.32.64",
+      "version": "0.32.64",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c",
+            "comment": "align-deps: Fix warnigns and issues"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.139.0",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Apr 2023 16:10:16 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.32.63",
       "version": "0.32.63",
