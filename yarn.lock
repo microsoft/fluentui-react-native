@@ -4348,7 +4348,7 @@ appdirsjs@^1.2.4:
   resolved "https://registry.yarnpkg.com/appdirsjs/-/appdirsjs-1.2.7.tgz#50b4b7948a26ba6090d4aede2ae2dc2b051be3b3"
   integrity sha512-Quji6+8kLBC3NnBeo14nPDq0+2jUs5s3/xEye+udFHumHhRk4M7aAMXp/PBJqkKYGuuyR9M/6Dq7d2AViiGmhw==
 
-appium-adb@^9.10.14, appium-adb@^9.10.9:
+appium-adb@^9.10.14:
   version "9.10.24"
   resolved "https://registry.yarnpkg.com/appium-adb/-/appium-adb-9.10.24.tgz#ffe6e296f5f3291e4c01b043ac6b89dc4556f240"
   integrity sha512-cS9q4utZ/klV6UsOd9wLS//2pCrZGdp4UOpj1Sj8+skAXhFEDswqUnHD+vKm4bhdLZ7Jh74qgt0k2Gj9GSDB9Q==
@@ -4367,13 +4367,32 @@ appium-adb@^9.10.14, appium-adb@^9.10.9:
     teen_process "^2.0.1"
     utf7 "^1.0.2"
 
-appium-android-driver@^5.8.10:
-  version "5.8.12"
-  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.8.12.tgz#0ac7aed55f6c6b8f460ba4293a9f022008379b29"
-  integrity sha512-FptP5BmiSneIlodyt+H9N+QRshJrhrB6HnQIcCzIfCQ8WPRNmRGYpPOcokGqVkccz4JgUDEmN4IhKAojeH1MDg==
+appium-adb@^9.11.0:
+  version "9.11.0"
+  resolved "https://registry.yarnpkg.com/appium-adb/-/appium-adb-9.11.0.tgz#010ca09a13ffe5fc144baaba0c1e0a77be9627ab"
+  integrity sha512-lVI9eo48JMSFX+2j5xD5/Gx8HDuui3+EwmgoPqLaUtezeOtn4OEVaQCJPw4x2+KrnQDVe381AQsU5ozkou2jEQ==
+  dependencies:
+    "@appium/support" "^3.0.0"
+    "@babel/runtime" "^7.0.0"
+    adbkit-apkreader "^3.1.2"
+    async-lock "^1.0.0"
+    asyncbox "^2.6.0"
+    bluebird "^3.4.7"
+    ini "^3.0.0"
+    lodash "^4.0.0"
+    lru-cache "^7.3.0"
+    semver "^7.0.0"
+    source-map-support "^0.x"
+    teen_process "^2.0.1"
+    utf7 "^1.0.2"
+
+appium-android-driver@^5.8.7:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/appium-android-driver/-/appium-android-driver-5.9.0.tgz#9b78522b1fd624bb866a0fdb043ffc9393de440c"
+  integrity sha512-eEX1zXomjdj/qbg6BGzOEpZNwJNFZYswAJdbJejY/VZtjuyIMbSMpr9C5yrso6aLWT02+DR1v7XfB3y+tjwqvA==
   dependencies:
     "@babel/runtime" "^7.0.0"
-    appium-adb "^9.10.9"
+    appium-adb "^9.11.0"
     appium-chromedriver "^5.2.0"
     asyncbox "^2.8.0"
     axios "^1.x"
@@ -4392,10 +4411,30 @@ appium-android-driver@^5.8.10:
     teen_process "^2.0.0"
     ws "^8.0.0"
 
-appium-chromedriver@^5.2.0, appium-chromedriver@^5.3.1:
+appium-chromedriver@^5.2.0:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/appium-chromedriver/-/appium-chromedriver-5.3.2.tgz#17018c33c9eebe0ca904a79a3f6d80125b27a7ca"
   integrity sha512-eJdQTiz5oA7xxRnAw4F+yXVsxXRCwHE67p7x8+afzVEcuISNO8ElcgxlHLHxCu3nwANHEsPLJ6AtZc4REDAhRg==
+  dependencies:
+    "@appium/base-driver" "^9.1.0"
+    "@appium/support" "^3.0.0"
+    "@babel/runtime" "^7.0.0"
+    "@xmldom/xmldom" "^0.x"
+    asyncbox "^2.0.2"
+    axios "^1.x"
+    bluebird "^3.5.1"
+    compare-versions "^5.0.0"
+    fancy-log "^2.0.0"
+    lodash "^4.17.4"
+    semver "^7.0.0"
+    source-map-support "^0.x"
+    teen_process "^2.0.0"
+    xpath "^0.x"
+
+appium-chromedriver@^5.2.16:
+  version "5.3.4"
+  resolved "https://registry.yarnpkg.com/appium-chromedriver/-/appium-chromedriver-5.3.4.tgz#9ab5162d460ca39412d6e8183f7f0d50c87e3c70"
+  integrity sha512-vSw50zqeobrK1YERkGqfAhWLpol9plQTK5w0cRg9fYn48/Ai4LjujsHOsENnyov2d24Adw0Q2hyJya/ACzRtJQ==
   dependencies:
     "@appium/base-driver" "^9.1.0"
     "@appium/support" "^3.0.0"
@@ -12039,9 +12078,9 @@ react-native-test-app@^2.3.16:
     uuid "^8.3.2"
 
 react-native-windows@^0.68.0:
-  version "0.68.30"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.30.tgz#b052f9370417e3e9be2d7a126944744e8dfdba9f"
-  integrity sha512-GokCTAwTVYFkaFKQv9udCl63LJUiUAMMDQJ0Naly4DbLAWAu31dvx0gXRfd1AFr2XeyDQoooKpGYUIpLzZQ+9g==
+  version "0.68.32"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.32.tgz#0adf1beb18177f014043241368018ad01f26a1e3"
+  integrity sha512-zZMe4c2uODD3NHXKiFXbKEPpTMMK8vbKnSCGOTuu1Zmj7gVQ3TEhodj+wPd873YhzeC/cDaxYREnVZwtJkU7ow==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"
