@@ -8,12 +8,11 @@ import type { MenuItemRadioProps, MenuItemRadioSlotProps, MenuItemRadioTokens } 
 import { menuItemRadioName } from './MenuItemRadio.types';
 import { defaultMenuItemRadioTokens } from './MenuItemRadioTokens';
 
-export const menuItemCheckboxStates: (keyof MenuItemRadioTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
-const hasPresetRententionForA11y = Platform.OS === 'android';
+export const menuItemRadioStates: (keyof MenuItemRadioTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
 
 export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadioSlotProps, MenuItemRadioTokens> = {
   tokens: [defaultMenuItemRadioTokens, menuItemRadioName],
-  states: menuItemCheckboxStates,
+  states: menuItemRadioStates,
   slotProps: {
     root: buildProps(
       (tokens: MenuItemRadioTokens, theme: Theme) => ({
@@ -28,28 +27,6 @@ export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadi
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
-    ...(Platform.OS === 'android' && {
-      checkbox: buildProps(
-        (tokens: MenuItemRadioTokens) => ({
-          style: {
-            height: tokens.checkboxSize,
-            marginEnd: tokens.paddingHorizontal,
-            width: tokens.checkboxSize,
-            backgroundColor: tokens.checkboxBackgroundColor,
-            borderColor: tokens.checkboxBorderColor,
-            borderRadius: tokens.checkboxBorderRadius,
-            borderWidth: tokens.checkboxBorderWidth,
-            alignItems: 'center',
-            justifyContent: 'center',
-          },
-          ...(hasPresetRententionForA11y && {
-            pressRetentionOffset: typeof tokens.padding === 'number' ? tokens.padding : parseFloat(tokens.padding), /// Retention of the press area outside of the checkbox equal to padding to match accessibility requirement
-          }),
-          android_ripple: { color: tokens.rippleColor, radius: tokens.checkmarkSize, foreground: true },
-        }),
-        ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize', 'rippleColor'],
-      ),
-    }),
     checkmark: buildProps(
       (tokens: MenuItemRadioTokens) => ({
         opacity: tokens.checkmarkVisibility,
