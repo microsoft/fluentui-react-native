@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added new component - input",
-  "packageName": "@fluentui-react-native/input",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}
