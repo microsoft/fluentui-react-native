@@ -16,6 +16,7 @@ import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdow
 import { FocusTrapTest } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest } from './TestComponents/FocusZone';
 import { IconTest } from './TestComponents/Icon';
+import { InputTest } from './TestComponents/Input';
 import { LinkLegacyTest } from './TestComponents/LinkLegacy';
 import { LinkV1Test } from './TestComponents/LinkV1';
 import { MenuTest } from './TestComponents/Menu';
@@ -158,6 +159,12 @@ export const tests: TestDescription[] = [
     component: IconTest,
     testPageButton: Constants.HOMEPAGE_ICON_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
+  },
+  {
+    name: 'Input',
+    component: InputTest,
+    testPageButton: Constants.HOMEPAGE_INPUT_BUTTON,
+    platforms: ['android'],
   },
   {
     name: 'Link Legacy',
