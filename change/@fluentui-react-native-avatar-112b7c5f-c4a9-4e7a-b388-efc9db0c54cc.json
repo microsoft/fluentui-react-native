@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update fallback icon logic",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
