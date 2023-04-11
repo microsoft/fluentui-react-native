@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Make radio announce unselected on Android",
+  "packageName": "@fluentui-react-native/experimental-radio-group",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "none"
+}
