@@ -203,7 +203,7 @@ export interface InputProps extends PressableFocusProps {
    * The following values work on iOS: - ascii-capable - numbers-and-punctuation - url - number-pad - name-phone-pad - decimal-pad - twitter - web-search
    * The following values work on Android: - visible-password
    */
-  type?: KeyboardTypeOptions | undefined; // Uses KeyBoardType under the hood, exposed as type to match fluent web
+  type?: KeyboardTypeOptions | undefined; // Uses KeyBoardType under the hood
 
   /**
    * Callback that is called when the text input's text changes.
