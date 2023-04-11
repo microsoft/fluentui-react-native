@@ -260,7 +260,7 @@ export const tests: TestDescription[] = [
     name: 'Spinner V1',
     component: SpinnerTest,
     testPageButton: Constants.HOMEPAGE_SPINNER_BUTTON,
-    platforms: ['android'],
+    platforms: ['android', 'win32'],
   },
   {
     name: 'Stroke Width Tokens',

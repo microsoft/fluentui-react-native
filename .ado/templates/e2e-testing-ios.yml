@@ -12,6 +12,12 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
+      yarn appium driver install xcuitest
+    workingDirectory: apps/E2E
+    displayName: 'Install appium driver'
+    condition: succeeded()
+
+  - script: |
       yarn e2etest:ios
     workingDirectory: apps/E2E
     displayName: 'run E2E iOS tests'
@@ -23,3 +29,9 @@ steps:
       platform: 'ios'
       buildArtifacts: variables['task.Build.status']
       directory: $(Build.SourcesDirectory)/apps/E2E
+
+  - script: |
+      yarn appium driver uninstall xcuitest
+    workingDirectory: apps/E2E
+    displayName: 'Uninstall appium driver'
+    condition: succeeded()

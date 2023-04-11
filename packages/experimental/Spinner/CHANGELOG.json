@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/spinner",
   "entries": [
     {
+      "date": "Mon, 10 Apr 2023 19:48:24 GMT",
+      "tag": "@fluentui-react-native/spinner_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/spinner",
+            "commit": "05bd73ded25b8407dd52161309b303741ba172fb",
+            "comment": "add tracker svg for win32"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/text to v0.19.31",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/spinner_v0.2.12",
       "version": "0.2.12",

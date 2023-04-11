@@ -23,22 +23,24 @@ class AppearanceAdditionsImpl implements AppearanceAdditions {
     return this._accessibilityContrastOption;
   }
 
-  constructor() {
+  constructor(reactTag: number = null) {
+    NativeAppearanceAdditions.initializeTraitCollection(reactTag);
+
     this._horizontalSizeClass = NativeAppearanceAdditions.horizontalSizeClass();
     this._userInterfaceLevel = NativeAppearanceAdditions.userInterfaceLevel();
     this._accessibilityContrastOption = NativeAppearanceAdditions.accessibilityContrastOption();
 
     const eventEmitter = new NativeEventEmitter(NativeAppearanceAdditions as any);
     eventEmitter.addListener('appearanceChanged', (newValue) => {
-      this._horizontalSizeClass = newValue[HorizontalSizeClassKey];
-      this._userInterfaceLevel = newValue[UserInterfaceLevelKey];
-      this._accessibilityContrastOption = newValue[AccessibilityContrastOptionKey];
+      this._horizontalSizeClass = newValue[HorizontalSizeClassKey] ?? this._horizontalSizeClass;
+      this._userInterfaceLevel = newValue[UserInterfaceLevelKey] ?? this._userInterfaceLevel;
+      this._accessibilityContrastOption = newValue[AccessibilityContrastOptionKey] ?? this._accessibilityContrastOption;
     });
   }
 }
 
-function getAppearanceAdditionsWorker() {
-  return new AppearanceAdditionsImpl() as AppearanceAdditions;
+function getAppearanceAdditionsWorker(reactTag: number) {
+  return new AppearanceAdditionsImpl(reactTag) as AppearanceAdditions;
 }
 
 export const appearanceAdditions = memoize(getAppearanceAdditionsWorker);

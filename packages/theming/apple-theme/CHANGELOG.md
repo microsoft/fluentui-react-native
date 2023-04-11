@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Tue, 21 Mar 2023 21:53:45 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Apr 2023 16:10:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Mon, 10 Apr 2023 16:10:15 GMT
+
+### Minor changes
+
+- Add trait collection support for multiwindow (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.4.0
 
 ## 0.19.2
 

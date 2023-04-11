@@ -1,8 +1,62 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 28 Mar 2023 12:35:36 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Apr 2023 19:48:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.139.0
+
+Mon, 10 Apr 2023 19:48:24 GMT
+
+### Minor changes
+
+- add tracker svg for win32 (email not defined)
+- Bump @fluentui-react-native/avatar to v1.8.11
+- Bump @fluentui-react-native/badge to v0.5.8
+- Bump @fluentui-react-native/button to v0.32.49
+- Bump @fluentui-react-native/divider to v0.3.15
+- Bump @fluentui-react-native/dropdown to v0.7.46
+- Bump @fluentui-react-native/experimental-button to v0.16.107
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.50
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.48
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.33
+- Bump @fluentui-react-native/experimental-shadow to v0.2.80
+- Bump @fluentui-react-native/experimental-tabs to v0.8.46
+- Bump @fluentui-react-native/experimental-text to v0.11.62
+- Bump @fluentui-react-native/icon to v0.17.25
+- Bump @fluentui-react-native/interactive-hooks to v0.22.29
+- Bump @fluentui-react-native/menu to v1.4.34
+- Bump @fluentui-react-native/notification to v0.21.51
+- Bump @fluentui-react-native/spinner to v0.3.0
+- Bump @fluentui-react-native/stack to v0.7.63
+- Bump @fluentui-react-native/switch to v0.8.40
+- Bump @fluentui-react-native/text to v0.19.31
+- Bump @fluentui/react-native to v0.36.21
+- Bump @fluentui-react-native/focus-zone to v0.11.41
+
+### Patches
+
+- align-deps: Fix warnigns and issues (sanajmi@microsoft.com)
+
+## 0.138.0
+
+Mon, 10 Apr 2023 16:10:16 GMT
+
+### Minor changes
+
+- Fix default avatar rendering and e2e section (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/apple-theme to v0.20.0
+- Bump @fluentui-react-native/avatar to v1.8.10
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.4.0
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.32
+- Bump @fluentui-react-native/notification to v0.21.50
+- Bump @fluentui-react-native/switch to v0.8.39
+
+### Patches
+
+- Add new example for Switch on/off text section (winlarry@microsoft.com)
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- fix npm publish pipeline (krsiler@microsoft.com)
 
 ## 0.137.0
 

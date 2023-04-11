@@ -19,10 +19,13 @@
     "directory": "scripts"
   },
   "peerDependencies": {
-    "just-scripts": "^1.8.0"
+    "just-scripts": "^1.8.0",
+    "react": "17.0.2"
   },
   "devDependencies": {
     "@react-native-community/cli": "^7.0.3",
+    "@react-native-community/cli-platform-android": "^7.0.1",
+    "@react-native-community/cli-platform-ios": "^7.0.1",
     "@rnx-kit/jest-preset": "^0.1.12",
     "@types/enzyme": "^3.10.5",
     "@types/es6-collections": "^0.5.29",
@@ -46,6 +49,7 @@
     "metro-config": "^0.67.0",
     "metro-react-native-babel-transformer": "^0.67.0",
     "prettier": "^2.4.1",
+    "react": "17.0.2",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.2",
     "rimraf": "^3.0.2",
@@ -75,9 +79,11 @@
         "react-native@0.68"
       ],
       "capabilities": [
+        "community/cli",
         "jest",
         "metro-config",
-        "metro-react-native-babel-transformer"
+        "metro-react-native-babel-transformer",
+        "react-test-renderer"
       ]
     }
   }

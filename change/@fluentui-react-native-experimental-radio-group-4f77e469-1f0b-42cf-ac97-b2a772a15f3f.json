@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fixed radio variant and radio gap",
-  "packageName": "@fluentui-react-native/experimental-radio-group",
-  "email": "gulnazsayed@microsoft.com",
-  "dependentChangeType": "patch"
-}
