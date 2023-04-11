@@ -4,19 +4,19 @@ import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework'
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
 
-import type { MenuItemCheckboxProps, MenuItemCheckboxTokens, MenuItemCheckboxSlotProps } from './MenuItemCheckbox.types';
-import { menuItemCheckboxName } from './MenuItemCheckbox.types';
-import { defaultMenuItemCheckboxTokens } from './MenuItemCheckboxTokens';
+import type { MenuItemRadioProps, MenuItemRadioSlotProps, MenuItemRadioTokens } from './MenuItemRadio.types';
+import { menuItemRadioName } from './MenuItemRadio.types';
+import { defaultMenuItemRadioTokens } from './MenuItemRadioTokens';
 
-export const menuItemCheckboxStates: (keyof MenuItemCheckboxTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
+export const menuItemCheckboxStates: (keyof MenuItemRadioTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
 const hasPresetRententionForA11y = Platform.OS === 'android';
 
-export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemCheckboxSlotProps, MenuItemCheckboxTokens> = {
-  tokens: [defaultMenuItemCheckboxTokens, menuItemCheckboxName],
+export const stylingSettings: UseStylingOptions<MenuItemRadioProps, MenuItemRadioSlotProps, MenuItemRadioTokens> = {
+  tokens: [defaultMenuItemRadioTokens, menuItemRadioName],
   states: menuItemCheckboxStates,
   slotProps: {
     root: buildProps(
-      (tokens: MenuItemCheckboxTokens, theme: Theme) => ({
+      (tokens: MenuItemRadioTokens, theme: Theme) => ({
         style: {
           alignItems: 'center',
           backgroundColor: tokens.backgroundColor,
@@ -30,7 +30,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
     ),
     ...(Platform.OS === 'android' && {
       checkbox: buildProps(
-        (tokens: MenuItemCheckboxTokens) => ({
+        (tokens: MenuItemRadioTokens) => ({
           style: {
             height: tokens.checkboxSize,
             marginEnd: tokens.paddingHorizontal,
@@ -50,9 +50,8 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
         ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize', 'rippleColor'],
       ),
     }),
-
     checkmark: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({
+      (tokens: MenuItemRadioTokens) => ({
         opacity: tokens.checkmarkVisibility,
         color: tokens.checkmarkColor ?? tokens.color,
         height: tokens.checkmarkSize,
@@ -63,7 +62,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
       ['checkmarkPadding', 'checkmarkSize', 'checkmarkVisibility', 'color', 'gap'],
     ),
     content: buildProps(
-      (tokens: MenuItemCheckboxTokens, theme: Theme) => ({
+      (tokens: MenuItemRadioTokens, theme: Theme) => ({
         style: {
           flexGrow: 1,
           color: tokens.color,
@@ -74,7 +73,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
       ['color', ...fontStyles.keys],
     ),
     iconPlaceholder: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({
+      (tokens: MenuItemRadioTokens) => ({
         style: {
           minHeight: tokens.iconSize,
           minWidth: tokens.iconSize,
@@ -86,13 +85,13 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
       ['checkmarkSize', 'gap'],
     ),
     imgIcon: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({
+      (tokens: MenuItemRadioTokens) => ({
         style: { tintColor: tokens.iconColor, height: tokens.iconSize, width: tokens.iconSize },
       }),
       ['gap', 'iconColor', 'iconSize'],
     ),
     fontOrSvgIcon: buildProps(
-      (tokens: MenuItemCheckboxTokens) => ({ color: tokens.iconColor, size: tokens.iconSize }),
+      (tokens: MenuItemRadioTokens) => ({ color: tokens.iconColor, size: tokens.iconSize }),
       ['gap', 'iconColor', 'iconSize'],
     ),
   },
