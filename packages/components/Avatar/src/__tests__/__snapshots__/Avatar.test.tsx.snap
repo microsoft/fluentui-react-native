@@ -390,7 +390,7 @@ exports[`Avatar component tests Avatar ring 1`] = `
       Object {
         "aspectRatio": 1,
         "backgroundColor": "transparent",
-        "borderColor": "transparent",
+        "borderColor": "#00000000",
         "borderRadius": 9999,
         "borderStyle": "solid",
         "borderWidth": 2,
