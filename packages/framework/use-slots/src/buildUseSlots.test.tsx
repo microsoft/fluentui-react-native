@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { ViewProps, TextProps } from 'react-native';
 import { View, Text } from 'react-native';

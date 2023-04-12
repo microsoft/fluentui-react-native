@@ -77,7 +77,8 @@
     "shell-quote": "^1.7.3",
     "@types/react": "^17.0.2",
     "@appium/types": "0.9.1",
-    "micromatch": "^4.0.0"
+    "micromatch": "^4.0.0",
+    "metro": "0.73.9"
   },
   "rnx-kit": {
     "kitType": "library",

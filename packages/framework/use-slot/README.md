@@ -51,6 +51,7 @@ The helper will return a `React.FunctionComponent` that will forward props (with
 Consuming these by hand are a bit tedious. To aid in this the `useSlot` hook function is provided. Besides enabling automatic tree compression (for component types that support it), this also allows components to be authored as pluggable bits in the render tree. Usage looks something like:
 
 ```ts
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 
 const baseStyle = {

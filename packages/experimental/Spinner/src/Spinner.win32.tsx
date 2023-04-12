@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { ColorValue } from 'react-native';
 import { View } from 'react-native';

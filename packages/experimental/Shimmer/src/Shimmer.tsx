@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { useRef, useEffect, useMemo, useCallback } from 'react';
 import type { ScaleXTransform, TranslateXTransform } from 'react-native';

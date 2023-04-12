@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { useRef, useEffect, useCallback } from 'react';
 import { Animated, Easing, View } from 'react-native';
