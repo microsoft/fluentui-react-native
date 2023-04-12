@@ -18,6 +18,11 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * States of the list control
    */
   hasMaxHeight?: MenuListTokens;
+
+  /**
+   * Corner radius of the menu list
+   */
+  cornerRadius?: number;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {

@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { layoutStyles } from '@fluentui-react-native/tokens';
@@ -18,6 +20,7 @@ export const stylingSettings: UseStylingOptions<MenuListProps, MenuListSlotProps
           backgroundColor: tokens.backgroundColor,
           display: 'flex',
           ...layoutStyles.from(tokens, theme),
+          ...(Platform.OS === 'android' && { borderRadius: tokens.cornerRadius }),
         },
         gap: tokens.gap,
       }),

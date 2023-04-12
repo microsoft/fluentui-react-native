@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { ColorValue, ImageProps } from 'react-native';
+import type { ColorValue, ImageProps, ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
@@ -9,9 +9,9 @@ import type { XmlProps } from 'react-native-svg';
 
 import type { MenuItemProps, MenuItemTokens } from '../MenuItem/MenuItem.types';
 
-export const menuItemCheckboxName = 'MenuItemCheckbox';
+export const menuItemRadioName = 'MenuItemRadio';
 
-export interface MenuItemCheckboxTokens
+export interface MenuItemRadioTokens
   extends Omit<MenuItemTokens, 'submenuIndicatorPadding' | 'submenuIndicatorSize' | 'disabled' | 'focused' | 'hovered' | 'pressed'> {
   /**
    * Color of the checkmark icon
@@ -77,6 +77,72 @@ export interface MenuItemCheckboxTokens
   rippleColor?: ColorValue;
 
   /**
+   * Color of the background of the box containing the radio.
+   * @platform android
+   */
+  radioBackgroundColor?: ColorValue;
+
+  /**
+   * Color of the border of the box containing the radio.
+   * @platform android
+   */
+  radioBorderColor?: ColorValue;
+
+  /**
+   * Border radius of the box containing the radio.
+   * @platform android
+   */
+  radioBorderRadius?: number;
+
+  /**
+   * Height and width of the box containing the radio.
+   * @platform android
+   */
+  radioSize?: number;
+
+  /**
+   * Indicator  radio border color
+   * @platform android
+   */
+  radioBorder?: ColorValue;
+
+  /**
+   * Indicator radio border style
+   * @platform android
+   */
+  radioBorderStyle?: ViewStyle['borderStyle'];
+
+  /**
+   * Inner circle color when selected
+   * @platform android
+   */
+  radioFill?: ColorValue;
+
+  /**
+   * Visibility of the radio inner circle from 0 to 1
+   * @platform android
+   */
+  radioVisibility?: number;
+
+  /**
+   * Diameter size of the outer indicator
+   * @platform android
+   */
+  radioOuterCircleSize?: number;
+
+  /**
+   * Diameter size of the inner circle indicator
+   * @platform android
+   */
+  radioInnerCircleSize?: number;
+
+  /**
+   * Border width of Radio
+   * @platform android
+   */
+  radioBorderWidth?: number;
+
+  /**
    * Ripple radius for circular radio on Android.
    *
    * A ripple animation is shown on click for Android. This sets the radius of the circular ripple shown on the radio button.
@@ -87,37 +153,38 @@ export interface MenuItemCheckboxTokens
   /**
    * States of the item control
    */
-  checked?: MenuItemCheckboxTokens;
-  disabled?: MenuItemCheckboxTokens;
-  focused?: MenuItemCheckboxTokens;
-  hovered?: MenuItemCheckboxTokens;
-  pressed?: MenuItemCheckboxTokens;
+  checked?: MenuItemRadioTokens;
+  disabled?: MenuItemRadioTokens;
+  focused?: MenuItemRadioTokens;
+  hovered?: MenuItemRadioTokens;
+  pressed?: MenuItemRadioTokens;
 }
 
-export interface MenuItemCheckboxProps extends MenuItemProps {
+export interface MenuItemRadioProps extends MenuItemProps {
   /**
    * Identifier for the control
    */
   name: string;
 }
 
-export interface MenuItemCheckboxInfo {
-  props: MenuItemCheckboxProps & React.ComponentPropsWithRef<any>;
+export interface MenuItemRadioInfo {
+  props: MenuItemRadioProps & React.ComponentPropsWithRef<any>;
   state: PressableState & { hasIcons: boolean; hasTooltips: boolean };
 }
 
-export interface MenuItemCheckboxSlotProps {
+export interface MenuItemRadioSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
-  checkbox?: PressablePropsExtended; // Android only
-  checkmark?: XmlProps;
   content?: TextProps;
+  checkmark?: XmlProps;
+  radioButton?: PressablePropsExtended;
+  radioInnerCircle?: React.PropsWithRef<IViewProps>;
   iconPlaceholder?: React.PropsWithRef<IViewProps>;
   imgIcon?: ImageProps;
   fontOrSvgIcon?: IconProps;
 }
 
-export interface MenuItemCheckboxType {
-  props: MenuItemCheckboxProps;
-  tokens: MenuItemCheckboxTokens;
-  slotProps: MenuItemCheckboxSlotProps;
+export interface MenuItemRadioType {
+  props: MenuItemRadioProps;
+  tokens: MenuItemRadioTokens;
+  slotProps: MenuItemRadioSlotProps;
 }

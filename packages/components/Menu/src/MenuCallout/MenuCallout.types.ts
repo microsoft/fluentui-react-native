@@ -1,28 +1,22 @@
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
 
-export const menuPopoverName = 'MenuPopover';
+export const menuCalloutName = 'MenuCallout';
 
 // Support for anchorRect and beakWidth will come at a later time.
 // Omitting dismissBehaviors as it doesn't seem to make sense as a token
-export type MenuPopoverTokens =
+export type MenuCalloutTokens =
   | Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' | 'dismissBehaviors'> & {
       /**
-       * The props for the corner radius for the Modal MenuPopover
+       * The token for the corner radius for the Modal MenuPopover
        * @platform android
        */
       cornerRadius?: number;
 
       /**
-       * Shadown elevation for the Modal MenuPopover
+       * Shadown elevation token for the Modal MenuPopover
        * @platform android
        */
       elevation?: number;
     };
 
-export type MenuPopoverProps = ICalloutProps;
-
-export interface MenuPopoverState {
-  props: ICalloutProps;
-  innerView: IViewProps;
-}
+export type MenuCalloutProps = ICalloutProps & { tokens: MenuCalloutTokens };

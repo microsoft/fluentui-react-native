@@ -36,7 +36,16 @@ export {
   useMenuCheckboxInteraction,
   useMenuItemCheckbox,
 } from './MenuItemCheckbox';
-export { MenuItemRadio, menuItemRadioName, useMenuItemRadio } from './MenuItemRadio';
+export {
+  MenuItemRadio,
+  menuItemRadioName,
+  useMenuItemRadio,
+  MenuItemRadioInfo,
+  MenuItemRadioProps,
+  MenuItemRadioSlotProps,
+  MenuItemRadioTokens,
+  MenuItemRadioType,
+} from './MenuItemRadio';
 export {
   MenuList,
   menuListName,
