@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Wed, 12 Apr 2023 18:42:22 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.19.33",
+      "version": "0.19.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "34d89fc8baf0f1438c6e5420a0ef75bf3be3fc49",
+            "comment": "add checkbox to android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Apr 2023 19:48:24 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.19.32",
       "version": "0.19.32",

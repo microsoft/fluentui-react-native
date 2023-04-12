@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "menu radio strcutured",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}

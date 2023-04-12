@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix the pipeline",
-  "packageName": "@fluentui-react-native/input",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

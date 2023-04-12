@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 11 Apr 2023 10:42:50 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Apr 2023 18:42:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.141.0
+
+Wed, 12 Apr 2023 18:42:22 GMT
+
+### Minor changes
+
+- fix tester and radio complete (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/button to v0.32.50
+- Bump @fluentui-react-native/dropdown to v0.7.47
+- Bump @fluentui-react-native/experimental-button to v0.16.108
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.51
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.49
+- Bump @fluentui-react-native/input to v0.1.2
+- Bump @fluentui-react-native/menu to v1.5.0
+- Bump @fluentui-react-native/notification to v0.21.52
+- Bump @fluentui/react-native to v0.36.22
 
 ## 0.140.0
 

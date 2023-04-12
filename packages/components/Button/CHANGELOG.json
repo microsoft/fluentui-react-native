@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 12 Apr 2023 18:42:22 GMT",
+      "tag": "@fluentui-react-native/button_v0.32.50",
+      "version": "0.32.50",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "ef4bdc8a765aaa08524c91047530f2ebdcfe77fd",
+            "comment": "Fix onLayout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Apr 2023 19:48:24 GMT",
       "tag": "@fluentui-react-native/button_v0.32.49",
       "version": "0.32.49",

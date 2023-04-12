@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/input
 
-This log was last generated on Tue, 11 Apr 2023 10:42:50 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Apr 2023 18:42:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.2
+
+Wed, 12 Apr 2023 18:42:22 GMT
+
+### Patches
+
+- Fix the pipeline (ruaraki@microsoft.com)
 
 ## 0.1.1
 
