@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
@@ -30,7 +32,7 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
         style: {
           height: tokens.checkmarkSize,
           width: tokens.checkmarkSize,
-          marginEnd: tokens.gap,
+          marginEnd: Platform.OS === 'android' ? tokens.marginEndForCheckedAndroid : tokens.gap,
         },
       }),
       ['checkmarkSize', 'gap'],

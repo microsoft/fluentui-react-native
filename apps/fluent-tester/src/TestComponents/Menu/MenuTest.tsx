@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import type { MenuProps } from '@fluentui-react-native/menu';
@@ -86,8 +86,8 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark</MenuItemCheckbox>
-            <MenuItemCheckbox name="itemThree">A MenuItem with checkmark</MenuItemCheckbox>
+            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark without alignment</MenuItemCheckbox>
+            <MenuItemCheckbox name="itemThree">A MenuItem with checkmark without alignment</MenuItemCheckbox>
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -181,17 +181,24 @@ const rootStackStyle = StyleSheet.create({ root: { ...(stackStyle as object), fl
 
 const MenuControlledOpen: React.FunctionComponent = () => {
   const [open, setOpen] = React.useState<boolean>(false);
+
+  const onOpenChange = () => {
+    setOpen(false);
+  };
+
   return (
     <Stack style={rootStackStyle.root}>
       <Button onClick={() => setOpen(!open)}>Toggle open</Button>
-      <Menu open={open}>
+      {/* For Android Platform the Controlled trigger becomes unavailable because of the screen we show on the screen click on which closes the Menu , Hence we need to make the state change based on open change */}
+
+      <Menu {...(Platform.OS === 'android' && { onOpenChange })} open={open}>
         <MenuTrigger>
           <Button>Test</Button>
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
             <MenuItem>A MenuItem</MenuItem>
-            <Submenu />
+            {Platform.OS !== 'android' && <Submenu />}
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -263,7 +270,7 @@ const MenuNofM: React.FunctionComponent = () => {
             <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
             <MenuDivider />
-            <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />
+            {Platform.OS !== 'android' && <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />}
             <MenuItem disabled accessibilitySetSize={2}>
               A disabled MenuItem
             </MenuItem>
@@ -296,7 +303,7 @@ const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
             <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
             <MenuDivider />
-            <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />
+            {Platform.OS !== 'android' && <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />}
             <MenuItem disabled accessibilitySetSize={2}>
               A disabled MenuItem
             </MenuItem>
@@ -322,26 +329,35 @@ const menuSections: TestSection[] = [
     name: 'Menu Radioitem',
     component: MenuRadioItem,
   },
-  {
-    name: 'Menu open on hover',
-    component: MenuOpenOnHover,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu open on hover',
+      component: MenuOpenOnHover,
+    },
+  }),
   {
     name: 'Menu open controlled',
     component: MenuControlledOpen,
   },
-  {
-    name: 'Menu with tooltips on items',
-    component: MenuTooltips,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu with tooltips on items',
+      component: MenuTooltips,
+    },
+  }),
   {
     name: 'Menu with icons',
     component: MenuIcons,
   },
-  {
-    name: 'Menu Submenu',
-    component: MenuSubMenu,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Submenu',
+      component: MenuSubMenu,
+    },
+  }),
   {
     name: 'Menu with ScrollView',
     component: MenuScrollView,
@@ -350,18 +366,24 @@ const menuSections: TestSection[] = [
     name: 'Menu Trigger onClick Override',
     component: MenuTriggerOnClickCallback,
   },
-  {
-    name: 'Menu Trigger Hover Override',
-    component: MenuTriggerHoverCallback,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Trigger Hover Override',
+      component: MenuTriggerHoverCallback,
+    },
+  }),
   {
     name: 'Menu Customized',
     component: MenuCustomized,
   },
-  {
-    name: 'Menu Refs',
-    component: MenuTriggerChildRef,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Refs',
+      component: MenuTriggerChildRef,
+    },
+  }),
   {
     name: 'Menu N of M Override',
     component: MenuNofM,
@@ -385,7 +407,7 @@ export const MenuTest: React.FunctionComponent = () => {
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
     macosStatus: 'Beta',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =

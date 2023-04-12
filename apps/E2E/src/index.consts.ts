@@ -13,6 +13,7 @@ export * from './Divider/consts';
 export * from './FocusTrapZone/consts';
 export * from './FocusZone/consts';
 export * from './IconLegacy/consts';
+export * from './Input/consts';
 export * from './LinkLegacy/consts';
 export * from './LinkV1/consts';
 export * from './Menu/consts';

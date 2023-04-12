@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 11 Apr 2023 10:42:50 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.22.0",
+      "version": "1.22.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "b3508cb0e0e5cffc32aa329cd15494b0ac3fdbc2",
+            "comment": "Add new component - input"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 19:48:24 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.21.7",
+      "version": "1.21.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.41",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Apr 2023 16:10:16 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.21.6",
       "version": "1.21.6",
