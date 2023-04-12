@@ -35,12 +35,12 @@
     "@types/react-native": "^0.68.0",
     "react": "18.2.0",
     "react-native": "^0.71.0",
-    "react-native-svg": "^13.7.0"
+    "react-native-svg": "^13.9.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
     "react-native": "^0.71.0",
-    "react-native-svg": "^13.7.0"
+    "react-native-svg": "^13.9.0"
   },
   "author": "",
   "license": "MIT",

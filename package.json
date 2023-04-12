@@ -78,7 +78,8 @@
     "@types/react": "^17.0.2",
     "@appium/types": "0.9.1",
     "micromatch": "^4.0.0",
-    "metro": "0.73.9"
+    "metro": "0.73.9",
+    "react-native-svg": "13.9.0"
   },
   "rnx-kit": {
     "kitType": "library",
