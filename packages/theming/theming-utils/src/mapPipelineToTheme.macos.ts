@@ -120,15 +120,15 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     strokeFocus1: pipelineOutput.strokeFocus1.strokeColorRest,
     strokeFocus2: pipelineOutput.strokeFocus2.strokeColorRest,
 
-    redBackground1: pipelineOutput.redBackground1.fillColorRest,
-    redBackground2: pipelineOutput.redBackground2.fillColorRest,
-    redBackground3: pipelineOutput.redBackground3.fillColorRest,
-    redForeground1: pipelineOutput.redForeground1.fillColorRest,
-    redForeground2: pipelineOutput.redBackground2.fillColorRest,
-    redForeground3: pipelineOutput.redBackground3.fillColorRest,
-    redBorderActive: pipelineOutput.redBorderActive.strokeColorRest,
-    redBorder1: pipelineOutput.redBorder1.strokeColorRest,
-    redBorder2: pipelineOutput.redBorder2.strokeColorRest,
+    redBackground1: pipelineOutput.redBackground1?.fillColorRest ?? '000000',
+    redBackground2: pipelineOutput.redBackground2?.fillColorRest ?? '000000',
+    redBackground3: pipelineOutput.redBackground3?.fillColorRest ?? '000000',
+    redForeground1: pipelineOutput.redForeground1?.fillColorRest ?? '000000',
+    redForeground2: pipelineOutput.redBackground2?.fillColorRest ?? '000000',
+    redForeground3: pipelineOutput.redBackground3?.fillColorRest ?? '000000',
+    redBorderActive: pipelineOutput.redBorderActive?.strokeColorRest ?? '000000',
+    redBorder1: pipelineOutput.redBorder1?.strokeColorRest ?? '000000',
+    redBorder2: pipelineOutput.redBorder2?.strokeColorRest ?? '000000',
   };
 }
 
