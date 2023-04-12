@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "fix tester and radio complete",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
