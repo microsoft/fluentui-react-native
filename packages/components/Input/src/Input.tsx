@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { Fragment } from 'react';
 import { Pressable, ScrollView, TextInput, View } from 'react-native';

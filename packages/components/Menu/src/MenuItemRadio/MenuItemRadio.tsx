@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import React from 'react';
 import { Image, Platform, Pressable, View } from 'react-native';

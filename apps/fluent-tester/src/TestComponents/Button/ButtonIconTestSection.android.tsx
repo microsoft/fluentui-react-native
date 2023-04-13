@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui/react-native';
 
-import { svgProps } from '../Common/iconExamples';
+import { testImage, svgProps } from '../Common/iconExamples';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 export const ButtonIconTest: React.FunctionComponent = () => {
@@ -12,9 +12,6 @@ export const ButtonIconTest: React.FunctionComponent = () => {
     codepoint: 0x2663,
     fontSize: 24,
   };
-
-  /* eslint-disable @typescript-eslint/no-var-requires */
-  const testImage = require('../../../../assets/icon_24x24.png');
 
   return (
     <View style={testContentRootViewStyle}>
