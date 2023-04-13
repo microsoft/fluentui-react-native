@@ -1,5 +1,4 @@
 import type * as React from 'react';
-
 // SAAD - Looks like ScreenRect got renamed.
 import type { KeyboardMetrics, ViewStyle } from 'react-native';
 

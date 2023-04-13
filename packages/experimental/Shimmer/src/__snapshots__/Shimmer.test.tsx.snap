@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Shimmer component tests Shimmer default 1`] = `
-<RNSVGSvgView
+<RNSVGSvgViewAndroid
   accessibilityRole="progressbar"
   accessible={true}
   angle={45}
@@ -15,15 +15,15 @@ exports[`Shimmer component tests Shimmer default 1`] = `
   shimmerWaveColor="#fafafa"
   shimmerWaveColorOpacity={1}
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "transparent",
         "borderWidth": 0,
       },
-      Object {
+      {
         "overflow": "hidden",
       },
-      Object {
+      {
         "flex": 0,
         "height": "100%",
         "width": "100%",
@@ -31,11 +31,18 @@ exports[`Shimmer component tests Shimmer default 1`] = `
     ]
   }
 >
-  <RNSVGGroup>
+  <RNSVGGroup
+    fill={
+      {
+        "payload": -16777216,
+        "type": 0,
+      }
+    }
+  >
     <RNSVGDefs>
       <RNSVGLinearGradient
         gradient={
-          Array [
+          [
             0.1,
             -1644826,
             0.2,
@@ -45,7 +52,7 @@ exports[`Shimmer component tests Shimmer default 1`] = `
           ]
         }
         gradientTransform={
-          Array [
+          [
             0.7071067811865476,
             0.7071067811865475,
             -0.7071067811865475,
@@ -56,63 +63,83 @@ exports[`Shimmer component tests Shimmer default 1`] = `
         }
         gradientUnits={0}
         name="gradient"
-        x1={-2}
+        x1="-2"
         x2="-1"
         y1="0%"
         y2="0%"
       />
       <RNSVGClipPath
+        fill={
+          {
+            "payload": -16777216,
+            "type": 0,
+          }
+        }
         name="shimmerView"
       >
         <RNSVGRect
-          height={20}
-          rx={3}
-          ry={3}
-          width={100}
-          x={90}
-          y={70}
+          fill={
+            {
+              "payload": -16777216,
+              "type": 0,
+            }
+          }
+          height="20"
+          rx="3"
+          ry="3"
+          width="100"
+          x="90"
+          y="70"
         />
         <RNSVGRect
-          height={20}
-          rx={3}
-          ry={3}
-          width={150}
-          x={90}
-          y={42}
+          fill={
+            {
+              "payload": -16777216,
+              "type": 0,
+            }
+          }
+          height="20"
+          rx="3"
+          ry="3"
+          width="150"
+          x="90"
+          y="42"
         />
         <RNSVGRect
-          height={20}
-          rx={3}
-          ry={3}
-          width={200}
-          x={90}
-          y={15}
+          fill={
+            {
+              "payload": -16777216,
+              "type": 0,
+            }
+          }
+          height="20"
+          rx="3"
+          ry="3"
+          width="200"
+          x="90"
+          y="15"
         />
       </RNSVGClipPath>
     </RNSVGDefs>
     <RNSVGGroup
-      matrix={
-        Array [
-          1,
-          0,
-          0,
-          1,
-          0,
-          0,
-        ]
+      fill={
+        {
+          "payload": -16777216,
+          "type": 0,
+        }
       }
     >
       <RNSVGRect
         clipPath="shimmerView"
         fill={
-          Array [
-            1,
-            "gradient",
-          ]
+          {
+            "brushRef": "gradient",
+            "type": 1,
+          }
         }
         height="100%"
         propList={
-          Array [
+          [
             "fill",
           ]
         }
@@ -122,16 +149,16 @@ exports[`Shimmer component tests Shimmer default 1`] = `
       />
     </RNSVGGroup>
   </RNSVGGroup>
-</RNSVGSvgView>
+</RNSVGSvgViewAndroid>
 `;
 
 exports[`Shimmer component tests Shimmer with style prop 1`] = `
-<RNSVGSvgView
+<RNSVGSvgViewAndroid
   accessibilityRole="progressbar"
   accessible={true}
   angle={45}
-  bbHeight={100}
-  bbWidth={300}
+  bbHeight="100"
+  bbWidth="300"
   delay={0}
   duration={1000}
   focusable={false}
@@ -140,17 +167,17 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
   shimmerWaveColor="#fafafa"
   shimmerWaveColorOpacity={1}
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "transparent",
         "borderWidth": 0,
       },
-      Object {
+      {
         "height": 100,
         "overflow": "hidden",
         "width": 300,
       },
-      Object {
+      {
         "flex": 0,
         "height": 100,
         "width": 300,
@@ -158,11 +185,18 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
     ]
   }
 >
-  <RNSVGGroup>
+  <RNSVGGroup
+    fill={
+      {
+        "payload": -16777216,
+        "type": 0,
+      }
+    }
+  >
     <RNSVGDefs>
       <RNSVGLinearGradient
         gradient={
-          Array [
+          [
             0.1,
             -1644826,
             0.2,
@@ -172,7 +206,7 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
           ]
         }
         gradientTransform={
-          Array [
+          [
             0.7071067811865476,
             0.7071067811865475,
             -0.7071067811865475,
@@ -183,71 +217,91 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
         }
         gradientUnits={0}
         name="gradient"
-        x1={-2}
+        x1="-2"
         x2="-1"
         y1="0%"
         y2="0%"
       />
       <RNSVGClipPath
+        fill={
+          {
+            "payload": -16777216,
+            "type": 0,
+          }
+        }
         name="shimmerView"
       >
         <RNSVGRect
-          height={20}
-          rx={3}
-          ry={3}
-          width={100}
-          x={90}
-          y={70}
+          fill={
+            {
+              "payload": -16777216,
+              "type": 0,
+            }
+          }
+          height="20"
+          rx="3"
+          ry="3"
+          width="100"
+          x="90"
+          y="70"
         />
         <RNSVGRect
-          height={20}
-          rx={3}
-          ry={3}
-          width={150}
-          x={90}
-          y={42}
+          fill={
+            {
+              "payload": -16777216,
+              "type": 0,
+            }
+          }
+          height="20"
+          rx="3"
+          ry="3"
+          width="150"
+          x="90"
+          y="42"
         />
         <RNSVGRect
-          height={20}
-          rx={3}
-          ry={3}
-          width={200}
-          x={90}
-          y={15}
+          fill={
+            {
+              "payload": -16777216,
+              "type": 0,
+            }
+          }
+          height="20"
+          rx="3"
+          ry="3"
+          width="200"
+          x="90"
+          y="15"
         />
       </RNSVGClipPath>
     </RNSVGDefs>
     <RNSVGGroup
-      matrix={
-        Array [
-          1,
-          0,
-          0,
-          1,
-          0,
-          0,
-        ]
+      fill={
+        {
+          "payload": -16777216,
+          "type": 0,
+        }
       }
     >
       <RNSVGRect
         clipPath="shimmerView"
         fill={
-          Array [
-            1,
-            "gradient",
-          ]
+          {
+            "brushRef": "gradient",
+            "type": 1,
+          }
         }
-        height={100}
+        height="100"
         propList={
-          Array [
+          [
             "fill",
           ]
         }
-        width={300}
+        width="300"
         x="0"
         y="0"
       />
     </RNSVGGroup>
   </RNSVGGroup>
-</RNSVGSvgView>
+</RNSVGSvgViewAndroid>
 `;

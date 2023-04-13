@@ -5,11 +5,11 @@ exports[`Pressable with useKeyProps 1`] = `
   accessible={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -35,11 +35,11 @@ exports[`useKeyProps called twice 1`] = `
   accessible={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]

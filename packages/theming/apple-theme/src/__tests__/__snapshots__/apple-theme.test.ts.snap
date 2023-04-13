@@ -1,1445 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createAppleTheme test 1`] = `
-Object {
-  "colors": Object {
-    "accentButtonBackground": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "accentButtonText": "#ffffff",
-    "actionLink": Object {
-      "semantic": Array [
-        "linkColor",
-      ],
-    },
-    "actionLinkHovered": Object {
-      "semantic": Array [
-        "linkColor",
-      ],
-    },
-    "background": Object {
-      "semantic": Array [
-        "windowBackgroundColor",
-      ],
-    },
-    "blockingBackground": Object {
-      "dynamic": Object {
-        "dark": "transparent",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#DD4242",
-      },
-    },
-    "bodyDivider": Object {
-      "semantic": Array [
-        "separatorColor",
-      ],
-    },
-    "bodyFrameBackground": Object {
-      "semantic": Array [
-        "windowBackgroundColor",
-      ],
-    },
-    "bodyFrameDivider": Object {
-      "semantic": Array [
-        "separatorColor",
-      ],
-    },
-    "bodyStandoutBackground": Object {
-      "semantic": Array [
-        "underPageBackgroundColor",
-      ],
-    },
-    "bodyText": Object {
-      "semantic": Array [
-        "labelColor",
-      ],
-    },
-    "bodyTextChecked": Object {
-      "semantic": Array [
-        "labelColor",
-      ],
-    },
-    "brandBackground": "#0078d4",
-    "brandBackground2": "#eff6fc",
-    "brandBackgroundDisabled": "#d1d1d1",
-    "brandBackgroundHover": "#106ebe",
-    "brandBackgroundPressed": "#106ebe",
-    "brandBackgroundSelected": "#005a9e",
-    "brandBackgroundStatic": "#0078d4",
-    "brandForeground1": "#0078d4",
-    "brandForeground1Disabled": "#757575",
-    "brandForeground1Pressed": "#004578",
-    "brandForeground2": "#106ebe",
-    "brandForegroundLink": "#0078d4",
-    "brandForegroundLinkHover": "#106ebe",
-    "brandForegroundLinkPressed": "#004578",
-    "brandForegroundLinkSelected": "#005a9e",
-    "brandStroke1": "#0078d4",
-    "brandStroke2": "#c7e0f4",
-    "brandedBackground": "#0078d4",
-    "brandedBorder": "transparent",
-    "brandedCheckedBackground": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "brandedCheckedContent": "#ffffff",
-    "brandedCheckedHoveredBackground": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "brandedCheckedHoveredContent": "#ffffff",
-    "brandedContent": "#ffffff",
-    "brandedDisabledBackground": "#f0f0f0",
-    "brandedDisabledBorder": "transparent",
-    "brandedDisabledContent": "#757575",
-    "brandedDisabledIcon": "#616161",
-    "brandedFocusedBackground": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "brandedFocusedBorder": "transparent",
-    "brandedFocusedContent": "#ffffff",
-    "brandedFocusedIcon": "#ffffff",
-    "brandedFocusedSecondaryContent": "#ffffff",
-    "brandedHoveredBackground": "#106ebe",
-    "brandedHoveredBorder": "transparent",
-    "brandedHoveredContent": "#ffffff",
-    "brandedHoveredIcon": "#ffffff",
-    "brandedHoveredSecondaryContent": "#ffffff",
-    "brandedIcon": "#ffffff",
-    "brandedPressedBackground": "#106ebe",
-    "brandedPressedBorder": "transparent",
-    "brandedPressedContent": "#ffffff",
-    "brandedPressedIcon": "#ffffff",
-    "brandedPressedSecondaryContent": Object {
-      "colorWithSystemEffect": Object {
-        "baseColor": "#ffffff",
-        "systemEffect": "pressed",
-      },
-    },
-    "brandedSecondaryContent": "#ffffff",
-    "buttonBackground": "#ffffff",
-    "buttonBackgroundChecked": "#f5f5f5",
-    "buttonBackgroundCheckedHovered": "#f5f5f5",
-    "buttonBackgroundDisabled": Object {
-      "colorWithSystemEffect": Object {
-        "baseColor": "#f5f5f5",
-        "systemEffect": "disabled",
-      },
-    },
-    "buttonBackgroundHovered": "#f5f5f5",
-    "buttonBackgroundPressed": Object {
-      "colorWithSystemEffect": Object {
-        "baseColor": "#f5f5f5",
-        "systemEffect": "pressed",
-      },
-    },
-    "buttonBorder": "transparent",
-    "buttonBorderDisabled": "transparent",
-    "buttonBorderFocused": "transparent",
-    "buttonText": "#616161",
-    "buttonTextChecked": "#616161",
-    "buttonTextCheckedHovered": "#616161",
-    "buttonTextDisabled": Object {
-      "colorWithSystemEffect": Object {
-        "baseColor": "#616161",
-        "systemEffect": "disabled",
-      },
-    },
-    "buttonTextHovered": "#616161",
-    "buttonTextPressed": Object {
-      "colorWithSystemEffect": Object {
-        "baseColor": "#616161",
-        "systemEffect": "pressed",
-      },
-    },
-    "checkboxBackground": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "checkboxBackgroundDisabled": "#f0f0f0",
-    "checkboxBorderColor": "#404040",
-    "checkmarkColor": "#ffffff",
-    "compoundBrandBackground1": "#0078d4",
-    "compoundBrandBackground1Hover": "#106ebe",
-    "compoundBrandBackground1Pressed": "#004578",
-    "compoundBrandForeground1": "#0078d4",
-    "compoundBrandForeground1Hover": "#106ebe",
-    "compoundBrandForeground1Pressed": "#004578",
-    "compoundBrandStroke1": "#0078d4",
-    "compoundBrandStroke1Hover": "#106ebe",
-    "compoundBrandStroke1Pressed": "#004578",
-    "defaultBackground": "#ffffff",
-    "defaultBorder": "#d6d6d6",
-    "defaultCheckedBackground": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "defaultCheckedContent": "#ffffff",
-    "defaultCheckedHoveredBackground": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "defaultCheckedHoveredContent": "#ffffff",
-    "defaultContent": "#000000",
-    "defaultDisabledBackground": "#ffffff",
-    "defaultDisabledBorder": "#d6d6d6",
-    "defaultDisabledContent": "#757575",
-    "defaultDisabledIcon": "#616161",
-    "defaultDisabledSecondaryContent": "#757575",
-    "defaultFocusedBackground": "#ffffff",
-    "defaultFocusedBorder": "#d6d6d6",
-    "defaultFocusedContent": "#000000",
-    "defaultFocusedIcon": "#616161",
-    "defaultHoveredBackground": "#f5f5f5",
-    "defaultHoveredBorder": "#d6d6d6",
-    "defaultHoveredContent": "#616161",
-    "defaultHoveredIcon": "#616161",
-    "defaultHoveredSecondaryContent": "#616161",
-    "defaultIcon": "#616161",
-    "defaultPressedBackground": "#ebebeb",
-    "defaultPressedBorder": "#d6d6d6",
-    "defaultPressedContent": "#000000",
-    "defaultPressedIcon": "#616161",
-    "defaultPressedSecondaryContent": "#ffffff",
-    "defaultStateBackground": Object {
-      "semantic": Array [
-        "controlBackgroundColor",
-      ],
-    },
-    "disabledBackground": "#E1E1E1",
-    "disabledBodySubtext": Object {
-      "semantic": Array [
-        "quaternaryLabelColor",
-      ],
-    },
-    "disabledBodyText": Object {
-      "semantic": Array [
-        "tertiaryLabelColor",
-      ],
-    },
-    "disabledSubtext": Object {
-      "semantic": Array [
-        "quaternaryLabelColor",
-      ],
-    },
-    "disabledText": Object {
-      "semantic": Array [
-        "tertiaryLabelColor",
-      ],
-    },
-    "errorBackground": Object {
-      "dynamic": Object {
-        "dark": "transparent",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#DD4242",
-      },
-    },
-    "errorText": Object {
-      "dynamic": Object {
-        "dark": "transparent",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#D92C2C",
-      },
-    },
-    "focusBorder": "transparent",
-    "ghostBackground": "transparent",
-    "ghostBorder": "transparent",
-    "ghostCheckedBackground": "transparent",
-    "ghostCheckedContent": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostCheckedHoveredBackground": "transparent",
-    "ghostCheckedHoveredBorder": "transparent",
-    "ghostCheckedHoveredContent": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostContent": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostDisabledBackground": "transparent",
-    "ghostDisabledBorder": "transparent",
-    "ghostDisabledContent": "#757575",
-    "ghostDisabledIcon": "#757575",
-    "ghostFocusedBackground": "transparent",
-    "ghostFocusedBorder": "transparent",
-    "ghostFocusedContent": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostFocusedIcon": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostFocusedSecondaryContent": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostHoveredBackground": "transparent",
-    "ghostHoveredBorder": "transparent",
-    "ghostHoveredContent": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostHoveredIcon": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostHoveredSecondaryContent": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostIcon": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "ghostPressedBackground": "transparent",
-    "ghostPressedBorder": "transparent",
-    "ghostPressedContent": "#004578",
-    "ghostPressedIcon": "#616161",
-    "ghostPressedSecondaryContent": Object {
-      "colorWithSystemEffect": Object {
-        "baseColor": Object {
-          "dynamic": Object {
-            "dark": "#1890F1",
-            "highContrastDark": undefined,
-            "highContrastLight": undefined,
-            "light": "#0078D4",
-          },
-        },
-        "systemEffect": "deepPressed",
-      },
-    },
-    "ghostSecondaryContent": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "inputBackground": Object {
-      "semantic": Array [
-        "textBackgroundColor",
-      ],
-    },
-    "inputBackgroundChecked": Object {
-      "semantic": Array [
-        "textBackgroundColor",
-      ],
-    },
-    "inputBackgroundCheckedHovered": Object {
-      "semantic": Array [
-        "textBackgroundColor",
-      ],
-    },
-    "inputBorder": Object {
-      "semantic": Array [
-        "separatorColor",
-      ],
-    },
-    "inputBorderHovered": Object {
-      "semantic": Array [
-        "separatorColor",
-      ],
-    },
-    "inputFocusBorderAlt": Object {
-      "semantic": Array [
-        "keyboardFocusIndicatorColor",
-      ],
-    },
-    "inputForegroundChecked": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "inputPlaceholderText": Object {
-      "semantic": Array [
-        "placeholderTextColor",
-      ],
-    },
-    "inputText": Object {
-      "semantic": Array [
-        "textColor",
-      ],
-    },
-    "inputTextHovered": Object {
-      "semantic": Array [
-        "textColor",
-      ],
-    },
-    "link": Object {
-      "semantic": Array [
-        "linkColor",
-      ],
-    },
-    "linkHovered": Object {
-      "semantic": Array [
-        "linkColor",
-      ],
-    },
-    "linkPressed": Object {
-      "semantic": Array [
-        "selectedControlColor",
-      ],
-    },
-    "listBackground": "transparent",
-    "listHeaderBackgroundHovered": Object {
-      "semantic": Array [
-        "headerTextColor",
-      ],
-    },
-    "listHeaderBackgroundPressed": Object {
-      "semantic": Array [
-        "headerTextColor",
-      ],
-    },
-    "listItemBackgroundChecked": "transparent",
-    "listItemBackgroundCheckedHovered": "transparent",
-    "listItemBackgroundHovered": "transparent",
-    "listText": Object {
-      "semantic": Array [
-        "labelColor",
-      ],
-    },
-    "menuBackground": "transparent",
-    "menuDivider": Object {
-      "semantic": Array [
-        "separatorColor",
-      ],
-    },
-    "menuHeader": Object {
-      "semantic": Array [
-        "headerTextColor",
-      ],
-    },
-    "menuIcon": "#616161",
-    "menuItemBackgroundHovered": Object {
-      "semantic": Array [
-        "controlAccentColor",
-      ],
-    },
-    "menuItemBackgroundPressed": Object {
-      "colorWithSystemEffect": Object {
-        "baseColor": Object {
-          "semantic": Array [
-            "controlAccentColor",
-          ],
-        },
-        "systemEffect": "pressed",
-      },
-    },
-    "menuItemText": Object {
-      "semantic": Array [
-        "labelColor",
-      ],
-    },
-    "menuItemTextHovered": "white",
-    "neutralBackground1": "#ffffff",
-    "neutralBackground1Hover": "#f5f5f5",
-    "neutralBackground1Pressed": "#ebebeb",
-    "neutralBackground1Selected": "#ebebeb",
-    "neutralBackground2": "#ffffff",
-    "neutralBackground2Hover": "#f0f0f0",
-    "neutralBackground2Pressed": "#ebebeb",
-    "neutralBackground2Selected": "#e6e6e6",
-    "neutralBackground3": "#f5f5f5",
-    "neutralBackground3Hover": "#ebebeb",
-    "neutralBackground3Pressed": "#d6d6d6",
-    "neutralBackground3Selected": "#e0e0e0",
-    "neutralBackground4": "#f0f0f0",
-    "neutralBackground4Hover": "#fafafa",
-    "neutralBackground4Pressed": "#f5f5f5",
-    "neutralBackground4Selected": "#ffffff",
-    "neutralBackground5": "#ebebeb",
-    "neutralBackground5Hover": "#f5f5f5",
-    "neutralBackground5Pressed": "#f0f0f0",
-    "neutralBackground5Selected": "#fafafa",
-    "neutralBackground6": "#e6e6e6",
-    "neutralBackgroundDisabled": "#f0f0f0",
-    "neutralBackgroundInverted": "#616161",
-    "neutralForeground1": "#242424",
-    "neutralForeground1Hover": "#242424",
-    "neutralForeground1Pressed": "#242424",
-    "neutralForeground1Selected": "#242424",
-    "neutralForeground2": "#000000",
-    "neutralForeground2BrandHover": "#106ebe",
-    "neutralForeground2BrandPressed": "#004578",
-    "neutralForeground2BrandSelected": "#005a9e",
-    "neutralForeground2Hover": "#242424",
-    "neutralForeground2Pressed": "#242424",
-    "neutralForeground2Selected": "#242424",
-    "neutralForeground3": "#616161",
-    "neutralForeground3BrandHover": "#106ebe",
-    "neutralForeground3BrandPressed": "#004578",
-    "neutralForeground3BrandSelected": "#005a9e",
-    "neutralForeground3Hover": "#424242",
-    "neutralForeground3Pressed": "#424242",
-    "neutralForeground3Selected": "#424242",
-    "neutralForeground4": "#808080",
-    "neutralForegroundDisabled": "#757575",
-    "neutralForegroundInverted": "#ffffff",
-    "neutralForegroundInvertedLink": "#ffffff",
-    "neutralForegroundInvertedLinkHover": "#ffffff",
-    "neutralForegroundInvertedLinkPressed": "#ffffff",
-    "neutralForegroundInvertedLinkSelected": "#ffffff",
-    "neutralForegroundOnBrand": "#ffffff",
-    "neutralForegroundOnBrandHover": "#ffffff",
-    "neutralForegroundOnBrandPressed": "#ffffff",
-    "neutralForegroundOnBrandSelected": "#ffffff",
-    "neutralStencil1": "#e6e6e6",
-    "neutralStencil2": "#fafafa",
-    "neutralStroke1": "#f0f0f0",
-    "neutralStroke1Hover": "#c7c7c7",
-    "neutralStroke1Pressed": "#b3b3b3",
-    "neutralStroke1Selected": "#bdbdbd",
-    "neutralStroke2": "#d6d6d6",
-    "neutralStroke3": "#f0f0f0",
-    "neutralStrokeAccessible": "#616161",
-    "neutralStrokeAccessibleHover": "#575757",
-    "neutralStrokeAccessiblePressed": "#4d4d4d",
-    "neutralStrokeAccessibleSelected": "#0078d4",
-    "neutralStrokeDisabled": "#e0e0e0",
-    "personaActivityGlow": "#D13438",
-    "personaActivityRing": "#ffffff",
-    "primaryButtonBackground": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "primaryButtonBackgroundDisabled": "#f0f0f0",
-    "primaryButtonBackgroundHovered": Object {
-      "dynamic": Object {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "primaryButtonBackgroundPressed": "#106ebe",
-    "primaryButtonBorder": "transparent",
-    "primaryButtonBorderFocused": "transparent",
-    "primaryButtonText": "#ffffff",
-    "primaryButtonTextDisabled": "#757575",
-    "primaryButtonTextHovered": "#ffffff",
-    "primaryButtonTextPressed": "#ffffff",
-    "redBackground1": "#f9f0f2",
-    "redBackground2": "#d69ca5",
-    "redBackground3": "#750b1c",
-    "redBorder1": "#d69ca5",
-    "redBorder2": "#750b1c",
-    "redBorderActive": "#750b1c",
-    "redForeground1": "#690a19",
-    "redForeground2": "#d69ca5",
-    "redForeground3": "#750b1c",
-    "smallInputBorder": Object {
-      "semantic": Array [
-        "separatorColor",
-      ],
-    },
-    "strokeFocus1": "#ffffff",
-    "strokeFocus2": "#000000",
-    "subText": Object {
-      "semantic": Array [
-        "secondaryLabelColor",
-      ],
-    },
-    "subtleBackground": "transparent",
-    "subtleBackgroundHover": "#f5f5f5",
-    "subtleBackgroundPressed": "#e0e0e0",
-    "subtleBackgroundSelected": "#ebebeb",
-    "successBackground": Object {
-      "dynamic": Object {
-        "dark": "#0D9D3D",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#27AC22",
-      },
-    },
-    "transparentBackground": "transparent",
-    "transparentBackgroundHover": "transparent",
-    "transparentBackgroundPressed": "transparent",
-    "transparentBackgroundSelected": "transparent",
-    "transparentStroke": "transparent",
-    "transparentStrokeDisabled": "transparent",
-    "transparentStrokeInteractive": "transparent",
-    "variantBorder": Object {
-      "semantic": Array [
-        "separatorColor",
-      ],
-    },
-    "variantBorderHovered": Object {
-      "semantic": Array [
-        "separatorColor",
-      ],
-    },
-    "warningBackground": Object {
-      "dynamic": Object {
-        "dark": "#FFC328",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD335",
-      },
-    },
-    "warningHighlight": Object {
-      "dynamic": Object {
-        "dark": "#E0AB24",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD94E",
-      },
-    },
-    "warningText": Object {
-      "dynamic": Object {
-        "dark": "#FFC328",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD335",
-      },
-    },
-  },
-  "components": Object {
-    "Button": Object {
-      "content": Object {
-        "fontSize": 15,
-      },
-      "icon": Object {
-        "style": Object {
-          "marginEnd": 10,
-        },
-      },
-      "root": Object {
-        "style": Object {
-          "margin": 8,
-        },
-      },
-      "stack": Object {
-        "style": Object {
-          "minHeight": 28,
-          "paddingVertical": 4.5,
-        },
-      },
-      "tokens": Object {
-        "borderRadius": 6,
-        "borderWidth": 1,
-        "minHeight": 28,
-        "minWidth": 72,
-      },
-    },
-    "Checkbox": Object {
-      "_precedence": Array [
-        "disabled",
-        "boxAtEnd",
-        "checked",
-      ],
-      "checkbox": Object {
-        "style": Object {
-          "borderRadius": 3,
-          "borderStyle": "solid",
-          "borderWidth": 0.5,
-          "marginEnd": 5,
-          "minHeight": 14,
-          "minWidth": 14,
-        },
-      },
-      "checkmarkIcon": Object {
-        "height": 10,
-        "style": Object {
-          "marginHorizontal": 2,
-          "marginVertical": 2,
-        },
-        "width": 10,
-      },
-    },
-    "RNFText": Object {
-      "tokens": Object {
-        "variant": "bodyStandard",
-      },
-    },
-  },
-  "host": Object {
-    "appearance": "dynamic",
-  },
-  "shadows": Object {
-    "shadow16": Object {
-      "ambient": Object {
-        "blur": 2,
-        "color": "#0000001f",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 16,
-        "color": "#00000024",
-        "x": 0,
-        "y": 8,
-      },
-    },
-    "shadow16brand": Object {
-      "ambient": Object {
-        "blur": 2,
-        "color": "#0000004d",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 16,
-        "color": "#00000040",
-        "x": 0,
-        "y": 8,
-      },
-    },
-    "shadow2": Object {
-      "ambient": Object {
-        "blur": 2,
-        "color": "#0000001f",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 2,
-        "color": "#00000024",
-        "x": 0,
-        "y": 1,
-      },
-    },
-    "shadow28": Object {
-      "ambient": Object {
-        "blur": 8,
-        "color": "#00000033",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 28,
-        "color": "#0000003d",
-        "x": 0,
-        "y": 14,
-      },
-    },
-    "shadow28brand": Object {
-      "ambient": Object {
-        "blur": 8,
-        "color": "#0000004d",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 28,
-        "color": "#00000040",
-        "x": 0,
-        "y": 14,
-      },
-    },
-    "shadow2brand": Object {
-      "ambient": Object {
-        "blur": 2,
-        "color": "#0000004d",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 2,
-        "color": "#00000040",
-        "x": 0,
-        "y": 1,
-      },
-    },
-    "shadow4": Object {
-      "ambient": Object {
-        "blur": 2,
-        "color": "#0000001f",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 4,
-        "color": "#00000024",
-        "x": 0,
-        "y": 2,
-      },
-    },
-    "shadow4brand": Object {
-      "ambient": Object {
-        "blur": 2,
-        "color": "#0000004d",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 4,
-        "color": "#00000040",
-        "x": 0,
-        "y": 2,
-      },
-    },
-    "shadow64": Object {
-      "ambient": Object {
-        "blur": 8,
-        "color": "#00000033",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 64,
-        "color": "#0000003d",
-        "x": 0,
-        "y": 32,
-      },
-    },
-    "shadow64brand": Object {
-      "ambient": Object {
-        "blur": 8,
-        "color": "#0000004d",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 64,
-        "color": "#00000040",
-        "x": 0,
-        "y": 32,
-      },
-    },
-    "shadow8": Object {
-      "ambient": Object {
-        "blur": 2,
-        "color": "#0000001f",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 8,
-        "color": "#00000024",
-        "x": 0,
-        "y": 4,
-      },
-    },
-    "shadow8brand": Object {
-      "ambient": Object {
-        "blur": 2,
-        "color": "#0000004d",
-        "x": 0,
-        "y": 0,
-      },
-      "key": Object {
-        "blur": 8,
-        "color": "#00000040",
-        "x": 0,
-        "y": 4,
-      },
-    },
-  },
-  "spacing": Object {
-    "l1": "20px",
-    "l2": "24px",
-    "m": "16px",
-    "s1": "12px",
-    "s2": "8px",
-  },
-  "typography": Object {
-    "families": Object {
-      "cursive": "System",
-      "monospace": "System",
-      "numeric": "System",
-      "primary": "System",
-      "sansSerif": "System",
-      "secondary": "System",
-      "serif": "System",
-    },
-    "sizes": Object {
-      "body": 13,
-      "caption": 10,
-      "header": 20,
-      "hero": 22,
-      "heroLarge": 26,
-      "secondary": 11,
-      "subheader": 16,
-    },
-    "variants": Object {
-      "body1": Object {
-        "face": "primary",
-        "size": "secondary",
-        "weight": "400",
-      },
-      "body1Strong": Object {
-        "face": "primary",
-        "size": "secondary",
-        "weight": "600",
-      },
-      "body2": Object {
-        "face": "primary",
-        "size": "body",
-        "weight": "400",
-      },
-      "body2Strong": Object {
-        "face": "primary",
-        "size": "body",
-        "weight": "600",
-      },
-      "bodySemibold": Object {
-        "face": "primary",
-        "size": "body",
-        "weight": "600",
-      },
-      "bodyStandard": Object {
-        "face": "primary",
-        "size": "body",
-        "weight": "400",
-      },
-      "caption1": Object {
-        "face": "primary",
-        "size": "caption",
-        "weight": "500",
-      },
-      "captionStandard": Object {
-        "face": "primary",
-        "size": "caption",
-        "weight": "500",
-      },
-      "display": Object {
-        "face": "primary",
-        "size": "heroLarge",
-        "weight": "700",
-      },
-      "headerSemibold": Object {
-        "face": "primary",
-        "size": "header",
-        "weight": "800",
-      },
-      "headerStandard": Object {
-        "face": "primary",
-        "size": "header",
-        "weight": "700",
-      },
-      "heroLargeSemibold": Object {
-        "face": "primary",
-        "size": "heroLarge",
-        "weight": "700",
-      },
-      "heroLargeStandard": Object {
-        "face": "primary",
-        "size": "heroLarge",
-        "weight": "400",
-      },
-      "heroSemibold": Object {
-        "face": "primary",
-        "size": "hero",
-        "weight": "700",
-      },
-      "heroStandard": Object {
-        "face": "primary",
-        "size": "hero",
-        "weight": "400",
-      },
-      "largeTitle": Object {
-        "face": "primary",
-        "size": "heroLarge",
-        "weight": "400",
-      },
-      "secondarySemibold": Object {
-        "face": "primary",
-        "size": "secondary",
-        "weight": "600",
-      },
-      "secondaryStandard": Object {
-        "face": "primary",
-        "size": "secondary",
-        "weight": "400",
-      },
-      "subheaderSemibold": Object {
-        "face": "primary",
-        "size": "subheader",
-        "weight": "600",
-      },
-      "subheaderStandard": Object {
-        "face": "primary",
-        "size": "subheader",
-        "weight": "400",
-      },
-      "subtitle1": Object {
-        "face": "primary",
-        "size": "header",
-        "weight": "700",
-      },
-      "subtitle1Strong": Object {
-        "face": "primary",
-        "size": "header",
-        "weight": "800",
-      },
-      "subtitle2": Object {
-        "face": "primary",
-        "size": "subheader",
-        "weight": "400",
-      },
-      "subtitle2Strong": Object {
-        "face": "primary",
-        "size": "subheader",
-        "weight": "600",
-      },
-      "title1": Object {
-        "face": "primary",
-        "size": "hero",
-        "weight": "400",
-      },
-      "title1Strong": Object {
-        "face": "primary",
-        "size": "hero",
-        "weight": "700",
-      },
-    },
-    "weights": Object {
-      "black": "900",
-      "bold": "700",
-      "heavy": "800",
-      "light": "300",
-      "medium": "500",
-      "regular": "400",
-      "semiBold": "600",
-      "thin": "200",
-      "ultralight": "100",
-    },
-  },
-}
-`;
-
-exports[`createMacOSColorAliasTokens test mode: dark, isHighContrast: false 1`] = `
-Object {
-  "brandBackground": "#0086f0",
-  "brandBackground2": "#092c47",
-  "brandBackgroundDisabled": "#575757",
-  "brandBackgroundHover": "#1890f1",
-  "brandBackgroundPressed": "#1890f1",
-  "brandBackgroundSelected": "#3aa0f3",
-  "brandBackgroundStatic": "#0086f0",
-  "brandForeground1": "#0086f0",
-  "brandForeground1Disabled": "#c2c2c2",
-  "brandForeground1Pressed": "#6cb8f6",
-  "brandForeground2": "#092c47",
-  "brandForegroundLink": "#043862",
-  "brandForegroundLinkHover": "#092c47",
-  "brandForegroundLinkPressed": "#0078d4",
-  "brandForegroundLinkSelected": "#092c47",
-  "brandStroke1": "#0086f0",
-  "brandStroke2": "#004c87",
-  "compoundBrandBackground1": "#0086f0",
-  "compoundBrandBackground1Hover": "#1890f1",
-  "compoundBrandBackground1Pressed": "#6cb8f6",
-  "compoundBrandForeground1": "#043862",
-  "compoundBrandForeground1Hover": "#092c47",
-  "compoundBrandForeground1Pressed": "#0078d4",
-  "compoundBrandStroke1": "#0086f0",
-  "compoundBrandStroke1Hover": "#1890f1",
-  "compoundBrandStroke1Pressed": "#6cb8f6",
-  "neutralBackground1": "#000000",
-  "neutralBackground1Hover": "#3d3d3d",
-  "neutralBackground1Pressed": "#5c5c5c",
-  "neutralBackground1Selected": "#383838",
-  "neutralBackground2": "#575757",
-  "neutralBackground2Hover": "#333333",
-  "neutralBackground2Pressed": "#707070",
-  "neutralBackground2Selected": "#2e2e2e",
-  "neutralBackground3": "#575757",
-  "neutralBackground3Hover": "#292929",
-  "neutralBackground3Pressed": "#0a0a0a",
-  "neutralBackground3Selected": "#242424",
-  "neutralBackground4": "#1f1f1f",
-  "neutralBackground4Hover": "#1f1f1f",
-  "neutralBackground4Pressed": "#000000",
-  "neutralBackground4Selected": "#1a1a1a",
-  "neutralBackground5": "#5c5c5c",
-  "neutralBackground5Hover": "#141414",
-  "neutralBackground5Pressed": "#050505",
-  "neutralBackground5Selected": "#0f0f0f",
-  "neutralBackground6": "#333333",
-  "neutralBackgroundDisabled": "#575757",
-  "neutralBackgroundInverted": "#ffffff",
-  "neutralForeground1": "#ffffff",
-  "neutralForeground1Hover": "#ffffff",
-  "neutralForeground1Pressed": "#ffffff",
-  "neutralForeground1Selected": "#ffffff",
-  "neutralForeground2": "#ffffff",
-  "neutralForeground2BrandHover": "#092c47",
-  "neutralForeground2BrandPressed": "#0078d4",
-  "neutralForeground2BrandSelected": "#092c47",
-  "neutralForeground2Hover": "#ffffff",
-  "neutralForeground2Pressed": "#ffffff",
-  "neutralForeground2Selected": "#ffffff",
-  "neutralForeground3": "#adadad",
-  "neutralForeground3BrandHover": "#092c47",
-  "neutralForeground3BrandPressed": "#0078d4",
-  "neutralForeground3BrandSelected": "#092c47",
-  "neutralForeground3Hover": "#d6d6d6",
-  "neutralForeground3Pressed": "#d6d6d6",
-  "neutralForeground3Selected": "#d6d6d6",
-  "neutralForeground4": "#858585",
-  "neutralForegroundDisabled": "#b8b8b8",
-  "neutralForegroundInverted": "#ffffff",
-  "neutralForegroundInvertedLink": "#292929",
-  "neutralForegroundInvertedLinkHover": "#292929",
-  "neutralForegroundInvertedLinkPressed": "#292929",
-  "neutralForegroundInvertedLinkSelected": "#292929",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#333333",
-  "neutralStencil2": "#575757",
-  "neutralStroke1": "#3d3d3d",
-  "neutralStroke1Hover": "#757575",
-  "neutralStroke1Pressed": "#6b6b6b",
-  "neutralStroke1Selected": "#707070",
-  "neutralStroke2": "#575757",
-  "neutralStroke3": "#666666",
-  "neutralStrokeAccessible": "#adadad",
-  "neutralStrokeAccessibleHover": "#bdbdbd",
-  "neutralStrokeAccessiblePressed": "#b3b3b3",
-  "neutralStrokeAccessibleSelected": "#0086f0",
-  "neutralStrokeDisabled": "#525252",
-  "redBackground1": "#230308",
-  "redBackground2": "#420610",
-  "redBackground3": "#750b1c",
-  "redBorder1": "#750b1c",
-  "redBorder2": "#962f3f",
-  "redBorderActive": "#ac4f5e",
-  "redForeground1": "#ac4f5e",
-  "redForeground2": "#420610",
-  "redForeground3": "#750b1c",
-  "strokeFocus1": "#000000",
-  "strokeFocus2": "#ffffff",
-  "subtleBackground": "transparent",
-  "subtleBackgroundHover": "#3d3d3d",
-  "subtleBackgroundPressed": "#1f1f1f",
-  "subtleBackgroundSelected": "#383838",
-  "transparentBackground": "transparent",
-  "transparentBackgroundHover": "transparent",
-  "transparentBackgroundPressed": "transparent",
-  "transparentBackgroundSelected": "transparent",
-  "transparentStroke": "transparent",
-  "transparentStrokeDisabled": "transparent",
-  "transparentStrokeInteractive": "transparent",
-}
-`;
-
-exports[`createMacOSColorAliasTokens test mode: dark, isHighContrast: true 1`] = `
-Object {
-  "brandBackground": "#0086f0",
-  "brandBackground2": "#092c47",
-  "brandBackgroundDisabled": "#575757",
-  "brandBackgroundHover": "#1890f1",
-  "brandBackgroundPressed": "#1890f1",
-  "brandBackgroundSelected": "#3aa0f3",
-  "brandBackgroundStatic": "#0086f0",
-  "brandForeground1": "#0086f0",
-  "brandForeground1Disabled": "#c2c2c2",
-  "brandForeground1Pressed": "#6cb8f6",
-  "brandForeground2": "#092c47",
-  "brandForegroundLink": "#043862",
-  "brandForegroundLinkHover": "#092c47",
-  "brandForegroundLinkPressed": "#0078d4",
-  "brandForegroundLinkSelected": "#092c47",
-  "brandStroke1": "#0086f0",
-  "brandStroke2": "#004c87",
-  "compoundBrandBackground1": "#0086f0",
-  "compoundBrandBackground1Hover": "#1890f1",
-  "compoundBrandBackground1Pressed": "#6cb8f6",
-  "compoundBrandForeground1": "#043862",
-  "compoundBrandForeground1Hover": "#092c47",
-  "compoundBrandForeground1Pressed": "#0078d4",
-  "compoundBrandStroke1": "#0086f0",
-  "compoundBrandStroke1Hover": "#1890f1",
-  "compoundBrandStroke1Pressed": "#6cb8f6",
-  "neutralBackground1": "#000000",
-  "neutralBackground1Hover": "#3d3d3d",
-  "neutralBackground1Pressed": "#5c5c5c",
-  "neutralBackground1Selected": "#383838",
-  "neutralBackground2": "#575757",
-  "neutralBackground2Hover": "#333333",
-  "neutralBackground2Pressed": "#707070",
-  "neutralBackground2Selected": "#2e2e2e",
-  "neutralBackground3": "#575757",
-  "neutralBackground3Hover": "#292929",
-  "neutralBackground3Pressed": "#0a0a0a",
-  "neutralBackground3Selected": "#242424",
-  "neutralBackground4": "#1f1f1f",
-  "neutralBackground4Hover": "#1f1f1f",
-  "neutralBackground4Pressed": "#000000",
-  "neutralBackground4Selected": "#1a1a1a",
-  "neutralBackground5": "#5c5c5c",
-  "neutralBackground5Hover": "#141414",
-  "neutralBackground5Pressed": "#050505",
-  "neutralBackground5Selected": "#0f0f0f",
-  "neutralBackground6": "#333333",
-  "neutralBackgroundDisabled": "#575757",
-  "neutralBackgroundInverted": "#ffffff",
-  "neutralForeground1": "#ffffff",
-  "neutralForeground1Hover": "#ffffff",
-  "neutralForeground1Pressed": "#ffffff",
-  "neutralForeground1Selected": "#ffffff",
-  "neutralForeground2": "#ffffff",
-  "neutralForeground2BrandHover": "#092c47",
-  "neutralForeground2BrandPressed": "#0078d4",
-  "neutralForeground2BrandSelected": "#092c47",
-  "neutralForeground2Hover": "#ffffff",
-  "neutralForeground2Pressed": "#ffffff",
-  "neutralForeground2Selected": "#ffffff",
-  "neutralForeground3": "#d6d6d6",
-  "neutralForeground3BrandHover": "#092c47",
-  "neutralForeground3BrandPressed": "#0078d4",
-  "neutralForeground3BrandSelected": "#092c47",
-  "neutralForeground3Hover": "#d6d6d6",
-  "neutralForeground3Pressed": "#d6d6d6",
-  "neutralForeground3Selected": "#d6d6d6",
-  "neutralForeground4": "#d6d6d6",
-  "neutralForegroundDisabled": "#b8b8b8",
-  "neutralForegroundInverted": "#ffffff",
-  "neutralForegroundInvertedLink": "#292929",
-  "neutralForegroundInvertedLinkHover": "#292929",
-  "neutralForegroundInvertedLinkPressed": "#292929",
-  "neutralForegroundInvertedLinkSelected": "#292929",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#333333",
-  "neutralStencil2": "#575757",
-  "neutralStroke1": "#adadad",
-  "neutralStroke1Hover": "#757575",
-  "neutralStroke1Pressed": "#6b6b6b",
-  "neutralStroke1Selected": "#707070",
-  "neutralStroke2": "#a8a8a8",
-  "neutralStroke3": "#adadad",
-  "neutralStrokeAccessible": "#d6d6d6",
-  "neutralStrokeAccessibleHover": "#bdbdbd",
-  "neutralStrokeAccessiblePressed": "#b3b3b3",
-  "neutralStrokeAccessibleSelected": "#0086f0",
-  "neutralStrokeDisabled": "#525252",
-  "redBackground1": "#230308",
-  "redBackground2": "#420610",
-  "redBackground3": "#750b1c",
-  "redBorder1": "#750b1c",
-  "redBorder2": "#962f3f",
-  "redBorderActive": "#ac4f5e",
-  "redForeground1": "#ac4f5e",
-  "redForeground2": "#420610",
-  "redForeground3": "#750b1c",
-  "strokeFocus1": "#000000",
-  "strokeFocus2": "#ffffff",
-  "subtleBackground": "transparent",
-  "subtleBackgroundHover": "#3d3d3d",
-  "subtleBackgroundPressed": "#1f1f1f",
-  "subtleBackgroundSelected": "#383838",
-  "transparentBackground": "transparent",
-  "transparentBackgroundHover": "transparent",
-  "transparentBackgroundPressed": "transparent",
-  "transparentBackgroundSelected": "transparent",
-  "transparentStroke": "#3aa0f3",
-  "transparentStrokeDisabled": "#d6d6d6",
-  "transparentStrokeInteractive": "#a8a8a8",
-}
-`;
-
-exports[`createMacOSColorAliasTokens test mode: light, isHighContrast: false 1`] = `
-Object {
-  "brandBackground": "#0078d4",
-  "brandBackground2": "#eff6fc",
-  "brandBackgroundDisabled": "#d1d1d1",
-  "brandBackgroundHover": "#106ebe",
-  "brandBackgroundPressed": "#106ebe",
-  "brandBackgroundSelected": "#005a9e",
-  "brandBackgroundStatic": "#0078d4",
-  "brandForeground1": "#0078d4",
-  "brandForeground1Disabled": "#757575",
-  "brandForeground1Pressed": "#004578",
-  "brandForeground2": "#106ebe",
-  "brandForegroundLink": "#0078d4",
-  "brandForegroundLinkHover": "#106ebe",
-  "brandForegroundLinkPressed": "#004578",
-  "brandForegroundLinkSelected": "#005a9e",
-  "brandStroke1": "#0078d4",
-  "brandStroke2": "#c7e0f4",
-  "compoundBrandBackground1": "#0078d4",
-  "compoundBrandBackground1Hover": "#106ebe",
-  "compoundBrandBackground1Pressed": "#004578",
-  "compoundBrandForeground1": "#0078d4",
-  "compoundBrandForeground1Hover": "#106ebe",
-  "compoundBrandForeground1Pressed": "#004578",
-  "compoundBrandStroke1": "#0078d4",
-  "compoundBrandStroke1Hover": "#106ebe",
-  "compoundBrandStroke1Pressed": "#004578",
-  "neutralBackground1": "#ffffff",
-  "neutralBackground1Hover": "#f5f5f5",
-  "neutralBackground1Pressed": "#ebebeb",
-  "neutralBackground1Selected": "#ebebeb",
-  "neutralBackground2": "#ffffff",
-  "neutralBackground2Hover": "#f0f0f0",
-  "neutralBackground2Pressed": "#ebebeb",
-  "neutralBackground2Selected": "#e6e6e6",
-  "neutralBackground3": "#f5f5f5",
-  "neutralBackground3Hover": "#ebebeb",
-  "neutralBackground3Pressed": "#d6d6d6",
-  "neutralBackground3Selected": "#e0e0e0",
-  "neutralBackground4": "#f0f0f0",
-  "neutralBackground4Hover": "#fafafa",
-  "neutralBackground4Pressed": "#f5f5f5",
-  "neutralBackground4Selected": "#ffffff",
-  "neutralBackground5": "#ebebeb",
-  "neutralBackground5Hover": "#f5f5f5",
-  "neutralBackground5Pressed": "#f0f0f0",
-  "neutralBackground5Selected": "#fafafa",
-  "neutralBackground6": "#e6e6e6",
-  "neutralBackgroundDisabled": "#f0f0f0",
-  "neutralBackgroundInverted": "#616161",
-  "neutralForeground1": "#242424",
-  "neutralForeground1Hover": "#242424",
-  "neutralForeground1Pressed": "#242424",
-  "neutralForeground1Selected": "#242424",
-  "neutralForeground2": "#000000",
-  "neutralForeground2BrandHover": "#106ebe",
-  "neutralForeground2BrandPressed": "#004578",
-  "neutralForeground2BrandSelected": "#005a9e",
-  "neutralForeground2Hover": "#242424",
-  "neutralForeground2Pressed": "#242424",
-  "neutralForeground2Selected": "#242424",
-  "neutralForeground3": "#616161",
-  "neutralForeground3BrandHover": "#106ebe",
-  "neutralForeground3BrandPressed": "#004578",
-  "neutralForeground3BrandSelected": "#005a9e",
-  "neutralForeground3Hover": "#424242",
-  "neutralForeground3Pressed": "#424242",
-  "neutralForeground3Selected": "#424242",
-  "neutralForeground4": "#808080",
-  "neutralForegroundDisabled": "#757575",
-  "neutralForegroundInverted": "#ffffff",
-  "neutralForegroundInvertedLink": "#ffffff",
-  "neutralForegroundInvertedLinkHover": "#ffffff",
-  "neutralForegroundInvertedLinkPressed": "#ffffff",
-  "neutralForegroundInvertedLinkSelected": "#ffffff",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#e6e6e6",
-  "neutralStencil2": "#fafafa",
-  "neutralStroke1": "#f0f0f0",
-  "neutralStroke1Hover": "#c7c7c7",
-  "neutralStroke1Pressed": "#b3b3b3",
-  "neutralStroke1Selected": "#bdbdbd",
-  "neutralStroke2": "#d6d6d6",
-  "neutralStroke3": "#f0f0f0",
-  "neutralStrokeAccessible": "#616161",
-  "neutralStrokeAccessibleHover": "#575757",
-  "neutralStrokeAccessiblePressed": "#4d4d4d",
-  "neutralStrokeAccessibleSelected": "#0078d4",
-  "neutralStrokeDisabled": "#e0e0e0",
-  "redBackground1": "#f9f0f2",
-  "redBackground2": "#d69ca5",
-  "redBackground3": "#750b1c",
-  "redBorder1": "#d69ca5",
-  "redBorder2": "#750b1c",
-  "redBorderActive": "#750b1c",
-  "redForeground1": "#690a19",
-  "redForeground2": "#d69ca5",
-  "redForeground3": "#750b1c",
-  "strokeFocus1": "#ffffff",
-  "strokeFocus2": "#000000",
-  "subtleBackground": "transparent",
-  "subtleBackgroundHover": "#f5f5f5",
-  "subtleBackgroundPressed": "#e0e0e0",
-  "subtleBackgroundSelected": "#ebebeb",
-  "transparentBackground": "transparent",
-  "transparentBackgroundHover": "transparent",
-  "transparentBackgroundPressed": "transparent",
-  "transparentBackgroundSelected": "transparent",
-  "transparentStroke": "transparent",
-  "transparentStrokeDisabled": "transparent",
-  "transparentStrokeInteractive": "transparent",
-}
-`;
-
-exports[`createMacOSColorAliasTokens test mode: light, isHighContrast: true 1`] = `
-Object {
+exports[` 1`] = `
+{
   "brandBackground": "#0078d4",
   "brandBackground2": "#eff6fc",
   "brandBackgroundDisabled": "#d1d1d1",
@@ -1556,170 +118,524 @@ Object {
 }
 `;
 
-exports[`createMacOSShadowAliasTokens test mode: dark, isHighContrast: false 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
+exports[` 2`] = `
+{
+  "brandBackground": "#0078d4",
+  "brandBackground2": "#eff6fc",
+  "brandBackgroundDisabled": "#d1d1d1",
+  "brandBackgroundHover": "#106ebe",
+  "brandBackgroundPressed": "#106ebe",
+  "brandBackgroundSelected": "#005a9e",
+  "brandBackgroundStatic": "#0078d4",
+  "brandForeground1": "#0078d4",
+  "brandForeground1Disabled": "#757575",
+  "brandForeground1Pressed": "#004578",
+  "brandForeground2": "#106ebe",
+  "brandForegroundLink": "#0078d4",
+  "brandForegroundLinkHover": "#106ebe",
+  "brandForegroundLinkPressed": "#004578",
+  "brandForegroundLinkSelected": "#005a9e",
+  "brandStroke1": "#0078d4",
+  "brandStroke2": "#c7e0f4",
+  "compoundBrandBackground1": "#0078d4",
+  "compoundBrandBackground1Hover": "#106ebe",
+  "compoundBrandBackground1Pressed": "#004578",
+  "compoundBrandForeground1": "#0078d4",
+  "compoundBrandForeground1Hover": "#106ebe",
+  "compoundBrandForeground1Pressed": "#004578",
+  "compoundBrandStroke1": "#0078d4",
+  "compoundBrandStroke1Hover": "#106ebe",
+  "compoundBrandStroke1Pressed": "#004578",
+  "neutralBackground1": "#ffffff",
+  "neutralBackground1Hover": "#f5f5f5",
+  "neutralBackground1Pressed": "#ebebeb",
+  "neutralBackground1Selected": "#ebebeb",
+  "neutralBackground2": "#ffffff",
+  "neutralBackground2Hover": "#f0f0f0",
+  "neutralBackground2Pressed": "#ebebeb",
+  "neutralBackground2Selected": "#e6e6e6",
+  "neutralBackground3": "#f5f5f5",
+  "neutralBackground3Hover": "#ebebeb",
+  "neutralBackground3Pressed": "#d6d6d6",
+  "neutralBackground3Selected": "#e0e0e0",
+  "neutralBackground4": "#f0f0f0",
+  "neutralBackground4Hover": "#fafafa",
+  "neutralBackground4Pressed": "#f5f5f5",
+  "neutralBackground4Selected": "#ffffff",
+  "neutralBackground5": "#ebebeb",
+  "neutralBackground5Hover": "#f5f5f5",
+  "neutralBackground5Pressed": "#f0f0f0",
+  "neutralBackground5Selected": "#fafafa",
+  "neutralBackground6": "#e6e6e6",
+  "neutralBackgroundDisabled": "#f0f0f0",
+  "neutralBackgroundInverted": "#616161",
+  "neutralForeground1": "#242424",
+  "neutralForeground1Hover": "#242424",
+  "neutralForeground1Pressed": "#242424",
+  "neutralForeground1Selected": "#242424",
+  "neutralForeground2": "#000000",
+  "neutralForeground2BrandHover": "#106ebe",
+  "neutralForeground2BrandPressed": "#004578",
+  "neutralForeground2BrandSelected": "#005a9e",
+  "neutralForeground2Hover": "#242424",
+  "neutralForeground2Pressed": "#242424",
+  "neutralForeground2Selected": "#242424",
+  "neutralForeground3": "#616161",
+  "neutralForeground3BrandHover": "#106ebe",
+  "neutralForeground3BrandPressed": "#004578",
+  "neutralForeground3BrandSelected": "#005a9e",
+  "neutralForeground3Hover": "#424242",
+  "neutralForeground3Pressed": "#424242",
+  "neutralForeground3Selected": "#424242",
+  "neutralForeground4": "#808080",
+  "neutralForegroundDisabled": "#757575",
+  "neutralForegroundInverted": "#ffffff",
+  "neutralForegroundInvertedLink": "#ffffff",
+  "neutralForegroundInvertedLinkHover": "#ffffff",
+  "neutralForegroundInvertedLinkPressed": "#ffffff",
+  "neutralForegroundInvertedLinkSelected": "#ffffff",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#e6e6e6",
+  "neutralStencil2": "#fafafa",
+  "neutralStroke1": "#f0f0f0",
+  "neutralStroke1Hover": "#c7c7c7",
+  "neutralStroke1Pressed": "#b3b3b3",
+  "neutralStroke1Selected": "#bdbdbd",
+  "neutralStroke2": "#d6d6d6",
+  "neutralStroke3": "#f0f0f0",
+  "neutralStrokeAccessible": "#616161",
+  "neutralStrokeAccessibleHover": "#575757",
+  "neutralStrokeAccessiblePressed": "#4d4d4d",
+  "neutralStrokeAccessibleSelected": "#0078d4",
+  "neutralStrokeDisabled": "#e0e0e0",
+  "redBackground1": "#f9f0f2",
+  "redBackground2": "#d69ca5",
+  "redBackground3": "#750b1c",
+  "redBorder1": "#d69ca5",
+  "redBorder2": "#750b1c",
+  "redBorderActive": "#750b1c",
+  "redForeground1": "#690a19",
+  "redForeground2": "#d69ca5",
+  "redForeground3": "#750b1c",
+  "strokeFocus1": "#ffffff",
+  "strokeFocus2": "#000000",
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": "#f5f5f5",
+  "subtleBackgroundPressed": "#e0e0e0",
+  "subtleBackgroundSelected": "#ebebeb",
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": "transparent",
+  "transparentStrokeDisabled": "transparent",
+  "transparentStrokeInteractive": "transparent",
+}
+`;
+
+exports[` 3`] = `
+{
+  "brandBackground": "#0086f0",
+  "brandBackground2": "#092c47",
+  "brandBackgroundDisabled": "#575757",
+  "brandBackgroundHover": "#1890f1",
+  "brandBackgroundPressed": "#1890f1",
+  "brandBackgroundSelected": "#3aa0f3",
+  "brandBackgroundStatic": "#0086f0",
+  "brandForeground1": "#0086f0",
+  "brandForeground1Disabled": "#c2c2c2",
+  "brandForeground1Pressed": "#6cb8f6",
+  "brandForeground2": "#092c47",
+  "brandForegroundLink": "#043862",
+  "brandForegroundLinkHover": "#092c47",
+  "brandForegroundLinkPressed": "#0078d4",
+  "brandForegroundLinkSelected": "#092c47",
+  "brandStroke1": "#0086f0",
+  "brandStroke2": "#004c87",
+  "compoundBrandBackground1": "#0086f0",
+  "compoundBrandBackground1Hover": "#1890f1",
+  "compoundBrandBackground1Pressed": "#6cb8f6",
+  "compoundBrandForeground1": "#043862",
+  "compoundBrandForeground1Hover": "#092c47",
+  "compoundBrandForeground1Pressed": "#0078d4",
+  "compoundBrandStroke1": "#0086f0",
+  "compoundBrandStroke1Hover": "#1890f1",
+  "compoundBrandStroke1Pressed": "#6cb8f6",
+  "neutralBackground1": "#000000",
+  "neutralBackground1Hover": "#3d3d3d",
+  "neutralBackground1Pressed": "#5c5c5c",
+  "neutralBackground1Selected": "#383838",
+  "neutralBackground2": "#575757",
+  "neutralBackground2Hover": "#333333",
+  "neutralBackground2Pressed": "#707070",
+  "neutralBackground2Selected": "#2e2e2e",
+  "neutralBackground3": "#575757",
+  "neutralBackground3Hover": "#292929",
+  "neutralBackground3Pressed": "#0a0a0a",
+  "neutralBackground3Selected": "#242424",
+  "neutralBackground4": "#1f1f1f",
+  "neutralBackground4Hover": "#1f1f1f",
+  "neutralBackground4Pressed": "#000000",
+  "neutralBackground4Selected": "#1a1a1a",
+  "neutralBackground5": "#5c5c5c",
+  "neutralBackground5Hover": "#141414",
+  "neutralBackground5Pressed": "#050505",
+  "neutralBackground5Selected": "#0f0f0f",
+  "neutralBackground6": "#333333",
+  "neutralBackgroundDisabled": "#575757",
+  "neutralBackgroundInverted": "#ffffff",
+  "neutralForeground1": "#ffffff",
+  "neutralForeground1Hover": "#ffffff",
+  "neutralForeground1Pressed": "#ffffff",
+  "neutralForeground1Selected": "#ffffff",
+  "neutralForeground2": "#ffffff",
+  "neutralForeground2BrandHover": "#092c47",
+  "neutralForeground2BrandPressed": "#0078d4",
+  "neutralForeground2BrandSelected": "#092c47",
+  "neutralForeground2Hover": "#ffffff",
+  "neutralForeground2Pressed": "#ffffff",
+  "neutralForeground2Selected": "#ffffff",
+  "neutralForeground3": "#d6d6d6",
+  "neutralForeground3BrandHover": "#092c47",
+  "neutralForeground3BrandPressed": "#0078d4",
+  "neutralForeground3BrandSelected": "#092c47",
+  "neutralForeground3Hover": "#d6d6d6",
+  "neutralForeground3Pressed": "#d6d6d6",
+  "neutralForeground3Selected": "#d6d6d6",
+  "neutralForeground4": "#d6d6d6",
+  "neutralForegroundDisabled": "#b8b8b8",
+  "neutralForegroundInverted": "#ffffff",
+  "neutralForegroundInvertedLink": "#292929",
+  "neutralForegroundInvertedLinkHover": "#292929",
+  "neutralForegroundInvertedLinkPressed": "#292929",
+  "neutralForegroundInvertedLinkSelected": "#292929",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#333333",
+  "neutralStencil2": "#575757",
+  "neutralStroke1": "#adadad",
+  "neutralStroke1Hover": "#757575",
+  "neutralStroke1Pressed": "#6b6b6b",
+  "neutralStroke1Selected": "#707070",
+  "neutralStroke2": "#a8a8a8",
+  "neutralStroke3": "#adadad",
+  "neutralStrokeAccessible": "#d6d6d6",
+  "neutralStrokeAccessibleHover": "#bdbdbd",
+  "neutralStrokeAccessiblePressed": "#b3b3b3",
+  "neutralStrokeAccessibleSelected": "#0086f0",
+  "neutralStrokeDisabled": "#525252",
+  "redBackground1": "#230308",
+  "redBackground2": "#420610",
+  "redBackground3": "#750b1c",
+  "redBorder1": "#750b1c",
+  "redBorder2": "#962f3f",
+  "redBorderActive": "#ac4f5e",
+  "redForeground1": "#ac4f5e",
+  "redForeground2": "#420610",
+  "redForeground3": "#750b1c",
+  "strokeFocus1": "#000000",
+  "strokeFocus2": "#ffffff",
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": "#3d3d3d",
+  "subtleBackgroundPressed": "#1f1f1f",
+  "subtleBackgroundSelected": "#383838",
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": "#3aa0f3",
+  "transparentStrokeDisabled": "#d6d6d6",
+  "transparentStrokeInteractive": "#a8a8a8",
+}
+`;
+
+exports[` 4`] = `
+{
+  "brandBackground": "#0086f0",
+  "brandBackground2": "#092c47",
+  "brandBackgroundDisabled": "#575757",
+  "brandBackgroundHover": "#1890f1",
+  "brandBackgroundPressed": "#1890f1",
+  "brandBackgroundSelected": "#3aa0f3",
+  "brandBackgroundStatic": "#0086f0",
+  "brandForeground1": "#0086f0",
+  "brandForeground1Disabled": "#c2c2c2",
+  "brandForeground1Pressed": "#6cb8f6",
+  "brandForeground2": "#092c47",
+  "brandForegroundLink": "#043862",
+  "brandForegroundLinkHover": "#092c47",
+  "brandForegroundLinkPressed": "#0078d4",
+  "brandForegroundLinkSelected": "#092c47",
+  "brandStroke1": "#0086f0",
+  "brandStroke2": "#004c87",
+  "compoundBrandBackground1": "#0086f0",
+  "compoundBrandBackground1Hover": "#1890f1",
+  "compoundBrandBackground1Pressed": "#6cb8f6",
+  "compoundBrandForeground1": "#043862",
+  "compoundBrandForeground1Hover": "#092c47",
+  "compoundBrandForeground1Pressed": "#0078d4",
+  "compoundBrandStroke1": "#0086f0",
+  "compoundBrandStroke1Hover": "#1890f1",
+  "compoundBrandStroke1Pressed": "#6cb8f6",
+  "neutralBackground1": "#000000",
+  "neutralBackground1Hover": "#3d3d3d",
+  "neutralBackground1Pressed": "#5c5c5c",
+  "neutralBackground1Selected": "#383838",
+  "neutralBackground2": "#575757",
+  "neutralBackground2Hover": "#333333",
+  "neutralBackground2Pressed": "#707070",
+  "neutralBackground2Selected": "#2e2e2e",
+  "neutralBackground3": "#575757",
+  "neutralBackground3Hover": "#292929",
+  "neutralBackground3Pressed": "#0a0a0a",
+  "neutralBackground3Selected": "#242424",
+  "neutralBackground4": "#1f1f1f",
+  "neutralBackground4Hover": "#1f1f1f",
+  "neutralBackground4Pressed": "#000000",
+  "neutralBackground4Selected": "#1a1a1a",
+  "neutralBackground5": "#5c5c5c",
+  "neutralBackground5Hover": "#141414",
+  "neutralBackground5Pressed": "#050505",
+  "neutralBackground5Selected": "#0f0f0f",
+  "neutralBackground6": "#333333",
+  "neutralBackgroundDisabled": "#575757",
+  "neutralBackgroundInverted": "#ffffff",
+  "neutralForeground1": "#ffffff",
+  "neutralForeground1Hover": "#ffffff",
+  "neutralForeground1Pressed": "#ffffff",
+  "neutralForeground1Selected": "#ffffff",
+  "neutralForeground2": "#ffffff",
+  "neutralForeground2BrandHover": "#092c47",
+  "neutralForeground2BrandPressed": "#0078d4",
+  "neutralForeground2BrandSelected": "#092c47",
+  "neutralForeground2Hover": "#ffffff",
+  "neutralForeground2Pressed": "#ffffff",
+  "neutralForeground2Selected": "#ffffff",
+  "neutralForeground3": "#adadad",
+  "neutralForeground3BrandHover": "#092c47",
+  "neutralForeground3BrandPressed": "#0078d4",
+  "neutralForeground3BrandSelected": "#092c47",
+  "neutralForeground3Hover": "#d6d6d6",
+  "neutralForeground3Pressed": "#d6d6d6",
+  "neutralForeground3Selected": "#d6d6d6",
+  "neutralForeground4": "#858585",
+  "neutralForegroundDisabled": "#b8b8b8",
+  "neutralForegroundInverted": "#ffffff",
+  "neutralForegroundInvertedLink": "#292929",
+  "neutralForegroundInvertedLinkHover": "#292929",
+  "neutralForegroundInvertedLinkPressed": "#292929",
+  "neutralForegroundInvertedLinkSelected": "#292929",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#333333",
+  "neutralStencil2": "#575757",
+  "neutralStroke1": "#3d3d3d",
+  "neutralStroke1Hover": "#757575",
+  "neutralStroke1Pressed": "#6b6b6b",
+  "neutralStroke1Selected": "#707070",
+  "neutralStroke2": "#575757",
+  "neutralStroke3": "#666666",
+  "neutralStrokeAccessible": "#adadad",
+  "neutralStrokeAccessibleHover": "#bdbdbd",
+  "neutralStrokeAccessiblePressed": "#b3b3b3",
+  "neutralStrokeAccessibleSelected": "#0086f0",
+  "neutralStrokeDisabled": "#525252",
+  "redBackground1": "#230308",
+  "redBackground2": "#420610",
+  "redBackground3": "#750b1c",
+  "redBorder1": "#750b1c",
+  "redBorder2": "#962f3f",
+  "redBorderActive": "#ac4f5e",
+  "redForeground1": "#ac4f5e",
+  "redForeground2": "#420610",
+  "redForeground3": "#750b1c",
+  "strokeFocus1": "#000000",
+  "strokeFocus2": "#ffffff",
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": "#3d3d3d",
+  "subtleBackgroundPressed": "#1f1f1f",
+  "subtleBackgroundSelected": "#383838",
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": "transparent",
+  "transparentStrokeDisabled": "transparent",
+  "transparentStrokeInteractive": "transparent",
+}
+`;
+
+exports[`createAppleTheme test 1`] = `
+{
+  "shadow16": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000047",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow16brand": Object {
-    "ambient": Object {
+  "shadow16brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000040",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow2": Object {
-    "ambient": Object {
+  "shadow2": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000047",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow28": Object {
-    "ambient": Object {
+  "shadow28": {
+    "ambient": {
       "blur": 8,
       "color": "#00000066",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#0000007a",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow28brand": Object {
-    "ambient": Object {
+  "shadow28brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#00000040",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow2brand": Object {
-    "ambient": Object {
+  "shadow2brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000040",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow4": Object {
-    "ambient": Object {
+  "shadow4": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000047",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow4brand": Object {
-    "ambient": Object {
+  "shadow4brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000040",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow64": Object {
-    "ambient": Object {
+  "shadow64": {
+    "ambient": {
       "blur": 8,
       "color": "#00000066",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#0000007a",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow64brand": Object {
-    "ambient": Object {
+  "shadow64brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#00000040",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow8": Object {
-    "ambient": Object {
+  "shadow8": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000047",
       "x": 0,
       "y": 4,
     },
   },
-  "shadow8brand": Object {
-    "ambient": Object {
+  "shadow8brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000040",
       "x": 0,
@@ -1729,343 +645,170 @@ Object {
 }
 `;
 
-exports[`createMacOSShadowAliasTokens test mode: dark, isHighContrast: true 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000047",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000047",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000047",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000047",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createMacOSShadowAliasTokens test mode: light, isHighContrast: false 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
+exports[`createAppleTheme test 2`] = `
+{
+  "shadow16": {
+    "ambient": {
       "blur": 2,
       "color": "#0000001f",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000024",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow16brand": Object {
-    "ambient": Object {
+  "shadow16brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000040",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow2": Object {
-    "ambient": Object {
+  "shadow2": {
+    "ambient": {
       "blur": 2,
       "color": "#0000001f",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000024",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow28": Object {
-    "ambient": Object {
+  "shadow28": {
+    "ambient": {
       "blur": 8,
       "color": "#00000033",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#0000003d",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow28brand": Object {
-    "ambient": Object {
+  "shadow28brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#00000040",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow2brand": Object {
-    "ambient": Object {
+  "shadow2brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000040",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow4": Object {
-    "ambient": Object {
+  "shadow4": {
+    "ambient": {
       "blur": 2,
       "color": "#0000001f",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000024",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow4brand": Object {
-    "ambient": Object {
+  "shadow4brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000040",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow64": Object {
-    "ambient": Object {
+  "shadow64": {
+    "ambient": {
       "blur": 8,
       "color": "#00000033",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#0000003d",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow64brand": Object {
-    "ambient": Object {
+  "shadow64brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#00000040",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow8": Object {
-    "ambient": Object {
+  "shadow8": {
+    "ambient": {
       "blur": 2,
       "color": "#0000001f",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000024",
       "x": 0,
       "y": 4,
     },
   },
-  "shadow8brand": Object {
-    "ambient": Object {
+  "shadow8brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000040",
       "x": 0,
@@ -2075,174 +818,1431 @@ Object {
 }
 `;
 
-exports[`createMacOSShadowAliasTokens test mode: light, isHighContrast: true 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
+exports[`createAppleTheme test 3`] = `
+{
+  "shadow16": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000047",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow16brand": Object {
-    "ambient": Object {
+  "shadow16brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000040",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow2": Object {
-    "ambient": Object {
+  "shadow2": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000047",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow28": Object {
-    "ambient": Object {
+  "shadow28": {
+    "ambient": {
       "blur": 8,
       "color": "#00000066",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#0000007a",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow28brand": Object {
-    "ambient": Object {
+  "shadow28brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#00000040",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow2brand": Object {
-    "ambient": Object {
+  "shadow2brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000040",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow4": Object {
-    "ambient": Object {
+  "shadow4": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000047",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow4brand": Object {
-    "ambient": Object {
+  "shadow4brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000040",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow64": Object {
-    "ambient": Object {
+  "shadow64": {
+    "ambient": {
       "blur": 8,
       "color": "#00000066",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#0000007a",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow64brand": Object {
-    "ambient": Object {
+  "shadow64brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#00000040",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow8": Object {
-    "ambient": Object {
+  "shadow8": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000047",
       "x": 0,
       "y": 4,
     },
   },
-  "shadow8brand": Object {
-    "ambient": Object {
+  "shadow8brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000040",
       "x": 0,
       "y": 4,
+    },
+  },
+}
+`;
+
+exports[`createAppleTheme test 4`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`createAppleTheme test 5`] = `
+{
+  "colors": {
+    "accentButtonBackground": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "accentButtonText": "#ffffff",
+    "actionLink": {
+      "semantic": [
+        "linkColor",
+      ],
+    },
+    "actionLinkHovered": {
+      "semantic": [
+        "linkColor",
+      ],
+    },
+    "background": {
+      "semantic": [
+        "windowBackgroundColor",
+      ],
+    },
+    "blockingBackground": {
+      "dynamic": {
+        "dark": "transparent",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#DD4242",
+      },
+    },
+    "bodyDivider": {
+      "semantic": [
+        "separatorColor",
+      ],
+    },
+    "bodyFrameBackground": {
+      "semantic": [
+        "windowBackgroundColor",
+      ],
+    },
+    "bodyFrameDivider": {
+      "semantic": [
+        "separatorColor",
+      ],
+    },
+    "bodyStandoutBackground": {
+      "semantic": [
+        "underPageBackgroundColor",
+      ],
+    },
+    "bodyText": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+    "bodyTextChecked": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+    "brandBackground": "#0078d4",
+    "brandBackground2": "#eff6fc",
+    "brandBackgroundDisabled": "#d1d1d1",
+    "brandBackgroundHover": "#106ebe",
+    "brandBackgroundPressed": "#106ebe",
+    "brandBackgroundSelected": "#005a9e",
+    "brandBackgroundStatic": "#0078d4",
+    "brandForeground1": "#0078d4",
+    "brandForeground1Disabled": "#757575",
+    "brandForeground1Pressed": "#004578",
+    "brandForeground2": "#106ebe",
+    "brandForegroundLink": "#0078d4",
+    "brandForegroundLinkHover": "#106ebe",
+    "brandForegroundLinkPressed": "#004578",
+    "brandForegroundLinkSelected": "#005a9e",
+    "brandStroke1": "#0078d4",
+    "brandStroke2": "#c7e0f4",
+    "brandedBackground": "#0078d4",
+    "brandedBorder": "transparent",
+    "brandedCheckedBackground": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "brandedCheckedContent": "#ffffff",
+    "brandedCheckedHoveredBackground": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "brandedCheckedHoveredContent": "#ffffff",
+    "brandedContent": "#ffffff",
+    "brandedDisabledBackground": "#f0f0f0",
+    "brandedDisabledBorder": "transparent",
+    "brandedDisabledContent": "#757575",
+    "brandedDisabledIcon": "#616161",
+    "brandedFocusedBackground": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "brandedFocusedBorder": "transparent",
+    "brandedFocusedContent": "#ffffff",
+    "brandedFocusedIcon": "#ffffff",
+    "brandedFocusedSecondaryContent": "#ffffff",
+    "brandedHoveredBackground": "#106ebe",
+    "brandedHoveredBorder": "transparent",
+    "brandedHoveredContent": "#ffffff",
+    "brandedHoveredIcon": "#ffffff",
+    "brandedHoveredSecondaryContent": "#ffffff",
+    "brandedIcon": "#ffffff",
+    "brandedPressedBackground": "#106ebe",
+    "brandedPressedBorder": "transparent",
+    "brandedPressedContent": "#ffffff",
+    "brandedPressedIcon": "#ffffff",
+    "brandedPressedSecondaryContent": {
+      "colorWithSystemEffect": {
+        "baseColor": "#ffffff",
+        "systemEffect": "pressed",
+      },
+    },
+    "brandedSecondaryContent": "#ffffff",
+    "buttonBackground": "#ffffff",
+    "buttonBackgroundChecked": "#f5f5f5",
+    "buttonBackgroundCheckedHovered": "#f5f5f5",
+    "buttonBackgroundDisabled": {
+      "colorWithSystemEffect": {
+        "baseColor": "#f5f5f5",
+        "systemEffect": "disabled",
+      },
+    },
+    "buttonBackgroundHovered": "#f5f5f5",
+    "buttonBackgroundPressed": {
+      "colorWithSystemEffect": {
+        "baseColor": "#f5f5f5",
+        "systemEffect": "pressed",
+      },
+    },
+    "buttonBorder": "transparent",
+    "buttonBorderDisabled": "transparent",
+    "buttonBorderFocused": "transparent",
+    "buttonText": "#616161",
+    "buttonTextChecked": "#616161",
+    "buttonTextCheckedHovered": "#616161",
+    "buttonTextDisabled": {
+      "colorWithSystemEffect": {
+        "baseColor": "#616161",
+        "systemEffect": "disabled",
+      },
+    },
+    "buttonTextHovered": "#616161",
+    "buttonTextPressed": {
+      "colorWithSystemEffect": {
+        "baseColor": "#616161",
+        "systemEffect": "pressed",
+      },
+    },
+    "checkboxBackground": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "checkboxBackgroundDisabled": "#f0f0f0",
+    "checkboxBorderColor": "#404040",
+    "checkmarkColor": "#ffffff",
+    "compoundBrandBackground1": "#0078d4",
+    "compoundBrandBackground1Hover": "#106ebe",
+    "compoundBrandBackground1Pressed": "#004578",
+    "compoundBrandForeground1": "#0078d4",
+    "compoundBrandForeground1Hover": "#106ebe",
+    "compoundBrandForeground1Pressed": "#004578",
+    "compoundBrandStroke1": "#0078d4",
+    "compoundBrandStroke1Hover": "#106ebe",
+    "compoundBrandStroke1Pressed": "#004578",
+    "defaultBackground": "#ffffff",
+    "defaultBorder": "#d6d6d6",
+    "defaultCheckedBackground": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "defaultCheckedContent": "#ffffff",
+    "defaultCheckedHoveredBackground": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "defaultCheckedHoveredContent": "#ffffff",
+    "defaultContent": "#000000",
+    "defaultDisabledBackground": "#ffffff",
+    "defaultDisabledBorder": "#d6d6d6",
+    "defaultDisabledContent": "#757575",
+    "defaultDisabledIcon": "#616161",
+    "defaultDisabledSecondaryContent": "#757575",
+    "defaultFocusedBackground": "#ffffff",
+    "defaultFocusedBorder": "#d6d6d6",
+    "defaultFocusedContent": "#000000",
+    "defaultFocusedIcon": "#616161",
+    "defaultHoveredBackground": "#f5f5f5",
+    "defaultHoveredBorder": "#d6d6d6",
+    "defaultHoveredContent": "#616161",
+    "defaultHoveredIcon": "#616161",
+    "defaultHoveredSecondaryContent": "#616161",
+    "defaultIcon": "#616161",
+    "defaultPressedBackground": "#ebebeb",
+    "defaultPressedBorder": "#d6d6d6",
+    "defaultPressedContent": "#000000",
+    "defaultPressedIcon": "#616161",
+    "defaultPressedSecondaryContent": "#ffffff",
+    "defaultStateBackground": {
+      "semantic": [
+        "controlBackgroundColor",
+      ],
+    },
+    "disabledBackground": "#E1E1E1",
+    "disabledBodySubtext": {
+      "semantic": [
+        "quaternaryLabelColor",
+      ],
+    },
+    "disabledBodyText": {
+      "semantic": [
+        "tertiaryLabelColor",
+      ],
+    },
+    "disabledSubtext": {
+      "semantic": [
+        "quaternaryLabelColor",
+      ],
+    },
+    "disabledText": {
+      "semantic": [
+        "tertiaryLabelColor",
+      ],
+    },
+    "errorBackground": {
+      "dynamic": {
+        "dark": "transparent",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#DD4242",
+      },
+    },
+    "errorText": {
+      "dynamic": {
+        "dark": "transparent",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#D92C2C",
+      },
+    },
+    "focusBorder": "transparent",
+    "ghostBackground": "transparent",
+    "ghostBorder": "transparent",
+    "ghostCheckedBackground": "transparent",
+    "ghostCheckedContent": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostCheckedHoveredBackground": "transparent",
+    "ghostCheckedHoveredBorder": "transparent",
+    "ghostCheckedHoveredContent": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostContent": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostDisabledBackground": "transparent",
+    "ghostDisabledBorder": "transparent",
+    "ghostDisabledContent": "#757575",
+    "ghostDisabledIcon": "#757575",
+    "ghostFocusedBackground": "transparent",
+    "ghostFocusedBorder": "transparent",
+    "ghostFocusedContent": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostFocusedIcon": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostFocusedSecondaryContent": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostHoveredBackground": "transparent",
+    "ghostHoveredBorder": "transparent",
+    "ghostHoveredContent": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostHoveredIcon": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostHoveredSecondaryContent": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostIcon": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "ghostPressedBackground": "transparent",
+    "ghostPressedBorder": "transparent",
+    "ghostPressedContent": "#004578",
+    "ghostPressedIcon": "#616161",
+    "ghostPressedSecondaryContent": {
+      "colorWithSystemEffect": {
+        "baseColor": {
+          "dynamic": {
+            "dark": "#1890F1",
+            "highContrastDark": undefined,
+            "highContrastLight": undefined,
+            "light": "#0078D4",
+          },
+        },
+        "systemEffect": "deepPressed",
+      },
+    },
+    "ghostSecondaryContent": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "inputBackground": {
+      "semantic": [
+        "textBackgroundColor",
+      ],
+    },
+    "inputBackgroundChecked": {
+      "semantic": [
+        "textBackgroundColor",
+      ],
+    },
+    "inputBackgroundCheckedHovered": {
+      "semantic": [
+        "textBackgroundColor",
+      ],
+    },
+    "inputBorder": {
+      "semantic": [
+        "separatorColor",
+      ],
+    },
+    "inputBorderHovered": {
+      "semantic": [
+        "separatorColor",
+      ],
+    },
+    "inputFocusBorderAlt": {
+      "semantic": [
+        "keyboardFocusIndicatorColor",
+      ],
+    },
+    "inputForegroundChecked": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "inputPlaceholderText": {
+      "semantic": [
+        "placeholderTextColor",
+      ],
+    },
+    "inputText": {
+      "semantic": [
+        "textColor",
+      ],
+    },
+    "inputTextHovered": {
+      "semantic": [
+        "textColor",
+      ],
+    },
+    "link": {
+      "semantic": [
+        "linkColor",
+      ],
+    },
+    "linkHovered": {
+      "semantic": [
+        "linkColor",
+      ],
+    },
+    "linkPressed": {
+      "semantic": [
+        "selectedControlColor",
+      ],
+    },
+    "listBackground": "transparent",
+    "listHeaderBackgroundHovered": {
+      "semantic": [
+        "headerTextColor",
+      ],
+    },
+    "listHeaderBackgroundPressed": {
+      "semantic": [
+        "headerTextColor",
+      ],
+    },
+    "listItemBackgroundChecked": "transparent",
+    "listItemBackgroundCheckedHovered": "transparent",
+    "listItemBackgroundHovered": "transparent",
+    "listText": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+    "menuBackground": "transparent",
+    "menuDivider": {
+      "semantic": [
+        "separatorColor",
+      ],
+    },
+    "menuHeader": {
+      "semantic": [
+        "headerTextColor",
+      ],
+    },
+    "menuIcon": "#616161",
+    "menuItemBackgroundHovered": {
+      "semantic": [
+        "controlAccentColor",
+      ],
+    },
+    "menuItemBackgroundPressed": {
+      "colorWithSystemEffect": {
+        "baseColor": {
+          "semantic": [
+            "controlAccentColor",
+          ],
+        },
+        "systemEffect": "pressed",
+      },
+    },
+    "menuItemText": {
+      "semantic": [
+        "labelColor",
+      ],
+    },
+    "menuItemTextHovered": "white",
+    "neutralBackground1": "#ffffff",
+    "neutralBackground1Hover": "#f5f5f5",
+    "neutralBackground1Pressed": "#ebebeb",
+    "neutralBackground1Selected": "#ebebeb",
+    "neutralBackground2": "#ffffff",
+    "neutralBackground2Hover": "#f0f0f0",
+    "neutralBackground2Pressed": "#ebebeb",
+    "neutralBackground2Selected": "#e6e6e6",
+    "neutralBackground3": "#f5f5f5",
+    "neutralBackground3Hover": "#ebebeb",
+    "neutralBackground3Pressed": "#d6d6d6",
+    "neutralBackground3Selected": "#e0e0e0",
+    "neutralBackground4": "#f0f0f0",
+    "neutralBackground4Hover": "#fafafa",
+    "neutralBackground4Pressed": "#f5f5f5",
+    "neutralBackground4Selected": "#ffffff",
+    "neutralBackground5": "#ebebeb",
+    "neutralBackground5Hover": "#f5f5f5",
+    "neutralBackground5Pressed": "#f0f0f0",
+    "neutralBackground5Selected": "#fafafa",
+    "neutralBackground6": "#e6e6e6",
+    "neutralBackgroundDisabled": "#f0f0f0",
+    "neutralBackgroundInverted": "#616161",
+    "neutralForeground1": "#242424",
+    "neutralForeground1Hover": "#242424",
+    "neutralForeground1Pressed": "#242424",
+    "neutralForeground1Selected": "#242424",
+    "neutralForeground2": "#000000",
+    "neutralForeground2BrandHover": "#106ebe",
+    "neutralForeground2BrandPressed": "#004578",
+    "neutralForeground2BrandSelected": "#005a9e",
+    "neutralForeground2Hover": "#242424",
+    "neutralForeground2Pressed": "#242424",
+    "neutralForeground2Selected": "#242424",
+    "neutralForeground3": "#616161",
+    "neutralForeground3BrandHover": "#106ebe",
+    "neutralForeground3BrandPressed": "#004578",
+    "neutralForeground3BrandSelected": "#005a9e",
+    "neutralForeground3Hover": "#424242",
+    "neutralForeground3Pressed": "#424242",
+    "neutralForeground3Selected": "#424242",
+    "neutralForeground4": "#808080",
+    "neutralForegroundDisabled": "#757575",
+    "neutralForegroundInverted": "#ffffff",
+    "neutralForegroundInvertedLink": "#ffffff",
+    "neutralForegroundInvertedLinkHover": "#ffffff",
+    "neutralForegroundInvertedLinkPressed": "#ffffff",
+    "neutralForegroundInvertedLinkSelected": "#ffffff",
+    "neutralForegroundOnBrand": "#ffffff",
+    "neutralForegroundOnBrandHover": "#ffffff",
+    "neutralForegroundOnBrandPressed": "#ffffff",
+    "neutralForegroundOnBrandSelected": "#ffffff",
+    "neutralStencil1": "#e6e6e6",
+    "neutralStencil2": "#fafafa",
+    "neutralStroke1": "#f0f0f0",
+    "neutralStroke1Hover": "#c7c7c7",
+    "neutralStroke1Pressed": "#b3b3b3",
+    "neutralStroke1Selected": "#bdbdbd",
+    "neutralStroke2": "#d6d6d6",
+    "neutralStroke3": "#f0f0f0",
+    "neutralStrokeAccessible": "#616161",
+    "neutralStrokeAccessibleHover": "#575757",
+    "neutralStrokeAccessiblePressed": "#4d4d4d",
+    "neutralStrokeAccessibleSelected": "#0078d4",
+    "neutralStrokeDisabled": "#e0e0e0",
+    "personaActivityGlow": "#D13438",
+    "personaActivityRing": "#ffffff",
+    "primaryButtonBackground": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "primaryButtonBackgroundDisabled": "#f0f0f0",
+    "primaryButtonBackgroundHovered": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "primaryButtonBackgroundPressed": "#106ebe",
+    "primaryButtonBorder": "transparent",
+    "primaryButtonBorderFocused": "transparent",
+    "primaryButtonText": "#ffffff",
+    "primaryButtonTextDisabled": "#757575",
+    "primaryButtonTextHovered": "#ffffff",
+    "primaryButtonTextPressed": "#ffffff",
+    "redBackground1": "#f9f0f2",
+    "redBackground2": "#d69ca5",
+    "redBackground3": "#750b1c",
+    "redBorder1": "#d69ca5",
+    "redBorder2": "#750b1c",
+    "redBorderActive": "#750b1c",
+    "redForeground1": "#690a19",
+    "redForeground2": "#d69ca5",
+    "redForeground3": "#750b1c",
+    "smallInputBorder": {
+      "semantic": [
+        "separatorColor",
+      ],
+    },
+    "strokeFocus1": "#ffffff",
+    "strokeFocus2": "#000000",
+    "subText": {
+      "semantic": [
+        "secondaryLabelColor",
+      ],
+    },
+    "subtleBackground": "transparent",
+    "subtleBackgroundHover": "#f5f5f5",
+    "subtleBackgroundPressed": "#e0e0e0",
+    "subtleBackgroundSelected": "#ebebeb",
+    "successBackground": {
+      "dynamic": {
+        "dark": "#0D9D3D",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#27AC22",
+      },
+    },
+    "transparentBackground": "transparent",
+    "transparentBackgroundHover": "transparent",
+    "transparentBackgroundPressed": "transparent",
+    "transparentBackgroundSelected": "transparent",
+    "transparentStroke": "transparent",
+    "transparentStrokeDisabled": "transparent",
+    "transparentStrokeInteractive": "transparent",
+    "variantBorder": {
+      "semantic": [
+        "separatorColor",
+      ],
+    },
+    "variantBorderHovered": {
+      "semantic": [
+        "separatorColor",
+      ],
+    },
+    "warningBackground": {
+      "dynamic": {
+        "dark": "#FFC328",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD335",
+      },
+    },
+    "warningHighlight": {
+      "dynamic": {
+        "dark": "#E0AB24",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD94E",
+      },
+    },
+    "warningText": {
+      "dynamic": {
+        "dark": "#FFC328",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD335",
+      },
+    },
+  },
+  "components": {
+    "Button": {
+      "content": {
+        "fontSize": 15,
+      },
+      "icon": {
+        "style": {
+          "marginEnd": 10,
+        },
+      },
+      "root": {
+        "style": {
+          "margin": 8,
+        },
+      },
+      "stack": {
+        "style": {
+          "minHeight": 28,
+          "paddingVertical": 4.5,
+        },
+      },
+      "tokens": {
+        "borderRadius": 6,
+        "borderWidth": 1,
+        "minHeight": 28,
+        "minWidth": 72,
+      },
+    },
+    "Checkbox": {
+      "_precedence": [
+        "disabled",
+        "boxAtEnd",
+        "checked",
+      ],
+      "checkbox": {
+        "style": {
+          "borderRadius": 3,
+          "borderStyle": "solid",
+          "borderWidth": 0.5,
+          "marginEnd": 5,
+          "minHeight": 14,
+          "minWidth": 14,
+        },
+      },
+      "checkmarkIcon": {
+        "height": 10,
+        "style": {
+          "marginHorizontal": 2,
+          "marginVertical": 2,
+        },
+        "width": 10,
+      },
+    },
+    "RNFText": {
+      "tokens": {
+        "variant": "bodyStandard",
+      },
+    },
+  },
+  "host": {
+    "appearance": "dynamic",
+  },
+  "shadows": {
+    "shadow16": {
+      "ambient": {
+        "blur": 2,
+        "color": "#0000001f",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 16,
+        "color": "#00000024",
+        "x": 0,
+        "y": 8,
+      },
+    },
+    "shadow16brand": {
+      "ambient": {
+        "blur": 2,
+        "color": "#0000004d",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 16,
+        "color": "#00000040",
+        "x": 0,
+        "y": 8,
+      },
+    },
+    "shadow2": {
+      "ambient": {
+        "blur": 2,
+        "color": "#0000001f",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 2,
+        "color": "#00000024",
+        "x": 0,
+        "y": 1,
+      },
+    },
+    "shadow28": {
+      "ambient": {
+        "blur": 8,
+        "color": "#00000033",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 28,
+        "color": "#0000003d",
+        "x": 0,
+        "y": 14,
+      },
+    },
+    "shadow28brand": {
+      "ambient": {
+        "blur": 8,
+        "color": "#0000004d",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 28,
+        "color": "#00000040",
+        "x": 0,
+        "y": 14,
+      },
+    },
+    "shadow2brand": {
+      "ambient": {
+        "blur": 2,
+        "color": "#0000004d",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 2,
+        "color": "#00000040",
+        "x": 0,
+        "y": 1,
+      },
+    },
+    "shadow4": {
+      "ambient": {
+        "blur": 2,
+        "color": "#0000001f",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 4,
+        "color": "#00000024",
+        "x": 0,
+        "y": 2,
+      },
+    },
+    "shadow4brand": {
+      "ambient": {
+        "blur": 2,
+        "color": "#0000004d",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 4,
+        "color": "#00000040",
+        "x": 0,
+        "y": 2,
+      },
+    },
+    "shadow64": {
+      "ambient": {
+        "blur": 8,
+        "color": "#00000033",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 64,
+        "color": "#0000003d",
+        "x": 0,
+        "y": 32,
+      },
+    },
+    "shadow64brand": {
+      "ambient": {
+        "blur": 8,
+        "color": "#0000004d",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 64,
+        "color": "#00000040",
+        "x": 0,
+        "y": 32,
+      },
+    },
+    "shadow8": {
+      "ambient": {
+        "blur": 2,
+        "color": "#0000001f",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 8,
+        "color": "#00000024",
+        "x": 0,
+        "y": 4,
+      },
+    },
+    "shadow8brand": {
+      "ambient": {
+        "blur": 2,
+        "color": "#0000004d",
+        "x": 0,
+        "y": 0,
+      },
+      "key": {
+        "blur": 8,
+        "color": "#00000040",
+        "x": 0,
+        "y": 4,
+      },
+    },
+  },
+  "spacing": {
+    "l1": "20px",
+    "l2": "24px",
+    "m": "16px",
+    "s1": "12px",
+    "s2": "8px",
+  },
+  "typography": {
+    "families": {
+      "cursive": "System",
+      "monospace": "System",
+      "numeric": "System",
+      "primary": "System",
+      "sansSerif": "System",
+      "secondary": "System",
+      "serif": "System",
+    },
+    "sizes": {
+      "body": 13,
+      "caption": 10,
+      "header": 20,
+      "hero": 22,
+      "heroLarge": 26,
+      "secondary": 11,
+      "subheader": 16,
+    },
+    "variants": {
+      "body1": {
+        "face": "primary",
+        "size": "secondary",
+        "weight": "400",
+      },
+      "body1Strong": {
+        "face": "primary",
+        "size": "secondary",
+        "weight": "600",
+      },
+      "body2": {
+        "face": "primary",
+        "size": "body",
+        "weight": "400",
+      },
+      "body2Strong": {
+        "face": "primary",
+        "size": "body",
+        "weight": "600",
+      },
+      "bodySemibold": {
+        "face": "primary",
+        "size": "body",
+        "weight": "600",
+      },
+      "bodyStandard": {
+        "face": "primary",
+        "size": "body",
+        "weight": "400",
+      },
+      "caption1": {
+        "face": "primary",
+        "size": "caption",
+        "weight": "500",
+      },
+      "captionStandard": {
+        "face": "primary",
+        "size": "caption",
+        "weight": "500",
+      },
+      "display": {
+        "face": "primary",
+        "size": "heroLarge",
+        "weight": "700",
+      },
+      "headerSemibold": {
+        "face": "primary",
+        "size": "header",
+        "weight": "800",
+      },
+      "headerStandard": {
+        "face": "primary",
+        "size": "header",
+        "weight": "700",
+      },
+      "heroLargeSemibold": {
+        "face": "primary",
+        "size": "heroLarge",
+        "weight": "700",
+      },
+      "heroLargeStandard": {
+        "face": "primary",
+        "size": "heroLarge",
+        "weight": "400",
+      },
+      "heroSemibold": {
+        "face": "primary",
+        "size": "hero",
+        "weight": "700",
+      },
+      "heroStandard": {
+        "face": "primary",
+        "size": "hero",
+        "weight": "400",
+      },
+      "largeTitle": {
+        "face": "primary",
+        "size": "heroLarge",
+        "weight": "400",
+      },
+      "secondarySemibold": {
+        "face": "primary",
+        "size": "secondary",
+        "weight": "600",
+      },
+      "secondaryStandard": {
+        "face": "primary",
+        "size": "secondary",
+        "weight": "400",
+      },
+      "subheaderSemibold": {
+        "face": "primary",
+        "size": "subheader",
+        "weight": "600",
+      },
+      "subheaderStandard": {
+        "face": "primary",
+        "size": "subheader",
+        "weight": "400",
+      },
+      "subtitle1": {
+        "face": "primary",
+        "size": "header",
+        "weight": "700",
+      },
+      "subtitle1Strong": {
+        "face": "primary",
+        "size": "header",
+        "weight": "800",
+      },
+      "subtitle2": {
+        "face": "primary",
+        "size": "subheader",
+        "weight": "400",
+      },
+      "subtitle2Strong": {
+        "face": "primary",
+        "size": "subheader",
+        "weight": "600",
+      },
+      "title1": {
+        "face": "primary",
+        "size": "hero",
+        "weight": "400",
+      },
+      "title1Strong": {
+        "face": "primary",
+        "size": "hero",
+        "weight": "700",
+      },
+    },
+    "weights": {
+      "black": "900",
+      "bold": "700",
+      "heavy": "800",
+      "light": "300",
+      "medium": "500",
+      "regular": "400",
+      "semiBold": "600",
+      "thin": "200",
+      "ultralight": "100",
     },
   },
 }

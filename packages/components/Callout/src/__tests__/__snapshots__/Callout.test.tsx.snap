@@ -3,7 +3,7 @@
 exports[`Callout default props 1`] = `
 <RCTCallout
   style={
-    Object {
+    {
       "backgroundColor": "#faf9f8",
       "borderColor": "#ffffff",
       "borderWidth": 1,

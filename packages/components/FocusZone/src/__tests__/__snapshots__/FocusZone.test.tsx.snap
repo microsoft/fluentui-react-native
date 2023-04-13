@@ -27,22 +27,22 @@ exports[`FocusZone No Props One child 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -77,22 +77,22 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -120,22 +120,22 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -163,22 +163,22 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -213,22 +213,22 @@ exports[`FocusZone No Props Two children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -256,22 +256,22 @@ exports[`FocusZone No Props Two children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -309,22 +309,22 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -352,22 +352,22 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -395,22 +395,22 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -445,22 +445,22 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -488,22 +488,22 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -531,22 +531,22 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -582,22 +582,22 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -625,22 +625,22 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -668,22 +668,22 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -719,22 +719,22 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -762,22 +762,22 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -805,22 +805,22 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -855,22 +855,22 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -898,22 +898,22 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -941,22 +941,22 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -992,22 +992,22 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -1035,22 +1035,22 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -1078,22 +1078,22 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
