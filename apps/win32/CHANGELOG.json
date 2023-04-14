@@ -2,6 +2,84 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 12 Apr 2023 18:42:22 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.32.66",
+      "version": "0.32.66",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.141.0",
+            "commit": "42f64ddb244764adf58f95b463b2638d0989b148"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Apr 2023 10:42:50 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.32.65",
+      "version": "0.32.65",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.140.0",
+            "commit": "b3508cb0e0e5cffc32aa329cd15494b0ac3fdbc2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 19:48:24 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.32.64",
+      "version": "0.32.64",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c",
+            "comment": "align-deps: Fix warnigns and issues"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.139.0",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 16:10:16 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.32.63",
+      "version": "0.32.63",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "c54c613a1657dfa8f246dd1cbf75913b2a41f28b",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "4b07fa13ee8b829a0f509c99a042b24c450a1bbd",
+            "comment": "Update appium beta version to version that doesn't use jsdoc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.138.0",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Mar 2023 12:35:36 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.32.62",
       "version": "0.32.62",

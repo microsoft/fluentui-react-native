@@ -1,8 +1,12 @@
 #import "FRNAppearanceAdditions.h"
+#import "RCTUIManager.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTConstants.h>
 #import <React/RCTUtils.h>
+#import <React/UIView+React.h>
+#import <React/RCTRootView.h>
+#import <React/RCTBridge+Private.h>
 
 NSString *const FRNAppearanceSizeClassCompact = @"compact";
 NSString *const FRNAppearanceSizeClassRegular = @"regular";
@@ -76,18 +80,35 @@ NSString *RCTAccessibilityContrastPreference(UITraitCollection *traitCollection)
     return YES;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass)
-{
+/**
+ * When initializing this native module, not all the information required to consistently get all correct initial traits is accessible.
+ * In order to ensure that the correct traits are always be returned the first time they are reuqested, a react tag for a view in that window can
+ * be provided to the native module.
+ *
+ * This initialization step may be needed when accessing traits that can be different in different windows, which include horizontal size class and user interface level.
+ * This initialization step is not necessary if the only traits that are accessed are system wide traits common to all windows, such as accessibility contrast.
+ */
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(initializeTraitCollection:(id)reactTag) {
+    RCTUnsafeExecuteOnMainQueueSync(^{
+        if ([reactTag isKindOfClass:[NSNumber class]]) {
+            UIView *view = [[[self bridge] uiManager] viewForReactTag:reactTag];
+            self->_horizontalSizeClass = RCTHorizontalSizeClassPreference([view traitCollection]);
+            self->_userInterfaceLevel = RCTUserInterfaceLevelPreference([view traitCollection]);
+            self->_accessibilityContrastOption = RCTAccessibilityContrastPreference([view traitCollection]);
+        }
+    });
+    return nil;
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(horizontalSizeClass) {
     return _horizontalSizeClass;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel)
-{
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(userInterfaceLevel) {
     return _userInterfaceLevel;
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
-{
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption) {
     return _accessibilityContrastOption;
 }
 
@@ -97,35 +118,43 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
     return @[ @"appearanceChanged" ];
 }
 
-- (dispatch_queue_t)methodQueue
-{
+- (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
 - (void)startObserving {
     _hasListeners = YES;
     
-    // Note that [UITraitCollection currentTraitCollection] always returns the same default trait collection,
-    // presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
-    // (which happens when a view gets added to the view hierachy). In order to get the right trait collection,
-    // we need to access a view that's been added to the view hierarchy
-    UIViewController *viewControllerWithInitialTraitCollection = RCTPresentedViewController();
-    UITraitCollection *initialTraitCollection;
-    
-    if (viewControllerWithInitialTraitCollection != nil) {
-        initialTraitCollection = [viewControllerWithInitialTraitCollection traitCollection];
-    } else {
-        initialTraitCollection = [UITraitCollection currentTraitCollection];
-    }
-    
-    _horizontalSizeClass = RCTHorizontalSizeClassPreference(initialTraitCollection);
-    _userInterfaceLevel = RCTUserInterfaceLevelPreference(initialTraitCollection);
-    _accessibilityContrastOption = RCTAccessibilityContrastPreference(initialTraitCollection);
-    
+    UITraitCollection *attemptedInitialTraitCollection = [self attemptTraitCollectionInitialization];
+
+    _horizontalSizeClass = RCTHorizontalSizeClassPreference(attemptedInitialTraitCollection);
+    _userInterfaceLevel = RCTUserInterfaceLevelPreference(attemptedInitialTraitCollection);
+    _accessibilityContrastOption = RCTAccessibilityContrastPreference(attemptedInitialTraitCollection);
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appearanceChanged:)
                                                  name:RCTUserInterfaceStyleDidChangeNotification
                                                object:nil];
+}
+
+/**
+ When this native module is first initialized, we don't have access to the information necessary to consistently retrieve all the right traits.
+ We should still attempt to initialize the traits with the right values with the information we do have access to.
+ 
+ The traits retrieved from RCTPresentedViewController() should be correct for non-multiwindow scenarios.
+ 
+ The traits retrieved from [UITraitCollection currentTraitCollection] will always be the same default trait collection,
+ presumably because FRNAppearanceAdditions isn't a view, so it never gets updated with the right traitCollection
+ (which happens when a view gets added to the view hierachy).
+ */
+- (UITraitCollection *)attemptTraitCollectionInitialization {
+    UIViewController *presentedViewControllerTraitCollection = RCTPresentedViewController();
+
+    if (presentedViewControllerTraitCollection != nil) {
+        return [presentedViewControllerTraitCollection traitCollection];
+    } else {
+        return [UITraitCollection currentTraitCollection];
+    }
 }
 
 - (void)stopObserving {
@@ -137,9 +166,20 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(accessibilityContrastOption)
 
 - (void)appearanceChanged:(NSNotification *)notification {
     if (_hasListeners) {
+        RCTBridge *notificationBridge = [[notification object] bridge];
+        if (![notificationBridge isKindOfClass:[RCTBridge class]]) {
+            return;
+        }
+
+        // Don't send the appearanceChanged event if the notification didn't originate from the same react native instance
+        RCTBridge *currentBridge = [[self bridge] parentBridge];
+        if (![currentBridge isEqual:notificationBridge]) {
+            return;
+        }
+
         UITraitCollection *traitCollection = [[notification userInfo] valueForKey:RCTUserInterfaceStyleDidChangeNotificationTraitCollectionKey];
         if (![traitCollection isKindOfClass:[UITraitCollection class]]) {
-            traitCollection = nil;
+            return;
         }
 
         NSString *horizontalSizeClass = RCTHorizontalSizeClassPreference(traitCollection);

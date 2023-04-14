@@ -1,8 +1,43 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Tue, 28 Mar 2023 12:35:36 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Apr 2023 18:42:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.66
+
+Wed, 12 Apr 2023 18:42:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.141.0
+
+## 0.32.65
+
+Tue, 11 Apr 2023 10:42:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.140.0
+
+## 0.32.64
+
+Mon, 10 Apr 2023 19:48:24 GMT
+
+### Patches
+
+- align-deps: Fix warnigns and issues (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.139.0
+
+## 0.32.63
+
+Mon, 10 Apr 2023 16:10:16 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Update appium beta version to version that doesn't use jsdoc (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.138.0
 
 ## 0.32.62
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
 
-import { Callout } from '@fluentui-react-native/callout';
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { compressible, mergeProps, patchTokens, useFluentTheme } from '@fluentui-react-native/framework';
 
@@ -10,6 +9,7 @@ import { menuPopoverName } from './MenuPopover.types';
 import { useMenuPopoverTokens } from './MenuPopoverTokens';
 import { useMenuPopover } from './useMenuPopover';
 import { useMenuContext } from '../context';
+import { MenuCallout } from '../MenuCallout';
 
 export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
   (props: MenuPopoverProps, useTokens: UseTokens<MenuPopoverTokens>) => {
@@ -47,7 +47,11 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
             }
           : state.innerView;
       const content = React.createElement(View, innerViewProps, children);
-      return <Callout {...mergedProps}>{content}</Callout>;
+      return (
+        <MenuCallout tokens={tokens} {...mergedProps}>
+          {content}
+        </MenuCallout>
+      );
     };
   },
   useMenuPopoverTokens,

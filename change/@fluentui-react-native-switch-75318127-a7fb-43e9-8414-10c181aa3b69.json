@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update Switch docs to reflect latest changes",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
