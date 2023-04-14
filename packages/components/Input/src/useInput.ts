@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { createIconProps } from '@fluentui-react-native/icon';
+import type { IconProps } from '@fluentui-react-native/icon';
 import { usePressableState } from '@fluentui-react-native/interactive-hooks';
 
 import DismissSvg from './assets/dismissIcon.svg'; // Default accessory icon
@@ -20,13 +22,31 @@ export const useInput = (props: InputProps): InputInfo => {
     defaultValue,
     textInputProps,
     placeholder,
+    icon,
+    focusedStateIcon,
+    componentRef,
+    error,
     ...rest
   } = props;
   const pressable = usePressableState({ onBlur, onFocus });
   const [text, setText] = React.useState<string>(defaultValue ? defaultValue : '');
+  const defaultIconProps = createIconProps(icon);
+  const focusedIconProps = createIconProps(focusedStateIcon);
+  const [iconProps, setIconProps] = React.useState<IconProps>(!(pressable.state.focused && !error) ? defaultIconProps : focusedIconProps);
+
   return {
     props: {
       ...pressable.props,
+      ...(focusedStateIcon && {
+        onFocus: (e) => {
+          setIconProps(focusedIconProps);
+          pressable.props.onFocus && pressable.props.onFocus(e);
+        },
+        onBlur: (e) => {
+          setIconProps(defaultIconProps);
+          pressable.props.onBlur && pressable.props.onBlur(e);
+        },
+      }),
       label,
       secondaryText,
       assistiveText,
@@ -46,7 +66,15 @@ export const useInput = (props: InputProps): InputInfo => {
           !value && setText(text);
           onChange && onChange(text);
         },
+        ref: componentRef,
       },
+      icon,
+      focusedStateIcon,
+      iconProps,
+      defaultIconProps,
+      focusedIconProps,
+      setIconProps,
+      error,
       ...rest,
     },
     state: { ...pressable.state, text: value ? value : text },

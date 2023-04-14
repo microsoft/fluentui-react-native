@@ -13,6 +13,8 @@ exports[`Input component tests Input default 1`] = `
       "paddingHorizontal": 16,
     }
   }
+  defaultIconProps={null}
+  focusedIconProps={null}
   keyboardShouldPersistTaps="handled"
   onBlur={[Function]}
   onFocus={[Function]}
@@ -21,6 +23,7 @@ exports[`Input component tests Input default 1`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   scrollEnabled={false}
+  setIconProps={[Function]}
   setText={[Function]}
 >
   <View>

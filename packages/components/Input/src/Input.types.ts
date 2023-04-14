@@ -1,4 +1,4 @@
-import type { ColorValue, TextInputProps, ViewStyle, ViewProps, ScrollViewProps, KeyboardTypeOptions } from 'react-native';
+import type { ColorValue, TextInputProps, ViewStyle, ViewProps, ScrollViewProps, KeyboardTypeOptions, TextInput } from 'react-native';
 
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
@@ -129,8 +129,20 @@ export interface InputTokens extends InputCoreTokens {
 export interface InputProps extends PressableFocusProps {
   /*
    * Source URL or name of the icon to show on the input.
+   *
+   * Based on fluent guidelines this icon should be an "outline" icon.
+   * FocusedStateIcon is applied onFocus and should be a "filled" icon.
    */
   icon?: IconSourcesType;
+
+  /*
+   * Source URL or name of the icon to show when the input is focused.
+   * Can be used only when the default icon is also passed.
+   *
+   * Based on fluent guidelines this icon should be a "filled" icon.
+   * While the default icon should be an "outline" icon.
+   */
+  focusedStateIcon?: IconSourcesType;
 
   /**
    * The width of the input.
@@ -220,10 +232,15 @@ export interface InputProps extends PressableFocusProps {
    * @default always
    */
   keyboardShouldPersistTaps?: boolean | 'always' | 'never' | 'handled' | undefined;
+
+  /**
+   * A RefObject to access the text input interface. Use this to access the public methods and properties of the component.
+   */
+  componentRef?: React.RefObject<TextInput>;
 }
 
 export interface InputInfo {
-  props: InputProps & React.ComponentPropsWithRef<any>;
+  props: InputProps & { iconProps: IconProps } & React.ComponentPropsWithRef<any>;
   state: FocusState & { text: string };
 }
 

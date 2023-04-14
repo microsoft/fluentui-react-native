@@ -49,7 +49,6 @@ export const Input = compose<InputType>({
   },
   useRender: (userProps: InputProps, useSlots: UseSlots<InputType>) => {
     const input = useInput(userProps);
-    const iconProps = createIconProps(input.props.icon);
     const accessoryIconProps = createIconProps(input.props.accessoryIcon);
     const Slots = useSlots(userProps, (layer) => inputLookup(layer, input.state, userProps));
 
@@ -64,6 +63,7 @@ export const Input = compose<InputType>({
         error,
         accessoryButtonOnPress,
         keyboardShouldPersistTaps,
+        iconProps,
         onChange, // Remove out of mergedProps
         ...mergedProps
       } = mergeProps(input.props, final);
