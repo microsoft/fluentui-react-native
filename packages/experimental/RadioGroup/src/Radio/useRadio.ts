@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type { AccessibilityState } from 'react-native';
-import { Platform } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
 import { usePressableState, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
@@ -88,7 +87,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     labelPositionBelow: labelPosition === 'below',
   };
 
-  const shouldAnnounceUnselected = Platform.OS == 'android';
   return {
     props: {
       value,
@@ -99,7 +97,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       ref: buttonRef,
       ...pressable.props,
       accessibilityRole: 'radio',
-      accessibilityLabel: (shouldAnnounceUnselected && state.selected ? '' : 'unselected') + (accessibilityLabel ?? label),
+      accessibilityLabel: accessibilityLabel ?? label,
       accessibilityHint: accessibilityHint ?? subtext,
       accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
