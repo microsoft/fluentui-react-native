@@ -15,6 +15,7 @@ export interface MenuProps extends MenuListProps {
 
   /**
    * How much delay to have between hover in and showing the menu, in ms.
+   * @platform win32
    */
   hoverDelay?: number;
 
@@ -30,6 +31,7 @@ export interface MenuProps extends MenuListProps {
 
   /*
    * Opens the menu on hovering over the trigger
+   * @platform win32
    */
   openOnHover?: boolean;
 

@@ -33,6 +33,7 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
 
   /**
    * Amount of space in pixels at the end of the item control that is reserved to align the item's text with other items which have checkmarks
+   * @platform android
    */
   marginEndForCheckedAndroid?: number;
 
