@@ -179,7 +179,7 @@ export interface MenuProps extends MenuListProps {
 
   /**
    * How much delay to have between hover in and showing the menu, in ms.
-   * @platform win32
+   * @platform win32, macOS
    */
   hoverDelay?: number;
 
@@ -195,7 +195,7 @@ export interface MenuProps extends MenuListProps {
 
   /*
    * Opens the menu on hovering over the trigger
-   * @platform win32
+   * @platform win32, macOS
    */
   openOnHover?: boolean;
 
@@ -260,7 +260,7 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
    *
    * This option is useful for programmatically generated items to provide
    * text for options that end up having tuncated text.
-   * @platform win32
+   * @platform win32, macOS
    */
   hasTooltips?: boolean;
 
