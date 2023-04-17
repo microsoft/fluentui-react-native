@@ -113,6 +113,11 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
    * The label's top margin.
    */
   spacingLabelTop?: number;
+
+  /**
+   * The accessory icon/text's visibility. Used to hide when text is empty.
+   */
+  accessoryViewVisibility?: 'none' | 'flex' | undefined;
 }
 
 export interface InputTokens extends InputCoreTokens {

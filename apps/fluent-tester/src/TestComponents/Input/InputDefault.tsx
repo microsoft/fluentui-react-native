@@ -23,13 +23,16 @@ export const InputDefault: React.FunctionComponent = () => {
         error={error}
         icon={outlineIconProps}
         focusedStateIcon={filledIconProps}
-        placeholder="Only text up to 5 characters!"
+        textInputProps={{ autoFocus: true }}
+        placeholder="Only text upto 5 characters!"
+        assistiveText="Assistive Text"
         label="Label"
-        onChange={(text) => {
+        onChange={(text: string) => {
           if (text.length > 5) setError('Text must be less than 5 characters!');
           else setError('');
         }}
       />
+      <Input icon={outlineIconProps} placeholder="No focused state icon!" label="Label" />
       <Input
         placeholder="Enter text here!"
         accessoryIcon={dismissIconProps}
@@ -56,7 +59,7 @@ export const InputDefault: React.FunctionComponent = () => {
         secondaryText="Secondary"
         type="email-address"
       />
-      <Input onChange={(text) => setControlText(text)} defaultValue={controlText} />
+      <Input onChange={(text) => setControlText(text)} placeholder={'Text entered here shows below too'} defaultValue={controlText} />
       <Input value={'Controlled text - ' + controlText} />
     </KeyboardAvoidingView>
   );

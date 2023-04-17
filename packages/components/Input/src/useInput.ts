@@ -32,21 +32,18 @@ export const useInput = (props: InputProps): InputInfo => {
   const [text, setText] = React.useState<string>(defaultValue ? defaultValue : '');
   const defaultIconProps = createIconProps(icon);
   const focusedIconProps = createIconProps(focusedStateIcon);
-  const [iconProps, setIconProps] = React.useState<IconProps>(!(pressable.state.focused && !error) ? defaultIconProps : focusedIconProps);
+  const [iconProps, setIconProps] = React.useState<IconProps>(defaultIconProps);
+  React.useEffect(() => {
+    if (pressable.state.focused && !error && focusedIconProps) {
+      setIconProps(focusedIconProps);
+    } else {
+      setIconProps(defaultIconProps);
+    }
+  }, [error, pressable.state.focused, defaultIconProps, focusedIconProps]);
 
   return {
     props: {
       ...pressable.props,
-      ...(focusedStateIcon && {
-        onFocus: (e) => {
-          setIconProps(focusedIconProps);
-          pressable.props.onFocus && pressable.props.onFocus(e);
-        },
-        onBlur: (e) => {
-          setIconProps(defaultIconProps);
-          pressable.props.onBlur && pressable.props.onBlur(e);
-        },
-      }),
       label,
       secondaryText,
       assistiveText,
