@@ -316,7 +316,10 @@ const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
   );
 };
 
-const menuAsABlackboxStyles = StyleSheet.create({ actionButoon: { alignSelf: 'center', justifyContent: 'center' } });
+const menuAsABlackboxStyles = StyleSheet.create({
+  actionButton: { alignSelf: 'center', justifyContent: 'center' },
+  switch: { marginHorizontal: 10 },
+});
 
 const MenuAsABlackbox: React.FunctionComponent = () => {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -335,9 +338,9 @@ const MenuAsABlackbox: React.FunctionComponent = () => {
 
         <MenuPopover minWidth={200}>
           <MenuList>
-            <Switch checked={dnd} onChange={() => setDnD(!dnd)} style={{ marginHorizontal: 10 }} label="Don't disturb" />
+            <Switch checked={dnd} onChange={() => setDnD(!dnd)} style={menuAsABlackboxStyles.switch} label="Don't disturb" />
             <MenuItem>{dnd ? 'DND is on' : 'DND is off'}</MenuItem>
-            <View style={menuAsABlackboxStyles.actionButoon}>
+            <View style={menuAsABlackboxStyles.actionButton}>
               <Button appearance="subtle" onClick={onOpenChange}>
                 Action
               </Button>
@@ -397,7 +400,7 @@ const menuSections: TestSection[] = [
     component: MenuScrollView,
   },
   Platform.select({
-    android: { name: 'Menu as blackbox', component: MenuAsABlackbox },
+    android: { name: 'Menu as a blackbox', component: MenuAsABlackbox },
     default: null,
   }),
   {
