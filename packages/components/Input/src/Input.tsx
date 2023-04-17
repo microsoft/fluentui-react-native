@@ -45,7 +45,7 @@ export const Input = compose<InputType>({
     accessoryIconPressable: Pressable,
     accessoryIcon: Icon,
     assistiveText: Text,
-    secondaryText: Text,
+    accessoryText: Text,
   },
   useRender: (userProps: InputProps, useSlots: UseSlots<InputType>) => {
     const input = useInput(userProps);
@@ -55,7 +55,7 @@ export const Input = compose<InputType>({
     return (final: InputProps) => {
       const {
         label,
-        secondaryText,
+        accessoryText,
         assistiveText,
         icon,
         accessoryIcon,
@@ -76,7 +76,7 @@ export const Input = compose<InputType>({
             {icon && <Slots.icon {...iconProps} accessible={false} />}
             <Slots.input>
               <Slots.textInput {...textInputProps} />
-              {secondaryText && <Slots.secondaryText>{secondaryText}</Slots.secondaryText>}
+              {accessoryText && <Slots.accessoryText>{accessoryText}</Slots.accessoryText>}
               {accessoryIcon && (
                 <Slots.accessoryIconPressable
                   accessibilityRole="button"

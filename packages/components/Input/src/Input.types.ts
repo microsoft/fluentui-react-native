@@ -50,14 +50,14 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
   inputTextColor?: ColorValue;
 
   /**
-   * The font style of the secondary text.
+   * The font style of the accessory text.
    */
-  secondaryTextFont?: FontTokens;
+  accessoryTextFont?: FontTokens;
 
   /**
-   * The color of the secondary text.
+   * The color of the accessory text.
    */
-  secondaryTextColor?: ColorValue;
+  accessoryTextColor?: ColorValue;
 
   /**
    * The width of the divider.
@@ -80,9 +80,9 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
   spacingIconContent?: number;
 
   /**
-   * The space between the input and the secondary text.
+   * The space between the input and the accessory text.
    */
-  spacingInputSecondary?: number;
+  spacingInputAccessory?: number;
 
   /**
    * The space between the dismiss icon and the left content.
@@ -179,9 +179,9 @@ export interface InputProps extends PressableFocusProps {
   assistiveText?: string;
 
   /**
-   * Secondary text to display on the right of the input.
+   * Accessory text to display on the right of the input.
    */
-  secondaryText?: string;
+  accessoryText?: string;
 
   /**
    * Placeholder to display in the input.
@@ -258,7 +258,7 @@ export interface InputSlotProps {
   inputWrapper: ViewProps;
   accessoryIcon: IconProps;
   assistiveText: TextProps;
-  secondaryText: TextProps;
+  accessoryText: TextProps;
   accessoryIconPressable: React.PropsWithRef<PressablePropsExtended>;
 }
 

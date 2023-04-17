@@ -11,7 +11,7 @@ export const useInput = (props: InputProps): InputInfo => {
   const {
     type,
     label,
-    secondaryText,
+    accessoryText,
     assistiveText,
     onBlur,
     onFocus,
@@ -45,7 +45,7 @@ export const useInput = (props: InputProps): InputInfo => {
     props: {
       ...pressable.props,
       label,
-      secondaryText,
+      accessoryText,
       assistiveText,
       setText,
       onChange,

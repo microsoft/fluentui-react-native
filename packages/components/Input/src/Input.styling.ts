@@ -110,17 +110,17 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
       },
       ['assistiveTextColor', 'assistiveTextFont', 'spacingAssistiveTextVertical', 'spacingAssistiveTextStart', ...fontStyles.keys],
     ),
-    secondaryText: buildProps(
+    accessoryText: buildProps(
       (tokens: InputTokens, theme: Theme) => ({
         style: {
-          ...fontStyles.from(tokens.secondaryTextFont, theme),
+          ...fontStyles.from(tokens.accessoryTextFont, theme),
           ...getTextMarginAdjustment(),
-          marginStart: tokens.spacingInputSecondary,
-          color: tokens.secondaryTextColor,
+          marginStart: tokens.spacingInputAccessory,
+          color: tokens.accessoryTextColor,
           display: tokens.accessoryViewVisibility,
         },
       }),
-      ['secondaryTextFont', 'spacingInputSecondary', 'secondaryTextColor', 'accessoryViewVisibility', ...fontStyles.keys],
+      ['accessoryTextFont', 'spacingInputAccessory', 'accessoryTextColor', 'accessoryViewVisibility', ...fontStyles.keys],
     ),
     accessoryIconPressable: buildProps(
       (tokens: InputTokens) => ({

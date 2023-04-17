@@ -38,7 +38,7 @@ export const InputDefault: React.FunctionComponent = () => {
         accessoryIcon={dismissIconProps}
         label="Label"
         assistiveText="Assistive Text"
-        secondaryText="Secondary"
+        accessoryText="Accessory"
       />
       <Input
         placeholder="Enter text here!"
@@ -56,7 +56,7 @@ export const InputDefault: React.FunctionComponent = () => {
           textInputRef.current.clear();
           textInputRef.current.blur();
         }}
-        secondaryText="Secondary"
+        accessoryText="Accessory"
         type="email-address"
       />
       <Input onChange={(text) => setControlText(text)} placeholder={'Text entered here shows below too'} defaultValue={controlText} />
