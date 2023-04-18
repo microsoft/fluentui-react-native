@@ -221,7 +221,7 @@ export type MenuPopoverProps = ICalloutProps;
 ### MenuCallout
 
 This component provides the temporary surface that will host the `Menu`'s popover.
-It act as a wrapper for Callout on win32 and RN Modal for Android plaform.
+It act as a wrapper for Callout on win32 and macos whereas RN Modal for Android plaform.
 
 ```ts
 export type MenuCalloutProps = ICalloutProps & { tokens: MenuCalloutTokens };
