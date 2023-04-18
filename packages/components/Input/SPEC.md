@@ -396,4 +396,4 @@ The input also takes an error string, if set, it replaces the assistive text wit
 - Should allow the user to set custom accessibility label and interact with the accessory button.
 - Should be keyboard tabbable and focusable.
 
-See [`useButton` hook](./src/useButton.ts) for details on accessibility props
+See [`useInput` hook](./src/useInput.ts) for details on accessibility props
