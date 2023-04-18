@@ -333,11 +333,15 @@ const MenuAsABlackbox: React.FunctionComponent = () => {
     setDnD(!dnd);
   }, [dnd, setDnD]);
 
+  const onMenuTriggerClicked = React.useCallback(() => {
+    setOpen(!open);
+  }, [open, setOpen]);
+
   return (
     <Stack style={stackStyle}>
       <Menu onOpenChange={onOpenChange} open={open}>
         <MenuTrigger>
-          <Button onClick={() => setOpen(!open)}>Blockbox Menu</Button>
+          <Button onClick={onMenuTriggerClicked}>Blockbox Menu</Button>
         </MenuTrigger>
 
         <MenuPopover minWidth={200}>
