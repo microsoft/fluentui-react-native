@@ -28,6 +28,7 @@ export const E2EInputTest: React.FunctionComponent = () => {
       <Input
         error={error}
         icon={outlineIconProps}
+        value={text}
         focusedStateIcon={filledIconProps}
         textInputProps={{ autoFocus: true }}
         placeholder="Only text upto 5 characters!"
