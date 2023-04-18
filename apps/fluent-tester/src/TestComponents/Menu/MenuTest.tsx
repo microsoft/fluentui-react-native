@@ -329,6 +329,10 @@ const MenuAsABlackbox: React.FunctionComponent = () => {
     setOpen(false);
   }, [setOpen]);
 
+  const onSwitchChange = React.useCallback(() => {
+    setDnD(!dnd);
+  }, [dnd, setDnD]);
+
   return (
     <Stack style={stackStyle}>
       <Menu onOpenChange={onOpenChange} open={open}>
@@ -338,7 +342,7 @@ const MenuAsABlackbox: React.FunctionComponent = () => {
 
         <MenuPopover minWidth={200}>
           <MenuList>
-            <Switch checked={dnd} onChange={() => setDnD(!dnd)} style={menuAsABlackboxStyles.switch} label="Don't disturb" />
+            <Switch checked={dnd} onChange={onSwitchChange} style={menuAsABlackboxStyles.switch} label="Don't disturb" />
             <MenuItem>{dnd ? 'DND is on' : 'DND is off'}</MenuItem>
             <View style={menuAsABlackboxStyles.actionButton}>
               <Button appearance="subtle" onClick={onOpenChange}>
