@@ -8,6 +8,7 @@ import DismissSvg from './assets/dismissIcon.svg'; // Default accessory icon
 import type { InputProps, InputInfo } from './Input.types';
 
 export const useInput = (props: InputProps): InputInfo => {
+  const defaultComponentRef = React.useRef(null);
   const {
     type,
     label,
@@ -24,7 +25,7 @@ export const useInput = (props: InputProps): InputInfo => {
     placeholder,
     icon,
     focusedStateIcon,
-    componentRef,
+    componentRef = defaultComponentRef,
     error,
     ...rest
   } = props;
@@ -72,6 +73,7 @@ export const useInput = (props: InputProps): InputInfo => {
       focusedIconProps,
       setIconProps,
       error,
+      componentRef,
       ...rest,
     },
     state: { ...pressable.state, text: value ? value : text },

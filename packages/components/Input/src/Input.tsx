@@ -64,6 +64,7 @@ export const Input = compose<InputType>({
         accessoryButtonOnPress,
         keyboardShouldPersistTaps,
         iconProps,
+        componentRef,
         onChange, // Remove out of mergedProps
         ...mergedProps
       } = mergeProps(input.props, final);
@@ -85,6 +86,7 @@ export const Input = compose<InputType>({
                     else {
                       input.props.setText('');
                       onChange && onChange('');
+                      componentRef.current.focus();
                     }
                   }}
                 >
