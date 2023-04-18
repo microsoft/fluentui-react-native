@@ -117,22 +117,21 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           ...getTextMarginAdjustment(),
           marginStart: tokens.spacingInputAccessory,
           color: tokens.accessoryTextColor,
-          display: tokens.accessoryViewVisibility,
         },
       }),
-      ['accessoryTextFont', 'spacingInputAccessory', 'accessoryTextColor', 'accessoryViewVisibility', ...fontStyles.keys],
+      ['accessoryTextFont', 'spacingInputAccessory', 'accessoryTextColor', ...fontStyles.keys],
     ),
     accessoryIconPressable: buildProps(
       (tokens: InputTokens) => ({
         style: {
-          display: tokens.accessoryViewVisibility,
+          display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           justifyContent: 'center',
           marginStart: tokens.spacingAccessoryIconStart,
         },
       }),
-      ['spacingAccessoryIconStart', 'accessoryViewVisibility'],
+      ['spacingAccessoryIconStart'],
     ),
     accessoryIcon: buildProps(
       (tokens: InputTokens) => ({

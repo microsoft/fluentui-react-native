@@ -338,11 +338,6 @@ export interface InputTokens extends LayoutTokens, IBorderTokens, IColorTokens, 
   spacingLabelTop?: number;
 
   /**
-   * The accessory icon/text's visibility. Used to hide when text is empty.
-   */
-  accessoryViewVisibility?: 'none' | 'flex' | undefined;
-
-  /**
    * States that can be applied to an input.
    */
   hasIcon?: InputTokens;

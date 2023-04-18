@@ -23,7 +23,6 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
     spacingLabelStart: 0,
     accessoryIconSize: 24,
     strokeWidth: globalTokens.stroke.width05,
-    accessoryViewVisibility: 'none',
 
     backgroundColor: t.colors.neutralBackground1,
     strokeColor: t.colors.neutralStroke1,
@@ -48,7 +47,6 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       inputTextColor: t.colors.neutralForeground1,
       accessoryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
-      accessoryViewVisibility: 'flex',
     },
 
     focused: {
@@ -61,7 +59,6 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       inputTextColor: t.colors.neutralForeground2,
       accessoryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
-      accessoryViewVisibility: 'none',
     },
 
     filled: {
@@ -73,7 +70,6 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       assistiveTextColor: t.colors.neutralForeground2,
       inputTextColor: t.colors.neutralForeground1,
       accessoryTextColor: t.colors.neutralForeground2,
-      accessoryViewVisibility: 'flex',
     },
 
     typing: {
@@ -86,6 +82,5 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       inputTextColor: t.colors.neutralForeground1,
       accessoryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
-      accessoryViewVisibility: 'flex',
     },
   } as InputTokens);
