@@ -325,9 +325,9 @@ const MenuAsABlackbox: React.FunctionComponent = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [dnd, setDnD] = React.useState<boolean>(false);
 
-  const onOpenChange = () => {
+  const onOpenChange = React.useCallback(() => {
     setOpen(false);
-  };
+  }, [setOpen]);
 
   return (
     <Stack style={stackStyle}>
