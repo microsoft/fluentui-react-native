@@ -48,12 +48,11 @@ export const InputDefault: React.FunctionComponent = () => {
         onBlur={() => console.log('blurred')}
       />
       <Input
-        placeholder="Custom dismiss icon onPress"
+        placeholder="Custom dismiss icon onPress - Blur"
         componentRef={textInputRef}
         accessoryIcon={outlineIconProps}
         accessoryButtonOnPress={() => {
-          // Demonstrating a clear and blur on the text input
-          textInputRef.current.clear();
+          // Demonstrating blur on the text input
           textInputRef.current.blur();
         }}
         accessoryText="Accessory"

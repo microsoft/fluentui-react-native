@@ -65,6 +65,7 @@ export const Input = compose<InputType>({
         keyboardShouldPersistTaps,
         iconProps,
         componentRef,
+        accessoryIconAccessibilityLabel,
         onChange, // Remove out of mergedProps
         ...mergedProps
       } = mergeProps(input.props, final);
@@ -81,9 +82,11 @@ export const Input = compose<InputType>({
               {accessoryIcon && !!input.state.text && (
                 <Slots.accessoryIconPressable
                   accessibilityRole="button"
+                  accessibilityLabel={accessoryIconAccessibilityLabel}
                   onPress={(e) => {
                     if (accessoryButtonOnPress) accessoryButtonOnPress(e);
                     else {
+                      if (input.props.textInputProps.editable === false) return;
                       input.props.setText('');
                       onChange && onChange('');
                       componentRef.current.focus();

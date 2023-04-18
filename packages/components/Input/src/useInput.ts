@@ -18,7 +18,7 @@ export const useInput = (props: InputProps): InputInfo => {
     onFocus,
     onChange,
     value,
-    accessoryIcon = value ? undefined : { svgSource: { src: DismissSvg, viewBox: '0 0 20 20' } },
+    accessoryIcon = { svgSource: { src: DismissSvg, viewBox: '0 0 20 20' } },
     accessoryButtonOnPress,
     defaultValue,
     textInputProps,
@@ -26,6 +26,7 @@ export const useInput = (props: InputProps): InputInfo => {
     icon,
     focusedStateIcon,
     componentRef = defaultComponentRef,
+    accessibilityLabel,
     error,
     ...rest
   } = props;
@@ -65,6 +66,7 @@ export const useInput = (props: InputProps): InputInfo => {
           onChange && onChange(text);
         },
         ref: componentRef,
+        accessibilityLabel,
       },
       icon,
       focusedStateIcon,

@@ -104,7 +104,18 @@ The slots can be modified using the `compose` function on the `Input`. For more 
 Below is the set of props the input supports:
 
 ```ts
-/*
+export interface InputProps {
+  /*
+   ** An accessibility label for screen readers. Set on the text input.
+   */
+  accessibilityLabel?: string;
+
+  /*
+   * An accessibility label for screen readers. Set on the accessory icon pressable.
+   */
+  accessoryIconAccessibilityLabel?: string;
+
+  /*
    * Source URL or name of the icon to show on the input.
    *
    * Based on fluent guidelines this icon should be an "outline" icon.
@@ -192,7 +203,7 @@ Below is the set of props the input supports:
    * The following values work on iOS: - ascii-capable - numbers-and-punctuation - url - number-pad - name-phone-pad - decimal-pad - twitter - web-search
    * The following values work on Android: - visible-password
    */
-  type?: KeyboardTypeOptions | undefined; // Uses KeyBoardType under the hood
+  type?: KeyboardTypeOptions | undefined; // Uses KeyboardType under the hood
 
   /**
    * Callback that is called when the text input's text changes.
@@ -224,6 +235,7 @@ Below is the set of props the input supports:
    * Called after the element is focused.
    */
   onFocus?: (event: FocusEvent) => any;
+}
 ```
 
 ### Styling Tokens
@@ -373,3 +385,15 @@ Once the user is done and taps away, the input switches back to the unfocused st
 #### Error state
 
 The input also takes an error string, if set, it replaces the assistive text with the error's localized description and recolors the title, separator, and assistive text to indicate an invalid input.
+
+## Accessibility
+
+### Expected behavior
+
+- Should read out placeholder text when focused, allow the user to interact with the text input and read out any pre-filled text when focused.
+- Should allow user to type into the text input.
+- Should allow user to read the label, assistive text and accessory text.
+- Should allow the user to set custom accessibility label and interact with the accessory button.
+- Should be keyboard tabbable and focusable.
+
+See [`useButton` hook](./src/useButton.ts) for details on accessibility props
