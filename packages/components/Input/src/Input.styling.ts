@@ -129,7 +129,6 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           flexDirection: 'row',
           justifyContent: 'center',
           marginStart: tokens.spacingAccessoryIconStart,
-          pressRetentionOffset: 8,
         },
       }),
       ['spacingAccessoryIconStart'],
