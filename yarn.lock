@@ -1606,48 +1606,30 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.36.0.tgz#9837f768c03a1e4a30bd304a64fb8844f0e72efe"
   integrity sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==
 
-"@fluentui-react-native/design-tokens-android@^0.47.0":
-  version "0.47.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.47.0.tgz#b06b65a458b043d7f391ba974f806406b2bfc080"
-  integrity sha512-3cQwOmA+cbIoiyMYjzG6wFAVa4hDGNXb14Zh1Kwb57EyLb7FK7/NWySSFY7xAOp6mzTpiomuHY8mwM1qRI/kpQ==
+"@fluentui-react-native/design-tokens-android@^0.48.0":
+  version "0.48.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.48.0.tgz#e0a34e470e4ce0ad6b2eb980315f2aca397d16c2"
+  integrity sha512-gYJmG7UtkO44YRauWZOy/w9Ycn8ThLBsh9+k9X3Oo7So/kIWDLevZgzhHwrFLFSfk+h5cVlYnJ2X1Z47NR8MSA==
 
-"@fluentui-react-native/design-tokens-ios@^0.47.0":
-  version "0.47.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-ios/-/design-tokens-ios-0.47.0.tgz#9d47775b35c567a6a102041e9ff43b39a6f14b67"
-  integrity sha512-Rc9sGcFRXTcob2L+Bc3Dtfs7JWCF6LhvB4TgOFa4b7UavxHm3cap+EluZfT9+J4RhnpTcVJq7XRmVWy8Cem2ZA==
+"@fluentui-react-native/design-tokens-ios@^0.48.0":
+  version "0.48.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-ios/-/design-tokens-ios-0.48.0.tgz#5899e84c46c7c89bd3580e7d8f877a9991857482"
+  integrity sha512-specKHsOHMgMioQzbRHP/21jP47pAHxiIx6USJAGLA7tCR5p6Yp71091IGr1k5kVEEdp64q0MqPbE1SKKeXJHg==
 
-"@fluentui-react-native/design-tokens-macos@^0.47.0":
-  version "0.47.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.47.0.tgz#9bc73af5a74a1011e03d7e20b0dfa54322c3dd55"
-  integrity sha512-Qlw4D9xqsEurjY1Vtd1iwCU9xl2fUaBL4zdkfIHkvxYfP78qlMaZVz+Uv55PkF0jsJ1LqiwPa176Bt4wTahEEw==
+"@fluentui-react-native/design-tokens-macos@^0.48.0":
+  version "0.48.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.48.0.tgz#5dea3bab8218a4b9571856aa21f006f565698efb"
+  integrity sha512-dO231fDzVbnk2T8+DHrRvszVrxLHROHJnk5+2/B0F+Zdz5AeQ0uAu6MwABVdpkYlus9lstT99kCle7TohR3wxA==
 
-"@fluentui-react-native/design-tokens-win32@^0.47.0":
-  version "0.47.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.47.0.tgz#5af8d016d04cfddd148a685e9b5ff24e4f9a4ca4"
-  integrity sha512-qbwsOQdj+N5BfTQyrY7YS4+QeS1lwbuBYvsjOpMoAMdRPxcYaSIJSUHFwVsvIBT91AjZTEKJkacmJXw3s8SiZQ==
+"@fluentui-react-native/design-tokens-win32@^0.48.0":
+  version "0.48.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.48.0.tgz#4c91e4e66a88cf6f4e6a9d07b3af8e3b8a2c20ad"
+  integrity sha512-Cz95w+s0ll3xcbqrO+ALfufhpmMU5Y2e1pseFt3h1W6koFAG+cSdpK3LHgKEfwYoR/MwnPE/pG3Lt3wHJR7uDg==
 
-"@fluentui-react-native/design-tokens-windows@^0.47.0":
-  version "0.47.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.47.0.tgz#cd4f34604285650d75df9314d9220c61a11ae2c2"
-  integrity sha512-MxI5eqC5tjBiHMF1SbAMBxv90uqdI91ZR+ctj2foptVCnRlEVv5N0dxeCQpiuT7iLT3X2bMWVjBX688CsePJ+A==
-
-"@fluentui-react-native/framework@0.7.17":
-  version "0.7.17"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.7.17.tgz#b8451227d15640bfcc73b002f7b3f3c19079faf6"
-  integrity sha512-AzI+2c9CbH1+oq1FMYdKzm6GxRup8jj4Gvk+3brECYaKPMHIC+w4iyBPkHdICayc3Iug+N7vlWxduhfaEearaw==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.7.6 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.9.11 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.6"
-    "@fluentui-react-native/memo-cache" "^1.1.7"
-    "@fluentui-react-native/merge-props" ">=0.4.2 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.14.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.11.8 <1.0.0"
-    "@fluentui-react-native/use-slot" ">=0.2.5 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.6.5 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.8.2 <1.0.0"
-    "@fluentui-react-native/use-tokens" ">=0.2.2 <1.0.0"
-    tslib "^2.3.1"
+"@fluentui-react-native/design-tokens-windows@^0.48.0":
+  version "0.48.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.48.0.tgz#1334636e0e0c3a02923a78263b103da5ab43bc9d"
+  integrity sha512-zO1cEzhsJZaWm/EFNPSXAm3NEnQzBp/NKDuf9zDSRkQPhwQ9mf3IAhRSiUiUQU9/P4xdRPXPCLlgjsSRhJBQpw==
 
 "@fortawesome/fontawesome-common-types@6.3.0":
   version "6.3.0"
