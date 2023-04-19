@@ -1,5 +1,5 @@
 import { AndroidAttribute, ANDROID_EDITTEXT, ANDROID_BUTTON } from '../../common/consts';
-import { INPUT_ERROR_STRING, INPUT_TEST_COMPONENT } from '../consts';
+import { INPUT_ERROR_STRING, INPUT_ONCLICK_STRING, INPUT_START_STRING, INPUT_TEST_COMPONENT, INPUT_TYPE_STRING } from '../consts';
 import InputPageObject from '../pages/InputPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -55,8 +55,8 @@ describe('Input Functional Testing', () => {
 
   it('Validate OnChange() callback was fired', async () => {
     await InputPageObject.click(InputPageObject._primaryComponent);
-    await InputPageObject.typeText(' ');
-    await expect(await InputPageObject.verifyTextContent('test ')).toBeTruthy();
+    await InputPageObject.typeText(INPUT_TYPE_STRING);
+    await expect(await InputPageObject.verifyTextContent(INPUT_START_STRING + INPUT_TYPE_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
 
@@ -69,7 +69,7 @@ describe('Input Functional Testing', () => {
 
   it('Validate accessory icon OnPress() callback was fired -> Click', async () => {
     await InputPageObject.click(InputPageObject._accessoryButton);
-    await expect(await InputPageObject.verifyTextContent('')).toBeTruthy();
+    await expect(await InputPageObject.verifyTextContent(INPUT_ONCLICK_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
 });

@@ -10,6 +10,8 @@ import {
   INPUT_TEXT,
   INPUT_TEST_COMPONENT_DISMISS_BUTTON,
   INPUT_ERROR_STRING,
+  INPUT_ONCLICK_STRING,
+  INPUT_START_STRING,
 } from '../../../../E2E/src/Input/consts';
 import FilledSvg from '../../../assets/filledIcon.svg';
 import OutlineSvg from '../../../assets/outlineIcon.svg';
@@ -21,7 +23,7 @@ export const filledIconProps: IconProps = { svgSource: { src: FilledSvg, viewBox
 
 export const E2EInputTest: React.FunctionComponent = () => {
   const [error, setError] = React.useState<string>('');
-  const [text, setText] = React.useState<string>('test');
+  const [text, setText] = React.useState<string>(INPUT_START_STRING);
 
   return (
     <Stack style={stackStyle}>
@@ -52,6 +54,9 @@ export const E2EInputTest: React.FunctionComponent = () => {
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(INPUT_TEST_COMPONENT)}
         accessoryIconAccessibilityLabel={INPUT_TEST_COMPONENT_DISMISS_BUTTON}
+        accessoryButtonOnPress={() => {
+          setText(INPUT_ONCLICK_STRING);
+        }}
       />
     </Stack>
   );
