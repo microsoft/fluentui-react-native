@@ -192,7 +192,7 @@ const SubmenuWithScrollView: React.FunctionComponent<MenuProps> = (props: MenuPr
 const MenuSubMenuWithScrollView: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Menu openOnHover>
+      <Menu>
         <MenuTrigger>
           <Button>Test</Button>
         </MenuTrigger>
