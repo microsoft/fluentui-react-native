@@ -1,4 +1,4 @@
-import { AndroidAttribute, ANDROID_EDITTEXT, ANDROID_BUTTON, Keys } from '../../common/consts';
+import { AndroidAttribute, ANDROID_EDITTEXT, ANDROID_BUTTON } from '../../common/consts';
 import { INPUT_ERROR_STRING, INPUT_TEST_COMPONENT } from '../consts';
 import InputPageObject from '../pages/InputPageObject';
 
