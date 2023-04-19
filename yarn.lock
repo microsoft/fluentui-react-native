@@ -1631,24 +1631,6 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.42.0.tgz#6b7ca87ed30a92634e72cbe8fc1280fd21db50b8"
   integrity sha512-hBPCikSDJ3Rgw+mAbTgnNB83dn3SeSKPo4XNli22tbV08fN8P5mEaEg8Uw0cbVMN3D138ykNeAaK/lZjO9KIqA==
 
-"@fluentui-react-native/framework@0.7.17":
-  version "0.7.17"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.7.17.tgz#b8451227d15640bfcc73b002f7b3f3c19079faf6"
-  integrity sha512-AzI+2c9CbH1+oq1FMYdKzm6GxRup8jj4Gvk+3brECYaKPMHIC+w4iyBPkHdICayc3Iug+N7vlWxduhfaEearaw==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.7.6 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.9.11 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.6"
-    "@fluentui-react-native/memo-cache" "^1.1.7"
-    "@fluentui-react-native/merge-props" ">=0.4.2 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.14.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.11.8 <1.0.0"
-    "@fluentui-react-native/use-slot" ">=0.2.5 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.6.5 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.8.2 <1.0.0"
-    "@fluentui-react-native/use-tokens" ">=0.2.2 <1.0.0"
-    tslib "^2.3.1"
-
 "@fortawesome/fontawesome-common-types@6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.3.0.tgz#51f734e64511dbc3674cd347044d02f4dd26e86b"
@@ -2873,6 +2855,11 @@
   dependencies:
     "@rnx-kit/tools-language" "^1.2.6"
     chalk "^4.1.0"
+
+"@rnx-kit/react-native-host@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.2.5.tgz#fd612628cbfd6dae3658703db97bdb3c264f9364"
+  integrity sha512-duURds7jZjWQq4r4wmzBQ/7d2drpGov68hbQv+m3Cv4Zl3duVE/HtJCTsLiGcCZQnvDMjtKinm/xQ0E87hjcvQ==
 
 "@rnx-kit/third-party-notices@^1.3.0":
   version "1.3.2"
@@ -12068,10 +12055,11 @@ react-native-svg@^12.3.0, react-native-svg@^12.5.0:
     css-tree "^1.1.3"
 
 react-native-test-app@^2.3.16:
-  version "2.3.16"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.3.16.tgz#9ee48ccd62ad2a3f425d75d010de3ce0e0b127d4"
-  integrity sha512-NdLRhZqPdj1dNJTOlCo2Ezu2hdoU3YolrrTHokbWA7vPNMTCbdj0SltWg6gS6f+Bz1Z+ToBDOkhPt+Llj2s2Rg==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.4.0.tgz#64e323a326e7b1132655f2609f80bb54229af88e"
+  integrity sha512-z8Neft/JBrnGnwwJpGviD23J6mWnBVeCLiXpgQBa1cdsoCsGTvETbyDbSRmNEL/IpGuPMO/FqEdhJmrOIaqi8g==
   dependencies:
+    "@rnx-kit/react-native-host" "^0.2.5"
     ajv "^8.0.0"
     chalk "^4.1.0"
     cliui "^8.0.0"
