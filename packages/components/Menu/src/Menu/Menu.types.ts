@@ -65,6 +65,7 @@ export interface MenuState extends MenuProps {
   animationStarted?: boolean;
   menuSize?: MenuSizeType;
   testID?: string;
+  parentDoNotTakePointerCapture?: boolean;
 }
 
 export enum AndroidMenuStates {

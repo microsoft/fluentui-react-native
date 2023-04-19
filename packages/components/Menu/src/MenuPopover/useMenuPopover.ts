@@ -36,7 +36,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
   // Initial focus behavior differs per platform, Windows platforms move focus
   // automatically onto first element of Callout
   const setInitialFocus = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
-  const doNotTakePointerCapture = openOnHover;
+  const doNotTakePointerCapture = props.doNotTakePointerCapture ?? context.parentDoNotTakePointerCapture;
   const accessibilityRole = 'menu';
 
   const onMouseEnter = React.useCallback(() => {
@@ -87,6 +87,17 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
     setCanFocusOnPopover(false);
   }, [setCanFocusOnPopover]);
 
+  // Prevents submenus that take initial focus from closing prematurely
+  // when the parent menu takes pointer capture and we still have
+  // the mouse hovered on the submenu trigger.
+  const onFocus = React.useCallback(() => {
+    if (isSubmenu && setInitialFocus && !doNotTakePointerCapture) {
+      clearTimeout(triggerHoverOutTimer);
+      clearTimeout(popoverHoverOutTimer);
+      clearTimeout(parentPopoverHoverOutTimer);
+    }
+  }, [parentPopoverHoverOutTimer, popoverHoverOutTimer, triggerHoverOutTimer, doNotTakePointerCapture, isSubmenu, setInitialFocus]);
+
   React.useEffect(() => {
     return function cleanup() {
       clearTimeout(popoverHoverOutTimer);
@@ -112,6 +123,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
       accessible: shouldFocusOnContainer,
       focusable: canFocusOnPopover,
       onBlur,
+      onFocus,
     },
   };
 };

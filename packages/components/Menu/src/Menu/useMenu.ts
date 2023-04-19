@@ -34,6 +34,12 @@ export const useMenu = (props: MenuProps): MenuState => {
   // the parent menu will close when the timeout passes.
   const parentPopoverHoverOutTimer = isSubmenu ? context.popoverHoverOutTimer : undefined;
 
+  // Submenus should have the same pointer capture logic as its parent menu
+  // to avoid conflicts with pointer capture events. We determine whether a
+  // menu and its submenus should take pointer capture based on whether the
+  // root menu opens on hover.
+  const parentDoNotTakePointerCapture = isSubmenu ? context.parentDoNotTakePointerCapture : props.openOnHover ? true : false;
+
   return {
     openOnHover,
     ...props,
@@ -46,6 +52,7 @@ export const useMenu = (props: MenuProps): MenuState => {
     isSubmenu,
     isControlled: isOpenControlled,
     parentPopoverHoverOutTimer,
+    parentDoNotTakePointerCapture,
   };
 };
 
