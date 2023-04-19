@@ -25,6 +25,12 @@ export const E2EInputTest: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
+      <Text
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(INPUT_TEXT)}
+      >
+        {text}
+      </Text>
       <Input
         error={error}
         icon={outlineIconProps}
@@ -46,12 +52,6 @@ export const E2EInputTest: React.FunctionComponent = () => {
         {...testProps(INPUT_TEST_COMPONENT)}
         accessoryIconAccessibilityLabel={INPUT_TEST_COMPONENT_DISMISS_BUTTON}
       />
-      <Text
-        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-        {...testProps(INPUT_TEXT)}
-      >
-        {text}
-      </Text>
     </Stack>
   );
 };
