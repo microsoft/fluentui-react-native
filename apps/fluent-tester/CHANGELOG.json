@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 19 Apr 2023 15:57:29 GMT",
+      "tag": "@fluentui-react-native/tester_v0.141.1",
+      "version": "0.141.1",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b4f4b99587f7cef25c187c0bc08183d55d2b3551",
+            "comment": "Fix android build issue"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Apr 2023 10:08:39 GMT",
       "tag": "@fluentui-react-native/tester_v0.141.1",
       "version": "0.141.1",
