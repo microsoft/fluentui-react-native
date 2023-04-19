@@ -5,7 +5,6 @@ import { Pressable, View } from 'react-native';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './TabList.styling';
 import type { TabListType, TabListProps, TabListContextData } from './TabList.types';
@@ -32,10 +31,8 @@ export const TabList = compose<TabListType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
-    label: Text,
     container: FocusZone,
     stack: View,
-    tabPanel: View,
   },
   useRender: (userProps: TabListProps, useSlots: UseSlots<TabListType>) => {
     // configure props and state for tabs based on user props
@@ -79,15 +76,9 @@ export const TabList = compose<TabListType>({
           value={tabs.state.context}
         >
           <Slots.root {...mergedProps}>
-            {tabs?.state?.label && <Slots.label key="label">{label}</Slots.label>}
             <Slots.container defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
-            <Slots.tabPanel>
-              <TabListContext.Consumer>
-                {(context) => !tabs?.state?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
-              </TabListContext.Consumer>
-            </Slots.tabPanel>
           </Slots.root>
         </TabListContext.Provider>
       );

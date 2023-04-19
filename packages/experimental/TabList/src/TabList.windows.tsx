@@ -4,7 +4,6 @@ import { View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './TabList.styling';
 import type { TabListType, TabListProps, TabListContextData } from './TabList.types';
@@ -32,9 +31,7 @@ export const TabList = compose<TabListType>({
   ...stylingSettings,
   slots: {
     root: View,
-    label: Text,
     stack: View,
-    tabPanel: View,
   },
   useRender: (userProps: TabListProps, useSlots: UseSlots<TabListType>) => {
     // configure props and state for tabs based on user props
@@ -116,13 +113,7 @@ export const TabList = compose<TabListType>({
           value={tabs.state.context}
         >
           <Slots.root {...mergedProps}>
-            {tabs?.state?.label && <Slots.label key="label">{label}</Slots.label>}
             <Slots.stack {...stackProps}>{children}</Slots.stack>
-            <Slots.tabPanel>
-              <TabListContext.Consumer>
-                {(context) => !tabs?.state?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
-              </TabListContext.Consumer>
-            </Slots.tabPanel>
           </Slots.root>
         </TabListContext.Provider>
       );

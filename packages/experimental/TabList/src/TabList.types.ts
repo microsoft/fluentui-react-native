@@ -3,7 +3,6 @@ import type { View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import type { TextProps } from '@fluentui-react-native/text';
 import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const tabListName = 'TabList';
@@ -107,10 +106,8 @@ export interface TabListInfo {
 }
 export interface TabListSlotProps {
   root: React.PropsWithRef<IViewProps>;
-  label: TextProps;
   container?: FocusZoneProps;
   stack: IViewProps;
-  tabPanel: IViewProps;
 }
 
 export interface TabListType {
