@@ -846,39 +846,40 @@ export interface AliasColorTokens {
 
   /// Red
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
+  /** @deprecated */
   redBackground1?: ColorValue;
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
   redBackground2?: ColorValue;
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
   redBackground3?: ColorValue;
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
   redForeground1?: ColorValue;
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
   redForeground2?: ColorValue;
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
   redForeground3?: ColorValue;
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
   redBorderActive?: ColorValue;
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
   redBorder1?: ColorValue;
 
-  // TODO #2765: remove from macOS
+  // TODO #2765: remove from macOS and mark as deprecated
   /** @platform macOS */
   redBorder2?: ColorValue;
 
