@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Ensure menu and submenus have same pointer capture logic",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
