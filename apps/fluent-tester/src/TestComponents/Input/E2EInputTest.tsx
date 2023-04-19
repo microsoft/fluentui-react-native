@@ -41,6 +41,7 @@ export const E2EInputTest: React.FunctionComponent = () => {
         assistiveText="Assistive Text"
         label="Label"
         onChange={(text: string) => {
+          setText(text);
           if (text.length > 5) {
             setError('Text must be less than 5 characters!');
             setText(INPUT_ERROR_STRING);
