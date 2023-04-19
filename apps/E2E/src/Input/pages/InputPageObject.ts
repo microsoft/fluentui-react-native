@@ -17,6 +17,10 @@ class InputPageObject extends BasePage {
     return (await callbackText.getAttribute(AndroidAttribute.Text)) == text;
   }
 
+  async typeText(text: string): Promise<void> {
+    await driver.execute('mobile: type', { text: text });
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/

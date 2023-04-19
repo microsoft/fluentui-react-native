@@ -55,14 +55,14 @@ describe('Input Functional Testing', () => {
 
   it('Validate OnChange() callback was fired', async () => {
     await InputPageObject.click(InputPageObject._primaryComponent);
-    await InputPageObject.sendKeys(InputPageObject._primaryComponent, [Keys.SPACE]);
-    await expect(await InputPageObject.verifyTextContent('1234 ')).toBeTruthy();
+    await InputPageObject.typeText(' ');
+    await expect(await InputPageObject.verifyTextContent('test ')).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate error state was achieved', async () => {
     await InputPageObject.click(InputPageObject._primaryComponent);
-    await InputPageObject.sendKeys(InputPageObject._primaryComponent, [Keys.SPACE]);
+    await InputPageObject.typeText(' ');
     await expect(await InputPageObject.verifyTextContent(INPUT_ERROR_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });

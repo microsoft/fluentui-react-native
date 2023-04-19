@@ -21,7 +21,7 @@ export const filledIconProps: IconProps = { svgSource: { src: FilledSvg, viewBox
 
 export const E2EInputTest: React.FunctionComponent = () => {
   const [error, setError] = React.useState<string>('');
-  const [text, setText] = React.useState<string>('1234');
+  const [text, setText] = React.useState<string>('test');
 
   return (
     <Stack style={stackStyle}>
