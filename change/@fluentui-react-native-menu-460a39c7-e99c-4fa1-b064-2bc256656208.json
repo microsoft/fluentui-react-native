@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "enable pointer capture to be overridden",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
