@@ -87,9 +87,10 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
     setCanFocusOnPopover(false);
   }, [setCanFocusOnPopover]);
 
-  // On win32, prevent the submenu from closing prematurely
-  // when the parent menu takes pointer capture and we still
-  // have mouse hover on the submenu trigger
+  // On win32, when the parent menu takes pointer capture and the
+  // submenu receives focus, prevent the submenu from closing in
+  // response to onHoverOut from the menu trigger by cancelling the
+  // triggerOnHoverOutTimer.
   const onFocus = React.useCallback(() => {
     if (Platform.OS === ('win32' as any) && isSubmenu && !doNotTakePointerCapture) {
       clearTimeout(triggerHoverOutTimer);
