@@ -21,6 +21,7 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
 
   /**
    * Corner radius of the menu list
+   * @platform android
    */
   cornerRadius?: number;
 }
@@ -51,6 +52,7 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
    *
    * This option is useful for programmatically generated items to provide
    * text for options that end up having tuncated text.
+   * @platform win32, macOS
    */
   hasTooltips?: boolean;
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/input",
   "entries": [
     {
+      "date": "Wed, 12 Apr 2023 18:42:22 GMT",
+      "tag": "@fluentui-react-native/input_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/input",
+            "commit": "42f64ddb244764adf58f95b463b2638d0989b148",
+            "comment": "Fix the pipeline"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Apr 2023 10:42:50 GMT",
       "tag": "@fluentui-react-native/input_v0.1.1",
       "version": "0.1.1",
