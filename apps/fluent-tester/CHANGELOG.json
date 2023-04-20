@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 20 Apr 2023 19:06:16 GMT",
+      "tag": "@fluentui-react-native/tester_v0.142.0",
+      "version": "0.142.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "285d5087d9575291afd8e4a831c4cb4eeece3b7e",
+            "comment": "Demo unselected radio announcement on Android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Apr 2023 09:41:22 GMT",
       "tag": "@fluentui-react-native/tester_v0.142.0",
       "version": "0.142.0",
