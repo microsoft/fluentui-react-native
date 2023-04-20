@@ -101,7 +101,7 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
         // submenu when we hover off of the trigger before the submenu is
         // opened. Otherwise, the submenu can cancel this action (for more
         // context on why this is needed, check onFocus in useMenuPopover.ts)
-        if (Platform.OS === ('win32' as any) && isSubmenu && !open) {
+        if (Platform.OS === ('win32' as any) && isSubmenu && !parentDoNotTakePointerCapture && !open) {
           setTimeout(() => {
             setOpen(e, false /* isOpen */);
           }, hoverDelay);
@@ -115,7 +115,7 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
 
       childOnHoverOut && childOnHoverOut(e);
     },
-    [childOnHoverOut, hoverDelay, openOnHover, setOpen, setTriggerHoverOutTimer, isSubmenu, open],
+    [childOnHoverOut, hoverDelay, openOnHover, setOpen, setTriggerHoverOutTimer, parentDoNotTakePointerCapture, isSubmenu, open],
   );
 
   const onClick = React.useCallback(
