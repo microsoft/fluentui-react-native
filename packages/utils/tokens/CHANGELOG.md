@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Mar 2023 21:53:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.14
+
+Tue, 21 Mar 2023 21:53:45 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+
+## 0.20.13
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Add 'width' to layout-tokens (winlarry@microsoft.com)
 
 ## 0.20.12
 

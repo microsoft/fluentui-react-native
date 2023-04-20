@@ -2,6 +2,84 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Tue, 21 Mar 2023 21:53:45 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.25.10",
+      "version": "0.25.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.18.2",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.10",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Mar 2023 17:22:31 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.25.9",
+      "version": "0.25.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.18.1",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.9",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Mar 2023 20:54:52 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.25.8",
+      "version": "0.25.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "17b7aef310b2c2325dce2129aeefceada04140e7",
+            "comment": "Remove error"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Mar 2023 21:46:56 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.25.7",
+      "version": "0.25.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "124fa9e36989035c4ebb848de1c727b0893eaceb",
+            "comment": "Have a way to query theme state over multiple instances of the win32 theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.25.6",
       "version": "0.25.6",

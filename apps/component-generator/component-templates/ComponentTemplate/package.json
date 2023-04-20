@@ -22,12 +22,7 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/components/ComponentTemplate"
   },
-  "dependencies": {
-    "@fluentui-react-native/framework": "0.7.17",
-    "@fluentui-react-native/text": ">=0.12.1 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.11.8 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.8.2 <1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",

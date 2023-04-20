@@ -1,4 +1,5 @@
 export { Spinner } from './Spinner';
+export { spinnerName } from './Spinner.types';
 export {
   SpinnerTokens,
   SpinnerProps,

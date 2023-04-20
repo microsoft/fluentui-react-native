@@ -61,6 +61,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorderWidth?: number;
 
   /**
+   * Background color of outer circle
+   */
+  radioOuterCircleBackground?: ColorValue;
+
+  /**
    * The flex direction of the root
    */
   flexDirection?: ViewStyle['flexDirection'];
@@ -98,7 +103,7 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   /**
    * Label's top margin.
    */
-  labelMarginTop?: ViewStyle['marginTop'];
+  labelMarginVertical?: ViewStyle['marginVertical'];
 
   /**
    * Label's right margin.

@@ -52,9 +52,12 @@ export const MenuList = compose<MenuListType>({
     const Slots = useSlots(menuList.props, (layer) => menuListLookup(layer, menuList, userProps));
 
     const focusZoneRef = React.useRef<View>();
+    const setFocusZoneFocus = () => {
+      focusZoneRef?.current?.focus();
+    };
 
     React.useEffect(() => {
-      focusZoneRef?.current?.focus();
+      setFocusZoneFocus();
     }, []);
 
     return (_final: MenuListProps, children: React.ReactNode) => {
@@ -83,7 +86,7 @@ export const MenuList = compose<MenuListType>({
 
       const content =
         Platform.OS === 'macos' ? (
-          <Slots.root onKeyDown={menuList.onListKeyDown}>
+          <Slots.root onMouseLeave={setFocusZoneFocus} onKeyDown={menuList.onListKeyDown}>
             <Slots.scrollView
               accessibilityRole="menu"
               showsVerticalScrollIndicator={menuContext.hasMaxHeight}

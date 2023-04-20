@@ -103,7 +103,7 @@ export interface IconProps {
 ## SVG Icon
 
 Svg Icon can be rendered using `src` prop or `uri` prop.
-When passing `src` then [react-native-svg-transfoprmer](https://github.com/kristerkari/react-native-svg-transformer) should be installed and configured.
+When passing `src` then [react-native-svg-transformer](https://github.com/kristerkari/react-native-svg-transformer) should be installed and configured.
 
 ### Props
 

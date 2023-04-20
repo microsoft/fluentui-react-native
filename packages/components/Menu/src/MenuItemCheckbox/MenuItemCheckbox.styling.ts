@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
@@ -7,6 +9,7 @@ import { menuItemCheckboxName } from './MenuItemCheckbox.types';
 import { defaultMenuItemCheckboxTokens } from './MenuItemCheckboxTokens';
 
 export const menuItemCheckboxStates: (keyof MenuItemCheckboxTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'checked'];
+const hasPressRententionForA11y = Platform.OS === 'android';
 
 export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemCheckboxSlotProps, MenuItemCheckboxTokens> = {
   tokens: [defaultMenuItemCheckboxTokens, menuItemCheckboxName],
@@ -25,14 +28,37 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
+    ...(Platform.OS === 'android' && {
+      checkbox: buildProps(
+        (tokens: MenuItemCheckboxTokens) => ({
+          style: {
+            height: tokens.checkboxSize,
+            marginEnd: tokens.paddingHorizontal,
+            width: tokens.checkboxSize,
+            backgroundColor: tokens.checkboxBackgroundColor,
+            borderColor: tokens.checkboxBorderColor,
+            borderRadius: tokens.checkboxBorderRadius,
+            borderWidth: tokens.checkboxBorderWidth,
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          ...(hasPressRententionForA11y && {
+            pressRetentionOffset: typeof tokens.padding === 'number' ? tokens.padding : parseFloat(tokens.padding), /// Retention of the press area outside of the checkbox equal to padding to match accessibility requirement
+          }),
+          android_ripple: { color: tokens.rippleColor, radius: tokens.checkmarkSize, foreground: true },
+        }),
+        ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize', 'rippleColor'],
+      ),
+    }),
+
     checkmark: buildProps(
       (tokens: MenuItemCheckboxTokens) => ({
         opacity: tokens.checkmarkVisibility,
-        color: tokens.color,
+        color: tokens.checkmarkColor ?? tokens.color,
         height: tokens.checkmarkSize,
         width: tokens.checkmarkSize,
         viewBox: '0 0 ' + (tokens.checkmarkSize - tokens.checkmarkPadding * 2) + ' ' + (tokens.checkmarkSize - tokens.checkmarkPadding * 2),
-        style: { marginEnd: tokens.gap },
+        ...(Platform.OS !== 'android' && { style: { marginEnd: tokens.gap } }),
       }),
       ['checkmarkPadding', 'checkmarkSize', 'checkmarkVisibility', 'color', 'gap'],
     ),
@@ -41,6 +67,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
         style: {
           flexGrow: 1,
           color: tokens.color,
+          ...(Platform.OS === 'android' && { flexShrink: 1 }),
           ...fontStyles.from(tokens, theme),
         },
       }),

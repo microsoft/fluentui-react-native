@@ -29,7 +29,6 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
       const isRtl = I18nManager.isRTL;
-
       const isArrowKey = isKeyPressEvent(e) && (e.nativeEvent.key === 'ArrowLeft' || e.nativeEvent.key === 'ArrowRight');
       const isArrowOpen =
         hasSubmenu &&

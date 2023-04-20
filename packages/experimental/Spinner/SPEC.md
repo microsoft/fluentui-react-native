@@ -42,13 +42,6 @@ The `Spinner` is an outline of a circle which animates around itself, to visuall
 
 ## Variants
 
-Label postion decides where will the label place with respect to Spinner :
-
-- If `labelPosition` is equal to "above", then the Label appears be vertically above with respect to Spinner.
-- If `labelPosition` is equal to "below", then the Label appears be vertically below with respect to Spinner.
-- If `labelPosition` is equal to "before", then the Label appears be horizontally before with respect to Spinner.
-- If `labelPosition` is equal to "after", then the Label appears be horizontally after with respect to Spinner.
-
 #### Status
 
 Users can control whether `Spinner` is animating or not :
@@ -60,6 +53,8 @@ Users can control whether `Spinner` is animating or not :
 
 Users can control the `Spinner` size from the configuration below :
 
+##### Mobile
+
 | Size     | Diameter (height/width) | Line Thickness   |
 | -------- | ----------------------- | ---------------- |
 | xx-small | 12 (iconSize120)        | 1 (stokeWidth10) |
@@ -67,6 +62,18 @@ Users can control the `Spinner` size from the configuration below :
 | medium   | 24 (iconSize240)        | 2 (stokeWidth20) |
 | large    | 32                      | 3 (stokeWidth30) |
 | x-large  | 40 (iconSize360)        | 4 (stokeWidth40) |
+
+##### Win32
+
+| Size    | Diameter (height/width) | Line Thickness   |
+| ------- | ----------------------- | ---------------- |
+| tiny    | 20 (iconSize200)        | 2 (stokeWidth20) |
+| x-small | 24 (iconSize240)        | 2 (stokeWidth20) |
+| small   | 28 (iconSize280)        | 2 (stokeWidth20) |
+| medium  | 32 (iconSize320)        | 3 (stokeWidth30) |
+| large   | 36 (iconSize360)        | 3 (stokeWidth30) |
+| x-large | 40 (iconSize400)        | 3 (stokeWidth30) |
+| huge    | 44 (iconSize440)        | 4 (stokeWidth40) |
 
 #### Label Postion
 
@@ -86,10 +93,10 @@ The `Spinner` uses 5 slots on win32 and 2 slots on mobile platforms:
 Win32 Slots
 
 - `root` [View] The outer container of the component
-- `track` [Svg]The container for the spinner svg .
-- `tail` [Svg] The svg of the tail that will act as animated spinner
+- `track` [trackSvg]The container for the spinner svg .
+- `tail` [tailSvg] The svg of the tail that will act as animated spinner
 - `tailContainer` [RCTNativeAnimatedSpinner] The Container for the tail of the spinner
-- `label` [TextV1] If specified, renders the name of the passed value as text.
+- `label` [Text] If specified, renders the name of the passed value as text.
 
 Mobile Slots
 
@@ -101,7 +108,7 @@ Mobile Slots
 Below is the set of props `Spinner` supports.
 
 ```tsx
-export interface SpinnerProps extends ViewProps, SpinnerTokens {
+export interface SpinnerProps extends ViewProps {
   /**
    * Spinner appearnace
    * @defaultValue 'primary'
@@ -115,6 +122,11 @@ export interface SpinnerProps extends ViewProps, SpinnerTokens {
    */
   labelPosition?: SpinnerLabelPosition;
   /**
+   * Spinner label
+   * Note: This is not supported on mobile platforms
+   */
+  label?: string;
+  /**
    * Spinner size
    * @defaultValue 'medium'
    */
@@ -125,22 +137,28 @@ export interface SpinnerProps extends ViewProps, SpinnerTokens {
    */
   status?: SpinnerStatus;
   /**
-   * Spinner label
-   * Note: This is not supported on mobile platforms
-   */
-  label?: string;
-  /**
    * Spinner hidden when not animating or not hidden
    * @defaultValue 'true'
    * @platform android
    */
   hidesWhenStopped?: boolean;
 }
+
+export interface SpinnerSvgProps extends SpinnerTokens {
+  /**
+   * The height and width of the viewBox are internal props used by the SVG to size themselves and
+   * set up their viewBox to establish coordinate space for DPI scaling purposes.
+   */
+  viewBoxHeight: number;
+  viewBoxWidth: number;
+}
 ```
 
 ### Styling Tokens
 
 Tokens can be used to customize the styling of the control by using the customize function on the `Spinner`. For more information on using the customize API, please see [this page](https://github.com/microsoft/fluentui-react-native/blob/main/packages/framework/composition/README.md). The `Spinner` has the following tokens:
+
+#### Shared Tokens
 
 ```tsx
 export interface SpinnerTokens {
@@ -158,5 +176,10 @@ export interface SpinnerTokens {
    * @defaultValue 'medium'
    */
   size?: SpinnerSize;
+  /**
+   * Spinner appearnace
+   * @defaultValue 'true'
+   */
+  inverted?: SpinnerTokens;
 }
 ```

@@ -16,6 +16,7 @@ import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdow
 import { FocusTrapTest } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest } from './TestComponents/FocusZone';
 import { IconTest } from './TestComponents/Icon';
+import { InputTest } from './TestComponents/Input';
 import { LinkLegacyTest } from './TestComponents/LinkLegacy';
 import { LinkV1Test } from './TestComponents/LinkV1';
 import { MenuTest } from './TestComponents/Menu';
@@ -160,6 +161,12 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
+    name: 'Input',
+    component: InputTest,
+    testPageButton: Constants.HOMEPAGE_INPUT_BUTTON,
+    platforms: ['android'],
+  },
+  {
     name: 'Link Legacy',
     component: LinkLegacyTest,
     testPageButton: Constants.HOMEPAGE_LINK_BUTTON,
@@ -175,7 +182,7 @@ export const tests: TestDescription[] = [
     name: 'Menu',
     component: MenuTest,
     testPageButton: Constants.HOMEPAGE_MENU_BUTTON,
-    platforms: ['macos', 'win32'],
+    platforms: ['macos', 'win32', 'android'],
   },
   {
     name: 'MenuButton Legacy',
@@ -253,7 +260,7 @@ export const tests: TestDescription[] = [
     name: 'Spinner V1',
     component: SpinnerTest,
     testPageButton: Constants.HOMEPAGE_SPINNER_BUTTON,
-    platforms: ['android'],
+    platforms: ['android', 'win32'],
   },
   {
     name: 'Stroke Width Tokens',

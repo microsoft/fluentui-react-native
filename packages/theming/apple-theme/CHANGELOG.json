@@ -2,6 +2,87 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Mon, 10 Apr 2023 16:10:15 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.20.0",
+      "version": "0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "de537fb81d0da93ee744c5d26247729d7982a453",
+            "comment": "Add trait collection support for multiwindow"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/experimental-appearance-additions to v0.4.0",
+            "commit": "4143b045fc2e6049711c3f5ff9d539015face7ea"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Mar 2023 21:53:45 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.19.2",
+      "version": "0.19.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.18.2",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/experimental-appearance-additions to v0.3.9",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.10",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Mar 2023 17:22:31 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.19.1",
+      "version": "0.19.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.18.1",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/experimental-appearance-additions to v0.3.8",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.9",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.19.0",
       "version": "0.19.0",

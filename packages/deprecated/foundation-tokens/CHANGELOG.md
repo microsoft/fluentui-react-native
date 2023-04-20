@@ -1,8 +1,25 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Mar 2023 21:53:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.31
+
+Tue, 21 Mar 2023 21:53:45 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.20.14
+
+## 0.12.30
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.20.13
 
 ## 0.12.29
 

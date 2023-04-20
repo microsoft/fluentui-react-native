@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/experimental-drawer",
   "entries": [
     {
+      "date": "Tue, 21 Mar 2023 21:53:46 GMT",
+      "tag": "@fluentui-react-native/experimental-drawer_v0.2.50",
+      "version": "0.2.50",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/experimental-drawer",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-drawer",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.8",
+            "commit": "e706a7afbd63d528878eadd179d5a91210ed62f6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Mar 2023 17:22:31 GMT",
+      "tag": "@fluentui-react-native/experimental-drawer_v0.2.49",
+      "version": "0.2.49",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-drawer",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.7",
+            "commit": "601309349ca2bc18780a3fb71c59337f7c26f9bf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Mar 2023 20:50:45 GMT",
       "tag": "@fluentui-react-native/experimental-drawer_v0.2.48",
       "version": "0.2.48",

@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component tests Input default 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+  keyboardShouldPersistTaps="handled"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  scrollEnabled={false}
+  setText={[Function]}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderBottomColor": "#d1d1d1",
+          "borderBottomWidth": 0.5,
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholderTextColor="#616161"
+        style={
+          Object {
+            "color": "#616161",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+            "padding": 0,
+          }
+        }
+        value=""
+      />
+    </View>
+  </View>
+</RCTScrollView>
+`;
