@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 19 Apr 2023 10:08:39 GMT",
+      "tag": "@fluentui-react-native/menu_v1.6.0",
+      "version": "1.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "3b9596a195208ebf455958f7dd1e64af8e224d39",
+            "comment": "add blackbox example and remove unused tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Apr 2023 18:42:22 GMT",
       "tag": "@fluentui-react-native/menu_v1.5.0",
       "version": "1.5.0",

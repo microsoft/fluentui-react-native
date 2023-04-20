@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/input
 
-This log was last generated on Wed, 12 Apr 2023 18:42:22 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Apr 2023 09:41:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.0
+
+Thu, 20 Apr 2023 09:41:22 GMT
+
+### Minor changes
+
+- Expand input functionality (ayushsinghs@yahoo.in)
 
 ## 0.1.2
 

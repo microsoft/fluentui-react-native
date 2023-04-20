@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 12 Apr 2023 18:42:22 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Apr 2023 10:08:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.0
+
+Wed, 19 Apr 2023 10:08:39 GMT
+
+### Minor changes
+
+- add blackbox example and remove unused tokens (rohanpd.work@gmail.com)
 
 ## 1.5.0
 

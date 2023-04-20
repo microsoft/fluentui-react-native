@@ -28,7 +28,7 @@ export const inputLookup = (layer: string, state: FocusState & { text: string },
     (layer === 'filled' && !state.focused && !!state.text) ||
     (layer === 'typing' && state.focused && !!state.text) ||
     userProps[layer] ||
-    (layer === 'hasIcon' && userProps.icon) ||
+    (layer === 'hasIcon' && userProps.defaultIcon) ||
     (layer === 'error' && !!userProps.error && !!state.text)
   );
 };
@@ -46,46 +46,51 @@ export const Input = compose<InputType>({
     accessoryIconPressable: Pressable,
     accessoryIcon: Icon,
     assistiveText: Text,
-    secondaryText: Text,
+    accessoryText: Text,
   },
   useRender: (userProps: InputProps, useSlots: UseSlots<InputType>) => {
     const input = useInput(userProps);
-    const iconProps = createIconProps(input.props.icon);
     const accessoryIconProps = createIconProps(input.props.accessoryIcon);
     const Slots = useSlots(userProps, (layer) => inputLookup(layer, input.state, userProps));
 
     return (final: InputProps) => {
       const {
         label,
-        secondaryText,
+        accessoryText,
         assistiveText,
-        icon,
+        defaultIcon,
         accessoryIcon,
         textInputProps,
         error,
         accessoryButtonOnPress,
         keyboardShouldPersistTaps,
+        iconProps,
+        componentRef,
+        accessoryIconAccessibilityLabel,
         onChange, // Remove out of mergedProps
         ...mergedProps
       } = mergeProps(input.props, final);
-      const IconWrapper = icon ? Slots.inputWrapper : Fragment;
+      const IconWrapper = defaultIcon ? Slots.inputWrapper : Fragment;
 
       return (
         <Slots.root {...mergedProps} keyboardShouldPersistTaps={keyboardShouldPersistTaps ? keyboardShouldPersistTaps : 'handled'}>
           {label && <Slots.label>{label}</Slots.label>}
           <IconWrapper>
-            {icon && <Slots.icon {...iconProps} accessible={false} />}
+            {defaultIcon && <Slots.icon {...iconProps} accessible={false} />}
             <Slots.input>
               <Slots.textInput {...textInputProps} />
-              {secondaryText && <Slots.secondaryText>{secondaryText}</Slots.secondaryText>}
-              {accessoryIcon && (
+              {accessoryText && !!input.state.text && <Slots.accessoryText>{accessoryText}</Slots.accessoryText>}
+              {accessoryIcon && !!input.state.text && (
                 <Slots.accessoryIconPressable
                   accessibilityRole="button"
-                  onTouchStart={(e) => {
+                  accessibilityLabel={accessoryIconAccessibilityLabel}
+                  onPress={(e) => {
                     if (accessoryButtonOnPress) accessoryButtonOnPress(e);
                     else {
+                      if (input.props.textInputProps.editable === false) return;
                       input.props.setText('');
                       onChange && onChange('');
+                      componentRef.current.focus();
                     }
                   }}
                 >
