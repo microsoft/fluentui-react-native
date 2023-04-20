@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 19 Apr 2023 10:08:39 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Apr 2023 09:41:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.142.0
+
+Thu, 20 Apr 2023 09:41:22 GMT
+
+### Minor changes
+
+- Expand input functionality (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/input to v0.2.0
 
 ## 0.141.1
 

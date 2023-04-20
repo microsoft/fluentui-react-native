@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/input",
   "entries": [
     {
+      "date": "Thu, 20 Apr 2023 09:41:22 GMT",
+      "tag": "@fluentui-react-native/input_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/input",
+            "commit": "b2c2e21264313a0897cbf692315c01acd85fb4b5",
+            "comment": "Expand input functionality"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Apr 2023 18:42:22 GMT",
       "tag": "@fluentui-react-native/input_v0.1.2",
       "version": "0.1.2",

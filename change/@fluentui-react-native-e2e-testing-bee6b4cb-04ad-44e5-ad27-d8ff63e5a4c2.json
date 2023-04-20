@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Expand input functionality ",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}

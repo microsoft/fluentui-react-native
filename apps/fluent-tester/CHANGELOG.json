@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 20 Apr 2023 09:41:22 GMT",
+      "tag": "@fluentui-react-native/tester_v0.142.0",
+      "version": "0.142.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b2c2e21264313a0897cbf692315c01acd85fb4b5",
+            "comment": "Expand input functionality"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/input to v0.2.0",
+            "commit": "285d5087d9575291afd8e4a831c4cb4eeece3b7e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Apr 2023 15:57:29 GMT",
       "tag": "@fluentui-react-native/tester_v0.141.1",
       "version": "0.141.1",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 20 Apr 2023 09:41:22 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.23.0",
+      "version": "1.23.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "b2c2e21264313a0897cbf692315c01acd85fb4b5",
+            "comment": "Expand input functionality "
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Apr 2023 10:42:50 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.22.0",
       "version": "1.22.0",
