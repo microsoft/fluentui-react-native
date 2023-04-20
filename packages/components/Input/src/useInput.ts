@@ -23,7 +23,7 @@ export const useInput = (props: InputProps): InputInfo => {
     defaultValue,
     textInputProps,
     placeholder,
-    icon,
+    defaultIcon,
     focusedStateIcon,
     componentRef = defaultComponentRef,
     accessibilityLabel,
@@ -32,7 +32,7 @@ export const useInput = (props: InputProps): InputInfo => {
   } = props;
   const pressable = usePressableState({ onBlur, onFocus });
   const [text, setText] = React.useState<string>(defaultValue ? defaultValue : '');
-  const defaultIconProps = createIconProps(icon);
+  const defaultIconProps = createIconProps(defaultIcon);
   const focusedIconProps = createIconProps(focusedStateIcon);
   const [iconProps, setIconProps] = React.useState<IconProps>(defaultIconProps);
   React.useEffect(() => {
@@ -68,7 +68,7 @@ export const useInput = (props: InputProps): InputInfo => {
         ref: componentRef,
         accessibilityLabel,
       },
-      icon,
+      defaultIcon,
       focusedStateIcon,
       iconProps,
       defaultIconProps,

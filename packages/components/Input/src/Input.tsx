@@ -27,7 +27,7 @@ export const inputLookup = (layer: string, state: FocusState & { text: string },
     (layer === 'filled' && !state.focused && !!state.text) ||
     (layer === 'typing' && state.focused && !!state.text) ||
     userProps[layer] ||
-    (layer === 'hasIcon' && userProps.icon) ||
+    (layer === 'hasIcon' && userProps.defaultIcon) ||
     (layer === 'error' && !!userProps.error && !!state.text)
   );
 };
@@ -57,7 +57,7 @@ export const Input = compose<InputType>({
         label,
         accessoryText,
         assistiveText,
-        icon,
+        defaultIcon,
         accessoryIcon,
         textInputProps,
         error,
@@ -69,13 +69,13 @@ export const Input = compose<InputType>({
         onChange, // Remove out of mergedProps
         ...mergedProps
       } = mergeProps(input.props, final);
-      const IconWrapper = icon ? Slots.inputWrapper : Fragment;
+      const IconWrapper = defaultIcon ? Slots.inputWrapper : Fragment;
 
       return (
         <Slots.root {...mergedProps} keyboardShouldPersistTaps={keyboardShouldPersistTaps ? keyboardShouldPersistTaps : 'handled'}>
           {label && <Slots.label>{label}</Slots.label>}
           <IconWrapper>
-            {icon && <Slots.icon {...iconProps} accessible={false} />}
+            {defaultIcon && <Slots.icon {...iconProps} accessible={false} />}
             <Slots.input>
               <Slots.textInput {...textInputProps} />
               {accessoryText && !!input.state.text && <Slots.accessoryText>{accessoryText}</Slots.accessoryText>}

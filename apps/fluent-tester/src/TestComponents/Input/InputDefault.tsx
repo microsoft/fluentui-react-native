@@ -21,7 +21,7 @@ export const InputDefault: React.FunctionComponent = () => {
     <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={200} style={{ flex: 1 }}>
       <Input
         error={error}
-        icon={outlineIconProps}
+        defaultIcon={outlineIconProps}
         focusedStateIcon={filledIconProps}
         textInputProps={{ autoFocus: true }}
         placeholder="Only text upto 5 characters!"
@@ -32,7 +32,7 @@ export const InputDefault: React.FunctionComponent = () => {
           else setError('');
         }}
       />
-      <Input icon={outlineIconProps} placeholder="No focused state icon!" label="Label" />
+      <Input defaultIcon={outlineIconProps} placeholder="No focused state icon!" label="Label" />
       <Input
         placeholder="Enter text here!"
         accessoryIcon={dismissIconProps}

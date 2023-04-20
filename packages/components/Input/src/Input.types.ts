@@ -138,12 +138,12 @@ export interface InputProps extends PressableFocusProps {
   accessoryIconAccessibilityLabel?: string;
 
   /*
-   * Source URL or name of the icon to show on the input.
+   * Source URL or name of the default icon to show on the input.
    *
    * Based on fluent guidelines this icon should be an "outline" icon.
    * FocusedStateIcon is applied onFocus and should be a "filled" icon.
    */
-  icon?: IconSourcesType;
+  defaultIcon?: IconSourcesType;
 
   /*
    * Source URL or name of the icon to show when the input is focused.

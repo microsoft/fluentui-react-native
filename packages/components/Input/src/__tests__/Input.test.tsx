@@ -34,7 +34,7 @@ describe('Input component tests', () => {
   });
 
   it('Input with icon', () => {
-    const tree = renderer.create(<Input placeholder="Test" icon={iconProps} />).toJSON();
+    const tree = renderer.create(<Input placeholder="Test" defaultIcon={iconProps} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

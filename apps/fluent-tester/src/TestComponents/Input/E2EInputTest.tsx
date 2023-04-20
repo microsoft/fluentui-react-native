@@ -35,7 +35,7 @@ export const E2EInputTest: React.FunctionComponent = () => {
       </Text>
       <Input
         error={error}
-        icon={outlineIconProps}
+        defaultIcon={outlineIconProps}
         value={text}
         focusedStateIcon={filledIconProps}
         textInputProps={{ autoFocus: true }}

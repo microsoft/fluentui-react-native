@@ -62,7 +62,7 @@ describe('Input Functional Testing', () => {
 
   it('Validate error state was achieved', async () => {
     await InputPageObject.click(InputPageObject._primaryComponent);
-    await InputPageObject.typeText(' ');
+    await InputPageObject.typeText(INPUT_TYPE_STRING);
     await expect(await InputPageObject.verifyTextContent(INPUT_ERROR_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
