@@ -160,6 +160,53 @@ const MenuSubMenu: React.FunctionComponent = () => {
   );
 };
 
+const SubmenuWithScrollView: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
+  return (
+    <Menu {...props}>
+      <MenuTrigger>
+        <MenuItem>A second MenuItem trigger</MenuItem>
+      </MenuTrigger>
+      <MenuPopover maxHeight={200}>
+        <MenuList>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+        </MenuList>
+      </MenuPopover>
+    </Menu>
+  );
+};
+
+const MenuSubMenuWithScrollView: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover doNotTakePointerCapture={true}>
+          <MenuList>
+            <MenuItem>A MenuItem</MenuItem>
+            <SubmenuWithScrollView />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const MenuOpenOnHover: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
@@ -374,6 +421,13 @@ const menuSections: TestSection[] = [
     name: 'Menu Radioitem',
     component: MenuRadioItem,
   },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Submenu with ScrollView',
+      component: MenuSubMenuWithScrollView,
+    },
+  }),
   Platform.select({
     android: null,
     default: {
