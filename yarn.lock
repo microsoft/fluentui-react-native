@@ -3233,12 +3233,12 @@
   integrity sha512-RQul5wEfY7BjWm0sYY86cmUN/pcXWGyVxWX93DFFJvcrxax5zKlieLwA3T77xJGwNcZW0YW6CYG70p1m8xPFmA==
 
 "@types/enzyme@^3.10.5":
-  version "3.10.12"
-  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.12.tgz#ac4494801b38188935580642f772ad18f72c132f"
-  integrity sha512-xryQlOEIe1TduDWAOphR0ihfebKFSWOXpIsk+70JskCfRfW+xALdnJ0r1ZOTo85F9Qsjk6vtlU7edTYHbls9tA==
+  version "3.10.13"
+  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.13.tgz#332c0ed59b01f7b1c398c532a1c21a5feefabeb1"
+  integrity sha512-FCtoUhmFsud0Yx9fmZk179GkdZ4U9B0GFte64/Md+W/agx0L5SxsIIbhLBOxIb9y2UfBA4WQnaG1Od/UsUQs9Q==
   dependencies:
     "@types/cheerio" "*"
-    "@types/react" "*"
+    "@types/react" "^16"
 
 "@types/es6-collections@^0.5.29":
   version "0.5.33"
@@ -3561,7 +3561,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17", "@types/react@^17.0.2":
+"@types/react@*", "@types/react@^16", "@types/react@^17", "@types/react@^17.0.2":
   version "17.0.56"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.56.tgz#16f54a0b0a4820065b8296f1dd6da80791fcf964"
   integrity sha512-Z13f9Qz7Hg8f2g2NsBjiJSVWmON2b3K8RIqFK8mMKCIgvD0CD0ZChTukz87H3lI28X3ukXoNFGzo3ZW1ICTtPA==
