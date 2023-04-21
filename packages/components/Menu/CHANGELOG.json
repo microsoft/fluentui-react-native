@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 21 Apr 2023 04:54:14 GMT",
+      "tag": "@fluentui-react-native/menu_v1.6.2",
+      "version": "1.6.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "f4d293b635560aded539334f6463ce837577cc76",
+            "comment": "Add Home and End key functionality in MenuList"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 21 Apr 2023 00:04:59 GMT",
       "tag": "@fluentui-react-native/menu_v1.6.1",
       "version": "1.6.1",
