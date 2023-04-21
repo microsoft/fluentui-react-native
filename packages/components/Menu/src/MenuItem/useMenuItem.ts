@@ -10,6 +10,7 @@ import type { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
+import { useMenuItemTracking } from '../MenuList/useMenuList';
 
 export const triggerKeys = [' ', 'Enter'];
 export const submenuTriggerKeys = ['ArrowLeft', 'ArrowRight', ...triggerKeys];
@@ -60,6 +61,9 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
 
   useHoverFocusEffect(pressable.state.hovered, componentRef);
+
+  // Track the ref and disabled props on this menu item so the MenuList can handle Home and End keypresses.
+  useMenuItemTracking(componentRef, disabled);
 
   return {
     props: {
