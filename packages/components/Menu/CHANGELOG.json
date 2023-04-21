@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 21 Apr 2023 00:04:59 GMT",
+      "tag": "@fluentui-react-native/menu_v1.6.1",
+      "version": "1.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "11930a798152c8616af7f196e2c92b39b579bd32",
+            "comment": "enable pointer capture to be overridden"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Apr 2023 10:08:39 GMT",
       "tag": "@fluentui-react-native/menu_v1.6.0",
       "version": "1.6.0",
