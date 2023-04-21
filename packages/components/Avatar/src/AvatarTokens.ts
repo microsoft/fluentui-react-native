@@ -1,5 +1,6 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { AvatarTokens } from '.';
@@ -18,7 +19,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     iconColor: t.colors.neutralForeground3,
     ringColor: t.colors.transparentStroke,
     borderColor: t.colors.neutralStroke1,
-    borderWidth: t.host.appearance === 'highContrast' ? 1 : 0,
+    borderWidth: isHighContrast() ? 1 : 0,
     circular: {
       borderRadius: globalTokens.corner.radiusCircular,
     },

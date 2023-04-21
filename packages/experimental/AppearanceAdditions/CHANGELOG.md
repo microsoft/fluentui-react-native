@@ -1,8 +1,49 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
-This log was last generated on Fri, 03 Mar 2023 06:47:26 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Apr 2023 16:10:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Mon, 10 Apr 2023 16:10:16 GMT
+
+### Minor changes
+
+- Add trait collection support for multiwindow (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.3.9
+
+Tue, 21 Mar 2023 21:53:46 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.9.8
+
+## 0.3.8
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.7
+
+## 0.3.7
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.6
+
+## 0.3.6
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.5
 
 ## 0.3.5
 

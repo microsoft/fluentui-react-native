@@ -10,6 +10,7 @@ import type { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
+import { useMenuItemTracking } from '../MenuList/useMenuList';
 
 export const triggerKeys = [' ', 'Enter'];
 export const submenuTriggerKeys = ['ArrowLeft', 'ArrowRight', ...triggerKeys];
@@ -17,7 +18,7 @@ export const submenuTriggerKeys = ['ArrowLeft', 'ArrowRight', ...triggerKeys];
 export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
+  const { accessible, onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
   const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
   const { hasCheckmarks, hasIcons, hasTooltips, onArrowClose } = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
@@ -28,7 +29,6 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
       const isRtl = I18nManager.isRTL;
-
       const isArrowKey = isKeyPressEvent(e) && (e.nativeEvent.key === 'ArrowLeft' || e.nativeEvent.key === 'ArrowRight');
       const isArrowOpen =
         hasSubmenu &&
@@ -62,10 +62,13 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
 
   useHoverFocusEffect(pressable.state.hovered, componentRef);
 
+  // Track the ref and disabled props on this menu item so the MenuList can handle Home and End keypresses.
+  useMenuItemTracking(componentRef, disabled);
+
   return {
     props: {
       ...pressable.props,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),

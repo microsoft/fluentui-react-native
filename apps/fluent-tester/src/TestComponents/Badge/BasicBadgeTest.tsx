@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useCallback, useMemo } from 'react';
-import { View, Platform, Text, Image } from 'react-native';
+import { View, Platform, Image } from 'react-native';
 
 import { ToggleButton } from '@fluentui/react-native';
 import type {
@@ -14,6 +14,7 @@ import type {
 } from '@fluentui-react-native/badge';
 import { Badge, BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from '@fluentui-react-native/badge';
 import { useFluentTheme } from '@fluentui-react-native/framework';
+import { Text } from '@fluentui-react-native/text';
 
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import { svgProps, iconProps } from '../Common/iconExamples';
@@ -57,6 +58,7 @@ export const BasicBadge: React.FunctionComponent = () => {
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
   const shadow = showShadow ? theme.shadows.shadow4 : undefined;
+  const showShadowWarning = showShadow && (badgeAppearance == 'ghost' || badgeAppearance == 'outline');
   const CustomBadge = useCustomizedBadge({ shadowToken: shadow });
 
   const badgeConfig = {
@@ -107,6 +109,7 @@ export const BasicBadge: React.FunctionComponent = () => {
         ) : (
           <CustomBadge {...badgeConfig}>Basic badge</CustomBadge>
         )}
+        {showShadowWarning && <Text variant="captionStandard">Adding a shadow to ghost and outline variants is not supported</Text>}
       </View>
       <Text>Size</Text>
       <Badge size="tiny" />

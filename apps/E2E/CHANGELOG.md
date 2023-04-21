@@ -1,8 +1,105 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Sat, 04 Mar 2023 00:02:26 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Apr 2023 09:41:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.23.0
+
+Thu, 20 Apr 2023 09:41:22 GMT
+
+### Minor changes
+
+- Expand input functionality  (ayushsinghs@yahoo.in)
+
+## 1.22.0
+
+Tue, 11 Apr 2023 10:42:50 GMT
+
+### Minor changes
+
+- Add new component - input (ayushsinghs@yahoo.in)
+
+## 1.21.7
+
+Mon, 10 Apr 2023 19:48:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.41
+
+## 1.21.6
+
+Mon, 10 Apr 2023 16:10:16 GMT
+
+### Patches
+
+- Update appium beta version to version that doesn't use jsdoc (ruaraki@microsoft.com)
+
+## 1.21.5
+
+Thu, 23 Mar 2023 20:49:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.40
+
+## 1.21.4
+
+Tue, 21 Mar 2023 21:53:46 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.39
+
+## 1.21.3
+
+Tue, 21 Mar 2023 17:43:32 GMT
+
+### Patches
+
+- Revert "Update appium and node version (#2620)" (krsiler@microsoft.com)
+
+## 1.21.2
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.38
+
+## 1.21.1
+
+Fri, 17 Mar 2023 18:39:51 GMT
+
+### Patches
+
+- Update appium beta version to version that doesn't use jsdoc (ruaraki@microsoft.com)
+
+## 1.21.0
+
+Fri, 17 Mar 2023 14:13:25 GMT
+
+### Minor changes
+
+- IconTests (email not defined)
+
+## 1.20.8
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.37
+
+## 1.20.7
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.36
 
 ## 1.20.6
 

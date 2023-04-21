@@ -22,15 +22,6 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   maxWidth: 300,
   padding: globalTokens.size40,
   paddingHorizontal: globalTokens.size80,
-  hovered: {
-    backgroundColor: t.colors.neutralBackground1Hover,
-    color: t.colors.neutralForeground1Hover,
-    iconColor: t.colors.neutralForeground1Hover,
-    checked: {
-      checkmarkColor: t.colors.neutralForeground1Hover,
-      checkmarkVisibility: 1,
-    },
-  },
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
     color: t.colors.neutralForeground1Pressed,

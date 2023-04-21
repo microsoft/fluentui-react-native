@@ -10,6 +10,7 @@ import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemChec
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
+import { useMenuItemTracking } from '../MenuList/useMenuList';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -56,6 +57,7 @@ export const useMenuCheckboxInteraction = (
     accessibilityActions,
     accessibilityLabel,
     accessibilityState,
+    accessible,
     componentRef = defaultComponentRef,
     disabled,
     name,
@@ -112,6 +114,9 @@ export const useMenuCheckboxInteraction = (
 
   useHoverFocusEffect(pressable.state.hovered, componentRef);
 
+  // Track the ref and disabled props on this menu item so the MenuList can handle Home and End keypresses.
+  useMenuItemTracking(componentRef, disabled);
+
   const state = {
     ...pressable.state,
     checked: isChecked,
@@ -123,7 +128,7 @@ export const useMenuCheckboxInteraction = (
   return {
     props: {
       ...pressable.props,
-      accessible: true,
+      accessible: accessible ?? true,
       accessibilityActions: accessibilityActionsProp,
       accessibilityLabel,
       accessibilityRole: 'menuitem',

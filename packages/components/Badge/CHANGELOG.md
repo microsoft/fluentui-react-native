@@ -1,8 +1,99 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 07 Mar 2023 07:23:34 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Apr 2023 19:48:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.8
+
+Mon, 10 Apr 2023 19:48:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.80
+- Bump @fluentui-react-native/icon to v0.17.25
+- Bump @fluentui-react-native/text to v0.19.31
+
+## 0.5.7
+
+Thu, 23 Mar 2023 20:49:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.79
+- Bump @fluentui-react-native/icon to v0.17.24
+- Bump @fluentui-react-native/text to v0.19.30
+
+## 0.5.6
+
+Tue, 21 Mar 2023 21:53:45 GMT
+
+### Patches
+
+- Trigger manual bump (no changes) (krsiler@microsoft.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.78
+- Bump @fluentui-react-native/framework to v0.9.8
+- Bump @fluentui-react-native/icon to v0.17.23
+- Bump @fluentui-react-native/text to v0.19.29
+- Bump @fluentui-react-native/theming-utils to v0.23.10
+- Bump @fluentui-react-native/tokens to v0.20.14
+
+## 0.5.5
+
+Sat, 18 Mar 2023 17:22:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.77
+- Bump @fluentui-react-native/framework to v0.9.7
+- Bump @fluentui-react-native/icon to v0.17.22
+- Bump @fluentui-react-native/text to v0.19.28
+- Bump @fluentui-react-native/theming-utils to v0.23.9
+- Bump @fluentui-react-native/tokens to v0.20.13
+
+## 0.5.4
+
+Fri, 17 Mar 2023 14:13:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.17.21
+
+## 0.5.3
+
+Thu, 16 Mar 2023 18:23:39 GMT
+
+### Patches
+
+- Remove check for appearance variant on shadow token layer (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.5.2
+
+Tue, 14 Mar 2023 20:50:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.76
+- Bump @fluentui-react-native/framework to v0.9.6
+- Bump @fluentui-react-native/icon to v0.17.20
+- Bump @fluentui-react-native/text to v0.19.27
+- Bump @fluentui-react-native/theme-tokens to v0.24.5
+- Bump @fluentui-react-native/theme-types to v0.31.0
+- Bump @fluentui-react-native/theming-utils to v0.23.8
+- Bump @fluentui-react-native/tokens to v0.20.12
+
+## 0.5.1
+
+Tue, 07 Mar 2023 20:54:15 GMT
+
+### Patches
+
+- Repoint current implementations of isHighContrast to new function (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.75
+- Bump @fluentui-react-native/framework to v0.9.5
+- Bump @fluentui-react-native/icon to v0.17.19
+- Bump @fluentui-react-native/text to v0.19.26
+- Bump @fluentui-react-native/theming-utils to v0.23.7
 
 ## 0.5.0
 

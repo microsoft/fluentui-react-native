@@ -5,11 +5,13 @@ import { Animated, Easing, View } from 'react-native';
 
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { Svg, Path } from 'react-native-svg';
+import { Path, Svg } from 'react-native-svg';
 
-import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './Spinner.styling';
+import { stylingSettings } from './Spinner.styling';
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
+import { diameterSizeMap, lineThicknessSizeMap } from './SpinnerTokens.win32';
+import { useSpinner } from './useSpinner';
 
 const getSpinnerPath = (diameter: number, width: number, color: ColorValue) => {
   const start = {
@@ -31,7 +33,8 @@ export const Spinner = compose<SpinnerType>({
     svg: AnimatedSvg,
   },
   useRender: (props: SpinnerProps, useSlots: UseSlots<SpinnerType>) => {
-    const Slots = useSlots(props);
+    const spinnerProps = useSpinner(props);
+    const Slots = useSlots(spinnerProps);
     const status = props.status !== undefined ? props.status : 'active';
     const hidesWhenStopped = props.hidesWhenStopped != undefined ? props.hidesWhenStopped : true;
     const hideOpacity = status === 'inactive' && hidesWhenStopped == true ? 0 : 1;
@@ -74,11 +77,7 @@ export const Spinner = compose<SpinnerType>({
       outputRange: ['0deg', '359deg'],
     });
 
-    const path = getSpinnerPath(
-      diameterSizeMap[Slots.root({}).props.size],
-      lineThicknessSizeMap[Slots.root({}).props.size],
-      Slots.root({}).props.trackColor,
-    );
+    const path = getSpinnerPath(diameterSizeMap[spinnerProps.size], lineThicknessSizeMap[spinnerProps.size], spinnerProps.trackColor);
 
     // perspective is needed for animations to work on Android. See https://reactnative.dev/docs/animations#bear-in-mind
     const animatedSvgProps = {
