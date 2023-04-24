@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Sat, 22 Apr 2023 23:41:05 GMT",
+      "tag": "@fluentui-react-native/menu_v1.6.3",
+      "version": "1.6.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.32.51",
+            "commit": "db950e1d4e3dd9f6ad94a34db94ab0a24b12a93b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 21 Apr 2023 04:54:14 GMT",
+      "tag": "@fluentui-react-native/menu_v1.6.2",
+      "version": "1.6.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "f4d293b635560aded539334f6463ce837577cc76",
+            "comment": "Add Home and End key functionality in MenuList"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 21 Apr 2023 00:04:59 GMT",
+      "tag": "@fluentui-react-native/menu_v1.6.1",
+      "version": "1.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "11930a798152c8616af7f196e2c92b39b579bd32",
+            "comment": "enable pointer capture to be overridden"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Apr 2023 10:08:39 GMT",
       "tag": "@fluentui-react-native/menu_v1.6.0",
       "version": "1.6.0",

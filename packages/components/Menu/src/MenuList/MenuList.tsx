@@ -86,7 +86,7 @@ export const MenuList = compose<MenuListType>({
 
       const content =
         Platform.OS === 'macos' ? (
-          <Slots.root onMouseLeave={setFocusZoneFocus}>
+          <Slots.root onMouseLeave={setFocusZoneFocus} onKeyDown={menuList.onListKeyDown}>
             <Slots.scrollView
               accessibilityRole="menu"
               showsVerticalScrollIndicator={menuContext.hasMaxHeight}
@@ -104,11 +104,13 @@ export const MenuList = compose<MenuListType>({
             </Slots.scrollView>
           </Slots.root>
         ) : menuContext.hasMaxHeight ? (
-          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
+          <Slots.root onKeyDown={menuList.onListKeyDown} style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
             <Slots.scrollView>{childrenWithSet}</Slots.scrollView>
           </Slots.root>
         ) : (
-          <Slots.root style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>{childrenWithSet}</Slots.root>
+          <Slots.root onKeyDown={menuList.onListKeyDown} style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
+            {childrenWithSet}
+          </Slots.root>
         );
 
       return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;

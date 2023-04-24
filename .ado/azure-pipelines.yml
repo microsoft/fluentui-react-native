@@ -5,7 +5,7 @@ variables:
   CI: true
 
 jobs:
-  # Dedicated task to build and bundle JS code, including jest tests, snapshot testing, and linting, because these things can be super
+  # Dedicated task to build JS code, including jest tests, snapshot testing, and linting, because these things can be super
   # time consuming they don't need to run on every CI pass, instead do a dedicated JS loop to make the platform specific tests start quicker
   - job: JSPR
     displayName: JS PR
