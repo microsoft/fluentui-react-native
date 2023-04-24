@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix talkbalks enabling status",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
