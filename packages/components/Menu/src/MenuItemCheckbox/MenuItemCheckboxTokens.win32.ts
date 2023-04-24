@@ -31,15 +31,6 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
       checkmarkVisibility: 1,
     },
   },
-  hovered: {
-    backgroundColor: t.colors.neutralBackground1Hover,
-    color: t.colors.neutralForeground1Hover,
-    iconColor: t.colors.neutralForeground1Hover,
-    checked: {
-      checkmarkColor: t.colors.neutralForeground1Hover,
-      checkmarkVisibility: 1,
-    },
-  },
   disabled: {
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForegroundDisabled,

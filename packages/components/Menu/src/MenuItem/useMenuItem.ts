@@ -19,8 +19,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   const defaultComponentRef = React.useRef(null);
   const { accessible, onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
   const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
-  const { hasCheckmarks, hasIcons, hasTooltips, onArrowClose, setIsMenuItemHovered } = useMenuListContext();
-  const menuListContext = useMenuListContext();
+  const { hasCheckmarks, hasIcons, hasTooltips, onArrowClose } = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
   const shouldPersist = persistOnClick ?? persistOnItemClick;
 
@@ -60,46 +59,52 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
 
-  useHoverFocusEffect(pressable.state.hovered, componentRef, setIsMenuItemHovered);
-  useRemoveHoverEffect(pressable.state.hovered, menuListContext.isMenuItemHovered, pressable.props.onHoverOut);
+  useHoverFocusEffect(pressable.state.hovered, componentRef);
 
   const [enableFocusRing, setEnableFocusRing] = React.useState(!pressable.state.hovered);
 
   const onHoverIn = React.useCallback(
     (e) => {
       pressable.props.onHoverIn(e);
-      // when it's a hover focus
-      if (!pressable.state.hovered && !pressable.state.focused) {
+      // when it's a hover focus, set enableFocusRing explicitly to false
+      if (!pressable.state.focused) {
         setEnableFocusRing(false);
       }
     },
     [pressable],
   );
 
-  const onFocusOverride = React.useCallback(
+  const onFocus = React.useCallback(
     (e) => {
       pressable.props.onFocus(e);
-      // when it's not a hover focus
-      if (!pressable.state.focused /*&& !pressable.state.hovered*/) {
-        // remove hover state from everywhere else
-        setIsMenuItemHovered(false);
+      // when it's not a hover focus, set enableFocusRing explicitly to true
+      if (!pressable.state.focused) {
         setEnableFocusRing(true);
       }
     },
-    [pressable, setIsMenuItemHovered],
+    [pressable],
   );
 
   return {
     props: {
       ...pressable.props,
-      onHoverIn: onHoverIn,
-      onFocus: onFocusOverride,
+      onHoverIn: Platform.select({
+        macos: pressable.props.onHoverIn,
+        default: onHoverIn, // win32
+      }),
+      onFocus: Platform.select({
+        macos: pressable.props.onFocus,
+        default: onFocus, // win32
+      }),
       accessible: accessible ?? true,
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
       disabled,
-      enableFocusRing: enableFocusRing,
+      enableFocusRing: Platform.select({
+        macos: false,
+        default: enableFocusRing, // win32
+      }),
       focusable: Platform.select({
         macos: !disabled,
         default: true, // win32
@@ -125,23 +130,12 @@ function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: Acc
   return { disabled };
 }
 
-export const useHoverFocusEffect = (hovered: boolean, componentRef: React.MutableRefObject<any>, setIsMenuItemHovered: any) => {
+export const useHoverFocusEffect = (hovered: boolean, componentRef: React.MutableRefObject<any>) => {
   React.useLayoutEffect(() => {
     if (hovered) {
       componentRef?.current?.focus();
-      setIsMenuItemHovered(true);
     } else {
       componentRef?.current?.blur();
-      setIsMenuItemHovered(undefined);
     }
-  }, [hovered, componentRef, setIsMenuItemHovered]);
-};
-
-export const useRemoveHoverEffect = (hovered: boolean, isMenuItemHovered: boolean, onHoverOut: any) => {
-  React.useLayoutEffect(() => {
-    if (hovered && isMenuItemHovered != undefined && !isMenuItemHovered) {
-      // remove Focus from this menuITem
-      onHoverOut();
-    }
-  }, [hovered, isMenuItemHovered, onHoverOut]);
+  }, [hovered, componentRef]);
 };
