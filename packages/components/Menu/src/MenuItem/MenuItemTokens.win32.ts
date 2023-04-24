@@ -41,4 +41,10 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
     iconColor: t.colors.neutralForeground1Hover,
     submenuIndicatorColor: t.colors.neutralForeground1Hover,
   },
+  hovered: {
+    backgroundColor: t.colors.neutralBackground1Hover,
+    color: t.colors.neutralForeground1Hover,
+    iconColor: t.colors.neutralForeground1Hover,
+    submenuIndicatorColor: t.colors.neutralForeground1Hover,
+  },
 });
