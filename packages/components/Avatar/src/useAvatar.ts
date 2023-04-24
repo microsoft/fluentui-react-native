@@ -39,7 +39,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const showRing = active === 'active' && activeAppearance === 'ring';
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
   const accessibilityText = `${accessibilityLabel ? `${accessibilityLabel}` : undefined || `${name || ''}`}
-   ${showBadge ? `, ${badge.status}` : ''}${active != undefined ? active : ''} ${badge?.outOfOffice ? 'Out of Office' : ''} `;
+   ${showBadge ? `,${badge.status}` : ''}${active != undefined ? active : ''} ${badge?.outOfOffice ? 'Out of Office' : ''}`;
   const state: AvatarState = {
     showRing,
     transparentRing: !!transparentRing,
