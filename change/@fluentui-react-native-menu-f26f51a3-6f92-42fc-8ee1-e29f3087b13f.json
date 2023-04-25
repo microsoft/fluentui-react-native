@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "set n of m on submenu trigger",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
