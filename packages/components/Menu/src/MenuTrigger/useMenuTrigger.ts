@@ -76,21 +76,19 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
   );
 
   const accessibilityPositionInSet = React.useMemo(() => {
-    const baseAccessibilityPositionInSet = context.accessibilityPositionInSet;
     if (childAccessibilityPositionInSet) {
       return childAccessibilityPositionInSet;
     }
 
-    return baseAccessibilityPositionInSet;
+    return context.accessibilityPositionInSet;
   }, [childAccessibilityPositionInSet, context.accessibilityPositionInSet]);
 
   const accessibilitySetSize = React.useMemo(() => {
-    const baseAccessibilitySetSize = context.accessibilitySetSize;
     if (childAccessibilitySetSize) {
       return childAccessibilitySetSize;
     }
 
-    return baseAccessibilitySetSize;
+    return context.accessibilitySetSize;
   }, [childAccessibilitySetSize, context.accessibilitySetSize]);
 
   const onHoverIn = React.useCallback(
