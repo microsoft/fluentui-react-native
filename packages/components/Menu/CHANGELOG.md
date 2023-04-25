@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Sat, 22 Apr 2023 23:41:05 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Apr 2023 02:09:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.0
+
+Tue, 25 Apr 2023 02:09:03 GMT
+
+### Minor changes
+
+- fixed hovered and focused visuals (email not defined)
 
 ## 1.6.3
 

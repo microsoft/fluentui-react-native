@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "fixed hovered and focused visuals",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
