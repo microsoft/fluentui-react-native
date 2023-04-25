@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 25 Apr 2023 02:09:03 GMT",
+      "tag": "@fluentui-react-native/menu_v1.7.0",
+      "version": "1.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "ffbdc9bbad312b93a9d48b87a190f18079598b4c",
+            "comment": "fixed hovered and focused visuals"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 22 Apr 2023 23:41:05 GMT",
+      "tag": "@fluentui-react-native/menu_v1.6.3",
+      "version": "1.6.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.32.51",
+            "commit": "db950e1d4e3dd9f6ad94a34db94ab0a24b12a93b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 21 Apr 2023 04:54:14 GMT",
       "tag": "@fluentui-react-native/menu_v1.6.2",
       "version": "1.6.2",
