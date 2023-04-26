@@ -1,237 +1,180 @@
+import { Text, ContextualMenuItem, ContextualMenu } from '@fluentui/react-native';
+//import { ButtonV1 as Button } from '@fluentui/react-native';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
-
-import { Separator, TextV1 as Text } from '@fluentui/react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
+//import { Stack } from '@fluentui-react-native/stack';
+//import { stackStyle /*, commonTestStyles*/ } from './TestComponents/Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import type { Theme } from '@fluentui-react-native/framework';
-import { useTheme } from '@fluentui-react-native/theme-types';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { commonTestStyles as commonStyles } from './TestComponents/Common/styles';
+//import { svgProps } from './TestComponents/Common/iconExamples';
 
-import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
-import { testProps } from './TestComponents/Common/TestProps';
-import { tests } from './testPages';
-import { ThemePickers } from './theme/ThemePickers';
-import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVIEWER } from '../../E2E/src/common/consts';
-import { ROOT_VIEW } from '../../E2E/src/common/consts';
+export const styles = StyleSheet.create({
+  text: {
+    fontSize: 12,
+  },
+});
 
-// uncomment the below lines to enable message spy
-/**
-import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
-MessageQueue.spy(true);
- */
+// const fontBuiltInProps = {
+//   fontFamily: 'Arial',
+//   codepoint: 0x2663,
+//   fontSize: 24,
+// };
 
 export interface FluentTesterProps {
   enableSinglePaneView?: boolean;
 }
 
-interface HeaderProps {
-  enableSinglePaneView?: boolean;
-  enableBackButtonIOS?: boolean;
-  onBackButtonPressedIOS?: () => void;
-}
+export const FluentTester: React.FunctionComponent<FluentTesterProps> = () => {
+  const [content, setContent] = React.useState([]);
+  // const [renderSV, setRenderSV] = React.useState(false);
 
-const getThemedStyles = themedStyleSheet((t: Theme) => {
-  return {
-    root: {
-      backgroundColor: t.colors.neutralBackground1,
-      flex: 1,
-      flexGrow: 1,
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-      alignItems: 'stretch',
-      padding: 4,
-    },
-    testSeparator: {
-      borderColor: t.colors.menuDivider,
-      borderWidth: 0.1,
-    },
+  // const addSingleLineComponent = () => {
+  //   setContent(content.concat(<Text>New single line text component</Text>));
+  // };
+
+  const addMultLineComponent = () => {
+    setContent(content.concat(<Text>New single line</Text>));
   };
-});
 
-const EmptyComponent: React.FunctionComponent = () => {
-  return <RNText style={fluentTesterStyles.noTest}>Select a component from the test list.</RNText>;
-};
+  // const removeComponent = () => {
+  //   const newArr = content.splice(0, content.length - 1);
+  //   setContent(newArr);
+  // };
 
-const HeaderSeparator = Separator.customize((t) => ({
-  color: t.colors.bodyFrameDivider,
-  separatorWidth: 2,
-}));
+  // const resetScrollViewer = () => {
+  //   setContent([]);
+  // };
 
-const TestListSeparator = Separator.customize((t) => ({
-  color: t.colors.menuDivider,
-  separatorWidth: 2,
-}));
+  // const setRenderSv = (val) => {
+  //   setRenderSV(val);
+  // };
 
-const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
-  const { enableSinglePaneView, enableBackButtonIOS, onBackButtonPressedIOS } = props;
-  const theme = useTheme();
+  const [showCallout, setShowCallout] = React.useState(false);
 
-  const headerStyle = enableSinglePaneView ? fluentTesterStyles.headerWithBackButton : fluentTesterStyles.header;
+  const toggleShowCallout = React.useCallback(() => {
+    setShowCallout(!showCallout);
+  }, [showCallout, setShowCallout]);
 
-  const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
+  const stdBtnRef = React.useRef(null);
+  const [contextualContent, setContextualContent] = React.useState([]);
 
-  return (
-    <View style={headerStyle}>
-      <Text
-        style={fluentTesterStyles.testHeader}
-        variant="heroLargeSemibold"
-        color={theme.host.palette?.TextEmphasis}
-        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-        {...testProps(BASE_TESTPAGE)}
-      >
-        ⚛ FluentUI Tests
-      </Text>
-      <View style={fluentTesterStyles.header}>
-        {/* On iPhone, We need a back button. Android has an OS back button, while desktop platforms have a two-pane view */}
-        {Platform.OS === 'ios' && !Platform.isPad && (
-          <Button
-            appearance="subtle"
-            style={fluentTesterStyles.backButton}
-            onClick={onBackButtonPressedIOS}
-            disabled={!enableBackButtonIOS}
-          >
-            {backButtonTitle}
-          </Button>
-        )}
-        <ThemePickers />
-      </View>
-    </View>
-  );
-});
+  const [key, setKey] = React.useState(' ');
+  const addContextualComponent = () => {
+    setContextualContent(contextualContent.concat(<ContextualMenuItem text="MenuItem 1" itemKey={key} />));
+    setKey(key + '1');
+  };
 
-// filters and sorts tests alphabetically
-const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
-const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
+  const [footerHeight, setFooterHeight] = React.useState(40);
+  const [availableSpace, setAvailableSpace] = React.useState(0);
+  const [svSize, setSvSize] = React.useState(0);
 
-export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
-  const { enableSinglePaneView } = props;
+  const ChangeSvHeight = () => {
+    setFooterHeight(footerHeight + 20);
+  };
 
-  const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
-  const [onTestListView, setOnTestListView] = React.useState(true);
-  const theme = useTheme();
-  const themedStyles = getThemedStyles(theme);
+  const RemoveSvHeight = () => {
+    setFooterHeight(footerHeight - 20);
+  };
 
-  const onBackPress = React.useCallback(() => {
-    setOnTestListView(true);
-    if (Platform.OS === 'android') {
-      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }
-    return true;
-  }, []);
-
-  const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
-
-  // This is used to initially bring focus to the app on win32
-  const focusOnMountRef = React.useRef<View>();
+  // const setAvailableSpace = () => {
+  //   const cardMaxHeight = 400;
+  //   const headerHeight = 40;
+  //   setAvailableSpace(cardMaxHeight - headerHeight - footerHeight);
+  // };
 
   React.useEffect(() => {
-    if (Platform.OS === ('win32' as any)) {
-      focusOnMountRef.current.focus();
+    console.log('In Effect');
+    const cardMaxHeight = 400;
+    const headerHeight = 40;
+    setAvailableSpace(cardMaxHeight - headerHeight - footerHeight);
+
+    const contentSize = (content.length + 5) * 16;
+
+    if (contentSize > availableSpace) {
+      setSvSize(availableSpace);
+    } else {
+      setSvSize(contentSize + 2);
     }
-  }, []);
-
-  const RootView = Platform.select({
-    ios: SafeAreaView,
-    default: View,
-  });
-
-  const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
-  const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
-
-  const TestList: React.FunctionComponent = React.memo(() => {
-    return (
-      <View style={fluentTesterStyles.testList}>
-        <ScrollView
-          contentContainerStyle={fluentTesterStyles.testListContainerStyle}
-          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-          {...testProps(TESTPAGE_BUTTONS_SCROLLVIEWER)}
-        >
-          {sortedTestComponents.map((description, index) => {
-            return (
-              <Button
-                appearance="subtle"
-                key={index}
-                disabled={index == selectedTestIndex}
-                onClick={() => setSelectedTestIndex(index)}
-                style={fluentTesterStyles.testListItem}
-                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-                {...testProps(description.testPageButton)}
-                // This ref so focus can be set on it when the app mounts in win32. Without this, focus won't be set anywhere.
-                {...(index === 0 && { componentRef: focusOnMountRef })}
-              >
-                {description.name}
-              </Button>
-            );
-          })}
-        </ScrollView>
-
-        <TestListSeparator vertical style={fluentTesterStyles.testListSeparator} />
-      </View>
-    );
-  });
-
-  const MobileTestList: React.FunctionComponent = React.memo(() => {
-    return (
-      <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
-        <ScrollView
-          contentContainerStyle={fluentTesterStyles.testListContainerStyle}
-          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-          {...testProps(TESTPAGE_BUTTONS_SCROLLVIEWER)}
-        >
-          {sortedTestComponents.map((description, index) => {
-            return (
-              <View key={index}>
-                <Text
-                  key={index}
-                  onPress={() => {
-                    setOnTestListView(false);
-                    setSelectedTestIndex(index);
-                    if (Platform.OS === 'android') {
-                      BackHandler.addEventListener('hardwareBackPress', onBackPress);
-                    }
-                  }}
-                  style={mobileStyles.testListItem}
-                  /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-                  {...testProps(description.testPageButton)}
-                >
-                  {description.name}
-                </Text>
-                <Separator style={themedStyles.testSeparator} />
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
-    );
-  });
-
-  const TestComponentView: React.FunctionComponent = () => {
-    return (
-      <ScrollView
-        keyboardShouldPersistTaps="handled" // Prevents keyboard from dismissing when tapping on a text input
-        contentContainerStyle={fluentTesterStyles.testSection}
-        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-        {...testProps(TESTPAGE_CONTENT_SCROLLVIEWER)}
-      >
-        <TestComponent />
-      </ScrollView>
-    );
-  };
+  }, [footerHeight, availableSpace, content.length]);
 
   return (
-    // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
-    <RootView
-      style={themedStyles.root}
-      accessible={Platform.OS !== 'ios'}
-      /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-      {...testProps(ROOT_VIEW)}
-    >
-      <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
-      <HeaderSeparator />
-      <View style={fluentTesterStyles.testRoot}>
-        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-        {isTestSectionVisible && <TestComponentView />}
+    <View>
+      <Button onClick={ChangeSvHeight}>Add Height</Button>
+      <Button onClick={RemoveSvHeight}>Remove Height</Button>
+      <Button onClick={addMultLineComponent}>Add Multi Component</Button>
+      <View
+        style={{ maxHeight: 400, maxWidth: 272, flexDirection: 'column', alignItems: 'flex-start', borderColor: 'red', borderWidth: 1 }}
+      >
+        <Text style={{ height: 40, backgroundColor: 'lightblue' }}>Header Test</Text>
+        <ScrollView style={{ backgroundColor: 'lightgreen', height: svSize /*minHeight: 40, maxHeight: availableSpace*/ }}>
+          <Text>New single line</Text>
+          <Text>New single line</Text>
+          <Text>New single line</Text>
+          <Text>New single line</Text>
+          <Text>New single line</Text>
+          {content}
+        </ScrollView>
+        <Text style={{ height: footerHeight, backgroundColor: 'lightpink' }}>Footer Text </Text>
       </View>
-    </RootView>
+      <View style={commonStyles.root}>
+        <View style={commonStyles.settings}>
+          {/* <View style={commonStyles.switch}>
+            <Text>Render ScrollViewer</Text>
+            <Switch value={renderSV} onValueChange={setRenderSv} />
+          </View>
+          <Button onClick={addSingleLineComponent} style={{ margin: 3 }}>
+            Add Single Component
+          </Button>
+          <Button onClick={addMultLineComponent} style={{ margin: 3 }}>
+            Add Multi Component
+          </Button>
+          <Button onClick={removeComponent} style={{ margin: 3 }}>
+            Remove Component
+          </Button>
+          <Button onClick={resetScrollViewer} style={{ margin: 3 }}>
+            Reset ScrollViewer
+          </Button> */}
+          <Button onClick={addContextualComponent} style={{ margin: 3 }}>
+            Add Contextual Component
+          </Button>
+          <Button onClick={toggleShowCallout} componentRef={stdBtnRef}>
+            Press for Contextual Menu
+          </Button>
+        </View>
+      </View>
+      {/* {renderSV && (
+        <View style={{ maxHeight: 200, maxWidth: 300, backgroundColor: 'pink' }}>
+          <ScrollView style={{ minHeight: 50, backgroundColor: 'lightblue' }}>
+            <Text style={styles.text}>Line 1</Text>
+            <Text style={styles.text}>Line 1</Text>
+            <Text style={styles.text}>Line 1</Text>
+            <Text style={styles.text}>
+              Line 1jefnhueilr bfluerb igilb ugb ieurabgyuierb gkjsrbg uosgbhsurgb erub uierb erubvguer bvguierbvguee gerbgfjbsdvb sdlkv
+              bdsrul ivbersdbveiuiv l vbiervlbseiuvbsertvusevuisde
+            </Text>
+            {content}
+          </ScrollView>
+        </View>
+      )} */}
+      {showCallout && (
+        <ContextualMenu target={stdBtnRef}>
+          <View
+            style={{ maxHeight: 400, maxWidth: 272, flexDirection: 'column', alignItems: 'flex-start', borderColor: 'red', borderWidth: 1 }}
+          >
+            <Text style={{ height: 40, backgroundColor: 'lightblue' }}>Header Test</Text>
+            <ScrollView style={{ backgroundColor: 'lightgreen', minHeight: 40, maxHeight: availableSpace }}>
+              <Text style={styles.text}>
+                Line 1wjfbriweu fbuier gbfilebgfeblerigfbuyeirbgf ioyuewgbuf we4rulfbuerioyuiew brgef erkgb uewyrer uergfihufrbegukb eryg
+                feisrfluwebrgfkyerjubfgeiyulergbf eargyuif bwerg ioyuwernjnefrrnf eruif geuirg bfebgf ielyufb aierfb iauerbf iuyrl bflb i
+              </Text>
+              <Text style={styles.text}>Line 1</Text>
+              <Text style={styles.text}>Line 1</Text>
+              {content}
+            </ScrollView>
+            <Text style={{ height: footerHeight, backgroundColor: 'lightpink' }}>Footer Text </Text>
+          </View>
+        </ContextualMenu>
+      )}
+    </View>
   );
 };
