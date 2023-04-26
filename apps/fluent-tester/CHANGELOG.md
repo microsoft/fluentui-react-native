@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 25 Apr 2023 02:09:03 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Apr 2023 20:11:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.142.5
+
+Wed, 26 Apr 2023 20:11:44 GMT
+
+### Patches
+
+- fixed accessibility props in pressable test for press to alert button (gulnazsayed@microsoft.com)
 
 ## 0.142.4
 

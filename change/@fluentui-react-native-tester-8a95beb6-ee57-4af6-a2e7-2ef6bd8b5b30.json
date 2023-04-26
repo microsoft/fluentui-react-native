@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fixed accessibility props in pressable test for press to alert button",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "gulnazsayed@microsoft.com",
-  "dependentChangeType": "patch"
-}

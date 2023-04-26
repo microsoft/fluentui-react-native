@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 26 Apr 2023 20:11:44 GMT",
+      "tag": "@fluentui-react-native/tester_v0.142.5",
+      "version": "0.142.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "8527eb2841a44a7e4c67a1c51617d60e598866ba",
+            "comment": "fixed accessibility props in pressable test for press to alert button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Apr 2023 02:09:03 GMT",
       "tag": "@fluentui-react-native/tester_v0.142.4",
       "version": "0.142.4",
