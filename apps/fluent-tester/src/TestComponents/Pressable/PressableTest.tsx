@@ -98,7 +98,7 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
     <Stack focusable={false}>
       <View
         accessible
-        accessibilityLabel={'Press'}
+        accessibilityLabel={'Press to alert'}
         onAccessibilityTap={onInvoke}
         accessibilityRole="button"
         focusable={true}
