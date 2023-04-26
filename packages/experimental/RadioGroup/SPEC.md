@@ -157,9 +157,9 @@ const radiogroup = (
 
 ### Horizontal RadioGroup
 
-Win32:
+The horizontal layout is not supported on Win32 and Android.
 
-![Horizontal RadioGroup Example on Win32](./assets/horizontal_radiogroup.png)
+![Horizontal RadioGroup Example](./assets/horizontal_radiogroup.png)
 
 ```tsx
 const onChange = React.useCallback((key: string) => {
@@ -178,9 +178,9 @@ const radiogroup = (
 
 ### Horizontal-Stacked RadioGroup
 
-Win32:
+The horizontal-stacked layout is not supported on Win32 and Android.
 
-![Horizontal-Stacked RadioGroup Example on Win32](./assets/horizontal_stacked_radiogroup.png)
+![Horizontal-Stacked RadioGroup Example](./assets/horizontal_stacked_radiogroup.png)
 
 ```tsx
 const onChange = React.useCallback((key: string) => {
