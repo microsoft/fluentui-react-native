@@ -75,22 +75,6 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
     [childOnAccessibilityAction, setOpen],
   );
 
-  const accessibilityPositionInSet = React.useMemo(() => {
-    if (childAccessibilityPositionInSet) {
-      return childAccessibilityPositionInSet;
-    }
-
-    return context.accessibilityPositionInSet;
-  }, [childAccessibilityPositionInSet, context.accessibilityPositionInSet]);
-
-  const accessibilitySetSize = React.useMemo(() => {
-    if (childAccessibilitySetSize) {
-      return childAccessibilitySetSize;
-    }
-
-    return context.accessibilitySetSize;
-  }, [childAccessibilitySetSize, context.accessibilitySetSize]);
-
   const onHoverIn = React.useCallback(
     (e: InteractionEvent) => {
       if (openOnHover) {
@@ -141,8 +125,8 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
       accessibilityState,
       accessibilityActions,
       onAccessibilityAction,
-      accessibilityPositionInSet, // win32
-      accessibilitySetSize, // win32
+      accessibilityPositionInSet: childAccessibilityPositionInSet ?? context.accessibilityPositionInSet, // win32
+      accessibilitySetSize: childAccessibilitySetSize ?? context.accessibilitySetSize, // win32
     },
     hasSubmenu: context.isSubmenu,
   };
