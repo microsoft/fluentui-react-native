@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 26 Apr 2023 20:11:44 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Apr 2023 19:45:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.143.0
+
+Thu, 27 Apr 2023 19:45:00 GMT
+
+### Minor changes
+
+- set n of m on submenu trigger (krsiler@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.8.0
 
 ## 0.142.5
 
