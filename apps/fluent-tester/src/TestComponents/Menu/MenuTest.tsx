@@ -318,7 +318,7 @@ const MenuNofM: React.FunctionComponent = () => {
             <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
             <MenuDivider />
-            {Platform.OS !== 'android' && <MenuWithCustomMenuTrigger accessibilityPositionInSet={16} accessibilitySetSize={7} />}
+            {Platform.OS !== 'android' && <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />}
             <MenuItem disabled accessibilitySetSize={2}>
               A disabled MenuItem
             </MenuItem>
@@ -351,7 +351,7 @@ const MenuWithCustomMenuTrigger: React.FunctionComponent<MenuProps> = (props: Me
             <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
             <MenuDivider />
-            {Platform.OS !== 'android' && <MenuWithCustomMenuTrigger />}
+            {Platform.OS !== 'android' && <Submenu />}
             <MenuItem disabled accessibilitySetSize={2}>
               A disabled MenuItem
             </MenuItem>
