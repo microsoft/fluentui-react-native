@@ -4482,9 +4482,9 @@ appium-remote-debugger@^9.1.1:
     teen_process "^2.0.0"
 
 appium-uiautomator2-driver@^2.12.3:
-  version "2.19.0"
-  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.19.0.tgz#43d46b5ac15984de282168ae3fa1ce5fda06944e"
-  integrity sha512-0UdLdKNBvVGvk/NfdnlcdIl3Jp9f4pfHwzhdvvwmfavsNaVPfpZCWJLzd2uKRRth5IC5uA3enMI4twwPqA4XMw==
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.21.0.tgz#1385737eec42b9ae3aad8237303cb7174218fa4c"
+  integrity sha512-O9k9qfQdg7gOhLql+Pt86r4glMrpRpNyS9L4yqxCmOkdUvikgQuG9DAJ/XUfvTgEbwd1QJFoPxUHvBjB7vxp2w==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.11.0"
