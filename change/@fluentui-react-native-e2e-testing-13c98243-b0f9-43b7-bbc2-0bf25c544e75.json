@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "test: e2e init for android menu",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "none"
-}
