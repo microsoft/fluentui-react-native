@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 28 Apr 2023 19:34:20 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.23.0",
+      "version": "1.23.0",
+      "comments": {
+        "none": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "5d78365aaa21b45ef76bc74ca3782121e13336d1",
+            "comment": "test: e2e init for android menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Apr 2023 09:41:22 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.23.0",
       "version": "1.23.0",

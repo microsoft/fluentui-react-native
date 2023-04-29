@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 27 Apr 2023 19:45:00 GMT",
+      "tag": "@fluentui-react-native/tester_v0.143.0",
+      "version": "0.143.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "331a77774f443d8af6dec5165640ccf46557e2a8",
+            "comment": "set n of m on submenu trigger"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.8.0",
+            "commit": "331a77774f443d8af6dec5165640ccf46557e2a8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 26 Apr 2023 20:11:44 GMT",
+      "tag": "@fluentui-react-native/tester_v0.142.5",
+      "version": "0.142.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "8527eb2841a44a7e4c67a1c51617d60e598866ba",
+            "comment": "fixed accessibility props in pressable test for press to alert button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Apr 2023 02:09:03 GMT",
       "tag": "@fluentui-react-native/tester_v0.142.4",
       "version": "0.142.4",
