@@ -22,7 +22,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     accessibilityState,
   } = props;
 
-  const layout = Platform.OS === ('win32' as any) ? 'vertical' : props.layout;
+  const layout = Platform.OS === ('win32' as any) || Platform.OS === 'android' ? 'vertical' : props.layout;
 
   // This hook updates the selected Radio and calls the customer's onClick function. This gets called after a button is pressed.
   const data = useValue(value || defaultValue || null, onChange);
