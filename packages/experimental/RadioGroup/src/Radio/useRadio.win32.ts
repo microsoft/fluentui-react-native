@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { AccessibilityState } from 'react-native';
+import { AccessibilityState } from 'react-native';
 import { I18nManager } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
@@ -29,7 +29,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     subtext,
     value,
     disabled,
-    labelPosition = radioGroupContext.layout === 'horizontal-stacked' ? 'below' : 'after',
+    labelPosition = 'after', // disables labelPosition in win32
     accessibilityActions,
     accessibilityLabel,
     accessibilityHint,

@@ -26,7 +26,7 @@ export const radioGroupLookup = (layer: string, state: RadioGroupState, userProp
   return (
     state[layer] ||
     userProps[layer] ||
-    (layer === 'isHorizontal' && (userProps['layout'] === 'horizontal' || userProps['layout'] === 'horizontal-stacked'))
+    (layer === 'isHorizontal' && (state['layout'] === 'horizontal' || state['layout'] === 'horizontal-stacked'))
   );
 };
 
