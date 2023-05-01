@@ -8,7 +8,6 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Path, Svg } from 'react-native-svg';
 import type { SvgProps } from 'react-native-svg';
 
-// import { RCTNativeAnimatedSpinner } from './consts.win32';
 import { stylingSettings } from './Spinner.styling.win32';
 import { spinnerName } from './Spinner.types';
 import type { SpinnerProps, SpinnerType, SpinnerSvgProps } from './Spinner.types.win32';
@@ -80,9 +79,7 @@ const spinnerTailContainer: React.FunctionComponent<SpinnerProps> = (props: Spin
    *return <RCTNativeAnimatedSpinner {...{ ...props, style: { position: 'absolute', height: diameterSizeMap[size], width: diameterSizeMap[size], overflow: 'hidden' } }} />;
    */
   return (
-    <View
-      {...{ ...props, style: { position: 'absolute', height: diameterSizeMap[size], width: diameterSizeMap[size], overflow: 'hidden' } }}
-    />
+    <View {...props} style={{ position: 'absolute', height: diameterSizeMap[size], width: diameterSizeMap[size], overflow: 'hidden' }} />
   );
 };
 
