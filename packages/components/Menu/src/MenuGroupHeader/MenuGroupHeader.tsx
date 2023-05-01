@@ -1,0 +1,25 @@
+/** @jsx withSlots */
+import React from 'react';
+
+import { compose, withSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
+import { stylingSettings } from './MenuGroupHeader.styling';
+import type { MenuGroupHeaderProps, MenuGroupHeaderType } from './MenuGroupHeader.types';
+import { menuGroupHeaderName } from './MenuGroupHeader.types';
+
+export const MenuGroupHeader = compose<MenuGroupHeaderType>({
+  displayName: menuGroupHeaderName,
+  ...stylingSettings,
+  slots: {
+    root: Text,
+  },
+  useRender: (userProps: MenuGroupHeaderProps, useSlots: UseSlots<MenuGroupHeaderType>) => {
+    const Slots = useSlots(userProps);
+
+    return (_final: MenuGroupHeaderProps, children: React.ReactNode) => {
+      return <Slots.root accessible={userProps.accessible}>{children}</Slots.root>;
+    };
+  },
+});

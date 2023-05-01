@@ -12,6 +12,8 @@ import {
   MenuPopover,
   MenuList,
   MenuDivider,
+  MenuGroup,
+  MenuGroupHeader,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -315,6 +317,30 @@ const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
   );
 };
 
+const MenuWithGroups: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuGroup>
+              <MenuGroupHeader>Section 1</MenuGroupHeader>
+              <MenuItem>A plain MenuItem</MenuItem>
+            </MenuGroup>
+            <MenuGroup>
+              <MenuGroupHeader>Section 2</MenuGroupHeader>
+              <MenuItem>A plain MenuItem</MenuItem>
+            </MenuGroup>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',
@@ -391,6 +417,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu with custom MenuTrigger',
     component: MenuWithCustomMenuTrigger,
+  },
+  {
+    name: 'Menu with groups',
+    component: MenuWithGroups,
   },
 ];
 
