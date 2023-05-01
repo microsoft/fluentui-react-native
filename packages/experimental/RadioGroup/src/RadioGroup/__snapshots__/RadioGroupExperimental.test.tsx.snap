@@ -12,6 +12,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
   }
   accessible={true}
   defaultValue="key2"
+  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
@@ -365,6 +366,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
   }
   accessible={true}
   defaultValue="key2"
+  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
@@ -718,6 +720,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
   }
   accessible={true}
   disabled={true}
+  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
@@ -1081,7 +1084,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
   }
   accessible={true}
   defaultValue="key2"
-  layout="horizontal"
+  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
@@ -1125,7 +1128,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         Object {
           "alignItems": "flex-start",
           "display": "flex",
-          "flexDirection": "row",
+          "flexDirection": "column",
           "justifyContent": "space-around",
         }
       }
@@ -1435,7 +1438,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
   }
   accessible={true}
   defaultValue="key2"
-  layout="horizontal-stacked"
+  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
@@ -1479,7 +1482,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         Object {
           "alignItems": "flex-start",
           "display": "flex",
-          "flexDirection": "row",
+          "flexDirection": "column",
           "justifyContent": "space-around",
         }
       }
@@ -1520,7 +1523,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             },
           ]
         }
-        labelPosition="below"
+        labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1537,9 +1540,9 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
+            "alignItems": "flex-start",
             "display": "flex",
-            "flexDirection": "column",
+            "flexDirection": "row",
             "paddingHorizontal": 4,
             "paddingVertical": undefined,
           }
@@ -1572,9 +1575,9 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "borderWidth": 1,
               "height": 16,
               "justifyContent": "center",
-              "marginBottom": 0,
-              "marginLeft": 6,
-              "marginRight": 6,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -1595,7 +1598,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         <View
           style={
             Object {
-              "alignItems": "center",
+              "alignItems": "flex-start",
               "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
@@ -1603,7 +1606,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 0,
-              "padding": 2,
+              "padding": undefined,
               "paddingRight": 0,
             }
           }
@@ -1620,7 +1623,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -1664,7 +1667,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             },
           ]
         }
-        labelPosition="below"
+        labelPosition="after"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1681,9 +1684,9 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
+            "alignItems": "flex-start",
             "display": "flex",
-            "flexDirection": "column",
+            "flexDirection": "row",
             "paddingHorizontal": 4,
             "paddingVertical": undefined,
           }
@@ -1716,9 +1719,9 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "borderWidth": 1,
               "height": 16,
               "justifyContent": "center",
-              "marginBottom": 0,
-              "marginLeft": 6,
-              "marginRight": 6,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 0,
               "marginTop": 6,
               "width": 16,
             }
@@ -1739,7 +1742,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         <View
           style={
             Object {
-              "alignItems": "center",
+              "alignItems": "flex-start",
               "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
@@ -1747,7 +1750,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "flexDirection": "column",
               "marginLeft": 0,
               "marginRight": 0,
-              "padding": 2,
+              "padding": undefined,
               "paddingRight": 0,
             }
           }
@@ -1764,7 +1767,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
                 "fontWeight": "400",
                 "margin": 0,
                 "marginHorizontal": 2,
-                "marginVertical": 2,
+                "marginVertical": 4,
               }
             }
           >
@@ -1789,6 +1792,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
   }
   accessible={true}
   defaultValue="key2"
+  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
