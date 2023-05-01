@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AccessibilityState } from 'react-native';
+import type { AccessibilityState } from 'react-native';
 import { I18nManager } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
