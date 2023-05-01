@@ -2764,9 +2764,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/eslint-plugin@^0.4.0":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.4.1.tgz#f81b1e39b908141a4cc752d7d0489d96c30a33d5"
-  integrity sha512-jWYp5U54OQB5UmUDwjftXLttWlIsCbT3+Ndf1/zQnkiEKc8EHN+AY9cwfFwAuHhte+OhGqZGq5WVq1P+iGYe2A==
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.4.2.tgz#81b97145d10473bfa6d671c2bc83207b80b81c94"
+  integrity sha512-Okgh2bEeeBVklpnbKlonnreOGntMBj4I2uXNp7M23qCJXi0bL2Ud1Nf8RWq4thgeD72AhPV8T43RwcW+8GkjDw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.0.0"
     "@typescript-eslint/parser" "^5.0.0"
