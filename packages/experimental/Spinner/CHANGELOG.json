@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/spinner",
   "entries": [
     {
+      "date": "Mon, 01 May 2023 20:43:14 GMT",
+      "tag": "@fluentui-react-native/spinner_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/spinner",
+            "commit": "3e1699cb80f2fd1d306708066b027c851eac2867",
+            "comment": "add spinner tail svg without native animation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Apr 2023 19:48:24 GMT",
       "tag": "@fluentui-react-native/spinner_v0.3.0",
       "version": "0.3.0",
