@@ -75,7 +75,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       backgroundColor: t.colors.subtleBackground,
       color: t.colors.neutralForeground1,
       borderColor: t.colors.transparentStroke,
-      iconColor: t.colors.neutralForeground2,
+      iconColor: t.colors.neutralForeground1,
       disabled: {
         backgroundColor: t.colors.subtleBackground,
         color: t.colors.neutralForegroundDisabled,
@@ -86,13 +86,13 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         backgroundColor: t.colors.subtleBackgroundHover,
         color: t.colors.neutralForeground1Hover,
         borderColor: t.colors.subtleBackgroundHover,
-        iconColor: t.colors.neutralForeground2BrandHover,
+        iconColor: t.colors.neutralForeground1Hover,
       },
       pressed: {
         backgroundColor: t.colors.subtleBackgroundPressed,
         color: t.colors.neutralForeground1Pressed,
         borderColor: t.colors.subtleBackgroundPressed,
-        iconColor: t.colors.neutralForeground2BrandPressed,
+        iconColor: t.colors.neutralForeground1Pressed,
       },
       focused: {
         backgroundColor: t.colors.subtleBackgroundHover,

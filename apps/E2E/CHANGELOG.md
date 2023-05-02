@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 10 Apr 2023 19:48:24 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Apr 2023 09:41:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.23.0
+
+Thu, 20 Apr 2023 09:41:22 GMT
+
+### Minor changes
+
+- Expand input functionality  (ayushsinghs@yahoo.in)
+
+## 1.22.0
+
+Tue, 11 Apr 2023 10:42:50 GMT
+
+### Minor changes
+
+- Add new component - input (ayushsinghs@yahoo.in)
 
 ## 1.21.7
 

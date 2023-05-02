@@ -10,6 +10,7 @@ import type { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemChec
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
+import { useMenuItemTracking } from '../MenuList/useMenuList';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -113,6 +114,33 @@ export const useMenuCheckboxInteraction = (
 
   useHoverFocusEffect(pressable.state.hovered, componentRef);
 
+  const [enableFocusRing, setEnableFocusRing] = React.useState(!pressable.state.hovered);
+
+  const onHoverIn = React.useCallback(
+    (e) => {
+      pressable.props.onHoverIn(e);
+      // when it's a hover focus, set enableFocusRing explicitly to false
+      if (!pressable.state.focused) {
+        setEnableFocusRing(false);
+      }
+    },
+    [pressable],
+  );
+
+  const onFocus = React.useCallback(
+    (e) => {
+      pressable.props.onFocus(e);
+      // when it's not a hover focus, set enableFocusRing explicitly to true
+      if (!pressable.state.focused) {
+        setEnableFocusRing(true);
+      }
+    },
+    [pressable],
+  );
+
+  // Track the ref and disabled props on this menu item so the MenuList can handle Home and End keypresses.
+  useMenuItemTracking(componentRef, disabled);
+
   const state = {
     ...pressable.state,
     checked: isChecked,
@@ -124,6 +152,14 @@ export const useMenuCheckboxInteraction = (
   return {
     props: {
       ...pressable.props,
+      onHoverIn: Platform.select({
+        macos: pressable.props.onHoverIn,
+        default: onHoverIn, // win32
+      }),
+      onFocus: Platform.select({
+        macos: pressable.props.onFocus,
+        default: onFocus, // win32
+      }),
       accessible: accessible ?? true,
       accessibilityActions: accessibilityActionsProp,
       accessibilityLabel,
@@ -132,7 +168,7 @@ export const useMenuCheckboxInteraction = (
       disabled,
       enableFocusRing: Platform.select({
         macos: false,
-        default: !pressable.state.hovered, // win32
+        default: enableFocusRing, // win32
       }),
       focusable: Platform.select({
         macos: !disabled,
