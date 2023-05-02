@@ -5,10 +5,11 @@ import type { TokenSettings } from '@fluentui-react-native/use-styling';
 import type { MenuGroupHeaderTokens } from './MenuGroupHeader.types';
 
 export const defaultMenuGroupHeaderTokens: TokenSettings<MenuGroupHeaderTokens, Theme> = (t): MenuGroupHeaderTokens => ({
-  color: t.colors.neutralForeground2,
+  color: t.colors.disabledText,
   fontFamily: t.typography.families.primary,
-  fontSize: globalTokens.font.size300,
+  fontSize: 13,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
-  padding: globalTokens.size60,
+  paddingHorizontal: 5,
+  paddingVertical: 3,
 });

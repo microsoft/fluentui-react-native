@@ -3,7 +3,9 @@ import type { FontTokens, IColorTokens, LayoutTokens } from '@fluentui-react-nat
 
 export const menuGroupHeaderName = 'MenuGroupHeader';
 
-export type MenuGroupHeaderTokens = LayoutTokens & FontTokens & IColorTokens;
+export interface MenuGroupHeaderTokens extends LayoutTokens, FontTokens, IColorTokens {
+  gap?: number;
+}
 export type MenuGroupHeaderProps = TextProps;
 
 export interface MenuGroupHeaderSlotProps {

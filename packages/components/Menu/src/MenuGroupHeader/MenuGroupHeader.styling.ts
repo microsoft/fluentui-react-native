@@ -1,5 +1,4 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
-import { layoutStyles } from '@fluentui-react-native/framework';
 import { fontStyles } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 
@@ -11,12 +10,16 @@ export const stylingSettings: UseStylingOptions<MenuGroupHeaderProps, MenuGroupH
   tokens: [defaultMenuGroupHeaderTokens, menuGroupHeaderName],
   slotProps: {
     root: buildProps(
-      (tokens: MenuGroupHeaderTokens, theme: Theme) => ({
-        ...fontStyles.from(tokens, theme),
-        ...layoutStyles.from(tokens, theme),
-        color: tokens.color,
-      }),
-      [],
+      (tokens: MenuGroupHeaderTokens, theme: Theme) => {
+        return {
+          color: tokens.color,
+          style: {
+            marginStart: tokens.gap,
+            ...fontStyles.from(tokens, theme),
+          },
+        };
+      },
+      ['color'],
     ),
   },
 };
