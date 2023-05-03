@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 06:08:29 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.19.34",
+      "version": "0.19.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "99482792583117c1bf64ea999a47f020470cd957",
+            "comment": "Update apple developer repo link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Apr 2023 18:42:22 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.19.33",
       "version": "0.19.33",
