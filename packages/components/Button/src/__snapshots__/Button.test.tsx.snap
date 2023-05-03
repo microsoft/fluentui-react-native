@@ -38,12 +38,14 @@ exports[`Button component tests Button circular 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -159,12 +161,14 @@ exports[`Button component tests Button customized 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -218,12 +222,14 @@ exports[`Button component tests Button default 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -282,12 +288,14 @@ exports[`Button component tests Button disabled 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#d2d0ce",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -342,12 +350,14 @@ exports[`Button component tests Button large 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 17,
         "fontWeight": "600",
@@ -402,12 +412,14 @@ exports[`Button component tests Button primary 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -462,12 +474,14 @@ exports[`Button component tests Button small 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 13,
         "fontWeight": "400",
@@ -522,12 +536,14 @@ exports[`Button component tests Button square 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -582,12 +598,14 @@ exports[`Button component tests Button subtle 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#323130",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",

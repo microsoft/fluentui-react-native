@@ -50,12 +50,14 @@ exports[`ToggleButton default 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
+        "flexShrink": 1,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",

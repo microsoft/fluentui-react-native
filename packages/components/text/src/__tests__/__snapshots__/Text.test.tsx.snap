@@ -2,11 +2,13 @@
 
 exports[`Text component tests Text all props 1`] = `
 <Text
+  accessibilityRole="text"
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
     Object {
       "color": "#323130",
+      "flexShrink": 1,
       "fontFamily": "Segoe UI",
       "fontSize": 14,
       "fontStyle": undefined,
@@ -25,11 +27,13 @@ exports[`Text component tests Text all props 1`] = `
 
 exports[`Text component tests Text all tokens 1`] = `
 <Text
+  accessibilityRole="text"
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
     Object {
       "color": "#323130",
+      "flexShrink": 1,
       "fontFamily": "Wingdings",
       "fontSize": 20,
       "fontStyle": undefined,
@@ -48,11 +52,13 @@ exports[`Text component tests Text all tokens 1`] = `
 
 exports[`Text component tests Text default 1`] = `
 <Text
+  accessibilityRole="text"
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
     Object {
       "color": "#323130",
+      "flexShrink": 1,
       "fontFamily": "Segoe UI",
       "fontSize": 13,
       "fontStyle": undefined,
@@ -71,11 +77,13 @@ exports[`Text component tests Text default 1`] = `
 
 exports[`Text component tests Text variants render correctly with style 1`] = `
 <Text
+  accessibilityRole="text"
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
     Object {
       "color": "blue",
+      "flexShrink": 1,
       "fontFamily": "Segoe UI",
       "fontSize": 60,
       "fontWeight": "600",

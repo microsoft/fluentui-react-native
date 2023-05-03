@@ -52,6 +52,7 @@ exports[`ContextualMenu default 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
@@ -59,6 +60,7 @@ exports[`ContextualMenu default 1`] = `
     style={
       Object {
         "color": "#242424",
+        "flexShrink": 1,
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",

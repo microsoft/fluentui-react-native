@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Fix text not wrapping",
+  "packageName": "@fluentui-react-native/link",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "none"
+}

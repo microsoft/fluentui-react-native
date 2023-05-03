@@ -69,12 +69,14 @@ exports[`Notification component tests Notification default 1`] = `
       }
     >
       <Text
+        accessibilityRole="text"
         ellipsizeMode="tail"
         numberOfLines={0}
         style={
           Object {
             "alignSelf": "flex-start",
             "color": "#0f548c",
+            "flexShrink": 1,
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "400",
@@ -138,12 +140,14 @@ exports[`Notification component tests Notification default 1`] = `
       }
     >
       <Text
+        accessibilityRole="text"
         accessible={false}
         ellipsizeMode="tail"
         numberOfLines={0}
         style={
           Object {
             "color": "#0f548c",
+            "flexShrink": 1,
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "600",

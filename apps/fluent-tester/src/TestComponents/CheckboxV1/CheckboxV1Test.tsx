@@ -21,7 +21,7 @@ function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
 const BasicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
-      <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
+      <Checkbox label="Unchecked checkbox (undefined) aidasdijk ahsdihsaidhas jasdhasid" onChange={onChangeUncontrolled} />
       <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
       <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked accessibilityLabel="Hello there" />
       <Checkbox label="Disabled checkbox" disabled />

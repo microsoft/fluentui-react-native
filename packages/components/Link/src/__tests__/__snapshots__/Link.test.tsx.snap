@@ -31,6 +31,7 @@ exports[`Link component tests Default Link 1`] = `
   tooltip="https://www.bing.com"
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     focusable={false}
     numberOfLines={0}
@@ -38,6 +39,7 @@ exports[`Link component tests Default Link 1`] = `
       Object {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
+        "flexShrink": 1,
         "margin": 0,
         "variant": "caption1Strong",
       }
@@ -78,6 +80,7 @@ exports[`Link component tests Default Link as a pressable 1`] = `
   }
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     focusable={false}
     numberOfLines={0}
@@ -85,6 +88,7 @@ exports[`Link component tests Default Link as a pressable 1`] = `
       Object {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
+        "flexShrink": 1,
         "margin": 0,
         "variant": "caption1Strong",
       }
@@ -123,6 +127,7 @@ exports[`Link component tests Inline Link 1`] = `
     Object {
       "alignSelf": "flex-start",
       "color": "#0f6cbd",
+      "flexShrink": 1,
       "margin": 0,
       "textDecorationLine": "underline",
       "variant": "caption1Strong",
@@ -166,6 +171,7 @@ exports[`Link component tests Subtle Link 1`] = `
   tooltip="https://www.bing.com"
 >
   <Text
+    accessibilityRole="text"
     ellipsizeMode="tail"
     focusable={false}
     numberOfLines={0}
@@ -173,6 +179,7 @@ exports[`Link component tests Subtle Link 1`] = `
       Object {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
+        "flexShrink": 1,
         "margin": 0,
         "variant": "caption1Strong",
       }

@@ -96,6 +96,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // now build the text style from tokens that can be shared between different Text instances
   const [tokenStyle] = cache(
     () => ({
+      flexShrink: 1, // Fixes bug in RN where text does not wrap correctly.  RN bug #1438
       margin: 0,
       color: tokens.color,
       fontStyle: tokens.fontStyle,
@@ -138,7 +139,8 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
 
   // return a continuation function that allows this text to be compressed
   return (extra: TextProps, children: React.ReactNode) => {
-    const mergedProps = {
+    const mergedProps: TextProps = {
+      accessibilityRole: 'text',
       ...rest,
       ...keyProps,
       ...filteredProps,

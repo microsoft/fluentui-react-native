@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Fix text not wrapping",
+  "packageName": "@fluentui-react-native/experimental-radio-group",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "none"
+}

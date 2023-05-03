@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Fix text not wrapping",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "none"
+}

@@ -118,6 +118,7 @@ exports[`Radio component tests Radio default 1`] = `
         "borderStyle": "solid",
         "borderWidth": 2,
         "flexDirection": "column",
+        "flexShrink": 1,
         "marginLeft": 0,
         "marginRight": 0,
         "padding": undefined,
@@ -126,12 +127,14 @@ exports[`Radio component tests Radio default 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#242424",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 12,
           "fontWeight": "400",
@@ -270,6 +273,7 @@ exports[`Radio component tests Radio disabled 1`] = `
         "borderStyle": "solid",
         "borderWidth": 2,
         "flexDirection": "column",
+        "flexShrink": 1,
         "marginLeft": 0,
         "marginRight": 0,
         "padding": undefined,
@@ -278,12 +282,14 @@ exports[`Radio component tests Radio disabled 1`] = `
     }
   >
     <Text
+      accessibilityRole="text"
       ellipsizeMode="tail"
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#bdbdbd",
+          "flexShrink": 1,
           "fontFamily": "Segoe UI",
           "fontSize": 12,
           "fontWeight": "400",
