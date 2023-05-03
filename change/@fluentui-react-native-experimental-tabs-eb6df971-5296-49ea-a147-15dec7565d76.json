@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update design-tokens package to 0.47.0",
+  "packageName": "@fluentui-react-native/experimental-tabs",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}

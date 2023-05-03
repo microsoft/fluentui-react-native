@@ -30,8 +30,8 @@
     "@fluentui-react-native/tokens": ">=0.20.14 <1.0.0"
   },
   "devDependencies": {
-    "@fluentui-react-native/design-tokens-win32": "^0.42.0",
-    "@fluentui-react-native/design-tokens-windows": "^0.42.0",
+    "@fluentui-react-native/design-tokens-win32": "^0.49.0",
+    "@fluentui-react-native/design-tokens-windows": "^0.49.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@types/react-native": "^0.68.0",

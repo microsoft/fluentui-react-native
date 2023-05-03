@@ -130,7 +130,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     severeBackground1: pipelineOutput.severeBackground1.fillColorRest,
     severeBackground2: pipelineOutput.severeBackground2.fillColorRest,
     severeForeground1: pipelineOutput.severeForeground1.fillColorRest,
-    severeForeground2: pipelineOutput.severeForeground1.fillColorRest,
+    severeForeground2: pipelineOutput.severeForeground2.fillColorRest,
 
     presenceAway: pipelineOutput.presenceAway.fillColorRest,
     presenceDnd: pipelineOutput.presenceDnd.fillColorRest,
