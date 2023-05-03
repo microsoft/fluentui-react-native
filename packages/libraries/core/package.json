@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.36.24",
+  "version": "0.36.25",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",
@@ -28,22 +28,22 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/button": "0.32.51",
-    "@fluentui-react-native/callout": "0.23.12",
-    "@fluentui-react-native/checkbox": "0.19.34",
-    "@fluentui-react-native/contextual-menu": "0.21.41",
-    "@fluentui-react-native/focus-trap-zone": "0.9.70",
-    "@fluentui-react-native/focus-zone": "0.11.41",
-    "@fluentui-react-native/interactive-hooks": "0.22.29",
-    "@fluentui-react-native/link": "0.18.26",
-    "@fluentui-react-native/menu-button": "0.10.50",
-    "@fluentui-react-native/persona": "0.13.49",
-    "@fluentui-react-native/persona-coin": "0.12.30",
-    "@fluentui-react-native/pressable": "0.9.68",
-    "@fluentui-react-native/radio-group": "0.16.45",
-    "@fluentui-react-native/separator": "0.14.22",
-    "@fluentui-react-native/tabs": "0.11.45",
-    "@fluentui-react-native/text": "0.19.31"
+    "@fluentui-react-native/button": "0.32.52",
+    "@fluentui-react-native/callout": "0.23.13",
+    "@fluentui-react-native/checkbox": "0.19.35",
+    "@fluentui-react-native/contextual-menu": "0.21.42",
+    "@fluentui-react-native/focus-trap-zone": "0.9.71",
+    "@fluentui-react-native/focus-zone": "0.11.42",
+    "@fluentui-react-native/interactive-hooks": "0.22.30",
+    "@fluentui-react-native/link": "0.18.27",
+    "@fluentui-react-native/menu-button": "0.10.51",
+    "@fluentui-react-native/persona": "0.13.50",
+    "@fluentui-react-native/persona-coin": "0.12.31",
+    "@fluentui-react-native/pressable": "0.9.69",
+    "@fluentui-react-native/radio-group": "0.16.46",
+    "@fluentui-react-native/separator": "0.14.23",
+    "@fluentui-react-native/tabs": "0.11.46",
+    "@fluentui-react-native/text": "0.19.32"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
