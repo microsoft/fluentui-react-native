@@ -160,6 +160,53 @@ const MenuSubMenu: React.FunctionComponent = () => {
   );
 };
 
+const SubmenuWithScrollView: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
+  return (
+    <Menu {...props}>
+      <MenuTrigger>
+        <MenuItem>A second MenuItem trigger</MenuItem>
+      </MenuTrigger>
+      <MenuPopover maxHeight={200}>
+        <MenuList>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+        </MenuList>
+      </MenuPopover>
+    </Menu>
+  );
+};
+
+const MenuSubMenuWithScrollView: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover doNotTakePointerCapture={true}>
+          <MenuList>
+            <MenuItem>A MenuItem</MenuItem>
+            <SubmenuWithScrollView />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const MenuOpenOnHover: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
@@ -285,7 +332,7 @@ const MenuNofM: React.FunctionComponent = () => {
 
 const CustomMenuTrigger: React.FunctionComponent = () => {
   return (
-    <View style={{ borderColor: 'purple', borderWidth: 3 }}>
+    <View style={{ backgroundColor: 'purple', width: 80, flexDirection: 'row', justifyContent: 'center' }}>
       <MenuTrigger>
         <Button>Test</Button>
       </MenuTrigger>
@@ -293,10 +340,10 @@ const CustomMenuTrigger: React.FunctionComponent = () => {
   );
 };
 
-const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
+const MenuWithCustomMenuTrigger: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
   return (
     <Stack style={stackStyle}>
-      <Menu>
+      <Menu {...props}>
         <CustomMenuTrigger />
         <MenuPopover>
           <MenuList>
@@ -304,7 +351,7 @@ const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
             <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
             <MenuDivider />
-            {Platform.OS !== 'android' && <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />}
+            {Platform.OS !== 'android' && <Submenu />}
             <MenuItem disabled accessibilitySetSize={2}>
               A disabled MenuItem
             </MenuItem>
@@ -374,6 +421,13 @@ const menuSections: TestSection[] = [
     name: 'Menu Radioitem',
     component: MenuRadioItem,
   },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Submenu with ScrollView',
+      component: MenuSubMenuWithScrollView,
+    },
+  }),
   Platform.select({
     android: null,
     default: {

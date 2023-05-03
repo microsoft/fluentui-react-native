@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/spinner
 
-This log was last generated on Mon, 10 Apr 2023 19:48:24 GMT and should not be manually modified.
+This log was last generated on Mon, 01 May 2023 20:43:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Mon, 01 May 2023 20:43:14 GMT
+
+### Minor changes
+
+- add spinner tail svg without native animation (email not defined)
 
 ## 0.3.0
 
