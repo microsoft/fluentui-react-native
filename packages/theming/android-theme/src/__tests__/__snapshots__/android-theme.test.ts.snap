@@ -493,36 +493,28 @@ Object {
     },
     "variants": Object {
       "body1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "400",
       },
       "body1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "500",
       },
       "body2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
         "weight": "400",
       },
       "body2Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
@@ -537,27 +529,21 @@ Object {
         "size": "body",
       },
       "caption1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "400",
       },
       "caption1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "500",
       },
       "caption2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 12,
@@ -568,9 +554,7 @@ Object {
         "size": "caption",
       },
       "display": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.5,
         "lineHeight": 72,
         "size": 60,
@@ -601,9 +585,7 @@ Object {
         "size": "hero",
       },
       "largeTitle": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.25,
         "lineHeight": 48,
         "size": 34,
@@ -626,27 +608,21 @@ Object {
         "size": "subheader",
       },
       "title1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
         "weight": "400",
       },
       "title2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 20,
         "weight": "500",
       },
       "title3": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 18,
@@ -1154,36 +1130,28 @@ Object {
     },
     "variants": Object {
       "body1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "400",
       },
       "body1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "500",
       },
       "body2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
         "weight": "400",
       },
       "body2Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
@@ -1198,27 +1166,21 @@ Object {
         "size": "body",
       },
       "caption1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "400",
       },
       "caption1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "500",
       },
       "caption2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 12,
@@ -1229,9 +1191,7 @@ Object {
         "size": "caption",
       },
       "display": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.5,
         "lineHeight": 72,
         "size": 60,
@@ -1262,9 +1222,7 @@ Object {
         "size": "hero",
       },
       "largeTitle": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.25,
         "lineHeight": 48,
         "size": 34,
@@ -1287,27 +1245,21 @@ Object {
         "size": "subheader",
       },
       "title1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
         "weight": "400",
       },
       "title2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 20,
         "weight": "500",
       },
       "title3": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 18,
@@ -1815,36 +1767,28 @@ Object {
     },
     "variants": Object {
       "body1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "400",
       },
       "body1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "500",
       },
       "body2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
         "weight": "400",
       },
       "body2Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
@@ -1859,27 +1803,21 @@ Object {
         "size": "body",
       },
       "caption1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "400",
       },
       "caption1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "500",
       },
       "caption2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 12,
@@ -1890,9 +1828,7 @@ Object {
         "size": "caption",
       },
       "display": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.5,
         "lineHeight": 72,
         "size": 60,
@@ -1923,9 +1859,7 @@ Object {
         "size": "hero",
       },
       "largeTitle": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.25,
         "lineHeight": 48,
         "size": 34,
@@ -1948,27 +1882,21 @@ Object {
         "size": "subheader",
       },
       "title1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
         "weight": "400",
       },
       "title2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 20,
         "weight": "500",
       },
       "title3": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 18,
@@ -2476,36 +2404,28 @@ Object {
     },
     "variants": Object {
       "body1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "400",
       },
       "body1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "500",
       },
       "body2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
         "weight": "400",
       },
       "body2Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
@@ -2520,27 +2440,21 @@ Object {
         "size": "body",
       },
       "caption1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "400",
       },
       "caption1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "500",
       },
       "caption2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 12,
@@ -2551,9 +2465,7 @@ Object {
         "size": "caption",
       },
       "display": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.5,
         "lineHeight": 72,
         "size": 60,
@@ -2584,9 +2496,7 @@ Object {
         "size": "hero",
       },
       "largeTitle": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.25,
         "lineHeight": 48,
         "size": 34,
@@ -2609,27 +2519,21 @@ Object {
         "size": "subheader",
       },
       "title1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
         "weight": "400",
       },
       "title2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 20,
         "weight": "500",
       },
       "title3": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 18,
@@ -3137,36 +3041,28 @@ Object {
     },
     "variants": Object {
       "body1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "400",
       },
       "body1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "500",
       },
       "body2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
         "weight": "400",
       },
       "body2Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
@@ -3181,27 +3077,21 @@ Object {
         "size": "body",
       },
       "caption1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "400",
       },
       "caption1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "500",
       },
       "caption2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 12,
@@ -3212,9 +3102,7 @@ Object {
         "size": "caption",
       },
       "display": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.5,
         "lineHeight": 72,
         "size": 60,
@@ -3245,9 +3133,7 @@ Object {
         "size": "hero",
       },
       "largeTitle": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.25,
         "lineHeight": 48,
         "size": 34,
@@ -3270,27 +3156,21 @@ Object {
         "size": "subheader",
       },
       "title1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
         "weight": "400",
       },
       "title2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 20,
         "weight": "500",
       },
       "title3": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 18,
@@ -3798,36 +3678,28 @@ Object {
     },
     "variants": Object {
       "body1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "400",
       },
       "body1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "500",
       },
       "body2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
         "weight": "400",
       },
       "body2Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
@@ -3842,27 +3714,21 @@ Object {
         "size": "body",
       },
       "caption1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "400",
       },
       "caption1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "500",
       },
       "caption2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 12,
@@ -3873,9 +3739,7 @@ Object {
         "size": "caption",
       },
       "display": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.5,
         "lineHeight": 72,
         "size": 60,
@@ -3906,9 +3770,7 @@ Object {
         "size": "hero",
       },
       "largeTitle": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.25,
         "lineHeight": 48,
         "size": 34,
@@ -3931,27 +3793,21 @@ Object {
         "size": "subheader",
       },
       "title1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
         "weight": "400",
       },
       "title2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 20,
         "weight": "500",
       },
       "title3": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 18,
@@ -4459,36 +4315,28 @@ Object {
     },
     "variants": Object {
       "body1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "400",
       },
       "body1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 16,
         "weight": "500",
       },
       "body2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
         "weight": "400",
       },
       "body2Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 18,
         "size": 14,
@@ -4503,27 +4351,21 @@ Object {
         "size": "body",
       },
       "caption1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "400",
       },
       "caption1Strong": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 13,
         "weight": "500",
       },
       "caption2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 16,
         "size": 12,
@@ -4534,9 +4376,7 @@ Object {
         "size": "caption",
       },
       "display": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.5,
         "lineHeight": 72,
         "size": 60,
@@ -4567,9 +4407,7 @@ Object {
         "size": "hero",
       },
       "largeTitle": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": -0.25,
         "lineHeight": 48,
         "size": 34,
@@ -4592,27 +4430,21 @@ Object {
         "size": "subheader",
       },
       "title1": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 32,
         "size": 24,
         "weight": "400",
       },
       "title2": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 20,
         "weight": "500",
       },
       "title3": Object {
-        "face": Array [
-          "Roboto",
-        ],
+        "face": "Roboto",
         "letterSpacing": 0,
         "lineHeight": 24,
         "size": 18,
