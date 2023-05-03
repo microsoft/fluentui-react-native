@@ -209,6 +209,18 @@ const CustomSvgInputTest: React.FunctionComponent = () => {
     [setInputText],
   );
 
+  const handleDrawOnClick = React.useCallback(() => {
+    const parsed = parse(inputText);
+    if (parsed !== null) {
+      setSvgText(inputText);
+      setDataText(JSON.stringify(parsed));
+    }
+  }, [inputText, setSvgText, setDataText]);
+
+  const handleShowParsed = React.useCallback(() => {
+    setShowParsed(!showParse);
+  }, [showParse, setShowParsed]);
+
   return (
     <View>
       <Text>
@@ -223,18 +235,8 @@ const CustomSvgInputTest: React.FunctionComponent = () => {
         onChangeText={handleChangeText}
       />
       <View style={{ flexDirection: 'row' }}>
-        <Button
-          onClick={() => {
-            const parsed = parse(inputText);
-            if (parsed !== null) {
-              setSvgText(inputText);
-              setDataText(JSON.stringify(parsed));
-            }
-          }}
-        >
-          Draw
-        </Button>
-        <ToggleButton onClick={() => setShowParsed(!showParse)}>Toggle Parsed data</ToggleButton>
+        <Button onClick={handleDrawOnClick}>Draw</Button>
+        <ToggleButton onClick={handleShowParsed}>Toggle Parsed data</ToggleButton>
       </View>
       <Separator />
       {showParse && <Text>{dataText}</Text>}
