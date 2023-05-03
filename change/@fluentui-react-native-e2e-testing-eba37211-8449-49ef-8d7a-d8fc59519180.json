@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use iOS 16.2 for appium",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}
