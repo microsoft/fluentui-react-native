@@ -38,8 +38,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
 
   const showRing = active === 'active' && activeAppearance === 'ring';
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
-  const accessibilityText = `${accessibilityLabel ? `${accessibilityLabel}` : undefined || `${name || ''}`}
-   ${showBadge ? `,${badge.status}` : ''}${active != undefined ? active : ''} ${badge?.outOfOffice ? 'Out of Office' : ''}`;
+  const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
   const state: AvatarState = {
     showRing,
     transparentRing: !!transparentRing,
@@ -47,7 +46,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   };
 
   let imageProps: ImageProps = {
-    accessibilityLabel: accessibilityLabel != undefined ? accessibilityLabel : '',
+    accessibilityLabel: accessibilityLabel !== undefined ? accessibilityLabel : '',
     source: imageUrl ? ({ uri: imageUrl } as ImageSourcePropType) : undefined,
   };
 
@@ -80,8 +79,8 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   return {
     props: {
       accessible: accessible ?? true,
-      accessibilityLabel: accessibilityText,
-      accessibilityRole: accessibilityRole ?? (name ? 'none' : 'image'),
+      accessibilityLabel: accessibilityLabel || accessibilityText,
+      accessibilityRole: accessibilityRole ?? (Platform.OS === 'android' ? (name ? 'none' : 'image') : 'image'),
       active,
       activeAppearance,
       avatarColor: avatarColor === 'colorful' ? resolveColorfulToSpecificColor(idForColor, name) : avatarColor,
