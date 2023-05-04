@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.8.28",
+      "version": "0.8.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.15",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.11",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:46 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.8.27",
       "version": "0.8.27",

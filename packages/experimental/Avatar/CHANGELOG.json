@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.17.24",
+      "version": "0.17.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:46 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.17.23",
       "version": "0.17.23",
