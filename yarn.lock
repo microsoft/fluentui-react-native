@@ -2618,10 +2618,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.10.tgz#339c7bfc6e1d9a5e934122eaaa7767dc1c5fb725"
   integrity sha512-EvAlHmPEPOwvbP6Pjg/gtDV3XJzIjIxr10fXFNlX5r9HeHw582G1Zt2o8FLyB718nOttgj8HYUTGxvhu4N65sQ==
 
-"@react-native-windows/cli@0.68.7":
-  version "0.68.7"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.68.7.tgz#bca2936684cd3873a24beca58cc62f6c35ec69a0"
-  integrity sha512-ifjJn7WEozVOmFb+rYJ4fR+yVFjbQpA7+5ptr9hXDszPflJedNIC8juJVu9n8jORPc0EhJ5d38KX+Buo6WIqdg==
+"@react-native-windows/cli@0.68.8":
+  version "0.68.8"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.68.8.tgz#9b0b51f67ec92fbafe3ef5a8344e2e143af0186a"
+  integrity sha512-SZ3+XK3N1sAPeLoFVZwGKw2EWrZ30qjVVf9UAEO3cAT7h0nAjUbKVFXann7ZRQ1sNQ+u10DF8wapQf2bsrj4Uw==
   dependencies:
     "@react-native-windows/fs" "0.68.1"
     "@react-native-windows/package-utils" "0.68.1"
@@ -12025,16 +12025,16 @@ react-native-test-app@^2.3.16:
     uuid "^8.3.2"
 
 react-native-windows@^0.68.0:
-  version "0.68.32"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.32.tgz#0adf1beb18177f014043241368018ad01f26a1e3"
-  integrity sha512-zZMe4c2uODD3NHXKiFXbKEPpTMMK8vbKnSCGOTuu1Zmj7gVQ3TEhodj+wPd873YhzeC/cDaxYREnVZwtJkU7ow==
+  version "0.68.34"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.34.tgz#b78c69e69581da082d76911ac0f675e4acd98acd"
+  integrity sha512-Fb6mze/i+9U7ZAp5en4z9ODh2h5XXBoAUHwkxTDgdmyHOS+OT0QFnrqsHbNDQKMHx3JqzJhLhjCpEUsT7Hi9tQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^7.0.3"
     "@react-native-community/cli-platform-android" "^7.0.1"
     "@react-native-community/cli-platform-ios" "^7.0.1"
-    "@react-native-windows/cli" "0.68.7"
+    "@react-native-windows/cli" "0.68.8"
     "@react-native-windows/virtualized-list" "0.68.1"
     "@react-native/assets" "1.0.0"
     "@react-native/normalize-color" "2.0.0"
