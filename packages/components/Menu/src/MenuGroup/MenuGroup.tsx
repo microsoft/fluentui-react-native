@@ -17,11 +17,28 @@ export const MenuGroup = compose<MenuGroupType>({
   },
   useRender: (userProps: MenuGroupProps, useSlots: UseSlots<MenuGroupType>) => {
     const Slots = useSlots(userProps);
-
     return (_final: MenuGroupProps, children: React.ReactNode) => {
-      const content = <Slots.root>{children}</Slots.root>;
+      let itemPosition = 0;
+      const childrenWithSet = React.Children.toArray(children).map((child) => {
+        if (React.isValidElement(child)) {
+          const itemCount = React.Children.toArray(children).filter(
+            (child) => React.isValidElement(child) && (child as any).type.displayName !== 'MenuGroupHeader',
+          ).length;
 
-      return <Slots.root>{content}</Slots.root>;
+          if ((child as any).type.displayName !== 'MenuGroupHeader') {
+            itemPosition++;
+          }
+          return React.cloneElement(
+            child as React.ReactElement<unknown, string | React.JSXElementConstructor<any>>,
+            {
+              accessibilityPositionInSet: child.props.accessibilityPositionInSet ?? itemPosition, // win32
+              accessibilitySetSize: child.props.accessibilitySetSize ?? itemCount, //win32
+            } as any,
+          );
+        }
+        return child;
+      });
+      return <Slots.root>{childrenWithSet}</Slots.root>;
     };
   },
 });
