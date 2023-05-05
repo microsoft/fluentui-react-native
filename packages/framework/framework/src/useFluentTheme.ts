@@ -1,3 +1,6 @@
+import { Platform } from 'react-native';
+
+import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -8,5 +11,17 @@ import { useTheme } from '@fluentui-react-native/theme-types';
  * @returns - a valid Theme object
  */
 export function useFluentTheme(): Theme {
-  return useTheme() || defaultFluentTheme;
+  const themeFromContext = useTheme();
+
+  if (themeFromContext) {
+    return themeFromContext;
+  }
+
+  // TODO GH 2492: if no theme is provided via react context, we should return a theme appropriate to that platform
+  // still to do for macOS/android/win32
+  if (Platform.OS === 'ios') {
+    return createAppleTheme().theme;
+  }
+
+  return defaultFluentTheme;
 }
