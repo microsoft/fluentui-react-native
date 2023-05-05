@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 05 May 2023 04:40:30 GMT and should not be manually modified.
+This log was last generated on Fri, 05 May 2023 23:13:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.143.5
+
+Fri, 05 May 2023 23:13:28 GMT
+
+### Patches
+
+- Update MenuPicker to use a MenuView instead of Picker (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.143.4
 
