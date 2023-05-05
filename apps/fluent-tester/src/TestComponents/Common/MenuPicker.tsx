@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import { Picker } from '@react-native-picker/picker';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Text } from '@fluentui-react-native/text';
+import { MenuView } from '@react-native-menu/menu';
+import type { MenuAction } from '@react-native-menu/menu';
 
 import type { CollectionItem, MenuPickerProps } from './MenuPicker.types';
 import { testProps } from './TestProps';
@@ -21,23 +24,25 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
     }
   });
 
+  const pickerOptions: MenuAction[] = collection.map((item) => ({
+    id: item.label,
+    title: item.label,
+    state: item.value === selected ? 'on' : 'off',
+  }));
+
   return (
-    <Picker
-      prompt={prompt}
-      selectedValue={selectedItemKey}
-      onValueChange={(value: string, index: number) => onChange(value, index)}
-      style={{ ...style }}
+    <MenuView
+      title={prompt}
+      onPressAction={({ nativeEvent }) => {
+        onChange(nativeEvent.event);
+      }}
+      actions={pickerOptions}
+      style={style}
       /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
       {...testProps(testID)}
     >
-      {collection.map((item, index) => (
-        <Picker.Item
-          label={item.label}
-          key={index}
-          value={item.value} /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-          {...testProps(item.testID)}
-        />
-      ))}
-    </Picker>
+      <Text variant="bodySemibold">{prompt}</Text>
+      <Button appearance="primary">{selectedItemKey}</Button>
+    </MenuView>
   );
 };
