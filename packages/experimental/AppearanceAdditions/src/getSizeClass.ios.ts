@@ -6,7 +6,7 @@ import { useSubscription } from 'use-subscription';
 
 import { appearanceAdditions } from './appearanceAdditions';
 import NativeAppearanceAdditions from './NativeAppearanceAdditions';
-import type { SizeClass } from './NativeAppearanceAdditions.types';
+import type { SizeClass, UserInterfaceLevel, AccessibilityContrastOption } from './NativeAppearanceAdditions.types';
 
 const eventEmitter = NativeAppearanceAdditions ? new NativeEventEmitter(NativeAppearanceAdditions as any) : undefined;
 
@@ -34,4 +34,12 @@ export function useHorizontalSizeClass(): SizeClass {
   // Early return on eventEmitter will either always or never return within a single instance
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useSubscription(subscription);
+}
+
+export function useUserInterfaceLevel(): UserInterfaceLevel {
+  return NativeAppearanceAdditions.userInterfaceLevel();
+}
+
+export function useAccessibilityContrastOption(): AccessibilityContrastOption {
+  return NativeAppearanceAdditions.accessibilityContrastOption();
 }

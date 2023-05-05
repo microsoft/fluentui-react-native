@@ -1,6 +1,6 @@
 import { Appearance, NativeEventEmitter } from 'react-native';
 
-import { NativeAppearanceAdditions } from '@fluentui-react-native/experimental-appearance-additions';
+import { useUserInterfaceLevel, NativeAppearanceAdditions } from '@fluentui-react-native/experimental-appearance-additions';
 import { ThemeReference } from '@fluentui-react-native/theme';
 import type { Theme } from '@fluentui-react-native/theme-types';
 
@@ -9,7 +9,7 @@ import { getBaseAppleThemeIOS } from './appleTheme.ios';
 export function createAppleTheme(): ThemeReference {
   const appleThemeReference = new ThemeReference({} as Theme, () => {
     const isLightMode = Appearance.getColorScheme() === 'light';
-    const isElevated = NativeAppearanceAdditions.userInterfaceLevel() === 'elevated';
+    const isElevated = useUserInterfaceLevel() === 'elevated';
     return getBaseAppleThemeIOS(isLightMode, isElevated);
   });
 
