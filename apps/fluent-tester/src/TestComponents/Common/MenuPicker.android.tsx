@@ -8,7 +8,7 @@ export { CollectionItem, MenuPickerProps };
 
 /*
  * The MenuPicker was created because the RN Core Picker was deprecated (preventing us from updating to RN 0.66).
- * MenuPicker uses the community Picker package for iOS/Win32 and our own Picker for Win32/MacOS.
+ * MenuPicker uses the community Picker package for Android
  */
 
 export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: MenuPickerProps) => {
