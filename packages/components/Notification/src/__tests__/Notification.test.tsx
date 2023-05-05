@@ -5,11 +5,14 @@ import * as renderer from 'react-test-renderer';
 
 import { Notification } from '../Notification';
 
+jest.mock('@fluentui-react-native/experimental-appearance-additions', () => ({
+  useUserInterfaceLevel: jest.fn(),
+  useHorizontalSizeClass: jest.fn(),
+}));
+
 describe('Notification component tests', () => {
   beforeAll(() => {
-    jest.mock('@fluentui-react-native/experimental-appearance-additions', () => ({
-      useHorizontalSizeClass: 'regular',
-    }));
+    jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
   });
 
   it('Notification default', () => {

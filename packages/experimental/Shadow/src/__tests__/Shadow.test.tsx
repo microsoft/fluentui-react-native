@@ -54,12 +54,18 @@ const TestShadowOnChildViewWithProps: React.FunctionComponent<ShadowOnChildViewW
   );
 };
 
+jest.mock('@fluentui-react-native/experimental-appearance-additions', () => ({
+  useUserInterfaceLevel: jest.fn(),
+  useHorizontalSizeClass: jest.fn(),
+}));
+
 describe('Shadow component tests', () => {
   beforeAll(() => {
     jest.mock('react-native/Libraries/Utilities/Platform', () => ({
       OS: 'macos',
       select: () => null,
     }));
+    jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
   });
 
   it('Shadow (depth=2)', () => {
