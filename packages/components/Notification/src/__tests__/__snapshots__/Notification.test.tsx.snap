@@ -4,7 +4,6 @@ exports[`Notification component tests Notification default 1`] = `
 <View
   style={
     Object {
-      "alignSelf": "center",
       "backgroundColor": "#cfe4fa",
       "borderColor": "transparent",
       "borderRadius": 12,
@@ -19,7 +18,6 @@ exports[`Notification component tests Notification default 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
-      "width": 375,
     }
   }
 >
@@ -36,7 +34,6 @@ exports[`Notification component tests Notification default 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignSelf": "center",
         "backgroundColor": "#cfe4fa",
         "borderColor": "transparent",
         "borderRadius": 12,
@@ -54,7 +51,6 @@ exports[`Notification component tests Notification default 1`] = `
         },
         "shadowOpacity": 0.14,
         "shadowRadius": 8,
-        "width": 375,
       }
     }
   >
@@ -69,6 +65,7 @@ exports[`Notification component tests Notification default 1`] = `
       }
     >
       <Text
+        allowFontScaling={false}
         ellipsizeMode="tail"
         numberOfLines={0}
         style={
@@ -78,6 +75,8 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "400",
+            "letterSpacing": -0.23,
+            "lineHeight": 20,
             "margin": 0,
           }
         }
@@ -124,7 +123,7 @@ exports[`Notification component tests Notification default 1`] = `
           "alignItems": "center",
           "alignSelf": "center",
           "backgroundColor": "transparent",
-          "borderColor": "#ffffff",
+          "borderColor": "transparent",
           "borderRadius": 4,
           "borderWidth": 1,
           "display": "flex",
@@ -147,6 +146,8 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "600",
+            "letterSpacing": -0.23,
+            "lineHeight": 20,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,
