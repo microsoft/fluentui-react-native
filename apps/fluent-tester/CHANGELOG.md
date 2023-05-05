@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
+This log was last generated on Fri, 05 May 2023 04:40:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.143.4
+
+Fri, 05 May 2023 04:40:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.8.13
 
 ## 0.143.3
 
