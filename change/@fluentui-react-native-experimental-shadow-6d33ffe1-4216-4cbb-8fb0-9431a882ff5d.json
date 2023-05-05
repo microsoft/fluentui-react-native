@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "On iOS, if no theme is provided, use apple theme instead of default theme",
+  "packageName": "@fluentui-react-native/experimental-shadow",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
