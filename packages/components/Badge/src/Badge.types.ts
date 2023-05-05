@@ -3,6 +3,7 @@ import type { ColorValue, FlexStyle } from 'react-native';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { ShadowProps } from '@fluentui-react-native/experimental-shadow';
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { ShadowToken } from '@fluentui-react-native/theme-types';
 import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
@@ -74,6 +75,38 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
    * @defaultvalue filled
    */
   appearance?: BadgeAppearance;
+
+  /**
+   * Whether the Badge is disabled or not
+   */
+  disabled?: boolean;
+
+  /**
+   * Selected state. Mutually exclusive to 'defaultSelected'. Use this if you control the selected state at a higher level
+   * and plan to pass in the correct value based on handling onChange events and re-rendering.
+   */
+  selected?: boolean;
+
+  /**
+   * Default selected state. Mutually exclusive to 'selected'. Use this if you want an uncontrolled component, and
+   * want the Badge instance to maintain its own state.
+   */
+  defaultSelected?: boolean;
+
+  /**
+   * Callback that is called when the selected value has changed.
+   */
+  onChange?: (e: InteractionEvent, isSelected: boolean) => void;
+}
+export interface BadgeState extends PressableState {
+  /**
+   * Whether the Badge is checked or not
+   */
+  selected?: boolean;
+}
+export interface BadgeInfo {
+  props: BadgeProps & React.ComponentPropsWithRef<any>;
+  state: BadgeState;
 }
 
 export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, Omit<IColorTokens, 'color'> {
@@ -170,10 +203,16 @@ export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   subtle?: BadgeTokens;
   success?: BadgeTokens;
   warning?: BadgeTokens;
+  disabled?: BadgeTokens;
+
+  /**
+   * Selected state tokens for Badge
+   */
+  selected?: BadgeTokens;
 }
 
 export interface BadgeSlotProps {
-  root: IViewProps;
+  root: React.PropsWithRef<PressablePropsExtended>;
   icon?: IconProps;
   text: TextProps;
   shadow?: ShadowProps;

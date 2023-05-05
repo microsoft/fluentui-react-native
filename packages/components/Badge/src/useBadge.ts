@@ -1,12 +1,15 @@
-import type { BadgeProps } from './Badge.types';
+import type { BadgeInfo, BadgeProps } from './Badge.types';
 
-export const useBadge = (props: BadgeProps): BadgeProps => {
-  if (!props) return {};
+export const useBadge = (props: BadgeProps): BadgeInfo => {
+  if (!props) return { props: {}, state: {} };
   const { iconPosition = 'before', size = 'medium', ...rest } = props;
 
   return {
-    iconPosition: iconPosition,
-    size,
-    ...rest,
+    props: {
+      iconPosition: iconPosition,
+      size,
+      ...rest,
+    },
+    state: {},
   };
 };

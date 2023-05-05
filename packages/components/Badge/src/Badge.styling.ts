@@ -9,7 +9,15 @@ import { badgeFontTokens } from './BadgeFontTokens';
 import { defaultBadgeTokens } from './BadgeTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
-export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances, 'rtl', 'shadowToken'];
+export const badgeStates: (keyof BadgeTokens)[] = [
+  ...coreBadgeStates,
+  ...BadgeColors,
+  ...BadgeAppearances,
+  'rtl',
+  'shadowToken',
+  'selected',
+  'disabled',
+];
 const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'color', 'icon', 'iconColor', 'iconPosition', 'position'];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
