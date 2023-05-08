@@ -30,7 +30,7 @@ export const PresenceBadge = compose<PresenceBadgeType>({
     svg: Svg,
   },
   useRender: (userProps: PresenceBadgeProps, useSlots: UseSlots<PresenceBadgeType>) => {
-    const badge = useBadge(userProps) as PresenceBadgeProps;
+    const badge = useBadge(userProps).props as PresenceBadgeProps;
     const Slots = useSlots(badge, (layer) => prensenceBadgeLookup(layer, badge));
 
     return (final: PresenceBadgeProps) => {
