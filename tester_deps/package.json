@@ -14,8 +14,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "3.10.3",
-    "@types/react": "^17.0.2",
-    "@types/react-native": "^0.68.0",
+    "@types/react": "^18.2.0",
     "@wdio/appium-service": "7.30.0",
     "@wdio/cli": "7.30.1",
     "@wdio/jasmine-framework": "7.26.0",

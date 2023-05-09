@@ -39,7 +39,6 @@
     "@fluentui-react-native/scripts": "^0.1.1",
     "@types/jest": "^26.0.0",
     "@types/node": "^10.3.5",
-    "@types/react-native": "^0.68.0",
     "react": "18.2.0",
     "react-native": "^0.71.0"
   },
