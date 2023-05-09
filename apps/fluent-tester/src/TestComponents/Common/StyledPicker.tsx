@@ -7,9 +7,9 @@ import { MenuPicker } from './MenuPicker';
 import { commonTestStyles as commonStyles } from './styles';
 
 export const StyledPicker = (props) => {
-  const { prompt, selected, onChange, collection } = props;
+  const { prompt, selected, onChange, collection, style } = props;
   const theme = useTheme();
-  const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
+  const pickerStyles = { color: theme.colors.inputText as ColorValue, alignSelf: 'flex-start', ...commonStyles.header, ...style };
   const styleCollection = collection.map((value) => {
     return {
       label: value,

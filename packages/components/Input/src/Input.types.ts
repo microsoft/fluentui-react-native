@@ -1,4 +1,4 @@
-import type { ColorValue, TextInputProps, ViewStyle, ViewProps, ScrollViewProps, KeyboardTypeOptions } from 'react-native';
+import type { ColorValue, TextInputProps, ViewStyle, ViewProps, ScrollViewProps, KeyboardTypeOptions, TextInput } from 'react-native';
 
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
@@ -50,14 +50,14 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
   inputTextColor?: ColorValue;
 
   /**
-   * The font style of the secondary text.
+   * The font style of the accessory text.
    */
-  secondaryTextFont?: FontTokens;
+  accessoryTextFont?: FontTokens;
 
   /**
-   * The color of the secondary text.
+   * The color of the accessory text.
    */
-  secondaryTextColor?: ColorValue;
+  accessoryTextColor?: ColorValue;
 
   /**
    * The width of the divider.
@@ -80,9 +80,9 @@ export interface InputCoreTokens extends LayoutTokens, IBorderTokens, IColorToke
   spacingIconContent?: number;
 
   /**
-   * The space between the input and the secondary text.
+   * The space between the input and the accessory text.
    */
-  spacingInputSecondary?: number;
+  spacingInputAccessory?: number;
 
   /**
    * The space between the dismiss icon and the left content.
@@ -128,9 +128,31 @@ export interface InputTokens extends InputCoreTokens {
 
 export interface InputProps extends PressableFocusProps {
   /*
-   * Source URL or name of the icon to show on the input.
+   ** An accessibility label for screen readers. Set on the text input.
    */
-  icon?: IconSourcesType;
+  accessibilityLabel?: string;
+
+  /*
+   ** An accessibility label for screen readers. Set on the accessory icon pressable.
+   */
+  accessoryIconAccessibilityLabel?: string;
+
+  /*
+   * Source URL or name of the default icon to show on the input.
+   *
+   * Based on fluent guidelines this icon should be an "outline" icon.
+   * FocusedStateIcon is applied onFocus and should be a "filled" icon.
+   */
+  defaultIcon?: IconSourcesType;
+
+  /*
+   * Source URL or name of the icon to show when the input is focused.
+   * Can be used only when the default icon is also passed.
+   *
+   * Based on fluent guidelines this icon should be a "filled" icon.
+   * While the default icon should be an "outline" icon.
+   */
+  focusedStateIcon?: IconSourcesType;
 
   /**
    * The width of the input.
@@ -162,9 +184,9 @@ export interface InputProps extends PressableFocusProps {
   assistiveText?: string;
 
   /**
-   * Secondary text to display on the right of the input.
+   * Accessory text to display on the right of the input.
    */
-  secondaryText?: string;
+  accessoryText?: string;
 
   /**
    * Placeholder to display in the input.
@@ -203,7 +225,7 @@ export interface InputProps extends PressableFocusProps {
    * The following values work on iOS: - ascii-capable - numbers-and-punctuation - url - number-pad - name-phone-pad - decimal-pad - twitter - web-search
    * The following values work on Android: - visible-password
    */
-  type?: KeyboardTypeOptions | undefined; // Uses KeyBoardType under the hood
+  type?: KeyboardTypeOptions | undefined; // Uses KeyboardType under the hood
 
   /**
    * Callback that is called when the text input's text changes.
@@ -220,10 +242,15 @@ export interface InputProps extends PressableFocusProps {
    * @default always
    */
   keyboardShouldPersistTaps?: boolean | 'always' | 'never' | 'handled' | undefined;
+
+  /**
+   * A RefObject to access the text input interface. Use this to access the public methods and properties of the component.
+   */
+  componentRef?: React.RefObject<TextInput>;
 }
 
 export interface InputInfo {
-  props: InputProps & React.ComponentPropsWithRef<any>;
+  props: InputProps & { iconProps: IconProps } & React.ComponentPropsWithRef<any>;
   state: FocusState & { text: string };
 }
 
@@ -236,8 +263,8 @@ export interface InputSlotProps {
   inputWrapper: ViewProps;
   accessoryIcon: IconProps;
   assistiveText: TextProps;
-  secondaryText: TextProps;
-  accessoryIconPressable: React.PropsWithRef<PressablePropsExtended>;
+  accessoryText: TextProps;
+  accessoryIconPressable: PressablePropsExtended;
 }
 
 export interface InputType {

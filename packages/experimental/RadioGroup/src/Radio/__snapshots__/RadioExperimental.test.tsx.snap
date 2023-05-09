@@ -113,7 +113,7 @@ exports[`Radio component tests Radio default 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "borderColor": "transparent",
+        "borderColor": "#00000000",
         "borderRadius": 4,
         "borderStyle": "solid",
         "borderWidth": 2,
@@ -265,7 +265,7 @@ exports[`Radio component tests Radio disabled 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "borderColor": "transparent",
+        "borderColor": "#00000000",
         "borderRadius": 4,
         "borderStyle": "solid",
         "borderWidth": 2,
