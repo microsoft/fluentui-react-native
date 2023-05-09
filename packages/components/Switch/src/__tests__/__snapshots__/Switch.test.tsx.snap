@@ -3,8 +3,8 @@
 exports[`Switch Default 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Toggle",
       },
     ]
@@ -12,9 +12,20 @@ exports[`Switch Default 1`] = `
   accessibilityLabel="Default Switch"
   accessibilityRole="switch"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": undefined,
       "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -31,7 +42,7 @@ exports[`Switch Default 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "borderColor": undefined,
@@ -41,15 +52,15 @@ exports[`Switch Default 1`] = `
     }
   }
   switchAnimationStyles={
-    Object {
-      "thumbAnimatedStyle": Object {
-        "transform": Array [
-          Object {
+    {
+      "thumbAnimatedStyle": {
+        "transform": [
+          {
             "translateX": 0,
           },
         ],
       },
-      "trackBackgroundStyle": Object {
+      "trackBackgroundStyle": {
         "backgroundColor": "rgba(15, 108, 189, 1)",
       },
     }
@@ -57,7 +68,7 @@ exports[`Switch Default 1`] = `
 >
   <Text
     style={
-      Object {
+      {
         "color": "#242424",
         "flexShrink": 1,
         "fontFamily": "Segoe UI",
@@ -71,7 +82,7 @@ exports[`Switch Default 1`] = `
   </Text>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row-reverse",
       }
@@ -80,7 +91,7 @@ exports[`Switch Default 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "rgba(15, 108, 189, 1)",
           "borderRadius": 100,
@@ -95,14 +106,14 @@ exports[`Switch Default 1`] = `
         animationClass="Ribbon_SwitchThumb"
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "#ffffff",
             "borderRadius": 100,
             "elevation": 8,
             "height": 26,
             "margin": 3,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
             ],
@@ -118,8 +129,8 @@ exports[`Switch Default 1`] = `
 exports[`Switch Disabled 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Toggle",
       },
     ]
@@ -127,9 +138,20 @@ exports[`Switch Disabled 1`] = `
   accessibilityLabel="Default Switch Disabled"
   accessibilityRole="switch"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": undefined,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={false}
@@ -146,7 +168,7 @@ exports[`Switch Disabled 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "borderColor": undefined,
@@ -156,15 +178,15 @@ exports[`Switch Disabled 1`] = `
     }
   }
   switchAnimationStyles={
-    Object {
-      "thumbAnimatedStyle": Object {
-        "transform": Array [
-          Object {
+    {
+      "thumbAnimatedStyle": {
+        "transform": [
+          {
             "translateX": 0,
           },
         ],
       },
-      "trackBackgroundStyle": Object {
+      "trackBackgroundStyle": {
         "backgroundColor": "rgba(240, 240, 240, 1)",
       },
     }
@@ -172,7 +194,7 @@ exports[`Switch Disabled 1`] = `
 >
   <Text
     style={
-      Object {
+      {
         "color": "#e0e0e0",
         "flexShrink": 1,
         "fontFamily": "Segoe UI",
@@ -186,7 +208,7 @@ exports[`Switch Disabled 1`] = `
   </Text>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row-reverse",
       }
@@ -195,7 +217,7 @@ exports[`Switch Disabled 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "rgba(240, 240, 240, 1)",
           "borderRadius": 100,
@@ -210,14 +232,14 @@ exports[`Switch Disabled 1`] = `
         animationClass="Ribbon_SwitchThumb"
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "#ffffff",
             "borderRadius": 100,
             "elevation": 0,
             "height": 26,
             "margin": 3,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
             ],

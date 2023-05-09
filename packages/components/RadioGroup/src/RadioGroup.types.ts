@@ -34,7 +34,7 @@ export interface IRadioGroupState {
   context: IRadioGroupContext;
 }
 
-export interface IRadioGroupProps {
+export type IRadioGroupProps = React.PropsWithChildren<{
   /**
    * Descriptive label for the RadioGroup. This will be displayed as the title of the radio group to the user.
    */
@@ -69,7 +69,7 @@ export interface IRadioGroupProps {
   onChange?: (key: string) => void;
 
   testID?: string;
-}
+}>;
 
 export interface IRadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 

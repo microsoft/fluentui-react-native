@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 1`] = `
+exports[` 1`] = `
 {
   "colors": {
     "accentButtonBackground": "#185abd",
@@ -629,7 +629,7 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
 }
 `;
 
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 2`] = `
+exports[` 2`] = `
 {
   "colors": {
     "accentButtonBackground": "#185abd",
@@ -1258,7 +1258,7 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
 }
 `;
 
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 3`] = `
+exports[` 3`] = `
 {
   "colors": {
     "accentButtonBackground": "#000000",
@@ -2299,7 +2299,7 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
 }
 `;
 
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 4`] = `
+exports[` 4`] = `
 {
   "colors": {
     "accentButtonBackground": "#185abd",
@@ -2928,7 +2928,7 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
 }
 `;
 
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 5`] = `
+exports[` 5`] = `
 {
   "colors": {
     "accentButtonBackground": "#185abd",
@@ -3552,1291 +3552,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
     "weights": {
       "regular": "400",
       "semiBold": "600",
-    },
-  },
-}
-`;
-
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 6`] = `
-{
-  "brandBackground": "#0078d4",
-  "brandBackground2": "#eff6fc",
-  "brandBackgroundDisabled": undefined,
-  "brandBackgroundHover": "#106ebe",
-  "brandBackgroundPressed": "#004578",
-  "brandBackgroundSelected": "#005a9e",
-  "brandBackgroundStatic": "#0078d4",
-  "brandForeground1": "#0078d4",
-  "brandForeground1Disabled": undefined,
-  "brandForeground1Pressed": undefined,
-  "brandForeground2": "#106ebe",
-  "brandForegroundLink": "#106ebe",
-  "brandForegroundLinkHover": "#005a9e",
-  "brandForegroundLinkPressed": "#004578",
-  "brandForegroundLinkSelected": "#106ebe",
-  "brandStroke1": "#0078d4",
-  "brandStroke2": "#c7e0f4",
-  "compoundBrandBackground1": "#0078d4",
-  "compoundBrandBackground1Hover": "#106ebe",
-  "compoundBrandBackground1Pressed": "#005a9e",
-  "compoundBrandForeground1": "#0078d4",
-  "compoundBrandForeground1Hover": "#106ebe",
-  "compoundBrandForeground1Pressed": "#005a9e",
-  "compoundBrandStroke1": "#0078d4",
-  "compoundBrandStroke1Hover": "#106ebe",
-  "compoundBrandStroke1Pressed": "#005a9e",
-  "neutralBackground1": "#ffffff",
-  "neutralBackground1Hover": "#f5f5f5",
-  "neutralBackground1Pressed": "#e0e0e0",
-  "neutralBackground1Selected": "#ebebeb",
-  "neutralBackground2": "#fafafa",
-  "neutralBackground2Hover": "#f0f0f0",
-  "neutralBackground2Pressed": "#dbdbdb",
-  "neutralBackground2Selected": "#e6e6e6",
-  "neutralBackground3": "#f5f5f5",
-  "neutralBackground3Hover": "#ebebeb",
-  "neutralBackground3Pressed": "#d6d6d6",
-  "neutralBackground3Selected": "#e0e0e0",
-  "neutralBackground4": "#f0f0f0",
-  "neutralBackground4Hover": "#fafafa",
-  "neutralBackground4Pressed": "#f5f5f5",
-  "neutralBackground4Selected": "#ffffff",
-  "neutralBackground5": "#ebebeb",
-  "neutralBackground5Hover": "#f5f5f5",
-  "neutralBackground5Pressed": "#f0f0f0",
-  "neutralBackground5Selected": "#fafafa",
-  "neutralBackground6": "#e6e6e6",
-  "neutralBackgroundDisabled": "#f0f0f0",
-  "neutralBackgroundInverted": "#616161",
-  "neutralForeground1": "#242424",
-  "neutralForeground1Hover": "#242424",
-  "neutralForeground1Pressed": "#242424",
-  "neutralForeground1Selected": "#242424",
-  "neutralForeground2": "#424242",
-  "neutralForeground2BrandHover": "#0078d4",
-  "neutralForeground2BrandPressed": "#106ebe",
-  "neutralForeground2BrandSelected": "#0078d4",
-  "neutralForeground2Hover": "#242424",
-  "neutralForeground2Pressed": "#242424",
-  "neutralForeground2Selected": "#242424",
-  "neutralForeground3": "#616161",
-  "neutralForeground3BrandHover": "#0078d4",
-  "neutralForeground3BrandPressed": "#106ebe",
-  "neutralForeground3BrandSelected": "#0078d4",
-  "neutralForeground3Hover": "#424242",
-  "neutralForeground3Pressed": "#424242",
-  "neutralForeground3Selected": "#424242",
-  "neutralForeground4": "#707070",
-  "neutralForegroundDisabled": "#bdbdbd",
-  "neutralForegroundInverted": "#ffffff",
-  "neutralForegroundInvertedLink": "#ffffff",
-  "neutralForegroundInvertedLinkHover": "#ffffff",
-  "neutralForegroundInvertedLinkPressed": "#ffffff",
-  "neutralForegroundInvertedLinkSelected": "#ffffff",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#e6e6e6",
-  "neutralStencil2": "#fafafa",
-  "neutralStroke1": "#d1d1d1",
-  "neutralStroke1Hover": "#c7c7c7",
-  "neutralStroke1Pressed": "#b3b3b3",
-  "neutralStroke1Selected": "#bdbdbd",
-  "neutralStroke2": "#e0e0e0",
-  "neutralStroke3": "#f0f0f0",
-  "neutralStrokeAccessible": "#616161",
-  "neutralStrokeAccessibleHover": "#575757",
-  "neutralStrokeAccessiblePressed": "#4d4d4d",
-  "neutralStrokeAccessibleSelected": "#0078d4",
-  "neutralStrokeDisabled": "#e0e0e0",
-  "redBackground1": "#f9f0f2",
-  "redBackground2": "#d69ca5",
-  "redBackground3": "#750b1c",
-  "redBorder1": "#d69ca5",
-  "redBorder2": "#750b1c",
-  "redBorderActive": "#750b1c",
-  "redForeground1": "#690a19",
-  "redForeground2": "#d69ca5",
-  "redForeground3": "#750b1c",
-  "strokeFocus1": "#ffffff",
-  "strokeFocus2": "#000000",
-  "subtleBackground": "transparent",
-  "subtleBackgroundHover": "#f5f5f5",
-  "subtleBackgroundPressed": "#e0e0e0",
-  "subtleBackgroundSelected": "#ebebeb",
-  "transparentBackground": "transparent",
-  "transparentBackgroundHover": "transparent",
-  "transparentBackgroundPressed": "transparent",
-  "transparentBackgroundSelected": "transparent",
-  "transparentStroke": "transparent",
-  "transparentStrokeDisabled": "transparent",
-  "transparentStrokeInteractive": "transparent",
-}
-`;
-
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 7`] = `
-{
-  "brandBackground": "#106ebe",
-  "brandBackground2": "#004578",
-  "brandBackgroundDisabled": undefined,
-  "brandBackgroundHover": "#0078d4",
-  "brandBackgroundPressed": "#004578",
-  "brandBackgroundSelected": "#005a9e",
-  "brandBackgroundStatic": "#0078d4",
-  "brandForeground1": "#3aa0f3",
-  "brandForeground1Disabled": undefined,
-  "brandForeground1Pressed": undefined,
-  "brandForeground2": "#6cb8f6",
-  "brandForegroundLink": "#2899f5",
-  "brandForegroundLinkHover": "#6cb8f6",
-  "brandForegroundLinkPressed": "#3aa0f3",
-  "brandForegroundLinkSelected": "#2899f5",
-  "brandStroke1": "#2899f5",
-  "brandStroke2": "#004c87",
-  "compoundBrandBackground1": "#2899f5",
-  "compoundBrandBackground1Hover": "#3aa0f3",
-  "compoundBrandBackground1Pressed": "#0078d4",
-  "compoundBrandForeground1": "#2899f5",
-  "compoundBrandForeground1Hover": "#3aa0f3",
-  "compoundBrandForeground1Pressed": "#0078d4",
-  "compoundBrandStroke1": "#2899f5",
-  "compoundBrandStroke1Hover": "#3aa0f3",
-  "compoundBrandStroke1Pressed": "#0078d4",
-  "neutralBackground1": "#292929",
-  "neutralBackground1Hover": "#3d3d3d",
-  "neutralBackground1Pressed": "#1f1f1f",
-  "neutralBackground1Selected": "#383838",
-  "neutralBackground2": "#1f1f1f",
-  "neutralBackground2Hover": "#333333",
-  "neutralBackground2Pressed": "#141414",
-  "neutralBackground2Selected": "#2e2e2e",
-  "neutralBackground3": "#141414",
-  "neutralBackground3Hover": "#292929",
-  "neutralBackground3Pressed": "#0a0a0a",
-  "neutralBackground3Selected": "#242424",
-  "neutralBackground4": "#0a0a0a",
-  "neutralBackground4Hover": "#1f1f1f",
-  "neutralBackground4Pressed": "#000000",
-  "neutralBackground4Selected": "#1a1a1a",
-  "neutralBackground5": "#000000",
-  "neutralBackground5Hover": "#141414",
-  "neutralBackground5Pressed": "#050505",
-  "neutralBackground5Selected": "#0f0f0f",
-  "neutralBackground6": "#333333",
-  "neutralBackgroundDisabled": "#141414",
-  "neutralBackgroundInverted": "#ffffff",
-  "neutralForeground1": "#ffffff",
-  "neutralForeground1Hover": "#ffffff",
-  "neutralForeground1Pressed": "#ffffff",
-  "neutralForeground1Selected": "#ffffff",
-  "neutralForeground2": "#d6d6d6",
-  "neutralForeground2BrandHover": "#3aa0f3",
-  "neutralForeground2BrandPressed": "#2899f5",
-  "neutralForeground2BrandSelected": "#3aa0f3",
-  "neutralForeground2Hover": "#ffffff",
-  "neutralForeground2Pressed": "#ffffff",
-  "neutralForeground2Selected": "#ffffff",
-  "neutralForeground3": "#adadad",
-  "neutralForeground3BrandHover": "#3aa0f3",
-  "neutralForeground3BrandPressed": "#2899f5",
-  "neutralForeground3BrandSelected": "#3aa0f3",
-  "neutralForeground3Hover": "#d6d6d6",
-  "neutralForeground3Pressed": "#d6d6d6",
-  "neutralForeground3Selected": "#d6d6d6",
-  "neutralForeground4": "#999999",
-  "neutralForegroundDisabled": "#5c5c5c",
-  "neutralForegroundInverted": "#242424",
-  "neutralForegroundInvertedLink": "#ffffff",
-  "neutralForegroundInvertedLinkHover": "#ffffff",
-  "neutralForegroundInvertedLinkPressed": "#ffffff",
-  "neutralForegroundInvertedLinkSelected": "#ffffff",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#333333",
-  "neutralStencil2": "#575757",
-  "neutralStroke1": "#666666",
-  "neutralStroke1Hover": "#757575",
-  "neutralStroke1Pressed": "#6b6b6b",
-  "neutralStroke1Selected": "#707070",
-  "neutralStroke2": "#525252",
-  "neutralStroke3": "#3d3d3d",
-  "neutralStrokeAccessible": "#adadad",
-  "neutralStrokeAccessibleHover": "#bdbdbd",
-  "neutralStrokeAccessiblePressed": "#b3b3b3",
-  "neutralStrokeAccessibleSelected": "#3aa0f3",
-  "neutralStrokeDisabled": "#424242",
-  "redBackground1": "#230308",
-  "redBackground2": "#420610",
-  "redBackground3": "#750b1c",
-  "redBorder1": "#750b1c",
-  "redBorder2": "#962f3f",
-  "redBorderActive": "#ac4f5e",
-  "redForeground1": "#ac4f5e",
-  "redForeground2": "#420610",
-  "redForeground3": "#750b1c",
-  "strokeFocus1": "#000000",
-  "strokeFocus2": "#ffffff",
-  "subtleBackground": "transparent",
-  "subtleBackgroundHover": "#383838",
-  "subtleBackgroundPressed": "#2e2e2e",
-  "subtleBackgroundSelected": "#333333",
-  "transparentBackground": "transparent",
-  "transparentBackgroundHover": "transparent",
-  "transparentBackgroundPressed": "transparent",
-  "transparentBackgroundSelected": "transparent",
-  "transparentStroke": "transparent",
-  "transparentStrokeDisabled": "transparent",
-  "transparentStrokeInteractive": "transparent",
-}
-`;
-
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 8`] = `
-{
-  "brandBackground": {
-    "resource_paths": [
-      "ButtonFace",
-    ],
-  },
-  "brandBackground2": {
-    "resource_paths": [
-      "ButtonFace",
-    ],
-  },
-  "brandBackgroundDisabled": undefined,
-  "brandBackgroundHover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "brandBackgroundPressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "brandBackgroundSelected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "brandBackgroundStatic": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "brandForeground1": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "brandForeground1Disabled": undefined,
-  "brandForeground1Pressed": undefined,
-  "brandForeground2": {
-    "resource_paths": [
-      "ButtonText",
-    ],
-  },
-  "brandForegroundLink": {
-    "resource_paths": [
-      "Hotlight",
-    ],
-  },
-  "brandForegroundLinkHover": {
-    "resource_paths": [
-      "Hotlight",
-    ],
-  },
-  "brandForegroundLinkPressed": {
-    "resource_paths": [
-      "Hotlight",
-    ],
-  },
-  "brandForegroundLinkSelected": {
-    "resource_paths": [
-      "Hotlight",
-    ],
-  },
-  "brandStroke1": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "brandStroke2": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "compoundBrandBackground1": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "compoundBrandBackground1Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "compoundBrandBackground1Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "compoundBrandForeground1": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "compoundBrandForeground1Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "compoundBrandForeground1Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "compoundBrandStroke1": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "compoundBrandStroke1Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "compoundBrandStroke1Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground1": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "neutralBackground1Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground1Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground1Selected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground2": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "neutralBackground2Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground2Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground2Selected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground3": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "neutralBackground3Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground3Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground3Selected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground4": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "neutralBackground4Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground4Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground4Selected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground5": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "neutralBackground5Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground5Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground5Selected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralBackground6": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "neutralBackgroundDisabled": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "neutralBackgroundInverted": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralForeground1": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralForeground1Hover": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground1Pressed": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground1Selected": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralForeground2BrandHover": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2BrandPressed": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2BrandSelected": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2Hover": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2Pressed": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2Selected": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralForeground3BrandHover": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3BrandPressed": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3BrandSelected": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3Hover": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3Pressed": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3Selected": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground4": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralForegroundDisabled": {
-    "resource_paths": [
-      "GrayText",
-    ],
-  },
-  "neutralForegroundInverted": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "neutralForegroundInvertedLink": {
-    "resource_paths": [
-      "Hotlight",
-    ],
-  },
-  "neutralForegroundInvertedLinkHover": {
-    "resource_paths": [
-      "Hotlight",
-    ],
-  },
-  "neutralForegroundInvertedLinkPressed": {
-    "resource_paths": [
-      "Hotlight",
-    ],
-  },
-  "neutralForegroundInvertedLinkSelected": {
-    "resource_paths": [
-      "Hotlight",
-    ],
-  },
-  "neutralForegroundOnBrand": {
-    "resource_paths": [
-      "ButtonText",
-    ],
-  },
-  "neutralForegroundOnBrandHover": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForegroundOnBrandPressed": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralForegroundOnBrandSelected": {
-    "resource_paths": [
-      "HighlightText",
-    ],
-  },
-  "neutralStencil1": "#141414",
-  "neutralStencil2": "#858585",
-  "neutralStroke1": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralStroke1Hover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralStroke1Pressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralStroke1Selected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralStroke2": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralStroke3": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralStrokeAccessible": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "neutralStrokeAccessibleHover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralStrokeAccessiblePressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralStrokeAccessibleSelected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "neutralStrokeDisabled": {
-    "resource_paths": [
-      "GrayText",
-    ],
-  },
-  "redBackground1": {
-    "resource_paths": [
-      "ButtonFace",
-    ],
-  },
-  "redBackground2": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "redBackground3": {
-    "resource_paths": [
-      "ButtonFace",
-    ],
-  },
-  "redBorder1": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "redBorder2": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "redBorderActive": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "redForeground1": {
-    "resource_paths": [
-      "ButtonText",
-    ],
-  },
-  "redForeground2": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "redForeground3": {
-    "resource_paths": [
-      "ButtonFace",
-    ],
-  },
-  "strokeFocus1": {
-    "resource_paths": [
-      "Window",
-    ],
-  },
-  "strokeFocus2": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "subtleBackground": "transparent",
-  "subtleBackgroundHover": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "subtleBackgroundPressed": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "subtleBackgroundSelected": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-  "transparentBackground": "transparent",
-  "transparentBackgroundHover": "transparent",
-  "transparentBackgroundPressed": "transparent",
-  "transparentBackgroundSelected": "transparent",
-  "transparentStroke": {
-    "resource_paths": [
-      "WindowText",
-    ],
-  },
-  "transparentStrokeDisabled": {
-    "resource_paths": [
-      "GrayText",
-    ],
-  },
-  "transparentStrokeInteractive": {
-    "resource_paths": [
-      "Highlight",
-    ],
-  },
-}
-`;
-
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 9`] = `
-{
-  "shadow16": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000024",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000024",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000033",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000024",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000033",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000024",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 10`] = `
-{
-  "shadow16": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000047",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000047",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000047",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000047",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultAppearance: 'light' } 11`] = `
-{
-  "shadow16": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000047",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000047",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000047",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000047",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
     },
   },
 }
@@ -5472,6 +4187,1291 @@ exports[`defaultFluentDarkTheme test 1`] = `
 `;
 
 exports[`defaultFluentTheme test 1`] = `
+{
+  "brandBackground": "#0078d4",
+  "brandBackground2": "#eff6fc",
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": "#106ebe",
+  "brandBackgroundPressed": "#004578",
+  "brandBackgroundSelected": "#005a9e",
+  "brandBackgroundStatic": "#0078d4",
+  "brandForeground1": "#0078d4",
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": "#106ebe",
+  "brandForegroundLink": "#106ebe",
+  "brandForegroundLinkHover": "#005a9e",
+  "brandForegroundLinkPressed": "#004578",
+  "brandForegroundLinkSelected": "#106ebe",
+  "brandStroke1": "#0078d4",
+  "brandStroke2": "#c7e0f4",
+  "compoundBrandBackground1": "#0078d4",
+  "compoundBrandBackground1Hover": "#106ebe",
+  "compoundBrandBackground1Pressed": "#005a9e",
+  "compoundBrandForeground1": "#0078d4",
+  "compoundBrandForeground1Hover": "#106ebe",
+  "compoundBrandForeground1Pressed": "#005a9e",
+  "compoundBrandStroke1": "#0078d4",
+  "compoundBrandStroke1Hover": "#106ebe",
+  "compoundBrandStroke1Pressed": "#005a9e",
+  "neutralBackground1": "#ffffff",
+  "neutralBackground1Hover": "#f5f5f5",
+  "neutralBackground1Pressed": "#e0e0e0",
+  "neutralBackground1Selected": "#ebebeb",
+  "neutralBackground2": "#fafafa",
+  "neutralBackground2Hover": "#f0f0f0",
+  "neutralBackground2Pressed": "#dbdbdb",
+  "neutralBackground2Selected": "#e6e6e6",
+  "neutralBackground3": "#f5f5f5",
+  "neutralBackground3Hover": "#ebebeb",
+  "neutralBackground3Pressed": "#d6d6d6",
+  "neutralBackground3Selected": "#e0e0e0",
+  "neutralBackground4": "#f0f0f0",
+  "neutralBackground4Hover": "#fafafa",
+  "neutralBackground4Pressed": "#f5f5f5",
+  "neutralBackground4Selected": "#ffffff",
+  "neutralBackground5": "#ebebeb",
+  "neutralBackground5Hover": "#f5f5f5",
+  "neutralBackground5Pressed": "#f0f0f0",
+  "neutralBackground5Selected": "#fafafa",
+  "neutralBackground6": "#e6e6e6",
+  "neutralBackgroundDisabled": "#f0f0f0",
+  "neutralBackgroundInverted": "#616161",
+  "neutralForeground1": "#242424",
+  "neutralForeground1Hover": "#242424",
+  "neutralForeground1Pressed": "#242424",
+  "neutralForeground1Selected": "#242424",
+  "neutralForeground2": "#424242",
+  "neutralForeground2BrandHover": "#0078d4",
+  "neutralForeground2BrandPressed": "#106ebe",
+  "neutralForeground2BrandSelected": "#0078d4",
+  "neutralForeground2Hover": "#242424",
+  "neutralForeground2Pressed": "#242424",
+  "neutralForeground2Selected": "#242424",
+  "neutralForeground3": "#616161",
+  "neutralForeground3BrandHover": "#0078d4",
+  "neutralForeground3BrandPressed": "#106ebe",
+  "neutralForeground3BrandSelected": "#0078d4",
+  "neutralForeground3Hover": "#424242",
+  "neutralForeground3Pressed": "#424242",
+  "neutralForeground3Selected": "#424242",
+  "neutralForeground4": "#707070",
+  "neutralForegroundDisabled": "#bdbdbd",
+  "neutralForegroundInverted": "#ffffff",
+  "neutralForegroundInvertedLink": "#ffffff",
+  "neutralForegroundInvertedLinkHover": "#ffffff",
+  "neutralForegroundInvertedLinkPressed": "#ffffff",
+  "neutralForegroundInvertedLinkSelected": "#ffffff",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#e6e6e6",
+  "neutralStencil2": "#fafafa",
+  "neutralStroke1": "#d1d1d1",
+  "neutralStroke1Hover": "#c7c7c7",
+  "neutralStroke1Pressed": "#b3b3b3",
+  "neutralStroke1Selected": "#bdbdbd",
+  "neutralStroke2": "#e0e0e0",
+  "neutralStroke3": "#f0f0f0",
+  "neutralStrokeAccessible": "#616161",
+  "neutralStrokeAccessibleHover": "#575757",
+  "neutralStrokeAccessiblePressed": "#4d4d4d",
+  "neutralStrokeAccessibleSelected": "#0078d4",
+  "neutralStrokeDisabled": "#e0e0e0",
+  "redBackground1": "#f9f0f2",
+  "redBackground2": "#d69ca5",
+  "redBackground3": "#750b1c",
+  "redBorder1": "#d69ca5",
+  "redBorder2": "#750b1c",
+  "redBorderActive": "#750b1c",
+  "redForeground1": "#690a19",
+  "redForeground2": "#d69ca5",
+  "redForeground3": "#750b1c",
+  "strokeFocus1": "#ffffff",
+  "strokeFocus2": "#000000",
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": "#f5f5f5",
+  "subtleBackgroundPressed": "#e0e0e0",
+  "subtleBackgroundSelected": "#ebebeb",
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": "transparent",
+  "transparentStrokeDisabled": "transparent",
+  "transparentStrokeInteractive": "transparent",
+}
+`;
+
+exports[`defaultFluentTheme test 2`] = `
+{
+  "brandBackground": "#106ebe",
+  "brandBackground2": "#004578",
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": "#0078d4",
+  "brandBackgroundPressed": "#004578",
+  "brandBackgroundSelected": "#005a9e",
+  "brandBackgroundStatic": "#0078d4",
+  "brandForeground1": "#3aa0f3",
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": "#6cb8f6",
+  "brandForegroundLink": "#2899f5",
+  "brandForegroundLinkHover": "#6cb8f6",
+  "brandForegroundLinkPressed": "#3aa0f3",
+  "brandForegroundLinkSelected": "#2899f5",
+  "brandStroke1": "#2899f5",
+  "brandStroke2": "#004c87",
+  "compoundBrandBackground1": "#2899f5",
+  "compoundBrandBackground1Hover": "#3aa0f3",
+  "compoundBrandBackground1Pressed": "#0078d4",
+  "compoundBrandForeground1": "#2899f5",
+  "compoundBrandForeground1Hover": "#3aa0f3",
+  "compoundBrandForeground1Pressed": "#0078d4",
+  "compoundBrandStroke1": "#2899f5",
+  "compoundBrandStroke1Hover": "#3aa0f3",
+  "compoundBrandStroke1Pressed": "#0078d4",
+  "neutralBackground1": "#292929",
+  "neutralBackground1Hover": "#3d3d3d",
+  "neutralBackground1Pressed": "#1f1f1f",
+  "neutralBackground1Selected": "#383838",
+  "neutralBackground2": "#1f1f1f",
+  "neutralBackground2Hover": "#333333",
+  "neutralBackground2Pressed": "#141414",
+  "neutralBackground2Selected": "#2e2e2e",
+  "neutralBackground3": "#141414",
+  "neutralBackground3Hover": "#292929",
+  "neutralBackground3Pressed": "#0a0a0a",
+  "neutralBackground3Selected": "#242424",
+  "neutralBackground4": "#0a0a0a",
+  "neutralBackground4Hover": "#1f1f1f",
+  "neutralBackground4Pressed": "#000000",
+  "neutralBackground4Selected": "#1a1a1a",
+  "neutralBackground5": "#000000",
+  "neutralBackground5Hover": "#141414",
+  "neutralBackground5Pressed": "#050505",
+  "neutralBackground5Selected": "#0f0f0f",
+  "neutralBackground6": "#333333",
+  "neutralBackgroundDisabled": "#141414",
+  "neutralBackgroundInverted": "#ffffff",
+  "neutralForeground1": "#ffffff",
+  "neutralForeground1Hover": "#ffffff",
+  "neutralForeground1Pressed": "#ffffff",
+  "neutralForeground1Selected": "#ffffff",
+  "neutralForeground2": "#d6d6d6",
+  "neutralForeground2BrandHover": "#3aa0f3",
+  "neutralForeground2BrandPressed": "#2899f5",
+  "neutralForeground2BrandSelected": "#3aa0f3",
+  "neutralForeground2Hover": "#ffffff",
+  "neutralForeground2Pressed": "#ffffff",
+  "neutralForeground2Selected": "#ffffff",
+  "neutralForeground3": "#adadad",
+  "neutralForeground3BrandHover": "#3aa0f3",
+  "neutralForeground3BrandPressed": "#2899f5",
+  "neutralForeground3BrandSelected": "#3aa0f3",
+  "neutralForeground3Hover": "#d6d6d6",
+  "neutralForeground3Pressed": "#d6d6d6",
+  "neutralForeground3Selected": "#d6d6d6",
+  "neutralForeground4": "#999999",
+  "neutralForegroundDisabled": "#5c5c5c",
+  "neutralForegroundInverted": "#242424",
+  "neutralForegroundInvertedLink": "#ffffff",
+  "neutralForegroundInvertedLinkHover": "#ffffff",
+  "neutralForegroundInvertedLinkPressed": "#ffffff",
+  "neutralForegroundInvertedLinkSelected": "#ffffff",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#333333",
+  "neutralStencil2": "#575757",
+  "neutralStroke1": "#666666",
+  "neutralStroke1Hover": "#757575",
+  "neutralStroke1Pressed": "#6b6b6b",
+  "neutralStroke1Selected": "#707070",
+  "neutralStroke2": "#525252",
+  "neutralStroke3": "#3d3d3d",
+  "neutralStrokeAccessible": "#adadad",
+  "neutralStrokeAccessibleHover": "#bdbdbd",
+  "neutralStrokeAccessiblePressed": "#b3b3b3",
+  "neutralStrokeAccessibleSelected": "#3aa0f3",
+  "neutralStrokeDisabled": "#424242",
+  "redBackground1": "#230308",
+  "redBackground2": "#420610",
+  "redBackground3": "#750b1c",
+  "redBorder1": "#750b1c",
+  "redBorder2": "#962f3f",
+  "redBorderActive": "#ac4f5e",
+  "redForeground1": "#ac4f5e",
+  "redForeground2": "#420610",
+  "redForeground3": "#750b1c",
+  "strokeFocus1": "#000000",
+  "strokeFocus2": "#ffffff",
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": "#383838",
+  "subtleBackgroundPressed": "#2e2e2e",
+  "subtleBackgroundSelected": "#333333",
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": "transparent",
+  "transparentStrokeDisabled": "transparent",
+  "transparentStrokeInteractive": "transparent",
+}
+`;
+
+exports[`defaultFluentTheme test 3`] = `
+{
+  "brandBackground": {
+    "resource_paths": [
+      "ButtonFace",
+    ],
+  },
+  "brandBackground2": {
+    "resource_paths": [
+      "ButtonFace",
+    ],
+  },
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "brandBackgroundPressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "brandBackgroundSelected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "brandBackgroundStatic": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "brandForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": {
+    "resource_paths": [
+      "ButtonText",
+    ],
+  },
+  "brandForegroundLink": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "brandForegroundLinkHover": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "brandForegroundLinkPressed": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "brandForegroundLinkSelected": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "brandStroke1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "brandStroke2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "compoundBrandBackground1": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandBackground1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandBackground1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandForeground1": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandForeground1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandForeground1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandStroke1": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandStroke1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandStroke1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground1Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground2Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground2Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground2Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground3": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground3Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground3Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground3Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground4": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground4Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground4Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground4Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground5": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground5Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground5Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground5Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground6": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackgroundDisabled": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackgroundInverted": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForeground1Hover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground1Pressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground1Selected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForeground2BrandHover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2BrandPressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2BrandSelected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2Hover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2Pressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2Selected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForeground3BrandHover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3BrandPressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3BrandSelected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3Hover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3Pressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3Selected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground4": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForegroundDisabled": {
+    "resource_paths": [
+      "GrayText",
+    ],
+  },
+  "neutralForegroundInverted": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralForegroundInvertedLink": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "neutralForegroundInvertedLinkHover": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "neutralForegroundInvertedLinkPressed": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "neutralForegroundInvertedLinkSelected": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "neutralForegroundOnBrand": {
+    "resource_paths": [
+      "ButtonText",
+    ],
+  },
+  "neutralForegroundOnBrandHover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForegroundOnBrandPressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForegroundOnBrandSelected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralStencil1": "#141414",
+  "neutralStencil2": "#858585",
+  "neutralStroke1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralStroke1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStroke1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStroke1Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStroke2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralStroke3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralStrokeAccessible": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralStrokeAccessibleHover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStrokeAccessiblePressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStrokeAccessibleSelected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStrokeDisabled": {
+    "resource_paths": [
+      "GrayText",
+    ],
+  },
+  "redBackground1": {
+    "resource_paths": [
+      "ButtonFace",
+    ],
+  },
+  "redBackground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "redBackground3": {
+    "resource_paths": [
+      "ButtonFace",
+    ],
+  },
+  "redBorder1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "redBorder2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "redBorderActive": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "redForeground1": {
+    "resource_paths": [
+      "ButtonText",
+    ],
+  },
+  "redForeground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "redForeground3": {
+    "resource_paths": [
+      "ButtonFace",
+    ],
+  },
+  "strokeFocus1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "strokeFocus2": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "subtleBackgroundPressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "subtleBackgroundSelected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "transparentStrokeDisabled": {
+    "resource_paths": [
+      "GrayText",
+    ],
+  },
+  "transparentStrokeInteractive": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+}
+`;
+
+exports[`defaultFluentTheme test 4`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000024",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000024",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000024",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000024",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`defaultFluentTheme test 5`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`defaultFluentTheme test 6`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`defaultFluentTheme test 7`] = `
 {
   "colors": {
     "accentButtonBackground": "#185abd",

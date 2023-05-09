@@ -81,7 +81,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@react-native-community/slider": "^4.2.0",
-    "@react-native-menu/menu": "^0.1.2",
+    "@react-native-menu/menu": "^0.7.3",
     "@react-native-picker/picker": "^2.2.1",
     "@warren-ms/react-native-icons": "^0.0.13",
     "react": "18.2.0",

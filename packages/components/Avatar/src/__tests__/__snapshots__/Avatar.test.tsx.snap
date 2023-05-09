@@ -8,7 +8,7 @@ exports[`Avatar component tests Avatar badge 1`] = `
   badgeStatus="available"
   icon={null}
   image={
-    Object {
+    {
       "accessibilityLabel": undefined,
       "source": undefined,
     }
@@ -17,7 +17,7 @@ exports[`Avatar component tests Avatar badge 1`] = `
   outOfOffice={false}
   shape="circular"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "aspectRatio": 1,
@@ -32,7 +32,7 @@ exports[`Avatar component tests Avatar badge 1`] = `
   <View
     accessible={false}
     style={
-      Object {
+      {
         "alignItems": "center",
         "aspectRatio": 1,
         "backgroundColor": "#e6e6e6",
@@ -47,42 +47,49 @@ exports[`Avatar component tests Avatar badge 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={16}
-      bbWidth={16}
-      color={4284572001}
+      bbHeight="16"
+      bbWidth="16"
+      color="#616161"
       focusable={false}
       height={16}
       meetOrSlice={0}
       minX={0}
       minY={0}
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "borderWidth": 0,
           },
-          Object {
+          {
             "flex": 0,
             "height": 16,
             "width": 16,
           },
         ]
       }
-      tintColor={4284572001}
+      tintColor="#616161"
       vbHeight={16}
       vbWidth={14}
       width={16}
     >
-      <RNSVGGroup>
+      <RNSVGGroup
+        fill={
+          {
+            "payload": 4278190080,
+            "type": 0,
+          }
+        }
+      >
         <RNSVGPath
           d="M7 0C4.79086 0 3 1.79086 3 4C3 6.20914 4.79086 8 7 8C9.20914 8 11 6.20914 11 4C11 1.79086 9.20914 0 7 0ZM4 4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4C10 5.65685 8.65685 7 7 7C5.34315 7 4 5.65685 4 4ZM2.00873 9C0.903151 9 0 9.88687 0 11C0 12.6912 0.83281 13.9663 2.13499 14.7966C3.41697 15.614 5.14526 16 7 16C8.85474 16 10.583 15.614 11.865 14.7966C13.1672 13.9663 14 12.6912 14 11C14 9.89557 13.1045 9.00001 12 9.00001L2.00873 9ZM1 11C1 10.4467 1.44786 10 2.00873 10L12 10C12.5522 10 13 10.4478 13 11C13 12.3088 12.3777 13.2837 11.3274 13.9534C10.2568 14.636 8.73511 15 7 15C5.26489 15 3.74318 14.636 2.67262 13.9534C1.62226 13.2837 1 12.3088 1 11Z"
           fill={
-            Array [
-              2,
-            ]
+            {
+              "type": 2,
+            }
           }
           propList={
-            Array [
+            [
               "fill",
             ]
           }
@@ -95,7 +102,7 @@ exports[`Avatar component tests Avatar badge 1`] = `
     iconPosition="before"
     position="absolute"
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "flex-start",
         "aspectRatio": 1,
@@ -116,41 +123,40 @@ exports[`Avatar component tests Avatar badge 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={6}
-      bbWidth={6}
-      color={4279476494}
+      bbHeight="6"
+      bbWidth="6"
       fill="none"
       focusable={false}
       meetOrSlice={0}
       minX={0}
       minY={0}
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "borderWidth": 0,
           },
-          Object {
+          {
             "aspectRatio": 1,
             "color": "#13a10e",
             "height": 6,
             "width": 6,
           },
-          Object {
+          {
             "flex": 0,
             "height": 6,
             "width": 6,
           },
         ]
       }
-      tintColor={4279476494}
+      tintColor="#13a10e"
       vbHeight={16}
       vbWidth={16}
     >
       <RNSVGGroup
         fill={null}
         propList={
-          Array [
+          [
             "fill",
           ]
         }
@@ -158,12 +164,12 @@ exports[`Avatar component tests Avatar badge 1`] = `
         <RNSVGPath
           d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.7-9.3l-4 4a1 1 0 01-1.41 0l-2-2a1 1 0 111.42-1.4L7 8.58l3.3-3.3a1 1 0 011.4 1.42z"
           fill={
-            Array [
-              2,
-            ]
+            {
+              "type": 2,
+            }
           }
           propList={
-            Array [
+            [
               "fill",
             ]
           }
@@ -181,7 +187,7 @@ exports[`Avatar component tests Avatar circular 1`] = `
   accessible={true}
   icon={null}
   image={
-    Object {
+    {
       "accessibilityLabel": undefined,
       "source": undefined,
     }
@@ -189,7 +195,7 @@ exports[`Avatar component tests Avatar circular 1`] = `
   initials=""
   shape="circular"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "aspectRatio": 1,
@@ -204,7 +210,7 @@ exports[`Avatar component tests Avatar circular 1`] = `
   <View
     accessible={false}
     style={
-      Object {
+      {
         "alignItems": "center",
         "aspectRatio": 1,
         "backgroundColor": "#e6e6e6",
@@ -219,42 +225,49 @@ exports[`Avatar component tests Avatar circular 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={16}
-      bbWidth={16}
-      color={4284572001}
+      bbHeight="16"
+      bbWidth="16"
+      color="#616161"
       focusable={false}
       height={16}
       meetOrSlice={0}
       minX={0}
       minY={0}
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "borderWidth": 0,
           },
-          Object {
+          {
             "flex": 0,
             "height": 16,
             "width": 16,
           },
         ]
       }
-      tintColor={4284572001}
+      tintColor="#616161"
       vbHeight={16}
       vbWidth={14}
       width={16}
     >
-      <RNSVGGroup>
+      <RNSVGGroup
+        fill={
+          {
+            "payload": 4278190080,
+            "type": 0,
+          }
+        }
+      >
         <RNSVGPath
           d="M7 0C4.79086 0 3 1.79086 3 4C3 6.20914 4.79086 8 7 8C9.20914 8 11 6.20914 11 4C11 1.79086 9.20914 0 7 0ZM4 4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4C10 5.65685 8.65685 7 7 7C5.34315 7 4 5.65685 4 4ZM2.00873 9C0.903151 9 0 9.88687 0 11C0 12.6912 0.83281 13.9663 2.13499 14.7966C3.41697 15.614 5.14526 16 7 16C8.85474 16 10.583 15.614 11.865 14.7966C13.1672 13.9663 14 12.6912 14 11C14 9.89557 13.1045 9.00001 12 9.00001L2.00873 9ZM1 11C1 10.4467 1.44786 10 2.00873 10L12 10C12.5522 10 13 10.4478 13 11C13 12.3088 12.3777 13.2837 11.3274 13.9534C10.2568 14.636 8.73511 15 7 15C5.26489 15 3.74318 14.636 2.67262 13.9534C1.62226 13.2837 1 12.3088 1 11Z"
           fill={
-            Array [
-              2,
-            ]
+            {
+              "type": 2,
+            }
           }
           propList={
-            Array [
+            [
               "fill",
             ]
           }
@@ -272,7 +285,7 @@ exports[`Avatar component tests Avatar default 1`] = `
   accessible={true}
   icon={null}
   image={
-    Object {
+    {
       "accessibilityLabel": undefined,
       "source": undefined,
     }
@@ -280,7 +293,7 @@ exports[`Avatar component tests Avatar default 1`] = `
   initials=""
   shape="circular"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "aspectRatio": 1,
@@ -295,7 +308,7 @@ exports[`Avatar component tests Avatar default 1`] = `
   <View
     accessible={false}
     style={
-      Object {
+      {
         "alignItems": "center",
         "aspectRatio": 1,
         "backgroundColor": "#e6e6e6",
@@ -310,42 +323,49 @@ exports[`Avatar component tests Avatar default 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={16}
-      bbWidth={16}
-      color={4284572001}
+      bbHeight="16"
+      bbWidth="16"
+      color="#616161"
       focusable={false}
       height={16}
       meetOrSlice={0}
       minX={0}
       minY={0}
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "borderWidth": 0,
           },
-          Object {
+          {
             "flex": 0,
             "height": 16,
             "width": 16,
           },
         ]
       }
-      tintColor={4284572001}
+      tintColor="#616161"
       vbHeight={16}
       vbWidth={14}
       width={16}
     >
-      <RNSVGGroup>
+      <RNSVGGroup
+        fill={
+          {
+            "payload": 4278190080,
+            "type": 0,
+          }
+        }
+      >
         <RNSVGPath
           d="M7 0C4.79086 0 3 1.79086 3 4C3 6.20914 4.79086 8 7 8C9.20914 8 11 6.20914 11 4C11 1.79086 9.20914 0 7 0ZM4 4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4C10 5.65685 8.65685 7 7 7C5.34315 7 4 5.65685 4 4ZM2.00873 9C0.903151 9 0 9.88687 0 11C0 12.6912 0.83281 13.9663 2.13499 14.7966C3.41697 15.614 5.14526 16 7 16C8.85474 16 10.583 15.614 11.865 14.7966C13.1672 13.9663 14 12.6912 14 11C14 9.89557 13.1045 9.00001 12 9.00001L2.00873 9ZM1 11C1 10.4467 1.44786 10 2.00873 10L12 10C12.5522 10 13 10.4478 13 11C13 12.3088 12.3777 13.2837 11.3274 13.9534C10.2568 14.636 8.73511 15 7 15C5.26489 15 3.74318 14.636 2.67262 13.9534C1.62226 13.2837 1 12.3088 1 11Z"
           fill={
-            Array [
-              2,
-            ]
+            {
+              "type": 2,
+            }
           }
           propList={
-            Array [
+            [
               "fill",
             ]
           }
@@ -365,7 +385,7 @@ exports[`Avatar component tests Avatar ring 1`] = `
   activeAppearance="ring"
   icon={null}
   image={
-    Object {
+    {
       "accessibilityLabel": undefined,
       "source": undefined,
     }
@@ -373,7 +393,7 @@ exports[`Avatar component tests Avatar ring 1`] = `
   initials=""
   shape="circular"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "aspectRatio": 1,
@@ -387,7 +407,7 @@ exports[`Avatar component tests Avatar ring 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "aspectRatio": 1,
         "backgroundColor": "transparent",
         "borderColor": "transparent",
@@ -404,7 +424,7 @@ exports[`Avatar component tests Avatar ring 1`] = `
     <View
       accessible={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "aspectRatio": 1,
           "backgroundColor": "#e6e6e6",
@@ -421,42 +441,49 @@ exports[`Avatar component tests Avatar ring 1`] = `
     >
       <RNSVGSvgView
         align="xMidYMid"
-        bbHeight={16}
-        bbWidth={16}
-        color={4284572001}
+        bbHeight="16"
+        bbWidth="16"
+        color="#616161"
         focusable={false}
         height={16}
         meetOrSlice={0}
         minX={0}
         minY={0}
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "transparent",
               "borderWidth": 0,
             },
-            Object {
+            {
               "flex": 0,
               "height": 16,
               "width": 16,
             },
           ]
         }
-        tintColor={4284572001}
+        tintColor="#616161"
         vbHeight={16}
         vbWidth={14}
         width={16}
       >
-        <RNSVGGroup>
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
           <RNSVGPath
             d="M7 0C4.79086 0 3 1.79086 3 4C3 6.20914 4.79086 8 7 8C9.20914 8 11 6.20914 11 4C11 1.79086 9.20914 0 7 0ZM4 4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4C10 5.65685 8.65685 7 7 7C5.34315 7 4 5.65685 4 4ZM2.00873 9C0.903151 9 0 9.88687 0 11C0 12.6912 0.83281 13.9663 2.13499 14.7966C3.41697 15.614 5.14526 16 7 16C8.85474 16 10.583 15.614 11.865 14.7966C13.1672 13.9663 14 12.6912 14 11C14 9.89557 13.1045 9.00001 12 9.00001L2.00873 9ZM1 11C1 10.4467 1.44786 10 2.00873 10L12 10C12.5522 10 13 10.4478 13 11C13 12.3088 12.3777 13.2837 11.3274 13.9534C10.2568 14.636 8.73511 15 7 15C5.26489 15 3.74318 14.636 2.67262 13.9534C1.62226 13.2837 1 12.3088 1 11Z"
             fill={
-              Array [
-                2,
-              ]
+              {
+                "type": 2,
+              }
             }
             propList={
-              Array [
+              [
                 "fill",
               ]
             }
@@ -475,7 +502,7 @@ exports[`Avatar component tests Avatar square 1`] = `
   accessible={true}
   icon={null}
   image={
-    Object {
+    {
       "accessibilityLabel": undefined,
       "source": undefined,
     }
@@ -483,7 +510,7 @@ exports[`Avatar component tests Avatar square 1`] = `
   initials=""
   shape="square"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "aspectRatio": 1,
@@ -498,7 +525,7 @@ exports[`Avatar component tests Avatar square 1`] = `
   <View
     accessible={false}
     style={
-      Object {
+      {
         "alignItems": "center",
         "aspectRatio": 1,
         "backgroundColor": "#e6e6e6",
@@ -513,42 +540,49 @@ exports[`Avatar component tests Avatar square 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={16}
-      bbWidth={16}
-      color={4284572001}
+      bbHeight="16"
+      bbWidth="16"
+      color="#616161"
       focusable={false}
       height={16}
       meetOrSlice={0}
       minX={0}
       minY={0}
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "borderWidth": 0,
           },
-          Object {
+          {
             "flex": 0,
             "height": 16,
             "width": 16,
           },
         ]
       }
-      tintColor={4284572001}
+      tintColor="#616161"
       vbHeight={16}
       vbWidth={14}
       width={16}
     >
-      <RNSVGGroup>
+      <RNSVGGroup
+        fill={
+          {
+            "payload": 4278190080,
+            "type": 0,
+          }
+        }
+      >
         <RNSVGPath
           d="M7 0C4.79086 0 3 1.79086 3 4C3 6.20914 4.79086 8 7 8C9.20914 8 11 6.20914 11 4C11 1.79086 9.20914 0 7 0ZM4 4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4C10 5.65685 8.65685 7 7 7C5.34315 7 4 5.65685 4 4ZM2.00873 9C0.903151 9 0 9.88687 0 11C0 12.6912 0.83281 13.9663 2.13499 14.7966C3.41697 15.614 5.14526 16 7 16C8.85474 16 10.583 15.614 11.865 14.7966C13.1672 13.9663 14 12.6912 14 11C14 9.89557 13.1045 9.00001 12 9.00001L2.00873 9ZM1 11C1 10.4467 1.44786 10 2.00873 10L12 10C12.5522 10 13 10.4478 13 11C13 12.3088 12.3777 13.2837 11.3274 13.9534C10.2568 14.636 8.73511 15 7 15C5.26489 15 3.74318 14.636 2.67262 13.9534C1.62226 13.2837 1 12.3088 1 11Z"
           fill={
-            Array [
-              2,
-            ]
+            {
+              "type": 2,
+            }
           }
           propList={
-            Array [
+            [
               "fill",
             ]
           }

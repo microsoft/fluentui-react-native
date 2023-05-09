@@ -1,4 +1,4 @@
-import type { IKeyboardEvent, IHandledKeyboardEvent } from '@office-iss/react-native-win32';
+import type { IKeyboardEvent, IHandledKeyboardEvent } from '@office-iss/react-native-win32/Libraries/Components/View/ViewPropTypes.win32';
 
 export type KeyPressEvent = IKeyboardEvent;
 

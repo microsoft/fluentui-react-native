@@ -1,12 +1,14 @@
 import type { ImageProps } from 'react-native';
 
-import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
+import type { ITextWin32Props } from '@office-iss/react-native-win32';
+import type { AccessibilityProps as IAccessibilityPropsWin32 } from '@office-iss/react-native-win32/Libraries/Components/View/ViewAccessibility.win32';
+import type { ViewProps as IViewWin32Props } from '@office-iss/react-native-win32/Libraries/Components/View/ViewPropTypes.win32';
 
 import type { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = ITextWin32Props;
-export type IViewProps = IViewWin32Props;
+export type ITextProps = ITextWin32Props & IAccessibilityPropsWin32;
+export type IViewProps = IViewWin32Props & IAccessibilityPropsWin32;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
@@ -20,7 +22,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityDescribedBy: true,
   accessibilityItemType: true,
   accessibilityLabel: true,
-  accessibilityLabeledBy: true,
+  accessibilityLabelledBy: true,
   accessibilityLevel: true,
   accessibilityPositionInSet: true,
   accessibilityRole: true,
@@ -70,7 +72,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   onTouchMove: true,
   onTouchStart: true,
   tooltip: true,
-  type: true,
   focusable: true,
   id: false,
   'aria-label': false,
@@ -100,19 +101,44 @@ const _viewMask: IFilterMask<IViewProps> = {
   onPointerDownCapture: false,
   onPointerUp: false,
   onPointerUpCapture: false,
+  collapsable: true,
+  needsOffscreenAlphaCompositing: true,
+  renderToHardwareTextureAndroid: true,
+  shouldRasterizeIOS: true,
+  isTVSelectable: false,
+  hasTVPreferredFocus: false,
+  tvParallaxProperties: false,
+  tvParallaxShiftDistanceX: false,
+  tvParallaxShiftDistanceY: false,
+  tvParallaxTiltAngle: false,
+  tvParallaxMagnification: false,
+  tabIndex: true,
+  importantForAccessibility: true,
+  accessibilityLiveRegion: true,
+  accessibilityElementsHidden: true,
+  accessibilityViewIsModal: false,
+  onAccessibilityEscape: false,
+  onMagicTap: false,
+  accessibilityIgnoresInvertColors: false,
+  accessibilityLanguage: false,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
   children: true,
+  accessibilityAccessKey: true,
   accessibilityActions: true,
+  accessibilityAnnotation: true,
   accessibilityControls: true,
   accessibilityDescribedBy: true,
+  accessibilityDescription: true,
   accessibilityHint: true,
   accessibilityItemType: true,
   accessibilityLabel: true,
-  accessibilityLabeledBy: true,
+  accessibilityLabelledBy: true,
   accessibilityLevel: true,
+  accessibilityPositionInSet: true,
   accessibilityRole: true,
+  accessibilitySetSize: true,
   accessibilityState: true,
   accessibilityValue: true,
   accessible: true,
@@ -162,6 +188,23 @@ const _textMask: IFilterMask<ITextProps> = {
   'aria-live': false,
   'aria-modal': false,
   role: false,
+  adjustsFontSizeToFit: false,
+  dynamicTypeRamp: false,
+  minimumFontScale: false,
+  suppressHighlighting: false,
+  disabled: true,
+  selectionColor: true,
+  textBreakStrategy: true,
+  dataDetectorType: false,
+  android_hyphenationFrequency: false,
+  importantForAccessibility: true,
+  accessibilityLiveRegion: true,
+  accessibilityElementsHidden: true,
+  accessibilityViewIsModal: false,
+  onAccessibilityEscape: false,
+  onMagicTap: false,
+  accessibilityIgnoresInvertColors: false,
+  accessibilityLanguage: false,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {

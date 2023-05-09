@@ -1,12 +1,14 @@
 import type { TextProps, ViewProps, ImageProps } from 'react-native';
 
-import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
+import type { ITextWin32Props } from '@office-iss/react-native-win32';
+import type { AccessibilityProps as IAccessibilityPropsWin32 } from '@office-iss/react-native-win32/Libraries/Components/View/ViewAccessibility.win32';
+import type { ViewProps as IViewWin32Props } from '@office-iss/react-native-win32/Libraries/Components/View/ViewPropTypes.win32';
 
 import type { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = TextProps & Partial<ITextWin32Props>;
-export type IViewProps = ViewProps & Partial<IViewWin32Props>;
+export type ITextProps = TextProps & Partial<ITextWin32Props> & Partial<IAccessibilityPropsWin32>;
+export type IViewProps = ViewProps & Partial<IViewWin32Props> & Partial<IAccessibilityPropsWin32>;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
@@ -70,7 +72,8 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityAnnotation: true,
   accessibilityDescription: true,
   accessibilityDescribedBy: true,
-  accessibilityLabeledBy: true,
+  accessibilityLabelledBy: true,
+  accessibilityLanguage: true,
   accessibilityLevel: true,
   accessibilityPositionInSet: true,
   accessibilitySetSize: true,
@@ -89,7 +92,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   onMouseEnter: true,
   onMouseLeave: true,
   tooltip: true,
-  type: true,
   id: false,
   onPointerEnter: false,
   onPointerEnterCapture: false,
@@ -118,22 +120,26 @@ const _viewMask: IFilterMask<IViewProps> = {
   'aria-live': false,
   'aria-modal': false,
   role: false,
-  accessibilityLabelledBy: false,
-  accessibilityLanguage: false,
+  tabIndex: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
   children: true,
+  accessibilityAccessKey: true,
   accessibilityActions: true,
+  accessibilityAnnotation: true,
   accessibilityControls: true,
+  accessibilityDescription: true,
   accessibilityElementsHidden: true,
   accessibilityHint: true,
   accessibilityIgnoresInvertColors: true,
   accessibilityItemType: true,
   accessibilityLabel: true,
-  accessibilityLiveRegion: true,
   accessibilityLevel: true,
+  accessibilityLiveRegion: true,
+  accessibilityPositionInSet: true,
   accessibilityRole: true,
+  accessibilitySetSize: true,
   accessibilityState: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
@@ -164,7 +170,7 @@ const _textMask: IFilterMask<ITextProps> = {
   selectionColor: true,
   suppressHighlighting: true,
   accessibilityDescribedBy: true,
-  accessibilityLabeledBy: true,
+  accessibilityLabelledBy: true,
   keyDownEvents: true,
   keyUpEvents: true,
   onKeyDown: true,
@@ -198,7 +204,6 @@ const _textMask: IFilterMask<ITextProps> = {
   'aria-live': false,
   'aria-modal': false,
   role: false,
-  accessibilityLabelledBy: false,
   accessibilityLanguage: false,
 };
 
