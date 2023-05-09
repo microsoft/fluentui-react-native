@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { useState } from 'react';
-import { Button, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
@@ -44,6 +44,7 @@ export const DrawerV1 = compose<DrawerV1Type>({
               <Button title="Open Drawer (Left)" onPress={() => handleOpenDrawer('left')} />
               <Button title="Open Drawer (Right)" onPress={() => handleOpenDrawer('right')} />
               <Button title="Open Drawer (Bottom)" onPress={() => handleOpenDrawer('bottom')} />
+              <Button title="Open Drawer (Top)" onPress={() => handleOpenDrawer('top')} />
             </View>
             <Drawer isVisible={isDrawerVisible} onClose={handleDrawerClose} position={drawerPosition}>
               <View style={styles.drawerContent}>

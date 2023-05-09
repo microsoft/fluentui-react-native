@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Dimensions, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Animated, Dimensions, Modal, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
@@ -68,14 +68,23 @@ const Drawer = ({ children, isVisible, onClose, position }) => {
   return (
     <>
       {isVisible && (
-        <TouchableWithoutFeedback onPress={handleBackdropPress}>
-          <Animated.View style={[styles.backdrop, { opacity: animatedOpacity }]} />
-        </TouchableWithoutFeedback>
+        <Modal
+          visible={isVisible}
+          onRequestClose={handleClose}
+          supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
+          animationType="none"
+          transparent
+        >
+          <TouchableWithoutFeedback onPress={handleBackdropPress}>
+            <Animated.View style={[styles.backdrop, { opacity: animatedOpacity }]} />
+          </TouchableWithoutFeedback>
+          <Animated.View style={[styles.container, styles[position], animatedStyle]}>
+            {position === 'bottom' && <View style={styles.dragger} />}
+            {children}
+            {position === 'top' && <View style={styles.dragger} />}
+          </Animated.View>
+        </Modal>
       )}
-      <Animated.View style={[styles.container, styles[position], animatedStyle]}>
-        <View style={styles.dragger} />
-        {children}
-      </Animated.View>
     </>
   );
 };
@@ -97,15 +106,21 @@ const styles = StyleSheet.create({
   },
   left: {
     left: 0,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
   },
   right: {
     right: 0,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
   },
   top: {
     top: 0,
   },
   bottom: {
     bottom: 0,
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 0,
   },
   dragger: {
     width: 40,
