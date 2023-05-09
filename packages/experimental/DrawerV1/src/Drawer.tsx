@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Dimensions, Modal, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Animated, Dimensions, Modal, PanResponder, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
@@ -8,14 +8,16 @@ const Drawer = ({ children, isVisible, onClose, position }) => {
 
   useEffect(() => {
     if (isVisible) {
-      Animated.spring(animatedValue, {
+      Animated.timing(animatedValue, {
         toValue: 1,
-        useNativeDriver: false,
+        duration: 500,
+        useNativeDriver: true,
       }).start();
     } else {
-      Animated.spring(animatedValue, {
+      Animated.timing(animatedValue, {
         toValue: 0,
-        useNativeDriver: false,
+        duration: 500,
+        useNativeDriver: true,
       }).start();
     }
   }, [animatedValue, isVisible]);
@@ -35,7 +37,7 @@ const Drawer = ({ children, isVisible, onClose, position }) => {
 
   const animatedTranslateY = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: position === 'top' ? [-height * 0.5, 0] : position === 'bottom' ? [height * 0.5, 0] : [0, 0],
+    outputRange: [height, height * 0.5],
   });
 
   const animatedOpacity = animatedValue.interpolate({
@@ -48,20 +50,9 @@ const Drawer = ({ children, isVisible, onClose, position }) => {
     outputRange: [0, 5],
   });
 
-  const animatedWidth = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: position === 'bottom' ? ['100%', '100%'] : position === 'left' || position === 'right' ? ['80%', '80%'] : ['100%', '100%'],
-  });
-
-  const animatedHeight = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: position === 'bottom' ? ['50%', '100%'] : ['100%', '100%'],
-  });
-
   const animatedStyle = {
     transform: position === 'left' || position === 'right' ? [{ translateX: animatedTranslateX }] : [{ translateY: animatedTranslateY }],
-    width: animatedWidth,
-    height: animatedHeight,
+
     elevation: animatedElevation,
   };
 
@@ -81,7 +72,6 @@ const Drawer = ({ children, isVisible, onClose, position }) => {
           <Animated.View style={[styles.container, styles[position], animatedStyle]}>
             {position === 'bottom' && <View style={styles.dragger} />}
             {children}
-            {position === 'top' && <View style={styles.dragger} />}
           </Animated.View>
         </Modal>
       )}
@@ -102,25 +92,23 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    borderRadius: 10,
   },
   left: {
     left: 0,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
+    height: '100%',
+    width: '50%',
   },
   right: {
     right: 0,
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
+    height: '100%',
+    width: '50%',
   },
-  top: {
-    top: 0,
-  },
+
   bottom: {
     bottom: 0,
-    borderBottomRightRadius: 0,
-    borderBottomLeftRadius: 0,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    width: '100%',
   },
   dragger: {
     width: 40,

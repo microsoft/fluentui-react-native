@@ -44,7 +44,6 @@ export const DrawerV1 = compose<DrawerV1Type>({
               <Button title="Open Drawer (Left)" onPress={() => handleOpenDrawer('left')} />
               <Button title="Open Drawer (Right)" onPress={() => handleOpenDrawer('right')} />
               <Button title="Open Drawer (Bottom)" onPress={() => handleOpenDrawer('bottom')} />
-              <Button title="Open Drawer (Top)" onPress={() => handleOpenDrawer('top')} />
             </View>
             <Drawer isVisible={isDrawerVisible} onClose={handleDrawerClose} position={drawerPosition}>
               <View style={styles.drawerContent}>
@@ -72,7 +71,6 @@ const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
   text: {
     fontSize: 20,
