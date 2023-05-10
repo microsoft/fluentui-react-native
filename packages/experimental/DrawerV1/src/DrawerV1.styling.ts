@@ -29,5 +29,52 @@ export const stylingSettings: UseStylingOptions<DrawerV1Props, DrawerV1SlotProps
       }),
       ['backgroundColor', 'paddingHorizontal', ...borderStyles.keys, ...layoutStyles.keys],
     ),
+    modal: buildProps((_tokens: DrawerV1Tokens, _theme: Theme) => ({}), []),
+    backdrop: buildProps(
+      (_tokens: DrawerV1Tokens, _theme: Theme) => ({
+        style: {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 999,
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#000',
+        },
+      }),
+      [],
+    ),
+    backdropContent: buildProps((_tokens: DrawerV1Tokens, _theme: Theme) => ({}), []),
+    content: buildProps(
+      (_tokens: DrawerV1Tokens, _theme: Theme) => ({
+        style: {
+          position: 'absolute',
+          top: 0,
+          zIndex: 1000,
+          backgroundColor: '#FFF',
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 4,
+        },
+      }),
+      [],
+    ),
+    dragger: buildProps(
+      (_tokens: DrawerV1Tokens, _theme: Theme) => ({
+        style: {
+          width: 40,
+          height: 5,
+          borderRadius: 10,
+          backgroundColor: '#CCC',
+          alignSelf: 'center',
+          marginVertical: 10,
+        },
+      }),
+      [],
+    ),
   },
 };

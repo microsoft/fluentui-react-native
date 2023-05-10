@@ -1,6 +1,5 @@
-import type { ColorValue, ScrollViewProps } from 'react-native';
+import type { Animated, ColorValue, ModalProps, TouchableWithoutFeedbackProps, ViewProps } from 'react-native';
 
-import type { IconProps } from '@fluentui-react-native/icon';
 import type { PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
 import type { FocusState } from '@fluentui-react-native/interactive-hooks/lib/usePressableState.types';
 import type { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
@@ -26,15 +25,30 @@ export interface DrawerV1Props extends PressableFocusProps {
    ** An accessibility label for screen readers. Set on the text DrawerV1.
    */
   accessibilityLabel?: string;
+
+  isVisible?: boolean;
+  onClose?: () => void;
+  handleClose?: () => void;
+  handleBackdropPress?: () => void;
+  animatedElevation?: any;
+  animatedStyle?: any;
+  animatedOpacity?: any;
+  position?: any;
+  children?: React.ReactNode;
 }
 
 export interface DrawerV1Info {
-  props: DrawerV1Props & { iconProps: IconProps } & React.ComponentPropsWithRef<any>;
+  props: DrawerV1Props;
   state: FocusState & { text: string };
 }
 
 export interface DrawerV1SlotProps {
-  root: ScrollViewProps;
+  root: ViewProps;
+  modal: ModalProps;
+  backdrop: TouchableWithoutFeedbackProps;
+  backdropContent: Animated.AnimatedProps<ViewProps>;
+  content: Animated.AnimatedProps<ViewProps>;
+  dragger: ViewProps;
 }
 
 export interface DrawerV1Type {
