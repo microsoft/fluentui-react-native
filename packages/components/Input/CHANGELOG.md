@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/input
 
-This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
+This log was last generated on Wed, 10 May 2023 11:59:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.2
+
+Wed, 10 May 2023 11:59:16 GMT
+
+### Patches
+
+- Change svg to component (ayushsinghs@yahoo.in)
 
 ## 0.2.1
 
