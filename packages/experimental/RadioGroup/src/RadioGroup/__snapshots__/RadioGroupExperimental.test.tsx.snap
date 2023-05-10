@@ -1598,7 +1598,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         <View
           style={
             Object {
-              "alignItems": "center",
+              "alignItems": "flex-start",
               "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
@@ -1742,7 +1742,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         <View
           style={
             Object {
-              "alignItems": "center",
+              "alignItems": "flex-start",
               "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
