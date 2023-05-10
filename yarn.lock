@@ -5924,10 +5924,10 @@ command-line-usage@^5.0.5:
     table-layout "^0.4.3"
     typical "^2.6.1"
 
-commander@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-10.0.0.tgz#71797971162cd3cf65f0b9d24eb28f8d303acdf1"
-  integrity sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==
+commander@^10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-10.0.1.tgz#881ee46b4f77d1c1dccc5823433aa39b022cbe06"
+  integrity sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==
 
 commander@^2.19.0:
   version "2.20.3"
@@ -10173,13 +10173,13 @@ map-obj@^1.0.0:
   integrity sha512-7N/q3lyZ+LVCp7PzuxrJr4KMbBE2hW7BT7YNia330OFxIf4d3r5zVpicP2650l7CPN6RM9zOJRl3NGpqSiw3Eg==
 
 markdown-link-check@^3.8.7:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/markdown-link-check/-/markdown-link-check-3.11.1.tgz#6d26de1fa79714cb89966f7df564b174a403c6ac"
-  integrity sha512-1O5CYb1qbrQGwG9kx3GKZ1t128ZMojKZwDCrGP7mC/xvXSF8KfMjcSUhdtdhvNJeDyNUO23YaAu7hSD72h9w5Q==
+  version "3.11.2"
+  resolved "https://registry.yarnpkg.com/markdown-link-check/-/markdown-link-check-3.11.2.tgz#303a8a03d4a34c42ef3158e0b245bced26b5d904"
+  integrity sha512-zave+vI4AMeLp0FlUllAwGbNytSKsS3R2Zgtf3ufVT892Z/L6Ro9osZwE9PNA7s0IkJ4onnuHqatpsaCiAShJw==
   dependencies:
     async "^3.2.4"
     chalk "^5.2.0"
-    commander "^10.0.0"
+    commander "^10.0.1"
     link-check "^5.2.0"
     lodash "^4.17.21"
     markdown-link-extractor "^3.1.0"
