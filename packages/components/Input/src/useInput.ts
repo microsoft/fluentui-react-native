@@ -4,7 +4,7 @@ import { createIconProps } from '@fluentui-react-native/icon';
 import type { IconProps } from '@fluentui-react-native/icon';
 import { usePressableState } from '@fluentui-react-native/interactive-hooks';
 
-import { DismissSvg } from './dismissSvg';
+import { DismissSvg } from './assets/dismissSvg';
 import type { InputProps, InputInfo } from './Input.types';
 
 export const useInput = (props: InputProps): InputInfo => {
