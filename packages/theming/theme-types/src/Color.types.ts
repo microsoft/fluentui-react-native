@@ -846,82 +846,236 @@ export interface AliasColorTokens {
 
   /// Red
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
+  /** @deprecated */
   redBackground1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
   redBackground2?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
   redBackground3?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
   redForeground1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
   redForeground2?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
   redForeground3?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
   redBorderActive?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
   redBorder1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  // TODO #2765: remove from macOS and mark as deprecated
+  /** @platform macOS */
   redBorder2?: ColorValue;
 
   /// Error, status, and presence tokens
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   dangerBackground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   dangerBackground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  dangerBackground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   dangerForeground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   dangerForeground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  dangerForeground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  dangerForegroundInverted?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  dangerBorderActive?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  dangerBorder1?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  dangerBorder2?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   successBackground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   successBackground2?: ColorValue;
 
-  /** @platform iOS, android */
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  successBackground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   successForeground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   successForeground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  successForeground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  successForegroundInverted?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  successBorderActive?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  successBorder1?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  successBorder2?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   warningBackground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   warningBackground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  warningBackground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   warningForeground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   warningForeground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  warningForeground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  warningForegroundInverted?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  warningBorderActive?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  warningBorder1?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  warningBorder2?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   severeBackground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   severeBackground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  severeBackground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   severeForeground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  // TODO #2765: add to macOS
+  /** @platform iOS, android, win32, windows  */
   severeForeground2?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  severeForeground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  severeBorderActive?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  severeBorder1?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  severeBorder2?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  outofofficeBackground1?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  outofofficeBackground2?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  outofofficeBackground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  outofofficeForeground1?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows  */
+  outofofficeForeground2?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  outofofficeForeground3?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  outofofficeBorderActive?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  outofofficeBorder1?: ColorValue;
+
+  // TODO #2765: add to macOS
+  /** @platform win32, windows */
+  outofofficeBorder2?: ColorValue;
 
   /** @platform iOS, android  */
   presenceAway?: ColorValue;
