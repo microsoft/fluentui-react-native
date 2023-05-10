@@ -4,7 +4,7 @@ import { createIconProps } from '@fluentui-react-native/icon';
 import type { IconProps } from '@fluentui-react-native/icon';
 import { usePressableState } from '@fluentui-react-native/interactive-hooks';
 
-import DismissSvg from './assets/dismissIcon.svg'; // Default accessory icon
+import { DismissSvg } from './dismissSvg';
 import type { InputProps, InputInfo } from './Input.types';
 
 export const useInput = (props: InputProps): InputInfo => {
@@ -18,7 +18,7 @@ export const useInput = (props: InputProps): InputInfo => {
     onFocus,
     onChange,
     value,
-    accessoryIcon = { svgSource: { src: DismissSvg, viewBox: '0 0 20 20' } },
+    accessoryIcon = { svgSource: { src: DismissSvg } }, // Default accessory icon
     accessoryButtonOnPress,
     defaultValue,
     textInputProps,
