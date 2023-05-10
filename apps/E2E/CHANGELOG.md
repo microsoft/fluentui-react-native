@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
+This log was last generated on Wed, 03 May 2023 23:02:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.23.2
+
+Wed, 03 May 2023 23:02:54 GMT
+
+### Patches
+
+- Use iOS 16.2 for appium (adgleitm@microsoft.com)
 
 ## 1.23.1
 

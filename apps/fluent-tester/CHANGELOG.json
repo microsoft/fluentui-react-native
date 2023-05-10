@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 05 May 2023 23:13:28 GMT",
+      "tag": "@fluentui-react-native/tester_v0.143.5",
+      "version": "0.143.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "6ca717a3d6cca9146c70c94d2f06b1e674d9b48a",
+            "comment": "Update MenuPicker to use a MenuView instead of Picker"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 05 May 2023 04:40:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.143.4",
+      "version": "0.143.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.8.13",
+            "commit": "6c95c2ab6259118046b951f35b7905b39ec4a2bc"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 May 2023 07:08:52 GMT",
       "tag": "@fluentui-react-native/tester_v0.143.3",
       "version": "0.143.3",
