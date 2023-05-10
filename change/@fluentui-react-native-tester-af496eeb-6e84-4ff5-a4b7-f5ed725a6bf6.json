@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "remove non working drawer",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
