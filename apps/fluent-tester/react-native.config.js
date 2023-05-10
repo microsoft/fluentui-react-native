@@ -10,7 +10,7 @@ const project = (() => {
       },
       windows: {
         sourceDir: 'windows',
-        solutionFile: 'windows/Example.sln',
+        solutionFile: 'windows/FluentTester.sln',
       },
     });
   } catch (_) {
