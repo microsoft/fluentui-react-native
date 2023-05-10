@@ -1,14 +1,12 @@
 import type { ImageProps } from 'react-native';
 
-import type { ITextWin32Props } from '@office-iss/react-native-win32';
-import type { AccessibilityProps as IAccessibilityPropsWin32 } from '@office-iss/react-native-win32/Libraries/Components/View/ViewAccessibility.win32';
-import type { ViewProps as IViewWin32Props } from '@office-iss/react-native-win32/Libraries/Components/View/ViewPropTypes.win32';
+import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
 
 import type { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = ITextWin32Props & IAccessibilityPropsWin32;
-export type IViewProps = IViewWin32Props & IAccessibilityPropsWin32;
+export type ITextProps = ITextWin32Props;
+export type IViewProps = IViewWin32Props;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
