@@ -102,7 +102,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     props: {
       ...props,
       required,
-      layout: layout,
+      layout,
       accessible: accessible ?? true,
       accessibilityRole: 'radiogroup',
       accessibilityLabel: accessibilityLabel ?? label,
