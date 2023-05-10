@@ -12,8 +12,6 @@ interface argsType {
 }
 
 export const yargsParse = (args: string[]): argsType => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   return yargs([])
     .help()
     .exitProcess(false)
@@ -30,7 +28,7 @@ export const yargsParse = (args: string[]): argsType => {
       choices: ['button-v0-to-v1', 'deprecate-exports'],
     })
     .demandOption(['path', 'transform'])
-    .parse(args);
+    .parseSync(args);
 };
 
 export const transform = (args: argsType) => {
