@@ -40,11 +40,13 @@
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
   },
   "author": "",
   "license": "MIT",
@@ -61,7 +63,8 @@
         "core",
         "core-android",
         "core-ios",
-        "react"
+        "react",
+        "svg"
       ]
     }
   }

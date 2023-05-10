@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Change svg to component",
+  "packageName": "@fluentui-react-native/input",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
