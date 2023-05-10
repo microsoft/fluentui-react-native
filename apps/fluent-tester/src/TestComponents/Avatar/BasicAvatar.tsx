@@ -60,11 +60,29 @@ export const StandardUsage: FunctionComponent = () => {
           Set {outOfOffice ? ' In office' : ' Out of office'}
         </ToggleButton>
 
-        <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
-        <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
+        <StyledPicker
+          style={commonStyles.vmargin}
+          prompt="Size"
+          selected={imageSize.toString()}
+          onChange={onSizeChange}
+          collection={avatarSizesForPicker}
+        />
+        <StyledPicker style={commonStyles.vmargin} prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
         {active === 'active' && <Text>Active appearance is ring</Text>}
-        <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
-        <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
+        <StyledPicker
+          style={commonStyles.vmargin}
+          prompt="Avatar Color"
+          selected={avatarColor}
+          onChange={onAvatarColorChange}
+          collection={avatarColors}
+        />
+        <StyledPicker
+          style={commonStyles.vmargin}
+          prompt="Presence status"
+          selected={presence}
+          onChange={onPresenceChange}
+          collection={allPresences}
+        />
       </View>
       <View style={commonStyles.pickerControlled}>
         <Avatar

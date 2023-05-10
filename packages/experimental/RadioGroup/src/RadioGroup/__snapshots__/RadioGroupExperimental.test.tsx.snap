@@ -200,7 +200,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -341,8 +341,8 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             {
               "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
+              "backgroundColor": "#185abd",
+              "borderColor": "#185abd",
               "borderRadius": 8,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -372,7 +372,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -609,7 +609,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -750,8 +750,8 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             {
               "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
+              "backgroundColor": "#185abd",
+              "borderColor": "#185abd",
               "borderRadius": 8,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -781,7 +781,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1018,7 +1018,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1190,7 +1190,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1428,7 +1428,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1569,8 +1569,8 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             {
               "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
+              "backgroundColor": "#185abd",
+              "borderColor": "#185abd",
               "borderRadius": 8,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -1600,7 +1600,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1838,7 +1838,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           style={
             {
               "alignItems": "center",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -1979,8 +1979,8 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           style={
             {
               "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
+              "backgroundColor": "#185abd",
+              "borderColor": "#185abd",
               "borderRadius": 8,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -2010,7 +2010,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           style={
             {
               "alignItems": "center",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -2099,7 +2099,6 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       onAccessibilityTap={[Function]}
       style={
         {
-          "color": "#750b1c",
           "fontFamily": "Segoe UI",
           "fontSize": 16,
           "fontWeight": "600",
@@ -2264,7 +2263,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,
@@ -2405,8 +2404,8 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             {
               "alignItems": "center",
-              "backgroundColor": "#0078d4",
-              "borderColor": "#0078d4",
+              "backgroundColor": "#185abd",
+              "borderColor": "#185abd",
               "borderRadius": 8,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -2436,7 +2435,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
+              "borderColor": "#00000000",
               "borderRadius": 4,
               "borderStyle": "solid",
               "borderWidth": 2,

@@ -90,9 +90,22 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
     [pressProps],
   );
 
+  const onInvoke = React.useCallback(() => {
+    Alert.alert('Alert.', 'Object has been pressed.');
+  }, []);
+
   return (
     <Stack focusable={false}>
-      <View focusable={true} {...pressProps} onTouchEnd={onTouchEnd} style={pressState.pressed ? styles.pressed : styles.notPressed} />
+      <View
+        accessible
+        accessibilityLabel={'Press to alert'}
+        onAccessibilityTap={onInvoke}
+        accessibilityRole="button"
+        focusable={true}
+        {...pressProps}
+        onTouchEnd={onTouchEnd}
+        style={pressState.pressed ? styles.pressed : styles.notPressed}
+      />
     </Stack>
   );
 };
