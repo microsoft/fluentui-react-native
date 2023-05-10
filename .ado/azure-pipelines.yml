@@ -139,9 +139,7 @@ jobs:
   # Windows bundling and end to end testing
   - job: WindowsPR
     displayName: Windows PR
-    pool:
-      vmImage: rnw-pool-4
-      demands: ImageOverride -equals rnw-img-vs2022
+    pool: OE-OfficePublic
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
