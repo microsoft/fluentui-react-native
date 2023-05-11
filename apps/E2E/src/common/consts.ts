@@ -32,7 +32,7 @@ export const PAGE_TIMEOUT = 15000;
 // eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum Attribute {
   AccessibilityHint = 'HelpText',
-  AccessibilityLabel = 'Name',
+  AccessibilityLabel = 'AutomationProperties.AutomationId',
   AccessibilityRole = 'ControlType',
   ExpandCollapseState = 'ExpandCollapse.ExpandCollapseState',
   IsEnabled = 'IsEnabled',
