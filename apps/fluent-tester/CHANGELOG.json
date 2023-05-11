@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 11 May 2023 18:38:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.144.0",
+      "version": "0.144.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "dd47cabeb500b00aa012d3a68e5f1a696bef67fc",
+            "comment": "remove non working drawer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 May 2023 08:01:20 GMT",
       "tag": "@fluentui-react-native/tester_v0.143.7",
       "version": "0.143.7",
