@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Fri, 05 May 2023 04:40:30 GMT and should not be manually modified.
+This log was last generated on Thu, 11 May 2023 04:51:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.14
+
+Thu, 11 May 2023 04:51:14 GMT
+
+### Patches
+
+- fix talkbalks enabling status (rohanpd.work@gmail.com)
 
 ## 1.8.13
 
