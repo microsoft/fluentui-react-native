@@ -1,8 +1,12 @@
 import * as React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { DrawerV1 as Drawer } from '@fluentui-react-native/drawer';
+import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/text';
+
+import { stackStyle } from '../Common/styles';
 
 export const DrawerV1Default: React.FunctionComponent = () => {
   const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
@@ -18,21 +22,33 @@ export const DrawerV1Default: React.FunctionComponent = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.text}>This is the main content of the screen.</Text>
-        <Button title="Open Drawer (Left)" onPress={() => handleOpenDrawer('left')} />
-        <Button title="Open Drawer (Right)" onPress={() => handleOpenDrawer('right')} />
-        <Button title="Open Drawer (Bottom)" onPress={() => handleOpenDrawer('bottom')} />
-      </View>
-      <Drawer isVisible={isDrawerVisible} onClose={handleDrawerClose} position={drawerPosition}>
-        <View style={styles.drawerContent}>
-          <Text style={styles.text}>This is the content of the drawer.</Text>
-          <Button title="Close Drawer" onPress={handleDrawerClose} />
-          <Button title="Validate Children Clicked on Drawer" onPress={() => console.log('Children Clicked')} />
+    <Stack style={stackStyle}>
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <Text>This is the main content of the screen.</Text>
+          <Button appearance="outline" onClick={() => handleOpenDrawer('left')}>
+            Open Drawer (Left)
+          </Button>
+          <Button appearance="outline" onClick={() => handleOpenDrawer('right')}>
+            Open Drawer (Right)
+          </Button>
+          <Button appearance="outline" onClick={() => handleOpenDrawer('bottom')}>
+            Open Drawer (Bottom)
+          </Button>
         </View>
-      </Drawer>
-    </View>
+        <Drawer visible={isDrawerVisible} onClose={handleDrawerClose} onBackdropClick={handleDrawerClose} position={drawerPosition}>
+          <View style={styles.drawerContent}>
+            <Text style={styles.text}>This is the content of the drawer.</Text>
+            <Button appearance="outline" onClick={handleDrawerClose}>
+              Close Drawer
+            </Button>
+            <Button appearance="outline" onClick={() => console.log('Children Clicked')}>
+              Validate Children Clicked on Drawer
+            </Button>
+          </View>
+        </Drawer>
+      </View>
+    </Stack>
   );
 };
 
@@ -41,9 +57,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    flex: 1,
+    height: 200,
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   drawerContent: {
     flex: 1,

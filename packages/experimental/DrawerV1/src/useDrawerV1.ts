@@ -1,19 +1,16 @@
 import { useRef, useEffect } from 'react';
 import { Animated, Dimensions } from 'react-native';
 
-import { usePressableState } from '@fluentui-react-native/interactive-hooks';
-
 import type { DrawerV1Props, DrawerV1Info } from './DrawerV1.types';
 
 const { height, width } = Dimensions.get('window');
 
 export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
-  const { onBlur, onFocus, accessibilityLabel, isVisible, position, children, ...rest } = props;
-  const pressable = usePressableState({ onBlur, onFocus });
+  const { onBlur, onFocus, accessibilityLabel, visible, position, children, ...rest } = props;
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    if (isVisible) {
+    if (visible) {
       Animated.timing(animatedValue, {
         toValue: 1,
         duration: 500,
@@ -26,14 +23,14 @@ export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
         useNativeDriver: true,
       }).start();
     }
-  }, [animatedValue, isVisible]);
+  }, [animatedValue, visible]);
 
-  const handleClose = () => {
-    props.onClose();
+  const onClose = () => {
+    props?.onClose && props.onClose();
   };
 
-  const handleBackdropPress = () => {
-    props.onClose();
+  const onBackdropClick = () => {
+    props?.onBackdropClick && props.onBackdropClick();
   };
 
   const animatedTranslateX = animatedValue.interpolate({
@@ -51,29 +48,28 @@ export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
     outputRange: [0, 0.5],
   });
 
-  const animatedElevation = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 5],
-  });
+  // const animatedElevation = animatedValue.interpolate({
+  //   inputRange: [0, 1],
+  //   outputRange: [0, 5],
+  // });
 
   const animatedStyle = {
     transform: position === 'left' || position === 'right' ? [{ translateX: animatedTranslateX }] : [{ translateY: animatedTranslateY }],
-    elevation: animatedElevation,
+    // elevation: animatedElevation,
   };
 
   return {
     props: {
-      ...pressable.props,
       ...rest,
-      handleClose,
-      handleBackdropPress,
-      animatedElevation,
+      onClose,
+      onBackdropClick,
+      // animatedElevation,
       animatedStyle,
       animatedOpacity,
-      isVisible,
+      visible,
       position,
       children,
     },
-    state: { ...pressable.state, text: '' },
+    state: { text: '' },
   };
 };
