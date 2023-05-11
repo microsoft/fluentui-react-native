@@ -11,7 +11,6 @@ import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { DividerTest } from './TestComponents/Divider';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
-// import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { FocusTrapTest } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest } from './TestComponents/FocusZone';
@@ -129,12 +128,6 @@ export const tests: TestDescription[] = [
     testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
     platforms: ['macos', 'win32'],
   },
-  // {
-  //   name: 'Drawer',
-  //   component: DrawerTest,
-  //   testPage: Constants.HOMEPAGE_DRAWER_BUTTON,
-  //   platforms: ['android'],
-  // },
   // GH##1027 Temporarily disabling while the test doesn't load
   // {
   //   name: 'Expander',
