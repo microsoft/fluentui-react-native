@@ -15,8 +15,8 @@ export const badgeStates: (keyof BadgeTokens)[] = [
   ...BadgeAppearances,
   'rtl',
   'shadowToken',
-  'selected',
-  'disabled',
+  'selected', // Mobile only
+  'disabled', // Mobile only
 ];
 const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'color', 'icon', 'iconColor', 'iconPosition', 'position'];
 
