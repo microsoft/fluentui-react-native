@@ -184,7 +184,8 @@
   },
   "depcheck": {
     "ignoreMatches": [
-      "@fluentui-react-native/experimental-expander"
+      "@fluentui-react-native/experimental-expander",
+      "@fluentui-react-native/experimental-drawer"
     ]
   }
 }

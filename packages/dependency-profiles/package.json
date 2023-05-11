@@ -29,6 +29,7 @@
     "@fluentui-react-native/experimental-avatar": "*",
     "@fluentui-react-native/experimental-button": "*",
     "@fluentui-react-native/experimental-checkbox": "*",
+    "@fluentui-react-native/experimental-drawer": "*",
     "@fluentui-react-native/experimental-expander": "*",
     "@fluentui-react-native/experimental-menu-button": "*",
     "@fluentui-react-native/experimental-native-date-picker": "*",
