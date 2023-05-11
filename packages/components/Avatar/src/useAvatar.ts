@@ -46,7 +46,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   };
 
   let imageProps: ImageProps = {
-    accessibilityLabel: accessibilityLabel !== undefined ? accessibilityLabel : '',
+    accessibilityLabel: accessibilityLabel ?? '',
     source: imageUrl ? ({ uri: imageUrl } as ImageSourcePropType) : undefined,
   };
 
