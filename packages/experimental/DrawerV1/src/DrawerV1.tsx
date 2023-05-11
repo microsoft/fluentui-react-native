@@ -31,23 +31,21 @@ export const DrawerV1 = compose<DrawerV1Type>({
       );
       return (
         <Slots.root {...rest}>
-          {isVisible && (
-            <Slots.modal
-              visible={isVisible}
-              onRequestClose={handleClose}
-              supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
-              animationType="none"
-              transparent
-            >
-              <Slots.backdrop onPress={handleBackdropPress}>
-                <Slots.backdropContent style={[{ opacity: animatedOpacity }]} />
-              </Slots.backdrop>
-              <Slots.content style={[styles[position], animatedStyle]}>
-                {position === 'bottom' && <Slots.dragger />}
-                {children}
-              </Slots.content>
-            </Slots.modal>
-          )}
+          <Slots.modal
+            visible={isVisible}
+            onRequestClose={handleClose}
+            supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
+            animationType="none"
+            transparent
+          >
+            <Slots.backdrop onPress={handleBackdropPress}>
+              <Slots.backdropContent style={[{ opacity: animatedOpacity }]} />
+            </Slots.backdrop>
+            <Slots.content style={[styles[position], animatedStyle]}>
+              {position === 'bottom' && <Slots.dragger />}
+              {children}
+            </Slots.content>
+          </Slots.modal>
         </Slots.root>
       );
     };
