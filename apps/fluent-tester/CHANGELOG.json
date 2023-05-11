@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 11 May 2023 08:01:20 GMT",
+      "tag": "@fluentui-react-native/tester_v0.143.7",
+      "version": "0.143.7",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "3685a37fe423be7e13886c3d506300c25e28253d",
+            "comment": "Fix android picker"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 May 2023 04:51:14 GMT",
       "tag": "@fluentui-react-native/tester_v0.143.7",
       "version": "0.143.7",
