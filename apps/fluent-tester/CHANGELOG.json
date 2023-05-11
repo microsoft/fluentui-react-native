@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 11 May 2023 08:01:20 GMT",
+      "tag": "@fluentui-react-native/tester_v0.143.7",
+      "version": "0.143.7",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "3685a37fe423be7e13886c3d506300c25e28253d",
+            "comment": "Fix android picker"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 May 2023 04:51:14 GMT",
+      "tag": "@fluentui-react-native/tester_v0.143.7",
+      "version": "0.143.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "548b31031f68e46af50b3910f98bd0330e75b9a4",
+            "comment": "fix talkbalks enabling status"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.8.14",
+            "commit": "548b31031f68e46af50b3910f98bd0330e75b9a4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 May 2023 11:59:17 GMT",
       "tag": "@fluentui-react-native/tester_v0.143.6",
       "version": "0.143.6",

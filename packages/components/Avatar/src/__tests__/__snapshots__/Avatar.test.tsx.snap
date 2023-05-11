@@ -9,7 +9,7 @@ exports[`Avatar component tests Avatar badge 1`] = `
   icon={null}
   image={
     {
-      "accessibilityLabel": undefined,
+      "accessibilityLabel": "",
       "source": undefined,
     }
   }
@@ -188,7 +188,7 @@ exports[`Avatar component tests Avatar circular 1`] = `
   icon={null}
   image={
     {
-      "accessibilityLabel": undefined,
+      "accessibilityLabel": "",
       "source": undefined,
     }
   }
@@ -286,7 +286,7 @@ exports[`Avatar component tests Avatar default 1`] = `
   icon={null}
   image={
     {
-      "accessibilityLabel": undefined,
+      "accessibilityLabel": "",
       "source": undefined,
     }
   }
@@ -386,7 +386,7 @@ exports[`Avatar component tests Avatar ring 1`] = `
   icon={null}
   image={
     {
-      "accessibilityLabel": undefined,
+      "accessibilityLabel": "",
       "source": undefined,
     }
   }
@@ -503,7 +503,7 @@ exports[`Avatar component tests Avatar square 1`] = `
   icon={null}
   image={
     {
-      "accessibilityLabel": undefined,
+      "accessibilityLabel": "",
       "source": undefined,
     }
   }
