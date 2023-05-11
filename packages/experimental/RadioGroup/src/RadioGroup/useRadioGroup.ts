@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import { Platform } from 'react-native';
 import type { View } from 'react-native';
 import type { AccessibilityState } from 'react-native';
 
@@ -22,8 +21,6 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     label,
     accessibilityState,
   } = props;
-
-  // const layout = Platform.OS === ('win32' as any) || Platform.OS === 'android' ? 'vertical' : props.layout;
 
   // This hook updates the selected Radio and calls the customer's onClick function. This gets called after a button is pressed.
   const data = useValue(value || defaultValue || null, onChange);
