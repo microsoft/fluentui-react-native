@@ -9,6 +9,7 @@ export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
+  acceptsFirstMouse: true,
   accessibilityActions: true,
   accessibilityElementsHidden: true,
   accessibilityHint: true,
@@ -23,6 +24,8 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityViewIsModal: true,
   accessible: true,
   collapsable: true,
+  draggedTypes: true,
+  enableFocusRing: true,
   focusable: true,
   hasTVPreferredFocus: false,
   hitSlop: true,
@@ -34,8 +37,15 @@ const _viewMask: IFilterMask<IViewProps> = {
   onAccessibilityAction: true,
   onAccessibilityEscape: true,
   onAccessibilityTap: true,
+  onDragEnter: true,
+  onDragLeave: true,
+  onDrop: true,
+  onKeyDown: true,
+  onKeyUp: true,
   onLayout: true,
   onMagicTap: true,
+  onMouseEnter: true,
+  onMouseLeave: true,
   onMoveShouldSetResponder: true,
   onMoveShouldSetResponderCapture: true,
   onPointerCancel: true,
@@ -77,6 +87,8 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxShiftDistanceX: false,
   tvParallaxShiftDistanceY: false,
   tvParallaxTiltAngle: false,
+  validKeysDown: true,
+  validKeysUp: true,
   'aria-busy': true,
   'aria-checked': true,
   'aria-disabled': true,
@@ -93,23 +105,12 @@ const _viewMask: IFilterMask<IViewProps> = {
   'aria-valuetext': true,
   // Use spread for mac specific properties until rn-macos TS type definitions are fixed
   ...{
-    acceptsFirstMouse: true,
     acceptsKeyboardFocus: true,
-    draggedTypes: true,
-    enableFocusRing: true,
     nextKeyViewTag: true,
     onBlur: true,
-    onDragEnter: true,
-    onDragLeave: true,
-    onDrop: true,
     onFocus: true,
-    onKeyUp: true,
-    onMouseEnter: true,
-    onMouseLeave: true,
     onPreferredScrollerStyleDidChange: true,
     tooltip: true,
-    validKeysDown: true,
-    validKeysUp: true,
   },
 };
 
@@ -227,6 +228,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   source: true,
   style: true,
   testID: true,
+  tooltip: true,
   'aria-busy': true,
   'aria-checked': true,
   'aria-disabled': true,
@@ -241,10 +243,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   'aria-valuemin': true,
   'aria-valuenow': true,
   'aria-valuetext': true,
-  // Use spread for mac specific properties until rn-macos TS type definitions are fixed
-  ...{
-    tooltip: true,
-  },
 };
 
 export function filterViewProps(propName: string): boolean {
