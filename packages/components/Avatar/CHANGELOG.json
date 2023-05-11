@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Thu, 11 May 2023 04:51:14 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.8.14",
+      "version": "1.8.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "548b31031f68e46af50b3910f98bd0330e75b9a4",
+            "comment": "fix talkbalks enabling status"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 May 2023 04:40:30 GMT",
       "tag": "@fluentui-react-native/avatar_v1.8.13",
       "version": "1.8.13",
