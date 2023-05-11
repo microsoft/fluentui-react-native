@@ -29,7 +29,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     subtext,
     value,
     disabled,
-    labelPosition = 'after', // disables labelPosition in win32
     accessibilityActions,
     accessibilityLabel,
     accessibilityHint,
@@ -39,6 +38,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     accessibilitySetSize,
     ...rest
   } = props;
+
+  const labelPosition = radioGroupContext.layout === 'horizontal-stacked' ? 'below' : 'after';
 
   const isDisabled = radioGroupContext.disabled || disabled;
 
@@ -148,7 +149,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     ...pressable.state,
     selected: radioGroupContext.value === props.value && !isDisabled,
     disabled: isDisabled || false,
-    labelPositionBelow: labelPosition === 'below',
   };
 
   return {
