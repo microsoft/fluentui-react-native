@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Animated, Dimensions } from 'react-native';
 
 import type { DrawerV1Props, DrawerV1Info } from './DrawerV1.types';
@@ -8,20 +8,26 @@ const { height, width } = Dimensions.get('window');
 export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
   const { onBlur, onFocus, accessibilityLabel, visible, position, children, ...rest } = props;
   const animatedValue = useRef(new Animated.Value(0)).current;
+  const [internalVisible, setInternalVisible] = useState(visible);
 
   useEffect(() => {
     if (visible) {
+      setInternalVisible(true);
       Animated.timing(animatedValue, {
         toValue: 1,
         duration: 500,
         useNativeDriver: true,
       }).start();
     } else {
-      Animated.timing(animatedValue, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: true,
-      }).start();
+      Animated.parallel([
+        Animated.timing(animatedValue, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        setInternalVisible(false);
+      });
     }
   }, [animatedValue, visible]);
 
@@ -48,14 +54,8 @@ export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
     outputRange: [0, 0.5],
   });
 
-  // const animatedElevation = animatedValue.interpolate({
-  //   inputRange: [0, 1],
-  //   outputRange: [0, 5],
-  // });
-
   const animatedStyle = {
     transform: position === 'left' || position === 'right' ? [{ translateX: animatedTranslateX }] : [{ translateY: animatedTranslateY }],
-    // elevation: animatedElevation,
   };
 
   return {
@@ -63,12 +63,11 @@ export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
       ...rest,
       onClose,
       onBackdropClick,
-      // animatedElevation,
       animatedStyle,
       animatedOpacity,
-      visible,
       position,
       children,
+      visible: internalVisible,
     },
     state: { text: '' },
   };
