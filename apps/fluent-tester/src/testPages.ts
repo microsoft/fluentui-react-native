@@ -12,7 +12,6 @@ import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { DividerTest } from './TestComponents/Divider';
 import { DrawerV1Test } from './TestComponents/DrawerV1';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
-// import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { FocusTrapTest } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest } from './TestComponents/FocusZone';
@@ -131,7 +130,7 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32'],
   },
   {
-    name: 'Drawer V1',
+    name: 'Drawer',
     component: DrawerV1Test,
     testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
     platforms: ['android'],

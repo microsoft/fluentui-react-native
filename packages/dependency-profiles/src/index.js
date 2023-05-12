@@ -8,15 +8,15 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.143.5"
+      "version": "0.144.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.32.79"
+      "version": "0.32.82"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
-      "version": "1.8.13"
+      "version": "1.8.14"
     },
     "@fluentui-react-native/badge": {
       "name": "@fluentui-react-native/badge",
@@ -56,7 +56,7 @@ module.exports = {
     },
     "@fluentui-react-native/input": {
       "name": "@fluentui-react-native/input",
-      "version": "0.2.1"
+      "version": "0.2.2"
     },
     "@fluentui-react-native/link": {
       "name": "@fluentui-react-native/link",
@@ -161,10 +161,6 @@ module.exports = {
     "@fluentui-react-native/experimental-checkbox": {
       "name": "@fluentui-react-native/experimental-checkbox",
       "version": "0.13.53"
-    },
-    "@fluentui-react-native/experimental-drawer": {
-      "name": "@fluentui-react-native/experimental-drawer",
-      "version": "0.2.51"
     },
     "@fluentui-react-native/dropdown": {
       "name": "@fluentui-react-native/dropdown",

@@ -212,9 +212,9 @@ To add a native module that wraps a FluentUI Android control:
 
    b. Include dependencies for android build environment
 
-   - Edit the generated build.gradle file (Example: packages/experimental/Drawer/android/build.gradle)
+   - Edit the generated build.gradle file
    - Add dependencies for kotlin, maven, react-native, etc
-     - Add dependency for FluentUIAndroid
+   - Add dependency for FluentUIAndroid
 
    c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in apps/fluent-tester/package.json in order for our Fluent Tester app to build and use your new Android component module
 
