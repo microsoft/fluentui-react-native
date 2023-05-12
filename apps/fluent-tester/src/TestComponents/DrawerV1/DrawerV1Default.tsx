@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { Avatar } from '@fluentui-react-native/avatar';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { DrawerV1 as Drawer } from '@fluentui-react-native/drawer';
 import { Stack } from '@fluentui-react-native/stack';
+import { Switch } from '@fluentui-react-native/switch';
 import { Text } from '@fluentui-react-native/text';
 
 import { stackStyle } from '../Common/styles';
@@ -12,39 +14,50 @@ export const DrawerV1Default: React.FunctionComponent = () => {
   const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
   const [drawerPosition, setDrawerPosition] = React.useState('left');
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = React.useCallback(() => {
     setIsDrawerVisible(false);
-  };
+  }, []);
 
-  const handleOpenDrawer = (position) => {
+  const handleDrawerOpen = React.useCallback((position) => {
     setDrawerPosition(position);
     setIsDrawerVisible(true);
-  };
+  }, []);
+
+  const handleChildrenClick = React.useCallback(() => {
+    console.log('Children Clicked');
+  }, []);
 
   return (
     <Stack style={stackStyle}>
-      <View style={styles.container}>
-        <View style={styles.content}>
+      <View style={drawerContentstyles.container}>
+        <View style={drawerContentstyles.content}>
           <Text>This is the main content of the screen.</Text>
-          <Button appearance="outline" onClick={() => handleOpenDrawer('left')}>
+          <Button appearance="outline" onClick={() => handleDrawerOpen('left')}>
             Open Drawer (Left)
           </Button>
-          <Button appearance="outline" onClick={() => handleOpenDrawer('right')}>
+          <Button appearance="outline" onClick={() => handleDrawerOpen('right')}>
             Open Drawer (Right)
           </Button>
-          <Button appearance="outline" onClick={() => handleOpenDrawer('bottom')}>
+          <Button appearance="outline" onClick={() => handleDrawerOpen('bottom')}>
             Open Drawer (Bottom)
           </Button>
         </View>
         <Drawer visible={isDrawerVisible} onClose={handleDrawerClose} onBackdropClick={handleDrawerClose} position={drawerPosition}>
-          <View style={styles.drawerContent}>
-            <Text style={styles.text}>This is the content of the drawer.</Text>
-            <Button appearance="outline" onClick={handleDrawerClose}>
-              Close Drawer
-            </Button>
-            <Button appearance="outline" onClick={() => console.log('Children Clicked')}>
-              Validate Children Clicked on Drawer
-            </Button>
+          <View style={drawerContentstyles.drawerContent}>
+            <View style={drawerContentstyles.flexRow}>
+              <Avatar active={'active'} activeAppearance="ring" size={56} name="John Doe" avatarColor={'colorful'} />
+              <Text variant="headerSemibold" style={drawerContentstyles.text}>
+                John Doe
+              </Text>
+            </View>
+            <Switch style={drawerContentstyles.switch} defaultChecked={true} label={'Notifications'} />
+            <Stack gap={10}>
+              <Text variant="body1">This is the content of the drawer.</Text>
+              <Button onClick={handleDrawerClose}>Close Drawer</Button>
+              <Button appearance="outline" onClick={handleChildrenClick}>
+                Validate Children Clicked on Drawer
+              </Button>
+            </Stack>
           </View>
         </Drawer>
       </View>
@@ -52,9 +65,12 @@ export const DrawerV1Default: React.FunctionComponent = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const drawerContentstyles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  flexRow: {
+    flexDirection: 'row',
   },
   content: {
     height: 200,
@@ -62,13 +78,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  switch: {
+    margin: 10,
+  },
   drawerContent: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    margin: 20,
   },
   text: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    alignSelf: 'center',
+    marginStart: 10,
   },
 });

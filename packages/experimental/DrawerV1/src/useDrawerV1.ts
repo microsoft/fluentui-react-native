@@ -1,6 +1,8 @@
 import { useRef, useEffect, useState } from 'react';
 import { Animated, Dimensions } from 'react-native';
 
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+
 import type { DrawerV1Props, DrawerV1Info } from './DrawerV1.types';
 
 const { height, width } = Dimensions.get('window');
@@ -15,14 +17,14 @@ export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
       setInternalVisible(true);
       Animated.timing(animatedValue, {
         toValue: 1,
-        duration: 500,
+        duration: 300,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.parallel([
         Animated.timing(animatedValue, {
           toValue: 0,
-          duration: 500,
+          duration: 300,
           useNativeDriver: true,
         }),
       ]).start(() => {
@@ -31,12 +33,12 @@ export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
     }
   }, [animatedValue, visible]);
 
-  const onClose = () => {
-    props?.onClose && props.onClose();
+  const onClose = (e: InteractionEvent) => {
+    props?.onClose && props.onClose(e);
   };
 
-  const onBackdropClick = () => {
-    props?.onBackdropClick && props.onBackdropClick();
+  const onBackdropClick = (e: InteractionEvent) => {
+    props?.onBackdropClick && props.onBackdropClick(e);
   };
 
   const animatedTranslateX = animatedValue.interpolate({
@@ -63,12 +65,13 @@ export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
       ...rest,
       onClose,
       onBackdropClick,
-      animatedStyle,
-      animatedOpacity,
+      animationConfig: {
+        animatedOpacity,
+        animatedStyle,
+      },
       position,
       children,
       visible: internalVisible,
     },
-    state: { text: '' },
   };
 };

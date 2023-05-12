@@ -27,10 +27,10 @@ export const DrawerV1Test: React.FunctionComponent = () => {
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',
-    androidStatus: 'Experimental',
+    androidStatus: 'Backlog',
   };
 
-  const description = 'DrawerV1 allows the user to enter and edit text.';
+  const description = 'DrawerV1 allows to put content in a drawer that slides in from different sides of the screen.';
 
   return <Test name="DrawerV1 Test" description={description} sections={DrawerV1Sections} status={status} e2eSections={e2eSections}></Test>;
 };

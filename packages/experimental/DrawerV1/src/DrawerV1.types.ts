@@ -1,7 +1,7 @@
 import type { Animated, ColorValue, FlexAlignType, ModalProps, TouchableWithoutFeedbackProps, ViewProps } from 'react-native';
 
-import type { PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
-import type { FocusState } from '@fluentui-react-native/interactive-hooks/lib/usePressableState.types';
+import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
+import { StyleProp } from '@fluentui-react-native/framework';
 
 export const DrawerV1Name = 'DrawerV1';
 
@@ -139,12 +139,12 @@ export interface DrawerV1Props extends PressableFocusProps {
   /**
    * Callback when the Drawer is closed
    * */
-  onClose?: () => void;
+  onClose?: (e: InteractionEvent) => void;
 
   /**
    * Callback when the Drawer is opened
    * */
-  onOpen?: () => void;
+  onOpen?: (e: InteractionEvent) => void;
 
   /**
    * Whether the Drawer is open on mount
@@ -154,7 +154,7 @@ export interface DrawerV1Props extends PressableFocusProps {
   /**
    * Callback when the backdrop is clicked
    * */
-  onBackdropClick?: () => void;
+  onBackdropClick?: (e: InteractionEvent) => void;
 
   /**
    * The content of the Drawer
@@ -167,14 +167,18 @@ export interface DrawerV1Props extends PressableFocusProps {
    * */
   position?: DrawerPositionType;
 
-  animatedElevation?: any;
-  animatedStyle?: any;
-  animatedOpacity?: any;
+  /**
+   * The width of the Drawer
+   * Animation configuration for the Drawer
+   * */
+  animationConfig?: {
+    animatedOpacity: Animated.AnimatedInterpolation;
+    animatedStyle: { transform: { translateX: Animated.AnimatedInterpolation }[] | { translateY: Animated.AnimatedInterpolation }[] };
+  };
 }
 
 export interface DrawerV1Info {
   props: DrawerV1Props;
-  state: FocusState & { text: string };
 }
 
 export interface DrawerV1SlotProps {

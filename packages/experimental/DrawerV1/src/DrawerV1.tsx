@@ -24,9 +24,10 @@ export const DrawerV1 = compose<DrawerV1Type>({
     const Slots = useSlots(userProps);
 
     return (final: DrawerV1Props, children: React.ReactNode) => {
-      const { visible, onClose, onBackdropClick, animatedOpacity, animatedStyle, position, ...rest } = mergeProps(DrawerV1.props, final);
+      const { visible, onClose, onBackdropClick, animationConfig, position, ...rest } = mergeProps(DrawerV1.props, final);
       return (
         <Slots.modal
+          {...rest}
           visible={visible}
           onRequestClose={onClose}
           supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
@@ -34,9 +35,9 @@ export const DrawerV1 = compose<DrawerV1Type>({
           transparent
         >
           <Slots.backdrop onPress={onBackdropClick}>
-            <Slots.backdropContent style={[{ opacity: animatedOpacity }]} />
+            <Slots.backdropContent style={[{ opacity: animationConfig.animatedOpacity }]} />
           </Slots.backdrop>
-          <Slots.content style={[styles[position], animatedStyle]}>
+          <Slots.content style={[styles[position], animationConfig.animatedStyle]}>
             {position === 'bottom' && <Slots.handle />}
             {children}
           </Slots.content>
@@ -46,6 +47,7 @@ export const DrawerV1 = compose<DrawerV1Type>({
   },
 });
 
+// To be moved to tokens files in later PRs
 const styles = StyleSheet.create({
   left: {
     left: 0,
