@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { Animated, Dimensions } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
@@ -13,6 +13,7 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
   const [internalVisible, setInternalVisible] = useState(visible);
 
   useEffect(() => {
+    console.log('useDrawer useEffect');
     if (visible) {
       setInternalVisible(true);
       Animated.timing(animatedValue, {
@@ -33,13 +34,19 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
     }
   }, [animatedValue, visible]);
 
-  const onClose = (e: InteractionEvent) => {
-    props?.onClose && props.onClose(e);
-  };
+  const onClose = useCallback(
+    (e: InteractionEvent) => {
+      props?.onClose && props.onClose(e);
+    },
+    [props?.onClose],
+  );
 
-  const onBackdropClick = (e: InteractionEvent) => {
-    props?.onBackdropClick && props.onBackdropClick(e);
-  };
+  const onBackdropClick = useCallback(
+    (e: InteractionEvent) => {
+      props?.onBackdropClick && props.onBackdropClick(e);
+    },
+    [props?.onBackdropClick],
+  );
 
   const animatedTranslateX = animatedValue.interpolate({
     inputRange: [0, 1],
