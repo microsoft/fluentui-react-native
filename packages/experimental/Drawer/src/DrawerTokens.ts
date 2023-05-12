@@ -2,9 +2,9 @@ import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
-import type { DrawerV1Tokens } from './DrawerV1.types';
+import type { DrawerTokens } from './Drawer.types';
 
-export const defaultDrawerV1Tokens: TokenSettings<DrawerV1Tokens, Theme> = (t: Theme) =>
+export const defaultDrawerTokens: TokenSettings<DrawerTokens, Theme> = (t: Theme) =>
   ({
     backdropColor: '#00000080', // to be replace with token in future based on design guidance
     drawerBackgroundColor: t.colors.neutralBackground2,
@@ -17,4 +17,4 @@ export const defaultDrawerV1Tokens: TokenSettings<DrawerV1Tokens, Theme> = (t: T
     handleMarginBottom: globalTokens.sizeNone,
     handleMarginEnd: globalTokens.sizeNone,
     handleMarginStart: globalTokens.sizeNone,
-  } as DrawerV1Tokens);
+  } as DrawerTokens);

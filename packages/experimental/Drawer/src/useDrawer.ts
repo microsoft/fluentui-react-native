@@ -3,11 +3,11 @@ import { Animated, Dimensions } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
-import type { DrawerV1Props, DrawerV1Info } from './DrawerV1.types';
+import type { DrawerProps, DrawerInfo } from './Drawer.types';
 
 const { height, width } = Dimensions.get('window');
 
-export const useDrawerV1 = (props: DrawerV1Props): DrawerV1Info => {
+export const useDrawer = (props: DrawerProps): DrawerInfo => {
   const { onBlur, onFocus, accessibilityLabel, visible, position, children, ...rest } = props;
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [internalVisible, setInternalVisible] = useState(visible);

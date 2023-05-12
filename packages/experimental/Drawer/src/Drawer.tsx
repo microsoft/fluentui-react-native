@@ -4,13 +4,13 @@ import { Animated, Modal, TouchableWithoutFeedback, View, StyleSheet } from 'rea
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 
-import { stylingSettings } from './DrawerV1.styling';
-import type { DrawerV1Type, DrawerV1Props } from './DrawerV1.types';
-import { DrawerV1Name } from './DrawerV1.types';
-import { useDrawerV1 } from './useDrawerV1';
+import { stylingSettings } from './Drawer.styling';
+import type { DrawerType, DrawerProps } from './Drawer.types';
+import { DrawerName } from './Drawer.types';
+import { useDrawer } from './useDrawer';
 
-export const DrawerV1 = compose<DrawerV1Type>({
-  displayName: DrawerV1Name,
+export const Drawer = compose<DrawerType>({
+  displayName: DrawerName,
   ...stylingSettings,
   slots: {
     modal: Modal,
@@ -19,12 +19,12 @@ export const DrawerV1 = compose<DrawerV1Type>({
     content: Animated.View,
     handle: View,
   },
-  useRender: (userProps: DrawerV1Props, useSlots: UseSlots<DrawerV1Type>) => {
-    const DrawerV1 = useDrawerV1(userProps);
+  useRender: (userProps: DrawerProps, useSlots: UseSlots<DrawerType>) => {
+    const Drawer = useDrawer(userProps);
     const Slots = useSlots(userProps);
 
-    return (final: DrawerV1Props, children: React.ReactNode) => {
-      const { visible, onClose, onBackdropClick, animationConfig, position, ...rest } = mergeProps(DrawerV1.props, final);
+    return (final: DrawerProps, children: React.ReactNode) => {
+      const { visible, onClose, onBackdropClick, animationConfig, position, ...rest } = mergeProps(Drawer.props, final);
       return (
         <Slots.modal
           {...rest}

@@ -1,15 +1,15 @@
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 
-import { DrawerV1Name } from './DrawerV1.types';
-import type { DrawerV1Tokens, DrawerV1SlotProps, DrawerV1Props } from './DrawerV1.types';
-import { defaultDrawerV1Tokens } from './DrawerV1Tokens';
+import { DrawerName } from './Drawer.types';
+import type { DrawerTokens, DrawerSlotProps, DrawerProps } from './Drawer.types';
+import { defaultDrawerTokens } from './DrawerTokens';
 
-export const stylingSettings: UseStylingOptions<DrawerV1Props, DrawerV1SlotProps, DrawerV1Tokens> = {
-  tokens: [defaultDrawerV1Tokens, DrawerV1Name],
+export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, DrawerTokens> = {
+  tokens: [defaultDrawerTokens, DrawerName],
   slotProps: {
     modal: buildProps(
-      (_tokens: DrawerV1Tokens, _theme: Theme) => ({
+      (_tokens: DrawerTokens, _theme: Theme) => ({
         style: {
           elevation: 10,
         },
@@ -17,13 +17,13 @@ export const stylingSettings: UseStylingOptions<DrawerV1Props, DrawerV1SlotProps
       [],
     ),
     backdrop: buildProps(
-      (_tokens: DrawerV1Tokens, _theme: Theme) => ({
+      (_tokens: DrawerTokens, _theme: Theme) => ({
         // empty for now, tokens will be added in next PR
       }),
       [],
     ),
     backdropContent: buildProps(
-      (tokens: DrawerV1Tokens, _theme: Theme) => ({
+      (tokens: DrawerTokens, _theme: Theme) => ({
         style: {
           position: 'absolute',
           top: 0,
@@ -36,7 +36,7 @@ export const stylingSettings: UseStylingOptions<DrawerV1Props, DrawerV1SlotProps
       [],
     ),
     content: buildProps(
-      (tokens: DrawerV1Tokens, _theme: Theme) => ({
+      (tokens: DrawerTokens, _theme: Theme) => ({
         style: {
           position: 'absolute',
           top: 0,
@@ -46,7 +46,7 @@ export const stylingSettings: UseStylingOptions<DrawerV1Props, DrawerV1SlotProps
       [],
     ),
     handle: buildProps(
-      (tokens: DrawerV1Tokens, _theme: Theme) => ({
+      (tokens: DrawerTokens, _theme: Theme) => ({
         style: {
           width: tokens.handleWidth,
           height: tokens.handleHeight,

@@ -3,16 +3,17 @@ import { StyleSheet, View } from 'react-native';
 
 import { Avatar } from '@fluentui-react-native/avatar';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { DrawerV1 as Drawer } from '@fluentui-react-native/drawer';
+import { Drawer } from '@fluentui-react-native/drawer';
+import type { DrawerPositionType } from '@fluentui-react-native/drawer';
 import { Stack } from '@fluentui-react-native/stack';
 import { Switch } from '@fluentui-react-native/switch';
 import { Text } from '@fluentui-react-native/text';
 
 import { stackStyle } from '../Common/styles';
 
-export const DrawerV1Default: React.FunctionComponent = () => {
+export const DrawerDefault: React.FunctionComponent = () => {
   const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
-  const [drawerPosition, setDrawerPosition] = React.useState('left');
+  const [drawerPosition, setDrawerPosition] = React.useState<DrawerPositionType>('left');
 
   const handleDrawerClose = React.useCallback(() => {
     setIsDrawerVisible(false);

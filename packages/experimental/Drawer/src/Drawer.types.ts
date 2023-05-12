@@ -1,13 +1,12 @@
 import type { Animated, ColorValue, FlexAlignType, ModalProps, TouchableWithoutFeedbackProps, ViewProps } from 'react-native';
 
 import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
-import { StyleProp } from '@fluentui-react-native/framework';
 
-export const DrawerV1Name = 'DrawerV1';
+export const DrawerName = 'Drawer';
 
 export type DrawerPositionType = 'left' | 'right' | 'bottom';
 
-export interface DrawerV1Tokens {
+export interface DrawerTokens {
   /**
    * The color of the backdrop.
    * */
@@ -125,9 +124,9 @@ export interface DrawerV1Tokens {
   shadowRadius?: number;
 }
 
-export interface DrawerV1Props extends PressableFocusProps {
+export interface DrawerProps extends PressableFocusProps {
   /*
-   ** An accessibility label for screen readers. Set on the text DrawerV1.
+   ** An accessibility label for screen readers. Set on the text Drawer.
    */
   accessibilityLabel?: string;
 
@@ -177,11 +176,11 @@ export interface DrawerV1Props extends PressableFocusProps {
   };
 }
 
-export interface DrawerV1Info {
-  props: DrawerV1Props;
+export interface DrawerInfo {
+  props: DrawerProps;
 }
 
-export interface DrawerV1SlotProps {
+export interface DrawerSlotProps {
   modal: ModalProps;
   backdrop: TouchableWithoutFeedbackProps;
   backdropContent: Animated.AnimatedProps<ViewProps>;
@@ -189,8 +188,8 @@ export interface DrawerV1SlotProps {
   handle: ViewProps;
 }
 
-export interface DrawerV1Type {
-  props: DrawerV1Props;
-  tokens: DrawerV1Tokens;
-  slotProps: DrawerV1SlotProps;
+export interface DrawerType {
+  props: DrawerProps;
+  tokens: DrawerTokens;
+  slotProps: DrawerSlotProps;
 }
