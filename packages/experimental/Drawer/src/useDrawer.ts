@@ -13,7 +13,6 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
   const [internalVisible, setInternalVisible] = useState(visible);
 
   useEffect(() => {
-    console.log('useDrawer useEffect');
     if (visible) {
       setInternalVisible(true);
       Animated.timing(animatedValue, {
