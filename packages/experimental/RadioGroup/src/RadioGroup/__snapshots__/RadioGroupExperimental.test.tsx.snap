@@ -12,7 +12,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
   }
   accessible={true}
   defaultValue="key2"
-  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
@@ -366,7 +365,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
   }
   accessible={true}
   defaultValue="key2"
-  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
@@ -720,7 +718,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
   }
   accessible={true}
   disabled={true}
-  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
@@ -1084,7 +1081,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
   }
   accessible={true}
   defaultValue="key2"
-  layout="vertical"
+  layout="horizontal"
   style={
     Object {
       "alignItems": "flex-start",
@@ -1438,7 +1435,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
   }
   accessible={true}
   defaultValue="key2"
-  layout="vertical"
+  layout="horizontal-stacked"
   style={
     Object {
       "alignItems": "flex-start",
@@ -1523,7 +1520,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             },
           ]
         }
-        labelPosition="after"
+        labelPosition="below"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1667,7 +1664,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             },
           ]
         }
-        labelPosition="after"
+        labelPosition="below"
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1792,7 +1789,6 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
   }
   accessible={true}
   defaultValue="key2"
-  layout="vertical"
   style={
     Object {
       "alignItems": "flex-start",
