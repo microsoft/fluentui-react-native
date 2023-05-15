@@ -16,6 +16,7 @@ import {
   MenuGroupHeader,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
+import { Switch } from '@fluentui-react-native/switch';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { E2EMenuTest } from './E2EMenuTest';
@@ -161,6 +162,53 @@ const MenuSubMenu: React.FunctionComponent = () => {
   );
 };
 
+const SubmenuWithScrollView: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
+  return (
+    <Menu {...props}>
+      <MenuTrigger>
+        <MenuItem>A second MenuItem trigger</MenuItem>
+      </MenuTrigger>
+      <MenuPopover maxHeight={200}>
+        <MenuList>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A nested MenuItem</MenuItem>
+        </MenuList>
+      </MenuPopover>
+    </Menu>
+  );
+};
+
+const MenuSubMenuWithScrollView: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover doNotTakePointerCapture={true}>
+          <MenuList>
+            <MenuItem>A MenuItem</MenuItem>
+            <SubmenuWithScrollView />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const MenuOpenOnHover: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
@@ -286,7 +334,7 @@ const MenuNofM: React.FunctionComponent = () => {
 
 const CustomMenuTrigger: React.FunctionComponent = () => {
   return (
-    <View style={{ borderColor: 'purple', borderWidth: 3 }}>
+    <View style={{ backgroundColor: 'purple', width: 80, flexDirection: 'row', justifyContent: 'center' }}>
       <MenuTrigger>
         <Button>Test</Button>
       </MenuTrigger>
@@ -294,10 +342,10 @@ const CustomMenuTrigger: React.FunctionComponent = () => {
   );
 };
 
-const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
+const MenuWithCustomMenuTrigger: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
   return (
     <Stack style={stackStyle}>
-      <Menu>
+      <Menu {...props}>
         <CustomMenuTrigger />
         <MenuPopover>
           <MenuList>
@@ -305,7 +353,7 @@ const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
             <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
             <MenuDivider />
-            {Platform.OS !== 'android' && <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />}
+            {Platform.OS !== 'android' && <Submenu />}
             <MenuItem disabled accessibilitySetSize={2}>
               A disabled MenuItem
             </MenuItem>
@@ -340,6 +388,50 @@ const MenuWithGroups: React.FunctionComponent = () => {
     </Stack>
   );
 };
+  
+const menuAsABlackboxStyles = StyleSheet.create({
+  actionButton: { alignSelf: 'center', justifyContent: 'center' },
+  switch: { marginHorizontal: 10 },
+});
+
+const MenuAsABlackbox: React.FunctionComponent = () => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [dnd, setDnD] = React.useState<boolean>(false);
+
+  const onOpenChange = React.useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
+
+  const onSwitchChange = React.useCallback(() => {
+    setDnD(!dnd);
+  }, [dnd, setDnD]);
+
+  const onMenuTriggerClicked = React.useCallback(() => {
+    setOpen(!open);
+  }, [open, setOpen]);
+
+  return (
+    <Stack style={stackStyle}>
+      <Menu onOpenChange={onOpenChange} open={open}>
+        <MenuTrigger>
+          <Button onClick={onMenuTriggerClicked}>Blockbox Menu</Button>
+        </MenuTrigger>
+
+        <MenuPopover minWidth={200}>
+          <MenuList>
+            <Switch checked={dnd} onChange={onSwitchChange} style={menuAsABlackboxStyles.switch} label="Don't disturb" />
+            <MenuItem>{dnd ? 'DND is on' : 'DND is off'}</MenuItem>
+            <View style={menuAsABlackboxStyles.actionButton}>
+              <Button appearance="subtle" onClick={onOpenChange}>
+                Action
+              </Button>
+            </View>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
 
 const menuSections: TestSection[] = [
   {
@@ -355,6 +447,13 @@ const menuSections: TestSection[] = [
     name: 'Menu Radioitem',
     component: MenuRadioItem,
   },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Menu Submenu with ScrollView',
+      component: MenuSubMenuWithScrollView,
+    },
+  }),
   Platform.select({
     android: null,
     default: {
@@ -388,6 +487,10 @@ const menuSections: TestSection[] = [
     name: 'Menu with ScrollView',
     component: MenuScrollView,
   },
+  Platform.select({
+    android: { name: 'Menu as a blackbox', component: MenuAsABlackbox },
+    default: null,
+  }),
   {
     name: 'Menu Trigger onClick Override',
     component: MenuTriggerOnClickCallback,

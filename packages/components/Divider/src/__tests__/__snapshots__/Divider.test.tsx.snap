@@ -17,7 +17,7 @@ exports[`Divider component tests Branded Divider 1`] = `
   <View
     style={
       Object {
-        "borderColor": "#0078d4",
+        "borderColor": "#185abd",
         "borderStyle": "solid",
         "borderTopWidth": 1,
         "flex": 1,

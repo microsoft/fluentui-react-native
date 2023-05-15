@@ -6,7 +6,7 @@ import { Platform } from 'react-native';
  * Because of this, we're adding the testProps function that takes in a unique identifier and returns the correct prop based on the platform
  * (testID for Win32, Windows, macOS, iOS; accessibilityId for Android).
  *
- * If explict accessibilityLabel is being used for other platforms, apply testProps after it to override it for Android.
+ * If explicit accessibilityLabel is being used for other platforms, apply testProps after it to override it for Android.
  * @param id The string to be used as the test identifier
  * @returns an object with the correct test identifier prop based on platform
  */

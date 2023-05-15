@@ -71,17 +71,6 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
       }),
       ['cursorColor', 'inputTextColor', 'inputTextFont', ...fontStyles.keys],
     ),
-    secondaryText: buildProps(
-      (tokens: InputTokens, theme: Theme) => ({
-        style: {
-          ...fontStyles.from(tokens.secondaryTextFont, theme),
-          ...getTextMarginAdjustment(),
-          marginStart: tokens.spacingInputSecondary,
-          color: tokens.secondaryTextColor,
-        },
-      }),
-      ['secondaryTextFont', 'spacingInputSecondary', 'secondaryTextColor', ...fontStyles.keys],
-    ),
     icon: buildProps(
       (tokens: InputTokens) => ({
         color: tokens.iconColor,
@@ -121,6 +110,17 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
       },
       ['assistiveTextColor', 'assistiveTextFont', 'spacingAssistiveTextVertical', 'spacingAssistiveTextStart', ...fontStyles.keys],
     ),
+    accessoryText: buildProps(
+      (tokens: InputTokens, theme: Theme) => ({
+        style: {
+          ...fontStyles.from(tokens.accessoryTextFont, theme),
+          ...getTextMarginAdjustment(),
+          marginStart: tokens.spacingInputAccessory,
+          color: tokens.accessoryTextColor,
+        },
+      }),
+      ['accessoryTextFont', 'spacingInputAccessory', 'accessoryTextColor', ...fontStyles.keys],
+    ),
     accessoryIconPressable: buildProps(
       (tokens: InputTokens) => ({
         style: {
@@ -129,6 +129,7 @@ export const stylingSettings: UseStylingOptions<InputProps, InputSlotProps, Inpu
           flexDirection: 'row',
           justifyContent: 'center',
           marginStart: tokens.spacingAccessoryIconStart,
+          hitSlop: { top: 8, bottom: 8, left: 8, right: 8 },
         },
       }),
       ['spacingAccessoryIconStart'],

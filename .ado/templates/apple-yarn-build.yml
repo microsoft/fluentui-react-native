@@ -11,7 +11,7 @@ steps:
 
   - bash: |
       echo "Pre boot simulator"
-      UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-12 iOS16.0)
+      UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-12 com.apple.CoreSimulator.SimRuntime.iOS-16-2)
       xcrun simctl boot $UDID
     workingDirectory: apps/fluent-tester
     condition: and(succeeded(), eq('${{ parameters.platform }}', 'ios'))

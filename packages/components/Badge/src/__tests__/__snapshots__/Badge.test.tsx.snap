@@ -8,8 +8,8 @@ exports[`Badge component tests Badge all props 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "transparent",
-      "borderColor": "transparent",
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 1,
       "bottom": 0,
@@ -107,8 +107,8 @@ exports[`Badge component tests Empty Badge 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": "#185abd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -130,8 +130,8 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
   style={
     Object {
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": "#185abd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "bottom": 0,
       "justifyContent": "center",
@@ -155,8 +155,8 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#0078d4",
-        "borderColor": "transparent",
+        "backgroundColor": "#185abd",
+        "borderColor": "#00000000",
         "borderRadius": 9999,
         "borderWidth": 1,
         "flexDirection": "row",
@@ -205,8 +205,8 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "transparent",
-      "borderColor": "transparent",
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 1,
       "bottom": 0,
@@ -263,8 +263,8 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": "#185abd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -307,8 +307,8 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": "#185abd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -352,8 +352,8 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": "#185abd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,

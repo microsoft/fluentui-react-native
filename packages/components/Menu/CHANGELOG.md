@@ -1,8 +1,72 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 12 Apr 2023 18:42:22 GMT and should not be manually modified.
+This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.1
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.23.13
+- Bump @fluentui-react-native/focus-zone to v0.11.42
+- Bump @fluentui-react-native/framework to v0.9.9
+- Bump @fluentui-react-native/icon to v0.17.26
+- Bump @fluentui-react-native/interactive-hooks to v0.22.30
+- Bump @fluentui-react-native/text to v0.19.32
+- Bump @fluentui-react-native/theme-tokens to v0.24.6
+- Bump @fluentui-react-native/tokens to v0.20.15
+- Bump @fluentui-react-native/button to v0.32.52
+
+## 1.8.0
+
+Thu, 27 Apr 2023 19:45:00 GMT
+
+### Minor changes
+
+- set n of m on submenu trigger (krsiler@microsoft.com)
+
+## 1.7.0
+
+Tue, 25 Apr 2023 02:09:03 GMT
+
+### Minor changes
+
+- fixed hovered and focused visuals (email not defined)
+
+## 1.6.3
+
+Sat, 22 Apr 2023 23:41:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.51
+
+## 1.6.2
+
+Fri, 21 Apr 2023 04:54:14 GMT
+
+### Patches
+
+- Add Home and End key functionality in MenuList (winlarry@microsoft.com)
+
+## 1.6.1
+
+Fri, 21 Apr 2023 00:04:59 GMT
+
+### Patches
+
+- enable pointer capture to be overridden (krsiler@microsoft.com)
+
+## 1.6.0
+
+Wed, 19 Apr 2023 10:08:39 GMT
+
+### Minor changes
+
+- add blackbox example and remove unused tokens (rohanpd.work@gmail.com)
 
 ## 1.5.0
 

@@ -36,7 +36,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
   // Initial focus behavior differs per platform, Windows platforms move focus
   // automatically onto first element of Callout
   const setInitialFocus = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
-  const doNotTakePointerCapture = openOnHover;
+  const doNotTakePointerCapture = props.doNotTakePointerCapture ?? openOnHover;
   const accessibilityRole = 'menu';
 
   const onMouseEnter = React.useCallback(() => {
