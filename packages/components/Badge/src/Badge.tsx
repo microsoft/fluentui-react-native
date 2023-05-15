@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import type { ReactNode } from 'react';
 import { Children } from 'react';
-import { Pressable, I18nManager } from 'react-native';
+import { Pressable, I18nManager, Platform } from 'react-native';
 
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -40,16 +40,16 @@ export const Badge = compose<BadgeType>({
   useRender: (userProps: BadgeProps, useSlots: UseSlots<BadgeType>) => {
     const iconProps = createIconProps(userProps.icon);
     const badge = useBadge(userProps);
-
     const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps, badge.state));
 
     return (final: BadgeProps, ...children: ReactNode[]) => {
       const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge.props, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size !== 'tiny';
+      const hasToggleFunctionality = Platform.OS === 'android';
       return (
         <Slots.shadow>
-          <Slots.root {...mergedProps}>
+          <Slots.root accessible={hasToggleFunctionality} {...mergedProps}>
             {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
             {showContent &&
               Children.map(children, (child, i) =>
