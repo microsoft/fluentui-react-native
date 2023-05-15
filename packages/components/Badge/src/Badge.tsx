@@ -19,12 +19,12 @@ export const badgeLookup = (layer: string, userProps: BadgeProps, state: BadgeSt
     userProps[layer] ||
     layer === userProps['appearance'] ||
     layer === userProps['size'] ||
-    (!userProps['size'] && layer === 'large') ||
+    (layer === 'large' && !userProps['size']) ||
     layer === userProps['shape'] ||
-    (!userProps['shape'] && layer === 'circular') ||
+    (layer === 'circular' && !userProps['shape']) ||
     layer === userProps['badgeColor'] ||
-    (I18nManager.isRTL && layer === 'rtl') ||
-    (state && state.selected && layer === 'selected')
+    (layer === 'rtl' && I18nManager.isRTL) ||
+    (layer === 'selected' && state && state.selected)
   );
 };
 
