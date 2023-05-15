@@ -77,30 +77,35 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
   appearance?: BadgeAppearance;
 
   /**
-   * Whether the Badge is disabled or not
+   * Whether the Badge is disabled or not.
+   * @platform android
    */
   disabled?: boolean;
 
   /**
    * Selected state. Mutually exclusive to 'defaultSelected'. Use this if you control the selected state at a higher level
    * and plan to pass in the correct value based on handling onChange events and re-rendering.
+   * @platform android
    */
   selected?: boolean;
 
   /**
    * Default selected state. Mutually exclusive to 'selected'. Use this if you want an uncontrolled component, and
    * want the Badge instance to maintain its own state.
+   * @platform android
    */
   defaultSelected?: boolean;
 
   /**
    * Callback that is called when the selected value has changed.
+   * @platform android
    */
   onChange?: (e: InteractionEvent, isSelected: boolean) => void;
 }
 export interface BadgeState extends PressableState {
   /**
-   * Whether the Badge is checked or not
+   * Whether the Badge is selected or not.
+   * @platform android
    */
   selected?: boolean;
 }
