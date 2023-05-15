@@ -7,12 +7,11 @@ import { defaultDrawerTokens } from './DrawerTokens';
 
 export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, DrawerTokens> = {
   tokens: [defaultDrawerTokens, DrawerName],
+  tokensThatAreAlsoProps: ['position'],
   slotProps: {
     modal: buildProps(
       (_tokens: DrawerTokens, _theme: Theme) => ({
-        style: {
-          elevation: 10,
-        },
+        style: {},
       }),
       [],
     ),
@@ -40,7 +39,10 @@ export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, Dr
         style: {
           position: 'absolute',
           top: 0,
+          elevation: 18,
           backgroundColor: tokens.drawerBackgroundColor,
+          borderTopRightRadius: tokens.position === 'bottom' ? tokens.drawerCornerRadius : 0,
+          borderTopLeftRadius: tokens.position === 'bottom' ? tokens.drawerCornerRadius : 0,
         },
       }),
       [],

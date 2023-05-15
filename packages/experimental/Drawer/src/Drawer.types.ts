@@ -13,6 +13,11 @@ export interface DrawerTokens {
   backdropColor?: ColorValue;
 
   /**
+   * The opacity of the backdrop.
+   * */
+  backdropOpacity?: number;
+
+  /**
    * Width of the handle.
    */
   handleWidth?: number;

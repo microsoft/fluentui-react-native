@@ -52,17 +52,15 @@ const styles = StyleSheet.create({
   left: {
     left: 0,
     height: '100%',
-    width: '70%',
+    width: '80%',
   },
   right: {
     right: 0,
     height: '100%',
-    width: '70%',
+    width: '80%',
   },
   bottom: {
     bottom: 0,
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
     width: '100%',
   },
 });

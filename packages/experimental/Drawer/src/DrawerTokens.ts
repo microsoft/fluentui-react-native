@@ -17,4 +17,7 @@ export const defaultDrawerTokens: TokenSettings<DrawerTokens, Theme> = (t: Theme
     handleMarginBottom: globalTokens.sizeNone,
     handleMarginEnd: globalTokens.sizeNone,
     handleMarginStart: globalTokens.sizeNone,
+    drawerElevation: globalTokens.size100,
+    position: 'left',
+    drawerCornerRadius: globalTokens.corner.radius120,
   } as DrawerTokens);
