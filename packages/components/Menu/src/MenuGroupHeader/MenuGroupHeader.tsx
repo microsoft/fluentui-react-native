@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import React from 'react';
 
-import { compose, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
@@ -18,8 +18,14 @@ export const MenuGroupHeader = compose<MenuGroupHeaderType>({
   useRender: (userProps: MenuGroupHeaderProps, useSlots: UseSlots<MenuGroupHeaderType>) => {
     const Slots = useSlots(userProps);
 
-    return (_final: MenuGroupHeaderProps, children: React.ReactNode) => {
-      return <Slots.root accessible={userProps.accessible}>{children}</Slots.root>;
+    return (final: MenuGroupHeaderProps, children: React.ReactNode) => {
+      const { ...mergedProps } = mergeProps(userProps, final);
+
+      return (
+        <Slots.root accessible={userProps.accessible} {...mergedProps}>
+          {children}
+        </Slots.root>
+      );
     };
   },
 });

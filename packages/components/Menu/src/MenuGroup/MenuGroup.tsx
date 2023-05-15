@@ -2,22 +2,22 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { compose, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { UseSlots } from '@fluentui-react-native/framework';
 
-import { stylingSettings } from './MenuGroup.styling';
 import type { MenuGroupProps, MenuGroupType } from './MenuGroup.types';
 import { menuGroupName } from './MenuGroup.types';
 
 export const MenuGroup = compose<MenuGroupType>({
   displayName: menuGroupName,
-  ...stylingSettings,
   slots: {
     root: View,
   },
   useRender: (userProps: MenuGroupProps, useSlots: UseSlots<MenuGroupType>) => {
     const Slots = useSlots(userProps);
-    return (_final: MenuGroupProps, children: React.ReactNode) => {
+    return (final: MenuGroupProps, children: React.ReactNode) => {
+      const { ...mergedProps } = mergeProps(userProps, final);
+
       let itemPosition = 0;
       const childrenWithSet = React.Children.toArray(children).map((child) => {
         if (React.isValidElement(child)) {
@@ -38,7 +38,7 @@ export const MenuGroup = compose<MenuGroupType>({
         }
         return child;
       });
-      return <Slots.root>{childrenWithSet}</Slots.root>;
+      return <Slots.root {...mergedProps}>{childrenWithSet}</Slots.root>;
     };
   },
 });
