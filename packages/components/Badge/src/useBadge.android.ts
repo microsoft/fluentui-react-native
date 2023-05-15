@@ -55,9 +55,9 @@ export const useBadge = (props: BadgeProps): BadgeInfo => {
 };
 
 const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(toggled: boolean, accessibilityState?: AccessibilityState) {
+function getAccessibilityStateWorker(checked: boolean, accessibilityState?: AccessibilityState) {
   if (accessibilityState) {
-    return { checked: toggled, ...accessibilityState };
+    return { checked, ...accessibilityState };
   }
-  return { checked: toggled };
+  return { checked };
 }
