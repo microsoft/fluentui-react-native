@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add toggle func and disabled",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
