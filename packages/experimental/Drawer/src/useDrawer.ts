@@ -11,6 +11,7 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
   const { onBlur, onFocus, accessibilityLabel, visible, position, children, ...rest } = props;
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [internalVisible, setInternalVisible] = useState(visible);
+  const [isFirstOpen, setIsFirstOpen] = useState(true);
 
   useEffect(() => {
     if (visible) {
@@ -21,15 +22,19 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
         useNativeDriver: true,
       }).start();
     } else {
-      Animated.parallel([
-        Animated.timing(animatedValue, {
-          toValue: 0,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-      ]).start(() => {
-        setInternalVisible(false);
-      });
+      if (isFirstOpen) {
+        setIsFirstOpen(false);
+      } else {
+        Animated.parallel([
+          Animated.timing(animatedValue, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: true,
+          }),
+        ]).start(() => {
+          setInternalVisible(false);
+        });
+      }
     }
   }, [animatedValue, visible]);
 
