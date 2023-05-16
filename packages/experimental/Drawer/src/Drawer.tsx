@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Animated, Modal, TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
+import { Animated, Modal, TouchableWithoutFeedback, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
@@ -8,6 +8,10 @@ import { stylingSettings } from './Drawer.styling';
 import type { DrawerType, DrawerProps } from './Drawer.types';
 import { DrawerName } from './Drawer.types';
 import { useDrawer } from './useDrawer';
+
+export const drawerLookup = (layer: string, userProps: DrawerProps): boolean => {
+  return userProps[layer] || layer === userProps['position'];
+};
 
 export const Drawer = compose<DrawerType>({
   displayName: DrawerName,
@@ -20,11 +24,11 @@ export const Drawer = compose<DrawerType>({
     handle: View,
   },
   useRender: (userProps: DrawerProps, useSlots: UseSlots<DrawerType>) => {
-    const Drawer = useDrawer(userProps);
-    const Slots = useSlots(userProps);
+    const drawerProps = useDrawer(userProps).props;
+    const Slots = useSlots(userProps, (layer) => drawerLookup(layer, drawerProps));
 
     return (final: DrawerProps, children: React.ReactNode) => {
-      const { visible, onClose, onBackdropClick, animationConfig, position, ...rest } = mergeProps(Drawer.props, final);
+      const { visible, onClose, onBackdropClick, animationConfig, position, ...rest } = mergeProps(drawerProps, final);
       return (
         <Slots.modal
           {...rest}
@@ -37,30 +41,12 @@ export const Drawer = compose<DrawerType>({
           <Slots.backdrop onPress={onBackdropClick}>
             <Slots.backdropContent style={[{ opacity: animationConfig.animatedOpacity }]} />
           </Slots.backdrop>
-          <Slots.content style={[styles[position], animationConfig.animatedStyle]}>
+          <Slots.content style={animationConfig.animatedStyle}>
             {position === 'bottom' && <Slots.handle />}
             {children}
           </Slots.content>
         </Slots.modal>
       );
     };
-  },
-});
-
-// To be moved to tokens files in later PRs
-const styles = StyleSheet.create({
-  left: {
-    left: 0,
-    height: '100%',
-    width: '80%',
-  },
-  right: {
-    right: 0,
-    height: '100%',
-    width: '80%',
-  },
-  bottom: {
-    bottom: 0,
-    width: '100%',
   },
 });

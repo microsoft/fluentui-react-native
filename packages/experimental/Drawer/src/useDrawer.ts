@@ -8,7 +8,7 @@ import type { DrawerProps, DrawerInfo } from './Drawer.types';
 const { height, width } = Dimensions.get('window');
 
 export const useDrawer = (props: DrawerProps): DrawerInfo => {
-  const { onBlur, onFocus, accessibilityLabel, visible, position, children, ...rest } = props;
+  const { onBlur, onFocus, accessibilityLabel, visible, position = 'left', children, ...rest } = props;
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [internalVisible, setInternalVisible] = useState(visible);
   const [isFirstOpen, setIsFirstOpen] = useState(true);

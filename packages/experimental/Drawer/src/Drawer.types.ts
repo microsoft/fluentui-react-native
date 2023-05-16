@@ -4,6 +4,9 @@ import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-nati
 
 export const DrawerName = 'Drawer';
 
+/**
+ * Specifies the possible position of the Drawer.
+ */
 export type DrawerPositionType = 'left' | 'right' | 'bottom';
 
 export interface DrawerTokens {
@@ -84,12 +87,6 @@ export interface DrawerTokens {
   drawerElevation?: number;
 
   /**
-   * The position of the Drawer
-   * @default 'left'
-   * */
-  position?: 'left' | 'right' | 'bottom';
-
-  /**
    * The width of the Drawer
    * Note: Only applicable when position is 'left' or 'right'
    * @default '100%'
@@ -127,6 +124,19 @@ export interface DrawerTokens {
    * */
 
   shadowRadius?: number;
+  /**
+   * The position of the Drawer
+   * @default 'left'
+   * */
+  position?: DrawerPositionType;
+
+  /**
+   * Positions of the Drawer
+   */
+
+  left?: DrawerTokens;
+  right?: DrawerTokens;
+  bottom?: DrawerTokens;
 }
 
 export interface DrawerProps extends PressableFocusProps {

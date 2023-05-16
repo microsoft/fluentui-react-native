@@ -7,20 +7,9 @@ import { defaultDrawerTokens } from './DrawerTokens';
 
 export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, DrawerTokens> = {
   tokens: [defaultDrawerTokens, DrawerName],
-  tokensThatAreAlsoProps: ['position'],
+  tokensThatAreAlsoProps: 'all',
+  states: ['left', 'right', 'bottom', 'scrimVisible'],
   slotProps: {
-    modal: buildProps(
-      (_tokens: DrawerTokens, _theme: Theme) => ({
-        style: {},
-      }),
-      [],
-    ),
-    backdrop: buildProps(
-      (_tokens: DrawerTokens, _theme: Theme) => ({
-        // empty for now, tokens will be added in next PR
-      }),
-      [],
-    ),
     backdropContent: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({
         style: {
@@ -30,22 +19,23 @@ export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, Dr
           width: '100%',
           height: '100%',
           backgroundColor: tokens.backdropColor,
+          opacity: tokens.backdropOpacity,
         },
       }),
-      [],
+      ['backdropColor'],
     ),
     content: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({
         style: {
           position: 'absolute',
-          top: 0,
-          elevation: 18,
+          height: tokens.height,
+          width: tokens.width,
+          elevation: tokens.drawerElevation,
+          ...(tokens.position === 'right' && { right: 0 }), // This is required to make the drawer stick to the right side of the screen as left overrides right position
           backgroundColor: tokens.drawerBackgroundColor,
-          borderTopRightRadius: tokens.position === 'bottom' ? tokens.drawerCornerRadius : 0,
-          borderTopLeftRadius: tokens.position === 'bottom' ? tokens.drawerCornerRadius : 0,
         },
       }),
-      [],
+      ['position', 'drawerBackgroundColor', 'drawerElevation', 'height', 'width'],
     ),
     handle: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({
@@ -58,7 +48,7 @@ export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, Dr
           marginTop: tokens.handleMarginTop,
         },
       }),
-      [],
+      ['handleWidth', 'handleHeight', 'handleCornerRadius', 'handleBackgroundColor', 'handleAlignment', 'handleMarginTop'],
     ),
   },
 };
