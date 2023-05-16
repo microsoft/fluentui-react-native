@@ -944,7 +944,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       Object {
         "alignItems": "flex-start",
         "display": "flex",
-        "flexDirection": "row",
+        "flexDirection": "column",
         "justifyContent": "space-around",
       }
     }
@@ -1239,7 +1239,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       Object {
         "alignItems": "flex-start",
         "display": "flex",
-        "flexDirection": "row",
+        "flexDirection": "column",
         "justifyContent": "space-around",
       }
     }
