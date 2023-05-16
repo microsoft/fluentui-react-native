@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Tue, 16 May 2023 16:53:27 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.9.35",
+      "version": "0.9.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "2b4a968ac333a0b95584cd26c23da91fad50b9b8",
+            "comment": "updated spec"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 May 2023 07:08:51 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.9.34",
       "version": "0.9.34",
