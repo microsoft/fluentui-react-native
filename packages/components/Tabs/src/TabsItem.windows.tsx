@@ -99,6 +99,7 @@ export const TabsItem = compose<TabsItemType>({
         ...rest,
         ...pressable.props,
         ref: buttonRef,
+        accessible: true,
         accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
