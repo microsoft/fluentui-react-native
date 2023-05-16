@@ -30,12 +30,16 @@
     "@fluentui-react-native/adapters": ">=0.10.2 <1.0.0",
     "@fluentui-react-native/component-cache": "^1.4.4",
     "@fluentui-react-native/focus-zone": ">=0.11.42 <1.0.0",
+    "@fluentui-react-native/framework": "0.9.9",
     "@fluentui-react-native/interactive-hooks": ">=0.22.30 <1.0.0",
     "@fluentui-react-native/pressable": ">=0.9.69 <1.0.0",
     "@fluentui-react-native/text": ">=0.19.32 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.24.6 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.20.15 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.9.4 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.11.3 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.12.3 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.12.3 <1.0.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Move RadioGroupV1 into main RadioGroup folder",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "gulnazsayed@microsoft.com",
+  "dependentChangeType": "patch"
+}

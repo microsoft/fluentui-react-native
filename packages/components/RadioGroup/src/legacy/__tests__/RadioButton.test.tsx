@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import * as renderer from 'react-test-renderer';
 
-import { RadioButton } from './RadioButton';
+import { RadioButton } from '../RadioButton';
 
 describe('RadioButton component tests', () => {
   it('RadioButton default', () => {
