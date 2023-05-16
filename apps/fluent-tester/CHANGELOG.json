@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 16 May 2023 16:53:28 GMT",
+      "tag": "@fluentui-react-native/tester_v0.144.1",
+      "version": "0.144.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2b4a968ac333a0b95584cd26c23da91fad50b9b8",
+            "comment": "removed horizontal layout tests"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.9.35",
+            "commit": "2b4a968ac333a0b95584cd26c23da91fad50b9b8"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 May 2023 18:38:25 GMT",
       "tag": "@fluentui-react-native/tester_v0.144.0",
       "version": "0.144.0",
