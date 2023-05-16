@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 11 Apr 2023 10:42:50 GMT and should not be manually modified.
+This log was last generated on Wed, 03 May 2023 23:02:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.23.2
+
+Wed, 03 May 2023 23:02:54 GMT
+
+### Patches
+
+- Use iOS 16.2 for appium (adgleitm@microsoft.com)
+
+## 1.23.1
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.42
+
+## 1.23.0
+
+Thu, 20 Apr 2023 09:41:22 GMT
+
+### Minor changes
+
+- Expand input functionality  (ayushsinghs@yahoo.in)
 
 ## 1.22.0
 

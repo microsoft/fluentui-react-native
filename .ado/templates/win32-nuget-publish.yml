@@ -14,13 +14,18 @@ steps:
       yarn buildci
     displayName: 'Building the repo'
 
+  - script: |
+      yarn bundle
+    workingDirectory: apps/win32
+    displayName: 'Bundling FluentTester Win32 app'
+
   # Pack the NuGet package
   - task: CmdLine@1
     displayName: 'Create NuGet package for FluentTester Win32 bundle.'
     inputs:
-        filename: nuget
-        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
-        workingFolder: 'apps/win32/nuget'
+      filename: nuget
+      arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+      workingFolder: 'apps/win32/nuget'
 
   # Pack the NuGet package
   - task: CmdLine@1

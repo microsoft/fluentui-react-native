@@ -17,7 +17,7 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
     spacingInputVertical: globalTokens.size120,
     spacingAssistiveTextVertical: globalTokens.size40,
     spacingLabelTop: globalTokens.size120,
-    spacingInputSecondary: globalTokens.size80,
+    spacingInputAccessory: globalTokens.size80,
     spacingAccessoryIconStart: globalTokens.size80,
     spacingAssistiveTextStart: 0,
     spacingLabelStart: 0,
@@ -34,8 +34,8 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
     assistiveTextFont: 'caption2',
     inputTextFont: 'body1',
     inputTextColor: t.colors.neutralForeground2,
-    secondaryTextFont: 'body1',
-    secondaryTextColor: t.colors.neutralForeground2,
+    accessoryTextFont: 'body1',
+    accessoryTextColor: t.colors.neutralForeground2,
 
     error: {
       backgroundColor: t.colors.neutralBackground1,
@@ -45,7 +45,7 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       color: t.colors.dangerForeground1, //label color
       assistiveTextColor: t.colors.dangerForeground1,
       inputTextColor: t.colors.neutralForeground1,
-      secondaryTextColor: t.colors.neutralForeground2,
+      accessoryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
     },
 
@@ -57,7 +57,7 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       color: t.colors.brandForeground1, //label color
       assistiveTextColor: t.colors.neutralForeground2,
       inputTextColor: t.colors.neutralForeground2,
-      secondaryTextColor: t.colors.neutralForeground2,
+      accessoryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
     },
 
@@ -69,7 +69,7 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       color: t.colors.neutralForeground2, // label color
       assistiveTextColor: t.colors.neutralForeground2,
       inputTextColor: t.colors.neutralForeground1,
-      secondaryTextColor: t.colors.neutralForeground2,
+      accessoryTextColor: t.colors.neutralForeground2,
     },
 
     typing: {
@@ -80,7 +80,7 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
       color: t.colors.brandForeground1, // label color
       assistiveTextColor: t.colors.neutralForeground2,
       inputTextColor: t.colors.neutralForeground1,
-      secondaryTextColor: t.colors.neutralForeground2,
+      accessoryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
     },
   } as InputTokens);

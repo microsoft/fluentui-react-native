@@ -1,8 +1,136 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 12 Apr 2023 18:42:22 GMT and should not be manually modified.
+This log was last generated on Thu, 11 May 2023 18:38:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.82
+
+Thu, 11 May 2023 18:38:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.144.0
+
+## 0.32.81
+
+Thu, 11 May 2023 04:51:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.143.7
+
+## 0.32.80
+
+Wed, 10 May 2023 11:59:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.143.6
+
+## 0.32.79
+
+Fri, 05 May 2023 23:13:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.143.5
+
+## 0.32.78
+
+Fri, 05 May 2023 04:40:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.143.4
+
+## 0.32.77
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.143.3
+
+## 0.32.76
+
+Wed, 03 May 2023 06:08:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.143.2
+
+## 0.32.75
+
+Mon, 01 May 2023 20:43:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.143.1
+
+## 0.32.74
+
+Thu, 27 Apr 2023 19:45:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.143.0
+
+## 0.32.73
+
+Wed, 26 Apr 2023 20:11:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.142.5
+
+## 0.32.72
+
+Tue, 25 Apr 2023 02:09:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.142.4
+
+## 0.32.71
+
+Sat, 22 Apr 2023 23:41:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.142.3
+
+## 0.32.70
+
+Fri, 21 Apr 2023 04:54:14 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.142.2
+
+## 0.32.69
+
+Fri, 21 Apr 2023 00:05:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.142.1
+
+## 0.32.68
+
+Thu, 20 Apr 2023 09:41:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.142.0
+
+## 0.32.67
+
+Wed, 19 Apr 2023 10:08:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.141.1
 
 ## 0.32.66
 

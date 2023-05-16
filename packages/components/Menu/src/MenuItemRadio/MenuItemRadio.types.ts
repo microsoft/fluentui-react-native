@@ -39,36 +39,6 @@ export interface MenuItemRadioTokens
   iconSize?: number;
 
   /**
-   * Color of the background of the box containing the checkmark.
-   * @platform android
-   */
-  checkboxBackgroundColor?: ColorValue;
-
-  /**
-   * Color of the border of the box containing the checkmark.
-   * @platform android
-   */
-  checkboxBorderColor?: ColorValue;
-
-  /**
-   * Border radius of the box containing the checkmark.
-   * @platform android
-   */
-  checkboxBorderRadius?: number;
-
-  /**
-   * Width of the border around the box containing the checkmark.
-   * @platform android
-   */
-  checkboxBorderWidth?: number;
-
-  /**
-   * Height and width of the box containing the checkmark.
-   * @platform android
-   */
-  checkboxSize?: number;
-
-  /**
    * Ripple color for Android.
    *
    * A ripple animation is shown on click for Android. This sets the color of the ripple.

@@ -23,6 +23,7 @@ export const ANDROID_CHECKBOX = 'android.widget.CheckBox';
 export const ANDROID_IMAGE = 'android.widget.ImageView';
 export const ANDROID_TEXT = 'android.widget.TextView';
 export const ANDROID_RADIOBUTTON = 'android.widget.RadioButton';
+export const ANDROID_EDITTEXT = 'android.widget.EditText';
 
 /* Jasmine Timeouts */
 export const BOOT_APP_TIMEOUT = 60000;
@@ -49,6 +50,7 @@ export const enum AndroidAttribute {
   Class = 'class',
   Clickable = 'clickable',
   Checked = 'checked',
+  Text = 'text',
 }
 
 export const attributeToEnumName = {
