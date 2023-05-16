@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.143.7"
+      "version": "0.144.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.32.81"
+      "version": "0.32.82"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -161,10 +161,6 @@ module.exports = {
     "@fluentui-react-native/experimental-checkbox": {
       "name": "@fluentui-react-native/experimental-checkbox",
       "version": "0.13.53"
-    },
-    "@fluentui-react-native/experimental-drawer": {
-      "name": "@fluentui-react-native/experimental-drawer",
-      "version": "0.2.51"
     },
     "@fluentui-react-native/dropdown": {
       "name": "@fluentui-react-native/dropdown",

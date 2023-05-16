@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 11 May 2023 04:51:14 GMT and should not be manually modified.
+This log was last generated on Thu, 11 May 2023 18:38:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.144.0
+
+Thu, 11 May 2023 18:38:25 GMT
+
+### Minor changes
+
+- remove non working drawer (rohanpd.work@gmail.com)
 
 ## 0.143.7
 
