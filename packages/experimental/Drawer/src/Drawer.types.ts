@@ -83,6 +83,7 @@ export interface DrawerTokens {
   /**
    * The elevation of the Drawer
    * @default 5
+   * @platform android
    * */
   drawerElevation?: number;
 
