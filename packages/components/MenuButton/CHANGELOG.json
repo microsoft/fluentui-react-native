@@ -2,6 +2,102 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.10.51",
+      "version": "0.10.51",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.32.52",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.21.42",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.26",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.15",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.13.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 22 Apr 2023 23:41:05 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.10.50",
+      "version": "0.10.50",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.32.51",
+            "commit": "db950e1d4e3dd9f6ad94a34db94ab0a24b12a93b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 Apr 2023 18:42:22 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.10.49",
+      "version": "0.10.49",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.32.50",
+            "commit": "42f64ddb244764adf58f95b463b2638d0989b148"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 19:48:24 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.10.48",
+      "version": "0.10.48",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.32.49",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.21.41",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.25",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.10.47",
       "version": "0.10.47",

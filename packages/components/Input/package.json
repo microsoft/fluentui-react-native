@@ -1,0 +1,71 @@
+{
+  "name": "@fluentui-react-native/input",
+  "version": "0.2.2",
+  "description": "A cross-platform Text input component using the Fluent Design System",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/components/Input"
+  },
+  "dependencies": {
+    "@fluentui-react-native/framework": "0.9.9",
+    "@fluentui-react-native/icon": "^0.17.26",
+    "@fluentui-react-native/interactive-hooks": ">=0.22.30 <1.0.0",
+    "@fluentui-react-native/styling-utils": ">=0.4.4 <1.0.0",
+    "@fluentui-react-native/text": ">=0.19.32 <1.0.0",
+    "@fluentui-react-native/theme-tokens": "^0.24.6",
+    "@fluentui-react-native/tokens": ">=0.20.15 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.9.4 <1.0.0"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "react": "17.0.2",
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
+  },
+  "peerDependencies": {
+    "react": "17.0.2",
+    "react-native": "^0.68.0",
+    "react-native-svg": "^12.3.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.68"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react",
+        "svg"
+      ]
+    }
+  }
+}

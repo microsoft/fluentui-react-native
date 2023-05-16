@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add new example for Switch on/off text section",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

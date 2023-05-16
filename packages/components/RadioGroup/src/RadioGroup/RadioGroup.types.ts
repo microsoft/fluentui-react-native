@@ -120,7 +120,7 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
 
   /**
    * The position of the label relative to the indicator.
-   * 'horizontal' and 'horizontal-stacked' are not supported from Fluent Android, renders as-is.
+   * 'horizontal' and 'horizontal-stacked' are not supported from Fluent Android and Win32, renders as-is.
    *
    * @default vertical
    */

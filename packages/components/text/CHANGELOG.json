@@ -2,6 +2,60 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/text_v0.19.32",
+      "version": "0.19.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.13.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.30",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.24.6",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.15",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 19:48:24 GMT",
+      "tag": "@fluentui-react-native/text_v0.19.31",
+      "version": "0.19.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.29",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/text_v0.19.30",
       "version": "0.19.30",

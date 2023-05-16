@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { ScrollViewProps } from 'react-native';
+import type { ScrollViewProps, View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
@@ -18,6 +18,12 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
    * States of the list control
    */
   hasMaxHeight?: MenuListTokens;
+
+  /**
+   * Corner radius of the menu list
+   * @platform android
+   */
+  cornerRadius?: number;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
@@ -46,6 +52,7 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
    *
    * This option is useful for programmatically generated items to provide
    * text for options that end up having tuncated text.
+   * @platform win32, macOS
    */
   hasTooltips?: boolean;
 
@@ -70,6 +77,9 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   selectRadio?: (e: InteractionEvent, name: string) => void;
   addRadioItem: (name: string) => void;
   removeRadioItem: (name: string) => void;
+  trackMenuItem: (item: TrackedMenuItem) => void;
+  untrackMenuItem: (item: TrackedMenuItem) => void;
+  onListKeyDown: (e: InteractionEvent) => void;
   hasMaxHeight?: boolean;
   hasMaxWidth?: boolean;
 }
@@ -84,4 +94,9 @@ export interface MenuListType {
   props: MenuListProps;
   tokens: MenuListTokens;
   slotProps: MenuListSlotProps;
+}
+
+export interface TrackedMenuItem {
+  ref: React.RefObject<View>;
+  disabled: boolean;
 }

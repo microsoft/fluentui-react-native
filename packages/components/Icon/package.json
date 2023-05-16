@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/icon",
-  "version": "0.17.24",
+  "version": "0.17.26",
   "description": "A cross-platform Icon component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "^0.10.2",
-    "@fluentui-react-native/framework": ">=0.9.8 <1.0.0",
-    "@fluentui-react-native/text": "^0.19.30"
+    "@fluentui-react-native/framework": ">=0.9.9 <1.0.0",
+    "@fluentui-react-native/text": "^0.19.32"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

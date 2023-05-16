@@ -2,6 +2,93 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/switch_v0.8.41",
+      "version": "0.8.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.30",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.19.32",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.23.11",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.15",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 19:48:24 GMT",
+      "tag": "@fluentui-react-native/switch_v0.8.40",
+      "version": "0.8.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.29",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.19.31",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 16:10:16 GMT",
+      "tag": "@fluentui-react-native/switch_v0.8.39",
+      "version": "0.8.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "d71d0c8daddac17c1abdd03b31ea979354f85668",
+            "comment": "On/off text renders with labelPosition=before"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "c54c613a1657dfa8f246dd1cbf75913b2a41f28b",
+            "comment": "Trigger manual bump (no changes)"
+          },
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "00118f44d44a2fff2eb376ee9ceb8df7c65b2c3e",
+            "comment": "Update Switch docs to reflect latest changes"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/switch_v0.8.38",
       "version": "0.8.38",

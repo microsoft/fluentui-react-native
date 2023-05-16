@@ -49,6 +49,7 @@ The `Switch` component has six slots. The slots behave as follows:
 - `thumb` - By default a circle. Its location informs the user of the Switch's toggle state.
 - `toggleContainer` - Container for the thumb and track.
 - `onOffText` - If specified, renders the the toggle state of the Switch as text.
+- `onOffTextContainer` - If `onText` or `offText` are passed, this is the container that holds such text.
 
 The slots can be modified using the `compose` function on the `Switch`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
 
@@ -96,9 +97,7 @@ export interface SwitchProps extends Omit<PressablePropsExtended 'onPress'> {
   onText?: string;
 
   /**
-   * Sets the position of the Switch's label. The position value 'after' is mutually
-   * exclusive with the onText and offText props. This is due to variable width
-   * of the text props causing the Switch's position to change when it shouldn't.
+   * The position of the label relative to the Switch.
    * Note : 'before' , 'above' are not supported on Android
    */
   labelPosition?: 'before' | 'above' | 'after';

@@ -20,7 +20,13 @@ import { useRadio } from './useRadio';
  * @returns Whether the styles that are assigned to the layer should be applied to the Radio
  */
 export const radioLookup = (layer: string, state: PressableState, userProps: RadioProps): boolean => {
-  return state[layer] || userProps[layer] || (layer === 'labelPositionBelow' && userProps['labelPosition'] === 'below');
+  return (
+    state[layer] ||
+    userProps[layer] ||
+    (!(Platform.OS === ('win32' as any) || Platform.OS === 'android') &&
+      layer === 'labelPositionBelow' &&
+      userProps['labelPosition'] === 'below')
+  );
 };
 
 export const Radio = compose<RadioType>({

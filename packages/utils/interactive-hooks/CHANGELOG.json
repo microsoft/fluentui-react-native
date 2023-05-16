@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.30",
+      "version": "0.22.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 19:48:23 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.22.29",
+      "version": "0.22.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c",
+            "comment": "align-deps: Fix warnigns and issues"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.22.28",
       "version": "0.22.28",

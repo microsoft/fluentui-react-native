@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 
 import { useFluentTheme } from '@fluentui-react-native/framework';
-import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
@@ -25,6 +25,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     disabled,
     onBlur,
     onClick,
+    onLayout,
     loading,
     enableFocusRing,
     focusable,
@@ -70,16 +71,18 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   const shouldUseTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary' && !isHighContrast(theme);
   const [baseHeight, setBaseHeight] = React.useState<number | undefined>(undefined);
   const [baseWidth, setBaseWidth] = React.useState<number | undefined>(undefined);
-  const onLayout = React.useCallback(
-    (e: LayoutEvent) => {
+  const onLayoutInner = React.useCallback(
+    (e: LayoutChangeEvent) => {
       // Only run when shouldUseTwoToneFocusBorder so that state update doesn't
       // affect platforms that don't need it.
       if (shouldUseTwoToneFocusBorder) {
         setBaseHeight(e.nativeEvent.layout.height);
         setBaseWidth(e.nativeEvent.layout.width);
       }
+
+      onLayout && onLayout(e);
     },
-    [setBaseHeight, setBaseWidth, shouldUseTwoToneFocusBorder],
+    [onLayout, setBaseHeight, setBaseWidth, shouldUseTwoToneFocusBorder],
   );
 
   return {
@@ -102,7 +105,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
       ref: useViewCommandFocus(componentRef),
       iconPosition: props.iconPosition || 'before',
       loading,
-      onLayout,
+      onLayout: onLayoutInner,
     },
     state: {
       ...pressable.state,

@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
+This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.30
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.9
+
+## 0.22.29
+
+Mon, 10 Apr 2023 19:48:23 GMT
+
+### Patches
+
+- align-deps: Fix warnigns and issues (sanajmi@microsoft.com)
 
 ## 0.22.28
 

@@ -91,7 +91,21 @@ exports[`Radio component tests Radio default 1`] = `
   <View
     style={
       Object {
+<<<<<<< HEAD:packages/components/RadioGroup/src/Radio/__tests__/__snapshots__/RadioExperimental.test.tsx.snap
         "alignItems": undefined,
+||||||| 4d4decc82:packages/experimental/RadioGroup/src/Radio/__snapshots__/RadioExperimental.test.tsx.snap
+        "alignItems": "flex-start",
+        "borderColor": "transparent",
+        "borderRadius": 4,
+        "borderStyle": "solid",
+        "borderWidth": 2,
+=======
+        "alignItems": "flex-start",
+        "borderColor": "#00000000",
+        "borderRadius": 4,
+        "borderStyle": "solid",
+        "borderWidth": 2,
+>>>>>>> master:packages/experimental/RadioGroup/src/Radio/__snapshots__/RadioExperimental.test.tsx.snap
         "flexDirection": "column",
         "marginLeft": 16,
         "marginRight": undefined,
@@ -216,7 +230,21 @@ exports[`Radio component tests Radio disabled 1`] = `
   <View
     style={
       Object {
+<<<<<<< HEAD:packages/components/RadioGroup/src/Radio/__tests__/__snapshots__/RadioExperimental.test.tsx.snap
         "alignItems": undefined,
+||||||| 4d4decc82:packages/experimental/RadioGroup/src/Radio/__snapshots__/RadioExperimental.test.tsx.snap
+        "alignItems": "flex-start",
+        "borderColor": "transparent",
+        "borderRadius": 4,
+        "borderStyle": "solid",
+        "borderWidth": 2,
+=======
+        "alignItems": "flex-start",
+        "borderColor": "#00000000",
+        "borderRadius": 4,
+        "borderStyle": "solid",
+        "borderWidth": 2,
+>>>>>>> master:packages/experimental/RadioGroup/src/Radio/__snapshots__/RadioExperimental.test.tsx.snap
         "flexDirection": "column",
         "marginLeft": 16,
         "marginRight": undefined,

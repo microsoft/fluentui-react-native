@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-activity-indicator",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.7.26",
+      "version": "0.7.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:46 GMT",
       "tag": "@fluentui-react-native/experimental-activity-indicator_v0.7.25",
       "version": "0.7.25",

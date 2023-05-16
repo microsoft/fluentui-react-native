@@ -2,6 +2,69 @@
   "name": "@fluentui-react-native/spinner",
   "entries": [
     {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/spinner_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.24.6",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/text to v0.19.32",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 May 2023 20:43:14 GMT",
+      "tag": "@fluentui-react-native/spinner_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/spinner",
+            "commit": "3e1699cb80f2fd1d306708066b027c851eac2867",
+            "comment": "add spinner tail svg without native animation"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Apr 2023 19:48:24 GMT",
+      "tag": "@fluentui-react-native/spinner_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/spinner",
+            "commit": "05bd73ded25b8407dd52161309b303741ba172fb",
+            "comment": "add tracker svg for win32"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/spinner",
+            "comment": "Bump @fluentui-react-native/text to v0.19.31",
+            "commit": "fd67dc8a7f2d938086f0b5d3eebd13b12a8d0f7c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Mar 2023 20:49:23 GMT",
       "tag": "@fluentui-react-native/spinner_v0.2.12",
       "version": "0.2.12",

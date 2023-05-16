@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
+This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.49
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.52
+- Bump @fluentui-react-native/callout to v0.23.13
+- Bump @fluentui-react-native/framework to v0.9.9
+- Bump @fluentui-react-native/interactive-hooks to v0.22.30
+- Bump @fluentui-react-native/text to v0.19.32
+- Bump @fluentui-react-native/theme-tokens to v0.24.6
+
+## 0.7.48
+
+Sat, 22 Apr 2023 23:41:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.51
+
+## 0.7.47
+
+Wed, 12 Apr 2023 18:42:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.50
+
+## 0.7.46
+
+Mon, 10 Apr 2023 19:48:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.49
+- Bump @fluentui-react-native/callout to v0.23.12
+- Bump @fluentui-react-native/interactive-hooks to v0.22.29
+- Bump @fluentui-react-native/text to v0.19.31
 
 ## 0.7.45
 

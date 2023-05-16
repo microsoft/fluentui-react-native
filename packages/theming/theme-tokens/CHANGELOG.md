@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Wed, 03 May 2023 07:08:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.6
+
+Wed, 03 May 2023 07:08:51 GMT
+
+### Patches
+
+- Update design-tokens package to 0.47.0 (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.31.1
 
 ## 0.24.5
 

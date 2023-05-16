@@ -1,0 +1,481 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component tests Input default 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+  defaultIconProps={null}
+  focusedIconProps={null}
+  keyboardShouldPersistTaps="handled"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  scrollEnabled={false}
+  setIconProps={[Function]}
+  setText={[Function]}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderBottomColor": "#d1d1d1",
+          "borderBottomWidth": 0.5,
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholderTextColor="#616161"
+        style={
+          Object {
+            "color": "#616161",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+            "padding": 0,
+          }
+        }
+        value=""
+      />
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Input component tests Input in error state 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+  defaultIconProps={null}
+  focusedIconProps={null}
+  keyboardShouldPersistTaps="handled"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  scrollEnabled={false}
+  setIconProps={[Function]}
+  setText={[Function]}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderBottomColor": "#bc2f32",
+          "borderBottomWidth": 0.5,
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholderTextColor="#242424"
+        selectionColor="#808080"
+        style={
+          Object {
+            "color": "#242424",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+            "padding": 0,
+          }
+        }
+        value=""
+      />
+    </View>
+    <Text
+      style={
+        Object {
+          "color": "#bc2f32",
+          "fontFamily": "Segoe UI",
+          "fontSize": 13,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
+          "marginTop": 0,
+          "paddingVertical": 4,
+        }
+      }
+    >
+      Error
+    </Text>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Input component tests Input with all optional text 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+  defaultIconProps={null}
+  focusedIconProps={null}
+  keyboardShouldPersistTaps="handled"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  scrollEnabled={false}
+  setIconProps={[Function]}
+  setText={[Function]}
+>
+  <View>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
+          "marginTop": 12,
+        }
+      }
+    >
+      Label
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderBottomColor": "#d1d1d1",
+          "borderBottomWidth": 0.5,
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Test"
+        placeholderTextColor="#616161"
+        style={
+          Object {
+            "color": "#616161",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+            "padding": 0,
+          }
+        }
+        value=""
+      />
+    </View>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontFamily": "Segoe UI",
+          "fontSize": 13,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
+          "marginTop": 0,
+          "paddingVertical": 4,
+        }
+      }
+    >
+      Assistive
+    </Text>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Input component tests Input with icon 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+  defaultIconProps={
+    Object {
+      "color": "#fff",
+      "fontSource": Object {
+        "codepoint": 9827,
+        "fontFamily": "Arial",
+        "fontSize": 16,
+      },
+    }
+  }
+  focusedIconProps={null}
+  keyboardShouldPersistTaps="handled"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  scrollEnabled={false}
+  setIconProps={[Function]}
+  setText={[Function]}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        accessible={false}
+        style={
+          Object {
+            "color": "#fff",
+            "fontFamily": "Arial",
+            "fontSize": 16,
+            "fontWeight": "400",
+            "margin": 0,
+          }
+        }
+      >
+        ♣
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderBottomColor": "#d1d1d1",
+            "borderBottomWidth": 0.5,
+            "display": "flex",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "paddingVertical": 12,
+          }
+        }
+      >
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Test"
+          placeholderTextColor="#616161"
+          style={
+            Object {
+              "color": "#616161",
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "margin": 0,
+              "marginBottom": 0,
+              "marginEnd": 0,
+              "marginStart": 0,
+              "marginTop": 0,
+              "padding": 0,
+            }
+          }
+          value=""
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Input component tests Input with placeholder 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+  defaultIconProps={null}
+  focusedIconProps={null}
+  keyboardShouldPersistTaps="handled"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  scrollEnabled={false}
+  setIconProps={[Function]}
+  setText={[Function]}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderBottomColor": "#d1d1d1",
+          "borderBottomWidth": 0.5,
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Test"
+        placeholderTextColor="#616161"
+        style={
+          Object {
+            "color": "#616161",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+            "padding": 0,
+          }
+        }
+        value=""
+      />
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Input component tests Input without accessoryIcon 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "paddingHorizontal": 16,
+    }
+  }
+  defaultIconProps={null}
+  focusedIconProps={null}
+  keyboardShouldPersistTaps="handled"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  scrollEnabled={false}
+  setIconProps={[Function]}
+  setText={[Function]}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderBottomColor": "#d1d1d1",
+          "borderBottomWidth": 0.5,
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Test"
+        placeholderTextColor="#616161"
+        style={
+          Object {
+            "color": "#616161",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+            "padding": 0,
+          }
+        }
+        value=""
+      />
+    </View>
+  </View>
+</RCTScrollView>
+`;
