@@ -157,9 +157,9 @@ const radiogroup = (
 
 ### Horizontal RadioGroup
 
-Win32:
+The horizontal layout is not supported on Win32 and Android.
 
-![Horizontal RadioGroup Example on Win32](./assets/horizontal_radiogroup.png)
+![Horizontal RadioGroup Example](./assets/horizontal_radiogroup.png)
 
 ```tsx
 const onChange = React.useCallback((key: string) => {
@@ -178,9 +178,9 @@ const radiogroup = (
 
 ### Horizontal-Stacked RadioGroup
 
-Win32:
+The horizontal-stacked layout is not supported on Win32 and Android.
 
-![Horizontal-Stacked RadioGroup Example on Win32](./assets/horizontal_stacked_radiogroup.png)
+![Horizontal-Stacked RadioGroup Example](./assets/horizontal_stacked_radiogroup.png)
 
 ```tsx
 const onChange = React.useCallback((key: string) => {
@@ -281,7 +281,7 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
   /**
    * The position of the label relative to the indicator.
    *
-   * 'horizontal' and 'horizontal-stacked' are not supported from Fluent Android, renders as-is.
+   * 'horizontal' and 'horizontal-stacked' are not supported from Fluent Android and Win32, renders as-is.
    *
    * @default vertical
    */
@@ -324,7 +324,7 @@ export interface RadioProps extends PressablePropsExtended {
    * This defaults to 'after' unless the Radio is inside a RadioGroup with layout horizontal-stacked,
    * in which case it defaults to 'below'
    *
-   * 'below' is not supported from Fluent Android, renders as-is.
+   * 'below' is not supported from Fluent Android and Win32, renders as-is.
    * @default after
    */
   labelPosition?: 'after' | 'below';
