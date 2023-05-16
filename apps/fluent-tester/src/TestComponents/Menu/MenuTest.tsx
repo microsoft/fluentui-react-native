@@ -388,7 +388,7 @@ const MenuWithGroups: React.FunctionComponent = () => {
     </Stack>
   );
 };
-  
+
 const menuAsABlackboxStyles = StyleSheet.create({
   actionButton: { alignSelf: 'center', justifyContent: 'center' },
   switch: { marginHorizontal: 10 },
