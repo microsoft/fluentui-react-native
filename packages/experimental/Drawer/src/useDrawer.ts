@@ -8,7 +8,7 @@ import type { DrawerProps, DrawerInfo } from './Drawer.types';
 const { height, width } = Dimensions.get('window');
 
 export const useDrawer = (props: DrawerProps): DrawerInfo => {
-  const { onBlur, onFocus, accessibilityLabel, visible, position = 'left', children, ...rest } = props;
+  const { onBlur, onFocus, accessibilityLabel, visible, behavior = 'leftSlideOver', children, ...rest } = props;
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [internalVisible, setInternalVisible] = useState(visible);
   const [isFirstOpen, setIsFirstOpen] = useState(true);
@@ -54,7 +54,7 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
 
   const animatedTranslateX = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: position === 'left' ? [-width * 0.8, 0] : position === 'right' ? [width * 0.8, 0] : [0, 0],
+    outputRange: behavior === 'leftSlideOver' ? [-width * 0.8, 0] : behavior === 'rightSlideOver' ? [width * 0.8, 0] : [0, 0],
   });
 
   const animatedTranslateY = animatedValue.interpolate({
@@ -68,7 +68,10 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
   });
 
   const animatedStyle = {
-    transform: position === 'left' || position === 'right' ? [{ translateX: animatedTranslateX }] : [{ translateY: animatedTranslateY }],
+    transform:
+      behavior === 'leftSlideOver' || behavior === 'rightSlideOver'
+        ? [{ translateX: animatedTranslateX }]
+        : [{ translateY: animatedTranslateY }],
   };
 
   return {
@@ -80,7 +83,7 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
         animatedOpacity,
         animatedStyle,
       },
-      position,
+      behavior: behavior ?? 'leftSlideOver',
       children,
       visible: internalVisible,
     },

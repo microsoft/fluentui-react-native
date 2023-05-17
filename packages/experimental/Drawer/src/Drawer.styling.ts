@@ -8,7 +8,7 @@ import { defaultDrawerTokens } from './DrawerTokens';
 export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, DrawerTokens> = {
   tokens: [defaultDrawerTokens, DrawerName],
   tokensThatAreAlsoProps: 'all',
-  states: ['left', 'right', 'bottom'],
+  states: ['leftSlideOver', 'rightSlideOver', 'bottomSlideOver', 'bottom'],
   slotProps: {
     scrimContent: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({
@@ -31,11 +31,16 @@ export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, Dr
           height: tokens.height,
           width: tokens.width,
           elevation: tokens.drawerElevation,
-          ...(tokens.position === 'right' && { right: 0 }), // This is required to make the drawer stick to the right side of the screen as left overrides right position
+          borderTopEndRadius: tokens.drawerCornerRadius,
+          borderTopStartRadius: tokens.drawerCornerRadius,
+          right: tokens.rightPosition,
+          left: tokens.leftPosition,
+          bottom: tokens.bottomPosition,
+          top: tokens.topPosition,
           backgroundColor: tokens.drawerBackgroundColor,
         },
       }),
-      ['position', 'drawerBackgroundColor', 'drawerElevation', 'height', 'width'],
+      ['behavior', 'drawerBackgroundColor', 'drawerElevation', 'height', 'width'],
     ),
     handle: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({

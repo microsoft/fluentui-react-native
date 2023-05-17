@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { Avatar } from '@fluentui-react-native/avatar';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Drawer } from '@fluentui-react-native/drawer';
-import type { DrawerPositionType } from '@fluentui-react-native/drawer';
+import type { DrawerBehaviorType } from '@fluentui-react-native/drawer';
 import { Stack } from '@fluentui-react-native/stack';
 import { Switch } from '@fluentui-react-native/switch';
 import { Text } from '@fluentui-react-native/text';
@@ -13,14 +13,14 @@ import { stackStyle } from '../Common/styles';
 
 export const DrawerDefault: React.FunctionComponent = () => {
   const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
-  const [drawerPosition, setDrawerPosition] = React.useState<DrawerPositionType>('left');
+  const [drawerPosition, setDrawerPosition] = React.useState<DrawerBehaviorType>('rightSlideOver');
 
   const handleDrawerClose = React.useCallback(() => {
     setIsDrawerVisible(false);
   }, []);
 
-  const handleDrawerOpen = React.useCallback((position) => {
-    setDrawerPosition(position);
+  const handleDrawerOpen = React.useCallback((behavior) => {
+    setDrawerPosition(behavior);
     setIsDrawerVisible(true);
   }, []);
 
@@ -33,17 +33,17 @@ export const DrawerDefault: React.FunctionComponent = () => {
       <View style={drawerContentstyles.container}>
         <View style={drawerContentstyles.content}>
           <Text>This is the main content of the screen.</Text>
-          <Button appearance="outline" onClick={() => handleDrawerOpen('left')}>
+          <Button appearance="outline" onClick={() => handleDrawerOpen('leftSlideOver')}>
             Open Drawer (Left)
           </Button>
-          <Button appearance="outline" onClick={() => handleDrawerOpen('right')}>
+          <Button appearance="outline" onClick={() => handleDrawerOpen('rightSlideOver')}>
             Open Drawer (Right)
           </Button>
-          <Button appearance="outline" onClick={() => handleDrawerOpen('bottom')}>
+          <Button appearance="outline" onClick={() => handleDrawerOpen('bottomSlideOver')}>
             Open Drawer (Bottom)
           </Button>
         </View>
-        <Drawer visible={isDrawerVisible} onClose={handleDrawerClose} onBackdropClick={handleDrawerClose} position={drawerPosition}>
+        <Drawer visible={isDrawerVisible} onClose={handleDrawerClose} onScrimClick={handleDrawerClose} behavior={drawerPosition}>
           <View style={drawerContentstyles.drawerContent}>
             <View style={drawerContentstyles.flexRow}>
               <Avatar active={'active'} activeAppearance="ring" size={56} name="John Doe" avatarColor={'colorful'} />

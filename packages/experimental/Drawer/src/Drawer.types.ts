@@ -7,7 +7,7 @@ export const DrawerName = 'Drawer';
 /**
  * Specifies the possible position of the Drawer.
  */
-export type DrawerPositionType = 'left' | 'right' | 'bottom';
+export type DrawerBehaviorType = 'bottom' | 'leftSlideOver' | 'rightSlideOver' | 'bottomSlideOver';
 
 export interface DrawerTokens {
   /**
@@ -126,18 +126,28 @@ export interface DrawerTokens {
 
   shadowRadius?: number;
   /**
-   * The position of the Drawer
-   * @default 'left'
+   * The behavior of the Drawer
+   * @default 'leftSlideOver'
    * */
-  position?: DrawerPositionType;
+  behavior?: DrawerBehaviorType;
 
   /**
-   * Positions of the Drawer
+   * Positions/Behaviours of the Drawer
    */
 
-  left?: DrawerTokens;
-  right?: DrawerTokens;
+  leftSlideOver?: DrawerTokens;
+  rightSlideOver?: DrawerTokens;
+  bottomSlideOver?: DrawerTokens;
   bottom?: DrawerTokens;
+
+  /**
+   * Coordinate position of the Drawer
+   */
+
+  leftPosition?: number;
+  rightPosition?: number;
+  bottomPosition?: number;
+  topPosition?: number;
 }
 
 export interface DrawerProps extends PressableFocusProps {
@@ -177,10 +187,10 @@ export interface DrawerProps extends PressableFocusProps {
   children?: React.ReactNode;
 
   /**
-   * The position of the Drawer
-   * @default 'left'
+   * The behavior of the Drawer
+   * @default 'leftSlideOver'
    * */
-  position?: DrawerPositionType;
+  behavior?: DrawerBehaviorType;
 
   /**
    * The width of the Drawer

@@ -18,23 +18,30 @@ export const defaultDrawerTokens: TokenSettings<DrawerTokens, Theme> = (t: Theme
     handleMarginEnd: globalTokens.sizeNone,
     handleMarginStart: globalTokens.sizeNone,
     drawerElevation: globalTokens.size100,
-    drawerCornerRadius: globalTokens.corner.radius120,
-    top: 0,
-    left: {
+    topPosition: 0,
+    leftSlideOver: {
       height: '100%',
       width: '80%',
-      left: 0,
+      leftPosition: 0,
+      drawerCornerRadius: 0,
     },
-    right: {
-      position: 'right',
+    rightSlideOver: {
       height: '100%',
       width: '80%',
-      right: 0,
+      rightPosition: 0,
+      drawerCornerRadius: 0,
     },
-    bottom: {
-      position: 'bottom',
-      bottom: 0,
+    bottomSlideOver: {
+      bottomPosition: 0,
       width: '100%',
+      drawerCornerRadius: globalTokens.corner.radius120,
+      height: '50%',
+    },
+
+    bottom: {
+      bottomPosition: 0,
+      width: '100%',
+      drawerCornerRadius: globalTokens.corner.radius120,
       height: '50%',
     },
   } as DrawerTokens);
