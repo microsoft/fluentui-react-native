@@ -13,9 +13,8 @@ import { stylingSettings } from './CounterBadge.styling';
 import type { CounterBadgeType, CounterBadgeProps } from './CounterBadge.types';
 import { counterBadgeName } from './CounterBadge.types';
 import { useCounterBadge } from './useCounterBadge';
-import type { BadgeProps } from '../Badge.types';
 
-export const counterBadgeLookup = (layer: string, userProps: BadgeProps): boolean => {
+export const counterBadgeLookup = (layer: string, userProps: CounterBadgeProps): boolean => {
   return (
     userProps[layer] ||
     layer === userProps['appearance'] ||
@@ -49,7 +48,7 @@ export const CounterBadge = compose<CounterBadgeType>({
       const displayCount = count && count > overflowCount ? `${overflowCount}+` : `${count}`;
       const hasChildren = Children.toArray(children)[0];
 
-      return showBadge ? (
+      return showBadge || hasChildren ? (
         <Slots.shadow>
           <Slots.root {...mergedProps}>
             {!dot && (
