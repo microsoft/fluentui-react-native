@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 17 May 2023 07:07:43 GMT",
+      "tag": "@fluentui-react-native/tester_v0.144.3",
+      "version": "0.144.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-expander to v0.5.27",
+            "commit": "35ab9f7e8295fd3b01e1fc96ad5602d2b546af2b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 16 May 2023 20:17:41 GMT",
       "tag": "@fluentui-react-native/tester_v0.144.2",
       "version": "0.144.2",
