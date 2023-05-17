@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 17 May 2023 21:03:42 GMT",
+      "tag": "@fluentui-react-native/tester_v0.145.0",
+      "version": "0.145.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/tester",
+            "commit": "604a9ede93e082dc5712c1035bdc04f04a7b82ae",
+            "comment": "macOS MenuGroup"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.9.0",
+            "commit": "604a9ede93e082dc5712c1035bdc04f04a7b82ae"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 May 2023 07:07:43 GMT",
       "tag": "@fluentui-react-native/tester_v0.144.3",
       "version": "0.144.3",
