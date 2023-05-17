@@ -7,6 +7,8 @@ import * as renderer from 'react-test-renderer';
 
 import { Menu } from '../Menu/Menu';
 import { MenuDivider } from '../MenuDivider/MenuDivider';
+import { MenuGroup } from '../MenuGroup';
+import { MenuGroupHeader } from '../MenuGroupHeader';
 import { MenuItem } from '../MenuItem/MenuItem';
 import { MenuItemCheckbox } from '../MenuItemCheckbox/MenuItemCheckbox';
 import { MenuItemRadio } from '../MenuItemRadio/MenuItemRadio';
@@ -178,6 +180,32 @@ describe('Menu component tests', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+});
+
+it('Menu open menu group and menu header', () => {
+  const tree = renderer
+    .create(
+      <Menu open>
+        <MenuTrigger>
+          <Button>Open</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuGroup>
+              <MenuGroupHeader>Header 1</MenuGroupHeader>
+              <MenuItem>Option 1</MenuItem>
+            </MenuGroup>
+            <MenuDivider></MenuDivider>
+            <MenuGroup>
+              <MenuGroupHeader>Header 2</MenuGroupHeader>
+              <MenuItem>Option 1</MenuItem>
+            </MenuGroup>
+          </MenuList>
+        </MenuPopover>
+      </Menu>,
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });
 
 describe('Menu rerender tests', () => {
