@@ -24,7 +24,8 @@ export const counterBadgeLookup = (layer: string, userProps: BadgeProps): boolea
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['badgeColor'] ||
-    (I18nManager.isRTL && layer === 'rtl')
+    (I18nManager.isRTL && layer === 'rtl') ||
+    (layer === 'list' && userProps.list)
   );
 };
 
@@ -40,7 +41,6 @@ export const CounterBadge = compose<CounterBadgeType>({
   useRender: (userProps: CounterBadgeProps, useSlots: UseSlots<CounterBadgeType>) => {
     const iconProps = createIconProps(userProps.icon);
     const badge = useCounterBadge(userProps);
-
     const Slots = useSlots(badge.props, (layer) => counterBadgeLookup(layer, badge.props));
 
     return (final: CounterBadgeProps, ...children: ReactNode[]) => {
