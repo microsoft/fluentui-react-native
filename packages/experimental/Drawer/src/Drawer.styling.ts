@@ -8,9 +8,9 @@ import { defaultDrawerTokens } from './DrawerTokens';
 export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, DrawerTokens> = {
   tokens: [defaultDrawerTokens, DrawerName],
   tokensThatAreAlsoProps: 'all',
-  states: ['left', 'right', 'bottom', 'scrimVisible'],
+  states: ['left', 'right', 'bottom'],
   slotProps: {
-    backdropContent: buildProps(
+    scrimContent: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({
         style: {
           position: 'absolute',
@@ -18,11 +18,11 @@ export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, Dr
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: tokens.backdropColor,
-          opacity: tokens.backdropOpacity,
+          backgroundColor: tokens.scrimColor,
+          opacity: tokens.scrimOpacity,
         },
       }),
-      ['backdropColor'],
+      ['scrimColor'],
     ),
     content: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({

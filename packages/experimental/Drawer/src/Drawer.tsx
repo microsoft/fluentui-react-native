@@ -18,8 +18,8 @@ export const Drawer = compose<DrawerType>({
   ...stylingSettings,
   slots: {
     modal: Modal,
-    backdrop: TouchableWithoutFeedback,
-    backdropContent: Animated.View,
+    scrim: TouchableWithoutFeedback,
+    scrimContent: Animated.View,
     content: Animated.View,
     handle: View,
   },
@@ -28,7 +28,7 @@ export const Drawer = compose<DrawerType>({
     const Slots = useSlots(userProps, (layer) => drawerLookup(layer, drawerProps));
 
     return (final: DrawerProps, children: React.ReactNode) => {
-      const { visible, onClose, onBackdropClick, animationConfig, position, ...rest } = mergeProps(drawerProps, final);
+      const { visible, onClose, onScrimClick, animationConfig, position, ...rest } = mergeProps(drawerProps, final);
       return (
         <Slots.modal
           {...rest}
@@ -38,9 +38,9 @@ export const Drawer = compose<DrawerType>({
           animationType="none"
           transparent
         >
-          <Slots.backdrop onPress={onBackdropClick}>
-            <Slots.backdropContent style={[{ opacity: animationConfig.animatedOpacity }]} />
-          </Slots.backdrop>
+          <Slots.scrim onPress={onScrimClick}>
+            <Slots.scrimContent style={[{ opacity: animationConfig.animatedOpacity }]} />
+          </Slots.scrim>
           <Slots.content style={animationConfig.animatedStyle}>
             {position === 'bottom' && <Slots.handle />}
             {children}

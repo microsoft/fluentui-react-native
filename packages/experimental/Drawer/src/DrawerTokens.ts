@@ -6,7 +6,7 @@ import type { DrawerTokens } from './Drawer.types';
 
 export const defaultDrawerTokens: TokenSettings<DrawerTokens, Theme> = (t: Theme) =>
   ({
-    backdropColor: '#00000080', // to be replace with token in future based on design guidance
+    scrimColor: '#00000080', // to be replace with token in future based on design guidance
     drawerBackgroundColor: t.colors.neutralBackground2,
     handleBackgroundColor: t.colors.neutralStroke1,
     handleWidth: globalTokens.size360,

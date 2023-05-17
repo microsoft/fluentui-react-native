@@ -11,14 +11,14 @@ export type DrawerPositionType = 'left' | 'right' | 'bottom';
 
 export interface DrawerTokens {
   /**
-   * The color of the backdrop.
+   * The color of the scrim.
    * */
-  backdropColor?: ColorValue;
+  scrimColor?: ColorValue;
 
   /**
-   * The opacity of the backdrop.
+   * The opacity of the scrim.
    * */
-  backdropOpacity?: number;
+  scrimOpacity?: number;
 
   /**
    * Width of the handle.
@@ -167,9 +167,9 @@ export interface DrawerProps extends PressableFocusProps {
   defaultOpen?: boolean;
 
   /**
-   * Callback when the backdrop is clicked
+   * Callback when the scrim is clicked
    * */
-  onBackdropClick?: (e: InteractionEvent) => void;
+  onScrimClick?: (e: InteractionEvent) => void;
 
   /**
    * The content of the Drawer
@@ -198,8 +198,8 @@ export interface DrawerInfo {
 
 export interface DrawerSlotProps {
   modal: ModalProps;
-  backdrop: TouchableWithoutFeedbackProps;
-  backdropContent: Animated.AnimatedProps<ViewProps>;
+  scrim: TouchableWithoutFeedbackProps;
+  scrimContent: Animated.AnimatedProps<ViewProps>;
   content: Animated.AnimatedProps<ViewProps>;
   handle: ViewProps;
 }

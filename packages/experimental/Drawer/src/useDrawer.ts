@@ -45,11 +45,11 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
     [props?.onClose],
   );
 
-  const onBackdropClick = useCallback(
+  const onScrimClick = useCallback(
     (e: InteractionEvent) => {
-      props?.onBackdropClick && props.onBackdropClick(e);
+      props?.onScrimClick && props.onScrimClick(e);
     },
-    [props?.onBackdropClick],
+    [props?.onScrimClick],
   );
 
   const animatedTranslateX = animatedValue.interpolate({
@@ -75,7 +75,7 @@ export const useDrawer = (props: DrawerProps): DrawerInfo => {
     props: {
       ...rest,
       onClose,
-      onBackdropClick,
+      onScrimClick,
       animationConfig: {
         animatedOpacity,
         animatedStyle,
