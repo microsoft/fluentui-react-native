@@ -5,11 +5,6 @@ exports[`Drawer component tests Drawer default 1`] = `
   animationType="none"
   hardwareAccelerated={false}
   onRequestClose={[Function]}
-  style={
-    Object {
-      "elevation": 10,
-    }
-  }
   supportedOrientations={
     Array [
       "portrait",
