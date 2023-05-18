@@ -19,25 +19,18 @@ export const defaultDrawerTokens: TokenSettings<DrawerTokens, Theme> = (t: Theme
     handleMarginStart: globalTokens.sizeNone,
     drawerElevation: globalTokens.size100,
     topPosition: 0,
-    leftSlideOver: {
+    left: {
       height: '100%',
       width: '80%',
       leftPosition: 0,
       drawerCornerRadius: 0,
     },
-    rightSlideOver: {
+    right: {
       height: '100%',
       width: '80%',
       rightPosition: 0,
       drawerCornerRadius: 0,
     },
-    bottomSlideOver: {
-      bottomPosition: 0,
-      width: '100%',
-      drawerCornerRadius: globalTokens.corner.radius120,
-      height: '50%',
-    },
-
     bottom: {
       bottomPosition: 0,
       width: '100%',

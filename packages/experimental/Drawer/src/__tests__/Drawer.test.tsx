@@ -12,7 +12,7 @@ describe('Drawer component tests', () => {
   it('Drawer default', () => {
     const tree = renderer
       .create(
-        <Drawer visible={false} behavior="leftSlideOver">
+        <Drawer open={false} drawerPosition="left">
           <Text>Hello</Text>
         </Drawer>,
       )

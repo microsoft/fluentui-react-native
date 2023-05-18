@@ -8,7 +8,7 @@ import { defaultDrawerTokens } from './DrawerTokens';
 export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, DrawerTokens> = {
   tokens: [defaultDrawerTokens, DrawerName],
   tokensThatAreAlsoProps: 'all',
-  states: ['leftSlideOver', 'rightSlideOver', 'bottomSlideOver', 'bottom'],
+  states: ['left', 'right', 'bottom'],
   slotProps: {
     scrimContent: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({
@@ -40,7 +40,7 @@ export const stylingSettings: UseStylingOptions<DrawerProps, DrawerSlotProps, Dr
           backgroundColor: tokens.drawerBackgroundColor,
         },
       }),
-      ['behavior', 'drawerBackgroundColor', 'drawerElevation', 'height', 'width'],
+      ['drawerBackgroundColor', 'drawerElevation', 'height', 'width'],
     ),
     handle: buildProps(
       (tokens: DrawerTokens, _theme: Theme) => ({

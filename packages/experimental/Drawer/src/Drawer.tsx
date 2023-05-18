@@ -10,7 +10,7 @@ import { DrawerName } from './Drawer.types';
 import { useDrawer } from './useDrawer';
 
 export const drawerLookup = (layer: string, userProps: DrawerProps): boolean => {
-  return userProps[layer] || layer === userProps['behavior'];
+  return userProps[layer] || layer === userProps['drawerPosition'];
 };
 
 export const Drawer = compose<DrawerType>({
@@ -27,11 +27,11 @@ export const Drawer = compose<DrawerType>({
     const drawerProps = useDrawer(userProps).props;
     const Slots = useSlots(userProps, (layer) => drawerLookup(layer, drawerProps));
     return (final: DrawerProps, children: React.ReactNode) => {
-      const { visible, onClose, onScrimClick, animationConfig, behavior, ...rest } = mergeProps(drawerProps, final);
+      const { open, onClose, onScrimClick, animationConfig, drawerPosition, showHandle, ...rest } = mergeProps(drawerProps, final);
       return (
         <Slots.modal
           {...rest}
-          visible={visible}
+          visible={open}
           onRequestClose={onClose}
           supportedOrientations={['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']}
           animationType="none"
@@ -41,7 +41,7 @@ export const Drawer = compose<DrawerType>({
             <Slots.scrimContent style={[{ opacity: animationConfig.animatedOpacity }]} />
           </Slots.scrim>
           <Slots.content style={animationConfig.animatedStyle}>
-            {behavior === 'bottomSlideOver' && <Slots.handle />}
+            {drawerPosition === 'bottom' && showHandle && <Slots.handle />}
             {children}
           </Slots.content>
         </Slots.modal>

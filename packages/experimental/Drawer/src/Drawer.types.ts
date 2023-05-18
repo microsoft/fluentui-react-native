@@ -7,7 +7,7 @@ export const DrawerName = 'Drawer';
 /**
  * Specifies the possible position of the Drawer.
  */
-export type DrawerBehaviorType = 'bottom' | 'leftSlideOver' | 'rightSlideOver' | 'bottomSlideOver';
+export type DrawerPositionType = 'bottom' | 'left' | 'right';
 
 export interface DrawerTokens {
   /**
@@ -125,25 +125,18 @@ export interface DrawerTokens {
    * */
 
   shadowRadius?: number;
-  /**
-   * The behavior of the Drawer
-   * @default 'leftSlideOver'
-   * */
-  behavior?: DrawerBehaviorType;
 
   /**
-   * Positions/Behaviours of the Drawer
+   * Positions/Behaviours of the Drawer, This is used to apply different tokens for different positions.
    */
 
-  leftSlideOver?: DrawerTokens;
-  rightSlideOver?: DrawerTokens;
-  bottomSlideOver?: DrawerTokens;
+  left?: DrawerTokens;
+  right?: DrawerTokens;
   bottom?: DrawerTokens;
 
   /**
-   * Coordinate position of the Drawer
+   * Coordinate position of the Drawer, This is used to position the Drawer at a particular coordinate.
    */
-
   leftPosition?: number;
   rightPosition?: number;
   bottomPosition?: number;
@@ -159,7 +152,7 @@ export interface DrawerProps extends PressableFocusProps {
   /**
    * Visibility of the Drawer
    */
-  visible?: boolean;
+  open?: boolean;
 
   /**
    * Callback when the Drawer is closed
@@ -170,11 +163,6 @@ export interface DrawerProps extends PressableFocusProps {
    * Callback when the Drawer is opened
    * */
   onOpen?: (e: InteractionEvent) => void;
-
-  /**
-   * Whether the Drawer is open on mount
-   */
-  defaultOpen?: boolean;
 
   /**
    * Callback when the scrim is clicked
@@ -188,9 +176,21 @@ export interface DrawerProps extends PressableFocusProps {
 
   /**
    * The behavior of the Drawer
-   * @default 'leftSlideOver'
+   * @default 'left'
    * */
-  behavior?: DrawerBehaviorType;
+  drawerPosition?: DrawerPositionType;
+
+  /**
+   * The behavior is for only bottom drawer in which content is scrollable without expanding the bottom drawer
+   * @default false
+   * */
+  isContentScrollableUnexpanded?: boolean;
+
+  /**
+   * The behavior is for only bottom drawer in which handle can be hidden for some usecases
+   * @default true
+   * */
+  showHandle?: boolean;
 
   /**
    * The width of the Drawer
