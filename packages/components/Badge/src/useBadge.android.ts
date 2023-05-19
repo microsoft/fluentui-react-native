@@ -12,7 +12,7 @@ export const useBadge = (props: BadgeProps): BadgeInfo => {
     accessibilityState,
     defaultSelected,
     selected,
-    onChange,
+    onSelectionChange,
     onAccessibilityAction,
     iconPosition = 'before',
     size = 'medium',
@@ -24,7 +24,7 @@ export const useBadge = (props: BadgeProps): BadgeInfo => {
     console.warn('defaultSelected and selected are mutually exclusive to one another. Use one or the other.');
   }
 
-  const [checkedValue, toggle] = useAsToggleWithEvent(defaultSelected, selected, onChange);
+  const [checkedValue, toggle] = useAsToggleWithEvent(defaultSelected, selected, onSelectionChange);
   const pressable = usePressableState({ onPress: toggle, ...rest });
   const onAccessibilityActionProp = React.useCallback(
     (event) => {

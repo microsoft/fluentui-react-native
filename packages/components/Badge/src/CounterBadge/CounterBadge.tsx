@@ -19,11 +19,11 @@ export const counterBadgeLookup = (layer: string, userProps: CounterBadgeProps):
     userProps[layer] ||
     layer === userProps['appearance'] ||
     layer === userProps['size'] ||
-    (!userProps['size'] && layer === 'large') ||
+    (layer === 'large' && !userProps['size']) ||
     layer === userProps['shape'] ||
-    (!userProps['shape'] && layer === 'circular') ||
+    (layer === 'circular' && !userProps['shape']) ||
     layer === userProps['badgeColor'] ||
-    (I18nManager.isRTL && layer === 'rtl') ||
+    (layer === 'rtl' && I18nManager.isRTL) ||
     (layer === 'list' && userProps.list)
   );
 };

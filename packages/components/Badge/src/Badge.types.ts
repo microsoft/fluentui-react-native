@@ -100,7 +100,7 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
    * Callback that is called when the selected value has changed.
    * @platform android
    */
-  onChange?: (e: InteractionEvent, isSelected: boolean) => void;
+  onSelectionChange?: (e: InteractionEvent, isSelected: boolean) => void;
 }
 export interface BadgeState extends PressableState {
   /**

@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import type { ReactNode } from 'react';
 import { Children } from 'react';
-import { Pressable, I18nManager, Platform } from 'react-native';
+import { Pressable, I18nManager, Platform, View } from 'react-native';
 
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -28,11 +28,12 @@ export const badgeLookup = (layer: string, userProps: BadgeProps, state: BadgeSt
   );
 };
 
+const hasToggleFunctionality = Platform.OS === 'android';
 export const Badge = compose<BadgeType>({
   displayName: badgeName,
   ...stylingSettings,
   slots: {
-    root: Pressable,
+    root: hasToggleFunctionality ? Pressable : View,
     icon: Icon,
     text: Text,
     shadow: Shadow,
@@ -46,7 +47,7 @@ export const Badge = compose<BadgeType>({
       const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge.props, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size !== 'tiny';
-      const hasToggleFunctionality = Platform.OS === 'android';
+
       return (
         <Slots.shadow>
           <Slots.root accessible={hasToggleFunctionality} {...mergedProps}>
