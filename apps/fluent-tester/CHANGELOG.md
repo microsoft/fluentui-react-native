@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 17 May 2023 21:03:42 GMT and should not be manually modified.
+This log was last generated on Fri, 19 May 2023 04:14:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.146.0
+
+Fri, 19 May 2023 04:14:45 GMT
+
+### Minor changes
+
+- feat: initial structuring for v1 js drawer (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/input to v0.2.2
+- Bump @fluentui-react-native/drawer to v0.1.0
 
 ## 0.145.0
 

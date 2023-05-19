@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: initial structuring for v1 js drawer",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
