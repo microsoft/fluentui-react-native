@@ -4,7 +4,8 @@ import type { BadgeTokens } from './Badge.types';
 
 export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
-    // neutral is default appearance on Android
+    // neutral is default appearance on Android.
+    // 'important', 'informative', 'subtle' are not supported on Android.
     backgroundColor: t.colors.neutralBackground5,
     color: t.colors.neutralForeground2,
     selected: {

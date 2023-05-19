@@ -65,6 +65,7 @@ The Basic Badge supports a square, rounded and circular shape.
 ### Sizes
 
 `Badge` supports next sizes: `tiny`, `extraSmall`, `small`, `medium`, `large`, `extraLarge`.
+On Android only `small`, `medium` are supported.
 
 ### Appearance
 
@@ -72,11 +73,13 @@ The `Badge` can be `filled`, `outline`, `tint`, `ghost`.
 
 ### Color
 
-The Badge supports preset and custom colors: `brand`, `danger`, `important`, `informative`, `severe`, `subtle`, `success`, `warning`
+The Badge supports preset and custom colors: `brand`, `danger`, `important`, `informative`, `severe`, `subtle`, `success`, `warning`.
+On Android `neutral` is the default and `brand`, `danger`, `severe`, `success`, `warning` are supported.
 
 ### Icon
 
 The `Badge` component can include an `icon`.
+Out of `small` and `medium` sizes for Android, the `icon` is shown only for `medium` size.
 
 ### Image
 
@@ -140,6 +143,7 @@ export interface BadgeConfigurableProps {
 export interface BadgeCoreProps {
   /**
    * A Badge can be square, circular or rounded.
+   * Not supported on Android.
    * @defaultvalue circular
    */
   shape?: BadgeShape;

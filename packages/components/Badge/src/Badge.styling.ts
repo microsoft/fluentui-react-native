@@ -118,7 +118,7 @@ export function getBadgePosition(tokens: BadgeCoreTokens) {
 
 export function getTextMargin(tokens: BadgeTokens) {
   if (tokens.icon) {
-    return tokens.iconPosition === 'before'
+    return tokens.iconPosition !== 'after'
       ? {
           marginStart: tokens.textMargin,
         }

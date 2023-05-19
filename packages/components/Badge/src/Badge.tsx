@@ -19,7 +19,7 @@ export const badgeLookup = (layer: string, userProps: BadgeProps, state: BadgeSt
     userProps[layer] ||
     layer === userProps['appearance'] ||
     layer === userProps['size'] ||
-    (layer === 'large' && !userProps['size']) ||
+    (layer === 'medium' && !userProps['size']) ||
     layer === userProps['shape'] ||
     (layer === 'circular' && !userProps['shape']) ||
     layer === userProps['badgeColor'] ||
@@ -46,7 +46,7 @@ export const Badge = compose<BadgeType>({
     return (final: BadgeProps, ...children: ReactNode[]) => {
       const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge.props, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
-      const showIcon = size !== 'tiny';
+      const showIcon = (size !== 'tiny' && Platform.OS !== 'android') || (size === 'medium' && Platform.OS === 'android');
 
       return (
         <Slots.shadow>

@@ -41,7 +41,7 @@ export const useBadge = (props: BadgeProps): BadgeInfo => {
   return {
     props: {
       iconPosition: iconPosition,
-      size,
+      size: size != 'small' && size != 'medium' ? 'medium' : size,
       accessibilityState: getAccessibilityState(checkedValue, accessibilityState),
       onAccessibilityAction: onAccessibilityActionProp,
       ...pressable.props,

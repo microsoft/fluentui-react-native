@@ -22,8 +22,10 @@ export type BadgeIconPosition = 'before' | 'after';
 
 export interface BadgeConfigurableProps {
   /**
-   * A Badge can be one of preset colors
-   * @defaultvalue brand
+   * A Badge can be one of preset colors.
+   * 'important', 'informative', 'subtle' are not supported on Android.
+   * @defaultvalue brand,
+   * @defaultvalue subtle on @platform android.
    */
   badgeColor?: BadgeColor;
 
@@ -63,6 +65,7 @@ export interface BadgeCoreProps extends IViewProps {
   shape?: BadgeShape;
 
   /** Sets style of Badge to a preset size style
+   * 'tiny', 'extraSmall', 'large', 'extraLarge' are not supported on Android.
    * @defaultvalue medium
    */
   size?: BadgeSize;
