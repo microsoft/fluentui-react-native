@@ -4,20 +4,6 @@ exports[`Badge component tests Badge all props 1`] = `
 <View
   accessible={false}
   appearance="outline"
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   shape="rounded"
   style={
     Object {
@@ -65,7 +51,7 @@ exports[`Badge component tests Badge all props 1`] = `
         "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
-        "marginEnd": 2,
+        "marginStart": 2,
       }
     }
   >
@@ -77,20 +63,6 @@ exports[`Badge component tests Badge all props 1`] = `
 exports[`Badge component tests Badge tokens 1`] = `
 <View
   accessible={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -102,8 +74,8 @@ exports[`Badge component tests Badge tokens 1`] = `
       "bottom": 0,
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 24,
-      "minWidth": 24,
+      "minHeight": 20,
+      "minWidth": 20,
       "paddingHorizontal": 4,
       "position": "relative",
       "right": 0,
@@ -120,7 +92,7 @@ exports[`Badge component tests Badge tokens 1`] = `
       Object {
         "color": "#ffffff",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 10,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -134,20 +106,6 @@ exports[`Badge component tests Badge tokens 1`] = `
 exports[`Badge component tests Empty Badge 1`] = `
 <View
   accessible={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -159,8 +117,8 @@ exports[`Badge component tests Empty Badge 1`] = `
       "bottom": 0,
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 24,
-      "minWidth": 24,
+      "minHeight": 20,
+      "minWidth": 20,
       "paddingHorizontal": 4,
       "position": "relative",
       "right": 0,
@@ -180,8 +138,8 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
       "borderRadius": 9999,
       "bottom": 0,
       "justifyContent": "center",
-      "minHeight": 24,
-      "minWidth": 24,
+      "minHeight": 20,
+      "minWidth": 20,
       "position": "relative",
       "right": 0,
       "shadowColor": "#000000",
@@ -197,20 +155,6 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
   <View
     accessible={false}
     appearance="filled"
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -221,8 +165,8 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
         "borderWidth": 1,
         "flexDirection": "row",
         "justifyContent": "center",
-        "minHeight": 24,
-        "minWidth": 24,
+        "minHeight": 20,
+        "minWidth": 20,
         "paddingHorizontal": 4,
         "position": "relative",
         "shadowColor": "#000000",
@@ -244,7 +188,7 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
         Object {
           "color": "#ffffff",
           "fontFamily": "Segoe UI",
-          "fontSize": 12,
+          "fontSize": 10,
           "fontWeight": "400",
           "margin": 0,
         }
@@ -274,6 +218,7 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
@@ -332,6 +277,7 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
@@ -376,6 +322,7 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
@@ -421,6 +368,7 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
@@ -465,6 +413,7 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
