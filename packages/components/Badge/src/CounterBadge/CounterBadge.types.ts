@@ -32,7 +32,8 @@ export interface CounterBadgeProps extends Omit<BadgeCoreProps, 'appearance' | '
   dot?: boolean;
 
   /**
-   * If the text badge is intended to be used a discovery surface.
+   * If the text badge is intended to be used a discovery surface
+   * (badge used in a list).
    * @default false, dot takes precendence if both are passed true.
    * @platform android
    */
