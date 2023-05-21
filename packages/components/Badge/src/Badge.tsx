@@ -39,14 +39,15 @@ export const Badge = compose<BadgeType>({
     shadow: Shadow,
   },
   useRender: (userProps: BadgeProps, useSlots: UseSlots<BadgeType>) => {
-    const iconProps = createIconProps(userProps.icon);
     const badge = useBadge(userProps);
     const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps, badge.state));
 
     return (final: BadgeProps, ...children: ReactNode[]) => {
-      const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge.props, final);
+      const { icon, iconPosition, size, showCloseIcon, ...mergedProps } = mergeProps(badge.props, final);
+      const iconProps = createIconProps(icon);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
-      const showIcon = (size !== 'tiny' && Platform.OS !== 'android') || (size === 'medium' && Platform.OS === 'android');
+      const showIcon =
+        (size !== 'tiny' && Platform.OS !== 'android') || ((size === 'medium' || showCloseIcon) && Platform.OS === 'android');
 
       return (
         <Slots.shadow>

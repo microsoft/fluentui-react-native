@@ -80,6 +80,8 @@ On Android `neutral` is the default and `brand`, `danger`, `severe`, `success`, 
 
 The `Badge` component can include an `icon`.
 Out of `small` and `medium` sizes for Android, the `icon` is shown only for `medium` size.
+Android also supports a default close icon in `selected` state. This is controlled by `showCloseIcon` prop.
+Note - Close icon is shown even for `small` size.
 
 ### Image
 
@@ -98,6 +100,19 @@ Example:
 
 Content is passed as part of `children` prop.
 For long Badges it's up to consumer how they want to truncate/hide the content.
+
+### Search Bar Badge
+
+Special styling is applied when the `Badge` is used in a `SearchBar` component.
+To enable this pass the `searchBar` prop to the `Badge`. Limited to Android.
+
+### States
+
+The following section describes the additional states a `Badge` can have.
+
+#### Selected state
+
+A selected `Badge` changes styling to communicate that the badge is currently selected or toggled. This is limited to Android.
 
 ## API
 
@@ -153,6 +168,7 @@ export interface BadgeCoreProps {
    */
   size?: BadgeSize;
 }
+
 export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
   /**
    * A Badge can have its content and borders styled for greater emphasis or to be subtle.
@@ -171,6 +187,45 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
    * @default before
    */
   iconPosition?: BadgeIconPosition;
+
+  /**
+   * Whether the Badge is disabled or not.
+   * @platform android
+   */
+  disabled?: boolean;
+
+  /**
+   * Selected state. Mutually exclusive to 'defaultSelected'. Use this if you control the selected state at a higher level
+   * and plan to pass in the correct value based on handling onChange events and re-rendering.
+   * @platform android
+   */
+  selected?: boolean;
+
+  /**
+   * Default selected state. Mutually exclusive to 'selected'. Use this if you want an uncontrolled component, and
+   * want the Badge instance to maintain its own state.
+   * @platform android
+   */
+  defaultSelected?: boolean;
+
+  /**
+   * Callback that is called when the selected value has changed.
+   * @platform android
+   */
+  onSelectionChange?: (e: InteractionEvent, isSelected: boolean) => void;
+
+  /**
+   * Apply when badge is intended to be used in a search bar.
+   * Special styling is applied to the badge.
+   * @platform android
+   */
+  searchBar?: boolean;
+
+  /**
+   * Show close icon when in 'selected' state.
+   * @platform android
+   */
+  showCloseIcon?: boolean;
 }
 ```
 
@@ -257,12 +312,18 @@ export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   subtle?: BadgeTokens;
   success?: BadgeTokens;
   warning?: BadgeTokens;
+  disabled?: BadgeTokens;
+  searchBar?: BadgeTokens;
+  /**
+   * Selected state tokens for Badge
+   */
+  selected?: BadgeTokens;
 }
 ```
 
 ### Accessibility
 
-Basic Badges do not recieve focus and are not accessible.
+Basic Badges do not recieve focus and are not accessible on all platforms other than Android.
 Information about the badge should be added to the element that hosts the Badge through the element's `accessibilityLabel`.
 
 ## PresenceBadge

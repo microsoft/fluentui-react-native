@@ -4,6 +4,7 @@ import type { AccessibilityState } from 'react-native';
 import { memoize } from '@fluentui-react-native/framework';
 import { usePressableState, useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
+import DismissSvg from './assets/DismissIcon';
 import type { BadgeInfo, BadgeProps } from './Badge.types';
 
 export const useBadge = (props: BadgeProps): BadgeInfo => {
@@ -16,6 +17,8 @@ export const useBadge = (props: BadgeProps): BadgeInfo => {
     onAccessibilityAction,
     iconPosition = 'before',
     size = 'medium',
+    icon,
+    showCloseIcon,
     ...rest
   } = props;
 
@@ -37,15 +40,15 @@ export const useBadge = (props: BadgeProps): BadgeInfo => {
     },
     [toggle, onAccessibilityAction],
   );
-
   return {
     props: {
       iconPosition: iconPosition,
-      size: size != 'small' && size != 'medium' ? 'medium' : size,
       accessibilityState: getAccessibilityState(checkedValue, accessibilityState),
       onAccessibilityAction: onAccessibilityActionProp,
       ...pressable.props,
       ...props,
+      size: size != 'small' && size != 'medium' ? 'medium' : size,
+      icon: showCloseIcon ? (!checkedValue ? icon : { svgSource: { src: DismissSvg } }) : icon,
     },
     state: {
       ...pressable.state,

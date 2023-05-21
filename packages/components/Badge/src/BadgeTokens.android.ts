@@ -22,6 +22,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       textMargin: globalTokens.size80,
     },
     small: {
+      iconSize: 16, // Used when close icon is active.
       borderRadius: globalTokens.corner.radius20,
       variant: 'caption1',
       paddingHorizontal: globalTokens.size40,
@@ -32,6 +33,12 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       position: 'relative',
       shadowToken: undefined,
       textMargin: globalTokens.sizeNone,
+      searchBar: {
+        borderRadius: globalTokens.corner.radius40,
+        variant: 'body2',
+        paddingHorizontal: globalTokens.size80,
+        paddingVertical: globalTokens.size20,
+      },
     },
     rtl: {
       left: globalTokens.sizeNone,

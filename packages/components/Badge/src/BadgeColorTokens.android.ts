@@ -23,10 +23,6 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         backgroundColor: t.colors.brandBackground,
         color: t.colors.neutralForegroundOnColor,
       },
-      disabled: {
-        backgroundColor: t.colors.neutralBackground5,
-        color: t.colors.neutralForegroundDisabled1,
-      },
     },
     danger: {
       backgroundColor: t.colors.dangerBackground1,
@@ -58,6 +54,30 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       selected: {
         backgroundColor: t.colors.successBackground2,
         color: t.colors.neutralForegroundLightStatic,
+      },
+    },
+    searchBar: {
+      backgroundColor: t.colors.neutralBackground6,
+      color: t.colors.neutralForeground1,
+      selected: {
+        backgroundColor: t.colors.brandBackgroundInverted,
+        color: t.colors.neutralForegroundOnColor,
+      },
+      disabled: {
+        backgroundColor: t.colors.neutralBackground6,
+        color: t.colors.neutralForegroundDisabled2,
+      },
+      brand: {
+        backgroundColor: t.colors.brandBackground3,
+        color: t.colors.neutralForegroundOnColor,
+        selected: {
+          backgroundColor: t.colors.neutralBackground1,
+          color: t.colors.brandForeground1,
+        },
+        disabled: {
+          backgroundColor: t.colors.brandBackground3,
+          color: t.colors.brandForeground1Disabled,
+        },
       },
     },
   } as BadgeTokens);

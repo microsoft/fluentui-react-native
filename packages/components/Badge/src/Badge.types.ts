@@ -25,7 +25,7 @@ export interface BadgeConfigurableProps {
    * A Badge can be one of preset colors.
    * 'important', 'informative', 'subtle' are not supported on Android.
    * @defaultvalue brand,
-   * @defaultvalue subtle on @platform android.
+   * @defaultvalue neutral on @platform android.
    */
   badgeColor?: BadgeColor;
 
@@ -104,6 +104,19 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
    * @platform android
    */
   onSelectionChange?: (e: InteractionEvent, isSelected: boolean) => void;
+
+  /**
+   * Apply when badge is intended to be used in a search bar.
+   * Special styling is applied to the badge.
+   * @platform android
+   */
+  searchBar?: boolean;
+
+  /**
+   * Show close icon when in 'selected' state.
+   * @platform android
+   */
+  showCloseIcon?: boolean;
 }
 export interface BadgeState extends PressableState {
   /**
@@ -212,7 +225,7 @@ export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   success?: BadgeTokens;
   warning?: BadgeTokens;
   disabled?: BadgeTokens;
-
+  searchBar?: BadgeTokens;
   /**
    * Selected state tokens for Badge
    */
@@ -220,7 +233,7 @@ export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
 }
 
 export interface BadgeSlotProps {
-  root: React.PropsWithRef<PressablePropsExtended>;
+  root: PressablePropsExtended;
   icon?: IconProps;
   text: TextProps;
   shadow?: ShadowProps;

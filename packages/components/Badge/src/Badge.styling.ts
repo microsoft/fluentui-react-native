@@ -11,6 +11,7 @@ import { defaultBadgeTokens } from './BadgeTokens';
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
 export const badgeStates: (keyof BadgeTokens)[] = [
   ...coreBadgeStates,
+  'searchBar', // Mobile only
   ...BadgeColors,
   ...BadgeAppearances,
   'rtl',
