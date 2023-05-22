@@ -1,11 +1,13 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
 import { tooltip, TooltipType, TooltipProps } from './Tooltip.types';
-import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Tooltip.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useTooltip } from './useTooltip';
+import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+
+const NativeTooltipView = ensureNativeComponent('RCTTooltip');
+
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the tooltip.
  *
@@ -21,8 +23,7 @@ export const Tooltip = compose<TooltipType>({
   displayName: tooltip,
   ...stylingSettings,
   slots: {
-    root: View,
-    text: Text,
+    root: NativeTooltipView,
   },
   useRender: (userProps: TooltipProps, useSlots: UseSlots<TooltipType>) => {
     const tooltipProps = useTooltip(userProps);
