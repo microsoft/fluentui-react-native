@@ -22,6 +22,9 @@ const badgeSections: TestSection[] = [
     name: 'Presence Badge',
     component: PresenceBadgeTest,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Badge E2E',
     component: E2EBadgeTest,
@@ -42,5 +45,7 @@ export const BadgeTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Badge/SPEC.md';
 
-  return <Test name="Badge Test" description={description} spec={spec} sections={badgeSections} status={status} />;
+  return (
+    <Test name="Badge Test" description={description} spec={spec} sections={badgeSections} status={status} e2eSections={e2eSections} />
+  );
 };
