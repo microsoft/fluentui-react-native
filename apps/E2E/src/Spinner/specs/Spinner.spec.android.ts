@@ -6,4 +6,9 @@ describe('Spinner Testing Initialization', () => {
     await SpinnerPageObject.waitForInitialPageToDisplay();
     expect(await SpinnerPageObject.isInitialPageDisplayed()).toBeTruthy(SpinnerPageObject.ERRORMESSAGE_APPLOAD);
   });
+
+  it('Click and navigate to Spinner test page', async () => {
+    await SpinnerPageObject.navigateToPageAndLoadTests();
+    expect(await SpinnerPageObject.isPageLoaded()).toBeTruthy(SpinnerPageObject.ERRORMESSAGE_PAGELOAD);
+  });
 });
