@@ -1,8 +1,54 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 11 May 2023 18:38:25 GMT and should not be manually modified.
+This log was last generated on Fri, 19 May 2023 04:14:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.146.0
+
+Fri, 19 May 2023 04:14:45 GMT
+
+### Minor changes
+
+- feat: initial structuring for v1 js drawer (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/input to v0.2.2
+- Bump @fluentui-react-native/drawer to v0.1.0
+
+## 0.145.0
+
+Wed, 17 May 2023 21:03:42 GMT
+
+### Minor changes
+
+- macOS MenuGroup (email not defined)
+- Bump @fluentui-react-native/menu to v1.9.0
+
+## 0.144.3
+
+Wed, 17 May 2023 07:07:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-expander to v0.5.27
+
+## 0.144.2
+
+Tue, 16 May 2023 20:17:41 GMT
+
+### Patches
+
+- Move RadioGroupV1 into main RadioGroup folder (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/radio-group to v0.16.47
+- Bump @fluentui/react-native to v0.36.26
+
+## 0.144.1
+
+Tue, 16 May 2023 16:53:28 GMT
+
+### Patches
+
+- removed horizontal layout tests (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/experimental-radio-group to v0.9.35
 
 ## 0.144.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
+This log was last generated on Wed, 17 May 2023 21:03:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.9.0
+
+Wed, 17 May 2023 21:03:42 GMT
+
+### Minor changes
+
+- macOS MenuGroup (email not defined)
 
 ## 1.8.1
 

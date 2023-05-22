@@ -58,3 +58,12 @@ export {
   useMenuListContextValue,
 } from './MenuList';
 export { MenuDivider, menuDividerName, MenuDividerProps, MenuDividerSlotProps, MenuDividerTokens, MenuDividerType } from './MenuDivider';
+export { MenuGroup, menuGroupName, MenuGroupProps, MenuGroupSlotProps, MenuGroupTokens, MenuGroupType } from './MenuGroup';
+export {
+  MenuGroupHeader,
+  menuGroupHeaderName,
+  MenuGroupHeaderProps,
+  MenuGroupHeaderSlotProps,
+  MenuGroupHeaderTokens,
+  MenuGroupHeaderType,
+} from './MenuGroupHeader';
