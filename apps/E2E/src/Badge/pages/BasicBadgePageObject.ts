@@ -1,6 +1,5 @@
-import { AndroidAttribute } from 'src/index.consts';
-
 import { BasePage, By } from '../../common/BasePage';
+import { AndroidAttribute } from '../../common/consts';
 import { BADGE_SECONDARY_TEST_COMPONENT, BADGE_TESTPAGE, BADGE_TEST_COMPONENT, BADGE_TEXT, HOMEPAGE_BADGE_BUTTON } from '../consts';
 
 class BasicBadgePageObject extends BasePage {
