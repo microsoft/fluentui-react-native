@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add E2E tests for Android, Hide all e2e tests behind switch",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
