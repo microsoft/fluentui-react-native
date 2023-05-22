@@ -1,27 +1,41 @@
-import { ViewProps } from 'react-native';
-import { TextProps } from '@fluentui-react-native/text';
-import { IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-
 export const tooltip = 'Tooltip';
-/**
- * This type is an example. Feel free to remove it.
- */
-export type TextSize = 'small' | 'medium' | 'large';
 
-export interface TooltipTokens extends LayoutTokens, IBorderTokens, IColorTokens {
-  small?: TooltipTokens;
-  medium?: TooltipTokens;
-  large?: TooltipTokens;
-}
+/**
+ * Properties and Tokens for FluentUI React Native Tooltip
+ */
+export type DirectionalHint =
+  | 'leftTopEdge'
+  | 'leftCenter'
+  | 'leftBottomEdge'
+  | 'topLeftEdge'
+  | 'topAutoEdge'
+  | 'topCenter'
+  | 'topRightEdge'
+  | 'rightTopEdge'
+  | 'rightCenter'
+  | 'rightBottomEdge'
+  | 'bottonLeftEdge'
+  | 'bottomAutoEdge'
+  | 'bottomCenter'
+  | 'bottomRightEdge';
+
+export interface TooltipTokens {}
 
 export interface TooltipProps {
-  textSize?: TextSize;
-  text?: string;
+  content: string;
+  target?: React.RefObject<React.Component>;
+  appearance?: 'normal' | 'inverted';
+  // hideDelay?: number;
+  onVisibleChange?: (event, data) => void;
+  positioning?: DirectionalHint;
+  relationship: 'label' | 'description' | 'inaccessible';
+  // showDelay: number;
+  visible: boolean;
+  withArrow: boolean;
 }
 
 export interface TooltipSlotProps {
-  root: ViewProps;
-  text: TextProps;
+  root: TooltipProps;
 }
 
 export interface TooltipType {
