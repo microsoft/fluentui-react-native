@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import * as renderer from 'react-test-renderer';
 
-import { RadioGroup, RadioButton } from '.';
+import { RadioGroup, RadioButton } from '../..';
 
 describe('RadioButton component tests', () => {
   it('RadioButton default', () => {

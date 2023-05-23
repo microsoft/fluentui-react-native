@@ -31,32 +31,14 @@ exports[`Radio component tests Radio default 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
   focusable={true}
-  keyDownEvents={
-    [
-      {
-        "key": "ArrowDown",
-      },
-      {
-        "key": "ArrowRight",
-      },
-      {
-        "key": "ArrowUp",
-      },
-      {
-        "key": "ArrowLeft",
-      },
-    ]
-  }
   labelPosition="after"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -65,10 +47,10 @@ exports[`Radio component tests Radio default 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
-      "alignItems": "flex-start",
+      "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
-      "paddingHorizontal": 4,
+      "paddingHorizontal": undefined,
       "paddingVertical": undefined,
     }
   }
@@ -93,14 +75,11 @@ exports[`Radio component tests Radio default 1`] = `
       }
     }
     accessible={false}
+    collapsable={false}
     focusable={false}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -110,18 +89,18 @@ exports[`Radio component tests Radio default 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#ffffff",
+        "backgroundColor": undefined,
         "borderColor": "#616161",
-        "borderRadius": 8,
+        "borderRadius": 10,
         "borderStyle": "solid",
-        "borderWidth": 1,
-        "height": 16,
+        "borderWidth": 1.5,
+        "height": 20,
         "justifyContent": "center",
-        "marginBottom": 6,
+        "marginBottom": 4,
         "marginLeft": 4,
-        "marginRight": 0,
-        "marginTop": 6,
-        "width": 16,
+        "marginRight": 4,
+        "marginTop": 4,
+        "width": 20,
       }
     }
   >
@@ -129,10 +108,10 @@ exports[`Radio component tests Radio default 1`] = `
       style={
         {
           "backgroundColor": undefined,
-          "borderRadius": 4,
-          "height": 8,
+          "borderRadius": 5,
+          "height": 10,
           "opacity": 0,
-          "width": 8,
+          "width": 10,
         }
       }
     />
@@ -140,15 +119,11 @@ exports[`Radio component tests Radio default 1`] = `
   <View
     style={
       {
-        "alignItems": "flex-start",
-        "borderColor": "#00000000",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 2,
+        "alignItems": undefined,
         "flexDirection": "column",
-        "marginLeft": 0,
-        "marginRight": 0,
-        "padding": undefined,
+        "marginLeft": 16,
+        "marginRight": undefined,
+        "padding": 2,
         "paddingRight": 0,
       }
     }
@@ -156,16 +131,14 @@ exports[`Radio component tests Radio default 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         {
           "color": "#242424",
           "fontFamily": "Segoe UI",
-          "fontSize": 12,
+          "fontSize": 13,
           "fontWeight": "400",
           "margin": 0,
           "marginHorizontal": 2,
-          "marginVertical": 4,
         }
       }
     >
@@ -205,33 +178,15 @@ exports[`Radio component tests Radio disabled 1`] = `
       "text": undefined,
     }
   }
-  accessible={true}
+  accessible={false}
+  collapsable={false}
+  enableFocusRing={true}
   focusable={false}
-  keyDownEvents={
-    [
-      {
-        "key": "ArrowDown",
-      },
-      {
-        "key": "ArrowRight",
-      },
-      {
-        "key": "ArrowUp",
-      },
-      {
-        "key": "ArrowLeft",
-      },
-    ]
-  }
   labelPosition="after"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -240,10 +195,10 @@ exports[`Radio component tests Radio disabled 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
-      "alignItems": "flex-start",
+      "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
-      "paddingHorizontal": 4,
+      "paddingHorizontal": undefined,
       "paddingVertical": undefined,
     }
   }
@@ -268,14 +223,11 @@ exports[`Radio component tests Radio disabled 1`] = `
       }
     }
     accessible={false}
+    collapsable={false}
     focusable={false}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -285,18 +237,18 @@ exports[`Radio component tests Radio disabled 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#f0f0f0",
+        "backgroundColor": undefined,
         "borderColor": "#e0e0e0",
-        "borderRadius": 8,
+        "borderRadius": 10,
         "borderStyle": "solid",
-        "borderWidth": 1,
-        "height": 16,
+        "borderWidth": 1.5,
+        "height": 20,
         "justifyContent": "center",
-        "marginBottom": 6,
+        "marginBottom": 4,
         "marginLeft": 4,
-        "marginRight": 0,
-        "marginTop": 6,
-        "width": 16,
+        "marginRight": 4,
+        "marginTop": 4,
+        "width": 20,
       }
     }
   >
@@ -304,10 +256,10 @@ exports[`Radio component tests Radio disabled 1`] = `
       style={
         {
           "backgroundColor": undefined,
-          "borderRadius": 4,
-          "height": 8,
+          "borderRadius": 5,
+          "height": 10,
           "opacity": 0,
-          "width": 8,
+          "width": 10,
         }
       }
     />
@@ -315,15 +267,11 @@ exports[`Radio component tests Radio disabled 1`] = `
   <View
     style={
       {
-        "alignItems": "flex-start",
-        "borderColor": "#00000000",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 2,
+        "alignItems": undefined,
         "flexDirection": "column",
-        "marginLeft": 0,
-        "marginRight": 0,
-        "padding": undefined,
+        "marginLeft": 16,
+        "marginRight": undefined,
+        "padding": 2,
         "paddingRight": 0,
       }
     }
@@ -331,16 +279,14 @@ exports[`Radio component tests Radio disabled 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         {
           "color": "#bdbdbd",
           "fontFamily": "Segoe UI",
-          "fontSize": 12,
+          "fontSize": 13,
           "fontWeight": "400",
           "margin": 0,
           "marginHorizontal": 2,
-          "marginVertical": 4,
         }
       }
     >

@@ -10,6 +10,7 @@ export * from './common/consts';
 export * from './ContextualMenu/consts';
 export * from './CornerRadiusTokens/consts';
 export * from './Divider/consts';
+export * from './Drawer/consts';
 export * from './FocusTrapZone/consts';
 export * from './FocusZone/consts';
 export * from './IconLegacy/consts';

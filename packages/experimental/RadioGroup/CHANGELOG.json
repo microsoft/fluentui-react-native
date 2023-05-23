@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Tue, 16 May 2023 20:17:41 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.9.36",
+      "version": "0.9.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "be95baa6b4c489a8abe0f51594fb87876f732cd1",
+            "comment": "Move RadioGroupV1 into main RadioGroup folder"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.16.47",
+            "commit": "be95baa6b4c489a8abe0f51594fb87876f732cd1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 16 May 2023 16:53:27 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.9.35",
       "version": "0.9.35",

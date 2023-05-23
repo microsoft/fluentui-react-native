@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 17 May 2023 21:03:42 GMT",
+      "tag": "@fluentui-react-native/menu_v1.9.0",
+      "version": "1.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "604a9ede93e082dc5712c1035bdc04f04a7b82ae",
+            "comment": "macOS MenuGroup"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 May 2023 07:08:52 GMT",
       "tag": "@fluentui-react-native/menu_v1.8.1",
       "version": "1.8.1",
