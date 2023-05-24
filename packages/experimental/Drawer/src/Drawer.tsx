@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { Animated, Modal, TouchableWithoutFeedback, View } from 'react-native';
 
