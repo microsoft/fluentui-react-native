@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add macOS status tokens and accessible mobile stroke colors to AliasColorTokens interface",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

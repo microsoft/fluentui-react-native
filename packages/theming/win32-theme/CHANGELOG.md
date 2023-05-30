@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
+This log was last generated on Tue, 30 May 2023 20:34:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.12
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Add macOS status tokens and accessible mobile stroke colors to AliasColorTokens interface (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.18.4
+- Bump @fluentui-react-native/theme-tokens to v0.24.7
+- Bump @fluentui-react-native/theme-types to v0.31.2
+- Bump @fluentui-react-native/theme to v0.8.5
+- Bump @fluentui-react-native/theming-utils to v0.23.12
 
 ## 0.25.11
 
