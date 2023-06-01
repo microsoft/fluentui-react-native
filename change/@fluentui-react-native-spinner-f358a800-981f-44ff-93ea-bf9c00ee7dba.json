@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "switch to RN Native Antive Container for animation",
+  "packageName": "@fluentui-react-native/spinner",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
