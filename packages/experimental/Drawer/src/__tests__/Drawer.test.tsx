@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 
 import * as renderer from 'react-test-renderer';
 
-import { Drawer } from '../Drawer';
+// import { Drawer } from '../Drawer';
 
 // mocks out setTimeout and other timer functions with mock functions , test will fail without this as we're using Animated API
 jest.useFakeTimers();

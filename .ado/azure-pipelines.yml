@@ -69,6 +69,8 @@ jobs:
     pool:
       vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
+    variables:
+      platform: 'macos'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -95,16 +97,16 @@ jobs:
       - template: templates/apple-xcode-select.yml
 
       - bash: |
-          echo "pod install ${{parameters.platform}}"
+          echo "pod install $(platform)"
           pod install
-        workingDirectory: apps/fluent-tester/${{parameters.platform}}
-        displayName: 'pod install ${{parameters.platform}}'
+        workingDirectory: apps/fluent-tester/$(platform)
+        displayName: 'pod install $(platform)'
 
-        - bash: |
-            echo "yarn ${{parameters.platform}}"
-            yarn ${{parameters.platform}}
+      - bash: |
+          echo "yarn $(platform)"
+          yarn $(platform)
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn ${{parameters.platform}}'
+        displayName: 'yarn $(platform)'
 
       - template: templates/e2e-testing-macos.yml
 
@@ -113,6 +115,8 @@ jobs:
     pool:
       vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
+    variables:
+      platform: 'ios'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -139,24 +143,24 @@ jobs:
       - template: templates/apple-xcode-select.yml
 
       - bash: |
-          echo "pod install ${{parameters.platform}}"
+          echo "pod install $(platform)"
           pod install
-        workingDirectory: apps/fluent-tester/${{parameters.platform}}
-        displayName: 'pod install ${{parameters.platform}}'
+        workingDirectory: apps/fluent-tester/$(platform)
+        displayName: 'pod install $(platform)'
 
       - bash: |
           echo "Pre boot simulator"
           UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-16-2)
           xcrun simctl boot $UDID
         workingDirectory: apps/fluent-tester
-        condition: and(succeeded(), eq('${{ parameters.platform }}', 'ios'))
+        condition: and(succeeded(), eq('$(platform)', 'ios'))
         displayName: 'Boot simulator'
 
       - bash: |
-          echo "yarn ${{parameters.platform}}"
-          yarn ${{parameters.platform}} --simulator "iPhone 14"
+          echo "yarn $(platform)"
+          yarn $(platform) --simulator "iPhone 14"
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn ${{parameters.platform}}'
+        displayName: 'yarn $(platform)x'
 
       - template: templates/e2e-testing-ios.yml
 
