@@ -14,8 +14,8 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'iOS',
-      'appium:platformVersion': '16.2',
-      'appium:deviceName': 'iPhone 13',
+      'appium:platformVersion': '16.4',
+      'appium:deviceName': 'iPhone 14 Pro',
       'appium:automationName': 'XCUITest',
       'appium:bundleId': 'com.microsoft.ReactTestApp',
     },
