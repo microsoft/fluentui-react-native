@@ -94,9 +94,17 @@ jobs:
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
-      - template: templates/apple-yarn-build.yml
-        parameters:
-          platform: 'macos'
+      - bash: |
+          echo "pod install ${{parameters.platform}}"
+          pod install
+        workingDirectory: apps/fluent-tester/${{parameters.platform}}
+        displayName: 'pod install ${{parameters.platform}}'
+
+        - bash: |
+            echo "yarn ${{parameters.platform}}"
+            yarn ${{parameters.platform}}
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn ${{parameters.platform}}'
 
       - template: templates/e2e-testing-macos.yml
 
@@ -130,9 +138,25 @@ jobs:
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
-      - template: templates/apple-yarn-build.yml
-        parameters:
-          platform: 'ios'
+      - bash: |
+          echo "pod install ${{parameters.platform}}"
+          pod install
+        workingDirectory: apps/fluent-tester/${{parameters.platform}}
+        displayName: 'pod install ${{parameters.platform}}'
+
+      - bash: |
+          echo "Pre boot simulator"
+          UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-16-2)
+          xcrun simctl boot $UDID
+        workingDirectory: apps/fluent-tester
+        condition: and(succeeded(), eq('${{ parameters.platform }}', 'ios'))
+        displayName: 'Boot simulator'
+
+      - bash: |
+          echo "yarn ${{parameters.platform}}"
+          yarn ${{parameters.platform}} --simulator "iPhone 14"
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn ${{parameters.platform}}'
 
       - template: templates/e2e-testing-ios.yml
 
