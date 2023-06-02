@@ -16,12 +16,12 @@ export type OnPressWithFocusCallback = (args: GestureResponderEvent) => void;
 export function useOnPressWithFocus(focusRef: React.RefObject<any>, userCallback: OnPressCallback): OnPressWithFocusCallback {
   const onPressWithFocus = React.useCallback(
     (args?: any) => {
-      userCallback?.(args);
-
       const platformSupportsFocus = ['windows', 'win32', 'macos'].includes(Platform.OS as string);
       if (platformSupportsFocus) {
         focusRef?.current?.focus();
       }
+
+      userCallback?.(args);
     },
     [userCallback, focusRef],
   );
