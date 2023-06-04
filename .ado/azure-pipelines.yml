@@ -153,7 +153,6 @@ jobs:
           UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-16-2)
           xcrun simctl boot $UDID
         workingDirectory: apps/fluent-tester
-        condition: and(succeeded(), eq('$(platform)', 'ios'))
         displayName: 'Boot simulator'
 
       - bash: |

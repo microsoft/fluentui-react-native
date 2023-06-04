@@ -827,11 +827,11 @@ exports[`Menu component tests Menu submenu 1`] = `
 exports[`Menu open menu group and menu header 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -839,19 +839,31 @@ exports[`Menu open menu group and menu header 1`] = `
   accessibilityLabel="Open"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
       "expanded": true,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -873,7 +885,7 @@ exports[`Menu open menu group and menu header 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -897,7 +909,7 @@ exports[`Menu open menu group and menu header 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
