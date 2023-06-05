@@ -6,7 +6,9 @@
  */
 
 const path = require('path');
+const { makeMetroConfig } = require('@rnx-kit/metro-config');
 const { defaultWatchFolders, exclusionList, resolveUniqueModule } = require('@rnx-kit/metro-config');
+const { MetroSerializer, esbuildTransformerConfig } = require('@rnx-kit/metro-serializer-esbuild');
 const { getDefaultConfig } = require('metro-config');
 
 const [reactIs, reactIsExcludePattern] = resolveUniqueModule('react-is');
@@ -62,5 +64,11 @@ module.exports = (async () => {
         },
       }),
     },
+    ...makeMetroConfig({
+      serializer: {
+        customSerializer: MetroSerializer(),
+      },
+      transformer: esbuildTransformerConfig,
+    }),
   };
 })();

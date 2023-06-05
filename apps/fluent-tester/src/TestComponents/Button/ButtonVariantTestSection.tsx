@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { Button, CompoundButton, FAB } from '@fluentui-react-native/experimental-button';
+import { Button, CompoundButton } from '@fluentui-react-native/experimental-button';
 
-import { iconProps } from '../Common/iconExamples';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 // Test also pulls button from deprecated package to ensure it's still working
@@ -42,9 +41,6 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
         Subtle
       </CompoundButton>
-      <FAB icon={iconProps} style={commonTestStyles.vmargin}>
-        FAB
-      </FAB>
     </View>
   );
 };

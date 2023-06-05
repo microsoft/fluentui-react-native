@@ -1,3 +1,11 @@
+const env = process.env.BABEL_ENV || process.env.NODE_ENV;
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: [
+    [
+      'module:metro-react-native-babel-preset',
+      {
+        disableImportExportTransform: env === 'production' && process.env['RNX_METRO_SERIALIZER_ESBUILD'],
+      },
+    ],
+  ],
 };

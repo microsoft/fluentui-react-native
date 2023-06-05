@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 
-import { ButtonV1 as Button, CompoundButton, FAB } from '@fluentui/react-native';
+import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
 
 import { iconProps } from '../Common/iconExamples';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
@@ -80,14 +80,6 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
           <Button size="large" appearance="primary" icon={iconProps} style={commonTestStyles.vmargin}>
             Large Button with icon
           </Button>
-          {Platform.OS == 'android' && (
-            <FAB size="small" icon={iconProps} style={commonTestStyles.vmargin}>
-              Small FAB
-            </FAB>
-          )}
-          <FAB size="large" icon={iconProps} style={commonTestStyles.vmargin}>
-            Large FAB
-          </FAB>
         </>
       )}
       <Button size="small" style={commonTestStyles.vmargin}>
