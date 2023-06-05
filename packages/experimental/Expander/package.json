@@ -36,15 +36,14 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@types/react-native": "^0.68.0",
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-windows": "^0.68.0"
+    "react": "18.2.0",
+    "react-native": "^0.71.0",
+    "react-native-windows": "^0.71.0"
   },
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-windows": "^0.68.0"
+    "react": "18.2.0",
+    "react-native": "^0.71.0",
+    "react-native-windows": "^0.71.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -53,7 +52,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.68"
+        "react-native@0.71"
       ],
       "capabilities": [
         "core",

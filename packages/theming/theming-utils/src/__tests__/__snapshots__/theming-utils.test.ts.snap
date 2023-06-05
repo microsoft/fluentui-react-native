@@ -1,68 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapFontPipelineToTheme test blackAliasTokens 1`] = `
-Object {
-  "body1": Object {
+{
+  "body1": {
     "face": "primary",
     "size": 12,
     "weight": "400",
   },
-  "body1Strong": Object {
+  "body1Strong": {
     "face": "primary",
     "size": 12,
     "weight": "600",
   },
-  "body2": Object {
+  "body2": {
     "face": "primary",
     "size": 14,
     "weight": "400",
   },
-  "body2Strong": Object {
+  "body2Strong": {
     "face": "primary",
     "size": 14,
     "weight": "600",
   },
-  "caption1": Object {
+  "caption1": {
     "face": "primary",
     "size": 10,
     "weight": "400",
   },
-  "display": Object {
+  "display": {
     "face": "primary",
     "size": 40,
     "weight": "600",
   },
-  "largeTitle": Object {
+  "largeTitle": {
     "face": "primary",
     "size": 40,
     "weight": "400",
   },
-  "subtitle1": Object {
+  "subtitle1": {
     "face": "primary",
     "size": 20,
     "weight": "400",
   },
-  "subtitle1Strong": Object {
+  "subtitle1Strong": {
     "face": "primary",
     "size": 20,
     "weight": "600",
   },
-  "subtitle2": Object {
+  "subtitle2": {
     "face": "primary",
     "size": 16,
     "weight": "400",
   },
-  "subtitle2Strong": Object {
+  "subtitle2Strong": {
     "face": "primary",
     "size": 16,
     "weight": "600",
   },
-  "title1": Object {
+  "title1": {
     "face": "primary",
     "size": 28,
     "weight": "400",
   },
-  "title1Strong": Object {
+  "title1Strong": {
     "face": "primary",
     "size": 28,
     "weight": "600",
@@ -71,68 +71,68 @@ Object {
 `;
 
 exports[`mapFontPipelineToTheme test colorfulAliasTokens 1`] = `
-Object {
-  "body1": Object {
+{
+  "body1": {
     "face": "primary",
     "size": 12,
     "weight": "400",
   },
-  "body1Strong": Object {
+  "body1Strong": {
     "face": "primary",
     "size": 12,
     "weight": "600",
   },
-  "body2": Object {
+  "body2": {
     "face": "primary",
     "size": 14,
     "weight": "400",
   },
-  "body2Strong": Object {
+  "body2Strong": {
     "face": "primary",
     "size": 14,
     "weight": "600",
   },
-  "caption1": Object {
+  "caption1": {
     "face": "primary",
     "size": 10,
     "weight": "400",
   },
-  "display": Object {
+  "display": {
     "face": "primary",
     "size": 40,
     "weight": "600",
   },
-  "largeTitle": Object {
+  "largeTitle": {
     "face": "primary",
     "size": 40,
     "weight": "400",
   },
-  "subtitle1": Object {
+  "subtitle1": {
     "face": "primary",
     "size": 20,
     "weight": "400",
   },
-  "subtitle1Strong": Object {
+  "subtitle1Strong": {
     "face": "primary",
     "size": 20,
     "weight": "600",
   },
-  "subtitle2": Object {
+  "subtitle2": {
     "face": "primary",
     "size": 16,
     "weight": "400",
   },
-  "subtitle2Strong": Object {
+  "subtitle2Strong": {
     "face": "primary",
     "size": 16,
     "weight": "600",
   },
-  "title1": Object {
+  "title1": {
     "face": "primary",
     "size": 28,
     "weight": "400",
   },
-  "title1Strong": Object {
+  "title1Strong": {
     "face": "primary",
     "size": 28,
     "weight": "600",
@@ -141,68 +141,68 @@ Object {
 `;
 
 exports[`mapFontPipelineToTheme test darkGrayAliasTokens 1`] = `
-Object {
-  "body1": Object {
+{
+  "body1": {
     "face": "primary",
     "size": 12,
     "weight": "400",
   },
-  "body1Strong": Object {
+  "body1Strong": {
     "face": "primary",
     "size": 12,
     "weight": "600",
   },
-  "body2": Object {
+  "body2": {
     "face": "primary",
     "size": 14,
     "weight": "400",
   },
-  "body2Strong": Object {
+  "body2Strong": {
     "face": "primary",
     "size": 14,
     "weight": "600",
   },
-  "caption1": Object {
+  "caption1": {
     "face": "primary",
     "size": 10,
     "weight": "400",
   },
-  "display": Object {
+  "display": {
     "face": "primary",
     "size": 40,
     "weight": "600",
   },
-  "largeTitle": Object {
+  "largeTitle": {
     "face": "primary",
     "size": 40,
     "weight": "400",
   },
-  "subtitle1": Object {
+  "subtitle1": {
     "face": "primary",
     "size": 20,
     "weight": "400",
   },
-  "subtitle1Strong": Object {
+  "subtitle1Strong": {
     "face": "primary",
     "size": 20,
     "weight": "600",
   },
-  "subtitle2": Object {
+  "subtitle2": {
     "face": "primary",
     "size": 16,
     "weight": "400",
   },
-  "subtitle2Strong": Object {
+  "subtitle2Strong": {
     "face": "primary",
     "size": 16,
     "weight": "600",
   },
-  "title1": Object {
+  "title1": {
     "face": "primary",
     "size": 28,
     "weight": "400",
   },
-  "title1Strong": Object {
+  "title1Strong": {
     "face": "primary",
     "size": 28,
     "weight": "600",
@@ -211,169 +211,169 @@ Object {
 `;
 
 exports[`mapPipelineToShadow test darkShadowTokens 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
+{
+  "shadow16": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000047",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow16brand": Object {
-    "ambient": Object {
+  "shadow16brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000040",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow2": Object {
-    "ambient": Object {
+  "shadow2": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000047",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow28": Object {
-    "ambient": Object {
+  "shadow28": {
+    "ambient": {
       "blur": 8,
       "color": "#00000066",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#0000007a",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow28brand": Object {
-    "ambient": Object {
+  "shadow28brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#00000040",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow2brand": Object {
-    "ambient": Object {
+  "shadow2brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000040",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow4": Object {
-    "ambient": Object {
+  "shadow4": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000047",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow4brand": Object {
-    "ambient": Object {
+  "shadow4brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000040",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow64": Object {
-    "ambient": Object {
+  "shadow64": {
+    "ambient": {
       "blur": 8,
       "color": "#00000066",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#0000007a",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow64brand": Object {
-    "ambient": Object {
+  "shadow64brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#00000040",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow8": Object {
-    "ambient": Object {
+  "shadow8": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000047",
       "x": 0,
       "y": 4,
     },
   },
-  "shadow8brand": Object {
-    "ambient": Object {
+  "shadow8brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000040",
       "x": 0,
@@ -384,169 +384,169 @@ Object {
 `;
 
 exports[`mapPipelineToShadow test hcShadowTokens 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
+{
+  "shadow16": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000047",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow16brand": Object {
-    "ambient": Object {
+  "shadow16brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000040",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow2": Object {
-    "ambient": Object {
+  "shadow2": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000047",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow28": Object {
-    "ambient": Object {
+  "shadow28": {
+    "ambient": {
       "blur": 8,
       "color": "#00000066",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#0000007a",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow28brand": Object {
-    "ambient": Object {
+  "shadow28brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#00000040",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow2brand": Object {
-    "ambient": Object {
+  "shadow2brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000040",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow4": Object {
-    "ambient": Object {
+  "shadow4": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000047",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow4brand": Object {
-    "ambient": Object {
+  "shadow4brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000040",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow64": Object {
-    "ambient": Object {
+  "shadow64": {
+    "ambient": {
       "blur": 8,
       "color": "#00000066",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#0000007a",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow64brand": Object {
-    "ambient": Object {
+  "shadow64brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#00000040",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow8": Object {
-    "ambient": Object {
+  "shadow8": {
+    "ambient": {
       "blur": 2,
       "color": "#0000003d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000047",
       "x": 0,
       "y": 4,
     },
   },
-  "shadow8brand": Object {
-    "ambient": Object {
+  "shadow8brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000040",
       "x": 0,
@@ -557,169 +557,169 @@ Object {
 `;
 
 exports[`mapPipelineToShadow test lightShadowTokens 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
+{
+  "shadow16": {
+    "ambient": {
       "blur": 2,
       "color": "#0000001f",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000024",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow16brand": Object {
-    "ambient": Object {
+  "shadow16brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 16,
       "color": "#00000040",
       "x": 0,
       "y": 8,
     },
   },
-  "shadow2": Object {
-    "ambient": Object {
+  "shadow2": {
+    "ambient": {
       "blur": 2,
       "color": "#0000001f",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000024",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow28": Object {
-    "ambient": Object {
+  "shadow28": {
+    "ambient": {
       "blur": 8,
       "color": "#00000033",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#0000003d",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow28brand": Object {
-    "ambient": Object {
+  "shadow28brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 28,
       "color": "#00000040",
       "x": 0,
       "y": 14,
     },
   },
-  "shadow2brand": Object {
-    "ambient": Object {
+  "shadow2brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 2,
       "color": "#00000040",
       "x": 0,
       "y": 1,
     },
   },
-  "shadow4": Object {
-    "ambient": Object {
+  "shadow4": {
+    "ambient": {
       "blur": 2,
       "color": "#0000001f",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000024",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow4brand": Object {
-    "ambient": Object {
+  "shadow4brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 4,
       "color": "#00000040",
       "x": 0,
       "y": 2,
     },
   },
-  "shadow64": Object {
-    "ambient": Object {
+  "shadow64": {
+    "ambient": {
       "blur": 8,
       "color": "#00000033",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#0000003d",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow64brand": Object {
-    "ambient": Object {
+  "shadow64brand": {
+    "ambient": {
       "blur": 8,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 64,
       "color": "#00000040",
       "x": 0,
       "y": 32,
     },
   },
-  "shadow8": Object {
-    "ambient": Object {
+  "shadow8": {
+    "ambient": {
       "blur": 2,
       "color": "#0000001f",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000024",
       "x": 0,
       "y": 4,
     },
   },
-  "shadow8brand": Object {
-    "ambient": Object {
+  "shadow8brand": {
+    "ambient": {
       "blur": 2,
       "color": "#0000004d",
       "x": 0,
       "y": 0,
     },
-    "key": Object {
+    "key": {
       "blur": 8,
       "color": "#00000040",
       "x": 0,
@@ -730,7 +730,7 @@ Object {
 `;
 
 exports[`mapPipelineToTheme test darkAliasTokens 1`] = `
-Object {
+{
   "brandBackground": "#1651aa",
   "brandBackground2": "#004578",
   "brandBackgroundDisabled": undefined,
@@ -887,7 +887,7 @@ Object {
 `;
 
 exports[`mapPipelineToTheme test lightAliasTokens 1`] = `
-Object {
+{
   "brandBackground": "#185abd",
   "brandBackground2": "#eff6fc",
   "brandBackgroundDisabled": undefined,

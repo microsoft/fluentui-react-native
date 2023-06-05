@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from 'react';
 import type { ColorValue } from 'react-native';
 
 export const expanderName = 'Expander';
@@ -9,7 +10,7 @@ export const expanderName = 'Expander';
  * To include more complex layouts for the header or content, wrap multiple header/content elements inside of a <View>
  */
 
-export interface ExpanderProps {
+export type ExpanderProps = PropsWithChildren<{
   /**
    * Direction to expand the Expander.
    */
@@ -42,7 +43,7 @@ export interface ExpanderProps {
    * A callback to call on Expander expanding event
    */
   onExpanding?: () => void;
-}
+}>;
 
 export interface ExpanderTokens {
   /**

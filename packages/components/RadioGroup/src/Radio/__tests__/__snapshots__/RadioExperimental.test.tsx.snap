@@ -3,8 +3,8 @@
 exports[`Radio component tests Radio default 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Select",
       },
     ]
@@ -14,9 +14,20 @@ exports[`Radio component tests Radio default 1`] = `
   accessibilityRole="radio"
   accessibilitySetSize={0}
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": false,
+      "expanded": undefined,
       "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -35,7 +46,7 @@ exports[`Radio component tests Radio default 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -46,6 +57,23 @@ exports[`Radio component tests Radio default 1`] = `
   value="key1"
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={false}
     collapsable={false}
     focusable={false}
@@ -59,7 +87,7 @@ exports[`Radio component tests Radio default 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": undefined,
         "borderColor": "#616161",
@@ -78,7 +106,7 @@ exports[`Radio component tests Radio default 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": undefined,
           "borderRadius": 5,
           "height": 10,
@@ -90,7 +118,7 @@ exports[`Radio component tests Radio default 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": undefined,
         "flexDirection": "column",
         "marginLeft": 16,
@@ -104,7 +132,7 @@ exports[`Radio component tests Radio default 1`] = `
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#242424",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -123,8 +151,8 @@ exports[`Radio component tests Radio default 1`] = `
 exports[`Radio component tests Radio disabled 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Select",
       },
     ]
@@ -134,9 +162,20 @@ exports[`Radio component tests Radio disabled 1`] = `
   accessibilityRole="radio"
   accessibilitySetSize={0}
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": true,
+      "expanded": undefined,
       "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={false}
@@ -155,7 +194,7 @@ exports[`Radio component tests Radio disabled 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -167,8 +206,20 @@ exports[`Radio component tests Radio disabled 1`] = `
 >
   <View
     accessibilityState={
-      Object {
+      {
+        "busy": undefined,
+        "checked": undefined,
         "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={false}
@@ -184,7 +235,7 @@ exports[`Radio component tests Radio disabled 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": undefined,
         "borderColor": "#e0e0e0",
@@ -203,7 +254,7 @@ exports[`Radio component tests Radio disabled 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": undefined,
           "borderRadius": 5,
           "height": 10,
@@ -215,7 +266,7 @@ exports[`Radio component tests Radio disabled 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": undefined,
         "flexDirection": "column",
         "marginLeft": 16,
@@ -229,7 +280,7 @@ exports[`Radio component tests Radio disabled 1`] = `
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#bdbdbd",
           "fontFamily": "Segoe UI",
           "fontSize": 13,

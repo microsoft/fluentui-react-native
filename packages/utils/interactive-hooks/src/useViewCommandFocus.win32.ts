@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { findNodeHandle, UIManager } from 'react-native';
 
-import type { IViewWin32 } from '@office-iss/react-native-win32';
+import type { ViewWin32 } from '@office-iss/react-native-win32';
 
 import { setAndForwardRef } from './setAndForwardRef';
 
-export type IFocusable = IViewWin32;
+export type IFocusable = ViewWin32;
 /**
  * A hook to add an imperative focus method to functional components which simply dispatch a focus command to
  * something View-derived on the native side.  In practice, this effectively applies to all components in our Win32
@@ -14,7 +14,7 @@ export type IFocusable = IViewWin32;
  * @returns The inner View-type you're rendering that you want to dispatch to & focus on.
  */
 export function useViewCommandFocus(
-  forwardedRef: React.Ref<IViewWin32 | null> | undefined,
+  forwardedRef: React.Ref<ViewWin32 | null> | undefined,
   // initialValue?: React.Component
 ): (ref: React.ElementRef<any>) => void {
   /**

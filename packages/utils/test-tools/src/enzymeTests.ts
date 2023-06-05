@@ -50,7 +50,19 @@ export function compareTrees(a: PropTreeSnapshot, b: PropTreeSnapshot, paths: st
   }
   Object.keys(a.props).forEach((key) => {
     if (a.props[key] !== b.props[key]) {
-      throw new Error(`Shallow compare failed for ${paths.join(': ')}, key: ${key}`);
+      // react-native's Pressable creates a new accessibilityState and accessibilityValue value on every render
+      // to avoid having to disable a bunch of tests adding this exception for now
+      if (key === 'accessibilityState') {
+        if (a.props[key].accessibilityState || b.props[key].accessibilityState) {
+          compareTrees(a.props[key].accessibilityState, b.props[key].accessibilityState, paths.concat('accessibilityState'));
+        }
+      } else if (key === 'accessibilityValue') {
+        if (a.props[key].accessibilityValue || b.props[key].accessibilityValue) {
+          compareTrees(a.props[key].accessibilityValue, b.props[key].accessibilityValue, paths.concat('accessibilityValue'));
+        }
+      } else {
+        throw new Error(`Shallow compare failed for ${paths.join(': ')}, key: ${key}`);
+      }
     }
   });
   for (let i = 0; i < a.children.length; i++) {

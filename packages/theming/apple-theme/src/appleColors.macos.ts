@@ -1,4 +1,6 @@
 import type { ThemeColorDefinition, AppearanceOptions } from '@fluentui-react-native/theme-types';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 
 import type { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';

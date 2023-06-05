@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { ReactNode } from 'react';
 import React, { Children } from 'react';

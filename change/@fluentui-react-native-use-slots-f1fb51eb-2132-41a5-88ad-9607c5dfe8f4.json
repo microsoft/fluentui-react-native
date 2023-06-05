@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Upgrade to React Native 0.71",
+  "packageName": "@fluentui-react-native/use-slots",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ScreenRect } from 'react-native';
+import type { KeyboardMetrics } from 'react-native';
 import { View } from 'react-native';
 
 import type { DismissBehaviors } from '@fluentui/react-native';
@@ -31,7 +31,7 @@ export const E2ECalloutTest: React.FunctionComponent = () => {
     setShowCallout(false);
   }, [setIsCalloutVisible, setShowCallout]);
 
-  const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
+  const myRect: KeyboardMetrics = { screenX: 10, screenY: 10, width: 100, height: 100 };
 
   return (
     <View>

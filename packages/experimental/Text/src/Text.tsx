@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { TextV1 } from '@fluentui-react-native/text';
 

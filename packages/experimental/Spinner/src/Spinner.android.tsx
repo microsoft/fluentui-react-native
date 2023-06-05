@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { useEffect, useCallback } from 'react';
 import type { ColorValue } from 'react-native';

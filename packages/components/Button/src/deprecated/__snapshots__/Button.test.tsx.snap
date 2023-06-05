@@ -5,7 +5,7 @@ exports[`Button default 1`] = `
   accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
     }
   }
@@ -22,7 +22,7 @@ exports[`Button default 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
@@ -37,7 +37,7 @@ exports[`Button default 1`] = `
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "flex-start",
           "display": "flex",
@@ -52,7 +52,7 @@ exports[`Button default 1`] = `
     >
       <Text
         style={
-          Object {
+          {
             "color": "#323130",
             "fontFamily": "System",
             "fontSize": 13,

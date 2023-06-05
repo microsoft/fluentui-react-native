@@ -3,7 +3,7 @@
 exports[`Stack with tokens 1`] = `
 <View
   style={
-    Object {
+    {
       "display": "flex",
       "maxWidth": 400,
       "padding": 16,
@@ -12,7 +12,7 @@ exports[`Stack with tokens 1`] = `
 >
   <Text
     style={
-      Object {
+      {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 13,
@@ -25,7 +25,7 @@ exports[`Stack with tokens 1`] = `
   </Text>
   <Text
     style={
-      Object {
+      {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 13,
@@ -39,7 +39,7 @@ exports[`Stack with tokens 1`] = `
   </Text>
   <Text
     style={
-      Object {
+      {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 13,

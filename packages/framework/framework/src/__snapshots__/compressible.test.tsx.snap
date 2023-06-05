@@ -12,7 +12,7 @@ exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] 
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "purple",
                 "fontSize": 24,
                 "fontWeight": "700",
@@ -21,7 +21,7 @@ exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] 
           >
             <Text
               style={
-                Object {
+                {
                   "color": "purple",
                   "fontSize": 24,
                   "fontWeight": "700",
@@ -33,7 +33,7 @@ exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] 
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "gray",
                 "fontSize": 12,
                 "fontWeight": "300",
@@ -42,7 +42,7 @@ exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] 
           >
             <Text
               style={
-                Object {
+                {
                   "color": "gray",
                   "fontSize": 12,
                   "fontWeight": "300",
@@ -63,7 +63,7 @@ exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] 
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "blue",
                 "fontSize": 16,
                 "fontWeight": "700",
@@ -72,7 +72,7 @@ exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] 
           >
             <Text
               style={
-                Object {
+                {
                   "color": "blue",
                   "fontSize": 16,
                   "fontWeight": "700",
@@ -84,7 +84,7 @@ exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] 
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "gray",
                 "fontSize": 12,
                 "fontWeight": "300",
@@ -93,7 +93,7 @@ exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] 
           >
             <Text
               style={
-                Object {
+                {
                   "color": "gray",
                   "fontSize": 12,
                   "fontWeight": "300",
@@ -118,7 +118,7 @@ exports[`compressible tests Two labels, one with caption and one without 1`] = `
     >
       <Text
         style={
-          Object {
+          {
             "color": "blue",
             "fontSize": 16,
             "fontWeight": "700",
@@ -127,7 +127,7 @@ exports[`compressible tests Two labels, one with caption and one without 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "blue",
               "fontSize": 16,
               "fontWeight": "700",
@@ -146,7 +146,7 @@ exports[`compressible tests Two labels, one with caption and one without 1`] = `
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "blue",
                 "fontSize": 16,
                 "fontWeight": "700",
@@ -155,7 +155,7 @@ exports[`compressible tests Two labels, one with caption and one without 1`] = `
           >
             <Text
               style={
-                Object {
+                {
                   "color": "blue",
                   "fontSize": 16,
                   "fontWeight": "700",
@@ -167,7 +167,7 @@ exports[`compressible tests Two labels, one with caption and one without 1`] = `
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "gray",
                 "fontSize": 12,
                 "fontWeight": "300",
@@ -176,7 +176,7 @@ exports[`compressible tests Two labels, one with caption and one without 1`] = `
           >
             <Text
               style={
-                Object {
+                {
                   "color": "gray",
                   "fontSize": 12,
                   "fontWeight": "300",
