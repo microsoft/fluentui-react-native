@@ -487,7 +487,7 @@
   dependencies:
     "@babel/types" "^7.21.4"
 
-"@babel/helper-module-transforms@^7.18.6", "@babel/helper-module-transforms@^7.20.11", "@babel/helper-module-transforms@^7.21.2", "@babel/helper-module-transforms@^7.21.5":
+"@babel/helper-module-transforms@^7.18.6", "@babel/helper-module-transforms@^7.20.11", "@babel/helper-module-transforms@^7.21.5":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/helper-module-transforms/-/helper-module-transforms-7.21.5.tgz#d937c82e9af68d31ab49039136a222b17ac0b420"
   integrity sha512-bI2Z9zBGY2q5yMHoBvJ2a9iX3ZOAzJPm7Q8Yz6YeoUjU/Cvhmi2G4QyTNyPBqqXSgTjUxRg3L0xV45HvkNWWBw==
@@ -535,7 +535,7 @@
     "@babel/traverse" "^7.20.7"
     "@babel/types" "^7.20.7"
 
-"@babel/helper-simple-access@^7.20.2", "@babel/helper-simple-access@^7.21.5":
+"@babel/helper-simple-access@^7.21.5":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/helper-simple-access/-/helper-simple-access-7.21.5.tgz#d697a7971a5c39eac32c7e63c0921c06c8a249ee"
   integrity sha512-ENPDAMC1wAjR0uaCUwliBdiSl1KBJAVnMTzXqi64c2MG8MPR6ii4qf7bSXDqSFbr4W6W028/rf5ivoHop5/mkg==
@@ -1038,14 +1038,14 @@
     "@babel/helper-module-transforms" "^7.20.11"
     "@babel/helper-plugin-utils" "^7.20.2"
 
-"@babel/plugin-transform-modules-commonjs@^7.0.0", "@babel/plugin-transform-modules-commonjs@^7.13.8", "@babel/plugin-transform-modules-commonjs@^7.21.2":
-  version "7.21.2"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.21.2.tgz#6ff5070e71e3192ef2b7e39820a06fb78e3058e7"
-  integrity sha512-Cln+Yy04Gxua7iPdj6nOV96smLGjpElir5YwzF0LBPKoPlLDNJePNlrGGaybAJkd0zKRnOVXOgizSqPYMNYkzA==
+"@babel/plugin-transform-modules-commonjs@^7.0.0", "@babel/plugin-transform-modules-commonjs@^7.13.8", "@babel/plugin-transform-modules-commonjs@^7.21.2", "@babel/plugin-transform-modules-commonjs@^7.21.5":
+  version "7.21.5"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.21.5.tgz#d69fb947eed51af91de82e4708f676864e5e47bc"
+  integrity sha512-OVryBEgKUbtqMoB7eG2rs6UFexJi6Zj6FDXx+esBLPTCxCNxAY9o+8Di7IsUGJ+AVhp5ncK0fxWUBd0/1gPhrQ==
   dependencies:
-    "@babel/helper-module-transforms" "^7.21.2"
-    "@babel/helper-plugin-utils" "^7.20.2"
-    "@babel/helper-simple-access" "^7.20.2"
+    "@babel/helper-module-transforms" "^7.21.5"
+    "@babel/helper-plugin-utils" "^7.21.5"
+    "@babel/helper-simple-access" "^7.21.5"
 
 "@babel/plugin-transform-modules-systemjs@^7.20.11":
   version "7.20.11"
@@ -1351,14 +1351,14 @@
     "@babel/plugin-transform-react-pure-annotations" "^7.18.6"
 
 "@babel/preset-typescript@^7.0.0", "@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.8.0":
-  version "7.21.4"
-  resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.21.4.tgz#b913ac8e6aa8932e47c21b01b4368d8aa239a529"
-  integrity sha512-sMLNWY37TCdRH/bJ6ZeeOH1nPuanED7Ai9Y/vH31IPqalioJ6ZNFUWONsakhv4r4n+I6gm5lmoE0olkgib/j/A==
+  version "7.21.5"
+  resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.21.5.tgz#68292c884b0e26070b4d66b202072d391358395f"
+  integrity sha512-iqe3sETat5EOrORXiQ6rWfoOg2y68Cs75B9wNxdPW4kixJxh7aXQE1KPdWLDniC24T/6dSnguF33W9j/ZZQcmA==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.20.2"
+    "@babel/helper-plugin-utils" "^7.21.5"
     "@babel/helper-validator-option" "^7.21.0"
     "@babel/plugin-syntax-jsx" "^7.21.4"
-    "@babel/plugin-transform-modules-commonjs" "^7.21.2"
+    "@babel/plugin-transform-modules-commonjs" "^7.21.5"
     "@babel/plugin-transform-typescript" "^7.21.3"
 
 "@babel/register@^7.13.16":
@@ -5361,9 +5361,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.31.13"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.13.tgz#55947cefd07add3c4208e2ba03123cde67eafe12"
-  integrity sha512-VEzTJc4zUlxSuKJDh44GQjhvhaCCz06E4uzBsWLhsYBFAt71FBu2KdSkPg0zzIwyom02tvC59rDeUWCYm0Hr+g==
+  version "2.33.3"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.33.3.tgz#fce5d9bf29fb9b1d0a353763b50aaa792e5baf3a"
+  integrity sha512-Rt5lDWy1nOLZci+Dk2Sb9wCmzEO635/V16NkdkGTUKWM48IiRaxJIggSIpkTDFhZHQBTLER9M6+350RP9/YjTQ==
   dependencies:
     cosmiconfig "^7.0.0"
     execa "^5.0.0"
@@ -5375,7 +5375,7 @@ beachball@^2.20.0:
     semver "^7.0.0"
     toposort "^2.0.2"
     uuid "^9.0.0"
-    workspace-tools "^0.30.0"
+    workspace-tools "^0.34.2"
     yargs-parser "^21.0.0"
 
 big-integer@1.6.x:
@@ -14335,10 +14335,10 @@ workspace-tools@^0.29.0:
     js-yaml "^4.1.0"
     micromatch "^4.0.0"
 
-workspace-tools@^0.30.0:
-  version "0.30.0"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.30.0.tgz#93103df09a66d5a4260bf65005b8f9924e439cf1"
-  integrity sha512-vQrzjAFvQYI2Zg9kFAo43aIgQNX5VSTtWLvOxCKhgjKnPdyLMXcPNxPTCKu3v+tjDW+YJNXUAigVv+pykrwOsQ==
+workspace-tools@^0.34.2:
+  version "0.34.6"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.34.6.tgz#f895750d8c46d55df1ace101f9c107a9237c1551"
+  integrity sha512-6KDZW4K/t+CM3RGp56KN11Jp75NwNsEgTGCIxnvLbCY14j/Xa67vBCdWipFkB7t72gJJb61qDoCL9CHVNcI6Qg==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     git-url-parse "^13.0.0"
