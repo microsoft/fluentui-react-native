@@ -4,7 +4,7 @@ module.exports = {
     [
       'module:metro-react-native-babel-preset',
       {
-        disableImportExportTransform: env === 'production' && process.env['RNX_METRO_SERIALIZER_ESBUILD'],
+        disableImportExportTransform: env === 'production',
       },
     ],
   ],

@@ -7,8 +7,7 @@
 
 const path = require('path');
 const { makeMetroConfig } = require('@rnx-kit/metro-config');
-const { defaultWatchFolders, exclusionList, resolveUniqueModule } = require('@rnx-kit/metro-config');
-const { MetroSerializer, esbuildTransformerConfig } = require('@rnx-kit/metro-serializer-esbuild');
+const { exclusionList, resolveUniqueModule } = require('@rnx-kit/metro-config');
 const { getDefaultConfig } = require('metro-config');
 
 const [reactIs, reactIsExcludePattern] = resolveUniqueModule('react-is');
@@ -43,8 +42,7 @@ module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
-  return {
-    watchFolders: defaultWatchFolders(),
+  return makeMetroConfig({
     resolver: {
       assetExts: [...assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
@@ -57,18 +55,6 @@ module.exports = (async () => {
     transformer: {
       // This transformer selects between the regular transformer and svg transformer depending on the file type
       babelTransformerPath: require.resolve('react-native-svg-transformer'),
-      getTransformOptions: async () => ({
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: false,
-        },
-      }),
     },
-    ...makeMetroConfig({
-      serializer: {
-        customSerializer: MetroSerializer(),
-      },
-      transformer: esbuildTransformerConfig,
-    }),
-  };
+  });
 })();
