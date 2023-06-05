@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
-This log was last generated on Fri, 24 Feb 2023 20:39:58 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Jun 2023 19:26:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Mon, 05 Jun 2023 19:26:23 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
 
 ## 0.3.2
 

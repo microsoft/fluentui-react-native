@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Mon, 05 Jun 2023 19:26:23 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/text to v0.20.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 30 May 2023 20:34:15 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.11.64",
       "version": "0.11.64",

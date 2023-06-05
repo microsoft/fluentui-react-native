@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Mon, 05 Jun 2023 19:26:26 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:57 GMT",
       "tag": "@fluentui-react-native/adapters_v0.10.2",
       "version": "0.10.2",

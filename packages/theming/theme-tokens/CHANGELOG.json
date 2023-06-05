@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Mon, 05 Jun 2023 19:26:25 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.25.0",
+      "version": "0.25.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme-tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.32.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 30 May 2023 20:34:15 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.24.7",
       "version": "0.24.7",

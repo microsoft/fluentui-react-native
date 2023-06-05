@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/styling-utils
 
-This log was last generated on Thu, 06 Oct 2022 17:24:49 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Jun 2023 19:26:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Mon, 05 Jun 2023 19:26:24 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
 
 ## 0.4.4
 

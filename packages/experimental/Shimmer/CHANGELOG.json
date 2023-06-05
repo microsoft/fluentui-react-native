@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Mon, 05 Jun 2023 19:26:23 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/framework to v0.10.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.24.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.5.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.10.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 30 May 2023 20:34:15 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.8.29",
       "version": "0.8.29",

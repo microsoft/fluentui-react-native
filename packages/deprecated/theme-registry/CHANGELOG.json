@@ -2,6 +2,27 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Mon, 05 Jun 2023 19:26:25 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theme-registry",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.2.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:57 GMT",
       "tag": "@uifabricshared/theme-registry_v0.9.2",
       "version": "0.9.2",

@@ -2,6 +2,33 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Mon, 05 Jun 2023 19:26:25 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@uifabricshared/themed-settings",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/themed-settings",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.13.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/themed-settings",
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.2.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:57 GMT",
       "tag": "@uifabricshared/themed-settings_v0.9.3",
       "version": "0.9.3",
