@@ -2,8 +2,9 @@ import type { TextProps } from 'react-native';
 
 import type { SpinnerProps, SpinnerTokens } from './Spinner.types.shared';
 
-export { SpinnerProps, SpinnerTokens };
-export { spinnerName, SpinnerAppearance, SpinnerLabelPosition, SpinnerSize, SpinnerStatus } from './Spinner.types.shared';
+export type { SpinnerProps, SpinnerTokens };
+export type { SpinnerAppearance, SpinnerLabelPosition, SpinnerSize, SpinnerStatus } from './Spinner.types.shared';
+export { spinnerName } from './Spinner.types.shared';
 
 export interface SpinnerSvgProps extends SpinnerTokens {
   /**

@@ -1,5 +1,6 @@
 export { Text as TextV1 } from './Text';
-export type { textName as textNameV1, TextProps, TextTokens } from './Text.types';
+export type { TextProps, TextTokens } from './Text.types';
+export { textName as textNameV1 } from './Text.types';
 export {
   Caption1,
   Caption1Strong,

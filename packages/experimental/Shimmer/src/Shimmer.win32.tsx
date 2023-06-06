@@ -11,7 +11,7 @@ import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg } from 'react-nat
 import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { stylingSettings } from './Shimmer.styling.win32';
 import type { ShimmerElementTypes, ShimmerProps, ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types.shared';
-export { ShimmerCircleElement, ShimmerRectElement };
+export type { ShimmerCircleElement, ShimmerRectElement };
 import { shimmerName } from './Shimmer.types.shared';
 import type { ClippingMaskProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
