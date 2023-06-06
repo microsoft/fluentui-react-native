@@ -39,7 +39,7 @@ jobs:
   - job: AndroidPR
     displayName: Android PR
     pool:
-      vmImage: 'macos-11'
+      vmImage: 'macos-13'
     variables:
       platform: 'android'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -67,7 +67,7 @@ jobs:
   - job: macOSPR
     displayName: macOS PR
     pool:
-      vmImage: 'internal-macos12'
+      vmImage: 'macos-13'
       demands: ['xcode', 'sh', 'npm']
     variables:
       platform: 'macos'
@@ -113,7 +113,7 @@ jobs:
   - job: iOSPR
     displayName: iOS PR
     pool:
-      vmImage: 'internal-macos12'
+      vmImage: 'macos-13'
       demands: ['xcode', 'sh', 'npm']
     variables:
       platform: 'ios'
