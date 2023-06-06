@@ -34,7 +34,7 @@ export interface ShimmerSlotProps {
   root: ViewProps;
   clippingMask: ClippingMaskProps;
   shimmerWave: ShimmerWaveProps;
-  shimmerWaveContainer: ShimmerWaveProps;
+  shimmerWaveContainer: React.PropsWithChildren<ShimmerWaveProps>;
 }
 
 export interface ShimmerType {

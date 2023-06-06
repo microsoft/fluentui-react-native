@@ -8,7 +8,7 @@ exports[`ContextualMenu default props 1`] = `
   borderWidth={1}
   setInitialFocus={true}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffff",
       "borderColor": "#8a8886",
       "borderWidth": 1,
@@ -20,7 +20,7 @@ exports[`ContextualMenu default props 1`] = `
     focusable={false}
     onBlur={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "minWidth": 180,
         "padding": 1,
@@ -29,7 +29,7 @@ exports[`ContextualMenu default props 1`] = `
   >
     <RCTScrollView
       contentContainerStyle={
-        Object {
+        {
           "flexDirection": "column",
           "flexGrow": 1,
         }

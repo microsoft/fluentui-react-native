@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ScreenRect } from 'react-native';
+import type { KeyboardMetrics } from 'react-native';
 import { Text, View, Switch, ScrollView } from 'react-native';
 
 import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
@@ -380,7 +380,7 @@ const CustomCallout: React.FunctionComponent = () => {
     setShowCustomizedCallout(false);
   }, [setIsCustomizedCalloutVisible, setShowCustomizedCallout]);
 
-  const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
+  const myRect: KeyboardMetrics = { screenX: 10, screenY: 10, width: 100, height: 100 };
 
   return (
     <View>

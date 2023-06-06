@@ -1,45 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createBrandedThemeWithAlias test themeName: Black 1`] = `
-Object {
-  "colors": Object {
-    "brandBackground": "#185abd",
-    "brandBackground2": "#d2e0f4",
-    "brandBackgroundHover": "#1651aa",
-    "brandBackgroundPressed": "#0e336a",
-    "brandBackgroundSelected": "#13458f",
-    "brandBackgroundStatic": "#185abd",
-    "brandForeground1": "#aec6eb",
-    "brandForeground2": "#d2e0f4",
-    "brandForegroundLink": "#aec6eb",
-    "brandForegroundLinkHover": "#d2e0f4",
-    "brandForegroundLinkPressed": "#2e6ac5",
-    "brandForegroundLinkSelected": "#d2e0f4",
-    "brandStroke1": "#185abd",
-    "brandStroke2": "#d2e0f4",
-    "compoundBrandBackground1": "#185abd",
-    "compoundBrandBackground1Hover": "#1651aa",
-    "compoundBrandBackground1Pressed": "#13458f",
-    "compoundBrandForeground1": "#aec6eb",
-    "compoundBrandForeground1Hover": "#d2e0f4",
-    "compoundBrandForeground1Pressed": "#2e6ac5",
-    "compoundBrandStroke1": "#185abd",
-    "compoundBrandStroke1Hover": "#1651aa",
-    "compoundBrandStroke1Pressed": "#13458f",
-    "neutralForeground2BrandHover": "#d2e0f4",
-    "neutralForeground2BrandPressed": "#2e6ac5",
-    "neutralForeground2BrandSelected": "#d2e0f4",
-    "neutralForeground3BrandHover": "#d2e0f4",
-    "neutralForeground3BrandPressed": "#2e6ac5",
-    "neutralForeground3BrandSelected": "#d2e0f4",
-    "neutralStrokeAccessibleSelected": "#185abd",
-  },
-}
-`;
-
-exports[`createBrandedThemeWithAlias test themeName: Colorful 1`] = `
-Object {
-  "colors": Object {
+exports[` 1`] = `
+{
+  "colors": {
     "brandBackground": "#185abd",
     "brandBackground2": "#d2e0f4",
     "brandBackgroundHover": "#1651aa",
@@ -74,9 +37,46 @@ Object {
 }
 `;
 
-exports[`createBrandedThemeWithAlias test themeName: DarkGray 1`] = `
-Object {
-  "colors": Object {
+exports[` 2`] = `
+{
+  "colors": {
+    "brandBackground": "#185abd",
+    "brandBackground2": "#d2e0f4",
+    "brandBackgroundHover": "#1651aa",
+    "brandBackgroundPressed": "#0e336a",
+    "brandBackgroundSelected": "#13458f",
+    "brandBackgroundStatic": "#185abd",
+    "brandForeground1": "#185abd",
+    "brandForeground2": "#1651aa",
+    "brandForegroundLink": "#185abd",
+    "brandForegroundLinkHover": "#1651aa",
+    "brandForegroundLinkPressed": "#0e336a",
+    "brandForegroundLinkSelected": "#13458f",
+    "brandStroke1": "#185abd",
+    "brandStroke2": "#d2e0f4",
+    "compoundBrandBackground1": "#185abd",
+    "compoundBrandBackground1Hover": "#1651aa",
+    "compoundBrandBackground1Pressed": "#13458f",
+    "compoundBrandForeground1": "#185abd",
+    "compoundBrandForeground1Hover": "#1651aa",
+    "compoundBrandForeground1Pressed": "#0e336a",
+    "compoundBrandStroke1": "#185abd",
+    "compoundBrandStroke1Hover": "#1651aa",
+    "compoundBrandStroke1Pressed": "#13458f",
+    "neutralForeground2BrandHover": "#1651aa",
+    "neutralForeground2BrandPressed": "#0e336a",
+    "neutralForeground2BrandSelected": "#13458f",
+    "neutralForeground3BrandHover": "#1651aa",
+    "neutralForeground3BrandPressed": "#0e336a",
+    "neutralForeground3BrandSelected": "#13458f",
+    "neutralStrokeAccessibleSelected": "#185abd",
+  },
+}
+`;
+
+exports[` 3`] = `
+{
+  "colors": {
     "brandBackground": "#185abd",
     "brandBackground2": "#d2e0f4",
     "brandBackgroundHover": "#1651aa",
@@ -111,2336 +111,118 @@ Object {
 }
 `;
 
-exports[`createBrandedThemeWithAlias test themeName: HighContrast 1`] = `Object {}`;
-
-exports[`createBrandedThemeWithAlias test themeName: White 1`] = `
-Object {
-  "colors": Object {
+exports[` 4`] = `
+{
+  "colors": {
     "brandBackground": "#185abd",
     "brandBackground2": "#d2e0f4",
     "brandBackgroundHover": "#1651aa",
     "brandBackgroundPressed": "#0e336a",
     "brandBackgroundSelected": "#13458f",
     "brandBackgroundStatic": "#185abd",
-    "brandForeground1": "#185abd",
-    "brandForeground2": "#1651aa",
-    "brandForegroundLink": "#185abd",
-    "brandForegroundLinkHover": "#1651aa",
-    "brandForegroundLinkPressed": "#0e336a",
-    "brandForegroundLinkSelected": "#13458f",
+    "brandForeground1": "#aec6eb",
+    "brandForeground2": "#d2e0f4",
+    "brandForegroundLink": "#aec6eb",
+    "brandForegroundLinkHover": "#d2e0f4",
+    "brandForegroundLinkPressed": "#2e6ac5",
+    "brandForegroundLinkSelected": "#d2e0f4",
     "brandStroke1": "#185abd",
     "brandStroke2": "#d2e0f4",
     "compoundBrandBackground1": "#185abd",
     "compoundBrandBackground1Hover": "#1651aa",
     "compoundBrandBackground1Pressed": "#13458f",
-    "compoundBrandForeground1": "#185abd",
-    "compoundBrandForeground1Hover": "#1651aa",
-    "compoundBrandForeground1Pressed": "#0e336a",
+    "compoundBrandForeground1": "#aec6eb",
+    "compoundBrandForeground1Hover": "#d2e0f4",
+    "compoundBrandForeground1Pressed": "#2e6ac5",
     "compoundBrandStroke1": "#185abd",
     "compoundBrandStroke1Hover": "#1651aa",
     "compoundBrandStroke1Pressed": "#13458f",
-    "neutralForeground2BrandHover": "#1651aa",
-    "neutralForeground2BrandPressed": "#0e336a",
-    "neutralForeground2BrandSelected": "#13458f",
-    "neutralForeground3BrandHover": "#1651aa",
-    "neutralForeground3BrandPressed": "#0e336a",
-    "neutralForeground3BrandSelected": "#13458f",
+    "neutralForeground2BrandHover": "#d2e0f4",
+    "neutralForeground2BrandPressed": "#2e6ac5",
+    "neutralForeground2BrandSelected": "#d2e0f4",
+    "neutralForeground3BrandHover": "#d2e0f4",
+    "neutralForeground3BrandPressed": "#2e6ac5",
+    "neutralForeground3BrandSelected": "#d2e0f4",
     "neutralStrokeAccessibleSelected": "#185abd",
   },
 }
 `;
+
+exports[` 5`] = `{}`;
 
 exports[`createFontAliasTokens test 1`] = `
-Object {
-  "body1": Object {
+{
+  "body1": {
     "face": "primary",
     "size": 12,
     "weight": "400",
   },
-  "body1Strong": Object {
+  "body1Strong": {
     "face": "primary",
     "size": 12,
     "weight": "600",
   },
-  "body2": Object {
+  "body2": {
     "face": "primary",
     "size": 14,
     "weight": "400",
   },
-  "body2Strong": Object {
+  "body2Strong": {
     "face": "primary",
     "size": 14,
     "weight": "600",
   },
-  "caption1": Object {
+  "caption1": {
     "face": "primary",
     "size": 10,
     "weight": "400",
   },
-  "display": Object {
+  "display": {
     "face": "primary",
     "size": 40,
     "weight": "600",
   },
-  "largeTitle": Object {
+  "largeTitle": {
     "face": "primary",
     "size": 40,
     "weight": "400",
   },
-  "subtitle1": Object {
+  "subtitle1": {
     "face": "primary",
     "size": 20,
     "weight": "400",
   },
-  "subtitle1Strong": Object {
+  "subtitle1Strong": {
     "face": "primary",
     "size": 20,
     "weight": "600",
   },
-  "subtitle2": Object {
+  "subtitle2": {
     "face": "primary",
     "size": 16,
     "weight": "400",
   },
-  "subtitle2Strong": Object {
+  "subtitle2Strong": {
     "face": "primary",
     "size": 16,
     "weight": "600",
   },
-  "title1": Object {
+  "title1": {
     "face": "primary",
     "size": 28,
     "weight": "400",
   },
-  "title1Strong": Object {
+  "title1Strong": {
     "face": "primary",
     "size": 28,
     "weight": "600",
-  },
-}
-`;
-
-exports[`createOfficeColorAliasTokens test officeTheme: Black 1`] = `
-Object {
-  "brandBackground": "#185abd",
-  "brandBackground2": "#d2e0f4",
-  "brandBackgroundDisabled": undefined,
-  "brandBackgroundHover": "#1651aa",
-  "brandBackgroundPressed": "#0e336a",
-  "brandBackgroundSelected": "#13458f",
-  "brandBackgroundStatic": "#185abd",
-  "brandForeground1": "#aec6eb",
-  "brandForeground1Disabled": undefined,
-  "brandForeground1Pressed": undefined,
-  "brandForeground2": "#d2e0f4",
-  "brandForegroundLink": "#aec6eb",
-  "brandForegroundLinkHover": "#d2e0f4",
-  "brandForegroundLinkPressed": "#2e6ac5",
-  "brandForegroundLinkSelected": "#d2e0f4",
-  "brandStroke1": "#185abd",
-  "brandStroke2": "#6794d7",
-  "compoundBrandBackground1": "#185abd",
-  "compoundBrandBackground1Hover": "#1651aa",
-  "compoundBrandBackground1Pressed": "#0e336a",
-  "compoundBrandForeground1": "#aec6eb",
-  "compoundBrandForeground1Hover": "#d2e0f4",
-  "compoundBrandForeground1Pressed": "#2e6ac5",
-  "compoundBrandStroke1": "#185abd",
-  "compoundBrandStroke1Hover": "#1651aa",
-  "compoundBrandStroke1Pressed": "#0e336a",
-  "dangerBackground1": "#3f1011",
-  "dangerBackground2": "#751d1f",
-  "dangerBackground3": "#d13438",
-  "dangerBorder1": "#d13438",
-  "dangerBorder2": "#dc5e62",
-  "dangerBorderActive": "#e37d80",
-  "dangerForeground1": "#e37d80",
-  "dangerForeground2": "#f1bbbc",
-  "dangerForeground3": "#e37d80",
-  "dangerForegroundInverted": "#d13438",
-  "neutralBackground1": "#292929",
-  "neutralBackground1Hover": "#3d3d3d",
-  "neutralBackground1Pressed": "#1f1f1f",
-  "neutralBackground1Selected": "#383838",
-  "neutralBackground2": "#1f1f1f",
-  "neutralBackground2Hover": "#333333",
-  "neutralBackground2Pressed": "#141414",
-  "neutralBackground2Selected": "#2e2e2e",
-  "neutralBackground3": "#141414",
-  "neutralBackground3Hover": "#292929",
-  "neutralBackground3Pressed": "#0a0a0a",
-  "neutralBackground3Selected": "#242424",
-  "neutralBackground4": "#0a0a0a",
-  "neutralBackground4Hover": "#1f1f1f",
-  "neutralBackground4Pressed": "#000000",
-  "neutralBackground4Selected": "#1a1a1a",
-  "neutralBackground5": "#000000",
-  "neutralBackground5Hover": "#141414",
-  "neutralBackground5Pressed": "#050505",
-  "neutralBackground5Selected": "#0f0f0f",
-  "neutralBackground6": "#333333",
-  "neutralBackgroundDisabled": "#141414",
-  "neutralBackgroundInverted": "#ffffff",
-  "neutralForeground1": "#ffffff",
-  "neutralForeground1Hover": "#ffffff",
-  "neutralForeground1Pressed": "#ffffff",
-  "neutralForeground1Selected": "#ffffff",
-  "neutralForeground2": "#d6d6d6",
-  "neutralForeground2BrandHover": "#d2e0f4",
-  "neutralForeground2BrandPressed": "#2e6ac5",
-  "neutralForeground2BrandSelected": "#d2e0f4",
-  "neutralForeground2Hover": "#ffffff",
-  "neutralForeground2Pressed": "#ffffff",
-  "neutralForeground2Selected": "#ffffff",
-  "neutralForeground3": "#adadad",
-  "neutralForeground3BrandHover": "#d2e0f4",
-  "neutralForeground3BrandPressed": "#2e6ac5",
-  "neutralForeground3BrandSelected": "#d2e0f4",
-  "neutralForeground3Hover": "#d6d6d6",
-  "neutralForeground3Pressed": "#d6d6d6",
-  "neutralForeground3Selected": "#d6d6d6",
-  "neutralForeground4": "#999999",
-  "neutralForegroundDisabled": "#5c5c5c",
-  "neutralForegroundInverted": "#000000",
-  "neutralForegroundInvertedLink": "#292929",
-  "neutralForegroundInvertedLinkHover": "#292929",
-  "neutralForegroundInvertedLinkPressed": "#292929",
-  "neutralForegroundInvertedLinkSelected": "#292929",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#333333",
-  "neutralStencil2": "#575757",
-  "neutralStroke1": "#666666",
-  "neutralStroke1Hover": "#757575",
-  "neutralStroke1Pressed": "#6b6b6b",
-  "neutralStroke1Selected": "#707070",
-  "neutralStroke2": "#525252",
-  "neutralStroke3": "#3d3d3d",
-  "neutralStrokeAccessible": "#adadad",
-  "neutralStrokeAccessibleHover": "#bdbdbd",
-  "neutralStrokeAccessiblePressed": "#b3b3b3",
-  "neutralStrokeAccessibleSelected": "#185abd",
-  "neutralStrokeDisabled": "#424242",
-  "outofofficeBackground1": "#3a1136",
-  "outofofficeBackground2": "#6d2064",
-  "outofofficeBackground3": "#c239b3",
-  "outofofficeBorder1": "#c239b3",
-  "outofofficeBorder2": "#d161c4",
-  "outofofficeBorderActive": "#da7ed0",
-  "outofofficeForeground1": "#da7ed0",
-  "outofofficeForeground2": "#edbbe7",
-  "outofofficeForeground3": "#d161c4",
-  "severeBackground1": "#411200",
-  "severeBackground2": "#7a2101",
-  "severeBackground3": "#da3b01",
-  "severeBorder1": "#da3b01",
-  "severeBorder2": "#e9835e",
-  "severeBorderActive": "#e9835e",
-  "severeForeground1": "#e9835e",
-  "severeForeground2": "#f4bfab",
-  "severeForeground3": "#e9835e",
-  "strokeFocus1": "#000000",
-  "strokeFocus2": "#ffffff",
-  "subtleBackground": "#00000000",
-  "subtleBackgroundHover": "#3d3d3d",
-  "subtleBackgroundPressed": "#1f1f1f",
-  "subtleBackgroundSelected": "#383838",
-  "successBackground1": "#052505",
-  "successBackground2": "#094509",
-  "successBackground3": "#107c10",
-  "successBorder1": "#107c10",
-  "successBorder2": "#9fd89f",
-  "successBorderActive": "#54b054",
-  "successForeground1": "#54b054",
-  "successForeground2": "#9fd89f",
-  "successForeground3": "#9fd89f",
-  "successForegroundInverted": "#107c10",
-  "transparentBackground": "#00000000",
-  "transparentBackgroundHover": "#00000000",
-  "transparentBackgroundPressed": "#00000000",
-  "transparentBackgroundSelected": "#00000000",
-  "transparentStroke": "#00000000",
-  "transparentStrokeDisabled": "#00000000",
-  "transparentStrokeInteractive": "#00000000",
-  "warningBackground1": "#4c4400",
-  "warningBackground2": "#817400",
-  "warningBackground3": "#fde300",
-  "warningBorder1": "#fde300",
-  "warningBorder2": "#fdea3d",
-  "warningBorderActive": "#feee66",
-  "warningForeground1": "#feee66",
-  "warningForeground2": "#fef7b2",
-  "warningForeground3": "#fdea3d",
-  "warningForegroundInverted": "#817400",
-}
-`;
-
-exports[`createOfficeColorAliasTokens test officeTheme: Colorful 1`] = `
-Object {
-  "brandBackground": "#185abd",
-  "brandBackground2": "#d2e0f4",
-  "brandBackgroundDisabled": undefined,
-  "brandBackgroundHover": "#1651aa",
-  "brandBackgroundPressed": "#0e336a",
-  "brandBackgroundSelected": "#13458f",
-  "brandBackgroundStatic": "#185abd",
-  "brandForeground1": "#185abd",
-  "brandForeground1Disabled": undefined,
-  "brandForeground1Pressed": undefined,
-  "brandForeground2": "#1651aa",
-  "brandForegroundLink": "#185abd",
-  "brandForegroundLinkHover": "#1651aa",
-  "brandForegroundLinkPressed": "#0e336a",
-  "brandForegroundLinkSelected": "#13458f",
-  "brandStroke1": "#185abd",
-  "brandStroke2": "#6794d7",
-  "compoundBrandBackground1": "#185abd",
-  "compoundBrandBackground1Hover": "#1651aa",
-  "compoundBrandBackground1Pressed": "#0e336a",
-  "compoundBrandForeground1": "#185abd",
-  "compoundBrandForeground1Hover": "#1651aa",
-  "compoundBrandForeground1Pressed": "#0e336a",
-  "compoundBrandStroke1": "#185abd",
-  "compoundBrandStroke1Hover": "#1651aa",
-  "compoundBrandStroke1Pressed": "#0e336a",
-  "dangerBackground1": "#fdf6f6",
-  "dangerBackground2": "#f1bbbc",
-  "dangerBackground3": "#d13438",
-  "dangerBorder1": "#f1bbbc",
-  "dangerBorder2": "#d13438",
-  "dangerBorderActive": "#d13438",
-  "dangerForeground1": "#bc2f32",
-  "dangerForeground2": "#751d1f",
-  "dangerForeground3": "#d13438",
-  "dangerForegroundInverted": "#dc5e62",
-  "neutralBackground1": "#ffffff",
-  "neutralBackground1Hover": "#f5f5f5",
-  "neutralBackground1Pressed": "#e0e0e0",
-  "neutralBackground1Selected": "#ebebeb",
-  "neutralBackground2": "#fafafa",
-  "neutralBackground2Hover": "#f0f0f0",
-  "neutralBackground2Pressed": "#dbdbdb",
-  "neutralBackground2Selected": "#e6e6e6",
-  "neutralBackground3": "#f5f5f5",
-  "neutralBackground3Hover": "#ebebeb",
-  "neutralBackground3Pressed": "#d6d6d6",
-  "neutralBackground3Selected": "#e0e0e0",
-  "neutralBackground4": "#f0f0f0",
-  "neutralBackground4Hover": "#fafafa",
-  "neutralBackground4Pressed": "#f5f5f5",
-  "neutralBackground4Selected": "#ffffff",
-  "neutralBackground5": "#ebebeb",
-  "neutralBackground5Hover": "#f5f5f5",
-  "neutralBackground5Pressed": "#f0f0f0",
-  "neutralBackground5Selected": "#fafafa",
-  "neutralBackground6": "#e6e6e6",
-  "neutralBackgroundDisabled": "#f0f0f0",
-  "neutralBackgroundInverted": "#616161",
-  "neutralForeground1": "#242424",
-  "neutralForeground1Hover": "#242424",
-  "neutralForeground1Pressed": "#242424",
-  "neutralForeground1Selected": "#242424",
-  "neutralForeground2": "#424242",
-  "neutralForeground2BrandHover": "#1651aa",
-  "neutralForeground2BrandPressed": "#0e336a",
-  "neutralForeground2BrandSelected": "#13458f",
-  "neutralForeground2Hover": "#242424",
-  "neutralForeground2Pressed": "#242424",
-  "neutralForeground2Selected": "#242424",
-  "neutralForeground3": "#616161",
-  "neutralForeground3BrandHover": "#1651aa",
-  "neutralForeground3BrandPressed": "#0e336a",
-  "neutralForeground3BrandSelected": "#13458f",
-  "neutralForeground3Hover": "#424242",
-  "neutralForeground3Pressed": "#424242",
-  "neutralForeground3Selected": "#424242",
-  "neutralForeground4": "#707070",
-  "neutralForegroundDisabled": "#bdbdbd",
-  "neutralForegroundInverted": "#ffffff",
-  "neutralForegroundInvertedLink": "#ffffff",
-  "neutralForegroundInvertedLinkHover": "#ffffff",
-  "neutralForegroundInvertedLinkPressed": "#ffffff",
-  "neutralForegroundInvertedLinkSelected": "#ffffff",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#e6e6e6",
-  "neutralStencil2": "#fafafa",
-  "neutralStroke1": "#d1d1d1",
-  "neutralStroke1Hover": "#c7c7c7",
-  "neutralStroke1Pressed": "#b3b3b3",
-  "neutralStroke1Selected": "#bdbdbd",
-  "neutralStroke2": "#e0e0e0",
-  "neutralStroke3": "#f0f0f0",
-  "neutralStrokeAccessible": "#616161",
-  "neutralStrokeAccessibleHover": "#575757",
-  "neutralStrokeAccessiblePressed": "#4d4d4d",
-  "neutralStrokeAccessibleSelected": "#185abd",
-  "neutralStrokeDisabled": "#e0e0e0",
-  "outofofficeBackground1": "#fdf5fc",
-  "outofofficeBackground2": "#edbbe7",
-  "outofofficeBackground3": "#c239b3",
-  "outofofficeBorder1": "#edbbe7",
-  "outofofficeBorder2": "#c239b3",
-  "outofofficeBorderActive": "#c239b3",
-  "outofofficeForeground1": "#af33a1",
-  "outofofficeForeground2": "#6d2064",
-  "outofofficeForeground3": "#c239b3",
-  "severeBackground1": "#fdf6f3",
-  "severeBackground2": "#f4bfab",
-  "severeBackground3": "#da3b01",
-  "severeBorder1": "#f4bfab",
-  "severeBorder2": "#da3b01",
-  "severeBorderActive": "#da3b01",
-  "severeForeground1": "#c43501",
-  "severeForeground2": "#7a2101",
-  "severeForeground3": "#da3b01",
-  "strokeFocus1": "#ffffff",
-  "strokeFocus2": "#000000",
-  "subtleBackground": "#00000000",
-  "subtleBackgroundHover": "#f5f5f5",
-  "subtleBackgroundPressed": "#e0e0e0",
-  "subtleBackgroundSelected": "#ebebeb",
-  "successBackground1": "#f1faf1",
-  "successBackground2": "#9fd89f",
-  "successBackground3": "#107c10",
-  "successBorder1": "#9fd89f",
-  "successBorder2": "#107c10",
-  "successBorderActive": "#107c10",
-  "successForeground1": "#0e700e",
-  "successForeground2": "#094509",
-  "successForeground3": "#107c10",
-  "successForegroundInverted": "#359b35",
-  "transparentBackground": "#00000000",
-  "transparentBackgroundHover": "#00000000",
-  "transparentBackgroundPressed": "#00000000",
-  "transparentBackgroundSelected": "#00000000",
-  "transparentStroke": "#00000000",
-  "transparentStrokeDisabled": "#00000000",
-  "transparentStrokeInteractive": "#00000000",
-  "warningBackground1": "#fffef5",
-  "warningBackground2": "#fef7b2",
-  "warningBackground3": "#fde300",
-  "warningBorder1": "#fef7b2",
-  "warningBorder2": "#fde300",
-  "warningBorderActive": "#fde300",
-  "warningForeground1": "#817400",
-  "warningForeground2": "#817400",
-  "warningForeground3": "#fde300",
-  "warningForegroundInverted": "#fef7b2",
-}
-`;
-
-exports[`createOfficeColorAliasTokens test officeTheme: DarkGray 1`] = `
-Object {
-  "brandBackground": "#185abd",
-  "brandBackground2": "#d2e0f4",
-  "brandBackgroundDisabled": undefined,
-  "brandBackgroundHover": "#1651aa",
-  "brandBackgroundPressed": "#0e336a",
-  "brandBackgroundSelected": "#13458f",
-  "brandBackgroundStatic": "#185abd",
-  "brandForeground1": "#aec6eb",
-  "brandForeground1Disabled": undefined,
-  "brandForeground1Pressed": undefined,
-  "brandForeground2": "#d2e0f4",
-  "brandForegroundLink": "#aec6eb",
-  "brandForegroundLinkHover": "#d2e0f4",
-  "brandForegroundLinkPressed": "#2e6ac5",
-  "brandForegroundLinkSelected": "#d2e0f4",
-  "brandStroke1": "#185abd",
-  "brandStroke2": "#6794d7",
-  "compoundBrandBackground1": "#185abd",
-  "compoundBrandBackground1Hover": "#1651aa",
-  "compoundBrandBackground1Pressed": "#0e336a",
-  "compoundBrandForeground1": "#aec6eb",
-  "compoundBrandForeground1Hover": "#d2e0f4",
-  "compoundBrandForeground1Pressed": "#2e6ac5",
-  "compoundBrandStroke1": "#185abd",
-  "compoundBrandStroke1Hover": "#1651aa",
-  "compoundBrandStroke1Pressed": "#0e336a",
-  "dangerBackground1": "#3f1011",
-  "dangerBackground2": "#751d1f",
-  "dangerBackground3": "#d13438",
-  "dangerBorder1": "#d13438",
-  "dangerBorder2": "#dc5e62",
-  "dangerBorderActive": "#e37d80",
-  "dangerForeground1": "#e37d80",
-  "dangerForeground2": "#f1bbbc",
-  "dangerForeground3": "#e37d80",
-  "dangerForegroundInverted": "#d13438",
-  "neutralBackground1": "#4d4d4d",
-  "neutralBackground1Hover": "#5c5c5c",
-  "neutralBackground1Pressed": "#424242",
-  "neutralBackground1Selected": "#575757",
-  "neutralBackground2": "#424242",
-  "neutralBackground2Hover": "#525252",
-  "neutralBackground2Pressed": "#383838",
-  "neutralBackground2Selected": "#4d4d4d",
-  "neutralBackground3": "#383838",
-  "neutralBackground3Hover": "#474747",
-  "neutralBackground3Pressed": "#2e2e2e",
-  "neutralBackground3Selected": "#424242",
-  "neutralBackground4": "#2e2e2e",
-  "neutralBackground4Hover": "#3d3d3d",
-  "neutralBackground4Pressed": "#242424",
-  "neutralBackground4Selected": "#383838",
-  "neutralBackground5": "#242424",
-  "neutralBackground5Hover": "#333333",
-  "neutralBackground5Pressed": "#1a1a1a",
-  "neutralBackground5Selected": "#2e2e2e",
-  "neutralBackground6": "#1a1a1a",
-  "neutralBackgroundDisabled": "#383838",
-  "neutralBackgroundInverted": "#ffffff",
-  "neutralForeground1": "#ffffff",
-  "neutralForeground1Hover": "#ffffff",
-  "neutralForeground1Pressed": "#ffffff",
-  "neutralForeground1Selected": "#ffffff",
-  "neutralForeground2": "#e6e6e6",
-  "neutralForeground2BrandHover": "#d2e0f4",
-  "neutralForeground2BrandPressed": "#2e6ac5",
-  "neutralForeground2BrandSelected": "#d2e0f4",
-  "neutralForeground2Hover": "#ffffff",
-  "neutralForeground2Pressed": "#ffffff",
-  "neutralForeground2Selected": "#ffffff",
-  "neutralForeground3": "#cccccc",
-  "neutralForeground3BrandHover": "#d2e0f4",
-  "neutralForeground3BrandPressed": "#2e6ac5",
-  "neutralForeground3BrandSelected": "#d2e0f4",
-  "neutralForeground3Hover": "#e6e6e6",
-  "neutralForeground3Pressed": "#e6e6e6",
-  "neutralForeground3Selected": "#e6e6e6",
-  "neutralForeground4": "#c2c2c2",
-  "neutralForegroundDisabled": "#666666",
-  "neutralForegroundInverted": "#000000",
-  "neutralForegroundInvertedLink": "#4d4d4d",
-  "neutralForegroundInvertedLinkHover": "#4d4d4d",
-  "neutralForegroundInvertedLinkPressed": "#4d4d4d",
-  "neutralForegroundInvertedLinkSelected": "#4d4d4d",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#1a1a1a",
-  "neutralStencil2": "#424242",
-  "neutralStroke1": "#8a8a8a",
-  "neutralStroke1Hover": "#999999",
-  "neutralStroke1Pressed": "#8f8f8f",
-  "neutralStroke1Selected": "#949494",
-  "neutralStroke2": "#757575",
-  "neutralStroke3": "#616161",
-  "neutralStrokeAccessible": "#a8a8a8",
-  "neutralStrokeAccessibleHover": "#b8b8b8",
-  "neutralStrokeAccessiblePressed": "#adadad",
-  "neutralStrokeAccessibleSelected": "#185abd",
-  "neutralStrokeDisabled": "#474747",
-  "outofofficeBackground1": "#3a1136",
-  "outofofficeBackground2": "#6d2064",
-  "outofofficeBackground3": "#c239b3",
-  "outofofficeBorder1": "#c239b3",
-  "outofofficeBorder2": "#d161c4",
-  "outofofficeBorderActive": "#da7ed0",
-  "outofofficeForeground1": "#da7ed0",
-  "outofofficeForeground2": "#edbbe7",
-  "outofofficeForeground3": "#d161c4",
-  "severeBackground1": "#411200",
-  "severeBackground2": "#7a2101",
-  "severeBackground3": "#da3b01",
-  "severeBorder1": "#da3b01",
-  "severeBorder2": "#e9835e",
-  "severeBorderActive": "#e9835e",
-  "severeForeground1": "#e9835e",
-  "severeForeground2": "#f4bfab",
-  "severeForeground3": "#e9835e",
-  "strokeFocus1": "#000000",
-  "strokeFocus2": "#ffffff",
-  "subtleBackground": "#00000000",
-  "subtleBackgroundHover": "#5c5c5c",
-  "subtleBackgroundPressed": "#424242",
-  "subtleBackgroundSelected": "#575757",
-  "successBackground1": "#052505",
-  "successBackground2": "#094509",
-  "successBackground3": "#107c10",
-  "successBorder1": "#107c10",
-  "successBorder2": "#9fd89f",
-  "successBorderActive": "#54b054",
-  "successForeground1": "#54b054",
-  "successForeground2": "#9fd89f",
-  "successForeground3": "#9fd89f",
-  "successForegroundInverted": "#107c10",
-  "transparentBackground": "#00000000",
-  "transparentBackgroundHover": "#00000000",
-  "transparentBackgroundPressed": "#00000000",
-  "transparentBackgroundSelected": "#00000000",
-  "transparentStroke": "#00000000",
-  "transparentStrokeDisabled": "#00000000",
-  "transparentStrokeInteractive": "#00000000",
-  "warningBackground1": "#4c4400",
-  "warningBackground2": "#817400",
-  "warningBackground3": "#fde300",
-  "warningBorder1": "#fde300",
-  "warningBorder2": "#fdea3d",
-  "warningBorderActive": "#feee66",
-  "warningForeground1": "#feee66",
-  "warningForeground2": "#fef7b2",
-  "warningForeground3": "#fdea3d",
-  "warningForegroundInverted": "#817400",
-}
-`;
-
-exports[`createOfficeColorAliasTokens test officeTheme: HighContrast 1`] = `
-Object {
-  "brandBackground": Object {
-    "resource_paths": Array [
-      "ButtonFace",
-    ],
-  },
-  "brandBackground2": Object {
-    "resource_paths": Array [
-      "ButtonFace",
-    ],
-  },
-  "brandBackgroundDisabled": undefined,
-  "brandBackgroundHover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "brandBackgroundPressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "brandBackgroundSelected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "brandBackgroundStatic": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "brandForeground1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "brandForeground1Disabled": undefined,
-  "brandForeground1Pressed": undefined,
-  "brandForeground2": Object {
-    "resource_paths": Array [
-      "ButtonText",
-    ],
-  },
-  "brandForegroundLink": Object {
-    "resource_paths": Array [
-      "Hotlight",
-    ],
-  },
-  "brandForegroundLinkHover": Object {
-    "resource_paths": Array [
-      "Hotlight",
-    ],
-  },
-  "brandForegroundLinkPressed": Object {
-    "resource_paths": Array [
-      "Hotlight",
-    ],
-  },
-  "brandForegroundLinkSelected": Object {
-    "resource_paths": Array [
-      "Hotlight",
-    ],
-  },
-  "brandStroke1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "brandStroke2": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "compoundBrandBackground1": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "compoundBrandBackground1Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "compoundBrandBackground1Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "compoundBrandForeground1": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "compoundBrandForeground1Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "compoundBrandForeground1Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "compoundBrandStroke1": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "compoundBrandStroke1Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "compoundBrandStroke1Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "dangerBackground1": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "dangerBackground2": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "dangerBackground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "dangerBorder1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "dangerBorder2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "dangerBorderActive": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "dangerForeground1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "dangerForeground2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "dangerForeground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "dangerForegroundInverted": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralBackground1": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "neutralBackground1Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground1Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground1Selected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground2": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "neutralBackground2Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground2Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground2Selected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground3": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "neutralBackground3Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground3Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground3Selected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground4": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "neutralBackground4Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground4Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground4Selected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground5": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "neutralBackground5Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground5Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground5Selected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralBackground6": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "neutralBackgroundDisabled": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "neutralBackgroundInverted": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralForeground1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralForeground1Hover": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground1Pressed": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground1Selected": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralForeground2BrandHover": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2BrandPressed": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2BrandSelected": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2Hover": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2Pressed": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground2Selected": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralForeground3BrandHover": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3BrandPressed": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3BrandSelected": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3Hover": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3Pressed": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground3Selected": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForeground4": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralForegroundDisabled": Object {
-    "resource_paths": Array [
-      "GrayText",
-    ],
-  },
-  "neutralForegroundInverted": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "neutralForegroundInvertedLink": Object {
-    "resource_paths": Array [
-      "Hotlight",
-    ],
-  },
-  "neutralForegroundInvertedLinkHover": Object {
-    "resource_paths": Array [
-      "Hotlight",
-    ],
-  },
-  "neutralForegroundInvertedLinkPressed": Object {
-    "resource_paths": Array [
-      "Hotlight",
-    ],
-  },
-  "neutralForegroundInvertedLinkSelected": Object {
-    "resource_paths": Array [
-      "Hotlight",
-    ],
-  },
-  "neutralForegroundOnBrand": Object {
-    "resource_paths": Array [
-      "ButtonText",
-    ],
-  },
-  "neutralForegroundOnBrandHover": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForegroundOnBrandPressed": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralForegroundOnBrandSelected": Object {
-    "resource_paths": Array [
-      "HighlightText",
-    ],
-  },
-  "neutralStencil1": "#141414",
-  "neutralStencil2": "#858585",
-  "neutralStroke1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralStroke1Hover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralStroke1Pressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralStroke1Selected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralStroke2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralStroke3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralStrokeAccessible": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "neutralStrokeAccessibleHover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralStrokeAccessiblePressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralStrokeAccessibleSelected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "neutralStrokeDisabled": Object {
-    "resource_paths": Array [
-      "GrayText",
-    ],
-  },
-  "outofofficeBackground1": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "outofofficeBackground2": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "outofofficeBackground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "outofofficeBorder1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "outofofficeBorder2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "outofofficeBorderActive": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "outofofficeForeground1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "outofofficeForeground2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "outofofficeForeground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "severeBackground1": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "severeBackground2": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "severeBackground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "severeBorder1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "severeBorder2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "severeBorderActive": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "severeForeground1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "severeForeground2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "severeForeground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "strokeFocus1": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "strokeFocus2": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "subtleBackground": "#00000000",
-  "subtleBackgroundHover": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "subtleBackgroundPressed": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "subtleBackgroundSelected": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "successBackground1": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "successBackground2": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "successBackground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "successBorder1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "successBorder2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "successBorderActive": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "successForeground1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "successForeground2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "successForeground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "successForegroundInverted": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "transparentBackground": "#00000000",
-  "transparentBackgroundHover": "#00000000",
-  "transparentBackgroundPressed": "#00000000",
-  "transparentBackgroundSelected": "#00000000",
-  "transparentStroke": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "transparentStrokeDisabled": Object {
-    "resource_paths": Array [
-      "GrayText",
-    ],
-  },
-  "transparentStrokeInteractive": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "warningBackground1": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "warningBackground2": Object {
-    "resource_paths": Array [
-      "Window",
-    ],
-  },
-  "warningBackground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "warningBorder1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "warningBorder2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "warningBorderActive": Object {
-    "resource_paths": Array [
-      "Highlight",
-    ],
-  },
-  "warningForeground1": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "warningForeground2": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "warningForeground3": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-  "warningForegroundInverted": Object {
-    "resource_paths": Array [
-      "WindowText",
-    ],
-  },
-}
-`;
-
-exports[`createOfficeColorAliasTokens test officeTheme: White 1`] = `
-Object {
-  "brandBackground": "#185abd",
-  "brandBackground2": "#d2e0f4",
-  "brandBackgroundDisabled": undefined,
-  "brandBackgroundHover": "#1651aa",
-  "brandBackgroundPressed": "#0e336a",
-  "brandBackgroundSelected": "#13458f",
-  "brandBackgroundStatic": "#185abd",
-  "brandForeground1": "#185abd",
-  "brandForeground1Disabled": undefined,
-  "brandForeground1Pressed": undefined,
-  "brandForeground2": "#1651aa",
-  "brandForegroundLink": "#185abd",
-  "brandForegroundLinkHover": "#1651aa",
-  "brandForegroundLinkPressed": "#0e336a",
-  "brandForegroundLinkSelected": "#13458f",
-  "brandStroke1": "#185abd",
-  "brandStroke2": "#6794d7",
-  "compoundBrandBackground1": "#185abd",
-  "compoundBrandBackground1Hover": "#1651aa",
-  "compoundBrandBackground1Pressed": "#0e336a",
-  "compoundBrandForeground1": "#185abd",
-  "compoundBrandForeground1Hover": "#1651aa",
-  "compoundBrandForeground1Pressed": "#0e336a",
-  "compoundBrandStroke1": "#185abd",
-  "compoundBrandStroke1Hover": "#1651aa",
-  "compoundBrandStroke1Pressed": "#0e336a",
-  "dangerBackground1": "#fdf6f6",
-  "dangerBackground2": "#f1bbbc",
-  "dangerBackground3": "#d13438",
-  "dangerBorder1": "#f1bbbc",
-  "dangerBorder2": "#d13438",
-  "dangerBorderActive": "#d13438",
-  "dangerForeground1": "#bc2f32",
-  "dangerForeground2": "#751d1f",
-  "dangerForeground3": "#d13438",
-  "dangerForegroundInverted": "#dc5e62",
-  "neutralBackground1": "#ffffff",
-  "neutralBackground1Hover": "#f5f5f5",
-  "neutralBackground1Pressed": "#e0e0e0",
-  "neutralBackground1Selected": "#ebebeb",
-  "neutralBackground2": "#fafafa",
-  "neutralBackground2Hover": "#f0f0f0",
-  "neutralBackground2Pressed": "#dbdbdb",
-  "neutralBackground2Selected": "#e6e6e6",
-  "neutralBackground3": "#f5f5f5",
-  "neutralBackground3Hover": "#ebebeb",
-  "neutralBackground3Pressed": "#d6d6d6",
-  "neutralBackground3Selected": "#e0e0e0",
-  "neutralBackground4": "#f0f0f0",
-  "neutralBackground4Hover": "#fafafa",
-  "neutralBackground4Pressed": "#f5f5f5",
-  "neutralBackground4Selected": "#ffffff",
-  "neutralBackground5": "#ebebeb",
-  "neutralBackground5Hover": "#f5f5f5",
-  "neutralBackground5Pressed": "#f0f0f0",
-  "neutralBackground5Selected": "#fafafa",
-  "neutralBackground6": "#e6e6e6",
-  "neutralBackgroundDisabled": "#f0f0f0",
-  "neutralBackgroundInverted": "#616161",
-  "neutralForeground1": "#242424",
-  "neutralForeground1Hover": "#242424",
-  "neutralForeground1Pressed": "#242424",
-  "neutralForeground1Selected": "#242424",
-  "neutralForeground2": "#424242",
-  "neutralForeground2BrandHover": "#1651aa",
-  "neutralForeground2BrandPressed": "#0e336a",
-  "neutralForeground2BrandSelected": "#13458f",
-  "neutralForeground2Hover": "#242424",
-  "neutralForeground2Pressed": "#242424",
-  "neutralForeground2Selected": "#242424",
-  "neutralForeground3": "#616161",
-  "neutralForeground3BrandHover": "#1651aa",
-  "neutralForeground3BrandPressed": "#0e336a",
-  "neutralForeground3BrandSelected": "#13458f",
-  "neutralForeground3Hover": "#424242",
-  "neutralForeground3Pressed": "#424242",
-  "neutralForeground3Selected": "#424242",
-  "neutralForeground4": "#707070",
-  "neutralForegroundDisabled": "#bdbdbd",
-  "neutralForegroundInverted": "#ffffff",
-  "neutralForegroundInvertedLink": "#ffffff",
-  "neutralForegroundInvertedLinkHover": "#ffffff",
-  "neutralForegroundInvertedLinkPressed": "#ffffff",
-  "neutralForegroundInvertedLinkSelected": "#ffffff",
-  "neutralForegroundOnBrand": "#ffffff",
-  "neutralForegroundOnBrandHover": "#ffffff",
-  "neutralForegroundOnBrandPressed": "#ffffff",
-  "neutralForegroundOnBrandSelected": "#ffffff",
-  "neutralStencil1": "#e6e6e6",
-  "neutralStencil2": "#fafafa",
-  "neutralStroke1": "#d1d1d1",
-  "neutralStroke1Hover": "#c7c7c7",
-  "neutralStroke1Pressed": "#b3b3b3",
-  "neutralStroke1Selected": "#bdbdbd",
-  "neutralStroke2": "#e0e0e0",
-  "neutralStroke3": "#f0f0f0",
-  "neutralStrokeAccessible": "#616161",
-  "neutralStrokeAccessibleHover": "#575757",
-  "neutralStrokeAccessiblePressed": "#4d4d4d",
-  "neutralStrokeAccessibleSelected": "#185abd",
-  "neutralStrokeDisabled": "#e0e0e0",
-  "outofofficeBackground1": "#fdf5fc",
-  "outofofficeBackground2": "#edbbe7",
-  "outofofficeBackground3": "#c239b3",
-  "outofofficeBorder1": "#edbbe7",
-  "outofofficeBorder2": "#c239b3",
-  "outofofficeBorderActive": "#c239b3",
-  "outofofficeForeground1": "#af33a1",
-  "outofofficeForeground2": "#6d2064",
-  "outofofficeForeground3": "#c239b3",
-  "severeBackground1": "#fdf6f3",
-  "severeBackground2": "#f4bfab",
-  "severeBackground3": "#da3b01",
-  "severeBorder1": "#f4bfab",
-  "severeBorder2": "#da3b01",
-  "severeBorderActive": "#da3b01",
-  "severeForeground1": "#c43501",
-  "severeForeground2": "#7a2101",
-  "severeForeground3": "#da3b01",
-  "strokeFocus1": "#ffffff",
-  "strokeFocus2": "#000000",
-  "subtleBackground": "#00000000",
-  "subtleBackgroundHover": "#f5f5f5",
-  "subtleBackgroundPressed": "#e0e0e0",
-  "subtleBackgroundSelected": "#ebebeb",
-  "successBackground1": "#f1faf1",
-  "successBackground2": "#9fd89f",
-  "successBackground3": "#107c10",
-  "successBorder1": "#9fd89f",
-  "successBorder2": "#107c10",
-  "successBorderActive": "#107c10",
-  "successForeground1": "#0e700e",
-  "successForeground2": "#094509",
-  "successForeground3": "#107c10",
-  "successForegroundInverted": "#359b35",
-  "transparentBackground": "#00000000",
-  "transparentBackgroundHover": "#00000000",
-  "transparentBackgroundPressed": "#00000000",
-  "transparentBackgroundSelected": "#00000000",
-  "transparentStroke": "#00000000",
-  "transparentStrokeDisabled": "#00000000",
-  "transparentStrokeInteractive": "#00000000",
-  "warningBackground1": "#fffef5",
-  "warningBackground2": "#fef7b2",
-  "warningBackground3": "#fde300",
-  "warningBorder1": "#fef7b2",
-  "warningBorder2": "#fde300",
-  "warningBorderActive": "#fde300",
-  "warningForeground1": "#817400",
-  "warningForeground2": "#817400",
-  "warningForeground3": "#fde300",
-  "warningForegroundInverted": "#fef7b2",
-}
-`;
-
-exports[`createOfficeShadowAliasTokens test officeTheme: Black 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000047",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000047",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000047",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000047",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createOfficeShadowAliasTokens test officeTheme: Colorful 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000024",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000024",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000033",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000024",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000033",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000024",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createOfficeShadowAliasTokens test officeTheme: DarkGray 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000047",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000047",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000047",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000047",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createOfficeShadowAliasTokens test officeTheme: HighContrast 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000047",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000047",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000047",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000047",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createOfficeShadowAliasTokens test officeTheme: White 1`] = `
-Object {
-  "shadow16": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000024",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000024",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000033",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000024",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#00000033",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": Object {
-    "ambient": Object {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000024",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": Object {
-    "ambient": Object {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": Object {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
   },
 }
 `;
 
 exports[`createOfficeTheme test 1`] = `
-Object {
-  "colors": Object {
+{
+  "colors": {
     "accentButtonBackground": "#D83B01",
     "accentButtonText": "#FFFFFF",
     "actionLink": "#262626",
@@ -2459,12 +241,12 @@ Object {
     "brandBackgroundPressed": "#A22C01",
     "brandBackgroundSelected": "#13458f",
     "brandBackgroundStatic": "#185abd",
-    "brandForeground1": "#aec6eb",
-    "brandForeground2": "#d2e0f4",
-    "brandForegroundLink": "#aec6eb",
-    "brandForegroundLinkHover": "#d2e0f4",
-    "brandForegroundLinkPressed": "#2e6ac5",
-    "brandForegroundLinkSelected": "#d2e0f4",
+    "brandForeground1": "#185abd",
+    "brandForeground2": "#1651aa",
+    "brandForegroundLink": "#185abd",
+    "brandForegroundLinkHover": "#1651aa",
+    "brandForegroundLinkPressed": "#0e336a",
+    "brandForegroundLinkSelected": "#13458f",
     "brandStroke1": "#D83B01",
     "brandStroke2": "#d2e0f4",
     "brandedBackground": "#D83B01",
@@ -2654,16 +436,16 @@ Object {
     "neutralForeground1Pressed": "#262626",
     "neutralForeground1Selected": "#262626",
     "neutralForeground2": "#666666",
-    "neutralForeground2BrandHover": "#d2e0f4",
-    "neutralForeground2BrandPressed": "#2e6ac5",
-    "neutralForeground2BrandSelected": "#d2e0f4",
+    "neutralForeground2BrandHover": "#1651aa",
+    "neutralForeground2BrandPressed": "#0e336a",
+    "neutralForeground2BrandSelected": "#13458f",
     "neutralForeground2Hover": "#505050",
     "neutralForeground2Pressed": "#666666",
     "neutralForeground2Selected": "#666666",
     "neutralForeground3": "#616161",
-    "neutralForeground3BrandHover": "#d2e0f4",
-    "neutralForeground3BrandPressed": "#2e6ac5",
-    "neutralForeground3BrandSelected": "#d2e0f4",
+    "neutralForeground3BrandHover": "#1651aa",
+    "neutralForeground3BrandPressed": "#0e336a",
+    "neutralForeground3BrandSelected": "#13458f",
     "neutralForeground3Hover": "#424242",
     "neutralForeground3Pressed": "#424242",
     "neutralForeground3Selected": "#424242",
@@ -2763,9 +545,9 @@ Object {
     "warningHighlight": "#A50000",
     "warningText": "#262626",
   },
-  "host": Object {
+  "host": {
     "appearance": "light",
-    "colors": Object {
+    "colors": {
       "App2": "#EFF6FC",
       "App3": "#BBDAF3",
       "App4": "#55A4E2",
@@ -2782,7 +564,7 @@ Object {
       "Gray5": "#737373",
       "Gray6": "#000000",
     },
-    "palette": Object {
+    "palette": {
       "AccentDark": "#C6C6C6",
       "AccentEmphasis": "#D83B01",
       "AccentLight": "#E6E6E6",
@@ -2922,169 +704,170 @@ Object {
       "ThumbToggleSwitchOnPressed": "#FFFFFF",
     },
   },
-  "shadows": Object {
-    "shadow16": Object {
-      "ambient": Object {
+  "name": "Colorful",
+  "shadows": {
+    "shadow16": {
+      "ambient": {
         "blur": 2,
         "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 16,
         "color": "#00000024",
         "x": 0,
         "y": 8,
       },
     },
-    "shadow16brand": Object {
-      "ambient": Object {
+    "shadow16brand": {
+      "ambient": {
         "blur": 2,
         "color": "#0000004d",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 16,
         "color": "#00000040",
         "x": 0,
         "y": 8,
       },
     },
-    "shadow2": Object {
-      "ambient": Object {
+    "shadow2": {
+      "ambient": {
         "blur": 2,
         "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 2,
         "color": "#00000024",
         "x": 0,
         "y": 1,
       },
     },
-    "shadow28": Object {
-      "ambient": Object {
+    "shadow28": {
+      "ambient": {
         "blur": 8,
         "color": "#00000033",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 28,
         "color": "#0000003d",
         "x": 0,
         "y": 14,
       },
     },
-    "shadow28brand": Object {
-      "ambient": Object {
+    "shadow28brand": {
+      "ambient": {
         "blur": 8,
         "color": "#0000004d",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 28,
         "color": "#00000040",
         "x": 0,
         "y": 14,
       },
     },
-    "shadow2brand": Object {
-      "ambient": Object {
+    "shadow2brand": {
+      "ambient": {
         "blur": 2,
         "color": "#0000004d",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 2,
         "color": "#00000040",
         "x": 0,
         "y": 1,
       },
     },
-    "shadow4": Object {
-      "ambient": Object {
+    "shadow4": {
+      "ambient": {
         "blur": 2,
         "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 4,
         "color": "#00000024",
         "x": 0,
         "y": 2,
       },
     },
-    "shadow4brand": Object {
-      "ambient": Object {
+    "shadow4brand": {
+      "ambient": {
         "blur": 2,
         "color": "#0000004d",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 4,
         "color": "#00000040",
         "x": 0,
         "y": 2,
       },
     },
-    "shadow64": Object {
-      "ambient": Object {
+    "shadow64": {
+      "ambient": {
         "blur": 8,
         "color": "#00000033",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 64,
         "color": "#0000003d",
         "x": 0,
         "y": 32,
       },
     },
-    "shadow64brand": Object {
-      "ambient": Object {
+    "shadow64brand": {
+      "ambient": {
         "blur": 8,
         "color": "#0000004d",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 64,
         "color": "#00000040",
         "x": 0,
         "y": 32,
       },
     },
-    "shadow8": Object {
-      "ambient": Object {
+    "shadow8": {
+      "ambient": {
         "blur": 2,
         "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 8,
         "color": "#00000024",
         "x": 0,
         "y": 4,
       },
     },
-    "shadow8brand": Object {
-      "ambient": Object {
+    "shadow8brand": {
+      "ambient": {
         "blur": 2,
         "color": "#0000004d",
         "x": 0,
         "y": 0,
       },
-      "key": Object {
+      "key": {
         "blur": 8,
         "color": "#00000040",
         "x": 0,
@@ -3092,15 +875,15 @@ Object {
       },
     },
   },
-  "spacing": Object {
+  "spacing": {
     "l1": "20px",
     "l2": "32px",
     "m": "16px",
     "s1": "8px",
     "s2": "4px",
   },
-  "typography": Object {
-    "families": Object {
+  "typography": {
+    "families": {
       "cursive": "System",
       "monospace": "Consolas",
       "numeric": "Bahnschrift",
@@ -3109,7 +892,7 @@ Object {
       "secondary": "Segoe UI Semibold",
       "serif": "System",
     },
-    "sizes": Object {
+    "sizes": {
       "body": 14,
       "caption": 10,
       "header": 20,
@@ -3118,139 +901,139 @@ Object {
       "secondary": 12,
       "subheader": 16,
     },
-    "variants": Object {
-      "body1": Object {
+    "variants": {
+      "body1": {
         "face": "primary",
         "size": 12,
         "weight": "400",
       },
-      "body1Strong": Object {
+      "body1Strong": {
         "face": "primary",
         "size": 12,
         "weight": "600",
       },
-      "body2": Object {
+      "body2": {
         "face": "primary",
         "size": 14,
         "weight": "400",
       },
-      "body2Strong": Object {
+      "body2Strong": {
         "face": "primary",
         "size": 14,
         "weight": "600",
       },
-      "bodySemibold": Object {
+      "bodySemibold": {
         "face": "primary",
         "size": "body",
         "weight": "semiBold",
       },
-      "bodyStandard": Object {
+      "bodyStandard": {
         "face": "primary",
         "size": "body",
         "weight": "regular",
       },
-      "caption1": Object {
+      "caption1": {
         "face": "primary",
         "size": 10,
         "weight": "400",
       },
-      "captionStandard": Object {
+      "captionStandard": {
         "face": "primary",
         "size": "caption",
         "weight": "regular",
       },
-      "display": Object {
+      "display": {
         "face": "primary",
         "size": 40,
         "weight": "600",
       },
-      "headerSemibold": Object {
+      "headerSemibold": {
         "face": "primary",
         "size": "header",
         "weight": "semiBold",
       },
-      "headerStandard": Object {
+      "headerStandard": {
         "face": "primary",
         "size": "header",
         "weight": "regular",
       },
-      "heroLargeSemibold": Object {
+      "heroLargeSemibold": {
         "face": "primary",
         "size": "heroLarge",
         "weight": "semiBold",
       },
-      "heroLargeStandard": Object {
+      "heroLargeStandard": {
         "face": "primary",
         "size": "heroLarge",
         "weight": "regular",
       },
-      "heroSemibold": Object {
+      "heroSemibold": {
         "face": "primary",
         "size": "hero",
         "weight": "semiBold",
       },
-      "heroStandard": Object {
+      "heroStandard": {
         "face": "primary",
         "size": "hero",
         "weight": "regular",
       },
-      "largeTitle": Object {
+      "largeTitle": {
         "face": "primary",
         "size": 40,
         "weight": "400",
       },
-      "secondarySemibold": Object {
+      "secondarySemibold": {
         "face": "primary",
         "size": "secondary",
         "weight": "semiBold",
       },
-      "secondaryStandard": Object {
+      "secondaryStandard": {
         "face": "primary",
         "size": "secondary",
         "weight": "regular",
       },
-      "subheaderSemibold": Object {
+      "subheaderSemibold": {
         "face": "primary",
         "size": "subheader",
         "weight": "semiBold",
       },
-      "subheaderStandard": Object {
+      "subheaderStandard": {
         "face": "primary",
         "size": "subheader",
         "weight": "regular",
       },
-      "subtitle1": Object {
+      "subtitle1": {
         "face": "primary",
         "size": 20,
         "weight": "400",
       },
-      "subtitle1Strong": Object {
+      "subtitle1Strong": {
         "face": "primary",
         "size": 20,
         "weight": "600",
       },
-      "subtitle2": Object {
+      "subtitle2": {
         "face": "primary",
         "size": 16,
         "weight": "400",
       },
-      "subtitle2Strong": Object {
+      "subtitle2Strong": {
         "face": "primary",
         "size": 16,
         "weight": "600",
       },
-      "title1": Object {
+      "title1": {
         "face": "primary",
         "size": 28,
         "weight": "400",
       },
-      "title1Strong": Object {
+      "title1Strong": {
         "face": "primary",
         "size": 28,
         "weight": "600",
       },
     },
-    "weights": Object {
+    "weights": {
       "regular": "400",
       "semiBold": "600",
     },
@@ -3259,7 +1042,7 @@ Object {
 `;
 
 exports[`fallbackGetPalette test Random palette 1`] = `
-Object {
+{
   "AccentDark": "#C6C6C6",
   "AccentEmphasis": "#D83B01",
   "AccentLight": "#E6E6E6",
@@ -3401,7 +1184,7 @@ Object {
 `;
 
 exports[`fallbackGetPalette test TaskPane palette 1`] = `
-Object {
+{
   "AccentDark": "#C6C6C6",
   "AccentEmphasis": "#D83B01",
   "AccentLight": "#E6E6E6",
@@ -3543,11 +1326,11 @@ Object {
 `;
 
 exports[`fallbackOfficeModule test 1`] = `
-Object {
-  "fluentTypography": Object {},
+{
+  "fluentTypography": {},
   "getPalette": [Function],
-  "rampNames": Object {
-    "App": Array [
+  "rampNames": {
+    "App": [
       "FakeApp1",
       "App2",
       "App3",
@@ -3557,22 +1340,22 @@ Object {
       "App7",
       "App8",
     ],
-    "ClassicGrays": Array [
+    "ClassicGrays": [
       "FakeGray4",
       "Gray5",
       "Gray6",
     ],
-    "FluentGrays": Array [
+    "FluentGrays": [
       "FakeGray1",
       "Gray2",
       "Gray3",
     ],
-    "Sepias": Array [
+    "Sepias": [
       "FakeSepia",
     ],
   },
-  "ramps": Object {
-    "App": Array [
+  "ramps": {
+    "App": [
       "#F8F8F8",
       "#EFF6FC",
       "#BBDAF3",
@@ -3582,96 +1365,2305 @@ Object {
       "#283E4A",
       "#030C13",
     ],
-    "ClassicGrays": Array [
+    "ClassicGrays": [
       "#FFFFFF",
       "#737373",
       "#000000",
     ],
-    "FluentGrays": Array [
+    "FluentGrays": [
       "#FAF9F8",
       "#797775",
       "#11100F",
     ],
-    "Sepias": Array [
+    "Sepias": [
       "#ECE6DE",
     ],
   },
-  "typography": Object {},
+  "typography": {},
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #0078d4 1`] = `
-Object {
-  "brandBackground": "#0078d4",
-  "brandBackground2": "#cce3f5",
-  "brandBackgroundHover": "#106ebe",
-  "brandBackgroundPressed": "#135995",
-  "brandBackgroundSelected": "#1664a7",
-  "brandBackgroundStatic": "#0078d4",
-  "brandForeground1": "#0078d4",
-  "brandForeground2": "#106ebe",
-  "brandForegroundLink": "#0078d4",
-  "brandForegroundLinkHover": "#106ebe",
-  "brandForegroundLinkPressed": "#135995",
-  "brandForegroundLinkSelected": "#1664a7",
-  "brandStroke1": "#0078d4",
-  "brandStroke2": "#cce3f5",
-  "compoundBrandBackground1": "#0078d4",
-  "compoundBrandBackground1Hover": "#106ebe",
-  "compoundBrandBackground1Pressed": "#1664a7",
-  "compoundBrandForeground1": "#0078d4",
-  "compoundBrandForeground1Hover": "#106ebe",
-  "compoundBrandForeground1Pressed": "#135995",
-  "compoundBrandStroke1": "#0078d4",
-  "compoundBrandStroke1Hover": "#106ebe",
-  "compoundBrandStroke1Pressed": "#1664a7",
-  "neutralForeground2BrandHover": "#106ebe",
-  "neutralForeground2BrandPressed": "#135995",
-  "neutralForeground2BrandSelected": "#1664a7",
-  "neutralForeground3BrandHover": "#106ebe",
-  "neutralForeground3BrandPressed": "#135995",
-  "neutralForeground3BrandSelected": "#1664a7",
-  "neutralStrokeAccessibleSelected": "#0078d4",
+exports[`getThemingModule test 1`] = `
+[
+  {
+    "fluentTypography": {},
+    "getPalette": [Function],
+    "rampNames": {
+      "App": [
+        "FakeApp1",
+        "App2",
+        "App3",
+        "App4",
+        "App5",
+        "App6",
+        "App7",
+        "App8",
+      ],
+      "ClassicGrays": [
+        "FakeGray4",
+        "Gray5",
+        "Gray6",
+      ],
+      "FluentGrays": [
+        "FakeGray1",
+        "Gray2",
+        "Gray3",
+      ],
+      "Sepias": [
+        "FakeSepia",
+      ],
+    },
+    "ramps": {
+      "App": [
+        "#F8F8F8",
+        "#EFF6FC",
+        "#BBDAF3",
+        "#55A4E2",
+        "#359EDD",
+        "#0078d7",
+        "#283E4A",
+        "#030C13",
+      ],
+      "ClassicGrays": [
+        "#FFFFFF",
+        "#737373",
+        "#000000",
+      ],
+      "FluentGrays": [
+        "#FAF9F8",
+        "#797775",
+        "#11100F",
+      ],
+      "Sepias": [
+        "#ECE6DE",
+      ],
+    },
+    "typography": {},
+  },
+  undefined,
+]
+`;
+
+exports[`win32Typography test 1`] = `
+{
+  "brandBackground": "#185abd",
+  "brandBackground2": "#d2e0f4",
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": "#1651aa",
+  "brandBackgroundPressed": "#0e336a",
+  "brandBackgroundSelected": "#13458f",
+  "brandBackgroundStatic": "#185abd",
+  "brandForeground1": "#185abd",
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": "#1651aa",
+  "brandForegroundLink": "#185abd",
+  "brandForegroundLinkHover": "#1651aa",
+  "brandForegroundLinkPressed": "#0e336a",
+  "brandForegroundLinkSelected": "#13458f",
+  "brandStroke1": "#185abd",
+  "brandStroke2": "#6794d7",
+  "compoundBrandBackground1": "#185abd",
+  "compoundBrandBackground1Hover": "#1651aa",
+  "compoundBrandBackground1Pressed": "#0e336a",
+  "compoundBrandForeground1": "#185abd",
+  "compoundBrandForeground1Hover": "#1651aa",
+  "compoundBrandForeground1Pressed": "#0e336a",
+  "compoundBrandStroke1": "#185abd",
+  "compoundBrandStroke1Hover": "#1651aa",
+  "compoundBrandStroke1Pressed": "#0e336a",
+  "dangerBackground1": "#fdf6f6",
+  "dangerBackground2": "#f1bbbc",
+  "dangerBackground3": "#d13438",
+  "dangerBorder1": "#f1bbbc",
+  "dangerBorder2": "#d13438",
+  "dangerBorderActive": "#d13438",
+  "dangerForeground1": "#bc2f32",
+  "dangerForeground2": "#751d1f",
+  "dangerForeground3": "#d13438",
+  "dangerForegroundInverted": "#dc5e62",
+  "neutralBackground1": "#ffffff",
+  "neutralBackground1Hover": "#f5f5f5",
+  "neutralBackground1Pressed": "#e0e0e0",
+  "neutralBackground1Selected": "#ebebeb",
+  "neutralBackground2": "#fafafa",
+  "neutralBackground2Hover": "#f0f0f0",
+  "neutralBackground2Pressed": "#dbdbdb",
+  "neutralBackground2Selected": "#e6e6e6",
+  "neutralBackground3": "#f5f5f5",
+  "neutralBackground3Hover": "#ebebeb",
+  "neutralBackground3Pressed": "#d6d6d6",
+  "neutralBackground3Selected": "#e0e0e0",
+  "neutralBackground4": "#f0f0f0",
+  "neutralBackground4Hover": "#fafafa",
+  "neutralBackground4Pressed": "#f5f5f5",
+  "neutralBackground4Selected": "#ffffff",
+  "neutralBackground5": "#ebebeb",
+  "neutralBackground5Hover": "#f5f5f5",
+  "neutralBackground5Pressed": "#f0f0f0",
+  "neutralBackground5Selected": "#fafafa",
+  "neutralBackground6": "#e6e6e6",
+  "neutralBackgroundDisabled": "#f0f0f0",
+  "neutralBackgroundInverted": "#616161",
+  "neutralForeground1": "#242424",
+  "neutralForeground1Hover": "#242424",
+  "neutralForeground1Pressed": "#242424",
+  "neutralForeground1Selected": "#242424",
+  "neutralForeground2": "#424242",
+  "neutralForeground2BrandHover": "#1651aa",
+  "neutralForeground2BrandPressed": "#0e336a",
+  "neutralForeground2BrandSelected": "#13458f",
+  "neutralForeground2Hover": "#242424",
+  "neutralForeground2Pressed": "#242424",
+  "neutralForeground2Selected": "#242424",
+  "neutralForeground3": "#616161",
+  "neutralForeground3BrandHover": "#1651aa",
+  "neutralForeground3BrandPressed": "#0e336a",
+  "neutralForeground3BrandSelected": "#13458f",
+  "neutralForeground3Hover": "#424242",
+  "neutralForeground3Pressed": "#424242",
+  "neutralForeground3Selected": "#424242",
+  "neutralForeground4": "#707070",
+  "neutralForegroundDisabled": "#bdbdbd",
+  "neutralForegroundInverted": "#ffffff",
+  "neutralForegroundInvertedLink": "#ffffff",
+  "neutralForegroundInvertedLinkHover": "#ffffff",
+  "neutralForegroundInvertedLinkPressed": "#ffffff",
+  "neutralForegroundInvertedLinkSelected": "#ffffff",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#e6e6e6",
+  "neutralStencil2": "#fafafa",
+  "neutralStroke1": "#d1d1d1",
+  "neutralStroke1Hover": "#c7c7c7",
+  "neutralStroke1Pressed": "#b3b3b3",
+  "neutralStroke1Selected": "#bdbdbd",
+  "neutralStroke2": "#e0e0e0",
+  "neutralStroke3": "#f0f0f0",
+  "neutralStrokeAccessible": "#616161",
+  "neutralStrokeAccessibleHover": "#575757",
+  "neutralStrokeAccessiblePressed": "#4d4d4d",
+  "neutralStrokeAccessibleSelected": "#185abd",
+  "neutralStrokeDisabled": "#e0e0e0",
+  "outofofficeBackground1": "#fdf5fc",
+  "outofofficeBackground2": "#edbbe7",
+  "outofofficeBackground3": "#c239b3",
+  "outofofficeBorder1": "#edbbe7",
+  "outofofficeBorder2": "#c239b3",
+  "outofofficeBorderActive": "#c239b3",
+  "outofofficeForeground1": "#af33a1",
+  "outofofficeForeground2": "#6d2064",
+  "outofofficeForeground3": "#c239b3",
+  "severeBackground1": "#fdf6f3",
+  "severeBackground2": "#f4bfab",
+  "severeBackground3": "#da3b01",
+  "severeBorder1": "#f4bfab",
+  "severeBorder2": "#da3b01",
+  "severeBorderActive": "#da3b01",
+  "severeForeground1": "#c43501",
+  "severeForeground2": "#7a2101",
+  "severeForeground3": "#da3b01",
+  "strokeFocus1": "#ffffff",
+  "strokeFocus2": "#000000",
+  "subtleBackground": "#00000000",
+  "subtleBackgroundHover": "#f5f5f5",
+  "subtleBackgroundPressed": "#e0e0e0",
+  "subtleBackgroundSelected": "#ebebeb",
+  "successBackground1": "#f1faf1",
+  "successBackground2": "#9fd89f",
+  "successBackground3": "#107c10",
+  "successBorder1": "#9fd89f",
+  "successBorder2": "#107c10",
+  "successBorderActive": "#107c10",
+  "successForeground1": "#0e700e",
+  "successForeground2": "#094509",
+  "successForeground3": "#107c10",
+  "successForegroundInverted": "#359b35",
+  "transparentBackground": "#00000000",
+  "transparentBackgroundHover": "#00000000",
+  "transparentBackgroundPressed": "#00000000",
+  "transparentBackgroundSelected": "#00000000",
+  "transparentStroke": "#00000000",
+  "transparentStrokeDisabled": "#00000000",
+  "transparentStrokeInteractive": "#00000000",
+  "warningBackground1": "#fffef5",
+  "warningBackground2": "#fef7b2",
+  "warningBackground3": "#fde300",
+  "warningBorder1": "#fef7b2",
+  "warningBorder2": "#fde300",
+  "warningBorderActive": "#fde300",
+  "warningForeground1": "#817400",
+  "warningForeground2": "#817400",
+  "warningForeground3": "#fde300",
+  "warningForegroundInverted": "#fef7b2",
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #107c41 1`] = `
-Object {
-  "brandBackground": "#107c41",
-  "brandBackground2": "#caead8",
-  "brandBackgroundHover": "#0f703b",
-  "brandBackgroundPressed": "#094624",
-  "brandBackgroundSelected": "#0c5f32",
-  "brandBackgroundStatic": "#107c41",
-  "brandForeground1": "#107c41",
-  "brandForeground2": "#0f703b",
-  "brandForegroundLink": "#107c41",
-  "brandForegroundLinkHover": "#0f703b",
-  "brandForegroundLinkPressed": "#094624",
-  "brandForegroundLinkSelected": "#0c5f32",
-  "brandStroke1": "#107c41",
-  "brandStroke2": "#caead8",
-  "compoundBrandBackground1": "#107c41",
-  "compoundBrandBackground1Hover": "#0f703b",
-  "compoundBrandBackground1Pressed": "#0c5f32",
-  "compoundBrandForeground1": "#107c41",
-  "compoundBrandForeground1Hover": "#0f703b",
-  "compoundBrandForeground1Pressed": "#094624",
-  "compoundBrandStroke1": "#107c41",
-  "compoundBrandStroke1Hover": "#0f703b",
-  "compoundBrandStroke1Pressed": "#0c5f32",
-  "neutralForeground2BrandHover": "#0f703b",
-  "neutralForeground2BrandPressed": "#094624",
-  "neutralForeground2BrandSelected": "#0c5f32",
-  "neutralForeground3BrandHover": "#0f703b",
-  "neutralForeground3BrandPressed": "#094624",
-  "neutralForeground3BrandSelected": "#0c5f32",
-  "neutralStrokeAccessibleSelected": "#107c41",
+exports[`win32Typography test 2`] = `
+{
+  "brandBackground": "#185abd",
+  "brandBackground2": "#d2e0f4",
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": "#1651aa",
+  "brandBackgroundPressed": "#0e336a",
+  "brandBackgroundSelected": "#13458f",
+  "brandBackgroundStatic": "#185abd",
+  "brandForeground1": "#185abd",
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": "#1651aa",
+  "brandForegroundLink": "#185abd",
+  "brandForegroundLinkHover": "#1651aa",
+  "brandForegroundLinkPressed": "#0e336a",
+  "brandForegroundLinkSelected": "#13458f",
+  "brandStroke1": "#185abd",
+  "brandStroke2": "#6794d7",
+  "compoundBrandBackground1": "#185abd",
+  "compoundBrandBackground1Hover": "#1651aa",
+  "compoundBrandBackground1Pressed": "#0e336a",
+  "compoundBrandForeground1": "#185abd",
+  "compoundBrandForeground1Hover": "#1651aa",
+  "compoundBrandForeground1Pressed": "#0e336a",
+  "compoundBrandStroke1": "#185abd",
+  "compoundBrandStroke1Hover": "#1651aa",
+  "compoundBrandStroke1Pressed": "#0e336a",
+  "dangerBackground1": "#fdf6f6",
+  "dangerBackground2": "#f1bbbc",
+  "dangerBackground3": "#d13438",
+  "dangerBorder1": "#f1bbbc",
+  "dangerBorder2": "#d13438",
+  "dangerBorderActive": "#d13438",
+  "dangerForeground1": "#bc2f32",
+  "dangerForeground2": "#751d1f",
+  "dangerForeground3": "#d13438",
+  "dangerForegroundInverted": "#dc5e62",
+  "neutralBackground1": "#ffffff",
+  "neutralBackground1Hover": "#f5f5f5",
+  "neutralBackground1Pressed": "#e0e0e0",
+  "neutralBackground1Selected": "#ebebeb",
+  "neutralBackground2": "#fafafa",
+  "neutralBackground2Hover": "#f0f0f0",
+  "neutralBackground2Pressed": "#dbdbdb",
+  "neutralBackground2Selected": "#e6e6e6",
+  "neutralBackground3": "#f5f5f5",
+  "neutralBackground3Hover": "#ebebeb",
+  "neutralBackground3Pressed": "#d6d6d6",
+  "neutralBackground3Selected": "#e0e0e0",
+  "neutralBackground4": "#f0f0f0",
+  "neutralBackground4Hover": "#fafafa",
+  "neutralBackground4Pressed": "#f5f5f5",
+  "neutralBackground4Selected": "#ffffff",
+  "neutralBackground5": "#ebebeb",
+  "neutralBackground5Hover": "#f5f5f5",
+  "neutralBackground5Pressed": "#f0f0f0",
+  "neutralBackground5Selected": "#fafafa",
+  "neutralBackground6": "#e6e6e6",
+  "neutralBackgroundDisabled": "#f0f0f0",
+  "neutralBackgroundInverted": "#616161",
+  "neutralForeground1": "#242424",
+  "neutralForeground1Hover": "#242424",
+  "neutralForeground1Pressed": "#242424",
+  "neutralForeground1Selected": "#242424",
+  "neutralForeground2": "#424242",
+  "neutralForeground2BrandHover": "#1651aa",
+  "neutralForeground2BrandPressed": "#0e336a",
+  "neutralForeground2BrandSelected": "#13458f",
+  "neutralForeground2Hover": "#242424",
+  "neutralForeground2Pressed": "#242424",
+  "neutralForeground2Selected": "#242424",
+  "neutralForeground3": "#616161",
+  "neutralForeground3BrandHover": "#1651aa",
+  "neutralForeground3BrandPressed": "#0e336a",
+  "neutralForeground3BrandSelected": "#13458f",
+  "neutralForeground3Hover": "#424242",
+  "neutralForeground3Pressed": "#424242",
+  "neutralForeground3Selected": "#424242",
+  "neutralForeground4": "#707070",
+  "neutralForegroundDisabled": "#bdbdbd",
+  "neutralForegroundInverted": "#ffffff",
+  "neutralForegroundInvertedLink": "#ffffff",
+  "neutralForegroundInvertedLinkHover": "#ffffff",
+  "neutralForegroundInvertedLinkPressed": "#ffffff",
+  "neutralForegroundInvertedLinkSelected": "#ffffff",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#e6e6e6",
+  "neutralStencil2": "#fafafa",
+  "neutralStroke1": "#d1d1d1",
+  "neutralStroke1Hover": "#c7c7c7",
+  "neutralStroke1Pressed": "#b3b3b3",
+  "neutralStroke1Selected": "#bdbdbd",
+  "neutralStroke2": "#e0e0e0",
+  "neutralStroke3": "#f0f0f0",
+  "neutralStrokeAccessible": "#616161",
+  "neutralStrokeAccessibleHover": "#575757",
+  "neutralStrokeAccessiblePressed": "#4d4d4d",
+  "neutralStrokeAccessibleSelected": "#185abd",
+  "neutralStrokeDisabled": "#e0e0e0",
+  "outofofficeBackground1": "#fdf5fc",
+  "outofofficeBackground2": "#edbbe7",
+  "outofofficeBackground3": "#c239b3",
+  "outofofficeBorder1": "#edbbe7",
+  "outofofficeBorder2": "#c239b3",
+  "outofofficeBorderActive": "#c239b3",
+  "outofofficeForeground1": "#af33a1",
+  "outofofficeForeground2": "#6d2064",
+  "outofofficeForeground3": "#c239b3",
+  "severeBackground1": "#fdf6f3",
+  "severeBackground2": "#f4bfab",
+  "severeBackground3": "#da3b01",
+  "severeBorder1": "#f4bfab",
+  "severeBorder2": "#da3b01",
+  "severeBorderActive": "#da3b01",
+  "severeForeground1": "#c43501",
+  "severeForeground2": "#7a2101",
+  "severeForeground3": "#da3b01",
+  "strokeFocus1": "#ffffff",
+  "strokeFocus2": "#000000",
+  "subtleBackground": "#00000000",
+  "subtleBackgroundHover": "#f5f5f5",
+  "subtleBackgroundPressed": "#e0e0e0",
+  "subtleBackgroundSelected": "#ebebeb",
+  "successBackground1": "#f1faf1",
+  "successBackground2": "#9fd89f",
+  "successBackground3": "#107c10",
+  "successBorder1": "#9fd89f",
+  "successBorder2": "#107c10",
+  "successBorderActive": "#107c10",
+  "successForeground1": "#0e700e",
+  "successForeground2": "#094509",
+  "successForeground3": "#107c10",
+  "successForegroundInverted": "#359b35",
+  "transparentBackground": "#00000000",
+  "transparentBackgroundHover": "#00000000",
+  "transparentBackgroundPressed": "#00000000",
+  "transparentBackgroundSelected": "#00000000",
+  "transparentStroke": "#00000000",
+  "transparentStrokeDisabled": "#00000000",
+  "transparentStrokeInteractive": "#00000000",
+  "warningBackground1": "#fffef5",
+  "warningBackground2": "#fef7b2",
+  "warningBackground3": "#fde300",
+  "warningBorder1": "#fef7b2",
+  "warningBorder2": "#fde300",
+  "warningBorderActive": "#fde300",
+  "warningForeground1": "#817400",
+  "warningForeground2": "#817400",
+  "warningForeground3": "#fde300",
+  "warningForegroundInverted": "#fef7b2",
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #185abd 1`] = `
-Object {
+exports[`win32Typography test 3`] = `
+{
+  "brandBackground": "#185abd",
+  "brandBackground2": "#d2e0f4",
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": "#1651aa",
+  "brandBackgroundPressed": "#0e336a",
+  "brandBackgroundSelected": "#13458f",
+  "brandBackgroundStatic": "#185abd",
+  "brandForeground1": "#aec6eb",
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": "#d2e0f4",
+  "brandForegroundLink": "#aec6eb",
+  "brandForegroundLinkHover": "#d2e0f4",
+  "brandForegroundLinkPressed": "#2e6ac5",
+  "brandForegroundLinkSelected": "#d2e0f4",
+  "brandStroke1": "#185abd",
+  "brandStroke2": "#6794d7",
+  "compoundBrandBackground1": "#185abd",
+  "compoundBrandBackground1Hover": "#1651aa",
+  "compoundBrandBackground1Pressed": "#0e336a",
+  "compoundBrandForeground1": "#aec6eb",
+  "compoundBrandForeground1Hover": "#d2e0f4",
+  "compoundBrandForeground1Pressed": "#2e6ac5",
+  "compoundBrandStroke1": "#185abd",
+  "compoundBrandStroke1Hover": "#1651aa",
+  "compoundBrandStroke1Pressed": "#0e336a",
+  "dangerBackground1": "#3f1011",
+  "dangerBackground2": "#751d1f",
+  "dangerBackground3": "#d13438",
+  "dangerBorder1": "#d13438",
+  "dangerBorder2": "#dc5e62",
+  "dangerBorderActive": "#e37d80",
+  "dangerForeground1": "#e37d80",
+  "dangerForeground2": "#f1bbbc",
+  "dangerForeground3": "#e37d80",
+  "dangerForegroundInverted": "#d13438",
+  "neutralBackground1": "#4d4d4d",
+  "neutralBackground1Hover": "#5c5c5c",
+  "neutralBackground1Pressed": "#424242",
+  "neutralBackground1Selected": "#575757",
+  "neutralBackground2": "#424242",
+  "neutralBackground2Hover": "#525252",
+  "neutralBackground2Pressed": "#383838",
+  "neutralBackground2Selected": "#4d4d4d",
+  "neutralBackground3": "#383838",
+  "neutralBackground3Hover": "#474747",
+  "neutralBackground3Pressed": "#2e2e2e",
+  "neutralBackground3Selected": "#424242",
+  "neutralBackground4": "#2e2e2e",
+  "neutralBackground4Hover": "#3d3d3d",
+  "neutralBackground4Pressed": "#242424",
+  "neutralBackground4Selected": "#383838",
+  "neutralBackground5": "#242424",
+  "neutralBackground5Hover": "#333333",
+  "neutralBackground5Pressed": "#1a1a1a",
+  "neutralBackground5Selected": "#2e2e2e",
+  "neutralBackground6": "#1a1a1a",
+  "neutralBackgroundDisabled": "#383838",
+  "neutralBackgroundInverted": "#ffffff",
+  "neutralForeground1": "#ffffff",
+  "neutralForeground1Hover": "#ffffff",
+  "neutralForeground1Pressed": "#ffffff",
+  "neutralForeground1Selected": "#ffffff",
+  "neutralForeground2": "#e6e6e6",
+  "neutralForeground2BrandHover": "#d2e0f4",
+  "neutralForeground2BrandPressed": "#2e6ac5",
+  "neutralForeground2BrandSelected": "#d2e0f4",
+  "neutralForeground2Hover": "#ffffff",
+  "neutralForeground2Pressed": "#ffffff",
+  "neutralForeground2Selected": "#ffffff",
+  "neutralForeground3": "#cccccc",
+  "neutralForeground3BrandHover": "#d2e0f4",
+  "neutralForeground3BrandPressed": "#2e6ac5",
+  "neutralForeground3BrandSelected": "#d2e0f4",
+  "neutralForeground3Hover": "#e6e6e6",
+  "neutralForeground3Pressed": "#e6e6e6",
+  "neutralForeground3Selected": "#e6e6e6",
+  "neutralForeground4": "#c2c2c2",
+  "neutralForegroundDisabled": "#666666",
+  "neutralForegroundInverted": "#000000",
+  "neutralForegroundInvertedLink": "#4d4d4d",
+  "neutralForegroundInvertedLinkHover": "#4d4d4d",
+  "neutralForegroundInvertedLinkPressed": "#4d4d4d",
+  "neutralForegroundInvertedLinkSelected": "#4d4d4d",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#1a1a1a",
+  "neutralStencil2": "#424242",
+  "neutralStroke1": "#8a8a8a",
+  "neutralStroke1Hover": "#999999",
+  "neutralStroke1Pressed": "#8f8f8f",
+  "neutralStroke1Selected": "#949494",
+  "neutralStroke2": "#757575",
+  "neutralStroke3": "#616161",
+  "neutralStrokeAccessible": "#a8a8a8",
+  "neutralStrokeAccessibleHover": "#b8b8b8",
+  "neutralStrokeAccessiblePressed": "#adadad",
+  "neutralStrokeAccessibleSelected": "#185abd",
+  "neutralStrokeDisabled": "#474747",
+  "outofofficeBackground1": "#3a1136",
+  "outofofficeBackground2": "#6d2064",
+  "outofofficeBackground3": "#c239b3",
+  "outofofficeBorder1": "#c239b3",
+  "outofofficeBorder2": "#d161c4",
+  "outofofficeBorderActive": "#da7ed0",
+  "outofofficeForeground1": "#da7ed0",
+  "outofofficeForeground2": "#edbbe7",
+  "outofofficeForeground3": "#d161c4",
+  "severeBackground1": "#411200",
+  "severeBackground2": "#7a2101",
+  "severeBackground3": "#da3b01",
+  "severeBorder1": "#da3b01",
+  "severeBorder2": "#e9835e",
+  "severeBorderActive": "#e9835e",
+  "severeForeground1": "#e9835e",
+  "severeForeground2": "#f4bfab",
+  "severeForeground3": "#e9835e",
+  "strokeFocus1": "#000000",
+  "strokeFocus2": "#ffffff",
+  "subtleBackground": "#00000000",
+  "subtleBackgroundHover": "#5c5c5c",
+  "subtleBackgroundPressed": "#424242",
+  "subtleBackgroundSelected": "#575757",
+  "successBackground1": "#052505",
+  "successBackground2": "#094509",
+  "successBackground3": "#107c10",
+  "successBorder1": "#107c10",
+  "successBorder2": "#9fd89f",
+  "successBorderActive": "#54b054",
+  "successForeground1": "#54b054",
+  "successForeground2": "#9fd89f",
+  "successForeground3": "#9fd89f",
+  "successForegroundInverted": "#107c10",
+  "transparentBackground": "#00000000",
+  "transparentBackgroundHover": "#00000000",
+  "transparentBackgroundPressed": "#00000000",
+  "transparentBackgroundSelected": "#00000000",
+  "transparentStroke": "#00000000",
+  "transparentStrokeDisabled": "#00000000",
+  "transparentStrokeInteractive": "#00000000",
+  "warningBackground1": "#4c4400",
+  "warningBackground2": "#817400",
+  "warningBackground3": "#fde300",
+  "warningBorder1": "#fde300",
+  "warningBorder2": "#fdea3d",
+  "warningBorderActive": "#feee66",
+  "warningForeground1": "#feee66",
+  "warningForeground2": "#fef7b2",
+  "warningForeground3": "#fdea3d",
+  "warningForegroundInverted": "#817400",
+}
+`;
+
+exports[`win32Typography test 4`] = `
+{
+  "brandBackground": "#185abd",
+  "brandBackground2": "#d2e0f4",
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": "#1651aa",
+  "brandBackgroundPressed": "#0e336a",
+  "brandBackgroundSelected": "#13458f",
+  "brandBackgroundStatic": "#185abd",
+  "brandForeground1": "#aec6eb",
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": "#d2e0f4",
+  "brandForegroundLink": "#aec6eb",
+  "brandForegroundLinkHover": "#d2e0f4",
+  "brandForegroundLinkPressed": "#2e6ac5",
+  "brandForegroundLinkSelected": "#d2e0f4",
+  "brandStroke1": "#185abd",
+  "brandStroke2": "#6794d7",
+  "compoundBrandBackground1": "#185abd",
+  "compoundBrandBackground1Hover": "#1651aa",
+  "compoundBrandBackground1Pressed": "#0e336a",
+  "compoundBrandForeground1": "#aec6eb",
+  "compoundBrandForeground1Hover": "#d2e0f4",
+  "compoundBrandForeground1Pressed": "#2e6ac5",
+  "compoundBrandStroke1": "#185abd",
+  "compoundBrandStroke1Hover": "#1651aa",
+  "compoundBrandStroke1Pressed": "#0e336a",
+  "dangerBackground1": "#3f1011",
+  "dangerBackground2": "#751d1f",
+  "dangerBackground3": "#d13438",
+  "dangerBorder1": "#d13438",
+  "dangerBorder2": "#dc5e62",
+  "dangerBorderActive": "#e37d80",
+  "dangerForeground1": "#e37d80",
+  "dangerForeground2": "#f1bbbc",
+  "dangerForeground3": "#e37d80",
+  "dangerForegroundInverted": "#d13438",
+  "neutralBackground1": "#292929",
+  "neutralBackground1Hover": "#3d3d3d",
+  "neutralBackground1Pressed": "#1f1f1f",
+  "neutralBackground1Selected": "#383838",
+  "neutralBackground2": "#1f1f1f",
+  "neutralBackground2Hover": "#333333",
+  "neutralBackground2Pressed": "#141414",
+  "neutralBackground2Selected": "#2e2e2e",
+  "neutralBackground3": "#141414",
+  "neutralBackground3Hover": "#292929",
+  "neutralBackground3Pressed": "#0a0a0a",
+  "neutralBackground3Selected": "#242424",
+  "neutralBackground4": "#0a0a0a",
+  "neutralBackground4Hover": "#1f1f1f",
+  "neutralBackground4Pressed": "#000000",
+  "neutralBackground4Selected": "#1a1a1a",
+  "neutralBackground5": "#000000",
+  "neutralBackground5Hover": "#141414",
+  "neutralBackground5Pressed": "#050505",
+  "neutralBackground5Selected": "#0f0f0f",
+  "neutralBackground6": "#333333",
+  "neutralBackgroundDisabled": "#141414",
+  "neutralBackgroundInverted": "#ffffff",
+  "neutralForeground1": "#ffffff",
+  "neutralForeground1Hover": "#ffffff",
+  "neutralForeground1Pressed": "#ffffff",
+  "neutralForeground1Selected": "#ffffff",
+  "neutralForeground2": "#d6d6d6",
+  "neutralForeground2BrandHover": "#d2e0f4",
+  "neutralForeground2BrandPressed": "#2e6ac5",
+  "neutralForeground2BrandSelected": "#d2e0f4",
+  "neutralForeground2Hover": "#ffffff",
+  "neutralForeground2Pressed": "#ffffff",
+  "neutralForeground2Selected": "#ffffff",
+  "neutralForeground3": "#adadad",
+  "neutralForeground3BrandHover": "#d2e0f4",
+  "neutralForeground3BrandPressed": "#2e6ac5",
+  "neutralForeground3BrandSelected": "#d2e0f4",
+  "neutralForeground3Hover": "#d6d6d6",
+  "neutralForeground3Pressed": "#d6d6d6",
+  "neutralForeground3Selected": "#d6d6d6",
+  "neutralForeground4": "#999999",
+  "neutralForegroundDisabled": "#5c5c5c",
+  "neutralForegroundInverted": "#000000",
+  "neutralForegroundInvertedLink": "#292929",
+  "neutralForegroundInvertedLinkHover": "#292929",
+  "neutralForegroundInvertedLinkPressed": "#292929",
+  "neutralForegroundInvertedLinkSelected": "#292929",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#333333",
+  "neutralStencil2": "#575757",
+  "neutralStroke1": "#666666",
+  "neutralStroke1Hover": "#757575",
+  "neutralStroke1Pressed": "#6b6b6b",
+  "neutralStroke1Selected": "#707070",
+  "neutralStroke2": "#525252",
+  "neutralStroke3": "#3d3d3d",
+  "neutralStrokeAccessible": "#adadad",
+  "neutralStrokeAccessibleHover": "#bdbdbd",
+  "neutralStrokeAccessiblePressed": "#b3b3b3",
+  "neutralStrokeAccessibleSelected": "#185abd",
+  "neutralStrokeDisabled": "#424242",
+  "outofofficeBackground1": "#3a1136",
+  "outofofficeBackground2": "#6d2064",
+  "outofofficeBackground3": "#c239b3",
+  "outofofficeBorder1": "#c239b3",
+  "outofofficeBorder2": "#d161c4",
+  "outofofficeBorderActive": "#da7ed0",
+  "outofofficeForeground1": "#da7ed0",
+  "outofofficeForeground2": "#edbbe7",
+  "outofofficeForeground3": "#d161c4",
+  "severeBackground1": "#411200",
+  "severeBackground2": "#7a2101",
+  "severeBackground3": "#da3b01",
+  "severeBorder1": "#da3b01",
+  "severeBorder2": "#e9835e",
+  "severeBorderActive": "#e9835e",
+  "severeForeground1": "#e9835e",
+  "severeForeground2": "#f4bfab",
+  "severeForeground3": "#e9835e",
+  "strokeFocus1": "#000000",
+  "strokeFocus2": "#ffffff",
+  "subtleBackground": "#00000000",
+  "subtleBackgroundHover": "#3d3d3d",
+  "subtleBackgroundPressed": "#1f1f1f",
+  "subtleBackgroundSelected": "#383838",
+  "successBackground1": "#052505",
+  "successBackground2": "#094509",
+  "successBackground3": "#107c10",
+  "successBorder1": "#107c10",
+  "successBorder2": "#9fd89f",
+  "successBorderActive": "#54b054",
+  "successForeground1": "#54b054",
+  "successForeground2": "#9fd89f",
+  "successForeground3": "#9fd89f",
+  "successForegroundInverted": "#107c10",
+  "transparentBackground": "#00000000",
+  "transparentBackgroundHover": "#00000000",
+  "transparentBackgroundPressed": "#00000000",
+  "transparentBackgroundSelected": "#00000000",
+  "transparentStroke": "#00000000",
+  "transparentStrokeDisabled": "#00000000",
+  "transparentStrokeInteractive": "#00000000",
+  "warningBackground1": "#4c4400",
+  "warningBackground2": "#817400",
+  "warningBackground3": "#fde300",
+  "warningBorder1": "#fde300",
+  "warningBorder2": "#fdea3d",
+  "warningBorderActive": "#feee66",
+  "warningForeground1": "#feee66",
+  "warningForeground2": "#fef7b2",
+  "warningForeground3": "#fdea3d",
+  "warningForegroundInverted": "#817400",
+}
+`;
+
+exports[`win32Typography test 5`] = `
+{
+  "brandBackground": {
+    "resource_paths": [
+      "ButtonFace",
+    ],
+  },
+  "brandBackground2": {
+    "resource_paths": [
+      "ButtonFace",
+    ],
+  },
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "brandBackgroundPressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "brandBackgroundSelected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "brandBackgroundStatic": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "brandForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": {
+    "resource_paths": [
+      "ButtonText",
+    ],
+  },
+  "brandForegroundLink": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "brandForegroundLinkHover": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "brandForegroundLinkPressed": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "brandForegroundLinkSelected": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "brandStroke1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "brandStroke2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "compoundBrandBackground1": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandBackground1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandBackground1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandForeground1": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandForeground1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandForeground1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandStroke1": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandStroke1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "compoundBrandStroke1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "dangerBackground1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "dangerBackground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "dangerBackground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "dangerBorder1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "dangerBorder2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "dangerBorderActive": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "dangerForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "dangerForeground2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "dangerForeground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "dangerForegroundInverted": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralBackground1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground1Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground2Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground2Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground2Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground3": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground3Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground3Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground3Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground4": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground4Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground4Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground4Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground5": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackground5Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground5Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground5Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralBackground6": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackgroundDisabled": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralBackgroundInverted": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForeground1Hover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground1Pressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground1Selected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForeground2BrandHover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2BrandPressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2BrandSelected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2Hover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2Pressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground2Selected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForeground3BrandHover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3BrandPressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3BrandSelected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3Hover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3Pressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground3Selected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForeground4": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralForegroundDisabled": {
+    "resource_paths": [
+      "GrayText",
+    ],
+  },
+  "neutralForegroundInverted": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "neutralForegroundInvertedLink": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "neutralForegroundInvertedLinkHover": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "neutralForegroundInvertedLinkPressed": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "neutralForegroundInvertedLinkSelected": {
+    "resource_paths": [
+      "Hotlight",
+    ],
+  },
+  "neutralForegroundOnBrand": {
+    "resource_paths": [
+      "ButtonText",
+    ],
+  },
+  "neutralForegroundOnBrandHover": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForegroundOnBrandPressed": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralForegroundOnBrandSelected": {
+    "resource_paths": [
+      "HighlightText",
+    ],
+  },
+  "neutralStencil1": "#141414",
+  "neutralStencil2": "#858585",
+  "neutralStroke1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralStroke1Hover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStroke1Pressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStroke1Selected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStroke2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralStroke3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralStrokeAccessible": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "neutralStrokeAccessibleHover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStrokeAccessiblePressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStrokeAccessibleSelected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "neutralStrokeDisabled": {
+    "resource_paths": [
+      "GrayText",
+    ],
+  },
+  "outofofficeBackground1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "outofofficeBackground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "outofofficeBackground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "outofofficeBorder1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "outofofficeBorder2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "outofofficeBorderActive": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "outofofficeForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "outofofficeForeground2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "outofofficeForeground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "severeBackground1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "severeBackground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "severeBackground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "severeBorder1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "severeBorder2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "severeBorderActive": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "severeForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "severeForeground2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "severeForeground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "strokeFocus1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "strokeFocus2": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "subtleBackground": "#00000000",
+  "subtleBackgroundHover": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "subtleBackgroundPressed": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "subtleBackgroundSelected": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "successBackground1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "successBackground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "successBackground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "successBorder1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "successBorder2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "successBorderActive": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "successForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "successForeground2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "successForeground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "successForegroundInverted": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "transparentBackground": "#00000000",
+  "transparentBackgroundHover": "#00000000",
+  "transparentBackgroundPressed": "#00000000",
+  "transparentBackgroundSelected": "#00000000",
+  "transparentStroke": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "transparentStrokeDisabled": {
+    "resource_paths": [
+      "GrayText",
+    ],
+  },
+  "transparentStrokeInteractive": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "warningBackground1": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "warningBackground2": {
+    "resource_paths": [
+      "Window",
+    ],
+  },
+  "warningBackground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "warningBorder1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "warningBorder2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "warningBorderActive": {
+    "resource_paths": [
+      "Highlight",
+    ],
+  },
+  "warningForeground1": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "warningForeground2": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "warningForeground3": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+  "warningForegroundInverted": {
+    "resource_paths": [
+      "WindowText",
+    ],
+  },
+}
+`;
+
+exports[`win32Typography test 6`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000024",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000024",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000024",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000024",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`win32Typography test 7`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000024",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000024",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000024",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000024",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`win32Typography test 8`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`win32Typography test 9`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`win32Typography test 10`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`win32Typography test 11`] = `
+{
   "brandBackground": "#185abd",
   "brandBackground2": "#d2e0f4",
   "brandBackgroundHover": "#1651aa",
@@ -3705,148 +3697,8 @@ Object {
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #80397b 1`] = `
-Object {
-  "brandBackground": "#80397b",
-  "brandBackground2": "#f0daee",
-  "brandBackgroundHover": "#6c2f68",
-  "brandBackgroundPressed": "#3c1a3a",
-  "brandBackgroundSelected": "#52254f",
-  "brandBackgroundStatic": "#80397b",
-  "brandForeground1": "#80397b",
-  "brandForeground2": "#6c2f68",
-  "brandForegroundLink": "#80397b",
-  "brandForegroundLinkHover": "#6c2f68",
-  "brandForegroundLinkPressed": "#3c1a3a",
-  "brandForegroundLinkSelected": "#52254f",
-  "brandStroke1": "#80397b",
-  "brandStroke2": "#f0daee",
-  "compoundBrandBackground1": "#80397b",
-  "compoundBrandBackground1Hover": "#6c2f68",
-  "compoundBrandBackground1Pressed": "#52254f",
-  "compoundBrandForeground1": "#80397b",
-  "compoundBrandForeground1Hover": "#6c2f68",
-  "compoundBrandForeground1Pressed": "#3c1a3a",
-  "compoundBrandStroke1": "#80397b",
-  "compoundBrandStroke1Hover": "#6c2f68",
-  "compoundBrandStroke1Pressed": "#52254f",
-  "neutralForeground2BrandHover": "#6c2f68",
-  "neutralForeground2BrandPressed": "#3c1a3a",
-  "neutralForeground2BrandSelected": "#52254f",
-  "neutralForeground3BrandHover": "#6c2f68",
-  "neutralForeground3BrandPressed": "#3c1a3a",
-  "neutralForeground3BrandSelected": "#52254f",
-  "neutralStrokeAccessibleSelected": "#80397b",
-}
-`;
-
-exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #c43e1c 1`] = `
-Object {
-  "brandBackground": "#c43e1c",
-  "brandBackground2": "#f6dbd4",
-  "brandBackgroundHover": "#b13719",
-  "brandBackgroundPressed": "#6e220f",
-  "brandBackgroundSelected": "#952f15",
-  "brandBackgroundStatic": "#c43e1c",
-  "brandForeground1": "#c43e1c",
-  "brandForeground2": "#b13719",
-  "brandForegroundLink": "#c43e1c",
-  "brandForegroundLinkHover": "#b13719",
-  "brandForegroundLinkPressed": "#6e220f",
-  "brandForegroundLinkSelected": "#952f15",
-  "brandStroke1": "#c43e1c",
-  "brandStroke2": "#f6dbd4",
-  "compoundBrandBackground1": "#c43e1c",
-  "compoundBrandBackground1Hover": "#b13719",
-  "compoundBrandBackground1Pressed": "#952f15",
-  "compoundBrandForeground1": "#c43e1c",
-  "compoundBrandForeground1Hover": "#b13719",
-  "compoundBrandForeground1Pressed": "#6e220f",
-  "compoundBrandStroke1": "#c43e1c",
-  "compoundBrandStroke1Hover": "#b13719",
-  "compoundBrandStroke1Pressed": "#952f15",
-  "neutralForeground2BrandHover": "#b13719",
-  "neutralForeground2BrandPressed": "#6e220f",
-  "neutralForeground2BrandSelected": "#952f15",
-  "neutralForeground3BrandHover": "#b13719",
-  "neutralForeground3BrandPressed": "#6e220f",
-  "neutralForeground3BrandSelected": "#952f15",
-  "neutralStrokeAccessibleSelected": "#c43e1c",
-}
-`;
-
-exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #d83b01 1`] = `
-Object {
-  "brandBackground": "#d83b01",
-  "brandBackground2": "#f9dcd1",
-  "brandBackgroundHover": "#c33400",
-  "brandBackgroundPressed": "#792000",
-  "brandBackgroundSelected": "#a52c00",
-  "brandBackgroundStatic": "#d83b01",
-  "brandForeground1": "#d83b01",
-  "brandForeground2": "#c33400",
-  "brandForegroundLink": "#d83b01",
-  "brandForegroundLinkHover": "#c33400",
-  "brandForegroundLinkPressed": "#792000",
-  "brandForegroundLinkSelected": "#a52c00",
-  "brandStroke1": "#d83b01",
-  "brandStroke2": "#f9dcd1",
-  "compoundBrandBackground1": "#d83b01",
-  "compoundBrandBackground1Hover": "#c33400",
-  "compoundBrandBackground1Pressed": "#a52c00",
-  "compoundBrandForeground1": "#d83b01",
-  "compoundBrandForeground1Hover": "#c33400",
-  "compoundBrandForeground1Pressed": "#792000",
-  "compoundBrandStroke1": "#d83b01",
-  "compoundBrandStroke1Hover": "#c33400",
-  "compoundBrandStroke1Pressed": "#a52c00",
-  "neutralForeground2BrandHover": "#c33400",
-  "neutralForeground2BrandPressed": "#792000",
-  "neutralForeground2BrandSelected": "#a52c00",
-  "neutralForeground3BrandHover": "#c33400",
-  "neutralForeground3BrandPressed": "#792000",
-  "neutralForeground3BrandSelected": "#a52c00",
-  "neutralStrokeAccessibleSelected": "#d83b01",
-}
-`;
-
-exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #0078d4 1`] = `
-Object {
-  "brandBackground": "#0078d4",
-  "brandBackground2": "#cce3f5",
-  "brandBackgroundHover": "#106ebe",
-  "brandBackgroundPressed": "#135995",
-  "brandBackgroundSelected": "#1664a7",
-  "brandBackgroundStatic": "#0078d4",
-  "brandForeground1": "#0078d4",
-  "brandForeground2": "#106ebe",
-  "brandForegroundLink": "#0078d4",
-  "brandForegroundLinkHover": "#106ebe",
-  "brandForegroundLinkPressed": "#135995",
-  "brandForegroundLinkSelected": "#1664a7",
-  "brandStroke1": "#0078d4",
-  "brandStroke2": "#cce3f5",
-  "compoundBrandBackground1": "#0078d4",
-  "compoundBrandBackground1Hover": "#106ebe",
-  "compoundBrandBackground1Pressed": "#1664a7",
-  "compoundBrandForeground1": "#0078d4",
-  "compoundBrandForeground1Hover": "#106ebe",
-  "compoundBrandForeground1Pressed": "#135995",
-  "compoundBrandStroke1": "#0078d4",
-  "compoundBrandStroke1Hover": "#106ebe",
-  "compoundBrandStroke1Pressed": "#1664a7",
-  "neutralForeground2BrandHover": "#106ebe",
-  "neutralForeground2BrandPressed": "#135995",
-  "neutralForeground2BrandSelected": "#1664a7",
-  "neutralForeground3BrandHover": "#106ebe",
-  "neutralForeground3BrandPressed": "#135995",
-  "neutralForeground3BrandSelected": "#1664a7",
-  "neutralStrokeAccessibleSelected": "#0078d4",
-}
-`;
-
-exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #107c41 1`] = `
-Object {
+exports[`win32Typography test 12`] = `
+{
   "brandBackground": "#107c41",
   "brandBackground2": "#caead8",
   "brandBackgroundHover": "#0f703b",
@@ -3880,113 +3732,8 @@ Object {
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #185abd 1`] = `
-Object {
-  "brandBackground": "#185abd",
-  "brandBackground2": "#d2e0f4",
-  "brandBackgroundHover": "#1651aa",
-  "brandBackgroundPressed": "#0e336a",
-  "brandBackgroundSelected": "#13458f",
-  "brandBackgroundStatic": "#185abd",
-  "brandForeground1": "#185abd",
-  "brandForeground2": "#1651aa",
-  "brandForegroundLink": "#185abd",
-  "brandForegroundLinkHover": "#1651aa",
-  "brandForegroundLinkPressed": "#0e336a",
-  "brandForegroundLinkSelected": "#13458f",
-  "brandStroke1": "#185abd",
-  "brandStroke2": "#d2e0f4",
-  "compoundBrandBackground1": "#185abd",
-  "compoundBrandBackground1Hover": "#1651aa",
-  "compoundBrandBackground1Pressed": "#13458f",
-  "compoundBrandForeground1": "#185abd",
-  "compoundBrandForeground1Hover": "#1651aa",
-  "compoundBrandForeground1Pressed": "#0e336a",
-  "compoundBrandStroke1": "#185abd",
-  "compoundBrandStroke1Hover": "#1651aa",
-  "compoundBrandStroke1Pressed": "#13458f",
-  "neutralForeground2BrandHover": "#1651aa",
-  "neutralForeground2BrandPressed": "#0e336a",
-  "neutralForeground2BrandSelected": "#13458f",
-  "neutralForeground3BrandHover": "#1651aa",
-  "neutralForeground3BrandPressed": "#0e336a",
-  "neutralForeground3BrandSelected": "#13458f",
-  "neutralStrokeAccessibleSelected": "#185abd",
-}
-`;
-
-exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #80397b 1`] = `
-Object {
-  "brandBackground": "#80397b",
-  "brandBackground2": "#f0daee",
-  "brandBackgroundHover": "#6c2f68",
-  "brandBackgroundPressed": "#3c1a3a",
-  "brandBackgroundSelected": "#52254f",
-  "brandBackgroundStatic": "#80397b",
-  "brandForeground1": "#80397b",
-  "brandForeground2": "#6c2f68",
-  "brandForegroundLink": "#80397b",
-  "brandForegroundLinkHover": "#6c2f68",
-  "brandForegroundLinkPressed": "#3c1a3a",
-  "brandForegroundLinkSelected": "#52254f",
-  "brandStroke1": "#80397b",
-  "brandStroke2": "#f0daee",
-  "compoundBrandBackground1": "#80397b",
-  "compoundBrandBackground1Hover": "#6c2f68",
-  "compoundBrandBackground1Pressed": "#52254f",
-  "compoundBrandForeground1": "#80397b",
-  "compoundBrandForeground1Hover": "#6c2f68",
-  "compoundBrandForeground1Pressed": "#3c1a3a",
-  "compoundBrandStroke1": "#80397b",
-  "compoundBrandStroke1Hover": "#6c2f68",
-  "compoundBrandStroke1Pressed": "#52254f",
-  "neutralForeground2BrandHover": "#6c2f68",
-  "neutralForeground2BrandPressed": "#3c1a3a",
-  "neutralForeground2BrandSelected": "#52254f",
-  "neutralForeground3BrandHover": "#6c2f68",
-  "neutralForeground3BrandPressed": "#3c1a3a",
-  "neutralForeground3BrandSelected": "#52254f",
-  "neutralStrokeAccessibleSelected": "#80397b",
-}
-`;
-
-exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #c43e1c 1`] = `
-Object {
-  "brandBackground": "#c43e1c",
-  "brandBackground2": "#f6dbd4",
-  "brandBackgroundHover": "#b13719",
-  "brandBackgroundPressed": "#6e220f",
-  "brandBackgroundSelected": "#952f15",
-  "brandBackgroundStatic": "#c43e1c",
-  "brandForeground1": "#c43e1c",
-  "brandForeground2": "#b13719",
-  "brandForegroundLink": "#c43e1c",
-  "brandForegroundLinkHover": "#b13719",
-  "brandForegroundLinkPressed": "#6e220f",
-  "brandForegroundLinkSelected": "#952f15",
-  "brandStroke1": "#c43e1c",
-  "brandStroke2": "#f6dbd4",
-  "compoundBrandBackground1": "#c43e1c",
-  "compoundBrandBackground1Hover": "#b13719",
-  "compoundBrandBackground1Pressed": "#952f15",
-  "compoundBrandForeground1": "#c43e1c",
-  "compoundBrandForeground1Hover": "#b13719",
-  "compoundBrandForeground1Pressed": "#6e220f",
-  "compoundBrandStroke1": "#c43e1c",
-  "compoundBrandStroke1Hover": "#b13719",
-  "compoundBrandStroke1Pressed": "#952f15",
-  "neutralForeground2BrandHover": "#b13719",
-  "neutralForeground2BrandPressed": "#6e220f",
-  "neutralForeground2BrandSelected": "#952f15",
-  "neutralForeground3BrandHover": "#b13719",
-  "neutralForeground3BrandPressed": "#6e220f",
-  "neutralForeground3BrandSelected": "#952f15",
-  "neutralStrokeAccessibleSelected": "#c43e1c",
-}
-`;
-
-exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #d83b01 1`] = `
-Object {
+exports[`win32Typography test 13`] = `
+{
   "brandBackground": "#d83b01",
   "brandBackground2": "#f9dcd1",
   "brandBackgroundHover": "#c33400",
@@ -4020,78 +3767,323 @@ Object {
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #0078d4 1`] = `
-Object {
+exports[`win32Typography test 14`] = `
+{
+  "brandBackground": "#80397b",
+  "brandBackground2": "#f0daee",
+  "brandBackgroundHover": "#6c2f68",
+  "brandBackgroundPressed": "#3c1a3a",
+  "brandBackgroundSelected": "#52254f",
+  "brandBackgroundStatic": "#80397b",
+  "brandForeground1": "#80397b",
+  "brandForeground2": "#6c2f68",
+  "brandForegroundLink": "#80397b",
+  "brandForegroundLinkHover": "#6c2f68",
+  "brandForegroundLinkPressed": "#3c1a3a",
+  "brandForegroundLinkSelected": "#52254f",
+  "brandStroke1": "#80397b",
+  "brandStroke2": "#f0daee",
+  "compoundBrandBackground1": "#80397b",
+  "compoundBrandBackground1Hover": "#6c2f68",
+  "compoundBrandBackground1Pressed": "#52254f",
+  "compoundBrandForeground1": "#80397b",
+  "compoundBrandForeground1Hover": "#6c2f68",
+  "compoundBrandForeground1Pressed": "#3c1a3a",
+  "compoundBrandStroke1": "#80397b",
+  "compoundBrandStroke1Hover": "#6c2f68",
+  "compoundBrandStroke1Pressed": "#52254f",
+  "neutralForeground2BrandHover": "#6c2f68",
+  "neutralForeground2BrandPressed": "#3c1a3a",
+  "neutralForeground2BrandSelected": "#52254f",
+  "neutralForeground3BrandHover": "#6c2f68",
+  "neutralForeground3BrandPressed": "#3c1a3a",
+  "neutralForeground3BrandSelected": "#52254f",
+  "neutralStrokeAccessibleSelected": "#80397b",
+}
+`;
+
+exports[`win32Typography test 15`] = `
+{
   "brandBackground": "#0078d4",
   "brandBackground2": "#cce3f5",
   "brandBackgroundHover": "#106ebe",
   "brandBackgroundPressed": "#135995",
   "brandBackgroundSelected": "#1664a7",
   "brandBackgroundStatic": "#0078d4",
-  "brandForeground1": "#b3d6f2",
-  "brandForeground2": "#cce3f5",
-  "brandForegroundLink": "#b3d6f2",
-  "brandForegroundLinkHover": "#cce3f5",
-  "brandForegroundLinkPressed": "#2488d8",
-  "brandForegroundLinkSelected": "#cce3f5",
+  "brandForeground1": "#0078d4",
+  "brandForeground2": "#106ebe",
+  "brandForegroundLink": "#0078d4",
+  "brandForegroundLinkHover": "#106ebe",
+  "brandForegroundLinkPressed": "#135995",
+  "brandForegroundLinkSelected": "#1664a7",
   "brandStroke1": "#0078d4",
   "brandStroke2": "#cce3f5",
   "compoundBrandBackground1": "#0078d4",
   "compoundBrandBackground1Hover": "#106ebe",
   "compoundBrandBackground1Pressed": "#1664a7",
-  "compoundBrandForeground1": "#b3d6f2",
-  "compoundBrandForeground1Hover": "#cce3f5",
-  "compoundBrandForeground1Pressed": "#2488d8",
+  "compoundBrandForeground1": "#0078d4",
+  "compoundBrandForeground1Hover": "#106ebe",
+  "compoundBrandForeground1Pressed": "#135995",
   "compoundBrandStroke1": "#0078d4",
   "compoundBrandStroke1Hover": "#106ebe",
   "compoundBrandStroke1Pressed": "#1664a7",
-  "neutralForeground2BrandHover": "#cce3f5",
-  "neutralForeground2BrandPressed": "#2488d8",
-  "neutralForeground2BrandSelected": "#cce3f5",
-  "neutralForeground3BrandHover": "#cce3f5",
-  "neutralForeground3BrandPressed": "#2488d8",
-  "neutralForeground3BrandSelected": "#cce3f5",
+  "neutralForeground2BrandHover": "#106ebe",
+  "neutralForeground2BrandPressed": "#135995",
+  "neutralForeground2BrandSelected": "#1664a7",
+  "neutralForeground3BrandHover": "#106ebe",
+  "neutralForeground3BrandPressed": "#135995",
+  "neutralForeground3BrandSelected": "#1664a7",
   "neutralStrokeAccessibleSelected": "#0078d4",
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #107c41 1`] = `
-Object {
+exports[`win32Typography test 16`] = `
+{
+  "brandBackground": "#c43e1c",
+  "brandBackground2": "#f6dbd4",
+  "brandBackgroundHover": "#b13719",
+  "brandBackgroundPressed": "#6e220f",
+  "brandBackgroundSelected": "#952f15",
+  "brandBackgroundStatic": "#c43e1c",
+  "brandForeground1": "#c43e1c",
+  "brandForeground2": "#b13719",
+  "brandForegroundLink": "#c43e1c",
+  "brandForegroundLinkHover": "#b13719",
+  "brandForegroundLinkPressed": "#6e220f",
+  "brandForegroundLinkSelected": "#952f15",
+  "brandStroke1": "#c43e1c",
+  "brandStroke2": "#f6dbd4",
+  "compoundBrandBackground1": "#c43e1c",
+  "compoundBrandBackground1Hover": "#b13719",
+  "compoundBrandBackground1Pressed": "#952f15",
+  "compoundBrandForeground1": "#c43e1c",
+  "compoundBrandForeground1Hover": "#b13719",
+  "compoundBrandForeground1Pressed": "#6e220f",
+  "compoundBrandStroke1": "#c43e1c",
+  "compoundBrandStroke1Hover": "#b13719",
+  "compoundBrandStroke1Pressed": "#952f15",
+  "neutralForeground2BrandHover": "#b13719",
+  "neutralForeground2BrandPressed": "#6e220f",
+  "neutralForeground2BrandSelected": "#952f15",
+  "neutralForeground3BrandHover": "#b13719",
+  "neutralForeground3BrandPressed": "#6e220f",
+  "neutralForeground3BrandSelected": "#952f15",
+  "neutralStrokeAccessibleSelected": "#c43e1c",
+}
+`;
+
+exports[`win32Typography test 17`] = `
+{
+  "brandBackground": "#185abd",
+  "brandBackground2": "#d2e0f4",
+  "brandBackgroundHover": "#1651aa",
+  "brandBackgroundPressed": "#0e336a",
+  "brandBackgroundSelected": "#13458f",
+  "brandBackgroundStatic": "#185abd",
+  "brandForeground1": "#185abd",
+  "brandForeground2": "#1651aa",
+  "brandForegroundLink": "#185abd",
+  "brandForegroundLinkHover": "#1651aa",
+  "brandForegroundLinkPressed": "#0e336a",
+  "brandForegroundLinkSelected": "#13458f",
+  "brandStroke1": "#185abd",
+  "brandStroke2": "#d2e0f4",
+  "compoundBrandBackground1": "#185abd",
+  "compoundBrandBackground1Hover": "#1651aa",
+  "compoundBrandBackground1Pressed": "#13458f",
+  "compoundBrandForeground1": "#185abd",
+  "compoundBrandForeground1Hover": "#1651aa",
+  "compoundBrandForeground1Pressed": "#0e336a",
+  "compoundBrandStroke1": "#185abd",
+  "compoundBrandStroke1Hover": "#1651aa",
+  "compoundBrandStroke1Pressed": "#13458f",
+  "neutralForeground2BrandHover": "#1651aa",
+  "neutralForeground2BrandPressed": "#0e336a",
+  "neutralForeground2BrandSelected": "#13458f",
+  "neutralForeground3BrandHover": "#1651aa",
+  "neutralForeground3BrandPressed": "#0e336a",
+  "neutralForeground3BrandSelected": "#13458f",
+  "neutralStrokeAccessibleSelected": "#185abd",
+}
+`;
+
+exports[`win32Typography test 18`] = `
+{
   "brandBackground": "#107c41",
   "brandBackground2": "#caead8",
   "brandBackgroundHover": "#0f703b",
   "brandBackgroundPressed": "#094624",
   "brandBackgroundSelected": "#0c5f32",
   "brandBackgroundStatic": "#107c41",
-  "brandForeground1": "#a0d8b9",
-  "brandForeground2": "#caead8",
-  "brandForegroundLink": "#a0d8b9",
-  "brandForegroundLinkHover": "#caead8",
-  "brandForegroundLinkPressed": "#218d51",
-  "brandForegroundLinkSelected": "#caead8",
+  "brandForeground1": "#107c41",
+  "brandForeground2": "#0f703b",
+  "brandForegroundLink": "#107c41",
+  "brandForegroundLinkHover": "#0f703b",
+  "brandForegroundLinkPressed": "#094624",
+  "brandForegroundLinkSelected": "#0c5f32",
   "brandStroke1": "#107c41",
   "brandStroke2": "#caead8",
   "compoundBrandBackground1": "#107c41",
   "compoundBrandBackground1Hover": "#0f703b",
   "compoundBrandBackground1Pressed": "#0c5f32",
-  "compoundBrandForeground1": "#a0d8b9",
-  "compoundBrandForeground1Hover": "#caead8",
-  "compoundBrandForeground1Pressed": "#218d51",
+  "compoundBrandForeground1": "#107c41",
+  "compoundBrandForeground1Hover": "#0f703b",
+  "compoundBrandForeground1Pressed": "#094624",
   "compoundBrandStroke1": "#107c41",
   "compoundBrandStroke1Hover": "#0f703b",
   "compoundBrandStroke1Pressed": "#0c5f32",
-  "neutralForeground2BrandHover": "#caead8",
-  "neutralForeground2BrandPressed": "#218d51",
-  "neutralForeground2BrandSelected": "#caead8",
-  "neutralForeground3BrandHover": "#caead8",
-  "neutralForeground3BrandPressed": "#218d51",
-  "neutralForeground3BrandSelected": "#caead8",
+  "neutralForeground2BrandHover": "#0f703b",
+  "neutralForeground2BrandPressed": "#094624",
+  "neutralForeground2BrandSelected": "#0c5f32",
+  "neutralForeground3BrandHover": "#0f703b",
+  "neutralForeground3BrandPressed": "#094624",
+  "neutralForeground3BrandSelected": "#0c5f32",
   "neutralStrokeAccessibleSelected": "#107c41",
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #185abd 1`] = `
-Object {
+exports[`win32Typography test 19`] = `
+{
+  "brandBackground": "#d83b01",
+  "brandBackground2": "#f9dcd1",
+  "brandBackgroundHover": "#c33400",
+  "brandBackgroundPressed": "#792000",
+  "brandBackgroundSelected": "#a52c00",
+  "brandBackgroundStatic": "#d83b01",
+  "brandForeground1": "#d83b01",
+  "brandForeground2": "#c33400",
+  "brandForegroundLink": "#d83b01",
+  "brandForegroundLinkHover": "#c33400",
+  "brandForegroundLinkPressed": "#792000",
+  "brandForegroundLinkSelected": "#a52c00",
+  "brandStroke1": "#d83b01",
+  "brandStroke2": "#f9dcd1",
+  "compoundBrandBackground1": "#d83b01",
+  "compoundBrandBackground1Hover": "#c33400",
+  "compoundBrandBackground1Pressed": "#a52c00",
+  "compoundBrandForeground1": "#d83b01",
+  "compoundBrandForeground1Hover": "#c33400",
+  "compoundBrandForeground1Pressed": "#792000",
+  "compoundBrandStroke1": "#d83b01",
+  "compoundBrandStroke1Hover": "#c33400",
+  "compoundBrandStroke1Pressed": "#a52c00",
+  "neutralForeground2BrandHover": "#c33400",
+  "neutralForeground2BrandPressed": "#792000",
+  "neutralForeground2BrandSelected": "#a52c00",
+  "neutralForeground3BrandHover": "#c33400",
+  "neutralForeground3BrandPressed": "#792000",
+  "neutralForeground3BrandSelected": "#a52c00",
+  "neutralStrokeAccessibleSelected": "#d83b01",
+}
+`;
+
+exports[`win32Typography test 20`] = `
+{
+  "brandBackground": "#80397b",
+  "brandBackground2": "#f0daee",
+  "brandBackgroundHover": "#6c2f68",
+  "brandBackgroundPressed": "#3c1a3a",
+  "brandBackgroundSelected": "#52254f",
+  "brandBackgroundStatic": "#80397b",
+  "brandForeground1": "#80397b",
+  "brandForeground2": "#6c2f68",
+  "brandForegroundLink": "#80397b",
+  "brandForegroundLinkHover": "#6c2f68",
+  "brandForegroundLinkPressed": "#3c1a3a",
+  "brandForegroundLinkSelected": "#52254f",
+  "brandStroke1": "#80397b",
+  "brandStroke2": "#f0daee",
+  "compoundBrandBackground1": "#80397b",
+  "compoundBrandBackground1Hover": "#6c2f68",
+  "compoundBrandBackground1Pressed": "#52254f",
+  "compoundBrandForeground1": "#80397b",
+  "compoundBrandForeground1Hover": "#6c2f68",
+  "compoundBrandForeground1Pressed": "#3c1a3a",
+  "compoundBrandStroke1": "#80397b",
+  "compoundBrandStroke1Hover": "#6c2f68",
+  "compoundBrandStroke1Pressed": "#52254f",
+  "neutralForeground2BrandHover": "#6c2f68",
+  "neutralForeground2BrandPressed": "#3c1a3a",
+  "neutralForeground2BrandSelected": "#52254f",
+  "neutralForeground3BrandHover": "#6c2f68",
+  "neutralForeground3BrandPressed": "#3c1a3a",
+  "neutralForeground3BrandSelected": "#52254f",
+  "neutralStrokeAccessibleSelected": "#80397b",
+}
+`;
+
+exports[`win32Typography test 21`] = `
+{
+  "brandBackground": "#0078d4",
+  "brandBackground2": "#cce3f5",
+  "brandBackgroundHover": "#106ebe",
+  "brandBackgroundPressed": "#135995",
+  "brandBackgroundSelected": "#1664a7",
+  "brandBackgroundStatic": "#0078d4",
+  "brandForeground1": "#0078d4",
+  "brandForeground2": "#106ebe",
+  "brandForegroundLink": "#0078d4",
+  "brandForegroundLinkHover": "#106ebe",
+  "brandForegroundLinkPressed": "#135995",
+  "brandForegroundLinkSelected": "#1664a7",
+  "brandStroke1": "#0078d4",
+  "brandStroke2": "#cce3f5",
+  "compoundBrandBackground1": "#0078d4",
+  "compoundBrandBackground1Hover": "#106ebe",
+  "compoundBrandBackground1Pressed": "#1664a7",
+  "compoundBrandForeground1": "#0078d4",
+  "compoundBrandForeground1Hover": "#106ebe",
+  "compoundBrandForeground1Pressed": "#135995",
+  "compoundBrandStroke1": "#0078d4",
+  "compoundBrandStroke1Hover": "#106ebe",
+  "compoundBrandStroke1Pressed": "#1664a7",
+  "neutralForeground2BrandHover": "#106ebe",
+  "neutralForeground2BrandPressed": "#135995",
+  "neutralForeground2BrandSelected": "#1664a7",
+  "neutralForeground3BrandHover": "#106ebe",
+  "neutralForeground3BrandPressed": "#135995",
+  "neutralForeground3BrandSelected": "#1664a7",
+  "neutralStrokeAccessibleSelected": "#0078d4",
+}
+`;
+
+exports[`win32Typography test 22`] = `
+{
+  "brandBackground": "#c43e1c",
+  "brandBackground2": "#f6dbd4",
+  "brandBackgroundHover": "#b13719",
+  "brandBackgroundPressed": "#6e220f",
+  "brandBackgroundSelected": "#952f15",
+  "brandBackgroundStatic": "#c43e1c",
+  "brandForeground1": "#c43e1c",
+  "brandForeground2": "#b13719",
+  "brandForegroundLink": "#c43e1c",
+  "brandForegroundLinkHover": "#b13719",
+  "brandForegroundLinkPressed": "#6e220f",
+  "brandForegroundLinkSelected": "#952f15",
+  "brandStroke1": "#c43e1c",
+  "brandStroke2": "#f6dbd4",
+  "compoundBrandBackground1": "#c43e1c",
+  "compoundBrandBackground1Hover": "#b13719",
+  "compoundBrandBackground1Pressed": "#952f15",
+  "compoundBrandForeground1": "#c43e1c",
+  "compoundBrandForeground1Hover": "#b13719",
+  "compoundBrandForeground1Pressed": "#6e220f",
+  "compoundBrandStroke1": "#c43e1c",
+  "compoundBrandStroke1Hover": "#b13719",
+  "compoundBrandStroke1Pressed": "#952f15",
+  "neutralForeground2BrandHover": "#b13719",
+  "neutralForeground2BrandPressed": "#6e220f",
+  "neutralForeground2BrandSelected": "#952f15",
+  "neutralForeground3BrandHover": "#b13719",
+  "neutralForeground3BrandPressed": "#6e220f",
+  "neutralForeground3BrandSelected": "#952f15",
+  "neutralStrokeAccessibleSelected": "#c43e1c",
+}
+`;
+
+exports[`win32Typography test 23`] = `
+{
   "brandBackground": "#185abd",
   "brandBackground2": "#d2e0f4",
   "brandBackgroundHover": "#1651aa",
@@ -4125,78 +4117,43 @@ Object {
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #80397b 1`] = `
-Object {
-  "brandBackground": "#80397b",
-  "brandBackground2": "#f0daee",
-  "brandBackgroundHover": "#6c2f68",
-  "brandBackgroundPressed": "#3c1a3a",
-  "brandBackgroundSelected": "#52254f",
-  "brandBackgroundStatic": "#80397b",
-  "brandForeground1": "#e0bfde",
-  "brandForeground2": "#f0daee",
-  "brandForegroundLink": "#e0bfde",
-  "brandForegroundLinkHover": "#f0daee",
-  "brandForegroundLinkPressed": "#9e5499",
-  "brandForegroundLinkSelected": "#f0daee",
-  "brandStroke1": "#80397b",
-  "brandStroke2": "#f0daee",
-  "compoundBrandBackground1": "#80397b",
-  "compoundBrandBackground1Hover": "#6c2f68",
-  "compoundBrandBackground1Pressed": "#52254f",
-  "compoundBrandForeground1": "#e0bfde",
-  "compoundBrandForeground1Hover": "#f0daee",
-  "compoundBrandForeground1Pressed": "#9e5499",
-  "compoundBrandStroke1": "#80397b",
-  "compoundBrandStroke1Hover": "#6c2f68",
-  "compoundBrandStroke1Pressed": "#52254f",
-  "neutralForeground2BrandHover": "#f0daee",
-  "neutralForeground2BrandPressed": "#9e5499",
-  "neutralForeground2BrandSelected": "#f0daee",
-  "neutralForeground3BrandHover": "#f0daee",
-  "neutralForeground3BrandPressed": "#9e5499",
-  "neutralForeground3BrandSelected": "#f0daee",
-  "neutralStrokeAccessibleSelected": "#80397b",
+exports[`win32Typography test 24`] = `
+{
+  "brandBackground": "#107c41",
+  "brandBackground2": "#caead8",
+  "brandBackgroundHover": "#0f703b",
+  "brandBackgroundPressed": "#094624",
+  "brandBackgroundSelected": "#0c5f32",
+  "brandBackgroundStatic": "#107c41",
+  "brandForeground1": "#a0d8b9",
+  "brandForeground2": "#caead8",
+  "brandForegroundLink": "#a0d8b9",
+  "brandForegroundLinkHover": "#caead8",
+  "brandForegroundLinkPressed": "#218d51",
+  "brandForegroundLinkSelected": "#caead8",
+  "brandStroke1": "#107c41",
+  "brandStroke2": "#caead8",
+  "compoundBrandBackground1": "#107c41",
+  "compoundBrandBackground1Hover": "#0f703b",
+  "compoundBrandBackground1Pressed": "#0c5f32",
+  "compoundBrandForeground1": "#a0d8b9",
+  "compoundBrandForeground1Hover": "#caead8",
+  "compoundBrandForeground1Pressed": "#218d51",
+  "compoundBrandStroke1": "#107c41",
+  "compoundBrandStroke1Hover": "#0f703b",
+  "compoundBrandStroke1Pressed": "#0c5f32",
+  "neutralForeground2BrandHover": "#caead8",
+  "neutralForeground2BrandPressed": "#218d51",
+  "neutralForeground2BrandSelected": "#caead8",
+  "neutralForeground3BrandHover": "#caead8",
+  "neutralForeground3BrandPressed": "#218d51",
+  "neutralForeground3BrandSelected": "#caead8",
+  "neutralStrokeAccessibleSelected": "#107c41",
 }
 `;
 
-exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #c43e1c 1`] = `
-Object {
-  "brandBackground": "#c43e1c",
-  "brandBackground2": "#f6dbd4",
-  "brandBackgroundHover": "#b13719",
-  "brandBackgroundPressed": "#6e220f",
-  "brandBackgroundSelected": "#952f15",
-  "brandBackgroundStatic": "#c43e1c",
-  "brandForeground1": "#edbcb0",
-  "brandForeground2": "#f6dbd4",
-  "brandForegroundLink": "#edbcb0",
-  "brandForegroundLinkHover": "#f6dbd4",
-  "brandForegroundLinkPressed": "#cb5031",
-  "brandForegroundLinkSelected": "#f6dbd4",
-  "brandStroke1": "#c43e1c",
-  "brandStroke2": "#f6dbd4",
-  "compoundBrandBackground1": "#c43e1c",
-  "compoundBrandBackground1Hover": "#b13719",
-  "compoundBrandBackground1Pressed": "#952f15",
-  "compoundBrandForeground1": "#edbcb0",
-  "compoundBrandForeground1Hover": "#f6dbd4",
-  "compoundBrandForeground1Pressed": "#cb5031",
-  "compoundBrandStroke1": "#c43e1c",
-  "compoundBrandStroke1Hover": "#b13719",
-  "compoundBrandStroke1Pressed": "#952f15",
-  "neutralForeground2BrandHover": "#f6dbd4",
-  "neutralForeground2BrandPressed": "#cb5031",
-  "neutralForeground2BrandSelected": "#f6dbd4",
-  "neutralForeground3BrandHover": "#f6dbd4",
-  "neutralForeground3BrandPressed": "#cb5031",
-  "neutralForeground3BrandSelected": "#f6dbd4",
-  "neutralStrokeAccessibleSelected": "#c43e1c",
-}
-`;
-
-exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #d83b01 1`] = `
-Object {
+exports[`win32Typography test 25`] = `
+{
   "brandBackground": "#d83b01",
   "brandBackground2": "#f9dcd1",
   "brandBackgroundHover": "#c33400",
@@ -4230,65 +4187,109 @@ Object {
 }
 `;
 
-exports[`getThemingModule test 1`] = `
-Array [
-  Object {
-    "fluentTypography": Object {},
-    "getPalette": [Function],
-    "rampNames": Object {
-      "App": Array [
-        "FakeApp1",
-        "App2",
-        "App3",
-        "App4",
-        "App5",
-        "App6",
-        "App7",
-        "App8",
-      ],
-      "ClassicGrays": Array [
-        "FakeGray4",
-        "Gray5",
-        "Gray6",
-      ],
-      "FluentGrays": Array [
-        "FakeGray1",
-        "Gray2",
-        "Gray3",
-      ],
-      "Sepias": Array [
-        "FakeSepia",
-      ],
-    },
-    "ramps": Object {
-      "App": Array [
-        "#F8F8F8",
-        "#EFF6FC",
-        "#BBDAF3",
-        "#55A4E2",
-        "#359EDD",
-        "#0078d7",
-        "#283E4A",
-        "#030C13",
-      ],
-      "ClassicGrays": Array [
-        "#FFFFFF",
-        "#737373",
-        "#000000",
-      ],
-      "FluentGrays": Array [
-        "#FAF9F8",
-        "#797775",
-        "#11100F",
-      ],
-      "Sepias": Array [
-        "#ECE6DE",
-      ],
-    },
-    "typography": Object {},
-  },
-  undefined,
-]
+exports[`win32Typography test 26`] = `
+{
+  "brandBackground": "#80397b",
+  "brandBackground2": "#f0daee",
+  "brandBackgroundHover": "#6c2f68",
+  "brandBackgroundPressed": "#3c1a3a",
+  "brandBackgroundSelected": "#52254f",
+  "brandBackgroundStatic": "#80397b",
+  "brandForeground1": "#e0bfde",
+  "brandForeground2": "#f0daee",
+  "brandForegroundLink": "#e0bfde",
+  "brandForegroundLinkHover": "#f0daee",
+  "brandForegroundLinkPressed": "#9e5499",
+  "brandForegroundLinkSelected": "#f0daee",
+  "brandStroke1": "#80397b",
+  "brandStroke2": "#f0daee",
+  "compoundBrandBackground1": "#80397b",
+  "compoundBrandBackground1Hover": "#6c2f68",
+  "compoundBrandBackground1Pressed": "#52254f",
+  "compoundBrandForeground1": "#e0bfde",
+  "compoundBrandForeground1Hover": "#f0daee",
+  "compoundBrandForeground1Pressed": "#9e5499",
+  "compoundBrandStroke1": "#80397b",
+  "compoundBrandStroke1Hover": "#6c2f68",
+  "compoundBrandStroke1Pressed": "#52254f",
+  "neutralForeground2BrandHover": "#f0daee",
+  "neutralForeground2BrandPressed": "#9e5499",
+  "neutralForeground2BrandSelected": "#f0daee",
+  "neutralForeground3BrandHover": "#f0daee",
+  "neutralForeground3BrandPressed": "#9e5499",
+  "neutralForeground3BrandSelected": "#f0daee",
+  "neutralStrokeAccessibleSelected": "#80397b",
+}
 `;
 
-exports[`win32Typography test 1`] = `[Function]`;
+exports[`win32Typography test 27`] = `
+{
+  "brandBackground": "#0078d4",
+  "brandBackground2": "#cce3f5",
+  "brandBackgroundHover": "#106ebe",
+  "brandBackgroundPressed": "#135995",
+  "brandBackgroundSelected": "#1664a7",
+  "brandBackgroundStatic": "#0078d4",
+  "brandForeground1": "#b3d6f2",
+  "brandForeground2": "#cce3f5",
+  "brandForegroundLink": "#b3d6f2",
+  "brandForegroundLinkHover": "#cce3f5",
+  "brandForegroundLinkPressed": "#2488d8",
+  "brandForegroundLinkSelected": "#cce3f5",
+  "brandStroke1": "#0078d4",
+  "brandStroke2": "#cce3f5",
+  "compoundBrandBackground1": "#0078d4",
+  "compoundBrandBackground1Hover": "#106ebe",
+  "compoundBrandBackground1Pressed": "#1664a7",
+  "compoundBrandForeground1": "#b3d6f2",
+  "compoundBrandForeground1Hover": "#cce3f5",
+  "compoundBrandForeground1Pressed": "#2488d8",
+  "compoundBrandStroke1": "#0078d4",
+  "compoundBrandStroke1Hover": "#106ebe",
+  "compoundBrandStroke1Pressed": "#1664a7",
+  "neutralForeground2BrandHover": "#cce3f5",
+  "neutralForeground2BrandPressed": "#2488d8",
+  "neutralForeground2BrandSelected": "#cce3f5",
+  "neutralForeground3BrandHover": "#cce3f5",
+  "neutralForeground3BrandPressed": "#2488d8",
+  "neutralForeground3BrandSelected": "#cce3f5",
+  "neutralStrokeAccessibleSelected": "#0078d4",
+}
+`;
+
+exports[`win32Typography test 28`] = `
+{
+  "brandBackground": "#c43e1c",
+  "brandBackground2": "#f6dbd4",
+  "brandBackgroundHover": "#b13719",
+  "brandBackgroundPressed": "#6e220f",
+  "brandBackgroundSelected": "#952f15",
+  "brandBackgroundStatic": "#c43e1c",
+  "brandForeground1": "#edbcb0",
+  "brandForeground2": "#f6dbd4",
+  "brandForegroundLink": "#edbcb0",
+  "brandForegroundLinkHover": "#f6dbd4",
+  "brandForegroundLinkPressed": "#cb5031",
+  "brandForegroundLinkSelected": "#f6dbd4",
+  "brandStroke1": "#c43e1c",
+  "brandStroke2": "#f6dbd4",
+  "compoundBrandBackground1": "#c43e1c",
+  "compoundBrandBackground1Hover": "#b13719",
+  "compoundBrandBackground1Pressed": "#952f15",
+  "compoundBrandForeground1": "#edbcb0",
+  "compoundBrandForeground1Hover": "#f6dbd4",
+  "compoundBrandForeground1Pressed": "#cb5031",
+  "compoundBrandStroke1": "#c43e1c",
+  "compoundBrandStroke1Hover": "#b13719",
+  "compoundBrandStroke1Pressed": "#952f15",
+  "neutralForeground2BrandHover": "#f6dbd4",
+  "neutralForeground2BrandPressed": "#cb5031",
+  "neutralForeground2BrandSelected": "#f6dbd4",
+  "neutralForeground3BrandHover": "#f6dbd4",
+  "neutralForeground3BrandPressed": "#cb5031",
+  "neutralForeground3BrandSelected": "#f6dbd4",
+  "neutralStrokeAccessibleSelected": "#c43e1c",
+}
+`;
+
+exports[`win32Typography test 29`] = `[Function]`;

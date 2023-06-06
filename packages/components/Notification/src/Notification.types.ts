@@ -26,7 +26,7 @@ export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorT
   shadowToken?: ShadowToken;
 }
 
-export interface NotificationProps {
+export type NotificationProps = React.PropsWithChildren<{
   /**
    * Notification variants: 'primary' | 'neutral' | 'primaryBar' | 'primaryOutlineBar' | 'neutralBar' | 'danger' | 'warning'
    */
@@ -56,7 +56,7 @@ export interface NotificationProps {
    * Callback function that is triggered by pressing the action button
    */
   onActionPress?: (e: InteractionEvent) => void;
-}
+}>;
 
 export interface NotificationSlotProps {
   root: PressableProps;

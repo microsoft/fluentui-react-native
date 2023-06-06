@@ -7,7 +7,7 @@ export const focusZoneName = 'FocusZone';
 
 export interface FocusZoneState {}
 
-export interface FocusZoneProps {
+export type FocusZoneProps = React.PropsWithChildren<{
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
@@ -41,7 +41,7 @@ export interface FocusZoneProps {
    * Callback called when “focus” event triggered in FocusZone
    */
   onFocus?: (e?: any) => void;
-}
+}>;
 
 export interface NativeProps extends Omit<FocusZoneProps, 'isCircularNavigation'> {
   navigateAtEnd?: NavigateAtEnd;

@@ -1,5 +1,6 @@
 import type * as React from 'react';
-import type { ScreenRect, ViewStyle } from 'react-native';
+// SAAD - Looks like ScreenRect got renamed.
+import type { KeyboardMetrics, ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -50,7 +51,7 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
    * AnchorRect arbitrary anchor rectangle; coordinate system is in DIPs, relative
    * to the React surface origin.
    */
-  anchorRect?: ScreenRect;
+  anchorRect?: KeyboardMetrics;
 
   /**
    * Width of the beak on the Callout indicating its anchor.

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/adapters",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "description": "Adapters for working with react-native types",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -28,19 +28,18 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@types/jest": "^26.0.0",
-    "@types/react-native": "^0.68.0",
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-macos": "^0.68.0",
-    "react-native-windows": "^0.68.0"
+    "@types/jest": "^29.0.0",
+    "react": "18.2.0",
+    "react-native": "^0.71.0",
+    "react-native-macos": "^0.71.0",
+    "react-native-windows": "^0.71.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.68.0",
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-macos": "^0.68.0",
-    "react-native-windows": "^0.68.0"
+    "@office-iss/react-native-win32": "^0.71.0",
+    "react": "18.2.0",
+    "react-native": "^0.71.0",
+    "react-native-macos": "^0.71.0",
+    "react-native-windows": "^0.71.0"
   },
   "author": "",
   "license": "MIT",
@@ -51,7 +50,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.68"
+        "react-native@0.71"
       ],
       "capabilities": [
         "core",

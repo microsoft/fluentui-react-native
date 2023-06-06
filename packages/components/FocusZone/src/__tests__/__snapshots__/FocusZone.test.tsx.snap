@@ -12,6 +12,23 @@ exports[`FocusZone No Props One child 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -27,22 +44,22 @@ exports[`FocusZone No Props One child 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -62,6 +79,23 @@ exports[`FocusZone No Props Three children 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -77,22 +111,22 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -105,6 +139,23 @@ exports[`FocusZone No Props Three children 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -120,22 +171,22 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -148,6 +199,23 @@ exports[`FocusZone No Props Three children 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -163,22 +231,22 @@ exports[`FocusZone No Props Three children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -198,6 +266,23 @@ exports[`FocusZone No Props Two children 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -213,22 +298,22 @@ exports[`FocusZone No Props Two children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -241,6 +326,23 @@ exports[`FocusZone No Props Two children 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -256,22 +358,22 @@ exports[`FocusZone No Props Two children 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -294,6 +396,23 @@ exports[`FocusZone With Props All Props 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -309,22 +428,22 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -337,6 +456,23 @@ exports[`FocusZone With Props All Props 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -352,22 +488,22 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -380,6 +516,23 @@ exports[`FocusZone With Props All Props 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -395,22 +548,22 @@ exports[`FocusZone With Props All Props 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -430,6 +583,23 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -445,22 +615,22 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -473,6 +643,23 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -488,22 +675,22 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -516,6 +703,23 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -531,22 +735,22 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -567,6 +771,23 @@ exports[`FocusZone With Props disabled Prop 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -582,22 +803,22 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -610,6 +831,23 @@ exports[`FocusZone With Props disabled Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -625,22 +863,22 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -653,6 +891,23 @@ exports[`FocusZone With Props disabled Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -668,22 +923,22 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -704,6 +959,23 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -719,22 +991,22 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -747,6 +1019,23 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -762,22 +1051,22 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -790,6 +1079,23 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -805,22 +1111,22 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -840,6 +1146,23 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -855,22 +1178,22 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -883,6 +1206,23 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -898,22 +1238,22 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -926,6 +1266,23 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -941,22 +1298,22 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -977,6 +1334,23 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -992,22 +1366,22 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -1020,6 +1394,23 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -1035,22 +1426,22 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },
@@ -1063,6 +1454,23 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -1078,22 +1486,22 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Array [
+        [
           undefined,
         ]
       }
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 8,
               "textAlign": "center",
             },

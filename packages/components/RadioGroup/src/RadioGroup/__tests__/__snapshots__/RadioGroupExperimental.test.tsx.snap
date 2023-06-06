@@ -5,7 +5,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
   accessibilityLabel="Uncontrolled RadioGroup"
   accessibilityRole="radiogroup"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
       "required": false,
     }
@@ -13,7 +13,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
   accessible={true}
   defaultValue="key2"
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "display": "flex",
       "flexDirection": "column",
@@ -22,7 +22,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
@@ -34,7 +34,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#242424",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -48,7 +48,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "display": "flex",
         "flexDirection": "column",
@@ -58,8 +58,8 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
   >
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -69,9 +69,20 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -90,7 +101,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -101,6 +112,23 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       value="key1"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -114,7 +142,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#616161",
@@ -133,7 +161,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": undefined,
               "borderRadius": 5,
               "height": 10,
@@ -145,7 +173,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -159,7 +187,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -175,8 +203,8 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
     </View>
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -186,9 +214,20 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -207,7 +246,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -218,6 +257,23 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       value="key2"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -231,7 +287,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#0f6cbd",
@@ -250,7 +306,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": "#0f6cbd",
               "borderRadius": 5,
               "height": 10,
@@ -262,7 +318,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -276,7 +332,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -299,7 +355,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
   accessibilityLabel="Uncontrolled RadioGroup"
   accessibilityRole="radiogroup"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
       "required": false,
     }
@@ -307,7 +363,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
   accessible={true}
   defaultValue="key2"
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "display": "flex",
       "flexDirection": "column",
@@ -316,7 +372,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
@@ -328,7 +384,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#242424",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -342,7 +398,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "display": "flex",
         "flexDirection": "column",
@@ -352,8 +408,8 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
   >
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -363,9 +419,20 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={0}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -384,7 +451,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -395,6 +462,23 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       value="key1"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -408,7 +492,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#616161",
@@ -427,7 +511,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": undefined,
               "borderRadius": 5,
               "height": 10,
@@ -439,7 +523,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -453,7 +537,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -469,8 +553,8 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
     </View>
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -480,9 +564,20 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={0}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -501,7 +596,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -512,6 +607,23 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       value="key2"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -525,7 +637,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#0f6cbd",
@@ -544,7 +656,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": "#0f6cbd",
               "borderRadius": 5,
               "height": 10,
@@ -556,7 +668,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -570,7 +682,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -593,7 +705,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
   accessibilityLabel="Disabled RadioGroup"
   accessibilityRole="radiogroup"
   accessibilityState={
-    Object {
+    {
       "disabled": true,
       "required": false,
     }
@@ -601,7 +713,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
   accessible={true}
   disabled={true}
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "display": "flex",
       "flexDirection": "column",
@@ -610,7 +722,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
@@ -622,7 +734,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#bdbdbd",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -636,7 +748,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "display": "flex",
         "flexDirection": "column",
@@ -646,8 +758,8 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
   >
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -657,9 +769,20 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={false}
@@ -678,7 +801,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -690,8 +813,20 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={false}
@@ -707,7 +842,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#e0e0e0",
@@ -726,7 +861,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": undefined,
               "borderRadius": 5,
               "height": 10,
@@ -738,7 +873,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -752,7 +887,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#bdbdbd",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -768,8 +903,8 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
     </View>
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -779,9 +914,20 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={false}
@@ -800,7 +946,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -812,8 +958,20 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={false}
@@ -829,7 +987,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#e0e0e0",
@@ -848,7 +1006,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": undefined,
               "borderRadius": 5,
               "height": 10,
@@ -860,7 +1018,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -874,7 +1032,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#bdbdbd",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -897,7 +1055,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
   accessibilityLabel="Horizontal RadioGroup"
   accessibilityRole="radiogroup"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
       "required": false,
     }
@@ -906,7 +1064,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
   defaultValue="key2"
   layout="horizontal"
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "display": "flex",
       "flexDirection": "column",
@@ -915,7 +1073,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
@@ -927,7 +1085,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#242424",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -941,7 +1099,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "display": "flex",
         "flexDirection": "column",
@@ -951,8 +1109,8 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
   >
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -962,9 +1120,20 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -983,7 +1152,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -994,6 +1163,23 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       value="key1"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -1007,7 +1193,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#616161",
@@ -1026,7 +1212,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": undefined,
               "borderRadius": 5,
               "height": 10,
@@ -1038,7 +1224,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -1052,7 +1238,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -1068,8 +1254,8 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
     </View>
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -1079,9 +1265,20 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1100,7 +1297,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -1111,6 +1308,23 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       value="key2"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -1124,7 +1338,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#0f6cbd",
@@ -1143,7 +1357,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": "#0f6cbd",
               "borderRadius": 5,
               "height": 10,
@@ -1155,7 +1369,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -1169,7 +1383,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -1192,7 +1406,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
   accessibilityLabel="Horizontal-Stacked RadioGroup"
   accessibilityRole="radiogroup"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
       "required": false,
     }
@@ -1201,7 +1415,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
   defaultValue="key2"
   layout="horizontal-stacked"
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "display": "flex",
       "flexDirection": "column",
@@ -1210,7 +1424,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
@@ -1222,7 +1436,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#242424",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -1236,7 +1450,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "display": "flex",
         "flexDirection": "column",
@@ -1246,8 +1460,8 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
   >
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -1257,9 +1471,20 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1278,7 +1503,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -1289,6 +1514,23 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       value="key1"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -1302,7 +1544,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#616161",
@@ -1321,7 +1563,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": undefined,
               "borderRadius": 5,
               "height": 10,
@@ -1333,7 +1575,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -1347,7 +1589,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -1363,8 +1605,8 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
     </View>
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -1374,9 +1616,20 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1395,7 +1648,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -1406,6 +1659,23 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       value="key2"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -1419,7 +1689,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#0f6cbd",
@@ -1438,7 +1708,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": "#0f6cbd",
               "borderRadius": 5,
               "height": 10,
@@ -1450,7 +1720,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -1464,7 +1734,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -1487,7 +1757,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
   accessibilityLabel="Required RadioGroup"
   accessibilityRole="radiogroup"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
       "required": true,
     }
@@ -1495,7 +1765,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
   accessible={true}
   defaultValue="key2"
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "display": "flex",
       "flexDirection": "column",
@@ -1504,7 +1774,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
@@ -1516,7 +1786,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#242424",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -1531,7 +1801,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       ellipsizeMode="tail"
       numberOfLines={0}
       style={
-        Object {
+        {
           "color": "#750b1c",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -1546,7 +1816,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "display": "flex",
         "flexDirection": "column",
@@ -1556,8 +1826,8 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
   >
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -1567,9 +1837,20 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1588,7 +1869,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -1599,6 +1880,23 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       value="key1"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -1612,7 +1910,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#616161",
@@ -1631,7 +1929,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": undefined,
               "borderRadius": 5,
               "height": 10,
@@ -1643,7 +1941,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -1657,7 +1955,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,
@@ -1673,8 +1971,8 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
     </View>
     <View
       accessibilityActions={
-        Array [
-          Object {
+        [
+          {
             "name": "Select",
           },
         ]
@@ -1684,9 +1982,20 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       accessibilityRole="radio"
       accessibilitySetSize={2}
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1705,7 +2014,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
@@ -1716,6 +2025,23 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       value="key2"
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={false}
         collapsable={false}
         focusable={false}
@@ -1729,7 +2055,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": undefined,
             "borderColor": "#0f6cbd",
@@ -1748,7 +2074,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": "#0f6cbd",
               "borderRadius": 5,
               "height": 10,
@@ -1760,7 +2086,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": undefined,
             "flexDirection": "column",
             "marginLeft": 16,
@@ -1774,7 +2100,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           ellipsizeMode="tail"
           numberOfLines={0}
           style={
-            Object {
+            {
               "color": "#242424",
               "fontFamily": "Segoe UI",
               "fontSize": 13,

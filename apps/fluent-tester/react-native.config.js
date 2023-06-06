@@ -1,24 +1,23 @@
-const fs = require("fs");
-const path = require("path");
-const {
-  androidManifestPath,
-  iosProjectPath,
-  windowsProjectPath,
-} = require("react-native-test-app");
+const project = (() => {
+  try {
+    const { configureProjects } = require('react-native-test-app');
+    return configureProjects({
+      android: {
+        sourceDir: 'android',
+      },
+      ios: {
+        sourceDir: 'ios',
+      },
+      windows: {
+        sourceDir: 'windows',
+        solutionFile: 'windows/FluentTester.sln',
+      },
+    });
+  } catch (_) {
+    return undefined;
+  }
+})();
 
 module.exports = {
-  project: {
-    android: {
-      sourceDir: "android",
-      manifestPath: androidManifestPath(path.join(__dirname, "android")),
-    },
-    ios: {
-      project: iosProjectPath("ios"),
-    },
-    windows: fs.existsSync("windows/FluentTester.sln") && {
-      sourceDir: "windows",
-      solutionFile: "FluentTester.sln",
-      project: windowsProjectPath(path.join(__dirname, "windows")),
-    },
-  },
+  ...(project ? { project } : undefined),
 };

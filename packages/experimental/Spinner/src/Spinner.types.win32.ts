@@ -19,7 +19,7 @@ export interface SpinnerSlotProps {
   root: SpinnerProps; //SpinnerProps extends ViewProps which is required for win32 native module.
   track?: SpinnerSvgProps;
   tail?: SpinnerSvgProps;
-  tailContainer?: SpinnerSvgProps;
+  tailContainer?: React.PropsWithChildren<SpinnerSvgProps>;
   label?: TextProps;
 }
 export interface SpinnerType {

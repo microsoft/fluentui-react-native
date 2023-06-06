@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import type * as React from 'react';
 import { Pressable } from 'react-native';

@@ -1,11 +1,12 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { useRef, useEffect, useMemo, useCallback } from 'react';
+import type { ScaleXTransform, TranslateXTransform } from 'react-native';
 import { Animated, I18nManager } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import assertNever from 'assert-never';
-import type { TransformObject } from 'react-native-svg';
 import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G } from 'react-native-svg';
 
 import { stylingSettings } from './Shimmer.styling';
@@ -97,7 +98,9 @@ export const Shimmer = compose<ShimmerType>({
       }
 
       // Flip the SVG if we are running in RTL
-      const rtlTransfrom: TransformObject = I18nManager.isRTL ? { translateX: memoizedShimmerData.containerWidth, scaleX: -1 } : {};
+      const rtlTransfrom: TranslateXTransform & ScaleXTransform = I18nManager.isRTL
+        ? { translateX: memoizedShimmerData.containerWidth, scaleX: -1 }
+        : { translateX: undefined, scaleX: undefined };
 
       return (
         <Slots.root {...mergedProps}>
@@ -113,7 +116,7 @@ export const Shimmer = compose<ShimmerType>({
             </AnimatedLinearGradient>
             <ClipPath id="shimmerView">{rows}</ClipPath>
           </Defs>
-          <G transform={rtlTransfrom}>
+          <G transformProps={rtlTransfrom}>
             <Rect
               x="0"
               y="0"

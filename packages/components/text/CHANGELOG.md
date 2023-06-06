@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Tue, 30 May 2023 20:34:15 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Jun 2023 19:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Mon, 05 Jun 2023 19:26:25 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.14.0
+- Bump @fluentui-react-native/adapters to v0.11.0
+- Bump @fluentui-react-native/experimental-native-font-metrics to v0.4.0
+- Bump @fluentui-react-native/framework to v0.10.0
+- Bump @fluentui-react-native/interactive-hooks to v0.23.0
+- Bump @fluentui-react-native/theme-tokens to v0.25.0
+- Bump @fluentui-react-native/tokens to v0.21.0
 
 ## 0.19.33
 

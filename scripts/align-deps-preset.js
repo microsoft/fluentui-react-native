@@ -11,4 +11,5 @@ module.exports = {
       devOnly: true,
     },
   },
+  0.71: {},
 };

@@ -9,7 +9,7 @@ import { RadioGroup } from '../RadioGroup';
 jest.useFakeTimers();
 
 describe('RadioGroup component tests', () => {
-  it('RadioGroup default', () => {
+  it('RadioGroup default', async () => {
     const tree = renderer
       .create(
         <RadioGroup label="Uncontrolled RadioGroup" defaultValue="key2">
@@ -19,9 +19,10 @@ describe('RadioGroup component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 
-  it('Radio not direct child of radio group', () => {
+  it('Radio not direct child of radio group', async () => {
     const tree = renderer
       .create(
         <RadioGroup label="Uncontrolled RadioGroup" defaultValue="key2">
@@ -31,9 +32,10 @@ describe('RadioGroup component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 
-  it('RadioGroup disabled', () => {
+  it('RadioGroup disabled', async () => {
     const tree = renderer
       .create(
         <RadioGroup disabled label="Disabled RadioGroup">
@@ -43,9 +45,10 @@ describe('RadioGroup component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 
-  it('RadioGroup required', () => {
+  it('RadioGroup required', async () => {
     const tree = renderer
       .create(
         <RadioGroup required label="Required RadioGroup" defaultValue="key2">
@@ -55,9 +58,10 @@ describe('RadioGroup component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 
-  it('RadioGroup horizontal', () => {
+  it('RadioGroup horizontal', async () => {
     const tree = renderer
       .create(
         <RadioGroup layout="horizontal" label="Horizontal RadioGroup" defaultValue="key2">
@@ -67,9 +71,10 @@ describe('RadioGroup component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 
-  it('RadioGroup horizontal-stacked', () => {
+  it('RadioGroup horizontal-stacked', async () => {
     const tree = renderer
       .create(
         <RadioGroup layout="horizontal-stacked" label="Horizontal-Stacked RadioGroup" defaultValue="key2">
@@ -79,13 +84,16 @@ describe('RadioGroup component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 
-  it('RadioGroup simple rendering does not invalidate styling', () => {
+  it('RadioGroup simple rendering does not invalidate styling', async () => {
     checkRenderConsistency(() => <RadioGroup>Default RadioGroup</RadioGroup>, 2);
+    await renderer.act(async () => null);
   });
 
-  it('RadioGroup re-renders correctly', () => {
+  it('RadioGroup re-renders correctly', async () => {
     checkReRender(() => <RadioGroup>Render twice</RadioGroup>, 2);
+    await renderer.act(async () => null);
   });
 });

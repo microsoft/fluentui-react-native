@@ -3,7 +3,7 @@
 exports[`Divider component tests Branded Divider 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -16,7 +16,7 @@ exports[`Divider component tests Branded Divider 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#185abd",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -32,7 +32,7 @@ exports[`Divider component tests Branded Divider 1`] = `
 exports[`Divider component tests Custom Divider 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -45,7 +45,7 @@ exports[`Divider component tests Custom Divider 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "red",
         "borderStyle": "solid",
         "borderTopWidth": 3,
@@ -61,7 +61,7 @@ exports[`Divider component tests Custom Divider 1`] = `
 exports[`Divider component tests Divider default 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -74,7 +74,7 @@ exports[`Divider component tests Divider default 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#e0e0e0",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -90,7 +90,7 @@ exports[`Divider component tests Divider default 1`] = `
 exports[`Divider component tests Divider with all props + tokens set 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "column",
@@ -110,7 +110,7 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "blue",
         "borderLeftWidth": 2,
         "borderStyle": "solid",
@@ -122,7 +122,7 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "flex": 0,
         "paddingVertical": 10,
       }
@@ -133,7 +133,7 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
-        Object {
+        {
           "color": "red",
           "fontFamily": "System",
           "fontSize": 10,
@@ -152,7 +152,7 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "borderColor": "blue",
         "borderLeftWidth": 2,
         "borderStyle": "solid",
@@ -168,7 +168,7 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
 exports[`Divider component tests Divider with icon 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -181,7 +181,7 @@ exports[`Divider component tests Divider with icon 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#e0e0e0",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -193,7 +193,7 @@ exports[`Divider component tests Divider with icon 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "flex": 0,
         "paddingHorizontal": 12,
       }
@@ -202,7 +202,7 @@ exports[`Divider component tests Divider with icon 1`] = `
     <Text
       accessible={true}
       style={
-        Object {
+        {
           "color": "#424242",
           "fontFamily": "Arial",
           "fontSize": 32,
@@ -214,7 +214,7 @@ exports[`Divider component tests Divider with icon 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "borderColor": "#e0e0e0",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -230,7 +230,7 @@ exports[`Divider component tests Divider with icon 1`] = `
 exports[`Divider component tests Divider with text 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -243,7 +243,7 @@ exports[`Divider component tests Divider with text 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#e0e0e0",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -255,7 +255,7 @@ exports[`Divider component tests Divider with text 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "flex": 0,
         "paddingHorizontal": 12,
       }
@@ -266,7 +266,7 @@ exports[`Divider component tests Divider with text 1`] = `
       numberOfLines={0}
       onAccessibilityTap={[Function]}
       style={
-        Object {
+        {
           "color": "#424242",
           "fontFamily": "Segoe UI",
           "fontSize": 12,
@@ -281,7 +281,7 @@ exports[`Divider component tests Divider with text 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "borderColor": "#e0e0e0",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -297,7 +297,7 @@ exports[`Divider component tests Divider with text 1`] = `
 exports[`Divider component tests Horizontal Divider with Inset 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -310,7 +310,7 @@ exports[`Divider component tests Horizontal Divider with Inset 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#e0e0e0",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -326,7 +326,7 @@ exports[`Divider component tests Horizontal Divider with Inset 1`] = `
 exports[`Divider component tests Strong Divider 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -339,7 +339,7 @@ exports[`Divider component tests Strong Divider 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#d1d1d1",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -355,7 +355,7 @@ exports[`Divider component tests Strong Divider 1`] = `
 exports[`Divider component tests Subtle Divider 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -368,7 +368,7 @@ exports[`Divider component tests Subtle Divider 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#f0f0f0",
         "borderStyle": "solid",
         "borderTopWidth": 1,
@@ -384,7 +384,7 @@ exports[`Divider component tests Subtle Divider 1`] = `
 exports[`Divider component tests Vertical Divider 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "column",
@@ -398,7 +398,7 @@ exports[`Divider component tests Vertical Divider 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#e0e0e0",
         "borderLeftWidth": 1,
         "borderStyle": "solid",
@@ -414,7 +414,7 @@ exports[`Divider component tests Vertical Divider 1`] = `
 exports[`Divider component tests Vertical Divider with Inset 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "column",
@@ -428,7 +428,7 @@ exports[`Divider component tests Vertical Divider with Inset 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "borderColor": "#e0e0e0",
         "borderLeftWidth": 1,
         "borderStyle": "solid",

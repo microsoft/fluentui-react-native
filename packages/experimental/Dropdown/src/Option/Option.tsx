@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /**  @jsx withSlots */
 import React from 'react';
 import { View } from 'react-native';

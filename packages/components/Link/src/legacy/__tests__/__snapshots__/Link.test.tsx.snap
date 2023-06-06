@@ -18,7 +18,7 @@ exports[`Link all props 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "display": "flex",
     }
@@ -27,7 +27,7 @@ exports[`Link all props 1`] = `
 >
   <Text
     style={
-      Object {
+      {
         "borderColor": "transparent",
         "borderRadius": 4,
         "borderStyle": "solid",
@@ -65,7 +65,7 @@ exports[`Link with child 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "display": "flex",
     }
@@ -74,7 +74,7 @@ exports[`Link with child 1`] = `
 >
   <Text
     style={
-      Object {
+      {
         "borderColor": "transparent",
         "borderRadius": 4,
         "borderStyle": "solid",

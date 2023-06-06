@@ -40,7 +40,7 @@ export type MenuButtonSlotProps = {
   button: ButtonProps & MenuButtonTokens & { content?: string };
   primaryButton: ButtonProps & MenuButtonTokens & { content?: string };
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;
-  contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
+  contextualMenuItems: React.PropsWithChildren<Pick<MenuButtonProps, 'menuItems'>>;
   contextualMenuItem: MenuButtonItemProps;
   chevronSvg: XmlProps;
 };

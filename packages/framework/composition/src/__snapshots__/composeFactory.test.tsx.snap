@@ -3,7 +3,7 @@
 exports[`composeFactory test suite Base component render 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "black",
       "borderColor": "green",
       "borderWidth": 1,
@@ -14,7 +14,7 @@ exports[`composeFactory test suite Base component render 1`] = `
 >
   <Text
     style={
-      Object {
+      {
         "color": "white",
       }
     }
@@ -27,7 +27,7 @@ exports[`composeFactory test suite Base component render 1`] = `
 exports[`composeFactory test suite Base component render 2`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "pink",
       "borderColor": "green",
       "borderWidth": 1,
@@ -38,7 +38,7 @@ exports[`composeFactory test suite Base component render 2`] = `
 >
   <Text
     style={
-      Object {
+      {
         "color": "white",
       }
     }
