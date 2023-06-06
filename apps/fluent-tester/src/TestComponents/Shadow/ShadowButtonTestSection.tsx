@@ -28,6 +28,9 @@ export const ShadowButtonTestSection: React.FunctionComponent = () => {
       <View style={shadowTestPageStyles(t).backgroundColor}>
         {platformSupportsShadow && platformSupportsFAB && (
           <View style={stackStyle}>
+            <FAB icon={iconProps} style={styles.marginBetweenComponentsWithShadow}>
+              FAB with default shadow
+            </FAB>
             <CustomFABShadow64 icon={iconProps} style={styles.marginBetweenComponentsWithShadow}>
               Custom FAB with shadow64
             </CustomFABShadow64>
