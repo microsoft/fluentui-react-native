@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Changes for treeshake to work",
+  "packageName": "@fluentui-react-native/memo-cache",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}

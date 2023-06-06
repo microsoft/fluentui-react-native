@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Changes for treeshake to work",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}

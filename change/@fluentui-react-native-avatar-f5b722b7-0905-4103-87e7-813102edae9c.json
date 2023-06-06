@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Changes for treeshake to work",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "none"
+}
