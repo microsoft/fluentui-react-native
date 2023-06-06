@@ -13,13 +13,13 @@ import { useTabList } from './useTabList';
 
 export const TabListContext = React.createContext<TabListContextData>({
   selectedKey: null,
-  onTabsClick: (/* key: string */) => {
+  onTabsClick: () => {
     return;
   },
-  getTabId: (/* key:string, index: number*/) => {
+  getTabId: () => {
     return null;
   },
-  updateSelectedTabsItemRef: (/* ref: React.RefObject<any>*/) => {
+  updateSelectedTabsItemRef: () => {
     return;
   },
   tabsItemKeys: [],
