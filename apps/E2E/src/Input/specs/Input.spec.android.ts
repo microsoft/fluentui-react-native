@@ -62,6 +62,8 @@ describe('Input Functional Testing', () => {
 
   it('Validate error state was achieved', async () => {
     await InputPageObject.click(InputPageObject._primaryComponent);
+    await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
+
     await InputPageObject.typeText(INPUT_TYPE_STRING);
     await expect(await InputPageObject.verifyTextContent(INPUT_ERROR_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
@@ -69,6 +71,8 @@ describe('Input Functional Testing', () => {
 
   it('Validate accessory icon OnPress() callback was fired -> Click', async () => {
     await InputPageObject.click(InputPageObject._accessoryButton);
+    await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
+
     await expect(await InputPageObject.verifyTextContent(INPUT_ONCLICK_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
