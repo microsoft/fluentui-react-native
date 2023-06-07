@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Make win32 use commonjs",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
