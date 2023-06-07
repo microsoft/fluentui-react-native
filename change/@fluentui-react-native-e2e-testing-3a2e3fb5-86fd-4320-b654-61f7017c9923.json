@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Handle flaky tests Android",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "none"
-}

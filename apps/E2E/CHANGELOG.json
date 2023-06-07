@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Wed, 07 Jun 2023 09:36:33 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.25.0",
+      "version": "1.25.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "ef55191aaa6584c74156571582a399c0321e5d2b",
+            "comment": "Handle flaky tests Android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 05 Jun 2023 19:26:22 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.25.0",
       "version": "1.25.0",
