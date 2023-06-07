@@ -1,16 +1,14 @@
 import { Tooltip } from '@fluentui-react-native/tooltip';
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { Button } from '@fluentui-react-native/experimental-button';
 
 export const TooltipDefault: React.FunctionComponent = () => {
   return (
     <View>
-      <Tooltip />
-      <Tooltip text="This is demo component. Feel free to change" />
-      <Text>Size</Text>
-      <Tooltip textSize="small" />
-      <Tooltip textSize="medium" />
-      <Tooltip textSize="large" />
+      <Tooltip content="Test">
+        <Button>Test</Button>
+      </Tooltip>
     </View>
   );
 };

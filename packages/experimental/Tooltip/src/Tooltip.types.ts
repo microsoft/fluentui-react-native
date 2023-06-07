@@ -24,14 +24,14 @@ export interface TooltipTokens {}
 export interface TooltipProps {
   content: string;
   target?: React.RefObject<React.Component>;
-  appearance?: 'normal' | 'inverted';
+  // appearance?: 'normal' | 'inverted';
   // hideDelay?: number;
   onVisibleChange?: (event, data) => void;
   positioning?: DirectionalHint;
-  relationship: 'label' | 'description' | 'inaccessible';
-  // showDelay: number;
-  visible: boolean;
-  withArrow: boolean;
+  // relationship: 'label' | 'description' | 'inaccessible';
+  // showDelay?: number;
+  visible?: boolean;
+  // withArrow?: boolean;
 }
 
 export interface TooltipSlotProps {

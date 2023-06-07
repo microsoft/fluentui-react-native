@@ -2,19 +2,40 @@ import * as React from 'react';
 import { Tooltip } from '../Tooltip';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import { Button } from '@fluentui-react-native/experimental-button';
 
 describe('Tooltip component tests', () => {
   it('Tooltip default', () => {
-    const tree = renderer.create(<Tooltip>Your component</Tooltip>).toJSON();
+    const tree = renderer
+      .create(
+        <Tooltip content="Your component">
+          <Button>Your component</Button>
+        </Tooltip>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Tooltip simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(() => <Tooltip>Default Tooltip</Tooltip>, 2);
+    checkRenderConsistency(
+      () => (
+        <Tooltip content="Default Tooltip">
+          <Button>Default Tooltip</Button>
+        </Tooltip>
+      ),
+      2,
+    );
   });
 
   it('Tooltip re-renders correctly', () => {
-    checkReRender(() => <Tooltip>Render twice</Tooltip>, 2);
+    checkReRender(
+      () => (
+        <Tooltip content="Render twice">
+          <Button>Render twice</Button>
+        </Tooltip>
+      ),
+      2,
+    );
   });
 
   // Feel free to add more tests here
