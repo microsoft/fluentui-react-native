@@ -8,7 +8,6 @@ import { Text } from '@fluentui-react-native/text';
 import {
   INPUT_TEST_COMPONENT,
   INPUT_TEXT,
-  INPUT_ONCLICK_TEXT,
   INPUT_TEST_COMPONENT_DISMISS_BUTTON,
   INPUT_ERROR_STRING,
   INPUT_ONCLICK_STRING,
@@ -25,26 +24,15 @@ export const filledIconProps: IconProps = { svgSource: { src: FilledSvg, viewBox
 export const E2EInputTest: React.FunctionComponent = () => {
   const [error, setError] = React.useState<string>('');
   const [text, setText] = React.useState<string>(INPUT_START_STRING);
-  const [clearText, setClearText] = React.useState<string>('');
 
   return (
     <Stack style={stackStyle}>
-      {text && (
-        <Text
-          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-          {...testProps(INPUT_TEXT)}
-        >
-          {text}
-        </Text>
-      )}
-      {clearText && (
-        <Text
-          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-          {...testProps(INPUT_ONCLICK_TEXT)}
-        >
-          {clearText}
-        </Text>
-      )}
+      <Text
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(INPUT_TEXT)}
+      >
+        {text}
+      </Text>
       <Input
         error={error}
         defaultIcon={outlineIconProps}
@@ -67,7 +55,7 @@ export const E2EInputTest: React.FunctionComponent = () => {
         {...testProps(INPUT_TEST_COMPONENT)}
         accessoryIconAccessibilityLabel={INPUT_TEST_COMPONENT_DISMISS_BUTTON}
         accessoryButtonOnPress={() => {
-          setClearText(INPUT_ONCLICK_STRING);
+          setText(INPUT_ONCLICK_STRING);
         }}
       />
     </Stack>

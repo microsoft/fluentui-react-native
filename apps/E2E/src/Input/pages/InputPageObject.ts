@@ -6,7 +6,6 @@ import {
   HOMEPAGE_INPUT_BUTTON,
   INPUT_TEXT,
   INPUT_TEST_COMPONENT_DISMISS_BUTTON,
-  INPUT_ONCLICK_TEXT,
 } from '../../Input/consts';
 
 class InputPageObject extends BasePage {
@@ -15,11 +14,6 @@ class InputPageObject extends BasePage {
   /******************************************************************/
   async verifyTextContent(text: string): Promise<boolean> {
     const callbackText = await this._callbackText;
-    return (await callbackText.getAttribute(AndroidAttribute.Text)) == text;
-  }
-
-  async verifyOnClickTextContent(text: string): Promise<boolean> {
-    const callbackText = await this._onClickCallbackText;
     return (await callbackText.getAttribute(AndroidAttribute.Text)) == text;
   }
 
@@ -48,10 +42,6 @@ class InputPageObject extends BasePage {
 
   get _callbackText() {
     return By(INPUT_TEXT);
-  }
-
-  get _onClickCallbackText() {
-    return By(INPUT_ONCLICK_TEXT);
   }
 }
 
