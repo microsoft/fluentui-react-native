@@ -3,7 +3,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "importHelpers": true,
-    "module": "commonjs",
     "outDir": "lib",
     "paths": {
       "*": ["*", "*.win32", "./*"],

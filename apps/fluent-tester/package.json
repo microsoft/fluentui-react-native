@@ -140,7 +140,6 @@
             }
           ]
         ],
-        "treeShake": true,
         "platforms": {
           "android": {
             "bundleOutput": "dist/index.android.bundle",
