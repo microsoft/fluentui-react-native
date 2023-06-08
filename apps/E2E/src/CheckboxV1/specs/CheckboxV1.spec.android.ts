@@ -61,7 +61,7 @@ describe('CheckboxV1 Functional Testing', () => {
     expect(await CheckboxV1PageObject.isCheckboxCheckedAndroid()).toBeTruthy();
 
     await CheckboxV1PageObject.click(CheckboxV1PageObject._primaryComponent);
-    expect(await CheckboxV1PageObject.didOnChangeCallbackFire('Callback failed to fire via click.')).toBeFalsy();
+    expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
 
     /* Validate the Checkbox is toggled OFF */
     expect(await CheckboxV1PageObject.isCheckboxCheckedAndroid()).toBeFalsy();
