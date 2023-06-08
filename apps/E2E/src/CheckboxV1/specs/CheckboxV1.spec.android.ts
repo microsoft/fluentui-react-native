@@ -55,16 +55,19 @@ describe('CheckboxV1 Functional Testing', () => {
 
     /* Click on the Checkbox to toggle ON */
     await CheckboxV1PageObject.click(CheckboxV1PageObject._primaryComponent);
-    expect(await CheckboxV1PageObject.didOnChangeCallbackFire('Callback failed to fire via click.')).toBeTruthy();
 
     /* Validate the Checkbox is toggled ON */
+    expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await CheckboxV1PageObject.waitForCheckboxToggle(true, 'Checkbox should have toggled on.')).toBeTruthy();
+    expect(await CheckboxV1PageObject.didOnChangeCallbackFire('Callback failed to fire via click.')).toBeTruthy();
     expect(await CheckboxV1PageObject.isCheckboxCheckedAndroid()).toBeTruthy();
 
+    /* Click on the Checkbox to toggle OFF */
     await CheckboxV1PageObject.click(CheckboxV1PageObject._primaryComponent);
-    expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
 
     /* Validate the Checkbox is toggled OFF */
-    expect(await CheckboxV1PageObject.isCheckboxCheckedAndroid()).toBeFalsy();
     expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await CheckboxV1PageObject.waitForCheckboxToggle(false, 'Checkbox should have toggled off.')).toBeTruthy();
+    expect(await CheckboxV1PageObject.isCheckboxCheckedAndroid()).toBeFalsy();
   });
 });
