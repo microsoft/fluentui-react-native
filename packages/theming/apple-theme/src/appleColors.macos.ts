@@ -1,4 +1,6 @@
 import type { ThemeColorDefinition, AppearanceOptions } from '@fluentui-react-native/theme-types';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 
 import type { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
@@ -593,15 +595,5 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
 
     strokeFocus1: macOSAliasColorTokens.strokeFocus1,
     strokeFocus2: macOSAliasColorTokens.strokeFocus2,
-
-    redBackground1: macOSAliasColorTokens.redBackground1,
-    redBackground2: macOSAliasColorTokens.redBackground2,
-    redBackground3: macOSAliasColorTokens.redBackground3,
-    redForeground1: macOSAliasColorTokens.redForeground1,
-    redForeground2: macOSAliasColorTokens.redForeground2,
-    redForeground3: macOSAliasColorTokens.redForeground3,
-    redBorderActive: macOSAliasColorTokens.redBorderActive,
-    redBorder1: macOSAliasColorTokens.redBorder1,
-    redBorder2: macOSAliasColorTokens.redBorder2,
   };
 }

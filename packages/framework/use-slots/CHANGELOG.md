@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/use-slots
 
-This log was last generated on Fri, 24 Feb 2023 20:40:00 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Jun 2023 19:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Mon, 05 Jun 2023 19:26:25 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/use-slot to v0.4.0
+- Bump @fluentui-react-native/merge-props to v0.6.0
 
 ## 0.7.4
 

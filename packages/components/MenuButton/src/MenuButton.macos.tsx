@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { Image } from 'react-native';
 import type { ImageResolvedAssetSource } from 'react-native';

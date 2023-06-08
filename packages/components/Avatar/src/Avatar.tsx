@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { Fragment } from 'react';
 import { Image, View, Text, Platform } from 'react-native';

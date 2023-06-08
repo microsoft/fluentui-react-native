@@ -4,7 +4,7 @@ exports[`Link component tests Default Link 1`] = `
 <View
   accessibilityRole="link"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
     }
   }
@@ -24,7 +24,7 @@ exports[`Link component tests Default Link 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignSelf": "flex-start",
     }
   }
@@ -35,7 +35,7 @@ exports[`Link component tests Default Link 1`] = `
     focusable={false}
     numberOfLines={0}
     style={
-      Object {
+      {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
         "margin": 0,
@@ -52,7 +52,7 @@ exports[`Link component tests Default Link as a pressable 1`] = `
 <View
   accessibilityRole="link"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
     }
   }
@@ -72,7 +72,7 @@ exports[`Link component tests Default Link as a pressable 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignSelf": "flex-start",
     }
   }
@@ -82,7 +82,7 @@ exports[`Link component tests Default Link as a pressable 1`] = `
     focusable={false}
     numberOfLines={0}
     style={
-      Object {
+      {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
         "margin": 0,
@@ -99,7 +99,7 @@ exports[`Link component tests Inline Link 1`] = `
 <Text
   accessibilityRole="link"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
     }
   }
@@ -120,7 +120,7 @@ exports[`Link component tests Inline Link 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignSelf": "flex-start",
       "color": "#0f6cbd",
       "margin": 0,
@@ -138,7 +138,7 @@ exports[`Link component tests Subtle Link 1`] = `
 <View
   accessibilityRole="link"
   accessibilityState={
-    Object {
+    {
       "disabled": false,
     }
   }
@@ -159,7 +159,7 @@ exports[`Link component tests Subtle Link 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignSelf": "flex-start",
     }
   }
@@ -170,7 +170,7 @@ exports[`Link component tests Subtle Link 1`] = `
     focusable={false}
     numberOfLines={0}
     style={
-      Object {
+      {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
         "margin": 0,

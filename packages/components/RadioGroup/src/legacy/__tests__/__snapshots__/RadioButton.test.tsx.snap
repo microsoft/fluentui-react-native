@@ -3,8 +3,8 @@
 exports[`RadioButton component tests RadioButton default 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "label": "Select a RadioButton",
         "name": "Select",
       },
@@ -15,7 +15,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
   accessibilityRole="radio"
   accessibilitySetSize={0}
   accessibilityState={
-    Object {
+    {
       "disabled": false,
       "selected": false,
     }
@@ -34,7 +34,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "row",
@@ -46,7 +46,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderColor": "#323130",
         "borderRadius": 10,
@@ -65,7 +65,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#323130",
           "borderRadius": 5,
           "height": 10,
@@ -80,7 +80,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
   </View>
   <Text
     style={
-      Object {
+      {
         "borderColor": "transparent",
         "borderStyle": "solid",
         "borderWidth": 2,

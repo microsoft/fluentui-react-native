@@ -197,8 +197,10 @@ export interface DrawerProps extends PressableFocusProps {
    * Animation configuration for the Drawer
    * */
   animationConfig?: {
-    animatedOpacity: Animated.AnimatedInterpolation;
-    animatedStyle: { transform: { translateX: Animated.AnimatedInterpolation }[] | { translateY: Animated.AnimatedInterpolation }[] };
+    animatedOpacity: Animated.AnimatedInterpolation<number>;
+    animatedStyle: {
+      transform: { translateX: Animated.AnimatedInterpolation<number> }[] | { translateY: Animated.AnimatedInterpolation<number> }[];
+    };
   };
 }
 

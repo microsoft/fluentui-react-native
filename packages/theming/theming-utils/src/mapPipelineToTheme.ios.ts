@@ -109,6 +109,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
     brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
     brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
+    brandStrokeTint: pipelineOutput.brandStrokeTint.strokeColorRest,
 
     /// Error, status, and presence tokens
 
@@ -116,21 +117,25 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     dangerBackground2: pipelineOutput.dangerBackground2.fillColorRest,
     dangerForeground1: pipelineOutput.dangerForeground1.fillColorRest,
     dangerForeground2: pipelineOutput.dangerForeground2.fillColorRest,
+    dangerStroke1: pipelineOutput.dangerStroke1.strokeColorRest,
 
     successBackground1: pipelineOutput.successBackground1.fillColorRest,
     successBackground2: pipelineOutput.successBackground2.fillColorRest,
     successForeground1: pipelineOutput.successForeground1.fillColorRest,
     successForeground2: pipelineOutput.successForeground2.fillColorRest,
+    successStroke1: pipelineOutput.successStroke1.strokeColorRest,
 
     warningBackground1: pipelineOutput.warningBackground1.fillColorRest,
     warningBackground2: pipelineOutput.warningBackground2.fillColorRest,
     warningForeground1: pipelineOutput.warningForeground1.fillColorRest,
     warningForeground2: pipelineOutput.warningForeground2.fillColorRest,
+    warningStroke1: pipelineOutput.warningStroke1.strokeColorRest,
 
     severeBackground1: pipelineOutput.severeBackground1.fillColorRest,
     severeBackground2: pipelineOutput.severeBackground2.fillColorRest,
     severeForeground1: pipelineOutput.severeForeground1.fillColorRest,
     severeForeground2: pipelineOutput.severeForeground2.fillColorRest,
+    severeStroke1: pipelineOutput.severeStroke1.strokeColorRest,
 
     presenceAway: pipelineOutput.presenceAway.fillColorRest,
     presenceDnd: pipelineOutput.presenceDnd.fillColorRest,

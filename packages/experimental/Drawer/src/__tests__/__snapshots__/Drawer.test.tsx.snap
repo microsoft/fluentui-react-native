@@ -1,20 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Drawer component tests Drawer default 1`] = `
-<Modal
-  animationType="none"
-  hardwareAccelerated={false}
-  onRequestClose={[Function]}
-  supportedOrientations={
-    Array [
-      "portrait",
-      "portrait-upside-down",
-      "landscape",
-      "landscape-left",
-      "landscape-right",
-    ]
-  }
-  transparent={true}
-  visible={false}
-/>
+<Text>
+  Hello
+</Text>
 `;

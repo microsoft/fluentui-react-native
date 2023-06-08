@@ -3,7 +3,7 @@
 exports[`Input component tests Input default 1`] = `
 <RCTScrollView
   contentContainerStyle={
-    Object {
+    {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -29,7 +29,7 @@ exports[`Input component tests Input default 1`] = `
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "flex-start",
           "borderBottomColor": "#d1d1d1",
@@ -46,7 +46,7 @@ exports[`Input component tests Input default 1`] = `
         onChangeText={[Function]}
         placeholderTextColor="#616161"
         style={
-          Object {
+          {
             "color": "#616161",
             "flexGrow": 1,
             "flexShrink": 1,
@@ -68,7 +68,7 @@ exports[`Input component tests Input default 1`] = `
 exports[`Input component tests Input in error state 1`] = `
 <RCTScrollView
   contentContainerStyle={
-    Object {
+    {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -94,7 +94,7 @@ exports[`Input component tests Input in error state 1`] = `
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "flex-start",
           "borderBottomColor": "#bc2f32",
@@ -112,7 +112,7 @@ exports[`Input component tests Input in error state 1`] = `
         placeholderTextColor="#242424"
         selectionColor="#808080"
         style={
-          Object {
+          {
             "color": "#242424",
             "flexGrow": 1,
             "flexShrink": 1,
@@ -129,7 +129,7 @@ exports[`Input component tests Input in error state 1`] = `
     </View>
     <Text
       style={
-        Object {
+        {
           "color": "#bc2f32",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -152,7 +152,7 @@ exports[`Input component tests Input in error state 1`] = `
 exports[`Input component tests Input with all optional text 1`] = `
 <RCTScrollView
   contentContainerStyle={
-    Object {
+    {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -178,7 +178,7 @@ exports[`Input component tests Input with all optional text 1`] = `
   <View>
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "margin": 0,
           "marginBottom": 0,
@@ -192,7 +192,7 @@ exports[`Input component tests Input with all optional text 1`] = `
     </Text>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "flex-start",
           "borderBottomColor": "#d1d1d1",
@@ -210,7 +210,7 @@ exports[`Input component tests Input with all optional text 1`] = `
         placeholder="Test"
         placeholderTextColor="#616161"
         style={
-          Object {
+          {
             "color": "#616161",
             "flexGrow": 1,
             "flexShrink": 1,
@@ -227,7 +227,7 @@ exports[`Input component tests Input with all optional text 1`] = `
     </View>
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontFamily": "Segoe UI",
           "fontSize": 13,
@@ -250,7 +250,7 @@ exports[`Input component tests Input with all optional text 1`] = `
 exports[`Input component tests Input with icon 1`] = `
 <RCTScrollView
   contentContainerStyle={
-    Object {
+    {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -261,9 +261,9 @@ exports[`Input component tests Input with icon 1`] = `
     }
   }
   defaultIconProps={
-    Object {
+    {
       "color": "#fff",
-      "fontSource": Object {
+      "fontSource": {
         "codepoint": 9827,
         "fontFamily": "Arial",
         "fontSize": 16,
@@ -285,7 +285,7 @@ exports[`Input component tests Input with icon 1`] = `
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "flex-start",
           "display": "flex",
@@ -297,7 +297,7 @@ exports[`Input component tests Input with icon 1`] = `
       <Text
         accessible={false}
         style={
-          Object {
+          {
             "color": "#fff",
             "fontFamily": "Arial",
             "fontSize": 16,
@@ -310,7 +310,7 @@ exports[`Input component tests Input with icon 1`] = `
       </Text>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderBottomColor": "#d1d1d1",
@@ -328,7 +328,7 @@ exports[`Input component tests Input with icon 1`] = `
           placeholder="Test"
           placeholderTextColor="#616161"
           style={
-            Object {
+            {
               "color": "#616161",
               "flexGrow": 1,
               "flexShrink": 1,
@@ -351,7 +351,7 @@ exports[`Input component tests Input with icon 1`] = `
 exports[`Input component tests Input with placeholder 1`] = `
 <RCTScrollView
   contentContainerStyle={
-    Object {
+    {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -377,7 +377,7 @@ exports[`Input component tests Input with placeholder 1`] = `
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "flex-start",
           "borderBottomColor": "#d1d1d1",
@@ -395,7 +395,7 @@ exports[`Input component tests Input with placeholder 1`] = `
         placeholder="Test"
         placeholderTextColor="#616161"
         style={
-          Object {
+          {
             "color": "#616161",
             "flexGrow": 1,
             "flexShrink": 1,
@@ -417,7 +417,7 @@ exports[`Input component tests Input with placeholder 1`] = `
 exports[`Input component tests Input without accessoryIcon 1`] = `
 <RCTScrollView
   contentContainerStyle={
-    Object {
+    {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -443,7 +443,7 @@ exports[`Input component tests Input without accessoryIcon 1`] = `
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "flex-start",
           "borderBottomColor": "#d1d1d1",
@@ -461,7 +461,7 @@ exports[`Input component tests Input without accessoryIcon 1`] = `
         placeholder="Test"
         placeholderTextColor="#616161"
         style={
-          Object {
+          {
             "color": "#616161",
             "flexGrow": 1,
             "flexShrink": 1,

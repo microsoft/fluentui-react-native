@@ -26,10 +26,10 @@ import { testProps } from '../Common/TestProps';
 
 export const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
 
-type FocusZoneListWrapperProps = {
+type FocusZoneListWrapperProps = React.PropsWithChildren<{
   beforeID?: string;
   afterID?: string;
-};
+}>;
 export const FocusZoneListWrapper: React.FunctionComponent<FocusZoneListWrapperProps> = ({ beforeID, afterID, children }) => {
   const buttonProps: ButtonProps = { children: 'Click to Focus', style: focusZoneTestStyles.listWrapperButton };
   return (

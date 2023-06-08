@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { StyleProp } from 'react-native';
 import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-native';

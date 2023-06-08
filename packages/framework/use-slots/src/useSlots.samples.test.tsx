@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { CSSProperties } from 'react';
 
@@ -37,7 +38,7 @@ describe('useSlots sample code test suite', () => {
   /**
    * First create the bold text in the standard way. This is just a function component.
    */
-  const BoldTextStandard: React.FunctionComponent<TextProps> = (props: React.PropsWithChildren<TextProps>) => {
+  const BoldTextStandard: React.FunctionComponent<React.PropsWithChildren<TextProps>> = (props: React.PropsWithChildren<TextProps>) => {
     /**
      * Pick out the children to pass them on to the child Text element
      */
@@ -57,7 +58,7 @@ describe('useSlots sample code test suite', () => {
    *
    * The stagedComponent function takes an input function of this form and wraps it in a function component that react knows how to render
    */
-  const BoldTextStaged = stagedComponent((props: TextProps) => {
+  const BoldTextStaged = stagedComponent((props: React.PropsWithChildren<TextProps>) => {
     /**
      * This section would be where hook/styling code would go, props here would include everything coming in from the base react tree with the
      * exception of children, which will be passed in stage 2.
@@ -105,7 +106,7 @@ describe('useSlots sample code test suite', () => {
    *
    * This again leverages style merging via mergeProps to avoid changing the references of the style objects on every render
    */
-  const HeaderStandard: React.FunctionComponent<TextProps> = (props) => {
+  const HeaderStandard: React.FunctionComponent<React.PropsWithChildren<TextProps>> = (props) => {
     const { children, ...rest } = props;
     return <BoldTextStandard {...mergeProps(headerBaseProps, rest)}>{children}</BoldTextStandard>;
   };
@@ -123,7 +124,7 @@ describe('useSlots sample code test suite', () => {
   /**
    * Now author the staged component using the slot hook
    */
-  const HeaderStaged = stagedComponent((props: TextProps) => {
+  const HeaderStaged = stagedComponent((props: React.PropsWithChildren<TextProps>) => {
     /**
      * Call the slots hook (or any hook) outside of the inner closure. The useSlots hook will return an object with each slot as a renderable
      * function. The hooks for sub-components will be called as part of this call. Props passed in at this point will be the props that appear
@@ -194,7 +195,7 @@ describe('useSlots sample code test suite', () => {
   /**
    * now just create the component like a standard react functional component
    */
-  const CaptionedHeaderStandard: React.FunctionComponent<HeaderWithCaptionProps> = (props) => {
+  const CaptionedHeaderStandard: React.FunctionComponent<React.PropsWithChildren<HeaderWithCaptionProps>> = (props) => {
     const { headerColor, captionColor, captionText, children, ...rest } = props;
     const headerColorProps = getColorProps(headerColor);
     const captionColorProps = getColorProps(captionColor);
@@ -231,7 +232,7 @@ describe('useSlots sample code test suite', () => {
   /**
    * now use the hook to implement it as a staged component
    */
-  const CaptionedHeaderStaged = stagedComponent<HeaderWithCaptionProps>((props) => {
+  const CaptionedHeaderStaged = stagedComponent<React.PropsWithChildren<HeaderWithCaptionProps>>((props) => {
     // At the point where this is called the slots are initialized with the initial prop values from useStyling above
     const Slots = useCaptionedHeaderSlots(props);
     return (extra: HeaderWithCaptionProps, children: React.ReactNode) => {

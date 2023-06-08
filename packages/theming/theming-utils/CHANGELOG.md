@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 03 May 2023 07:08:52 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Jun 2023 19:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.0
+
+Mon, 05 Jun 2023 19:26:25 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.32.0
+- Bump @fluentui-react-native/tokens to v0.21.0
+
+## 0.23.12
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Add macOS status tokens and accessible mobile stroke colors to AliasColorTokens interface (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.31.2
+- Bump @fluentui-react-native/tokens to v0.20.16
 
 ## 0.23.11
 

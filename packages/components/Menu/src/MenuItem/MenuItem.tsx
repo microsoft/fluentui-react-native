@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import React from 'react';
 import { I18nManager, Image, Pressable, View } from 'react-native';
