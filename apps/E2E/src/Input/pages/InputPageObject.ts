@@ -21,6 +21,15 @@ class InputPageObject extends BasePage {
     await driver.execute('mobile: type', { text: text });
   }
 
+  /* Waits for the text content to get updated to new string.
+   * Returns true if new string is attained. */
+  async waitForStringUpdate(newState: string, errorMessage: string): Promise<boolean> {
+    if (!(await this.verifyTextContent(newState))) {
+      await this.waitForCondition(async () => await this.verifyTextContent(newState), errorMessage);
+    }
+    return await this.verifyTextContent(newState);
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
