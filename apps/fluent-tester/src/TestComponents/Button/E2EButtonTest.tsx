@@ -31,7 +31,7 @@ export const E2EButtonTest: React.FunctionComponent = () => {
     setKeyDetected('');
   }, [buttonPressed]);
 
-  const keyPressProps: Omit<IViewWin32Props, 'accessibilityRole' | 'onBlur' | 'onFocus'> = {
+  const keyPressProps: Omit<IViewWin32Props, 'accessibilityRole' | 'role' | 'onBlur' | 'onFocus'> = {
     keyDownEvents: [{ key: 'a' }],
     onKeyDown: (args) => {
       if (args.nativeEvent.key === 'a') {
