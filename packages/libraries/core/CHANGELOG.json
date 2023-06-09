@@ -2,6 +2,63 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Fri, 09 Jun 2023 15:29:07 GMT",
+      "tag": "@fluentui/react-native_v0.37.1",
+      "version": "0.37.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.33.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.20.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.22.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/link to v0.19.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.11.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.17.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.12.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/text to v0.20.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 05 Jun 2023 19:26:26 GMT",
       "tag": "@fluentui/react-native_v0.37.0",
       "version": "0.37.0",

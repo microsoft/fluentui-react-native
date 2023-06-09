@@ -2390,9 +2390,9 @@
     fastq "^1.6.0"
 
 "@office-iss/react-native-win32@^0.71.0":
-  version "0.71.6"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.71.6.tgz#3684d87106939423c1d5e1cc582506bc33e8d9a2"
-  integrity sha512-rgZKeQ7zPu7m72D+/nB9v7st6H5poVR/PdaeOP7whDcGCeptLP4/H7KWbeEFUwwjWGroa75yWSHTPK2q9vNJIQ==
+  version "0.71.10"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.71.10.tgz#5d1a7d1e60269dab9340c3f9b5b3f8b8720b4ab4"
+  integrity sha512-E5JukHKgEvqaG/uNJVU6F6GWgrVeFbOlxWvEh84btuR/pUg90e26ib8+QaC6Sy8eMeJvv0dtAZFnWaSI47Nb6Q==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
@@ -2430,10 +2430,10 @@
     whatwg-fetch "^3.0.0"
     ws "^6.2.2"
 
-"@office-iss/rex-win32@0.71.9-devmain.16515.10000":
-  version "0.71.9-devmain.16515.10000"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.71.9-devmain.16515.10000.tgz#2121ce8acf2ccc10da21b7e06227a6c59b49bd49"
-  integrity sha512-6ELldOKpdCnx3GA80l2VEriun179UBzkpEJ74TJVyJh522OvgNVgea0JmPLlPICwms4wbgR3m2Y1/5VihSmZow==
+"@office-iss/rex-win32@0.71.15-devmain.16608.10000":
+  version "0.71.15-devmain.16608.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.71.15-devmain.16608.10000.tgz#dcefc95d24d0558f01ad07c7d7e6c021d56d9a7b"
+  integrity sha512-q41yoDTQH8VU4889hwYGgPDZHFPpnAqwPs2hQynFUrrAbWQsNkSxLMbGayDDqKg5p/rLqYrQnG8HErNIm93p6w==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
@@ -2671,10 +2671,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.10.tgz#339c7bfc6e1d9a5e934122eaaa7767dc1c5fb725"
   integrity sha512-EvAlHmPEPOwvbP6Pjg/gtDV3XJzIjIxr10fXFNlX5r9HeHw582G1Zt2o8FLyB718nOttgj8HYUTGxvhu4N65sQ==
 
-"@react-native-windows/cli@0.71.5":
-  version "0.71.5"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.71.5.tgz#479798182549032798a8b72c6aabcbae282a944e"
-  integrity sha512-ZPK6QQq+UrZhw+yBQH3W649o5Rm98vaHBA+fYGPUPCmZrsfjH4xBE9jS5DfgY6MumJkHuK2OuVgKXNSy9i3ZPQ==
+"@react-native-windows/cli@0.71.6":
+  version "0.71.6"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.71.6.tgz#8ae12e8b2025f6c49cd375b522fe843ce0814694"
+  integrity sha512-WYsA0Tp7puBNpbrtO/iY0QDNp8qpfaUiZGyQwSf3XlLvDdyT9ZXnM6ysusphK+Cc+bw1DYPpBMFYD4mPqNQGdw==
   dependencies:
     "@react-native-windows/codegen" "0.71.3"
     "@react-native-windows/fs" "0.71.2"
@@ -3405,9 +3405,9 @@
   integrity sha512-SWyMrjgdAUHNQmutvDcKablrJhkDLy4wunTme8oYLjKp41GnHGxMRXr2MQMvy/qy8H3LdzwQk9gH4hZ6T++H8g==
 
 "@types/jest@^29.0.0":
-  version "29.5.1"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.5.1.tgz#83c818aa9a87da27d6da85d3378e5a34d2f31a47"
-  integrity sha512-tEuVcHrpaixS36w7hpsfLBLpjtMRJUE09/MHXn923LOVojDwyC14cWcfc0rDs0VEfUyYmt/+iX1kxxp+gZMcaQ==
+  version "29.5.2"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.5.2.tgz#86b4afc86e3a8f3005b297ed8a72494f89e6395b"
+  integrity sha512-mSoZVJF5YzGVCk+FsDxzDuH7s+SCkzrgKZzf0Z0T2WudhBUPoF6ktoTPC4R0ZoCPCV5xUvuU6ias5NvxcBcMMg==
   dependencies:
     expect "^29.0.0"
     pretty-format "^29.0.0"
@@ -12027,15 +12027,15 @@ react-native-codegen@^0.71.5:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-gradle-plugin@^0.71.17:
-  version "0.71.17"
-  resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.17.tgz#cf780a27270f0a32dca8184eff91555d7627dd00"
-  integrity sha512-OXXYgpISEqERwjSlaCiaQY6cTY5CH6j73gdkWpK0hedxtiWMWgH+i5TOi4hIGYitm9kQBeyDu+wim9fA8ROFJA==
+react-native-gradle-plugin@^0.71.17, react-native-gradle-plugin@^0.71.19:
+  version "0.71.19"
+  resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.19.tgz#3379e28341fcd189bc1f4691cefc84c1a4d7d232"
+  integrity sha512-1dVk9NwhoyKHCSxcrM6vY6cxmojeATsBobDicX0ZKr7DgUF2cBQRTKsimQFvzH8XhOVXyH8p4HyDSZNIFI8OlQ==
 
 react-native-macos@^0.71.0:
-  version "0.71.8"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.71.8.tgz#d605c5bcfa7831ca553ced0f5afb5cb00ddc75ae"
-  integrity sha512-34/e9GqI6xPcY1Ih6hCRAI7SAtDFSgE58XF8WGXpOEALs2BaEzyRrtKnvUh1UwrKfjrr8/f8PQzLkDispQ22NQ==
+  version "0.71.11"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.71.11.tgz#0ada0ce4bbf690a6075933dd4db16f04d829a923"
+  integrity sha512-h2eIgiQ/SiQ1GnRn8oZYEuoWDzvu7lkoTZEkXjOVk5mSfAKw44+VlFAhObS5hFB0xgTe4v5IjbUJSmIj1a9F7w==
   dependencies:
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
@@ -12106,16 +12106,16 @@ react-native-test-app@^2.2.1:
     uuid "^8.3.2"
 
 react-native-windows@^0.71.0:
-  version "0.71.14"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.14.tgz#421c450b9e38511d93c22aba91e765948c0b4208"
-  integrity sha512-nL3XVYJCyWDo3f82WAqiAEkS9S2sqUaUjBkKguJpt7BObP9xkCZmnoYY1U928W8GkGd7s+OarHrNvptsDV06gw==
+  version "0.71.16"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.16.tgz#d3814ddd2540e09639970178445356ab192e3cbc"
+  integrity sha512-PehMZskgvJM31TDw6qVRhyQnSWDjw3/kOqD0uN7t/4e68GTDYUA0afY39Z4y+I3wtBS81xU3CPRCQnAXE9wNng==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
     "@react-native-community/cli-platform-android" "10.2.0"
     "@react-native-community/cli-platform-ios" "10.2.1"
-    "@react-native-windows/cli" "0.71.5"
+    "@react-native-windows/cli" "0.71.6"
     "@react-native/assets" "1.0.0"
     "@react-native/normalize-color" "2.1.0"
     "@react-native/polyfills" "2.0.0"
@@ -12147,9 +12147,9 @@ react-native-windows@^0.71.0:
     ws "^6.2.2"
 
 react-native@^0.71.0:
-  version "0.71.6"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.71.6.tgz#e8f07baf55abd1015eaa7040ceaa4aa632c2c04f"
-  integrity sha512-gHrDj7qaAaiE41JwaFCh3AtvOqOLuRgZtHKzNiwxakG/wvPAYmG73ECfWHGxjxIx/QT17Hp37Da3ipCei/CayQ==
+  version "0.71.10"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.71.10.tgz#4294d289b4226a3f35bd627bb157fc1f18395d58"
+  integrity sha512-O+sWH9ln7euxhHdooVL8is2FiVc7CfAp2zsKgIRhbq/8lGbJr5ZyT6QkCQK0M8Sx1zNe9puebr+BE8uBFsartg==
   dependencies:
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
@@ -12176,7 +12176,7 @@ react-native@^0.71.0:
     promise "^8.3.0"
     react-devtools-core "^4.26.1"
     react-native-codegen "^0.71.5"
-    react-native-gradle-plugin "^0.71.17"
+    react-native-gradle-plugin "^0.71.19"
     react-refresh "^0.4.0"
     react-shallow-renderer "^16.15.0"
     regenerator-runtime "^0.13.2"

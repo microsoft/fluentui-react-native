@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 09 Jun 2023 05:47:08 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.26.0",
+      "version": "1.26.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "473b5eea3a48a2756a4fda790c874405ce227bf2",
+            "comment": "Fix test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 07 Jun 2023 09:36:33 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.25.0",
       "version": "1.25.0",

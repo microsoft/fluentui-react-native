@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Mon, 05 Jun 2023 19:26:23 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Jun 2023 15:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.1
+
+Fri, 09 Jun 2023 15:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.20.1
 
 ## 0.19.0
 
