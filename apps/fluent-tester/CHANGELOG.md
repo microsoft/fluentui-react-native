@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 09 Jun 2023 04:19:43 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Jun 2023 05:47:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.148.0
+
+Fri, 09 Jun 2023 05:47:08 GMT
+
+### Minor changes
+
+- Fix test (ayushsinghs@yahoo.in)
 
 ## 0.147.1
 

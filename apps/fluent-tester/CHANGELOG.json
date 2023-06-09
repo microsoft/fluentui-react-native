@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 09 Jun 2023 05:47:08 GMT",
+      "tag": "@fluentui-react-native/tester_v0.148.0",
+      "version": "0.148.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "473b5eea3a48a2756a4fda790c874405ce227bf2",
+            "comment": "Fix test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 04:19:43 GMT",
       "tag": "@fluentui-react-native/tester_v0.147.1",
       "version": "0.147.1",
