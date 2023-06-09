@@ -200,7 +200,7 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
 
   /**
    * Determines whether the Callout sets focus when displayed.
-   * On macOS, this determines whether the Callout becomes the key window.
+   * On macOS: this determines whether the Callout becomes the key window.
    * On win32: If true then the callout will attempt to focus the first focusable element that it contains.
    * If it doesn't find an element, no focus will be set. This means that it's the contents responsibility
    * to either set focus or have focusable items.
