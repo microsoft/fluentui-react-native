@@ -25,6 +25,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			updateCalloutFrameToAnchor()
 		}
 	}
+    
+    // Not yet implemented
+    @objc public var dismissBehaviors: [String] = []
 
 	@objc public var onShow: RCTDirectEventBlock?
 
@@ -95,42 +98,15 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		// Dismiss the Callout if the window is no longer active.
 		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
-
-		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseDown, handler: { [weak self] (event) -> NSEvent? in
-			func isClickInsideWindowHierarchy(window: NSWindow?, event: NSEvent) -> Bool {
-				guard let window = window else {
-					return false
-				}
-				guard let clickedWindow = event.window else {
-					return false
-				}
-
-				var isClickInHierarchy = false
-
-				if (window.isEqual(to: clickedWindow)) {
-					isClickInHierarchy = true
-				} else {
-					if let childWindows = window.childWindows {
-						for childWindow in childWindows {
-							isClickInHierarchy = isClickInsideWindowHierarchy(window: childWindow, event: event)
-						}
-					}
-				}
-
-				return isClickInHierarchy
-			}
-
-			var window: NSWindow? = self?.calloutWindow
-			while (window?.parent as? CalloutWindow != nil) {
-				window = window?.parent
-			}
-
-			if (!isClickInsideWindowHierarchy(window: window, event: event)) {
-				self?.dismissCallout()
-			}
-
-			return event
-		})
+        
+        
+        if (!dismissBehaviors.contains("preventDismissOnClickOutside")) {
+            monitorMouseClicks()
+        }
+        
+//        if (!dismissBehaviors.contains("preventDismissOnKeyDown")) {
+//            monitorKeyDown()
+//        }
 
 		isCalloutWindowShown = true
 		onShowCallout()
@@ -341,6 +317,44 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	@objc private func menuDidBeginTracking() {
 		self.dismissCallout()
 	}
+    
+    private func monitorMouseClicks() {
+        mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseDown, handler: { [weak self] (event) -> NSEvent? in
+            func isClickInsideWindowHierarchy(window: NSWindow?, event: NSEvent) -> Bool {
+                guard let window = window else {
+                    return false
+                }
+                guard let clickedWindow = event.window else {
+                    return false
+                }
+
+                var isClickInHierarchy = false
+
+                if (window.isEqual(to: clickedWindow)) {
+                    isClickInHierarchy = true
+                } else {
+                    if let childWindows = window.childWindows {
+                        for childWindow in childWindows {
+                            isClickInHierarchy = isClickInsideWindowHierarchy(window: childWindow, event: event)
+                        }
+                    }
+                }
+
+                return isClickInHierarchy
+            }
+
+            var window: NSWindow? = self?.calloutWindow
+            while (window?.parent as? CalloutWindow != nil) {
+                window = window?.parent
+            }
+
+            if (!isClickInsideWindowHierarchy(window: window, event: event)) {
+                self?.dismissCallout()
+            }
+
+            return event
+        })
+    }
 
 	// MARK: Private variables
 

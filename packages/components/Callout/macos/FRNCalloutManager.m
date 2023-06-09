@@ -1,5 +1,7 @@
 #import <FRNCalloutManager.h>
 
+@class FRNCalloutView;
+
 @implementation RCTConvert (FRNCalloutAdditions)
 
 // RCTConvert does not properly convert a JS screenRect into a native CGRect/NSRect,
@@ -32,6 +34,7 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 	@"bottomRightEdge": @(NSRectEdgeMinY),
 }), NSRectEdgeMaxY, integerValue);
 
+
 @end
 
 @interface RCT_EXTERN_MODULE(FRNCalloutManager, RCTViewManager)
@@ -41,6 +44,8 @@ RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
 
 RCT_EXPORT_VIEW_PROPERTY(directionalHint, NSRectEdge)
+
+RCT_EXPORT_VIEW_PROPERTY(dismissBehaviors, NSArray<NSString *>)
 
 RCT_EXPORT_VIEW_PROPERTY(onShow, RCTDirectEventBlock)
 
