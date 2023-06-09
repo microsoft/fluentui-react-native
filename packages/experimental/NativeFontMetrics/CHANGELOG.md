@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
-This log was last generated on Mon, 05 Jun 2023 19:26:23 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Jun 2023 15:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.1
+
+Fri, 09 Jun 2023 15:29:07 GMT
+
+### Patches
+
+- Fix package using `use-subscription` at runtime but does not correctly declare dependencies (4123478+tido64@users.noreply.github.com)
 
 ## 0.4.0
 
