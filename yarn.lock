@@ -2671,10 +2671,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.10.tgz#339c7bfc6e1d9a5e934122eaaa7767dc1c5fb725"
   integrity sha512-EvAlHmPEPOwvbP6Pjg/gtDV3XJzIjIxr10fXFNlX5r9HeHw582G1Zt2o8FLyB718nOttgj8HYUTGxvhu4N65sQ==
 
-"@react-native-windows/cli@0.71.5":
-  version "0.71.5"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.71.5.tgz#479798182549032798a8b72c6aabcbae282a944e"
-  integrity sha512-ZPK6QQq+UrZhw+yBQH3W649o5Rm98vaHBA+fYGPUPCmZrsfjH4xBE9jS5DfgY6MumJkHuK2OuVgKXNSy9i3ZPQ==
+"@react-native-windows/cli@0.71.6":
+  version "0.71.6"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.71.6.tgz#8ae12e8b2025f6c49cd375b522fe843ce0814694"
+  integrity sha512-WYsA0Tp7puBNpbrtO/iY0QDNp8qpfaUiZGyQwSf3XlLvDdyT9ZXnM6ysusphK+Cc+bw1DYPpBMFYD4mPqNQGdw==
   dependencies:
     "@react-native-windows/codegen" "0.71.3"
     "@react-native-windows/fs" "0.71.2"
@@ -12106,16 +12106,16 @@ react-native-test-app@^2.2.1:
     uuid "^8.3.2"
 
 react-native-windows@^0.71.0:
-  version "0.71.14"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.14.tgz#421c450b9e38511d93c22aba91e765948c0b4208"
-  integrity sha512-nL3XVYJCyWDo3f82WAqiAEkS9S2sqUaUjBkKguJpt7BObP9xkCZmnoYY1U928W8GkGd7s+OarHrNvptsDV06gw==
+  version "0.71.16"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.16.tgz#d3814ddd2540e09639970178445356ab192e3cbc"
+  integrity sha512-PehMZskgvJM31TDw6qVRhyQnSWDjw3/kOqD0uN7t/4e68GTDYUA0afY39Z4y+I3wtBS81xU3CPRCQnAXE9wNng==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
     "@react-native-community/cli-platform-android" "10.2.0"
     "@react-native-community/cli-platform-ios" "10.2.1"
-    "@react-native-windows/cli" "0.71.5"
+    "@react-native-windows/cli" "0.71.6"
     "@react-native/assets" "1.0.0"
     "@react-native/normalize-color" "2.1.0"
     "@react-native/polyfills" "2.0.0"
