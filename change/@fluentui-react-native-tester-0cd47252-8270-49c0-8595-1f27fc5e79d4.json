@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "[Callout] Implement setInitialFocus for macOS",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch"
+}
