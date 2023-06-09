@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 09 Jun 2023 15:29:07 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Jun 2023 21:35:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.10.2
+
+Fri, 09 Jun 2023 21:35:03 GMT
+
+### Patches
+
+- [Callout] Implement setInitialFocus for macOS (saadnajmi2@gmail.com)
+- Bump @fluentui-react-native/callout to v0.24.1
 
 ## 1.10.1
 
