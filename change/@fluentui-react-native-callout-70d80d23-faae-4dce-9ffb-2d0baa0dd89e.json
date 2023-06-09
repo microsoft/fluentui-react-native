@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "[Callout][macOS] Implement DismissBehaviors",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch"
+}
