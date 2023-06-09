@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 05 Jun 2023 19:26:24 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Jun 2023 04:19:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.147.1
+
+Fri, 09 Jun 2023 04:19:43 GMT
+
+### Patches
+
+- Bump version of win32 being used (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.147.0
 
