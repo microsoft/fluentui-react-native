@@ -2390,9 +2390,9 @@
     fastq "^1.6.0"
 
 "@office-iss/react-native-win32@^0.71.0":
-  version "0.71.6"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.71.6.tgz#3684d87106939423c1d5e1cc582506bc33e8d9a2"
-  integrity sha512-rgZKeQ7zPu7m72D+/nB9v7st6H5poVR/PdaeOP7whDcGCeptLP4/H7KWbeEFUwwjWGroa75yWSHTPK2q9vNJIQ==
+  version "0.71.10"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.71.10.tgz#5d1a7d1e60269dab9340c3f9b5b3f8b8720b4ab4"
+  integrity sha512-E5JukHKgEvqaG/uNJVU6F6GWgrVeFbOlxWvEh84btuR/pUg90e26ib8+QaC6Sy8eMeJvv0dtAZFnWaSI47Nb6Q==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
@@ -2430,10 +2430,10 @@
     whatwg-fetch "^3.0.0"
     ws "^6.2.2"
 
-"@office-iss/rex-win32@0.71.9-devmain.16515.10000":
-  version "0.71.9-devmain.16515.10000"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.71.9-devmain.16515.10000.tgz#2121ce8acf2ccc10da21b7e06227a6c59b49bd49"
-  integrity sha512-6ELldOKpdCnx3GA80l2VEriun179UBzkpEJ74TJVyJh522OvgNVgea0JmPLlPICwms4wbgR3m2Y1/5VihSmZow==
+"@office-iss/rex-win32@0.71.15-devmain.16608.10000":
+  version "0.71.15-devmain.16608.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.71.15-devmain.16608.10000.tgz#dcefc95d24d0558f01ad07c7d7e6c021d56d9a7b"
+  integrity sha512-q41yoDTQH8VU4889hwYGgPDZHFPpnAqwPs2hQynFUrrAbWQsNkSxLMbGayDDqKg5p/rLqYrQnG8HErNIm93p6w==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
