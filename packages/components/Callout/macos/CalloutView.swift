@@ -26,6 +26,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
+	@objc public var setInitialFocus: Bool = false
+
 	@objc public var onShow: RCTDirectEventBlock?
 
 	@objc public var onDismiss: RCTDirectEventBlock?
@@ -91,7 +93,10 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 
 		updateCalloutFrameToAnchor()
-		calloutWindow.makeKeyAndOrderFront(self)
+		calloutWindow.orderFront(self)
+		if (setInitialFocus) {
+		    calloutWindow.makeKey()
+		}
 
 		// Dismiss the Callout if the window is no longer active.
 		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)

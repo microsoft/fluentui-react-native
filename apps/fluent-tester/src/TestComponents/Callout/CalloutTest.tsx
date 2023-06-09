@@ -19,7 +19,7 @@ const StandardCallout: React.FunctionComponent = () => {
   const [calloutHovered, setCalloutHovered] = React.useState(false);
 
   const [shouldSetInitialFocus, setShouldSetInitialFocus] = React.useState(true);
-  const onInitialFocusChange = React.useCallback((value) => setShouldSetInitialFocus(value), []);
+  const onInitialFocusChange = React.useCallback((value: boolean) => setShouldSetInitialFocus(value), []);
 
   const [customRestoreFocus, setCustomRestoreFocus] = React.useState(false);
   const onRestoreFocusChange = React.useCallback((value) => setCustomRestoreFocus(value), []);
