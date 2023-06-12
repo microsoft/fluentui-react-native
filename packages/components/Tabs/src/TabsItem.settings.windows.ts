@@ -4,8 +4,6 @@ import type { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { TabsItemType } from './TabsItem.types';
 import { tabsItemName } from './TabsItem.types';
 
-export const tabsItemSelectActionLabel = 'Select a TabsItem';
-
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
