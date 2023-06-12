@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Mon, 05 Jun 2023 19:26:23 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jun 2023 17:46:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.0
+
+Mon, 12 Jun 2023 17:46:43 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/composition to v0.9.1
+- Bump @fluentui-react-native/default-theme to v0.19.1
+- Bump @fluentui-react-native/merge-props to v0.7.0
+- Bump @fluentui-react-native/use-styling to v0.11.0
+- Bump @fluentui-react-native/use-slot to v0.4.1
+- Bump @fluentui-react-native/use-slots to v0.8.1
+- Bump @fluentui-react-native/use-tokens to v0.4.1
+- Bump @fluentui-react-native/memo-cache to v1.3.0
 
 ## 0.10.0
 

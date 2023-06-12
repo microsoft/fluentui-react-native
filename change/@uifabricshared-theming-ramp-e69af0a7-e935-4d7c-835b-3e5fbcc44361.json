@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Changes for treeshake to work",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}

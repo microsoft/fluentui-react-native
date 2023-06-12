@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Changes for treeshake to work",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}
