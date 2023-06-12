@@ -1,8 +1,17 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Mon, 05 Jun 2023 19:26:25 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.0
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @uifabricshared/foundation-settings to v0.13.1
 
 ## 0.18.0
 

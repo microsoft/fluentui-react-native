@@ -1,8 +1,17 @@
 # Change Log - @uifabricshared/themed-settings
 
-This log was last generated on Mon, 05 Jun 2023 19:26:25 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.1
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.13.1
+- Bump @fluentui-react-native/memo-cache to v1.3.0
 
 ## 0.10.0
 

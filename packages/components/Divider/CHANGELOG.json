@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/divider",
   "entries": [
     {
+      "date": "Mon, 12 Jun 2023 17:46:42 GMT",
+      "tag": "@fluentui-react-native/divider_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/divider",
+            "commit": "60d243e2af9f727a0265bf6a0aed49e687305f77",
+            "comment": "Changes for treeshake to work"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/text to v0.21.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 15:29:07 GMT",
       "tag": "@fluentui-react-native/divider_v0.4.1",
       "version": "0.4.1",

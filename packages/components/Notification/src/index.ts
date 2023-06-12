@@ -1,3 +1,4 @@
 export { Notification } from './Notification';
-export { NotificationVariant, NotificationVariants } from './Notification.types';
+export type { NotificationVariant } from './Notification.types';
+export { NotificationVariants } from './Notification.types';
 export type { NotificationTokens, NotificationProps, NotificationSlotProps, NotificationType } from './Notification.types';

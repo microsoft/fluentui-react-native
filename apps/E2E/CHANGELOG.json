@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Mon, 12 Jun 2023 17:46:42 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.27.0",
+      "version": "1.27.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "60d243e2af9f727a0265bf6a0aed49e687305f77",
+            "comment": "Fix e2e, retain tree shaking"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.1",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 05:47:08 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.26.0",
       "version": "1.26.0",

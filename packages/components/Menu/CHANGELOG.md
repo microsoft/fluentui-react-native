@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 09 Jun 2023 15:29:07 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jun 2023 17:46:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.0
+
+Mon, 12 Jun 2023 17:46:43 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/callout to v0.24.2
+- Bump @fluentui-react-native/focus-zone to v0.12.1
+- Bump @fluentui-react-native/framework to v0.11.0
+- Bump @fluentui-react-native/icon to v0.19.0
+- Bump @fluentui-react-native/interactive-hooks to v0.24.0
+- Bump @fluentui-react-native/text to v0.21.0
+- Bump @fluentui-react-native/use-styling to v0.11.0
+- Bump @fluentui-react-native/button to v0.34.0
+
+## 1.10.2
+
+Fri, 09 Jun 2023 21:35:03 GMT
+
+### Patches
+
+- [Callout] Implement setInitialFocus for macOS (saadnajmi2@gmail.com)
+- Bump @fluentui-react-native/callout to v0.24.1
 
 ## 1.10.1
 

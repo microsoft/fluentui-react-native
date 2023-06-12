@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/tabs",
   "entries": [
     {
+      "date": "Mon, 12 Jun 2023 17:46:44 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tabs",
+            "commit": "60d243e2af9f727a0265bf6a0aed49e687305f77",
+            "comment": "Add missing constant"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.1",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/text to v0.21.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @uifabricshared/foundation-composable to v0.12.1",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.1",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.13.1",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 15:29:07 GMT",
       "tag": "@fluentui-react-native/tabs_v0.12.1",
       "version": "0.12.1",

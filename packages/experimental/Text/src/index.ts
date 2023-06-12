@@ -1,8 +1,7 @@
 export { Text } from './Text';
+export type { TextProps, TextTokens } from '@fluentui-react-native/text';
 export {
   textNameV1 as textName,
-  TextProps,
-  TextTokens,
   Caption1,
   Body1,
   Body1Strong,

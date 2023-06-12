@@ -81,7 +81,7 @@ const CustomLinks: React.FunctionComponent = () => {
       fontSize: linkFontSize,
     };
     return Link.customize(tokens);
-  }, [linkColor, linkFont, linkFontSize, linkText, linkUrl]);
+  }, [linkColor, linkFont, linkFontSize]);
 
   return (
     <View style={styles.tokensColumn}>

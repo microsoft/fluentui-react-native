@@ -1,8 +1,27 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Mon, 05 Jun 2023 19:26:22 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.2
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.0
+- Bump @uifabricshared/foundation-composable to v0.12.1
+- Bump @uifabricshared/foundation-compose to v1.14.1
+- Bump @uifabricshared/foundation-settings to v0.13.1
+
+## 0.24.1
+
+Fri, 09 Jun 2023 21:35:03 GMT
+
+### Patches
+
+- [Callout] Implement setInitialFocus for macOS (saadnajmi2@gmail.com)
 
 ## 0.24.0
 

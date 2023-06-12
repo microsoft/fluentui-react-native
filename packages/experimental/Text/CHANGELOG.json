@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Mon, 12 Jun 2023 17:46:43 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "60d243e2af9f727a0265bf6a0aed49e687305f77",
+            "comment": "Changes for treeshake to work"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/text to v0.21.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 15:29:07 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.12.1",
       "version": "0.12.1",

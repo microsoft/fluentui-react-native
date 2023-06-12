@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Mon, 05 Jun 2023 19:26:23 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jun 2023 17:46:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Mon, 12 Jun 2023 17:46:43 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/framework to v0.11.0
+- Bump @fluentui-react-native/use-styling to v0.11.0
 
 ## 0.9.0
 

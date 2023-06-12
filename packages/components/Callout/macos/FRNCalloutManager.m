@@ -42,6 +42,8 @@ RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
 
 RCT_EXPORT_VIEW_PROPERTY(directionalHint, NSRectEdge)
 
+RCT_EXPORT_VIEW_PROPERTY(setInitialFocus, BOOL)
+
 RCT_EXPORT_VIEW_PROPERTY(onShow, RCTDirectEventBlock)
 
 RCT_EXPORT_VIEW_PROPERTY(onDismiss, RCTDirectEventBlock)

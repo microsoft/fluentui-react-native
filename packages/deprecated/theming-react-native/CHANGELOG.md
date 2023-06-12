@@ -1,8 +1,19 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Mon, 05 Jun 2023 19:26:26 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.0
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/default-theme to v0.19.1
+- Bump @fluentui-react-native/win32-theme to v0.26.1
+- Bump @uifabricshared/theming-ramp to v0.19.0
 
 ## 0.17.0
 
