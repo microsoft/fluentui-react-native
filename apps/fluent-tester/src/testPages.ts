@@ -42,6 +42,7 @@ import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
 import * as Constants from '../../E2E/src/index.consts';
+import { TooltipTest } from './TestComponents/Tooltip';
 
 export const tests: TestDescription[] = [
   {
@@ -308,5 +309,11 @@ export const tests: TestDescription[] = [
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Tooltip',
+    component: TooltipTest,
+    testPageButton: Constants.HOMEPAGE_TOOLTOP_BUTTON,
+    platforms: ['win32'],
   },
 ];
