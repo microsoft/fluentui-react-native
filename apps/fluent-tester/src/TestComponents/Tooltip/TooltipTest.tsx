@@ -5,7 +5,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 
 const tooltipSections: TestSection[] = [
   {
-    name: 'Tooltip Page',
+    name: 'Tooltip',
     testID: TOOLTIP_TESTPAGE,
     component: TooltipDefault,
   },
@@ -13,10 +13,10 @@ const tooltipSections: TestSection[] = [
 
 export const TooltipTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Beta',
+    win32Status: 'Experimental',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Backlog',
+    macosStatus: 'Backlog',
     androidStatus: 'Backlog',
   };
 
