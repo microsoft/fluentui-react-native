@@ -49,6 +49,7 @@
     "react-native": "^0.71.0",
     "react-native-svg": "^13.7.0"
   },
+  "sideEffects": false,
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {

@@ -57,6 +57,7 @@
   },
   "author": "",
   "license": "MIT",
+  "sideEffects": false,
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
