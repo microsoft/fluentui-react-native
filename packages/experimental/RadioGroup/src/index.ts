@@ -4,17 +4,24 @@ if (__DEV__) {
   );
 }
 
-export {
-  RadioGroupV1 as RadioGroup,
-  radioGroupNameV1 as radioGroupName,
+export type {
   RadioGroupInfo,
   RadioGroupProps,
   RadioGroupSlotProps,
   RadioGroupState,
   RadioGroupTokens,
   RadioGroupType,
-  RadioGroupContextV1 as RadioGroupContext,
   RadioGroupContextValue,
+  RadioProps,
+  RadioSlotProps,
+  RadioInfo,
+  RadioTokens,
+  RadioType,
+} from '@fluentui-react-native/radio-group';
+export {
+  RadioGroupV1 as RadioGroup,
+  radioGroupNameV1 as radioGroupName,
+  RadioGroupContextV1 as RadioGroupContext,
   RadioGroupProvider,
   useRadioGroupContext,
   useRadioGroup,
@@ -22,10 +29,5 @@ export {
   Radio,
   radioLookup,
   radioName,
-  RadioProps,
-  RadioSlotProps,
-  RadioInfo,
-  RadioTokens,
-  RadioType,
   useRadio,
 } from '@fluentui-react-native/radio-group';

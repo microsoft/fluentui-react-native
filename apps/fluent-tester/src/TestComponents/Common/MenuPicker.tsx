@@ -1,5 +1,5 @@
 import type { CollectionItem, MenuPickerProps } from './MenuPicker.types';
-export { CollectionItem, MenuPickerProps };
+export type { CollectionItem, MenuPickerProps };
 
 /*
  * The MenuPicker was created because the RN Core Picker was deprecated (preventing us from updating to RN 0.66).

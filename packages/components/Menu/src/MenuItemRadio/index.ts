@@ -6,5 +6,5 @@ export type {
   MenuItemRadioSlotProps,
   MenuItemRadioTokens,
   MenuItemRadioType,
-  menuItemRadioName,
 } from './MenuItemRadio.types';
+export { menuItemRadioName } from './MenuItemRadio.types';

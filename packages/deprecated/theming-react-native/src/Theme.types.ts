@@ -4,7 +4,7 @@ import type { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 /**
  * @deprecated
  */
-export { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
+export type { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 
 /**
  * @deprecated
