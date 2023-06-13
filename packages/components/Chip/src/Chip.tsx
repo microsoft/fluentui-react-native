@@ -42,13 +42,13 @@ export const Chip = compose<ChipType>({
     const Slots = useSlots(userProps, (layer) => chipLookup(layer, userProps, chip.state));
 
     return (final: ChipProps, ...children: ReactNode[]) => {
-      const { icon, iconPosition, size, showCloseIcon, ...mergedProps } = mergeProps(chip.props, final);
+      const { icon, size, showCloseIcon, ...mergedProps } = mergeProps(chip.props, final);
       const iconProps = createIconProps(icon);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size === 'medium' || showCloseIcon;
       return (
         <Slots.root accessible {...mergedProps}>
-          {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+          {icon && showIcon && <Slots.icon accessible={false} {...iconProps} />}
           {showContent &&
             Children.map(children, (child, i) =>
               typeof child === 'string' ? (
@@ -59,7 +59,6 @@ export const Chip = compose<ChipType>({
                 child
               ),
             )}
-          {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
         </Slots.root>
       );
     };
