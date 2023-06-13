@@ -5,6 +5,7 @@ export * from './ButtonLegacy/consts';
 export * from './Callout/consts';
 export * from './CheckboxLegacy/consts';
 export * from './CheckboxV1/consts';
+export * from './Chip/consts';
 export * from './ColorTokens/consts';
 export * from './common/consts';
 export * from './ContextualMenu/consts';

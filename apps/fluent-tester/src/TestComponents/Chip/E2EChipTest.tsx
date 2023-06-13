@@ -1,0 +1,27 @@
+import * as React from 'react';
+import { View } from 'react-native';
+
+import { Chip } from '@fluentui-react-native/chip';
+import { Text } from '@fluentui-react-native/text';
+
+import { CHIP_TEST_COMPONENT, CHIP_END_TEXT, CHIP_START_TEXT, CHIP_TEXT } from '../../../../E2E/src/Chip/consts';
+import { testProps } from '../Common/TestProps';
+
+export const E2EChipTest: React.FunctionComponent = () => {
+  const [text, setText] = React.useState<string>(CHIP_START_TEXT);
+  return (
+    <View>
+      {text ? <Text {...testProps(CHIP_TEXT)}>{text}</Text> : null}
+      <Chip
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(CHIP_TEST_COMPONENT)}
+        chipColor="success"
+        shape="square"
+        showCloseIcon
+        onSelectionChange={(_e, isSelected) => setText(isSelected ? CHIP_END_TEXT : CHIP_START_TEXT)}
+      >
+        Basic Chip
+      </Chip>
+    </View>
+  );
+};
