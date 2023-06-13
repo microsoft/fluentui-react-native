@@ -1,6 +1,6 @@
 import { BasePage, By } from '../../common/BasePage';
 import { AndroidAttribute } from '../../common/consts';
-import { CHIP_SECONDARY_TEST_COMPONENT, CHIP_TESTPAGE, CHIP_TEST_COMPONENT, CHIP_TEXT, HOMEPAGE_CHIP_BUTTON } from '../consts';
+import { CHIP_TESTPAGE, CHIP_TEST_COMPONENT, CHIP_TEXT, HOMEPAGE_CHIP_BUTTON } from '../consts';
 
 class ChipPageObject extends BasePage {
   async getPrimaryComponentAttribute(attribute: string): Promise<string> {
@@ -34,10 +34,6 @@ class ChipPageObject extends BasePage {
 
   get _primaryComponentName() {
     return CHIP_TEST_COMPONENT;
-  }
-
-  get _secondaryComponentName() {
-    return CHIP_SECONDARY_TEST_COMPONENT;
   }
 
   get _callbackText() {
