@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import { Children } from 'react';
 import { Pressable, I18nManager } from 'react-native';
 
-import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
@@ -36,7 +35,6 @@ export const Chip = compose<ChipType>({
     root: Pressable,
     icon: Icon,
     text: Text,
-    shadow: Shadow,
   },
   useRender: (userProps: ChipProps, useSlots: UseSlots<ChipType>) => {
     const chip = useChip(userProps);
@@ -49,22 +47,20 @@ export const Chip = compose<ChipType>({
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size === 'medium' || showCloseIcon;
       return (
-        <Slots.shadow>
-          <Slots.root accessible {...mergedProps}>
-            {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
-            {showContent &&
-              Children.map(children, (child, i) =>
-                typeof child === 'string' ? (
-                  <Slots.text accessible={false} key={`text-${i}`}>
-                    {child}
-                  </Slots.text>
-                ) : (
-                  child
-                ),
-              )}
-            {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
-          </Slots.root>
-        </Slots.shadow>
+        <Slots.root accessible {...mergedProps}>
+          {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+          {showContent &&
+            Children.map(children, (child, i) =>
+              typeof child === 'string' ? (
+                <Slots.text accessible={false} key={`text-${i}`}>
+                  {child}
+                </Slots.text>
+              ) : (
+                child
+              ),
+            )}
+          {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
+        </Slots.root>
       );
     };
   },

@@ -5,7 +5,6 @@ import type { ChipTokens } from './Chip.types';
 export const defaultChipColorTokens: TokenSettings<ChipTokens> = (t: Theme) =>
   ({
     // neutral is default appearance on Android.
-    // 'important', 'informative', 'subtle' are not supported on Android.
     backgroundColor: t.colors.neutralBackground5,
     color: t.colors.neutralForeground2,
     selected: {

@@ -18,7 +18,6 @@ export const defaultChipTokens: TokenSettings<ChipTokens, Theme> = () =>
       bottom: globalTokens.sizeNone,
       right: globalTokens.sizeNone,
       position: 'relative',
-      shadowToken: undefined,
       textMargin: globalTokens.size80,
     },
     small: {
@@ -31,7 +30,6 @@ export const defaultChipTokens: TokenSettings<ChipTokens, Theme> = () =>
       bottom: globalTokens.sizeNone,
       right: globalTokens.sizeNone,
       position: 'relative',
-      shadowToken: undefined,
       textMargin: globalTokens.sizeNone,
       searchBar: {
         borderRadius: globalTokens.corner.radius40,

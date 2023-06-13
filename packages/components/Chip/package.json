@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "^0.11.0",
-    "@fluentui-react-native/experimental-shadow": ">=0.3.0 <1.0.0",
     "@fluentui-react-native/framework": ">=0.10.0 <1.0.0",
     "@fluentui-react-native/icon": "^0.18.1",
     "@fluentui-react-native/interactive-hooks": ">=0.22.30 <1.0.0",

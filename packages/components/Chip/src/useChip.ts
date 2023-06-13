@@ -15,7 +15,6 @@ export const useChip = (props: ChipProps): ChipInfo => {
     selected,
     onSelectionChange,
     onAccessibilityAction,
-    iconPosition = 'before',
     size = 'medium',
     icon,
     showCloseIcon,
@@ -42,12 +41,11 @@ export const useChip = (props: ChipProps): ChipInfo => {
   );
   return {
     props: {
-      iconPosition: iconPosition,
       accessibilityState: getAccessibilityState(checkedValue, accessibilityState),
       onAccessibilityAction: onAccessibilityActionProp,
       ...pressable.props,
       ...props,
-      size: size != 'small' && size != 'medium' ? 'medium' : size,
+      size,
       icon: showCloseIcon ? (!checkedValue ? icon : { svgSource: { src: DismissSvg } }) : icon,
     },
     state: {
