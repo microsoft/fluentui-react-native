@@ -7,7 +7,7 @@ import { SvgXml } from 'react-native-svg';
 
 import type { MenuPickerProps, CollectionItem } from './MenuPicker.types';
 
-export { MenuPickerProps, CollectionItem };
+export type { MenuPickerProps, CollectionItem };
 
 const chevronXml = `
 <svg width="12" height="16" viewBox="0 0 11 6" color="#000">

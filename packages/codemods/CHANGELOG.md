@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/codemods
 
-This log was last generated on Mon, 05 Jun 2023 19:26:22 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jun 2023 17:46:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Mon, 12 Jun 2023 17:46:42 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
 
 ## 0.4.0
 

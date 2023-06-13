@@ -1,6 +1,8 @@
-export { GetMemoValue, getMemoCache, memoize } from '@fluentui-react-native/memo-cache';
+export type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+export { getMemoCache, memoize } from '@fluentui-react-native/memo-cache';
 
-export { StyleProp, mergeProps, mergeStyles } from '@fluentui-react-native/merge-props';
+export type { StyleProp } from '@fluentui-react-native/merge-props';
+export { mergeProps, mergeStyles } from '@fluentui-react-native/merge-props';
 
 export {
   backgroundColorTokens,
@@ -92,7 +94,8 @@ export type {
 } from './compose';
 export { compressible } from './compressible';
 export { useFluentTheme } from './useFluentTheme';
-export { HasLayer, TokensThatAreAlsoProps, UseStyling, buildProps, buildUseStyling } from './useStyling';
+export type { HasLayer, TokensThatAreAlsoProps, UseStyling } from './useStyling';
+export { buildProps, buildUseStyling } from './useStyling';
 export type { BuildProps, TokenSettings, TokensFromTheme, UseStylingOptions } from './useStyling';
 export { applyPropsToTokens, applyTokenLayers, buildUseTokens, customizable, patchTokens } from './useTokens';
 export type { UseTokens } from './useTokens';

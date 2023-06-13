@@ -1,5 +1,4 @@
-export {
-  shimmerName,
+export type {
   ShimmerCircleElement,
   ShimmerRectElement,
   ShimmerElementTypes,
@@ -8,3 +7,4 @@ export {
   ShimmerProps,
   ShimmerType,
 } from './Shimmer.types.shared';
+export { shimmerName } from './Shimmer.types.shared';
