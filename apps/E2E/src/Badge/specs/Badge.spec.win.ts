@@ -8,7 +8,7 @@ describe('Badge Testing Initialization', () => {
   });
 
   it('Click and navigate to Badge test page', async () => {
-    await BasicBadgePageObject.navigateToPageAndLoadTests();
+    await BasicBadgePageObject.navigateToPageAndLoadTests(true);
     expect(await BasicBadgePageObject.isPageLoaded()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_PAGELOAD);
 
     await expect(await BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
