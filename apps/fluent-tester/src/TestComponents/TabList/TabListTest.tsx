@@ -23,7 +23,7 @@ const sections: TestSection[] = [
 
 export const TabListTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Production',
+    win32Status: 'Experimental',
     uwpStatus: 'Experimental',
     iosStatus: 'Backlog',
     macosStatus: 'Experimental',
