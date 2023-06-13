@@ -20,6 +20,7 @@ const badgeSections: TestSection[] = [
   }),
   {
     name: 'Counter Badge',
+    testID: BADGE_TESTPAGE,
     component: CounterBadgeTest,
   },
   {
