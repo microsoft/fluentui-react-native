@@ -16,7 +16,7 @@ export interface TabTokens extends FontTokens, IBorderTokens {
   indicatorColor?: string;
 
   /**
-   * The opacity of the tabs item.
+   * The opacity of the Tab.
    */
   tabsItemOpacity?: number;
 
@@ -97,10 +97,10 @@ export interface TabProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A unique key-identifier for each option
    */
-  value: unknown;
+  key: string;
 
   /**
-   * Whether or not the tabs item is selectable
+   * Whether or not the tab is selectable
    */
   disabled?: boolean;
 

@@ -9,24 +9,24 @@ export const tabListName = 'TabList';
 
 export interface TabListContextData {
   /**
-   * The currently selected TabsItem's key
+   * The currently selected Tab's key
    */
-  selectedValue: unknown;
+  selectedKey: string;
 
   /**
-   * Updates the selected tabsItem and calls the client’s onTabsClick callback
+   * Updates the selected Tab and calls the client’s onTabSelect callback
    */
-  onTabSelect?: (value: unknown) => void;
+  onTabSelect?: (key: string) => void;
 
   /**
-   * Updates the selected tabsItem's ref to set as the default tabbable element
+   * Updates the selected Tab's ref to set as the default tabbable element
    */
   updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void;
 
   /**
-   * Array of tabsItem keys in the group
+   * Array of Tab values in the group
    */
-  tabValues?: unknown[];
+  tabKeys?: string[];
 
   /**
    * Reference to the Focus Container as there is no FocusZone on windows.
@@ -47,9 +47,9 @@ export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation
   appearance?: TabListAppearance;
 
   /**
-   * The key of the TabsItem that will initially be selected
+   * The key of the Tab that will initially be selected
    */
-  defaultSelectedValue?: unknown;
+  defaultSelectedKey?: string;
 
   /**
    * Flag to disable all tabs
@@ -59,14 +59,14 @@ export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation
   /**
    * Callback for receiving a notification when the choice has been changed
    */
-  onTabSelect?: (value: unknown) => void;
+  onTabSelect?: (key: string) => void;
 
   /**
    * The value of the selected option. If you provide this, you must maintain selection state by observing
-   * onTabsClick events and passing a new value in when changed. This overrides defaultSelectedValue
-   * and makes the Tabs a controlled component. This prop is mutually exclusive to defaultSelectedValue.
+   * onTabSelect events and passing a new value in when changed. This overrides defaultSelectedKey
+   * and makes the TabList a controlled component. This prop is mutually exclusive to defaultSelectedKey.
    */
-  selectedValue?: unknown;
+  selectedKey?: string;
 
   /**
    * Flag to change the size of the tabs.
@@ -79,7 +79,7 @@ export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation
   vertical?: boolean;
 
   /**
-   * A RefObject to access Tabs.
+   * A RefObject to access TabList.
    */
   componentRef?: React.RefObject<View>;
 
@@ -93,7 +93,7 @@ export interface TabListState {
    * Array of enabled keys in the group
    * Windows-Specific Prop.
    */
-  enabledValues?: unknown[];
+  enabledKeys?: string[];
 }
 export interface TabListInfo {
   props: TabListProps;
