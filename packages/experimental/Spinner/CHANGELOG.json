@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/spinner",
   "entries": [
     {
+      "date": "Thu, 15 Jun 2023 19:51:13 GMT",
+      "tag": "@fluentui-react-native/spinner_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/spinner",
+            "commit": "989894559a96eea0e7583d5a0f4dcd4da1aa5a49",
+            "comment": "switch to RN Native Antive Container for animation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Jun 2023 17:46:43 GMT",
       "tag": "@fluentui-react-native/spinner_v0.6.0",
       "version": "0.6.0",

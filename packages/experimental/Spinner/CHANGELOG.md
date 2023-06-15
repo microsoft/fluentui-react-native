@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/spinner
 
-This log was last generated on Mon, 12 Jun 2023 17:46:43 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Jun 2023 19:51:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Thu, 15 Jun 2023 19:51:13 GMT
+
+### Minor changes
+
+- switch to RN Native Antive Container for animation (email not defined)
 
 ## 0.6.0
 
