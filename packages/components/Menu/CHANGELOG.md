@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 14 Jun 2023 12:05:51 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Jun 2023 20:51:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.2
+
+Thu, 15 Jun 2023 20:51:40 GMT
+
+### Patches
+
+- Tokenize MenuItemRadio (email not defined)
 
 ## 1.11.1
 
