@@ -9,6 +9,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Path, Svg } from 'react-native-svg';
 import type { SvgProps } from 'react-native-svg';
 
+import { RCTNativeAnimatedContainer } from './consts.win32';
 import { stylingSettings } from './Spinner.styling.win32';
 import { spinnerName } from './Spinner.types';
 import type { SpinnerProps, SpinnerType, SpinnerSvgProps } from './Spinner.types.win32';
@@ -47,7 +48,8 @@ const getTailPath = (diameter: number, width: number, color: ColorValue) => {
     y: diameter / 2,
   };
   const innerRadius = diameter / 2 - width / 2;
-  const path = `M${start.x} ${start.y} a${innerRadius} ${innerRadius} 0 0 1 -${innerRadius} ${innerRadius}`;
+  const path = `M${start.x} ${start.y} a${innerRadius} ${innerRadius} 0 0 0 -${innerRadius} -${innerRadius}`;
+
   return <Path d={path} stroke={color} strokeWidth={width} strokeLinecap="round" fillOpacity={0} />;
 };
 
@@ -80,7 +82,13 @@ const spinnerTailContainer: React.FunctionComponent<SpinnerProps> = (props: Spin
    *return <RCTNativeAnimatedSpinner {...{ ...props, style: { position: 'absolute', height: diameterSizeMap[size], width: diameterSizeMap[size], overflow: 'hidden' } }} />;
    */
   return (
-    <View {...props} style={{ position: 'absolute', height: diameterSizeMap[size], width: diameterSizeMap[size], overflow: 'hidden' }} />
+    <RCTNativeAnimatedContainer
+      {...{
+        ...props,
+        nativeAnimationClass: 'NativeAnimatedSpinner',
+        style: { position: 'absolute', height: diameterSizeMap[size], width: diameterSizeMap[size], overflow: 'hidden' },
+      }}
+    />
   );
 };
 
