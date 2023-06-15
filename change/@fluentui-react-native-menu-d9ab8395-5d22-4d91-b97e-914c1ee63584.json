@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Tokenize MenuItemRadio",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
