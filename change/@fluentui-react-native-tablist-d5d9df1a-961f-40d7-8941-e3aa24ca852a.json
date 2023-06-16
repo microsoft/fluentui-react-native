@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Define initial tablist package",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "none"
-}

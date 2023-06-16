@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add TabList test page on win32",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

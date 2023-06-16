@@ -1,0 +1,56 @@
+{
+  "name": "@fluentui-react-native/tablist",
+  "entries": [
+    {
+      "date": "Fri, 16 Jun 2023 21:10:32 GMT",
+      "tag": "@fluentui-react-native/tablist_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "none": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "ccdeeeaf9ecceda21dc599826095dd9c36e66722",
+            "comment": "Define initial tablist package"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.0",
+            "commit": "ccdeeeaf9ecceda21dc599826095dd9c36e66722"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.0",
+            "commit": "ccdeeeaf9ecceda21dc599826095dd9c36e66722"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.1",
+            "commit": "ccdeeeaf9ecceda21dc599826095dd9c36e66722"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/text to v0.21.0",
+            "commit": "ccdeeeaf9ecceda21dc599826095dd9c36e66722"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.11.0",
+            "commit": "ccdeeeaf9ecceda21dc599826095dd9c36e66722"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.0",
+            "commit": "ccdeeeaf9ecceda21dc599826095dd9c36e66722"
+          }
+        ]
+      }
+    }
+  ]
+}

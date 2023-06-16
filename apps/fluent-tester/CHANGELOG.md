@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 15 Jun 2023 20:51:40 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Jun 2023 21:10:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.150.0
+
+Fri, 16 Jun 2023 21:10:32 GMT
+
+### Minor changes
+
+- Add TabList test page on win32 (winlarry@microsoft.com)
 
 ## 0.149.3
 
