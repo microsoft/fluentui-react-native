@@ -37,6 +37,7 @@ import { SpinnerTest } from './TestComponents/Spinner';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
 import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
+import { TabListTest } from './TestComponents/TabList/TabListTest';
 import { TabsLegacyTest } from './TestComponents/TabsLegacy';
 import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
@@ -285,6 +286,12 @@ export const tests: TestDescription[] = [
     component: SwitchTest,
     testPageButton: Constants.HOMEPAGE_SWITCH_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'TabList',
+    component: TabListTest,
+    testPageButton: '',
+    platforms: ['win32', 'windows'],
   },
   {
     name: 'Tabs Legacy',
