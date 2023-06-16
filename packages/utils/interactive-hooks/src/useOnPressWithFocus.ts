@@ -5,19 +5,18 @@ import { Platform } from 'react-native';
 export type OnPressCallback = (args: GestureResponderEvent) => void;
 export type OnPressWithFocusCallback = (args: GestureResponderEvent) => void;
 
-/* Re-usable hook for pressable components.
- * This hook sets focus on a component after onPress behavior.
- *
- * PROPS:  focusRef - the ref used to set focus
- *         userCallback() - Callback provided by userProps for onPress behavior
- * RETURNS:
- *         onPressWithFocus() - Callback to set focus after calling the userCallback for onPress
+/**
+ * Sets focus on the focusRef after calling the userCallback for onPress, if that is an expected behavior on the platform
+ * @param focusRef the ref used to set focus, generally the ref of the component that is being pressed
+ * @param userCallback user-provided callback for onPress behavior
+ * @returns Hook that sets focus, then calls the user callback
  */
 export function useOnPressWithFocus(focusRef: React.RefObject<any>, userCallback: OnPressCallback): OnPressWithFocusCallback {
   const onPressWithFocus = React.useCallback(
     (args?: any) => {
       const platformSupportsFocus = ['windows', 'win32', 'macos'].includes(Platform.OS as string);
-      if (platformSupportsFocus) {
+      const takesFocusOnClick = ['windows', 'win32'].includes(Platform.OS as string);
+      if (platformSupportsFocus && takesFocusOnClick) {
         focusRef?.current?.focus();
       }
 
