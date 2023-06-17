@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Sat, 17 Jun 2023 00:00:18 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.22.4",
+      "version": "0.22.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.3",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.2",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.1",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.1",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.1",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/pressable to v0.10.2",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Jun 2023 17:46:44 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.22.3",
       "version": "0.22.3",
