@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "[Callout][macOS] Add new prop `vibrant`",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "[Callout][macOS] Add new prop `vibrant`",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch"
+}
