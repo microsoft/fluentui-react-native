@@ -4,6 +4,7 @@ import { Text, View, Switch, ScrollView } from 'react-native';
 
 import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
 import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
+import { useTheme } from '@fluentui-react-native/framework';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
@@ -193,6 +194,8 @@ const StandardCallout: React.FunctionComponent = () => {
   const [showScrollViewCallout, setShowScrollViewCalout] = React.useState(false);
   const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
 
+  const [vibrant, setVibrant] = React.useState(false);
+
   const removeButton = React.useCallback(() => {
     const tempArray = scrollviewContents;
     tempArray.pop();
@@ -240,6 +243,11 @@ const StandardCallout: React.FunctionComponent = () => {
           <View style={{ flexDirection: 'row' }}>
             <Switch value={showScrollViewCallout} onValueChange={setShowScrollViewCalout} />
             <Text>Enable ScrollView Callout</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={vibrant} onValueChange={setVibrant} />
+            <Text>Vibrant (macOS only)</Text>
           </View>
 
           <MenuPicker
@@ -324,6 +332,7 @@ const StandardCallout: React.FunctionComponent = () => {
             accessibilityLabel: 'Standard Callout',
             setInitialFocus: shouldSetInitialFocus,
             isBeakVisible: isBeakVisible,
+            vibrant: vibrant,
             ...(selectedBorderColor && { borderColor: selectedBorderColor }),
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: parseInt(selectedBorderWidth) }),
@@ -356,6 +365,8 @@ const StandardCallout: React.FunctionComponent = () => {
 };
 
 const CustomCallout: React.FunctionComponent = () => {
+  const theme = useTheme();
+
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
@@ -394,6 +405,7 @@ const CustomCallout: React.FunctionComponent = () => {
 
       {showCustomizedCallout && (
         <Callout
+          vibrant={true}
           anchorRect={myRect}
           onDismiss={onDismissCustomizedCallout}
           onShow={onShowCustomizedCallout}
@@ -401,7 +413,7 @@ const CustomCallout: React.FunctionComponent = () => {
           accessibilityRole="alert"
           accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
         >
-          <View style={{ padding: 20, borderWidth: 2, borderColor: 'black' }}>
+          <View style={{ padding: 20, borderWidth: 2, borderColor: 'black', backgroundColor: theme.colors.neutralBackground1 }}>
             <Text>just some text so it does not take focus and is not empty.</Text>
           </View>
         </Callout>

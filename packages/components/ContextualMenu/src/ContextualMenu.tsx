@@ -82,6 +82,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
       root: {
         accessibilityRole: 'menu',
         setInitialFocus: shouldFocusOnMount,
+        ...(Platform.OS === 'macos' && { vibrant: true }),
         ...rest,
       },
       container: {

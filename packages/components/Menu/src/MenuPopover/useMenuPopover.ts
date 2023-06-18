@@ -1,5 +1,5 @@
 import React from 'react';
-import { I18nManager } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
 
 import type { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
 
@@ -101,6 +101,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
       dismissBehaviors,
       doNotTakePointerCapture,
       setInitialFocus,
+      ...(Platform.OS === 'macos' && { vibrant: true }),
     },
     innerView: {
       onMouseEnter,

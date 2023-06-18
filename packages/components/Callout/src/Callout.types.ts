@@ -213,6 +213,13 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
    * anchoring to a point inside the component.
    */
   target?: React.RefObject<React.Component> | string;
+
+  /**
+   * Determines whether the Callout is vibrant, A.K.A, has an NSVisualEffectView.
+   * https://developer.apple.com/design/human-interface-guidelines/materials
+   * @platform macos
+   */
+  vibrant?: boolean;
 }
 
 export type ICalloutSlotProps = {
