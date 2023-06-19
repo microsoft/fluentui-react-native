@@ -9692,9 +9692,9 @@ ky@0.30.0:
   integrity sha512-X/u76z4JtDVq10u1JA5UQfatPxgPaVDMYTrgHyiTpGN2z4TMEJkIHsoSBBSg9SWZEIXTKsi9kHgiQ9o3Y/4yog==
 
 lage@^2.0.0:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-2.7.1.tgz#e31130073aadfb2bfdde70ca301e836e12efbe48"
-  integrity sha512-JqezK5ayGSZqCbCB2zvMKYC9o8fs/7uINSBMzsgf7jyl6hQVbFLS7qg6rmpelVYhWg/FlYkupxqmNHSors0EJg==
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-2.7.2.tgz#dbcbb194559b9a4f383a10e17d13f73849521dd0"
+  integrity sha512-xj8HFEnYIReKT7LpARxmulPQKWY9+uuyZT35VZB6AfU83vj07t5YakG/ITmRhi8C4UhZtsHPOMTYsTamHefT0w==
   dependencies:
     glob-hasher "^1.3.0"
   optionalDependencies:
