@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Mon, 19 Jun 2023 18:37:35 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.18.3",
+      "version": "0.18.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.3",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.2",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/pressable to v0.10.3",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/text to v0.21.2",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 17 Jun 2023 00:00:18 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.18.2",
       "version": "0.18.2",

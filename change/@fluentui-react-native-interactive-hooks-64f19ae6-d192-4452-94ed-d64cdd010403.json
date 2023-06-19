@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[useKeyEvent] Make event parameter non optional",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch"
-}
