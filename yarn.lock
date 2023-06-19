@@ -10385,7 +10385,7 @@ metro-minify-uglify@0.73.9:
   dependencies:
     uglify-es "^3.1.9"
 
-metro-react-native-babel-preset@0.73.10:
+metro-react-native-babel-preset@0.73.10, metro-react-native-babel-preset@^0.73.7:
   version "0.73.10"
   resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.73.10.tgz#304b24bb391537d2c987732cc0a9774be227d3f6"
   integrity sha512-1/dnH4EHwFb2RKEKx34vVDpUS3urt2WEeR8FYim+ogqALg4sTpG7yeQPxWpbgKATezt4rNfqAANpIyH19MS4BQ==
@@ -10429,7 +10429,7 @@ metro-react-native-babel-preset@0.73.10:
     "@babel/template" "^7.0.0"
     react-refresh "^0.4.0"
 
-metro-react-native-babel-preset@0.73.9, metro-react-native-babel-preset@^0.73.7:
+metro-react-native-babel-preset@0.73.9:
   version "0.73.9"
   resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.73.9.tgz#ef54637dd20f025197beb49e71309a9c539e73e2"
   integrity sha512-AoD7v132iYDV4K78yN2OLgTPwtAKn0XlD2pOhzyBxiI8PeXzozhbKyPV7zUOJUPETj+pcEVfuYj5ZN/8+bhbCw==
