@@ -28,7 +28,7 @@ export const defaultChipColorTokens: TokenSettings<ChipTokens> = (t: Theme) =>
       color: t.colors.dangerForeground1,
       selected: {
         backgroundColor: t.colors.dangerBackground2,
-        color: t.colors.neutralForegroundLightStatic,
+        color: 'white',
       },
     },
     severe: {
@@ -36,7 +36,7 @@ export const defaultChipColorTokens: TokenSettings<ChipTokens> = (t: Theme) =>
       color: t.colors.severeForeground1,
       selected: {
         backgroundColor: t.colors.severeBackground2,
-        color: t.colors.neutralForegroundLightStatic,
+        color: 'white',
       },
     },
     warning: {
@@ -44,7 +44,7 @@ export const defaultChipColorTokens: TokenSettings<ChipTokens> = (t: Theme) =>
       color: t.colors.warningForeground1,
       selected: {
         backgroundColor: t.colors.warningBackground2,
-        color: t.colors.neutralForegroundDarkStatic,
+        color: 'black',
       },
     },
     success: {
@@ -52,7 +52,7 @@ export const defaultChipColorTokens: TokenSettings<ChipTokens> = (t: Theme) =>
       color: t.colors.successForeground1,
       selected: {
         backgroundColor: t.colors.successBackground2,
-        color: t.colors.neutralForegroundLightStatic,
+        color: 'white',
       },
     },
     searchBar: {

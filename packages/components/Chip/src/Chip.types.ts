@@ -27,7 +27,7 @@ export interface ChipConfigurableProps {
 export interface ChipProps extends IViewProps, ChipConfigurableProps {
   /**
    * A Chip can be one of preset colors.
-   * @defaultvalue neutral on @platform android.
+   * @defaultvalue neutral
    */
   chipColor?: ChipColor;
 
@@ -83,7 +83,7 @@ export interface ChipInfo {
   state: ChipState;
 }
 
-export interface ChipCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, Omit<IColorTokens, 'color'> {
+export interface ChipTokens extends LayoutTokens, FontTokens, IBorderTokens, Omit<IColorTokens, 'color'>, ChipConfigurableProps {
   /**
    * Set the text color
    */
@@ -120,8 +120,7 @@ export interface ChipCoreTokens extends LayoutTokens, FontTokens, IBorderTokens,
    */
   small?: ChipTokens;
   medium?: ChipTokens;
-}
-export interface ChipTokens extends ChipCoreTokens, ChipConfigurableProps {
+
   /**
    * When isRTL - applies Chip from the left side
    */

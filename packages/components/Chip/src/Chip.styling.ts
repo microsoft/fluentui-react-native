@@ -3,13 +3,13 @@ import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 
 import { chipName, ChipColors, ChipSizes } from './Chip.types';
-import type { ChipCoreTokens, ChipTokens, ChipSlotProps, ChipProps, ChipConfigurableProps } from './Chip.types';
+import type { ChipTokens, ChipSlotProps, ChipProps, ChipConfigurableProps } from './Chip.types';
 import { defaultChipColorTokens } from './ChipColorTokens';
 import { chipFontTokens } from './ChipFontTokens';
 import { defaultChipTokens } from './ChipTokens';
 
 export const chipStates: (keyof ChipTokens)[] = [...ChipSizes, 'searchBar', ...ChipColors, 'rtl', 'selected', 'disabled'];
-const tokensThatAreAlsoProps: (keyof ChipConfigurableProps)[] = ['chipColor', 'icon', 'iconColor'];
+const tokensThatAreAlsoProps: (keyof ChipConfigurableProps)[] = ['icon', 'iconColor'];
 
 export const stylingSettings: UseStylingOptions<ChipProps, ChipSlotProps, ChipTokens> = {
   tokens: [defaultChipTokens, defaultChipColorTokens, chipFontTokens, chipName],
@@ -57,7 +57,7 @@ export const stylingSettings: UseStylingOptions<ChipProps, ChipSlotProps, ChipTo
   },
 };
 
-export function getChipPosition(tokens: ChipCoreTokens) {
+export function getChipPosition(tokens: ChipTokens) {
   const verticalPosition =
     tokens.bottom !== undefined
       ? {

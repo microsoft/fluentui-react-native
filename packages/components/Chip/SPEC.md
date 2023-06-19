@@ -2,7 +2,7 @@
 
 ## Background
 
-A cross-platform Chip component using the Fluent Design System. A chip is an additional visual descriptor for UI elements.
+Chips are compact representations of entities (most commonly, people) that can be typed in, deleted or dragged easily. The most common example can be seen in the To field of a new email in Outlook Mobile.
 
 ```ts
 import { Chip } from '@fluentui-react-native/chip';
@@ -13,57 +13,47 @@ import { Chip } from '@fluentui-react-native/chip';
 Basic examples:
 
 ```jsx
-  <Chip>999+</Chip>
-  <Chip appearance="filled">999+</Chip>
-  <Chip shape="rounded" size="large" />
-  <Chip icon={{ svgSource: { src: TestSvg, viewBox: '0 0 500 500' } }} iconPosition="after" />
+  <Chip showCloseIcon>Chip</Chip>
+  <Chip size="small" />
+  <Chip icon={{ svgSource: { src: TestSvg, viewBox: '0 0 500 500' } }} disabled />
 ```
 
 More examples on the [Test pages for the Chip](../../../apps/fluent-tester/src/TestComponents/Chip). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 
-Win32:
+##### Dark Mode
 
-![Chip with text on win32 example](./assets/basic_chip_example_win32.png)
+![Chip default dark](./assets/chip_default_dark.jpg)
+Clicking on the chip toggles the selected state.
+![Chip selected dark](./assets/chip_selected_dark.jpg)
+Chip can show a close icon in selected state.
+![Chip close icon dark](./assets/chip_close_dark.jpg)
 
-```tsx
-<Chip>999+</Chip>
-```
+##### Light Mode
 
-![Chip with icon on win32 example](./assets/chip_with_icon_example_win32.png)
+![Chip default light](./assets/chip_default_light.jpg)
+Clicking on the chip toggles the selected state.
+![Chip selected light](./assets/chip_selected_light.jpg)
+Chip can show a close icon in selected state.
+![Chip close icon light](./assets/chip_close_light.jpg)
 
-```tsx
-<Chip appearance="severe" icon={{ svgProps }} iconPosition="after">WARNING</Button>
-```
-
-## BasicChip
+## Chip
 
 ## Variants
 
-### Shape
-
-The Basic Chip supports a square, rounded and circular shape.
-
 ### Sizes
 
-`Chip` supports next sizes: `tiny`, `extraSmall`, `small`, `medium`, `large`, `extraLarge`.
-On Android only `small`, `medium` are supported.
-
-### Appearance
-
-The `Chip` can be `filled`, `outline`, `tint`, `ghost`.
+`Chip` supports sizes: `small`, `medium`.
 
 ### Color
 
-The Chip supports preset and custom colors: `brand`, `danger`, `important`, `informative`, `severe`, `subtle`, `success`, `warning`.
-On Android `neutral` is the default and `brand`, `danger`, `severe`, `success`, `warning` are supported.
+The Chip supports preset and custom colors: `neutral`, `brand`, `danger`, `severe`, `success`, `warning`, with `neutral` being the default.
 
 ### Icon
 
 The `Chip` component can include an `icon`.
-Out of `small` and `medium` sizes for Android, the `icon` is shown only for `medium` size.
-Android also supports a default close icon in `selected` state. This is controlled by `showCloseIcon` prop.
+Out of `small` and `medium` sizes, the `icon` is shown only for `medium` size. Chip also supports a default close icon in `selected` state. This is controlled by `showCloseIcon` prop.
 Note - Close icon is shown even for `small` size.
 
 ### Image
@@ -87,7 +77,7 @@ For long Chips it's up to consumer how they want to truncate/hide the content.
 ### Search Bar Chip
 
 Special styling is applied when the `Chip` is used in a `SearchBar` component.
-To enable this pass the `searchBar` prop to the `Chip`. Limited to Android.
+To enable this pass the `searchBar` prop to the `Chip`.
 
 ### States
 
@@ -95,7 +85,7 @@ The following section describes the additional states a `Chip` can have.
 
 #### Selected state
 
-A selected `Chip` changes styling to communicate that the chip is currently selected or toggled. This is limited to Android.
+A selected `Chip` changes styling to communicate that the chip is currently selected or toggled.
 
 ## API
 
@@ -113,100 +103,64 @@ The slots can be modified using the `compose` function on the `Chip`. For more i
 
 ```ts
 export interface ChipConfigurableProps {
-  /**
-   * A Chip can be one of preset colors
-   * @defaultvalue brand
-   */
-  chipColor?: ChipColor;
-
-  /**
-   * The icon color.
-   */
-  iconColor?: ColorValue;
-
-  /**
-   * Chip position
-   * @defaultvalue absolute
-   */
-  position?: FlexStyle['position'];
-
-  /**
-   * Sets shadow style with `ambient` and `key` props
-   */
-  shadowToken?: ShadowToken;
-}
-```
-
-```ts
-export interface ChipCoreProps {
-  /**
-   * A Chip can be square, circular or rounded.
-   * Not supported on Android.
-   * @defaultvalue circular
-   */
-  shape?: ChipShape;
-
-  /** Sets style of Chip to a preset size style
-   * @defaultvalue medium
-   */
-  size?: ChipSize;
-}
-
-export interface ChipProps extends ChipCoreProps, ChipConfigurableProps {
-  /**
-   * A Chip can have its content and borders styled for greater emphasis or to be subtle.
-   * It can be filled, outline, ghost, inverted
-   * @defaultvalue filled
-   */
-  appearance?: ChipAppearance;
-
   /*
    * Source URL or name of the icon to show on the Chip.
    */
   icon?: IconSourcesType;
 
   /**
-   * Icon can be placed before or after Chip's content.
-   * @default before
+   * The icon color.
    */
-  iconPosition?: ChipIconPosition;
+  iconColor?: ColorValue;
+}
+```
+
+```ts
+export interface ChipProps extends IViewProps, ChipConfigurableProps {
+  /**
+   * A Chip can be one of preset colors.
+   * @defaultvalue neutral
+   */
+  chipColor?: ChipColor;
+
+  /** Sets style of Chip to a preset size style
+   * @defaultvalue medium
+   */
+  size?: ChipSize;
 
   /**
    * Whether the Chip is disabled or not.
-   * @platform android
+   * @defaultvalue false
    */
   disabled?: boolean;
 
   /**
    * Selected state. Mutually exclusive to 'defaultSelected'. Use this if you control the selected state at a higher level
    * and plan to pass in the correct value based on handling onChange events and re-rendering.
-   * @platform android
+   * @defaultvalue false
    */
   selected?: boolean;
 
   /**
    * Default selected state. Mutually exclusive to 'selected'. Use this if you want an uncontrolled component, and
    * want the Chip instance to maintain its own state.
-   * @platform android
    */
   defaultSelected?: boolean;
 
   /**
    * Callback that is called when the selected value has changed.
-   * @platform android
    */
   onSelectionChange?: (e: InteractionEvent, isSelected: boolean) => void;
 
   /**
    * Apply when chip is intended to be used in a search bar.
    * Special styling is applied to the chip.
-   * @platform android
    */
   searchBar?: boolean;
 
   /**
    * Show close icon when in 'selected' state.
-   * @platform android
+   * @defaultvalue false
    */
   showCloseIcon?: boolean;
 }
@@ -217,16 +171,16 @@ export interface ChipProps extends ChipCoreProps, ChipConfigurableProps {
 Tokens can be used to customize the styling of the control by using the `customize` function on the `Chip`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Chip` has the following tokens:
 
 ```ts
-export interface ChipCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface ChipTokens extends LayoutTokens, FontTokens, IBorderTokens, Omit<IColorTokens, 'color'>, ChipConfigurableProps {
+  /**
+   * Set the text color
+   */
+  color?: ColorValue;
+
   /**
    * Set the bottom edge of the Chip
    */
   bottom?: FlexStyle['bottom'];
-
-  /**
-   * The height of the Chip.
-   */
-  height?: number;
 
   /**
    * The icon size.
@@ -244,55 +198,29 @@ export interface ChipCoreTokens extends LayoutTokens, FontTokens, IBorderTokens,
   right?: FlexStyle['right'];
 
   /**
-   * Set the top edge of the Chip
+   * Set padding for text container when Chip contains
+   * icons or images
    */
-  top?: FlexStyle['top'];
-
-  /**
-   * The width of the Chip.
-   */
-  width?: number;
+  textMargin?: number;
 
   /**
    * Sizes of the Chip
    */
-  tiny?: ChipTokens;
-  extraSmall?: ChipTokens;
   small?: ChipTokens;
   medium?: ChipTokens;
-  large?: ChipTokens;
-  extraLarge?: ChipTokens;
 
   /**
-   * Shapes of the Chip
+   * When isRTL - applies Chip from the left side
    */
-  rounded?: ChipTokens;
-  circular?: ChipTokens;
-  square?: ChipTokens;
-}
-export interface ChipTokens extends ChipCoreTokens, ChipConfigurableProps {
-  /**
-   * The weight of the lines used when drawing the icon.
-   */
-  iconWeight?: number;
-
-  /**
-   * Additional states that can be applied to a Chip
-   */
-  filled?: ChipTokens;
-  outline?: ChipTokens;
-  tint?: ChipTokens;
-  ghost?: ChipTokens;
+  rtl?: ChipTokens;
 
   /**
    * Colors of the Chip
    */
+  neutral?: ChipTokens;
   brand?: ChipTokens;
   danger?: ChipTokens;
-  important?: ChipTokens;
-  informative?: ChipTokens;
   severe?: ChipTokens;
-  subtle?: ChipTokens;
   success?: ChipTokens;
   warning?: ChipTokens;
   disabled?: ChipTokens;
@@ -306,5 +234,5 @@ export interface ChipTokens extends ChipCoreTokens, ChipConfigurableProps {
 
 ### Accessibility
 
-Basic Chips do not recieve focus and are not accessible on all platforms other than Android.
+Chips recieve focus and are accessible. They can be toggled.
 Information about the chip should be added to the element that hosts the Chip through the element's `accessibilityLabel`.
