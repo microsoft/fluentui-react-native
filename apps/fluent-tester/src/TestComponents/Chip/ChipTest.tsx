@@ -23,11 +23,11 @@ const e2eSections: TestSection[] = [
 
 export const ChipTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Production',
+    win32Status: 'Backlog',
     uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    iosStatus: 'Backlog',
+    macosStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =
