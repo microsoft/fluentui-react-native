@@ -48,6 +48,7 @@ exports[`Chip component tests Chip all props 1`] = `
       "width": undefined,
     }
   }
+  toggle={[Function]}
 >
   <Text
     accessible={false}
@@ -132,6 +133,7 @@ exports[`Chip component tests Chip tokens 1`] = `
       "width": undefined,
     }
   }
+  toggle={[Function]}
 >
   <Text
     accessible={false}
@@ -200,5 +202,6 @@ exports[`Chip component tests Empty Chip 1`] = `
       "width": undefined,
     }
   }
+  toggle={[Function]}
 />
 `;
