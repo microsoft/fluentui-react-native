@@ -46,6 +46,7 @@ export const useChip = (props: ChipProps): ChipInfo => {
       ...pressable.props,
       ...props,
       size,
+      toggle,
       icon: showCloseIcon ? (!checkedValue ? icon : { svgSource: { src: DismissSvg } }) : icon,
     },
     state: {

@@ -71,6 +71,16 @@ export interface ChipProps extends IViewProps, ChipConfigurableProps {
    * @defaultvalue false
    */
   showCloseIcon?: boolean;
+
+  /**
+   * Close icon's accessibility label.
+   */
+  closeIconAccessibilityLabel?: string;
+
+  /**
+   * A callback to call on close icon click event.
+   */
+  closeIconOnPress?: (e: InteractionEvent) => void;
 }
 export interface ChipState extends PressableState {
   /**
@@ -147,6 +157,7 @@ export interface ChipSlotProps {
   root: PressablePropsExtended;
   icon?: IconProps;
   text: TextProps;
+  iconPressable?: PressablePropsExtended;
 }
 
 export interface ChipType {

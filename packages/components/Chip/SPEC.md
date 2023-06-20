@@ -96,6 +96,7 @@ The `Chip` component has the following slots:
 - `root` - The outer container representing the `Chip` wrapper.
 - `icon` - If specified, renders an `icon`.
 - `text` - This slot is used to render text content.
+- `iconPressable` - This provides the press target for the `icon`.
 
 The slots can be modified using the `compose` function on the `Chip`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
 
@@ -163,6 +164,16 @@ export interface ChipProps extends IViewProps, ChipConfigurableProps {
    * @defaultvalue false
    */
   showCloseIcon?: boolean;
+
+  /**
+   * Close icon's accessibility label.
+   */
+  closeIconAccessibilityLabel?: string;
+
+  /**
+   * A callback to call on close icon click event.
+   */
+  closeIconOnPress?: (e: InteractionEvent) => void;
 }
 ```
 

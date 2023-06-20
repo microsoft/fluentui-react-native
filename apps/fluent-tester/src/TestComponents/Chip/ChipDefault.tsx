@@ -17,10 +17,15 @@ export const ChipDefault: React.FunctionComponent = () => {
     <View>
       <Switch label={'Show Close Icon'} defaultChecked={showCloseIcon} onChange={toggleActivityState} />
       <View style={styles.rowStyle}>
-        <Chip size="small" style={styles.rowGap} showCloseIcon={showCloseIcon}>
+        <Chip size="small" style={styles.rowGap} showCloseIcon={showCloseIcon} closeIconOnPress={() => console.log('Close icon clicked!')}>
           Neutral
         </Chip>
-        <Chip size="medium" icon={{ svgSource: svgProps }} showCloseIcon={showCloseIcon}>
+        <Chip
+          size="medium"
+          icon={{ svgSource: svgProps }}
+          showCloseIcon={showCloseIcon}
+          closeIconOnPress={() => console.log('Close icon clicked!')}
+        >
           Neutral
         </Chip>
       </View>
