@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Mon, 12 Jun 2023 17:46:43 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.2
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- [useKeyEvent] Make event parameter non optional (saadnajmi2@gmail.com)
+
+## 0.24.1
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- useOnPressWihFocus doesn't take focus on macOS (sanajmi@microsoft.com)
 
 ## 0.24.0
 

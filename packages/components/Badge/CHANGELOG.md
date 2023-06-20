@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.5
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.4.2
+- Bump @fluentui-react-native/icon to v0.19.2
+- Bump @fluentui-react-native/text to v0.21.2
+
+## 0.6.4
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.4.1
+- Bump @fluentui-react-native/icon to v0.19.1
+- Bump @fluentui-react-native/text to v0.21.1
+
+## 0.6.3
+
+Wed, 14 Jun 2023 12:05:51 GMT
+
+### Patches
+
+- Declare `"sideEffects": false` to help improve tree shaking (4123478+tido64@users.noreply.github.com)
 
 ## 0.6.2
 

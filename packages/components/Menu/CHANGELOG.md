@@ -1,8 +1,51 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 12 Jun 2023 17:46:43 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.4
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.24.4
+- Bump @fluentui-react-native/focus-zone to v0.12.3
+- Bump @fluentui-react-native/icon to v0.19.2
+- Bump @fluentui-react-native/interactive-hooks to v0.24.2
+- Bump @fluentui-react-native/text to v0.21.2
+- Bump @fluentui-react-native/button to v0.34.3
+
+## 1.11.3
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.24.3
+- Bump @fluentui-react-native/focus-zone to v0.12.2
+- Bump @fluentui-react-native/icon to v0.19.1
+- Bump @fluentui-react-native/interactive-hooks to v0.24.1
+- Bump @fluentui-react-native/text to v0.21.1
+- Bump @fluentui-react-native/button to v0.34.2
+
+## 1.11.2
+
+Thu, 15 Jun 2023 20:51:40 GMT
+
+### Patches
+
+- Tokenize MenuItemRadio (email not defined)
+
+## 1.11.1
+
+Wed, 14 Jun 2023 12:05:51 GMT
+
+### Patches
+
+- Declare `"sideEffects": false` to help improve tree shaking (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.34.1
 
 ## 1.11.0
 

@@ -1,0 +1,70 @@
+{
+  "name": "@fluentui-react-native/tablist",
+  "version": "0.1.2",
+  "description": "A cross-platform TabList component using the Fluent Design System",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/TabList"
+  },
+  "dependencies": {
+    "@fluentui-react-native/framework": "0.10.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.24.2 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.12.3 <1.0.0",
+    "@fluentui-react-native/text": ">=0.21.2 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.21.0 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.10.0 <1.0.0",
+    "@fluentui-react-native/icon": "0.19.2",
+    "@fluentui-react-native/adapters": "0.11.0",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@office-iss/react-native-win32": "^0.71.0",
+    "react": "18.2.0",
+    "react-native": "^0.71.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "^0.71.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.71"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
+  }
+}
