@@ -21,7 +21,6 @@ export const E2EChipTest: React.FunctionComponent = () => {
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(CHIP_TEST_COMPONENT)}
         chipColor="success"
-        shape="square"
         showCloseIcon
         onSelectionChange={showTextOnSelection}
       >
