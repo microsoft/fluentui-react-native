@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
 
 import { ToggleButton } from '@fluentui/react-native';
 import { PresenceBadge } from '@fluentui-react-native/badge';
 
 export const PresenceBadgeTest: React.FunctionComponent = () => {
   const [outOfOffice, setOutOfOffice] = useState(false);
+  const toggleOutOfOffice = useCallback(() => setOutOfOffice(!outOfOffice), [outOfOffice]);
   return (
     <View>
-      <ToggleButton onClick={() => setOutOfOffice(!outOfOffice)} checked={outOfOffice}>
+      <ToggleButton onClick={toggleOutOfOffice} checked={outOfOffice}>
         Set {outOfOffice ? ' In office' : ' Out of office'}
       </ToggleButton>
       <Text>Small</Text>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styles.rowStyle}>
         <PresenceBadge status="available" size="small" outOfOffice={outOfOffice} />
         <PresenceBadge status="blocked" size="small" outOfOffice={outOfOffice} />
         <PresenceBadge status="doNotDisturb" size="small" outOfOffice={outOfOffice} />
@@ -24,7 +25,7 @@ export const PresenceBadgeTest: React.FunctionComponent = () => {
         <PresenceBadge status="unknown" size="small" outOfOffice={outOfOffice} />
       </View>
       <Text>Medium</Text>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styles.rowStyle}>
         <PresenceBadge status="available" size="medium" outOfOffice={outOfOffice} />
         <PresenceBadge status="blocked" size="medium" outOfOffice={outOfOffice} />
         <PresenceBadge status="doNotDisturb" size="medium" outOfOffice={outOfOffice} />
@@ -35,7 +36,7 @@ export const PresenceBadgeTest: React.FunctionComponent = () => {
         <PresenceBadge status="unknown" size="medium" outOfOffice={outOfOffice} />
       </View>
       <Text>Large</Text>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styles.rowStyle}>
         <PresenceBadge status="available" size="large" outOfOffice={outOfOffice} />
         <PresenceBadge status="blocked" size="large" outOfOffice={outOfOffice} />
         <PresenceBadge status="doNotDisturb" size="large" outOfOffice={outOfOffice} />
@@ -48,3 +49,7 @@ export const PresenceBadgeTest: React.FunctionComponent = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  rowStyle: { flexDirection: 'row' },
+});

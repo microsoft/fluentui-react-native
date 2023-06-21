@@ -82,10 +82,5 @@ export function getChipPosition(tokens: ChipTokens) {
 }
 
 export function getTextMargin(tokens: ChipTokens) {
-  if (tokens.icon) {
-    return {
-      marginStart: tokens.textMargin,
-    };
-  }
-  return {};
+  return tokens.icon && { marginStart: tokens.textMargin };
 }

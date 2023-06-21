@@ -22,7 +22,7 @@ export const useChip = (props: ChipProps): ChipInfo => {
   } = props;
 
   // Warns defaultChecked and checked being mutually exclusive.
-  if (defaultSelected != undefined && selected != undefined) {
+  if (defaultSelected !== undefined && selected !== undefined) {
     console.warn('defaultSelected and selected are mutually exclusive to one another. Use one or the other.');
   }
 
