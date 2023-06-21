@@ -8,7 +8,21 @@ import { defaultTabListTokens } from './TabListTokens';
 export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, TabListTokens> = {
   tokens: [defaultTabListTokens, tabListName],
   slotProps: {
-    root: buildProps(() => ({}), []),
-    stack: buildProps(() => ({}), []),
+    root: buildProps(
+      () => ({
+        style: {
+          display: 'flex',
+        },
+      }),
+      [],
+    ),
+    stack: buildProps(
+      (tokens: TabListTokens) => ({
+        style: {
+          flexDirection: tokens.flexDirection,
+        },
+      }),
+      [],
+    ),
   },
 };

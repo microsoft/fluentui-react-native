@@ -97,7 +97,7 @@ export interface TabProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A unique key-identifier for each option
    */
-  key: string;
+  tabKey: string;
 
   /**
    * Whether or not the tab is selectable

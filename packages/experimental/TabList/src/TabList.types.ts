@@ -1,9 +1,8 @@
 import type * as React from 'react';
-import type { View } from 'react-native';
+import type { View, ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const tabListName = 'TabList';
 
@@ -21,7 +20,7 @@ export interface TabListContextData {
   /**
    * Updates the selected Tab's ref to set as the default tabbable element
    */
-  updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void;
+  updateSelectedTabRef?: (ref: React.RefObject<any>) => void;
 
   /**
    * Array of Tab values in the group
@@ -35,7 +34,12 @@ export interface TabListContextData {
   focusZoneRef?: React.RefObject<any> | null;
 }
 
-export interface TabListTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
+export interface TabListTokens {
+  /**
+   * Flex direction of Tab items. Controlled by TabList `vertical` prop.
+   */
+  flexDirection?: ViewStyle['flexDirection'];
+}
 
 export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
