@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Wed, 21 Jun 2023 22:47:32 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "ae6f6796fbefbb529650fe27bdac75a5ea42e251",
+            "comment": "update Shimmer direction for rtl"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Jun 2023 17:46:43 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.10.0",
       "version": "0.10.0",

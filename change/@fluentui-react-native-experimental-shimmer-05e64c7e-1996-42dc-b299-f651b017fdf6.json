@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update Shimmer direction for rtl",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}
