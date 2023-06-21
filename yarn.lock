@@ -2687,15 +2687,15 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.10.tgz#339c7bfc6e1d9a5e934122eaaa7767dc1c5fb725"
   integrity sha512-EvAlHmPEPOwvbP6Pjg/gtDV3XJzIjIxr10fXFNlX5r9HeHw582G1Zt2o8FLyB718nOttgj8HYUTGxvhu4N65sQ==
 
-"@react-native-windows/cli@0.71.6":
-  version "0.71.6"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.71.6.tgz#8ae12e8b2025f6c49cd375b522fe843ce0814694"
-  integrity sha512-WYsA0Tp7puBNpbrtO/iY0QDNp8qpfaUiZGyQwSf3XlLvDdyT9ZXnM6ysusphK+Cc+bw1DYPpBMFYD4mPqNQGdw==
+"@react-native-windows/cli@0.71.9":
+  version "0.71.9"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.71.9.tgz#aa89420a2691ffa7cdf570864cdbad11bfcdc1be"
+  integrity sha512-g4Iitkwfg7prgpGz1ajSVy8nWYaAwohsCeGO/qsP1Py3tGDjmFm9kBxp5cTQZCKu503Q7dPOy7AJBmJ4U65HIA==
   dependencies:
-    "@react-native-windows/codegen" "0.71.3"
+    "@react-native-windows/codegen" "0.71.4"
     "@react-native-windows/fs" "0.71.2"
     "@react-native-windows/package-utils" "0.71.2"
-    "@react-native-windows/telemetry" "0.71.2"
+    "@react-native-windows/telemetry" "0.71.4"
     "@xmldom/xmldom" "^0.7.7"
     chalk "^4.1.0"
     cli-spinners "^2.2.0"
@@ -2714,10 +2714,10 @@
     xml-parser "^1.2.1"
     xpath "^0.0.27"
 
-"@react-native-windows/codegen@0.71.3":
-  version "0.71.3"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/codegen/-/codegen-0.71.3.tgz#f1b7a0d8fae5ddc08075a0c7214975d09692b383"
-  integrity sha512-VPHII+LDYJlhRKB4fFZ3bAktp6bPjwQ3Ld8fE1dVW9XgN7Ddyic76TX5Vj+e2f4jU4uSvhHCZVTnV70hGpS+Jg==
+"@react-native-windows/codegen@0.71.4":
+  version "0.71.4"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/codegen/-/codegen-0.71.4.tgz#2083c311c9189fd85635694a255d55506bdfe91b"
+  integrity sha512-6/YD9t1ydFQHV/4AWi6SWgVBkeEbBwsJzA0vNacmBrtCjvsEQRTVh2OqHyrNnJ68qREvUTKDDKpYO62HdvmuuA==
   dependencies:
     "@react-native-windows/fs" "0.71.2"
     chalk "^4.1.0"
@@ -2751,10 +2751,10 @@
     get-monorepo-packages "^1.2.0"
     lodash "^4.17.15"
 
-"@react-native-windows/telemetry@0.71.2":
-  version "0.71.2"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/telemetry/-/telemetry-0.71.2.tgz#d44b3c4af08edec69dc602d2cb43d8110c60c48c"
-  integrity sha512-klY6NMHBM6mTsuphQlYhAwKbW5+pmItWJl3ZH4goK2HICyWPrCvE8twUfoUkzIki2zyLEToXT/P+1Isz+E8X8w==
+"@react-native-windows/telemetry@0.71.4":
+  version "0.71.4"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/telemetry/-/telemetry-0.71.4.tgz#b39db9ab5a8b4e3e6673706093fa9398f5c374aa"
+  integrity sha512-UbX2kkQogNdy9bHZvBygaLr/vlwLkm2d8zWxyncZu6PlC6IUSnIOdpxaMbsYZ0mX4Oh4dIjBhE8bjGHS/aI4bw==
   dependencies:
     "@react-native-windows/fs" "0.71.2"
     "@xmldom/xmldom" "^0.7.7"
@@ -12243,16 +12243,16 @@ react-native-test-app@^2.2.1:
     uuid "^8.3.2"
 
 react-native-windows@^0.71.0:
-  version "0.71.16"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.16.tgz#d3814ddd2540e09639970178445356ab192e3cbc"
-  integrity sha512-PehMZskgvJM31TDw6qVRhyQnSWDjw3/kOqD0uN7t/4e68GTDYUA0afY39Z4y+I3wtBS81xU3CPRCQnAXE9wNng==
+  version "0.71.19"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.19.tgz#6f6055300ddeee26d8e7bce686ebbbb0e7230c48"
+  integrity sha512-SmUjUIQnENeVBzoiq2UVwknK9WfTpygjXzOf7vJYToL86Aw0J6anODAel4IL9fYG6LbFrlZ7kJYUyV/mfbKXPQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
     "@react-native-community/cli-platform-android" "10.2.0"
     "@react-native-community/cli-platform-ios" "10.2.1"
-    "@react-native-windows/cli" "0.71.6"
+    "@react-native-windows/cli" "0.71.9"
     "@react-native/assets" "1.0.0"
     "@react-native/normalize-color" "2.1.0"
     "@react-native/polyfills" "2.0.0"
