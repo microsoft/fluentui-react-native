@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Change prop names on TabList page",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
