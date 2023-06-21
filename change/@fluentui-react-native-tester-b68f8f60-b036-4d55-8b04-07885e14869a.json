@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Add a custom SVG REPL so so you can paste or type in an svg and render it live! Add a test for a very fancy svg using lots of stuff Add a test for radial gradient",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "63264034+warren-ms@users.noreply.github.com",
+  "dependentChangeType": "none"
+}
