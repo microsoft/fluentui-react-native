@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "manually update TabList package",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}
