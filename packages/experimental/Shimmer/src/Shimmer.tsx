@@ -53,12 +53,15 @@ export const Shimmer = compose<ShimmerType>({
      * Different angles are handled by rotating this gradient.
      * The startValue is used to control the start position of the gradient animation, it is set as -2 to make sure it is starts off the screen for any angle.
      * Similarly the endValue is set to 3 to make sure the gradient animation exits the entire screen for any angle.
+     * In RTL, startValue and endValue are flipped to ensure that the animation moves from right to left.
      */
-    const startValue = useRef(new Animated.Value(-2)).current;
+    const startValue = I18nManager.isRTL ? 3 : -2;
+    const endValue = I18nManager.isRTL ? -2 : 3;
+    const x1 = useRef(new Animated.Value(startValue)).current;
     const shimmerAnimation = useCallback(() => {
       Animated.loop(
-        Animated.timing(startValue, {
-          toValue: 3,
+        Animated.timing(x1, {
+          toValue: endValue,
           duration: memoizedShimmerData.duration,
           delay: memoizedShimmerData.delay,
           useNativeDriver: true,
@@ -105,7 +108,7 @@ export const Shimmer = compose<ShimmerType>({
       return (
         <Slots.root {...mergedProps}>
           <Defs>
-            <AnimatedLinearGradient id="gradient" x1={startValue} x2="-1" gradientTransform={`rotate(${memoizedShimmerData.angle})`}>
+            <AnimatedLinearGradient id="gradient" x1={x1} x2="-1" gradientTransform={`rotate(${memoizedShimmerData.angle})`}>
               <Stop offset="10%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={memoizedShimmerData.shimmerColorOpacity} />
               <Stop
                 offset="20%"
