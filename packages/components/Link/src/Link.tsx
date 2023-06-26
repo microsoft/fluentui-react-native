@@ -39,10 +39,7 @@ export const Link = compose<LinkType>({
     return (final: LinkProps, ...children: React.ReactNode[]) => {
       // the event fires twice due to native's implementation of inline link
       const { inline, ...mergedProps } = mergeProps(link.props, final);
-
-      return inline || mergedProps.selectable ? (
-        <Slots.content {...mergedProps}>{children}</Slots.content>
-      ) : (
+      return (
         <Slots.root {...mergedProps}>
           <Slots.content focusable={false}>{children}</Slots.content>
         </Slots.root>
