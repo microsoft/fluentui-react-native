@@ -1,5 +1,4 @@
-import { AndroidAttribute } from 'src/index.consts';
-
+import { AndroidAttribute } from '../../common/consts';
 import { CHIP_END_TEXT, CHIP_START_TEXT } from '../consts';
 import ChipPageObject from '../pages/ChipPageObject';
 
