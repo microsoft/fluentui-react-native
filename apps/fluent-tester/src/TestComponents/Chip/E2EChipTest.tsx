@@ -16,7 +16,7 @@ export const E2EChipTest: React.FunctionComponent = () => {
   );
   return (
     <View>
-      {text && <Text {...testProps(CHIP_TEXT)}>{text}</Text>}
+      <Text {...testProps(CHIP_TEXT)}>{text}</Text>
       <Chip
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(CHIP_TEST_COMPONENT)}

@@ -1,17 +1,7 @@
 import { BasePage, By } from '../../common/BasePage';
-import { AndroidAttribute } from '../../common/consts';
 import { CHIP_TESTPAGE, CHIP_TEST_COMPONENT, CHIP_TEXT, HOMEPAGE_CHIP_BUTTON } from '../consts';
 
 class ChipPageObject extends BasePage {
-  /******************************************************************/
-  /**************** UI Element Interaction Methods ******************/
-  /******************************************************************/
-
-  async verifyTextContent(text: string): Promise<boolean> {
-    const callbackText = await this._callbackText;
-    return (await callbackText.getAttribute(AndroidAttribute.Text)) == text;
-  }
-
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
