@@ -1653,24 +1653,6 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.50.0.tgz#c29048d5d7046fe27c51e1931306ad3b0479f70e"
   integrity sha512-rPdiXW6q1VbcAJPMLKjpM7VgNsiolHlaXXUT5i9YNjHCrDxwN6V0jI8svLZT8FztZtRlxmMOT1l7/9Pxm9B7Pw==
 
-"@fluentui-react-native/framework@0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.10.0.tgz#01cf87622f21cc9da1508c4ea0e99065c2e437b4"
-  integrity sha512-i+jHxfpP3ITJyi2fHoPvJ0Dht7FY0HQfpooTPFxyv4+cfvP9boHuO3psyHstNeU1DCshu2vzU0RM1krWYnVO2Q==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.9.0 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.19.0 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.2.0"
-    "@fluentui-react-native/memo-cache" "^1.2.0"
-    "@fluentui-react-native/merge-props" ">=0.6.0 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.32.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.21.0 <1.0.0"
-    "@fluentui-react-native/use-slot" ">=0.4.0 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.8.0 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.10.0 <1.0.0"
-    "@fluentui-react-native/use-tokens" ">=0.4.0 <1.0.0"
-    tslib "^2.3.1"
-
 "@fortawesome/fontawesome-common-types@6.4.0":
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.4.0.tgz#88da2b70d6ca18aaa6ed3687832e11f39e80624b"
@@ -3624,9 +3606,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16", "@types/react@^17", "@types/react@^18.2.0":
-  version "18.2.6"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.6.tgz#5cd53ee0d30ffc193b159d3516c8c8ad2f19d571"
-  integrity sha512-wRZClXn//zxCFW+ye/D2qY65UsYP1Fpex2YXorHc8awoNamkMZSvBxwxdYVInsHOZZd2Ppq8isnSzJL5Mpf8OA==
+  version "18.2.14"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.14.tgz#fa7a6fecf1ce35ca94e74874f70c56ce88f7a127"
+  integrity sha512-A0zjq+QN/O0Kpe30hA1GidzyFjatVvrpIvWLxD+xv67Vt91TWWgco9IvrJBkeyHm1trGaFS/FSGqPlhyeZRm0g==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
