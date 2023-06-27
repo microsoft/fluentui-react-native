@@ -5,7 +5,6 @@ import { LinkV1 as Link, TextV1 as Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 
 import { stackStyle } from '../Common/styles';
-import { Test } from '../Test';
 
 export const InlineLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
