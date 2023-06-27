@@ -12152,9 +12152,9 @@ react-native-gradle-plugin@^0.71.17, react-native-gradle-plugin@^0.71.19:
   integrity sha512-1dVk9NwhoyKHCSxcrM6vY6cxmojeATsBobDicX0ZKr7DgUF2cBQRTKsimQFvzH8XhOVXyH8p4HyDSZNIFI8OlQ==
 
 react-native-macos@^0.71.0:
-  version "0.71.11"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.71.11.tgz#0ada0ce4bbf690a6075933dd4db16f04d829a923"
-  integrity sha512-h2eIgiQ/SiQ1GnRn8oZYEuoWDzvu7lkoTZEkXjOVk5mSfAKw44+VlFAhObS5hFB0xgTe4v5IjbUJSmIj1a9F7w==
+  version "0.71.14"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.71.14.tgz#446520c64ab995c210f79529e59cdccb8995d6c6"
+  integrity sha512-/s7SNhcuEG9ukWlJ/lPqtVYCpTOm6xOT2Awvr4CXibVhrcHHcNXsTucufhZNfQSsB3Yl2tfR8vAp1dLgzXB/JQ==
   dependencies:
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
