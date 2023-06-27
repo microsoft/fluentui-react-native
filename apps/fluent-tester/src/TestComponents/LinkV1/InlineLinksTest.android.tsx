@@ -5,6 +5,7 @@ import { LinkV1 as Link, TextV1 as Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 
 import { stackStyle } from '../Common/styles';
+import { Test } from '../Test';
 
 export const InlineLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
@@ -20,13 +21,11 @@ export const InlineLinks: React.FunctionComponent = () => {
         <Text> to alert me.</Text>
       </View>
       <View style={styles.row}>
-        <Text>
-          This
-          <Link inline onPress={doPress} disabled focusable>
-            link
-          </Link>
-          is disabled but focusable.
-        </Text>
+        <Text>This </Text>
+        <Link inline onPress={doPress} disabled focusable>
+          link
+        </Link>
+        <Text> is disabled but focusable.</Text>
       </View>
       <View style={styles.row}>
         <Text>Follow this </Text>
