@@ -2763,9 +2763,9 @@
   integrity sha512-K0aGNn1TjalKj+65D7ycc1//H9roAQ51GJVk5ZJQFb2teECGmzd86bYDC0aYdbRf7gtovescq4Zt6FR0tgXiHQ==
 
 "@rnx-kit/align-deps@^2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/align-deps/-/align-deps-2.2.2.tgz#cc7b95b7dcd66bc254d47bcb61c8bd40bbac385d"
-  integrity sha512-OEt5q4QnvOK7Kv7nGVN4JLxBof347e31Vir241qxvUs8jUGbNqS4qdaW9L45v5R1dbLQc/OBLSxyqq5caFgn7Q==
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/align-deps/-/align-deps-2.2.4.tgz#3ed70da68276163ee9b362f1c625ccc4e17d364d"
+  integrity sha512-sLbQMBU6LvYesH6AsIHKsN6e90PU1JGyjzvZDXYX8VnxqgjmEkgqHF8/PFAKi0lP+OUzDZk6bmSo3cbhd6OqXg==
 
 "@rnx-kit/babel-preset-metro-react-native@^1.1.4":
   version "1.1.4"
