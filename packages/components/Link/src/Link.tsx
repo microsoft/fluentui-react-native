@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
@@ -39,7 +39,11 @@ export const Link = compose<LinkType>({
     return (final: LinkProps, ...children: React.ReactNode[]) => {
       // the event fires twice due to native's implementation of inline link
       const { inline, ...mergedProps } = mergeProps(link.props, final);
-      return (
+      const supportsInlineLink = Platform.OS !== 'android';
+
+      return supportsInlineLink && (inline || mergedProps.selectable) ? (
+        <Slots.content {...mergedProps}>{children}</Slots.content>
+      ) : (
         <Slots.root {...mergedProps}>
           <Slots.content focusable={false}>{children}</Slots.content>
         </Slots.root>
