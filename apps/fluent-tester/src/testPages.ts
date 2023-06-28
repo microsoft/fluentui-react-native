@@ -42,9 +42,16 @@ import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
+import { VideoTest } from './TestComponents/Video';
 import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
+  {
+    name: 'AVideo',
+    component: VideoTest,
+    testPageButton: Constants.HOMEPAGE_VIDEO_BUTTON,
+    platforms: ['win32'],
+  },
   {
     name: 'ActivityIndicator',
     component: ActivityIndicatorTest,

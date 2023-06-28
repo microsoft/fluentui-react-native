@@ -10,5 +10,5 @@
     },
     "types": ["webdriverio/async", "@wdio/jasmine-framework", "node", "@types/jasmine"]
   },
-  "include": ["src"]
+  "include": ["src", "../E2E/src/Video/consts.ts"]
 }

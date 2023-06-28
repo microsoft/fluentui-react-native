@@ -97,5 +97,9 @@
         "react-dom"
       ]
     }
+  },
+  "dependencies": {
+    "@types/react": "^18.2.0",
+    "shell-quote": "^1.7.3"
   }
 }

@@ -38,3 +38,4 @@ export * from './TabsV1/consts';
 export * from './TextLegacy/consts';
 export * from './TextV1/consts';
 export * from './Theme/consts';
+export * from './Video/consts';

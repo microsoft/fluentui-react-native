@@ -31,6 +31,7 @@
     "directory": "apps/win32"
   },
   "dependencies": {
+    "@fluentui-react-native/experimental-videoplayer": "*",
     "@fluentui-react-native/tester": "^0.147.1",
     "react": "18.2.0",
     "react-native": "^0.71.0",
