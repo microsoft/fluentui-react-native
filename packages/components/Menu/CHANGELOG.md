@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 30 Jun 2023 06:57:52 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jun 2023 21:37:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.6
+
+Fri, 30 Jun 2023 21:37:05 GMT
+
+### Patches
+
+- Fix VO bug in Menu (email not defined)
 
 ## 1.11.5
 
