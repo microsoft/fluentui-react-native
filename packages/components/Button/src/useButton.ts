@@ -90,12 +90,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
       ...onKeyProps,
       ...(Platform.OS === ('win32' as any) && { onKeyDown: onKeyDown }),
       ...pressable.props, // allow user key events to override those set by us
-      /**
-       * https://github.com/facebook/react-native/issues/34986
-       * Due to a bug in React Native, unconditionally passing this may cause unnecessary re-renders.
-       * Therefore, let's only pass it in if it's defined to limit this issue.
-       */
-      ...(isDisabled && { disabled: isDisabled }),
+      disabled: isDisabled,
       accessible: accessible ?? true,
       accessibilityRole: accessibilityRole || 'button',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
