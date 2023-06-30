@@ -1,7 +1,7 @@
 {
-  "type": "patch",
+  "type": "prerelease",
   "comment": "[Callout] Implement setInitialFocus for macOS",
   "packageName": "@fluentui-react-native/menu",
   "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch"
+  "dependentChangeType": "prerelease"
 }
