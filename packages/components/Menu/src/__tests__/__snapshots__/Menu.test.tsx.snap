@@ -18,7 +18,7 @@ exports[`Menu component tests Menu default 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": false,
       "selected": undefined,
     }
@@ -121,7 +121,7 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": true,
       "selected": undefined,
     }
@@ -224,7 +224,7 @@ exports[`Menu component tests Menu open 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": true,
       "selected": undefined,
     }
@@ -327,7 +327,7 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": true,
       "selected": undefined,
     }
@@ -430,7 +430,7 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": true,
       "selected": undefined,
     }
@@ -533,7 +533,7 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": true,
       "selected": undefined,
     }
@@ -636,7 +636,7 @@ exports[`Menu component tests Menu open radio 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": true,
       "selected": undefined,
     }
@@ -739,7 +739,7 @@ exports[`Menu component tests Menu submenu 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": true,
       "selected": undefined,
     }
@@ -842,7 +842,7 @@ exports[`Menu open menu group and menu header 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": true,
       "selected": undefined,
     }
