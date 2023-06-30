@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Fri, 09 Jun 2023 15:29:07 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jun 2023 17:33:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.2-0
+
+Fri, 30 Jun 2023 17:33:56 GMT
+
+### Changes
+
+- Set disabled prop on button when false (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.33.2-0
+- Bump @fluentui-react-native/contextual-menu to v0.22.2-0
 
 ## 0.11.1
 

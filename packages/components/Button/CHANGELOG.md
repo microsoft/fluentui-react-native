@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 09 Jun 2023 15:29:07 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jun 2023 17:33:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.33.2-0
+
+Fri, 30 Jun 2023 17:33:56 GMT
+
+### Changes
+
+- Set disabled prop on button when not disabled (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.33.1
 

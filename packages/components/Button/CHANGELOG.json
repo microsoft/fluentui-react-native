@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Fri, 30 Jun 2023 17:33:56 GMT",
+      "tag": "@fluentui-react-native/button_v0.33.2-0",
+      "version": "0.33.2-0",
+      "comments": {
+        "prerelease": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "ece5f5873104774ed3d520841e4c079d2f768883",
+            "comment": "Set disabled prop on button when not disabled"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 15:29:07 GMT",
       "tag": "@fluentui-react-native/button_v0.33.1",
       "version": "0.33.1",

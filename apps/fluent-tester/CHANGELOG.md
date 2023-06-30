@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 09 Jun 2023 15:29:07 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jun 2023 17:33:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.148.2-0
+
+Fri, 30 Jun 2023 17:33:56 GMT
+
+### Changes
+
+- [Callout] Implement setInitialFocus for macOS (saadnajmi2@gmail.com)
+- Bump @fluentui-react-native/button to v0.33.2-0
+- Bump @fluentui-react-native/dropdown to v0.8.2-0
+- Bump @fluentui-react-native/experimental-button to v0.17.2-0
+- Bump @fluentui-react-native/experimental-menu-button to v0.7.2-0
+- Bump @fluentui-react-native/menu to v1.10.2-0
+- Bump @fluentui-react-native/notification to v0.22.2-0
+- Bump @fluentui/react-native to v0.37.2-0
 
 ## 0.148.1
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Mon, 05 Jun 2023 19:26:22 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jun 2023 17:33:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.1-0
+
+Fri, 30 Jun 2023 17:33:56 GMT
+
+### Changes
+
+- [Callout] Implement setInitialFocus for macOS (saadnajmi2@gmail.com)
 
 ## 0.24.0
 

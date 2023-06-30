@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 30 Jun 2023 17:33:56 GMT",
+      "tag": "@fluentui-react-native/callout_v0.24.1-0",
+      "version": "0.24.1-0",
+      "comments": {
+        "prerelease": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "3229c24401791f983031da4b00154263f3b3a2cb",
+            "comment": "[Callout] Implement setInitialFocus for macOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 05 Jun 2023 19:26:22 GMT",
       "tag": "@fluentui-react-native/callout_v0.24.0",
       "version": "0.24.0",

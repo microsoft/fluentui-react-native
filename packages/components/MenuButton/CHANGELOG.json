@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Fri, 30 Jun 2023 17:33:56 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.11.2-0",
+      "version": "0.11.2-0",
+      "comments": {
+        "prerelease": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/menu-button",
+            "commit": "ece5f5873104774ed3d520841e4c079d2f768883",
+            "comment": "Set disabled prop on button when false"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.33.2-0",
+            "commit": "7a36c48d268be0d70d2b07d922e9c86586b8c0a5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.22.2-0",
+            "commit": "7a36c48d268be0d70d2b07d922e9c86586b8c0a5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 15:29:07 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.11.1",
       "version": "0.11.1",
