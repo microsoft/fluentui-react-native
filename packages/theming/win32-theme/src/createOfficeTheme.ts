@@ -66,7 +66,6 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
       }
 
       return {
-        ...(paletteName !== undefined && { colors: createAliasesFromPalette(theme.host.palette, ref.themeName === 'HighContrast') }),
         typography: win32Typography(),
       };
     },
