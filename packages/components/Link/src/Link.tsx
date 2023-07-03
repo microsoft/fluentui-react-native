@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
@@ -40,7 +40,11 @@ export const Link = compose<LinkType>({
       // the event fires twice due to native's implementation of inline link
       const { inline, ...mergedProps } = mergeProps(link.props, final);
 
-      return inline || mergedProps.selectable ? (
+      // RN Core has a bug where Text in Text is not keyboard accessible. Issues - #32004, #35194.
+      // This is a workaround for the issue. Once those issues are resolved, supportsA11yTextInText can be removed.
+      const supportsA11yTextInText = Platform.OS !== 'android';
+
+      return supportsA11yTextInText && (inline || mergedProps.selectable) ? (
         <Slots.content {...mergedProps}>{children}</Slots.content>
       ) : (
         <Slots.root {...mergedProps}>

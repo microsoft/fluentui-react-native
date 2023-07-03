@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix inline link keyboard access",
+  "packageName": "@fluentui-react-native/link",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
