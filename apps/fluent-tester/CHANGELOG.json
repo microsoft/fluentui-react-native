@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 03 Jul 2023 06:39:58 GMT",
+      "tag": "@fluentui-react-native/tester_v0.151.0",
+      "version": "0.151.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "6c02816577791c5d071004a225afb91a2359a527",
+            "comment": "Fix inline link keyboard access"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.37.8",
+            "commit": "6c02816577791c5d071004a225afb91a2359a527"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jun 2023 21:37:05 GMT",
       "tag": "@fluentui-react-native/tester_v0.150.5",
       "version": "0.150.5",
