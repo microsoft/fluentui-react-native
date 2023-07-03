@@ -89,7 +89,6 @@ export const MenuList = compose<MenuListType>({
         Platform.OS === 'macos' ? (
           <Slots.root onMouseLeave={setFocusZoneFocus} onKeyDown={menuList.onListKeyDown}>
             <Slots.scrollView
-              accessibilityRole="menu"
               showsVerticalScrollIndicator={menuContext.hasMaxHeight}
               showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
             >

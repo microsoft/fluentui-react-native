@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Wed, 21 Jun 2023 22:47:32 GMT",
+      "tag": "@fluentui-react-native/tablist_v0.1.3",
+      "version": "0.1.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "0cec0e25053c838b99917cce0bc7627ef9f77f24",
+            "comment": "manually update TabList package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Jun 2023 18:37:35 GMT",
       "tag": "@fluentui-react-native/tablist_v0.1.2",
       "version": "0.1.2",

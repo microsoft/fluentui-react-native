@@ -1,13 +1,32 @@
 import * as React from 'react';
-import { StyleSheet, Switch, Text, View } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
+import { ButtonV1 as Button, ToggleButton } from '@fluentui/react-native';
 import { Separator } from '@fluentui/react-native';
-import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgUri, Use } from 'react-native-svg';
+import {
+  Circle,
+  Defs,
+  G,
+  Line,
+  Path,
+  Polygon,
+  LinearGradient,
+  RadialGradient,
+  Rect,
+  Stop,
+  Svg,
+  SvgUri,
+  SvgXml,
+  Use,
+  parse,
+} from 'react-native-svg';
 
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from '../../../../E2E/src/Svg/consts';
-import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
+
 const styles = StyleSheet.create({
   svg: {
     backgroundColor: 'green',
@@ -99,6 +118,28 @@ const RadialGradientTest: React.FunctionComponent = () => {
   );
 };
 
+const RadialGradientTransformTest: React.FunctionComponent = () => {
+  return (
+    <Svg width={256} height={256} viewBox="0 0 48 48" fill="none">
+      <Rect width={48} height={48} fill="url(#paint0_radial_1533_187044)" />
+      <Rect x={10} y={10} width={10} height={10} fill="red" />
+      <Defs>
+        <RadialGradient
+          id="paint0_radial_1533_187044"
+          cx={0}
+          cy={0}
+          r={20}
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(22 11)"
+        >
+          <Stop offset={0.0598494} stopColor="#FF0000" />
+          <Stop offset={1} stopColor="#00FF00" />
+        </RadialGradient>
+      </Defs>
+    </Svg>
+  );
+};
+
 const RectCircleTest: React.FunctionComponent = () => {
   return (
     <Svg height="200" width="200">
@@ -148,10 +189,70 @@ const RemoteSvgTest: React.FunctionComponent = () => {
   );
 };
 
+const CustomSvgInputTest: React.FunctionComponent = () => {
+  const defaultxml = `
+  <svg width="256" height="256" viewBox="0 0 48 48">
+  <rect width="48" height="48" fill="red"/>
+  </svg>
+`;
+
+  const textInputStyle = { height: 256, width: 1024, borderColor: 'gray', borderWidth: 1, fontSize: 16 };
+  const [inputText, setInputText] = useState<string>(defaultxml);
+  const [svgText, setSvgText] = useState<string>(defaultxml);
+  const [dataText, setDataText] = useState<string>('click draw to see parsed data');
+  const [showParse, setShowParsed] = useState<boolean>(false);
+
+  const handleChangeText = React.useCallback(
+    (text: string) => {
+      setInputText(text);
+    },
+    [setInputText],
+  );
+
+  const handleDrawOnClick = React.useCallback(() => {
+    const parsed = parse(inputText);
+    if (parsed !== null) {
+      setSvgText(inputText);
+      setDataText(JSON.stringify(parsed));
+    }
+  }, [inputText, setSvgText, setDataText]);
+
+  const handleShowParsed = React.useCallback(() => {
+    setShowParsed(!showParse);
+  }, [showParse, setShowParsed]);
+
+  return (
+    <View>
+      <Text>
+        Paste an svg in here and click Draw to try it out. The way it uses rnsvg&apos;s parse function to attempt to validate svg may cause
+        asserts and crashes if the svg is invalid. Looking for another solution for this, but this is still useful in its current state.
+      </Text>
+      <TextInput
+        multiline={true}
+        accessibilityLabel="Custom svg text input"
+        value={inputText}
+        style={textInputStyle}
+        onChangeText={handleChangeText}
+      />
+      <View style={{ flexDirection: 'row' }}>
+        <Button onClick={handleDrawOnClick}>Draw</Button>
+        <ToggleButton onClick={handleShowParsed}>Toggle Parsed data</ToggleButton>
+      </View>
+      <Separator />
+      {showParse && <Text>{dataText}</Text>}
+      <SvgXml width="256" height="256" xml={svgText} />
+    </View>
+  );
+};
+
 const svgSections: TestSection[] = [
   {
-    name: 'Rect',
+    name: 'Custom Svg Input',
+    component: CustomSvgInputTest,
     testID: SVG_TESTPAGE,
+  },
+  {
+    name: 'Rect',
     component: RectTest,
   },
   {
@@ -177,6 +278,10 @@ const svgSections: TestSection[] = [
   {
     name: 'Radial Gradient',
     component: RadialGradientTest,
+  },
+  {
+    name: 'Radial GradientTransform',
+    component: RadialGradientTransformTest,
   },
   {
     name: 'Rect and Circle via Defs and Use',
