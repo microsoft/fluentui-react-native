@@ -11,6 +11,8 @@ export const InlineLinks: React.FunctionComponent = () => {
   const doA11yTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onA11yTap.'), []);
 
   return (
+    // RN Core has a bug where Text in Text is not keyboard accessible. Issues - #32004, #35194.
+    // This is a workaround for the issue. Once those issues are resolved, InlineLinksTest.android.tsx can be removed.
     <Stack style={stackStyle}>
       <View style={styles.row}>
         <Text>Click </Text>

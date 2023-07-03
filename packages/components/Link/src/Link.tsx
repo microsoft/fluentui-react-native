@@ -39,6 +39,9 @@ export const Link = compose<LinkType>({
     return (final: LinkProps, ...children: React.ReactNode[]) => {
       // the event fires twice due to native's implementation of inline link
       const { inline, ...mergedProps } = mergeProps(link.props, final);
+
+      // RN Core has a bug where Text in Text is not keyboard accessible. Issues - #32004, #35194.
+      // This is a workaround for the issue. Once those issues are resolved, supportsA11yTextInText can be removed.
       const supportsA11yTextInText = Platform.OS !== 'android';
 
       return supportsA11yTextInText && (inline || mergedProps.selectable) ? (
