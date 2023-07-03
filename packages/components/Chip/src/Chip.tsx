@@ -11,6 +11,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import type { ChipType, ChipProps } from './Chip.types';
 import { chipName } from './Chip.types';
 
+export const chipLookup = null;
 export const Chip = compose<ChipType>({
   displayName: chipName,
   slots: {
