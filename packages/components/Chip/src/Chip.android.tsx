@@ -1,13 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { ReactNode } from 'react';
-import { Children, useCallback } from 'react';
+import { Children } from 'react';
 import { Pressable, I18nManager } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
-import { Icon, createIconProps } from '@fluentui-react-native/icon';
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './Chip.styling';
@@ -43,19 +42,9 @@ export const Chip = compose<ChipType>({
     const Slots = useSlots(userProps, (layer) => chipLookup(layer, userProps, chip.state));
 
     return (final: ChipProps, ...children: ReactNode[]) => {
-      const { icon, size, showCloseIcon, closeIconAccessibilityLabel, closeIconOnPress, ...mergedProps } = mergeProps(chip.props, final);
-      const iconProps = createIconProps(icon);
+      const { closeIconVisibile, iconProps, iconPressFunction, size, showCloseIcon, closeIconAccessibilityLabel, ...mergedProps } =
+        mergeProps(chip.props, final);
       const showIcon = size === 'medium' || showCloseIcon;
-      const closeIconVisibile = showCloseIcon && chip.state.selected;
-
-      const iconPressFunction = useCallback(
-        (e: InteractionEvent) => {
-          if (closeIconVisibile && closeIconOnPress) {
-            closeIconOnPress(e);
-          }
-        },
-        [chip.state.selected, showCloseIcon, closeIconOnPress],
-      );
 
       const iconCore = <Slots.icon accessible={false} {...iconProps} />;
       const iconWithPressable = (
@@ -66,7 +55,7 @@ export const Chip = compose<ChipType>({
 
       return (
         <Slots.root accessible {...mergedProps}>
-          {icon && showIcon && (closeIconVisibile ? iconWithPressable : iconCore)}
+          {iconProps && showIcon && (closeIconVisibile ? iconWithPressable : iconCore)}
           {Children.map(children, (child, i) =>
             typeof child === 'string' ? (
               <Slots.text accessible={false} key={`text-${i}`}>

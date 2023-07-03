@@ -2,7 +2,9 @@ import * as React from 'react';
 import type { AccessibilityState } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
+import { createIconProps } from '@fluentui-react-native/icon';
 import { usePressableState, useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 import DismissSvg from './assets/DismissIcon';
 import type { ChipInfo, ChipProps } from './Chip.types';
@@ -18,6 +20,7 @@ export const useChip = (props: ChipProps): ChipInfo => {
     size = 'medium',
     icon,
     showCloseIcon,
+    closeIconOnPress,
     ...rest
   } = props;
 
@@ -39,6 +42,18 @@ export const useChip = (props: ChipProps): ChipInfo => {
     },
     [toggle, onAccessibilityAction],
   );
+
+  const iconProps = createIconProps(showCloseIcon ? (!checkedValue ? icon : { svgSource: { src: DismissSvg } }) : icon);
+  const closeIconVisibile = showCloseIcon && checkedValue;
+  const iconPressFunction = React.useCallback(
+    (e: InteractionEvent) => {
+      if (closeIconVisibile && closeIconOnPress) {
+        closeIconOnPress(e);
+      }
+    },
+    [checkedValue, showCloseIcon, closeIconOnPress],
+  );
+
   return {
     props: {
       accessibilityState: getAccessibilityState(checkedValue, accessibilityState),
@@ -47,7 +62,9 @@ export const useChip = (props: ChipProps): ChipInfo => {
       ...props,
       size,
       toggle,
-      icon: showCloseIcon ? (!checkedValue ? icon : { svgSource: { src: DismissSvg } }) : icon,
+      iconProps,
+      iconPressFunction,
+      closeIconVisibile,
     },
     state: {
       ...pressable.state,
