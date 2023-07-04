@@ -22,6 +22,16 @@ exports[`Chip component tests Chip all props 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  icon={
+    {
+      "color": "#fff",
+      "fontSource": {
+        "codepoint": 9827,
+        "fontFamily": "Arial",
+        "fontSize": 16,
+      },
+    }
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
