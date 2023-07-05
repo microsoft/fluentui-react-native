@@ -3,6 +3,7 @@ import type { View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import type { LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const tabListName = 'TabList';
 
@@ -10,6 +11,9 @@ export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
 
 export interface TabListContextData {
+  appearance?: TabListAppearance;
+
+  disabled?: boolean;
   /**
    * The currently selected Tab's key
    */
@@ -35,9 +39,13 @@ export interface TabListContextData {
    * GH #964
    */
   focusZoneRef?: React.RefObject<any> | null;
+
+  size?: TabListSize;
+
+  vertical?: boolean;
 }
 
-export interface TabListTokens {
+export interface TabListTokens extends LayoutTokens {
   /**
    * Controls direction of TabList items, controlled by 'vertical' prop
    */

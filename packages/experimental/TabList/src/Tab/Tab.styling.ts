@@ -14,13 +14,15 @@ export const stylingSettings: UseStylingOptions<TabProps, TabSlotProps, TabToken
         style: {
           display: 'flex',
           alignItems: 'center',
-          flexDirection: 'column',
+          flexDirection: tokens.flexDirection,
           alignSelf: 'flex-start',
           justifyContent: 'center',
+          padding: 1,
+          backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
         },
       }),
-      [...borderStyles.keys],
+      ['flexDirection', 'backgroundColor', ...borderStyles.keys],
     ),
     content: buildProps(
       (tokens: TabTokens, theme: Theme) => ({
@@ -34,37 +36,36 @@ export const stylingSettings: UseStylingOptions<TabProps, TabSlotProps, TabToken
     icon: buildProps(
       (tokens: TabTokens) => ({
         color: tokens.iconColor,
+        size: tokens.iconSize,
+        style: {
+          marginRight: tokens.iconMargin,
+        },
       }),
-      ['iconColor'],
+      ['iconColor', 'iconSize', 'iconMargin'],
     ),
     stack: buildProps(
       (tokens: TabTokens) => ({
         style: {
           display: 'flex',
-          marginHorizontal: 10,
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
-          minHeight: 32,
-          minWidth: 32,
           justifyContent: 'center',
           opacity: tokens.tabsItemOpacity,
+          marginHorizontal: tokens.stackMarginHorizontal,
+          marginVertical: tokens.stackMarginVertical,
         },
       }),
-      ['tabsItemOpacity'],
+      ['tabsItemOpacity', 'stackMarginHorizontal', 'stackMarginVertical'],
     ),
     indicator: buildProps(
       (tokens: TabTokens) => ({
-        style: {
-          minHeight: 2,
-          borderRadius: 2,
-          marginBottom: 2,
-          alignSelf: 'stretch',
-          marginHorizontal: tokens.indicatorMarginHorizontal,
-          backgroundColor: tokens.indicatorColor,
-        },
+        color: tokens.indicatorColor,
+        inset: tokens.indicatorInset,
+        thickness: tokens.indicatorThickness,
+        vertical: tokens.indicatorOrientation === 'vertical',
       }),
-      ['indicatorColor', 'indicatorMarginHorizontal'],
+      ['indicatorColor', 'indicatorInset', 'indicatorThickness'],
     ),
   },
 };
