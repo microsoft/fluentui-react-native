@@ -2861,9 +2861,9 @@
     babel-plugin-const-enum "^1.0.0"
 
 "@rnx-kit/cli@^0.16.2":
-  version "0.16.8"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.16.8.tgz#72c9b2ba58f961864c8f15a83640498dff4e2113"
-  integrity sha512-VC6UT0EH6gpPrltDCOqq03tn72fiu4IviT9AgUFnnTOMUOSC0lfS7qPw5jC4hxJb+Petd1HbKL0amo5F1DZ8zA==
+  version "0.16.9"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.16.9.tgz#69947223ebb12f75e0a349cb4ee61e9ffb846146"
+  integrity sha512-R93xEfLj/v6fclHBFmlfBW9zulDcFV6QnkWB3ypP2GJ5bJA8kEu7nXKybgfcV/wDRqOFVj40PcBaiGP1/30XOw==
   dependencies:
     "@rnx-kit/align-deps" "^2.2.2"
     "@rnx-kit/config" "^0.6.2"
