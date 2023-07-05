@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Counter badge changes for Android",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}

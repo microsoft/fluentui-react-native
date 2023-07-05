@@ -42,6 +42,7 @@
     "@fluentui-react-native/avatar": "^1.10.3",
     "@fluentui-react-native/badge": ">=0.6.5 <1.0.0",
     "@fluentui-react-native/button": ">=0.34.4 <1.0.0",
+    "@fluentui-react-native/chip": "^0.1.0",
     "@fluentui-react-native/default-theme": ">=0.19.1 <1.0.0",
     "@fluentui-react-native/divider": "^0.5.2",
     "@fluentui-react-native/dropdown": ">=0.8.7 <1.0.0",
