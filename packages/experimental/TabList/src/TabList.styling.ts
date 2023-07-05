@@ -22,7 +22,7 @@ export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, 
           flexDirection: tokens.flexDirection,
         },
       }),
-      [],
+      ['flexDirection'],
     ),
   },
 };

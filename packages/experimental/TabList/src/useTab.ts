@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { memoize } from '@fluentui-react-native/framework';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
@@ -63,7 +64,7 @@ export const useTab = (props: TabProps): TabInfo => {
       accessible: accessible ?? true,
       accessibilityRole: 'tab',
       focusable: !disabled ?? true,
-      accessibilityState: { disabled: disabled, selected: info.selectedKey === tabKey },
+      accessibilityState: getAccessibilityState(disabled, info.selectedKey === tabKey),
       accessibilityActions: [{ name: 'Select' }],
       onAccessibilityAction: onAccessibilityAction,
       ref: useViewCommandFocus(componentRef),
@@ -77,3 +78,8 @@ export const useTab = (props: TabProps): TabInfo => {
     },
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(disabled: boolean, selected: boolean) {
+  return { disabled, selected };
+}

@@ -46,22 +46,14 @@ export const TabList = compose<TabListType>({
 
       const { defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
 
-      // Populate the tabsItemKeys array.
+      // Populate the tabKeys array.
       if (children) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - TODO, fix typing error
-        tabs.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
+        tabs.state.context.tabKeys = React.Children.map(children, (child: React.ReactNode) => {
           if (React.isValidElement(child)) {
-            // Sets default selected tabItem.
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore - TODO, fix typing error
+            // Sets default selected tab.
             if (tabs.state?.context.selectedKey == null && !child.props.disabled) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore - TODO, fix typing error
               tabs.state.context.selectedKey = child.props.tabKey;
             }
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore - TODO, fix typing error
             return child.props.tabKey;
           }
         });
@@ -69,7 +61,7 @@ export const TabList = compose<TabListType>({
 
       return (
         <TabListContext.Provider
-          // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback.
+          // Passes in the selected key and a hook function to update the newly selected tab and call the client's onTabsClick callback.
           value={tabs.state.context}
         >
           <Slots.root {...mergedProps}>

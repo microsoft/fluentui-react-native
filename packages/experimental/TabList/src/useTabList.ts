@@ -18,7 +18,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   const data = useSelectedKey(selectedKey || defaultSelectedKey || null, onTabSelect);
 
-  // selectedTabRef should be set to default tabbale element.
+  // selectedTabRef should be set to default tabbable element.
   const [selectedTabRef, setSelectedTabRef] = React.useState(React.useRef<View>(null));
 
   const onSelectTabRef = React.useCallback(
