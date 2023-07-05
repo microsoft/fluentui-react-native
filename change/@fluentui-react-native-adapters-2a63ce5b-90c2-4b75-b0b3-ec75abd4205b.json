@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update macOS props",
+  "packageName": "@fluentui-react-native/adapters",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch"
+}
