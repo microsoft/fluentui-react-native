@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Wed, 05 Jul 2023 16:01:24 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.27.2",
+      "version": "1.27.2",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "eb588ece1230029993e40d2b27156513dc643f99",
+            "comment": "Test update counter/presence badge Android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Jun 2023 18:37:35 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.27.2",
       "version": "1.27.2",

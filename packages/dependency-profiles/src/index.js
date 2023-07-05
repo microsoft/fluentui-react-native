@@ -8,19 +8,19 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.151.0"
+      "version": "0.151.1"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.34.10"
+      "version": "0.34.11"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
-      "version": "1.10.3"
+      "version": "1.10.4"
     },
     "@fluentui-react-native/badge": {
       "name": "@fluentui-react-native/badge",
-      "version": "0.6.5"
+      "version": "0.7.0"
     },
     "@fluentui-react-native/button": {
       "name": "@fluentui-react-native/button",
@@ -33,6 +33,10 @@ module.exports = {
     "@fluentui-react-native/checkbox": {
       "name": "@fluentui-react-native/checkbox",
       "version": "0.20.5"
+    },
+    "@fluentui-react-native/chip": {
+      "name": "@fluentui-react-native/chip",
+      "version": "0.1.1"
     },
     "@fluentui-react-native/contextual-menu": {
       "name": "@fluentui-react-native/contextual-menu",

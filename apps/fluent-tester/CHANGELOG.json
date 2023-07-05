@@ -2,6 +2,41 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 05 Jul 2023 16:01:24 GMT",
+      "tag": "@fluentui-react-native/tester_v0.151.1",
+      "version": "0.151.1",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "eb588ece1230029993e40d2b27156513dc643f99",
+            "comment": "Test update counter/presence badge Android"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.10.4",
+            "commit": "eb588ece1230029993e40d2b27156513dc643f99"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.7.0",
+            "commit": "eb588ece1230029993e40d2b27156513dc643f99"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/chip to v0.1.1",
+            "commit": "eb588ece1230029993e40d2b27156513dc643f99"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 03 Jul 2023 06:39:58 GMT",
       "tag": "@fluentui-react-native/tester_v0.151.0",
       "version": "0.151.0",

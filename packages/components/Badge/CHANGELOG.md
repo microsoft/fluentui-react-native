@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jul 2023 16:01:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 05 Jul 2023 16:01:23 GMT
+
+### Minor changes
+
+- Counter badge changes for Android (ayushsinghs@yahoo.in)
 
 ## 0.6.5
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Create basic Chip structure",
-  "packageName": "@fluentui-react-native/chip",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}
