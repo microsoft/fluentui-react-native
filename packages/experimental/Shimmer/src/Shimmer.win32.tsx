@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
-import { View } from 'react-native';
+import { processColor, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps } from '@fluentui-react-native/framework';
@@ -56,16 +56,34 @@ const wave: React.FunctionComponent<ShimmerWaveProps> = (props: ShimmerWaveProps
     preserveAspectRatio: 'xMinYMin slice',
   };
 
-  return (
-    <Svg {...svgProps}>
-      <LinearGradient id="gradient">
-        <Stop stopColor={shimmerColor} stopOpacity={shimmerColorOpacity} />
-        <Stop offset="20%" stopColor={shimmerWaveColor} stopOpacity={shimmerWaveColorOpacity} />
-        <Stop offset="40%" stopColor={shimmerColor} stopOpacity={shimmerColorOpacity} />
-      </LinearGradient>
-      <Rect width={props.shimmerWaveWidth} height="100%" fill="url(#gradient)" />
-    </Svg>
-  );
+  /**
+   * React-Native-SVG doesn't process opaque color values correctly for gradients, directly invoking `processColor`
+   * and squashing in the opacity value of the color stop.  This handling scheme is incompatible with OpaqueColorValue type
+   * colors e.g. PlatformColor, and will show nothing.  As a short-term solution, provide alternate non-gradient handling
+   * of the wave color as a solid color.
+   */
+  if (typeof processColor(shimmerWaveColor) !== 'object' && typeof processColor(shimmerColor) !== 'object') {
+    // The typical path where the provided shimmer colors are not OpaqueColorValues.
+    return (
+      <Svg {...svgProps}>
+        <LinearGradient id="gradient">
+          <Stop stopColor={shimmerColor} stopOpacity={shimmerColorOpacity} />
+          <Stop offset="20%" stopColor={shimmerWaveColor} stopOpacity={shimmerWaveColorOpacity} />
+          <Stop offset="40%" stopColor={shimmerColor} stopOpacity={shimmerColorOpacity} />
+        </LinearGradient>
+        <Rect width={props.shimmerWaveWidth} height="100%" fill="url(#gradient)" />
+      </Svg>
+    );
+  } else {
+    // The unexpected path where either of the provided shimmer colors are OpaqueColorValues.
+    // scaleX is used to mimic the gradient occupying 40% of the fill since we don't know the provided width of the
+    // shimmer wave.
+    return (
+      <Svg {...svgProps}>
+        <Rect width={props.shimmerWaveWidth} height="100%" fill={shimmerWaveColor} fillOpacity={shimmerWaveColorOpacity} scaleX="0.4" />
+      </Svg>
+    );
+  }
 };
 
 const waveContainer: React.FunctionComponent<ShimmerWaveProps> = (props: ShimmerWaveProps) => {
