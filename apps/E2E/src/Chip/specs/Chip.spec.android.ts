@@ -1,4 +1,3 @@
-import { AndroidAttribute } from '../../common/consts';
 import { CHIP_CALLBACK_TEXT_END_STATE, CHIP_CALLBACK_TEXT_START_STATE } from '../consts';
 import ChipPageObject from '../pages/ChipPageObject';
 
@@ -25,15 +24,12 @@ describe('Chip Functional Testing', () => {
 
   it('Validate OnPress() callback was fired -> Click', async () => {
     /* Verify that the callback text is in start state */
-    await expect(
-      await ChipPageObject.compareAttribute(ChipPageObject._callbackText, AndroidAttribute.Text, CHIP_CALLBACK_TEXT_START_STATE),
-    ).toBeTruthy();
+    await expect(await ChipPageObject.verifyTextContent(CHIP_CALLBACK_TEXT_START_STATE)).toBeTruthy();
 
     /* Click the Chip and verify callback text gets updated */
     await ChipPageObject.click(ChipPageObject._primaryComponent);
-    await expect(
-      await ChipPageObject.compareAttribute(ChipPageObject._callbackText, AndroidAttribute.Text, CHIP_CALLBACK_TEXT_END_STATE),
-    ).toBeTruthy();
+    await expect(await ChipPageObject.waitForStringUpdate(CHIP_CALLBACK_TEXT_END_STATE, 'OnPress callback failing.')).toBeTruthy();
+    await expect(await ChipPageObject.verifyTextContent(CHIP_CALLBACK_TEXT_END_STATE)).toBeTruthy();
     await expect(await ChipPageObject.didAssertPopup()).toBeFalsy(ChipPageObject.ERRORMESSAGE_ASSERT);
   });
 });
