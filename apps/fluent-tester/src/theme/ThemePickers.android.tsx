@@ -62,7 +62,6 @@ export const ThemePickers: React.FunctionComponent = () => {
 
   const Dropdown = (props: DropdownProps) => {
     const { initial, onValueChange, options, accessibilityLabel } = props;
-    console.log(options);
     return (
       <View style={themedPickerStyles.dropdownBorder}>
         <Picker
