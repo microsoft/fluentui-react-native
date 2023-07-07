@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/chip",
+  "entries": [
+    {
+      "date": "Wed, 05 Jul 2023 16:01:23 GMT",
+      "tag": "@fluentui-react-native/chip_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/chip",
+            "commit": "eb588ece1230029993e40d2b27156513dc643f99",
+            "comment": "Create basic Chip structure"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@ trigger:
   branches:
     include:
       - main
+      - releases/*
 
 pr: none
 
@@ -61,7 +62,13 @@ jobs:
 
       - script: |
           yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/main -n $(npmAuth) --access public -y
-        displayName: 'Publish NPM Packages'
+        displayName: 'Publish NPM Packages (for main branch)'
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+
+      - script: |
+          yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/main -n $(npmAuth) --access public -y -t v%BUILD_SOURCEBRANCH:refs/heads/releases/=% -b origin/%BUILD_SOURCEBRANCH:refs/heads/=% --prerelease-prefix %BUILD_SOURCEBRANCH:refs/heads/releases/=%
+        displayName: 'Publish NPM Packages (for other release branches)'
+        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
 
       - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
         displayName: 📒 Generate Manifest Npm

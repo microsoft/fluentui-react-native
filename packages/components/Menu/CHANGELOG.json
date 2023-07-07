@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 30 Jun 2023 21:37:05 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.6",
+      "version": "1.11.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "6a6390aa7d8268609ab62b54d158c2d6cd459c9f",
+            "comment": "Fix VO bug in Menu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jun 2023 06:57:52 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.5",
+      "version": "1.11.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "cb2544808fd900ccd2aa8e5ea20a23ae052c8fd8",
+            "comment": "Set disabled prop on button when false"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.4",
+            "commit": "cb2544808fd900ccd2aa8e5ea20a23ae052c8fd8"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Jun 2023 18:37:35 GMT",
       "tag": "@fluentui-react-native/menu_v1.11.4",
       "version": "1.11.4",

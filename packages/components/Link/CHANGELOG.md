@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
+This log was last generated on Mon, 03 Jul 2023 06:39:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.5
+
+Mon, 03 Jul 2023 06:39:58 GMT
+
+### Patches
+
+- Fix inline link keyboard access (ayushsinghs@yahoo.in)
 
 ## 0.19.4
 
