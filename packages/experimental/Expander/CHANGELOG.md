@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Fri, 07 Jul 2023 19:45:35 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jul 2023 20:45:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.3
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.1
 
 ## 0.6.2
 
