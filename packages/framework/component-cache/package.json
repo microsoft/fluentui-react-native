@@ -31,7 +31,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@types/jest": "^29.0.0",
