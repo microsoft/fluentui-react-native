@@ -105,12 +105,11 @@ const _viewMask: IFilterMask<IViewProps> = {
   'aria-valuetext': true,
   // Use spread for mac specific properties until rn-macos TS type definitions are fixed
   ...{
-    acceptsKeyboardFocus: true,
-    nextKeyViewTag: true,
     onBlur: true,
     onFocus: true,
     onPreferredScrollerStyleDidChange: true,
     tooltip: true,
+    mouseDownCanMoveWindow: true,
   },
 };
 
