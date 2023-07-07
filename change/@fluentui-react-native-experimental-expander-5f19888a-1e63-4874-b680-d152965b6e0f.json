@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixing warnings from secure supply chain task",
+  "packageName": "@fluentui-react-native/experimental-expander",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
