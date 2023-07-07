@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add special handling for shimmer colors that use OpaqueColorValue such as PlatformColor",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}

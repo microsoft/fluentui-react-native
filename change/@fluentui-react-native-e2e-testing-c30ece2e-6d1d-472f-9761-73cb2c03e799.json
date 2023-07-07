@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Cleanup chip/input & uninstall task",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}

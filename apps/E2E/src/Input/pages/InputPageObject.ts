@@ -13,8 +13,7 @@ class InputPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async verifyTextContent(text: string): Promise<boolean> {
-    const callbackText = await this._callbackText;
-    return (await callbackText.getAttribute(AndroidAttribute.Text)) == text;
+    return await this.compareAttribute(this._callbackText, AndroidAttribute.Text, text);
   }
 
   async typeText(text: string): Promise<void> {
