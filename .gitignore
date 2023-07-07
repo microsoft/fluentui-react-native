@@ -103,3 +103,6 @@ apps/*/.vscode/.react/
 
 # Ignore Gradle build output directory
 **/android/**/build
+
+# No NPM config to pass CFS compliance
+.npmrc
