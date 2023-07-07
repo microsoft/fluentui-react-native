@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 07 Jul 2023 20:45:12 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jul 2023 22:02:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.28.2
+
+Fri, 07 Jul 2023 22:02:00 GMT
+
+### Patches
+
+- Disable failing Chip test to unblock CI (ruaraki@microsoft.com)
 
 ## 1.28.1
 
