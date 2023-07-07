@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jul 2023 19:45:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.2
+
+Fri, 07 Jul 2023 19:45:35 GMT
+
+### Patches
+
+- CG: Fix nuget config (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.6.1
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jul 2023 19:45:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.28.0
+
+Fri, 07 Jul 2023 19:45:35 GMT
+
+### Minor changes
+
+- Cleanup chip/input & uninstall task (ayushsinghs@yahoo.in)
 
 ## 1.27.2
 

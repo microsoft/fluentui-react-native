@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 05 Jul 2023 16:01:24 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jul 2023 19:45:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.151.2
+
+Fri, 07 Jul 2023 19:45:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-expander to v0.6.2
+- Bump @fluentui-react-native/experimental-shimmer to v0.10.2
 
 ## 0.151.1
 

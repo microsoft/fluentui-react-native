@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 07 Jul 2023 19:45:35 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.0",
+      "version": "1.28.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "42ab24bf4fa5b262117bd99f2f73a465fa62a0e8",
+            "comment": "Cleanup chip/input & uninstall task"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Jul 2023 16:01:24 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.27.2",
       "version": "1.27.2",
