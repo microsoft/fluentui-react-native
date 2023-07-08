@@ -10,12 +10,6 @@ class ChipPageObject extends BasePage {
     return await this.compareAttribute(this._callbackText, AndroidAttribute.Text, text);
   }
 
-  /* Waits for the text content to get updated to new string.
-   * Returns true if new string is attained. */
-  async waitForStringUpdate(newState: string, errorMessage: string): Promise<boolean> {
-    await this.waitForCondition(async () => await this.verifyTextContent(newState), errorMessage);
-    return await this.verifyTextContent(newState);
-  }
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/

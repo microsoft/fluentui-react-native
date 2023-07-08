@@ -22,9 +22,11 @@ class InputPageObject extends BasePage {
 
   /* Waits for the text content to get updated to new string.
    * Returns true if new string is attained. */
-  async waitForStringUpdate(newState: string, errorMessage: string): Promise<boolean> {
-    await this.waitForCondition(async () => await this.verifyTextContent(newState), errorMessage);
-    return await this.verifyTextContent(newState);
+  async waitForStringUpdate(newState: string, errorMessage: string): Promise<void> {
+    await this.waitForCondition(
+      async () => (await (await this._callbackText).getAttribute(AndroidAttribute.Text)) == newState,
+      errorMessage,
+    );
   }
 
   /*****************************************/
