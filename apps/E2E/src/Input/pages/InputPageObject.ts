@@ -20,8 +20,7 @@ class InputPageObject extends BasePage {
     await driver.execute('mobile: type', { text: text });
   }
 
-  /* Waits for the text content to get updated to new string.
-   * Returns true if new string is attained. */
+  /* Waits for the text content to get updated to new string. */
   async waitForStringUpdate(newState: string, errorMessage: string): Promise<void> {
     await this.waitForCondition(
       async () => (await (await this._callbackText).getAttribute(AndroidAttribute.Text)) == newState,
