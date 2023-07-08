@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Sat, 08 Jul 2023 00:50:04 GMT",
+      "tag": "@fluentui-react-native/framework_v0.11.1-testpatch.0",
+      "version": "0.11.1-testpatch.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.19.2-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.1-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Jun 2023 17:46:43 GMT",
       "tag": "@fluentui-react-native/framework_v0.11.0",
       "version": "0.11.0",

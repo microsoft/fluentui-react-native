@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/menu",
-  "version": "1.11.6",
+  "version": "1.11.7-testpatch.0",
   "description": "A cross-platform Menu component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,20 +26,20 @@
     "directory": "packages/components/menu"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.11.0 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.24.4 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.12.3 <1.0.0",
-    "@fluentui-react-native/framework": "0.11.0",
-    "@fluentui-react-native/icon": "^0.19.2",
-    "@fluentui-react-native/interactive-hooks": ">=0.24.2 <1.0.0",
-    "@fluentui-react-native/text": ">=0.21.2 <1.0.0",
+    "@fluentui-react-native/adapters": ">=0.11.1-testpatch.0 <1.0.0",
+    "@fluentui-react-native/callout": ">=0.24.5-testpatch.0 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.12.4-testpatch.0 <1.0.0",
+    "@fluentui-react-native/framework": "0.11.1-testpatch.0",
+    "@fluentui-react-native/icon": "^0.19.3-testpatch.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.24.3-testpatch.0 <1.0.0",
+    "@fluentui-react-native/text": ">=0.21.3-testpatch.0 <1.0.0",
     "@fluentui-react-native/theme-tokens": ">=0.25.0 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.21.0 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.21.1-testpatch.0 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.11.0 <1.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/button": ">=0.34.4 <1.0.0",
+    "@fluentui-react-native/button": ">=0.34.5-testpatch.0 <1.0.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",

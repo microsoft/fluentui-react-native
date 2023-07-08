@@ -1,7 +1,0 @@
-{
-  "type": "prerelease",
-  "comment": "Testing ability to create patch releases",
-  "packageName": "@fluentui-react-native/button",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "prerelease"
-}

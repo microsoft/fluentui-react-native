@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Sat, 08 Jul 2023 00:50:04 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.18.4-testpatch.0",
+      "version": "0.18.4-testpatch.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.2-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/adapters to v0.11.1-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.4-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.1-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.3-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/pressable to v0.10.4-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/text to v0.21.3-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.1-testpatch.0",
+            "commit": "691411a9f344ca7d52cd6b916f03742001227748"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Jun 2023 18:37:35 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.18.3",
       "version": "0.18.3",
