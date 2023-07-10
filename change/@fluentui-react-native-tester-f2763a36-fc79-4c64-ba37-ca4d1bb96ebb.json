@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix accessibility on dropdown and remove blank option in L/D mode",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}

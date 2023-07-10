@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 10 Jul 2023 09:58:55 GMT",
+      "tag": "@fluentui-react-native/tester_v0.151.4",
+      "version": "0.151.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d87435c312f875b4cc6c64dc09416ce1c03dfe10",
+            "comment": "Fix accessibility on dropdown and remove blank option in L/D mode"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Jul 2023 20:45:12 GMT",
       "tag": "@fluentui-react-native/tester_v0.151.3",
       "version": "0.151.3",
