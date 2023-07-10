@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Fri, 07 Jul 2023 20:45:12 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Jul 2023 17:25:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.5
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.5.1
+- Bump @fluentui-react-native/focus-zone to v0.12.5
 
 ## 0.18.4
 

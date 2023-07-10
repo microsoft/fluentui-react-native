@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 10 Jul 2023 09:58:55 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Jul 2023 17:25:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.151.5
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/dropdown to v0.8.9
+- Bump @fluentui-react-native/experimental-avatar to v0.19.2
+- Bump @fluentui-react-native/experimental-checkbox to v0.15.5
+- Bump @fluentui-react-native/experimental-expander to v0.6.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.7.9
+- Bump @fluentui-react-native/experimental-shimmer to v0.10.4
+- Bump @fluentui-react-native/experimental-tabs to v0.9.6
+- Bump @fluentui-react-native/menu to v1.11.8
+- Bump @fluentui-react-native/radio-group to v0.18.5
+- Bump @fluentui-react-native/spinner to v0.7.4
+- Bump @fluentui-react-native/tablist to v0.1.5
+- Bump @fluentui/react-native to v0.37.10
+- Bump @fluentui-react-native/focus-zone to v0.12.5
 
 ## 0.151.4
 
