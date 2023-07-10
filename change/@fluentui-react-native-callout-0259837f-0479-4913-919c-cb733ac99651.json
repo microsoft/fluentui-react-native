@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "[macOS] [Callout] Fixing anchor rect",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "nakambo@microsoft.com",
+  "dependentChangeType": "patch"
+}

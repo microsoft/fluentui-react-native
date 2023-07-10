@@ -183,7 +183,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			preconditionFailure("No window found")
 		}
 
-		guard let screenFrame = window.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
+		if (window.screen == nil) {
 			preconditionFailure("No screen Available")
 		}
 
@@ -193,16 +193,14 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		while (!rootView.isReactRootView()) {
 			rootView = rootView.reactSuperview()
 		}
-		let rootViewBoundsInWindow = rootView.convert(rootView.bounds, to: nil)
-		let rootViewRectInScreenCoordinates = window.convertToScreen(rootViewBoundsInWindow)
 
-		// macOS uses a flipped Y coordinate (I.E: (0,0) is on the bottom left of the screen). However,
-		// React Native assumes a standard Y coordinate. Let's flip the Y coordinate of our rect to match
-		let anchorScreenRectOrigin = NSPoint(
-			x: rootViewRectInScreenCoordinates.origin.x + self.anchorRect.origin.x,
-			y: screenFrame.height - (rootViewRectInScreenCoordinates.origin.y + self.anchorRect.origin.y)
-		)
-		let anchorRectInScreenCoordinates = NSRect(origin: anchorScreenRectOrigin, size: anchorRect.size)
+		let anchorRect = self.anchorRect
+
+		// Since the root view is flipped, we already have anchorRect in the "correct"
+		// (i.e. flipped) coordinate space. Since we need to provide screen rects to Apple,
+		// we will once again arrive at the "correct" (not flipped) coordinate space.
+		let anchorRectInWindow = rootView.convert(anchorRect, to: nil)
+		let anchorRectInScreenCoordinates = window.convertToScreen(anchorRectInWindow)
 
 		return anchorRectInScreenCoordinates
 	}
