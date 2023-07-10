@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { View, ViewStyle } from 'react-native';
+import type { View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
@@ -34,12 +34,7 @@ export interface TabListContextData {
   focusZoneRef?: React.RefObject<any> | null;
 }
 
-export interface TabListTokens {
-  /**
-   * Flex direction of Tab items. Controlled by TabList `vertical` prop.
-   */
-  flexDirection?: ViewStyle['flexDirection'];
-}
+export interface TabListTokens {}
 
 export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
