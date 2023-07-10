@@ -313,7 +313,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Tooltip',
     component: TooltipTest,
-    testPageButton: Constants.HOMEPAGE_TOOLTOP_BUTTON,
+    testPageButton: Constants.HOMEPAGE_TOOLTIP_BUTTON,
     platforms: ['win32'],
   },
 ];
