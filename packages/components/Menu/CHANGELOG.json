@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Mon, 10 Jul 2023 23:39:34 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.9",
+      "version": "1.11.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.7",
+            "commit": "204b9178a9dd307b854b3b59fd7d0c1616719a03"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Jul 2023 17:25:04 GMT",
       "tag": "@fluentui-react-native/menu_v1.11.8",
       "version": "1.11.8",
