@@ -172,7 +172,7 @@ export const tests: TestDescription[] = [
     name: 'Input',
     component: InputTest,
     testPageButton: Constants.HOMEPAGE_INPUT_BUTTON,
-    platforms: ['android'],
+    platforms: ['android', 'ios'],
   },
   {
     name: 'Link Legacy',
