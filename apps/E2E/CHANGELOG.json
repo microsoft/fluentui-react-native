@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 11 Jul 2023 04:56:58 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.4",
+      "version": "1.28.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "c24eecc65abc539df8f9700cbe6058a46a268b18",
+            "comment": "Update waiters to not fail"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Jul 2023 17:25:04 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.28.3",
       "version": "1.28.3",

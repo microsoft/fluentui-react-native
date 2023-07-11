@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update waiters to not fail",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}
