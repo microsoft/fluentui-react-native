@@ -34,12 +34,17 @@ export interface TabListContextData {
   focusZoneRef?: React.RefObject<any> | null;
 }
 
-export interface TabListTokens {}
+export interface TabListTokens {
+  /**
+   * Flag to render the list of tabs horizontally or vertically
+   */
+  vertical?: boolean;
+}
 
 export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
 
-export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
+export interface TabListProps extends TabListTokens, Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
   /**
    * Visual appearance of the TabList, affecting header hover / selection background.
    */
@@ -71,11 +76,6 @@ export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation
    * Flag to change the size of the tabs.
    */
   size?: TabListSize;
-
-  /**
-   * Flag to render the list of tabs horizontally or vertically
-   */
-  vertical?: boolean;
 
   /**
    * A RefObject to access TabList.
