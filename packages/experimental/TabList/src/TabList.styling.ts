@@ -7,7 +7,7 @@ import { defaultTabListTokens } from './TabListTokens';
 
 export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, TabListTokens> = {
   tokens: [defaultTabListTokens, tabListName],
-  tokensThatAreAlsoProps: ['vertical'],
+  states: ['vertical'],
   slotProps: {
     root: buildProps(
       () => ({
@@ -20,7 +20,7 @@ export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, 
     stack: buildProps(
       (tokens: TabListTokens) => ({
         style: {
-          flexDirection: tokens.vertical ? 'column' : 'row',
+          flexDirection: tokens.flexDirection,
         },
       }),
       ['vertical'],

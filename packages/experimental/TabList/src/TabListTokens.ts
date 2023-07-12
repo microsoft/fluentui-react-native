@@ -7,4 +7,7 @@ export const defaultTabListTokens: TokenSettings<TabListTokens, Theme> = (t: The
   ({
     backgroundColor: t.colors.transparent,
     flexDirection: 'row',
+    vertical: {
+      flexDirection: 'column',
+    },
   } as TabListTokens);
