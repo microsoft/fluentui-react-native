@@ -99,7 +99,7 @@ export const tests: TestDescription[] = [
     name: 'Chip',
     component: ChipTest,
     testPageButton: Constants.HOMEPAGE_CHIP_BUTTON,
-    platforms: ['android'],
+    platforms: ['android', 'ios'],
   },
   {
     name: 'Color Tokens',
