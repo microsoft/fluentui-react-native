@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Complete FAB changes",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}

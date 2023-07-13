@@ -8,7 +8,6 @@ export const defaultFABColorTokens: TokenSettings<FABTokens, Theme> = (t: Theme)
   backgroundColor: t.colors.brandBackground,
   color: t.colors.neutralForegroundOnColor,
   iconColor: t.colors.neutralForegroundOnColor,
-  rippleColor: '#D4D4D4', //Android Only
   disabled: {
     backgroundColor: t.colors.neutralBackground5,
     color: t.colors.neutralForegroundDisabled,
@@ -30,7 +29,6 @@ export const defaultFABColorTokens: TokenSettings<FABTokens, Theme> = (t: Theme)
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForeground2,
     iconColor: t.colors.neutralForeground2,
-    rippleColor: '#D4D4D4',
     disabled: {
       backgroundColor: t.colors.neutralBackground5,
       color: t.colors.neutralForegroundDisabled,
