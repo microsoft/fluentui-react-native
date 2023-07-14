@@ -6,8 +6,8 @@ import type { TabListTokens } from '.';
 export const defaultTabListTokens: TokenSettings<TabListTokens, Theme> = (t: Theme) =>
   ({
     backgroundColor: t.colors.transparent,
-    flexDirection: 'row',
+    direction: 'row',
     vertical: {
-      flexDirection: 'column',
+      direction: 'column',
     },
   } as TabListTokens);

@@ -20,7 +20,7 @@ export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, 
     stack: buildProps(
       (tokens: TabListTokens) => ({
         style: {
-          flexDirection: tokens.flexDirection,
+          flexDirection: tokens.direction,
         },
       }),
       ['vertical'],

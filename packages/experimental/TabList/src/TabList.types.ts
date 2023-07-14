@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { View, ViewStyle } from 'react-native';
+import type { View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
@@ -41,7 +41,7 @@ export interface TabListTokens {
   /**
    * Controls direction of TabList items, controlled by 'vertical' prop
    */
-  flexDirection?: ViewStyle['flexDirection'];
+  direction?: 'row' | 'column';
   /**
    * States
    */
