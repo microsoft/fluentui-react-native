@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 10 Jul 2023 23:39:34 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jul 2023 22:28:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.151.7
+
+Fri, 14 Jul 2023 22:28:56 GMT
+
+### Patches
+
+- Change prop names on TabList page (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tablist to v0.2.0
 
 ## 0.151.6
 

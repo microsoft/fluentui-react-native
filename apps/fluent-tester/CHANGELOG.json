@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 14 Jul 2023 22:28:56 GMT",
+      "tag": "@fluentui-react-native/tester_v0.151.7",
+      "version": "0.151.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "35bbbb343fc27af437dd1e471c874ddf499ac9c5",
+            "comment": "Change prop names on TabList page"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/tablist to v0.2.0",
+            "commit": "35bbbb343fc27af437dd1e471c874ddf499ac9c5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Jul 2023 23:39:34 GMT",
       "tag": "@fluentui-react-native/tester_v0.151.6",
       "version": "0.151.6",
