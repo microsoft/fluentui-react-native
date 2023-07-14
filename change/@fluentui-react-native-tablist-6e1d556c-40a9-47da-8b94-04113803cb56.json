@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Port old experimental Tabs implementation, refactor props",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
