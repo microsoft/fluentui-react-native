@@ -214,6 +214,7 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
@@ -272,6 +273,7 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
@@ -316,6 +318,7 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
@@ -361,6 +364,7 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }
@@ -405,6 +409,7 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "paddingHorizontal": 4,
+      "paddingVertical": undefined,
       "right": 0,
       "width": undefined,
     }

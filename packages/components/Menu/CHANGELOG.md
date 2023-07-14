@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Jul 2023 23:39:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.9
+
+Mon, 10 Jul 2023 23:39:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.24.7
+
+## 1.11.8
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.24.6
+- Bump @fluentui-react-native/focus-zone to v0.12.5
+
+## 1.11.7
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.1
+- Bump @fluentui-react-native/callout to v0.24.5
+- Bump @fluentui-react-native/focus-zone to v0.12.4
+- Bump @fluentui-react-native/framework to v0.11.1
+- Bump @fluentui-react-native/icon to v0.19.3
+- Bump @fluentui-react-native/interactive-hooks to v0.24.3
+- Bump @fluentui-react-native/text to v0.21.3
+- Bump @fluentui-react-native/tokens to v0.21.1
+- Bump @fluentui-react-native/button to v0.34.5
+
+## 1.11.6
+
+Fri, 30 Jun 2023 21:37:05 GMT
+
+### Patches
+
+- Fix VO bug in Menu (email not defined)
+
+## 1.11.5
+
+Fri, 30 Jun 2023 06:57:52 GMT
+
+### Patches
+
+- Set disabled prop on button when false (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.34.4
 
 ## 1.11.4
 

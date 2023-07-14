@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 
 import { BasicBadge } from './BasicBadgeTest';
 import { CounterBadgeTest } from './CounterBadgeTest';
@@ -9,19 +10,26 @@ import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
 const badgeSections: TestSection[] = [
-  {
-    name: 'Basic Badge',
-    testID: BADGE_TESTPAGE,
-    component: BasicBadge,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Basic Badge',
+      testID: BADGE_TESTPAGE,
+      component: BasicBadge,
+    },
+  }),
   {
     name: 'Counter Badge',
+    testID: BADGE_TESTPAGE,
     component: CounterBadgeTest,
   },
   {
     name: 'Presence Badge',
     component: PresenceBadgeTest,
   },
+];
+
+const e2eSections: TestSection[] = [
   {
     name: 'Badge E2E',
     component: E2EBadgeTest,
@@ -42,5 +50,7 @@ export const BadgeTest: React.FunctionComponent = () => {
 
   const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Badge/SPEC.md';
 
-  return <Test name="Badge Test" description={description} spec={spec} sections={badgeSections} status={status} />;
+  return (
+    <Test name="Badge Test" description={description} spec={spec} sections={badgeSections} status={status} e2eSections={e2eSections} />
+  );
 };

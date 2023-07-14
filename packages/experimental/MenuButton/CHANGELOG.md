@@ -1,8 +1,44 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Jul 2023 23:39:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.10
+
+Mon, 10 Jul 2023 23:39:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.22.8
+
+## 0.7.9
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.22.7
+
+## 0.7.8
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.22.6
+- Bump @fluentui-react-native/experimental-button to v0.18.5
+- Bump @fluentui-react-native/framework to v0.11.1
+- Bump @fluentui-react-native/tokens to v0.21.1
+
+## 0.7.7
+
+Fri, 30 Jun 2023 06:57:52 GMT
+
+### Patches
+
+- Set disabled prop on button when false (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-button to v0.18.4
 
 ## 0.7.6
 
