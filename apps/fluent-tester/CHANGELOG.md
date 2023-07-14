@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 14 Jul 2023 22:28:56 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jul 2023 23:32:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.151.8
+
+Fri, 14 Jul 2023 23:32:22 GMT
+
+### Patches
+
+- [Callout] Fix anchor not updating when going from `target` to `anchorRect` (email not defined)
+- Bump @fluentui-react-native/dropdown to v0.8.11
+- Bump @fluentui-react-native/experimental-menu-button to v0.7.11
+- Bump @fluentui-react-native/menu to v1.11.10
+- Bump @fluentui/react-native to v0.37.12
 
 ## 0.151.7
 

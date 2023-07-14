@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 14 Jul 2023 23:32:22 GMT",
+      "tag": "@fluentui-react-native/callout_v0.24.8",
+      "version": "0.24.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/callout",
+            "commit": "40fafc6d32e9fa3d4d137ec003ac185470a96575",
+            "comment": "[Callout] Fix anchor not updating when going from `target` to `anchorRect`"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Jul 2023 23:39:34 GMT",
       "tag": "@fluentui-react-native/callout_v0.24.7",
       "version": "0.24.7",
