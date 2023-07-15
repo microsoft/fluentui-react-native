@@ -8,7 +8,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		didSet {
 			let targetView = bridge?.uiManager.view(forReactTag: target)
 			if (targetView == nil && target != nil) {
-				preconditionFailure("Invalid target react tag")
+				preconditionFailure("Invalid target")
 			}
 			anchorView = targetView
 			updateCalloutFrameToAnchor()
