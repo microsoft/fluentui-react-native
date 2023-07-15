@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 14 Jul 2023 23:32:22 GMT and should not be manually modified.
+This log was last generated on Sat, 15 Jul 2023 23:01:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.9
+
+Sat, 15 Jul 2023 23:01:27 GMT
+
+### Patches
+
+- [macOS] [FRNCallout] Fix switching betwen `target` and `anchorRect` (nakambo@microsoft.com)
 
 ## 0.24.8
 

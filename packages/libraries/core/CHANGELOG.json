@@ -2,6 +2,33 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Sat, 15 Jul 2023 23:01:27 GMT",
+      "tag": "@fluentui/react-native_v0.37.13",
+      "version": "0.37.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.9",
+            "commit": "d00b3a1d07d0dc05083e02fd1dcc7e8a264290c9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.22.10",
+            "commit": "d00b3a1d07d0dc05083e02fd1dcc7e8a264290c9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.11.12",
+            "commit": "d00b3a1d07d0dc05083e02fd1dcc7e8a264290c9"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jul 2023 23:32:22 GMT",
       "tag": "@fluentui/react-native_v0.37.12",
       "version": "0.37.12",

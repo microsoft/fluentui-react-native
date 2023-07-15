@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[macOS] [FRNCallout] Fix switching betwen `target` and `anchorRect`",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "nakambo@microsoft.com",
-  "dependentChangeType": "patch"
-}
