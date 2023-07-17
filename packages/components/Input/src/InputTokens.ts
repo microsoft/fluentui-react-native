@@ -31,10 +31,10 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
     variant: 'caption2', //label font
     color: t.colors.neutralForeground2, //label color
     assistiveTextColor: t.colors.neutralForeground2,
-    assistiveTextFont: 'caption2',
-    inputTextFont: 'body1',
+    assistiveTextFont: { variant: 'caption2' },
+    inputTextFont: { variant: 'body1' },
     inputTextColor: t.colors.neutralForeground2,
-    accessoryTextFont: 'body1',
+    accessoryTextFont: { variant: 'body1' },
     accessoryTextColor: t.colors.neutralForeground2,
 
     error: {
