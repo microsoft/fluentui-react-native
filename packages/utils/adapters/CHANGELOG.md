@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Mon, 05 Jun 2023 19:26:26 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jul 2023 20:45:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Fri, 07 Jul 2023 20:45:11 GMT
+
+### Patches
+
+- Update macOS props (saadnajmi2@gmail.com)
 
 ## 0.11.0
 

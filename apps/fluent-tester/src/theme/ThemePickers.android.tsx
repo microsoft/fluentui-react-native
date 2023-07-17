@@ -53,7 +53,7 @@ export const ThemePickers: React.FunctionComponent = () => {
 
   type DropdownEntry = { label: string; value: string };
 
-  type DropdownProps = { initial: string; onValueChange: (value: string) => void; options: DropdownEntry[] };
+  type DropdownProps = { initial: string; onValueChange: (value: string) => void; options: DropdownEntry[]; accessibilityLabel?: string };
 
   const dropdownProps: Omit<PickerProps, 'onValueChange' | 'selectedValue'> = {
     style: themedPickerStyles.dropdown,
@@ -61,13 +61,19 @@ export const ThemePickers: React.FunctionComponent = () => {
   };
 
   const Dropdown = (props: DropdownProps) => {
-    const { initial, onValueChange, options } = props;
+    const { initial, onValueChange, options, accessibilityLabel } = props;
     return (
       <View style={themedPickerStyles.dropdownBorder}>
-        <Picker selectedValue={initial} onValueChange={onValueChange} dropdownIconColor={theme.colors.defaultIcon} {...dropdownProps}>
-          {options.map((entry: DropdownEntry, index: number) => (
-            <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
-          ))}
+        <Picker
+          selectedValue={initial}
+          onValueChange={onValueChange}
+          dropdownIconColor={theme.colors.defaultIcon}
+          {...dropdownProps}
+          accessibilityLabel={accessibilityLabel}
+        >
+          {options.map(
+            (entry: DropdownEntry, index: number) => entry && <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />,
+          )}
         </Picker>
       </View>
     );
@@ -77,12 +83,22 @@ export const ThemePickers: React.FunctionComponent = () => {
     <View style={themedPickerStyles.pickerRoot}>
       <View style={themedPickerStyles.picker}>
         <PickerLabel>Theme: </PickerLabel>
-        <Dropdown initial={testerTheme.themeName} onValueChange={onThemeSelected} options={themeChoices} />
+        <Dropdown
+          accessibilityLabel="Theme Selector"
+          initial={testerTheme.themeName}
+          onValueChange={onThemeSelected}
+          options={themeChoices}
+        />
       </View>
 
       <View style={themedPickerStyles.picker}>
         <PickerLabel>Light/Dark: </PickerLabel>
-        <Dropdown initial={testerTheme.appearance} onValueChange={onAppearanceChange} options={lightnessOptions} />
+        <Dropdown
+          accessibilityLabel="Light/Dark Selector"
+          initial={testerTheme.appearance}
+          onValueChange={onAppearanceChange}
+          options={lightnessOptions}
+        />
       </View>
     </View>
   );

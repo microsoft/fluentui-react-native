@@ -3,9 +3,11 @@ import type { View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import type { FontTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const tabListName = 'TabList';
+
+export type TabListAppearance = 'transparent' | 'subtle';
+export type TabListSize = 'small' | 'medium' | 'large';
 
 export interface TabListContextData {
   /**
@@ -21,7 +23,7 @@ export interface TabListContextData {
   /**
    * Updates the selected Tab's ref to set as the default tabbable element
    */
-  updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void;
+  updateSelectedTabRef?: (ref: React.RefObject<any>) => void;
 
   /**
    * Array of Tab values in the group
@@ -35,10 +37,16 @@ export interface TabListContextData {
   focusZoneRef?: React.RefObject<any> | null;
 }
 
-export interface TabListTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
-
-export type TabListAppearance = 'transparent' | 'subtle';
-export type TabListSize = 'small' | 'medium' | 'large';
+export interface TabListTokens {
+  /**
+   * Controls direction of TabList items, controlled by 'vertical' prop
+   */
+  direction?: 'row' | 'column';
+  /**
+   * States
+   */
+  vertical?: TabListTokens;
+}
 
 export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
   /**
@@ -74,16 +82,16 @@ export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation
   size?: TabListSize;
 
   /**
-   * Flag to render the list of tabs horizontally or vertically
-   */
-  vertical?: boolean;
-
-  /**
    * A RefObject to access TabList.
    */
   componentRef?: React.RefObject<View>;
 
   testID?: string;
+
+  /**
+   * Flag to render the list of tabs horizontally or vertically
+   */
+  vertical?: boolean;
 }
 
 export interface TabListState {

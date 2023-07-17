@@ -8,8 +8,8 @@ import { Test } from '../Test';
 const TabListMainTest: React.FunctionComponent = () => {
   return (
     <TabList>
-      <Tab key="hello">Tab 1</Tab>
-      <Tab key="world">Tab 2</Tab>
+      <Tab tabKey="hello">Tab 1</Tab>
+      <Tab tabKey="world">Tab 2</Tab>
     </TabList>
   );
 };

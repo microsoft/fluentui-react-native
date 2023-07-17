@@ -1,8 +1,51 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
+This log was last generated on Sat, 15 Jul 2023 23:01:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.9
+
+Sat, 15 Jul 2023 23:01:27 GMT
+
+### Patches
+
+- [macOS] [FRNCallout] Fix switching betwen `target` and `anchorRect` (nakambo@microsoft.com)
+
+## 0.24.8
+
+Fri, 14 Jul 2023 23:32:22 GMT
+
+### Patches
+
+- [Callout] Fix anchor not updating when going from `target` to `anchorRect` (email not defined)
+
+## 0.24.7
+
+Mon, 10 Jul 2023 23:39:34 GMT
+
+### Patches
+
+- [macOS] [Callout] Fixing anchor rect (nakambo@microsoft.com)
+
+## 0.24.6
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.5.1
+
+## 0.24.5
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.1
+- Bump @fluentui-react-native/interactive-hooks to v0.24.3
+- Bump @fluentui-react-native/tokens to v0.21.1
+- Bump @uifabricshared/foundation-compose to v1.14.2
 
 ## 0.24.4
 

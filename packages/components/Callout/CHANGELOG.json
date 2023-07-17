@@ -2,6 +2,99 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Sat, 15 Jul 2023 23:01:27 GMT",
+      "tag": "@fluentui-react-native/callout_v0.24.9",
+      "version": "0.24.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "d00b3a1d07d0dc05083e02fd1dcc7e8a264290c9",
+            "comment": "[macOS] [FRNCallout] Fix switching betwen `target` and `anchorRect`"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jul 2023 23:32:22 GMT",
+      "tag": "@fluentui-react-native/callout_v0.24.8",
+      "version": "0.24.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/callout",
+            "commit": "40fafc6d32e9fa3d4d137ec003ac185470a96575",
+            "comment": "[Callout] Fix anchor not updating when going from `target` to `anchorRect`"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Jul 2023 23:39:34 GMT",
+      "tag": "@fluentui-react-native/callout_v0.24.7",
+      "version": "0.24.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "204b9178a9dd307b854b3b59fd7d0c1616719a03",
+            "comment": "[macOS] [Callout] Fixing anchor rect"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Jul 2023 17:25:04 GMT",
+      "tag": "@fluentui-react-native/callout_v0.24.6",
+      "version": "0.24.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.5.1",
+            "commit": "d1fc0c774448d103085b5bb5ab0103678a62cbbc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jul 2023 20:45:12 GMT",
+      "tag": "@fluentui-react-native/callout_v0.24.5",
+      "version": "0.24.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/adapters to v0.11.1",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.3",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.1",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.2",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Jun 2023 18:37:35 GMT",
       "tag": "@fluentui-react-native/callout_v0.24.4",
       "version": "0.24.4",

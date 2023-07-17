@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Fri, 07 Jul 2023 20:45:11 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "e86c7196f4985a947aa6724b1e8b6690476a45a0",
+            "comment": "Update macOS props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 05 Jun 2023 19:26:26 GMT",
       "tag": "@fluentui-react-native/adapters_v0.11.0",
       "version": "0.11.0",

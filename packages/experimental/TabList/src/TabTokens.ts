@@ -5,4 +5,40 @@ import type { TabTokens } from '.';
 
 export const tabStates: (keyof TabTokens)[] = ['hovered', 'selected', 'focused', 'disabled', 'pressed'];
 
-export const defaultTabTokens: TokenSettings<TabTokens, Theme> = () => ({} as TabTokens);
+export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
+  ({
+    color: t.colors.neutralStrokeAccessible,
+    borderColor: 'transparent',
+    indicatorColor: 'transparent',
+    variant: 'bodyStandard',
+    borderWidth: 2,
+    borderRadius: 4,
+    indicatorMarginHorizontal: 10,
+    disabled: {
+      color: t.colors.neutralForegroundDisabled,
+      borderColor: 'transparent',
+      indicatorColor: 'transparent',
+    },
+    hovered: {
+      color: t.colors.neutralForeground1,
+      indicatorColor: t.colors.neutralStroke1,
+      selected: {
+        indicatorMarginHorizontal: 0,
+      },
+    },
+    pressed: {
+      color: t.colors.neutralForeground2Pressed,
+      indicatorColor: t.colors.brandStroke1,
+    },
+    focused: {
+      color: t.colors.neutralForeground1,
+      borderColor: t.colors.neutralForeground1,
+      icon: t.colors.buttonFocusedIcon,
+    },
+    selected: {
+      color: t.colors.neutralForeground1,
+      icon: t.colors.buttonFocusedIcon,
+      indicatorColor: t.colors.brandStroke1,
+      variant: 'bodySemibold',
+    },
+  } as TabTokens);

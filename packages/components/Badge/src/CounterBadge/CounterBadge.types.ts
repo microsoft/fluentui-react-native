@@ -32,6 +32,14 @@ export interface CounterBadgeProps extends Omit<BadgeCoreProps, 'appearance' | '
   dot?: boolean;
 
   /**
+   * If the text badge is intended to be used a discovery surface
+   * (badge used in a list).
+   * @default false, dot takes precendence if both are passed true.
+   * @platform android
+   */
+  list?: boolean;
+
+  /**
    * Max number to be displayed
    * @default 99
    */
@@ -52,6 +60,7 @@ export interface CounterBadgeProps extends Omit<BadgeCoreProps, 'appearance' | '
 
 export interface CounterBadgeTokens extends BadgeTokens {
   dot?: CounterBadgeTokens;
+  list?: CounterBadgeTokens; // Android only
 }
 
 export interface CounterBadgeSlotProps extends BadgeSlotProps {}

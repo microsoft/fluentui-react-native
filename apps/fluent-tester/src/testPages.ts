@@ -6,6 +6,7 @@ import { ButtonTest } from './TestComponents/Button';
 import { CalloutTest } from './TestComponents/Callout';
 import { CheckboxLegacyTest } from './TestComponents/CheckboxLegacy';
 import { CheckboxV1Test } from './TestComponents/CheckboxV1';
+import { ChipTest } from './TestComponents/Chip';
 import { ColorTokensTest } from './TestComponents/ColorTokens';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
@@ -93,6 +94,12 @@ export const tests: TestDescription[] = [
     component: CheckboxV1Test,
     testPageButton: Constants.HOMEPAGE_CHECKBOXV1_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
+  },
+  {
+    name: 'Chip',
+    component: ChipTest,
+    testPageButton: Constants.HOMEPAGE_CHIP_BUTTON,
+    platforms: ['android'],
   },
   {
     name: 'Color Tokens',

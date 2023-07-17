@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 19 Jun 2023 18:37:35 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Jul 2023 04:56:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.28.4
+
+Tue, 11 Jul 2023 04:56:58 GMT
+
+### Patches
+
+- Update waiters to not fail (ayushsinghs@yahoo.in)
+
+## 1.28.3
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.12.5
+
+## 1.28.2
+
+Fri, 07 Jul 2023 22:02:00 GMT
+
+### Patches
+
+- Disable failing Chip test to unblock CI (ruaraki@microsoft.com)
+
+## 1.28.1
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.12.4
+
+## 1.28.0
+
+Fri, 07 Jul 2023 19:45:35 GMT
+
+### Minor changes
+
+- Cleanup chip/input & uninstall task (ayushsinghs@yahoo.in)
 
 ## 1.27.2
 
