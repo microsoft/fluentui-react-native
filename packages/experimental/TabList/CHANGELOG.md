@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Mon, 10 Jul 2023 17:25:04 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jul 2023 22:28:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.0
+
+Fri, 14 Jul 2023 22:28:56 GMT
+
+### Minor changes
+
+- Port old experimental Tabs implementation, refactor props (winlarry@microsoft.com)
 
 ## 0.1.5
 

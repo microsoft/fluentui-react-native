@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Fri, 14 Jul 2023 22:28:56 GMT",
+      "tag": "@fluentui-react-native/tablist_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "35bbbb343fc27af437dd1e471c874ddf499ac9c5",
+            "comment": "Port old experimental Tabs implementation, refactor props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Jul 2023 17:25:04 GMT",
       "tag": "@fluentui-react-native/tablist_v0.1.5",
       "version": "0.1.5",

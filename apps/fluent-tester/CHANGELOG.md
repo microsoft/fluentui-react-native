@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 10 Jul 2023 23:39:34 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Jul 2023 05:40:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.151.10
+
+Mon, 17 Jul 2023 05:40:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/win32-theme to v0.27.0
+
+## 0.151.9
+
+Sat, 15 Jul 2023 23:01:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/dropdown to v0.8.12
+- Bump @fluentui-react-native/experimental-menu-button to v0.7.12
+- Bump @fluentui-react-native/menu to v1.11.11
+- Bump @fluentui/react-native to v0.37.13
+
+## 0.151.8
+
+Fri, 14 Jul 2023 23:32:22 GMT
+
+### Patches
+
+- [Callout] Fix anchor not updating when going from `target` to `anchorRect` (email not defined)
+- Bump @fluentui-react-native/dropdown to v0.8.11
+- Bump @fluentui-react-native/experimental-menu-button to v0.7.11
+- Bump @fluentui-react-native/menu to v1.11.10
+- Bump @fluentui/react-native to v0.37.12
+
+## 0.151.7
+
+Fri, 14 Jul 2023 22:28:56 GMT
+
+### Patches
+
+- Change prop names on TabList page (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tablist to v0.2.0
 
 ## 0.151.6
 

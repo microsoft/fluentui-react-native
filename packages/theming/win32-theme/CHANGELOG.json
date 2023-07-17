@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Mon, 17 Jul 2023 05:40:07 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.27.0",
+      "version": "0.27.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "2173a22e13dcf97d0513adf97b131f70ecc9e691",
+            "comment": "only set alias tokens from palette when paletteName is defined"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Jul 2023 20:45:12 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.26.2",
       "version": "0.26.2",
