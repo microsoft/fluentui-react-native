@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.151.9"
+      "version": "0.151.10"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.34.19"
+      "version": "0.34.20"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -144,7 +144,7 @@ module.exports = {
     },
     "@uifabricshared/theming-react-native": {
       "name": "@uifabricshared/theming-react-native",
-      "version": "0.18.1"
+      "version": "0.18.2"
     },
     "@fluentui-react-native/experimental-activity-indicator": {
       "name": "@fluentui-react-native/experimental-activity-indicator",
@@ -304,7 +304,7 @@ module.exports = {
     },
     "@fluentui-react-native/win32-theme": {
       "name": "@fluentui-react-native/win32-theme",
-      "version": "0.26.2"
+      "version": "0.27.0"
     },
     "@fluentui-react-native/adapters": {
       "name": "@fluentui-react-native/adapters",
