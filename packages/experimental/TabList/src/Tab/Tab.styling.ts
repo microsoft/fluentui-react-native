@@ -28,20 +28,27 @@ export const stylingSettings: UseStylingOptions<TabProps, TabSlotProps, TabToken
       (tokens: TabTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
+          marginLeft: tokens.contentMarginLeft,
+          marginRight: tokens.contentMarginRight,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['color', 'contentMarginLeft', 'contentMarginRight', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: TabTokens) => ({
         color: tokens.iconColor,
         size: tokens.iconSize,
+      }),
+      ['iconColor', 'iconSize'],
+    ),
+    iconPadding: buildProps(
+      (tokens: TabTokens) => ({
         style: {
-          marginRight: tokens.iconMargin,
+          width: tokens.iconMargin,
         },
       }),
-      ['iconColor', 'iconSize', 'iconMargin'],
+      ['iconMargin'],
     ),
     stack: buildProps(
       (tokens: TabTokens) => ({

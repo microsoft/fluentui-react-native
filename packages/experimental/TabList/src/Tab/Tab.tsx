@@ -1,11 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
+/** @jsxFrag */
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { Icon } from '@fluentui-react-native/icon';
+import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './Tab.styling';
@@ -20,9 +21,10 @@ const tabLookup = (layer: string, state: TabState, props: TabProps, tablistConte
   return (
     state[layer] ||
     props[layer] ||
+    tablistContext[layer] ||
     layer === tablistContext.appearance ||
     layer === tablistContext.size ||
-    (layer === 'vertical' && tablistContext.vertical)
+    (layer === 'hasIcon' && props.icon)
   );
 };
 
@@ -33,6 +35,7 @@ export const Tab = compose<TabType>({
     root: Pressable,
     stack: View,
     icon: Icon,
+    iconPadding: View,
     indicator: TabIndicator,
     content: Text,
   },
@@ -63,7 +66,7 @@ export const Tab = compose<TabType>({
         <Slots.root {...mergedProps}>
           <Slots.stack>
             {icon && <Slots.icon {...icon} />}
-            <Slots.content>{text}</Slots.content>
+            {text && <Slots.content>{text}</Slots.content>}
           </Slots.stack>
           <Slots.indicator />
         </Slots.root>
