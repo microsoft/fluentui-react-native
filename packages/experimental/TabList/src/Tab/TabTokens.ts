@@ -21,7 +21,6 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
   ({
     indicatorOrientation: 'horizontal',
     indicatorThickness: 2,
-    variant: 'bodyStandard',
     borderWidth: 2,
     borderRadius: 4,
     contentMarginHorizontal: 2,
@@ -36,6 +35,10 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
       indicatorInset: 8,
       stackMarginHorizontal: 6,
       stackMarginVertical: 8,
+      variant: 'body1',
+      selected: {
+        variant: 'body1Strong',
+      },
     },
     medium: {
       iconSize: 20,
@@ -43,6 +46,10 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
       indicatorInset: 12,
       stackMarginHorizontal: 10,
       stackMarginVertical: 12,
+      variant: 'body1',
+      selected: {
+        variant: 'body1Strong',
+      },
     },
     large: {
       iconSize: 24,
@@ -50,6 +57,10 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
       indicatorInset: 12,
       stackMarginHorizontal: 10,
       stackMarginVertical: 16,
+      variant: 'body2',
+      selected: {
+        variant: 'subtitle2',
+      },
     },
     vertical: {
       flexDirection: 'row-reverse',
