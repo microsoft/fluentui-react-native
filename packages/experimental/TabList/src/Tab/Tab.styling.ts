@@ -65,7 +65,7 @@ export const stylingSettings: UseStylingOptions<TabProps, TabSlotProps, TabToken
         thickness: tokens.indicatorThickness,
         vertical: tokens.indicatorOrientation === 'vertical',
       }),
-      ['indicatorColor', 'indicatorInset', 'indicatorThickness'],
+      ['indicatorColor', 'indicatorInset', 'indicatorThickness', 'indicatorOrientation'],
     ),
   },
 };
