@@ -51,12 +51,11 @@ export const stylingSettings: UseStylingOptions<TabProps, TabSlotProps, TabToken
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          opacity: tokens.tabsItemOpacity,
           marginHorizontal: tokens.stackMarginHorizontal,
           marginVertical: tokens.stackMarginVertical,
         },
       }),
-      ['tabsItemOpacity', 'stackMarginHorizontal', 'stackMarginVertical'],
+      ['stackMarginHorizontal', 'stackMarginVertical'],
     ),
     indicator: buildProps(
       (tokens: TabTokens) => ({

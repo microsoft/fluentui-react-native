@@ -18,18 +18,34 @@ import type { TabIndicatorProps } from '../TabIndicator/TabIndicator.types';
 export const tabName = 'Tab';
 
 export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens {
+  /**
+   * Horizontal margin of the tab text.
+   */
   contentMarginHorizontal?: number;
 
+  /**
+   * Controls order and direction of tab content and indicator.
+   */
   flexDirection?: ViewStyle['flexDirection'];
+
   /**
    * The indicator color.
    */
   indicatorColor?: ColorValue;
 
+  /**
+   * The horizontal / vertical margin of the indicator, depending on its orientation.
+   */
   indicatorInset?: number;
 
+  /**
+   * The direction the indicator is laying.
+   */
   indicatorOrientation?: 'horizontal' | 'vertical';
 
+  /**
+   * Thickness of the indicator line.
+   */
   indicatorThickness?: number;
 
   /**
@@ -37,6 +53,9 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
    */
   iconColor?: string;
 
+  /**
+   * If there is Tab content, this is the margin of the icon relative to the content.
+   */
   iconMargin?: number;
 
   /**
@@ -44,11 +63,15 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
    */
   iconSize?: number;
 
+  /**
+   * Horizontal margin of the icon + content.
+   */
   stackMarginHorizontal?: number;
 
+  /**
+   * Vertical margin of the icon + content.
+   */
   stackMarginVertical?: number;
-
-  tabsItemOpacity?: number;
 
   /**
    * States that can be applied to a button
