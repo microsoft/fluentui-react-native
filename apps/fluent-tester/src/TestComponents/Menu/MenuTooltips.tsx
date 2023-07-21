@@ -9,9 +9,9 @@ import { stackStyle } from '../Common/styles';
 export const MenuTooltips: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Menu hasTooltips>
+      <Menu>
         <MenuTrigger>
-          <Button>Items with tooltips</Button>
+          <Button tooltip={'I am tooltip'}>Items with tooltips</Button>
         </MenuTrigger>
         <MenuPopover maxWidth={160}>
           <MenuList>
