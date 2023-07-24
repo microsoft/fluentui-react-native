@@ -13,6 +13,8 @@ import { tabListName } from './TabList.types';
 import { useTabList } from './useTabList';
 
 export const TabListContext = React.createContext<TabListContextData>({
+  appearance: 'transparent',
+  disabled: false,
   selectedKey: '',
   onTabSelect: () => {
     return;
@@ -20,7 +22,9 @@ export const TabListContext = React.createContext<TabListContextData>({
   updateSelectedTabRef: () => {
     return;
   },
+  size: 'medium',
   tabKeys: [],
+  vertical: false,
 });
 
 export const TabList = compose<TabListType>({
@@ -36,7 +40,7 @@ export const TabList = compose<TabListType>({
     const tabs = useTabList(userProps);
 
     // Grab the styled slots.
-    const Slots = useSlots(userProps, (layer) => tabs.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps);
 
     // Return the handler to finish render.
     return (final: TabListProps, ...children: React.ReactNode[]) => {
@@ -65,7 +69,11 @@ export const TabList = compose<TabListType>({
           value={tabs.state.context}
         >
           <Slots.root {...mergedProps}>
-            <Slots.container defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
+            <Slots.container
+              disabled={final.disabled}
+              defaultTabbableElement={defaultTabbableElement}
+              isCircularNavigation={isCircularNavigation}
+            >
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
           </Slots.root>

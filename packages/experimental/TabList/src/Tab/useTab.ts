@@ -5,7 +5,7 @@ import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabProps, TabInfo } from './Tab.types';
-import { TabListContext } from './TabList';
+import { TabListContext } from '../TabList/TabList';
 
 /**
  * Re-usable hook for TabsItem.
@@ -63,6 +63,7 @@ export const useTab = (props: TabProps): TabInfo => {
       ...pressable.props,
       accessible: accessible ?? true,
       accessibilityRole: 'tab',
+      disabled: info.disabled || props.disabled || false,
       focusable: !disabled ?? true,
       accessibilityState: getAccessibilityState(disabled, info.selectedKey === tabKey),
       accessibilityActions: [{ name: 'Select' }],

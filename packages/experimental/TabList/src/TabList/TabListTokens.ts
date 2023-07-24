@@ -1,11 +1,10 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
-import type { TabListTokens } from '.';
+import type { TabListTokens } from './TabList.types';
 
-export const defaultTabListTokens: TokenSettings<TabListTokens, Theme> = (t: Theme) =>
+export const defaultTabListTokens: TokenSettings<TabListTokens, Theme> = () =>
   ({
-    backgroundColor: t.colors.transparent,
     direction: 'row',
     vertical: {
       direction: 'column',

@@ -5,25 +5,48 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { IFocusable, PressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
-import type { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import type {
+  FontTokens,
+  IBackgroundColorTokens,
+  IBorderTokens,
+  IForegroundColorTokens,
+  LayoutTokens,
+} from '@fluentui-react-native/tokens';
+
+import type { TabIndicatorProps } from '../TabIndicator/TabIndicator.types';
 
 export const tabName = 'Tab';
 
-export interface TabTokens extends FontTokens, IBorderTokens {
+export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens {
+  /**
+   * Horizontal margin of the tab text.
+   */
+  contentMarginHorizontal?: number;
+
+  /**
+   * Controls order and direction of tab content and indicator.
+   */
+  flexDirection?: ViewStyle['flexDirection'];
+
   /**
    * The indicator color.
    */
-  indicatorColor?: string;
+  indicatorColor?: ColorValue;
 
   /**
-   * The opacity of the Tab.
+   * The horizontal / vertical margin of the indicator, depending on its orientation.
    */
-  tabsItemOpacity?: number;
+  indicatorInset?: number;
 
   /**
-   * The indicator marginHorizontal value.
+   * The direction the indicator is laying.
    */
-  indicatorMarginHorizontal?: number;
+  indicatorOrientation?: 'horizontal' | 'vertical';
+
+  /**
+   * Thickness of the indicator line.
+   */
+  indicatorThickness?: number;
 
   /**
    * The icon color.
@@ -31,61 +54,34 @@ export interface TabTokens extends FontTokens, IBorderTokens {
   iconColor?: string;
 
   /**
-   * The amount of padding between the border and the headerText.
+   * If there is Tab content, this is the margin of the icon relative to the content.
    */
-  headerTextPadding?: number | string;
-
-  /**
-   * The amount of padding between the border and the headerText when the TabsItem has focus.
-   */
-  headerTextPaddingFocused?: number | string;
-  /**
-   * Background color for the button
-   */
-  backgroundColor?: ColorValue;
-
-  /**
-   * Foreground color for the text and/or icon of the button
-   */
-  color?: ColorValue;
-
-  /**
-   * The amount of padding between the border and the contents.
-   */
-  contentPadding?: number | string;
-
-  /**
-   * The amount of padding between the border and the contents when the Button has focus.
-   */
-  contentPaddingFocused?: number | string;
-
-  /**
-   * The icon color when hovering over the Button.
-   */
-  iconColorHovered?: ColorValue;
-
-  /**
-   * The icon color when the Button is being pressed.
-   */
-  iconColorPressed?: ColorValue;
+  iconMargin?: number;
 
   /**
    * The size of the icon.
    */
-  iconSize?: number | string;
+  iconSize?: number;
 
   /**
-   * The weight of the lines used when drawing the icon.
+   * Horizontal margin of the icon + content.
    */
-  iconWeight?: number;
+  stackMarginHorizontal?: number;
 
-  width?: ViewStyle['width'];
-  minHeight?: ViewStyle['minHeight'];
-  minWidth?: ViewStyle['minWidth'];
+  /**
+   * Vertical margin of the icon + content.
+   */
+  stackMarginVertical?: number;
 
   /**
    * States that can be applied to a button
    */
+  small?: TabTokens;
+  medium?: TabTokens;
+  large?: TabTokens;
+  vertical?: TabTokens;
+  transparent?: TabTokens;
+  subtle?: TabTokens;
   hovered?: TabTokens;
   focused?: TabTokens;
   pressed?: TabTokens;
@@ -130,7 +126,7 @@ export interface TabSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
   icon: IconProps;
   stack: IViewProps;
-  indicator: IViewProps;
+  indicator: TabIndicatorProps;
   content: TextProps;
 }
 

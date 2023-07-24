@@ -14,7 +14,18 @@ import type { TabListProps, TabListInfo, TabListState } from './TabList.types';
  */
 export const useTabList = (props: TabListProps): TabListInfo => {
   const defaultComponentRef = React.useRef(null);
-  const { accessible, componentRef = defaultComponentRef, isCircularNavigation, selectedKey, onTabSelect, defaultSelectedKey } = props;
+  const {
+    accessible,
+    disabled = false,
+    appearance = 'transparent',
+    componentRef = defaultComponentRef,
+    isCircularNavigation,
+    selectedKey,
+    onTabSelect,
+    defaultSelectedKey,
+    size = 'medium',
+    vertical = false,
+  } = props;
 
   const data = useSelectedKey(selectedKey || defaultSelectedKey || null, onTabSelect);
 
@@ -30,9 +41,13 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   const state: TabListState = {
     context: {
-      selectedKey: selectedKey ?? data.selectedKey,
+      appearance: appearance,
+      disabled: disabled,
       onTabSelect: data.onKeySelect,
+      selectedKey: selectedKey ?? data.selectedKey,
+      size: size,
       updateSelectedTabRef: onSelectTabRef,
+      vertical: vertical,
     },
   };
 
@@ -41,9 +56,12 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       ...props,
       accessible: accessible ?? true,
       accessibilityRole: 'tablist',
+      appearance: appearance,
       componentRef: componentRef,
       defaultTabbableElement: selectedTabRef,
       isCircularNavigation: isCircularNavigation ?? false,
+      size: size,
+      vertical: vertical,
     },
     state: { ...state },
   };

@@ -1,23 +1,108 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
+import { Divider } from '@fluentui-react-native/divider';
 import { TabList, Tab } from '@fluentui-react-native/tablist';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import type { PlatformStatus, TestSection } from '../Test';
 import { Test } from '../Test';
 
-const TabListMainTest: React.FunctionComponent = () => {
+const Header = Text.customize({ variant: 'subheaderStandard' });
+const Line = Divider.customize({ paddingVertical: 4 });
+const PaddedTabList = TabList.customize({
+  paddingVertical: 4,
+});
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 8,
+  },
+});
+
+const TabListSizeTest: React.FunctionComponent = () => {
   return (
-    <TabList>
+    <View style={styles.container}>
+      <Header>Small</Header>
+      <PaddedTabList size="small">
+        <Tab tabKey="hello">Tab 1</Tab>
+        <Tab tabKey="world">Tab 2</Tab>
+      </PaddedTabList>
+      <Line />
+      <Header>Medium (default)</Header>
+      <PaddedTabList size="medium">
+        <Tab tabKey="hello">Tab 1</Tab>
+        <Tab tabKey="world">Tab 2</Tab>
+      </PaddedTabList>
+      <Line />
+      <Header>Large</Header>
+      <PaddedTabList size="large">
+        <Tab tabKey="hello">Tab 1</Tab>
+        <Tab tabKey="world">Tab 2</Tab>
+      </PaddedTabList>
+    </View>
+  );
+};
+
+const TabListVerticalTest: React.FunctionComponent = () => {
+  return (
+    <TabList vertical>
       <Tab tabKey="hello">Tab 1</Tab>
       <Tab tabKey="world">Tab 2</Tab>
     </TabList>
   );
 };
 
+const TabListAppearanceTest: React.FunctionComponent = () => {
+  return (
+    <View style={styles.container}>
+      <Header>Transparent Appearance</Header>
+      <PaddedTabList appearance="transparent">
+        <Tab tabKey="hello">Tab 1</Tab>
+        <Tab tabKey="world">Tab 2</Tab>
+      </PaddedTabList>
+      <Header>Subtle Appearance</Header>
+      <PaddedTabList appearance="subtle">
+        <Tab tabKey="hello">Tab 1</Tab>
+        <Tab tabKey="world">Tab 2</Tab>
+      </PaddedTabList>
+    </View>
+  );
+};
+
+const TabListDisabledTest: React.FunctionComponent = () => {
+  return (
+    <View>
+      <PaddedTabList>
+        <Tab disabled tabKey="hello">
+          Tab 1
+        </Tab>
+        <Tab tabKey="world">Tab 2</Tab>
+      </PaddedTabList>
+      <PaddedTabList disabled>
+        <Tab tabKey="hello">Tab 1</Tab>
+        <Tab tabKey="world">Tab 2</Tab>
+      </PaddedTabList>
+    </View>
+  );
+};
+
 const sections: TestSection[] = [
   {
-    name: 'Main Test',
-    component: TabListMainTest,
+    name: 'Size',
+    component: TabListSizeTest,
+  },
+  {
+    name: 'Vertical',
+    component: TabListVerticalTest,
+  },
+  {
+    name: 'Appearance',
+    component: TabListAppearanceTest,
+  },
+  {
+    name: 'Disabled',
+    component: TabListDisabledTest,
   },
 ];
 
