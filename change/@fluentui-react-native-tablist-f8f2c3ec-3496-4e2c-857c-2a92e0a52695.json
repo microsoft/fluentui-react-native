@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update tokens to add new variants",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
