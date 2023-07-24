@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { AccessibilityState } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -7,17 +8,31 @@ import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocu
 import type { TabProps, TabInfo } from './Tab.types';
 import { TabListContext } from '../TabList/TabList';
 
+const defaultAccessibilityActions = [{ name: 'Select' }];
+
 /**
- * Re-usable hook for TabsItem.
- * This hook configures tabs item props and state for TabsItem.
+ * Re-usable hook for Tab.
+ * This hook configures tabs item props and state for Tab.
  *
- * @param props user props sent to TabsItem
- * @returns configured props and state for TabsItem
+ * @param props user props sent to Tab
+ * @returns configured props and state for Tab
  */
 export const useTab = (props: TabProps): TabInfo => {
   const defaultComponentRef = React.useRef<IFocusable>(null);
-  const { accessibilityLabel, accessible, componentRef = defaultComponentRef, tabKey, disabled, icon, ...rest } = props;
-  // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
+  const {
+    accessibilityActions,
+    accessibilityLabel,
+    accessibilityPositionInSet,
+    accessibilitySetSize,
+    accessibilityState,
+    accessible,
+    componentRef = defaultComponentRef,
+    disabled,
+    icon,
+    tabKey,
+    ...rest
+  } = props;
+  // Grabs the context information from Tabs (currently selected Tab and client's onTabSelect callback).
   const info = React.useContext(TabListContext);
 
   const changeSelection = React.useCallback(() => {
@@ -49,7 +64,12 @@ export const useTab = (props: TabProps): TabInfo => {
     [changeSelection],
   );
 
-  /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
+  const accessibilityActionsProp = React.useMemo(
+    () => (accessibilityActions ? [...defaultAccessibilityActions, ...accessibilityActions] : defaultAccessibilityActions),
+    [accessibilityActions],
+  );
+
+  /* We use the componentRef of the currently selected tab to maintain the default tabbable
   element in Tabs. Since the componentRef isn't generated until after initial render,
   we must update it once here. */
   React.useEffect(() => {
@@ -63,14 +83,16 @@ export const useTab = (props: TabProps): TabInfo => {
       ...pressable.props,
       accessible: accessible ?? true,
       accessibilityRole: 'tab',
-      disabled: info.disabled || props.disabled || false,
+      accessibilityActions: accessibilityActionsProp,
+      accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabKeys.findIndex((key) => key === tabKey) + 1,
+      accessibilityState: getAccessibilityState(disabled, info.selectedKey === tabKey, accessibilityState),
+      accessibilitySetSize: accessibilitySetSize ?? info.tabKeys.length,
+      disabled: info.disabled || props.disabled,
       focusable: !disabled ?? true,
-      accessibilityState: getAccessibilityState(disabled, info.selectedKey === tabKey),
-      accessibilityActions: [{ name: 'Select' }],
+      icon: icon,
       onAccessibilityAction: onAccessibilityAction,
       ref: useViewCommandFocus(componentRef),
       tabKey: tabKey,
-      icon: icon,
       ...onKeyUpProps,
     },
     state: {
@@ -81,6 +103,9 @@ export const useTab = (props: TabProps): TabInfo => {
 };
 
 const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(disabled: boolean, selected: boolean) {
+function getAccessibilityStateWorker(disabled: boolean, selected: boolean, accessibilityState?: AccessibilityState): AccessibilityState {
+  if (accessibilityState) {
+    return { disabled, selected, ...accessibilityState };
+  }
   return { disabled, selected };
 }

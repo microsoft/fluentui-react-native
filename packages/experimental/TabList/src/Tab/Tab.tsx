@@ -70,7 +70,7 @@ export const Tab = compose<TabType>({
         <Slots.root {...mergedProps}>
           <Slots.stack>
             {icon && <Slots.icon {...icon} />}
-            <Slots.content>{text}</Slots.content>
+            {text && <Slots.content accessible={false}>{text}</Slots.content>}
           </Slots.stack>
           <Slots.indicator />
         </Slots.root>

@@ -1,28 +1,30 @@
 import * as React from 'react';
-import type { View } from 'react-native';
+import type { View, AccessibilityState } from 'react-native';
 
+import { memoize } from '@fluentui-react-native/framework';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabListProps, TabListInfo, TabListState } from './TabList.types';
 
 /**
- * Re-usable hook for Tabs.
- * This hook configures tabs props and state for Tabs.
+ * Re-usable hook for TabList.
+ * This hook configures props and state for TabList.
  *
- * @param props user props sent to Tabs
- * @returns configured props and state for Tabs
+ * @param props user props sent to TabList
+ * @returns configured props and state for TabList
  */
 export const useTabList = (props: TabListProps): TabListInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
     accessible,
-    disabled = false,
     appearance = 'transparent',
+    accessibilityState,
     componentRef = defaultComponentRef,
-    isCircularNavigation,
-    selectedKey,
-    onTabSelect,
     defaultSelectedKey,
+    disabled = false,
+    isCircularNavigation,
+    onTabSelect,
+    selectedKey,
     size = 'medium',
     vertical = false,
   } = props;
@@ -55,6 +57,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     props: {
       ...props,
       accessible: accessible ?? true,
+      accessibilityState: getAccessibilityState(disabled, accessibilityState),
       accessibilityRole: 'tablist',
       appearance: appearance,
       componentRef: componentRef,
@@ -66,3 +69,11 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     state: { ...state },
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: AccessibilityState): AccessibilityState {
+  if (accessibilityState) {
+    return { disabled, ...accessibilityState };
+  }
+  return { disabled };
+}
