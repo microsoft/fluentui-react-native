@@ -42,14 +42,6 @@ export const stylingSettings: UseStylingOptions<TabProps, TabSlotProps, TabToken
       }),
       ['iconColor', 'iconSize'],
     ),
-    iconPadding: buildProps(
-      (tokens: TabTokens) => ({
-        style: {
-          width: tokens.iconMargin,
-        },
-      }),
-      ['iconMargin'],
-    ),
     stack: buildProps(
       (tokens: TabTokens) => ({
         style: {

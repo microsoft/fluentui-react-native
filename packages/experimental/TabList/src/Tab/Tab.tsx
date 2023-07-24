@@ -35,7 +35,6 @@ export const Tab = compose<TabType>({
     root: Pressable,
     stack: View,
     icon: Icon,
-    iconPadding: View,
     indicator: TabIndicator,
     content: Text,
   },
@@ -53,6 +52,7 @@ export const Tab = compose<TabType>({
         return null;
       }
 
+      // Only support text as content for now.
       let text = '';
       React.Children.forEach(children, (child) => {
         if (typeof child === 'string') {
@@ -62,11 +62,15 @@ export const Tab = compose<TabType>({
 
       const { icon, tabKey, ...mergedProps } = mergeProps(tab.props, final, { accessibilityLabel: final.accessibilityLabel || text });
 
+      if (__DEV__ && !text && !icon) {
+        console.warn('A Tab component must render content. Text, an icon, or both should at least be passed in.');
+      }
+
       return (
         <Slots.root {...mergedProps}>
           <Slots.stack>
             {icon && <Slots.icon {...icon} />}
-            {text && <Slots.content>{text}</Slots.content>}
+            <Slots.content>{text}</Slots.content>
           </Slots.stack>
           <Slots.indicator />
         </Slots.root>
