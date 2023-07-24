@@ -9,7 +9,7 @@ FluentUI React Native is still in the alpha stages of development for both the c
 Development status on each platform:
 | Windows | macOS | iOS | Android |
 |---------------------|---------------------|-------------|-------------|
-| Alpha (in progress) | Alpha (in progress) | Alpha (in progress) | Coming Soon |
+| Alpha (in progress) | Alpha (in progress) | Alpha (in progress) | Alpha (in progress) |
 
 ## Getting Started
 
