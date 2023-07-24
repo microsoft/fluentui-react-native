@@ -71,7 +71,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       },
       spacingIconContentBefore: globalTokens.size40,
       spacingIconContentAfter: globalTokens.size40,
-      minHeight: 28,
+      minHeight: 24,
       minWidth: 28,
     },
     rounded: {

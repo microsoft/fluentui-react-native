@@ -80,7 +80,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (theme: T
       },
       hasContent: {
         minWidth: 64,
-        minHeight: 32,
+        minHeight: 24,
         paddingHorizontal: globalTokens.size80 - globalTokens.stroke.width10,
         hasIconAfter: {
           spacingIconContentAfter: globalTokens.size40,
