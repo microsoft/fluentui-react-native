@@ -56,12 +56,12 @@ const TabListVerticalTest: React.FunctionComponent = () => {
 const TabListAppearanceTest: React.FunctionComponent = () => {
   return (
     <View style={styles.container}>
-      {/* <Header>Transparent Appearance</Header> */}
+      <Header>Transparent Appearance</Header>
       <PaddedTabList appearance="transparent">
         <Tab tabKey="hello">Tab 1</Tab>
         <Tab tabKey="world">Tab 2</Tab>
       </PaddedTabList>
-      {/* <Header>Subtle Appearance</Header> */}
+      <Header>Subtle Appearance</Header>
       <PaddedTabList appearance="subtle">
         <Tab tabKey="hello">Tab 1</Tab>
         <Tab tabKey="world">Tab 2</Tab>
