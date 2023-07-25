@@ -24,8 +24,8 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
     indicatorThickness: 2,
     borderWidth: 2,
     borderRadius: 4,
-    contentMarginLeft: 2,
-    contentMarginRight: 2,
+    contentMarginStart: 2,
+    contentMarginEnd: 2,
     flexDirection: 'column',
     borderColor: t.colors.transparentStroke,
     color: t.colors.neutralForeground2,
@@ -141,6 +141,6 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
       borderColor: t.colors.neutralForeground1,
     },
     hasIcon: {
-      contentMarginLeft: 8,
+      contentMarginStart: 8,
     },
   } as TabTokens);

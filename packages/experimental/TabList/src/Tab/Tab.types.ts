@@ -19,14 +19,14 @@ export const tabName = 'Tab';
 
 export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens {
   /**
-   * Horizontal left margin of the tab text. If an icon and text are both rendered, this is the margin beween the icon and text.
+   * Horizontal start margin of the tab text. If an icon and text are both rendered, this is the margin beween the icon and text.
    */
-  contentMarginLeft?: number;
+  contentMarginStart?: number;
 
   /**
-   * Horizontal right margin of the tab text.
+   * Horizontal end margin of the tab text.
    */
-  contentMarginRight?: number;
+  contentMarginEnd?: number;
 
   /**
    * Controls order and direction of tab content and indicator.
@@ -128,6 +128,7 @@ export interface TabSlotProps {
   icon: IconProps;
   stack: IViewProps;
   indicator: TabIndicatorProps;
+  contentContainer: IViewProps;
   content: TextProps;
 }
 

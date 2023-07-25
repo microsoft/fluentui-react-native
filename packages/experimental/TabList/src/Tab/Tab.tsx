@@ -36,6 +36,7 @@ export const Tab = compose<TabType>({
     stack: View,
     icon: Icon,
     indicator: TabIndicator,
+    contentContainer: View,
     content: Text,
   },
   useRender: (userProps: TabProps, useSlots: UseSlots<TabType>) => {
@@ -52,27 +53,43 @@ export const Tab = compose<TabType>({
         return null;
       }
 
-      // Only support text as content for now.
-      let text = '';
+      // Get label for Tab to use if there's no accessibilityLabel prop passed in.
+      let label = '';
+      let hasChildren = false;
       React.Children.forEach(children, (child) => {
-        if (typeof child === 'string') {
-          text = child;
+        if (child !== null) {
+          hasChildren = true;
+          if (typeof child === 'string') {
+            label = child;
+          }
         }
       });
 
       const { icon, tabKey, ...mergedProps } = mergeProps(tab.props, final, {
-        accessibilityLabel: tab.props.accessibilityLabel || final.accessibilityLabel || text,
+        accessibilityLabel: tab.props.accessibilityLabel || final.accessibilityLabel || label,
       });
 
-      if (__DEV__ && !text && !icon) {
-        console.warn('A Tab component must render content. Text, an icon, or both should at least be passed in.');
+      if (__DEV__ && !hasChildren && !icon) {
+        console.warn('A Tab component must render content. Children, an icon, or both should be passed in.');
       }
 
       return (
         <Slots.root {...mergedProps}>
           <Slots.stack>
             {icon && <Slots.icon {...icon} />}
-            {text && <Slots.content accessible={false}>{text}</Slots.content>}
+            {hasChildren && (
+              <Slots.contentContainer>
+                {React.Children.map(children, (child, i) =>
+                  typeof child === 'string' ? (
+                    <Slots.content accessible={false} key={i}>
+                      {child}
+                    </Slots.content>
+                  ) : (
+                    child
+                  ),
+                )}
+              </Slots.contentContainer>
+            )}
           </Slots.stack>
           <Slots.indicator />
         </Slots.root>
