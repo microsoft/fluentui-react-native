@@ -21,7 +21,6 @@ export const useTab = (props: TabProps): TabInfo => {
   const defaultComponentRef = React.useRef<IFocusable>(null);
   const {
     accessibilityActions,
-    accessibilityLabel,
     accessibilityPositionInSet,
     accessibilitySetSize,
     accessibilityState,
@@ -80,6 +79,7 @@ export const useTab = (props: TabProps): TabInfo => {
 
   return {
     props: {
+      ...props,
       ...pressable.props,
       accessible: accessible ?? true,
       accessibilityRole: 'tab',

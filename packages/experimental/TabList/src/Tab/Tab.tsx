@@ -60,7 +60,9 @@ export const Tab = compose<TabType>({
         }
       });
 
-      const { icon, tabKey, ...mergedProps } = mergeProps(tab.props, final, { accessibilityLabel: final.accessibilityLabel || text });
+      const { icon, tabKey, ...mergedProps } = mergeProps(tab.props, final, {
+        accessibilityLabel: tab.props.accessibilityLabel || final.accessibilityLabel || text,
+      });
 
       if (__DEV__ && !text && !icon) {
         console.warn('A Tab component must render content. Text, an icon, or both should at least be passed in.');
