@@ -254,11 +254,6 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.22.9.tgz#71cdb00a1ce3a329ce4cbec3a44f9fef35669730"
   integrity sha512-5UamI7xkUcJ3i9qVDS+KFDEK8/7oJ55/sJMB1Ge7IEapr7KfdfV/HErR+koZwOfd+SgtFKOKRhRakdg++DcJpQ==
 
-"@babel/compat-data@^7.22.9":
-  version "7.22.9"
-  resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.22.9.tgz#71cdb00a1ce3a329ce4cbec3a44f9fef35669730"
-  integrity sha512-5UamI7xkUcJ3i9qVDS+KFDEK8/7oJ55/sJMB1Ge7IEapr7KfdfV/HErR+koZwOfd+SgtFKOKRhRakdg++DcJpQ==
-
 "@babel/core@^7.1.0", "@babel/core@^7.11.6", "@babel/core@^7.12.3", "@babel/core@^7.13.16", "@babel/core@^7.19.6", "@babel/core@^7.20.0", "@babel/core@^7.8.0":
   version "7.22.9"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.22.9.tgz#bd96492c68822198f33e8a256061da3cf391f58f"
@@ -1928,16 +1923,6 @@
   dependencies:
     "@jest/types" "^29.5.0"
 
-"@jest/environment@^29.5.0":
-  version "29.5.0"
-  resolved "https://registry.yarnpkg.com/@jest/environment/-/environment-29.5.0.tgz#9152d56317c1fdb1af389c46640ba74ef0bb4c65"
-  integrity sha512-5FXw2+wD29YU1d4I2htpRX7jYnAyTRjP2CsXQdo9SAM8g3ifxWPSV0HnClSn71xwctr0U3oZIIH+dtbfmnbXVQ==
-  dependencies:
-    "@jest/fake-timers" "^29.5.0"
-    "@jest/types" "^29.5.0"
-    "@types/node" "*"
-    jest-mock "^29.5.0"
-
 "@jest/environment@^29.6.1":
   version "29.6.1"
   resolved "https://registry.yarnpkg.com/@jest/environment/-/environment-29.6.1.tgz#ee358fff2f68168394b4a50f18c68278a21fe82f"
@@ -1985,18 +1970,6 @@
     "@jest/types" "^24.9.0"
     jest-message-util "^24.9.0"
     jest-mock "^24.9.0"
-
-"@jest/fake-timers@^29.5.0":
-  version "29.5.0"
-  resolved "https://registry.yarnpkg.com/@jest/fake-timers/-/fake-timers-29.5.0.tgz#d4d09ec3286b3d90c60bdcd66ed28d35f1b4dc2c"
-  integrity sha512-9ARvuAAQcBwDAqOnglWq2zwNIRUDtk/SCkp/ToGEhFv5r86K21l+VEs0qNTaXtyiY0lEePl3kylijSYJQqdbDg==
-  dependencies:
-    "@jest/types" "^29.5.0"
-    "@sinonjs/fake-timers" "^10.0.2"
-    "@types/node" "*"
-    jest-message-util "^29.5.0"
-    jest-mock "^29.5.0"
-    jest-util "^29.5.0"
 
 "@jest/fake-timers@^29.6.1":
   version "29.6.1"
@@ -2056,13 +2029,6 @@
   integrity sha512-/l/VWsdt/aBXgjshLWOFyFt3IVdYypu5y2Wn2rOO1un6nkqIn8SLXzgIMYXFyYsRWDyF5EthmKJMIdJvk08grg==
   dependencies:
     "@sinclair/typebox" "^0.24.1"
-
-"@jest/schemas@^29.4.3":
-  version "29.4.3"
-  resolved "https://registry.yarnpkg.com/@jest/schemas/-/schemas-29.4.3.tgz#39cf1b8469afc40b6f5a2baaa146e332c4151788"
-  integrity sha512-VLYKXQmtmuEz6IxJsrZwzG9NvtkQsWNnWMsKxqWNu3+CnfzJQhp0WDDKWLVV9hLKr0l3SLLFRqcYHjhtyuDVxg==
-  dependencies:
-    "@sinclair/typebox" "^0.25.16"
 
 "@jest/schemas@^29.6.0":
   version "29.6.0"
@@ -2865,15 +2831,15 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.10.tgz#339c7bfc6e1d9a5e934122eaaa7767dc1c5fb725"
   integrity sha512-EvAlHmPEPOwvbP6Pjg/gtDV3XJzIjIxr10fXFNlX5r9HeHw582G1Zt2o8FLyB718nOttgj8HYUTGxvhu4N65sQ==
 
-"@react-native-windows/cli@0.71.11":
-  version "0.71.11"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.71.11.tgz#a528d97b55547c2670912038a5c7041b28370f7b"
-  integrity sha512-tGRX9cFMUCzQstV+PZyIehMvsMHesscaNcUEVsUaBFDN7tLAyN/lOL1oJ9bUljHOr7Kc7/cqoHpYU+Ac8LspbA==
+"@react-native-windows/cli@0.71.13":
+  version "0.71.13"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.71.13.tgz#d330cae194fe9dddf41d33b4ec14e761ce4030d5"
+  integrity sha512-7u24+sxh0RuTZGGXvNNsH0PF9kktmpNH7g+iUGjLVvJIC50aiU2l+OsBfWq2vqsDjnm4O0oVtiPoYXQfdn1rKw==
   dependencies:
-    "@react-native-windows/codegen" "0.71.5"
+    "@react-native-windows/codegen" "0.71.6"
     "@react-native-windows/fs" "0.71.3"
     "@react-native-windows/package-utils" "0.71.3"
-    "@react-native-windows/telemetry" "0.71.5"
+    "@react-native-windows/telemetry" "0.71.6"
     "@xmldom/xmldom" "^0.7.7"
     chalk "^4.1.0"
     cli-spinners "^2.2.0"
@@ -2892,10 +2858,10 @@
     xml-parser "^1.2.1"
     xpath "^0.0.27"
 
-"@react-native-windows/codegen@0.71.5":
-  version "0.71.5"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/codegen/-/codegen-0.71.5.tgz#6be9910012158e4798dcaf9dd0bd8ffac4cd6e01"
-  integrity sha512-ziQsYW8gOyFwrs2HOnjdmObDEz8/eY6L8xEAMJNkDjgUEDQh/d9/PeeLlSDjE+Ts2YBgKONDrBAMQ9QWbtaHLw==
+"@react-native-windows/codegen@0.71.6":
+  version "0.71.6"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/codegen/-/codegen-0.71.6.tgz#7af49d52022fbe650fc11ca6f7a9b1c0ea6bcfad"
+  integrity sha512-84JWi5RIx+M6OfMQP+8+XNWiFvsHow0bsXE1Cq5OXO7Agynn6QkLUCjZJ8zEw+zqG9z/T4NkPM70xfL3QXanHQ==
   dependencies:
     "@react-native-windows/fs" "0.71.3"
     chalk "^4.1.0"
@@ -2929,10 +2895,10 @@
     get-monorepo-packages "^1.2.0"
     lodash "^4.17.15"
 
-"@react-native-windows/telemetry@0.71.5":
-  version "0.71.5"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/telemetry/-/telemetry-0.71.5.tgz#f072f9617cfc7e91d972c33a73e3d660bc21a36c"
-  integrity sha512-jcOLi2Wy2Mr3bAin/FCFy3vXAIoiq+JqvfDjJIuBKwQOZ55PJ1SiPjXqR8jg/omVWUODVyMPzwH1ZH5GMp/oXw==
+"@react-native-windows/telemetry@0.71.6":
+  version "0.71.6"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/telemetry/-/telemetry-0.71.6.tgz#e8d9093a4e22a83b132f15c5b68d35d559506580"
+  integrity sha512-mNlQRmBkaZv90Rr76RuEbKlpAU0x3GojTfazUa3aMREd5/jACoYXCpQ0jF3tSpsiVCk03xIE72PF6l23ozs4vA==
   dependencies:
     "@react-native-windows/fs" "0.71.3"
     "@xmldom/xmldom" "^0.7.7"
@@ -3206,11 +3172,6 @@
   version "0.24.51"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.51.tgz#645f33fe4e02defe26f2f5c0410e1c094eac7f5f"
   integrity sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==
-
-"@sinclair/typebox@^0.25.16":
-  version "0.25.24"
-  resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.25.24.tgz#8c7688559979f7079aacaf31aa881c3aa410b718"
-  integrity sha512-XJfwUVUKDHF5ugKwIcxEgc9k8b7HbznCp6eUfWgu710hMPNIO4aw4/zB5RogDQz8nd6gyCDpU9O/m6qYEWY6yQ==
 
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
@@ -9149,19 +9110,7 @@ jest-each@^29.6.1:
     jest-util "^29.6.1"
     pretty-format "^29.6.1"
 
-jest-environment-node@^29.2.1:
-  version "29.5.0"
-  resolved "https://registry.yarnpkg.com/jest-environment-node/-/jest-environment-node-29.5.0.tgz#f17219d0f0cc0e68e0727c58b792c040e332c967"
-  integrity sha512-ExxuIK/+yQ+6PRGaHkKewYtg6hto2uGCgvKdb2nfJfKXgZ17DfXjvbZ+jA1Qt9A8EQSfPnt5FKIfnOO3u1h9qw==
-  dependencies:
-    "@jest/environment" "^29.5.0"
-    "@jest/fake-timers" "^29.5.0"
-    "@jest/types" "^29.5.0"
-    "@types/node" "*"
-    jest-mock "^29.5.0"
-    jest-util "^29.5.0"
-
-jest-environment-node@^29.6.1:
+jest-environment-node@^29.2.1, jest-environment-node@^29.6.1:
   version "29.6.1"
   resolved "https://registry.yarnpkg.com/jest-environment-node/-/jest-environment-node-29.6.1.tgz#08a122dece39e58bc388da815a2166c58b4abec6"
   integrity sha512-ZNIfAiE+foBog24W+2caIldl4Irh8Lx1PUhg/GZ0odM1d/h2qORAsejiFc7zb+SEmYPn1yDZzEDSU5PmDkmVLQ==
@@ -9334,15 +9283,6 @@ jest-mock@^24.9.0:
   integrity sha512-3BEYN5WbSq9wd+SyLDES7AHnjH9A/ROBwmz7l2y+ol+NtSFO8DYiEBzoO1CeFc9a8DYy10EO4dDFVv/wN3zl1w==
   dependencies:
     "@jest/types" "^24.9.0"
-
-jest-mock@^29.5.0:
-  version "29.5.0"
-  resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-29.5.0.tgz#26e2172bcc71d8b0195081ff1f146ac7e1518aed"
-  integrity sha512-GqOzvdWDE4fAV2bWQLQCkujxYWL7RxjCnj71b5VhDAGOevB3qj3Ovg26A5NI84ZpODxyzaozXLOh2NCgkbvyaw==
-  dependencies:
-    "@jest/types" "^29.5.0"
-    "@types/node" "*"
-    jest-util "^29.5.0"
 
 jest-mock@^29.6.1:
   version "29.6.1"
@@ -11839,16 +11779,7 @@ pretty-format@^28.1.3:
     ansi-styles "^5.0.0"
     react-is "^18.0.0"
 
-pretty-format@^29.0.0, pretty-format@^29.5.0:
-  version "29.5.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.5.0.tgz#283134e74f70e2e3e7229336de0e4fce94ccde5a"
-  integrity sha512-V2mGkI31qdttvTFX7Mt4efOqHXqJWMu4/r66Xh3Z3BwZaPfPJgp6/gbwoujRpPUtfEF6AUUWx3Jim3GCw5g/Qw==
-  dependencies:
-    "@jest/schemas" "^29.4.3"
-    ansi-styles "^5.0.0"
-    react-is "^18.0.0"
-
-pretty-format@^29.6.1:
+pretty-format@^29.0.0, pretty-format@^29.5.0, pretty-format@^29.6.1:
   version "29.6.1"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.6.1.tgz#ec838c288850b7c4f9090b867c2d4f4edbfb0f3e"
   integrity sha512-7jRj+yXO0W7e4/tSJKoR7HRIHLPPjtNaUGG2xxKQnGvPNRkgWcQ0AZX6P4KBRJN4FcTBWb3sa7DVUJmocYuoog==
@@ -12173,16 +12104,16 @@ react-native-test-app@^2.2.1:
     uuid "^8.3.2"
 
 react-native-windows@^0.71.0:
-  version "0.71.23"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.23.tgz#464e422d20116a7665ed384a20fbafc9feb8cbe8"
-  integrity sha512-hXzN+8RIzIk49wAMYnuZd1ZDTFC7lZdb+jdebe42gFlhxDNhHllyV99r58ppQaZ5FPusitoW2sRiM48ECcEWKA==
+  version "0.71.25"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.25.tgz#4a0f95b323c51869b481c3379616d4a00cf70ead"
+  integrity sha512-sj0oqOKzASIKSmedzkMwnA25Ss2QE6hZ78KW+Ck99iuq2YmNE2STCSAThQkHbSJHEg5lh1VsXtXrLMZiGLnEGQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.4"
     "@react-native-community/cli-platform-android" "10.2.0"
     "@react-native-community/cli-platform-ios" "10.2.4"
-    "@react-native-windows/cli" "0.71.11"
+    "@react-native-windows/cli" "0.71.13"
     "@react-native/assets" "1.0.0"
     "@react-native/normalize-color" "2.1.0"
     "@react-native/polyfills" "2.0.0"
