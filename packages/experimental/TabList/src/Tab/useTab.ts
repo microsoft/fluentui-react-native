@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { AccessibilityState } from 'react-native';
+import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -28,6 +28,7 @@ export const useTab = (props: TabProps): TabInfo => {
     componentRef = defaultComponentRef,
     disabled,
     icon,
+    onAccessibilityAction,
     tabKey,
     ...rest
   } = props;
@@ -52,15 +53,18 @@ export const useTab = (props: TabProps): TabInfo => {
   const onKeyUpProps = useKeyProps(changeSelection, ' ', 'Enter');
 
   // Used when creating accessibility properties in mergeSettings below.
-  const onAccessibilityAction = React.useCallback(
-    (event: { nativeEvent: { actionName: any } }) => {
-      switch (event.nativeEvent.actionName) {
-        case 'Select':
-          changeSelection();
-          break;
+  const onAccessibilityActionProp = React.useCallback(
+    (event: AccessibilityActionEvent) => {
+      if (!disabled) {
+        switch (event.nativeEvent.actionName) {
+          case 'Select':
+            changeSelection();
+            break;
+        }
+        onAccessibilityAction && onAccessibilityAction(event);
       }
     },
-    [changeSelection],
+    [changeSelection, disabled, onAccessibilityAction],
   );
 
   const accessibilityActionsProp = React.useMemo(
@@ -90,7 +94,7 @@ export const useTab = (props: TabProps): TabInfo => {
       disabled: info.disabled || props.disabled,
       focusable: !disabled ?? true,
       icon: icon,
-      onAccessibilityAction: onAccessibilityAction,
+      onAccessibilityAction: onAccessibilityActionProp,
       ref: useViewCommandFocus(componentRef),
       tabKey: tabKey,
       ...onKeyUpProps,
