@@ -12102,9 +12102,9 @@ react-native-test-app@^2.2.1:
     uuid "^8.3.2"
 
 react-native-windows@^0.71.0:
-  version "0.71.25"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.25.tgz#4a0f95b323c51869b481c3379616d4a00cf70ead"
-  integrity sha512-sj0oqOKzASIKSmedzkMwnA25Ss2QE6hZ78KW+Ck99iuq2YmNE2STCSAThQkHbSJHEg5lh1VsXtXrLMZiGLnEGQ==
+  version "0.71.26"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.71.26.tgz#9c27a47e61522b2817547e066849209efba558c3"
+  integrity sha512-XdUSnNM9X/v5hWk08ZCkm20i2aJR8ObPWFFbFyQbON0T86UZolnIVHMWQYX4JRe3lzlbiTrXInVZJGymuQTY2Q==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
