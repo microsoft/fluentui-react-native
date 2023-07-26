@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Tokenize for ios",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
