@@ -30,6 +30,7 @@ const radioGroupV1Sections: TestSection[] = [
   },
   ...Platform.select({
     android: [null],
+    ios: [null],
     native: [
       {
         name: 'RadioGroup with Label Subtext',
