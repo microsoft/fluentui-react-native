@@ -24,6 +24,16 @@ export const stylingSettings: UseStylingOptions<TabProps, TabSlotProps, TabToken
       }),
       ['flexDirection', 'backgroundColor', ...borderStyles.keys],
     ),
+    contentContainer: buildProps(
+      (tokens: TabTokens) => ({
+        style: {
+          flexDirection: 'row',
+          paddingStart: tokens.contentMarginStart,
+          paddingEnd: tokens.contentMarginEnd,
+        },
+      }),
+      ['contentMarginEnd', 'contentMarginStart'],
+    ),
     content: buildProps(
       (tokens: TabTokens, theme: Theme) => ({
         style: {
@@ -37,11 +47,8 @@ export const stylingSettings: UseStylingOptions<TabProps, TabSlotProps, TabToken
       (tokens: TabTokens) => ({
         color: tokens.iconColor,
         size: tokens.iconSize,
-        style: {
-          marginRight: tokens.iconMargin,
-        },
       }),
-      ['iconColor', 'iconSize', 'iconMargin'],
+      ['iconColor', 'iconSize'],
     ),
     stack: buildProps(
       (tokens: TabTokens) => ({

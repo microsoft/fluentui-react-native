@@ -87,6 +87,23 @@ const TabListDisabledTest: React.FunctionComponent = () => {
   );
 };
 
+const TabListIconTest: React.FunctionComponent = () => {
+  const iconProp = {
+    fontSource: {
+      fontFamily: 'Arial',
+      codepoint: 0x2663,
+    },
+  };
+  return (
+    <TabList>
+      <Tab icon={iconProp} tabKey="withIcon">
+        Tab Item
+      </Tab>
+      <Tab icon={iconProp} tabKey="iconOnly" />
+    </TabList>
+  );
+};
+
 const sections: TestSection[] = [
   {
     name: 'Size',
@@ -103,6 +120,10 @@ const sections: TestSection[] = [
   {
     name: 'Disabled',
     component: TabListDisabledTest,
+  },
+  {
+    name: 'Icon',
+    component: TabListIconTest,
   },
 ];
 

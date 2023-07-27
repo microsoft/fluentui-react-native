@@ -19,9 +19,14 @@ export const tabName = 'Tab';
 
 export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens {
   /**
-   * Horizontal margin of the tab text.
+   * Horizontal start margin of the tab text. If an icon and text are both rendered, this is the margin beween the icon and text.
    */
-  contentMarginHorizontal?: number;
+  contentMarginStart?: number;
+
+  /**
+   * Horizontal end margin of the tab text.
+   */
+  contentMarginEnd?: number;
 
   /**
    * Controls order and direction of tab content and indicator.
@@ -54,11 +59,6 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   iconColor?: string;
 
   /**
-   * If there is Tab content, this is the margin of the icon relative to the content.
-   */
-  iconMargin?: number;
-
-  /**
    * The size of the icon.
    */
   iconSize?: number;
@@ -87,6 +87,7 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   pressed?: TabTokens;
   disabled?: TabTokens;
   selected?: TabTokens;
+  hasIcon?: TabTokens;
 }
 
 export interface TabProps extends Omit<PressablePropsExtended, 'onPress'> {
@@ -127,6 +128,7 @@ export interface TabSlotProps {
   icon: IconProps;
   stack: IViewProps;
   indicator: TabIndicatorProps;
+  contentContainer: IViewProps;
   content: TextProps;
 }
 

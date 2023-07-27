@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -31,7 +31,6 @@ export const TabList = compose<TabListType>({
   displayName: tabListName,
   ...stylingSettings,
   slots: {
-    root: Pressable,
     container: FocusZone,
     stack: View,
   },
@@ -48,7 +47,7 @@ export const TabList = compose<TabListType>({
         return null;
       }
 
-      const { defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
+      const { disabled, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
 
       // Populate the tabKeys array.
       if (children) {
@@ -68,15 +67,9 @@ export const TabList = compose<TabListType>({
           // Passes in the selected key and a hook function to update the newly selected tab and call the client's onTabsClick callback.
           value={tabs.state.context}
         >
-          <Slots.root {...mergedProps}>
-            <Slots.container
-              disabled={final.disabled}
-              defaultTabbableElement={defaultTabbableElement}
-              isCircularNavigation={isCircularNavigation}
-            >
-              <Slots.stack>{children}</Slots.stack>
-            </Slots.container>
-          </Slots.root>
+          <Slots.container disabled={disabled} defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
+            <Slots.stack {...mergedProps}>{children}</Slots.stack>
+          </Slots.container>
         </TabListContext.Provider>
       );
     };

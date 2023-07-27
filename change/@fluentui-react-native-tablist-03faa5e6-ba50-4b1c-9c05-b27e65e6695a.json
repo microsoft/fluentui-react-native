@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix keyboarding, a11y, and icon rendering for TabList and Tab",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

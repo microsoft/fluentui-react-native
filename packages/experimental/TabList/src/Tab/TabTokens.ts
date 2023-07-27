@@ -15,6 +15,7 @@ export const tabStates: (keyof TabTokens)[] = [
   'pressed',
   'transparent',
   'subtle',
+  'hasIcon',
 ];
 
 export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
@@ -23,7 +24,8 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
     indicatorThickness: 2,
     borderWidth: 2,
     borderRadius: 4,
-    contentMarginHorizontal: 2,
+    contentMarginStart: 2,
+    contentMarginEnd: 2,
     flexDirection: 'column',
     borderColor: t.colors.transparentStroke,
     color: t.colors.neutralForeground2,
@@ -137,5 +139,8 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
     },
     focused: {
       borderColor: t.colors.neutralForeground1,
+    },
+    hasIcon: {
+      contentMarginStart: 8,
     },
   } as TabTokens);

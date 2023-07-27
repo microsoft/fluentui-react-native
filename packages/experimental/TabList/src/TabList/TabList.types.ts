@@ -116,9 +116,8 @@ export interface TabListInfo {
   state: TabListState;
 }
 export interface TabListSlotProps {
-  root: React.PropsWithRef<IViewProps>;
   container?: FocusZoneProps;
-  stack: IViewProps;
+  stack: React.PropsWithRef<IViewProps>;
 }
 
 export interface TabListType {
