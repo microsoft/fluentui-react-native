@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Thu, 27 Jul 2023 18:43:21 GMT",
+      "version": "0.3.1",
+      "tag": "@fluentui-react-native/tablist_v0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "a821985bb93f52185950c9b04db3f9c157331007",
+            "comment": "Fix keyboarding, a11y, and icon rendering for TabList and Tab"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 24 Jul 2023 19:01:40 GMT",
       "tag": "@fluentui-react-native/tablist_v0.3.0",
       "version": "0.3.0",

@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 24 Jul 2023 19:01:40 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Jul 2023 18:43:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.151.13
+
+Thu, 27 Jul 2023 18:43:21 GMT
+
+### Patches
+
+- Add Icon examples for TabList (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tablist to v0.3.1
 
 ## 0.151.12
 

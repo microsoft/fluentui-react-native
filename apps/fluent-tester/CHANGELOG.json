@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 27 Jul 2023 18:43:21 GMT",
+      "version": "0.151.13",
+      "tag": "@fluentui-react-native/tester_v0.151.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "a821985bb93f52185950c9b04db3f9c157331007",
+            "comment": "Add Icon examples for TabList"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/tablist to v0.3.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 24 Jul 2023 19:01:40 GMT",
       "tag": "@fluentui-react-native/tester_v0.151.12",
       "version": "0.151.12",
