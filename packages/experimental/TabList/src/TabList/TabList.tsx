@@ -13,18 +13,7 @@ import { tabListName } from './TabList.types';
 import { useTabList } from './useTabList';
 
 export const TabListContext = React.createContext<TabListContextData>({
-  appearance: 'transparent',
-  disabled: false,
   selectedKey: '',
-  onTabSelect: () => {
-    return;
-  },
-  updateSelectedTabRef: () => {
-    return;
-  },
-  size: 'medium',
-  tabKeys: [],
-  vertical: false,
 });
 
 export const TabList = compose<TabListType>({
@@ -36,36 +25,23 @@ export const TabList = compose<TabListType>({
   },
   useRender: (userProps: TabListProps, useSlots: UseSlots<TabListType>) => {
     // configure props and state for tabs based on user props
-    const tabs = useTabList(userProps);
+    const tablist = useTabList(userProps);
 
     // Grab the styled slots.
     const Slots = useSlots(userProps);
 
     // Return the handler to finish render.
     return (final: TabListProps, ...children: React.ReactNode[]) => {
-      if (!tabs.state) {
+      if (!tablist.state) {
         return null;
       }
 
-      const { disabled, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
-
-      // Populate the tabKeys array.
-      if (children) {
-        tabs.state.context.tabKeys = React.Children.map(children, (child: React.ReactNode) => {
-          if (React.isValidElement(child)) {
-            // Sets default selected tab.
-            if (tabs.state?.context.selectedKey == null && !child.props.disabled) {
-              tabs.state.context.selectedKey = child.props.tabKey;
-            }
-            return child.props.tabKey;
-          }
-        });
-      }
+      const { disabled, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tablist.props, final);
 
       return (
         <TabListContext.Provider
           // Passes in the selected key and a hook function to update the newly selected tab and call the client's onTabsClick callback.
-          value={tabs.state.context}
+          value={tablist.state.context}
         >
           <Slots.container disabled={disabled} defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
             <Slots.stack {...mergedProps}>{children}</Slots.stack>
