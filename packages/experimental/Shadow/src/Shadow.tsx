@@ -156,7 +156,6 @@ function withObjectAssign(object, [key, value]) {
 
 const removeUndefinedProperties = (object: ViewStyle) => {
   return Object.entries(object).reduce(withObjectAssign, {});
-  //return Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null));
 };
 
 Shadow.displayName = shadowName;
