@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 31 Jul 2023 21:34:43 GMT",
+      "version": "0.151.15",
+      "tag": "@fluentui-react-native/tester_v0.151.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4a4b9b694c7bc696914467028b00c2c7477fb531",
+            "comment": "Update podfile lock"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 31 Jul 2023 19:29:59 GMT",
       "version": "0.151.14",
       "tag": "@fluentui-react-native/tester_v0.151.14",
