@@ -25,23 +25,23 @@ export const TabList = compose<TabListType>({
   },
   useRender: (userProps: TabListProps, useSlots: UseSlots<TabListType>) => {
     // configure props and state for tabs based on user props
-    const tablist = useTabList(userProps);
+    const tabList = useTabList(userProps);
 
     // Grab the styled slots.
     const Slots = useSlots(userProps);
 
     // Return the handler to finish render.
     return (final: TabListProps, ...children: React.ReactNode[]) => {
-      if (!tablist.state) {
+      if (!tabList.state) {
         return null;
       }
 
-      const { disabled, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tablist.props, final);
+      const { disabled, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabList.props, final);
 
       return (
         <TabListContext.Provider
           // Passes in the selected key and a hook function to update the newly selected tab and call the client's onTabsClick callback.
-          value={tablist.state.context}
+          value={tabList.state.context}
         >
           <Slots.container disabled={disabled} defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
             <Slots.stack {...mergedProps}>{children}</Slots.stack>

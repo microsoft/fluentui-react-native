@@ -38,7 +38,7 @@ export interface TabListContextData {
   onTabSelect?: (key: string) => void;
 
   /**
-   * Method to remove a tabKey from a context's `tabKeys` list. Run once when the tab umounts.
+   * Method to remove a tabKey from a context's `tabKeys` list. Run once when the tab unmounts.
    */
   removeTabKey?: (tabKey: string) => void;
 
