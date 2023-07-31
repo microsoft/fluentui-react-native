@@ -186,17 +186,21 @@ describe('Menu component tests', () => {
       .create(
         <Menu>
           <MenuTrigger>
-            <Button tooltip='A Tooltip'>Button</Button>
+            <Button tooltip="A Tooltip">Button</Button>
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
               <MenuItem>Test</MenuItem>
-              <MenuItem tooltip='Second'>With Tooltip</MenuItem>
-              <MenuItemRadio name='Radio' tooltip='Third'>Radio Tooltip</MenuItemRadio>
-              <MenuItemCheckbox name='Check' tooltip='Fourth'>Checkbox Tooltip</MenuItemCheckbox>
+              <MenuItem tooltip="Second">With Tooltip</MenuItem>
+              <MenuItemRadio name="Radio" tooltip="Third">
+                Radio Tooltip
+              </MenuItemRadio>
+              <MenuItemCheckbox name="Check" tooltip="Fourth">
+                Checkbox Tooltip
+              </MenuItemCheckbox>
             </MenuList>
           </MenuPopover>
-        </Menu>
+        </Menu>,
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
