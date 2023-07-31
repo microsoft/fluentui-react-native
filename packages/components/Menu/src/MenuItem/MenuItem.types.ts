@@ -85,7 +85,7 @@ export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * Display the tooltip if one exists
    * Note the capital "T" in tip as it is needed to match the same prop name in win32 where this is read
-   * @platform windows, win32
+   * @platform win32
    */
   alwaysShowToolTip?: boolean;
 }
