@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Mon, 31 Jul 2023 19:29:59 GMT",
+      "version": "0.11.3",
+      "tag": "@fluentui-react-native/framework_v0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.19.4",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 18 Jul 2023 19:09:32 GMT",
       "tag": "@fluentui-react-native/framework_v0.11.2",
       "version": "0.11.2",

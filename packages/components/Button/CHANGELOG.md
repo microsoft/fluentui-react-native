@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 18 Jul 2023 19:09:32 GMT and should not be manually modified.
+This log was last generated on Mon, 31 Jul 2023 19:29:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.34.7
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.14.4
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.8.4
+- Bump @fluentui-react-native/experimental-shadow to v0.4.5
+- Bump @fluentui-react-native/framework to v0.11.3
+- Bump @fluentui-react-native/icon to v0.19.5
+- Bump @fluentui-react-native/interactive-hooks to v0.24.5
+- Bump @fluentui-react-native/pressable to v0.10.6
+- Bump @fluentui-react-native/text to v0.21.5
 
 ## 0.34.6
 
