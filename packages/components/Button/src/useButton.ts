@@ -29,6 +29,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     loading,
     enableFocusRing,
     focusable,
+    alwaysShowToolTip,
     ...rest
   } = props;
 
@@ -106,6 +107,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
       iconPosition: props.iconPosition || 'before',
       loading,
       onLayout: onLayoutInner,
+      alwaysShowToolTip,
     },
     state: {
       ...pressable.state,

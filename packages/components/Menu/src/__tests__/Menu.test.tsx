@@ -180,6 +180,27 @@ describe('Menu component tests', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it('Menu alwaysShowToolTip', () => {
+    const tree = renderer
+      .create(
+        <Menu>
+          <MenuTrigger>
+            <Button tooltip='A Tooltip'>Button</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItem>Test</MenuItem>
+              <MenuItem tooltip='Second'>With Tooltip</MenuItem>
+              <MenuItemRadio name='Radio' tooltip='Third'>Radio Tooltip</MenuItemRadio>
+              <MenuItemCheckbox name='Check' tooltip='Fourth'>Checkbox Tooltip</MenuItemCheckbox>
+            </MenuList>
+          </MenuPopover>
+        </Menu>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
 
 it('Menu open menu group and menu header', () => {
