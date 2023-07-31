@@ -36,14 +36,19 @@ export const TabList = compose<TabListType>({
         return null;
       }
 
-      const { disabled, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabList.props, final);
+      const { disabled, defaultTabbableElement, isCircularNavigation, vertical, ...mergedProps } = mergeProps(tabList.props, final);
 
       return (
         <TabListContext.Provider
           // Passes in the selected key and a hook function to update the newly selected tab and call the client's onTabsClick callback.
           value={tabList.state.context}
         >
-          <Slots.container disabled={disabled} defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
+          <Slots.container
+            disabled={disabled}
+            defaultTabbableElement={defaultTabbableElement}
+            focusZoneDirection={vertical ? 'vertical' : 'horizontal'}
+            isCircularNavigation={isCircularNavigation}
+          >
             <Slots.stack {...mergedProps}>{children}</Slots.stack>
           </Slots.container>
         </TabListContext.Provider>

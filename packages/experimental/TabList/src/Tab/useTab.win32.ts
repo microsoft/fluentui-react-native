@@ -39,7 +39,7 @@ export const useTab = (props: TabProps): TabInfo => {
   const isDisabled = disabled || tablist.disabled;
 
   const changeSelection = React.useCallback(() => {
-    if (tabKey != selectedKey) {
+    if (tabKey !== selectedKey) {
       onTabSelect && onTabSelect(tabKey);
       setSelectedTabRef && componentRef && setSelectedTabRef(componentRef);
     }
