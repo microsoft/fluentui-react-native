@@ -4546,7 +4546,7 @@ appdirsjs@^1.2.4:
   resolved "https://registry.yarnpkg.com/appdirsjs/-/appdirsjs-1.2.7.tgz#50b4b7948a26ba6090d4aede2ae2dc2b051be3b3"
   integrity sha512-Quji6+8kLBC3NnBeo14nPDq0+2jUs5s3/xEye+udFHumHhRk4M7aAMXp/PBJqkKYGuuyR9M/6Dq7d2AViiGmhw==
 
-appium-adb@^9.11.2, appium-adb@^9.13.1:
+appium-adb@^9.11.2, appium-adb@^9.13.1, appium-adb@^9.14.1:
   version "9.14.2"
   resolved "https://registry.yarnpkg.com/appium-adb/-/appium-adb-9.14.2.tgz#64f9e930638cc3d7c10ca72dae555dc390b00515"
   integrity sha512-RJ3C5FOkPAYLcfk43JtLuT+7f39xozRBxX6yn1GKwf6a9BdDiQ0aqd8n5E2ETtXbRKl5mO0BnUE+allohkMPyA==
@@ -4587,19 +4587,20 @@ appium-android-driver@^5.14.0:
     teen_process "^2.0.0"
     ws "^8.0.0"
 
-appium-chromedriver@^5.2.0, appium-chromedriver@^5.3.1:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/appium-chromedriver/-/appium-chromedriver-5.4.0.tgz#ba125b3427d7d826566f84a0b9e134eee67c0a74"
-  integrity sha512-eKRj7STFpLS1rxWMcwfeRPpy6E2Q2B3uTf4MbHbI6543x0bWQPn7EOtDit5J1Ov8/Vdgf8QwkcAo9oA4Pk8S0A==
+appium-chromedriver@^5.2.0, appium-chromedriver@^5.6.1:
+  version "5.6.1"
+  resolved "https://registry.yarnpkg.com/appium-chromedriver/-/appium-chromedriver-5.6.1.tgz#892f2c0d435c604fd0870b217fe785e30e0118aa"
+  integrity sha512-EgRIzi3VjbuoFukePAeWzQvgTxLNUI1h9x0aMMlQwgB/khScZGRS1IPxQzgahTM6zpDULJ0Q0uTc55WY9r31dg==
   dependencies:
     "@appium/base-driver" "^9.1.0"
-    "@appium/support" "^3.0.0"
+    "@appium/support" "^4.0.0"
     "@babel/runtime" "^7.0.0"
     "@xmldom/xmldom" "^0.x"
+    appium-adb "^9.14.1"
     asyncbox "^2.0.2"
     axios "^1.x"
     bluebird "^3.5.1"
-    compare-versions "^5.0.0"
+    compare-versions "^6.0.0"
     fancy-log "^2.0.0"
     lodash "^4.17.4"
     semver "^7.0.0"
@@ -4687,14 +4688,14 @@ appium-remote-debugger@^9.1.1:
     teen_process "^2.0.0"
 
 appium-uiautomator2-driver@^2.12.3:
-  version "2.29.2"
-  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.29.2.tgz#88e7042a4da1cdde849fff01b5b04176b7197e73"
-  integrity sha512-9hwGsTfoZN0ETRMK3KjwviW+PF+GSovUGJkFmvBYO+Nfu3v++W30QezQnULrE4GCwOpf2Zs26DwMF2aNL2/ACA==
+  version "2.29.3"
+  resolved "https://registry.yarnpkg.com/appium-uiautomator2-driver/-/appium-uiautomator2-driver-2.29.3.tgz#726d4a3668091cf0ceb1254144fdd6a8de538da7"
+  integrity sha512-FXaSCCLnaBhy8RIgmx0DOICBFKBVylZ/e4Tr8I4IK8NrAQU2RhxE9x0mD39yTG9A8Sjxc2B5ZCeZNx0rocRtZQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     appium-adb "^9.13.1"
     appium-android-driver "^5.14.0"
-    appium-chromedriver "^5.3.1"
+    appium-chromedriver "^5.6.1"
     appium-uiautomator2-server "^5.12.2"
     asyncbox "^2.3.1"
     axios "^1.x"
@@ -6128,10 +6129,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==
 
-compare-versions@^5.0.0:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-5.0.3.tgz#a9b34fea217472650ef4a2651d905f42c28ebfd7"
-  integrity sha512-4UZlZP8Z99MGEY+Ovg/uJxJuvoXuN4M6B3hKaiackiHrgzQFEe3diJi1mf1PNHbFujM7FvLrK2bpgIaImbtZ1A==
+compare-versions@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-6.0.0.tgz#a3edb527e4487bfab9a8b62ffe70cebc9b87675b"
+  integrity sha512-s2MzYxfRsE9f/ow8hjn7ysa7pod1xhHdQMsgiJtKx6XSNf4x2N1KG4fjrkUmXcP/e9Y2ZX4zB6sHIso0Lm6evQ==
 
 compress-commons@^4.1.0:
   version "4.1.1"
@@ -13085,7 +13086,7 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-shell-quote@1.7.3, shell-quote@1.8.0, shell-quote@^1.6.1, shell-quote@^1.7.3:
+shell-quote@1.7.3, shell-quote@1.8.0, shell-quote@1.8.1, shell-quote@^1.6.1, shell-quote@^1.7.3:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.8.0.tgz#20d078d0eaf71d54f43bd2ba14a1b5b9bfa5c8ba"
   integrity sha512-QHsz8GgQIGKlRi24yFc6a6lN69Idnx634w49ay6+jA5yFh7a1UY+4Rp6HPx/L/1zcEDPEij8cIsiqR6bQsE5VQ==
@@ -13599,7 +13600,7 @@ tar@^6.1.9:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-teen_process@2.0.2, teen_process@^2.0.0, teen_process@^2.0.1:
+teen_process@2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/teen_process/-/teen_process-2.0.2.tgz#c82f3ab5bb45b489b059f7f2e5efb115b7f206ea"
   integrity sha512-8Be+s0d3XIs6rosilYTYR8/TY4JfAl8Der8ItWhI/o/MTYGLTcjvNUNk5AU8c1eTpJ98MF0xextE8VJtqhtUcg==
@@ -13610,6 +13611,16 @@ teen_process@2.0.2, teen_process@^2.0.0, teen_process@^2.0.1:
     shell-quote "1.7.3"
     source-map-support "0.5.21"
     which "2.0.2"
+
+teen_process@^2.0.0, teen_process@^2.0.1:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/teen_process/-/teen_process-2.0.4.tgz#4946d2226cddff310ec791c17c35736bfe4fa10b"
+  integrity sha512-34Jw6kbHF0alXf9Rqt7B4kL1mrO30siG4JgdFuzYOeahoF9fbzDxSovC4pEfQ8L614cy2BPnAQPBp+dWZGuZNw==
+  dependencies:
+    bluebird "3.7.2"
+    lodash "4.17.21"
+    shell-quote "1.8.1"
+    source-map-support "0.5.21"
 
 temp@0.8.3:
   version "0.8.3"
