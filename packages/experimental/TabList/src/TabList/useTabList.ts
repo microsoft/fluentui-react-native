@@ -33,22 +33,36 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   // selectedTabRef should be set to default tabbable element.
   const [selectedTabRef, setSelectedTabRef] = React.useState(React.useRef<View>(null));
+  const [invoked, setInvoked] = React.useState(false);
+  const [tabKeys, setTabKeys] = React.useState([]);
 
-  const onSelectTabRef = React.useCallback(
-    (ref: React.RefObject<View>) => {
-      setSelectedTabRef(ref);
+  const addTabKey = React.useCallback(
+    (tabKey: string) => {
+      setTabKeys((keys) => [...keys, tabKey]);
     },
-    [setSelectedTabRef],
+    [setTabKeys],
+  );
+
+  const removeTabKey = React.useCallback(
+    (tabKey: string) => {
+      setTabKeys((keys) => keys.filter((key) => key !== tabKey));
+    },
+    [setTabKeys],
   );
 
   const state: TabListState = {
     context: {
+      addTabKey: addTabKey,
       appearance: appearance,
       disabled: disabled,
+      invoked: invoked,
       onTabSelect: data.onKeySelect,
+      removeTabKey: removeTabKey,
       selectedKey: selectedKey ?? data.selectedKey,
+      setSelectedTabRef: setSelectedTabRef,
+      setInvoked: setInvoked,
       size: size,
-      updateSelectedTabRef: onSelectTabRef,
+      tabKeys: tabKeys,
       vertical: vertical,
     },
   };
