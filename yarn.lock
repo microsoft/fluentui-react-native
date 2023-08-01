@@ -3089,10 +3089,10 @@
     "@rnx-kit/tools-language" "^2.0.0"
     chalk "^4.1.0"
 
-"@rnx-kit/react-native-host@^0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.2.7.tgz#78570ecf06733193275eba8ddcb1c2c93f67c8ff"
-  integrity sha512-TMrilUTm4BIJEPVf9JNXdV7Ux88GMKwNYERrf/e7BlZjG8oiGB13sds1W+0H9vpq/CgEbvOhk1m67VE2u/6c7w==
+"@rnx-kit/react-native-host@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.2.8.tgz#e0bbba21c7f7fb47f53dfb0304a0156c3ea836b3"
+  integrity sha512-lPE4uWW1Td6UE/Gu7m0OKkzkOHYlEUolW8l0dCnUhl3ayq/x9e1MmyLQSgAXhh2aDci9dqtoSBQfgD749XRPqg==
 
 "@rnx-kit/third-party-notices@^1.3.3":
   version "1.3.3"
@@ -12277,11 +12277,11 @@ react-native-svg@^12.5.0, react-native-svg@^13.7.0:
     css-tree "^1.1.3"
 
 react-native-test-app@^2.2.1:
-  version "2.5.12"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.12.tgz#84ec1a9f3c13c0bf76e3993376d3ec808978e482"
-  integrity sha512-6QPaNd0xHD30LAkBkkgFBg7faDv9RX4XkHUPUDd4mwZr5Mfhpo8lespB0tYEdgRUWGFf8p79HTKqM5npIvOalA==
+  version "2.5.13"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.13.tgz#82725c240ab0e475483f6e23f04b2e8c22651bee"
+  integrity sha512-WAr0Gm7sXlyK0yFJ4LyTfHvXjaQqWFl5TDsYWB/FLlfHNdh0goX3CT29A5q+YhSNKMXVnWZJ+cTTZc/s8DCtVQ==
   dependencies:
-    "@rnx-kit/react-native-host" "^0.2.7"
+    "@rnx-kit/react-native-host" "^0.2.8"
     ajv "^8.0.0"
     chalk "^4.1.0"
     cliui "^8.0.0"
