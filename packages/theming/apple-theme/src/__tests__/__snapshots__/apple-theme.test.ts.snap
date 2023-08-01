@@ -1232,6 +1232,179 @@ exports[`createMacOSColorAliasTokens test mode: dark, isHighContrast: false 1`] 
 }
 `;
 
+exports[`createMacOSColorAliasTokens test mode: dark, isHighContrast: false 2`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
 exports[`createMacOSColorAliasTokens test mode: dark, isHighContrast: true 1`] = `
 {
   "brandBackground": "#0086f0",
@@ -1386,6 +1559,179 @@ exports[`createMacOSColorAliasTokens test mode: dark, isHighContrast: true 1`] =
   "warningForeground2": "#fef7b2",
   "warningForeground3": "#fdea3d",
   "warningForegroundInverted": "#817400",
+}
+`;
+
+exports[`createMacOSColorAliasTokens test mode: dark, isHighContrast: true 2`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
 }
 `;
 
@@ -1546,6 +1892,179 @@ exports[`createMacOSColorAliasTokens test mode: light, isHighContrast: false 1`]
 }
 `;
 
+exports[`createMacOSColorAliasTokens test mode: light, isHighContrast: false 2`] = `
+{
+  "shadow16": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000024",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000024",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000024",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": {
+    "ambient": {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": {
+    "ambient": {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000024",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": {
+    "ambient": {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
 exports[`createMacOSColorAliasTokens test mode: light, isHighContrast: true 1`] = `
 {
   "brandBackground": "#0078d4",
@@ -1703,526 +2222,7 @@ exports[`createMacOSColorAliasTokens test mode: light, isHighContrast: true 1`] 
 }
 `;
 
-exports[`createMacOSShadowAliasTokens test mode: dark, isHighContrast: false 1`] = `
-{
-  "shadow16": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000047",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000047",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000047",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000047",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createMacOSShadowAliasTokens test mode: dark, isHighContrast: true 1`] = `
-{
-  "shadow16": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000047",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000047",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000047",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000066",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#0000007a",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000047",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createMacOSShadowAliasTokens test mode: light, isHighContrast: false 1`] = `
-{
-  "shadow16": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000024",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow16brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 16,
-      "color": "#00000040",
-      "x": 0,
-      "y": 8,
-    },
-  },
-  "shadow2": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000024",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow28": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000033",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow28brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 28,
-      "color": "#00000040",
-      "x": 0,
-      "y": 14,
-    },
-  },
-  "shadow2brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 2,
-      "color": "#00000040",
-      "x": 0,
-      "y": 1,
-    },
-  },
-  "shadow4": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000024",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow4brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 4,
-      "color": "#00000040",
-      "x": 0,
-      "y": 2,
-    },
-  },
-  "shadow64": {
-    "ambient": {
-      "blur": 8,
-      "color": "#00000033",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#0000003d",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow64brand": {
-    "ambient": {
-      "blur": 8,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 64,
-      "color": "#00000040",
-      "x": 0,
-      "y": 32,
-    },
-  },
-  "shadow8": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000001f",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000024",
-      "x": 0,
-      "y": 4,
-    },
-  },
-  "shadow8brand": {
-    "ambient": {
-      "blur": 2,
-      "color": "#0000004d",
-      "x": 0,
-      "y": 0,
-    },
-    "key": {
-      "blur": 8,
-      "color": "#00000040",
-      "x": 0,
-      "y": 4,
-    },
-  },
-}
-`;
-
-exports[`createMacOSShadowAliasTokens test mode: light, isHighContrast: true 1`] = `
+exports[`createMacOSColorAliasTokens test mode: light, isHighContrast: true 2`] = `
 {
   "shadow16": {
     "ambient": {
