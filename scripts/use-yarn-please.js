@@ -61,7 +61,7 @@ function checkRepositoryLocation() {
 
 function detectYarnInstallation() {
   let yarnResult;
-  if (process.platform !== 'win32') {
+  if (process.platform === 'win32') {
     yarnResult = spawnSync('yarn.cmd', ['--version']);
   } else {
     yarnResult = spawnSync('yarn', ['--version']);
