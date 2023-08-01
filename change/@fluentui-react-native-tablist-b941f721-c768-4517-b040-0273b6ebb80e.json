@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add dev warning for duplicate tabKeys",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
