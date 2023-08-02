@@ -7,7 +7,7 @@ import { Menu, MenuTrigger, MenuList, MenuItem, MenuPopover } from '@fluentui-re
 import { TabList, Tab } from '@fluentui-react-native/tablist';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
-import TestSvg from '../../../assets/test.svg';
+import { svgProps, fontProps } from '../Common/iconExamples';
 import { stackStyle } from '../Common/styles';
 import type { PlatformStatus, TestSection } from '../Test';
 import { Test } from '../Test';
@@ -119,29 +119,17 @@ const TabListVariantsTest: React.FunctionComponent = () => {
 };
 
 const TabListIconTest: React.FunctionComponent = () => {
-  const fontIconProp = {
-    fontSource: {
-      fontFamily: 'Arial',
-      codepoint: 0x2663,
-    },
-  };
-  const svgIconProp = {
-    svgSource: {
-      viewBox: '0 0 500 500',
-      src: TestSvg,
-    },
-  };
   return (
     <View style={stackStyle}>
       <TabList defaultSelectedKey="fontIcon">
-        <Tab icon={fontIconProp} tabKey="fontIcon">
+        <Tab icon={{ fontSource: fontProps }} tabKey="fontIcon">
           Font Icon
         </Tab>
-        <Tab icon={fontIconProp} tabKey="fontIconOnly" />
-        <Tab icon={svgIconProp} tabKey="svgIcon">
+        <Tab icon={{ fontSource: fontProps }} tabKey="fontIconOnly" />
+        <Tab icon={{ svgSource: svgProps }} tabKey="svgIcon">
           SVG Icon
         </Tab>
-        <Tab icon={svgIconProp} tabKey="svgIconOnly" />
+        <Tab icon={{ svgSource: svgProps }} tabKey="svgIconOnly" />
       </TabList>
     </View>
   );
