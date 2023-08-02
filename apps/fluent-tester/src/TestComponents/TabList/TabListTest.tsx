@@ -7,6 +7,8 @@ import { Menu, MenuTrigger, MenuList, MenuItem, MenuPopover } from '@fluentui-re
 import { TabList, Tab } from '@fluentui-react-native/tablist';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
+import { TabListE2ETest } from './TabListE2ETest';
+import { TABLIST_TESTPAGE } from '../../../../E2E/src/index.consts';
 import { svgProps, fontProps } from '../Common/iconExamples';
 import { stackStyle } from '../Common/styles';
 import type { PlatformStatus, TestSection } from '../Test';
@@ -187,6 +189,7 @@ const sections: TestSection[] = [
   {
     name: 'TabList Controlled vs Uncontrolled',
     component: TabListDefaultTest,
+    testID: TABLIST_TESTPAGE,
   },
   {
     name: 'Disabled',
@@ -206,6 +209,13 @@ const sections: TestSection[] = [
   },
 ];
 
+const e2eSections: TestSection[] = [
+  {
+    name: 'E2E Tests',
+    component: TabListE2ETest,
+  },
+];
+
 export const TabListTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
@@ -217,5 +227,5 @@ export const TabListTest: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="TabsV1 Test" description={description} sections={sections} status={status} />;
+  return <Test name="TabsV1 Test" description={description} sections={sections} status={status} e2eSections={e2eSections} />;
 };
