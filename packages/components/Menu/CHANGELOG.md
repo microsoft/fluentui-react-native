@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 31 Jul 2023 19:29:59 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Aug 2023 16:51:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.14
+
+Wed, 02 Aug 2023 16:51:10 GMT
+
+### Patches
+
+- minHeight for small button (rofang@microsoft.com)
+- Bump @fluentui-react-native/button to v0.34.8
 
 ## 1.11.13
 

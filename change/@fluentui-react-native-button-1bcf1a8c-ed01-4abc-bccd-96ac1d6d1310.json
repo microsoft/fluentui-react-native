@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "minHeight for small button",
-  "packageName": "@fluentui-react-native/button",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
