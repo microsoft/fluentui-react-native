@@ -11,6 +11,7 @@ export const FIRST_TAB_KEY = 'A';
 
 /* E2E Testing Tab 1 (2 of 4) No accessibilityLabel */
 export const SECOND_TAB = 'Second_Tab';
+export const SECOND_TAB_LABEL = 'Option B';
 export const SECOND_TAB_KEY = 'B';
 
 /* E2E Testing Tab 1 (3 of 4) */

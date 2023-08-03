@@ -20,6 +20,7 @@ import {
   FOURTH_TAB_KEY,
   SECOND_TAB_KEY,
   THIRD_TAB_KEY,
+  SECOND_TAB_LABEL,
 } from '../../../../E2E/src/index.consts';
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
@@ -39,7 +40,7 @@ export const TabListE2ETest: React.FunctionComponent = () => {
             Option A
           </Tab>
           <Tab tabKey={SECOND_TAB_KEY} {...testProps(SECOND_TAB)}>
-            Option B
+            {SECOND_TAB_LABEL}
           </Tab>
           <Tab disabled tabKey={THIRD_TAB_KEY} {...testProps(THIRD_TAB)}>
             Option C
