@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 03 Aug 2023 21:20:10 GMT",
+      "version": "0.151.18",
+      "tag": "@fluentui-react-native/tester_v0.151.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "e921fe55b5d10f26ea0418c851f6bc04631aa78c",
+            "comment": "Add examples to test page"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/tablist to v0.3.4",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 02 Aug 2023 16:51:10 GMT",
       "version": "0.151.17",
       "tag": "@fluentui-react-native/tester_v0.151.17",

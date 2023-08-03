@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add examples to test page",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

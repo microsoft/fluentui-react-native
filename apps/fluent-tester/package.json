@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.151.17",
+  "version": "0.151.18",
   "description": "A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -71,7 +71,7 @@
     "@fluentui-react-native/spinner": "^0.7.6",
     "@fluentui-react-native/stack": ">=0.8.7 <1.0.0",
     "@fluentui-react-native/switch": "^0.10.5",
-    "@fluentui-react-native/tablist": "0.3.3",
+    "@fluentui-react-native/tablist": "0.3.4",
     "@fluentui-react-native/text": ">=0.21.5 <1.0.0",
     "@fluentui-react-native/theme": ">=0.9.0 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.25.0",
