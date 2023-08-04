@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 02 Aug 2023 16:51:10 GMT",
+      "version": "1.11.14",
+      "tag": "@fluentui-react-native/menu_v1.11.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "a799ae2b264f782fc7160c0e1cb58703f2db62fb",
+            "comment": "minHeight for small button"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 31 Jul 2023 19:29:59 GMT",
       "version": "1.11.13",
       "tag": "@fluentui-react-native/menu_v1.11.13",

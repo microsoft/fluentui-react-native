@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Mon, 31 Jul 2023 19:29:59 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Aug 2023 16:51:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.34.8
+
+Wed, 02 Aug 2023 16:51:10 GMT
+
+### Patches
+
+- minHeight for small button (email not defined)
 
 ## 0.34.7
 
