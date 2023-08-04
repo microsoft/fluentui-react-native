@@ -2918,6 +2918,7 @@ __metadata:
     metro-react-native-babel-preset: ^0.73.7
     react: 18.2.0
     react-native: ^0.71.0
+    rimraf: ^5.0.1
     ts-node: ^8.10.1
     typescript: 4.9.4
     webdriverio: 7.30.1
@@ -3682,7 +3683,7 @@ __metadata:
     react: 18.2.0
     react-native-svg-transformer: ^1.0.0
     react-test-renderer: 18.2.0
-    rimraf: ^3.0.2
+    rimraf: ^5.0.1
     typescript: 4.9.4
     workspace-tools: ^0.26.3
   peerDependencies:
@@ -3887,6 +3888,7 @@ __metadata:
     react-native-svg: ^13.7.0
     react-native-svg-transformer: ^1.0.0
     react-test-renderer: 18.2.0
+    rimraf: ^5.0.1
     ts-node: ^8.10.1
     tslib: ^2.3.1
     typescript: 4.9.4
@@ -12954,7 +12956,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.2.2":
+"glob@npm:^10.2.2, glob@npm:^10.2.5":
   version: 10.3.3
   resolution: "glob@npm:10.3.3"
   dependencies:
@@ -19491,6 +19493,17 @@ __metadata:
   bin:
     rimraf: dist/cjs/src/bin.js
   checksum: 480b8147fd9bcbef3ac118f88a7b1169c3872977a3411a0c84df838bfc30e175a394c0db6f9619fc8b8a886a18c6d779d5e74f380a0075ecc710afaf81b3f50c
+  languageName: node
+  linkType: hard
+
+"rimraf@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "rimraf@npm:5.0.1"
+  dependencies:
+    glob: ^10.2.5
+  bin:
+    rimraf: dist/cjs/src/bin.js
+  checksum: bafce85391349a2d960847980bf9b5caa2a8887f481af630f1ea27e08288217293cec72d75e9a2ba35495c212789f66a7f3d23366ba6197026ab71c535126857
   languageName: node
   linkType: hard
 
