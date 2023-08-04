@@ -4,11 +4,13 @@ import { View, Switch } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { Stack } from '@fluentui-react-native/stack';
+import { VisualEffectView } from '@fluentui-react-native/visual-effect-view';
 
 import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
+import { width } from '@fortawesome/free-solid-svg-icons/faMountainCity';
 
 const BasicActivityIndicator: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
@@ -17,17 +19,7 @@ const BasicActivityIndicator: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <View style={commonStyles.root}>
-        <View style={commonStyles.settings}>
-          <View style={commonStyles.switch}>
-            <Text>Animating</Text>
-            <Switch value={animating} onValueChange={setAnimating} />
-          </View>
-          <View style={commonStyles.switch}>
-            <Text>HidesWhenStopped</Text>
-            <Switch value={hidesWhenStopped} onValueChange={setHidesWhenStopped} />
-          </View>
-        </View>
-        <ActivityIndicator animating={animating} hidesWhenStopped={hidesWhenStopped} />
+        <VisualEffectView style={{ width: 100, height: 100, borderColor: 'red', borderWidth: 1, borderRadius: 8 }} />
       </View>
     </Stack>
   );

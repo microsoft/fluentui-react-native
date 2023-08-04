@@ -1,0 +1,1 @@
+export { VisualEffectView } from './VisualEffectView';
