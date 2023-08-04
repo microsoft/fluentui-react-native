@@ -14,7 +14,6 @@ import {
   THIRD_TAB,
   FOURTH_TAB,
   FIFTH_TAB,
-  TABLIST_NO_A11Y_LABEL_COMPONENT,
   FIRST_TAB_KEY,
   TABLIST_CALLBACK_TEXT,
   FOURTH_TAB_KEY,
@@ -49,7 +48,7 @@ export const TabListE2ETest: React.FunctionComponent = () => {
             Option D
           </Tab>
         </TabList>
-        <TabList {...testProps(TABLIST_NO_A11Y_LABEL_COMPONENT)}>
+        <TabList>
           <Tab tabKey="1" {...testProps(FIFTH_TAB)}>
             Option 1
           </Tab>

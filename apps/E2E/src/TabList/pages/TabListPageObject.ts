@@ -4,7 +4,6 @@ import {
   TABLIST_TESTPAGE,
   HOMEPAGE_TABLIST_BUTTON,
   TABLIST_TEST_COMPONENT,
-  TABLIST_NO_A11Y_LABEL_COMPONENT,
   FIRST_TAB,
   SECOND_TAB,
   THIRD_TAB,
@@ -16,7 +15,7 @@ import {
 type Tab = 'First' | 'Second' | 'Third' | 'Fourth' | 'Fifth';
 
 class TabListPageObject extends BasePage {
-  async resetRadioGroupSelection(): Promise<void> {
+  async resetListSelection(): Promise<void> {
     return (await this.getTab('First')).click();
   }
 
@@ -72,10 +71,6 @@ class TabListPageObject extends BasePage {
 
   get _primaryComponentName() {
     return TABLIST_TEST_COMPONENT;
-  }
-
-  get _secondaryComponentName() {
-    return TABLIST_NO_A11Y_LABEL_COMPONENT;
   }
 }
 
