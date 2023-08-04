@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Implement TabList a11y and functional e2e testing for windows",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
