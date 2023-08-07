@@ -55,21 +55,11 @@
     "react-dom": "^18.2.0",
     "react-native": "^0.71.0"
   },
-  "workspaces": {
-    "packages": [
-      "apps/*",
-      "packages/**",
-      "scripts"
-    ],
-    "nohoist": [
-      "@fluentui-react-native/e2e-testing/appium-windows-driver",
-      "@fluentui-react-native/e2e-testing/appium-mac2-driver",
-      "@fluentui-react-native/e2e-testing/appium-xcuitest-driver",
-      "@fluentui-react-native/tester-win32/appium-windows-driver",
-      "@fluentui-react-native/e2e-testing/appium-uiautomator2-driver",
-      "@fluentui-react-native/e2e-testing/appium-uiautomator2-server"
-    ]
-  },
+  "workspaces": [
+    "apps/*",
+    "packages/**",
+    "scripts"
+  ],
   "resolutions": {
     "@appium/support": "3.1.5",
     "es5-ext": "0.10.53",
