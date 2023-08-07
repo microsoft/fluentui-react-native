@@ -1,4 +1,4 @@
-import { Attribute, Keys, TAB_A11Y_ROLE, TABITEM_A11Y_ROLE } from '../../index.consts';
+import { Attribute, AttributeValue, Keys, TAB_A11Y_ROLE, TABITEM_A11Y_ROLE } from '../../index.consts';
 import {
   FIRST_TAB_ACCESSIBILITY_LABEL,
   FIRST_TAB_KEY,
@@ -102,7 +102,7 @@ describe('TabList Functional Testing', () => {
 
   it('Click on Tab. Validate that it changes state from unselected to selected.', async () => {
     // Validate Tab is not initially selected
-    expect(await TabListPageObject.isTabSelected('Second'))
+    expect(await (await TabListPageObject.getTab('Second')).isSelected())
       .withContext('Expected tab #2 to be unselected at test start, but #2 was initially selected.')
       .toBeFalsy();
 
@@ -110,9 +110,7 @@ describe('TabList Functional Testing', () => {
     await TabListPageObject.click(TabListPageObject.getTab('Second'));
 
     // Validate Tab is selected
-    expect(
-      await TabListPageObject.waitForTabSelected('Second', 'Expected tab #2 to be selected by click, but #2 remained unselected.'),
-    ).toBeTruthy();
+    await TabListPageObject.waitForTabSelected('Second', 'Expected tab #2 to be selected by click, but #2 remained unselected.');
 
     expect(await TabListPageObject.didAssertPopup())
       .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
@@ -121,23 +119,19 @@ describe('TabList Functional Testing', () => {
 
   it('Navigate to unselected tab using "RIGHT ARROW" key and press "ENTER". Validate tab is first focused then selected.', async () => {
     // Validate Tab is not initially selected
-    expect(await TabListPageObject.isTabSelected('Second'))
+    expect(await (await TabListPageObject.getTab('Second')).isSelected())
       .withContext('Expected tab #2 to be unselected at test start, but #2 was initially selected.')
       .toBeFalsy();
 
     // Press RIGHT ARROW on TabList to focus on next
     await TabListPageObject.sendKeys(TabListPageObject.getTab('First'), [Keys.ARROW_RIGHT]);
-    expect(
-      await TabListPageObject.waitForTabFocused('Second', 'Expected tab #2 to be focused after RIGHT ARROW, but #2 remained focused.'),
-    ).toBeTruthy();
+    await TabListPageObject.waitForTabFocused('Second', 'Expected tab #2 to be focused after RIGHT ARROW, but #2 remained focused.');
 
     // Press ENTER to select
     await TabListPageObject.sendKeys(TabListPageObject.getTab('Second'), [Keys.ENTER]);
 
     // Validate Tab is selected
-    expect(
-      await TabListPageObject.waitForTabSelected('Second', 'Expected tab #2 to be selected by ENTER, but #2 remained unselected.'),
-    ).toBeTruthy();
+    await TabListPageObject.waitForTabSelected('Second', 'Expected tab #2 to be selected by ENTER, but #2 remained unselected.');
 
     expect(await TabListPageObject.didAssertPopup())
       .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
@@ -147,9 +141,7 @@ describe('TabList Functional Testing', () => {
   it('Navigate to tab next to disabled and press "RIGHT ARROW". Validate disabled tab skips focus.', async () => {
     // Press RIGHT ARROW on TabList to focus on next enabled tab
     await TabListPageObject.sendKeys(TabListPageObject.getTab('Second'), [Keys.ARROW_RIGHT]);
-    expect(
-      await TabListPageObject.waitForTabFocused('Fourth', 'Expected tab #4 to be focused after RIGHT ARROW, but #4 was not focused.'),
-    ).toBeTruthy();
+    await TabListPageObject.waitForTabFocused('Fourth', 'Expected tab #4 to be focused after RIGHT ARROW, but #4 was not focused.');
 
     expect(await TabListPageObject.didAssertPopup())
       .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
@@ -158,15 +150,13 @@ describe('TabList Functional Testing', () => {
 
   it('Press TAB on TabList. Expect selected button of next list to be selected.', async () => {
     // Validate Tab is not initially selected
-    expect(await TabListPageObject.isTabFocused('First'))
+    expect(await TabListPageObject.compareAttribute(TabListPageObject.getTab('First'), Attribute.IsFocused, AttributeValue.true))
       .withContext('Expected tab #3 to be unfocused at test start, but #3 was initially selected.')
       .toBeTrue();
 
     // Press RIGHT ARROW on TabList to focus on next enabled tab
     await TabListPageObject.sendKeys(TabListPageObject.getTab('First'), [Keys.TAB]);
-    expect(
-      await TabListPageObject.waitForTabFocused('Fifth', 'Expected tab #5 to be focused after TAB, but #5 was not focused.'),
-    ).toBeTruthy();
+    await TabListPageObject.waitForTabFocused('Fifth', 'Expected tab #5 to be focused after TAB, but #5 was not focused.');
 
     expect(await TabListPageObject.didAssertPopup())
       .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
@@ -187,12 +177,10 @@ describe('TabList Functional Testing', () => {
         `Expected ${selector} tab to be selected when clicked, but tab wasn't selected.`,
       );
 
-      expect(
-        await TabListPageObject.waitForCallbackToFire(
-          key,
-          `Expected TabList "onTabSelect" callback to fire when ${selector} was clicked, but callback didn't fire.`,
-        ),
-      ).toBeTrue();
+      await TabListPageObject.waitForCallbackToFire(
+        key,
+        `Expected TabList "onTabSelect" callback to fire when ${selector} was clicked, but callback didn't fire.`,
+      );
     }
 
     expect(await TabListPageObject.didAssertPopup())

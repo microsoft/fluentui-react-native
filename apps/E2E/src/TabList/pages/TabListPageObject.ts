@@ -19,28 +19,24 @@ class TabListPageObject extends BasePage {
     return (await this.getTab('First')).click();
   }
 
-  async isTabSelected(selector: Tab): Promise<boolean> {
-    return await (await this.getTab(selector)).isSelected();
+  // Waits for given tab's selection state to be true. Throws an error if the selection state is still false at the end of the timeout.
+  async waitForTabSelected(selector: Tab, errorMsg: string, timeout?: number): Promise<void> {
+    await this.waitForCondition(async () => await (await this.getTab(selector)).isSelected(), errorMsg, timeout);
   }
 
-  async isTabFocused(selector: Tab): Promise<boolean> {
-    return await this.compareAttribute(this.getTab(selector), Attribute.IsFocused, AttributeValue.true);
+  // Waits for given tab to be focused. Throws an error if the tab is not focused at the end of the timeout.
+  async waitForTabFocused(selector: Tab, errorMsg: string, timeout?: number): Promise<void> {
+    await this.waitForCondition(
+      async () => await this.compareAttribute(this.getTab(selector), Attribute.IsFocused, AttributeValue.true),
+      errorMsg,
+      timeout,
+    );
   }
 
-  async waitForTabSelected(selector: Tab, errorMsg: string, timeout?: number): Promise<boolean> {
-    await this.waitForCondition(async () => await this.isTabSelected(selector), errorMsg, timeout);
-    return await this.isTabSelected(selector);
-  }
-
-  async waitForTabFocused(selector: Tab, errorMsg: string, timeout?: number): Promise<boolean> {
-    await this.waitForCondition(async () => await this.isTabFocused(selector), errorMsg, timeout);
-    return await this.isTabFocused(selector);
-  }
-
-  async waitForCallbackToFire(tabKeyPressed: string, errorMsg: string, timeout?: number) {
+  // Waits for the TabList's `onTabSelect` callback to fire (changing a text component value). Throws an error if the callback doesn't fire by the end of the timeout.
+  async waitForCallbackToFire(tabKeyPressed: string, errorMsg: string, timeout?: number): Promise<void> {
     const callbackText = await By(TABLIST_CALLBACK_TEXT);
     await this.waitForCondition(async () => (await callbackText.getText()) === tabKeyPressed, errorMsg, timeout);
-    return (await callbackText.getText()) === tabKeyPressed;
   }
 
   async getTab(selector: Tab): Promise<WebdriverIO.Element> {
