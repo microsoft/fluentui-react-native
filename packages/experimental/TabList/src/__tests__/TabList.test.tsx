@@ -1,12 +1,12 @@
 import * as React from 'react';
-// import type { I18nManagerStatic } from 'react-native';
-// import { I18nManager } from 'react-native';
 
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import Tab from '../Tab/Tab';
 import TabList from '../TabList/TabList';
+
+jest.useFakeTimers();
 
 describe('TabList component tests', () => {
   beforeAll(() => {
