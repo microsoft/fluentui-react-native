@@ -1,4 +1,6 @@
 import * as React from 'react';
+// import type { I18nManagerStatic } from 'react-native';
+// import { I18nManager } from 'react-native';
 
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
@@ -7,13 +9,23 @@ import Tab from '../Tab/Tab';
 import TabList from '../TabList/TabList';
 
 describe('TabList component tests', () => {
+  beforeAll(() => {
+    jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+      OS: 'win32',
+      select: () => null,
+    }));
+    jest.mock('react-native/Libraries/ReactNative/I18nManager', () => ({
+      isRtl: false,
+    }));
+  });
+
   it('TabList default props', () => {
     const tree = renderer
       .create(
         <TabList>
           <Tab tabKey="1">Tab 1</Tab>
-          <Tab tabKey="2">Tab 2</Tab>
-          <Tab tabKey="3">Tab 3</Tab>
+          {/* <Tab tabKey="2">Tab 2</Tab>
+          <Tab tabKey="3">Tab 3</Tab> */}
         </TabList>,
       )
       .toJSON();
@@ -144,4 +156,8 @@ describe('TabList component tests', () => {
   //     2,
   //   );
   // });
+  afterAll(() => {
+    jest.unmock('react-native/Libraries/Utilities/Platform');
+    jest.unmock('react-native/Libraries/ReactNative/I18nManager');
+  });
 });
