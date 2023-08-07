@@ -5389,8 +5389,8 @@ __metadata:
   linkType: hard
 
 "@office-iss/react-native-win32@npm:^0.71.0":
-  version: 0.71.12
-  resolution: "@office-iss/react-native-win32@npm:0.71.12"
+  version: 0.71.13
+  resolution: "@office-iss/react-native-win32@npm:0.71.13"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
@@ -5430,7 +5430,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-  checksum: 231cfe35d70cd655fc26fbb46edf943ddf0ce2d1914535ab44ff5ea5abad5d0f3bcf14e4fa887a936a0cc02deb09b53b2e006c89f2d5e30553c31c4bfe6a239c
+  checksum: 2380869b0b7bb60f3b6be9555bd453abd432cd018b3aa49ff9b21f50983c7d1cf2041a72fd5cecbfeb32fcdf163ceccd309369e6ce448b7b8c00145addb8acfa
   languageName: node
   linkType: hard
 
@@ -5759,14 +5759,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-windows/cli@npm:0.71.13":
-  version: 0.71.13
-  resolution: "@react-native-windows/cli@npm:0.71.13"
+"@react-native-windows/cli@npm:0.71.14":
+  version: 0.71.14
+  resolution: "@react-native-windows/cli@npm:0.71.14"
   dependencies:
     "@react-native-windows/codegen": 0.71.6
     "@react-native-windows/fs": 0.71.3
     "@react-native-windows/package-utils": 0.71.3
-    "@react-native-windows/telemetry": 0.71.6
+    "@react-native-windows/telemetry": 0.71.7
     "@xmldom/xmldom": ^0.7.7
     chalk: ^4.1.0
     cli-spinners: ^2.2.0
@@ -5786,7 +5786,7 @@ __metadata:
     xpath: ^0.0.27
   peerDependencies:
     react-native: "*"
-  checksum: 0ba757f4d86203cadc2a9aef74ad75e3f5f6710618657e06e596a24c4c6e2df065a47ae1f123bb9cb150a57a66f106d206b1d76801426c94d340c5d143a9a56b
+  checksum: a99ec9936c63a70eb09c44a8d58466dbefe2e3e8443d21382b4319fa6ea3bc782f608506a6725894909a11eca9adf6a710ff17e1c73014f577fa6c6dfe773d4c
   languageName: node
   linkType: hard
 
@@ -5839,9 +5839,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-windows/telemetry@npm:0.71.6":
-  version: 0.71.6
-  resolution: "@react-native-windows/telemetry@npm:0.71.6"
+"@react-native-windows/telemetry@npm:0.71.7":
+  version: 0.71.7
+  resolution: "@react-native-windows/telemetry@npm:0.71.7"
   dependencies:
     "@react-native-windows/fs": 0.71.3
     "@xmldom/xmldom": ^0.7.7
@@ -5851,7 +5851,7 @@ __metadata:
     lodash: ^4.17.21
     os-locale: ^5.0.0
     xpath: ^0.0.27
-  checksum: 022d57c0d6cfeaf16b5f7a9109d7296f6940ff8048d3a56d97d407a874d0e9aafbeae29cdb777a35b590cae0fa212f206996348dcbae83ac375bd3b0c31d81f0
+  checksum: d4ed4df725438fb3a62422e3680114cd495e16ba7775fe96fc6e56e79e01d6c7e37b3165fcb682f66880ae2b77b251e270eba28c46bfeb97e330635d4349bca3
   languageName: node
   linkType: hard
 
@@ -18850,15 +18850,15 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.71.0":
-  version: 0.71.26
-  resolution: "react-native-windows@npm:0.71.26"
+  version: 0.71.28
+  resolution: "react-native-windows@npm:0.71.28"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 10.2.4
     "@react-native-community/cli-platform-android": 10.2.0
     "@react-native-community/cli-platform-ios": 10.2.4
-    "@react-native-windows/cli": 0.71.13
+    "@react-native-windows/cli": 0.71.14
     "@react-native/assets": 1.0.0
     "@react-native/normalize-color": 2.1.0
     "@react-native/polyfills": 2.0.0
@@ -18891,7 +18891,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-  checksum: 5c549dee5f4fd6cff477425712bdec2999feb4d8af5a976aef65223c1b232ab27d5474666c0cc91050e87eba8262b17cfaf0e83b0ac4dbf45952687abd817135
+  checksum: f6379d3b2e28be8a24c83e8a897eb56a3ea4f0ac52a859211cb47741a94cfe99a06aaa35f10ba553fbdf42f91715a6a8dc31ea7b037925f34381465ceeeafee1
   languageName: node
   linkType: hard
 
