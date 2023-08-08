@@ -8,5 +8,6 @@ export type {
   ICalloutTokens,
   ICalloutType,
   RestoreFocusEvent,
+  VisualEffectMaterial,
 } from './Callout.types';
 export { Callout } from './Callout';

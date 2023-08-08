@@ -58,6 +58,7 @@ export type {
   ICalloutTokens,
   ICalloutType,
   RestoreFocusEvent,
+  VisualEffectMaterial,
 } from '@fluentui-react-native/callout';
 
 export { Checkbox, checkboxName, CheckboxV1, checkboxNameV1, useCheckbox } from '@fluentui-react-native/checkbox';

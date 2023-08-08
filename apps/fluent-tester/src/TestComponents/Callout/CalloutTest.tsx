@@ -3,8 +3,7 @@ import type { KeyboardMetrics } from 'react-native';
 import { Text, View, Switch, ScrollView } from 'react-native';
 
 import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
-import type { IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
-import type { VisualEffectMaterial } from '@fluentui-react-native/callout';
+import type { IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps, VisualEffectMaterial } from '@fluentui/react-native';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
