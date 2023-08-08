@@ -6,6 +6,7 @@ import * as renderer from 'react-test-renderer';
 import Tab from '../Tab/Tab';
 import TabList from '../TabList/TabList';
 
+// Mocks out timer functions such as setTimeout. Without this, tests fail before the second render completes.
 jest.useFakeTimers();
 
 describe('TabList component tests', () => {
@@ -20,6 +21,7 @@ describe('TabList component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+    // Each test needs this, again having to do with tests failing during the second render.
     await renderer.act(async () => null);
   });
 
