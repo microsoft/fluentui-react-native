@@ -180,7 +180,6 @@ const StandardCallout: React.FunctionComponent = () => {
     [decoyBtn1Ref, decoyBtn2Ref],
   );
 
-  const [vibrant, setVibrant] = React.useState(false);
   const [selectedMateral, setSelectedMateral] = React.useState<VisualEffectMaterial>('menu');
 
   const colorDefault: string = 'default';
@@ -289,11 +288,6 @@ const StandardCallout: React.FunctionComponent = () => {
             <Text>Enable ScrollView Callout</Text>
           </View>
 
-          <View style={{ flexDirection: 'row' }}>
-            <Switch value={vibrant} onValueChange={setVibrant} />
-            <Text>Vibrant (macOS only)</Text>
-          </View>
-
           <MenuPicker
             prompt="Background Color"
             selected={selectedBackgroundColor || colorDefault}
@@ -382,12 +376,11 @@ const StandardCallout: React.FunctionComponent = () => {
             accessibilityLabel: 'Standard Callout',
             setInitialFocus: shouldSetInitialFocus,
             isBeakVisible: isBeakVisible,
-            vibrant: vibrant,
             ...(selectedBorderColor && { borderColor: selectedBorderColor }),
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: parseInt(selectedBorderWidth) }),
             ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
-            material: 'popover',
+            material: selectedMateral,
           }}
         >
           <Pressable onHoverIn={() => calloutHoveredCallback(true)} onHoverOut={() => calloutHoveredCallback(false)}>
@@ -408,6 +401,7 @@ const StandardCallout: React.FunctionComponent = () => {
               <View style={{ padding: 20 }}>
                 <Button content="click to change anchor" onClick={toggleCalloutRef} />
                 <Button content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
+                <Text>Material: {selectedMateral}</Text>
               </View>
             )}
           </Pressable>
@@ -458,7 +452,6 @@ const CustomCallout: React.FunctionComponent = () => {
 
       {showCustomizedCallout && (
         <Callout
-          vibrant={true}
           anchorRect={myRect}
           onDismiss={onDismissCustomizedCallout}
           onShow={onShowCustomizedCallout}

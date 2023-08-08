@@ -20,7 +20,7 @@ const NativeCalloutView = Platform.select({
 export const Callout = compose<ICalloutType>({
   displayName: calloutName,
   usePrepareProps: (props: ICalloutProps, useStyling: IUseComposeStyling<ICalloutType>) => {
-    const { componentRef, target, vibrant, material, ...rest } = props;
+    const { componentRef, target, material, ...rest } = props;
     const calloutRef = useViewCommandFocus(componentRef);
     const [nativeTarget, setNativeTarget] = React.useState<number | string | null>(null);
 
@@ -40,10 +40,7 @@ export const Callout = compose<ICalloutType>({
     const slotProps = mergeSettings<ICalloutSlotProps>(useStyling(props), {
       root: {
         ref: calloutRef,
-        ...(Platform.OS === 'macos' && {
-          vibrant: vibrant,
-          material: material,
-        }),
+        ...(Platform.OS === 'macos' && { material: material }),
         ...(nativeTarget && { target: nativeTarget }),
         ...rest,
       },

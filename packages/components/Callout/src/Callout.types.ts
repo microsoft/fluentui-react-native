@@ -230,14 +230,7 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
   target?: React.RefObject<React.Component> | string;
 
   /**
-   * Determines whether the Callout is vibrant, A.K.A, has an NSVisualEffectView.
-   * https://developer.apple.com/design/human-interface-guidelines/materials
-   * @platform macos
-   */
-  vibrant?: boolean;
-
-  /**
-   * Determines the material of the NSVisualEffectView.
+   * Determines the material of the NSVisualEffectView that is the contentView of the Callout.
    * https://developer.apple.com/documentation/appkit/nsvisualeffectview/material/
    * @platform macos
    */

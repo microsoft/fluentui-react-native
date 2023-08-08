@@ -101,7 +101,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
       dismissBehaviors,
       doNotTakePointerCapture,
       setInitialFocus,
-      ...(Platform.OS === 'macos' && { vibrant: true }),
+      ...(Platform.OS === 'macos' && { material: 'menu' }),
     },
     innerView: {
       onMouseEnter,

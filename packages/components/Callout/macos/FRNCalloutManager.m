@@ -65,8 +65,6 @@ RCT_EXPORT_VIEW_PROPERTY(onShow, RCTDirectEventBlock)
 
 RCT_EXPORT_VIEW_PROPERTY(onDismiss, RCTDirectEventBlock)
 
-RCT_EXPORT_VIEW_PROPERTY(vibrant, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(material, NSVisualEffectMaterial)
 
 

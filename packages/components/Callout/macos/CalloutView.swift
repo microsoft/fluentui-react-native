@@ -33,8 +33,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var onDismiss: RCTDirectEventBlock?
 
-	@objc public var vibrant: Bool = false
-
 	@objc public var material: NSVisualEffectView.Material = .menu
 
 	public weak var bridge: RCTBridge?
@@ -364,18 +362,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
 	/// view hierarchy, ensuring our React Views are not placed in the main window.
 	private lazy var proxyView: NSView = {
-		var view: NSView
-		if (vibrant) {
-			let visualEffectView = FlippedVisualEffectView()
-			visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-			visualEffectView.material = material
-			visualEffectView.state = .active
-			view = visualEffectView
-		} else {
-			view = RCTUIView()
-		}
-		view.wantsLayer = true
-		view.layer?.cornerRadius = calloutWindowCornerRadius
+    let visualEffectView = FlippedVisualEffectView()
+    visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+    visualEffectView.material = material
+    visualEffectView.state = .active
+		visualEffectView.wantsLayer = true
+		visualEffectView.layer?.cornerRadius = calloutWindowCornerRadius
 
 		/**
 		 * We can't directly call touchHandler.attach(to:) because `visualEffectView` is not always an RCTUIView.
@@ -384,9 +376,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
 			preconditionFailure("Callout could not create RCTTouchHandler")
 		}
-		view.addGestureRecognizer(touchHandler)
+	  visualEffectView.addGestureRecognizer(touchHandler)
 
-		return view
+		return visualEffectView
 	}()
 
 	private lazy var calloutWindow: CalloutWindow = {

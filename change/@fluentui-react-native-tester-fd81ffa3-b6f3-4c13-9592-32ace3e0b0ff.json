@@ -1,7 +1,7 @@
 {
   "type": "patch",
-  "comment": "[Callout][macOS] Add new prop `vibrant`",
+  "comment": "[Callout][macOS] Add new prop `material`",
   "packageName": "@fluentui-react-native/tester",
-  "email": "saadnajmi2@gmail.com",
+  "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
 }
