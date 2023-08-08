@@ -106,7 +106,7 @@
     "metro-config": "^0.73.7",
     "metro-react-native-babel-preset": "^0.73.7",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^2.2.1",
+    "react-native-test-app": "^2.5.15",
     "react-test-renderer": "18.2.0"
   },
   "peerDependencies": {
