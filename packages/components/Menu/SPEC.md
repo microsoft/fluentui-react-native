@@ -293,9 +293,9 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
 
   /**
    * Corner radius of the menu list
-   * @platform android
+   * @platform android macos
    */
-  cornerRadius?: number;
+  borderRadius?: number;
 }
 ```
 
