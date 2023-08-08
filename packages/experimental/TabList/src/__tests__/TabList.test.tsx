@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import Tab from '../Tab/Tab';
@@ -9,155 +9,168 @@ import TabList from '../TabList/TabList';
 jest.useFakeTimers();
 
 describe('TabList component tests', () => {
-  beforeAll(() => {
-    jest.mock('react-native/Libraries/Utilities/Platform', () => ({
-      OS: 'win32',
-      select: () => null,
-    }));
-    jest.mock('react-native/Libraries/ReactNative/I18nManager', () => ({
-      isRtl: false,
-    }));
-  });
-
-  it('TabList default props', () => {
+  it('TabList default props', async () => {
     const tree = renderer
       .create(
         <TabList>
           <Tab tabKey="1">Tab 1</Tab>
-          {/* <Tab tabKey="2">Tab 2</Tab>
-          <Tab tabKey="3">Tab 3</Tab> */}
+          <Tab tabKey="2">Tab 2</Tab>
+          <Tab tabKey="3">Tab 3</Tab>
         </TabList>,
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 
-  // it('TabList disabled tabs', () => {
-  //   const tree = renderer
-  //     .create(
-  //       <TabList>
-  //         <Tab disabled tabKey="1">
-  //           Tab 1
-  //         </Tab>
-  //         <Tab tabKey="2">Tab 2</Tab>
-  //         <Tab disabled tabKey="3">
-  //           Tab 3
-  //         </Tab>
-  //       </TabList>,
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it('TabList selected key', async () => {
+    const tree = renderer
+      .create(
+        <TabList selectedKey="1">
+          <Tab tabKey="1">Tab 1</Tab>
+          <Tab tabKey="2">Tab 2</Tab>
+          <Tab tabKey="3">Tab 3</Tab>
+        </TabList>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
+  });
 
-  // it('TabList disabled list', () => {
-  //   const tree = renderer
-  //     .create(
-  //       <TabList disabled>
-  //         <Tab tabKey="1">Tab 1</Tab>
-  //         <Tab tabKey="2">Tab 2</Tab>
-  //         <Tab tabKey="3">Tab 3</Tab>
-  //       </TabList>,
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it('TabList disabled tabs', async () => {
+    const tree = renderer
+      .create(
+        <TabList>
+          <Tab disabled tabKey="1">
+            Tab 1
+          </Tab>
+          <Tab tabKey="2">Tab 2</Tab>
+          <Tab disabled tabKey="3">
+            Tab 3
+          </Tab>
+        </TabList>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
+  });
 
-  // it('TabList appearance', () => {
-  //   const tree = renderer
-  //     .create(
-  //       <TabList appearance="subtle">
-  //         <Tab tabKey="1">Tab 1</Tab>
-  //         <Tab tabKey="2">Tab 2</Tab>
-  //         <Tab tabKey="3">Tab 3</Tab>
-  //       </TabList>,
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it('TabList disabled list', async () => {
+    const tree = renderer
+      .create(
+        <TabList disabled>
+          <Tab tabKey="1">Tab 1</Tab>
+          <Tab tabKey="2">Tab 2</Tab>
+          <Tab tabKey="3">Tab 3</Tab>
+        </TabList>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
+  });
 
-  // it('TabList size', () => {
-  //   const tree = renderer
-  //     .create(
-  //       <TabList size="large">
-  //         <Tab tabKey="1">Tab 1</Tab>
-  //         <Tab tabKey="2">Tab 2</Tab>
-  //         <Tab tabKey="3">Tab 3</Tab>
-  //       </TabList>,
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it('TabList appearance', async () => {
+    const tree = renderer
+      .create(
+        <TabList appearance="subtle">
+          <Tab tabKey="1">Tab 1</Tab>
+          <Tab tabKey="2">Tab 2</Tab>
+          <Tab tabKey="3">Tab 3</Tab>
+        </TabList>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
+  });
 
-  // it('TabList orientation', () => {
-  //   const tree = renderer
-  //     .create(
-  //       <TabList vertical>
-  //         <Tab tabKey="1">Tab 1</Tab>
-  //         <Tab tabKey="2">Tab 2</Tab>
-  //         <Tab tabKey="3">Tab 3</Tab>
-  //       </TabList>,
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it('TabList size', async () => {
+    const tree = renderer
+      .create(
+        <TabList size="large">
+          <Tab tabKey="1">Tab 1</Tab>
+          <Tab tabKey="2">Tab 2</Tab>
+          <Tab tabKey="3">Tab 3</Tab>
+        </TabList>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
+  });
 
-  // it('TabList rendering icons', () => {
-  //   const tree = renderer
-  //     .create(
-  //       <TabList>
-  //         <Tab
-  //           icon={{
-  //             fontSource: {
-  //               fontFamily: 'Arial',
-  //               codepoint: 0x2663,
-  //             },
-  //           }}
-  //           tabKey="1"
-  //         >
-  //           Tab 1
-  //         </Tab>
-  //         <Tab
-  //           icon={{
-  //             fontSource: {
-  //               fontFamily: 'Arial',
-  //               codepoint: 0x2663,
-  //             },
-  //           }}
-  //           tabKey="2"
-  //         />
-  //       </TabList>,
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it('TabList orientation', async () => {
+    const tree = renderer
+      .create(
+        <TabList vertical>
+          <Tab tabKey="1">Tab 1</Tab>
+          <Tab tabKey="2">Tab 2</Tab>
+          <Tab tabKey="3">Tab 3</Tab>
+        </TabList>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
+  });
 
-  // it('TabList simple rendering does not invalidate styling', () => {
-  //   checkRenderConsistency(
-  //     () => (
-  //       <TabList>
-  //         <Tab tabKey="1">Tab 1</Tab>
-  //         <Tab tabKey="2">Tab 2</Tab>
-  //         <Tab tabKey="3">Tab 3</Tab>
-  //       </TabList>
-  //     ),
-  //     2,
-  //   );
-  // });
+  it('TabList rendering icons', async () => {
+    const tree = renderer
+      .create(
+        <TabList>
+          <Tab
+            icon={{
+              fontSource: {
+                fontFamily: 'Arial',
+                codepoint: 0x2663,
+              },
+            }}
+            tabKey="1"
+          >
+            Tab 1
+          </Tab>
+          <Tab
+            icon={{
+              fontSource: {
+                fontFamily: 'Arial',
+                codepoint: 0x2663,
+              },
+            }}
+            tabKey="2"
+          />
+        </TabList>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
+  });
 
-  // it('TabList re-renders correctly', () => {
-  //   checkReRender(
-  //     () => (
-  //       <TabList>
-  //         <Tab tabKey="1">Tab 1</Tab>
-  //         <Tab tabKey="2">Tab 2</Tab>
-  //         <Tab tabKey="3">Tab 3</Tab>
-  //       </TabList>
-  //     ),
-  //     2,
-  //   );
-  // });
-  afterAll(() => {
-    jest.unmock('react-native/Libraries/Utilities/Platform');
-    jest.unmock('react-native/Libraries/ReactNative/I18nManager');
+  it('TabList customized tabs', async () => {
+    const CustomTab = Tab.customize({
+      variant: 'headerSemibold',
+      stackMarginVertical: 16,
+      stackMarginHorizontal: 16,
+      indicatorThickness: 4,
+      color: 'red',
+    });
+    const tree = renderer.create(
+      <TabList>
+        <CustomTab tabKey="1">Tab 1</CustomTab>
+        <CustomTab tabKey="2">Tab 2</CustomTab>
+      </TabList>,
+    );
+    expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
+  });
+
+  it('TabList re-renders correctly', async () => {
+    checkReRender(
+      () => (
+        <TabList>
+          <Tab tabKey="1">Tab 1</Tab>
+          <Tab tabKey="2">Tab 2</Tab>
+          <Tab tabKey="3">Tab 3</Tab>
+        </TabList>
+      ),
+      2,
+    );
+    await renderer.act(async () => null);
   });
 });
