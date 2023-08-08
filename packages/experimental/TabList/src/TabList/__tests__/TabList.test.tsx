@@ -3,8 +3,8 @@ import * as React from 'react';
 import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
-import Tab from '../Tab/Tab';
-import TabList from '../TabList/TabList';
+import Tab from '../../Tab/Tab';
+import TabList from '../TabList';
 
 // Mocks out timer functions such as setTimeout. Without this, tests fail before the second render completes.
 jest.useFakeTimers();
@@ -32,24 +32,6 @@ describe('TabList component tests', () => {
           <Tab tabKey="1">Tab 1</Tab>
           <Tab tabKey="2">Tab 2</Tab>
           <Tab tabKey="3">Tab 3</Tab>
-        </TabList>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
-  });
-
-  it('TabList disabled tabs', async () => {
-    const tree = renderer
-      .create(
-        <TabList>
-          <Tab disabled tabKey="1">
-            Tab 1
-          </Tab>
-          <Tab tabKey="2">Tab 2</Tab>
-          <Tab disabled tabKey="3">
-            Tab 3
-          </Tab>
         </TabList>,
       )
       .toJSON();
@@ -109,55 +91,6 @@ describe('TabList component tests', () => {
         </TabList>,
       )
       .toJSON();
-    expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
-  });
-
-  it('TabList rendering icons', async () => {
-    const tree = renderer
-      .create(
-        <TabList>
-          <Tab
-            icon={{
-              fontSource: {
-                fontFamily: 'Arial',
-                codepoint: 0x2663,
-              },
-            }}
-            tabKey="1"
-          >
-            Tab 1
-          </Tab>
-          <Tab
-            icon={{
-              fontSource: {
-                fontFamily: 'Arial',
-                codepoint: 0x2663,
-              },
-            }}
-            tabKey="2"
-          />
-        </TabList>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
-  });
-
-  it('TabList customized tabs', async () => {
-    const CustomTab = Tab.customize({
-      variant: 'headerSemibold',
-      stackMarginVertical: 16,
-      stackMarginHorizontal: 16,
-      indicatorThickness: 4,
-      color: 'red',
-    });
-    const tree = renderer.create(
-      <TabList>
-        <CustomTab tabKey="1">Tab 1</CustomTab>
-        <CustomTab tabKey="2">Tab 2</CustomTab>
-      </TabList>,
-    );
     expect(tree).toMatchSnapshot();
     await renderer.act(async () => null);
   });
