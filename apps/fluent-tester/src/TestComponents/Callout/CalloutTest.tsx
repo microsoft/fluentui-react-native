@@ -398,7 +398,7 @@ const StandardCallout: React.FunctionComponent = () => {
               </View>
             ) : (
               //else
-              <View style={{ padding: 20 }}>
+              <View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
                 <Button content="click to change anchor" onClick={toggleCalloutRef} />
                 <Button content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
               </View>
@@ -411,8 +411,6 @@ const StandardCallout: React.FunctionComponent = () => {
 };
 
 const CustomCallout: React.FunctionComponent = () => {
-  const theme = useTheme();
-
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
@@ -458,7 +456,7 @@ const CustomCallout: React.FunctionComponent = () => {
           accessibilityRole="alert"
           accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
         >
-          <View style={{ padding: 20, borderWidth: 2, borderColor: 'black', backgroundColor: theme.colors.neutralBackground1 }}>
+          <View style={{ padding: 20, borderWidth: 2, borderColor: 'black' }}>
             <Text>just some text so it does not take focus and is not empty.</Text>
           </View>
         </Callout>
