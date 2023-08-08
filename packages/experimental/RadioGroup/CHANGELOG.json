@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Mon, 31 Jul 2023 19:29:59 GMT",
+      "version": "0.11.7",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.11.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.18.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 18 Jul 2023 19:09:32 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.11.6",
+      "version": "0.11.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.18.6",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Jul 2023 17:25:04 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.11.5",
+      "version": "0.11.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.18.5",
+            "commit": "d1fc0c774448d103085b5bb5ab0103678a62cbbc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jul 2023 20:45:12 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.11.4",
+      "version": "0.11.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.18.4",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Jun 2023 18:37:35 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.18.3",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 17 Jun 2023 00:00:18 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.11.2",
       "version": "0.11.2",

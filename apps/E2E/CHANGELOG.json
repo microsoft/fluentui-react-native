@@ -2,6 +2,141 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Mon, 31 Jul 2023 19:29:59 GMT",
+      "version": "1.28.6",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 18 Jul 2023 19:09:32 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.5",
+      "version": "1.28.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.6",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Jul 2023 04:56:58 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.4",
+      "version": "1.28.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "c24eecc65abc539df8f9700cbe6058a46a268b18",
+            "comment": "Update waiters to not fail"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Jul 2023 17:25:04 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.3",
+      "version": "1.28.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.5",
+            "commit": "d1fc0c774448d103085b5bb5ab0103678a62cbbc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jul 2023 22:02:00 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.2",
+      "version": "1.28.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "7822bce9017632fd123736bd4eb9220a85bb4e32",
+            "comment": "Disable failing Chip test to unblock CI"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jul 2023 20:45:12 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.1",
+      "version": "1.28.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.4",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jul 2023 19:45:35 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.0",
+      "version": "1.28.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "42ab24bf4fa5b262117bd99f2f73a465fa62a0e8",
+            "comment": "Cleanup chip/input & uninstall task"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Jul 2023 16:01:24 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.27.2",
+      "version": "1.27.2",
+      "comments": {
+        "none": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "eb588ece1230029993e40d2b27156513dc643f99",
+            "comment": "Test update counter/presence badge Android"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Jun 2023 18:37:35 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.27.2",
+      "version": "1.27.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.3",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 17 Jun 2023 00:00:18 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.27.1",
       "version": "1.27.1",

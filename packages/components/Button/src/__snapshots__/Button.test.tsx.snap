@@ -8,7 +8,7 @@ exports[`Button component tests Button circular 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -85,7 +85,7 @@ exports[`Button component tests Button composed 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -164,7 +164,7 @@ exports[`Button component tests Button customized 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -240,7 +240,7 @@ exports[`Button component tests Button default 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -392,7 +392,7 @@ exports[`Button component tests Button large 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -469,7 +469,7 @@ exports[`Button component tests Button primary 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -546,7 +546,7 @@ exports[`Button component tests Button small 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -585,6 +585,7 @@ exports[`Button component tests Button small 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 7,
       "paddingHorizontal": 11,
@@ -623,7 +624,7 @@ exports[`Button component tests Button square 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -700,7 +701,7 @@ exports[`Button component tests Button subtle 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }

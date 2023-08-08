@@ -38,8 +38,10 @@ exports[`Link component tests Default Link 1`] = `
       {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
+        "fontFamily": "Segoe UI",
+        "fontSize": 13,
+        "fontWeight": "400",
         "margin": 0,
-        "variant": "caption1Strong",
       }
     }
   >
@@ -85,8 +87,10 @@ exports[`Link component tests Default Link as a pressable 1`] = `
       {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
+        "fontFamily": "Segoe UI",
+        "fontSize": 13,
+        "fontWeight": "400",
         "margin": 0,
-        "variant": "caption1Strong",
       }
     }
   >
@@ -96,7 +100,7 @@ exports[`Link component tests Default Link as a pressable 1`] = `
 `;
 
 exports[`Link component tests Inline Link 1`] = `
-<Text
+<View
   accessibilityRole="link"
   accessibilityState={
     {
@@ -106,13 +110,12 @@ exports[`Link component tests Inline Link 1`] = `
   accessible={true}
   cursor="pointer"
   disabled={false}
-  ellipsizeMode="tail"
   enableFocusRing={true}
   focusable={true}
-  numberOfLines={0}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -122,16 +125,29 @@ exports[`Link component tests Inline Link 1`] = `
   style={
     {
       "alignSelf": "flex-start",
-      "color": "#0f6cbd",
-      "margin": 0,
-      "textDecorationLine": "underline",
-      "variant": "caption1Strong",
     }
   }
   tooltip="https://www.bing.com"
 >
-  Link to Bing
-</Text>
+  <Text
+    ellipsizeMode="tail"
+    focusable={false}
+    numberOfLines={0}
+    style={
+      {
+        "alignSelf": "flex-start",
+        "color": "#0f6cbd",
+        "fontFamily": "Segoe UI",
+        "fontSize": 13,
+        "fontWeight": "400",
+        "margin": 0,
+        "textDecorationLine": "underline",
+      }
+    }
+  >
+    Link to Bing
+  </Text>
+</View>
 `;
 
 exports[`Link component tests Subtle Link 1`] = `
@@ -173,8 +189,10 @@ exports[`Link component tests Subtle Link 1`] = `
       {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
+        "fontFamily": "Segoe UI",
+        "fontSize": 13,
+        "fontWeight": "400",
         "margin": 0,
-        "variant": "caption1Strong",
       }
     }
   >

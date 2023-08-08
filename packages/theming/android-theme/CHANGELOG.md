@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
+This log was last generated on Tue, 18 Jul 2023 19:09:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.3
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Fix tests (ruaraki@microsoft.com)
+
+## 0.18.2
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.24.1
 
 ## 0.18.1
 

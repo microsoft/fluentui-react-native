@@ -31,6 +31,9 @@ export const Callout = compose<ICalloutType>({
       } else if (target?.current) {
         // Pass the tagID for a valid ref `target`
         setNativeTarget(findNodeHandle(target.current));
+      } else {
+        // Clear `target` so we may fall back on `anchorRect` if provided
+        setNativeTarget(null);
       }
     }, [target]);
 

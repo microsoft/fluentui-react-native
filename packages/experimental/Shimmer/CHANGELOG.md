@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Mon, 12 Jun 2023 17:46:43 GMT and should not be manually modified.
+This log was last generated on Mon, 31 Jul 2023 19:29:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.6
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.3
+
+## 0.10.5
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.2
+
+## 0.10.4
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.5.1
+
+## 0.10.3
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.1
+- Bump @fluentui-react-native/tokens to v0.21.1
+- Bump @fluentui-react-native/theming-utils to v0.24.1
+
+## 0.10.2
+
+Fri, 07 Jul 2023 19:45:35 GMT
+
+### Patches
+
+- Add special handling for shimmer colors that use OpaqueColorValue such as PlatformColor (patboyd@microsoft.com)
+
+## 0.10.1
+
+Wed, 21 Jun 2023 22:47:32 GMT
+
+### Patches
+
+- update Shimmer direction for rtl (joannaquu@gmail.com)
 
 ## 0.10.0
 

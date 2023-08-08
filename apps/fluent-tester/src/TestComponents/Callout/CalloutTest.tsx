@@ -3,7 +3,7 @@ import type { KeyboardMetrics } from 'react-native';
 import { Text, View, Switch, ScrollView } from 'react-native';
 
 import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
-import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
+import type { IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
 import { useTheme } from '@fluentui-react-native/framework';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
@@ -67,7 +67,7 @@ const StandardCallout: React.FunctionComponent = () => {
   const greenTargetRef = React.useRef<View>(null);
   const decoyBtn1Ref = React.useRef<IFocusable>(null);
   const decoyBtn2Ref = React.useRef<IFocusable>(null);
-  const [anchorRef, setAnchorRef] = React.useState(redTargetRef);
+  const [anchorRef, setAnchorRef] = React.useState<React.RefObject<View> | undefined>(redTargetRef);
   const [hoveredTargetsCount, setHoveredTargetsCount] = React.useState(0);
   const [displayCountHoveredTargets, setDisplayCountHoveredTargets] = React.useState(0);
 
@@ -147,6 +147,17 @@ const StandardCallout: React.FunctionComponent = () => {
     setAnchorRef(anchorRef === redTargetRef ? greenTargetRef : anchorRef === greenTargetRef ? blueTargetRef : redTargetRef);
   }, [anchorRef]);
 
+  const switchTargetRefOrRect = React.useCallback(() => {
+    // Switch between RGB views or a fixed anchor
+    setAnchorRef(anchorRef === redTargetRef || anchorRef === greenTargetRef || anchorRef == blueTargetRef ? undefined : redTargetRef);
+  }, [anchorRef]);
+
+  React.useEffect(() => {
+    if (!showStandardCallout && anchorRef === undefined) {
+      setAnchorRef(redTargetRef);
+    }
+  }, [anchorRef, setAnchorRef, showStandardCallout]);
+
   const onShowStandardCallout = React.useCallback(() => {
     setIsStandardCalloutVisible(true);
   }, []);
@@ -205,6 +216,13 @@ const StandardCallout: React.FunctionComponent = () => {
   const addButton = React.useCallback(() => {
     setScrollviewContents((arr) => [...arr, 1]);
   }, [setScrollviewContents]);
+
+  const calloutTargetOrAnchor: Partial<ICalloutProps> = {};
+  if (anchorRef) {
+    calloutTargetOrAnchor.target = anchorRef;
+  } else {
+    calloutTargetOrAnchor.anchorRect = { screenX: 50, screenY: 50, width: 1, height: 1 };
+  }
 
   return (
     <View>
@@ -325,7 +343,7 @@ const StandardCallout: React.FunctionComponent = () => {
         <Callout
           {...{
             doNotTakePointerCapture: openCalloutOnHoverAnchor ?? undefined,
-            target: anchorRef,
+            ...calloutTargetOrAnchor,
             onDismiss: onDismissStandardCallout,
             onShow: onShowStandardCallout,
             ...(customRestoreFocus && { onRestoreFocus: onRestoreFocusStandardCallout }),
@@ -344,6 +362,7 @@ const StandardCallout: React.FunctionComponent = () => {
               <View style={fluentTesterStyles.scrollViewContainer}>
                 <ScrollView contentContainerStyle={fluentTesterStyles.scrollViewStyle} showsVerticalScrollIndicator={true}>
                   <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
+                  <StealthButton content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
                   <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
                   <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
                   {scrollviewContents.map((value) => {
@@ -355,6 +374,7 @@ const StandardCallout: React.FunctionComponent = () => {
               //else
               <View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
                 <Button content="click to change anchor" onClick={toggleCalloutRef} />
+                <Button content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
               </View>
             )}
           </Pressable>

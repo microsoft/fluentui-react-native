@@ -1,5 +1,6 @@
 import {
   AndroidAttribute,
+  androidAttributeToEnumName,
   Attribute,
   attributeToEnumName,
   BASE_TESTPAGE,
@@ -134,13 +135,20 @@ export abstract class BasePage {
     const el = await element;
     const actualValue = await el.getAttribute(attribute);
     if (expectedValue !== actualValue) {
-      throw new Error(
-        `On ${this._pageName}, a test component with a testID = '${await el.getAttribute(Attribute.TestID)}' should have attribute, ${
-          attributeToEnumName[attribute]
-        } (which maps to windows attribute '${attribute}' property on the element), equal to '${expectedValue}'. Instead, ${
-          attributeToEnumName[attribute]
-        } is equal to '${actualValue}'.`,
-      );
+      switch (this.platform) {
+        case 'android':
+          throw new Error(
+            `On ${this._pageName}, expected attribute ${androidAttributeToEnumName[attribute]} value to be ${expectedValue} but got ${actualValue}`,
+          );
+        default:
+          throw new Error(
+            `On ${this._pageName}, a test component with a testID = '${await el.getAttribute(Attribute.TestID)}' should have attribute, ${
+              attributeToEnumName[attribute]
+            } (which maps to windows attribute '${attribute}' property on the element), equal to '${expectedValue}'. Instead, ${
+              attributeToEnumName[attribute]
+            } is equal to '${actualValue}'.`,
+          );
+      }
     }
     return true;
   }

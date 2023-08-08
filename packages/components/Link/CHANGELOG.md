@@ -1,8 +1,60 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Sat, 17 Jun 2023 00:00:18 GMT and should not be manually modified.
+This log was last generated on Mon, 31 Jul 2023 19:29:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.8
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.14.4
+- Bump @fluentui-react-native/framework to v0.11.3
+- Bump @fluentui-react-native/interactive-hooks to v0.24.5
+- Bump @fluentui-react-native/text to v0.21.5
+
+## 0.19.7
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.14.3
+- Bump @fluentui-react-native/framework to v0.11.2
+- Bump @fluentui-react-native/interactive-hooks to v0.24.4
+- Bump @fluentui-react-native/text to v0.21.4
+
+## 0.19.6
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.14.2
+- Bump @fluentui-react-native/adapters to v0.11.1
+- Bump @fluentui-react-native/framework to v0.11.1
+- Bump @fluentui-react-native/interactive-hooks to v0.24.3
+- Bump @fluentui-react-native/text to v0.21.3
+- Bump @fluentui-react-native/tokens to v0.21.1
+
+## 0.19.5
+
+Mon, 03 Jul 2023 06:39:58 GMT
+
+### Patches
+
+- Fix inline link keyboard access (ayushsinghs@yahoo.in)
+
+## 0.19.4
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.2
+- Bump @fluentui-react-native/text to v0.21.2
 
 ## 0.19.3
 

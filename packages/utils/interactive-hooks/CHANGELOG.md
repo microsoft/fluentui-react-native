@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Sat, 17 Jun 2023 00:00:18 GMT and should not be manually modified.
+This log was last generated on Mon, 31 Jul 2023 19:29:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.5
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.3
+
+## 0.24.4
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.2
+
+## 0.24.3
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.1
+- Bump @fluentui-react-native/framework to v0.11.1
+
+## 0.24.2
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- [useKeyEvent] Make event parameter non optional (saadnajmi2@gmail.com)
 
 ## 0.24.1
 
