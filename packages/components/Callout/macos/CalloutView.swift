@@ -362,10 +362,10 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
 	/// view hierarchy, ensuring our React Views are not placed in the main window.
 	private lazy var proxyView: NSView = {
-    let visualEffectView = FlippedVisualEffectView()
-    visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-    visualEffectView.material = material
-    visualEffectView.state = .active
+		let visualEffectView = FlippedVisualEffectView()
+		visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+		visualEffectView.material = material
+		visualEffectView.state = .active
 		visualEffectView.wantsLayer = true
 		visualEffectView.layer?.cornerRadius = calloutWindowCornerRadius
 
