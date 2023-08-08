@@ -376,7 +376,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
 			preconditionFailure("Callout could not create RCTTouchHandler")
 		}
-	  visualEffectView.addGestureRecognizer(touchHandler)
+		visualEffectView.addGestureRecognizer(touchHandler)
 
 		return visualEffectView
 	}()
