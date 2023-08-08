@@ -27,6 +27,22 @@ export type DirectionalHint =
   | 'bottomCenter'
   | 'bottomRightEdge';
 
+export type VisualEffectMaterial =
+  | 'titlebar'
+  | 'selection'
+  | 'menu'
+  | 'popover'
+  | 'sidebar'
+  | 'headerview'
+  | 'sheet'
+  | 'windowbackground'
+  | 'hudWindow'
+  | 'fullScreenUI'
+  | 'toolTip'
+  | 'contentBackground'
+  | 'underWindowBackground'
+  | 'underPageBackground';
+
 export type DismissBehaviors = 'preventDismissOnKeyDown' | 'preventDismissOnClickOutside';
 
 export interface RestoreFocusEvent {
@@ -219,6 +235,13 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
    * @platform macos
    */
   vibrant?: boolean;
+
+  /**
+   * Determines the material of the NSVisualEffectView.
+   * https://developer.apple.com/documentation/appkit/nsvisualeffectview/material/
+   * @platform macos
+   */
+  material?: VisualEffectMaterial;
 }
 
 export type ICalloutSlotProps = {

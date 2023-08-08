@@ -35,6 +35,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var vibrant: Bool = false
 
+	@objc public var material: NSVisualEffectView.Material = .menu
+
 	public weak var bridge: RCTBridge?
 
 	private init() {
@@ -366,7 +368,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		if (vibrant) {
 			let visualEffectView = FlippedVisualEffectView()
 			visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-			visualEffectView.material = .menu
+			visualEffectView.material = material
 			visualEffectView.state = .active
 			view = visualEffectView
 		} else {

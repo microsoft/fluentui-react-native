@@ -32,6 +32,23 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 	@"bottomRightEdge": @(NSRectEdgeMinY),
 }), NSRectEdgeMaxY, integerValue);
 
+RCT_ENUM_CONVERTER(NSVisualEffectMaterial, (@{
+	@"titlebar": @(NSVisualEffectMaterialTitlebar),
+	@"selection": @(NSVisualEffectMaterialSelection),
+	@"menu": @(NSVisualEffectMaterialMenu),
+	@"popover": @(NSVisualEffectMaterialPopover),
+	@"sidebar": @(NSVisualEffectMaterialSidebar),
+	@"headerview": @(NSVisualEffectMaterialHeaderView),
+	@"sheet": @(NSVisualEffectMaterialSheet),
+	@"windowbackground": @(NSVisualEffectMaterialWindowBackground),
+	@"hudWindow": @(NSVisualEffectMaterialHUDWindow),
+	@"fullScreenUI": @(NSVisualEffectMaterialFullScreenUI),
+	@"toolTip": @(NSVisualEffectMaterialToolTip),
+	@"contentBackground": @(NSVisualEffectMaterialContentBackground),
+	@"underWindowBackground": @(NSVisualEffectMaterialUnderWindowBackground),
+	@"underPageBackground": @(NSVisualEffectMaterialUnderPageBackground),
+}), NSVisualEffectMaterialMenu, integerValue);
+
 @end
 
 @interface RCT_EXTERN_MODULE(FRNCalloutManager, RCTViewManager)
@@ -49,5 +66,8 @@ RCT_EXPORT_VIEW_PROPERTY(onShow, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDismiss, RCTDirectEventBlock)
 
 RCT_EXPORT_VIEW_PROPERTY(vibrant, BOOL)
+
+RCT_EXPORT_VIEW_PROPERTY(material, NSVisualEffectMaterial)
+
 
 @end

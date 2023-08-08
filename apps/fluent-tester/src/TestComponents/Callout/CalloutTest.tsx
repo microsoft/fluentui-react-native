@@ -4,6 +4,7 @@ import { Text, View, Switch, ScrollView } from 'react-native';
 
 import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
 import type { IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
+import type { VisualEffectMaterial } from '@fluentui-react-native/callout';
 import { useTheme } from '@fluentui-react-native/framework';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
@@ -179,6 +180,9 @@ const StandardCallout: React.FunctionComponent = () => {
     [decoyBtn1Ref, decoyBtn2Ref],
   );
 
+  const [vibrant, setVibrant] = React.useState(false);
+  const [selectedMateral, setSelectedMateral] = React.useState<VisualEffectMaterial>('menu');
+
   const colorDefault: string = 'default';
   const colorSelections: string[] = [colorDefault, 'red', 'green', 'blue'];
   const menuPickerColorCollection = colorSelections.map((color) => {
@@ -205,7 +209,29 @@ const StandardCallout: React.FunctionComponent = () => {
   const [showScrollViewCallout, setShowScrollViewCalout] = React.useState(false);
   const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
 
-  const [vibrant, setVibrant] = React.useState(false);
+  const materialDefault: VisualEffectMaterial = 'menu';
+  const materialSelections: string[] = [
+    'titlebar',
+    'selection',
+    'menu',
+    'popover',
+    'sidebar',
+    'headerview',
+    'sheet',
+    'windowbackground',
+    'hudWindow',
+    'fullScreenUI',
+    'toolTip',
+    'contentBackground',
+    'underWindowBackground',
+    'underPageBackground',
+  ];
+  const materialsCollection = materialSelections.map((material) => {
+    return {
+      label: material,
+      value: material,
+    };
+  });
 
   const removeButton = React.useCallback(() => {
     const tempArray = scrollviewContents;
@@ -286,6 +312,12 @@ const StandardCallout: React.FunctionComponent = () => {
             onChange={(color) => setSelectedBorderWidth(color === colorDefault ? undefined : color)}
             collection={menuPickerBorderWidthCollection}
           />
+          <MenuPicker
+            prompt="Material (macOS Only)"
+            selected={selectedMateral || materialDefault}
+            onChange={(material) => setSelectedMateral(material)}
+            collection={materialsCollection}
+          />
         </View>
 
         <Separator vertical />
@@ -355,6 +387,7 @@ const StandardCallout: React.FunctionComponent = () => {
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: parseInt(selectedBorderWidth) }),
             ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
+            material: 'popover',
           }}
         >
           <Pressable onHoverIn={() => calloutHoveredCallback(true)} onHoverOut={() => calloutHoveredCallback(false)}>
@@ -372,7 +405,7 @@ const StandardCallout: React.FunctionComponent = () => {
               </View>
             ) : (
               //else
-              <View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
+              <View style={{ padding: 20 }}>
                 <Button content="click to change anchor" onClick={toggleCalloutRef} />
                 <Button content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
               </View>
