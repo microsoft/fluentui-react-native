@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { KeyboardMetrics } from 'react-native';
-import { Text, View, Switch, ScrollView } from 'react-native';
+import { Text, View, Switch, ScrollView, Platform } from 'react-native';
 
 import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
 import type { IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
@@ -190,8 +190,8 @@ const StandardCallout: React.FunctionComponent = () => {
   const [selectedBackgroundColor, setSelectedBackgroundColor] = React.useState<string | undefined>(undefined);
   const [selectedBorderColor, setSelectedBorderColor] = React.useState<string | undefined>(undefined);
 
-  const borderWidthDefault: string = '1';
-  const borderWidthSelections: string[] = ['1', '2', '4', '10'];
+  const borderWidthDefault: string = Platform.OS === 'macos' ? '0' : '1';
+  const borderWidthSelections: string[] = ['0', '1', '2', '4', '10'];
   const menuPickerBorderWidthCollection = borderWidthSelections.map((width) => {
     return {
       label: width,
@@ -199,7 +199,17 @@ const StandardCallout: React.FunctionComponent = () => {
     };
   });
 
+  const borderRadiusDefault: string = '5';
+  const borderRadiusSelections: string[] = ['0', '5', '7', '15'];
+  const menuPickerBorderRadiusCollection = borderRadiusSelections.map((width) => {
+    return {
+      label: width,
+      value: width,
+    };
+  });
+
   const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<string | undefined>(undefined);
+  const [selectedBorderRadius, setSelectedBorderRadius] = React.useState<string | undefined>(undefined);
 
   const [showScrollViewCallout, setShowScrollViewCalout] = React.useState(false);
   const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
@@ -278,6 +288,12 @@ const StandardCallout: React.FunctionComponent = () => {
             onChange={(color) => setSelectedBorderWidth(color === colorDefault ? undefined : color)}
             collection={menuPickerBorderWidthCollection}
           />
+          <MenuPicker
+            prompt="Border Radius (macOS Only)"
+            selected={selectedBorderRadius || borderRadiusDefault}
+            onChange={(radius) => setSelectedBorderRadius(radius === borderRadiusDefault ? undefined : radius)}
+            collection={menuPickerBorderRadiusCollection}
+          />
         </View>
 
         <Separator vertical />
@@ -345,6 +361,7 @@ const StandardCallout: React.FunctionComponent = () => {
             ...(selectedBorderColor && { borderColor: selectedBorderColor }),
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: parseInt(selectedBorderWidth) }),
+            ...(selectedBorderRadius && { borderRadius: parseInt(selectedBorderRadius) }),
             ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
           }}
         >
