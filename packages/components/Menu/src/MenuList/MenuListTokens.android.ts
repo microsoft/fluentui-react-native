@@ -6,6 +6,6 @@ import type { MenuListTokens } from './MenuList.types';
 
 export const defaultMenuListTokens: TokenSettings<MenuListTokens, Theme> = (t: Theme): MenuListTokens => ({
   backgroundColor: t.colors.neutralBackground1,
-  cornerRadius: globalTokens.corner.radius80,
+  borderRadius: globalTokens.corner.radius80,
   paddingVertical: globalTokens.size80,
 });

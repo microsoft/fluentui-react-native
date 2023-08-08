@@ -27,7 +27,7 @@ To learn more about all the commands that this monorepo supports, see the wiki:
 `,
 };
 
-if (path.basename(npmPath) !== 'yarn.js') {
+if (path.basename(npmPath) !== 'yarn.js' && path.basename(npmPath) !== 'yarn') {
   console.error(Strings.useYarnInstead);
 
   if (!detectYarnInstallation()) {
@@ -60,6 +60,12 @@ function checkRepositoryLocation() {
 }
 
 function detectYarnInstallation() {
-  const yarnResult = spawnSync('yarn', ['--version']);
+  let yarnResult;
+  if (process.platform === 'win32') {
+    yarnResult = spawnSync('yarn.cmd', ['--version']);
+  } else {
+    yarnResult = spawnSync('yarn', ['--version']);
+  }
+
   return yarnResult.status === 0;
 }

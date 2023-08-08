@@ -45,6 +45,7 @@
     "@fluentui-react-native/chip": "^0.1.4",
     "@fluentui-react-native/default-theme": ">=0.19.4 <1.0.0",
     "@fluentui-react-native/divider": "^0.5.5",
+    "@fluentui-react-native/drawer": "^0.2.6",
     "@fluentui-react-native/dropdown": ">=0.8.15 <1.0.0",
     "@fluentui-react-native/experimental-activity-indicator": ">=0.8.4 <1.0.0",
     "@fluentui-react-native/experimental-appearance-additions": "^0.5.5",
@@ -61,7 +62,6 @@
     "@fluentui-react-native/framework": ">=0.11.3 <1.0.0",
     "@fluentui-react-native/icon": "0.19.5",
     "@fluentui-react-native/input": "^0.3.7",
-    "@fluentui-react-native/drawer": "^0.2.6",
     "@fluentui-react-native/interactive-hooks": ">=0.24.5 <1.0.0",
     "@fluentui-react-native/menu": "^1.11.14",
     "@fluentui-react-native/merge-props": ">=0.7.0 <1.0.0",
@@ -107,7 +107,7 @@
     "metro-config": "^0.73.7",
     "metro-react-native-babel-preset": "^0.73.7",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^2.2.1",
+    "react-native-test-app": "^2.5.15",
     "react-test-renderer": "18.2.0"
   },
   "peerDependencies": {
