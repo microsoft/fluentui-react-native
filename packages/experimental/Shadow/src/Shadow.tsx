@@ -146,8 +146,16 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
   return { inner: { style: innerStyle }, outer: { style: outerStyle } };
 }
 
-const removeUndefinedProperties = (object: any) => {
-  return Object.fromEntries(Object.entries(object).filter(([_, v]) => v != null));
+function withObjectAssign(object, [key, value]) {
+  if (value !== undefined) {
+    return Object.assign(object, { [key]: value });
+  }
+
+  return object;
+}
+
+const removeUndefinedProperties = (object: ViewStyle) => {
+  return Object.entries(object).reduce(withObjectAssign, {});
 };
 
 Shadow.displayName = shadowName;

@@ -9,9 +9,9 @@ export type MenuPopoverTokens =
   | Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' | 'dismissBehaviors'> & {
       /**
        * The props for the corner radius for the Modal MenuPopover
-       * @platform android
+       * @platform android macos
        */
-      cornerRadius?: number;
+      borderRadius?: number;
 
       /**
        * Shadown elevation for the Modal MenuPopover

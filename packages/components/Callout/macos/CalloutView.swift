@@ -66,6 +66,14 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
+	override func updateLayer() {
+		if let layer = calloutWindow.contentView?.layer {
+			layer.borderColor =  borderColor.cgColor
+			layer.borderWidth = borderWidth
+			layer.backgroundColor = backgroundColor.cgColor
+			layer.cornerRadius = borderRadius
+		}
+	}
 
 	// MARK: RCTComponent Overrides
 
@@ -367,7 +375,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		visualEffectView.material = material
 		visualEffectView.state = .active
 		visualEffectView.wantsLayer = true
-		visualEffectView.layer?.cornerRadius = calloutWindowCornerRadius
 
 		/**
 		 * We can't directly call touchHandler.attach(to:) because `visualEffectView` is not always an RCTUIView.
@@ -400,7 +407,3 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	private var isCalloutWindowShown = false
 }
-
-
-
-private var calloutWindowCornerRadius: CGFloat = 5.0

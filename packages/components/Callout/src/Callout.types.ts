@@ -55,7 +55,6 @@ export interface RestoreFocusEvent {
 }
 
 interface OmittedBorderTokens {
-  borderRadius?: number | string;
   borderStyle?: ViewStyle['borderStyle'];
 }
 

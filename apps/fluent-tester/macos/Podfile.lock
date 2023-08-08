@@ -415,13 +415,13 @@ PODS:
     - React-Core
     - React-cxxreact
     - ReactCommon/turbomodule/core
-  - ReactTestApp-DevSupport (2.5.14):
+  - ReactTestApp-DevSupport (2.5.15):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
   - RNCPicker (2.4.10):
     - React-Core
-  - RNSVG (13.10.0):
+  - RNSVG (13.11.0):
     - React-Core
   - SocketRocket (0.7.0)
   - Yoga (1.14.0)
@@ -611,13 +611,13 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 3702e9f2d25c1efe68b2fe29fc65a38a20e3c4ea
   ReactCommon: eed83bf8fcd8fecdf38892710f30f46f5c5eefc0
   ReactNativeHost: 5caf8c9381f26c453fabbe8c3b87f6a013a3c459
-  ReactTestApp-DevSupport: 96681f7d9f0bdd1988637b90c4594575ff64ff91
+  ReactTestApp-DevSupport: 9b9eb9bf56d1a2f3ce71875c20597decdc04683c
   ReactTestApp-Resources: 8c0164a3cc5052418c92018e2af0e05d564aa307
   RNCPicker: 0bc2f0a29abcca7b7ed44a2d036aac9ab6d25700
-  RNSVG: 80584470ff1ffc7994923ea135a3e5ad825546b9
+  RNSVG: 03e4d258ca355d7836a0a5dd4d4dc63c1eb49cbb
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: d2019bf885074096f2f0eddc32dedf52a60f63e7
 
 PODFILE CHECKSUM: d3fe834dea1e24594a8ba545f70b5250bbc25c91
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.12.0
