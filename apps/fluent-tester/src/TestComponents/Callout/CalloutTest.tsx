@@ -401,7 +401,6 @@ const StandardCallout: React.FunctionComponent = () => {
               <View style={{ padding: 20 }}>
                 <Button content="click to change anchor" onClick={toggleCalloutRef} />
                 <Button content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
-                <Text>Material: {selectedMateral}</Text>
               </View>
             )}
           </Pressable>
