@@ -289,7 +289,7 @@ const StandardCallout: React.FunctionComponent = () => {
             collection={menuPickerBorderWidthCollection}
           />
           <MenuPicker
-            prompt="Border Radius (macOS Only)"
+            prompt="Border Radius"
             selected={selectedBorderRadius || borderRadiusDefault}
             onChange={(radius) => setSelectedBorderRadius(radius === borderRadiusDefault ? undefined : radius)}
             collection={menuPickerBorderRadiusCollection}
