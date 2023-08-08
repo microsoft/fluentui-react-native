@@ -1,7 +1,6 @@
 import type { AliasColorTokens, Variants } from '@fluentui-react-native/theme-types';
 
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
-  console.log('pipelineOutput ' + JSON.stringify(pipelineOutput.brandForeground1.disabled, null, 2));
   return {
     neutralForeground1: pipelineOutput.neutralForeground1.rest,
     neutralForeground1Hover: pipelineOutput.neutralForeground1.hover,
