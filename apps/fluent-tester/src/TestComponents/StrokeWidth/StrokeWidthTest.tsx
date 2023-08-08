@@ -24,7 +24,6 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       height: 100,
       backgroundColor: isLightMode ? globalTokens.color.grey80 : globalTokens.color.grey10,
       display: 'flex',
-      justifyContent: 'center',
       marginTop: 8,
     },
   };
@@ -41,10 +40,11 @@ const StrokeWidthTestComponent: React.FunctionComponent<StrokeWidthTestComponent
   const isLightMode = getCurrentAppearance(theme.host.appearance, 'light') === 'light';
   const exampleStrokeStyle = React.useMemo(
     () => ({
-      height: props.strokeWidth,
-      backgroundColor: isLightMode ? globalTokens.color.grey10 : globalTokens.color.grey80,
+      height: 50,
+      borderBottomWidth: props.strokeWidth,
+      borderColor: isLightMode ? globalTokens.color.grey10 : globalTokens.color.grey80,
     }),
-    [props.strokeWidth],
+    [props.strokeWidth, isLightMode],
   );
 
   return (
