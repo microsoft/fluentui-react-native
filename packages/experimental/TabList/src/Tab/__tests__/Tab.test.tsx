@@ -5,14 +5,10 @@ import * as renderer from 'react-test-renderer';
 
 import Tab from '../Tab';
 
-// Mocks out timer functions such as setTimeout. Without this, tests fail before the second render completes.
-jest.useFakeTimers();
-
 describe('Tab component tests', () => {
   it('Tab default props', () => {
     const tree = renderer.create(<Tab tabKey="1">Tab 1</Tab>).toJSON();
     expect(tree).toMatchSnapshot();
-    // Each test needs this, again having to do with tests failing during the second render.
   });
 
   it('Tab disabled', () => {
