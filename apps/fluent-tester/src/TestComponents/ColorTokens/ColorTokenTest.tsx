@@ -53,11 +53,6 @@ const styles = StyleSheet.create({
   colorDescriptionNamePadding: { paddingRight: 5 },
 });
 
-const getSwatchColorStyle = (colorName: string, colorValue: ColorValue): ViewStyle => {
-  styles[colorName] = styles[colorName] || { backgroundColor: colorValue };
-  return styles[colorName];
-};
-
 type ColorTokenProps = { colorValue: ColorValue; colorName: string };
 const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps) => {
   if (p.colorValue === undefined) {
@@ -68,7 +63,7 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
   return (
     <View style={styles.swatchItem}>
       <View
-        style={[getSwatchColorStyle(p.colorName, p.colorValue), themedStyles.swatch]}
+        style={[{ backgroundColor: p.colorValue }, themedStyles.swatch]}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(COLORTOKENS_TEST_COMPONENT)}
       />
@@ -89,7 +84,6 @@ const getSwatch = (item) => {
 
 const AliasColorTokensSwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
-
   const aliasColorTokens = theme.colors;
 
   const aggregator = React.useCallback(
