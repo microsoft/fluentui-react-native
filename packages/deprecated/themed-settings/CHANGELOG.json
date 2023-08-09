@@ -2,6 +2,27 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Wed, 09 Aug 2023 22:02:15 GMT",
+      "version": "0.10.2",
+      "tag": "@uifabricshared/themed-settings_v0.10.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/themed-settings",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.13.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/themed-settings",
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.3.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Jun 2023 17:46:44 GMT",
       "tag": "@uifabricshared/themed-settings_v0.10.1",
       "version": "0.10.1",

@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/drawer
 
-This log was last generated on Mon, 31 Jul 2023 19:29:59 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Aug 2023 22:02:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.7
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.4
+- Bump @fluentui-react-native/interactive-hooks to v0.24.6
+- Bump @fluentui-react-native/theme-tokens to v0.25.1
+- Bump @fluentui-react-native/use-styling to v0.11.1
 
 ## 0.2.6
 

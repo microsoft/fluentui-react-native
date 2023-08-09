@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[Callout][macOS] Support Border Tokens",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch"
-}

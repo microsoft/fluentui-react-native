@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Result of yarn",
-  "packageName": "@fluentui-react-native/spinner",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

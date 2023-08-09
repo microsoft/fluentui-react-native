@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix StrokeWidthTest so strokeWidth05 is visible",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

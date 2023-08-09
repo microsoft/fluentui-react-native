@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix for win32?",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
