@@ -8407,6 +8407,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"appium-adb@npm:^9.14.1":
+  version: 9.14.4
+  resolution: "appium-adb@npm:9.14.4"
+  dependencies:
+    "@appium/support": ^4.0.0
+    adbkit-apkreader: ^3.1.2
+    async-lock: ^1.0.0
+    asyncbox: ^2.6.0
+    bluebird: ^3.4.7
+    ini: ^4.1.1
+    lodash: ^4.0.0
+    lru-cache: ^10.0.0
+    semver: ^7.0.0
+    source-map-support: ^0.x
+    teen_process: ^2.0.1
+    utf7: ^1.0.2
+  checksum: ebbc94e97f759ea30c35794ef652e635e128dd59fa67414cc77c180c060ee0068835a00d847da19c485276b6d10318e0a1a5ce8b087270c0a6014fd884f1fdea
+  languageName: node
+  linkType: hard
+
 "appium-android-driver@npm:^5.14.0":
   version: 5.14.0
   resolution: "appium-android-driver@npm:5.14.0"
@@ -8434,7 +8454,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-chromedriver@npm:^5.2.0, appium-chromedriver@npm:^5.3.1":
+"appium-chromedriver@npm:^5.2.0":
   version: 5.4.0
   resolution: "appium-chromedriver@npm:5.4.0"
   dependencies:
@@ -8453,6 +8473,29 @@ __metadata:
     teen_process: ^2.0.0
     xpath: ^0.x
   checksum: 927c2c842d00f1e9aa3f322e845494cfa22261547120319e07beec43cec8403ac729b8fff8a8aa2a91eeddefb7a52fe1a67dd37a28e3be9ec3e38556a4a37634
+  languageName: node
+  linkType: hard
+
+"appium-chromedriver@npm:^5.6.1":
+  version: 5.6.2
+  resolution: "appium-chromedriver@npm:5.6.2"
+  dependencies:
+    "@appium/base-driver": ^9.1.0
+    "@appium/support": ^4.0.0
+    "@babel/runtime": ^7.0.0
+    "@xmldom/xmldom": ^0.x
+    appium-adb: ^9.14.1
+    asyncbox: ^2.0.2
+    axios: ^1.x
+    bluebird: ^3.5.1
+    compare-versions: ^6.0.0
+    fancy-log: ^2.0.0
+    lodash: ^4.17.4
+    semver: ^7.0.0
+    source-map-support: ^0.x
+    teen_process: ^2.0.0
+    xpath: ^0.x
+  checksum: a2633bd5b3e511f73fdaa200104d8f26ff5563fbbaf681f6337acc4ea39791a00afcd9566754fca7ca01ca70a96f80f366eae2bcb660ee4aa8117045f8982a60
   languageName: node
   linkType: hard
 
@@ -8548,13 +8591,13 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.12.3":
-  version: 2.29.2
-  resolution: "appium-uiautomator2-driver@npm:2.29.2"
+  version: 2.29.3
+  resolution: "appium-uiautomator2-driver@npm:2.29.3"
   dependencies:
     "@babel/runtime": ^7.0.0
     appium-adb: ^9.13.1
     appium-android-driver: ^5.14.0
-    appium-chromedriver: ^5.3.1
+    appium-chromedriver: ^5.6.1
     appium-uiautomator2-server: ^5.12.2
     asyncbox: ^2.3.1
     axios: ^1.x
@@ -8566,7 +8609,7 @@ __metadata:
     teen_process: ^2.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 2e83571020c3c6921d6f02974bb61661a6d087376875a003dc78dda8b1690063dd946dddc8533f3c8f76a8d08311859763a2c2c5fa2b5f011e75416bb824c8df
+  checksum: 046b9392806925777a88e2debb7112a67bf5ccc4a68e6cbb8f76aef6d14616a9162bbc88093f24e003cc720fc764bd64dfad8cc3fd43154dee51ad38196126d0
   languageName: node
   linkType: hard
 
@@ -10409,6 +10452,13 @@ __metadata:
   version: 5.0.3
   resolution: "compare-versions@npm:5.0.3"
   checksum: f66a4bb6ef8ff32031cc92c04dea4bbead039e72a7f6c7df7ef05f5a42ddca9202f8875b7449add54181e73b89f039662a8760c8db0ab036c4e8f653a7cd29c1
+  languageName: node
+  linkType: hard
+
+"compare-versions@npm:^6.0.0":
+  version: 6.1.0
+  resolution: "compare-versions@npm:6.1.0"
+  checksum: d4e2a45706a023d8d0b6680338b66b79e20bd02d1947f0ac6531dab634cbed89fa373b3f03d503c5e489761194258d6e1bae67a07f88b1efc61648454f2d47e7
   languageName: node
   linkType: hard
 
@@ -13693,6 +13743,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ini@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "ini@npm:4.1.1"
+  checksum: 0e5909554074fbc31824fa5415b0f604de4a665514c96a897a77bf77353a7ad4743927321270e9d0610a9d510ccd1f3cd77422f7cc80d8f4542dbce75476fb6d
+  languageName: node
+  linkType: hard
+
 "inquirer@npm:8.2.4":
   version: 8.2.4
   resolution: "inquirer@npm:8.2.4"
@@ -16265,6 +16322,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lru-cache@npm:^10.0.0, lru-cache@npm:^9.1.1 || ^10.0.0":
+  version: 10.0.0
+  resolution: "lru-cache@npm:10.0.0"
+  checksum: 18f101675fe283bc09cda0ef1e3cc83781aeb8373b439f086f758d1d91b28730950db785999cd060d3c825a8571c03073e8c14512b6655af2188d623031baf50
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^4.0.1":
   version: 4.1.5
   resolution: "lru-cache@npm:4.1.5"
@@ -16297,13 +16361,6 @@ __metadata:
   version: 7.18.3
   resolution: "lru-cache@npm:7.18.3"
   checksum: e550d772384709deea3f141af34b6d4fa392e2e418c1498c078de0ee63670f1f46f5eee746e8ef7e69e1c895af0d4224e62ee33e66a543a14763b0f2e74c1356
-  languageName: node
-  linkType: hard
-
-"lru-cache@npm:^9.1.1 || ^10.0.0":
-  version: 10.0.0
-  resolution: "lru-cache@npm:10.0.0"
-  checksum: 18f101675fe283bc09cda0ef1e3cc83781aeb8373b439f086f758d1d91b28730950db785999cd060d3c825a8571c03073e8c14512b6655af2188d623031baf50
   languageName: node
   linkType: hard
 
