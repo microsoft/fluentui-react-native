@@ -18,8 +18,18 @@ const BasicActivityIndicator: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <View style={commonStyles.root}>
-        <VisualEffectView style={{ width: 100, height: 100, borderColor: 'red', borderWidth: 1, borderRadius: 8 }} />
+      <View style={[commonStyles.root, { width: 100, height: 500, backgroundColor: 'red' }]}>
+        <VisualEffectView
+          behindWindow={true}
+          material={'menu'}
+          style={{ width: 200, height: 400, borderColor: 'red', borderWidth: 1, borderRadius: 8 }}
+        >
+          <VisualEffectView
+            behindWindow={true}
+            material={'popover'}
+            style={{ width: 200, height: 150, borderColor: 'red', borderWidth: 1, borderRadius: 8 }}
+          ></VisualEffectView>
+        </VisualEffectView>
       </View>
     </Stack>
   );

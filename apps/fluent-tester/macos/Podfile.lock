@@ -21,6 +21,8 @@ PODS:
     - React
   - FRNRadioButton (0.18.7):
     - React
+  - FRNVisualEffectView (0.0.1):
+    - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.13.1):
     - MicrosoftFluentUI/ActivityIndicator_ios (= 0.13.1)
@@ -436,6 +438,7 @@ DEPENDENCIES:
   - FRNCheckbox (from `../../../packages/experimental/Checkbox/FRNCheckbox.podspec`)
   - FRNMenuButton (from `../../../packages/components/MenuButton/FRNMenuButton.podspec`)
   - FRNRadioButton (from `../../../packages/components/RadioGroup/FRNRadioButton.podspec`)
+  - "FRNVisualEffectView (from `../../../node_modules/@fluentui-react-native/visual-effect-view`)"
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTFocusZone (from `../../../packages/components/FocusZone/RCTFocusZone.podspec`)
@@ -498,6 +501,8 @@ EXTERNAL SOURCES:
     :path: "../../../packages/components/MenuButton/FRNMenuButton.podspec"
   FRNRadioButton:
     :path: "../../../packages/components/RadioGroup/FRNRadioButton.podspec"
+  FRNVisualEffectView:
+    :path: "../../../node_modules/@fluentui-react-native/visual-effect-view"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -580,6 +585,7 @@ SPEC CHECKSUMS:
   FRNCheckbox: 38db97c2b45c69016a227e12f3cbcf28abb624a2
   FRNMenuButton: 5e7383ae716fdf43c99542d4e52e7bbb69cd5474
   FRNRadioButton: 45152e76fc1e8142f298c0b22f89b18801a93f74
+  FRNVisualEffectView: 96aa9488c1e19133a0468a18c66e5eed7ff2c036
   glog: 6df0a3d6e2750a50609471fd1a01fd2948d405b5
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: bf7b4921a91932051ebf1c5c2d297154b1fa3c8c
@@ -620,4 +626,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: d3fe834dea1e24594a8ba545f70b5250bbc25c91
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1
