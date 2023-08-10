@@ -1,5 +1,5 @@
 {
-  "type": "minor",
+  "type": "patch",
   "comment": "Use workspaces",
   "packageName": "@fluentui-react-native/notification",
   "email": "ruaraki@microsoft.com",
