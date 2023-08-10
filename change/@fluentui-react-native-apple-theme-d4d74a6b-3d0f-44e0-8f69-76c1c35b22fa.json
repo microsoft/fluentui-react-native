@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Expose all macOS alias color tokens through the theme",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
