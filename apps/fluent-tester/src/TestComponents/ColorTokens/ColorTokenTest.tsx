@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ViewStyle, ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 import { View, StyleSheet, Platform } from 'react-native';
 
 import { Text, ToggleButton } from '@fluentui/react-native';
