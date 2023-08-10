@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { View, Switch } from 'react-native';
+import { View, Switch, PlatformColor } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { Stack } from '@fluentui-react-native/stack';
-import { VisualEffectView } from '@fluentui-react-native/visual-effect-view';
+import { VibrancyView } from '@fluentui-react-native/vibrancy-view';
 
 import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
@@ -18,18 +18,23 @@ const BasicActivityIndicator: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <View style={[commonStyles.root, { width: 100, height: 500, backgroundColor: 'red' }]}>
-        <VisualEffectView
-          behindWindow={true}
+      <View style={[commonStyles.root, { width: 80, height: 500, backgroundColor: 'black' }]}>
+        <VibrancyView
           material={'menu'}
+          blendingMode={'behindWindow'}
           style={{ width: 200, height: 400, borderColor: 'red', borderWidth: 1, borderRadius: 8 }}
         >
-          <VisualEffectView
-            behindWindow={true}
+          {/* <VisualEffectView
+            allowsVibrancy={true}
+            behindWindow={false}
             material={'popover'}
             style={{ width: 200, height: 150, borderColor: 'red', borderWidth: 1, borderRadius: 8 }}
-          ></VisualEffectView>
-        </VisualEffectView>
+          > */}
+          <View allowsVibrancy={true} style={[commonStyles.root, { width: 150, height: 100, backgroundColor: 'blue' }]}>
+            <View allowsVibrancy={false} style={[commonStyles.root, { width: 200, height: 50, backgroundColor: 'red' }]} />
+          </View>
+        </VibrancyView>
+        {/* </VisualEffectView> */}
       </View>
     </Stack>
   );

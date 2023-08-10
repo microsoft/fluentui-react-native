@@ -2518,7 +2518,7 @@ __metadata:
     "@types/jest": ^29.0.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-macos: ^0.71.0
+    react-native-macos: ^0.71.31
     react-native-windows: ^0.71.0
   peerDependencies:
     "@office-iss/react-native-win32": ^0.71.0
@@ -2567,7 +2567,7 @@ __metadata:
     assert-never: ^1.2.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-macos: ^0.71.0
+    react-native-macos: ^0.71.31
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
@@ -3492,7 +3492,7 @@ __metadata:
     invariant: ^2.2.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-macos: ^0.71.0
+    react-native-macos: ^0.71.31
     react-native-windows: ^0.71.0
     tslib: ^2.3.1
   peerDependencies:
@@ -4075,7 +4075,7 @@ __metadata:
     "@fluentui-react-native/theme-types": ">=0.32.0 <1.0.0"
     "@fluentui-react-native/themed-stylesheet": ^1.5.1
     "@fluentui-react-native/theming-utils": ">=0.24.1 <1.0.0"
-    "@fluentui-react-native/visual-effect-view": ^0.0.1
+    "@fluentui-react-native/vibrancy-view": ^0.0.1
     "@fluentui-react-native/win32-theme": ">=0.27.2 <1.0.0"
     "@fluentui/react-native": ">=0.37.16 <1.0.0"
     "@fortawesome/fontawesome-svg-core": ^6.2.0
@@ -4092,7 +4092,7 @@ __metadata:
     metro-react-native-babel-preset: ^0.73.7
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-macos: ^0.71.0
+    react-native-macos: ^0.71.31
     react-native-svg: ^13.7.0
     react-native-svg-transformer: ^1.0.0
     react-native-test-app: ^2.5.15
@@ -4295,9 +4295,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/visual-effect-view@^0.0.1, @fluentui-react-native/visual-effect-view@workspace:packages/experimental/VisualEffectView":
+"@fluentui-react-native/vibrancy-view@^0.0.1, @fluentui-react-native/vibrancy-view@workspace:packages/experimental/VisualEffectView":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/visual-effect-view@workspace:packages/experimental/VisualEffectView"
+  resolution: "@fluentui-react-native/vibrancy-view@workspace:packages/experimental/VisualEffectView"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.1 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
@@ -18873,9 +18873,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-macos@npm:^0.71.0":
-  version: 0.71.29
-  resolution: "react-native-macos@npm:0.71.29"
+"react-native-macos@npm:^0.71.31":
+  version: 0.71.31
+  resolution: "react-native-macos@npm:0.71.31"
   dependencies:
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 10.2.4
@@ -18917,7 +18917,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native-macos: cli.js
-  checksum: 38bc52546c36e600dbb96640fed4157d121919f9462d2616f5012ab737cea42152f5b5e69e379ff02fcd7ec2db35d0d30017bd692369d83c1b2bfe837786cf21
+  checksum: a4b79b40405a967560e137bb1e80b11ac961396f48e320d51a4071d80ffe2a6874bec3481c16c8f6e3c50a6165b19cee6a5dd3f8afd1481ce454ffc299a580e6
   languageName: node
   linkType: hard
 

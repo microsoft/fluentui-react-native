@@ -1,1 +1,1 @@
-export { VisualEffectView } from './VisualEffectView';
+export { VibrancyView } from './VibrancyView';

@@ -1,7 +1,7 @@
 #import <React/RCTComponent.h>
 #import <React/RCTViewManager.h>
 
-@implementation RCTConvert (FRNVisualEffectViewAdditions)
+@implementation RCTConvert (FRNVibrancyViewAdditions)
 
 RCT_ENUM_CONVERTER(NSVisualEffectMaterial, (@{
 	@"titlebar": @(NSVisualEffectMaterialTitlebar),
@@ -20,26 +20,26 @@ RCT_ENUM_CONVERTER(NSVisualEffectMaterial, (@{
 	@"underPageBackground": @(NSVisualEffectMaterialUnderPageBackground),
 }), NSVisualEffectMaterialMenu, integerValue);
 
+RCT_ENUM_CONVERTER(NSVisualEffectBlendingMode, (@{
+	@"behindWindow": @(NSVisualEffectBlendingModeBehindWindow),
+	@"withinWindow": @(NSVisualEffectBlendingModeWithinWindow),
+}), NSVisualEffectBlendingModeBehindWindow, integerValue);
+
+RCT_ENUM_CONVERTER(NSVisualEffectState, (@{
+	@"followsWindowActiveState": @(NSVisualEffectStateFollowsWindowActiveState),
+	@"active": @(NSVisualEffectStateActive),
+	@"inactive": @(NSVisualEffectStateInactive),
+}), NSVisualEffectStateFollowsWindowActiveState, integerValue);
+
 @end
 
 
-@interface RCT_EXTERN_MODULE(FRNVisualEffectViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNVibrancyViewManager, RCTViewManager)
 
+RCT_EXPORT_VIEW_PROPERTY(material, NSVisualEffectMaterial)
 
-RCT_CUSTOM_VIEW_PROPERTY(material, NSString, NSView)
-{
-  NSVisualEffectMaterial material = [RCTConvert NSVisualEffectMaterial:json];
-  [(NSVisualEffectView *)[[view subviews] firstObject] setMaterial:material];
-}
+RCT_EXPORT_VIEW_PROPERTY(blendingMode, NSVisualEffectBlendingMode)
 
-RCT_CUSTOM_VIEW_PROPERTY(behindWindow, BOOL, NSView)
-{
-  BOOL behindWindow = [RCTConvert BOOL:json];
-  if (behindWindow) {
-	[(NSVisualEffectView *)[[view subviews] firstObject] setBlendingMode:NSVisualEffectBlendingModeBehindWindow];
-  } else {
-	[(NSVisualEffectView *)[[view subviews] firstObject] setBlendingMode:NSVisualEffectBlendingModeWithinWindow];
-  }
-}
+RCT_EXPORT_VIEW_PROPERTY(state, NSVisualEffectState)
 
 @end

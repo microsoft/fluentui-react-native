@@ -1,7 +1,8 @@
 import React from 'react';
-import { I18nManager } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
 
 import type { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
+import type { VibrancyViewProps } from '@fluentui-react-native/vibrancy-view';
 
 import type { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
 import { useMenuContext } from '../context/menuContext';
@@ -91,6 +92,10 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
     };
   });
 
+  const vibrancyViewProps: VibrancyViewProps = {
+    ...(Platform.OS === 'macos' && { material: 'menu', blendingMode: 'behindWindow', state: 'inactive' }),
+  };
+
   return {
     props: {
       accessibilityRole,
@@ -110,6 +115,9 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
       accessible: shouldFocusOnContainer,
       focusable: canFocusOnPopover,
       onBlur,
+    },
+    vibrancyView: {
+      vibrancyViewProps,
     },
   };
 };
