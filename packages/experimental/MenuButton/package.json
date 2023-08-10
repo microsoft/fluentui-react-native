@@ -26,14 +26,14 @@
     "directory": "packages/experimental/MenuButton"
   },
   "dependencies": {
-    "@fluentui-react-native/contextual-menu": "^0.22.13",
-    "@fluentui-react-native/experimental-button": "^0.18.9",
-    "@fluentui-react-native/framework": "0.11.4",
-    "@fluentui-react-native/tokens": ">=0.21.1 <1.0.0"
+    "@fluentui-react-native/contextual-menu": "workspace:*",
+    "@fluentui-react-native/experimental-button": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.71.0",
     "react": "18.2.0",
     "react-native": "^0.71.0",

@@ -26,18 +26,18 @@
     "directory": "packages/experimental/dropdown"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.11.1 <1.0.0",
-    "@fluentui-react-native/button": ">=0.34.9 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.24.12 <1.0.0",
-    "@fluentui-react-native/framework": "0.11.4",
-    "@fluentui-react-native/interactive-hooks": ">=0.24.6 <1.0.0",
-    "@fluentui-react-native/text": ">=0.21.6 <1.0.0",
-    "@fluentui-react-native/theme-tokens": "^0.25.1"
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*",
+    "@fluentui-react-native/theme-tokens": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
     "react": "18.2.0",
     "react-native": "^0.71.0",
     "react-native-svg": "^13.7.0"

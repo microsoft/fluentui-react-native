@@ -26,12 +26,12 @@
     "directory": "packages/experimental/Text"
   },
   "dependencies": {
-    "@fluentui-react-native/text": ">=0.21.6 <1.0.0",
+    "@fluentui-react-native/text": "workspace:*",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "react": "18.2.0",
     "react-native": "^0.71.0"
   },

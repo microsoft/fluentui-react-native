@@ -26,20 +26,20 @@
     "directory": "packages/experimental/Tabs"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "0.11.1",
-    "@fluentui-react-native/focus-zone": ">=0.12.8 <1.0.0",
-    "@fluentui-react-native/framework": "0.11.4",
-    "@fluentui-react-native/icon": "0.19.6",
-    "@fluentui-react-native/interactive-hooks": ">=0.24.6 <1.0.0",
-    "@fluentui-react-native/text": ">=0.21.6 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.21.1 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0",
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/icon": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*",
+    "@fluentui-react-native/use-styling": "workspace:*",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
     "@office-iss/react-native-win32": "^0.71.0",
     "react": "18.2.0",
     "react-native": "^0.71.0"

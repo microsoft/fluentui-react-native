@@ -26,11 +26,11 @@
     "directory": "packages/experimental/RadioGroup"
   },
   "dependencies": {
-    "@fluentui-react-native/radio-group": ">=0.18.8 <1.0.0"
+    "@fluentui-react-native/radio-group": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.71.0",
     "react": "18.2.0",
     "react-native": "^0.71.0"
