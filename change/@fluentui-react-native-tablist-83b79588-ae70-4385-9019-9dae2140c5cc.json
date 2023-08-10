@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add snapshot testing to TabList",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

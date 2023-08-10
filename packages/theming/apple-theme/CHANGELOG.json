@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Thu, 10 Aug 2023 19:05:55 GMT",
+      "version": "0.21.7",
+      "tag": "@fluentui-react-native/apple-theme_v0.21.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "2a50f175c3c1f519f992fba7feafb10a7a411606",
+            "comment": "Expose all macOS alias color tokens through the theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Aug 2023 22:02:13 GMT",
       "version": "0.21.6",
       "tag": "@fluentui-react-native/apple-theme_v0.21.6",

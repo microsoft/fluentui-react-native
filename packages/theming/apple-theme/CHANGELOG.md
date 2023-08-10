@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Wed, 09 Aug 2023 22:02:13 GMT and should not be manually modified.
+This log was last generated on Thu, 10 Aug 2023 19:05:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.7
+
+Thu, 10 Aug 2023 19:05:55 GMT
+
+### Patches
+
+- Expose all macOS alias color tokens through the theme (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.21.6
 
