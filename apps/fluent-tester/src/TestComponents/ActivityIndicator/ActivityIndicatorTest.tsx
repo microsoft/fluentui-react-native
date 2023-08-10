@@ -1,16 +1,14 @@
 import * as React from 'react';
-import { View, Switch, PlatformColor } from 'react-native';
+import { View, Switch } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { Stack } from '@fluentui-react-native/stack';
-import { VibrancyView } from '@fluentui-react-native/vibrancy-view';
 
 import { ACTIVITY_INDICATOR_TESTPAGE } from '../../../../E2E/src/ActivityIndicator/consts';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { width } from '@fortawesome/free-solid-svg-icons/faMountainCity';
 
 const BasicActivityIndicator: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
@@ -18,23 +16,18 @@ const BasicActivityIndicator: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <View style={[commonStyles.root, { width: 80, height: 500, backgroundColor: 'black' }]}>
-        <VibrancyView
-          material={'menu'}
-          blendingMode={'behindWindow'}
-          style={{ width: 200, height: 400, borderColor: 'red', borderWidth: 1, borderRadius: 8 }}
-        >
-          {/* <VisualEffectView
-            allowsVibrancy={true}
-            behindWindow={false}
-            material={'popover'}
-            style={{ width: 200, height: 150, borderColor: 'red', borderWidth: 1, borderRadius: 8 }}
-          > */}
-          <View allowsVibrancy={true} style={[commonStyles.root, { width: 150, height: 100, backgroundColor: 'blue' }]}>
-            <View allowsVibrancy={false} style={[commonStyles.root, { width: 200, height: 50, backgroundColor: 'red' }]} />
+      <View style={commonStyles.root}>
+        <View style={commonStyles.settings}>
+          <View style={commonStyles.switch}>
+            <Text>Animating</Text>
+            <Switch value={animating} onValueChange={setAnimating} />
           </View>
-        </VibrancyView>
-        {/* </VisualEffectView> */}
+          <View style={commonStyles.switch}>
+            <Text>HidesWhenStopped</Text>
+            <Switch value={hidesWhenStopped} onValueChange={setHidesWhenStopped} />
+          </View>
+        </View>
+        <ActivityIndicator animating={animating} hidesWhenStopped={hidesWhenStopped} />
       </View>
     </Stack>
   );

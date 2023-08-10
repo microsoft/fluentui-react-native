@@ -2518,7 +2518,7 @@ __metadata:
     "@types/jest": ^29.0.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-macos: ^0.71.31
+    react-native-macos: ^0.71.0
     react-native-windows: ^0.71.0
   peerDependencies:
     "@office-iss/react-native-win32": ^0.71.0
@@ -2567,7 +2567,7 @@ __metadata:
     assert-never: ^1.2.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-macos: ^0.71.31
+    react-native-macos: ^0.71.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
@@ -3492,7 +3492,7 @@ __metadata:
     invariant: ^2.2.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-macos: ^0.71.31
+    react-native-macos: ^0.71.0
     react-native-windows: ^0.71.0
     tslib: ^2.3.1
   peerDependencies:
@@ -4092,7 +4092,7 @@ __metadata:
     metro-react-native-babel-preset: ^0.73.7
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-macos: ^0.71.31
+    react-native-macos: ^0.71.0
     react-native-svg: ^13.7.0
     react-native-svg-transformer: ^1.0.0
     react-native-test-app: ^2.5.15
@@ -18873,7 +18873,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-macos@npm:^0.71.31":
+"react-native-macos@npm:^0.71.0":
   version: 0.71.31
   resolution: "react-native-macos@npm:0.71.31"
   dependencies:
