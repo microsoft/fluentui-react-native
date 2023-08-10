@@ -25,8 +25,15 @@ steps:
     condition: succeeded()
     displayName: 'Create success build variable'
 
+  # Appium needs to be installed globally with npm for driver installation to work
   - script: |
-      yarn appium driver install --source=npm appium-windows-driver
+      npm install appium@2.0.0 -g
+    workingDirectory: apps/E2E
+    displayName: 'Install appium'
+    condition: succeeded()
+
+  - script: |
+      appium driver install --source=npm appium-windows-driver
     workingDirectory: apps/win32
     displayName: 'Install appium driver'
     condition: succeeded()
