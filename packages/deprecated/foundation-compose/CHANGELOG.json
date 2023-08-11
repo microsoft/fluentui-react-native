@@ -2,6 +2,69 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Wed, 09 Aug 2023 22:02:15 GMT",
+      "version": "1.14.5",
+      "tag": "@uifabricshared/foundation-compose_v1.14.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/foundation-compose",
+            "commit": "144e13724c3bdd68fa821c9166fae7f9dffc7d01",
+            "comment": "Result of yarn"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.19.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.2.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.3.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/foundation-composable to v0.12.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.13.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.13.3",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/themed-settings to v0.10.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.19.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 31 Jul 2023 19:29:59 GMT",
       "version": "1.14.4",
       "tag": "@uifabricshared/foundation-compose_v1.14.4",

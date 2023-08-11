@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Mon, 31 Jul 2023 19:29:59 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Aug 2023 22:02:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.12
+
+Wed, 09 Aug 2023 22:02:13 GMT
+
+### Patches
+
+- [Callout][macOS] Support Border Tokens (saadnajmi2@gmail.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.24.6
+- Bump @uifabricshared/foundation-composable to v0.12.2
+- Bump @uifabricshared/foundation-compose to v1.14.5
+- Bump @uifabricshared/foundation-settings to v0.13.2
 
 ## 0.24.11
 

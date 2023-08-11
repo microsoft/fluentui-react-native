@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Result of yarn",
-  "packageName": "@uifabricshared/foundation-composable",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

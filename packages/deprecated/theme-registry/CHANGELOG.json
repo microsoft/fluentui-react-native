@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Wed, 09 Aug 2023 22:02:15 GMT",
+      "version": "0.10.1",
+      "tag": "@uifabricshared/theme-registry_v0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theme-registry",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.2.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 05 Jun 2023 19:26:25 GMT",
       "tag": "@uifabricshared/theme-registry_v0.10.0",
       "version": "0.10.0",

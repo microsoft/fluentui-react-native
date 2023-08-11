@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update tests",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

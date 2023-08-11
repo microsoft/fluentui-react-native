@@ -61,12 +61,12 @@ jobs:
         condition: ${{ parameters.skipGitPush }}
 
       - script: |
-          yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/main -n $(npmAuth) --access public -y
+          yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -b origin/main -y
         displayName: 'Publish NPM Packages (for main branch)'
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
 
       - script: |
-          yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -n $(npmAuth) --access public -y -t v${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }} -b origin/${{ replace(variables['Build.SourceBranch'],'refs/heads/','') }} --prerelease-prefix ${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }}
+          yarn publish:beachball $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) --access public --token $(npmAuth) -y -t v${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }} -b origin/${{ replace(variables['Build.SourceBranch'],'refs/heads/','') }} --prerelease-prefix ${{ replace(variables['Build.SourceBranch'],'refs/heads/releases/','') }}
         displayName: 'Publish NPM Packages (for other release branches)'
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
 
