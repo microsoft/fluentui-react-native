@@ -3,7 +3,6 @@ import { Platform, View } from 'react-native';
 
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { compressible, mergeProps, patchTokens, useFluentTheme } from '@fluentui-react-native/framework';
-import { VibrancyView } from '@fluentui-react-native/vibrancy-view';
 
 import type { MenuPopoverProps, MenuPopoverTokens } from './MenuPopover.types';
 import { menuPopoverName } from './MenuPopover.types';
@@ -46,21 +45,11 @@ export const MenuPopover = compressible<MenuPopoverProps, MenuPopoverTokens>(
                 maxHeight: mergedProps.maxHeight,
               },
             }
-          : Platform.OS === 'macos'
-          ? {
-              ...state.innerView,
-              ...state.vibrancyView,
-            }
           : state.innerView;
-
-      const ContainerView = Platform.select({
-        macos: VibrancyView,
-        default: View,
-      });
-
+      const content = React.createElement(View, innerViewProps, children);
       return (
         <MenuCallout tokens={tokens} {...mergedProps}>
-          <ContainerView {...innerViewProps}>{children}</ContainerView>
+          {content}
         </MenuCallout>
       );
     };

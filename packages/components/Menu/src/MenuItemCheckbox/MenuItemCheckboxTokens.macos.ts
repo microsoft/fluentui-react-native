@@ -10,9 +10,9 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   checkmarkPadding: globalTokens.sizeNone,
   checkmarkSize: 16,
   checkmarkVisibility: 0,
-  color: t.colors.neutralForeground1,
+  color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
-  fontSize: 13, // aligning with NSMenu font size
+  fontSize: globalTokens.font.size300,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
   iconColor: t.colors.neutralForeground2,

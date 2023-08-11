@@ -1,6 +1,5 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
-import type { VibrancyViewProps } from '@fluentui-react-native/vibrancy-view';
 
 export const menuPopoverName = 'MenuPopover';
 
@@ -9,7 +8,13 @@ export const menuPopoverName = 'MenuPopover';
 export type MenuPopoverTokens =
   | Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' | 'dismissBehaviors'> & {
       /**
-       * Shadow elevation for the Modal MenuPopover
+       * The props for the corner radius for the Modal MenuPopover
+       * @platform android macos
+       */
+      borderRadius?: number;
+
+      /**
+       * Shadown elevation for the Modal MenuPopover
        * @platform android
        */
       elevation?: number;
@@ -20,5 +25,4 @@ export type MenuPopoverProps = ICalloutProps;
 export interface MenuPopoverState {
   props: ICalloutProps;
   innerView: IViewProps;
-  vibrancyView: VibrancyViewProps;
 }
