@@ -14,9 +14,6 @@ import { Test } from '../Test';
 import { MenuPicker } from '../Common/MenuPicker';
 
 const styles = StyleSheet.create({
-  spacing: {
-    gap: 8,
-  },
   box: {
     width: 100,
     height: 100,
@@ -60,16 +57,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
   },
+  rootWithSpacing: { ...commonStyles.root, gap: 8 },
 });
 
 const VibrancyViewDefault: React.FunctionComponent = () => {
-  const viewProps: ViewProps = {
-    focusable: true,
-    style: [styles.box, styles.borderProps],
-  };
   return (
     <Stack style={stackStyle}>
-      <View style={[commonStyles.root, styles.spacing]}>
+      <View style={styles.rootWithSpacing}>
         <Text>Vibrancy View with no props set</Text>
         <VibrancyView style={styles.box} />
       </View>
@@ -85,7 +79,7 @@ const VibrancyViewWithViewProps: React.FunctionComponent = () => {
   };
   return (
     <Stack style={stackStyle}>
-      <View style={[commonStyles.root, styles.spacing]}>
+      <View style={styles.rootWithSpacing}>
         <Text>{descriptionString}</Text>
         <VibrancyView {...viewProps} />
         <View {...viewProps} />
@@ -94,67 +88,74 @@ const VibrancyViewWithViewProps: React.FunctionComponent = () => {
   );
 };
 
+const materialSelections: Material[] = [
+  'titlebar',
+  'selection',
+  'menu',
+  'popover',
+  'sidebar',
+  'headerview',
+  'sheet',
+  'windowbackground',
+  'hudWindow',
+  'fullScreenUI',
+  'toolTip',
+  'contentBackground',
+  'underWindowBackground',
+  'underPageBackground',
+];
+const materialsCollection = materialSelections.map((material) => {
+  return {
+    label: material,
+    value: material,
+  };
+});
+
+const blendingModeSelections: BlendingMode[] = ['withinWindow', 'behindWindow'];
+const blendingModeCollection = blendingModeSelections.map((material) => {
+  return {
+    label: material,
+    value: material,
+  };
+});
+
+const stateSelections: State[] = ['followsWindowActiveState', 'active', 'inactive'];
+const stateCollection = stateSelections.map((material) => {
+  return {
+    label: material,
+    value: material,
+  };
+});
+
 const VibrancyViewWithVibrancyViewProps: React.FunctionComponent = () => {
   const [material, setMaterial] = React.useState<Material>(undefined);
   const [blendingMode, setBlendingMode] = React.useState<BlendingMode>(undefined);
   const [state, setState] = React.useState<State>(undefined);
 
-  const materialSelections: Material[] = [
-    'titlebar',
-    'selection',
-    'menu',
-    'popover',
-    'sidebar',
-    'headerview',
-    'sheet',
-    'windowbackground',
-    'hudWindow',
-    'fullScreenUI',
-    'toolTip',
-    'contentBackground',
-    'underWindowBackground',
-    'underPageBackground',
-  ];
-  const materialsCollection = materialSelections.map((material) => {
-    return {
-      label: material,
-      value: material,
-    };
-  });
+  const onMaterialChange = React.useCallback((material: Material) => {
+    setMaterial(material);
+  }, []);
 
-  const blendingModeSelections: BlendingMode[] = ['withinWindow', 'behindWindow'];
-  const blendingModeCollection = blendingModeSelections.map((material) => {
-    return {
-      label: material,
-      value: material,
-    };
-  });
+  const onBlendingModeChange = React.useCallback((blendingMode: BlendingMode) => {
+    setBlendingMode(blendingMode);
+  }, []);
 
-  const stateSelections: State[] = ['followsWindowActiveState', 'active', 'inactive'];
-  const stateCollection = stateSelections.map((material) => {
-    return {
-      label: material,
-      value: material,
-    };
-  });
+  const onStateChange = React.useCallback((state: State) => {
+    setState(state);
+  }, []);
 
   return (
     <Stack style={stackStyle}>
       <View style={styles.Rectangle1}>
         <VibrancyView material={material} blendingMode={blendingMode} state={state} style={styles.Rectangle2}>
-          <MenuPicker
-            prompt="Material"
-            selected={material || 'undefined'}
-            onChange={(material) => setMaterial(material)}
-            collection={materialsCollection}
-          />
+          <MenuPicker prompt="Material" selected={material || 'undefined'} onChange={onMaterialChange} collection={materialsCollection} />
           <MenuPicker
             prompt="Blending Mode"
             selected={blendingMode || 'undefined'}
-            onChange={(blendingMode) => setBlendingMode(blendingMode)}
+            onChange={onBlendingModeChange}
             collection={blendingModeCollection}
           />
-          <MenuPicker prompt="State" selected={state || 'undefined'} onChange={(state) => setState(state)} collection={stateCollection} />
+          <MenuPicker prompt="State" selected={state || 'undefined'} onChange={onStateChange} collection={stateCollection} />
         </VibrancyView>
       </View>
     </Stack>
