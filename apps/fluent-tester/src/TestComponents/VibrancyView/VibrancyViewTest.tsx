@@ -14,6 +14,9 @@ import { Test } from '../Test';
 import { MenuPicker } from '../Common/MenuPicker';
 
 const styles = StyleSheet.create({
+  spacing: {
+    gap: 8,
+  },
   box: {
     width: 100,
     height: 100,
@@ -33,6 +36,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  Rectangle1: {
+    backgroundColor: 'yellow',
+    width: 300,
+    height: 300,
+  },
+  Rectangle2: {
+    position: 'absolute',
+    top: 50,
+    width: 400,
+    height: 200,
+  },
   centeredBox: {
     backgroundColor: 'green',
     width: 100,
@@ -49,9 +63,13 @@ const styles = StyleSheet.create({
 });
 
 const VibrancyViewDefault: React.FunctionComponent = () => {
+  const viewProps: ViewProps = {
+    focusable: true,
+    style: [styles.box, styles.borderProps],
+  };
   return (
     <Stack style={stackStyle}>
-      <View style={commonStyles.root}>
+      <View style={[commonStyles.root, styles.spacing]}>
         <Text>Vibrancy View with no props set</Text>
         <VibrancyView style={styles.box} />
       </View>
@@ -67,12 +85,10 @@ const VibrancyViewWithViewProps: React.FunctionComponent = () => {
   };
   return (
     <Stack style={stackStyle}>
-      <View style={commonStyles.root}>
+      <View style={[commonStyles.root, styles.spacing]}>
         <Text>{descriptionString}</Text>
-        <Stack horizontal={false} gap={10}>
-          <VibrancyView {...viewProps} />
-          <View {...viewProps} />
-        </Stack>
+        <VibrancyView {...viewProps} />
+        <View {...viewProps} />
       </View>
     </Stack>
   );
@@ -124,57 +140,52 @@ const VibrancyViewWithVibrancyViewProps: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <MenuPicker
-        prompt="Material"
-        selected={material || 'undefined'}
-        onChange={(material) => setMaterial(material)}
-        collection={materialsCollection}
-      />
-      <MenuPicker
-        prompt="Blending Mode"
-        selected={blendingMode || 'undefined'}
-        onChange={(blendingMode) => setBlendingMode(blendingMode)}
-        collection={blendingModeCollection}
-      />
-      <MenuPicker prompt="State" selected={state || 'undefined'} onChange={(state) => setState(state)} collection={stateCollection} />
-      <View style={commonStyles.root}>
-        <View style={styles.biggerBox}>
-          <Button
-            onClick={(_e) => {
-              Alert.alert('Hello');
-            }}
-          >
-            Hello
-          </Button>
-
-          <VibrancyView material={material} blendingMode={blendingMode} state={state} style={styles.bigBox}>
-            <Button
-              onClick={(_e) => {
-                Alert.alert('Hello');
-              }}
-            >
-              Hello
-            </Button>
-            <View allowsVibrancy={true} style={styles.centeredBox}>
-              <Button
-                onClick={(_e) => {
-                  Alert.alert('Hello');
-                }}
-              >
-                Hello
-              </Button>
-            </View>
-            <Button
-              onClick={(_e) => {
-                Alert.alert('Hello');
-              }}
-            >
-              Hello
-            </Button>
-          </VibrancyView>
-        </View>
+      <View style={styles.Rectangle1}>
+        <VibrancyView material={material} blendingMode={blendingMode} state={state} style={styles.Rectangle2}>
+          <MenuPicker
+            prompt="Material"
+            selected={material || 'undefined'}
+            onChange={(material) => setMaterial(material)}
+            collection={materialsCollection}
+          />
+          <MenuPicker
+            prompt="Blending Mode"
+            selected={blendingMode || 'undefined'}
+            onChange={(blendingMode) => setBlendingMode(blendingMode)}
+            collection={blendingModeCollection}
+          />
+          <MenuPicker prompt="State" selected={state || 'undefined'} onChange={(state) => setState(state)} collection={stateCollection} />
+        </VibrancyView>
       </View>
     </Stack>
+  );
+};
+
+const HitTestButton = (props: { title: string }) => {
+  return (
+    <Button
+      onClick={(_e) => {
+        Alert.alert(props.title);
+      }}
+    >
+      {props.title}
+    </Button>
+  );
+};
+
+const VibrancyViewHitTest: React.FunctionComponent = () => {
+  return (
+    <View style={commonStyles.root}>
+      <HitTestButton title={'Button 1'} />
+      <VibrancyView style={styles.biggerBox}>
+        <HitTestButton title={'Button 2'} />
+        <View allowsVibrancy={true} style={styles.centeredBox}>
+          <HitTestButton title={'Button 3'} />
+        </View>
+        <HitTestButton title={'Button 4'} />
+      </VibrancyView>
+      <HitTestButton title={'Button 5'} />
+    </View>
   );
 };
 
@@ -191,6 +202,10 @@ const VibrancyViewSections: TestSection[] = [
   {
     name: 'VibrancyView with VibrancyView props',
     component: VibrancyViewWithVibrancyViewProps,
+  },
+  {
+    name: 'VibrancyView Hit Test',
+    component: VibrancyViewHitTest,
   },
 ];
 

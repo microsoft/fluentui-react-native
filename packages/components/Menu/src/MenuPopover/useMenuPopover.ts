@@ -93,7 +93,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
   });
 
   const vibrancyViewProps: VibrancyViewProps = {
-    ...(Platform.OS === 'macos' && { material: 'menu', blendingMode: 'behindWindow', state: 'inactive' }),
+    ...(Platform.OS === 'macos' && { material: 'menu', blendingMode: 'behindWindow', state: 'active' }),
   };
 
   return {

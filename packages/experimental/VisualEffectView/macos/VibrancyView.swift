@@ -36,14 +36,5 @@ open class VibrancyView: RCTView {
 	  visualEffectView.state = state
 	}
 
-	private let visualEffectView = OtherFlippedVisualEffectView()
-}
-
-/// React Native macOS uses a flipped coordinate space by default. Let's stay consistent and
-/// ensure any views hosting React Native views are also flipped. This helps RCTTouchHandler
-/// register clicks in the right location.
-internal class OtherFlippedVisualEffectView: NSVisualEffectView {
-	override var isFlipped: Bool {
-		return true
-	}
+	private let visualEffectView = FixedVisualEffectView()
 }
