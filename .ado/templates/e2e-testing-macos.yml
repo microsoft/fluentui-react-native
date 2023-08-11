@@ -11,15 +11,8 @@ steps:
     condition: succeeded()
     displayName: 'Create success build variable'
 
-  # Appium needs to be installed globally with npm for driver installation to work
   - script: |
-      npm install appium@2.0.0 -g
-    workingDirectory: apps/E2E
-    displayName: 'Install appium'
-    condition: succeeded()
-
-  - script: |
-      appium driver install mac2
+      yarn appium driver install mac2
     workingDirectory: apps/E2E
     displayName: 'Install appium driver'
     condition: succeeded()
