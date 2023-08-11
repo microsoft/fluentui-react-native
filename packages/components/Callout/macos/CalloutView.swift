@@ -370,7 +370,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private lazy var proxyView: NSView = {
 		let visualEffectView = FlippedVisualEffectView()
 		visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-		visualEffectView.material = .popover
+		visualEffectView.material = .menu
 		visualEffectView.state = .active
 		visualEffectView.wantsLayer = true
 

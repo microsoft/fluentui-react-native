@@ -1,7 +1,5 @@
 #import <FRNCalloutManager.h>
 
-
-
 @implementation RCTConvert (FRNCalloutAdditions)
 
 // RCTConvert does not properly convert a JS screenRect into a native CGRect/NSRect,
