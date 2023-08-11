@@ -2548,7 +2548,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/apple-theme@*, @fluentui-react-native/apple-theme@>=0.21.6 <1.0.0, @fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme":
+"@fluentui-react-native/apple-theme@*, @fluentui-react-native/apple-theme@>=0.21.7 <1.0.0, @fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme"
   dependencies:
@@ -3922,7 +3922,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.3.5, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
+"@fluentui-react-native/tablist@0.3.6, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/experimental/TabList"
   dependencies:
@@ -3994,7 +3994,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.151.19
+    "@fluentui-react-native/tester": ^0.151.20
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
@@ -4025,14 +4025,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.151.19, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.151.20, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
     "@babel/core": ^7.8.0
     "@babel/runtime": ^7.8.0
     "@fluentui-react-native/android-theme": ">=0.18.4 <1.0.0"
-    "@fluentui-react-native/apple-theme": ">=0.21.6 <1.0.0"
+    "@fluentui-react-native/apple-theme": ">=0.21.7 <1.0.0"
     "@fluentui-react-native/avatar": ^1.10.8
     "@fluentui-react-native/badge": ">=0.7.4 <1.0.0"
     "@fluentui-react-native/button": ">=0.34.9 <1.0.0"
@@ -4068,7 +4068,7 @@ __metadata:
     "@fluentui-react-native/spinner": ^0.7.7
     "@fluentui-react-native/stack": ">=0.8.8 <1.0.0"
     "@fluentui-react-native/switch": ^0.10.6
-    "@fluentui-react-native/tablist": 0.3.5
+    "@fluentui-react-native/tablist": 0.3.6
     "@fluentui-react-native/text": ">=0.21.6 <1.0.0"
     "@fluentui-react-native/theme": ">=0.9.1 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
@@ -8489,8 +8489,8 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.12.3":
-  version: 2.29.3
-  resolution: "appium-uiautomator2-driver@npm:2.29.3"
+  version: 2.29.4
+  resolution: "appium-uiautomator2-driver@npm:2.29.4"
   dependencies:
     "@babel/runtime": ^7.0.0
     appium-adb: ^9.13.1
@@ -8507,7 +8507,7 @@ __metadata:
     teen_process: ^2.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 046b9392806925777a88e2debb7112a67bf5ccc4a68e6cbb8f76aef6d14616a9162bbc88093f24e003cc720fc764bd64dfad8cc3fd43154dee51ad38196126d0
+  checksum: d05e5569cbdd9e1981fff2c6d55ad04757e0e15548a312a089c2dd7330b3dcd2bd145fb2f019b8504ef9c88720e4b4bfdeac193a2263035dc4315deadae5b878
   languageName: node
   linkType: hard
 
