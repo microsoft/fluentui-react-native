@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Alert, type ViewProps } from 'react-native';
-import { View, StyleSheet } from 'react-native-macos';
+import { Alert, StyleSheet, View } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 import { ButtonV1 as Button, Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
@@ -8,10 +8,10 @@ import type { Material, BlendingMode, State } from '@fluentui-react-native/vibra
 import { VibrancyView } from '@fluentui-react-native/vibrancy-view';
 
 import { VIBRANCYVIEW_TESTPAGE } from '../../../../E2E/src/VibrancyView/consts';
+import { MenuPicker } from '../Common/MenuPicker';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
-import { MenuPicker } from '../Common/MenuPicker';
 
 const styles = StyleSheet.create({
   box: {
@@ -73,10 +73,12 @@ const VibrancyViewDefault: React.FunctionComponent = () => {
 
 const VibrancyViewWithViewProps: React.FunctionComponent = () => {
   const descriptionString = '<View> and <VibrancyView> with the same props set';
-  const viewProps: ViewProps = {
-    focusable: true,
-    style: [styles.box, styles.borderProps],
-  };
+  const viewProps: ViewProps = React.useMemo(() => {
+    return {
+      focusable: true,
+      style: [styles.box, styles.borderProps],
+    };
+  }, []);
   return (
     <Stack style={stackStyle}>
       <View style={styles.rootWithSpacing}>
@@ -163,15 +165,13 @@ const VibrancyViewWithVibrancyViewProps: React.FunctionComponent = () => {
 };
 
 const HitTestButton = (props: { title: string }) => {
-  return (
-    <Button
-      onClick={(_e) => {
-        Alert.alert(props.title);
-      }}
-    >
-      {props.title}
-    </Button>
+  const onClick = React.useCallback(
+    (_e) => {
+      Alert.alert(props.title);
+    },
+    [props],
   );
+  return <Button onClick={onClick}>{props.title}</Button>;
 };
 
 const VibrancyViewHitTest: React.FunctionComponent = () => {
@@ -180,7 +180,7 @@ const VibrancyViewHitTest: React.FunctionComponent = () => {
       <HitTestButton title={'Button 1'} />
       <VibrancyView style={styles.biggerBox}>
         <HitTestButton title={'Button 2'} />
-        <View allowsVibrancy={true} style={styles.centeredBox}>
+        <View style={styles.centeredBox}>
           <HitTestButton title={'Button 3'} />
         </View>
         <HitTestButton title={'Button 4'} />
