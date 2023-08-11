@@ -2548,7 +2548,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/apple-theme@*, @fluentui-react-native/apple-theme@>=0.21.6 <1.0.0, @fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme":
+"@fluentui-react-native/apple-theme@*, @fluentui-react-native/apple-theme@>=0.21.7 <1.0.0, @fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme"
   dependencies:
@@ -3922,7 +3922,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.3.5, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
+"@fluentui-react-native/tablist@0.3.6, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/experimental/TabList"
   dependencies:
@@ -3994,7 +3994,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.151.19
+    "@fluentui-react-native/tester": ^0.151.20
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
@@ -4025,14 +4025,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.151.19, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.151.20, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
     "@babel/core": ^7.8.0
     "@babel/runtime": ^7.8.0
     "@fluentui-react-native/android-theme": ">=0.18.4 <1.0.0"
-    "@fluentui-react-native/apple-theme": ">=0.21.6 <1.0.0"
+    "@fluentui-react-native/apple-theme": ">=0.21.7 <1.0.0"
     "@fluentui-react-native/avatar": ^1.10.8
     "@fluentui-react-native/badge": ">=0.7.4 <1.0.0"
     "@fluentui-react-native/button": ">=0.34.9 <1.0.0"
@@ -4068,7 +4068,7 @@ __metadata:
     "@fluentui-react-native/spinner": ^0.7.7
     "@fluentui-react-native/stack": ">=0.8.8 <1.0.0"
     "@fluentui-react-native/switch": ^0.10.6
-    "@fluentui-react-native/tablist": 0.3.5
+    "@fluentui-react-native/tablist": 0.3.6
     "@fluentui-react-native/text": ">=0.21.6 <1.0.0"
     "@fluentui-react-native/theme": ">=0.9.1 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
@@ -15630,8 +15630,8 @@ __metadata:
   linkType: hard
 
 "lage@npm:^2.0.0":
-  version: 2.7.5
-  resolution: "lage@npm:2.7.5"
+  version: 2.7.6
+  resolution: "lage@npm:2.7.6"
   dependencies:
     fsevents: ~2.3.2
     glob-hasher: ^1.3.0
@@ -15640,7 +15640,7 @@ __metadata:
       optional: true
   bin:
     lage: dist/lage.js
-  checksum: 5f186bca8a044d09795182b71ec429d0d12126da68af8a24b2b41343bfe2186a56a670d17e12f7a002eed22c2ef706eecef889500090110a39569466f261c4ca
+  checksum: 612b3c0ec10193fead0813428dce285a211d145998a75e8f2b00a7edb27c9ccecd22c0e8887f6e9f406c05826020fe3860cb1a209b37ec6550bf534c7bc2e3c3
   languageName: node
   linkType: hard
 
