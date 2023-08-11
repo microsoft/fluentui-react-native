@@ -4295,9 +4295,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/vibrancy-view@^0.0.1, @fluentui-react-native/vibrancy-view@workspace:packages/experimental/VisualEffectView":
+"@fluentui-react-native/vibrancy-view@^0.0.1, @fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/vibrancy-view@workspace:packages/experimental/VisualEffectView"
+  resolution: "@fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.1 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
