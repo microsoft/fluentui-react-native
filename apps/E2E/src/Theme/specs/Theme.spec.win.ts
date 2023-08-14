@@ -1,4 +1,4 @@
-import ThemePageObject from '../pages/ThemePageObject.win';
+import ThemePageObject from '../pages/ThemePageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Theme Testing Initialization', () => {
