@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/contextual-menu",
-  "version": "0.22.13",
+  "version": "0.22.14",
   "description": "A cross-platform ContextualMenu component using the Fluent Design System",
   "license": "MIT",
   "author": "",
@@ -29,20 +29,20 @@
     "directory": "packages/components/ContextualMenu"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.11.1",
-    "@fluentui-react-native/callout": ">=0.24.12 <1.0.0",
-    "@fluentui-react-native/focus-zone": "^0.12.8",
-    "@fluentui-react-native/icon": "0.19.6",
-    "@fluentui-react-native/interactive-hooks": ">=0.24.6 <1.0.0",
-    "@fluentui-react-native/text": ">=0.21.6 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.21.1 <1.0.0",
+    "@fluentui-react-native/adapters": "^0.11.2",
+    "@fluentui-react-native/callout": ">=0.24.13 <1.0.0",
+    "@fluentui-react-native/focus-zone": "^0.12.9",
+    "@fluentui-react-native/icon": "0.19.7",
+    "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0",
+    "@fluentui-react-native/text": ">=0.21.7 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0",
-    "@uifabricshared/foundation-compose": "^1.14.5",
+    "@uifabricshared/foundation-compose": "^1.14.6",
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/pressable": ">=0.10.7 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.10.8 <1.0.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@office-iss/react-native-win32": "^0.71.0",
     "react": "18.2.0",

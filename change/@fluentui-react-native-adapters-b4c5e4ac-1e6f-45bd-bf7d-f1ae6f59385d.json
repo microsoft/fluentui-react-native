@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add macOS prop `allowsVibrancy`",
-  "packageName": "@fluentui-react-native/adapters",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch"
-}
