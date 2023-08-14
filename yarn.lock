@@ -2509,7 +2509,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/adapters@*, @fluentui-react-native/adapters@0.11.2, @fluentui-react-native/adapters@>=0.11.1 <1.0.0, @fluentui-react-native/adapters@>=0.11.2 <1.0.0, @fluentui-react-native/adapters@^0.11.2, @fluentui-react-native/adapters@workspace:packages/utils/adapters":
+"@fluentui-react-native/adapters@*, @fluentui-react-native/adapters@0.11.2, @fluentui-react-native/adapters@>=0.11.2 <1.0.0, @fluentui-react-native/adapters@^0.11.2, @fluentui-react-native/adapters@workspace:packages/utils/adapters":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/adapters@workspace:packages/utils/adapters"
   dependencies:
@@ -4299,7 +4299,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView"
   dependencies:
-    "@fluentui-react-native/adapters": ">=0.11.1 <1.0.0"
+    "@fluentui-react-native/adapters": ">=0.11.2 <1.0.0"
     "@fluentui-react-native/component-cache": ^1.5.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
