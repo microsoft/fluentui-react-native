@@ -23,6 +23,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
+  allowsVibrancy: true,
   collapsable: true,
   draggedTypes: true,
   enableFocusRing: true,
