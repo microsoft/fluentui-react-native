@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Fri, 07 Jul 2023 20:45:11 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.2
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Add macOS prop `allowsVibrancy` (saadnajmi2@gmail.com)
 
 ## 0.11.1
 
