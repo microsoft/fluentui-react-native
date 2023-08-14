@@ -18,6 +18,8 @@ module.exports = {
       if (name === '@fluentui-react-native/dependency-profiles') {
         console.log(`Updating ${name} to use latest published versions`);
         execSync(`yarn update-profile`, { cwd: packagePath });
+        console.log('Updating lockfile');
+        execSync(`yarn install  --mode update-lockfile`);
       }
     },
   },
