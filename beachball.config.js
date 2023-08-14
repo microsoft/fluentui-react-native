@@ -21,7 +21,7 @@ module.exports = {
         // This logic is run after all bumps have happened,
         // so it's ok that it's only run once
         console.log('Updating lockfile');
-        execSync(`yarn install  --mode update-lockfile`);
+        execSync(`yarn install --mode update-lockfile`);
       }
     },
   },
