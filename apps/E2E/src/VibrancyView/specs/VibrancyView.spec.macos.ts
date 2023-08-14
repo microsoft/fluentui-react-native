@@ -1,16 +1,16 @@
-import ThemePageObject from '../pages/ThemePageObject.win';
+import VibrancyViewPageObject from '../pages/VibrancyViewPageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('VibrancyView Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await ThemePageObject.waitForInitialPageToDisplay();
-    expect(await ThemePageObject.isInitialPageDisplayed()).toBeTruthy(ThemePageObject.ERRORMESSAGE_APPLOAD);
+    await VibrancyViewPageObject.waitForInitialPageToDisplay();
+    expect(await VibrancyViewPageObject.isInitialPageDisplayed()).toBeTruthy(VibrancyViewPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to VibrancyView test page', async () => {
-    await ThemePageObject.navigateToPageAndLoadTests();
-    expect(await ThemePageObject.isPageLoaded()).toBeTruthy(ThemePageObject.ERRORMESSAGE_PAGELOAD);
+    await VibrancyViewPageObject.navigateToPageAndLoadTests();
+    expect(await VibrancyViewPageObject.isPageLoaded()).toBeTruthy(VibrancyViewPageObject.ERRORMESSAGE_PAGELOAD);
 
-    await expect(await ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await VibrancyViewPageObject.didAssertPopup()).toBeFalsy(VibrancyViewPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
