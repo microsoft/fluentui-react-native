@@ -2757,7 +2757,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/component-cache@*, @fluentui-react-native/component-cache@^1.5.1, @fluentui-react-native/component-cache@workspace:^, @fluentui-react-native/component-cache@workspace:packages/framework/component-cache":
+"@fluentui-react-native/component-cache@*, @fluentui-react-native/component-cache@^1.5.1, @fluentui-react-native/component-cache@workspace:packages/framework/component-cache":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/component-cache@workspace:packages/framework/component-cache"
   dependencies:
@@ -4322,7 +4322,7 @@ __metadata:
   resolution: "@fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.1 <1.0.0"
-    "@fluentui-react-native/component-cache": "workspace:^"
+    "@fluentui-react-native/component-cache": ^1.5.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.3
     "@fluentui-react-native/scripts": ^0.1.1
