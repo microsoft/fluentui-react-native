@@ -2485,9 +2485,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@eslint/eslintrc@npm:2.1.1"
+"@eslint/eslintrc@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "@eslint/eslintrc@npm:2.1.2"
   dependencies:
     ajv: ^6.12.4
     debug: ^4.3.2
@@ -2498,14 +2498,14 @@ __metadata:
     js-yaml: ^4.1.0
     minimatch: ^3.1.2
     strip-json-comments: ^3.1.1
-  checksum: bf909ea183d27238c257a82d4ffdec38ca94b906b4b8dfae02ecbe7ecc9e5a8182ef5e469c808bb8cb4fea4750f43ac4ca7c4b4a167b6cd7e3aaacd386b2bd25
+  checksum: bc742a1e3b361f06fedb4afb6bf32cbd27171292ef7924f61c62f2aed73048367bcc7ac68f98c06d4245cd3fabc43270f844e3c1699936d4734b3ac5398814a7
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:^8.46.0":
-  version: 8.46.0
-  resolution: "@eslint/js@npm:8.46.0"
-  checksum: 7aed479832302882faf5bec37e9d068f270f84c19b3fb529646a7c1b031e73a312f730569c78806492bc09cfce3d7651dfab4ce09a56cbb06bc6469449e56377
+"@eslint/js@npm:^8.47.0":
+  version: 8.47.0
+  resolution: "@eslint/js@npm:8.47.0"
+  checksum: 0ef57fe27b6d4c305b33f3b2d2fee1ab397a619006f1d6f4ce5ee4746b8f03d11a4e098805a7d78601ca534cf72917d37f0ac19896c992a32e26299ecb9f9de1
   languageName: node
   linkType: hard
 
@@ -5444,8 +5444,8 @@ __metadata:
   linkType: hard
 
 "@office-iss/react-native-win32@npm:^0.71.0":
-  version: 0.71.13
-  resolution: "@office-iss/react-native-win32@npm:0.71.13"
+  version: 0.71.14
+  resolution: "@office-iss/react-native-win32@npm:0.71.14"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
@@ -5485,7 +5485,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-  checksum: 2380869b0b7bb60f3b6be9555bd453abd432cd018b3aa49ff9b21f50983c7d1cf2041a72fd5cecbfeb32fcdf163ceccd309369e6ce448b7b8c00145addb8acfa
+  checksum: dfc494a6f89e60b837738132a2a78a472301e1e4d669a561dd777be0ef8cd70bfd68411bc3664f02fd7fc6b4dbe0210f7fed37b83551c70a899c40704bd500a4
   languageName: node
   linkType: hard
 
@@ -8507,8 +8507,8 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.12.3":
-  version: 2.29.3
-  resolution: "appium-uiautomator2-driver@npm:2.29.3"
+  version: 2.29.4
+  resolution: "appium-uiautomator2-driver@npm:2.29.4"
   dependencies:
     "@babel/runtime": ^7.0.0
     appium-adb: ^9.13.1
@@ -8525,7 +8525,7 @@ __metadata:
     teen_process: ^2.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 046b9392806925777a88e2debb7112a67bf5ccc4a68e6cbb8f76aef6d14616a9162bbc88093f24e003cc720fc764bd64dfad8cc3fd43154dee51ad38196126d0
+  checksum: d05e5569cbdd9e1981fff2c6d55ad04757e0e15548a312a089c2dd7330b3dcd2bd145fb2f019b8504ef9c88720e4b4bfdeac193a2263035dc4315deadae5b878
   languageName: node
   linkType: hard
 
@@ -12025,21 +12025,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-visitor-keys@npm:^3.4.2":
-  version: 3.4.2
-  resolution: "eslint-visitor-keys@npm:3.4.2"
-  checksum: 9e0e7e4aaea705c097ae37c97410e5f167d4d2193be2edcb1f0760762ede3df01545e4820ae314f42dcec687745f2c6dcaf6d83575c4a2a241eb0c8517d724f2
+"eslint-visitor-keys@npm:^3.4.3":
+  version: 3.4.3
+  resolution: "eslint-visitor-keys@npm:3.4.3"
+  checksum: 36e9ef87fca698b6fd7ca5ca35d7b2b6eeaaf106572e2f7fd31c12d3bfdaccdb587bba6d3621067e5aece31c8c3a348b93922ab8f7b2cbc6aaab5e1d89040c60
   languageName: node
   linkType: hard
 
 "eslint@npm:^8.0.0":
-  version: 8.46.0
-  resolution: "eslint@npm:8.46.0"
+  version: 8.47.0
+  resolution: "eslint@npm:8.47.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.6.1
-    "@eslint/eslintrc": ^2.1.1
-    "@eslint/js": ^8.46.0
+    "@eslint/eslintrc": ^2.1.2
+    "@eslint/js": ^8.47.0
     "@humanwhocodes/config-array": ^0.11.10
     "@humanwhocodes/module-importer": ^1.0.1
     "@nodelib/fs.walk": ^1.2.8
@@ -12050,7 +12050,7 @@ __metadata:
     doctrine: ^3.0.0
     escape-string-regexp: ^4.0.0
     eslint-scope: ^7.2.2
-    eslint-visitor-keys: ^3.4.2
+    eslint-visitor-keys: ^3.4.3
     espree: ^9.6.1
     esquery: ^1.4.2
     esutils: ^2.0.2
@@ -12075,7 +12075,7 @@ __metadata:
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: 7a7d36b1a3bbc12e08fbb5bc36fd482a7a5a1797e62e762499dd45601b9e45aaa53a129f31ce0b4444551a9639b8b681ad535f379893dd1e3ae37b31dccd82aa
+  checksum: 1988617f703eadc5c7540468d54dc8e5171cf2bb9483f6172799cd1ff54a9a5e4470f003784e8cef92687eaa14de37172732787040e67817581a20bcb9c15970
   languageName: node
   linkType: hard
 
@@ -15648,8 +15648,8 @@ __metadata:
   linkType: hard
 
 "lage@npm:^2.0.0":
-  version: 2.7.5
-  resolution: "lage@npm:2.7.5"
+  version: 2.7.6
+  resolution: "lage@npm:2.7.6"
   dependencies:
     fsevents: ~2.3.2
     glob-hasher: ^1.3.0
@@ -15658,7 +15658,7 @@ __metadata:
       optional: true
   bin:
     lage: dist/lage.js
-  checksum: 5f186bca8a044d09795182b71ec429d0d12126da68af8a24b2b41343bfe2186a56a670d17e12f7a002eed22c2ef706eecef889500090110a39569466f261c4ca
+  checksum: 612b3c0ec10193fead0813428dce285a211d145998a75e8f2b00a7edb27c9ccecd22c0e8887f6e9f406c05826020fe3860cb1a209b37ec6550bf534c7bc2e3c3
   languageName: node
   linkType: hard
 
@@ -18667,8 +18667,8 @@ __metadata:
   linkType: hard
 
 "react-native-macos@npm:^0.71.0":
-  version: 0.71.30
-  resolution: "react-native-macos@npm:0.71.30"
+  version: 0.71.31
+  resolution: "react-native-macos@npm:0.71.31"
   dependencies:
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 10.2.4
@@ -18710,7 +18710,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native-macos: cli.js
-  checksum: 65fa85ee3bbce4016a6de81756a6e6bcf4de1576f23ea6a8018162b68754d8df2f0efc7e57f371e1e7e4e0d4e3ba72d5f146215cdcb76fd760c0bc5b81ece9e7
+  checksum: a4b79b40405a967560e137bb1e80b11ac961396f48e320d51a4071d80ffe2a6874bec3481c16c8f6e3c50a6165b19cee6a5dd3f8afd1481ce454ffc299a580e6
   languageName: node
   linkType: hard
 
@@ -18790,8 +18790,8 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.71.0":
-  version: 0.71.28
-  resolution: "react-native-windows@npm:0.71.28"
+  version: 0.71.29
+  resolution: "react-native-windows@npm:0.71.29"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
@@ -18831,7 +18831,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-  checksum: f6379d3b2e28be8a24c83e8a897eb56a3ea4f0ac52a859211cb47741a94cfe99a06aaa35f10ba553fbdf42f91715a6a8dc31ea7b037925f34381465ceeeafee1
+  checksum: 07effb866e3c6781791099cc32c1164dd82548ddcf0ce20d2cec37fa64c0ac1f3a8410ebf2fca65f00db74a9fa9874a6ecf4a064cb1831848ea39a7079009796
   languageName: node
   linkType: hard
 
