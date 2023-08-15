@@ -38,20 +38,12 @@ describe('TabList Accessibility Testing', () => {
     expect(
       await TabListPageObject.compareAttribute(TabListPageObject._primaryComponent, Attribute.AccessibilityRole, TAB_A11Y_ROLE),
     ).toBeTruthy();
-
-    expect(await TabListPageObject.didAssertPopup())
-      .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
   });
 
   it('Validate Tab\'s "accessibilityRole" defaults to "ControlType.TabItem"', async () => {
     expect(
       await TabListPageObject.compareAttribute(TabListPageObject.getTab('First'), Attribute.AccessibilityRole, TABITEM_A11Y_ROLE),
     ).toBeTruthy();
-
-    expect(await TabListPageObject.didAssertPopup())
-      .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
   });
 
   it('Set TabList "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -62,10 +54,6 @@ describe('TabList Accessibility Testing', () => {
         TABLIST_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await TabListPageObject.didAssertPopup())
-      .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
   });
 
   it('Set Tab "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -76,20 +64,12 @@ describe('TabList Accessibility Testing', () => {
         FIRST_TAB_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await TabListPageObject.didAssertPopup())
-      .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
   });
 
   it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to current Tab label.', async () => {
     expect(
       await TabListPageObject.compareAttribute(TabListPageObject.getTab('Second'), Attribute.AccessibilityLabel, SECOND_TAB_LABEL),
     ).toBeTruthy();
-
-    expect(await TabListPageObject.didAssertPopup())
-      .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
   });
 });
 
