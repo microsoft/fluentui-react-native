@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Aug 2023 22:54:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.5
+
+Tue, 15 Aug 2023 22:54:41 GMT
+
+### Patches
+
+- Add additional brand color check (ruaraki@microsoft.com)
 
 ## 0.27.4
 
