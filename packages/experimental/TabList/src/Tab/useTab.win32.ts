@@ -2,11 +2,11 @@ import * as React from 'react';
 import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
-import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import type { IFocusable, LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabProps, TabInfo } from './Tab.types';
-import { TabListContext } from '../TabList/TabList';
+import { TabListContext } from '../TabList/TabListContext';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
@@ -33,8 +33,19 @@ export const useTab = (props: TabProps): TabInfo => {
     ...rest
   } = props;
   // Grabs the context information from Tabs (currently selected Tab and client's onTabSelect callback).
-  const { addTabKey, invoked, onTabSelect, removeTabKey, setInvoked, setSelectedTabRef, selectedKey, tabKeys, ...tablist } =
-    React.useContext(TabListContext);
+  const {
+    addTabKey,
+    animatedIndicatorState,
+    invoked,
+    onTabSelect,
+    removeTabKey,
+    setInvoked,
+    setSelectedTabRef,
+    selectedKey,
+    tabKeys,
+    vertical,
+    ...tablist
+  } = React.useContext(TabListContext);
 
   const isDisabled = disabled || tablist.disabled;
 
@@ -115,6 +126,31 @@ export const useTab = (props: TabProps): TabInfo => {
     [accessibilityActions],
   );
 
+  const onTabLayout = React.useCallback(
+    (e: LayoutEvent) => {
+      if (e.nativeEvent.layout) {
+        // save x and y of tab
+        animatedIndicatorState.addToLayoutMap(tabKey, { x: e.nativeEvent.layout.x, y: e.nativeEvent.layout.y });
+      }
+    },
+    [animatedIndicatorState, tabKey],
+  );
+
+  const onIndicatorLayout = React.useCallback(
+    (e: LayoutEvent) => {
+      if (e?.nativeEvent?.layout) {
+        // save width, height, and start margin of indicator.
+        const startMargin = vertical ? e.nativeEvent.layout.y : e.nativeEvent.layout.x;
+        animatedIndicatorState?.addToLayoutMap(tabKey, {
+          width: e.nativeEvent.layout.width,
+          height: e.nativeEvent.layout.height,
+          startMargin: startMargin,
+        });
+      }
+    },
+    [animatedIndicatorState, tabKey, vertical],
+  );
+
   return {
     props: {
       ...props,
@@ -129,6 +165,7 @@ export const useTab = (props: TabProps): TabInfo => {
       focusable: !isDisabled ?? true,
       icon: icon,
       onAccessibilityAction: onAccessibilityActionProp,
+      onLayout: onTabLayout,
       ref: useViewCommandFocus(componentRef),
       tabKey: tabKey,
       ...onKeyProps,
@@ -136,6 +173,7 @@ export const useTab = (props: TabProps): TabInfo => {
     state: {
       ...pressable.state,
       selected: tabKey === selectedKey,
+      onIndicatorLayout: onIndicatorLayout,
     },
   };
 };

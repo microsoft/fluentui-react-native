@@ -32,7 +32,7 @@ const TabListDefaultTest: React.FunctionComponent = () => {
         <Tab tabKey="tab2">Tab 2</Tab>
         <Tab tabKey="tab3">Tab 3</Tab>
       </PaddedTabList>
-      <Header>Controlled Component</Header>
+      {/* <Header>Controlled Component</Header>
       <Line />
       <Text>Selected Key: {key}</Text>
       <PaddedTabList
@@ -45,7 +45,7 @@ const TabListDefaultTest: React.FunctionComponent = () => {
         <Tab tabKey="tab1">Tab 1</Tab>
         <Tab tabKey="tab2">Tab 2</Tab>
         <Tab tabKey="tab3">Tab 3</Tab>
-      </PaddedTabList>
+      </PaddedTabList> */}
     </View>
   );
 };
@@ -191,22 +191,22 @@ const sections: TestSection[] = [
     component: TabListDefaultTest,
     testID: TABLIST_TESTPAGE,
   },
-  {
-    name: 'Disabled',
-    component: TabListDisabledTest,
-  },
-  {
-    name: 'Variants',
-    component: TabListVariantsTest,
-  },
-  {
-    name: 'Icon',
-    component: TabListIconTest,
-  },
-  {
-    name: 'Rendering Content Separately',
-    component: TabListViewTest,
-  },
+  // {
+  //   name: 'Disabled',
+  //   component: TabListDisabledTest,
+  // },
+  // {
+  //   name: 'Variants',
+  //   component: TabListVariantsTest,
+  // },
+  // {
+  //   name: 'Icon',
+  //   component: TabListIconTest,
+  // },
+  // {
+  //   name: 'Rendering Content Separately',
+  //   component: TabListViewTest,
+  // },
 ];
 
 const e2eSections: TestSection[] = [

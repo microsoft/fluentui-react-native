@@ -14,8 +14,8 @@ import type { TabType, TabProps, TabState } from './Tab.types';
 import { tabName } from './Tab.types';
 import { useTab } from './useTab';
 import { TabIndicator } from '../TabIndicator/TabIndicator';
-import { TabListContext } from '../TabList/TabList';
 import type { TabListContextData } from '../TabList/TabList.types';
+import { TabListContext } from '../TabList/TabListContext';
 
 const tabLookup = (layer: string, state: TabState, props: TabProps, tablistContext: TabListContextData): boolean => {
   return (
@@ -91,7 +91,7 @@ export const Tab = compose<TabType>({
               </Slots.contentContainer>
             )}
           </Slots.stack>
-          <Slots.indicator />
+          <Slots.indicator onLayout={tab.state.onIndicatorLayout} />
         </Slots.root>
       );
     };

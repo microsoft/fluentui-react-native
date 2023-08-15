@@ -8,13 +8,11 @@ import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 
 import { stylingSettings } from './TabList.styling';
-import type { TabListType, TabListProps, TabListContextData } from './TabList.types';
+import type { TabListType, TabListProps } from './TabList.types';
 import { tabListName } from './TabList.types';
+import { TabListContext } from './TabListContext';
 import { useTabList } from './useTabList';
-
-export const TabListContext = React.createContext<TabListContextData>({
-  selectedKey: '',
-});
+import { TabListAnimatedIndicator } from '../TabListAnimatedIndicator/TabListAnimatedIndicator';
 
 export const TabList = compose<TabListType>({
   displayName: tabListName,
@@ -22,6 +20,7 @@ export const TabList = compose<TabListType>({
   slots: {
     container: FocusZone,
     stack: View,
+    animatedIndicator: TabListAnimatedIndicator,
   },
   useRender: (userProps: TabListProps, useSlots: UseSlots<TabListType>) => {
     // configure props and state for tabs based on user props
@@ -50,6 +49,7 @@ export const TabList = compose<TabListType>({
             isCircularNavigation={isCircularNavigation}
           >
             <Slots.stack {...mergedProps}>{children}</Slots.stack>
+            <Slots.animatedIndicator />
           </Slots.container>
         </TabListContext.Provider>
       );

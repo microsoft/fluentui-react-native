@@ -12,7 +12,10 @@ export interface TabIndicatorCoreTokens extends IForegroundColorTokens {
 }
 
 export type TabIndicatorTokens = TabIndicatorCoreTokens & LayoutTokens;
-export type TabIndicatorProps = TabIndicatorCoreTokens & IViewProps;
+export type TabIndicatorProps = TabIndicatorCoreTokens &
+  IViewProps & {
+    tabKey?: string;
+  };
 
 export interface TabIndicatorSlotProps {
   root: React.PropsWithRef<IViewProps>;

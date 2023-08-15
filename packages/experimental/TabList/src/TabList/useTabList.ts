@@ -4,7 +4,8 @@ import type { View, AccessibilityState } from 'react-native';
 import { memoize } from '@fluentui-react-native/framework';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
-import type { TabListProps, TabListInfo, TabListState } from './TabList.types';
+import type { ListLayoutInfo, TabLayoutInfo } from './TabList.types';
+import { type TabListProps, type TabListInfo, type TabListState } from './TabList.types';
 
 /**
  * Re-usable hook for TabList.
@@ -34,7 +35,8 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   // selectedTabRef should be set to default tabbable element.
   const [selectedTabRef, setSelectedTabRef] = React.useState(React.useRef<View>(null));
   const [invoked, setInvoked] = React.useState(false);
-  const [tabKeys, setTabKeys] = React.useState([]);
+  const [tabKeys, setTabKeys] = React.useState<string[]>([]);
+  const [listLayoutInfo, setListLayoutInfo] = React.useState<ListLayoutInfo>({});
 
   const addTabKey = React.useCallback(
     (tabKey: string) => {
@@ -53,9 +55,19 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     [setTabKeys],
   );
 
+  const addToLayoutMap = React.useCallback(
+    (tabKey: string, layoutInfo: TabLayoutInfo) => {
+      setListLayoutInfo((prev) => ({ ...prev, [tabKey]: { ...prev[tabKey], ...layoutInfo } }));
+    },
+    [setListLayoutInfo],
+  );
+
+  React.useEffect(() => console.log(JSON.stringify(listLayoutInfo, undefined, 2)), [listLayoutInfo]);
+
   const state: TabListState = {
     context: {
       addTabKey: addTabKey,
+      animatedIndicatorState: { layout: listLayoutInfo, addToLayoutMap: addToLayoutMap },
       appearance: appearance,
       disabled: disabled,
       invoked: invoked,

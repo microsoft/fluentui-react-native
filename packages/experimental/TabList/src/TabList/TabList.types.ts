@@ -4,17 +4,33 @@ import type { View } from 'react-native';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
+import type { LayoutRectangle } from '@office-iss/react-native-win32';
+
+import type { TabListAnimatedIndicatorProps } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 export const tabListName = 'TabList';
 
 export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
 
+export interface TabLayoutInfo extends Partial<LayoutRectangle> {
+  startMargin?: number;
+}
+
+export type ListLayoutInfo = { [tabKey: string]: TabLayoutInfo };
+
+export interface AnimatedIndicatorState {
+  addToLayoutMap: (tabKey: string, layout: TabLayoutInfo) => void;
+  layout: { [tabKey: string]: TabLayoutInfo };
+}
+
 export interface TabListContextData {
   /**
    * Method to add tabKey to context's `tabKeys` list. Run once on a tab mounting.
    */
   addTabKey?: (tabKey: string) => void;
+
+  animatedIndicatorState?: AnimatedIndicatorState;
 
   /**
    * TabList's `appearance` prop passed to its children.
@@ -141,6 +157,7 @@ export interface TabListInfo {
 export interface TabListSlotProps {
   container?: FocusZoneProps;
   stack: React.PropsWithRef<IViewProps>;
+  animatedIndicator?: TabListAnimatedIndicatorProps;
 }
 
 export interface TabListType {
