@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Implement tablist animation on win32",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

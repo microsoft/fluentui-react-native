@@ -67,6 +67,11 @@ export interface TabListState {
   layout?: TabListLayoutInfo;
 
   /**
+   * Stores the layout rect of the tablist and the layout rects + some tokens of each tab. Used to style the animated indicator.
+   */
+  layout?: TabListLayoutInfo;
+
+  /**
    * Updates the selected Tab and calls the client’s onTabSelect callback
    */
   onTabSelect: (key: string) => void;

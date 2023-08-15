@@ -90,7 +90,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       setTabListLayout(e.nativeEvent.layout);
     }
   };
-
   return {
     props: {
       ...props,
