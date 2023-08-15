@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add e2e section to tablist page",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

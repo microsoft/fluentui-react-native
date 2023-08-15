@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Aug 2023 21:40:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.28.9
+
+Tue, 15 Aug 2023 21:40:26 GMT
+
+### Patches
+
+- Implement TabList a11y and functional e2e testing for windows (winlarry@microsoft.com)
 
 ## 1.28.8
 
