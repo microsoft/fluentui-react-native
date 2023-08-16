@@ -14,6 +14,10 @@ import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
 const styles = StyleSheet.create({
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   box: {
     width: 100,
     height: 100,
@@ -83,8 +87,10 @@ const VibrancyViewWithViewProps: React.FunctionComponent = () => {
     <Stack style={stackStyle}>
       <View style={styles.rootWithSpacing}>
         <Text>{descriptionString}</Text>
-        <VibrancyView {...viewProps} />
-        <View {...viewProps} />
+        <View style={styles.row}>
+          <View {...viewProps} />
+          <VibrancyView {...viewProps} />
+        </View>
       </View>
     </Stack>
   );
