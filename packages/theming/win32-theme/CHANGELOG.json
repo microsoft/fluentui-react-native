@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Tue, 15 Aug 2023 22:54:41 GMT",
+      "version": "0.27.5",
+      "tag": "@fluentui-react-native/win32-theme_v0.27.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "ace5e1a980721049fb5092d12704c9be9491b6e8",
+            "comment": "Add additional brand color check"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.27.4",
       "tag": "@fluentui-react-native/win32-theme_v0.27.4",

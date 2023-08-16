@@ -298,7 +298,7 @@ export const tests: TestDescription[] = [
   {
     name: 'TabList',
     component: TabListTest,
-    testPageButton: '',
+    testPageButton: Constants.HOMEPAGE_TABLIST_BUTTON,
     platforms: ['win32', 'windows'],
   },
   {

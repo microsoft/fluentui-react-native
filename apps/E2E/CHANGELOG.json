@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 15 Aug 2023 21:40:26 GMT",
+      "version": "1.28.9",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "414916d1d85f2873af850d33a71e1f4bce2e445a",
+            "comment": "Implement TabList a11y and functional e2e testing for windows"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "1.28.8",
       "tag": "@fluentui-react-native/e2e-testing_v1.28.8",
