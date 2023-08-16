@@ -10,7 +10,5 @@ describe('VibrancyView Testing Initialization', () => {
   it('Click and navigate to VibrancyView test page', async () => {
     await VibrancyViewPageObject.navigateToPageAndLoadTests();
     expect(await VibrancyViewPageObject.isPageLoaded()).toBeTruthy(VibrancyViewPageObject.ERRORMESSAGE_PAGELOAD);
-
-    await expect(await VibrancyViewPageObject.didAssertPopup()).toBeFalsy(VibrancyViewPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

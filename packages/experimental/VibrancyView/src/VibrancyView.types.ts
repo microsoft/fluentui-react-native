@@ -21,7 +21,7 @@ export type BlendingMode = 'behindWindow' | 'withinWindow';
 export type State = 'followsWindowActiveState' | 'active' | 'inactive';
 
 export interface VibrancyViewProps extends IViewProps {
-  material: Material;
-  blendingMode: BlendingMode;
-  state: State;
+  material?: Material;
+  blendingMode?: BlendingMode;
+  state?: State;
 }
