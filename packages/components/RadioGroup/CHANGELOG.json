@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 16 Aug 2023 23:34:27 GMT",
+      "version": "0.19.0",
+      "tag": "@fluentui-react-native/radio-group_v0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "08baf35e9701f3cdd26e52fd78534f8594c14a82",
+            "comment": "Tokenize for ios"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.18.9",
       "tag": "@fluentui-react-native/radio-group_v0.18.9",

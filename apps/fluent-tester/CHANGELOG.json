@@ -2,6 +2,45 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 16 Aug 2023 23:34:27 GMT",
+      "version": "0.152.0",
+      "tag": "@fluentui-react-native/tester_v0.152.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "08baf35e9701f3cdd26e52fd78534f8594c14a82",
+            "comment": "RG/CB ios changes"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.15.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shimmer to v0.11.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.19.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.37.19",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Aug 2023 22:54:41 GMT",
       "version": "0.151.23",
       "tag": "@fluentui-react-native/tester_v0.151.23",

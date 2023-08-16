@@ -2341,7 +2341,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/checkbox@*, @fluentui-react-native/checkbox@0.20.10, @fluentui-react-native/checkbox@>=0.20.10 <1.0.0, @fluentui-react-native/checkbox@workspace:packages/components/Checkbox":
+"@fluentui-react-native/checkbox@*, @fluentui-react-native/checkbox@0.21.0, @fluentui-react-native/checkbox@>=0.21.0 <1.0.0, @fluentui-react-native/checkbox@workspace:packages/components/Checkbox":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/checkbox@workspace:packages/components/Checkbox"
   dependencies:
@@ -2788,12 +2788,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-checkbox@*, @fluentui-react-native/experimental-checkbox@0.15.9, @fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox":
+"@fluentui-react-native/experimental-checkbox@*, @fluentui-react-native/experimental-checkbox@0.15.10, @fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.2 <1.0.0"
-    "@fluentui-react-native/checkbox": ">=0.20.10 <1.0.0"
+    "@fluentui-react-native/checkbox": ">=0.21.0 <1.0.0"
     "@fluentui-react-native/component-cache": ^1.5.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.5
@@ -2897,7 +2897,7 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-radio-group@workspace:packages/experimental/RadioGroup"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/radio-group": ">=0.18.9 <1.0.0"
+    "@fluentui-react-native/radio-group": ">=0.19.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
@@ -2926,7 +2926,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-shimmer@*, @fluentui-react-native/experimental-shimmer@0.10.8, @fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer":
+"@fluentui-react-native/experimental-shimmer@*, @fluentui-react-native/experimental-shimmer@0.11.0, @fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer"
   dependencies:
@@ -3381,7 +3381,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.18.9, @fluentui-react-native/radio-group@>=0.18.9 <1.0.0, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
+"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.19.0, @fluentui-react-native/radio-group@>=0.19.0 <1.0.0, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/radio-group@workspace:packages/components/RadioGroup"
   dependencies:
@@ -3652,7 +3652,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.151.23
+    "@fluentui-react-native/tester": ^0.152.0
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
@@ -3683,7 +3683,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.151.23, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.152.0, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3704,12 +3704,12 @@ __metadata:
     "@fluentui-react-native/experimental-appearance-additions": ^0.5.7
     "@fluentui-react-native/experimental-avatar": ">=0.19.6 <1.0.0"
     "@fluentui-react-native/experimental-button": 0.18.10
-    "@fluentui-react-native/experimental-checkbox": 0.15.9
+    "@fluentui-react-native/experimental-checkbox": 0.15.10
     "@fluentui-react-native/experimental-expander": 0.6.8
     "@fluentui-react-native/experimental-menu-button": ">=0.7.17 <1.0.0"
     "@fluentui-react-native/experimental-native-date-picker": ">=0.8.0 <1.0.0"
     "@fluentui-react-native/experimental-shadow": 0.4.7
-    "@fluentui-react-native/experimental-shimmer": 0.10.8
+    "@fluentui-react-native/experimental-shimmer": 0.11.0
     "@fluentui-react-native/experimental-tabs": 0.9.10
     "@fluentui-react-native/experimental-text": ">=0.13.7 <1.0.0"
     "@fluentui-react-native/focus-zone": ^0.12.9
@@ -3720,7 +3720,7 @@ __metadata:
     "@fluentui-react-native/menu": ^1.11.16
     "@fluentui-react-native/merge-props": ">=0.7.1 <1.0.0"
     "@fluentui-react-native/notification": 0.23.10
-    "@fluentui-react-native/radio-group": ">=0.18.9 <1.0.0"
+    "@fluentui-react-native/radio-group": ">=0.19.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": ^0.16.5
     "@fluentui-react-native/spinner": ^0.7.8
@@ -3734,7 +3734,7 @@ __metadata:
     "@fluentui-react-native/themed-stylesheet": ^1.5.2
     "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0"
     "@fluentui-react-native/win32-theme": ">=0.27.5 <1.0.0"
-    "@fluentui/react-native": ">=0.37.18 <1.0.0"
+    "@fluentui/react-native": ">=0.37.19 <1.0.0"
     "@fortawesome/fontawesome-svg-core": ^6.2.0
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-native-fontawesome": ^0.3.0
@@ -3976,13 +3976,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native@*, @fluentui/react-native@>=0.37.18 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
+"@fluentui/react-native@*, @fluentui/react-native@>=0.37.19 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
     "@fluentui-react-native/button": 0.34.10
     "@fluentui-react-native/callout": 0.24.13
-    "@fluentui-react-native/checkbox": 0.20.10
+    "@fluentui-react-native/checkbox": 0.21.0
     "@fluentui-react-native/contextual-menu": 0.22.14
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-trap-zone": 0.10.9
@@ -3993,7 +3993,7 @@ __metadata:
     "@fluentui-react-native/persona": 0.14.6
     "@fluentui-react-native/persona-coin": 0.13.6
     "@fluentui-react-native/pressable": 0.10.8
-    "@fluentui-react-native/radio-group": 0.18.9
+    "@fluentui-react-native/radio-group": 0.19.0
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": 0.16.5
     "@fluentui-react-native/tabs": 0.13.8

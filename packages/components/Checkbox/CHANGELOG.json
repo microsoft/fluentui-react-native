@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Wed, 16 Aug 2023 23:34:27 GMT",
+      "version": "0.21.0",
+      "tag": "@fluentui-react-native/checkbox_v0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "08baf35e9701f3cdd26e52fd78534f8594c14a82",
+            "comment": "Tokenize for ios"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.20.10",
       "tag": "@fluentui-react-native/checkbox_v0.20.10",

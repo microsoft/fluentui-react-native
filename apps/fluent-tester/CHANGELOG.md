@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 15 Aug 2023 22:54:41 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Aug 2023 23:34:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.152.0
+
+Wed, 16 Aug 2023 23:34:27 GMT
+
+### Minor changes
+
+- RG/CB ios changes (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/experimental-checkbox to v0.15.10
+- Bump @fluentui-react-native/experimental-shimmer to v0.11.0
+- Bump @fluentui-react-native/radio-group to v0.19.0
+- Bump @fluentui/react-native to v0.37.19
 
 ## 0.151.23
 

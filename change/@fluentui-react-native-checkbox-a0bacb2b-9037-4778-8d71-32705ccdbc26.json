@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Tokenize for ios",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}
