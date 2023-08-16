@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "RG/CB ios changes",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}

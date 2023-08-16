@@ -1,22 +1,17 @@
-import { Platform } from 'react-native';
-
 import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { CheckboxTokens } from './Checkbox.types';
 
-// A copy of CheckboxTokens.android.ts, these are expected to change in the future.
-
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
     requiredColor: globalTokens.color.darkRed.primary,
     requiredPadding: globalTokens.size20,
-    checkboxBorderWidth: globalTokens.stroke.width15,
-    checkboxBorderRadius: globalTokens.corner.radius40,
+    checkboxBorderWidth: globalTokens.stroke.width10,
+    checkboxBorderRadius: globalTokens.corner.radiusCircular,
     checkboxSize: globalTokens.size200,
     checkmarkSize: globalTokens.size120,
-    ...(Platform.OS === 'android' && { rippleColor: '#D4D4D4' }),
     label: {
       // Tokens taken from Android List Item
       color: t.colors.neutralForeground1,
