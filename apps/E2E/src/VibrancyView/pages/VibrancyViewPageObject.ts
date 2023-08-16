@@ -1,5 +1,5 @@
 import { BasePage } from '../../common/BasePage';
-import { VIBRANCYVIEW_TESTPAGE, HOMEPAGE_VIBRANCYVIEW_BUTTON } from '../consts';
+import { VIBRANCYVIEW_TESTPAGE, VIBRANCYVIEW_TEST_COMPONENT, HOMEPAGE_VIBRANCYVIEW_BUTTON } from '../consts';
 
 class VibrancyViewTestPage extends BasePage {
   /*****************************************/
@@ -7,6 +7,10 @@ class VibrancyViewTestPage extends BasePage {
   /*****************************************/
   get _pageName() {
     return VIBRANCYVIEW_TESTPAGE;
+  }
+
+  get _primaryComponentName() {
+    return VIBRANCYVIEW_TEST_COMPONENT;
   }
 
   get _pageButtonName() {

@@ -33,7 +33,7 @@ open class VibrancyView: RCTView {
 	}
 
 	@objc public func setState(_ state: NSVisualEffectView.State) {
-	  visualEffectView.state = state
+		visualEffectView.state = state
 	}
 
 	private let visualEffectView = FixedVisualEffectView()

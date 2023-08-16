@@ -72,7 +72,7 @@ const VibrancyViewDefault: React.FunctionComponent = () => {
 };
 
 const VibrancyViewWithViewProps: React.FunctionComponent = () => {
-  const descriptionString = '<View> and <VibrancyView> with the same props set';
+  const descriptionString = '<View> and <VibrancyView> with the backgroundColor, borderColor, borderWidth, borderRadius set';
   const viewProps: ViewProps = React.useMemo(() => {
     return {
       focusable: true,
