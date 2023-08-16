@@ -5444,11 +5444,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-windows/cli@npm:0.71.14":
-  version: 0.71.14
-  resolution: "@react-native-windows/cli@npm:0.71.14"
+"@react-native-windows/cli@npm:0.71.15":
+  version: 0.71.15
+  resolution: "@react-native-windows/cli@npm:0.71.15"
   dependencies:
-    "@react-native-windows/codegen": 0.71.6
+    "@react-native-windows/codegen": 0.71.7
     "@react-native-windows/fs": 0.71.3
     "@react-native-windows/package-utils": 0.71.3
     "@react-native-windows/telemetry": 0.71.7
@@ -5471,13 +5471,13 @@ __metadata:
     xpath: ^0.0.27
   peerDependencies:
     react-native: "*"
-  checksum: a99ec9936c63a70eb09c44a8d58466dbefe2e3e8443d21382b4319fa6ea3bc782f608506a6725894909a11eca9adf6a710ff17e1c73014f577fa6c6dfe773d4c
+  checksum: fd5739fcf8562690683b238f3954d0226bc23b60cad7a7ab086b2c271e8c3baa081d071726b50dbfc8a30c03cccc54a81af1ad887259aa84774f6b1b3ae1e965
   languageName: node
   linkType: hard
 
-"@react-native-windows/codegen@npm:0.71.6":
-  version: 0.71.6
-  resolution: "@react-native-windows/codegen@npm:0.71.6"
+"@react-native-windows/codegen@npm:0.71.7":
+  version: 0.71.7
+  resolution: "@react-native-windows/codegen@npm:0.71.7"
   dependencies:
     "@react-native-windows/fs": 0.71.3
     chalk: ^4.1.0
@@ -5489,7 +5489,7 @@ __metadata:
     react-native: "*"
   bin:
     react-native-windows-codegen: bin.js
-  checksum: 6e75c7df3f2a6502f723803d3745652dfb0fc86d8fe8fa7cce8b4722440406fd9942aca79ae9db557eac9e2c5f55e459a0703b56ba294fcc528aa92c841cbdaf
+  checksum: 4abddad5d9bd7a19be18dcdfd740a0db9d19491c362a9f5e95fd93d3fe5850e6b43477741868b1b809caa355415bd7c552dbe2ae7d2195e0947cca05dc0056d9
   languageName: node
   linkType: hard
 
@@ -18384,15 +18384,15 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.71.0":
-  version: 0.71.29
-  resolution: "react-native-windows@npm:0.71.29"
+  version: 0.71.31
+  resolution: "react-native-windows@npm:0.71.31"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 10.2.4
     "@react-native-community/cli-platform-android": 10.2.0
     "@react-native-community/cli-platform-ios": 10.2.4
-    "@react-native-windows/cli": 0.71.14
+    "@react-native-windows/cli": 0.71.15
     "@react-native/assets": 1.0.0
     "@react-native/normalize-color": 2.1.0
     "@react-native/polyfills": 2.0.0
@@ -18425,7 +18425,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-  checksum: 07effb866e3c6781791099cc32c1164dd82548ddcf0ce20d2cec37fa64c0ac1f3a8410ebf2fca65f00db74a9fa9874a6ecf4a064cb1831848ea39a7079009796
+  checksum: d98f17ba352820e9e4d980c0e2b709f074d6eb95a1862231d6e014def3e1cd8703c06d0b742ac21981d2666ada26ef2efe8b519908dc747787258d78f55210ff
   languageName: node
   linkType: hard
 
