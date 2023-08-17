@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "[macOS] Add VibrancyView",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -4,15 +4,15 @@ module.exports = {
   "0.71": {
     "@fluentui-react-native/e2e-testing": {
       "name": "@fluentui-react-native/e2e-testing",
-      "version": "1.28.9"
+      "version": "1.29.0"
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.152.0"
+      "version": "0.153.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.34.34"
+      "version": "0.34.35"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -225,6 +225,10 @@ module.exports = {
     "@fluentui-react-native/experimental-text": {
       "name": "@fluentui-react-native/experimental-text",
       "version": "0.13.7"
+    },
+    "@fluentui-react-native/vibrancy-view": {
+      "name": "@fluentui-react-native/vibrancy-view",
+      "version": "0.0.2"
     },
     "@fluentui-react-native/component-cache": {
       "name": "@fluentui-react-native/component-cache",

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 17 Aug 2023 01:06:01 GMT",
+      "version": "0.153.0",
+      "tag": "@fluentui-react-native/tester_v0.153.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4977d524de19b0c2cc238efab29a40867eaf3e54",
+            "comment": "[macOS] Add VibrancyView"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/vibrancy-view to v0.0.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Aug 2023 23:34:27 GMT",
       "version": "0.152.0",
       "tag": "@fluentui-react-native/tester_v0.152.0",

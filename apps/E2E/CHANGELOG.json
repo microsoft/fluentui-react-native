@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 17 Aug 2023 01:06:01 GMT",
+      "version": "1.29.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.29.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4977d524de19b0c2cc238efab29a40867eaf3e54",
+            "comment": "[macOS] Add VibrancyView"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Aug 2023 21:40:26 GMT",
       "version": "1.28.9",
       "tag": "@fluentui-react-native/e2e-testing_v1.28.9",

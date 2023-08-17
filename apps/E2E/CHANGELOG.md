@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 15 Aug 2023 21:40:26 GMT and should not be manually modified.
+This log was last generated on Thu, 17 Aug 2023 01:06:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.29.0
+
+Thu, 17 Aug 2023 01:06:01 GMT
+
+### Minor changes
+
+- [macOS] Add VibrancyView (saadnajmi2@gmail.com)
 
 ## 1.28.9
 
