@@ -27,6 +27,7 @@
     <file src="DerivedData\Build\Products\Release\FRNCheckbox\libFRNCheckbox.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNMenuButton\libFRNMenuButton.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNRadioButton\libFRNRadioButton.a" target="Ship-macosx"/>
+    <file src="DerivedData\Build\Products\Release\FRNVibrancyView\libFRNVibrancyView.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\RCTFocusZone\libRCTFocusZone.a" target="Ship-macosx"/>
 
   </files>
