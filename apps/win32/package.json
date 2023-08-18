@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.34.16",
+  "version": "0.34.35",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -21,7 +21,7 @@
     "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useFastRefresh --pluginProps --debugBundlePath index --jsEngine v8",
     "run-win32-dev-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDevMain --useWebDebugger --windowTitle \"FluentUI Tester\" --useFastRefresh --pluginProps --debugBundlePath index --jsEngine v8",
     "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
-    "e2etest": "rimraf reports/* && wdio",
+    "e2etest": "rimraf reports && wdio",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
@@ -31,7 +31,7 @@
     "directory": "apps/win32"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.151.6",
+    "@fluentui-react-native/tester": "^0.153.0",
     "react": "18.2.0",
     "react-native": "^0.71.0",
     "react-native-svg": "^13.7.0",
@@ -59,6 +59,7 @@
     "metro-react-native-babel-preset": "^0.73.7",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",
+    "rimraf": "^5.0.1",
     "ts-node": "^8.10.1",
     "typescript": "4.9.4",
     "webdriverio": "7.30.1"

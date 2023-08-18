@@ -1,8 +1,94 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 10 Jul 2023 23:39:34 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.16
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.2
+- Bump @fluentui-react-native/callout to v0.24.13
+- Bump @fluentui-react-native/focus-zone to v0.12.9
+- Bump @fluentui-react-native/framework to v0.11.5
+- Bump @fluentui-react-native/icon to v0.19.7
+- Bump @fluentui-react-native/interactive-hooks to v0.24.7
+- Bump @fluentui-react-native/text to v0.21.7
+- Bump @fluentui-react-native/tokens to v0.21.2
+- Bump @fluentui-react-native/button to v0.34.10
+
+## 1.11.15
+
+Wed, 09 Aug 2023 22:02:14 GMT
+
+### Patches
+
+- [Callout][macOS] Support Border Tokens (saadnajmi2@gmail.com)
+- Bump @fluentui-react-native/callout to v0.24.12
+- Bump @fluentui-react-native/focus-zone to v0.12.8
+- Bump @fluentui-react-native/framework to v0.11.4
+- Bump @fluentui-react-native/icon to v0.19.6
+- Bump @fluentui-react-native/interactive-hooks to v0.24.6
+- Bump @fluentui-react-native/text to v0.21.6
+- Bump @fluentui-react-native/theme-tokens to v0.25.1
+- Bump @fluentui-react-native/use-styling to v0.11.1
+- Bump @fluentui-react-native/button to v0.34.9
+
+## 1.11.14
+
+Wed, 02 Aug 2023 16:51:10 GMT
+
+### Patches
+
+- minHeight for small button (rofang@microsoft.com)
+- Bump @fluentui-react-native/button to v0.34.8
+
+## 1.11.13
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.24.11
+- Bump @fluentui-react-native/focus-zone to v0.12.7
+- Bump @fluentui-react-native/framework to v0.11.3
+- Bump @fluentui-react-native/icon to v0.19.5
+- Bump @fluentui-react-native/interactive-hooks to v0.24.5
+- Bump @fluentui-react-native/text to v0.21.5
+- Bump @fluentui-react-native/button to v0.34.7
+
+## 1.11.12
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.24.10
+- Bump @fluentui-react-native/focus-zone to v0.12.6
+- Bump @fluentui-react-native/framework to v0.11.2
+- Bump @fluentui-react-native/icon to v0.19.4
+- Bump @fluentui-react-native/interactive-hooks to v0.24.4
+- Bump @fluentui-react-native/text to v0.21.4
+- Bump @fluentui-react-native/button to v0.34.6
+
+## 1.11.11
+
+Sat, 15 Jul 2023 23:01:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.24.9
+
+## 1.11.10
+
+Fri, 14 Jul 2023 23:32:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.24.8
 
 ## 1.11.9
 

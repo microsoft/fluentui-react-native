@@ -7,12 +7,10 @@ export const settings: IComposeSettings<ICalloutType> = [
   {
     tokens: {
       backgroundColor: 'bodyStandoutBackground',
-      beakWidth: 20,
-      borderColor: 'bodyFrameBackground',
-      borderWidth: 1,
+      borderColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 5,
       directionalHint: 'bottonLeftEdge',
-      gapSpace: 0,
-      minPadding: 0,
     },
     root: {
       style: {

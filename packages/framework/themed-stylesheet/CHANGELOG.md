@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/themed-stylesheet
 
-This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Aug 2023 22:02:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.5.2
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/memo-cache to v1.3.1
 
 ## 1.5.1
 

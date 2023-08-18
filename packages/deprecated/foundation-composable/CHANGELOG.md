@@ -1,8 +1,18 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Aug 2023 22:02:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Result of yarn (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/merge-props to v0.7.1
+- Bump @uifabricshared/foundation-settings to v0.13.2
 
 ## 0.12.1
 

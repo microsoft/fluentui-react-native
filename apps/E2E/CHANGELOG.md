@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 11 Jul 2023 04:56:58 GMT and should not be manually modified.
+This log was last generated on Thu, 17 Aug 2023 01:06:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.29.0
+
+Thu, 17 Aug 2023 01:06:01 GMT
+
+### Minor changes
+
+- [macOS] Add VibrancyView (saadnajmi2@gmail.com)
+
+## 1.28.9
+
+Tue, 15 Aug 2023 21:40:26 GMT
+
+### Patches
+
+- Implement TabList a11y and functional e2e testing for windows (winlarry@microsoft.com)
+
+## 1.28.8
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.12.9
+
+## 1.28.7
+
+Wed, 09 Aug 2023 22:02:13 GMT
+
+### Patches
+
+- Fix for win32? (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.12.8
+
+## 1.28.6
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.12.7
+
+## 1.28.5
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.12.6
 
 ## 1.28.4
 

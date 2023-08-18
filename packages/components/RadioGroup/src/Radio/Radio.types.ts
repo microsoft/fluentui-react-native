@@ -11,6 +11,7 @@ import type {
   IBorderTokens,
   IColorTokens,
 } from '@fluentui-react-native/tokens';
+import type { SvgProps } from 'react-native-svg';
 
 export const radioName = 'Radio';
 
@@ -220,7 +221,8 @@ export interface RadioInfo {
 export interface RadioSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
   button: PressablePropsExtended;
-  innerCircle: IViewProps;
+  innerCircle?: IViewProps;
+  checkmark?: SvgProps;
   labelContent: IViewProps;
   label: TextProps;
   subtext?: TextProps;

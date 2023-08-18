@@ -18,6 +18,10 @@ module.exports = {
       if (name === '@fluentui-react-native/dependency-profiles') {
         console.log(`Updating ${name} to use latest published versions`);
         execSync(`yarn update-profile`, { cwd: packagePath });
+        // This logic is run after all bumps have happened,
+        // so it's ok that it's only run once
+        console.log('Updating lockfile');
+        execSync(`yarn install --mode update-lockfile`);
       }
     },
   },

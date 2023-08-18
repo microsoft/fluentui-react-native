@@ -1,8 +1,61 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Fri, 07 Jul 2023 20:45:12 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.8
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.6
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.5.7
+- Bump @fluentui-react-native/theming-utils to v0.24.3
+
+## 0.21.7
+
+Thu, 10 Aug 2023 19:05:55 GMT
+
+### Patches
+
+- Expose all macOS alias color tokens through the theme (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.21.6
+
+Wed, 09 Aug 2023 22:02:13 GMT
+
+### Patches
+
+- Update tests (ruaraki@microsoft.com)
+- Bump design-tokens packages to 0.51.0 (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.19.5
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.5.6
+- Bump @fluentui-react-native/memo-cache to v1.3.1
+- Bump @fluentui-react-native/theme to v0.9.1
+- Bump @fluentui-react-native/theme-tokens to v0.25.1
+- Bump @fluentui-react-native/theming-utils to v0.24.2
+
+## 0.21.5
+
+Mon, 31 Jul 2023 19:29:58 GMT
+
+### Patches
+
+- Update snapshots (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.19.4
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.5.5
+
+## 0.21.4
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Fix tests (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.19.3
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.5.4
 
 ## 0.21.3
 

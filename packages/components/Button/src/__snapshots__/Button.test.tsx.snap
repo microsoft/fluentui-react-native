@@ -585,6 +585,7 @@ exports[`Button component tests Button small 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 7,
       "paddingHorizontal": 11,

@@ -84,6 +84,14 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       }),
       ['labelAlignItems', 'labelMarginRight', 'labelMarginLeft', 'labelPadding', ...borderStyles.keys],
     ),
+    checkmark: buildProps(
+      (tokens: RadioTokens) => ({
+        style: {
+          opacity: tokens.radioVisibility,
+        },
+      }),
+      ['radioVisibility'],
+    ),
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,

@@ -10,9 +10,9 @@ PODS:
     - React-jsi (= 0.71.12)
     - ReactCommon/turbomodule/core (= 0.71.12)
   - fmt (6.2.1)
-  - FRNAppearanceAdditions (0.5.3):
+  - FRNAppearanceAdditions (0.5.4):
     - React
-  - FRNAvatar (0.19.2):
+  - FRNAvatar (0.19.3):
     - MicrosoftFluentUI (= 0.13.1)
     - React
   - FRNDatePicker (0.8.0):
@@ -493,7 +493,7 @@ PODS:
     - React-Core
     - React-cxxreact
     - ReactCommon/turbomodule/core
-  - ReactTestApp-DevSupport (2.5.10):
+  - ReactTestApp-DevSupport (2.5.12):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -651,8 +651,8 @@ SPEC CHECKSUMS:
   FBLazyVector: 4eb7ee83e8d0ad7e20a829485295ff48823c4e4c
   FBReactNativeSpec: c64c99884d25e07301aaf0d243d83bb2c100880f
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAppearanceAdditions: be03efbbfcc51f5990a093b2fee7cbdaf9c88195
-  FRNAvatar: ead8b69ba479d0ea8cfc9cc39740802c1a06964a
+  FRNAppearanceAdditions: 5b8fa16ad65830031acd4d2f160539c9b0721c33
+  FRNAvatar: 65790bfa0ebdbba2c7b0f29efa3728b7769e9c65
   FRNDatePicker: 78b02a5ba9d7559d553b358271b1ec18ebecb1ec
   FRNFontMetrics: 41579c8c7cef1f816a894b6d3968461ef599f5c1
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
@@ -687,7 +687,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 7902246857a4ead4166869e6c42d4df329ff721d
   ReactCommon: 903ae47d52e4af9bd1d41d5c7c6004e828aa59a1
   ReactNativeHost: 5dd0021c01ade845f1171f4e6f6814f214ddfadb
-  ReactTestApp-DevSupport: 4bef8745d6a67987c92113f503805066ff268f97
+  ReactTestApp-DevSupport: 7c030a9b1a9d54ba3f39db6ea9af7e7d02acd387
   ReactTestApp-Resources: 3a5202e2bbbd3fb589d54d15f296a52a5659855f
   RNCPicker: 0bc2f0a29abcca7b7ed44a2d036aac9ab6d25700
   RNSVG: 80584470ff1ffc7994923ea135a3e5ad825546b9

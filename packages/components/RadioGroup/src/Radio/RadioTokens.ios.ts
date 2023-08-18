@@ -27,13 +27,10 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     marginRight: 24 - 20, // Size - Outer Circle Size
     radioOuterCircleSize: 20,
     radioInnerCircleSize: 10,
-    radioBorderStyle: 'solid',
-    radioBorderWidth: globalTokens.stroke.width15,
     rippleRadius: globalTokens.size160,
     rippleColor: '#D4D4D4',
 
     // Unselected, Rest
-    radioBorder: t.colors.neutralStrokeAccessible,
     radioVisibility: 0,
 
     disabled: {

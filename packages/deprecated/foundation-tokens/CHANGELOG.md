@@ -1,8 +1,26 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Fri, 07 Jul 2023 20:45:12 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.4
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.21.2
+
+## 0.13.3
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/merge-props to v0.7.1
+- Bump @uifabricshared/foundation-settings to v0.13.2
+- Bump @fluentui-react-native/memo-cache to v1.3.1
 
 ## 0.13.2
 

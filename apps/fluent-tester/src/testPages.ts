@@ -44,6 +44,7 @@ import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
+import { VibrancyViewTest } from './TestComponents/VibrancyView';
 import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
@@ -297,7 +298,7 @@ export const tests: TestDescription[] = [
   {
     name: 'TabList',
     component: TabListTest,
-    testPageButton: '',
+    testPageButton: Constants.HOMEPAGE_TABLIST_BUTTON,
     platforms: ['win32', 'windows'],
   },
   {
@@ -329,5 +330,11 @@ export const tests: TestDescription[] = [
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Vibrancy View',
+    component: VibrancyViewTest,
+    testPageButton: Constants.HOMEPAGE_VIBRANCYVIEW_BUTTON,
+    platforms: ['macos'],
   },
 ];

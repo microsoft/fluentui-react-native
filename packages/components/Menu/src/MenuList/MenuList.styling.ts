@@ -20,7 +20,7 @@ export const stylingSettings: UseStylingOptions<MenuListProps, MenuListSlotProps
           backgroundColor: tokens.backgroundColor,
           display: 'flex',
           ...layoutStyles.from(tokens, theme),
-          ...(Platform.OS === 'android' && { borderRadius: tokens.cornerRadius }),
+          ...(Platform.OS === 'android' && { borderRadius: tokens.borderRadius }),
         },
         gap: tokens.gap,
       }),
