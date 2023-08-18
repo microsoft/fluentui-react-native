@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Sat, 15 Jul 2023 23:01:27 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.17
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.22.14
+- Bump @fluentui-react-native/experimental-button to v0.18.10
+- Bump @fluentui-react-native/framework to v0.11.5
+- Bump @fluentui-react-native/tokens to v0.21.2
+
+## 0.7.16
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.22.13
+- Bump @fluentui-react-native/experimental-button to v0.18.9
+- Bump @fluentui-react-native/framework to v0.11.4
+
+## 0.7.15
+
+Wed, 02 Aug 2023 16:51:10 GMT
+
+### Patches
+
+- minHeight for small button (rofang@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.18.8
+
+## 0.7.14
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.22.12
+- Bump @fluentui-react-native/experimental-button to v0.18.7
+- Bump @fluentui-react-native/framework to v0.11.3
+
+## 0.7.13
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.22.11
+- Bump @fluentui-react-native/experimental-button to v0.18.6
+- Bump @fluentui-react-native/framework to v0.11.2
 
 ## 0.7.12
 

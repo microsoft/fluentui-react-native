@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Mon, 12 Jun 2023 17:46:44 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Aug 2023 22:02:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.2
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.2.1
+- Bump @fluentui-react-native/use-slot to v0.4.2
+- Bump @fluentui-react-native/use-slots to v0.8.2
+- Bump @fluentui-react-native/use-styling to v0.11.1
 
 ## 0.9.1
 

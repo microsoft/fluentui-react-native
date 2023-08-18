@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/popover
 
-This log was last generated on Fri, 07 Jul 2023 20:45:12 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.6
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.2
+- Bump @fluentui-react-native/framework to v0.11.5
+
+## 0.2.5
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.4
+
+## 0.2.4
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.3
+
+## 0.2.3
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.2
 
 ## 0.2.2
 

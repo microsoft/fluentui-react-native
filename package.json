@@ -35,10 +35,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@rnx-kit/align-deps": "^2.2.2",
     "babel-jest": "^24.9.0",
     "beachball": "^2.20.0",
@@ -55,21 +55,11 @@
     "react-dom": "^18.2.0",
     "react-native": "^0.71.0"
   },
-  "workspaces": {
-    "packages": [
-      "apps/*",
-      "packages/**",
-      "scripts"
-    ],
-    "nohoist": [
-      "@fluentui-react-native/e2e-testing/appium-windows-driver",
-      "@fluentui-react-native/e2e-testing/appium-mac2-driver",
-      "@fluentui-react-native/e2e-testing/appium-xcuitest-driver",
-      "@fluentui-react-native/tester-win32/appium-windows-driver",
-      "@fluentui-react-native/e2e-testing/appium-uiautomator2-driver",
-      "@fluentui-react-native/e2e-testing/appium-uiautomator2-server"
-    ]
-  },
+  "workspaces": [
+    "apps/*",
+    "packages/**",
+    "scripts"
+  ],
   "resolutions": {
     "@appium/support": "3.1.5",
     "es5-ext": "0.10.53",
@@ -99,5 +89,6 @@
         "react-dom"
       ]
     }
-  }
+  },
+  "packageManager": "yarn@3.6.1"
 }

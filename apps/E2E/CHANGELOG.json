@@ -2,6 +2,102 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 17 Aug 2023 01:06:01 GMT",
+      "version": "1.29.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.29.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4977d524de19b0c2cc238efab29a40867eaf3e54",
+            "comment": "[macOS] Add VibrancyView"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Aug 2023 21:40:26 GMT",
+      "version": "1.28.9",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "414916d1d85f2873af850d33a71e1f4bce2e445a",
+            "comment": "Implement TabList a11y and functional e2e testing for windows"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 14 Aug 2023 20:14:41 GMT",
+      "version": "1.28.8",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Aug 2023 22:02:13 GMT",
+      "version": "1.28.7",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "144e13724c3bdd68fa821c9166fae7f9dffc7d01",
+            "comment": "Fix for win32?"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 31 Jul 2023 19:29:59 GMT",
+      "version": "1.28.6",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 18 Jul 2023 19:09:32 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.28.5",
+      "version": "1.28.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.6",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Jul 2023 04:56:58 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.28.4",
       "version": "1.28.4",
