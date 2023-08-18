@@ -5463,9 +5463,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-windows/cli@npm:0.71.16":
-  version: 0.71.16
-  resolution: "@react-native-windows/cli@npm:0.71.16"
+"@react-native-windows/cli@npm:0.71.17":
+  version: 0.71.17
+  resolution: "@react-native-windows/cli@npm:0.71.17"
   dependencies:
     "@react-native-windows/codegen": 0.71.7
     "@react-native-windows/fs": 0.71.3
@@ -5490,7 +5490,7 @@ __metadata:
     xpath: ^0.0.27
   peerDependencies:
     react-native: "*"
-  checksum: dd96edfbb5dc7f9061e9cdc4915f6f385dd4cbcfd19af986a05115cbccb755e6061e4cda524d686014fdfb2e9c51eee608f09df65b3f9f97855e9430fa3c3dce
+  checksum: f6f448d1bad3fe3226baed112370f7431c3fa709d07a0c398b15d6d01a1bd2e3da906baf8a62af6788fdd11bd8d8f22dc7c96ee3f51a92178623c25bf397571a
   languageName: node
   linkType: hard
 
@@ -18403,15 +18403,15 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.71.0":
-  version: 0.71.32
-  resolution: "react-native-windows@npm:0.71.32"
+  version: 0.71.33
+  resolution: "react-native-windows@npm:0.71.33"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 10.2.4
     "@react-native-community/cli-platform-android": 10.2.0
     "@react-native-community/cli-platform-ios": 10.2.4
-    "@react-native-windows/cli": 0.71.16
+    "@react-native-windows/cli": 0.71.17
     "@react-native/assets": 1.0.0
     "@react-native/normalize-color": 2.1.0
     "@react-native/polyfills": 2.0.0
@@ -18444,7 +18444,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-  checksum: 2e3c1da8c1f0d47b726045c82b08e36715d71e51da86312f5059d33be63c4fef4a11530e67db4d9a858a0e55462b48cf5bbaecc751005bec49815a675d82b507
+  checksum: a5134953fac1e19e53083546fc35237d804d40a8a569364093a5adb09d02af38d68f2b8e53a4e9f74ad3655b7f190a4a1045c3f381c595e9330c56bfb4f9b0be
   languageName: node
   linkType: hard
 
