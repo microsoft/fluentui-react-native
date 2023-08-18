@@ -3556,7 +3556,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/switch@*, @fluentui-react-native/switch@^0.10.7, @fluentui-react-native/switch@workspace:packages/components/Switch":
+"@fluentui-react-native/switch@*, @fluentui-react-native/switch@^0.11.0, @fluentui-react-native/switch@workspace:packages/components/Switch":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/switch@workspace:packages/components/Switch"
   dependencies:
@@ -3652,7 +3652,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.153.0
+    "@fluentui-react-native/tester": ^0.153.1
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
@@ -3683,7 +3683,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.153.0, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.153.1, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3725,7 +3725,7 @@ __metadata:
     "@fluentui-react-native/separator": ^0.16.5
     "@fluentui-react-native/spinner": ^0.7.8
     "@fluentui-react-native/stack": ">=0.8.9 <1.0.0"
-    "@fluentui-react-native/switch": ^0.10.7
+    "@fluentui-react-native/switch": ^0.11.0
     "@fluentui-react-native/tablist": 0.3.7
     "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
     "@fluentui-react-native/theme": ">=0.9.1 <1.0.0"
