@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/input",
   "entries": [
     {
+      "date": "Mon, 21 Aug 2023 22:45:19 GMT",
+      "version": "0.4.0",
+      "tag": "@fluentui-react-native/input_v0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/input",
+            "commit": "79614a9a2888cf684a9781374f04575e357afb19",
+            "comment": "Tokenize for iOS and add to tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.3.9",
       "tag": "@fluentui-react-native/input_v0.3.9",

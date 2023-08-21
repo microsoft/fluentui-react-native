@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Tokenize for iOS and add to tester",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}

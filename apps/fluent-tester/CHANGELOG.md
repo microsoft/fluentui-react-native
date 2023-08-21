@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 21 Aug 2023 20:45:53 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Aug 2023 22:45:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.155.0
+
+Mon, 21 Aug 2023 22:45:19 GMT
+
+### Minor changes
+
+- Tokenize for iOS and add to tester (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/chip to v0.2.0
+- Bump @fluentui-react-native/input to v0.4.0
 
 ## 0.154.0
 

@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 21 Aug 2023 22:45:19 GMT",
+      "version": "0.155.0",
+      "tag": "@fluentui-react-native/tester_v0.155.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/tester",
+            "commit": "79614a9a2888cf684a9781374f04575e357afb19",
+            "comment": "Tokenize for iOS and add to tester"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/chip to v0.2.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/input to v0.4.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 21 Aug 2023 20:45:53 GMT",
       "version": "0.154.0",
       "tag": "@fluentui-react-native/tester_v0.154.0",

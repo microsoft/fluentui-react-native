@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/chip",
   "entries": [
     {
+      "date": "Mon, 21 Aug 2023 22:45:19 GMT",
+      "version": "0.2.0",
+      "tag": "@fluentui-react-native/chip_v0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/chip",
+            "commit": "79614a9a2888cf684a9781374f04575e357afb19",
+            "comment": "Move chip to common file, fix input font tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.1.6",
       "tag": "@fluentui-react-native/chip_v0.1.6",
