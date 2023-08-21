@@ -48,14 +48,23 @@ exports[`Input component tests Input default 1`] = `
         style={
           {
             "color": "#616161",
+            "dynamicTypeRamp": undefined,
             "flexGrow": 1,
             "flexShrink": 1,
+            "fontFamily": "Segoe UI",
+            "fontSize": 13,
+            "fontStyle": undefined,
+            "fontWeight": "400",
+            "letterSpacing": undefined,
+            "lineHeight": undefined,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,
             "marginStart": 0,
             "marginTop": 0,
+            "maximumFontSize": undefined,
             "padding": 0,
+            "textDecorationLine": undefined,
           }
         }
         value=""
@@ -114,14 +123,23 @@ exports[`Input component tests Input in error state 1`] = `
         style={
           {
             "color": "#242424",
+            "dynamicTypeRamp": undefined,
             "flexGrow": 1,
             "flexShrink": 1,
+            "fontFamily": "Segoe UI",
+            "fontSize": 13,
+            "fontStyle": undefined,
+            "fontWeight": "400",
+            "letterSpacing": undefined,
+            "lineHeight": undefined,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,
             "marginStart": 0,
             "marginTop": 0,
+            "maximumFontSize": undefined,
             "padding": 0,
+            "textDecorationLine": undefined,
           }
         }
         value=""
@@ -131,9 +149,6 @@ exports[`Input component tests Input in error state 1`] = `
       style={
         {
           "color": "#bc2f32",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,
           "marginEnd": 0,
@@ -212,14 +227,23 @@ exports[`Input component tests Input with all optional text 1`] = `
         style={
           {
             "color": "#616161",
+            "dynamicTypeRamp": undefined,
             "flexGrow": 1,
             "flexShrink": 1,
+            "fontFamily": "Segoe UI",
+            "fontSize": 13,
+            "fontStyle": undefined,
+            "fontWeight": "400",
+            "letterSpacing": undefined,
+            "lineHeight": undefined,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,
             "marginStart": 0,
             "marginTop": 0,
+            "maximumFontSize": undefined,
             "padding": 0,
+            "textDecorationLine": undefined,
           }
         }
         value=""
@@ -229,9 +253,6 @@ exports[`Input component tests Input with all optional text 1`] = `
       style={
         {
           "color": "#616161",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,
           "marginEnd": 0,
@@ -330,14 +351,23 @@ exports[`Input component tests Input with icon 1`] = `
           style={
             {
               "color": "#616161",
+              "dynamicTypeRamp": undefined,
               "flexGrow": 1,
               "flexShrink": 1,
+              "fontFamily": "Segoe UI",
+              "fontSize": 13,
+              "fontStyle": undefined,
+              "fontWeight": "400",
+              "letterSpacing": undefined,
+              "lineHeight": undefined,
               "margin": 0,
               "marginBottom": 0,
               "marginEnd": 0,
               "marginStart": 0,
               "marginTop": 0,
+              "maximumFontSize": undefined,
               "padding": 0,
+              "textDecorationLine": undefined,
             }
           }
           value=""
@@ -397,14 +427,23 @@ exports[`Input component tests Input with placeholder 1`] = `
         style={
           {
             "color": "#616161",
+            "dynamicTypeRamp": undefined,
             "flexGrow": 1,
             "flexShrink": 1,
+            "fontFamily": "Segoe UI",
+            "fontSize": 13,
+            "fontStyle": undefined,
+            "fontWeight": "400",
+            "letterSpacing": undefined,
+            "lineHeight": undefined,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,
             "marginStart": 0,
             "marginTop": 0,
+            "maximumFontSize": undefined,
             "padding": 0,
+            "textDecorationLine": undefined,
           }
         }
         value=""
@@ -463,14 +502,23 @@ exports[`Input component tests Input without accessoryIcon 1`] = `
         style={
           {
             "color": "#616161",
+            "dynamicTypeRamp": undefined,
             "flexGrow": 1,
             "flexShrink": 1,
+            "fontFamily": "Segoe UI",
+            "fontSize": 13,
+            "fontStyle": undefined,
+            "fontWeight": "400",
+            "letterSpacing": undefined,
+            "lineHeight": undefined,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,
             "marginStart": 0,
             "marginTop": 0,
+            "maximumFontSize": undefined,
             "padding": 0,
+            "textDecorationLine": undefined,
           }
         }
         value=""

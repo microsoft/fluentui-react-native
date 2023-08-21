@@ -39,11 +39,11 @@ export const defaultInputTokens: TokenSettings<InputTokens, Theme> = (t: Theme) 
 
     error: {
       backgroundColor: t.colors.neutralBackground1,
-      strokeColor: t.colors.dangerForeground1,
+      strokeColor: t.colors.dangerStroke1,
       iconColor: t.colors.neutralForeground2,
       accessoryIconColor: t.colors.neutralForeground2,
-      color: t.colors.dangerForeground1, //label color
-      assistiveTextColor: t.colors.dangerForeground1,
+      color: t.colors.dangerForeground2, //label color
+      assistiveTextColor: t.colors.dangerForeground2,
       inputTextColor: t.colors.neutralForeground1,
       accessoryTextColor: t.colors.neutralForeground2,
       cursorColor: t.colors.neutralForeground3,
