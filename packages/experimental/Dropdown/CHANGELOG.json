@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Mon, 21 Aug 2023 20:45:53 GMT",
+      "version": "0.8.18",
+      "tag": "@fluentui-react-native/dropdown_v0.8.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/button to v0.35.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.8.17",
       "tag": "@fluentui-react-native/dropdown_v0.8.17",

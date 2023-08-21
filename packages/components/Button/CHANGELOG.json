@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Mon, 21 Aug 2023 20:45:53 GMT",
+      "version": "0.35.0",
+      "tag": "@fluentui-react-native/button_v0.35.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/button",
+            "commit": "540dad5b88921fc6fb631d926cbebc67b4d16c9e",
+            "comment": "Add tokens for iOS FAB"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.34.10",
       "tag": "@fluentui-react-native/button_v0.34.10",

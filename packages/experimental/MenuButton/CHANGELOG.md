@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Aug 2023 20:45:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.18
+
+Mon, 21 Aug 2023 20:45:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.18.11
 
 ## 0.7.17
 
