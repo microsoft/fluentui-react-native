@@ -17,13 +17,13 @@ export interface TabListAnimatedIndicatorTokens extends IForegroundColorTokens, 
   disabled?: TabListAnimatedIndicatorTokens;
 }
 
-export type TabListAnimatedIndicatorProps = IViewProps & {
+export interface TabListAnimatedIndicatorProps extends IViewProps {
   vertical?: boolean;
   styles?: {
     container: ViewStyle;
     indicator: ViewStyle;
   };
-};
+}
 
 export interface TabListAnimatedIndicatorState extends Omit<PressableState, 'focused'> {
   disabled?: boolean;
