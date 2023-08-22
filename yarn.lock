@@ -5629,8 +5629,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.12
-  resolution: "@rnx-kit/cli@npm:0.16.12"
+  version: 0.16.13
+  resolution: "@rnx-kit/cli@npm:0.16.13"
   dependencies:
     "@rnx-kit/align-deps": ^2.2.2
     "@rnx-kit/config": ^0.6.2
@@ -5665,7 +5665,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 3fbfc2aeaeb4db78fb63f8bafcc29642c6f333665340561a9afae9ebe04a9a2b570ed40868dcaa1b96f12fbf6fdd3848f68e653e8dac2ed061eb9669d80786ac
+  checksum: a9cc834e597c1f7927e80090561ebe69d870d365b413c4079e72ec99d4070822adad52a5ded40d2549038a1090873d87ab0e2b7564816dd28729964e3f68dd06
   languageName: node
   linkType: hard
 
