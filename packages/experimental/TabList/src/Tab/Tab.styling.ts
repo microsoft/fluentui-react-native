@@ -49,7 +49,7 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
     (e: LayoutEvent) => {
       if (e?.nativeEvent?.layout) {
         // save width, height, and start margin of indicator.
-        animatedIndicatorState?.addToLayoutMap(props.tabKey, {
+        animatedIndicatorState.addToLayoutMap(props.tabKey, {
           width: e.nativeEvent.layout.width,
           height: e.nativeEvent.layout.height,
           startMargin: tokens.indicatorInset,
@@ -59,6 +59,7 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
     [animatedIndicatorState, props.tabKey, tokens.indicatorInset],
   );
 
+  // Get each slot's props using our final tokens
   const root = React.useMemo<PressablePropsExtended>(
     () => ({
       style: {

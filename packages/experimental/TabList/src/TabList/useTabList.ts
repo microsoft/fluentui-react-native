@@ -2,7 +2,9 @@ import * as React from 'react';
 import type { View, AccessibilityState, ViewStyle } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
+import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
 import type { AnimatedIndicatorState, ListLayoutInfo, TabLayoutInfo } from './TabList.types';
 import { type TabListProps, type TabListInfo, type TabListState } from './TabList.types';
@@ -36,10 +38,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   const [selectedTabRef, setSelectedTabRef] = React.useState(React.useRef<View>(null));
   const [invoked, setInvoked] = React.useState(false);
   const [tabKeys, setTabKeys] = React.useState<string[]>([]);
-  const [listLayoutInfo, setListLayoutInfo] = React.useState<ListLayoutInfo>({});
-  const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<
-    Partial<AnimatedIndicatorState['styles']>
-  >({});
 
   const addTabKey = React.useCallback(
     (tabKey: string) => {
@@ -58,23 +56,39 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     [setTabKeys],
   );
 
+  // Logic to style the animated indicator
+  const [listLayout, setListLayout] = React.useState<ListLayoutInfo>({});
+  const [stackLayoutRect, setStackLayoutRect] = React.useState<LayoutRectangle>();
+  const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<
+    Partial<AnimatedIndicatorState['styles']>
+  >({});
+
   const addToLayoutMap = React.useCallback(
     (tabKey: string, layoutInfo: TabLayoutInfo) => {
-      setListLayoutInfo((prev) => ({ ...prev, [tabKey]: { ...prev[tabKey], ...layoutInfo } }));
+      setListLayout((prev) => ({ ...prev, [tabKey]: { ...prev[tabKey], ...layoutInfo } }));
     },
-    [setListLayoutInfo],
+    [setListLayout],
   );
+
+  const onStackLayout = React.useCallback((e: LayoutEvent) => {
+    if (e.nativeEvent.layout) {
+      setStackLayoutRect(e.nativeEvent.layout);
+    }
+  }, []);
 
   const selectedIndicatorLayout = React.useMemo<TabLayoutInfo | null>(() => {
     const key = selectedKey ?? data.selectedKey;
-    return key ? listLayoutInfo[key] : null;
-  }, [selectedKey, data.selectedKey, listLayoutInfo]);
+    return key ? listLayout[key] : null;
+  }, [selectedKey, data.selectedKey, listLayout]);
 
+  // Calculate styles using both layout information and user defined styles
   const animatedIndicatorStyles = React.useMemo<AnimatedIndicatorState['styles']>(() => {
     // if not all layout props have been recorded for the current selected indicator, don't render the animated indicator
     if (selectedIndicatorLayout) {
       const { x, y, width, height, startMargin, tabBorderWidth } = selectedIndicatorLayout;
+      const layoutValuesAreReasonable = stackLayoutRect.width > 0 && selectedIndicatorLayout.height < stackLayoutRect.height;
       if (
+        layoutValuesAreReasonable &&
         x !== undefined &&
         y !== undefined &&
         width !== undefined &&
@@ -82,9 +96,12 @@ export const useTabList = (props: TabListProps): TabListInfo => {
         startMargin !== undefined &&
         tabBorderWidth !== undefined
       ) {
-        // calculate styles here
-        const containerStyles: ViewStyle = { ...userDefinedAnimatedIndicatorStyles.container };
+        const containerStyles: ViewStyle = {
+          position: 'absolute',
+          ...userDefinedAnimatedIndicatorStyles.container,
+        };
         const indicatorStyles: ViewStyle = {
+          borderRadius: 99,
           ...userDefinedAnimatedIndicatorStyles.indicator,
           width: selectedIndicatorLayout.width,
           height: selectedIndicatorLayout.height,
@@ -106,14 +123,14 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       container: { display: 'none' },
       indicator: { display: 'none' },
     };
-  }, [vertical, selectedIndicatorLayout, userDefinedAnimatedIndicatorStyles]);
+  }, [vertical, selectedIndicatorLayout, userDefinedAnimatedIndicatorStyles, stackLayoutRect]);
 
   const state: TabListState = {
     context: {
       addTabKey: addTabKey,
       animatedIndicatorState: {
         addToLayoutMap: addToLayoutMap,
-        layout: listLayoutInfo,
+        layout: listLayout,
         styles: animatedIndicatorStyles,
         updateStyles: setUserDefinedAnimatedIndicatorStyles,
       },
@@ -141,6 +158,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       componentRef: componentRef,
       defaultTabbableElement: selectedTabRef,
       isCircularNavigation: isCircularNavigation ?? false,
+      onLayout: onStackLayout,
       size: size,
       vertical: vertical,
     },

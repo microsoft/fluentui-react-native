@@ -39,8 +39,10 @@ export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens
   const theme = useFluentTheme();
   let [tokens, cache] = useTokens(theme);
 
+  // Calculate component states to get the correct tokens here (this happens in useSlots for compose components)
   [tokens, cache] = applyTokenLayers(tokens, tabStates, cache, (layer) => tabLookup(layer, tab.state, tab.props, tablist));
 
+  // Get styling props for each Tab slot
   const slotProps = useTabSlotProps(tab.props, tokens, theme, tablist);
 
   const RootSlot = useSlot<PressablePropsExtended>(Pressable, slotProps.root as PressablePropsExtended);
