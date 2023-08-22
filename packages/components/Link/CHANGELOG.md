@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Aug 2023 19:41:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Tue, 22 Aug 2023 19:41:25 GMT
+
+### Minor changes
+
+- Add LinkTokens.ios.ts (moniriv@microsoft.com)
 
 ## 0.19.10
 

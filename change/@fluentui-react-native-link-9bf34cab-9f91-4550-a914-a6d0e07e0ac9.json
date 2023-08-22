@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add LinkTokens.ios.ts",
-  "packageName": "@fluentui-react-native/link",
-  "email": "moniriv@microsoft.com",
-  "dependentChangeType": "patch"
-}

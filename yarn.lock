@@ -2831,7 +2831,7 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-link@workspace:packages/experimental/Link"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/link": ">=0.19.10 <1.0.0"
+    "@fluentui-react-native/link": ">=0.20.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     react: 18.2.0
     react-native: ^0.71.0
@@ -3160,7 +3160,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/link@*, @fluentui-react-native/link@0.19.10, @fluentui-react-native/link@>=0.19.10 <1.0.0, @fluentui-react-native/link@workspace:packages/components/Link":
+"@fluentui-react-native/link@*, @fluentui-react-native/link@0.20.0, @fluentui-react-native/link@>=0.20.0 <1.0.0, @fluentui-react-native/link@workspace:packages/components/Link":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/link@workspace:packages/components/Link"
   dependencies:
@@ -3652,7 +3652,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.155.0
+    "@fluentui-react-native/tester": ^0.155.1
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
@@ -3683,7 +3683,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.155.0, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.155.1, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3735,7 +3735,7 @@ __metadata:
     "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0"
     "@fluentui-react-native/vibrancy-view": ">=0.0.2 <1.0.0"
     "@fluentui-react-native/win32-theme": ">=0.27.5 <1.0.0"
-    "@fluentui/react-native": ">=0.37.20 <1.0.0"
+    "@fluentui/react-native": ">=0.37.21 <1.0.0"
     "@fortawesome/fontawesome-svg-core": ^6.2.0
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-native-fontawesome": ^0.3.0
@@ -3994,7 +3994,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native@*, @fluentui/react-native@>=0.37.20 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
+"@fluentui/react-native@*, @fluentui/react-native@>=0.37.21 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
@@ -4006,7 +4006,7 @@ __metadata:
     "@fluentui-react-native/focus-trap-zone": 0.10.9
     "@fluentui-react-native/focus-zone": 0.12.9
     "@fluentui-react-native/interactive-hooks": 0.24.7
-    "@fluentui-react-native/link": 0.19.10
+    "@fluentui-react-native/link": 0.20.0
     "@fluentui-react-native/menu-button": 0.11.18
     "@fluentui-react-native/persona": 0.14.6
     "@fluentui-react-native/persona-coin": 0.13.6
