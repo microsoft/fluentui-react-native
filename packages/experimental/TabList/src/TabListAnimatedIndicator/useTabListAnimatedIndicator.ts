@@ -3,20 +3,25 @@ import * as React from 'react';
 import type { ViewStyle } from '@office-iss/react-native-win32';
 
 import type { TabListAnimatedIndicatorProps } from './TabListAnimatedIndicator.types';
-import { TabListContext } from '../TabList/TabListContext';
+import type { TabListContextData } from '../TabList/TabList.types';
 
-export function useTabListAnimatedIndicator(props: TabListAnimatedIndicatorProps): TabListAnimatedIndicatorProps {
-  const {
-    selectedKey,
-    animatedIndicatorState: { layout },
-    vertical,
-  } = React.useContext(TabListContext);
+export function useTabListAnimatedIndicator(
+  props: TabListAnimatedIndicatorProps,
+  context: TabListContextData,
+): TabListAnimatedIndicatorProps {
+  const { selectedKey, animatedIndicatorState, vertical } = context;
+  console.log('asdfkk');
+  console.log(context);
 
-  const selectedIndicatorLayout = React.useMemo(() => layout[selectedKey], [layout, selectedKey]);
+  const selectedIndicatorLayout = React.useMemo(() => {
+    console.log(animatedIndicatorState);
+    return animatedIndicatorState?.layout ? animatedIndicatorState?.layout[selectedKey] : null;
+  }, [animatedIndicatorState, selectedKey]);
 
   const indicatorStyle: ViewStyle = React.useMemo(() => {
     // if not all layout props have been recorded for the current selected indicator, don't render the animated indicator
-    if (Object.keys(selectedIndicatorLayout).length < 5) {
+    if (!selectedIndicatorLayout || Object.keys(selectedIndicatorLayout).length < 5) {
+      console.log(selectedIndicatorLayout);
       return { display: 'none' };
     }
     // calculate indicator styles here

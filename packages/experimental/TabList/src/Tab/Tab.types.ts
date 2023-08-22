@@ -3,7 +3,7 @@ import type { ViewStyle, ColorValue } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
-import type { IFocusable, PressableState, PressablePropsExtended, LayoutEvent } from '@fluentui-react-native/interactive-hooks';
+import type { IFocusable, PressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
 import type {
   FontTokens,
@@ -12,8 +12,6 @@ import type {
   IForegroundColorTokens,
   LayoutTokens,
 } from '@fluentui-react-native/tokens';
-
-import type { TabIndicatorProps } from '../TabIndicator/TabIndicator.types';
 
 export const tabName = 'Tab';
 
@@ -116,8 +114,6 @@ export interface TabProps extends Omit<PressablePropsExtended, 'onPress'> {
 
 export interface TabState extends PressableState {
   selected?: boolean;
-
-  onIndicatorLayout?: (e: LayoutEvent) => void;
 }
 
 export interface TabInfo {
@@ -129,7 +125,8 @@ export interface TabSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
   icon: IconProps;
   stack: IViewProps;
-  indicator: TabIndicatorProps;
+  indicatorContainer: IViewProps;
+  indicator: IViewProps;
   contentContainer: IViewProps;
   content: TextProps;
 }

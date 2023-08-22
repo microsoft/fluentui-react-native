@@ -1,35 +1,41 @@
-import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import type { UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 
-import type {
-  TabListAnimatedIndicatorTokens,
-  TabListAnimatedIndicatorSlotProps,
-  TabListAnimatedIndicatorProps,
+import {
+  type TabListAnimatedIndicatorTokens,
+  type TabListAnimatedIndicatorSlotProps,
+  type TabListAnimatedIndicatorProps,
+  tablistAnimatedIndicatorName,
 } from './TabListAnimatedIndicator.types';
+import { defaultTabListAnimatedIndicatorTokens, tabListAnimatedIndicatorStates } from './TabListAnimatedIndicatorTokens';
 
 export const stylingSettings: UseStylingOptions<
   TabListAnimatedIndicatorProps,
   TabListAnimatedIndicatorSlotProps,
   TabListAnimatedIndicatorTokens
 > = {
+  tokens: [defaultTabListAnimatedIndicatorTokens, tablistAnimatedIndicatorName],
+  tokensThatAreAlsoProps: 'none',
+  states: tabListAnimatedIndicatorStates,
   slotProps: {
     root: buildProps(
-      () => ({
+      (t) => ({
         style: {
           position: 'absolute',
-          bottom: 0,
-          start: 0,
+          ...(t.bottom ? { top: '100%' } : {}),
+          ...(t.start ? { start: t.start } : {}),
         },
       }),
-      [],
+      ['bottom', 'start'],
     ),
     indicator: buildProps(
-      (_, theme: Theme) => ({
+      (t) => ({
         style: {
-          backgroundColor: theme.colors.compoundBrandStroke1,
+          backgroundColor: t.color,
+          borderRadius: 99,
         },
       }),
-      [],
+      ['color'],
     ),
   },
 };

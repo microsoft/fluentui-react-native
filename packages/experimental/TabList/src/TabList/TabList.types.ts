@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { View } from 'react-native';
+import type { View, ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
@@ -15,13 +15,19 @@ export type TabListSize = 'small' | 'medium' | 'large';
 
 export interface TabLayoutInfo extends Partial<LayoutRectangle> {
   startMargin?: number;
+  tabBorderWidth?: number;
 }
 
 export type ListLayoutInfo = { [tabKey: string]: TabLayoutInfo };
 
 export interface AnimatedIndicatorState {
   addToLayoutMap: (tabKey: string, layout: TabLayoutInfo) => void;
-  layout: { [tabKey: string]: TabLayoutInfo };
+  layout: ListLayoutInfo;
+  styles: {
+    container: ViewStyle;
+    indicator: ViewStyle;
+  };
+  updateStyles: (updates: Partial<AnimatedIndicatorState['styles']>) => void;
 }
 
 export interface TabListContextData {

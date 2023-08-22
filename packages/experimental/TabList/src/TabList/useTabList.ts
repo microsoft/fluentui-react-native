@@ -1,10 +1,10 @@
 import * as React from 'react';
-import type { View, AccessibilityState } from 'react-native';
+import type { View, AccessibilityState, ViewStyle } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
-import type { ListLayoutInfo, TabLayoutInfo } from './TabList.types';
+import type { AnimatedIndicatorState, ListLayoutInfo, TabLayoutInfo } from './TabList.types';
 import { type TabListProps, type TabListInfo, type TabListState } from './TabList.types';
 
 /**
@@ -37,6 +37,9 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   const [invoked, setInvoked] = React.useState(false);
   const [tabKeys, setTabKeys] = React.useState<string[]>([]);
   const [listLayoutInfo, setListLayoutInfo] = React.useState<ListLayoutInfo>({});
+  const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<
+    Partial<AnimatedIndicatorState['styles']>
+  >({});
 
   const addTabKey = React.useCallback(
     (tabKey: string) => {
@@ -62,12 +65,58 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     [setListLayoutInfo],
   );
 
-  React.useEffect(() => console.log(JSON.stringify(listLayoutInfo, undefined, 2)), [listLayoutInfo]);
+  const selectedIndicatorLayout = React.useMemo<TabLayoutInfo | null>(() => {
+    const key = selectedKey ?? data.selectedKey;
+    return key ? listLayoutInfo[key] : null;
+  }, [selectedKey, data.selectedKey, listLayoutInfo]);
+
+  const animatedIndicatorStyles = React.useMemo<AnimatedIndicatorState['styles']>(() => {
+    // if not all layout props have been recorded for the current selected indicator, don't render the animated indicator
+    if (selectedIndicatorLayout) {
+      const { x, y, width, height, startMargin, tabBorderWidth } = selectedIndicatorLayout;
+      if (
+        x !== undefined &&
+        y !== undefined &&
+        width !== undefined &&
+        height !== undefined &&
+        startMargin !== undefined &&
+        tabBorderWidth !== undefined
+      ) {
+        // calculate styles here
+        const containerStyles: ViewStyle = { ...userDefinedAnimatedIndicatorStyles.container };
+        const indicatorStyles: ViewStyle = {
+          ...userDefinedAnimatedIndicatorStyles.indicator,
+          width: selectedIndicatorLayout.width,
+          height: selectedIndicatorLayout.height,
+        };
+        if (vertical) {
+          containerStyles.start = tabBorderWidth + 1;
+          indicatorStyles.marginTop = selectedIndicatorLayout.y + selectedIndicatorLayout.startMargin + tabBorderWidth + 1;
+        } else {
+          containerStyles.bottom = height + y + 1;
+          indicatorStyles.marginLeft = selectedIndicatorLayout.x + selectedIndicatorLayout.startMargin + tabBorderWidth + 1;
+        }
+        return {
+          container: containerStyles,
+          indicator: indicatorStyles,
+        };
+      }
+    }
+    return {
+      container: { display: 'none' },
+      indicator: { display: 'none' },
+    };
+  }, [vertical, selectedIndicatorLayout, userDefinedAnimatedIndicatorStyles]);
 
   const state: TabListState = {
     context: {
       addTabKey: addTabKey,
-      animatedIndicatorState: { layout: listLayoutInfo, addToLayoutMap: addToLayoutMap },
+      animatedIndicatorState: {
+        addToLayoutMap: addToLayoutMap,
+        layout: listLayoutInfo,
+        styles: animatedIndicatorStyles,
+        updateStyles: setUserDefinedAnimatedIndicatorStyles,
+      },
       appearance: appearance,
       disabled: disabled,
       invoked: invoked,

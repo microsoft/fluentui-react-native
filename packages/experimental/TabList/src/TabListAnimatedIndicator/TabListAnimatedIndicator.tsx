@@ -1,36 +1,35 @@
+/** @jsxRuntime classic */
+/** @jsx withSlots */
+
 import * as React from 'react';
 import { View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps } from '@fluentui-react-native/framework';
+import { withSlots, compose, mergeProps } from '@fluentui-react-native/framework';
 
 import { stylingSettings } from './TabListAnimatedIndicator.styling';
 import type { TabListAnimatedIndicatorProps, TabListAnimatedIndicatorType } from './TabListAnimatedIndicator.types';
 import { tablistAnimatedIndicatorName } from './TabListAnimatedIndicator.types';
-import { useTabListAnimatedIndicator } from './useTabListAnimatedIndicator';
 
 export const TabListAnimatedIndicator = compose<TabListAnimatedIndicatorType>({
   displayName: tablistAnimatedIndicatorName,
+  ...stylingSettings,
   slots: {
     root: View,
     indicator: View,
   },
   useRender: (userProps: TabListAnimatedIndicatorProps, useSlots: UseSlots<TabListAnimatedIndicatorType>) => {
-    const { style, ...props } = useTabListAnimatedIndicator(userProps);
-    const Slots = useSlots(userProps);
+    const Slots = useSlots(userProps, (layer) => userProps[layer]);
     return (final: TabListAnimatedIndicatorProps) => {
-      const mergedProps = mergeProps(props, final, {
-        style: {
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-        },
-      });
+      const { styles, ...finalProps } = final;
+      const mergedProps = mergeProps(userProps, finalProps, { style: styles.container });
       return (
         <Slots.root {...mergedProps}>
-          <Slots.indicator style={style} />
+          <Slots.indicator animationClass="Ribbon_TabUnderline" style={styles.indicator} />
         </Slots.root>
       );
     };
   },
 });
+
+export default TabListAnimatedIndicator;

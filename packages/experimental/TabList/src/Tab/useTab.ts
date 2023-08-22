@@ -6,7 +6,7 @@ import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabProps, TabInfo } from './Tab.types';
-import { TabListContext } from '../TabList/TabList';
+import { TabListContext } from '../TabList/TabListContext';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 

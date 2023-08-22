@@ -1,19 +1,23 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 /** @jsxFrag */
-import * as React from 'react';
-import { Pressable, View } from 'react-native';
 
-import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import React from 'react';
+import { View, Pressable } from 'react-native';
+import type { ViewProps } from 'react-native';
+
+import type { UseTokens } from '@fluentui-react-native/framework';
+import { withSlots, compressible, useSlot, useFluentTheme, applyTokenLayers, mergeProps } from '@fluentui-react-native/framework';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
-import { TextV1 as Text } from '@fluentui-react-native/text';
+import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { TextProps } from '@fluentui-react-native/text';
+import { Text } from '@fluentui-react-native/text';
 
-import { stylingSettings } from './Tab.styling';
-import type { TabType, TabProps, TabState } from './Tab.types';
-import { tabName } from './Tab.types';
+import { useTabSlotProps } from './Tab.styling';
+import { tabName, type TabProps, type TabState, type TabTokens } from './Tab.types';
+import { tabStates, useTabTokens } from './TabTokens';
 import { useTab } from './useTab';
-import { TabIndicator } from '../TabIndicator/TabIndicator';
 import type { TabListContextData } from '../TabList/TabList.types';
 import { TabListContext } from '../TabList/TabListContext';
 
@@ -28,74 +32,73 @@ const tabLookup = (layer: string, state: TabState, props: TabProps, tablistConte
   );
 };
 
-export const Tab = compose<TabType>({
-  displayName: tabName,
-  ...stylingSettings,
-  slots: {
-    root: Pressable,
-    stack: View,
-    icon: Icon,
-    indicator: TabIndicator,
-    contentContainer: View,
-    content: Text,
-  },
-  useRender: (userProps: TabProps, useSlots: UseSlots<TabType>) => {
-    const tab = useTab(userProps);
+export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens: UseTokens<TabTokens>) => {
+  const tablist = React.useContext(TabListContext);
+  const tab = useTab(props);
 
-    const tablistContext = React.useContext(TabListContext);
+  const theme = useFluentTheme();
+  let [tokens, cache] = useTokens(theme);
 
-    // Grab the styled slots.
-    const Slots = useSlots(userProps, (layer) => tabLookup(layer, tab.state, tab.props, tablistContext));
+  [tokens, cache] = applyTokenLayers(tokens, tabStates, cache, (layer) => tabLookup(layer, tab.state, tab.props, tablist));
 
-    // Return the handler to finish render.
-    return (final: TabProps, ...children: React.ReactNode[]) => {
-      if (!tab.state) {
-        return null;
-      }
+  const slotProps = useTabSlotProps(tab.props, tokens, theme, tablist);
 
-      // Get label for Tab to use if there's no accessibilityLabel prop passed in.
-      let label = '';
-      let hasChildren = false;
-      React.Children.forEach(children, (child) => {
-        if (child !== null) {
-          hasChildren = true;
-          if (typeof child === 'string') {
-            label = child;
-          }
+  const RootSlot = useSlot<PressablePropsExtended>(Pressable, slotProps.root as PressablePropsExtended);
+  const StackSlot = useSlot<ViewProps>(View, slotProps.stack as ViewProps);
+  const IndicatorContainerSlot = useSlot<ViewProps>(View, slotProps.indicatorContainer as ViewProps);
+  const IndicatorSlot = useSlot<ViewProps>(View, slotProps.indicator as ViewProps);
+  const ContentContainerSlot = useSlot<ViewProps>(View, slotProps.contentContainer as ViewProps);
+  const ContentSlot = useSlot<TextProps>(Text, slotProps.content);
+  const IconSlot = useSlot<IconProps>(Icon, slotProps.icon);
+
+  return (final: TabProps, ...children: React.ReactNode[]) => {
+    if (!tab.state) {
+      return null;
+    }
+
+    // Get label for Tab to use if there's no accessibilityLabel prop passed in.
+    let label = '';
+    let hasChildren = false;
+    React.Children.forEach(children, (child) => {
+      if (child !== null) {
+        hasChildren = true;
+        if (typeof child === 'string') {
+          label = child;
         }
-      });
-
-      const { icon, tabKey, ...mergedProps } = mergeProps(tab.props, final, {
-        accessibilityLabel: tab.props.accessibilityLabel || final.accessibilityLabel || label,
-      });
-
-      if (__DEV__ && !hasChildren && !icon) {
-        console.warn('A Tab component must render content. Children, an icon, or both should be passed in.');
       }
+    });
 
-      return (
-        <Slots.root {...mergedProps}>
-          <Slots.stack>
-            {icon && <Slots.icon {...icon} />}
-            {hasChildren && (
-              <Slots.contentContainer>
-                {React.Children.map(children, (child, i) =>
-                  typeof child === 'string' ? (
-                    <Slots.content accessible={false} key={i}>
-                      {child}
-                    </Slots.content>
-                  ) : (
-                    child
-                  ),
-                )}
-              </Slots.contentContainer>
-            )}
-          </Slots.stack>
-          <Slots.indicator onLayout={tab.state.onIndicatorLayout} />
-        </Slots.root>
-      );
-    };
-  },
-});
+    const { icon, tabKey, ...mergedProps } = mergeProps(tab.props, final, {
+      accessibilityLabel: tab.props.accessibilityLabel || final.accessibilityLabel || label,
+    });
 
-export default Tab;
+    if (__DEV__ && !hasChildren && !icon) {
+      console.warn('A Tab component must render content. Children, an icon, or both should be passed in.');
+    }
+
+    return (
+      <RootSlot {...mergedProps}>
+        <StackSlot>
+          {icon && <IconSlot {...icon} />}
+          {hasChildren && (
+            <ContentContainerSlot>
+              {React.Children.map(children, (child, i) =>
+                typeof child === 'string' ? (
+                  <ContentSlot accessible={false} key={i}>
+                    {child}
+                  </ContentSlot>
+                ) : (
+                  child
+                ),
+              )}
+            </ContentContainerSlot>
+          )}
+        </StackSlot>
+        <IndicatorContainerSlot>
+          <IndicatorSlot />
+        </IndicatorContainerSlot>
+      </RootSlot>
+    );
+  };
+}, useTabTokens);
+Tab.displayName = tabName;

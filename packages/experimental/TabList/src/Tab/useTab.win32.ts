@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { AccessibilityActionEvent, AccessibilityState } from 'react-native';
 
 import { memoize } from '@fluentui-react-native/framework';
-import type { IFocusable, LayoutEvent } from '@fluentui-react-native/interactive-hooks';
+import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabProps, TabInfo } from './Tab.types';
@@ -126,31 +126,6 @@ export const useTab = (props: TabProps): TabInfo => {
     [accessibilityActions],
   );
 
-  const onTabLayout = React.useCallback(
-    (e: LayoutEvent) => {
-      if (e.nativeEvent.layout) {
-        // save x and y of tab
-        animatedIndicatorState.addToLayoutMap(tabKey, { x: e.nativeEvent.layout.x, y: e.nativeEvent.layout.y });
-      }
-    },
-    [animatedIndicatorState, tabKey],
-  );
-
-  const onIndicatorLayout = React.useCallback(
-    (e: LayoutEvent) => {
-      if (e?.nativeEvent?.layout) {
-        // save width, height, and start margin of indicator.
-        const startMargin = vertical ? e.nativeEvent.layout.y : e.nativeEvent.layout.x;
-        animatedIndicatorState?.addToLayoutMap(tabKey, {
-          width: e.nativeEvent.layout.width,
-          height: e.nativeEvent.layout.height,
-          startMargin: startMargin,
-        });
-      }
-    },
-    [animatedIndicatorState, tabKey, vertical],
-  );
-
   return {
     props: {
       ...props,
@@ -165,7 +140,6 @@ export const useTab = (props: TabProps): TabInfo => {
       focusable: !isDisabled ?? true,
       icon: icon,
       onAccessibilityAction: onAccessibilityActionProp,
-      onLayout: onTabLayout,
       ref: useViewCommandFocus(componentRef),
       tabKey: tabKey,
       ...onKeyProps,
@@ -173,7 +147,6 @@ export const useTab = (props: TabProps): TabInfo => {
     state: {
       ...pressable.state,
       selected: tabKey === selectedKey,
-      onIndicatorLayout: onIndicatorLayout,
     },
   };
 };

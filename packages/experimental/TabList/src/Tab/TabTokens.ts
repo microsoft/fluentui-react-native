@@ -1,5 +1,5 @@
-import type { Theme } from '@fluentui-react-native/framework';
-import type { TokenSettings } from '@fluentui-react-native/use-styling';
+import { buildUseTokens, type Theme } from '@fluentui-react-native/framework';
+import type { TokensFromTheme } from '@fluentui-react-native/use-styling';
 
 import type { TabTokens } from '..';
 
@@ -18,7 +18,7 @@ export const tabStates: (keyof TabTokens)[] = [
   'hasIcon',
 ];
 
-export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
+export const defaultTabTokens: TokensFromTheme<TabTokens, Theme> = (t: Theme) =>
   ({
     indicatorOrientation: 'horizontal',
     indicatorThickness: 2,
@@ -144,3 +144,5 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = (t: Theme) =>
       contentMarginStart: 8,
     },
   } as TabTokens);
+
+export const useTabTokens = buildUseTokens(defaultTabTokens);
