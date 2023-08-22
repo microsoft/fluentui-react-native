@@ -65,7 +65,7 @@
       "name": "Debug Fabric Tester",
       "type": "node",
       "request": "attach",
-      "protocol": "insepctor",
+      "protocol": "inspector",
       "port": 9223,
       "sourceMaps": true
     }

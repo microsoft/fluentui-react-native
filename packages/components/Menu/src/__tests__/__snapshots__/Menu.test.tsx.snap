@@ -72,7 +72,7 @@ exports[`Menu component tests Menu alwaysShowToolTip 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
