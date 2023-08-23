@@ -2267,11 +2267,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2295,11 +2295,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2382,12 +2382,12 @@ __metadata:
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     tslib: ^2.3.1
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2409,11 +2409,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2485,12 +2485,12 @@ __metadata:
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     react-native-svg-transformer: ^1.0.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2688,11 +2688,11 @@ __metadata:
     "@fluentui-react-native/theme-tokens": ^0.25.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2749,11 +2749,11 @@ __metadata:
     assert-never: ^1.2.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2872,11 +2872,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2958,11 +2958,11 @@ __metadata:
     assert-never: ^1.2.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3105,11 +3105,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3142,11 +3142,11 @@ __metadata:
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3232,11 +3232,11 @@ __metadata:
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3261,12 +3261,12 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     tslib: ^2.3.1
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3311,11 +3311,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3422,11 +3422,12 @@ __metadata:
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
+    react-native-svg: ^13.9.0
     tslib: ^2.3.1
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3530,11 +3531,11 @@ __metadata:
     "@fluentui-react-native/use-styling": ^0.11.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3690,7 +3691,7 @@ __metadata:
     metro-react-native-babel-preset: ^0.73.7
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     react-native-svg-transformer: ^1.0.0
     react-test-renderer: 18.2.0
     rimraf: ^5.0.1
@@ -3769,7 +3770,7 @@ __metadata:
     react: 18.2.0
     react-native: ^0.71.0
     react-native-macos: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     react-native-svg-transformer: ^1.0.0
     react-native-test-app: ^2.5.15
     react-native-windows: ^0.71.0
