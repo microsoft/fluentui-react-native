@@ -8086,9 +8086,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-chromedriver@npm:^5.6.1":
-  version: 5.6.2
-  resolution: "appium-chromedriver@npm:5.6.2"
+"appium-chromedriver@npm:^5.6.5":
+  version: 5.6.5
+  resolution: "appium-chromedriver@npm:5.6.5"
   dependencies:
     "@appium/base-driver": ^9.1.0
     "@appium/support": ^4.0.0
@@ -8105,7 +8105,7 @@ __metadata:
     source-map-support: ^0.x
     teen_process: ^2.0.0
     xpath: ^0.x
-  checksum: a2633bd5b3e511f73fdaa200104d8f26ff5563fbbaf681f6337acc4ea39791a00afcd9566754fca7ca01ca70a96f80f366eae2bcb660ee4aa8117045f8982a60
+  checksum: 6cc4377ec50a4f5006588ad2be278607a6db1687f87b9287679f7c7cda0506c71d641c0d0fbee3b0bf562c93f8a12106078b82aeb694c0698ea8c0aa40fafbac
   languageName: node
   linkType: hard
 
@@ -8201,13 +8201,13 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.12.3":
-  version: 2.29.4
-  resolution: "appium-uiautomator2-driver@npm:2.29.4"
+  version: 2.29.5
+  resolution: "appium-uiautomator2-driver@npm:2.29.5"
   dependencies:
     "@babel/runtime": ^7.0.0
     appium-adb: ^9.13.1
     appium-android-driver: ^5.14.0
-    appium-chromedriver: ^5.6.1
+    appium-chromedriver: ^5.6.5
     appium-uiautomator2-server: ^5.12.2
     asyncbox: ^2.3.1
     axios: ^1.x
@@ -8219,7 +8219,7 @@ __metadata:
     teen_process: ^2.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: d05e5569cbdd9e1981fff2c6d55ad04757e0e15548a312a089c2dd7330b3dcd2bd145fb2f019b8504ef9c88720e4b4bfdeac193a2263035dc4315deadae5b878
+  checksum: cb3ab6971daba688d2080fcbfa9b62d38b8645a6f60afc54d8c57f372eec8476b491824636cd959c4b382d1c4157f43249ad176224bede099282f580a3d57d1d
   languageName: node
   linkType: hard
 
