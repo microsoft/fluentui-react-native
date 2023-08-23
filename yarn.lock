@@ -2250,15 +2250,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/avatar@*, @fluentui-react-native/avatar@^1.10.9, @fluentui-react-native/avatar@workspace:packages/components/Avatar":
+"@fluentui-react-native/avatar@*, @fluentui-react-native/avatar@^1.10.10, @fluentui-react-native/avatar@workspace:packages/components/Avatar":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/avatar@workspace:packages/components/Avatar"
   dependencies:
     "@fluentui-react-native/adapters": ^0.11.2
-    "@fluentui-react-native/badge": ^0.7.5
+    "@fluentui-react-native/badge": ^0.7.6
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.5
-    "@fluentui-react-native/icon": ^0.19.7
+    "@fluentui-react-native/icon": ^0.19.8
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/theme-tokens": ^0.25.1
     "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0"
@@ -2275,7 +2275,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/badge@*, @fluentui-react-native/badge@>=0.7.5 <1.0.0, @fluentui-react-native/badge@^0.7.5, @fluentui-react-native/badge@workspace:packages/components/Badge":
+"@fluentui-react-native/badge@*, @fluentui-react-native/badge@>=0.7.6 <1.0.0, @fluentui-react-native/badge@^0.7.6, @fluentui-react-native/badge@workspace:packages/components/Badge":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/badge@workspace:packages/components/Badge"
   dependencies:
@@ -2283,10 +2283,10 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/experimental-shadow": ">=0.4.7 <1.0.0"
     "@fluentui-react-native/framework": ">=0.11.5 <1.0.0"
-    "@fluentui-react-native/icon": ^0.19.7
+    "@fluentui-react-native/icon": ^0.19.8
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
     "@fluentui-react-native/theme-types": ^0.32.0
     "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0"
@@ -2303,22 +2303,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/button@*, @fluentui-react-native/button@0.35.0, @fluentui-react-native/button@>=0.35.0 <1.0.0, @fluentui-react-native/button@^0.35.0, @fluentui-react-native/button@workspace:packages/components/Button":
+"@fluentui-react-native/button@*, @fluentui-react-native/button@0.35.1, @fluentui-react-native/button@>=0.35.1 <1.0.0, @fluentui-react-native/button@^0.35.1, @fluentui-react-native/button@workspace:packages/components/Button":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/button@workspace:packages/components/Button"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.2 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-activity-indicator": ^0.8.6
+    "@fluentui-react-native/experimental-activity-indicator": ^0.8.7
     "@fluentui-react-native/experimental-shadow": 0.4.7
     "@fluentui-react-native/framework": 0.11.5
-    "@fluentui-react-native/icon": 0.19.7
+    "@fluentui-react-native/icon": 0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/pressable": ">=0.10.8 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/styling-utils": ">=0.5.0 <1.0.0"
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ">=0.25.1 <1.0.0"
     "@fluentui-react-native/theme-types": ">=0.32.0 <1.0.0"
     "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0"
@@ -2326,7 +2326,7 @@ __metadata:
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -2337,7 +2337,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/callout@*, @fluentui-react-native/callout@0.24.13, @fluentui-react-native/callout@>=0.24.13 <1.0.0, @fluentui-react-native/callout@workspace:packages/components/Callout":
+"@fluentui-react-native/callout@*, @fluentui-react-native/callout@0.24.14, @fluentui-react-native/callout@>=0.24.14 <1.0.0, @fluentui-react-native/callout@workspace:packages/components/Callout":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/callout@workspace:packages/components/Callout"
   dependencies:
@@ -2349,7 +2349,7 @@ __metadata:
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -2359,7 +2359,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/checkbox@*, @fluentui-react-native/checkbox@0.21.0, @fluentui-react-native/checkbox@>=0.21.0 <1.0.0, @fluentui-react-native/checkbox@workspace:packages/components/Checkbox":
+"@fluentui-react-native/checkbox@*, @fluentui-react-native/checkbox@0.21.1, @fluentui-react-native/checkbox@>=0.21.1 <1.0.0, @fluentui-react-native/checkbox@workspace:packages/components/Checkbox":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/checkbox@workspace:packages/components/Checkbox"
   dependencies:
@@ -2371,14 +2371,14 @@ __metadata:
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/styling-utils": ">=0.5.0 <1.0.0"
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
     "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -2391,18 +2391,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/chip@^0.2.0, @fluentui-react-native/chip@workspace:packages/components/Chip":
+"@fluentui-react-native/chip@^0.2.1, @fluentui-react-native/chip@workspace:packages/components/Chip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/chip@workspace:packages/components/Chip"
   dependencies:
     "@fluentui-react-native/adapters": ^0.11.2
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": ">=0.11.5 <1.0.0"
-    "@fluentui-react-native/icon": ^0.19.7
+    "@fluentui-react-native/icon": ^0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
     "@fluentui-react-native/tokens": ^0.21.2
     "@fluentui-react-native/use-styling": ^0.11.1
@@ -2465,23 +2465,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/contextual-menu@*, @fluentui-react-native/contextual-menu@0.22.14, @fluentui-react-native/contextual-menu@^0.22.14, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
+"@fluentui-react-native/contextual-menu@*, @fluentui-react-native/contextual-menu@0.22.15, @fluentui-react-native/contextual-menu@^0.22.15, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu"
   dependencies:
     "@fluentui-react-native/adapters": ^0.11.2
-    "@fluentui-react-native/callout": ">=0.24.13 <1.0.0"
+    "@fluentui-react-native/callout": ">=0.24.14 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ^0.12.9
-    "@fluentui-react-native/icon": 0.19.7
+    "@fluentui-react-native/icon": 0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/pressable": ">=0.10.8 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -2633,16 +2633,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/divider@^0.5.7, @fluentui-react-native/divider@workspace:packages/components/Divider":
+"@fluentui-react-native/divider@^0.5.8, @fluentui-react-native/divider@workspace:packages/components/Divider":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.5
-    "@fluentui-react-native/icon": 0.19.7
+    "@fluentui-react-native/icon": 0.19.8
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ">=0.25.1 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
@@ -2672,19 +2672,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/dropdown@*, @fluentui-react-native/dropdown@>=0.8.18 <1.0.0, @fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown":
+"@fluentui-react-native/dropdown@*, @fluentui-react-native/dropdown@>=0.8.19 <1.0.0, @fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.2 <1.0.0"
-    "@fluentui-react-native/button": ">=0.35.0 <1.0.0"
-    "@fluentui-react-native/callout": ">=0.24.13 <1.0.0"
+    "@fluentui-react-native/button": ">=0.35.1 <1.0.0"
+    "@fluentui-react-native/callout": ">=0.24.14 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.5
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
     react: 18.2.0
     react-native: ^0.71.0
@@ -2739,7 +2739,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-activity-indicator@*, @fluentui-react-native/experimental-activity-indicator@>=0.8.6 <1.0.0, @fluentui-react-native/experimental-activity-indicator@^0.8.6, @fluentui-react-native/experimental-activity-indicator@workspace:packages/experimental/ActivityIndicator":
+"@fluentui-react-native/experimental-activity-indicator@*, @fluentui-react-native/experimental-activity-indicator@>=0.8.7 <1.0.0, @fluentui-react-native/experimental-activity-indicator@^0.8.7, @fluentui-react-native/experimental-activity-indicator@workspace:packages/experimental/ActivityIndicator":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-activity-indicator@workspace:packages/experimental/ActivityIndicator"
   dependencies:
@@ -2790,11 +2790,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-button@*, @fluentui-react-native/experimental-button@0.18.11, @fluentui-react-native/experimental-button@^0.18.11, @fluentui-react-native/experimental-button@workspace:packages/experimental/Button":
+"@fluentui-react-native/experimental-button@*, @fluentui-react-native/experimental-button@0.18.12, @fluentui-react-native/experimental-button@^0.18.12, @fluentui-react-native/experimental-button@workspace:packages/experimental/Button":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-button@workspace:packages/experimental/Button"
   dependencies:
-    "@fluentui-react-native/button": ^0.35.0
+    "@fluentui-react-native/button": ^0.35.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
@@ -2806,12 +2806,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-checkbox@*, @fluentui-react-native/experimental-checkbox@0.15.10, @fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox":
+"@fluentui-react-native/experimental-checkbox@*, @fluentui-react-native/experimental-checkbox@0.15.11, @fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.2 <1.0.0"
-    "@fluentui-react-native/checkbox": ">=0.21.0 <1.0.0"
+    "@fluentui-react-native/checkbox": ">=0.21.1 <1.0.0"
     "@fluentui-react-native/component-cache": ^1.5.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.5
@@ -2849,7 +2849,7 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-link@workspace:packages/experimental/Link"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/link": ">=0.20.0 <1.0.0"
+    "@fluentui-react-native/link": ">=0.20.1 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     react: 18.2.0
     react-native: ^0.71.0
@@ -2859,13 +2859,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@>=0.7.18 <1.0.0, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
+"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@>=0.7.19 <1.0.0, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
   dependencies:
-    "@fluentui-react-native/contextual-menu": ^0.22.14
+    "@fluentui-react-native/contextual-menu": ^0.22.15
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-button": ^0.18.11
+    "@fluentui-react-native/experimental-button": ^0.18.12
     "@fluentui-react-native/framework": 0.11.5
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
@@ -2915,7 +2915,7 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-radio-group@workspace:packages/experimental/RadioGroup"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/radio-group": ">=0.19.0 <1.0.0"
+    "@fluentui-react-native/radio-group": ">=0.19.1 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
@@ -2944,7 +2944,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-shimmer@*, @fluentui-react-native/experimental-shimmer@0.11.0, @fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer":
+"@fluentui-react-native/experimental-shimmer@*, @fluentui-react-native/experimental-shimmer@0.11.1, @fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer"
   dependencies:
@@ -2974,7 +2974,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.5
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -2985,7 +2985,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-tabs@*, @fluentui-react-native/experimental-tabs@0.9.10, @fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs":
+"@fluentui-react-native/experimental-tabs@*, @fluentui-react-native/experimental-tabs@0.9.11, @fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs"
   dependencies:
@@ -2993,11 +2993,11 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.12.9 <1.0.0"
     "@fluentui-react-native/framework": 0.11.5
-    "@fluentui-react-native/icon": 0.19.7
+    "@fluentui-react-native/icon": 0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
@@ -3010,13 +3010,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-text@*, @fluentui-react-native/experimental-text@>=0.13.7 <1.0.0, @fluentui-react-native/experimental-text@workspace:packages/experimental/Text":
+"@fluentui-react-native/experimental-text@*, @fluentui-react-native/experimental-text@>=0.13.8 <1.0.0, @fluentui-react-native/experimental-text@workspace:packages/experimental/Text":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-text@workspace:packages/experimental/Text"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
     tslib: ^2.3.1
@@ -3092,7 +3092,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/icon@*, @fluentui-react-native/icon@0.19.7, @fluentui-react-native/icon@^0.19.7, @fluentui-react-native/icon@workspace:packages/components/Icon":
+"@fluentui-react-native/icon@*, @fluentui-react-native/icon@0.19.8, @fluentui-react-native/icon@^0.19.8, @fluentui-react-native/icon@workspace:packages/components/Icon":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/icon@workspace:packages/components/Icon"
   dependencies:
@@ -3101,7 +3101,7 @@ __metadata:
     "@fluentui-react-native/framework": ">=0.11.5 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ^0.21.7
+    "@fluentui-react-native/text": ^0.21.8
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
@@ -3125,18 +3125,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/input@^0.4.0, @fluentui-react-native/input@workspace:packages/components/Input":
+"@fluentui-react-native/input@^0.4.1, @fluentui-react-native/input@workspace:packages/components/Input":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/input@workspace:packages/components/Input"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.5
-    "@fluentui-react-native/icon": ^0.19.7
+    "@fluentui-react-native/icon": ^0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/styling-utils": ">=0.5.0 <1.0.0"
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
@@ -3178,7 +3178,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/link@*, @fluentui-react-native/link@0.20.0, @fluentui-react-native/link@>=0.20.0 <1.0.0, @fluentui-react-native/link@workspace:packages/components/Link":
+"@fluentui-react-native/link@*, @fluentui-react-native/link@0.20.1, @fluentui-react-native/link@>=0.20.1 <1.0.0, @fluentui-react-native/link@workspace:packages/components/Link":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/link@workspace:packages/components/Link"
   dependencies:
@@ -3188,11 +3188,11 @@ __metadata:
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@fluentui-react-native/use-styling": ^0.11.1
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -3215,20 +3215,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.11.18, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
+"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.11.19, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu-button@workspace:packages/components/MenuButton"
   dependencies:
-    "@fluentui-react-native/button": ^0.35.0
+    "@fluentui-react-native/button": ^0.35.1
     "@fluentui-react-native/component-cache": ^1.5.1
-    "@fluentui-react-native/contextual-menu": ^0.22.14
+    "@fluentui-react-native/contextual-menu": ^0.22.15
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/icon": ^0.19.7
+    "@fluentui-react-native/icon": ^0.19.8
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/tokens": ^0.21.2
     "@office-iss/react-native-win32": ^0.71.0
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -3240,21 +3240,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.11.17, @fluentui-react-native/menu@workspace:packages/components/Menu":
+"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.11.18, @fluentui-react-native/menu@workspace:packages/components/Menu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.2 <1.0.0"
-    "@fluentui-react-native/button": ">=0.35.0 <1.0.0"
-    "@fluentui-react-native/callout": ">=0.24.13 <1.0.0"
+    "@fluentui-react-native/button": ">=0.35.1 <1.0.0"
+    "@fluentui-react-native/callout": ">=0.24.14 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.12.9 <1.0.0"
     "@fluentui-react-native/framework": 0.11.5
-    "@fluentui-react-native/icon": ^0.19.7
+    "@fluentui-react-native/icon": ^0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ">=0.25.1 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
@@ -3288,22 +3288,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/notification@*, @fluentui-react-native/notification@0.23.11, @fluentui-react-native/notification@workspace:packages/components/Notification":
+"@fluentui-react-native/notification@*, @fluentui-react-native/notification@0.23.12, @fluentui-react-native/notification@workspace:packages/components/Notification":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/notification@workspace:packages/components/Notification"
   dependencies:
     "@fluentui-react-native/adapters": ^0.11.2
-    "@fluentui-react-native/button": ">=0.35.0 <1.0.0"
+    "@fluentui-react-native/button": ">=0.35.1 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/experimental-appearance-additions": ^0.5.7
     "@fluentui-react-native/experimental-shadow": 0.4.7
     "@fluentui-react-native/framework": 0.11.5
-    "@fluentui-react-native/icon": 0.19.7
+    "@fluentui-react-native/icon": 0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/pressable": ">=0.10.8 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": 0.25.1
     "@fluentui-react-native/theme-types": ">=0.32.0 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
@@ -3319,7 +3319,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/persona-coin@*, @fluentui-react-native/persona-coin@0.13.6, @fluentui-react-native/persona-coin@>=0.13.6 <1.0.0, @fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin":
+"@fluentui-react-native/persona-coin@*, @fluentui-react-native/persona-coin@0.13.7, @fluentui-react-native/persona-coin@>=0.13.7 <1.0.0, @fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin"
   dependencies:
@@ -3331,9 +3331,9 @@ __metadata:
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
-    "@uifabricshared/foundation-tokens": ">=0.13.4 <1.0.0"
+    "@uifabricshared/foundation-tokens": ">=0.13.5 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
   peerDependencies:
@@ -3342,20 +3342,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/persona@*, @fluentui-react-native/persona@0.14.6, @fluentui-react-native/persona@workspace:packages/components/Persona":
+"@fluentui-react-native/persona@*, @fluentui-react-native/persona@0.14.7, @fluentui-react-native/persona@workspace:packages/components/Persona":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/persona@workspace:packages/components/Persona"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.2 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": ">=0.11.5 <1.0.0"
-    "@fluentui-react-native/persona-coin": ">=0.13.6 <1.0.0"
+    "@fluentui-react-native/persona-coin": ">=0.13.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
-    "@uifabricshared/foundation-tokens": ">=0.13.4 <1.0.0"
+    "@uifabricshared/foundation-tokens": ">=0.13.5 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
   peerDependencies:
@@ -3399,7 +3399,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.19.0, @fluentui-react-native/radio-group@>=0.19.0 <1.0.0, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
+"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.19.1, @fluentui-react-native/radio-group@>=0.19.1 <1.0.0, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/radio-group@workspace:packages/components/RadioGroup"
   dependencies:
@@ -3412,13 +3412,13 @@ __metadata:
     "@fluentui-react-native/pressable": ">=0.10.8 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ">=0.25.1 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -3518,7 +3518,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/spinner@^0.7.8, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
+"@fluentui-react-native/spinner@^0.7.9, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/spinner@workspace:packages/experimental/Spinner"
   dependencies:
@@ -3526,7 +3526,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.5
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
     "@fluentui-react-native/use-styling": ^0.11.1
     react: 18.2.0
@@ -3539,7 +3539,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/stack@*, @fluentui-react-native/stack@>=0.8.9 <1.0.0, @fluentui-react-native/stack@workspace:packages/components/Stack":
+"@fluentui-react-native/stack@*, @fluentui-react-native/stack@>=0.8.10 <1.0.0, @fluentui-react-native/stack@workspace:packages/components/Stack":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/stack@workspace:packages/components/Stack"
   dependencies:
@@ -3547,12 +3547,12 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": ">=0.11.5 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
-    "@uifabricshared/foundation-tokens": ">=0.13.4 <1.0.0"
+    "@uifabricshared/foundation-tokens": ">=0.13.5 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
   peerDependencies:
@@ -3575,7 +3575,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/switch@*, @fluentui-react-native/switch@^0.11.0, @fluentui-react-native/switch@workspace:packages/components/Switch":
+"@fluentui-react-native/switch@*, @fluentui-react-native/switch@^0.11.1, @fluentui-react-native/switch@workspace:packages/components/Switch":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/switch@workspace:packages/components/Switch"
   dependencies:
@@ -3585,7 +3585,7 @@ __metadata:
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
@@ -3599,7 +3599,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.3.7, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
+"@fluentui-react-native/tablist@0.3.8, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/experimental/TabList"
   dependencies:
@@ -3607,11 +3607,11 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.12.9 <1.0.0"
     "@fluentui-react-native/framework": 0.11.5
-    "@fluentui-react-native/icon": 0.19.7
+    "@fluentui-react-native/icon": 0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
@@ -3624,22 +3624,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tabs@*, @fluentui-react-native/tabs@0.13.8, @fluentui-react-native/tabs@workspace:packages/components/Tabs":
+"@fluentui-react-native/tabs@*, @fluentui-react-native/tabs@0.13.9, @fluentui-react-native/tabs@workspace:packages/components/Tabs":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tabs@workspace:packages/components/Tabs"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.2 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.12.9 <1.0.0"
-    "@fluentui-react-native/icon": 0.19.7
+    "@fluentui-react-native/icon": 0.19.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
     "@office-iss/react-native-win32": ^0.71.0
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -3671,7 +3671,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.155.1
+    "@fluentui-react-native/tester": ^0.155.2
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
@@ -3702,7 +3702,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.155.1, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.155.2, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3710,43 +3710,43 @@ __metadata:
     "@babel/runtime": ^7.8.0
     "@fluentui-react-native/android-theme": ">=0.18.5 <1.0.0"
     "@fluentui-react-native/apple-theme": ">=0.21.8 <1.0.0"
-    "@fluentui-react-native/avatar": ^1.10.9
-    "@fluentui-react-native/badge": ">=0.7.5 <1.0.0"
-    "@fluentui-react-native/button": ">=0.35.0 <1.0.0"
-    "@fluentui-react-native/chip": ^0.2.0
+    "@fluentui-react-native/avatar": ^1.10.10
+    "@fluentui-react-native/badge": ">=0.7.6 <1.0.0"
+    "@fluentui-react-native/button": ">=0.35.1 <1.0.0"
+    "@fluentui-react-native/chip": ^0.2.1
     "@fluentui-react-native/default-theme": ">=0.19.6 <1.0.0"
-    "@fluentui-react-native/divider": ^0.5.7
+    "@fluentui-react-native/divider": ^0.5.8
     "@fluentui-react-native/drawer": ^0.2.8
-    "@fluentui-react-native/dropdown": ">=0.8.18 <1.0.0"
+    "@fluentui-react-native/dropdown": ">=0.8.19 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-activity-indicator": ">=0.8.6 <1.0.0"
+    "@fluentui-react-native/experimental-activity-indicator": ">=0.8.7 <1.0.0"
     "@fluentui-react-native/experimental-appearance-additions": ^0.5.7
     "@fluentui-react-native/experimental-avatar": ">=0.19.6 <1.0.0"
-    "@fluentui-react-native/experimental-button": 0.18.11
-    "@fluentui-react-native/experimental-checkbox": 0.15.10
+    "@fluentui-react-native/experimental-button": 0.18.12
+    "@fluentui-react-native/experimental-checkbox": 0.15.11
     "@fluentui-react-native/experimental-expander": 0.6.8
-    "@fluentui-react-native/experimental-menu-button": ">=0.7.18 <1.0.0"
+    "@fluentui-react-native/experimental-menu-button": ">=0.7.19 <1.0.0"
     "@fluentui-react-native/experimental-native-date-picker": ">=0.8.0 <1.0.0"
     "@fluentui-react-native/experimental-shadow": 0.4.7
-    "@fluentui-react-native/experimental-shimmer": 0.11.0
-    "@fluentui-react-native/experimental-tabs": 0.9.10
-    "@fluentui-react-native/experimental-text": ">=0.13.7 <1.0.0"
+    "@fluentui-react-native/experimental-shimmer": 0.11.1
+    "@fluentui-react-native/experimental-tabs": 0.9.11
+    "@fluentui-react-native/experimental-text": ">=0.13.8 <1.0.0"
     "@fluentui-react-native/focus-zone": ^0.12.9
     "@fluentui-react-native/framework": ">=0.11.5 <1.0.0"
-    "@fluentui-react-native/icon": 0.19.7
-    "@fluentui-react-native/input": ^0.4.0
+    "@fluentui-react-native/icon": 0.19.8
+    "@fluentui-react-native/input": ^0.4.1
     "@fluentui-react-native/interactive-hooks": ">=0.24.7 <1.0.0"
-    "@fluentui-react-native/menu": ^1.11.17
+    "@fluentui-react-native/menu": ^1.11.18
     "@fluentui-react-native/merge-props": ">=0.7.1 <1.0.0"
-    "@fluentui-react-native/notification": 0.23.11
-    "@fluentui-react-native/radio-group": ">=0.19.0 <1.0.0"
+    "@fluentui-react-native/notification": 0.23.12
+    "@fluentui-react-native/radio-group": ">=0.19.1 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": ^0.16.5
-    "@fluentui-react-native/spinner": ^0.7.8
-    "@fluentui-react-native/stack": ">=0.8.9 <1.0.0"
-    "@fluentui-react-native/switch": ^0.11.0
-    "@fluentui-react-native/tablist": 0.3.7
-    "@fluentui-react-native/text": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/spinner": ^0.7.9
+    "@fluentui-react-native/stack": ">=0.8.10 <1.0.0"
+    "@fluentui-react-native/switch": ^0.11.1
+    "@fluentui-react-native/tablist": 0.3.8
+    "@fluentui-react-native/text": ">=0.21.8 <1.0.0"
     "@fluentui-react-native/theme": ">=0.9.1 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.1
     "@fluentui-react-native/theme-types": ">=0.32.0 <1.0.0"
@@ -3754,7 +3754,7 @@ __metadata:
     "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0"
     "@fluentui-react-native/vibrancy-view": ">=0.0.2 <1.0.0"
     "@fluentui-react-native/win32-theme": ">=0.27.5 <1.0.0"
-    "@fluentui/react-native": ">=0.37.21 <1.0.0"
+    "@fluentui/react-native": ">=0.37.22 <1.0.0"
     "@fortawesome/fontawesome-svg-core": ^6.2.0
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-native-fontawesome": ^0.3.0
@@ -3784,7 +3784,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/text@*, @fluentui-react-native/text@0.21.7, @fluentui-react-native/text@>=0.21.7 <1.0.0, @fluentui-react-native/text@^0.21.7, @fluentui-react-native/text@workspace:packages/components/text":
+"@fluentui-react-native/text@*, @fluentui-react-native/text@0.21.8, @fluentui-react-native/text@>=0.21.8 <1.0.0, @fluentui-react-native/text@^0.21.8, @fluentui-react-native/text@workspace:packages/components/text":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/text@workspace:packages/components/text"
   dependencies:
@@ -3797,7 +3797,7 @@ __metadata:
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
     "@fluentui-react-native/theme-tokens": ">=0.25.1 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.21.2 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.6
+    "@uifabricshared/foundation-compose": ^1.14.7
     react: 18.2.0
     react-native: ^0.71.0
     tslib: ^2.3.1
@@ -4016,28 +4016,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native@*, @fluentui/react-native@>=0.37.21 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
+"@fluentui/react-native@*, @fluentui/react-native@>=0.37.22 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
-    "@fluentui-react-native/button": 0.35.0
-    "@fluentui-react-native/callout": 0.24.13
-    "@fluentui-react-native/checkbox": 0.21.0
-    "@fluentui-react-native/contextual-menu": 0.22.14
+    "@fluentui-react-native/button": 0.35.1
+    "@fluentui-react-native/callout": 0.24.14
+    "@fluentui-react-native/checkbox": 0.21.1
+    "@fluentui-react-native/contextual-menu": 0.22.15
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-trap-zone": 0.10.9
     "@fluentui-react-native/focus-zone": 0.12.9
     "@fluentui-react-native/interactive-hooks": 0.24.7
-    "@fluentui-react-native/link": 0.20.0
-    "@fluentui-react-native/menu-button": 0.11.18
-    "@fluentui-react-native/persona": 0.14.6
-    "@fluentui-react-native/persona-coin": 0.13.6
+    "@fluentui-react-native/link": 0.20.1
+    "@fluentui-react-native/menu-button": 0.11.19
+    "@fluentui-react-native/persona": 0.14.7
+    "@fluentui-react-native/persona-coin": 0.13.7
     "@fluentui-react-native/pressable": 0.10.8
-    "@fluentui-react-native/radio-group": 0.19.0
+    "@fluentui-react-native/radio-group": 0.19.1
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": 0.16.5
-    "@fluentui-react-native/tabs": 0.13.8
-    "@fluentui-react-native/text": 0.21.7
+    "@fluentui-react-native/tabs": 0.13.9
+    "@fluentui-react-native/text": 0.21.8
     react: 18.2.0
     react-native: ^0.71.0
   peerDependencies:
@@ -7210,7 +7210,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/foundation-compose@*, @uifabricshared/foundation-compose@^1.14.6, @uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose":
+"@uifabricshared/foundation-compose@*, @uifabricshared/foundation-compose@^1.14.7, @uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose"
   dependencies:
@@ -7222,7 +7222,7 @@ __metadata:
     "@fluentui-react-native/theme-types": ">=0.32.0 <1.0.0"
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0"
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
-    "@uifabricshared/foundation-tokens": ">=0.13.4 <1.0.0"
+    "@uifabricshared/foundation-tokens": ">=0.13.5 <1.0.0"
     "@uifabricshared/themed-settings": ">=0.10.2 <1.0.0"
     "@uifabricshared/theming-ramp": ">=0.19.1 <1.0.0"
     react: 18.2.0
@@ -7248,7 +7248,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/foundation-tokens@*, @uifabricshared/foundation-tokens@>=0.13.4 <1.0.0, @uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens":
+"@uifabricshared/foundation-tokens@*, @uifabricshared/foundation-tokens@>=0.13.5 <1.0.0, @uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens"
   dependencies:

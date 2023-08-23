@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Wed, 23 Aug 2023 18:55:24 GMT",
+      "version": "1.14.7",
+      "tag": "@uifabricshared/foundation-compose_v1.14.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.13.5",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "1.14.6",
       "tag": "@uifabricshared/foundation-compose_v1.14.6",

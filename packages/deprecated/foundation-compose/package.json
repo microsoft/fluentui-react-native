@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.14.6",
+  "version": "1.14.7",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
     "@fluentui-react-native/theme-types": ">=0.32.0 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.13.4 <1.0.0",
+    "@uifabricshared/foundation-tokens": ">=0.13.5 <1.0.0",
     "@uifabricshared/themed-settings": ">=0.10.2 <1.0.0",
     "@uifabricshared/theming-ramp": ">=0.19.1 <1.0.0"
   },

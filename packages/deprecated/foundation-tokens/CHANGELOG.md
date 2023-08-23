@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Aug 2023 18:55:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.5
+
+Wed, 23 Aug 2023 18:55:24 GMT
+
+### Patches
+
+- Fix depcheck (ruaraki@microsoft.com)
 
 ## 0.13.4
 

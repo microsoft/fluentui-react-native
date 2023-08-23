@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Wed, 16 Aug 2023 23:34:27 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Aug 2023 18:55:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.1
+
+Wed, 23 Aug 2023 18:55:23 GMT
+
+### Patches
+
+- Update SVG dependencies (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/text to v0.21.8
+- Bump @uifabricshared/foundation-compose to v1.14.7
 
 ## 0.21.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Wed, 16 Aug 2023 23:34:27 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Aug 2023 18:55:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Wed, 23 Aug 2023 18:55:23 GMT
+
+### Patches
+
+- Update SVG dependencies (ruaraki@microsoft.com)
 
 ## 0.11.0
 

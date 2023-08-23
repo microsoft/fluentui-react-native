@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Wed, 23 Aug 2023 18:55:23 GMT",
+      "version": "0.7.19",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.7.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "565d51b9f2769d1e566e59249d062b26338f408b",
+            "comment": "Update SVG dependencies"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.22.15",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.18.12",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 21 Aug 2023 20:45:53 GMT",
       "version": "0.7.18",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.7.18",

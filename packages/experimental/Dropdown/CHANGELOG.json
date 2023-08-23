@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Wed, 23 Aug 2023 18:55:23 GMT",
+      "version": "0.8.19",
+      "tag": "@fluentui-react-native/dropdown_v0.8.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "565d51b9f2769d1e566e59249d062b26338f408b",
+            "comment": "Update SVG dependencies"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/button to v0.35.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.14",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/dropdown",
+            "comment": "Bump @fluentui-react-native/text to v0.21.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 21 Aug 2023 20:45:53 GMT",
       "version": "0.8.18",
       "tag": "@fluentui-react-native/dropdown_v0.8.18",

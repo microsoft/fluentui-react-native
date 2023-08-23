@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Wed, 23 Aug 2023 18:55:23 GMT",
+      "version": "0.19.8",
+      "tag": "@fluentui-react-native/icon_v0.19.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/icon",
+            "commit": "565d51b9f2769d1e566e59249d062b26338f408b",
+            "comment": "Update SVG dependencies"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/text to v0.21.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.19.7",
       "tag": "@fluentui-react-native/icon_v0.19.7",
