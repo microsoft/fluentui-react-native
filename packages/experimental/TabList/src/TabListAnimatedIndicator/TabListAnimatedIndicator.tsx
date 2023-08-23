@@ -14,6 +14,10 @@ function indicatorPropsWorker(animationClass: string, style: ViewStyle): ViewPro
   return { animationClass, style } as ViewProps;
 }
 
+/**
+ * This component renders as the indicator for the selected tab. Its styles are calculated and passed
+ * from the useTabList hook, so it doesn't need to use the compose or compressible franework.
+ */
 export const TabListAnimatedIndicator = stagedComponent((props: TabListAnimatedIndicatorProps) => {
   return (final: TabListAnimatedIndicatorProps) => {
     const { styles, ...finalProps } = final;
