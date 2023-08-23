@@ -325,7 +325,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/generator@npm:^7.20.0, @babel/generator@npm:^7.22.10, @babel/generator@npm:^7.4.0, @babel/generator@npm:^7.7.2":
+"@babel/generator@npm:^7.20.0, @babel/generator@npm:^7.22.10, @babel/generator@npm:^7.22.5, @babel/generator@npm:^7.4.0, @babel/generator@npm:^7.7.2":
   version: 7.22.10
   resolution: "@babel/generator@npm:7.22.10"
   dependencies:
@@ -534,7 +534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-split-export-declaration@npm:^7.22.6":
+"@babel/helper-split-export-declaration@npm:^7.22.5, @babel/helper-split-export-declaration@npm:^7.22.6":
   version: 7.22.6
   resolution: "@babel/helper-split-export-declaration@npm:7.22.6"
   dependencies:
@@ -597,12 +597,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:7.16.4":
-  version: 7.16.4
-  resolution: "@babel/parser@npm:7.16.4"
+"@babel/parser@npm:7.22.5":
+  version: 7.22.5
+  resolution: "@babel/parser@npm:7.22.5"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: ce0a8f92f440f2a12bc932f070a7b60c5133bf8a63f461841f9e39af0194f573707959d606c6fad1a2fd496a45148553afd9b74d3b8dd36cdb7861598d1f3e36
+  checksum: 470ebba516417ce8683b36e2eddd56dcfecb32c54b9bb507e28eb76b30d1c3e618fd0cfeee1f64d8357c2254514e1a19e32885cfb4e73149f4ae875436a6d59c
   languageName: node
   linkType: hard
 
@@ -1897,7 +1897,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.12.5, @babel/traverse@npm:^7.16.0, @babel/traverse@npm:^7.20.0, @babel/traverse@npm:^7.22.10, @babel/traverse@npm:^7.4.3":
+"@babel/traverse@npm:7.22.5":
+  version: 7.22.5
+  resolution: "@babel/traverse@npm:7.22.5"
+  dependencies:
+    "@babel/code-frame": ^7.22.5
+    "@babel/generator": ^7.22.5
+    "@babel/helper-environment-visitor": ^7.22.5
+    "@babel/helper-function-name": ^7.22.5
+    "@babel/helper-hoist-variables": ^7.22.5
+    "@babel/helper-split-export-declaration": ^7.22.5
+    "@babel/parser": ^7.22.5
+    "@babel/types": ^7.22.5
+    debug: ^4.1.0
+    globals: ^11.1.0
+  checksum: 560931422dc1761f2df723778dcb4e51ce0d02e560cf2caa49822921578f49189a5a7d053b78a32dca33e59be886a6b2200a6e24d4ae9b5086ca0ba803815694
+  languageName: node
+  linkType: hard
+
+"@babel/traverse@npm:^7.16.0, @babel/traverse@npm:^7.20.0, @babel/traverse@npm:^7.22.10, @babel/traverse@npm:^7.4.3":
   version: 7.22.10
   resolution: "@babel/traverse@npm:7.22.10"
   dependencies:
@@ -2249,11 +2267,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2277,11 +2295,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2364,12 +2382,12 @@ __metadata:
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     tslib: ^2.3.1
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2391,11 +2409,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2467,12 +2485,12 @@ __metadata:
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     react-native-svg-transformer: ^1.0.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2670,11 +2688,11 @@ __metadata:
     "@fluentui-react-native/theme-tokens": ^0.25.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2731,11 +2749,11 @@ __metadata:
     assert-never: ^1.2.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2854,11 +2872,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -2940,11 +2958,11 @@ __metadata:
     assert-never: ^1.2.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3087,11 +3105,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3124,11 +3142,11 @@ __metadata:
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3214,11 +3232,11 @@ __metadata:
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3243,12 +3261,12 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     tslib: ^2.3.1
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3293,11 +3311,11 @@ __metadata:
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3404,11 +3422,12 @@ __metadata:
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
+    react-native-svg: ^13.9.0
     tslib: ^2.3.1
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3512,11 +3531,11 @@ __metadata:
     "@fluentui-react-native/use-styling": ^0.11.1
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
   languageName: unknown
   linkType: soft
 
@@ -3672,7 +3691,7 @@ __metadata:
     metro-react-native-babel-preset: ^0.73.7
     react: 18.2.0
     react-native: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     react-native-svg-transformer: ^1.0.0
     react-test-renderer: 18.2.0
     rimraf: ^5.0.1
@@ -3744,19 +3763,22 @@ __metadata:
     "@react-native-picker/picker": ^2.2.1
     "@rnx-kit/cli": ^0.16.2
     "@rnx-kit/metro-config": ^1.3.1
+    "@types/jasmine": 3.10.3
     "@warren-ms/react-native-icons": ^0.0.13
+    "@wdio/jasmine-framework": 7.26.0
     flow-bin: ^0.113.0
     metro-config: ^0.73.7
     metro-react-native-babel-preset: ^0.73.7
     react: 18.2.0
     react-native: ^0.71.0
     react-native-macos: ^0.71.0
-    react-native-svg: ^13.7.0
+    react-native-svg: ^13.9.0
     react-native-svg-transformer: ^1.0.0
     react-native-test-app: ^2.5.15
     react-native-windows: ^0.71.0
     react-test-renderer: 18.2.0
     tslib: ^2.3.1
+    webdriverio: 7.30.1
   peerDependencies:
     "@office-iss/react-native-win32": ^0.71.0
   languageName: unknown
@@ -7235,6 +7257,7 @@ __metadata:
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/tokens": 0.21.2
     "@types/jest": ^29.0.0
+    "@types/react": ^18.2.0
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
     react: 18.2.0
     react-native: ^0.71.0
@@ -9495,6 +9518,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"callsite@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "callsite@npm:1.0.0"
+  checksum: 569686d622a288a4f0a827466c2f967b6d7a98f2ee1e6ada9dcf5a6802267a5e2a995d40f07113b5f95c7b2b2d5cbff4fdde590195f2a8bed24b829d048688f8
+  languageName: node
+  linkType: hard
+
 "callsites@npm:^2.0.0":
   version: 2.0.0
   resolution: "callsites@npm:2.0.0"
@@ -10673,16 +10703,18 @@ __metadata:
   linkType: hard
 
 "depcheck@npm:^1.0.0":
-  version: 1.4.3
-  resolution: "depcheck@npm:1.4.3"
+  version: 1.4.5
+  resolution: "depcheck@npm:1.4.5"
   dependencies:
-    "@babel/parser": 7.16.4
-    "@babel/traverse": ^7.12.5
+    "@babel/parser": 7.22.5
+    "@babel/traverse": 7.22.5
     "@vue/compiler-sfc": ^3.0.5
+    callsite: ^1.0.0
     camelcase: ^6.2.0
     cosmiconfig: ^7.0.0
     debug: ^4.2.0
     deps-regex: ^0.1.4
+    findup-sync: ^5.0.0
     ignore: ^5.1.8
     is-core-module: ^2.4.0
     js-yaml: ^3.14.0
@@ -10691,17 +10723,16 @@ __metadata:
     minimatch: ^3.0.4
     multimatch: ^5.0.0
     please-upgrade-node: ^3.2.0
-    query-ast: ^1.0.3
     readdirp: ^3.5.0
     require-package-name: ^2.0.1
     resolve: ^1.18.1
-    sass: ^1.29.0
-    scss-parser: ^1.0.4
+    resolve-from: ^5.0.0
+    sass: ^1.50.1
     semver: ^7.3.2
     yargs: ^16.1.0
   bin:
     depcheck: bin/depcheck.js
-  checksum: 122631cab325707a55e26a8b530eb72c893bd481194100b1853ac2bc944b61320eb0e1ea0ff7e71724009cdfbd4057381d7bf868b9c5aad0c4207ac0bdca5e48
+  checksum: e63ece03d5c462f01e15144ed1f6240c7291e69b963d44319baa9ea6b16c3e8b0479f5103d68b169ddb8ed66c1d13d834afe2289086ac1203d2c6b792befce5c
   languageName: node
   linkType: hard
 
@@ -10734,6 +10765,13 @@ __metadata:
   version: 1.2.0
   resolution: "destroy@npm:1.2.0"
   checksum: 0acb300b7478a08b92d810ab229d5afe0d2f4399272045ab22affa0d99dbaf12637659411530a6fcd597a9bdac718fc94373a61a95b4651bbc7b83684a565e38
+  languageName: node
+  linkType: hard
+
+"detect-file@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "detect-file@npm:1.0.0"
+  checksum: 1861e4146128622e847abe0e1ed80fef01e78532665858a792267adf89032b7a9c698436137707fcc6f02956c2a6a0052d6a0cef5be3d4b76b1ff0da88e2158a
   languageName: node
   linkType: hard
 
@@ -11912,6 +11950,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expand-tilde@npm:^2.0.0, expand-tilde@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "expand-tilde@npm:2.0.2"
+  dependencies:
+    homedir-polyfill: ^1.0.1
+  checksum: 2efe6ed407d229981b1b6ceb552438fbc9e5c7d6a6751ad6ced3e0aa5cf12f0b299da695e90d6c2ac79191b5c53c613e508f7149e4573abfbb540698ddb7301a
+  languageName: node
+  linkType: hard
+
 "expect-webdriverio@npm:^3.0.0":
   version: 3.5.3
   resolution: "expect-webdriverio@npm:3.5.3"
@@ -12293,6 +12340,18 @@ __metadata:
     locate-path: ^5.0.0
     path-exists: ^4.0.0
   checksum: 4c172680e8f8c1f78839486e14a43ef82e9decd0e74145f40707cc42e7420506d5ec92d9a11c22bd2c48fb0c384ea05dd30e10dd152fefeec6f2f75282a8b844
+  languageName: node
+  linkType: hard
+
+"findup-sync@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "findup-sync@npm:5.0.0"
+  dependencies:
+    detect-file: ^1.0.0
+    is-glob: ^4.0.3
+    micromatch: ^4.0.4
+    resolve-dir: ^1.0.1
+  checksum: 576716c77a0e8330b17ae9cba27d1fda8907c8cda7bf33a47f1999e16e089bfc6df4dd62933e0760f430736183c054348c34aa45dd882d49c8c098f55b89ee1d
   languageName: node
   linkType: hard
 
@@ -12859,6 +12918,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"global-modules@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "global-modules@npm:1.0.0"
+  dependencies:
+    global-prefix: ^1.0.1
+    is-windows: ^1.0.1
+    resolve-dir: ^1.0.0
+  checksum: 10be68796c1e1abc1e2ba87ec4ea507f5629873b119ab0cd29c07284ef2b930f1402d10df01beccb7391dedd9cd479611dd6a24311c71be58937beaf18edf85e
+  languageName: node
+  linkType: hard
+
+"global-prefix@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "global-prefix@npm:1.0.2"
+  dependencies:
+    expand-tilde: ^2.0.2
+    homedir-polyfill: ^1.0.1
+    ini: ^1.3.4
+    is-windows: ^1.0.1
+    which: ^1.2.14
+  checksum: 061b43470fe498271bcd514e7746e8a8535032b17ab9570517014ae27d700ff0dca749f76bbde13ba384d185be4310d8ba5712cb0e74f7d54d59390db63dd9a0
+  languageName: node
+  linkType: hard
+
 "global@npm:~4.4.0":
   version: 4.4.0
   resolution: "global@npm:4.4.0"
@@ -13107,6 +13190,15 @@ __metadata:
   dependencies:
     source-map: ^0.7.3
   checksum: b5f874eaa65b70d88df7a4ce3b20d73312bb0bc73410f1b63d708f02e1c532ae16975da84e23b977eab8592ac95d7e6fc0c4094c78604fd0a092ed886c62aa7a
+  languageName: node
+  linkType: hard
+
+"homedir-polyfill@npm:^1.0.1":
+  version: 1.0.3
+  resolution: "homedir-polyfill@npm:1.0.3"
+  dependencies:
+    parse-passwd: ^1.0.0
+  checksum: 18dd4db87052c6a2179d1813adea0c4bfcfa4f9996f0e226fefb29eb3d548e564350fa28ec46b0bf1fbc0a1d2d6922ceceb80093115ea45ff8842a4990139250
   languageName: node
   linkType: hard
 
@@ -13404,6 +13496,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ini@npm:^1.3.4":
+  version: 1.3.8
+  resolution: "ini@npm:1.3.8"
+  checksum: dfd98b0ca3a4fc1e323e38a6c8eb8936e31a97a918d3b377649ea15bdb15d481207a0dda1021efbd86b464cae29a0d33c1d7dcaf6c5672bee17fa849bc50a1b3
+  languageName: node
+  linkType: hard
+
 "ini@npm:^3.0.0":
   version: 3.0.1
   resolution: "ini@npm:3.0.1"
@@ -13459,7 +13558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"invariant@npm:*, invariant@npm:2.2.4, invariant@npm:^2.2.0, invariant@npm:^2.2.4":
+"invariant@npm:*, invariant@npm:^2.2.0, invariant@npm:^2.2.4":
   version: 2.2.4
   resolution: "invariant@npm:2.2.4"
   dependencies:
@@ -13905,6 +14004,13 @@ __metadata:
     call-bind: ^1.0.2
     get-intrinsic: ^1.1.1
   checksum: 5d8698d1fa599a0635d7ca85be9c26d547b317ed8fd83fc75f03efbe75d50001b5eececb1e9971de85fcde84f69ae6f8346bc92d20d55d46201d328e4c74a367
+  languageName: node
+  linkType: hard
+
+"is-windows@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "is-windows@npm:1.0.2"
+  checksum: 438b7e52656fe3b9b293b180defb4e448088e7023a523ec21a91a80b9ff8cdb3377ddb5b6e60f7c7de4fa8b63ab56e121b6705fe081b3cf1b828b0a380009ad7
   languageName: node
   linkType: hard
 
@@ -17585,6 +17691,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"parse-passwd@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "parse-passwd@npm:1.0.0"
+  checksum: 4e55e0231d58f828a41d0f1da2bf2ff7bcef8f4cb6146e69d16ce499190de58b06199e6bd9b17fbf0d4d8aef9052099cdf8c4f13a6294b1a522e8e958073066e
+  languageName: node
+  linkType: hard
+
 "parse-path@npm:^7.0.0":
   version: 7.0.0
   resolution: "parse-path@npm:7.0.0"
@@ -18195,16 +18308,6 @@ __metadata:
   dependencies:
     side-channel: ^1.0.4
   checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
-  languageName: node
-  linkType: hard
-
-"query-ast@npm:^1.0.3":
-  version: 1.0.5
-  resolution: "query-ast@npm:1.0.5"
-  dependencies:
-    invariant: 2.2.4
-    lodash: ^4.17.21
-  checksum: 4b7ae79bc907d0614c8d306d77fc82a19d40f5900bace286943839b875d84a52aa4993a73fdb8f4e989461b88474c47a60a48c7a42964b53253d5abe1452e9ad
   languageName: node
   linkType: hard
 
@@ -18975,6 +19078,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"resolve-dir@npm:^1.0.0, resolve-dir@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "resolve-dir@npm:1.0.1"
+  dependencies:
+    expand-tilde: ^2.0.0
+    global-modules: ^1.0.0
+  checksum: ef736b8ed60d6645c3b573da17d329bfb50ec4e1d6c5ffd6df49e3497acef9226f9810ea6823b8ece1560e01dcb13f77a9f6180d4f242d00cc9a8f4de909c65c
+  languageName: node
+  linkType: hard
+
 "resolve-from@npm:5.0.0, resolve-from@npm:^5.0.0":
   version: 5.0.0
   resolution: "resolve-from@npm:5.0.0"
@@ -19312,16 +19425,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.29.0":
-  version: 1.58.0
-  resolution: "sass@npm:1.58.0"
+"sass@npm:^1.50.1":
+  version: 1.66.1
+  resolution: "sass@npm:1.66.1"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: a7219634881d2de6441fb619787fb1a02e3fa0333fb715be26aa335ba49d6bdb4f1105d9df70a80a67200893022b08346745783dc49046095d94fc6e044492d6
+  checksum: 74fc11d0fcd5e16c5331b57dd59865705a299c64e89f2b99646869caeb011dc8d0b6144a6c74a90c264e9ef70654207dbf44fc9b7e3393f8bd14809b904c8a52
   languageName: node
   linkType: hard
 
@@ -19357,16 +19470,6 @@ __metadata:
   dependencies:
     loose-envify: ^1.1.0
   checksum: d79192eeaa12abef860c195ea45d37cbf2bbf5f66e3c4dcd16f54a7da53b17788a70d109ee3d3dde1a0fd50e6a8fc171f4300356c5aee4fc0171de526bf35f8a
-  languageName: node
-  linkType: hard
-
-"scss-parser@npm:^1.0.4":
-  version: 1.0.6
-  resolution: "scss-parser@npm:1.0.6"
-  dependencies:
-    invariant: 2.2.4
-    lodash: 4.17.21
-  checksum: f1424d73e9c6aec006df16da7222a590efc3ee9b2abb622caffb5e19ed029baf66cf0d2d7aaad1e3d84e5d7f75cf7a3f761570341f26b318b499b08a7e5cd91c
   languageName: node
   linkType: hard
 
@@ -21382,7 +21485,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"which@npm:^1.2.9":
+"which@npm:^1.2.14, which@npm:^1.2.9":
   version: 1.3.1
   resolution: "which@npm:1.3.1"
   dependencies:
