@@ -1,34 +1,16 @@
 import type * as React from 'react';
-import type { View, ViewStyle } from 'react-native';
+import type { View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
-import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
-import type { TabListAnimatedIndicatorProps } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
+import type { AnimatedIndicatorState, TabListAnimatedIndicatorProps } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 export const tabListName = 'TabList';
 
 export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
-
-export interface TabLayoutInfo extends Partial<LayoutRectangle> {
-  startMargin?: number;
-  tabBorderWidth?: number;
-}
-
-export type ListLayoutInfo = { [tabKey: string]: TabLayoutInfo };
-
-export interface AnimatedIndicatorState {
-  addToLayoutMap: (tabKey: string, layout: TabLayoutInfo) => void;
-  layout: ListLayoutInfo;
-  styles: {
-    container: ViewStyle;
-    indicator: ViewStyle;
-  };
-  updateStyles: (updates: Partial<AnimatedIndicatorState['styles']>) => void;
-}
 
 export interface TabListContextData {
   /**
@@ -36,6 +18,9 @@ export interface TabListContextData {
    */
   addTabKey?: (tabKey: string) => void;
 
+  /**
+   * Global state both TabList and Tab use to create styles for the animated indicator.
+   */
   animatedIndicatorState?: AnimatedIndicatorState;
 
   /**

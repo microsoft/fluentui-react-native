@@ -2,18 +2,23 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import type { ViewProps } from 'react-native';
+import type { ViewProps, ViewStyle } from 'react-native';
 
-import { stagedComponent, mergeProps } from '@fluentui-react-native/framework';
+import { stagedComponent, mergeProps, memoize } from '@fluentui-react-native/framework';
 
 import type { TabListAnimatedIndicatorProps } from './TabListAnimatedIndicator.types';
 import { tablistAnimatedIndicatorName } from './TabListAnimatedIndicator.types';
+
+const getIndicatorProps = memoize(indicatorPropsWorker);
+function indicatorPropsWorker(animationClass: string, style: ViewStyle): ViewProps {
+  return { animationClass, style } as ViewProps;
+}
 
 export const TabListAnimatedIndicator = stagedComponent((props: TabListAnimatedIndicatorProps) => {
   return (final: TabListAnimatedIndicatorProps) => {
     const { styles, ...finalProps } = final;
     const rootProps = mergeProps(props, finalProps, { style: styles.container });
-    const indicatorProps = { animationClass: 'Ribbon_TabUnderline', style: styles.indicator } as ViewProps;
+    const indicatorProps = getIndicatorProps('Ribbon_TabUnderline', styles.indicator);
     return (
       <View {...rootProps}>
         <View {...indicatorProps} />

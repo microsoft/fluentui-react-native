@@ -186,16 +186,6 @@ const TabListViewTest: React.FunctionComponent = () => {
 };
 
 const sections: TestSection[] = [
-  // {
-  //   name: 'Test',
-  //   component: () => (
-  //     <PaddedTabList defaultSelectedKey="tab1" vertical>
-  //       <Tab tabKey="tab1">Tab 1</Tab>
-  //       <Tab tabKey="tab2">Tab 2</Tab>
-  //       <Tab tabKey="tab3">Tab 3</Tab>
-  //     </PaddedTabList>
-  //   ),
-  // },
   {
     name: 'TabList Controlled vs Uncontrolled',
     component: TabListDefaultTest,

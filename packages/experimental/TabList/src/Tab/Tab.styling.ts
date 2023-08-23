@@ -4,14 +4,17 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import { borderStyles, fontStyles } from '@fluentui-react-native/framework';
 import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
-import type { LayoutEvent, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
 
 import type { TabProps, TabSlotProps, TabTokens } from './Tab.types';
 import type { TabListContextData } from '../TabList/TabList.types';
 
+/**
+ * Hook to get the style props for each Tab slot.
+ */
 export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme, context: TabListContextData): TabSlotProps => {
-  const { animatedIndicatorState, vertical } = context;
+  const { vertical } = context;
 
   const indicatorColor = React.useMemo(() => {
     if (props.tabKey === context.selectedKey) {
@@ -20,44 +23,7 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
     } else {
       return tokens.indicatorColor;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokens.indicatorColor, props.tabKey, context.selectedKey, theme.colors.transparentStroke]);
-
-  React.useEffect(() => {
-    if (props.tabKey === context.selectedKey) {
-      context.animatedIndicatorState.updateStyles({ indicator: { backgroundColor: tokens.indicatorColor } });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.tabKey, context.selectedKey, tokens.indicatorColor]);
-
-  // onLayout callbacks to help calculate positioning of the animated indicator
-  const onTabLayout = React.useCallback(
-    (e: LayoutEvent) => {
-      if (e.nativeEvent.layout) {
-        // save x and y of tab
-        animatedIndicatorState.addToLayoutMap(props.tabKey, {
-          x: e.nativeEvent.layout.x,
-          y: e.nativeEvent.layout.y,
-          tabBorderWidth: tokens.borderWidth,
-        });
-      }
-    },
-    [animatedIndicatorState, props.tabKey, tokens.borderWidth],
-  );
-
-  const onIndicatorLayout = React.useCallback(
-    (e: LayoutEvent) => {
-      if (e?.nativeEvent?.layout) {
-        // save width, height, and start margin of indicator.
-        animatedIndicatorState.addToLayoutMap(props.tabKey, {
-          width: e.nativeEvent.layout.width,
-          height: e.nativeEvent.layout.height,
-          startMargin: tokens.indicatorInset,
-        });
-      }
-    },
-    [animatedIndicatorState, props.tabKey, tokens.indicatorInset],
-  );
 
   // Get each slot's props using our final tokens
   const root = React.useMemo<PressablePropsExtended>(
@@ -72,9 +38,8 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         backgroundColor: tokens.backgroundColor,
         ...borderStyles.from(tokens, theme),
       },
-      onLayout: onTabLayout,
     }),
-    [tokens, theme, onTabLayout],
+    [tokens, theme],
   );
 
   const contentContainer = React.useMemo<IViewProps>(
@@ -147,9 +112,8 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         borderRadius: 99,
         backgroundColor: indicatorColor,
       },
-      onLayout: onIndicatorLayout,
     }),
-    [indicatorColor, onIndicatorLayout],
+    [indicatorColor],
   );
 
   return { root, contentContainer, content, icon, stack, indicatorContainer, indicator };
