@@ -19,6 +19,7 @@ exports[`TabList component tests TabList appearance 1`] = `
         "current": null,
       }
     }
+    onLayout={[Function]}
     size="medium"
     style={
       {
@@ -73,6 +74,7 @@ exports[`TabList component tests TabList appearance 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -120,9 +122,6 @@ exports[`TabList component tests TabList appearance 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -138,8 +137,6 @@ exports[`TabList component tests TabList appearance 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -148,8 +145,6 @@ exports[`TabList component tests TabList appearance 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -209,6 +204,7 @@ exports[`TabList component tests TabList appearance 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -256,9 +252,6 @@ exports[`TabList component tests TabList appearance 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -274,8 +267,6 @@ exports[`TabList component tests TabList appearance 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -284,8 +275,6 @@ exports[`TabList component tests TabList appearance 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -345,6 +334,7 @@ exports[`TabList component tests TabList appearance 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -392,9 +382,6 @@ exports[`TabList component tests TabList appearance 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -410,8 +397,6 @@ exports[`TabList component tests TabList appearance 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -420,8 +405,6 @@ exports[`TabList component tests TabList appearance 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -457,6 +440,7 @@ exports[`TabList component tests TabList default props 1`] = `
         "current": null,
       }
     }
+    onLayout={[Function]}
     size="medium"
     style={
       {
@@ -511,6 +495,7 @@ exports[`TabList component tests TabList default props 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -558,9 +543,6 @@ exports[`TabList component tests TabList default props 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -576,8 +558,6 @@ exports[`TabList component tests TabList default props 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -586,8 +566,6 @@ exports[`TabList component tests TabList default props 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -647,6 +625,7 @@ exports[`TabList component tests TabList default props 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -694,9 +673,6 @@ exports[`TabList component tests TabList default props 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -712,8 +688,6 @@ exports[`TabList component tests TabList default props 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -722,8 +696,6 @@ exports[`TabList component tests TabList default props 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -783,6 +755,7 @@ exports[`TabList component tests TabList default props 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -830,9 +803,6 @@ exports[`TabList component tests TabList default props 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -848,8 +818,6 @@ exports[`TabList component tests TabList default props 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -858,8 +826,6 @@ exports[`TabList component tests TabList default props 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -896,6 +862,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
         "current": null,
       }
     }
+    onLayout={[Function]}
     size="medium"
     style={
       {
@@ -950,6 +917,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -997,9 +965,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#bdbdbd",
@@ -1015,8 +980,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -1025,8 +988,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -1086,6 +1047,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -1133,9 +1095,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#bdbdbd",
@@ -1151,8 +1110,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -1161,8 +1118,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -1222,6 +1177,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -1269,9 +1225,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#bdbdbd",
@@ -1287,8 +1240,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -1297,8 +1248,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -1334,6 +1283,7 @@ exports[`TabList component tests TabList orientation 1`] = `
         "current": null,
       }
     }
+    onLayout={[Function]}
     size="medium"
     style={
       {
@@ -1388,6 +1338,7 @@ exports[`TabList component tests TabList orientation 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -1435,9 +1386,6 @@ exports[`TabList component tests TabList orientation 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -1453,8 +1401,6 @@ exports[`TabList component tests TabList orientation 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -1463,8 +1409,6 @@ exports[`TabList component tests TabList orientation 1`] = `
             "width": 2,
           }
         }
-        thickness={2}
-        vertical={true}
       >
         <View
           style={
@@ -1524,6 +1468,7 @@ exports[`TabList component tests TabList orientation 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -1571,9 +1516,6 @@ exports[`TabList component tests TabList orientation 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -1589,8 +1531,6 @@ exports[`TabList component tests TabList orientation 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -1599,8 +1539,6 @@ exports[`TabList component tests TabList orientation 1`] = `
             "width": 2,
           }
         }
-        thickness={2}
-        vertical={true}
       >
         <View
           style={
@@ -1660,6 +1598,7 @@ exports[`TabList component tests TabList orientation 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -1707,9 +1646,6 @@ exports[`TabList component tests TabList orientation 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -1725,8 +1661,6 @@ exports[`TabList component tests TabList orientation 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -1735,8 +1669,6 @@ exports[`TabList component tests TabList orientation 1`] = `
             "width": 2,
           }
         }
-        thickness={2}
-        vertical={true}
       >
         <View
           style={
@@ -1772,6 +1704,7 @@ exports[`TabList component tests TabList selected key 1`] = `
         "current": null,
       }
     }
+    onLayout={[Function]}
     selectedKey="1"
     size="medium"
     style={
@@ -1827,6 +1760,7 @@ exports[`TabList component tests TabList selected key 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -1874,9 +1808,6 @@ exports[`TabList component tests TabList selected key 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#242424",
@@ -1892,8 +1823,6 @@ exports[`TabList component tests TabList selected key 1`] = `
         </View>
       </View>
       <View
-        color="#185abd"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -1902,13 +1831,11 @@ exports[`TabList component tests TabList selected key 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
             {
-              "backgroundColor": "#185abd",
+              "backgroundColor": "#00000000",
               "borderRadius": 99,
               "flex": 1,
             }
@@ -1963,6 +1890,7 @@ exports[`TabList component tests TabList selected key 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -2010,9 +1938,6 @@ exports[`TabList component tests TabList selected key 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -2028,8 +1953,6 @@ exports[`TabList component tests TabList selected key 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -2038,8 +1961,6 @@ exports[`TabList component tests TabList selected key 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -2099,6 +2020,7 @@ exports[`TabList component tests TabList selected key 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -2146,9 +2068,6 @@ exports[`TabList component tests TabList selected key 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -2164,8 +2083,6 @@ exports[`TabList component tests TabList selected key 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -2174,8 +2091,6 @@ exports[`TabList component tests TabList selected key 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -2211,6 +2126,7 @@ exports[`TabList component tests TabList size 1`] = `
         "current": null,
       }
     }
+    onLayout={[Function]}
     size="large"
     style={
       {
@@ -2265,6 +2181,7 @@ exports[`TabList component tests TabList size 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -2312,9 +2229,6 @@ exports[`TabList component tests TabList size 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -2330,8 +2244,6 @@ exports[`TabList component tests TabList size 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -2340,8 +2252,6 @@ exports[`TabList component tests TabList size 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -2401,6 +2311,7 @@ exports[`TabList component tests TabList size 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -2448,9 +2359,6 @@ exports[`TabList component tests TabList size 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -2466,8 +2374,6 @@ exports[`TabList component tests TabList size 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -2476,8 +2382,6 @@ exports[`TabList component tests TabList size 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={
@@ -2537,6 +2441,7 @@ exports[`TabList component tests TabList size 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
+      onLayout={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onResponderGrant={[Function]}
@@ -2584,9 +2489,6 @@ exports[`TabList component tests TabList size 1`] = `
         >
           <Text
             accessible={false}
-            ellipsizeMode="tail"
-            numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               {
                 "color": "#424242",
@@ -2602,8 +2504,6 @@ exports[`TabList component tests TabList size 1`] = `
         </View>
       </View>
       <View
-        color="#00000000"
-        inset={12}
         style={
           {
             "backgroundColor": "#00000000",
@@ -2612,8 +2512,6 @@ exports[`TabList component tests TabList size 1`] = `
             "width": "100%",
           }
         }
-        thickness={2}
-        vertical={false}
       >
         <View
           style={

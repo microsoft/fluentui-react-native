@@ -112,3 +112,5 @@ export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens
   };
 }, useTabTokens);
 Tab.displayName = tabName;
+
+export default Tab;

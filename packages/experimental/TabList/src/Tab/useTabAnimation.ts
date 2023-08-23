@@ -12,25 +12,27 @@ import type { TabListContextData } from '../TabList/TabList.types';
  * root slot we initialize here, and we color the animated indicator using the user defined tab indicator color token.
  */
 export function useTabAnimation(props: TabProps, context: TabListContextData, tokens: TabTokens) {
-  const {
-    animatedIndicatorState: { addToLayoutMap, tablistLayout, updateStyles },
-    selectedKey,
-    vertical,
-  } = context;
+  const { animatedIndicatorState, selectedKey, vertical } = context;
   const { tabKey } = props;
 
   // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
   React.useEffect(() => {
     if (tabKey === selectedKey) {
-      updateStyles({ indicator: { backgroundColor: tokens.indicatorColor } });
+      animatedIndicatorState?.updateStyles({ indicator: { backgroundColor: tokens.indicatorColor } });
     }
-  }, [tabKey, selectedKey, tokens.indicatorColor, updateStyles]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tabKey, selectedKey, tokens.indicatorColor]);
 
   // onLayout callbacks to help calculate positioning of the animated indicator
   const onTabLayout = React.useCallback(
     (e: LayoutEvent) => {
       // If the layout values of the tab aren't set or are wonky, don't update state
-      if (e?.nativeEvent?.layout && tablistLayout.width > 0 && e.nativeEvent.layout.height <= tablistLayout.height) {
+      if (
+        e?.nativeEvent?.layout &&
+        animatedIndicatorState?.tablistLayout &&
+        animatedIndicatorState.tablistLayout.width > 0 &&
+        e.nativeEvent.layout.height <= animatedIndicatorState?.tablistLayout.height
+      ) {
         let width: number, height: number;
         // we can calculate the dimensions of the indicator using token values we can access via the compressable framework
         if (vertical) {
@@ -40,7 +42,7 @@ export function useTabAnimation(props: TabProps, context: TabListContextData, to
           width = e.nativeEvent.layout.width - 2 * (tokens.indicatorInset + tokens.borderWidth + 1);
           height = tokens.indicatorThickness;
         }
-        addToLayoutMap(tabKey, {
+        animatedIndicatorState?.addToLayoutMap(tabKey, {
           x: e.nativeEvent.layout.x,
           y: e.nativeEvent.layout.y,
           width: width,
@@ -50,7 +52,7 @@ export function useTabAnimation(props: TabProps, context: TabListContextData, to
         });
       }
     },
-    [addToLayoutMap, tabKey, tablistLayout, tokens, vertical],
+    [animatedIndicatorState, tabKey, tokens, vertical],
   );
 
   return onTabLayout;

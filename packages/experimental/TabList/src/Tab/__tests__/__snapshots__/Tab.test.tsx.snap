@@ -47,6 +47,7 @@ exports[`Tab component tests Customized Tab 1`] = `
   onFocus={[Function]}
   onKeyDown={[Function]}
   onKeyUp={[Function]}
+  onLayout={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onResponderGrant={[Function]}
@@ -94,9 +95,6 @@ exports[`Tab component tests Customized Tab 1`] = `
     >
       <Text
         accessible={false}
-        ellipsizeMode="tail"
-        numberOfLines={0}
-        onAccessibilityTap={[Function]}
         style={
           {
             "color": "red",
@@ -112,7 +110,6 @@ exports[`Tab component tests Customized Tab 1`] = `
     </View>
   </View>
   <View
-    color="#00000000"
     style={
       {
         "backgroundColor": "#00000000",
@@ -121,8 +118,6 @@ exports[`Tab component tests Customized Tab 1`] = `
         "width": "100%",
       }
     }
-    thickness={4}
-    vertical={false}
   >
     <View
       style={
@@ -184,6 +179,7 @@ exports[`Tab component tests Tab default props 1`] = `
   onFocus={[Function]}
   onKeyDown={[Function]}
   onKeyUp={[Function]}
+  onLayout={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onResponderGrant={[Function]}
@@ -231,9 +227,6 @@ exports[`Tab component tests Tab default props 1`] = `
     >
       <Text
         accessible={false}
-        ellipsizeMode="tail"
-        numberOfLines={0}
-        onAccessibilityTap={[Function]}
         style={
           {
             "color": "#424242",
@@ -249,7 +242,6 @@ exports[`Tab component tests Tab default props 1`] = `
     </View>
   </View>
   <View
-    color="#00000000"
     style={
       {
         "backgroundColor": "#00000000",
@@ -258,8 +250,6 @@ exports[`Tab component tests Tab default props 1`] = `
         "width": "100%",
       }
     }
-    thickness={2}
-    vertical={false}
   >
     <View
       style={
@@ -321,6 +311,7 @@ exports[`Tab component tests Tab disabled 1`] = `
   onFocus={[Function]}
   onKeyDown={[Function]}
   onKeyUp={[Function]}
+  onLayout={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onResponderGrant={[Function]}
@@ -368,9 +359,6 @@ exports[`Tab component tests Tab disabled 1`] = `
     >
       <Text
         accessible={false}
-        ellipsizeMode="tail"
-        numberOfLines={0}
-        onAccessibilityTap={[Function]}
         style={
           {
             "color": "#bdbdbd",
@@ -386,7 +374,6 @@ exports[`Tab component tests Tab disabled 1`] = `
     </View>
   </View>
   <View
-    color="#00000000"
     style={
       {
         "backgroundColor": "#00000000",
@@ -395,8 +382,6 @@ exports[`Tab component tests Tab disabled 1`] = `
         "width": "100%",
       }
     }
-    thickness={2}
-    vertical={false}
   >
     <View
       style={
@@ -458,6 +443,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
   onFocus={[Function]}
   onKeyDown={[Function]}
   onKeyUp={[Function]}
+  onLayout={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onResponderGrant={[Function]}
@@ -517,9 +503,6 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     >
       <Text
         accessible={false}
-        ellipsizeMode="tail"
-        numberOfLines={0}
-        onAccessibilityTap={[Function]}
         style={
           {
             "color": "#424242",
@@ -535,7 +518,6 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     </View>
   </View>
   <View
-    color="#00000000"
     style={
       {
         "backgroundColor": "#00000000",
@@ -544,8 +526,6 @@ exports[`Tab component tests Tab render icon + text 1`] = `
         "width": "100%",
       }
     }
-    thickness={2}
-    vertical={false}
   >
     <View
       style={
@@ -607,6 +587,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
   onFocus={[Function]}
   onKeyDown={[Function]}
   onKeyUp={[Function]}
+  onLayout={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onResponderGrant={[Function]}
@@ -657,7 +638,6 @@ exports[`Tab component tests Tab render icon only 1`] = `
     </Text>
   </View>
   <View
-    color="#00000000"
     style={
       {
         "backgroundColor": "#00000000",
@@ -666,8 +646,6 @@ exports[`Tab component tests Tab render icon only 1`] = `
         "width": "100%",
       }
     }
-    thickness={2}
-    vertical={false}
   >
     <View
       style={
