@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update SVG dependencies",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
