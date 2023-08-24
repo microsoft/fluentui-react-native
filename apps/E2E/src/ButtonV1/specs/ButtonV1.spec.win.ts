@@ -18,7 +18,7 @@ describe('ButtonV1 Testing Initialization', () => {
   });
 });
 
-describe('ButtonV1 Accessibility Testing', () => {
+describe('ButtonV1 Accessibility  Testing', () => {
   beforeEach(async () => {
     await ButtonV1PageObject.scrollToTestElement();
   });
