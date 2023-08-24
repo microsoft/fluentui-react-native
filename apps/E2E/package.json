@@ -50,6 +50,9 @@
     "typescript": "4.9.4",
     "webdriverio": "7.30.1"
   },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "rnx-kit": {
     "kitType": "app",
     "alignDeps": {
