@@ -26,7 +26,7 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
-      yarn e2etest
+      yarn e2etest:win32
     workingDirectory: apps/E2E
     displayName: 'run E2E Win32 tests'
     condition: succeeded()
