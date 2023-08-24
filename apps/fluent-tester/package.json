@@ -119,6 +119,9 @@
   "jest": {
     "preset": "react-native"
   },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "rnx-kit": {
     "kitType": "app",
     "bundle": [
