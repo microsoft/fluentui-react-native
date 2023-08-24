@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Updating appium to v2 and adding noihost back to relevant packages",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
