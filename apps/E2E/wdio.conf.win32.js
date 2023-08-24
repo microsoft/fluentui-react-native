@@ -2,7 +2,9 @@ const path = require('path');
 const fs = require('fs');
 
 const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
-const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
+const appArgs =
+  'basePath ' + path.join(__dirname, '..', 'win32', 'dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
+//const appArgs = 'basePath ' + path.resolve('win32/dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
 const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
 const defaultWaitForTimeout = 20000;
