@@ -4,14 +4,9 @@ if (__DEV__) {
   );
 }
 
+export type { LinkTokens, LinkProps, LinkAppearance, LinkState, LinkSlotProps, LinkType } from '@fluentui-react-native/link';
 export {
   linkNameV1 as linkName,
-  LinkTokens,
-  LinkProps,
-  LinkAppearance,
-  LinkState,
-  LinkSlotProps,
-  LinkType,
   defaultLinkTokens,
   linkStates,
   linkStylingSettings,

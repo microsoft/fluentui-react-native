@@ -12,6 +12,8 @@ import {
   MenuPopover,
   MenuList,
   MenuDivider,
+  MenuGroup,
+  MenuGroupHeader,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { Switch } from '@fluentui-react-native/switch';
@@ -332,7 +334,7 @@ const MenuNofM: React.FunctionComponent = () => {
 
 const CustomMenuTrigger: React.FunctionComponent = () => {
   return (
-    <View style={{ borderColor: 'purple', borderWidth: 3 }}>
+    <View style={{ backgroundColor: 'purple', width: 80, flexDirection: 'row', justifyContent: 'center' }}>
       <MenuTrigger>
         <Button>Test</Button>
       </MenuTrigger>
@@ -340,10 +342,10 @@ const CustomMenuTrigger: React.FunctionComponent = () => {
   );
 };
 
-const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
+const MenuWithCustomMenuTrigger: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
   return (
     <Stack style={stackStyle}>
-      <Menu>
+      <Menu {...props}>
         <CustomMenuTrigger />
         <MenuPopover>
           <MenuList>
@@ -351,11 +353,35 @@ const MenuWithCustomMenuTrigger: React.FunctionComponent = () => {
             <MenuItem disabled>A disabled MenuItem</MenuItem>
             <MenuItem accessibilityPositionInSet={9}>A plain MenuItem</MenuItem>
             <MenuDivider />
-            {Platform.OS !== 'android' && <Submenu accessibilityPositionInSet={16} accessibilitySetSize={7} />}
+            {Platform.OS !== 'android' && <Submenu />}
             <MenuItem disabled accessibilitySetSize={2}>
               A disabled MenuItem
             </MenuItem>
             <MenuItem>A plain MenuItem</MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
+const MenuWithGroups: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuGroup>
+              <MenuGroupHeader>Section 1</MenuGroupHeader>
+              <MenuItem>A plain MenuItem</MenuItem>
+            </MenuGroup>
+            <MenuGroup>
+              <MenuGroupHeader>Section 2</MenuGroupHeader>
+              <MenuItem>A plain MenuItem</MenuItem>
+            </MenuGroup>
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -494,6 +520,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu with custom MenuTrigger',
     component: MenuWithCustomMenuTrigger,
+  },
+  {
+    name: 'Menu with groups',
+    component: MenuWithGroups,
   },
 ];
 

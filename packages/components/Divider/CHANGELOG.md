@@ -1,8 +1,147 @@
 # Change Log - @fluentui-react-native/divider
 
-This log was last generated on Mon, 10 Apr 2023 19:48:24 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Aug 2023 18:55:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.8
+
+Wed, 23 Aug 2023 18:55:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.19.8
+- Bump @fluentui-react-native/text to v0.21.8
+
+## 0.5.7
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.5
+- Bump @fluentui-react-native/icon to v0.19.7
+- Bump @fluentui-react-native/text to v0.21.7
+- Bump @fluentui-react-native/tokens to v0.21.2
+
+## 0.5.6
+
+Wed, 09 Aug 2023 22:02:13 GMT
+
+### Patches
+
+- Result of yarn (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.11.4
+- Bump @fluentui-react-native/icon to v0.19.6
+- Bump @fluentui-react-native/text to v0.21.6
+- Bump @fluentui-react-native/theme-tokens to v0.25.1
+
+## 0.5.5
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.3
+- Bump @fluentui-react-native/icon to v0.19.5
+- Bump @fluentui-react-native/text to v0.21.5
+
+## 0.5.4
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.2
+- Bump @fluentui-react-native/icon to v0.19.4
+- Bump @fluentui-react-native/text to v0.21.4
+
+## 0.5.3
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.1
+- Bump @fluentui-react-native/icon to v0.19.3
+- Bump @fluentui-react-native/text to v0.21.3
+- Bump @fluentui-react-native/tokens to v0.21.1
+
+## 0.5.2
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.19.2
+- Bump @fluentui-react-native/text to v0.21.2
+
+## 0.5.1
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.19.1
+- Bump @fluentui-react-native/text to v0.21.1
+
+## 0.5.0
+
+Mon, 12 Jun 2023 17:46:42 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/framework to v0.11.0
+- Bump @fluentui-react-native/icon to v0.19.0
+- Bump @fluentui-react-native/text to v0.21.0
+
+## 0.4.1
+
+Fri, 09 Jun 2023 15:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.18.1
+- Bump @fluentui-react-native/text to v0.20.1
+
+## 0.4.0
+
+Mon, 05 Jun 2023 19:26:22 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.10.0
+- Bump @fluentui-react-native/icon to v0.18.0
+- Bump @fluentui-react-native/text to v0.20.0
+- Bump @fluentui-react-native/tokens to v0.21.0
+- Bump @fluentui-react-native/theme-tokens to v0.25.0
+
+## 0.3.17
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.10
+- Bump @fluentui-react-native/icon to v0.17.27
+- Bump @fluentui-react-native/text to v0.19.33
+- Bump @fluentui-react-native/tokens to v0.20.16
+- Bump @fluentui-react-native/theme-tokens to v0.24.7
+
+## 0.3.16
+
+Wed, 03 May 2023 07:08:51 GMT
+
+### Patches
+
+- Update design-tokens package to 0.47.0 (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.9.9
+- Bump @fluentui-react-native/icon to v0.17.26
+- Bump @fluentui-react-native/text to v0.19.32
+- Bump @fluentui-react-native/tokens to v0.20.15
+- Bump @fluentui-react-native/theme-tokens to v0.24.6
 
 ## 0.3.15
 

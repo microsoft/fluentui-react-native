@@ -2,14 +2,31 @@
 
 exports[`Pressable with useKeyProps 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -32,14 +49,31 @@ exports[`Pressable with useKeyProps 1`] = `
 
 exports[`useKeyProps called twice 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]

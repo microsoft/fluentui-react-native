@@ -3,7 +3,7 @@
 exports[`Separator all props & tokens 1`] = `
 <View
   style={
-    Object {
+    {
       "borderColor": "red",
       "borderLeftWidth": 15,
     }
@@ -14,7 +14,7 @@ exports[`Separator all props & tokens 1`] = `
 exports[`Separator default 1`] = `
 <View
   style={
-    Object {
+    {
       "borderTopWidth": 1,
     }
   }

@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
@@ -88,7 +89,6 @@ export const MenuList = compose<MenuListType>({
         Platform.OS === 'macos' ? (
           <Slots.root onMouseLeave={setFocusZoneFocus} onKeyDown={menuList.onListKeyDown}>
             <Slots.scrollView
-              accessibilityRole="menu"
               showsVerticalScrollIndicator={menuContext.hasMaxHeight}
               showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
             >

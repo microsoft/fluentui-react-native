@@ -20,10 +20,10 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
   hasMaxHeight?: MenuListTokens;
 
   /**
-   * Corner radius of the menu list
-   * @platform android
+   * Border radius of the menu list
+   * @platform android macos
    */
-  cornerRadius?: number;
+  borderRadius?: number;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {

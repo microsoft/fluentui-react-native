@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 
 import { ActivityIndicator as CoreActivityIndicator } from 'react-native';

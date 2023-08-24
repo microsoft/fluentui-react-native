@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { Fragment } from 'react';
 import { Image, View, Text, Platform } from 'react-native';
@@ -91,7 +92,7 @@ function renderAvatar(final: AvatarProps, avatarProps: AvatarProps, Slots: Slots
         <Slots.icon {...icon} accessible={false} />
       ) : (
         svgIconsEnabled && (
-          <Slots.fallbackIcon viewBox="0 0 14 16">
+          <Slots.fallbackIcon viewBox="0 0 20 20">
             <Path fill="currentColor" d={getFallbackIconPath(avatarProps.avatarColor)}></Path>
           </Slots.fallbackIcon>
         )

@@ -35,7 +35,7 @@ export const MenuCallout = stagedComponent((props: MenuCalloutProps) => {
                   maxHeight: mergedProps.maxHeight ? mergedProps.maxHeight : tokens.maxHeight,
                   maxWidth: tokens.maxWidth,
                   position: 'absolute',
-                  borderRadius: tokens.cornerRadius,
+                  borderRadius: tokens.borderRadius,
                   elevation: tokens.elevation,
                   overflow: 'hidden',
                 },

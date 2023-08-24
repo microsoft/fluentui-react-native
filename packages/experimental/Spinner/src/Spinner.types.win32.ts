@@ -2,8 +2,9 @@ import type { TextProps } from 'react-native';
 
 import type { SpinnerProps, SpinnerTokens } from './Spinner.types.shared';
 
-export { SpinnerProps, SpinnerTokens };
-export { spinnerName, SpinnerAppearance, SpinnerLabelPosition, SpinnerSize, SpinnerStatus } from './Spinner.types.shared';
+export type { SpinnerProps, SpinnerTokens };
+export type { SpinnerAppearance, SpinnerLabelPosition, SpinnerSize, SpinnerStatus } from './Spinner.types.shared';
+export { spinnerName } from './Spinner.types.shared';
 
 export interface SpinnerSvgProps extends SpinnerTokens {
   /**
@@ -18,7 +19,7 @@ export interface SpinnerSlotProps {
   root: SpinnerProps; //SpinnerProps extends ViewProps which is required for win32 native module.
   track?: SpinnerSvgProps;
   tail?: SpinnerSvgProps;
-  tailContainer?: SpinnerSvgProps;
+  tailContainer?: React.PropsWithChildren<SpinnerSvgProps>;
   label?: TextProps;
 }
 export interface SpinnerType {

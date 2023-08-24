@@ -1,56 +1,36 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
 
-import { Link } from '@fluentui/react-native';
-import { Button } from '@fluentui-react-native/experimental-button';
-import { Drawer } from '@fluentui-react-native/experimental-drawer';
-import { Icon } from '@fluentui-react-native/icon';
-import { Stack } from '@fluentui-react-native/stack';
-
-import { DRAWER_TESTPAGE } from './consts';
-import { svgProps } from '../Common/iconExamples';
-import { stackStyle } from '../Common/styles';
-import { Test } from '../Test';
+import { DrawerDefault } from './DrawerDefault';
+import { E2EDrawerTest } from './E2EDrawerTest';
+import { Drawer_TESTPAGE } from '../../../../E2E/src/Drawer/consts';
 import type { TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
 
-const BasicDrawer: React.FunctionComponent = () => {
-  const stdBtnRef = React.useRef(null);
-
-  return (
-    <Stack style={stackStyle} gap={5}>
-      <Drawer>
-        <View>
-          <Text>Press for Drawer</Text>
-        </View>
-        <View style={{ padding: 20 }}>
-          <Text>This is content inside Drawer</Text>
-          <Link url="https://www.bing.com/" content="Click to navigate." />
-          <Icon svgSource={svgProps} width={100} height={100} color="blue" />
-          <Button componentRef={stdBtnRef}>Press for Drawer</Button>
-        </View>
-      </Drawer>
-    </Stack>
-  );
-};
-
-const drawerSections: TestSection[] = [
+const DrawerSections: TestSection[] = [
   {
-    name: 'Basic Drawer',
-    testID: DRAWER_TESTPAGE,
-    component: BasicDrawer,
+    name: 'Drawer Page',
+    testID: Drawer_TESTPAGE,
+    component: DrawerDefault,
+  },
+];
+
+const e2eSections: TestSection[] = [
+  {
+    name: 'E2E Drawer Testing',
+    component: E2EDrawerTest,
   },
 ];
 
 export const DrawerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'N/A',
-    uwpStatus: 'N/A',
+    win32Status: 'Backlog',
+    uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'N/A',
-    androidStatus: 'Experimental',
+    macosStatus: 'Backlog',
+    androidStatus: 'Backlog',
   };
 
-  const description = 'A Drawer component using the Fluent Design System.  Currently only implemented on Android.';
+  const description = 'Drawer allows to put content in a drawer that slides in from different sides of the screen.';
 
-  return <Test name="Drawer Test" description={description} sections={drawerSections} status={status} />;
+  return <Test name="Drawer Test" description={description} sections={DrawerSections} status={status} e2eSections={e2eSections}></Test>;
 };

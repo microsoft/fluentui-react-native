@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /* @jsxFrag React.Fragment */
 import * as React from 'react';
 

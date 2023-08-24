@@ -66,6 +66,14 @@ export const attributeToEnumName = {
   [Attribute.ToggleState]: 'ToggleState',
 };
 
+export const androidAttributeToEnumName = {
+  [AndroidAttribute.AccessibilityLabel]: 'content-desc',
+  [AndroidAttribute.Class]: 'class',
+  [AndroidAttribute.Clickable]: 'clickable',
+  [AndroidAttribute.Checked]: 'checked',
+  [AndroidAttribute.Text]: 'text',
+};
+
 // eslint-disable-next-line @rnx-kit/no-const-enum
 export const enum AttributeValue {
   on = '1',

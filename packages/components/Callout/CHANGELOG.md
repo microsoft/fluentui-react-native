@@ -1,8 +1,170 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Mon, 10 Apr 2023 19:48:24 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Aug 2023 18:55:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.14
+
+Wed, 23 Aug 2023 18:55:24 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.14.7
+
+## 0.24.13
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.2
+- Bump @fluentui-react-native/interactive-hooks to v0.24.7
+- Bump @fluentui-react-native/tokens to v0.21.2
+- Bump @uifabricshared/foundation-compose to v1.14.6
+
+## 0.24.12
+
+Wed, 09 Aug 2023 22:02:13 GMT
+
+### Patches
+
+- [Callout][macOS] Support Border Tokens (saadnajmi2@gmail.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.24.6
+- Bump @uifabricshared/foundation-composable to v0.12.2
+- Bump @uifabricshared/foundation-compose to v1.14.5
+- Bump @uifabricshared/foundation-settings to v0.13.2
+
+## 0.24.11
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.5
+- Bump @uifabricshared/foundation-compose to v1.14.4
+
+## 0.24.10
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.4
+- Bump @uifabricshared/foundation-compose to v1.14.3
+
+## 0.24.9
+
+Sat, 15 Jul 2023 23:01:27 GMT
+
+### Patches
+
+- [macOS] [FRNCallout] Fix switching betwen `target` and `anchorRect` (nakambo@microsoft.com)
+
+## 0.24.8
+
+Fri, 14 Jul 2023 23:32:22 GMT
+
+### Patches
+
+- [Callout] Fix anchor not updating when going from `target` to `anchorRect` (email not defined)
+
+## 0.24.7
+
+Mon, 10 Jul 2023 23:39:34 GMT
+
+### Patches
+
+- [macOS] [Callout] Fixing anchor rect (nakambo@microsoft.com)
+
+## 0.24.6
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.5.1
+
+## 0.24.5
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.1
+- Bump @fluentui-react-native/interactive-hooks to v0.24.3
+- Bump @fluentui-react-native/tokens to v0.21.1
+- Bump @uifabricshared/foundation-compose to v1.14.2
+
+## 0.24.4
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.2
+
+## 0.24.3
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.1
+
+## 0.24.2
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.0
+- Bump @uifabricshared/foundation-composable to v0.12.1
+- Bump @uifabricshared/foundation-compose to v1.14.1
+- Bump @uifabricshared/foundation-settings to v0.13.1
+
+## 0.24.1
+
+Fri, 09 Jun 2023 21:35:03 GMT
+
+### Patches
+
+- [Callout] Implement setInitialFocus for macOS (saadnajmi2@gmail.com)
+
+## 0.24.0
+
+Mon, 05 Jun 2023 19:26:22 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.11.0
+- Bump @fluentui-react-native/component-cache to v1.5.0
+- Bump @fluentui-react-native/interactive-hooks to v0.23.0
+- Bump @fluentui-react-native/tokens to v0.21.0
+- Bump @uifabricshared/foundation-composable to v0.12.0
+- Bump @uifabricshared/foundation-compose to v1.14.0
+- Bump @uifabricshared/foundation-settings to v0.13.0
+
+## 0.23.14
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.31
+- Bump @fluentui-react-native/tokens to v0.20.16
+- Bump @uifabricshared/foundation-compose to v1.13.10
+
+## 0.23.13
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.30
+- Bump @fluentui-react-native/tokens to v0.20.15
+- Bump @uifabricshared/foundation-compose to v1.13.9
 
 ## 0.23.12
 

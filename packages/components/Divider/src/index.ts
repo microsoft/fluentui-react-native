@@ -1,5 +1,5 @@
 export { Divider } from './Divider';
-export {
+export type {
   DividerTokens,
   DividerProps,
   DividerSlotProps,

@@ -1,8 +1,106 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Tue, 21 Mar 2023 21:53:46 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.8
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.5
+
+## 0.6.7
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.4
+
+## 0.6.6
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.3
+
+## 0.6.5
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.2
+
+## 0.6.4
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.5.1
+
+## 0.6.3
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.1
+
+## 0.6.2
+
+Fri, 07 Jul 2023 19:45:35 GMT
+
+### Patches
+
+- CG: Fix nuget config (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.6.1
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.0
+
+## 0.6.0
+
+Mon, 05 Jun 2023 19:26:23 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.5.0
+- Bump @fluentui-react-native/framework to v0.10.0
+
+## 0.5.28
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.10
+
+## 0.5.27
+
+Wed, 17 May 2023 07:07:43 GMT
+
+### Patches
+
+- bump expander's windows min (tatianakapos@microsoft.com)
+
+## 0.5.26
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.9
 
 ## 0.5.25
 

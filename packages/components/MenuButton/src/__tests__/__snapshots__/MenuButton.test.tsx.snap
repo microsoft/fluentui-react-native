@@ -4,15 +4,32 @@ exports[`ContextualMenu default 1`] = `
 <View
   accessibilityLabel=""
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -33,7 +50,7 @@ exports[`ContextualMenu default 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -50,46 +67,53 @@ exports[`ContextualMenu default 1`] = `
 >
   <RNSVGSvgView
     align="xMidYMid"
-    bbHeight={16}
-    bbWidth={12}
-    color={4284572001}
+    bbHeight="16"
+    bbWidth="12"
+    color="#616161"
     focusable={false}
     height={16}
     meetOrSlice={0}
     minX={0}
     minY={0}
     style={
-      Array [
-        Object {
+      [
+        {
           "backgroundColor": "transparent",
           "borderWidth": 0,
         },
-        Object {
+        {
           "flex": 0,
           "height": 16,
           "width": 12,
         },
       ]
     }
-    tintColor={4284572001}
+    tintColor="#616161"
     vbHeight={6}
     vbWidth={11}
     width={12}
     xml="
-    <svg width=\\"12\\" height=\\"16\\" viewBox=\\"0 0 11 6\\" color=#616161>
+    <svg width="12" height="16" viewBox="0 0 11 6" color=#616161>
       <path fill='currentColor' d='M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z' />
     </svg>"
   >
-    <RNSVGGroup>
+    <RNSVGGroup
+      fill={
+        {
+          "payload": 4278190080,
+          "type": 0,
+        }
+      }
+    >
       <RNSVGPath
         d="M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z"
         fill={
-          Array [
-            2,
-          ]
+          {
+            "type": 2,
+          }
         }
         propList={
-          Array [
+          [
             "fill",
           ]
         }

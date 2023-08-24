@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This package contains all dependencies needed to run FURNs automated testing framework. This includes WebDriverIO + Appium dependencies.",
   "license": "MIT",
-  "private": "true",
+  "private": true,
   "scripts": {
     "build": "fluentui-scripts build"
   },
@@ -14,8 +14,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "3.10.3",
-    "@types/react": "^17.0.2",
-    "@types/react-native": "^0.68.0",
+    "@types/react": "^18.2.0",
     "@wdio/appium-service": "7.30.0",
     "@wdio/cli": "7.30.1",
     "@wdio/jasmine-framework": "7.26.0",
@@ -25,13 +24,12 @@
     "appium-windows-driver": "2.3.5",
     "ts-node": "^10.7.0",
     "typescript": "^4.9.4",
-    "webdriverio": "7.30.1",
-    "wdio-json-reporter": "3.0.0"
+    "wdio-json-reporter": "3.0.0",
+    "webdriverio": "7.30.1"
   },
   "resolutions": {
     "@appium/types": "0.9.1",
-    "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/parse-glob/glob-base/glob-parent": "5.1.2",
-    "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/braces": "^3.0.2",
+    "semver": "^7.5.2",
     "xml2js": "^0.5.0",
     "yaml": "^2.2.2"
   },

@@ -25,7 +25,7 @@ export const InputTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
+    iosStatus: 'Experimental',
     macosStatus: 'Backlog',
     androidStatus: 'Experimental',
   };

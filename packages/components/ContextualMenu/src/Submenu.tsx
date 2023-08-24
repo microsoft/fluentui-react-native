@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import * as React from 'react';
 import { View, ScrollView, Platform, I18nManager } from 'react-native';

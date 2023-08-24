@@ -1,4 +1,4 @@
-export { FontIconProps, SvgIconProps, RasterImageIconProps, IconProps, IconSourcesType } from './legacy/Icon.types';
+export type { FontIconProps, SvgIconProps, RasterImageIconProps, IconProps, IconSourcesType } from './legacy/Icon.types';
 export { Icon } from './legacy/Icon';
 export { createIconProps } from './legacy/useIconProps.hooks';
 

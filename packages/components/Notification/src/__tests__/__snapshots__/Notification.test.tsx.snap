@@ -3,7 +3,7 @@
 exports[`Notification component tests Notification default 1`] = `
 <View
   style={
-    Object {
+    {
       "alignSelf": "center",
       "backgroundColor": "#cfe4fa",
       "borderColor": "transparent",
@@ -13,7 +13,7 @@ exports[`Notification component tests Notification default 1`] = `
       "marginHorizontal": 16,
       "minHeight": 52,
       "shadowColor": "#000000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
@@ -35,7 +35,7 @@ exports[`Notification component tests Notification default 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignSelf": "center",
         "backgroundColor": "#cfe4fa",
         "borderColor": "transparent",
@@ -48,7 +48,7 @@ exports[`Notification component tests Notification default 1`] = `
         "padding": 16,
         "paddingVertical": 12,
         "shadowColor": "#000000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 8,
           "width": 0,
         },
@@ -61,7 +61,7 @@ exports[`Notification component tests Notification default 1`] = `
     <View
       accessible={true}
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "column",
           "justifyContent": "center",
@@ -72,7 +72,7 @@ exports[`Notification component tests Notification default 1`] = `
         ellipsizeMode="tail"
         numberOfLines={0}
         style={
-          Object {
+          {
             "alignSelf": "flex-start",
             "color": "#0f548c",
             "fontFamily": "System",
@@ -88,6 +88,23 @@ exports[`Notification component tests Notification default 1`] = `
     <View
       accessibilityLabel="Undo"
       accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       appearance="subtle"
       collapsable={false}
@@ -110,8 +127,8 @@ exports[`Notification component tests Notification default 1`] = `
       padding={0}
       paddingHorizontal={0}
       pressedColor={
-        Object {
-          "dynamic": Object {
+        {
+          "dynamic": {
             "dark": "#77B7F756",
             "highContrastDark": undefined,
             "highContrastLight": undefined,
@@ -120,7 +137,7 @@ exports[`Notification component tests Notification default 1`] = `
         }
       }
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "center",
           "backgroundColor": "transparent",
@@ -142,7 +159,7 @@ exports[`Notification component tests Notification default 1`] = `
         ellipsizeMode="tail"
         numberOfLines={0}
         style={
-          Object {
+          {
             "color": "#0f548c",
             "fontFamily": "System",
             "fontSize": 15,

@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { PressableProps, ViewStyle, ViewProps } from 'react-native';
 import { useWindowDimensions, View } from 'react-native';

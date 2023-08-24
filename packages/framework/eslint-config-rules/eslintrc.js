@@ -1,5 +1,8 @@
 module.exports = {
   extends: ['plugin:@rnx-kit/recommended'],
+  parserOptions: {
+    project: ['./tsconfig.json', 'apps/*/tsconfig.json', 'packages/*/*/tsconfig.json'],
+  },
   rules: {
     '@rnx-kit/no-const-enum': 'error',
     '@rnx-kit/no-export-all': ['error', { expand: 'external-only' }],
@@ -11,6 +14,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/consistent-type-exports': 'error',
     'no-prototype-builtins': 'off',
     'no-undef': 'off',
     'react/display-name': 'off',

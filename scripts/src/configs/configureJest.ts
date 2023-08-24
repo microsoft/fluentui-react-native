@@ -34,7 +34,7 @@ export function configureJest(customConfig?: object): object {
 
       // testRegex for which files to consider test files
       testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$',
-      testURL: 'http://localhost',
+      testEnvironmentOptions: { url: 'http://localhost' },
 
       verbose: false,
     },

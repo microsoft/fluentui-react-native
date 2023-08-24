@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Tue, 21 Mar 2023 21:53:45 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Aug 2023 20:14:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.5
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.24.3
+
+## 0.18.4
+
+Wed, 09 Aug 2023 22:02:13 GMT
+
+### Patches
+
+- Result of yarn (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.3.1
+- Bump @fluentui-react-native/theme to v0.9.1
+- Bump @fluentui-react-native/theme-tokens to v0.25.1
+- Bump @fluentui-react-native/theming-utils to v0.24.2
+
+## 0.18.3
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Fix tests (ruaraki@microsoft.com)
+
+## 0.18.2
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.24.1
+
+## 0.18.1
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/memo-cache to v1.3.0
+
+## 0.18.0
+
+Mon, 05 Jun 2023 19:26:26 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.25.0
+- Bump @fluentui-react-native/theme-types to v0.32.0
+- Bump @fluentui-react-native/theme to v0.9.0
+- Bump @fluentui-react-native/theming-utils to v0.24.0
+- Bump @fluentui-react-native/memo-cache to v1.2.0
+
+## 0.17.4
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.24.7
+- Bump @fluentui-react-native/theme-types to v0.31.2
+- Bump @fluentui-react-native/theme to v0.8.5
+- Bump @fluentui-react-native/theming-utils to v0.23.12
+
+## 0.17.3
+
+Wed, 03 May 2023 07:08:51 GMT
+
+### Patches
+
+- Update design-tokens package to 0.47.0 (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-tokens to v0.24.6
+- Bump @fluentui-react-native/theme-types to v0.31.1
+- Bump @fluentui-react-native/theme to v0.8.4
+- Bump @fluentui-react-native/theming-utils to v0.23.11
 
 ## 0.17.2
 

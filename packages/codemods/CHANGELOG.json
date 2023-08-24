@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/codemods",
   "entries": [
     {
+      "date": "Mon, 12 Jun 2023 17:46:42 GMT",
+      "tag": "@fluentui-react-native/codemods_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/codemods",
+            "commit": "60d243e2af9f727a0265bf6a0aed49e687305f77",
+            "comment": "Changes for treeshake to work"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 05 Jun 2023 19:26:22 GMT",
+      "tag": "@fluentui-react-native/codemods_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/codemods",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:57 GMT",
       "tag": "@fluentui-react-native/codemods_v0.3.7",
       "version": "0.3.7",

@@ -103,3 +103,13 @@ apps/*/.vscode/.react/
 
 # Ignore Gradle build output directory
 **/android/**/build
+
+# Yarn
+
+.pnp.*
+**/.yarn/*
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/sdks
+!**/.yarn/versions

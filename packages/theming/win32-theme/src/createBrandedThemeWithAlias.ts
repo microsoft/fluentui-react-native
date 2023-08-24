@@ -59,7 +59,7 @@ function getAppColors(primaryColor: ColorValue) {
       return globalTokens.color.excel;
     } else if (primaryColor.toLowerCase() === '#d83b01') {
       return globalTokens.color.office;
-    } else if (primaryColor.toLowerCase() === '#80397b') {
+    } else if (primaryColor.toLowerCase() === '#80397b' || primaryColor.toLowerCase() === '#7719aa') {
       return globalTokens.color.oneNote;
     } else if (primaryColor.toLowerCase() === '#0078d4') {
       return globalTokens.color.outlook;
