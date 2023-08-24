@@ -6,6 +6,13 @@ import type { TabProps, TabTokens } from './Tab.types';
 import type { TabListContextData } from '../TabList/TabList.types';
 
 /**
+ * On win32, when a vertical tablist initially lays out, we sometimes get odd, large height values that cause the
+ * indicator to noticably take up the entire screen height before getting a correct layout value that makes sense. This is
+ * an arbitrary limit we'll set to keep the indicator from looking weird.
+ */
+const RENDERING_HEIGHT_LIMIT = 20_000;
+
+/**
  * This hook handles the logic on the tab side to correctly style and animate the TabListAnimatedIndicator.
  *
  * We save the layout information (width, height, x, y) of the Tab component using a LayoutEventHandler attached to the
@@ -31,7 +38,8 @@ export function useTabAnimation(props: TabProps, context: TabListContextData, to
         e?.nativeEvent?.layout &&
         animatedIndicatorState?.tablistLayout &&
         animatedIndicatorState.tablistLayout.width > 0 &&
-        e.nativeEvent.layout.height <= animatedIndicatorState?.tablistLayout.height
+        e.nativeEvent.layout.height <= animatedIndicatorState.tablistLayout.height &&
+        e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT
       ) {
         let width: number, height: number;
         // we can calculate the dimensions of the indicator using token values we can access via the compressable framework
