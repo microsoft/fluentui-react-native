@@ -1,10 +1,4 @@
 steps:
-  - task: CmdLine@1
-    displayName: 'Seeing what the APPIUM_HOME env variable is set to'
-    inputs:
-      arguments: 'echo %APPIUM_HOME%'
-      workingFolder: 'apps/win32'
-
   - script: |
       yarn bundle
     workingDirectory: apps/win32
@@ -30,6 +24,12 @@ steps:
         Write-Host "##vso[task.setvariable variable=task.Build.status]Success"
     condition: succeeded()
     displayName: 'Create success build variable'
+
+  - script: |
+      yarn appium driver install --source=npm appium-windows-driver
+    workingDirectory: apps/E2E
+    displayName: 'Install appium driver'
+    condition: succeeded()
 
   - script: |
       yarn e2etest:win32
