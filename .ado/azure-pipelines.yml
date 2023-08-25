@@ -201,6 +201,11 @@ jobs:
       # yarn and minimal build to get set up
       - template: templates/setup-repo-min-build.yml
 
+      - script: |
+          echo %APPIUM_HOME%
+        workingDirectory: apps/win32
+        displayName: 'Seeing what the APPIUM_HOME env variable is set to'
+
       # bundle win32 and do end to end tests
       - template: templates/e2e-testing-win32.yml
 
