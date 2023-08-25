@@ -1,8 +1,9 @@
 steps:
-  - script: |
-      echo %APPIUM_HOME%
-    workingDirectory: apps/win32
+  - task: CmdLine@1
     displayName: 'Seeing what the APPIUM_HOME env variable is set to'
+    inputs:
+      arguments: 'echo %APPIUM_HOME%'
+      workingFolder: 'apps/win32'
 
   - script: |
       yarn bundle
