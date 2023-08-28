@@ -5759,8 +5759,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/metro-config@npm:^1.3.1":
-  version: 1.3.8
-  resolution: "@rnx-kit/metro-config@npm:1.3.8"
+  version: 1.3.9
+  resolution: "@rnx-kit/metro-config@npm:1.3.9"
   dependencies:
     "@rnx-kit/babel-preset-metro-react-native": ^1.1.4
     "@rnx-kit/console": ^1.0.0
@@ -5779,7 +5779,7 @@ __metadata:
       optional: true
     metro-resolver:
       optional: true
-  checksum: b0189d0562d07997935baf59b076543340be90ecfea255189be2dae7e83e30e1f74f801f168e66d9545b7998918c7d1b3ef84c0d396a25fe4b1c3187e80a79ea
+  checksum: ebb3cd45842af04c7114d1287291e4c830ec3b0656f1d20ff847333d1858747cdce63d185d9cebe0c4128c9e6d4ee7881beca91f1b3ca6e9fd9fc0d5a1391723
   languageName: node
   linkType: hard
 
