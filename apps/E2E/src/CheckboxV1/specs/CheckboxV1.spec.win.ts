@@ -1,4 +1,4 @@
-import { CHECKBOX_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
+import { CHECKBOX_A11Y_ROLE, Keys, Attribute, AttributeValue } from '../../common/consts';
 import { CHECKBOXV1_TEST_COMPONENT_LABEL, CHECKBOXV1_ACCESSIBILITY_LABEL } from '../consts';
 import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 
@@ -56,7 +56,11 @@ describe('CheckboxV1 Accessibility Testing', () => {
 
   it('Set "required" prop. Validate "IsRequiredForForm" element attribute is true.', async () => {
     await expect(
-      await CheckboxV1PageObject.compareAttribute(CheckboxV1PageObject._secondaryComponent, Attribute.IsRequiredForForm, 'True'),
+      await CheckboxV1PageObject.compareAttribute(
+        CheckboxV1PageObject._secondaryComponent,
+        Attribute.IsRequiredForForm,
+        AttributeValue.true,
+      ),
     ).toBeTruthy();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
@@ -64,7 +68,11 @@ describe('CheckboxV1 Accessibility Testing', () => {
 
   it('Do NOT set "required" prop. Validate "IsRequiredForForm" element attribute is false.', async () => {
     await expect(
-      await CheckboxV1PageObject.compareAttribute(CheckboxV1PageObject._primaryComponent, Attribute.IsRequiredForForm, 'False'),
+      await CheckboxV1PageObject.compareAttribute(
+        CheckboxV1PageObject._primaryComponent,
+        Attribute.IsRequiredForForm,
+        AttributeValue.false,
+      ),
     ).toBeTruthy();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
