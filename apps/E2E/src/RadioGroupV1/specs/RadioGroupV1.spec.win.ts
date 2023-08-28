@@ -99,6 +99,22 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
 
     expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
+
+  it('Set "required" prop on RadioGroup. Validate "IsRequiredForForm" element attribute is true.', async () => {
+    await expect(
+      await RadioGroupV1PageObject.compareAttribute(RadioGroupV1PageObject._secondaryComponent, Attribute.IsRequiredForForm, 'True'),
+    ).toBeTruthy();
+
+    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Do NOT set "required" prop on RadioGroup. Validate "IsRequiredForForm" element attribute is false.', async () => {
+    await expect(
+      await RadioGroupV1PageObject.compareAttribute(RadioGroupV1PageObject._primaryComponent, Attribute.IsRequiredForForm, 'False'),
+    ).toBeTruthy();
+
+    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+  });
 });
 
 describe('RadioGroupV1 Functional Testing', () => {

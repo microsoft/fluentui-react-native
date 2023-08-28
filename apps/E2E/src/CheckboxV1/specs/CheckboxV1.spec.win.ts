@@ -53,6 +53,22 @@ describe('CheckboxV1 Accessibility Testing', () => {
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
+
+  it('Set "required" prop. Validate "IsRequiredForForm" element attribute is true.', async () => {
+    await expect(
+      await CheckboxV1PageObject.compareAttribute(CheckboxV1PageObject._secondaryComponent, Attribute.IsRequiredForForm, 'True'),
+    ).toBeTruthy();
+
+    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Do NOT set "required" prop. Validate "IsRequiredForForm" element attribute is false.', async () => {
+    await expect(
+      await CheckboxV1PageObject.compareAttribute(CheckboxV1PageObject._primaryComponent, Attribute.IsRequiredForForm, 'False'),
+    ).toBeTruthy();
+
+    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
+  });
 });
 
 describe('CheckboxV1 Functional Testing', () => {
