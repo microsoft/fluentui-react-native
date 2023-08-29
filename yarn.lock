@@ -22,7 +22,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/base-driver@npm:^9.0.0, @appium/base-driver@npm:^9.1.0, @appium/base-driver@npm:^9.3.1":
+"@appium/base-driver@npm:^9.0.0, @appium/base-driver@npm:^9.1.0":
   version: 9.3.1
   resolution: "@appium/base-driver@npm:9.3.1"
   dependencies:
@@ -87,16 +87,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/base-plugin@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "@appium/base-plugin@npm:2.2.1"
-  dependencies:
-    "@appium/base-driver": ^9.3.1
-    "@appium/support": ^3.1.5
-  checksum: e3d6d8bbfab1f78e6847d560fa3d6f459664cf596b58bd6817ea1cb55c1bea6c84a78ace23ab8537eb76afa439a3b554585aef58fe67441afab0e25c9f0043ef
-  languageName: node
-  linkType: hard
-
 "@appium/base-plugin@npm:^2.2.20":
   version: 2.2.20
   resolution: "@appium/base-plugin@npm:2.2.20"
@@ -104,44 +94,6 @@ __metadata:
     "@appium/base-driver": ^9.3.20
     "@appium/support": ^4.1.6
   checksum: bee2f5c933a2a1c68a85d3f616351e754c85eff9081155276d494051b1b58fec96d906bfcf6f14da1afd5ab8e22268a504d28259ae52a7b84d96392fbc16ad09
-  languageName: node
-  linkType: hard
-
-"@appium/docutils@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "@appium/docutils@npm:0.2.1"
-  dependencies:
-    "@appium/support": ^3.1.5
-    "@appium/tsconfig": ^0.2.4
-    "@appium/typedoc-plugin-appium": ^0.4.0
-    "@sliphua/lilconfig-ts-loader": 3.2.2
-    chalk: 4.1.2
-    consola: 2.15.3
-    diff: 5.1.0
-    figures: 3.2.0
-    find-up: 5.0.0
-    glob: 8.1.0
-    json5: 2.2.3
-    lilconfig: 2.0.6
-    lodash: 4.17.21
-    log-symbols: 4.1.0
-    pkg-dir: 5.0.0
-    pluralize: 8.0.0
-    read-pkg: 5.2.0
-    semver: 7.3.8
-    source-map-support: 0.5.21
-    teen_process: 2.0.2
-    type-fest: 3.5.6
-    typedoc: 0.23.24
-    typedoc-plugin-markdown: 3.14.0
-    typedoc-plugin-resolve-crossmodule-references: 0.3.3
-    typescript: 4.7.4
-    yaml: 2.2.1
-    yargs: 17.6.2
-    yargs-parser: 21.1.1
-  bin:
-    appium-docs: build/lib/cli/index.js
-  checksum: 776fc705d5fd84fba35d5e850ee0fce9607cf1132b41914e2003c97755e75f7fd0d66025f6d77831accc8d89ad2f2745f71ad4c71a86cee94f63b6ed2a33ee22
   languageName: node
   linkType: hard
 
@@ -295,24 +247,6 @@ __metadata:
   dependencies:
     "@tsconfig/node14": 1.0.3
   checksum: 086de7240d1d1c85ecd678af5436bbf682c499baee92f2b60a74b104a1688c736fa3ff77c5819dc777bc87a98563cfda83214fd58eea97237479a1a7bd3e4bbb
-  languageName: node
-  linkType: hard
-
-"@appium/typedoc-plugin-appium@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@appium/typedoc-plugin-appium@npm:0.4.0"
-  dependencies:
-    handlebars: 4.7.7
-    lodash: 4.17.21
-    pluralize: 8.0.0
-    type-fest: 3.5.6
-  peerDependencies:
-    appium: ^2.0.0-beta.48
-    typedoc: ^0.23.14
-    typedoc-plugin-markdown: ^3.14.0
-    typedoc-plugin-resolve-crossmodule-references: ~0.3.3
-    typescript: ~4.7.0
-  checksum: 7f19bf79b74138757e3f6aedaa4aeed29eb020e48f4429b45ca39706da0921804099d0c572adc4d65b36f308f6198bf3a4ed7d8d545b2c339cc0724331a402ef
   languageName: node
   linkType: hard
 
@@ -3811,17 +3745,7 @@ __metadata:
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
     "@rnx-kit/metro-config": ^1.3.1
-    "@types/jasmine": 3.10.3
     "@types/react": ^18.2.0
-    "@wdio/allure-reporter": 7.30.1
-    "@wdio/appium-service": 7.30.0
-    "@wdio/cli": 7.30.1
-    "@wdio/jasmine-framework": 7.26.0
-    "@wdio/local-runner": 7.30.1
-    "@wdio/spec-reporter": 7.29.1
-    allure-commandline: 2.13.0
-    appium: 2.0.0-beta.55
-    appium-windows-driver: 2.3.5
     metro-config: ^0.73.7
     metro-react-native-babel-preset: ^0.73.7
     react: 18.2.0
@@ -3833,7 +3757,6 @@ __metadata:
     ts-node: ^8.10.1
     tslib: ^2.3.1
     typescript: 4.9.4
-    webdriverio: 7.30.1
   languageName: unknown
   linkType: soft
 
@@ -7596,22 +7519,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wdio/allure-reporter@npm:7.30.1":
-  version: 7.30.1
-  resolution: "@wdio/allure-reporter@npm:7.30.1"
-  dependencies:
-    "@types/node": ^18.0.0
-    "@wdio/reporter": 7.29.1
-    "@wdio/types": 7.26.0
-    allure-js-commons: ^1.3.2
-    csv-stringify: ^6.0.4
-    strip-ansi: ^6.0.0
-  peerDependencies:
-    "@wdio/cli": ^7.0.0
-  checksum: 2a638fd30a288d32be93c482107ef1fa93d2618bd2d335a4e458eb8ee168a28d0941727428ada603c98835659a8961d2fae1565a47bff69a4d814717513cb149
-  languageName: node
-  linkType: hard
-
 "@wdio/appium-service@npm:7.30.0":
   version: 7.30.0
   resolution: "@wdio/appium-service@npm:7.30.0"
@@ -8031,29 +7938,6 @@ __metadata:
     json-schema-traverse: ^0.4.1
     uri-js: ^4.2.2
   checksum: 874972efe5c4202ab0a68379481fbd3d1b5d0a7bd6d3cc21d40d3536ebff3352a2a1fabb632d4fd2cc7fe4cbdcd5ed6782084c9bbf7f32a1536d18f9da5007d4
-  languageName: node
-  linkType: hard
-
-"allure-commandline@npm:2.13.0":
-  version: 2.13.0
-  resolution: "allure-commandline@npm:2.13.0"
-  bin:
-    allure: bin/allure
-  checksum: a76b3d3ea6c04f2e33cc305fb35a963e5097651816954ebaf76d4dc773ed5b2533a18c904598181357333cbeca5c4b6ad04a8599cf8f5c58c7ab27706b389325
-  languageName: node
-  linkType: hard
-
-"allure-js-commons@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "allure-js-commons@npm:1.3.2"
-  dependencies:
-    file-type: ^7.7.1
-    fs-extra: ^6.0.1
-    js2xmlparser: ^3.0.0
-    mime: ^2.3.1
-    object-assign: ^4.1.1
-    uuid: ^3.0.0
-  checksum: 9e7433579e061dc4fa0e0b826f22457c96554a76453b663c0378005c312dbce43d592a7d64b79384ccb45fd21d3ff32fa4069be37651b7dc89da4e8d6499e5d0
   languageName: node
   linkType: hard
 
@@ -8489,25 +8373,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-windows-driver@npm:2.3.5":
-  version: 2.3.5
-  resolution: "appium-windows-driver@npm:2.3.5"
-  dependencies:
-    "@babel/runtime": ^7.0.0
-    asyncbox: ^2.3.1
-    bluebird: ^3.5.1
-    es6-error: ^4.1.1
-    fancy-log: ^2.0.0
-    lodash: ^4.6.1
-    portscanner: 2.2.0
-    source-map-support: ^0.5.5
-    teen_process: ^2.0.1
-  peerDependencies:
-    appium: ^2.0.0-beta.40
-  checksum: e25612aeca26e6e64d5c53c0a88a5af5bae8e8f4e35bac757fb684b6ea3850b42215bfe2f14ba736b10b6e3bfe15f65775a7cfcbec3320f5806e61cce1df5dbd
-  languageName: node
-  linkType: hard
-
 "appium-windows-driver@npm:^2.12.0":
   version: 2.12.2
   resolution: "appium-windows-driver@npm:2.12.2"
@@ -8594,53 +8459,6 @@ __metadata:
   peerDependencies:
     appium: ^2.0.0
   checksum: b22d54e4d0fa25bf4d356c49f371cd17d2697ff5ccee59ea9cb2c3bb2990b9b05dfedb577b2eed01dee9f06d5485a7f98782ae77dcacc353626b4e638999b0cf
-  languageName: node
-  linkType: hard
-
-"appium@npm:2.0.0-beta.55":
-  version: 2.0.0-beta.55
-  resolution: "appium@npm:2.0.0-beta.55"
-  dependencies:
-    "@appium/base-driver": ^9.3.1
-    "@appium/base-plugin": ^2.2.1
-    "@appium/docutils": ^0.2.1
-    "@appium/schema": ^0.2.4
-    "@appium/support": ^3.1.5
-    "@appium/types": ^0.9.1
-    "@sidvind/better-ajv-errors": 2.1.0
-    "@types/argparse": 2.0.10
-    "@types/bluebird": 3.5.38
-    "@types/fancy-log": 2.0.0
-    "@types/semver": 7.3.13
-    "@types/teen_process": 2.0.0
-    "@types/wrap-ansi": 3.0.0
-    ajv: 8.12.0
-    ajv-formats: 2.1.1
-    argparse: 2.0.1
-    async-lock: 1.4.0
-    asyncbox: 2.9.4
-    axios: 1.2.3
-    bluebird: 3.7.2
-    cross-env: 7.0.3
-    find-up: 5.0.0
-    glob: 8.1.0
-    lilconfig: 2.0.6
-    lodash: 4.17.21
-    longjohn: 0.2.12
-    npmlog: 7.0.1
-    ora: 5.4.1
-    package-changed: 2.0.0
-    resolve-from: 5.0.0
-    semver: 7.3.8
-    source-map-support: 0.5.21
-    teen_process: 2.0.2
-    type-fest: 3.5.6
-    winston: 3.8.2
-    wrap-ansi: 7.0.0
-    yaml: 2.2.1
-  bin:
-    appium: index.js
-  checksum: 8e8d2ae7a096051707c089f898c42e8911f4c1176583f5e55bdffb30bc4002a5ab730e9143fb363442e189c918a62be219780beb128ea01c5775370abc23b4c4
   languageName: node
   linkType: hard
 
@@ -10784,13 +10602,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csv-stringify@npm:^6.0.4":
-  version: 6.2.4
-  resolution: "csv-stringify@npm:6.2.4"
-  checksum: 12d8ab299735ad6c1ca90b37d900d66ef0fcc4289f565df7c67cbeed33f2de56daeae19094a215aa7d3bde8877c0a105f1aeb531e4f582d7561f213b0680c99d
-  languageName: node
-  linkType: hard
-
 "d@npm:1, d@npm:^1.0.1":
   version: 1.0.1
   resolution: "d@npm:1.0.1"
@@ -12546,13 +12357,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-type@npm:^7.7.1":
-  version: 7.7.1
-  resolution: "file-type@npm:7.7.1"
-  checksum: 1c4f8cb2bd1f8ccde330da3b5ccd56e9cbd701245c147433d74778cc3286abaabf3d0fcd19b9f821caccbd11af825ec9b780cfbd2ad61e644ffcba1f59b1426d
-  languageName: node
-  linkType: hard
-
 "file-uri-to-path@npm:1.0.0":
   version: 1.0.0
   resolution: "file-uri-to-path@npm:1.0.0"
@@ -12822,17 +12626,6 @@ __metadata:
     jsonfile: ^6.0.1
     universalify: ^2.0.0
   checksum: dc94ab37096f813cc3ca12f0f1b5ad6744dfed9ed21e953d72530d103cea193c2f81584a39e9dee1bea36de5ee66805678c0dddc048e8af1427ac19c00fffc50
-  languageName: node
-  linkType: hard
-
-"fs-extra@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "fs-extra@npm:6.0.1"
-  dependencies:
-    graceful-fs: ^4.1.2
-    jsonfile: ^4.0.0
-    universalify: ^0.1.0
-  checksum: 133dbd765e05c1cdaaf723308e00ffbe746da5ad516ad890ae2da2a538982c1175371055c778fbe68d1fca1da9ed4003ba55c4a14e070372eabf6a7c48062759
   languageName: node
   linkType: hard
 
@@ -13396,24 +13189,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"handlebars@npm:4.7.7, handlebars@npm:^4.7.7":
-  version: 4.7.7
-  resolution: "handlebars@npm:4.7.7"
-  dependencies:
-    minimist: ^1.2.5
-    neo-async: ^2.6.0
-    source-map: ^0.6.1
-    uglify-js: ^3.1.4
-    wordwrap: ^1.0.0
-  dependenciesMeta:
-    uglify-js:
-      optional: true
-  bin:
-    handlebars: bin/handlebars
-  checksum: 1e79a43f5e18d15742977cb987923eab3e2a8f44f2d9d340982bcb69e1735ed049226e534d7c1074eaddaf37e4fb4f471a8adb71cddd5bc8cf3f894241df5cee
-  languageName: node
-  linkType: hard
-
 "handlebars@npm:4.7.8":
   version: 4.7.8
   resolution: "handlebars@npm:4.7.8"
@@ -13429,6 +13204,24 @@ __metadata:
   bin:
     handlebars: bin/handlebars
   checksum: 00e68bb5c183fd7b8b63322e6234b5ac8fbb960d712cb3f25587d559c2951d9642df83c04a1172c918c41bcfc81bfbd7a7718bbce93b893e0135fc99edea93ff
+  languageName: node
+  linkType: hard
+
+"handlebars@npm:^4.7.7":
+  version: 4.7.7
+  resolution: "handlebars@npm:4.7.7"
+  dependencies:
+    minimist: ^1.2.5
+    neo-async: ^2.6.0
+    source-map: ^0.6.1
+    uglify-js: ^3.1.4
+    wordwrap: ^1.0.0
+  dependenciesMeta:
+    uglify-js:
+      optional: true
+  bin:
+    handlebars: bin/handlebars
+  checksum: 1e79a43f5e18d15742977cb987923eab3e2a8f44f2d9d340982bcb69e1735ed049226e534d7c1074eaddaf37e4fb4f471a8adb71cddd5bc8cf3f894241df5cee
   languageName: node
   linkType: hard
 
@@ -15429,15 +15222,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js2xmlparser@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "js2xmlparser@npm:3.0.0"
-  dependencies:
-    xmlcreate: ^1.0.1
-  checksum: 4e0ff6b6951192cb3bc2d06425b14785f9efc3b5e36c36cc7c67640004eaa07b508c0dd4d3e26bebe59dac7bd04dfe2774ca8b1a1ab00ef187d554794f0ae9c3
-  languageName: node
-  linkType: hard
-
 "jsc-android@npm:^250231.0.0":
   version: 250231.0.0
   resolution: "jsc-android@npm:250231.0.0"
@@ -15856,13 +15640,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lilconfig@npm:2.0.6":
-  version: 2.0.6
-  resolution: "lilconfig@npm:2.0.6"
-  checksum: 40a3cd72f103b1be5975f2ac1850810b61d4053e20ab09be8d3aeddfe042187e1ba70b4651a7e70f95efa1642e7dc8b2ae395b317b7d7753b241b43cef7c0f7d
-  languageName: node
-  linkType: hard
-
 "lilconfig@npm:2.1.0":
   version: 2.1.0
   resolution: "lilconfig@npm:2.1.0"
@@ -16167,15 +15944,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"longjohn@npm:0.2.12":
-  version: 0.2.12
-  resolution: "longjohn@npm:0.2.12"
-  dependencies:
-    source-map-support: 0.3.2 - 1.0.0
-  checksum: 6345ed1d21b44849ef0a98eae09bdc579727952297280552129f6cb60f819274d9bb2c42fa39410d43b862e9fdf39b2f96720727d9c6d02bf1d8782d57427630
-  languageName: node
-  linkType: hard
-
 "loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
@@ -16395,7 +16163,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^4.0.12, marked@npm:^4.1.0, marked@npm:^4.2.5":
+"marked@npm:^4.0.12, marked@npm:^4.1.0":
   version: 4.2.12
   resolution: "marked@npm:4.2.12"
   bin:
@@ -16880,7 +16648,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime@npm:^2.3.1, mime@npm:^2.4.1":
+"mime@npm:^2.4.1":
   version: 2.6.0
   resolution: "mime@npm:2.6.0"
   bin:
@@ -16935,7 +16703,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^5.0.1, minimatch@npm:^5.1.0, minimatch@npm:^5.1.2":
+"minimatch@npm:^5.0.1, minimatch@npm:^5.1.0":
   version: 5.1.6
   resolution: "minimatch@npm:5.1.6"
   dependencies:
@@ -17967,17 +17735,6 @@ __metadata:
   version: 2.2.0
   resolution: "p-try@npm:2.2.0"
   checksum: f8a8e9a7693659383f06aec604ad5ead237c7a261c18048a6e1b5b85a5f8a067e469aa24f5bc009b991ea3b058a87f5065ef4176793a200d4917349881216cae
-  languageName: node
-  linkType: hard
-
-"package-changed@npm:2.0.0":
-  version: 2.0.0
-  resolution: "package-changed@npm:2.0.0"
-  dependencies:
-    commander: ^6.2.0
-  bin:
-    package-changed: bin/package-changed.js
-  checksum: 169997103bda0151f1e2752f1a510e11d4f3392631e27264df71383d521e0b18f873a65b1b3b9ae106c900b2d3e8aa4fa597f7bba45767db2a3909aad6882646
   languageName: node
   linkType: hard
 
@@ -20052,17 +19809,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:^0.12.1":
-  version: 0.12.1
-  resolution: "shiki@npm:0.12.1"
-  dependencies:
-    jsonc-parser: ^3.2.0
-    vscode-oniguruma: ^1.7.0
-    vscode-textmate: ^8.0.0
-  checksum: a5d78a79d282f5c5168786980c66e82f075e91fa015097456486624fc5775688d685ad9b1972b0617d7f1ef50927d21b61dca476247a6f6c6b7042046e89a979
-  languageName: node
-  linkType: hard
-
 "shiki@npm:^0.14.1":
   version: 0.14.3
   resolution: "shiki@npm:0.14.3"
@@ -20207,16 +19953,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-support@npm:0.3.2 - 1.0.0, source-map-support@npm:0.5.21, source-map-support@npm:^0.5.16, source-map-support@npm:^0.5.17, source-map-support@npm:^0.5.19, source-map-support@npm:^0.5.5, source-map-support@npm:^0.x, source-map-support@npm:~0.5.20":
-  version: 0.5.21
-  resolution: "source-map-support@npm:0.5.21"
-  dependencies:
-    buffer-from: ^1.0.0
-    source-map: ^0.6.0
-  checksum: 43e98d700d79af1d36f859bdb7318e601dfc918c7ba2e98456118ebc4c4872b327773e5a1df09b0524e9e5063bb18f0934538eace60cca2710d1fa687645d137
-  languageName: node
-  linkType: hard
-
 "source-map-support@npm:0.5.13":
   version: 0.5.13
   resolution: "source-map-support@npm:0.5.13"
@@ -20224,6 +19960,16 @@ __metadata:
     buffer-from: ^1.0.0
     source-map: ^0.6.0
   checksum: 933550047b6c1a2328599a21d8b7666507427c0f5ef5eaadd56b5da0fd9505e239053c66fe181bf1df469a3b7af9d775778eee283cbb7ae16b902ddc09e93a97
+  languageName: node
+  linkType: hard
+
+"source-map-support@npm:0.5.21, source-map-support@npm:^0.5.16, source-map-support@npm:^0.5.17, source-map-support@npm:^0.5.19, source-map-support@npm:^0.5.5, source-map-support@npm:^0.x, source-map-support@npm:~0.5.20":
+  version: 0.5.21
+  resolution: "source-map-support@npm:0.5.21"
+  dependencies:
+    buffer-from: ^1.0.0
+    source-map: ^0.6.0
+  checksum: 43e98d700d79af1d36f859bdb7318e601dfc918c7ba2e98456118ebc4c4872b327773e5a1df09b0524e9e5063bb18f0934538eace60cca2710d1fa687645d137
   languageName: node
   linkType: hard
 
@@ -21262,22 +21008,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:0.23.24":
-  version: 0.23.24
-  resolution: "typedoc@npm:0.23.24"
-  dependencies:
-    lunr: ^2.3.9
-    marked: ^4.2.5
-    minimatch: ^5.1.2
-    shiki: ^0.12.1
-  peerDependencies:
-    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x
-  bin:
-    typedoc: bin/typedoc
-  checksum: b04f9afcba9a38d35631b08ca345f52700f9138f59b9729d7bfecf127c2a75dd6a053594db68f3141e4d7e63b701ffa5421cbdeb95f86b254257e05e240f4da0
-  languageName: node
-  linkType: hard
-
 "typedoc@npm:0.23.28":
   version: 0.23.28
   resolution: "typedoc@npm:0.23.28"
@@ -21291,16 +21021,6 @@ __metadata:
   bin:
     typedoc: bin/typedoc
   checksum: 40eb4e207aac1b734e09400cf03f543642cc7b11000895198dd5a0d3166315759ccf4ac30a2915153597c5c186101c72bac2f1fc12b428184a9274d3a0e44c5e
-  languageName: node
-  linkType: hard
-
-"typescript@npm:4.7.4":
-  version: 4.7.4
-  resolution: "typescript@npm:4.7.4"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 5750181b1cd7e6482c4195825547e70f944114fb47e58e4aa7553e62f11b3f3173766aef9c281783edfd881f7b8299cf35e3ca8caebe73d8464528c907a164df
   languageName: node
   linkType: hard
 
@@ -21628,7 +21348,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^3.0.0, uuid@npm:^3.3.2":
+"uuid@npm:^3.3.2":
   version: 3.4.0
   resolution: "uuid@npm:3.4.0"
   bin:
@@ -22021,25 +21741,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winston@npm:3.8.2":
-  version: 3.8.2
-  resolution: "winston@npm:3.8.2"
-  dependencies:
-    "@colors/colors": 1.5.0
-    "@dabh/diagnostics": ^2.0.2
-    async: ^3.2.3
-    is-stream: ^2.0.0
-    logform: ^2.4.0
-    one-time: ^1.0.0
-    readable-stream: ^3.4.0
-    safe-stable-stringify: ^2.3.1
-    stack-trace: 0.0.x
-    triple-beam: ^1.3.0
-    winston-transport: ^4.5.0
-  checksum: f7b901798b92ab9e93c850110bf6e98500e9a0e762b62dab410cf928b2a4145533dfa6d3d2b24f7bf0dc94b53808d5bd28aaaeff9a4b43b89ea4c798cce308ea
-  languageName: node
-  linkType: hard
-
 "wordwrap@npm:^1.0.0":
   version: 1.0.0
   resolution: "wordwrap@npm:1.0.0"
@@ -22316,13 +22017,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xmlcreate@npm:^1.0.1":
-  version: 1.0.2
-  resolution: "xmlcreate@npm:1.0.2"
-  checksum: 2fbe0303fa8d1e9e401e9137a6e6b32f037151bc25a5a413cf97c7cb197b47d21adb518eb3f9ee59f248851144491deb04d22a962acfeff700dafad109e9ecce
-  languageName: node
-  linkType: hard
-
 "xpath@npm:^0.0.27":
   version: 0.0.27
   resolution: "xpath@npm:0.0.27"
@@ -22407,21 +22101,6 @@ __metadata:
   version: 20.2.9
   resolution: "yargs-parser@npm:20.2.9"
   checksum: 8bb69015f2b0ff9e17b2c8e6bfe224ab463dd00ca211eece72a4cd8a906224d2703fb8a326d36fdd0e68701e201b2a60ed7cf81ce0fd9b3799f9fe7745977ae3
-  languageName: node
-  linkType: hard
-
-"yargs@npm:17.6.2":
-  version: 17.6.2
-  resolution: "yargs@npm:17.6.2"
-  dependencies:
-    cliui: ^8.0.1
-    escalade: ^3.1.1
-    get-caller-file: ^2.0.5
-    require-directory: ^2.1.1
-    string-width: ^4.2.3
-    y18n: ^5.0.5
-    yargs-parser: ^21.1.1
-  checksum: 47da1b0d854fa16d45a3ded57b716b013b2179022352a5f7467409da5a04a1eef5b3b3d97a2dfc13e8bbe5f2ffc0afe3bc6a4a72f8254e60f5a4bd7947138643
   languageName: node
   linkType: hard
 
