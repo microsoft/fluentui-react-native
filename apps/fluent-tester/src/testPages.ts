@@ -6,12 +6,13 @@ import { ButtonTest } from './TestComponents/Button';
 import { CalloutTest } from './TestComponents/Callout';
 import { CheckboxLegacyTest } from './TestComponents/CheckboxLegacy';
 import { CheckboxV1Test } from './TestComponents/CheckboxV1';
+import { ChipTest } from './TestComponents/Chip';
 import { ColorTokensTest } from './TestComponents/ColorTokens';
 import { ContextualMenuTest } from './TestComponents/ContextualMenu';
 import { CornerRadiusTokensTest } from './TestComponents/CornerRadius';
 import { DividerTest } from './TestComponents/Divider';
+import { DrawerTest } from './TestComponents/Drawer';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
-// import { DrawerTest, Constants.HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, Constants.HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { FocusTrapTest } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest } from './TestComponents/FocusZone';
@@ -37,11 +38,13 @@ import { SpinnerTest } from './TestComponents/Spinner';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
 import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
+import { TabListTest } from './TestComponents/TabList/TabListTest';
 import { TabsLegacyTest } from './TestComponents/TabsLegacy';
 import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
+import { VibrancyViewTest } from './TestComponents/VibrancyView';
 import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
@@ -94,6 +97,12 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
   },
   {
+    name: 'Chip',
+    component: ChipTest,
+    testPageButton: Constants.HOMEPAGE_CHIP_BUTTON,
+    platforms: ['android', 'ios'],
+  },
+  {
     name: 'Color Tokens',
     component: ColorTokensTest,
     testPageButton: Constants.HOMEPAGE_COLORTOKEN_BUTTON,
@@ -129,12 +138,12 @@ export const tests: TestDescription[] = [
     testPageButton: HOMEPAGE_DROPDOWN_BUTTON,
     platforms: ['macos', 'win32'],
   },
-  // {
-  //   name: 'Drawer',
-  //   component: DrawerTest,
-  //   testPage: Constants.HOMEPAGE_DRAWER_BUTTON,
-  //   platforms: ['android'],
-  // },
+  {
+    name: 'Drawer',
+    component: DrawerTest,
+    testPageButton: Constants.HOMEPAGE_Drawer_BUTTON,
+    platforms: ['android'],
+  },
   // GH##1027 Temporarily disabling while the test doesn't load
   // {
   //   name: 'Expander',
@@ -164,7 +173,7 @@ export const tests: TestDescription[] = [
     name: 'Input',
     component: InputTest,
     testPageButton: Constants.HOMEPAGE_INPUT_BUTTON,
-    platforms: ['android'],
+    platforms: ['android', 'ios'],
   },
   {
     name: 'Link Legacy',
@@ -287,6 +296,12 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
+    name: 'TabList',
+    component: TabListTest,
+    testPageButton: Constants.HOMEPAGE_TABLIST_BUTTON,
+    platforms: ['win32', 'windows'],
+  },
+  {
     name: 'Tabs Legacy',
     component: TabsLegacyTest,
     testPageButton: Constants.HOMEPAGE_TABS_BUTTON,
@@ -315,5 +330,11 @@ export const tests: TestDescription[] = [
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Vibrancy View',
+    component: VibrancyViewTest,
+    testPageButton: Constants.HOMEPAGE_VIBRANCYVIEW_BUTTON,
+    platforms: ['macos'],
   },
 ];

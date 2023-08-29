@@ -8,7 +8,7 @@
 + (NSRect)screenRect:(id)json
 {
 	CGFloat x = [RCTConvert CGFloat:json[@"screenX"]];
-	CGFloat y = [RCTConvert CGFloat:json[@"screenX"]];
+	CGFloat y = [RCTConvert CGFloat:json[@"screenY"]];
 	CGFloat width = [RCTConvert CGFloat:json[@"width"]];
 	CGFloat height = [RCTConvert CGFloat:json[@"height"]];
 	return NSMakeRect(x, y, width, height);
@@ -41,6 +41,8 @@ RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
 
 RCT_EXPORT_VIEW_PROPERTY(directionalHint, NSRectEdge)
+
+RCT_EXPORT_VIEW_PROPERTY(setInitialFocus, BOOL)
 
 RCT_EXPORT_VIEW_PROPERTY(onShow, RCTDirectEventBlock)
 

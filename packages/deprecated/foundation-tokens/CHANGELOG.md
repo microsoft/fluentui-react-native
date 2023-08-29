@@ -1,8 +1,80 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Tue, 21 Mar 2023 21:53:45 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Aug 2023 18:55:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.5
+
+Wed, 23 Aug 2023 18:55:24 GMT
+
+### Patches
+
+- Fix depcheck (ruaraki@microsoft.com)
+
+## 0.13.4
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.21.2
+
+## 0.13.3
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/merge-props to v0.7.1
+- Bump @uifabricshared/foundation-settings to v0.13.2
+- Bump @fluentui-react-native/memo-cache to v1.3.1
+
+## 0.13.2
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.21.1
+
+## 0.13.1
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/merge-props to v0.7.0
+- Bump @uifabricshared/foundation-settings to v0.13.1
+- Bump @fluentui-react-native/memo-cache to v1.3.0
+
+## 0.13.0
+
+Mon, 05 Jun 2023 19:26:25 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/merge-props to v0.6.0
+- Bump @fluentui-react-native/tokens to v0.21.0
+- Bump @uifabricshared/foundation-settings to v0.13.0
+- Bump @fluentui-react-native/memo-cache to v1.2.0
+
+## 0.12.33
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.20.16
+
+## 0.12.32
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.20.15
 
 ## 0.12.31
 

@@ -65,9 +65,8 @@ Reach out to Samuel Freiberg with any questions related to E2E testing.
 
    1. `index.ts`
       - This is the file listed as `main` inside your package.json and simply exports other files.
-   1. `<new-component>.tsx`
-      - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens.
-      - Note that we need the comment `/** @jsx withSlots */` at the top of this file. An explanation can be found in the comment at `packages/experimental/use-slots/src/withSlots.tsx`
+   1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxRuntime classic */
+/** @jsx withSlots */` at the top of this file. An explanation can be found in the comment at `packages/experimental/use-slots/src/withSlots.tsx`
    1. `<new-component>.<types | settings | platform | blah>.tsx` (Optional)
       - Optional extra files to subdivide your code however you see fit. You can also add platform specific files as you see fit.
 
@@ -212,9 +211,9 @@ To add a native module that wraps a FluentUI Android control:
 
    b. Include dependencies for android build environment
 
-   - Edit the generated build.gradle file (Example: packages/experimental/Drawer/android/build.gradle)
+   - Edit the generated build.gradle file
    - Add dependencies for kotlin, maven, react-native, etc
-     - Add dependency for FluentUIAndroid
+   - Add dependency for FluentUIAndroid
 
    c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in apps/fluent-tester/package.json in order for our Fluent Tester app to build and use your new Android component module
 

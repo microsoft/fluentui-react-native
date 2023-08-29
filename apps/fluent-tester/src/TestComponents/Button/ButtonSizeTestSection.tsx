@@ -80,11 +80,9 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
           <Button size="large" appearance="primary" icon={iconProps} style={commonTestStyles.vmargin}>
             Large Button with icon
           </Button>
-          {Platform.OS == 'android' && (
-            <FAB size="small" icon={iconProps} style={commonTestStyles.vmargin}>
-              Small FAB
-            </FAB>
-          )}
+          <FAB size="small" icon={iconProps} style={commonTestStyles.vmargin}>
+            Small FAB
+          </FAB>
           <FAB size="large" icon={iconProps} style={commonTestStyles.vmargin}>
             Large FAB
           </FAB>

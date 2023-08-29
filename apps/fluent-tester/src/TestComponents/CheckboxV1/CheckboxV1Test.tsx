@@ -185,6 +185,7 @@ const checkboxSections: TestSection[] = [
   },
   Platform.select({
     android: null,
+    ios: null,
     default: {
       name: 'Size Checkboxes',
       component: SizeCheckbox,
@@ -192,6 +193,7 @@ const checkboxSections: TestSection[] = [
   }),
   Platform.select({
     android: null,
+    ios: null,
     default: {
       name: 'Desktop Specific Checkboxes',
       component: DesktopSpecificCheckbox,
@@ -203,6 +205,7 @@ const checkboxSections: TestSection[] = [
   },
   Platform.select({
     android: null,
+    ios: null,
     default: {
       name: 'Token Customized Checkboxes',
       component: TokenCheckbox,
@@ -221,7 +224,7 @@ export const CheckboxV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
     uwpStatus: 'N/A',
-    iosStatus: 'N/A',
+    iosStatus: 'Experimental',
     macosStatus: 'Experimental',
     androidStatus: 'Experimental',
   };

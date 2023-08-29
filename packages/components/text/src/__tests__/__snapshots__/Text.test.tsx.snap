@@ -5,7 +5,7 @@ exports[`Text component tests Text all props 1`] = `
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
-    Object {
+    {
       "color": "#323130",
       "fontFamily": "Segoe UI",
       "fontSize": 14,
@@ -28,7 +28,7 @@ exports[`Text component tests Text all tokens 1`] = `
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
-    Object {
+    {
       "color": "#323130",
       "fontFamily": "Wingdings",
       "fontSize": 20,
@@ -51,7 +51,7 @@ exports[`Text component tests Text default 1`] = `
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
-    Object {
+    {
       "color": "#323130",
       "fontFamily": "Segoe UI",
       "fontSize": 13,
@@ -74,7 +74,7 @@ exports[`Text component tests Text variants render correctly with style 1`] = `
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
-    Object {
+    {
       "color": "blue",
       "fontFamily": "Segoe UI",
       "fontSize": 60,

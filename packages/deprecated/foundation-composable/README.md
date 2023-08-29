@@ -143,6 +143,7 @@ The three parameters are:
 The `Slots` parameter allows plugging different react types into a complex component. These can be output by either using `renderSlot` or by using the `withSlots` jsx helper. Usage would be something like:
 
 ```tsx
+/** @jsxRuntime classic */
 /* @jsx withSlots */
 import { withSlots } from '@uifabricshared/foundation-composable';
 

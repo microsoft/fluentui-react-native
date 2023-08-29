@@ -56,19 +56,26 @@ describe('Input Functional Testing', () => {
   it('Validate OnChange() callback was fired', async () => {
     await InputPageObject.click(InputPageObject._primaryComponent);
     await InputPageObject.typeText(INPUT_TYPE_STRING);
+    await expect(await InputPageObject.waitForStringUpdate(INPUT_START_STRING + INPUT_TYPE_STRING, 'Text typing failing.'));
     await expect(await InputPageObject.verifyTextContent(INPUT_START_STRING + INPUT_TYPE_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate error state was achieved', async () => {
     await InputPageObject.click(InputPageObject._primaryComponent);
+    await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
+
     await InputPageObject.typeText(INPUT_TYPE_STRING);
+    await expect(await InputPageObject.waitForStringUpdate(INPUT_ERROR_STRING, 'Error state not achieved.'));
     await expect(await InputPageObject.verifyTextContent(INPUT_ERROR_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate accessory icon OnPress() callback was fired -> Click', async () => {
     await InputPageObject.click(InputPageObject._accessoryButton);
+    await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
+
+    await expect(await InputPageObject.waitForStringUpdate(INPUT_ONCLICK_STRING, 'OnPress callback failing.'));
     await expect(await InputPageObject.verifyTextContent(INPUT_ONCLICK_STRING)).toBeTruthy();
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });

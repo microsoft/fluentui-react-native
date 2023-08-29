@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
-This log was last generated on Mon, 10 Apr 2023 16:10:16 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Aug 2023 22:02:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.34
+
+Wed, 09 Aug 2023 22:02:13 GMT
+
+### Patches
+
+- Result of yarn (ruaraki@microsoft.com)
+
+## 0.4.0
+
+Mon, 05 Jun 2023 19:26:22 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+
+## 0.3.0
+
+Thu, 11 May 2023 18:38:25 GMT
+
+### Minor changes
+
+- remove non working drawer (rohanpd.work@gmail.com)
 
 ## 0.2.148
 

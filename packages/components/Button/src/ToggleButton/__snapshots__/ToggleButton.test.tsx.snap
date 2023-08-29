@@ -3,8 +3,8 @@
 exports[`ToggleButton default 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Toggle",
       },
     ]
@@ -12,8 +12,20 @@ exports[`ToggleButton default 1`] = `
   accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -32,7 +44,7 @@ exports[`ToggleButton default 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
@@ -54,7 +66,7 @@ exports[`ToggleButton default 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 15,

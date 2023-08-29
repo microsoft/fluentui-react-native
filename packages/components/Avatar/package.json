@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/avatar",
-  "version": "1.8.11",
+  "version": "1.10.10",
   "description": "A cross-platform Avatar component using the Fluent Design System",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -29,28 +29,27 @@
     "directory": "packages/components/Avatar"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.10.2",
-    "@fluentui-react-native/badge": "^0.5.8",
-    "@fluentui-react-native/framework": "0.9.8",
-    "@fluentui-react-native/icon": "^0.17.25",
-    "@fluentui-react-native/theme-tokens": "^0.24.5",
-    "@fluentui-react-native/theming-utils": ">=0.23.10 <1.0.0",
-    "@fluentui-react-native/tokens": "^0.20.14",
-    "@fluentui-react-native/use-styling": "^0.9.4"
+    "@fluentui-react-native/adapters": "^0.11.2",
+    "@fluentui-react-native/badge": "^0.7.6",
+    "@fluentui-react-native/framework": "0.11.5",
+    "@fluentui-react-native/icon": "^0.19.8",
+    "@fluentui-react-native/theme-tokens": "^0.25.1",
+    "@fluentui-react-native/theming-utils": ">=0.24.3 <1.0.0",
+    "@fluentui-react-native/tokens": "^0.21.2",
+    "@fluentui-react-native/use-styling": "^0.11.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@office-iss/react-native-win32": "^0.68.0",
-    "@types/react-native": "^0.68.0",
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-svg": "^12.3.0"
+    "@office-iss/react-native-win32": "^0.71.0",
+    "react": "18.2.0",
+    "react-native": "^0.71.0",
+    "react-native-svg": "^13.9.0"
   },
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-svg": "^12.3.0"
+    "react": "18.2.0",
+    "react-native": "^0.71.0",
+    "react-native-svg": "^13.9.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -59,7 +58,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.68"
+        "react-native@0.71"
       ],
       "capabilities": [
         "core",

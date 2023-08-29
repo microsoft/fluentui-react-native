@@ -39,7 +39,6 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const showRing = active === 'active' && activeAppearance === 'ring';
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
   const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
-
   const state: AvatarState = {
     showRing,
     transparentRing: !!transparentRing,
@@ -47,7 +46,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   };
 
   let imageProps: ImageProps = {
-    accessibilityLabel,
+    accessibilityLabel: accessibilityLabel ?? '',
     source: imageUrl ? ({ uri: imageUrl } as ImageSourcePropType) : undefined,
   };
 
@@ -81,7 +80,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     props: {
       accessible: accessible ?? true,
       accessibilityLabel: accessibilityLabel || accessibilityText,
-      accessibilityRole: accessibilityRole ?? 'image',
+      accessibilityRole: accessibilityRole ?? (Platform.OS === 'android' ? (name ? 'none' : 'image') : 'image'),
       active,
       activeAppearance,
       avatarColor: avatarColor === 'colorful' ? resolveColorfulToSpecificColor(idForColor, name) : avatarColor,

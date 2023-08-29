@@ -1,0 +1,297 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio component tests Radio default 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Select",
+      },
+    ]
+  }
+  accessibilityLabel="Default Radio"
+  accessibilityPositionInSet={0}
+  accessibilityRole="radio"
+  accessibilitySetSize={0}
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  labelPosition="after"
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "paddingHorizontal": undefined,
+      "paddingVertical": undefined,
+    }
+  }
+  value="key1"
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={false}
+    collapsable={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": undefined,
+        "borderColor": "#616161",
+        "borderRadius": 10,
+        "borderStyle": "solid",
+        "borderWidth": 1.5,
+        "height": 20,
+        "justifyContent": "center",
+        "marginBottom": 4,
+        "marginLeft": 4,
+        "marginRight": 4,
+        "marginTop": 4,
+        "width": 20,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "backgroundColor": undefined,
+          "borderRadius": 5,
+          "height": 10,
+          "opacity": 0,
+          "width": 10,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      {
+        "alignItems": undefined,
+        "flexDirection": "column",
+        "marginLeft": 16,
+        "marginRight": undefined,
+        "padding": 2,
+        "paddingRight": 0,
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        {
+          "color": "#242424",
+          "fontFamily": "Segoe UI",
+          "fontSize": 13,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginHorizontal": 2,
+        }
+      }
+    >
+      Default Radio
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Radio component tests Radio disabled 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Select",
+      },
+    ]
+  }
+  accessibilityLabel="Disabled Radio"
+  accessibilityPositionInSet={0}
+  accessibilityRole="radio"
+  accessibilitySetSize={0}
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={false}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={false}
+  labelPosition="after"
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "paddingHorizontal": undefined,
+      "paddingVertical": undefined,
+    }
+  }
+  value="key1"
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={false}
+    collapsable={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": undefined,
+        "borderColor": "#e0e0e0",
+        "borderRadius": 10,
+        "borderStyle": "solid",
+        "borderWidth": 1.5,
+        "height": 20,
+        "justifyContent": "center",
+        "marginBottom": 4,
+        "marginLeft": 4,
+        "marginRight": 4,
+        "marginTop": 4,
+        "width": 20,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "backgroundColor": undefined,
+          "borderRadius": 5,
+          "height": 10,
+          "opacity": 0,
+          "width": 10,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      {
+        "alignItems": undefined,
+        "flexDirection": "column",
+        "marginLeft": 16,
+        "marginRight": undefined,
+        "padding": 2,
+        "paddingRight": 0,
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        {
+          "color": "#bdbdbd",
+          "fontFamily": "Segoe UI",
+          "fontSize": 13,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginHorizontal": 2,
+        }
+      }
+    >
+      Disabled Radio
+    </Text>
+  </View>
+</View>
+`;

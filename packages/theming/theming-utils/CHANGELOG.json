@@ -2,6 +2,132 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Mon, 14 Aug 2023 20:14:41 GMT",
+      "version": "0.24.3",
+      "tag": "@fluentui-react-native/theming-utils_v0.24.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Aug 2023 22:02:15 GMT",
+      "version": "0.24.2",
+      "tag": "@fluentui-react-native/theming-utils_v0.24.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "98c09956b4c3c3cdb312388b763d5d9a7768a1e7",
+            "comment": "Bump design-tokens packages to 0.51.0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jul 2023 20:45:12 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.24.1",
+      "version": "0.24.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.1",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 05 Jun 2023 19:26:25 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.24.0",
+      "version": "0.24.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.32.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 30 May 2023 20:34:15 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.23.12",
+      "version": "0.23.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979",
+            "comment": "Add macOS status tokens and accessible mobile stroke colors to AliasColorTokens interface"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.31.2",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.16",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.23.11",
+      "version": "0.23.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a",
+            "comment": "Update design-tokens package to 0.47.0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.31.1",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.15",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Mar 2023 21:53:45 GMT",
       "tag": "@fluentui-react-native/theming-utils_v0.23.10",
       "version": "0.23.10",

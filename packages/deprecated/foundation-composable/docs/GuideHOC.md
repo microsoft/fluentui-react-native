@@ -113,6 +113,7 @@ Here we will use the same interfaces and helpers but implement `ButtonBase` and 
 We will use the optional TState to pass additional arguments between `usePrepareProps` and `render`. Note that the state can be anything, it is simply a payload to be passed from one function to the next.
 
 ```tsx
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 
 export interface IButtonState {
@@ -141,15 +142,15 @@ const ButtonBase = composable<IButtonProps, IButtonSlotProps, IButtonState>({
   slots: {
     root: { slotType: View },
     icon: { slotType: Icon },
-    label: { slotType: Text }
-  }
+    label: { slotType: Text },
+  },
 });
 
 const Button = composable({
   ...ButtonBase.__composable,
   useStyling: (props: IButtonProps) => {
     // return whatever styles are desired for the button
-  }
+  },
 });
 ```
 
@@ -177,9 +178,9 @@ export interface IButtonWithCustomIconProps extends Omit<IButtonProps, 'icon'> {
 const ButtonWithCustomIcon = composable<IButtonWithCustomIconProps>(
   immutableMerge(ButtonBase.__composable, {
     slots: {
-      icon: { slotType: CustomIcon }
-    }
-  })
+      icon: { slotType: CustomIcon },
+    },
+  }),
 );
 ```
 
@@ -194,7 +195,7 @@ const ButtonWithLogic = composable<IButtonProps>({
     const parentRenderData = ButtonBase.__composable.usePrepareProps(props, useStyling);
     const slotProps = doExtraPropManipulation(parentRenderData.slotProps);
     return { slotProps, state: parentRenderData.state };
-  }
+  },
 });
 ```
 
@@ -212,6 +213,6 @@ const Nottub = composable<IButtonProps>({
       {icon && <Slots.icon source={icon} />}
       {children}
     </Slots.root>;
-  }
+  },
 });
 ```

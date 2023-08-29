@@ -6,7 +6,7 @@ exports[`useSlot tests Header and caption text render as expected 1`] = `
     <component>
       <Text
         style={
-          Object {
+          {
             "fontSize": 24,
             "fontWeight": "bold",
           }
@@ -14,7 +14,7 @@ exports[`useSlot tests Header and caption text render as expected 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 24,
               "fontWeight": "bold",
             }
@@ -27,7 +27,7 @@ exports[`useSlot tests Header and caption text render as expected 1`] = `
     <component>
       <Text
         style={
-          Object {
+          {
             "fontFamily": "Arial",
             "fontWeight": "200",
           }
@@ -35,7 +35,7 @@ exports[`useSlot tests Header and caption text render as expected 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "fontFamily": "Arial",
               "fontWeight": "200",
             }
@@ -53,7 +53,7 @@ exports[`useSlot tests Multi-level text elements are equivalent 1`] = `
 <HeaderCaptionText1>
   <Text
     style={
-      Object {
+      {
         "fontFamily": "Arial",
         "fontSize": 24,
         "fontWeight": "bold",
@@ -62,7 +62,7 @@ exports[`useSlot tests Multi-level text elements are equivalent 1`] = `
   >
     <Text
       style={
-        Object {
+        {
           "fontFamily": "Arial",
           "fontSize": 24,
           "fontWeight": "bold",
@@ -79,7 +79,7 @@ exports[`useSlot tests Multi-level text elements are equivalent 2`] = `
 <HeaderCaptionText2>
   <Text
     style={
-      Object {
+      {
         "fontFamily": "Arial",
         "fontSize": 24,
         "fontWeight": "bold",
@@ -88,7 +88,7 @@ exports[`useSlot tests Multi-level text elements are equivalent 2`] = `
   >
     <Text
       style={
-        Object {
+        {
           "fontFamily": "Arial",
           "fontSize": 24,
           "fontWeight": "bold",
@@ -113,21 +113,21 @@ exports[`useSlot tests Two base text elements rendering, with and without styles
     </PluggableText>
     <PluggableText
       style={
-        Object {
+        {
           "color": "blue",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "color": "blue",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "blue",
             }
           }

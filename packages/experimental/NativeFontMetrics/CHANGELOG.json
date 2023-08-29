@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-native-font-metrics",
   "entries": [
     {
+      "date": "Fri, 09 Jun 2023 15:29:07 GMT",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "f790d0b4bdd65cd38d57349e97b57d782a32347c",
+            "comment": "Fix package using `use-subscription` at runtime but does not correctly declare dependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 05 Jun 2023 19:26:23 GMT",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Feb 2023 20:39:58 GMT",
       "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.3.2",
       "version": "0.3.2",

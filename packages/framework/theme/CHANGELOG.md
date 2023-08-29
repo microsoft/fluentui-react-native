@@ -1,8 +1,42 @@
 # Change Log - @fluentui-react-native/theme
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Aug 2023 22:02:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.1
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.2.1
+
+## 0.9.0
+
+Mon, 05 Jun 2023 19:26:25 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/immutable-merge to v1.2.0
+- Bump @fluentui-react-native/theme-types to v0.32.0
+
+## 0.8.5
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.31.2
+
+## 0.8.4
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.31.1
 
 ## 0.8.3
 

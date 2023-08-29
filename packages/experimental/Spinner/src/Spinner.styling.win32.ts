@@ -27,5 +27,14 @@ export const stylingSettings: UseStylingOptions<SpinnerProps, SpinnerSlotProps, 
       }),
       ['size', 'trackColor', 'width', 'height'],
     ),
+    tail: buildProps(
+      (tokens: SpinnerTokens) => ({
+        size: tokens.size,
+        tailColor: tokens.tailColor,
+        viewBoxWidth: tokens.width,
+        viewBoxHeight: tokens.height,
+      }),
+      ['size', 'tailColor', 'width', 'height'],
+    ),
   },
 };

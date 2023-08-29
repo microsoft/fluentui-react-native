@@ -2,6 +2,954 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 23 Aug 2023 18:55:24 GMT",
+      "version": "1.11.18",
+      "tag": "@fluentui-react-native/menu_v1.11.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "565d51b9f2769d1e566e59249d062b26338f408b",
+            "comment": "Update SVG dependencies"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.14",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.35.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 21 Aug 2023 20:45:53 GMT",
+      "version": "1.11.17",
+      "tag": "@fluentui-react-native/menu_v1.11.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.35.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 14 Aug 2023 20:14:41 GMT",
+      "version": "1.11.16",
+      "tag": "@fluentui-react-native/menu_v1.11.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/adapters to v0.11.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.13",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.9",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.10",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Aug 2023 22:02:14 GMT",
+      "version": "1.11.15",
+      "tag": "@fluentui-react-native/menu_v1.11.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "0458d809d77273f3d8adf080bf561e1fdde80696",
+            "comment": "[Callout][macOS] Support Border Tokens"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.12",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.25.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.11.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Aug 2023 16:51:10 GMT",
+      "version": "1.11.14",
+      "tag": "@fluentui-react-native/menu_v1.11.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "a799ae2b264f782fc7160c0e1cb58703f2db62fb",
+            "comment": "minHeight for small button"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 31 Jul 2023 19:29:59 GMT",
+      "version": "1.11.13",
+      "tag": "@fluentui-react-native/menu_v1.11.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.11",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.3",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 18 Jul 2023 19:09:32 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.12",
+      "version": "1.11.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.10",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.6",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.2",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.4",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.4",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.4",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.6",
+            "commit": "225d20784228abaa4b80bd12b57d2c6972d9abd4"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 15 Jul 2023 23:01:27 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.11",
+      "version": "1.11.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.9",
+            "commit": "d00b3a1d07d0dc05083e02fd1dcc7e8a264290c9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jul 2023 23:32:22 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.10",
+      "version": "1.11.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.8",
+            "commit": "40fafc6d32e9fa3d4d137ec003ac185470a96575"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Jul 2023 23:39:34 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.9",
+      "version": "1.11.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.7",
+            "commit": "204b9178a9dd307b854b3b59fd7d0c1616719a03"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Jul 2023 17:25:04 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.8",
+      "version": "1.11.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.6",
+            "commit": "d1fc0c774448d103085b5bb5ab0103678a62cbbc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.5",
+            "commit": "d1fc0c774448d103085b5bb5ab0103678a62cbbc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jul 2023 20:45:12 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.7",
+      "version": "1.11.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/adapters to v0.11.1",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.5",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.4",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.1",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.3",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.3",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.3",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.1",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.5",
+            "commit": "d2f6f8d12972593821ec0e2764953efd6dafb1a2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jun 2023 21:37:05 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.6",
+      "version": "1.11.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "6a6390aa7d8268609ab62b54d158c2d6cd459c9f",
+            "comment": "Fix VO bug in Menu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jun 2023 06:57:52 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.5",
+      "version": "1.11.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "cb2544808fd900ccd2aa8e5ea20a23ae052c8fd8",
+            "comment": "Set disabled prop on button when false"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.4",
+            "commit": "cb2544808fd900ccd2aa8e5ea20a23ae052c8fd8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Jun 2023 18:37:35 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.4",
+      "version": "1.11.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.4",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.3",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.2",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.2",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.2",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.3",
+            "commit": "8fb16fe41492ebb2f9b262a038928c9228c20ac2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 17 Jun 2023 00:00:18 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.3",
+      "version": "1.11.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.3",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.2",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.1",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.1",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.1",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.2",
+            "commit": "30d5533f69785ce98f3f6fe79059ad18ee7136cc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Jun 2023 20:51:40 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.2",
+      "version": "1.11.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "7778cc852e423102bec6f5dc964c33b956c8d378",
+            "comment": "Tokenize MenuItemRadio"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 14 Jun 2023 12:05:51 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.1",
+      "version": "1.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378",
+            "comment": "Declare `\"sideEffects\": false` to help improve tree shaking"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.1",
+            "commit": "1842e7f972ab46fd361f16d1f4edb8f753983691"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Jun 2023 17:46:43 GMT",
+      "tag": "@fluentui-react-native/menu_v1.11.0",
+      "version": "1.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ayushsinghs@yahoo.in",
+            "package": "@fluentui-react-native/menu",
+            "commit": "60d243e2af9f727a0265bf6a0aed49e687305f77",
+            "comment": "Changes for treeshake to work"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.2",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.1",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.19.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.21.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.11.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.34.0",
+            "commit": "6530042f4f24cbb296337a8bcf5fb32a09cc6378"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 09 Jun 2023 21:35:03 GMT",
+      "tag": "@fluentui-react-native/menu_v1.10.2",
+      "version": "1.10.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "3229c24401791f983031da4b00154263f3b3a2cb",
+            "comment": "[Callout] Implement setInitialFocus for macOS"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.1",
+            "commit": "3229c24401791f983031da4b00154263f3b3a2cb"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 09 Jun 2023 15:29:07 GMT",
+      "tag": "@fluentui-react-native/menu_v1.10.1",
+      "version": "1.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.18.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.20.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.33.1",
+            "commit": "1791790bbd41797f0244fef65d4e5e6b095808e9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 05 Jun 2023 19:26:24 GMT",
+      "tag": "@fluentui-react-native/menu_v1.10.0",
+      "version": "1.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325",
+            "comment": "Upgrade to React Native 0.71"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/adapters to v0.11.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.24.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.12.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.10.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.18.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.23.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.20.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.25.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.10.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.33.0",
+            "commit": "8c0f9d27e34913da82c00299c12c399877257325"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 30 May 2023 20:34:15 GMT",
+      "tag": "@fluentui-react-native/menu_v1.9.1",
+      "version": "1.9.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.23.14",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.43",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.10",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.27",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.31",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.19.33",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.24.7",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.16",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.32.53",
+            "commit": "09fa3b65fd9d29f4dc4769e1e479fb5a82812979"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 May 2023 21:03:42 GMT",
+      "tag": "@fluentui-react-native/menu_v1.9.0",
+      "version": "1.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/menu",
+            "commit": "604a9ede93e082dc5712c1035bdc04f04a7b82ae",
+            "comment": "macOS MenuGroup"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 May 2023 07:08:52 GMT",
+      "tag": "@fluentui-react-native/menu_v1.8.1",
+      "version": "1.8.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.23.13",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.42",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.9.9",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.17.26",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.30",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.19.32",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.24.6",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/tokens to v0.20.15",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.32.52",
+            "commit": "52a53e376865d500b73f26ea9935e13036b04b1a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 27 Apr 2023 19:45:00 GMT",
+      "tag": "@fluentui-react-native/menu_v1.8.0",
+      "version": "1.8.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "331a77774f443d8af6dec5165640ccf46557e2a8",
+            "comment": "set n of m on submenu trigger"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Apr 2023 02:09:03 GMT",
       "tag": "@fluentui-react-native/menu_v1.7.0",
       "version": "1.7.0",

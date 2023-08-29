@@ -4,16 +4,17 @@ import { borderStyles } from '@fluentui-react-native/tokens';
 
 import { counterBadgeName } from './CounterBadge.types';
 import type { CounterBadgeTokens, CounterBadgeProps, CounterBadgeSlotProps } from './CounterBadge.types';
+import { defaultCounterBadgeColorTokens } from './CounterBadgeColorTokens';
 import { counterBadgeTokens } from './CounterBadgeTokens';
 import { badgeStates, getBadgePosition } from '../Badge.styling';
 import { defaultBadgeColorTokens } from '../BadgeColorTokens';
 import { defaultBadgeTokens } from '../BadgeTokens';
 
-export const counterBadgeStates: (keyof CounterBadgeTokens)[] = [...badgeStates, 'dot'];
+export const counterBadgeStates: (keyof CounterBadgeTokens)[] = [...badgeStates, 'list', 'dot'];
 const tokensThatAreAlsoProps: (keyof CounterBadgeTokens)[] = ['shadowToken'];
 
 export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeSlotProps, CounterBadgeTokens> = {
-  tokens: [defaultBadgeTokens, defaultBadgeColorTokens, counterBadgeName, counterBadgeTokens],
+  tokens: [defaultBadgeTokens, defaultBadgeColorTokens, defaultCounterBadgeColorTokens, counterBadgeName, counterBadgeTokens],
   states: counterBadgeStates,
   tokensThatAreAlsoProps,
   slotProps: {
@@ -27,6 +28,7 @@ export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeS
           justifyContent: 'center',
           minHeight: tokens.minHeight,
           width: tokens.width,
+          paddingVertical: tokens.paddingVertical,
           paddingHorizontal: tokens.paddingHorizontal,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),

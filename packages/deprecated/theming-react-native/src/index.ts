@@ -5,7 +5,7 @@ export { addThemeRegistryListener, removeThemeRegistryListener, setTheme, getThe
 /**
  * @deprecated
  */
-export { IPartialTheme, ITheme } from './Theme.types';
+export type { IPartialTheme, ITheme } from './Theme.types';
 /**
  * @deprecated
  */
@@ -13,7 +13,8 @@ export type { IThemeDefinition, ThemeRegistry } from './Theme.types';
 /**
  * @deprecated
  */
-export { IThemeLayerProps, ThemeLayer } from './ThemeLayer';
+export type { IThemeLayerProps } from './ThemeLayer';
+export { ThemeLayer } from './ThemeLayer';
 /**
  * @deprecated
  */
