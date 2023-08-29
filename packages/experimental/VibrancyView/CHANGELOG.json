@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/vibrancy-view",
   "entries": [
     {
+      "date": "Tue, 29 Aug 2023 22:56:32 GMT",
+      "version": "0.0.3",
+      "tag": "@fluentui-react-native/vibrancy-view_v0.0.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/vibrancy-view",
+            "comment": "Bump @fluentui-react-native/adapters to v0.11.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 17 Aug 2023 01:06:02 GMT",
       "version": "0.0.2",
       "tag": "@fluentui-react-native/vibrancy-view_v0.0.2",

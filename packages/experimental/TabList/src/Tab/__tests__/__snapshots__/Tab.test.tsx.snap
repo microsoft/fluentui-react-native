@@ -18,6 +18,8 @@ exports[`Tab component tests Customized Tab 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": false,
     }
   }
@@ -155,6 +157,8 @@ exports[`Tab component tests Tab default props 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": false,
     }
   }
@@ -292,6 +296,8 @@ exports[`Tab component tests Tab disabled 1`] = `
       "checked": undefined,
       "disabled": true,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": false,
     }
   }
@@ -429,6 +435,8 @@ exports[`Tab component tests Tab render icon + text 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": false,
     }
   }
@@ -578,6 +586,8 @@ exports[`Tab component tests Tab render icon only 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": false,
     }
   }

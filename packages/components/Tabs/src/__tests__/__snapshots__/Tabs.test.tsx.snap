@@ -9,6 +9,8 @@ exports[`Tabs FocusZone props 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -64,6 +66,8 @@ exports[`Tabs FocusZone props 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -149,6 +153,8 @@ exports[`Tabs FocusZone props 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
           }
         }
@@ -234,6 +240,8 @@ exports[`Tabs FocusZone props 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -316,6 +324,8 @@ exports[`Tabs default props 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -371,6 +381,8 @@ exports[`Tabs default props 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
           }
         }
@@ -456,6 +468,8 @@ exports[`Tabs default props 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -541,6 +555,8 @@ exports[`Tabs default props 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -623,6 +639,8 @@ exports[`Tabs disabled 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -678,6 +696,8 @@ exports[`Tabs disabled 1`] = `
             "checked": undefined,
             "disabled": true,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -763,6 +783,8 @@ exports[`Tabs disabled 1`] = `
             "checked": undefined,
             "disabled": true,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -848,6 +870,8 @@ exports[`Tabs disabled 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
           }
         }
@@ -930,6 +954,8 @@ exports[`Tabs header text and count 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -986,6 +1012,8 @@ exports[`Tabs header text and count 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
           }
         }
@@ -1086,6 +1114,8 @@ exports[`Tabs header text and count 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -1186,6 +1216,8 @@ exports[`Tabs header text and count 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -1282,6 +1314,8 @@ exports[`Tabs headers only 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -1337,6 +1371,8 @@ exports[`Tabs headers only 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
           }
         }
@@ -1422,6 +1458,8 @@ exports[`Tabs headers only 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -1507,6 +1545,8 @@ exports[`Tabs headers only 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -1590,6 +1630,8 @@ exports[`Tabs props 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -1659,6 +1701,8 @@ exports[`Tabs props 1`] = `
             "checked": undefined,
             "disabled": true,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }
@@ -1759,6 +1803,8 @@ exports[`Tabs props 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
           }
         }
@@ -1859,6 +1905,8 @@ exports[`Tabs props 1`] = `
             "checked": undefined,
             "disabled": undefined,
             "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
           }
         }

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Tue, 29 Aug 2023 22:56:32 GMT",
+      "version": "0.11.3",
+      "tag": "@fluentui-react-native/adapters_v0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "b2c77a0f16222a3d7e3a333730e34a3b5991d3ca",
+            "comment": "add aria-multiselectable and aria-reaquired"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.11.2",
       "tag": "@fluentui-react-native/adapters_v0.11.2",
