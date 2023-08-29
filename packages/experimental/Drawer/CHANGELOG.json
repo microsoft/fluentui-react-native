@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/drawer",
   "entries": [
     {
+      "date": "Tue, 29 Aug 2023 22:56:32 GMT",
+      "version": "0.2.9",
+      "tag": "@fluentui-react-native/drawer_v0.2.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/drawer",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/drawer",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.2.8",
       "tag": "@fluentui-react-native/drawer_v0.2.8",

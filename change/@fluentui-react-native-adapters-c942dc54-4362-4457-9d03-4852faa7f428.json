@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add aria-multiselectable and aria-reaquired",
-  "packageName": "@fluentui-react-native/adapters",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

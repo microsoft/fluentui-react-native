@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update useKeyProps snapshots",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
