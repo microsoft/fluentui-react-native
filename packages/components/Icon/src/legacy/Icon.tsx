@@ -54,7 +54,7 @@ function renderFontIcon(iconProps: IconProps) {
       fontSize: fontSource.fontSize,
       color: iconProps.color,
     },
-    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily],
+    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.fontSize],
   )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);
