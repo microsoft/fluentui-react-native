@@ -1,4 +1,4 @@
-import { Attribute, Keys, RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE } from '../../common/consts';
+import { Attribute, AttributeValue, Keys, RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE } from '../../common/consts';
 import {
   FIRST_RADIO_ACCESSIBILITY_LABEL,
   RADIOGROUPV1_ACCESSIBILITY_LABEL,
@@ -98,6 +98,30 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
     ).toBeTruthy();
 
     expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Set "required" prop on RadioGroup. Validate "IsRequiredForForm" element attribute is true.', async () => {
+    await expect(
+      await RadioGroupV1PageObject.compareAttribute(
+        RadioGroupV1PageObject._secondaryComponent,
+        Attribute.IsRequiredForForm,
+        AttributeValue.true,
+      ),
+    ).toBeTruthy();
+
+    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Do NOT set "required" prop on RadioGroup. Validate "IsRequiredForForm" element attribute is false.', async () => {
+    await expect(
+      await RadioGroupV1PageObject.compareAttribute(
+        RadioGroupV1PageObject._primaryComponent,
+        Attribute.IsRequiredForForm,
+        AttributeValue.false,
+      ),
+    ).toBeTruthy();
+
+    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

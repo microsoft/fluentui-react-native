@@ -44,6 +44,8 @@ exports[`TabList component tests TabList appearance 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -180,6 +182,8 @@ exports[`TabList component tests TabList appearance 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -316,6 +320,8 @@ exports[`TabList component tests TabList appearance 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -482,6 +488,8 @@ exports[`TabList component tests TabList default props 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -618,6 +626,8 @@ exports[`TabList component tests TabList default props 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -754,6 +764,8 @@ exports[`TabList component tests TabList default props 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -921,6 +933,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -1057,6 +1071,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -1193,6 +1209,8 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -1359,6 +1377,8 @@ exports[`TabList component tests TabList orientation 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -1495,6 +1515,8 @@ exports[`TabList component tests TabList orientation 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -1631,6 +1653,8 @@ exports[`TabList component tests TabList orientation 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -1798,6 +1822,8 @@ exports[`TabList component tests TabList selected key 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": true,
         }
       }
@@ -1934,6 +1960,8 @@ exports[`TabList component tests TabList selected key 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -2070,6 +2098,8 @@ exports[`TabList component tests TabList selected key 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -2236,6 +2266,8 @@ exports[`TabList component tests TabList size 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -2372,6 +2404,8 @@ exports[`TabList component tests TabList size 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }
@@ -2508,6 +2542,8 @@ exports[`TabList component tests TabList size 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
+          "multiselectable": undefined,
+          "required": undefined,
           "selected": false,
         }
       }

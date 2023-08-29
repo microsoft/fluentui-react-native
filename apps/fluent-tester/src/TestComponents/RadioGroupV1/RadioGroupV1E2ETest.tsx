@@ -59,6 +59,7 @@ export const RadioGroupV1E2ETest: React.FunctionComponent = () => {
         </RadioGroup>
         <RadioGroup
           label={RADIOGROUPV1_TEST_COMPONENT_LABEL}
+          required
           /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(RADIOGROUPV1_NO_A11Y_LABEL_COMPONENT)}
         >
