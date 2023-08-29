@@ -41,6 +41,14 @@ async function QueryWithChaining(identifier) {
     // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
     queryResult = await $(selector);
   }
+
+  // Wait for the element to exist before returning
+  await browser.waitUntil(async () => await queryResult.isExisting(),
+  {
+    timeout: 30000,
+    timeoutMsg: `UI Element with automationID="${identifier}" could not be found.`
+  });
+
   return queryResult;
 }
 
