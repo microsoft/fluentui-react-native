@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix fontSource props not being correctly applied",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
