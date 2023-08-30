@@ -56,6 +56,13 @@ class FocusZonePageObject extends BasePage {
     if (switchValue !== arg) {
       await switchElement.click();
     }
+
+    // Wait until the switch correctly changes states
+    await browser.waitUntil(async () => await switchElement.isSelected() == switchValue,
+    {
+      timeout: 15000,
+      timeoutMsg: `Attempted to switch the ${option} to ${switchValue}, but it remained at ${await switchElement.isSelected()}`
+    });
   }
 
   async gridButton(button: GridButton) {
