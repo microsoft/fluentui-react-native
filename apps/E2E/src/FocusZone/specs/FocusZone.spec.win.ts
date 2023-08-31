@@ -49,18 +49,10 @@ describe('FocusZone Functional Testing', () => {
   it('Navigate horizontal focuszone using arrow keys. Validate focus switches correctly.', async () => {
     await FocusZonePageObject.configureGridFocusZone('SetDirection', 'horizontal');
     // move to 2 with right arrow
-
-    console.log('\n\n\n\n\n Sending right on button 1\n\n\n');
-
     await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_RIGHT]);
-
-    console.log('\n\n\n\n\n Sent right on button 1, Focus should be on 2\n\n\n\n\n');
-
     expect(
       await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
-
-    console.log('\n\n\n\n\n Sending down on button 2\n\n\n');
 
     // down arrow shouldn't move focus
     await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(2), [Keys.ARROW_DOWN]);
