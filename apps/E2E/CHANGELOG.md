@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Aug 2023 17:15:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.30.0
+
+Thu, 31 Aug 2023 17:15:50 GMT
+
+### Minor changes
+
+- Improving FZ E2E reliability (safreibe@microsoft.com)
 
 ## 1.29.1
 

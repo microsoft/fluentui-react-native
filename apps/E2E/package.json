@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/e2e-testing",
-  "version": "1.29.1",
+  "version": "1.30.0",
   "description": "Package containing E2E testing specs",
   "license": "MIT",
   "scripts": {
