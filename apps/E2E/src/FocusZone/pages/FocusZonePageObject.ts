@@ -33,7 +33,7 @@ class FocusZonePageObject extends BasePage {
   async configureGridFocusZone(option: GridFocusZoneOption, arg: any): Promise<void> {
     let switchElement: WebdriverIO.Element;
     switch (option) {
-      case 'SetDirection':
+      case 'SetDirection': {
         const DirectionDropdown = await this._directionPicker;
 
         // If the dropdown is already at the default value, break
@@ -51,6 +51,7 @@ class FocusZonePageObject extends BasePage {
           timeoutMsg: 'Could not reset the directional dropdown back to it\'s original value'
         });
         return;
+      }
       case 'Set2DNavigation':
         switchElement = await this._twoDimSwitch;
         break;
