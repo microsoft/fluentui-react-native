@@ -42,13 +42,6 @@ async function QueryWithChaining(identifier) {
     queryResult = await $(selector);
   }
 
-  // Wait for the element to exist before returning
-  await browser.waitUntil(async () => await queryResult.isExisting(),
-  {
-    timeout: 30000,
-    timeoutMsg: `UI Element with automationID="${identifier}" could not be found.`
-  });
-
   return queryResult;
 }
 
