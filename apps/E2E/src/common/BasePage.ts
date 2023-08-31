@@ -41,6 +41,7 @@ async function QueryWithChaining(identifier) {
     // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
     queryResult = await $(selector);
   }
+
   return queryResult;
 }
 
@@ -133,8 +134,11 @@ export abstract class BasePage {
     expectedValue: any,
   ): Promise<boolean> {
     const el = await element;
-    const actualValue = await el.getAttribute(attribute);
-    if (expectedValue !== actualValue) {
+
+    try {
+      await browser.waitUntil(async () => expectedValue === await el.getAttribute(attribute));
+    } catch {
+      const actualValue = await el.getAttribute(attribute);
       switch (this.platform) {
         case 'android':
           throw new Error(
@@ -150,6 +154,7 @@ export abstract class BasePage {
           );
       }
     }
+
     return true;
   }
 
