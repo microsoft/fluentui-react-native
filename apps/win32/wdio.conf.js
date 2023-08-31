@@ -154,11 +154,8 @@ exports.config = {
       return;
     }
 
-    // get current test title and clean it, to use it as file name
-    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
-
     // build file path
-    const filePath = './errorShots/' + fileName + '.png';
+    const filePath = './errorShots/ScreenshotOfFailure.png';
 
     /* If there are more than one instance of the app open, we know an assert popped up. Since the test already failed and a screenshot was captured
      * we want to close the assert popup. If we don't it will stay open and negatively interact with logic in our CI pipeline. */
