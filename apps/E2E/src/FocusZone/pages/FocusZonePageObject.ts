@@ -71,10 +71,10 @@ class FocusZonePageObject extends BasePage {
     }
 
     // Wait until the switch correctly changes states
-    await browser.waitUntil(async () => await switchElement.isSelected() == switchValue,
+    await browser.waitUntil(async () => await switchElement.isSelected() == arg,
     {
       timeout: 15000,
-      timeoutMsg: `Attempted to switch the ${option} to ${switchValue}, but it remained at ${await switchElement.isSelected()}`
+      timeoutMsg: `Attempted to switch the ${option} to ${arg}, but it remained at ${await switchElement.isSelected()}`
     });
   }
 
