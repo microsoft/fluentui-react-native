@@ -2,6 +2,27 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Tue, 29 Aug 2023 22:56:32 GMT",
+      "version": "1.14.8",
+      "tag": "@uifabricshared/foundation-compose_v1.14.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.19.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.13.6",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Aug 2023 18:55:24 GMT",
       "version": "1.14.7",
       "tag": "@uifabricshared/foundation-compose_v1.14.7",

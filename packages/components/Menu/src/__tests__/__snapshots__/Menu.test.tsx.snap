@@ -20,6 +20,8 @@ exports[`Menu component tests Menu default 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": false,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -123,6 +125,8 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -226,6 +230,8 @@ exports[`Menu component tests Menu open 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -329,6 +335,8 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -432,6 +440,8 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -535,6 +545,8 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -638,6 +650,8 @@ exports[`Menu component tests Menu open radio 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -741,6 +755,8 @@ exports[`Menu component tests Menu submenu 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -844,6 +860,8 @@ exports[`Menu open menu group and menu header 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
