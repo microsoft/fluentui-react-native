@@ -37,7 +37,7 @@ class FocusZonePageObject extends BasePage {
         const DirectionDropdown = await this._directionPicker;
 
         // If the dropdown is already at the default value, break
-        if((await DirectionDropdown.getAttribute('Name')).indexOf('bidirectional') !== -1) {
+        if((await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1) {
           return;
         }
 
@@ -45,7 +45,7 @@ class FocusZonePageObject extends BasePage {
         await browser.waitUntil(async () => await (await this._getGridFocusZoneMenuOption(arg)).isDisplayed());
         await (await this._getGridFocusZoneMenuOption(arg)).click();
 
-        await browser.waitUntil(async () => (await DirectionDropdown.getAttribute('Name')).indexOf('bidirectional') !== -1,
+        await browser.waitUntil(async () => (await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1,
         {
           timeout: 15000,
           timeoutMsg: 'Could not reset the directional dropdown back to it\'s original value'
