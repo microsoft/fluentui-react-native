@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Testing CI",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
