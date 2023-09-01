@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Change name of error screenshot. Now that there's only one failure, no need to get test name. Already in failure. Makes error Screenshot more accesible",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

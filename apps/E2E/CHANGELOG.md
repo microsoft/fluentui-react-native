@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 31 Aug 2023 17:15:50 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Sep 2023 02:16:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.31.0
+
+Fri, 01 Sep 2023 02:16:14 GMT
+
+### Minor changes
+
+- Change name of error screenshot. Now that there's only one failure, no need to get test name. Already in failure. Makes error Screenshot more accesible (safreibe@microsoft.com)
 
 ## 1.30.0
 
