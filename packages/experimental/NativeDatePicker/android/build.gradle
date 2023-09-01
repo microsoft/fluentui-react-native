@@ -43,6 +43,6 @@ repositories {
 dependencies {
   implementation "com.facebook.react:react-android:+"
   implementation "com.microsoft.device:dualscreen-layout:1.0.0-alpha01"
-  //implementation "com.microsoft.fluentui:FluentUIAndroid:${safeExtGet('fluentUIVersion', '0.1.32')}"
   implementation "com.microsoft.fluentui:fluentui_calendar:${safeExtGet('fluentUICalendarVersion', '0.0.27')}"
+  implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
 }
