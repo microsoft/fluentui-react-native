@@ -1,6 +1,7 @@
 import type { LayoutRectangle, ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const tablistAnimatedIndicatorName = 'TabListAnimatedIndicator';
 
@@ -25,9 +26,10 @@ export interface AnimatedIndicatorStyles {
 }
 export type AnimatedIndicatorStylesUpdate = Partial<AnimatedIndicatorStyles>;
 
-export interface AnimatedIndicatorState {
-  addToLayoutMap: (tabKey: string, layout: TabLayoutInfo) => void;
-  tablistLayout: LayoutRectangle;
+export interface UseAnimatedIndicatorReturn {
+  addTabLayout: (tabKey: string, layout: TabLayoutInfo) => void;
+  onTabListLayout: (e: LayoutEvent) => void;
+  tabListLayout: LayoutRectangle;
   styles: AnimatedIndicatorStyles;
   updateStyles: (updates: AnimatedIndicatorStylesUpdate) => void;
 }

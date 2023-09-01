@@ -8,19 +8,17 @@ import type {
   ListLayoutMap,
   AnimatedIndicatorStyles,
   TabLayoutInfo,
-  AnimatedIndicatorState,
   AnimatedIndicatorStylesUpdate,
+  UseAnimatedIndicatorReturn,
 } from './TabListAnimatedIndicator.types';
 import type { TabListProps } from '../TabList/TabList.types';
-
-type LayoutEventHandler = (e: LayoutEvent) => void;
 
 /**
  * This hook handles logic for generating the styles for the TabList's Animated Indicator. Child Tabs add layout update events to state
  * variables here, which we use to either directly update the layout values of the animated indicator (on win32) or generate the transforms
  * to move the indicator (on non-win32 platforms).
  */
-export function useTabListAnimatedIndicatorState(props: TabListProps, selectedKey?: string): [AnimatedIndicatorState, LayoutEventHandler] {
+export function useAnimatedIndicator(props: TabListProps, selectedKey?: string): UseAnimatedIndicatorReturn {
   const { vertical } = props;
 
   const [listLayoutMap, setListLayoutMap] = React.useState<ListLayoutMap>({});
@@ -30,28 +28,24 @@ export function useTabListAnimatedIndicatorState(props: TabListProps, selectedKe
     indicator: {},
   });
 
-  const addToLayoutMap = React.useCallback((tabKey: string, layoutInfo: TabLayoutInfo) => {
+  const addTabLayout = (tabKey: string, layoutInfo: TabLayoutInfo) => {
     setListLayoutMap((prev) => ({ ...prev, [tabKey]: { ...prev[tabKey], ...layoutInfo } }));
-  }, []);
+  };
 
-  const updateStyles = React.useCallback(
-    (update: AnimatedIndicatorStylesUpdate) =>
-      setUserDefinedAnimatedIndicatorStyles((prev) => {
-        const newStyles: AnimatedIndicatorStyles = { ...prev };
-        if (update.container) {
-          newStyles.container = mergeStyles(prev.container, update.container);
-        }
-        if (update.indicator) {
-          newStyles.indicator = mergeStyles(prev.indicator, update.indicator);
-        }
-        return newStyles;
-      }),
-    [],
-  );
+  const updateStyles = (update: AnimatedIndicatorStylesUpdate) =>
+    setUserDefinedAnimatedIndicatorStyles((prev) => {
+      const newStyles: AnimatedIndicatorStyles = { ...prev };
+      if (update.container) {
+        newStyles.container = mergeStyles(prev.container, update.container);
+      }
+      if (update.indicator) {
+        newStyles.indicator = mergeStyles(prev.indicator, update.indicator);
+      }
+      return newStyles;
+    });
 
-  const onStackLayout = React.useCallback((e: LayoutEvent) => {
+  const onTabListLayout = React.useCallback((e: LayoutEvent) => {
     if (e.nativeEvent.layout) {
-      console.log('tablist', e.nativeEvent.layout);
       setTabListLayout(e.nativeEvent.layout);
     }
   }, []);
@@ -61,7 +55,7 @@ export function useTabListAnimatedIndicatorState(props: TabListProps, selectedKe
   }, [selectedKey, listLayoutMap]);
 
   // Calculate styles using both layout information and user defined styles
-  const animatedIndicatorStyles = React.useMemo<AnimatedIndicatorState['styles'] | null>(() => {
+  const styles = React.useMemo<AnimatedIndicatorStyles | null>(() => {
     // if not all layout props have been recorded for the current selected indicator, don't render the animated indicator
     if (selectedIndicatorLayout) {
       const { x, y, width, height, startMargin, tabBorderWidth } = selectedIndicatorLayout;
@@ -90,12 +84,11 @@ export function useTabListAnimatedIndicatorState(props: TabListProps, selectedKe
     return null;
   }, [vertical, selectedIndicatorLayout, userDefinedAnimatedIndicatorStyles]);
 
-  const animatedIndicatorState: AnimatedIndicatorState = {
-    addToLayoutMap: addToLayoutMap,
-    tablistLayout: tabListLayout,
-    styles: animatedIndicatorStyles,
-    updateStyles: updateStyles,
+  return {
+    addTabLayout,
+    onTabListLayout,
+    tabListLayout,
+    styles,
+    updateStyles,
   };
-
-  return [animatedIndicatorState, onStackLayout];
 }

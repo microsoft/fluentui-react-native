@@ -49,8 +49,8 @@ export const TabList = compose<TabListType>({
             isCircularNavigation={isCircularNavigation}
           >
             <Slots.stack {...mergedProps}>{children}</Slots.stack>
-            {tabList.state.context?.animatedIndicatorState?.styles && (
-              <Slots.animatedIndicator styles={tabList.state.context?.animatedIndicatorState?.styles} />
+            {tabList.state.context?.animatedIndicatorStyles && (
+              <Slots.animatedIndicator styles={tabList.state.context?.animatedIndicatorStyles} />
             )}
           </Slots.container>
         </TabListContext.Provider>

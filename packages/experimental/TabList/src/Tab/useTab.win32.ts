@@ -33,26 +33,15 @@ export const useTab = (props: TabProps): TabInfo => {
     ...rest
   } = props;
   // Grabs the context information from Tabs (currently selected Tab and client's onTabSelect callback).
-  const {
-    addTabKey,
-    animatedIndicatorState,
-    invoked,
-    onTabSelect,
-    removeTabKey,
-    setInvoked,
-    setSelectedTabRef,
-    selectedKey,
-    tabKeys,
-    vertical,
-    ...tablist
-  } = React.useContext(TabListContext);
+  const { addTabKey, invoked, onTabSelect, removeTabKey, setInvoked, setSelectedTabRef, selectedKey, tabKeys, vertical, ...tablist } =
+    React.useContext(TabListContext);
 
   const isDisabled = disabled || tablist.disabled;
 
   const changeSelection = React.useCallback(() => {
     if (tabKey !== selectedKey) {
-      onTabSelect && onTabSelect(tabKey);
-      setSelectedTabRef && componentRef && setSelectedTabRef(componentRef);
+      onTabSelect(tabKey);
+      componentRef && setSelectedTabRef(componentRef);
     }
   }, [componentRef, setSelectedTabRef, onTabSelect, selectedKey, tabKey]);
 
@@ -82,14 +71,12 @@ export const useTab = (props: TabProps): TabInfo => {
    */
   React.useEffect(() => {
     // Add tab key to the global TabList context.
-    addTabKey && addTabKey(tabKey);
+    addTabKey(tabKey);
     // Set a defaultTabbableElement if we're the initial selectedKey.
     if (selectedKey === tabKey) {
-      setSelectedTabRef && componentRef && setSelectedTabRef(componentRef);
+      componentRef && setSelectedTabRef(componentRef);
     }
-    return () => {
-      removeTabKey && removeTabKey(tabKey);
-    };
+    return () => removeTabKey(tabKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -98,8 +85,8 @@ export const useTab = (props: TabProps): TabInfo => {
    * the narrator will only run once.
    */
   React.useEffect(() => {
-    if (invoked && tabKey === selectedKey && !isDisabled) {
-      setSelectedTabRef && componentRef && setSelectedTabRef(componentRef);
+    if (invoked && setInvoked && tabKey === selectedKey && !isDisabled) {
+      componentRef && setSelectedTabRef(componentRef);
       componentRef?.current?.focus();
       setInvoked(false);
     }
@@ -133,9 +120,9 @@ export const useTab = (props: TabProps): TabInfo => {
       accessible: accessible ?? true,
       accessibilityRole: 'tab',
       accessibilityActions: accessibilityActionsProp,
-      accessibilityPositionInSet: accessibilityPositionInSet ?? tabKeys?.findIndex((key) => key === tabKey) + 1,
+      accessibilityPositionInSet: accessibilityPositionInSet ?? tabKeys.findIndex((key) => key === tabKey) + 1,
       accessibilityState: getAccessibilityState(isDisabled, selectedKey === tabKey, accessibilityState),
-      accessibilitySetSize: accessibilitySetSize ?? tabKeys?.length,
+      accessibilitySetSize: accessibilitySetSize ?? tabKeys.length,
       disabled: isDisabled,
       focusable: !isDisabled ?? true,
       icon: icon,

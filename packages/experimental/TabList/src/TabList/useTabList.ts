@@ -5,7 +5,7 @@ import { memoize } from '@fluentui-react-native/framework';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabListInfo, TabListState, TabListProps } from './TabList.types';
-import { useTabListAnimatedIndicatorState } from '../TabListAnimatedIndicator/useTabListAnimatedIndicatorState';
+import { useAnimatedIndicator } from '../TabListAnimatedIndicator/useAnimatedIndicator';
 
 /**
  * Re-usable hook for TabList.
@@ -55,12 +55,16 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   );
 
   // Logic to style the animated indicator
-  const [animatedIndicatorState, onStackLayout] = useTabListAnimatedIndicatorState(props, selectedKey ?? data.selectedKey);
+  const { addTabLayout, onTabListLayout, tabListLayout, styles, updateStyles } = useAnimatedIndicator(
+    props,
+    selectedKey ?? data.selectedKey,
+  );
 
   const state: TabListState = {
     context: {
       addTabKey: addTabKey,
-      animatedIndicatorState: animatedIndicatorState,
+      addTabLayout: addTabLayout,
+      animatedIndicatorStyles: styles,
       appearance: appearance,
       disabled: disabled,
       invoked: invoked,
@@ -71,7 +75,9 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       setInvoked: setInvoked,
       size: size,
       tabKeys: tabKeys,
+      tabListLayout: tabListLayout,
       vertical: vertical,
+      updateAnimatedIndicatorStyles: updateStyles,
     },
   };
 
@@ -85,7 +91,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       componentRef: componentRef,
       defaultTabbableElement: selectedTabRef,
       isCircularNavigation: isCircularNavigation ?? false,
-      onLayout: onStackLayout,
+      onLayout: onTabListLayout,
       size: size,
       vertical: vertical,
     },

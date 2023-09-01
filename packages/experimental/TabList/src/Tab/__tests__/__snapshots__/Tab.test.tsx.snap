@@ -10,13 +10,14 @@ exports[`Tab component tests Customized Tab 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={NaN}
+  accessibilityPositionInSet={0}
   accessibilityRole="tab"
+  accessibilitySetSize={0}
   accessibilityState={
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": false,
     }
@@ -60,7 +61,7 @@ exports[`Tab component tests Customized Tab 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
@@ -79,8 +80,8 @@ exports[`Tab component tests Customized Tab 1`] = `
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "marginHorizontal": 16,
-        "marginVertical": 16,
+        "marginHorizontal": 6,
+        "marginVertical": 8,
       }
     }
   >
@@ -99,8 +100,8 @@ exports[`Tab component tests Customized Tab 1`] = `
           {
             "color": "red",
             "fontFamily": "Segoe UI",
-            "fontSize": 20,
-            "fontWeight": "600",
+            "fontSize": 12,
+            "fontWeight": "400",
             "margin": 0,
           }
         }
@@ -114,7 +115,7 @@ exports[`Tab component tests Customized Tab 1`] = `
       {
         "backgroundColor": "#00000000",
         "height": 4,
-        "paddingHorizontal": undefined,
+        "paddingHorizontal": 8,
         "width": "100%",
       }
     }
@@ -142,13 +143,14 @@ exports[`Tab component tests Tab default props 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={NaN}
+  accessibilityPositionInSet={0}
   accessibilityRole="tab"
+  accessibilitySetSize={0}
   accessibilityState={
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": false,
     }
@@ -192,7 +194,7 @@ exports[`Tab component tests Tab default props 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
@@ -211,8 +213,8 @@ exports[`Tab component tests Tab default props 1`] = `
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "marginHorizontal": undefined,
-        "marginVertical": undefined,
+        "marginHorizontal": 6,
+        "marginVertical": 8,
       }
     }
   >
@@ -246,7 +248,7 @@ exports[`Tab component tests Tab default props 1`] = `
       {
         "backgroundColor": "#00000000",
         "height": 2,
-        "paddingHorizontal": undefined,
+        "paddingHorizontal": 8,
         "width": "100%",
       }
     }
@@ -274,8 +276,9 @@ exports[`Tab component tests Tab disabled 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={NaN}
+  accessibilityPositionInSet={0}
   accessibilityRole="tab"
+  accessibilitySetSize={0}
   accessibilityState={
     {
       "busy": undefined,
@@ -324,7 +327,7 @@ exports[`Tab component tests Tab disabled 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
@@ -343,8 +346,8 @@ exports[`Tab component tests Tab disabled 1`] = `
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "marginHorizontal": undefined,
-        "marginVertical": undefined,
+        "marginHorizontal": 6,
+        "marginVertical": 8,
       }
     }
   >
@@ -378,7 +381,7 @@ exports[`Tab component tests Tab disabled 1`] = `
       {
         "backgroundColor": "#00000000",
         "height": 2,
-        "paddingHorizontal": undefined,
+        "paddingHorizontal": 8,
         "width": "100%",
       }
     }
@@ -406,13 +409,14 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     ]
   }
   accessibilityLabel="Tab 1"
-  accessibilityPositionInSet={NaN}
+  accessibilityPositionInSet={0}
   accessibilityRole="tab"
+  accessibilitySetSize={0}
   accessibilityState={
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": false,
     }
@@ -456,7 +460,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
@@ -475,8 +479,8 @@ exports[`Tab component tests Tab render icon + text 1`] = `
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "marginHorizontal": undefined,
-        "marginVertical": undefined,
+        "marginHorizontal": 6,
+        "marginVertical": 8,
       }
     }
   >
@@ -486,7 +490,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
         {
           "color": "#424242",
           "fontFamily": "Arial",
-          "fontSize": undefined,
+          "fontSize": 20,
         }
       }
     >
@@ -522,7 +526,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
       {
         "backgroundColor": "#00000000",
         "height": 2,
-        "paddingHorizontal": undefined,
+        "paddingHorizontal": 8,
         "width": "100%",
       }
     }
@@ -550,13 +554,14 @@ exports[`Tab component tests Tab render icon only 1`] = `
     ]
   }
   accessibilityLabel=""
-  accessibilityPositionInSet={NaN}
+  accessibilityPositionInSet={0}
   accessibilityRole="tab"
+  accessibilitySetSize={0}
   accessibilityState={
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": false,
     }
@@ -600,7 +605,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
       "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
@@ -619,8 +624,8 @@ exports[`Tab component tests Tab render icon only 1`] = `
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "marginHorizontal": undefined,
-        "marginVertical": undefined,
+        "marginHorizontal": 6,
+        "marginVertical": 8,
       }
     }
   >
@@ -630,7 +635,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
         {
           "color": "#424242",
           "fontFamily": "Arial",
-          "fontSize": undefined,
+          "fontSize": 20,
         }
       }
     >
@@ -642,7 +647,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
       {
         "backgroundColor": "#00000000",
         "height": 2,
-        "paddingHorizontal": undefined,
+        "paddingHorizontal": 8,
         "width": "100%",
       }
     }
