@@ -31,11 +31,10 @@ class FRNDatePickerModule(private val reactContext: ReactApplicationContext) :
 
     @ReactMethod()
     fun showDatePicker() {
-        val activity: Activity? = reactContext.currentActivity;
         val mainHandler: Handler = Handler(reactContext.mainLooper)
         val runnable = Runnable {
             val dateTimePickerDialog = DateTimePickerDialog(
-                    activity ?: reactContext,
+                    reactContext.currentActivity ?: reactContext,
                     DateTimePickerDialog.Mode.DATE,
                     DateTimePickerDialog.DateRangeMode.NONE,
                     ZonedDateTime.now(),
