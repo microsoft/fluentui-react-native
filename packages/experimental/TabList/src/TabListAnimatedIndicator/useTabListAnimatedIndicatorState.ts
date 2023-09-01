@@ -51,6 +51,7 @@ export function useTabListAnimatedIndicatorState(props: TabListProps, selectedKe
 
   const onStackLayout = React.useCallback((e: LayoutEvent) => {
     if (e.nativeEvent.layout) {
+      console.log('tablist', e.nativeEvent.layout);
       setTabListLayout(e.nativeEvent.layout);
     }
   }, []);
@@ -75,7 +76,7 @@ export function useTabListAnimatedIndicatorState(props: TabListProps, selectedKe
         height: height,
       };
       if (vertical) {
-        containerStyles.start = tabBorderWidth + 1;
+        containerStyles.start = x + tabBorderWidth + 1;
         indicatorStyles.marginTop = y + startMargin + tabBorderWidth + 1;
       } else {
         containerStyles.bottom = height + y + 1;

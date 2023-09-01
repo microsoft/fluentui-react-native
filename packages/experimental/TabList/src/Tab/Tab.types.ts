@@ -39,7 +39,7 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   /**
    * The horizontal / vertical margin of the indicator, depending on its orientation.
    */
-  indicatorInset?: number;
+  indicatorMargin?: number;
 
   /**
    * The direction the indicator is laying.

@@ -33,7 +33,17 @@ export function useTabAnimation(props: TabProps, context: TabListContextData, to
   // onLayout callbacks to help calculate positioning of the animated indicator
   const onTabLayout = React.useCallback(
     (e: LayoutEvent) => {
-      // If the layout values of the tab aren't set or are wonky, don't update state
+      /**
+       * This checks to see if we have relevant info to calculate the layout position and dimensions of the indicator. If this check fails, we don't
+       * want to trigger a re-render by needlessly updating the TabList state.
+       *
+       * We also check if the info is good. Info can be bad in some weird cases:
+       * - Check if width > 0 because there is an on-going issue caused by ScrollViews initially laying out its childrens' width to 0 and height to be a bigger than expected value.
+       * - ScrollView also negatively affects the initial height values. For vertical TabLists, the initial height value will lay out incorrectly. Sometimes, the styling of the parent
+       *   component combined with the ScrollView issues causes the initial height layout value to be completely unreasonable. Exactly which style that causes this issue isn't known;
+       *   more investigation has to be done.
+       */
+      console.log(tabKey, e.nativeEvent.layout);
       if (
         e?.nativeEvent?.layout &&
         animatedIndicatorState?.tablistLayout &&
@@ -42,12 +52,16 @@ export function useTabAnimation(props: TabProps, context: TabListContextData, to
         e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT
       ) {
         let width: number, height: number;
-        // we can calculate the dimensions of the indicator using token values we can access via the compressable framework
+        // Total Indicator inset consists of the horizontal/vertical margin of the indicator, the space taken up by the tab's focus border, and the
+        // existing padding between the focus border and the tab itself. Multiply by 2 to account for the start + end margin/border/padding.
+        const focusBorderPadding = 1;
+        const totalIndicatorInset = 2 * (tokens.indicatorMargin + tokens.borderWidth + focusBorderPadding);
+        // we can calculate the dimensions of the indicator using token values we have access to.
         if (vertical) {
           width = tokens.indicatorThickness;
-          height = e.nativeEvent.layout.height - 2 * (tokens.indicatorInset + tokens.borderWidth + 1); // the '1' is to account for padding between the focus border and tab
+          height = e.nativeEvent.layout.height - totalIndicatorInset;
         } else {
-          width = e.nativeEvent.layout.width - 2 * (tokens.indicatorInset + tokens.borderWidth + 1);
+          width = e.nativeEvent.layout.width - totalIndicatorInset;
           height = tokens.indicatorThickness;
         }
         animatedIndicatorState?.addToLayoutMap(tabKey, {
@@ -56,7 +70,7 @@ export function useTabAnimation(props: TabProps, context: TabListContextData, to
           width: width,
           height: height,
           tabBorderWidth: tokens.borderWidth,
-          startMargin: tokens.indicatorInset,
+          startMargin: tokens.indicatorMargin,
         });
       }
     },

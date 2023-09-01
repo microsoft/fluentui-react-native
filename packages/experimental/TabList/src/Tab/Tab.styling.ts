@@ -14,16 +14,7 @@ import type { TabListContextData } from '../TabList/TabList.types';
  * Hook to get the style props for each Tab slot.
  */
 export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme, context: TabListContextData): TabSlotProps => {
-  const { vertical } = context;
-
-  const indicatorColor = React.useMemo(() => {
-    if (props.tabKey === context.selectedKey) {
-      // if we're the selected tab, we don't want to show the static indicator. We want to style the animated indicator with the correct color instead.
-      return theme.colors.transparentStroke;
-    } else {
-      return tokens.indicatorColor;
-    }
-  }, [tokens.indicatorColor, props.tabKey, context.selectedKey, theme.colors.transparentStroke]);
+  const { selectedKey, vertical } = context;
 
   // Get each slot's props using our final tokens
   const root = React.useMemo<PressablePropsExtended>(
@@ -93,27 +84,28 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
           ? {
               height: '100%',
               width: tokens.indicatorThickness,
-              paddingVertical: tokens.indicatorInset,
+              paddingVertical: tokens.indicatorMargin,
             }
           : {
               width: '100%',
               height: tokens.indicatorThickness,
-              paddingHorizontal: tokens.indicatorInset,
+              paddingHorizontal: tokens.indicatorMargin,
             }),
       },
     }),
-    [vertical, tokens.indicatorThickness, tokens.indicatorInset, theme],
+    [vertical, tokens.indicatorThickness, tokens.indicatorMargin, theme],
   );
 
   const indicator = React.useMemo<IViewProps>(
+    // if we're the selected tab, render the tab indicator as transparent. The animated indicator will receive styling instead via useTabAnimation hook.
     () => ({
       style: {
         flex: 1,
         borderRadius: 99,
-        backgroundColor: indicatorColor,
+        backgroundColor: props.tabKey === selectedKey ? theme.colors.transparentStroke : tokens.indicatorColor,
       },
     }),
-    [indicatorColor],
+    [props.tabKey, selectedKey, tokens.indicatorColor, theme],
   );
 
   return { root, contentContainer, content, icon, stack, indicatorContainer, indicator };
