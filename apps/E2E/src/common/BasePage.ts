@@ -134,8 +134,11 @@ export abstract class BasePage {
     expectedValue: any,
   ): Promise<boolean> {
     const el = await element;
-    const actualValue = await el.getAttribute(attribute);
-    if (expectedValue !== actualValue) {
+
+    try {
+      await browser.waitUntil(async () => expectedValue === await el.getAttribute(attribute));
+    } catch {
+      const actualValue = await el.getAttribute(attribute);
       switch (this.platform) {
         case 'android':
           throw new Error(
@@ -151,6 +154,7 @@ export abstract class BasePage {
           );
       }
     }
+
     return true;
   }
 

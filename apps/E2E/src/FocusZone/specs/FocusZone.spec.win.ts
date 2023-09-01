@@ -8,7 +8,7 @@ describe('FocusZone Testing Initialization', () => {
     expect(await FocusZonePageObject.isInitialPageDisplayed()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to FocusTrapZone test page', async () => {
+  it('Click and navigate to FocusZone test page', async () => {
     /* Click on component button to navigate to test page */
     await FocusZonePageObject.navigateToPageAndLoadTests(true);
     expect(await FocusZonePageObject.isPageLoaded()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_PAGELOAD);

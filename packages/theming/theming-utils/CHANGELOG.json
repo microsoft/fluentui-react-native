@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Tue, 29 Aug 2023 22:56:32 GMT",
+      "version": "0.24.4",
+      "tag": "@fluentui-react-native/theming-utils_v0.24.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 14 Aug 2023 20:14:41 GMT",
       "version": "0.24.3",
       "tag": "@fluentui-react-native/theming-utils_v0.24.3",

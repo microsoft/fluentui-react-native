@@ -8,6 +8,8 @@ exports[`Pressable with useKeyProps 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
@@ -55,6 +57,8 @@ exports[`useKeyProps called twice 1`] = `
       "checked": undefined,
       "disabled": undefined,
       "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
