@@ -7,6 +7,7 @@ interface NativeDatePickerAndroidInterface {
 
 export const NativeDatePicker: NativeDatePickerAndroidInterface = {
   present: (params: any) => {
-    FRNDatePicker.consoleLog('Hello World ' + params);
+    console.log(params);
+    FRNDatePicker.showDatePicker();
   }
 }
