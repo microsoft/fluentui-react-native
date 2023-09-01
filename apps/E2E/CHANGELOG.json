@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 01 Sep 2023 02:16:14 GMT",
+      "version": "1.31.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.31.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "bc7bbbbe5c92009aa28ccb090bfd96825c9ffa8c",
+            "comment": "Change name of error screenshot. Now that there's only one failure, no need to get test name. Already in failure. Makes error Screenshot more accesible"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 31 Aug 2023 17:15:50 GMT",
+      "version": "1.30.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.30.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "54b31a152abeb0ee543dd8a53cab4b79ae15b437",
+            "comment": "Improving FZ E2E reliability"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Aug 2023 22:56:32 GMT",
       "version": "1.29.1",
       "tag": "@fluentui-react-native/e2e-testing_v1.29.1",

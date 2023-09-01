@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Fri, 01 Sep 2023 02:16:14 GMT",
+      "version": "0.35.0",
+      "tag": "@fluentui-react-native/tester-win32_v0.35.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "bc7bbbbe5c92009aa28ccb090bfd96825c9ffa8c",
+            "comment": "Failing early in our E2E tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Aug 2023 22:56:32 GMT",
       "version": "0.34.42",
       "tag": "@fluentui-react-native/tester-win32_v0.34.42",
