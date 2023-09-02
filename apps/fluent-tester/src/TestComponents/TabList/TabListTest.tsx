@@ -27,7 +27,7 @@ const TabListDefaultTest: React.FunctionComponent = () => {
     <View style={stackStyle}>
       <Header>Uncontrolled Component</Header>
       <Line />
-      <PaddedTabList vertical defaultSelectedKey={'tab1'}>
+      <PaddedTabList defaultSelectedKey={'tab1'}>
         <Tab tabKey="tab1">Tab 1</Tab>
         <Tab tabKey="tab2">Tab 2</Tab>
         <Tab tabKey="tab3">Tab 3</Tab>
