@@ -97,15 +97,19 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
   );
 
   const indicator = React.useMemo<IViewProps>(
-    // if we're the selected tab, render the tab indicator as transparent. The animated indicator will receive styling instead via useTabAnimation hook.
-    () => ({
-      style: {
-        flex: 1,
-        borderRadius: 99,
-        backgroundColor: props.tabKey === selectedKey ? theme.colors.transparentStroke : tokens.indicatorColor,
-      },
-    }),
-    [props.tabKey, selectedKey, tokens.indicatorColor, theme],
+    // if we're the selected tab and we've generated styles for the animated indicator, render the static tab indicator as transparent.
+    // The animated indicator will receive styling instead via useTabAnimation hook.
+    () => {
+      const hideStaticIndicator = props.tabKey === selectedKey && !!context.animatedIndicatorStyles;
+      return {
+        style: {
+          flex: 1,
+          borderRadius: 99,
+          backgroundColor: hideStaticIndicator ? theme.colors.transparentStroke : tokens.indicatorColor,
+        },
+      };
+    },
+    [context.animatedIndicatorStyles, props.tabKey, selectedKey, tokens.indicatorColor, theme],
   );
 
   return { root, contentContainer, content, icon, stack, indicatorContainer, indicator };
