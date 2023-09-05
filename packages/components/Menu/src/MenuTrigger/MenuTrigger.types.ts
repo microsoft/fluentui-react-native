@@ -25,18 +25,6 @@ export interface MenuTriggerChildProps extends Omit<PressablePropsExtended, 'onP
    * A callback to call on button click event
    */
   onClick?: (e: InteractionEvent) => void;
-
-  /**
-   * Tooltip over menu trigger
-   */
-  tooltip?: string;
-
-  /**
-   * Display the tooltip
-   * Note the capital "T" in tip as it is needed to match the same prop name in win32 where this is read
-   * @platform win32
-   */
-  alwaysShowToolTip?: boolean;
 }
 
 export interface MenuTriggerState {

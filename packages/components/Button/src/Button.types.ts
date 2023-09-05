@@ -117,13 +117,6 @@ export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'>
    * Text that should show in a tooltip when the user hovers over a button.
    */
   tooltip?: string;
-
-  /**
-   * Should display tooltip
-   * Note the capital "T" in tip as it is needed to match the same prop name in win32 where this is read
-   * @platform win32
-   */
-  alwaysShowToolTip?: boolean;
 }
 
 export interface ButtonProps extends ButtonCoreProps {

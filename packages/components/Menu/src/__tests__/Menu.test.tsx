@@ -181,6 +181,8 @@ describe('Menu component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  // Note the capital T the "Tip" (in the snapshot)
+  // It is intentional as it matches the same prop in NetUI
   it('Menu alwaysShowToolTip', () => {
     const tree = renderer
       .create(
