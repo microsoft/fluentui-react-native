@@ -20,6 +20,8 @@ exports[`Menu component tests Menu alwaysShowToolTip 1`] = `
       "checked": undefined,
       "disabled": false,
       "expanded": false,
+      "multiselectable": undefined,
+      "required": undefined,
       "selected": undefined,
     }
   }
