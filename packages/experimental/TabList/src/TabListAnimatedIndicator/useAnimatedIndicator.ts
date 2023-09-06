@@ -71,10 +71,10 @@ export function useAnimatedIndicator(props: TabListProps, selectedKey?: string):
       };
       if (vertical) {
         containerStyles.start = x + tabBorderWidth + 1;
-        indicatorStyles.marginTop = y + startMargin + tabBorderWidth + 1;
+        indicatorStyles.top = y + startMargin + tabBorderWidth + 1;
       } else {
         containerStyles.bottom = height + y + 1;
-        indicatorStyles.marginLeft = x + startMargin + tabBorderWidth + 1;
+        indicatorStyles.start = x + startMargin + tabBorderWidth + 1;
       }
       return {
         container: containerStyles,

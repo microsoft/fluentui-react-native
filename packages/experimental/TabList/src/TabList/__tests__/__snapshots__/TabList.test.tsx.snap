@@ -1835,7 +1835,7 @@ exports[`TabList component tests TabList selected key 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": "#185abd",
               "borderRadius": 99,
               "flex": 1,
             }
