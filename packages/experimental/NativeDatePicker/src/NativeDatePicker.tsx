@@ -1,7 +1,11 @@
 export const NativeDatePicker = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   present: (params: any) => {
-    console.log("SHOULD NOT LOG" + params);
+    console.warn('This log should not appear');
+    params;
   },
-  parseISOString: (date: string) => new Date(date),
+  parseISOString: (date: string) => {
+    console.warn('This log should not appear');
+    return new Date(date)
+  },
 };
-console.warn('DatePicker not supported');
