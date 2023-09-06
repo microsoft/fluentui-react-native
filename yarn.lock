@@ -9206,8 +9206,8 @@ __metadata:
   linkType: hard
 
 "beachball@npm:^2.20.0":
-  version: 2.36.0
-  resolution: "beachball@npm:2.36.0"
+  version: 2.37.0
+  resolution: "beachball@npm:2.37.0"
   dependencies:
     cosmiconfig: ^7.0.0
     execa: ^5.0.0
@@ -9223,7 +9223,7 @@ __metadata:
     yargs-parser: ^21.0.0
   bin:
     beachball: bin/beachball.js
-  checksum: 86865e2639cea1941999757ca30a57922c380ca6a56ecf949855b92f296d0bf158529a86a80437b058095c47fd958220b2f0b941a94fcf5913fa19fc85b7eefe
+  checksum: 94260709d55e2b5d035e715ee96d2e5fb840ac927cb5da721474c97c2941d4a979f4989706d4609a22d4e8420ca0cea78c5177f6c12ea7d02d35d06581fda9ad
   languageName: node
   linkType: hard
 
@@ -15438,8 +15438,8 @@ __metadata:
   linkType: hard
 
 "lage@npm:^2.0.0":
-  version: 2.7.6
-  resolution: "lage@npm:2.7.6"
+  version: 2.7.8
+  resolution: "lage@npm:2.7.8"
   dependencies:
     fsevents: ~2.3.2
     glob-hasher: ^1.3.0
@@ -15448,7 +15448,7 @@ __metadata:
       optional: true
   bin:
     lage: dist/lage.js
-  checksum: 612b3c0ec10193fead0813428dce285a211d145998a75e8f2b00a7edb27c9ccecd22c0e8887f6e9f406c05826020fe3860cb1a209b37ec6550bf534c7bc2e3c3
+  checksum: 1f49d2f28b0a17f5adf96e908010460bb147205c4eeaad7eb0764d4a8ba292558031225a3bc406a4bdac131cd1af0b5e33364bd105ad105b55e06d17a010a37a
   languageName: node
   linkType: hard
 
@@ -18576,8 +18576,8 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.71.0":
-  version: 0.71.35
-  resolution: "react-native-windows@npm:0.71.35"
+  version: 0.71.36
+  resolution: "react-native-windows@npm:0.71.36"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
@@ -18617,7 +18617,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-  checksum: 85e29c87c8c96674e7e7a9cf05db801e808c0367b07cbaf10caf702d98807c278d88ac96d44cb1b6e89bb7902bbd1d0830a2b66b3bdc6bf226352131db27d043
+  checksum: 68a93a0fc73115975f30a4a4ebcfa54c4c5245545661bf998174b9e77e90bf38132d715f0e4becf536f6c5f131ff3fb64d419bba2f0b08fa76c5ec137fcfbc73
   languageName: node
   linkType: hard
 
