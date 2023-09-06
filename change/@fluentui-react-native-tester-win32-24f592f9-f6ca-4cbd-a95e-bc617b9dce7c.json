@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Moving wdio.win32 to apps/E2E",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
