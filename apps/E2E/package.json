@@ -52,7 +52,7 @@
     "webdriverio": "7.30.1"
   },
   "installConfig": {
-    "hoistingLimits": "workspaces"
+    "hoistingLimits": "dependencies"
   },
   "rnx-kit": {
     "kitType": "app",
