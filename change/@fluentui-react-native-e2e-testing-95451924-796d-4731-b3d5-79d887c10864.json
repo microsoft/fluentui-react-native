@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Removing E2E testing assets from apps/win32. Will host in apps/e2e",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
