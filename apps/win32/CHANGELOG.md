@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 01 Sep 2023 02:16:14 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Sep 2023 22:59:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.36.0
+
+Wed, 06 Sep 2023 22:59:22 GMT
+
+### Minor changes
+
+- Moving wdio.win32 to apps/E2E (safreibe@microsoft.com)
 
 ## 0.35.0
 

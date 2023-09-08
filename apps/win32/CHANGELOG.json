@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 06 Sep 2023 22:59:22 GMT",
+      "version": "0.36.0",
+      "tag": "@fluentui-react-native/tester-win32_v0.36.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "8e3fd53940e0add938cd1239dcb5949088f49dce",
+            "comment": "Moving wdio.win32 to apps/E2E"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Sep 2023 02:16:14 GMT",
       "version": "0.35.0",
       "tag": "@fluentui-react-native/tester-win32_v0.35.0",
