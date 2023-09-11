@@ -100,6 +100,12 @@ export abstract class BasePage {
 
   async enableE2ETesterMode(): Promise<void> {
     const e2eSwitch = await this._e2eSwitch;
+    await browser.waitUntil(async () => await e2eSwitch.isDisplayed() && await e2eSwitch.isEnabled(),
+    {
+      timeout: 15000,
+      timeoutMsg: 'The E2E Switch should be enabled and visible before we interact with it'
+    })
+
     switch (this.platform) {
       // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
       // different on android because .isSelected() doesn't function as expected on the platform.
