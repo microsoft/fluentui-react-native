@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 01 Sep 2023 02:16:14 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Sep 2023 22:59:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.31.1
+
+Wed, 06 Sep 2023 22:59:22 GMT
+
+### Patches
+
+- Removing E2E testing assets from apps/win32. Will host in apps/e2e (safreibe@microsoft.com)
 
 ## 1.31.0
 
