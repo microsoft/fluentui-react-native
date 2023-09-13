@@ -10,8 +10,7 @@ import RadioGroupPageObject from '../pages/RadioGroupLegacyPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('RadioGroup/RadioButton Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await RadioGroupPageObject.waitForInitialPageToDisplay();
-    expect(await RadioGroupPageObject.isInitialPageDisplayed()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await RadioGroupPageObject.waitForInitialPageToDisplay()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {

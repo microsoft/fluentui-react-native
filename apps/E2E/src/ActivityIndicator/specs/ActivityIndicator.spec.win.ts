@@ -3,8 +3,7 @@ import ActivityIndicatorPageObject from '../pages/ActivityIndicatorPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Activity Indicator Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await ActivityIndicatorPageObject.waitForInitialPageToDisplay();
-    expect(await ActivityIndicatorPageObject.isInitialPageDisplayed()).toBeTruthy(ActivityIndicatorPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await ActivityIndicatorPageObject.waitForInitialPageToDisplay()).toBeTruthy(ActivityIndicatorPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Activity Indicator test page', async () => {

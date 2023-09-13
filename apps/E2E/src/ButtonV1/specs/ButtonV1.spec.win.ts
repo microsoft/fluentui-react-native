@@ -5,8 +5,7 @@ import ButtonV1PageObject from '../pages/ButtonV1PageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('ButtonV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await ButtonV1PageObject.waitForInitialPageToDisplay();
-    expect(await ButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await ButtonV1PageObject.waitForInitialPageToDisplay()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to ButtonV1 test page', async () => {

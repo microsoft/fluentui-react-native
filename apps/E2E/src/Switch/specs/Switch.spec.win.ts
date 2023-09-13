@@ -5,8 +5,7 @@ import SwitchPageObject from '../pages/SwitchPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await SwitchPageObject.waitForInitialPageToDisplay();
-    expect(await SwitchPageObject.isInitialPageDisplayed()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await SwitchPageObject.waitForInitialPageToDisplay()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Switch test page', async () => {

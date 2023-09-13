@@ -11,8 +11,7 @@ import TabListPageObject from '../pages/TabListPageObject';
 
 describe('TabList Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await TabListPageObject.waitForInitialPageToDisplay();
-    expect(await TabListPageObject.isInitialPageDisplayed())
+    expect(await TabListPageObject.waitForInitialPageToDisplay())
       .withContext(TabListPageObject.ERRORMESSAGE_APPLOAD)
       .toBeTruthy();
   });

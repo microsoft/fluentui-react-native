@@ -243,12 +243,8 @@ export abstract class BasePage {
   }
 
   /** Waits for the tester app to load by checking if the startup page loads. If the app doesn't load before the timeout, it causes the test to fail. */
-  async waitForInitialPageToDisplay(): Promise<void> {
-    await this.waitForCondition(async () => await this.isInitialPageDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
-  }
-
-  async isInitialPageDisplayed(): Promise<boolean> {
-    return await (await this._initialPage).isDisplayed();
+  async waitForInitialPageToDisplay(): Promise<boolean | void> {
+    return await this.waitForCondition(async () => await (await this._initialPage).isDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
   }
 
   /* Scrolls to the specified or primary UI test element until it is displayed. */
@@ -324,8 +320,8 @@ export abstract class BasePage {
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
-  async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number, interval?: number): Promise<void> {
-    await browser.waitUntil(async () => await condition(), {
+  async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number, interval?: number): Promise<boolean | void> {
+    return await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
       interval: interval ?? 1000,

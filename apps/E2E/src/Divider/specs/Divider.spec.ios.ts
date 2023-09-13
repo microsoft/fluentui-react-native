@@ -3,8 +3,7 @@ import DividerPageObject from '../pages/DividerPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Divider Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await DividerPageObject.waitForInitialPageToDisplay();
-    expect(await DividerPageObject.isInitialPageDisplayed()).toBeTruthy(DividerPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await DividerPageObject.waitForInitialPageToDisplay()).toBeTruthy(DividerPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Divider test page', async () => {

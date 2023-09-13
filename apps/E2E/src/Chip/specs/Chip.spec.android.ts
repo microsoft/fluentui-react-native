@@ -5,8 +5,7 @@ import ChipPageObject from '../pages/ChipPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Chip Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await ChipPageObject.waitForInitialPageToDisplay();
-    expect(await ChipPageObject.isInitialPageDisplayed()).toBeTruthy(ChipPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await ChipPageObject.waitForInitialPageToDisplay()).toBeTruthy(ChipPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Chip test page', async () => {

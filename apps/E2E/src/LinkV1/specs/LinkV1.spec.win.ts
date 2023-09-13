@@ -5,8 +5,7 @@ import LinkV1PageObject from '../pages/LinkV1PageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('LinkV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await LinkV1PageObject.waitForInitialPageToDisplay();
-    expect(await LinkV1PageObject.isInitialPageDisplayed()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await LinkV1PageObject.waitForInitialPageToDisplay()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to LinkV1 test page', async () => {

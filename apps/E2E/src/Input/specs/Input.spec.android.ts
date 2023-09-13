@@ -5,8 +5,7 @@ import InputPageObject from '../pages/InputPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Input Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await InputPageObject.waitForInitialPageToDisplay();
-    expect(await InputPageObject.isInitialPageDisplayed()).toBeTruthy(InputPageObject.ERRORMESSAGE_APPLOAD);
+      expect(await InputPageObject.waitForInitialPageToDisplay()).toBeTruthy(InputPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Input test page', async () => {

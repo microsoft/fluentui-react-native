@@ -4,7 +4,7 @@ import NativeTestingPageObject from '../pages/NativeTestingPageObject.win';
 describe('Native Safety Check Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NativeTestingPageObject.waitForInitialPageToDisplay();
-    expect(await NativeTestingPageObject.isInitialPageDisplayed()).toBeTruthy(NativeTestingPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await NativeTestingPageObject.waitForInitialPageToDisplay()).toBeTruthy(NativeTestingPageObject.ERRORMESSAGE_APPLOAD);
   });
 
   // The ScrollView in testing is the one that contains all the buttons that navigate to each component's

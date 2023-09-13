@@ -5,8 +5,7 @@ import MenuButtonV1PageObject from '../pages/MenuButtonV1PageObject.win';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButtonV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await MenuButtonV1PageObject.waitForInitialPageToDisplay();
-    expect(await MenuButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await MenuButtonV1PageObject.waitForInitialPageToDisplay()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to MenuButtonV1 test page', async () => {

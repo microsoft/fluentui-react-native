@@ -3,8 +3,7 @@ import FocusZonePageObject from '../pages/FocusZonePageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('FocusZone Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await FocusZonePageObject.waitForInitialPageToDisplay();
-    expect(await FocusZonePageObject.isInitialPageDisplayed()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_APPLOAD);
+    expect(await FocusZonePageObject.waitForInitialPageToDisplay()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to FocusTrapZone test page', async () => {
