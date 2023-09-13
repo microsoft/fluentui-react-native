@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "check dimensions before rendering focusInnerBorder",
+  "packageName": "@fluentui-react-native/button",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
