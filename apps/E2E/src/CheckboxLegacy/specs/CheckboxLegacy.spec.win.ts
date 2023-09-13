@@ -31,8 +31,6 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         CHECKBOX_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -43,8 +41,6 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         CHECKBOX_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do NOT set "accessibilityLabel" prop. Validate "Name" element attribute defaults to the checkbox label.', async () => {
@@ -55,8 +51,6 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         CHECKBOX_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

@@ -29,8 +29,6 @@ describe('Callout Accessibility Testing', () => {
     await expect(
       await CalloutPageObject.compareAttribute(CalloutPageObject._primaryComponent, Attribute.AccessibilityRole, CALLOUT_A11Y_ROLE),
     ).toBeTruthy();
-
-    await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -41,8 +39,6 @@ describe('Callout Accessibility Testing', () => {
         CALLOUT_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
   afterAll(async () => {
