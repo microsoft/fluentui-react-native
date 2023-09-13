@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 13 Sep 2023 17:08:13 GMT",
+      "version": "0.35.4",
+      "tag": "@fluentui-react-native/button_v0.35.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "9107d6e5d15c77a00188ff22e6b4622ec30ceb05",
+            "comment": "check dimensions before rendering focusInnerBorder"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Aug 2023 22:56:32 GMT",
       "version": "0.35.3",
       "tag": "@fluentui-react-native/button_v0.35.3",
