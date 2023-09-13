@@ -11,6 +11,9 @@ describe('TextV1 Testing Initialization', () => {
   it('Click and navigate to TextV1 test page', async () => {
     expect(await TextV1PageObject.navigateToPageAndLoadTests()).toBeTrue();
 
+    /* Expand E2E section */
+    expect(await TextV1PageObject.enableE2ETesterMode()).toBeTrue();
+
     expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

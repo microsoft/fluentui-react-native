@@ -10,6 +10,9 @@ describe('Tabs Legacy Testing Initialization', () => {
   it('Click and navigate to Tabs Legacy test page', async () => {
     expect(await TabsLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
+    /* Expand E2E section */
+    expect(await TabsLegacyPageObject.enableE2ETesterMode()).toBeTrue();
+
     expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
