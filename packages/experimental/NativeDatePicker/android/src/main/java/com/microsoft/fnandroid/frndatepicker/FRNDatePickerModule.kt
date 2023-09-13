@@ -58,17 +58,18 @@ class FRNDatePickerModule(private val reactContext: ReactApplicationContext) :
                     DateTimePickerDialog.Mode.values()[dialogMode],
                     DateTimePickerDialog.DateRangeMode.values()[dateRangeMode],
                     getZonedDateTimeFromString(startDate),
-                    getDurationFromStartAndEnd(startDate, endDate)
+                    getDuration(startDate, endDate, DateTimePickerDialog.DateRangeMode.values()[dateRangeMode])
             )
 
             dateTimePickerDialog.onDateTimePickedListener =
                     object : DateTimePickerDialog.OnDateTimePickedListener {
                         override fun onDateTimePicked(dateTime: ZonedDateTime, duration: Duration) {
-                            val formatter: DateTimeFormatter = DateTimeFormatter.ISO_INSTANT;
-                            val formattedStartDate: String = formatter.format(dateTime);
-                            val endDate: ZonedDateTime = dateTime.plus(duration);
-                            val formattedEndDate: String = formatter.format(endDate);
-                            onDateTimePicked.invoke(formattedStartDate, formattedEndDate, duration.toMinutes().toInt());
+                            val endDateTime: ZonedDateTime = dateTime.plus(duration);
+                            onDateTimePicked.invoke(
+                                    formatDate(dateTime,
+                                            DateTimePickerDialog.Mode.values()[dialogMode]),
+                                    formatDate(endDateTime,
+                                            DateTimePickerDialog.Mode.values()[dialogMode]))
                         }
                     }
 
@@ -78,8 +79,20 @@ class FRNDatePickerModule(private val reactContext: ReactApplicationContext) :
         mainHandler.post(runnable);
     }
 
-    private fun getDurationFromStartAndEnd(startDate: String?, endDate: String?): Duration {
-        if (startDate.isNullOrEmpty() || endDate.isNullOrEmpty()) {
+    private fun formatDate(selectedDate: ZonedDateTime, dialogMode: DateTimePickerDialog.Mode): String {
+        Log(selectedDate.zone.toString());
+
+        // Removes the timezone information from the date object.
+        val localDate = selectedDate.toLocalDateTime();
+        if (dialogMode == DateTimePickerDialog.Mode.DATE) {
+            return DateTimeFormatter.ISO_DATE.format(localDate);
+        }
+
+        return DateTimeFormatter.ISO_DATE_TIME.format(localDate);
+    }
+
+    private fun getDuration(startDate: String?, endDate: String?, dateRangeMode: DateTimePickerDialog.DateRangeMode): Duration {
+        if (startDate.isNullOrEmpty() || endDate.isNullOrEmpty() || dateRangeMode == DateTimePickerDialog.DateRangeMode.NONE) {
             return Duration.ZERO;
         }
 
@@ -100,5 +113,9 @@ class FRNDatePickerModule(private val reactContext: ReactApplicationContext) :
         val zonedDateTime = ZonedDateTime.ofInstant(instant, ZoneOffset.UTC);
 
         return zonedDateTime;
+    }
+
+    private fun Log(msg: String) {
+        Log.d("FRNDatePickerModule", msg);
     }
 }
