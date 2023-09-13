@@ -5,13 +5,15 @@ import ButtonV1PageObject from '../pages/ButtonV1PageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('ButtonV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await ButtonV1PageObject.waitForInitialPageToDisplay()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await ButtonV1PageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to ButtonV1 test page', async () => {
     /* Click on component button to navigate to test page */
-    await ButtonV1PageObject.navigateToPageAndLoadTests(true);
-    expect(await ButtonV1PageObject.isPageLoaded()).toBeTruthy(ButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await ButtonV1PageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await ButtonV1PageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

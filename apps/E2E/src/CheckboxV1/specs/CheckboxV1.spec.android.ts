@@ -4,12 +4,14 @@ import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 
 describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await CheckboxV1PageObject.waitForInitialPageToDisplay()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await CheckboxV1PageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to CheckboxV1 test page', async () => {
-    await CheckboxV1PageObject.navigateToPageAndLoadTests(true);
-    expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await CheckboxV1PageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await CheckboxV1PageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

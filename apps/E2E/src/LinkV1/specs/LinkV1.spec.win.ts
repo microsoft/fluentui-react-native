@@ -5,12 +5,14 @@ import LinkV1PageObject from '../pages/LinkV1PageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('LinkV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await LinkV1PageObject.waitForInitialPageToDisplay()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await LinkV1PageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to LinkV1 test page', async () => {
-    await LinkV1PageObject.navigateToPageAndLoadTests(true);
-    expect(await LinkV1PageObject.isPageLoaded()).toBeTruthy(LinkV1PageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await LinkV1PageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await LinkV1PageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

@@ -5,13 +5,15 @@ import AvatarPageObject from '../pages/AvatarPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Avatar Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await AvatarPageObject.waitForInitialPageToDisplay()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await AvatarPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Avatar test page', async () => {
     /* Click on component button to navigate to test page */
-    await AvatarPageObject.navigateToPageAndLoadTests(true);
-    expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await AvatarPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await AvatarPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });

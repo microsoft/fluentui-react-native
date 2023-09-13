@@ -4,12 +4,14 @@ import TabsV1PageObject from '../pages/TabsV1PageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('TabsV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await TabsV1PageObject.waitForInitialPageToDisplay()).toBeTruthy(TabsV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await TabsV1PageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to TabsV1 test page', async () => {
-    await TabsV1PageObject.navigateToPageAndLoadTests(true);
-    expect(await TabsV1PageObject.isPageLoaded()).toBeTruthy(TabsV1PageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await TabsV1PageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await TabsV1PageObject.enableE2ETesterMode()).toBeTrue();
 
     expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

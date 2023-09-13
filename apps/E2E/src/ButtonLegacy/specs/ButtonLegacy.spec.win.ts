@@ -5,13 +5,15 @@ import ButtonLegacyPageObject from '../pages/ButtonLegacyPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Button Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await ButtonLegacyPageObject.waitForInitialPageToDisplay()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await ButtonLegacyPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Button Legacy test page', async () => {
     /* Click on component button to navigate to test page */
-    await ButtonLegacyPageObject.navigateToPageAndLoadTests(true);
-    expect(await ButtonLegacyPageObject.isPageLoaded()).toBeTruthy(ButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await ButtonLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await ButtonLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });

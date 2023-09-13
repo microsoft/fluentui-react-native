@@ -5,12 +5,14 @@ import InputPageObject from '../pages/InputPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Input Testing Initialization', () => {
   it('Wait for app load', async () => {
-      expect(await InputPageObject.waitForInitialPageToDisplay()).toBeTruthy(InputPageObject.ERRORMESSAGE_APPLOAD);
+      expect(await InputPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Input test page', async () => {
-    await InputPageObject.navigateToPageAndLoadTests(true);
-    expect(await InputPageObject.isPageLoaded()).toBeTruthy(InputPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await InputPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await InputPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });

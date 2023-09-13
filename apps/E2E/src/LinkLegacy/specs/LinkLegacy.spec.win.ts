@@ -5,12 +5,14 @@ import LinkLegacyPageObject from '../pages/LinkLegacyPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Link Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await LinkLegacyPageObject.waitForInitialPageToDisplay()).toBeTruthy(LinkLegacyPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await LinkLegacyPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Link Legacy test page', async () => {
-    await LinkLegacyPageObject.navigateToPageAndLoadTests(true);
-    expect(await LinkLegacyPageObject.isPageLoaded()).toBeTruthy(LinkLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await LinkLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await LinkLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

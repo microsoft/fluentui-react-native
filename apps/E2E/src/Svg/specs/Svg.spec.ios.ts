@@ -3,11 +3,10 @@ import SvgPageObject from '../pages/SvgPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Svg Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await SvgPageObject.waitForInitialPageToDisplay()).toBeTruthy(SvgPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await SvgPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Svg test page', async () => {
-    await SvgPageObject.navigateToPageAndLoadTests();
-    expect(await SvgPageObject.isPageLoaded()).toBeTruthy(SvgPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await SvgPageObject.navigateToPageAndLoadTests()).toBeTrue();
   });
 });

@@ -4,12 +4,14 @@ import CheckboxLegacyPageObject from '../pages/CheckboxLegacyPageObject';
 
 describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await CheckboxLegacyPageObject.waitForInitialPageToDisplay()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await CheckboxLegacyPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
-    await CheckboxLegacyPageObject.navigateToPageAndLoadTests(true);
-    expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await CheckboxLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await CheckboxLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

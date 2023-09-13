@@ -4,12 +4,14 @@ import TabsLegacyPageObject from '../pages/TabsLegacyPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Tabs Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await TabsLegacyPageObject.waitForInitialPageToDisplay()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await TabsLegacyPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Tabs Legacy test page', async () => {
-    await TabsLegacyPageObject.navigateToPageAndLoadTests(true);
-    expect(await TabsLegacyPageObject.isPageLoaded()).toBeTruthy(TabsLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await TabsLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await TabsLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
     expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

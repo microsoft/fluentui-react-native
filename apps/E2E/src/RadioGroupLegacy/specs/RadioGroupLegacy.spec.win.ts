@@ -10,12 +10,14 @@ import RadioGroupPageObject from '../pages/RadioGroupLegacyPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('RadioGroup/RadioButton Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await RadioGroupPageObject.waitForInitialPageToDisplay()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await RadioGroupPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {
-    await RadioGroupPageObject.navigateToPageAndLoadTests(true);
-    expect(await RadioGroupPageObject.isPageLoaded()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await RadioGroupPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await RadioGroupPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

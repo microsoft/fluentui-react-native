@@ -5,13 +5,15 @@ import CalloutPageObject from '../pages/CalloutPageObject.win';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Callout Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await CalloutPageObject.waitForInitialPageToDisplay()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await CalloutPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Callout test page', async () => {
     /* Click on component button to navigate to test page */
-    await CalloutPageObject.navigateToPageAndLoadTests(true);
-    expect(await CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await CalloutPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await CalloutPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

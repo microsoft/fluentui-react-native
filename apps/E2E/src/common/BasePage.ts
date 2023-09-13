@@ -74,31 +74,27 @@ export abstract class BasePage {
    * For any given page object, this method automates:
    *  - Navigating to the page by clicking its component button
    *  - Waiting for the component page to load
-   *  - Optionally expanding its E2E sections IF a boolean flag is passed.
    *
    * This also contains error checking through its waiters, removing the extra `expect()` calls during test setup.
-   *
-   * @param {boolean} showE2ESection Some components' E2E tests check only if the test page loads correctly or not. Others
-   * (majority), perform UI manipulation tests on UI components on the test page. In these scenarios, these UI components have their
-   * own section on the test page (by default, it's hidden so partners don't see it). If this parameter is true, this method opens up
-   * that testing section.
    */
-  async navigateToPageAndLoadTests(showE2ESection = false) {
+  async navigateToPageAndLoadTests(): Promise<boolean | void> {
     // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
     if (this.platform === 'android' || this.platform === 'ios') {
       await this.mobileScrollToComponentButton();
     }
 
     await (await this._pageButton).click();
-    // Wait for page to load
-    await this.waitForCondition(async () => await this.isPageLoaded(), this.ERRORMESSAGE_PAGELOAD, this.waitForUiEvent, 1500);
 
-    if (showE2ESection) {
-      await this.enableE2ETesterMode();
-    }
+    // Wait for page to load
+    return await this.waitForCondition(async () => await this.isPageLoaded(), this.ERRORMESSAGE_PAGELOAD, this.waitForUiEvent, 1500);
   }
 
-  async enableE2ETesterMode(): Promise<void> {
+  /*
+   * Some components' E2E tests check only if the test page loads correctly or not. Others
+   * (majority), perform UI manipulation tests on UI components on the test page. In these scenarios, these UI components have their
+   * own section on the test page (by default, it's hidden so partners don't see it). This method opens up that testing section.
+  */
+  async enableE2ETesterMode(): Promise<boolean | void> {
     const e2eSwitch = await this._e2eSwitch;
     await browser.waitUntil(async () => await e2eSwitch.isDisplayed() && await e2eSwitch.isEnabled(),
     {
@@ -124,7 +120,8 @@ export abstract class BasePage {
           await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
         }
     }
-    await this.waitForCondition(
+
+    return await this.waitForCondition(
       async () => await (await this._e2eSection).isDisplayed(),
       'Pressed E2E Mode Switch, but E2E Test Sections failed to display before the timeout.',
     );

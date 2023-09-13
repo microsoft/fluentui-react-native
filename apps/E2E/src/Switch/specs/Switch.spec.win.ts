@@ -5,12 +5,14 @@ import SwitchPageObject from '../pages/SwitchPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await SwitchPageObject.waitForInitialPageToDisplay()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await SwitchPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Switch test page', async () => {
-    await SwitchPageObject.navigateToPageAndLoadTests(true);
-    expect(await SwitchPageObject.isPageLoaded()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await SwitchPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await SwitchPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

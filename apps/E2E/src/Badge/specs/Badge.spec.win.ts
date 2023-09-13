@@ -3,12 +3,11 @@ import BasicBadgePageObject from '../pages/BasicBadgePageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Badge Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await BasicBadgePageObject.waitForInitialPageToDisplay()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_APPLOAD);
+    expect(await BasicBadgePageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Badge test page', async () => {
-    await BasicBadgePageObject.navigateToPageAndLoadTests(true);
-    expect(await BasicBadgePageObject.isPageLoaded()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await BasicBadgePageObject.navigateToPageAndLoadTests()).toBeTrue();
 
     await expect(await BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
   });

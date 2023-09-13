@@ -5,12 +5,14 @@ import TextLegacyPageObject from '../pages/TextLegacyPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Text Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    expect(await TextLegacyPageObject.waitForInitialPageToDisplay()).toBeTruthy(TextLegacyPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await TextLegacyPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Text Legacy test page', async () => {
-    await TextLegacyPageObject.navigateToPageAndLoadTests(true);
-    expect(await TextLegacyPageObject.isPageLoaded()).toBeTruthy(TextLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await TextLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await TextLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
     expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
