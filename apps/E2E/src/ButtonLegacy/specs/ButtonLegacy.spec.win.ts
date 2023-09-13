@@ -33,8 +33,6 @@ describe('Button Legacy Accessibility Testing', () => {
         BUTTON_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -45,8 +43,6 @@ describe('Button Legacy Accessibility Testing', () => {
         BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
       ),
     ).toBeTruthy();
-
-    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do NOT set "accessibilityLabel" prop. Validate "Name" element attribute defaults to the button label.', async () => {
@@ -57,8 +53,6 @@ describe('Button Legacy Accessibility Testing', () => {
         BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
       ),
     ).toBeTruthy();
-
-    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

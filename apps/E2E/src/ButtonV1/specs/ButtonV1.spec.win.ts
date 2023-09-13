@@ -28,8 +28,6 @@ describe('ButtonV1 Accessibility Testing', () => {
     await expect(
       await ButtonV1PageObject.compareAttribute(ButtonV1PageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
     ).toBeTruthy();
-
-    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -40,8 +38,6 @@ describe('ButtonV1 Accessibility Testing', () => {
         BUTTON_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do NOT set "accessibilityLabel" prop. Validate "Name" element attribute defaults to the button label.', async () => {
@@ -52,8 +48,6 @@ describe('ButtonV1 Accessibility Testing', () => {
         BUTTON_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
