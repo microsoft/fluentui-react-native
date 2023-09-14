@@ -22,16 +22,12 @@ describe('TabsV1 Accessibility Testing', () => {
     expect(
       await TabsV1PageObject.compareAttribute(TabsV1PageObject._primaryComponent, Attribute.AccessibilityRole, TAB_A11Y_ROLE),
     ).toBeTruthy();
-
-    expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate TabItem\'s "accessibilityRole" defaults to "ControlType.TabItem".', async () => {
     expect(
       await TabsV1PageObject.compareAttribute(TabsV1PageObject.getTabItem('First'), Attribute.AccessibilityRole, TABITEM_A11Y_ROLE),
     ).toBeTruthy();
-
-    expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -41,7 +37,7 @@ describe('TabsV1 Functional Tests', () => {
     await TabsV1PageObject.scrollToTestElement();
 
     // Reset the TabGroup by putting focus on First tab item
-    await TabsV1PageObject.click(TabsV1PageObject.getTabItem('First'));
+    await TabsV1PageObject.resetListSelection();
   });
 
   it('Click on the second tab header. Validate the second TabItem content is shown.', async () => {

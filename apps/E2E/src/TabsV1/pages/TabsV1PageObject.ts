@@ -14,10 +14,14 @@ import {
 export type TabItem = 'First' | 'Second' | 'Third';
 
 class TabsV1PageObject extends BasePage {
-  async waitForTabItemContentToLoad(selector: TabItem, errorMsg: string): Promise<boolean> {
+  async resetListSelection(): Promise<void> {
+    (await this.getTabItem('First')).click();
+    await this.waitForTabItemContentToLoad('First', 'Reset TabList, first tab should be selected');
+  }
+
+  async waitForTabItemContentToLoad(selector: TabItem, errorMsg: string): Promise<boolean | void> {
     const content = await this.getTabItemContent(selector);
-    await this.waitForCondition(async () => await content.isDisplayed(), errorMsg);
-    return await content.isDisplayed();
+    return await this.waitForCondition(async () => await content.isDisplayed(), errorMsg);
   }
 
   async getTabItem(selector: TabItem): Promise<WebdriverIO.Element> {
