@@ -156,7 +156,7 @@ exports.config = {
    */
   afterTest: (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
-    console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
+    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration/600).toFixed(2)}s". \n`);
 
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
