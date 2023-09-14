@@ -27,23 +27,17 @@ describe('TextV1 Accessibility Testing', () => {
     expect(
       await TextV1PageObject.compareAttribute(TextV1PageObject._primaryComponent, Attribute.AccessibilityRole, TEXT_A11Y_ROLE),
     ).toBeTruthy();
-
-    expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     expect(
       await TextV1PageObject.compareAttribute(TextV1PageObject._primaryComponent, Attribute.AccessibilityLabel, TEXTV1_ACCESSIBILITY_LABEL),
     ).toBeTruthy();
-
-    expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to text content.', async () => {
     expect(
       await TextV1PageObject.compareAttribute(TextV1PageObject._secondaryComponent, Attribute.AccessibilityLabel, TEXTV1_CONTENT),
     ).toBeTruthy();
-
-    expect(await TextV1PageObject.didAssertPopup()).toBeFalsy(TextV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

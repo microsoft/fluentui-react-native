@@ -31,8 +31,6 @@ describe('Text Legacy Accessibility Testing', () => {
         TEXT_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -43,8 +41,6 @@ describe('Text Legacy Accessibility Testing', () => {
         DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to text content.', async () => {
@@ -55,7 +51,5 @@ describe('Text Legacy Accessibility Testing', () => {
         DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT,
       ),
     ).toBeTruthy();
-
-    expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });

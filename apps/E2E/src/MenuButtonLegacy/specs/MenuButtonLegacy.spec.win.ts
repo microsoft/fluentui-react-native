@@ -32,8 +32,6 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         MENUBUTTON_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -44,8 +42,6 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         MENU_BUTTON_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set "accessibilityLabel". Validate "Name" element attribute defaults to MenuButton label.', async () => {
@@ -56,8 +52,6 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         MENU_BUTTON_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

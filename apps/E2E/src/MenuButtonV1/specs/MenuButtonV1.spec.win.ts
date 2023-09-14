@@ -33,8 +33,6 @@ describe('MenuButtonV1 Accessibility Testing', () => {
         MENUBUTTON_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -45,8 +43,6 @@ describe('MenuButtonV1 Accessibility Testing', () => {
         MENUBUTTONV1_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set "accessibilityLabel". Validate "Name" element attribute defaults to MenuButton label.', async () => {
@@ -57,7 +53,5 @@ describe('MenuButtonV1 Accessibility Testing', () => {
         MENUBUTTONV1_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

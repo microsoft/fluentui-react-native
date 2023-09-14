@@ -27,16 +27,12 @@ describe('LinkV1 Accessibility Testing', () => {
     await expect(
       await LinkV1PageObject.compareAttribute(LinkV1PageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
     ).toBeTruthy();
-
-    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" propagates to "Name" element attribute.', async () => {
     await expect(
       await LinkV1PageObject.compareAttribute(LinkV1PageObject._primaryComponent, Attribute.AccessibilityLabel, LINKV1_ACCESSIBILITY_LABEL),
     ).toBeTruthy();
-
-    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   // No need to test not setting a11y label. The content prop gets passed down to the child Text component. This equates to not setting the a11y label

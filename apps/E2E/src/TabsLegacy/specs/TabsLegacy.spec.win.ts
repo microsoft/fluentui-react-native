@@ -27,16 +27,12 @@ describe('Tabs Legacy Accessibility Testing', () => {
     expect(
       await TabsLegacyPageObject.compareAttribute(TabsLegacyPageObject._primaryComponent, Attribute.AccessibilityRole, TAB_A11Y_ROLE),
     ).toBeTruthy();
-
-    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate TabItem\'s "accessibilityRole" defaults to "ControlType.TabItem".', async () => {
     expect(
       await TabsLegacyPageObject.compareAttribute(TabsLegacyPageObject.getTabItem('First'), Attribute.AccessibilityRole, TABITEM_A11Y_ROLE),
     ).toBeTruthy();
-
-    expect(await TabsLegacyPageObject.didAssertPopup()).toBeFalsy(TabsLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

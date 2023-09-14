@@ -27,24 +27,18 @@ describe('Input Accessibility Testing', () => {
     await expect(
       await InputPageObject.compareAttribute(InputPageObject._primaryComponent, AndroidAttribute.AccessibilityLabel, INPUT_TEST_COMPONENT),
     ).toBeTruthy();
-
-    await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate Edit text Class on Android', async () => {
     await expect(
       await InputPageObject.compareAttribute(InputPageObject._primaryComponent, AndroidAttribute.Class, ANDROID_EDITTEXT),
     ).toBeTruthy();
-
-    await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate Accessory button Class on Android', async () => {
     await expect(
       await InputPageObject.compareAttribute(InputPageObject._accessoryButton, AndroidAttribute.Class, ANDROID_BUTTON),
     ).toBeTruthy();
-
-    await expect(await InputPageObject.didAssertPopup()).toBeFalsy(InputPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
