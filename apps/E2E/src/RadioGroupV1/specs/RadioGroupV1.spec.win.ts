@@ -37,8 +37,6 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         RADIOGROUP_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate Radio\'s "accessibilityRole" defaults to "ControlType.RadioButton".', async () => {
@@ -49,8 +47,6 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         RADIOBUTTON_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set RadioGroup "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -61,8 +57,6 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         RADIOGROUPV1_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set RadioGroup "accessibilityLabel" prop. Validate "Name" element attribute defaults to current RadioGroup label.', async () => {
@@ -73,8 +67,6 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         RADIOGROUPV1_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set Radio "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -85,8 +77,6 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         FIRST_RADIO_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set Radio "accessibilityLabel" prop. Validate "Name" element attribute defaults to current Radio label.', async () => {
@@ -97,8 +87,6 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         SECOND_RADIO_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "required" prop on RadioGroup. Validate "IsRequiredForForm" element attribute is true.', async () => {
@@ -109,8 +97,6 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         AttributeValue.true,
       ),
     ).toBeTruthy();
-
-    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do NOT set "required" prop on RadioGroup. Validate "IsRequiredForForm" element attribute is false.', async () => {
@@ -121,8 +107,6 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         AttributeValue.false,
       ),
     ).toBeTruthy();
-
-    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

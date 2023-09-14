@@ -34,9 +34,8 @@ class RadioGroupLegacyPage extends BasePage {
     return await (await this.getRadioButton(selector)).isSelected();
   }
 
-  async waitForRadioButtonSelected(selector: RadioButton, errorMsg: string): Promise<boolean> {
-    await this.waitForCondition(async () => await this.isRadioButtonSelected(selector), errorMsg);
-    return await this.isRadioButtonSelected(selector);
+  async waitForRadioButtonSelected(selector: RadioButton, errorMsg: string): Promise<boolean | void> {
+    return await this.waitForCondition(async () => await this.isRadioButtonSelected(selector), errorMsg);
   }
 
   /* Returns the correct WebDriverIO element from the RadioButton Selector */
