@@ -40,25 +40,23 @@ class MenuPageObject extends BasePage {
   }
 
   /* Waits for menuitems to be visible. This is a separate method from openMenu() because we test multiple ways of opening the menu (mouse + keyboard). */
-  async waitForMenuToOpen(errorMsg?: string): Promise<boolean> {
-    await this.waitForCondition(
+  async waitForMenuToOpen(errorMsg?: string): Promise<boolean | void> {
+    return await this.waitForCondition(
       async () => await this.menuIsExpanded(),
       errorMsg ?? 'The Menu did not open: It looks like the MenuItems failed to display.',
       this.waitForUiEvent,
       500,
     );
-    return await this.menuIsExpanded();
   }
 
   /* Same as above -> Just waits for menuitems to not be visible. */
-  async waitForMenuToClose(errorMsg?: string): Promise<boolean> {
-    await this.waitForCondition(
+  async waitForMenuToClose(errorMsg?: string): Promise<boolean | void> {
+    return await this.waitForCondition(
       async () => !(await this.menuIsExpanded()),
       errorMsg ?? 'The Menu did not close: It looks like the MenuItems are still displayed.',
       this.waitForUiEvent,
       500,
     );
-    return !(await this.menuIsExpanded());
   }
 
   /* If the first item is displayed, then it's safe to say that the rest of the menu is expanded. */
@@ -72,10 +70,10 @@ class MenuPageObject extends BasePage {
   }
 
   /* Waits for the onClick callback of menu item 1 to fire. */
-  async waitForItemCallbackToFire(timesFired: number): Promise<void> {
-    await this.waitForCondition(
+  async waitForItemCallbackToFire(timesFired: number, errorMsg?: string): Promise<boolean | void> {
+    return await this.waitForCondition(
       async () => await this.itemOnClickHasFired(timesFired),
-      `MenuItem callback failed to fire ${timesFired} times.`,
+      errorMsg ?? `MenuItem callback failed to fire ${timesFired} times.`,
       this.waitForUiEvent,
       500,
     );

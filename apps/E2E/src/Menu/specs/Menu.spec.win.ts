@@ -102,16 +102,13 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.openMenu();
 
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('First'), [Keys.SPACE]);
-    await MenuPageObject.waitForItemCallbackToFire(1);
-    expect(await MenuPageObject.itemOnClickHasFired(1)).toBeTruthy('Space input failed to fire MenuItem onClick callback');
+    expect(await MenuPageObject.waitForItemCallbackToFire(1, 'Space input failed to fire MenuItem onClick callback')).toBeTrue();
 
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('First'), [Keys.ENTER]);
-    await MenuPageObject.waitForItemCallbackToFire(2);
-    expect(await MenuPageObject.itemOnClickHasFired(2)).toBeTruthy('Enter input failed to fire MenuItem onClick callback');
+    expect(await MenuPageObject.waitForItemCallbackToFire(2, 'Enter input failed to fire MenuItem onClick callback')).toBeTrue();
 
     await MenuPageObject.click(MenuPageObject.getMenuItem('First'));
-    await MenuPageObject.waitForItemCallbackToFire(3);
-    expect(await MenuPageObject.itemOnClickHasFired(3)).toBeTruthy('Click input failed to fire MenuItem onClick callback');
+    expect(await MenuPageObject.waitForItemCallbackToFire(3, 'Click input failed to fire MenuItem onClick callback')).toBeTrue();
 
     expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -121,15 +118,13 @@ describe('Menu Functional Testing', () => {
 
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Second'), [Keys.SPACE]);
     await MenuPageObject.waitForItemCallbackToFire(0);
-    expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Space input fired disabled MenuItem onClick callback');
+    expect(await MenuPageObject.waitForItemCallbackToFire(0, 'Space input fired disabled MenuItem onClick callback')).toBeTrue();
 
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Second'), [Keys.ENTER]);
-    await MenuPageObject.waitForItemCallbackToFire(0);
-    expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Enter input fired disabled MenuItem onClick callback');
+    expect(await MenuPageObject.waitForItemCallbackToFire(0, 'Enter input fired disabled MenuItem onClick callback')).toBeTrue();
 
     await MenuPageObject.click(MenuPageObject.getMenuItem('Second'));
-    await MenuPageObject.waitForItemCallbackToFire(0);
-    expect(await MenuPageObject.itemOnClickHasFired(0)).toBeTruthy('Click input fired disabled MenuItem onClick callback');
+    expect(await MenuPageObject.waitForItemCallbackToFire(0, 'Click input fired disabled MenuItem onClick callback')).toBeTrue();
 
     expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
