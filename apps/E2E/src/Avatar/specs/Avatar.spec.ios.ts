@@ -7,7 +7,6 @@ describe('Avatar Testing Initialization', () => {
   });
 
   it('Click and navigate to Avatar test page', async () => {
-    await AvatarPageObject.navigateToPageAndLoadTests();
     expect(await AvatarPageObject.navigateToPageAndLoadTests()).toBeTrue();
   });
 });
