@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Android native date picker",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ankarm@microsoft.com",
+  "dependentChangeType": "patch"
+}
