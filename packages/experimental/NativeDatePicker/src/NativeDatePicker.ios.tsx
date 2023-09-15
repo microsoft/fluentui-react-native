@@ -2,10 +2,7 @@ import { NativeModules } from 'react-native';
 
 export const NativeDatePicker = NativeModules.FRNDatePickerManager;
 import { parseISOString } from './DatePickerUtils';
-import type { DatePickeriOSParameterObject } from './NativeDatePicker.types.ios';
-import type { DatePickerSharedParameterObject, NativeDatePickerSharedInterface } from './NativeDatePicker.types.shared';
-
-type DatePickerParameterObject = DatePickerSharedParameterObject & DatePickeriOSParameterObject;
+import type { DatePickerNativeParameters, NativeDatePickerInterface } from './NativeDatePicker.types.mobile';
 
 NativeDatePicker.present = ({
   mode = 'date',
@@ -26,7 +23,7 @@ NativeDatePicker.present = ({
   timeTitle = null,
   timeSubtitle = null,
   callback,
-}: DatePickerParameterObject) => {
+}: DatePickerNativeParameters) => {
   NativeDatePicker.presentWithMode(
     mode,
     dateRangePresentation,
@@ -55,8 +52,4 @@ NativeDatePicker.parseISOString = (dateISOString: string): Date => {
   return parseISOString(dateISOString);
 };
 
-type NativeDatePickeriOSInterface = NativeDatePickerSharedInterface & {
-  present(object: DatePickerParameterObject): void;
-}
-
-export default NativeDatePicker as NativeDatePickeriOSInterface;
+export default NativeDatePicker as NativeDatePickerInterface;

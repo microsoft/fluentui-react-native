@@ -4,12 +4,10 @@ export const { MSFDateTimePickerMode, MSFDateTimePickerDatePickerType, MSFDateTi
   NativeDatePicker.getConstants();
 
 // Enums from the iOS DateTimePicker in FluentUI-Apple
-type NativeDatePickerMode = keyof typeof MSFDateTimePickerMode;
 type NativeDatePickerType = keyof typeof MSFDateTimePickerDatePickerType;
 type NativeDatePickerDateRangePresentation = keyof typeof MSFDateTimePickerDateRangePresentation;
 
-export type DatePickeriOSParameterObject = {
-  mode?: NativeDatePickerMode;
+export type DatePickerNativeIOSParameters = {
   dateRangePresentation?: NativeDatePickerDateRangePresentation;
   datePickerType?: NativeDatePickerType;
   referenceStartDate?: Date;
@@ -24,4 +22,4 @@ export type DatePickeriOSParameterObject = {
   dateSubtitle?: string;
   timeTitle?: string;
   timeSubtitle?: string;
-}
+};

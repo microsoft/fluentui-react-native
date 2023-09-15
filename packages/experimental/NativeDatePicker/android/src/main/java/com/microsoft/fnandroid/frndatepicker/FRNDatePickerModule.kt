@@ -128,7 +128,11 @@ class FRNDatePickerModule(private val reactContext: ReactApplicationContext) :
         }
 
         val zonedStart = getLocalZonedDateTimeFromString(startDate);
-        val zonedEnd = getLocalZonedDateTimeFromString(endDate);
+        var zonedEnd = getLocalZonedDateTimeFromString(endDate);
+
+        if (zonedEnd < zonedStart) {
+            zonedEnd = zonedStart.plusDays(1)
+        }
 
         val duration = Duration.between(zonedStart, zonedEnd);
         return duration;

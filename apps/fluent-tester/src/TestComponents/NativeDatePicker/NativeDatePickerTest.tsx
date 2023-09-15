@@ -14,7 +14,7 @@ import { Test } from '../Test';
 const NativeDatePickerAndroidUsage: React.FunctionComponent = () => {
   const today = new Date();
   const [startDate, setStartDate] = React.useState<Date>(today);
-  const [endDate, setEndDate] = React.useState<Date>(null);
+  const [endDate, setEndDate] = React.useState<Date>(today);
 
   return (
     <Stack style={stackStyle}>
@@ -32,8 +32,7 @@ const NativeDatePickerAndroidUsage: React.FunctionComponent = () => {
         content="Date Picker"
         onClick={() => {
           NativeDatePicker.present({
-            dialogMode: 'DATE',
-            dateRangeMode: 'NONE',
+            mode: 'date',
             startDate: startDate,
             endDate: endDate,
             callback: (date1: string, date2: string) => {
@@ -49,8 +48,8 @@ const NativeDatePickerAndroidUsage: React.FunctionComponent = () => {
           content="Start Date"
           onClick={() => {
             NativeDatePicker.present({
-              dialogMode: 'DATE',
-              dateRangeMode: 'START',
+              mode: 'dateRange',
+              dateRangeMode: 'start',
               startDate: startDate,
               endDate: endDate,
               callback: (date1: string, date2: string) => {
@@ -66,8 +65,8 @@ const NativeDatePickerAndroidUsage: React.FunctionComponent = () => {
           content="End Date"
           onClick={() => {
             NativeDatePicker.present({
-              dialogMode: 'DATE',
-              dateRangeMode: 'END',
+              mode: 'dateRange',
+              dateRangeMode: 'end',
               startDate: startDate,
               endDate: endDate,
               callback: (date1: string, date2: string) => {
@@ -85,8 +84,7 @@ const NativeDatePickerAndroidUsage: React.FunctionComponent = () => {
         content="Date Time Picker"
         onClick={() => {
           NativeDatePicker.present({
-            dialogMode: 'DATE_TIME',
-            dateRangeMode: 'NONE',
+            mode: 'dateTime',
             startDate: startDate,
             endDate: endDate,
             callback: (date1: string, date2: string) => {
@@ -100,28 +98,11 @@ const NativeDatePickerAndroidUsage: React.FunctionComponent = () => {
       <Text variant="headerStandard">Ranged Date Time Picker</Text>
       <View style={{ flexDirection: 'row' }}>
         <Button
-          content="Start Date Time"
+          content="Date Time Range"
           onClick={() => {
             NativeDatePicker.present({
-              dialogMode: 'DATE_TIME',
-              dateRangeMode: 'START',
-              startDate: startDate,
-              endDate: endDate,
-              callback: (date1: string, date2: string) => {
-                console.warn(`${date1} - ${date2}`);
-                setStartDate(NativeDatePicker.parseISOString(date1));
-                setEndDate(NativeDatePicker.parseISOString(date2));
-              },
-            });
-          }}
-        />
-
-        <Button
-          content="End Date Time"
-          onClick={() => {
-            NativeDatePicker.present({
-              dialogMode: 'DATE_TIME',
-              dateRangeMode: 'END',
+              mode: 'dateTimeRange',
+              dateRangeMode: 'start',
               startDate: startDate,
               endDate: endDate,
               callback: (date1: string, date2: string) => {
