@@ -1,5 +1,5 @@
-import { DatePickerNativeAndroidParameters } from './NativeDatePicker.types.android';
-import { DatePickerNativeIOSParameters } from './NativeDatePicker.types.ios';
+import type { DatePickerNativeAndroidParameters } from './NativeDatePicker.types.android';
+import type { DatePickerNativeIOSParameters } from './NativeDatePicker.types.ios';
 
 export type DatePickerNativeSharedParameters = {
   mode?: 'date' | 'dateTime' | 'dateRange' | 'dateTimeRange';

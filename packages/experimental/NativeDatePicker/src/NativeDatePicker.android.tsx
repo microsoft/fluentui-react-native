@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native';
 
 import { parseISOString } from './DatePickerUtils';
-import { DatePickerNativeParameters, NativeDatePickerInterface } from './NativeDatePicker.types.mobile';
+import type { DatePickerNativeParameters, NativeDatePickerInterface } from './NativeDatePicker.types.mobile';
 
 const FRNDatePicker = NativeModules.FRNDatePicker;
 const { DIALOG_MODE, DATE_RANGE_MODE } = FRNDatePicker.getConstants();
