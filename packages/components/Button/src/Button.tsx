@@ -112,13 +112,16 @@ export const Button = compose<ButtonType>({
         return (
           <Slots.root {...mergedProps} accessibilityLabel={label}>
             {buttonContent}
-            {button.state.focused && button.state.shouldUseTwoToneFocusBorder && (
-              <Slots.focusInnerBorder
-                style={getFocusBorderStyle(button.state.measuredHeight, button.state.measuredWidth)}
-                accessible={false}
-                focusable={false}
-              />
-            )}
+            {button.state.focused &&
+              button.state.measuredHeight &&
+              button.state.measuredWidth &&
+              button.state.shouldUseTwoToneFocusBorder && (
+                <Slots.focusInnerBorder
+                  style={getFocusBorderStyle(button.state.measuredHeight, button.state.measuredWidth)}
+                  accessible={false}
+                  focusable={false}
+                />
+              )}
           </Slots.root>
         );
       }
