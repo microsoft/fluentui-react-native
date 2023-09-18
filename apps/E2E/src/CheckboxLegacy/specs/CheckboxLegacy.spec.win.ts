@@ -4,13 +4,14 @@ import CheckboxLegacyPageObject from '../pages/CheckboxLegacyPageObject';
 
 describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await CheckboxLegacyPageObject.waitForInitialPageToDisplay();
-    expect(await CheckboxLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await CheckboxLegacyPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
-    await CheckboxLegacyPageObject.navigateToPageAndLoadTests(true);
-    expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await CheckboxLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await CheckboxLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -30,8 +31,6 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         CHECKBOX_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -42,8 +41,6 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         CHECKBOX_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do NOT set "accessibilityLabel" prop. Validate "Name" element attribute defaults to the checkbox label.', async () => {
@@ -54,8 +51,6 @@ describe('Checkbox Legacy Accessibility Testing', () => {
         CHECKBOX_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

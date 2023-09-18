@@ -24,16 +24,13 @@ class CheckboxLegacyPageObject extends BasePage {
 
   /* Waits for the checkbox to be checked or unchecked if the new state is true or false. Returns true if the
    * checkbox toggled to the new state. */
-  async waitForCheckboxToggle(newState: boolean, errorMessage: string): Promise<boolean> {
-    if ((await this.isCheckboxChecked()) !== newState) {
-      await this.waitForCondition(async () => (await this.isCheckboxChecked()) === newState, errorMessage);
-    }
-    return (await this.isCheckboxChecked()) === newState;
+  async waitForCheckboxToggle(newState: boolean, errorMessage: string): Promise<boolean | void> {
+    return await this.waitForCondition(async () => (await this.isCheckboxChecked()) === newState, errorMessage);
   }
 
   /* Toggles the checkbox to the checked if newState == true or unchecked if newState == false. */
   async toggleCheckbox(newState: boolean) {
-    if ((await this.isCheckboxChecked()) !== newState) {
+    if (await this.isCheckboxChecked() !== newState) {
       await this.click(this._primaryComponent);
       await this.waitForCheckboxToggle(
         newState,
@@ -45,10 +42,9 @@ class CheckboxLegacyPageObject extends BasePage {
   /* Unlike snapshot testing, we cannot spy on functions to determine if they get called or not. In order to determine if
    * the onChange() callback gets fired, we show / hide the a Text label as the callback gets fired. This way, we know that
    * the onChange() callback has fired by checking that the label element is currently displayed. */
-  async didOnChangeCallbackFire(errorMsg: string): Promise<boolean> {
+  async didOnChangeCallbackFire(errorMsg: string): Promise<boolean | void> {
     const callbackText = await this._callbackText;
-    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
-    return await callbackText.isDisplayed();
+    return await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
   }
 
   /*****************************************/

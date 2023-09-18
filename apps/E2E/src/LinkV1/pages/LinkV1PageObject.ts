@@ -5,15 +5,9 @@ class LinkV1PageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async didOnPressCallbackFire(errMsg: string): Promise<boolean> {
+  async didOnPressCallbackFire(errMsg: string): Promise<boolean | void> {
     const callbackText = await By(LINKV1_NO_A11Y_LABEL_COMPONENT);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: errMsg,
-      interval: 1000,
-    });
-
-    return await callbackText.isDisplayed();
+    return await this.waitForCondition(async () => await callbackText.isDisplayed(), errMsg);
   }
 
   /*****************************************/

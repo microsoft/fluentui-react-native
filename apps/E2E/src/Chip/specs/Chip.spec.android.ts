@@ -5,13 +5,14 @@ import ChipPageObject from '../pages/ChipPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Chip Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await ChipPageObject.waitForInitialPageToDisplay();
-    expect(await ChipPageObject.isInitialPageDisplayed()).toBeTruthy(ChipPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await ChipPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Chip test page', async () => {
-    await ChipPageObject.navigateToPageAndLoadTests(true);
-    expect(await ChipPageObject.isPageLoaded()).toBeTruthy(ChipPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await ChipPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await ChipPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await ChipPageObject.didAssertPopup()).toBeFalsy(ChipPageObject.ERRORMESSAGE_ASSERT);
   });

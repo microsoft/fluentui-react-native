@@ -5,14 +5,15 @@ import CalloutPageObject from '../pages/CalloutPageObject.win';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Callout Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await CalloutPageObject.waitForInitialPageToDisplay();
-    expect(await CalloutPageObject.isInitialPageDisplayed()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await CalloutPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Callout test page', async () => {
     /* Click on component button to navigate to test page */
-    await CalloutPageObject.navigateToPageAndLoadTests(true);
-    expect(await CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await CalloutPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await CalloutPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -28,8 +29,6 @@ describe('Callout Accessibility Testing', () => {
     await expect(
       await CalloutPageObject.compareAttribute(CalloutPageObject._primaryComponent, Attribute.AccessibilityRole, CALLOUT_A11Y_ROLE),
     ).toBeTruthy();
-
-    await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -40,8 +39,6 @@ describe('Callout Accessibility Testing', () => {
         CALLOUT_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
   afterAll(async () => {

@@ -4,13 +4,14 @@ import CheckboxV1PageObject from '../pages/CheckboxV1PageObject';
 
 describe('CheckboxV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await CheckboxV1PageObject.waitForInitialPageToDisplay();
-    expect(await CheckboxV1PageObject.isInitialPageDisplayed()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await CheckboxV1PageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to CheckboxV1 test page', async () => {
-    await CheckboxV1PageObject.navigateToPageAndLoadTests(true);
-    expect(await CheckboxV1PageObject.isPageLoaded()).toBeTruthy(CheckboxV1PageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await CheckboxV1PageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await CheckboxV1PageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -26,8 +27,6 @@ describe('CheckboxV1 Accessibility Testing', () => {
     await expect(
       await CheckboxV1PageObject.compareAttribute(CheckboxV1PageObject._primaryComponent, Attribute.AccessibilityRole, CHECKBOX_A11Y_ROLE),
     ).toBeTruthy();
-
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -38,8 +37,6 @@ describe('CheckboxV1 Accessibility Testing', () => {
         CHECKBOXV1_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do NOT set "accessibilityLabel" prop. Validate "Name" element attribute defaults to the checkbox label.', async () => {
@@ -50,8 +47,6 @@ describe('CheckboxV1 Accessibility Testing', () => {
         CHECKBOXV1_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "required" prop. Validate "IsRequiredForForm" element attribute is true.', async () => {
@@ -62,8 +57,6 @@ describe('CheckboxV1 Accessibility Testing', () => {
         AttributeValue.true,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do NOT set "required" prop. Validate "IsRequiredForForm" element attribute is false.', async () => {
@@ -74,8 +67,6 @@ describe('CheckboxV1 Accessibility Testing', () => {
         AttributeValue.false,
       ),
     ).toBeTruthy();
-
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

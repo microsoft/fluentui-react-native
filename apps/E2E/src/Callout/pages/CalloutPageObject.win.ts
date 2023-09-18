@@ -12,7 +12,14 @@ class CalloutPageObject extends BasePage {
   // This both opens and waits for it to go in view
   async openCalloutAndWaitForLoad(): Promise<void> {
     if (!(await this.isCalloutOpen())) {
-      await (await this._buttonToOpenCallout).click();
+      const calloutButton = await this._buttonToOpenCallout;
+      await browser.waitUntil(async () => await calloutButton.isEnabled(),
+      {
+        timeout: 15000,
+        timeoutMsg: 'Button to open the Callout is not enabled.'
+      });
+
+      await calloutButton.click();
       await this.waitForCondition(
         async () => await this.isCalloutOpen(),
         'Clicked the button to open the Callout, but the Callout did not open correctly.',

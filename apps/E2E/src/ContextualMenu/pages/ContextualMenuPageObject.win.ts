@@ -12,9 +12,8 @@ class ContextualMenuPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   /* Waits for the MenuItems to be displayed and returns true / false whether that occurs. */
-  async waitForContextualMenuItemsToDisplay(timeout?: number): Promise<boolean> {
-    await this.waitForCondition(async () => this.contextualMenuItemDisplayed(), 'The Contextual Menu Items did not display.', timeout);
-    return await this.contextualMenuItemDisplayed();
+  async waitForContextualMenuItemsToDisplay(timeout?: number): Promise<boolean | void> {
+    return await this.waitForCondition(async () => await this.contextualMenuItemDisplayed(), 'The Contextual Menu Items did not display.', timeout);
   }
 
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */

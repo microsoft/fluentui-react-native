@@ -16,7 +16,8 @@ type Tab = 'First' | 'Second' | 'Third' | 'Fourth' | 'Fifth';
 
 class TabListPageObject extends BasePage {
   async resetListSelection(): Promise<void> {
-    return (await this.getTab('First')).click();
+    (await this.getTab('First')).click();
+    await this.waitForTabSelected('First', 'Reset TabList, first tab should be selected');
   }
 
   // Waits for given tab's selection state to be true. Throws an error if the selection state is still false at the end of the timeout.
