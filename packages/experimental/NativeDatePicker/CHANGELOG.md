@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
-This log was last generated on Mon, 05 Jun 2023 19:26:23 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Sep 2023 19:31:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Tue, 19 Sep 2023 19:31:59 GMT
+
+### Minor changes
+
+- Android native date picker (ankarm@microsoft.com)
 
 ## 0.8.0
 

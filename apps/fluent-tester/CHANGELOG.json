@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 19 Sep 2023 19:31:59 GMT",
+      "version": "0.156.0",
+      "tag": "@fluentui-react-native/tester_v0.156.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ankarm@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "426330058bed897fd61743f303a527f2c5e3c2b0",
+            "comment": "Android native date picker"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-native-date-picker to v0.9.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 13 Sep 2023 17:08:13 GMT",
       "version": "0.155.5",
       "tag": "@fluentui-react-native/tester_v0.155.5",

@@ -4,15 +4,15 @@ module.exports = {
   "0.71": {
     "@fluentui-react-native/e2e-testing": {
       "name": "@fluentui-react-native/e2e-testing",
-      "version": "1.31.1"
+      "version": "1.32.0"
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.155.5"
+      "version": "0.156.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.36.1"
+      "version": "0.36.2"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -188,7 +188,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-native-date-picker": {
       "name": "@fluentui-react-native/experimental-native-date-picker",
-      "version": "0.8.0"
+      "version": "0.9.0"
     },
     "@fluentui-react-native/experimental-native-font-metrics": {
       "name": "@fluentui-react-native/experimental-native-font-metrics",
