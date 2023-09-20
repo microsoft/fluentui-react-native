@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.156.0"
+      "version": "0.156.1"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.36.2"
+      "version": "0.36.3"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -24,7 +24,7 @@ module.exports = {
     },
     "@fluentui-react-native/button": {
       "name": "@fluentui-react-native/button",
-      "version": "0.35.4"
+      "version": "0.35.5"
     },
     "@fluentui-react-native/callout": {
       "name": "@fluentui-react-native/callout",
@@ -68,15 +68,15 @@ module.exports = {
     },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
-      "version": "1.11.21"
+      "version": "1.11.22"
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
-      "version": "0.11.22"
+      "version": "0.11.23"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
-      "version": "0.23.15"
+      "version": "0.23.16"
     },
     "@fluentui-react-native/persona": {
       "name": "@fluentui-react-native/persona",
@@ -160,7 +160,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-button": {
       "name": "@fluentui-react-native/experimental-button",
-      "version": "0.18.15"
+      "version": "0.18.16"
     },
     "@fluentui-react-native/experimental-checkbox": {
       "name": "@fluentui-react-native/experimental-checkbox",
@@ -172,7 +172,7 @@ module.exports = {
     },
     "@fluentui-react-native/dropdown": {
       "name": "@fluentui-react-native/dropdown",
-      "version": "0.8.22"
+      "version": "0.8.23"
     },
     "@fluentui-react-native/experimental-expander": {
       "name": "@fluentui-react-native/experimental-expander",
@@ -184,7 +184,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-menu-button": {
       "name": "@fluentui-react-native/experimental-menu-button",
-      "version": "0.7.22"
+      "version": "0.7.23"
     },
     "@fluentui-react-native/experimental-native-date-picker": {
       "name": "@fluentui-react-native/experimental-native-date-picker",
@@ -284,7 +284,7 @@ module.exports = {
     },
     "@fluentui/react-native": {
       "name": "@fluentui/react-native",
-      "version": "0.37.25"
+      "version": "0.37.26"
     },
     "@fluentui-react-native/android-theme": {
       "name": "@fluentui-react-native/android-theme",

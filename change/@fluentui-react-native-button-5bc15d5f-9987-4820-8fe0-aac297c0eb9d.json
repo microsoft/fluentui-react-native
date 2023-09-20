@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[Button][macOS] Don't call onClick with onKeyDown",
-  "packageName": "@fluentui-react-native/button",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch"
-}
