@@ -8,12 +8,12 @@ import type { PressablePropsExtended } from '@fluentui-react-native/interactive-
 import type { TextProps } from '@fluentui-react-native/text';
 
 import type { TabProps, TabSlotProps, TabTokens } from './Tab.types';
-import type { TabListContextData } from '../TabList/TabList.types';
+import type { TabListState } from '../TabList/TabList.types';
 
 /**
  * Hook to get the style props for each Tab slot.
  */
-export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme, context: TabListContextData): TabSlotProps => {
+export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme, context: TabListState): TabSlotProps => {
   const { selectedKey, vertical } = context;
 
   // Get each slot's props using our final tokens

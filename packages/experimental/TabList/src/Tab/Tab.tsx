@@ -19,10 +19,10 @@ import { tabName, type TabProps, type TabState, type TabTokens } from './Tab.typ
 import { tabStates, useTabTokens } from './TabTokens';
 import { useTab } from './useTab';
 import { useTabAnimation } from './useTabAnimation';
-import type { TabListContextData } from '../TabList/TabList.types';
+import type { TabListState } from '../TabList/TabList.types';
 import { TabListContext } from '../TabList/TabListContext';
 
-const tabLookup = (layer: string, state: TabState, props: TabProps, tablistContext: TabListContextData): boolean => {
+const tabLookup = (layer: string, state: TabState, props: TabProps, tablistContext: TabListState): boolean => {
   return (
     state[layer] ||
     props[layer] ||

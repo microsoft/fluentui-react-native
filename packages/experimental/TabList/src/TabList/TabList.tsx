@@ -20,27 +20,26 @@ export const TabList = compose<TabListType>({
   slots: {
     container: FocusZone,
     stack: View,
-    animatedIndicator: TabListAnimatedIndicator,
   },
   useRender: (userProps: TabListProps, useSlots: UseSlots<TabListType>) => {
     // configure props and state for tabs based on user props
-    const tabList = useTabList(userProps);
+    const tablist = useTabList(userProps);
 
     // Grab the styled slots.
     const Slots = useSlots(userProps);
 
     // Return the handler to finish render.
     return (final: TabListProps, ...children: React.ReactNode[]) => {
-      if (!tabList.state) {
+      if (!tablist.state) {
         return null;
       }
 
-      const { disabled, defaultTabbableElement, isCircularNavigation, vertical, ...mergedProps } = mergeProps(tabList.props, final);
+      const { disabled, defaultTabbableElement, isCircularNavigation, vertical, ...mergedProps } = mergeProps(tablist.props, final);
 
       return (
         <TabListContext.Provider
           // Passes in the selected key and a hook function to update the newly selected tab and call the client's onTabsClick callback.
-          value={tabList.state.context}
+          value={tablist.state}
         >
           <Slots.container
             disabled={disabled}
@@ -49,9 +48,7 @@ export const TabList = compose<TabListType>({
             isCircularNavigation={isCircularNavigation}
           >
             <Slots.stack {...mergedProps}>{children}</Slots.stack>
-            {tabList.state.context?.animatedIndicatorStyles && (
-              <Slots.animatedIndicator styles={tabList.state.context?.animatedIndicatorStyles} />
-            )}
+            {tablist.state.animatedIndicatorStyles && tablist.state.layout && <TabListAnimatedIndicator />}
           </Slots.container>
         </TabListContext.Provider>
       );

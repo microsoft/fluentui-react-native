@@ -1,11 +1,12 @@
 import * as React from 'react';
-import type { View, AccessibilityState } from 'react-native';
+import type { View, AccessibilityState, LayoutRectangle } from 'react-native';
 
-import { memoize } from '@fluentui-react-native/framework';
+import { memoize, mergeStyles } from '@fluentui-react-native/framework';
+import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
-import type { TabListInfo, TabListState, TabListProps } from './TabList.types';
-import { useAnimatedIndicator } from '../TabListAnimatedIndicator/useAnimatedIndicator';
+import type { TabListInfo, TabListProps, TabLayoutInfo } from './TabList.types';
+import type { AnimatedIndicatorStyles, AnimatedIndicatorStylesUpdate } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 /**
  * Re-usable hook for TabList.
@@ -54,32 +55,35 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     [setTabKeys],
   );
 
-  // Logic to style the animated indicator
-  const { addTabLayout, onTabListLayout, tabListLayout, styles, updateStyles } = useAnimatedIndicator(
-    props,
-    selectedKey ?? data.selectedKey,
-  );
+  // State variables and callbacks for styling the animated indicator
+  const [listLayoutMap, setListLayoutMap] = React.useState<{ [key: string]: TabLayoutInfo }>({});
+  const [tabListLayout, setTabListLayout] = React.useState<LayoutRectangle>();
+  const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<AnimatedIndicatorStyles>({
+    container: {},
+    indicator: {},
+  });
 
-  const state: TabListState = {
-    context: {
-      addTabKey: addTabKey,
-      addTabLayout: addTabLayout,
-      animatedIndicatorStyles: styles,
-      appearance: appearance,
-      disabled: disabled,
-      invoked: invoked,
-      onTabSelect: data.onKeySelect,
-      removeTabKey: removeTabKey,
-      selectedKey: selectedKey ?? data.selectedKey,
-      setSelectedTabRef: setSelectedTabRef,
-      setInvoked: setInvoked,
-      size: size,
-      tabKeys: tabKeys,
-      tabListLayout: tabListLayout,
-      vertical: vertical,
-      updateAnimatedIndicatorStyles: updateStyles,
-    },
+  const addTabLayout = (tabKey: string, layoutInfo: TabLayoutInfo) => {
+    setListLayoutMap((prev) => ({ ...prev, [tabKey]: { ...prev[tabKey], ...layoutInfo } }));
   };
+
+  const updateStyles = (update: AnimatedIndicatorStylesUpdate) =>
+    setUserDefinedAnimatedIndicatorStyles((prev) => {
+      const newStyles: AnimatedIndicatorStyles = { ...prev };
+      if (update.container) {
+        newStyles.container = mergeStyles(prev.container, update.container);
+      }
+      if (update.indicator) {
+        newStyles.indicator = mergeStyles(prev.indicator, update.indicator);
+      }
+      return newStyles;
+    });
+
+  const onTabListLayout = React.useCallback((e: LayoutEvent) => {
+    if (e.nativeEvent.layout) {
+      setTabListLayout(e.nativeEvent.layout);
+    }
+  }, []);
 
   return {
     props: {
@@ -95,7 +99,27 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       size: size,
       vertical: vertical,
     },
-    state: { ...state },
+    state: {
+      addTabKey: addTabKey,
+      addTabLayout: addTabLayout,
+      animatedIndicatorStyles: userDefinedAnimatedIndicatorStyles,
+      appearance: appearance,
+      disabled: disabled,
+      invoked: invoked,
+      layout: {
+        tablist: tabListLayout,
+        tabs: listLayoutMap,
+      },
+      onTabSelect: data.onKeySelect,
+      removeTabKey: removeTabKey,
+      selectedKey: selectedKey ?? data.selectedKey,
+      setSelectedTabRef: setSelectedTabRef,
+      setInvoked: setInvoked,
+      size: size,
+      tabKeys: tabKeys,
+      vertical: vertical,
+      updateAnimatedIndicatorStyles: updateStyles,
+    },
   };
 };
 

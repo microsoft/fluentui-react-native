@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import type { TabListContextData } from './TabList.types';
+import type { TabListState } from './TabList.types';
 
 const nullFunction = () => null;
 
-export const TabListContext = React.createContext<TabListContextData>({
+export const TabListContext = React.createContext<TabListState>({
   addTabKey: nullFunction,
   appearance: 'transparent',
   disabled: false,

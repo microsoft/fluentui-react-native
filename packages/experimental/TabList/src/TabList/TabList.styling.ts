@@ -18,11 +18,5 @@ export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, 
       }),
       ['direction', ...layoutStyles.keys],
     ),
-    animatedIndicator: buildProps(
-      (tokens: TabListTokens) => ({
-        vertical: tokens.direction === 'column',
-      }),
-      ['direction'],
-    ),
   },
 };
