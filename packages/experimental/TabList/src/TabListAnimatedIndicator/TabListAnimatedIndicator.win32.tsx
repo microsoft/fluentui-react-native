@@ -15,12 +15,15 @@ function indicatorPropsWorker(animationClass: string, style: ViewStyle): ViewPro
 }
 
 /**
- * This component renders as the indicator for the selected tab. Its styles are calculated and passed
- * from the useTabList hook, so it doesn't need to use the compose or compressible franework.
+ * This component renders as the indicator for the selected tab. Its styles are manually calculated using
+ * changing layout stored in the tablist context, so it doesn't need to use the compose or compressible franework.
  */
 export const TabListAnimatedIndicator = stagedComponent(() => {
   const styles = useAnimatedIndicatorStyles();
   return () => {
+    if (!styles) {
+      return null;
+    }
     const indicatorProps = getIndicatorProps('Ribbon_TabUnderline', styles.indicator);
     return (
       <View style={styles.container}>

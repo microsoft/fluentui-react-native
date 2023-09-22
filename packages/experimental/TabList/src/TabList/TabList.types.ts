@@ -36,8 +36,7 @@ export interface TabListState {
   /**
    * Global state both TabList and Tab use for tracking styling of the animated indicator.
    *
-   * This is the styling of each of the slots, including user-set styles, layout styles on win32 calculated in
-   * `useTabList`, and transforms on non-win32 platforms.
+   * This is the styling of each of the slots, excluding layout-set styles calculated in `useAnimatedIndicatorStyles`.
    */
   animatedIndicatorStyles?: AnimatedIndicatorStyles;
 
@@ -57,6 +56,9 @@ export interface TabListState {
    */
   invoked?: boolean;
 
+  /**
+   * Stores the layout rect of the tablist and the layout rects + some tokens of each tab. Used to style the animated indicator.
+   */
   layout?: TabListLayoutInfo;
 
   /**

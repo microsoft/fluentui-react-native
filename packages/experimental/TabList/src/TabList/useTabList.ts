@@ -55,7 +55,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     [setTabKeys],
   );
 
-  // State variables and callbacks for styling the animated indicator
+  // State variables and functions for saving layout info and other styling information to style the animated indicator.
   const [listLayoutMap, setListLayoutMap] = React.useState<{ [key: string]: TabLayoutInfo }>({});
   const [tabListLayout, setTabListLayout] = React.useState<LayoutRectangle>();
   const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<AnimatedIndicatorStyles>({
@@ -79,11 +79,12 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       return newStyles;
     });
 
-  const onTabListLayout = React.useCallback((e: LayoutEvent) => {
+  // TabList layout callback used to style the animated indicator.
+  const onTabListLayout = (e: LayoutEvent) => {
     if (e.nativeEvent.layout) {
       setTabListLayout(e.nativeEvent.layout);
     }
-  }, []);
+  };
 
   return {
     props: {
