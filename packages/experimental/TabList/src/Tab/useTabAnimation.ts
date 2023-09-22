@@ -3,7 +3,7 @@ import React from 'react';
 import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabProps, TabTokens } from './Tab.types';
-import type { TabListContextData } from '../TabList/TabList.types';
+import type { TabListState } from '../TabList/TabList.types';
 
 /**
  * On win32, when a vertical tablist initially lays out, we sometimes get odd, large height values that cause the
@@ -18,8 +18,8 @@ const RENDERING_HEIGHT_LIMIT = 20_000;
  * We save the layout information (width, height, x, y) of the Tab component using a LayoutEventHandler attached to the
  * root slot we initialize here, and we color the animated indicator using the user defined tab indicator color token.
  */
-export function useTabAnimation(props: TabProps, context: TabListContextData, tokens: TabTokens) {
-  const { addTabLayout, selectedKey, tabListLayout, updateAnimatedIndicatorStyles, vertical } = context;
+export function useTabAnimation(props: TabProps, context: TabListState, tokens: TabTokens) {
+  const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical } = context;
   const { tabKey } = props;
 
   // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
@@ -45,9 +45,9 @@ export function useTabAnimation(props: TabProps, context: TabListContextData, to
        */
       if (
         e?.nativeEvent?.layout &&
-        tabListLayout &&
-        tabListLayout.width > 0 &&
-        e.nativeEvent.layout.height <= tabListLayout.height &&
+        layout.tablist &&
+        layout.tablist.width > 0 &&
+        e.nativeEvent.layout.height <= layout.tablist.height &&
         e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT
       ) {
         let width: number, height: number;
@@ -73,7 +73,7 @@ export function useTabAnimation(props: TabProps, context: TabListContextData, to
         });
       }
     },
-    [addTabLayout, tabKey, tabListLayout, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
+    [addTabLayout, tabKey, layout.tablist, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );
 
   return onTabLayout;
