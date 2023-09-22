@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 22 Sep 2023 03:45:17 GMT",
+      "version": "0.156.1",
+      "tag": "@fluentui-react-native/tester_v0.156.1",
+      "comments": {
+        "none": [
+          {
+            "author": "16262858+TravisSpomer@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c2bc91f9e37d1dccab343365669a9921a9007bb9",
+            "comment": "Remove four unused size tokens from test page"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Sep 2023 18:30:43 GMT",
       "version": "0.156.1",
       "tag": "@fluentui-react-native/tester_v0.156.1",

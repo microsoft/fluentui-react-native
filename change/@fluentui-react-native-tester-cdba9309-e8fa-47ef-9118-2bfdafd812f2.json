@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove four unused size tokens from test page",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "16262858+TravisSpomer@users.noreply.github.com",
-  "dependentChangeType": "none"
-}
