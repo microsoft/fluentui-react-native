@@ -2372,7 +2372,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/button@*, @fluentui-react-native/button@0.35.3, @fluentui-react-native/button@>=0.35.3 <1.0.0, @fluentui-react-native/button@^0.35.3, @fluentui-react-native/button@workspace:packages/components/Button":
+"@fluentui-react-native/button@*, @fluentui-react-native/button@0.35.5, @fluentui-react-native/button@>=0.35.5 <1.0.0, @fluentui-react-native/button@^0.35.5, @fluentui-react-native/button@workspace:packages/components/Button":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/button@workspace:packages/components/Button"
   dependencies:
@@ -2741,12 +2741,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/dropdown@*, @fluentui-react-native/dropdown@>=0.8.21 <1.0.0, @fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown":
+"@fluentui-react-native/dropdown@*, @fluentui-react-native/dropdown@>=0.8.23 <1.0.0, @fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.3 <1.0.0"
-    "@fluentui-react-native/button": ">=0.35.3 <1.0.0"
+    "@fluentui-react-native/button": ">=0.35.5 <1.0.0"
     "@fluentui-react-native/callout": ">=0.24.15 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.11.6
@@ -2859,11 +2859,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-button@*, @fluentui-react-native/experimental-button@0.18.14, @fluentui-react-native/experimental-button@^0.18.14, @fluentui-react-native/experimental-button@workspace:packages/experimental/Button":
+"@fluentui-react-native/experimental-button@*, @fluentui-react-native/experimental-button@0.18.16, @fluentui-react-native/experimental-button@^0.18.16, @fluentui-react-native/experimental-button@workspace:packages/experimental/Button":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-button@workspace:packages/experimental/Button"
   dependencies:
-    "@fluentui-react-native/button": ^0.35.3
+    "@fluentui-react-native/button": ^0.35.5
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
@@ -2928,13 +2928,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@>=0.7.21 <1.0.0, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
+"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@>=0.7.23 <1.0.0, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
   dependencies:
     "@fluentui-react-native/contextual-menu": ^0.22.17
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-button": ^0.18.14
+    "@fluentui-react-native/experimental-button": ^0.18.16
     "@fluentui-react-native/framework": 0.11.6
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/tokens": ">=0.21.3 <1.0.0"
@@ -2949,7 +2949,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-native-date-picker@*, @fluentui-react-native/experimental-native-date-picker@>=0.8.0 <1.0.0, @fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker":
+"@fluentui-react-native/experimental-native-date-picker@*, @fluentui-react-native/experimental-native-date-picker@>=0.9.0 <1.0.0, @fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker"
   dependencies:
@@ -3284,11 +3284,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.11.21, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
+"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.11.23, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu-button@workspace:packages/components/MenuButton"
   dependencies:
-    "@fluentui-react-native/button": ^0.35.3
+    "@fluentui-react-native/button": ^0.35.5
     "@fluentui-react-native/component-cache": ^1.5.1
     "@fluentui-react-native/contextual-menu": ^0.22.17
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
@@ -3309,12 +3309,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.11.20, @fluentui-react-native/menu@workspace:packages/components/Menu":
+"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.11.22, @fluentui-react-native/menu@workspace:packages/components/Menu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.3 <1.0.0"
-    "@fluentui-react-native/button": ">=0.35.3 <1.0.0"
+    "@fluentui-react-native/button": ">=0.35.5 <1.0.0"
     "@fluentui-react-native/callout": ">=0.24.15 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.12.10 <1.0.0"
@@ -3357,12 +3357,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/notification@*, @fluentui-react-native/notification@0.23.14, @fluentui-react-native/notification@workspace:packages/components/Notification":
+"@fluentui-react-native/notification@*, @fluentui-react-native/notification@0.23.16, @fluentui-react-native/notification@workspace:packages/components/Notification":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/notification@workspace:packages/components/Notification"
   dependencies:
     "@fluentui-react-native/adapters": ^0.11.3
-    "@fluentui-react-native/button": ">=0.35.3 <1.0.0"
+    "@fluentui-react-native/button": ">=0.35.5 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/experimental-appearance-additions": ^0.5.8
     "@fluentui-react-native/experimental-shadow": 0.4.8
@@ -3740,7 +3740,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.155.4
+    "@fluentui-react-native/tester": ^0.156.1
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
@@ -3760,7 +3760,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.155.4, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.156.1, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3770,21 +3770,21 @@ __metadata:
     "@fluentui-react-native/apple-theme": ">=0.21.9 <1.0.0"
     "@fluentui-react-native/avatar": ^1.10.12
     "@fluentui-react-native/badge": ">=0.7.8 <1.0.0"
-    "@fluentui-react-native/button": ">=0.35.3 <1.0.0"
+    "@fluentui-react-native/button": ">=0.35.5 <1.0.0"
     "@fluentui-react-native/chip": ^0.2.3
     "@fluentui-react-native/default-theme": ">=0.19.7 <1.0.0"
     "@fluentui-react-native/divider": ^0.5.10
     "@fluentui-react-native/drawer": ^0.2.9
-    "@fluentui-react-native/dropdown": ">=0.8.21 <1.0.0"
+    "@fluentui-react-native/dropdown": ">=0.8.23 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/experimental-activity-indicator": ">=0.8.8 <1.0.0"
     "@fluentui-react-native/experimental-appearance-additions": ^0.5.8
     "@fluentui-react-native/experimental-avatar": ">=0.19.7 <1.0.0"
-    "@fluentui-react-native/experimental-button": 0.18.14
+    "@fluentui-react-native/experimental-button": 0.18.16
     "@fluentui-react-native/experimental-checkbox": 0.15.12
     "@fluentui-react-native/experimental-expander": 0.6.9
-    "@fluentui-react-native/experimental-menu-button": ">=0.7.21 <1.0.0"
-    "@fluentui-react-native/experimental-native-date-picker": ">=0.8.0 <1.0.0"
+    "@fluentui-react-native/experimental-menu-button": ">=0.7.23 <1.0.0"
+    "@fluentui-react-native/experimental-native-date-picker": ">=0.9.0 <1.0.0"
     "@fluentui-react-native/experimental-shadow": 0.4.8
     "@fluentui-react-native/experimental-shimmer": 0.11.2
     "@fluentui-react-native/experimental-tabs": 0.9.13
@@ -3794,9 +3794,9 @@ __metadata:
     "@fluentui-react-native/icon": 0.19.10
     "@fluentui-react-native/input": ^0.4.3
     "@fluentui-react-native/interactive-hooks": ">=0.24.8 <1.0.0"
-    "@fluentui-react-native/menu": ^1.11.20
+    "@fluentui-react-native/menu": ^1.11.22
     "@fluentui-react-native/merge-props": ">=0.7.1 <1.0.0"
-    "@fluentui-react-native/notification": 0.23.14
+    "@fluentui-react-native/notification": 0.23.16
     "@fluentui-react-native/radio-group": ">=0.19.2 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": ^0.16.6
@@ -3812,7 +3812,7 @@ __metadata:
     "@fluentui-react-native/theming-utils": ">=0.24.4 <1.0.0"
     "@fluentui-react-native/vibrancy-view": ">=0.0.3 <1.0.0"
     "@fluentui-react-native/win32-theme": ">=0.27.6 <1.0.0"
-    "@fluentui/react-native": ">=0.37.24 <1.0.0"
+    "@fluentui/react-native": ">=0.37.26 <1.0.0"
     "@fortawesome/fontawesome-svg-core": ^6.2.0
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-native-fontawesome": ^0.3.0
@@ -4074,11 +4074,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native@*, @fluentui/react-native@>=0.37.24 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
+"@fluentui/react-native@*, @fluentui/react-native@>=0.37.26 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
-    "@fluentui-react-native/button": 0.35.3
+    "@fluentui-react-native/button": 0.35.5
     "@fluentui-react-native/callout": 0.24.15
     "@fluentui-react-native/checkbox": 0.21.2
     "@fluentui-react-native/contextual-menu": 0.22.17
@@ -4087,7 +4087,7 @@ __metadata:
     "@fluentui-react-native/focus-zone": 0.12.10
     "@fluentui-react-native/interactive-hooks": 0.24.8
     "@fluentui-react-native/link": 0.20.2
-    "@fluentui-react-native/menu-button": 0.11.21
+    "@fluentui-react-native/menu-button": 0.11.23
     "@fluentui-react-native/persona": 0.14.8
     "@fluentui-react-native/persona-coin": 0.13.8
     "@fluentui-react-native/pressable": 0.10.9

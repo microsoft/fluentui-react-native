@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Sep 2023 18:30:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.5
+
+Wed, 20 Sep 2023 18:30:43 GMT
+
+### Patches
+
+- [Button][macOS] Don't call onClick with onKeyDown (saadnajmi2@gmail.com)
+
+## 0.35.4
+
+Wed, 13 Sep 2023 17:08:13 GMT
+
+### Patches
+
+- check dimensions before rendering focusInnerBorder (krsiler@microsoft.com)
 
 ## 0.35.3
 

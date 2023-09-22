@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, View } from 'react-native';
+import { Platform, Switch, View } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/button';
@@ -11,7 +11,114 @@ import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { PlatformStatus, TestSection } from '../Test';
 import { Test } from '../Test';
 
-const NativeDatePickerMainTest: React.FunctionComponent = () => {
+const NativeDatePickerAndroidUsage: React.FunctionComponent = () => {
+  const today = new Date();
+  const [startDate, setStartDate] = React.useState<Date>(today);
+  const [endDate, setEndDate] = React.useState<Date>(today);
+
+  return (
+    <Stack style={stackStyle}>
+      <Text variant="headerStandard">Selected Start Date/Time</Text>
+      <Text variant="subheaderStandard">
+        {startDate?.toString()} {'\n'}
+      </Text>
+
+      <Text variant="headerStandard">Selected End Date/Time</Text>
+      <Text variant="subheaderStandard">
+        {endDate?.toString() ?? 'N/A'} {'\n'}
+      </Text>
+
+      <Button
+        content="Date Picker"
+        onClick={() => {
+          NativeDatePicker.present({
+            mode: 'date',
+            startDate: startDate,
+            endDate: endDate,
+            callback: (date1: string, date2: string) => {
+              console.warn(`${date1} - ${date2}`);
+              setStartDate(NativeDatePicker.parseISOString(date1));
+            },
+          });
+        }}
+      />
+      <Text variant="headerStandard">Ranged Datepicker</Text>
+      <View style={{ flexDirection: 'row' }}>
+        <Button
+          content="Start Date"
+          onClick={() => {
+            NativeDatePicker.present({
+              mode: 'dateRange',
+              dateRangeMode: 'start',
+              startDate: startDate,
+              endDate: endDate,
+              callback: (date1: string, date2: string) => {
+                console.warn(`${date1} - ${date2}`);
+                setStartDate(NativeDatePicker.parseISOString(date1));
+                setEndDate(NativeDatePicker.parseISOString(date2));
+              },
+            });
+          }}
+        />
+
+        <Button
+          content="End Date"
+          onClick={() => {
+            NativeDatePicker.present({
+              mode: 'dateRange',
+              dateRangeMode: 'end',
+              startDate: startDate,
+              endDate: endDate,
+              callback: (date1: string, date2: string) => {
+                console.warn(`${date1} - ${date2}`);
+                setStartDate(NativeDatePicker.parseISOString(date1));
+                setEndDate(NativeDatePicker.parseISOString(date2));
+              },
+            });
+          }}
+        />
+      </View>
+
+      <Text variant="headerStandard">Date and Time</Text>
+      <Button
+        content="Date Time Picker"
+        onClick={() => {
+          NativeDatePicker.present({
+            mode: 'dateTime',
+            startDate: startDate,
+            endDate: endDate,
+            callback: (date1: string, date2: string) => {
+              console.warn(`${date1} - ${date2}`);
+              setStartDate(NativeDatePicker.parseISOString(date1));
+            },
+          });
+        }}
+      />
+
+      <Text variant="headerStandard">Ranged Date Time Picker</Text>
+      <View style={{ flexDirection: 'row' }}>
+        <Button
+          content="Date Time Range"
+          onClick={() => {
+            NativeDatePicker.present({
+              mode: 'dateTimeRange',
+              dateRangeMode: 'start',
+              startDate: startDate,
+              endDate: endDate,
+              callback: (date1: string, date2: string) => {
+                console.warn(`${date1} - ${date2}`);
+                setStartDate(NativeDatePicker.parseISOString(date1));
+                setEndDate(NativeDatePicker.parseISOString(date2));
+              },
+            });
+          }}
+        />
+      </View>
+    </Stack>
+  );
+};
+
+const NativeDatePickeriOSUsage: React.FunctionComponent = () => {
   const [startDate, setStartDate] = React.useState<Date>(new Date());
   const [endDate, setEndDate] = React.useState<Date>(null);
   const [customCalendarConfiguration, setCustomCalendarConfiguration] = React.useState(false);
@@ -230,11 +337,21 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
 };
 
 const nativeDatePickerSections: TestSection[] = [
-  {
-    name: 'Native Date Picker',
-    testID: NATIVEDATEPICKER_TESTPAGE,
-    component: NativeDatePickerMainTest,
-  },
+  ...Platform.select({
+    android: [
+      {
+        name: 'Native Date Picker',
+        component: NativeDatePickerAndroidUsage,
+      },
+    ],
+    default: [
+      {
+        name: 'Native Date Picker',
+        testID: NATIVEDATEPICKER_TESTPAGE,
+        component: NativeDatePickeriOSUsage,
+      },
+    ],
+  }),
 ];
 
 export const NativeDatePickerTest: React.FunctionComponent = () => {
@@ -243,10 +360,10 @@ export const NativeDatePickerTest: React.FunctionComponent = () => {
     uwpStatus: 'N/A',
     iosStatus: 'Experimental',
     macosStatus: 'N/A',
-    androidStatus: 'N/A',
+    androidStatus: 'Experimental',
   };
 
-  const description = 'A Native date picker component using the Fluent Design System.  Currently only implemented on iOS.';
+  const description = 'A Native date picker component using the Fluent Design System.';
 
   return <Test name="Native Date Picker Test" description={description} sections={nativeDatePickerSections} status={status}></Test>;
 };

@@ -1,8 +1,45 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Sep 2023 18:30:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.156.1
+
+Wed, 20 Sep 2023 18:30:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.35.5
+- Bump @fluentui-react-native/dropdown to v0.8.23
+- Bump @fluentui-react-native/experimental-button to v0.18.16
+- Bump @fluentui-react-native/experimental-menu-button to v0.7.23
+- Bump @fluentui-react-native/menu to v1.11.22
+- Bump @fluentui-react-native/notification to v0.23.16
+- Bump @fluentui/react-native to v0.37.26
+
+## 0.156.0
+
+Tue, 19 Sep 2023 19:31:59 GMT
+
+### Minor changes
+
+- Android native date picker (ankarm@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.9.0
+
+## 0.155.5
+
+Wed, 13 Sep 2023 17:08:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.35.4
+- Bump @fluentui-react-native/dropdown to v0.8.22
+- Bump @fluentui-react-native/experimental-button to v0.18.15
+- Bump @fluentui-react-native/experimental-menu-button to v0.7.22
+- Bump @fluentui-react-native/menu to v1.11.21
+- Bump @fluentui-react-native/notification to v0.23.15
+- Bump @fluentui/react-native to v0.37.25
 
 ## 0.155.4
 

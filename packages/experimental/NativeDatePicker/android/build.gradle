@@ -1,0 +1,48 @@
+buildscript {
+  ext.safeExtGet = { prop, fallback ->
+    return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+  }
+
+  repositories {
+    mavenCentral()
+    google()
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlinVersion', '1.6.10')}"
+    classpath "com.facebook.react:react-native-gradle-plugin"
+  }
+}
+
+def safeExtGet(prop, fallback) {
+  rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+  compileSdkVersion safeExtGet('compileSdkVersion', 31)
+  buildToolsVersion safeExtGet('buildToolsVersion', '31.0.0')
+
+  defaultConfig {
+    minSdkVersion safeExtGet('minSdkVersion', 21)
+    targetSdkVersion safeExtGet('targetSdkVersion', 31)
+  }
+}
+
+repositories {
+  maven {
+    url "https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1"
+  }
+  mavenCentral()
+  google()
+}
+
+dependencies {
+  implementation "com.facebook.react:react-android:+"
+  implementation "com.microsoft.device:dualscreen-layout:1.0.0-alpha01"
+  implementation "com.microsoft.fluentui:fluentui_calendar:${safeExtGet('fluentUICalendarVersion', '0.0.27')}"
+  implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
+}

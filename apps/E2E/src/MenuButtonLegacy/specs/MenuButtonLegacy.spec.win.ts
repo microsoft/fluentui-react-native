@@ -5,13 +5,14 @@ import MenuButtonLegacyPageObject from '../pages/MenuButtonLegacyPageObject.win'
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButton Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await MenuButtonLegacyPageObject.waitForInitialPageToDisplay();
-    expect(await MenuButtonLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await MenuButtonLegacyPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to MenuButton test page', async () => {
-    await MenuButtonLegacyPageObject.navigateToPageAndLoadTests(true);
-    expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await MenuButtonLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await MenuButtonLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -31,8 +32,6 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         MENUBUTTON_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -43,8 +42,6 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         MENU_BUTTON_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set "accessibilityLabel". Validate "Name" element attribute defaults to MenuButton label.', async () => {
@@ -55,8 +52,6 @@ describe('MenuButton Legacy Accessibility Testing', () => {
         MENU_BUTTON_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

@@ -56,14 +56,22 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   );
   const onKeyPress = React.useCallback(
     (e) => {
-      if (isProcessingKeyboardInvocation) {
-        onClick?.(e);
-        isProcessingKeyboardInvocation = false;
+      if (shouldOnlyFireIfPressed) {
+        if (isProcessingKeyboardInvocation) {
+          onClick?.(e);
+          isProcessingKeyboardInvocation = false;
+        }
+      } else {
+        if (Platform.OS === 'macos') {
+          // Do nothing as macOS's pressable already calls onPress with onKeyDown
+        } else {
+          onClick?.(e);
+        }
       }
     },
     [onClick],
   );
-  const onKeyProps = useKeyProps(shouldOnlyFireIfPressed ? onKeyPress : onClick, ' ', 'Enter');
+  const onKeyProps = useKeyProps(onKeyPress, ' ', 'Enter');
 
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 

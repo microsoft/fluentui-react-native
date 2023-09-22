@@ -11,15 +11,14 @@ class ButtonLegacyPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
 
-  async didOnClickCallbackFire(errorMsg: string): Promise<boolean> {
+  async didOnClickCallbackFire(errorMsg: string): Promise<boolean | void> {
     const callbackText = await this._callbackText;
-    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
-    return await callbackText.isDisplayed();
+    return await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
   }
 
   async resetTest(): Promise<void> {
     const callbackText = await this._callbackText;
-    if (callbackText.isDisplayed()) {
+    if (await callbackText.isDisplayed()) {
       await (await this._primaryComponent).click();
       await this.waitForCondition(
         async () => !(await callbackText.isDisplayed()),

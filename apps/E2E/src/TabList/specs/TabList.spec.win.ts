@@ -11,17 +11,14 @@ import TabListPageObject from '../pages/TabListPageObject';
 
 describe('TabList Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await TabListPageObject.waitForInitialPageToDisplay();
-    expect(await TabListPageObject.isInitialPageDisplayed())
-      .withContext(TabListPageObject.ERRORMESSAGE_APPLOAD)
-      .toBeTruthy();
+    expect(await TabListPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to TabList test page', async () => {
-    await TabListPageObject.navigateToPageAndLoadTests(true);
-    expect(await TabListPageObject.isPageLoaded())
-      .withContext(TabListPageObject.ERRORMESSAGE_PAGELOAD)
-      .toBeTruthy();
+    expect(await TabListPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await TabListPageObject.enableE2ETesterMode()).toBeTrue();
 
     expect(await TabListPageObject.didAssertPopup())
       .withContext(TabListPageObject.ERRORMESSAGE_ASSERT)

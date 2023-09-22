@@ -2,13 +2,11 @@ import CheckboxLegacyPageObject from '../pages/CheckboxLegacyPageObject';
 
 describe('Checkbox Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await CheckboxLegacyPageObject.waitForInitialPageToDisplay();
-    expect(await CheckboxLegacyPageObject.isInitialPageDisplayed()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await CheckboxLegacyPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Checkbox Legacy test page', async () => {
-    await CheckboxLegacyPageObject.navigateToPageAndLoadTests();
-    expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy(CheckboxLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await CheckboxLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
     await expect(await CheckboxLegacyPageObject.isPageLoaded()).toBeTruthy();
   });

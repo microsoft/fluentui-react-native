@@ -5,13 +5,14 @@ import MenuButtonV1PageObject from '../pages/MenuButtonV1PageObject.win';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButtonV1 Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await MenuButtonV1PageObject.waitForInitialPageToDisplay();
-    expect(await MenuButtonV1PageObject.isInitialPageDisplayed()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_APPLOAD);
+    expect(await MenuButtonV1PageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to MenuButtonV1 test page', async () => {
-    await MenuButtonV1PageObject.navigateToPageAndLoadTests(true);
-    expect(await MenuButtonV1PageObject.isPageLoaded()).toBeTruthy(MenuButtonV1PageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await MenuButtonV1PageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await MenuButtonV1PageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -32,8 +33,6 @@ describe('MenuButtonV1 Accessibility Testing', () => {
         MENUBUTTON_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -44,8 +43,6 @@ describe('MenuButtonV1 Accessibility Testing', () => {
         MENUBUTTONV1_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set "accessibilityLabel". Validate "Name" element attribute defaults to MenuButton label.', async () => {
@@ -56,7 +53,5 @@ describe('MenuButtonV1 Accessibility Testing', () => {
         MENUBUTTONV1_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT);
   });
 });

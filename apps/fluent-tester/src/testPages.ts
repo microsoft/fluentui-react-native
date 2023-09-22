@@ -124,7 +124,7 @@ export const tests: TestDescription[] = [
     name: 'Date Picker (Native)',
     component: NativeDatePickerTest,
     testPageButton: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
-    platforms: ['ios'],
+    platforms: ['ios', 'android'],
   },
   {
     name: 'Divider',
