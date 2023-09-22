@@ -45,6 +45,7 @@ export function useTabAnimation(props: TabProps, context: TabListState, tokens: 
        */
       if (
         e?.nativeEvent?.layout &&
+        layout &&
         layout.tablist &&
         layout.tablist.width > 0 &&
         e.nativeEvent.layout.height <= layout.tablist.height &&
@@ -73,7 +74,7 @@ export function useTabAnimation(props: TabProps, context: TabListState, tokens: 
         });
       }
     },
-    [addTabLayout, tabKey, layout.tablist, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
+    [addTabLayout, tabKey, layout, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );
 
   return onTabLayout;
