@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "support numberOfLines prop",
-  "packageName": "@fluentui-react-native/text",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/avatar",
-  "version": "1.10.12",
+  "version": "1.10.13",
   "description": "A cross-platform Avatar component using the Fluent Design System",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -30,9 +30,9 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "^0.11.3",
-    "@fluentui-react-native/badge": "^0.7.8",
+    "@fluentui-react-native/badge": "^0.7.9",
     "@fluentui-react-native/framework": "0.11.6",
-    "@fluentui-react-native/icon": "^0.19.10",
+    "@fluentui-react-native/icon": "^0.19.11",
     "@fluentui-react-native/theme-tokens": "^0.25.1",
     "@fluentui-react-native/theming-utils": ">=0.24.4 <1.0.0",
     "@fluentui-react-native/tokens": "^0.21.3",
