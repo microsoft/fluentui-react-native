@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Focus zone in MenuLis for win32t",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
