@@ -44,7 +44,7 @@ export const MenuList = compose<MenuListType>({
   slots: {
     root: MenuStack,
     scrollView: ScrollView,
-    ...(Platform.OS === 'macos' && { focusZone: FocusZone }),
+    focusZone: FocusZone,
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
@@ -85,33 +85,26 @@ export const MenuList = compose<MenuListType>({
         return child;
       });
 
-      const content =
-        Platform.OS === 'macos' ? (
-          <Slots.root onMouseLeave={setFocusZoneFocus} onKeyDown={menuList.onListKeyDown}>
-            <Slots.scrollView
-              showsVerticalScrollIndicator={menuContext.hasMaxHeight}
-              showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
+      const ScrollViewWrapper = Platform.OS === 'macos' || !menuContext.hasMaxHeight ? Slots.scrollView : React.Fragment;
+
+      const content = (
+        <Slots.root onMouseLeave={setFocusZoneFocus} onKeyDown={menuList.onListKeyDown}>
+          <ScrollViewWrapper
+            showsVerticalScrollIndicator={menuContext.hasMaxHeight}
+            showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
+          >
+            <Slots.focusZone
+              componentRef={focusZoneRef}
+              focusZoneDirection={'vertical'}
+              defaultTabbableElement={focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
+              enableFocusRing={false}
             >
-              <Slots.focusZone
-                componentRef={focusZoneRef}
-                focusZoneDirection={'vertical'}
-                defaultTabbableElement={focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
-                enableFocusRing={false}
-              >
-                {childrenWithSet}
-              </Slots.focusZone>
-            </Slots.scrollView>
-          </Slots.root>
-        ) : menuContext.hasMaxHeight ? (
-          <Slots.root onKeyDown={menuList.onListKeyDown} style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
-            <Slots.scrollView>{childrenWithSet}</Slots.scrollView>
-          </Slots.root>
-        ) : (
-          <Slots.root onKeyDown={menuList.onListKeyDown} style={menuContext.minWidth ? { minWidth: menuContext.minWidth } : {}}>
-            {childrenWithSet}
-          </Slots.root>
-        );
+              {childrenWithSet}
+            </Slots.focusZone>
+          </ScrollViewWrapper>
+        </Slots.root>
+      );
 
       return <MenuListProvider value={menuListContextValue}>{content}</MenuListProvider>;
     };
