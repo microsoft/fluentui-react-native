@@ -44,7 +44,7 @@ export const MenuList = compose<MenuListType>({
   slots: {
     root: MenuStack,
     scrollView: ScrollView,
-    focusZone: FocusZone,
+    ...(Platform.OS !== 'android' && { focusZone: FocusZone }),
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
@@ -85,7 +85,8 @@ export const MenuList = compose<MenuListType>({
         return child;
       });
 
-      const ScrollViewWrapper = Platform.OS === 'macos' || !menuContext.hasMaxHeight ? Slots.scrollView : React.Fragment;
+      const ScrollViewWrapper = Platform.OS === 'macos' || menuContext.hasMaxHeight ? Slots.scrollView : React.Fragment;
+      const FocusZoneWrapper = Platform.OS !== 'android' ? Slots.focusZone : React.Fragment;
 
       const content = (
         <Slots.root onMouseLeave={setFocusZoneFocus} onKeyDown={menuList.onListKeyDown}>
@@ -93,15 +94,16 @@ export const MenuList = compose<MenuListType>({
             showsVerticalScrollIndicator={menuContext.hasMaxHeight}
             showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
           >
-            <Slots.focusZone
+            <FocusZoneWrapper
               componentRef={focusZoneRef}
               focusZoneDirection={'vertical'}
               defaultTabbableElement={focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
               enableFocusRing={false}
+              isCircularNavigation={Platform.OS !== 'macos'}
             >
               {childrenWithSet}
-            </Slots.focusZone>
+            </FocusZoneWrapper>
           </ScrollViewWrapper>
         </Slots.root>
       );
