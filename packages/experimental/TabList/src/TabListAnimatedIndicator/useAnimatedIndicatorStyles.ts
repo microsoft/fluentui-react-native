@@ -45,6 +45,10 @@ export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
     };
   }, [vertical, selectedIndicatorLayout, animatedIndicatorStyles]);
 
+  /**
+   * Until we have styles for the animated indicator, we show the Tab's "static indicator" for the selected key which is normally shown only on hover.
+   * The `canShowAnimatedIndicator` variable is used to decide whether to render the selected tab's static indicator as transparent or as colored in Tab.styling.tsx.
+   */
   React.useEffect(() => setCanShowAnimatedIndicator(styles !== null), [setCanShowAnimatedIndicator, styles]);
 
   return styles;
