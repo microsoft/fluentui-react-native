@@ -162,9 +162,21 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     };
   });
 
+  // focus management
+  const focusZoneRef = React.useRef<View>();
+  const setFocusZoneFocus = () => {
+    focusZoneRef?.current?.focus();
+  };
+
+  React.useEffect(() => {
+    setFocusZoneFocus();
+  }, []);
+
   return {
     props: {
       ...context,
+      onMouseLeave: setFocusZoneFocus,
+      onKeyDown: onListKeyDown,
     },
     isCheckedControlled,
     checked,
@@ -175,7 +187,6 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     removeRadioItem,
     trackMenuItem,
     untrackMenuItem,
-    onListKeyDown,
     hasMaxHeight: context.hasMaxHeight,
     hasMaxWidth: context.hasMaxWidth,
   };

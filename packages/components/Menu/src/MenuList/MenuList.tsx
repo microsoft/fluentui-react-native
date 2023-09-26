@@ -48,18 +48,8 @@ export const MenuList = compose<MenuListType>({
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
-    const menuContext = useMenuContext();
     const menuListContextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList.props, (layer) => menuListLookup(layer, menuList, userProps));
-
-    const focusZoneRef = React.useRef<View>();
-    const setFocusZoneFocus = () => {
-      focusZoneRef?.current?.focus();
-    };
-
-    React.useEffect(() => {
-      setFocusZoneFocus();
-    }, []);
 
     return (_final: MenuListProps, children: React.ReactNode) => {
       const itemCount = React.Children.toArray(children).filter(
@@ -85,15 +75,12 @@ export const MenuList = compose<MenuListType>({
         return child;
       });
 
-      const ScrollViewWrapper = Platform.OS === 'macos' || menuContext.hasMaxHeight ? Slots.scrollView : React.Fragment;
+      const ScrollViewWrapper = Platform.OS === 'macos' || menuList.hasMaxHeight ? Slots.scrollView : React.Fragment;
       const FocusZoneWrapper = Platform.OS !== 'android' ? Slots.focusZone : React.Fragment;
 
       const content = (
-        <Slots.root onMouseLeave={setFocusZoneFocus} onKeyDown={menuList.onListKeyDown}>
-          <ScrollViewWrapper
-            showsVerticalScrollIndicator={menuContext.hasMaxHeight}
-            showsHorizontalScrollIndicator={menuContext.hasMaxWidth}
-          >
+        <Slots.root>
+          <ScrollViewWrapper showsVerticalScrollIndicator={menuList.hasMaxHeight} showsHorizontalScrollIndicator={menuList.hasMaxWidth}>
             <FocusZoneWrapper
               componentRef={focusZoneRef}
               focusZoneDirection={'vertical'}

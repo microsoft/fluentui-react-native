@@ -79,7 +79,6 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   removeRadioItem: (name: string) => void;
   trackMenuItem: (item: TrackedMenuItem) => void;
   untrackMenuItem: (item: TrackedMenuItem) => void;
-  onListKeyDown: (e: InteractionEvent) => void;
   hasMaxHeight?: boolean;
   hasMaxWidth?: boolean;
 }
