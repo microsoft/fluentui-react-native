@@ -51,6 +51,11 @@ export interface TabListState {
   disabled: boolean;
 
   /**
+   * Flag indicating whether the animated indicator has rendered.
+   */
+  indicatorHasRendered: boolean;
+
+  /**
    * Flag to indicate whether a Tab has been clicked and selected.
    * @platform win32
    */
@@ -75,6 +80,11 @@ export interface TabListState {
    * The currently selected Tab's key.
    */
   selectedKey: string;
+
+  /**
+   * Setter function for the `indicatorHasRendered` variable for this state object.
+   */
+  setIndicatorHasRendered: (hasRendered: boolean) => void;
 
   /**
    * Setter for the context's `invoked` flag.
