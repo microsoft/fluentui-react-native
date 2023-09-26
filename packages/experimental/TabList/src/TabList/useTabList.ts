@@ -64,10 +64,13 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   });
 
   const addTabLayout = (tabKey: string, layoutInfo: TabLayoutInfo) => {
-    setListLayoutMap((prev) => ({ ...prev, [tabKey]: { ...prev[tabKey], ...layoutInfo } }));
+    setListLayoutMap((prev) => ({ ...prev, [tabKey]: layoutInfo }));
   };
 
-  const updateStyles = (update: AnimatedIndicatorStylesUpdate) =>
+  const updateStyles = (update: AnimatedIndicatorStylesUpdate) => {
+    if (!update.container && !update.indicator) {
+      return;
+    }
     setUserDefinedAnimatedIndicatorStyles((prev) => {
       const newStyles: AnimatedIndicatorStyles = { ...prev };
       if (update.container) {
@@ -78,6 +81,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       }
       return newStyles;
     });
+  };
 
   // TabList layout callback used to style the animated indicator.
   const onTabListLayout = (e: LayoutEvent) => {

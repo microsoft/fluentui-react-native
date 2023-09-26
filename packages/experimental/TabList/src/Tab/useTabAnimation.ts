@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
+import type { LayoutEvent, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabProps, TabTokens } from './Tab.types';
 import type { TabListState } from '../TabList/TabList.types';
@@ -15,10 +15,16 @@ const RENDERING_HEIGHT_LIMIT = 20_000;
 /**
  * This hook handles the logic on the tab side to correctly style and animate the TabListAnimatedIndicator.
  *
- * We save the layout information (width, height, x, y) of the Tab component using a LayoutEventHandler attached to the
- * root slot we initialize here, and we color the animated indicator using the user defined tab indicator color token.
+ * We save the layout information (width, height, x, y) of the Tab component by returning the root's slot props with a
+ * LayoutEventHandler attached to track layout info of the tab, and we color the animated indicator using the user
+ * defined tab indicator color token.
  */
-export function useTabAnimation(props: TabProps, context: TabListState, tokens: TabTokens) {
+export function useTabAnimation(
+  props: TabProps,
+  context: TabListState,
+  tokens: TabTokens,
+  rootProps: PressablePropsExtended,
+): PressablePropsExtended {
   const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical } = context;
   const { tabKey } = props;
 
@@ -77,5 +83,5 @@ export function useTabAnimation(props: TabProps, context: TabListState, tokens: 
     [addTabLayout, tabKey, layout, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );
 
-  return onTabLayout;
+  return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);
 }

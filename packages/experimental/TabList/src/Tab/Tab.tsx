@@ -7,10 +7,10 @@ import { View, Pressable } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import type { UseTokens } from '@fluentui-react-native/framework';
-import { withSlots, compressible, useSlot, useFluentTheme, applyTokenLayers, mergeProps, memoize } from '@fluentui-react-native/framework';
+import { withSlots, compressible, useSlot, useFluentTheme, applyTokenLayers, mergeProps } from '@fluentui-react-native/framework';
 import { IconV1 as Icon } from '@fluentui-react-native/icon';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
-import type { LayoutEvent, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import type { TextProps } from '@fluentui-react-native/text';
 import { Text } from '@fluentui-react-native/text';
 
@@ -33,11 +33,6 @@ const tabLookup = (layer: string, state: TabState, props: TabProps, tablistConte
   );
 };
 
-const getRootProps = memoize(rootPropsWorker);
-function rootPropsWorker(props: PressablePropsExtended, onLayout: (e: LayoutEvent) => void) {
-  return mergeProps(props, { onLayout });
-}
-
 export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens: UseTokens<TabTokens>) => {
   const tablist = React.useContext(TabListContext);
   const tab = useTab(props);
@@ -51,9 +46,9 @@ export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens
   // Get styling props for each Tab slot
   const slotProps = useTabSlotProps(tab.props, tokens, theme, tablist);
 
-  const onTabLayout = useTabAnimation(props, tablist, tokens);
+  const rootProps = useTabAnimation(props, tablist, tokens, slotProps.root);
 
-  const RootSlot = useSlot<PressablePropsExtended>(Pressable, getRootProps(slotProps.root, onTabLayout));
+  const RootSlot = useSlot<PressablePropsExtended>(Pressable, rootProps);
   const StackSlot = useSlot<ViewProps>(View, slotProps.stack as ViewProps);
   const IndicatorContainerSlot = useSlot<ViewProps>(View, slotProps.indicatorContainer as ViewProps);
   const IndicatorSlot = useSlot<ViewProps>(View, slotProps.indicator as ViewProps);

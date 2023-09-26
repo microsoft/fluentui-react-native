@@ -47,6 +47,11 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   indicatorOrientation?: 'horizontal' | 'vertical';
 
   /**
+   * Border radius of the indicator.
+   */
+  indicatorRadius?: number;
+
+  /**
    * Thickness of the indicator line.
    */
   indicatorThickness?: number;

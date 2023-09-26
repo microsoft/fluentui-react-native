@@ -104,12 +104,12 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
       return {
         style: {
           flex: 1,
-          borderRadius: 99,
+          borderRadius: tokens.indicatorRadius,
           backgroundColor: hideStaticIndicator ? theme.colors.transparentStroke : tokens.indicatorColor,
         },
       };
     },
-    [context.animatedIndicatorStyles, props.tabKey, selectedKey, tokens.indicatorColor, theme],
+    [context.animatedIndicatorStyles, props.tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius, theme],
   );
 
   return { root, contentContainer, content, icon, stack, indicatorContainer, indicator };

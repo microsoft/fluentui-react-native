@@ -31,6 +31,7 @@ export const defaultTabTokens: TokensFromTheme<TabTokens, Theme> = (t: Theme) =>
     color: t.colors.neutralForeground2,
     iconColor: t.colors.neutralForeground2,
     indicatorColor: t.colors.transparentStroke,
+    indicatorRadius: 99,
     small: {
       iconSize: 20,
       iconMargin: 2,
