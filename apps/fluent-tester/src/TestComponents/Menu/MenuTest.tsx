@@ -20,6 +20,7 @@ import { Switch } from '@fluentui-react-native/switch';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { E2EMenuTest } from './E2EMenuTest';
+import { MenuFocusZone } from './MenuFocusZone';
 import { MenuIcons } from './MenuIcons';
 import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
@@ -527,6 +528,13 @@ const menuSections: TestSection[] = [
     name: 'Menu with groups',
     component: MenuWithGroups,
   },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'MenuList FocusZone test',
+      component: MenuFocusZone,
+    },
+  }),
 ];
 
 const e2eSections: TestSection[] = [
