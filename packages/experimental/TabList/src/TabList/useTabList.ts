@@ -56,7 +56,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   );
 
   // State variables and functions for saving layout info and other styling information to style the animated indicator.
-  const [indicatorHasRendered, setIndicatorHasRendered] = React.useState<boolean>(false);
+  const [canShowAnimatedIndicator, setCanShowAnimatedIndicator] = React.useState<boolean>(false);
   const [listLayoutMap, setListLayoutMap] = React.useState<{ [key: string]: TabLayoutInfo }>({});
   const [tabListLayout, setTabListLayout] = React.useState<LayoutRectangle>();
   const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<AnimatedIndicatorStyles>({
@@ -110,8 +110,8 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       addTabLayout: addTabLayout,
       animatedIndicatorStyles: userDefinedAnimatedIndicatorStyles,
       appearance: appearance,
+      canShowAnimatedIndicator: canShowAnimatedIndicator,
       disabled: disabled,
-      indicatorHasRendered: indicatorHasRendered,
       invoked: invoked,
       layout: {
         tablist: tabListLayout,
@@ -121,7 +121,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       removeTabKey: removeTabKey,
       selectedKey: selectedKey ?? data.selectedKey,
       setSelectedTabRef: setSelectedTabRef,
-      setIndicatorHasRendered: setIndicatorHasRendered,
+      setCanShowAnimatedIndicator: setCanShowAnimatedIndicator,
       setInvoked: setInvoked,
       size: size,
       tabKeys: tabKeys,

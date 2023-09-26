@@ -14,7 +14,7 @@ import type { TabListState } from '../TabList/TabList.types';
  * Hook to get the style props for each Tab slot.
  */
 export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme, context: TabListState): TabSlotProps => {
-  const { indicatorHasRendered, selectedKey, vertical } = context;
+  const { canShowAnimatedIndicator, selectedKey, vertical } = context;
 
   // Get each slot's props using our final tokens
   const root = React.useMemo<PressablePropsExtended>(
@@ -100,7 +100,7 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
     // if we're the selected tab and we've generated styles for the animated indicator, render the static tab indicator as transparent.
     // The animated indicator will receive styling instead via useTabAnimation hook.
     () => {
-      const hideStaticIndicator = props.tabKey === selectedKey && indicatorHasRendered;
+      const hideStaticIndicator = props.tabKey === selectedKey && canShowAnimatedIndicator;
       return {
         style: {
           flex: 1,
@@ -109,7 +109,7 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         },
       };
     },
-    [indicatorHasRendered, props.tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius, theme],
+    [canShowAnimatedIndicator, props.tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius, theme],
   );
 
   return { root, contentContainer, content, icon, stack, indicatorContainer, indicator };

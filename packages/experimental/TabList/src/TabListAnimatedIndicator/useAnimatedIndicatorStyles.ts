@@ -9,7 +9,7 @@ import { TabListContext } from '../TabList/TabListContext';
  * This hook handles logic for generating the styles for the TabList's Animated Indicator.
  */
 export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
-  const { animatedIndicatorStyles, layout, selectedKey, setIndicatorHasRendered, vertical } = React.useContext(TabListContext);
+  const { animatedIndicatorStyles, layout, selectedKey, setCanShowAnimatedIndicator, vertical } = React.useContext(TabListContext);
 
   const selectedIndicatorLayout = React.useMemo<TabLayoutInfo | null>(() => {
     return selectedKey ? layout.tabs[selectedKey] : null;
@@ -45,7 +45,7 @@ export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
     };
   }, [vertical, selectedIndicatorLayout, animatedIndicatorStyles]);
 
-  React.useEffect(() => setIndicatorHasRendered(styles !== null), [setIndicatorHasRendered, styles]);
+  React.useEffect(() => setCanShowAnimatedIndicator(styles !== null), [setCanShowAnimatedIndicator, styles]);
 
   return styles;
 }
