@@ -13,7 +13,6 @@ import type { MenuListProps, MenuListState, MenuListType } from './MenuList.type
 import { menuListName } from './MenuList.types';
 import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
-import { useMenuContext } from '../context';
 import { MenuListProvider } from '../context/menuListContext';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
@@ -75,16 +74,23 @@ export const MenuList = compose<MenuListType>({
         return child;
       });
 
-      const ScrollViewWrapper = Platform.OS === 'macos' || menuList.hasMaxHeight ? Slots.scrollView : React.Fragment;
+      const shouldHaveScrollView = Platform.OS === 'macos' || menuList.hasMaxHeight || menuList.hasMaxWidth;
+      const ScrollViewWrapper = shouldHaveScrollView ? Slots.scrollView : React.Fragment;
       const FocusZoneWrapper = Platform.OS !== 'android' ? Slots.focusZone : React.Fragment;
 
       const content = (
         <Slots.root>
-          <ScrollViewWrapper showsVerticalScrollIndicator={menuList.hasMaxHeight} showsHorizontalScrollIndicator={menuList.hasMaxWidth}>
+          <ScrollViewWrapper
+            // avoid error that fires when props are passed into React.fragment
+            {...(shouldHaveScrollView && {
+              showsVerticalScrollIndicator: menuList.hasMaxHeight,
+              showsHorizontalScrollIndicator: menuList.hasMaxWidth,
+            })}
+          >
             <FocusZoneWrapper
-              componentRef={focusZoneRef}
+              componentRef={menuList.focusZoneRef}
               focusZoneDirection={'vertical'}
-              defaultTabbableElement={focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              defaultTabbableElement={menuList.focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
               enableFocusRing={false}
               isCircularNavigation={Platform.OS !== 'macos'}

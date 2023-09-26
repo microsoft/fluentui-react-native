@@ -79,8 +79,9 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   removeRadioItem: (name: string) => void;
   trackMenuItem: (item: TrackedMenuItem) => void;
   untrackMenuItem: (item: TrackedMenuItem) => void;
-  hasMaxHeight?: boolean;
-  hasMaxWidth?: boolean;
+  hasMaxHeight: boolean;
+  hasMaxWidth: boolean;
+  focusZoneRef?: React.RefObject<View>;
 }
 
 export interface MenuListSlotProps {
