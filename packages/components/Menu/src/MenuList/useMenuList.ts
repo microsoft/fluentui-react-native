@@ -189,6 +189,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     untrackMenuItem,
     hasMaxHeight: context.hasMaxHeight,
     hasMaxWidth: context.hasMaxWidth,
+    focusZoneRef: focusZoneRef,
   };
 };
 
