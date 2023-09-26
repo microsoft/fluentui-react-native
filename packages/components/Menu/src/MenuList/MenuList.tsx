@@ -43,7 +43,7 @@ export const MenuList = compose<MenuListType>({
   slots: {
     root: MenuStack,
     scrollView: ScrollView,
-    ...(Platform.OS !== 'android' && { focusZone: FocusZone }),
+    focusZone: Platform.OS !== 'android' ? FocusZone : React.Fragment,
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
@@ -76,7 +76,7 @@ export const MenuList = compose<MenuListType>({
 
       const shouldHaveScrollView = Platform.OS === 'macos' || menuList.hasMaxHeight || menuList.hasMaxWidth;
       const ScrollViewWrapper = shouldHaveScrollView ? Slots.scrollView : React.Fragment;
-      const FocusZoneWrapper = Platform.OS !== 'android' ? Slots.focusZone : React.Fragment;
+      const shouldHaveFocusZone = Platform.OS !== 'android';
 
       const content = (
         <Slots.root>
@@ -87,16 +87,18 @@ export const MenuList = compose<MenuListType>({
               showsHorizontalScrollIndicator: menuList.hasMaxWidth,
             })}
           >
-            <FocusZoneWrapper
-              componentRef={menuList.focusZoneRef}
-              focusZoneDirection={'vertical'}
-              defaultTabbableElement={menuList.focusZoneRef} // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
-              enableFocusRing={false}
-              isCircularNavigation={Platform.OS !== 'macos'}
+            <Slots.focusZone
+              // avoid error that fires when props are passed into React.fragment
+              {...(shouldHaveFocusZone && {
+                componentRef: menuList.focusZoneRef,
+                focusZoneDirection: 'vertical',
+                defaultTabbableElement: menuList.focusZoneRef,
+                enableFocusRing: false,
+                isCircularNavigation: Platform.OS !== 'macos',
+              })}
             >
               {childrenWithSet}
-            </FocusZoneWrapper>
+            </Slots.focusZone>
           </ScrollViewWrapper>
         </Slots.root>
       );
