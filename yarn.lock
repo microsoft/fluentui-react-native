@@ -6501,12 +6501,12 @@ __metadata:
   linkType: hard
 
 "@types/enzyme@npm:^3.10.5":
-  version: 3.10.13
-  resolution: "@types/enzyme@npm:3.10.13"
+  version: 3.10.14
+  resolution: "@types/enzyme@npm:3.10.14"
   dependencies:
     "@types/cheerio": "*"
     "@types/react": ^16
-  checksum: a7983c56a9991bb9446a9468fbf0d5905d46574122ab76d87dab690685321bbe1875ce152f731481700a15e646b22560187ceb0b9591f5c6940a01be60e1f961
+  checksum: c3a33d73ac53fe9638b554bd2f7c1d83db4e9af03d3664b792fa2cd0da9a8a7f33a1ac599ac621f27f4f03ddeba931afb6a3d0dfce1daf63bdb944dfa089fe49
   languageName: node
   linkType: hard
 
