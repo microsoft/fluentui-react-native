@@ -6053,28 +6053,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/node-core-library@npm:3.53.3":
-  version: 3.53.3
-  resolution: "@rushstack/node-core-library@npm:3.53.3"
+"@rushstack/node-core-library@npm:3.60.1":
+  version: 3.60.1
+  resolution: "@rushstack/node-core-library@npm:3.60.1"
   dependencies:
-    "@types/node": 12.20.24
     colors: ~1.2.1
     fs-extra: ~7.0.1
     import-lazy: ~4.0.0
     jju: ~1.4.0
-    resolve: ~1.17.0
-    semver: ~7.3.0
+    resolve: ~1.22.1
+    semver: ~7.5.4
     z-schema: ~5.0.2
-  checksum: 265d18e176079b8e90cd507e5d4d45f3afb1f811efdf491ea26f25f0397b77c0e9d42065166bf79a04503426c844ea92034cd3f8d5961b2a116de82e45cf6d6a
+  peerDependencies:
+    "@types/node": "*"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 1e18d74cea169c240fb8e68ec06c42060f16d927178ffac705cce796e7d5c27efb4d4b20c162f62947a7fc92b49100acb1fd6caa223918c0c92b3e349a00f7d5
   languageName: node
   linkType: hard
 
-"@rushstack/package-deps-hash@npm:^3.2.5":
-  version: 3.2.67
-  resolution: "@rushstack/package-deps-hash@npm:3.2.67"
+"@rushstack/package-deps-hash@npm:^4.0.0":
+  version: 4.1.6
+  resolution: "@rushstack/package-deps-hash@npm:4.1.6"
   dependencies:
-    "@rushstack/node-core-library": 3.53.3
-  checksum: 3875eeff0d67592eb54fdf2c004ace728c58ba3270e3f389ec839c4d885790237a29a0ae100ff1966ed2f33afe5b14d035721b62854e524cb8f54f544a164b34
+    "@rushstack/node-core-library": 3.60.1
+  checksum: 5da89fa2e41ca99dc411ac94973846629298b240a0602180f6d4581f3b2e4a97884c347c21603f7a00dc44f63682839c873d514bdbdae1a59630a14dc524b4d9
   languageName: node
   linkType: hard
 
@@ -6468,6 +6472,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/chokidar@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "@types/chokidar@npm:2.1.3"
+  dependencies:
+    chokidar: "*"
+  checksum: bdd3d49a8b4672ae0ecf62af6902a2724fd6311daedaf041868e3bafe9827bd4cc4f4799d39dfc57a38241b54cd32b51be33a88f1add8de4f35c9bf546fd7387
+  languageName: node
+  linkType: hard
+
 "@types/connect@npm:*":
   version: 3.4.35
   resolution: "@types/connect@npm:3.4.35"
@@ -6823,13 +6836,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:12.20.24":
-  version: 12.20.24
-  resolution: "@types/node@npm:12.20.24"
-  checksum: e7a13460e2f5b0b5a32c0f3af7daf1a05201552a66d542d3cc3b1ea8b52d4730250f9eb1961d755e31cfe5d03c78340911a6242657a0a9a17d6f7e341fc9f366
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:16.9.1":
   version: 16.9.1
   resolution: "@types/node@npm:16.9.1"
@@ -7098,6 +7104,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/undertaker-registry@npm:*":
+  version: 1.0.2
+  resolution: "@types/undertaker-registry@npm:1.0.2"
+  checksum: 059c0c2894269da2f2cb2793009cd39b807184b259c4df36580ff1d379588071ab0c191a87e840143164fb5e380f547d350757198ecf687fa4b27e0685d53f5a
+  languageName: node
+  linkType: hard
+
+"@types/undertaker@npm:^1.2.8":
+  version: 1.2.9
+  resolution: "@types/undertaker@npm:1.2.9"
+  dependencies:
+    "@types/node": "*"
+    "@types/undertaker-registry": "*"
+    async-done: ~1.3.2
+  checksum: 46d5ab6b6e366850deea92e74482372154791949619403a38b106e55f6df4e4dbd740ecabb29bbb58a38727d54435ddc52e26d382d62f4067eb7d16220ccc6f4
+  languageName: node
+  linkType: hard
+
 "@types/use-subscription@npm:1.0.0":
   version: 1.0.0
   resolution: "@types/use-subscription@npm:1.0.0"
@@ -7146,6 +7170,13 @@ __metadata:
   version: 21.0.0
   resolution: "@types/yargs-parser@npm:21.0.0"
   checksum: b2f4c8d12ac18a567440379909127cf2cec393daffb73f246d0a25df36ea983b93b7e9e824251f959e9f928cbc7c1aab6728d0a0ff15d6145f66cec2be67d9a2
+  languageName: node
+  linkType: hard
+
+"@types/yargs-parser@npm:^20.2.2":
+  version: 20.2.3
+  resolution: "@types/yargs-parser@npm:20.2.3"
+  checksum: 26d417fd227421dce598e2d8816cd91ccc5847223ab71858d725a60437adc3a8e85f6f91a42c91853b69ce4e5a6aa3c1c2b099915f7825ecd84dee9543771d7a
   languageName: node
   linkType: hard
 
@@ -8916,7 +8947,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async-done@npm:^1.2.2":
+"async-done@npm:^1.2.2, async-done@npm:~1.3.2":
   version: 1.3.2
   resolution: "async-done@npm:1.3.2"
   dependencies:
@@ -9845,7 +9876,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.0.0, chokidar@npm:^3.5.2":
+"chokidar@npm:*, chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.0.0, chokidar@npm:^3.5.2":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -12647,6 +12678,17 @@ __metadata:
     jsonfile: ^6.0.1
     universalify: ^2.0.0
   checksum: dc94ab37096f813cc3ca12f0f1b5ad6744dfed9ed21e953d72530d103cea193c2f81584a39e9dee1bea36de5ee66805678c0dddc048e8af1427ac19c00fffc50
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^11.0.0":
+  version: 11.1.1
+  resolution: "fs-extra@npm:11.1.1"
+  dependencies:
+    graceful-fs: ^4.2.0
+    jsonfile: ^6.0.1
+    universalify: ^2.0.0
+  checksum: fb883c68245b2d777fbc1f2082c9efb084eaa2bbf9fddaa366130d196c03608eebef7fb490541276429ee1ca99f317e2d73e96f5ca0999eefedf5a624ae1edfd
   languageName: node
   linkType: hard
 
@@ -15528,14 +15570,17 @@ __metadata:
   linkType: hard
 
 "just-task@npm:>=1.5.0 <2.0.0, just-task@npm:^1.4.2":
-  version: 1.7.2
-  resolution: "just-task@npm:1.7.2"
+  version: 1.8.0
+  resolution: "just-task@npm:1.8.0"
   dependencies:
-    "@rushstack/package-deps-hash": ^3.2.5
+    "@rushstack/package-deps-hash": ^4.0.0
+    "@types/chokidar": ^2.1.3
+    "@types/undertaker": ^1.2.8
+    "@types/yargs-parser": ^20.2.2
     bach: ^2.0.0
     chalk: ^4.0.0
     chokidar: ^3.5.2
-    fs-extra: ^10.0.0
+    fs-extra: ^11.0.0
     just-task-logger: ">=1.2.1 <2.0.0"
     resolve: ^1.19.0
     undertaker: ^1.3.0
@@ -15543,7 +15588,7 @@ __metadata:
     yargs-parser: ^20.2.3
   bin:
     just: bin/just.js
-  checksum: 78913898acf795f81460b2a67b8d730353f10574a7700a23db3d8554d93a3213da396c47d2e3ad22516a01e2b8617294d0e8a85437a63f31e109d0dc1bd5789b
+  checksum: 84b6f80da6a63f16452433160c332441aaf6ffc7974d17fe61659af9dfaad221bcf0b9c91ce7a5324be55fbb9f0579d518bc27b7131452f42c7f2962d8051e15
   languageName: node
   linkType: hard
 
@@ -17988,7 +18033,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-parse@npm:^1.0.6, path-parse@npm:^1.0.7":
+"path-parse@npm:^1.0.7":
   version: 1.0.7
   resolution: "path-parse@npm:1.0.7"
   checksum: 49abf3d81115642938a8700ec580da6e830dde670be21893c62f4e10bd7dd4c3742ddc603fe24f898cba7eb0c6bc1777f8d9ac14185d34540c6d4d80cd9cae8a
@@ -19341,12 +19386,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:~1.17.0":
-  version: 1.17.0
-  resolution: "resolve@npm:1.17.0"
+"resolve@npm:~1.22.1":
+  version: 1.22.6
+  resolution: "resolve@npm:1.22.6"
   dependencies:
-    path-parse: ^1.0.6
-  checksum: 9ceaf83b3429f2d7ff5d0281b8d8f18a1f05b6ca86efea7633e76b8f76547f33800799dfdd24434942dec4fbd9e651ed3aef577d9a6b5ec87ad89c1060e24759
+    is-core-module: ^2.13.0
+    path-parse: ^1.0.7
+    supports-preserve-symlinks-flag: ^1.0.0
+  bin:
+    resolve: bin/resolve
+  checksum: d13bf66d4e2ee30d291491f16f2fa44edd4e0cefb85d53249dd6f93e70b2b8c20ec62f01b18662e3cd40e50a7528f18c4087a99490048992a3bb954cf3201a5b
   languageName: node
   linkType: hard
 
