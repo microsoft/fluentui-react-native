@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.156.2"
+      "version": "0.156.3"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.36.4"
+      "version": "0.36.5"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -216,7 +216,7 @@ module.exports = {
     },
     "@fluentui-react-native/tablist": {
       "name": "@fluentui-react-native/tablist",
-      "version": "0.3.11"
+      "version": "0.4.0"
     },
     "@fluentui-react-native/experimental-tabs": {
       "name": "@fluentui-react-native/experimental-tabs",
