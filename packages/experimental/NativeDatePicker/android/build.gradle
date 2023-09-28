@@ -7,12 +7,6 @@ buildscript {
     mavenCentral()
     google()
   }
-
-  // dependencies {
-  //   classpath "com.android.tools.build:gradle"
-  //   classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlinVersion', '1.6.10')}"
-  //   classpath "com.facebook.react:react-native-gradle-plugin"
-  // }
 }
 
 def safeExtGet(prop, fallback) {
