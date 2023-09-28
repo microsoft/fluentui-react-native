@@ -5839,22 +5839,20 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/jest-preset@npm:^0.1.14":
-  version: 0.1.14
-  resolution: "@rnx-kit/jest-preset@npm:0.1.14"
+  version: 0.1.15
+  resolution: "@rnx-kit/jest-preset@npm:0.1.15"
   dependencies:
     "@babel/preset-env": ^7.0.0
     "@babel/preset-typescript": ^7.0.0
+    "@rnx-kit/tools-node": ^2.1.0
     find-up: ^5.0.0
   peerDependencies:
     "@babel/core": ^7.0.0-0
-    "@react-native-community/cli": ">=4.10"
     react-native: ^0.0.0-0 || >=0.63
   peerDependenciesMeta:
-    "@react-native-community/cli":
-      optional: true
     react-native:
       optional: true
-  checksum: 67270755dafde2f14000218f15d08adcacdc4bc4b124aa5417b11d101d3929d279b000b75a8d91ec4cd23471c9159a9844ad4f9b8e2b600f06c7867bdad3d151
+  checksum: 023a58baff456148bba23d897e03755673fae1a939fde1ab46c8251a306123c605d7ef759bb7572dc90f14de5c1c854b5aac21f57b686f641d665fd2cc67f1fe
   languageName: node
   linkType: hard
 
@@ -5999,6 +5997,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/tools-language@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@rnx-kit/tools-language@npm:2.0.1"
+  checksum: 8664d25d686ca6da80cbd85ced920c6301f05395c1781b7216cd185e0e088be1bc681166d639c5bf9c2ec67f47691ecc02dcd96f2eaa065a4dd4c40a320bee7c
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/tools-node@npm:^2.0.0":
   version: 2.0.0
   resolution: "@rnx-kit/tools-node@npm:2.0.0"
@@ -6008,6 +6013,18 @@ __metadata:
     pkg-dir: ^5.0.0
     pkg-up: ^3.1.0
   checksum: aea9da7bab1f37de57431773656ac64afb8aab5c46900f06921d63ea476f63f7b884ab0e07b94f177bc1f0b9ea525edb8b81c625ad2a42f018d4a61db4494a8d
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-node@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@rnx-kit/tools-node@npm:2.1.0"
+  dependencies:
+    "@rnx-kit/tools-language": ^2.0.1
+    find-up: ^5.0.0
+    pkg-dir: ^5.0.0
+    pkg-up: ^3.1.0
+  checksum: e23908eaaaa1bda7ec160a7d0ad6cb5461100f6875db5a204f587f532229d5c9ffe74424bf1a1439efed9f4a782f6e1fc6a8f44bdd62f4ada63dcb61e7707e36
   languageName: node
   linkType: hard
 
