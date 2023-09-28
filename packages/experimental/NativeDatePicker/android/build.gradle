@@ -1,35 +1,50 @@
 buildscript {
-  ext.safeExtGet = { prop, fallback ->
-    return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-  }
-
-  repositories {
-    mavenCentral()
-    google()
-  }
-
-  dependencies {
-    classpath "com.android.tools.build:gradle"
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlinVersion', '1.6.10')}"
-    classpath "com.facebook.react:react-native-gradle-plugin"
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
-def safeExtGet(prop, fallback) {
-  rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+def getExtOrIntegerDefault(name) {
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['ReactNativeDateTimePicker_' + name]).toInteger()
+}
+
+def isNewArchitectureEnabled() {
+    // To opt-in for the New Architecture, you can either:
+    // - Set `newArchEnabled` to true inside the `gradle.properties` file
+    // - Invoke gradle with `-newArchEnabled=true`
+    // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
+    return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+if (isNewArchitectureEnabled()) {
+  apply plugin: "com.facebook.react"
+}
+
 
 android {
-  compileSdkVersion safeExtGet('compileSdkVersion', 31)
-  buildToolsVersion safeExtGet('buildToolsVersion', '31.0.0')
+    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+    if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+      namespace "com.reactcommunity.rndatetimepicker"
+    }
 
-  defaultConfig {
-    minSdkVersion safeExtGet('minSdkVersion', 21)
-    targetSdkVersion safeExtGet('targetSdkVersion', 31)
-  }
+    compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
+
+    // Used to override the NDK path/version on internal CI or by allowing
+    // users to customize the NDK path/version from their root project (e.g. for M1 support)
+    if (rootProject.hasProperty("ndkPath")) {
+        ndkPath rootProject.ext.ndkPath
+    }
+    if (rootProject.hasProperty("ndkVersion")) {
+        ndkVersion rootProject.ext.ndkVersion
+    }
+
+    defaultConfig {
+        minSdkVersion getExtOrIntegerDefault('minSdkVersion')
+        targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
+        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+    }
 }
 
 repositories {
@@ -43,6 +58,6 @@ repositories {
 dependencies {
   implementation "com.facebook.react:react-android:+"
   implementation "com.microsoft.device:dualscreen-layout:1.0.0-alpha01"
-  implementation "com.microsoft.fluentui:fluentui_calendar:${safeExtGet('fluentUICalendarVersion', '0.0.27')}"
+  implementation "com.microsoft.fluentui:fluentui_calendar:0.0.27"
   implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
 }
