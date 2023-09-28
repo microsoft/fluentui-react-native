@@ -43,7 +43,7 @@ android {
   defaultConfig {
       minSdkVersion getExtOrIntegerDefault('minSdkVersion', 21)
       targetSdkVersion getExtOrIntegerDefault('targetSdkVersion', 34)
-      //buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+      buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
   }
 }
 
