@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Android build.gradle file for NativeDatePicker",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "ankarm@microsoft.com",
-  "dependentChangeType": "patch"
-}

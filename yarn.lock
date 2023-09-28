@@ -2991,7 +2991,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-native-date-picker@*, @fluentui-react-native/experimental-native-date-picker@>=0.9.0 <1.0.0, @fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker":
+"@fluentui-react-native/experimental-native-date-picker@*, @fluentui-react-native/experimental-native-date-picker@>=0.9.1 <1.0.0, @fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker"
   dependencies:
@@ -3782,7 +3782,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.156.3
+    "@fluentui-react-native/tester": ^0.156.4
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.15-devmain.16608.10000
     "@rnx-kit/cli": ^0.16.2
@@ -3802,7 +3802,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.156.3, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.156.4, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3826,7 +3826,7 @@ __metadata:
     "@fluentui-react-native/experimental-checkbox": 0.15.13
     "@fluentui-react-native/experimental-expander": 0.6.9
     "@fluentui-react-native/experimental-menu-button": ">=0.7.24 <1.0.0"
-    "@fluentui-react-native/experimental-native-date-picker": ">=0.9.0 <1.0.0"
+    "@fluentui-react-native/experimental-native-date-picker": ">=0.9.1 <1.0.0"
     "@fluentui-react-native/experimental-shadow": 0.4.8
     "@fluentui-react-native/experimental-shimmer": 0.11.2
     "@fluentui-react-native/experimental-tabs": 0.9.14

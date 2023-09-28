@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 28 Sep 2023 03:54:05 GMT",
+      "version": "0.156.4",
+      "tag": "@fluentui-react-native/tester_v0.156.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-native-date-picker to v0.9.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 27 Sep 2023 00:35:39 GMT",
       "version": "0.156.3",
       "tag": "@fluentui-react-native/tester_v0.156.3",
