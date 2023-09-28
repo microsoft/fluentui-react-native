@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Mon, 25 Sep 2023 12:49:34 GMT",
+      "version": "0.21.10",
+      "tag": "@fluentui-react-native/text_v0.21.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/text",
+            "commit": "12f87e1c2cd4c311eb5d7f4d8f331166dec84131",
+            "comment": "support numberOfLines prop"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Aug 2023 22:56:32 GMT",
       "version": "0.21.9",
       "tag": "@fluentui-react-native/text_v0.21.9",

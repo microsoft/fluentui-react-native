@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Sep 2023 00:35:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Wed, 27 Sep 2023 00:35:39 GMT
+
+### Minor changes
+
+- Implement tablist animation on win32 (winlarry@microsoft.com)
+
+## 0.3.11
+
+Mon, 25 Sep 2023 12:49:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.19.11
+- Bump @fluentui-react-native/text to v0.21.10
 
 ## 0.3.10
 

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/input",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "A cross-platform Text input component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,10 +27,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/framework": "0.11.6",
-    "@fluentui-react-native/icon": "^0.19.10",
+    "@fluentui-react-native/icon": "^0.19.11",
     "@fluentui-react-native/interactive-hooks": ">=0.24.8 <1.0.0",
     "@fluentui-react-native/styling-utils": ">=0.5.0 <1.0.0",
-    "@fluentui-react-native/text": ">=0.21.9 <1.0.0",
+    "@fluentui-react-native/text": ">=0.21.10 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.25.1",
     "@fluentui-react-native/tokens": ">=0.21.3 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.11.1 <1.0.0"

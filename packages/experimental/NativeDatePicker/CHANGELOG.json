@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Thu, 28 Sep 2023 03:54:05 GMT",
+      "version": "0.9.1",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.9.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ankarm@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "5acfb2ed53d3ee420b3fe26ad231d18037faaa57",
+            "comment": "Android build.gradle file for NativeDatePicker"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 Sep 2023 19:31:59 GMT",
       "version": "0.9.0",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.9.0",

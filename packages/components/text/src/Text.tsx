@@ -26,6 +26,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     color,
     font,
     italic,
+    numberOfLines,
     onAccessibilityTap,
     onKeyUp,
     onKeyDown,
@@ -146,7 +147,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...extra,
       ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
       onPress,
-      numberOfLines: truncate || !wrap ? 1 : 0,
+      numberOfLines: numberOfLines ?? (truncate || !wrap) ? 1 : 0,
       style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
 
