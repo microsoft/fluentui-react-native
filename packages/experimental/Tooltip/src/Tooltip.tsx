@@ -1,7 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { tooltip, TooltipType, TooltipProps } from './Tooltip.types';
-// import { stylingSettings } from './Tooltip.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useTooltip } from './useTooltip';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
@@ -21,7 +20,6 @@ export const tooltipLookup = (layer: string, userProps: TooltipProps): boolean =
 
 export const Tooltip = compose<TooltipType>({
   displayName: tooltip,
-  // ...stylingSettings,
   slots: {
     root: NativeTooltipView,
   },

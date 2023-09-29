@@ -22,8 +22,16 @@ export type DirectionalHint =
 export interface TooltipTokens {}
 
 export interface TooltipProps {
+  /**
+   * The text of the tooltip.
+   */
   content: string;
+
+  /**
+   * Target node that tooltip uses for relative positioning.
+   */
   target?: React.RefObject<React.Component>;
+
   // appearance?: 'normal' | 'inverted';
   // hideDelay?: number;
   onVisibleChange?: (event, data) => void;

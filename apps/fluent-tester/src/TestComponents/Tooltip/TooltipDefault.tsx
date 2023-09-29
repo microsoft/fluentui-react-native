@@ -20,7 +20,7 @@ export const TooltipDefault: React.FunctionComponent = () => {
           </Tooltip>
         </View>
       )} */}
-      <Tooltip content="Test">
+      <Tooltip content="Test" positioning="topCenter">
         <Button>Test</Button>
       </Tooltip>
       <Tooltip content="Test 2">
