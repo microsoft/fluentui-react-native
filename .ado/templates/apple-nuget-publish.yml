@@ -25,8 +25,8 @@ steps:
   # Select proper Xcode version
   - template: apple-xcode-select.yml
       parameters:
-        slice_name: $(slice_name)
         xcode_version: $(xcode_version)
+        xcode_path: $(xcode_path)
 
   # Pod Install iOS
   - bash: |

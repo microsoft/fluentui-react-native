@@ -39,7 +39,7 @@ jobs:
   - job: AndroidPR
     displayName: Android PR
     pool:
-      vmImage: $(VmImageApple)
+      vmImage: 'macos-11'
     variables:
       platform: 'android'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -95,8 +95,8 @@ jobs:
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
         parameters:
-          slice_name: $(slice_name)
           xcode_version: $(xcode_version)
+          xcode_path: $(xcode_path)
 
       - bash: |
           echo "pod install $(platform)"
@@ -125,14 +125,14 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      # Clean Derived Data
       - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
+          xcrun simctl list
+        displayName: 'List Simulators'
 
       - script: |
           sudo gem install cocoapods
         displayName: 'Install Cocoapods Environment'
+
       - template: templates/setup-repo-min-build.yml
 
       - script: |
@@ -143,8 +143,8 @@ jobs:
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
         parameters:
-          slice_name: $(slice_name)
           xcode_version: $(xcode_version)
+          xcode_path: $(xcode_path)
 
       - bash: |
           echo "pod install $(platform)"
@@ -153,17 +153,10 @@ jobs:
         displayName: 'pod install $(platform)'
 
       - bash: |
-          echo "Pre boot simulator"
-          UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-16-2)
-          xcrun simctl boot $UDID
-        workingDirectory: apps/fluent-tester
-        displayName: 'Boot simulator'
-
-      - bash: |
           echo "yarn $(platform)"
-          yarn $(platform) --simulator "iPhone 14"
+          yarn $(platform) --simulator $(ios_simulator)
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)x'
+        displayName: 'yarn $(platform)'
 
       - template: templates/e2e-testing-ios.yml
 

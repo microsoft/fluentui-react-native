@@ -1,4 +1,6 @@
 variables:
-  VmImageApple: macOS-13
-  slice_name: 'Xcode_15.0'
-  xcode_version: '/Applications/Xcode_15.0.app'
+  VmImageApple: macos-13
+  xcode_version: 'Xcode_15.0'
+  xcode_path: '/Applications/Xcode_15.0.app'
+  ios_version: '17.0'
+  ios_simulator: 'iPhone 14'
