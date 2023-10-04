@@ -2,7 +2,7 @@ pr:
   - main
 
 variables:
-  CI: true
+  - template: variables/vars.yml
 
 jobs:
   # Dedicated task to build JS code, including jest tests, snapshot testing, and linting, because these things can be super
@@ -39,7 +39,7 @@ jobs:
   - job: AndroidPR
     displayName: Android PR
     pool:
-      vmImage: 'macos-11'
+      vmImage: $(VmImageApple)
     variables:
       platform: 'android'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -67,8 +67,7 @@ jobs:
   - job: macOSPR
     displayName: macOS PR
     pool:
-      vmImage: 'internal-macos12'
-      demands: ['xcode', 'sh', 'npm']
+      vmImage: $(VmImageApple)
     variables:
       platform: 'macos'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -95,6 +94,9 @@ jobs:
 
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
+        parameters:
+          slice_name: $(slice_name)
+          xcode_version: $(xcode_version)
 
       - bash: |
           echo "pod install $(platform)"
@@ -113,8 +115,7 @@ jobs:
   - job: iOSPR
     displayName: iOS PR
     pool:
-      vmImage: 'internal-macos12'
-      demands: ['xcode', 'sh', 'npm']
+      vmImage: $(VmImageApple)
     variables:
       platform: 'ios'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -141,6 +142,9 @@ jobs:
 
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
+        parameters:
+          slice_name: $(slice_name)
+          xcode_version: $(xcode_version)
 
       - bash: |
           echo "pod install $(platform)"

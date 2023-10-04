@@ -28,6 +28,7 @@ variables:
   - group: InfoSec-SecurityResults
   - name: tags
     value: production,externalfacing
+  - template: variables/vars.yml
 
 jobs:
   - job: NPMPublish
@@ -88,8 +89,7 @@ jobs:
   - job: NuGetPublish
     displayName: NuGet Publish
     pool:
-      vmImage: 'internal-macos12'
-      demands: ['xcode', 'sh', 'npm']
+      vmImage: $(VmImageApple)
     variables:
       - name: BUILDSECMON_OPT_IN
         value: true
