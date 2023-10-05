@@ -5751,8 +5751,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.13
-  resolution: "@rnx-kit/cli@npm:0.16.13"
+  version: 0.16.16
+  resolution: "@rnx-kit/cli@npm:0.16.16"
   dependencies:
     "@rnx-kit/align-deps": ^2.2.2
     "@rnx-kit/config": ^0.6.2
@@ -5761,33 +5761,28 @@ __metadata:
     "@rnx-kit/metro-plugin-duplicates-checker": ^2.1.1
     "@rnx-kit/metro-plugin-typescript": ^0.4.4
     "@rnx-kit/metro-serializer": ^1.0.12
-    "@rnx-kit/metro-serializer-esbuild": ^0.1.28
-    "@rnx-kit/metro-service": ^3.1.1
+    "@rnx-kit/metro-serializer-esbuild": ^0.1.29
+    "@rnx-kit/metro-service": ^3.1.4
     "@rnx-kit/third-party-notices": ^1.3.4
     "@rnx-kit/tools-language": ^2.0.0
-    "@rnx-kit/tools-node": ^2.0.0
+    "@rnx-kit/tools-node": ^2.1.0
     "@rnx-kit/tools-react-native": ^1.3.2
     chalk: ^4.1.0
     find-up: ^5.0.0
     fs-extra: ^10.0.0
+    node-fetch: ^2.6.7
     ora: ^5.4.1
     qrcode: ^1.5.0
     readline: ^1.3.0
   peerDependencies:
-    "@react-native-community/cli": ">=5.0.1"
-    "@react-native-community/cli-server-api": ">=5.0.1"
     jest-cli: ">=26.0"
     react-native: ">=0.64"
   peerDependenciesMeta:
-    "@react-native-community/cli":
-      optional: true
-    "@react-native-community/cli-server-api":
-      optional: true
     jest-cli:
       optional: true
     react-native:
       optional: true
-  checksum: a9cc834e597c1f7927e80090561ebe69d870d365b413c4079e72ec99d4070822adad52a5ded40d2549038a1090873d87ab0e2b7564816dd28729964e3f68dd06
+  checksum: da7d1da077cad06819f430cded3eb694fa571ca481b310efe51fd609f0824183021915577f5ea629530da6b751c8a750a0941f8402b865ebfa616a25daf0c953
   languageName: node
   linkType: hard
 
@@ -5920,9 +5915,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-serializer-esbuild@npm:^0.1.28":
-  version: 0.1.28
-  resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.1.28"
+"@rnx-kit/metro-serializer-esbuild@npm:^0.1.29":
+  version: 0.1.29
+  resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.1.29"
   dependencies:
     "@rnx-kit/console": ^1.0.11
     "@rnx-kit/tools-node": ^2.0.0
@@ -5931,7 +5926,7 @@ __metadata:
     esbuild-plugin-lodash: ^1.2.0
     fast-glob: ^3.2.7
     semver: ^7.0.0
-  checksum: 9657cad1c6496ac2c1d12a5b98e3a742ce391fac49abb64431d7ba6c4869ebcbcd3123c46e6afb2ba2c85c3662bdd03e67cc7d83946fe2088c861717c378ebd7
+  checksum: 86b4ecf1d9e1ca440bb1e28b1fadccecf7f8276c1a5c7a5dffc80de8cdc0dd5eb3fdb3283fffb60eee64b10cfed38095e3a4bcbdf9e0bbc4ca44072df28385e5
   languageName: node
   linkType: hard
 
@@ -5944,14 +5939,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-service@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "@rnx-kit/metro-service@npm:3.1.1"
+"@rnx-kit/metro-service@npm:^3.1.4":
+  version: 3.1.4
+  resolution: "@rnx-kit/metro-service@npm:3.1.4"
   dependencies:
     "@rnx-kit/console": ^1.0.0
     "@rnx-kit/tools-language": ^2.0.0
+    "@rnx-kit/tools-node": ^2.1.0
     chalk: ^4.1.0
+    node-fetch: ^2.6.7
   peerDependencies:
+    "@office-iss/react-native-win32": "*"
     "@react-native-community/cli-plugin-metro": "*"
     "@react-native/metro-config": "*"
     metro: ">=0.66.1"
@@ -5961,11 +5959,13 @@ __metadata:
     metro-resolver: ">=0.66.1"
     metro-runtime: ">=0.66.1"
   peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
     "@react-native-community/cli-plugin-metro":
       optional: true
     "@react-native/metro-config":
       optional: true
-  checksum: 7c6c5de7668794b8535d9dcdd7d4cbfa51c9fb4750843569ea5d9cbdaeb6024fd8366d92102c26eaffebfd1295b7aef8e3054f6503bdafc42ebf0c70439d259f
+  checksum: f6657cd7ea0531c48475c9eeba732d1c26af5cdc799b4253fdbc97f9e7735662fa10e11cab5cc85864bbae1d365a259a817aff1dfcc2572be84185835cca285e
   languageName: node
   linkType: hard
 
@@ -5999,6 +5999,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/tools-language@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@rnx-kit/tools-language@npm:2.0.1"
+  checksum: 8664d25d686ca6da80cbd85ced920c6301f05395c1781b7216cd185e0e088be1bc681166d639c5bf9c2ec67f47691ecc02dcd96f2eaa065a4dd4c40a320bee7c
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/tools-node@npm:^2.0.0":
   version: 2.0.0
   resolution: "@rnx-kit/tools-node@npm:2.0.0"
@@ -6008,6 +6015,18 @@ __metadata:
     pkg-dir: ^5.0.0
     pkg-up: ^3.1.0
   checksum: aea9da7bab1f37de57431773656ac64afb8aab5c46900f06921d63ea476f63f7b884ab0e07b94f177bc1f0b9ea525edb8b81c625ad2a42f018d4a61db4494a8d
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-node@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@rnx-kit/tools-node@npm:2.1.0"
+  dependencies:
+    "@rnx-kit/tools-language": ^2.0.1
+    find-up: ^5.0.0
+    pkg-dir: ^5.0.0
+    pkg-up: ^3.1.0
+  checksum: e23908eaaaa1bda7ec160a7d0ad6cb5461100f6875db5a204f587f532229d5c9ffe74424bf1a1439efed9f4a782f6e1fc6a8f44bdd62f4ada63dcb61e7707e36
   languageName: node
   linkType: hard
 
@@ -17234,6 +17253,20 @@ __metadata:
     encoding:
       optional: true
   checksum: acb04f9ce7224965b2b59e71b33c639794d8991efd73855b0b250921382b38331ffc9d61bce502571f6cc6e11a8905ca9b1b6d4aeb586ab093e2756a1fd190d0
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^2.6.7":
+  version: 2.7.0
+  resolution: "node-fetch@npm:2.7.0"
+  dependencies:
+    whatwg-url: ^5.0.0
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: d76d2f5edb451a3f05b15115ec89fc6be39de37c6089f1b6368df03b91e1633fd379a7e01b7ab05089a25034b2023d959b47e59759cb38d88341b2459e89d6e5
   languageName: node
   linkType: hard
 
