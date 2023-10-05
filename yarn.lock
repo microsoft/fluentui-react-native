@@ -18864,15 +18864,15 @@ __metadata:
   linkType: hard
 
 "react-native-svg@npm:^13.7.0":
-  version: 13.13.0
-  resolution: "react-native-svg@npm:13.13.0"
+  version: 13.14.0
+  resolution: "react-native-svg@npm:13.14.0"
   dependencies:
     css-select: ^5.1.0
     css-tree: ^1.1.3
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 533365186d868f8220dc9c247cc7f8a4e1b6ff73bd9530e5feff1bac9157225bae683f2cc148f00210080f29e02f5b2f673b536198d456e69870748e4e2b8998
+  checksum: 4668028563ae0ca669003cc29ff5f03fd5b13a61d53273f294f04a496cbc0af6003277025793d01fb9c3a53af4515839185578d59e9eecb072587178b751c234
   languageName: node
   linkType: hard
 
