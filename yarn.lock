@@ -5834,22 +5834,20 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/jest-preset@npm:^0.1.14":
-  version: 0.1.14
-  resolution: "@rnx-kit/jest-preset@npm:0.1.14"
+  version: 0.1.15
+  resolution: "@rnx-kit/jest-preset@npm:0.1.15"
   dependencies:
     "@babel/preset-env": ^7.0.0
     "@babel/preset-typescript": ^7.0.0
+    "@rnx-kit/tools-node": ^2.1.0
     find-up: ^5.0.0
   peerDependencies:
     "@babel/core": ^7.0.0-0
-    "@react-native-community/cli": ">=4.10"
     react-native: ^0.0.0-0 || >=0.63
   peerDependenciesMeta:
-    "@react-native-community/cli":
-      optional: true
     react-native:
       optional: true
-  checksum: 67270755dafde2f14000218f15d08adcacdc4bc4b124aa5417b11d101d3929d279b000b75a8d91ec4cd23471c9159a9844ad4f9b8e2b600f06c7867bdad3d151
+  checksum: 023a58baff456148bba23d897e03755673fae1a939fde1ab46c8251a306123c605d7ef759bb7572dc90f14de5c1c854b5aac21f57b686f641d665fd2cc67f1fe
   languageName: node
   linkType: hard
 
