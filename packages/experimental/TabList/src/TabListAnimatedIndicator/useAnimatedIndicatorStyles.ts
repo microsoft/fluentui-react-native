@@ -14,10 +14,6 @@ import { TabListContext } from '../TabList/TabListContext';
 export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
   const { animatedIndicatorStyles, layout, selectedKey, setCanShowAnimatedIndicator, vertical } = React.useContext(TabListContext);
 
-  const selectedIndicatorLayout = React.useMemo<TabLayoutInfo | null>(() => {
-    return selectedKey ? layout.tabs[selectedKey] : null;
-  }, [selectedKey, layout.tabs]);
-
   // animated values
   const indicatorTranslate = React.useRef(new Animated.Value(0)).current;
   const indicatorScale = React.useRef(new Animated.Value(1)).current;
@@ -25,9 +21,14 @@ export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
   const [startingIndicatorLayout, setStartingIndicatorLayout] = React.useState<TabLayoutInfo | null>(null);
 
   React.useEffect(() => {
-    if (startingIndicatorLayout === null && selectedIndicatorLayout) {
-      setStartingIndicatorLayout(selectedIndicatorLayout);
-    } else if (startingIndicatorLayout && selectedIndicatorLayout) {
+    if (startingIndicatorLayout === null && layout.tabs[selectedKey]) {
+      setStartingIndicatorLayout(layout.tabs[selectedKey]);
+    }
+  }, [selectedKey, layout.tabs, startingIndicatorLayout, setStartingIndicatorLayout]);
+
+  React.useEffect(() => {
+    const selectedIndicatorLayout = layout.tabs[selectedKey];
+    if (startingIndicatorLayout && selectedIndicatorLayout) {
       /**
        * Calculate transforms. Because the scale transform's origin is at the center, we need to calculate an extra offset to add to the
        * translate transform to place the indicator at the correct location on screen.
@@ -53,16 +54,15 @@ export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
         useNativeDriver: false,
       }).start();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startingIndicatorLayout, selectedIndicatorLayout, vertical]);
+  }, [indicatorScale, indicatorTranslate, layout.tabs, selectedKey, startingIndicatorLayout, vertical]);
 
   // Calculate styles using both layout information and user defined styles
   const styles = React.useMemo<AnimatedIndicatorStyles | null>(() => {
     // if not all layout props have been recorded for the current selected indicator, don't render the animated indicator
-    if (!selectedIndicatorLayout) {
+    if (!startingIndicatorLayout) {
       return null;
     }
-    const { x, y, width, height, startMargin, tabBorderWidth } = selectedIndicatorLayout;
+    const { x, y, width, height, startMargin, tabBorderWidth } = startingIndicatorLayout;
     const containerStyles: ViewStyle = {
       position: 'absolute',
       ...animatedIndicatorStyles.container,
@@ -76,15 +76,24 @@ export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
     if (vertical) {
       containerStyles.start = x + tabBorderWidth + 1;
       indicatorStyles.top = y + startMargin + tabBorderWidth + 1;
+      indicatorStyles.transform = [{ scaleY: indicatorScale as any }, { translateY: indicatorTranslate as any }];
     } else {
       containerStyles.bottom = height + y + 1;
       indicatorStyles.start = x + startMargin + tabBorderWidth + 1;
+      indicatorStyles.transform = [{ scaleX: indicatorScale as any }, { translateX: indicatorTranslate as any }];
     }
     return {
       container: containerStyles,
       indicator: indicatorStyles,
     };
-  }, [vertical, selectedIndicatorLayout, animatedIndicatorStyles]);
+  }, [
+    startingIndicatorLayout,
+    animatedIndicatorStyles.container,
+    animatedIndicatorStyles.indicator,
+    vertical,
+    indicatorScale,
+    indicatorTranslate,
+  ]);
 
   /**
    * Until we have styles for the animated indicator, we show the Tab's "static indicator" for the selected key which is normally shown only on hover.
