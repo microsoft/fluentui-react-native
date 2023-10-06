@@ -24,6 +24,7 @@ exports[`TabList component tests TabList appearance 1`] = `
     style={
       {
         "flexDirection": "row",
+        "position": "relative",
       }
     }
   >
@@ -45,8 +46,6 @@ exports[`TabList component tests TabList appearance 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -177,8 +176,6 @@ exports[`TabList component tests TabList appearance 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -309,8 +306,6 @@ exports[`TabList component tests TabList appearance 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -451,6 +446,7 @@ exports[`TabList component tests TabList default props 1`] = `
     style={
       {
         "flexDirection": "row",
+        "position": "relative",
       }
     }
   >
@@ -472,8 +468,6 @@ exports[`TabList component tests TabList default props 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -604,8 +598,6 @@ exports[`TabList component tests TabList default props 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -736,8 +728,6 @@ exports[`TabList component tests TabList default props 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -879,6 +869,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
     style={
       {
         "flexDirection": "row",
+        "position": "relative",
       }
     }
   >
@@ -900,8 +891,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -1032,8 +1021,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -1164,8 +1151,6 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -1306,6 +1291,7 @@ exports[`TabList component tests TabList orientation 1`] = `
     style={
       {
         "flexDirection": "column",
+        "position": "relative",
       }
     }
   >
@@ -1327,8 +1313,6 @@ exports[`TabList component tests TabList orientation 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -1459,8 +1443,6 @@ exports[`TabList component tests TabList orientation 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -1591,8 +1573,6 @@ exports[`TabList component tests TabList orientation 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -1734,6 +1714,7 @@ exports[`TabList component tests TabList selected key 1`] = `
     style={
       {
         "flexDirection": "row",
+        "position": "relative",
       }
     }
   >
@@ -1755,8 +1736,6 @@ exports[`TabList component tests TabList selected key 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": true,
         }
       }
@@ -1861,7 +1840,7 @@ exports[`TabList component tests TabList selected key 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#00000000",
+              "backgroundColor": "#185abd",
               "borderRadius": 99,
               "flex": 1,
             }
@@ -1887,8 +1866,6 @@ exports[`TabList component tests TabList selected key 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -2019,8 +1996,6 @@ exports[`TabList component tests TabList selected key 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -2161,6 +2136,7 @@ exports[`TabList component tests TabList size 1`] = `
     style={
       {
         "flexDirection": "row",
+        "position": "relative",
       }
     }
   >
@@ -2182,8 +2158,6 @@ exports[`TabList component tests TabList size 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -2314,8 +2288,6 @@ exports[`TabList component tests TabList size 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }
@@ -2446,8 +2418,6 @@ exports[`TabList component tests TabList size 1`] = `
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
           "selected": false,
         }
       }

@@ -87,7 +87,7 @@ export function useTabAnimation(
   }, [
     addTabLayout,
     tabKey,
-    layout.tablist,
+    layout,
     layoutInfoWasSent,
     rect,
     tokens.borderWidth,
