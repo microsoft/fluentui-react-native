@@ -8173,26 +8173,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-adb@npm:^9.11.2, appium-adb@npm:^9.13.1":
-  version: 9.14.2
-  resolution: "appium-adb@npm:9.14.2"
-  dependencies:
-    "@appium/support": ^4.0.0
-    adbkit-apkreader: ^3.1.2
-    async-lock: ^1.0.0
-    asyncbox: ^2.6.0
-    bluebird: ^3.4.7
-    ini: ^3.0.0
-    lodash: ^4.0.0
-    lru-cache: ^7.3.0
-    semver: ^7.0.0
-    source-map-support: ^0.x
-    teen_process: ^2.0.1
-    utf7: ^1.0.2
-  checksum: 30a521f4f56f98456ca3813b7d9dd68aa4b53d7a126f8af7cf2d8d264d2f403d45cfb028d714b3b6b32512659a4be6985e3ab597ead539fcf51a862bfe1e4a0e
-  languageName: node
-  linkType: hard
-
 "appium-adb@npm:^9.14.1":
   version: 9.14.4
   resolution: "appium-adb@npm:9.14.4"
@@ -8213,11 +8193,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-android-driver@npm:^5.14.0":
-  version: 5.14.0
-  resolution: "appium-android-driver@npm:5.14.0"
+"appium-adb@npm:^9.14.10, appium-adb@npm:^9.14.11":
+  version: 9.14.11
+  resolution: "appium-adb@npm:9.14.11"
   dependencies:
-    appium-adb: ^9.11.2
+    "@appium/support": ^4.0.0
+    adbkit-apkreader: ^3.1.2
+    async-lock: ^1.0.0
+    asyncbox: ^2.6.0
+    bluebird: ^3.4.7
+    ini: ^4.1.1
+    lodash: ^4.0.0
+    lru-cache: ^10.0.0
+    semver: ^7.0.0
+    source-map-support: ^0.x
+    teen_process: ^2.0.1
+  checksum: a45a92b99ce43af2adf3bb545e7b0a830112c1f387d8c6faca68d5a3c8fcaedb6b9712ec3f2ca4a3ab9e2300a542056889292dcc8f11b95d088bc709551f572e
+  languageName: node
+  linkType: hard
+
+"appium-android-driver@npm:^5.14.9":
+  version: 5.14.9
+  resolution: "appium-android-driver@npm:5.14.9"
+  dependencies:
+    appium-adb: ^9.14.11
     appium-chromedriver: ^5.2.0
     asyncbox: ^2.8.0
     axios: ^1.x
@@ -8226,7 +8225,7 @@ __metadata:
     lodash: ^4.17.4
     lru-cache: ^7.3.0
     moment: ^2.24.0
-    moment-timezone: ^0.5.26
+    moment-timezone: ^0.x
     portfinder: ^1.0.6
     portscanner: 2.2.0
     semver: ^7.0.0
@@ -8236,7 +8235,7 @@ __metadata:
     ws: ^8.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 973bb5900db156dc61c6bd7c511254f2f53a06216458313c8d5c616ef8dcfd89cde2d030962d983c9accf4717e82bc3b2e352eccfd1def97da5091f307847c76
+  checksum: dc23f78eefad6f6cebc0de1d9541caacb4742cd23b3054a1839cdfee785dc12d9cbf8716a5d9ab4fc226e4560c1ad19d62adba450f20bd060cc1d7ef535cde5b
   languageName: node
   linkType: hard
 
@@ -8412,12 +8411,12 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.29.5
-  resolution: "appium-uiautomator2-driver@npm:2.29.5"
+  version: 2.29.10
+  resolution: "appium-uiautomator2-driver@npm:2.29.10"
   dependencies:
     "@babel/runtime": ^7.0.0
-    appium-adb: ^9.13.1
-    appium-android-driver: ^5.14.0
+    appium-adb: ^9.14.10
+    appium-android-driver: ^5.14.9
     appium-chromedriver: ^5.6.5
     appium-uiautomator2-server: ^5.12.2
     asyncbox: ^2.3.1
@@ -8430,7 +8429,7 @@ __metadata:
     teen_process: ^2.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: cb3ab6971daba688d2080fcbfa9b62d38b8645a6f60afc54d8c57f372eec8476b491824636cd959c4b382d1c4157f43249ad176224bede099282f580a3d57d1d
+  checksum: 3898fa122b9c6f6dc28b80e0e94092c974874ea771039c7e24a3c48f2f80842639083095d15ec87e05abf8b49c9cc26de24e923666887d722bde40631560d6c7
   languageName: node
   linkType: hard
 
@@ -13762,13 +13761,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ini@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "ini@npm:3.0.1"
-  checksum: 947b582a822f06df3c22c75c90aec217d604ea11f7a20249530ee5c1cf8f508288439abe17b0e1d9b421bda5f4fae5e7aae0b18cb3ded5ac9d68f607df82f10f
-  languageName: node
-  linkType: hard
-
 "ini@npm:^4.1.1":
   version: 4.1.1
   resolution: "ini@npm:4.1.1"
@@ -17044,7 +17036,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment-timezone@npm:^0.5.26, moment-timezone@npm:^0.x":
+"moment-timezone@npm:^0.x":
   version: 0.5.40
   resolution: "moment-timezone@npm:0.5.40"
   dependencies:
