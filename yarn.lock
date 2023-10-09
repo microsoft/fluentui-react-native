@@ -18877,8 +18877,8 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^2.5.15":
-  version: 2.5.16
-  resolution: "react-native-test-app@npm:2.5.16"
+  version: 2.5.26
+  resolution: "react-native-test-app@npm:2.5.26"
   dependencies:
     "@rnx-kit/react-native-host": ^0.2.8
     ajv: ^8.0.0
@@ -18891,24 +18891,12 @@ __metadata:
     uuid: ^8.3.2
   peerDependencies:
     "@expo/config-plugins": ">=5.0"
-    "@react-native-community/cli": ">=5.0"
-    "@react-native-community/cli-platform-android": ">=5.0"
-    "@react-native-community/cli-platform-ios": ">=5.0"
-    mustache: ^4.0.0
     react: ~17.0.1 || ~18.0.0 || ~18.1.0 || ~18.2.0
     react-native: ^0.0.0-0 || 0.64 - 0.72 || 1000.0.0
-    react-native-macos: ^0.0.0-0 || 0.64 || 0.66 || 0.68 || 0.71
+    react-native-macos: ^0.0.0-0 || 0.64 || 0.66 || 0.68 || 0.71 - 0.72
     react-native-windows: ^0.0.0-0 || 0.64 - 0.72
   peerDependenciesMeta:
     "@expo/config-plugins":
-      optional: true
-    "@react-native-community/cli":
-      optional: true
-    "@react-native-community/cli-platform-android":
-      optional: true
-    "@react-native-community/cli-platform-ios":
-      optional: true
-    mustache:
       optional: true
     react-native-macos:
       optional: true
@@ -18919,7 +18907,7 @@ __metadata:
     init: scripts/init.js
     init-test-app: scripts/init.js
     install-windows-test-app: windows/test-app.js
-  checksum: 184fedec33fe99b170012c6d240451b4dc4991a68e93715c019836ea9ae1d9ed44f03d1c6fb35a18aa725db68468ba13e752788e637190185fcf9ba1b1aa7942
+  checksum: fb0f2b0479dc9d1d72f5196160d8557e7d32e9dff0ac929f63220c1589b5d16cb9a12383473f95e5eea05ec626ed45737be907490c6df06a257a87e398d4f1ec
   languageName: node
   linkType: hard
 
