@@ -76,11 +76,11 @@ export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
     if (vertical) {
       containerStyles.start = x + tabBorderWidth + 1;
       indicatorStyles.top = y + startMargin + tabBorderWidth + 1;
-      indicatorStyles.transform = [{ scaleY: indicatorScale as any }, { translateY: indicatorTranslate as any }];
+      indicatorStyles.transform = [{ translateY: indicatorTranslate as any }, { scaleY: indicatorScale as any }];
     } else {
       containerStyles.bottom = height + y + 1;
       indicatorStyles.start = x + startMargin + tabBorderWidth + 1;
-      indicatorStyles.transform = [{ scaleX: indicatorScale as any }, { translateX: indicatorTranslate as any }];
+      indicatorStyles.transform = [{ translateX: indicatorTranslate as any }, { scaleX: indicatorScale as any }];
     }
     return {
       container: containerStyles,
