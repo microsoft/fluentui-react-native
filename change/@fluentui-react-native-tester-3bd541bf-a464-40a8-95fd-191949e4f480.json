@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Implement animations on mac",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
