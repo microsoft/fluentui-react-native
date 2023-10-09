@@ -29,8 +29,10 @@ export function useTabAnimation(
   const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical } = context;
   const { tabKey } = props;
 
+  // This tab's layout rect from the onLayout callback
   const [rect, setRect] = React.useState<LayoutRectangle>();
-  const [layoutInfoWasSent, setLayoutInfoWasSent] = React.useState(false);
+  // Whenever we get new layout info, we need to re-update the global tab layout map in our context. This flag triggers the logic in the useEffect hook below.
+  const [shouldUpdateLayoutInfo, setShouldUpdateLayoutInfo] = React.useState(false);
 
   // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
   React.useEffect(() => {
@@ -42,7 +44,7 @@ export function useTabAnimation(
 
   React.useEffect(() => {
     /**
-     * This useEffect logic runs once, once we have the layout rects of this tab and the tablist.
+     * This useEffect logic runs once, once we have the layout rects of this tab and the tablist itself.
      *
      * This checks to see if we have relevant info to calculate the layout position and dimensions of the indicator. If this check fails, we don't
      * want to trigger a re-render by needlessly updating the TabList state.
@@ -54,7 +56,7 @@ export function useTabAnimation(
      *   more investigation has to be done.
      */
     if (
-      !layoutInfoWasSent &&
+      shouldUpdateLayoutInfo &&
       rect &&
       layout?.tablist &&
       layout?.tablist.width > 0 &&
@@ -82,13 +84,13 @@ export function useTabAnimation(
         tabBorderWidth: tokens.borderWidth,
         startMargin: tokens.indicatorMargin,
       });
-      setLayoutInfoWasSent(true);
+      setShouldUpdateLayoutInfo(false);
     }
   }, [
     addTabLayout,
     tabKey,
     layout,
-    layoutInfoWasSent,
+    shouldUpdateLayoutInfo,
     rect,
     tokens.borderWidth,
     tokens.indicatorMargin,
@@ -97,7 +99,13 @@ export function useTabAnimation(
   ]);
 
   // onLayout callback saves layout rect of tab
-  const onTabLayout = React.useCallback((e: LayoutEvent) => setRect(e.nativeEvent.layout), [setRect]);
+  const onTabLayout = React.useCallback(
+    (e: LayoutEvent) => {
+      setRect(e.nativeEvent.layout);
+      setShouldUpdateLayoutInfo(true);
+    },
+    [setRect],
+  );
 
   return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);
 }
