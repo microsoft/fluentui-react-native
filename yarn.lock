@@ -5751,11 +5751,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.16
-  resolution: "@rnx-kit/cli@npm:0.16.16"
+  version: 0.16.17
+  resolution: "@rnx-kit/cli@npm:0.16.17"
   dependencies:
     "@rnx-kit/align-deps": ^2.2.2
-    "@rnx-kit/config": ^0.6.2
+    "@rnx-kit/config": ^0.6.6
     "@rnx-kit/console": ^1.0.11
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector": ^1.1.1
     "@rnx-kit/metro-plugin-duplicates-checker": ^2.1.1
@@ -5782,19 +5782,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: da7d1da077cad06819f430cded3eb694fa571ca481b310efe51fd609f0824183021915577f5ea629530da6b751c8a750a0941f8402b865ebfa616a25daf0c953
-  languageName: node
-  linkType: hard
-
-"@rnx-kit/config@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "@rnx-kit/config@npm:0.6.2"
-  dependencies:
-    "@rnx-kit/console": ^1.0.11
-    "@rnx-kit/tools-node": ^2.0.0
-    lodash: ^4.17.21
-    semver: ^7.0.0
-  checksum: 6dc16b78a139794abfc8eb4105e1ec9b5228c431f71cf9a06babd70109bccbb6a34a4c90e42b298f94e1183a8729f22940381ee484ceea9b52bb8cd0c6c0d65b
+  checksum: 4587b0de17299e5e98b012c39928695fa50b0abfc9dccf8f7a4d061729ca2467f0e57810bde284a58a9f3d81ba17132228143bd400fea2625d37a650426128c4
   languageName: node
   linkType: hard
 
@@ -5809,12 +5797,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/config@npm:^0.6.6":
+  version: 0.6.6
+  resolution: "@rnx-kit/config@npm:0.6.6"
+  dependencies:
+    "@rnx-kit/console": ^1.0.12
+    "@rnx-kit/tools-node": ^2.0.1
+    semver: ^7.0.0
+  checksum: 290248bcadc099e6f7d975287d3704b62c1bb9a7bf7b67196ecab810dbee7066e80186864d1d45bd81cc139ada39ab0ec25c30319f493fceceb24f6d767bd48a
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/console@npm:^1.0.0, @rnx-kit/console@npm:^1.0.11":
   version: 1.0.11
   resolution: "@rnx-kit/console@npm:1.0.11"
   dependencies:
     chalk: ^4.1.0
   checksum: 54afcddcbc104a157b0b595384bc821966c10cc6dcac3d76c468192830072cd0b0623a5d6cbb7bb2d8dcb2fc813f9e13764067bad5796184147aef1521b31f5f
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/console@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "@rnx-kit/console@npm:1.0.12"
+  dependencies:
+    chalk: ^4.1.0
+  checksum: a023cafcd3b5aa57b2c6547ec6a4f12589cdf47c479a5f7f4f09a8ce6f530717651521466ae4eabad46d4f94ba2f961f69283171d5c71ce323c6a99f938d77b6
   languageName: node
   linkType: hard
 
@@ -6016,7 +6024,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/tools-node@npm:^2.1.0":
+"@rnx-kit/tools-node@npm:^2.0.1, @rnx-kit/tools-node@npm:^2.1.0":
   version: 2.1.0
   resolution: "@rnx-kit/tools-node@npm:2.1.0"
   dependencies:
