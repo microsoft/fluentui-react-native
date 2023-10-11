@@ -39,8 +39,12 @@ export type FocusZoneProps = React.PropsWithChildren<{
 
   /**
    * By default, pressing Tab within a FocusZone moves focus out of the FocusZone.
-   * This prop makes it so Tab/Shift+Tab navigate elements within the FocusZone. However, now
-   * that tab navigates within the FocusZone, there is no way to escape keyboard focus from the FZ.
+   * This prop allows you to change that behavior.
+   *
+   * "None" : Default
+   * "NavigateWrap" : Tab allowed within FZ with circular navigation behavior
+   * "NavigateStopAtEnds" : Tab allowed within FZ and stops at ends
+   * "Normal" : Tab allowed within FZ, and focus is not trapped. Tabbing at the last element bring you out of the FZ.
    *
    * Recommended Usage - Moving focus OUT of the FocusZone - Custom Key Handlers
    *      Example: Subscribe to key events. On the pressing of "Escape", move focus out of the FocusZone.
@@ -76,7 +80,7 @@ export type NavigateAtEnd =
   | 'NavigateWrap' /* Circular Navigation Functionality */
   | 'NavigateContinue'; /* At the last element of the FocusZone, focus will move to the first focusable element outside the FocusZone */
 
-  export type FocusZoneTabNavigation =
+export type FocusZoneTabNavigation =
   | 'None' /* Tab navigates you out of the FocusZone. This is Default */
   | 'NavigateWrap' /* Navigate the FZ with Tab. Circular navigation at ends */
   | 'NavigateStopAtEnds' /* Navigate the FZ with Tab. Stop navigation at ends */
