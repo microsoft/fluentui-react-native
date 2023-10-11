@@ -131,6 +131,7 @@ export type {
   FocusZoneType,
   NativeProps,
   NavigateAtEnd,
+  TabKeyNavigation
 } from '@fluentui-react-native/focus-zone';
 
 export {

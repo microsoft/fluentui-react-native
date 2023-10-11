@@ -9,5 +9,6 @@ export type {
   FocusZoneType,
   NativeProps,
   NavigateAtEnd,
+  TabKeyNavigation,
 } from './FocusZone.types';
 export { FocusZone } from './FocusZone';
