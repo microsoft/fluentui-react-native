@@ -5726,11 +5726,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.2":
-  version: 2.2.4
-  resolution: "@rnx-kit/align-deps@npm:2.2.4"
+  version: 2.2.5
+  resolution: "@rnx-kit/align-deps@npm:2.2.5"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 96ad10991e89b26529cc2c6dd6cbb7ff26a667dc390a4025d06cbbe317c191bd9bc397de34b4ab4cccf1a1cb8a6e564339b48c9229acae05e1a8136fd79ac9bb
+  checksum: 76a9818cb43d6cd3517ff25937fe7564e52fb82eb0408b1971a6e8cbc985dc38490dcf514b50e2cdd7fd84bc9ffaa5c7d549f5ad4cc4b42ef82e1377d8a924c2
   languageName: node
   linkType: hard
 
