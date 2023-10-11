@@ -127,11 +127,11 @@ export type {
   FocusZoneRenderData,
   FocusZoneSlotProps,
   FocusZoneState,
+  FocusZoneTabNavigation,
   FocusZoneTokens,
   FocusZoneType,
   NativeProps,
-  NavigateAtEnd,
-  TabKeyNavigation
+  NavigateAtEnd
 } from '@fluentui-react-native/focus-zone';
 
 export {

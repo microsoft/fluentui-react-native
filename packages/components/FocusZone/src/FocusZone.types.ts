@@ -52,7 +52,7 @@ export type FocusZoneProps = React.PropsWithChildren<{
    *    Instead, once focus lands on the parent of the FocusZone, implement a custom key handler that will enable
    *    the FocusZone.
    */
-  tabKeyNavigation?: TabKeyNavigation;
+  tabKeyNavigation?: FocusZoneTabNavigation;
 
   /**
    * Callback called when “focus” event triggered in FocusZone
@@ -62,7 +62,7 @@ export type FocusZoneProps = React.PropsWithChildren<{
 
 export interface NativeProps extends Omit<FocusZoneProps, 'isCircularNavigation'> {
   navigateAtEnd?: NavigateAtEnd;
-  tabKeyNavigation?: TabKeyNavigation;
+  tabKeyNavigation?: FocusZoneTabNavigation;
 }
 
 export type FocusZoneDirection =
@@ -76,7 +76,7 @@ export type NavigateAtEnd =
   | 'NavigateWrap' /* Circular Navigation Functionality */
   | 'NavigateContinue'; /* At the last element of the FocusZone, focus will move to the first focusable element outside the FocusZone */
 
-  export type TabKeyNavigation =
+  export type FocusZoneTabNavigation =
   | 'None' /* Tab navigates you out of the FocusZone. This is Default */
   | 'NavigateWrap' /* Navigate the FZ with Tab. Circular navigation at ends */
   | 'NavigateStopAtEnds' /* Navigate the FZ with Tab. Stop navigation at ends */

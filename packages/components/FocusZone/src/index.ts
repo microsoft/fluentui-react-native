@@ -5,10 +5,10 @@ export type {
   FocusZoneRenderData,
   FocusZoneSlotProps,
   FocusZoneState,
+  FocusZoneTabNavigation,
   FocusZoneTokens,
   FocusZoneType,
   NativeProps,
-  NavigateAtEnd,
-  TabKeyNavigation,
+  NavigateAtEnd
 } from './FocusZone.types';
 export { FocusZone } from './FocusZone';
