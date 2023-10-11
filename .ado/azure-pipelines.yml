@@ -130,6 +130,10 @@ jobs:
         displayName: 'List Simulators'
 
       - script: |
+          xcrun --sdk iphonesimulator --show-sdk-version
+        displayName: 'Determine iOS SDK version'
+
+      - script: |
           sudo gem install cocoapods
         displayName: 'Install Cocoapods Environment'
 
