@@ -131,7 +131,7 @@ export type {
   FocusZoneTokens,
   FocusZoneType,
   NativeProps,
-  NavigateAtEnd
+  NavigateAtEnd,
 } from '@fluentui-react-native/focus-zone';
 
 export {
