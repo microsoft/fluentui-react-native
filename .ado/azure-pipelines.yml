@@ -77,14 +77,6 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
-      - script: |
-          sudo gem install cocoapods
-        displayName: 'Install Cocoapods Environment'
       - template: templates/setup-repo-min-build.yml
 
       - script: |
@@ -125,18 +117,6 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - script: |
-          xcrun simctl list
-        displayName: 'List Simulators'
-
-      - script: |
-          xcrun --sdk iphonesimulator --show-sdk-version
-        displayName: 'Determine iOS SDK version'
-
-      - script: |
-          sudo gem install cocoapods
-        displayName: 'Install Cocoapods Environment'
-
       - template: templates/setup-repo-min-build.yml
 
       - script: |
@@ -156,9 +136,27 @@ jobs:
         workingDirectory: apps/fluent-tester/$(platform)
         displayName: 'pod install $(platform)'
 
+      - script: |
+          brew install xcbeautify
+        displayName: 'Install xcbeautify'
+
+      - script: |
+          xcrun simctl list
+        displayName: 'List Simulators'
+
+      - script: |
+          xcrun --sdk iphonesimulator --show-sdk-version
+        displayName: 'Determine iOS SDK version'
+
+      - script: |
+          NEW_DEVICE=$(xcrun simctl create "Test Phone" "$(ios_simulator)" iOS$(ios_version))
+          echo "🤖 Created ${NEW_DEVICE}"
+          xcrun simctl boot ${NEW_DEVICE}
+        displayName: 'Boot Simulator'
+
       - bash: |
           echo "yarn $(platform)"
-          yarn $(platform) --simulator $(ios_simulator)
+          yarn $(platform) --udid $NEW_DEVICE
         workingDirectory: apps/fluent-tester
         displayName: 'yarn $(platform)'
 
