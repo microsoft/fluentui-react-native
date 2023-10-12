@@ -9,6 +9,6 @@ export type {
   FocusZoneTokens,
   FocusZoneType,
   NativeProps,
-  NavigateAtEnd
+  NavigateAtEnd,
 } from './FocusZone.types';
 export { FocusZone } from './FocusZone';

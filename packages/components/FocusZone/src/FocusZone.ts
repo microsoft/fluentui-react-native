@@ -35,7 +35,7 @@ export const FocusZone = composable<FocusZoneType>({
           defaultTabbableElement: targetNativeTag,
           ref: ftzRef,
           navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds',
-          tabKeyNavigation
+          tabKeyNavigation,
         },
       }),
     };
