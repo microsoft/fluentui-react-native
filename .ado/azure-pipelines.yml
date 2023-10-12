@@ -96,6 +96,10 @@ jobs:
         workingDirectory: apps/fluent-tester/$(platform)
         displayName: 'pod install $(platform)'
 
+      - script: |
+          brew install xcbeautify
+        displayName: 'Install xcbeautify'
+
       - bash: |
           echo "yarn $(platform)"
           yarn $(platform)
