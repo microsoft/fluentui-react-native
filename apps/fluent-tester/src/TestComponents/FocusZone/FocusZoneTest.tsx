@@ -98,9 +98,7 @@ const FocusZoneTabNavigationComponent: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Text>
-        FocusZone Tab Navigation
-      </Text>
+      <Text>FocusZone Tab Navigation</Text>
       <MenuButton
         content={`Current tab key navigation: ${tabNavigation}`}
         menuItems={FocusZoneTabNavigations.map((dir) => ({
