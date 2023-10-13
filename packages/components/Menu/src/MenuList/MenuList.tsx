@@ -34,16 +34,19 @@ const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap
 });
 MenuStack.displayName = 'MenuStack';
 
+const shouldHaveFocusZone = ['macos', 'win32'].includes(Platform.OS as string);
+
 export const menuListLookup = (layer: string, state: MenuListState, userProps: MenuListProps): boolean => {
   return state[layer] || userProps[layer] || layer === 'hasMaxHeight';
 };
+
 export const MenuList = compose<MenuListType>({
   displayName: menuListName,
   ...stylingSettings,
   slots: {
     root: MenuStack,
     scrollView: ScrollView,
-    focusZone: Platform.OS !== 'android' ? FocusZone : React.Fragment,
+    focusZone: shouldHaveFocusZone ? FocusZone : React.Fragment,
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
@@ -76,7 +79,6 @@ export const MenuList = compose<MenuListType>({
 
       const shouldHaveScrollView = Platform.OS === 'macos' || menuList.hasMaxHeight || menuList.hasMaxWidth;
       const ScrollViewWrapper = shouldHaveScrollView ? Slots.scrollView : React.Fragment;
-      const shouldHaveFocusZone = Platform.OS !== 'android';
 
       const content = (
         <Slots.root>
