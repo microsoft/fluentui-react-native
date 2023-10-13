@@ -144,7 +144,7 @@ describe('Menu Functional Testing', () => {
     expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Press "Tab" to navigate between MenuItems. Validate that focus does not switch between MenuItems.', async () => {
+  it('Press "Tab" while Menu is open. Validate that focus does not switch between MenuItems.', async () => {
     await MenuPageObject.openMenu();
 
     await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Third'), [Keys.TAB]);
