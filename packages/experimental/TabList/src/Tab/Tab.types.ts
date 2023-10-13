@@ -13,8 +13,6 @@ import type {
   LayoutTokens,
 } from '@fluentui-react-native/tokens';
 
-import type { TabIndicatorProps } from '../TabIndicator/TabIndicator.types';
-
 export const tabName = 'Tab';
 
 export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens {
@@ -41,12 +39,17 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   /**
    * The horizontal / vertical margin of the indicator, depending on its orientation.
    */
-  indicatorInset?: number;
+  indicatorMargin?: number;
 
   /**
    * The direction the indicator is laying.
    */
   indicatorOrientation?: 'horizontal' | 'vertical';
+
+  /**
+   * Border radius of the indicator.
+   */
+  indicatorRadius?: number;
 
   /**
    * Thickness of the indicator line.
@@ -127,7 +130,8 @@ export interface TabSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
   icon: IconProps;
   stack: IViewProps;
-  indicator: TabIndicatorProps;
+  indicatorContainer: IViewProps;
+  indicator: IViewProps;
   contentContainer: IViewProps;
   content: TextProps;
 }

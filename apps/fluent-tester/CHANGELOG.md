@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 25 Sep 2023 12:49:34 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Sep 2023 03:54:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.156.4
+
+Thu, 28 Sep 2023 03:54:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.9.1
+
+## 0.156.3
+
+Wed, 27 Sep 2023 00:35:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tablist to v0.4.0
 
 ## 0.156.2
 
