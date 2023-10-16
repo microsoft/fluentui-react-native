@@ -15,7 +15,7 @@ const filterOutComponentRef = (propName) => propName !== 'componentRef';
 
 export const FocusZone = composable<FocusZoneType>({
   usePrepareProps: (userProps: FocusZoneProps, useStyling: IUseStyling<FocusZoneType>) => {
-    const { componentRef, defaultTabbableElement, isCircularNavigation, tabKeyNavigation, ...rest } = userProps;
+    const { componentRef, defaultTabbableElement, isCircularNavigation, ...rest } = userProps;
 
     const ftzRef = useViewCommandFocus(componentRef);
 
@@ -35,7 +35,6 @@ export const FocusZone = composable<FocusZoneType>({
           defaultTabbableElement: targetNativeTag,
           ref: ftzRef,
           navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds',
-          tabKeyNavigation,
         },
       }),
     };
