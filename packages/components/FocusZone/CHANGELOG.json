@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Tue, 17 Oct 2023 19:21:23 GMT",
+      "version": "0.13.0",
+      "tag": "@fluentui-react-native/focus-zone_v0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "8f8c60c46ed91076bde2e5a00c88a2a63de9861b",
+            "comment": "Adding prop in FocusZone to configure tab key navigation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Aug 2023 22:56:32 GMT",
       "version": "0.12.10",
       "tag": "@fluentui-react-native/focus-zone_v0.12.10",

@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 28 Sep 2023 03:54:05 GMT and should not be manually modified.
+This log was last generated on Tue, 17 Oct 2023 19:21:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.157.0
+
+Tue, 17 Oct 2023 19:21:23 GMT
+
+### Minor changes
+
+- Adding prop in FocusZone to configure tab key navigation (safreibe@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.7.25
+- Bump @fluentui-react-native/experimental-tabs to v0.9.15
+- Bump @fluentui-react-native/menu to v1.11.24
+- Bump @fluentui-react-native/radio-group to v0.19.4
+- Bump @fluentui-react-native/tablist to v0.4.1
+- Bump @fluentui/react-native to v0.38.0
+- Bump @fluentui-react-native/focus-zone to v0.13.0
 
 ## 0.156.4
 
