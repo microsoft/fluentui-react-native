@@ -7535,9 +7535,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-android-driver@npm:^7.0.1":
-  version: 7.0.2
-  resolution: "appium-android-driver@npm:7.0.2"
+"appium-android-driver@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "appium-android-driver@npm:7.1.0"
   dependencies:
     appium-adb: ^9.12.0
     appium-chromedriver: ^5.5.1
@@ -7549,8 +7549,7 @@ __metadata:
     lru-cache: ^10.0.1
     moment: ^2.24.0
     moment-timezone: ^0.5.26
-    portfinder: ^1.0.6
-    portscanner: 2.2.0
+    portscanner: ^2.2.0
     semver: ^7.0.0
     source-map-support: ^0.x
     teen_process: ^2.0.0
@@ -7558,7 +7557,7 @@ __metadata:
     ws: ^8.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 3c11269f1fb4acf00e73128c5ccfb9a937429ca047643d890cf3e738f0abfd2355025e5982e77647022203361092a5978bc51916b5490806170574e444789536
+  checksum: 32034b846fc3a9e469b36286320c2e53c7e6af7d33e7c2e36b4ac45f403dd31645daea4caeefb0a679cd31dace2863b626b75e348701e11a83128be3a31dca2e
   languageName: node
   linkType: hard
 
@@ -7694,11 +7693,11 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.31.3
-  resolution: "appium-uiautomator2-driver@npm:2.31.3"
+  version: 2.32.0
+  resolution: "appium-uiautomator2-driver@npm:2.32.0"
   dependencies:
     appium-adb: ^9.14.12
-    appium-android-driver: ^7.0.1
+    appium-android-driver: ^7.1.0
     appium-chromedriver: ^5.6.5
     appium-uiautomator2-server: ^5.12.2
     asyncbox: ^2.3.1
@@ -7709,10 +7708,10 @@ __metadata:
     portscanner: ^2.2.0
     source-map-support: ^0.x
     teen_process: ^2.0.0
-    type-fest: ^3.12.0
+    type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: be9322a18399166dc5d3d93066bdc341d6a8294950d8b18686cc14f0fa71b4347619a5f4cafbb9f50da804826b622ba2de6c5b2b08492f222edfe878b1d14e80
+  checksum: 8900dab40424c990e4e44802bc31472bbbfc5e83e3a8378a47a6e85cf92dbfdcf333652ba4fa0089f8bed935b53acfe184b16b0f2b9571def020542c42eec9b3
   languageName: node
   linkType: hard
 
@@ -8335,7 +8334,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async@npm:^2.6.0, async@npm:^2.6.4":
+"async@npm:^2.6.0":
   version: 2.6.4
   resolution: "async@npm:2.6.4"
   dependencies:
@@ -15960,7 +15959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mkdirp@npm:^0.5.1, mkdirp@npm:^0.5.6, mkdirp@npm:~0.5.1":
+"mkdirp@npm:^0.5.1, mkdirp@npm:~0.5.1":
   version: 0.5.6
   resolution: "mkdirp@npm:0.5.6"
   dependencies:
@@ -17218,17 +17217,6 @@ __metadata:
   version: 5.0.0
   resolution: "pngjs@npm:5.0.0"
   checksum: 04e912cc45fb9601564e2284efaf0c5d20d131d9b596244f8a6789fc6cdb6b18d2975a6bbf7a001858d7e159d5c5c5dd7b11592e97629b7137f7f5cef05904c8
-  languageName: node
-  linkType: hard
-
-"portfinder@npm:^1.0.6":
-  version: 1.0.32
-  resolution: "portfinder@npm:1.0.32"
-  dependencies:
-    async: ^2.6.4
-    debug: ^3.2.7
-    mkdirp: ^0.5.6
-  checksum: 116b4aed1b9e16f6d5503823d966d9ffd41b1c2339e27f54c06cd2f3015a9d8ef53e2a53b57bc0a25af0885977b692007353aa28f9a0a98a44335cb50487240d
   languageName: node
   linkType: hard
 
@@ -19961,7 +19949,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:3.13.1, type-fest@npm:^3.12.0":
+"type-fest@npm:3.13.1":
   version: 3.13.1
   resolution: "type-fest@npm:3.13.1"
   checksum: c06b0901d54391dc46de3802375f5579868949d71f93b425ce564e19a428a0d411ae8d8cb0e300d330071d86152c3ea86e744c3f2860a42a79585b6ec2fdae8e
