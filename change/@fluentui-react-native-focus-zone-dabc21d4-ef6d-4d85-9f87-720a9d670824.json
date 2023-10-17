@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding prop in FocusZone to configure tab key navigation",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}

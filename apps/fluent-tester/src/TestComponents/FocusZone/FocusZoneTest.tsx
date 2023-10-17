@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { View, ScrollView, Pressable } from 'react-native';
 
-import type { FocusZoneDirection } from '@fluentui/react-native';
-import { FocusZone, Text, useOnPressWithFocus } from '@fluentui/react-native';
+import type { FocusZoneDirection, FocusZoneTabNavigation } from '@fluentui/react-native';
+import { FocusZone, MenuButton, Text, useOnPressWithFocus } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { CheckboxProps } from '@fluentui-react-native/experimental-checkbox';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 
-import { FocusZone2D, FocusZoneDirections, FocusZoneListWrapper, GridOfButtons } from './FocusZoneE2ETest';
+import { FocusZone2D, FocusZoneDirections, FocusZoneListWrapper, FocusZoneTabNavigations, GridOfButtons } from './FocusZoneE2ETest';
 import { focusZoneTestStyles, SubheaderText } from './styles';
 import { FOCUSZONE_TESTPAGE } from '../../../../E2E/src/FocusZone/consts';
 import type { CollectionItem } from '../Common/MenuPicker';
@@ -93,6 +93,27 @@ const FocusZoneNoProps: React.FunctionComponent = () => {
   );
 };
 
+const FocusZoneTabNavigationComponent: React.FunctionComponent = () => {
+  const [tabNavigation, setTabNavigation] = React.useState<FocusZoneTabNavigation>('None');
+
+  return (
+    <View>
+      <Text>FocusZone Tab Navigation</Text>
+      <MenuButton
+        content={`Current tab key navigation: ${tabNavigation}`}
+        menuItems={FocusZoneTabNavigations.map((dir) => ({
+          itemKey: dir,
+          text: dir,
+        }))}
+        onItemClick={(dir) => setTabNavigation(dir as FocusZoneTabNavigation)}
+      />
+      <FocusZone tabKeyNavigation={tabNavigation}>
+        <Checkboxes />
+      </FocusZone>
+    </View>
+  );
+};
+
 const TinyBox = () => {
   const ref = React.useRef<View>();
   const onPress = useOnPressWithFocus(ref, null);
@@ -169,6 +190,10 @@ const focusZoneSections: TestSection[] = [
   {
     name: 'Directional FocusZone Usage',
     component: DirectionalFocusZone,
+  },
+  {
+    name: 'FocusZone with Tab Key Abstraction',
+    component: FocusZoneTabNavigationComponent,
   },
   {
     name: 'ScrollView inside FocusZone',
