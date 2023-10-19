@@ -1,19 +1,17 @@
 import React from 'react';
 import type { ViewStyle } from 'react-native';
 
-import type { AnimatedIndicatorStyles } from './TabListAnimatedIndicator.types';
-import type { TabLayoutInfo } from '../TabList/TabList.types';
-import { TabListContext } from '../TabList/TabListContext';
+import type { AnimatedIndicatorProps, AnimatedIndicatorStyles, TabLayoutInfo } from './TabListAnimatedIndicator.types';
 
 /**
  * This hook handles logic for generating the styles for the TabList's Animated Indicator.
  */
-export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
-  const { animatedIndicatorStyles, layout, selectedKey, setCanShowAnimatedIndicator, vertical } = React.useContext(TabListContext);
+export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): AnimatedIndicatorStyles {
+  const { animatedIndicatorStyles, selectedKey, tabLayout, vertical } = props;
 
   const selectedIndicatorLayout = React.useMemo<TabLayoutInfo | null>(() => {
-    return selectedKey ? layout.tabs[selectedKey] : null;
-  }, [selectedKey, layout.tabs]);
+    return selectedKey ? tabLayout[selectedKey] : null;
+  }, [selectedKey, tabLayout]);
 
   // Calculate styles using both layout information and user defined styles
   const styles = React.useMemo<AnimatedIndicatorStyles | null>(() => {
@@ -26,7 +24,7 @@ export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
       position: 'absolute',
       ...animatedIndicatorStyles.container,
     };
-    const indicatorStyles: ViewStyle = {
+    const indicatorStyles = {
       borderRadius: 99,
       ...animatedIndicatorStyles.indicator,
       width: width,
@@ -44,12 +42,6 @@ export function useAnimatedIndicatorStyles(): AnimatedIndicatorStyles {
       indicator: indicatorStyles,
     };
   }, [vertical, selectedIndicatorLayout, animatedIndicatorStyles]);
-
-  /**
-   * Until we have styles for the animated indicator, we show the Tab's "static indicator" for the selected key which is normally shown only on hover.
-   * The `canShowAnimatedIndicator` variable is used to decide whether to render the selected tab's static indicator as transparent or as colored in Tab.styling.tsx.
-   */
-  React.useEffect(() => setCanShowAnimatedIndicator(styles !== null), [setCanShowAnimatedIndicator, styles]);
 
   return styles;
 }

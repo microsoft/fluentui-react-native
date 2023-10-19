@@ -5,8 +5,12 @@ import { memoize, mergeStyles } from '@fluentui-react-native/framework';
 import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
-import type { TabListInfo, TabListProps, TabLayoutInfo } from './TabList.types';
-import type { AnimatedIndicatorStyles, AnimatedIndicatorStylesUpdate } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
+import type { TabListInfo, TabListProps } from './TabList.types';
+import type {
+  AnimatedIndicatorStyles,
+  AnimatedIndicatorStylesUpdate,
+  TabLayoutInfo,
+} from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 /**
  * Re-usable hook for TabList.
@@ -56,7 +60,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   );
 
   // State variables and functions for saving layout info and other styling information to style the animated indicator.
-  const [canShowAnimatedIndicator, setCanShowAnimatedIndicator] = React.useState<boolean>(false);
+  // const [canShowAnimatedIndicator, setCanShowAnimatedIndicator] = React.useState<boolean>(false);
   const [listLayoutMap, setListLayoutMap] = React.useState<{ [key: string]: TabLayoutInfo }>({});
   const [tabListLayout, setTabListLayout] = React.useState<LayoutRectangle>();
   const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<AnimatedIndicatorStyles>({
@@ -110,7 +114,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       addTabLayout: addTabLayout,
       animatedIndicatorStyles: userDefinedAnimatedIndicatorStyles,
       appearance: appearance,
-      canShowAnimatedIndicator: canShowAnimatedIndicator,
+      canShowAnimatedIndicator: !!(userDefinedAnimatedIndicatorStyles && listLayoutMap && listLayoutMap[selectedKey]),
       disabled: disabled,
       invoked: invoked,
       layout: {
@@ -121,7 +125,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       removeTabKey: removeTabKey,
       selectedKey: selectedKey ?? data.selectedKey,
       setSelectedTabRef: setSelectedTabRef,
-      setCanShowAnimatedIndicator: setCanShowAnimatedIndicator,
       setInvoked: setInvoked,
       size: size,
       tabKeys: tabKeys,

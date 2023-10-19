@@ -1,22 +1,20 @@
 /** @jsxRuntime classic */
 import React from 'react';
-import { Animated } from 'react-native';
+import { Animated, View } from 'react-native';
 
 import { stagedComponent } from '@fluentui-react-native/framework';
 
+import type { AnimatedIndicatorProps } from './TabListAnimatedIndicator.types';
 import { tablistAnimatedIndicatorName } from './TabListAnimatedIndicator.types';
 import { useAnimatedIndicatorStyles } from './useAnimatedIndicatorStyles';
 
-export const TabListAnimatedIndicator = stagedComponent(() => {
-  const styles = useAnimatedIndicatorStyles();
+export const TabListAnimatedIndicator = stagedComponent<AnimatedIndicatorProps>((props) => {
+  const styles = useAnimatedIndicatorStyles(props);
   return () => {
-    if (!styles) {
-      return null;
-    }
     return (
-      <Animated.View style={styles.container}>
+      <View style={styles.container}>
         <Animated.View style={styles.indicator} />
-      </Animated.View>
+      </View>
     );
   };
 });

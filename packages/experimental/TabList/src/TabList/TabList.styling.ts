@@ -12,7 +12,6 @@ export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, 
     stack: buildProps(
       (tokens: TabListTokens, theme: Theme) => ({
         style: {
-          position: 'relative',
           flexDirection: tokens.direction,
           ...layoutStyles.from(tokens, theme),
         },
