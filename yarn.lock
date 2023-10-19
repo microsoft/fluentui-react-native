@@ -8728,12 +8728,12 @@ __metadata:
   linkType: hard
 
 "beachball@npm:^2.20.0":
-  version: 2.37.0
-  resolution: "beachball@npm:2.37.0"
+  version: 2.39.0
+  resolution: "beachball@npm:2.39.0"
   dependencies:
-    cosmiconfig: ^7.0.0
+    cosmiconfig: ^8.3.6
     execa: ^5.0.0
-    fs-extra: ^10.0.0
+    fs-extra: ^11.1.1
     lodash: ^4.17.15
     minimatch: ^3.0.4
     p-limit: ^3.0.2
@@ -8741,11 +8741,11 @@ __metadata:
     semver: ^7.0.0
     toposort: ^2.0.2
     uuid: ^9.0.0
-    workspace-tools: ^0.35.0
+    workspace-tools: ^0.36.3
     yargs-parser: ^21.0.0
   bin:
     beachball: bin/beachball.js
-  checksum: 94260709d55e2b5d035e715ee96d2e5fb840ac927cb5da721474c97c2941d4a979f4989706d4609a22d4e8420ca0cea78c5177f6c12ea7d02d35d06581fda9ad
+  checksum: 9ea703dc24c57ed21c8969da8596fabe8d36dbb67f31fadc21cf81a774f85addcba3105b89de5b4ed378b8f16fd77c9692575c5de5def4507f523a43a0fa67a1
   languageName: node
   linkType: hard
 
@@ -9798,7 +9798,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmiconfig@npm:^7.0.0, cosmiconfig@npm:^7.1.0":
+"cosmiconfig@npm:^7.1.0":
   version: 7.1.0
   resolution: "cosmiconfig@npm:7.1.0"
   dependencies:
@@ -9820,6 +9820,23 @@ __metadata:
     parse-json: ^5.0.0
     path-type: ^4.0.0
   checksum: 836d5d8efa750f3fb17b03d6ca74cd3154ed025dffd045304b3ef59637f662bde1e5dc88f8830080d180ec60841719cf4ea2ce73fb21ec694b16865c478ff297
+  languageName: node
+  linkType: hard
+
+"cosmiconfig@npm:^8.3.6":
+  version: 8.3.6
+  resolution: "cosmiconfig@npm:8.3.6"
+  dependencies:
+    import-fresh: ^3.3.0
+    js-yaml: ^4.1.0
+    parse-json: ^5.2.0
+    path-type: ^4.0.0
+  peerDependencies:
+    typescript: ">=4.9.5"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: dc339ebea427898c9e03bf01b56ba7afbac07fc7d2a2d5a15d6e9c14de98275a9565da949375aee1809591c152c0a3877bb86dbeaf74d5bd5aaa79955ad9e7a0
   languageName: node
   linkType: hard
 
@@ -11599,6 +11616,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-glob@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "fast-glob@npm:3.3.1"
+  dependencies:
+    "@nodelib/fs.stat": ^2.0.2
+    "@nodelib/fs.walk": ^1.2.3
+    glob-parent: ^5.1.2
+    merge2: ^1.3.0
+    micromatch: ^4.0.4
+  checksum: b6f3add6403e02cf3a798bfbb1183d0f6da2afd368f27456010c0bc1f9640aea308243d4cb2c0ab142f618276e65ecb8be1661d7c62a7b4e5ba774b9ce5432e5
+  languageName: node
+  linkType: hard
+
 "fast-json-stable-stringify@npm:^2.0.0, fast-json-stable-stringify@npm:^2.1.0":
   version: 2.1.0
   resolution: "fast-json-stable-stringify@npm:2.1.0"
@@ -11955,7 +11985,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^11.0.0":
+"fs-extra@npm:^11.0.0, fs-extra@npm:^11.1.1":
   version: 11.1.1
   resolution: "fs-extra@npm:11.1.1"
   dependencies:
@@ -12851,7 +12881,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"import-fresh@npm:^3.2.1":
+"import-fresh@npm:^3.2.1, import-fresh@npm:^3.3.0":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
   dependencies:
@@ -20834,17 +20864,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"workspace-tools@npm:^0.35.0":
-  version: 0.35.0
-  resolution: "workspace-tools@npm:0.35.0"
+"workspace-tools@npm:^0.36.3":
+  version: 0.36.3
+  resolution: "workspace-tools@npm:0.36.3"
   dependencies:
     "@yarnpkg/lockfile": ^1.1.0
+    fast-glob: ^3.3.1
     git-url-parse: ^13.0.0
     globby: ^11.0.0
     jju: ^1.4.0
     js-yaml: ^4.1.0
     micromatch: ^4.0.0
-  checksum: 30e5c768d37a66ee86e9e4b647734e9ba65920ddab900df87249cc14e56b202fa5154c5d954d69f35dc1c55b6e14ccf0427f5baba1102fe75bfd1b615bf0f99c
+  checksum: b25f8058b65023ccee30cf9fe854daa7e6d898a2a7052bd0a85468328ac990d63e028853c0a5602944a5b3ac4551280ab1b819ee58d9597f0b6860cae6b98595
   languageName: node
   linkType: hard
 
