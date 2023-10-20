@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "[CI] Update to macOS 13 / Xcode 15",
+  "comment": "[CI] Refactor Apple CI",
   "packageName": "@fluentui-react-native/e2e-testing",
   "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
