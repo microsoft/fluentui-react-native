@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Tue, 17 Oct 2023 19:21:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Tue, 17 Oct 2023 19:21:23 GMT
+
+### Minor changes
+
+- Adding prop in FocusZone to configure tab key navigation (safreibe@microsoft.com)
 
 ## 0.12.10
 
