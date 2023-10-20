@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import type { AnimatedIndicatorProps, AnimatedIndicatorStyles, TabLayoutInfo } from './TabListAnimatedIndicator.types';
+import type { AnimatedIndicatorProps, AnimatedIndicatorStyles } from './TabListAnimatedIndicator.types';
 
 /**
  * This hook handles logic for generating the styles for the TabList's Animated Indicator. Child Tabs add layout update events to state
@@ -16,13 +16,9 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
   const indicatorTranslate = React.useRef(new Animated.Value(0)).current;
   const indicatorScale = React.useRef(new Animated.Value(1)).current;
 
-  const [startingIndicatorLayout, setStartingIndicatorLayout] = React.useState<TabLayoutInfo | null>(null);
-
-  React.useEffect(() => {
-    if (startingIndicatorLayout === null && tabLayout[selectedKey]) {
-      setStartingIndicatorLayout(tabLayout[selectedKey]);
-    }
-  }, [selectedKey, tabLayout, startingIndicatorLayout, setStartingIndicatorLayout]);
+  // Save the initial selected layout, this shouldn't update
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const startingIndicatorLayout = React.useMemo(() => tabLayout[selectedKey], []);
 
   React.useEffect(() => {
     const selectedIndicatorLayout = tabLayout[selectedKey];

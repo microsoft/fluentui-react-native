@@ -37,10 +37,21 @@ export function useTabAnimation(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabKey, selectedKey, tokens.indicatorColor]);
 
+  /**
+   * This checks to see if we have relevant info to calculate the layout position and dimensions of the indicator. If this check fails, we don't
+   * want to trigger a re-render by needlessly updating the TabList state.
+   *
+   * We also check if the info is good. Info can be bad in some weird cases:
+   * - Check if width > 0 because there is an on-going issue caused by ScrollViews initially laying out its childrens' width to 0 and height to be a bigger than expected value.
+   * - ScrollView also negatively affects the initial height values. For vertical TabLists, the initial height value will lay out incorrectly. Sometimes, the styling of the parent
+   *   component combined with the ScrollView issues causes the initial height layout value to be completely unreasonable. Exactly which style that causes this issue isn't known;
+   *   more investigation has to be done.
+   */
   const onTabLayout = React.useCallback(
     (e: LayoutEvent) => {
       if (
         e.nativeEvent.layout &&
+        // Following checks are for win32 only, will be removed after addressing scrollview layout bug
         (Platform.OS === ('win32' as any)
           ? layout?.tablist &&
             layout?.tablist.width > 0 &&
@@ -71,7 +82,7 @@ export function useTabAnimation(
         });
       }
     },
-    [addTabLayout, layout.tablist, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
+    [addTabLayout, layout, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );
 
   return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);
