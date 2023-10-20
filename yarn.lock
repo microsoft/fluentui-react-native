@@ -7762,8 +7762,8 @@ __metadata:
   linkType: hard
 
 "appium-windows-driver@npm:^2.12.0":
-  version: 2.12.4
-  resolution: "appium-windows-driver@npm:2.12.4"
+  version: 2.12.6
+  resolution: "appium-windows-driver@npm:2.12.6"
   dependencies:
     asyncbox: ^2.3.1
     bluebird: ^3.5.1
@@ -7779,7 +7779,7 @@ __metadata:
   dependenciesMeta:
     koffi:
       optional: true
-  checksum: 85db00326dd57778dcced7db34a4e158b5789eb8e523325b32c5cdfc3b9ba89b38bfd5e88dc49d2dd35aa68872b39f76cfb50d5f242f77902ab283c6bcdc4147
+  checksum: 1a6ca97b502a1a91c3fa6e01ecc54663c8016f22d717c93825c179b14810b3fff7de210ecb61b7658078b8cb59bbdb391f57bfe1e3d11c4a93db8be639a58644
   languageName: node
   linkType: hard
 
