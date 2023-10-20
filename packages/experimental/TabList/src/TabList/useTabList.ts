@@ -114,7 +114,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       addTabLayout: addTabLayout,
       animatedIndicatorStyles: userDefinedAnimatedIndicatorStyles,
       appearance: appearance,
-      canShowAnimatedIndicator: !!(userDefinedAnimatedIndicatorStyles && listLayoutMap && listLayoutMap[selectedKey]),
+      canShowAnimatedIndicator: !!(userDefinedAnimatedIndicatorStyles && listLayoutMap && listLayoutMap[selectedKey ?? data.selectedKey]),
       disabled: disabled,
       invoked: invoked,
       layout: {
