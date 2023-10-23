@@ -4,9 +4,6 @@ parameters:
     type: boolean
     default: false
 
-variables:
-  - template: variables/vars.yml
-
 steps:
   - checkout: self
     persistCredentials: true
