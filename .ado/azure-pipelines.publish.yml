@@ -87,7 +87,7 @@ jobs:
           ignoreDirectories: 'node_modules/react-native/template'
 
   - job: NuGetPublish
-    displayName: NuGet Publish
+    displayName: Apple NuGet Publish
     pool:
       vmImage: $(VmImageApple)
     variables:

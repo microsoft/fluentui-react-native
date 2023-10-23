@@ -4,9 +4,6 @@ parameters:
     type: boolean
     default: false
 
-variables:
-  - template: variables/vars.yml
-
 steps:
   - checkout: self
     persistCredentials: true
@@ -22,20 +19,17 @@ steps:
       sudo gem install cocoapods
     displayName: 'Install CocoaPods Environment'
 
-  # Select proper Xcode version
-  - template: apple-xcode-select.yml
-      parameters:
-        xcode_version: $(xcode_version)
-        xcode_path: $(xcode_path)
+  - bash: |
+      sudo xcode-select --switch $(xcode_path)
+    displayName: Switch Xcode version $(xcode_version)
+    failOnStderr: true
 
-  # Pod Install iOS
   - bash: |
       echo "pod install --project-directory=ios"
       pod install --project-directory=ios
     workingDirectory: apps/fluent-tester
     displayName: 'pod install iOS'
 
-  # Pod Install macOS
   - bash: |
       echo "pod install --project-directory=macos"
       pod install --project-directory=macos
