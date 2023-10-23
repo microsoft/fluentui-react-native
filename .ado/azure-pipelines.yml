@@ -1,9 +1,6 @@
 pr:
   - main
 
-variables:
-  - template: variables/vars.yml
-
 jobs:
   # Dedicated task to build JS code, including jest tests, snapshot testing, and linting, because these things can be super
   # time consuming they don't need to run on every CI pass, instead do a dedicated JS loop to make the platform specific tests start quicker
@@ -41,7 +38,8 @@ jobs:
     pool:
       vmImage: 'macos-11'
     variables:
-      platform: 'android'
+      - name: platform
+        value: 'android'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -69,7 +67,9 @@ jobs:
     pool:
       vmImage: $(VmImageApple)
     variables:
-      platform: 'macos'
+      - name: platform
+        value: 'macos'
+      - template: variables/apple-vars.yml
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -91,7 +91,7 @@ jobs:
         displayName: 'pod install $(platform)'
 
       - bash: |
-          sudo xcode-select --switch '$(xcode_path)'
+          sudo xcode-select --switch '$[variables.xcode_path]'
         displayName: Switch Xcode version $(xcode_version)
         failOnStderr: true
 
@@ -112,7 +112,9 @@ jobs:
     pool:
       vmImage: $(VmImageApple)
     variables:
-      platform: 'ios'
+      - name: platform
+        value: 'ios'
+      - template: variables/apple-vars.yml
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
