@@ -1,18 +1,25 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 
+import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { UseSlots } from '@fluentui-react-native/framework';
 
 import type { MenuGroupProps, MenuGroupType } from './MenuGroup.types';
 import { menuGroupName } from './MenuGroup.types';
 
+// macOS has focus zone around entire list, including it for groups may
+// cause bad keyboard behavior. Will review in the future.
+const hasFocusZone = ['win32'].includes(Platform.OS as string);
+const useCircularNav = Platform.OS !== 'macos';
+
 export const MenuGroup = compose<MenuGroupType>({
   displayName: menuGroupName,
   slots: {
     root: View,
+    focusZone: hasFocusZone ? FocusZone : React.Fragment,
   },
   useRender: (userProps: MenuGroupProps, useSlots: UseSlots<MenuGroupType>) => {
     const Slots = useSlots(userProps);
@@ -39,7 +46,21 @@ export const MenuGroup = compose<MenuGroupType>({
         }
         return child;
       });
-      return <Slots.root {...mergedProps}>{childrenWithSet}</Slots.root>;
+
+      return (
+        <Slots.root {...mergedProps}>
+          <Slots.focusZone
+            // avoid error that fires when props are passed into React.fragment
+            {...(hasFocusZone && {
+              focusZoneDirection: 'vertical',
+              enableFocusRing: false,
+              isCircularNavigation: useCircularNav,
+            })}
+          >
+            {childrenWithSet}
+          </Slots.focusZone>
+        </Slots.root>
+      );
     };
   },
 });
