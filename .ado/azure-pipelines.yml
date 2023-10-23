@@ -91,7 +91,7 @@ jobs:
         displayName: 'pod install $(platform)'
 
       - bash: |
-          sudo xcode-select --switch '$(xcode_path)'
+          sudo xcode-select --switch $(xcode_path)
         displayName: Switch Xcode version $(xcode_version)
         failOnStderr: true
 
@@ -136,7 +136,7 @@ jobs:
         displayName: 'pod install $(platform)'
 
       - bash: |
-          sudo xcode-select --switch '$(xcode_path)'
+          sudo xcode-select --switch $(xcode_path)
         displayName: Switch Xcode version $(xcode_version)
         failOnStderr: true
 

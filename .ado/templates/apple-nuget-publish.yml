@@ -20,7 +20,7 @@ steps:
     displayName: 'Install CocoaPods Environment'
 
   - bash: |
-      sudo xcode-select --switch '$(xcode_path)'
+      sudo xcode-select --switch $(xcode_path)
     displayName: Switch Xcode version $(xcode_version)
     failOnStderr: true
 
