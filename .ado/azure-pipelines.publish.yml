@@ -24,11 +24,7 @@ parameters:
     default: false
 
 variables:
-  - group: 'FluentUI React Native Secrets'
-  - group: InfoSec-SecurityResults
-  - name: tags
-    value: production,externalfacing
-  - template: variables/vars.yml
+  - template: variables/vars.publish.yml
 
 jobs:
   - job: NPMPublish

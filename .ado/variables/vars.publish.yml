@@ -1,4 +1,8 @@
 variables:
+  - group: 'FluentUI React Native Secrets'
+  - group: InfoSec-SecurityResults
+  - name: tags
+    value: production,externalfacing
   - name: VmImageApple
   - value: internal-macos12
   - name: xcode_version
