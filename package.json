@@ -61,13 +61,8 @@
     "scripts"
   ],
   "resolutions": {
-    "@appium/support": "3.1.5",
     "es5-ext": "0.10.53",
-    "jpeg-js": "^0.4.4",
-    "moment": "^2.29.4",
-    "shell-quote": "^1.7.3",
     "@types/react": "^18.2.0",
-    "@appium/types": "0.9.1",
     "micromatch": "^4.0.0",
     "react-native-svg": "^13.7.0",
     "semver": "^7.5.2",

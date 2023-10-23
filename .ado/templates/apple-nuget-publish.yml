@@ -4,6 +4,9 @@ parameters:
     type: boolean
     default: false
 
+variables:
+  - template: variables/vars.yml
+
 steps:
   - checkout: self
     persistCredentials: true
@@ -21,6 +24,9 @@ steps:
 
   # Select proper Xcode version
   - template: apple-xcode-select.yml
+      parameters:
+        xcode_version: $(xcode_version)
+        xcode_path: $(xcode_path)
 
   # Pod Install iOS
   - bash: |

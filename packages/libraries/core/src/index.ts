@@ -127,6 +127,7 @@ export type {
   FocusZoneRenderData,
   FocusZoneSlotProps,
   FocusZoneState,
+  FocusZoneTabNavigation,
   FocusZoneTokens,
   FocusZoneType,
   NativeProps,

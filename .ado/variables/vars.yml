@@ -1,0 +1,6 @@
+variables:
+  VmImageApple: internal-macos12
+  xcode_version: 'Xcode 14.2'
+  xcode_path: '/Applications/Xcode_14.2.app'
+  ios_version: '16.2.0'
+  ios_simulator: 'iPhone 14'

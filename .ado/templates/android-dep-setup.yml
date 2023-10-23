@@ -5,6 +5,7 @@ steps:
       targetType: 'inline'
       script: |
         #!/usr/bin/env bash
+        set -ex
 
         # Install AVD files
         echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;default;x86_64'
@@ -20,7 +21,7 @@ steps:
         emulator_config=~/.android/avd/android_emulator.avd/config.ini
           # The following is to support empty OR populated config.ini files,
           # the state of which is dependant on the version of the emulator used (which we don't control),
-          # Replace existing config (NOTE we're on MacOS so sed works differently!)
+          # Replace existing config (NOTE we're on macOS so sed works differently!)
         sed -i .bak 's/hw.lcd.density=.*/hw.lcd.density=420/' "$emulator_config"
         sed -i .bak 's/hw.lcd.height=.*/hw.lcd.height=1920/' "$emulator_config"
         sed -i .bak 's/hw.lcd.width=.*/hw.lcd.width=1080/' "$emulator_config"

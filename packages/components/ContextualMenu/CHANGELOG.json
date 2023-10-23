@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Tue, 17 Oct 2023 19:21:23 GMT",
+      "version": "0.22.19",
+      "tag": "@fluentui-react-native/contextual-menu_v0.22.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Sep 2023 12:49:34 GMT",
       "version": "0.22.18",
       "tag": "@fluentui-react-native/contextual-menu_v0.22.18",
