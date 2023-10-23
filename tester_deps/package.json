@@ -41,5 +41,6 @@
     "express": "Patching security issue",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/parse-glob/glob-base/glob-parent": "There is a security risk associated with this package version (it's a very outdated packaged, 2.0.0). Therefore, we are forcing an upgrade to the patched version.",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/braces": " There is a security risk associated with this package version (it's a very outdated packaged, 1.8.2). Therefore, we are forcing an upgrade to the patched version."
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }
