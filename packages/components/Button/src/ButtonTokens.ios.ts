@@ -12,6 +12,8 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     medium: {
       padding: globalTokens.size80,
       borderWidth: globalTokens.stroke.width10,
+      borderRadius: globalTokens.corner.radius80,
+      minHeight: 40,
       iconSize: 16,
       focused: {
         borderWidth: 0,
@@ -34,6 +36,8 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     small: {
       padding: globalTokens.size80 - globalTokens.stroke.width10,
       borderWidth: globalTokens.stroke.width10,
+      borderRadius: globalTokens.corner.radius80,
+      minHeight: 28,
       iconSize: 16,
       focused: {
         borderWidth: 0,
@@ -58,6 +62,8 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       padding: globalTokens.size120 - globalTokens.stroke.width10,
       borderWidth: globalTokens.stroke.width10,
       iconSize: 20,
+      borderRadius: globalTokens.corner.radius120,
+      minHeight: 52,
       focused: {
         borderWidth: 0,
         padding: globalTokens.size120,
@@ -75,9 +81,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
           paddingHorizontal: globalTokens.size160,
         },
       },
-    },
-    rounded: {
-      borderRadius: globalTokens.corner.radius40,
     },
     circular: {
       borderRadius: globalTokens.corner.radiusCircular,
