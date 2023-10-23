@@ -69,7 +69,7 @@ jobs:
     variables:
       - name: platform
         value: 'macos'
-      - template: variables/apple-vars.yml
+      - template: variables/vars.yml
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -114,7 +114,7 @@ jobs:
     variables:
       - name: platform
         value: 'ios'
-      - template: variables/apple-vars.yml
+      - template: variables/vars.yml
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
