@@ -19,7 +19,10 @@ steps:
       sudo gem install cocoapods
     displayName: 'Install CocoaPods Environment'
 
-  - template: apple-xcode-select.yml
+  - bash: |
+      sudo xcode-select --switch '$(xcode_path)'
+    displayName: Switch Xcode version $(xcode_version)
+    failOnStderr: true
 
   - bash: |
       echo "pod install --project-directory=ios"
