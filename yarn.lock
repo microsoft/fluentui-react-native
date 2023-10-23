@@ -5954,9 +5954,9 @@ __metadata:
   linkType: hard
 
 "@types/es6-collections@npm:^0.5.29":
-  version: 0.5.34
-  resolution: "@types/es6-collections@npm:0.5.34"
-  checksum: 95bd82498f8df8ac2544b63f1c9d8562420235f2da0afde6e5991b15342e962a0c561431c24917c2f17deda7368df03c00f59bc832e460f1b70b9e3d73fd087a
+  version: 0.5.35
+  resolution: "@types/es6-collections@npm:0.5.35"
+  checksum: d93756717fc31356b37ab7883cd0a78f5ec313094c58240aa45fbb2822b17944bf54833faac775589a7f9580a45cf2ea290526c8bb67bda2ad7c0e440eecd62e
   languageName: node
   linkType: hard
 
