@@ -10,10 +10,8 @@ import type { UseSlots } from '@fluentui-react-native/framework';
 import type { MenuGroupProps, MenuGroupType } from './MenuGroup.types';
 import { menuGroupName } from './MenuGroup.types';
 
-// macOS has focus zone around entire list, including it for groups may
-// cause bad keyboard behavior. Will review in the future.
+// Intentionally not enabled on macOS to match system context menus
 const hasFocusZone = ['win32'].includes(Platform.OS as string);
-const useCircularNav = Platform.OS !== 'macos';
 
 export const MenuGroup = compose<MenuGroupType>({
   displayName: menuGroupName,
@@ -54,7 +52,7 @@ export const MenuGroup = compose<MenuGroupType>({
             {...(hasFocusZone && {
               focusZoneDirection: 'vertical',
               enableFocusRing: false,
-              isCircularNavigation: useCircularNav,
+              isCircularNavigation: true,
             })}
           >
             {childrenWithSet}
