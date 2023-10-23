@@ -28,6 +28,7 @@ variables:
   - group: InfoSec-SecurityResults
   - name: tags
     value: production,externalfacing
+  - template: variables/vars.yml
 
 jobs:
   - job: NPMPublish
@@ -92,7 +93,6 @@ jobs:
     variables:
       - name: BUILDSECMON_OPT_IN
         value: true
-      - template: variables/vars.yml
     timeoutInMinutes: 90 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
