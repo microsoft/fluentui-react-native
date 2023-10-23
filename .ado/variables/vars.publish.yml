@@ -4,10 +4,10 @@ variables:
   - name: tags
     value: production,externalfacing
   - name: VmImageApple
-  - value: internal-macos12
+    value: internal-macos12
   - name: xcode_version
-  - value: 'Xcode 14.2'
+    value: 'Xcode 14.2'
   - name: ios_version
-  - value: '16.2.0'
+    value: '16.2.0'
   - name: ios_simulator
-  - value: 'iPhone 14'
+    value: 'iPhone 14'
