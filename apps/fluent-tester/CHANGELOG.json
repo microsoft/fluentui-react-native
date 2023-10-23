@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 23 Oct 2023 23:10:25 GMT",
+      "version": "0.157.1",
+      "tag": "@fluentui-react-native/tester_v0.157.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "a55dd40020ae73f1c0d0bf6f11eb3b4ab278eb61",
+            "comment": "[CI] Refactor Apple CI"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 17 Oct 2023 19:21:23 GMT",
       "version": "0.157.0",
       "tag": "@fluentui-react-native/tester_v0.157.0",

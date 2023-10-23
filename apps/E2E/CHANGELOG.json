@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Mon, 23 Oct 2023 23:10:25 GMT",
+      "version": "1.32.3",
+      "tag": "@fluentui-react-native/e2e-testing_v1.32.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "a55dd40020ae73f1c0d0bf6f11eb3b4ab278eb61",
+            "comment": "[CI] Refactor Apple CI"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 17 Oct 2023 19:21:23 GMT",
       "version": "1.32.2",
       "tag": "@fluentui-react-native/e2e-testing_v1.32.2",
