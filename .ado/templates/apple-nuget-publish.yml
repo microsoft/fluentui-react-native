@@ -19,20 +19,14 @@ steps:
       sudo gem install cocoapods
     displayName: 'Install CocoaPods Environment'
 
-  # Select proper Xcode version
   - template: apple-xcode-select.yml
-      parameters:
-        xcode_version: $(xcode_version)
-        xcode_path: $(xcode_path)
 
-  # Pod Install iOS
   - bash: |
       echo "pod install --project-directory=ios"
       pod install --project-directory=ios
     workingDirectory: apps/fluent-tester
     displayName: 'pod install iOS'
 
-  # Pod Install macOS
   - bash: |
       echo "pod install --project-directory=macos"
       pod install --project-directory=macos
