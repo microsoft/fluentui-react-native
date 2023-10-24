@@ -34,7 +34,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     },
     large: {
       paddingHorizontal: globalTokens.size200,
-      paddingVertical: globalTokens.size120,
       borderRadius: globalTokens.corner.radius80,
       iconSize: 20,
       outline: {
@@ -44,11 +43,10 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       spacingIconContentBefore: globalTokens.size80,
       spacingIconContentAfter: globalTokens.size80,
       minHeight: 48,
-      minWidth: 48,
+      minWidth: 36,
     },
     medium: {
       paddingHorizontal: globalTokens.size120,
-      paddingVertical: globalTokens.size80,
       borderRadius: globalTokens.corner.radius40,
       iconSize: 20,
       outline: {
@@ -62,7 +60,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     },
     small: {
       paddingHorizontal: globalTokens.size80,
-      paddingVertical: globalTokens.size40,
       borderRadius: globalTokens.corner.radius40,
       iconSize: 16,
       outline: {
@@ -73,6 +70,9 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       spacingIconContentAfter: globalTokens.size40,
       minHeight: 28,
       minWidth: 28,
+    },
+    rounded: {
+      borderRadius: globalTokens.corner.radius40,
     },
     circular: {
       borderRadius: globalTokens.corner.radiusCircular,
