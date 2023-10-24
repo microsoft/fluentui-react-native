@@ -52,12 +52,11 @@ export function useTabAnimation(
       if (
         e.nativeEvent.layout &&
         // Following checks are for win32 only, will be removed after addressing scrollview layout bug
-        (Platform.OS === ('win32' as any)
-          ? layout?.tablist &&
+        (Platform.OS !== ('win32' as any) ||
+          (layout?.tablist &&
             layout?.tablist.width > 0 &&
             e.nativeEvent.layout.height <= layout.tablist.height &&
-            e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT
-          : true)
+            e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT))
       ) {
         let width: number, height: number;
         // Total Indicator inset consists of the horizontal/vertical margin of the indicator, the space taken up by the tab's focus border, and the
