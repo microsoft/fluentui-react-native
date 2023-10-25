@@ -385,7 +385,7 @@ export interface ControlColorTokens {
   ghostDisabledBorder: ColorValue;
   ghostDisabledContent: ColorValue;
   ghostDisabledIcon: ColorValue;
-
+  /* Deprecated */
   brandedBackground: ColorValue;
   brandedBorder: ColorValue;
   brandedContent: ColorValue;
