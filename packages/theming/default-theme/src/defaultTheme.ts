@@ -46,6 +46,7 @@ function _defaultTypography(): Typography {
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' },
       // mocked out
       caption1: { face: 'primary', size: 'caption', weight: 'regular' },
+      caption1Strong: { face: 'primary', size: 'caption', weight: 'semiBold' },
       body1: { face: 'primary', size: 'secondary', weight: 'regular' },
       body1Strong: { face: 'primary', size: 'secondary', weight: 'semiBold' },
       body2: { face: 'primary', size: 'body', weight: 'regular' },
