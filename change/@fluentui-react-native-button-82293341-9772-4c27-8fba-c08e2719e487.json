@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixing up button values for figma (Padding and sizes)",
-  "packageName": "@fluentui-react-native/button",
-  "email": "56889386+gremlin529@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

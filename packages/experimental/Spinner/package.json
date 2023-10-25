@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/spinner",
-  "version": "0.7.11",
+  "version": "0.7.12",
   "description": "A cross-platform Fluent spinner component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/component-cache": "^1.5.1",
-    "@fluentui-react-native/framework": "0.11.6",
-    "@fluentui-react-native/text": ">=0.21.10 <1.0.0",
+    "@fluentui-react-native/framework": "0.11.7",
+    "@fluentui-react-native/text": ">=0.21.11 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.25.1",
     "@fluentui-react-native/use-styling": "^0.11.1"
   },
