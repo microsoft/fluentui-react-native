@@ -5,7 +5,7 @@ import type { ImageStyle, TextStyle } from 'react-native';
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
-import type { SvgProps, UriProps } from 'react-native-svg';
+import type { SvgProps } from 'react-native-svg';
 import { SvgUri } from 'react-native-svg';
 
 import type { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
@@ -71,7 +71,7 @@ function renderSvg(iconProps: IconProps) {
   const { accessible, accessibilityLabel, width, height, color } = iconProps;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
 
-  let svgProps: SvgProps | UriProps = { width, height, color };
+  const svgProps: SvgProps = { width, height, color };
   if (svgIconProps.viewBox) {
     svgProps.viewBox = svgIconProps.viewBox;
   }
@@ -83,10 +83,9 @@ function renderSvg(iconProps: IconProps) {
       </View>
     );
   } else if (svgIconProps.uri) {
-    svgProps = { ...svgProps, uri: svgIconProps.uri };
     return (
       <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
-        <SvgUri {...svgProps} />
+        <SvgUri uri={svgIconProps.uri} {...svgProps} />
       </View>
     );
   } else {
