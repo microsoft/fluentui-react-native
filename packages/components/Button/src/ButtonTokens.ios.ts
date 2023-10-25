@@ -26,9 +26,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         hasIconBefore: {
           spacingIconContentBefore: globalTokens.size80,
         },
-        focused: {
-          paddingHorizontal: globalTokens.size120,
-        },
       },
     },
     small: {
@@ -49,9 +46,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         hasIconBefore: {
           spacingIconContentBefore: globalTokens.size40,
         },
-        focused: {
-          paddingHorizontal: globalTokens.size60,
-        },
       },
     },
     large: {
@@ -70,9 +64,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         },
         hasIconBefore: {
           spacingIconContentBefore: globalTokens.size80,
-        },
-        focused: {
-          paddingHorizontal: globalTokens.size160,
         },
       },
     },
