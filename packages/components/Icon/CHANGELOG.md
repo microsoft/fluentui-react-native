@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Mon, 25 Sep 2023 12:49:34 GMT and should not be manually modified.
+This log was last generated on Wed, 25 Oct 2023 17:21:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.12
+
+Wed, 25 Oct 2023 17:21:07 GMT
+
+### Patches
+
+- Fix viewBox prop being explicitly set as undefined on legacy icon (winlarry@microsoft.com)
 
 ## 0.19.11
 

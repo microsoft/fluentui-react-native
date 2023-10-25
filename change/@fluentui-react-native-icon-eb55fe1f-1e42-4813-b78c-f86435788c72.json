@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix viewBox prop being explicitly set as undefined on legacy icon",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
