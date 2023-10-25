@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add TabList page to mac tester",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

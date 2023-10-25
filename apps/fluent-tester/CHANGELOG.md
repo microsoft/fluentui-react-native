@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 23 Oct 2023 23:10:25 GMT and should not be manually modified.
+This log was last generated on Wed, 25 Oct 2023 00:10:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.157.2
+
+Wed, 25 Oct 2023 00:10:15 GMT
+
+### Patches
+
+- Implement animations on mac (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tablist to v0.4.2
 
 ## 0.157.1
 
