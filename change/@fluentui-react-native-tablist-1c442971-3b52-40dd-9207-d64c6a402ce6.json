@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Correct indicatorColor token used for selected+pressed tab",
+  "comment": "Fix small tab styling bugs regarding indicator color and tab sizing",
   "packageName": "@fluentui-react-native/tablist",
   "email": "winlarry@microsoft.com",
   "dependentChangeType": "patch"

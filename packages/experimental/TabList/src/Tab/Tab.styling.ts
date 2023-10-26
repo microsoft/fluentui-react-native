@@ -27,10 +27,11 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         justifyContent: 'center',
         padding: 1,
         backgroundColor: tokens.backgroundColor,
+        ...(!context.vertical ? { height: '100%' } : {}),
         ...borderStyles.from(tokens, theme),
       },
     }),
-    [tokens, theme],
+    [tokens, theme, context.vertical],
   );
 
   const contentContainer = React.useMemo<IViewProps>(
