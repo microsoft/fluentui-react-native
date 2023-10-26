@@ -377,9 +377,11 @@ const MenuWithGroups: React.FunctionComponent = () => {
             <MenuGroup>
               <MenuGroupHeader>Section 1</MenuGroupHeader>
               <MenuItem>A plain MenuItem</MenuItem>
+              <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
             <MenuGroup>
               <MenuGroupHeader>Section 2</MenuGroupHeader>
+              <MenuItem>A plain MenuItem</MenuItem>
               <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
           </MenuList>
