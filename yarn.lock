@@ -7718,8 +7718,8 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.32.2
-  resolution: "appium-uiautomator2-driver@npm:2.32.2"
+  version: 2.32.3
+  resolution: "appium-uiautomator2-driver@npm:2.32.3"
   dependencies:
     appium-adb: ^10.0.0
     appium-android-driver: ^7.1.3
@@ -7736,7 +7736,7 @@ __metadata:
     type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: 17ceee2896693668e107b9b5f7952adaae8c49a7ec71c08c01b3511a40b4c0d6d4fc6c2645cae85892909ae0b910f9bf2de3340edd55bf85b18827e9feb6dcc2
+  checksum: 1957829f9d45bb364f675c159f9b773fbf9d5fe49bfdee7659ab4f6331b7e6a2a5347870f7a72c670fff2630764a8cf1f7c6086bf20c28a9e4bc8e99dafc311b
   languageName: node
   linkType: hard
 
