@@ -94,6 +94,11 @@ export const defaultTabTokens: TokensFromTheme<TabTokens, Theme> = (t: Theme) =>
       color: t.colors.neutralForeground1,
       iconColor: t.colors.compoundBrandForeground1,
       indicatorColor: t.colors.compoundBrandStroke1,
+      pressed: {
+        color: t.colors.neutralForeground1Pressed,
+        iconColor: t.colors.compoundBrandForeground1Pressed,
+        indicatorColor: t.colors.compoundBrandStroke1Pressed,
+      },
     },
     disabled: {
       color: t.colors.neutralForegroundDisabled,
@@ -126,11 +131,6 @@ export const defaultTabTokens: TokensFromTheme<TabTokens, Theme> = (t: Theme) =>
       color: t.colors.neutralForeground2Pressed,
       iconColor: t.colors.neutralForeground2Pressed,
       indicatorColor: t.colors.neutralStroke1Pressed,
-      selected: {
-        color: t.colors.neutralForeground1Pressed,
-        iconColor: t.colors.compoundBrandForeground1Pressed,
-        indicatorColor: t.colors.compoundBrandStroke1Pressed,
-      },
       transparent: {
         backgroundColor: t.colors.transparentBackgroundPressed,
       },
