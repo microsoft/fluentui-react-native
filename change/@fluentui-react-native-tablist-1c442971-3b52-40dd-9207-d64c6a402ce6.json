@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Correct indicatorColor token used for selected+pressed tab",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
