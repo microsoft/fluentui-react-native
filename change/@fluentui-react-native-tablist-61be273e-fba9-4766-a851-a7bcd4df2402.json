@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Make FURN complaint by migrating to 1ESPT pipelines",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "dannyvv@microsoft.com",
+  "dependentChangeType": "patch"
+}
