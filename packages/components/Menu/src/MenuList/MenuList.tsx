@@ -97,7 +97,7 @@ export const MenuList = compose<MenuListType>({
                 defaultTabbableElement: Platform.OS === 'macos' && menuList.focusZoneRef,
                 enableFocusRing: false,
                 isCircularNavigation: Platform.OS !== 'macos',
-                tabKeyNavigation: Platform.OS !== 'macos' ? 'NavigateWrap' : 'None',
+                tabKeyNavigation: Platform.OS !== 'macos' ? 'Normal' : 'None',
               })}
             >
               {childrenWithSet}
