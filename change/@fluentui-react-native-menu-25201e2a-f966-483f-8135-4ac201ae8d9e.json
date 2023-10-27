@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix keyboarding behavior",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
