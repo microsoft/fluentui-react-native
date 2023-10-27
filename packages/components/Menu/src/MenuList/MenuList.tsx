@@ -35,6 +35,9 @@ const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap
 MenuStack.displayName = 'MenuStack';
 
 const shouldHaveFocusZone = ['macos', 'win32'].includes(Platform.OS as string);
+const focusLandsOnContainer = Platform.OS === 'macos';
+const hasCircularNavigation = Platform.OS === ('win32' as any);
+const hasTabNavigation = Platform.OS === ('win32' as any);
 
 export const menuListLookup = (layer: string, state: MenuListState, userProps: MenuListProps): boolean => {
   return state[layer] || userProps[layer] || layer === 'hasMaxHeight';
@@ -92,12 +95,12 @@ export const MenuList = compose<MenuListType>({
             <Slots.focusZone
               // avoid error that fires when props are passed into React.fragment
               {...(shouldHaveFocusZone && {
-                componentRef: Platform.OS === 'macos' && menuList.focusZoneRef,
+                componentRef: focusLandsOnContainer && menuList.focusZoneRef,
                 focusZoneDirection: 'vertical',
-                defaultTabbableElement: Platform.OS === 'macos' && menuList.focusZoneRef,
+                defaultTabbableElement: focusLandsOnContainer && menuList.focusZoneRef,
                 enableFocusRing: false,
-                isCircularNavigation: Platform.OS !== 'macos',
-                tabKeyNavigation: Platform.OS !== 'macos' ? 'Normal' : 'None',
+                isCircularNavigation: hasCircularNavigation,
+                tabKeyNavigation: hasTabNavigation ? 'Normal' : 'None',
               })}
             >
               {childrenWithSet}
