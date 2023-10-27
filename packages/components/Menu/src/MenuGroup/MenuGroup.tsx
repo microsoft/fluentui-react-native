@@ -52,7 +52,7 @@ export const MenuGroup = compose<MenuGroupType>({
             {...(hasFocusZone && {
               focusZoneDirection: 'vertical',
               enableFocusRing: false,
-              isCircularNavigation: true,
+              navigateAtEnd: 'NavigateContinue',
             })}
           >
             {childrenWithSet}

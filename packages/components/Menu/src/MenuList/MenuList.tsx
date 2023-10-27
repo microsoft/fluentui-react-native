@@ -92,11 +92,12 @@ export const MenuList = compose<MenuListType>({
             <Slots.focusZone
               // avoid error that fires when props are passed into React.fragment
               {...(shouldHaveFocusZone && {
-                componentRef: menuList.focusZoneRef,
+                componentRef: Platform.OS === 'macos' && menuList.focusZoneRef,
                 focusZoneDirection: 'vertical',
-                defaultTabbableElement: menuList.focusZoneRef,
+                defaultTabbableElement: Platform.OS === 'macos' && menuList.focusZoneRef,
                 enableFocusRing: false,
                 isCircularNavigation: Platform.OS !== 'macos',
+                tabKeyNavigation: Platform.OS !== 'macos' ? 'NavigateWrap' : 'None',
               })}
             >
               {childrenWithSet}
