@@ -15,7 +15,8 @@ import type { TextProps } from '@fluentui-react-native/text';
 import { Text } from '@fluentui-react-native/text';
 
 import { useTabSlotProps } from './Tab.styling';
-import { tabName, type TabProps, type TabState, type TabTokens } from './Tab.types';
+import { tabName } from './Tab.types';
+import type { TabProps, TabState, TabTokens } from './Tab.types';
 import { tabStates, useTabTokens } from './TabTokens';
 import { useTab } from './useTab';
 import { useTabAnimation } from './useTabAnimation';

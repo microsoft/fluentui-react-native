@@ -1,4 +1,5 @@
-import { buildUseTokens, type Theme } from '@fluentui-react-native/framework';
+import { buildUseTokens } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/framework';
 import type { TokensFromTheme } from '@fluentui-react-native/use-styling';
 
 import type { TabTokens } from '..';
