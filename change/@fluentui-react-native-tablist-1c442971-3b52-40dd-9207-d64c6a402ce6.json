@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix small tab styling bugs regarding indicator color and tab sizing",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
