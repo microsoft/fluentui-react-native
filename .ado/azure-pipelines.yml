@@ -30,7 +30,7 @@ jobs:
 
       - script: |
           yarn buildci
-        displayName: 'yarn buildci'
+        displayName: 'yarn buildci [test]'
 
       - script: |
           yarn check-for-changed-files

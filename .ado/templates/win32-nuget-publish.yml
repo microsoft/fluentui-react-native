@@ -26,7 +26,7 @@ jobs:
 
       - script: |
           yarn buildci
-        displayName: 'Building the repo'
+        displayName: 'Building the repo [test]'
 
       - script: |
           yarn bundle
