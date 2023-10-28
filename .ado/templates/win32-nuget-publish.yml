@@ -25,8 +25,8 @@ jobs:
       - template: setup-repo-min-build.yml
 
       - script: |
-          yarn buildci [test]
-        displayName: 'Building the repo'
+          yarn buildci
+        displayName: 'Building the repo [test]'
 
       - script: |
           yarn bundle

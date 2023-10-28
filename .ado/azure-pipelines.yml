@@ -29,8 +29,8 @@ jobs:
         displayName: 'check prettier'
 
       - script: |
-          yarn buildci [test]
-        displayName: 'yarn buildci'
+          yarn buildci
+        displayName: 'yarn buildci [test]'
 
       - script: |
           yarn check-for-changed-files
