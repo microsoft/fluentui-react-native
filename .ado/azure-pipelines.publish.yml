@@ -81,7 +81,7 @@ extends:
                 displayName: 'yarn install'
 
               - script: |
-                  yarn buildci
+                  yarn buildci [test]
                 displayName: 'yarn buildci'
 
               - script: |
