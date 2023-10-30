@@ -48,9 +48,8 @@ exports[`ToggleButton default 1`] = `
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
+      "borderColor": "#0f6cbd",
       "borderRadius": 8,
-
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
