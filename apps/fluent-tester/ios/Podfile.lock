@@ -15,7 +15,7 @@ PODS:
   - FRNAvatar (0.19.7):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNDatePicker (0.8.0):
+  - FRNDatePicker (0.9.1):
     - MicrosoftFluentUI (= 0.13.1)
     - React
   - FRNFontMetrics (0.4.1):
@@ -493,13 +493,13 @@ PODS:
     - React-Core
     - React-cxxreact
     - ReactCommon/turbomodule/core
-  - ReactTestApp-DevSupport (2.5.16):
+  - ReactTestApp-DevSupport (2.5.26):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNCPicker (2.5.0):
+  - RNCPicker (2.5.1):
     - React-Core
-  - RNSVG (13.13.0):
+  - RNSVG (13.14.0):
     - React-Core
   - Yoga (1.14.0)
 
@@ -653,7 +653,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   FRNAppearanceAdditions: ae112fef1bf92d0282c66b53eac14c1de22c97d2
   FRNAvatar: 1db3235b5e4320685b7bc5e69f507632189b0f82
-  FRNDatePicker: 78b02a5ba9d7559d553b358271b1ec18ebecb1ec
+  FRNDatePicker: 9101a588417cf7351a619480f9eb7da8bfc10559
   FRNFontMetrics: 41579c8c7cef1f816a894b6d3968461ef599f5c1
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
@@ -687,12 +687,12 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 35cec6420c9d4144b0d06f9fdb093cf8f02bd52c
   ReactCommon: 56296d2632e8eb53e94a2b7c0d05db694e164ca7
   ReactNativeHost: 5caf8c9381f26c453fabbe8c3b87f6a013a3c459
-  ReactTestApp-DevSupport: 444613e05eef80e5d2ecb5302e44b9a7abc597fa
+  ReactTestApp-DevSupport: 092f0caf9902efaaba73b4a20f153e64bcee6daf
   ReactTestApp-Resources: 3a5202e2bbbd3fb589d54d15f296a52a5659855f
-  RNCPicker: 32ca102146bc7d34a8b93a998d9938d9f9ec7898
-  RNSVG: ed492aaf3af9ca01bc945f7a149d76d62e73ec82
+  RNCPicker: 529d564911e93598cc399b56cc0769ce3675f8c8
+  RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
   Yoga: 135109c9b8c5d1a8af3a58d21cd4c7aa7f3bf555
 
 PODFILE CHECKSUM: b9fd154312c68d8d92a9ba6e8a2cac9fcf88b104
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0

@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 25 Oct 2023 20:50:34 GMT",
+      "version": "0.19.5",
+      "tag": "@fluentui-react-native/radio-group_v0.19.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.9",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/pressable to v0.10.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/text to v0.21.11",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Oct 2023 19:21:23 GMT",
+      "version": "0.19.4",
+      "tag": "@fluentui-react-native/radio-group_v0.19.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Sep 2023 12:49:34 GMT",
       "version": "0.19.3",
       "tag": "@fluentui-react-native/radio-group_v0.19.3",

@@ -4,98 +4,97 @@ parameters:
     type: boolean
     default: false
 
-steps:
-  - checkout: self
-    persistCredentials: true
+jobs:
+  - job: NuGetPublish
+    displayName: Apple NuGet Publish
+    pool:
+      name: Azure Pipelines
+      vmImage: internal-macos12
+      os: macOS
+    variables:
+      - name: BUILDSECMON_OPT_IN
+        value: true
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+    ${{ if not(parameters.skipNugetPublish) }}:
+      templateContext:
+        outputs:
+          - output: nuget
+            packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
+            packageParentPath: '$(Build.ArtifactStagingDirectory)'
+            publishVstsFeed: Office # Required when pushing to internal feed.
+            nuGetFeedType: internal # Change to external when publishing to external feed
+            publishPackageMetadata: true # Optional
+    steps:
+      - checkout: self
+        persistCredentials: true
 
-  - template: setup-repo-min-build.yml
+      - template: setup-repo-min-build.yml
 
-  # Clean Derived Data
-  - script: |
-      rm -rf $(Build.Repository.LocalPath)/DerivedData
-    displayName: 'Clean DerivedData'
+      # Clean Derived Data
+      - script: |
+          rm -rf $(Build.Repository.LocalPath)/DerivedData
+        displayName: 'Clean DerivedData'
 
-  - script: |
-      sudo gem install cocoapods
-    displayName: 'Install CocoaPods Environment'
+      - script: |
+          sudo gem install cocoapods
+        displayName: 'Install CocoaPods Environment'
 
-  # Select proper Xcode version
-  - template: apple-xcode-select.yml
+      - bash: |
+          sudo xcode-select --switch $(xcode_path)
+        displayName: Switch Xcode version $(xcode_version)
+        failOnStderr: true
 
-  # Pod Install iOS
-  - bash: |
-      echo "pod install --project-directory=ios"
-      pod install --project-directory=ios
-    workingDirectory: apps/fluent-tester
-    displayName: 'pod install iOS'
+      - bash: |
+          echo "pod install --project-directory=ios"
+          pod install --project-directory=ios
+        workingDirectory: apps/fluent-tester
+        displayName: 'pod install iOS'
 
-  # Pod Install macOS
-  - bash: |
-      echo "pod install --project-directory=macos"
-      pod install --project-directory=macos
-    workingDirectory: apps/fluent-tester
-    displayName: 'pod install macOS'
+      - bash: |
+          echo "pod install --project-directory=macos"
+          pod install --project-directory=macos
+        workingDirectory: apps/fluent-tester
+        displayName: 'pod install macOS'
 
-  # macOS Release
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/fluent-tester/macos/FluentTester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'FluentTester'
-      xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+      # macOS Release
+      - template: apple-xcode-build.yml
+        parameters:
+          xcode_sdk: 'macosx'
+          xcode_workspacePath: 'apps/fluent-tester/macos/FluentTester.xcworkspace'
+          xcode_actions: 'build'
+          xcode_scheme: 'FluentTester'
+          xcode_configuration: 'Release'
+          xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
 
-  # iPhone Simulator Release
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'iphonesimulator'
-      xcode_workspacePath: 'apps/fluent-tester/ios/FluentTester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'FluentTester'
-      xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_simulator.xcconfig'
+      # iPhone Simulator Release
+      - template: apple-xcode-build.yml
+        parameters:
+          xcode_sdk: 'iphonesimulator'
+          xcode_workspacePath: 'apps/fluent-tester/ios/FluentTester.xcworkspace'
+          xcode_actions: 'build'
+          xcode_scheme: 'FluentTester'
+          xcode_configuration: 'Release'
+          xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_simulator.xcconfig'
 
-  # iPhone Device Release
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'iphoneos'
-      xcode_workspacePath: 'apps/fluent-tester/ios/FluentTester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'FluentTester'
-      xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'
+      # iPhone Device Release
+      - template: apple-xcode-build.yml
+        parameters:
+          xcode_sdk: 'iphoneos'
+          xcode_workspacePath: 'apps/fluent-tester/ios/FluentTester.xcworkspace'
+          xcode_actions: 'build'
+          xcode_scheme: 'FluentTester'
+          xcode_configuration: 'Release'
+          xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'
 
-  # generate the sanitizedBuildNumber environment variable
-  - bash: '.ado/scripts/generate_build_number.sh'
-    displayName: 'Generate Build Number'
+      # generate the sanitizedBuildNumber environment variable
+      - bash: '.ado/scripts/generate_build_number.sh'
+        displayName: 'Generate Build Number'
 
-  - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
-    displayName: 📒 Generate Manifest Apple
-    inputs:
-      BuildDropPath: $(System.DefaultWorkingDirectory)
-
-  - task: PublishPipelineArtifact@1
-    displayName: 📒 Publish Manifest Apple
-    inputs:
-      artifactName: SBom-Apple-$(System.JobAttempt)
-      targetPath: $(System.DefaultWorkingDirectory)/_manifest
-
-  # pack the nuspec
-  - task: NuGetCommand@2
-    displayName: 'NuGet pack'
-    inputs:
-      command: pack
-      packagesToPack: 'package.nuspec'
-      buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
-
-  - task: ComponentGovernanceComponentDetection@0
-
-  # push the package package
-  - task: NuGetCommand@2
-    displayName: 'NuGet push'
-    condition: not(${{ parameters.skipNugetPublish }})
-    inputs:
-      command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
-      publishVstsFeed: Office
+      # pack the nuspec
+      - task: NuGetCommand@2
+        displayName: 'NuGet pack'
+        inputs:
+          command: pack
+          packagesToPack: 'package.nuspec'
+          buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
