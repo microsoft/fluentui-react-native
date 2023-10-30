@@ -7747,9 +7747,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-webdriveragent@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "appium-webdriveragent@npm:5.11.0"
+"appium-webdriveragent@npm:^5.12.2":
+  version: 5.12.2
+  resolution: "appium-webdriveragent@npm:5.12.2"
   dependencies:
     "@appium/base-driver": ^9.0.0
     "@appium/strongbox": ^0.x
@@ -7764,7 +7764,7 @@ __metadata:
     node-simctl: ^7.0.1
     source-map-support: ^0.x
     teen_process: ^2.0.0
-  checksum: 759d2497559b949bc3bcd70639089227ebfe786dd9c55ca78b5f188ec250ec236bc9fb87d4c8517154eb582e7b546d7620fc98f8fe3c1893947d591993d11696
+  checksum: 425dfcfcd5557903c03ae68ce97e2ff7c0677296a12d19892824d5808344929e43da6c85cfd9ae361a783e716b80f113eeeab6b2f3159b834f7bbb9d9baacf80
   languageName: node
   linkType: hard
 
@@ -7808,14 +7808,14 @@ __metadata:
   linkType: hard
 
 "appium-xcuitest-driver@npm:^5.6.0":
-  version: 5.7.0
-  resolution: "appium-xcuitest-driver@npm:5.7.0"
+  version: 5.8.0
+  resolution: "appium-xcuitest-driver@npm:5.8.0"
   dependencies:
     appium-idb: ^1.6.13
     appium-ios-device: ^2.5.4
     appium-ios-simulator: ^5.3.3
     appium-remote-debugger: ^10.0.0
-    appium-webdriveragent: ^5.11.0
+    appium-webdriveragent: ^5.12.2
     appium-xcode: ^5.1.4
     async-lock: ^1.4.0
     asyncbox: ^2.9.4
@@ -7831,11 +7831,11 @@ __metadata:
     portscanner: ^2.2.0
     semver: ^7.5.4
     source-map-support: ^0.x
-    teen_process: 2.0.48
+    teen_process: ^2.0.60
     ws: ^8.13.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: 5acae78aee9a76a3769a0dc14fdde12498b20b9e1143cd776d4c7aedf8a88230e027ccbfd95b3c4511e7f938c26d1a1b1e678e3a4e91e2182b249fbbdaadf23e
+  checksum: b38d4a8892b8e74f4ff2e7e53804ac62a38318d28f25bd90ce3ebd025360c752012c7bcf35314e499de65a044392d003e9ae45f483dc71fa9b7b0d5f4ac7bbe4
   languageName: node
   linkType: hard
 
@@ -19980,18 +19980,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"teen_process@npm:2.0.48":
-  version: 2.0.48
-  resolution: "teen_process@npm:2.0.48"
-  dependencies:
-    bluebird: 3.7.2
-    lodash: 4.17.21
-    shell-quote: 1.8.1
-    source-map-support: 0.5.21
-  checksum: 69a4a73c5f93fccef8901fff0c7112c2c7f529280122de258117c1e215c38b075cbdcbcf1dc9f884a1d38a88101b2617b3d44315f5b37eebbdd8399ac4ada791
-  languageName: node
-  linkType: hard
-
 "teen_process@npm:^2.0.0, teen_process@npm:^2.0.1":
   version: 2.0.38
   resolution: "teen_process@npm:2.0.38"
@@ -20001,6 +19989,18 @@ __metadata:
     shell-quote: 1.8.1
     source-map-support: 0.5.21
   checksum: 9b46520c2ff95a0fe94d9c940608233e1d87d2fd205cfafb47b51a6c639d9406c715a60fd71c91443e91ad5e3ff2d2d662c54e180bb4bc092c1eab3d7d7016ca
+  languageName: node
+  linkType: hard
+
+"teen_process@npm:^2.0.60":
+  version: 2.0.68
+  resolution: "teen_process@npm:2.0.68"
+  dependencies:
+    bluebird: 3.7.2
+    lodash: 4.17.21
+    shell-quote: 1.8.1
+    source-map-support: 0.5.21
+  checksum: d31712cd35385b15e08afa90abb99a8321a391467f87f78b8f562fbe57a2eaeafd535f4a38b30ac6b09ccbde6640cccf6d1924a424bab7dcd7d1770c121499a1
   languageName: node
   linkType: hard
 
