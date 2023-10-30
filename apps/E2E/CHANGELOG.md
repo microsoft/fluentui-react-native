@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Wed, 25 Oct 2023 20:50:34 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.32.5
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.13.2
 
 ## 1.32.4
 

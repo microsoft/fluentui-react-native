@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "remove deprecated alias tokens from v1 components",
-  "packageName": "@fluentui-react-native/button",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
