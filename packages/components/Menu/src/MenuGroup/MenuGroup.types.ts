@@ -12,7 +12,7 @@ export type MenuGroupProps = IViewProps;
 
 export interface MenuGroupSlotProps {
   root: ViewProps;
-  focusZone: FocusZoneProps;
+  contentWrapper: FocusZoneProps;
 }
 
 export interface MenuGroupType {

@@ -17,7 +17,7 @@ export const MenuGroup = compose<MenuGroupType>({
   displayName: menuGroupName,
   slots: {
     root: View,
-    focusZone: hasFocusZone ? FocusZone : React.Fragment,
+    contentWrapper: hasFocusZone ? FocusZone : React.Fragment,
   },
   useRender: (userProps: MenuGroupProps, useSlots: UseSlots<MenuGroupType>) => {
     const Slots = useSlots(userProps);
@@ -47,7 +47,7 @@ export const MenuGroup = compose<MenuGroupType>({
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.focusZone
+          <Slots.contentWrapper
             // avoid error that fires when props are passed into React.fragment
             {...(hasFocusZone && {
               focusZoneDirection: 'vertical',
@@ -56,7 +56,7 @@ export const MenuGroup = compose<MenuGroupType>({
             })}
           >
             {childrenWithSet}
-          </Slots.focusZone>
+          </Slots.contentWrapper>
         </Slots.root>
       );
     };

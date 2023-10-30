@@ -6,7 +6,7 @@ import { Stack } from '@fluentui-react-native/stack';
 
 import { stackStyle } from '../Common/styles';
 
-export const MenuFocusZone: React.FunctionComponent = () => {
+export const MenuComponentOutsideMenuList: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Menu>

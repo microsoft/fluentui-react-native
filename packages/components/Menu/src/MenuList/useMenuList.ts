@@ -22,6 +22,7 @@ const removeRadioItem = (name: string) => {
 
 const platformsWithoutFocusOnDisabled = ['ios', 'macos'];
 const handledKeys = ['Home', 'End'];
+const handleFocusOnMouseLevae = Platform.OS === 'macos';
 
 export const useMenuList = (_props: MenuListProps): MenuListState => {
   const context = useMenuContext();
@@ -175,7 +176,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   return {
     props: {
       ...context,
-      onMouseLeave: setFocusZoneFocus,
+      onMouseLeave: handleFocusOnMouseLevae ? setFocusZoneFocus : context.onMouseLeave,
       onKeyDown: onListKeyDown,
     },
     isCheckedControlled,

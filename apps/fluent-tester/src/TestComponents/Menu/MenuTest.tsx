@@ -20,7 +20,7 @@ import { Switch } from '@fluentui-react-native/switch';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { E2EMenuTest } from './E2EMenuTest';
-import { MenuFocusZone } from './MenuFocusZone';
+import { MenuComponentOutsideMenuList } from './MenuComponentOutsideMenuList';
 import { MenuIcons } from './MenuIcons';
 import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
@@ -531,8 +531,8 @@ const menuSections: TestSection[] = [
   Platform.select({
     android: null,
     default: {
-      name: 'MenuList FocusZone test',
-      component: MenuFocusZone,
+      name: 'MenuList component outside menu list test',
+      component: MenuComponentOutsideMenuList,
     },
   }),
 ];
