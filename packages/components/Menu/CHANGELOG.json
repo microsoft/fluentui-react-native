@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 31 Oct 2023 19:11:10 GMT",
+      "version": "1.11.28",
+      "tag": "@fluentui-react-native/menu_v1.11.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "e66e88aa687589668526066da35ca8b1abc6287c",
+            "comment": "Fix keyboarding behavior"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Oct 2023 21:26:06 GMT",
       "version": "1.11.27",
       "tag": "@fluentui-react-native/menu_v1.11.27",

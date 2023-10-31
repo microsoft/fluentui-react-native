@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Oct 2023 19:11:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.3
+
+Tue, 31 Oct 2023 19:11:10 GMT
+
+### Patches
+
+- Fix keyboarding behavior (ruaraki@microsoft.com)
 
 ## 0.13.2
 

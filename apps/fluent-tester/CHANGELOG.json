@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 31 Oct 2023 19:11:10 GMT",
+      "version": "0.157.8",
+      "tag": "@fluentui-react-native/tester_v0.157.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "e66e88aa687589668526066da35ca8b1abc6287c",
+            "comment": "Add test and a tiny bit of cleanup"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.7.29",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.9.19",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.11.28",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.19.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/tablist to v0.4.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.38.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Oct 2023 21:26:06 GMT",
       "version": "0.157.7",
       "tag": "@fluentui-react-native/tester_v0.157.7",

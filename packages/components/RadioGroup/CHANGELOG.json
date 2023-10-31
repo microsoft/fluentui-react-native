@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Tue, 31 Oct 2023 19:11:10 GMT",
+      "version": "0.19.7",
+      "tag": "@fluentui-react-native/radio-group_v0.19.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Oct 2023 21:26:06 GMT",
       "version": "0.19.6",
       "tag": "@fluentui-react-native/radio-group_v0.19.6",

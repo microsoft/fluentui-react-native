@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Tue, 31 Oct 2023 19:11:10 GMT",
+      "version": "0.9.19",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.9.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Oct 2023 21:26:06 GMT",
       "version": "0.9.18",
       "tag": "@fluentui-react-native/experimental-tabs_v0.9.18",

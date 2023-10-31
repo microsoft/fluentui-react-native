@@ -2500,14 +2500,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/contextual-menu@*, @fluentui-react-native/contextual-menu@0.22.22, @fluentui-react-native/contextual-menu@^0.22.22, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
+"@fluentui-react-native/contextual-menu@*, @fluentui-react-native/contextual-menu@0.22.23, @fluentui-react-native/contextual-menu@^0.22.23, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu"
   dependencies:
     "@fluentui-react-native/adapters": ^0.11.3
     "@fluentui-react-native/callout": ">=0.24.17 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ^0.13.2
+    "@fluentui-react-native/focus-zone": ^0.13.3
     "@fluentui-react-native/icon": 0.19.14
     "@fluentui-react-native/interactive-hooks": ">=0.24.10 <1.0.0"
     "@fluentui-react-native/pressable": ">=0.10.11 <1.0.0"
@@ -2738,7 +2738,7 @@ __metadata:
     "@babel/core": ^7.8.0
     "@babel/runtime": ^7.8.0
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ^0.13.2
+    "@fluentui-react-native/focus-zone": ^0.13.3
     "@fluentui-react-native/scripts": ^0.1.1
     "@rnx-kit/metro-config": ^1.3.1
     "@types/jasmine": 3.10.3
@@ -2894,11 +2894,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@>=0.7.28 <1.0.0, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
+"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@>=0.7.29 <1.0.0, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
   dependencies:
-    "@fluentui-react-native/contextual-menu": ^0.22.22
+    "@fluentui-react-native/contextual-menu": ^0.22.23
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/experimental-button": ^0.18.20
     "@fluentui-react-native/framework": 0.11.8
@@ -2950,7 +2950,7 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-radio-group@workspace:packages/experimental/RadioGroup"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/radio-group": ">=0.19.6 <1.0.0"
+    "@fluentui-react-native/radio-group": ">=0.19.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@office-iss/react-native-win32": ^0.71.0
     react: 18.2.0
@@ -3020,13 +3020,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-tabs@*, @fluentui-react-native/experimental-tabs@0.9.18, @fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs":
+"@fluentui-react-native/experimental-tabs@*, @fluentui-react-native/experimental-tabs@0.9.19, @fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs"
   dependencies:
     "@fluentui-react-native/adapters": 0.11.3
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ">=0.13.2 <1.0.0"
+    "@fluentui-react-native/focus-zone": ">=0.13.3 <1.0.0"
     "@fluentui-react-native/framework": 0.11.8
     "@fluentui-react-native/icon": 0.19.14
     "@fluentui-react-native/interactive-hooks": ">=0.24.10 <1.0.0"
@@ -3081,7 +3081,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/focus-zone@*, @fluentui-react-native/focus-zone@0.13.2, @fluentui-react-native/focus-zone@>=0.13.2 <1.0.0, @fluentui-react-native/focus-zone@^0.13.2, @fluentui-react-native/focus-zone@workspace:packages/components/FocusZone":
+"@fluentui-react-native/focus-zone@*, @fluentui-react-native/focus-zone@0.13.3, @fluentui-react-native/focus-zone@>=0.13.3 <1.0.0, @fluentui-react-native/focus-zone@^0.13.3, @fluentui-react-native/focus-zone@workspace:packages/components/FocusZone":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/focus-zone@workspace:packages/components/FocusZone"
   dependencies:
@@ -3250,13 +3250,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.11.28, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
+"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.11.29, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu-button@workspace:packages/components/MenuButton"
   dependencies:
     "@fluentui-react-native/button": ^0.35.9
     "@fluentui-react-native/component-cache": ^1.5.1
-    "@fluentui-react-native/contextual-menu": ^0.22.22
+    "@fluentui-react-native/contextual-menu": ^0.22.23
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/icon": ^0.19.14
     "@fluentui-react-native/scripts": ^0.1.1
@@ -3275,7 +3275,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.11.27, @fluentui-react-native/menu@workspace:packages/components/Menu":
+"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.11.28, @fluentui-react-native/menu@workspace:packages/components/Menu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
@@ -3283,7 +3283,7 @@ __metadata:
     "@fluentui-react-native/button": ">=0.35.9 <1.0.0"
     "@fluentui-react-native/callout": ">=0.24.17 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ">=0.13.2 <1.0.0"
+    "@fluentui-react-native/focus-zone": ">=0.13.3 <1.0.0"
     "@fluentui-react-native/framework": 0.11.8
     "@fluentui-react-native/icon": ^0.19.14
     "@fluentui-react-native/interactive-hooks": ">=0.24.10 <1.0.0"
@@ -3434,14 +3434,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.19.6, @fluentui-react-native/radio-group@>=0.19.6 <1.0.0, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
+"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.19.7, @fluentui-react-native/radio-group@>=0.19.7 <1.0.0, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/radio-group@workspace:packages/components/RadioGroup"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.3 <1.0.0"
     "@fluentui-react-native/component-cache": ^1.5.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ">=0.13.2 <1.0.0"
+    "@fluentui-react-native/focus-zone": ">=0.13.3 <1.0.0"
     "@fluentui-react-native/framework": 0.11.8
     "@fluentui-react-native/interactive-hooks": ">=0.24.10 <1.0.0"
     "@fluentui-react-native/pressable": ">=0.10.11 <1.0.0"
@@ -3634,13 +3634,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.4.7, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
+"@fluentui-react-native/tablist@0.4.8, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/experimental/TabList"
   dependencies:
     "@fluentui-react-native/adapters": 0.11.3
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ">=0.13.2 <1.0.0"
+    "@fluentui-react-native/focus-zone": ">=0.13.3 <1.0.0"
     "@fluentui-react-native/framework": 0.11.8
     "@fluentui-react-native/icon": 0.19.14
     "@fluentui-react-native/interactive-hooks": ">=0.24.10 <1.0.0"
@@ -3659,13 +3659,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tabs@*, @fluentui-react-native/tabs@0.13.16, @fluentui-react-native/tabs@workspace:packages/components/Tabs":
+"@fluentui-react-native/tabs@*, @fluentui-react-native/tabs@0.13.17, @fluentui-react-native/tabs@workspace:packages/components/Tabs":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tabs@workspace:packages/components/Tabs"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.3 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ">=0.13.2 <1.0.0"
+    "@fluentui-react-native/focus-zone": ">=0.13.3 <1.0.0"
     "@fluentui-react-native/icon": 0.19.14
     "@fluentui-react-native/interactive-hooks": ">=0.24.10 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
@@ -3706,7 +3706,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.157.7
+    "@fluentui-react-native/tester": ^0.157.8
     "@office-iss/react-native-win32": ^0.71.0
     "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
     "@rnx-kit/cli": ^0.16.2
@@ -3726,7 +3726,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.157.7, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.157.8, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3749,27 +3749,27 @@ __metadata:
     "@fluentui-react-native/experimental-button": 0.18.20
     "@fluentui-react-native/experimental-checkbox": 0.15.15
     "@fluentui-react-native/experimental-expander": 0.6.11
-    "@fluentui-react-native/experimental-menu-button": ">=0.7.28 <1.0.0"
+    "@fluentui-react-native/experimental-menu-button": ">=0.7.29 <1.0.0"
     "@fluentui-react-native/experimental-native-date-picker": ">=0.9.1 <1.0.0"
     "@fluentui-react-native/experimental-shadow": 0.4.10
     "@fluentui-react-native/experimental-shimmer": 0.11.4
-    "@fluentui-react-native/experimental-tabs": 0.9.18
+    "@fluentui-react-native/experimental-tabs": 0.9.19
     "@fluentui-react-native/experimental-text": ">=0.13.12 <1.0.0"
-    "@fluentui-react-native/focus-zone": ^0.13.2
+    "@fluentui-react-native/focus-zone": ^0.13.3
     "@fluentui-react-native/framework": ">=0.11.8 <1.0.0"
     "@fluentui-react-native/icon": 0.19.14
     "@fluentui-react-native/input": ^0.4.7
     "@fluentui-react-native/interactive-hooks": ">=0.24.10 <1.0.0"
-    "@fluentui-react-native/menu": ^1.11.27
+    "@fluentui-react-native/menu": ^1.11.28
     "@fluentui-react-native/merge-props": ">=0.7.1 <1.0.0"
     "@fluentui-react-native/notification": 0.23.20
-    "@fluentui-react-native/radio-group": ">=0.19.6 <1.0.0"
+    "@fluentui-react-native/radio-group": ">=0.19.7 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": ^0.16.8
     "@fluentui-react-native/spinner": ^0.7.13
     "@fluentui-react-native/stack": ">=0.8.14 <1.0.0"
     "@fluentui-react-native/switch": ^0.11.5
-    "@fluentui-react-native/tablist": 0.4.7
+    "@fluentui-react-native/tablist": 0.4.8
     "@fluentui-react-native/text": ">=0.21.12 <1.0.0"
     "@fluentui-react-native/theme": ">=0.9.2 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.25.2
@@ -3778,7 +3778,7 @@ __metadata:
     "@fluentui-react-native/theming-utils": ">=0.24.5 <1.0.0"
     "@fluentui-react-native/vibrancy-view": ">=0.0.3 <1.0.0"
     "@fluentui-react-native/win32-theme": ">=0.27.8 <1.0.0"
-    "@fluentui/react-native": ">=0.38.3 <1.0.0"
+    "@fluentui/react-native": ">=0.38.4 <1.0.0"
     "@fortawesome/fontawesome-svg-core": ^6.2.0
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-native-fontawesome": ^0.3.0
@@ -4040,27 +4040,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native@*, @fluentui/react-native@>=0.38.3 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
+"@fluentui/react-native@*, @fluentui/react-native@>=0.38.4 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
     "@fluentui-react-native/button": 0.35.9
     "@fluentui-react-native/callout": 0.24.17
     "@fluentui-react-native/checkbox": 0.21.5
-    "@fluentui-react-native/contextual-menu": 0.22.22
+    "@fluentui-react-native/contextual-menu": 0.22.23
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-trap-zone": 0.10.12
-    "@fluentui-react-native/focus-zone": 0.13.2
+    "@fluentui-react-native/focus-zone": 0.13.3
     "@fluentui-react-native/interactive-hooks": 0.24.10
     "@fluentui-react-native/link": 0.20.5
-    "@fluentui-react-native/menu-button": 0.11.28
+    "@fluentui-react-native/menu-button": 0.11.29
     "@fluentui-react-native/persona": 0.14.10
     "@fluentui-react-native/persona-coin": 0.13.10
     "@fluentui-react-native/pressable": 0.10.11
-    "@fluentui-react-native/radio-group": 0.19.6
+    "@fluentui-react-native/radio-group": 0.19.7
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": 0.16.8
-    "@fluentui-react-native/tabs": 0.13.16
+    "@fluentui-react-native/tabs": 0.13.17
     "@fluentui-react-native/text": 0.21.12
     react: 18.2.0
     react-native: ^0.71.0
