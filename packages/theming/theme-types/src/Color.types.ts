@@ -386,40 +386,73 @@ export interface ControlColorTokens {
   ghostDisabledContent: ColorValue;
   ghostDisabledIcon: ColorValue;
 
+  /* Deprecated */
   brandedBackground: ColorValue;
+  /* Deprecated */
   brandedBorder: ColorValue;
+  /* Deprecated */
   brandedContent: ColorValue;
+  /* Deprecated */
   brandedIcon: ColorValue;
 
+  /* Deprecated */
   brandedHoveredBackground: ColorValue;
+  /* Deprecated */
   brandedHoveredBorder: ColorValue;
+  /* Deprecated */
   brandedHoveredContent: ColorValue;
+  /* Deprecated */
   brandedHoveredIcon: ColorValue;
 
+  /* Deprecated */
   brandedFocusedBackground: ColorValue;
+  /* Deprecated */
   brandedFocusedBorder: ColorValue;
+  /* Deprecated */
   brandedFocusedContent: ColorValue;
+  /* Deprecated */
   brandedFocusedIcon: ColorValue;
 
+  /* Deprecated */
   brandedPressedBackground: ColorValue;
+  /* Deprecated */
   brandedPressedBorder: ColorValue;
+  /* Deprecated */
   brandedPressedContent: ColorValue;
+  /* Deprecated */
   brandedPressedIcon: ColorValue;
 
+  /* Deprecated */
   brandedDisabledBackground: ColorValue;
+  /* Deprecated */
   brandedDisabledBorder: ColorValue;
+  /* Deprecated */
   brandedDisabledContent: ColorValue;
+  /* Deprecated */
   brandedDisabledIcon: ColorValue;
+
+  /* Deprecated */
+  brandedCheckedBackground: ColorValue;
+  /* Deprecated */
+  brandedCheckedContent: ColorValue;
+  /* Deprecated */
+  brandedCheckedHoveredBackground: ColorValue;
+  /* Deprecated */
+  brandedCheckedHoveredContent: ColorValue;
+
+  /* Deprecated */
+  brandedSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedFocusedSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedHoveredSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedPressedSecondaryContent: ColorValue;
 
   defaultCheckedBackground: ColorValue;
   defaultCheckedContent: ColorValue;
   defaultCheckedHoveredBackground: ColorValue;
   defaultCheckedHoveredContent: ColorValue;
-
-  brandedCheckedBackground: ColorValue;
-  brandedCheckedContent: ColorValue;
-  brandedCheckedHoveredBackground: ColorValue;
-  brandedCheckedHoveredContent: ColorValue;
 
   ghostCheckedBackground: ColorValue;
   ghostCheckedContent: ColorValue;
@@ -431,11 +464,6 @@ export interface ControlColorTokens {
   ghostFocusedSecondaryContent: ColorValue;
   ghostHoveredSecondaryContent: ColorValue;
   ghostPressedSecondaryContent: ColorValue;
-
-  brandedSecondaryContent: ColorValue;
-  brandedFocusedSecondaryContent: ColorValue;
-  brandedHoveredSecondaryContent: ColorValue;
-  brandedPressedSecondaryContent: ColorValue;
 
   defaultDisabledSecondaryContent: ColorValue;
   defaultHoveredSecondaryContent: ColorValue;

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Mon, 05 Jun 2023 19:26:25 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.1
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- remove deprecated alias tokens from v1 components (email not defined)
 
 ## 0.32.0
 

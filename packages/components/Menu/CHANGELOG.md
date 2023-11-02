@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 25 Oct 2023 20:50:34 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Oct 2023 19:11:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.28
+
+Tue, 31 Oct 2023 19:11:10 GMT
+
+### Patches
+
+- Fix keyboarding behavior (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.13.3
+
+## 1.11.27
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- remove deprecated alias tokens from v1 components (email not defined)
+- Bump @fluentui-react-native/callout to v0.24.17
+- Bump @fluentui-react-native/focus-zone to v0.13.2
+- Bump @fluentui-react-native/framework to v0.11.8
+- Bump @fluentui-react-native/icon to v0.19.14
+- Bump @fluentui-react-native/interactive-hooks to v0.24.10
+- Bump @fluentui-react-native/text to v0.21.12
+- Bump @fluentui-react-native/theme-tokens to v0.25.2
+- Bump @fluentui-react-native/tokens to v0.21.4
+- Bump @fluentui-react-native/button to v0.35.9
 
 ## 1.11.26
 

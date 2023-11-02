@@ -22,6 +22,7 @@ const removeRadioItem = (name: string) => {
 
 const platformsWithoutFocusOnDisabled = ['ios', 'macos'];
 const handledKeys = ['Home', 'End'];
+const handleFocusOnMouseLevae = Platform.OS === 'macos';
 
 export const useMenuList = (_props: MenuListProps): MenuListState => {
   const context = useMenuContext();
@@ -162,9 +163,21 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     };
   });
 
+  // focus management
+  const focusZoneRef = React.useRef<View>();
+  const setFocusZoneFocus = () => {
+    focusZoneRef?.current?.focus();
+  };
+
+  React.useEffect(() => {
+    setFocusZoneFocus();
+  }, []);
+
   return {
     props: {
       ...context,
+      onMouseLeave: handleFocusOnMouseLevae ? setFocusZoneFocus : context.onMouseLeave,
+      onKeyDown: onListKeyDown,
     },
     isCheckedControlled,
     checked,
@@ -175,9 +188,9 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     removeRadioItem,
     trackMenuItem,
     untrackMenuItem,
-    onListKeyDown,
     hasMaxHeight: context.hasMaxHeight,
     hasMaxWidth: context.hasMaxWidth,
+    focusZoneRef: focusZoneRef,
   };
 };
 
