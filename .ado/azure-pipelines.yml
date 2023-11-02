@@ -2,7 +2,7 @@ pr:
   - main
 
 variables:
-  CI: true
+  - template: variables/vars.yml
 
 jobs:
   # Dedicated task to build JS code, including jest tests, snapshot testing, and linting, because these things can be super
@@ -30,7 +30,7 @@ jobs:
 
       - script: |
           yarn buildci
-        displayName: 'yarn buildci'
+        displayName: 'yarn buildci [test]'
 
       - script: |
           yarn check-for-changed-files
@@ -67,8 +67,7 @@ jobs:
   - job: macOSPR
     displayName: macOS PR
     pool:
-      vmImage: 'internal-macos12'
-      demands: ['xcode', 'sh', 'npm']
+      vmImage: $(VmImageApple)
     variables:
       platform: 'macos'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -78,14 +77,6 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
-      - script: |
-          sudo gem install cocoapods
-        displayName: 'Install Cocoapods Environment'
       - template: templates/setup-repo-min-build.yml
 
       - script: |
@@ -93,14 +84,20 @@ jobs:
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle macos'
 
-      # Select proper Xcode version
-      - template: templates/apple-xcode-select.yml
-
       - bash: |
           echo "pod install $(platform)"
           pod install
         workingDirectory: apps/fluent-tester/$(platform)
         displayName: 'pod install $(platform)'
+
+      - bash: |
+          sudo xcode-select --switch '$(xcode_path)'
+        displayName: Switch Xcode version $(xcode_version)
+        failOnStderr: true
+
+      - script: |
+          brew install xcbeautify
+        displayName: 'Install xcbeautify'
 
       - bash: |
           echo "yarn $(platform)"
@@ -113,8 +110,7 @@ jobs:
   - job: iOSPR
     displayName: iOS PR
     pool:
-      vmImage: 'internal-macos12'
-      demands: ['xcode', 'sh', 'npm']
+      vmImage: $(VmImageApple)
     variables:
       platform: 'ios'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -124,23 +120,12 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
-      - script: |
-          sudo gem install cocoapods
-        displayName: 'Install Cocoapods Environment'
       - template: templates/setup-repo-min-build.yml
 
       - script: |
           yarn bundle:ios
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle ios'
-
-      # Select proper Xcode version
-      - template: templates/apple-xcode-select.yml
 
       - bash: |
           echo "pod install $(platform)"
@@ -149,17 +134,33 @@ jobs:
         displayName: 'pod install $(platform)'
 
       - bash: |
-          echo "Pre boot simulator"
-          UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-16-2)
-          xcrun simctl boot $UDID
-        workingDirectory: apps/fluent-tester
-        displayName: 'Boot simulator'
+          sudo xcode-select --switch '$(xcode_path)'
+        displayName: Switch Xcode version $(xcode_version)
+        failOnStderr: true
+
+      - script: |
+          brew install xcbeautify
+        displayName: 'Install xcbeautify'
+
+      - script: |
+          xcrun simctl list
+        displayName: 'List Simulators'
+
+      - script: |
+          xcrun --sdk iphonesimulator --show-sdk-version
+        displayName: 'Determine iOS SDK version'
+
+      # - script: |
+      #     NEW_DEVICE=$(xcrun simctl create "Test Phone" "$(ios_simulator)" iOS$(ios_version))
+      #     echo "🤖 Created ${NEW_DEVICE}"
+      #     xcrun simctl boot ${NEW_DEVICE}
+      #   displayName: 'Boot Simulator'
 
       - bash: |
           echo "yarn $(platform)"
-          yarn $(platform) --simulator "iPhone 14"
+          yarn $(platform) --simulator "$(ios_simulator)"
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)x'
+        displayName: 'yarn $(platform)'
 
       - template: templates/e2e-testing-ios.yml
 

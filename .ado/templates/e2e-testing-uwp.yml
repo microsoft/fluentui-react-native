@@ -44,7 +44,7 @@ steps:
   - script: |
       yarn e2etest:windows
     workingDirectory: apps\E2E
-    displayName: 'run E2E UWP tests'
+    displayName: 'run E2E UWP tests [test]'
     condition: succeeded()
 
   # The following condition (using task.Build.status variable) make it so the reports generate even if the E2E tasks fails,

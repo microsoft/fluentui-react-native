@@ -20,7 +20,7 @@ steps:
   - script: |
       yarn e2etest:macos
     workingDirectory: apps/E2E
-    displayName: 'run E2E macos tests'
+    displayName: 'run E2E macos tests [test]'
     condition: succeeded()
 
   - template: e2e-publish-artifacts.yml
