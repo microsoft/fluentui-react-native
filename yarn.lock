@@ -2929,7 +2929,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-native-font-metrics@^0.4.1, @fluentui-react-native/experimental-native-font-metrics@workspace:packages/experimental/NativeFontMetrics":
+"@fluentui-react-native/experimental-native-font-metrics@workspace:packages/experimental/NativeFontMetrics":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-native-font-metrics@workspace:packages/experimental/NativeFontMetrics"
   dependencies:
@@ -3814,7 +3814,6 @@ __metadata:
   dependencies:
     "@fluentui-react-native/adapters": ">=0.11.3 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-native-font-metrics": ^0.4.1
     "@fluentui-react-native/framework": 0.11.7
     "@fluentui-react-native/interactive-hooks": ">=0.24.9 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
