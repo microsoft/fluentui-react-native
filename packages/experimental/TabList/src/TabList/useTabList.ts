@@ -44,9 +44,9 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   const addTabKey = React.useCallback(
     (tabKey: string) => {
-      if (__DEV__ && tabKeys.includes(tabKey)) {
-        console.warn(`Tab Key "${tabKey}" already exists in the TabList. Duplicate keys are not supported.`);
-      }
+      // if (__DEV__ && tabKeys.includes(tabKey)) {
+      //   console.warn(`Tab Key "${tabKey}" already exists in the TabList. Duplicate keys are not supported.`);
+      // }
       setTabKeys((keys) => [...keys, tabKey]);
     },
     [tabKeys, setTabKeys],
