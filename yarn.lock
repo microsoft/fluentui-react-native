@@ -7559,13 +7559,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-android-driver@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "appium-android-driver@npm:7.2.1"
+"appium-android-driver@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "appium-android-driver@npm:7.3.0"
   dependencies:
     appium-adb: ^11.0.1
     appium-chromedriver: ^5.5.1
-    asyncbox: ^2.8.0
+    asyncbox: ^3.0.0
     axios: ^1.x
     bluebird: ^3.4.7
     io.appium.settings: ^5.2.0
@@ -7581,7 +7581,7 @@ __metadata:
     ws: ^8.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 021417b23cd2e30b23f15999ef659f21f0f549eb2363f5d4ea5ca21f5a7639728abb1f4ebad14d3f27b6d9fa9f7b23900168eb1556c0a31dbc13fef32ffa99cc
+  checksum: 9927364aaf65f083bc13f36d072c96d2a612ab1e153b0fe77b4f3f59689fd77bdb1a26015b753c1396a7da83f4a802c578bab510bf1d7d1a5f255aaca9b6beb5
   languageName: node
   linkType: hard
 
@@ -7717,14 +7717,14 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.33.0
-  resolution: "appium-uiautomator2-driver@npm:2.33.0"
+  version: 2.34.0
+  resolution: "appium-uiautomator2-driver@npm:2.34.0"
   dependencies:
     appium-adb: ^11.0.1
-    appium-android-driver: ^7.2.1
+    appium-android-driver: ^7.3.0
     appium-chromedriver: ^5.6.5
     appium-uiautomator2-server: ^5.12.2
-    asyncbox: ^2.3.1
+    asyncbox: ^3.0.0
     axios: ^1.x
     bluebird: ^3.5.1
     css-selector-parser: ^3.0.0
@@ -7735,7 +7735,7 @@ __metadata:
     type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: 16a8d145e95d5c73a03a053cf9048970a7279b4e0c7099d26bdde09fdb4a6cffcec98f2ee6e90d4142fe7c80fd5de4b055cd0f97f47589db3fd5de96d3f73a49
+  checksum: bce9e88baf7c3776f647f1119e9a18fbbb1408c6a55a3af7120782444afce0f13238712187dff1a70a2e35f1950fd0ad6046f33fb217ef7bb90f192f126a013d
   languageName: node
   linkType: hard
 
@@ -8426,7 +8426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"asyncbox@npm:2.9.4, asyncbox@npm:^2.0.2, asyncbox@npm:^2.3.0, asyncbox@npm:^2.3.1, asyncbox@npm:^2.5.2, asyncbox@npm:^2.5.3, asyncbox@npm:^2.6.0, asyncbox@npm:^2.8.0, asyncbox@npm:^2.9.2, asyncbox@npm:^2.9.4":
+"asyncbox@npm:2.9.4, asyncbox@npm:^2.0.2, asyncbox@npm:^2.3.0, asyncbox@npm:^2.3.1, asyncbox@npm:^2.5.2, asyncbox@npm:^2.5.3, asyncbox@npm:^2.6.0, asyncbox@npm:^2.9.2, asyncbox@npm:^2.9.4":
   version: 2.9.4
   resolution: "asyncbox@npm:2.9.4"
   dependencies:
@@ -8436,6 +8436,17 @@ __metadata:
     lodash: ^4.17.4
     source-map-support: ^0.5.5
   checksum: 74b8aa95596acffbf2321a1a20610707542003821b3771e3f596f933afca4bd60551b462c909933d9008ecdb075b1479368b1f23cae29a63cbd58c55612edbce
+  languageName: node
+  linkType: hard
+
+"asyncbox@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "asyncbox@npm:3.0.0"
+  dependencies:
+    bluebird: ^3.5.1
+    lodash: ^4.17.4
+    source-map-support: ^0.x
+  checksum: 662f4617c03857f146a1b730175b85fd824f11b30dab42be0fe6a17bf10b3d488ef468e6f73c38760f9058a4815f0d919eda6f3460fb0e2f591e8249b1d9ad2a
   languageName: node
   linkType: hard
 
