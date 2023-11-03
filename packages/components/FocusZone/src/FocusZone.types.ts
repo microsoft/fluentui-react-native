@@ -1,4 +1,5 @@
 import type * as React from 'react';
+import type { ViewStyle } from 'react-native';
 
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
@@ -63,6 +64,11 @@ export type FocusZoneProps = React.PropsWithChildren<{
    * Callback called when “focus” event triggered in FocusZone
    */
   onFocus?: (e?: any) => void;
+
+  /**
+   * Allow consumers to pass in Style props
+   */
+  style?: ViewStyle;
 }>;
 
 export interface NativeProps extends Omit<FocusZoneProps, 'isCircularNavigation'> {
