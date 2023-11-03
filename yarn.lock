@@ -1029,7 +1029,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-typescript@npm:^7.22.5, @babel/plugin-syntax-typescript@npm:^7.3.3, @babel/plugin-syntax-typescript@npm:^7.7.2":
+"@babel/plugin-syntax-typescript@npm:^7.22.5, @babel/plugin-syntax-typescript@npm:^7.7.2":
   version: 7.22.5
   resolution: "@babel/plugin-syntax-typescript@npm:7.22.5"
   dependencies:
@@ -1943,7 +1943,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.16.0, @babel/traverse@npm:^7.20.0, @babel/traverse@npm:^7.23.2, @babel/traverse@npm:^7.4.3":
+"@babel/traverse@npm:^7.20.0, @babel/traverse@npm:^7.23.2, @babel/traverse@npm:^7.4.3":
   version: 7.23.2
   resolution: "@babel/traverse@npm:7.23.2"
   dependencies:
@@ -5194,25 +5194,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/babel-preset-metro-react-native@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "@rnx-kit/babel-preset-metro-react-native@npm:1.1.4"
-  dependencies:
-    babel-plugin-const-enum: ^1.0.0
-  peerDependencies:
-    "@babel/core": ^7.0.0
-    "@babel/plugin-transform-typescript": ^7.0.0
-    metro-react-native-babel-preset: "*"
-  peerDependenciesMeta:
-    "@babel/plugin-transform-typescript":
-      optional: true
-  checksum: c0b38bf30b840fe9a7e52ca2e19d412fac406c5d5bcb54ba521da272b4c0f704f9da2a22cd917c4f08bbadade0aa336528147eed57978c8c03626fae1898984b
-  languageName: node
-  linkType: hard
-
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.18
-  resolution: "@rnx-kit/cli@npm:0.16.18"
+  version: 0.16.19
+  resolution: "@rnx-kit/cli@npm:0.16.19"
   dependencies:
     "@rnx-kit/align-deps": ^2.2.2
     "@rnx-kit/config": ^0.6.6
@@ -5220,7 +5204,7 @@ __metadata:
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector": ^1.1.1
     "@rnx-kit/metro-plugin-duplicates-checker": ^2.1.1
     "@rnx-kit/metro-plugin-typescript": ^0.4.4
-    "@rnx-kit/metro-serializer": ^1.0.13
+    "@rnx-kit/metro-serializer": ^1.0.14
     "@rnx-kit/metro-serializer-esbuild": ^0.1.31
     "@rnx-kit/metro-service": ^3.1.5
     "@rnx-kit/third-party-notices": ^1.3.4
@@ -5242,7 +5226,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: d547870d280dc51930ce248835904fa1f29ec8659ba558ce163bfd338d657e4f8af60f1de02be2bf851e97b48d62418fdc1e5131ac0d51964dc90bde68bba58c
+  checksum: 8e19e58403d82e0c0a8d745c9cf1390fec2a9e01e8d20c6e0b74379f1675db1d6a6c7840f021832b727a0dc150b30b7492e6c4e70fad17a64bff33360c42cab4
   languageName: node
   linkType: hard
 
@@ -5300,23 +5284,21 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/metro-config@npm:^1.3.1":
-  version: 1.3.11
-  resolution: "@rnx-kit/metro-config@npm:1.3.11"
+  version: 1.3.12
+  resolution: "@rnx-kit/metro-config@npm:1.3.12"
   dependencies:
-    "@rnx-kit/babel-preset-metro-react-native": ^1.1.4
     "@rnx-kit/console": ^1.0.0
     "@rnx-kit/tools-node": ^2.0.0
     "@rnx-kit/tools-react-native": ^1.3.4
     "@rnx-kit/tools-workspaces": ^0.1.3
   peerDependencies:
-    "@babel/core": ^7.0.0
     "@react-native/metro-config": "*"
     react: "*"
     react-native: "*"
   peerDependenciesMeta:
     "@react-native/metro-config":
       optional: true
-  checksum: e7ac56db3cd86c55e1caa6db99e4843a4114bea5b705daac4ffefbb7f1bd02740e90233af7650c8ab9df5621589fe7c7ebb039d3595e3b31756fd81cd1d8a289
+  checksum: 0608dfb5c4050b3cac7dc17a34b32f145be5cd6ba1be988638be58b79860a15c910b1e62719ef7f83c1764a298fd6edd4fecb28fbec7949a0b15383066f8ea07
   languageName: node
   linkType: hard
 
@@ -5372,13 +5354,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-serializer@npm:^1.0.13":
-  version: 1.0.13
-  resolution: "@rnx-kit/metro-serializer@npm:1.0.13"
+"@rnx-kit/metro-serializer@npm:^1.0.14":
+  version: 1.0.14
+  resolution: "@rnx-kit/metro-serializer@npm:1.0.14"
   dependencies:
     "@rnx-kit/tools-react-native": ^1.3.4
     semver: ^7.0.0
-  checksum: abf17ebd6de61b791ca5ddc82541581a24d1f9dab574cb0d9865ecbefdb713d19ea0fdba6089dbbfb5c7e8c3a0ef4224bfec54d7ccb059de849e99c3f3124df1
+  checksum: 53141e247c7f3bfb6f94fbd27a64c992b2dc04d1205f66916d1c9308de8957d162187c026c6c59c2a43ae110c0d352bac1f64d7354ce7a88cacc8bea9328c4ed
   languageName: node
   linkType: hard
 
@@ -8523,19 +8505,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.8.0
   checksum: ee6f8e0495afee07cac5e4ee167be705c711a8cc8a737e05a587a131fdae2b3c8f9aa55dfd4d9c03009ac2d27f2de63d8ba96d3e8460da4d00e8af19ef9a83f7
-  languageName: node
-  linkType: hard
-
-"babel-plugin-const-enum@npm:^1.0.0":
-  version: 1.2.0
-  resolution: "babel-plugin-const-enum@npm:1.2.0"
-  dependencies:
-    "@babel/helper-plugin-utils": ^7.0.0
-    "@babel/plugin-syntax-typescript": ^7.3.3
-    "@babel/traverse": ^7.16.0
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: fc840a71f6717a01b63853b8bc67f75c591ebacfd0d8739c68de02da5d6e48ea38086040427d553726c0e103d2e0ee8b4207827ef26b281247f671f868f78aae
   languageName: node
   linkType: hard
 
