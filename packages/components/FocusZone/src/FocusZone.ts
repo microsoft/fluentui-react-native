@@ -31,10 +31,10 @@ export const FocusZone = composable<FocusZoneType>({
     return {
       slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), {
         root: {
+          navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds', // let rest override
           ...rest,
           defaultTabbableElement: targetNativeTag,
           ref: ftzRef,
-          navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds',
         },
       }),
     };

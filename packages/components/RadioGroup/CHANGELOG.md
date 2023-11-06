@@ -1,8 +1,52 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 25 Sep 2023 12:49:34 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Oct 2023 19:11:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.7
+
+Tue, 31 Oct 2023 19:11:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.13.3
+
+## 0.19.6
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.13.2
+- Bump @fluentui-react-native/framework to v0.11.8
+- Bump @fluentui-react-native/interactive-hooks to v0.24.10
+- Bump @fluentui-react-native/pressable to v0.10.11
+- Bump @fluentui-react-native/text to v0.21.12
+- Bump @fluentui-react-native/theme-tokens to v0.25.2
+- Bump @fluentui-react-native/tokens to v0.21.4
+- Bump @uifabricshared/foundation-compose to v1.14.10
+
+## 0.19.5
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.13.1
+- Bump @fluentui-react-native/framework to v0.11.7
+- Bump @fluentui-react-native/interactive-hooks to v0.24.9
+- Bump @fluentui-react-native/pressable to v0.10.10
+- Bump @fluentui-react-native/text to v0.21.11
+- Bump @uifabricshared/foundation-compose to v1.14.9
+
+## 0.19.4
+
+Tue, 17 Oct 2023 19:21:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.13.0
 
 ## 0.19.3
 

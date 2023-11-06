@@ -2,6 +2,102 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 31 Oct 2023 19:11:10 GMT",
+      "version": "1.32.6",
+      "tag": "@fluentui-react-native/e2e-testing_v1.32.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "e66e88aa687589668526066da35ca8b1abc6287c",
+            "comment": "Add test and a tiny bit of cleanup"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Oct 2023 21:26:06 GMT",
+      "version": "1.32.5",
+      "tag": "@fluentui-react-native/e2e-testing_v1.32.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Oct 2023 20:50:34 GMT",
+      "version": "1.32.4",
+      "tag": "@fluentui-react-native/e2e-testing_v1.32.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 23 Oct 2023 23:10:25 GMT",
+      "version": "1.32.3",
+      "tag": "@fluentui-react-native/e2e-testing_v1.32.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "a55dd40020ae73f1c0d0bf6f11eb3b4ab278eb61",
+            "comment": "[CI] Refactor Apple CI"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Oct 2023 19:21:23 GMT",
+      "version": "1.32.2",
+      "tag": "@fluentui-react-native/e2e-testing_v1.32.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.13.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 11 Oct 2023 21:01:53 GMT",
+      "version": "1.32.1",
+      "tag": "@fluentui-react-native/e2e-testing_v1.32.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "b7b40989e7fa74110d902cdb12755ceec1f89ba6",
+            "comment": "Deduping some dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 18 Sep 2023 18:35:05 GMT",
       "version": "1.32.0",
       "tag": "@fluentui-react-native/e2e-testing_v1.32.0",

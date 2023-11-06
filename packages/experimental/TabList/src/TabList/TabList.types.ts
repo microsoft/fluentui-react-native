@@ -6,17 +6,16 @@ import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
 import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
-import type { AnimatedIndicatorStyles, AnimatedIndicatorStylesUpdate } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
+import type {
+  AnimatedIndicatorStyles,
+  AnimatedIndicatorStylesUpdate,
+  TabLayoutInfo,
+} from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 export const tabListName = 'TabList';
 
 export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
-
-export interface TabLayoutInfo extends LayoutRectangle {
-  startMargin?: number;
-  tabBorderWidth?: number;
-}
 export interface TabListLayoutInfo {
   tablist: LayoutRectangle;
   tabs: { [key: string]: TabLayoutInfo };
@@ -80,11 +79,6 @@ export interface TabListState {
    * The currently selected Tab's key.
    */
   selectedKey: string;
-
-  /**
-   * Setter function for the `canShowAnimatedIndicator` variable for this state object.
-   */
-  setCanShowAnimatedIndicator: (canShowAnimatedIndicator: boolean) => void;
 
   /**
    * Setter for the context's `invoked` flag.

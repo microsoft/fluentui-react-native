@@ -48,15 +48,15 @@ exports[`ToggleButton default 1`] = `
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
-      "borderRadius": 4,
+      "borderColor": "#0f6cbd",
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -69,7 +69,7 @@ exports[`ToggleButton default 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,

@@ -79,14 +79,14 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   removeRadioItem: (name: string) => void;
   trackMenuItem: (item: TrackedMenuItem) => void;
   untrackMenuItem: (item: TrackedMenuItem) => void;
-  onListKeyDown: (e: InteractionEvent) => void;
-  hasMaxHeight?: boolean;
-  hasMaxWidth?: boolean;
+  hasMaxHeight: boolean;
+  hasMaxWidth: boolean;
+  focusZoneRef?: React.RefObject<View>;
 }
 
 export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps> & { gap?: number };
-  focusZone?: FocusZoneProps; // macOS only
+  focusZone?: FocusZoneProps; // macOS and win32 only
   scrollView?: ScrollViewProps;
 }
 

@@ -20,7 +20,7 @@ steps:
   - script: |
       yarn e2etest:ios
     workingDirectory: apps/E2E
-    displayName: 'run E2E iOS tests'
+    displayName: 'run E2E iOS tests [test]'
     condition: succeeded()
 
   - template: e2e-publish-artifacts.yml

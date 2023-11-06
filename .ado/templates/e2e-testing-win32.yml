@@ -34,7 +34,7 @@ steps:
   - script: |
       yarn e2etest:win32
     workingDirectory: apps/E2E
-    displayName: 'run E2E Win32 tests'
+    displayName: 'run E2E Win32 tests [test]'
     condition: succeeded()
 
   - template: e2e-publish-artifacts.yml

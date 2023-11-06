@@ -95,6 +95,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -227,6 +228,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -359,6 +361,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -522,6 +525,7 @@ exports[`TabList component tests TabList default props 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -654,6 +658,7 @@ exports[`TabList component tests TabList default props 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -786,6 +791,7 @@ exports[`TabList component tests TabList default props 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -950,6 +956,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -1082,6 +1089,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -1214,6 +1222,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -1805,6 +1814,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -1937,6 +1947,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -2069,6 +2080,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -2232,6 +2244,7 @@ exports[`TabList component tests TabList size 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -2364,6 +2377,7 @@ exports[`TabList component tests TabList size 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
@@ -2496,6 +2510,7 @@ exports[`TabList component tests TabList size 1`] = `
           "borderWidth": 2,
           "display": "flex",
           "flexDirection": "column",
+          "height": "100%",
           "justifyContent": "center",
           "padding": 1,
         }
