@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Manually bump packages stuck in the pipeline",
+  "packageName": "@uifabricshared/foundation-tokens",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}

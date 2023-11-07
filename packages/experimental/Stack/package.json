@@ -29,7 +29,7 @@
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.11.3 <1.0.0",
     "@fluentui-react-native/framework": "0.11.8",
-    "@fluentui-react-native/tokens": ">=0.21.4 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.21.5 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
