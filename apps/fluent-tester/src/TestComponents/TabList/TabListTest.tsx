@@ -1,22 +1,21 @@
 import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { CheckboxV1 as Checkbox } from '@fluentui-react-native/checkbox';
 import { Divider } from '@fluentui-react-native/divider';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { RadioGroupV1 as RadioGroup, Radio } from '@fluentui-react-native/radio-group';
-import { Stack } from '@fluentui-react-native/stack';
 import { TabList, Tab } from '@fluentui-react-native/tablist';
 import type { TabListProps, TabProps, TabTokens } from '@fluentui-react-native/tablist';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
-import { commonTestStyles } from '../Common/styles';
 import { TabListE2ETest } from './TabListE2ETest';
 import { TABLIST_TESTPAGE } from '../../../../E2E/src/index.consts';
 import { svgProps, fontProps } from '../Common/iconExamples';
+import { commonTestStyles } from '../Common/styles';
 import { stackStyle } from '../Common/styles';
 import type { PlatformStatus, TestSection } from '../Test';
 import { Test } from '../Test';
