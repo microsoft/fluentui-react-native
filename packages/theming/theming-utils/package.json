@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/theme-types": ">=0.32.1 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.21.6 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.21.5 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/design-tokens-win32": "^0.53.0",
