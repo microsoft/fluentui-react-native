@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Tue, 07 Nov 2023 20:20:36 GMT",
+      "version": "0.21.6",
+      "tag": "@fluentui-react-native/tokens_v0.21.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "130232522fd2916880ec3decfe594550f069d7a7",
+            "comment": "Use RN-based dynamic type"
+          },
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.32.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Oct 2023 21:26:06 GMT",
       "version": "0.21.4",
       "tag": "@fluentui-react-native/tokens_v0.21.4",

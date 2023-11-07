@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Manually bump packages stuck in the pipeline",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

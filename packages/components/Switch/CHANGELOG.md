@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Nov 2023 20:20:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.7
+
+Tue, 07 Nov 2023 20:20:35 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.11.10
+- Bump @fluentui-react-native/interactive-hooks to v0.24.12
+- Bump @fluentui-react-native/text to v0.21.14
+- Bump @fluentui-react-native/theming-utils to v0.24.7
+- Bump @fluentui-react-native/tokens to v0.21.6
 
 ## 0.11.5
 

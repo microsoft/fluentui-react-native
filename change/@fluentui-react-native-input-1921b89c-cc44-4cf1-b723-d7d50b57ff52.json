@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Manually bump packages stuck in the pipeline",
-  "packageName": "@fluentui-react-native/input",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
