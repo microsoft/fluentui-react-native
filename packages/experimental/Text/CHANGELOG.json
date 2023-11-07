@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Tue, 07 Nov 2023 20:20:34 GMT",
+      "version": "0.13.14",
+      "tag": "@fluentui-react-native/experimental-text_v0.13.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/text to v0.21.14",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Oct 2023 21:26:06 GMT",
       "version": "0.13.12",
       "tag": "@fluentui-react-native/experimental-text_v0.13.12",

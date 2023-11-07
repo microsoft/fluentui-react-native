@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add documentation to TabList package",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

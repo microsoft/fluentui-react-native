@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Tue, 07 Nov 2023 20:20:36 GMT",
+      "version": "0.27.10",
+      "tag": "@fluentui-react-native/win32-theme_v0.27.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.19.11",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.9.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.25.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.32.3",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/win32-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.24.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Oct 2023 21:26:06 GMT",
       "version": "0.27.8",
       "tag": "@fluentui-react-native/win32-theme_v0.27.8",

@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Tue, 07 Nov 2023 20:20:35 GMT",
+      "version": "0.21.14",
+      "tag": "@fluentui-react-native/text_v0.21.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "130232522fd2916880ec3decfe594550f069d7a7",
+            "comment": "Use RN-based dynamic type"
+          },
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.12",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.25.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.12",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Oct 2023 21:26:06 GMT",
       "version": "0.21.12",
       "tag": "@fluentui-react-native/text_v0.21.12",
