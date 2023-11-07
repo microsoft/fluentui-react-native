@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update to react-native 0.72",
+  "packageName": "@fluentui-react-native/switch",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
