@@ -33,7 +33,7 @@
     "@fluentui-react-native/component-cache": "^1.5.1",
     "@fluentui-react-native/contextual-menu": "^0.22.23",
     "@fluentui-react-native/icon": "^0.19.14",
-    "@fluentui-react-native/tokens": "^0.21.4",
+    "@fluentui-react-native/tokens": "^0.21.6",
     "@uifabricshared/foundation-composable": ">=0.12.2 <1.0.0",
     "@uifabricshared/foundation-compose": "^1.14.10",
     "@uifabricshared/foundation-settings": ">=0.13.2 <1.0.0"
