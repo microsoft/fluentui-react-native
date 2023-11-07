@@ -85,17 +85,17 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
   /**
    * Defines a maximum height for the Callout.
    */
-  maxHeight?: number | string;
+  maxHeight?: number | `${number}%`;
 
   /**
    * Defines a maximum width for the Callout.
    */
-  maxWidth?: number | string;
+  maxWidth?: number | `${number}%`;
 
   /**
    * Defines a minimum width for the Callout.
    */
-  minWidth?: number | string;
+  minWidth?: number | `${number}%`;
 
   /**
    * Defines the minimum padding between the Callout and the display edges.

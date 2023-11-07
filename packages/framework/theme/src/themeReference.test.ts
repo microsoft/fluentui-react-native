@@ -22,7 +22,7 @@ describe('ThemeReference tests', () => {
       colors: {
         white: 'pink',
       },
-      spacing: { l2: '120px' } as Spacing,
+      spacing: { l2: '120px' } as Partial<Spacing>,
     });
     expect(themeRef.theme.colors.white).toEqual('pink');
     expect(themeRef.theme.spacing.l2).toEqual('120px');

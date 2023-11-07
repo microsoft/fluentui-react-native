@@ -22,7 +22,13 @@ function depcheckTask() {
     const options = mergeOneLevel(
       {
         ignorePatterns: ['*eslint*', '/lib/*', '/lib-commonjs/*'],
-        ignoreMatches: ['@fluentui-react-native/scripts', '@fluentui-react-native/eslint-config-rules', 'tslib', ...scriptsDevDeps()],
+        ignoreMatches: [
+          '@fluentui-react-native/scripts',
+          '@fluentui-react-native/eslint-config-rules',
+          'tslib',
+          '@react-native/metro-config',
+          ...scriptsDevDeps(),
+        ],
         specials: [depcheck.special.eslint, depcheck.special.jest],
       },
       config.depcheck,
