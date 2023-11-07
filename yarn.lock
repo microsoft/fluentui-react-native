@@ -4697,8 +4697,8 @@ __metadata:
   linkType: hard
 
 "@office-iss/react-native-win32@npm:^0.71.0":
-  version: 0.71.16
-  resolution: "@office-iss/react-native-win32@npm:0.71.16"
+  version: 0.71.18
+  resolution: "@office-iss/react-native-win32@npm:0.71.18"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
@@ -4738,7 +4738,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.71.0
-  checksum: 1a6d4b04d3634782ed819c094d97a0a1170fc31c90e8b2f93b724dca69fb9c938ff0bb5c01278f53ca93de4d9910f7b77e0e0f501303578f065e6127b410b0df
+  checksum: ed5101db4078602d3d6240511d8723173053b5c8157289e688e26eaeb510c9783bc53b22682dd4f1725ed0c841c0887ea0bebc07018ccc756bee2b8652cefdce
   languageName: node
   linkType: hard
 
