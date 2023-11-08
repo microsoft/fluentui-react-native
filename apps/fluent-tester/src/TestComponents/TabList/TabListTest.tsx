@@ -87,6 +87,21 @@ const SubmitInput: React.FunctionComponent<SubmitInputProps> = ({ label, onSubmi
   );
 };
 
+const tabStates = [
+  'small',
+  'medium',
+  'large',
+  'vertical',
+  'hovered',
+  'disabled',
+  'selected',
+  'focused',
+  'pressed',
+  'transparent',
+  'subtle',
+  'hasIcon',
+];
+
 const CustomizableTabList: React.FunctionComponent = () => {
   const styles = getStyles(useFluentTheme());
   const [tablistProps, setTablistProps] = React.useState<TabListProps>({
@@ -136,8 +151,18 @@ const CustomizableTabList: React.FunctionComponent = () => {
         const newTokens = prev[tabKey];
         if (value === '') {
           delete newTokens[tokenName];
+          for (const state of tabStates) {
+            if (newTokens[state][tokenName]) delete newTokens[state][tokenName];
+          }
         } else {
           newTokens[tokenName] = value;
+          for (const state of tabStates) {
+            if (newTokens[state]) {
+              newTokens[state][tokenName] = value;
+            } else {
+              newTokens[state] = { [tokenName]: value };
+            }
+          }
         }
         return { ...prev, [tabKey]: newTokens };
       });
