@@ -44,7 +44,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
           },
           ...(hasPressRententionForA11y && {
             pressRetentionOffset:
-              typeof tokens.padding === 'number' ? tokens.padding : typeof tokens.padding === 'number' ? parseFloat(tokens.padding) : 0, /// Retention of the press area outside of the checkbox equal to padding to match accessibility requirement
+              typeof tokens.padding === 'number' ? tokens.padding : typeof tokens.padding === 'string' ? parseFloat(tokens.padding) : 0, /// Retention of the press area outside of the checkbox equal to padding to match accessibility requirement
           }),
           android_ripple: { color: tokens.rippleColor, radius: tokens.checkmarkSize, foreground: true },
         }),
