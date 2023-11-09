@@ -35,13 +35,14 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/framework": "0.11.10",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@react-native/metro-config": "^0.72.0",
     "@types/use-subscription": "1.0.0",
     "react": "18.2.0",
-    "react-native": "^0.71.0"
+    "react-native": "^0.72.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-native": "^0.71.0"
+    "react-native": "^0.72.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -50,7 +51,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.71"
+        "react-native@0.72"
       ],
       "capabilities": [
         "core",
