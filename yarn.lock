@@ -8031,9 +8031,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-webdriveragent@npm:^5.12.2":
-  version: 5.12.2
-  resolution: "appium-webdriveragent@npm:5.12.2"
+"appium-webdriveragent@npm:^5.13.0":
+  version: 5.13.2
+  resolution: "appium-webdriveragent@npm:5.13.2"
   dependencies:
     "@appium/base-driver": ^9.0.0
     "@appium/strongbox": ^0.x
@@ -8041,14 +8041,14 @@ __metadata:
     appium-ios-device: ^2.5.0
     appium-ios-simulator: ^5.0.1
     async-lock: ^1.0.0
-    asyncbox: ^2.5.3
+    asyncbox: ^3.0.0
     axios: ^1.4.0
     bluebird: ^3.5.5
     lodash: ^4.17.11
     node-simctl: ^7.0.1
     source-map-support: ^0.x
     teen_process: ^2.0.0
-  checksum: 425dfcfcd5557903c03ae68ce97e2ff7c0677296a12d19892824d5808344929e43da6c85cfd9ae361a783e716b80f113eeeab6b2f3159b834f7bbb9d9baacf80
+  checksum: 64d56145f2870e0d3f7bdc8a66ac45216563acfd93bed3bad1180d2c1e7263ccac90716a29f0cadb71d559b5250e1b1a71dce6231e4f9ac8e941dcab7682a1af
   languageName: node
   linkType: hard
 
@@ -8092,17 +8092,17 @@ __metadata:
   linkType: hard
 
 "appium-xcuitest-driver@npm:^5.6.0":
-  version: 5.8.0
-  resolution: "appium-xcuitest-driver@npm:5.8.0"
+  version: 5.8.2
+  resolution: "appium-xcuitest-driver@npm:5.8.2"
   dependencies:
     appium-idb: ^1.6.13
     appium-ios-device: ^2.5.4
     appium-ios-simulator: ^5.3.3
     appium-remote-debugger: ^10.0.0
-    appium-webdriveragent: ^5.12.2
+    appium-webdriveragent: ^5.13.0
     appium-xcode: ^5.1.4
     async-lock: ^1.4.0
-    asyncbox: ^2.9.4
+    asyncbox: ^3.0.0
     bluebird: ^3.7.2
     css-selector-parser: ^3.0.0
     fancy-log: ^2.0.0
@@ -8119,7 +8119,7 @@ __metadata:
     ws: ^8.13.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: b38d4a8892b8e74f4ff2e7e53804ac62a38318d28f25bd90ce3ebd025360c752012c7bcf35314e499de65a044392d003e9ae45f483dc71fa9b7b0d5f4ac7bbe4
+  checksum: 8ae6d97f6682cd932ffaa1a592779a30305e89992d988985d887265c28b340503ac67246ff84f32bd19daa875d3709243f22d7823298a35f2c8355960ed55cb1
   languageName: node
   linkType: hard
 
@@ -8711,7 +8711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"asyncbox@npm:2.9.4, asyncbox@npm:^2.0.2, asyncbox@npm:^2.3.0, asyncbox@npm:^2.3.1, asyncbox@npm:^2.5.2, asyncbox@npm:^2.5.3, asyncbox@npm:^2.6.0, asyncbox@npm:^2.9.2, asyncbox@npm:^2.9.4":
+"asyncbox@npm:2.9.4, asyncbox@npm:^2.0.2, asyncbox@npm:^2.3.0, asyncbox@npm:^2.3.1, asyncbox@npm:^2.5.2, asyncbox@npm:^2.6.0, asyncbox@npm:^2.9.2":
   version: 2.9.4
   resolution: "asyncbox@npm:2.9.4"
   dependencies:
