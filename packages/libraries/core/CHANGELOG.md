@@ -1,8 +1,56 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Tue, 31 Oct 2023 19:11:10 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 02:39:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.39.0
+
+Thu, 09 Nov 2023 02:39:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.36.0
+- Bump @fluentui-react-native/callout to v0.25.0
+- Bump @fluentui-react-native/checkbox to v0.22.0
+- Bump @fluentui-react-native/contextual-menu to v0.23.0
+- Bump @fluentui-react-native/focus-trap-zone to v0.11.0
+- Bump @fluentui-react-native/focus-zone to v0.16.0
+- Bump @fluentui-react-native/interactive-hooks to v0.25.0
+- Bump @fluentui-react-native/link to v0.21.0
+- Bump @fluentui-react-native/menu-button to v0.12.0
+- Bump @fluentui-react-native/persona to v0.15.0
+- Bump @fluentui-react-native/persona-coin to v0.14.0
+- Bump @fluentui-react-native/pressable to v0.11.0
+- Bump @fluentui-react-native/radio-group to v0.20.0
+- Bump @fluentui-react-native/separator to v0.17.0
+- Bump @fluentui-react-native/tabs to v0.14.0
+- Bump @fluentui-react-native/text to v0.22.0
+
+## 0.38.6
+
+Tue, 07 Nov 2023 20:20:32 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/button to v0.35.11
+- Bump @fluentui-react-native/callout to v0.24.19
+- Bump @fluentui-react-native/checkbox to v0.21.7
+- Bump @fluentui-react-native/contextual-menu to v0.22.25
+- Bump @fluentui-react-native/focus-trap-zone to v0.10.14
+- Bump @fluentui-react-native/focus-zone to v0.15.0
+- Bump @fluentui-react-native/interactive-hooks to v0.24.12
+- Bump @fluentui-react-native/link to v0.20.7
+- Bump @fluentui-react-native/menu-button to v0.11.31
+- Bump @fluentui-react-native/persona to v0.14.12
+- Bump @fluentui-react-native/persona-coin to v0.13.12
+- Bump @fluentui-react-native/pressable to v0.10.13
+- Bump @fluentui-react-native/radio-group to v0.19.9
+- Bump @fluentui-react-native/separator to v0.16.10
+- Bump @fluentui-react-native/tabs to v0.13.19
+- Bump @fluentui-react-native/text to v0.21.14
 
 ## 0.38.4
 

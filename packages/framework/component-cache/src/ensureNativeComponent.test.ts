@@ -4,15 +4,17 @@ import { ensureNativeComponent } from './ensureNativeComponent';
 
 describe('ensureNativeComponent test suite', () => {
   beforeAll(() => {
-    jest.mock('react-native/Libraries/ReactNative/requireNativeComponent', () =>
-      jest.fn((className) => {
-        if (className == 'RCTView') {
-          return jest.requireActual('react-native/Libraries/Components/View/View');
-        }
+    jest.mock('react-native/Libraries/ReactNative/requireNativeComponent', () => {
+      return {
+        default: jest.fn((className) => {
+          if (className == 'RCTView') {
+            return jest.requireActual('react-native/Libraries/Components/View/View');
+          }
 
-        return null;
-      }),
-    );
+          return null;
+        }),
+      };
+    });
   });
 
   it('Base component render', () => {

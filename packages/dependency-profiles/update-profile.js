@@ -56,13 +56,9 @@ let profiles;
 // the current react-native version in index.js to a new file under src named
 // "furn-profile-X.Y.js" and add that profile here. For example:
 //
-// profiles = {
-//   [`${major}.${minor}`]: packages,
-//   ...require('./src/furn-profile-0.68.js')
-// };
-
 profiles = {
   [`${major}.${minor}`]: packages,
+  ...require('./src/furn-profile-0.71.js'),
 };
 
 const source = [

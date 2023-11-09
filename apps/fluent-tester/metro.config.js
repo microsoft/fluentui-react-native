@@ -6,8 +6,7 @@
  */
 
 const path = require('path');
-const { defaultWatchFolders, exclusionList, resolveUniqueModule } = require('@rnx-kit/metro-config');
-const { getDefaultConfig } = require('metro-config');
+const { exclusionList, makeMetroConfig, resolveUniqueModule } = require('@rnx-kit/metro-config');
 
 const [reactIs, reactIsExcludePattern] = resolveUniqueModule('react-is');
 
@@ -37,30 +36,19 @@ const blockList = exclusionList([
   reactIsExcludePattern,
 ]);
 
-module.exports = (async () => {
-  const {
-    resolver: { sourceExts, assetExts },
-  } = await getDefaultConfig();
-  return {
-    watchFolders: defaultWatchFolders(),
-    resolver: {
-      assetExts: [...assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
-      sourceExts: [...sourceExts, 'svg'],
-      blacklistRE: blockList,
-      blockList,
-      extraNodeModules: {
-        'react-is': reactIs,
-      },
+let config = makeMetroConfig({
+  resolver: {
+    blockList,
+    extraNodeModules: {
+      'react-is': reactIs,
     },
-    transformer: {
-      // This transformer selects between the regular transformer and svg transformer depending on the file type
-      babelTransformerPath: require.resolve('react-native-svg-transformer'),
-      getTransformOptions: async () => ({
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: false,
-        },
-      }),
-    },
-  };
-})();
+  },
+  transformer: {
+    // This transformer selects between the regular transformer and svg transformer depending on the file type
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+  },
+});
+
+(config.resolver.assetExts = [...config.resolver.assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png']),
+  (config.resolver.sourceExts = [...config.resolver.sourceExts, 'svg']),
+  (module.exports = config);

@@ -1,8 +1,28 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 02:39:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Thu, 09 Nov 2023 02:39:06 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/merge-props to v0.8.0
+- Bump @fluentui-react-native/tokens to v0.22.0
+- Bump @uifabricshared/foundation-settings to v0.14.0
+
+## 0.13.9
+
+Tue, 07 Nov 2023 20:20:36 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.21.6
 
 ## 0.13.7
 
