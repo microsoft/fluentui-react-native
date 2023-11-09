@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
-This log was last generated on Thu, 09 Nov 2023 02:39:08 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 21:59:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Thu, 09 Nov 2023 21:59:07 GMT
+
+### Patches
+
+- update RN 0.71 profile (krsiler@microsoft.com)
 
 ## 0.5.0
 

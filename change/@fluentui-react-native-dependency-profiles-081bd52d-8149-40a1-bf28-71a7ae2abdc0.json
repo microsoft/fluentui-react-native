@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update RN 0.71 profile",
-  "packageName": "@fluentui-react-native/dependency-profiles",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

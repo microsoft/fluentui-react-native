@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dependency-profiles",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 21:59:07 GMT",
+      "version": "0.5.1",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "47bca8203b3c5f6420603e9b069b4289eb18748b",
+            "comment": "update RN 0.71 profile"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:08 GMT",
       "version": "0.5.0",
       "tag": "@fluentui-react-native/dependency-profiles_v0.5.0",
