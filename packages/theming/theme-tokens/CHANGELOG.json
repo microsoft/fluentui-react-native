@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:11 GMT",
+      "version": "0.26.0",
+      "tag": "@fluentui-react-native/theme-tokens_v0.26.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme-tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.33.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Nov 2023 20:20:35 GMT",
       "version": "0.25.4",
       "tag": "@fluentui-react-native/theme-tokens_v0.25.4",

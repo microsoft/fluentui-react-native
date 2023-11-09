@@ -2,6 +2,39 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:06 GMT",
+      "version": "0.14.0",
+      "tag": "@uifabricshared/foundation-tokens_v0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-tokens",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-tokens",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.8.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-tokens",
+            "comment": "Bump @fluentui-react-native/tokens to v0.22.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-tokens",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.14.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Nov 2023 20:20:36 GMT",
       "version": "0.13.9",
       "tag": "@uifabricshared/foundation-tokens_v0.13.9",

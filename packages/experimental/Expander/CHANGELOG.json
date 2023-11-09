@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:08 GMT",
+      "version": "0.7.0",
+      "tag": "@fluentui-react-native/experimental-expander_v0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-expander",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.6.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-expander",
+            "comment": "Bump @fluentui-react-native/framework to v0.12.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 07 Nov 2023 20:20:33 GMT",
       "version": "0.6.13",
       "tag": "@fluentui-react-native/experimental-expander_v0.6.13",

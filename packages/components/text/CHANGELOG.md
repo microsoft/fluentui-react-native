@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Tue, 07 Nov 2023 20:20:35 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 02:39:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.0
+
+Thu, 09 Nov 2023 02:39:10 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.12.0
+- Bump @fluentui-react-native/framework to v0.12.0
+- Bump @fluentui-react-native/interactive-hooks to v0.25.0
+- Bump @fluentui-react-native/theme-tokens to v0.26.0
+- Bump @fluentui-react-native/tokens to v0.22.0
+- Bump @uifabricshared/foundation-compose to v1.14.13
 
 ## 0.21.14
 
