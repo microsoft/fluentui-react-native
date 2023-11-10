@@ -6771,12 +6771,12 @@ __metadata:
   linkType: hard
 
 "@types/jscodeshift@npm:^0.11.5":
-  version: 0.11.9
-  resolution: "@types/jscodeshift@npm:0.11.9"
+  version: 0.11.10
+  resolution: "@types/jscodeshift@npm:0.11.10"
   dependencies:
     ast-types: ^0.14.1
     recast: ^0.20.3
-  checksum: a5b0bc6250dad3dfbaa9af71f56e65979cbfb632ee3d8da43bd79e729eaf231bc15356cc5de45c7e1f634881ab541f712cdbf554f89032273819c49bc397882e
+  checksum: 91cd3ec925e4a9624fe0f5490ac1509b1f9b34bd7beed89c210eb0bec340c7b4627beef27912e5408aeb4dd6e2d7e37d2fd6a66a8436cd2c56c5cb7e0ddc2cbb
   languageName: node
   linkType: hard
 
