@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix various tab styling bugs",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
