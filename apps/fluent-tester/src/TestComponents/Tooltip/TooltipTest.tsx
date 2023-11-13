@@ -20,7 +20,8 @@ export const TooltipTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'component-description';
+  const description =
+    'A Tooltip component displays additional information about another component. Tooltip is not expected to handle interactive content.';
 
   return <Test name="Tooltip Test" description={description} sections={tooltipSections} status={status}></Test>;
 };
