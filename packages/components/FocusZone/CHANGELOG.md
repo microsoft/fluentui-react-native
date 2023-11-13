@@ -1,8 +1,160 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Oct 2023 19:11:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.3
+
+Tue, 31 Oct 2023 19:11:10 GMT
+
+### Patches
+
+- Fix keyboarding behavior (ruaraki@microsoft.com)
+
+## 0.13.2
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.10
+
+## 0.13.1
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.9
+
+## 0.13.0
+
+Tue, 17 Oct 2023 19:21:23 GMT
+
+### Minor changes
+
+- Adding prop in FocusZone to configure tab key navigation (safreibe@microsoft.com)
+
+## 0.12.10
+
+Tue, 29 Aug 2023 22:56:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.8
+
+## 0.12.9
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.7
+
+## 0.12.8
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.6
+- Bump @uifabricshared/foundation-composable to v0.12.2
+- Bump @uifabricshared/foundation-settings to v0.13.2
+
+## 0.12.7
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.5
+
+## 0.12.6
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.4
+
+## 0.12.5
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.5.1
+
+## 0.12.4
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.3
+
+## 0.12.3
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.2
+
+## 0.12.2
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.1
+
+## 0.12.1
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.0
+- Bump @uifabricshared/foundation-composable to v0.12.1
+- Bump @uifabricshared/foundation-settings to v0.13.1
+
+## 0.12.0
+
+Mon, 05 Jun 2023 19:26:23 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.5.0
+- Bump @fluentui-react-native/interactive-hooks to v0.23.0
+- Bump @uifabricshared/foundation-composable to v0.12.0
+- Bump @uifabricshared/foundation-settings to v0.13.0
+
+## 0.11.43
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.31
+
+## 0.11.42
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.30
+
+## 0.11.41
+
+Mon, 10 Apr 2023 19:48:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.29
 
 ## 0.11.40
 

@@ -386,40 +386,73 @@ export interface ControlColorTokens {
   ghostDisabledContent: ColorValue;
   ghostDisabledIcon: ColorValue;
 
+  /* Deprecated */
   brandedBackground: ColorValue;
+  /* Deprecated */
   brandedBorder: ColorValue;
+  /* Deprecated */
   brandedContent: ColorValue;
+  /* Deprecated */
   brandedIcon: ColorValue;
 
+  /* Deprecated */
   brandedHoveredBackground: ColorValue;
+  /* Deprecated */
   brandedHoveredBorder: ColorValue;
+  /* Deprecated */
   brandedHoveredContent: ColorValue;
+  /* Deprecated */
   brandedHoveredIcon: ColorValue;
 
+  /* Deprecated */
   brandedFocusedBackground: ColorValue;
+  /* Deprecated */
   brandedFocusedBorder: ColorValue;
+  /* Deprecated */
   brandedFocusedContent: ColorValue;
+  /* Deprecated */
   brandedFocusedIcon: ColorValue;
 
+  /* Deprecated */
   brandedPressedBackground: ColorValue;
+  /* Deprecated */
   brandedPressedBorder: ColorValue;
+  /* Deprecated */
   brandedPressedContent: ColorValue;
+  /* Deprecated */
   brandedPressedIcon: ColorValue;
 
+  /* Deprecated */
   brandedDisabledBackground: ColorValue;
+  /* Deprecated */
   brandedDisabledBorder: ColorValue;
+  /* Deprecated */
   brandedDisabledContent: ColorValue;
+  /* Deprecated */
   brandedDisabledIcon: ColorValue;
+
+  /* Deprecated */
+  brandedCheckedBackground: ColorValue;
+  /* Deprecated */
+  brandedCheckedContent: ColorValue;
+  /* Deprecated */
+  brandedCheckedHoveredBackground: ColorValue;
+  /* Deprecated */
+  brandedCheckedHoveredContent: ColorValue;
+
+  /* Deprecated */
+  brandedSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedFocusedSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedHoveredSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedPressedSecondaryContent: ColorValue;
 
   defaultCheckedBackground: ColorValue;
   defaultCheckedContent: ColorValue;
   defaultCheckedHoveredBackground: ColorValue;
   defaultCheckedHoveredContent: ColorValue;
-
-  brandedCheckedBackground: ColorValue;
-  brandedCheckedContent: ColorValue;
-  brandedCheckedHoveredBackground: ColorValue;
-  brandedCheckedHoveredContent: ColorValue;
 
   ghostCheckedBackground: ColorValue;
   ghostCheckedContent: ColorValue;
@@ -431,11 +464,6 @@ export interface ControlColorTokens {
   ghostFocusedSecondaryContent: ColorValue;
   ghostHoveredSecondaryContent: ColorValue;
   ghostPressedSecondaryContent: ColorValue;
-
-  brandedSecondaryContent: ColorValue;
-  brandedFocusedSecondaryContent: ColorValue;
-  brandedHoveredSecondaryContent: ColorValue;
-  brandedPressedSecondaryContent: ColorValue;
 
   defaultDisabledSecondaryContent: ColorValue;
   defaultHoveredSecondaryContent: ColorValue;
@@ -826,6 +854,9 @@ export interface AliasColorTokens {
   /** @platform macOS, win32, windows */
   brandStroke2?: ColorValue;
 
+  /** @platform android, iOS */
+  brandStrokeTint?: ColorValue;
+
   /** @platform macOS, win32, windows */
   compoundBrandStroke1?: ColorValue;
 
@@ -846,82 +877,190 @@ export interface AliasColorTokens {
 
   /// Red
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redBackground1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redBackground2?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redBackground3?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redForeground1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redForeground2?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redForeground3?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redBorderActive?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redBorder1?: ColorValue;
 
-  /** @platform macOS, win32, windows */
+  /** @deprecated */
   redBorder2?: ColorValue;
 
   /// Error, status, and presence tokens
 
-  /** @platform iOS, android  */
+  /** @platform android, iOS, macOS, win32, windows  */
   dangerBackground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform android, iOS, macOS, win32, windows  */
   dangerBackground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform macOS, win32, windows  */
+  dangerBackground3?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows  */
   dangerForeground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform android, iOS, macOS, win32, windows  */
   dangerForeground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform macOS, win32, windows */
+  dangerForeground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  dangerForegroundInverted?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  dangerBorderActive?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  dangerBorder1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  dangerBorder2?: ColorValue;
+
+  /** @platform android, iOS  */
+  dangerStroke1?: ColorValue;
+
+  /** @platform iOS, macOS, android, win32, windows  */
   successBackground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform iOS, android, macOS, win32, windows  */
   successBackground2?: ColorValue;
 
-  /** @platform iOS, android */
+  /** @platform macOS, win32, windows  */
+  successBackground3?: ColorValue;
+
+  /** @platform iOS, android, macOS, win32, windows  */
   successForeground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform iOS, android, macOS, win32, windows  */
   successForeground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform macOS, win32, windows */
+  successForeground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  successForegroundInverted?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  successBorderActive?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  successBorder1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  successBorder2?: ColorValue;
+
+  /** @platform android, iOS  */
+  successStroke1?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows  */
   warningBackground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform android, iOS, macOS, win32, windows  */
   warningBackground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform macOS, win32, windows */
+  warningBackground3?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows  */
   warningForeground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform android, iOS, macOS, win32, windows  */
   warningForeground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform macOS, win32, windows */
+  warningForeground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  warningForegroundInverted?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  warningBorderActive?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  warningBorder1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  warningBorder2?: ColorValue;
+
+  /** @platform android, iOS  */
+  warningStroke1?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows  */
   severeBackground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform android, iOS, macOS, win32, windows  */
   severeBackground2?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform macOS, win32, windows */
+  severeBackground3?: ColorValue;
+
+  /** @platform android, iOS, macOS, win32, windows  */
   severeForeground1?: ColorValue;
 
-  /** @platform iOS, android  */
+  /** @platform android, iOS, macOS, win32, windows  */
   severeForeground2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  severeForeground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  severeBorderActive?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  severeBorder1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  severeBorder2?: ColorValue;
+
+  /** @platform android, iOS  */
+  severeStroke1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeBackground1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeBackground2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeBackground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeForeground1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeForeground2?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeForeground3?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeBorderActive?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeBorder1?: ColorValue;
+
+  /** @platform macOS, win32, windows */
+  outofofficeBorder2?: ColorValue;
 
   /** @platform iOS, android  */
   presenceAway?: ColorValue;

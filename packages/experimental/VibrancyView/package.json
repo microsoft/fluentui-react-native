@@ -1,0 +1,63 @@
+{
+  "name": "@fluentui-react-native/vibrancy-view",
+  "version": "0.0.3",
+  "description": "A native wrapper for NSVisualEffectView on macOS",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/VibrancyView"
+  },
+  "dependencies": {
+    "@fluentui-react-native/adapters": ">=0.11.3 <1.0.0",
+    "@fluentui-react-native/component-cache": "^1.5.1",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "react": "18.2.0",
+    "react-native": "^0.71.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "^0.71.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.71"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
+  }
+}

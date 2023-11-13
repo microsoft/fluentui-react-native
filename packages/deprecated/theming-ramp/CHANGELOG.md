@@ -1,8 +1,62 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Tue, 14 Mar 2023 20:50:45 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.2
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.32.1
+
+## 0.19.1
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Result of yarn (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/immutable-merge to v1.2.1
+- Bump @uifabricshared/foundation-settings to v0.13.2
+
+## 0.19.0
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @uifabricshared/foundation-settings to v0.13.1
+
+## 0.18.0
+
+Mon, 05 Jun 2023 19:26:25 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @uifabricshared/foundation-settings to v0.13.0
+- Bump @fluentui-react-native/immutable-merge to v1.2.0
+- Bump @fluentui-react-native/theme-types to v0.32.0
+
+## 0.17.24
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.31.2
+
+## 0.17.23
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.31.1
 
 ## 0.17.22
 

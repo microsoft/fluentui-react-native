@@ -1,5 +1,6 @@
 export { Spinner } from './Spinner';
-export {
+export { spinnerName } from './Spinner.types';
+export type {
   SpinnerTokens,
   SpinnerProps,
   SpinnerSlotProps,

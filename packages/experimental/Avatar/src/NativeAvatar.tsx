@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { ImageURISource, ViewProps, ColorValue } from 'react-native';
 import { NativeModules } from 'react-native';

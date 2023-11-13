@@ -5,6 +5,7 @@ import type { ImageStyle, TextStyle } from 'react-native';
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
+import type { SvgProps } from 'react-native-svg';
 import { SvgUri } from 'react-native-svg';
 
 import type { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
@@ -54,7 +55,7 @@ function renderFontIcon(iconProps: IconProps) {
       fontSize: fontSource.fontSize,
       color: iconProps.color,
     },
-    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily],
+    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.fontSize],
   )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);
@@ -68,19 +69,23 @@ function renderFontIcon(iconProps: IconProps) {
 function renderSvg(iconProps: IconProps) {
   const svgIconProps: SvgIconProps = iconProps.svgSource;
   const { accessible, accessibilityLabel, width, height, color } = iconProps;
-  const viewBox = iconProps.svgSource.viewBox;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
+
+  const svgProps: SvgProps = { width, height, color };
+  if (svgIconProps.viewBox) {
+    svgProps.viewBox = svgIconProps.viewBox;
+  }
 
   if (svgIconProps.src) {
     return (
       <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
-        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={color} />
+        <svgIconProps.src {...svgProps} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
       <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
-        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={color} />
+        <SvgUri uri={svgIconProps.uri} {...svgProps} />
       </View>
     );
   } else {

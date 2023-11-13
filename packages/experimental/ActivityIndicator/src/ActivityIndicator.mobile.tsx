@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import { useRef, useEffect, useCallback } from 'react';
 import { Animated, Easing, View } from 'react-native';
@@ -18,7 +19,7 @@ const getActivityIndicatorPath = (diameter: number, width: number, color: string
   const innerRadius = diameter / 2 - width / 2;
   const path = `M${start.x} ${start.y} a${innerRadius} ${innerRadius} 0 1 1 ${innerRadius} ${innerRadius}`;
 
-  return <Path d={path} stroke={color} strokeWidth={width} strokeLinecap="round" />;
+  return <Path d={path} stroke={color} strokeWidth={width} strokeLinecap="round" fill={'transparent'} />;
 };
 
 export const AnimatedSvg = Animated.createAnimatedComponent(Svg);

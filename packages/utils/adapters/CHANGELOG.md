@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Fri, 24 Feb 2023 20:39:57 GMT and should not be manually modified.
+This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.3
+
+Tue, 29 Aug 2023 22:56:32 GMT
+
+### Patches
+
+- add aria-multiselectable and aria-reaquired (krsiler@microsoft.com)
+
+## 0.11.2
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Add macOS prop `allowsVibrancy` (saadnajmi2@gmail.com)
+
+## 0.11.1
+
+Fri, 07 Jul 2023 20:45:11 GMT
+
+### Patches
+
+- Update macOS props (saadnajmi2@gmail.com)
+
+## 0.11.0
+
+Mon, 05 Jun 2023 19:26:26 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
 
 ## 0.10.2
 

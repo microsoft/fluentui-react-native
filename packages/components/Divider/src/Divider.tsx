@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 /** @jsxFrag */
 import React from 'react';

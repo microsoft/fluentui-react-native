@@ -5,13 +5,14 @@ import SwitchPageObject from '../pages/SwitchPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await SwitchPageObject.waitForInitialPageToDisplay();
-    expect(await SwitchPageObject.isInitialPageDisplayed()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await SwitchPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to Switch test page', async () => {
-    await SwitchPageObject.navigateToPageAndLoadTests(true);
-    expect(await SwitchPageObject.isPageLoaded()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await SwitchPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await SwitchPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -27,16 +28,12 @@ describe('Switch Accessibility Testing', () => {
     await expect(
       await SwitchPageObject.compareAttribute(SwitchPageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
     ).toBeTruthy();
-
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
     await expect(
       await SwitchPageObject.compareAttribute(SwitchPageObject._primaryComponent, Attribute.AccessibilityLabel, SWITCH_ACCESSIBILITY_LABEL),
     ).toBeTruthy();
-
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set "accessibilityLabel" prop. Validate "Name" element attribute defaults to current Switch label.', async () => {
@@ -47,8 +44,6 @@ describe('Switch Accessibility Testing', () => {
         SWITCH_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

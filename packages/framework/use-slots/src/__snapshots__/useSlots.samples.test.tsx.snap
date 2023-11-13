@@ -4,14 +4,14 @@ exports[`useSlots sample code test suite renders sample 1 - the two types of bas
 <div>
   <BoldTextStaged
     style={
-      Object {
+      {
         "color": "black",
       }
     }
   >
     <span
       style={
-        Object {
+        {
           "color": "black",
           "fontWeight": 900,
         }
@@ -22,14 +22,14 @@ exports[`useSlots sample code test suite renders sample 1 - the two types of bas
   </BoldTextStaged>
   <BoldTextStandard
     style={
-      Object {
+      {
         "color": "black",
       }
     }
   >
     <span
       style={
-        Object {
+        {
           "color": "black",
           "fontWeight": 900,
         }
@@ -45,14 +45,14 @@ exports[`useSlots sample code test suite renders sample 2 = the two types of two
 <div>
   <HeaderStaged
     style={
-      Object {
+      {
         "color": "black",
       }
     }
   >
     <span
       style={
-        Object {
+        {
           "color": "black",
           "fontSize": 20,
           "fontWeight": 900,
@@ -64,14 +64,14 @@ exports[`useSlots sample code test suite renders sample 2 = the two types of two
   </HeaderStaged>
   <HeaderStandard
     style={
-      Object {
+      {
         "color": "black",
       }
     }
   >
     <BoldTextStandard
       style={
-        Object {
+        {
           "color": "black",
           "fontSize": 20,
         }
@@ -79,7 +79,7 @@ exports[`useSlots sample code test suite renders sample 2 = the two types of two
     >
       <span
         style={
-          Object {
+          {
             "color": "black",
             "fontSize": 20,
             "fontWeight": 900,
@@ -100,7 +100,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   </span>
   <CaptionedHeaderStandard';
     style={
-      Object {
+      {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
@@ -109,7 +109,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   >
     <div
       style={
-        Object {
+        {
           "backgroundColor": "gray",
           "borderColor": "purple",
           "borderWidth": 1,
@@ -121,14 +121,14 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       <HeaderStandard>
         <BoldTextStandard
           style={
-            Object {
+            {
               "fontSize": 20,
             }
           }
         >
           <span
             style={
-              Object {
+              {
                 "fontSize": 20,
                 "fontWeight": 900,
               }
@@ -142,7 +142,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   </CaptionedHeaderStandard';>
   <CaptionedHeaderStaged
     style={
-      Object {
+      {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
@@ -151,7 +151,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   >
     <div
       style={
-        Object {
+        {
           "backgroundColor": "gray",
           "borderColor": "purple",
           "borderWidth": 1,
@@ -162,7 +162,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
     >
       <span
         style={
-          Object {
+          {
             "fontSize": 20,
             "fontWeight": 900,
           }
@@ -178,7 +178,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   <CaptionedHeaderStandard';
     captionText="Caption text"
     style={
-      Object {
+      {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
@@ -187,7 +187,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   >
     <div
       style={
-        Object {
+        {
           "backgroundColor": "gray",
           "borderColor": "purple",
           "borderWidth": 1,
@@ -199,14 +199,14 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       <HeaderStandard>
         <BoldTextStandard
           style={
-            Object {
+            {
               "fontSize": 20,
             }
           }
         >
           <span
             style={
-              Object {
+              {
                 "fontSize": 20,
                 "fontWeight": 900,
               }
@@ -219,7 +219,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       <BoldTextStandard>
         <span
           style={
-            Object {
+            {
               "fontWeight": 900,
             }
           }
@@ -232,7 +232,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   <CaptionedHeaderStaged
     captionText="Caption text"
     style={
-      Object {
+      {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
@@ -241,7 +241,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   >
     <div
       style={
-        Object {
+        {
           "backgroundColor": "gray",
           "borderColor": "purple",
           "borderWidth": 1,
@@ -252,7 +252,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
     >
       <span
         style={
-          Object {
+          {
             "fontSize": 20,
             "fontWeight": 900,
           }
@@ -262,7 +262,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       </span>
       <span
         style={
-          Object {
+          {
             "fontWeight": 900,
           }
         }
@@ -279,7 +279,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
     captionText="Caption text"
     headerColor="red"
     style={
-      Object {
+      {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
@@ -288,7 +288,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   >
     <div
       style={
-        Object {
+        {
           "backgroundColor": "gray",
           "borderColor": "purple",
           "borderWidth": 1,
@@ -299,14 +299,14 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
     >
       <HeaderStandard
         style={
-          Object {
+          {
             "color": "red",
           }
         }
       >
         <BoldTextStandard
           style={
-            Object {
+            {
               "color": "red",
               "fontSize": 20,
             }
@@ -314,7 +314,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
         >
           <span
             style={
-              Object {
+              {
                 "color": "red",
                 "fontSize": 20,
                 "fontWeight": 900,
@@ -327,14 +327,14 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       </HeaderStandard>
       <BoldTextStandard
         style={
-          Object {
+          {
             "color": "yellow",
           }
         }
       >
         <span
           style={
-            Object {
+            {
               "color": "yellow",
               "fontWeight": 900,
             }
@@ -350,7 +350,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
     captionText="Caption text"
     headerColor="red"
     style={
-      Object {
+      {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
@@ -359,7 +359,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   >
     <div
       style={
-        Object {
+        {
           "backgroundColor": "gray",
           "borderColor": "purple",
           "borderWidth": 1,
@@ -370,7 +370,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
     >
       <span
         style={
-          Object {
+          {
             "color": "red",
             "fontSize": 20,
             "fontWeight": 900,
@@ -381,7 +381,7 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
       </span>
       <span
         style={
-          Object {
+          {
             "color": "yellow",
             "fontWeight": 900,
           }

@@ -3,7 +3,7 @@
 exports[`buildUseSlots test suite Simple component render 1`] = `
 <View
   style={
-    Object {
+    {
       "borderColor": "green",
       "borderWidth": 1,
       "height": 20,
@@ -13,7 +13,7 @@ exports[`buildUseSlots test suite Simple component render 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "backgroundColor": "blue",
         "height": 10,
         "width": 20,

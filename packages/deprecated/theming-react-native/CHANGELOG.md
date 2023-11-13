@@ -1,8 +1,142 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Tue, 21 Mar 2023 21:53:45 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.10
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.9
+- Bump @fluentui-react-native/win32-theme to v0.27.8
+- Bump @uifabricshared/theming-ramp to v0.19.2
+
+## 0.18.9
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.8
+- Bump @fluentui-react-native/win32-theme to v0.27.7
+
+## 0.18.8
+
+Tue, 29 Aug 2023 22:56:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.7
+- Bump @fluentui-react-native/win32-theme to v0.27.6
+
+## 0.18.7
+
+Tue, 15 Aug 2023 22:54:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/win32-theme to v0.27.5
+
+## 0.18.6
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.6
+- Bump @fluentui-react-native/win32-theme to v0.27.4
+
+## 0.18.5
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.5
+- Bump @fluentui-react-native/win32-theme to v0.27.3
+- Bump @uifabricshared/theme-registry to v0.10.1
+- Bump @uifabricshared/theming-ramp to v0.19.1
+
+## 0.18.4
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.4
+- Bump @fluentui-react-native/win32-theme to v0.27.2
+
+## 0.18.3
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.3
+- Bump @fluentui-react-native/win32-theme to v0.27.1
+
+## 0.18.2
+
+Mon, 17 Jul 2023 05:40:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/win32-theme to v0.27.0
+
+## 0.18.1
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.2
+- Bump @fluentui-react-native/win32-theme to v0.26.2
+
+## 0.18.0
+
+Mon, 12 Jun 2023 17:46:44 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/default-theme to v0.19.1
+- Bump @fluentui-react-native/win32-theme to v0.26.1
+- Bump @uifabricshared/theming-ramp to v0.19.0
+
+## 0.17.0
+
+Mon, 05 Jun 2023 19:26:26 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.19.0
+- Bump @fluentui-react-native/win32-theme to v0.26.0
+- Bump @uifabricshared/theme-registry to v0.10.0
+- Bump @uifabricshared/theming-ramp to v0.18.0
+
+## 0.16.12
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.18.4
+- Bump @fluentui-react-native/win32-theme to v0.25.12
+- Bump @uifabricshared/theming-ramp to v0.17.24
+
+## 0.16.11
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.18.3
+- Bump @fluentui-react-native/win32-theme to v0.25.11
+- Bump @uifabricshared/theming-ramp to v0.17.23
 
 ## 0.16.10
 

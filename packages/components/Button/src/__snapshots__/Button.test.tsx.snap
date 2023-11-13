@@ -4,6 +4,23 @@ exports[`Button component tests Button circular 1`] = `
 <View
   accessibilityLabel="Circular Button"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   enableFocusRing={true}
@@ -20,19 +37,19 @@ exports[`Button component tests Button circular 1`] = `
   onStartShouldSetResponder={[Function]}
   shape="circular"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
+      "borderColor": "#0f6cbd",
       "borderRadius": 9999,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -42,10 +59,10 @@ exports[`Button component tests Button circular 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -64,6 +81,23 @@ exports[`Button component tests Button composed 1`] = `
 <View
   accessibilityLabel="Composed Button with RNText"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   enableFocusRing={true}
@@ -79,19 +113,19 @@ exports[`Button component tests Button composed 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
-      "borderRadius": 4,
+      "borderColor": "#0f6cbd",
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -99,11 +133,11 @@ exports[`Button component tests Button composed 1`] = `
   <Text
     accessible={false}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "dynamicTypeRamp": undefined,
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "600",
         "letterSpacing": undefined,
@@ -126,6 +160,23 @@ exports[`Button component tests Button customized 1`] = `
 <View
   accessibilityLabel="Custom Button"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   enableFocusRing={true}
@@ -141,19 +192,19 @@ exports[`Button component tests Button customized 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
-      "borderRadius": 4,
+      "borderColor": "#0f6cbd",
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -163,10 +214,10 @@ exports[`Button component tests Button customized 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -185,6 +236,23 @@ exports[`Button component tests Button default 1`] = `
 <View
   accessibilityLabel="Default Button"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   enableFocusRing={true}
@@ -200,19 +268,19 @@ exports[`Button component tests Button default 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
-      "borderRadius": 4,
+      "borderColor": "#0f6cbd",
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -222,10 +290,10 @@ exports[`Button component tests Button default 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -245,8 +313,20 @@ exports[`Button component tests Button disabled 1`] = `
   accessibilityLabel="Disabled Button"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -264,19 +344,19 @@ exports[`Button component tests Button disabled 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
+      "backgroundColor": "#b4d6fa",
       "borderColor": "#f3f2f1",
-      "borderRadius": 4,
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -286,10 +366,10 @@ exports[`Button component tests Button disabled 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
-        "color": "#d2d0ce",
+      {
+        "color": "#bdbdbd",
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -308,6 +388,23 @@ exports[`Button component tests Button large 1`] = `
 <View
   accessibilityLabel="Large Button"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   enableFocusRing={true}
@@ -324,19 +421,19 @@ exports[`Button component tests Button large 1`] = `
   onStartShouldSetResponder={[Function]}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
-      "borderRadius": 4,
+      "borderColor": "#0f6cbd",
+      "borderRadius": 12,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 52,
       "minWidth": 96,
-      "padding": 11,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 16,
       "width": undefined,
     }
   }
@@ -346,10 +443,10 @@ exports[`Button component tests Button large 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 17,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -368,6 +465,23 @@ exports[`Button component tests Button primary 1`] = `
 <View
   accessibilityLabel="Primary Button"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   appearance="primary"
   collapsable={false}
@@ -384,19 +498,19 @@ exports[`Button component tests Button primary 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
-      "borderRadius": 4,
+      "borderColor": "#0f6cbd",
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -406,10 +520,10 @@ exports[`Button component tests Button primary 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -428,6 +542,23 @@ exports[`Button component tests Button small 1`] = `
 <View
   accessibilityLabel="Small Button"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   enableFocusRing={true}
@@ -444,19 +575,19 @@ exports[`Button component tests Button small 1`] = `
   onStartShouldSetResponder={[Function]}
   size="small"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
-      "borderRadius": 4,
+      "borderColor": "#0f6cbd",
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 28,
       "minWidth": 64,
-      "padding": 7,
-      "paddingHorizontal": 11,
+      "paddingHorizontal": 6,
       "width": undefined,
     }
   }
@@ -466,11 +597,11 @@ exports[`Button component tests Button small 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 13,
-        "fontWeight": "400",
+        "fontSize": 12,
+        "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
@@ -488,6 +619,23 @@ exports[`Button component tests Button square 1`] = `
 <View
   accessibilityLabel="Square Button"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   enableFocusRing={true}
@@ -504,19 +652,19 @@ exports[`Button component tests Button square 1`] = `
   onStartShouldSetResponder={[Function]}
   shape="square"
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0f6cbd",
-      "borderColor": "#0f548c",
+      "borderColor": "#0f6cbd",
       "borderRadius": 0,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -526,10 +674,10 @@ exports[`Button component tests Button square 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -548,6 +696,23 @@ exports[`Button component tests Button subtle 1`] = `
 <View
   accessibilityLabel="Subtle Button"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   appearance="subtle"
   collapsable={false}
@@ -564,19 +729,19 @@ exports[`Button component tests Button subtle 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
       "borderColor": "#ffffff",
-      "borderRadius": 4,
+      "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 40,
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 12,
       "width": undefined,
     }
   }
@@ -586,10 +751,10 @@ exports[`Button component tests Button subtle 1`] = `
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
-      Object {
+      {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 15,
+        "fontSize": 12,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,

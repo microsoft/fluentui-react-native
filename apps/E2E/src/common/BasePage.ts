@@ -1,5 +1,6 @@
 import {
   AndroidAttribute,
+  androidAttributeToEnumName,
   Attribute,
   attributeToEnumName,
   BASE_TESTPAGE,
@@ -40,6 +41,7 @@ async function QueryWithChaining(identifier) {
     // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
     queryResult = await $(selector);
   }
+
   return queryResult;
 }
 
@@ -72,32 +74,34 @@ export abstract class BasePage {
    * For any given page object, this method automates:
    *  - Navigating to the page by clicking its component button
    *  - Waiting for the component page to load
-   *  - Optionally expanding its E2E sections IF a boolean flag is passed.
    *
    * This also contains error checking through its waiters, removing the extra `expect()` calls during test setup.
-   *
-   * @param {boolean} showE2ESection Some components' E2E tests check only if the test page loads correctly or not. Others
-   * (majority), perform UI manipulation tests on UI components on the test page. In these scenarios, these UI components have their
-   * own section on the test page (by default, it's hidden so partners don't see it). If this parameter is true, this method opens up
-   * that testing section.
    */
-  async navigateToPageAndLoadTests(showE2ESection = false) {
+  async navigateToPageAndLoadTests(): Promise<boolean | void> {
     // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
     if (this.platform === 'android' || this.platform === 'ios') {
       await this.mobileScrollToComponentButton();
     }
 
     await (await this._pageButton).click();
-    // Wait for page to load
-    await this.waitForCondition(async () => await this.isPageLoaded(), this.ERRORMESSAGE_PAGELOAD, this.waitForUiEvent, 1500);
 
-    if (showE2ESection) {
-      await this.enableE2ETesterMode();
-    }
+    // Wait for page to load
+    return await this.waitForCondition(async () => await this.isPageLoaded(), this.ERRORMESSAGE_PAGELOAD, this.waitForUiEvent, 1500);
   }
 
-  async enableE2ETesterMode(): Promise<void> {
+  /*
+   * Some components' E2E tests check only if the test page loads correctly or not. Others
+   * (majority), perform UI manipulation tests on UI components on the test page. In these scenarios, these UI components have their
+   * own section on the test page (by default, it's hidden so partners don't see it). This method opens up that testing section.
+  */
+  async enableE2ETesterMode(): Promise<boolean | void> {
     const e2eSwitch = await this._e2eSwitch;
+    await browser.waitUntil(async () => await e2eSwitch.isDisplayed() && await e2eSwitch.isEnabled(),
+    {
+      timeout: 15000,
+      timeoutMsg: 'The E2E Switch should be enabled and visible before we interact with it'
+    })
+
     switch (this.platform) {
       // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
       // different on android because .isSelected() doesn't function as expected on the platform.
@@ -116,7 +120,8 @@ export abstract class BasePage {
           await this.waitForCondition(async () => e2eSwitch.isSelected(), 'Clicked the E2E Mode Switch, but it failed to toggle.');
         }
     }
-    await this.waitForCondition(
+
+    return await this.waitForCondition(
       async () => await (await this._e2eSection).isDisplayed(),
       'Pressed E2E Mode Switch, but E2E Test Sections failed to display before the timeout.',
     );
@@ -132,16 +137,27 @@ export abstract class BasePage {
     expectedValue: any,
   ): Promise<boolean> {
     const el = await element;
-    const actualValue = await el.getAttribute(attribute);
-    if (expectedValue !== actualValue) {
-      throw new Error(
-        `On ${this._pageName}, a test component with a testID = '${await el.getAttribute(Attribute.TestID)}' should have attribute, ${
-          attributeToEnumName[attribute]
-        } (which maps to windows attribute '${attribute}' property on the element), equal to '${expectedValue}'. Instead, ${
-          attributeToEnumName[attribute]
-        } is equal to '${actualValue}'.`,
-      );
+
+    try {
+      await browser.waitUntil(async () => expectedValue === await el.getAttribute(attribute));
+    } catch {
+      const actualValue = await el.getAttribute(attribute);
+      switch (this.platform) {
+        case 'android':
+          throw new Error(
+            `On ${this._pageName}, expected attribute ${androidAttributeToEnumName[attribute]} value to be ${expectedValue} but got ${actualValue}`,
+          );
+        default:
+          throw new Error(
+            `On ${this._pageName}, a test component with a testID = '${await el.getAttribute(Attribute.TestID)}' should have attribute, ${
+              attributeToEnumName[attribute]
+            } (which maps to windows attribute '${attribute}' property on the element), equal to '${expectedValue}'. Instead, ${
+              attributeToEnumName[attribute]
+            } is equal to '${actualValue}'.`,
+          );
+      }
     }
+
     return true;
   }
 
@@ -149,13 +165,7 @@ export abstract class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    const onPage = (await (await this._testPage).isDisplayed()) || (await (await this._primaryComponent).isDisplayed());
-    return onPage;
-  }
-
-  /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
-  async isButtonInView(): Promise<boolean> {
-    return await (await this._pageButton).isDisplayed();
+    return (await (await this._testPage).isDisplayed()) || (await (await this._primaryComponent).isDisplayed());
   }
 
   /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
@@ -224,12 +234,8 @@ export abstract class BasePage {
   }
 
   /** Waits for the tester app to load by checking if the startup page loads. If the app doesn't load before the timeout, it causes the test to fail. */
-  async waitForInitialPageToDisplay(): Promise<void> {
-    await this.waitForCondition(async () => await this.isInitialPageDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
-  }
-
-  async isInitialPageDisplayed(): Promise<boolean> {
-    return await (await this._initialPage).isDisplayed();
+  async waitForInitialPageToDisplay(): Promise<boolean | void> {
+    return await this.waitForCondition(async () => await (await this._initialPage).isDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
   }
 
   /* Scrolls to the specified or primary UI test element until it is displayed. */
@@ -305,8 +311,8 @@ export abstract class BasePage {
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
-  async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number, interval?: number): Promise<void> {
-    await browser.waitUntil(async () => await condition(), {
+  async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number, interval?: number): Promise<boolean | void> {
+    return await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
       interval: interval ?? 1000,

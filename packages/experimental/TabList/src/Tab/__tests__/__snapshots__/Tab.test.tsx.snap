@@ -1,0 +1,681 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tab component tests Customized Tab 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Select",
+      },
+    ]
+  }
+  accessibilityLabel="Tab 1"
+  accessibilityPositionInSet={0}
+  accessibilityRole="tab"
+  accessibilitySetSize={0}
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  focusable={true}
+  keyUpEvents={
+    [
+      {
+        "key": " ",
+      },
+      {
+        "key": "Enter",
+      },
+    ]
+  }
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onLayout={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
+      "borderRadius": 4,
+      "borderWidth": 2,
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "padding": 1,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginHorizontal": 6,
+        "marginVertical": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "paddingEnd": 2,
+          "paddingStart": 2,
+        }
+      }
+    >
+      <Text
+        accessible={false}
+        style={
+          {
+            "color": "red",
+            "fontFamily": "Segoe UI",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "margin": 0,
+          }
+        }
+      >
+        Tab 1
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "backgroundColor": "#00000000",
+        "height": 4,
+        "paddingHorizontal": 8,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "backgroundColor": "#00000000",
+          "borderRadius": 99,
+          "flex": 1,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Tab component tests Tab default props 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Select",
+      },
+    ]
+  }
+  accessibilityLabel="Tab 1"
+  accessibilityPositionInSet={0}
+  accessibilityRole="tab"
+  accessibilitySetSize={0}
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  focusable={true}
+  keyUpEvents={
+    [
+      {
+        "key": " ",
+      },
+      {
+        "key": "Enter",
+      },
+    ]
+  }
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onLayout={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
+      "borderRadius": 4,
+      "borderWidth": 2,
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "padding": 1,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginHorizontal": 6,
+        "marginVertical": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "paddingEnd": 2,
+          "paddingStart": 2,
+        }
+      }
+    >
+      <Text
+        accessible={false}
+        style={
+          {
+            "color": "#424242",
+            "fontFamily": "Segoe UI",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "margin": 0,
+          }
+        }
+      >
+        Tab 1
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "backgroundColor": "#00000000",
+        "height": 2,
+        "paddingHorizontal": 8,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "backgroundColor": "#00000000",
+          "borderRadius": 99,
+          "flex": 1,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Tab component tests Tab disabled 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Select",
+      },
+    ]
+  }
+  accessibilityLabel="Tab 1"
+  accessibilityPositionInSet={0}
+  accessibilityRole="tab"
+  accessibilitySetSize={0}
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  focusable={false}
+  keyUpEvents={
+    [
+      {
+        "key": " ",
+      },
+      {
+        "key": "Enter",
+      },
+    ]
+  }
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onLayout={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
+      "borderRadius": 4,
+      "borderWidth": 2,
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "padding": 1,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginHorizontal": 6,
+        "marginVertical": 8,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "paddingEnd": 2,
+          "paddingStart": 2,
+        }
+      }
+    >
+      <Text
+        accessible={false}
+        style={
+          {
+            "color": "#bdbdbd",
+            "fontFamily": "Segoe UI",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "margin": 0,
+          }
+        }
+      >
+        Tab 1
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "backgroundColor": "#00000000",
+        "height": 2,
+        "paddingHorizontal": 8,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "backgroundColor": "#00000000",
+          "borderRadius": 99,
+          "flex": 1,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Tab component tests Tab render icon + text 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Select",
+      },
+    ]
+  }
+  accessibilityLabel="Tab 1"
+  accessibilityPositionInSet={0}
+  accessibilityRole="tab"
+  accessibilitySetSize={0}
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  focusable={true}
+  keyUpEvents={
+    [
+      {
+        "key": " ",
+      },
+      {
+        "key": "Enter",
+      },
+    ]
+  }
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onLayout={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
+      "borderRadius": 4,
+      "borderWidth": 2,
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "padding": 1,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginHorizontal": 6,
+        "marginVertical": 8,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      style={
+        {
+          "color": "#424242",
+          "fontFamily": "Arial",
+          "fontSize": 20,
+        }
+      }
+    >
+      ♣
+    </Text>
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "paddingEnd": 2,
+          "paddingStart": 8,
+        }
+      }
+    >
+      <Text
+        accessible={false}
+        style={
+          {
+            "color": "#424242",
+            "fontFamily": "Segoe UI",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "margin": 0,
+          }
+        }
+      >
+        Tab 1
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      {
+        "backgroundColor": "#00000000",
+        "height": 2,
+        "paddingHorizontal": 8,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "backgroundColor": "#00000000",
+          "borderRadius": 99,
+          "flex": 1,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Tab component tests Tab render icon only 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Select",
+      },
+    ]
+  }
+  accessibilityLabel=""
+  accessibilityPositionInSet={0}
+  accessibilityRole="tab"
+  accessibilitySetSize={0}
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": false,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  focusable={true}
+  keyUpEvents={
+    [
+      {
+        "key": " ",
+      },
+      {
+        "key": "Enter",
+      },
+    ]
+  }
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onLayout={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
+      "borderRadius": 4,
+      "borderWidth": 2,
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "padding": 1,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginHorizontal": 6,
+        "marginVertical": 8,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      style={
+        {
+          "color": "#424242",
+          "fontFamily": "Arial",
+          "fontSize": 20,
+        }
+      }
+    >
+      ♣
+    </Text>
+  </View>
+  <View
+    style={
+      {
+        "backgroundColor": "#00000000",
+        "height": 2,
+        "paddingHorizontal": 8,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "backgroundColor": "#00000000",
+          "borderRadius": 99,
+          "flex": 1,
+        }
+      }
+    />
+  </View>
+</View>
+`;

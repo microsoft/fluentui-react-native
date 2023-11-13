@@ -36,7 +36,7 @@ steps:
   - script: |
       yarn e2etest:android
     workingDirectory: apps/E2E
-    displayName: 'run E2E Android tests'
+    displayName: 'run E2E Android tests [test]'
     condition: succeeded()
 
   - template: e2e-publish-artifacts.yml
@@ -45,9 +45,3 @@ steps:
       platform: 'android'
       buildArtifacts: variables['task.Build.status']
       directory: $(Build.SourcesDirectory)/apps/E2E
-
-  - script: |
-      yarn appium driver uninstall uiautomator2
-    workingDirectory: apps/E2E
-    displayName: 'Uninstall appium driver'
-    condition: succeeded()

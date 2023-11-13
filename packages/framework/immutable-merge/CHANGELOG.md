@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
-This log was last generated on Wed, 01 Feb 2023 22:33:15 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Aug 2023 22:02:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.1
+
+Wed, 09 Aug 2023 22:02:14 GMT
+
+### Patches
+
+- Result of yarn (ruaraki@microsoft.com)
+
+## 1.2.0
+
+Mon, 05 Jun 2023 19:26:23 GMT
+
+### Minor changes
+
+- Update to react-native 0.71 (30809111+acoates-ms@users.noreply.github.com)
 
 ## 1.1.8
 

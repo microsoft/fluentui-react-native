@@ -20,7 +20,7 @@ steps:
   - script: |
       yarn e2etest:macos
     workingDirectory: apps/E2E
-    displayName: 'run E2E macos tests'
+    displayName: 'run E2E macos tests [test]'
     condition: succeeded()
 
   - template: e2e-publish-artifacts.yml
@@ -29,9 +29,3 @@ steps:
       platform: 'macos'
       buildArtifacts: variables['task.Build.status']
       directory: $(Build.SourcesDirectory)/apps/E2E
-
-  - script: |
-      yarn appium driver uninstall mac2
-    workingDirectory: apps/E2E
-    displayName: 'Uninstall appium driver'
-    condition: succeeded()

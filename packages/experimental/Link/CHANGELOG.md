@@ -1,8 +1,170 @@
 # Change Log - @fluentui-react-native/experimental-link
 
-This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.14
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.20.5
+
+## 0.6.13
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.20.4
+
+## 0.6.12
+
+Mon, 25 Sep 2023 12:49:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.20.3
+
+## 0.6.11
+
+Tue, 29 Aug 2023 22:56:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.20.2
+
+## 0.6.10
+
+Wed, 23 Aug 2023 18:55:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.20.1
+
+## 0.6.9
+
+Tue, 22 Aug 2023 19:41:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.20.0
+
+## 0.6.8
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.10
+
+## 0.6.7
+
+Wed, 09 Aug 2023 22:02:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.9
+
+## 0.6.6
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.8
+
+## 0.6.5
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.7
+
+## 0.6.4
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.6
+
+## 0.6.3
+
+Mon, 03 Jul 2023 06:39:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.5
+
+## 0.6.2
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.4
+
+## 0.6.1
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.3
+
+## 0.6.0
+
+Mon, 12 Jun 2023 17:46:43 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/link to v0.19.2
+
+## 0.5.1
+
+Fri, 09 Jun 2023 15:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.19.1
+
+## 0.5.0
+
+Mon, 05 Jun 2023 19:26:23 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/link to v0.19.0
+
+## 0.4.37
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.28
+
+## 0.4.36
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.27
+
+## 0.4.35
+
+Mon, 10 Apr 2023 19:48:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.18.26
 
 ## 0.4.34
 

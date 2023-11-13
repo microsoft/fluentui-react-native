@@ -41,14 +41,12 @@ class RadioGroupV1Page extends BasePage {
     return this.compareAttribute(this.getRadio(radioSelector), Attribute.IsFocused, AttributeValue.true);
   }
 
-  async waitForRadioSelected(radioSelector: Radio, errorMsg: string, timeout?: number): Promise<boolean> {
-    await this.waitForCondition(async () => await this.isRadioSelected(radioSelector), errorMsg, timeout);
-    return await this.isRadioSelected(radioSelector);
+  async waitForRadioSelected(radioSelector: Radio, errorMsg: string, timeout?: number): Promise<boolean | void> {
+    return await this.waitForCondition(async () => await this.isRadioSelected(radioSelector), errorMsg, timeout);
   }
 
-  async waitForRadioFocused(radioSelector: Radio, errorMsg: string, timeout?: number): Promise<boolean> {
-    await this.waitForCondition(async () => await this.isRadioFocused(radioSelector), errorMsg, timeout);
-    return await this.isRadioFocused(radioSelector);
+  async waitForRadioFocused(radioSelector: Radio, errorMsg: string, timeout?: number): Promise<boolean | void> {
+    return await this.waitForCondition(async () => await this.isRadioFocused(radioSelector), errorMsg, timeout);
   }
 
   /* Returns the correct WebDriverIO element from the Radio Selector */

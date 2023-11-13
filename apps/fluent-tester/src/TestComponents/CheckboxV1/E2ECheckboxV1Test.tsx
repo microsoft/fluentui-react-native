@@ -38,6 +38,7 @@ export const E2ECheckboxV1Test: React.FunctionComponent = () => {
         />
         <Checkbox
           label={CHECKBOXV1_TEST_COMPONENT_LABEL}
+          required
           /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(CHECKBOXV1_NO_A11Y_LABEL_COMPONENT)}
         />

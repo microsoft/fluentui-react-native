@@ -3,6 +3,25 @@
 exports[`Tabs FocusZone props 1`] = `
 <View
   accessibilityRole="tablist"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onBlur={[Function]}
@@ -24,15 +43,15 @@ exports[`Tabs FocusZone props 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -42,9 +61,22 @@ exports[`Tabs FocusZone props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -64,7 +96,7 @@ exports[`Tabs FocusZone props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -78,7 +110,7 @@ exports[`Tabs FocusZone props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -92,7 +124,7 @@ exports[`Tabs FocusZone props 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -105,8 +137,8 @@ exports[`Tabs FocusZone props 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -116,9 +148,22 @@ exports[`Tabs FocusZone props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -138,7 +183,7 @@ exports[`Tabs FocusZone props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -152,7 +197,7 @@ exports[`Tabs FocusZone props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -166,9 +211,9 @@ exports[`Tabs FocusZone props 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#185abd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -179,8 +224,8 @@ exports[`Tabs FocusZone props 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -190,9 +235,22 @@ exports[`Tabs FocusZone props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -212,7 +270,7 @@ exports[`Tabs FocusZone props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -226,7 +284,7 @@ exports[`Tabs FocusZone props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -240,7 +298,7 @@ exports[`Tabs FocusZone props 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -260,6 +318,25 @@ exports[`Tabs FocusZone props 1`] = `
 exports[`Tabs default props 1`] = `
 <View
   accessibilityRole="tablist"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onBlur={[Function]}
@@ -281,15 +358,15 @@ exports[`Tabs default props 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -299,9 +376,22 @@ exports[`Tabs default props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -321,7 +411,7 @@ exports[`Tabs default props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -335,7 +425,7 @@ exports[`Tabs default props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -349,9 +439,9 @@ exports[`Tabs default props 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#185abd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -362,8 +452,8 @@ exports[`Tabs default props 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -373,9 +463,22 @@ exports[`Tabs default props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -395,7 +498,7 @@ exports[`Tabs default props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -409,7 +512,7 @@ exports[`Tabs default props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -423,7 +526,7 @@ exports[`Tabs default props 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -436,8 +539,8 @@ exports[`Tabs default props 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -447,9 +550,22 @@ exports[`Tabs default props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -469,7 +585,7 @@ exports[`Tabs default props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -483,7 +599,7 @@ exports[`Tabs default props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -497,7 +613,7 @@ exports[`Tabs default props 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -517,6 +633,25 @@ exports[`Tabs default props 1`] = `
 exports[`Tabs disabled 1`] = `
 <View
   accessibilityRole="tablist"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onBlur={[Function]}
@@ -538,15 +673,15 @@ exports[`Tabs disabled 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -556,9 +691,22 @@ exports[`Tabs disabled 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -578,7 +726,7 @@ exports[`Tabs disabled 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -592,7 +740,7 @@ exports[`Tabs disabled 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -606,7 +754,7 @@ exports[`Tabs disabled 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -619,8 +767,8 @@ exports[`Tabs disabled 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -630,9 +778,22 @@ exports[`Tabs disabled 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -652,7 +813,7 @@ exports[`Tabs disabled 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -666,7 +827,7 @@ exports[`Tabs disabled 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -680,7 +841,7 @@ exports[`Tabs disabled 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -693,8 +854,8 @@ exports[`Tabs disabled 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -704,9 +865,22 @@ exports[`Tabs disabled 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -726,7 +900,7 @@ exports[`Tabs disabled 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -740,7 +914,7 @@ exports[`Tabs disabled 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -754,9 +928,9 @@ exports[`Tabs disabled 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#185abd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -774,6 +948,25 @@ exports[`Tabs disabled 1`] = `
 exports[`Tabs header text and count 1`] = `
 <View
   accessibilityRole="tablist"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onBlur={[Function]}
@@ -795,15 +988,15 @@ exports[`Tabs header text and count 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -814,9 +1007,22 @@ exports[`Tabs header text and count 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -836,7 +1042,7 @@ exports[`Tabs header text and count 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -850,7 +1056,7 @@ exports[`Tabs header text and count 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -864,7 +1070,7 @@ exports[`Tabs header text and count 1`] = `
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -878,9 +1084,9 @@ exports[`Tabs header text and count 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#185abd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -891,8 +1097,8 @@ exports[`Tabs header text and count 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -903,9 +1109,22 @@ exports[`Tabs header text and count 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -925,7 +1144,7 @@ exports[`Tabs header text and count 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -939,7 +1158,7 @@ exports[`Tabs header text and count 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -953,7 +1172,7 @@ exports[`Tabs header text and count 1`] = `
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -967,7 +1186,7 @@ exports[`Tabs header text and count 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -980,8 +1199,8 @@ exports[`Tabs header text and count 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -992,9 +1211,22 @@ exports[`Tabs header text and count 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1014,7 +1246,7 @@ exports[`Tabs header text and count 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -1028,7 +1260,7 @@ exports[`Tabs header text and count 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -1042,7 +1274,7 @@ exports[`Tabs header text and count 1`] = `
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1056,7 +1288,7 @@ exports[`Tabs header text and count 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -1076,6 +1308,25 @@ exports[`Tabs header text and count 1`] = `
 exports[`Tabs headers only 1`] = `
 <View
   accessibilityRole="tablist"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onBlur={[Function]}
@@ -1097,15 +1348,15 @@ exports[`Tabs headers only 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -1115,9 +1366,22 @@ exports[`Tabs headers only 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1137,7 +1401,7 @@ exports[`Tabs headers only 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -1151,7 +1415,7 @@ exports[`Tabs headers only 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -1165,9 +1429,9 @@ exports[`Tabs headers only 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#185abd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -1178,8 +1442,8 @@ exports[`Tabs headers only 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -1189,9 +1453,22 @@ exports[`Tabs headers only 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1211,7 +1488,7 @@ exports[`Tabs headers only 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -1225,7 +1502,7 @@ exports[`Tabs headers only 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -1239,7 +1516,7 @@ exports[`Tabs headers only 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -1252,8 +1529,8 @@ exports[`Tabs headers only 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -1263,9 +1540,22 @@ exports[`Tabs headers only 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1285,7 +1575,7 @@ exports[`Tabs headers only 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -1299,7 +1589,7 @@ exports[`Tabs headers only 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -1313,7 +1603,7 @@ exports[`Tabs headers only 1`] = `
         />
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -1334,6 +1624,25 @@ exports[`Tabs props 1`] = `
 <View
   accessibilityLabel="Tabs"
   accessibilityRole="tablist"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onBlur={[Function]}
@@ -1352,7 +1661,7 @@ exports[`Tabs props 1`] = `
 >
   <Text
     style={
-      Object {
+      {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 16,
@@ -1368,15 +1677,15 @@ exports[`Tabs props 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -1387,9 +1696,22 @@ exports[`Tabs props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1409,7 +1731,7 @@ exports[`Tabs props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -1423,7 +1745,7 @@ exports[`Tabs props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -1437,7 +1759,7 @@ exports[`Tabs props 1`] = `
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#bdbdbd",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1451,7 +1773,7 @@ exports[`Tabs props 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,
@@ -1464,8 +1786,8 @@ exports[`Tabs props 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -1476,9 +1798,22 @@ exports[`Tabs props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": true,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1498,7 +1833,7 @@ exports[`Tabs props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -1512,7 +1847,7 @@ exports[`Tabs props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -1526,7 +1861,7 @@ exports[`Tabs props 1`] = `
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1540,9 +1875,9 @@ exports[`Tabs props 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#185abd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -1553,8 +1888,8 @@ exports[`Tabs props 1`] = `
       </View>
       <View
         accessibilityActions={
-          Array [
-            Object {
+          [
+            {
               "label": "Select a TabsItem",
               "name": "Select",
             },
@@ -1565,9 +1900,22 @@ exports[`Tabs props 1`] = `
         accessibilityRole="tab"
         accessibilitySetSize={3}
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": undefined,
+            "expanded": undefined,
+            "multiselectable": undefined,
+            "required": undefined,
             "selected": false,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1587,7 +1935,7 @@ exports[`Tabs props 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "alignSelf": "flex-start",
             "borderColor": "transparent",
@@ -1601,7 +1949,7 @@ exports[`Tabs props 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "alignSelf": "flex-start",
               "display": "flex",
@@ -1615,7 +1963,7 @@ exports[`Tabs props 1`] = `
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1629,7 +1977,7 @@ exports[`Tabs props 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "alignSelf": "stretch",
               "backgroundColor": "transparent",
               "borderRadius": 2,

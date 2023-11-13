@@ -24,6 +24,7 @@ export const StandardUsage: FunctionComponent = () => {
   const toggleOutOfOffice = (_e: InteractionEvent, isActive: boolean) => {
     setOutOfOffice(isActive);
   };
+  const nameAccessibilityLabel = 'Steve Ballmer';
 
   return (
     <View style={mobileStyles.pageStyle}>
@@ -68,25 +69,102 @@ export const StandardUsage: FunctionComponent = () => {
 
       <View style={mobileStyles.testVariants}>
         {/* Variation - Image */}
-        <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={16} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={20} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={24} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={32} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={40} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={56} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar active={activityRing ? 'active' : 'inactive'} activeAppearance="ring" size={72} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar
+          active={activityRing ? 'active' : 'inactive'}
+          accessibilityLabel={nameAccessibilityLabel}
+          activeAppearance="ring"
+          size={16}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          active={activityRing ? 'active' : 'inactive'}
+          accessibilityLabel={nameAccessibilityLabel}
+          activeAppearance="ring"
+          size={20}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          active={activityRing ? 'active' : 'inactive'}
+          accessibilityLabel={nameAccessibilityLabel}
+          activeAppearance="ring"
+          size={24}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          active={activityRing ? 'active' : 'inactive'}
+          accessibilityLabel={nameAccessibilityLabel}
+          activeAppearance="ring"
+          size={32}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          active={activityRing ? 'active' : 'inactive'}
+          accessibilityLabel={nameAccessibilityLabel}
+          activeAppearance="ring"
+          size={40}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          active={activityRing ? 'active' : 'inactive'}
+          accessibilityLabel={nameAccessibilityLabel}
+          activeAppearance="ring"
+          size={56}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          active={activityRing ? 'active' : 'inactive'}
+          accessibilityLabel={nameAccessibilityLabel}
+          activeAppearance="ring"
+          size={72}
+          imageUrl={steveBallmerPhotoUrl}
+        />
       </View>
 
       <View style={mobileStyles.testVariants}>
         {/* Variation - Image with Badge */
         /* Badge is not shown for size 16 on Android. */}
-        <Avatar size={16} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={20} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={24} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={32} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={40} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={56} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
-        <Avatar size={72} badge={{ status: status, outOfOffice: outOfOffice }} imageUrl={steveBallmerPhotoUrl} />
+        <Avatar
+          size={16}
+          accessibilityLabel={nameAccessibilityLabel}
+          badge={{ status: status, outOfOffice: outOfOffice }}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          size={20}
+          accessibilityLabel={nameAccessibilityLabel}
+          badge={{ status: status, outOfOffice: outOfOffice }}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          size={24}
+          accessibilityLabel={nameAccessibilityLabel}
+          badge={{ status: status, outOfOffice: outOfOffice }}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          size={32}
+          accessibilityLabel={nameAccessibilityLabel}
+          badge={{ status: status, outOfOffice: outOfOffice }}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          size={40}
+          accessibilityLabel={nameAccessibilityLabel}
+          badge={{ status: status, outOfOffice: outOfOffice }}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          size={56}
+          accessibilityLabel={nameAccessibilityLabel}
+          badge={{ status: status, outOfOffice: outOfOffice }}
+          imageUrl={steveBallmerPhotoUrl}
+        />
+        <Avatar
+          size={72}
+          accessibilityLabel={nameAccessibilityLabel}
+          badge={{ status: status, outOfOffice: outOfOffice }}
+          imageUrl={steveBallmerPhotoUrl}
+        />
       </View>
 
       <View style={mobileStyles.testVariants}>

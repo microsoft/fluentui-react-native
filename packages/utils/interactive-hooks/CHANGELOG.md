@@ -1,8 +1,143 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.10
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.8
+
+## 0.24.9
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.7
+
+## 0.24.8
+
+Tue, 29 Aug 2023 22:56:32 GMT
+
+### Patches
+
+- update useKeyProps snapshots (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.11.3
+- Bump @fluentui-react-native/framework to v0.11.6
+
+## 0.24.7
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.2
+- Bump @fluentui-react-native/framework to v0.11.5
+
+## 0.24.6
+
+Wed, 09 Aug 2023 22:02:14 GMT
+
+### Patches
+
+- Result of yarn (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.11.4
+- Bump @fluentui-react-native/memo-cache to v1.3.1
+
+## 0.24.5
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.3
+
+## 0.24.4
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.2
+
+## 0.24.3
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.11.1
+- Bump @fluentui-react-native/framework to v0.11.1
+
+## 0.24.2
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- [useKeyEvent] Make event parameter non optional (saadnajmi2@gmail.com)
+
+## 0.24.1
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- useOnPressWihFocus doesn't take focus on macOS (sanajmi@microsoft.com)
+
+## 0.24.0
+
+Mon, 12 Jun 2023 17:46:43 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/framework to v0.11.0
+- Bump @fluentui-react-native/memo-cache to v1.3.0
+
+## 0.23.0
+
+Mon, 05 Jun 2023 19:26:23 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.11.0
+- Bump @fluentui-react-native/framework to v0.10.0
+- Bump @fluentui-react-native/memo-cache to v1.2.0
+
+### Patches
+
+- Execute focus before calling callback (ruaraki@microsoft.com)
+
+## 0.22.31
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.10
+
+## 0.22.30
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.9.9
+
+## 0.22.29
+
+Mon, 10 Apr 2023 19:48:23 GMT
+
+### Patches
+
+- align-deps: Fix warnigns and issues (sanajmi@microsoft.com)
 
 ## 0.22.28
 

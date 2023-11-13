@@ -4,14 +4,15 @@ import FocusZonePageObject from '../pages/FocusZonePageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('FocusZone Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await FocusZonePageObject.waitForInitialPageToDisplay();
-    expect(await FocusZonePageObject.isInitialPageDisplayed()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_APPLOAD);
+    expect(await FocusZonePageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
-  it('Click and navigate to FocusTrapZone test page', async () => {
+  it('Click and navigate to FocusZone test page', async () => {
     /* Click on component button to navigate to test page */
-    await FocusZonePageObject.navigateToPageAndLoadTests(true);
-    expect(await FocusZonePageObject.isPageLoaded()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await FocusZonePageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+   /* Expand E2E section */
+   expect(await FocusZonePageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });

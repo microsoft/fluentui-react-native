@@ -20,15 +20,13 @@ class SwitchPageObject extends BasePage {
     return await (await this._primaryComponent).isSelected();
   }
 
-  async waitForSwitchStateChange(newState: boolean, errorMsg: string): Promise<boolean> {
-    await this.waitForCondition(async () => (await this.isSwitchChecked()) === newState, errorMsg);
-    return (await this.isSwitchChecked()) === newState;
+  async waitForSwitchStateChange(newState: boolean, errorMsg: string): Promise<boolean | void> {
+    return await this.waitForCondition(async () => (await this.isSwitchChecked()) === newState, errorMsg);
   }
 
-  async waitForOnChangeCallbackToFire(errorMsg: string): Promise<boolean> {
+  async waitForOnChangeCallbackToFire(errorMsg: string): Promise<boolean | void> {
     const callbackText = await this._callbackText;
-    await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
-    return await callbackText.isDisplayed();
+    return await this.waitForCondition(async () => await callbackText.isDisplayed(), errorMsg);
   }
 
   /*****************************************/

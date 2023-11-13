@@ -21,8 +21,8 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   paddingVertical: 3,
   focused: {
     backgroundColor: t.colors.brandBackground,
-    color: t.colors.brandedContent,
-    iconColor: t.colors.brandedContent,
+    color: t.colors.neutralForegroundOnBrand,
+    iconColor: t.colors.neutralForegroundOnBrand,
     checked: {
       checkmarkColor: t.colors.neutralForeground2Hover,
       checkmarkVisibility: 1,
@@ -30,10 +30,10 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   },
   pressed: {
     backgroundColor: t.colors.brandBackgroundPressed,
-    color: t.colors.brandedPressedContent,
-    iconColor: t.colors.brandedPressedContent,
+    color: t.colors.neutralForegroundOnBrandPressed,
+    iconColor: t.colors.neutralForegroundOnBrandPressed,
     checked: {
-      checkmarkColor: t.colors.brandedPressedContent,
+      checkmarkColor: t.colors.neutralForegroundOnBrandPressed,
       checkmarkVisibility: 1,
     },
   },

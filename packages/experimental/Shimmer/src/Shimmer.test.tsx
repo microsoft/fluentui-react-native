@@ -43,13 +43,15 @@ function shimmerRects(): Array<ShimmerRectElement | ShimmerCircleElement> {
 const style = { width: 300, height: 100 };
 
 describe('Shimmer component tests', () => {
-  it('Shimmer default', () => {
+  it('Shimmer default', async () => {
     const tree = renderer.create(<Shimmer elements={shimmerRects()} />).toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 
-  it('Shimmer with style prop', () => {
+  it('Shimmer with style prop', async () => {
     const tree = renderer.create(<Shimmer elements={shimmerRects()} style={style} />).toJSON();
     expect(tree).toMatchSnapshot();
+    await renderer.act(async () => null);
   });
 });

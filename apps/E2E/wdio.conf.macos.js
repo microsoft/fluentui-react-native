@@ -28,11 +28,11 @@ exports.config = {
    */
 
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
-  bail: 0, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
+  bail: 1, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
-  specFileRetries: 3, // The number of times to retry the entire spec file when it fails as a whole.
+  connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
+  specFileRetries: 2, // The number of times to retry the entire spec file when it fails as a whole.
 
   port: 4723, // default appium port
   services: [
@@ -156,7 +156,7 @@ exports.config = {
    */
   afterTest: (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
-    console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
+    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration/600).toFixed(2)}s". \n`);
 
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.

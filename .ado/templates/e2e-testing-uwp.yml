@@ -13,28 +13,6 @@ steps:
       Start-Process msiexec -ArgumentList "/quiet","/i","$(Agent.TempDirectory)\WinAppDriver.msi" -Verb runAs -Wait
     displayName: Replace WinAppDriver 1.2.99 with WinAppDriver 1.1
 
-  - task: DownloadSecureFile@1
-    name: UwpCertificate
-    inputs:
-      secureFile: FluentTester_TemporaryKey.pfx
-    displayName: 'Download UWP App Certificate'
-
-  - powershell: |
-      certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
-    displayName: 'Add Certificate to Personal Store'
-
-  - task: DownloadSecureFile@1
-    name: AzureCredentials
-    inputs:
-      secureFile: 'installcredprovider.ps1'
-    displayName: 'Download Azure Credentials Plugin for NuGet'
-
-  - task: PowerShell@2
-    inputs:
-      filePath: $(AzureCredentials.secureFilePath)
-      arguments: '-AddNetfx -Force'
-    displayName: 'Install Azure Credentials Plugin for NuGet'
-
   - script: |
       yarn install-windows-test-app
     workingDirectory: apps\fluent-tester
@@ -66,7 +44,7 @@ steps:
   - script: |
       yarn e2etest:windows
     workingDirectory: apps\E2E
-    displayName: 'run E2E UWP tests'
+    displayName: 'run E2E UWP tests [test]'
     condition: succeeded()
 
   # The following condition (using task.Build.status variable) make it so the reports generate even if the E2E tasks fails,

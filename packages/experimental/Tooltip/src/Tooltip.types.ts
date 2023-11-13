@@ -1,3 +1,5 @@
+import type * as React from 'react';
+
 export const tooltip = 'Tooltip';
 
 /**
@@ -21,7 +23,7 @@ export type DirectionalHint =
 
 export interface TooltipTokens {}
 
-export interface TooltipProps {
+export type TooltipProps = React.PropsWithChildren<{
   /**
    * The text of the tooltip.
    */
@@ -40,7 +42,7 @@ export interface TooltipProps {
   // showDelay?: number;
   visible?: boolean;
   // withArrow?: boolean;
-}
+}>;
 
 export interface TooltipSlotProps {
   root: TooltipProps;

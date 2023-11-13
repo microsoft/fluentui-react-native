@@ -27,14 +27,14 @@ steps:
 
   - script: |
       yarn appium driver install --source=npm appium-windows-driver
-    workingDirectory: apps/win32
+    workingDirectory: apps/E2E
     displayName: 'Install appium driver'
     condition: succeeded()
 
   - script: |
-      yarn e2etest
-    workingDirectory: apps/win32
-    displayName: 'run E2E Win32 tests'
+      yarn e2etest:win32
+    workingDirectory: apps/E2E
+    displayName: 'run E2E Win32 tests [test]'
     condition: succeeded()
 
   - template: e2e-publish-artifacts.yml
@@ -42,10 +42,4 @@ steps:
       applicationType: win32
       platform: 'win32'
       buildArtifacts: variables['task.Build.status']
-      directory: $(Build.SourcesDirectory)/apps/win32
-
-  - script: |
-      yarn appium driver uninstall windows
-    workingDirectory: apps/win32
-    displayName: 'Uninstall appium driver'
-    condition: succeeded()
+      directory: $(Build.SourcesDirectory)/apps/E2E

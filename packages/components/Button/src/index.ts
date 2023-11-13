@@ -11,8 +11,7 @@ export type {
 export { Button } from './deprecated/Button';
 export { PrimaryButton } from './deprecated/PrimaryButton';
 export { StealthButton } from './deprecated/StealthButton';
-export {
-  buttonName as buttonNameV1,
+export type {
   ButtonSize,
   ButtonAppearance,
   ButtonShape,
@@ -24,6 +23,7 @@ export {
   ButtonSlotProps,
   ButtonType,
 } from './Button.types';
+export { buttonName as buttonNameV1 } from './Button.types';
 export { Button as ButtonV1 } from './Button';
 export { useButton } from './useButton';
 export { CompoundButton, compoundButtonName } from './CompoundButton';

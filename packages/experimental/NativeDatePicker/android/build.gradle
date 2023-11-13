@@ -1,0 +1,63 @@
+buildscript {
+  ext.safeExtGet = { prop, fallback ->
+    return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+  }
+
+  repositories {
+    mavenCentral()
+    google()
+  }
+}
+
+def getExtOrIntegerDefault(name, fallback) {
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : fallback;
+}
+
+def isNewArchitectureEnabled() {
+    // To opt-in for the New Architecture, you can either:
+    // - Set `newArchEnabled` to true inside the `gradle.properties` file
+    // - Invoke gradle with `-newArchEnabled=true`
+    // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
+    return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+  def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+  if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+    namespace "com.microsoft.fnandroid.frndatepicker"
+  }
+  compileSdkVersion getExtOrIntegerDefault('compileSdkVersion', 34)
+
+  // Used to override the NDK path/version on internal CI or by allowing
+  // users to customize the NDK path/version from their root project (e.g. for M1 support)
+  if (rootProject.hasProperty("ndkPath")) {
+      ndkPath rootProject.ext.ndkPath
+  }
+  if (rootProject.hasProperty("ndkVersion")) {
+      ndkVersion rootProject.ext.ndkVersion
+  }
+
+  defaultConfig {
+      minSdkVersion getExtOrIntegerDefault('minSdkVersion', 21)
+      targetSdkVersion getExtOrIntegerDefault('targetSdkVersion', 34)
+      buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+  }
+}
+
+repositories {
+  maven {
+    url "https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1"
+  }
+  mavenCentral()
+  google()
+}
+
+dependencies {
+  implementation "com.facebook.react:react-android:+"
+  implementation "com.microsoft.device:dualscreen-layout:1.0.0-alpha01"
+  implementation "com.microsoft.fluentui:fluentui_calendar:0.0.27"
+  implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
+}

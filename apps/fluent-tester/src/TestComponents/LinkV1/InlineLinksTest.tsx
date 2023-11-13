@@ -8,13 +8,13 @@ import { stackStyle } from '../Common/styles';
 
 export const InlineLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
-  const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
+  const doA11yTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onA11yTap.'), []);
 
   return (
     <Stack style={stackStyle}>
       <Text>
         Click{' '}
-        <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>
+        <Link inline onPress={doPress} onAccessibilityTap={doA11yTap}>
           this link
         </Link>{' '}
         to alert me.

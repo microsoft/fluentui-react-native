@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import type { FocusZoneDirection } from '@fluentui/react-native';
+import type { FocusZoneDirection, FocusZoneTabNavigation } from '@fluentui/react-native';
 import { FocusZone, MenuButton, Text } from '@fluentui/react-native';
 import type { ButtonProps } from '@fluentui-react-native/button';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
@@ -25,11 +25,12 @@ import { commonTestStyles } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
+export const FocusZoneTabNavigations: FocusZoneTabNavigation[] = ['None', 'NavigateWrap', 'NavigateStopAtEnds', 'Normal'];
 
-type FocusZoneListWrapperProps = {
+type FocusZoneListWrapperProps = React.PropsWithChildren<{
   beforeID?: string;
   afterID?: string;
-};
+}>;
 export const FocusZoneListWrapper: React.FunctionComponent<FocusZoneListWrapperProps> = ({ beforeID, afterID, children }) => {
   const buttonProps: ButtonProps = { children: 'Click to Focus', style: focusZoneTestStyles.listWrapperButton };
   return (

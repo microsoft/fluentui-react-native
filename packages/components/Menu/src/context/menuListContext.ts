@@ -5,7 +5,7 @@ import type { MenuListState } from '../MenuList/MenuList.types';
 /**
  * Context shared between Menu and its child components
  */
-export type MenuListContextValue = Omit<MenuListState, 'props'> & {
+export type MenuListContextValue = Omit<MenuListState, 'props' | 'focusZoneRef' | 'hasMaxHeight' | 'hasMaxWidth'> & {
   hasCheckmarks: boolean;
   hasIcons: boolean;
   hasTooltips: boolean;
@@ -21,6 +21,8 @@ export const MenuListContext = React.createContext<MenuListContextValue>({
   onArrowClose: () => false,
   addRadioItem: () => false,
   removeRadioItem: () => false,
+  trackMenuItem: () => false,
+  untrackMenuItem: () => false,
 });
 
 export const MenuListProvider = MenuListContext.Provider;

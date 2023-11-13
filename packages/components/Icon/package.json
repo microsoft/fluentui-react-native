@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/icon",
-  "version": "0.17.24",
+  "version": "0.19.14",
   "description": "A cross-platform Icon component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,24 +26,23 @@
     "directory": "packages/components/Icon"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.10.2",
-    "@fluentui-react-native/framework": ">=0.9.8 <1.0.0",
-    "@fluentui-react-native/text": "^0.19.30"
+    "@fluentui-react-native/adapters": "^0.11.3",
+    "@fluentui-react-native/framework": ">=0.11.8 <1.0.0",
+    "@fluentui-react-native/text": "^0.21.12"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@office-iss/react-native-win32": "^0.68.0",
-    "@types/react-native": "^0.68.0",
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-svg": "^12.3.0"
+    "@office-iss/react-native-win32": "^0.71.0",
+    "react": "18.2.0",
+    "react-native": "^0.71.0",
+    "react-native-svg": "^13.9.0"
   },
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-svg": "^12.3.0"
+    "react": "18.2.0",
+    "react-native": "^0.71.0",
+    "react-native-svg": "^13.9.0"
   },
   "author": "",
   "license": "MIT",
@@ -54,7 +53,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.68"
+        "react-native@0.71"
       ],
       "capabilities": [
         "core",

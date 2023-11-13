@@ -33,11 +33,25 @@ class FocusZonePageObject extends BasePage {
   async configureGridFocusZone(option: GridFocusZoneOption, arg: any): Promise<void> {
     let switchElement: WebdriverIO.Element;
     switch (option) {
-      case 'SetDirection':
-        await (await this._directionPicker).click();
+      case 'SetDirection': {
+        const DirectionDropdown = await this._directionPicker;
+
+        // If the dropdown is already at the default value, break
+        if((await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1) {
+          return;
+        }
+
+        await DirectionDropdown.click();
         await browser.waitUntil(async () => await (await this._getGridFocusZoneMenuOption(arg)).isDisplayed());
         await (await this._getGridFocusZoneMenuOption(arg)).click();
+
+        await browser.waitUntil(async () => (await DirectionDropdown.getAttribute('Name')).indexOf(arg) !== -1,
+        {
+          timeout: 15000,
+          timeoutMsg: 'Could not reset the directional dropdown back to it\'s original value'
+        });
         return;
+      }
       case 'Set2DNavigation':
         switchElement = await this._twoDimSwitch;
         break;
@@ -56,6 +70,13 @@ class FocusZonePageObject extends BasePage {
     if (switchValue !== arg) {
       await switchElement.click();
     }
+
+    // Wait until the switch correctly changes states
+    await browser.waitUntil(async () => await switchElement.isSelected() == arg,
+    {
+      timeout: 15000,
+      timeoutMsg: `Attempted to switch the ${option} to ${arg}, but it remained at ${await switchElement.isSelected()}`
+    });
   }
 
   async gridButton(button: GridButton) {

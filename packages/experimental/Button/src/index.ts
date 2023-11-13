@@ -4,9 +4,7 @@ if (__DEV__) {
   );
 }
 
-export {
-  buttonNameV1 as buttonName,
-  ButtonV1 as Button,
+export type {
   ButtonSize,
   ButtonAppearance,
   ButtonShape,
@@ -17,20 +15,24 @@ export {
   ButtonInfo,
   ButtonSlotProps,
   ButtonType,
-  compoundButtonName,
-  CompoundButton,
   CompoundButtonTokens,
   CompoundButtonProps,
   CompoundButtonSlotProps,
   CompoundButtonType,
-  fabName,
-  FAB,
   FABType,
-  toggleButtonName,
-  ToggleButton,
   ToggleButtonTokens,
   ToggleButtonProps,
   ToggleButtonInfo,
   ToggleButtonSlotProps,
   ToggleButtonType,
+} from '@fluentui-react-native/button';
+export {
+  buttonNameV1 as buttonName,
+  ButtonV1 as Button,
+  compoundButtonName,
+  CompoundButton,
+  fabName,
+  FAB,
+  toggleButtonName,
+  ToggleButton,
 } from '@fluentui-react-native/button';

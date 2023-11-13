@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx withSlots */
 import * as React from 'react';
 import { tooltip, TooltipType, TooltipProps } from './Tooltip.types';

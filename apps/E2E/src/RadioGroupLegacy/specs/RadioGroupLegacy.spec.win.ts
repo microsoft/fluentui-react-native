@@ -10,13 +10,14 @@ import RadioGroupPageObject from '../pages/RadioGroupLegacyPageObject';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('RadioGroup/RadioButton Legacy Testing Initialization', () => {
   it('Wait for app load', async () => {
-    await RadioGroupPageObject.waitForInitialPageToDisplay();
-    expect(await RadioGroupPageObject.isInitialPageDisplayed()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_APPLOAD);
+    expect(await RadioGroupPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
   it('Click and navigate to RadioGroup Legacy test page', async () => {
-    await RadioGroupPageObject.navigateToPageAndLoadTests(true);
-    expect(await RadioGroupPageObject.isPageLoaded()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(await RadioGroupPageObject.navigateToPageAndLoadTests()).toBeTrue();
+
+    /* Expand E2E section */
+    expect(await RadioGroupPageObject.enableE2ETesterMode()).toBeTrue();
 
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -32,8 +33,6 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
     expect(
       await RadioGroupPageObject.compareAttribute(RadioGroupPageObject._firstRadioGroup, Attribute.AccessibilityRole, RADIOGROUP_A11Y_ROLE),
     ).toBeTruthy();
-
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate RadioButton\'s "accessibilityRole" defaults to "ControlType.RadioButton".', async () => {
@@ -44,8 +43,6 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         RADIOBUTTON_A11Y_ROLE,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set RadioGroup "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -56,8 +53,6 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         RADIOGROUP_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set RadioGroup "accessibilityLabel" prop. Validate "Name" element attribute defaults to current RadioGroup label.', async () => {
@@ -68,8 +63,6 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         RADIOGROUP_TEST_COMPONENT_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Set RadioButton "accessibilityLabel" prop. Validate "accessibilityLabel" value propagates to "Name" element attribute.', async () => {
@@ -80,8 +73,6 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set RadioButton "accessibilityLabel" prop. Validate "Name" element attribute defaults to current RadioButton label.', async () => {
@@ -92,8 +83,6 @@ describe('RadioGroup/RadioButton Legacy Accessibility Testing', () => {
         SECOND_RADIO_BUTTON_LABEL,
       ),
     ).toBeTruthy();
-
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 

@@ -1,0 +1,217 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip component tests Chip all props 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  icon={
+    {
+      "color": "#fff",
+      "fontSource": {
+        "codepoint": 9827,
+        "fontFamily": "Arial",
+        "fontSize": 16,
+      },
+    }
+  }
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f0f0f0",
+      "borderRadius": 4,
+      "borderWidth": 0,
+      "bottom": 0,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 8,
+      "paddingVertical": 2,
+      "right": 0,
+      "width": undefined,
+    }
+  }
+  toggle={[Function]}
+>
+  <Text
+    accessible={false}
+    style={
+      {
+        "color": "#fff",
+        "fontFamily": "Arial",
+        "fontSize": 16,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    ♣
+  </Text>
+  <Text
+    accessible={false}
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      {
+        "color": "#616161",
+        "fontFamily": "Segoe UI",
+        "fontSize": 14,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginStart": 8,
+      }
+    }
+  >
+    Chip
+  </Text>
+</View>
+`;
+
+exports[`Chip component tests Chip tokens 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "yellow",
+      "borderColor": "#f09",
+      "borderRadius": 4,
+      "borderWidth": 0,
+      "bottom": 0,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 8,
+      "paddingVertical": 2,
+      "right": 0,
+      "width": undefined,
+    }
+  }
+  toggle={[Function]}
+>
+  <Text
+    accessible={false}
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      {
+        "color": "#616161",
+        "fontFamily": "Segoe UI",
+        "fontSize": 14,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    Chip Tokens
+  </Text>
+</View>
+`;
+
+exports[`Chip component tests Empty Chip 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f0f0f0",
+      "borderRadius": 4,
+      "borderWidth": 0,
+      "bottom": 0,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 8,
+      "paddingVertical": 2,
+      "right": 0,
+      "width": undefined,
+    }
+  }
+  toggle={[Function]}
+/>
+`;

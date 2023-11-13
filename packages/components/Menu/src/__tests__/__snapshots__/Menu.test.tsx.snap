@@ -3,11 +3,11 @@
 exports[`Menu component tests Menu default 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -15,19 +15,33 @@ exports[`Menu component tests Menu default 1`] = `
   accessibilityLabel="Default"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
       "expanded": false,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -49,7 +63,7 @@ exports[`Menu component tests Menu default 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -59,7 +73,7 @@ exports[`Menu component tests Menu default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
@@ -73,7 +87,7 @@ exports[`Menu component tests Menu default 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
@@ -94,11 +108,11 @@ exports[`Menu component tests Menu default 1`] = `
 exports[`Menu component tests Menu defaultOpen 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -106,19 +120,33 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
   accessibilityLabel="Open"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -140,7 +168,7 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -150,7 +178,7 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
@@ -164,7 +192,7 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
@@ -185,11 +213,11 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
 exports[`Menu component tests Menu open 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -197,19 +225,33 @@ exports[`Menu component tests Menu open 1`] = `
   accessibilityLabel="Open"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -231,7 +273,7 @@ exports[`Menu component tests Menu open 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -241,7 +283,7 @@ exports[`Menu component tests Menu open 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
@@ -255,7 +297,7 @@ exports[`Menu component tests Menu open 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
@@ -276,11 +318,11 @@ exports[`Menu component tests Menu open 1`] = `
 exports[`Menu component tests Menu open checkbox and divider 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -288,19 +330,33 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
   accessibilityLabel="Open"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -322,7 +378,7 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -332,7 +388,7 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
@@ -346,7 +402,7 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
@@ -367,11 +423,11 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
 exports[`Menu component tests Menu open checkbox checked 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -379,19 +435,33 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
   accessibilityLabel="Open"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -413,7 +483,7 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -423,7 +493,7 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
@@ -437,7 +507,7 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
@@ -458,11 +528,11 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
 exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -470,19 +540,33 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
   accessibilityLabel="Open"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -504,7 +588,7 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -514,7 +598,7 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
@@ -528,7 +612,7 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
@@ -549,11 +633,11 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
 exports[`Menu component tests Menu open radio 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -561,19 +645,33 @@ exports[`Menu component tests Menu open radio 1`] = `
   accessibilityLabel="Open"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -595,7 +693,7 @@ exports[`Menu component tests Menu open radio 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -605,7 +703,7 @@ exports[`Menu component tests Menu open radio 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
@@ -619,7 +717,7 @@ exports[`Menu component tests Menu open radio 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
@@ -640,11 +738,11 @@ exports[`Menu component tests Menu open radio 1`] = `
 exports[`Menu component tests Menu submenu 1`] = `
 <View
   accessibilityActions={
-    Array [
-      Object {
+    [
+      {
         "name": "Expand",
       },
-      Object {
+      {
         "name": "Collapse",
       },
     ]
@@ -652,19 +750,33 @@ exports[`Menu component tests Menu submenu 1`] = `
   accessibilityLabel="Default"
   accessibilityRole="button"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
       "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
   enableFocusRing={true}
   focusable={true}
   keyUpEvents={
-    Array [
-      Object {
+    [
+      {
         "key": " ",
       },
-      Object {
+      {
         "key": "Enter",
       },
     ]
@@ -686,7 +798,7 @@ exports[`Menu component tests Menu submenu 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
@@ -696,7 +808,7 @@ exports[`Menu component tests Menu submenu 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 24,
       "minWidth": 64,
       "padding": 3,
       "paddingHorizontal": 7,
@@ -710,7 +822,7 @@ exports[`Menu component tests Menu submenu 1`] = `
     numberOfLines={0}
     onAccessibilityTap={[Function]}
     style={
-      Object {
+      {
         "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
@@ -724,6 +836,111 @@ exports[`Menu component tests Menu submenu 1`] = `
     }
   >
     Default
+  </Text>
+</View>
+`;
+
+exports[`Menu open menu group and menu header 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Expand",
+      },
+      {
+        "name": "Collapse",
+      },
+    ]
+  }
+  accessibilityLabel="Open"
+  accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": true,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    [
+      {
+        "key": " ",
+      },
+      {
+        "key": "Enter",
+      },
+    ]
+  }
+  onAccessibilityAction={[Function]}
+  onAccessibilityTap={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onLayout={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 24,
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    accessible={false}
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Open
   </Text>
 </View>
 `;

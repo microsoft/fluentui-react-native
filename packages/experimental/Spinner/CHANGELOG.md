@@ -1,8 +1,202 @@
 # Change Log - @fluentui-react-native/spinner
 
-This log was last generated on Thu, 23 Mar 2023 20:49:23 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Oct 2023 21:26:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.13
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.8
+- Bump @fluentui-react-native/text to v0.21.12
+- Bump @fluentui-react-native/theme-tokens to v0.25.2
+
+## 0.7.12
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.7
+- Bump @fluentui-react-native/text to v0.21.11
+
+## 0.7.11
+
+Mon, 25 Sep 2023 12:49:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.21.10
+
+## 0.7.10
+
+Tue, 29 Aug 2023 22:56:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.6
+- Bump @fluentui-react-native/text to v0.21.9
+
+## 0.7.9
+
+Wed, 23 Aug 2023 18:55:24 GMT
+
+### Patches
+
+- Update SVG dependencies (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/text to v0.21.8
+
+## 0.7.8
+
+Mon, 14 Aug 2023 20:14:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.5
+- Bump @fluentui-react-native/text to v0.21.7
+
+## 0.7.7
+
+Wed, 09 Aug 2023 22:02:14 GMT
+
+### Patches
+
+- Result of yarn (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.11.4
+- Bump @fluentui-react-native/text to v0.21.6
+- Bump @fluentui-react-native/theme-tokens to v0.25.1
+- Bump @fluentui-react-native/use-styling to v0.11.1
+
+## 0.7.6
+
+Mon, 31 Jul 2023 19:29:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.3
+- Bump @fluentui-react-native/text to v0.21.5
+
+## 0.7.5
+
+Tue, 18 Jul 2023 19:09:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.2
+- Bump @fluentui-react-native/text to v0.21.4
+
+## 0.7.4
+
+Mon, 10 Jul 2023 17:25:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.5.1
+
+## 0.7.3
+
+Fri, 07 Jul 2023 20:45:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.1
+- Bump @fluentui-react-native/text to v0.21.3
+
+## 0.7.2
+
+Mon, 19 Jun 2023 18:37:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.21.2
+
+## 0.7.1
+
+Sat, 17 Jun 2023 00:00:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.21.1
+
+## 0.7.0
+
+Thu, 15 Jun 2023 19:51:13 GMT
+
+### Minor changes
+
+- switch to RN Native Antive Container for animation (email not defined)
+
+## 0.6.0
+
+Mon, 12 Jun 2023 17:46:43 GMT
+
+### Minor changes
+
+- Changes for treeshake to work (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/use-styling to v0.11.0
+- Bump @fluentui-react-native/framework to v0.11.0
+- Bump @fluentui-react-native/text to v0.21.0
+
+## 0.5.1
+
+Fri, 09 Jun 2023 15:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.20.1
+
+## 0.5.0
+
+Mon, 05 Jun 2023 19:26:24 GMT
+
+### Minor changes
+
+- Upgrade to React Native 0.71 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.5.0
+- Bump @fluentui-react-native/theme-tokens to v0.25.0
+- Bump @fluentui-react-native/use-styling to v0.10.0
+- Bump @fluentui-react-native/framework to v0.10.0
+- Bump @fluentui-react-native/text to v0.20.0
+
+## 0.4.2
+
+Tue, 30 May 2023 20:34:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.24.7
+- Bump @fluentui-react-native/framework to v0.9.10
+- Bump @fluentui-react-native/text to v0.19.33
+
+## 0.4.1
+
+Wed, 03 May 2023 07:08:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.24.6
+- Bump @fluentui-react-native/framework to v0.9.9
+- Bump @fluentui-react-native/text to v0.19.32
+
+## 0.4.0
+
+Mon, 01 May 2023 20:43:14 GMT
+
+### Minor changes
+
+- add spinner tail svg without native animation (email not defined)
+
+## 0.3.0
+
+Mon, 10 Apr 2023 19:48:24 GMT
+
+### Minor changes
+
+- add tracker svg for win32 (email not defined)
+- Bump @fluentui-react-native/text to v0.19.31
 
 ## 0.2.12
 

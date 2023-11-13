@@ -1,8 +1,9 @@
 import type { ViewProps } from 'react-native';
 
 import type { ShimmerProps, ShimmerTokens } from './Shimmer.types.shared';
-export { ShimmerProps, ShimmerTokens };
-export { shimmerName, ShimmerRectElement, ShimmerElementTypes, ShimmerCircleElement } from './Shimmer.types.shared';
+export type { ShimmerProps, ShimmerTokens };
+export type { ShimmerRectElement, ShimmerElementTypes, ShimmerCircleElement } from './Shimmer.types.shared';
+export { shimmerName } from './Shimmer.types.shared';
 
 export interface ClippingMaskProps extends ShimmerTokens {
   /**
@@ -33,7 +34,7 @@ export interface ShimmerSlotProps {
   root: ViewProps;
   clippingMask: ClippingMaskProps;
   shimmerWave: ShimmerWaveProps;
-  shimmerWaveContainer: ShimmerWaveProps;
+  shimmerWaveContainer: React.PropsWithChildren<ShimmerWaveProps>;
 }
 
 export interface ShimmerType {
