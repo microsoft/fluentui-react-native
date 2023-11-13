@@ -8352,11 +8352,11 @@ __metadata:
   linkType: hard
 
 "appium-mac2-driver@npm:^1.8.2":
-  version: 1.8.5
-  resolution: "appium-mac2-driver@npm:1.8.5"
+  version: 1.8.8
+  resolution: "appium-mac2-driver@npm:1.8.8"
   dependencies:
     "@appium/strongbox": ^0.x
-    asyncbox: ^2.0.2
+    asyncbox: ^3.0.0
     axios: ^1.x
     bluebird: ^3.5.1
     lodash: ^4.17.4
@@ -8365,7 +8365,7 @@ __metadata:
     teen_process: ^2.0.1
   peerDependencies:
     appium: ^2.0.0
-  checksum: 4243f44cb3c9254da905aef289622eaa760d702e94e3e18180bc427a63b50dfdde56c8fb920fe5c19c99d89ced758f358ebcb68a3b3df3c3855b2203bdc323e0
+  checksum: b6b58dad0264d0d0bb5ea35b8227c4497f924bace20c2a4b5f4db06288367b39fe1b6bb01f9f0fec3f2639fb239f80b9170f85ee8a1392da3febd065c2c3e618
   languageName: node
   linkType: hard
 
