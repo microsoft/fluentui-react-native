@@ -21,8 +21,6 @@ export type DirectionalHint =
   | 'bottomCenter'
   | 'bottomRightEdge';
 
-export interface TooltipTokens {}
-
 export type TooltipProps = React.PropsWithChildren<{
   /**
    * The text of the tooltip.
@@ -30,18 +28,28 @@ export type TooltipProps = React.PropsWithChildren<{
   content: string;
 
   /**
+   * Notification when the visibility of the tooltip is changed.
+   */
+  onVisibleChange?: (event, data) => void;
+
+  /**
+   * Positioning of the tooltip relative to the target element.
+   *
+   * @default topCenter
+   */
+  positioning?: DirectionalHint;
+
+  /**
    * Target node that tooltip uses for relative positioning.
    */
   target?: React.RefObject<React.Component>;
 
-  // appearance?: 'normal' | 'inverted';
-  // hideDelay?: number;
-  onVisibleChange?: (event, data) => void;
-  positioning?: DirectionalHint;
-  // relationship: 'label' | 'description' | 'inaccessible';
-  // showDelay?: number;
+  /**
+   * Controls the tooltip visibility and can be used in conjunction with onVisibleChange to modify show/hide behavior. If not provided, will be updated based on hover/focus events on target element.
+   *
+   * @default false
+   */
   visible?: boolean;
-  // withArrow?: boolean;
 }>;
 
 export interface TooltipSlotProps {
@@ -50,6 +58,5 @@ export interface TooltipSlotProps {
 
 export interface TooltipType {
   props: TooltipProps;
-  tokens: TooltipTokens;
   slotProps: TooltipSlotProps;
 }
