@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
 
 import type { LayoutEvent, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
@@ -58,24 +58,30 @@ export function useTabAnimation(
             e.nativeEvent.layout.height <= layout.tablist.height &&
             e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT))
       ) {
-        let width: number, height: number;
+        const { width: tabWidth, height: tabHeight, y: tabY } = e.nativeEvent.layout;
+        let indicatorWidth: number, indicatorHeight: number;
         // Total Indicator inset consists of the horizontal/vertical margin of the indicator, the space taken up by the tab's focus border, and the
         // existing padding between the focus border and the tab itself. Multiply by 2 to account for the start + end margin/border/padding.
         const focusBorderPadding = 1;
         const totalIndicatorInset = 2 * (tokens.indicatorMargin + tokens.borderWidth + focusBorderPadding);
         // we can calculate the dimensions of the indicator using token values we have access to.
         if (vertical) {
-          width = tokens.indicatorThickness;
-          height = e.nativeEvent.layout.height - totalIndicatorInset;
+          indicatorWidth = tokens.indicatorThickness;
+          indicatorHeight = tabHeight - totalIndicatorInset;
         } else {
-          width = e.nativeEvent.layout.width - totalIndicatorInset;
-          height = tokens.indicatorThickness;
+          indicatorWidth = tabWidth - totalIndicatorInset;
+          indicatorHeight = tokens.indicatorThickness;
+        }
+        let tabX = e.nativeEvent.layout.x;
+        // For RTL users, we adjust the x position of each tab to be relative to the entire tablist starting right to left
+        if (Platform.OS == ('win32' as any) && I18nManager.isRTL) {
+          tabX = layout.tablist.width - (tabX + tabWidth);
         }
         addTabLayout(tabKey, {
-          x: e.nativeEvent.layout.x,
-          y: e.nativeEvent.layout.y,
-          width: width,
-          height: height,
+          x: tabX,
+          y: tabY,
+          width: indicatorWidth,
+          height: indicatorHeight,
           tabBorderWidth: tokens.borderWidth,
           startMargin: tokens.indicatorMargin,
         });
