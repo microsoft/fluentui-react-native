@@ -89,7 +89,7 @@ export interface TabListState {
   /**
    * Setter for the selected Tab's ref to set as the default tabbable element in the FocusZone
    */
-  setSelectedTabRef: (ref: React.RefObject<any>) => void;
+  setFocusedTabRef: (ref: React.RefObject<any>) => void;
 
   /**
    * TabList's `size` prop.
@@ -105,6 +105,16 @@ export interface TabListState {
    * Directly update the animated indicator's styles with styles the user supplies for each slot.
    */
   updateAnimatedIndicatorStyles?: (updates: AnimatedIndicatorStylesUpdate) => void;
+
+  /**
+   * Updates internal map that keeps track of each of this tablist's tabs disabled state
+   */
+  updateDisabledTabs: (tabKey: string, isDisabled: boolean) => void;
+
+  /**
+   * Updates internal map that keeps track of each of this tablist's tabs' refs.
+   */
+  updateTabRef: (tabKey: string, ref: React.RefObject<View>) => void;
 
   /**
    * TabList's `vertical` prop.
