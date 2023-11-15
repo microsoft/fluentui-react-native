@@ -1,4 +1,12 @@
-import type { Animated, ColorValue, FlexAlignType, ModalProps, TouchableWithoutFeedbackProps, ViewProps } from 'react-native';
+import type {
+  Animated,
+  ColorValue,
+  DimensionValue,
+  FlexAlignType,
+  ModalProps,
+  TouchableWithoutFeedbackProps,
+  ViewProps,
+} from 'react-native';
 
 import type { InteractionEvent, PressableFocusProps } from '@fluentui-react-native/interactive-hooks';
 
@@ -92,14 +100,14 @@ export interface DrawerTokens {
    * Note: Only applicable when position is 'left' or 'right'
    * @default '100%'
    * */
-  width?: number | string;
+  width?: DimensionValue;
 
   /**
    * The height of the Drawer
    * Note: Only applicable when position is 'bottom'
    * @default '40%'
    * */
-  height?: number | string;
+  height?: DimensionValue;
 
   /**
    * The shadow color of the Drawer

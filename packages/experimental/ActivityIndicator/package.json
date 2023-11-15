@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-activity-indicator",
-  "version": "0.8.8",
+  "version": "0.9.0",
   "description": "A cross-platform Fluent Activity Indicator component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,20 +26,21 @@
     "directory": "packages/experimental/ActivityIndicator"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.11.6",
+    "@fluentui-react-native/framework": "0.12.0",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@react-native/metro-config": "^0.72.0",
     "react": "18.2.0",
-    "react-native": "^0.71.0",
-    "react-native-svg": "^13.9.0"
+    "react-native": "^0.72.0",
+    "react-native-svg": "^13.14.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-native": "^0.71.0",
-    "react-native-svg": "^13.9.0"
+    "react-native": "^0.72.0",
+    "react-native-svg": "^13.14.0"
   },
   "author": "",
   "license": "MIT",
@@ -50,7 +51,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.71"
+        "react-native@0.72"
       ],
       "capabilities": [
         "core",

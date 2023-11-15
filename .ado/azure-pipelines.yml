@@ -30,7 +30,7 @@ jobs:
 
       - script: |
           yarn buildci
-        displayName: 'yarn buildci'
+        displayName: 'yarn buildci [test]'
 
       - script: |
           yarn check-for-changed-files
@@ -84,17 +84,16 @@ jobs:
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle macos'
 
-      # Select proper Xcode version
-      - template: templates/apple-xcode-select.yml
-        parameters:
-          xcode_version: $(xcode_version)
-          xcode_path: $(xcode_path)
-
       - bash: |
           echo "pod install $(platform)"
           pod install
         workingDirectory: apps/fluent-tester/$(platform)
         displayName: 'pod install $(platform)'
+
+      - bash: |
+          sudo xcode-select --switch '$(xcode_path)'
+        displayName: Switch Xcode version $(xcode_version)
+        failOnStderr: true
 
       - script: |
           brew install xcbeautify
@@ -128,17 +127,16 @@ jobs:
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle ios'
 
-      # Select proper Xcode version
-      - template: templates/apple-xcode-select.yml
-        parameters:
-          xcode_version: $(xcode_version)
-          xcode_path: $(xcode_path)
-
       - bash: |
           echo "pod install $(platform)"
           pod install
         workingDirectory: apps/fluent-tester/$(platform)
         displayName: 'pod install $(platform)'
+
+      - bash: |
+          sudo xcode-select --switch '$(xcode_path)'
+        displayName: Switch Xcode version $(xcode_version)
+        failOnStderr: true
 
       - script: |
           brew install xcbeautify

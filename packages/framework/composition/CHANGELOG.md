@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Wed, 09 Aug 2023 22:02:15 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 02:39:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Thu, 09 Nov 2023 02:39:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/use-slot to v0.5.0
+- Bump @fluentui-react-native/use-slots to v0.9.0
+- Bump @fluentui-react-native/use-styling to v0.12.0
 
 ## 0.9.2
 

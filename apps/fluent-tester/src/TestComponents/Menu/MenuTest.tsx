@@ -20,6 +20,7 @@ import { Switch } from '@fluentui-react-native/switch';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { E2EMenuTest } from './E2EMenuTest';
+import { MenuComponentOutsideMenuList } from './MenuComponentOutsideMenuList';
 import { MenuIcons } from './MenuIcons';
 import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
@@ -377,9 +378,11 @@ const MenuWithGroups: React.FunctionComponent = () => {
             <MenuGroup>
               <MenuGroupHeader>Section 1</MenuGroupHeader>
               <MenuItem>A plain MenuItem</MenuItem>
+              <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
             <MenuGroup>
               <MenuGroupHeader>Section 2</MenuGroupHeader>
+              <MenuItem>A plain MenuItem</MenuItem>
               <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
           </MenuList>
@@ -525,6 +528,13 @@ const menuSections: TestSection[] = [
     name: 'Menu with groups',
     component: MenuWithGroups,
   },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'MenuList component outside menu list test',
+      component: MenuComponentOutsideMenuList,
+    },
+  }),
 ];
 
 const e2eSections: TestSection[] = [

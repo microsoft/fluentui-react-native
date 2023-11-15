@@ -57,27 +57,22 @@ const buildInnerProps = (tokenProps: StackTokens, theme: Theme, cache: GetMemoVa
     : cache(() => {
         const childrenGap = tokenProps.childrenGap || tokenProps.gap;
         const { rowGap, columnGap } = parseGap(childrenGap, theme);
-        const horizontalMargin = `${-0.5 * columnGap.value}${columnGap.unit}`;
-        const verticalMargin = `${-0.5 * rowGap.value}${rowGap.unit}`;
 
         const innerStyle: ViewStyle = {
           display: 'flex',
           flexWrap: 'wrap',
           overflow: 'visible',
-          marginLeft: horizontalMargin,
-          marginRight: horizontalMargin,
-          marginTop: verticalMargin,
-          marginBottom: verticalMargin,
+          rowGap: rowGap,
+          columnGap: columnGap,
           padding: parsePadding(padding, theme),
-          width: columnGap.value === 0 ? '100%' : `calc(100% + ${columnGap.value}${columnGap.unit})`,
+          width: '100%',
         };
         _mapAlignment(!!horizontal, horizontalAlign, verticalAlign, innerStyle);
-        const heightToSet = rowGap.value === 0 ? '100%' : `calc(100% + ${rowGap.value}${rowGap.unit})`;
         if (horizontal) {
-          innerStyle.height = heightToSet;
+          innerStyle.height = '100%';
         } else {
-          innerStyle.maxHeight = heightToSet;
-          innerStyle.height = `calc(100% + ${rowGap.value}${rowGap.unit})`;
+          innerStyle.maxHeight = '100%';
+          innerStyle.height = `100%`;
         }
 
         return { style: innerStyle };

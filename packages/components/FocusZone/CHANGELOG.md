@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Tue, 17 Oct 2023 19:21:23 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 02:39:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Thu, 09 Nov 2023 02:39:09 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/component-cache to v1.6.0
+- Bump @fluentui-react-native/interactive-hooks to v0.25.0
+- Bump @uifabricshared/foundation-composable to v0.12.3
+- Bump @uifabricshared/foundation-settings to v0.14.0
+
+## 0.15.0
+
+Tue, 07 Nov 2023 20:20:34 GMT
+
+### Minor changes
+
+- Adding style prop on FocusZone (safreibe@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.24.12
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+
+## 0.13.3
+
+Tue, 31 Oct 2023 19:11:10 GMT
+
+### Patches
+
+- Fix keyboarding behavior (ruaraki@microsoft.com)
+
+## 0.13.2
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.10
+
+## 0.13.1
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.24.9
 
 ## 0.13.0
 

@@ -2,6 +2,78 @@
   "name": "@fluentui-react-native/experimental-activity-indicator",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:08 GMT",
+      "version": "0.9.0",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "comment": "Bump @fluentui-react-native/framework to v0.12.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 07 Nov 2023 20:20:33 GMT",
+      "version": "0.8.12",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.8.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.10",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Oct 2023 21:26:06 GMT",
+      "version": "0.8.10",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.8.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Oct 2023 20:50:34 GMT",
+      "version": "0.8.9",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.8.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Aug 2023 22:56:32 GMT",
       "version": "0.8.8",
       "tag": "@fluentui-react-native/experimental-activity-indicator_v0.8.8",

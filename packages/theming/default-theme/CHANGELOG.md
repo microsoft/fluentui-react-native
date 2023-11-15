@@ -1,8 +1,51 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 02:39:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Thu, 09 Nov 2023 02:39:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/theme to v0.10.0
+- Bump @fluentui-react-native/theme-tokens to v0.26.0
+- Bump @fluentui-react-native/theme-types to v0.33.0
+- Bump @fluentui-react-native/theming-utils to v0.25.0
+
+## 0.19.11
+
+Tue, 07 Nov 2023 20:20:32 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.9.4
+- Bump @fluentui-react-native/theme-tokens to v0.25.4
+- Bump @fluentui-react-native/theme-types to v0.32.3
+- Bump @fluentui-react-native/theming-utils to v0.24.7
+
+## 0.19.9
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.9.2
+- Bump @fluentui-react-native/theme-tokens to v0.25.2
+- Bump @fluentui-react-native/theme-types to v0.32.1
+- Bump @fluentui-react-native/theming-utils to v0.24.5
+
+## 0.19.8
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- update snapshots (56889386+gremlin529@users.noreply.github.com)
 
 ## 0.19.7
 

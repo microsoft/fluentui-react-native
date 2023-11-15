@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theme-types",
-  "version": "0.32.0",
+  "version": "0.33.0",
   "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",
@@ -33,13 +33,14 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@react-native/metro-config": "^0.72.0",
     "@types/react": "^18.2.0",
     "react": "18.2.0",
-    "react-native": "^0.71.0"
+    "react-native": "^0.72.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-native": "^0.71.0"
+    "react-native": "^0.72.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -48,7 +49,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.71"
+        "react-native@0.72"
       ],
       "capabilities": [
         "core",

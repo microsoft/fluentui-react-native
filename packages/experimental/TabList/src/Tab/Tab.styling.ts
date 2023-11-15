@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { borderStyles, fontStyles } from '@fluentui-react-native/framework';
@@ -27,10 +28,11 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         justifyContent: 'center',
         padding: 1,
         backgroundColor: tokens.backgroundColor,
+        ...(!vertical ? Platform.select({ macos: {}, default: { height: '100%' } }) : {}),
         ...borderStyles.from(tokens, theme),
       },
     }),
-    [tokens, theme],
+    [tokens, theme, vertical],
   );
 
   const contentContainer = React.useMemo<IViewProps>(

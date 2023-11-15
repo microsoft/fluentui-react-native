@@ -2,6 +2,123 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:09 GMT",
+      "version": "0.20.0",
+      "tag": "@fluentui-react-native/icon_v0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/icon",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/adapters to v0.12.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/framework to v0.12.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/text to v0.22.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 07 Nov 2023 20:20:34 GMT",
+      "version": "0.19.16",
+      "tag": "@fluentui-react-native/icon_v0.19.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/icon",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/text to v0.21.14",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Oct 2023 21:26:06 GMT",
+      "version": "0.19.14",
+      "tag": "@fluentui-react-native/icon_v0.19.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/text to v0.21.12",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Oct 2023 20:50:34 GMT",
+      "version": "0.19.13",
+      "tag": "@fluentui-react-native/icon_v0.19.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/text to v0.21.11",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Oct 2023 17:21:07 GMT",
+      "version": "0.19.12",
+      "tag": "@fluentui-react-native/icon_v0.19.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/icon",
+            "commit": "80f97a447e5fe65c3758879e799ab129e7b6fbac",
+            "comment": "Fix viewBox prop being explicitly set as undefined on legacy icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Sep 2023 12:49:34 GMT",
       "version": "0.19.11",
       "tag": "@fluentui-react-native/icon_v0.19.11",

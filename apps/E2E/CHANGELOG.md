@@ -1,8 +1,59 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 17 Oct 2023 19:21:23 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Nov 2023 02:39:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.33.0
+
+Thu, 09 Nov 2023 02:39:08 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/focus-zone to v0.16.0
+
+## 1.32.8
+
+Tue, 07 Nov 2023 20:20:33 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.15.0
+
+## 1.32.6
+
+Tue, 31 Oct 2023 19:11:10 GMT
+
+### Patches
+
+- Add test and a tiny bit of cleanup (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.13.3
+
+## 1.32.5
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.13.2
+
+## 1.32.4
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.13.1
+
+## 1.32.3
+
+Mon, 23 Oct 2023 23:10:25 GMT
+
+### Patches
+
+- [CI] Refactor Apple CI (sanajmi@microsoft.com)
 
 ## 1.32.2
 

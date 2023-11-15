@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/codemods
 
-This log was last generated on Mon, 12 Jun 2023 17:46:42 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Nov 2023 20:20:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.3
+
+Tue, 07 Nov 2023 20:20:32 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
 
 ## 0.5.0
 

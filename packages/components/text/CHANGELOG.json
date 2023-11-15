@@ -2,6 +2,174 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:10 GMT",
+      "version": "0.22.0",
+      "tag": "@fluentui-react-native/text_v0.22.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/adapters to v0.12.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/framework to v0.12.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.25.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/tokens to v0.22.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.13",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 07 Nov 2023 20:20:35 GMT",
+      "version": "0.21.14",
+      "tag": "@fluentui-react-native/text_v0.21.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "130232522fd2916880ec3decfe594550f069d7a7",
+            "comment": "Use RN-based dynamic type"
+          },
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.12",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.25.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.12",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Oct 2023 21:26:06 GMT",
+      "version": "0.21.12",
+      "tag": "@fluentui-react-native/text_v0.21.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.25.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/tokens to v0.21.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.10",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Oct 2023 20:50:34 GMT",
+      "version": "0.21.11",
+      "tag": "@fluentui-react-native/text_v0.21.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/framework to v0.11.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.24.9",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Sep 2023 12:49:34 GMT",
       "version": "0.21.10",
       "tag": "@fluentui-react-native/text_v0.21.10",

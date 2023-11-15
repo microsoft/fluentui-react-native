@@ -1,4 +1,5 @@
-import { buildUseTokens, type Theme } from '@fluentui-react-native/framework';
+import { buildUseTokens } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/framework';
 import type { TokensFromTheme } from '@fluentui-react-native/use-styling';
 
 import type { TabTokens } from '..';
@@ -94,12 +95,18 @@ export const defaultTabTokens: TokensFromTheme<TabTokens, Theme> = (t: Theme) =>
       color: t.colors.neutralForeground1,
       iconColor: t.colors.compoundBrandForeground1,
       indicatorColor: t.colors.compoundBrandStroke1,
+      pressed: {
+        color: t.colors.neutralForeground1Pressed,
+        iconColor: t.colors.compoundBrandForeground1Pressed,
+        indicatorColor: t.colors.compoundBrandStroke1Pressed,
+      },
     },
     disabled: {
       color: t.colors.neutralForegroundDisabled,
       iconColor: t.colors.neutralForegroundDisabled,
       selected: {
         color: t.colors.neutralForegroundDisabled,
+        iconColor: t.colors.neutralForegroundDisabled,
         indicatorColor: t.colors.neutralForegroundDisabled,
       },
     },
@@ -126,11 +133,6 @@ export const defaultTabTokens: TokensFromTheme<TabTokens, Theme> = (t: Theme) =>
       color: t.colors.neutralForeground2Pressed,
       iconColor: t.colors.neutralForeground2Pressed,
       indicatorColor: t.colors.neutralStroke1Pressed,
-      selected: {
-        color: t.colors.neutralForeground1Pressed,
-        iconColor: t.colors.compoundBrandForeground1Pressed,
-        indicatorColor: t.colors.compoundBrandStroke1Pressed,
-      },
       transparent: {
         backgroundColor: t.colors.transparentBackgroundPressed,
       },

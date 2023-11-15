@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theme-tokens",
-  "version": "0.25.1",
+  "version": "0.26.0",
   "description": "Defines values for tokens used to fill out themes.",
   "repository": {
     "type": "git",
@@ -35,18 +35,19 @@
     "@fluentui-react-native/design-tokens-ios": "^0.53.0",
     "@fluentui-react-native/design-tokens-win32": "^0.53.0",
     "@fluentui-react-native/design-tokens-windows": "^0.53.0",
-    "@fluentui-react-native/theme-types": ">=0.32.0 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.33.0 <1.0.0",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@react-native/metro-config": "^0.72.0",
     "react": "18.2.0",
-    "react-native": "^0.71.0"
+    "react-native": "^0.72.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-native": "^0.71.0"
+    "react-native": "^0.72.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -55,7 +56,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.71"
+        "react-native@0.72"
       ],
       "capabilities": [
         "core",

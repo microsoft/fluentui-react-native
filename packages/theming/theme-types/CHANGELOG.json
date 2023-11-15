@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:11 GMT",
+      "version": "0.33.0",
+      "tag": "@fluentui-react-native/theme-types_v0.33.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 07 Nov 2023 20:20:35 GMT",
+      "version": "0.32.3",
+      "tag": "@fluentui-react-native/theme-types_v0.32.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "130232522fd2916880ec3decfe594550f069d7a7",
+            "comment": "Use RN-based dynamic type"
+          },
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Oct 2023 21:26:06 GMT",
+      "version": "0.32.1",
+      "tag": "@fluentui-react-native/theme-types_v0.32.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "7461843f37999539940e7babf4603f0a3719aeaa",
+            "comment": "remove deprecated alias tokens from v1 components"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 05 Jun 2023 19:26:25 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.32.0",
       "version": "0.32.0",
