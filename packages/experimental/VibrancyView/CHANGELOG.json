@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/vibrancy-view",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:06 GMT",
+      "version": "0.1.0",
+      "tag": "@fluentui-react-native/vibrancy-view_v0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/vibrancy-view",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/vibrancy-view",
+            "comment": "Bump @fluentui-react-native/adapters to v0.12.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/vibrancy-view",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.6.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Aug 2023 22:56:32 GMT",
       "version": "0.0.3",
       "tag": "@fluentui-react-native/vibrancy-view_v0.0.3",

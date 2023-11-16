@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use RN-based dynamic type",
-  "packageName": "@fluentui-react-native/tokens",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}

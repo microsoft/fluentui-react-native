@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-shimmer",
-  "version": "0.11.4",
+  "version": "0.12.0",
   "description": "A cross-platform Fluent Shimmer component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,24 +26,25 @@
     "directory": "packages/experimental/Shimmer"
   },
   "dependencies": {
-    "@fluentui-react-native/component-cache": "^1.5.1",
-    "@fluentui-react-native/framework": "0.11.8",
-    "@fluentui-react-native/theming-utils": ">=0.24.5 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.21.4 <1.0.0",
-    "@fluentui-react-native/use-styling": "^0.11.1"
+    "@fluentui-react-native/component-cache": "^1.6.0",
+    "@fluentui-react-native/framework": "0.12.0",
+    "@fluentui-react-native/theming-utils": ">=0.25.0 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.22.0 <1.0.0",
+    "@fluentui-react-native/use-styling": "^0.12.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@react-native/metro-config": "^0.72.0",
     "assert-never": "^1.2.1",
     "react": "18.2.0",
-    "react-native": "^0.71.0",
-    "react-native-svg": "^13.9.0"
+    "react-native": "^0.72.0",
+    "react-native-svg": "^13.14.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-native": "^0.71.0",
-    "react-native-svg": "^13.9.0"
+    "react-native": "^0.72.0",
+    "react-native-svg": "^13.14.0"
   },
   "author": "",
   "license": "MIT",
@@ -54,7 +55,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.71"
+        "react-native@0.72"
       ],
       "capabilities": [
         "core",
