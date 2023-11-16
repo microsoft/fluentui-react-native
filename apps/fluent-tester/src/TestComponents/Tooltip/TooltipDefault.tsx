@@ -4,22 +4,8 @@ import { View } from 'react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 
 export const TooltipDefault: React.FunctionComponent = () => {
-  // const [check, setCheck] = React.useState(false);
-
-  // const toggleCheck = React.useCallback(() => {
-  //   setCheck(!check);
-  // }, [setCheck]);
-
   return (
     <View>
-      {/* <Button onClick={toggleCheck}>Click</Button>
-      {check && (
-        <View>
-          <Tooltip content="Test">
-            <Button>Test</Button>
-          </Tooltip>
-        </View>
-      )} */}
       <Tooltip content="Test" positioning="topCenter">
         <Button>Test</Button>
       </Tooltip>
