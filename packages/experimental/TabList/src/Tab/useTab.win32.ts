@@ -97,6 +97,9 @@ export const useTab = (props: TabProps): TabInfo => {
 
   React.useEffect(() => {
     updateDisabledTabs(tabKey, disabled);
+    if (selectedKey === tabKey && !disabled) {
+      componentRef && setFocusedTabRef(componentRef);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [disabled]);
 
@@ -141,7 +144,7 @@ export const useTab = (props: TabProps): TabInfo => {
       accessibilityRole: 'tab',
       accessibilityActions: accessibilityActionsProp,
       accessibilityPositionInSet: accessibilityPositionInSet ?? tabKeys.findIndex((key) => key === tabKey) + 1,
-      accessibilityState: getAccessibilityState(isDisabled, selectedKey === tabKey, accessibilityState),
+      accessibilityState: getAccessibilityState(isDisabled, selectedKey === tabKey && !isDisabled, accessibilityState),
       accessibilitySetSize: accessibilitySetSize ?? tabKeys.length,
       disabled: isDisabled,
       focusable: !isDisabled ?? true,
