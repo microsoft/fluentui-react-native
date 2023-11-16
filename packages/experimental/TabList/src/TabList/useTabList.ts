@@ -56,6 +56,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
         setAllTabsDisabled(false);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [allTabsDisabled],
   );
 
@@ -140,7 +141,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     props: {
       ...props,
       accessible: accessible ?? true,
-      accessibilityState: getAccessibilityState(disabled, accessibilityState),
+      accessibilityState: getAccessibilityState(disabled || allTabsDisabled, accessibilityState),
       accessibilityRole: 'tablist',
       appearance: appearance,
       componentRef: componentRef,
