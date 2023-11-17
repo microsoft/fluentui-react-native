@@ -4089,7 +4089,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.5.0, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
+"@fluentui-react-native/tablist@0.5.1, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/experimental/TabList"
   dependencies:
@@ -4163,7 +4163,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.158.0
+    "@fluentui-react-native/tester": ^0.158.1
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
     "@react-native/metro-config": ^0.72.0
@@ -4184,7 +4184,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.158.0, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.158.1, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -4227,7 +4227,7 @@ __metadata:
     "@fluentui-react-native/spinner": ^0.8.0
     "@fluentui-react-native/stack": ">=0.9.0 <1.0.0"
     "@fluentui-react-native/switch": ^0.12.0
-    "@fluentui-react-native/tablist": 0.5.0
+    "@fluentui-react-native/tablist": 0.5.1
     "@fluentui-react-native/text": ">=0.22.0 <1.0.0"
     "@fluentui-react-native/theme": ">=0.10.0 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.26.0
@@ -6761,22 +6761,22 @@ __metadata:
   linkType: hard
 
 "@types/jest@npm:^29.0.0":
-  version: 29.5.7
-  resolution: "@types/jest@npm:29.5.7"
+  version: 29.5.8
+  resolution: "@types/jest@npm:29.5.8"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: e28624ccb0ef1255a03fbbb4b5bc3e5cbcdc450d39e0739985ff679b124198f808c38c8c3e67859c6efc0e848196deeb8cfed028e12a821c511dfc1112a2d6e9
+  checksum: ca8438a5b4c098c8c023e9d5b279ea306494a1d0b5291cfb498100fa780377145f068b2a021d545b0398bbe0328dcc37044dd3aaf3c6c0fe9b0bef7b46a63453
   languageName: node
   linkType: hard
 
 "@types/jscodeshift@npm:^0.11.5":
-  version: 0.11.9
-  resolution: "@types/jscodeshift@npm:0.11.9"
+  version: 0.11.10
+  resolution: "@types/jscodeshift@npm:0.11.10"
   dependencies:
     ast-types: ^0.14.1
     recast: ^0.20.3
-  checksum: a5b0bc6250dad3dfbaa9af71f56e65979cbfb632ee3d8da43bd79e729eaf231bc15356cc5de45c7e1f634881ab541f712cdbf554f89032273819c49bc397882e
+  checksum: 91cd3ec925e4a9624fe0f5490ac1509b1f9b34bd7beed89c210eb0bec340c7b4627beef27912e5408aeb4dd6e2d7e37d2fd6a66a8436cd2c56c5cb7e0ddc2cbb
   languageName: node
   linkType: hard
 
@@ -8352,11 +8352,11 @@ __metadata:
   linkType: hard
 
 "appium-mac2-driver@npm:^1.8.2":
-  version: 1.8.5
-  resolution: "appium-mac2-driver@npm:1.8.5"
+  version: 1.8.8
+  resolution: "appium-mac2-driver@npm:1.8.8"
   dependencies:
     "@appium/strongbox": ^0.x
-    asyncbox: ^2.0.2
+    asyncbox: ^3.0.0
     axios: ^1.x
     bluebird: ^3.5.1
     lodash: ^4.17.4
@@ -8365,7 +8365,7 @@ __metadata:
     teen_process: ^2.0.1
   peerDependencies:
     appium: ^2.0.0
-  checksum: 4243f44cb3c9254da905aef289622eaa760d702e94e3e18180bc427a63b50dfdde56c8fb920fe5c19c99d89ced758f358ebcb68a3b3df3c3855b2203bdc323e0
+  checksum: b6b58dad0264d0d0bb5ea35b8227c4497f924bace20c2a4b5f4db06288367b39fe1b6bb01f9f0fec3f2639fb239f80b9170f85ee8a1392da3febd065c2c3e618
   languageName: node
   linkType: hard
 
@@ -8389,8 +8389,8 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.34.0
-  resolution: "appium-uiautomator2-driver@npm:2.34.0"
+  version: 2.34.1
+  resolution: "appium-uiautomator2-driver@npm:2.34.1"
   dependencies:
     appium-adb: ^11.0.1
     appium-android-driver: ^7.3.0
@@ -8407,7 +8407,7 @@ __metadata:
     type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: bce9e88baf7c3776f647f1119e9a18fbbb1408c6a55a3af7120782444afce0f13238712187dff1a70a2e35f1950fd0ad6046f33fb217ef7bb90f192f126a013d
+  checksum: 5db9f782c374ed46c87fd3a4f443ce0bc81c7c09a4a102fa4cd489680e5dd6b1606c0b433876cfdb51d259d4ae74cca2069b21a445a1256ab25c63d7ef06c623
   languageName: node
   linkType: hard
 

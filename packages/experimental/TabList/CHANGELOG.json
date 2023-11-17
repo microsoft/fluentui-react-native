@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Mon, 13 Nov 2023 19:40:23 GMT",
+      "version": "0.5.1",
+      "tag": "@fluentui-react-native/tablist_v0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "5b1b1af01711336fb7926128e5585207619a8975",
+            "comment": "Fix various tab styling bugs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:10 GMT",
       "version": "0.5.0",
       "tag": "@fluentui-react-native/tablist_v0.5.0",
