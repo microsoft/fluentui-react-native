@@ -2,6 +2,27 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:06 GMT",
+      "version": "0.11.0",
+      "tag": "@uifabricshared/themed-settings_v0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/themed-settings",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/themed-settings",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.14.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Aug 2023 22:02:15 GMT",
       "version": "0.10.2",
       "tag": "@uifabricshared/themed-settings_v0.10.2",

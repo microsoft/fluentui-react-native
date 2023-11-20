@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/codemods",
   "entries": [
     {
+      "date": "Tue, 07 Nov 2023 20:20:32 GMT",
+      "version": "0.5.3",
+      "tag": "@fluentui-react-native/codemods_v0.5.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/codemods",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Jun 2023 17:46:42 GMT",
       "tag": "@fluentui-react-native/codemods_v0.5.0",
       "version": "0.5.0",

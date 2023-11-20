@@ -2,6 +2,27 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:11 GMT",
+      "version": "0.12.3",
+      "tag": "@uifabricshared/foundation-composable_v0.12.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-composable",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.8.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-composable",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.14.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Aug 2023 22:02:15 GMT",
       "version": "0.12.2",
       "tag": "@uifabricshared/foundation-composable_v0.12.2",

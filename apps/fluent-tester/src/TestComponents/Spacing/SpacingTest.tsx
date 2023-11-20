@@ -10,7 +10,7 @@ import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
 const BasicUsage: React.FunctionComponent = () => {
-  function spacingExample(tokenName: string, spacing?: number | string) {
+  function spacingExample(tokenName: string, spacing?: number) {
     return (
       <View>
         <Text>

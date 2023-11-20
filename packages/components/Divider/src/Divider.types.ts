@@ -1,4 +1,4 @@
-import type { ViewProps, ColorValue } from 'react-native';
+import type { ViewProps, ColorValue, DimensionValue } from 'react-native';
 
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { TextProps } from '@fluentui-react-native/text';
@@ -52,7 +52,7 @@ export interface DividerTokens extends LayoutTokens, Omit<FontTokens, 'fontDynam
    * The padding of divider content between the start and end lines.
    * @default 12
    */
-  contentPadding?: string | number;
+  contentPadding?: DimensionValue;
   /**
    * The flex value of the line after content, set to 0 if `alignContent` = `end`.
    * @default 1

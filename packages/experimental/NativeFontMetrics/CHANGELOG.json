@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-font-metrics",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:08 GMT",
+      "version": "0.5.0",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 15:29:07 GMT",
       "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.4.1",
       "version": "0.4.1",

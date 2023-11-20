@@ -8,12 +8,12 @@ import type { Typography, PartialTypography } from './Typography.types';
 type TwoLevelPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 
 export interface Spacing {
-  s2: string;
-  s1: string;
-  m?: string;
+  s2: `${number}px`;
+  s1: `${number}px`;
+  m?: `${number}px`;
   // m is now defined as a v2 type
-  l1: string;
-  l2: string;
+  l1: `${number}px`;
+  l2: `${number}px`;
 }
 
 /**

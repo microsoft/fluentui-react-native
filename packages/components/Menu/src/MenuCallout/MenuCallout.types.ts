@@ -1,3 +1,5 @@
+import type { AnimatableNumericValue } from 'react-native';
+
 import type { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
 
 export const menuCalloutName = 'MenuCallout';
@@ -10,7 +12,7 @@ export type MenuCalloutTokens =
        * The token for the corner radius for the Modal MenuPopover
        * @platform android macos
        */
-      borderRadius?: number;
+      borderRadius?: AnimatableNumericValue;
 
       /**
        * Shadown elevation token for the Modal MenuPopover

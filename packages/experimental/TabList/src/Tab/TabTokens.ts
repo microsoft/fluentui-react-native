@@ -106,6 +106,7 @@ export const defaultTabTokens: TokensFromTheme<TabTokens, Theme> = (t: Theme) =>
       iconColor: t.colors.neutralForegroundDisabled,
       selected: {
         color: t.colors.neutralForegroundDisabled,
+        iconColor: t.colors.neutralForegroundDisabled,
         indicatorColor: t.colors.neutralForegroundDisabled,
       },
     },

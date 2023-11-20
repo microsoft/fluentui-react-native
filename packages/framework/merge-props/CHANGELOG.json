@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/merge-props",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:09 GMT",
+      "version": "0.8.0",
+      "tag": "@fluentui-react-native/merge-props_v0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/merge-props",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Aug 2023 22:02:15 GMT",
       "version": "0.7.1",
       "tag": "@fluentui-react-native/merge-props_v0.7.1",
