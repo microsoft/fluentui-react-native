@@ -40,9 +40,10 @@ export type TooltipProps = React.PropsWithChildren<{
   positioning?: DirectionalHint;
 
   /**
-   * Target node that tooltip uses for relative positioning.
+   * Target anchor that tooltip uses for relative positioning. Certain components may proffer a string as an anchor target, such as
+   * anchoring to a point inside the component.
    */
-  target?: React.RefObject<React.Component>;
+  target?: React.RefObject<React.Component> | string;
 
   /**
    * Controls the tooltip visibility and can be used in conjunction with onVisibleChange to modify show/hide behavior. If not provided, will be updated based on hover/focus events on target element.
