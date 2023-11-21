@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 09 Nov 2023 02:39:09 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Nov 2023 18:57:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.1
+
+Tue, 21 Nov 2023 18:57:38 GMT
+
+### Patches
+
+- Stop propagation of left right arrow keys for menu (ruaraki@microsoft.com)
 
 ## 1.12.0
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Stop propagation of left right arrow keys for menu",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
