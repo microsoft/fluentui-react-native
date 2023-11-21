@@ -6712,9 +6712,9 @@ __metadata:
   linkType: hard
 
 "@types/invariant@npm:^2.2.0":
-  version: 2.2.36
-  resolution: "@types/invariant@npm:2.2.36"
-  checksum: 8f9855a5da7aeef0292bda3ef14ce1d893059e2f70934d870d5533744c789fb4087035dc2e510ffa036d89890812d8170fb1a0e241991cc15e0ffccfaf7d9c13
+  version: 2.2.37
+  resolution: "@types/invariant@npm:2.2.37"
+  checksum: dd6ee07af8516d21c868f95fd96c601c50a231e69c2df69360cb491b5858c76cf9b5a646df166cb4197b5078ca824da3dd90d6142d01a3cefc1176c57278b129
   languageName: node
   linkType: hard
 
