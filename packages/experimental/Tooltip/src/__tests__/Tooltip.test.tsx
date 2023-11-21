@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Tooltip } from '../Tooltip';
-import * as renderer from 'react-test-renderer';
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+
 import { Button } from '@fluentui-react-native/experimental-button';
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import * as renderer from 'react-test-renderer';
+
+import { Tooltip } from '../Tooltip';
 
 describe('Tooltip component tests', () => {
   it('Tooltip default', () => {

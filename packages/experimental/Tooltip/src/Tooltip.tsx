@@ -1,10 +1,14 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import * as React from 'react';
-import { tooltip, TooltipType, TooltipProps } from './Tooltip.types';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useTooltip } from './useTooltip';
+
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import type { UseSlots } from '@fluentui-react-native/framework';
+
+import type { TooltipType, TooltipProps } from './Tooltip.types';
+import { tooltip } from './Tooltip.types';
+import { useTooltip } from './useTooltip';
 
 const NativeTooltipView = ensureNativeComponent('RCTTooltip');
 

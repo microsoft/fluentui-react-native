@@ -1,4 +1,4 @@
-import { TooltipProps } from './Tooltip.types';
+import type { TooltipProps } from './Tooltip.types';
 
 export const useTooltip = (props: TooltipProps): TooltipProps => {
   const { ...rest } = props;

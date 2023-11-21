@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import { TOOLTIP_TESTPAGE } from './consts';
 import { TooltipDefault } from './TooltipDefault';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test } from '../Test';
+import type { TestSection, PlatformStatus } from '../Test';
 
 const tooltipSections: TestSection[] = [
   {

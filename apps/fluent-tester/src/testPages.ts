@@ -44,9 +44,9 @@ import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
+import { TooltipTest } from './TestComponents/Tooltip';
 import { VibrancyViewTest } from './TestComponents/VibrancyView';
 import * as Constants from '../../E2E/src/index.consts';
-import { TooltipTest } from './TestComponents/Tooltip';
 
 export const tests: TestDescription[] = [
   {
