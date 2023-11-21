@@ -5878,11 +5878,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.2, @rnx-kit/align-deps@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "@rnx-kit/align-deps@npm:2.2.5"
+  version: 2.2.6
+  resolution: "@rnx-kit/align-deps@npm:2.2.6"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 76a9818cb43d6cd3517ff25937fe7564e52fb82eb0408b1971a6e8cbc985dc38490dcf514b50e2cdd7fd84bc9ffaa5c7d549f5ad4cc4b42ef82e1377d8a924c2
+  checksum: f80f0f1b82ff7127c1f7b520d6e7bcd9ad30cba8696ee498e313b7a756059a800b6340dbb90475ee18a29cab2e2d634fb0adf411fa3a4a1ac3996b63da260ab7
   languageName: node
   linkType: hard
 
@@ -5975,8 +5975,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/metro-config@npm:^1.3.1":
-  version: 1.3.13
-  resolution: "@rnx-kit/metro-config@npm:1.3.13"
+  version: 1.3.14
+  resolution: "@rnx-kit/metro-config@npm:1.3.14"
   dependencies:
     "@rnx-kit/console": ^1.0.0
     "@rnx-kit/tools-node": ^2.0.0
@@ -5989,7 +5989,7 @@ __metadata:
   peerDependenciesMeta:
     "@react-native/metro-config":
       optional: true
-  checksum: c0e2480527f1dcd010c833a520c28c799e15d1908601c8bd9fe6e4ca2d2f07174a6357ae88af7d020b5b3fd675e053bd7d518d6a27b3404c0849f5c08b55da1c
+  checksum: 65b8ecfd614ea0a313757fa00d23550cf8ac773f702be0858608be059aa812592b7a257d8976cc5d53a1e87c12639eaee8292a667dc75443024f92b5cfa0d1bf
   languageName: node
   linkType: hard
 
