@@ -2595,9 +2595,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "@eslint/eslintrc@npm:2.1.2"
+"@eslint/eslintrc@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "@eslint/eslintrc@npm:2.1.3"
   dependencies:
     ajv: ^6.12.4
     debug: ^4.3.2
@@ -2608,14 +2608,14 @@ __metadata:
     js-yaml: ^4.1.0
     minimatch: ^3.1.2
     strip-json-comments: ^3.1.1
-  checksum: bc742a1e3b361f06fedb4afb6bf32cbd27171292ef7924f61c62f2aed73048367bcc7ac68f98c06d4245cd3fabc43270f844e3c1699936d4734b3ac5398814a7
+  checksum: 5c6c3878192fe0ddffa9aff08b4e2f3bcc8f1c10d6449b7295a5f58b662019896deabfc19890455ffd7e60a5bd28d25d0eaefb2f78b2d230aae3879af92b89e5
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@eslint/js@npm:8.52.0"
-  checksum: 490893b8091a66415f4ac98b963d23eb287264ea3bd6af7ec788f0570705cf64fd6ab84b717785980f55e39d08ff5c7fde6d8e4391ccb507169370ce3a6d091a
+"@eslint/js@npm:8.54.0":
+  version: 8.54.0
+  resolution: "@eslint/js@npm:8.54.0"
+  checksum: 6d88a6f711ef0133566b5340e3178a178fbb297585766460f195d0a9db85688f1e5cf8559fd5748aeb3131e2096c66595b323d8edab22df015acda68f1ebde92
   languageName: node
   linkType: hard
 
@@ -6627,9 +6627,9 @@ __metadata:
   linkType: hard
 
 "@types/es6-collections@npm:^0.5.29":
-  version: 0.5.35
-  resolution: "@types/es6-collections@npm:0.5.35"
-  checksum: d93756717fc31356b37ab7883cd0a78f5ec313094c58240aa45fbb2822b17944bf54833faac775589a7f9580a45cf2ea290526c8bb67bda2ad7c0e440eecd62e
+  version: 0.5.36
+  resolution: "@types/es6-collections@npm:0.5.36"
+  checksum: d42d37c62b72395ee11dfd3657284a36182e750c533d1b8e9412b7a1eb94cd1ea6a41e40d40a874b7dbf9372a97bf4e4bfb2a3b2c9e28680c8a9df05a1b7d6bb
   languageName: node
   linkType: hard
 
@@ -12059,13 +12059,13 @@ __metadata:
   linkType: hard
 
 "eslint@npm:^8.0.0":
-  version: 8.52.0
-  resolution: "eslint@npm:8.52.0"
+  version: 8.54.0
+  resolution: "eslint@npm:8.54.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.6.1
-    "@eslint/eslintrc": ^2.1.2
-    "@eslint/js": 8.52.0
+    "@eslint/eslintrc": ^2.1.3
+    "@eslint/js": 8.54.0
     "@humanwhocodes/config-array": ^0.11.13
     "@humanwhocodes/module-importer": ^1.0.1
     "@nodelib/fs.walk": ^1.2.8
@@ -12102,7 +12102,7 @@ __metadata:
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: fd22d1e9bd7090e31b00cbc7a3b98f3b76020a4c4641f987ae7d0c8f52e1b88c3b268bdfdabac2e1a93513e5d11339b718ff45cbff48a44c35d7e52feba510ed
+  checksum: 7e876e9da2a18a017271cf3733d05a3dfbbe469272d75753408c6ea5b1646c71c6bb18cb91e10ca930144c32c1ce3701e222f1ae6784a3975a69f8f8aa68e49f
   languageName: node
   linkType: hard
 
@@ -18572,8 +18572,8 @@ __metadata:
   linkType: hard
 
 "react-native-macos@npm:^0.72.0":
-  version: 0.72.5
-  resolution: "react-native-macos@npm:0.72.5"
+  version: 0.72.10
+  resolution: "react-native-macos@npm:0.72.10"
   dependencies:
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 11.3.7
@@ -18615,7 +18615,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native-macos: cli.js
-  checksum: 58f9b384a57acd76b5c1d0fd2ca2f0306eafc0f6b93ce70b7c69441365532a0daa5f86e075e10bf3b4a327fa5251ff075815ac006ac7ff4ae9ac34fc372cc5d5
+  checksum: dcf81894f4e8f268cd90bfd515ac69a8fb622feaf6dceabbb83acae3af50d26a7bde4124b613374bd7956628bb5cb00549774a06ba655245b12c66b8b7a0b58b
   languageName: node
   linkType: hard
 
@@ -18683,8 +18683,8 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.72.0":
-  version: 0.72.18
-  resolution: "react-native-windows@npm:0.72.18"
+  version: 0.72.19
+  resolution: "react-native-windows@npm:0.72.19"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
@@ -18729,7 +18729,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.72.6
-  checksum: f0fe76a36b907bb3fe747143ef5825a5fb0c1a5d73c0b7342158af2a1b0a5911e97317ce305ac0bfa39593f051ffe9b698f8fe4f676c571fd3a1b9dd25b4e514
+  checksum: 825525305de9874aae53a3d339cc8ce8e018b20c3a037f72a76e51bf79215f4cae4e169371047d8e218aba61760f35645f2fa05cd9a2eb82efcd5ed739a39db2
   languageName: node
   linkType: hard
 
