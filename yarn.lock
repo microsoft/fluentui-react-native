@@ -8479,8 +8479,8 @@ __metadata:
   linkType: hard
 
 "appium-xcuitest-driver@npm:^5.6.0":
-  version: 5.8.2
-  resolution: "appium-xcuitest-driver@npm:5.8.2"
+  version: 5.9.1
+  resolution: "appium-xcuitest-driver@npm:5.9.1"
   dependencies:
     appium-idb: ^1.6.13
     appium-ios-device: ^2.5.4
@@ -8506,7 +8506,7 @@ __metadata:
     ws: ^8.13.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: 8ae6d97f6682cd932ffaa1a592779a30305e89992d988985d887265c28b340503ac67246ff84f32bd19daa875d3709243f22d7823298a35f2c8355960ed55cb1
+  checksum: fa6a1ba5b3d0fe0ebfeed7188afb2f3190aa9b05d742a6f79bd5e7bf2ee0a79d5da1df7e79c704dea7bdfca2278b21d8c2ab1b596fee6fc17c1bbffdd39cea7a
   languageName: node
   linkType: hard
 
