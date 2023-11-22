@@ -15,7 +15,7 @@
   <files>
     <file
       src="..\node_modules\**"
-      exclude="..\node_modules\appium-windows-driver\node_modules\teen_process\node_modules\@babel\runtime\helpers\esm\classCheckPrivateStaticFieldDescriptor.js;..\node_modules\@appium\docutils\node_modules\typedoc-plugin-markdown\node_modules\handlebars\dist\amd\handlebars\compiler\javascript-compiler.js"
+      exclude="..\node_modules\appium-windows-driver\node_modules\teen_process\node_modules\@babel\runtime\helpers\esm\classCheckPrivateStaticFieldDescriptor.js;..\node_modules\@appium\docutils\node_modules\typedoc-plugin-markdown\node_modules\handlebars\dist\amd\handlebars\compiler\javascript-compiler.js;..\node_modules\@appium\docutils\node_modules\typedoc-plugin-markdown\node_modules\handlebars\dist\amd\handlebars\helpers\block-helper-missing.js"
       target="node_modules"
     />
   </files>
