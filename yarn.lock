@@ -2295,11 +2295,11 @@ __metadata:
   linkType: hard
 
 "@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.8.0, @babel/runtime@npm:^7.8.4":
-  version: 7.23.2
-  resolution: "@babel/runtime@npm:7.23.2"
+  version: 7.23.4
+  resolution: "@babel/runtime@npm:7.23.4"
   dependencies:
     regenerator-runtime: ^0.14.0
-  checksum: 6c4df4839ec75ca10175f636d6362f91df8a3137f86b38f6cd3a4c90668a0fe8e9281d320958f4fbd43b394988958585a17c3aab2a4ea6bf7316b22916a371fb
+  checksum: 8eb6a6b2367f7d60e7f7dd83f477cc2e2fdb169e5460694d7614ce5c730e83324bcf29251b70940068e757ad1ee56ff8073a372260d90cad55f18a825caf97cd
   languageName: node
   linkType: hard
 
@@ -3716,7 +3716,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.0, @fluentui-react-native/menu@workspace:packages/components/Menu":
+"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.1, @fluentui-react-native/menu@workspace:packages/components/Menu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
@@ -4163,7 +4163,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.158.1
+    "@fluentui-react-native/tester": ^0.158.2
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
     "@react-native/metro-config": ^0.72.0
@@ -4184,7 +4184,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.158.1, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.158.2, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -4218,7 +4218,7 @@ __metadata:
     "@fluentui-react-native/icon": 0.20.0
     "@fluentui-react-native/input": ^0.5.0
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
-    "@fluentui-react-native/menu": ^1.12.0
+    "@fluentui-react-native/menu": ^1.12.1
     "@fluentui-react-native/merge-props": ">=0.8.0 <1.0.0"
     "@fluentui-react-native/notification": 0.24.0
     "@fluentui-react-native/radio-group": ">=0.20.0 <1.0.0"
@@ -5878,11 +5878,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.2, @rnx-kit/align-deps@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "@rnx-kit/align-deps@npm:2.2.5"
+  version: 2.2.6
+  resolution: "@rnx-kit/align-deps@npm:2.2.6"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 76a9818cb43d6cd3517ff25937fe7564e52fb82eb0408b1971a6e8cbc985dc38490dcf514b50e2cdd7fd84bc9ffaa5c7d549f5ad4cc4b42ef82e1377d8a924c2
+  checksum: f80f0f1b82ff7127c1f7b520d6e7bcd9ad30cba8696ee498e313b7a756059a800b6340dbb90475ee18a29cab2e2d634fb0adf411fa3a4a1ac3996b63da260ab7
   languageName: node
   linkType: hard
 
@@ -5975,8 +5975,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/metro-config@npm:^1.3.1":
-  version: 1.3.13
-  resolution: "@rnx-kit/metro-config@npm:1.3.13"
+  version: 1.3.14
+  resolution: "@rnx-kit/metro-config@npm:1.3.14"
   dependencies:
     "@rnx-kit/console": ^1.0.0
     "@rnx-kit/tools-node": ^2.0.0
@@ -5989,7 +5989,7 @@ __metadata:
   peerDependenciesMeta:
     "@react-native/metro-config":
       optional: true
-  checksum: c0e2480527f1dcd010c833a520c28c799e15d1908601c8bd9fe6e4ca2d2f07174a6357ae88af7d020b5b3fd675e053bd7d518d6a27b3404c0849f5c08b55da1c
+  checksum: 65b8ecfd614ea0a313757fa00d23550cf8ac773f702be0858608be059aa812592b7a257d8976cc5d53a1e87c12639eaee8292a667dc75443024f92b5cfa0d1bf
   languageName: node
   linkType: hard
 
@@ -6712,9 +6712,9 @@ __metadata:
   linkType: hard
 
 "@types/invariant@npm:^2.2.0":
-  version: 2.2.36
-  resolution: "@types/invariant@npm:2.2.36"
-  checksum: 8f9855a5da7aeef0292bda3ef14ce1d893059e2f70934d870d5533744c789fb4087035dc2e510ffa036d89890812d8170fb1a0e241991cc15e0ffccfaf7d9c13
+  version: 2.2.37
+  resolution: "@types/invariant@npm:2.2.37"
+  checksum: dd6ee07af8516d21c868f95fd96c601c50a231e69c2df69360cb491b5858c76cf9b5a646df166cb4197b5078ca824da3dd90d6142d01a3cefc1176c57278b129
   languageName: node
   linkType: hard
 
@@ -6761,12 +6761,12 @@ __metadata:
   linkType: hard
 
 "@types/jest@npm:^29.0.0":
-  version: 29.5.8
-  resolution: "@types/jest@npm:29.5.8"
+  version: 29.5.9
+  resolution: "@types/jest@npm:29.5.9"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: ca8438a5b4c098c8c023e9d5b279ea306494a1d0b5291cfb498100fa780377145f068b2a021d545b0398bbe0328dcc37044dd3aaf3c6c0fe9b0bef7b46a63453
+  checksum: 02245cff5f5b5ef46cc8c28acc516674aa167f2398bc4042752db7c763555928c5d62d56b3510eb8a2e5e25eea921f34866ef1c5515edfe16699b4a1e99ed4e1
   languageName: node
   linkType: hard
 
@@ -18683,8 +18683,8 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.72.0":
-  version: 0.72.19
-  resolution: "react-native-windows@npm:0.72.19"
+  version: 0.72.20
+  resolution: "react-native-windows@npm:0.72.20"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
@@ -18729,7 +18729,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.72.6
-  checksum: 825525305de9874aae53a3d339cc8ce8e018b20c3a037f72a76e51bf79215f4cae4e169371047d8e218aba61760f35645f2fa05cd9a2eb82efcd5ed739a39db2
+  checksum: cc32656288163db43e7770095faff2465f47d3cdc01b8a141008a00e8afdf9347b71770c864948f05cbd91bc3ea80f4e4d019ac02e56130d9e7f517b3eced26e
   languageName: node
   linkType: hard
 
