@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update appium packages",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
