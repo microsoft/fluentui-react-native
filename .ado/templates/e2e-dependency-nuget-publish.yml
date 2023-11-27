@@ -13,7 +13,7 @@ jobs:
       templateContext:
         outputs:
           - output: nuget
-            packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.WebDriverIO.Appium.Deps.nupkg'
+            packagesToPush: '$(Build.ArtifactStagingDirectory)/WebDriverIO.Appium.Deps.nupkg'
             packageParentPath: '$(Build.ArtifactStagingDirectory)'
             publishVstsFeed: Office # Required when pushing to internal feed.
             nuGetFeedType: internal # Change to external when publishing to external feed
