@@ -44,11 +44,11 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   const [tabKeys, setTabKeys] = React.useState<string[]>([]);
   const [allTabsDisabled, setAllTabsDisabled] = React.useState(false);
 
-  // These
+  // These maps are used to switch tab focus in the event the selected tab is disabled. React refs are used as storage because updating the maps shouldn't trigger a re-render.
   const tabRefMap = React.useRef<{ [key: string]: React.RefObject<View> }>({}).current;
   const disabledStateMap = React.useRef<{ [key: string]: boolean }>({}).current;
 
-  const updateTabRef = (key: string, ref: React.RefObject<View>) => (tabRefMap[key] = ref);
+  const updateTabRef = React.useCallback((key: string, ref: React.RefObject<View>) => (tabRefMap[key] = ref), [tabRefMap]);
   const updateDisabledTabs = React.useCallback(
     (key: string, isDisabled: boolean) => {
       disabledStateMap[key] = isDisabled;

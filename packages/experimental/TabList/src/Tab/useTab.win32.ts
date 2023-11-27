@@ -92,13 +92,14 @@ export const useTab = (props: TabProps): TabInfo => {
 
   React.useEffect(() => {
     updateTabRef(tabKey, componentRef);
+    // Intentionally disable exhaustive-deps warning this and the following hooks because the hook shouldn't run whenever the excluded dependencies change.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [componentRef]);
+  }, [tabKey, componentRef]);
 
   React.useEffect(() => {
     updateDisabledTabs(tabKey, disabled);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [disabled]);
+  }, [tabKey, disabled]);
 
   /**
    * Continuing from `handlePressAndDeferFocus`, once we have updated the selection state, we can safely set focus to the correct tab so

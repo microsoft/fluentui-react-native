@@ -87,7 +87,7 @@ export interface TabListState {
   setInvoked?: (invoked: boolean) => void;
 
   /**
-   * Setter for the selected Tab's ref to set as the default tabbable element in the FocusZone
+   * Setter for the focused Tab's ref to set as the default tabbable element in the FocusZone
    */
   setFocusedTabRef: (ref: React.RefObject<any>) => void;
 
