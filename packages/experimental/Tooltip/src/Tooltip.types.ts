@@ -1,4 +1,5 @@
 import type * as React from 'react';
+import type { ViewStyle } from 'react-native';
 
 export const tooltip = 'Tooltip';
 
@@ -38,6 +39,11 @@ export type TooltipProps = React.PropsWithChildren<{
    * @default topCenter
    */
   positioning?: DirectionalHint;
+
+  /**
+   * Allow consumers to pass in Style props
+   */
+  style?: ViewStyle;
 
   /**
    * Target anchor that tooltip uses for relative positioning. Certain components may proffer a string as an anchor target, such as
