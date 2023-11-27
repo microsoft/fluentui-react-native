@@ -13,7 +13,7 @@ jobs:
       templateContext:
         outputs:
           - output: nuget
-            packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.WebDriverIO.Appium.Deps.nupkg'
+            packagesToPush: '$(Build.ArtifactStagingDirectory)/WebDriverIO.Appium.Deps.nupkg'
             packageParentPath: '$(Build.ArtifactStagingDirectory)'
             publishVstsFeed: Office # Required when pushing to internal feed.
             nuGetFeedType: internal # Change to external when publishing to external feed
@@ -34,5 +34,5 @@ jobs:
         displayName: 'Create NuGet package for tester_deps.'
         inputs:
           filename: nuget
-          arguments: 'pack Microsoft.FluentUI.WebDriverIO.Appium.Deps.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+          arguments: 'pack WebDriverIO.Appium.Deps.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
           workingFolder: 'tester_deps/nuget'
