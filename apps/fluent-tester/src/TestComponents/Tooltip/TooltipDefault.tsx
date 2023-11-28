@@ -7,17 +7,8 @@ import { Tooltip } from '@fluentui-react-native/tooltip';
 export const TooltipDefault: React.FunctionComponent = () => {
   return (
     <View>
-      <Tooltip content="Test">
+      <Tooltip content="Tooltip should show under mouse cursor.">
         <Button>Test</Button>
-      </Tooltip>
-      <Tooltip content="Test 2">
-        <Button>Test 2</Button>
-      </Tooltip>
-      <Tooltip content="Test 3">
-        <Button>Test 3</Button>
-      </Tooltip>
-      <Tooltip content="Test 4">
-        <Button>Test 4</Button>
       </Tooltip>
     </View>
   );
