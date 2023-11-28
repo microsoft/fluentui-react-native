@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, I18nManager } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import type { AnimatedIndicatorProps, AnimatedIndicatorStyles } from './TabListAnimatedIndicator.types';
@@ -30,13 +30,17 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
       let scaleValue: number, translateValue: number, translateOffset: number;
       if (vertical) {
         scaleValue = selectedIndicatorLayout.height / startingIndicatorLayout.height;
-        translateValue = selectedIndicatorLayout.y - startingIndicatorLayout.y;
         translateOffset = (selectedIndicatorLayout.height - startingIndicatorLayout.height) / 2;
+        translateValue = selectedIndicatorLayout.y - startingIndicatorLayout.y + translateOffset;
       } else {
         scaleValue = selectedIndicatorLayout.width / startingIndicatorLayout.width;
-        translateValue = selectedIndicatorLayout.x - startingIndicatorLayout.x;
         translateOffset = (selectedIndicatorLayout.width - startingIndicatorLayout.width) / 2;
+        translateValue = selectedIndicatorLayout.x - startingIndicatorLayout.x + translateOffset;
+        if (I18nManager.isRTL) {
+          translateValue *= -1;
+        }
       }
+      translateValue = translateValue + translateOffset;
       Animated.parallel([
         Animated.timing(indicatorScale, {
           toValue: scaleValue,
@@ -45,7 +49,7 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
           useNativeDriver: true,
         }),
         Animated.timing(indicatorTranslate, {
-          toValue: translateValue + translateOffset,
+          toValue: translateValue,
           duration: 300,
           easing: Easing.bezier(0, 0, 0, 1),
           useNativeDriver: true,
