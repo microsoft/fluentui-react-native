@@ -21,8 +21,8 @@ export const tooltipLookup = (layer: string, userProps: TooltipProps): boolean =
 };
 
 export const Tooltip = stagedComponent((props: TooltipProps) => {
-  return (_rest: TooltipProps, children: React.ReactNode) => {
-    return <NativeTooltipView {...mergeProps(props, _rest)}>{children}</NativeTooltipView>;
+  return (rest: TooltipProps, children: React.ReactNode) => {
+    return <NativeTooltipView {...mergeProps(props, rest)}>{children}</NativeTooltipView>;
   };
 });
 

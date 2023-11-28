@@ -14,7 +14,6 @@ const tooltipSections: TestSection[] = [
   },
   {
     name: 'Target + Positioning',
-    testID: TOOLTIP_TESTPAGE,
     component: TooltipPosition,
   },
 ];
