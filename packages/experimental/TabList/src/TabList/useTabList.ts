@@ -56,8 +56,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
         setAllTabsDisabled(false);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [allTabsDisabled],
+    [allTabsDisabled, disabledStateMap],
   );
 
   const addTabKey = React.useCallback(
@@ -134,6 +133,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
         setFocusedTabRef(ref);
       }
     }
+    // Disable exhaustive-deps warning because this hook should only run once 'isSelectedTabDisabled' dependency changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelectedTabDisabled]);
 
