@@ -15,6 +15,7 @@ export const TooltipPosition: React.FunctionComponent = () => {
       <Tooltip content="Test" positioning="topCenter" target={topCenterRef}>
         <Button componentRef={topCenterRef}>Target + TopCenter</Button>
       </Tooltip>
+      {/* Adding more tests as follow-up*/}
     </View>
   );
 };
