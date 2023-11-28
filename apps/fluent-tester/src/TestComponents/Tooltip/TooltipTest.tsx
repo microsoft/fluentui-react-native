@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TOOLTIP_TESTPAGE } from './consts';
+import { TOOLTIP_TESTPAGE } from '../../../../E2E/src/Tooltip/consts';
 import { TooltipDefault } from './TooltipDefault';
 import { TooltipPosition } from './TooltipPosition';
 import { Test } from '../Test';

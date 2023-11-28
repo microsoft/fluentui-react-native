@@ -26,13 +26,13 @@
     "directory": "packages/experimental/Tooltip"
   },
   "dependencies": {
+    "@fluentui-react-native/component-cache": "^1.6.0",
     "@fluentui-react-native/framework": "0.12.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/component-cache": "^1.6.0",
+    "@fluentui-react-native/button": "^0.36.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/experimental-button": "^0.19.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@office-iss/react-native-win32": "^0.72.0",

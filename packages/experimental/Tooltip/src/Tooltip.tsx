@@ -7,7 +7,7 @@ import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework
 import type { UseSlots } from '@fluentui-react-native/framework';
 
 import type { TooltipType, TooltipProps } from './Tooltip.types';
-import { tooltip } from './Tooltip.types';
+import { tooltipName } from './Tooltip.types';
 import { useTooltip } from './useTooltip';
 
 const NativeTooltipView = ensureNativeComponent('RCTTooltip');
@@ -24,7 +24,7 @@ export const tooltipLookup = (layer: string, userProps: TooltipProps): boolean =
 };
 
 export const Tooltip = compose<TooltipType>({
-  displayName: tooltip,
+  displayName: tooltipName,
   slots: {
     root: NativeTooltipView,
   },

@@ -1,7 +1,7 @@
 import type * as React from 'react';
 import type { ViewStyle } from 'react-native';
 
-export const tooltip = 'Tooltip';
+export const tooltipName = 'Tooltip';
 
 /**
  * Properties and Tokens for FluentUI React Native Tooltip
