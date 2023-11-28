@@ -1,14 +1,11 @@
 /** @jsxRuntime classic */
-/** @jsx withSlots */
 import * as React from 'react';
 
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import type { UseSlots } from '@fluentui-react-native/framework';
+import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 
-import type { TooltipType, TooltipProps } from './Tooltip.types';
+import type { TooltipProps } from './Tooltip.types';
 import { tooltipName } from './Tooltip.types';
-import { useTooltip } from './useTooltip';
 
 const NativeTooltipView = ensureNativeComponent('RCTTooltip');
 
@@ -23,19 +20,12 @@ export const tooltipLookup = (layer: string, userProps: TooltipProps): boolean =
   return userProps[layer];
 };
 
-export const Tooltip = compose<TooltipType>({
-  displayName: tooltipName,
-  slots: {
-    root: NativeTooltipView,
-  },
-  useRender: (userProps: TooltipProps, useSlots: UseSlots<TooltipType>) => {
-    const tooltipProps = useTooltip(userProps);
-    const Slots = useSlots(userProps, (layer) => tooltipLookup(layer, userProps));
-
-    return (final: TooltipProps, ...children: React.ReactNode[]) => {
-      const { ...mergedProps } = mergeProps(tooltipProps, final);
-
-      return <Slots.root {...mergedProps}>{children}</Slots.root>;
-    };
-  },
+export const Tooltip = stagedComponent((props: TooltipProps) => {
+  return (_rest: TooltipProps, children: React.ReactNode) => {
+    return <NativeTooltipView {...mergeProps(props, _rest)}>{children}</NativeTooltipView>;
+  };
 });
+
+Tooltip.displayName = tooltipName;
+
+export default Tooltip;
