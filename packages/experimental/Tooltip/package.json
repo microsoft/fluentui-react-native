@@ -26,6 +26,7 @@
     "directory": "packages/experimental/Tooltip"
   },
   "dependencies": {
+    "@fluentui-react-native/callout": "^0.25.0",
     "@fluentui-react-native/component-cache": "^1.6.0",
     "@fluentui-react-native/framework": "0.12.0",
     "tslib": "^2.3.1"

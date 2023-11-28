@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV1 } from '@fluentui-react-native/button';
 import { Tooltip } from '@fluentui-react-native/tooltip';
 
 export const TooltipPosition: React.FunctionComponent = () => {
@@ -10,10 +10,10 @@ export const TooltipPosition: React.FunctionComponent = () => {
   return (
     <View>
       <Tooltip content="Test" positioning="topCenter">
-        <Button>No Target + TopCenter</Button>
+        <ButtonV1>No Target + TopCenter</ButtonV1>
       </Tooltip>
       <Tooltip content="Test" positioning="topCenter" target={topCenterRef}>
-        <Button componentRef={topCenterRef}>Target + TopCenter</Button>
+        <ButtonV1 componentRef={topCenterRef}>Target + TopCenter</ButtonV1>
       </Tooltip>
       {/* Adding more tests as follow-up*/}
     </View>

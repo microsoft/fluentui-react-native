@@ -1,26 +1,8 @@
 import type * as React from 'react';
 import type { ViewStyle } from 'react-native';
+import type { DirectionalHint } from '@fluentui-react-native/callout';
 
 export const tooltipName = 'Tooltip';
-
-/**
- * Properties and Tokens for FluentUI React Native Tooltip
- */
-export type DirectionalHint =
-  | 'leftTopEdge'
-  | 'leftCenter'
-  | 'leftBottomEdge'
-  | 'topLeftEdge'
-  | 'topAutoEdge'
-  | 'topCenter'
-  | 'topRightEdge'
-  | 'rightTopEdge'
-  | 'rightCenter'
-  | 'rightBottomEdge'
-  | 'bottonLeftEdge'
-  | 'bottomAutoEdge'
-  | 'bottomCenter'
-  | 'bottomRightEdge';
 
 export type TooltipProps = React.PropsWithChildren<{
   /**
