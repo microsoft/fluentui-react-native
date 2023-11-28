@@ -7,7 +7,7 @@ import { Tooltip } from '@fluentui-react-native/tooltip';
 export const TooltipDefault: React.FunctionComponent = () => {
   return (
     <View>
-      <Tooltip content="Test" positioning="topCenter">
+      <Tooltip content="Test">
         <Button>Test</Button>
       </Tooltip>
       <Tooltip content="Test 2">

@@ -2,14 +2,20 @@ import * as React from 'react';
 
 import { TOOLTIP_TESTPAGE } from './consts';
 import { TooltipDefault } from './TooltipDefault';
+import { TooltipPosition } from './TooltipPosition';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
 
 const tooltipSections: TestSection[] = [
   {
-    name: 'Tooltip',
+    name: 'Default',
     testID: TOOLTIP_TESTPAGE,
     component: TooltipDefault,
+  },
+  {
+    name: 'Target + Positioning',
+    testID: TOOLTIP_TESTPAGE,
+    component: TooltipPosition,
   },
 ];
 

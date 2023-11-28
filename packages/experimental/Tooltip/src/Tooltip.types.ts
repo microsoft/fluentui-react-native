@@ -48,6 +48,8 @@ export type TooltipProps = React.PropsWithChildren<{
   /**
    * Target anchor that tooltip uses for relative positioning. Certain components may proffer a string as an anchor target, such as
    * anchoring to a point inside the component.
+   *
+   * If not provided, will anchor to the wrapper element.
    */
   target?: React.RefObject<React.Component> | string;
 
