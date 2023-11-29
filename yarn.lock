@@ -4123,12 +4123,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:6.5.0":
+  version: 6.5.0
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.5.0"
+  checksum: a129ad8bd00ae735ef9e2431b0d1bbfd6c862e8de5bbceaee57f4a58400ee7693d98faaee54fa257c11a4f5a69c0bedd611405812a32ae0594d7bc74d6d29e97
+  languageName: node
+  linkType: hard
+
 "@fortawesome/fontawesome-svg-core@npm:^6.2.0":
-  version: 6.4.2
-  resolution: "@fortawesome/fontawesome-svg-core@npm:6.4.2"
+  version: 6.5.0
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.5.0"
   dependencies:
-    "@fortawesome/fontawesome-common-types": 6.4.2
-  checksum: 0c0ecd9058883b128127e2b281c983ba6272be38a17577aaa2293ada58e9b1538357fe44430ded508d49ae3f5cc55aa720a0448d2b9d99689bb912d786f034e5
+    "@fortawesome/fontawesome-common-types": 6.5.0
+  checksum: 108fd0a520d16745257febc37c36c544eff6a59855e95f45b97341042edb1a39bc5cfc092bf45046ae4f627de08f6cfe473a5e90f782817c7b45f524bedff76c
   languageName: node
   linkType: hard
 
