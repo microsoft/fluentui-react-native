@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix disabled selected tab impeding keyboard navigation",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

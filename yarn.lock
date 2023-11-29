@@ -3798,7 +3798,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.5.1, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
+"@fluentui-react-native/tablist@0.5.2, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/experimental/TabList"
   dependencies:
@@ -3872,7 +3872,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.158.2
+    "@fluentui-react-native/tester": ^0.158.3
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
     "@react-native/metro-config": ^0.72.0
@@ -3893,7 +3893,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.158.2, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.158.3, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3936,7 +3936,7 @@ __metadata:
     "@fluentui-react-native/spinner": ^0.8.0
     "@fluentui-react-native/stack": ">=0.9.0 <1.0.0"
     "@fluentui-react-native/switch": ^0.12.0
-    "@fluentui-react-native/tablist": 0.5.1
+    "@fluentui-react-native/tablist": 0.5.2
     "@fluentui-react-native/text": ">=0.22.0 <1.0.0"
     "@fluentui-react-native/theme": ">=0.10.0 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.26.0
