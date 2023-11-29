@@ -102,14 +102,14 @@ export function useTabAnimation(
         setTabLayoutRect(e.nativeEvent.layout);
       }
     },
-    [calculateAndUpdateAnimationLayoutInfo, layout.tablist],
+    [calculateAndUpdateAnimationLayoutInfo, layout?.tablist],
   );
 
   React.useEffect(() => {
     if (tabLayoutRect && layout.tablist) {
       calculateAndUpdateAnimationLayoutInfo(tabLayoutRect, layout.tablist);
     }
-  }, [layout.tablist]);
+  }, [layout?.tablist]);
 
   return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);
 }
