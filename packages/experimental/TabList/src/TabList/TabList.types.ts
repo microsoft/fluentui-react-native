@@ -174,7 +174,8 @@ export interface TabListInfo {
 }
 export interface TabListSlotProps {
   container?: FocusZoneProps;
-  stack: React.PropsWithRef<IViewProps>;
+  stack: IViewProps;
+  root: React.PropsWithRef<IViewProps>;
 }
 
 export interface TabListType {

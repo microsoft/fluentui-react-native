@@ -10,13 +10,18 @@ export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, 
   states: ['vertical'],
   slotProps: {
     stack: buildProps(
-      (tokens: TabListTokens, theme: Theme) => ({
+      (tokens: TabListTokens) => ({
         style: {
           flexDirection: tokens.direction,
-          ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['direction', ...layoutStyles.keys],
+      ['direction'],
+    ),
+    root: buildProps(
+      (tokens: TabListTokens, theme: Theme) => ({
+        style: layoutStyles.from(tokens, theme),
+      }),
+      layoutStyles.keys,
     ),
   },
 };
