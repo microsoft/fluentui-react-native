@@ -1,5 +1,6 @@
 import type * as React from 'react';
 import type { ViewStyle } from 'react-native';
+
 import type { DirectionalHint } from '@fluentui-react-native/callout';
 
 export const tooltipName = 'Tooltip';
