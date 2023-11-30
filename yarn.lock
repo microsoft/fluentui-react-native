@@ -2487,35 +2487,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/button@npm:^0.36.1":
-  version: 0.36.1
-  resolution: "@fluentui-react-native/button@npm:0.36.1"
-  dependencies:
-    "@fluentui-react-native/adapters": ">=0.12.0 <1.0.0"
-    "@fluentui-react-native/experimental-activity-indicator": ^0.9.0
-    "@fluentui-react-native/experimental-shadow": 0.5.0
-    "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": 0.20.0
-    "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
-    "@fluentui-react-native/pressable": ">=0.11.0 <1.0.0"
-    "@fluentui-react-native/styling-utils": ">=0.6.0 <1.0.0"
-    "@fluentui-react-native/text": ">=0.22.0 <1.0.0"
-    "@fluentui-react-native/theme-tokens": ">=0.26.0 <1.0.0"
-    "@fluentui-react-native/theme-types": ">=0.33.0 <1.0.0"
-    "@fluentui-react-native/theming-utils": ">=0.25.0 <1.0.0"
-    "@fluentui-react-native/tokens": ">=0.22.0 <1.0.0"
-    "@fluentui-react-native/use-styling": ">=0.12.0 <1.0.0"
-    "@uifabricshared/foundation-composable": ">=0.12.3 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.13
-    "@uifabricshared/foundation-settings": ">=0.14.0 <1.0.0"
-    tslib: ^2.3.1
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  checksum: d9e12da6e83ab554917a726e6e2adacd3e1df9a1ac89250a19b6487a6d19c8b8a1f5ab280026ad68d066b58ead23cd489bf314438f63befa682f5fc4d6f9f364
-  languageName: node
-  linkType: hard
-
 "@fluentui-react-native/callout@*, @fluentui-react-native/callout@0.25.0, @fluentui-react-native/callout@>=0.25.0 <1.0.0, @fluentui-react-native/callout@^0.25.0, @fluentui-react-native/callout@workspace:packages/components/Callout":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/callout@workspace:packages/components/Callout"
