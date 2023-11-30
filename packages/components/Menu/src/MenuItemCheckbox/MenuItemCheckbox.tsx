@@ -76,7 +76,7 @@ export const menuItemFinalRender = (
           </Slots.iconPlaceholder>
         )}
         {children && (
-          <Slots.content accessible={false} tooltip={tooltipResult}>
+          <Slots.content accessible={false} tooltip={tooltipResult} {...(tooltipResult && { alwaysShowToolTip: true })}>
             {children}
           </Slots.content>
         )}

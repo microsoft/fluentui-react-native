@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "alwaysShowToolTip prop",
+  "packageName": "@fluentui-react-native/button",
+  "email": "rofang@microsoft.com",
+  "dependentChangeType": "patch"
+}
