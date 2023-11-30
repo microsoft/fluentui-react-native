@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 30 Nov 2023 21:40:35 GMT",
+      "version": "0.159.0",
+      "tag": "@fluentui-react-native/tester_v0.159.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b5a9fdefb58572ac6976e682563a190cb8a644b7",
+            "comment": "adding tests for new component"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/tooltip to v0.2.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 30 Nov 2023 19:44:57 GMT",
       "version": "0.158.4",
       "tag": "@fluentui-react-native/tester_v0.158.4",

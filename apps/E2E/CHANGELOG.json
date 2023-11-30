@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 30 Nov 2023 21:40:35 GMT",
+      "version": "1.34.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.34.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "b5a9fdefb58572ac6976e682563a190cb8a644b7",
+            "comment": "adding package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Nov 2023 00:12:31 GMT",
       "version": "1.33.1",
       "tag": "@fluentui-react-native/e2e-testing_v1.33.1",

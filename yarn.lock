@@ -3872,7 +3872,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.158.4
+    "@fluentui-react-native/tester": ^0.159.0
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
     "@react-native/metro-config": ^0.72.0
@@ -3893,7 +3893,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.158.4, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.159.0, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3943,7 +3943,7 @@ __metadata:
     "@fluentui-react-native/theme-types": ">=0.33.0 <1.0.0"
     "@fluentui-react-native/themed-stylesheet": ^1.6.0
     "@fluentui-react-native/theming-utils": ">=0.25.0 <1.0.0"
-    "@fluentui-react-native/tooltip": 0.1.0
+    "@fluentui-react-native/tooltip": 0.2.0
     "@fluentui-react-native/vibrancy-view": ">=0.1.0 <1.0.0"
     "@fluentui-react-native/win32-theme": ">=0.28.0 <1.0.0"
     "@fluentui/react-native": ">=0.39.1 <1.0.0"
@@ -4109,7 +4109,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tooltip@0.1.0, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
+"@fluentui-react-native/tooltip@0.2.0, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip"
   dependencies:

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "adding tests for new component",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "gulnazsayed@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -4,15 +4,15 @@ module.exports = {
   "0.72": {
     "@fluentui-react-native/e2e-testing": {
       "name": "@fluentui-react-native/e2e-testing",
-      "version": "1.33.1"
+      "version": "1.34.0"
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.158.4"
+      "version": "0.159.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.37.4"
+      "version": "0.37.5"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -225,6 +225,10 @@ module.exports = {
     "@fluentui-react-native/experimental-text": {
       "name": "@fluentui-react-native/experimental-text",
       "version": "0.14.0"
+    },
+    "@fluentui-react-native/tooltip": {
+      "name": "@fluentui-react-native/tooltip",
+      "version": "0.2.0"
     },
     "@fluentui-react-native/vibrancy-view": {
       "name": "@fluentui-react-native/vibrancy-view",

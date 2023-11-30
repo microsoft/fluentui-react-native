@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 30 Nov 2023 19:44:57 GMT and should not be manually modified.
+This log was last generated on Thu, 30 Nov 2023 21:40:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.159.0
+
+Thu, 30 Nov 2023 21:40:35 GMT
+
+### Minor changes
+
+- adding tests for new component (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/tooltip to v0.2.0
 
 ## 0.158.4
 
