@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 21 Nov 2023 18:57:38 GMT and should not be manually modified.
+This log was last generated on Thu, 30 Nov 2023 19:44:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.2
+
+Thu, 30 Nov 2023 19:44:57 GMT
+
+### Patches
+
+- alwaysShowToolTip prop (rofang@microsoft.com)
+- Bump @fluentui-react-native/button to v0.36.1
 
 ## 1.12.1
 
