@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV1 } from '@fluentui-react-native/button';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
@@ -11,7 +11,7 @@ describe('Tooltip component tests', () => {
     const tree = renderer
       .create(
         <Tooltip content="Your component">
-          <Button>Your component</Button>
+          <ButtonV1>Your component</ButtonV1>
         </Tooltip>,
       )
       .toJSON();
@@ -22,7 +22,7 @@ describe('Tooltip component tests', () => {
     checkRenderConsistency(
       () => (
         <Tooltip content="Default Tooltip">
-          <Button>Default Tooltip</Button>
+          <ButtonV1>Default Tooltip</ButtonV1>
         </Tooltip>
       ),
       2,
@@ -33,7 +33,7 @@ describe('Tooltip component tests', () => {
     checkReRender(
       () => (
         <Tooltip content="Render twice">
-          <Button>Render twice</Button>
+          <ButtonV1>Render twice</ButtonV1>
         </Tooltip>
       ),
       2,
