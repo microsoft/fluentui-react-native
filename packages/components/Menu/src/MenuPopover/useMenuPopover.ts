@@ -7,7 +7,7 @@ import type { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
 import { useMenuContext } from '../context/menuContext';
 
 const controlledDismissBehaviors = ['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[];
-const stopPropagationKeys = ['ArrowUp', 'ArrowDown', 'Tab', 'Home', 'End', 'Escape'] as const;
+const stopPropagationKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Tab', 'Home', 'End', 'Escape'] as const;
 
 export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
   const context = useMenuContext();
