@@ -3872,7 +3872,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.159.0
+    "@fluentui-react-native/tester": ^0.159.1
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
     "@react-native/metro-config": ^0.72.0
@@ -3893,7 +3893,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.159.0, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.159.1, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -4274,13 +4274,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fortawesome/fontawesome-common-types@npm:6.4.2":
-  version: 6.4.2
-  resolution: "@fortawesome/fontawesome-common-types@npm:6.4.2"
-  checksum: 4a22932bd0cac65be1d35b739624f366b6c247b60eb5b8f66218957f54ce1cae56e2a20ea88789ede45d1e1c0c1014f160e01c1752122ec174ad0823e60f94bf
-  languageName: node
-  linkType: hard
-
 "@fortawesome/fontawesome-common-types@npm:6.5.0":
   version: 6.5.0
   resolution: "@fortawesome/fontawesome-common-types@npm:6.5.0"
@@ -4288,21 +4281,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:6.5.1":
+  version: 6.5.1
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.5.1"
+  checksum: c597062de8903aae591b652aa03b9b7aaa66e8c71e5950dc34a8b2812851a7f4ad743fba7396bab87d787c5359bb121496769a165bd3399d039dc214434f6f0c
+  languageName: node
+  linkType: hard
+
 "@fortawesome/fontawesome-svg-core@npm:^6.2.0":
-  version: 6.5.0
-  resolution: "@fortawesome/fontawesome-svg-core@npm:6.5.0"
+  version: 6.5.1
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.5.1"
   dependencies:
-    "@fortawesome/fontawesome-common-types": 6.5.0
-  checksum: 108fd0a520d16745257febc37c36c544eff6a59855e95f45b97341042edb1a39bc5cfc092bf45046ae4f627de08f6cfe473a5e90f782817c7b45f524bedff76c
+    "@fortawesome/fontawesome-common-types": 6.5.1
+  checksum: e17f995abe215d288163b2cd009f935c7f96bc896ab4ea7a75de72789d52a1275bd112eeb60cadd63bb20017a05ed765232157079bfb7efda7347a5614e04ce1
   languageName: node
   linkType: hard
 
 "@fortawesome/free-solid-svg-icons@npm:^6.2.0":
-  version: 6.4.2
-  resolution: "@fortawesome/free-solid-svg-icons@npm:6.4.2"
+  version: 6.5.0
+  resolution: "@fortawesome/free-solid-svg-icons@npm:6.5.0"
   dependencies:
-    "@fortawesome/fontawesome-common-types": 6.4.2
-  checksum: 4a365004990d5b1c970fb30c11b284b0b807903d0ecb193eb9b5a5e41ea7c0b8fff5c60480c580a1e44535cf23c5d9c90cb698189741e40ea3e10ac66290709c
+    "@fortawesome/fontawesome-common-types": 6.5.0
+  checksum: 0be81a33f2a321bb0cd6465031bf99021d590289b45833f2f500b060c5e973cfe06875b5c2574815153c1e3ccf4aa12036f1a800e4c24aa1a0652096e02853d2
   languageName: node
   linkType: hard
 
@@ -5617,11 +5617,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.2, @rnx-kit/align-deps@npm:^2.2.5":
-  version: 2.2.6
-  resolution: "@rnx-kit/align-deps@npm:2.2.6"
+  version: 2.3.0
+  resolution: "@rnx-kit/align-deps@npm:2.3.0"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: f80f0f1b82ff7127c1f7b520d6e7bcd9ad30cba8696ee498e313b7a756059a800b6340dbb90475ee18a29cab2e2d634fb0adf411fa3a4a1ac3996b63da260ab7
+  checksum: 3a5f47685f046be3f24004594eaf4032b2f8c55a930b0a6dff55520843c8901f53950400430ec2e0d6dcc51ae7b8ca3cbbc473a6db736ad06b721a85bc2587cb
   languageName: node
   linkType: hard
 
@@ -5818,12 +5818,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.2.8":
-  version: 0.2.8
-  resolution: "@rnx-kit/react-native-host@npm:0.2.8"
+"@rnx-kit/react-native-host@npm:^0.2.9":
+  version: 0.2.9
+  resolution: "@rnx-kit/react-native-host@npm:0.2.9"
   peerDependencies:
     react-native: ">=0.64"
-  checksum: 3a4e13f08be28941d766837dda1c78ae33527b1b9c087be195d6b2772faab4a7fb73df82c6b7df8ddb5b09f5e9adf6b75a271e5621b2d94d64084739e8ab5ee8
+  checksum: 1d7678930cd59b6ca84b9858ef0834991f89909df0a4f8176592d967d921d547405431f7518803b29bc4cb1bddc722898c42758b2a8889df11f0550283dff146
   languageName: node
   linkType: hard
 
@@ -18155,10 +18155,10 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^2.5.5":
-  version: 2.5.33
-  resolution: "react-native-test-app@npm:2.5.33"
+  version: 2.5.34
+  resolution: "react-native-test-app@npm:2.5.34"
   dependencies:
-    "@rnx-kit/react-native-host": ^0.2.8
+    "@rnx-kit/react-native-host": ^0.2.9
     ajv: ^8.0.0
     chalk: ^4.1.0
     cliui: ^8.0.0
@@ -18169,8 +18169,8 @@ __metadata:
     uuid: ^8.3.2
   peerDependencies:
     "@expo/config-plugins": ">=5.0"
-    react: ~17.0.1 || ~18.0.0 || ~18.1.0 || ~18.2.0
-    react-native: ^0.0.0-0 || 0.64 - 0.72 || 1000.0.0
+    react: 17.0.1 - 18.2
+    react-native: ^0.0.0-0 || 0.64 - 0.73 || 1000.0.0
     react-native-macos: ^0.0.0-0 || 0.64 || 0.66 || 0.68 || 0.71 - 0.72
     react-native-windows: ^0.0.0-0 || 0.64 - 0.72
   peerDependenciesMeta:
@@ -18185,7 +18185,7 @@ __metadata:
     init: scripts/init.js
     init-test-app: scripts/init.js
     install-windows-test-app: windows/test-app.js
-  checksum: 96e9d78b44c3cb620e11b02177660e859a652f7ff492580f93d5ac7e38af0114c85540087b62a7b9b4347373cb5cd9f411f2c97b90b16dc9fb0e37ebe8635b0e
+  checksum: f8af3ffd1fa18c59147abd70c78fc3191f1811dda7829a88a5577d061183997ad16d2c06c2cd28458816c269044bee71cbec4baa11e48ed3f9be8dce24b4f9b2
   languageName: node
   linkType: hard
 
