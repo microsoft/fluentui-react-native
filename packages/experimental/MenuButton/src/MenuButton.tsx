@@ -2,7 +2,7 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
 
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, withSlots } from '@fluentui-react-native/framework';
 import { SvgXml } from 'react-native-svg';

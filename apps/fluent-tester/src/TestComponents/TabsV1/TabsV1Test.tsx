@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Platform } from 'react-native';
 
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
