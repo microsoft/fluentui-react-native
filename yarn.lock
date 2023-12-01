@@ -5811,12 +5811,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.2.8":
-  version: 0.2.8
-  resolution: "@rnx-kit/react-native-host@npm:0.2.8"
+"@rnx-kit/react-native-host@npm:^0.2.9":
+  version: 0.2.9
+  resolution: "@rnx-kit/react-native-host@npm:0.2.9"
   peerDependencies:
     react-native: ">=0.64"
-  checksum: 3a4e13f08be28941d766837dda1c78ae33527b1b9c087be195d6b2772faab4a7fb73df82c6b7df8ddb5b09f5e9adf6b75a271e5621b2d94d64084739e8ab5ee8
+  checksum: 1d7678930cd59b6ca84b9858ef0834991f89909df0a4f8176592d967d921d547405431f7518803b29bc4cb1bddc722898c42758b2a8889df11f0550283dff146
   languageName: node
   linkType: hard
 
@@ -18148,10 +18148,10 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^2.5.5":
-  version: 2.5.33
-  resolution: "react-native-test-app@npm:2.5.33"
+  version: 2.5.34
+  resolution: "react-native-test-app@npm:2.5.34"
   dependencies:
-    "@rnx-kit/react-native-host": ^0.2.8
+    "@rnx-kit/react-native-host": ^0.2.9
     ajv: ^8.0.0
     chalk: ^4.1.0
     cliui: ^8.0.0
@@ -18162,8 +18162,8 @@ __metadata:
     uuid: ^8.3.2
   peerDependencies:
     "@expo/config-plugins": ">=5.0"
-    react: ~17.0.1 || ~18.0.0 || ~18.1.0 || ~18.2.0
-    react-native: ^0.0.0-0 || 0.64 - 0.72 || 1000.0.0
+    react: 17.0.1 - 18.2
+    react-native: ^0.0.0-0 || 0.64 - 0.73 || 1000.0.0
     react-native-macos: ^0.0.0-0 || 0.64 || 0.66 || 0.68 || 0.71 - 0.72
     react-native-windows: ^0.0.0-0 || 0.64 - 0.72
   peerDependenciesMeta:
@@ -18178,7 +18178,7 @@ __metadata:
     init: scripts/init.js
     init-test-app: scripts/init.js
     install-windows-test-app: windows/test-app.js
-  checksum: 96e9d78b44c3cb620e11b02177660e859a652f7ff492580f93d5ac7e38af0114c85540087b62a7b9b4347373cb5cd9f411f2c97b90b16dc9fb0e37ebe8635b0e
+  checksum: f8af3ffd1fa18c59147abd70c78fc3191f1811dda7829a88a5577d061183997ad16d2c06c2cd28458816c269044bee71cbec4baa11e48ed3f9be8dce24b4f9b2
   languageName: node
   linkType: hard
 
