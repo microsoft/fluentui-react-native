@@ -9,12 +9,19 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+      fortawesome:
+        patterns:
+          - '@fortawesome*'
+        update-types:
+          - 'minor'
+          - 'patch'
       rnx-kit:
         patterns:
           - '@rnx-kit*'
         update-types:
           - 'minor'
           - 'patch'
+
     schedule:
       interval: daily
       time: '13:00'
