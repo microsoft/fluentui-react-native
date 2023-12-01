@@ -5610,11 +5610,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.2, @rnx-kit/align-deps@npm:^2.2.5":
-  version: 2.2.6
-  resolution: "@rnx-kit/align-deps@npm:2.2.6"
+  version: 2.3.0
+  resolution: "@rnx-kit/align-deps@npm:2.3.0"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: f80f0f1b82ff7127c1f7b520d6e7bcd9ad30cba8696ee498e313b7a756059a800b6340dbb90475ee18a29cab2e2d634fb0adf411fa3a4a1ac3996b63da260ab7
+  checksum: 3a5f47685f046be3f24004594eaf4032b2f8c55a930b0a6dff55520843c8901f53950400430ec2e0d6dcc51ae7b8ca3cbbc473a6db736ad06b721a85bc2587cb
   languageName: node
   linkType: hard
 
