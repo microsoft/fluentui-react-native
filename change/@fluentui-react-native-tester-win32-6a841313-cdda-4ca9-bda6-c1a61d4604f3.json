@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "update versions to match NPM (again)",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "none"
-}

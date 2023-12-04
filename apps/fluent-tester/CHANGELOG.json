@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 04 Dec 2023 22:05:01 GMT",
+      "version": "0.159.3",
+      "tag": "@fluentui-react-native/tester_v0.159.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "96cc1611e4163f9586d20ab8c1fde0c851cc8668",
+            "comment": "update versions to match NPM"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ee146d9debfce3f54c26578821782816bdd6b796",
+            "comment": "fix HC on button text"
+          }
+        ],
+        "none": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "940e0b0fd6d225ed9c25bb14782d802ca3c5e359",
+            "comment": "update versions to match NPM (again)"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 30 Nov 2023 21:40:35 GMT",
       "version": "0.159.0",
       "tag": "@fluentui-react-native/tester_v0.159.0",

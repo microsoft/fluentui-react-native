@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 30 Nov 2023 21:40:35 GMT and should not be manually modified.
+This log was last generated on Mon, 04 Dec 2023 22:05:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.159.3
+
+Mon, 04 Dec 2023 22:05:01 GMT
+
+### Patches
+
+- update versions to match NPM (krsiler@microsoft.com)
+- fix HC on button text (krsiler@microsoft.com)
 
 ## 0.159.0
 
