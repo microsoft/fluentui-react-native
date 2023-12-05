@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip component tests Tooltip default 1`] = `
+<RCTTooltip
+  content="Your component"
+>
+  <View
+    accessibilityLabel="Your component"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "multiselectable": undefined,
+        "required": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    enableFocusRing={true}
+    focusable={true}
+    keyUpEvents={
+      [
+        {
+          "key": " ",
+        },
+        {
+          "key": "Enter",
+        },
+      ]
+    }
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onLayout={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "backgroundColor": "#ffffff",
+        "borderColor": "#d1d1d1",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "minHeight": 24,
+        "minWidth": 64,
+        "padding": 3,
+        "paddingHorizontal": 7,
+        "width": undefined,
+      }
+    }
+  >
+    <Text
+      accessible={false}
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
+      style={
+        {
+          "color": "#242424",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 1,
+          "marginEnd": -2,
+          "marginStart": 0,
+          "marginTop": -1,
+        }
+      }
+    >
+      Your component
+    </Text>
+  </View>
+</RCTTooltip>
+`;

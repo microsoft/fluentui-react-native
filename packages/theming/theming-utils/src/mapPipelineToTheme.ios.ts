@@ -1,4 +1,4 @@
-import type { AliasColorTokens, Variants, VariantValue } from '@fluentui-react-native/theme-types';
+import type { AliasColorTokens, FontDynamicTypeRamp, Variants, VariantValue } from '@fluentui-react-native/theme-types';
 import type { FontStyleTokens } from '@fluentui-react-native/tokens';
 
 // API that maps tokens coming from the iOS token pipeline to Theme color values.
@@ -162,7 +162,7 @@ export function mapFontPipelineToTheme(pipelineOutput: any): Partial<Variants> {
 }
 
 // TODO: Dynamic Type ramps should eventually be pulled from the pipeline
-function convertAliasFont(aliasFont: FontStyleTokens, dynamicTypeRamp: string): VariantValue {
+function convertAliasFont(aliasFont: FontStyleTokens, dynamicTypeRamp: FontDynamicTypeRamp): VariantValue {
   return {
     face: aliasFont.fontFamily,
     size: aliasFont.fontSize,

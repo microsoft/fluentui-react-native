@@ -36,7 +36,7 @@ export const TabList = compose<TabListType>({
 
       const { disabled, defaultTabbableElement, isCircularNavigation, vertical, ...mergedProps } = mergeProps(tablist.props, final);
 
-      const { animatedIndicatorStyles, canShowAnimatedIndicator, layout, selectedKey } = tablist.state;
+      const { animatedIndicatorStyles, canShowAnimatedIndicator, disabled: tablistDisabledState, layout, selectedKey } = tablist.state;
 
       return (
         <TabListContext.Provider
@@ -44,7 +44,7 @@ export const TabList = compose<TabListType>({
           value={tablist.state}
         >
           <Slots.container
-            disabled={disabled}
+            disabled={disabled || tablistDisabledState}
             defaultTabbableElement={defaultTabbableElement}
             focusZoneDirection={vertical ? 'vertical' : 'horizontal'}
             isCircularNavigation={isCircularNavigation}

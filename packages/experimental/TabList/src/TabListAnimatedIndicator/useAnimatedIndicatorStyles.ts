@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import type { AnimatedIndicatorProps, AnimatedIndicatorStyles } from './TabListAnimatedIndicator.types';
@@ -40,12 +40,14 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
       Animated.parallel([
         Animated.timing(indicatorScale, {
           toValue: scaleValue,
-          duration: 200,
+          duration: 300,
+          easing: Easing.bezier(0, 0, 0, 1),
           useNativeDriver: true,
         }),
         Animated.timing(indicatorTranslate, {
           toValue: translateValue + translateOffset,
-          duration: 200,
+          duration: 300,
+          easing: Easing.bezier(0, 0, 0, 1),
           useNativeDriver: true,
         }),
       ]).start();

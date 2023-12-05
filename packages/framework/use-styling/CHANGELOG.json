@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/use-styling",
   "entries": [
     {
+      "date": "Thu, 09 Nov 2023 02:39:06 GMT",
+      "version": "0.12.0",
+      "tag": "@fluentui-react-native/use-styling_v0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/use-styling",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-styling",
+            "comment": "Bump @fluentui-react-native/use-tokens to v0.5.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Aug 2023 22:02:15 GMT",
       "version": "0.11.1",
       "tag": "@fluentui-react-native/use-styling_v0.11.1",

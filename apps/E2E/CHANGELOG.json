@@ -2,6 +2,78 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 30 Nov 2023 21:40:35 GMT",
+      "version": "1.34.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.34.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "b5a9fdefb58572ac6976e682563a190cb8a644b7",
+            "comment": "adding package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Nov 2023 00:12:31 GMT",
+      "version": "1.33.1",
+      "tag": "@fluentui-react-native/e2e-testing_v1.33.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "facaad9c830109329cde18aed4cf6f840387276f",
+            "comment": "Update appium packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Nov 2023 02:39:08 GMT",
+      "version": "1.33.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.33.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.16.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 07 Nov 2023 20:20:33 GMT",
+      "version": "1.32.8",
+      "tag": "@fluentui-react-native/e2e-testing_v1.32.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.15.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 31 Oct 2023 19:11:10 GMT",
       "version": "1.32.6",
       "tag": "@fluentui-react-native/e2e-testing_v1.32.6",

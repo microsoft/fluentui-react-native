@@ -1,4 +1,4 @@
-import type { ViewProps } from 'react-native';
+import type { DimensionValue, ViewProps } from 'react-native';
 
 export const stackItemName = 'RNFStackItem';
 
@@ -9,12 +9,12 @@ export interface IStackItemTokens extends ViewProps {
   /**
    * Defines the margin to be applied to the StackItem relative to its container.
    */
-  margin?: number | string;
+  margin?: DimensionValue;
 
   /**
    * Defines the padding to be applied to the StackItem contents relative to its border.
    */
-  padding?: number | string;
+  padding?: DimensionValue;
   /**
    * Defines how much to grow the StackItem in proportion to its siblings.
    */
