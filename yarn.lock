@@ -22,7 +22,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/base-driver@npm:^9.0.0, @appium/base-driver@npm:^9.1.0, @appium/base-driver@npm:^9.4.2":
+"@appium/base-driver@npm:^9.0.0, @appium/base-driver@npm:^9.1.0":
   version: 9.4.2
   resolution: "@appium/base-driver@npm:9.4.2"
   dependencies:
@@ -60,21 +60,59 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/base-plugin@npm:^2.2.23":
-  version: 2.2.23
-  resolution: "@appium/base-plugin@npm:2.2.23"
+"@appium/base-driver@npm:^9.4.3":
+  version: 9.4.3
+  resolution: "@appium/base-driver@npm:9.4.3"
   dependencies:
-    "@appium/base-driver": ^9.4.2
-    "@appium/support": ^4.1.9
-  checksum: 32da31160d97a875a542617a778ceddbd02ebd28aca10fa175131e291cccfd998aa9ec311c980590ca4763bf8e652329d292d0fc068de81d58e00690e37d907b
+    "@appium/support": ^4.1.10
+    "@appium/types": ^0.14.3
+    "@colors/colors": 1.6.0
+    "@types/async-lock": 1.4.2
+    "@types/bluebird": 3.5.42
+    "@types/express": 4.17.21
+    "@types/lodash": 4.14.202
+    "@types/method-override": 0.0.35
+    "@types/serve-favicon": 2.5.7
+    async-lock: 1.4.0
+    asyncbox: 3.0.0
+    axios: 1.6.2
+    bluebird: 3.7.2
+    body-parser: 1.20.2
+    es6-error: 4.1.1
+    express: 4.18.2
+    http-status-codes: 2.3.0
+    lodash: 4.17.21
+    lru-cache: 10.0.1
+    method-override: 3.0.0
+    morgan: 1.10.0
+    path-to-regexp: 6.2.1
+    serve-favicon: 2.5.0
+    source-map-support: 0.5.21
+    spdy: 4.0.2
+    type-fest: 3.13.1
+    validate.js: 0.13.1
+  dependenciesMeta:
+    spdy:
+      optional: true
+  checksum: a6cec7e1b38f7b81c2cd2be76899a712ef69407b419509fc238da05eb09f3c5992225d0ecca1e4b3e4b25703c7d8fcb26f7d8475a96adff76fba22265de884d4
   languageName: node
   linkType: hard
 
-"@appium/docutils@npm:^0.4.12":
-  version: 0.4.12
-  resolution: "@appium/docutils@npm:0.4.12"
+"@appium/base-plugin@npm:^2.2.24":
+  version: 2.2.24
+  resolution: "@appium/base-plugin@npm:2.2.24"
   dependencies:
-    "@appium/support": ^4.1.9
+    "@appium/base-driver": ^9.4.3
+    "@appium/support": ^4.1.10
+  checksum: 64e334e14ce394c7af73bc93cb26c486e422b48a2802cea07e2ee27dee6a077df4d9f713418aa914a932af242474c3592931bc14cd5b7e7071771af2f5875080
+  languageName: node
+  linkType: hard
+
+"@appium/docutils@npm:^0.4.13":
+  version: 0.4.13
+  resolution: "@appium/docutils@npm:0.4.13"
+  dependencies:
+    "@appium/support": ^4.1.10
     "@appium/tsconfig": ^0.x
     "@appium/typedoc-plugin-appium": ^0.x
     "@sliphua/lilconfig-ts-loader": 3.2.2
@@ -92,7 +130,7 @@ __metadata:
     read-pkg: 5.2.0
     semver: 7.5.4
     source-map-support: 0.5.21
-    teen_process: 2.0.84
+    teen_process: 2.0.101
     type-fest: 3.13.1
     typedoc: 0.23.28
     typedoc-plugin-markdown: 3.14.0
@@ -103,7 +141,7 @@ __metadata:
     yargs-parser: 21.1.1
   bin:
     appium-docs: bin/appium-docs.js
-  checksum: 114cb02a47fe6eea332a85d199df8f848609c77c8bcb687c81bc7de9e42aef5a6718c6e823a4928a01959f8383794c2d9138edf16e1e9621719abf63faeec8c0
+  checksum: 59ef0a148d99c8b34bb91925f5a3a385e2a36ff73e6cd644ad69e811df06062a3dbb47e0bc43734dcac85dfcc582a2b52e1852bf8a1ec2d565c8df98d9c7c921
   languageName: node
   linkType: hard
 
@@ -193,6 +231,71 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@appium/support@npm:^4.1.10":
+  version: 4.1.10
+  resolution: "@appium/support@npm:4.1.10"
+  dependencies:
+    "@appium/tsconfig": ^0.x
+    "@appium/types": ^0.14.3
+    "@colors/colors": 1.6.0
+    "@types/archiver": 6.0.2
+    "@types/base64-stream": 1.0.5
+    "@types/find-root": 1.1.4
+    "@types/jsftp": 2.1.5
+    "@types/klaw": 3.0.6
+    "@types/lockfile": 1.0.4
+    "@types/mv": 2.1.4
+    "@types/ncp": 2.0.8
+    "@types/npmlog": 4.1.6
+    "@types/pluralize": 0.0.33
+    "@types/semver": 7.5.6
+    "@types/shell-quote": 1.7.5
+    "@types/supports-color": 8.1.3
+    "@types/teen_process": 2.0.4
+    "@types/uuid": 9.0.7
+    "@types/which": 3.0.1
+    archiver: 6.0.1
+    axios: 1.6.2
+    base64-stream: 1.0.0
+    bluebird: 3.7.2
+    bplist-creator: 0.1.1
+    bplist-parser: 0.3.2
+    form-data: 4.0.0
+    get-stream: 6.0.1
+    glob: 10.3.10
+    jsftp: 2.1.3
+    klaw: 4.1.0
+    lockfile: 1.0.4
+    lodash: 4.17.21
+    log-symbols: 4.1.0
+    moment: 2.29.4
+    mv: 2.1.1
+    ncp: 2.0.0
+    npmlog: 7.0.1
+    opencv-bindings: 4.5.5
+    pkg-dir: 5.0.0
+    plist: 3.1.0
+    pluralize: 8.0.0
+    read-pkg: 5.2.0
+    resolve-from: 5.0.0
+    sanitize-filename: 1.6.3
+    semver: 7.5.4
+    sharp: 0.32.6
+    shell-quote: 1.8.1
+    source-map-support: 0.5.21
+    supports-color: 8.1.1
+    teen_process: 2.0.101
+    type-fest: 3.13.1
+    uuid: 9.0.1
+    which: 4.0.0
+    yauzl: 2.10.0
+  dependenciesMeta:
+    sharp:
+      optional: true
+  checksum: 8cd8b53c0385b3dcf9653e1341d502f801744d012bd8aaae58220825196ac3b8b5b9efd076f43f390391c2610832ce6cdead286b2ec528c98207581c09fb303b
+  languageName: node
+  linkType: hard
+
 "@appium/tsconfig@npm:^0.x":
   version: 0.3.2
   resolution: "@appium/tsconfig@npm:0.3.2"
@@ -231,6 +334,20 @@ __metadata:
     "@types/ws": 8.5.9
     type-fest: 3.13.1
   checksum: c22003d1a434ce325bcf8fe5fff1a542fbbd966ae7a7fab3bf395df612a5ed272d72ea6c23be90095a5c02f3903910719e0c4fd06eb35279796276d3a5bffb55
+  languageName: node
+  linkType: hard
+
+"@appium/types@npm:^0.14.3":
+  version: 0.14.3
+  resolution: "@appium/types@npm:0.14.3"
+  dependencies:
+    "@appium/schema": ^0.4.2
+    "@appium/tsconfig": ^0.x
+    "@types/express": 4.17.21
+    "@types/npmlog": 4.1.6
+    "@types/ws": 8.5.10
+    type-fest: 3.13.1
+  checksum: 9b72f5232bb030c9d70fdb36857536c11f9ef566f9a22e34bd06be38dd3bb7de05b0b8af3a7e80e6c9873b0ef99dc2a4584a526a2c6ab084033125b3d140ac38
   languageName: node
   linkType: hard
 
@@ -6170,10 +6287,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/argparse@npm:2.0.13":
-  version: 2.0.13
-  resolution: "@types/argparse@npm:2.0.13"
-  checksum: 32553556d24de9fc89018bda531cb1ebdeff812e0d459045469721501f9118b16c3672e5d50299f5474d0a3b5ca4cf03801bbcdb16086f086012902a096af091
+"@types/archiver@npm:6.0.2":
+  version: 6.0.2
+  resolution: "@types/archiver@npm:6.0.2"
+  dependencies:
+    "@types/readdir-glob": "*"
+  checksum: 4bef71e5b95863be9880339275ad92c2513dd78d56587653614dc5a74af1d078f5f5926ec996de06e7071a1003e0c2764d0e9d2bb0893a2ffb14ab1718eaf5ca
+  languageName: node
+  linkType: hard
+
+"@types/argparse@npm:2.0.14":
+  version: 2.0.14
+  resolution: "@types/argparse@npm:2.0.14"
+  checksum: 1eba6ad70904f79a7c475cbdde74fead2db84dbda58e9e7329dbc6df5569812205e844925713175d264b321e0d5908f3a828615528823217775d043ef27cca36
   languageName: node
   linkType: hard
 
@@ -6566,6 +6692,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:4.14.202":
+  version: 4.14.202
+  resolution: "@types/lodash@npm:4.14.202"
+  checksum: a91acf3564a568c6f199912f3eb2c76c99c5a0d7e219394294213b3f2d54f672619f0fde4da22b29dc5d4c31457cd799acc2e5cb6bd90f9af04a1578483b6ff7
+  languageName: node
+  linkType: hard
+
 "@types/method-override@npm:0.0.35":
   version: 0.0.35
   resolution: "@types/method-override@npm:0.0.35"
@@ -6754,6 +6887,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/semver@npm:7.5.6":
+  version: 7.5.6
+  resolution: "@types/semver@npm:7.5.6"
+  checksum: 563a0120ec0efcc326567db2ed920d5d98346f3638b6324ea6b50222b96f02a8add3c51a916b6897b51523aad8ac227d21d3dcf8913559f1bfc6c15b14d23037
+  languageName: node
+  linkType: hard
+
 "@types/serve-favicon@npm:2.5.7":
   version: 2.5.7
   resolution: "@types/serve-favicon@npm:2.5.7"
@@ -6777,6 +6917,13 @@ __metadata:
   version: 1.7.4
   resolution: "@types/shell-quote@npm:1.7.4"
   checksum: 30fbe5f26af7e8fdc9d41f784fa4e4047e93d69e97a474886f43c9c596820145c3e033a3547d15e0de988b0369d8093d62a30fd14e2c7be6bd090143b906f885
+  languageName: node
+  linkType: hard
+
+"@types/shell-quote@npm:1.7.5":
+  version: 1.7.5
+  resolution: "@types/shell-quote@npm:1.7.5"
+  checksum: 32b4d697c7d23dbadf40713692c47f1595f083a3b3deea76cb18e30a05d197aa9205d2b87f6d92edb60cda120b51e35d32bda96ed9b0a7e32921eed2deb4559e
   languageName: node
   linkType: hard
 
@@ -6816,6 +6963,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 33036881f2083cee609799576f580c0a255ca02d0f72dac1722f41551ea43e98e970a2e133fca1b02e7d1faf3313a0fe29dd675c0482cfe2ec7ff5b299710bf0
+  languageName: node
+  linkType: hard
+
+"@types/teen_process@npm:2.0.4":
+  version: 2.0.4
+  resolution: "@types/teen_process@npm:2.0.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: d474c115f3ff9acaa7c6c01151d2fa9a35648b1e8a217dad2007b894a7f3a1376888a4bdb507611739f95d2869487bf888ae0099fa5e8d5ae73c291093d8d64f
   languageName: node
   linkType: hard
 
@@ -6899,6 +7055,15 @@ __metadata:
   version: 3.0.0
   resolution: "@types/wrap-ansi@npm:3.0.0"
   checksum: 492f0610093b5802f45ca292777679bb9b381f1f32ae939956dd9e00bf81dba7cc99979687620a2817d9a7d8b59928207698166c47a0861c6a2e5c30d4aaf1e9
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:8.5.10":
+  version: 8.5.10
+  resolution: "@types/ws@npm:8.5.10"
+  dependencies:
+    "@types/node": "*"
+  checksum: 3ec416ea2be24042ebd677932a462cf16d2080393d8d7d0b1b3f5d6eaa4a7387aaf0eefb99193c0bfd29444857cf2e0c3ac89899e130550dc6c14ada8a46d25e
   languageName: node
   linkType: hard
 
@@ -8214,28 +8379,28 @@ __metadata:
   linkType: hard
 
 "appium@npm:^2.0.0":
-  version: 2.2.2
-  resolution: "appium@npm:2.2.2"
+  version: 2.2.3
+  resolution: "appium@npm:2.2.3"
   dependencies:
-    "@appium/base-driver": ^9.4.2
-    "@appium/base-plugin": ^2.2.23
-    "@appium/docutils": ^0.4.12
+    "@appium/base-driver": ^9.4.3
+    "@appium/base-plugin": ^2.2.24
+    "@appium/docutils": ^0.4.13
     "@appium/schema": ^0.4.2
-    "@appium/support": ^4.1.9
-    "@appium/types": ^0.14.2
+    "@appium/support": ^4.1.10
+    "@appium/types": ^0.14.3
     "@sidvind/better-ajv-errors": 2.1.0
-    "@types/argparse": 2.0.13
+    "@types/argparse": 2.0.14
     "@types/bluebird": 3.5.42
     "@types/fancy-log": 2.0.2
-    "@types/semver": 7.5.5
-    "@types/teen_process": 2.0.3
+    "@types/semver": 7.5.6
+    "@types/teen_process": 2.0.4
     "@types/wrap-ansi": 3.0.0
     ajv: 8.12.0
     ajv-formats: 2.1.1
     argparse: 2.0.1
     async-lock: 1.4.0
     asyncbox: 3.0.0
-    axios: 1.6.1
+    axios: 1.6.2
     bluebird: 3.7.2
     cross-env: 7.0.3
     find-up: 5.0.0
@@ -8247,14 +8412,14 @@ __metadata:
     resolve-from: 5.0.0
     semver: 7.5.4
     source-map-support: 0.5.21
-    teen_process: 2.0.84
+    teen_process: 2.0.101
     type-fest: 3.13.1
     winston: 3.11.0
     wrap-ansi: 7.0.0
     yaml: 2.3.4
   bin:
     appium: index.js
-  checksum: 515c7fdf611f9c3ee13c405ef677fe78efebb94aa7a9de4609b0aef0aacff22ae1bdc00506155ffc719f15af7dd55b13076324100ab5e89b43f95b0813ebbdf4
+  checksum: f439ab86fdf7035cceaf01696ee745aca8e27632d1da5780236d648e09cff3d2fad82f931889266967e0dd02c3197ed2bb1d986fd73a21db64cc3a5b2ecc716b
   languageName: node
   linkType: hard
 
@@ -8824,6 +8989,17 @@ __metadata:
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
   checksum: 573f03f59b7487d54551b16f5e155d1d130ad4864ed32d1da93d522b78a57123b34e3bde37f822a65ee297e79f1db840f9ad6514addff50d3cbf5caeed39e8dc
+  languageName: node
+  linkType: hard
+
+"axios@npm:1.6.2":
+  version: 1.6.2
+  resolution: "axios@npm:1.6.2"
+  dependencies:
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: 4a7429e2b784be0f2902ca2680964391eae7236faa3967715f30ea45464b98ae3f1c6f631303b13dfe721b17126b01f486c7644b9ef276bfc63112db9fd379f8
   languageName: node
   linkType: hard
 
@@ -20017,6 +20193,18 @@ __metadata:
     mkdirp: ^1.0.3
     yallist: ^4.0.0
   checksum: f23832fceeba7578bf31907aac744ae21e74a66f4a17a9e94507acf460e48f6db598c7023882db33bab75b80e027c21f276d405e4a0322d58f51c7088d428268
+  languageName: node
+  linkType: hard
+
+"teen_process@npm:2.0.101":
+  version: 2.0.101
+  resolution: "teen_process@npm:2.0.101"
+  dependencies:
+    bluebird: 3.7.2
+    lodash: 4.17.21
+    shell-quote: 1.8.1
+    source-map-support: 0.5.21
+  checksum: 2582f8a40cbc0103bc40e68316bc2565c139c0346044c94c2c5d50e7a91b8ea5fcb9fa90a170d1165e495e34f778ae51c0963cc1ded30789557a8462c4fbdfdf
   languageName: node
   linkType: hard
 
