@@ -5600,8 +5600,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.20
-  resolution: "@rnx-kit/cli@npm:0.16.20"
+  version: 0.16.21
+  resolution: "@rnx-kit/cli@npm:0.16.21"
   dependencies:
     "@rnx-kit/align-deps": ^2.2.2
     "@rnx-kit/config": ^0.6.6
@@ -5614,10 +5614,9 @@ __metadata:
     "@rnx-kit/metro-service": ^3.1.5
     "@rnx-kit/third-party-notices": ^1.3.4
     "@rnx-kit/tools-language": ^2.0.0
-    "@rnx-kit/tools-node": ^2.1.0
+    "@rnx-kit/tools-node": ^2.1.1
     "@rnx-kit/tools-react-native": ^1.3.4
     chalk: ^4.1.0
-    find-up: ^5.0.0
     fs-extra: ^10.0.0
     node-fetch: ^2.6.7
     ora: ^5.4.1
@@ -5631,7 +5630,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 5607057979e9ba27d06ddce765ff027c8474518599702b11142382fbdc8fa7fde2f3e1097a1742f7b6e50035a1791a65decefc6c562e747660a9bb7c280c7a4a
+  checksum: 9869ccca8ebd5a8a543bfd54d93ee3f317ebb1028c7d404beb80c183a82b829b4859f56673e0cde520683d47219cf148117ab0920cf43676da41b1c380b363ba
   languageName: node
   linkType: hard
 
@@ -5831,6 +5830,13 @@ __metadata:
     pkg-dir: ^5.0.0
     pkg-up: ^3.1.0
   checksum: e23908eaaaa1bda7ec160a7d0ad6cb5461100f6875db5a204f587f532229d5c9ffe74424bf1a1439efed9f4a782f6e1fc6a8f44bdd62f4ada63dcb61e7707e36
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-node@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@rnx-kit/tools-node@npm:2.1.1"
+  checksum: 6a274ad65c6ae776c1758d1573ba30a533dd242b82973891f610983992d738ce1ead7ac8ca4308a4267bcdbf4d30a124f82c9756b9b433a901ddcd9ac30a4772
   languageName: node
   linkType: hard
 
