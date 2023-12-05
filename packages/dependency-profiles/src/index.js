@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.159.3"
+      "version": "0.160.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.37.8"
+      "version": "0.37.9"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -158,10 +158,6 @@ module.exports = {
       "name": "@fluentui-react-native/experimental-avatar",
       "version": "0.20.0"
     },
-    "@fluentui-react-native/experimental-button": {
-      "name": "@fluentui-react-native/experimental-button",
-      "version": "0.19.1"
-    },
     "@fluentui-react-native/experimental-checkbox": {
       "name": "@fluentui-react-native/experimental-checkbox",
       "version": "0.16.0"
@@ -184,7 +180,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-menu-button": {
       "name": "@fluentui-react-native/experimental-menu-button",
-      "version": "0.8.1"
+      "version": "0.9.0"
     },
     "@fluentui-react-native/experimental-native-date-picker": {
       "name": "@fluentui-react-native/experimental-native-date-picker",

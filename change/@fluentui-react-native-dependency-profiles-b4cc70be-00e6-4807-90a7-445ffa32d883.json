@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Delete files",
-  "packageName": "@fluentui-react-native/dependency-profiles",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
