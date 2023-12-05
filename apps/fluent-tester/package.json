@@ -50,7 +50,6 @@
     "@fluentui-react-native/experimental-activity-indicator": ">=0.9.0 <1.0.0",
     "@fluentui-react-native/experimental-appearance-additions": "^0.6.0",
     "@fluentui-react-native/experimental-avatar": ">=0.20.0 <1.0.0",
-    "@fluentui-react-native/experimental-button": "0.19.1",
     "@fluentui-react-native/experimental-checkbox": "0.16.0",
     "@fluentui-react-native/experimental-expander": "0.7.0",
     "@fluentui-react-native/experimental-menu-button": ">=0.8.1 <1.0.0",

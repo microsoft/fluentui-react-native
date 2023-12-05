@@ -2692,7 +2692,6 @@ __metadata:
     "@fluentui-react-native/dropdown": "*"
     "@fluentui-react-native/experimental-activity-indicator": "*"
     "@fluentui-react-native/experimental-avatar": "*"
-    "@fluentui-react-native/experimental-button": "*"
     "@fluentui-react-native/experimental-checkbox": "*"
     "@fluentui-react-native/experimental-expander": "*"
     "@fluentui-react-native/experimental-menu-button": "*"
@@ -2954,23 +2953,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-button@*, @fluentui-react-native/experimental-button@0.19.1, @fluentui-react-native/experimental-button@^0.19.1, @fluentui-react-native/experimental-button@workspace:packages/experimental/Button":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/experimental-button@workspace:packages/experimental/Button"
-  dependencies:
-    "@fluentui-react-native/button": ^0.36.1
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@react-native/metro-config": ^0.72.0
-    react: 18.2.0
-    react-native: ^0.72.0
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  languageName: unknown
-  linkType: soft
-
 "@fluentui-react-native/experimental-checkbox@*, @fluentui-react-native/experimental-checkbox@0.16.0, @fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox"
@@ -3031,9 +3013,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
   dependencies:
+    "@fluentui-react-native/button": ^0.36.1
     "@fluentui-react-native/contextual-menu": ^0.23.0
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-button": ^0.19.1
     "@fluentui-react-native/framework": 0.12.0
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/tokens": ">=0.22.0 <1.0.0"
@@ -3913,7 +3895,6 @@ __metadata:
     "@fluentui-react-native/experimental-activity-indicator": ">=0.9.0 <1.0.0"
     "@fluentui-react-native/experimental-appearance-additions": ^0.6.0
     "@fluentui-react-native/experimental-avatar": ">=0.20.0 <1.0.0"
-    "@fluentui-react-native/experimental-button": 0.19.1
     "@fluentui-react-native/experimental-checkbox": 0.16.0
     "@fluentui-react-native/experimental-expander": 0.7.0
     "@fluentui-react-native/experimental-menu-button": ">=0.8.1 <1.0.0"

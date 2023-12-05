@@ -26,8 +26,8 @@
     "directory": "packages/experimental/MenuButton"
   },
   "dependencies": {
+    "@fluentui-react-native/button": "^0.36.1",
     "@fluentui-react-native/contextual-menu": "^0.23.0",
-    "@fluentui-react-native/experimental-button": "^0.19.1",
     "@fluentui-react-native/framework": "0.12.0",
     "@fluentui-react-native/tokens": ">=0.22.0 <1.0.0"
   },
