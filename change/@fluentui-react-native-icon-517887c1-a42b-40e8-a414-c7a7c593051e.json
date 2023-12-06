@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "small change to use output of function",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "56889386+gremlin529@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
