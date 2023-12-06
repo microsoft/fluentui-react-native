@@ -12,14 +12,20 @@ export const stylingSettings: UseStylingOptions<TabListProps, TabListSlotProps, 
     stack: buildProps(
       (tokens: TabListTokens) => ({
         style: {
+          display: 'flex',
           flexDirection: tokens.direction,
+          flex: 0,
         },
       }),
       ['direction'],
     ),
     root: buildProps(
       (tokens: TabListTokens, theme: Theme) => ({
-        style: layoutStyles.from(tokens, theme),
+        style: {
+          display: 'flex',
+          alignItems: 'flex-start',
+          ...layoutStyles.from(tokens, theme),
+        },
       }),
       layoutStyles.keys,
     ),

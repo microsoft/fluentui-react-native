@@ -35,16 +35,17 @@ export function useTabAnimation(
   // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
   React.useEffect(() => {
     if (tabKey === selectedKey && updateAnimatedIndicatorStyles) {
-      updateAnimatedIndicatorStyles({ indicator: { backgroundColor: tokens.indicatorColor } });
+      updateAnimatedIndicatorStyles({ backgroundColor: tokens.indicatorColor, borderRadius: tokens.borderRadius });
     }
+    // Disabling warning because effect does not need to fire on `updateAnimatedIndicatorStyles` being changed
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tabKey, selectedKey, tokens.indicatorColor]);
+  }, [tabKey, selectedKey, tokens.indicatorColor, tokens.borderRadius]);
 
   // Function to calculate indicator positioning and dimensions for the animated indicator.
   const calculateAndUpdateAnimationLayoutInfo = React.useCallback(
-    (tabLayout: LayoutRectangle, tablistLayout: LayoutRectangle) => {
-      const { width: tabWidth, height: tabHeight, y: tabY } = tabLayout;
-      let indicatorWidth: number, indicatorHeight: number;
+    (tabLayout: LayoutRectangle, tokens: TabTokens) => {
+      const { width: tabWidth, height: tabHeight, x: tabX, y: tabY } = tabLayout;
+      let indicatorWidth: number, indicatorHeight: number, indicatorX: number, indicatorY: number;
       // Total Indicator inset consists of the horizontal/vertical margin of the indicator, the space taken up by the tab's focus border, and the
       // existing padding between the focus border and the tab itself. Multiply by 2 to account for the start + end margin/border/padding.
       const focusBorderPadding = 1;
@@ -53,26 +54,27 @@ export function useTabAnimation(
       if (vertical) {
         indicatorWidth = tokens.indicatorThickness;
         indicatorHeight = tabHeight - totalIndicatorInset;
+        indicatorY = tabY + tokens.indicatorMargin + tokens.borderWidth + focusBorderPadding;
+        if (I18nManager.isRTL) {
+          // On RTL, the vertical tab indicator should appear to the right
+          indicatorX = tabX + tabWidth - (tokens.borderWidth + focusBorderPadding + indicatorWidth);
+        } else {
+          indicatorX = tabX + tokens.borderWidth + focusBorderPadding;
+        }
       } else {
         indicatorWidth = tabWidth - totalIndicatorInset;
         indicatorHeight = tokens.indicatorThickness;
-      }
-      let tabX = tabLayout.x;
-      // For RTL users on win32 and mac, we adjust the x position of each tab to be relative to the entire tablist starting right to left
-      // (e.g. 0 = 0 from the right, 100 = 100 from the right, rather than from the left)
-      if (I18nManager.isRTL) {
-        tabX = tablistLayout.width - (tabX + tabWidth);
+        indicatorX = tabX + tokens.indicatorMargin + tokens.borderWidth + focusBorderPadding;
+        indicatorY = tabHeight + tabY - indicatorHeight - tokens.borderWidth - focusBorderPadding;
       }
       addTabLayout(tabKey, {
-        x: tabX,
-        y: tabY,
+        x: indicatorX,
+        y: indicatorY,
         width: indicatorWidth,
         height: indicatorHeight,
-        tabBorderWidth: tokens.borderWidth,
-        startMargin: tokens.indicatorMargin,
       });
     },
-    [addTabLayout, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
+    [addTabLayout, tabKey, vertical],
   );
 
   /**
@@ -87,29 +89,37 @@ export function useTabAnimation(
    */
   const onTabLayout = React.useCallback(
     (e: LayoutEvent) => {
-      if (
-        e.nativeEvent.layout &&
-        layout?.tablist &&
-        // Following checks are for win32 only, will be removed after addressing scrollview layout bug
-        (Platform.OS !== ('win32' as any) ||
-          (layout.tablist.width > 0 &&
-            e.nativeEvent.layout.height <= layout.tablist.height &&
-            e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT))
-      ) {
-        calculateAndUpdateAnimationLayoutInfo(e.nativeEvent.layout, layout.tablist);
-      } else if (!layout.tablist) {
-        // We need the tablist layout rectangle for the layout calculation, so we save the tab rect given and defer the calculation to the useEffect below
+      if (e.nativeEvent.layout) {
         setTabLayoutRect(e.nativeEvent.layout);
+        if (
+          // Following checks are for win32 only, will be removed after addressing scrollview layout bug
+          Platform.OS !== ('win32' as any) ||
+          (layout?.tablist &&
+            layout.tablist.width > 0 &&
+            e.nativeEvent.layout.height <= layout.tablist.height &&
+            e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT)
+        ) {
+          calculateAndUpdateAnimationLayoutInfo(e.nativeEvent.layout, tokens);
+        }
       }
     },
-    [calculateAndUpdateAnimationLayoutInfo, layout?.tablist],
+    [calculateAndUpdateAnimationLayoutInfo, tokens, layout?.tablist],
   );
 
   React.useEffect(() => {
-    if (tabLayoutRect && layout.tablist) {
-      calculateAndUpdateAnimationLayoutInfo(tabLayoutRect, layout.tablist);
+    if (
+      (tabLayoutRect &&
+        // Following checks are for win32 only, will be removed after addressing scrollview layout bug
+        Platform.OS !== ('win32' as any)) ||
+      (layout?.tablist &&
+        layout.tablist.width > 0 &&
+        tabLayoutRect.height <= layout.tablist.height &&
+        tabLayoutRect.height < RENDERING_HEIGHT_LIMIT)
+    ) {
+      calculateAndUpdateAnimationLayoutInfo(tabLayoutRect, tokens);
     }
-  }, [layout?.tablist]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tabLayoutRect, tokens.indicatorThickness, tokens.borderWidth, tokens.indicatorMargin]);
 
   return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);
 }

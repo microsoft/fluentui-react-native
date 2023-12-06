@@ -1,6 +1,5 @@
 import React from 'react';
 import { Animated, Easing, I18nManager } from 'react-native';
-import type { ViewStyle } from 'react-native';
 
 import type { AnimatedIndicatorProps, AnimatedIndicatorStyles } from './TabListAnimatedIndicator.types';
 
@@ -10,7 +9,7 @@ import type { AnimatedIndicatorProps, AnimatedIndicatorStyles } from './TabListA
  * to move the indicator (on non-win32 platforms).
  */
 export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): AnimatedIndicatorStyles {
-  const { animatedIndicatorStyles, selectedKey, tabLayout, vertical } = props;
+  const { animatedIndicatorStyles: additionalStyles, selectedKey, tabLayout, vertical } = props;
 
   // animated values
   const indicatorTranslate = React.useRef(new Animated.Value(0)).current;
@@ -18,9 +17,10 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
 
   // Save the initial selected layout, this shouldn't update
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const startingIndicatorLayout = React.useMemo(() => tabLayout[selectedKey], []);
+  const startingKey = React.useMemo(() => selectedKey, []);
 
   React.useEffect(() => {
+    const startingIndicatorLayout = tabLayout[startingKey];
     const selectedIndicatorLayout = tabLayout[selectedKey];
     if (startingIndicatorLayout && selectedIndicatorLayout) {
       /**
@@ -31,16 +31,12 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
       if (vertical) {
         scaleValue = selectedIndicatorLayout.height / startingIndicatorLayout.height;
         translateOffset = (selectedIndicatorLayout.height - startingIndicatorLayout.height) / 2;
-        translateValue = selectedIndicatorLayout.y - startingIndicatorLayout.y + translateOffset;
+        translateValue = selectedIndicatorLayout.y - startingIndicatorLayout.y;
       } else {
         scaleValue = selectedIndicatorLayout.width / startingIndicatorLayout.width;
         translateOffset = (selectedIndicatorLayout.width - startingIndicatorLayout.width) / 2;
-        translateValue = selectedIndicatorLayout.x - startingIndicatorLayout.x + translateOffset;
-        if (I18nManager.isRTL) {
-          translateValue *= -1;
-        }
+        translateValue = selectedIndicatorLayout.x - startingIndicatorLayout.x;
       }
-      translateValue = translateValue + translateOffset;
       Animated.parallel([
         Animated.timing(indicatorScale, {
           toValue: scaleValue,
@@ -49,49 +45,33 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
           useNativeDriver: true,
         }),
         Animated.timing(indicatorTranslate, {
-          toValue: translateValue,
+          toValue: translateValue + translateOffset,
           duration: 300,
           easing: Easing.bezier(0, 0, 0, 1),
           useNativeDriver: true,
         }),
       ]).start();
     }
-  }, [indicatorScale, indicatorTranslate, tabLayout, selectedKey, startingIndicatorLayout, vertical]);
+  }, [selectedKey, tabLayout, vertical]);
 
   // Calculate styles using both layout information and user defined styles
   const styles = React.useMemo<AnimatedIndicatorStyles>(() => {
-    const { x, y, width, height, startMargin, tabBorderWidth } = startingIndicatorLayout;
-    const containerStyles: ViewStyle = {
+    const { x, y, width, height } = tabLayout[startingKey];
+    const indicatorStyles: AnimatedIndicatorStyles = {
+      ...additionalStyles,
       position: 'absolute',
-      ...animatedIndicatorStyles.container,
-    };
-    const indicatorStyles = {
-      borderRadius: 99,
-      ...animatedIndicatorStyles.indicator,
-      width: width,
       height: height,
+      width: width,
+      top: y,
+      [I18nManager.isRTL ? 'right' : 'left']: x,
     };
     if (vertical) {
-      containerStyles.start = x + tabBorderWidth + 1;
-      indicatorStyles.top = y + startMargin + tabBorderWidth + 1;
       indicatorStyles.transform = [{ translateY: indicatorTranslate }, { scaleY: indicatorScale }];
     } else {
-      containerStyles.bottom = height + y + 1;
-      indicatorStyles.start = x + startMargin + tabBorderWidth + 1;
       indicatorStyles.transform = [{ translateX: indicatorTranslate }, { scaleX: indicatorScale }];
     }
-    return {
-      container: containerStyles,
-      indicator: indicatorStyles,
-    };
-  }, [
-    startingIndicatorLayout,
-    animatedIndicatorStyles.container,
-    animatedIndicatorStyles.indicator,
-    vertical,
-    indicatorScale,
-    indicatorTranslate,
-  ]);
+    return indicatorStyles;
+  }, [startingKey, additionalStyles, vertical, indicatorScale, indicatorTranslate]);
 
   return styles;
 }

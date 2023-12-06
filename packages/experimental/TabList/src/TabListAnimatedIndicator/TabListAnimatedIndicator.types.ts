@@ -1,11 +1,7 @@
 import type { Animated, LayoutRectangle, ViewStyle } from 'react-native';
 
 export const tablistAnimatedIndicatorName = 'TabListAnimatedIndicator';
-export interface AnimatedIndicatorStyles {
-  container: ViewStyle;
-  indicator: Animated.AnimatedProps<ViewStyle>;
-}
-export type AnimatedIndicatorStylesUpdate = Partial<AnimatedIndicatorStyles>;
+export type AnimatedIndicatorStyles = Animated.AnimatedProps<ViewStyle>;
 
 export interface TabLayoutInfo extends LayoutRectangle {
   startMargin?: number;

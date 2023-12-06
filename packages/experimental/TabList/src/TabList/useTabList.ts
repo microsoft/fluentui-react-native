@@ -6,11 +6,7 @@ import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabListInfo, TabListProps } from './TabList.types';
-import type {
-  AnimatedIndicatorStyles,
-  AnimatedIndicatorStylesUpdate,
-  TabLayoutInfo,
-} from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
+import type { AnimatedIndicatorStyles, TabLayoutInfo } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 /**
  * Re-usable hook for TabList.
@@ -62,37 +58,31 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   // State variables and functions for saving layout info and other styling information to style the animated indicator.
   const [listLayoutMap, setListLayoutMap] = React.useState<{ [key: string]: TabLayoutInfo }>({});
   const [tabListLayout, setTabListLayout] = React.useState<LayoutRectangle>();
-  const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<AnimatedIndicatorStyles>({
-    container: {},
-    indicator: {},
-  });
+  const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<AnimatedIndicatorStyles>({});
 
-  const addTabLayout = (tabKey: string, layoutInfo: TabLayoutInfo) => {
-    setListLayoutMap((prev) => ({ ...prev, [tabKey]: layoutInfo }));
-  };
+  const addTabLayout = React.useCallback(
+    (tabKey: string, layoutInfo: TabLayoutInfo) => {
+      setListLayoutMap((prev) => ({ ...prev, [tabKey]: layoutInfo }));
+    },
+    [setListLayoutMap],
+  );
 
-  const updateStyles = (update: AnimatedIndicatorStylesUpdate) => {
-    if (!update.container && !update.indicator) {
-      return;
-    }
-    setUserDefinedAnimatedIndicatorStyles((prev) => {
-      const newStyles: AnimatedIndicatorStyles = { ...prev };
-      if (update.container) {
-        newStyles.container = mergeStyles(prev.container, update.container);
-      }
-      if (update.indicator) {
-        newStyles.indicator = mergeStyles(prev.indicator, update.indicator);
-      }
-      return newStyles;
-    });
-  };
+  const updateStyles = React.useCallback(
+    (update: AnimatedIndicatorStyles) => {
+      setUserDefinedAnimatedIndicatorStyles((prev) => mergeStyles(prev, update));
+    },
+    [setUserDefinedAnimatedIndicatorStyles],
+  );
 
   // TabList layout callback used to style the animated indicator.
-  const onTabListLayout = (e: LayoutEvent) => {
-    if (e.nativeEvent.layout) {
-      setTabListLayout(e.nativeEvent.layout);
-    }
-  };
+  const onTabListLayout = React.useCallback(
+    (e: LayoutEvent) => {
+      if (e.nativeEvent.layout) {
+        setTabListLayout(e.nativeEvent.layout);
+      }
+    },
+    [setTabListLayout],
+  );
 
   return {
     props: {

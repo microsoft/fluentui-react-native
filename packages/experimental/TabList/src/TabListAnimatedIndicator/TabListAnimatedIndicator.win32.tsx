@@ -22,12 +22,8 @@ function indicatorPropsWorker(animationClass: string, style: Animated.AnimatedPr
 export const TabListAnimatedIndicator = stagedComponent<AnimatedIndicatorProps>((props) => {
   const styles = useAnimatedIndicatorStyles(props);
   return () => {
-    const indicatorProps = getIndicatorProps('Ribbon_TabUnderline', styles.indicator);
-    return (
-      <View style={styles.container}>
-        <View {...indicatorProps} />
-      </View>
-    );
+    const indicatorProps = getIndicatorProps('Ribbon_TabUnderline', styles);
+    return <View {...indicatorProps} />;
   };
 });
 TabListAnimatedIndicator.displayName = tablistAnimatedIndicatorName;

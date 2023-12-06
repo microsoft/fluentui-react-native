@@ -6,11 +6,7 @@ import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
 import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
-import type {
-  AnimatedIndicatorStyles,
-  AnimatedIndicatorStylesUpdate,
-  TabLayoutInfo,
-} from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
+import type { AnimatedIndicatorStyles, TabLayoutInfo } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 export const tabListName = 'TabList';
 
@@ -104,7 +100,7 @@ export interface TabListState {
   /**
    * Directly update the animated indicator's styles with styles the user supplies for each slot.
    */
-  updateAnimatedIndicatorStyles?: (updates: AnimatedIndicatorStylesUpdate) => void;
+  updateAnimatedIndicatorStyles?: (updates: AnimatedIndicatorStyles) => void;
 
   /**
    * TabList's `vertical` prop.

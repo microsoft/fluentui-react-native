@@ -36,6 +36,7 @@ const TabListDefaultTest: React.FunctionComponent = () => {
       <Line />
       <Text>Selected Key: {key}</Text>
       <PaddedTabList
+        vertical
         selectedKey={key}
         onTabSelect={(val) => {
           console.log('New key:', val);
