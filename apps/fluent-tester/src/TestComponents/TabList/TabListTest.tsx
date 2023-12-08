@@ -227,5 +227,5 @@ export const TabListTest: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="TabsV1 Test" description={description} sections={sections} status={status} e2eSections={e2eSections} />;
+  return <Test name="TabList Test" description={description} sections={sections} status={status} e2eSections={e2eSections} />;
 };
