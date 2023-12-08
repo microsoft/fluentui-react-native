@@ -32,11 +32,11 @@ export function useTabAnimation(
   // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
   React.useEffect(() => {
     if (tabKey === selectedKey && updateAnimatedIndicatorStyles) {
-      updateAnimatedIndicatorStyles({ backgroundColor: tokens.indicatorColor, borderRadius: tokens.borderRadius });
+      updateAnimatedIndicatorStyles({ backgroundColor: tokens.indicatorColor, borderRadius: tokens.indicatorRadius });
     }
     // Disabling warning because effect does not need to fire on `updateAnimatedIndicatorStyles` being changed
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tabKey, selectedKey, tokens.indicatorColor, tokens.borderRadius]);
+  }, [tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius]);
 
   /**
    * This checks to see if we have relevant info to calculate the layout position and dimensions of the indicator. If this check fails, we don't
