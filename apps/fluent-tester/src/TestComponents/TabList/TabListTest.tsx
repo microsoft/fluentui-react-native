@@ -36,7 +36,6 @@ const TabListDefaultTest: React.FunctionComponent = () => {
       <Line />
       <Text>Selected Key: {key}</Text>
       <PaddedTabList
-        vertical
         selectedKey={key}
         onTabSelect={(val) => {
           console.log('New key:', val);
@@ -228,5 +227,5 @@ export const TabListTest: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="TabList Test" description={description} sections={sections} status={status} e2eSections={e2eSections} />;
+  return <Test name="TabsV1 Test" description={description} sections={sections} status={status} e2eSections={e2eSections} />;
 };

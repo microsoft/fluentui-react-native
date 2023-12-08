@@ -1,6 +1,7 @@
 import React from 'react';
+import type { LayoutRectangle } from 'react-native';
 
-import type { AnimatedIndicatorProps, AnimatedIndicatorStyles, TabLayoutInfo } from './TabListAnimatedIndicator.types';
+import type { AnimatedIndicatorProps, AnimatedIndicatorStyles } from './TabListAnimatedIndicator.types';
 
 /**
  * This hook handles logic for generating the styles for the TabList's Animated Indicator.
@@ -8,7 +9,7 @@ import type { AnimatedIndicatorProps, AnimatedIndicatorStyles, TabLayoutInfo } f
 export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): AnimatedIndicatorStyles {
   const { animatedIndicatorStyles: additionalStyles, selectedKey, tabLayout } = props;
 
-  const selectedIndicatorLayout = React.useMemo<TabLayoutInfo | null>(() => {
+  const selectedIndicatorLayout = React.useMemo<LayoutRectangle | null>(() => {
     return selectedKey ? tabLayout[selectedKey] : null;
   }, [selectedKey, tabLayout]);
 
@@ -21,7 +22,6 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
     const { x, y, width, height } = selectedIndicatorLayout;
     const indicatorStyles: AnimatedIndicatorStyles = {
       ...additionalStyles,
-      backgroundColor: 'red',
       position: 'absolute',
       width: width,
       height: height,

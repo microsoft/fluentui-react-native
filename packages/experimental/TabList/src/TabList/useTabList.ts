@@ -6,7 +6,7 @@ import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabListInfo, TabListProps } from './TabList.types';
-import type { AnimatedIndicatorStyles, TabLayoutInfo } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
+import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 /**
  * Re-usable hook for TabList.
@@ -56,12 +56,12 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   );
 
   // State variables and functions for saving layout info and other styling information to style the animated indicator.
-  const [listLayoutMap, setListLayoutMap] = React.useState<{ [key: string]: TabLayoutInfo }>({});
+  const [listLayoutMap, setListLayoutMap] = React.useState<{ [key: string]: LayoutRectangle }>({});
   const [tabListLayout, setTabListLayout] = React.useState<LayoutRectangle>();
   const [userDefinedAnimatedIndicatorStyles, setUserDefinedAnimatedIndicatorStyles] = React.useState<AnimatedIndicatorStyles>({});
 
   const addTabLayout = React.useCallback(
-    (tabKey: string, layoutInfo: TabLayoutInfo) => {
+    (tabKey: string, layoutInfo: LayoutRectangle) => {
       setListLayoutMap((prev) => ({ ...prev, [tabKey]: layoutInfo }));
     },
     [setListLayoutMap],

@@ -15,7 +15,7 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
   const indicatorTranslate = React.useRef(new Animated.Value(0)).current;
   const indicatorScale = React.useRef(new Animated.Value(1)).current;
 
-  // Save the initial selected layout, this shouldn't update
+  // Save the initial selected layout, this shouldn't update after the first render.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const startingKey = React.useMemo(() => selectedKey, []);
 
@@ -52,11 +52,23 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
         }),
       ]).start();
     }
+    // This hook should only run when (1) the selected key / vertical prop changes and (2) whenever the tabLayout map changes because that implies an
+    // extent change among the tabs: specifically whenever the selected tab is bolded and previously selected tab is unbolded. Without checking for #2,
+    // the animation for scaling and translating the indicator uses outdated layout info, resulting in a unaligned, small indicator. All other dependencies
+    // are irrelevant.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedKey, tabLayout, vertical]);
 
   // Calculate styles using both layout information and user defined styles
   const styles = React.useMemo<AnimatedIndicatorStyles>(() => {
     const { x, y, width, height } = tabLayout[startingKey];
+    /**
+     * Currently the behavior of layout style props and RTL differs between mac and win32. On mac, RTL = true simply swaps `right` and `left`. This should have been
+     * removed per this: https://reactnative.dev/blog/2017/11/06/react-native-monthly-5#:~:text=The%20meaning%20of,opt%20into%20them.
+     *
+     * Because this is still in place, we account for the swap with the ternary operator below.
+     * TODO: once mac RTL styling is fixed, remove the ternary operator.
+     */
     const indicatorStyles: AnimatedIndicatorStyles = {
       ...additionalStyles,
       position: 'absolute',
@@ -71,7 +83,7 @@ export function useAnimatedIndicatorStyles(props: AnimatedIndicatorProps): Anima
       indicatorStyles.transform = [{ translateX: indicatorTranslate }, { scaleX: indicatorScale }];
     }
     return indicatorStyles;
-  }, [startingKey, additionalStyles, vertical, indicatorScale, indicatorTranslate]);
+  }, [additionalStyles, indicatorScale, indicatorTranslate, startingKey, tabLayout, vertical]);
 
   return styles;
 }

@@ -6,7 +6,7 @@ import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
 import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
-import type { AnimatedIndicatorStyles, TabLayoutInfo } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
+import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 export const tabListName = 'TabList';
 
@@ -14,7 +14,7 @@ export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
 export interface TabListLayoutInfo {
   tablist: LayoutRectangle;
-  tabs: { [key: string]: TabLayoutInfo };
+  tabs: { [key: string]: LayoutRectangle };
 }
 
 export interface TabListState {
@@ -26,7 +26,7 @@ export interface TabListState {
   /**
    * Method to add Tab's layout information for animating the tab indicator
    */
-  addTabLayout?: (tabKey: string, layout: TabLayoutInfo) => void;
+  addTabLayout?: (tabKey: string, layout: LayoutRectangle) => void;
 
   /**
    * Global state both TabList and Tab use for tracking styling of the animated indicator.
