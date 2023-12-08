@@ -12,8 +12,10 @@ export const TabListContext = React.createContext<TabListState>({
   onTabSelect: nullFunction,
   removeTabKey: nullFunction,
   selectedKey: '',
-  setSelectedTabRef: nullFunction,
+  setFocusedTabRef: nullFunction,
   size: 'small',
   tabKeys: [],
   vertical: false,
+  updateDisabledTabs: nullFunction,
+  updateTabRef: nullFunction,
 });

@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Wed, 06 Dec 2023 22:21:57 GMT",
+      "version": "0.5.3",
+      "tag": "@fluentui-react-native/tablist_v0.5.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Nov 2023 19:35:12 GMT",
+      "version": "0.5.2",
+      "tag": "@fluentui-react-native/tablist_v0.5.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "bdfa4596ef738aca998a8bac5a3af30fe94e9f62",
+            "comment": "Fix disabled selected tab impeding keyboard navigation"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Nov 2023 19:40:23 GMT",
+      "version": "0.5.1",
+      "tag": "@fluentui-react-native/tablist_v0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "5b1b1af01711336fb7926128e5585207619a8975",
+            "comment": "Fix various tab styling bugs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:10 GMT",
       "version": "0.5.0",
       "tag": "@fluentui-react-native/tablist_v0.5.0",

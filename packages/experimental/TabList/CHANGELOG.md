@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Thu, 09 Nov 2023 02:39:10 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Dec 2023 22:21:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.3
+
+Wed, 06 Dec 2023 22:21:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.20.1
+
+## 0.5.2
+
+Wed, 29 Nov 2023 19:35:12 GMT
+
+### Patches
+
+- Fix disabled selected tab impeding keyboard navigation (winlarry@microsoft.com)
+
+## 0.5.1
+
+Mon, 13 Nov 2023 19:40:23 GMT
+
+### Patches
+
+- Fix various tab styling bugs (winlarry@microsoft.com)
 
 ## 0.5.0
 

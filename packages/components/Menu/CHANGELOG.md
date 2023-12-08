@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 09 Nov 2023 02:39:09 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Dec 2023 22:21:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.3
+
+Wed, 06 Dec 2023 22:21:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.20.1
+- Bump @fluentui-react-native/button to v0.36.2
+
+## 1.12.2
+
+Thu, 30 Nov 2023 19:44:57 GMT
+
+### Patches
+
+- alwaysShowToolTip prop (rofang@microsoft.com)
+- Bump @fluentui-react-native/button to v0.36.1
+
+## 1.12.1
+
+Tue, 21 Nov 2023 18:57:38 GMT
+
+### Patches
+
+- Stop propagation of left right arrow keys for menu (ruaraki@microsoft.com)
 
 ## 1.12.0
 

@@ -25,6 +25,7 @@ exports[`TabList component tests TabList appearance 1`] = `
   }
 >
   <RCTFocusZone
+    disabled={false}
     focusZoneDirection="horizontal"
     navigateAtEnd="NavigateStopAtEnds"
   >
@@ -469,6 +470,7 @@ exports[`TabList component tests TabList default props 1`] = `
   }
 >
   <RCTFocusZone
+    disabled={false}
     focusZoneDirection="horizontal"
     navigateAtEnd="NavigateStopAtEnds"
   >
@@ -1358,6 +1360,7 @@ exports[`TabList component tests TabList orientation 1`] = `
   }
 >
   <RCTFocusZone
+    disabled={false}
     focusZoneDirection="vertical"
     navigateAtEnd="NavigateStopAtEnds"
   >
@@ -1800,6 +1803,7 @@ exports[`TabList component tests TabList selected key 1`] = `
   }
 >
   <RCTFocusZone
+    disabled={false}
     focusZoneDirection="horizontal"
     navigateAtEnd="NavigateStopAtEnds"
   >
@@ -2244,6 +2248,7 @@ exports[`TabList component tests TabList size 1`] = `
   }
 >
   <RCTFocusZone
+    disabled={false}
     focusZoneDirection="horizontal"
     navigateAtEnd="NavigateStopAtEnds"
   >

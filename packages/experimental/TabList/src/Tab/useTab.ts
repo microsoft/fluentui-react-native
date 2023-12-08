@@ -33,7 +33,7 @@ export const useTab = (props: TabProps): TabInfo => {
     ...rest
   } = props;
   // Grabs the context information from Tabs (currently selected Tab and client's onTabSelect callback).
-  const { addTabKey, invoked, onTabSelect, removeTabKey, setInvoked, setSelectedTabRef, selectedKey, tabKeys, ...tablist } =
+  const { addTabKey, invoked, onTabSelect, removeTabKey, setInvoked, setFocusedTabRef, selectedKey, tabKeys, ...tablist } =
     React.useContext(TabListContext);
 
   const isDisabled = disabled || tablist.disabled;
@@ -41,9 +41,9 @@ export const useTab = (props: TabProps): TabInfo => {
   const changeSelection = React.useCallback(() => {
     if (tabKey !== selectedKey) {
       onTabSelect(tabKey);
-      componentRef && setSelectedTabRef(componentRef);
+      componentRef && setFocusedTabRef(componentRef);
     }
-  }, [componentRef, setSelectedTabRef, onTabSelect, selectedKey, tabKey]);
+  }, [componentRef, setFocusedTabRef, onTabSelect, selectedKey, tabKey]);
 
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
@@ -65,7 +65,7 @@ export const useTab = (props: TabProps): TabInfo => {
     addTabKey(tabKey);
     // Set a defaultTabbableElement if we're the initial selectedKey.
     if (selectedKey === tabKey) {
-      componentRef && setSelectedTabRef(componentRef);
+      componentRef && setFocusedTabRef(componentRef);
     }
     return () => removeTabKey(tabKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps

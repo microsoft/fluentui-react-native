@@ -9,7 +9,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { svgProps } from '../Common/iconExamples';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 
-const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
+const CustomText = Text.customize({ fontSize: 'header', color: '#ad0258' });
 const CustomButton = Button.customize({ backgroundColor: 'pink' });
 const CustomIconButton = Button.customize({ iconColor: 'yellow' });
 const ComposedButton = Button.compose({

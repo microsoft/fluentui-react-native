@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 09 Nov 2023 02:39:08 GMT and should not be manually modified.
+This log was last generated on Thu, 30 Nov 2023 21:40:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.34.0
+
+Thu, 30 Nov 2023 21:40:35 GMT
+
+### Minor changes
+
+- adding package (gulnazsayed@microsoft.com)
+
+## 1.33.1
+
+Thu, 23 Nov 2023 00:12:31 GMT
+
+### Patches
+
+- Update appium packages (ruaraki@microsoft.com)
 
 ## 1.33.0
 

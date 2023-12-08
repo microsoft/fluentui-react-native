@@ -3,7 +3,7 @@
   "compilerOptions": {
     "importHelpers": true,
     "outDir": "lib",
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "include": ["src"]
 }

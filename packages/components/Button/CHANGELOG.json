@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 06 Dec 2023 22:21:57 GMT",
+      "version": "0.36.2",
+      "tag": "@fluentui-react-native/button_v0.36.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 30 Nov 2023 19:44:57 GMT",
+      "version": "0.36.1",
+      "tag": "@fluentui-react-native/button_v0.36.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "b9867d70b31d309406e461989161da94f0991886",
+            "comment": "alwaysShowToolTip prop"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:07 GMT",
       "version": "0.36.0",
       "tag": "@fluentui-react-native/button_v0.36.0",
