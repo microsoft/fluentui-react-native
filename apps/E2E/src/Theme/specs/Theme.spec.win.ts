@@ -9,6 +9,8 @@ describe('Theme Testing Initialization', () => {
   it('Click and navigate to Theme test page', async () => {
     expect(await ThemePageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ThemePageObject.didAssertPopup())
+      .withContext(ThemePageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

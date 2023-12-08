@@ -13,7 +13,9 @@ describe('TabsV1 Testing Initialization', () => {
     /* Expand E2E section */
     expect(await TabsV1PageObject.enableE2ETesterMode()).toBeTrue();
 
-    expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(await TabsV1PageObject.didAssertPopup())
+      .withContext(TabsV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -49,7 +51,9 @@ describe('TabsV1 Functional Tests', () => {
         "Expected the second tab item's content to show by clicking the second tab item.",
       ),
     ).toBeTruthy();
-    expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT);
+    expect(await TabsV1PageObject.didAssertPopup())
+      .withContext(TabsV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Input the following arrow keys on the tabs: Right -> Down -> Left -> Up. Validate the correct TabItem content gets shown.', async () => {
@@ -93,6 +97,8 @@ describe('TabsV1 Functional Tests', () => {
       ),
     ).toBeTruthy();
 
-    expect(await TabsV1PageObject.didAssertPopup()).toBeFalsy(TabsV1PageObject.ERRORMESSAGE_ASSERT);
+    expect(await TabsV1PageObject.didAssertPopup())
+      .withContext(TabsV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

@@ -9,6 +9,8 @@ describe('Icon Legacy Testing Initialization', () => {
   it('Click and navigate to Icon Legacy test page', async () => {
     expect(await IconLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await IconLegacyPageObject.didAssertPopup()).toBeFalsy(IconLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await IconLegacyPageObject.didAssertPopup())
+      .withContext(IconLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
