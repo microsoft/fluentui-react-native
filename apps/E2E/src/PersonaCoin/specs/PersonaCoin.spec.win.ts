@@ -9,6 +9,8 @@ describe('PersonaCoin Testing Initialization', () => {
   it('Click and navigate to PersonaCoin test page', async () => {
     expect(await PersonaCoinPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await PersonaCoinPageObject.didAssertPopup()).toBeFalsy(PersonaCoinPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await PersonaCoinPageObject.didAssertPopup())
+      .withContext(PersonaCoinPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

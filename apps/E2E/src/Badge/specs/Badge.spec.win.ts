@@ -9,6 +9,8 @@ describe('Badge Testing Initialization', () => {
   it('Click and navigate to Badge test page', async () => {
     expect(await BasicBadgePageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
+    await expect(await BasicBadgePageObject.didAssertPopup())
+      .withContext(BasicBadgePageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

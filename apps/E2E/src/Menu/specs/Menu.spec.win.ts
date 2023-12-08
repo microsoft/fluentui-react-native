@@ -15,7 +15,9 @@ describe('Menu Testing Initialization', () => {
     /* Expand E2E section */
     expect(await MenuPageObject.enableE2ETesterMode()).toBeTrue();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -59,7 +61,9 @@ describe('Menu Accessibility Testing', () => {
       await MenuPageObject.compareAttribute(MenuPageObject._menuTrigger, Attribute.ExpandCollapseState, AttributeValue.collapsed),
     ).toBeTruthy();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });
 
@@ -75,21 +79,27 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.click(MenuPageObject._menuTrigger);
     expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "Enter" on MenuTrigger. Validate Menu is opened by checking if MenuItems are visible.', async () => {
     await MenuPageObject.sendKeys(MenuPageObject._menuTrigger, [Keys.ENTER]);
     expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "Space" on MenuTrigger. Validate Menu is opened by checking if MenuItems are visible.', async () => {
     await MenuPageObject.sendKeys(MenuPageObject._menuTrigger, [Keys.SPACE]);
     expect(await MenuPageObject.waitForMenuToOpen()).toBeTruthy();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "Space", Press "Enter", and "Click" on MenuItem. Validate that onClick() callback fires correctly.', async () => {
@@ -104,7 +114,9 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.click(MenuPageObject.getMenuItem('First'));
     expect(await MenuPageObject.waitForItemCallbackToFire(3, 'Click input failed to fire MenuItem onClick callback')).toBeTrue();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "Space", Press "Enter", and "Click" on disabled MenuItem. Validate that onClick() callback does not fire.', async () => {
@@ -120,7 +132,9 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.click(MenuPageObject.getMenuItem('Second'));
     expect(await MenuPageObject.waitForItemCallbackToFire(0, 'Click input fired disabled MenuItem onClick callback')).toBeTrue();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "Up" + "Down" to navigate between MenuItems. Validate that focus switches correctly between MenuItems.', async () => {
@@ -141,7 +155,9 @@ describe('Menu Functional Testing', () => {
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('Fourth'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "Tab" to navigate between MenuItems. Validate that focus switches correctly between MenuItems.', async () => {
@@ -157,7 +173,9 @@ describe('Menu Functional Testing', () => {
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('First'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "Escape" on MenuItem. Validate that Menu closes by checking if MenuItems are not visible.', async () => {
@@ -168,6 +186,8 @@ describe('Menu Functional Testing', () => {
       'Expected the Menu to close, but its MenuItems are still displayed - the menu appears to still be open.',
     );
 
-    expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+    expect(await MenuPageObject.didAssertPopup())
+      .withContext(MenuPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

@@ -12,6 +12,8 @@ describe('Badge Testing Initialization', () => {
     /* Expand E2E section */
     expect(await BasicBadgePageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
+    await expect(await BasicBadgePageObject.didAssertPopup())
+      .withContext(BasicBadgePageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

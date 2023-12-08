@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Replace deprecated usage of falsy/truthy methods in E2E tests",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

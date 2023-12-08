@@ -13,7 +13,7 @@ describe('CheckboxV1 Testing Initialization', () => {
     /* Expand E2E section */
     expect(await CheckboxV1PageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await CheckboxV1PageObject.didAssertPopup()).withContext(CheckboxV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u.toBeFalsy()p
   });
 });
 
@@ -80,7 +80,9 @@ describe('CheckboxV1 Functional Testing', () => {
 
   it("Click the primary checkbox. Validate that the Checkbox toggles correctly AND calls the user's onChange() callback.", async () => {
     /* Validate the Checkbox is initially toggled OFF */
-    await expect(await CheckboxV1PageObject.isCheckboxChecked()).toBeFalsy('The primary checkbox should initially be toggled off.');
+    await expect(await CheckboxV1PageObject.isCheckboxChecked())
+      .withContext('The primary checkbox should initially be toggled off.')
+      .toBeFalsy();
 
     /* Click on the Checkbox to toggle on */
     await CheckboxV1PageObject.click(CheckboxV1PageObject._primaryComponent);
@@ -101,12 +103,16 @@ describe('CheckboxV1 Functional Testing', () => {
       await CheckboxV1PageObject.waitForCheckboxToggle(false, 'The primary checkbox should have been toggled off via click.'),
     ).toBeTruthy();
 
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await CheckboxV1PageObject.didAssertPopup())
+      .withContext(CheckboxV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it("Press 'Space' on the primary checkbox. Validate that the Checkbox toggles correctly AND calls the user's onChange() callback.", async () => {
     /* Validate the Checkbox is initially toggled OFF */
-    await expect(await CheckboxV1PageObject.isCheckboxChecked()).toBeFalsy('The primary checkbox should initially be toggled off.');
+    await expect(await CheckboxV1PageObject.isCheckboxChecked())
+      .withContext('The primary checkbox should initially be toggled off.')
+      .toBeFalsy();
 
     /* Presses the "space bar" to select the Checkbox */
     await CheckboxV1PageObject.sendKeys(CheckboxV1PageObject._primaryComponent, [Keys.SPACE]);
@@ -126,6 +132,8 @@ describe('CheckboxV1 Functional Testing', () => {
       await CheckboxV1PageObject.waitForCheckboxToggle(false, "The primary checkbox should have been toggled off via 'Space' press."),
     ).toBeTruthy();
 
-    await expect(await CheckboxV1PageObject.didAssertPopup()).toBeFalsy(CheckboxV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await CheckboxV1PageObject.didAssertPopup())
+      .withContext(CheckboxV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

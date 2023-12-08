@@ -10,6 +10,8 @@ describe('Divider Testing Initialization', () => {
     /* Click on component button to navigate to test page */
     expect(await DividerPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    expect(await DividerPageObject.didAssertPopup()).toBeFalsy(DividerPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(await DividerPageObject.didAssertPopup())
+      .withContext(DividerPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

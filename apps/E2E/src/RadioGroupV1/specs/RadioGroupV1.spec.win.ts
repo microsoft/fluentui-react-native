@@ -19,7 +19,9 @@ describe('RadioGroupV1/RadioV1 Testing Initialization', () => {
     /* Expand E2E section */
     expect(await RadioGroupV1PageObject.enableE2ETesterMode()).toBeTrue();
 
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -132,7 +134,9 @@ describe('RadioGroupV1 Functional Testing', () => {
       await RadioGroupV1PageObject.waitForRadioSelected('Second', 'Expected radio #2 to be selected by click, but #2 remained unselected.'),
     ).toBeTruthy();
 
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Navigate to unselected radio using "DOWN ARROW" key. Validate state changes from unselected to selected.', async () => {
@@ -147,7 +151,9 @@ describe('RadioGroupV1 Functional Testing', () => {
       ),
     ).toBeTruthy();
 
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Navigate to unselected radio using "DOWN ARROW" key. Validate disabled Radio is skipped.', async () => {
@@ -162,7 +168,9 @@ describe('RadioGroupV1 Functional Testing', () => {
       ),
     ).toBeTruthy();
 
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "DOWN ARROW" on the last Radio of a RadioGroup. Validate circular navigation functions correctly.', async () => {
@@ -174,7 +182,9 @@ describe('RadioGroupV1 Functional Testing', () => {
       await RadioGroupV1PageObject.waitForRadioSelected('First', 'Expected radio #1 to be selected by a "DOWN ARROW" input from radio #4.'),
     ).toBeTruthy();
 
-    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "TAB" on a Radio. Validate Radio in the next RadioGroup is focused.', async () => {
@@ -189,6 +199,8 @@ describe('RadioGroupV1 Functional Testing', () => {
       ),
     ).toBeTruthy();
 
-    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

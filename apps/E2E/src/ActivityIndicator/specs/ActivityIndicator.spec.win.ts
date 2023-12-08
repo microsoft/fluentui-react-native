@@ -9,6 +9,8 @@ describe('Activity Indicator Testing Initialization', () => {
   it('Navigate to Activity Indicator test page', async () => {
     expect(await ActivityIndicatorPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    expect(await ActivityIndicatorPageObject.didAssertPopup()).toBeFalsy(ActivityIndicatorPageObject.ERRORMESSAGE_ASSERT);
+    expect(await ActivityIndicatorPageObject.didAssertPopup())
+      .withContext(ActivityIndicatorPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });
