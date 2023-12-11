@@ -31,8 +31,8 @@
     "@fluentui-react-native/framework": "0.12.0",
     "@fluentui-react-native/icon": "0.20.1",
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.25.0 <1.0.0",
     "@fluentui-react-native/text": ">=0.22.0 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.25.0 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.22.0 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.12.0 <1.0.0",
     "tslib": "^2.3.1"
