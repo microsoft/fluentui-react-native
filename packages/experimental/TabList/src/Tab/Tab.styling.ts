@@ -107,7 +107,7 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         style: {
           flex: 1,
           borderRadius: tokens.indicatorRadius,
-          backgroundColor: hideStaticIndicator ? theme.colors.transparentStroke : tokens.indicatorColor,
+          backgroundColor: hideStaticIndicator ? theme.colors.transparentBackground : tokens.indicatorColor,
         },
       };
     },
