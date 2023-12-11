@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix win32 high contrast theming for TabList",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
