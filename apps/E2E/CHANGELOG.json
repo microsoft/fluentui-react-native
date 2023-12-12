@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Sat, 09 Dec 2023 00:26:48 GMT",
+      "version": "1.34.1",
+      "tag": "@fluentui-react-native/e2e-testing_v1.34.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "a564cf4ab6b53d3ac2aef34b2244739af8c6dc07",
+            "comment": "Replace deprecated usage of falsy/truthy methods in E2E tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 30 Nov 2023 21:40:35 GMT",
       "version": "1.34.0",
       "tag": "@fluentui-react-native/e2e-testing_v1.34.0",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix HC on button text",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
