@@ -9,6 +9,8 @@ describe('Shimmer Testing Initialization', () => {
   it('Click and navigate to Shimmer test page', async () => {
     expect(await ShimmerPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await ShimmerPageObject.didAssertPopup()).toBeFalsy(ShimmerPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ShimmerPageObject.didAssertPopup())
+      .withContext(ShimmerPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

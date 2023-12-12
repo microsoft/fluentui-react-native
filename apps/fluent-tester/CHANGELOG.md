@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 30 Nov 2023 21:40:35 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Dec 2023 22:21:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.160.1
+
+Wed, 06 Dec 2023 22:21:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.11.1
+- Bump @fluentui-react-native/badge to v0.8.1
+- Bump @fluentui-react-native/button to v0.36.2
+- Bump @fluentui-react-native/chip to v0.3.1
+- Bump @fluentui-react-native/divider to v0.6.1
+- Bump @fluentui-react-native/dropdown to v0.9.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.9.1
+- Bump @fluentui-react-native/experimental-tabs to v0.10.1
+- Bump @fluentui-react-native/icon to v0.20.1
+- Bump @fluentui-react-native/input to v0.5.1
+- Bump @fluentui-react-native/menu to v1.12.3
+- Bump @fluentui-react-native/notification to v0.24.2
+- Bump @fluentui-react-native/tablist to v0.5.3
+- Bump @fluentui-react-native/tooltip to v0.2.1
+- Bump @fluentui/react-native to v0.39.2
+
+## 0.160.0
+
+Tue, 05 Dec 2023 00:56:17 GMT
+
+### Minor changes
+
+- Delete files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.9.0
+
+## 0.159.3
+
+Mon, 04 Dec 2023 22:05:01 GMT
+
+### Patches
+
+- update versions to match NPM (krsiler@microsoft.com)
+- fix HC on button text (krsiler@microsoft.com)
 
 ## 0.159.0
 

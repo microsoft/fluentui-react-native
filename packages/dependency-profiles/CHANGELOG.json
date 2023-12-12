@@ -2,6 +2,44 @@
   "name": "@fluentui-react-native/dependency-profiles",
   "entries": [
     {
+      "date": "Tue, 05 Dec 2023 00:56:17 GMT",
+      "version": "0.6.0",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "a3714842e3aaad810b2e41c12cfc3d13b49a414b",
+            "comment": "Delete files"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 04 Dec 2023 22:05:01 GMT",
+      "version": "0.5.9",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.5.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "96cc1611e4163f9586d20ab8c1fde0c851cc8668",
+            "comment": "update versions to match NPM"
+          }
+        ],
+        "none": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "940e0b0fd6d225ed9c25bb14782d802ca3c5e359",
+            "comment": "update versions to match NPM (again)"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 21:59:07 GMT",
       "version": "0.5.1",
       "tag": "@fluentui-react-native/dependency-profiles_v0.5.1",

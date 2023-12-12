@@ -15,7 +15,9 @@ describe('Button Legacy Testing Initialization', () => {
     /* Expand E2E section */
     expect(await ButtonLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonLegacyPageObject.didAssertPopup())
+      .withContext(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });
 
@@ -72,7 +74,9 @@ describe('Button Legacy Functional Testing', () => {
       await ButtonLegacyPageObject.didOnClickCallbackFire('Clicking on the primary button failed to fire the onClick() callback.'),
     ).toBeTruthy();
 
-    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonLegacyPageObject.didAssertPopup())
+      .withContext(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Type "Enter" on primary button. Validate onClick() callback was fired.', async () => {
@@ -82,7 +86,9 @@ describe('Button Legacy Functional Testing', () => {
         "Pressing the 'Enter' key on the primary button failed to fire the onClick() callback.",
       ),
     ).toBeTruthy();
-    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonLegacyPageObject.didAssertPopup())
+      .withContext(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Type "Space" on primary button. Validate onClick() callback was fired.', async () => {
@@ -93,6 +99,8 @@ describe('Button Legacy Functional Testing', () => {
       ),
     ).toBeTruthy();
 
-    await expect(await ButtonLegacyPageObject.didAssertPopup()).toBeFalsy(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonLegacyPageObject.didAssertPopup())
+      .withContext(ButtonLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

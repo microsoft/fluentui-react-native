@@ -15,7 +15,9 @@ describe('ButtonV1 Testing Initialization', () => {
     /* Expand E2E section */
     expect(await ButtonV1PageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ButtonV1PageObject.didAssertPopup())
+      .withContext(ButtonV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -67,7 +69,9 @@ describe('ButtonV1 Functional Testing', () => {
       await ButtonV1PageObject.waitForOnClickCallbackToFire(`The primary button failed to fire an onClick callback with a mouse click.`),
     ).toBeTruthy();
 
-    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup())
+      .withContext(ButtonV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Type "Enter" on primary button. Validate onClick() callback was fired.', async () => {
@@ -78,7 +82,9 @@ describe('ButtonV1 Functional Testing', () => {
       ),
     ).toBeTruthy();
 
-    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup())
+      .withContext(ButtonV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Type "Space" on primary button. Validate onClick() callback was fired.', async () => {
@@ -88,6 +94,8 @@ describe('ButtonV1 Functional Testing', () => {
       await ButtonV1PageObject.waitForOnClickCallbackToFire(`The primary button failed to fire an onClick callback with a space keypress.`),
     ).toBeTruthy();
 
-    await expect(await ButtonV1PageObject.didAssertPopup()).toBeFalsy(ButtonV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonV1PageObject.didAssertPopup())
+      .withContext(ButtonV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

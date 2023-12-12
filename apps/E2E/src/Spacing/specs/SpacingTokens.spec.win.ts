@@ -9,6 +9,8 @@ describe('Spacing Token Testing Initialization', () => {
   it('Click and navigate to Spacing Tokens test page', async () => {
     expect(await SpacingTokensPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await SpacingTokensPageObject.didAssertPopup()).toBeFalsy(SpacingTokensPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await SpacingTokensPageObject.didAssertPopup())
+      .withContext(SpacingTokensPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

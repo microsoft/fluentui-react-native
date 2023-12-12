@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 30 Nov 2023 21:40:35 GMT and should not be manually modified.
+This log was last generated on Sat, 09 Dec 2023 00:26:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.34.1
+
+Sat, 09 Dec 2023 00:26:48 GMT
+
+### Patches
+
+- Replace deprecated usage of falsy/truthy methods in E2E tests (winlarry@microsoft.com)
 
 ## 1.34.0
 

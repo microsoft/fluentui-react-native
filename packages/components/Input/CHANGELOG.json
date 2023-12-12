@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/input",
   "entries": [
     {
+      "date": "Wed, 06 Dec 2023 22:21:57 GMT",
+      "version": "0.5.1",
+      "tag": "@fluentui-react-native/input_v0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/input",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:09 GMT",
       "version": "0.5.0",
       "tag": "@fluentui-react-native/input_v0.5.0",

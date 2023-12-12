@@ -19,7 +19,9 @@ describe('RadioGroup/RadioButton Legacy Testing Initialization', () => {
     /* Expand E2E section */
     expect(await RadioGroupPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await RadioGroupPageObject.didAssertPopup())
+      .withContext(RadioGroupPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -108,7 +110,9 @@ describe('RadioGroup Legacy Functional Testing', () => {
       await RadioGroupPageObject.waitForRadioButtonSelected('Second', 'Clicked the second RadioButton, but it failed to be selected.'),
     ).toBeTruthy();
 
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupPageObject.didAssertPopup())
+      .withContext(RadioGroupPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press forward "Arrow Key" on a RadioButton. Validate adjacent RadioButton is newly selected.', async () => {
@@ -123,7 +127,9 @@ describe('RadioGroup Legacy Functional Testing', () => {
       ),
     ).toBeTruthy();
 
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupPageObject.didAssertPopup())
+      .withContext(RadioGroupPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press forward "Arrow Key" on a RadioButton adjacent to a disabled RadioButton. Validate disabled RadioButton is skipped.', async () => {
@@ -138,6 +144,8 @@ describe('RadioGroup Legacy Functional Testing', () => {
       ),
     ).toBeTruthy(); // It should skip RadioButton 3 since it is disabled
 
-    expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupPageObject.didAssertPopup())
+      .withContext(RadioGroupPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

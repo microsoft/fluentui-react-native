@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet, Switch, View } from 'react-native';
 
 import { Text, ToggleButton, Separator, Link } from '@fluentui/react-native';
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { Stack } from '@fluentui-react-native/stack';
 import { useTheme } from '@fluentui-react-native/theme-types';

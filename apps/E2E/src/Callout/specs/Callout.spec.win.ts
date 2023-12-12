@@ -15,7 +15,9 @@ describe('Callout Testing Initialization', () => {
     /* Expand E2E section */
     expect(await CalloutPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await CalloutPageObject.didAssertPopup())
+      .withContext(CalloutPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -53,7 +55,9 @@ describe('Callout Functional Testing', () => {
   });
 
   it('Open Callout by clicking a button. Validate that the Callout is displayed.', async () => {
-    await expect(await CalloutPageObject.isCalloutOpen()).toBeTruthy('The callout failed to visibly display.');
+    await expect(await CalloutPageObject.isCalloutOpen())
+      .withContext('The callout failed to visibly display.')
+      .toBeTruthy();
   });
 
   afterEach(async () => {

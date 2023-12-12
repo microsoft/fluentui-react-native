@@ -14,7 +14,9 @@ describe('Text Legacy Testing Initialization', () => {
     /* Expand E2E section */
     expect(await TextLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
-    expect(await TextLegacyPageObject.didAssertPopup()).toBeFalsy(TextLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(await TextLegacyPageObject.didAssertPopup())
+      .withContext(TextLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

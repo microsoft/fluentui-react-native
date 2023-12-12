@@ -14,7 +14,9 @@ describe('RadioGroupV1/RadioV1 Testing Initialization', () => {
     /* Expand E2E section */
     expect(await RadioGroupV1PageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -32,7 +34,9 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
         RADIOGROUPV1_TEST_COMPONENT,
       ),
     ).toBeTruthy();
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Validate Radio Group Class on Android', async () => {
@@ -40,7 +44,9 @@ describe('RadioGroupV1/RadioV1 Accessibility Testing', () => {
       await RadioGroupV1PageObject.compareAttribute(RadioGroupV1PageObject.getRadio('First'), AndroidAttribute.Class, ANDROID_RADIOBUTTON),
     ).toBeTruthy();
 
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });
 
@@ -61,6 +67,8 @@ describe('RadioGroupV1 Functional Testing', async () => {
 
     /* Validate the Radio is selected */
     expect(await RadioGroupV1PageObject.waitForRadioSelected('Second', 'Expected radio #2 to be selected by click.')).toBeTruthy();
-    expect(await RadioGroupV1PageObject.didAssertPopup()).toBeFalsy(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT);
+    expect(await RadioGroupV1PageObject.didAssertPopup())
+      .withContext(RadioGroupV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });
