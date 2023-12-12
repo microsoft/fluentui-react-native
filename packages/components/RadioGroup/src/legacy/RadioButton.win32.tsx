@@ -7,7 +7,7 @@ import { View, I18nManager } from 'react-native';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import {
   useAsPressable,
-  useOnPressWithFocus,
+  //useOnPressWithFocus,
   useViewCommandFocus,
   KeyPressEvent,
   useKeyDownProps,
@@ -130,7 +130,13 @@ export const RadioButton = compose<IRadioButtonType>({
     const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
 
     // Ensure focus is placed on button after click
-    const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
+    const changeSelectionWithFocus = () => {
+      if (buttonKey != info.selectedKey) {
+        info.onChange && info.onChange(buttonKey);
+        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+        info.updateInvoked && info.updateInvoked(true);
+      }
+    };
 
     /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
     const pressable = useAsPressable({
