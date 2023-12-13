@@ -7,6 +7,7 @@ import type { ShimmerTokens } from './Shimmer.types';
 export const defaultShimmerTokens: TokenSettings<ShimmerTokens, Theme> = (theme: Theme) =>
   ({
     angle: 0,
+    backgroundColor: theme.colors.transparentBackground,
     delay: 0,
     duration: 7000,
     shimmerColor: getCurrentAppearance(theme.host.appearance, 'light') === 'light' ? '#E1E1E1' : '#404040',
