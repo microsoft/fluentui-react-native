@@ -6,11 +6,7 @@ import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
 import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
-import type {
-  AnimatedIndicatorStyles,
-  AnimatedIndicatorStylesUpdate,
-  TabLayoutInfo,
-} from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
+import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 export const tabListName = 'TabList';
 
@@ -18,7 +14,7 @@ export type TabListAppearance = 'transparent' | 'subtle';
 export type TabListSize = 'small' | 'medium' | 'large';
 export interface TabListLayoutInfo {
   tablist: LayoutRectangle;
-  tabs: { [key: string]: TabLayoutInfo };
+  tabs: { [key: string]: LayoutRectangle };
 }
 
 export interface TabListState {
@@ -30,7 +26,7 @@ export interface TabListState {
   /**
    * Method to add Tab's layout information for animating the tab indicator
    */
-  addTabLayout?: (tabKey: string, layout: TabLayoutInfo) => void;
+  addTabLayout?: (tabKey: string, layout: LayoutRectangle) => void;
 
   /**
    * Global state both TabList and Tab use for tracking styling of the animated indicator.
@@ -104,7 +100,7 @@ export interface TabListState {
   /**
    * Directly update the animated indicator's styles with styles the user supplies for each slot.
    */
-  updateAnimatedIndicatorStyles?: (updates: AnimatedIndicatorStylesUpdate) => void;
+  updateAnimatedIndicatorStyles?: (updates: AnimatedIndicatorStyles) => void;
 
   /**
    * Updates internal map that keeps track of each of this tablist's tabs disabled state
@@ -184,7 +180,8 @@ export interface TabListInfo {
 }
 export interface TabListSlotProps {
   container?: FocusZoneProps;
-  stack: React.PropsWithRef<IViewProps>;
+  stack: IViewProps;
+  root: React.PropsWithRef<IViewProps>;
 }
 
 export interface TabListType {

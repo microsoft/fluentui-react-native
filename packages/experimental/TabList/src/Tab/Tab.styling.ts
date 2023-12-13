@@ -69,13 +69,14 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
+        flex: vertical ? 0 : 1,
         alignSelf: 'flex-start',
         justifyContent: 'center',
         marginHorizontal: tokens.stackMarginHorizontal,
         marginVertical: tokens.stackMarginVertical,
       },
     }),
-    [tokens.stackMarginHorizontal, tokens.stackMarginVertical],
+    [vertical, tokens.stackMarginHorizontal, tokens.stackMarginVertical],
   );
 
   const indicatorContainer = React.useMemo<IViewProps>(
