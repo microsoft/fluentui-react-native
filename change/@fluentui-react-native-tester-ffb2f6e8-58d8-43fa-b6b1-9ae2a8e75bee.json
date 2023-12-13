@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix RTL styling on win32",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

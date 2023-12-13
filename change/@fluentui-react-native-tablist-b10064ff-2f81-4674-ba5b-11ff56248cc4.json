@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Change TabList test page title to be correct",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

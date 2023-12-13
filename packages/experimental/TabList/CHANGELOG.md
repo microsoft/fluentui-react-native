@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Wed, 06 Dec 2023 22:21:57 GMT and should not be manually modified.
+This log was last generated on Wed, 13 Dec 2023 18:47:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.4
+
+Wed, 13 Dec 2023 18:47:39 GMT
+
+### Patches
+
+- Change TabList test page title to be correct (winlarry@microsoft.com)
 
 ## 0.5.3
 
