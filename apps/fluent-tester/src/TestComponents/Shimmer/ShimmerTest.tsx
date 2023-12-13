@@ -47,7 +47,7 @@ export const RoundedCornerClipCheckShimmer: React.FunctionComponent = () => {
         elements={shimmerRectsAndCircle()}
         duration={2000}
         delay={1000}
-        style={{ height: 100, width: 150, borderRadius: 16, borderWidth: 2, borderColor: 'black' }}
+        style={{ height: 100, width: 150, borderRadius: 20, borderWidth: 2, borderColor: 'black' }}
         backgroundColor="teal"
       />
     </Stack>
