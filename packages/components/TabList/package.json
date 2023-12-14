@@ -23,7 +23,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/experimental/TabList"
+    "directory": "packages/components/TabList"
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "0.12.0",
