@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 14 Dec 2023 18:50:21 GMT",
+      "version": "0.160.4",
+      "tag": "@fluentui-react-native/tester_v0.160.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.20.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.39.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Dec 2023 00:40:41 GMT",
       "version": "0.160.3",
       "tag": "@fluentui-react-native/tester_v0.160.3",

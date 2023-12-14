@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix disabled, selected radio stopping keyboard navigation",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
