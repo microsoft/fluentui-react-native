@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 14 Dec 2023 18:50:21 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Dec 2023 19:01:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.160.5
+
+Fri, 15 Dec 2023 19:01:28 GMT
+
+### Patches
+
+- Increase border radius of one Shimmer test case (adgleitm@microsoft.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.12.1
 
 ## 0.160.4
 

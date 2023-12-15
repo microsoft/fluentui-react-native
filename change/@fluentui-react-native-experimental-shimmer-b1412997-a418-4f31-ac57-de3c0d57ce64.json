@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Make Shimmer respect backgroundColor and containerBorderRadius",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}

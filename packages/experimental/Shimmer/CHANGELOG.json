@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Fri, 15 Dec 2023 19:01:28 GMT",
+      "version": "0.12.1",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "4a8aa9d24c3134e515004f0e0abd049d53e8dda4",
+            "comment": "Make Shimmer respect backgroundColor and containerBorderRadius"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:09 GMT",
       "version": "0.12.0",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.12.0",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Thu, 09 Nov 2023 02:39:09 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Dec 2023 19:01:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.1
+
+Fri, 15 Dec 2023 19:01:28 GMT
+
+### Patches
+
+- Make Shimmer respect backgroundColor and containerBorderRadius (adgleitm@microsoft.com)
 
 ## 0.12.0
 

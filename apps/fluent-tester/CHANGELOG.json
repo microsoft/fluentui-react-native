@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 15 Dec 2023 19:01:28 GMT",
+      "version": "0.160.5",
+      "tag": "@fluentui-react-native/tester_v0.160.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4a8aa9d24c3134e515004f0e0abd049d53e8dda4",
+            "comment": "Increase border radius of one Shimmer test case"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shimmer to v0.12.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Dec 2023 18:50:21 GMT",
       "version": "0.160.4",
       "tag": "@fluentui-react-native/tester_v0.160.4",

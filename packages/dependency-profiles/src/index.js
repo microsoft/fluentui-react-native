@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.160.4"
+      "version": "0.160.5"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.37.13"
+      "version": "0.37.14"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -204,7 +204,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-shimmer": {
       "name": "@fluentui-react-native/experimental-shimmer",
-      "version": "0.12.0"
+      "version": "0.12.1"
     },
     "@fluentui-react-native/spinner": {
       "name": "@fluentui-react-native/spinner",

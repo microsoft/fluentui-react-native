@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Increase border radius of one Shimmer test case",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}
