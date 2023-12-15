@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { Shimmer } from '@fluentui-react-native/experimental-shimmer';
 import { Stack } from '@fluentui-react-native/stack';
@@ -17,6 +17,13 @@ const TestCompareCustomizeShimmer = Shimmer.customize({
   backgroundColor: 'red',
 });
 
+const shimmerStyles = StyleSheet.create({
+  smallCustomizedShimmer: { height: 100, width: '50%', borderWidth: 2, borderColor: 'black' },
+  smallRoundedCustomizedShimmer: { height: 100, width: 150, borderRadius: 20, borderWidth: 2, borderColor: 'black' },
+  mediumShimmer: { width: 300, height: 100 },
+  largeShimmer: { width: 800, height: 400 },
+});
+
 export const CustomizeAndTokenPropsShimmers: React.FunctionComponent = () => {
   return (
     <Stack style={{ margin: 4 }}>
@@ -24,14 +31,14 @@ export const CustomizeAndTokenPropsShimmers: React.FunctionComponent = () => {
         elements={shimmerRectsAndCircle()}
         duration={2000}
         delay={1000}
-        style={{ height: 100, width: '50%', borderWidth: 2, borderColor: 'black' }}
+        style={shimmerStyles.smallCustomizedShimmer}
       />
 
       <Shimmer
         elements={shimmerRectsAndCircle()}
         duration={2000}
         delay={1000}
-        style={{ height: 100, width: '50%', borderWidth: 2, borderColor: 'black' }}
+        style={shimmerStyles.smallCustomizedShimmer}
         shimmerWaveColor="blue"
         shimmerColor="orange"
         backgroundColor="red"
@@ -47,7 +54,7 @@ export const RoundedCornerClipCheckShimmer: React.FunctionComponent = () => {
         elements={shimmerRectsAndCircle()}
         duration={2000}
         delay={1000}
-        style={{ height: 100, width: 150, borderRadius: 16, borderWidth: 2, borderColor: 'black' }}
+        style={shimmerStyles.smallRoundedCustomizedShimmer}
         backgroundColor="teal"
       />
     </Stack>
@@ -57,7 +64,7 @@ export const RoundedCornerClipCheckShimmer: React.FunctionComponent = () => {
 const RectShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
-      <Shimmer elements={shimmerRectsAndRect()} style={{ width: 300, height: 100 }} />
+      <Shimmer elements={shimmerRectsAndRect()} style={shimmerStyles.mediumShimmer} />
     </Stack>
   );
 };
@@ -65,7 +72,7 @@ const RectShimmers: React.FunctionComponent<Record<string, never>> = () => {
 const RectCircleShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
-      <Shimmer elements={shimmerRectsAndCircle()} duration={3000} delay={1000} style={{ width: 300, height: 100 }} />
+      <Shimmer elements={shimmerRectsAndCircle()} duration={3000} delay={1000} style={shimmerStyles.mediumShimmer} />
     </Stack>
   );
 };
@@ -82,7 +89,7 @@ const CustomizedShimmer: React.FunctionComponent<Record<string, never>> = () => 
 const ShimmerBorderRadii: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
-      <Shimmer elements={shimmerBorderRadiusTests()} duration={3000} style={{ width: 800, height: 400 }} />
+      <Shimmer elements={shimmerBorderRadiusTests()} duration={3000} style={shimmerStyles.largeShimmer} />
     </Stack>
   );
 };
