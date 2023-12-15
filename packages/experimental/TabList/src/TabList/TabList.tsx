@@ -20,6 +20,7 @@ export const TabList = compose<TabListType>({
   slots: {
     container: FocusZone,
     stack: View,
+    root: View,
   },
   useRender: (userProps: TabListProps, useSlots: UseSlots<TabListType>) => {
     // configure props and state for tabs based on user props
@@ -43,22 +44,24 @@ export const TabList = compose<TabListType>({
           // Passes in the selected key and a hook function to update the newly selected tab and call the client's onTabsClick callback.
           value={tablist.state}
         >
-          <Slots.container
-            disabled={disabled || tablistDisabledState}
-            defaultTabbableElement={defaultTabbableElement}
-            focusZoneDirection={vertical ? 'vertical' : 'horizontal'}
-            isCircularNavigation={isCircularNavigation}
-          >
-            <Slots.stack {...mergedProps}>{children}</Slots.stack>
-            {canShowAnimatedIndicator && (
-              <TabListAnimatedIndicator
-                animatedIndicatorStyles={animatedIndicatorStyles}
-                selectedKey={selectedKey}
-                tabLayout={layout.tabs}
-                vertical={vertical}
-              />
-            )}
-          </Slots.container>
+          <Slots.root {...mergedProps}>
+            <Slots.container
+              disabled={disabled || tablistDisabledState}
+              defaultTabbableElement={defaultTabbableElement}
+              focusZoneDirection={vertical ? 'vertical' : 'horizontal'}
+              isCircularNavigation={isCircularNavigation}
+            >
+              <Slots.stack>{children}</Slots.stack>
+              {canShowAnimatedIndicator && (
+                <TabListAnimatedIndicator
+                  animatedIndicatorStyles={animatedIndicatorStyles}
+                  selectedKey={selectedKey}
+                  tabLayout={layout.tabs}
+                  vertical={vertical}
+                />
+              )}
+            </Slots.container>
+          </Slots.root>
         </TabListContext.Provider>
       );
     };

@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Wed, 29 Nov 2023 19:35:12 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Dec 2023 00:40:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.5
+
+Thu, 14 Dec 2023 00:40:41 GMT
+
+### Patches
+
+- Fix win32 high contrast theming for TabList (winlarry@microsoft.com)
+
+## 0.5.4
+
+Wed, 13 Dec 2023 18:47:39 GMT
+
+### Patches
+
+- Change TabList test page title to be correct (winlarry@microsoft.com)
+
+## 0.5.3
+
+Wed, 06 Dec 2023 22:21:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.20.1
 
 ## 0.5.2
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Thu, 14 Dec 2023 18:50:21 GMT",
+      "version": "0.20.1",
+      "tag": "@fluentui-react-native/radio-group_v0.20.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "531ff393ccea4062ce5bab8ac77b2346e6a6ead4",
+            "comment": "Fix disabled, selected radio stopping keyboard navigation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:10 GMT",
       "version": "0.20.0",
       "tag": "@fluentui-react-native/radio-group_v0.20.0",

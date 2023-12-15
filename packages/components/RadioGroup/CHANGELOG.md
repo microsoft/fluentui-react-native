@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Thu, 09 Nov 2023 02:39:10 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Dec 2023 18:50:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.1
+
+Thu, 14 Dec 2023 18:50:21 GMT
+
+### Patches
+
+- Fix disabled, selected radio stopping keyboard navigation (winlarry@microsoft.com)
 
 ## 0.20.0
 

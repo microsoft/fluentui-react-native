@@ -63,6 +63,12 @@ export interface RadioGroupState extends RadioGroupProps {
    * @platform win32
    */
   invoked?: boolean;
+
+  /**
+   * Signals whether the currently selected radio is disabled. If this is the case, the FocusZone state is set to 'disabled'.
+   * @platform win32
+   */
+  selectedButtonDisabled?: boolean;
 }
 
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {

@@ -22,7 +22,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/base-driver@npm:^9.0.0, @appium/base-driver@npm:^9.1.0, @appium/base-driver@npm:^9.4.2":
+"@appium/base-driver@npm:^9.0.0, @appium/base-driver@npm:^9.1.0":
   version: 9.4.2
   resolution: "@appium/base-driver@npm:9.4.2"
   dependencies:
@@ -60,21 +60,59 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/base-plugin@npm:^2.2.23":
-  version: 2.2.23
-  resolution: "@appium/base-plugin@npm:2.2.23"
+"@appium/base-driver@npm:^9.4.3":
+  version: 9.4.3
+  resolution: "@appium/base-driver@npm:9.4.3"
   dependencies:
-    "@appium/base-driver": ^9.4.2
-    "@appium/support": ^4.1.9
-  checksum: 32da31160d97a875a542617a778ceddbd02ebd28aca10fa175131e291cccfd998aa9ec311c980590ca4763bf8e652329d292d0fc068de81d58e00690e37d907b
+    "@appium/support": ^4.1.10
+    "@appium/types": ^0.14.3
+    "@colors/colors": 1.6.0
+    "@types/async-lock": 1.4.2
+    "@types/bluebird": 3.5.42
+    "@types/express": 4.17.21
+    "@types/lodash": 4.14.202
+    "@types/method-override": 0.0.35
+    "@types/serve-favicon": 2.5.7
+    async-lock: 1.4.0
+    asyncbox: 3.0.0
+    axios: 1.6.2
+    bluebird: 3.7.2
+    body-parser: 1.20.2
+    es6-error: 4.1.1
+    express: 4.18.2
+    http-status-codes: 2.3.0
+    lodash: 4.17.21
+    lru-cache: 10.0.1
+    method-override: 3.0.0
+    morgan: 1.10.0
+    path-to-regexp: 6.2.1
+    serve-favicon: 2.5.0
+    source-map-support: 0.5.21
+    spdy: 4.0.2
+    type-fest: 3.13.1
+    validate.js: 0.13.1
+  dependenciesMeta:
+    spdy:
+      optional: true
+  checksum: a6cec7e1b38f7b81c2cd2be76899a712ef69407b419509fc238da05eb09f3c5992225d0ecca1e4b3e4b25703c7d8fcb26f7d8475a96adff76fba22265de884d4
   languageName: node
   linkType: hard
 
-"@appium/docutils@npm:^0.4.12":
-  version: 0.4.12
-  resolution: "@appium/docutils@npm:0.4.12"
+"@appium/base-plugin@npm:^2.2.24":
+  version: 2.2.24
+  resolution: "@appium/base-plugin@npm:2.2.24"
   dependencies:
-    "@appium/support": ^4.1.9
+    "@appium/base-driver": ^9.4.3
+    "@appium/support": ^4.1.10
+  checksum: 64e334e14ce394c7af73bc93cb26c486e422b48a2802cea07e2ee27dee6a077df4d9f713418aa914a932af242474c3592931bc14cd5b7e7071771af2f5875080
+  languageName: node
+  linkType: hard
+
+"@appium/docutils@npm:^0.4.13":
+  version: 0.4.13
+  resolution: "@appium/docutils@npm:0.4.13"
+  dependencies:
+    "@appium/support": ^4.1.10
     "@appium/tsconfig": ^0.x
     "@appium/typedoc-plugin-appium": ^0.x
     "@sliphua/lilconfig-ts-loader": 3.2.2
@@ -92,7 +130,7 @@ __metadata:
     read-pkg: 5.2.0
     semver: 7.5.4
     source-map-support: 0.5.21
-    teen_process: 2.0.84
+    teen_process: 2.0.101
     type-fest: 3.13.1
     typedoc: 0.23.28
     typedoc-plugin-markdown: 3.14.0
@@ -103,7 +141,7 @@ __metadata:
     yargs-parser: 21.1.1
   bin:
     appium-docs: bin/appium-docs.js
-  checksum: 114cb02a47fe6eea332a85d199df8f848609c77c8bcb687c81bc7de9e42aef5a6718c6e823a4928a01959f8383794c2d9138edf16e1e9621719abf63faeec8c0
+  checksum: 59ef0a148d99c8b34bb91925f5a3a385e2a36ff73e6cd644ad69e811df06062a3dbb47e0bc43734dcac85dfcc582a2b52e1852bf8a1ec2d565c8df98d9c7c921
   languageName: node
   linkType: hard
 
@@ -193,6 +231,71 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@appium/support@npm:^4.1.10":
+  version: 4.1.10
+  resolution: "@appium/support@npm:4.1.10"
+  dependencies:
+    "@appium/tsconfig": ^0.x
+    "@appium/types": ^0.14.3
+    "@colors/colors": 1.6.0
+    "@types/archiver": 6.0.2
+    "@types/base64-stream": 1.0.5
+    "@types/find-root": 1.1.4
+    "@types/jsftp": 2.1.5
+    "@types/klaw": 3.0.6
+    "@types/lockfile": 1.0.4
+    "@types/mv": 2.1.4
+    "@types/ncp": 2.0.8
+    "@types/npmlog": 4.1.6
+    "@types/pluralize": 0.0.33
+    "@types/semver": 7.5.6
+    "@types/shell-quote": 1.7.5
+    "@types/supports-color": 8.1.3
+    "@types/teen_process": 2.0.4
+    "@types/uuid": 9.0.7
+    "@types/which": 3.0.1
+    archiver: 6.0.1
+    axios: 1.6.2
+    base64-stream: 1.0.0
+    bluebird: 3.7.2
+    bplist-creator: 0.1.1
+    bplist-parser: 0.3.2
+    form-data: 4.0.0
+    get-stream: 6.0.1
+    glob: 10.3.10
+    jsftp: 2.1.3
+    klaw: 4.1.0
+    lockfile: 1.0.4
+    lodash: 4.17.21
+    log-symbols: 4.1.0
+    moment: 2.29.4
+    mv: 2.1.1
+    ncp: 2.0.0
+    npmlog: 7.0.1
+    opencv-bindings: 4.5.5
+    pkg-dir: 5.0.0
+    plist: 3.1.0
+    pluralize: 8.0.0
+    read-pkg: 5.2.0
+    resolve-from: 5.0.0
+    sanitize-filename: 1.6.3
+    semver: 7.5.4
+    sharp: 0.32.6
+    shell-quote: 1.8.1
+    source-map-support: 0.5.21
+    supports-color: 8.1.1
+    teen_process: 2.0.101
+    type-fest: 3.13.1
+    uuid: 9.0.1
+    which: 4.0.0
+    yauzl: 2.10.0
+  dependenciesMeta:
+    sharp:
+      optional: true
+  checksum: 8cd8b53c0385b3dcf9653e1341d502f801744d012bd8aaae58220825196ac3b8b5b9efd076f43f390391c2610832ce6cdead286b2ec528c98207581c09fb303b
+  languageName: node
+  linkType: hard
+
 "@appium/tsconfig@npm:^0.x":
   version: 0.3.2
   resolution: "@appium/tsconfig@npm:0.3.2"
@@ -231,6 +334,20 @@ __metadata:
     "@types/ws": 8.5.9
     type-fest: 3.13.1
   checksum: c22003d1a434ce325bcf8fe5fff1a542fbbd966ae7a7fab3bf395df612a5ed272d72ea6c23be90095a5c02f3903910719e0c4fd06eb35279796276d3a5bffb55
+  languageName: node
+  linkType: hard
+
+"@appium/types@npm:^0.14.3":
+  version: 0.14.3
+  resolution: "@appium/types@npm:0.14.3"
+  dependencies:
+    "@appium/schema": ^0.4.2
+    "@appium/tsconfig": ^0.x
+    "@types/express": 4.17.21
+    "@types/npmlog": 4.1.6
+    "@types/ws": 8.5.10
+    type-fest: 3.13.1
+  checksum: 9b72f5232bb030c9d70fdb36857536c11f9ef566f9a22e34bd06be38dd3bb7de05b0b8af3a7e80e6c9873b0ef99dc2a4584a526a2c6ab084033125b3d140ac38
   languageName: node
   linkType: hard
 
@@ -334,25 +451,25 @@ __metadata:
   linkType: hard
 
 "@babel/core@npm:^7.0.0, @babel/core@npm:^7.1.0, @babel/core@npm:^7.11.6, @babel/core@npm:^7.12.3, @babel/core@npm:^7.13.16, @babel/core@npm:^7.20.0, @babel/core@npm:^7.21.3, @babel/core@npm:^7.8.0":
-  version: 7.23.5
-  resolution: "@babel/core@npm:7.23.5"
+  version: 7.23.6
+  resolution: "@babel/core@npm:7.23.6"
   dependencies:
     "@ampproject/remapping": ^2.2.0
     "@babel/code-frame": ^7.23.5
-    "@babel/generator": ^7.23.5
-    "@babel/helper-compilation-targets": ^7.22.15
+    "@babel/generator": ^7.23.6
+    "@babel/helper-compilation-targets": ^7.23.6
     "@babel/helper-module-transforms": ^7.23.3
-    "@babel/helpers": ^7.23.5
-    "@babel/parser": ^7.23.5
+    "@babel/helpers": ^7.23.6
+    "@babel/parser": ^7.23.6
     "@babel/template": ^7.22.15
-    "@babel/traverse": ^7.23.5
-    "@babel/types": ^7.23.5
+    "@babel/traverse": ^7.23.6
+    "@babel/types": ^7.23.6
     convert-source-map: ^2.0.0
     debug: ^4.1.0
     gensync: ^1.0.0-beta.2
     json5: ^2.2.3
     semver: ^6.3.1
-  checksum: 5e5dfb1e61f298676f1fca18c646dbf6fb164ca1056b0169b8d42b7f5c35e026d81823582ccb2358e93a61b035e22b3ad37e2abaae4bf43f1ffb93b6ce19466e
+  checksum: 4bddd1b80394a64b2ee33eeb216e8a2a49ad3d74f0ca9ba678c84a37f4502b2540662d72530d78228a2a349fda837fa852eea5cd3ae28465d1188acc6055868e
   languageName: node
   linkType: hard
 
@@ -368,15 +485,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/generator@npm:^7.23.5":
-  version: 7.23.5
-  resolution: "@babel/generator@npm:7.23.5"
+"@babel/generator@npm:^7.23.6":
+  version: 7.23.6
+  resolution: "@babel/generator@npm:7.23.6"
   dependencies:
-    "@babel/types": ^7.23.5
+    "@babel/types": ^7.23.6
     "@jridgewell/gen-mapping": ^0.3.2
     "@jridgewell/trace-mapping": ^0.3.17
     jsesc: ^2.5.1
-  checksum: 845ddda7cf38a3edf4be221cc8a439dee9ea6031355146a1a74047aa8007bc030305b27d8c68ec9e311722c910610bde38c0e13a9ce55225251e7cb7e7f3edc8
+  checksum: 1a1a1c4eac210f174cd108d479464d053930a812798e09fee069377de39a893422df5b5b146199ead7239ae6d3a04697b45fc9ac6e38e0f6b76374390f91fc6c
   languageName: node
   linkType: hard
 
@@ -408,6 +525,19 @@ __metadata:
     lru-cache: ^5.1.1
     semver: ^6.3.1
   checksum: ce85196769e091ae54dd39e4a80c2a9df1793da8588e335c383d536d54f06baf648d0a08fc873044f226398c4ded15c4ae9120ee18e7dfd7c639a68e3cdc9980
+  languageName: node
+  linkType: hard
+
+"@babel/helper-compilation-targets@npm:^7.23.6":
+  version: 7.23.6
+  resolution: "@babel/helper-compilation-targets@npm:7.23.6"
+  dependencies:
+    "@babel/compat-data": ^7.23.5
+    "@babel/helper-validator-option": ^7.23.5
+    browserslist: ^4.22.2
+    lru-cache: ^5.1.1
+    semver: ^6.3.1
+  checksum: c630b98d4527ac8fe2c58d9a06e785dfb2b73ec71b7c4f2ddf90f814b5f75b547f3c015f110a010fd31f76e3864daaf09f3adcd2f6acdbfb18a8de3a48717590
   languageName: node
   linkType: hard
 
@@ -632,14 +762,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helpers@npm:^7.23.5":
-  version: 7.23.5
-  resolution: "@babel/helpers@npm:7.23.5"
+"@babel/helpers@npm:^7.23.6":
+  version: 7.23.6
+  resolution: "@babel/helpers@npm:7.23.6"
   dependencies:
     "@babel/template": ^7.22.15
-    "@babel/traverse": ^7.23.5
-    "@babel/types": ^7.23.5
-  checksum: c16dc8a3bb3d0e02c7ee1222d9d0865ed4b92de44fb8db43ff5afd37a0fc9ea5e2906efa31542c95b30c1a3a9540d66314663c9a23b5bb9b5ec76e8ebc896064
+    "@babel/traverse": ^7.23.6
+    "@babel/types": ^7.23.6
+  checksum: c5ba62497e1d717161d107c4b3de727565c68b6b9f50f59d6298e613afeca8895799b227c256e06d362e565aec34e26fb5c675b9c3d25055c52b945a21c21e21
   languageName: node
   linkType: hard
 
@@ -674,12 +804,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.23.5":
-  version: 7.23.5
-  resolution: "@babel/parser@npm:7.23.5"
+"@babel/parser@npm:^7.23.6":
+  version: 7.23.6
+  resolution: "@babel/parser@npm:7.23.6"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: ea763629310f71580c4a3ea9d3705195b7ba994ada2cc98f9a584ebfdacf54e92b2735d351672824c2c2b03c7f19206899f4d95650d85ce514a822b19a8734c7
+  checksum: 140801c43731a6c41fd193f5c02bc71fd647a0360ca616b23d2db8be4b9739b9f951a03fc7c2db4f9b9214f4b27c1074db0f18bc3fa653783082d5af7c8860d5
   languageName: node
   linkType: hard
 
@@ -1326,7 +1456,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-for-of@npm:^7.0.0, @babel/plugin-transform-for-of@npm:^7.23.3":
+"@babel/plugin-transform-for-of@npm:^7.0.0":
   version: 7.23.3
   resolution: "@babel/plugin-transform-for-of@npm:7.23.3"
   dependencies:
@@ -1334,6 +1464,18 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: a6288122a5091d96c744b9eb23dc1b2d4cce25f109ac1e26a0ea03c4ea60330e6f3cc58530b33ba7369fa07163b71001399a145238b7e92bff6270ef3b9c32a0
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-for-of@npm:^7.23.6":
+  version: 7.23.6
+  resolution: "@babel/plugin-transform-for-of@npm:7.23.6"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.22.5
+    "@babel/helper-skip-transparent-expression-wrappers": ^7.22.5
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 228c060aa61f6aa89dc447170075f8214863b94f830624e74ade99c1a09316897c12d76e848460b0b506593e58dbc42739af6dc4cb0fe9b84dffe4a596050a36
   languageName: node
   linkType: hard
 
@@ -1835,11 +1977,11 @@ __metadata:
   linkType: hard
 
 "@babel/preset-env@npm:^7.0.0, @babel/preset-env@npm:^7.8.0":
-  version: 7.23.5
-  resolution: "@babel/preset-env@npm:7.23.5"
+  version: 7.23.6
+  resolution: "@babel/preset-env@npm:7.23.6"
   dependencies:
     "@babel/compat-data": ^7.23.5
-    "@babel/helper-compilation-targets": ^7.22.15
+    "@babel/helper-compilation-targets": ^7.23.6
     "@babel/helper-plugin-utils": ^7.22.5
     "@babel/helper-validator-option": ^7.23.5
     "@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression": ^7.23.3
@@ -1879,7 +2021,7 @@ __metadata:
     "@babel/plugin-transform-dynamic-import": ^7.23.4
     "@babel/plugin-transform-exponentiation-operator": ^7.23.3
     "@babel/plugin-transform-export-namespace-from": ^7.23.4
-    "@babel/plugin-transform-for-of": ^7.23.3
+    "@babel/plugin-transform-for-of": ^7.23.6
     "@babel/plugin-transform-function-name": ^7.23.3
     "@babel/plugin-transform-json-strings": ^7.23.4
     "@babel/plugin-transform-literals": ^7.23.3
@@ -1920,7 +2062,7 @@ __metadata:
     semver: ^6.3.1
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: adddd58d14fc1b2e5f8cf90995f522879362a0543e316afe9e5783f1bd715bb1e92300cd49d7ce3a95c64a96d60788d0089651e2cf4cac937f5469aac1087bb1
+  checksum: 130262f263c8a76915ff5361f78afa9e63b4ecbf3ade8e833dc7546db7b9552ab507835bdea0feb5e70861345ca128a31327fd2e187084a215fc9dd1cc0ed38e
   languageName: node
   linkType: hard
 
@@ -2004,11 +2146,11 @@ __metadata:
   linkType: hard
 
 "@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.8.0, @babel/runtime@npm:^7.8.4":
-  version: 7.23.5
-  resolution: "@babel/runtime@npm:7.23.5"
+  version: 7.23.6
+  resolution: "@babel/runtime@npm:7.23.6"
   dependencies:
     regenerator-runtime: ^0.14.0
-  checksum: 164d9802424f06908e62d29b8fd3a87db55accf82f46f964ac481dcead11ff7df8391e3696e5fa91a8ca10ea8845bf650acd730fa88cf13f8026cd8d5eec6936
+  checksum: 1a8eaf3d3a103ef5227b60ca7ab5c589118c36ca65ef2d64e65380b32a98a3f3b5b3ef96660fa0471b079a18b619a8317f3e7f03ab2b930c45282a8b69ed9a16
   languageName: node
   linkType: hard
 
@@ -2041,21 +2183,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.23.5":
-  version: 7.23.5
-  resolution: "@babel/traverse@npm:7.23.5"
+"@babel/traverse@npm:^7.23.6":
+  version: 7.23.6
+  resolution: "@babel/traverse@npm:7.23.6"
   dependencies:
     "@babel/code-frame": ^7.23.5
-    "@babel/generator": ^7.23.5
+    "@babel/generator": ^7.23.6
     "@babel/helper-environment-visitor": ^7.22.20
     "@babel/helper-function-name": ^7.23.0
     "@babel/helper-hoist-variables": ^7.22.5
     "@babel/helper-split-export-declaration": ^7.22.6
-    "@babel/parser": ^7.23.5
-    "@babel/types": ^7.23.5
-    debug: ^4.1.0
+    "@babel/parser": ^7.23.6
+    "@babel/types": ^7.23.6
+    debug: ^4.3.1
     globals: ^11.1.0
-  checksum: 0558b05360850c3ad6384e85bd55092126a8d5f93e29a8e227dd58fa1f9e1a4c25fd337c07c7ae509f0983e7a2b1e761ffdcfaa77a1e1bedbc867058e1de5a7d
+  checksum: 48f2eac0e86b6cb60dab13a5ea6a26ba45c450262fccdffc334c01089e75935f7546be195e260e97f6e43cea419862eda095018531a2718fef8189153d479f88
   languageName: node
   linkType: hard
 
@@ -2070,14 +2212,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.23.5":
-  version: 7.23.5
-  resolution: "@babel/types@npm:7.23.5"
+"@babel/types@npm:^7.23.6":
+  version: 7.23.6
+  resolution: "@babel/types@npm:7.23.6"
   dependencies:
     "@babel/helper-string-parser": ^7.23.4
     "@babel/helper-validator-identifier": ^7.22.20
     to-fast-properties: ^2.0.0
-  checksum: 3d21774480a459ef13b41c2e32700d927af649e04b70c5d164814d8e04ab584af66a93330602c2925e1a6925c2b829cc153418a613a4e7d79d011be1f29ad4b2
+  checksum: 68187dbec0d637f79bc96263ac95ec8b06d424396678e7e225492be866414ce28ebc918a75354d4c28659be6efe30020b4f0f6df81cc418a2d30645b690a8de0
   languageName: node
   linkType: hard
 
@@ -2397,15 +2539,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/avatar@*, @fluentui-react-native/avatar@^1.11.0, @fluentui-react-native/avatar@workspace:packages/components/Avatar":
+"@fluentui-react-native/avatar@*, @fluentui-react-native/avatar@^1.11.1, @fluentui-react-native/avatar@workspace:packages/components/Avatar":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/avatar@workspace:packages/components/Avatar"
   dependencies:
     "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/badge": ^0.8.0
+    "@fluentui-react-native/badge": ^0.8.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": ^0.20.0
+    "@fluentui-react-native/icon": ^0.20.1
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/theme-tokens": ^0.26.0
     "@fluentui-react-native/theming-utils": ">=0.25.0 <1.0.0"
@@ -2423,7 +2565,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/badge@*, @fluentui-react-native/badge@>=0.8.0 <1.0.0, @fluentui-react-native/badge@^0.8.0, @fluentui-react-native/badge@workspace:packages/components/Badge":
+"@fluentui-react-native/badge@*, @fluentui-react-native/badge@>=0.8.1 <1.0.0, @fluentui-react-native/badge@^0.8.1, @fluentui-react-native/badge@workspace:packages/components/Badge":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/badge@workspace:packages/components/Badge"
   dependencies:
@@ -2431,7 +2573,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/experimental-shadow": ">=0.5.0 <1.0.0"
     "@fluentui-react-native/framework": ">=0.12.0 <1.0.0"
-    "@fluentui-react-native/icon": ^0.20.0
+    "@fluentui-react-native/icon": ^0.20.1
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
     "@fluentui-react-native/text": ">=0.22.0 <1.0.0"
@@ -2452,7 +2594,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/button@*, @fluentui-react-native/button@0.36.1, @fluentui-react-native/button@>=0.36.1 <1.0.0, @fluentui-react-native/button@^0.36.1, @fluentui-react-native/button@workspace:packages/components/Button":
+"@fluentui-react-native/button@*, @fluentui-react-native/button@0.36.2, @fluentui-react-native/button@>=0.36.2 <1.0.0, @fluentui-react-native/button@^0.36.2, @fluentui-react-native/button@workspace:packages/components/Button":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/button@workspace:packages/components/Button"
   dependencies:
@@ -2461,7 +2603,7 @@ __metadata:
     "@fluentui-react-native/experimental-activity-indicator": ^0.9.0
     "@fluentui-react-native/experimental-shadow": 0.5.0
     "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": 0.20.0
+    "@fluentui-react-native/icon": 0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/pressable": ">=0.11.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
@@ -2543,14 +2685,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/chip@^0.3.0, @fluentui-react-native/chip@workspace:packages/components/Chip":
+"@fluentui-react-native/chip@^0.3.1, @fluentui-react-native/chip@workspace:packages/components/Chip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/chip@workspace:packages/components/Chip"
   dependencies:
     "@fluentui-react-native/adapters": ^0.12.0
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": ">=0.12.0 <1.0.0"
-    "@fluentui-react-native/icon": ^0.20.0
+    "@fluentui-react-native/icon": ^0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
@@ -2620,7 +2762,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/contextual-menu@*, @fluentui-react-native/contextual-menu@0.23.0, @fluentui-react-native/contextual-menu@^0.23.0, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
+"@fluentui-react-native/contextual-menu@*, @fluentui-react-native/contextual-menu@0.23.1, @fluentui-react-native/contextual-menu@^0.23.1, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu"
   dependencies:
@@ -2628,7 +2770,7 @@ __metadata:
     "@fluentui-react-native/callout": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ^0.16.0
-    "@fluentui-react-native/icon": 0.20.0
+    "@fluentui-react-native/icon": 0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/pressable": ">=0.11.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
@@ -2789,13 +2931,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/divider@^0.6.0, @fluentui-react-native/divider@workspace:packages/components/Divider":
+"@fluentui-react-native/divider@^0.6.1, @fluentui-react-native/divider@workspace:packages/components/Divider":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": 0.20.0
+    "@fluentui-react-native/icon": 0.20.1
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
     "@fluentui-react-native/text": ">=0.22.0 <1.0.0"
@@ -2830,12 +2972,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/dropdown@*, @fluentui-react-native/dropdown@>=0.9.1 <1.0.0, @fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown":
+"@fluentui-react-native/dropdown@*, @fluentui-react-native/dropdown@>=0.9.2 <1.0.0, @fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.12.0 <1.0.0"
-    "@fluentui-react-native/button": ">=0.36.1 <1.0.0"
+    "@fluentui-react-native/button": ">=0.36.2 <1.0.0"
     "@fluentui-react-native/callout": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.12.0
@@ -3009,12 +3151,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@>=0.9.0 <1.0.0, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
+"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@>=0.9.1 <1.0.0, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
   dependencies:
-    "@fluentui-react-native/button": ^0.36.1
-    "@fluentui-react-native/contextual-menu": ^0.23.0
+    "@fluentui-react-native/button": ^0.36.2
+    "@fluentui-react-native/contextual-menu": ^0.23.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.12.0
     "@fluentui-react-native/scripts": ^0.1.1
@@ -3068,7 +3210,7 @@ __metadata:
   resolution: "@fluentui-react-native/experimental-radio-group@workspace:packages/experimental/RadioGroup"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/radio-group": ">=0.20.0 <1.0.0"
+    "@fluentui-react-native/radio-group": ">=0.20.1 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
@@ -3142,7 +3284,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-tabs@*, @fluentui-react-native/experimental-tabs@0.10.0, @fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs":
+"@fluentui-react-native/experimental-tabs@*, @fluentui-react-native/experimental-tabs@0.10.1, @fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs"
   dependencies:
@@ -3150,7 +3292,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.16.0 <1.0.0"
     "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": 0.20.0
+    "@fluentui-react-native/icon": 0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
@@ -3254,7 +3396,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/icon@*, @fluentui-react-native/icon@0.20.0, @fluentui-react-native/icon@^0.20.0, @fluentui-react-native/icon@workspace:packages/components/Icon":
+"@fluentui-react-native/icon@*, @fluentui-react-native/icon@0.20.1, @fluentui-react-native/icon@^0.20.1, @fluentui-react-native/icon@workspace:packages/components/Icon":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/icon@workspace:packages/components/Icon"
   dependencies:
@@ -3288,13 +3430,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/input@^0.5.0, @fluentui-react-native/input@workspace:packages/components/Input":
+"@fluentui-react-native/input@^0.5.1, @fluentui-react-native/input@workspace:packages/components/Input":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/input@workspace:packages/components/Input"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": ^0.20.0
+    "@fluentui-react-native/icon": ^0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/styling-utils": ">=0.6.0 <1.0.0"
@@ -3381,15 +3523,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.12.1, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
+"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.12.2, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu-button@workspace:packages/components/MenuButton"
   dependencies:
-    "@fluentui-react-native/button": ^0.36.1
+    "@fluentui-react-native/button": ^0.36.2
     "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/contextual-menu": ^0.23.0
+    "@fluentui-react-native/contextual-menu": ^0.23.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/icon": ^0.20.0
+    "@fluentui-react-native/icon": ^0.20.1
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/tokens": ^0.22.0
     "@office-iss/react-native-win32": ^0.72.0
@@ -3407,17 +3549,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.2, @fluentui-react-native/menu@workspace:packages/components/Menu":
+"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.3, @fluentui-react-native/menu@workspace:packages/components/Menu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.12.0 <1.0.0"
-    "@fluentui-react-native/button": ">=0.36.1 <1.0.0"
+    "@fluentui-react-native/button": ">=0.36.2 <1.0.0"
     "@fluentui-react-native/callout": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.16.0 <1.0.0"
     "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": ^0.20.0
+    "@fluentui-react-native/icon": ^0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
@@ -3457,17 +3599,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/notification@*, @fluentui-react-native/notification@0.24.1, @fluentui-react-native/notification@workspace:packages/components/Notification":
+"@fluentui-react-native/notification@*, @fluentui-react-native/notification@0.24.2, @fluentui-react-native/notification@workspace:packages/components/Notification":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/notification@workspace:packages/components/Notification"
   dependencies:
     "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/button": ">=0.36.1 <1.0.0"
+    "@fluentui-react-native/button": ">=0.36.2 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/experimental-appearance-additions": ^0.6.0
     "@fluentui-react-native/experimental-shadow": 0.5.0
     "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": 0.20.0
+    "@fluentui-react-native/icon": 0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/pressable": ">=0.11.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
@@ -3573,7 +3715,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.20.0, @fluentui-react-native/radio-group@>=0.20.0 <1.0.0, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
+"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.20.1, @fluentui-react-native/radio-group@>=0.20.1 <1.0.0, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/radio-group@workspace:packages/components/RadioGroup"
   dependencies:
@@ -3780,7 +3922,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.5.2, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
+"@fluentui-react-native/tablist@0.5.5, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/experimental/TabList"
   dependencies:
@@ -3788,11 +3930,12 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.16.0 <1.0.0"
     "@fluentui-react-native/framework": 0.12.0
-    "@fluentui-react-native/icon": 0.20.0
+    "@fluentui-react-native/icon": 0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
     "@fluentui-react-native/text": ">=0.22.0 <1.0.0"
+    "@fluentui-react-native/theming-utils": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.22.0 <1.0.0"
     "@fluentui-react-native/use-styling": ">=0.12.0 <1.0.0"
     "@office-iss/react-native-win32": ^0.72.0
@@ -3806,14 +3949,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tabs@*, @fluentui-react-native/tabs@0.14.0, @fluentui-react-native/tabs@workspace:packages/components/Tabs":
+"@fluentui-react-native/tabs@*, @fluentui-react-native/tabs@0.14.1, @fluentui-react-native/tabs@workspace:packages/components/Tabs":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tabs@workspace:packages/components/Tabs"
   dependencies:
     "@fluentui-react-native/adapters": ">=0.12.0 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-zone": ">=0.16.0 <1.0.0"
-    "@fluentui-react-native/icon": 0.20.0
+    "@fluentui-react-native/icon": 0.20.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
@@ -3854,7 +3997,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.160.0
+    "@fluentui-react-native/tester": ^0.160.4
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
     "@react-native/metro-config": ^0.72.0
@@ -3875,7 +4018,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.160.0, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.160.4, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3883,51 +4026,51 @@ __metadata:
     "@babel/runtime": ^7.8.0
     "@fluentui-react-native/android-theme": ">=0.19.0 <1.0.0"
     "@fluentui-react-native/apple-theme": ">=0.22.0 <1.0.0"
-    "@fluentui-react-native/avatar": ^1.11.0
-    "@fluentui-react-native/badge": ">=0.8.0 <1.0.0"
-    "@fluentui-react-native/button": ">=0.36.1 <1.0.0"
-    "@fluentui-react-native/chip": ^0.3.0
+    "@fluentui-react-native/avatar": ^1.11.1
+    "@fluentui-react-native/badge": ">=0.8.1 <1.0.0"
+    "@fluentui-react-native/button": ">=0.36.2 <1.0.0"
+    "@fluentui-react-native/chip": ^0.3.1
     "@fluentui-react-native/default-theme": ">=0.20.0 <1.0.0"
-    "@fluentui-react-native/divider": ^0.6.0
+    "@fluentui-react-native/divider": ^0.6.1
     "@fluentui-react-native/drawer": ^0.3.0
-    "@fluentui-react-native/dropdown": ">=0.9.1 <1.0.0"
+    "@fluentui-react-native/dropdown": ">=0.9.2 <1.0.0"
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/experimental-activity-indicator": ">=0.9.0 <1.0.0"
     "@fluentui-react-native/experimental-appearance-additions": ^0.6.0
     "@fluentui-react-native/experimental-avatar": ">=0.20.0 <1.0.0"
     "@fluentui-react-native/experimental-checkbox": 0.16.0
     "@fluentui-react-native/experimental-expander": 0.7.0
-    "@fluentui-react-native/experimental-menu-button": ">=0.9.0 <1.0.0"
+    "@fluentui-react-native/experimental-menu-button": ">=0.9.1 <1.0.0"
     "@fluentui-react-native/experimental-native-date-picker": ">=0.10.0 <1.0.0"
     "@fluentui-react-native/experimental-shadow": 0.5.0
     "@fluentui-react-native/experimental-shimmer": 0.12.0
-    "@fluentui-react-native/experimental-tabs": 0.10.0
+    "@fluentui-react-native/experimental-tabs": 0.10.1
     "@fluentui-react-native/experimental-text": ">=0.14.0 <1.0.0"
     "@fluentui-react-native/focus-zone": ^0.16.0
     "@fluentui-react-native/framework": ">=0.12.0 <1.0.0"
-    "@fluentui-react-native/icon": 0.20.0
-    "@fluentui-react-native/input": ^0.5.0
+    "@fluentui-react-native/icon": 0.20.1
+    "@fluentui-react-native/input": ^0.5.1
     "@fluentui-react-native/interactive-hooks": ">=0.25.0 <1.0.0"
-    "@fluentui-react-native/menu": ^1.12.2
+    "@fluentui-react-native/menu": ^1.12.3
     "@fluentui-react-native/merge-props": ">=0.8.0 <1.0.0"
-    "@fluentui-react-native/notification": 0.24.1
-    "@fluentui-react-native/radio-group": ">=0.20.0 <1.0.0"
+    "@fluentui-react-native/notification": 0.24.2
+    "@fluentui-react-native/radio-group": ">=0.20.1 <1.0.0"
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": ^0.17.0
     "@fluentui-react-native/spinner": ^0.8.0
     "@fluentui-react-native/stack": ">=0.9.0 <1.0.0"
     "@fluentui-react-native/switch": ^0.12.0
-    "@fluentui-react-native/tablist": 0.5.2
+    "@fluentui-react-native/tablist": 0.5.5
     "@fluentui-react-native/text": ">=0.22.0 <1.0.0"
     "@fluentui-react-native/theme": ">=0.10.0 <1.0.0"
     "@fluentui-react-native/theme-tokens": ^0.26.0
     "@fluentui-react-native/theme-types": ">=0.33.0 <1.0.0"
     "@fluentui-react-native/themed-stylesheet": ^1.6.0
     "@fluentui-react-native/theming-utils": ">=0.25.0 <1.0.0"
-    "@fluentui-react-native/tooltip": 0.2.0
+    "@fluentui-react-native/tooltip": 0.2.1
     "@fluentui-react-native/vibrancy-view": ">=0.1.0 <1.0.0"
     "@fluentui-react-native/win32-theme": ">=0.28.0 <1.0.0"
-    "@fluentui/react-native": ">=0.39.1 <1.0.0"
+    "@fluentui/react-native": ">=0.39.3 <1.0.0"
     "@fortawesome/fontawesome-svg-core": ^6.2.0
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-native-fontawesome": ^0.3.0
@@ -4090,11 +4233,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tooltip@0.2.0, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
+"@fluentui-react-native/tooltip@0.2.1, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip"
   dependencies:
-    "@fluentui-react-native/button": ^0.36.1
+    "@fluentui-react-native/button": ^0.36.2
     "@fluentui-react-native/callout": ^0.25.0
     "@fluentui-react-native/component-cache": ^1.6.0
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
@@ -4224,27 +4367,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native@*, @fluentui/react-native@>=0.39.1 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
+"@fluentui/react-native@*, @fluentui/react-native@>=0.39.3 <1.0.0, @fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
-    "@fluentui-react-native/button": 0.36.1
+    "@fluentui-react-native/button": 0.36.2
     "@fluentui-react-native/callout": 0.25.0
     "@fluentui-react-native/checkbox": 0.22.0
-    "@fluentui-react-native/contextual-menu": 0.23.0
+    "@fluentui-react-native/contextual-menu": 0.23.1
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/focus-trap-zone": 0.11.0
     "@fluentui-react-native/focus-zone": 0.16.0
     "@fluentui-react-native/interactive-hooks": 0.25.0
     "@fluentui-react-native/link": 0.21.0
-    "@fluentui-react-native/menu-button": 0.12.1
+    "@fluentui-react-native/menu-button": 0.12.2
     "@fluentui-react-native/persona": 0.15.0
     "@fluentui-react-native/persona-coin": 0.14.0
     "@fluentui-react-native/pressable": 0.11.0
-    "@fluentui-react-native/radio-group": 0.20.0
+    "@fluentui-react-native/radio-group": 0.20.1
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": 0.17.0
-    "@fluentui-react-native/tabs": 0.14.0
+    "@fluentui-react-native/tabs": 0.14.1
     "@fluentui-react-native/text": 0.22.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -4883,8 +5026,8 @@ __metadata:
   linkType: hard
 
 "@office-iss/react-native-win32@npm:^0.72.0":
-  version: 0.72.10
-  resolution: "@office-iss/react-native-win32@npm:0.72.10"
+  version: 0.72.11
+  resolution: "@office-iss/react-native-win32@npm:0.72.11"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
@@ -4929,7 +5072,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.72.6
-  checksum: 6019c82722b1e5e56d2668dae55aea3412d5d09624e9ee6c578ae7c955c20e8d891086bf63189f6ec5967b35e16412faded841e6f51a44664e86b4d9b4334b67
+  checksum: fa04c1c9e0888cdb23dacb338a4870214247718cc64734e7a9f3902d15f34678ceb2556fb74dc4671ac90f69f52be5cdf7cfa6123bf49f66f976c1a45ef21ced
   languageName: node
   linkType: hard
 
@@ -5421,14 +5564,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-windows/cli@npm:0.72.3":
-  version: 0.72.3
-  resolution: "@react-native-windows/cli@npm:0.72.3"
+"@react-native-windows/cli@npm:0.72.4":
+  version: 0.72.4
+  resolution: "@react-native-windows/cli@npm:0.72.4"
   dependencies:
-    "@react-native-windows/codegen": 0.72.2
-    "@react-native-windows/fs": 0.72.0
-    "@react-native-windows/package-utils": 0.72.0
-    "@react-native-windows/telemetry": 0.72.1
+    "@react-native-windows/codegen": 0.72.3
+    "@react-native-windows/fs": 0.72.1
+    "@react-native-windows/package-utils": 0.72.1
+    "@react-native-windows/telemetry": 0.72.2
     "@xmldom/xmldom": ^0.7.7
     chalk: ^4.1.0
     cli-spinners: ^2.2.0
@@ -5448,15 +5591,15 @@ __metadata:
     xpath: ^0.0.27
   peerDependencies:
     react-native: "*"
-  checksum: 7ebf1ad24988f8ff436eb4ea1a9bf5884e3854bfe6a8778f8d12ebb234ea3a8c2b4b032e94696af9481c8a9eb83a653f26b5c87faea2c7cc2bf490b825ba3aed
+  checksum: 8ca3ed59f9cac729139dccec1ade1e5481f32128e34f51fc8bcaba7b77f3778dba7d0a22bcb93fa60171c23825a68dbecd81189db080bbda8ca09636d5789f8a
   languageName: node
   linkType: hard
 
-"@react-native-windows/codegen@npm:0.72.2":
-  version: 0.72.2
-  resolution: "@react-native-windows/codegen@npm:0.72.2"
+"@react-native-windows/codegen@npm:0.72.3":
+  version: 0.72.3
+  resolution: "@react-native-windows/codegen@npm:0.72.3"
   dependencies:
-    "@react-native-windows/fs": 0.72.0
+    "@react-native-windows/fs": 0.72.1
     chalk: ^4.1.0
     globby: ^11.0.4
     mustache: ^4.0.1
@@ -5466,46 +5609,46 @@ __metadata:
     react-native: "*"
   bin:
     react-native-windows-codegen: bin.js
-  checksum: 7103a1af12305d755afc5208cd438861c97971b053ee0d01565a0d4d9ef3d4b766bf83d92bc751ce99caa037346f8e3c2b0592e93be966f1592f13ef4e8e7ee8
+  checksum: 094644acd92dc1c3a8f7bc8d0614ed1764c0ff08c0107224613a301b1ab948eace96fae8bc22798a7564ccb3c31034dc8205418b9b17a60de3b23aa0bbfb0858
   languageName: node
   linkType: hard
 
-"@react-native-windows/find-repo-root@npm:0.72.0":
-  version: 0.72.0
-  resolution: "@react-native-windows/find-repo-root@npm:0.72.0"
+"@react-native-windows/find-repo-root@npm:0.72.1":
+  version: 0.72.1
+  resolution: "@react-native-windows/find-repo-root@npm:0.72.1"
   dependencies:
-    "@react-native-windows/fs": 0.72.0
+    "@react-native-windows/fs": 0.72.1
     find-up: ^4.1.0
-  checksum: 48e90f27bfb772c982e69189a02f07776d2f0ff1e67f449bfceef0e26e88d45cc5fab9c854de7e75989291bb08c49821e6572f053200fe88ab041d977fbd2f3b
+  checksum: 8430eb7ba480fb3bf54d540a6f50b872961afc5e0b12e2da73ef55c1f6ae2ba86f6ea5ded482b43f3d3bbb04b64e9403b1eca7cf46bae0d5cb12e6619ec32ff9
   languageName: node
   linkType: hard
 
-"@react-native-windows/fs@npm:0.72.0":
-  version: 0.72.0
-  resolution: "@react-native-windows/fs@npm:0.72.0"
+"@react-native-windows/fs@npm:0.72.1":
+  version: 0.72.1
+  resolution: "@react-native-windows/fs@npm:0.72.1"
   dependencies:
     graceful-fs: ^4.2.8
-  checksum: e7d3506ed82072e4ddd3ff279f1979bfd0cba8b1bd9b52fd5bea1394783ba0a991fc9a5190ab5b5e1621d273f414ea2fa839e0b6c9a86e73c298d787ddb06455
+  checksum: cbeb9315a56328c2148cbc5fee353381c0b2c1f606121cc0d069edd94fce78900a0f1b9611d1994238824863e441739edf5160d0798db6b1e0a73084734d8dcd
   languageName: node
   linkType: hard
 
-"@react-native-windows/package-utils@npm:0.72.0":
-  version: 0.72.0
-  resolution: "@react-native-windows/package-utils@npm:0.72.0"
+"@react-native-windows/package-utils@npm:0.72.1":
+  version: 0.72.1
+  resolution: "@react-native-windows/package-utils@npm:0.72.1"
   dependencies:
-    "@react-native-windows/find-repo-root": 0.72.0
-    "@react-native-windows/fs": 0.72.0
+    "@react-native-windows/find-repo-root": 0.72.1
+    "@react-native-windows/fs": 0.72.1
     get-monorepo-packages: ^1.2.0
     lodash: ^4.17.15
-  checksum: 0a3bf98b7f153193ff59b93c2d8f4d0c0f349a4f72624c5e45bbc285126cd85710deb95a203e60151754d5fc473f2ba8a4e185f4242172da249b5b9931f431c6
+  checksum: fc0f774f3d413eedc7ac86b92c88c8324345a688817740804f226c9401fc3dc171f273d0031b18bc35427a1bc2a7ffa8aeb84d0370b4c1e4cc35a6ef310a60d0
   languageName: node
   linkType: hard
 
-"@react-native-windows/telemetry@npm:0.72.1":
-  version: 0.72.1
-  resolution: "@react-native-windows/telemetry@npm:0.72.1"
+"@react-native-windows/telemetry@npm:0.72.2":
+  version: 0.72.2
+  resolution: "@react-native-windows/telemetry@npm:0.72.2"
   dependencies:
-    "@react-native-windows/fs": 0.72.0
+    "@react-native-windows/fs": 0.72.1
     "@xmldom/xmldom": ^0.7.7
     applicationinsights: ^2.3.1
     ci-info: ^3.2.0
@@ -5513,7 +5656,7 @@ __metadata:
     lodash: ^4.17.21
     os-locale: ^5.0.0
     xpath: ^0.0.27
-  checksum: 6263dd8aa73aa10ab4d3f568f5ebaee77e2b26559ad54877561e226dd95121db5a8e0b736fe7baead0611a43451d6ca1a51eb42d2a4727d2622041c61bd50a3c
+  checksum: fbbb2db836fa1f35ae75ebafcd33cd29ae5833ac757eb025f709437dac0a668094437bcdf301760ae8aea3369b5a1ade52718ae853d3bcce1abdadf958c85212
   languageName: node
   linkType: hard
 
@@ -5591,17 +5734,17 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.2, @rnx-kit/align-deps@npm:^2.2.5":
-  version: 2.3.0
-  resolution: "@rnx-kit/align-deps@npm:2.3.0"
+  version: 2.3.1
+  resolution: "@rnx-kit/align-deps@npm:2.3.1"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 3a5f47685f046be3f24004594eaf4032b2f8c55a930b0a6dff55520843c8901f53950400430ec2e0d6dcc51ae7b8ca3cbbc473a6db736ad06b721a85bc2587cb
+  checksum: 760bd3fdfdfbd87d4806080ca93ee09970cff3fcefb12b1c8848caeb9e84677b1a2d80b1941724a220d9911c44cd6cfc272b511b8f7e01e9dd93b5b6f206b52b
   languageName: node
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.20
-  resolution: "@rnx-kit/cli@npm:0.16.20"
+  version: 0.16.21
+  resolution: "@rnx-kit/cli@npm:0.16.21"
   dependencies:
     "@rnx-kit/align-deps": ^2.2.2
     "@rnx-kit/config": ^0.6.6
@@ -5614,10 +5757,9 @@ __metadata:
     "@rnx-kit/metro-service": ^3.1.5
     "@rnx-kit/third-party-notices": ^1.3.4
     "@rnx-kit/tools-language": ^2.0.0
-    "@rnx-kit/tools-node": ^2.1.0
+    "@rnx-kit/tools-node": ^2.1.1
     "@rnx-kit/tools-react-native": ^1.3.4
     chalk: ^4.1.0
-    find-up: ^5.0.0
     fs-extra: ^10.0.0
     node-fetch: ^2.6.7
     ora: ^5.4.1
@@ -5631,7 +5773,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 5607057979e9ba27d06ddce765ff027c8474518599702b11142382fbdc8fa7fde2f3e1097a1742f7b6e50035a1791a65decefc6c562e747660a9bb7c280c7a4a
+  checksum: 9869ccca8ebd5a8a543bfd54d93ee3f317ebb1028c7d404beb80c183a82b829b4859f56673e0cde520683d47219cf148117ab0920cf43676da41b1c380b363ba
   languageName: node
   linkType: hard
 
@@ -5831,6 +5973,13 @@ __metadata:
     pkg-dir: ^5.0.0
     pkg-up: ^3.1.0
   checksum: e23908eaaaa1bda7ec160a7d0ad6cb5461100f6875db5a204f587f532229d5c9ffe74424bf1a1439efed9f4a782f6e1fc6a8f44bdd62f4ada63dcb61e7707e36
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-node@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@rnx-kit/tools-node@npm:2.1.1"
+  checksum: 6a274ad65c6ae776c1758d1573ba30a533dd242b82973891f610983992d738ce1ead7ac8ca4308a4267bcdbf4d30a124f82c9756b9b433a901ddcd9ac30a4772
   languageName: node
   linkType: hard
 
@@ -6038,12 +6187,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/babel-plugin-transform-react-native-svg@npm:8.0.0":
-  version: 8.0.0
-  resolution: "@svgr/babel-plugin-transform-react-native-svg@npm:8.0.0"
+"@svgr/babel-plugin-transform-react-native-svg@npm:8.1.0":
+  version: 8.1.0
+  resolution: "@svgr/babel-plugin-transform-react-native-svg@npm:8.1.0"
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: 14e3f8ef27bb3215aa8914ea44831eb43decde4a131e4302480f23d6e75aa8c4ea9e1f8888d479b7a8ac63b828e590c03df6d72a6964676612c015f4a967fc74
+  checksum: 85b434a57572f53bd2b9f0606f253e1fcf57b4a8c554ec3f2d43ed17f50d8cae200cb3aaf1ec9d626e1456e8b135dce530ae047eb0bed6d4bf98a752d6640459
   languageName: node
   linkType: hard
 
@@ -6056,9 +6205,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/babel-preset@npm:8.0.0":
-  version: 8.0.0
-  resolution: "@svgr/babel-preset@npm:8.0.0"
+"@svgr/babel-preset@npm:8.1.0":
+  version: 8.1.0
+  resolution: "@svgr/babel-preset@npm:8.1.0"
   dependencies:
     "@svgr/babel-plugin-add-jsx-attribute": 8.0.0
     "@svgr/babel-plugin-remove-jsx-attribute": 8.0.0
@@ -6066,24 +6215,24 @@ __metadata:
     "@svgr/babel-plugin-replace-jsx-attribute-value": 8.0.0
     "@svgr/babel-plugin-svg-dynamic-title": 8.0.0
     "@svgr/babel-plugin-svg-em-dimensions": 8.0.0
-    "@svgr/babel-plugin-transform-react-native-svg": 8.0.0
+    "@svgr/babel-plugin-transform-react-native-svg": 8.1.0
     "@svgr/babel-plugin-transform-svg-component": 8.0.0
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: c8a4497f3fe8338831be275e9e9534b265d22c8ecd75eec0ed82cff8d287506d38fc1963ac3b1a3a27abe0582bcba73f7a76798d23cce586e840bf65a87ba990
+  checksum: 3a67930f080b8891e1e8e2595716b879c944d253112bae763dce59807ba23454d162216c8d66a0a0e3d4f38a649ecd6c387e545d1e1261dd69a68e9a3392ee08
   languageName: node
   linkType: hard
 
-"@svgr/core@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "@svgr/core@npm:8.0.0"
+"@svgr/core@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@svgr/core@npm:8.1.0"
   dependencies:
     "@babel/core": ^7.21.3
-    "@svgr/babel-preset": 8.0.0
+    "@svgr/babel-preset": 8.1.0
     camelcase: ^6.2.0
     cosmiconfig: ^8.1.3
     snake-case: ^3.0.4
-  checksum: ce83ecbab185db72d16dbd9650f5a66c6e2705627722e593b0eaf23bfafe49cf8bb55f216016a11b8a546822c7387887d218aab8697f7b31e3d1a97d94fa0593
+  checksum: da4a12865c7dc59829d58df8bd232d6c85b7115fda40da0d2f844a1a51886e2e945560596ecfc0345d37837ac457de86a931e8b8d8550e729e0c688c02250d8a
   languageName: node
   linkType: hard
 
@@ -6097,30 +6246,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/plugin-jsx@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@svgr/plugin-jsx@npm:8.0.1"
+"@svgr/plugin-jsx@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@svgr/plugin-jsx@npm:8.1.0"
   dependencies:
     "@babel/core": ^7.21.3
-    "@svgr/babel-preset": 8.0.0
+    "@svgr/babel-preset": 8.1.0
     "@svgr/hast-util-to-babel-ast": 8.0.0
     svg-parser: ^2.0.4
   peerDependencies:
     "@svgr/core": "*"
-  checksum: c6a0fc3e757e79837cd88f41f18b35594f8c4efe1b87e673514fa7add0912388b7dc79fa2738d629c2f945395ea568fa901c9c5ca5fce827a004c03867c1c482
+  checksum: 0418a9780753d3544912ee2dad5d2cf8d12e1ba74df8053651b3886aeda54d5f0f7d2dece0af5e0d838332c4f139a57f0dabaa3ca1afa4d1a765efce6a7656f2
   languageName: node
   linkType: hard
 
-"@svgr/plugin-svgo@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@svgr/plugin-svgo@npm:8.0.1"
+"@svgr/plugin-svgo@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@svgr/plugin-svgo@npm:8.1.0"
   dependencies:
     cosmiconfig: ^8.1.3
     deepmerge: ^4.3.1
     svgo: ^3.0.2
   peerDependencies:
     "@svgr/core": "*"
-  checksum: c5008c5dd8467f8f8b3a173462773fc37f2a8fa53989934ea802fc7a9db2147f6fee68736610a117751f2ab94773373e807d21e74db5f93b98040f1479845ec6
+  checksum: 59d9d214cebaacca9ca71a561f463d8b7e5a68ca9443e4792a42d903acd52259b1790c0680bc6afecc3f00a255a6cbd7ea278a9f625bac443620ea58a590c2d0
   languageName: node
   linkType: hard
 
@@ -6170,10 +6319,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/argparse@npm:2.0.13":
-  version: 2.0.13
-  resolution: "@types/argparse@npm:2.0.13"
-  checksum: 32553556d24de9fc89018bda531cb1ebdeff812e0d459045469721501f9118b16c3672e5d50299f5474d0a3b5ca4cf03801bbcdb16086f086012902a096af091
+"@types/archiver@npm:6.0.2":
+  version: 6.0.2
+  resolution: "@types/archiver@npm:6.0.2"
+  dependencies:
+    "@types/readdir-glob": "*"
+  checksum: 4bef71e5b95863be9880339275ad92c2513dd78d56587653614dc5a74af1d078f5f5926ec996de06e7071a1003e0c2764d0e9d2bb0893a2ffb14ab1718eaf5ca
+  languageName: node
+  linkType: hard
+
+"@types/argparse@npm:2.0.14":
+  version: 2.0.14
+  resolution: "@types/argparse@npm:2.0.14"
+  checksum: 1eba6ad70904f79a7c475cbdde74fead2db84dbda58e9e7329dbc6df5569812205e844925713175d264b321e0d5908f3a828615528823217775d043ef27cca36
   languageName: node
   linkType: hard
 
@@ -6321,12 +6479,12 @@ __metadata:
   linkType: hard
 
 "@types/enzyme@npm:^3.10.5":
-  version: 3.10.17
-  resolution: "@types/enzyme@npm:3.10.17"
+  version: 3.10.18
+  resolution: "@types/enzyme@npm:3.10.18"
   dependencies:
     "@types/cheerio": "*"
     "@types/react": ^16
-  checksum: 032c906b1ed254ee7b3bbd6fe2a7b864c621af7b0964b6b6b23619b0f462b8414083df7c1d0fa366a72c0e826f4184d23e43bbc03c13269f7313c4ac4fe45114
+  checksum: faccec3634e7ae5e5c19e6d9b09d0171a63c9dffb7c9464ba7ddc8f6beceb2b083d94d043fd719ab728e9b15f49b9faba62639e2c3956ac55cb526291485c139
   languageName: node
   linkType: hard
 
@@ -6465,12 +6623,12 @@ __metadata:
   linkType: hard
 
 "@types/jest@npm:^29.0.0":
-  version: 29.5.10
-  resolution: "@types/jest@npm:29.5.10"
+  version: 29.5.11
+  resolution: "@types/jest@npm:29.5.11"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: ef385905787db528de9b6beb2688865c0bb276e64256ed60b9a1a6ffc0b75737456cb5e27e952a3241c5845b6a1da487470010dd30f3ca59c8581624c564a823
+  checksum: f892a06ec9f0afa9a61cd7fa316ec614e21d4df1ad301b5a837787e046fcb40dfdf7f264a55e813ac6b9b633cb9d366bd5b8d1cea725e84102477b366df23fdd
   languageName: node
   linkType: hard
 
@@ -6563,6 +6721,13 @@ __metadata:
   version: 4.14.201
   resolution: "@types/lodash@npm:4.14.201"
   checksum: 484be655298e9b2dc2d218ea934071b2ea31e4a531c561dd220dbda65237e8d08c20dc2d457ac24f29be7fe167415bf7bb9360ea0d80bdb8b0f0ec8d8db92fae
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:4.14.202":
+  version: 4.14.202
+  resolution: "@types/lodash@npm:4.14.202"
+  checksum: a91acf3564a568c6f199912f3eb2c76c99c5a0d7e219394294213b3f2d54f672619f0fde4da22b29dc5d4c31457cd799acc2e5cb6bd90f9af04a1578483b6ff7
   languageName: node
   linkType: hard
 
@@ -6703,13 +6868,13 @@ __metadata:
   linkType: hard
 
 "@types/react@npm:^18.2.0":
-  version: 18.2.39
-  resolution: "@types/react@npm:18.2.39"
+  version: 18.2.43
+  resolution: "@types/react@npm:18.2.43"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 9bcb1f1f060f1bf8f4730fb1c7772d0323a6e707f274efee3b976c40d92af4677df4d88e9135faaacf34e13e02f92ef24eb7d0cbcf7fb75c1883f5623ccb19f4
+  checksum: e7e4da18c7b14e4b8b1ea630d1d8224835698f2bb2485766455bfb9dea93b8ee6cc549a9fe1cb10c984e62685db44fcfb61e8fac913b008cd30a92087f25b9df
   languageName: node
   linkType: hard
 
@@ -6754,6 +6919,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/semver@npm:7.5.6":
+  version: 7.5.6
+  resolution: "@types/semver@npm:7.5.6"
+  checksum: 563a0120ec0efcc326567db2ed920d5d98346f3638b6324ea6b50222b96f02a8add3c51a916b6897b51523aad8ac227d21d3dcf8913559f1bfc6c15b14d23037
+  languageName: node
+  linkType: hard
+
 "@types/serve-favicon@npm:2.5.7":
   version: 2.5.7
   resolution: "@types/serve-favicon@npm:2.5.7"
@@ -6777,6 +6949,13 @@ __metadata:
   version: 1.7.4
   resolution: "@types/shell-quote@npm:1.7.4"
   checksum: 30fbe5f26af7e8fdc9d41f784fa4e4047e93d69e97a474886f43c9c596820145c3e033a3547d15e0de988b0369d8093d62a30fd14e2c7be6bd090143b906f885
+  languageName: node
+  linkType: hard
+
+"@types/shell-quote@npm:1.7.5":
+  version: 1.7.5
+  resolution: "@types/shell-quote@npm:1.7.5"
+  checksum: 32b4d697c7d23dbadf40713692c47f1595f083a3b3deea76cb18e30a05d197aa9205d2b87f6d92edb60cda120b51e35d32bda96ed9b0a7e32921eed2deb4559e
   languageName: node
   linkType: hard
 
@@ -6816,6 +6995,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 33036881f2083cee609799576f580c0a255ca02d0f72dac1722f41551ea43e98e970a2e133fca1b02e7d1faf3313a0fe29dd675c0482cfe2ec7ff5b299710bf0
+  languageName: node
+  linkType: hard
+
+"@types/teen_process@npm:2.0.4":
+  version: 2.0.4
+  resolution: "@types/teen_process@npm:2.0.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: d474c115f3ff9acaa7c6c01151d2fa9a35648b1e8a217dad2007b894a7f3a1376888a4bdb507611739f95d2869487bf888ae0099fa5e8d5ae73c291093d8d64f
   languageName: node
   linkType: hard
 
@@ -6899,6 +7087,15 @@ __metadata:
   version: 3.0.0
   resolution: "@types/wrap-ansi@npm:3.0.0"
   checksum: 492f0610093b5802f45ca292777679bb9b381f1f32ae939956dd9e00bf81dba7cc99979687620a2817d9a7d8b59928207698166c47a0861c6a2e5c30d4aaf1e9
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:8.5.10":
+  version: 8.5.10
+  resolution: "@types/ws@npm:8.5.10"
+  dependencies:
+    "@types/node": "*"
+  checksum: 3ec416ea2be24042ebd677932a462cf16d2080393d8d7d0b1b3f5d6eaa4a7387aaf0eefb99193c0bfd29444857cf2e0c3ac89899e130550dc6c14ada8a46d25e
   languageName: node
   linkType: hard
 
@@ -8035,9 +8232,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-ios-simulator@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "appium-ios-simulator@npm:5.5.0"
+"appium-ios-simulator@npm:^5.5.1":
+  version: 5.5.1
+  resolution: "appium-ios-simulator@npm:5.5.1"
   dependencies:
     "@appium/support": ^4.0.0
     "@xmldom/xmldom": ^0.x
@@ -8050,7 +8247,7 @@ __metadata:
     semver: ^7.0.0
     source-map-support: ^0.x
     teen_process: ^2.0.0
-  checksum: 69e1b50011b74e34946ef5753c143bf419d201f33ec182c1932278419021401f1638c8de468b984092077fd4810688f01692b992cf9a67677b7012cce7aea84d
+  checksum: 552adf4742dda5e0d4d1a99f426236124ddc1e32aa8db7804fb8f18a4da546960ef0c1e4ae0a15be4d7ee8c6efd38871285f3ab5c2171a98b9343b0fd488e3f6
   languageName: node
   linkType: hard
 
@@ -8121,9 +8318,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-webdriveragent@npm:^5.15.2":
-  version: 5.15.3
-  resolution: "appium-webdriveragent@npm:5.15.3"
+"appium-webdriveragent@npm:^5.15.4":
+  version: 5.15.4
+  resolution: "appium-webdriveragent@npm:5.15.4"
   dependencies:
     "@appium/base-driver": ^9.0.0
     "@appium/strongbox": ^0.x
@@ -8138,7 +8335,7 @@ __metadata:
     node-simctl: ^7.0.1
     source-map-support: ^0.x
     teen_process: ^2.0.0
-  checksum: 9ba4f0631ac5faa79624721a0513164590cac3ef473cc865a7c3685f8aa581b9418ceeb197b9c2d71eb06c5f9e00fc8098560698868a735635856d43bfcf873a
+  checksum: 91095e6fb3c74efa826a3ea241323779cf7225ddff3b76277065e707415ce5234d025fb23872f0759cfa6855aa27493a0fa32fb7bb286a0d56bd58cd0667c1c6
   languageName: node
   linkType: hard
 
@@ -8182,14 +8379,14 @@ __metadata:
   linkType: hard
 
 "appium-xcuitest-driver@npm:^5.6.0":
-  version: 5.11.0
-  resolution: "appium-xcuitest-driver@npm:5.11.0"
+  version: 5.12.1
+  resolution: "appium-xcuitest-driver@npm:5.12.1"
   dependencies:
     appium-idb: ^1.6.13
     appium-ios-device: ^2.5.4
-    appium-ios-simulator: ^5.5.0
+    appium-ios-simulator: ^5.5.1
     appium-remote-debugger: ^10.0.0
-    appium-webdriveragent: ^5.15.2
+    appium-webdriveragent: ^5.15.4
     appium-xcode: ^5.1.4
     async-lock: ^1.4.0
     asyncbox: ^3.0.0
@@ -8209,33 +8406,33 @@ __metadata:
     ws: ^8.13.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: ca8ef09036dc3ac9e4c0e816076881b02884307b80afa8b56a96d0a58cffb1f3f8f81115d7550e710b8e775443ddadee91eb22b68b93047b15d04382064f5f0e
+  checksum: 32dbc201be9e2182211acf8c962bd2ec47c5413da6fd9e7e7646b4bd43a931805809f2fde6f5f76b96472071cb5e63e5a69d4c95e73a26bc5ad3a56b6146476a
   languageName: node
   linkType: hard
 
 "appium@npm:^2.0.0":
-  version: 2.2.2
-  resolution: "appium@npm:2.2.2"
+  version: 2.2.3
+  resolution: "appium@npm:2.2.3"
   dependencies:
-    "@appium/base-driver": ^9.4.2
-    "@appium/base-plugin": ^2.2.23
-    "@appium/docutils": ^0.4.12
+    "@appium/base-driver": ^9.4.3
+    "@appium/base-plugin": ^2.2.24
+    "@appium/docutils": ^0.4.13
     "@appium/schema": ^0.4.2
-    "@appium/support": ^4.1.9
-    "@appium/types": ^0.14.2
+    "@appium/support": ^4.1.10
+    "@appium/types": ^0.14.3
     "@sidvind/better-ajv-errors": 2.1.0
-    "@types/argparse": 2.0.13
+    "@types/argparse": 2.0.14
     "@types/bluebird": 3.5.42
     "@types/fancy-log": 2.0.2
-    "@types/semver": 7.5.5
-    "@types/teen_process": 2.0.3
+    "@types/semver": 7.5.6
+    "@types/teen_process": 2.0.4
     "@types/wrap-ansi": 3.0.0
     ajv: 8.12.0
     ajv-formats: 2.1.1
     argparse: 2.0.1
     async-lock: 1.4.0
     asyncbox: 3.0.0
-    axios: 1.6.1
+    axios: 1.6.2
     bluebird: 3.7.2
     cross-env: 7.0.3
     find-up: 5.0.0
@@ -8247,14 +8444,14 @@ __metadata:
     resolve-from: 5.0.0
     semver: 7.5.4
     source-map-support: 0.5.21
-    teen_process: 2.0.84
+    teen_process: 2.0.101
     type-fest: 3.13.1
     winston: 3.11.0
     wrap-ansi: 7.0.0
     yaml: 2.3.4
   bin:
     appium: index.js
-  checksum: 515c7fdf611f9c3ee13c405ef677fe78efebb94aa7a9de4609b0aef0aacff22ae1bdc00506155ffc719f15af7dd55b13076324100ab5e89b43f95b0813ebbdf4
+  checksum: f439ab86fdf7035cceaf01696ee745aca8e27632d1da5780236d648e09cff3d2fad82f931889266967e0dd02c3197ed2bb1d986fd73a21db64cc3a5b2ecc716b
   languageName: node
   linkType: hard
 
@@ -8827,6 +9024,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:1.6.2":
+  version: 1.6.2
+  resolution: "axios@npm:1.6.2"
+  dependencies:
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: 4a7429e2b784be0f2902ca2680964391eae7236faa3967715f30ea45464b98ae3f1c6f631303b13dfe721b17126b01f486c7644b9ef276bfc63112db9fd379f8
+  languageName: node
+  linkType: hard
+
 "b4a@npm:^1.6.4":
   version: 1.6.4
   resolution: "b4a@npm:1.6.4"
@@ -9293,6 +9501,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"browserslist@npm:^4.22.2":
+  version: 4.22.2
+  resolution: "browserslist@npm:4.22.2"
+  dependencies:
+    caniuse-lite: ^1.0.30001565
+    electron-to-chromium: ^1.4.601
+    node-releases: ^2.0.14
+    update-browserslist-db: ^1.0.13
+  bin:
+    browserslist: cli.js
+  checksum: 33ddfcd9145220099a7a1ac533cecfe5b7548ffeb29b313e1b57be6459000a1f8fa67e781cf4abee97268ac594d44134fcc4a6b2b4750ceddc9796e3a22076d9
+  languageName: node
+  linkType: hard
+
 "bser@npm:2.1.1":
   version: 2.1.1
   resolution: "bser@npm:2.1.1"
@@ -9492,6 +9714,13 @@ __metadata:
   version: 1.0.30001547
   resolution: "caniuse-lite@npm:1.0.30001547"
   checksum: ec0fc2b46721887f6f4aca1f3902f03d9a1a07416d16a86b7cd4bfba60e7b6b03ab3969659d3ea0158cc2f298972c80215c06c9457eb15c649d7780e8f5e91a7
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001565":
+  version: 1.0.30001568
+  resolution: "caniuse-lite@npm:1.0.30001568"
+  checksum: 7092aaa246dc8531fbca5b47be91e92065db7e5c04cc9e3d864e848f8f1be769ac6754429e843a5e939f7331a771e8b0a1bc3b13495c66b748c65e2f5bdb1220
   languageName: node
   linkType: hard
 
@@ -10464,7 +10693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:4.3.4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4, debug@npm:~4.1.1":
+"debug@npm:4, debug@npm:4.3.4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4, debug@npm:~4.1.1":
   version: 4.3.4
   resolution: "debug@npm:4.3.4"
   dependencies:
@@ -10996,6 +11225,13 @@ __metadata:
   version: 1.4.551
   resolution: "electron-to-chromium@npm:1.4.551"
   checksum: 80f05eaefaaaf99b7833318c728b9aa7013fbdc9ee96dcc79b25ae3ebdddc62e2ed8b0153c0e6e6e2f1f600b4fa164774cdabb0674aa0a23373e7edbace0febb
+  languageName: node
+  linkType: hard
+
+"electron-to-chromium@npm:^1.4.601":
+  version: 1.4.609
+  resolution: "electron-to-chromium@npm:1.4.609"
+  checksum: 4ef3c32b11adc01ed8227d7bdbe0978b436b817e6b3bd09f19b42afbf9affdb6ddf99f4d20a3b28a494772a2985df12ec95abca849a38cccb217c4ee338561bb
   languageName: node
   linkType: hard
 
@@ -16687,6 +16923,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-releases@npm:^2.0.14":
+  version: 2.0.14
+  resolution: "node-releases@npm:2.0.14"
+  checksum: 59443a2f77acac854c42d321bf1b43dea0aef55cd544c6a686e9816a697300458d4e82239e2d794ea05f7bbbc8a94500332e2d3ac3f11f52e4b16cbe638b3c41
+  languageName: node
+  linkType: hard
+
 "node-simctl@npm:^7.0.1, node-simctl@npm:^7.1.0, node-simctl@npm:^7.1.17":
   version: 7.3.7
   resolution: "node-simctl@npm:7.3.7"
@@ -18101,17 +18344,17 @@ __metadata:
   linkType: hard
 
 "react-native-svg-transformer@npm:^1.0.0":
-  version: 1.1.0
-  resolution: "react-native-svg-transformer@npm:1.1.0"
+  version: 1.2.0
+  resolution: "react-native-svg-transformer@npm:1.2.0"
   dependencies:
-    "@svgr/core": ^8.0.0
-    "@svgr/plugin-jsx": ^8.0.1
-    "@svgr/plugin-svgo": ^8.0.1
+    "@svgr/core": ^8.1.0
+    "@svgr/plugin-jsx": ^8.1.0
+    "@svgr/plugin-svgo": ^8.1.0
     path-dirname: ^1.0.2
   peerDependencies:
     react-native: ">=0.59.0"
     react-native-svg: ">=12.0.0"
-  checksum: 5c1295c3e6a934af8cdd204215abc1e8689b1fd0c860d660f17e58f7e1d4af69c848914c975bc93ad79776bf4a745fa0be01c3a7ad4cce9f389cec5084e807e0
+  checksum: f853d65c38d7602061370518393ee3884babed227f0c0910cf364e599190d022e93438edadd7bc8f2e7eee690ad59a82b710b6e6163f48525f4802adcf64575c
   languageName: node
   linkType: hard
 
@@ -18164,15 +18407,15 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.72.0":
-  version: 0.72.20
-  resolution: "react-native-windows@npm:0.72.20"
+  version: 0.72.22
+  resolution: "react-native-windows@npm:0.72.22"
   dependencies:
     "@babel/runtime": ^7.0.0
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 11.3.7
     "@react-native-community/cli-platform-android": 11.3.7
     "@react-native-community/cli-platform-ios": 11.3.7
-    "@react-native-windows/cli": 0.72.3
+    "@react-native-windows/cli": 0.72.4
     "@react-native/assets": 1.0.0
     "@react-native/assets-registry": ^0.72.0
     "@react-native/codegen": ^0.72.7
@@ -18210,7 +18453,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.72.6
-  checksum: cc32656288163db43e7770095faff2465f47d3cdc01b8a141008a00e8afdf9347b71770c864948f05cbd91bc3ea80f4e4d019ac02e56130d9e7f517b3eced26e
+  checksum: a70b51bcf5ad593ee5530a95bc9979e29be94d141647bc2b6c097b211aa85cc65a32ad3c09d6d7ef63c1969a518dfc27e05763e2e9a4de119b8f1f6f969d85ad
   languageName: node
   linkType: hard
 
@@ -20017,6 +20260,18 @@ __metadata:
     mkdirp: ^1.0.3
     yallist: ^4.0.0
   checksum: f23832fceeba7578bf31907aac744ae21e74a66f4a17a9e94507acf460e48f6db598c7023882db33bab75b80e027c21f276d405e4a0322d58f51c7088d428268
+  languageName: node
+  linkType: hard
+
+"teen_process@npm:2.0.101":
+  version: 2.0.101
+  resolution: "teen_process@npm:2.0.101"
+  dependencies:
+    bluebird: 3.7.2
+    lodash: 4.17.21
+    shell-quote: 1.8.1
+    source-map-support: 0.5.21
+  checksum: 2582f8a40cbc0103bc40e68316bc2565c139c0346044c94c2c5d50e7a91b8ea5fcb9fa90a170d1165e495e34f778ae51c0963cc1ded30789557a8462c4fbdfdf
   languageName: node
   linkType: hard
 

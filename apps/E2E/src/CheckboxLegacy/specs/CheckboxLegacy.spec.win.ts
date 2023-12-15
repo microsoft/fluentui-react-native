@@ -13,7 +13,7 @@ describe('Checkbox Legacy Testing Initialization', () => {
     /* Expand E2E section */
     expect(await CheckboxLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await CheckboxLegacyPageObject.didAssertPopup()).withContext(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u.toBeFalsy()p
   });
 });
 
@@ -64,7 +64,9 @@ describe('Checkbox Legacy Functional Testing', () => {
 
   it("Click the primary checkbox. Validate that the Checkbox toggles correctly AND calls the user's onChange() callback.", async () => {
     /* Validate the Checkbox is initially toggled OFF */
-    await expect(await CheckboxLegacyPageObject.isCheckboxChecked()).toBeFalsy('The primary checkbox should initially be toggled off.');
+    await expect(await CheckboxLegacyPageObject.isCheckboxChecked())
+      .withContext('The primary checkbox should initially be toggled off.')
+      .toBeFalsy();
 
     /* Click on the Checkbox to toggle on */
     await CheckboxLegacyPageObject.click(CheckboxLegacyPageObject._primaryComponent);
@@ -85,12 +87,16 @@ describe('Checkbox Legacy Functional Testing', () => {
       await CheckboxLegacyPageObject.waitForCheckboxToggle(false, 'The primary checkbox should have been toggled off via click.'),
     ).toBeTruthy();
 
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await CheckboxLegacyPageObject.didAssertPopup())
+      .withContext(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it("Press 'Space' on the primary checkbox. Validate that the Checkbox toggles correctly AND calls the user's onChange() callback.", async () => {
     /* Validate the Checkbox is initially toggled OFF */
-    await expect(await CheckboxLegacyPageObject.isCheckboxChecked()).toBeFalsy('The primary checkbox should initially be toggled off.');
+    await expect(await CheckboxLegacyPageObject.isCheckboxChecked())
+      .withContext('The primary checkbox should initially be toggled off.')
+      .toBeFalsy();
 
     /* Presses the "space bar" to select the Checkbox */
     await CheckboxLegacyPageObject.sendKeys(CheckboxLegacyPageObject._primaryComponent, [Keys.SPACE]);
@@ -110,6 +116,8 @@ describe('Checkbox Legacy Functional Testing', () => {
       await CheckboxLegacyPageObject.waitForCheckboxToggle(false, "The primary checkbox should have been toggled off via 'Space' press."),
     ).toBeTruthy();
 
-    await expect(await CheckboxLegacyPageObject.didAssertPopup()).toBeFalsy(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await CheckboxLegacyPageObject.didAssertPopup())
+      .withContext(CheckboxLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

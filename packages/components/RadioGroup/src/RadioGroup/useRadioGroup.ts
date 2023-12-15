@@ -47,16 +47,14 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
 
   const onAddRadioValue = React.useCallback(
     (value: string) => {
-      values.push(value);
-      setValues(values);
+      setValues((values) => [...values, value]);
     },
     [setValues],
   );
 
   const onRemoveRadioValue = React.useCallback(
     (value: string) => {
-      values.filter((item) => item !== value);
-      setValues(values);
+      setValues((values) => values.filter((item) => item !== value));
     },
     [setValues],
   );
@@ -65,16 +63,14 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
 
   const onAddRadioEnabledValue = React.useCallback(
     (value: string) => {
-      enabledValues.push(value);
-      setEnabledValues(enabledValues);
+      setEnabledValues((enabledValues) => [...enabledValues, value]);
     },
     [setEnabledValues],
   );
 
   const onRemoveRadioEnabledValue = React.useCallback(
     (value: string) => {
-      enabledValues.filter((item) => item !== value);
-      setEnabledValues(enabledValues);
+      setEnabledValues((enabledValues) => enabledValues.filter((item) => item !== value));
     },
     [setEnabledValues],
   );
@@ -94,6 +90,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     removeRadioValue: onRemoveRadioValue,
     addRadioEnabledValue: onAddRadioEnabledValue,
     removeRadioEnabledValue: onRemoveRadioEnabledValue,
+    selectedButtonDisabled: values.includes(data.selectedKey) && !enabledValues.includes(data.selectedKey),
   };
 
   return {

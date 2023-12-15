@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Thu, 14 Dec 2023 00:40:41 GMT",
+      "version": "0.5.5",
+      "tag": "@fluentui-react-native/tablist_v0.5.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "d596477e421bd80a095fe48b7913069c4bfa8c50",
+            "comment": "Fix win32 high contrast theming for TabList"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Dec 2023 18:47:39 GMT",
+      "version": "0.5.4",
+      "tag": "@fluentui-react-native/tablist_v0.5.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "942da0494bbdca9f91a37fed330e26b379c16c1f",
+            "comment": "Change TabList test page title to be correct"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 06 Dec 2023 22:21:57 GMT",
+      "version": "0.5.3",
+      "tag": "@fluentui-react-native/tablist_v0.5.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Nov 2023 19:35:12 GMT",
       "version": "0.5.2",
       "tag": "@fluentui-react-native/tablist_v0.5.2",

@@ -14,7 +14,9 @@ describe('LinkV1 Testing Initialization', () => {
     /* Expand E2E section */
     expect(await LinkV1PageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await LinkV1PageObject.didAssertPopup())
+      .withContext(LinkV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -50,7 +52,9 @@ describe('Link Testing Functionality', () => {
     await expect(
       await LinkV1PageObject.didOnPressCallbackFire(`The link failed to fire an onPress callback with a mouse click.`),
     ).toBeTruthy();
-    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await LinkV1PageObject.didAssertPopup())
+      .withContext(LinkV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Validate OnPress() callback was fired after hitting "Enter"', async () => {
@@ -58,7 +62,9 @@ describe('Link Testing Functionality', () => {
     await expect(
       await LinkV1PageObject.didOnPressCallbackFire(`The link failed to fire an OnPress callback with an enter keypress.`),
     ).toBeTruthy();
-    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await LinkV1PageObject.didAssertPopup())
+      .withContext(LinkV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Validate OnPress() callback was fired after hitting "SPACE"', async () => {
@@ -66,6 +72,8 @@ describe('Link Testing Functionality', () => {
     await expect(
       await LinkV1PageObject.didOnPressCallbackFire(`The link failed to fire an OnPress callback with a space keypress.`),
     ).toBeTruthy();
-    await expect(await LinkV1PageObject.didAssertPopup()).toBeFalsy(LinkV1PageObject.ERRORMESSAGE_ASSERT);
+    await expect(await LinkV1PageObject.didAssertPopup())
+      .withContext(LinkV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });
