@@ -22,6 +22,12 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       hasIconBefore: {
         spacingIconContentBefore: globalTokens.size120,
       },
+      circular: {
+        paddingHorizontal: globalTokens.size160 - globalTokens.stroke.width10,
+        focused: {
+          paddingHorizontal: globalTokens.size160,
+        },
+      },
     },
   },
   small: {
@@ -41,6 +47,12 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       hasIconBefore: {
         spacingIconContentBefore: globalTokens.size80,
       },
+      circular: {
+        paddingHorizontal: globalTokens.size120 - globalTokens.stroke.width10,
+        focused: {
+          paddingHorizontal: globalTokens.size120,
+        },
+      },
     },
   },
   large: {
@@ -59,6 +71,12 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       },
       hasIconBefore: {
         spacingIconContentBefore: globalTokens.size160,
+      },
+      circular: {
+        paddingHorizontal: globalTokens.size200 - globalTokens.stroke.width10,
+        focused: {
+          paddingHorizontal: globalTokens.size200,
+        },
       },
     },
   },
