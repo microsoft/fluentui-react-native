@@ -83,7 +83,6 @@ exports[`createAppleTheme test 1`] = `
     "brandStroke1": "#0078d4",
     "brandStroke2": "#c7e0f4",
     "brandedBackground": "#0078d4",
-    "brandedBorder": "#00000000",
     "brandedCheckedBackground": {
       "dynamic": {
         "dark": "#1890F1",
@@ -222,24 +221,11 @@ exports[`createAppleTheme test 1`] = `
     },
     "defaultCheckedHoveredContent": "#ffffff",
     "defaultContent": "#000000",
-    "defaultDisabledBackground": "#ffffff",
-    "defaultDisabledBorder": "#d6d6d6",
-    "defaultDisabledContent": "#757575",
-    "defaultDisabledIcon": "#616161",
     "defaultDisabledSecondaryContent": "#757575",
-    "defaultFocusedBackground": "#ffffff",
-    "defaultFocusedBorder": "#d6d6d6",
-    "defaultFocusedContent": "#000000",
     "defaultFocusedIcon": "#616161",
-    "defaultHoveredBackground": "#f5f5f5",
-    "defaultHoveredBorder": "#d6d6d6",
-    "defaultHoveredContent": "#616161",
     "defaultHoveredIcon": "#616161",
     "defaultHoveredSecondaryContent": "#616161",
     "defaultIcon": "#616161",
-    "defaultPressedBackground": "#ebebeb",
-    "defaultPressedBorder": "#d6d6d6",
-    "defaultPressedContent": "#000000",
     "defaultPressedIcon": "#616161",
     "defaultPressedSecondaryContent": "#ffffff",
     "defaultStateBackground": {
@@ -285,8 +271,6 @@ exports[`createAppleTheme test 1`] = `
       },
     },
     "focusBorder": "transparent",
-    "ghostBackground": "transparent",
-    "ghostBorder": "transparent",
     "ghostCheckedBackground": "transparent",
     "ghostCheckedContent": {
       "dynamic": {

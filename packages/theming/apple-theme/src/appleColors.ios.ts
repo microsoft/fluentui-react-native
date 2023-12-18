@@ -173,28 +173,12 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     defaultContent: fluentApple.communicationBlue,
     defaultIcon: fluentApple.communicationBlue,
 
-    defaultHoveredBackground: 'transparent',
-    defaultHoveredBorder: fluentApple.communicationBlueTint10,
-    defaultHoveredContent: fluentApple.communicationBlue,
     defaultHoveredIcon: fluentApple.communicationBlue,
 
-    defaultFocusedBackground: 'transparent',
-    defaultFocusedBorder: fluentApple.communicationBlueTint10,
-    defaultFocusedContent: fluentApple.communicationBlue,
     defaultFocusedIcon: fluentApple.communicationBlue,
 
-    defaultPressedBackground: 'transparent',
-    defaultPressedBorder: fluentApple.communicationBlueTint30,
-    defaultPressedContent: fluentApple.communicationBlueTint20,
     defaultPressedIcon: fluentApple.communicationBlueTint20,
 
-    defaultDisabledBackground: 'transparent',
-    defaultDisabledBorder: fluent2AliasColorTokens.neutralBackgroundDisabled,
-    defaultDisabledContent: fluentApple.buttonTitleDisabled,
-    defaultDisabledIcon: fluentApple.buttonTitleDisabled,
-
-    ghostBackground: 'transparent',
-    ghostBorder: 'transparent',
     ghostContent: fluentApple.communicationBlue,
     ghostIcon: fluentApple.communicationBlue,
 
@@ -219,7 +203,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     ghostDisabledIcon: fluentApple.buttonTitleDisabled,
 
     brandedBackground: fluentApple.communicationBlue,
-    brandedBorder: 'transparent',
     brandedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
     brandedIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
 

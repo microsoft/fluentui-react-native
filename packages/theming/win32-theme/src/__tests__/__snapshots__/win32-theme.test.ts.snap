@@ -2468,7 +2468,6 @@ exports[`createOfficeTheme test 1`] = `
     "brandStroke1": "#D83B01",
     "brandStroke2": "#d2e0f4",
     "brandedBackground": "#D83B01",
-    "brandedBorder": "#A22C01",
     "brandedCheckedBackground": "#c8c6c4",
     "brandedCheckedContent": "#201f1e",
     "brandedCheckedHoveredBackground": "#edebe9",

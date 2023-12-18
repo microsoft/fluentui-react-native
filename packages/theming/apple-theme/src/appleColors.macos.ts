@@ -372,28 +372,12 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     defaultContent: macOSAliasColorTokens.neutralForeground2,
     defaultIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultHoveredBackground: macOSAliasColorTokens.neutralBackground3,
-    defaultHoveredBorder: macOSAliasColorTokens.neutralStroke2,
-    defaultHoveredContent: macOSAliasColorTokens.neutralForeground3,
     defaultHoveredIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultFocusedBackground: macOSAliasColorTokens.neutralBackground2,
-    defaultFocusedBorder: macOSAliasColorTokens.neutralStroke2,
-    defaultFocusedContent: macOSAliasColorTokens.neutralForeground2,
     defaultFocusedIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultPressedBackground: macOSAliasColorTokens.neutralBackground2Pressed,
-    defaultPressedBorder: macOSAliasColorTokens.neutralStroke2,
-    defaultPressedContent: macOSAliasColorTokens.neutralForeground2,
     defaultPressedIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultDisabledBackground: macOSAliasColorTokens.neutralBackground2,
-    defaultDisabledBorder: macOSAliasColorTokens.neutralStroke2,
-    defaultDisabledContent: macOSAliasColorTokens.neutralForegroundDisabled,
-    defaultDisabledIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
-
-    ghostBackground: 'transparent',
-    ghostBorder: 'transparent',
     ghostContent: fluentUIApple.communicationBlue,
     ghostIcon: fluentUIApple.communicationBlue,
 
@@ -418,7 +402,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     ghostDisabledIcon: macOSAliasColorTokens.brandForeground1Disabled,
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
-    brandedBorder: macOSAliasColorTokens.transparentStroke,
     brandedContent: macOSAliasColorTokens.neutralForegroundInverted,
     brandedIcon: macOSAliasColorTokens.neutralForegroundInverted,
 
