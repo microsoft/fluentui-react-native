@@ -108,18 +108,8 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     defaultContent: p.textPrimary,
     defaultIcon: p.iconsSecondary,
 
-    defaultPressedBackground: p.buttonBackgroundPressed,
-    defaultPressedBorder: 'transparent',
-    defaultPressedContent: p.textOnAccent,
     defaultPressedIcon: p.iconsOnAccent,
 
-    defaultDisabledBackground: p.buttonBackgroundDisabled,
-    defaultDisabledBorder: 'transparent',
-    defaultDisabledContent: p.buttonTextDisabled,
-    defaultDisabledIcon: p.buttonTextDisabled,
-
-    ghostBackground: 'transparent',
-    ghostBorder: 'transparent',
     ghostContent: p.textDominant,
     ghostIcon: p.textDominant,
 

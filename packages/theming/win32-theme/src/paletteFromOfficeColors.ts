@@ -101,28 +101,12 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     defaultContent: p.TextCtl,
     defaultIcon: p.TextCtl,
 
-    defaultHoveredBackground: p.BkgCtlHover,
-    defaultHoveredBorder: p.StrokeCtlHover,
-    defaultHoveredContent: p.TextCtlHover,
     defaultHoveredIcon: p.TextCtlHover,
 
-    defaultFocusedBackground: p.BkgCtlHover,
-    defaultFocusedBorder: p.StrokeCtlKeyboard,
-    defaultFocusedContent: p.TextCtlHover,
     defaultFocusedIcon: p.TextCtlHover,
 
-    defaultPressedBackground: p.BkgCtlPressed,
-    defaultPressedBorder: p.StrokeCtlPressed,
-    defaultPressedContent: p.TextCtlPressed,
     defaultPressedIcon: p.TextCtlPressed,
 
-    defaultDisabledBackground: p.BkgCtlDisabled,
-    defaultDisabledBorder: p.StrokeCtlDisabled,
-    defaultDisabledContent: p.TextCtlDisabled,
-    defaultDisabledIcon: p.TextCtlDisabled,
-
-    ghostBackground: p.Bkg,
-    ghostBorder: p.Bkg,
     ghostContent: p.Text,
     ghostIcon: p.Text,
 

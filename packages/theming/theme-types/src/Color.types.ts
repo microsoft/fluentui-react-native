@@ -341,28 +341,12 @@ export interface ControlColorTokens {
   defaultContent: ColorValue;
   defaultIcon: ColorValue;
 
-  defaultHoveredBackground: ColorValue;
-  defaultHoveredBorder: ColorValue;
-  defaultHoveredContent: ColorValue;
   defaultHoveredIcon: ColorValue;
 
-  defaultFocusedBackground: ColorValue;
-  defaultFocusedBorder: ColorValue;
-  defaultFocusedContent: ColorValue;
   defaultFocusedIcon: ColorValue;
 
-  defaultPressedBackground: ColorValue;
-  defaultPressedBorder: ColorValue;
-  defaultPressedContent: ColorValue;
   defaultPressedIcon: ColorValue;
 
-  defaultDisabledBackground: ColorValue;
-  defaultDisabledBorder: ColorValue;
-  defaultDisabledContent: ColorValue;
-  defaultDisabledIcon: ColorValue;
-
-  ghostBackground: ColorValue;
-  ghostBorder: ColorValue;
   ghostContent: ColorValue;
   ghostIcon: ColorValue;
 

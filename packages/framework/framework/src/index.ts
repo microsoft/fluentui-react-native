@@ -53,7 +53,6 @@ export type {
   AppearanceOptions,
   Color,
   ControlColorTokens,
-  FabricWebPalette,
   FontFamilies,
   FontFamily,
   FontFamilyValue,

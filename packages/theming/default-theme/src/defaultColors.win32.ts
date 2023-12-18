@@ -111,28 +111,12 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultContent: isInverted ? p.black : p.neutralPrimary,
     defaultIcon: isInverted ? p.black : p.neutralPrimary,
 
-    defaultHoveredBackground: p.neutralLight,
-    defaultHoveredBorder: p.neutralSecondaryAlt,
-    defaultHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
     defaultHoveredIcon: isInverted ? p.neutralPrimary : p.neutralDark,
 
-    defaultFocusedBackground: p.neutralLight,
-    defaultFocusedBorder: p.neutralSecondaryAlt,
-    defaultFocusedContent: isInverted ? p.neutralPrimary : p.neutralDark,
     defaultFocusedIcon: isInverted ? p.neutralPrimary : p.neutralDark,
 
-    defaultPressedBackground: p.neutralLight,
-    defaultPressedBorder: p.neutralSecondaryAlt,
-    defaultPressedContent: p.neutralDark,
     defaultPressedIcon: p.neutralDark,
 
-    defaultDisabledBackground: p.neutralLighter,
-    defaultDisabledBorder: p.neutralLighter,
-    defaultDisabledContent: p.neutralTertiary,
-    defaultDisabledIcon: p.neutralTertiary,
-
-    ghostBackground: p.white,
-    ghostBorder: p.white,
     ghostContent: p.neutralPrimary,
     ghostIcon: p.neutralPrimary,
 
@@ -399,28 +383,12 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     defaultContent: '#ffffff',
     defaultIcon: '#ffffff',
 
-    defaultHoveredBackground: '#1aebff',
-    defaultHoveredBorder: '#1aebff',
-    defaultHoveredContent: '#000000',
     defaultHoveredIcon: '#000000',
 
-    defaultFocusedBackground: '#000000',
-    defaultFocusedBorder: '#ffffff',
-    defaultFocusedContent: '#ffffff',
     defaultFocusedIcon: '#ffffff',
 
-    defaultPressedBackground: '#1aebff',
-    defaultPressedBorder: '#1aebff',
-    defaultPressedContent: '#000000',
     defaultPressedIcon: '#000000',
 
-    defaultDisabledBackground: '#000000',
-    defaultDisabledBorder: '#3ff23f',
-    defaultDisabledContent: '#3ff23f',
-    defaultDisabledIcon: '#3ff23f',
-
-    ghostBackground: '#000000',
-    ghostBorder: '#000000',
     ghostContent: '#ffffff',
     ghostIcon: '#ffffff',
 
