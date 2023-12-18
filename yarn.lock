@@ -5526,9 +5526,9 @@ __metadata:
   linkType: hard
 
 "@react-native-community/slider@npm:^4.2.0":
-  version: 4.4.4
-  resolution: "@react-native-community/slider@npm:4.4.4"
-  checksum: 65d79b72d100aab75e9051315798935a2419202e157f5e35dedb4e2843ccdd93816b553c9a7a41642f5140e5a05e20326a27ef65e9ed9c53efc59d8755a5d91f
+  version: 4.5.0
+  resolution: "@react-native-community/slider@npm:4.5.0"
+  checksum: 65f0399ab0b3a052b257ae4004364cb0ea01a0e8749c7547dcf24d7f2f448a807a49eb6c1daaa3b0037b2ac576d86372a7818ffe8b4421cddf3d307c3744d709
   languageName: node
   linkType: hard
 
