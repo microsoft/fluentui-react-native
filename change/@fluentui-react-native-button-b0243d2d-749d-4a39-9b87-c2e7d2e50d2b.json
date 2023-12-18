@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Text in circular compound button no longer cuts into button padding",
+  "packageName": "@fluentui-react-native/button",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
