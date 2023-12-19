@@ -8131,9 +8131,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-android-driver@npm:^7.3.0":
-  version: 7.3.0
-  resolution: "appium-android-driver@npm:7.3.0"
+"appium-android-driver@npm:^7.4.0":
+  version: 7.4.1
+  resolution: "appium-android-driver@npm:7.4.1"
   dependencies:
     appium-adb: ^11.0.1
     appium-chromedriver: ^5.5.1
@@ -8153,7 +8153,7 @@ __metadata:
     ws: ^8.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 9927364aaf65f083bc13f36d072c96d2a612ab1e153b0fe77b4f3f59689fd77bdb1a26015b753c1396a7da83f4a802c578bab510bf1d7d1a5f255aaca9b6beb5
+  checksum: b8e42dd058dbd341c16c6f5ecb8743647c6044d9b759c5e3bbed4b6945a6956f86ade9dde4542d03415561e60288df038d7fe973c3e0bc52fdd3739cd6ca9255
   languageName: node
   linkType: hard
 
@@ -8286,11 +8286,11 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.34.2
-  resolution: "appium-uiautomator2-driver@npm:2.34.2"
+  version: 2.35.0
+  resolution: "appium-uiautomator2-driver@npm:2.35.0"
   dependencies:
     appium-adb: ^11.0.1
-    appium-android-driver: ^7.3.0
+    appium-android-driver: ^7.4.0
     appium-chromedriver: ^5.6.5
     appium-uiautomator2-server: ^5.12.2
     asyncbox: ^3.0.0
@@ -8304,7 +8304,7 @@ __metadata:
     type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: dd8215d30bec014ef8025680d892ae978ff492a52bf13af20f19f98e05a2223082beb3f04e6ae02611308c2d3b26851d2b90315f89fc9c5ef1f3cf175515dfb3
+  checksum: e00ef9dd69c1280408846a83c6a90bc17f56c4f865513eeabff4e20873833bd0ad728f44b1e5d531840683aef6468915c15ee7531e86872aae6b4248d654f171
   languageName: node
   linkType: hard
 
