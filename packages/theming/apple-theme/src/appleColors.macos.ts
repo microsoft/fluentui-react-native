@@ -419,14 +419,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
 
-    brandedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedHoveredIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedFocusedBackground: fluentUIApple.communicationBlue,
-    brandedFocusedBorder: 'transparent',
-    brandedFocusedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedFocusedIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
     brandedPressedBackground: macOSAliasColorTokens.brandBackgroundPressed, //ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
     brandedPressedBorder: 'transparent',
     brandedPressedContent: macOSAliasColorTokens.neutralForegroundInverted,
