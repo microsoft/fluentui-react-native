@@ -389,8 +389,6 @@ export interface ControlColorTokens {
   /* Deprecated */
   brandedBackground: ColorValue;
   /* Deprecated */
-  brandedBorder: ColorValue;
-  /* Deprecated */
   brandedContent: ColorValue;
   /* Deprecated */
   brandedIcon: ColorValue;

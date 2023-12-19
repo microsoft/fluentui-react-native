@@ -147,7 +147,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     ghostDisabledIcon: p.TextDisabled,
 
     brandedBackground: p.BkgCtlEmphasis,
-    brandedBorder: p.StrokeCtlEmphasis,
     brandedContent: p.TextCtlEmphasis,
     brandedIcon: p.TextCtlEmphasis,
 

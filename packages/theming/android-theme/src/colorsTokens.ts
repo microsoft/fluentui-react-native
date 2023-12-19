@@ -144,7 +144,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     ghostDisabledIcon: p.iconsDisabled,
 
     brandedBackground: p.communicationBlue,
-    brandedBorder: 'transparent',
     brandedContent: p.textDominant,
     brandedIcon: p.textDominant,
 

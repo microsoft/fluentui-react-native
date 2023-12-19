@@ -157,7 +157,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     ghostDisabledIcon: p.neutralTertiary,
 
     brandedBackground: p.themePrimary,
-    brandedBorder: p.themeDark,
     brandedContent: p.white,
     brandedIcon: p.white,
 
@@ -445,7 +444,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     ghostDisabledIcon: '#3ff23f',
 
     brandedBackground: '#000000',
-    brandedBorder: '#ffffff',
     brandedContent: '#ffffff',
     brandedIcon: '#ffffff',
 

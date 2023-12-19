@@ -83,7 +83,6 @@ exports[`createAppleTheme test 1`] = `
     "brandStroke1": "#0078d4",
     "brandStroke2": "#c7e0f4",
     "brandedBackground": "#0078d4",
-    "brandedBorder": "#00000000",
     "brandedCheckedBackground": {
       "dynamic": {
         "dark": "#1890F1",
