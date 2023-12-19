@@ -57,6 +57,9 @@ export const defaultTabColorTokens: TokenSettings<TabTokens, Theme> = (t: Theme)
         color: t.colors.neutralForeground1Hover,
         iconColor: t.colors.compoundBrandForeground1Hover,
         indicatorColor: t.colors.compoundBrandStroke1Hover,
+        subtle: {
+          indicatorColor: t.colors.compoundBrandStroke1Hover,
+        },
       },
       disabled: {
         indicatorColor: t.colors.transparentBackground,
