@@ -60,12 +60,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/base-driver@npm:^9.4.3":
-  version: 9.4.3
-  resolution: "@appium/base-driver@npm:9.4.3"
+"@appium/base-driver@npm:^9.4.4":
+  version: 9.4.4
+  resolution: "@appium/base-driver@npm:9.4.4"
   dependencies:
-    "@appium/support": ^4.1.10
-    "@appium/types": ^0.14.3
+    "@appium/support": ^4.1.11
+    "@appium/types": ^0.15.0
     "@colors/colors": 1.6.0
     "@types/async-lock": 1.4.2
     "@types/bluebird": 3.5.42
@@ -82,46 +82,44 @@ __metadata:
     express: 4.18.2
     http-status-codes: 2.3.0
     lodash: 4.17.21
-    lru-cache: 10.0.1
+    lru-cache: 10.1.0
     method-override: 3.0.0
     morgan: 1.10.0
     path-to-regexp: 6.2.1
     serve-favicon: 2.5.0
     source-map-support: 0.5.21
     spdy: 4.0.2
-    type-fest: 3.13.1
+    type-fest: 4.8.3
     validate.js: 0.13.1
   dependenciesMeta:
     spdy:
       optional: true
-  checksum: a6cec7e1b38f7b81c2cd2be76899a712ef69407b419509fc238da05eb09f3c5992225d0ecca1e4b3e4b25703c7d8fcb26f7d8475a96adff76fba22265de884d4
+  checksum: c07ce3650f009c8c7d402b84d7140445dd92769254eaf5940e4c980761469ec692928c85b970fa88453fc10a9480d707a62c61902a995df16ed92ffc1f1ea4ad
   languageName: node
   linkType: hard
 
-"@appium/base-plugin@npm:^2.2.24":
-  version: 2.2.24
-  resolution: "@appium/base-plugin@npm:2.2.24"
+"@appium/base-plugin@npm:^2.2.25":
+  version: 2.2.25
+  resolution: "@appium/base-plugin@npm:2.2.25"
   dependencies:
-    "@appium/base-driver": ^9.4.3
-    "@appium/support": ^4.1.10
-  checksum: 64e334e14ce394c7af73bc93cb26c486e422b48a2802cea07e2ee27dee6a077df4d9f713418aa914a932af242474c3592931bc14cd5b7e7071771af2f5875080
+    "@appium/base-driver": ^9.4.4
+    "@appium/support": ^4.1.11
+  checksum: ff1c6dc43c4290109e4ee391d5698c64e06ad6363617abaa032c9eb9997376c5ad04f94b8a21546d88e7d09e26b66a532b31a6170fd27040a865667a743fda57
   languageName: node
   linkType: hard
 
-"@appium/docutils@npm:^0.4.13":
-  version: 0.4.13
-  resolution: "@appium/docutils@npm:0.4.13"
+"@appium/docutils@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@appium/docutils@npm:1.0.1"
   dependencies:
-    "@appium/support": ^4.1.10
+    "@appium/support": ^4.1.11
     "@appium/tsconfig": ^0.x
-    "@appium/typedoc-plugin-appium": ^0.x
     "@sliphua/lilconfig-ts-loader": 3.2.2
-    "@types/which": 3.0.1
+    "@types/which": 3.0.3
     chalk: 4.1.2
     consola: 2.15.3
     diff: 5.1.0
     figures: 3.2.0
-    find-up: 5.0.0
     json5: 2.2.3
     lilconfig: 2.1.0
     lodash: 4.17.21
@@ -130,18 +128,15 @@ __metadata:
     read-pkg: 5.2.0
     semver: 7.5.4
     source-map-support: 0.5.21
-    teen_process: 2.0.101
-    type-fest: 3.13.1
-    typedoc: 0.23.28
-    typedoc-plugin-markdown: 3.14.0
-    typedoc-plugin-resolve-crossmodule-references: 0.3.3
-    typescript: 5.0.4
+    teen_process: 2.1.1
+    type-fest: 4.8.3
+    typescript: 5.2.2
     yaml: 2.3.4
     yargs: 17.7.2
     yargs-parser: 21.1.1
   bin:
     appium-docs: bin/appium-docs.js
-  checksum: 59ef0a148d99c8b34bb91925f5a3a385e2a36ff73e6cd644ad69e811df06062a3dbb47e0bc43734dcac85dfcc582a2b52e1852bf8a1ec2d565c8df98d9c7c921
+  checksum: 6779bab1f52e9b82f68d6a26ddaf12c6485aafa0bad1215baec9a81064c7b8e39643e8d3deec27f5890fd7cf70d57ac69e067cf6f2f99dcdf3e80a539f8c6ac5
   languageName: node
   linkType: hard
 
@@ -153,6 +148,17 @@ __metadata:
     json-schema: 0.4.0
     source-map-support: 0.5.21
   checksum: accdfd5b8a176d330489fbf5c41888aba47ca55760a5ef0e0e3d1ca0835099543e29be4fa5ac1b92a62aee408ad784e3984c75652012408d23c857f14e81a552
+  languageName: node
+  linkType: hard
+
+"@appium/schema@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@appium/schema@npm:0.5.0"
+  dependencies:
+    "@types/json-schema": 7.0.15
+    json-schema: 0.4.0
+    source-map-support: 0.5.21
+  checksum: c343b56168556ff8a8ef1648aef4978d8030c9c6b05154b0ccd840bb1e77d8377470df980e53f100deff26825aafcd13d8bd1b873c5520c3cdddb66e8902bb97
   languageName: node
   linkType: hard
 
@@ -231,12 +237,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/support@npm:^4.1.10":
-  version: 4.1.10
-  resolution: "@appium/support@npm:4.1.10"
+"@appium/support@npm:^4.1.11":
+  version: 4.1.11
+  resolution: "@appium/support@npm:4.1.11"
   dependencies:
     "@appium/tsconfig": ^0.x
-    "@appium/types": ^0.14.3
+    "@appium/types": ^0.15.0
     "@colors/colors": 1.6.0
     "@types/archiver": 6.0.2
     "@types/base64-stream": 1.0.5
@@ -246,14 +252,14 @@ __metadata:
     "@types/lockfile": 1.0.4
     "@types/mv": 2.1.4
     "@types/ncp": 2.0.8
-    "@types/npmlog": 4.1.6
+    "@types/npmlog": 7.0.0
     "@types/pluralize": 0.0.33
     "@types/semver": 7.5.6
     "@types/shell-quote": 1.7.5
     "@types/supports-color": 8.1.3
     "@types/teen_process": 2.0.4
     "@types/uuid": 9.0.7
-    "@types/which": 3.0.1
+    "@types/which": 3.0.3
     archiver: 6.0.1
     axios: 1.6.2
     base64-stream: 1.0.0
@@ -284,15 +290,15 @@ __metadata:
     shell-quote: 1.8.1
     source-map-support: 0.5.21
     supports-color: 8.1.1
-    teen_process: 2.0.101
-    type-fest: 3.13.1
+    teen_process: 2.1.1
+    type-fest: 4.8.3
     uuid: 9.0.1
     which: 4.0.0
     yauzl: 2.10.0
   dependenciesMeta:
     sharp:
       optional: true
-  checksum: 8cd8b53c0385b3dcf9653e1341d502f801744d012bd8aaae58220825196ac3b8b5b9efd076f43f390391c2610832ce6cdead286b2ec528c98207581c09fb303b
+  checksum: 4ec30e69c76f7a376eaaa929a67ddebec1637915f3f72663c8e3a53673e296226e2bb3b0399dfcf9bbe90f7dfd2bd8d1d0f3bcee44bcc957d4fe7906242cce5d
   languageName: node
   linkType: hard
 
@@ -302,24 +308,6 @@ __metadata:
   dependencies:
     "@tsconfig/node14": 14.1.0
   checksum: f8261a02e4c8202e88f517ebdb9223d4a118ff4bf5244852487ef5d9608132f123c7488579834f424aa95ada36d07636b357dcbc5160c657e12daff5cd023aea
-  languageName: node
-  linkType: hard
-
-"@appium/typedoc-plugin-appium@npm:^0.x":
-  version: 0.6.6
-  resolution: "@appium/typedoc-plugin-appium@npm:0.6.6"
-  dependencies:
-    handlebars: 4.7.8
-    lodash: 4.17.21
-    pluralize: 8.0.0
-    type-fest: 3.13.1
-  peerDependencies:
-    appium: ^2.0.0-beta.48
-    typedoc: ~0.23.14
-    typedoc-plugin-markdown: 3.14.0
-    typedoc-plugin-resolve-crossmodule-references: ~0.3.3
-    typescript: ^4.7.0 || ^5.0.0
-  checksum: d0fa2d0c63947a5ed4e29d28085c183eaf641a0a8d0c8e41b3fe8c54066893fcf861e9c513cb90ae91bccfd12ea81d3aec5feb03a468317dc616589080062714
   languageName: node
   linkType: hard
 
@@ -337,17 +325,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/types@npm:^0.14.3":
-  version: 0.14.3
-  resolution: "@appium/types@npm:0.14.3"
+"@appium/types@npm:^0.15.0":
+  version: 0.15.0
+  resolution: "@appium/types@npm:0.15.0"
   dependencies:
-    "@appium/schema": ^0.4.2
+    "@appium/schema": ^0.5.0
     "@appium/tsconfig": ^0.x
     "@types/express": 4.17.21
-    "@types/npmlog": 4.1.6
+    "@types/npmlog": 7.0.0
     "@types/ws": 8.5.10
-    type-fest: 3.13.1
-  checksum: 9b72f5232bb030c9d70fdb36857536c11f9ef566f9a22e34bd06be38dd3bb7de05b0b8af3a7e80e6c9873b0ef99dc2a4584a526a2c6ab084033125b3d140ac38
+    type-fest: 4.8.3
+  checksum: 9a19400e36c618cbf360cf07af820f2928b0d32a3e55c00fe0b0eca66af94ae319337b116c278e03595c4b501afa3823501af097cf7d3b10e5eccf89e40c127f
   languageName: node
   linkType: hard
 
@@ -6068,15 +6056,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sidvind/better-ajv-errors@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@sidvind/better-ajv-errors@npm:2.1.0"
+"@sidvind/better-ajv-errors@npm:2.1.3":
+  version: 2.1.3
+  resolution: "@sidvind/better-ajv-errors@npm:2.1.3"
   dependencies:
     "@babel/code-frame": ^7.16.0
     chalk: ^4.1.0
   peerDependencies:
     ajv: 4.11.8 - 8
-  checksum: bced6252ffa9376990a720889c1ca9eb3afa1c3b85f5a881b2a72f857ebd78065e952f05f857ca07dfe792da66251dfd46ddf4c32ee0bff82c1ee573dd3d313c
+  checksum: 949cb805a130a61c00895231aa33c1c9e51b72ae21bd59fe088fc9671b0e921b99183d816d34a02fe5d07647477c570a92d7d327c5e99670605e92b0d2ef163b
   languageName: node
   linkType: hard
 
@@ -6807,6 +6795,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/npmlog@npm:7.0.0":
+  version: 7.0.0
+  resolution: "@types/npmlog@npm:7.0.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 0fbddf3b9647fcdbd47fa5851ba55d05d9a25c5a6ca0029a2a25d3a69bbe966c5dd1dfe7e4f051af6294b59d457e931e524338a20e9cfeea90fd994f5779537a
+  languageName: node
+  linkType: hard
+
 "@types/object-inspect@npm:^1.8.0":
   version: 1.8.1
   resolution: "@types/object-inspect@npm:1.8.1"
@@ -7073,6 +7070,13 @@ __metadata:
   version: 3.0.1
   resolution: "@types/which@npm:3.0.1"
   checksum: 77f040178a3332bad08e201195abc96274a3133d90174928b04f52d4edd55a34c1d2022d55998249994f499ef345ad0e5913767b6be8a967bd958e3a81bb1449
+  languageName: node
+  linkType: hard
+
+"@types/which@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@types/which@npm:3.0.3"
+  checksum: eee298875ff62f7d56a2267cd70789a7032647c599d6abc684864281923763c082626b9742d4cfa7ea3e0790ac5d05aff48edd6ecba0f61eb69a6d57cc83c6f5
   languageName: node
   linkType: hard
 
@@ -8016,13 +8020,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-sequence-parser@npm:^1.1.0":
-  version: 1.1.1
-  resolution: "ansi-sequence-parser@npm:1.1.1"
-  checksum: ead5b15c596e8e85ca02951a844366c6776769dcc9fd1bd3a0db11bb21364554822c6a439877fb599e7e1ffa0b5f039f1e5501423950457f3dcb2f480c30b188
-  languageName: node
-  linkType: hard
-
 "ansi-styles@npm:^2.2.1":
   version: 2.2.1
   resolution: "ansi-styles@npm:2.2.1"
@@ -8411,16 +8408,16 @@ __metadata:
   linkType: hard
 
 "appium@npm:^2.0.0":
-  version: 2.2.3
-  resolution: "appium@npm:2.2.3"
+  version: 2.3.0
+  resolution: "appium@npm:2.3.0"
   dependencies:
-    "@appium/base-driver": ^9.4.3
-    "@appium/base-plugin": ^2.2.24
-    "@appium/docutils": ^0.4.13
-    "@appium/schema": ^0.4.2
-    "@appium/support": ^4.1.10
-    "@appium/types": ^0.14.3
-    "@sidvind/better-ajv-errors": 2.1.0
+    "@appium/base-driver": ^9.4.4
+    "@appium/base-plugin": ^2.2.25
+    "@appium/docutils": ^1.0.1
+    "@appium/schema": ^0.5.0
+    "@appium/support": ^4.1.11
+    "@appium/types": ^0.15.0
+    "@sidvind/better-ajv-errors": 2.1.3
     "@types/argparse": 2.0.14
     "@types/bluebird": 3.5.42
     "@types/fancy-log": 2.0.2
@@ -8444,14 +8441,14 @@ __metadata:
     resolve-from: 5.0.0
     semver: 7.5.4
     source-map-support: 0.5.21
-    teen_process: 2.0.101
-    type-fest: 3.13.1
+    teen_process: 2.1.1
+    type-fest: 4.8.3
     winston: 3.11.0
     wrap-ansi: 7.0.0
     yaml: 2.3.4
   bin:
     appium: index.js
-  checksum: f439ab86fdf7035cceaf01696ee745aca8e27632d1da5780236d648e09cff3d2fad82f931889266967e0dd02c3197ed2bb1d986fd73a21db64cc3a5b2ecc716b
+  checksum: 376b846c5315e2777066c80fa1b0677eec5a9a8d31ee8b2ca4b4c77d833985afc0296c69960c450d6abf2120fcdd2e47fd04594f342766e3b80227f715b4d511
   languageName: node
   linkType: hard
 
@@ -13141,24 +13138,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"handlebars@npm:4.7.8, handlebars@npm:^4.7.7":
-  version: 4.7.8
-  resolution: "handlebars@npm:4.7.8"
-  dependencies:
-    minimist: ^1.2.5
-    neo-async: ^2.6.2
-    source-map: ^0.6.1
-    uglify-js: ^3.1.4
-    wordwrap: ^1.0.0
-  dependenciesMeta:
-    uglify-js:
-      optional: true
-  bin:
-    handlebars: bin/handlebars
-  checksum: 00e68bb5c183fd7b8b63322e6234b5ac8fbb960d712cb3f25587d559c2951d9642df83c04a1172c918c41bcfc81bfbd7a7718bbce93b893e0135fc99edea93ff
-  languageName: node
-  linkType: hard
-
 "has-ansi@npm:^2.0.0":
   version: 2.0.0
   resolution: "has-ansi@npm:2.0.0"
@@ -15177,13 +15156,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonc-parser@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "jsonc-parser@npm:3.2.0"
-  checksum: 946dd9a5f326b745aa326d48a7257e3f4a4b62c5e98ec8e49fa2bdd8d96cef7e6febf1399f5c7016114fd1f68a1c62c6138826d5d90bc650448e3cf0951c53c7
-  languageName: node
-  linkType: hard
-
 "jsonfile@npm:^4.0.0":
   version: 4.0.0
   resolution: "jsonfile@npm:4.0.0"
@@ -15734,6 +15706,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lru-cache@npm:10.1.0":
+  version: 10.1.0
+  resolution: "lru-cache@npm:10.1.0"
+  checksum: 58056d33e2500fbedce92f8c542e7c11b50d7d086578f14b7074d8c241422004af0718e08a6eaae8705cee09c77e39a61c1c79e9370ba689b7010c152e6a76ab
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^4.0.1":
   version: 4.1.5
   resolution: "lru-cache@npm:4.1.5"
@@ -15766,13 +15745,6 @@ __metadata:
   version: 7.18.3
   resolution: "lru-cache@npm:7.18.3"
   checksum: e550d772384709deea3f141af34b6d4fa392e2e418c1498c078de0ee63670f1f46f5eee746e8ef7e69e1c895af0d4224e62ee33e66a543a14763b0f2e74c1356
-  languageName: node
-  linkType: hard
-
-"lunr@npm:^2.3.9":
-  version: 2.3.9
-  resolution: "lunr@npm:2.3.9"
-  checksum: 176719e24fcce7d3cf1baccce9dd5633cd8bdc1f41ebe6a180112e5ee99d80373fe2454f5d4624d437e5a8319698ca6837b9950566e15d2cae5f2a543a3db4b8
   languageName: node
   linkType: hard
 
@@ -15912,7 +15884,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^4.0.12, marked@npm:^4.1.0, marked@npm:^4.2.12":
+"marked@npm:^4.0.12, marked@npm:^4.1.0":
   version: 4.3.0
   resolution: "marked@npm:4.3.0"
   bin:
@@ -16445,7 +16417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^7.1.3, minimatch@npm:^7.4.6":
+"minimatch@npm:^7.4.6":
   version: 7.4.6
   resolution: "minimatch@npm:7.4.6"
   dependencies:
@@ -16472,7 +16444,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.1.1, minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.5, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
+"minimist@npm:^1.1.1, minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
   checksum: 75a6d645fb122dad29c06a7597bddea977258957ed88d7a6df59b5cd3fe4a527e253e9bbf2e783e4b73657f9098b96a5fe96ab8a113655d4109108577ecf85b0
@@ -16779,7 +16751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"neo-async@npm:^2.5.0, neo-async@npm:^2.6.2":
+"neo-async@npm:^2.5.0":
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
@@ -19452,7 +19424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shell-quote@npm:1.8.1, shell-quote@npm:^1.6.1, shell-quote@npm:^1.7.3":
+"shell-quote@npm:1.8.1, shell-quote@npm:^1.6.1, shell-quote@npm:^1.7.3, shell-quote@npm:^1.8.1":
   version: 1.8.1
   resolution: "shell-quote@npm:1.8.1"
   checksum: 5f01201f4ef504d4c6a9d0d283fa17075f6770bfbe4c5850b074974c68062f37929ca61700d95ad2ac8822e14e8c4b990ca0e6e9272e64befd74ce5e19f0736b
@@ -19469,18 +19441,6 @@ __metadata:
   bin:
     shjs: bin/shjs
   checksum: 7babc46f732a98f4c054ec1f048b55b9149b98aa2da32f6cf9844c434b43c6251efebd6eec120937bd0999e13811ebd45efe17410edb3ca938f82f9381302748
-  languageName: node
-  linkType: hard
-
-"shiki@npm:^0.14.1":
-  version: 0.14.3
-  resolution: "shiki@npm:0.14.3"
-  dependencies:
-    ansi-sequence-parser: ^1.1.0
-    jsonc-parser: ^3.2.0
-    vscode-oniguruma: ^1.7.0
-    vscode-textmate: ^8.0.0
-  checksum: a4dd98e3b2a5dd8be207448f111ffb9ad2ed6c530f215714d8b61cbf91ec3edbabb09109b8ec58a26678aacd24e8161d5a9bc0c1fa1b4f64b27ceb180cbd0c89
   languageName: node
   linkType: hard
 
@@ -20263,18 +20223,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"teen_process@npm:2.0.101":
-  version: 2.0.101
-  resolution: "teen_process@npm:2.0.101"
-  dependencies:
-    bluebird: 3.7.2
-    lodash: 4.17.21
-    shell-quote: 1.8.1
-    source-map-support: 0.5.21
-  checksum: 2582f8a40cbc0103bc40e68316bc2565c139c0346044c94c2c5d50e7a91b8ea5fcb9fa90a170d1165e495e34f778ae51c0963cc1ded30789557a8462c4fbdfdf
-  languageName: node
-  linkType: hard
-
 "teen_process@npm:2.0.84, teen_process@npm:^2.0.0, teen_process@npm:^2.0.1, teen_process@npm:^2.0.60":
   version: 2.0.84
   resolution: "teen_process@npm:2.0.84"
@@ -20284,6 +20232,18 @@ __metadata:
     shell-quote: 1.8.1
     source-map-support: 0.5.21
   checksum: 9bdac4243b1ccb4f764cd0c1b39bb22e94a293817594b89b6a6993e6c5f87a07d09f598205d42649e26b07e3e85003975012687a5f73bd0ef12f6c830c8c808d
+  languageName: node
+  linkType: hard
+
+"teen_process@npm:2.1.1":
+  version: 2.1.1
+  resolution: "teen_process@npm:2.1.1"
+  dependencies:
+    bluebird: ^3.7.2
+    lodash: ^4.17.21
+    shell-quote: ^1.8.1
+    source-map-support: ^0.x
+  checksum: f85d1dfbe21eafcaac0ce90ae95b7f13278c45d68b7e90f5b63ae9c7ce702bb1e55b7282218fafc493d5ff8a5ba0471db13a501c42e1a507ae8f9dba85e3fbb4
   languageName: node
   linkType: hard
 
@@ -20571,6 +20531,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"type-fest@npm:4.8.3":
+  version: 4.8.3
+  resolution: "type-fest@npm:4.8.3"
+  checksum: cd8c9a20a32b9d813f5f6d84bd81e52e22fb779a7ef0ae53974bae5baac427974bc8243269e9832b22ce2b6277d857b44769b3664f97dcac344e600bdd95f186
+  languageName: node
+  linkType: hard
+
 "type-fest@npm:^0.20.2":
   version: 0.20.2
   resolution: "type-fest@npm:0.20.2"
@@ -20677,42 +20644,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:3.14.0":
-  version: 3.14.0
-  resolution: "typedoc-plugin-markdown@npm:3.14.0"
-  dependencies:
-    handlebars: ^4.7.7
-  peerDependencies:
-    typedoc: ">=0.23.0"
-  checksum: 6205600052185b4b193ab8a253d9df5ccbc95002c948a07f9024bcd26f0f23fbcc089fda4d6b4c8f4172f4eaca2bf9c32129989f6baaace7261cf4a0e41c976b
-  languageName: node
-  linkType: hard
-
-"typedoc-plugin-resolve-crossmodule-references@npm:0.3.3":
-  version: 0.3.3
-  resolution: "typedoc-plugin-resolve-crossmodule-references@npm:0.3.3"
-  peerDependencies:
-    typedoc: ">=0.22 <=0.23"
-  checksum: a3194653a9586fdef8484fc70959409185681c47621424719181f040158672ac4b32ae8cef8f16ee8e3754a569a4471feea2e9683761305c4a151c379f4a3000
-  languageName: node
-  linkType: hard
-
-"typedoc@npm:0.23.28":
-  version: 0.23.28
-  resolution: "typedoc@npm:0.23.28"
-  dependencies:
-    lunr: ^2.3.9
-    marked: ^4.2.12
-    minimatch: ^7.1.3
-    shiki: ^0.14.1
-  peerDependencies:
-    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x
-  bin:
-    typedoc: bin/typedoc
-  checksum: 40eb4e207aac1b734e09400cf03f543642cc7b11000895198dd5a0d3166315759ccf4ac30a2915153597c5c186101c72bac2f1fc12b428184a9274d3a0e44c5e
-  languageName: node
-  linkType: hard
-
 "typescript@npm:4.9.4":
   version: 4.9.4
   resolution: "typescript@npm:4.9.4"
@@ -20723,7 +20654,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.0.4, typescript@npm:>=4.7.0":
+"typescript@npm:5.2.2":
+  version: 5.2.2
+  resolution: "typescript@npm:5.2.2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 7912821dac4d962d315c36800fe387cdc0a6298dba7ec171b350b4a6e988b51d7b8f051317786db1094bd7431d526b648aba7da8236607febb26cf5b871d2d3c
+  languageName: node
+  linkType: hard
+
+"typescript@npm:>=4.7.0":
   version: 5.0.4
   resolution: "typescript@npm:5.0.4"
   bin:
@@ -20763,15 +20704,6 @@ __metadata:
   bin:
     uglifyjs: bin/uglifyjs
   checksum: f2de133ba71f05aca442db2c31a2f2614201e5b540948f022f5b53cd39b6b1b43a7db7cc2aa9917383bbb26e8043947fce35867cd1edcf2444854cb7fae0fa99
-  languageName: node
-  linkType: hard
-
-"uglify-js@npm:^3.1.4":
-  version: 3.17.4
-  resolution: "uglify-js@npm:3.17.4"
-  bin:
-    uglifyjs: bin/uglifyjs
-  checksum: 7b3897df38b6fc7d7d9f4dcd658599d81aa2b1fb0d074829dd4e5290f7318dbca1f4af2f45acb833b95b1fe0ed4698662ab61b87e94328eb4c0a0d3435baf924
   languageName: node
   linkType: hard
 
@@ -21086,20 +21018,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vscode-oniguruma@npm:^1.7.0":
-  version: 1.7.0
-  resolution: "vscode-oniguruma@npm:1.7.0"
-  checksum: 53519d91d90593e6fb080260892e87d447e9b200c4964d766772b5053f5699066539d92100f77f1302c91e8fc5d9c772fbe40fe4c90f3d411a96d5a9b1e63f42
-  languageName: node
-  linkType: hard
-
-"vscode-textmate@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "vscode-textmate@npm:8.0.0"
-  checksum: 127780dfea89559d70b8326df6ec344cfd701312dd7f3f591a718693812b7852c30b6715e3cfc8b3200a4e2515b4c96f0843c0eacc0a3020969b5de262c2a4bb
-  languageName: node
-  linkType: hard
-
 "w3c-hr-time@npm:^1.0.2":
   version: 1.0.2
   resolution: "w3c-hr-time@npm:1.0.2"
@@ -21393,13 +21311,6 @@ __metadata:
     triple-beam: ^1.3.0
     winston-transport: ^4.5.0
   checksum: ca4454070f7a71b19f53c8c1765c59a013dab220edb49161b2e81917751d3e9edc3382430e4fb050feda04fb8463290ecab7cbc9240ec8d3d3b32a121849bbb0
-  languageName: node
-  linkType: hard
-
-"wordwrap@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "wordwrap@npm:1.0.0"
-  checksum: 2a44b2788165d0a3de71fd517d4880a8e20ea3a82c080ce46e294f0b68b69a2e49cff5f99c600e275c698a90d12c5ea32aff06c311f0db2eb3f1201f3e7b2a04
   languageName: node
   linkType: hard
 
