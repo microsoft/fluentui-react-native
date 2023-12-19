@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 19 Dec 2023 20:00:03 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Dec 2023 21:03:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.160.7
+
+Tue, 19 Dec 2023 21:03:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shimmer to v0.12.2
+- Bump @fluentui-react-native/tablist to v0.5.6
 
 ## 0.160.6
 
