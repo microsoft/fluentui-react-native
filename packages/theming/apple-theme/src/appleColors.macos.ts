@@ -418,19 +418,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     ghostDisabledIcon: macOSAliasColorTokens.brandForeground1Disabled,
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
-    brandedBorder: macOSAliasColorTokens.transparentStroke,
-    brandedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedHoveredBackground: macOSAliasColorTokens.brandBackgroundHover,
-    brandedHoveredBorder: 'transparent',
-    brandedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedHoveredIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedFocusedBackground: fluentUIApple.communicationBlue,
-    brandedFocusedBorder: 'transparent',
-    brandedFocusedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedFocusedIcon: macOSAliasColorTokens.neutralForegroundInverted,
 
     brandedPressedBackground: macOSAliasColorTokens.brandBackgroundPressed, //ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
     brandedPressedBorder: 'transparent',
