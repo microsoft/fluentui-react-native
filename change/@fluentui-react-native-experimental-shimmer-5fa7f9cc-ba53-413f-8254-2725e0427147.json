@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix shimmer test",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
