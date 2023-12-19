@@ -418,11 +418,7 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     ghostDisabledIcon: macOSAliasColorTokens.brandForeground1Disabled,
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
-    brandedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedIcon: macOSAliasColorTokens.neutralForegroundInverted,
 
-    brandedHoveredBackground: macOSAliasColorTokens.brandBackgroundHover,
-    brandedHoveredBorder: 'transparent',
     brandedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
     brandedHoveredIcon: macOSAliasColorTokens.neutralForegroundInverted,
 

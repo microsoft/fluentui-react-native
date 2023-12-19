@@ -156,8 +156,6 @@ export const applyBrand = (parent: Theme, currentBrand: string): PartialTheme =>
           defaultPressedBackground: ramp.App2,
           defaultPressedBorder: ramp.App5,
           brandedBackground: ramp.App6,
-          brandedHoveredBackground: ramp.App7,
-          brandedHoveredBorder: ramp.App6,
           brandedFocusedBackground: ramp.App7,
           brandedFocusedBorder: ramp.App7,
           brandedPressedBackground: ramp.App8,
