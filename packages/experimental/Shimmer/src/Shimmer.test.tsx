@@ -5,9 +5,6 @@ import * as renderer from 'react-test-renderer';
 import { Shimmer } from './Shimmer';
 import type { ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types';
 
-// mocks out setTimeout and other timer functions with mock functions, test will fail without this as we're using Animated API
-jest.useFakeTimers();
-
 function shimmerRects(): Array<ShimmerRectElement | ShimmerCircleElement> {
   return [
     {
@@ -43,6 +40,12 @@ function shimmerRects(): Array<ShimmerRectElement | ShimmerCircleElement> {
 const style = { width: 300, height: 100 };
 
 describe('Shimmer component tests', () => {
+  beforeAll(() => {
+    // mocks out setTimeout and other timer functions with mock functions, test will fail without this as we're using Animated API
+    jest.useFakeTimers();
+    jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+  });
+
   it('Shimmer default', async () => {
     const tree = renderer.create(<Shimmer elements={shimmerRects()} />).toJSON();
     expect(tree).toMatchSnapshot();
