@@ -73,7 +73,6 @@ export const mockTheme: Theme = {
     disabledBackground: neutralLighter,
     disabledText: neutralTertiary,
     disabledBodyText: neutralTertiary,
-    disabledBodySubtext: neutralTertiaryAlt,
 
     focusBorder: neutralSecondary,
     variantBorder: neutralLight,
@@ -81,7 +80,6 @@ export const mockTheme: Theme = {
     defaultStateBackground: neutralLighterAlt,
 
     errorText: redDark,
-    warningText: '#333333',
     errorBackground: 'rgba(245, 135, 145, .2)',
     blockingBackground: 'rgba(250, 65, 0, .2)',
     warningBackground: 'rgba(255, 200, 10, .2)',

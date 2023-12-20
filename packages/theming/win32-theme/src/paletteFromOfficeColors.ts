@@ -14,7 +14,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     disabledBackground: p.BkgCtlSubtleDisabled,
     disabledText: p.TextCtlSubtleDisabled,
     disabledBodyText: p.TextDisabled,
-    disabledBodySubtext: p.TextDisabled,
 
     focusBorder: p.StrokeKeyboard,
     variantBorder: p.AccentOutline,
@@ -22,7 +21,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     defaultStateBackground: p.Bkg,
 
     errorText: p.TextError,
-    warningText: p.Text,
     errorBackground: p.Bkg,
     blockingBackground: p.Bkg,
     warningBackground: p.Bkg,

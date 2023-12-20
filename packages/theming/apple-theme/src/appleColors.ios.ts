@@ -80,7 +80,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     disabledBackground: fluent2AliasColorTokens.neutralBackgroundDisabled,
     disabledText: fluent2AliasColorTokens.neutralForegroundDisabled1,
     disabledBodyText: fluent2AliasColorTokens.neutralForegroundDisabled1,
-    disabledBodySubtext: fluent2AliasColorTokens.neutralForegroundDisabled1,
 
     focusBorder: 'transparent',
     variantBorder: fluent2AliasColorTokens.neutralStroke2,
@@ -88,7 +87,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     defaultStateBackground: fluent2AliasColorTokens.neutralBackground1,
 
     errorText: fluentApple.dangerPrimary,
-    warningText: fluentApple.warningPrimary,
     errorBackground: fluentApple.dangerTint10,
     blockingBackground: fluentApple.dangerTint10,
     warningBackground: fluentApple.warningPrimary,

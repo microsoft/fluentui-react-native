@@ -225,11 +225,6 @@ exports[`createAppleTheme test 1`] = `
       ],
     },
     "disabledBackground": "#E1E1E1",
-    "disabledBodySubtext": {
-      "semantic": [
-        "quaternaryLabelColor",
-      ],
-    },
     "disabledBodyText": {
       "semantic": [
         "tertiaryLabelColor",
@@ -679,14 +674,6 @@ exports[`createAppleTheme test 1`] = `
         "highContrastDark": undefined,
         "highContrastLight": undefined,
         "light": "#FFD94E",
-      },
-    },
-    "warningText": {
-      "dynamic": {
-        "dark": "#FFC328",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD335",
       },
     },
   },

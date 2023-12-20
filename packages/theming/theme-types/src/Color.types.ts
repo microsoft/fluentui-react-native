@@ -85,7 +85,7 @@ export interface FabricWebPalette {
   neutralTertiary: ColorValue;
 
   // ROLE: text, background, border
-  // disabledBodySubtext, buttonBackgroundChecked, menuDivider
+  // buttonBackgroundChecked, menuDivider
   neutralTertiaryAlt: ColorValue;
 
   // ROLE: text
@@ -150,15 +150,11 @@ export interface PaletteTextColors {
   disabledText: ColorValue;
   /** The default color for disabled text on the default background (bodyBackground). */
   disabledBodyText: ColorValue;
-  /** Disabled de-emphasized text, for use on the default background (bodyBackground). */
-  disabledBodySubtext: ColorValue;
 
   //// Invariants - slots that rarely change color theme-to-theme because the color has meaning
 
   /** The default color of error text, used on bodyBackground. */
   errorText: ColorValue;
-  /** The color of text on errorBackground, warningBackground, blockingBackground, or successBackground. */
-  warningText: ColorValue;
   /** The color of input text. */
   inputText: ColorValue;
   /** The color of input text on hover. */

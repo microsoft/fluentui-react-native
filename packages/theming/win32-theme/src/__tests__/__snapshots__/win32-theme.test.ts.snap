@@ -2550,7 +2550,6 @@ exports[`createOfficeTheme test 1`] = `
     "defaultPressedSecondaryContent": "#a19f9d",
     "defaultStateBackground": "antiquewhite",
     "disabledBackground": "#F3F3F3",
-    "disabledBodySubtext": "#B1B1B1",
     "disabledBodyText": "#B1B1B1",
     "disabledText": "#B1B1B1",
     "errorBackground": "antiquewhite",
@@ -2748,7 +2747,6 @@ exports[`createOfficeTheme test 1`] = `
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
     "warningHighlight": "#A50000",
-    "warningText": "#262626",
   },
   "host": {
     "appearance": "light",

@@ -19,7 +19,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     disabledBackground: p.surfacesTertiary,
     disabledText: p.textDisabledHighContrast,
     disabledBodyText: p.textDisabled,
-    disabledBodySubtext: p.gray300,
 
     focusBorder: 'transparent',
     variantBorder: 'transparent',
@@ -27,7 +26,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     defaultStateBackground: 'transparent',
 
     errorText: p.dangerPrimary,
-    warningText: p.warningPrimary,
     errorBackground: p.dangerTint10,
     blockingBackground: p.dangerTint10,
     warningBackground: p.warningPrimary,
