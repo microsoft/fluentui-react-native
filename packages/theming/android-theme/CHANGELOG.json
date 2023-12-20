@@ -2,6 +2,45 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Wed, 20 Dec 2023 00:05:24 GMT",
+      "version": "0.20.0",
+      "tag": "@fluentui-react-native/android-theme_v0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/android-theme",
+            "commit": "4da5194b2ce7e8729785d415bb551bef3c99d248",
+            "comment": "Delete unused colors"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/android-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/android-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/android-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.34.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/android-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.25.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:07 GMT",
       "version": "0.19.0",
       "tag": "@fluentui-react-native/android-theme_v0.19.0",

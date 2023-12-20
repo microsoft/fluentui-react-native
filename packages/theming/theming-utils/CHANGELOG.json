@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Wed, 20 Dec 2023 00:05:24 GMT",
+      "version": "0.25.1",
+      "tag": "@fluentui-react-native/theming-utils_v0.25.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.34.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/tokens to v0.22.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:11 GMT",
       "version": "0.25.0",
       "tag": "@fluentui-react-native/theming-utils_v0.25.0",
