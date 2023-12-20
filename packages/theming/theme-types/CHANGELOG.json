@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Wed, 20 Dec 2023 00:05:24 GMT",
+      "version": "0.34.0",
+      "tag": "@fluentui-react-native/theme-types_v0.34.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "4da5194b2ce7e8729785d415bb551bef3c99d248",
+            "comment": "Delete unused colors"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:11 GMT",
       "version": "0.33.0",
       "tag": "@fluentui-react-native/theme-types_v0.33.0",
