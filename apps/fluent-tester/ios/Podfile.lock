@@ -10,9 +10,9 @@ PODS:
     - React-jsi (= 0.72.7)
     - ReactCommon/turbomodule/core (= 0.72.7)
   - fmt (6.2.1)
-  - FRNAppearanceAdditions (0.6.0):
+  - FRNAppearanceAdditions (0.6.1):
     - React
-  - FRNAvatar (0.20.0):
+  - FRNAvatar (0.20.1):
     - MicrosoftFluentUI (= 0.13.1)
     - React
   - FRNDatePicker (0.10.0):
@@ -741,8 +741,8 @@ SPEC CHECKSUMS:
   FBLazyVector: 5fbbff1d7734827299274638deb8ba3024f6c597
   FBReactNativeSpec: d4cde71c7bf6eee11a6900e0220d8ea5dd83f435
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAppearanceAdditions: 39073d483114c283b4326ae1614610c226744a6d
-  FRNAvatar: a203c1ef33d83bb5c86d430e2835aacd26c66755
+  FRNAppearanceAdditions: 166f1f563e540f888182123499ea3e346aa648d1
+  FRNAvatar: 74d861d8bea10dcf89223b1c52f6cdff829234ee
   FRNDatePicker: 597ed9cf5ea22901abc54665716c37c9d091dcf6
   FRNFontMetrics: 6a686698781efbb258c7ded507928a6977e47e93
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
@@ -789,6 +789,6 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 4c3aa327e4a6a23eeacd71f61c81df1bcdf677d5
 
-PODFILE CHECKSUM: 329f26984f16d32b40ace26888d7173456b586ee
+PODFILE CHECKSUM: 9b861e9de522d75158bb7207da0ed7dc9b304c8e
 
 COCOAPODS: 1.14.3
