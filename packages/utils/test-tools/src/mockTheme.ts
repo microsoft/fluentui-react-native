@@ -73,7 +73,6 @@ export const mockTheme: Theme = {
     disabledBackground: neutralLighter,
     disabledText: neutralTertiary,
     disabledBodyText: neutralTertiary,
-    disabledSubtext: neutralQuaternary,
     disabledBodySubtext: neutralTertiaryAlt,
 
     focusBorder: neutralSecondary,
@@ -150,7 +149,6 @@ export const mockTheme: Theme = {
     listHeaderBackgroundPressed: neutralLight,
 
     actionLink: neutralPrimary,
-    actionLinkHovered: neutralDark,
     link: themePrimary,
     linkHovered: themeDarker,
     linkPressed: themeDark,

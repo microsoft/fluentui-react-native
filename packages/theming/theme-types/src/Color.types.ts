@@ -62,7 +62,7 @@ export interface FabricWebPalette {
   blackTranslucent40: ColorValue;
 
   // ROLE: text
-  // inputTextHovered, buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered, actionLinkHovered
+  // inputTextHovered, buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered
   neutralDark: ColorValue;
 
   // ROLE: text, border
@@ -89,7 +89,7 @@ export interface FabricWebPalette {
   neutralTertiaryAlt: ColorValue;
 
   // ROLE: text
-  // disabledSubtext, primaryButtonTextDisabled
+  // primaryButtonTextDisabled
   neutralQuaternary: ColorValue;
 
   // ROLE: background
@@ -139,8 +139,6 @@ export interface PaletteTextColors {
   subText: ColorValue;
   /** Neutral colored links and links for action buttons. */
   actionLink: ColorValue;
-  /** Hover state for neutral colored links and links for action buttons. */
-  actionLinkHovered: ColorValue;
 
   /** The color of a link. */
   link: ColorValue;
@@ -152,8 +150,6 @@ export interface PaletteTextColors {
   disabledText: ColorValue;
   /** The default color for disabled text on the default background (bodyBackground). */
   disabledBodyText: ColorValue;
-  /** Disabled de-emphasized text, for use on disabledBackground. */
-  disabledSubtext: ColorValue;
   /** Disabled de-emphasized text, for use on the default background (bodyBackground). */
   disabledBodySubtext: ColorValue;
 
@@ -388,6 +384,30 @@ export interface ControlColorTokens {
 
   /* Deprecated */
   brandedBackground: ColorValue;
+  /* Deprecated */
+  brandedBorder: ColorValue;
+  /* Deprecated */
+  brandedContent: ColorValue;
+  /* Deprecated */
+  brandedIcon: ColorValue;
+
+  /* Deprecated */
+  brandedHoveredBackground: ColorValue;
+  /* Deprecated */
+  brandedHoveredBorder: ColorValue;
+  /* Deprecated */
+  brandedHoveredContent: ColorValue;
+  /* Deprecated */
+  brandedHoveredIcon: ColorValue;
+
+  /* Deprecated */
+  brandedFocusedBackground: ColorValue;
+  /* Deprecated */
+  brandedFocusedBorder: ColorValue;
+  /* Deprecated */
+  brandedFocusedContent: ColorValue;
+  /* Deprecated */
+  brandedFocusedIcon: ColorValue;
 
   /* Deprecated */
   brandedPressedBackground: ColorValue;

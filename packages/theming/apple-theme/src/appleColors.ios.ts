@@ -80,7 +80,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     disabledBackground: fluent2AliasColorTokens.neutralBackgroundDisabled,
     disabledText: fluent2AliasColorTokens.neutralForegroundDisabled1,
     disabledBodyText: fluent2AliasColorTokens.neutralForegroundDisabled1,
-    disabledSubtext: fluent2AliasColorTokens.neutralForegroundDisabled1,
     disabledBodySubtext: fluent2AliasColorTokens.neutralForegroundDisabled1,
 
     focusBorder: 'transparent',
@@ -159,7 +158,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     listHeaderBackgroundPressed: fluent2AliasColorTokens.neutralForeground1,
 
     actionLink: fluentApple.communicationBlue,
-    actionLinkHovered: fluentApple.communicationBlue,
     link: fluentApple.communicationBlue,
     linkHovered: fluentApple.communicationBlue,
     linkPressed: fluentApple.communicationBlueTint10,

@@ -24,7 +24,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     disabledBackground: isInverted ? p.neutralQuaternaryAlt : p.neutralLighter,
     disabledText: p.neutralTertiary,
     disabledBodyText: p.neutralTertiary,
-    disabledSubtext: p.neutralQuaternary,
     disabledBodySubtext: p.neutralTertiaryAlt,
 
     focusBorder: p.neutralSecondary,
@@ -101,7 +100,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     listHeaderBackgroundPressed: p.neutralLight,
 
     actionLink: p.neutralPrimary,
-    actionLinkHovered: p.neutralDark,
     link: p.themePrimary,
     linkHovered: p.themeDarker,
     linkPressed: p.themeDark,
@@ -323,7 +321,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     disabledBackground: '#000000',
     disabledText: '#3ff23f',
     disabledBodyText: '#3ff23f',
-    disabledSubtext: '#3ff23f',
     disabledBodySubtext: '#3ff23f',
 
     focusBorder: '#ffffff',
@@ -400,7 +397,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     listHeaderBackgroundPressed: '#1aebff',
 
     actionLink: '#ffff00',
-    actionLinkHovered: '#ffffff',
     link: '#ffff00',
     linkHovered: '#ffffff',
     linkPressed: '#ffffff',

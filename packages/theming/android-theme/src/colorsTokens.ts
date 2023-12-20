@@ -19,7 +19,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     disabledBackground: p.surfacesTertiary,
     disabledText: p.textDisabledHighContrast,
     disabledBodyText: p.textDisabled,
-    disabledSubtext: p.gray200,
     disabledBodySubtext: p.gray300,
 
     focusBorder: 'transparent',
@@ -96,7 +95,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     listHeaderBackgroundPressed: 'transparent',
 
     actionLink: p.textPrimary,
-    actionLinkHovered: p.textPrimary,
     link: p.textHyperLink,
     linkHovered: p.textHyperLink,
     linkPressed: p.textHyperLink,

@@ -281,7 +281,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     disabledBackground: fluentUIApple.gray100,
     disabledText: applePlatform.tertiaryLabelColor,
     disabledBodyText: applePlatform.tertiaryLabelColor,
-    disabledSubtext: applePlatform.quaternaryLabelColor,
     disabledBodySubtext: applePlatform.quaternaryLabelColor,
 
     focusBorder: 'transparent',
@@ -359,7 +358,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     listHeaderBackgroundPressed: applePlatform.headerTextColor,
 
     actionLink: applePlatform.linkColor,
-    actionLinkHovered: applePlatform.linkColor,
     link: applePlatform.linkColor,
     linkHovered: applePlatform.linkColor,
     linkPressed: applePlatform.selectedControlColor,

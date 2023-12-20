@@ -14,7 +14,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     disabledBackground: p.BkgCtlSubtleDisabled,
     disabledText: p.TextCtlSubtleDisabled,
     disabledBodyText: p.TextDisabled,
-    disabledSubtext: p.TextCtlSubtleDisabled,
     disabledBodySubtext: p.TextDisabled,
 
     focusBorder: p.StrokeKeyboard,
@@ -91,7 +90,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     listHeaderBackgroundPressed: p.BkgPressed,
 
     actionLink: p.TextActive,
-    actionLinkHovered: p.TextActiveHover,
     link: p.TextHyperlink,
     linkHovered: p.TextHyperlinkHover,
     linkPressed: p.TextHyperlinkPressed,

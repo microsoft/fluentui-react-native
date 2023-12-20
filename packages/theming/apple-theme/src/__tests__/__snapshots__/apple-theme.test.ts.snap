@@ -17,11 +17,6 @@ exports[`createAppleTheme test 1`] = `
         "linkColor",
       ],
     },
-    "actionLinkHovered": {
-      "semantic": [
-        "linkColor",
-      ],
-    },
     "background": {
       "semantic": [
         "windowBackgroundColor",
@@ -238,11 +233,6 @@ exports[`createAppleTheme test 1`] = `
     "disabledBodyText": {
       "semantic": [
         "tertiaryLabelColor",
-      ],
-    },
-    "disabledSubtext": {
-      "semantic": [
-        "quaternaryLabelColor",
       ],
     },
     "disabledText": {
