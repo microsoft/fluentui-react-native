@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/divider",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "A cross-platform Divider component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,9 +26,9 @@
     "directory": "packages/components/Divider"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.13.0",
-    "@fluentui-react-native/icon": "0.20.2",
-    "@fluentui-react-native/text": ">=0.22.1 <1.0.0",
+    "@fluentui-react-native/framework": "0.13.1",
+    "@fluentui-react-native/icon": "0.20.3",
+    "@fluentui-react-native/text": ">=0.22.2 <1.0.0",
     "@fluentui-react-native/theme-tokens": ">=0.26.1 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.22.1 <1.0.0"
   },

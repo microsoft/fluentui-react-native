@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tooltip
 
-This log was last generated on Wed, 20 Dec 2023 00:05:24 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Dec 2023 20:20:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.4
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.25.2
+- Bump @fluentui-react-native/framework to v0.13.1
+- Bump @fluentui-react-native/button to v0.36.5
 
 ## 0.2.3
 

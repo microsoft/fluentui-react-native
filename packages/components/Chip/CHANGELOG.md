@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/chip
 
-This log was last generated on Wed, 20 Dec 2023 00:05:24 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Dec 2023 20:20:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.3
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.1
+- Bump @fluentui-react-native/icon to v0.20.3
+- Bump @fluentui-react-native/interactive-hooks to v0.25.2
+- Bump @fluentui-react-native/text to v0.22.2
 
 ## 0.3.2
 
