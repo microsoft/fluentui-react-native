@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 19 Dec 2023 20:00:03 GMT",
+      "version": "0.36.3",
+      "tag": "@fluentui-react-native/button_v0.36.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "835f1523c4d1c12b2784e1b1e744cbad130b8174",
+            "comment": "Text in circular compound button no longer cuts into button padding"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Dec 2023 22:21:57 GMT",
       "version": "0.36.2",
       "tag": "@fluentui-react-native/button_v0.36.2",

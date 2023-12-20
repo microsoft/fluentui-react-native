@@ -52,8 +52,6 @@ export type {
   AliasColorTokens,
   AppearanceOptions,
   Color,
-  ControlColorTokens,
-  FabricWebPalette,
   FontFamilies,
   FontFamily,
   FontFamilyValue,

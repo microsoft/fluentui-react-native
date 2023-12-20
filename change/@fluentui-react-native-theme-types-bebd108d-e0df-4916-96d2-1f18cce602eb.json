@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Delete unused colors",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

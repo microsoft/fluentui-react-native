@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Thu, 14 Dec 2023 00:40:41 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Dec 2023 21:03:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.6
+
+Tue, 19 Dec 2023 21:03:38 GMT
+
+### Patches
+
+- Fix color token for selected, hovered, subtle tab (winlarry@microsoft.com)
 
 ## 0.5.5
 
