@@ -78,7 +78,6 @@ export const mockTheme: Theme = {
 
     focusBorder: neutralSecondary,
     variantBorder: neutralLight,
-    variantBorderHovered: neutralTertiary,
     defaultStateBackground: neutralLighterAlt,
 
     errorText: redDark,
@@ -111,7 +110,6 @@ export const mockTheme: Theme = {
     buttonText: neutralPrimary,
     buttonTextHovered: neutralDark,
     buttonTextChecked: neutralDark,
-    buttonTextCheckedHovered: black,
     buttonTextPressed: neutralDark,
     buttonTextDisabled: neutralTertiary,
     buttonBorderDisabled: neutralLighter,
@@ -129,7 +127,6 @@ export const mockTheme: Theme = {
     primaryButtonTextDisabled: neutralQuaternary,
 
     accentButtonBackground: accent,
-    accentButtonText: white,
 
     menuBackground: white,
     menuDivider: neutralTertiaryAlt,
@@ -141,7 +138,6 @@ export const mockTheme: Theme = {
     menuItemTextHovered: neutralDark,
 
     listBackground: white,
-    listText: neutralPrimary,
     listItemBackgroundHovered: neutralLighter,
     listItemBackgroundChecked: neutralLight,
     listItemBackgroundCheckedHovered: neutralQuaternaryAlt,

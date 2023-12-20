@@ -11,7 +11,6 @@ exports[`createAppleTheme test 1`] = `
         "light": "#0078D4",
       },
     },
-    "accentButtonText": "#ffffff",
     "actionLink": {
       "semantic": [
         "linkColor",
@@ -139,7 +138,6 @@ exports[`createAppleTheme test 1`] = `
     "buttonBorderFocused": "#00000000",
     "buttonText": "#616161",
     "buttonTextChecked": "#616161",
-    "buttonTextCheckedHovered": "#616161",
     "buttonTextDisabled": {
       "colorWithSystemEffect": {
         "baseColor": "#616161",
@@ -467,11 +465,6 @@ exports[`createAppleTheme test 1`] = `
     "listItemBackgroundChecked": "transparent",
     "listItemBackgroundCheckedHovered": "transparent",
     "listItemBackgroundHovered": "transparent",
-    "listText": {
-      "semantic": [
-        "labelColor",
-      ],
-    },
     "menuBackground": "transparent",
     "menuDivider": {
       "semantic": [
@@ -656,11 +649,6 @@ exports[`createAppleTheme test 1`] = `
     "transparentStrokeDisabled": "#00000000",
     "transparentStrokeInteractive": "#00000000",
     "variantBorder": {
-      "semantic": [
-        "separatorColor",
-      ],
-    },
-    "variantBorderHovered": {
       "semantic": [
         "separatorColor",
       ],

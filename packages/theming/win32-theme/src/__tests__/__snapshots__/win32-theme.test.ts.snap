@@ -2442,7 +2442,6 @@ exports[`createOfficeTheme test 1`] = `
 {
   "colors": {
     "accentButtonBackground": "#D83B01",
-    "accentButtonText": "#FFFFFF",
     "actionLink": "#262626",
     "actionLinkHovered": "#EA6115",
     "background": "antiquewhite",
@@ -2495,7 +2494,6 @@ exports[`createOfficeTheme test 1`] = `
     "buttonBorderFocused": "#FBDFD0",
     "buttonText": "#262626",
     "buttonTextChecked": "#262626",
-    "buttonTextCheckedHovered": "#262626",
     "buttonTextDisabled": "#B1B1B1",
     "buttonTextHovered": "#262626",
     "buttonTextPressed": "#262626",
@@ -2606,7 +2604,6 @@ exports[`createOfficeTheme test 1`] = `
     "listItemBackgroundChecked": "#C6C6C6",
     "listItemBackgroundCheckedHovered": "#C6C6C6",
     "listItemBackgroundHovered": "#D2D2D2",
-    "listText": "#262626",
     "menuBackground": "antiquewhite",
     "menuDivider": "#E6E6E6",
     "menuHeader": "#262626",
@@ -2737,7 +2734,6 @@ exports[`createOfficeTheme test 1`] = `
     "transparentStrokeDisabled": "#00000000",
     "transparentStrokeInteractive": "#00000000",
     "variantBorder": "#000000",
-    "variantBorderHovered": "#000000",
     "warningBackground": "antiquewhite",
     "warningBackground1": "#fffef5",
     "warningBackground2": "#fef7b2",

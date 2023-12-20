@@ -286,7 +286,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
 
     focusBorder: 'transparent',
     variantBorder: applePlatform.separatorColor,
-    variantBorderHovered: applePlatform.separatorColor,
     defaultStateBackground: applePlatform.controlBackgroundColor,
     errorText: fluentUIApple.dangerPrimary,
     warningText: fluentUIApple.warningPrimary,
@@ -319,7 +318,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     buttonText: macOSAliasColorTokens.neutralForeground3,
     buttonTextHovered: macOSAliasColorTokens.neutralForeground3,
     buttonTextChecked: macOSAliasColorTokens.neutralForeground3,
-    buttonTextCheckedHovered: macOSAliasColorTokens.neutralForeground3,
     buttonTextPressed: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralForeground3, 'pressed'),
     buttonTextDisabled: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralForeground3, 'disabled'),
 
@@ -338,7 +336,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     primaryButtonTextDisabled: macOSAliasColorTokens.brandForeground1Disabled,
 
     accentButtonBackground: fluentUIApple.communicationBlue,
-    accentButtonText: macOSAliasColorTokens.neutralForegroundInverted,
 
     menuBackground: 'transparent',
     menuDivider: applePlatform.separatorColor,
@@ -350,7 +347,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     menuItemTextHovered: 'white',
 
     listBackground: 'transparent',
-    listText: applePlatform.labelColor,
     listItemBackgroundHovered: 'transparent',
     listItemBackgroundChecked: 'transparent',
     listItemBackgroundCheckedHovered: 'transparent',

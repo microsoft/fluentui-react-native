@@ -85,7 +85,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
 
     focusBorder: 'transparent',
     variantBorder: fluent2AliasColorTokens.neutralStroke2,
-    variantBorderHovered: fluent2AliasColorTokens.neutralStroke2,
     defaultStateBackground: fluent2AliasColorTokens.neutralBackground1,
 
     errorText: fluentApple.dangerPrimary,
@@ -120,7 +119,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     buttonText: fluentApple.communicationBlue,
     buttonTextHovered: fluentApple.communicationBlue,
     buttonTextChecked: fluentApple.communicationBlue,
-    buttonTextCheckedHovered: fluentApple.communicationBlue,
     buttonTextPressed: fluentApple.communicationBlueTint20,
     buttonTextDisabled: fluentApple.buttonTitleDisabled,
     buttonBorderDisabled: fluent2AliasColorTokens.neutralBackgroundDisabled,
@@ -138,7 +136,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     primaryButtonTextDisabled: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     accentButtonBackground: fluentApple.communicationBlue,
-    accentButtonText: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     menuBackground: fluent2AliasColorTokens.neutralBackground1,
     menuDivider: fluent2AliasColorTokens.neutralStroke2,
@@ -150,7 +147,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     menuItemTextHovered: fluent2AliasColorTokens.neutralForeground1,
 
     listBackground: fluent2AliasColorTokens.neutralBackground1,
-    listText: fluent2AliasColorTokens.neutralForeground1,
     listItemBackgroundHovered: fluent2AliasColorTokens.neutralBackground1,
     listItemBackgroundChecked: fluent2AliasColorTokens.neutralBackground1,
     listItemBackgroundCheckedHovered: fluent2AliasColorTokens.neutralBackground1,
