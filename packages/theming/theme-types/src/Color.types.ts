@@ -62,7 +62,7 @@ export interface FabricWebPalette {
   blackTranslucent40: ColorValue;
 
   // ROLE: text
-  // inputTextHovered, buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered
+  // buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered
   neutralDark: ColorValue;
 
   // ROLE: text, border
@@ -97,7 +97,7 @@ export interface FabricWebPalette {
   neutralQuaternaryAlt: ColorValue;
 
   // ROLE: background, border
-  // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered, buttonBackgroundCheckedHovered
+  // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered
   // buttonBackgroundPressed, menuItemBackgroundPressed, listItemBackgroundChecked, listHeaderBackgroundPressed
   neutralLight: ColorValue;
 
@@ -157,8 +157,6 @@ export interface PaletteTextColors {
   errorText: ColorValue;
   /** The color of input text. */
   inputText: ColorValue;
-  /** The color of input text on hover. */
-  inputTextHovered: ColorValue;
   /** The color of placeholder text. */
   inputPlaceholderText: ColorValue;
 
@@ -263,8 +261,6 @@ export interface PaletteBackgroundColors {
   buttonBackgroundChecked: ColorValue;
   /** Background of a hovered standard button */
   buttonBackgroundHovered: ColorValue;
-  /** Background of a checked and hovered standard button; e.g. bold/italicize/underline text button in toolbar */
-  buttonBackgroundCheckedHovered: ColorValue;
   /** Background of a disabled standard button */
   buttonBackgroundDisabled: ColorValue;
   /** Background of a pressed standard button; i.e. currently being clicked by mouse */

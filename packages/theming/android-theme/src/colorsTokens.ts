@@ -41,13 +41,11 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     inputFocusBorderAlt: 'transparent',
     smallInputBorder: 'transparent',
     inputText: p.textPrimary,
-    inputTextHovered: p.textPrimary,
     inputPlaceholderText: p.textSecondary,
 
     buttonBackground: p.buttonBackground,
     buttonBackgroundChecked: p.buttonBackground,
     buttonBackgroundHovered: p.buttonBackground,
-    buttonBackgroundCheckedHovered: p.buttonBackground,
     buttonBackgroundPressed: p.buttonBackgroundPressed,
     buttonBackgroundDisabled: p.buttonBackgroundDisabled,
     buttonBorder: 'transparent',

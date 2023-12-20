@@ -95,13 +95,11 @@ export const mockTheme: Theme = {
     inputFocusBorderAlt: themePrimary,
     smallInputBorder: neutralSecondary,
     inputText: neutralPrimary,
-    inputTextHovered: neutralDark,
     inputPlaceholderText: neutralSecondary,
 
     buttonBackground: neutralLighter,
     buttonBackgroundChecked: neutralTertiaryAlt,
     buttonBackgroundHovered: neutralLight,
-    buttonBackgroundCheckedHovered: neutralLight,
     buttonBackgroundPressed: neutralLight,
     buttonBackgroundDisabled: neutralLighter,
     buttonBorder: neutralSecondaryAlt,

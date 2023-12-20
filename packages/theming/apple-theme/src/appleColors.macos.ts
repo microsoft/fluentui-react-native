@@ -302,14 +302,12 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     inputFocusBorderAlt: applePlatform.keyboardFocusIndicatorColor,
     smallInputBorder: applePlatform.separatorColor,
     inputText: applePlatform.textColor,
-    inputTextHovered: applePlatform.textColor,
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
     // Set the default button tokens to match the Acrylic Button style
     buttonBackground: macOSAliasColorTokens.neutralBackground1,
     buttonBackgroundChecked: macOSAliasColorTokens.neutralBackground3,
     buttonBackgroundHovered: macOSAliasColorTokens.neutralBackground3,
-    buttonBackgroundCheckedHovered: macOSAliasColorTokens.neutralBackground3,
     buttonBackgroundPressed: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralBackground3, 'pressed'),
     buttonBackgroundDisabled: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralBackground3, 'disabled'),
     buttonBorder: macOSAliasColorTokens.transparentStroke,

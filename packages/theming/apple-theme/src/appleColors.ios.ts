@@ -102,7 +102,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     inputFocusBorderAlt: fluent2AliasColorTokens.neutralStroke1,
     smallInputBorder: fluent2AliasColorTokens.neutralStroke1,
     inputText: fluent2AliasColorTokens.neutralForeground1,
-    inputTextHovered: fluent2AliasColorTokens.neutralForeground1,
     inputPlaceholderText: fluent2AliasColorTokens.neutralForeground3,
 
     // Default values without any style
@@ -110,7 +109,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     buttonBackground: 'transparent',
     buttonBackgroundChecked: 'transparent',
     buttonBackgroundHovered: 'transparent',
-    buttonBackgroundCheckedHovered: 'transparent',
     buttonBackgroundPressed: 'transparent',
     buttonBackgroundDisabled: 'transparent',
     buttonBorder: fluentApple.communicationBlueTint10,
