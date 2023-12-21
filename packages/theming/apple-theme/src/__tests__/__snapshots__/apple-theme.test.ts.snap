@@ -115,7 +115,6 @@ exports[`createAppleTheme test 1`] = `
     "brandedSecondaryContent": "#ffffff",
     "buttonBackground": "#ffffff",
     "buttonBackgroundChecked": "#f5f5f5",
-    "buttonBackgroundCheckedHovered": "#f5f5f5",
     "buttonBackgroundDisabled": {
       "colorWithSystemEffect": {
         "baseColor": "#f5f5f5",
@@ -414,11 +413,6 @@ exports[`createAppleTheme test 1`] = `
       ],
     },
     "inputText": {
-      "semantic": [
-        "textColor",
-      ],
-    },
-    "inputTextHovered": {
       "semantic": [
         "textColor",
       ],
