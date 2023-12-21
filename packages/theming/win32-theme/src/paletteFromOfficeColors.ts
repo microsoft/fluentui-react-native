@@ -19,15 +19,9 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
 
     focusBorder: p.StrokeKeyboard,
     variantBorder: p.AccentOutline,
-    defaultStateBackground: p.Bkg,
 
     errorText: p.TextError,
     warningText: p.Text,
-    errorBackground: p.Bkg,
-    blockingBackground: p.Bkg,
-    warningBackground: p.Bkg,
-    warningHighlight: p.TextError,
-    successBackground: p.TextEmphasis,
 
     inputBorder: p.StrokeCtlSubtle,
     inputBorderHovered: p.StrokeCtlSubtleHover,

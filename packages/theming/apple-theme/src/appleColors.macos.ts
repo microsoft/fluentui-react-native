@@ -286,14 +286,8 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
 
     focusBorder: 'transparent',
     variantBorder: applePlatform.separatorColor,
-    defaultStateBackground: applePlatform.controlBackgroundColor,
     errorText: fluentUIApple.dangerPrimary,
     warningText: fluentUIApple.warningPrimary,
-    errorBackground: fluentUIApple.dangerTint10,
-    blockingBackground: fluentUIApple.dangerTint10,
-    warningBackground: fluentUIApple.warningPrimary,
-    warningHighlight: fluentUIApple.warningTint10,
-    successBackground: fluentUIApple.successTint10,
 
     inputBorder: applePlatform.separatorColor,
     inputBorderHovered: applePlatform.separatorColor,

@@ -24,14 +24,9 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
 
     focusBorder: 'transparent',
     variantBorder: 'transparent',
-    defaultStateBackground: 'transparent',
 
     errorText: p.dangerPrimary,
     warningText: p.warningPrimary,
-    errorBackground: p.dangerTint10,
-    blockingBackground: p.dangerTint10,
-    warningBackground: p.warningPrimary,
-    warningHighlight: p.warningTint10,
     successBackground: p.successTint10,
 
     inputBorder: 'transparent',

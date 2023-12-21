@@ -29,15 +29,9 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
 
     focusBorder: p.neutralSecondary,
     variantBorder: p.neutralLight,
-    defaultStateBackground: p.neutralLighterAlt,
 
     errorText: !isInverted ? p.redDark : '#ff5f5f',
     warningText: !isInverted ? globalTokens.color.grey20 : globalTokens.color.white,
-    errorBackground: !isInverted ? 'rgba(245, 135, 145, .2)' : 'rgba(232, 17, 35, .5)',
-    blockingBackground: !isInverted ? 'rgba(250, 65, 0, .2)' : 'rgba(234, 67, 0, .5)',
-    warningBackground: !isInverted ? 'rgba(255, 200, 10, .2)' : 'rgba(255, 251, 0, .6)',
-    warningHighlight: !isInverted ? '#ffb900' : '#fff100',
-    successBackground: !isInverted ? 'rgba(95, 210, 85, .2)' : 'rgba(186, 216, 10, .4)',
 
     inputBorder: p.neutralTertiary,
     inputBorderHovered: p.neutralPrimary,
@@ -224,15 +218,9 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
 
     focusBorder: '#ffffff',
     variantBorder: '#ffffff',
-    defaultStateBackground: '#000000',
 
     errorText: '#ffffff',
     warningText: '#ffffff',
-    errorBackground: '#000000',
-    blockingBackground: '#000000',
-    warningBackground: '#000000',
-    warningHighlight: '#ffffff',
-    successBackground: '#000000',
 
     inputBorder: '#ffffff',
     inputBorderHovered: '#1aebff',

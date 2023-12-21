@@ -107,7 +107,7 @@ export interface FabricWebPalette {
   neutralLighter: ColorValue;
 
   // ROLE: background
-  // bodyStandoutBackground, defaultStateBackground
+  // bodyStandoutBackground
   neutralLighterAlt: ColorValue;
 
   // ROLE: background
@@ -161,7 +161,7 @@ export interface PaletteTextColors {
 
   /** The default color of error text, used on bodyBackground. */
   errorText: ColorValue;
-  /** The color of text on errorBackground, warningBackground, blockingBackground, or successBackground. */
+  /** The color of text on warning background. */
   warningText: ColorValue;
   /** The color of input text. */
   inputText: ColorValue;
@@ -216,21 +216,6 @@ export interface PaletteBackgroundColors {
   focusBorder: ColorValue;
   /** The color of the border that provides contrast between an element, such as a card, and an emphasized background. */
   variantBorder: ColorValue;
-  /** Background color for default/empty state elements; default icons, placeholder graphics, empty seats, etc. */
-  defaultStateBackground: ColorValue;
-
-  //// Invariants - slots that rarely change color theme-to-theme because the color has meaning
-
-  /** The background for errors, if necessary, or highlighting the section of the page where the error is present. */
-  errorBackground: ColorValue;
-  /** Background for blocking issues, which is more severe than a warning, but not as bad as an error. */
-  blockingBackground: ColorValue;
-  /** Background for warning messages. */
-  warningBackground: ColorValue;
-  /** Foreground color for warning highlights */
-  warningHighlight: ColorValue;
-  /** Background for success */
-  successBackground: ColorValue;
 
   //// Input controls slots (text fields, checkboxes, radios...)
 
