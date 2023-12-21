@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Wed, 20 Dec 2023 00:05:24 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Dec 2023 01:31:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.0
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Minor changes
+
+- Remove unused colors (ruaraki@microsoft.com)
 
 ## 0.34.0
 
