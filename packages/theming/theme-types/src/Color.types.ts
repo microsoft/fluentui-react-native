@@ -62,7 +62,7 @@ export interface FabricWebPalette {
   blackTranslucent40: ColorValue;
 
   // ROLE: text
-  // inputTextHovered, buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered, actionLinkHovered
+  // buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered
   neutralDark: ColorValue;
 
   // ROLE: text, border
@@ -85,11 +85,11 @@ export interface FabricWebPalette {
   neutralTertiary: ColorValue;
 
   // ROLE: text, background, border
-  // disabledBodySubtext, buttonBackgroundChecked, menuDivider
+  // buttonBackgroundChecked, menuDivider
   neutralTertiaryAlt: ColorValue;
 
   // ROLE: text
-  // disabledSubtext, primaryButtonTextDisabled
+  // primaryButtonTextDisabled
   neutralQuaternary: ColorValue;
 
   // ROLE: background
@@ -97,7 +97,7 @@ export interface FabricWebPalette {
   neutralQuaternaryAlt: ColorValue;
 
   // ROLE: background, border
-  // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered, buttonBackgroundCheckedHovered
+  // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered
   // buttonBackgroundPressed, menuItemBackgroundPressed, listItemBackgroundChecked, listHeaderBackgroundPressed
   neutralLight: ColorValue;
 
@@ -139,8 +139,6 @@ export interface PaletteTextColors {
   subText: ColorValue;
   /** Neutral colored links and links for action buttons. */
   actionLink: ColorValue;
-  /** Hover state for neutral colored links and links for action buttons. */
-  actionLinkHovered: ColorValue;
 
   /** The color of a link. */
   link: ColorValue;
@@ -152,21 +150,13 @@ export interface PaletteTextColors {
   disabledText: ColorValue;
   /** The default color for disabled text on the default background (bodyBackground). */
   disabledBodyText: ColorValue;
-  /** Disabled de-emphasized text, for use on disabledBackground. */
-  disabledSubtext: ColorValue;
-  /** Disabled de-emphasized text, for use on the default background (bodyBackground). */
-  disabledBodySubtext: ColorValue;
 
   //// Invariants - slots that rarely change color theme-to-theme because the color has meaning
 
   /** The default color of error text, used on bodyBackground. */
   errorText: ColorValue;
-  /** The color of text on errorBackground, warningBackground, blockingBackground, or successBackground. */
-  warningText: ColorValue;
   /** The color of input text. */
   inputText: ColorValue;
-  /** The color of input text on hover. */
-  inputTextHovered: ColorValue;
   /** The color of placeholder text. */
   inputPlaceholderText: ColorValue;
 
@@ -271,8 +261,6 @@ export interface PaletteBackgroundColors {
   buttonBackgroundChecked: ColorValue;
   /** Background of a hovered standard button */
   buttonBackgroundHovered: ColorValue;
-  /** Background of a checked and hovered standard button; e.g. bold/italicize/underline text button in toolbar */
-  buttonBackgroundCheckedHovered: ColorValue;
   /** Background of a disabled standard button */
   buttonBackgroundDisabled: ColorValue;
   /** Background of a pressed standard button; i.e. currently being clicked by mouse */

@@ -80,8 +80,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     disabledBackground: fluent2AliasColorTokens.neutralBackgroundDisabled,
     disabledText: fluent2AliasColorTokens.neutralForegroundDisabled1,
     disabledBodyText: fluent2AliasColorTokens.neutralForegroundDisabled1,
-    disabledSubtext: fluent2AliasColorTokens.neutralForegroundDisabled1,
-    disabledBodySubtext: fluent2AliasColorTokens.neutralForegroundDisabled1,
 
     focusBorder: 'transparent',
     variantBorder: fluent2AliasColorTokens.neutralStroke2,
@@ -89,7 +87,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     defaultStateBackground: fluent2AliasColorTokens.neutralBackground1,
 
     errorText: fluentApple.dangerPrimary,
-    warningText: fluentApple.warningPrimary,
     errorBackground: fluentApple.dangerTint10,
     blockingBackground: fluentApple.dangerTint10,
     warningBackground: fluentApple.warningPrimary,
@@ -105,7 +102,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     inputFocusBorderAlt: fluent2AliasColorTokens.neutralStroke1,
     smallInputBorder: fluent2AliasColorTokens.neutralStroke1,
     inputText: fluent2AliasColorTokens.neutralForeground1,
-    inputTextHovered: fluent2AliasColorTokens.neutralForeground1,
     inputPlaceholderText: fluent2AliasColorTokens.neutralForeground3,
 
     // Default values without any style
@@ -113,7 +109,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     buttonBackground: 'transparent',
     buttonBackgroundChecked: 'transparent',
     buttonBackgroundHovered: 'transparent',
-    buttonBackgroundCheckedHovered: 'transparent',
     buttonBackgroundPressed: 'transparent',
     buttonBackgroundDisabled: 'transparent',
     buttonBorder: fluentApple.communicationBlueTint10,
@@ -159,7 +154,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     listHeaderBackgroundPressed: fluent2AliasColorTokens.neutralForeground1,
 
     actionLink: fluentApple.communicationBlue,
-    actionLinkHovered: fluentApple.communicationBlue,
     link: fluentApple.communicationBlue,
     linkHovered: fluentApple.communicationBlue,
     linkPressed: fluentApple.communicationBlueTint10,

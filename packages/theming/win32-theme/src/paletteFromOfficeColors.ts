@@ -14,8 +14,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     disabledBackground: p.BkgCtlSubtleDisabled,
     disabledText: p.TextCtlSubtleDisabled,
     disabledBodyText: p.TextDisabled,
-    disabledSubtext: p.TextCtlSubtleDisabled,
-    disabledBodySubtext: p.TextDisabled,
 
     focusBorder: p.StrokeKeyboard,
     variantBorder: p.AccentOutline,
@@ -23,7 +21,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     defaultStateBackground: p.Bkg,
 
     errorText: p.TextError,
-    warningText: p.Text,
     errorBackground: p.Bkg,
     blockingBackground: p.Bkg,
     warningBackground: p.Bkg,
@@ -39,13 +36,11 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     inputFocusBorderAlt: p.StrokeCtlSubtleKeyboard,
     smallInputBorder: p.StrokeCtlSubtle,
     inputText: p.TextCtlSubtle,
-    inputTextHovered: p.TextCtlSubtleHover,
     inputPlaceholderText: p.TextCtlSubtlePlaceholder,
 
     buttonBackground: p.BkgCtl,
     buttonBackgroundChecked: p.BkgCtlSelected,
     buttonBackgroundHovered: p.BkgCtlHover,
-    buttonBackgroundCheckedHovered: p.BkgCtlSelected,
     buttonBackgroundPressed: p.BkgCtlPressed,
     buttonBackgroundDisabled: p.BkgCtlDisabled,
     buttonBorder: p.StrokeCtl,
@@ -91,7 +86,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     listHeaderBackgroundPressed: p.BkgPressed,
 
     actionLink: p.TextActive,
-    actionLinkHovered: p.TextActiveHover,
     link: p.TextHyperlink,
     linkHovered: p.TextHyperlinkHover,
     linkPressed: p.TextHyperlinkPressed,

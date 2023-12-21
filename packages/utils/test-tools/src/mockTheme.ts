@@ -73,8 +73,6 @@ export const mockTheme: Theme = {
     disabledBackground: neutralLighter,
     disabledText: neutralTertiary,
     disabledBodyText: neutralTertiary,
-    disabledSubtext: neutralQuaternary,
-    disabledBodySubtext: neutralTertiaryAlt,
 
     focusBorder: neutralSecondary,
     variantBorder: neutralLight,
@@ -82,7 +80,6 @@ export const mockTheme: Theme = {
     defaultStateBackground: neutralLighterAlt,
 
     errorText: redDark,
-    warningText: '#333333',
     errorBackground: 'rgba(245, 135, 145, .2)',
     blockingBackground: 'rgba(250, 65, 0, .2)',
     warningBackground: 'rgba(255, 200, 10, .2)',
@@ -98,13 +95,11 @@ export const mockTheme: Theme = {
     inputFocusBorderAlt: themePrimary,
     smallInputBorder: neutralSecondary,
     inputText: neutralPrimary,
-    inputTextHovered: neutralDark,
     inputPlaceholderText: neutralSecondary,
 
     buttonBackground: neutralLighter,
     buttonBackgroundChecked: neutralTertiaryAlt,
     buttonBackgroundHovered: neutralLight,
-    buttonBackgroundCheckedHovered: neutralLight,
     buttonBackgroundPressed: neutralLight,
     buttonBackgroundDisabled: neutralLighter,
     buttonBorder: neutralSecondaryAlt,
@@ -150,7 +145,6 @@ export const mockTheme: Theme = {
     listHeaderBackgroundPressed: neutralLight,
 
     actionLink: neutralPrimary,
-    actionLinkHovered: neutralDark,
     link: themePrimary,
     linkHovered: themeDarker,
     linkPressed: themeDark,

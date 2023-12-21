@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { Palette, FabricWebPalette, ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 
 import { createColorAliasTokens } from './createAliasTokens';
@@ -24,8 +22,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     disabledBackground: isInverted ? p.neutralQuaternaryAlt : p.neutralLighter,
     disabledText: p.neutralTertiary,
     disabledBodyText: p.neutralTertiary,
-    disabledSubtext: p.neutralQuaternary,
-    disabledBodySubtext: p.neutralTertiaryAlt,
 
     focusBorder: p.neutralSecondary,
     variantBorder: p.neutralLight,
@@ -33,7 +29,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultStateBackground: p.neutralLighterAlt,
 
     errorText: !isInverted ? p.redDark : '#ff5f5f',
-    warningText: !isInverted ? globalTokens.color.grey20 : globalTokens.color.white,
     errorBackground: !isInverted ? 'rgba(245, 135, 145, .2)' : 'rgba(232, 17, 35, .5)',
     blockingBackground: !isInverted ? 'rgba(250, 65, 0, .2)' : 'rgba(234, 67, 0, .5)',
     warningBackground: !isInverted ? 'rgba(255, 200, 10, .2)' : 'rgba(255, 251, 0, .6)',
@@ -49,13 +44,11 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     inputFocusBorderAlt: p.themePrimary,
     smallInputBorder: p.neutralSecondary,
     inputText: p.neutralPrimary,
-    inputTextHovered: p.neutralDark,
     inputPlaceholderText: p.neutralSecondary,
 
     buttonBackground: p.neutralLighter,
     buttonBackgroundChecked: p.neutralTertiaryAlt,
     buttonBackgroundHovered: p.neutralLight,
-    buttonBackgroundCheckedHovered: p.neutralLight,
     buttonBackgroundPressed: p.neutralLight,
     buttonBackgroundDisabled: p.neutralLighter,
     buttonBorder: p.neutralSecondaryAlt,
@@ -101,7 +94,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     listHeaderBackgroundPressed: p.neutralLight,
 
     actionLink: p.neutralPrimary,
-    actionLinkHovered: p.neutralDark,
     link: p.themePrimary,
     linkHovered: p.themeDarker,
     linkPressed: p.themeDark,
@@ -223,8 +215,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     disabledBackground: '#000000',
     disabledText: '#3ff23f',
     disabledBodyText: '#3ff23f',
-    disabledSubtext: '#3ff23f',
-    disabledBodySubtext: '#3ff23f',
 
     focusBorder: '#ffffff',
     variantBorder: '#ffffff',
@@ -232,7 +222,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     defaultStateBackground: '#000000',
 
     errorText: '#ffffff',
-    warningText: '#ffffff',
     errorBackground: '#000000',
     blockingBackground: '#000000',
     warningBackground: '#000000',
@@ -248,13 +237,11 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     inputFocusBorderAlt: '#ffffff',
     smallInputBorder: '#ffffff',
     inputText: '#ffffff',
-    inputTextHovered: '#000000',
     inputPlaceholderText: '#ffffff',
 
     buttonBackground: '#000000',
     buttonBackgroundChecked: '#1aebff',
     buttonBackgroundHovered: '#1aebff',
-    buttonBackgroundCheckedHovered: '#1aebff',
     buttonBackgroundPressed: '#1aebff',
     buttonBackgroundDisabled: '#000000',
     buttonBorder: '#ffffff',
@@ -300,7 +287,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     listHeaderBackgroundPressed: '#1aebff',
 
     actionLink: '#ffff00',
-    actionLinkHovered: '#ffffff',
     link: '#ffff00',
     linkHovered: '#ffffff',
     linkPressed: '#ffffff',

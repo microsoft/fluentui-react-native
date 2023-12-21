@@ -281,15 +281,12 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     disabledBackground: fluentUIApple.gray100,
     disabledText: applePlatform.tertiaryLabelColor,
     disabledBodyText: applePlatform.tertiaryLabelColor,
-    disabledSubtext: applePlatform.quaternaryLabelColor,
-    disabledBodySubtext: applePlatform.quaternaryLabelColor,
 
     focusBorder: 'transparent',
     variantBorder: applePlatform.separatorColor,
     variantBorderHovered: applePlatform.separatorColor,
     defaultStateBackground: applePlatform.controlBackgroundColor,
     errorText: fluentUIApple.dangerPrimary,
-    warningText: fluentUIApple.warningPrimary,
     errorBackground: fluentUIApple.dangerTint10,
     blockingBackground: fluentUIApple.dangerTint10,
     warningBackground: fluentUIApple.warningPrimary,
@@ -305,14 +302,12 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     inputFocusBorderAlt: applePlatform.keyboardFocusIndicatorColor,
     smallInputBorder: applePlatform.separatorColor,
     inputText: applePlatform.textColor,
-    inputTextHovered: applePlatform.textColor,
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
     // Set the default button tokens to match the Acrylic Button style
     buttonBackground: macOSAliasColorTokens.neutralBackground1,
     buttonBackgroundChecked: macOSAliasColorTokens.neutralBackground3,
     buttonBackgroundHovered: macOSAliasColorTokens.neutralBackground3,
-    buttonBackgroundCheckedHovered: macOSAliasColorTokens.neutralBackground3,
     buttonBackgroundPressed: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralBackground3, 'pressed'),
     buttonBackgroundDisabled: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralBackground3, 'disabled'),
     buttonBorder: macOSAliasColorTokens.transparentStroke,
@@ -359,7 +354,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     listHeaderBackgroundPressed: applePlatform.headerTextColor,
 
     actionLink: applePlatform.linkColor,
-    actionLinkHovered: applePlatform.linkColor,
     link: applePlatform.linkColor,
     linkHovered: applePlatform.linkColor,
     linkPressed: applePlatform.selectedControlColor,
