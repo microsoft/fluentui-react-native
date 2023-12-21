@@ -376,30 +376,6 @@ export interface ControlColorTokens {
 
   /* Deprecated */
   brandedBackground: ColorValue;
-  /* Deprecated */
-  brandedBorder: ColorValue;
-  /* Deprecated */
-  brandedContent: ColorValue;
-  /* Deprecated */
-  brandedIcon: ColorValue;
-
-  /* Deprecated */
-  brandedHoveredBackground: ColorValue;
-  /* Deprecated */
-  brandedHoveredBorder: ColorValue;
-  /* Deprecated */
-  brandedHoveredContent: ColorValue;
-  /* Deprecated */
-  brandedHoveredIcon: ColorValue;
-
-  /* Deprecated */
-  brandedFocusedBackground: ColorValue;
-  /* Deprecated */
-  brandedFocusedBorder: ColorValue;
-  /* Deprecated */
-  brandedFocusedContent: ColorValue;
-  /* Deprecated */
-  brandedFocusedIcon: ColorValue;
 
   /* Deprecated */
   brandedPressedBackground: ColorValue;
