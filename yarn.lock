@@ -8303,13 +8303,13 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.35.0
-  resolution: "appium-uiautomator2-driver@npm:2.35.0"
+  version: 2.36.0
+  resolution: "appium-uiautomator2-driver@npm:2.36.0"
   dependencies:
     appium-adb: ^11.0.1
     appium-android-driver: ^7.4.0
     appium-chromedriver: ^5.6.5
-    appium-uiautomator2-server: ^5.12.2
+    appium-uiautomator2-server: ^5.13.0
     asyncbox: ^3.0.0
     axios: ^1.x
     bluebird: ^3.5.1
@@ -8321,14 +8321,14 @@ __metadata:
     type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.0.0
-  checksum: e00ef9dd69c1280408846a83c6a90bc17f56c4f865513eeabff4e20873833bd0ad728f44b1e5d531840683aef6468915c15ee7531e86872aae6b4248d654f171
+  checksum: 74c7c27b3904295cce6c2b7ba6484034a69dc88f5add1277893c6769b99d2b1132e6f83d877b2f4a8ca4e2368db20461f91aa9a7d15869b741ecd98acb923eb1
   languageName: node
   linkType: hard
 
-"appium-uiautomator2-server@npm:^5.12.2":
-  version: 5.12.2
-  resolution: "appium-uiautomator2-server@npm:5.12.2"
-  checksum: 15b3c9df9772d2979b2ae500294e23a54995cb30ad37e5882fe7c7cd571662064de85da8f3332eb8c13e531f9abd0d43fcbea8d8096ae0f4eaf88f08c1abedcc
+"appium-uiautomator2-server@npm:^5.13.0":
+  version: 5.13.0
+  resolution: "appium-uiautomator2-server@npm:5.13.0"
+  checksum: a4058fe32ccbcf0440e771abbd4aaf1d0b8f3ac3d9129a80b8b91906bd02d8aba90ead0fc9372b9161760ac40d3488844aee8278eca3b40c0c239baefe674a92
   languageName: node
   linkType: hard
 
