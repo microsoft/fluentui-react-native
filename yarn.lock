@@ -18333,8 +18333,8 @@ __metadata:
   linkType: hard
 
 "react-native-svg-transformer@npm:^1.0.0":
-  version: 1.2.0
-  resolution: "react-native-svg-transformer@npm:1.2.0"
+  version: 1.3.0
+  resolution: "react-native-svg-transformer@npm:1.3.0"
   dependencies:
     "@svgr/core": ^8.1.0
     "@svgr/plugin-jsx": ^8.1.0
@@ -18343,7 +18343,7 @@ __metadata:
   peerDependencies:
     react-native: ">=0.59.0"
     react-native-svg: ">=12.0.0"
-  checksum: f853d65c38d7602061370518393ee3884babed227f0c0910cf364e599190d022e93438edadd7bc8f2e7eee690ad59a82b710b6e6163f48525f4802adcf64575c
+  checksum: 09dc490aad05b8f44289fc6c1b75a2fce92b95b27cacb07f320f29c0d0edcc6979fbd6a46f0b13e6b0681c2ae4652d08af35c018bbbd29324db3579a869a4502
   languageName: node
   linkType: hard
 
