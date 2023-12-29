@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "VoiceOver should ignore contextual menu item children",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
