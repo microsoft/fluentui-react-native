@@ -28,7 +28,7 @@ yarn run-win32
 
 5. You will see the FluentUI Tester show up in a new window.
 
-![ReactTest image debug menu location](./../../assets/fluent_tester_win32.png)
+![Image of Fluent Tester](./../../assets/fluent_tester_win32.png)
 
 ## Debug `FluentUI Tester` app with direct debugging
 
@@ -49,11 +49,11 @@ yarn run-win32
 
 4. Inside ReactTest, open the debug option menu and select the checkbox `Use Direct Debugger`
 
-![ReactTest image debug menu location](./../../assets/fluent_tester_win32_debug_menu.png)
+![Image of Fluent Tester debug menu location](./../../assets/fluent_tester_win32_debug_menu.png)
 
 5. In Visual Studio Code, open the debug pane and select `Debug Fabric Tester` option from the "Run And Debug" dropdown.
 
-![ReactTest image debug menu location](./../../assets/fluent_tester_vscode_debug.png)
+![Image of Visual Studio Code debug pane](./../../assets/fluent_tester_vscode_debug.png)
 
 6. At this time, VS Code will attach to the JS runtime and you can start debugging. For more information on debugging in VS Code, please see [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging).
 
