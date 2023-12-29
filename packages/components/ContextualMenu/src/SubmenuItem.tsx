@@ -170,12 +170,12 @@ export const SubmenuItem = compose<SubmenuItemType>({
         children: text,
       },
       icon: {
-        accessible: false,
         ...createIconProps(icon),
+        accessible: false,
       },
       chevron: {
-        accessible: false,
         ...createIconProps({ svgSource: svgProps, width: 12, height: 12 }),
+        accessible: false,
       },
     });
 

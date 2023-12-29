@@ -128,8 +128,8 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         children: text,
       },
       icon: {
-        accessible: false,
         ...createIconProps(icon),
+        accessible: false,
       },
     });
 
