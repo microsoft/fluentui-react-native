@@ -165,9 +165,18 @@ export const SubmenuItem = compose<SubmenuItemType>({
         onAccessibilityTap: onAccTap,
         ...rest,
       },
-      content: { children: text },
-      icon: createIconProps(icon),
-      chevron: createIconProps({ svgSource: svgProps, width: 12, height: 12 }),
+      content: {
+        accessible: false,
+        children: text,
+      },
+      icon: {
+        accessible: false,
+        ...createIconProps(icon),
+      },
+      chevron: {
+        accessible: false,
+        ...createIconProps({ svgSource: svgProps, width: 12, height: 12 }),
+      },
     });
 
     return { slotProps, state };

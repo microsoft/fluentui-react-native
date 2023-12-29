@@ -123,8 +123,14 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         testID,
         ...rest,
       },
-      content: { children: text },
-      icon: createIconProps(icon),
+      content: {
+        accessible: false,
+        children: text,
+      },
+      icon: {
+        accessible: false,
+        ...createIconProps(icon),
+      },
     });
 
     return { slotProps, state };
