@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 30 Dec 2023 02:10:31 GMT",
+      "version": "0.162.1",
+      "tag": "@fluentui-react-native/tester_v0.162.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.9.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.39.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 Dec 2023 01:31:00 GMT",
       "version": "0.162.0",
       "tag": "@fluentui-react-native/tester_v0.162.0",

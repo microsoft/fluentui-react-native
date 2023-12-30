@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Thu, 21 Dec 2023 01:31:00 GMT and should not be manually modified.
+This log was last generated on Sat, 30 Dec 2023 02:10:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.5
+
+Sat, 30 Dec 2023 02:10:31 GMT
+
+### Patches
+
+- VoiceOver should ignore contextual menu item children (adgleitm@microsoft.com)
 
 ## 0.23.4
 

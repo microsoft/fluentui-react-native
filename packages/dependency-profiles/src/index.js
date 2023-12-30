@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.162.0"
+      "version": "0.162.1"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.37.20"
+      "version": "0.37.21"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -40,7 +40,7 @@ module.exports = {
     },
     "@fluentui-react-native/contextual-menu": {
       "name": "@fluentui-react-native/contextual-menu",
-      "version": "0.23.4"
+      "version": "0.23.5"
     },
     "@fluentui-react-native/divider": {
       "name": "@fluentui-react-native/divider",
@@ -72,7 +72,7 @@ module.exports = {
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
-      "version": "0.12.6"
+      "version": "0.12.7"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
@@ -180,7 +180,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-menu-button": {
       "name": "@fluentui-react-native/experimental-menu-button",
-      "version": "0.9.5"
+      "version": "0.9.6"
     },
     "@fluentui-react-native/experimental-native-date-picker": {
       "name": "@fluentui-react-native/experimental-native-date-picker",
@@ -284,7 +284,7 @@ module.exports = {
     },
     "@fluentui/react-native": {
       "name": "@fluentui/react-native",
-      "version": "0.39.7"
+      "version": "0.39.8"
     },
     "@fluentui-react-native/android-theme": {
       "name": "@fluentui-react-native/android-theme",

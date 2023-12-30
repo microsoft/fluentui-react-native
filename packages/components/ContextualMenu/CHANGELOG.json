@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Sat, 30 Dec 2023 02:10:31 GMT",
+      "version": "0.23.5",
+      "tag": "@fluentui-react-native/contextual-menu_v0.23.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "9c4db27f4f2418d69593c101212c6f63d46e3e2a",
+            "comment": "VoiceOver should ignore contextual menu item children"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 Dec 2023 01:31:00 GMT",
       "version": "0.23.4",
       "tag": "@fluentui-react-native/contextual-menu_v0.23.4",
