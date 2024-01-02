@@ -22,14 +22,8 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
 
     focusBorder: 'transparent',
     variantBorder: 'transparent',
-    variantBorderHovered: 'transparent',
-    defaultStateBackground: 'transparent',
 
     errorText: p.dangerPrimary,
-    errorBackground: p.dangerTint10,
-    blockingBackground: p.dangerTint10,
-    warningBackground: p.warningPrimary,
-    warningHighlight: p.warningTint10,
     successBackground: p.successTint10,
 
     inputBorder: 'transparent',
@@ -52,7 +46,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     buttonText: p.textOnAccent,
     buttonTextHovered: '#ffffff',
     buttonTextChecked: '#ffffff',
-    buttonTextCheckedHovered: '#ffffff',
     buttonTextPressed: p.textOnAccent,
     buttonTextDisabled: p.buttonTextDisabled,
     buttonBorderDisabled: 'transparent',
@@ -70,7 +63,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     primaryButtonTextDisabled: p.buttonTextDisabled,
 
     accentButtonBackground: p.buttonBackground,
-    accentButtonText: p.textOnAccent,
 
     menuBackground: p.menuBackground,
     menuDivider: 'transparent',
@@ -82,7 +74,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     menuItemTextHovered: p.gray900,
 
     listBackground: p.listBackground,
-    listText: p.menuItemText,
     listItemBackgroundHovered: 'transparent',
     listItemBackgroundChecked: 'transparent',
     listItemBackgroundCheckedHovered: 'transparent',

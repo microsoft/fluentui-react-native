@@ -76,15 +76,8 @@ export const mockTheme: Theme = {
 
     focusBorder: neutralSecondary,
     variantBorder: neutralLight,
-    variantBorderHovered: neutralTertiary,
-    defaultStateBackground: neutralLighterAlt,
 
     errorText: redDark,
-    errorBackground: 'rgba(245, 135, 145, .2)',
-    blockingBackground: 'rgba(250, 65, 0, .2)',
-    warningBackground: 'rgba(255, 200, 10, .2)',
-    warningHighlight: '#ffb900',
-    successBackground: 'rgba(95, 210, 85, .2)',
 
     inputBorder: neutralTertiary,
     inputBorderHovered: neutralPrimary,
@@ -106,7 +99,6 @@ export const mockTheme: Theme = {
     buttonText: neutralPrimary,
     buttonTextHovered: neutralDark,
     buttonTextChecked: neutralDark,
-    buttonTextCheckedHovered: black,
     buttonTextPressed: neutralDark,
     buttonTextDisabled: neutralTertiary,
     buttonBorderDisabled: neutralLighter,
@@ -124,7 +116,6 @@ export const mockTheme: Theme = {
     primaryButtonTextDisabled: neutralQuaternary,
 
     accentButtonBackground: accent,
-    accentButtonText: white,
 
     menuBackground: white,
     menuDivider: neutralTertiaryAlt,
@@ -136,7 +127,6 @@ export const mockTheme: Theme = {
     menuItemTextHovered: neutralDark,
 
     listBackground: white,
-    listText: neutralPrimary,
     listItemBackgroundHovered: neutralLighter,
     listItemBackgroundChecked: neutralLight,
     listItemBackgroundCheckedHovered: neutralQuaternaryAlt,

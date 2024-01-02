@@ -17,15 +17,8 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
 
     focusBorder: p.StrokeKeyboard,
     variantBorder: p.AccentOutline,
-    variantBorderHovered: p.AccentOutline,
-    defaultStateBackground: p.Bkg,
 
     errorText: p.TextError,
-    errorBackground: p.Bkg,
-    blockingBackground: p.Bkg,
-    warningBackground: p.Bkg,
-    warningHighlight: p.TextError,
-    successBackground: p.TextEmphasis,
 
     inputBorder: p.StrokeCtlSubtle,
     inputBorderHovered: p.StrokeCtlSubtleHover,
@@ -47,7 +40,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     buttonText: p.TextCtl,
     buttonTextHovered: p.TextCtlHover,
     buttonTextChecked: p.TextCtlSelected,
-    buttonTextCheckedHovered: p.TextCtlSelected,
     buttonTextPressed: p.TextCtlPressed,
     buttonTextDisabled: p.TextCtlDisabled,
     buttonBorderDisabled: p.StrokeCtlDisabled,
@@ -65,7 +57,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     primaryButtonTextDisabled: p.TextCtlEmphasisDisabled,
 
     accentButtonBackground: p.BkgCtlEmphasis,
-    accentButtonText: p.TextCtlEmphasis,
 
     menuBackground: p.Bkg,
     menuDivider: p.AccentLight,
@@ -77,7 +68,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     menuItemTextHovered: p.TextHover,
 
     listBackground: p.Bkg,
-    listText: p.Text,
     listItemBackgroundHovered: p.BkgHover,
     listItemBackgroundChecked: p.BkgSelected,
     listItemBackgroundCheckedHovered: p.BkgSelected,

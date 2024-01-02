@@ -55,7 +55,7 @@ export interface FabricWebPalette {
   themeLighterAlt: ColorValue;
 
   // ROLE: Text, should not be called black
-  // bodyTextChecked, buttonTextCheckedHovered
+  // bodyTextChecked
   black: ColorValue;
 
   // unused
@@ -66,7 +66,7 @@ export interface FabricWebPalette {
   neutralDark: ColorValue;
 
   // ROLE: text, border
-  // bodyText, inputBorderHovered, inputText, buttonText, menuItemText, listText, actionLink
+  // bodyText, inputBorderHovered, inputText, buttonText, menuItemText, actionLink
   neutralPrimary: ColorValue;
 
   // unused
@@ -81,7 +81,7 @@ export interface FabricWebPalette {
   neutralSecondaryAlt: ColorValue;
 
   // ROLE: text, border
-  // disabledText, disabledBodyText, variantBorderHovered, inputBorder, buttonTextDisabled
+  // disabledText, disabledBodyText, inputBorder, buttonTextDisabled
   neutralTertiary: ColorValue;
 
   // ROLE: text, background, border
@@ -107,7 +107,7 @@ export interface FabricWebPalette {
   neutralLighter: ColorValue;
 
   // ROLE: background
-  // bodyStandoutBackground, defaultStateBackground
+  // bodyStandoutBackground
   neutralLighterAlt: ColorValue;
 
   // ROLE: background
@@ -116,7 +116,7 @@ export interface FabricWebPalette {
 
   // ROLE: background, theme/accent text
   // bodyBackground, bodyFrameBackground, inputBackground, inputForegroundChecked, primaryButtonText, primaryButtonTextHovered
-  // primaryButtonTextPressed, accentButtonText, menuBackground, listBackground
+  // primaryButtonTextPressed, menuBackground, listBackground
   white: ColorValue;
 
   // red color
@@ -168,8 +168,6 @@ export interface PaletteTextColors {
   buttonTextHovered: ColorValue;
   /** Color of text in a checked standard button */
   buttonTextChecked: ColorValue;
-  /** Color of text in a checked and hovered standard button */
-  buttonTextCheckedHovered: ColorValue;
   /** Color of text in a pressed standard button; i.e. currently being clicked by mouse */
   buttonTextPressed: ColorValue;
   /** Color of text in a disabled standard button */
@@ -183,14 +181,6 @@ export interface PaletteTextColors {
   primaryButtonTextPressed: ColorValue;
   /** Color of text in a disabled primary button */
   primaryButtonTextDisabled: ColorValue;
-
-  /** Color of text for accent button (kicker) */
-  accentButtonText: ColorValue;
-
-  //// Lists
-
-  /** The default text color for list item titles and text in column fields. */
-  listText: ColorValue;
 }
 
 /**
@@ -216,23 +206,6 @@ export interface PaletteBackgroundColors {
   focusBorder: ColorValue;
   /** The color of the border that provides contrast between an element, such as a card, and an emphasized background. */
   variantBorder: ColorValue;
-  /** Hover color of border that provides contrast between an element, such as a card, and an emphasized background. */
-  variantBorderHovered: ColorValue;
-  /** Background color for default/empty state elements; default icons, placeholder graphics, empty seats, etc. */
-  defaultStateBackground: ColorValue;
-
-  //// Invariants - slots that rarely change color theme-to-theme because the color has meaning
-
-  /** The background for errors, if necessary, or highlighting the section of the page where the error is present. */
-  errorBackground: ColorValue;
-  /** Background for blocking issues, which is more severe than a warning, but not as bad as an error. */
-  blockingBackground: ColorValue;
-  /** Background for warning messages. */
-  warningBackground: ColorValue;
-  /** Foreground color for warning highlights */
-  warningHighlight: ColorValue;
-  /** Background for success */
-  successBackground: ColorValue;
 
   //// Input controls slots (text fields, checkboxes, radios...)
 
@@ -309,8 +282,6 @@ export interface PaletteBackgroundColors {
 
   /** The background color for the entire list. */
   listBackground: ColorValue;
-  /** The default text color for list item titles and text in column fields. */
-  listText: ColorValue;
   /** The background color of a hovered list item. */
   listItemBackgroundHovered: ColorValue;
   /** The background color of a checked list item. */

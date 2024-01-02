@@ -11,7 +11,6 @@ exports[`createAppleTheme test 1`] = `
         "light": "#0078D4",
       },
     },
-    "accentButtonText": "#ffffff",
     "actionLink": {
       "semantic": [
         "linkColor",
@@ -21,14 +20,6 @@ exports[`createAppleTheme test 1`] = `
       "semantic": [
         "windowBackgroundColor",
       ],
-    },
-    "blockingBackground": {
-      "dynamic": {
-        "dark": "transparent",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#DD4242",
-      },
     },
     "bodyDivider": {
       "semantic": [
@@ -133,7 +124,6 @@ exports[`createAppleTheme test 1`] = `
     "buttonBorderFocused": "#00000000",
     "buttonText": "#616161",
     "buttonTextChecked": "#616161",
-    "buttonTextCheckedHovered": "#616161",
     "buttonTextDisabled": {
       "colorWithSystemEffect": {
         "baseColor": "#616161",
@@ -218,11 +208,6 @@ exports[`createAppleTheme test 1`] = `
     "defaultPressedContent": "#000000",
     "defaultPressedIcon": "#616161",
     "defaultPressedSecondaryContent": "#ffffff",
-    "defaultStateBackground": {
-      "semantic": [
-        "controlBackgroundColor",
-      ],
-    },
     "disabledBackground": "#E1E1E1",
     "disabledBodyText": {
       "semantic": [
@@ -233,14 +218,6 @@ exports[`createAppleTheme test 1`] = `
       "semantic": [
         "tertiaryLabelColor",
       ],
-    },
-    "errorBackground": {
-      "dynamic": {
-        "dark": "transparent",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#DD4242",
-      },
     },
     "errorText": {
       "dynamic": {
@@ -446,11 +423,6 @@ exports[`createAppleTheme test 1`] = `
     "listItemBackgroundChecked": "transparent",
     "listItemBackgroundCheckedHovered": "transparent",
     "listItemBackgroundHovered": "transparent",
-    "listText": {
-      "semantic": [
-        "labelColor",
-      ],
-    },
     "menuBackground": "transparent",
     "menuDivider": {
       "semantic": [
@@ -609,14 +581,6 @@ exports[`createAppleTheme test 1`] = `
     "subtleBackgroundHover": "#f5f5f5",
     "subtleBackgroundPressed": "#e0e0e0",
     "subtleBackgroundSelected": "#ebebeb",
-    "successBackground": {
-      "dynamic": {
-        "dark": "#0D9D3D",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#27AC22",
-      },
-    },
     "successBackground1": "#f1faf1",
     "successBackground2": "#9fd89f",
     "successBackground3": "#107c10",
@@ -639,19 +603,6 @@ exports[`createAppleTheme test 1`] = `
         "separatorColor",
       ],
     },
-    "variantBorderHovered": {
-      "semantic": [
-        "separatorColor",
-      ],
-    },
-    "warningBackground": {
-      "dynamic": {
-        "dark": "#FFC328",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD335",
-      },
-    },
     "warningBackground1": "#fffef5",
     "warningBackground2": "#fef7b2",
     "warningBackground3": "#fde300",
@@ -662,14 +613,6 @@ exports[`createAppleTheme test 1`] = `
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
-    "warningHighlight": {
-      "dynamic": {
-        "dark": "#E0AB24",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD94E",
-      },
-    },
   },
   "components": {
     "Button": {

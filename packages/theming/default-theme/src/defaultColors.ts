@@ -25,16 +25,8 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
 
     focusBorder: p.neutralSecondary,
     variantBorder: p.neutralLight,
-    variantBorderHovered: p.neutralTertiary,
-    defaultStateBackground: p.neutralLighterAlt,
 
     errorText: !isInverted ? p.redDark : '#ff5f5f',
-    errorBackground: !isInverted ? 'rgba(245, 135, 145, .2)' : 'rgba(232, 17, 35, .5)',
-    blockingBackground: !isInverted ? 'rgba(250, 65, 0, .2)' : 'rgba(234, 67, 0, .5)',
-    warningBackground: !isInverted ? 'rgba(255, 200, 10, .2)' : 'rgba(255, 251, 0, .6)',
-    warningHighlight: !isInverted ? '#ffb900' : '#fff100',
-    successBackground: !isInverted ? 'rgba(95, 210, 85, .2)' : 'rgba(186, 216, 10, .4)',
-
     inputBorder: p.neutralTertiary,
     inputBorderHovered: p.neutralPrimary,
     inputBackground: p.white,
@@ -55,7 +47,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     buttonText: isInverted ? p.black : p.neutralPrimary,
     buttonTextHovered: isInverted ? p.neutralPrimary : p.neutralDark,
     buttonTextChecked: p.neutralDark,
-    buttonTextCheckedHovered: p.black,
     buttonTextPressed: p.neutralDark,
     buttonTextDisabled: p.neutralTertiary,
     buttonBorderDisabled: p.neutralLighter,
@@ -73,7 +64,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     primaryButtonTextDisabled: p.neutralQuaternary,
 
     accentButtonBackground: p.accent,
-    accentButtonText: p.white,
 
     menuBackground: isInverted ? p.neutralLighter : p.white,
     menuDivider: isInverted ? p.neutralTertiaryAlt : p.neutralTertiaryAlt,
@@ -85,7 +75,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     menuItemTextHovered: p.neutralDark,
 
     listBackground: p.white,
-    listText: p.neutralPrimary,
     listItemBackgroundHovered: p.neutralLighter,
     listItemBackgroundChecked: p.neutralLight,
     listItemBackgroundCheckedHovered: p.neutralQuaternaryAlt,
@@ -218,15 +207,8 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
 
     focusBorder: '#ffffff',
     variantBorder: '#ffffff',
-    variantBorderHovered: '#ffffff',
-    defaultStateBackground: '#000000',
 
     errorText: '#ffffff',
-    errorBackground: '#000000',
-    blockingBackground: '#000000',
-    warningBackground: '#000000',
-    warningHighlight: '#ffffff',
-    successBackground: '#000000',
 
     inputBorder: '#ffffff',
     inputBorderHovered: '#1aebff',
@@ -248,7 +230,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     buttonText: '#ffffff',
     buttonTextHovered: '#000000',
     buttonTextChecked: '#000000',
-    buttonTextCheckedHovered: '#000000',
     buttonTextPressed: '#000000',
     buttonTextDisabled: '#3ff23f',
     buttonBorderDisabled: '#3ff23f',
@@ -266,7 +247,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     primaryButtonTextDisabled: '#3ff23f',
 
     accentButtonBackground: '#000000',
-    accentButtonText: '#ffffff',
 
     menuBackground: '#000000',
     menuDivider: '#ffffff',
@@ -278,7 +258,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     menuItemTextHovered: '#000000',
 
     listBackground: '#000000',
-    listText: '#ffffff',
     listItemBackgroundHovered: '#1aebff',
     listItemBackgroundChecked: '#1aebff',
     listItemBackgroundCheckedHovered: '#1aebff',
