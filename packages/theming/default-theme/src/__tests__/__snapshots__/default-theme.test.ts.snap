@@ -1339,14 +1339,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dark', defaultAppe
     "warningForeground2": "#fef7b2",
     "warningForeground3": "#fdea3d",
     "warningForegroundInverted": "#817400",
-<<<<<<< HEAD
-    "warningText": "#ffffff",
-||||||| a0a844846
-    "warningHighlight": "#fff100",
-    "warningText": "#ffffff",
-=======
-    "warningHighlight": "#fff100",
->>>>>>> main
   },
   "components": {},
   "host": {
@@ -1993,14 +1985,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dynamic', defaultA
     "warningForeground2": "#fef7b2",
     "warningForeground3": "#fdea3d",
     "warningForegroundInverted": "#817400",
-<<<<<<< HEAD
-    "warningText": "#ffffff",
-||||||| a0a844846
-    "warningHighlight": "#fff100",
-    "warningText": "#ffffff",
-=======
-    "warningHighlight": "#fff100",
->>>>>>> main
   },
   "components": {},
   "host": {
@@ -3215,14 +3199,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'highContrast', def
         "WindowText",
       ],
     },
-<<<<<<< HEAD
-    "warningText": "#ffffff",
-||||||| a0a844846
-    "warningHighlight": "#ffffff",
-    "warningText": "#ffffff",
-=======
-    "warningHighlight": "#ffffff",
->>>>>>> main
   },
   "components": {},
   "host": {
@@ -3869,14 +3845,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
-<<<<<<< HEAD
-    "warningText": "#333333",
-||||||| a0a844846
-    "warningHighlight": "#ffb900",
-    "warningText": "#333333",
-=======
-    "warningHighlight": "#ffb900",
->>>>>>> main
   },
   "components": {},
   "host": {
@@ -4523,14 +4491,6 @@ exports[`createDefaultTheme test themeOption - { appearance: undefined, defaultA
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
-<<<<<<< HEAD
-    "warningText": "#333333",
-||||||| a0a844846
-    "warningHighlight": "#ffb900",
-    "warningText": "#333333",
-=======
-    "warningHighlight": "#ffb900",
->>>>>>> main
   },
   "components": {},
   "host": {
@@ -5696,14 +5656,6 @@ exports[`defaultFluentDarkTheme test 1`] = `
     "warningForeground2": "#fef7b2",
     "warningForeground3": "#fdea3d",
     "warningForegroundInverted": "#817400",
-<<<<<<< HEAD
-    "warningText": "#ffffff",
-||||||| a0a844846
-    "warningHighlight": "#fff100",
-    "warningText": "#ffffff",
-=======
-    "warningHighlight": "#fff100",
->>>>>>> main
   },
   "components": {},
   "host": {
@@ -6350,14 +6302,6 @@ exports[`defaultFluentTheme test 1`] = `
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
-<<<<<<< HEAD
-    "warningText": "#333333",
-||||||| a0a844846
-    "warningHighlight": "#ffb900",
-    "warningText": "#333333",
-=======
-    "warningHighlight": "#ffb900",
->>>>>>> main
   },
   "components": {},
   "host": {

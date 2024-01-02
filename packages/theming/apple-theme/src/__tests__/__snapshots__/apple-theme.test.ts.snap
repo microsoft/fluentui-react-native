@@ -613,42 +613,6 @@ exports[`createAppleTheme test 1`] = `
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
-<<<<<<< HEAD
-    "warningText": {
-      "dynamic": {
-        "dark": "#FFC328",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD335",
-      },
-    },
-||||||| a0a844846
-    "warningHighlight": {
-      "dynamic": {
-        "dark": "#E0AB24",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD94E",
-      },
-    },
-    "warningText": {
-      "dynamic": {
-        "dark": "#FFC328",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD335",
-      },
-    },
-=======
-    "warningHighlight": {
-      "dynamic": {
-        "dark": "#E0AB24",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD94E",
-      },
-    },
->>>>>>> main
   },
   "components": {
     "Button": {

@@ -2735,14 +2735,6 @@ exports[`createOfficeTheme test 1`] = `
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
-<<<<<<< HEAD
-    "warningText": "#262626",
-||||||| a0a844846
-    "warningHighlight": "#A50000",
-    "warningText": "#262626",
-=======
-    "warningHighlight": "#A50000",
->>>>>>> main
   },
   "host": {
     "appearance": "light",
