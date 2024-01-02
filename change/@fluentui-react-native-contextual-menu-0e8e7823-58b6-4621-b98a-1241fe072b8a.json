@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Specify disabled=false explicitly for contextual menu items and subitems",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
