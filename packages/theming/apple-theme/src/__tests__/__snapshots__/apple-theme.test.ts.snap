@@ -16,11 +16,6 @@ exports[`createAppleTheme test 1`] = `
         "linkColor",
       ],
     },
-    "actionLinkHovered": {
-      "semantic": [
-        "linkColor",
-      ],
-    },
     "background": {
       "semantic": [
         "windowBackgroundColor",
@@ -111,7 +106,6 @@ exports[`createAppleTheme test 1`] = `
     "brandedSecondaryContent": "#ffffff",
     "buttonBackground": "#ffffff",
     "buttonBackgroundChecked": "#f5f5f5",
-    "buttonBackgroundCheckedHovered": "#f5f5f5",
     "buttonBackgroundDisabled": {
       "colorWithSystemEffect": {
         "baseColor": "#f5f5f5",
@@ -215,19 +209,9 @@ exports[`createAppleTheme test 1`] = `
     "defaultPressedIcon": "#616161",
     "defaultPressedSecondaryContent": "#ffffff",
     "disabledBackground": "#E1E1E1",
-    "disabledBodySubtext": {
-      "semantic": [
-        "quaternaryLabelColor",
-      ],
-    },
     "disabledBodyText": {
       "semantic": [
         "tertiaryLabelColor",
-      ],
-    },
-    "disabledSubtext": {
-      "semantic": [
-        "quaternaryLabelColor",
       ],
     },
     "disabledText": {
@@ -406,11 +390,6 @@ exports[`createAppleTheme test 1`] = `
       ],
     },
     "inputText": {
-      "semantic": [
-        "textColor",
-      ],
-    },
-    "inputTextHovered": {
       "semantic": [
         "textColor",
       ],
@@ -634,6 +613,7 @@ exports[`createAppleTheme test 1`] = `
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
+<<<<<<< HEAD
     "warningText": {
       "dynamic": {
         "dark": "#FFC328",
@@ -642,6 +622,33 @@ exports[`createAppleTheme test 1`] = `
         "light": "#FFD335",
       },
     },
+||||||| a0a844846
+    "warningHighlight": {
+      "dynamic": {
+        "dark": "#E0AB24",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD94E",
+      },
+    },
+    "warningText": {
+      "dynamic": {
+        "dark": "#FFC328",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD335",
+      },
+    },
+=======
+    "warningHighlight": {
+      "dynamic": {
+        "dark": "#E0AB24",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#FFD94E",
+      },
+    },
+>>>>>>> main
   },
   "components": {
     "Button": {

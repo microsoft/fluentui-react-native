@@ -5,7 +5,6 @@ exports[`createAndroidTheme test option { appearance: 'dark', defaultAppearance:
   "colors": {
     "accentButtonBackground": "#0086F0",
     "actionLink": "#E1E1E1",
-    "actionLinkHovered": "#E1E1E1",
     "background": "#000000",
     "bodyDivider": "#292929",
     "bodyFrameBackground": "#212121",
@@ -52,7 +51,6 @@ exports[`createAndroidTheme test option { appearance: 'dark', defaultAppearance:
     "brandedSecondaryContent": "#6E6E6E",
     "buttonBackground": "#0086F0",
     "buttonBackgroundChecked": "#0086F0",
-    "buttonBackgroundCheckedHovered": "#0086F0",
     "buttonBackgroundDisabled": "#0078D4",
     "buttonBackgroundHovered": "#0086F0",
     "buttonBackgroundPressed": "#004C87",
@@ -92,9 +90,7 @@ exports[`createAndroidTheme test option { appearance: 'dark', defaultAppearance:
     "defaultPressedIcon": "#000000",
     "defaultPressedSecondaryContent": "#6E6E6E",
     "disabledBackground": "#212121",
-    "disabledBodySubtext": "#ACACAC",
     "disabledBodyText": "#404040",
-    "disabledSubtext": "#C8C8C8",
     "disabledText": "#919191",
     "errorText": "#E83A3A",
     "focusBorder": "transparent",
@@ -136,7 +132,6 @@ exports[`createAndroidTheme test option { appearance: 'dark', defaultAppearance:
     "inputForegroundChecked": "#0086F0",
     "inputPlaceholderText": "#919191",
     "inputText": "#E1E1E1",
-    "inputTextHovered": "#E1E1E1",
     "link": "#D83B01",
     "linkHovered": "#D83B01",
     "linkPressed": "#D83B01",
@@ -249,7 +244,14 @@ exports[`createAndroidTheme test option { appearance: 'dark', defaultAppearance:
     "warningBackground2": "#e4cc00",
     "warningForeground1": "#feee66",
     "warningForeground2": "#feee66",
+<<<<<<< HEAD
     "warningText": "#0EB244",
+||||||| a0a844846
+    "warningHighlight": "#0D9D3D",
+    "warningText": "#0EB244",
+=======
+    "warningHighlight": "#0D9D3D",
+>>>>>>> main
   },
   "components": {
     "Checkbox": {
@@ -622,7 +624,6 @@ exports[`createAndroidTheme test option { appearance: 'darkElevated', defaultApp
   "colors": {
     "accentButtonBackground": "#0086F0",
     "actionLink": "#E1E1E1",
-    "actionLinkHovered": "#E1E1E1",
     "background": "#000000",
     "bodyDivider": "#292929",
     "bodyFrameBackground": "#212121",
@@ -669,7 +670,6 @@ exports[`createAndroidTheme test option { appearance: 'darkElevated', defaultApp
     "brandedSecondaryContent": "#6E6E6E",
     "buttonBackground": "#0086F0",
     "buttonBackgroundChecked": "#0086F0",
-    "buttonBackgroundCheckedHovered": "#0086F0",
     "buttonBackgroundDisabled": "#0078D4",
     "buttonBackgroundHovered": "#0086F0",
     "buttonBackgroundPressed": "#004C87",
@@ -709,9 +709,7 @@ exports[`createAndroidTheme test option { appearance: 'darkElevated', defaultApp
     "defaultPressedIcon": "#000000",
     "defaultPressedSecondaryContent": "#6E6E6E",
     "disabledBackground": "#212121",
-    "disabledBodySubtext": "#ACACAC",
     "disabledBodyText": "#404040",
-    "disabledSubtext": "#C8C8C8",
     "disabledText": "#919191",
     "errorText": "#E83A3A",
     "focusBorder": "transparent",
@@ -753,7 +751,6 @@ exports[`createAndroidTheme test option { appearance: 'darkElevated', defaultApp
     "inputForegroundChecked": "#0086F0",
     "inputPlaceholderText": "#919191",
     "inputText": "#E1E1E1",
-    "inputTextHovered": "#E1E1E1",
     "link": "#D83B01",
     "linkHovered": "#D83B01",
     "linkPressed": "#D83B01",
@@ -866,7 +863,14 @@ exports[`createAndroidTheme test option { appearance: 'darkElevated', defaultApp
     "warningBackground2": "#e4cc00",
     "warningForeground1": "#feee66",
     "warningForeground2": "#feee66",
+<<<<<<< HEAD
     "warningText": "#0EB244",
+||||||| a0a844846
+    "warningHighlight": "#0D9D3D",
+    "warningText": "#0EB244",
+=======
+    "warningHighlight": "#0D9D3D",
+>>>>>>> main
   },
   "components": {
     "Checkbox": {
@@ -1239,7 +1243,6 @@ exports[`createAndroidTheme test option { appearance: 'dynamic', defaultAppearan
   "colors": {
     "accentButtonBackground": "#0086F0",
     "actionLink": "#E1E1E1",
-    "actionLinkHovered": "#E1E1E1",
     "background": "#000000",
     "bodyDivider": "#292929",
     "bodyFrameBackground": "#212121",
@@ -1286,7 +1289,6 @@ exports[`createAndroidTheme test option { appearance: 'dynamic', defaultAppearan
     "brandedSecondaryContent": "#6E6E6E",
     "buttonBackground": "#0086F0",
     "buttonBackgroundChecked": "#0086F0",
-    "buttonBackgroundCheckedHovered": "#0086F0",
     "buttonBackgroundDisabled": "#0078D4",
     "buttonBackgroundHovered": "#0086F0",
     "buttonBackgroundPressed": "#004C87",
@@ -1326,9 +1328,7 @@ exports[`createAndroidTheme test option { appearance: 'dynamic', defaultAppearan
     "defaultPressedIcon": "#000000",
     "defaultPressedSecondaryContent": "#6E6E6E",
     "disabledBackground": "#212121",
-    "disabledBodySubtext": "#ACACAC",
     "disabledBodyText": "#404040",
-    "disabledSubtext": "#C8C8C8",
     "disabledText": "#919191",
     "errorText": "#E83A3A",
     "focusBorder": "transparent",
@@ -1370,7 +1370,6 @@ exports[`createAndroidTheme test option { appearance: 'dynamic', defaultAppearan
     "inputForegroundChecked": "#0086F0",
     "inputPlaceholderText": "#919191",
     "inputText": "#E1E1E1",
-    "inputTextHovered": "#E1E1E1",
     "link": "#D83B01",
     "linkHovered": "#D83B01",
     "linkPressed": "#D83B01",
@@ -1483,7 +1482,14 @@ exports[`createAndroidTheme test option { appearance: 'dynamic', defaultAppearan
     "warningBackground2": "#e4cc00",
     "warningForeground1": "#feee66",
     "warningForeground2": "#feee66",
+<<<<<<< HEAD
     "warningText": "#0EB244",
+||||||| a0a844846
+    "warningHighlight": "#0D9D3D",
+    "warningText": "#0EB244",
+=======
+    "warningHighlight": "#0D9D3D",
+>>>>>>> main
   },
   "components": {
     "Checkbox": {
@@ -1856,7 +1862,6 @@ exports[`createAndroidTheme test option { appearance: 'highContrast', defaultApp
   "colors": {
     "accentButtonBackground": "#0086F0",
     "actionLink": "#E1E1E1",
-    "actionLinkHovered": "#E1E1E1",
     "background": "#000000",
     "bodyDivider": "#292929",
     "bodyFrameBackground": "#212121",
@@ -1903,7 +1908,6 @@ exports[`createAndroidTheme test option { appearance: 'highContrast', defaultApp
     "brandedSecondaryContent": "#6E6E6E",
     "buttonBackground": "#0086F0",
     "buttonBackgroundChecked": "#0086F0",
-    "buttonBackgroundCheckedHovered": "#0086F0",
     "buttonBackgroundDisabled": "#0078D4",
     "buttonBackgroundHovered": "#0086F0",
     "buttonBackgroundPressed": "#004C87",
@@ -1943,9 +1947,7 @@ exports[`createAndroidTheme test option { appearance: 'highContrast', defaultApp
     "defaultPressedIcon": "#000000",
     "defaultPressedSecondaryContent": "#6E6E6E",
     "disabledBackground": "#212121",
-    "disabledBodySubtext": "#ACACAC",
     "disabledBodyText": "#404040",
-    "disabledSubtext": "#C8C8C8",
     "disabledText": "#919191",
     "errorText": "#E83A3A",
     "focusBorder": "transparent",
@@ -1987,7 +1989,6 @@ exports[`createAndroidTheme test option { appearance: 'highContrast', defaultApp
     "inputForegroundChecked": "#0086F0",
     "inputPlaceholderText": "#919191",
     "inputText": "#E1E1E1",
-    "inputTextHovered": "#E1E1E1",
     "link": "#D83B01",
     "linkHovered": "#D83B01",
     "linkPressed": "#D83B01",
@@ -2100,7 +2101,14 @@ exports[`createAndroidTheme test option { appearance: 'highContrast', defaultApp
     "warningBackground2": "#e4cc00",
     "warningForeground1": "#feee66",
     "warningForeground2": "#feee66",
+<<<<<<< HEAD
     "warningText": "#0EB244",
+||||||| a0a844846
+    "warningHighlight": "#0D9D3D",
+    "warningText": "#0EB244",
+=======
+    "warningHighlight": "#0D9D3D",
+>>>>>>> main
   },
   "components": {
     "Checkbox": {
@@ -2473,7 +2481,6 @@ exports[`createAndroidTheme test option { appearance: 'light', defaultAppearance
   "colors": {
     "accentButtonBackground": "#0078D4",
     "actionLink": "#212121",
-    "actionLinkHovered": "#212121",
     "background": "#FFFFFF",
     "bodyDivider": "#E1E1E1",
     "bodyFrameBackground": "#F1F1F1",
@@ -2520,7 +2527,6 @@ exports[`createAndroidTheme test option { appearance: 'light', defaultAppearance
     "brandedSecondaryContent": "#919191",
     "buttonBackground": "#0078D4",
     "buttonBackgroundChecked": "#0078D4",
-    "buttonBackgroundCheckedHovered": "#0078D4",
     "buttonBackgroundDisabled": "#F1F1F1",
     "buttonBackgroundHovered": "#0078D4",
     "buttonBackgroundPressed": "#005A9E",
@@ -2560,9 +2566,7 @@ exports[`createAndroidTheme test option { appearance: 'light', defaultAppearance
     "defaultPressedIcon": "#FFFFFF",
     "defaultPressedSecondaryContent": "#919191",
     "disabledBackground": "#F1F1F1",
-    "disabledBodySubtext": "#ACACAC",
     "disabledBodyText": "#ACACAC",
-    "disabledSubtext": "#C8C8C8",
     "disabledText": "#6E6E6E",
     "errorText": "#D92C2C",
     "focusBorder": "transparent",
@@ -2604,7 +2608,6 @@ exports[`createAndroidTheme test option { appearance: 'light', defaultAppearance
     "inputForegroundChecked": "#0078D4",
     "inputPlaceholderText": "#6E6E6E",
     "inputText": "#212121",
-    "inputTextHovered": "#212121",
     "link": "#D83B01",
     "linkHovered": "#D83B01",
     "linkPressed": "#D83B01",
@@ -2717,7 +2720,14 @@ exports[`createAndroidTheme test option { appearance: 'light', defaultAppearance
     "warningBackground2": "#fde300",
     "warningForeground1": "#817400",
     "warningForeground2": "#817400",
+<<<<<<< HEAD
     "warningText": "#FFD335",
+||||||| a0a844846
+    "warningHighlight": "#FFD94E",
+    "warningText": "#FFD335",
+=======
+    "warningHighlight": "#FFD94E",
+>>>>>>> main
   },
   "components": {
     "Checkbox": {
@@ -3090,7 +3100,6 @@ exports[`getAndroidTheme dark appearance test 1`] = `
   "colors": {
     "accentButtonBackground": "#0086F0",
     "actionLink": "#E1E1E1",
-    "actionLinkHovered": "#E1E1E1",
     "background": "#000000",
     "bodyDivider": "#292929",
     "bodyFrameBackground": "#212121",
@@ -3137,7 +3146,6 @@ exports[`getAndroidTheme dark appearance test 1`] = `
     "brandedSecondaryContent": "#6E6E6E",
     "buttonBackground": "#0086F0",
     "buttonBackgroundChecked": "#0086F0",
-    "buttonBackgroundCheckedHovered": "#0086F0",
     "buttonBackgroundDisabled": "#0078D4",
     "buttonBackgroundHovered": "#0086F0",
     "buttonBackgroundPressed": "#004C87",
@@ -3177,9 +3185,7 @@ exports[`getAndroidTheme dark appearance test 1`] = `
     "defaultPressedIcon": "#000000",
     "defaultPressedSecondaryContent": "#6E6E6E",
     "disabledBackground": "#212121",
-    "disabledBodySubtext": "#ACACAC",
     "disabledBodyText": "#404040",
-    "disabledSubtext": "#C8C8C8",
     "disabledText": "#919191",
     "errorText": "#E83A3A",
     "focusBorder": "transparent",
@@ -3221,7 +3227,6 @@ exports[`getAndroidTheme dark appearance test 1`] = `
     "inputForegroundChecked": "#0086F0",
     "inputPlaceholderText": "#919191",
     "inputText": "#E1E1E1",
-    "inputTextHovered": "#E1E1E1",
     "link": "#D83B01",
     "linkHovered": "#D83B01",
     "linkPressed": "#D83B01",
@@ -3334,7 +3339,14 @@ exports[`getAndroidTheme dark appearance test 1`] = `
     "warningBackground2": "#e4cc00",
     "warningForeground1": "#feee66",
     "warningForeground2": "#feee66",
+<<<<<<< HEAD
     "warningText": "#0EB244",
+||||||| a0a844846
+    "warningHighlight": "#0D9D3D",
+    "warningText": "#0EB244",
+=======
+    "warningHighlight": "#0D9D3D",
+>>>>>>> main
   },
   "components": {
     "Checkbox": {
@@ -3707,7 +3719,6 @@ exports[`getAndroidTheme light appearance test 1`] = `
   "colors": {
     "accentButtonBackground": "#0078D4",
     "actionLink": "#212121",
-    "actionLinkHovered": "#212121",
     "background": "#FFFFFF",
     "bodyDivider": "#E1E1E1",
     "bodyFrameBackground": "#F1F1F1",
@@ -3754,7 +3765,6 @@ exports[`getAndroidTheme light appearance test 1`] = `
     "brandedSecondaryContent": "#919191",
     "buttonBackground": "#0078D4",
     "buttonBackgroundChecked": "#0078D4",
-    "buttonBackgroundCheckedHovered": "#0078D4",
     "buttonBackgroundDisabled": "#F1F1F1",
     "buttonBackgroundHovered": "#0078D4",
     "buttonBackgroundPressed": "#005A9E",
@@ -3794,9 +3804,7 @@ exports[`getAndroidTheme light appearance test 1`] = `
     "defaultPressedIcon": "#FFFFFF",
     "defaultPressedSecondaryContent": "#919191",
     "disabledBackground": "#F1F1F1",
-    "disabledBodySubtext": "#ACACAC",
     "disabledBodyText": "#ACACAC",
-    "disabledSubtext": "#C8C8C8",
     "disabledText": "#6E6E6E",
     "errorText": "#D92C2C",
     "focusBorder": "transparent",
@@ -3838,7 +3846,6 @@ exports[`getAndroidTheme light appearance test 1`] = `
     "inputForegroundChecked": "#0078D4",
     "inputPlaceholderText": "#6E6E6E",
     "inputText": "#212121",
-    "inputTextHovered": "#212121",
     "link": "#D83B01",
     "linkHovered": "#D83B01",
     "linkPressed": "#D83B01",
@@ -3951,7 +3958,14 @@ exports[`getAndroidTheme light appearance test 1`] = `
     "warningBackground2": "#fde300",
     "warningForeground1": "#817400",
     "warningForeground2": "#817400",
+<<<<<<< HEAD
     "warningText": "#FFD335",
+||||||| a0a844846
+    "warningHighlight": "#FFD94E",
+    "warningText": "#FFD335",
+=======
+    "warningHighlight": "#FFD94E",
+>>>>>>> main
   },
   "components": {
     "Checkbox": {

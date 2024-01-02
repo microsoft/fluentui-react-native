@@ -19,14 +19,11 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     disabledBackground: p.surfacesTertiary,
     disabledText: p.textDisabledHighContrast,
     disabledBodyText: p.textDisabled,
-    disabledSubtext: p.gray200,
-    disabledBodySubtext: p.gray300,
 
     focusBorder: 'transparent',
     variantBorder: 'transparent',
 
     errorText: p.dangerPrimary,
-    warningText: p.warningPrimary,
     successBackground: p.successTint10,
 
     inputBorder: 'transparent',
@@ -38,13 +35,11 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     inputFocusBorderAlt: 'transparent',
     smallInputBorder: 'transparent',
     inputText: p.textPrimary,
-    inputTextHovered: p.textPrimary,
     inputPlaceholderText: p.textSecondary,
 
     buttonBackground: p.buttonBackground,
     buttonBackgroundChecked: p.buttonBackground,
     buttonBackgroundHovered: p.buttonBackground,
-    buttonBackgroundCheckedHovered: p.buttonBackground,
     buttonBackgroundPressed: p.buttonBackgroundPressed,
     buttonBackgroundDisabled: p.buttonBackgroundDisabled,
     buttonBorder: 'transparent',
@@ -87,7 +82,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     listHeaderBackgroundPressed: 'transparent',
 
     actionLink: p.textPrimary,
-    actionLinkHovered: p.textPrimary,
     link: p.textHyperLink,
     linkHovered: p.textHyperLink,
     linkPressed: p.textHyperLink,

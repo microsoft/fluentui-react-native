@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Thu, 21 Dec 2023 01:31:00 GMT",
+      "version": "0.14.2",
+      "tag": "@uifabricshared/foundation-tokens_v0.14.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-tokens",
+            "comment": "Bump @fluentui-react-native/tokens to v0.22.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Dec 2023 00:05:24 GMT",
       "version": "0.14.1",
       "tag": "@uifabricshared/foundation-tokens_v0.14.1",

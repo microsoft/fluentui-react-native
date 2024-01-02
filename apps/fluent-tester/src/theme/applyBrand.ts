@@ -144,7 +144,6 @@ export const applyBrand = (parent: Theme, currentBrand: string): PartialTheme =>
           primaryButtonBorder: ramp.App7,
           primaryButtonBorderFocused: ramp.App7,
           accentButtonBackground: ramp.App6,
-          actionLinkHovered: ramp.App5,
           link: ramp.App6,
           linkHovered: ramp.App7,
           linkPressed: ramp.App8,

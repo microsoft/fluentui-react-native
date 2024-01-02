@@ -1,8 +1,31 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Wed, 20 Dec 2023 00:05:24 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Dec 2023 01:31:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.0
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Minor changes
+
+- Remove unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.22.0
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.6.3
+- Bump @fluentui-react-native/theme to v0.10.2
+- Bump @fluentui-react-native/theme-tokens to v0.26.2
+- Bump @fluentui-react-native/theme-types to v0.35.0
+- Bump @fluentui-react-native/theming-utils to v0.25.2
+
+## 0.23.1
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.21.1
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.6.2
 
 ## 0.23.0
 

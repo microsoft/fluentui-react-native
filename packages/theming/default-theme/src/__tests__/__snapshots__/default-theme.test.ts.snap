@@ -1044,7 +1044,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dark', defaultAppe
   "colors": {
     "accentButtonBackground": "#185abd",
     "actionLink": "#f3f2f1",
-    "actionLinkHovered": "#faf9f8",
     "background": "#1b1a19",
     "bodyDivider": "#292827",
     "bodyFrameBackground": "#1b1a19",
@@ -1088,7 +1087,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dark', defaultAppe
     "brandedSecondaryContent": "#201f1e",
     "buttonBackground": "#252423",
     "buttonBackgroundChecked": "#484644",
-    "buttonBackgroundCheckedHovered": "#292827",
     "buttonBackgroundDisabled": "#252423",
     "buttonBackgroundHovered": "#292827",
     "buttonBackgroundPressed": "#292827",
@@ -1151,9 +1149,7 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dark', defaultAppe
     "defaultPressedIcon": "#faf9f8",
     "defaultPressedSecondaryContent": "#797775",
     "disabledBackground": "#323130",
-    "disabledBodySubtext": "#484644",
     "disabledBodyText": "#797775",
-    "disabledSubtext": "#3b3a39",
     "disabledText": "#797775",
     "errorText": "#ff5f5f",
     "focusBorder": "#a19f9d",
@@ -1195,7 +1191,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dark', defaultAppe
     "inputForegroundChecked": "#1b1a19",
     "inputPlaceholderText": "#a19f9d",
     "inputText": "#f3f2f1",
-    "inputTextHovered": "#faf9f8",
     "link": "#2e6ac5",
     "linkHovered": "#82c7ff",
     "linkPressed": "#aec6eb",
@@ -1344,7 +1339,14 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dark', defaultAppe
     "warningForeground2": "#fef7b2",
     "warningForeground3": "#fdea3d",
     "warningForegroundInverted": "#817400",
+<<<<<<< HEAD
     "warningText": "#ffffff",
+||||||| a0a844846
+    "warningHighlight": "#fff100",
+    "warningText": "#ffffff",
+=======
+    "warningHighlight": "#fff100",
+>>>>>>> main
   },
   "components": {},
   "host": {
@@ -1696,7 +1698,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dynamic', defaultA
   "colors": {
     "accentButtonBackground": "#185abd",
     "actionLink": "#f3f2f1",
-    "actionLinkHovered": "#faf9f8",
     "background": "#1b1a19",
     "bodyDivider": "#292827",
     "bodyFrameBackground": "#1b1a19",
@@ -1740,7 +1741,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dynamic', defaultA
     "brandedSecondaryContent": "#201f1e",
     "buttonBackground": "#252423",
     "buttonBackgroundChecked": "#484644",
-    "buttonBackgroundCheckedHovered": "#292827",
     "buttonBackgroundDisabled": "#252423",
     "buttonBackgroundHovered": "#292827",
     "buttonBackgroundPressed": "#292827",
@@ -1803,9 +1803,7 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dynamic', defaultA
     "defaultPressedIcon": "#faf9f8",
     "defaultPressedSecondaryContent": "#797775",
     "disabledBackground": "#323130",
-    "disabledBodySubtext": "#484644",
     "disabledBodyText": "#797775",
-    "disabledSubtext": "#3b3a39",
     "disabledText": "#797775",
     "errorText": "#ff5f5f",
     "focusBorder": "#a19f9d",
@@ -1847,7 +1845,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dynamic', defaultA
     "inputForegroundChecked": "#1b1a19",
     "inputPlaceholderText": "#a19f9d",
     "inputText": "#f3f2f1",
-    "inputTextHovered": "#faf9f8",
     "link": "#2e6ac5",
     "linkHovered": "#82c7ff",
     "linkPressed": "#aec6eb",
@@ -1996,7 +1993,14 @@ exports[`createDefaultTheme test themeOption - { appearance: 'dynamic', defaultA
     "warningForeground2": "#fef7b2",
     "warningForeground3": "#fdea3d",
     "warningForegroundInverted": "#817400",
+<<<<<<< HEAD
     "warningText": "#ffffff",
+||||||| a0a844846
+    "warningHighlight": "#fff100",
+    "warningText": "#ffffff",
+=======
+    "warningHighlight": "#fff100",
+>>>>>>> main
   },
   "components": {},
   "host": {
@@ -2348,7 +2352,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'highContrast', def
   "colors": {
     "accentButtonBackground": "#000000",
     "actionLink": "#ffff00",
-    "actionLinkHovered": "#ffffff",
     "background": "#000000",
     "bodyDivider": "#ffffff",
     "bodyFrameBackground": "#000000",
@@ -2448,7 +2451,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'highContrast', def
     "brandedSecondaryContent": "#ffffff",
     "buttonBackground": "#000000",
     "buttonBackgroundChecked": "#1aebff",
-    "buttonBackgroundCheckedHovered": "#1aebff",
     "buttonBackgroundDisabled": "#000000",
     "buttonBackgroundHovered": "#1aebff",
     "buttonBackgroundPressed": "#1aebff",
@@ -2587,9 +2589,7 @@ exports[`createDefaultTheme test themeOption - { appearance: 'highContrast', def
     "defaultPressedIcon": "#000000",
     "defaultPressedSecondaryContent": "#000000",
     "disabledBackground": "#000000",
-    "disabledBodySubtext": "#3ff23f",
     "disabledBodyText": "#3ff23f",
-    "disabledSubtext": "#3ff23f",
     "disabledText": "#3ff23f",
     "errorText": "#ffffff",
     "focusBorder": "#ffffff",
@@ -2631,7 +2631,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'highContrast', def
     "inputForegroundChecked": "#000000",
     "inputPlaceholderText": "#ffffff",
     "inputText": "#ffffff",
-    "inputTextHovered": "#000000",
     "link": "#ffff00",
     "linkHovered": "#ffffff",
     "linkPressed": "#ffffff",
@@ -3216,7 +3215,14 @@ exports[`createDefaultTheme test themeOption - { appearance: 'highContrast', def
         "WindowText",
       ],
     },
+<<<<<<< HEAD
     "warningText": "#ffffff",
+||||||| a0a844846
+    "warningHighlight": "#ffffff",
+    "warningText": "#ffffff",
+=======
+    "warningHighlight": "#ffffff",
+>>>>>>> main
   },
   "components": {},
   "host": {
@@ -3568,7 +3574,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
   "colors": {
     "accentButtonBackground": "#185abd",
     "actionLink": "#323130",
-    "actionLinkHovered": "#201f1e",
     "background": "#ffffff",
     "bodyDivider": "#edebe9",
     "bodyFrameBackground": "#ffffff",
@@ -3612,7 +3617,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
     "brandedSecondaryContent": "#faf9f8",
     "buttonBackground": "#f3f2f1",
     "buttonBackgroundChecked": "#c8c6c4",
-    "buttonBackgroundCheckedHovered": "#edebe9",
     "buttonBackgroundDisabled": "#f3f2f1",
     "buttonBackgroundHovered": "#edebe9",
     "buttonBackgroundPressed": "#edebe9",
@@ -3675,9 +3679,7 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
     "defaultPressedIcon": "#201f1e",
     "defaultPressedSecondaryContent": "#a19f9d",
     "disabledBackground": "#f3f2f1",
-    "disabledBodySubtext": "#c8c6c4",
     "disabledBodyText": "#a19f9d",
-    "disabledSubtext": "#d2d0ce",
     "disabledText": "#a19f9d",
     "errorText": "#a4262c",
     "focusBorder": "#605e5c",
@@ -3719,7 +3721,6 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
     "inputForegroundChecked": "#ffffff",
     "inputPlaceholderText": "#605e5c",
     "inputText": "#323130",
-    "inputTextHovered": "#201f1e",
     "link": "#185abd",
     "linkHovered": "#004578",
     "linkPressed": "#13458f",
@@ -3868,7 +3869,14 @@ exports[`createDefaultTheme test themeOption - { appearance: 'light', defaultApp
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
+<<<<<<< HEAD
     "warningText": "#333333",
+||||||| a0a844846
+    "warningHighlight": "#ffb900",
+    "warningText": "#333333",
+=======
+    "warningHighlight": "#ffb900",
+>>>>>>> main
   },
   "components": {},
   "host": {
@@ -4220,7 +4228,6 @@ exports[`createDefaultTheme test themeOption - { appearance: undefined, defaultA
   "colors": {
     "accentButtonBackground": "#185abd",
     "actionLink": "#323130",
-    "actionLinkHovered": "#201f1e",
     "background": "#ffffff",
     "bodyDivider": "#edebe9",
     "bodyFrameBackground": "#ffffff",
@@ -4264,7 +4271,6 @@ exports[`createDefaultTheme test themeOption - { appearance: undefined, defaultA
     "brandedSecondaryContent": "#faf9f8",
     "buttonBackground": "#f3f2f1",
     "buttonBackgroundChecked": "#c8c6c4",
-    "buttonBackgroundCheckedHovered": "#edebe9",
     "buttonBackgroundDisabled": "#f3f2f1",
     "buttonBackgroundHovered": "#edebe9",
     "buttonBackgroundPressed": "#edebe9",
@@ -4327,9 +4333,7 @@ exports[`createDefaultTheme test themeOption - { appearance: undefined, defaultA
     "defaultPressedIcon": "#201f1e",
     "defaultPressedSecondaryContent": "#a19f9d",
     "disabledBackground": "#f3f2f1",
-    "disabledBodySubtext": "#c8c6c4",
     "disabledBodyText": "#a19f9d",
-    "disabledSubtext": "#d2d0ce",
     "disabledText": "#a19f9d",
     "errorText": "#a4262c",
     "focusBorder": "#605e5c",
@@ -4371,7 +4375,6 @@ exports[`createDefaultTheme test themeOption - { appearance: undefined, defaultA
     "inputForegroundChecked": "#ffffff",
     "inputPlaceholderText": "#605e5c",
     "inputText": "#323130",
-    "inputTextHovered": "#201f1e",
     "link": "#185abd",
     "linkHovered": "#004578",
     "linkPressed": "#13458f",
@@ -4520,7 +4523,14 @@ exports[`createDefaultTheme test themeOption - { appearance: undefined, defaultA
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
+<<<<<<< HEAD
     "warningText": "#333333",
+||||||| a0a844846
+    "warningHighlight": "#ffb900",
+    "warningText": "#333333",
+=======
+    "warningHighlight": "#ffb900",
+>>>>>>> main
   },
   "components": {},
   "host": {
@@ -5391,7 +5401,6 @@ exports[`defaultFluentDarkTheme test 1`] = `
   "colors": {
     "accentButtonBackground": "#185abd",
     "actionLink": "#f3f2f1",
-    "actionLinkHovered": "#faf9f8",
     "background": "#1b1a19",
     "bodyDivider": "#292827",
     "bodyFrameBackground": "#1b1a19",
@@ -5435,7 +5444,6 @@ exports[`defaultFluentDarkTheme test 1`] = `
     "brandedSecondaryContent": "#201f1e",
     "buttonBackground": "#252423",
     "buttonBackgroundChecked": "#484644",
-    "buttonBackgroundCheckedHovered": "#292827",
     "buttonBackgroundDisabled": "#252423",
     "buttonBackgroundHovered": "#292827",
     "buttonBackgroundPressed": "#292827",
@@ -5498,9 +5506,7 @@ exports[`defaultFluentDarkTheme test 1`] = `
     "defaultPressedIcon": "#faf9f8",
     "defaultPressedSecondaryContent": "#797775",
     "disabledBackground": "#323130",
-    "disabledBodySubtext": "#484644",
     "disabledBodyText": "#797775",
-    "disabledSubtext": "#3b3a39",
     "disabledText": "#797775",
     "errorText": "#ff5f5f",
     "focusBorder": "#a19f9d",
@@ -5542,7 +5548,6 @@ exports[`defaultFluentDarkTheme test 1`] = `
     "inputForegroundChecked": "#1b1a19",
     "inputPlaceholderText": "#a19f9d",
     "inputText": "#f3f2f1",
-    "inputTextHovered": "#faf9f8",
     "link": "#2e6ac5",
     "linkHovered": "#82c7ff",
     "linkPressed": "#aec6eb",
@@ -5691,7 +5696,14 @@ exports[`defaultFluentDarkTheme test 1`] = `
     "warningForeground2": "#fef7b2",
     "warningForeground3": "#fdea3d",
     "warningForegroundInverted": "#817400",
+<<<<<<< HEAD
     "warningText": "#ffffff",
+||||||| a0a844846
+    "warningHighlight": "#fff100",
+    "warningText": "#ffffff",
+=======
+    "warningHighlight": "#fff100",
+>>>>>>> main
   },
   "components": {},
   "host": {
@@ -6043,7 +6055,6 @@ exports[`defaultFluentTheme test 1`] = `
   "colors": {
     "accentButtonBackground": "#185abd",
     "actionLink": "#323130",
-    "actionLinkHovered": "#201f1e",
     "background": "#ffffff",
     "bodyDivider": "#edebe9",
     "bodyFrameBackground": "#ffffff",
@@ -6087,7 +6098,6 @@ exports[`defaultFluentTheme test 1`] = `
     "brandedSecondaryContent": "#faf9f8",
     "buttonBackground": "#f3f2f1",
     "buttonBackgroundChecked": "#c8c6c4",
-    "buttonBackgroundCheckedHovered": "#edebe9",
     "buttonBackgroundDisabled": "#f3f2f1",
     "buttonBackgroundHovered": "#edebe9",
     "buttonBackgroundPressed": "#edebe9",
@@ -6150,9 +6160,7 @@ exports[`defaultFluentTheme test 1`] = `
     "defaultPressedIcon": "#201f1e",
     "defaultPressedSecondaryContent": "#a19f9d",
     "disabledBackground": "#f3f2f1",
-    "disabledBodySubtext": "#c8c6c4",
     "disabledBodyText": "#a19f9d",
-    "disabledSubtext": "#d2d0ce",
     "disabledText": "#a19f9d",
     "errorText": "#a4262c",
     "focusBorder": "#605e5c",
@@ -6194,7 +6202,6 @@ exports[`defaultFluentTheme test 1`] = `
     "inputForegroundChecked": "#ffffff",
     "inputPlaceholderText": "#605e5c",
     "inputText": "#323130",
-    "inputTextHovered": "#201f1e",
     "link": "#185abd",
     "linkHovered": "#004578",
     "linkPressed": "#13458f",
@@ -6343,7 +6350,14 @@ exports[`defaultFluentTheme test 1`] = `
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
+<<<<<<< HEAD
     "warningText": "#333333",
+||||||| a0a844846
+    "warningHighlight": "#ffb900",
+    "warningText": "#333333",
+=======
+    "warningHighlight": "#ffb900",
+>>>>>>> main
   },
   "components": {},
   "host": {
