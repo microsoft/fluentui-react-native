@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-appearance-additions",
   "entries": [
     {
+      "date": "Wed, 03 Jan 2024 00:15:20 GMT",
+      "version": "0.6.4",
+      "tag": "@fluentui-react-native/experimental-appearance-additions_v0.6.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-appearance-additions",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 Dec 2023 01:31:00 GMT",
       "version": "0.6.3",
       "tag": "@fluentui-react-native/experimental-appearance-additions_v0.6.3",
