@@ -140,11 +140,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
 
     brandedBackground: p.themePrimary,
 
-    brandedPressedBackground: p.themeDark,
-    brandedPressedBorder: p.themeDarker,
-    brandedPressedContent: p.white,
-    brandedPressedIcon: p.white,
-
     brandedDisabledBackground: p.neutralLighter,
     brandedDisabledBorder: p.neutralLighter,
     brandedDisabledContent: p.neutralQuaternary,
@@ -322,11 +317,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     ghostDisabledIcon: '#3ff23f',
 
     brandedBackground: '#000000',
-
-    brandedPressedBackground: '#1aebff',
-    brandedPressedBorder: '#1aebff',
-    brandedPressedContent: '#000000',
-    brandedPressedIcon: '#000000',
 
     brandedDisabledBackground: '#000000',
     brandedDisabledBorder: '#3ff23f',

@@ -204,11 +204,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
 
     brandedBackground: fluentApple.communicationBlue,
 
-    brandedPressedBackground: fluentApple.buttonBackgroundFilledPressed,
-    brandedPressedBorder: 'transparent',
-    brandedPressedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
-    brandedPressedIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
-
     brandedDisabledBackground: fluent2AliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
     brandedDisabledContent: fluent2AliasColorTokens.neutralForegroundOnColor,

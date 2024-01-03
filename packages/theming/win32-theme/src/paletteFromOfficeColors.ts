@@ -132,11 +132,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
 
     brandedBackground: p.BkgCtlEmphasis,
 
-    brandedPressedBackground: p.BkgCtlEmphasisPressed,
-    brandedPressedBorder: p.StrokeCtlEmphasisPressed,
-    brandedPressedContent: p.TextCtlEmphasisPressed,
-    brandedPressedIcon: p.TextCtlEmphasisPressed,
-
     brandedDisabledBackground: p.BkgCtlEmphasisDisabled,
     brandedDisabledBorder: p.StrokeCtlEmphasisDisabled,
     brandedDisabledContent: p.TextCtlEmphasisDisabled,

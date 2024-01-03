@@ -349,15 +349,6 @@ export interface ControlColorTokens {
   brandedBackground: ColorValue;
 
   /* Deprecated */
-  brandedPressedBackground: ColorValue;
-  /* Deprecated */
-  brandedPressedBorder: ColorValue;
-  /* Deprecated */
-  brandedPressedContent: ColorValue;
-  /* Deprecated */
-  brandedPressedIcon: ColorValue;
-
-  /* Deprecated */
   brandedDisabledBackground: ColorValue;
   /* Deprecated */
   brandedDisabledBorder: ColorValue;

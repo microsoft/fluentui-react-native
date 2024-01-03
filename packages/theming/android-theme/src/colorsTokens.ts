@@ -130,11 +130,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
 
     brandedBackground: p.communicationBlue,
 
-    brandedPressedBackground: p.communicationBlueTint10,
-    brandedPressedBorder: 'transparent',
-    brandedPressedContent: p.textDominant,
-    brandedPressedIcon: p.textDominant,
-
     brandedDisabledBackground: p.gray100,
     brandedDisabledBorder: 'transparent',
     brandedDisabledContent: p.textDisabled,

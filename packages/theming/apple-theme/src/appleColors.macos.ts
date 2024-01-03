@@ -403,11 +403,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
 
-    brandedPressedBackground: macOSAliasColorTokens.brandBackgroundPressed, //ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
-    brandedPressedBorder: 'transparent',
-    brandedPressedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedPressedIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
     brandedDisabledBackground: macOSAliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
     brandedDisabledContent: macOSAliasColorTokens.brandForeground1Disabled,
