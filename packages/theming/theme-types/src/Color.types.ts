@@ -116,7 +116,7 @@ export interface FabricWebPalette {
 
   // ROLE: background, theme/accent text
   // bodyBackground, bodyFrameBackground, inputBackground, primaryButtonText, primaryButtonTextHovered
-  // primaryButtonTextPressed, menuBackground, listBackground
+  // primaryButtonTextPressed, menuBackground
   white: ColorValue;
 
   // red color
@@ -268,8 +268,6 @@ export interface PaletteBackgroundColors {
 
   //// Lists
 
-  /** The background color for the entire list. */
-  listBackground: ColorValue;
   /** The background color of a hovered list item. */
   listItemBackgroundHovered: ColorValue;
   /** The background color of a checked list item. */
