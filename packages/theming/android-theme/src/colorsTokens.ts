@@ -28,7 +28,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
 
     inputBorder: 'transparent',
     inputBackground: 'transparent',
-    inputForegroundChecked: p.communicationBlue,
     inputFocusBorderAlt: 'transparent',
     inputText: p.textPrimary,
     inputPlaceholderText: p.textSecondary,

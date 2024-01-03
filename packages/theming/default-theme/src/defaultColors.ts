@@ -29,7 +29,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     errorText: !isInverted ? p.redDark : '#ff5f5f',
     inputBorder: p.neutralTertiary,
     inputBackground: p.white,
-    inputForegroundChecked: p.white,
     inputFocusBorderAlt: p.themePrimary,
     inputText: p.neutralPrimary,
     inputPlaceholderText: p.neutralSecondary,
@@ -208,7 +207,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
 
     inputBorder: '#ffffff',
     inputBackground: '#000000',
-    inputForegroundChecked: '#000000',
     inputFocusBorderAlt: '#ffffff',
     inputText: '#ffffff',
     inputPlaceholderText: '#ffffff',

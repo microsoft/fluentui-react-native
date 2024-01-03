@@ -115,7 +115,7 @@ export interface FabricWebPalette {
   accent: ColorValue;
 
   // ROLE: background, theme/accent text
-  // bodyBackground, bodyFrameBackground, inputBackground, inputForegroundChecked, primaryButtonText, primaryButtonTextHovered
+  // bodyBackground, bodyFrameBackground, inputBackground, primaryButtonText, primaryButtonTextHovered
   // primaryButtonTextPressed, menuBackground, listBackground
   white: ColorValue;
 
@@ -213,8 +213,6 @@ export interface PaletteBackgroundColors {
   inputBorder: ColorValue;
   /** The background color of an input, e.g. textbox background. */
   inputBackground: ColorValue;
-  /** The foreground of a checked control; e.g. checked checkbox's checkmark color, checked toggle's thumb color */
-  inputForegroundChecked: ColorValue;
   /** The alternate focus border color for elements that already have a border; e.g. text field borders on focus. */
   inputFocusBorderAlt: ColorValue;
 
