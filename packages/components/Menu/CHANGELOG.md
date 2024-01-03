@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 03 Jan 2024 00:15:20 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Jan 2024 22:31:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.9
+
+Wed, 03 Jan 2024 22:31:48 GMT
+
+### Patches
+
+- Set disabled=false by default in menu item props (adgleitm@microsoft.com)
 
 ## 1.12.8
 

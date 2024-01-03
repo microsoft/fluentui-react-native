@@ -3250,7 +3250,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.8, @fluentui-react-native/menu@workspace:packages/components/Menu":
+"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.9, @fluentui-react-native/menu@workspace:packages/components/Menu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
@@ -3698,7 +3698,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.163.1
+    "@fluentui-react-native/tester": ^0.163.2
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
     "@react-native/metro-config": ^0.72.0
@@ -3719,7 +3719,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.163.1, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.163.2, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3752,7 +3752,7 @@ __metadata:
     "@fluentui-react-native/icon": 0.20.5
     "@fluentui-react-native/input": ^0.5.5
     "@fluentui-react-native/interactive-hooks": ">=0.25.4 <1.0.0"
-    "@fluentui-react-native/menu": ^1.12.8
+    "@fluentui-react-native/menu": ^1.12.9
     "@fluentui-react-native/merge-props": ">=0.8.0 <1.0.0"
     "@fluentui-react-native/notification": 0.24.7
     "@fluentui-react-native/radio-group": ">=0.20.5 <1.0.0"

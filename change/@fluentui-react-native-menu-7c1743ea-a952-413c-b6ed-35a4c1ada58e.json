@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Set disabled=false by default in menu item props",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}

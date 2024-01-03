@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 03 Jan 2024 22:31:48 GMT",
+      "version": "1.12.9",
+      "tag": "@fluentui-react-native/menu_v1.12.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "17580514f0499a3219b338ff21b8bf6f9380e40a",
+            "comment": "Set disabled=false by default in menu item props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Jan 2024 00:15:20 GMT",
       "version": "1.12.8",
       "tag": "@fluentui-react-native/menu_v1.12.8",
