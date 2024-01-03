@@ -120,7 +120,6 @@ export const mockTheme: Theme = {
     menuItemText: neutralPrimary,
     menuItemTextHovered: neutralDark,
 
-    listItemBackgroundHovered: neutralLighter,
     listItemBackgroundChecked: neutralLight,
     listItemBackgroundCheckedHovered: neutralQuaternaryAlt,
 

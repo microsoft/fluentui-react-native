@@ -329,7 +329,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     menuItemText: applePlatform.labelColor,
     menuItemTextHovered: 'white',
 
-    listItemBackgroundHovered: 'transparent',
     listItemBackgroundChecked: 'transparent',
     listItemBackgroundCheckedHovered: 'transparent',
 

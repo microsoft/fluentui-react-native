@@ -103,7 +103,7 @@ export interface FabricWebPalette {
 
   // ROLE: background, border (though really to blend with bgs)
   // disabledBackground, buttonBackground, buttonBackgroundDisabled, buttonBorderDisabled, primaryButtonBackgroundDisabled
-  // menuItemBackgroundHovered, listItemBackgroundHovered, listHeaderBackgroundHovered
+  // menuItemBackgroundHovered, listHeaderBackgroundHovered
   neutralLighter: ColorValue;
 
   // ROLE: background
@@ -268,8 +268,6 @@ export interface PaletteBackgroundColors {
 
   //// Lists
 
-  /** The background color of a hovered list item. */
-  listItemBackgroundHovered: ColorValue;
   /** The background color of a checked list item. */
   listItemBackgroundChecked: ColorValue;
   /** The background color of a checked and hovered list item. */

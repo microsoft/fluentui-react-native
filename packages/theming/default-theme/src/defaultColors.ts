@@ -68,7 +68,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     menuItemText: p.neutralPrimary,
     menuItemTextHovered: p.neutralDark,
 
-    listItemBackgroundHovered: p.neutralLighter,
     listItemBackgroundChecked: p.neutralLight,
     listItemBackgroundCheckedHovered: p.neutralQuaternaryAlt,
 
@@ -244,7 +243,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     menuItemText: '#ffffff',
     menuItemTextHovered: '#000000',
 
-    listItemBackgroundHovered: '#1aebff',
     listItemBackgroundChecked: '#1aebff',
     listItemBackgroundCheckedHovered: '#1aebff',
 
