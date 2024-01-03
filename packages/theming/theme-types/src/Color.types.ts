@@ -66,7 +66,7 @@ export interface FabricWebPalette {
   neutralDark: ColorValue;
 
   // ROLE: text, border
-  // bodyText, inputBorderHovered, inputText, buttonText, menuItemText, actionLink
+  // bodyText, inputText, buttonText, menuItemText, actionLink
   neutralPrimary: ColorValue;
 
   // unused
@@ -211,8 +211,6 @@ export interface PaletteBackgroundColors {
 
   /** The border of a large input control in its resting, state; e.g. the box of dropdown. */
   inputBorder: ColorValue;
-  /** The border color of a large hovered input control, such as textbox. */
-  inputBorderHovered: ColorValue;
   /** The background color of an input, e.g. textbox background. */
   inputBackground: ColorValue;
   /** The background of a checked control; e.g. checked radio button's dot, checked toggle's background. */

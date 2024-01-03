@@ -87,7 +87,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     errorText: fluentApple.dangerPrimary,
 
     inputBorder: fluent2AliasColorTokens.neutralStroke2,
-    inputBorderHovered: fluent2AliasColorTokens.neutralStroke2,
     inputBackground: fluent2AliasColorTokens.neutralBackground1,
     inputBackgroundChecked: fluent2AliasColorTokens.neutralBackground1,
     inputBackgroundCheckedHovered: fluent2AliasColorTokens.neutralBackground1,

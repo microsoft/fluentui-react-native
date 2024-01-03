@@ -21,7 +21,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     errorText: p.TextError,
 
     inputBorder: p.StrokeCtlSubtle,
-    inputBorderHovered: p.StrokeCtlSubtleHover,
     inputBackground: p.BkgCtlSubtle,
     inputBackgroundChecked: p.BkgCtlSubtle,
     inputBackgroundCheckedHovered: p.BkgCtlSubtleHover,

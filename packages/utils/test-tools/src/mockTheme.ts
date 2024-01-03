@@ -80,7 +80,6 @@ export const mockTheme: Theme = {
     errorText: redDark,
 
     inputBorder: neutralTertiary,
-    inputBorderHovered: neutralPrimary,
     inputBackground: white,
     inputBackgroundChecked: themePrimary,
     inputBackgroundCheckedHovered: themeDarkAlt,

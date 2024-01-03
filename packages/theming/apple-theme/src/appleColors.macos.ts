@@ -287,7 +287,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     errorText: fluentUIApple.dangerPrimary,
 
     inputBorder: applePlatform.separatorColor,
-    inputBorderHovered: applePlatform.separatorColor,
     inputBackground: applePlatform.textBackgroundColor,
     inputBackgroundChecked: applePlatform.textBackgroundColor,
     inputBackgroundCheckedHovered: applePlatform.textBackgroundColor,
