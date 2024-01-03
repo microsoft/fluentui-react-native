@@ -1,8 +1,17 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Wed, 03 Jan 2024 00:15:20 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Jan 2024 02:03:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.39.10
+
+Wed, 03 Jan 2024 02:03:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.23.7
+- Bump @fluentui-react-native/menu-button to v0.12.9
 
 ## 0.39.9
 

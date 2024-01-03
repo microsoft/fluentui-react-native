@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Wed, 03 Jan 2024 02:03:20 GMT",
+      "version": "0.23.7",
+      "tag": "@fluentui-react-native/contextual-menu_v0.23.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "40943f4779ee77302eefb8c9daaccd4bbbd21345",
+            "comment": "Specify disabled=false explicitly for contextual menu items and subitems"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Jan 2024 00:15:20 GMT",
       "version": "0.23.6",
       "tag": "@fluentui-react-native/contextual-menu_v0.23.6",

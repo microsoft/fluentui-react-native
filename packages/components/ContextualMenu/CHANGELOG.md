@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Wed, 03 Jan 2024 00:15:20 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Jan 2024 02:03:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.7
+
+Wed, 03 Jan 2024 02:03:20 GMT
+
+### Patches
+
+- Specify disabled=false explicitly for contextual menu items and subitems (adgleitm@microsoft.com)
 
 ## 0.23.6
 
