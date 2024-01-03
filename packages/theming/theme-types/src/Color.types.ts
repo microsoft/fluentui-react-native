@@ -32,11 +32,11 @@ export interface FabricWebPalette {
   themeDark: ColorValue;
 
   // ROLE: Themed background
-  // inputBackgroundCheckedHovered, primaryButtonBackgroundHovered
+  // primaryButtonBackgroundHovered
   themeDarkAlt: ColorValue;
 
   // ROLE: Themed background, border, text
-  // inputBackgroundChecked, inputFocusBorderAlt, primaryButtonBackground, menuIcon, menuHeader, link
+  // inputFocusBorderAlt, primaryButtonBackground, menuIcon, menuHeader, link
   themePrimary: ColorValue;
 
   // unused
@@ -213,10 +213,6 @@ export interface PaletteBackgroundColors {
   inputBorder: ColorValue;
   /** The background color of an input, e.g. textbox background. */
   inputBackground: ColorValue;
-  /** The background of a checked control; e.g. checked radio button's dot, checked toggle's background. */
-  inputBackgroundChecked: ColorValue;
-  /** The background of a checked and hovered control; e.g. checked checkbox's background color on hover. */
-  inputBackgroundCheckedHovered: ColorValue;
   /** The foreground of a checked control; e.g. checked checkbox's checkmark color, checked toggle's thumb color */
   inputForegroundChecked: ColorValue;
   /** The alternate focus border color for elements that already have a border; e.g. text field borders on focus. */

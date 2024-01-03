@@ -132,7 +132,6 @@ export const applyBrand = (parent: Theme, currentBrand: string): PartialTheme =>
   return ramp
     ? {
         colors: {
-          inputBackgroundCheckedHovered: ramp.App1,
           inputFocusBorderAlt: ramp.App4,
           buttonBackgroundHovered: ramp.App1,
           buttonBackgroundPressed: ramp.App2,
