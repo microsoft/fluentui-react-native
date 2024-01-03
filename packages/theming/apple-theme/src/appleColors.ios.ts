@@ -124,7 +124,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     menuBackground: fluent2AliasColorTokens.neutralBackground1,
     menuDivider: fluent2AliasColorTokens.neutralStroke2,
     menuIcon: fluent2AliasColorTokens.neutralForeground3,
-    menuHeader: fluent2AliasColorTokens.neutralForeground1,
     menuItemBackgroundHovered: fluent2AliasColorTokens.neutralBackground1,
     menuItemBackgroundPressed: fluent2AliasColorTokens.neutralBackground1,
     menuItemText: fluent2AliasColorTokens.neutralForeground1,

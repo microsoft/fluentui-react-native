@@ -36,7 +36,7 @@ export interface FabricWebPalette {
   themeDarkAlt: ColorValue;
 
   // ROLE: Themed background, border, text
-  // inputFocusBorderAlt, primaryButtonBackground, menuIcon, menuHeader, link
+  // inputFocusBorderAlt, primaryButtonBackground, menuIcon, link
   themePrimary: ColorValue;
 
   // unused
@@ -257,8 +257,6 @@ export interface PaletteBackgroundColors {
   menuDivider: ColorValue;
   /** The default colors of icons in menus. */
   menuIcon: ColorValue;
-  /** The headers in menus that denote title of a section. */
-  menuHeader: ColorValue;
   /** The background of a hovered menu item. */
   menuItemBackgroundHovered: ColorValue;
   /** The background of a pressed menu item. */

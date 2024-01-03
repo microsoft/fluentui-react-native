@@ -62,7 +62,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     menuBackground: p.menuBackground,
     menuDivider: 'transparent',
     menuIcon: p.menuIcon,
-    menuHeader: 'transparent',
     menuItemBackgroundHovered: 'transparent',
     menuItemBackgroundPressed: 'transparent',
     menuItemText: p.menuItemText,

@@ -115,7 +115,6 @@ export const mockTheme: Theme = {
     menuBackground: white,
     menuDivider: neutralTertiaryAlt,
     menuIcon: themePrimary,
-    menuHeader: themePrimary,
     menuItemBackgroundHovered: neutralLighter,
     menuItemBackgroundPressed: neutralLight,
     menuItemText: neutralPrimary,

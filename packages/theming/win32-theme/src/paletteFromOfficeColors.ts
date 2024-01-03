@@ -56,7 +56,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     menuBackground: p.Bkg,
     menuDivider: p.AccentLight,
     menuIcon: p.Text,
-    menuHeader: p.Text,
     menuItemBackgroundHovered: p.BkgHover,
     menuItemBackgroundPressed: p.BkgPressed,
     menuItemText: p.Text,
