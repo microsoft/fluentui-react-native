@@ -67,9 +67,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     menuItemText: p.menuItemText,
     menuItemTextHovered: p.gray900,
 
-    listItemBackgroundChecked: 'transparent',
-    listItemBackgroundCheckedHovered: 'transparent',
-
     listHeaderBackgroundHovered: 'transparent',
     listHeaderBackgroundPressed: 'transparent',
 

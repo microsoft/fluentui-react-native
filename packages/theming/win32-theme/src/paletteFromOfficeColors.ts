@@ -61,9 +61,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     menuItemText: p.Text,
     menuItemTextHovered: p.TextHover,
 
-    listItemBackgroundChecked: p.BkgSelected,
-    listItemBackgroundCheckedHovered: p.BkgSelected,
-
     listHeaderBackgroundHovered: p.BkgHover,
     listHeaderBackgroundPressed: p.BkgPressed,
 

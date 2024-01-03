@@ -93,12 +93,11 @@ export interface FabricWebPalette {
   neutralQuaternary: ColorValue;
 
   // ROLE: background
-  // listItemBackgroundCheckedHovered
   neutralQuaternaryAlt: ColorValue;
 
   // ROLE: background, border
   // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered
-  // buttonBackgroundPressed, menuItemBackgroundPressed, listItemBackgroundChecked, listHeaderBackgroundPressed
+  // buttonBackgroundPressed, menuItemBackgroundPressed, listHeaderBackgroundPressed
   neutralLight: ColorValue;
 
   // ROLE: background, border (though really to blend with bgs)
@@ -268,10 +267,6 @@ export interface PaletteBackgroundColors {
 
   //// Lists
 
-  /** The background color of a checked list item. */
-  listItemBackgroundChecked: ColorValue;
-  /** The background color of a checked and hovered list item. */
-  listItemBackgroundCheckedHovered: ColorValue;
   /** The background color for a hovered list header. */
   listHeaderBackgroundHovered: ColorValue;
   /** The background color for a pressed list header. */
