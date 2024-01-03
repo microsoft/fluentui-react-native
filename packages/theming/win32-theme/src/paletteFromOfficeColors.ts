@@ -27,7 +27,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     inputBackgroundCheckedHovered: p.BkgCtlSubtleHover,
     inputForegroundChecked: p.TextCtlSubtle,
     inputFocusBorderAlt: p.StrokeCtlSubtleKeyboard,
-    smallInputBorder: p.StrokeCtlSubtle,
     inputText: p.TextCtlSubtle,
     inputPlaceholderText: p.TextCtlSubtlePlaceholder,
 

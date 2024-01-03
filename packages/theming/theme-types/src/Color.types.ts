@@ -73,7 +73,7 @@ export interface FabricWebPalette {
   neutralPrimaryAlt: ColorValue;
 
   // ROLE: text, border
-  // bodySubtext, focusBorder, smallInputBorder, inputPlaceholderText
+  // bodySubtext, focusBorder, inputPlaceholderText
   neutralSecondary: ColorValue;
 
   // ROLE: border
@@ -211,8 +211,6 @@ export interface PaletteBackgroundColors {
 
   /** The border of a large input control in its resting, state; e.g. the box of dropdown. */
   inputBorder: ColorValue;
-  /** The border of a small input control in its resting unchecked state; e.g. the box of an unchecked checkbox. */
-  smallInputBorder: ColorValue;
   /** The border color of a large hovered input control, such as textbox. */
   inputBorderHovered: ColorValue;
   /** The background color of an input, e.g. textbox background. */

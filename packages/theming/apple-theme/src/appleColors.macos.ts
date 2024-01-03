@@ -293,7 +293,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     inputBackgroundCheckedHovered: applePlatform.textBackgroundColor,
     inputForegroundChecked: fluentUIApple.communicationBlue,
     inputFocusBorderAlt: applePlatform.keyboardFocusIndicatorColor,
-    smallInputBorder: applePlatform.separatorColor,
     inputText: applePlatform.textColor,
     inputPlaceholderText: applePlatform.placeholderTextColor,
 

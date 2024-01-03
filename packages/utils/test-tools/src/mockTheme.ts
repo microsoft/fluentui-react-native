@@ -86,7 +86,6 @@ export const mockTheme: Theme = {
     inputBackgroundCheckedHovered: themeDarkAlt,
     inputForegroundChecked: white,
     inputFocusBorderAlt: themePrimary,
-    smallInputBorder: neutralSecondary,
     inputText: neutralPrimary,
     inputPlaceholderText: neutralSecondary,
 
