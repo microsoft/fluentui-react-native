@@ -140,10 +140,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
 
     brandedBackground: p.themePrimary,
 
-    brandedDisabledBackground: p.neutralLighter,
     brandedDisabledBorder: p.neutralLighter,
-    brandedDisabledContent: p.neutralQuaternary,
-    brandedDisabledIcon: p.neutralQuaternary,
 
     defaultCheckedBackground: p.neutralTertiaryAlt,
     defaultCheckedContent: p.neutralDark,
@@ -318,10 +315,7 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
 
     brandedBackground: '#000000',
 
-    brandedDisabledBackground: '#000000',
     brandedDisabledBorder: '#3ff23f',
-    brandedDisabledContent: '#3ff23f',
-    brandedDisabledIcon: '#3ff23f',
 
     defaultCheckedBackground: '#1aebff',
     defaultCheckedContent: '#000000',

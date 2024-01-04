@@ -132,10 +132,7 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
 
     brandedBackground: p.BkgCtlEmphasis,
 
-    brandedDisabledBackground: p.BkgCtlEmphasisDisabled,
     brandedDisabledBorder: p.StrokeCtlEmphasisDisabled,
-    brandedDisabledContent: p.TextCtlEmphasisDisabled,
-    brandedDisabledIcon: p.TextCtlEmphasisDisabled,
 
     defaultCheckedBackground: p.BkgCtlSelected,
     defaultCheckedContent: p.TextCtlSelected,

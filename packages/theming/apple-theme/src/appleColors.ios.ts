@@ -204,10 +204,7 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
 
     brandedBackground: fluentApple.communicationBlue,
 
-    brandedDisabledBackground: fluent2AliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
-    brandedDisabledContent: fluent2AliasColorTokens.neutralForegroundOnColor,
-    brandedDisabledIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     defaultCheckedBackground: 'transparent',
     defaultCheckedContent: fluentApple.communicationBlue,

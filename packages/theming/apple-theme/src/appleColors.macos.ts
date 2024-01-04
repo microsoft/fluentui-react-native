@@ -403,10 +403,7 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
 
-    brandedDisabledBackground: macOSAliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
-    brandedDisabledContent: macOSAliasColorTokens.brandForeground1Disabled,
-    brandedDisabledIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultCheckedBackground: fluentUIApple.communicationBlue,
     defaultCheckedContent: macOSAliasColorTokens.neutralForegroundInverted,
