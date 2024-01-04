@@ -87,13 +87,8 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     errorText: fluentApple.dangerPrimary,
 
     inputBorder: fluent2AliasColorTokens.neutralStroke2,
-    inputBorderHovered: fluent2AliasColorTokens.neutralStroke2,
     inputBackground: fluent2AliasColorTokens.neutralBackground1,
-    inputBackgroundChecked: fluent2AliasColorTokens.neutralBackground1,
-    inputBackgroundCheckedHovered: fluent2AliasColorTokens.neutralBackground1,
-    inputForegroundChecked: fluent2AliasColorTokens.neutralForegroundOnColor,
     inputFocusBorderAlt: fluent2AliasColorTokens.neutralStroke1,
-    smallInputBorder: fluent2AliasColorTokens.neutralStroke1,
     inputText: fluent2AliasColorTokens.neutralForeground1,
     inputPlaceholderText: fluent2AliasColorTokens.neutralForeground3,
 
@@ -129,16 +124,10 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     menuBackground: fluent2AliasColorTokens.neutralBackground1,
     menuDivider: fluent2AliasColorTokens.neutralStroke2,
     menuIcon: fluent2AliasColorTokens.neutralForeground3,
-    menuHeader: fluent2AliasColorTokens.neutralForeground1,
     menuItemBackgroundHovered: fluent2AliasColorTokens.neutralBackground1,
     menuItemBackgroundPressed: fluent2AliasColorTokens.neutralBackground1,
     menuItemText: fluent2AliasColorTokens.neutralForeground1,
     menuItemTextHovered: fluent2AliasColorTokens.neutralForeground1,
-
-    listBackground: fluent2AliasColorTokens.neutralBackground1,
-    listItemBackgroundHovered: fluent2AliasColorTokens.neutralBackground1,
-    listItemBackgroundChecked: fluent2AliasColorTokens.neutralBackground1,
-    listItemBackgroundCheckedHovered: fluent2AliasColorTokens.neutralBackground1,
 
     listHeaderBackgroundHovered: fluent2AliasColorTokens.neutralForeground1,
     listHeaderBackgroundPressed: fluent2AliasColorTokens.neutralForeground1,

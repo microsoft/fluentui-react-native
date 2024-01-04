@@ -80,13 +80,8 @@ export const mockTheme: Theme = {
     errorText: redDark,
 
     inputBorder: neutralTertiary,
-    inputBorderHovered: neutralPrimary,
     inputBackground: white,
-    inputBackgroundChecked: themePrimary,
-    inputBackgroundCheckedHovered: themeDarkAlt,
-    inputForegroundChecked: white,
     inputFocusBorderAlt: themePrimary,
-    smallInputBorder: neutralSecondary,
     inputText: neutralPrimary,
     inputPlaceholderText: neutralSecondary,
 
@@ -120,16 +115,10 @@ export const mockTheme: Theme = {
     menuBackground: white,
     menuDivider: neutralTertiaryAlt,
     menuIcon: themePrimary,
-    menuHeader: themePrimary,
     menuItemBackgroundHovered: neutralLighter,
     menuItemBackgroundPressed: neutralLight,
     menuItemText: neutralPrimary,
     menuItemTextHovered: neutralDark,
-
-    listBackground: white,
-    listItemBackgroundHovered: neutralLighter,
-    listItemBackgroundChecked: neutralLight,
-    listItemBackgroundCheckedHovered: neutralQuaternaryAlt,
 
     listHeaderBackgroundHovered: neutralLighter,
     listHeaderBackgroundPressed: neutralLight,

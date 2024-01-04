@@ -287,13 +287,8 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     errorText: fluentUIApple.dangerPrimary,
 
     inputBorder: applePlatform.separatorColor,
-    inputBorderHovered: applePlatform.separatorColor,
     inputBackground: applePlatform.textBackgroundColor,
-    inputBackgroundChecked: applePlatform.textBackgroundColor,
-    inputBackgroundCheckedHovered: applePlatform.textBackgroundColor,
-    inputForegroundChecked: fluentUIApple.communicationBlue,
     inputFocusBorderAlt: applePlatform.keyboardFocusIndicatorColor,
-    smallInputBorder: applePlatform.separatorColor,
     inputText: applePlatform.textColor,
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
@@ -329,16 +324,10 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     menuBackground: 'transparent',
     menuDivider: applePlatform.separatorColor,
     menuIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
-    menuHeader: applePlatform.headerTextColor,
     menuItemBackgroundHovered: applePlatform.controlAccentColor,
     menuItemBackgroundPressed: ColorWithSystemEffectMacOS(applePlatform.controlAccentColor, 'pressed'),
     menuItemText: applePlatform.labelColor,
     menuItemTextHovered: 'white',
-
-    listBackground: 'transparent',
-    listItemBackgroundHovered: 'transparent',
-    listItemBackgroundChecked: 'transparent',
-    listItemBackgroundCheckedHovered: 'transparent',
 
     listHeaderBackgroundHovered: applePlatform.headerTextColor,
     listHeaderBackgroundPressed: applePlatform.headerTextColor,

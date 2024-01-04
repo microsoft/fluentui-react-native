@@ -27,13 +27,8 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     successBackground: p.successTint10,
 
     inputBorder: 'transparent',
-    inputBorderHovered: 'transparent',
     inputBackground: 'transparent',
-    inputBackgroundChecked: 'transparent',
-    inputBackgroundCheckedHovered: 'transparent',
-    inputForegroundChecked: p.communicationBlue,
     inputFocusBorderAlt: 'transparent',
-    smallInputBorder: 'transparent',
     inputText: p.textPrimary,
     inputPlaceholderText: p.textSecondary,
 
@@ -67,16 +62,10 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     menuBackground: p.menuBackground,
     menuDivider: 'transparent',
     menuIcon: p.menuIcon,
-    menuHeader: 'transparent',
     menuItemBackgroundHovered: 'transparent',
     menuItemBackgroundPressed: 'transparent',
     menuItemText: p.menuItemText,
     menuItemTextHovered: p.gray900,
-
-    listBackground: p.listBackground,
-    listItemBackgroundHovered: 'transparent',
-    listItemBackgroundChecked: 'transparent',
-    listItemBackgroundCheckedHovered: 'transparent',
 
     listHeaderBackgroundHovered: 'transparent',
     listHeaderBackgroundPressed: 'transparent',

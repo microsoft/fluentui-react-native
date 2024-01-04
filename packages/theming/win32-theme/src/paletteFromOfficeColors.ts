@@ -21,13 +21,8 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     errorText: p.TextError,
 
     inputBorder: p.StrokeCtlSubtle,
-    inputBorderHovered: p.StrokeCtlSubtleHover,
     inputBackground: p.BkgCtlSubtle,
-    inputBackgroundChecked: p.BkgCtlSubtle,
-    inputBackgroundCheckedHovered: p.BkgCtlSubtleHover,
-    inputForegroundChecked: p.TextCtlSubtle,
     inputFocusBorderAlt: p.StrokeCtlSubtleKeyboard,
-    smallInputBorder: p.StrokeCtlSubtle,
     inputText: p.TextCtlSubtle,
     inputPlaceholderText: p.TextCtlSubtlePlaceholder,
 
@@ -61,16 +56,10 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     menuBackground: p.Bkg,
     menuDivider: p.AccentLight,
     menuIcon: p.Text,
-    menuHeader: p.Text,
     menuItemBackgroundHovered: p.BkgHover,
     menuItemBackgroundPressed: p.BkgPressed,
     menuItemText: p.Text,
     menuItemTextHovered: p.TextHover,
-
-    listBackground: p.Bkg,
-    listItemBackgroundHovered: p.BkgHover,
-    listItemBackgroundChecked: p.BkgSelected,
-    listItemBackgroundCheckedHovered: p.BkgSelected,
 
     listHeaderBackgroundHovered: p.BkgHover,
     listHeaderBackgroundPressed: p.BkgPressed,

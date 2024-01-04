@@ -28,13 +28,8 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
 
     errorText: !isInverted ? p.redDark : '#ff5f5f',
     inputBorder: p.neutralTertiary,
-    inputBorderHovered: p.neutralPrimary,
     inputBackground: p.white,
-    inputBackgroundChecked: p.themePrimary,
-    inputBackgroundCheckedHovered: p.themeDarkAlt,
-    inputForegroundChecked: p.white,
     inputFocusBorderAlt: p.themePrimary,
-    smallInputBorder: p.neutralSecondary,
     inputText: p.neutralPrimary,
     inputPlaceholderText: p.neutralSecondary,
 
@@ -68,16 +63,10 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     menuBackground: isInverted ? p.neutralLighter : p.white,
     menuDivider: isInverted ? p.neutralTertiaryAlt : p.neutralTertiaryAlt,
     menuIcon: isInverted ? p.themeDarkAlt : p.themePrimary,
-    menuHeader: isInverted ? p.black : p.themePrimary,
     menuItemBackgroundHovered: isInverted ? p.neutralQuaternaryAlt : p.neutralLighter,
     menuItemBackgroundPressed: isInverted ? p.neutralQuaternary : p.neutralLight,
     menuItemText: p.neutralPrimary,
     menuItemTextHovered: p.neutralDark,
-
-    listBackground: p.white,
-    listItemBackgroundHovered: p.neutralLighter,
-    listItemBackgroundChecked: p.neutralLight,
-    listItemBackgroundCheckedHovered: p.neutralQuaternaryAlt,
 
     listHeaderBackgroundHovered: p.neutralLighter,
     listHeaderBackgroundPressed: p.neutralLight,
@@ -211,13 +200,8 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     errorText: '#ffffff',
 
     inputBorder: '#ffffff',
-    inputBorderHovered: '#1aebff',
     inputBackground: '#000000',
-    inputBackgroundChecked: '#1aebff',
-    inputBackgroundCheckedHovered: '#1aebff',
-    inputForegroundChecked: '#000000',
     inputFocusBorderAlt: '#ffffff',
-    smallInputBorder: '#ffffff',
     inputText: '#ffffff',
     inputPlaceholderText: '#ffffff',
 
@@ -251,16 +235,10 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     menuBackground: '#000000',
     menuDivider: '#ffffff',
     menuIcon: '#ffffff',
-    menuHeader: '#ffffff',
     menuItemBackgroundHovered: '#1aebff',
     menuItemBackgroundPressed: '#1aebff',
     menuItemText: '#ffffff',
     menuItemTextHovered: '#000000',
-
-    listBackground: '#000000',
-    listItemBackgroundHovered: '#1aebff',
-    listItemBackgroundChecked: '#1aebff',
-    listItemBackgroundCheckedHovered: '#1aebff',
 
     listHeaderBackgroundHovered: '#1aebff',
     listHeaderBackgroundPressed: '#1aebff',

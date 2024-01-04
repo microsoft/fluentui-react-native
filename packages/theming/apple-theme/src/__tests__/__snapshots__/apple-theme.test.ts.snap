@@ -351,22 +351,7 @@ exports[`createAppleTheme test 1`] = `
         "textBackgroundColor",
       ],
     },
-    "inputBackgroundChecked": {
-      "semantic": [
-        "textBackgroundColor",
-      ],
-    },
-    "inputBackgroundCheckedHovered": {
-      "semantic": [
-        "textBackgroundColor",
-      ],
-    },
     "inputBorder": {
-      "semantic": [
-        "separatorColor",
-      ],
-    },
-    "inputBorderHovered": {
       "semantic": [
         "separatorColor",
       ],
@@ -375,14 +360,6 @@ exports[`createAppleTheme test 1`] = `
       "semantic": [
         "keyboardFocusIndicatorColor",
       ],
-    },
-    "inputForegroundChecked": {
-      "dynamic": {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
     },
     "inputPlaceholderText": {
       "semantic": [
@@ -409,7 +386,6 @@ exports[`createAppleTheme test 1`] = `
         "selectedControlColor",
       ],
     },
-    "listBackground": "transparent",
     "listHeaderBackgroundHovered": {
       "semantic": [
         "headerTextColor",
@@ -420,18 +396,10 @@ exports[`createAppleTheme test 1`] = `
         "headerTextColor",
       ],
     },
-    "listItemBackgroundChecked": "transparent",
-    "listItemBackgroundCheckedHovered": "transparent",
-    "listItemBackgroundHovered": "transparent",
     "menuBackground": "transparent",
     "menuDivider": {
       "semantic": [
         "separatorColor",
-      ],
-    },
-    "menuHeader": {
-      "semantic": [
-        "headerTextColor",
       ],
     },
     "menuIcon": "#616161",
@@ -565,11 +533,6 @@ exports[`createAppleTheme test 1`] = `
     "severeForeground1": "#c43501",
     "severeForeground2": "#7a2101",
     "severeForeground3": "#da3b01",
-    "smallInputBorder": {
-      "semantic": [
-        "separatorColor",
-      ],
-    },
     "strokeFocus1": "#ffffff",
     "strokeFocus2": "#000000",
     "subText": {

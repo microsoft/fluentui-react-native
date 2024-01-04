@@ -32,11 +32,11 @@ export interface FabricWebPalette {
   themeDark: ColorValue;
 
   // ROLE: Themed background
-  // inputBackgroundCheckedHovered, primaryButtonBackgroundHovered
+  // primaryButtonBackgroundHovered
   themeDarkAlt: ColorValue;
 
   // ROLE: Themed background, border, text
-  // inputBackgroundChecked, inputFocusBorderAlt, primaryButtonBackground, menuIcon, menuHeader, link
+  // inputFocusBorderAlt, primaryButtonBackground, menuIcon, link
   themePrimary: ColorValue;
 
   // unused
@@ -66,14 +66,14 @@ export interface FabricWebPalette {
   neutralDark: ColorValue;
 
   // ROLE: text, border
-  // bodyText, inputBorderHovered, inputText, buttonText, menuItemText, actionLink
+  // bodyText, inputText, buttonText, menuItemText, actionLink
   neutralPrimary: ColorValue;
 
   // unused
   neutralPrimaryAlt: ColorValue;
 
   // ROLE: text, border
-  // bodySubtext, focusBorder, smallInputBorder, inputPlaceholderText
+  // bodySubtext, focusBorder, inputPlaceholderText
   neutralSecondary: ColorValue;
 
   // ROLE: border
@@ -93,17 +93,16 @@ export interface FabricWebPalette {
   neutralQuaternary: ColorValue;
 
   // ROLE: background
-  // listItemBackgroundCheckedHovered
   neutralQuaternaryAlt: ColorValue;
 
   // ROLE: background, border
   // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered
-  // buttonBackgroundPressed, menuItemBackgroundPressed, listItemBackgroundChecked, listHeaderBackgroundPressed
+  // buttonBackgroundPressed, menuItemBackgroundPressed, listHeaderBackgroundPressed
   neutralLight: ColorValue;
 
   // ROLE: background, border (though really to blend with bgs)
   // disabledBackground, buttonBackground, buttonBackgroundDisabled, buttonBorderDisabled, primaryButtonBackgroundDisabled
-  // menuItemBackgroundHovered, listItemBackgroundHovered, listHeaderBackgroundHovered
+  // menuItemBackgroundHovered, listHeaderBackgroundHovered
   neutralLighter: ColorValue;
 
   // ROLE: background
@@ -115,8 +114,8 @@ export interface FabricWebPalette {
   accent: ColorValue;
 
   // ROLE: background, theme/accent text
-  // bodyBackground, bodyFrameBackground, inputBackground, inputForegroundChecked, primaryButtonText, primaryButtonTextHovered
-  // primaryButtonTextPressed, menuBackground, listBackground
+  // bodyBackground, bodyFrameBackground, inputBackground, primaryButtonText, primaryButtonTextHovered
+  // primaryButtonTextPressed, menuBackground
   white: ColorValue;
 
   // red color
@@ -211,18 +210,8 @@ export interface PaletteBackgroundColors {
 
   /** The border of a large input control in its resting, state; e.g. the box of dropdown. */
   inputBorder: ColorValue;
-  /** The border of a small input control in its resting unchecked state; e.g. the box of an unchecked checkbox. */
-  smallInputBorder: ColorValue;
-  /** The border color of a large hovered input control, such as textbox. */
-  inputBorderHovered: ColorValue;
   /** The background color of an input, e.g. textbox background. */
   inputBackground: ColorValue;
-  /** The background of a checked control; e.g. checked radio button's dot, checked toggle's background. */
-  inputBackgroundChecked: ColorValue;
-  /** The background of a checked and hovered control; e.g. checked checkbox's background color on hover. */
-  inputBackgroundCheckedHovered: ColorValue;
-  /** The foreground of a checked control; e.g. checked checkbox's checkmark color, checked toggle's thumb color */
-  inputForegroundChecked: ColorValue;
   /** The alternate focus border color for elements that already have a border; e.g. text field borders on focus. */
   inputFocusBorderAlt: ColorValue;
 
@@ -267,8 +256,6 @@ export interface PaletteBackgroundColors {
   menuDivider: ColorValue;
   /** The default colors of icons in menus. */
   menuIcon: ColorValue;
-  /** The headers in menus that denote title of a section. */
-  menuHeader: ColorValue;
   /** The background of a hovered menu item. */
   menuItemBackgroundHovered: ColorValue;
   /** The background of a pressed menu item. */
@@ -280,14 +267,6 @@ export interface PaletteBackgroundColors {
 
   //// Lists
 
-  /** The background color for the entire list. */
-  listBackground: ColorValue;
-  /** The background color of a hovered list item. */
-  listItemBackgroundHovered: ColorValue;
-  /** The background color of a checked list item. */
-  listItemBackgroundChecked: ColorValue;
-  /** The background color of a checked and hovered list item. */
-  listItemBackgroundCheckedHovered: ColorValue;
   /** The background color for a hovered list header. */
   listHeaderBackgroundHovered: ColorValue;
   /** The background color for a pressed list header. */
