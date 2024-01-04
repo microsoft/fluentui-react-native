@@ -410,11 +410,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     defaultCheckedHoveredBackground: fluentUIApple.communicationBlue,
     defaultCheckedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
 
-    brandedCheckedBackground: fluentUIApple.communicationBlue,
-    brandedCheckedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedCheckedHoveredBackground: fluentUIApple.communicationBlue,
-    brandedCheckedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
-
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: fluentUIApple.communicationBlue,
     ghostCheckedHoveredBackground: 'transparent',

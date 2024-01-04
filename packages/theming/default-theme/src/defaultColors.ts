@@ -147,11 +147,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultCheckedHoveredBackground: p.neutralLight,
     defaultCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
 
-    brandedCheckedBackground: p.neutralTertiaryAlt,
-    brandedCheckedContent: p.neutralDark,
-    brandedCheckedHoveredBackground: p.neutralLight,
-    brandedCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
-
     ghostCheckedBackground: p.neutralLight,
     ghostCheckedContent: p.black,
     ghostCheckedHoveredBackground: p.neutralLighter,
@@ -321,11 +316,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     defaultCheckedContent: '#000000',
     defaultCheckedHoveredBackground: '#1aebff',
     defaultCheckedHoveredContent: '#000000',
-
-    brandedCheckedBackground: '#1aebff',
-    brandedCheckedContent: '#000000',
-    brandedCheckedHoveredBackground: '#1aebff',
-    brandedCheckedHoveredContent: '#000000',
 
     ghostCheckedBackground: '#1aebff',
     ghostCheckedContent: '#000000',

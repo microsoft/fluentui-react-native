@@ -352,15 +352,6 @@ export interface ControlColorTokens {
   brandedDisabledBorder: ColorValue;
 
   /* Deprecated */
-  brandedCheckedBackground: ColorValue;
-  /* Deprecated */
-  brandedCheckedContent: ColorValue;
-  /* Deprecated */
-  brandedCheckedHoveredBackground: ColorValue;
-  /* Deprecated */
-  brandedCheckedHoveredContent: ColorValue;
-
-  /* Deprecated */
   brandedSecondaryContent: ColorValue;
   /* Deprecated */
   brandedFocusedSecondaryContent: ColorValue;

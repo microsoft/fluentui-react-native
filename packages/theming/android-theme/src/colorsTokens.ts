@@ -137,11 +137,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     defaultCheckedHoveredBackground: p.communicationBlueTint10,
     defaultCheckedHoveredContent: p.textDominant,
 
-    brandedCheckedBackground: p.communicationBlueTint10,
-    brandedCheckedContent: p.textDominant,
-    brandedCheckedHoveredBackground: p.communicationBlueTint10,
-    brandedCheckedHoveredContent: p.textDominant,
-
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: p.communicationBlueTint20,
     ghostCheckedHoveredBackground: 'transparent',

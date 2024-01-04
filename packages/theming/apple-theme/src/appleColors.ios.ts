@@ -211,11 +211,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     defaultCheckedHoveredBackground: 'transparent',
     defaultCheckedHoveredContent: fluentApple.communicationBlue,
 
-    brandedCheckedBackground: fluentApple.communicationBlue,
-    brandedCheckedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
-    brandedCheckedHoveredBackground: fluent2AliasColorTokens.neutralForegroundOnColor,
-    brandedCheckedHoveredContent: fluent2AliasColorTokens.neutralForegroundOnColor,
-
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: fluentApple.communicationBlue,
     ghostCheckedHoveredBackground: 'transparent',
