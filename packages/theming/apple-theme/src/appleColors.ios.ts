@@ -193,25 +193,12 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
 
     brandedBackground: fluentApple.communicationBlue,
 
-    brandedPressedBackground: fluentApple.buttonBackgroundFilledPressed,
-    brandedPressedBorder: 'transparent',
-    brandedPressedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
-    brandedPressedIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
-
-    brandedDisabledBackground: fluent2AliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
-    brandedDisabledContent: fluent2AliasColorTokens.neutralForegroundOnColor,
-    brandedDisabledIcon: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     defaultCheckedBackground: 'transparent',
     defaultCheckedContent: fluentApple.communicationBlue,
     defaultCheckedHoveredBackground: 'transparent',
     defaultCheckedHoveredContent: fluentApple.communicationBlue,
-
-    brandedCheckedBackground: fluentApple.communicationBlue,
-    brandedCheckedContent: fluent2AliasColorTokens.neutralForegroundOnColor,
-    brandedCheckedHoveredBackground: fluent2AliasColorTokens.neutralForegroundOnColor,
-    brandedCheckedHoveredContent: fluent2AliasColorTokens.neutralForegroundOnColor,
 
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: fluentApple.communicationBlue,
@@ -230,7 +217,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     brandedHoveredSecondaryContent: fluent2AliasColorTokens.neutralForegroundOnColor,
     brandedPressedSecondaryContent: fluent2AliasColorTokens.neutralForegroundOnColor,
 
-    defaultDisabledSecondaryContent: fluentApple.buttonTitleDisabled,
     defaultHoveredSecondaryContent: fluentApple.communicationBlue,
     defaultPressedSecondaryContent: fluentApple.communicationBlueTint20,
 

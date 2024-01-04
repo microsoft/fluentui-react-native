@@ -392,25 +392,12 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
 
-    brandedPressedBackground: macOSAliasColorTokens.brandBackgroundPressed, //ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
-    brandedPressedBorder: 'transparent',
-    brandedPressedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedPressedIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedDisabledBackground: macOSAliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
-    brandedDisabledContent: macOSAliasColorTokens.brandForeground1Disabled,
-    brandedDisabledIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultCheckedBackground: fluentUIApple.communicationBlue,
     defaultCheckedContent: macOSAliasColorTokens.neutralForegroundInverted,
     defaultCheckedHoveredBackground: fluentUIApple.communicationBlue,
     defaultCheckedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedCheckedBackground: fluentUIApple.communicationBlue,
-    brandedCheckedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedCheckedHoveredBackground: fluentUIApple.communicationBlue,
-    brandedCheckedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
 
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: fluentUIApple.communicationBlue,
@@ -428,7 +415,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     brandedHoveredSecondaryContent: macOSAliasColorTokens.neutralForegroundInverted,
     brandedPressedSecondaryContent: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralForegroundInverted, 'pressed'),
 
-    defaultDisabledSecondaryContent: macOSAliasColorTokens.brandForeground1Disabled,
     defaultHoveredSecondaryContent: macOSAliasColorTokens.neutralForeground3,
     defaultPressedSecondaryContent: macOSAliasColorTokens.neutralForegroundInverted,
 

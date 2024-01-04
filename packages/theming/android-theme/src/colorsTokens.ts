@@ -119,25 +119,12 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
 
     brandedBackground: p.communicationBlue,
 
-    brandedPressedBackground: p.communicationBlueTint10,
-    brandedPressedBorder: 'transparent',
-    brandedPressedContent: p.textDominant,
-    brandedPressedIcon: p.textDominant,
-
-    brandedDisabledBackground: p.gray100,
     brandedDisabledBorder: 'transparent',
-    brandedDisabledContent: p.textDisabled,
-    brandedDisabledIcon: p.textDisabled,
 
     defaultCheckedBackground: p.communicationBlueTint10,
     defaultCheckedContent: p.textDominant,
     defaultCheckedHoveredBackground: p.communicationBlueTint10,
     defaultCheckedHoveredContent: p.textDominant,
-
-    brandedCheckedBackground: p.communicationBlueTint10,
-    brandedCheckedContent: p.textDominant,
-    brandedCheckedHoveredBackground: p.communicationBlueTint10,
-    brandedCheckedHoveredContent: p.textDominant,
 
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: p.communicationBlueTint20,
@@ -155,7 +142,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     brandedHoveredSecondaryContent: p.iconsSecondary,
     brandedPressedSecondaryContent: p.iconsSecondary,
 
-    defaultDisabledSecondaryContent: p.textSecondary,
     defaultHoveredSecondaryContent: p.iconsSecondary,
     defaultPressedSecondaryContent: p.iconsSecondary,
 

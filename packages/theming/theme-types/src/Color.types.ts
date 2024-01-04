@@ -328,31 +328,7 @@ export interface ControlColorTokens {
   brandedBackground: ColorValue;
 
   /* Deprecated */
-  brandedPressedBackground: ColorValue;
-  /* Deprecated */
-  brandedPressedBorder: ColorValue;
-  /* Deprecated */
-  brandedPressedContent: ColorValue;
-  /* Deprecated */
-  brandedPressedIcon: ColorValue;
-
-  /* Deprecated */
-  brandedDisabledBackground: ColorValue;
-  /* Deprecated */
   brandedDisabledBorder: ColorValue;
-  /* Deprecated */
-  brandedDisabledContent: ColorValue;
-  /* Deprecated */
-  brandedDisabledIcon: ColorValue;
-
-  /* Deprecated */
-  brandedCheckedBackground: ColorValue;
-  /* Deprecated */
-  brandedCheckedContent: ColorValue;
-  /* Deprecated */
-  brandedCheckedHoveredBackground: ColorValue;
-  /* Deprecated */
-  brandedCheckedHoveredContent: ColorValue;
 
   /* Deprecated */
   brandedSecondaryContent: ColorValue;
@@ -379,7 +355,6 @@ export interface ControlColorTokens {
   ghostHoveredSecondaryContent: ColorValue;
   ghostPressedSecondaryContent: ColorValue;
 
-  defaultDisabledSecondaryContent: ColorValue;
   defaultHoveredSecondaryContent: ColorValue;
   defaultPressedSecondaryContent: ColorValue;
 

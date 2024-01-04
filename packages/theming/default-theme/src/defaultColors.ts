@@ -129,25 +129,12 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
 
     brandedBackground: p.themePrimary,
 
-    brandedPressedBackground: p.themeDark,
-    brandedPressedBorder: p.themeDarker,
-    brandedPressedContent: p.white,
-    brandedPressedIcon: p.white,
-
-    brandedDisabledBackground: p.neutralLighter,
     brandedDisabledBorder: p.neutralLighter,
-    brandedDisabledContent: p.neutralQuaternary,
-    brandedDisabledIcon: p.neutralQuaternary,
 
     defaultCheckedBackground: p.neutralTertiaryAlt,
     defaultCheckedContent: p.neutralDark,
     defaultCheckedHoveredBackground: p.neutralLight,
     defaultCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
-
-    brandedCheckedBackground: p.neutralTertiaryAlt,
-    brandedCheckedContent: p.neutralDark,
-    brandedCheckedHoveredBackground: p.neutralLight,
-    brandedCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
 
     ghostCheckedBackground: p.neutralLight,
     ghostCheckedContent: p.black,
@@ -165,7 +152,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     brandedHoveredSecondaryContent: p.neutralLighterAlt,
     brandedPressedSecondaryContent: p.neutralLighterAlt,
 
-    defaultDisabledSecondaryContent: p.neutralTertiary,
     defaultHoveredSecondaryContent: p.neutralTertiary,
     defaultPressedSecondaryContent: p.neutralTertiary,
 
@@ -301,25 +287,12 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
 
     brandedBackground: '#000000',
 
-    brandedPressedBackground: '#1aebff',
-    brandedPressedBorder: '#1aebff',
-    brandedPressedContent: '#000000',
-    brandedPressedIcon: '#000000',
-
-    brandedDisabledBackground: '#000000',
     brandedDisabledBorder: '#3ff23f',
-    brandedDisabledContent: '#3ff23f',
-    brandedDisabledIcon: '#3ff23f',
 
     defaultCheckedBackground: '#1aebff',
     defaultCheckedContent: '#000000',
     defaultCheckedHoveredBackground: '#1aebff',
     defaultCheckedHoveredContent: '#000000',
-
-    brandedCheckedBackground: '#1aebff',
-    brandedCheckedContent: '#000000',
-    brandedCheckedHoveredBackground: '#1aebff',
-    brandedCheckedHoveredContent: '#000000',
 
     ghostCheckedBackground: '#1aebff',
     ghostCheckedContent: '#000000',
@@ -337,7 +310,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     brandedHoveredSecondaryContent: '#000000',
     brandedPressedSecondaryContent: '#000000',
 
-    defaultDisabledSecondaryContent: '#ffffff',
     defaultHoveredSecondaryContent: '#000000',
     defaultPressedSecondaryContent: '#000000',
 
