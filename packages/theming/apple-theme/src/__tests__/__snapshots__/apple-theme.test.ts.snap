@@ -69,34 +69,9 @@ exports[`createAppleTheme test 1`] = `
     "brandStroke1": "#0078d4",
     "brandStroke2": "#c7e0f4",
     "brandedBackground": "#0078d4",
-    "brandedCheckedBackground": {
-      "dynamic": {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "brandedCheckedContent": "#ffffff",
-    "brandedCheckedHoveredBackground": {
-      "dynamic": {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "brandedCheckedHoveredContent": "#ffffff",
-    "brandedDisabledBackground": "#f0f0f0",
     "brandedDisabledBorder": "transparent",
-    "brandedDisabledContent": "#757575",
-    "brandedDisabledIcon": "#616161",
     "brandedFocusedSecondaryContent": "#ffffff",
     "brandedHoveredSecondaryContent": "#ffffff",
-    "brandedPressedBackground": "#106ebe",
-    "brandedPressedBorder": "transparent",
-    "brandedPressedContent": "#ffffff",
-    "brandedPressedIcon": "#ffffff",
     "brandedPressedSecondaryContent": {
       "colorWithSystemEffect": {
         "baseColor": "#ffffff",
@@ -192,7 +167,6 @@ exports[`createAppleTheme test 1`] = `
     "defaultDisabledBorder": "#d6d6d6",
     "defaultDisabledContent": "#757575",
     "defaultDisabledIcon": "#616161",
-    "defaultDisabledSecondaryContent": "#757575",
     "defaultFocusedBackground": "#ffffff",
     "defaultFocusedBorder": "#d6d6d6",
     "defaultFocusedContent": "#000000",
