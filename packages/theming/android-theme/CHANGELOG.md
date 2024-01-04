@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Thu, 04 Jan 2024 01:35:42 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jan 2024 21:06:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.0
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Minor changes
+
+-  Remove unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.10.5
+- Bump @fluentui-react-native/theme-tokens to v0.26.5
+- Bump @fluentui-react-native/theme-types to v0.38.0
+- Bump @fluentui-react-native/theming-utils to v0.25.5
 
 ## 0.23.0
 

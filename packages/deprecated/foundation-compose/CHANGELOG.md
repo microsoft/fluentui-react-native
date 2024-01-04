@@ -1,8 +1,19 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Thu, 04 Jan 2024 01:35:42 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jan 2024 21:06:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.14.19
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.25.0
+- Bump @fluentui-react-native/theme-types to v0.38.0
+- Bump @uifabricshared/foundation-tokens to v0.14.5
+- Bump @uifabricshared/theming-ramp to v0.19.10
 
 ## 1.14.18
 

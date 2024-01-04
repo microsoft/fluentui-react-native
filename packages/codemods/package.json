@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/codemods",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "Transform files to make refactoring FURN code easier",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
