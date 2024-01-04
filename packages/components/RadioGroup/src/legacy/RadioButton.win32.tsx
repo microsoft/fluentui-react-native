@@ -93,9 +93,6 @@ export const RadioButton = compose<IRadioButtonType>({
       (e: KeyPressEvent) => {
         if (e.nativeEvent.key in DirectionalArrowKeys) {
           const length = info.enabledButtonKeys.length;
-          const previous =
-            e.nativeEvent.key === DirectionalArrowKeys.ArrowUp ||
-            (isRTL ? e.nativeEvent.key === DirectionalArrowKeys.ArrowRight : e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft);
           const next =
             e.nativeEvent.key === DirectionalArrowKeys.ArrowDown ||
             (isRTL ? e.nativeEvent.key === DirectionalArrowKeys.ArrowLeft : e.nativeEvent.key === DirectionalArrowKeys.ArrowRight);
@@ -103,13 +100,12 @@ export const RadioButton = compose<IRadioButtonType>({
           let newCurrRadioButtonIndex;
           if (next) {
             newCurrRadioButtonIndex = (currRadioButtonIndex + 1) % length;
-            info.onChange && info.onChange(info.enabledButtonKeys[newCurrRadioButtonIndex]);
-            info.updateInvoked && info.updateInvoked(true);
-          } else if (previous) {
+          } else {
+            // previous
             newCurrRadioButtonIndex = (currRadioButtonIndex - 1 + length) % length;
-            info.onChange && info.onChange(info.enabledButtonKeys[newCurrRadioButtonIndex]);
-            info.updateInvoked && info.updateInvoked(true);
           }
+          info.onChange && info.onChange(info.enabledButtonKeys[newCurrRadioButtonIndex]);
+          info.updateInvoked && info.updateInvoked(true);
         }
       },
       [info],
