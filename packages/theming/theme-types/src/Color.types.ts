@@ -376,7 +376,6 @@ export interface ControlColorTokens {
   ghostHoveredSecondaryContent: ColorValue;
   ghostPressedSecondaryContent: ColorValue;
 
-  defaultDisabledSecondaryContent: ColorValue;
   defaultHoveredSecondaryContent: ColorValue;
   defaultPressedSecondaryContent: ColorValue;
 

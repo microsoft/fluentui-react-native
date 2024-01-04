@@ -426,7 +426,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     brandedHoveredSecondaryContent: macOSAliasColorTokens.neutralForegroundInverted,
     brandedPressedSecondaryContent: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralForegroundInverted, 'pressed'),
 
-    defaultDisabledSecondaryContent: macOSAliasColorTokens.brandForeground1Disabled,
     defaultHoveredSecondaryContent: macOSAliasColorTokens.neutralForeground3,
     defaultPressedSecondaryContent: macOSAliasColorTokens.neutralForegroundInverted,
 

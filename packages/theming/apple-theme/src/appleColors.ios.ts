@@ -228,7 +228,6 @@ export function paletteFromAppleColors(isLightMode: boolean, isElevated: boolean
     brandedHoveredSecondaryContent: fluent2AliasColorTokens.neutralForegroundOnColor,
     brandedPressedSecondaryContent: fluent2AliasColorTokens.neutralForegroundOnColor,
 
-    defaultDisabledSecondaryContent: fluentApple.buttonTitleDisabled,
     defaultHoveredSecondaryContent: fluentApple.communicationBlue,
     defaultPressedSecondaryContent: fluentApple.communicationBlueTint20,
 

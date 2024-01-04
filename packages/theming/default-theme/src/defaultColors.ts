@@ -163,7 +163,6 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     brandedHoveredSecondaryContent: p.neutralLighterAlt,
     brandedPressedSecondaryContent: p.neutralLighterAlt,
 
-    defaultDisabledSecondaryContent: p.neutralTertiary,
     defaultHoveredSecondaryContent: p.neutralTertiary,
     defaultPressedSecondaryContent: p.neutralTertiary,
 
@@ -333,7 +332,6 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     brandedHoveredSecondaryContent: '#000000',
     brandedPressedSecondaryContent: '#000000',
 
-    defaultDisabledSecondaryContent: '#ffffff',
     defaultHoveredSecondaryContent: '#000000',
     defaultPressedSecondaryContent: '#000000',
 

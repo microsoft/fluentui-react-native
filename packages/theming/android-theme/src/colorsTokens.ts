@@ -153,7 +153,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     brandedHoveredSecondaryContent: p.iconsSecondary,
     brandedPressedSecondaryContent: p.iconsSecondary,
 
-    defaultDisabledSecondaryContent: p.textSecondary,
     defaultHoveredSecondaryContent: p.iconsSecondary,
     defaultPressedSecondaryContent: p.iconsSecondary,
 
