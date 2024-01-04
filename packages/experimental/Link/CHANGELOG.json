@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-link",
   "entries": [
     {
+      "date": "Thu, 04 Jan 2024 01:35:42 GMT",
+      "version": "0.7.5",
+      "tag": "@fluentui-react-native/experimental-link_v0.7.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-link",
+            "comment": "Bump @fluentui-react-native/link to v0.21.5",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Jan 2024 00:15:20 GMT",
       "version": "0.7.4",
       "tag": "@fluentui-react-native/experimental-link_v0.7.4",
