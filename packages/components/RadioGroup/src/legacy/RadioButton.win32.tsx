@@ -5,13 +5,8 @@ import * as React from 'react';
 import { View, I18nManager } from 'react-native';
 
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import {
-  useAsPressable,
-  //useOnPressWithFocus,
-  useViewCommandFocus,
-  KeyPressEvent,
-  useKeyDownProps,
-} from '@fluentui-react-native/interactive-hooks';
+import type { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useViewCommandFocus, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
 import { Text } from '@fluentui-react-native/text';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
