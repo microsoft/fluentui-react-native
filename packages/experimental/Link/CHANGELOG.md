@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/experimental-link
 
-This log was last generated on Thu, 09 Nov 2023 02:39:08 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jan 2024 21:06:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.6
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.21.6
+
+## 0.7.5
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.21.5
+
+## 0.7.4
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.21.4
+
+## 0.7.3
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.21.3
+
+## 0.7.2
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.21.2
+
+## 0.7.1
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.21.1
 
 ## 0.7.0
 

@@ -58,6 +58,9 @@ export const defaultTabColorTokens: TokenSettings<TabTokens, Theme> = (t: Theme)
         color: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.neutralForeground1Hover,
         iconColor: isHighContrast(t) ? t.colors.neutralForeground2 : t.colors.compoundBrandForeground1Hover,
         indicatorColor: t.colors.compoundBrandStroke1Hover,
+        subtle: {
+          indicatorColor: isHighContrast(t) ? t.colors.neutralStroke1 : t.colors.compoundBrandStroke1Hover,
+        },
       },
       disabled: {
         indicatorColor: t.colors.transparentBackground,

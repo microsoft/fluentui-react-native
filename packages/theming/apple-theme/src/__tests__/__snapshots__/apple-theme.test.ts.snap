@@ -11,13 +11,7 @@ exports[`createAppleTheme test 1`] = `
         "light": "#0078D4",
       },
     },
-    "accentButtonText": "#ffffff",
     "actionLink": {
-      "semantic": [
-        "linkColor",
-      ],
-    },
-    "actionLinkHovered": {
       "semantic": [
         "linkColor",
       ],
@@ -26,14 +20,6 @@ exports[`createAppleTheme test 1`] = `
       "semantic": [
         "windowBackgroundColor",
       ],
-    },
-    "blockingBackground": {
-      "dynamic": {
-        "dark": "transparent",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#DD4242",
-      },
     },
     "bodyDivider": {
       "semantic": [
@@ -83,52 +69,9 @@ exports[`createAppleTheme test 1`] = `
     "brandStroke1": "#0078d4",
     "brandStroke2": "#c7e0f4",
     "brandedBackground": "#0078d4",
-    "brandedBorder": "#00000000",
-    "brandedCheckedBackground": {
-      "dynamic": {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "brandedCheckedContent": "#ffffff",
-    "brandedCheckedHoveredBackground": {
-      "dynamic": {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "brandedCheckedHoveredContent": "#ffffff",
-    "brandedContent": "#ffffff",
-    "brandedDisabledBackground": "#f0f0f0",
     "brandedDisabledBorder": "transparent",
-    "brandedDisabledContent": "#757575",
-    "brandedDisabledIcon": "#616161",
-    "brandedFocusedBackground": {
-      "dynamic": {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
-    "brandedFocusedBorder": "transparent",
-    "brandedFocusedContent": "#ffffff",
-    "brandedFocusedIcon": "#ffffff",
     "brandedFocusedSecondaryContent": "#ffffff",
-    "brandedHoveredBackground": "#106ebe",
-    "brandedHoveredBorder": "transparent",
-    "brandedHoveredContent": "#ffffff",
-    "brandedHoveredIcon": "#ffffff",
     "brandedHoveredSecondaryContent": "#ffffff",
-    "brandedIcon": "#ffffff",
-    "brandedPressedBackground": "#106ebe",
-    "brandedPressedBorder": "transparent",
-    "brandedPressedContent": "#ffffff",
-    "brandedPressedIcon": "#ffffff",
     "brandedPressedSecondaryContent": {
       "colorWithSystemEffect": {
         "baseColor": "#ffffff",
@@ -138,7 +81,6 @@ exports[`createAppleTheme test 1`] = `
     "brandedSecondaryContent": "#ffffff",
     "buttonBackground": "#ffffff",
     "buttonBackgroundChecked": "#f5f5f5",
-    "buttonBackgroundCheckedHovered": "#f5f5f5",
     "buttonBackgroundDisabled": {
       "colorWithSystemEffect": {
         "baseColor": "#f5f5f5",
@@ -157,7 +99,6 @@ exports[`createAppleTheme test 1`] = `
     "buttonBorderFocused": "#00000000",
     "buttonText": "#616161",
     "buttonTextChecked": "#616161",
-    "buttonTextCheckedHovered": "#616161",
     "buttonTextDisabled": {
       "colorWithSystemEffect": {
         "baseColor": "#616161",
@@ -226,7 +167,6 @@ exports[`createAppleTheme test 1`] = `
     "defaultDisabledBorder": "#d6d6d6",
     "defaultDisabledContent": "#757575",
     "defaultDisabledIcon": "#616161",
-    "defaultDisabledSecondaryContent": "#757575",
     "defaultFocusedBackground": "#ffffff",
     "defaultFocusedBorder": "#d6d6d6",
     "defaultFocusedContent": "#000000",
@@ -242,39 +182,16 @@ exports[`createAppleTheme test 1`] = `
     "defaultPressedContent": "#000000",
     "defaultPressedIcon": "#616161",
     "defaultPressedSecondaryContent": "#ffffff",
-    "defaultStateBackground": {
-      "semantic": [
-        "controlBackgroundColor",
-      ],
-    },
     "disabledBackground": "#E1E1E1",
-    "disabledBodySubtext": {
-      "semantic": [
-        "quaternaryLabelColor",
-      ],
-    },
     "disabledBodyText": {
       "semantic": [
         "tertiaryLabelColor",
-      ],
-    },
-    "disabledSubtext": {
-      "semantic": [
-        "quaternaryLabelColor",
       ],
     },
     "disabledText": {
       "semantic": [
         "tertiaryLabelColor",
       ],
-    },
-    "errorBackground": {
-      "dynamic": {
-        "dark": "transparent",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#DD4242",
-      },
     },
     "errorText": {
       "dynamic": {
@@ -408,22 +325,7 @@ exports[`createAppleTheme test 1`] = `
         "textBackgroundColor",
       ],
     },
-    "inputBackgroundChecked": {
-      "semantic": [
-        "textBackgroundColor",
-      ],
-    },
-    "inputBackgroundCheckedHovered": {
-      "semantic": [
-        "textBackgroundColor",
-      ],
-    },
     "inputBorder": {
-      "semantic": [
-        "separatorColor",
-      ],
-    },
-    "inputBorderHovered": {
       "semantic": [
         "separatorColor",
       ],
@@ -433,25 +335,12 @@ exports[`createAppleTheme test 1`] = `
         "keyboardFocusIndicatorColor",
       ],
     },
-    "inputForegroundChecked": {
-      "dynamic": {
-        "dark": "#1890F1",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#0078D4",
-      },
-    },
     "inputPlaceholderText": {
       "semantic": [
         "placeholderTextColor",
       ],
     },
     "inputText": {
-      "semantic": [
-        "textColor",
-      ],
-    },
-    "inputTextHovered": {
       "semantic": [
         "textColor",
       ],
@@ -471,7 +360,6 @@ exports[`createAppleTheme test 1`] = `
         "selectedControlColor",
       ],
     },
-    "listBackground": "transparent",
     "listHeaderBackgroundHovered": {
       "semantic": [
         "headerTextColor",
@@ -482,23 +370,10 @@ exports[`createAppleTheme test 1`] = `
         "headerTextColor",
       ],
     },
-    "listItemBackgroundChecked": "transparent",
-    "listItemBackgroundCheckedHovered": "transparent",
-    "listItemBackgroundHovered": "transparent",
-    "listText": {
-      "semantic": [
-        "labelColor",
-      ],
-    },
     "menuBackground": "transparent",
     "menuDivider": {
       "semantic": [
         "separatorColor",
-      ],
-    },
-    "menuHeader": {
-      "semantic": [
-        "headerTextColor",
       ],
     },
     "menuIcon": "#616161",
@@ -632,11 +507,6 @@ exports[`createAppleTheme test 1`] = `
     "severeForeground1": "#c43501",
     "severeForeground2": "#7a2101",
     "severeForeground3": "#da3b01",
-    "smallInputBorder": {
-      "semantic": [
-        "separatorColor",
-      ],
-    },
     "strokeFocus1": "#ffffff",
     "strokeFocus2": "#000000",
     "subText": {
@@ -648,14 +518,6 @@ exports[`createAppleTheme test 1`] = `
     "subtleBackgroundHover": "#f5f5f5",
     "subtleBackgroundPressed": "#e0e0e0",
     "subtleBackgroundSelected": "#ebebeb",
-    "successBackground": {
-      "dynamic": {
-        "dark": "#0D9D3D",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#27AC22",
-      },
-    },
     "successBackground1": "#f1faf1",
     "successBackground2": "#9fd89f",
     "successBackground3": "#107c10",
@@ -678,19 +540,6 @@ exports[`createAppleTheme test 1`] = `
         "separatorColor",
       ],
     },
-    "variantBorderHovered": {
-      "semantic": [
-        "separatorColor",
-      ],
-    },
-    "warningBackground": {
-      "dynamic": {
-        "dark": "#FFC328",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD335",
-      },
-    },
     "warningBackground1": "#fffef5",
     "warningBackground2": "#fef7b2",
     "warningBackground3": "#fde300",
@@ -701,22 +550,6 @@ exports[`createAppleTheme test 1`] = `
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
-    "warningHighlight": {
-      "dynamic": {
-        "dark": "#E0AB24",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD94E",
-      },
-    },
-    "warningText": {
-      "dynamic": {
-        "dark": "#FFC328",
-        "highContrastDark": undefined,
-        "highContrastLight": undefined,
-        "light": "#FFD335",
-      },
-    },
   },
   "components": {
     "Button": {

@@ -8,7 +8,7 @@ import { useMenuCheckboxInteraction } from '../MenuItemCheckbox/useMenuItemCheck
 import type { MenuItemRadioProps, MenuItemRadioInfo } from '../MenuItemRadio/MenuItemRadio.types';
 
 export const useMenuItemRadio = (props: MenuItemRadioProps): MenuItemRadioInfo => {
-  const { disabled, name, persistOnClick } = props;
+  const { disabled = false, name, persistOnClick } = props;
   const context = useMenuContext();
   const listContext = useMenuListContext();
   const selectRadio = listContext.selectRadio;

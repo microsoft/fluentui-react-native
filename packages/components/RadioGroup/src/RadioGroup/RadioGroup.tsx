@@ -67,7 +67,11 @@ export const RadioGroup = compose<RadioGroupType>({
 
       const radioGroupContent = <Slots.options>{children}</Slots.options>;
       const radioGroupContentWithFocusZone = (
-        <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
+        <Slots.container
+          disabled={radioGroup.state.selectedButtonDisabled}
+          isCircularNavigation
+          defaultTabbableElement={defaultTabbableElement}
+        >
           {radioGroupContent}
         </Slots.container>
       );

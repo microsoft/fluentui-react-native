@@ -4,9 +4,11 @@
 
 ## Launch `FluentUI Tester` app on Win32
 
-1. Make sure you have followed the [Getting Started](../../README.md#setup-your-development-environment) instructions to clone and build the entire FluentUI React Native repository. I.e. from the root of the repo:
+1. Make sure you've installed the Standard React Native dependencies and Node.js from the [Prerequisites](https://github.com/microsoft/fluentui-react-native/tree/main?tab=readme-ov-file#prerequisites) section.
 
-2. Then go into `apps\win32` folder:
+2. Next, [clone and build the repo](https://github.com/microsoft/fluentui-react-native/tree/main?tab=readme-ov-file#setup-your-development-environment). If you already have a clone of the repo, make sure you've pulled the latest from the main branch (run `git pull` from your clone's main branch). You can verify you have the latest commits by running `git log` which lists all the commits from your branch with dates. Ensure commits are from a recent date or match the latest commits [here](https://github.com/microsoft/fluentui-react-native/commits/main). To exit the `git log` view, press the letter 'q' (for "quit").
+
+3. Then go into `apps\win32` folder:
 
 ```
 cd apps\win32
@@ -26,61 +28,34 @@ yarn run-win32
 
 5. You will see the FluentUI Tester show up in a new window.
 
-![ReactTest image debug menu location](./../../assets/fluent_tester_radiogroup.png)
+![Image of Fluent Tester](./../../assets/fluent_tester_win32.png)
 
 ## Debug `FluentUI Tester` app with direct debugging
 
 Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/download) for direct debugging.
 
-1. Follow the same step #1 as above.
-2. Follow the same step #2 as above.
-
-3. Build the FluentUI Tester bundle with dev option. This will ensure source map is included in the bundle.
+1. Follow steps #1-3 above.
+2. Build the FluentUI Tester bundle with dev option. This will ensure source map is included in the bundle.
 
 ```
 yarn bundle-dev
 ```
 
-4. Launch the FluentUI Tester app:
+3. Launch the FluentUI Tester app:
 
 ```
 yarn run-win32
 ```
 
-5. Inside ReactTest, open the debug option menu and select the checkbox `Use Direct Debugger`
+4. Inside ReactTest, open the debug option menu and select the checkbox `Use Direct Debugger`
 
-![ReactTest image debug menu location](./../../assets/fluent_tester_debug_menu.png)
+![Image of Fluent Tester debug menu location](./../../assets/fluent_tester_win32_debug_menu.png)
 
-6. In Visual Studio Code, open the debug pane and select `Debug Fabric Tester` option from the "Run And Debug" dropdown.
+5. In Visual Studio Code, open the debug pane and select `Debug Fabric Tester` option from the "Run And Debug" dropdown.
 
-![ReactTest image debug menu location](./../../assets/fluent_tester_vscode_debug.png)
+![Image of Visual Studio Code debug pane](./../../assets/fluent_tester_vscode_debug.png)
 
-7. At this time, VS Code will attach to the JS runtime and you can start debugging. For more information on debugging in VS Code, please see [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging).
-
-## Debug `FluentUI Tester` app with web debugging
-
-1. Follow the same step #1 as above.
-2. Follow the same step #2 as above.
-3. Start the debug server:
-
-```
-yarn start
-```
-
-4. Open Edge or Chrome and navigate to http://localhost:8081/debugger-ui
-
-5. Open another command prompt and go into the same location `apps\win32` and run:
-
-```
-yarn run-win32-web
-```
-
-## Debug `FluentUI Tester` app with web debugging in VS Code
-
-1. Launch your test app + packager as you normally would
-2. Go the debug menu in VS Code and run the "Attach to Packager (Win32)" configuration
-3. Open the developer menu in your test app, and click debug
-4. You now should be able to set breakpoints and step through your code directly in VS Code.
+6. At this time, VS Code will attach to the JS runtime and you can start debugging. For more information on debugging in VS Code, please see [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging).
 
 ## Dependencies
 

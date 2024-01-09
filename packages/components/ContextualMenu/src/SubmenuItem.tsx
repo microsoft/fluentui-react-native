@@ -158,16 +158,25 @@ export const SubmenuItem = compose<SubmenuItemType>({
         accessible: true,
         accessibilityLabel: accessibilityLabel,
         accessibilityRole: 'menuitem',
-        accessibilityState: { disabled: state.disabled, selected: state.selected },
+        accessibilityState: { disabled: state.disabled ?? false, selected: state.selected },
         accessibilityValue: { text: itemKey },
         disabled,
         focusable: !disabled,
         onAccessibilityTap: onAccTap,
         ...rest,
       },
-      content: { children: text },
-      icon: createIconProps(icon),
-      chevron: createIconProps({ svgSource: svgProps, width: 12, height: 12 }),
+      content: {
+        accessible: false,
+        children: text,
+      },
+      icon: {
+        ...createIconProps(icon),
+        accessible: false,
+      },
+      chevron: {
+        ...createIconProps({ svgSource: svgProps, width: 12, height: 12 }),
+        accessible: false,
+      },
     });
 
     return { slotProps, state };
