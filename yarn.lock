@@ -3623,9 +3623,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.5.12, @fluentui-react-native/tablist@workspace:packages/experimental/TabList":
+"@fluentui-react-native/tablist@0.5.12, @fluentui-react-native/tablist@workspace:packages/components/TabList":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/tablist@workspace:packages/experimental/TabList"
+  resolution: "@fluentui-react-native/tablist@workspace:packages/components/TabList"
   dependencies:
     "@fluentui-react-native/adapters": 0.12.0
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
