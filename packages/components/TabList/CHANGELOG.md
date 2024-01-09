@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Thu, 04 Jan 2024 21:06:26 GMT and should not be manually modified.
+This log was last generated on Tue, 09 Jan 2024 20:05:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.13
+
+Tue, 09 Jan 2024 20:05:27 GMT
+
+### Patches
+
+- Move TabList package from 'experimental' to 'components' folder (winlarry@microsoft.com)
 
 ## 0.5.12
 

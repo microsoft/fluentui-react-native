@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.165.0"
+      "version": "0.165.1"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.37.26"
+      "version": "0.37.27"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -105,6 +105,10 @@ module.exports = {
     "@fluentui-react-native/switch": {
       "name": "@fluentui-react-native/switch",
       "version": "0.12.6"
+    },
+    "@fluentui-react-native/tablist": {
+      "name": "@fluentui-react-native/tablist",
+      "version": "0.5.13"
     },
     "@fluentui-react-native/tabs": {
       "name": "@fluentui-react-native/tabs",
@@ -209,10 +213,6 @@ module.exports = {
     "@fluentui-react-native/spinner": {
       "name": "@fluentui-react-native/spinner",
       "version": "0.8.6"
-    },
-    "@fluentui-react-native/tablist": {
-      "name": "@fluentui-react-native/tablist",
-      "version": "0.5.12"
     },
     "@fluentui-react-native/experimental-tabs": {
       "name": "@fluentui-react-native/experimental-tabs",

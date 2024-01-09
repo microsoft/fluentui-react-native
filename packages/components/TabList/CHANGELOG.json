@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Tue, 09 Jan 2024 20:05:27 GMT",
+      "version": "0.5.13",
+      "tag": "@fluentui-react-native/tablist_v0.5.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "7bf4f78f17d70736ced02c720068bd1d1690a9fa",
+            "comment": "Move TabList package from 'experimental' to 'components' folder"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "0.5.12",
       "tag": "@fluentui-react-native/tablist_v0.5.12",

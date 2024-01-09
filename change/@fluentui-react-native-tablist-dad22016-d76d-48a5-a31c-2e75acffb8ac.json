@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Move TabList package from 'experimental' to 'components' folder",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
