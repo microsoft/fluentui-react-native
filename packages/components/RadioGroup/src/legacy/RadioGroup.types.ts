@@ -28,6 +28,37 @@ export interface IRadioGroupContext {
    * Array of radio button keys in the group
    */
   buttonKeys?: string[];
+
+  /**
+   * Populate the buttonKeys array (all RadioButton keys) at mount and un-mount
+   */
+  addRadioButtonKey?: (value: string) => void;
+  removeRadioButtonKey?: (value: string) => void;
+
+  /**
+   * Array of enabled Radio keys in the RadioGroup
+   * @platform win32
+   */
+  enabledButtonKeys?: string[];
+
+  /**
+   * Populate the enabledButtonKeys array (only enabled/valid RadioButton keys) at mount and un-mount
+   * @platform win32
+   */
+  addRadioButtonEnabledKey?: (value: string) => void;
+  removeRadioButtonEnabledKey?: (value: string) => void;
+
+  /**
+   * Updates invoked to signal that arrow key has been pressed and focus needs to be set
+   * @platform win32
+   */
+  updateInvoked?: (check: boolean) => void;
+
+  /**
+   * Signals whether arrow key has been pressed
+   * @platform win32
+   */
+  invoked?: boolean;
 }
 
 export interface IRadioGroupState {
