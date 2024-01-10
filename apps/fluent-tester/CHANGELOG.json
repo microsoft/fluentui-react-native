@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 10 Jan 2024 20:27:23 GMT",
+      "version": "0.166.0",
+      "tag": "@fluentui-react-native/tester_v0.166.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7816839224b7a253f4e65bebcdf9e30367d102af",
+            "comment": "Update to react-native-test-app 3.0.0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Jan 2024 19:28:16 GMT",
       "version": "0.165.2",
       "tag": "@fluentui-react-native/tester_v0.165.2",

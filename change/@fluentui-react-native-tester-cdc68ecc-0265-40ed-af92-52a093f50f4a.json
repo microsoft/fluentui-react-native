@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update to react-native-test-app 3.0.0",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
