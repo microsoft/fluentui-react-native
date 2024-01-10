@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Thu, 04 Jan 2024 21:06:26 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Jan 2024 19:28:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.8
+
+Wed, 10 Jan 2024 19:28:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.8
 
 ## 0.12.7
 

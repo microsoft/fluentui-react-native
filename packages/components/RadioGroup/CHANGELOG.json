@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 10 Jan 2024 19:28:16 GMT",
+      "version": "0.20.8",
+      "tag": "@fluentui-react-native/radio-group_v0.20.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "41920c7cbc84771e6e25429856a635d24fabd4ea",
+            "comment": "manually setting focus after selection to fix narrator bug"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "0.20.7",
       "tag": "@fluentui-react-native/radio-group_v0.20.7",

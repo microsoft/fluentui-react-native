@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/radio-group",
-  "version": "0.20.7",
+  "version": "0.20.8",
   "description": "A cross-platform Radio Group component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
