@@ -4,8 +4,6 @@ workspace 'FluentTester.xcworkspace'
 
 react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
-use_flipper!(false)
-
 use_test_app! do |target|
   target.app do
     platform :ios, '15.0'
