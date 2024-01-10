@@ -7997,9 +7997,10 @@ __metadata:
   linkType: hard
 
 "appium-xcuitest-driver@npm:^5.6.0":
-  version: 5.12.2
-  resolution: "appium-xcuitest-driver@npm:5.12.2"
+  version: 5.13.2
+  resolution: "appium-xcuitest-driver@npm:5.13.2"
   dependencies:
+    "@colors/colors": ^1.6.0
     appium-idb: ^1.6.13
     appium-ios-device: ^2.5.4
     appium-ios-simulator: ^5.5.1
@@ -8011,7 +8012,7 @@ __metadata:
     bluebird: ^3.7.2
     css-selector-parser: ^3.0.0
     fancy-log: ^2.0.0
-    js2xmlparser2: ^0.2.0
+    js2xmlparser2: ^0.x
     lodash: ^4.17.21
     lru-cache: ^10.0.0
     moment: ^2.29.4
@@ -8023,8 +8024,8 @@ __metadata:
     teen_process: ^2.0.60
     ws: ^8.13.0
   peerDependencies:
-    appium: ^2.0.0
-  checksum: 116965867ce374cd60af11ddf5c6d1ae3aa14b263a162cc3b4cb2a37048d066a51b246b0d8dd19a436c7dcd34e7def59e9e81909a63acf966fb77183a72a0df9
+    appium: ^2.4.1
+  checksum: 7a08c553133d2d08ac22406bf92e3215f66c4a5cb916c46827031a14e29fe8ad6382274a2add3f6964650bb77908aa2a581f1774c9385e63a35fd35b531f4411
   languageName: node
   linkType: hard
 
@@ -14514,7 +14515,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js2xmlparser2@npm:^0.2.0":
+"js2xmlparser2@npm:^0.x":
   version: 0.2.0
   resolution: "js2xmlparser2@npm:0.2.0"
   checksum: a64a765e91e3177ca0a66e8d745da32b190d1bbffb0682ff0f760cca910061f3a76bf84896a3350e73b4061068c739d4f6081a7fbe01322a81c1e34bb47eebbe
