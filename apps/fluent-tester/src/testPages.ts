@@ -40,7 +40,6 @@ import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
 import { TabListTest } from './TestComponents/TabList/TabListTest';
 import { TabsLegacyTest } from './TestComponents/TabsLegacy';
-import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
@@ -306,12 +305,6 @@ export const tests: TestDescription[] = [
     name: 'Tabs Legacy',
     component: TabsLegacyTest,
     testPageButton: Constants.HOMEPAGE_TABS_BUTTON,
-    platforms: ['macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Tabs V1',
-    component: TabsV1Test,
-    testPageButton: Constants.HOMEPAGE_TABSV1_BUTTON,
     platforms: ['macos', 'win32', 'windows'],
   },
   {

@@ -40,7 +40,6 @@
     "@fluentui-react-native/experimental-shadow": "*",
     "@fluentui-react-native/experimental-shimmer": "*",
     "@fluentui-react-native/experimental-stack": "*",
-    "@fluentui-react-native/experimental-tabs": "*",
     "@fluentui-react-native/experimental-text": "*",
     "@fluentui-react-native/focus-trap-zone": "*",
     "@fluentui-react-native/focus-zone": "*",
