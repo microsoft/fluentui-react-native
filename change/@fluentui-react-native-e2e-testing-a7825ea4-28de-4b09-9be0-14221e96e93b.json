@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove Tabs and Experimental Tabs E2E tests",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
