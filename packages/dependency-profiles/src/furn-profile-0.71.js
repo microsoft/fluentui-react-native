@@ -106,10 +106,6 @@ module.exports = {
       name: '@fluentui-react-native/switch',
       version: '0.11.7',
     },
-    '@fluentui-react-native/tabs': {
-      name: '@fluentui-react-native/tabs',
-      version: '0.13.19',
-    },
     '@fluentui-react-native/text': {
       name: '@fluentui-react-native/text',
       version: '0.21.14',

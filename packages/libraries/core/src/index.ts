@@ -321,22 +321,3 @@ export type {
   MenuButtonTokens,
   MenuButtonType,
 } from '@fluentui-react-native/menu-button';
-
-export { Tabs, TabsContext, TabsItem, tabsItemName, tabsName } from '@fluentui-react-native/tabs';
-export type {
-  TabsContextData,
-  TabsInfo,
-  TabsItemInfo,
-  TabsItemProps,
-  TabsItemRenderData,
-  TabsItemSlotProps,
-  TabsItemState,
-  TabsItemTokens,
-  TabsItemType,
-  TabsProps,
-  TabsRenderData,
-  TabsSlotProps,
-  TabsState,
-  TabsTokens,
-  TabsType,
-} from '@fluentui-react-native/tabs';

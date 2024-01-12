@@ -63,7 +63,6 @@
     "@fluentui-react-native/stack": "*",
     "@fluentui-react-native/styling-utils": "*",
     "@fluentui-react-native/switch": "*",
-    "@fluentui-react-native/tabs": "*",
     "@fluentui-react-native/tester": "*",
     "@fluentui-react-native/tester-win32": "*",
     "@fluentui-react-native/text": "*",

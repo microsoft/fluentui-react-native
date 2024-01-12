@@ -42,7 +42,6 @@
     "@fluentui-react-native/pressable": "0.11.6",
     "@fluentui-react-native/radio-group": "0.20.8",
     "@fluentui-react-native/separator": "0.17.6",
-    "@fluentui-react-native/tabs": "0.14.7",
     "@fluentui-react-native/text": "0.22.6"
   },
   "devDependencies": {
