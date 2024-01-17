@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 17 Jan 2024 01:26:39 GMT",
+      "version": "0.40.0",
+      "tag": "@fluentui/react-native_v0.40.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui/react-native",
+            "commit": "4eb131d61e7b44e0e4c0be3af327d7077d3eae84",
+            "comment": "Remove Tabs and Experimental Tabs packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Jan 2024 19:28:16 GMT",
       "version": "0.39.13",
       "tag": "@fluentui/react-native_v0.39.13",

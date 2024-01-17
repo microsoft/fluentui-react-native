@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
-This log was last generated on Tue, 05 Dec 2023 00:56:17 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Jan 2024 01:26:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 17 Jan 2024 01:26:39 GMT
+
+### Minor changes
+
+- Remove Tabs and Experimental Tabs packages (winlarry@microsoft.com)
 
 ## 0.6.0
 

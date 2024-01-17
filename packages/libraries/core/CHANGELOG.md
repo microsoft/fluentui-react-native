@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Wed, 10 Jan 2024 19:28:16 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Jan 2024 01:26:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.40.0
+
+Wed, 17 Jan 2024 01:26:39 GMT
+
+### Minor changes
+
+- Remove Tabs and Experimental Tabs packages (winlarry@microsoft.com)
 
 ## 0.39.13
 

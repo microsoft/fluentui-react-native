@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 10 Jan 2024 20:27:23 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Jan 2024 01:26:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.0
+
+Wed, 17 Jan 2024 01:26:39 GMT
+
+### Minor changes
+
+- Remove Tabs and Experimental Tabs test pages (winlarry@microsoft.com)
+- Bump @fluentui/react-native to v0.40.0
 
 ## 0.166.0
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Wed, 17 Jan 2024 01:26:39 GMT",
+      "version": "1.34.8",
+      "tag": "@fluentui-react-native/e2e-testing_v1.34.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4eb131d61e7b44e0e4c0be3af327d7077d3eae84",
+            "comment": "Remove Tabs and Experimental Tabs E2E tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "1.34.7",
       "tag": "@fluentui-react-native/e2e-testing_v1.34.7",

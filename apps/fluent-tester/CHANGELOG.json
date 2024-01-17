@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 17 Jan 2024 01:26:39 GMT",
+      "version": "0.167.0",
+      "tag": "@fluentui-react-native/tester_v0.167.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4eb131d61e7b44e0e4c0be3af327d7077d3eae84",
+            "comment": "Remove Tabs and Experimental Tabs test pages"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.40.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Jan 2024 20:27:23 GMT",
       "version": "0.166.0",
       "tag": "@fluentui-react-native/tester_v0.166.0",
