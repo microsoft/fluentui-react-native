@@ -5656,20 +5656,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/align-deps@npm:^2.2.2, @rnx-kit/align-deps@npm:^2.2.5":
-  version: 2.3.2
-  resolution: "@rnx-kit/align-deps@npm:2.3.2"
+"@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.3.3":
+  version: 2.3.3
+  resolution: "@rnx-kit/align-deps@npm:2.3.3"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 9f0c6b392e8478413adb79c57c07b8c2a0cf61621d6b897161fc4df9e8732149a8a3c6b6942d36ec94f45448fec5f167d931f6c28648020fa3c79ac805d8df38
+  checksum: e8f511142aa579684a7fa636e0a3fcc444650acf7e139061f345868f75edbb3cc1b10d9d58fdbcc74e0ee46104064295531b130a57459bd856ccf6e338a673fb
   languageName: node
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.21
-  resolution: "@rnx-kit/cli@npm:0.16.21"
+  version: 0.16.22
+  resolution: "@rnx-kit/cli@npm:0.16.22"
   dependencies:
-    "@rnx-kit/align-deps": ^2.2.2
+    "@rnx-kit/align-deps": ^2.3.3
     "@rnx-kit/config": ^0.6.6
     "@rnx-kit/console": ^1.0.11
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector": ^1.1.1
@@ -5681,7 +5681,7 @@ __metadata:
     "@rnx-kit/third-party-notices": ^1.3.4
     "@rnx-kit/tools-language": ^2.0.0
     "@rnx-kit/tools-node": ^2.1.1
-    "@rnx-kit/tools-react-native": ^1.3.4
+    "@rnx-kit/tools-react-native": ^1.3.5
     chalk: ^4.1.0
     fs-extra: ^10.0.0
     node-fetch: ^2.6.7
@@ -5696,7 +5696,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 9869ccca8ebd5a8a543bfd54d93ee3f317ebb1028c7d404beb80c183a82b829b4859f56673e0cde520683d47219cf148117ab0920cf43676da41b1c380b363ba
+  checksum: a8049cade06c7011f1bba2b9c9d814f550528d1af52b1aba947eff334ca632f8b412726d09f842b647cfc9e18e92af93fbc736ee41e1fcafdb8b8068dd69ce78
   languageName: node
   linkType: hard
 
@@ -5900,6 +5900,15 @@ __metadata:
   dependencies:
     "@rnx-kit/tools-node": ^2.0.1
   checksum: 4c4be8663220bfb0568fee2eb8c8c49f5d55bcb7b6ea88c5c48b310413304ea6d145f2eb48445141815777708667ff85d3c1f97c9579468bdb346be6040fcaf7
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-react-native@npm:^1.3.5":
+  version: 1.3.5
+  resolution: "@rnx-kit/tools-react-native@npm:1.3.5"
+  dependencies:
+    "@rnx-kit/tools-node": ^2.0.1
+  checksum: 2049dfb24655765ec4254e404a5deda3bb4d58bce1ed255e9543b5f5c75a0f39ac6da7c7f078351af316b546c6ae165b08c36f5e7442013d300664f43b8bb949
   languageName: node
   linkType: hard
 
