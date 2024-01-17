@@ -35,8 +35,6 @@ export * from './StrokeWidthTokens/consts';
 export * from './Svg/consts';
 export * from './Switch/consts';
 export * from './TabList/consts';
-export * from './TabsLegacy/consts';
-export * from './TabsV1/consts';
 export * from './TextLegacy/consts';
 export * from './TextV1/consts';
 export * from './Theme/consts';

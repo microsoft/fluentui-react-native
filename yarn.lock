@@ -2642,7 +2642,6 @@ __metadata:
     "@fluentui-react-native/experimental-shadow": "*"
     "@fluentui-react-native/experimental-shimmer": "*"
     "@fluentui-react-native/experimental-stack": "*"
-    "@fluentui-react-native/experimental-tabs": "*"
     "@fluentui-react-native/experimental-text": "*"
     "@fluentui-react-native/focus-trap-zone": "*"
     "@fluentui-react-native/focus-zone": "*"
@@ -2666,7 +2665,6 @@ __metadata:
     "@fluentui-react-native/stack": "*"
     "@fluentui-react-native/styling-utils": "*"
     "@fluentui-react-native/switch": "*"
-    "@fluentui-react-native/tabs": "*"
     "@fluentui-react-native/tester": "*"
     "@fluentui-react-native/tester-win32": "*"
     "@fluentui-react-native/text": "*"
@@ -3074,32 +3072,6 @@ __metadata:
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/text": ">=0.22.6 <1.0.0"
     "@fluentui-react-native/tokens": ">=0.22.5 <1.0.0"
-    "@react-native/metro-config": ^0.72.0
-    react: 18.2.0
-    react-native: ^0.72.0
-    tslib: ^2.3.1
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  languageName: unknown
-  linkType: soft
-
-"@fluentui-react-native/experimental-tabs@*, @fluentui-react-native/experimental-tabs@0.10.7, @fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/experimental-tabs@workspace:packages/experimental/Tabs"
-  dependencies:
-    "@fluentui-react-native/adapters": 0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ">=0.16.6 <1.0.0"
-    "@fluentui-react-native/framework": 0.13.5
-    "@fluentui-react-native/icon": 0.20.7
-    "@fluentui-react-native/interactive-hooks": ">=0.25.6 <1.0.0"
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.22.6 <1.0.0"
-    "@fluentui-react-native/tokens": ">=0.22.5 <1.0.0"
-    "@fluentui-react-native/use-styling": ">=0.12.0 <1.0.0"
-    "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3749,32 +3721,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tabs@*, @fluentui-react-native/tabs@0.14.7, @fluentui-react-native/tabs@workspace:packages/components/Tabs":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/tabs@workspace:packages/components/Tabs"
-  dependencies:
-    "@fluentui-react-native/adapters": ">=0.12.0 <1.0.0"
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ">=0.16.6 <1.0.0"
-    "@fluentui-react-native/icon": 0.20.7
-    "@fluentui-react-native/interactive-hooks": ">=0.25.6 <1.0.0"
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/text": ">=0.22.6 <1.0.0"
-    "@fluentui-react-native/tokens": ">=0.22.5 <1.0.0"
-    "@office-iss/react-native-win32": ^0.72.0
-    "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ">=0.12.3 <1.0.0"
-    "@uifabricshared/foundation-compose": ^1.14.19
-    "@uifabricshared/foundation-settings": ">=0.14.0 <1.0.0"
-    react: 18.2.0
-    react-native: ^0.72.0
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  languageName: unknown
-  linkType: soft
-
 "@fluentui-react-native/test-tools@>=0.1.1 <1.0.0, @fluentui-react-native/test-tools@workspace:packages/utils/test-tools":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/test-tools@workspace:packages/utils/test-tools"
@@ -3844,7 +3790,6 @@ __metadata:
     "@fluentui-react-native/experimental-native-date-picker": ">=0.10.0 <1.0.0"
     "@fluentui-react-native/experimental-shadow": 0.5.6
     "@fluentui-react-native/experimental-shimmer": 0.12.8
-    "@fluentui-react-native/experimental-tabs": 0.10.7
     "@fluentui-react-native/experimental-text": ">=0.14.6 <1.0.0"
     "@fluentui-react-native/focus-zone": ^0.16.6
     "@fluentui-react-native/framework": ">=0.13.5 <1.0.0"
@@ -4187,7 +4132,7 @@ __metadata:
     "@fluentui-react-native/radio-group": 0.20.8
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/separator": 0.17.6
-    "@fluentui-react-native/tabs": 0.14.7
+    "@fluentui-react-native/tablist": 0.5.13
     "@fluentui-react-native/text": 0.22.6
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0

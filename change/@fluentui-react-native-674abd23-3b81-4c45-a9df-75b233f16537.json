@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Remove Tabs and Experimental Tabs packages",
+  "packageName": "@fluentui/react-native",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
