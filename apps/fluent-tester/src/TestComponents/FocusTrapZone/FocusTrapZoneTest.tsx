@@ -20,12 +20,12 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
     trapZoneStyle: {
       padding: 10,
       borderWidth: 2,
-      borderColor: t.colors.defaultBorder,
+      borderColor: t.colors.neutralStroke1,
       borderStyle: 'dashed',
     },
     activeTrapZoneStyle: {
       padding: 10,
-      borderColor: t.colors.defaultBorder,
+      borderColor: t.colors.neutralStroke1,
       borderWidth: 2,
       borderStyle: 'solid',
     },
@@ -33,7 +33,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       borderWidth: 1,
       padding: 8,
       margin: 4,
-      borderColor: t.colors.defaultBorder,
+      borderColor: t.colors.neutralStroke1,
       borderStyle: 'solid',
     },
     focusedComponentTwiddlerStyle: {
@@ -41,14 +41,14 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       padding: 8,
       margin: 4,
       borderStyle: 'solid',
-      borderColor: t.colors.defaultFocusedBorder,
-      backgroundColor: t.colors.defaultFocusedBackground,
+      borderColor: t.colors.strokeFocus2,
+      backgroundColor: t.colors.neutralBackground1Hover,
     },
     componentTwiddlerText: {
-      color: t.colors.defaultContent,
+      color: t.colors.neutralForeground1,
     },
     focusedComponentTwiddlerText: {
-      color: t.colors.defaultFocusedContent,
+      color: t.colors.neutralForeground1Hover,
     },
   };
 });
