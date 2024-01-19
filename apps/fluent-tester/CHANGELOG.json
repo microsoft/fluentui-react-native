@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 19 Jan 2024 16:18:22 GMT",
+      "version": "0.167.1",
+      "tag": "@fluentui-react-native/tester_v0.167.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "fce80d28a4e9ebd28e23f5ebf84ce80909f49b75",
+            "comment": "use themed colors for FocusTrapZone test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Jan 2024 01:26:39 GMT",
       "version": "0.167.0",
       "tag": "@fluentui-react-native/tester_v0.167.0",
