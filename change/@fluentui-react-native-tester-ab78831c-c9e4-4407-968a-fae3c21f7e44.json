@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "use themed colors for FocusTrapZone test",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
