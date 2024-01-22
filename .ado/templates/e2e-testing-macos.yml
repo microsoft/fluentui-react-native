@@ -12,12 +12,6 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
-      yarn appium driver install mac2
-    workingDirectory: apps/E2E
-    displayName: 'Install appium driver'
-    condition: succeeded()
-
-  - script: |
       yarn e2etest:macos
     workingDirectory: apps/E2E
     displayName: 'run E2E macos tests [test]'

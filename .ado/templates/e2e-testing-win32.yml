@@ -26,12 +26,6 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
-      yarn appium driver install --source=npm appium-windows-driver
-    workingDirectory: apps/E2E
-    displayName: 'Install appium driver'
-    condition: succeeded()
-
-  - script: |
       yarn e2etest:win32
     workingDirectory: apps/E2E
     displayName: 'run E2E Win32 tests [test]'
