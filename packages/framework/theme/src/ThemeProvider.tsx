@@ -16,7 +16,7 @@ export const ThemeProvider: React.FunctionComponent<ThemeProviderProps> = (props
   const [theme, setThemeState] = React.useState(() => themeRef.theme);
 
   React.useEffect(() => {
-    // Result of https://github.com/microsoft/fluentui-react-native/issues/3163
+    // If the theme passed by prop is different, we directly update state. We also add a listener to update state if there's a change within the passed theme.
     setThemeState(themeRef.theme);
 
     const onInvalidate = () => {
