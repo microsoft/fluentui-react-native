@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tooltip",
   "entries": [
     {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.2.9",
+      "tag": "@fluentui-react-native/tooltip_v0.2.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.10",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "0.2.8",
       "tag": "@fluentui-react-native/tooltip_v0.2.8",

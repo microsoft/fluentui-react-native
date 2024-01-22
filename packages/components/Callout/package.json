@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/callout",
-  "version": "0.25.6",
+  "version": "0.25.7",
   "description": "A cross-platform Callout component using the Fluent Design System",
   "license": "MIT",
   "author": "",
@@ -31,10 +31,10 @@
   "dependencies": {
     "@fluentui-react-native/adapters": "^0.12.0",
     "@fluentui-react-native/component-cache": "^1.6.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.25.6 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.25.7 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.22.5 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.12.3 <1.0.0",
-    "@uifabricshared/foundation-compose": "^1.14.19",
+    "@uifabricshared/foundation-compose": "^1.14.20",
     "@uifabricshared/foundation-settings": ">=0.14.0 <1.0.0"
   },
   "devDependencies": {

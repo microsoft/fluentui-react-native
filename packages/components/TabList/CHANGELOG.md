@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Tue, 09 Jan 2024 20:05:27 GMT and should not be manually modified.
+This log was last generated on Mon, 22 Jan 2024 22:09:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.14
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.7
+- Bump @fluentui-react-native/framework to v0.13.6
+- Bump @fluentui-react-native/icon to v0.20.8
+- Bump @fluentui-react-native/interactive-hooks to v0.25.7
+- Bump @fluentui-react-native/text to v0.22.7
 
 ## 0.5.13
 

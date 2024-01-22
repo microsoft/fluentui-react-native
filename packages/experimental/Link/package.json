@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-link",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "description": "A cross-platform Link component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,7 +26,7 @@
     "directory": "packages/experimental/link"
   },
   "dependencies": {
-    "@fluentui-react-native/link": ">=0.21.6 <1.0.0"
+    "@fluentui-react-native/link": ">=0.21.7 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.12.9",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.12.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.20.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Jan 2024 19:28:16 GMT",
       "version": "0.12.8",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.12.8",

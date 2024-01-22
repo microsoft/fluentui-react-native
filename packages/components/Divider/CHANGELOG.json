@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/divider",
   "entries": [
     {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.6.8",
+      "tag": "@fluentui-react-native/divider_v0.6.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/divider",
+            "comment": "Bump @fluentui-react-native/text to v0.22.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "0.6.7",
       "tag": "@fluentui-react-native/divider_v0.6.7",

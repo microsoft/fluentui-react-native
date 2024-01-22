@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix theme state not changing when themeRef passed into provider is changed",
-  "packageName": "@fluentui-react-native/theme",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

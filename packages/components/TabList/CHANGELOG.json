@@ -2,6 +2,45 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.5.14",
+      "tag": "@fluentui-react-native/tablist_v0.5.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.16.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.25.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/text to v0.22.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 09 Jan 2024 20:05:27 GMT",
       "version": "0.5.13",
       "tag": "@fluentui-react-native/tablist_v0.5.13",
