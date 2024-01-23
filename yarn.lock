@@ -7925,9 +7925,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-android-driver@npm:^7.8.1":
-  version: 7.8.1
-  resolution: "appium-android-driver@npm:7.8.1"
+"appium-android-driver@npm:^7.8.3":
+  version: 7.8.3
+  resolution: "appium-android-driver@npm:7.8.3"
   dependencies:
     "@appium/support": ^4.2.0
     "@colors/colors": ^1.6.0
@@ -7949,7 +7949,7 @@ __metadata:
     ws: ^8.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 093b2885d85b1c4563fa32d0155e238c4061d10381392f53d8e391dacef87c6b1b5acfecbc069c67f4c4e4b21f3d071d944a1216da9ace212bf79ffd684bc233
+  checksum: 8400177f092bf4eeb4b37a266d3bdc070ceaac2649e3efc3b874d351999e95055f5413bb37375c83ff52bcad1d9801631401fec95d1f6fcbc58f2a99c61eb361
   languageName: node
   linkType: hard
 
@@ -8065,11 +8065,11 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.42.1
-  resolution: "appium-uiautomator2-driver@npm:2.42.1"
+  version: 2.42.2
+  resolution: "appium-uiautomator2-driver@npm:2.42.2"
   dependencies:
     appium-adb: ^12.0.0
-    appium-android-driver: ^7.8.1
+    appium-android-driver: ^7.8.3
     appium-chromedriver: ^5.6.28
     appium-uiautomator2-server: ^6.0.3
     asyncbox: ^3.0.0
@@ -8084,7 +8084,7 @@ __metadata:
     type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.4.1
-  checksum: efcebf8ab3d669fab41da05b51ef0963deb611a88d6f08e0d921cfb6dc8b07a984a71216f5d11a5588a16faf825ae4c8d4eddfc4d757efb27741a1a7d746311b
+  checksum: b509fb1245752d9a9cf2c2bfcc20144d080ee2c0be4876582a292a34ad3b4417c5639eba6b34fb96e548d528d72b44db992f2222cfcdce8942bf0448b88d9e7a
   languageName: node
   linkType: hard
 
