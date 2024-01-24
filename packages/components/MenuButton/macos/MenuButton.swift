@@ -4,6 +4,7 @@
 //
 
 import AppKit
+import React
 
 @objc(FRNMenuButton)
 class MenuButton: NSPopUpButton {

@@ -1,5 +1,6 @@
-import Foundation
 import AppKit
+import Foundation
+import React
 
 @objc(FRNCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {

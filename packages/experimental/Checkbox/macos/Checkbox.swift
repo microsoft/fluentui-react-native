@@ -1,3 +1,6 @@
+import AppKit
+import React
+
 class Checkbox: NSButton {
 
 	@objc public var onPress: RCTBubblingEventBlock?

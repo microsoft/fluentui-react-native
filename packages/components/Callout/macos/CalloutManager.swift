@@ -1,4 +1,6 @@
+import AppKit
 import Foundation
+import React
 
 @objc(FRNCalloutManager)
 class CalloutManager: RCTViewManager {

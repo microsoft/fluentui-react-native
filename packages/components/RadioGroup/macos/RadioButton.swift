@@ -1,3 +1,6 @@
+import AppKit
+import React
+
 class RadioButton: NSButton {
 
 	@objc public var onPress: RCTBubblingEventBlock?
@@ -5,11 +8,11 @@ class RadioButton: NSButton {
 	public override init(frame:NSRect) {
 		super.init(frame: frame)
 	}
-	
+
 	required init?(coder: NSCoder) {
 		preconditionFailure("init(coder:) has not been implemented")
 	}
-	
+
 	@objc public func sendCallback() {
 		self.window?.makeFirstResponder(self)
 		if (onPress != nil) {

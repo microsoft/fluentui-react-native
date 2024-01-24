@@ -1,4 +1,5 @@
 import AppKit
+import React
 
 @objc(FRNVibrancyView)
 open class VibrancyView: RCTView {
