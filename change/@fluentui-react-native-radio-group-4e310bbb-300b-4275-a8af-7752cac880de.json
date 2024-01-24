@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add explicit module imports",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "araje@microsoft.com",
-  "dependentChangeType": "none"
-}

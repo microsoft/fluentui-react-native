@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add explicit module imports",
-  "packageName": "@fluentui-react-native/experimental-native-font-metrics",
-  "email": "araje@microsoft.com",
-  "dependentChangeType": "none"
-}

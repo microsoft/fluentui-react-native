@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add explicit module imports",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "araje@microsoft.com",
-  "dependentChangeType": "none"
-}
