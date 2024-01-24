@@ -1,5 +1,8 @@
-import Foundation
 import AppKit
+import Foundation
+#if USE_REACT_AS_MODULE
+import React
+#endif // USE_REACT_AS_MODULE
 
 @objc(FRNCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {

@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Add explicit module imports",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "araje@microsoft.com",
+  "dependentChangeType": "none"
+}

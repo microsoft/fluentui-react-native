@@ -421,7 +421,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 		// If the previous view is in a FocusZone, focus on its defaultKeyView
 		// (For FocusZoneActionTab, this is handled by becomeFirstResponder).
-		RCTFocusZone *focusZoneAncestor = GetFocusZoneAncestor(nextViewToFocus);
+		focusZoneAncestor = GetFocusZoneAncestor(nextViewToFocus);
 		NSView *ancestorKeyView = [focusZoneAncestor defaultResponder];
 		if (ancestorKeyView != nil) {
 			nextViewToFocus = [focusZoneAncestor defaultResponder];
