@@ -1,5 +1,7 @@
 import AppKit
+#if USE_REACT_AS_MODULE
 import React
+#endif // USE_REACT_AS_MODULE
 
 @objc(FRNVibrancyView)
 open class VibrancyView: RCTView {
