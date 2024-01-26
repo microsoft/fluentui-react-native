@@ -89,11 +89,11 @@ const activityIndicatorSections: TestSection[] = [
 
 export const ActivityIndicatorTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Backlog',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Beta',
-    macosStatus: 'Backlog',
-    androidStatus: 'Beta',
+    win32Status: 'Deprecated',
+    uwpStatus: 'Deprecated',
+    iosStatus: 'Deprecated',
+    macosStatus: 'Deprecated',
+    androidStatus: 'Deprecated',
   };
 
   const description =
