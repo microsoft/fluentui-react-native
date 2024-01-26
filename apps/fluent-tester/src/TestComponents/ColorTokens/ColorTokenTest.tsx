@@ -238,11 +238,11 @@ const themeSections: TestSection[] = [
 
 export const ColorTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
+    iosStatus: 'Production',
     macosStatus: 'Backlog',
-    androidStatus: 'Experimental',
+    androidStatus: 'Production',
   };
 
   const description = 'Alias and global tokens given from token pipeline. Used to style components.';

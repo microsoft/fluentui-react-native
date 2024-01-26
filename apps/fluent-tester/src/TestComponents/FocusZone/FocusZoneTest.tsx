@@ -226,10 +226,10 @@ const e2eSections: TestSection[] = [
 
 export const FocusZoneTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
+    win32Status: 'Production',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Backlog',
+    macosStatus: 'Production',
     androidStatus: 'Backlog',
   };
 

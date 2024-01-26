@@ -25,11 +25,11 @@ const shadowSections: TestSection[] = [
 
 export const ShadowTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    win32Status: 'Production',
+    uwpStatus: 'Production',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description = 'A Shadow component using the Fluent Design System. Shadow components can be added to other components.';

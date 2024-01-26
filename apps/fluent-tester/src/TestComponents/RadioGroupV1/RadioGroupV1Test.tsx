@@ -69,10 +69,10 @@ const e2eSections: TestSection[] = [
 export const RadioGroupV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Backlog',
-    androidStatus: 'Experimental',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description =

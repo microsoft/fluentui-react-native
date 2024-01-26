@@ -128,11 +128,11 @@ const shimmerSections: TestSection[] = [
 
 export const ShimmerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
-    iosStatus: 'Beta',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description =

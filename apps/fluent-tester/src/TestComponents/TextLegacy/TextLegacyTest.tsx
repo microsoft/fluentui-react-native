@@ -34,10 +34,10 @@ const e2eSections: TestSection[] = [
 export const TextLegacyTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Deprecated',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Beta',
+    uwpStatus: 'Deprecated',
+    iosStatus: 'Deprecated',
+    macosStatus: 'Deprecated',
+    androidStatus: 'Deprecated',
   };
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';
