@@ -7925,13 +7925,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-android-driver@npm:^7.8.3":
-  version: 7.8.3
-  resolution: "appium-android-driver@npm:7.8.3"
+"appium-adb@npm:^12.0.2":
+  version: 12.0.3
+  resolution: "appium-adb@npm:12.0.3"
+  dependencies:
+    "@appium/support": ^4.0.0
+    "@devicefarmer/adbkit-apkreader": ^3.2.4
+    async-lock: ^1.0.0
+    asyncbox: ^3.0.0
+    bluebird: ^3.4.7
+    ini: ^4.1.1
+    lodash: ^4.0.0
+    lru-cache: ^10.0.0
+    semver: ^7.0.0
+    source-map-support: ^0.x
+    teen_process: ^2.0.1
+  checksum: 5bb5edf29da1653197a16f7cbd7a627ee2601c9a7a0eb89e3c43bd9063aa7042827e4a91d3204d8caa01bbcb6cf44679891a6a62330d981fbd2789ee921cf10c
+  languageName: node
+  linkType: hard
+
+"appium-android-driver@npm:^8.1.8":
+  version: 8.1.8
+  resolution: "appium-android-driver@npm:8.1.8"
   dependencies:
     "@appium/support": ^4.2.0
     "@colors/colors": ^1.6.0
-    appium-adb: ^12.0.0
+    appium-adb: ^12.0.2
     appium-chromedriver: ^5.5.1
     asyncbox: ^3.0.0
     axios: ^1.x
@@ -7949,7 +7968,7 @@ __metadata:
     ws: ^8.0.0
   peerDependencies:
     appium: ^2.0.0-beta.40
-  checksum: 8400177f092bf4eeb4b37a266d3bdc070ceaac2649e3efc3b874d351999e95055f5413bb37375c83ff52bcad1d9801631401fec95d1f6fcbc58f2a99c61eb361
+  checksum: b0c34fbfa2537fcefd87577e8b8da16d7254748b3804c97ab72576ae04cc121936dedf387d1f7da94cb2e9d8c4d662490a521775c1388f30981f1395583753b0
   languageName: node
   linkType: hard
 
@@ -8065,11 +8084,11 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^2.29.0":
-  version: 2.42.2
-  resolution: "appium-uiautomator2-driver@npm:2.42.2"
+  version: 2.43.3
+  resolution: "appium-uiautomator2-driver@npm:2.43.3"
   dependencies:
     appium-adb: ^12.0.0
-    appium-android-driver: ^7.8.3
+    appium-android-driver: ^8.1.8
     appium-chromedriver: ^5.6.28
     appium-uiautomator2-server: ^6.0.3
     asyncbox: ^3.0.0
@@ -8084,7 +8103,7 @@ __metadata:
     type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.4.1
-  checksum: b509fb1245752d9a9cf2c2bfcc20144d080ee2c0be4876582a292a34ad3b4417c5639eba6b34fb96e548d528d72b44db992f2222cfcdce8942bf0448b88d9e7a
+  checksum: a593f4c39b954d9b2e8f50a21cf5a61c496189ed8ae249a34634fca894c208178b3c803eed06ed8ad1a287207eab18a124b522fbb6680e5777056d20e1fa0dca
   languageName: node
   linkType: hard
 
