@@ -3743,7 +3743,7 @@ __metadata:
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/tester": ^0.167.3
     "@office-iss/react-native-win32": ^0.72.0
-    "@office-iss/rex-win32": 0.71.41-devmain.17024.10000
+    "@office-iss/rex-win32": 0.72.25-devmain.16.0.17327.15000
     "@react-native/metro-config": ^0.72.0
     "@rnx-kit/cli": ^0.16.2
     "@rnx-kit/metro-config": ^1.3.1
@@ -4994,15 +4994,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@office-iss/rex-win32@npm:0.71.41-devmain.17024.10000":
-  version: 0.71.41-devmain.17024.10000
-  resolution: "@office-iss/rex-win32@npm:0.71.41-devmain.17024.10000"
+"@office-iss/rex-win32@npm:0.72.25-devmain.16.0.17327.15000":
+  version: 0.72.25-devmain.16.0.17327.15000
+  resolution: "@office-iss/rex-win32@npm:0.72.25-devmain.16.0.17327.15000"
   dependencies:
     command-line-args: ^5.0.2
     command-line-usage: ^5.0.5
   bin:
     rex-win32: rex-win32.js
-  checksum: 2ffa6dc0ee7ce024bc17866e861bc9ad5b8680bbcf1e08bb48d7befba7b5afb9dcca7072a0c6c8498116c5d38b15184089655ae3159338c8bbc5f585c7a9865c
+  checksum: e433b9e27a7dc18141161c752d0521c909faea698d555afddd11f32f46ae4eee49ee429ce1c3bb365bcf83d1b7e1ae8e765d1f7e0007e8f47f319865833d76fa
   languageName: node
   linkType: hard
 
