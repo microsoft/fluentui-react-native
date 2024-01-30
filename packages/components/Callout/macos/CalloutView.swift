@@ -337,6 +337,10 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				if (NSMaxX(calloutScreenRect) > NSMaxX(screenFrame)) {
 					calloutScreenRect.origin.x = NSMaxX(screenFrame) - NSWidth(calloutScreenRect)
 				}
+				// If we go off the left edge in RTL, just slide to the right so we're fully onscreen
+				if (NSMinX(calloutScreenRect) < NSMinX(screenFrame)) {
+					calloutScreenRect.origin.x = 0;
+				}
 			@unknown default:
 				preconditionFailure("Unknown directional hint")
 			}
