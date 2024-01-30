@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 30 Jan 2024 17:13:09 GMT",
+      "version": "0.37.34",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "378116f52ef6806881481297c960fba28eae9140",
+            "comment": "update rex-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Jan 2024 19:34:00 GMT",
       "version": "0.37.33",
       "tag": "@fluentui-react-native/tester-win32_v0.37.33",
