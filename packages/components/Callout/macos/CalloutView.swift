@@ -264,7 +264,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				origin.y = NSMaxY(anchorScreenRect) - calloutFrame.size.height
 			case .maxY:
 				// When in RTL mode, align the right edges of the menu and flyout anchor
-				if (NSApp.userInterfaceLayoutDirection == .rightToLeft) {
+				if (NSApp.userInterfaceLayoutDirection == .rightToLeft || RCTI18nUtil.sharedInstance().isRTL()) {
 					origin.x = NSMaxX(anchorScreenRect) - calloutFrame.size.width
 				} else {
 					origin.x = NSMinX(anchorScreenRect);
