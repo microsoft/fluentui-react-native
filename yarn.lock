@@ -16197,7 +16197,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"metro-react-native-babel-transformer@npm:0.76.8, metro-react-native-babel-transformer@npm:^0.76.5":
+"metro-react-native-babel-transformer@npm:0.76.8":
   version: 0.76.8
   resolution: "metro-react-native-babel-transformer@npm:0.76.8"
   dependencies:
@@ -16209,6 +16209,21 @@ __metadata:
   peerDependencies:
     "@babel/core": "*"
   checksum: 7b7489709b8ea27e9337dd5997e143fc947a60695b2233d77a5eb3ea9c90a129d5e8308fd6af0b592ee4b037a1e5878ab1798181325e493a05249ff173299608
+  languageName: node
+  linkType: hard
+
+"metro-react-native-babel-transformer@npm:^0.76.5":
+  version: 0.76.9
+  resolution: "metro-react-native-babel-transformer@npm:0.76.9"
+  dependencies:
+    "@babel/core": ^7.20.0
+    babel-preset-fbjs: ^3.4.0
+    hermes-parser: 0.12.0
+    metro-react-native-babel-preset: 0.76.9
+    nullthrows: ^1.1.1
+  peerDependencies:
+    "@babel/core": "*"
+  checksum: bb4427ed2225f72667f82e0ec5317843582628d35f2a7c329ba6d22eb9ee20726403cf2ab869ee6e9056e80576e5a05a55a92d169ac3276227bb6a0159caadeb
   languageName: node
   linkType: hard
 
