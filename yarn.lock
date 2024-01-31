@@ -16099,7 +16099,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"metro-react-native-babel-preset@npm:0.76.8, metro-react-native-babel-preset@npm:^0.76.5":
+"metro-react-native-babel-preset@npm:0.76.8":
   version: 0.76.8
   resolution: "metro-react-native-babel-preset@npm:0.76.8"
   dependencies:
@@ -16148,7 +16148,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"metro-react-native-babel-preset@npm:0.76.9":
+"metro-react-native-babel-preset@npm:0.76.9, metro-react-native-babel-preset@npm:^0.76.5":
   version: 0.76.9
   resolution: "metro-react-native-babel-preset@npm:0.76.9"
   dependencies:
