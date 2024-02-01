@@ -264,7 +264,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				origin.y = NSMaxY(anchorScreenRect) - calloutFrame.size.height
 			case .maxY:
 				// When in RTL mode, align the right edges of the menu and flyout anchor
-				if (NSApp.userInterfaceLayoutDirection == .rightToLeft) {
+				if (NSApp.userInterfaceLayoutDirection == .rightToLeft || RCTI18nUtil.sharedInstance().isRTL()) {
 					origin.x = NSMaxX(anchorScreenRect) - calloutFrame.size.width
 				} else {
 					origin.x = NSMinX(anchorScreenRect);
@@ -336,6 +336,10 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				// If we go off the right edge, just slide to the left until we fit
 				if (NSMaxX(calloutScreenRect) > NSMaxX(screenFrame)) {
 					calloutScreenRect.origin.x = NSMaxX(screenFrame) - NSWidth(calloutScreenRect)
+				}
+				// If we go off the left edge in RTL, just slide to the right so we're fully onscreen
+				if (NSMinX(calloutScreenRect) < NSMinX(screenFrame)) {
+					calloutScreenRect.origin.x = 0;
 				}
 			@unknown default:
 				preconditionFailure("Unknown directional hint")
