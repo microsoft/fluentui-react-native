@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 26 Jan 2024 19:34:00 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Feb 2024 20:54:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.4
+
+Thu, 01 Feb 2024 20:54:31 GMT
+
+### Patches
+
+- fix rtl bug in macos callout/menu controls going offscreen (7664112+FalseLobster@users.noreply.github.com)
+- Bump @fluentui-react-native/dropdown to v0.9.11
+- Bump @fluentui-react-native/experimental-menu-button to v0.9.12
+- Bump @fluentui-react-native/menu to v1.12.13
+- Bump @fluentui-react-native/tooltip to v0.2.10
+- Bump @fluentui/react-native to v0.40.2
 
 ## 0.167.3
 

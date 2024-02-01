@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix rtl bug in macos callout/menu controls going offscreen",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "7664112+FalseLobster@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

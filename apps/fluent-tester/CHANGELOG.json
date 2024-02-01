@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 01 Feb 2024 20:54:31 GMT",
+      "version": "0.167.4",
+      "tag": "@fluentui-react-native/tester_v0.167.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "7664112+FalseLobster@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "9bc47a95e0c990bc67955cbfa101a4b180a53148",
+            "comment": "fix rtl bug in macos callout/menu controls going offscreen"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/dropdown to v0.9.11",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.9.12",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.12.13",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/tooltip to v0.2.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.40.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Jan 2024 19:34:00 GMT",
       "version": "0.167.3",
       "tag": "@fluentui-react-native/tester_v0.167.3",
