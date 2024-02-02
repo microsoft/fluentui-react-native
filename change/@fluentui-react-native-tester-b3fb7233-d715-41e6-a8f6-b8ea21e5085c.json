@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[CI] Fix react-native-test-app and react-native-macos not upgrading",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
