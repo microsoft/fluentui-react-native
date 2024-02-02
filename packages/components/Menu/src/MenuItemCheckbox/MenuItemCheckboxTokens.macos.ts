@@ -10,7 +10,7 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   checkmarkPadding: globalTokens.size20,
   checkmarkSize: 16,
   checkmarkVisibility: 0,
-  color: t.colors.actionLink,
+  color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
   fontSize: globalTokens.font.size300,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
