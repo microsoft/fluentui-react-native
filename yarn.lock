@@ -3834,7 +3834,7 @@ __metadata:
     react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
     react-native-svg-transformer: ^1.0.0
-    react-native-test-app: ^3.1.0
+    react-native-test-app: ^3.1.1
     react-native-windows: ^0.72.0
     react-test-renderer: 18.2.0
     tslib: ^2.3.1
@@ -18461,9 +18461,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-test-app@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "react-native-test-app@npm:3.1.0"
+"react-native-test-app@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "react-native-test-app@npm:3.1.1"
   dependencies:
     "@rnx-kit/react-native-host": ^0.4.2
     ajv: ^8.0.0
@@ -18491,7 +18491,7 @@ __metadata:
     init: scripts/init.js
     init-test-app: scripts/init.js
     install-windows-test-app: windows/test-app.js
-  checksum: 039cfd2b6f5ae9680f3e2ce78e9786ba71d9c799e56e997633c82bb5fb486c6b4b3f9c1943a99ca9038ad67dc3ca446fe2b99639d718a8b44c5eb00f792fa7b3
+  checksum: f6f987240150e21449f9579307ba88d9689ec9871d34f01d4a39938e3533efbd7f202c2f227b4f16c24535330bb0c8f420458676bce1240668e733ea85eeff4c
   languageName: node
   linkType: hard
 

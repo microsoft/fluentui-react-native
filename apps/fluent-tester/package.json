@@ -109,7 +109,7 @@
     "metro-config": "^0.76.5",
     "metro-react-native-babel-preset": "^0.76.5",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^3.1.0",
+    "react-native-test-app": "^3.1.1",
     "react-test-renderer": "18.2.0",
     "webdriverio": "7.30.1"
   },
