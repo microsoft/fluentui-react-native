@@ -3741,7 +3741,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.167.4
+    "@fluentui-react-native/tester": ^0.167.5
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.72.25-devmain.16.0.17327.15000
     "@react-native/metro-config": ^0.72.0
@@ -3762,7 +3762,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.167.4, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.167.5, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3834,7 +3834,7 @@ __metadata:
     react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
     react-native-svg-transformer: ^1.0.0
-    react-native-test-app: ^3.0.0
+    react-native-test-app: ^3.1.1
     react-native-windows: ^0.72.0
     react-test-renderer: 18.2.0
     tslib: ^2.3.1
@@ -5870,12 +5870,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "@rnx-kit/react-native-host@npm:0.3.1"
+"@rnx-kit/react-native-host@npm:^0.4.2":
+  version: 0.4.2
+  resolution: "@rnx-kit/react-native-host@npm:0.4.2"
   peerDependencies:
     react-native: ">=0.66"
-  checksum: e65b7de70570cc8565f7c6ffaa07d096dc9812a53b660608834dbca40b9cd0f54158bfb8344383f3a1bc0c072b097dbb141a16bfb1cf52dfa6f87486402d3625
+  checksum: 83740f09e509b5e56efa7d904a7df5a0ca85e23c3d425cb190b10ae7c570775105c7602931ae230a24e73c8a15b10be8f948a0a696e60ff0f8e447e1696be24b
   languageName: node
   linkType: hard
 
@@ -16640,7 +16640,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.1.1, minimist@npm:^1.2.0, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
+"minimist@npm:^1.1.1, minimist@npm:^1.2.0, minimist@npm:^1.2.6":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
   checksum: 75a6d645fb122dad29c06a7597bddea977258957ed88d7a6df59b5cd3fe4a527e253e9bbf2e783e4b73657f9098b96a5fe96ab8a113655d4109108577ecf85b0
@@ -18401,8 +18401,8 @@ __metadata:
   linkType: hard
 
 "react-native-macos@npm:^0.72.0":
-  version: 0.72.15
-  resolution: "react-native-macos@npm:0.72.15"
+  version: 0.72.16
+  resolution: "react-native-macos@npm:0.72.16"
   dependencies:
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 11.3.7
@@ -18444,7 +18444,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native-macos: cli.js
-  checksum: cc0280901c59768f328253b7e63cde5a2e9286d2d5bd0e2d3dcc3f259e26eb40034b75e51b712a1c4bfed32003918157fb51c80c8fdf3102158e2d63e7e4570a
+  checksum: 58f19f90d31d6713db3e4f8c632a416d782ab7efc4fb3fd6af8327fbcad3e322b473e1fb2524380e6b1e822ed6109d37ea6017eb65117a915d68d26e3b25930e
   languageName: node
   linkType: hard
 
@@ -18476,16 +18476,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-test-app@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "react-native-test-app@npm:3.0.0"
+"react-native-test-app@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "react-native-test-app@npm:3.1.1"
   dependencies:
-    "@rnx-kit/react-native-host": ^0.3.1
+    "@rnx-kit/react-native-host": ^0.4.2
     ajv: ^8.0.0
     chalk: ^4.1.0
     cliui: ^8.0.0
     fast-xml-parser: ^4.0.0
-    minimist: ^1.2.8
     prompts: ^2.4.0
     semver: ^7.3.5
     uuid: ^8.3.2
@@ -18507,7 +18506,7 @@ __metadata:
     init: scripts/init.js
     init-test-app: scripts/init.js
     install-windows-test-app: windows/test-app.js
-  checksum: d23a444294b015f5c762ff8a6361da5d9c1e5ff7dd6292ece5a8c06d5ef4627dd463ab07786b744d77827885e3f3a28c396ebf3fc5c2fe15367c669e17772bf2
+  checksum: f6f987240150e21449f9579307ba88d9689ec9871d34f01d4a39938e3533efbd7f202c2f227b4f16c24535330bb0c8f420458676bce1240668e733ea85eeff4c
   languageName: node
   linkType: hard
 
