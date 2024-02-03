@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use Correct checkmarkPadding for MenuItemCheckbox",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "julio.rocha@microsoft.com",
-  "dependentChangeType": "patch"
-}

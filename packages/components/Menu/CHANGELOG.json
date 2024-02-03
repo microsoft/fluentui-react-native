@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Sat, 03 Feb 2024 02:29:49 GMT",
+      "version": "1.12.14",
+      "tag": "@fluentui-react-native/menu_v1.12.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "julio.rocha@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "2f346a09245e4fdea8ff76324e5307e02055ed66",
+            "comment": "Use Correct checkmarkPadding for MenuItemCheckbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 01 Feb 2024 20:54:31 GMT",
       "version": "1.12.13",
       "tag": "@fluentui-react-native/menu_v1.12.13",
