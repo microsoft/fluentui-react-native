@@ -13,11 +13,11 @@ PODS:
   - FRNAvatar (0.20.7):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNCallout (0.25.8):
+  - FRNCallout (0.25.7):
     - React
   - FRNCheckbox (0.16.7):
     - React
-  - FRNMenuButton (0.12.13):
+  - FRNMenuButton (0.12.12):
     - React
   - FRNRadioButton (0.20.9):
     - React
@@ -648,20 +648,20 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost: dd6670278a62b2597c8aa78da360a2b25563e3f8
-  DoubleConversion: b27dc0920d7399c3d0135ef9089b1dc4d0403a2a
+  boost: 8fa3cd00fa17ef6c3221e5fd283fa93e81d23017
+  DoubleConversion: acaf5db79676d2e9119015819153f0f99191de12
   FBLazyVector: f3a437617321a576905548c703193fc8e2dbd456
   FBReactNativeSpec: 1deb0c0a38bb71781594c73b9fb5d527af25b927
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   FRNAvatar: 4800a3053ad300d0d6b269abe7bacfc6e4bf09b9
-  FRNCallout: 0eb60ff945966f57e1f2334ed41204ae84a8596d
+  FRNCallout: c45b703918a5ea576d939ddc9d45f68d286d8412
   FRNCheckbox: 8eb1bc84f46c6f71e5e22b58b55ce7b820ccbd8d
-  FRNMenuButton: 4f3cee9695720f0591ebb28cf53d2b81e2a0ce1c
+  FRNMenuButton: 785c2b90435e1ae8de1aa4e3b8aa814662a9294e
   FRNRadioButton: 49b2b099456df66d2d491a27c8178efa39b80a27
   FRNVibrancyView: 4362b4c882bbf18e752c847544b97beea195b544
-  glog: 48990dc5c7733bd923abbd8f3acf1f4e0df9e1c8
+  glog: 6df0a3d6e2750a50609471fd1a01fd2948d405b5
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
-  RCT-Folly: b27f06d7ec178935814a767c2616eeaf6c94a9a0
+  RCT-Folly: bf7b4921a91932051ebf1c5c2d297154b1fa3c8c
   RCTFocusZone: d635359e79f444c4fa3a269769caed72e46bfafa
   RCTRequired: 160507b13db57211cbcc421bfc30034170d25043
   RCTTypeSafety: c18f79f887eb142430ccf896fd8c85b139d0195f
@@ -704,4 +704,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 0e740f9fca1901b692b84c05390764ca72e2fb41
 
-COCOAPODS: 1.15.0
+COCOAPODS: 1.14.2
