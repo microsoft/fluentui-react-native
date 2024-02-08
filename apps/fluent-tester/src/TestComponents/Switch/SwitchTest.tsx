@@ -149,9 +149,9 @@ export const SwitchTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
     uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
-    androidStatus: 'Experimental',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description = 'Switch is a control that has two mutually exclusive states.';

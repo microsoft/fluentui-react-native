@@ -43,11 +43,11 @@ const e2eSections: TestSection[] = [
 
 export const TextV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    win32Status: 'Production',
+    uwpStatus: 'Beta',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';

@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 22 Jan 2024 22:09:17 GMT and should not be manually modified.
+This log was last generated on Sat, 03 Feb 2024 02:29:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.14
+
+Sat, 03 Feb 2024 02:29:49 GMT
+
+### Patches
+
+- Use Correct checkmarkPadding for MenuItemCheckbox (julio.rocha@microsoft.com)
+
+## 1.12.13
+
+Thu, 01 Feb 2024 20:54:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.25.8
 
 ## 1.12.12
 

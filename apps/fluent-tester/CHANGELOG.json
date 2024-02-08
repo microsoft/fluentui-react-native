@@ -2,6 +2,102 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 03 Feb 2024 02:29:49 GMT",
+      "version": "0.167.6",
+      "tag": "@fluentui-react-native/tester_v0.167.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "julio.rocha@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2f346a09245e4fdea8ff76324e5307e02055ed66",
+            "comment": "Use Correct checkmarkPadding for MenuItemCheckbox"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.12.14",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 02 Feb 2024 20:10:50 GMT",
+      "version": "0.167.5",
+      "tag": "@fluentui-react-native/tester_v0.167.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "95cf797983f3c07cef3a589ca48bdf8cc534c522",
+            "comment": "[CI] Fix react-native-test-app and react-native-macos not upgrading"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 01 Feb 2024 20:54:31 GMT",
+      "version": "0.167.4",
+      "tag": "@fluentui-react-native/tester_v0.167.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "7664112+FalseLobster@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "9bc47a95e0c990bc67955cbfa101a4b180a53148",
+            "comment": "fix rtl bug in macos callout/menu controls going offscreen"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/dropdown to v0.9.11",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.9.12",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.12.13",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/tooltip to v0.2.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.40.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 26 Jan 2024 19:34:00 GMT",
+      "version": "0.167.3",
+      "tag": "@fluentui-react-native/tester_v0.167.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "31191b03ab660245144fabda0624789d9e8c48ff",
+            "comment": "Update statuses for components"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 22 Jan 2024 22:09:17 GMT",
       "version": "0.167.2",
       "tag": "@fluentui-react-native/tester_v0.167.2",

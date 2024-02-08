@@ -546,10 +546,10 @@ const e2eSections: TestSection[] = [
 
 export const MenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Beta',
+    macosStatus: 'Production',
     androidStatus: 'Experimental',
   };
 

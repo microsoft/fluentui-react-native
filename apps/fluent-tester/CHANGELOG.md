@@ -1,8 +1,46 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 22 Jan 2024 22:09:17 GMT and should not be manually modified.
+This log was last generated on Sat, 03 Feb 2024 02:29:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.6
+
+Sat, 03 Feb 2024 02:29:49 GMT
+
+### Patches
+
+- Use Correct checkmarkPadding for MenuItemCheckbox (julio.rocha@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.12.14
+
+## 0.167.5
+
+Fri, 02 Feb 2024 20:10:50 GMT
+
+### Patches
+
+- [CI] Fix react-native-test-app and react-native-macos not upgrading (sanajmi@microsoft.com)
+
+## 0.167.4
+
+Thu, 01 Feb 2024 20:54:31 GMT
+
+### Patches
+
+- fix rtl bug in macos callout/menu controls going offscreen (7664112+FalseLobster@users.noreply.github.com)
+- Bump @fluentui-react-native/dropdown to v0.9.11
+- Bump @fluentui-react-native/experimental-menu-button to v0.9.12
+- Bump @fluentui-react-native/menu to v1.12.13
+- Bump @fluentui-react-native/tooltip to v0.2.10
+- Bump @fluentui/react-native to v0.40.2
+
+## 0.167.3
+
+Fri, 26 Jan 2024 19:34:00 GMT
+
+### Patches
+
+- Update statuses for components (ruaraki@microsoft.com)
 
 ## 0.167.2
 
