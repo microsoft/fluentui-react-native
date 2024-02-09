@@ -64,6 +64,7 @@
     "@fluentui-react-native/menu": "^1.12.13",
     "@fluentui-react-native/merge-props": ">=0.8.0 <1.0.0",
     "@fluentui-react-native/notification": "0.24.10",
+    "@fluentui-react-native/overflow": "0.1.0",
     "@fluentui-react-native/radio-group": ">=0.20.9 <1.0.0",
     "@fluentui-react-native/separator": "^0.17.7",
     "@fluentui-react-native/spinner": "^0.8.7",

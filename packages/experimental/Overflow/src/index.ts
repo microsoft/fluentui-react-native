@@ -1,1 +1,2 @@
-export { Overflow as Tooltip } from './Overflow';
+export { Overflow } from './Overflow';
+export { OverflowItem } from './OverflowItem';

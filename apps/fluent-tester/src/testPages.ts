@@ -25,6 +25,7 @@ import { MenuButtonLegacyTest } from './TestComponents/MenuButtonLegacy';
 import { MenuButtonV1Test } from './TestComponents/MenuButtonV1';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
+import { OverflowTest } from './TestComponents/Overflow/OverflowTest';
 import { PersonaTest } from './TestComponents/Persona';
 import { PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { PressableTest } from './TestComponents/Pressable';
@@ -209,6 +210,12 @@ export const tests: TestDescription[] = [
     component: NotificationTest,
     testPageButton: HOMEPAGE_NOTIFICATION_BUTTON,
     platforms: ['android', 'ios'],
+  },
+  {
+    name: 'Overflow',
+    component: OverflowTest,
+    testPageButton: '',
+    platforms: ['win32'],
   },
   {
     name: 'Persona',
