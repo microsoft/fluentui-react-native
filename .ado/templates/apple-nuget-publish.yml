@@ -37,8 +37,12 @@ jobs:
         displayName: 'Clean DerivedData'
 
       - script: |
-          sudo gem install cocoapods
-        displayName: 'Install CocoaPods Environment'
+          brew install xcbeautify
+        displayName: 'Install xcbeautify'
+
+      - script: |
+          brew install coocapods
+        displayName: 'Install coocapods'
 
       - bash: |
           sudo xcode-select --switch $(xcode_path)

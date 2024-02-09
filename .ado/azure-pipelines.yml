@@ -80,6 +80,14 @@ jobs:
       - template: templates/setup-repo-min-build.yml
 
       - script: |
+          brew install xcbeautify
+        displayName: 'Install xcbeautify'
+
+      - script: |
+          brew install coocapods
+        displayName: 'Install coocapods'
+
+      - script: |
           yarn bundle:macos
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle macos'
@@ -94,10 +102,6 @@ jobs:
           sudo xcode-select --switch '$(xcode_path)'
         displayName: Switch Xcode version $(xcode_version)
         failOnStderr: true
-
-      - script: |
-          brew install xcbeautify
-        displayName: 'Install xcbeautify'
 
       - bash: |
           echo "yarn $(platform)"
@@ -121,6 +125,14 @@ jobs:
         persistCredentials: true
 
       - template: templates/setup-repo-min-build.yml
+
+      - script: |
+          brew install xcbeautify
+        displayName: 'Install xcbeautify'
+
+      - script: |
+          brew install coocapods
+        displayName: 'Install coocapods'
 
       - script: |
           yarn bundle:ios
