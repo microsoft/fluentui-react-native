@@ -1,16 +1,87 @@
 import * as React from 'react';
+import { View } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
+import { Divider } from '@fluentui-react-native/divider';
 import { Overflow, OverflowItem } from '@fluentui-react-native/overflow';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { Test } from '../Test';
 
+const containerStyle: ViewStyle = {
+  paddingVertical: 4,
+};
+
 export function OverflowMainTest() {
+  const items = ['a', 'b', 'c'];
   return (
-    <Overflow>
-      <OverflowItem id="a">Item A</OverflowItem>
-      <OverflowItem id="b">Item B</OverflowItem>
-      <OverflowItem id="c">Item C</OverflowItem>
-    </Overflow>
+    <View>
+      <Text variant="heroLargeStandard">Hidden Before Layout</Text>
+      <View style={containerStyle}>
+        <Text variant="headerSemibold">Width: 250</Text>
+        <Overflow style={{ width: 250 }} itemIDs={items}>
+          {items.map((item) => (
+            <OverflowItem id={item} key={item}>
+              Item {' ' + item}
+            </OverflowItem>
+          ))}
+        </Overflow>
+      </View>
+      <View style={containerStyle}>
+        <Text variant="headerSemibold">Width: 150</Text>
+        <Overflow style={{ width: 150 }} itemIDs={items}>
+          {items.map((item) => (
+            <OverflowItem id={item} key={item}>
+              Item {' ' + item}
+            </OverflowItem>
+          ))}
+        </Overflow>
+      </View>
+      <View style={containerStyle}>
+        <Text variant="headerSemibold">Width: 75</Text>
+        <Overflow style={{ width: 75 }} itemIDs={items}>
+          {items.map((item) => (
+            <OverflowItem id={item} key={item}>
+              Item {' ' + item}
+            </OverflowItem>
+          ))}
+        </Overflow>
+      </View>
+      <Divider />
+      <Text variant="heroLargeStandard">Visible Before Layout</Text>
+      <View style={containerStyle}>
+        <Text variant="headerSemibold">Width: 250</Text>
+        <Overflow dontHideBeforeReady style={{ width: 250 }} itemIDs={items}>
+          {items.map((item) => (
+            <OverflowItem id={item} key={item}>
+              Item {' ' + item}
+            </OverflowItem>
+          ))}
+        </Overflow>
+      </View>
+      <View style={containerStyle}>
+        <Text variant="headerSemibold">Width: 150</Text>
+        <Overflow dontHideBeforeReady style={{ width: 150 }} itemIDs={items}>
+          {items.map((item) => (
+            <OverflowItem id={item} key={item}>
+              Item {' ' + item}
+            </OverflowItem>
+          ))}
+        </Overflow>
+      </View>
+      <View style={containerStyle}>
+        <Text variant="headerSemibold" style={{ paddingVertical: 8 }}>
+          Width: 75
+        </Text>
+        <Overflow dontHideBeforeReady style={{ width: 75 }} itemIDs={items}>
+          {items.map((item) => (
+            <OverflowItem id={item} key={item}>
+              Item {' ' + item}
+            </OverflowItem>
+          ))}
+        </Overflow>
+      </View>
+    </View>
   );
 }
 
