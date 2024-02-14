@@ -1,12 +1,17 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
-import type { OverflowContextType } from './Overflow.types';
+import type { OverflowState } from './Overflow.types';
 
 const noop = () => null;
 
-export const OverflowContext = createContext<OverflowContextType>({
-  itemVisibility: {},
+export const OverflowContext = createContext<OverflowState>({
   hasOverflow: false,
-  registerItem: noop,
+  initialOverflowLayoutDone: false,
+  itemVisibility: {},
+  setLayoutState: noop,
   updateOverflow: noop,
+  updateItemSize: noop,
+  updateMenuSize: noop,
 });
+
+export const useOverflowContext = () => useContext(OverflowContext);
