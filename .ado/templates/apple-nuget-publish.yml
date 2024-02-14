@@ -37,7 +37,7 @@ jobs:
         displayName: 'Clean DerivedData'
 
       - script: |
-          sudo gem install cocoapods
+          sudo gem install cocoapods -v 1.14.3
         displayName: 'Install CocoaPods Environment'
 
       - bash: |
