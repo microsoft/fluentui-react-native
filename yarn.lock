@@ -5265,7 +5265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-ios@npm:11.3.10, @react-native-community/cli-platform-ios@npm:^11.3.2":
+"@react-native-community/cli-platform-ios@npm:11.3.10":
   version: 11.3.10
   resolution: "@react-native-community/cli-platform-ios@npm:11.3.10"
   dependencies:
@@ -5290,6 +5290,20 @@ __metadata:
     glob: ^7.1.3
     ora: ^5.4.1
   checksum: 7c067d2e42855b70efd93396ecd6a4379660f5ff0f62472b693e52e092a19b9f39aef73d9ba58cda9eac8bd47710bbee98393438ac7936b6c9d0b5c9c60a1d23
+  languageName: node
+  linkType: hard
+
+"@react-native-community/cli-platform-ios@npm:^11.3.2":
+  version: 11.4.0
+  resolution: "@react-native-community/cli-platform-ios@npm:11.4.0"
+  dependencies:
+    "@react-native-community/cli-tools": 11.4.0
+    chalk: ^4.1.2
+    execa: ^5.0.0
+    fast-xml-parser: ^4.0.12
+    glob: ^7.1.3
+    ora: ^5.4.1
+  checksum: 7a0263f36d2629ca7d8c44393c8a9e2225ed70fa266b0e13d930bad251636db18e52aba5b256c5398dabdff2ae5c5c80e07acfa5e3b4196418891e709e29ab46
   languageName: node
   linkType: hard
 
