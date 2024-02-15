@@ -46,7 +46,7 @@ export const MenuGroup = compose<MenuGroupType>({
       });
 
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} accessible accessibilityRole={'group' as any}>
           <Slots.contentWrapper
             // avoid error that fires when props are passed into React.fragment
             {...(hasFocusZone && {
