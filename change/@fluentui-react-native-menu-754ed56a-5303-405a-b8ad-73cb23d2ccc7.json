@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add safety checks for `MenuList` max height/width specifications",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}

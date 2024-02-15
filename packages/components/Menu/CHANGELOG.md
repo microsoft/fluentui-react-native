@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Sat, 03 Feb 2024 02:29:49 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Feb 2024 23:41:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.15
+
+Thu, 15 Feb 2024 23:41:23 GMT
+
+### Patches
+
+- Add safety checks for `MenuList` max height/width specifications (adgleitm@microsoft.com)
 
 ## 1.12.14
 

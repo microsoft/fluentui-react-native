@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Thu, 15 Feb 2024 23:41:23 GMT",
+      "version": "1.12.15",
+      "tag": "@fluentui-react-native/menu_v1.12.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "757a58039a139ee16c1ba47fafda300fe7883133",
+            "comment": "Add safety checks for `MenuList` max height/width specifications"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 03 Feb 2024 02:29:49 GMT",
       "version": "1.12.14",
       "tag": "@fluentui-react-native/menu_v1.12.14",

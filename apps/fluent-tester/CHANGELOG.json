@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 15 Feb 2024 23:41:23 GMT",
+      "version": "0.167.7",
+      "tag": "@fluentui-react-native/tester_v0.167.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.12.15",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 03 Feb 2024 02:29:49 GMT",
       "version": "0.167.6",
       "tag": "@fluentui-react-native/tester_v0.167.6",
