@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Rework package json version notation",
+  "packageName": "@fluentui-react-native/experimental-text",
+  "email": "rofang@microsoft.com",
+  "dependentChangeType": "patch"
+}
