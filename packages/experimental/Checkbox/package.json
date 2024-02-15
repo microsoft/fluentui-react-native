@@ -26,8 +26,8 @@
     "directory": "packages/experimental/Checkbox"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.12.0 <1.0.0",
-    "@fluentui-react-native/checkbox": ">=0.22.7 <1.0.0",
+    "@fluentui-react-native/adapters": "^0.12.0",
+    "@fluentui-react-native/checkbox": "^0.22.7",
     "@fluentui-react-native/component-cache": "^1.6.0",
     "@fluentui-react-native/framework": "0.13.6",
     "tslib": "^2.3.1"

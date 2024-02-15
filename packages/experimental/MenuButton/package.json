@@ -29,7 +29,7 @@
     "@fluentui-react-native/button": "^0.36.10",
     "@fluentui-react-native/contextual-menu": "^0.23.11",
     "@fluentui-react-native/framework": "0.13.6",
-    "@fluentui-react-native/tokens": ">=0.22.5 <1.0.0"
+    "@fluentui-react-native/tokens": "^0.22.5"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
