@@ -28,12 +28,6 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
-      yarn appium driver install uiautomator2
-    workingDirectory: apps/E2E
-    displayName: 'Install appium driver'
-    condition: succeeded()
-
-  - script: |
       yarn e2etest:android
     workingDirectory: apps/E2E
     displayName: 'run E2E Android tests [test]'

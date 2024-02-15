@@ -224,13 +224,13 @@ export const CheckboxV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
     uwpStatus: 'N/A',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description =
-    'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
+    'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off). For macOS, use experimental-checkbox package.';
 
   return <Test name="CheckboxV1 Test" description={description} sections={checkboxSections} status={status} e2eSections={e2eSections} />;
 };

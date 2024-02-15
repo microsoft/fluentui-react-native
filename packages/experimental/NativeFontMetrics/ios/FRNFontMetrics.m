@@ -105,7 +105,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(NSString *)styleStri
 
 #pragma mark - RCTEventEmitter
 
-- (NSArray<NSString *> *)supportedEvents
+- (NSArray<NSString *> *_Nullable)supportedEvents
 {
     return @[ @"onFontMetricsChanged" ];
 }

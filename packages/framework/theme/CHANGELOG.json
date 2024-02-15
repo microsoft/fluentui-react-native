@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.10.6",
+      "tag": "@fluentui-react-native/theme_v0.10.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/theme",
+            "commit": "4d79ecd404648014e7a1f4e147c8a1fd44eb3246",
+            "comment": "Fix theme state not changing when themeRef passed into provider is changed"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "0.10.5",
       "tag": "@fluentui-react-native/theme_v0.10.5",

@@ -515,10 +515,10 @@ const e2eSections: TestSection[] = [
 export const ContextualMenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Deprecated',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
-    macosStatus: 'Beta',
-    androidStatus: 'Backlog',
+    uwpStatus: 'Deprecated',
+    iosStatus: 'Deprecated',
+    macosStatus: 'Deprecated',
+    androidStatus: 'Deprecated',
   };
 
   const description =

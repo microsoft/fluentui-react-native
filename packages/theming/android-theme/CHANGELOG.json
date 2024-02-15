@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.24.1",
+      "tag": "@fluentui-react-native/android-theme_v0.24.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/android-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.6",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "0.24.0",
       "tag": "@fluentui-react-native/android-theme_v0.24.0",

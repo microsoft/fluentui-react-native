@@ -1,3 +1,8 @@
+import AppKit
+#if USE_REACT_AS_MODULE
+import React
+#endif // USE_REACT_AS_MODULE
+
 /// React Native macOS inherits some assumptions from React Native on iOS / UIKit.
 /// This serves as an issue when we want to write our own native components derived from NSView, as we don't
 /// inherit the "fixes" we need from RCTView to get views working properly.. This subclass "fixes" the minimal amount

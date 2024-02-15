@@ -40,9 +40,9 @@ export const BadgeTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
     uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    iosStatus: 'N/A',
+    macosStatus: 'Production',
+    androidStatus: 'N/A',
   };
 
   const description =

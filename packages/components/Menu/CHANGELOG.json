@@ -2,6 +2,87 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Sat, 03 Feb 2024 02:29:49 GMT",
+      "version": "1.12.14",
+      "tag": "@fluentui-react-native/menu_v1.12.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "julio.rocha@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "2f346a09245e4fdea8ff76324e5307e02055ed66",
+            "comment": "Use Correct checkmarkPadding for MenuItemCheckbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 01 Feb 2024 20:54:31 GMT",
+      "version": "1.12.13",
+      "tag": "@fluentui-react-native/menu_v1.12.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "1.12.12",
+      "tag": "@fluentui-react-native/menu_v1.12.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.16.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.25.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.22.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.36.10",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "1.12.11",
       "tag": "@fluentui-react-native/menu_v1.12.11",

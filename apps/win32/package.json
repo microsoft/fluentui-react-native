@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.37.26",
+  "version": "0.37.37",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -17,10 +17,10 @@
     "start": "react-native rnx-start",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
-    "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps --debugBundlePath index --jsEngine v8",
-    "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useFastRefresh --pluginProps --debugBundlePath index --jsEngine v8",
-    "run-win32-dev-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDevMain --useWebDebugger --windowTitle \"FluentUI Tester\" --useFastRefresh --pluginProps --debugBundlePath index --jsEngine v8",
-    "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
+    "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
+    "run-win32-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh",
+    "run-win32-devmain-dev": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useFastRefresh --useDevMain",
+    "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8 --useDevMain ",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
@@ -30,7 +30,7 @@
     "directory": "apps/win32"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.165.0",
+    "@fluentui-react-native/tester": "^0.167.6",
     "react": "18.2.0",
     "react-native": "^0.72.0",
     "react-native-svg": "^13.14.0",
@@ -40,7 +40,7 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@office-iss/react-native-win32": "^0.72.0",
-    "@office-iss/rex-win32": "0.71.41-devmain.17024.10000",
+    "@office-iss/rex-win32": "0.72.25-devmain.16.0.17327.15000",
     "@react-native/metro-config": "^0.72.0",
     "@rnx-kit/cli": "^0.16.2",
     "@rnx-kit/metro-config": "^1.3.1",

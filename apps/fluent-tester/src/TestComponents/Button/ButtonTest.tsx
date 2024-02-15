@@ -80,10 +80,10 @@ const e2eSections: TestSection[] = [
 export const ButtonTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Production',
     macosStatus: 'Production',
-    androidStatus: 'Experimental',
+    androidStatus: 'Production',
   };
 
   const description =

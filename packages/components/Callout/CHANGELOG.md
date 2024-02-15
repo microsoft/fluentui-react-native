@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Thu, 04 Jan 2024 21:06:26 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Feb 2024 20:54:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.8
+
+Thu, 01 Feb 2024 20:54:31 GMT
+
+### Patches
+
+- fix rtl bug in macos callout/menu controls going offscreen (7664112+FalseLobster@users.noreply.github.com)
+
+## 0.25.7
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.25.7
+- Bump @uifabricshared/foundation-compose to v1.14.20
 
 ## 0.25.6
 
