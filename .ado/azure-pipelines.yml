@@ -79,6 +79,8 @@ jobs:
 
       - template: templates/setup-repo-min-build.yml
 
+      - template: templates/apple-ensure-valid-cocoapods.yml
+
       - script: |
           yarn bundle:macos
         workingDirectory: apps/fluent-tester
@@ -121,6 +123,8 @@ jobs:
         persistCredentials: true
 
       - template: templates/setup-repo-min-build.yml
+
+      - template: templates/apple-ensure-valid-cocoapods.yml
 
       - script: |
           yarn bundle:ios

@@ -13,5 +13,3 @@ steps:
   - script: |
       yarn
     displayName: 'yarn install'
-
-  - template: .ado/templates/apple-ensure-valid-cocoapods.yml@self
