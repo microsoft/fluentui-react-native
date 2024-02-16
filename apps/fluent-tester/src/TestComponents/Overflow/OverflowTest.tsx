@@ -16,7 +16,7 @@ export function OverflowMainTest() {
   const items = ['a', 'b', 'c'];
   return (
     <View>
-      <Text variant="heroLargeStandard">Hidden Before Layout</Text>
+      {/* <Text variant="heroLargeStandard">Hidden Before Layout</Text>
       <View style={containerStyle}>
         <Text variant="headerSemibold">Width: 250</Text>
         <Overflow style={{ width: 250 }} itemIDs={items}>
@@ -80,7 +80,14 @@ export function OverflowMainTest() {
             </OverflowItem>
           ))}
         </Overflow>
-      </View>
+      </View> */}
+      <Overflow itemIDs={items}>
+        {items.map((item) => (
+          <OverflowItem id={item} key={item}>
+            Item {' ' + item}
+          </OverflowItem>
+        ))}
+      </Overflow>
     </View>
   );
 }
