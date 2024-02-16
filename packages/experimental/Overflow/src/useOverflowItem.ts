@@ -20,5 +20,8 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
     [id],
   ); // Get item dimensions
 
-  return { props: { ...props, onLayout }, state: { visible: !initialOverflowLayoutDone || itemVisibility[id] } };
+  return {
+    props: { ...props, onLayout },
+    state: { visible: !initialOverflowLayoutDone || itemVisibility[id] },
+  };
 }

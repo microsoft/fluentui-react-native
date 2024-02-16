@@ -32,14 +32,14 @@ export function createOverflowManager(): OverflowManager {
   };
 
   const showItem = () => {
-    const itemToShow = invisibleItems.pop();
-    visibleItems.push(itemToShow);
+    const itemToShow = invisibleItems.shift();
+    visibleItems.unshift(itemToShow);
     onUpdateItemVisibility && onUpdateItemVisibility({ id: itemToShow, visible: true });
   };
 
   const hideItem = () => {
-    const itemToHide = visibleItems.pop();
-    invisibleItems.push(itemToHide);
+    const itemToHide = visibleItems.shift();
+    invisibleItems.unshift(itemToHide);
     onUpdateItemVisibility && onUpdateItemVisibility({ id: itemToHide, visible: false });
   };
 
@@ -49,8 +49,8 @@ export function createOverflowManager(): OverflowManager {
     }
     const availableSize = containerSize.width - padding;
 
-    const visibleTop = visibleItems[visibleItems.length - 1];
-    const invisibleTop = invisibleItems[invisibleItems.length - 1];
+    const visibleTop = visibleItems[0];
+    const invisibleTop = invisibleItems[0];
 
     for (let i = 0; i < 2; i++) {
       while ((occupiedSize() < availableSize && invisibleItems.length > 0) || invisibleItems.length === 1) {
@@ -61,7 +61,7 @@ export function createOverflowManager(): OverflowManager {
       }
     }
 
-    return visibleTop !== visibleItems[visibleItems.length - 1] || invisibleTop !== invisibleItems[invisibleItems.length - 1];
+    return visibleTop !== visibleItems[0] || invisibleTop !== invisibleItems[0];
   };
 
   const initialize = (options: OverflowManagerOptions) => {
@@ -86,7 +86,7 @@ export function createOverflowManager(): OverflowManager {
 
   const addItem = (id: string, size: LayoutSize) => {
     setItemSize(id, size);
-    visibleItems.push(id);
+    visibleItems.unshift(id);
 
     forceDispatch = true;
 

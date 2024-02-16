@@ -104,6 +104,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     },
     props: {
       ...props,
+      accessible: false,
       onLayout: onContainerLayout,
     },
   };

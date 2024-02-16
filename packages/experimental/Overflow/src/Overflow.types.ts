@@ -65,6 +65,15 @@ export interface OverflowItemInfo {
   state: OverflowItemState;
 }
 
+export interface OverflowItemSlotProps {
+  root: ButtonProps;
+}
+
+export interface OverflowItemType {
+  props: OverflowItemProps;
+  slotProps: OverflowItemSlotProps;
+}
+
 export const overflowMenuName = 'OverflowMenu';
 
 export interface OverflowMenuState {
