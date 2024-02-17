@@ -24,15 +24,18 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
     backgroundColor: t.colors.menuItemBackgroundHovered,
     color: t.colors.menuItemTextHovered,
     iconColor: t.colors.menuItemTextHovered,
+    submenuIndicatorColor: t.colors.menuItemTextHovered,
   },
   pressed: {
     backgroundColor: t.colors.menuItemBackgroundPressed,
     color: t.colors.menuItemTextHovered,
     iconColor: t.colors.menuItemTextHovered,
+    submenuIndicatorColor: t.colors.menuItemTextHovered,
   },
   disabled: {
     backgroundColor: t.colors.menuBackground,
     color: t.colors.disabledText,
     iconColor: t.colors.disabledText,
+    submenuIndicatorColor: t.colors.disabledText,
   },
 });
