@@ -24,7 +24,7 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
     color: t.colors.neutralForegroundOnBrand,
     iconColor: t.colors.neutralForegroundOnBrand,
     checked: {
-      checkmarkColor: t.colors.neutralForeground2Hover,
+      checkmarkColor: t.colors.neutralForegroundOnBrand,
       checkmarkVisibility: 1,
     },
   },
