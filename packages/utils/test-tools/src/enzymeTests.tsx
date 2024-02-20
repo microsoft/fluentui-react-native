@@ -123,7 +123,7 @@ export function validateHookValueNotChanged<TValues extends NonNullable<any>[]>(
     wrapper.setProps({});
     expect(callCount).toBe(2);
     expect(latestValues).toBeDefined();
-    expect(latestValues).toHaveSize(firstValues!.length);
+    expect(latestValues.length).toEqual(firstValues!.length);
 
     for (let i = 0; i < latestValues!.length; i++) {
       try {
