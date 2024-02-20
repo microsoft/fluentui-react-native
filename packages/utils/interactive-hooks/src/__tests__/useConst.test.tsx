@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { mount } from 'enzyme';
 
-import { validateHookValueNotChanged } from './testUtilities';
+import { validateHookValueNotChanged } from '@fluentui-react-native/test-tools';
 import { useConst } from '../useConst';
 
 describe('useConst', () => {
