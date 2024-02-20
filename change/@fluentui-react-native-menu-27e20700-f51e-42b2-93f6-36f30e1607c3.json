@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix some MenuItem font and color tokens",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
