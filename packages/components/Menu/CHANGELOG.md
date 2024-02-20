@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 15 Feb 2024 23:41:23 GMT and should not be manually modified.
+This log was last generated on Tue, 20 Feb 2024 22:24:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.16
+
+Tue, 20 Feb 2024 22:24:34 GMT
+
+### Patches
+
+- Fix some MenuItem font and color tokens (adgleitm@microsoft.com)
 
 ## 1.12.15
 

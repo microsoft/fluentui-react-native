@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 20 Feb 2024 22:24:34 GMT",
+      "version": "1.12.16",
+      "tag": "@fluentui-react-native/menu_v1.12.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "033c7eeeff2dc807a833548ecab25a6688db9e9c",
+            "comment": "Fix some MenuItem font and color tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Feb 2024 23:41:23 GMT",
       "version": "1.12.15",
       "tag": "@fluentui-react-native/menu_v1.12.15",
