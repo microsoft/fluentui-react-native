@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useConst } from './useConst';
 
-export type ChangeCallback<TElement, TValue, TEvent extends React.SyntheticEvent<TElement> | undefined> = (
+export type ValueChangeCallback<TElement, TValue, TEvent extends React.SyntheticEvent<TElement> | undefined> = (
   ev: TEvent,
   newValue: TValue | undefined,
 ) => void;
@@ -27,13 +27,13 @@ export function useControllableValue<TValue, TElement>(
 export function useControllableValue<TValue, TElement, TEvent extends React.SyntheticEvent<TElement> | undefined>(
   controlledValue: TValue | undefined,
   defaultUncontrolledValue: TValue | undefined,
-  onChange: ChangeCallback<TElement, TValue, TEvent> | undefined,
+  onChange: ValueChangeCallback<TElement, TValue, TEvent> | undefined,
 ): Readonly<[TValue | undefined, (update: React.SetStateAction<TValue | undefined>, ev?: React.FormEvent<TElement>) => void]>;
 
 export function useControllableValue<TValue, TElement extends HTMLElement, TEvent extends React.SyntheticEvent<TElement> | undefined>(
   controlledValue: TValue | undefined,
   defaultUncontrolledValue: TValue | undefined,
-  onChange?: ChangeCallback<TElement, TValue, TEvent>,
+  onChange?: ValueChangeCallback<TElement, TValue, TEvent>,
 ) {
   const [value, setValue] = React.useState<TValue | undefined>(defaultUncontrolledValue);
   const isControlled = useConst<boolean>(controlledValue !== undefined);
