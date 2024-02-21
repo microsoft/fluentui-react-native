@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "exclude dividers from n of m in MenuGroup",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
