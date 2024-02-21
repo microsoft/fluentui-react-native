@@ -1,4 +1,4 @@
-import type { LayoutSize } from './Overflow.types';
+import type { LayoutSize } from './Overflow/Overflow.types';
 import type { OverflowManagerOptions, OverflowManager } from './overflowManager.types';
 
 export function createOverflowManager(): OverflowManager {

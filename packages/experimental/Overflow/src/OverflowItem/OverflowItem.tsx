@@ -6,22 +6,9 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { mergeProps, compose, withSlots, buildProps } from '@fluentui-react-native/framework';
 import type { UseSlots } from '@fluentui-react-native/framework';
 
-import type { OverflowItemProps, OverflowItemType } from './Overflow.types';
-import { overflowItemName } from './Overflow.types';
+import type { OverflowItemProps, OverflowItemType } from './OverflowItem.types';
+import { overflowItemName } from './OverflowItem.types';
 import { useOverflowItem } from './useOverflowItem';
-
-// export const OverflowItem = stagedComponent((initial: OverflowItemProps) => {
-//   const { props, state } = useOverflowItem(initial);
-//   return (rest: OverflowItemProps, children: React.ReactNode) => {
-//     const merged = mergeProps(props, rest);
-//     if (!state.visible) {
-//       return null;
-//     }
-//     return <Button {...merged}>{children}</Button>;
-//   };
-// });
-
-// OverflowItem.displayName = overflowItemName;
 
 export const OverflowItem = compose<OverflowItemType>({
   displayName: overflowItemName,

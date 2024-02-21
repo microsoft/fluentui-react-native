@@ -1,8 +1,8 @@
 import * as React from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 
-import type { OverflowMenuProps, OverflowMenuInfo } from './Overflow.types';
-import { useOverflowContext } from './OverflowContext';
+import type { OverflowMenuProps, OverflowMenuInfo } from './OverflowMenu.types';
+import { useOverflowContext } from '../OverflowContext';
 
 export function useOverflowMenu(props: OverflowMenuProps): OverflowMenuInfo {
   const { itemVisibility, initialOverflowLayoutDone, hasOverflow, setLayoutState, updateMenuSize } = useOverflowContext();

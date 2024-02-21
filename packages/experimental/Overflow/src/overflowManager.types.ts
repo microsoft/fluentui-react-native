@@ -1,4 +1,4 @@
-import type { LayoutSize } from './Overflow.types';
+import type { LayoutSize } from './Overflow/Overflow.types';
 
 export interface OverflowItemEntry {
   id: string;

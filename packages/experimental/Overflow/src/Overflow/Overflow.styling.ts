@@ -9,7 +9,6 @@ const overflowStates: (keyof OverflowTokens)[] = ['hidden'];
 export const defaultOverflowTokens: TokenSettings<OverflowTokens> = () => ({
   axis: 'horizontal',
   opacity: 1,
-
   hidden: {
     opacity: 0,
   },

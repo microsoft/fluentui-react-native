@@ -3,8 +3,8 @@ import * as React from 'react';
 import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { LayoutSize, OverflowInfo, OverflowState, OverflowProps, SetLayoutStateParam } from './Overflow.types';
-import { createOverflowManager } from './overflowManager';
-import type { OverflowManager, OverflowUpdatePayload } from './overflowManager.types';
+import { createOverflowManager } from '../overflowManager';
+import type { OverflowManager, OverflowUpdatePayload } from '../overflowManager.types';
 
 type PartialOverflowState = Pick<OverflowState, 'hasOverflow' | 'itemVisibility'>;
 

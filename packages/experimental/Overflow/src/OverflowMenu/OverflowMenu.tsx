@@ -5,8 +5,8 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { stagedComponent, mergeProps } from '@fluentui-react-native/framework';
 import { Menu, MenuItem, MenuTrigger, MenuPopover } from '@fluentui-react-native/menu';
 
-import { overflowMenuName } from './Overflow.types';
-import type { OverflowMenuProps } from './Overflow.types';
+import { overflowMenuName } from './OverflowMenu.types';
+import type { OverflowMenuProps } from './OverflowMenu.types';
 import { useOverflowMenu } from './useOverflowMenu';
 
 export const OverflowMenu = stagedComponent((initial: OverflowMenuProps) => {

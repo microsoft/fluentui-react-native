@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-import type { OverflowState } from './Overflow.types';
+import type { OverflowState } from './Overflow/Overflow.types';
 
 const noop = () => null;
 
