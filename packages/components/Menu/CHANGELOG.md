@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 20 Feb 2024 22:24:34 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Feb 2024 22:10:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.17
+
+Wed, 21 Feb 2024 22:10:45 GMT
+
+### Patches
+
+- exclude dividers from n of m in MenuGroup (krsiler@microsoft.com)
 
 ## 1.12.16
 

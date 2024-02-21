@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 20 Feb 2024 22:24:35 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Feb 2024 22:10:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.9
+
+Wed, 21 Feb 2024 22:10:45 GMT
+
+### Patches
+
+- exclude dividers from n of m in MenuGroup (krsiler@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.12.17
 
 ## 0.167.8
 
