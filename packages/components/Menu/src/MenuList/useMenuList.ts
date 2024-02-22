@@ -188,8 +188,8 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     removeRadioItem,
     trackMenuItem,
     untrackMenuItem,
-    hasMaxHeight: context.hasMaxHeight,
-    hasMaxWidth: context.hasMaxWidth,
+    hasMaxHeight: context.hasMaxHeight ?? false,
+    hasMaxWidth: context.hasMaxWidth ?? false,
     focusZoneRef: focusZoneRef,
   };
 };

@@ -3319,7 +3319,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.14, @fluentui-react-native/menu@workspace:packages/components/Menu":
+"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.17, @fluentui-react-native/menu@workspace:packages/components/Menu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
@@ -3741,7 +3741,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": ^0.1.1
     "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.167.6
+    "@fluentui-react-native/tester": ^0.167.9
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.72.25-devmain.16.0.17327.15000
     "@react-native/metro-config": ^0.72.0
@@ -3762,7 +3762,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.167.6, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.167.9, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
@@ -3794,7 +3794,7 @@ __metadata:
     "@fluentui-react-native/icon": 0.20.8
     "@fluentui-react-native/input": ^0.5.8
     "@fluentui-react-native/interactive-hooks": ^0.25.7
-    "@fluentui-react-native/menu": ^1.12.14
+    "@fluentui-react-native/menu": ^1.12.17
     "@fluentui-react-native/merge-props": ^0.8.0
     "@fluentui-react-native/notification": 0.24.10
     "@fluentui-react-native/radio-group": ^0.20.9
@@ -13556,9 +13556,9 @@ __metadata:
   linkType: hard
 
 "ip@npm:^1.1.5":
-  version: 1.1.8
-  resolution: "ip@npm:1.1.8"
-  checksum: a2ade53eb339fb0cbe9e69a44caab10d6e3784662285eb5d2677117ee4facc33a64679051c35e0dfdb1a3983a51ce2f5d2cb36446d52e10d01881789b76e28fb
+  version: 1.1.9
+  resolution: "ip@npm:1.1.9"
+  checksum: b6d91fd45a856e3bd6d4f601ea0619d90f3517638f6918ebd079f959a8a6308568d8db5ef4fdf037e0d9cfdcf264f46833dfeea81ca31309cf0a7eb4b1307b84
   languageName: node
   linkType: hard
 
