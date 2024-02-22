@@ -30,7 +30,7 @@ export function useControllableValue<TValue, TElement, TEvent extends React.Synt
   onChange: ValueChangeCallback<TElement, TValue, TEvent> | undefined,
 ): Readonly<[TValue | undefined, (update: React.SetStateAction<TValue | undefined>, ev?: React.FormEvent<TElement>) => void]>;
 
-export function useControllableValue<TValue, TElement extends HTMLElement, TEvent extends React.SyntheticEvent<TElement> | undefined>(
+export function useControllableValue<TValue, TElement, TEvent extends React.SyntheticEvent<TElement> | undefined>(
   controlledValue: TValue | undefined,
   defaultUncontrolledValue: TValue | undefined,
   onChange?: ValueChangeCallback<TElement, TValue, TEvent>,
