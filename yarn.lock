@@ -5700,11 +5700,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.3.3":
-  version: 2.3.3
-  resolution: "@rnx-kit/align-deps@npm:2.3.3"
+  version: 2.3.4
+  resolution: "@rnx-kit/align-deps@npm:2.3.4"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: e8f511142aa579684a7fa636e0a3fcc444650acf7e139061f345868f75edbb3cc1b10d9d58fdbcc74e0ee46104064295531b130a57459bd856ccf6e338a673fb
+  checksum: 25b7deedd7e77a35e9a33b8cb3dae3045e550c7ddf2912204d4330c9b0fdb1d6d91055e71e41b5fb01281c16b4338bdb115ab4b001521757b83fe8115d0d10be
   languageName: node
   linkType: hard
 
