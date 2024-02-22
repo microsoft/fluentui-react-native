@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Rework package json version notation",
-  "packageName": "@fluentui-react-native/android-theme",
-  "email": "rofang@microsoft.com",
-  "dependentChangeType": "patch"
-}

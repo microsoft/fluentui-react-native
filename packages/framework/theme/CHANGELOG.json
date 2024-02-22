@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Thu, 22 Feb 2024 23:27:43 GMT",
+      "version": "0.10.7",
+      "tag": "@fluentui-react-native/theme_v0.10.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/theme",
+            "commit": "dbd7aadff1ba8c61fd5d8aedde8b079c650e37fa",
+            "comment": "Rework package json version notation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 22 Jan 2024 22:09:17 GMT",
       "version": "0.10.6",
       "tag": "@fluentui-react-native/theme_v0.10.6",

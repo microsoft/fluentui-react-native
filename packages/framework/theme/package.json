@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theme",
-  "version": "0.10.6",
+  "version": "0.10.7",
   "description": "Experimental version of fluentui-react-native theme framework",
   "repository": {
     "type": "git",

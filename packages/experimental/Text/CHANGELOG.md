@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Mon, 22 Jan 2024 22:09:17 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Feb 2024 23:27:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.8
+
+Thu, 22 Feb 2024 23:27:45 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/text to v0.22.8
 
 ## 0.14.7
 

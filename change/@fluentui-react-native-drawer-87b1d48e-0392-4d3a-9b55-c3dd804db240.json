@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Rework package json version notation",
-  "packageName": "@fluentui-react-native/drawer",
-  "email": "rofang@microsoft.com",
-  "dependentChangeType": "patch"
-}
