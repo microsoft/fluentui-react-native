@@ -3,6 +3,7 @@ import * as React from 'react';
 import { createIconProps } from '@fluentui-react-native/icon';
 import type { IconProps } from '@fluentui-react-native/icon';
 import { usePressableState, useControllableValue } from '@fluentui-react-native/interactive-hooks';
+import type { ValueChangeCallback } from '@fluentui-react-native/interactive-hooks';
 
 import { DismissSvg } from './assets/dismissSvg';
 import type { InputProps, InputInfo } from './Input.types';
@@ -43,8 +44,8 @@ export const useInput = (props: InputProps): InputInfo => {
     }
   }, [error, pressable.state.focused, defaultIconProps, focusedIconProps]);
 
-  const onChangeText = React.useCallback(
-    (_ev: unknown, text: string) => {
+  const onChangeText: ValueChangeCallback<Element, string, React.SyntheticEvent<Element, Event>> = React.useCallback(
+    (_ev, text) => {
       onChange?.(text);
     },
     [onChange],
