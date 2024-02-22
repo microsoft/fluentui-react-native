@@ -1,8 +1,89 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Thu, 09 Nov 2023 02:39:09 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Feb 2024 23:27:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.10
+
+Thu, 22 Feb 2024 23:27:45 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/radio-group to v0.20.10
+
+## 0.12.9
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.9
+
+## 0.12.8
+
+Wed, 10 Jan 2024 19:28:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.8
+
+## 0.12.7
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.7
+
+## 0.12.6
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.6
+
+## 0.12.5
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.5
+
+## 0.12.4
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.4
+
+## 0.12.3
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.3
+
+## 0.12.2
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.2
+
+## 0.12.1
+
+Thu, 14 Dec 2023 18:50:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.20.1
 
 ## 0.12.0
 

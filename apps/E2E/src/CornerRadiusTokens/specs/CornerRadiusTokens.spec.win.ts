@@ -9,6 +9,8 @@ describe('CornerRadiusTokens Testing Initialization', () => {
   it('Click and navigate to CornerRadiusTokens test page', async () => {
     expect(await CornerRadiusTokensPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await CornerRadiusTokensPageObject.didAssertPopup()).toBeFalsy(CornerRadiusTokensPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await CornerRadiusTokensPageObject.didAssertPopup())
+      .withContext(CornerRadiusTokensPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

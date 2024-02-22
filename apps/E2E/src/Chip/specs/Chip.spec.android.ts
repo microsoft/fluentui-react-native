@@ -14,7 +14,9 @@ describe('Chip Testing Initialization', () => {
     /* Expand E2E section */
     expect(await ChipPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await ChipPageObject.didAssertPopup()).toBeFalsy(ChipPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ChipPageObject.didAssertPopup())
+      .withContext(ChipPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });
 
@@ -35,6 +37,8 @@ describe('Chip Functional Testing', () => {
       'OnPress callback failing.',
     );
     await expect(await ChipPageObject.verifyTextContent(CHIP_CALLBACK_TEXT_END_STATE)).toBeTruthy();
-    await expect(await ChipPageObject.didAssertPopup()).toBeFalsy(ChipPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ChipPageObject.didAssertPopup())
+      .withContext(ChipPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

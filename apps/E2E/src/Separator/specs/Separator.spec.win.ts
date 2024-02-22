@@ -9,6 +9,8 @@ describe('Separator Testing Initialization', () => {
   it('Click and navigate to Separator test page', async () => {
     expect(await SeparatorPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await SeparatorPageObject.didAssertPopup()).toBeFalsy(SeparatorPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await SeparatorPageObject.didAssertPopup())
+      .withContext(SeparatorPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

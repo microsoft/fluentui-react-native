@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dependency-profiles",
   "entries": [
     {
+      "date": "Wed, 17 Jan 2024 01:26:39 GMT",
+      "version": "0.7.0",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "4eb131d61e7b44e0e4c0be3af327d7077d3eae84",
+            "comment": "Remove Tabs and Experimental Tabs packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 05 Dec 2023 00:56:17 GMT",
       "version": "0.6.0",
       "tag": "@fluentui-react-native/dependency-profiles_v0.6.0",

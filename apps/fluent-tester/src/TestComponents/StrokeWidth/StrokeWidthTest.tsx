@@ -84,11 +84,11 @@ const strokeWidthSections: TestSection[] = [
 
 export const StrokeWidthTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    win32Status: 'Production',
+    uwpStatus: 'Production',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description = 'This showcases the different global stroke width tokens available in Fluent UI.';

@@ -15,7 +15,7 @@ import { useMenuItemTracking } from '../MenuList/useMenuList';
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
 export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheckboxInfo => {
-  const { disabled, name } = props;
+  const { disabled = false, name } = props;
   const context = useMenuListContext();
   const checked = context.checked?.[name];
   const onCheckedChange = context.onCheckedChange;
@@ -59,7 +59,7 @@ export const useMenuCheckboxInteraction = (
     accessibilityState,
     accessible,
     componentRef = defaultComponentRef,
-    disabled,
+    disabled = false,
     name,
     onAccessibilityAction,
     ...rest

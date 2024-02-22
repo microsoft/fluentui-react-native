@@ -384,6 +384,8 @@ const MenuWithGroups: React.FunctionComponent = () => {
               <MenuGroupHeader>Section 2</MenuGroupHeader>
               <MenuItem>A plain MenuItem</MenuItem>
               <MenuItem>A plain MenuItem</MenuItem>
+              <MenuDivider />
+              <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
           </MenuList>
         </MenuPopover>
@@ -546,10 +548,10 @@ const e2eSections: TestSection[] = [
 
 export const MenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Beta',
+    macosStatus: 'Production',
     androidStatus: 'Experimental',
   };
 

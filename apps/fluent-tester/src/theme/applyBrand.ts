@@ -132,9 +132,6 @@ export const applyBrand = (parent: Theme, currentBrand: string): PartialTheme =>
   return ramp
     ? {
         colors: {
-          successBackground: ramp.App6,
-          inputBorderHovered: ramp.App3,
-          inputBackgroundCheckedHovered: ramp.App1,
           inputFocusBorderAlt: ramp.App4,
           buttonBackgroundHovered: ramp.App1,
           buttonBackgroundPressed: ramp.App2,
@@ -145,7 +142,6 @@ export const applyBrand = (parent: Theme, currentBrand: string): PartialTheme =>
           primaryButtonBorder: ramp.App7,
           primaryButtonBorderFocused: ramp.App7,
           accentButtonBackground: ramp.App6,
-          actionLinkHovered: ramp.App5,
           link: ramp.App6,
           linkHovered: ramp.App7,
           linkPressed: ramp.App8,
@@ -156,13 +152,6 @@ export const applyBrand = (parent: Theme, currentBrand: string): PartialTheme =>
           defaultPressedBackground: ramp.App2,
           defaultPressedBorder: ramp.App5,
           brandedBackground: ramp.App6,
-          brandedBorder: ramp.App7,
-          brandedHoveredBackground: ramp.App7,
-          brandedHoveredBorder: ramp.App6,
-          brandedFocusedBackground: ramp.App7,
-          brandedFocusedBorder: ramp.App7,
-          brandedPressedBackground: ramp.App8,
-          brandedPressedBorder: ramp.App7,
           defaultCheckedHoveredBackground: ramp.App1,
           ...getCurrentBrandAliasTokens(parent.name, ramp.AppPrimary),
         },

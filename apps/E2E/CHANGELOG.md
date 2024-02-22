@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 30 Nov 2023 21:40:35 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Feb 2024 23:27:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.34.10
+
+Thu, 22 Feb 2024 23:27:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.8
+
+## 1.34.9
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.7
+
+## 1.34.8
+
+Wed, 17 Jan 2024 01:26:39 GMT
+
+### Patches
+
+- Remove Tabs and Experimental Tabs E2E tests (winlarry@microsoft.com)
+
+## 1.34.7
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.6
+
+## 1.34.6
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.5
+
+## 1.34.5
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.4
+
+## 1.34.4
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.3
+
+## 1.34.3
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.2
+
+## 1.34.2
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.1
+
+## 1.34.1
+
+Sat, 09 Dec 2023 00:26:48 GMT
+
+### Patches
+
+- Replace deprecated usage of falsy/truthy methods in E2E tests (winlarry@microsoft.com)
 
 ## 1.34.0
 

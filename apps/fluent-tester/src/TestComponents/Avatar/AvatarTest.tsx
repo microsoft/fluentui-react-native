@@ -36,9 +36,9 @@ export const AvatarTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Production',
     uwpStatus: 'Backlog',
-    iosStatus: 'Beta',
-    macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description =

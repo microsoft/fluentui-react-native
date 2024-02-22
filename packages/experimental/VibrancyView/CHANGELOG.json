@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/vibrancy-view",
   "entries": [
     {
+      "date": "Thu, 22 Feb 2024 23:27:44 GMT",
+      "version": "0.1.1",
+      "tag": "@fluentui-react-native/vibrancy-view_v0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/vibrancy-view",
+            "commit": "dbd7aadff1ba8c61fd5d8aedde8b079c650e37fa",
+            "comment": "Rework package json version notation"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 24 Jan 2024 23:08:27 GMT",
+      "version": "0.1.0",
+      "tag": "@fluentui-react-native/vibrancy-view_v0.1.0",
+      "comments": {
+        "none": [
+          {
+            "author": "araje@microsoft.com",
+            "package": "@fluentui-react-native/vibrancy-view",
+            "commit": "84a30d159490fb1034c18fb1ba7accfcd1d47a9c",
+            "comment": "Add explicit module imports"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:06 GMT",
       "version": "0.1.0",
       "tag": "@fluentui-react-native/vibrancy-view_v0.1.0",

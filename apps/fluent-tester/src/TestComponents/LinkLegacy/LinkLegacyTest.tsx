@@ -40,11 +40,11 @@ const e2eSections: TestSection[] = [
 
 export const LinkLegacyTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Beta',
-    androidStatus: 'Backlog',
+    win32Status: 'Deprecated',
+    uwpStatus: 'Deprecated',
+    iosStatus: 'Deprecated',
+    macosStatus: 'Deprecated',
+    androidStatus: 'Deprecated',
   };
 
   const description =

@@ -1,8 +1,87 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Thu, 09 Nov 2023 02:39:07 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Feb 2024 23:27:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.2
+
+Thu, 22 Feb 2024 23:27:44 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.10.7
+- Bump @fluentui-react-native/theme-tokens to v0.26.6
+- Bump @fluentui-react-native/theming-utils to v0.25.6
+
+## 0.24.1
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.10.6
+
+## 0.24.0
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Minor changes
+
+-  Remove unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.10.5
+- Bump @fluentui-react-native/theme-tokens to v0.26.5
+- Bump @fluentui-react-native/theme-types to v0.38.0
+- Bump @fluentui-react-native/theming-utils to v0.25.5
+
+## 0.23.0
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Minor changes
+
+- Delete unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.10.4
+- Bump @fluentui-react-native/theme-tokens to v0.26.4
+- Bump @fluentui-react-native/theme-types to v0.37.0
+- Bump @fluentui-react-native/theming-utils to v0.25.4
+
+## 0.22.0
+
+Wed, 03 Jan 2024 00:15:19 GMT
+
+### Minor changes
+
+- Remove unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.10.3
+- Bump @fluentui-react-native/theme-tokens to v0.26.3
+- Bump @fluentui-react-native/theme-types to v0.36.0
+- Bump @fluentui-react-native/theming-utils to v0.25.3
+
+## 0.21.0
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Minor changes
+
+- Remove unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.10.2
+- Bump @fluentui-react-native/theme-tokens to v0.26.2
+- Bump @fluentui-react-native/theme-types to v0.35.0
+- Bump @fluentui-react-native/theming-utils to v0.25.2
+
+## 0.20.0
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Minor changes
+
+- Delete unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.10.1
+- Bump @fluentui-react-native/theme-tokens to v0.26.1
+- Bump @fluentui-react-native/theme-types to v0.34.0
+- Bump @fluentui-react-native/theming-utils to v0.25.1
 
 ## 0.19.0
 
