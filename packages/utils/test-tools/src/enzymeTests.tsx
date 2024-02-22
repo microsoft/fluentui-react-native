@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { View } from 'react-native';
 
 import type { ReactWrapper } from 'enzyme';
 import { mount } from 'enzyme';
@@ -111,7 +112,7 @@ export function validateHookValueNotChanged<TValues extends NonNullable<any>[]>(
       callCount++;
       // eslint-disable-next-line react-hooks/rules-of-hooks
       latestValues = callCount === 1 ? useHook() : (useHookAgain || useHook)();
-      return <div />;
+      return <View />;
     };
 
     const wrapper = mount(<TestComponent />);
