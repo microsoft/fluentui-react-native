@@ -26,7 +26,7 @@
     "directory": "packages/experimental/link"
   },
   "dependencies": {
-    "@fluentui-react-native/link": ">=0.21.7 <1.0.0"
+    "@fluentui-react-native/link": "^0.21.7"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
