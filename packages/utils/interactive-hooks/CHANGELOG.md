@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 22 Feb 2024 23:27:46 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.26.0
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Minor changes
+
+- Adding useControllableValue hook. (nerios@microsoft.com)
 
 ## 0.25.8
 
