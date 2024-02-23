@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/input",
   "entries": [
     {
+      "date": "Fri, 23 Feb 2024 03:22:29 GMT",
+      "version": "0.6.0",
+      "tag": "@fluentui-react-native/input_v0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nerios@microsoft.com",
+            "package": "@fluentui-react-native/input",
+            "commit": "43dde5da3c68516d6c10dabfcebde7ee11c43cf1",
+            "comment": "Adopting useControllableValue in Input component."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/input",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/input",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.26.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/input",
+            "comment": "Bump @fluentui-react-native/text to v0.22.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Feb 2024 23:27:46 GMT",
       "version": "0.5.9",
       "tag": "@fluentui-react-native/input_v0.5.9",
