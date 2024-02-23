@@ -10,7 +10,7 @@ describe('useControllableValue', () => {
     let resultValue: boolean | undefined;
     const TestComponent: React.FunctionComponent<{ value?: boolean; defaultValue?: boolean }> = ({ value, defaultValue }) => {
       [resultValue] = useControllableValue(value, defaultValue);
-      return <div />;
+      return <React.Fragment />;
     };
 
     const wrapper1 = mount(<TestComponent value={true} />);
@@ -30,7 +30,7 @@ describe('useControllableValue', () => {
     let resultValue: boolean | undefined;
     const TestComponent: React.FunctionComponent<{ value?: boolean; defaultValue?: boolean }> = ({ value, defaultValue }) => {
       [resultValue] = useControllableValue(value, defaultValue);
-      return <div />;
+      return <React.Fragment />;
     };
 
     mount(<TestComponent defaultValue={true} />);
@@ -41,7 +41,7 @@ describe('useControllableValue', () => {
     let resultValue: boolean | undefined;
     const TestComponent: React.FunctionComponent<{ value?: boolean; defaultValue?: boolean }> = ({ value, defaultValue }) => {
       [resultValue] = useControllableValue(value, defaultValue);
-      return <div />;
+      return <React.Fragment />;
     };
 
     const wrapper = mount(<TestComponent defaultValue={true} />);

@@ -14,8 +14,10 @@ describe('useConst', () => {
     const initializer = jest.fn(() => Math.random());
     const TestComponent: React.FunctionComponent = () => {
       const value = useConst(initializer);
-      return <div>{value}</div>;
+
+      return <React.Fragment>{value}</React.Fragment>;
     };
+
     const wrapper = mount(<TestComponent />);
     const firstValue = wrapper.text();
     // Re-render the component
@@ -30,8 +32,10 @@ describe('useConst', () => {
     const initializer = jest.fn(() => undefined);
     const TestComponent: React.FunctionComponent = () => {
       const value = useConst(initializer);
-      return <div>{value}</div>;
+
+      return <React.Fragment>{value}</React.Fragment>;
     };
+
     const wrapper = mount(<TestComponent />);
     // Re-render the component
     wrapper.update();
