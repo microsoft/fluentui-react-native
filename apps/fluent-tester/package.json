@@ -56,7 +56,6 @@
     "@fluentui-react-native/experimental-native-date-picker": "^0.10.0",
     "@fluentui-react-native/experimental-shadow": "0.5.9",
     "@fluentui-react-native/experimental-shimmer": "0.12.10",
-    "@fluentui-react-native/experimental-text": "^0.14.9",
     "@fluentui-react-native/framework": "^0.13.7",
     "@fluentui-react-native/icon": "0.20.10",
     "@fluentui-react-native/input": "^0.6.0",

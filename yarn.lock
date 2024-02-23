@@ -2585,11 +2585,9 @@ __metadata:
     "@fluentui-react-native/experimental-expander": "*"
     "@fluentui-react-native/experimental-menu-button": "*"
     "@fluentui-react-native/experimental-native-date-picker": "*"
-    "@fluentui-react-native/experimental-radio-group": "*"
     "@fluentui-react-native/experimental-shadow": "*"
     "@fluentui-react-native/experimental-shimmer": "*"
     "@fluentui-react-native/experimental-stack": "*"
-    "@fluentui-react-native/experimental-text": "*"
     "@fluentui-react-native/focus-trap-zone": "*"
     "@fluentui-react-native/focus-zone": "*"
     "@fluentui-react-native/framework": "*"
@@ -2880,22 +2878,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-link@workspace:packages/experimental/Link":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/experimental-link@workspace:packages/experimental/Link"
-  dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/link": ^0.21.9
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@react-native/metro-config": ^0.72.0
-    react: 18.2.0
-    react-native: ^0.72.0
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  languageName: unknown
-  linkType: soft
-
 "@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@^0.9.14, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
@@ -2944,23 +2926,6 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
     use-subscription: ">=1.0.0 <1.6.0"
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  languageName: unknown
-  linkType: soft
-
-"@fluentui-react-native/experimental-radio-group@*, @fluentui-react-native/experimental-radio-group@workspace:packages/experimental/RadioGroup":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/experimental-radio-group@workspace:packages/experimental/RadioGroup"
-  dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/radio-group": ^0.20.11
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@office-iss/react-native-win32": ^0.72.0
-    "@react-native/metro-config": ^0.72.0
-    react: 18.2.0
-    react-native: ^0.72.0
   peerDependencies:
     react: 18.2.0
     react-native: ^0.72.0
@@ -3019,23 +2984,6 @@ __metadata:
     "@fluentui-react-native/scripts": ^0.1.1
     "@fluentui-react-native/text": ^0.22.9
     "@fluentui-react-native/tokens": ^0.22.6
-    "@react-native/metro-config": ^0.72.0
-    react: 18.2.0
-    react-native: ^0.72.0
-    tslib: ^2.3.1
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  languageName: unknown
-  linkType: soft
-
-"@fluentui-react-native/experimental-text@*, @fluentui-react-native/experimental-text@^0.14.9, @fluentui-react-native/experimental-text@workspace:packages/experimental/Text":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/experimental-text@workspace:packages/experimental/Text"
-  dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3204,7 +3152,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/link@*, @fluentui-react-native/link@0.21.9, @fluentui-react-native/link@^0.21.9, @fluentui-react-native/link@workspace:packages/components/Link":
+"@fluentui-react-native/link@*, @fluentui-react-native/link@0.21.9, @fluentui-react-native/link@workspace:packages/components/Link":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/link@workspace:packages/components/Link"
   dependencies:
@@ -3737,7 +3685,6 @@ __metadata:
     "@fluentui-react-native/experimental-native-date-picker": ^0.10.0
     "@fluentui-react-native/experimental-shadow": 0.5.9
     "@fluentui-react-native/experimental-shimmer": 0.12.10
-    "@fluentui-react-native/experimental-text": ^0.14.9
     "@fluentui-react-native/focus-zone": ^0.16.9
     "@fluentui-react-native/framework": ^0.13.7
     "@fluentui-react-native/icon": 0.20.10

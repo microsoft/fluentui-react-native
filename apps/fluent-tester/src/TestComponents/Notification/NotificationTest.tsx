@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Animated, StyleSheet, Switch, TextInput, View } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Text } from '@fluentui-react-native/experimental-text';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import type { NotificationVariant } from '@fluentui-react-native/notification';
 import { Notification, NotificationVariants } from '@fluentui-react-native/notification';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import PlayButton from './assets/play_button.svg';
 import { StyledPicker } from '../Common/StyledPicker';
