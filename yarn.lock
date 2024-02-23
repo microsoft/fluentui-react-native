@@ -5350,7 +5350,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-ios@npm:11.3.10, @react-native-community/cli-platform-ios@npm:^11.3.2":
+"@react-native-community/cli-platform-ios@npm:11.3.10":
   version: 11.3.10
   resolution: "@react-native-community/cli-platform-ios@npm:11.3.10"
   dependencies:
@@ -5378,7 +5378,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-ios@npm:11.4.1":
+"@react-native-community/cli-platform-ios@npm:11.4.1, @react-native-community/cli-platform-ios@npm:^11.3.2":
   version: 11.4.1
   resolution: "@react-native-community/cli-platform-ios@npm:11.4.1"
   dependencies:
