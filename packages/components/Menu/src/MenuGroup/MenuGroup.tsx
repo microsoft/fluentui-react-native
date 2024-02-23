@@ -28,10 +28,13 @@ export const MenuGroup = compose<MenuGroupType>({
       const childrenWithSet = React.Children.toArray(children).map((child) => {
         if (React.isValidElement(child)) {
           const itemCount = React.Children.toArray(children).filter(
-            (child) => React.isValidElement(child) && (child as any).type.displayName !== 'MenuGroupHeader',
+            (child) =>
+              React.isValidElement(child) &&
+              (child as any).type.displayName !== 'MenuGroupHeader' &&
+              (child as any).type.displayName !== 'MenuDivider',
           ).length;
 
-          if ((child as any).type.displayName !== 'MenuGroupHeader') {
+          if ((child as any).type.displayName !== 'MenuGroupHeader' && (child as any).type.displayName !== 'MenuDivider') {
             itemPosition++;
           }
           return React.cloneElement(

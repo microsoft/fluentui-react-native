@@ -33,11 +33,11 @@ const e2eSections: TestSection[] = [
 
 export const MenuButtonLegacyTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    win32Status: 'Deprecated',
+    uwpStatus: 'Deprecated',
+    iosStatus: 'Deprecated',
+    macosStatus: 'Deprecated',
+    androidStatus: 'Deprecated',
   };
 
   const description =

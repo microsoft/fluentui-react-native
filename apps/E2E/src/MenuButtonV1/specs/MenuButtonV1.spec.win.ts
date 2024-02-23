@@ -14,7 +14,9 @@ describe('MenuButtonV1 Testing Initialization', () => {
     /* Expand E2E section */
     expect(await MenuButtonV1PageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await MenuButtonV1PageObject.didAssertPopup()).toBeFalsy(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await MenuButtonV1PageObject.didAssertPopup())
+      .withContext(MenuButtonV1PageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

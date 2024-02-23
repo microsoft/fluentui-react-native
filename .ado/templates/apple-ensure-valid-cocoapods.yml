@@ -1,0 +1,10 @@
+# Cocoapods 1.15.0 doesn't work with React Native
+steps:
+  - task: CmdLine@2
+    displayName: Install Cocoapods 1.15.2 if needed
+    inputs:
+      script: |
+        POD_VERSION=$(pod --version)
+        if [ $POD_VERSION = 1.15.0 ]; then
+          gem install cocoapods -v 1.15.2
+        fi

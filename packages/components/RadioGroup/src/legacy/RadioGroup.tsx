@@ -53,11 +53,64 @@ export const RadioGroup = compose<IRadioGroupType>({
       [setSelectedButtonRef],
     );
 
+    const [invoked, setInvoked] = React.useState(false);
+
+    const onInvoked = React.useCallback(
+      (check: boolean) => {
+        setInvoked(check);
+      },
+      [setInvoked],
+    );
+
+    const [buttonKeys, setButtonKeys] = React.useState([]);
+
+    const onAddRadioButtonKey = React.useCallback(
+      (buttonKey: string) => {
+        buttonKeys.push(buttonKey);
+        setButtonKeys(buttonKeys);
+      },
+      [setButtonKeys],
+    );
+
+    const onRemoveRadioButtonKey = React.useCallback(
+      (buttonKey: string) => {
+        buttonKeys.filter((item) => item !== buttonKey);
+        setButtonKeys(buttonKeys);
+      },
+      [setButtonKeys],
+    );
+
+    const [enabledButtonKeys, setEnabledButtonKeys] = React.useState([]);
+
+    const onAddRadioButtonEnabledKey = React.useCallback(
+      (buttonKey: string) => {
+        enabledButtonKeys.push(buttonKey);
+        setEnabledButtonKeys(enabledButtonKeys);
+      },
+      [setEnabledButtonKeys],
+    );
+
+    const onRemoveRadioButtonEnabledKey = React.useCallback(
+      (buttonKey: string) => {
+        enabledButtonKeys.filter((item) => item !== buttonKey);
+        setEnabledButtonKeys(enabledButtonKeys);
+      },
+      [setEnabledButtonKeys],
+    );
+
     const state: IRadioGroupState = {
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
         onChange: data.onKeySelect,
         updateSelectedButtonRef: onSelectButtonRef,
+        invoked: invoked,
+        updateInvoked: onInvoked,
+        buttonKeys: buttonKeys,
+        enabledButtonKeys: enabledButtonKeys,
+        addRadioButtonKey: onAddRadioButtonKey,
+        removeRadioButtonKey: onRemoveRadioButtonKey,
+        addRadioButtonEnabledKey: onAddRadioButtonEnabledKey,
+        removeRadioButtonEnabledKey: onRemoveRadioButtonEnabledKey,
       },
     };
 
@@ -75,19 +128,6 @@ export const RadioGroup = compose<IRadioGroupType>({
   render: (Slots: ISlots<IRadioGroupSlotProps>, renderData: IRadioGroupRenderData, ...children: React.ReactNode[]) => {
     if (renderData.state == undefined) {
       return null;
-    }
-
-    // Populate the buttonKeys array
-    if (children) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore - TODO, fix typing error
-      renderData.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
-        if (React.isValidElement(child)) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore - TODO, fix typing error
-          return child.props.buttonKey;
-        }
-      });
     }
 
     return (

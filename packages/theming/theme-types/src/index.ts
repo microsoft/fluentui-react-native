@@ -1,7 +1,6 @@
 export type {
   AliasColorTokens,
   Color,
-  ControlColorTokens,
   FabricWebPalette,
   Palette,
   PaletteBackgroundColors,

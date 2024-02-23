@@ -1,8 +1,94 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Thu, 09 Nov 2023 02:39:09 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.9
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.11.9
+
+## 0.5.8
+
+Thu, 22 Feb 2024 23:27:45 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.13.7
+- Bump @fluentui-react-native/pressable to v0.11.8
+
+## 0.5.7
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.6
+- Bump @fluentui-react-native/pressable to v0.11.7
+
+## 0.5.6
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.5
+- Bump @fluentui-react-native/pressable to v0.11.6
+- Bump @fluentui-react-native/theme-types to v0.38.0
+
+## 0.5.5
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.4
+- Bump @fluentui-react-native/pressable to v0.11.5
+- Bump @fluentui-react-native/theme-types to v0.37.0
+
+## 0.5.4
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.3
+- Bump @fluentui-react-native/pressable to v0.11.4
+- Bump @fluentui-react-native/theme-types to v0.36.0
+
+## 0.5.3
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.2
+- Bump @fluentui-react-native/pressable to v0.11.3
+- Bump @fluentui-react-native/theme-types to v0.35.0
+
+## 0.5.2
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.1
+- Bump @fluentui-react-native/pressable to v0.11.2
+
+## 0.5.1
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.0
+- Bump @fluentui-react-native/pressable to v0.11.1
+- Bump @fluentui-react-native/theme-types to v0.34.0
 
 ## 0.5.0
 

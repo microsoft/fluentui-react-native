@@ -1,5 +1,7 @@
 import Foundation
 import FluentUI
+import React
+import UIKit
 
 @objc(FRNAvatarViewManager)
 class AvatarViewManager: RCTViewManager {

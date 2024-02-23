@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Thu, 09 Nov 2023 02:39:09 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Feb 2024 23:27:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.7
+
+Thu, 22 Feb 2024 23:27:45 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/composition to v0.10.1
+- Bump @fluentui-react-native/default-theme to v0.25.2
+- Bump @fluentui-react-native/tokens to v0.22.6
+- Bump @fluentui-react-native/use-slot to v0.5.1
+- Bump @fluentui-react-native/use-slots to v0.9.1
+
+## 0.13.6
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.25.1
+
+## 0.13.5
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.25.0
+- Bump @fluentui-react-native/theme-types to v0.38.0
+- Bump @fluentui-react-native/tokens to v0.22.5
+
+## 0.13.4
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.24.0
+- Bump @fluentui-react-native/theme-types to v0.37.0
+- Bump @fluentui-react-native/tokens to v0.22.4
+
+## 0.13.3
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.23.0
+- Bump @fluentui-react-native/theme-types to v0.36.0
+- Bump @fluentui-react-native/tokens to v0.22.3
+
+## 0.13.2
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.22.0
+- Bump @fluentui-react-native/theme-types to v0.35.0
+- Bump @fluentui-react-native/tokens to v0.22.2
+
+## 0.13.1
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.21.1
+
+## 0.13.0
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Minor changes
+
+- Delete unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.21.0
+- Bump @fluentui-react-native/theme-types to v0.34.0
+- Bump @fluentui-react-native/tokens to v0.22.1
 
 ## 0.12.0
 

@@ -115,7 +115,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         accessible: true,
         accessibilityLabel: accessibilityLabel,
         accessibilityRole: 'menuitem',
-        accessibilityState: { disabled: state.disabled, selected: state.selected },
+        accessibilityState: { disabled: state.disabled ?? false, selected: state.selected },
         accessibilityValue: { text: itemKey },
         onAccessibilityTap: onAccTap,
         disabled,
@@ -123,8 +123,14 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         testID,
         ...rest,
       },
-      content: { children: text },
-      icon: createIconProps(icon),
+      content: {
+        accessible: false,
+        children: text,
+      },
+      icon: {
+        ...createIconProps(icon),
+        accessible: false,
+      },
     });
 
     return { slotProps, state };

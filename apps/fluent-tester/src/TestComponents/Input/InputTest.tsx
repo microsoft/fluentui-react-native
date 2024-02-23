@@ -25,9 +25,9 @@ export const InputTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
+    iosStatus: 'Production',
     macosStatus: 'Backlog',
-    androidStatus: 'Experimental',
+    androidStatus: 'Production',
   };
 
   const description = 'Input allows the user to enter and edit text.';

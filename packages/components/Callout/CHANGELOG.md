@@ -1,8 +1,103 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Thu, 09 Nov 2023 02:39:07 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.10
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
+
+## 0.25.9
+
+Thu, 22 Feb 2024 23:27:44 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.25.8
+- Bump @fluentui-react-native/tokens to v0.22.6
+- Bump @uifabricshared/foundation-compose to v1.14.21
+
+## 0.25.8
+
+Thu, 01 Feb 2024 20:54:31 GMT
+
+### Patches
+
+- fix rtl bug in macos callout/menu controls going offscreen (7664112+FalseLobster@users.noreply.github.com)
+
+## 0.25.7
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.25.7
+- Bump @uifabricshared/foundation-compose to v1.14.20
+
+## 0.25.6
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.25.6
+- Bump @fluentui-react-native/tokens to v0.22.5
+- Bump @uifabricshared/foundation-compose to v1.14.19
+
+## 0.25.5
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.25.5
+- Bump @fluentui-react-native/tokens to v0.22.4
+- Bump @uifabricshared/foundation-compose to v1.14.18
+
+## 0.25.4
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.25.4
+- Bump @fluentui-react-native/tokens to v0.22.3
+- Bump @uifabricshared/foundation-compose to v1.14.17
+
+## 0.25.3
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.25.3
+- Bump @fluentui-react-native/tokens to v0.22.2
+- Bump @uifabricshared/foundation-compose to v1.14.16
+
+## 0.25.2
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.25.2
+- Bump @uifabricshared/foundation-compose to v1.14.15
+
+## 0.25.1
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.25.1
+- Bump @fluentui-react-native/tokens to v0.22.1
+- Bump @uifabricshared/foundation-compose to v1.14.14
 
 ## 0.25.0
 

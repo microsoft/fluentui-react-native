@@ -73,6 +73,7 @@ export const MenuList = compose<MenuListType>({
             {
               accessibilityPositionInSet: child.props.accessibilityPositionInSet ?? itemPosition, // win32
               accessibilitySetSize: child.props.accessibilitySetSize ?? itemCount, //win32
+              ...(child.props.tooltip && { alwaysShowToolTip: true }),
             } as any,
           );
         }

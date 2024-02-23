@@ -2,6 +2,111 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Thu, 22 Feb 2024 23:27:43 GMT",
+      "version": "0.10.7",
+      "tag": "@fluentui-react-native/theme_v0.10.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/theme",
+            "commit": "dbd7aadff1ba8c61fd5d8aedde8b079c650e37fa",
+            "comment": "Rework package json version notation"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.10.6",
+      "tag": "@fluentui-react-native/theme_v0.10.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/theme",
+            "commit": "4d79ecd404648014e7a1f4e147c8a1fd44eb3246",
+            "comment": "Fix theme state not changing when themeRef passed into provider is changed"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jan 2024 21:06:26 GMT",
+      "version": "0.10.5",
+      "tag": "@fluentui-react-native/theme_v0.10.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.38.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jan 2024 01:35:42 GMT",
+      "version": "0.10.4",
+      "tag": "@fluentui-react-native/theme_v0.10.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.37.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 Jan 2024 00:15:20 GMT",
+      "version": "0.10.3",
+      "tag": "@fluentui-react-native/theme_v0.10.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.36.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Dec 2023 01:31:00 GMT",
+      "version": "0.10.2",
+      "tag": "@fluentui-react-native/theme_v0.10.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.35.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Dec 2023 00:05:24 GMT",
+      "version": "0.10.1",
+      "tag": "@fluentui-react-native/theme_v0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.34.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:11 GMT",
       "version": "0.10.0",
       "tag": "@fluentui-react-native/theme_v0.10.0",

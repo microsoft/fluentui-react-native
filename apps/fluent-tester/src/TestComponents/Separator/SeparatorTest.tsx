@@ -41,11 +41,11 @@ const separatorSections: TestSection[] = [
 
 export const SeparatorTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Beta',
-    androidStatus: 'Experimental',
+    win32Status: 'Deprecated',
+    uwpStatus: 'Deprecated',
+    iosStatus: 'Deprecated',
+    macosStatus: 'Deprecated',
+    androidStatus: 'Deprecated',
   };
 
   const description =

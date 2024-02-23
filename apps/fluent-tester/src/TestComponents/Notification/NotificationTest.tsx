@@ -279,7 +279,7 @@ export const NotificationTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
+    iosStatus: 'Production',
     macosStatus: 'Backlog',
     androidStatus: 'Backlog',
   };

@@ -218,14 +218,14 @@ const e2eSections: TestSection[] = [
 
 export const TabListTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Backlog',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    win32Status: 'Production',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="TabsV1 Test" description={description} sections={sections} status={status} e2eSections={e2eSections} />;
+  return <Test name="TabList Test" description={description} sections={sections} status={status} e2eSections={e2eSections} />;
 };

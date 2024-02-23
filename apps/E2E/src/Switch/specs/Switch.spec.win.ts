@@ -14,7 +14,9 @@ describe('Switch Testing Initialization', () => {
     /* Expand E2E section */
     expect(await SwitchPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await SwitchPageObject.didAssertPopup())
+      .withContext(SwitchPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -82,7 +84,9 @@ describe('Switch Functional Testing', () => {
       await SwitchPageObject.waitForSwitchStateChange(false, 'Clicked the primary switch to turn it off, but it remained on.'),
     ).toBeTruthy();
 
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await SwitchPageObject.didAssertPopup())
+      .withContext(SwitchPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "ENTER" on primary Switch. Validate it toggles correctly AND calls the user\'s onChange() callback.', async () => {
@@ -112,7 +116,9 @@ describe('Switch Functional Testing', () => {
       await SwitchPageObject.waitForSwitchStateChange(false, 'Pressed "ENTER" on the primary switch to turn it off, but it remained on.'),
     ).toBeTruthy();
 
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await SwitchPageObject.didAssertPopup())
+      .withContext(SwitchPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Press "SPACE" on primary Switch. Validate it toggles correctly AND calls the user\'s onChange() callback.', async () => {
@@ -142,6 +148,8 @@ describe('Switch Functional Testing', () => {
       await SwitchPageObject.waitForSwitchStateChange(false, 'Pressed "SPACE" on the primary switch to turn it off, but it remained on.'),
     ).toBeTruthy();
 
-    await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await SwitchPageObject.didAssertPopup())
+      .withContext(SwitchPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });

@@ -14,7 +14,9 @@ describe('Link Testing Initialization', () => {
     /* Expand E2E section */
     expect(await LinkLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await LinkLegacyPageObject.didAssertPopup()).toBeFalsy(LinkLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await LinkLegacyPageObject.didAssertPopup())
+      .withContext(LinkLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

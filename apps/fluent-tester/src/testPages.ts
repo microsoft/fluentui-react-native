@@ -39,11 +39,10 @@ import { StrokeWidthTest } from './TestComponents/StrokeWidth';
 import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
 import { TabListTest } from './TestComponents/TabList/TabListTest';
-import { TabsLegacyTest } from './TestComponents/TabsLegacy';
-import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
+import { TooltipTest } from './TestComponents/Tooltip';
 import { VibrancyViewTest } from './TestComponents/VibrancyView';
 import * as Constants from '../../E2E/src/index.consts';
 
@@ -302,18 +301,6 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32', 'windows'],
   },
   {
-    name: 'Tabs Legacy',
-    component: TabsLegacyTest,
-    testPageButton: Constants.HOMEPAGE_TABS_BUTTON,
-    platforms: ['macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Tabs V1',
-    component: TabsV1Test,
-    testPageButton: Constants.HOMEPAGE_TABSV1_BUTTON,
-    platforms: ['macos', 'win32', 'windows'],
-  },
-  {
     name: 'Text Legacy',
     component: TextLegacyTest,
     testPageButton: Constants.HOMEPAGE_TEXT_BUTTON,
@@ -330,6 +317,12 @@ export const tests: TestDescription[] = [
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Tooltip',
+    component: TooltipTest,
+    testPageButton: Constants.HOMEPAGE_TOOLTIP_BUTTON,
+    platforms: ['win32'],
   },
   {
     name: 'Vibrancy View',

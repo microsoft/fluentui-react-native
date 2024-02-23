@@ -46,9 +46,6 @@ export interface SemanticPalette {
   menuIcon: ColorValue;
   menuItemText: ColorValue;
 
-  // List
-  listBackground: ColorValue;
-
   // HyperLink
   textHyperLink: ColorValue;
 
@@ -95,7 +92,6 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuBackground: p.white,
         menuIcon: p.gray400,
         menuItemText: p.gray900,
-        listBackground: p.white,
         textHyperLink: '#D83B01',
         checkboxDisabled: p.white,
         checkboxBorder: '#808080',
@@ -134,7 +130,6 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuBackground: p.gray800,
         menuIcon: p.gray500,
         menuItemText: p.gray100,
-        listBackground: p.gray950,
         textHyperLink: '#D83B01',
         checkboxDisabled: p.black,
         checkboxBorder: '#808080',

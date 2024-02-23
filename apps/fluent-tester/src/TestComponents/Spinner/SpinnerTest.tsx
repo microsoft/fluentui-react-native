@@ -97,11 +97,11 @@ const spinnerSections: TestSection[] = [
 
 export const SpinnerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Backlog',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
-    iosStatus: 'Beta',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description =
