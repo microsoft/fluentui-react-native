@@ -3053,22 +3053,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-link@workspace:packages/experimental/Link":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/experimental-link@workspace:packages/experimental/Link"
-  dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/link": ^0.21.8
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@react-native/metro-config": ^0.72.0
-    react: 18.2.0
-    react-native: ^0.72.0
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  languageName: unknown
-  linkType: soft
-
 "@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@^0.9.13, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
@@ -3343,7 +3327,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/link@*, @fluentui-react-native/link@0.21.8, @fluentui-react-native/link@^0.21.8, @fluentui-react-native/link@workspace:packages/components/Link":
+"@fluentui-react-native/link@*, @fluentui-react-native/link@0.21.8, @fluentui-react-native/link@workspace:packages/components/Link":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/link@workspace:packages/components/Link"
   dependencies:
