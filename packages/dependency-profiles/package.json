@@ -36,7 +36,6 @@
     "@fluentui-react-native/experimental-expander": "*",
     "@fluentui-react-native/experimental-menu-button": "*",
     "@fluentui-react-native/experimental-native-date-picker": "*",
-    "@fluentui-react-native/experimental-radio-group": "*",
     "@fluentui-react-native/experimental-shadow": "*",
     "@fluentui-react-native/experimental-shimmer": "*",
     "@fluentui-react-native/experimental-stack": "*",
