@@ -31,8 +31,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
     "@types/jest": "^29.0.0",
     "@types/node": "^10.3.5",

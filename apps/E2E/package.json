@@ -28,9 +28,9 @@
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/focus-zone": "^0.16.8",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
     "@rnx-kit/metro-config": "^1.3.1",
     "@types/jasmine": "3.10.3",

@@ -27,14 +27,14 @@
     "directory": "packages/experimental/Stack"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.12.0",
-    "@fluentui-react-native/framework": "0.13.7",
-    "@fluentui-react-native/tokens": "^0.22.6"
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@fluentui-react-native/text": "^0.22.8",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
     "react": "18.2.0",
     "react-native": "^0.72.0",

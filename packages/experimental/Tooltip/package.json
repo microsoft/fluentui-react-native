@@ -26,16 +26,16 @@
     "directory": "packages/experimental/Tooltip"
   },
   "dependencies": {
-    "@fluentui-react-native/callout": "^0.25.9",
-    "@fluentui-react-native/component-cache": "^1.6.0",
-    "@fluentui-react-native/framework": "0.13.7",
+    "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/component-cache": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/button": "^0.36.11",
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@fluentui-react-native/test-tools": "^0.1.1",
+    "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
     "@office-iss/react-native-win32": "^0.72.0",
     "@react-native/metro-config": "^0.72.0",
     "react": "18.2.0",
