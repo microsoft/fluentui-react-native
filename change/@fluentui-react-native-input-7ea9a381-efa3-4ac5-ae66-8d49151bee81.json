@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adopting useControllableValue in Input component.",
+  "packageName": "@fluentui-react-native/input",
+  "email": "nerios@microsoft.com",
+  "dependentChangeType": "patch"
+}
