@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.167.11"
+      "version": "0.167.12"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.37.42"
+      "version": "0.37.43"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -174,10 +174,6 @@ module.exports = {
       "name": "@fluentui-react-native/experimental-expander",
       "version": "0.7.8"
     },
-    "@fluentui-react-native/experimental-link": {
-      "name": "@fluentui-react-native/experimental-link",
-      "version": "0.7.9"
-    },
     "@fluentui-react-native/experimental-menu-button": {
       "name": "@fluentui-react-native/experimental-menu-button",
       "version": "0.9.14"
@@ -194,10 +190,6 @@ module.exports = {
       "name": "@fluentui-react-native/popover",
       "version": "0.3.8"
     },
-    "@fluentui-react-native/experimental-radio-group": {
-      "name": "@fluentui-react-native/experimental-radio-group",
-      "version": "0.12.11"
-    },
     "@fluentui-react-native/experimental-shadow": {
       "name": "@fluentui-react-native/experimental-shadow",
       "version": "0.5.9"
@@ -209,10 +201,6 @@ module.exports = {
     "@fluentui-react-native/spinner": {
       "name": "@fluentui-react-native/spinner",
       "version": "0.8.9"
-    },
-    "@fluentui-react-native/experimental-text": {
-      "name": "@fluentui-react-native/experimental-text",
-      "version": "0.14.9"
     },
     "@fluentui-react-native/tooltip": {
       "name": "@fluentui-react-native/tooltip",
