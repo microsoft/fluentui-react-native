@@ -21,7 +21,7 @@ const PaddedTabList = TabList.customize({
   paddingVertical: 4,
 });
 
-const TabListDefaultTest: React.FunctionComponent = () => {
+export const TabListDefaultTest: React.FunctionComponent = () => {
   const [key, setKey] = React.useState('tab1');
   return (
     <View style={stackStyle}>

@@ -8,12 +8,19 @@ export function createOverflowManager(): OverflowManager {
   const invisibleItems: string[] = [];
 
   let forceDispatch = false;
+  let debug = false;
 
   let menuSize: LayoutSize = { width: 0, height: 0 };
   let containerSize: LayoutSize;
   let padding: number;
   let onUpdateItemVisibility: OverflowManagerOptions['onUpdateItemVisibility'];
   let onOverflowUpdate: OverflowManagerOptions['onOverflowUpdate'];
+
+  const log = (...args: any[]) => {
+    if (debug) {
+      console.log(...args);
+    }
+  };
 
   const occupiedSize = () => {
     let totalSize = 0;
@@ -27,7 +34,7 @@ export function createOverflowManager(): OverflowManager {
   };
 
   const dispatchUpdate = () => {
-    console.log('occupied', occupiedSize(), '| available', containerSize.width - padding);
+    log('occupied', occupiedSize(), '| available', containerSize.width - padding);
     onOverflowUpdate && onOverflowUpdate({ visibleIds: visibleItems, invisibleIds: invisibleItems });
   };
 
@@ -65,6 +72,8 @@ export function createOverflowManager(): OverflowManager {
   };
 
   const initialize = (options: OverflowManagerOptions) => {
+    debug = options.debug;
+    log('container size:', options.initialContainerSize);
     containerSize = options.initialContainerSize;
     padding = options.padding ?? 0;
     onUpdateItemVisibility = options.onUpdateItemVisibility;
@@ -80,11 +89,12 @@ export function createOverflowManager(): OverflowManager {
   const setMenuSize = (size: LayoutSize) => {
     // implement
     menuSize = size;
-    console.log(menuSize);
+    log(menuSize);
     update();
   };
 
   const addItem = (id: string, size: LayoutSize) => {
+    log('new item:', id, size);
     setItemSize(id, size);
     visibleItems.unshift(id);
 
@@ -112,6 +122,7 @@ export function createOverflowManager(): OverflowManager {
 
   const update = (newContainerSize?: LayoutSize) => {
     if (newContainerSize) {
+      log('new container size:', newContainerSize);
       containerSize = newContainerSize;
     }
     if (processOverflowItems() || forceDispatch) {

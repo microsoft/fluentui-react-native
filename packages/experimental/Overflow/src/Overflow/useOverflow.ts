@@ -81,7 +81,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
 
   React.useLayoutEffect(() => {
     if (!layoutState.container) {
-      overflowManager.initialize({ initialContainerSize: containerSize, onOverflowUpdate });
+      overflowManager.initialize({ debug: true, initialContainerSize: containerSize, onOverflowUpdate });
       overflowManager.update();
       setLayoutState((prev) => ({ ...prev, container: true }));
     } else {
@@ -104,7 +104,6 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     },
     props: {
       ...props,
-      accessible: false,
       onLayout: onContainerLayout,
     },
   };

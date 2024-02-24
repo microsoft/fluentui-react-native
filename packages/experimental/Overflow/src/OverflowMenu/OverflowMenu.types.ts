@@ -10,6 +10,7 @@ export interface OverflowMenuState {
 
 export type OverflowMenuProps = MenuProps & {
   buttonProps?: ButtonProps;
+  getMenuItemLabel?: (overflowID: string) => string;
 };
 
 export interface OverflowMenuInfo {

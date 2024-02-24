@@ -3,73 +3,52 @@ import { View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { Divider } from '@fluentui-react-native/divider';
-import { memoize, mergeProps, stagedComponent } from '@fluentui-react-native/framework';
-import { Overflow, OverflowItem, OverflowTab, OverflowMenu, useOverflow, OverflowContext } from '@fluentui-react-native/overflow';
-import type { OverflowProps } from '@fluentui-react-native/overflow';
-import { TabList, type TabListProps } from '@fluentui-react-native/tablist';
+import { Overflow, OverflowItem, OverflowTab, OverflowTabList, OverflowMenu } from '@fluentui-react-native/overflow';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
 import { Test } from '../Test';
 
-const items = ['a', 'b', 'c'];
+const items = ['a', 'b', 'c', 'd', 'e'];
+const itemLabels = {
+  a: 'Item A',
+  b: 'Item B Item B Item B',
+  c: 'Item C Item C',
+  d: 'Item D',
+  e: 'Item E Item E Item E Item E',
+};
 
 const containerStyle: ViewStyle = {
   paddingVertical: 4,
 };
 
-interface OverflowTabListProps extends TabListProps, OverflowProps {}
-
-export const getOverflowStyleProps = memoize(overflowStylePropsWorker);
-function overflowStylePropsWorker(dontHideBeforeReady: boolean, initialOverflowLayoutDone: boolean): Partial<OverflowProps> {
-  return {
-    style: {
-      opacity: dontHideBeforeReady || initialOverflowLayoutDone ? 1 : 0,
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-    },
-  };
-}
-
-export const OverflowTabList = stagedComponent<OverflowTabListProps>((initial: OverflowTabListProps) => {
-  const { props, state } = useOverflow(initial);
-  return (final: OverflowTabListProps, ...children: React.ReactNode[]) => {
-    const { itemIDs: _, ...mergedProps } = mergeProps(
-      props,
-      final,
-      getOverflowStyleProps(props.dontHideBeforeReady, state.initialOverflowLayoutDone),
-    );
-    return (
-      <OverflowContext.Provider value={state}>
-        <TabList {...(mergedProps as any)}>{children}</TabList>
-      </OverflowContext.Provider>
-    );
-  };
-});
-Overflow.displayName = 'OverflowTabList';
-
 export function OverflowMainTest() {
   return (
     <View>
-      <OverflowTabList itemIDs={items} size="small">
+      <Text>Hi</Text>
+      {/* <Overflow itemIDs={items}>
         {items.map((item) => (
-          <OverflowTab tabKey={item} overflowID={item} key={item}>
-            Item {' ' + item}
+          <OverflowItem overflowID={item} key={item}>
+            {itemLabels[item]}
+          </OverflowItem>
+        ))}
+        <OverflowMenu getMenuItemLabel={(id) => itemLabels[id]} />
+      </Overflow> */}
+      <OverflowTabList defaultSelectedKey="b" tabKeys={items}>
+        {items.map((item) => (
+          <OverflowTab tabKey={item} key={item}>
+            {itemLabels[item]}
           </OverflowTab>
         ))}
         <OverflowMenu
           buttonProps={{
-            iconOnly: true,
-            icon: {
-              svgSource: { src: MoreHorizontalIcon, viewBox: '0 0 20 20' },
-            },
-            children: null,
             appearance: 'subtle',
-            style: {
-              alignSelf: 'center',
-            },
+            iconOnly: true,
+            icon: { svgSource: { src: MoreHorizontalIcon, viewBox: '0 0 20 20' } },
+            style: { alignSelf: 'center' },
+            children: null,
           }}
+          getMenuItemLabel={(id) => itemLabels[id]}
         />
       </OverflowTabList>
     </View>

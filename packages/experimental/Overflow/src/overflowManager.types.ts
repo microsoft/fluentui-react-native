@@ -16,6 +16,7 @@ export interface OverflowUpdatePayload {
 }
 
 export interface OverflowManagerOptions {
+  debug?: boolean;
   initialContainerSize: LayoutSize;
   padding?: number;
   onUpdateItemVisibility?: (data: ItemVisibilityUpdatePayload) => void;

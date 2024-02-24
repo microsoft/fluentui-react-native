@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/button": "^0.36.10",
+    "@fluentui-react-native/focus-zone": ">=0.16.7 <1.0.0",
     "@fluentui-react-native/framework": "0.13.6",
     "@fluentui-react-native/menu": "^1.12.13",
     "@fluentui-react-native/tablist": "0.5.14",

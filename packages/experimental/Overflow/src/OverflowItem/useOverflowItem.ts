@@ -1,11 +1,12 @@
 import * as React from 'react';
 
+import type { ButtonProps } from '@fluentui-react-native/button';
 import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 
-import type { OverflowItemInfo, OverflowItemCoreProps } from './OverflowItem.types';
+import type { OverflowItemInfo, OverflowItemProps } from './OverflowItem.types';
 import { useOverflowContext } from '../OverflowContext';
 
-export function useOverflowItem(props: OverflowItemCoreProps): OverflowItemInfo {
+export function useOverflowItem<T = ButtonProps>(props: OverflowItemProps<T>): OverflowItemInfo<T> {
   const { overflowID } = props;
   const { itemVisibility, initialOverflowLayoutDone, setLayoutState, updateItemSize } = useOverflowContext();
 

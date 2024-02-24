@@ -9,22 +9,22 @@ export interface OverflowItemCoreProps {
   onLayout?: ViewProps['onLayout'];
 }
 
-export interface OverflowItemProps extends ButtonProps, OverflowItemCoreProps {}
+export type OverflowItemProps<T = ButtonProps> = T & OverflowItemCoreProps;
 
 export interface OverflowItemState {
   visible: boolean;
 }
 
-export interface OverflowItemInfo {
-  props: OverflowItemProps;
+export interface OverflowItemInfo<T = ButtonProps> {
+  props: OverflowItemProps<T>;
   state: OverflowItemState;
 }
 
-export interface OverflowItemSlotProps {
-  root: ButtonProps;
+export interface OverflowItemSlotProps<T = ButtonProps> {
+  root: T;
 }
 
-export interface OverflowItemType {
-  props: OverflowItemProps;
-  slotProps: OverflowItemSlotProps;
+export interface OverflowItemType<T = ButtonProps> {
+  props: OverflowItemProps<T>;
+  slotProps: OverflowItemSlotProps<T>;
 }

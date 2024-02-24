@@ -10,6 +10,7 @@ export { OverflowMenu } from './OverflowMenu/OverflowMenu';
 export { useOverflowMenu } from './OverflowMenu/useOverflowMenu';
 export { overflowMenuName } from './OverflowMenu/OverflowMenu.types';
 export type { OverflowMenuProps, OverflowMenuState } from './OverflowMenu/OverflowMenu.types';
-export { OverflowTab } from './OverflowTab/OverflowTab';
-export type { OverflowTabProps } from './OverflowTab/OverflowTab.types';
 export { OverflowContext } from './OverflowContext';
+
+export { OverflowTabList } from './OverflowTab/OverflowTabList';
+export { OverflowTab } from './OverflowTab/OverflowTab';

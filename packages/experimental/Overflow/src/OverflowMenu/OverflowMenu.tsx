@@ -23,7 +23,7 @@ export const OverflowMenu = stagedComponent((initial: OverflowMenuProps) => {
         </MenuTrigger>
         <MenuPopover>
           {state.menuItems.map((id) => (
-            <MenuItem key={id}>Item {id}</MenuItem>
+            <MenuItem key={id}>{props.getMenuItemLabel ? props.getMenuItemLabel(id) : `Item ${id}`}</MenuItem>
           ))}
         </MenuPopover>
       </Menu>
