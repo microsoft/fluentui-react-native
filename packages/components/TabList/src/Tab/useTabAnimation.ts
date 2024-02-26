@@ -53,6 +53,16 @@ export function useTabAnimation(
    */
   const onTabLayout = React.useCallback(
     (e: LayoutEvent) => {
+      // console.log(tabKey, 'tab animation');
+      // console.log(context);
+      // console.log(
+      //   tabKey,
+      //   'tab animation',
+      //   layout?.tablist !== undefined,
+      //   layout?.tablist?.width > 0,
+      //   e.nativeEvent.layout.height <= layout?.tablist?.height,
+      //   e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT,
+      // );
       if (
         (e.nativeEvent.layout &&
           // Following checks are for win32 only, will be removed after addressing scrollview layout bug
@@ -91,6 +101,8 @@ export function useTabAnimation(
           height: indicatorHeight,
         });
       }
+
+      props.onLayout && props.onLayout(e);
     },
     [addTabLayout, layout, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );

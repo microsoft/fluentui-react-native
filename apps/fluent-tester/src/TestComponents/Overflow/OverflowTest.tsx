@@ -2,8 +2,10 @@ import * as React from 'react';
 import { View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Divider } from '@fluentui-react-native/divider';
-import { Overflow, OverflowItem, OverflowTab, OverflowTabList, OverflowMenu } from '@fluentui-react-native/overflow';
+import { Menu, MenuTrigger, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
+import { Overflow, OverflowItem, OverflowTab, OverflowTabList, useOverflowMenu } from '@fluentui-react-native/overflow';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
@@ -22,34 +24,50 @@ const containerStyle: ViewStyle = {
   paddingVertical: 4,
 };
 
+interface OverflowMenuProps {
+  onItemClick: (id: string) => void;
+}
+
+function OverflowMenu(props: OverflowMenuProps) {
+  const { showMenu, menuItems, onLayout } = useOverflowMenu();
+  if (showMenu) {
+    return (
+      <Menu>
+        <MenuTrigger>
+          <Button
+            onLayout={onLayout}
+            style={{ alignSelf: 'center' }}
+            appearance="subtle"
+            iconOnly
+            icon={{ svgSource: { src: MoreHorizontalIcon, viewBox: '0 0 20 20' } }}
+          />
+        </MenuTrigger>
+        <MenuPopover>
+          {menuItems.map((id) => (
+            <MenuItem onClick={() => props.onItemClick(id)} key={id}>
+              {itemLabels[id]}
+            </MenuItem>
+          ))}
+        </MenuPopover>
+      </Menu>
+    );
+  } else {
+    return null;
+  }
+}
+
 export function OverflowMainTest() {
+  const [key, setKey] = React.useState('b');
   return (
     <View>
       <Text>Hi</Text>
-      {/* <Overflow itemIDs={items}>
-        {items.map((item) => (
-          <OverflowItem overflowID={item} key={item}>
-            {itemLabels[item]}
-          </OverflowItem>
-        ))}
-        <OverflowMenu getMenuItemLabel={(id) => itemLabels[id]} />
-      </Overflow> */}
-      <OverflowTabList defaultSelectedKey="b" tabKeys={items}>
+      <OverflowTabList selectedKey={key} onTabSelect={setKey} tabKeys={items}>
         {items.map((item) => (
           <OverflowTab tabKey={item} key={item}>
             {itemLabels[item]}
           </OverflowTab>
         ))}
-        <OverflowMenu
-          buttonProps={{
-            appearance: 'subtle',
-            iconOnly: true,
-            icon: { svgSource: { src: MoreHorizontalIcon, viewBox: '0 0 20 20' } },
-            style: { alignSelf: 'center' },
-            children: null,
-          }}
-          getMenuItemLabel={(id) => itemLabels[id]}
-        />
+        <OverflowMenu onItemClick={setKey} />
       </OverflowTabList>
     </View>
   );

@@ -9,7 +9,7 @@ import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
 import type { FluentTesterProps } from './FluentTester';
 // import { FluentTester } from './FluentTester';
 import { OverflowMainTest } from './TestComponents/Overflow/OverflowTest';
-import { TabListDefaultTest } from './TestComponents/TabList/TabListTest';
+// import { TabListDefaultTest } from './TestComponents/TabList/TabListTest';
 import { testerTheme } from './theme/index';
 
 export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (_props) => {

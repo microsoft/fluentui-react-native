@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
+import { LayoutChangeEvent } from 'react-native';
 
 import type { LayoutSize, OverflowInfo, OverflowState, OverflowProps, SetLayoutStateParam } from './Overflow.types';
 import { createOverflowManager } from '../overflowManager';
@@ -15,7 +15,7 @@ interface LayoutState {
 }
 
 export function useOverflow(props: OverflowProps): OverflowInfo {
-  const { itemIDs } = props;
+  const { itemIDs, onLayout } = props;
   const overflowManager = React.useRef<OverflowManager>(createOverflowManager()).current;
 
   const [containerSize, setContainerSize] = React.useState<LayoutSize>();
@@ -43,12 +43,18 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     }
   }, []);
 
-  const onContainerLayout = React.useCallback((e: LayoutEvent) => {
-    const { width, height } = e.nativeEvent.layout;
-    if (width !== undefined && height !== undefined) {
-      setContainerSize({ width, height });
-    }
-  }, []);
+  const onContainerLayout = React.useCallback(
+    (e: LayoutChangeEvent) => {
+      const { width, height } = e.nativeEvent.layout;
+      if (width !== undefined && height !== undefined) {
+        setContainerSize({ width, height });
+      }
+
+      console.log('overflow container layout');
+      onLayout && onLayout(e);
+    },
+    [onLayout],
+  );
 
   const onItemLayout = React.useCallback(
     (id: string, size: LayoutSize) => {
@@ -66,7 +72,6 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
   const onOverflowUpdate = React.useCallback(
     (data: OverflowUpdatePayload) =>
       setOverflowState((prev) => {
-        console.log(data);
         const visibilities: Record<string, boolean> = {};
         for (const id of data.visibleIds) {
           visibilities[id] = true;

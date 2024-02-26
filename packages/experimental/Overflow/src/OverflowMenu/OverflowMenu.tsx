@@ -10,20 +10,20 @@ import type { OverflowMenuProps } from './OverflowMenu.types';
 import { useOverflowMenu } from './useOverflowMenu';
 
 export const OverflowMenu = stagedComponent((initial: OverflowMenuProps) => {
-  const { state, props } = useOverflowMenu(initial);
+  const state = useOverflowMenu();
   return (final: OverflowMenuProps) => {
-    const { buttonProps, ...rest } = mergeProps(props, final);
+    const { buttonProps, ...mergedProps } = mergeProps(initial, final);
     if (!state.showMenu) {
       return null;
     }
     return (
-      <Menu {...rest}>
+      <Menu {...mergedProps}>
         <MenuTrigger>
           <Button {...buttonProps} />
         </MenuTrigger>
         <MenuPopover>
           {state.menuItems.map((id) => (
-            <MenuItem key={id}>{props.getMenuItemLabel ? props.getMenuItemLabel(id) : `Item ${id}`}</MenuItem>
+            <MenuItem key={id}>{mergedProps.getMenuItemLabel ? mergedProps.getMenuItemLabel(id) : `Item ${id}`}</MenuItem>
           ))}
         </MenuPopover>
       </Menu>

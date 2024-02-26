@@ -58,7 +58,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   const addTabKey = React.useCallback(
     (tabKey: string) => {
       if (__DEV__ && tabKeys.includes(tabKey)) {
-        console.warn(`Tab Key "${tabKey}" already exists in the TabList. Duplicate keys are not supported.`);
+        // console.warn(`Tab Key "${tabKey}" already exists in the TabList. Duplicate keys are not supported.`);
       }
       setTabKeys((keys) => [...keys, tabKey]);
     },
@@ -79,6 +79,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   const addTabLayout = React.useCallback(
     (tabKey: string, layoutInfo: LayoutRectangle) => {
+      console.log('addTabLayout');
       setListLayoutMap((prev) => ({ ...prev, [tabKey]: layoutInfo }));
     },
     [setListLayoutMap],
@@ -97,6 +98,9 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       if (e.nativeEvent.layout) {
         setTabListLayout(e.nativeEvent.layout);
       }
+
+      console.log('tablist layout');
+      props.onLayout && props.onLayout(e as any);
     },
     [setTabListLayout],
   );
@@ -126,6 +130,8 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     // Disable exhaustive-deps warning because this hook should only run once 'isSelectedTabDisabled' dependency changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelectedTabDisabled]);
+
+  // console.log(listLayoutMap);
 
   return {
     props: {

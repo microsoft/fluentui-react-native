@@ -24,22 +24,22 @@ export function renderTabList(Slots: Slots<TabListSlotProps>, tablist: TabListIn
       value={tablist.state}
     >
       <Slots.root {...mergedProps}>
-        {/* <Slots.container
+        <Slots.container
           disabled={disabled || tablistDisabledState}
           defaultTabbableElement={defaultTabbableElement}
           focusZoneDirection={vertical ? 'vertical' : 'horizontal'}
           isCircularNavigation={isCircularNavigation}
-        > */}
-        <Slots.stack>{children}</Slots.stack>
-        {canShowAnimatedIndicator && (
-          <TabListAnimatedIndicator
-            animatedIndicatorStyles={animatedIndicatorStyles}
-            selectedKey={selectedKey}
-            tabLayout={layout.tabs}
-            vertical={vertical}
-          />
-        )}
-        {/* </Slots.container> */}
+        >
+          <Slots.stack>{children}</Slots.stack>
+          {canShowAnimatedIndicator && (
+            <TabListAnimatedIndicator
+              animatedIndicatorStyles={animatedIndicatorStyles}
+              selectedKey={selectedKey}
+              tabLayout={layout.tabs}
+              vertical={vertical}
+            />
+          )}
+        </Slots.container>
       </Slots.root>
     </TabListContext.Provider>
   );
