@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Mon, 22 Jan 2024 22:09:17 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.10
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.22.9
+
+## 0.20.9
+
+Thu, 22 Feb 2024 23:27:46 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.13.7
+- Bump @fluentui-react-native/text to v0.22.8
 
 ## 0.20.8
 

@@ -1,8 +1,121 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 03 Feb 2024 02:29:49 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Feb 2024 23:29:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.12
+
+Fri, 23 Feb 2024 23:29:38 GMT
+
+### Patches
+
+- change dependencies (ruaraki@microsoft.com)
+
+## 0.167.11
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.11.10
+- Bump @fluentui-react-native/badge to v0.8.10
+- Bump @fluentui-react-native/button to v0.36.12
+- Bump @fluentui-react-native/chip to v0.3.10
+- Bump @fluentui-react-native/divider to v0.6.10
+- Bump @fluentui-react-native/drawer to v0.3.9
+- Bump @fluentui-react-native/dropdown to v0.9.13
+- Bump @fluentui-react-native/experimental-checkbox to v0.16.9
+- Bump @fluentui-react-native/experimental-menu-button to v0.9.14
+- Bump @fluentui-react-native/experimental-shadow to v0.5.9
+- Bump @fluentui-react-native/experimental-text to v0.14.9
+- Bump @fluentui-react-native/icon to v0.20.10
+- Bump @fluentui-react-native/input to v0.6.0
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
+- Bump @fluentui-react-native/menu to v1.12.19
+- Bump @fluentui-react-native/notification to v0.24.12
+- Bump @fluentui-react-native/radio-group to v0.20.11
+- Bump @fluentui-react-native/spinner to v0.8.9
+- Bump @fluentui-react-native/stack to v0.9.9
+- Bump @fluentui-react-native/switch to v0.12.9
+- Bump @fluentui-react-native/tablist to v0.5.16
+- Bump @fluentui-react-native/text to v0.22.9
+- Bump @fluentui-react-native/tooltip to v0.2.12
+- Bump @fluentui/react-native to v0.40.4
+- Bump @fluentui-react-native/focus-zone to v0.16.9
+
+## 0.167.10
+
+Thu, 22 Feb 2024 23:27:43 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.24.2
+- Bump @fluentui-react-native/apple-theme to v0.27.2
+- Bump @fluentui-react-native/avatar to v1.11.9
+- Bump @fluentui-react-native/badge to v0.8.9
+- Bump @fluentui-react-native/button to v0.36.11
+- Bump @fluentui-react-native/chip to v0.3.9
+- Bump @fluentui-react-native/default-theme to v0.25.2
+- Bump @fluentui-react-native/divider to v0.6.9
+- Bump @fluentui-react-native/drawer to v0.3.8
+- Bump @fluentui-react-native/dropdown to v0.9.12
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.9.8
+- Bump @fluentui-react-native/experimental-appearance-additions to v0.6.8
+- Bump @fluentui-react-native/experimental-avatar to v0.20.8
+- Bump @fluentui-react-native/experimental-checkbox to v0.16.8
+- Bump @fluentui-react-native/experimental-expander to v0.7.8
+- Bump @fluentui-react-native/experimental-menu-button to v0.9.13
+- Bump @fluentui-react-native/experimental-shadow to v0.5.8
+- Bump @fluentui-react-native/experimental-shimmer to v0.12.10
+- Bump @fluentui-react-native/experimental-text to v0.14.8
+- Bump @fluentui-react-native/framework to v0.13.7
+- Bump @fluentui-react-native/icon to v0.20.9
+- Bump @fluentui-react-native/input to v0.5.9
+- Bump @fluentui-react-native/interactive-hooks to v0.25.8
+- Bump @fluentui-react-native/menu to v1.12.18
+- Bump @fluentui-react-native/notification to v0.24.11
+- Bump @fluentui-react-native/radio-group to v0.20.10
+- Bump @fluentui-react-native/separator to v0.17.8
+- Bump @fluentui-react-native/spinner to v0.8.8
+- Bump @fluentui-react-native/stack to v0.9.8
+- Bump @fluentui-react-native/switch to v0.12.8
+- Bump @fluentui-react-native/tablist to v0.5.15
+- Bump @fluentui-react-native/text to v0.22.8
+- Bump @fluentui-react-native/theme to v0.10.7
+- Bump @fluentui-react-native/theme-tokens to v0.26.6
+- Bump @fluentui-react-native/theming-utils to v0.25.6
+- Bump @fluentui-react-native/tooltip to v0.2.11
+- Bump @fluentui-react-native/vibrancy-view to v0.1.1
+- Bump @fluentui-react-native/win32-theme to v0.33.2
+- Bump @fluentui/react-native to v0.40.3
+- Bump @fluentui-react-native/focus-zone to v0.16.8
+
+## 0.167.9
+
+Wed, 21 Feb 2024 22:10:45 GMT
+
+### Patches
+
+- exclude dividers from n of m in MenuGroup (krsiler@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.12.17
+
+## 0.167.8
+
+Tue, 20 Feb 2024 22:24:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.12.16
+
+## 0.167.7
+
+Thu, 15 Feb 2024 23:41:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.12.15
 
 ## 0.167.6
 

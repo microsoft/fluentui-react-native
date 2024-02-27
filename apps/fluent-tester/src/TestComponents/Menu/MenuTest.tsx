@@ -384,6 +384,8 @@ const MenuWithGroups: React.FunctionComponent = () => {
               <MenuGroupHeader>Section 2</MenuGroupHeader>
               <MenuItem>A plain MenuItem</MenuItem>
               <MenuItem>A plain MenuItem</MenuItem>
+              <MenuDivider />
+              <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
           </MenuList>
         </MenuPopover>
