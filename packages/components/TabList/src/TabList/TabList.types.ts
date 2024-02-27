@@ -115,6 +115,8 @@ export interface TabListState {
    * TabList's `vertical` prop.
    */
   vertical: boolean;
+
+  waitForGoodTabLayoutValues?: boolean;
 }
 
 export interface TabListTokens extends LayoutTokens {
@@ -172,6 +174,8 @@ export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation
    * Flag to render the list of tabs horizontally or vertically
    */
   vertical?: boolean;
+
+  waitForGoodTabLayoutValues?: boolean;
 }
 export interface TabListInfo {
   props: TabListProps;

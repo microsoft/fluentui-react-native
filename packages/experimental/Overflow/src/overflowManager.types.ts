@@ -3,6 +3,8 @@ import type { LayoutSize } from './Overflow/Overflow.types';
 export interface OverflowItemEntry {
   id: string;
   size: LayoutSize;
+  priority?: number;
+  initialOrder?: number;
 }
 
 export interface ItemVisibilityUpdatePayload {
@@ -24,11 +26,11 @@ export interface OverflowManagerOptions {
 }
 
 export interface OverflowManager {
-  addItem: (id: string, size: LayoutSize) => void;
-  hasItem: (id: string) => boolean;
   initialize: (options: OverflowManagerOptions) => void;
+  addItem: (entry: OverflowItemEntry) => void;
+  hasItem: (id: string) => boolean;
   removeItem: (id: string) => void;
-  setItemSize: (id: string, size: LayoutSize) => void;
+  updateItem: (id: string, update: Partial<OverflowItemEntry>) => void;
   setMenuSize: (size: LayoutSize) => void;
   update: (newContainerSize?: LayoutSize) => void;
 }

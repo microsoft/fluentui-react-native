@@ -61,9 +61,18 @@ export function OverflowMainTest() {
   return (
     <View>
       <Text>Hi</Text>
-      <OverflowTabList selectedKey={key} onTabSelect={setKey} tabKeys={items}>
+      <OverflowTabList
+        onOverflowUpdate={(data) => {
+          if (data.invisibleIds.contains(key)) {
+            setKey(undefined);
+          }
+        }}
+        selectedKey={key}
+        onTabSelect={setKey}
+        tabKeys={items}
+      >
         {items.map((item) => (
-          <OverflowTab tabKey={item} key={item}>
+          <OverflowTab priority={key === item ? 2 : 1} tabKey={item} key={item}>
             {itemLabels[item]}
           </OverflowTab>
         ))}

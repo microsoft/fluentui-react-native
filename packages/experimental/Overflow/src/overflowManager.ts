@@ -1,14 +1,14 @@
 import type { LayoutSize } from './Overflow/Overflow.types';
-import type { OverflowManagerOptions, OverflowManager } from './overflowManager.types';
+import type { OverflowManagerOptions, OverflowManager, OverflowItemEntry } from './overflowManager.types';
+import { createPriorityQueue } from './priorityQueue';
+import type { PriorityQueue } from './priorityQueue';
 
 export function createOverflowManager(): OverflowManager {
-  const itemSizes = new Map<string, LayoutSize>();
-
-  const visibleItems: string[] = [];
-  const invisibleItems: string[] = [];
+  const items: Record<string, OverflowItemEntry> = {};
 
   let forceDispatch = false;
   let debug = false;
+  let numItems = 0;
 
   let menuSize: LayoutSize = { width: 0, height: 0 };
   let containerSize: LayoutSize;
@@ -22,12 +22,30 @@ export function createOverflowManager(): OverflowManager {
     }
   };
 
+  const compareItems = (lt: string | null, rt: string | null): number => {
+    if (!lt || !rt) {
+      return 0;
+    }
+
+    const lte = items[lt];
+    const rte = items[rt];
+
+    if (lte.priority !== rte.priority) {
+      return lte.priority - rte.priority;
+    }
+
+    return rte.initialOrder - lte.initialOrder ? 1 : -1;
+  };
+
+  const visibleItems: PriorityQueue<string> = createPriorityQueue(compareItems);
+  const invisibleItems: PriorityQueue<string> = createPriorityQueue(compareItems);
+
   const occupiedSize = () => {
     let totalSize = 0;
-    for (const id of visibleItems) {
-      totalSize += itemSizes.get(id).width;
+    for (const id of visibleItems.all()) {
+      totalSize += items[id].size.width;
     }
-    if (invisibleItems.length > 0) {
+    if (invisibleItems.size() > 0) {
       totalSize += menuSize.width;
     }
     return totalSize;
@@ -35,18 +53,26 @@ export function createOverflowManager(): OverflowManager {
 
   const dispatchUpdate = () => {
     log('occupied', occupiedSize(), '| available', containerSize.width - padding);
-    onOverflowUpdate && onOverflowUpdate({ visibleIds: visibleItems, invisibleIds: invisibleItems });
+    log(visibleItems.all().map((id) => `(${id}, ${items[id].priority}, ${items[id].initialOrder})`));
+    log(invisibleItems.all().map((id) => `(${id}, ${items[id].priority}, ${items[id].initialOrder})`));
+    onOverflowUpdate &&
+      onOverflowUpdate({
+        visibleIds: visibleItems.all(),
+        invisibleIds: invisibleItems.all(),
+      });
   };
 
   const showItem = () => {
-    const itemToShow = invisibleItems.shift();
-    visibleItems.unshift(itemToShow);
+    const itemToShow = invisibleItems.dequeue();
+    log('showing', itemToShow);
+    visibleItems.enqueue(itemToShow);
     onUpdateItemVisibility && onUpdateItemVisibility({ id: itemToShow, visible: true });
   };
 
   const hideItem = () => {
-    const itemToHide = visibleItems.shift();
-    invisibleItems.unshift(itemToHide);
+    const itemToHide = visibleItems.dequeue();
+    log('hiding', itemToHide);
+    invisibleItems.enqueue(itemToHide);
     onUpdateItemVisibility && onUpdateItemVisibility({ id: itemToHide, visible: false });
   };
 
@@ -56,19 +82,25 @@ export function createOverflowManager(): OverflowManager {
     }
     const availableSize = containerSize.width - padding;
 
-    const visibleTop = visibleItems[0];
-    const invisibleTop = invisibleItems[0];
+    const visibleTop = visibleItems.peek();
+    const invisibleTop = invisibleItems.peek();
+
+    log('processing, occupied', occupiedSize(), 'available', availableSize);
 
     for (let i = 0; i < 2; i++) {
-      while ((occupiedSize() < availableSize && invisibleItems.length > 0) || invisibleItems.length === 1) {
+      log('try showing', i + 1);
+      while ((occupiedSize() < availableSize && invisibleItems.size() > 0) || invisibleItems.size() === 1) {
         showItem();
       }
-      while (occupiedSize() > availableSize && visibleItems.length > 0) {
+      log('try hiding', i + 1);
+      while (occupiedSize() > availableSize && visibleItems.size() > 0) {
         hideItem();
       }
     }
 
-    return visibleTop !== visibleItems[0] || invisibleTop !== invisibleItems[0];
+    log(`${visibleTop} !== ${visibleItems.peek()} || ${invisibleTop} !== ${invisibleItems.peek()}`);
+
+    return visibleTop !== visibleItems.peek() || invisibleTop !== invisibleItems.peek();
   };
 
   const initialize = (options: OverflowManagerOptions) => {
@@ -80,9 +112,9 @@ export function createOverflowManager(): OverflowManager {
     onOverflowUpdate = options.onOverflowUpdate;
   };
 
-  const setItemSize = (id: string, size: LayoutSize) => {
+  const updateItem = (id: string, updates: Partial<OverflowItemEntry>) => {
     // implement
-    itemSizes.set(id, size);
+    items[id] = { ...items[id], ...updates };
     update();
   };
 
@@ -93,28 +125,24 @@ export function createOverflowManager(): OverflowManager {
     update();
   };
 
-  const addItem = (id: string, size: LayoutSize) => {
-    log('new item:', id, size);
-    setItemSize(id, size);
-    visibleItems.unshift(id);
-
+  const addItem = (entry: OverflowItemEntry) => {
+    log('new item:', entry);
+    updateItem(entry.id, { ...entry, initialOrder: numItems++ });
+    visibleItems.enqueue(entry.id);
     forceDispatch = true;
 
     update();
   };
 
-  const hasItem = (id: string) => itemSizes.has(id);
+  const hasItem = (id: string) => !!items[id];
 
   const removeItem = (id: string) => {
     // implement
-    itemSizes.delete(id);
-    // remove from whichever queue the item is in
-    const visibleIdx = visibleItems.indexOf(id);
-    const invisibleIdx = invisibleItems.indexOf(id);
-    if (visibleIdx != -1) {
-      visibleItems.splice(visibleIdx, 1);
-    } else {
-      invisibleItems.splice(invisibleIdx, 1);
+    delete items[id];
+    if (visibleItems.contains(id)) {
+      visibleItems.remove(id);
+    } else if (invisibleItems.contains(id)) {
+      invisibleItems.remove(id);
     }
     forceDispatch = true;
     update();
@@ -136,7 +164,7 @@ export function createOverflowManager(): OverflowManager {
     hasItem,
     initialize,
     removeItem,
-    setItemSize,
+    updateItem,
     setMenuSize,
     update,
   };

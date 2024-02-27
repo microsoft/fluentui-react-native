@@ -22,7 +22,7 @@ export const OverflowTabList = compose<OverflowTabListType>({
   },
   useRender: (userProps: OverflowTabListProps, useSlots: UseSlots<OverflowTabListType>) => {
     // configure props and state for tabs based on user props
-    const tablist = useTabList(userProps);
+    const tablist = useTabList({ ...userProps, waitForGoodTabLayoutValues: true });
 
     const overflowProps = React.useMemo<OverflowProps>(
       () => ({

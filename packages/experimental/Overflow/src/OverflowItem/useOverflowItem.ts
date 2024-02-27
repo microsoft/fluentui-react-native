@@ -1,29 +1,39 @@
 import * as React from 'react';
+import type { LayoutChangeEvent } from 'react-native';
 
 import type { ButtonProps } from '@fluentui-react-native/button';
-import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 
 import type { OverflowItemInfo, OverflowItemProps } from './OverflowItem.types';
+import type { LayoutSize } from '../Overflow/Overflow.types';
 import { useOverflowContext } from '../OverflowContext';
 
 export function useOverflowItem<T = ButtonProps>(props: OverflowItemProps<T>): OverflowItemInfo<T> {
-  const { overflowID, onLayout: layoutHandler } = props;
-  const { itemVisibility, initialOverflowLayoutDone, setLayoutState, updateItemSize } = useOverflowContext();
+  const { overflowID, priority } = props;
+  const { itemVisibility, initialOverflowLayoutDone, setLayoutState, updateItem } = useOverflowContext();
+
+  const [size, setSize] = React.useState<LayoutSize>();
 
   // console.log(layoutHandler);
 
+  React.useEffect(() => {
+    if (size) {
+      updateItem({ id: overflowID, size: size, priority: priority });
+    }
+  }, [priority]);
+
   const onLayout = React.useCallback(
-    (e: LayoutEvent) => {
-      console.log(overflowID, 'overflow item');
-      const { width, height } = e.nativeEvent.layout;
-      updateItemSize(overflowID, { width, height });
+    (e: LayoutChangeEvent) => {
+      const itemSize = { width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height };
+      setSize(itemSize);
+      updateItem({ id: overflowID, size: itemSize, priority: priority });
+
       if (!initialOverflowLayoutDone) {
         setLayoutState({ type: 'item', id: overflowID, layoutDone: true });
       }
 
-      layoutHandler && layoutHandler(e);
+      props.onLayout && props.onLayout(e);
     },
-    [overflowID],
+    [initialOverflowLayoutDone, overflowID, priority, props, setLayoutState, updateItem],
   ); // Get item dimensions
 
   return {

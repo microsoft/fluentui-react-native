@@ -4,6 +4,8 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { LayoutTokens } from '@fluentui-react-native/framework';
 import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
+import type { OverflowItemEntry, OverflowUpdatePayload } from '../overflowManager.types';
+
 export type LayoutSize = Pick<LayoutRectangle, 'width' | 'height'>;
 
 export const overflowName = 'Overflow';
@@ -12,6 +14,7 @@ export interface OverflowProps extends ViewProps {
   padding?: ViewStyle['padding'];
   itemIDs: string[];
   dontHideBeforeReady?: boolean;
+  onOverflowUpdate?: (data: OverflowUpdatePayload) => void;
 }
 
 export type OverflowTokens = LayoutTokens & {
@@ -40,7 +43,7 @@ export interface OverflowState {
   initialOverflowLayoutDone: boolean;
   itemVisibility: Record<string, boolean>;
   setLayoutState: (data: SetLayoutStateParam) => void;
-  updateItemSize: (id: string, size: LayoutSize) => void;
+  updateItem: (item: OverflowItemEntry) => void;
   updateMenuSize: (size: LayoutSize) => void;
   updateOverflow: () => void;
 }

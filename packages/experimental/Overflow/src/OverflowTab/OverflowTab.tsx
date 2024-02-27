@@ -36,7 +36,6 @@ const tabLookup = (layer: string, state: TabState, props: TabProps, tablistConte
 export const OverflowTab = compressible<TabProps, TabTokens>((props: TabProps, useTokens: UseTokens<TabTokens>) => {
   const tablist = React.useContext(TabListContext);
   const tab = useTab(props);
-
   const theme = useFluentTheme();
   let [tokens, cache] = useTokens(theme);
 
@@ -45,7 +44,8 @@ export const OverflowTab = compressible<TabProps, TabTokens>((props: TabProps, u
 
   // Get styling props for each Tab slot
   const slotProps = useTabSlotProps(tab.props, tokens, theme, tablist);
-  slotProps.root = useTabAnimation(props, tablist, tokens, slotProps.root);
+  const rootProps = useTabAnimation(props, tablist, tokens, slotProps.root);
+  slotProps.root = rootProps;
 
   const initialOverflowItemProps = React.useMemo<OverflowItemProps<TabProps>>(
     () => ({

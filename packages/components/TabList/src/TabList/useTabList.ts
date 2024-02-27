@@ -29,6 +29,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     selectedKey,
     size = 'medium',
     vertical = false,
+    waitForGoodTabLayoutValues = false,
   } = props;
 
   const data = useSelectedKey(selectedKey || defaultSelectedKey || null, onTabSelect);
@@ -79,8 +80,9 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   const addTabLayout = React.useCallback(
     (tabKey: string, layoutInfo: LayoutRectangle) => {
-      console.log('addTabLayout');
-      setListLayoutMap((prev) => ({ ...prev, [tabKey]: layoutInfo }));
+      // setListLayoutMap((prev) => {
+      //   return { ...prev, [tabKey]: layoutInfo };
+      // });
     },
     [setListLayoutMap],
   );
@@ -98,8 +100,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       if (e.nativeEvent.layout) {
         setTabListLayout(e.nativeEvent.layout);
       }
-
-      console.log('tablist layout');
       props.onLayout && props.onLayout(e as any);
     },
     [setTabListLayout],
@@ -130,8 +130,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     // Disable exhaustive-deps warning because this hook should only run once 'isSelectedTabDisabled' dependency changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelectedTabDisabled]);
-
-  // console.log(listLayoutMap);
 
   return {
     props: {
@@ -170,6 +168,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       updateAnimatedIndicatorStyles: updateStyles,
       updateDisabledTabs,
       updateTabRef,
+      waitForGoodTabLayoutValues,
     },
   };
 };

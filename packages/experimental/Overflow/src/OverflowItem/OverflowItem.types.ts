@@ -6,6 +6,7 @@ export const overflowItemName = 'OverflowItem';
 
 export interface OverflowItemCoreProps {
   overflowID: string;
+  priority?: number;
   onLayout?: ViewProps['onLayout'];
 }
 

@@ -10,7 +10,7 @@ export const OverflowContext = createContext<OverflowState>({
   itemVisibility: {},
   setLayoutState: noop,
   updateOverflow: noop,
-  updateItemSize: noop,
+  updateItem: noop,
   updateMenuSize: noop,
 });
 

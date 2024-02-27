@@ -26,7 +26,7 @@ export function useTabAnimation(
   tokens: TabTokens,
   rootProps: PressablePropsExtended,
 ): PressablePropsExtended {
-  const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical } = context;
+  const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical, waitForGoodTabLayoutValues } = context;
   const { tabKey } = props;
 
   // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
@@ -53,16 +53,6 @@ export function useTabAnimation(
    */
   const onTabLayout = React.useCallback(
     (e: LayoutEvent) => {
-      // console.log(tabKey, 'tab animation');
-      // console.log(context);
-      // console.log(
-      //   tabKey,
-      //   'tab animation',
-      //   layout?.tablist !== undefined,
-      //   layout?.tablist?.width > 0,
-      //   e.nativeEvent.layout.height <= layout?.tablist?.height,
-      //   e.nativeEvent.layout.height < RENDERING_HEIGHT_LIMIT,
-      // );
       if (
         (e.nativeEvent.layout &&
           // Following checks are for win32 only, will be removed after addressing scrollview layout bug
@@ -102,9 +92,11 @@ export function useTabAnimation(
         });
       }
 
-      props.onLayout && props.onLayout(e);
+      console.log(`TAB ${tabKey} LAYOUT EVENT`);
+
+      props.onLayout && props.onLayout(e as any);
     },
-    [addTabLayout, layout, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
+    [addTabLayout, layout.tablist, props, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );
 
   return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);
