@@ -5723,14 +5723,14 @@ __metadata:
   linkType: hard
 
 "@react-native/metro-config@npm:^0.72.0":
-  version: 0.72.11
-  resolution: "@react-native/metro-config@npm:0.72.11"
+  version: 0.72.12
+  resolution: "@react-native/metro-config@npm:0.72.12"
   dependencies:
     "@react-native/js-polyfills": ^0.72.1
-    metro-config: 0.76.8
-    metro-react-native-babel-transformer: 0.76.8
-    metro-runtime: 0.76.8
-  checksum: b6c6d74a63d5b1336f0caf34e06d4792a34d0e0bfac20a34ce14a449385ab163cf7f6dce1b147afadae8098c2f9f1b639827c94cf6f93123e6ee4d59d72a1ef5
+    metro-config: ^0.76.9
+    metro-react-native-babel-transformer: ^0.76.9
+    metro-runtime: ^0.76.9
+  checksum: cbce117512d06b91cca6ebc8448ae788371c0863aa25c47bfc7dcd2982cba2e83b770553632aeccd51d504e5fcfeaf4c1e4cde9eb0d3ed307a472776ca876763
   languageName: node
   linkType: hard
 
@@ -6860,13 +6860,13 @@ __metadata:
   linkType: hard
 
 "@types/react@npm:^18.2.0":
-  version: 18.2.58
-  resolution: "@types/react@npm:18.2.58"
+  version: 18.2.60
+  resolution: "@types/react@npm:18.2.60"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 42551e30c8a54161a11b2ecd11406782ddba4472a4471d45034c551295263d56f06234f283526d0c0420352ce9ce9675b2a6c65db7a287d9613643d3ceaaf1f0
+  checksum: 4cd2000c4c5d93aec92bca9fce3a6050a6a20c5827409099a4cc9e68a259a937b2acc77aecbcea555eb99e295373903da17bc833e3f711442eec20e3c6cc5895
   languageName: node
   linkType: hard
 
@@ -9254,8 +9254,8 @@ __metadata:
   linkType: hard
 
 "beachball@npm:^2.20.0":
-  version: 2.39.0
-  resolution: "beachball@npm:2.39.0"
+  version: 2.40.0
+  resolution: "beachball@npm:2.40.0"
   dependencies:
     cosmiconfig: ^8.3.6
     execa: ^5.0.0
@@ -9271,7 +9271,7 @@ __metadata:
     yargs-parser: ^21.0.0
   bin:
     beachball: bin/beachball.js
-  checksum: 9ea703dc24c57ed21c8969da8596fabe8d36dbb67f31fadc21cf81a774f85addcba3105b89de5b4ed378b8f16fd77c9692575c5de5def4507f523a43a0fa67a1
+  checksum: b038367dfb241e1b9064d4d56e76f88a21cdc16fcebfbb1447d812fdcd6f88048ebbbad8aeaf0fabdb00ca72e03e867452c582cde13b7cdc6b25211fde7b3512
   languageName: node
   linkType: hard
 
@@ -15225,8 +15225,8 @@ __metadata:
   linkType: hard
 
 "lage@npm:^2.0.0":
-  version: 2.7.11
-  resolution: "lage@npm:2.7.11"
+  version: 2.7.12
+  resolution: "lage@npm:2.7.12"
   dependencies:
     fsevents: ~2.3.2
     glob-hasher: ^1.3.0
@@ -15235,7 +15235,7 @@ __metadata:
       optional: true
   bin:
     lage: dist/lage.js
-  checksum: 4731c0ba9169eb75367cee3abd5b265c08145b26b15bb49d536ce92b593579b45f698fbfce332ec139bf1bd19aeac4a56cfa24afda084166cac60c86af6cfffe
+  checksum: b24eeee943ed56947201846f128774311c57bdde65d7b497dbdcb3dba18341318d95c9db0088ad7f06010571f587472added95c85db36075695be35055d8174f
   languageName: node
   linkType: hard
 
@@ -18498,8 +18498,8 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^3.1.1":
-  version: 3.2.13
-  resolution: "react-native-test-app@npm:3.2.13"
+  version: 3.2.14
+  resolution: "react-native-test-app@npm:3.2.14"
   dependencies:
     "@rnx-kit/react-native-host": ^0.4.4
     ajv: ^8.0.0
@@ -18527,7 +18527,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 05550698a5007f569771dc57a1a9a4a94cfe3075e4a8f81f32f365a1572e2d06235256ce499b567d82abe86a9081d01bd97c27059d2d2048239a215ccc249eff
+  checksum: 0731b92f78b61564afb71f291deb796016471abf005e3940cd8b4652b3a71f662b28b78fae85aa79a442e99221924e4e833ac19f43c1961e5bff67b97595d786
   languageName: node
   linkType: hard
 
