@@ -26,7 +26,7 @@ export function useTabAnimation(
   tokens: TabTokens,
   rootProps: PressablePropsExtended,
 ): PressablePropsExtended {
-  const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical, waitForGoodTabLayoutValues } = context;
+  const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical } = context;
   const { tabKey } = props;
 
   // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
@@ -91,8 +91,6 @@ export function useTabAnimation(
           height: indicatorHeight,
         });
       }
-
-      console.log(`TAB ${tabKey} LAYOUT EVENT`);
 
       props.onLayout && props.onLayout(e as any);
     },

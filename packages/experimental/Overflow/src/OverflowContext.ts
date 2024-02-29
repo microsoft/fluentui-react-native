@@ -8,6 +8,8 @@ export const OverflowContext = createContext<OverflowState>({
   hasOverflow: false,
   initialOverflowLayoutDone: false,
   itemVisibility: {},
+  register: noop,
+  disconnect: noop,
   setLayoutState: noop,
   updateOverflow: noop,
   updateItem: noop,

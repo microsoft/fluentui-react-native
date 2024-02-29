@@ -1,9 +1,22 @@
 import * as React from 'react';
-import type { LayoutChangeEvent } from 'react-native';
+import type { View, LayoutChangeEvent } from 'react-native';
 
-import type { LayoutSize, OverflowInfo, OverflowState, OverflowProps, SetLayoutStateParam } from './Overflow.types';
+import type {
+  LayoutSize,
+  OverflowInfo,
+  OverflowState,
+  OverflowProps,
+  SetLayoutStateParam,
+  OverflowItemChangeHandler,
+} from './Overflow.types';
 import { createOverflowManager } from '../overflowManager';
-import type { OverflowItemEntry, OverflowManager, OverflowUpdatePayload } from '../overflowManager.types';
+import type {
+  ItemVisibilityUpdatePayload,
+  ItemDimensionUpdatePayload,
+  OverflowItemEntry,
+  OverflowManager,
+  OverflowUpdatePayload,
+} from '../overflowManager.types';
 
 type PartialOverflowState = Pick<OverflowState, 'hasOverflow' | 'itemVisibility'>;
 
@@ -16,6 +29,8 @@ interface LayoutState {
 export function useOverflow(props: OverflowProps): OverflowInfo {
   const { itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback } = props;
   const overflowManager = React.useRef<OverflowManager>(createOverflowManager()).current;
+  const overflowItemUpdateCallbacks = React.useRef<Record<string, OverflowItemChangeHandler>>({}).current;
+  const overflowMenuRef = React.useRef<View>(null);
 
   const [containerSize, setContainerSize] = React.useState<LayoutSize>();
   const [overflowState, setOverflowState] = React.useState<PartialOverflowState>({
@@ -33,6 +48,14 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
       items: itemLayoutState,
     };
   });
+
+  const register = React.useCallback(
+    (id: string, onItemChange: OverflowItemChangeHandler) => {
+      overflowItemUpdateCallbacks[id] = onItemChange;
+    },
+    [overflowItemUpdateCallbacks],
+  );
+  const disconnect = React.useCallback((id: string) => delete overflowItemUpdateCallbacks[id], [overflowItemUpdateCallbacks]);
 
   const userSetLayoutState = React.useCallback((data: SetLayoutStateParam) => {
     if (data.type === 'menu') {
@@ -78,14 +101,37 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
         }
         return { ...prev, itemVisibility: visibilities, hasOverflow: data.invisibleIds.length > 0 };
       });
+      // NEED TO MAKE ON OVERFLOW SHOW / HIDE EVENTS SEPARATE IN OVERFLOW MANAGER
       overflowUpdateCallback && overflowUpdateCallback(data);
     },
     [overflowUpdateCallback],
   );
 
+  const onUpdateItemDimension = React.useCallback(
+    (data: ItemDimensionUpdatePayload) => {
+      overflowItemUpdateCallbacks[data.id] && overflowItemUpdateCallbacks[data.id]({ type: 'layout', id: data.id, newLayout: data.update });
+    },
+    [overflowItemUpdateCallbacks],
+  );
+
+  const onUpdateItemVisibility = React.useCallback(
+    (data: ItemVisibilityUpdatePayload) => {
+      overflowItemUpdateCallbacks[data.id] && overflowItemUpdateCallbacks[data.id]({ type: 'visibility', ...data });
+    },
+    [overflowItemUpdateCallbacks],
+  );
+
+  // console.log('itemIDWithForcedLayoutChangeRef', itemIDWithForcedLayoutChangeRef.current);
+
   React.useLayoutEffect(() => {
     if (!layoutState.container) {
-      overflowManager.initialize({ debug: true, initialContainerSize: containerSize, onOverflowUpdate });
+      overflowManager.initialize({
+        debug: false,
+        initialContainerSize: containerSize,
+        onOverflowUpdate,
+        onUpdateItemDimension,
+        onUpdateItemVisibility,
+      });
       overflowManager.update();
       setLayoutState((prev) => ({ ...prev, container: true }));
     } else {
@@ -101,6 +147,9 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     state: {
       ...overflowState,
       initialOverflowLayoutDone: initialLayoutDone,
+      overflowMenuRef: overflowMenuRef,
+      register: register,
+      disconnect: disconnect,
       setLayoutState: userSetLayoutState,
       updateOverflow: overflowManager.update,
       updateItem: handleItemUpdate,

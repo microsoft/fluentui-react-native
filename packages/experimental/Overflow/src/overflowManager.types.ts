@@ -15,12 +15,22 @@ export interface ItemVisibilityUpdatePayload {
 export interface OverflowUpdatePayload {
   visibleIds: string[];
   invisibleIds: string[];
+  layoutChange?: {
+    id: string;
+    newWidth: number;
+  };
+}
+
+export interface ItemDimensionUpdatePayload {
+  id: string;
+  update: LayoutSize | null;
 }
 
 export interface OverflowManagerOptions {
   debug?: boolean;
   initialContainerSize: LayoutSize;
   padding?: number;
+  onUpdateItemDimension?: (data: ItemDimensionUpdatePayload) => void;
   onUpdateItemVisibility?: (data: ItemVisibilityUpdatePayload) => void;
   onOverflowUpdate?: (data: OverflowUpdatePayload) => void;
 }

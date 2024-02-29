@@ -9,6 +9,7 @@ export const TabListContext = React.createContext<TabListState>({
   appearance: 'transparent',
   canShowAnimatedIndicator: false,
   disabled: false,
+  focusOnSelectedTab: nullFunction,
   onTabSelect: nullFunction,
   removeTabKey: nullFunction,
   selectedKey: '',

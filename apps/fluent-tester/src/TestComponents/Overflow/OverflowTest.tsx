@@ -19,6 +19,13 @@ const itemLabels = {
   d: 'Item D',
   e: 'Item E Item E Item E Item E',
 };
+const itemPriorities = {
+  a: 1,
+  b: 1,
+  c: 2,
+  d: 2,
+  e: 1,
+};
 
 const containerStyle: ViewStyle = {
   paddingVertical: 4,
@@ -29,7 +36,7 @@ interface OverflowMenuProps {
 }
 
 function OverflowMenu(props: OverflowMenuProps) {
-  const { showMenu, menuItems, onLayout } = useOverflowMenu();
+  const { showMenu, menuItems, menuRef, onLayout } = useOverflowMenu();
   if (showMenu) {
     return (
       <Menu>
@@ -40,6 +47,7 @@ function OverflowMenu(props: OverflowMenuProps) {
             appearance="subtle"
             iconOnly
             icon={{ svgSource: { src: MoreHorizontalIcon, viewBox: '0 0 20 20' } }}
+            componentRef={menuRef}
           />
         </MenuTrigger>
         <MenuPopover>
@@ -57,7 +65,7 @@ function OverflowMenu(props: OverflowMenuProps) {
 }
 
 export function OverflowMainTest() {
-  const [key, setKey] = React.useState('b');
+  const [key, setKey] = React.useState('e');
   return (
     <View>
       <Text>Hi</Text>
@@ -72,7 +80,7 @@ export function OverflowMainTest() {
         tabKeys={items}
       >
         {items.map((item) => (
-          <OverflowTab priority={key === item ? 2 : 1} tabKey={item} key={item}>
+          <OverflowTab priority={itemPriorities[item] + (key === item ? 5 : 0)} tabKey={item} key={item}>
             {itemLabels[item]}
           </OverflowTab>
         ))}

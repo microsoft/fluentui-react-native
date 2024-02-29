@@ -5,7 +5,7 @@ import type { OverflowMenuState } from './OverflowMenu.types';
 import { useOverflowContext } from '../OverflowContext';
 
 export function useOverflowMenu(): OverflowMenuState {
-  const { itemVisibility, initialOverflowLayoutDone, hasOverflow, setLayoutState, updateMenuSize } = useOverflowContext();
+  const { itemVisibility, initialOverflowLayoutDone, hasOverflow, overflowMenuRef, setLayoutState, updateMenuSize } = useOverflowContext();
 
   const onButtonLayout = React.useCallback(
     (e: LayoutChangeEvent) => {
@@ -24,6 +24,7 @@ export function useOverflowMenu(): OverflowMenuState {
   return {
     showMenu: !initialOverflowLayoutDone || hasOverflow,
     menuItems: menuItems,
+    menuRef: overflowMenuRef,
     onLayout: onButtonLayout,
   };
 }

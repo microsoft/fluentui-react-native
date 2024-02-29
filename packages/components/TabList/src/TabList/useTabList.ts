@@ -37,6 +37,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   // focusedTabRef should be set to default tabbable element.
   const [focusedTabRef, setFocusedTabRef] = React.useState(React.useRef<View>(null));
+  const [selectedTabRef, setSelectedTabRef] = React.useState(React.useRef<View>(null));
   const [invoked, setInvoked] = React.useState(false);
   const [tabKeys, setTabKeys] = React.useState<string[]>([]);
   const [allTabsDisabled, setAllTabsDisabled] = React.useState(false);
@@ -131,6 +132,10 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelectedTabDisabled]);
 
+  const focusOnSelectedTab = React.useCallback(() => {
+    tabRefMap[selectedTabKey] && tabRefMap[selectedTabKey].current?.focus();
+  }, [selectedTabKey, tabRefMap]);
+
   return {
     props: {
       ...props,
@@ -153,6 +158,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       canShowAnimatedIndicator: !!(userDefinedAnimatedIndicatorStyles && listLayoutMap && listLayoutMap[selectedTabKey]),
       disabled: disabled || allTabsDisabled,
       invoked: invoked,
+      focusOnSelectedTab: focusOnSelectedTab,
       layout: {
         tablist: tabListLayout,
         tabs: listLayoutMap,

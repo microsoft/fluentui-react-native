@@ -49,6 +49,8 @@ export interface TabListState {
    */
   disabled: boolean;
 
+  focusOnSelectedTab: () => void;
+
   /**
    * Flag to indicate whether a Tab has been clicked and selected.
    * @platform win32

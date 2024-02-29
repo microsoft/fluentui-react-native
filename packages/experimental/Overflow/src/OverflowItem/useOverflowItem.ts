@@ -8,8 +8,8 @@ import type { LayoutSize } from '../Overflow/Overflow.types';
 import { useOverflowContext } from '../OverflowContext';
 
 export function useOverflowItem<T = ButtonProps>(props: OverflowItemProps<T>): OverflowItemInfo<T> {
-  const { overflowID, priority } = props;
-  const { itemVisibility, initialOverflowLayoutDone, setLayoutState, updateItem } = useOverflowContext();
+  const { overflowID, priority, onOverflowItemChange: onOveflowItemChange } = props;
+  const { itemVisibility, initialOverflowLayoutDone, disconnect, register, setLayoutState, updateItem } = useOverflowContext();
 
   const [size, setSize] = React.useState<LayoutSize>();
 
@@ -20,6 +20,14 @@ export function useOverflowItem<T = ButtonProps>(props: OverflowItemProps<T>): O
       updateItem({ id: overflowID, size: size, priority: priority });
     }
   }, [priority]);
+
+  React.useEffect(() => {
+    if (onOveflowItemChange) {
+      register(overflowID, onOveflowItemChange);
+    }
+    return () => disconnect(overflowID);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onOveflowItemChange]);
 
   const onLayout = React.useCallback(
     (e: LayoutChangeEvent) => {
