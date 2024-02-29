@@ -7,13 +7,6 @@ import { isMouseEvent } from '@fluentui-react-native/interactive-hooks';
 import type { MenuProps, MenuState } from './Menu.types';
 import { useMenuContext } from '../context/menuContext';
 
-// Due to how events get fired we get double notifications
-// for the same event causing us to immediately reopen
-// a menu when we close it. Adding in a delay to prevent
-// this behavior.
-const delayOpen = 150;
-let lastCloseTimestamp = -1;
-
 export const useMenu = (props: MenuProps): MenuState => {
   const triggerRef = React.useRef();
   const context = useMenuContext();
@@ -61,6 +54,13 @@ const useMenuOpenState = (
 
   const state = isControlled ? open : openInternal;
 
+  // Due to how events get fired we get double notifications
+  // for the same event causing us to immediately reopen
+  // a menu when we close it. Adding in a delay to prevent
+  // this behavior.
+  const delayOpen = 150;
+  const [lastCloseTimestamp, setLastCloseTimestamp] = React.useState<number>(-1);
+
   const setOpen = React.useCallback(
     (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => {
       const openPrev = state;
@@ -78,7 +78,7 @@ const useMenuOpenState = (
 
       if (!isOpen) {
         setShouldFocusOnContainer(undefined);
-        lastCloseTimestamp = Date.now();
+        setLastCloseTimestamp(Date.now());
       }
 
       if (onOpenChange && openPrev !== isOpen) {
