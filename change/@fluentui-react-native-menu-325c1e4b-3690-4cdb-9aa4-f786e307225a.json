@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "adding timestamp per instance",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "gulnazsayed@microsoft.com",
+  "dependentChangeType": "patch"
+}
