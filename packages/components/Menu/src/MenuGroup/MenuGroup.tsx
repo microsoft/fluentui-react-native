@@ -54,7 +54,7 @@ export const MenuGroup = compose<MenuGroupType>({
         (child) => React.isValidElement(child) && (child as any).type.displayName === 'MenuGroupHeader',
       );
 
-      // In order for assistive technology to read a group, it must have a name which is why
+      // On win32, in order for assistive technology to read a group, it must have a name which is why
       // we use a string with a space as the default accessibilityLabel for MenuGroup.
       // If an empty string was used, the group context would not be read.
       let menuGroupA11yLabel = ' ';
@@ -65,9 +65,11 @@ export const MenuGroup = compose<MenuGroupType>({
       return (
         <Slots.root
           {...mergedProps}
-          accessible
-          accessibilityRole={'group' as any}
-          accessibilityLabel={mergedProps.accessibilityLabel ?? menuGroupA11yLabel}
+          {...(Platform.OS == ('win32' as any) && {
+            accessible: true,
+            accessibilityRole: 'group' as any,
+            accessibilityLabel: mergedProps.accessibilityLabel ?? menuGroupA11yLabel,
+          })}
         >
           <Slots.contentWrapper
             // avoid error that fires when props are passed into React.fragment

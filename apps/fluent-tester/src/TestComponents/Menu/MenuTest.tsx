@@ -387,7 +387,7 @@ const MenuWithGroups: React.FunctionComponent = () => {
               <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
             <MenuDivider />
-            <MenuGroup>
+            <MenuGroup accessibilityLabel="cat">
               <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
           </MenuList>
