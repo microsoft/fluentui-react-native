@@ -13,13 +13,13 @@ export interface OverflowItemCoreProps {
   onOverflowItemChange?: OverflowItemChangeHandler;
 }
 
-export type OverflowItemProps<T = ButtonProps> = T & OverflowItemCoreProps;
+export type OverflowItemProps<T = ViewProps> = T & OverflowItemCoreProps;
 
 export interface OverflowItemState {
   visible: boolean;
 }
 
-export interface OverflowItemInfo<T = ButtonProps> {
+export interface OverflowItemInfo<T = ViewProps> {
   props: OverflowItemProps<T>;
   state: OverflowItemState;
 }

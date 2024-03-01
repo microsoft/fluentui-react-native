@@ -31,7 +31,10 @@ export function createOverflowManager(): OverflowManager {
     if (!lt || !rt) {
       return 0;
     }
-    return items[lt].priority - items[rt].priority;
+    if (items[lt].priority > items[rt].priority) {
+      return items[lt].priority > items[rt].priority ? 1 : -1;
+    }
+    return items[lt].initialOrder < items[rt].initialOrder ? 1 : -1;
   };
 
   const visibleItems: PriorityQueue<string> = createPriorityQueue(compareItems);
@@ -116,8 +119,8 @@ export function createOverflowManager(): OverflowManager {
 
     if (itemVisibilityHasChanged) {
       ret.push({ type: 'visibility' });
+      log(Object.keys(processItemsChangeMap).filter((item) => processItemsChangeMap[item]));
     }
-    log(lastVisibleSizeShouldShrink, lastItemDimensionHasChanged);
     if (lastVisibleSizeShouldShrink || lastItemDimensionHasChanged) {
       ret.push({
         type: 'dimension',
@@ -179,8 +182,8 @@ export function createOverflowManager(): OverflowManager {
       containerSize = newContainerSize;
     }
     const processOverflowItemsRet = processOverflowItems();
-    processOverflowItemsRet.length && log(processOverflowItemsRet);
     if (processOverflowItemsRet.length > 0) {
+      forceDispatch = false;
       dispatchUpdates(processOverflowItemsRet);
     } else if (forceDispatch) {
       forceDispatch = false;

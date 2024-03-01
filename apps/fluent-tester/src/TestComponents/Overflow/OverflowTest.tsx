@@ -69,7 +69,7 @@ export function OverflowMainTest() {
   return (
     <View>
       <Text>Hi</Text>
-      <OverflowTabList
+      {/* <OverflowTabList
         onOverflowUpdate={(data) => {
           if (data.invisibleIds.contains(key)) {
             setKey(undefined);
@@ -85,7 +85,15 @@ export function OverflowMainTest() {
           </OverflowTab>
         ))}
         <OverflowMenu onItemClick={setKey} />
-      </OverflowTabList>
+      </OverflowTabList> */}
+      <Overflow itemIDs={items}>
+        {items.map((item) => (
+          <OverflowItem key={item} overflowID={item}>
+            <Button>{itemLabels[item]}</Button>
+          </OverflowItem>
+        ))}
+        <OverflowMenu onItemClick={(item) => console.log(item)} />
+      </Overflow>
     </View>
   );
 }
