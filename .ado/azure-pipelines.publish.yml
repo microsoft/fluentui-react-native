@@ -104,10 +104,6 @@ extends:
                 displayName: 'Publish NPM Packages (for other release branches)'
                 condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
 
-          - template: .ado/templates/apple-nuget-publish.yml@self
-            parameters:
-              skipNugetPublish: ${{ parameters.skipNugetPublish }}
-
           - template: .ado/templates/win32-nuget-publish.yml@self
             parameters:
               skipNugetPublish: ${{ parameters.skipNugetPublish }}
