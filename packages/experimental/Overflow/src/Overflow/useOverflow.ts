@@ -109,6 +109,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
 
   const onUpdateItemDimension = React.useCallback(
     (data: ItemDimensionUpdatePayload) => {
+      console.log('item dimension update', data);
       overflowItemUpdateCallbacks[data.id] && overflowItemUpdateCallbacks[data.id]({ type: 'layout', id: data.id, newLayout: data.update });
     },
     [overflowItemUpdateCallbacks],
@@ -126,7 +127,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
   React.useLayoutEffect(() => {
     if (!layoutState.container) {
       overflowManager.initialize({
-        debug: false,
+        debug: true,
         initialContainerSize: containerSize,
         onOverflowUpdate,
         onUpdateItemDimension,

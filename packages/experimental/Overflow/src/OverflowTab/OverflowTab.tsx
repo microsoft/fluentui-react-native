@@ -54,6 +54,7 @@ export const OverflowTab = compressible<TabProps, TabTokens>((props: TabProps, u
   const [shouldBlurFocus, setShouldBlurFocus] = React.useState<boolean>(false);
   const onOverflowItemChange: OverflowItemChangeHandler = React.useCallback(
     (data) => {
+      // console.log(data);
       if (data.id === props.tabKey) {
         if (data.type === 'layout') {
           // set stack style
@@ -71,7 +72,6 @@ export const OverflowTab = compressible<TabProps, TabTokens>((props: TabProps, u
         } else {
           // unfocus if we're focused
           if (tab.state.focused) {
-            console.log('NEED TO BLUR');
             setShouldBlurFocus(true);
           }
         }

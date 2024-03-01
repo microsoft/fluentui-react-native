@@ -16,6 +16,7 @@ export function createOverflowManager(): OverflowManager {
   let menuSize: LayoutSize = { width: 0, height: 0 };
   let containerSize: LayoutSize;
   let padding: number;
+  let lastItemDimensionHasChanged: boolean = false;
   let onUpdateItemDimension: OverflowManagerOptions['onUpdateItemDimension'];
   let onUpdateItemVisibility: OverflowManagerOptions['onUpdateItemVisibility'];
   let onOverflowUpdate: OverflowManagerOptions['onOverflowUpdate'];
@@ -30,17 +31,7 @@ export function createOverflowManager(): OverflowManager {
     if (!lt || !rt) {
       return 0;
     }
-
-    const lte = items[lt];
-    const rte = items[rt];
-
-    log('compare', lt, rt, ':', lte.priority, '>', rte.priority, '|', lte.initialOrder, '>', rte.initialOrder);
-
-    if (lte.priority !== rte.priority) {
-      return lte.priority > rte.priority ? 1 : -1;
-    } else {
-      return lte.initialOrder < rte.initialOrder ? 1 : -1;
-    }
+    return items[lt].priority - items[rt].priority;
   };
 
   const visibleItems: PriorityQueue<string> = createPriorityQueue(compareItems);
@@ -62,7 +53,6 @@ export function createOverflowManager(): OverflowManager {
   };
 
   const dispatchUpdates = (updates: ProcessOverflowItemsReturn[]) => {
-    log('occupied', occupiedSize(), '| available', containerSize.width - padding);
     for (const update of updates) {
       if (update.type === 'dimension' && onUpdateItemDimension) {
         let newSize = containerSize.width - padding;
@@ -92,16 +82,12 @@ export function createOverflowManager(): OverflowManager {
     const itemToShow = invisibleItems.dequeue();
     visibleItems.enqueue(itemToShow);
     processItemsChangeMap[itemToShow] = !processItemsChangeMap[itemToShow];
-    log('showing', itemToShow);
-    log(visibleItems.all(), invisibleItems.all());
   };
 
   const hideItem = () => {
     const itemToHide = visibleItems.dequeue();
     invisibleItems.enqueue(itemToHide);
     processItemsChangeMap[itemToHide] = !processItemsChangeMap[itemToHide];
-    log('hiding', itemToHide);
-    log(visibleItems.all(), invisibleItems.all());
   };
 
   const processOverflowItems = (): ProcessOverflowItemsReturn[] => {
@@ -112,25 +98,18 @@ export function createOverflowManager(): OverflowManager {
 
     const ret: ProcessOverflowItemsReturn[] = [];
     const availableSize = containerSize.width - padding;
-    const lastVisibleIsShrunk = shouldShrinkMinVisible();
 
     const visibleTop = visibleItems.peek();
     const invisibleTop = invisibleItems.peek();
 
-    log('processing, occupied', occupiedSize(), 'available', availableSize);
-
     for (let i = 0; i < 2; i++) {
-      log('try showing', i + 1);
       while ((occupiedSize() < availableSize && invisibleItems.size() > 0) || invisibleItems.size() === 1) {
         showItem();
       }
-      log('try hiding', i + 1); // min visible = 1
       while (occupiedSize() > availableSize && visibleItems.size() > 1) {
         hideItem();
       }
     }
-
-    log(`${visibleTop} !== ${visibleItems.peek()} || ${invisibleTop} !== ${invisibleItems.peek()}`);
 
     const itemVisibilityHasChanged = visibleTop !== visibleItems.peek() || invisibleTop !== invisibleItems.peek();
     const lastVisibleSizeShouldShrink = shouldShrinkMinVisible();
@@ -138,22 +117,24 @@ export function createOverflowManager(): OverflowManager {
     if (itemVisibilityHasChanged) {
       ret.push({ type: 'visibility' });
     }
-    if (lastVisibleSizeShouldShrink || lastVisibleIsShrunk) {
+    log(lastVisibleSizeShouldShrink, lastItemDimensionHasChanged);
+    if (lastVisibleSizeShouldShrink || lastItemDimensionHasChanged) {
       ret.push({
         type: 'dimension',
         shrinking: lastVisibleSizeShouldShrink,
       });
     }
+    lastItemDimensionHasChanged = lastVisibleSizeShouldShrink;
     return ret;
   };
 
   const initialize = (options: OverflowManagerOptions) => {
     debug = options.debug;
-    log('container size:', options.initialContainerSize);
     containerSize = options.initialContainerSize;
     padding = options.padding ?? 0;
     onUpdateItemVisibility = options.onUpdateItemVisibility;
     onOverflowUpdate = options.onOverflowUpdate;
+    onUpdateItemDimension = options.onUpdateItemDimension;
   };
 
   const updateItem = (id: string, updates: Partial<OverflowItemEntry>) => {
@@ -172,7 +153,6 @@ export function createOverflowManager(): OverflowManager {
   };
 
   const addItem = (entry: OverflowItemEntry) => {
-    log('new item:', entry);
     updateItem(entry.id, { ...entry, initialOrder: numItems++ });
     visibleItems.enqueue(entry.id);
     forceDispatch = true;
@@ -196,10 +176,10 @@ export function createOverflowManager(): OverflowManager {
 
   const update = (newContainerSize?: LayoutSize) => {
     if (newContainerSize) {
-      log('new container size:', newContainerSize);
       containerSize = newContainerSize;
     }
     const processOverflowItemsRet = processOverflowItems();
+    processOverflowItemsRet.length && log(processOverflowItemsRet);
     if (processOverflowItemsRet.length > 0) {
       dispatchUpdates(processOverflowItemsRet);
     } else if (forceDispatch) {
