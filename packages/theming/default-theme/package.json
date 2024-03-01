@@ -31,16 +31,16 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.3.1",
-    "@fluentui-react-native/theme": "^0.10.7",
-    "@fluentui-react-native/theme-tokens": "^0.26.6",
-    "@fluentui-react-native/theme-types": "^0.38.0",
-    "@fluentui-react-native/theming-utils": "^0.25.6",
+    "@fluentui-react-native/memo-cache": "workspace:*",
+    "@fluentui-react-native/theme": "workspace:*",
+    "@fluentui-react-native/theme-tokens": "workspace:*",
+    "@fluentui-react-native/theme-types": "workspace:*",
+    "@fluentui-react-native/theming-utils": "workspace:*",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.72.0",
     "@react-native/metro-config": "^0.72.0",
     "@types/react": "^18.2.0",

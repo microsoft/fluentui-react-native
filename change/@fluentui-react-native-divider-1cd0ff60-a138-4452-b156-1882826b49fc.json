@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Use workspace for version of local package",
+  "packageName": "@fluentui-react-native/divider",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

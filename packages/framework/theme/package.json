@@ -31,12 +31,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/immutable-merge": "^1.2.1",
-    "@fluentui-react-native/theme-types": "^0.38.0"
+    "@fluentui-react-native/immutable-merge": "workspace:*",
+    "@fluentui-react-native/theme-types": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@fluentui-react-native/test-tools": "^0.1.1",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
     "react": "18.2.0",
     "react-native": "^0.72.0"

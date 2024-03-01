@@ -2273,12 +2273,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/adapters@*, @fluentui-react-native/adapters@0.12.0, @fluentui-react-native/adapters@^0.12.0, @fluentui-react-native/adapters@workspace:packages/utils/adapters":
+"@fluentui-react-native/adapters@*, @fluentui-react-native/adapters@workspace:*, @fluentui-react-native/adapters@workspace:packages/utils/adapters":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/adapters@workspace:packages/utils/adapters"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     react: 18.2.0
@@ -2294,17 +2294,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/android-theme@*, @fluentui-react-native/android-theme@^0.24.2, @fluentui-react-native/android-theme@workspace:packages/theming/android-theme":
+"@fluentui-react-native/android-theme@*, @fluentui-react-native/android-theme@workspace:*, @fluentui-react-native/android-theme@workspace:packages/theming/android-theme":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/android-theme@workspace:packages/theming/android-theme"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme": ^0.10.7
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/theming-utils": ^0.25.6
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -2314,21 +2314,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/apple-theme@*, @fluentui-react-native/apple-theme@^0.27.2, @fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme":
+"@fluentui-react-native/apple-theme@*, @fluentui-react-native/apple-theme@workspace:*, @fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme"
   dependencies:
-    "@fluentui-react-native/default-theme": ^0.25.2
+    "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design-tokens-ios": ^0.53.0
     "@fluentui-react-native/design-tokens-macos": ^0.53.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-appearance-additions": ^0.6.8
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme": ^0.10.7
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/theming-utils": ^0.25.6
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/react": ^18.2.0
     assert-never: ^1.2.1
@@ -2342,20 +2342,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/avatar@*, @fluentui-react-native/avatar@^1.11.10, @fluentui-react-native/avatar@workspace:packages/components/Avatar":
+"@fluentui-react-native/avatar@*, @fluentui-react-native/avatar@workspace:*, @fluentui-react-native/avatar@workspace:packages/components/Avatar":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/avatar@workspace:packages/components/Avatar"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/badge": ^0.8.10
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/icon": ^0.20.10
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theming-utils": ^0.25.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/badge": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -2368,23 +2368,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/badge@*, @fluentui-react-native/badge@^0.8.10, @fluentui-react-native/badge@workspace:packages/components/Badge":
+"@fluentui-react-native/badge@*, @fluentui-react-native/badge@workspace:*, @fluentui-react-native/badge@workspace:packages/components/Badge":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/badge@workspace:packages/components/Badge"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-shadow": ^0.5.9
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/icon": ^0.20.10
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/theming-utils": ^0.25.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-shadow": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -2397,32 +2397,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/button@*, @fluentui-react-native/button@0.36.12, @fluentui-react-native/button@^0.36.12, @fluentui-react-native/button@workspace:packages/components/Button":
+"@fluentui-react-native/button@*, @fluentui-react-native/button@workspace:*, @fluentui-react-native/button@workspace:packages/components/Button":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/button@workspace:packages/components/Button"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-activity-indicator": ^0.9.8
-    "@fluentui-react-native/experimental-shadow": 0.5.9
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/icon": 0.20.10
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/pressable": ^0.11.9
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/styling-utils": ^0.6.0
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/theming-utils": ^0.25.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-activity-indicator": "workspace:*"
+    "@fluentui-react-native/experimental-shadow": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/pressable": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/styling-utils": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
     tslib: ^2.3.1
@@ -2432,21 +2432,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/callout@*, @fluentui-react-native/callout@0.25.10, @fluentui-react-native/callout@^0.25.10, @fluentui-react-native/callout@workspace:packages/components/Callout":
+"@fluentui-react-native/callout@*, @fluentui-react-native/callout@workspace:*, @fluentui-react-native/callout@workspace:packages/components/Callout":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/callout@workspace:packages/components/Callout"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -2455,28 +2455,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/checkbox@*, @fluentui-react-native/checkbox@0.22.9, @fluentui-react-native/checkbox@^0.22.9, @fluentui-react-native/checkbox@workspace:packages/components/Checkbox":
+"@fluentui-react-native/checkbox@*, @fluentui-react-native/checkbox@workspace:*, @fluentui-react-native/checkbox@workspace:packages/components/Checkbox":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/checkbox@workspace:packages/components/Checkbox"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/pressable": ^0.11.9
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/styling-utils": ^0.6.0
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theming-utils": ^0.25.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/pressable": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/styling-utils": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
@@ -2488,21 +2488,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/chip@^0.3.10, @fluentui-react-native/chip@workspace:packages/components/Chip":
+"@fluentui-react-native/chip@workspace:*, @fluentui-react-native/chip@workspace:packages/components/Chip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/chip@workspace:packages/components/Chip"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/icon": ^0.20.10
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -2519,9 +2519,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/codemods@workspace:packages/codemods"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
     "@types/jscodeshift": ^0.11.5
     jscodeshift: ^0.13.1
     yargs: ^17.0.0
@@ -2530,12 +2530,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/component-cache@*, @fluentui-react-native/component-cache@^1.6.0, @fluentui-react-native/component-cache@workspace:packages/framework/component-cache":
+"@fluentui-react-native/component-cache@*, @fluentui-react-native/component-cache@workspace:*, @fluentui-react-native/component-cache@workspace:packages/framework/component-cache":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/component-cache@workspace:packages/framework/component-cache"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     "@types/node": ^10.3.5
@@ -2547,15 +2547,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/composition@*, @fluentui-react-native/composition@^0.10.1, @fluentui-react-native/composition@workspace:packages/framework/composition":
+"@fluentui-react-native/composition@*, @fluentui-react-native/composition@workspace:*, @fluentui-react-native/composition@workspace:packages/framework/composition":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/composition@workspace:packages/framework/composition"
   dependencies:
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/use-slot": ^0.5.1
-    "@fluentui-react-native/use-slots": ^0.9.1
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/use-slot": "workspace:*"
+    "@fluentui-react-native/use-slots": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -2565,25 +2565,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/contextual-menu@*, @fluentui-react-native/contextual-menu@0.23.13, @fluentui-react-native/contextual-menu@^0.23.13, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
+"@fluentui-react-native/contextual-menu@*, @fluentui-react-native/contextual-menu@workspace:*, @fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/callout": ^0.25.10
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ^0.16.9
-    "@fluentui-react-native/icon": 0.20.10
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/pressable": ^0.11.9
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/pressable": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
@@ -2595,17 +2595,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/default-theme@*, @fluentui-react-native/default-theme@>=0.25.2 <1.0.0, @fluentui-react-native/default-theme@^0.25.2, @fluentui-react-native/default-theme@workspace:packages/theming/default-theme":
+"@fluentui-react-native/default-theme@*, @fluentui-react-native/default-theme@workspace:*, @fluentui-react-native/default-theme@workspace:packages/theming/default-theme":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/default-theme@workspace:packages/theming/default-theme"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme": ^0.10.7
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/theming-utils": ^0.25.6
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     "@types/react": ^18.2.0
@@ -2661,7 +2661,7 @@ __metadata:
     "@fluentui-react-native/popover": "*"
     "@fluentui-react-native/pressable": "*"
     "@fluentui-react-native/radio-group": "*"
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/separator": "*"
     "@fluentui-react-native/stack": "*"
     "@fluentui-react-native/styling-utils": "*"
@@ -2730,18 +2730,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/divider@^0.6.10, @fluentui-react-native/divider@workspace:packages/components/Divider":
+"@fluentui-react-native/divider@workspace:*, @fluentui-react-native/divider@workspace:packages/components/Divider":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/icon": 0.20.10
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -2752,16 +2752,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/drawer@^0.3.9, @fluentui-react-native/drawer@workspace:packages/experimental/Drawer":
+"@fluentui-react-native/drawer@workspace:*, @fluentui-react-native/drawer@workspace:packages/experimental/Drawer":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/drawer@workspace:packages/experimental/Drawer"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -2771,20 +2771,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/dropdown@*, @fluentui-react-native/dropdown@^0.9.13, @fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown":
+"@fluentui-react-native/dropdown@*, @fluentui-react-native/dropdown@workspace:*, @fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/button": ^0.36.12
-    "@fluentui-react-native/callout": ^0.25.10
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -2802,9 +2802,9 @@ __metadata:
   dependencies:
     "@babel/core": ^7.8.0
     "@babel/runtime": ^7.8.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ^0.16.9
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@rnx-kit/metro-config": ^1.3.1
     "@types/jasmine": 3.10.3
@@ -2830,7 +2830,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/eslint-config-rules@^0.1.1, @fluentui-react-native/eslint-config-rules@workspace:packages/framework/eslint-config-rules":
+"@fluentui-react-native/eslint-config-rules@workspace:*, @fluentui-react-native/eslint-config-rules@workspace:packages/framework/eslint-config-rules":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/eslint-config-rules@workspace:packages/framework/eslint-config-rules"
   dependencies:
@@ -2840,13 +2840,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-activity-indicator@*, @fluentui-react-native/experimental-activity-indicator@^0.9.8, @fluentui-react-native/experimental-activity-indicator@workspace:packages/experimental/ActivityIndicator":
+"@fluentui-react-native/experimental-activity-indicator@*, @fluentui-react-native/experimental-activity-indicator@workspace:*, @fluentui-react-native/experimental-activity-indicator@workspace:packages/experimental/ActivityIndicator":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-activity-indicator@workspace:packages/experimental/ActivityIndicator"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     assert-never: ^1.2.1
     react: 18.2.0
@@ -2859,13 +2859,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-appearance-additions@^0.6.8, @fluentui-react-native/experimental-appearance-additions@workspace:packages/experimental/AppearanceAdditions":
+"@fluentui-react-native/experimental-appearance-additions@workspace:*, @fluentui-react-native/experimental-appearance-additions@workspace:packages/experimental/AppearanceAdditions":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-appearance-additions@workspace:packages/experimental/AppearanceAdditions"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/use-subscription": 1.0.0
     react: 18.2.0
@@ -2877,14 +2877,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-avatar@*, @fluentui-react-native/experimental-avatar@^0.20.8, @fluentui-react-native/experimental-avatar@workspace:packages/experimental/Avatar":
+"@fluentui-react-native/experimental-avatar@*, @fluentui-react-native/experimental-avatar@workspace:*, @fluentui-react-native/experimental-avatar@workspace:packages/experimental/Avatar":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-avatar@workspace:packages/experimental/Avatar"
   dependencies:
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -2894,16 +2894,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-checkbox@*, @fluentui-react-native/experimental-checkbox@0.16.9, @fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox":
+"@fluentui-react-native/experimental-checkbox@*, @fluentui-react-native/experimental-checkbox@workspace:*, @fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/checkbox": ^0.22.9
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/checkbox": "workspace:*"
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -2915,14 +2915,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-expander@*, @fluentui-react-native/experimental-expander@0.7.8, @fluentui-react-native/experimental-expander@workspace:packages/experimental/Expander":
+"@fluentui-react-native/experimental-expander@*, @fluentui-react-native/experimental-expander@workspace:*, @fluentui-react-native/experimental-expander@workspace:packages/experimental/Expander":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-expander@workspace:packages/experimental/Expander"
   dependencies:
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -2934,16 +2934,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@^0.9.14, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
+"@fluentui-react-native/experimental-menu-button@*, @fluentui-react-native/experimental-menu-button@workspace:*, @fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
   dependencies:
-    "@fluentui-react-native/button": ^0.36.12
-    "@fluentui-react-native/contextual-menu": ^0.23.13
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/contextual-menu": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -2956,12 +2956,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-native-date-picker@*, @fluentui-react-native/experimental-native-date-picker@^0.10.0, @fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker":
+"@fluentui-react-native/experimental-native-date-picker@*, @fluentui-react-native/experimental-native-date-picker@workspace:*, @fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -2975,8 +2975,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-native-font-metrics@workspace:packages/experimental/NativeFontMetrics"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/use-subscription": 1.0.0
     react: 18.2.0
@@ -2988,16 +2988,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-shadow@*, @fluentui-react-native/experimental-shadow@0.5.9, @fluentui-react-native/experimental-shadow@^0.5.9, @fluentui-react-native/experimental-shadow@workspace:packages/experimental/Shadow":
+"@fluentui-react-native/experimental-shadow@*, @fluentui-react-native/experimental-shadow@workspace:*, @fluentui-react-native/experimental-shadow@workspace:packages/experimental/Shadow":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-shadow@workspace:packages/experimental/Shadow"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/pressable": 0.11.9
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/theme-types": 0.38.0
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/pressable": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3007,17 +3007,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/experimental-shimmer@*, @fluentui-react-native/experimental-shimmer@0.12.10, @fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer":
+"@fluentui-react-native/experimental-shimmer@*, @fluentui-react-native/experimental-shimmer@workspace:*, @fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer"
   dependencies:
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theming-utils": ^0.25.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     assert-never: ^1.2.1
     react: 18.2.0
@@ -3034,12 +3034,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-stack@workspace:packages/experimental/Stack"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3050,19 +3050,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/focus-trap-zone@*, @fluentui-react-native/focus-trap-zone@0.11.9, @fluentui-react-native/focus-trap-zone@workspace:packages/components/FocusTrapZone":
+"@fluentui-react-native/focus-trap-zone@*, @fluentui-react-native/focus-trap-zone@workspace:*, @fluentui-react-native/focus-trap-zone@workspace:packages/components/FocusTrapZone":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/focus-trap-zone@workspace:packages/components/FocusTrapZone"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -3071,18 +3071,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/focus-zone@*, @fluentui-react-native/focus-zone@0.16.9, @fluentui-react-native/focus-zone@^0.16.9, @fluentui-react-native/focus-zone@workspace:packages/components/FocusZone":
+"@fluentui-react-native/focus-zone@*, @fluentui-react-native/focus-zone@workspace:*, @fluentui-react-native/focus-zone@workspace:packages/components/FocusZone":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/focus-zone@workspace:packages/components/FocusZone"
   dependencies:
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -3091,23 +3091,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/framework@*, @fluentui-react-native/framework@0.13.7, @fluentui-react-native/framework@^0.13.7, @fluentui-react-native/framework@workspace:packages/framework/framework":
+"@fluentui-react-native/framework@*, @fluentui-react-native/framework@workspace:*, @fluentui-react-native/framework@workspace:packages/framework/framework":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/framework@workspace:packages/framework/framework"
   dependencies:
-    "@fluentui-react-native/composition": ^0.10.1
-    "@fluentui-react-native/default-theme": ^0.25.2
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/merge-props": ^0.8.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-slot": ^0.5.1
-    "@fluentui-react-native/use-slots": ^0.9.1
-    "@fluentui-react-native/use-styling": ^0.12.0
-    "@fluentui-react-native/use-tokens": ^0.5.0
+    "@fluentui-react-native/composition": "workspace:*"
+    "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-slot": "workspace:*"
+    "@fluentui-react-native/use-slots": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
+    "@fluentui-react-native/use-tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/react": ^18.2.0
     react: 18.2.0
@@ -3119,16 +3119,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/icon@*, @fluentui-react-native/icon@0.20.10, @fluentui-react-native/icon@^0.20.10, @fluentui-react-native/icon@workspace:packages/components/Icon":
+"@fluentui-react-native/icon@*, @fluentui-react-native/icon@workspace:*, @fluentui-react-native/icon@workspace:packages/components/Icon":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/icon@workspace:packages/components/Icon"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -3141,33 +3141,33 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/immutable-merge@*, @fluentui-react-native/immutable-merge@^1.2.1, @fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge":
+"@fluentui-react-native/immutable-merge@*, @fluentui-react-native/immutable-merge@workspace:*, @fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": ^29.0.0
     "@types/node": ^10.3.5
     tslib: ^2.3.1
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/input@^0.6.0, @fluentui-react-native/input@workspace:packages/components/Input":
+"@fluentui-react-native/input@workspace:*, @fluentui-react-native/input@workspace:packages/components/Input":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/input@workspace:packages/components/Input"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/icon": ^0.20.10
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/styling-utils": ^0.6.0
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/styling-utils": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3179,16 +3179,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/interactive-hooks@*, @fluentui-react-native/interactive-hooks@0.26.0, @fluentui-react-native/interactive-hooks@^0.26.0, @fluentui-react-native/interactive-hooks@workspace:packages/utils/interactive-hooks":
+"@fluentui-react-native/interactive-hooks@*, @fluentui-react-native/interactive-hooks@workspace:*, @fluentui-react-native/interactive-hooks@workspace:packages/utils/interactive-hooks":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/interactive-hooks@workspace:packages/utils/interactive-hooks"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     "@types/invariant": ^2.2.0
@@ -3208,23 +3208,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/link@*, @fluentui-react-native/link@0.21.9, @fluentui-react-native/link@workspace:packages/components/Link":
+"@fluentui-react-native/link@*, @fluentui-react-native/link@workspace:*, @fluentui-react-native/link@workspace:packages/components/Link":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/link@workspace:packages/components/Link"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
     tslib: ^2.3.1
@@ -3234,34 +3234,34 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/memo-cache@*, @fluentui-react-native/memo-cache@^1.3.1, @fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache":
+"@fluentui-react-native/memo-cache@*, @fluentui-react-native/memo-cache@workspace:*, @fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": ^29.0.0
     "@types/node": ^10.3.5
     tslib: ^2.3.1
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@0.12.15, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
+"@fluentui-react-native/menu-button@*, @fluentui-react-native/menu-button@workspace:*, @fluentui-react-native/menu-button@workspace:packages/components/MenuButton":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu-button@workspace:packages/components/MenuButton"
   dependencies:
-    "@fluentui-react-native/button": ^0.36.12
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/contextual-menu": ^0.23.13
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/icon": ^0.20.10
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/contextual-menu": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
@@ -3272,24 +3272,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/menu@*, @fluentui-react-native/menu@^1.12.20, @fluentui-react-native/menu@workspace:packages/components/Menu":
+"@fluentui-react-native/menu@*, @fluentui-react-native/menu@workspace:*, @fluentui-react-native/menu@workspace:packages/components/Menu":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/button": ^0.36.12
-    "@fluentui-react-native/callout": ^0.25.10
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ^0.16.9
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/icon": ^0.20.10
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -3303,14 +3303,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/merge-props@*, @fluentui-react-native/merge-props@>=0.8.0 <1.0.0, @fluentui-react-native/merge-props@^0.8.0, @fluentui-react-native/merge-props@workspace:packages/framework/merge-props":
+"@fluentui-react-native/merge-props@*, @fluentui-react-native/merge-props@workspace:*, @fluentui-react-native/merge-props@workspace:packages/framework/merge-props":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/merge-props@workspace:packages/framework/merge-props"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     react: 18.2.0
@@ -3322,26 +3322,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/notification@*, @fluentui-react-native/notification@0.24.12, @fluentui-react-native/notification@workspace:packages/components/Notification":
+"@fluentui-react-native/notification@*, @fluentui-react-native/notification@workspace:*, @fluentui-react-native/notification@workspace:packages/components/Notification":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/notification@workspace:packages/components/Notification"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/button": ^0.36.12
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-appearance-additions": ^0.6.8
-    "@fluentui-react-native/experimental-shadow": 0.5.9
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/icon": 0.20.10
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/pressable": ^0.11.9
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": 0.26.6
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/experimental-shadow": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/pressable": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -3354,22 +3354,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/persona-coin@*, @fluentui-react-native/persona-coin@0.14.8, @fluentui-react-native/persona-coin@^0.14.8, @fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin":
+"@fluentui-react-native/persona-coin@*, @fluentui-react-native/persona-coin@workspace:*, @fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
-    "@uifabricshared/foundation-tokens": ^0.14.6
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
+    "@uifabricshared/foundation-tokens": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -3378,21 +3378,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/persona@*, @fluentui-react-native/persona@0.15.8, @fluentui-react-native/persona@workspace:packages/components/Persona":
+"@fluentui-react-native/persona@*, @fluentui-react-native/persona@workspace:*, @fluentui-react-native/persona@workspace:packages/components/Persona":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/persona@workspace:packages/components/Persona"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/persona-coin": ^0.14.8
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/persona-coin": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
-    "@uifabricshared/foundation-tokens": ^0.14.6
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
+    "@uifabricshared/foundation-tokens": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -3405,10 +3405,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/popover@workspace:packages/experimental/Popover"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3419,17 +3419,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/pressable@*, @fluentui-react-native/pressable@0.11.9, @fluentui-react-native/pressable@^0.11.9, @fluentui-react-native/pressable@workspace:packages/components/Pressable":
+"@fluentui-react-native/pressable@*, @fluentui-react-native/pressable@workspace:*, @fluentui-react-native/pressable@workspace:packages/components/Pressable":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/pressable@workspace:packages/components/Pressable"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -3438,28 +3438,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@0.20.11, @fluentui-react-native/radio-group@^0.20.11, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
+"@fluentui-react-native/radio-group@*, @fluentui-react-native/radio-group@workspace:*, @fluentui-react-native/radio-group@workspace:packages/components/RadioGroup":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/radio-group@workspace:packages/components/RadioGroup"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ^0.16.9
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/pressable": ^0.11.9
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/pressable": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
@@ -3498,7 +3498,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/scripts@^0.1.1, @fluentui-react-native/scripts@workspace:scripts":
+"@fluentui-react-native/scripts@workspace:*, @fluentui-react-native/scripts@workspace:scripts":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/scripts@workspace:scripts"
   dependencies:
@@ -3541,15 +3541,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/separator@*, @fluentui-react-native/separator@0.17.8, @fluentui-react-native/separator@^0.17.8, @fluentui-react-native/separator@workspace:packages/components/Separator":
+"@fluentui-react-native/separator@*, @fluentui-react-native/separator@workspace:*, @fluentui-react-native/separator@workspace:packages/components/Separator":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/separator@workspace:packages/components/Separator"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -3560,17 +3560,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/spinner@^0.8.9, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
+"@fluentui-react-native/spinner@workspace:*, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/spinner@workspace:packages/experimental/Spinner"
   dependencies:
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3582,21 +3582,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/stack@*, @fluentui-react-native/stack@^0.9.9, @fluentui-react-native/stack@workspace:packages/components/Stack":
+"@fluentui-react-native/stack@*, @fluentui-react-native/stack@workspace:*, @fluentui-react-native/stack@workspace:packages/components/Stack":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/stack@workspace:packages/components/Stack"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-composable": ^0.12.3
-    "@uifabricshared/foundation-compose": ^1.14.21
-    "@uifabricshared/foundation-settings": ^0.14.0
-    "@uifabricshared/foundation-tokens": ^0.14.6
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-compose": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
+    "@uifabricshared/foundation-tokens": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -3605,12 +3605,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/styling-utils@*, @fluentui-react-native/styling-utils@^0.6.0, @fluentui-react-native/styling-utils@workspace:packages/utils/styling":
+"@fluentui-react-native/styling-utils@*, @fluentui-react-native/styling-utils@workspace:*, @fluentui-react-native/styling-utils@workspace:packages/utils/styling":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/styling-utils@workspace:packages/utils/styling"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3620,20 +3620,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/switch@*, @fluentui-react-native/switch@^0.12.9, @fluentui-react-native/switch@workspace:packages/components/Switch":
+"@fluentui-react-native/switch@*, @fluentui-react-native/switch@workspace:*, @fluentui-react-native/switch@workspace:packages/components/Switch":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/switch@workspace:packages/components/Switch"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theming-utils": ^0.25.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -3645,22 +3645,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@0.5.16, @fluentui-react-native/tablist@workspace:packages/components/TabList":
+"@fluentui-react-native/tablist@workspace:*, @fluentui-react-native/tablist@workspace:packages/components/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/components/TabList"
   dependencies:
-    "@fluentui-react-native/adapters": 0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-zone": ^0.16.9
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/icon": 0.20.10
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theming-utils": ^0.25.6
-    "@fluentui-react-native/tokens": ^0.22.6
-    "@fluentui-react-native/use-styling": ^0.12.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -3672,13 +3672,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/test-tools@>=0.1.1 <1.0.0, @fluentui-react-native/test-tools@^0.1.1, @fluentui-react-native/test-tools@workspace:packages/utils/test-tools":
+"@fluentui-react-native/test-tools@workspace:*, @fluentui-react-native/test-tools@workspace:packages/utils/test-tools":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/test-tools@workspace:packages/utils/test-tools"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-types": ^0.38.0
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
     "@types/react": ^18.2.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3692,9 +3692,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester-win32@workspace:apps/win32"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tester": ^0.167.13
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/tester": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@office-iss/rex-win32": 0.72.25-devmain.16.0.17327.15000
     "@react-native/metro-config": ^0.72.0
@@ -3715,57 +3715,57 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tester@*, @fluentui-react-native/tester@^0.167.13, @fluentui-react-native/tester@workspace:apps/fluent-tester":
+"@fluentui-react-native/tester@*, @fluentui-react-native/tester@workspace:*, @fluentui-react-native/tester@workspace:apps/fluent-tester":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester@workspace:apps/fluent-tester"
   dependencies:
     "@babel/core": ^7.8.0
     "@babel/runtime": ^7.8.0
-    "@fluentui-react-native/android-theme": ^0.24.2
-    "@fluentui-react-native/apple-theme": ^0.27.2
-    "@fluentui-react-native/avatar": ^1.11.10
-    "@fluentui-react-native/badge": ^0.8.10
-    "@fluentui-react-native/button": ^0.36.12
-    "@fluentui-react-native/chip": ^0.3.10
-    "@fluentui-react-native/default-theme": ^0.25.2
-    "@fluentui-react-native/divider": ^0.6.10
-    "@fluentui-react-native/drawer": ^0.3.9
-    "@fluentui-react-native/dropdown": ^0.9.13
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/experimental-activity-indicator": ^0.9.8
-    "@fluentui-react-native/experimental-appearance-additions": ^0.6.8
-    "@fluentui-react-native/experimental-avatar": ^0.20.8
-    "@fluentui-react-native/experimental-checkbox": 0.16.9
-    "@fluentui-react-native/experimental-expander": 0.7.8
-    "@fluentui-react-native/experimental-menu-button": ^0.9.14
-    "@fluentui-react-native/experimental-native-date-picker": ^0.10.0
-    "@fluentui-react-native/experimental-shadow": 0.5.9
-    "@fluentui-react-native/experimental-shimmer": 0.12.10
-    "@fluentui-react-native/focus-zone": ^0.16.9
-    "@fluentui-react-native/framework": ^0.13.7
-    "@fluentui-react-native/icon": 0.20.10
-    "@fluentui-react-native/input": ^0.6.0
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/menu": ^1.12.20
-    "@fluentui-react-native/merge-props": ^0.8.0
-    "@fluentui-react-native/notification": 0.24.12
-    "@fluentui-react-native/radio-group": ^0.20.11
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/separator": ^0.17.8
-    "@fluentui-react-native/spinner": ^0.8.9
-    "@fluentui-react-native/stack": ^0.9.9
-    "@fluentui-react-native/switch": ^0.12.9
-    "@fluentui-react-native/tablist": 0.5.16
-    "@fluentui-react-native/text": ^0.22.9
-    "@fluentui-react-native/theme": ^0.10.7
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/themed-stylesheet": ^1.6.0
-    "@fluentui-react-native/theming-utils": ^0.25.6
-    "@fluentui-react-native/tooltip": 0.2.12
-    "@fluentui-react-native/vibrancy-view": ^0.1.1
-    "@fluentui-react-native/win32-theme": ^0.33.2
-    "@fluentui/react-native": ^0.40.4
+    "@fluentui-react-native/android-theme": "workspace:*"
+    "@fluentui-react-native/apple-theme": "workspace:*"
+    "@fluentui-react-native/avatar": "workspace:*"
+    "@fluentui-react-native/badge": "workspace:*"
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/chip": "workspace:*"
+    "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/divider": "workspace:*"
+    "@fluentui-react-native/drawer": "workspace:*"
+    "@fluentui-react-native/dropdown": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/experimental-activity-indicator": "workspace:*"
+    "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/experimental-avatar": "workspace:*"
+    "@fluentui-react-native/experimental-checkbox": "workspace:*"
+    "@fluentui-react-native/experimental-expander": "workspace:*"
+    "@fluentui-react-native/experimental-menu-button": "workspace:*"
+    "@fluentui-react-native/experimental-native-date-picker": "workspace:*"
+    "@fluentui-react-native/experimental-shadow": "workspace:*"
+    "@fluentui-react-native/experimental-shimmer": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/icon": "workspace:*"
+    "@fluentui-react-native/input": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/menu": "workspace:*"
+    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/notification": "workspace:*"
+    "@fluentui-react-native/radio-group": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/separator": "workspace:*"
+    "@fluentui-react-native/spinner": "workspace:*"
+    "@fluentui-react-native/stack": "workspace:*"
+    "@fluentui-react-native/switch": "workspace:*"
+    "@fluentui-react-native/tablist": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
+    "@fluentui-react-native/theme": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/themed-stylesheet": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/tooltip": "workspace:*"
+    "@fluentui-react-native/vibrancy-view": "workspace:*"
+    "@fluentui-react-native/win32-theme": "workspace:*"
+    "@fluentui/react-native": "workspace:*"
     "@fortawesome/fontawesome-svg-core": ^6.2.0
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-native-fontawesome": ^0.3.0
@@ -3796,20 +3796,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/text@*, @fluentui-react-native/text@0.22.9, @fluentui-react-native/text@^0.22.9, @fluentui-react-native/text@workspace:packages/components/text":
+"@fluentui-react-native/text@*, @fluentui-react-native/text@workspace:*, @fluentui-react-native/text@workspace:packages/components/text":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/text@workspace:packages/components/text"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/interactive-hooks": ^0.26.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
-    "@uifabricshared/foundation-compose": ^1.14.21
+    "@uifabricshared/foundation-compose": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
     tslib: ^2.3.1
@@ -3819,7 +3819,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/theme-tokens@*, @fluentui-react-native/theme-tokens@0.26.6, @fluentui-react-native/theme-tokens@^0.26.6, @fluentui-react-native/theme-tokens@workspace:packages/theming/theme-tokens":
+"@fluentui-react-native/theme-tokens@*, @fluentui-react-native/theme-tokens@workspace:*, @fluentui-react-native/theme-tokens@workspace:packages/theming/theme-tokens":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theme-tokens@workspace:packages/theming/theme-tokens"
   dependencies:
@@ -3827,9 +3827,9 @@ __metadata:
     "@fluentui-react-native/design-tokens-ios": ^0.53.0
     "@fluentui-react-native/design-tokens-win32": ^0.53.0
     "@fluentui-react-native/design-tokens-windows": ^0.53.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-types": ^0.38.0
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     assert-never: ^1.2.1
     react: 18.2.0
@@ -3840,12 +3840,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/theme-types@*, @fluentui-react-native/theme-types@0.38.0, @fluentui-react-native/theme-types@>=0.38.0 <1.0.0, @fluentui-react-native/theme-types@^0.38.0, @fluentui-react-native/theme-types@workspace:packages/theming/theme-types":
+"@fluentui-react-native/theme-types@*, @fluentui-react-native/theme-types@workspace:*, @fluentui-react-native/theme-types@workspace:packages/theming/theme-types":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theme-types@workspace:packages/theming/theme-types"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/react": ^18.2.0
     react: 18.2.0
@@ -3856,14 +3856,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/theme@*, @fluentui-react-native/theme@^0.10.7, @fluentui-react-native/theme@workspace:packages/framework/theme":
+"@fluentui-react-native/theme@*, @fluentui-react-native/theme@workspace:*, @fluentui-react-native/theme@workspace:packages/framework/theme":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theme@workspace:packages/framework/theme"
   dependencies:
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
-    "@fluentui-react-native/theme-types": ^0.38.0
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3873,13 +3873,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/themed-stylesheet@*, @fluentui-react-native/themed-stylesheet@^1.6.0, @fluentui-react-native/themed-stylesheet@workspace:packages/framework/themed-stylesheet":
+"@fluentui-react-native/themed-stylesheet@*, @fluentui-react-native/themed-stylesheet@workspace:*, @fluentui-react-native/themed-stylesheet@workspace:packages/framework/themed-stylesheet":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/themed-stylesheet@workspace:packages/framework/themed-stylesheet"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3889,16 +3889,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/theming-utils@*, @fluentui-react-native/theming-utils@^0.25.6, @fluentui-react-native/theming-utils@workspace:packages/theming/theming-utils":
+"@fluentui-react-native/theming-utils@*, @fluentui-react-native/theming-utils@workspace:*, @fluentui-react-native/theming-utils@workspace:packages/theming/theming-utils":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theming-utils@workspace:packages/theming/theming-utils"
   dependencies:
     "@fluentui-react-native/design-tokens-win32": ^0.53.0
     "@fluentui-react-native/design-tokens-windows": ^0.53.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/tokens": ^0.22.6
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3910,14 +3910,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tokens@*, @fluentui-react-native/tokens@0.22.6, @fluentui-react-native/tokens@^0.22.6, @fluentui-react-native/tokens@workspace:packages/utils/tokens":
+"@fluentui-react-native/tokens@*, @fluentui-react-native/tokens@workspace:*, @fluentui-react-native/tokens@workspace:packages/utils/tokens":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tokens@workspace:packages/utils/tokens"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-types": ^0.38.0
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3928,17 +3928,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tooltip@0.2.12, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
+"@fluentui-react-native/tooltip@workspace:*, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip"
   dependencies:
-    "@fluentui-react-native/button": ^0.36.12
-    "@fluentui-react-native/callout": ^0.25.10
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/framework": 0.13.7
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ^0.1.1
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
@@ -3950,12 +3950,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/use-slot@*, @fluentui-react-native/use-slot@^0.5.1, @fluentui-react-native/use-slot@workspace:packages/framework/use-slot":
+"@fluentui-react-native/use-slot@*, @fluentui-react-native/use-slot@workspace:*, @fluentui-react-native/use-slot@workspace:packages/framework/use-slot":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-slot@workspace:packages/framework/use-slot"
   dependencies:
-    "@fluentui-react-native/merge-props": ^0.8.0
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3966,13 +3966,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/use-slots@*, @fluentui-react-native/use-slots@^0.9.1, @fluentui-react-native/use-slots@workspace:packages/framework/use-slots":
+"@fluentui-react-native/use-slots@*, @fluentui-react-native/use-slots@workspace:*, @fluentui-react-native/use-slots@workspace:packages/framework/use-slots":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-slots@workspace:packages/framework/use-slots"
   dependencies:
-    "@fluentui-react-native/merge-props": ^0.8.0
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/use-slot": ^0.5.1
+    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/use-slot": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -3982,13 +3982,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/use-styling@*, @fluentui-react-native/use-styling@^0.12.0, @fluentui-react-native/use-styling@workspace:packages/framework/use-styling":
+"@fluentui-react-native/use-styling@*, @fluentui-react-native/use-styling@workspace:*, @fluentui-react-native/use-styling@workspace:packages/framework/use-styling":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-styling@workspace:packages/framework/use-styling"
   dependencies:
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/use-tokens": ^0.5.0
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/use-tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     react: 18.2.0
@@ -4000,14 +4000,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/use-tokens@*, @fluentui-react-native/use-tokens@^0.5.0, @fluentui-react-native/use-tokens@workspace:packages/framework/use-tokens":
+"@fluentui-react-native/use-tokens@*, @fluentui-react-native/use-tokens@workspace:*, @fluentui-react-native/use-tokens@workspace:packages/framework/use-tokens":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-tokens@workspace:packages/framework/use-tokens"
   dependencies:
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/merge-props": ^0.8.0
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     react: 18.2.0
@@ -4019,14 +4019,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/vibrancy-view@^0.1.1, @fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView":
+"@fluentui-react-native/vibrancy-view@workspace:*, @fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView"
   dependencies:
-    "@fluentui-react-native/adapters": ^0.12.0
-    "@fluentui-react-native/component-cache": ^1.6.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/adapters": "workspace:*"
+    "@fluentui-react-native/component-cache": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -4037,19 +4037,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/win32-theme@*, @fluentui-react-native/win32-theme@>=0.33.2 <1.0.0, @fluentui-react-native/win32-theme@^0.33.2, @fluentui-react-native/win32-theme@workspace:packages/theming/win32-theme":
+"@fluentui-react-native/win32-theme@*, @fluentui-react-native/win32-theme@workspace:*, @fluentui-react-native/win32-theme@workspace:packages/theming/win32-theme":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/win32-theme@workspace:packages/theming/win32-theme"
   dependencies:
-    "@fluentui-react-native/default-theme": ^0.25.2
+    "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design-tokens-win32": ^0.53.0
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme": ^0.10.7
-    "@fluentui-react-native/theme-tokens": ^0.26.6
-    "@fluentui-react-native/theme-types": ^0.38.0
-    "@fluentui-react-native/theming-utils": ^0.25.6
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme": "workspace:*"
+    "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
     "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     "@types/react": ^18.2.0
@@ -4062,28 +4062,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui/react-native@*, @fluentui/react-native@^0.40.4, @fluentui/react-native@workspace:packages/libraries/core":
+"@fluentui/react-native@*, @fluentui/react-native@workspace:*, @fluentui/react-native@workspace:packages/libraries/core":
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
-    "@fluentui-react-native/button": 0.36.12
-    "@fluentui-react-native/callout": 0.25.10
-    "@fluentui-react-native/checkbox": 0.22.9
-    "@fluentui-react-native/contextual-menu": 0.23.13
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/focus-trap-zone": 0.11.9
-    "@fluentui-react-native/focus-zone": 0.16.9
-    "@fluentui-react-native/interactive-hooks": 0.26.0
-    "@fluentui-react-native/link": 0.21.9
-    "@fluentui-react-native/menu-button": 0.12.15
-    "@fluentui-react-native/persona": 0.15.8
-    "@fluentui-react-native/persona-coin": 0.14.8
-    "@fluentui-react-native/pressable": 0.11.9
-    "@fluentui-react-native/radio-group": 0.20.11
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/separator": 0.17.8
-    "@fluentui-react-native/tablist": 0.5.16
-    "@fluentui-react-native/text": 0.22.9
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/checkbox": "workspace:*"
+    "@fluentui-react-native/contextual-menu": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/focus-trap-zone": "workspace:*"
+    "@fluentui-react-native/focus-zone": "workspace:*"
+    "@fluentui-react-native/interactive-hooks": "workspace:*"
+    "@fluentui-react-native/link": "workspace:*"
+    "@fluentui-react-native/menu-button": "workspace:*"
+    "@fluentui-react-native/persona": "workspace:*"
+    "@fluentui-react-native/persona-coin": "workspace:*"
+    "@fluentui-react-native/pressable": "workspace:*"
+    "@fluentui-react-native/radio-group": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/separator": "workspace:*"
+    "@fluentui-react-native/tablist": "workspace:*"
+    "@fluentui-react-native/text": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
@@ -7139,49 +7139,49 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uifabricshared/foundation-composable@*, @uifabricshared/foundation-composable@>=0.12.3 <1.0.0, @uifabricshared/foundation-composable@^0.12.3, @uifabricshared/foundation-composable@workspace:packages/deprecated/foundation-composable":
+"@uifabricshared/foundation-composable@*, @uifabricshared/foundation-composable@workspace:*, @uifabricshared/foundation-composable@workspace:packages/deprecated/foundation-composable":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-composable@workspace:packages/deprecated/foundation-composable"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/merge-props": ">=0.8.0 <1.0.0"
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": ^29.0.0
     "@types/react": ^18.2.0
-    "@uifabricshared/foundation-settings": ">=0.14.0 <1.0.0"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/foundation-compose@*, @uifabricshared/foundation-compose@^1.14.21, @uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose":
+"@uifabricshared/foundation-compose@*, @uifabricshared/foundation-compose@workspace:*, @uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose"
   dependencies:
-    "@fluentui-react-native/default-theme": ">=0.25.2 <1.0.0"
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/theme-types": ">=0.38.0 <1.0.0"
-    "@uifabricshared/foundation-composable": ">=0.12.3 <1.0.0"
-    "@uifabricshared/foundation-settings": ">=0.14.0 <1.0.0"
-    "@uifabricshared/foundation-tokens": ">=0.14.6 <1.0.0"
-    "@uifabricshared/themed-settings": ">=0.11.0 <1.0.0"
-    "@uifabricshared/theming-ramp": ">=0.19.10 <1.0.0"
+    "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
+    "@uifabricshared/foundation-composable": "workspace:*"
+    "@uifabricshared/foundation-settings": "workspace:*"
+    "@uifabricshared/foundation-tokens": "workspace:*"
+    "@uifabricshared/themed-settings": "workspace:*"
+    "@uifabricshared/theming-ramp": "workspace:*"
     react: 18.2.0
   peerDependencies:
     react: ">=17.0.2"
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/foundation-settings@*, @uifabricshared/foundation-settings@>=0.14.0 <1.0.0, @uifabricshared/foundation-settings@^0.14.0, @uifabricshared/foundation-settings@workspace:packages/deprecated/foundation-settings":
+"@uifabricshared/foundation-settings@*, @uifabricshared/foundation-settings@workspace:*, @uifabricshared/foundation-settings@workspace:packages/deprecated/foundation-settings":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-settings@workspace:packages/deprecated/foundation-settings"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/merge-props": ">=0.8.0 <1.0.0"
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     react: 18.2.0
@@ -7192,18 +7192,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/foundation-tokens@*, @uifabricshared/foundation-tokens@>=0.14.6 <1.0.0, @uifabricshared/foundation-tokens@^0.14.6, @uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens":
+"@uifabricshared/foundation-tokens@*, @uifabricshared/foundation-tokens@workspace:*, @uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens"
   dependencies:
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/merge-props": ">=0.8.0 <1.0.0"
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/tokens": 0.22.6
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     "@types/react": ^18.2.0
-    "@uifabricshared/foundation-settings": ">=0.14.0 <1.0.0"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -7212,13 +7212,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/theme-registry@*, @uifabricshared/theme-registry@>=0.11.0 <1.0.0, @uifabricshared/theme-registry@workspace:packages/deprecated/theme-registry":
+"@uifabricshared/theme-registry@*, @uifabricshared/theme-registry@workspace:*, @uifabricshared/theme-registry@workspace:packages/deprecated/theme-registry":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/theme-registry@workspace:packages/deprecated/theme-registry"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     react: 18.2.0
@@ -7229,17 +7229,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/themed-settings@*, @uifabricshared/themed-settings@>=0.11.0 <1.0.0, @uifabricshared/themed-settings@workspace:packages/deprecated/themed-settings":
+"@uifabricshared/themed-settings@*, @uifabricshared/themed-settings@workspace:*, @uifabricshared/themed-settings@workspace:packages/deprecated/themed-settings":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/themed-settings@workspace:packages/deprecated/themed-settings"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/memo-cache": ^1.3.1
-    "@fluentui-react-native/scripts": ^0.1.1
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     "@types/node": ^10.3.5
-    "@uifabricshared/foundation-settings": ">=0.14.0 <1.0.0"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
@@ -7248,18 +7248,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uifabricshared/theming-ramp@*, @uifabricshared/theming-ramp@>=0.19.10 <1.0.0, @uifabricshared/theming-ramp@workspace:packages/deprecated/theming-ramp":
+"@uifabricshared/theming-ramp@*, @uifabricshared/theming-ramp@workspace:*, @uifabricshared/theming-ramp@workspace:packages/deprecated/theming-ramp":
   version: 0.0.0-use.local
   resolution: "@uifabricshared/theming-ramp@workspace:packages/deprecated/theming-ramp"
   dependencies:
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/immutable-merge": ^1.2.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0"
-    "@fluentui-react-native/theme-types": ">=0.38.0 <1.0.0"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@fluentui-react-native/theme-types": "workspace:*"
     "@types/jest": ^29.0.0
     "@types/react": ^18.2.0
-    "@uifabricshared/foundation-settings": ">=0.14.0 <1.0.0"
+    "@uifabricshared/foundation-settings": "workspace:*"
     react: 18.2.0
   peerDependencies:
     react: ">=17.0.2"
@@ -7270,15 +7270,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/theming-react-native@workspace:packages/deprecated/theming-react-native"
   dependencies:
-    "@fluentui-react-native/default-theme": ">=0.25.2 <1.0.0"
-    "@fluentui-react-native/eslint-config-rules": ^0.1.1
-    "@fluentui-react-native/scripts": ^0.1.1
-    "@fluentui-react-native/win32-theme": ">=0.33.2 <1.0.0"
+    "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/win32-theme": "workspace:*"
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
     "@types/react": ^18.2.0
-    "@uifabricshared/theme-registry": ">=0.11.0 <1.0.0"
-    "@uifabricshared/theming-ramp": ">=0.19.10 <1.0.0"
+    "@uifabricshared/theme-registry": "workspace:*"
+    "@uifabricshared/theming-ramp": "workspace:*"
     react: 18.2.0
     react-native: ^0.72.0
     typescript: 4.9.4

@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Use workspace for version of local package",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

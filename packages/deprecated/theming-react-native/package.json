@@ -31,14 +31,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.25.2 <1.0.0",
-    "@fluentui-react-native/win32-theme": ">=0.33.2 <1.0.0",
-    "@uifabricshared/theme-registry": ">=0.11.0 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.19.10 <1.0.0"
+    "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/win32-theme": "workspace:*",
+    "@uifabricshared/theme-registry": "workspace:*",
+    "@uifabricshared/theming-ramp": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
     "@types/jest": "^29.0.0",
     "@types/react": "^18.2.0",

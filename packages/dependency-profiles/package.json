@@ -56,7 +56,7 @@
     "@fluentui-react-native/popover": "*",
     "@fluentui-react-native/pressable": "*",
     "@fluentui-react-native/radio-group": "*",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/separator": "*",
     "@fluentui-react-native/stack": "*",
     "@fluentui-react-native/styling-utils": "*",

@@ -31,11 +31,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/merge-props": "^0.8.0",
+    "@fluentui-react-native/merge-props": "workspace:*",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
     "react": "18.2.0",
     "react-native": "^0.72.0"
