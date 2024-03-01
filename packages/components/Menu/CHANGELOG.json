@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 01:04:35 GMT",
+      "version": "1.12.20",
+      "tag": "@fluentui-react-native/menu_v1.12.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "17974c7b86abaa7769834551ff5743691819c905",
+            "comment": "fix menu group accessibility"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Feb 2024 03:22:29 GMT",
       "version": "1.12.19",
       "tag": "@fluentui-react-native/menu_v1.12.19",
