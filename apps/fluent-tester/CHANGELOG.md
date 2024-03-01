@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 23 Feb 2024 23:29:38 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 01:04:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.13
+
+Fri, 01 Mar 2024 01:04:36 GMT
+
+### Patches
+
+- fix menu group accessibility (krsiler@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.12.20
 
 ## 0.167.12
 

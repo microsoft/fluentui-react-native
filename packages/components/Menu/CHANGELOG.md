@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 01:04:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.20
+
+Fri, 01 Mar 2024 01:04:35 GMT
+
+### Patches
+
+- fix menu group accessibility (krsiler@microsoft.com)
 
 ## 1.12.19
 

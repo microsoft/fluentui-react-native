@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix menu group accessibility",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

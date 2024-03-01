@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 01:04:36 GMT",
+      "version": "0.167.13",
+      "tag": "@fluentui-react-native/tester_v0.167.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "17974c7b86abaa7769834551ff5743691819c905",
+            "comment": "fix menu group accessibility"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.12.20",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Feb 2024 23:29:38 GMT",
       "version": "0.167.12",
       "tag": "@fluentui-react-native/tester_v0.167.12",
