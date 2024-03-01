@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { createIconProps } from '@fluentui-react-native/icon';
 import type { IconProps } from '@fluentui-react-native/icon';
-import { usePressableState } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useControllableValue } from '@fluentui-react-native/interactive-hooks';
+import type { ValueChangeCallback } from '@fluentui-react-native/interactive-hooks';
 
 import { DismissSvg } from './assets/dismissSvg';
 import type { InputProps, InputInfo } from './Input.types';
@@ -31,10 +32,10 @@ export const useInput = (props: InputProps): InputInfo => {
     ...rest
   } = props;
   const pressable = usePressableState({ onBlur, onFocus });
-  const [text, setText] = React.useState<string>(defaultValue ? defaultValue : '');
   const defaultIconProps = createIconProps(defaultIcon);
   const focusedIconProps = createIconProps(focusedStateIcon);
   const [iconProps, setIconProps] = React.useState<IconProps>(defaultIconProps);
+
   React.useEffect(() => {
     if (pressable.state.focused && !error && focusedIconProps) {
       setIconProps(focusedIconProps);
@@ -42,6 +43,15 @@ export const useInput = (props: InputProps): InputInfo => {
       setIconProps(defaultIconProps);
     }
   }, [error, pressable.state.focused, defaultIconProps, focusedIconProps]);
+
+  const onChangeText: ValueChangeCallback<Element, string, React.SyntheticEvent<Element, Event>> = React.useCallback(
+    (_ev, text) => {
+      onChange?.(text);
+    },
+    [onChange],
+  );
+
+  const [text, setText] = useControllableValue(value, defaultValue, onChangeText);
 
   return {
     props: {
@@ -53,17 +63,15 @@ export const useInput = (props: InputProps): InputInfo => {
       onChange,
       accessoryIcon,
       accessoryButtonOnPress,
-      value,
+      value: text,
       // Directly applied onto the TextInput
       textInputProps: {
         ...textInputProps,
         keyboardType: type,
         placeholder,
-        defaultValue,
-        value: value ? value : text,
+        value: text,
         onChangeText: (text) => {
-          !value && setText(text);
-          onChange && onChange(text);
+          setText(text);
         },
         ref: componentRef,
         accessibilityLabel,
@@ -78,6 +86,6 @@ export const useInput = (props: InputProps): InputInfo => {
       componentRef,
       ...rest,
     },
-    state: { ...pressable.state, text: value ? value : text },
+    state: { ...pressable.state, text },
   };
 };

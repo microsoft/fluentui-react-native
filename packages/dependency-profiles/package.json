@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/dependency-profiles",
-  "version": "0.7.11",
+  "version": "0.7.13",
   "description": "@rnx-kit/align-deps profiles covering packages published from FluentUI-React-Native",
   "license": "MIT",
   "files": [
@@ -36,11 +36,9 @@
     "@fluentui-react-native/experimental-expander": "*",
     "@fluentui-react-native/experimental-menu-button": "*",
     "@fluentui-react-native/experimental-native-date-picker": "*",
-    "@fluentui-react-native/experimental-radio-group": "*",
     "@fluentui-react-native/experimental-shadow": "*",
     "@fluentui-react-native/experimental-shimmer": "*",
     "@fluentui-react-native/experimental-stack": "*",
-    "@fluentui-react-native/experimental-text": "*",
     "@fluentui-react-native/focus-trap-zone": "*",
     "@fluentui-react-native/focus-zone": "*",
     "@fluentui-react-native/framework": "*",

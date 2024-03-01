@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 22 Feb 2024 23:27:43 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Feb 2024 23:29:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.12
+
+Fri, 23 Feb 2024 23:29:38 GMT
+
+### Patches
+
+- change dependencies (ruaraki@microsoft.com)
+
+## 0.167.11
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.11.10
+- Bump @fluentui-react-native/badge to v0.8.10
+- Bump @fluentui-react-native/button to v0.36.12
+- Bump @fluentui-react-native/chip to v0.3.10
+- Bump @fluentui-react-native/divider to v0.6.10
+- Bump @fluentui-react-native/drawer to v0.3.9
+- Bump @fluentui-react-native/dropdown to v0.9.13
+- Bump @fluentui-react-native/experimental-checkbox to v0.16.9
+- Bump @fluentui-react-native/experimental-menu-button to v0.9.14
+- Bump @fluentui-react-native/experimental-shadow to v0.5.9
+- Bump @fluentui-react-native/experimental-text to v0.14.9
+- Bump @fluentui-react-native/icon to v0.20.10
+- Bump @fluentui-react-native/input to v0.6.0
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
+- Bump @fluentui-react-native/menu to v1.12.19
+- Bump @fluentui-react-native/notification to v0.24.12
+- Bump @fluentui-react-native/radio-group to v0.20.11
+- Bump @fluentui-react-native/spinner to v0.8.9
+- Bump @fluentui-react-native/stack to v0.9.9
+- Bump @fluentui-react-native/switch to v0.12.9
+- Bump @fluentui-react-native/tablist to v0.5.16
+- Bump @fluentui-react-native/text to v0.22.9
+- Bump @fluentui-react-native/tooltip to v0.2.12
+- Bump @fluentui/react-native to v0.40.4
+- Bump @fluentui-react-native/focus-zone to v0.16.9
 
 ## 0.167.10
 

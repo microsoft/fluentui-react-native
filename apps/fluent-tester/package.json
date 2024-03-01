@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.167.10",
+  "version": "0.167.12",
   "description": "A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -56,7 +56,6 @@
     "@fluentui-react-native/experimental-native-date-picker": "workspace:*",
     "@fluentui-react-native/experimental-shadow": "workspace:*",
     "@fluentui-react-native/experimental-shimmer": "workspace:*",
-    "@fluentui-react-native/experimental-text": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/icon": "workspace:*",
     "@fluentui-react-native/input": "workspace:*",
