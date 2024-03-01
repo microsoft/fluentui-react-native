@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/styling-utils
 
-This log was last generated on Thu, 09 Nov 2023 02:39:10 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.1
+
+Fri, 01 Mar 2024 20:39:12 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 0.6.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Thu, 22 Feb 2024 23:27:44 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.2
+
+Fri, 01 Mar 2024 20:39:09 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 0.10.1
 

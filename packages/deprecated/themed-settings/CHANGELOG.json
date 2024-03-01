@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 20:39:09 GMT",
+      "version": "0.11.1",
+      "tag": "@uifabricshared/themed-settings_v0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/themed-settings",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:06 GMT",
       "version": "0.11.0",
       "tag": "@uifabricshared/themed-settings_v0.11.0",

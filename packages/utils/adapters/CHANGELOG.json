@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 20:39:09 GMT",
+      "version": "0.12.1",
+      "tag": "@fluentui-react-native/adapters_v0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:07 GMT",
       "version": "0.12.0",
       "tag": "@fluentui-react-native/adapters_v0.12.0",

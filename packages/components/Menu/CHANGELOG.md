@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 01 Mar 2024 01:04:35 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.21
+
+Fri, 01 Mar 2024 20:39:11 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 1.12.20
 

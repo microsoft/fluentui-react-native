@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/memo-cache
 
-This log was last generated on Wed, 09 Aug 2023 22:02:14 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.2
+
+Fri, 01 Mar 2024 20:39:11 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 1.3.1
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 20:39:12 GMT",
+      "version": "0.20.12",
+      "tag": "@fluentui-react-native/radio-group_v0.20.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Feb 2024 03:22:29 GMT",
       "version": "0.20.11",
       "tag": "@fluentui-react-native/radio-group_v0.20.11",
