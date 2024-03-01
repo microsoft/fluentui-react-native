@@ -26,14 +26,14 @@
     "directory": "packages/components/Drawer"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.13.7",
-    "@fluentui-react-native/interactive-hooks": "^0.26.0",
-    "@fluentui-react-native/theme-tokens": "^0.26.6",
-    "@fluentui-react-native/use-styling": "^0.12.0"
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/theme-tokens": "workspace:*",
+    "@fluentui-react-native/use-styling": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
     "react": "18.2.0",
     "react-native": "^0.72.0"

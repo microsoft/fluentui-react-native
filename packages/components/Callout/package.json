@@ -29,17 +29,17 @@
     "directory": "packages/components/Callout"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.12.0",
-    "@fluentui-react-native/component-cache": "^1.6.0",
-    "@fluentui-react-native/interactive-hooks": "^0.26.0",
-    "@fluentui-react-native/tokens": "^0.22.6",
-    "@uifabricshared/foundation-composable": "^0.12.3",
-    "@uifabricshared/foundation-compose": "^1.14.21",
-    "@uifabricshared/foundation-settings": "^0.14.0"
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/component-cache": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*",
+    "@uifabricshared/foundation-composable": "workspace:*",
+    "@uifabricshared/foundation-compose": "workspace:*",
+    "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.72.0",
     "@react-native/metro-config": "^0.72.0",
     "react": "18.2.0",
