@@ -84,22 +84,14 @@ export const OverflowTab = compressible<TabProps, TabTokens>((props: TabProps, u
   }
 
   React.useEffect(() => {
-    if (tab.state.focused) console.log(tab.props.tabKey, 'is focused');
-  }, [tab.state.focused]);
-
-  React.useLayoutEffect(() => {
     if (shouldBlurFocus) {
       if (tab.state.focused) {
-        tablist.focusOnSelectedTab();
-        // tab.props.componentRef && tab.props.componentRef.blur();
-        // overflow.overflowMenuRef && overflow.overflowMenuRef.current.blur();
-        console.log('BLURRED');
+        overflow.overflowMenuRef && overflow.overflowMenuRef.current.focus();
       } else {
-        console.log('BLURRED SUCCESS');
         setShouldBlurFocus(false);
       }
     }
-  }, [shouldBlurFocus, tab.props.componentRef, tab.state.focused]);
+  }, [overflow.overflowMenuRef, shouldBlurFocus, tab.props.componentRef, tab.state.focused]);
 
   const initialOverflowItemProps = React.useMemo<OverflowItemProps<TabProps>>(
     () => ({

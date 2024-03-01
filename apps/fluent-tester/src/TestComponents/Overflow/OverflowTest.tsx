@@ -22,8 +22,8 @@ const itemLabels = {
 const itemPriorities = {
   a: 1,
   b: 1,
-  c: 2,
-  d: 2,
+  c: 1,
+  d: 1,
   e: 1,
 };
 
