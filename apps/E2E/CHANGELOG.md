@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Mon, 22 Jan 2024 22:09:17 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.34.12
+
+Fri, 01 Mar 2024 20:39:10 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 1.34.11
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.9
+
+## 1.34.10
+
+Thu, 22 Feb 2024 23:27:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.8
 
 ## 1.34.9
 

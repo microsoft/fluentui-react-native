@@ -2,6 +2,69 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 20:39:09 GMT",
+      "version": "0.25.11",
+      "tag": "@fluentui-react-native/callout_v0.25.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 03:22:29 GMT",
+      "version": "0.25.10",
+      "tag": "@fluentui-react-native/callout_v0.25.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.26.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Feb 2024 23:27:44 GMT",
+      "version": "0.25.9",
+      "tag": "@fluentui-react-native/callout_v0.25.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "dbd7aadff1ba8c61fd5d8aedde8b079c650e37fa",
+            "comment": "Rework package json version notation"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.25.8",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.22.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.21",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 01 Feb 2024 20:54:31 GMT",
       "version": "0.25.8",
       "tag": "@fluentui-react-native/callout_v0.25.8",

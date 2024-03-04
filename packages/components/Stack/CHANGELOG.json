@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 20:39:12 GMT",
+      "version": "0.9.10",
+      "tag": "@fluentui-react-native/stack_v0.9.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/stack",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 03:22:29 GMT",
+      "version": "0.9.9",
+      "tag": "@fluentui-react-native/stack_v0.9.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/text to v0.22.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Feb 2024 23:27:43 GMT",
+      "version": "0.9.8",
+      "tag": "@fluentui-react-native/stack_v0.9.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/stack",
+            "commit": "dbd7aadff1ba8c61fd5d8aedde8b079c650e37fa",
+            "comment": "Rework package json version notation"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/tokens to v0.22.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.14.21",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.14.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/text to v0.22.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 22 Jan 2024 22:09:17 GMT",
       "version": "0.9.7",
       "tag": "@fluentui-react-native/stack_v0.9.7",

@@ -2,6 +2,156 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 20:39:12 GMT",
+      "version": "0.37.45",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.45",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 01:04:36 GMT",
+      "version": "0.37.44",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.44",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.13",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 23:29:38 GMT",
+      "version": "0.37.43",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.43",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.12",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 03:22:29 GMT",
+      "version": "0.37.42",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.42",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.11",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Feb 2024 23:27:46 GMT",
+      "version": "0.37.41",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.10",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Feb 2024 22:10:45 GMT",
+      "version": "0.37.40",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 20 Feb 2024 22:24:35 GMT",
+      "version": "0.37.39",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Feb 2024 23:41:23 GMT",
+      "version": "0.37.38",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.38",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 03 Feb 2024 02:29:49 GMT",
+      "version": "0.37.37",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.37",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.6",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 02 Feb 2024 20:10:50 GMT",
+      "version": "0.37.36",
+      "tag": "@fluentui-react-native/tester-win32_v0.37.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.167.5",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 01 Feb 2024 20:54:31 GMT",
       "version": "0.37.35",
       "tag": "@fluentui-react-native/tester-win32_v0.37.35",

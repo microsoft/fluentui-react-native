@@ -1,8 +1,86 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 01 Feb 2024 20:54:31 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.21
+
+Fri, 01 Mar 2024 20:39:11 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 1.12.20
+
+Fri, 01 Mar 2024 01:04:35 GMT
+
+### Patches
+
+- fix menu group accessibility (krsiler@microsoft.com)
+
+## 1.12.19
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.25.10
+- Bump @fluentui-react-native/focus-zone to v0.16.9
+- Bump @fluentui-react-native/icon to v0.20.10
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
+- Bump @fluentui-react-native/text to v0.22.9
+- Bump @fluentui-react-native/button to v0.36.12
+
+## 1.12.18
+
+Thu, 22 Feb 2024 23:27:46 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.25.9
+- Bump @fluentui-react-native/focus-zone to v0.16.8
+- Bump @fluentui-react-native/framework to v0.13.7
+- Bump @fluentui-react-native/icon to v0.20.9
+- Bump @fluentui-react-native/interactive-hooks to v0.25.8
+- Bump @fluentui-react-native/text to v0.22.8
+- Bump @fluentui-react-native/theme-tokens to v0.26.6
+- Bump @fluentui-react-native/tokens to v0.22.6
+- Bump @fluentui-react-native/button to v0.36.11
+
+## 1.12.17
+
+Wed, 21 Feb 2024 22:10:45 GMT
+
+### Patches
+
+- exclude dividers from n of m in MenuGroup (krsiler@microsoft.com)
+
+## 1.12.16
+
+Tue, 20 Feb 2024 22:24:34 GMT
+
+### Patches
+
+- Fix some MenuItem font and color tokens (adgleitm@microsoft.com)
+
+## 1.12.15
+
+Thu, 15 Feb 2024 23:41:23 GMT
+
+### Patches
+
+- Add safety checks for `MenuList` max height/width specifications (adgleitm@microsoft.com)
+
+## 1.12.14
+
+Sat, 03 Feb 2024 02:29:49 GMT
+
+### Patches
+
+- Use Correct checkmarkPadding for MenuItemCheckbox (julio.rocha@microsoft.com)
 
 ## 1.12.13
 

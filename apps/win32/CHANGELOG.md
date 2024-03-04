@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 01 Feb 2024 20:54:31 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.37.45
+
+Fri, 01 Mar 2024 20:39:12 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.37.44
+
+Fri, 01 Mar 2024 01:04:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.13
+
+## 0.37.43
+
+Fri, 23 Feb 2024 23:29:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.12
+
+## 0.37.42
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.11
+
+## 0.37.41
+
+Thu, 22 Feb 2024 23:27:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.10
+
+## 0.37.40
+
+Wed, 21 Feb 2024 22:10:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.9
+
+## 0.37.39
+
+Tue, 20 Feb 2024 22:24:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.8
+
+## 0.37.38
+
+Thu, 15 Feb 2024 23:41:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.7
+
+## 0.37.37
+
+Sat, 03 Feb 2024 02:29:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.6
+
+## 0.37.36
+
+Fri, 02 Feb 2024 20:10:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.5
 
 ## 0.37.35
 

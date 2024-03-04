@@ -15,6 +15,12 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+      metro:
+        patterns:
+          - 'metro*'
+        update-types:
+          - 'minor'
+          - 'patch'
       rnx-kit:
         patterns:
           - '@rnx-kit*'

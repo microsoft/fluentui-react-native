@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-native-font-metrics",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A temporary partial wrapper for UIFontMetrics.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -32,8 +32,8 @@
     "use-subscription": ">=1.0.0 <1.6.0"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
     "@types/use-subscription": "1.0.0",
     "react": "18.2.0",
