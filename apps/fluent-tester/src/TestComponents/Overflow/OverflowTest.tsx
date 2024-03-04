@@ -5,7 +5,7 @@ import type { ViewStyle } from 'react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Divider } from '@fluentui-react-native/divider';
 import { Menu, MenuTrigger, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
-import { Overflow, OverflowItem, OverflowTab, OverflowTabList, useOverflowMenu } from '@fluentui-react-native/overflow';
+import { Overflow, OverflowItem, useOverflowMenu } from '@fluentui-react-native/overflow';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
@@ -18,13 +18,6 @@ const itemLabels = {
   c: 'Item C Item C',
   d: 'Item D',
   e: 'Item E Item E Item E Item E',
-};
-const itemPriorities = {
-  a: 1,
-  b: 1,
-  c: 1,
-  d: 1,
-  e: 1,
 };
 
 const containerStyle: ViewStyle = {
@@ -65,27 +58,8 @@ function OverflowMenu(props: OverflowMenuProps) {
 }
 
 export function OverflowMainTest() {
-  const [key, setKey] = React.useState('e');
   return (
     <View>
-      <Text>Hi</Text>
-      {/* <OverflowTabList
-        onOverflowUpdate={(data) => {
-          if (data.invisibleIds.contains(key)) {
-            setKey(undefined);
-          }
-        }}
-        selectedKey={key}
-        onTabSelect={setKey}
-        tabKeys={items}
-      >
-        {items.map((item) => (
-          <OverflowTab priority={itemPriorities[item] + (key === item ? 5 : 0)} tabKey={item} key={item}>
-            {itemLabels[item]}
-          </OverflowTab>
-        ))}
-        <OverflowMenu onItemClick={setKey} />
-      </OverflowTabList> */}
       <Overflow itemIDs={items}>
         {items.map((item) => (
           <OverflowItem key={item} overflowID={item}>
