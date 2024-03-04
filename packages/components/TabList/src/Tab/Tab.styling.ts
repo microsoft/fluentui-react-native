@@ -1,14 +1,11 @@
 import React from 'react';
-import { Platform, View, Pressable } from 'react-native';
-import type { ViewProps } from 'react-native';
+import { Platform } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { borderStyles, fontStyles, useSlot } from '@fluentui-react-native/framework';
-import type { Slots, Theme } from '@fluentui-react-native/framework';
-import { IconV1 as Icon } from '@fluentui-react-native/icon';
+import { borderStyles, fontStyles } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/framework';
 import type { IconPropsV1 as IconProps } from '@fluentui-react-native/icon';
 import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
-import { TextV1 as Text } from '@fluentui-react-native/text';
 import type { TextProps } from '@fluentui-react-native/text';
 
 import type { TabProps, TabSlotProps, TabTokens } from './Tab.types';
@@ -72,14 +69,14 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        flex: 0,
+        flex: vertical ? 0 : 1,
         alignSelf: 'flex-start',
         justifyContent: 'center',
         marginHorizontal: tokens.stackMarginHorizontal,
         marginVertical: tokens.stackMarginVertical,
       },
     }),
-    [tokens.stackMarginHorizontal, tokens.stackMarginVertical],
+    [vertical, tokens.stackMarginHorizontal, tokens.stackMarginVertical],
   );
 
   const indicatorContainer = React.useMemo<IViewProps>(
@@ -120,14 +117,3 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
 
   return { root, contentContainer, content, icon, stack, indicatorContainer, indicator };
 };
-
-export function useTabSlots(slotProps: TabSlotProps): Slots<TabSlotProps> {
-  const root = useSlot<PressablePropsExtended>(Pressable, slotProps.root);
-  const stack = useSlot<ViewProps>(View, slotProps.stack as ViewProps);
-  const indicatorContainer = useSlot<ViewProps>(View, slotProps.indicatorContainer as ViewProps);
-  const indicator = useSlot<ViewProps>(View, slotProps.indicator as ViewProps);
-  const contentContainer = useSlot<ViewProps>(View, slotProps.contentContainer as ViewProps);
-  const content = useSlot<TextProps>(Text, slotProps.content);
-  const icon = useSlot<IconProps>(Icon, slotProps.icon);
-  return { root, stack, indicatorContainer, indicator, contentContainer, content, icon };
-}

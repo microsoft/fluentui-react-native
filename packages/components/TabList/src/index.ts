@@ -1,15 +1,7 @@
 export { tabName } from './Tab/Tab.types';
 export type { TabType, TabInfo, TabProps, TabSlotProps, TabState, TabTokens } from './Tab/Tab.types';
 export { Tab } from './Tab/Tab';
-export { useTab } from './Tab/useTab';
-export { useTabSlots, useTabSlotProps } from './Tab/Tab.styling';
-export { useTabAnimation } from './Tab/useTabAnimation';
-export { renderTab } from './Tab/renderTab';
 export { tabListName } from './TabList/TabList.types';
-export { useTabTokens, tabStates } from './Tab/TabTokens';
 export type { TabListInfo, TabListProps, TabListSlotProps, TabListState, TabListTokens, TabListType } from './TabList/TabList.types';
 export { TabList } from './TabList/TabList';
 export { TabListContext } from './TabList/TabListContext';
-export { useTabList } from './TabList/useTabList';
-export { stylingSettings as tablistStylingSettings } from './TabList/TabList.styling';
-export { renderTabList } from './TabList/renderTabList';

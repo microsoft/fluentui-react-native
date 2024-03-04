@@ -1,6 +1,7 @@
 import type * as React from 'react';
-import type { View, ViewProps } from 'react-native';
+import type { View } from 'react-native';
 
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
 import type { LayoutRectangle } from '@office-iss/react-native-win32';
@@ -115,8 +116,6 @@ export interface TabListState {
    * TabList's `vertical` prop.
    */
   vertical: boolean;
-
-  waitForGoodTabLayoutValues?: boolean;
 }
 
 export interface TabListTokens extends LayoutTokens {
@@ -130,7 +129,7 @@ export interface TabListTokens extends LayoutTokens {
   vertical?: TabListTokens;
 }
 
-export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, ViewProps {
+export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
   /**
    * Visual appearance of the TabList, affecting header hover / selection background.
    */
@@ -174,8 +173,6 @@ export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation
    * Flag to render the list of tabs horizontally or vertically
    */
   vertical?: boolean;
-
-  waitForGoodTabLayoutValues?: boolean;
 }
 export interface TabListInfo {
   props: TabListProps;
@@ -183,8 +180,8 @@ export interface TabListInfo {
 }
 export interface TabListSlotProps {
   container?: FocusZoneProps;
-  stack: ViewProps;
-  root: React.PropsWithRef<ViewProps>;
+  stack: IViewProps;
+  root: React.PropsWithRef<IViewProps>;
 }
 
 export interface TabListType {

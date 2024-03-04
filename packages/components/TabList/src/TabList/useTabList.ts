@@ -29,7 +29,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     selectedKey,
     size = 'medium',
     vertical = false,
-    waitForGoodTabLayoutValues = false,
   } = props;
 
   const data = useSelectedKey(selectedKey || defaultSelectedKey || null, onTabSelect);
@@ -59,7 +58,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   const addTabKey = React.useCallback(
     (tabKey: string) => {
       if (__DEV__ && tabKeys.includes(tabKey)) {
-        // console.warn(`Tab Key "${tabKey}" already exists in the TabList. Duplicate keys are not supported.`);
+        console.warn(`Tab Key "${tabKey}" already exists in the TabList. Duplicate keys are not supported.`);
       }
       setTabKeys((keys) => [...keys, tabKey]);
     },
@@ -80,9 +79,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
   const addTabLayout = React.useCallback(
     (tabKey: string, layoutInfo: LayoutRectangle) => {
-      setListLayoutMap((prev) => {
-        return { ...prev, [tabKey]: layoutInfo };
-      });
+      setListLayoutMap((prev) => ({ ...prev, [tabKey]: layoutInfo }));
     },
     [setListLayoutMap],
   );
@@ -100,7 +97,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       if (e.nativeEvent.layout) {
         setTabListLayout(e.nativeEvent.layout);
       }
-      props.onLayout && props.onLayout(e as any);
     },
     [setTabListLayout],
   );
@@ -168,7 +164,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       updateAnimatedIndicatorStyles: updateStyles,
       updateDisabledTabs,
       updateTabRef,
-      waitForGoodTabLayoutValues,
     },
   };
 };

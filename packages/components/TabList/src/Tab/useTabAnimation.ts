@@ -91,10 +91,8 @@ export function useTabAnimation(
           height: indicatorHeight,
         });
       }
-
-      props.onLayout && props.onLayout(e as any);
     },
-    [addTabLayout, layout.tablist, props, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
+    [addTabLayout, layout, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );
 
   return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);
