@@ -1,19 +1,15 @@
 import * as React from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 
-import type { ButtonProps } from '@fluentui-react-native/button';
-
 import type { OverflowItemInfo, OverflowItemProps } from './OverflowItem.types';
 import type { LayoutSize } from '../Overflow/Overflow.types';
 import { useOverflowContext } from '../OverflowContext';
 
-export function useOverflowItem<T = ButtonProps>(props: OverflowItemProps<T>): OverflowItemInfo<T> {
+export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
   const { overflowID, priority, onOverflowItemChange: onOveflowItemChange } = props;
   const { itemVisibility, initialOverflowLayoutDone, disconnect, register, setLayoutState, updateItem } = useOverflowContext();
 
   const [size, setSize] = React.useState<LayoutSize>();
-
-  // console.log(layoutHandler);
 
   React.useEffect(() => {
     if (size) {

@@ -1,7 +1,5 @@
 import type { View, ViewProps, ViewStyle } from 'react-native';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { LayoutTokens } from '@fluentui-react-native/framework';
 import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
 import type { OverflowItemEntry, OverflowUpdatePayload } from '../overflowManager.types';
@@ -15,23 +13,6 @@ export interface OverflowProps extends ViewProps {
   itemIDs: string[];
   dontHideBeforeReady?: boolean;
   onOverflowUpdate?: (data: OverflowUpdatePayload) => void;
-}
-
-export type OverflowTokens = LayoutTokens & {
-  axis?: 'horizontal' | 'vertical';
-  opacity?: ViewStyle['opacity'];
-
-  hidden?: OverflowTokens;
-};
-
-export interface OverflowSlotProps {
-  root: IViewProps;
-}
-
-export interface OverflowType {
-  props: OverflowProps;
-  slotProps: OverflowSlotProps;
-  tokens: OverflowTokens;
 }
 
 type MenuSetLayoutStateParam = { type: 'menu'; layoutDone: boolean };

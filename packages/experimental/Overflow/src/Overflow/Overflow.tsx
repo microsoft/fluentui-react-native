@@ -1,9 +1,8 @@
 /** @jsxRuntime classic */
-/** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { mergeProps, withSlots, stagedComponent, memoize } from '@fluentui-react-native/framework';
+import { mergeProps, stagedComponent, memoize } from '@fluentui-react-native/framework';
 
 import type { OverflowProps } from './Overflow.types';
 import { overflowName } from './Overflow.types';

@@ -1,7 +1,5 @@
 import type { ViewProps } from 'react-native';
 
-import type { ButtonProps } from '@fluentui-react-native/button';
-
 import type { OverflowItemChangeHandler } from '../Overflow/Overflow.types';
 
 export const overflowItemName = 'OverflowItem';
@@ -13,22 +11,13 @@ export interface OverflowItemCoreProps {
   onOverflowItemChange?: OverflowItemChangeHandler;
 }
 
-export type OverflowItemProps<T = ViewProps> = T & OverflowItemCoreProps;
+export type OverflowItemProps = ViewProps & OverflowItemCoreProps;
 
 export interface OverflowItemState {
   visible: boolean;
 }
 
-export interface OverflowItemInfo<T = ViewProps> {
-  props: OverflowItemProps<T>;
+export interface OverflowItemInfo {
+  props: OverflowItemProps;
   state: OverflowItemState;
-}
-
-export interface OverflowItemSlotProps<T = ButtonProps> {
-  root: T;
-}
-
-export interface OverflowItemType<T = ButtonProps> {
-  props: OverflowItemProps<T>;
-  slotProps: OverflowItemSlotProps<T>;
 }

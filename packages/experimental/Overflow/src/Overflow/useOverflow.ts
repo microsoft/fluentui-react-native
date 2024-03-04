@@ -122,8 +122,6 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     [overflowItemUpdateCallbacks],
   );
 
-  // console.log('itemIDWithForcedLayoutChangeRef', itemIDWithForcedLayoutChangeRef.current);
-
   React.useLayoutEffect(() => {
     if (!layoutState.container) {
       overflowManager.initialize({
