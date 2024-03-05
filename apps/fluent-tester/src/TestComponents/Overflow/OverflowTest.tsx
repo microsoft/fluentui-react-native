@@ -145,12 +145,11 @@ export function OverflowDifferentWidthTest() {
 }
 
 export const OverflowTest: React.FunctionComponent = () => {
-  const description = 'A Divider is a visual separator that can contain content (text or an icon). Dividers can be horizontal or vertical';
-  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Divider/SPEC.md';
+  const description = 'Experimental component based off web v9 Overflow.';
 
   return (
     <Test
-      name="Divider Test"
+      name="Overflow Test"
       description={description}
       sections={[
         {
@@ -158,13 +157,12 @@ export const OverflowTest: React.FunctionComponent = () => {
           component: OverflowMainTest,
         },
       ]}
-      spec={spec}
       status={{
-        win32Status: 'Production',
+        win32Status: 'Experimental',
         uwpStatus: 'Backlog',
-        iosStatus: 'Production',
-        macosStatus: 'Production',
-        androidStatus: 'Production',
+        iosStatus: 'Backlog',
+        macosStatus: 'Experimental',
+        androidStatus: 'Backlog',
       }}
     />
   );
