@@ -26,8 +26,15 @@ interface LayoutState {
   items: Record<string, boolean>;
 }
 
+/**
+ * Hook for Overflow component. Used as middle man between Overflow / Overflow item components and overflow manager. Can be integrated with
+ * other components.
+ *
+ * Returns state to feed into context provider and props (with an important onLayout callback) to pass to Overflow's containing view. */
 export function useOverflow(props: OverflowProps): OverflowInfo {
   const { itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback } = props;
+
+  // The overflow manager records layout info of the container, menu, and items and calculates what is visible and what isn't.
   const overflowManager = React.useRef<OverflowManager>(createOverflowManager()).current;
   const overflowItemUpdateCallbacks = React.useRef<Record<string, OverflowItemChangeHandler>>({}).current;
   const overflowMenuRef = React.useRef<View>(null);
@@ -37,6 +44,8 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     hasOverflow: false,
     itemVisibility: {},
   });
+  // This is used to check if the container, menu, and each overflow item has received a layout event and recorded it in the
+  // overflow manager.
   const [layoutState, setLayoutState] = React.useState<LayoutState>(() => {
     const itemLayoutState = {};
     for (const id of props.itemIDs) {
@@ -89,6 +98,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
 
   const onMenuLayout = React.useCallback((size: LayoutSize) => overflowManager.setMenuSize(size), [overflowManager]);
 
+  // Callback for when the overflow manager has calculated all overall changes towards item visibilities in its update cycle.
   const onOverflowUpdate = React.useCallback(
     (data: OverflowUpdatePayload) => {
       setOverflowState((prev) => {
@@ -101,20 +111,21 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
         }
         return { ...prev, itemVisibility: visibilities, hasOverflow: data.invisibleIds.length > 0 };
       });
-      // NEED TO MAKE ON OVERFLOW SHOW / HIDE EVENTS SEPARATE IN OVERFLOW MANAGER
       overflowUpdateCallback && overflowUpdateCallback(data);
     },
     [overflowUpdateCallback],
   );
 
+  // If there is one item showing, callback to send the dimensions the item should have to truncate itself and have everything fit neatly
+  // in the overflow container.
   const onUpdateItemDimension = React.useCallback(
     (data: ItemDimensionUpdatePayload) => {
-      console.log('item dimension update', data);
       overflowItemUpdateCallbacks[data.id] && overflowItemUpdateCallbacks[data.id]({ type: 'layout', id: data.id, newLayout: data.update });
     },
     [overflowItemUpdateCallbacks],
   );
 
+  // Callback for when a single item has its visibility changed.
   const onUpdateItemVisibility = React.useCallback(
     (data: ItemVisibilityUpdatePayload) => {
       overflowItemUpdateCallbacks[data.id] && overflowItemUpdateCallbacks[data.id]({ type: 'visibility', ...data });
@@ -122,10 +133,10 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     [overflowItemUpdateCallbacks],
   );
 
+  // This layout effect is run before re-rendering, allowing us to calculate what's visible / invisible with our overflow manager.
   React.useLayoutEffect(() => {
     if (!layoutState.container) {
       overflowManager.initialize({
-        debug: true,
         initialContainerSize: containerSize,
         onOverflowUpdate,
         onUpdateItemDimension,
@@ -136,6 +147,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     } else {
       overflowManager.update(containerSize);
     }
+    // We only want to run this layout effect whenever the container's size updates.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerSize]);
 

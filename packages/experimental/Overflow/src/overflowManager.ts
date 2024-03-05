@@ -5,13 +5,30 @@ import type { PriorityQueue } from './priorityQueue';
 
 type ProcessOverflowItemsReturn = { type: 'visibility' } | { type: 'dimension'; shrinking: boolean };
 
+/**
+ * This function is used to construct an overflow manager.
+ *
+ * The OverflowManager is a helper object that keeps track of each overflow item, calculates which items are visible and invisible
+ * when the container's size changes, and emits events that help track changes to visibilities and sizes of given OverflowItems. This
+ * logic is put here instead of within a React hook for better modularity and becausehaving the calculations here will not cause
+ * unnecessary re-renders.
+ *
+ * The cycle for calculating visibility goes as follows:
+ *   1. Overflow onLayout - size of the container has changed / OverflowItem mounting - item has been added or removed
+ *   2. processOverflowItems() - Get the total container width and the current visible item width. Show / hide items if there is space to
+ *      be added or removed. Track which items have visibility changes, if any.
+ *   3. If a change has occured, dispatch events to the Overflow container and the individual OverflowItem whose visibility has changed.
+ *
+ * The useOverflow hook of the Overflow component creates and uses an overflow manager.
+ */
 export function createOverflowManager(): OverflowManager {
   const items: Record<string, OverflowItemEntry> = {};
 
   let forceDispatch = false;
-  let debug = false;
   let numItems = 0;
 
+  // processItemsChangeMap is used to track which OverflowItems have had visibility changes during `processOverflowItems` calls.
+  // Keys are ids and values are whether their visibilities have changed.
   let processItemsChangeMap: Record<string, boolean> = {};
   let menuSize: LayoutSize = { width: 0, height: 0 };
   let containerSize: LayoutSize;
@@ -21,12 +38,8 @@ export function createOverflowManager(): OverflowManager {
   let onUpdateItemVisibility: OverflowManagerOptions['onUpdateItemVisibility'];
   let onOverflowUpdate: OverflowManagerOptions['onOverflowUpdate'];
 
-  const log = (...args: any[]) => {
-    if (debug) {
-      console.log(...args);
-    }
-  };
-
+  // Comparison function to order items in priority queue. Items with a larger priority value are sorted first. If there's a tie, then
+  // the initial ordering set when adding an item to the manager is used.
   const compareItems = (lt: string | null, rt: string | null): number => {
     if (!lt || !rt) {
       return 0;
@@ -37,9 +50,12 @@ export function createOverflowManager(): OverflowManager {
     return items[lt].initialOrder < items[rt].initialOrder ? 1 : -1;
   };
 
+  // Priority queue of item ids that are to be shown or hidden.
   const visibleItems: PriorityQueue<string> = createPriorityQueue(compareItems);
   const invisibleItems: PriorityQueue<string> = createPriorityQueue(compareItems);
 
+  // Method for getting the occupied size = sum(visible items) + current menu size
+  // TODO: add support for vertical overflow using height.
   const occupiedSize = () => {
     let totalSize = 0;
     for (const id of visibleItems.all()) {
@@ -51,10 +67,12 @@ export function createOverflowManager(): OverflowManager {
     return totalSize;
   };
 
+  // Flag for whether the last visible item should be shrunk and whether we should emit OverflowItemVisibilityChange events.
   const shouldShrinkMinVisible = () => {
     return visibleItems.size() === 1 && occupiedSize() > containerSize.width - padding;
   };
 
+  // Method for emitting overflow update events.
   const dispatchUpdates = (updates: ProcessOverflowItemsReturn[]) => {
     for (const update of updates) {
       if (update.type === 'dimension' && onUpdateItemDimension) {
@@ -93,6 +111,11 @@ export function createOverflowManager(): OverflowManager {
     processItemsChangeMap[itemToHide] = !processItemsChangeMap[itemToHide];
   };
 
+  /** Method called whenever `update()` is called. On container size changing / items being added or deleted, we re-do our math
+   * to see if any items can be shown or hidden. If one item remains, and the size of the item exceeds that of the container, we
+   * also calculate what the new size of the item should be to truncate it.
+   *
+   * If any item visibilities should be updated or if the last items dimensions should change, we return objects that state said updates.*/
   const processOverflowItems = (): ProcessOverflowItemsReturn[] => {
     if (!containerSize) {
       return [];
@@ -119,7 +142,6 @@ export function createOverflowManager(): OverflowManager {
 
     if (itemVisibilityHasChanged) {
       ret.push({ type: 'visibility' });
-      log(Object.keys(processItemsChangeMap).filter((item) => processItemsChangeMap[item]));
     }
     if (lastVisibleSizeShouldShrink || lastItemDimensionHasChanged) {
       ret.push({
@@ -131,8 +153,8 @@ export function createOverflowManager(): OverflowManager {
     return ret;
   };
 
+  // Public method to create and parameterize the manager
   const initialize = (options: OverflowManagerOptions) => {
-    debug = options.debug;
     containerSize = options.initialContainerSize;
     padding = options.padding ?? 0;
     onUpdateItemVisibility = options.onUpdateItemVisibility;
@@ -140,6 +162,7 @@ export function createOverflowManager(): OverflowManager {
     onUpdateItemDimension = options.onUpdateItemDimension;
   };
 
+  // Public method to update properties of a given item
   const updateItem = (id: string, updates: Partial<OverflowItemEntry>) => {
     // implement
     if (!updates.size || !shouldShrinkMinVisible()) {
@@ -148,13 +171,14 @@ export function createOverflowManager(): OverflowManager {
     update();
   };
 
+  // Public method to set / reset the overflow's menu size
   const setMenuSize = (size: LayoutSize) => {
     // implement
     menuSize = size;
-    log(menuSize);
     update();
   };
 
+  // Public method to register an overflow item
   const addItem = (entry: OverflowItemEntry) => {
     updateItem(entry.id, { ...entry, initialOrder: numItems++ });
     visibleItems.enqueue(entry.id);
@@ -163,8 +187,10 @@ export function createOverflowManager(): OverflowManager {
     update();
   };
 
+  // Public method that returns whether an item with the given id exists in the manager
   const hasItem = (id: string) => !!items[id];
 
+  // Public method to delete and cleanup an item from the manager
   const removeItem = (id: string) => {
     // implement
     delete items[id];
@@ -177,6 +203,7 @@ export function createOverflowManager(): OverflowManager {
     update();
   };
 
+  // Public method to run whenever the Overflow container receives a layout event
   const update = (newContainerSize?: LayoutSize) => {
     if (newContainerSize) {
       containerSize = newContainerSize;

@@ -5,6 +5,9 @@ import type { OverflowItemInfo, OverflowItemProps } from './OverflowItem.types';
 import type { LayoutSize } from '../Overflow/Overflow.types';
 import { useOverflowContext } from '../OverflowContext';
 
+/**
+ * Hook for getting the item's onLayout callback and whether the item should be showing.
+ */
 export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
   const { overflowID, priority, onOverflowItemChange: onOveflowItemChange } = props;
   const { itemVisibility, initialOverflowLayoutDone, disconnect, register, setLayoutState, updateItem } = useOverflowContext();
@@ -15,6 +18,8 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
     if (size) {
       updateItem({ id: overflowID, size: size, priority: priority });
     }
+    // The item's size updates whenever the onLayout callback runs. This is purely for updating the item info when its priority changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [priority]);
 
   React.useEffect(() => {
@@ -22,6 +27,8 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
       register(overflowID, onOveflowItemChange);
     }
     return () => disconnect(overflowID);
+    // Runs when mounting / unmounting / whenever an onOverflowItemChange callback is added. Register / disconnect shouldn't be called at any
+    // other point.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onOveflowItemChange]);
 

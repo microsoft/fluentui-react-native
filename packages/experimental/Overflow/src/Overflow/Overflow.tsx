@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 import * as React from 'react';
 import { View } from 'react-native';
+import type { DimensionValue } from 'react-native';
 
 import { mergeProps, stagedComponent, memoize } from '@fluentui-react-native/framework';
 
@@ -10,13 +11,18 @@ import { useOverflow } from './useOverflow';
 import { OverflowContext } from '../OverflowContext';
 
 export const getOverflowStyleProps = memoize(overflowStylePropsWorker);
-function overflowStylePropsWorker(dontHideBeforeReady: boolean, initialOverflowLayoutDone: boolean): Partial<OverflowProps> {
+function overflowStylePropsWorker(
+  dontHideBeforeReady: boolean,
+  initialOverflowLayoutDone: boolean,
+  padding?: DimensionValue,
+): Partial<OverflowProps> {
   return {
     style: {
       opacity: dontHideBeforeReady || initialOverflowLayoutDone ? 1 : 0,
       display: 'flex',
       flexDirection: 'row',
       flexWrap: 'wrap',
+      paddingHorizontal: padding,
     },
   };
 }
@@ -27,7 +33,7 @@ export const Overflow = stagedComponent<OverflowProps>((initial: OverflowProps) 
     const { itemIDs: _, ...mergedProps } = mergeProps(
       props,
       final,
-      getOverflowStyleProps(props.dontHideBeforeReady, state.initialOverflowLayoutDone),
+      getOverflowStyleProps(props.dontHideBeforeReady, state.initialOverflowLayoutDone, props.padding),
     );
     return (
       <OverflowContext.Provider value={state}>
