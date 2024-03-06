@@ -35,6 +35,8 @@ export interface ItemDimensionUpdatePayload {
 
 /** Options to initialize a FURN overflow manager. */
 export interface OverflowManagerOptions {
+  /** Flag to enable debug logs in the overflow manager */
+  debug?: boolean;
   /** Width and height of overflow container */
   initialContainerSize: LayoutSize;
   /** Padding of container (width right now, will add support for height later) */
@@ -49,13 +51,17 @@ export interface OverflowManagerOptions {
 
 /** Methods exposed by the overflow manager */
 export interface OverflowManager {
-  /** Set up for using the overflow manager */
+  /** Initialize the overflow manager with user-passed parameters */
   initialize: (options: OverflowManagerOptions) => void;
+  /** Add a new overflow item to the manager */
   addItem: (entry: OverflowItemEntry) => void;
+  /** Check if an overflow item exists within the manager */
   hasItem: (id: string) => boolean;
+  /** Delete an overflow item from the manager */
   removeItem: (id: string) => void;
   /** Used to update either the size or priority of a given item. */
   updateItem: (id: string, update: Partial<OverflowItemEntry>) => void;
+  /** Update overflow manager with the overflow menu trigger's width and height */
   setMenuSize: (size: LayoutSize) => void;
   /** Should run whenever the overflow container receives a layout event.  */
   update: (newContainerSize?: LayoutSize) => void;

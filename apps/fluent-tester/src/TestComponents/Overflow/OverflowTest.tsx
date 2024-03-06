@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import type { ViewStyle } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Divider } from '@fluentui-react-native/divider';
@@ -20,21 +19,33 @@ const itemLabels = {
   e: 'Item E Item E Item E Item E',
 };
 
-const containerStyle: ViewStyle = {
-  paddingVertical: 4,
-};
+const overflowTestPageStyles = StyleSheet.create({
+  containerStyle: {
+    paddingVertical: 4,
+  },
+  width100: {
+    width: 100,
+  },
+  width250: {
+    width: 250,
+  },
+  width400: {
+    width: 400,
+  },
+});
 
 interface OverflowMenuProps {
-  onItemClick: (id: string) => void;
+  onItemPress: (id: string) => void;
 }
 
 function OverflowMenu(props: OverflowMenuProps) {
-  const { showMenu, menuItems, menuRef, onLayout } = useOverflowMenu();
+  const { showMenu, menuItemVisibilities, menuRef, onLayout } = useOverflowMenu();
   if (showMenu) {
     return (
       <Menu>
         <MenuTrigger>
           <Button
+            accessibilityLabel="More options"
             onLayout={onLayout}
             style={{ alignSelf: 'center' }}
             appearance="subtle"
@@ -44,11 +55,13 @@ function OverflowMenu(props: OverflowMenuProps) {
           />
         </MenuTrigger>
         <MenuPopover>
-          {menuItems.map((id) => (
-            <MenuItem onClick={() => props.onItemClick(id)} key={id}>
-              {itemLabels[id]}
-            </MenuItem>
-          ))}
+          {items
+            .filter((id) => menuItemVisibilities[id])
+            .map((id) => (
+              <MenuItem onClick={() => props.onItemPress(id)} key={id}>
+                {itemLabels[id]}
+              </MenuItem>
+            ))}
         </MenuPopover>
       </Menu>
     );
@@ -59,14 +72,14 @@ function OverflowMenu(props: OverflowMenuProps) {
 
 export function OverflowMainTest() {
   return (
-    <View>
+    <View style={overflowTestPageStyles.containerStyle}>
       <Overflow itemIDs={items}>
         {items.map((item) => (
           <OverflowItem key={item} overflowID={item}>
             <Button>{itemLabels[item]}</Button>
           </OverflowItem>
         ))}
-        <OverflowMenu onItemClick={(item) => console.log(item)} />
+        <OverflowMenu onItemPress={console.log} />
       </Overflow>
     </View>
   );
@@ -75,69 +88,75 @@ export function OverflowMainTest() {
 export function OverflowDifferentWidthTest() {
   return (
     <View>
-      <Text variant="heroLargeStandard">Hidden Before Layout</Text>
-      <View style={containerStyle}>
-        <Text variant="headerSemibold">Width: 250</Text>
-        <Overflow style={{ width: 250 }} itemIDs={items}>
+      <Text variant="heroStandard">Hidden Before Layout</Text>
+      <View style={overflowTestPageStyles.containerStyle}>
+        <Text variant="body1Strong">Width: 400</Text>
+        <Overflow style={overflowTestPageStyles.width400} itemIDs={items}>
           {items.map((item) => (
             <OverflowItem overflowID={item} key={item}>
-              Item {' ' + item}
+              <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
+          <OverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
-      <View style={containerStyle}>
-        <Text variant="headerSemibold">Width: 150</Text>
-        <Overflow style={{ width: 150 }} itemIDs={items}>
+      <View style={overflowTestPageStyles.containerStyle}>
+        <Text variant="body1Strong">Width: 250</Text>
+        <Overflow style={overflowTestPageStyles.width250} itemIDs={items}>
           {items.map((item) => (
             <OverflowItem overflowID={item} key={item}>
-              Item {' ' + item}
+              <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
+          <OverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
-      <View style={containerStyle}>
-        <Text variant="headerSemibold">Width: 75</Text>
-        <Overflow style={{ width: 75 }} itemIDs={items}>
+      <View style={overflowTestPageStyles.containerStyle}>
+        <Text variant="body1Strong">Width: 100</Text>
+        <Overflow style={overflowTestPageStyles.width100} itemIDs={items}>
           {items.map((item) => (
             <OverflowItem overflowID={item} key={item}>
-              Item {' ' + item}
+              <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
+          <OverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
       <Divider />
-      <Text variant="heroLargeStandard">Visible Before Layout</Text>
-      <View style={containerStyle}>
-        <Text variant="headerSemibold">Width: 250</Text>
-        <Overflow dontHideBeforeReady style={{ width: 250 }} itemIDs={items}>
+      <Text variant="heroStandard">Visible Before Layout</Text>
+      <View style={overflowTestPageStyles.containerStyle}>
+        <Text variant="body1Strong">Width: 400</Text>
+        <Overflow dontHideBeforeReady style={overflowTestPageStyles.width400} itemIDs={items}>
           {items.map((item) => (
             <OverflowItem overflowID={item} key={item}>
-              Item {' ' + item}
+              <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
+          <OverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
-      <View style={containerStyle}>
-        <Text variant="headerSemibold">Width: 150</Text>
-        <Overflow dontHideBeforeReady style={{ width: 150 }} itemIDs={items}>
+      <View style={overflowTestPageStyles.containerStyle}>
+        <Text variant="body1Strong">Width: 250</Text>
+        <Overflow dontHideBeforeReady style={overflowTestPageStyles.width250} itemIDs={items}>
           {items.map((item) => (
             <OverflowItem overflowID={item} key={item}>
-              Item {' ' + item}
+              <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
+          <OverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
-      <View style={containerStyle}>
-        <Text variant="headerSemibold" style={{ paddingVertical: 8 }}>
-          Width: 75
+      <View style={overflowTestPageStyles.containerStyle}>
+        <Text variant="body1Strong" style={overflowTestPageStyles.containerStyle}>
+          Width: 100
         </Text>
-        <Overflow dontHideBeforeReady style={{ width: 75 }} itemIDs={items}>
+        <Overflow dontHideBeforeReady style={overflowTestPageStyles.width100} itemIDs={items}>
           {items.map((item) => (
             <OverflowItem overflowID={item} key={item}>
-              Item {' ' + item}
+              <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
+          <OverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
     </View>
@@ -155,6 +174,10 @@ export const OverflowTest: React.FunctionComponent = () => {
         {
           name: 'Overflow',
           component: OverflowMainTest,
+        },
+        {
+          name: 'Overflow Variable Width',
+          component: OverflowDifferentWidthTest,
         },
       ]}
       status={{

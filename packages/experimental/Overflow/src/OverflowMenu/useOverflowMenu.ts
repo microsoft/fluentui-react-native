@@ -24,11 +24,18 @@ export function useOverflowMenu(): OverflowMenuState {
     [updateMenuSize, initialOverflowLayoutDone, setLayoutState],
   );
 
-  const menuItems = Object.keys(itemVisibility).filter((id) => !itemVisibility[id]);
+  // Visibility of a menu item is the inverse of whether an item is visible within the overflow
+  const menuItemVisibilities = React.useMemo(() => {
+    const ret = {};
+    for (const key in itemVisibility) {
+      ret[key] = !itemVisibility[key];
+    }
+    return ret;
+  }, [itemVisibility]);
 
   return {
     showMenu: !initialOverflowLayoutDone || hasOverflow,
-    menuItems: menuItems,
+    menuItemVisibilities: menuItemVisibilities,
     menuRef: overflowMenuRef,
     onLayout: onButtonLayout,
   };
