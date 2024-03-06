@@ -1,5 +1,4 @@
 import React from 'react';
-import { Platform } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { borderStyles, fontStyles } from '@fluentui-react-native/framework';
@@ -28,11 +27,10 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         justifyContent: 'center',
         padding: 1,
         backgroundColor: tokens.backgroundColor,
-        ...(!vertical ? Platform.select({ macos: {}, default: { height: '100%' } }) : {}),
         ...borderStyles.from(tokens, theme),
       },
     }),
-    [tokens, theme, vertical],
+    [tokens, theme],
   );
 
   const contentContainer = React.useMemo<IViewProps>(
@@ -69,14 +67,14 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        flex: vertical ? 0 : 1,
+        flex: 0,
         alignSelf: 'flex-start',
         justifyContent: 'center',
         marginHorizontal: tokens.stackMarginHorizontal,
         marginVertical: tokens.stackMarginVertical,
       },
     }),
-    [vertical, tokens.stackMarginHorizontal, tokens.stackMarginVertical],
+    [tokens.stackMarginHorizontal, tokens.stackMarginVertical],
   );
 
   const indicatorContainer = React.useMemo<IViewProps>(
@@ -117,3 +115,17 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
 
   return { root, contentContainer, content, icon, stack, indicatorContainer, indicator };
 };
+
+/**
+ * Helper hook to style animated indicator's color and border radius
+ */
+export function useAnimatedIndicatorStylingHelper(props: TabProps, tokens: TabTokens, context: TabListState) {
+  // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
+  React.useEffect(() => {
+    if (props.tabKey === context.selectedKey && context.updateAnimatedIndicatorStyles) {
+      context.updateAnimatedIndicatorStyles({ backgroundColor: tokens.indicatorColor, borderRadius: tokens.indicatorRadius });
+    }
+    // Disabling warning because effect does not need to fire on `updateAnimatedIndicatorStyles` being changed
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.tabKey, context.selectedKey, tokens.indicatorColor, tokens.indicatorRadius]);
+}

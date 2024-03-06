@@ -14,12 +14,12 @@ import type { PressablePropsExtended } from '@fluentui-react-native/interactive-
 import type { TextProps } from '@fluentui-react-native/text';
 import { Text } from '@fluentui-react-native/text';
 
-import { useTabSlotProps } from './Tab.styling';
+import { useTabSlotProps, useAnimatedIndicatorStylingHelper } from './Tab.styling';
 import { tabName } from './Tab.types';
 import type { TabProps, TabState, TabTokens } from './Tab.types';
 import { tabStates, useTabTokens } from './TabTokens';
 import { useTab } from './useTab';
-import { useTabAnimation } from './useTabAnimation';
+import { useTabAnimationInternal as useTabAnimation } from './useTabAnimation';
 import type { TabListState } from '../TabList/TabList.types';
 import { TabListContext } from '../TabList/TabListContext';
 
@@ -47,9 +47,14 @@ export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens
   // Get styling props for each Tab slot
   const slotProps = useTabSlotProps(tab.props, tokens, theme, tablist);
 
-  const rootProps = useTabAnimation(props, tablist, tokens, slotProps.root);
+  useAnimatedIndicatorStylingHelper(tab.props, tokens, tablist);
 
-  const RootSlot = useSlot<PressablePropsExtended>(Pressable, rootProps);
+  const onRootLayout = useTabAnimation(tab.props, tokens);
+  if (!tab.props.calculateAnimationValuesExternally) {
+    slotProps.root.onLayout = onRootLayout;
+  }
+
+  const RootSlot = useSlot<PressablePropsExtended>(Pressable, slotProps.root);
   const StackSlot = useSlot<ViewProps>(View, slotProps.stack as ViewProps);
   const IndicatorContainerSlot = useSlot<ViewProps>(View, slotProps.indicatorContainer as ViewProps);
   const IndicatorSlot = useSlot<ViewProps>(View, slotProps.indicator as ViewProps);

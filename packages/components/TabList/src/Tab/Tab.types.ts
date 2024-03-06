@@ -110,6 +110,14 @@ export interface TabProps extends Omit<PressablePropsExtended, 'onPress'> {
   icon?: IconProps;
 
   /**
+   * Conditional flag to disable the default Tab's onLayout handler from sending animation values to the TabList.
+   *
+   * If you want to set the onLayout handler from useTabAnimation() on your own custom element, this must be set to
+   * true so that animations run correctly.
+   */
+  calculateAnimationValuesExternally?: boolean;
+
+  /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
