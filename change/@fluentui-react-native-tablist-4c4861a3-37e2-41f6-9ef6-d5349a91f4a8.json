@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Modularize useTabAnimation() hook and fixed styling issues with Tabs wrapped by a parent element.",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
