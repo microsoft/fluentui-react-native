@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tooltip component tests Tooltip default 1`] = `
+exports[`Overflow component tests Overflow default 1`] = `
 <View
   onLayout={[Function]}
   style={
@@ -16,6 +16,7 @@ exports[`Tooltip component tests Tooltip default 1`] = `
   <View
     onLayout={[Function]}
     overflowID="a"
+    style={{}}
   >
     <View
       accessibilityLabel="a"
@@ -111,6 +112,7 @@ exports[`Tooltip component tests Tooltip default 1`] = `
   <View
     onLayout={[Function]}
     overflowID="b"
+    style={{}}
   >
     <View
       accessibilityLabel="b"
@@ -206,6 +208,7 @@ exports[`Tooltip component tests Tooltip default 1`] = `
   <View
     onLayout={[Function]}
     overflowID="c"
+    style={{}}
   >
     <View
       accessibilityLabel="c"

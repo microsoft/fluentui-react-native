@@ -8,8 +8,8 @@ import { Overflow, OverflowItem } from '../';
 
 const items = ['a', 'b', 'c'];
 
-describe('Tooltip component tests', () => {
-  it('Tooltip default', () => {
+describe('Overflow component tests', () => {
+  it('Overflow default', () => {
     const tree = renderer
       .create(
         <Overflow itemIDs={items}>
@@ -24,7 +24,7 @@ describe('Tooltip component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('Tooltip simple rendering does not invalidate styling', () => {
+  it('Overflow simple rendering does not invalidate styling', () => {
     checkRenderConsistency(
       () => (
         <Overflow itemIDs={items}>
@@ -39,7 +39,7 @@ describe('Tooltip component tests', () => {
     );
   });
 
-  it('Tooltip re-renders correctly', () => {
+  it('Overflow re-renders correctly', () => {
     checkReRender(
       () => (
         <Overflow itemIDs={items}>
