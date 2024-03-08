@@ -77,6 +77,11 @@ export interface TabTokens extends FontTokens, IBorderTokens, IForegroundColorTo
   stackMarginVertical?: number;
 
   /**
+   * Controls the max # of lines rendered in the Text component. Set to 0 for no limit.
+   */
+  numberOfLines?: number;
+
+  /**
    * States that can be applied to a button
    */
   small?: TabTokens;

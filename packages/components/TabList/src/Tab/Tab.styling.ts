@@ -46,6 +46,7 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
 
   const content = React.useMemo<TextProps>(
     () => ({
+      numberOfLines: tokens.numberOfLines,
       style: {
         color: tokens.color,
         ...fontStyles.from(tokens, theme),
