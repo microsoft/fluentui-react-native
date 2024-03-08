@@ -47,7 +47,7 @@ export function createOverflowManager(): OverflowManager {
     if (!lt || !rt) {
       return 0;
     }
-    if (items[lt].priority > items[rt].priority) {
+    if (items[lt].priority !== items[rt].priority) {
       return items[lt].priority > items[rt].priority ? 1 : -1;
     }
     return items[lt].initialOrder < items[rt].initialOrder ? 1 : -1;
@@ -55,13 +55,7 @@ export function createOverflowManager(): OverflowManager {
 
   // Same as above, except items with equal priority will be sorted by lower order rather than higher
   const compareInvisibleItems = (lt: string | null, rt: string | null): number => {
-    if (!lt || !rt) {
-      return 0;
-    }
-    if (items[lt].priority > items[rt].priority) {
-      return items[lt].priority > items[rt].priority ? 1 : -1;
-    }
-    return items[lt].initialOrder > items[rt].initialOrder ? 1 : -1;
+    return -1 * compareVisibleItems(lt, rt);
   };
 
   // Priority queue of item ids that are to be shown or hidden.
@@ -92,7 +86,7 @@ export function createOverflowManager(): OverflowManager {
       if (update.type === 'dimension' && onUpdateItemDimension) {
         let newSize = containerSize.width - padding;
         if (invisibleItems.size() > 0) {
-          newSize -= 2 * menuSize.width;
+          newSize -= menuSize.width;
         }
         const id = visibleItems.peek();
         const payload = { id: id, update: update.shrinking ? { width: newSize, height: items[id].size.height } : null };
@@ -144,7 +138,11 @@ export function createOverflowManager(): OverflowManager {
 
     for (let i = 0; i < 2; i++) {
       log(`Occupied size: ${occupiedSize()} | Available size: ${availableSize}`);
-      log(`Queue.peek() on iteration ${i + 1}: visible - ${visibleItems.peek()} | invisible - ${invisibleItems.peek()}`);
+      log(
+        `Queue.peek() on iteration ${
+          i + 1
+        }: visible - ${visibleItems.peek()} [${visibleItems.all()}] | invisible - ${invisibleItems.peek()} [${invisibleItems.all()}]`,
+      );
       while ((occupiedSize() < availableSize && invisibleItems.size() > 0) || invisibleItems.size() === 1) {
         showItem();
       }

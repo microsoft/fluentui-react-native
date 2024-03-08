@@ -1,8 +1,10 @@
 import * as React from 'react';
-import type { LayoutChangeEvent } from 'react-native';
+import type { ViewStyle, LayoutChangeEvent } from 'react-native';
+
+import { mergeStyles } from '@fluentui-react-native/framework';
 
 import type { OverflowItemInfo, OverflowItemProps } from './OverflowItem.types';
-import type { LayoutSize } from '../Overflow/Overflow.types';
+import type { LayoutSize, OverflowItemChangeHandler } from '../Overflow/Overflow.types';
 import { useOverflowContext } from '../OverflowContext';
 
 /**
@@ -13,6 +15,17 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
   const { itemVisibility, initialOverflowLayoutDone, disconnect, register, setLayoutState, updateItem } = useOverflowContext();
 
   const [size, setSize] = React.useState<LayoutSize>();
+  const [controlledSize, setControlledSize] = React.useState<LayoutSize | null>(null);
+
+  const handleOverflowItemChange: OverflowItemChangeHandler = React.useCallback(
+    (data) => {
+      if (data.id === overflowID && data.type === 'layout') {
+        setControlledSize(data.newLayout);
+      }
+      onOveflowItemChange && onOveflowItemChange(data);
+    },
+    [onOveflowItemChange, overflowID],
+  );
 
   React.useEffect(() => {
     if (size) {
@@ -23,9 +36,7 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
   }, [priority]);
 
   React.useEffect(() => {
-    if (onOveflowItemChange) {
-      register(overflowID, onOveflowItemChange);
-    }
+    register(overflowID, handleOverflowItemChange);
     return () => disconnect(overflowID);
     // Runs when mounting / unmounting / whenever an onOverflowItemChange callback is added. Register / disconnect shouldn't be called at any
     // other point.
@@ -47,8 +58,16 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
     [initialOverflowLayoutDone, overflowID, priority, props, setLayoutState, updateItem],
   ); // Get item dimensions
 
+  const styles = React.useMemo<ViewStyle>(() => {
+    const stylesToMerge = [props.style];
+    if (controlledSize !== null) {
+      stylesToMerge.push({ width: controlledSize.width });
+    }
+    return mergeStyles(...stylesToMerge);
+  }, [controlledSize, props.style]);
+
   return {
-    props: { ...props, onLayout },
+    props: { ...props, style: styles, onLayout },
     state: { visible: !initialOverflowLayoutDone || itemVisibility[overflowID] },
   };
 }
