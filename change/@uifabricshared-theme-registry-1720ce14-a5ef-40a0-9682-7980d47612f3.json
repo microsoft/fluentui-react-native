@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update deprecation messages on theme objects",
-  "packageName": "@uifabricshared/theme-registry",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

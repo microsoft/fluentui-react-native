@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 01 Mar 2024 20:39:09 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Mar 2024 23:09:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.10
+
+Mon, 11 Mar 2024 23:09:49 GMT
+
+### Patches
+
+- Update deprecation messages on theme objects (ruaraki@microsoft.com)
 
 ## 0.19.9
 

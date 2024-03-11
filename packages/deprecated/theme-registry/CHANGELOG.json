@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Mon, 11 Mar 2024 23:09:49 GMT",
+      "version": "0.11.2",
+      "tag": "@uifabricshared/theme-registry_v0.11.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "27e32411d737885e04f388545b52ef7fc3151faa",
+            "comment": "Update deprecation messages on theme objects"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:08 GMT",
       "version": "0.11.1",
       "tag": "@uifabricshared/theme-registry_v0.11.1",

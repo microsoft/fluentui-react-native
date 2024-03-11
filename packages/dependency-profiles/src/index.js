@@ -132,7 +132,7 @@ module.exports = {
     },
     "@uifabricshared/theme-registry": {
       "name": "@uifabricshared/theme-registry",
-      "version": "0.11.1"
+      "version": "0.11.2"
     },
     "@uifabricshared/themed-settings": {
       "name": "@uifabricshared/themed-settings",
@@ -144,7 +144,7 @@ module.exports = {
     },
     "@uifabricshared/theming-react-native": {
       "name": "@uifabricshared/theming-react-native",
-      "version": "0.19.9"
+      "version": "0.19.10"
     },
     "@fluentui-react-native/experimental-activity-indicator": {
       "name": "@fluentui-react-native/experimental-activity-indicator",

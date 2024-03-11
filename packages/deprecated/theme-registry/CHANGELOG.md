@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Fri, 01 Mar 2024 20:39:08 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Mar 2024 23:09:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.2
+
+Mon, 11 Mar 2024 23:09:49 GMT
+
+### Patches
+
+- Update deprecation messages on theme objects (ruaraki@microsoft.com)
 
 ## 0.11.1
 
