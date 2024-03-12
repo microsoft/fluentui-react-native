@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Divider } from '@fluentui-react-native/divider';
 import { Menu, MenuTrigger, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
-import { Overflow, OverflowItem, useOverflowMenu, OverflowMenu } from '@fluentui-react-native/overflow';
+import { Overflow, OverflowItem, useOverflowMenu } from '@fluentui-react-native/overflow';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
@@ -41,7 +42,7 @@ interface OverflowMenuProps {
   onItemPress: (id: string) => void;
 }
 
-function CustomOverflowMenu(props: OverflowMenuProps) {
+function OverflowMenu(props: OverflowMenuProps) {
   const { showMenu, visibleMenuItems, menuTriggerRef, onMenuTriggerLayout } = useOverflowMenu();
   if (showMenu) {
     return (
@@ -74,11 +75,6 @@ function CustomOverflowMenu(props: OverflowMenuProps) {
 }
 
 function OverflowMainTest() {
-  const getMenuItemProps = (id: string) => ({
-    children: itemLabels[id],
-    onClick: () => console.log(id),
-  });
-
   return (
     <View style={overflowTestPageStyles.containerStyle}>
       <Overflow itemIDs={items}>
@@ -87,7 +83,24 @@ function OverflowMainTest() {
             <Button onClick={() => console.log(item)}>{itemLabels[item]}</Button>
           </OverflowItem>
         ))}
-        <OverflowMenu mapMenuItemProps={getMenuItemProps} />
+        <OverflowMenu onItemPress={console.log} />
+      </Overflow>
+    </View>
+  );
+}
+
+function OverflowWidthExample(props: { width: number; dontHideBeforeReady?: boolean }) {
+  const style = React.useMemo<ViewStyle>(() => ({ width: props.width }), [props]);
+  return (
+    <View style={overflowTestPageStyles.containerStyle}>
+      <Text variant="body1Strong">{`Width: ${props.width}`}</Text>
+      <Overflow dontHideBeforeReady={props.dontHideBeforeReady} style={style} itemIDs={items}>
+        {items.map((item) => (
+          <OverflowItem overflowID={item} key={item}>
+            <Button>Item {' ' + item}</Button>
+          </OverflowItem>
+        ))}
+        <OverflowMenu onItemPress={console.log} />
       </Overflow>
     </View>
   );
@@ -97,76 +110,14 @@ function OverflowDifferentWidthTest() {
   return (
     <View>
       <Text variant="heroStandard">Hidden Before Layout</Text>
-      <View style={overflowTestPageStyles.containerStyle}>
-        <Text variant="body1Strong">Width: 400</Text>
-        <Overflow style={overflowTestPageStyles.width400} itemIDs={items}>
-          {items.map((item) => (
-            <OverflowItem overflowID={item} key={item}>
-              <Button>Item {' ' + item}</Button>
-            </OverflowItem>
-          ))}
-          <CustomOverflowMenu onItemPress={console.log} />
-        </Overflow>
-      </View>
-      <View style={overflowTestPageStyles.containerStyle}>
-        <Text variant="body1Strong">Width: 250</Text>
-        <Overflow style={overflowTestPageStyles.width250} itemIDs={items}>
-          {items.map((item) => (
-            <OverflowItem overflowID={item} key={item}>
-              <Button>Item {' ' + item}</Button>
-            </OverflowItem>
-          ))}
-          <CustomOverflowMenu onItemPress={console.log} />
-        </Overflow>
-      </View>
-      <View style={overflowTestPageStyles.containerStyle}>
-        <Text variant="body1Strong">Width: 100</Text>
-        <Overflow style={overflowTestPageStyles.width100} itemIDs={items}>
-          {items.map((item) => (
-            <OverflowItem overflowID={item} key={item}>
-              <Button>Item {' ' + item}</Button>
-            </OverflowItem>
-          ))}
-          <CustomOverflowMenu onItemPress={console.log} />
-        </Overflow>
-      </View>
+      <OverflowWidthExample width={100} />
+      <OverflowWidthExample width={250} />
+      <OverflowWidthExample width={400} />
       <Divider />
       <Text variant="heroStandard">Visible Before Layout</Text>
-      <View style={overflowTestPageStyles.containerStyle}>
-        <Text variant="body1Strong">Width: 400</Text>
-        <Overflow dontHideBeforeReady style={overflowTestPageStyles.width400} itemIDs={items}>
-          {items.map((item) => (
-            <OverflowItem overflowID={item} key={item}>
-              <Button>Item {' ' + item}</Button>
-            </OverflowItem>
-          ))}
-          <CustomOverflowMenu onItemPress={console.log} />
-        </Overflow>
-      </View>
-      <View style={overflowTestPageStyles.containerStyle}>
-        <Text variant="body1Strong">Width: 250</Text>
-        <Overflow dontHideBeforeReady style={overflowTestPageStyles.width250} itemIDs={items}>
-          {items.map((item) => (
-            <OverflowItem overflowID={item} key={item}>
-              <Button>Item {' ' + item}</Button>
-            </OverflowItem>
-          ))}
-          <CustomOverflowMenu onItemPress={console.log} />
-        </Overflow>
-      </View>
-      <View style={overflowTestPageStyles.containerStyle}>
-        <Text variant="body1Strong" style={overflowTestPageStyles.containerStyle}>
-          Width: 100
-        </Text>
-        <Overflow dontHideBeforeReady style={overflowTestPageStyles.width100} itemIDs={items}>
-          {items.map((item) => (
-            <OverflowItem overflowID={item} key={item}>
-              <Button>Item {' ' + item}</Button>
-            </OverflowItem>
-          ))}
-          <CustomOverflowMenu onItemPress={console.log} />
-        </Overflow>
-      </View>
+      <OverflowWidthExample dontHideBeforeReady width={100} />
+      <OverflowWidthExample dontHideBeforeReady width={250} />
+      <OverflowWidthExample dontHideBeforeReady width={400} />
     </View>
   );
 }
