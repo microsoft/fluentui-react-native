@@ -39,7 +39,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
   const overflowItemUpdateCallbacks = React.useRef<Record<string, OverflowItemChangeHandler>>({}).current;
   const overflowMenuRef = React.useRef<View>(null);
 
-  const [containerSize, setContainerSize] = React.useState<LayoutSize>();
+  const [containerSize, setContainerSize] = React.useState<LayoutSize | null>(null);
   const [overflowState, setOverflowState] = React.useState<PartialOverflowState>({
     hasOverflow: false,
     itemVisibility: {},
@@ -135,18 +135,20 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
 
   // This layout effect is run before re-rendering, allowing us to calculate what's visible / invisible with our overflow manager.
   React.useLayoutEffect(() => {
-    if (!layoutState.container) {
-      overflowManager.initialize({
-        debug: debug,
-        initialContainerSize: containerSize,
-        onOverflowUpdate,
-        onUpdateItemDimension,
-        onUpdateItemVisibility,
-      });
-      overflowManager.update();
-      setLayoutState((prev) => ({ ...prev, container: true }));
-    } else {
-      overflowManager.update(containerSize);
+    if (containerSize) {
+      if (!layoutState.container) {
+        overflowManager.initialize({
+          debug: debug,
+          initialContainerSize: containerSize,
+          onOverflowUpdate,
+          onUpdateItemDimension,
+          onUpdateItemVisibility,
+        });
+        overflowManager.update();
+        setLayoutState((prev) => ({ ...prev, container: true }));
+      } else {
+        overflowManager.update(containerSize);
+      }
     }
     // We only want to run this layout effect whenever the container's size updates.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -158,6 +160,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
   return {
     state: {
       ...overflowState,
+      containerSize,
       initialOverflowLayoutDone: initialLayoutDone,
       overflowMenuRef: overflowMenuRef,
       register: register,

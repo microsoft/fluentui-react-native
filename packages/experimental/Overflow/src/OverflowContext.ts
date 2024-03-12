@@ -5,6 +5,7 @@ import type { OverflowState } from './Overflow/Overflow.types';
 const noop = () => null;
 
 export const OverflowContext = createContext<OverflowState>({
+  containerSize: null,
   hasOverflow: false,
   initialOverflowLayoutDone: false,
   itemVisibility: {},

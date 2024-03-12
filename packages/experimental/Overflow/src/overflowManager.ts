@@ -44,7 +44,7 @@ export function createOverflowManager(): OverflowManager {
   // Comparison functions to order items in priority queue. Items with a larger priority value are sorted first. If there's a tie, then
   // the initial ordering set when adding an item to the manager is used.
   const compareVisibleItems = (lt: string | null, rt: string | null): number => {
-    if (!lt || !rt) {
+    if (!lt || !rt || !items[lt] || !items[rt]) {
       return 0;
     }
     if (items[lt].priority !== items[rt].priority) {
@@ -84,6 +84,7 @@ export function createOverflowManager(): OverflowManager {
 
   // Method for emitting overflow update events.
   const dispatchUpdates = (updates: ProcessOverflowItemsReturn[]) => {
+    log('Dispatching updates:', updates);
     for (const update of updates) {
       if (update.type === 'dimension' && onUpdateItemDimension) {
         let newSize = containerSize.width - padding;
@@ -186,7 +187,7 @@ export function createOverflowManager(): OverflowManager {
 
   // Public method to update properties of a given item
   const updateItem = (id: string, updates: Partial<OverflowItemEntry>) => {
-    if (!updates.size || !shouldShrinkMinVisible()) {
+    if (!shouldShrinkMinVisible()) {
       items[id] = { ...items[id], ...updates };
     }
     update();
@@ -201,9 +202,12 @@ export function createOverflowManager(): OverflowManager {
 
   // Public method to register an overflow item
   const addItem = (entry: OverflowItemEntry) => {
-    updateItem(entry.id, { ...entry, initialOrder: numItems++ });
+    items[entry.id] = { ...entry, initialOrder: numItems++ };
     visibleItems.enqueue(entry.id);
     forceDispatch = true;
+    log(`New item #${numItems}: ${JSON.stringify(entry)}`);
+    log(`Item map: ${JSON.stringify(items, undefined, 2)}`);
+    log('----------------------------------------------');
 
     update();
   };

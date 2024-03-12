@@ -12,7 +12,8 @@ import { useOverflowContext } from '../OverflowContext';
  */
 export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
   const { overflowID, priority, onOverflowItemChange: onOveflowItemChange } = props;
-  const { itemVisibility, initialOverflowLayoutDone, disconnect, register, setLayoutState, updateItem } = useOverflowContext();
+  const { containerSize, itemVisibility, initialOverflowLayoutDone, disconnect, register, setLayoutState, updateItem } =
+    useOverflowContext();
 
   const [size, setSize] = React.useState<LayoutSize>();
   const [controlledSize, setControlledSize] = React.useState<LayoutSize | null>(null);
@@ -43,19 +44,27 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onOveflowItemChange]);
 
-  const onLayout = React.useCallback(
-    (e: LayoutChangeEvent) => {
-      const itemSize = { width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height };
-      setSize(itemSize);
-      updateItem({ id: overflowID, size: itemSize, priority: priority });
+  React.useLayoutEffect(() => {
+    // When rendered in a ScrollView on win32, the layout event initially returns a width = 0 before getting the correct layout values.
+    // By waiting until the container size is more accurate, we reduce unnecessary updates in the OverflowManager and reduce visual quirks / OverflowItem pop-in.
+    if (containerSize && containerSize.width > 0 && size) {
+      updateItem({ id: overflowID, size: size, priority: priority });
 
       if (!initialOverflowLayoutDone) {
         setLayoutState({ type: 'item', id: overflowID, layoutDone: true });
       }
+    }
+    // This effect should only run when the size of the item or container changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [size, containerSize]);
 
+  const onLayout = React.useCallback(
+    (e: LayoutChangeEvent) => {
+      const itemSize = { width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height };
+      setSize(itemSize);
       props.onLayout && props.onLayout(e);
     },
-    [initialOverflowLayoutDone, overflowID, priority, props, setLayoutState, updateItem],
+    [props],
   ); // Get item dimensions
 
   const styles = React.useMemo<ViewStyle>(() => {
