@@ -2,6 +2,57 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Mon, 11 Mar 2024 23:09:49 GMT",
+      "version": "0.19.10",
+      "tag": "@uifabricshared/theming-react-native_v0.19.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "27e32411d737885e04f388545b52ef7fc3151faa",
+            "comment": "Update deprecation messages on theme objects"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:09 GMT",
+      "version": "0.19.9",
+      "tag": "@uifabricshared/theming-react-native_v0.19.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Feb 2024 23:27:46 GMT",
+      "version": "0.19.8",
+      "tag": "@uifabricshared/theming-react-native_v0.19.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.25.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.33.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 22 Jan 2024 22:09:17 GMT",
       "version": "0.19.7",
       "tag": "@uifabricshared/theming-react-native_v0.19.7",

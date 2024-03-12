@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 20:39:09 GMT",
+      "version": "0.19.11",
+      "tag": "@uifabricshared/theming-ramp_v0.19.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jan 2024 21:06:26 GMT",
       "version": "0.19.10",
       "tag": "@uifabricshared/theming-ramp_v0.19.10",

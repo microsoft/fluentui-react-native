@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/dependency-profiles",
-  "version": "0.7.3",
+  "version": "0.7.16",
   "description": "@rnx-kit/align-deps profiles covering packages published from FluentUI-React-Native",
   "license": "MIT",
   "files": [
@@ -36,11 +36,9 @@
     "@fluentui-react-native/experimental-expander": "*",
     "@fluentui-react-native/experimental-menu-button": "*",
     "@fluentui-react-native/experimental-native-date-picker": "*",
-    "@fluentui-react-native/experimental-radio-group": "*",
     "@fluentui-react-native/experimental-shadow": "*",
     "@fluentui-react-native/experimental-shimmer": "*",
     "@fluentui-react-native/experimental-stack": "*",
-    "@fluentui-react-native/experimental-text": "*",
     "@fluentui-react-native/focus-trap-zone": "*",
     "@fluentui-react-native/focus-zone": "*",
     "@fluentui-react-native/framework": "*",
@@ -58,7 +56,7 @@
     "@fluentui-react-native/popover": "*",
     "@fluentui-react-native/pressable": "*",
     "@fluentui-react-native/radio-group": "*",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/separator": "*",
     "@fluentui-react-native/stack": "*",
     "@fluentui-react-native/styling-utils": "*",

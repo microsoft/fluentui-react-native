@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 01 Mar 2024 20:39:11 GMT",
+      "version": "0.26.1",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.26.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 03:22:29 GMT",
+      "version": "0.26.0",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.26.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nerios@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "43dde5da3c68516d6c10dabfcebde7ee11c43cf1",
+            "comment": "Adding useControllableValue hook."
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Feb 2024 23:27:46 GMT",
+      "version": "0.25.8",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.25.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "dbd7aadff1ba8c61fd5d8aedde8b079c650e37fa",
+            "comment": "Rework package json version notation"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 22 Jan 2024 22:09:17 GMT",
       "version": "0.25.7",
       "tag": "@fluentui-react-native/interactive-hooks_v0.25.7",

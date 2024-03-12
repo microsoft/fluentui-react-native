@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/use-slots
 
-This log was last generated on Thu, 09 Nov 2023 02:39:06 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.2
+
+Fri, 01 Mar 2024 20:39:08 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.9.1
+
+Thu, 22 Feb 2024 23:27:44 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/use-slot to v0.5.1
 
 ## 0.9.0
 

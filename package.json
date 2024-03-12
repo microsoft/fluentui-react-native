@@ -62,7 +62,7 @@
     "scripts"
   ],
   "resolutions": {
-    "es5-ext": "0.10.53",
+    "es5-ext": "0.10.63",
     "@types/react": "^18.2.0",
     "micromatch": "^4.0.0",
     "react-native-svg": "^13.7.0",

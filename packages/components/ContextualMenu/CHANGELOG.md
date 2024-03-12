@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Mon, 22 Jan 2024 22:09:17 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Mar 2024 20:39:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.14
+
+Fri, 01 Mar 2024 20:39:10 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.23.13
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.25.10
+- Bump @fluentui-react-native/focus-zone to v0.16.9
+- Bump @fluentui-react-native/icon to v0.20.10
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
+- Bump @fluentui-react-native/text to v0.22.9
+- Bump @fluentui-react-native/pressable to v0.11.9
+
+## 0.23.12
+
+Thu, 22 Feb 2024 23:27:44 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.25.9
+- Bump @fluentui-react-native/focus-zone to v0.16.8
+- Bump @fluentui-react-native/icon to v0.20.9
+- Bump @fluentui-react-native/interactive-hooks to v0.25.8
+- Bump @fluentui-react-native/text to v0.22.8
+- Bump @fluentui-react-native/tokens to v0.22.6
+- Bump @uifabricshared/foundation-compose to v1.14.21
+- Bump @fluentui-react-native/pressable to v0.11.8
+
+## 0.23.11
+
+Thu, 01 Feb 2024 20:54:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.25.8
 
 ## 0.23.10
 
