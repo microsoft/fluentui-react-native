@@ -6,6 +6,7 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Divider } from '@fluentui-react-native/divider';
 import { Menu, MenuTrigger, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
 import { Overflow, OverflowItem, useOverflowMenu } from '@fluentui-react-native/overflow';
+import { TabList, Tab } from '@fluentui-react-native/tablist';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
@@ -59,13 +60,11 @@ function OverflowMenu(props: OverflowMenuProps) {
           />
         </MenuTrigger>
         <MenuPopover>
-          {items
-            .filter((id) => visibleMenuItems.includes[id])
-            .map((id) => (
-              <MenuItem onClick={() => props.onItemPress(id)} key={id}>
-                {itemLabels[id]}
-              </MenuItem>
-            ))}
+          {visibleMenuItems.map((id) => (
+            <MenuItem onClick={() => props.onItemPress(id)} key={id}>
+              {itemLabels[id]}
+            </MenuItem>
+          ))}
         </MenuPopover>
       </Menu>
     );
@@ -84,6 +83,24 @@ function OverflowMainTest() {
           </OverflowItem>
         ))}
         <OverflowMenu onItemPress={console.log} />
+      </Overflow>
+    </View>
+  );
+}
+
+function OverflowTabTest() {
+  const [key, setKey] = React.useState('a');
+  return (
+    <View style={overflowTestPageStyles.containerStyle}>
+      <Overflow dontHideBeforeReady debug itemIDs={items}>
+        <TabList selectedKey={key} onTabSelect={setKey}>
+          {items.map((item) => (
+            <OverflowItem priority={key === item ? 2 : 1} key={item} overflowID={item}>
+              <Tab tabKey={item}>{itemLabels[item]}</Tab>
+            </OverflowItem>
+          ))}
+          <OverflowMenu onItemPress={setKey} />
+        </TabList>
       </Overflow>
     </View>
   );
@@ -134,6 +151,10 @@ export const OverflowTest: React.FunctionComponent = () => {
         {
           name: 'Overflow',
           component: OverflowMainTest,
+        },
+        {
+          name: 'Overflow TabList',
+          component: OverflowTabTest,
         },
         {
           name: 'Overflow Variable Width',
