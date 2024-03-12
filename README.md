@@ -43,7 +43,7 @@ import { Checkbox } from '@fluentui/react-native';
 // In App.js in a new project
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Checkbox } from '@fluentui/react-native';
+import { CheckboxV1 as Checkbox } from '@fluentui/react-native';
 function HelloWorldApp() {
   return (
     <View
