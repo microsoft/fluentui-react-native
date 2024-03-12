@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Divider } from '@fluentui-react-native/divider';
 import { Menu, MenuTrigger, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
-import { Overflow, OverflowItem, useOverflowMenu } from '@fluentui-react-native/overflow';
+import { Overflow, OverflowItem, useOverflowMenu, OverflowMenu } from '@fluentui-react-native/overflow';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
@@ -32,31 +32,34 @@ const overflowTestPageStyles = StyleSheet.create({
   width400: {
     width: 400,
   },
+  menuTrigger: {
+    alignSelf: 'center',
+  },
 });
 
 interface OverflowMenuProps {
   onItemPress: (id: string) => void;
 }
 
-function OverflowMenu(props: OverflowMenuProps) {
-  const { showMenu, menuItemVisibilities, menuRef, onLayout } = useOverflowMenu();
+function CustomOverflowMenu(props: OverflowMenuProps) {
+  const { showMenu, visibleMenuItems, menuTriggerRef, onMenuTriggerLayout } = useOverflowMenu();
   if (showMenu) {
     return (
       <Menu>
         <MenuTrigger>
           <Button
             accessibilityLabel="More options"
-            onLayout={onLayout}
-            style={{ alignSelf: 'center' }}
+            onLayout={onMenuTriggerLayout}
+            style={overflowTestPageStyles.menuTrigger}
             appearance="subtle"
             iconOnly
             icon={{ svgSource: { src: MoreHorizontalIcon, viewBox: '0 0 20 20' } }}
-            componentRef={menuRef}
+            componentRef={menuTriggerRef}
           />
         </MenuTrigger>
         <MenuPopover>
           {items
-            .filter((id) => menuItemVisibilities[id])
+            .filter((id) => visibleMenuItems.includes[id])
             .map((id) => (
               <MenuItem onClick={() => props.onItemPress(id)} key={id}>
                 {itemLabels[id]}
@@ -70,22 +73,27 @@ function OverflowMenu(props: OverflowMenuProps) {
   }
 }
 
-export function OverflowMainTest() {
+function OverflowMainTest() {
+  const getMenuItemProps = (id: string) => ({
+    children: itemLabels[id],
+    onClick: () => console.log(id),
+  });
+
   return (
     <View style={overflowTestPageStyles.containerStyle}>
       <Overflow itemIDs={items}>
         {items.map((item) => (
           <OverflowItem key={item} overflowID={item}>
-            <Button>{itemLabels[item]}</Button>
+            <Button onClick={() => console.log(item)}>{itemLabels[item]}</Button>
           </OverflowItem>
         ))}
-        <OverflowMenu onItemPress={console.log} />
+        <OverflowMenu mapMenuItemProps={getMenuItemProps} />
       </Overflow>
     </View>
   );
 }
 
-export function OverflowDifferentWidthTest() {
+function OverflowDifferentWidthTest() {
   return (
     <View>
       <Text variant="heroStandard">Hidden Before Layout</Text>
@@ -97,7 +105,7 @@ export function OverflowDifferentWidthTest() {
               <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
-          <OverflowMenu onItemPress={console.log} />
+          <CustomOverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
       <View style={overflowTestPageStyles.containerStyle}>
@@ -108,7 +116,7 @@ export function OverflowDifferentWidthTest() {
               <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
-          <OverflowMenu onItemPress={console.log} />
+          <CustomOverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
       <View style={overflowTestPageStyles.containerStyle}>
@@ -119,7 +127,7 @@ export function OverflowDifferentWidthTest() {
               <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
-          <OverflowMenu onItemPress={console.log} />
+          <CustomOverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
       <Divider />
@@ -132,7 +140,7 @@ export function OverflowDifferentWidthTest() {
               <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
-          <OverflowMenu onItemPress={console.log} />
+          <CustomOverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
       <View style={overflowTestPageStyles.containerStyle}>
@@ -143,7 +151,7 @@ export function OverflowDifferentWidthTest() {
               <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
-          <OverflowMenu onItemPress={console.log} />
+          <CustomOverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
       <View style={overflowTestPageStyles.containerStyle}>
@@ -156,7 +164,7 @@ export function OverflowDifferentWidthTest() {
               <Button>Item {' ' + item}</Button>
             </OverflowItem>
           ))}
-          <OverflowMenu onItemPress={console.log} />
+          <CustomOverflowMenu onItemPress={console.log} />
         </Overflow>
       </View>
     </View>
@@ -164,7 +172,8 @@ export function OverflowDifferentWidthTest() {
 }
 
 export const OverflowTest: React.FunctionComponent = () => {
-  const description = 'Experimental component based off web v9 Overflow.';
+  const description =
+    "The Overflow component is a container which renders OverflowItems and an OverflowMenu. As the container shrinks, OverflowItems that don't fit will be hidden and re-rendered as an item within the OverflowMenu.";
 
   return (
     <Test

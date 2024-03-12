@@ -16,6 +16,7 @@ export const OverflowItem = stagedComponent<OverflowItemProps>((userProps: Overf
     if (!state.visible) {
       return null;
     }
+
     return <View {...merged}>{children}</View>;
   };
 });

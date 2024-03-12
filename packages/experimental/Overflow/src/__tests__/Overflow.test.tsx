@@ -4,7 +4,7 @@ import { ButtonV1 } from '@fluentui-react-native/button';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
-import { Overflow, OverflowItem } from '../';
+import { Overflow, OverflowItem, OverflowMenu } from '../';
 
 const items = ['a', 'b', 'c'];
 
@@ -18,6 +18,7 @@ describe('Overflow component tests', () => {
               <ButtonV1>{item}</ButtonV1>
             </OverflowItem>
           ))}
+          <OverflowMenu />
         </Overflow>,
       )
       .toJSON();
@@ -33,6 +34,7 @@ describe('Overflow component tests', () => {
               <ButtonV1>{item}</ButtonV1>
             </OverflowItem>
           ))}
+          <OverflowMenu />
         </Overflow>
       ),
       2,
@@ -48,6 +50,7 @@ describe('Overflow component tests', () => {
               <ButtonV1>{item}</ButtonV1>
             </OverflowItem>
           ))}
+          <OverflowMenu />
         </Overflow>
       ),
       2,

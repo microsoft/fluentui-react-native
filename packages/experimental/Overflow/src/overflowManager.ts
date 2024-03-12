@@ -58,6 +58,8 @@ export function createOverflowManager(): OverflowManager {
     return -1 * compareVisibleItems(lt, rt);
   };
 
+  const sortByInitialOrder = (lt: string, rt: string) => items[lt].initialOrder - items[rt].initialOrder;
+
   // Priority queue of item ids that are to be shown or hidden.
   const visibleItems: PriorityQueue<string> = createPriorityQueue(compareVisibleItems);
   const invisibleItems: PriorityQueue<string> = createPriorityQueue(compareInvisibleItems);
@@ -93,8 +95,8 @@ export function createOverflowManager(): OverflowManager {
         onUpdateItemDimension(payload);
       } else {
         const payload: OverflowUpdatePayload = {
-          visibleIds: [...visibleItems.all()],
-          invisibleIds: [...invisibleItems.all()],
+          visibleIds: [...visibleItems.all()].sort(sortByInitialOrder), // need to unsort ordering returned by min-heap.
+          invisibleIds: [...invisibleItems.all()].sort(sortByInitialOrder),
         };
         onOverflowUpdate && onOverflowUpdate(payload);
         // dispatch visibility updates to individual items

@@ -8,5 +8,6 @@ export { overflowItemName } from './OverflowItem/OverflowItem.types';
 export type { OverflowItemProps, OverflowItemState } from './OverflowItem/OverflowItem.types';
 export { useOverflowMenu } from './OverflowMenu/useOverflowMenu';
 export { overflowMenuName } from './OverflowMenu/OverflowMenu.types';
-export type { OverflowMenuState } from './OverflowMenu/OverflowMenu.types';
+export type { OverflowMenuState, OverflowMenuProps } from './OverflowMenu/OverflowMenu.types';
+export { OverflowMenu } from './OverflowMenu/OverflowMenu';
 export { OverflowContext } from './OverflowContext';

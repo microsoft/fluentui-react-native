@@ -25,18 +25,12 @@ export function useOverflowMenu(): OverflowMenuState {
   );
 
   // Visibility of a menu item is the inverse of whether an item is visible within the overflow
-  const menuItemVisibilities = React.useMemo(() => {
-    const ret = {};
-    for (const key in itemVisibility) {
-      ret[key] = !itemVisibility[key];
-    }
-    return ret;
-  }, [itemVisibility]);
+  const visibleMenuItems = React.useMemo(() => Object.keys(itemVisibility).filter((item) => !itemVisibility[item]), [itemVisibility]);
 
   return {
     showMenu: !initialOverflowLayoutDone || hasOverflow,
-    menuItemVisibilities: menuItemVisibilities,
-    menuRef: overflowMenuRef,
-    onLayout: onButtonLayout,
+    visibleMenuItems: visibleMenuItems,
+    menuTriggerRef: overflowMenuRef,
+    onMenuTriggerLayout: onButtonLayout,
   };
 }

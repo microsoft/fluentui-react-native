@@ -36,7 +36,8 @@ export type OverflowItemLayoutChangePayload = {
   type: 'layout';
   newLayout: LayoutSize | null;
 };
-export type OverflowItemChangeHandler = (data: OverflowItemVisibilityChangePayload | OverflowItemLayoutChangePayload) => void;
+export type OverflowItemChangePayload = OverflowItemVisibilityChangePayload | OverflowItemLayoutChangePayload;
+export type OverflowItemChangeHandler = (data: OverflowItemChangePayload) => void;
 
 // Data passed to the Overflow Context
 export interface OverflowState {

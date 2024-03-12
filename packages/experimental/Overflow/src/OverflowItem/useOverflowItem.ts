@@ -4,7 +4,7 @@ import type { ViewStyle, LayoutChangeEvent } from 'react-native';
 import { mergeStyles } from '@fluentui-react-native/framework';
 
 import type { OverflowItemInfo, OverflowItemProps } from './OverflowItem.types';
-import type { LayoutSize, OverflowItemChangeHandler } from '../Overflow/Overflow.types';
+import type { LayoutSize, OverflowItemChangePayload } from '../Overflow/Overflow.types';
 import { useOverflowContext } from '../OverflowContext';
 
 /**
@@ -17,8 +17,8 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
   const [size, setSize] = React.useState<LayoutSize>();
   const [controlledSize, setControlledSize] = React.useState<LayoutSize | null>(null);
 
-  const handleOverflowItemChange: OverflowItemChangeHandler = React.useCallback(
-    (data) => {
+  const handleOverflowItemChange = React.useCallback(
+    (data: OverflowItemChangePayload) => {
       if (data.id === overflowID && data.type === 'layout') {
         setControlledSize(data.newLayout);
       }
