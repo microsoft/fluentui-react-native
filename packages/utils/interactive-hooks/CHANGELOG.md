@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 01 Mar 2024 20:39:11 GMT and should not be manually modified.
+This log was last generated on Tue, 12 Mar 2024 22:16:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.26.2
+
+Tue, 12 Mar 2024 22:16:47 GMT
+
+### Patches
+
+- win32 has implemented the focus method on UIManager for quite a while at this point (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.26.1
 
