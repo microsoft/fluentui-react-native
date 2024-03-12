@@ -1,8 +1,5 @@
 import type { LayoutChangeEvent, View } from 'react-native';
 
-import type { ButtonProps } from '@fluentui-react-native/button';
-import type { MenuProps, MenuItemProps } from '@fluentui-react-native/menu';
-
 export const overflowMenuName = 'OverflowMenu';
 
 export interface OverflowMenuState {
@@ -14,13 +11,4 @@ export interface OverflowMenuState {
   menuTriggerRef: React.RefObject<View>;
   /** Callback for RN onLayout event */
   onMenuTriggerLayout: (e: LayoutChangeEvent) => void;
-}
-
-export interface OverflowMenuProps {
-  /** Props for the menu itself */
-  menuProps?: MenuProps;
-  /** Props for the menu trigger */
-  triggerProps?: ButtonProps;
-  /** Function that maps an overflowID to the menu item props it will render */
-  mapMenuItemProps?: (overflowID: string) => MenuItemProps;
 }
