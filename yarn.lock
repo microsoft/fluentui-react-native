@@ -18331,24 +18331,27 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^3.1.1":
-  version: 3.2.16
-  resolution: "react-native-test-app@npm:3.2.16"
+  version: 3.3.0
+  resolution: "react-native-test-app@npm:3.3.0"
   dependencies:
     "@rnx-kit/react-native-host": ^0.4.4
     ajv: ^8.0.0
-    chalk: ^4.1.0
     cliui: ^8.0.0
     fast-xml-parser: ^4.0.0
     prompts: ^2.4.0
     semver: ^7.3.5
     uuid: ^8.3.2
+    yoctocolors: ^2.0.0
   peerDependencies:
+    "@callstack/react-native-visionos": 0.73
     "@expo/config-plugins": ">=5.0"
     react: 17.0.1 - 18.2
     react-native: ^0.0.0-0 || 0.66 - 0.73 || 1000.0.0
     react-native-macos: ^0.0.0-0 || 0.66 || 0.68 || 0.71 - 0.73
     react-native-windows: ^0.0.0-0 || 0.66 - 0.73
   peerDependenciesMeta:
+    "@callstack/react-native-visionos":
+      optional: true
     "@expo/config-plugins":
       optional: true
     react-native-macos:
@@ -18360,7 +18363,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 825403c63132d202ba17094245f0238f27d384b509dc58556a100860dbf864881a6773f6a20088fff8ab0302ec28bb5531a1a1a00bb8d1db3f8842492d86c486
+  checksum: d1761b32400ea05d3cef059ced197fddcd341c0d9f08862e25032221bfecbcb2727f94e9d295623458be4ef021e9e030da6f30817a9bff5b38ea8dfa8208a656
   languageName: node
   linkType: hard
 
@@ -21659,6 +21662,13 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"yoctocolors@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "yoctocolors@npm:2.0.0"
+  checksum: ae0e5a244bf5c2be111bff84cc5e40751da4df5a26e90c60485df14d1334ff349a1af2908af6c12e90f8d534bbb5e03009182437639e95bfebb6a99b9370ed14
   languageName: node
   linkType: hard
 
