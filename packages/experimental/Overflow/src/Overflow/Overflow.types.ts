@@ -9,8 +9,6 @@ export type LayoutSize = Pick<LayoutRectangle, 'width' | 'height'>;
 export const overflowName = 'Overflow';
 
 export interface OverflowProps extends ViewProps {
-  /** Set true to turn on logs in the overflow manager */
-  debug?: boolean;
   /**  Horizontal padding to add to the container */
   padding?: ViewStyle['padding'];
   /**  List of all IDs that will be rendered in the overflow container */
@@ -42,7 +40,7 @@ export type OverflowItemChangeHandler = (data: OverflowItemChangePayload) => voi
 // Data passed to the Overflow Context
 export interface OverflowState {
   /** Size of the Overflow Container */
-  containerSize: LayoutSize | null;
+  containerSize?: LayoutSize;
   /**  Flag set to true when one or more items are hidden by the manager */
   hasOverflow: boolean;
   /**  Flag set to true once the overflow manager runs its first calculation to see which items should initially be visible / hidden */

@@ -32,14 +32,14 @@ interface LayoutState {
  *
  * Returns state to feed into context provider and props (with an important onLayout callback) to pass to Overflow's containing view. */
 export function useOverflow(props: OverflowProps): OverflowInfo {
-  const { debug = false, itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback } = props;
+  const { itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback } = props;
 
   // The overflow manager records layout info of the container, menu, and items and calculates what is visible and what isn't.
   const overflowManager = React.useRef<OverflowManager>(createOverflowManager()).current;
   const overflowItemUpdateCallbacks = React.useRef<Record<string, OverflowItemChangeHandler>>({}).current;
   const overflowMenuRef = React.useRef<View>(null);
 
-  const [containerSize, setContainerSize] = React.useState<LayoutSize | null>(null);
+  const [containerSize, setContainerSize] = React.useState<LayoutSize | undefined>(undefined);
   const [overflowState, setOverflowState] = React.useState<PartialOverflowState>({
     hasOverflow: false,
     itemVisibility: {},
@@ -135,20 +135,21 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
 
   // This layout effect is run before re-rendering, allowing us to calculate what's visible / invisible with our overflow manager.
   React.useLayoutEffect(() => {
-    if (containerSize) {
-      if (!layoutState.container) {
-        overflowManager.initialize({
-          debug: debug,
-          initialContainerSize: containerSize,
-          onOverflowUpdate,
-          onUpdateItemDimension,
-          onUpdateItemVisibility,
-        });
-        overflowManager.update();
-        setLayoutState((prev) => ({ ...prev, container: true }));
-      } else {
-        overflowManager.update(containerSize);
-      }
+    if (!containerSize) {
+      return;
+    }
+
+    if (!layoutState.container) {
+      overflowManager.initialize({
+        initialContainerSize: containerSize,
+        onOverflowUpdate,
+        onUpdateItemDimension,
+        onUpdateItemVisibility,
+      });
+      overflowManager.update();
+      setLayoutState((prev) => ({ ...prev, container: true }));
+    } else {
+      overflowManager.update(containerSize);
     }
     // We only want to run this layout effect whenever the container's size updates.
     // eslint-disable-next-line react-hooks/exhaustive-deps

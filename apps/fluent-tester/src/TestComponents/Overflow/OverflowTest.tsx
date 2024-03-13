@@ -92,7 +92,7 @@ function OverflowTabTest() {
   const [key, setKey] = React.useState('a');
   return (
     <View style={overflowTestPageStyles.containerStyle}>
-      <Overflow dontHideBeforeReady debug itemIDs={items}>
+      <Overflow dontHideBeforeReady itemIDs={items}>
         <TabList selectedKey={key} onTabSelect={setKey}>
           {items.map((item) => (
             <OverflowItem priority={key === item ? 2 : 1} key={item} overflowID={item}>
