@@ -91,9 +91,11 @@ export function createOverflowManager(): OverflowManager {
         if (invisibleItems.size() > 0) {
           newSize -= menuSize.width;
         }
-        const id = visibleItems.peek();
-        const payload = { id: id, update: update.shrinking ? { width: newSize, height: items[id].size.height } : null };
-        onUpdateItemDimension(payload);
+        if (newSize > 0) {
+          const id = visibleItems.peek();
+          const payload = { id: id, update: update.shrinking ? { width: newSize, height: items[id].size.height } : null };
+          onUpdateItemDimension(payload);
+        }
       } else {
         const payload: OverflowUpdatePayload = {
           visibleIds: [...visibleItems.all()].sort(sortByInitialOrder), // need to unsort ordering returned by min-heap.
