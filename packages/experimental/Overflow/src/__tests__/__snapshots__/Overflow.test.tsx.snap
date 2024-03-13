@@ -14,292 +14,274 @@ exports[`Overflow component tests Overflow default 1`] = `
   }
 >
   <View
+    accessibilityLabel="a"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "multiselectable": undefined,
+        "required": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    enableFocusRing={true}
+    focusable={true}
+    keyUpEvents={
+      [
+        {
+          "key": " ",
+        },
+        {
+          "key": "Enter",
+        },
+      ]
+    }
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
     onLayout={[Function]}
-    overflowID="a"
-    style={{}}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "backgroundColor": "#ffffff",
+        "borderColor": "#d1d1d1",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "minHeight": 24,
+        "minWidth": 64,
+        "padding": 3,
+        "paddingHorizontal": 7,
+        "width": undefined,
+      }
+    }
   >
-    <View
-      accessibilityLabel="a"
-      accessibilityRole="button"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      enableFocusRing={true}
-      focusable={true}
-      keyUpEvents={
-        [
-          {
-            "key": " ",
-          },
-          {
-            "key": "Enter",
-          },
-        ]
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onLayout={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+    <Text
+      accessible={false}
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
       style={
         {
-          "alignItems": "center",
-          "alignSelf": "flex-start",
-          "backgroundColor": "#ffffff",
-          "borderColor": "#d1d1d1",
-          "borderRadius": 4,
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "minHeight": 24,
-          "minWidth": 64,
-          "padding": 3,
-          "paddingHorizontal": 7,
-          "width": undefined,
+          "color": "#242424",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 1,
+          "marginEnd": -2,
+          "marginStart": 0,
+          "marginTop": -1,
         }
       }
     >
-      <Text
-        accessible={false}
-        ellipsizeMode="tail"
-        numberOfLines={0}
-        onAccessibilityTap={[Function]}
-        style={
-          {
-            "color": "#242424",
-            "fontFamily": "Segoe UI",
-            "fontSize": 12,
-            "fontWeight": "400",
-            "margin": 0,
-            "marginBottom": 1,
-            "marginEnd": -2,
-            "marginStart": 0,
-            "marginTop": -1,
-          }
-        }
-      >
-        a
-      </Text>
-    </View>
+      a
+    </Text>
   </View>
   <View
+    accessibilityLabel="b"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "multiselectable": undefined,
+        "required": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    enableFocusRing={true}
+    focusable={true}
+    keyUpEvents={
+      [
+        {
+          "key": " ",
+        },
+        {
+          "key": "Enter",
+        },
+      ]
+    }
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
     onLayout={[Function]}
-    overflowID="b"
-    style={{}}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "backgroundColor": "#ffffff",
+        "borderColor": "#d1d1d1",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "minHeight": 24,
+        "minWidth": 64,
+        "padding": 3,
+        "paddingHorizontal": 7,
+        "width": undefined,
+      }
+    }
   >
-    <View
-      accessibilityLabel="b"
-      accessibilityRole="button"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      enableFocusRing={true}
-      focusable={true}
-      keyUpEvents={
-        [
-          {
-            "key": " ",
-          },
-          {
-            "key": "Enter",
-          },
-        ]
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onLayout={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+    <Text
+      accessible={false}
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
       style={
         {
-          "alignItems": "center",
-          "alignSelf": "flex-start",
-          "backgroundColor": "#ffffff",
-          "borderColor": "#d1d1d1",
-          "borderRadius": 4,
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "minHeight": 24,
-          "minWidth": 64,
-          "padding": 3,
-          "paddingHorizontal": 7,
-          "width": undefined,
+          "color": "#242424",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 1,
+          "marginEnd": -2,
+          "marginStart": 0,
+          "marginTop": -1,
         }
       }
     >
-      <Text
-        accessible={false}
-        ellipsizeMode="tail"
-        numberOfLines={0}
-        onAccessibilityTap={[Function]}
-        style={
-          {
-            "color": "#242424",
-            "fontFamily": "Segoe UI",
-            "fontSize": 12,
-            "fontWeight": "400",
-            "margin": 0,
-            "marginBottom": 1,
-            "marginEnd": -2,
-            "marginStart": 0,
-            "marginTop": -1,
-          }
-        }
-      >
-        b
-      </Text>
-    </View>
+      b
+    </Text>
   </View>
   <View
+    accessibilityLabel="c"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "multiselectable": undefined,
+        "required": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    enableFocusRing={true}
+    focusable={true}
+    keyUpEvents={
+      [
+        {
+          "key": " ",
+        },
+        {
+          "key": "Enter",
+        },
+      ]
+    }
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
     onLayout={[Function]}
-    overflowID="c"
-    style={{}}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "backgroundColor": "#ffffff",
+        "borderColor": "#d1d1d1",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "minHeight": 24,
+        "minWidth": 64,
+        "padding": 3,
+        "paddingHorizontal": 7,
+        "width": undefined,
+      }
+    }
   >
-    <View
-      accessibilityLabel="c"
-      accessibilityRole="button"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "multiselectable": undefined,
-          "required": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      enableFocusRing={true}
-      focusable={true}
-      keyUpEvents={
-        [
-          {
-            "key": " ",
-          },
-          {
-            "key": "Enter",
-          },
-        ]
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onLayout={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+    <Text
+      accessible={false}
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      onAccessibilityTap={[Function]}
       style={
         {
-          "alignItems": "center",
-          "alignSelf": "flex-start",
-          "backgroundColor": "#ffffff",
-          "borderColor": "#d1d1d1",
-          "borderRadius": 4,
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "minHeight": 24,
-          "minWidth": 64,
-          "padding": 3,
-          "paddingHorizontal": 7,
-          "width": undefined,
+          "color": "#242424",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 1,
+          "marginEnd": -2,
+          "marginStart": 0,
+          "marginTop": -1,
         }
       }
     >
-      <Text
-        accessible={false}
-        ellipsizeMode="tail"
-        numberOfLines={0}
-        onAccessibilityTap={[Function]}
-        style={
-          {
-            "color": "#242424",
-            "fontFamily": "Segoe UI",
-            "fontSize": 12,
-            "fontWeight": "400",
-            "margin": 0,
-            "marginBottom": 1,
-            "marginEnd": -2,
-            "marginStart": 0,
-            "marginTop": -1,
-          }
-        }
-      >
-        c
-      </Text>
-    </View>
+      c
+    </Text>
   </View>
   <View
     accessibilityActions={
