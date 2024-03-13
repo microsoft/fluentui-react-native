@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add missing react-native peerDependencies",
-  "packageName": "@uifabricshared/foundation-composable",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

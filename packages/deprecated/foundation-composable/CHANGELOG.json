@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Wed, 13 Mar 2024 15:54:07 GMT",
+      "version": "0.12.5",
+      "tag": "@uifabricshared/foundation-composable_v0.12.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "61f5a09163d57858fae85be8c9a0687fd7fad3df",
+            "comment": "Add missing react-native peerDependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:08 GMT",
       "version": "0.12.4",
       "tag": "@uifabricshared/foundation-composable_v0.12.4",
