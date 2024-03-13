@@ -79,7 +79,10 @@ export function createOverflowManager(): OverflowManager {
 
   // Flag for whether the last visible item should be shrunk and whether we should emit OverflowItemVisibilityChange events.
   const shouldShrinkMinVisible = () => {
-    return visibleItems.size() === 1 && occupiedSize() > containerSize.width - padding;
+    const availableSize = containerSize.width - padding;
+    const shouldShrink = visibleItems.size() === 1 && occupiedSize() > availableSize;
+    const canShrink = availableSize - (invisibleItems.size() > 0 ? menuSize.width : 0) > 0;
+    return shouldShrink && canShrink;
   };
 
   // Method for emitting overflow update events.
@@ -91,11 +94,9 @@ export function createOverflowManager(): OverflowManager {
         if (invisibleItems.size() > 0) {
           newSize -= menuSize.width;
         }
-        if (newSize > 0) {
-          const id = visibleItems.peek();
-          const payload = { id: id, update: update.shrinking ? { width: newSize, height: items[id].size.height } : null };
-          onUpdateItemDimension(payload);
-        }
+        const id = visibleItems.peek();
+        const payload = { id: id, update: update.shrinking ? { width: newSize, height: items[id].size.height } : null };
+        onUpdateItemDimension(payload);
       } else {
         const payload: OverflowUpdatePayload = {
           visibleIds: [...visibleItems.all()].sort(sortByInitialOrder), // need to unsort ordering returned by min-heap.
