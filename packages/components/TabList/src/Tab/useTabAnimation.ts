@@ -2,11 +2,10 @@ import React from 'react';
 import { I18nManager, Platform } from 'react-native';
 import type { LayoutChangeEvent } from 'react-native';
 
-import type { TabProps, TabTokens } from './Tab.types';
-import { TabListContext } from '../TabList/TabListContext';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
-type OnLayoutHandler = (event: LayoutChangeEvent) => void;
-type RequiredTabAnimationTokens = Partial<TabTokens> & Required<Pick<TabTokens, 'borderWidth' | 'indicatorMargin' | 'indicatorThickness'>>;
+import type { TabProps, TabTokens } from './Tab.types';
+import type { TabListState } from '../TabList/TabList.types';
 
 /**
  * On win32, when a vertical tablist initially lays out, we sometimes get odd, large height values that cause the
@@ -18,12 +17,27 @@ const RENDERING_HEIGHT_LIMIT = 20_000;
 /**
  * This hook handles the logic on the tab side to correctly style and animate the TabListAnimatedIndicator.
  *
- * We save the layout information (width, height, x, y) of the Tab component by returning an onLayout handler, which calculates
- * animation values of the indicator, to attach to the root's slot props, and we color the animated indicator using the user
+ * We save the layout information (width, height, x, y) of the Tab component by returning the root's slot props with a
+ * LayoutEventHandler attached to track layout info of the tab, and we color the animated indicator using the user
  * defined tab indicator color token.
  */
-function useTabAnimationCore(tabKey: string, tokens: TabTokens, onLayout?: OnLayoutHandler): OnLayoutHandler {
-  const { addTabLayout, layout, vertical } = React.useContext(TabListContext);
+export function useTabAnimation(
+  props: TabProps,
+  context: TabListState,
+  tokens: TabTokens,
+  rootProps: PressablePropsExtended,
+): PressablePropsExtended {
+  const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical } = context;
+  const { tabKey, onLayout } = props;
+
+  // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
+  React.useEffect(() => {
+    if (tabKey === selectedKey && updateAnimatedIndicatorStyles) {
+      updateAnimatedIndicatorStyles({ backgroundColor: tokens.indicatorColor, borderRadius: tokens.indicatorRadius });
+    }
+    // Disabling warning because effect does not need to fire on `updateAnimatedIndicatorStyles` being changed
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tabKey, selectedKey, tokens.indicatorColor, tokens.indicatorRadius]);
 
   /**
    * This checks to see if we have relevant info to calculate the layout position and dimensions of the indicator. If this check fails, we don't
@@ -41,8 +55,9 @@ function useTabAnimationCore(tabKey: string, tokens: TabTokens, onLayout?: OnLay
   const onTabLayout = React.useCallback(
     (e: LayoutChangeEvent) => {
       if (
-        // Following checks are for win32 only, will be removed after addressing scrollview layout bug
-        Platform.OS !== ('win32' as any) ||
+        (e.nativeEvent.layout &&
+          // Following checks are for win32 only, will be removed after addressing scrollview layout bug
+          Platform.OS !== ('win32' as any)) ||
         (layout?.tablist &&
           layout.tablist.width > 0 &&
           e.nativeEvent.layout.height <= layout.tablist.height &&
@@ -77,18 +92,11 @@ function useTabAnimationCore(tabKey: string, tokens: TabTokens, onLayout?: OnLay
           height: indicatorHeight,
         });
       }
+
       onLayout && onLayout(e);
     },
     [addTabLayout, layout, onLayout, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );
 
-  return onTabLayout;
-}
-
-export function useTabAnimationInternal(props: TabProps, tokens: TabTokens) {
-  return useTabAnimationCore(props.tabKey, tokens, props.onLayout);
-}
-
-export function useTabAnimationExternal(tabKey: string, tokens: RequiredTabAnimationTokens, onLayout?: OnLayoutHandler) {
-  return useTabAnimationCore(tabKey, tokens, onLayout);
+  return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);
 }

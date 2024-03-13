@@ -69,6 +69,7 @@ exports[`Tab component tests Customized Tab 1`] = `
       "borderWidth": 2,
       "display": "flex",
       "flexDirection": "column",
+      "height": "100%",
       "justifyContent": "center",
       "padding": 1,
     }
@@ -99,6 +100,7 @@ exports[`Tab component tests Customized Tab 1`] = `
     >
       <Text
         accessible={false}
+        numberOfLines={1}
         style={
           {
             "color": "red",
@@ -205,6 +207,7 @@ exports[`Tab component tests Tab default props 1`] = `
       "borderWidth": 2,
       "display": "flex",
       "flexDirection": "column",
+      "height": "100%",
       "justifyContent": "center",
       "padding": 1,
     }
@@ -235,6 +238,7 @@ exports[`Tab component tests Tab default props 1`] = `
     >
       <Text
         accessible={false}
+        numberOfLines={1}
         style={
           {
             "color": "#424242",
@@ -341,6 +345,7 @@ exports[`Tab component tests Tab disabled 1`] = `
       "borderWidth": 2,
       "display": "flex",
       "flexDirection": "column",
+      "height": "100%",
       "justifyContent": "center",
       "padding": 1,
     }
@@ -371,6 +376,7 @@ exports[`Tab component tests Tab disabled 1`] = `
     >
       <Text
         accessible={false}
+        numberOfLines={1}
         style={
           {
             "color": "#bdbdbd",
@@ -477,6 +483,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
       "borderWidth": 2,
       "display": "flex",
       "flexDirection": "column",
+      "height": "100%",
       "justifyContent": "center",
       "padding": 1,
     }
@@ -519,6 +526,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     >
       <Text
         accessible={false}
+        numberOfLines={1}
         style={
           {
             "color": "#424242",
@@ -625,6 +633,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
       "borderWidth": 2,
       "display": "flex",
       "flexDirection": "column",
+      "height": "100%",
       "justifyContent": "center",
       "padding": 1,
     }

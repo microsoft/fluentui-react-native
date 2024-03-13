@@ -14,12 +14,12 @@ import type { PressablePropsExtended } from '@fluentui-react-native/interactive-
 import type { TextProps } from '@fluentui-react-native/text';
 import { Text } from '@fluentui-react-native/text';
 
-import { useTabSlotProps, useAnimatedIndicatorStylingHelper } from './Tab.styling';
+import { useTabSlotProps } from './Tab.styling';
 import { tabName } from './Tab.types';
 import type { TabProps, TabState, TabTokens } from './Tab.types';
 import { tabStates, useTabTokens } from './TabTokens';
 import { useTab } from './useTab';
-import { useTabAnimationInternal as useTabAnimation } from './useTabAnimation';
+import { useTabAnimation } from './useTabAnimation';
 import type { TabListState } from '../TabList/TabList.types';
 import { TabListContext } from '../TabList/TabListContext';
 
@@ -47,14 +47,9 @@ export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens
   // Get styling props for each Tab slot
   const slotProps = useTabSlotProps(tab.props, tokens, theme, tablist);
 
-  useAnimatedIndicatorStylingHelper(tab.props, tokens, tablist);
+  const rootProps = useTabAnimation(props, tablist, tokens, slotProps.root);
 
-  const onRootLayout = useTabAnimation(tab.props, tokens);
-  if (!tab.props.calculateAnimationValuesExternally) {
-    slotProps.root.onLayout = onRootLayout;
-  }
-
-  const RootSlot = useSlot<PressablePropsExtended>(Pressable, slotProps.root);
+  const RootSlot = useSlot<PressablePropsExtended>(Pressable, rootProps);
   const StackSlot = useSlot<ViewProps>(View, slotProps.stack as ViewProps);
   const IndicatorContainerSlot = useSlot<ViewProps>(View, slotProps.indicatorContainer as ViewProps);
   const IndicatorSlot = useSlot<ViewProps>(View, slotProps.indicator as ViewProps);
@@ -79,7 +74,14 @@ export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens
       }
     });
 
-    const { icon, tabKey, ...mergedProps } = mergeProps(tab.props, final, {
+    // `onLayout` is unused and excluded from the rest of the mergedProps to be passed into the RootSlot.
+    // This is to ensure that the chained layout callback created in useTabAnimation isn't overwritten.
+    const {
+      icon,
+      tabKey,
+      onLayout: _,
+      ...mergedProps
+    } = mergeProps(tab.props, final, {
       accessibilityLabel: tab.props.accessibilityLabel || final.accessibilityLabel || label,
     });
 

@@ -106,6 +106,7 @@ exports[`TabList component tests TabList appearance 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -136,6 +137,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -239,6 +241,7 @@ exports[`TabList component tests TabList appearance 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -269,6 +272,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -372,6 +376,7 @@ exports[`TabList component tests TabList appearance 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -402,6 +407,7 @@ exports[`TabList component tests TabList appearance 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -548,6 +554,7 @@ exports[`TabList component tests TabList default props 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -578,6 +585,7 @@ exports[`TabList component tests TabList default props 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -681,6 +689,7 @@ exports[`TabList component tests TabList default props 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -711,6 +720,7 @@ exports[`TabList component tests TabList default props 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -814,6 +824,7 @@ exports[`TabList component tests TabList default props 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -844,6 +855,7 @@ exports[`TabList component tests TabList default props 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -990,6 +1002,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -1020,6 +1033,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#bdbdbd",
@@ -1123,6 +1137,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -1153,6 +1168,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#bdbdbd",
@@ -1256,6 +1272,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -1286,6 +1303,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#bdbdbd",
@@ -1462,6 +1480,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -1595,6 +1614,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -1728,6 +1748,7 @@ exports[`TabList component tests TabList orientation 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -1875,6 +1896,7 @@ exports[`TabList component tests TabList selected key 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -1905,6 +1927,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#242424",
@@ -2008,6 +2031,7 @@ exports[`TabList component tests TabList selected key 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -2038,6 +2062,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -2141,6 +2166,7 @@ exports[`TabList component tests TabList selected key 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -2171,6 +2197,7 @@ exports[`TabList component tests TabList selected key 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -2317,6 +2344,7 @@ exports[`TabList component tests TabList size 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -2347,6 +2375,7 @@ exports[`TabList component tests TabList size 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -2450,6 +2479,7 @@ exports[`TabList component tests TabList size 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -2480,6 +2510,7 @@ exports[`TabList component tests TabList size 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
@@ -2583,6 +2614,7 @@ exports[`TabList component tests TabList size 1`] = `
             "borderWidth": 2,
             "display": "flex",
             "flexDirection": "column",
+            "height": "100%",
             "justifyContent": "center",
             "padding": 1,
           }
@@ -2613,6 +2645,7 @@ exports[`TabList component tests TabList size 1`] = `
           >
             <Text
               accessible={false}
+              numberOfLines={1}
               style={
                 {
                   "color": "#424242",
