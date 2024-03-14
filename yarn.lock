@@ -18494,7 +18494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:^13.7.0":
+"react-native-svg@npm:^13.14.0":
   version: 13.14.0
   resolution: "react-native-svg@npm:13.14.0"
   dependencies:
