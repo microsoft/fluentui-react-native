@@ -1,16 +1,19 @@
 import type { TextProps, ViewProps, ImageProps } from 'react-native';
 
 import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
+import type { TextProps as MacOSTextProps, ViewProps as MacOSViewProps } from 'react-native-macos';
+import type { TextProps as WindowsTextProps, ViewProps as WindowsViewProps } from 'react-native-windows';
 
 import type { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = TextProps & Partial<ITextWin32Props>;
-export type IViewProps = ViewProps & Partial<IViewWin32Props>;
+export type ITextProps = TextProps & Partial<ITextWin32Props> & Partial<MacOSTextProps> & Partial<WindowsTextProps>;
+export type IViewProps = ViewProps & Partial<IViewWin32Props> & Partial<MacOSViewProps> & Partial<WindowsViewProps>;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
+  acceptsFirstMouse: true,
   accessibilityAccessKey: true,
   accessibilityActions: true,
   accessibilityAnnotation: true,
@@ -33,9 +36,11 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
+  allowsVibrancy: true,
   animationClass: true,
   collapsable: true,
   cursor: true,
+  draggedTypes: true,
   enableFocusRing: true,
   focusable: true,
   hasTVPreferredFocus: true,
@@ -45,6 +50,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   isTVSelectable: true,
   keyDownEvents: true,
   keyUpEvents: true,
+  mouseDownCanMoveWindow: true,
   nativeID: true,
   needsOffscreenAlphaCompositing: true,
   onAccessibilityAction: true,
@@ -52,6 +58,9 @@ const _viewMask: IFilterMask<IViewProps> = {
   onAccessibilityTap: true,
   onBlur: true,
   onBlurCapture: true,
+  onDragEnter: true,
+  onDragLeave: true,
+  onDrop: true,
   onFocus: true,
   onFocusCapture: true,
   onKeyDown: true,
@@ -105,6 +114,8 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxShiftDistanceX: true,
   tvParallaxShiftDistanceY: true,
   tvParallaxTiltAngle: true,
+  validKeysDown: true,
+  validKeysUp: true,
   'aria-busy': true,
   'aria-checked': true,
   'aria-disabled': true,
