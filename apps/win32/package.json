@@ -102,5 +102,8 @@
         "svg"
       ]
     }
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.72.0"
   }
 }

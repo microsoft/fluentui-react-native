@@ -2253,8 +2253,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2280,9 +2283,11 @@ __metadata:
     react-native: ^0.72.0
     react-native-macos: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
     react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2306,9 +2311,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2335,9 +2343,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2371,8 +2382,12 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2394,8 +2409,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2426,9 +2444,12 @@ __metadata:
     react-native-svg: ^13.14.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2453,9 +2474,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2463,6 +2487,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/codemods@workspace:packages/codemods"
   dependencies:
+    "@babel/core": ^7.8.0
+    "@babel/preset-env": ^7.8.0
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
@@ -2533,9 +2559,12 @@ __metadata:
     react-native-svg: ^13.14.0
     react-native-svg-transformer: ^1.0.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2557,8 +2586,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2625,6 +2657,7 @@ __metadata:
     "@fluentui-react-native/use-tokens": "*"
     "@fluentui-react-native/win32-theme": "*"
     "@fluentui/react-native": "*"
+    "@office-iss/react-native-win32": ^0.72.0
     "@uifabricshared/foundation-composable": "*"
     "@uifabricshared/foundation-compose": "*"
     "@uifabricshared/foundation-settings": "*"
@@ -2633,8 +2666,11 @@ __metadata:
     "@uifabricshared/themed-settings": "*"
     "@uifabricshared/theming-ramp": "*"
     "@uifabricshared/theming-react-native": "*"
+    react: 18.2.0
     react-native: ^0.72.0
-    semver: ^7.3.5
+    react-native-macos: ^0.72.0
+    react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
     workspace-tools: ^0.26.3
   languageName: unknown
   linkType: soft
@@ -2691,8 +2727,12 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2710,8 +2750,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2734,9 +2777,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2767,6 +2813,8 @@ __metadata:
     metro-react-native-babel-preset: ^0.76.5
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
     rimraf: ^5.0.1
     ts-node: ^8.10.1
     typescript: 4.9.4
@@ -2797,9 +2845,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2816,8 +2867,11 @@ __metadata:
     react-native: ^0.72.0
     use-subscription: ">=1.0.0 <1.6.0"
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2833,8 +2887,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2854,8 +2911,12 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2872,8 +2933,10 @@ __metadata:
     react-native: ^0.72.0
     react-native-windows: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
@@ -2894,9 +2957,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2946,8 +3012,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2968,9 +3037,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -2989,8 +3061,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3010,8 +3085,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3030,8 +3108,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3058,8 +3139,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3079,9 +3163,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3117,9 +3204,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3145,6 +3235,7 @@ __metadata:
     react-native-windows: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
     react-native-macos: ^0.72.0
@@ -3173,8 +3264,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3210,9 +3304,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3241,9 +3338,12 @@ __metadata:
     react-native-svg: ^13.14.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3292,9 +3392,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3317,8 +3420,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3340,8 +3446,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3358,8 +3467,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3377,8 +3489,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3409,9 +3524,12 @@ __metadata:
     react-native-svg: ^13.14.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3428,6 +3546,7 @@ __metadata:
     "@rnx-kit/align-deps": ^2.2.5
     babel-jest: ^24.9.0
     beachball: ^2.20.0
+    eslint: ^8.0.0
     eslint-plugin-import: ^2.27.5
     lage: ^2.0.0
     markdown-link-check: ^3.8.7
@@ -3472,6 +3591,9 @@ __metadata:
     metro-react-native-babel-transformer: ^0.76.5
     prettier: ^2.4.1
     react: 18.2.0
+    react-dom: ^18.2.0
+    react-native: ^0.72.0
+    react-native-svg: ^13.14.0
     react-native-svg-transformer: ^1.0.0
     react-test-renderer: 18.2.0
     rimraf: ^5.0.1
@@ -3499,8 +3621,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3520,9 +3645,12 @@ __metadata:
     react-native: ^0.72.0
     react-native-svg: ^13.14.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3544,8 +3672,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3584,8 +3715,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3611,8 +3745,12 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3656,6 +3794,8 @@ __metadata:
     ts-node: ^8.10.1
     tslib: ^2.3.1
     typescript: 4.9.4
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3721,6 +3861,7 @@ __metadata:
     "@rnx-kit/metro-config": ^1.3.1
     "@types/jasmine": 3.10.3
     "@warren-ms/react-native-icons": ^0.0.13
+    "@wdio/cli": 7.30.1
     "@wdio/jasmine-framework": 7.26.0
     flow-bin: ^0.113.0
     metro-config: ^0.76.5
@@ -3758,8 +3899,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3848,8 +3992,10 @@ __metadata:
     react-native: ^0.72.0
     react-native-windows: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
     react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
@@ -3867,8 +4013,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3887,10 +4036,14 @@ __metadata:
     "@react-native/metro-config": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-svg: ^13.14.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -3976,8 +4129,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -4001,8 +4157,11 @@ __metadata:
     react-native: ^0.72.0
     tslib: ^2.3.1
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -4032,8 +4191,12 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-svg: ^13.14.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -7117,8 +7280,11 @@ __metadata:
     "@uifabricshared/theming-ramp": "workspace:*"
     react: 18.2.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -7155,8 +7321,11 @@ __metadata:
     react: 18.2.0
     react-native: ^0.72.0
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -7232,8 +7401,11 @@ __metadata:
     react-native: ^0.72.0
     typescript: 4.9.4
   peerDependencies:
+    "@office-iss/react-native-win32": ^0.72.0
     react: 18.2.0
     react-native: ^0.72.0
+    react-native-macos: ^0.72.0
+    react-native-windows: ^0.72.0
   languageName: unknown
   linkType: soft
 

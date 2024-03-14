@@ -43,6 +43,7 @@
     "@rnx-kit/align-deps": "^2.2.5",
     "babel-jest": "^24.9.0",
     "beachball": "^2.20.0",
+    "eslint": "^8.0.0",
     "eslint-plugin-import": "^2.27.5",
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
