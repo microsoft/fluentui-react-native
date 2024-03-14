@@ -64,7 +64,7 @@
   ],
   "resolutions": {
     "es5-ext": "0.10.63",
-    "react-native-svg": "^13.7.0",
+    "react-native-svg": "^13.14.0",
     "@types/react": "^18.2.0",
     "micromatch": "^4.0.0",
     "semver": "^7.5.2",
