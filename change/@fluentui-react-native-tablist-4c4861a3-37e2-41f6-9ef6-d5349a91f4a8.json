@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix layout callback chaining, and added new styling token allowing for customization of text's numberOfLines prop.",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

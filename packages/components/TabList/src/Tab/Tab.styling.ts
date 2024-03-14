@@ -48,6 +48,7 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
 
   const content = React.useMemo<TextProps>(
     () => ({
+      numberOfLines: tokens.numberOfLines,
       style: {
         color: tokens.color,
         ...fontStyles.from(tokens, theme),
@@ -69,14 +70,14 @@ export const useTabSlotProps = (props: TabProps, tokens: TabTokens, theme: Theme
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        flex: vertical ? 0 : 1,
+        flex: 0,
         alignSelf: 'flex-start',
         justifyContent: 'center',
         marginHorizontal: tokens.stackMarginHorizontal,
         marginVertical: tokens.stackMarginVertical,
       },
     }),
-    [vertical, tokens.stackMarginHorizontal, tokens.stackMarginVertical],
+    [tokens.stackMarginHorizontal, tokens.stackMarginVertical],
   );
 
   const indicatorContainer = React.useMemo<IViewProps>(
