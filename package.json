@@ -43,6 +43,7 @@
     "@rnx-kit/align-deps": "^2.2.5",
     "babel-jest": "^24.9.0",
     "beachball": "^2.20.0",
+    "eslint": "^8.0.0",
     "eslint-plugin-import": "^2.27.5",
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
@@ -65,7 +66,6 @@
     "es5-ext": "0.10.63",
     "@types/react": "^18.2.0",
     "micromatch": "^4.0.0",
-    "react-native-svg": "^13.7.0",
     "semver": "^7.5.2",
     "xml2js": "^0.5.0",
     "yaml": "^2.2.2"

@@ -84,6 +84,7 @@
     "@uifabricshared/themed-settings": "*",
     "@uifabricshared/theming-ramp": "*",
     "@uifabricshared/theming-react-native": "*",
+    "react": "18.2.0",
     "react-native": "^0.72.0",
     "semver": "^7.3.5",
     "workspace-tools": "^0.26.3"

@@ -2223,8 +2223,10 @@ __metadata:
   dependencies:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@office-iss/react-native-win32": ^0.72.0
     "@react-native/metro-config": ^0.72.0
     "@types/jest": ^29.0.0
+    "@types/react": ^18.2.0
     react: 18.2.0
     react-native: ^0.72.0
     react-native-macos: ^0.72.0
@@ -2463,6 +2465,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/codemods@workspace:packages/codemods"
   dependencies:
+    "@babel/core": ^7.8.0
+    "@babel/preset-env": ^7.8.0
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
@@ -2633,6 +2637,7 @@ __metadata:
     "@uifabricshared/themed-settings": "*"
     "@uifabricshared/theming-ramp": "*"
     "@uifabricshared/theming-react-native": "*"
+    react: 18.2.0
     react-native: ^0.72.0
     semver: ^7.3.5
     workspace-tools: ^0.26.3
@@ -3428,6 +3433,7 @@ __metadata:
     "@rnx-kit/align-deps": ^2.2.5
     babel-jest: ^24.9.0
     beachball: ^2.20.0
+    eslint: ^8.0.0
     eslint-plugin-import: ^2.27.5
     lage: ^2.0.0
     markdown-link-check: ^3.8.7
@@ -3472,6 +3478,8 @@ __metadata:
     metro-react-native-babel-transformer: ^0.76.5
     prettier: ^2.4.1
     react: 18.2.0
+    react-native: ^0.72.0
+    react-native-svg: ^13.14.0
     react-native-svg-transformer: ^1.0.0
     react-test-renderer: 18.2.0
     rimraf: ^5.0.1
@@ -3480,6 +3488,7 @@ __metadata:
   peerDependencies:
     just-scripts: ^1.8.0
     react: 18.2.0
+    react-native: ^0.72.0
   bin:
     fluentui-scripts: ./just-scripts.js
   languageName: unknown
@@ -3713,6 +3722,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": ^6.2.0
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-native-fontawesome": ^0.3.0
+    "@office-iss/react-native-win32": ^0.72.0
     "@react-native-community/slider": ^4.2.0
     "@react-native-menu/menu": ^0.7.3
     "@react-native-picker/picker": ^2.2.1
@@ -3721,6 +3731,7 @@ __metadata:
     "@rnx-kit/metro-config": ^1.3.1
     "@types/jasmine": 3.10.3
     "@warren-ms/react-native-icons": ^0.0.13
+    "@wdio/cli": 7.30.1
     "@wdio/jasmine-framework": 7.26.0
     flow-bin: ^0.113.0
     metro-config: ^0.76.5
@@ -3735,8 +3746,6 @@ __metadata:
     react-test-renderer: 18.2.0
     tslib: ^2.3.1
     webdriverio: 7.30.1
-  peerDependencies:
-    "@office-iss/react-native-win32": ^0.72.0
   languageName: unknown
   linkType: soft
 
@@ -18322,7 +18331,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:^13.7.0":
+"react-native-svg@npm:^12.5.0":
+  version: 12.5.1
+  resolution: "react-native-svg@npm:12.5.1"
+  dependencies:
+    css-select: ^5.1.0
+    css-tree: ^1.1.3
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.50.0"
+  checksum: e51a4eccb205c433c088087500b9da6a2956b2f5937ca18211243d033c2f57c9e720167222c394aa660fa070c417ea120ba9542cc3a6b178d0017895b7d35d2e
+  languageName: node
+  linkType: hard
+
+"react-native-svg@npm:^13.14.0":
   version: 13.14.0
   resolution: "react-native-svg@npm:13.14.0"
   dependencies:
