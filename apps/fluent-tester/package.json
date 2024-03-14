@@ -63,6 +63,7 @@
     "@fluentui-react-native/menu": "workspace:*",
     "@fluentui-react-native/merge-props": "workspace:*",
     "@fluentui-react-native/notification": "workspace:*",
+    "@fluentui-react-native/overflow": "workspace:*",
     "@fluentui-react-native/radio-group": "workspace:*",
     "@fluentui-react-native/separator": "workspace:*",
     "@fluentui-react-native/spinner": "workspace:*",

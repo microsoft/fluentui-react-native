@@ -1,0 +1,64 @@
+{
+  "name": "@fluentui-react-native/overflow",
+  "version": "0.1.0",
+  "description": "A cross-platform Overflow component for React Native.",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/Overflow"
+  },
+  "dependencies": {
+    "@fluentui-react-native/framework": "workspace:*",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/menu": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
+    "@office-iss/react-native-win32": "^0.72.0",
+    "@react-native/metro-config": "^0.72.0",
+    "react": "18.2.0",
+    "react-native": "^0.72.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "^0.72.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.72"
+      ],
+      "capabilities": [
+        "core",
+        "react"
+      ]
+    }
+  }
+}
