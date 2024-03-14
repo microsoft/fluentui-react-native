@@ -9,14 +9,22 @@ export type LayoutSize = Pick<LayoutRectangle, 'width' | 'height'>;
 export const overflowName = 'Overflow';
 
 export interface OverflowProps extends ViewProps {
-  /**  Horizontal padding to add to the container */
+  /**
+   * Horizontal padding to add to the container
+   */
   padding?: ViewStyle['padding'];
-  /**  List of all IDs that will be rendered in the overflow container */
+  /**
+   * List of all IDs that will be rendered in the overflow container
+   */
   itemIDs: string[];
-  /**  By default, the overflow container's opacity is set to 0 while the overflow manager figures out which items should be hidden due to noticable pop-in. */
-  /**  This flag sets the opacity to always be visible. */
+  /**
+   * By default, the overflow container's opacity is set to 0 while the overflow manager figures out which items should be hidden due to noticable pop-in.
+   * This flag sets the opacity to always be visible.
+   */
   dontHideBeforeReady?: boolean;
-  /**  Callback triggering whenever the visibility of one or more items changes */
+  /**
+   * Callback triggering whenever the visibility of one or more items changes
+   */
   onOverflowUpdate?: (data: OverflowUpdatePayload) => void;
 }
 

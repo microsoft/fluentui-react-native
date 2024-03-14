@@ -12,7 +12,7 @@ import { useOverflowContext } from '../OverflowContext';
 export function useOverflowMenu(): OverflowMenuState {
   const { itemVisibility, initialOverflowLayoutDone, hasOverflow, overflowMenuRef, setLayoutState, updateMenuSize } = useOverflowContext();
 
-  const onButtonLayout = React.useCallback(
+  const onTriggerLayout = React.useCallback(
     (e: LayoutChangeEvent) => {
       const { width, height } = e.nativeEvent.layout;
       updateMenuSize({ width, height });
@@ -31,6 +31,6 @@ export function useOverflowMenu(): OverflowMenuState {
     showMenu: !initialOverflowLayoutDone || hasOverflow,
     visibleMenuItems: visibleMenuItems,
     menuTriggerRef: overflowMenuRef,
-    onMenuTriggerLayout: onButtonLayout,
+    onMenuTriggerLayout: onTriggerLayout,
   };
 }

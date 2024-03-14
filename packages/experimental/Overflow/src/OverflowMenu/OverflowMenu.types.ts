@@ -1,7 +1,5 @@
 import type { LayoutChangeEvent, View } from 'react-native';
 
-export const overflowMenuName = 'OverflowMenu';
-
 export interface OverflowMenuState {
   /** Flag for whether the menu should be showing */
   showMenu: boolean;

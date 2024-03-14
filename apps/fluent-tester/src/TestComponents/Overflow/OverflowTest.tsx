@@ -143,7 +143,7 @@ function OverflowDifferentWidthTest() {
 
 export const OverflowTest: React.FunctionComponent = () => {
   const description =
-    "The Overflow component is a container which renders OverflowItems and an OverflowMenu. As the container shrinks, OverflowItems that don't fit will be hidden and re-rendered as an item within the OverflowMenu.";
+    'The `Overflow` and `OverflowItem` components, based off the same Fluent web v9 components of the same name, are low level utilities that enable users to create overflow experiences with any component. These components will detect and hide overflowing elements on screen and manage the overflow state.';
 
   return (
     <Test
@@ -163,6 +163,7 @@ export const OverflowTest: React.FunctionComponent = () => {
           component: OverflowDifferentWidthTest,
         },
       ]}
+      spec="https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/Overflow/SPEC.md"
       status={{
         win32Status: 'Experimental',
         uwpStatus: 'Backlog',
