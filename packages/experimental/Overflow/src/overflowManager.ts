@@ -1,5 +1,11 @@
 import type { LayoutSize } from './Overflow/Overflow.types';
-import type { OverflowManagerOptions, OverflowManager, OverflowItemEntry, OverflowUpdatePayload } from './overflowManager.types';
+import type {
+  OverflowManagerOptions,
+  OverflowManager,
+  OverflowItemEntry,
+  OverflowUpdatePayload,
+  ItemDimensionUpdatePayload,
+} from './overflowManager.types';
 import { createPriorityQueue } from './priorityQueue';
 import type { PriorityQueue } from './priorityQueue';
 
@@ -34,6 +40,7 @@ export function createOverflowManager(): OverflowManager {
   let containerSize: LayoutSize;
   let padding: number;
   let lastItemDimensionHasChanged: boolean = false;
+  let itemToShrink: string;
   let onUpdateItemDimension: OverflowManagerOptions['onUpdateItemDimension'];
   let onUpdateItemVisibility: OverflowManagerOptions['onUpdateItemVisibility'];
   let onOverflowUpdate: OverflowManagerOptions['onOverflowUpdate'];
@@ -90,8 +97,14 @@ export function createOverflowManager(): OverflowManager {
         if (invisibleItems.size() > 0) {
           newSize -= menuSize.width;
         }
-        const id = visibleItems.peek();
-        const payload = { id: id, update: update.shrinking ? { width: newSize, height: items[id].size.height } : null };
+        let payload: ItemDimensionUpdatePayload;
+        if (update.shrinking) {
+          if (!itemToShrink) itemToShrink = visibleItems.peek();
+          payload = { id: itemToShrink, update: { width: newSize, height: items[itemToShrink].size.height } };
+        } else {
+          payload = { id: itemToShrink, update: null };
+          itemToShrink = undefined;
+        }
         onUpdateItemDimension(payload);
       } else {
         const payload: OverflowUpdatePayload = {

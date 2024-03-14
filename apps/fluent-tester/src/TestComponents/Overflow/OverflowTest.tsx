@@ -4,7 +4,7 @@ import type { ViewStyle } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Divider } from '@fluentui-react-native/divider';
-import { Menu, MenuTrigger, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
+import { Menu, MenuTrigger, MenuList, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
 import { Overflow, OverflowItem, useOverflowMenu } from '@fluentui-react-native/overflow';
 import { TabList, Tab } from '@fluentui-react-native/tablist';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -60,11 +60,13 @@ function OverflowMenu(props: OverflowMenuProps) {
           />
         </MenuTrigger>
         <MenuPopover>
-          {visibleMenuItems.map((id) => (
-            <MenuItem onClick={() => props.onItemPress(id)} key={id}>
-              {itemLabels[id]}
-            </MenuItem>
-          ))}
+          <MenuList>
+            {visibleMenuItems.map((id) => (
+              <MenuItem onClick={() => props.onItemPress(id)} key={id}>
+                {itemLabels[id]}
+              </MenuItem>
+            ))}
+          </MenuList>
         </MenuPopover>
       </Menu>
     );
