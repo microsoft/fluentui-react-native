@@ -26,6 +26,7 @@
     "directory": "packages/experimental/Shimmer"
   },
   "dependencies": {
+    "assert-never": "^1.2.1",
     "@fluentui-react-native/component-cache": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/theming-utils": "workspace:*",
@@ -36,7 +37,6 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/metro-config": "^0.72.0",
-    "assert-never": "^1.2.1",
     "react": "18.2.0",
     "react-native": "^0.72.0",
     "react-native-svg": "^13.14.0"
