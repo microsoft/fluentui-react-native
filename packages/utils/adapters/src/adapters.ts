@@ -1,15 +1,25 @@
+/**
+ * Projects with complex multi-platform code should use @rnx-kit/metro-plugin-typescript to properly type check against the platform they are building
+ *
+ * However, for build steps just using a default config of tsc, this platform neutral definition of the view types will be used.  This is more relaxed
+ * and slightly less accurate than the type checking of your bundle using @rnx-kit/metro-plugin-typescript.
+ */
+
 import type { TextProps, ViewProps, ImageProps } from 'react-native';
 
-import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
-import type { TextProps as MacOSTextProps, ViewProps as MacOSViewProps } from 'react-native-macos';
-import type { TextProps as WindowsTextProps, ViewProps as WindowsViewProps } from 'react-native-windows';
-
+// To avoid all projects having to depend on '@office-iss/react-native-win32' and other platform packages we use our own inline type definitions
+import type { IAdapterMacOSViewProps, IAdapterMacOSTextProps, IAdapterMacOSImageProps } from './adapter.types.macos';
+import type { IAdapterWin32ViewProps, IAdapterWin32TextProps, IAdapterWin32ImageProps } from './adapter.types.win32';
+import type { IAdapterWindowsViewProps, IAdapterWindowsTextProps, IAdapterWindowsImageProps } from './adapter.types.windows';
 import type { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = TextProps & Partial<ITextWin32Props> & Partial<MacOSTextProps> & Partial<WindowsTextProps>;
-export type IViewProps = ViewProps & Partial<IViewWin32Props> & Partial<MacOSViewProps> & Partial<WindowsViewProps>;
-export type IImageProps = ImageProps;
+export type ITextProps = TextProps & Partial<IAdapterWin32TextProps> & Partial<IAdapterMacOSTextProps> & Partial<IAdapterWindowsTextProps>;
+export type IViewProps = ViewProps & Partial<IAdapterWin32ViewProps> & Partial<IAdapterMacOSViewProps> & Partial<IAdapterWindowsViewProps>;
+export type IImageProps = ImageProps &
+  Partial<IAdapterWin32ImageProps> &
+  Partial<IAdapterMacOSImageProps> &
+  Partial<IAdapterWindowsImageProps>;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
