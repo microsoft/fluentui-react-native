@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Thu, 14 Mar 2024 01:39:46 GMT",
+      "version": "0.5.20",
+      "tag": "@fluentui-react-native/tablist_v0.5.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "b865b8b2c4f21f6bd18b6ceeb7c88cdb72f837d6",
+            "comment": "Fix layout callback chaining, and added new styling token allowing for customization of text's numberOfLines prop."
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:12 GMT",
       "version": "0.5.17",
       "tag": "@fluentui-react-native/tablist_v0.5.17",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Fri, 01 Mar 2024 20:39:12 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Mar 2024 01:39:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.20
+
+Thu, 14 Mar 2024 01:39:46 GMT
+
+### Patches
+
+- Fix layout callback chaining, and added new styling token allowing for customization of text's numberOfLines prop. (winlarry@microsoft.com)
 
 ## 0.5.17
 
