@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Thu, 14 Mar 2024 03:17:22 GMT",
+      "version": "0.12.12",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.12.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "b2824a33f5d064fdffc8b53f5aa44fd3141b26fe",
+            "comment": "Add assert-never as a dependency"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:11 GMT",
       "version": "0.12.11",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.12.11",
