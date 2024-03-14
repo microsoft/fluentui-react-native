@@ -26,12 +26,12 @@
     "directory": "packages/experimental/Shimmer"
   },
   "dependencies": {
-    "assert-never": "^1.2.1",
     "@fluentui-react-native/component-cache": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/theming-utils": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
-    "@fluentui-react-native/use-styling": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*",
+    "assert-never": "^1.2.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
