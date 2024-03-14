@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 14 Mar 2024 22:02:05 GMT",
+      "version": "0.167.19",
+      "tag": "@fluentui-react-native/tester_v0.167.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d61779d527096fc2fa586bafe1abec600b8457f3",
+            "comment": "Add Overflow page"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:12 GMT",
       "version": "0.167.14",
       "tag": "@fluentui-react-native/tester_v0.167.14",

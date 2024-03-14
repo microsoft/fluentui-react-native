@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add Overflow / OverflowItem components",
-  "packageName": "@fluentui-react-native/overflow",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
