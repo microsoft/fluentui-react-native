@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix typos, add visual examples of Overflow scenarios to spec.",
+  "packageName": "@fluentui-react-native/overflow",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
