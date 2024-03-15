@@ -3,6 +3,12 @@ updates:
   - package-ecosystem: npm
     directory: '/'
     groups:
+      appium:
+        patterns:
+          - 'appium*'
+        update-types:
+          - 'minor'
+          - 'patch'
       babel:
         patterns:
           - '@babel*'
@@ -24,6 +30,12 @@ updates:
       rnx-kit:
         patterns:
           - '@rnx-kit*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      wdio:
+        patterns:
+          - '@wdio*'
         update-types:
           - 'minor'
           - 'patch'
