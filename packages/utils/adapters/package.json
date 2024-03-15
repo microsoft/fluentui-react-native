@@ -61,5 +61,16 @@
         "core-windows"
       ]
     }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
   }
 }
