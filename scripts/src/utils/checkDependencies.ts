@@ -15,10 +15,7 @@ export function checkDependencies() {
   let everWrote = false;
 
   // These packages should be optional peers, since not all consumers may require all platforms
-  // Currently @fluentui-react-native/adapters requires all the platform types
-  // Until we come up with a better solution for that, we cannot make the platforms optional
-  // const optionalPeers = ['react-native-windows', '@office-iss/react-native-win32', 'react-native-macos'];
-  const optionalPeers = [];
+  const optionalPeers = ['react-native-windows', '@office-iss/react-native-win32', 'react-native-macos'];
 
   while (requireRescan) {
     requireRescan = false;
@@ -69,7 +66,6 @@ export function checkDependencies() {
         for (const missingDep of missingPeerDeps) {
           infos[pkgName].pkgJson.peerDependencies[missingDep.name] = missingDep.version;
         }
-
         requireWriteFile = true;
       }
 
@@ -83,6 +79,7 @@ export function checkDependencies() {
             'optional': true
           };
         }
+        requireWriteFile = true;
       }
 
       if (requireWriteFile) {
