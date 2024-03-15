@@ -3401,6 +3401,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/overflow@workspace:*, @fluentui-react-native/overflow@workspace:packages/experimental/Overflow":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/overflow@workspace:packages/experimental/Overflow"
+  dependencies:
+    "@fluentui-react-native/button": "workspace:*"
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/menu": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/test-tools": "workspace:*"
+    "@office-iss/react-native-win32": ^0.72.0
+    "@react-native/metro-config": ^0.72.0
+    react: 18.2.0
+    react-native: ^0.72.0
+    tslib: ^2.3.1
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.72.0
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/persona-coin@*, @fluentui-react-native/persona-coin@workspace:*, @fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin"
@@ -3833,6 +3854,7 @@ __metadata:
     "@fluentui-react-native/menu": "workspace:*"
     "@fluentui-react-native/merge-props": "workspace:*"
     "@fluentui-react-native/notification": "workspace:*"
+    "@fluentui-react-native/overflow": "workspace:*"
     "@fluentui-react-native/radio-group": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/separator": "workspace:*"
@@ -12400,12 +12422,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.15.4":
-  version: 1.15.5
-  resolution: "follow-redirects@npm:1.15.5"
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 5ca49b5ce6f44338cbfc3546823357e7a70813cecc9b7b768158a1d32c1e62e7407c944402a918ea8c38ae2e78266312d617dc68783fac502cbb55e1047b34ec
+  checksum: a62c378dfc8c00f60b9c80cab158ba54e99ba0239a5dd7c81245e5a5b39d10f0c35e249c3379eae719ff0285fff88c365dd446fab19dee771f1d76252df1bbf5
   languageName: node
   linkType: hard
 
@@ -18432,8 +18454,8 @@ __metadata:
   linkType: hard
 
 "react-native-macos@npm:^0.72.0":
-  version: 0.72.20
-  resolution: "react-native-macos@npm:0.72.20"
+  version: 0.72.21
+  resolution: "react-native-macos@npm:0.72.21"
   dependencies:
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 11.3.7
@@ -18475,7 +18497,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native-macos: cli.js
-  checksum: 3c1dd641248531e87abf62ea4d4ca1cc7fb784f09c61a79431d73253ef51cc7fea65f248097713059fec88307a5223b072393f0cf73156c7618ccddaef2acae8
+  checksum: 7d28455817ef400d4d052f2d8585ca786f82d2b478a228d95f6dc9dd9d879c04a19796bf4abd7e697227f6a005bb5dfa1a72cc49a76da1cd208660210abcef51
   languageName: node
   linkType: hard
 
