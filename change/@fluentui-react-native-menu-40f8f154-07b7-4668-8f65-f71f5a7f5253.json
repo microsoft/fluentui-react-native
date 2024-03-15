@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "set directionalHint on MenuPopover from user props",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

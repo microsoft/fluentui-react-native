@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 15 Mar 2024 20:38:11 GMT",
+      "version": "1.12.25",
+      "tag": "@fluentui-react-native/menu_v1.12.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "14b7873d56543f64107bca938746e14fd49248ea",
+            "comment": "set directionalHint on MenuPopover from user props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 16:26:20 GMT",
       "version": "1.12.24",
       "tag": "@fluentui-react-native/menu_v1.12.24",
