@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Fri, 01 Mar 2024 20:39:09 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Mar 2024 16:26:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Fri, 15 Mar 2024 16:26:18 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.12.1
 

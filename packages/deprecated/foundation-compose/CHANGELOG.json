@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Fri, 15 Mar 2024 16:26:21 GMT",
+      "version": "1.14.24",
+      "tag": "@uifabricshared/foundation-compose_v1.14.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-compose",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 13 Mar 2024 15:54:07 GMT",
       "version": "1.14.23",
       "tag": "@uifabricshared/foundation-compose_v1.14.23",

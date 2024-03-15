@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add many missing peerDependencies",
-  "packageName": "@fluentui-react-native/experimental-checkbox",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

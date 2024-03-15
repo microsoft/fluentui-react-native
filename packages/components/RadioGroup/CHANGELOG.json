@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Fri, 15 Mar 2024 16:26:20 GMT",
+      "version": "0.20.15",
+      "tag": "@fluentui-react-native/radio-group_v0.20.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:12 GMT",
       "version": "0.20.12",
       "tag": "@fluentui-react-native/radio-group_v0.20.12",

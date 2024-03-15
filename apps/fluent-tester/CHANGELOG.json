@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 15 Mar 2024 16:26:21 GMT",
+      "version": "0.167.20",
+      "tag": "@fluentui-react-native/tester_v0.167.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Mar 2024 22:02:05 GMT",
       "version": "0.167.19",
       "tag": "@fluentui-react-native/tester_v0.167.19",

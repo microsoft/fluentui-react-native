@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 15 Mar 2024 16:26:21 GMT",
+      "version": "0.19.12",
+      "tag": "@uifabricshared/theming-react-native_v0.19.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 11 Mar 2024 23:09:49 GMT",
       "version": "0.19.10",
       "tag": "@uifabricshared/theming-react-native_v0.19.10",

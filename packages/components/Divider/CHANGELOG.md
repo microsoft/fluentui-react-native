@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/divider
 
-This log was last generated on Fri, 01 Mar 2024 20:39:10 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Mar 2024 16:26:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.14
+
+Fri, 15 Mar 2024 16:26:19 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.6.11
 
