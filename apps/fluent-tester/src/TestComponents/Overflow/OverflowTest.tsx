@@ -10,8 +10,9 @@ import { TabList, Tab } from '@fluentui-react-native/tablist';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
-import { Test } from '../Test';
 import { E2EOverflowTest } from './OverflowE2ETest';
+import { OVERFLOW_TESTPAGE } from '../../../../E2E/src/index.consts';
+import { Test } from '../Test';
 
 const items = ['a', 'b', 'c', 'd', 'e'];
 const itemLabels = {
@@ -154,6 +155,7 @@ export const OverflowTest: React.FunctionComponent = () => {
         {
           name: 'Overflow',
           component: OverflowMainTest,
+          testID: OVERFLOW_TESTPAGE,
         },
         {
           name: 'Overflow TabList',

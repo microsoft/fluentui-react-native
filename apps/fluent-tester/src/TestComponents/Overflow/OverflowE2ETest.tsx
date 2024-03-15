@@ -8,6 +8,25 @@ import { Overflow, OverflowItem, useOverflowMenu } from '@fluentui-react-native/
 import { RadioGroupV1 as RadioGroup, Radio } from '@fluentui-react-native/radio-group';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
+import {
+  FIRST_OVERFLOW_ITEM,
+  FIRST_OVERFLOW_ITEM_ID,
+  SECOND_OVERFLOW_ITEM,
+  SECOND_OVERFLOW_ITEM_ID,
+  THIRD_OVERFLOW_ITEM,
+  THIRD_OVERFLOW_ITEM_ID,
+  OVERFLOW_MENU,
+  READY_LABEL,
+  READY_VALUE_FALSE,
+  READY_VALUE_TRUE,
+  UPDATED_LABEL,
+  UPDATED_VALUE_FALSE,
+  UPDATED_VALUE_TRUE,
+  RADIO_175,
+  RADIO_275,
+  RADIO_375,
+} from '../../../../E2E/src/Overflow/consts';
+
 const styles = StyleSheet.create({
   menu: {
     width: 50,
@@ -23,8 +42,8 @@ function OverflowMenu() {
 
   if (showMenu) {
     return (
-      <Button onLayout={onMenuTriggerLayout} style={styles.menu}>
-        <Text>{`${overflowCount} hidden`}</Text>
+      <Button testID={OVERFLOW_MENU} onLayout={onMenuTriggerLayout} style={styles.menu}>
+        {`${overflowCount} hidden`}
       </Button>
     );
   } else {
@@ -32,7 +51,12 @@ function OverflowMenu() {
   }
 }
 
-const items = ['a', 'b', 'c'];
+const items = [FIRST_OVERFLOW_ITEM_ID, SECOND_OVERFLOW_ITEM_ID, THIRD_OVERFLOW_ITEM_ID];
+const itemsToTestIDs = {
+  [FIRST_OVERFLOW_ITEM_ID]: FIRST_OVERFLOW_ITEM,
+  [SECOND_OVERFLOW_ITEM_ID]: SECOND_OVERFLOW_ITEM,
+  [THIRD_OVERFLOW_ITEM_ID]: THIRD_OVERFLOW_ITEM,
+};
 
 export function E2EOverflowTest() {
   const [overflowStyles, setOverflowStyles] = React.useState<StyleProp<ViewStyle>>({});
@@ -50,18 +74,18 @@ export function E2EOverflowTest() {
 
   return (
     <View>
-      <Text>{ready ? 'Ready' : 'Not Ready'}</Text>
-      <Text>{updated ? 'Updated' : 'Not Updated'}</Text>
+      <Text testID={READY_LABEL}>{ready ? READY_VALUE_TRUE : READY_VALUE_FALSE}</Text>
+      <Text testID={UPDATED_LABEL}>{updated ? UPDATED_VALUE_TRUE : UPDATED_VALUE_FALSE}</Text>
       <Divider />
       <RadioGroup defaultValue="375" label="Width Options" onChange={handleRadioGroupChange}>
-        <Radio label="175" value="175" />
-        <Radio label="275" value="275" />
-        <Radio label="375" value="375" />
+        <Radio testID={RADIO_175} label="175" value="175" />
+        <Radio testID={RADIO_275} label="275" value="275" />
+        <Radio testID={RADIO_375} label="375" value="375" />
       </RadioGroup>
       <Divider />
       <Overflow onOverflowUpdate={handleOverflowUpdate} itemIDs={items} style={overflowStyles} onReady={handleReady}>
         {items.map((id, i) => (
-          <OverflowItem priority={items.length - i} overflowID={id} key={id}>
+          <OverflowItem testID={itemsToTestIDs[id]} priority={items.length - i} overflowID={id} key={id}>
             <Button style={styles.item}>{`Item '${id}'`}</Button>
           </OverflowItem>
         ))}

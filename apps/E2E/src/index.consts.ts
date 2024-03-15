@@ -21,6 +21,7 @@ export * from './LinkV1/consts';
 export * from './Menu/consts';
 export * from './MenuButtonLegacy/consts';
 export * from './MenuButtonV1/consts';
+export * from './Overflow/consts';
 export * from './Persona/consts';
 export * from './PersonaCoin/consts';
 export * from './Pressable/consts';
