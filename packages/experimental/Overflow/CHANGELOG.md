@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/overflow
 
-This log was last generated on Fri, 15 Mar 2024 16:26:20 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Mar 2024 22:44:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.3
+
+Fri, 15 Mar 2024 22:44:19 GMT
+
+### Patches
+
+- Fix typos, add visual examples of Overflow scenarios to spec. (winlarry@microsoft.com)
 
 ## 0.2.1
 
