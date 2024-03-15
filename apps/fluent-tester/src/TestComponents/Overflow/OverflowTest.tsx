@@ -11,6 +11,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
 import { Test } from '../Test';
+import { E2EOverflowTest } from './OverflowE2ETest';
 
 const items = ['a', 'b', 'c', 'd', 'e'];
 const itemLabels = {
@@ -161,6 +162,12 @@ export const OverflowTest: React.FunctionComponent = () => {
         {
           name: 'Overflow Variable Width',
           component: OverflowDifferentWidthTest,
+        },
+      ]}
+      e2eSections={[
+        {
+          name: 'Overflow E2E Section',
+          component: E2EOverflowTest,
         },
       ]}
       spec="https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/Overflow/SPEC.md"
