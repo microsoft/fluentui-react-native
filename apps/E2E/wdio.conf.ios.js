@@ -3,9 +3,9 @@ const fs = require('fs');
 // Booting the iOS simulator os very slow, most likely due to slower CI hardware. 
 // Arbitrarily increase the timeout by a set multiplier
 const timeoutMultiplier = 5
-const defaultWaitForTimeout = 20000;
-const defaultConnectionRetryTimeout = 60000 * timeoutMultiplier;
-const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
+const defaultWaitForTimeout = 20000 * timeoutMultiplier;
+const defaultConnectionRetryTimeout =  60000 * timeoutMultiplier;
+const jasmineDefaultTimeout = 60000 * timeoutMultiplier ; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
