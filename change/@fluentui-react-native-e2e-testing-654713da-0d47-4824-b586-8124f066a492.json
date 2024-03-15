@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add Overflow E2E test spec for win32.",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

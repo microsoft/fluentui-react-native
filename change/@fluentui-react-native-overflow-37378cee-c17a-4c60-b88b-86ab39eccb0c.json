@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix OverflowItem incorrectly merging its props with its cloned child.",
+  "packageName": "@fluentui-react-native/overflow",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
