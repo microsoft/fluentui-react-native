@@ -295,7 +295,7 @@ const MenuCustomized: React.FunctionComponent = () => {
         <MenuTrigger>
           <Button>Test</Button>
         </MenuTrigger>
-        <CustomMenuPopover>
+        <CustomMenuPopover directionalHint="rightCenter">
           <CustomMenuList>
             <CustomMenuItem>A MenuItem</CustomMenuItem>
             <CustomMenuItem>A MenuItem</CustomMenuItem>
