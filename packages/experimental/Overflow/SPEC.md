@@ -33,6 +33,11 @@ export interface OverflowProps extends ViewProps {
    * Callback triggering whenever the visibility of one or more items changes
    */
   onOverflowUpdate?: (data: OverflowUpdatePayload) => void;
+
+  /**
+   * Callback that triggers when the container, menu, and every item is registered in the manager. If `dontHideBeforeReady` is false, this triggers once `Overflow` is visible.
+   */
+  onReady?: () => void;
 }
 
 interface OverflowUpdatePayload {
@@ -92,12 +97,12 @@ The examples below will show this hook being used to populate the items of a [FU
 
 ### Usage and Examples
 
-See the test page for
+See the test page for more examples.
 
 Below is an example of using the `useOverflowMenu` hook with a Menu component.
 
 ```tsx
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { ButtonV1 as Button, type ButtonProps } from '@fluentui-react-native/button';
 import { Menu, MenuTrigger, MenuList, MenuPopover, MenuItem } from '@fluentui-react-native/menu';
 import { useOverflowMenu } from '@fluentui-react-native/overflow';
 
@@ -106,7 +111,7 @@ interface OverflowMenuProps extends ButtonProps {
 }
 
 export function OverflowMenu(props: OverflowMenuProps) {
-  const { onItemPress, appearance = 'outline' } = props;
+  const { onItemPress, ...rest } = props;
   const { showMenu, visibleMenuItems, menuTriggerRef, onMenuTriggerLayout } = useOverflowMenu();
   const overflowCount = visibleMenuItems.length;
   if (showMenu) {
@@ -118,8 +123,9 @@ export function OverflowMenu(props: OverflowMenuProps) {
             onLayout={onMenuTriggerLayout}
             style={overflowTestPageStyles.menuTrigger}
             componentRef={menuTriggerRef}
+            {...rest}
           >
-            {`+ ${overflowCount} item${visibleItems.length !== 1 ? 's' : ''}`}
+            {`+ ${overflowCount} item${overflowCount !== 1 ? 's' : ''}`}
           </Button>
         </MenuTrigger>
         <MenuPopover>
@@ -168,6 +174,14 @@ function OverflowExperience() {
 }
 ```
 
+Example above, fully rendered.
+
+![Barebones overflow experience, with full width](./assets/example1_full.png)
+
+Example above, with overflow.
+
+![Barebones overflow experience, with overflow](./assets/example1_retracted.png)
+
 You can even integrate the `Overflow` and `OverflowItem` with existing FURN components, such as a TabList.
 
 ```tsx
@@ -199,3 +213,11 @@ function OverflowTabListExperience() {
   );
 }
 ```
+
+Example above, fully rendered.
+
+![Overflow Tablist, with full width](./assets/example2_full.png)
+
+Example above, with overflow.
+
+![Overflow Tablist, with overflow](./assets/example2_retracted.png)
