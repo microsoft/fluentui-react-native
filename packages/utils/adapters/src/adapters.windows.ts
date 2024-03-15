@@ -1,13 +1,10 @@
-import type { TextProps } from 'react-native';
-import type { ImageProps } from 'react-native';
-
-import type { IViewWindowsProps } from 'react-native-windows';
+import type { ImageProps, TextProps, ViewProps } from 'react-native-windows';
 
 import type { IFilterMask } from './filter.types';
 
-// export core interface types from RN
+// export core interface types
 export type ITextProps = TextProps;
-export type IViewProps = IViewWindowsProps;
+export type IViewProps = ViewProps;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
@@ -20,36 +17,25 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityLabelledBy: true,
   accessibilityLanguage: true,
   accessibilityLiveRegion: true,
-  accessibilityPosInSet: true,
   accessibilityRole: true,
-  accessibilitySetSize: true,
   accessibilityState: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
   collapsable: true,
-  enableFocusRing: true,
   focusable: true,
   hasTVPreferredFocus: true,
   hitSlop: true,
   id: true,
   importantForAccessibility: true,
   isTVSelectable: true,
-  keyDownEvents: true,
-  keyUpEvents: true,
   nativeID: true,
   needsOffscreenAlphaCompositing: true,
   onAccessibilityAction: true,
   onAccessibilityEscape: true,
   onAccessibilityTap: true,
-  onKeyDown: true,
-  onKeyDownCapture: true,
-  onKeyUp: true,
-  onKeyUpCapture: true,
   onLayout: true,
   onMagicTap: true,
-  onMouseEnter: true,
-  onMouseLeave: true,
   onMoveShouldSetResponder: true,
   onMoveShouldSetResponderCapture: true,
   onPointerCancel: true,
@@ -85,9 +71,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   role: true,
   shouldRasterizeIOS: true,
   style: true,
-  tabIndex: true,
   testID: true,
-  tooltip: true,
   tvParallaxMagnification: true,
   tvParallaxProperties: true,
   tvParallaxShiftDistanceX: true,
