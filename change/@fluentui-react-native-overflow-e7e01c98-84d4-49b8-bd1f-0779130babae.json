@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix more typos in Overflow doc",
-  "packageName": "@fluentui-react-native/overflow",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

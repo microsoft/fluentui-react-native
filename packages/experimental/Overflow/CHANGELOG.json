@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/overflow",
   "entries": [
     {
+      "date": "Sat, 16 Mar 2024 18:50:13 GMT",
+      "version": "0.2.4",
+      "tag": "@fluentui-react-native/overflow_v0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/overflow",
+            "commit": "1904dcf89c9f1c6b7ae4626519abefe5990f1e57",
+            "comment": "Fix more typos in Overflow doc"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 22:44:19 GMT",
       "version": "0.2.3",
       "tag": "@fluentui-react-native/overflow_v0.2.3",
