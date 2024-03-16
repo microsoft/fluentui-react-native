@@ -152,12 +152,13 @@ import { Overflow, OverflowItem } from '@fluentui-react-native/overflow';
 
 import { OverflowMenu } from '.';
 
-const items = ['a', 'b', 'c', 'd'];
+const items = ['a', 'b', 'c', 'd', 'e'];
 const itemLabels = {
   a: 'Item A',
   b: 'Item B',
   c: 'Item C',
   d: 'Item D',
+  e: 'Item E',
 };
 
 function OverflowExperience() {
@@ -189,12 +190,13 @@ import { TabList, Tab } from '@fluentui-react-native/tablist';
 
 import { OverflowMenu } from '.';
 
-const items = ['a', 'b', 'c', 'd'];
+const items = ['a', 'b', 'c', 'd', 'e'];
 const itemLabels = {
   a: 'Item A',
   b: 'Item B',
   c: 'Item C',
   d: 'Item D',
+  e: 'Item E',
 };
 
 function OverflowTabListExperience() {
