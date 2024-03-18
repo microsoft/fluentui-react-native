@@ -1,11 +1,11 @@
 import OverflowPageObject from '../pages/OverflowPageObject';
 
-describe('TabList Testing Initialization', () => {
+describe('Overflow Testing Initialization', () => {
   it('Wait for app load', async () => {
     expect(await OverflowPageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
 
-  it('Click and navigate to TabList test page', async () => {
+  it('Click and navigate to Overflow test page', async () => {
     expect(await OverflowPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
     /* Expand E2E section */
