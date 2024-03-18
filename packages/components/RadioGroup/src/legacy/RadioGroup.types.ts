@@ -1,9 +1,9 @@
 import type * as React from 'react';
+import type { ViewProps } from 'react-native';
 
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { ITextProps } from '@fluentui-react-native/text';
 import type { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const radioGroupName = 'RadioGroup';
@@ -105,7 +105,7 @@ export type IRadioGroupProps = React.PropsWithChildren<{
 export interface IRadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 
 export interface IRadioGroupSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<ViewProps>;
   label: ITextProps;
   container: FocusZoneProps;
 }
