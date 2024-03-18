@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Mon, 11 Mar 2024 23:09:49 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Mar 2024 16:26:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.12
+
+Fri, 15 Mar 2024 16:26:21 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.19.10
 

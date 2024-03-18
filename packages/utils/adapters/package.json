@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/adapters",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "description": "Adapters for working with react-native types",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -60,6 +60,17 @@
         "core-macos",
         "core-windows"
       ]
+    }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   }
 }

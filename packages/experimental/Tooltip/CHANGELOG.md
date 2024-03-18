@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tooltip
 
-This log was last generated on Fri, 01 Mar 2024 20:39:08 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Mar 2024 16:26:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.16
+
+Fri, 15 Mar 2024 16:26:21 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.2.13
 

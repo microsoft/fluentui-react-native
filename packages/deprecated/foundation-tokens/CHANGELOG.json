@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Fri, 15 Mar 2024 16:26:21 GMT",
+      "version": "0.14.8",
+      "tag": "@uifabricshared/foundation-tokens_v0.14.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-tokens",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:08 GMT",
       "version": "0.14.7",
       "tag": "@uifabricshared/foundation-tokens_v0.14.7",

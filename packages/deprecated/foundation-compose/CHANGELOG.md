@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Wed, 13 Mar 2024 15:54:07 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Mar 2024 16:26:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.14.24
+
+Fri, 15 Mar 2024 16:26:21 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 1.14.23
 

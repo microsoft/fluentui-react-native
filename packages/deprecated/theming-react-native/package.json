@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-react-native",
-  "version": "0.19.11",
+  "version": "0.19.12",
   "description": "A library of functions which produce React Native styles from a Theme",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -47,8 +47,11 @@
     "typescript": "4.9.4"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.72.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.72.0",
+    "react-native-macos": "^0.72.0",
+    "react-native-windows": "^0.72.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -65,6 +68,17 @@
         "core-ios",
         "react"
       ]
+    }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   }
 }

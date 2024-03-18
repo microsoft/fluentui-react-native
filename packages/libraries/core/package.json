@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.40.8",
+  "version": "0.40.9",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",
@@ -53,8 +53,12 @@
     "react-native": "^0.72.0"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.72.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.72.0",
+    "react-native-macos": "^0.72.0",
+    "react-native-svg": "^13.14.0",
+    "react-native-windows": "^0.72.0"
   },
   "author": "",
   "license": "MIT",
@@ -73,6 +77,17 @@
         "core-ios",
         "react"
       ]
+    }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   }
 }

@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 01 Mar 2024 20:39:12 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Mar 2024 20:38:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.21
+
+Fri, 15 Mar 2024 20:38:11 GMT
+
+### Patches
+
+- set directionalHint on MenuPopover from user props (krsiler@microsoft.com)
+
+## 0.167.20
+
+Fri, 15 Mar 2024 16:26:21 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.167.19
+
+Thu, 14 Mar 2024 22:02:05 GMT
+
+### Patches
+
+- Add Overflow page (winlarry@microsoft.com)
 
 ## 0.167.14
 

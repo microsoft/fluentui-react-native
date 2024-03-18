@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.14.23",
+  "version": "1.14.24",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -47,8 +47,11 @@
     "react": "18.2.0"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.72.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.72.0",
+    "react-native-macos": "^0.72.0",
+    "react-native-windows": "^0.72.0"
   },
   "depcheck": {
     "ignoreMatches": [
@@ -56,5 +59,16 @@
       "@fluentui-react-native/memo-cache",
       "@fluentui-react-native/theme-types"
     ]
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
   }
 }

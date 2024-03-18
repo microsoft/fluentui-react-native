@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/input",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "A cross-platform Text input component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -45,9 +45,12 @@
     "react-native-svg": "^13.14.0"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.72.0",
     "react": "18.2.0",
     "react-native": "^0.72.0",
-    "react-native-svg": "^13.14.0"
+    "react-native-macos": "^0.72.0",
+    "react-native-svg": "^13.14.0",
+    "react-native-windows": "^0.72.0"
   },
   "author": "",
   "license": "MIT",
@@ -67,6 +70,17 @@
         "react",
         "svg"
       ]
+    }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   }
 }

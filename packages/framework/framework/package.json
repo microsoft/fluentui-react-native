@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/framework",
-  "version": "0.13.8",
+  "version": "0.13.9",
   "description": "Component framework used by fluentui react native controls",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -50,8 +50,11 @@
     "react-native": "^0.72.0"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.72.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.72.0",
+    "react-native-macos": "^0.72.0",
+    "react-native-windows": "^0.72.0"
   },
   "author": "",
   "license": "MIT",
@@ -70,6 +73,17 @@
         "core-ios",
         "react"
       ]
+    }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   }
 }

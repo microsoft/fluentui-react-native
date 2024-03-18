@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 01 Mar 2024 20:39:11 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Mar 2024 20:38:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.25
+
+Fri, 15 Mar 2024 20:38:11 GMT
+
+### Patches
+
+- set directionalHint on MenuPopover from user props (krsiler@microsoft.com)
+
+## 1.12.24
+
+Fri, 15 Mar 2024 16:26:20 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 1.12.21
 
