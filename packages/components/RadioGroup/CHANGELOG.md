@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Fri, 15 Mar 2024 16:26:20 GMT and should not be manually modified.
+This log was last generated on Mon, 18 Mar 2024 23:41:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.16
+
+Mon, 18 Mar 2024 23:41:59 GMT
+
+### Patches
+
+- Remove usages of react-native-win32 from non win32 overrides (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.20.15
 

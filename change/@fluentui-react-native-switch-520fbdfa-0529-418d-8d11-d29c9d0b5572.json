@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove usages of react-native-win32 from non win32 overrides",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Mon, 18 Mar 2024 23:41:59 GMT",
+      "version": "0.20.16",
+      "tag": "@fluentui-react-native/radio-group_v0.20.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "2987dfe69a815b118981b62ed49a41ea00705496",
+            "comment": "Remove usages of react-native-win32 from non win32 overrides"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 16:26:20 GMT",
       "version": "0.20.15",
       "tag": "@fluentui-react-native/radio-group_v0.20.15",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Mon, 18 Mar 2024 23:41:59 GMT",
+      "version": "0.12.3",
+      "tag": "@fluentui-react-native/adapters_v0.12.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "2987dfe69a815b118981b62ed49a41ea00705496",
+            "comment": "Make base adapter types be union of all platforms"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 16:26:18 GMT",
       "version": "0.12.2",
       "tag": "@fluentui-react-native/adapters_v0.12.2",

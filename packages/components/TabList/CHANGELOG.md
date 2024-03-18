@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tablist
 
-This log was last generated on Fri, 15 Mar 2024 16:26:21 GMT and should not be manually modified.
+This log was last generated on Mon, 18 Mar 2024 23:42:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.22
+
+Mon, 18 Mar 2024 23:42:00 GMT
+
+### Patches
+
+- Remove usages of react-native-win32 from non win32 overrides (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.5.21
 
