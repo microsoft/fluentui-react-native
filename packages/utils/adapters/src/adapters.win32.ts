@@ -199,6 +199,8 @@ const _textMask: IFilterMask<ITextProps> = {
   'aria-labelledby': true,
   'aria-live': true,
   'aria-modal': true,
+  'aria-multiselectable': true,
+  'aria-required': true,
   'aria-selected': true,
   'aria-valuemax': true,
   'aria-valuemin': true,

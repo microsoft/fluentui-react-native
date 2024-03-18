@@ -177,6 +177,7 @@ export type IAdapterWin32ViewProps = ViewProps & {
   onFocusCapture?: (ev: NativeSyntheticEvent<{}>) => void;
   cursor?: Cursor;
   animationClass?: string;
+  focusable?: boolean;
 
   'aria-multiselectable'?: boolean | undefined;
   'aria-required'?: boolean | undefined;
@@ -233,7 +234,34 @@ export type IAdapterWin32ViewProps = ViewProps & {
     | 'toolbar';
 };
 
+/**
+ * Role-based text style names.
+ */
+export type TextWin32TextStyle =
+  | 'None'
+  | 'SmallStandard'
+  | 'SmallSecondary'
+  | 'MediumStandard'
+  | 'MediumSecondary'
+  | 'MediumApp'
+  | 'MediumBold'
+  | 'MediumBoldApp'
+  | 'LargeStandard'
+  | 'LargePlusStandard'
+  | 'ExtraLargeStandard'
+  | 'HugeStandard';
+
+
 export type IAdapterWin32TextProps = TextProps & {
+
+  onKeyDown?: (args: IKeyboardEvent) => void;
+  onKeyDownCapture?: (args: IKeyboardEvent) => void;
+  onKeyUp?: (args: IKeyboardEvent) => void;
+  onKeyUpCapture?: (args: IKeyboardEvent) => void;
+
+  keyDownEvents?: IHandledKeyboardEvent[];
+  keyUpEvents?: IHandledKeyboardEvent[];
+
   'aria-multiselectable'?: boolean | undefined;
   'aria-required'?: boolean | undefined;
   accessibilitySetSize?: number;
@@ -245,6 +273,19 @@ export type IAdapterWin32TextProps = TextProps & {
   accessibilityItemType?: string;
   accessibilityControls?: string | undefined;
   accessibilityDescribedBy?: string | undefined;
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onBlur?: (ev: NativeSyntheticEvent<{}>) => void;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onBlurCapture?: (ev: NativeSyntheticEvent<{}>) => void;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onFocus?: (ev: NativeSyntheticEvent<{}>) => void;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onFocusCapture?: (ev: NativeSyntheticEvent<{}>) => void;
+
+  focusable?: boolean;
+  textStyle?: TextWin32TextStyle;
+  tooltip?: string;
 };
 
 export type IAdapterWin32ImageProps = ImageProps & {
