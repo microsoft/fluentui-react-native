@@ -251,9 +251,7 @@ export type TextWin32TextStyle =
   | 'ExtraLargeStandard'
   | 'HugeStandard';
 
-
 export type IAdapterWin32TextProps = TextProps & {
-
   onKeyDown?: (args: IKeyboardEvent) => void;
   onKeyDownCapture?: (args: IKeyboardEvent) => void;
   onKeyUp?: (args: IKeyboardEvent) => void;
