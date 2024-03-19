@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 19 Mar 2024 20:00:34 GMT",
+      "version": "1.13.0",
+      "tag": "@fluentui-react-native/menu_v1.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "9f0f6a0c339e8887cf5cb4c8a0cf3263da56ddbc",
+            "comment": "timestamp per instance"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 20:38:11 GMT",
       "version": "1.12.25",
       "tag": "@fluentui-react-native/menu_v1.12.25",
