@@ -14,7 +14,6 @@ import { useMenuContext } from '../context/menuContext';
 // this behavior.
 // This are use when show() function is called to show the Menu
 const delayOpen = 150;
-let lastCloseTimestamp = -1;
 
 /**
  * Values related to Screen Width and Animation Easing
@@ -273,6 +272,7 @@ const useMenuOpenState = (
   const [openInternal, setOpenInternal] = React.useState<boolean>(initialState);
   const [shouldFocusOnContainer, setShouldFocusOnContainer] = React.useState<boolean | undefined>(undefined);
   const state = isControlled ? open : openInternal;
+  const lastCloseTimestampRef = React.useRef<number>(-1);
 
   /**
    * setOpen handles the open of the Menu and setting focus on the Popover container
@@ -280,7 +280,7 @@ const useMenuOpenState = (
   const setOpen = React.useCallback(
     (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => {
       const openPrev = state;
-      if (!isControlled && (!isOpen || lastCloseTimestamp + delayOpen <= Date.now())) {
+      if (!isControlled && (!isOpen || lastCloseTimestampRef.current + delayOpen <= Date.now())) {
         setOpenInternal(isOpen);
       }
       if (isOpen) {
@@ -289,7 +289,7 @@ const useMenuOpenState = (
       }
       if (!isOpen) {
         setShouldFocusOnContainer(undefined);
-        lastCloseTimestamp = Date.now();
+        lastCloseTimestampRef.current = Date.now();
         hide();
       }
       if (onOpenChange && openPrev !== isOpen) {
