@@ -6573,20 +6573,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.3.3":
-  version: 2.3.4
-  resolution: "@rnx-kit/align-deps@npm:2.3.4"
+"@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "@rnx-kit/align-deps@npm:2.4.0"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 25b7deedd7e77a35e9a33b8cb3dae3045e550c7ddf2912204d4330c9b0fdb1d6d91055e71e41b5fb01281c16b4338bdb115ab4b001521757b83fe8115d0d10be
+  checksum: 4dcb1e810b4592fb903fa3927f033cefd686b6c562b052528cdd6cd0e1b0b82b9f20433de610b4eec9e59cb7d6d9e246da10543ef711f956235096226bdacb86
   languageName: node
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.23
-  resolution: "@rnx-kit/cli@npm:0.16.23"
+  version: 0.16.24
+  resolution: "@rnx-kit/cli@npm:0.16.24"
   dependencies:
-    "@rnx-kit/align-deps": ^2.3.3
+    "@rnx-kit/align-deps": ^2.4.0
     "@rnx-kit/config": ^0.6.6
     "@rnx-kit/console": ^1.0.11
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector": ^1.1.1
@@ -6613,7 +6613,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: e9d760a08a05723160343982fb47e967ab3d669ee7056c9bc815ce0d2d9b2337527aa3719bf4e9815bf78407d02df23b10f2d661fb0e77251b0718f80b2b5522
+  checksum: c0d225d30e179ed26303daea1bfba7ff9c78791e78211a6471951c3035354f8b88b705d2f2f8fcdeab193a67686f9fbb76875f76a7613b64f27c836366ed09a9
   languageName: node
   linkType: hard
 
