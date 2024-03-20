@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 15 Mar 2024 20:38:11 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Mar 2024 22:58:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.26
+
+Wed, 20 Mar 2024 22:58:12 GMT
+
+### Patches
+
+- Add Overflow E2E test section. (winlarry@microsoft.com)
 
 ## 0.167.21
 

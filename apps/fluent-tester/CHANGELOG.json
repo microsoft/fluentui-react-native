@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 20 Mar 2024 22:58:12 GMT",
+      "version": "0.167.26",
+      "tag": "@fluentui-react-native/tester_v0.167.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "fc707c2ae9c12047a5cd46f04db72e360c730ee1",
+            "comment": "Add Overflow E2E test section."
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 20:38:11 GMT",
       "version": "0.167.21",
       "tag": "@fluentui-react-native/tester_v0.167.21",

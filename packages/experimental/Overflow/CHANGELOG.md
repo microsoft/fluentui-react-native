@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/overflow
 
-This log was last generated on Sat, 16 Mar 2024 18:50:13 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Mar 2024 22:58:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.7
+
+Wed, 20 Mar 2024 22:58:12 GMT
+
+### Patches
+
+- Fix OverflowItem incorrectly merging its props with its cloned child. (winlarry@microsoft.com)
 
 ## 0.2.4
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 15 Mar 2024 16:26:19 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Mar 2024 22:58:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.34.17
+
+Wed, 20 Mar 2024 22:58:12 GMT
+
+### Patches
+
+- Add Overflow E2E test spec for win32. (winlarry@microsoft.com)
 
 ## 1.34.15
 
