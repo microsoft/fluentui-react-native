@@ -214,7 +214,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Overflow',
     component: OverflowTest,
-    testPageButton: '',
+    testPageButton: Constants.HOMEPAGE_OVERFLOW_BUTTON,
     platforms: ['win32', 'macos'],
   },
   {

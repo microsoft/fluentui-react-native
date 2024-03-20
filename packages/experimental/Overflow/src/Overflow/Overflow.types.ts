@@ -26,6 +26,11 @@ export interface OverflowProps extends ViewProps {
    * Callback triggering whenever the visibility of one or more items changes
    */
   onOverflowUpdate?: (data: OverflowUpdatePayload) => void;
+
+  /**
+   * Callback that triggers when the container, menu, and every item is registered in the manager. If `dontHideBeforeReady` is false, this triggers once `Overflow` is visible.
+   */
+  onReady?: () => void;
 }
 
 type MenuSetLayoutStateParam = { type: 'menu'; layoutDone: boolean };

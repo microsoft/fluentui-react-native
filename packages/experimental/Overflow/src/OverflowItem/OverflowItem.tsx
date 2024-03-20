@@ -1,16 +1,16 @@
 /** @jsxRuntime classic */
 import * as React from 'react';
-import type { LayoutChangeEvent, StyleProp, ViewProps, ViewStyle } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { mergeProps, stagedComponent, memoize } from '@fluentui-react-native/framework';
+import { mergeProps, stagedComponent, memoize, mergeStyles } from '@fluentui-react-native/framework';
 
 import type { OverflowItemProps } from './OverflowItem.types';
 import { overflowItemName } from './OverflowItem.types';
 import { useOverflowItem } from './useOverflowItem';
 
 const getOverflowItemProps = memoize(overflowItemPropWorker);
-function overflowItemPropWorker(style: StyleProp<ViewStyle>, onLayout: (e: LayoutChangeEvent) => void): ViewProps {
-  return { style, onLayout };
+function overflowItemPropWorker(props: ViewProps, style: StyleProp<ViewStyle>): ViewProps {
+  return { ...props, style };
 }
 
 export const OverflowItem = stagedComponent<OverflowItemProps>((userProps: OverflowItemProps) => {
@@ -20,7 +20,7 @@ export const OverflowItem = stagedComponent<OverflowItemProps>((userProps: Overf
       return null;
     }
 
-    finalProps = mergeProps(props, finalProps);
+    const mergedProps = mergeProps(props, finalProps);
     const childrenArray = React.Children.toArray(children);
     const child = childrenArray[0];
 
@@ -36,7 +36,8 @@ export const OverflowItem = stagedComponent<OverflowItemProps>((userProps: Overf
     }
 
     // Assume that the child can accept ViewProps.
-    const viewProps = getOverflowItemProps(finalProps.style, finalProps.onLayout);
+    const viewStyles = mergeStyles(child.props.style, finalProps.style);
+    const viewProps = getOverflowItemProps(mergedProps, viewStyles);
 
     const clone = React.cloneElement(child, viewProps);
     return clone;

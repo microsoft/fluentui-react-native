@@ -62,6 +62,7 @@ exports[`Overflow component tests Overflow default 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    overflowID="a"
     style={
       {
         "alignItems": "center",
@@ -152,6 +153,7 @@ exports[`Overflow component tests Overflow default 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    overflowID="b"
     style={
       {
         "alignItems": "center",
@@ -242,6 +244,7 @@ exports[`Overflow component tests Overflow default 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    overflowID="c"
     style={
       {
         "alignItems": "center",

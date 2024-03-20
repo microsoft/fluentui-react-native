@@ -10,6 +10,8 @@ import { TabList, Tab } from '@fluentui-react-native/tablist';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import MoreHorizontalIcon from './MoreHorizontalFilled.svg';
+import { E2EOverflowTest } from './OverflowE2ETest';
+import { OVERFLOW_TESTPAGE } from '../../../../E2E/src/index.consts';
 import { Test } from '../Test';
 
 const items = ['a', 'b', 'c', 'd', 'e'];
@@ -153,6 +155,7 @@ export const OverflowTest: React.FunctionComponent = () => {
         {
           name: 'Overflow',
           component: OverflowMainTest,
+          testID: OVERFLOW_TESTPAGE,
         },
         {
           name: 'Overflow TabList',
@@ -161,6 +164,12 @@ export const OverflowTest: React.FunctionComponent = () => {
         {
           name: 'Overflow Variable Width',
           component: OverflowDifferentWidthTest,
+        },
+      ]}
+      e2eSections={[
+        {
+          name: 'Overflow E2E Section',
+          component: E2EOverflowTest,
         },
       ]}
       spec="https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/Overflow/SPEC.md"
