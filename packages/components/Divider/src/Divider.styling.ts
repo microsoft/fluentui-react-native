@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { ViewProps, ColorValue, StyleProp, ViewStyle } from 'react-native';
+import type { ViewProps, ColorValue } from 'react-native';
 import { Platform } from 'react-native';
 
 import { memoize, mergeProps, mergeStyles } from '@fluentui-react-native/framework';

@@ -2,6 +2,9 @@
 
 exports[`Divider component tests Branded Divider 1`] = `
 <View
+  alignContent="center"
+  appearance="brand"
+  insetSize={0}
   style={
     {
       "alignItems": "center",
@@ -31,6 +34,9 @@ exports[`Divider component tests Branded Divider 1`] = `
 
 exports[`Divider component tests Custom Divider 1`] = `
 <View
+  alignContent="center"
+  appearance="default"
+  insetSize={0}
   style={
     {
       "alignItems": "center",
@@ -60,6 +66,9 @@ exports[`Divider component tests Custom Divider 1`] = `
 
 exports[`Divider component tests Divider default 1`] = `
 <View
+  alignContent="center"
+  appearance="default"
+  insetSize={0}
   style={
     {
       "alignItems": "center",
@@ -89,6 +98,18 @@ exports[`Divider component tests Divider default 1`] = `
 
 exports[`Divider component tests Divider with all props + tokens set 1`] = `
 <View
+  alignContent="start"
+  appearance="strong"
+  icon={
+    {
+      "fontSource": {
+        "codepoint": 9827,
+        "fontFamily": "Arial",
+        "fontSize": 32,
+      },
+    }
+  }
+  insetSize={16}
   style={
     {
       "alignItems": "center",
@@ -98,7 +119,7 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
       "justifyContent": "center",
       "maxHeight": 200,
       "maxWidth": 200,
-      "minHeight": 40,
+      "minHeight": 84,
       "minWidth": 10,
       "padding": 10,
       "paddingEnd": 10,
@@ -167,6 +188,18 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
 
 exports[`Divider component tests Divider with icon 1`] = `
 <View
+  alignContent="center"
+  appearance="default"
+  icon={
+    {
+      "fontSource": {
+        "codepoint": 9827,
+        "fontFamily": "Arial",
+        "fontSize": 32,
+      },
+    }
+  }
+  insetSize={0}
   style={
     {
       "alignItems": "center",
@@ -229,6 +262,9 @@ exports[`Divider component tests Divider with icon 1`] = `
 
 exports[`Divider component tests Divider with text 1`] = `
 <View
+  alignContent="center"
+  appearance="default"
+  insetSize={0}
   style={
     {
       "alignItems": "center",
@@ -296,6 +332,9 @@ exports[`Divider component tests Divider with text 1`] = `
 
 exports[`Divider component tests Horizontal Divider with Inset 1`] = `
 <View
+  alignContent="center"
+  appearance="default"
+  insetSize={16}
   style={
     {
       "alignItems": "center",
@@ -325,6 +364,9 @@ exports[`Divider component tests Horizontal Divider with Inset 1`] = `
 
 exports[`Divider component tests Strong Divider 1`] = `
 <View
+  alignContent="center"
+  appearance="strong"
+  insetSize={0}
   style={
     {
       "alignItems": "center",
@@ -354,6 +396,9 @@ exports[`Divider component tests Strong Divider 1`] = `
 
 exports[`Divider component tests Subtle Divider 1`] = `
 <View
+  alignContent="center"
+  appearance="subtle"
+  insetSize={0}
   style={
     {
       "alignItems": "center",
@@ -383,6 +428,9 @@ exports[`Divider component tests Subtle Divider 1`] = `
 
 exports[`Divider component tests Vertical Divider 1`] = `
 <View
+  alignContent="center"
+  appearance="default"
+  insetSize={0}
   style={
     {
       "alignItems": "center",
@@ -413,6 +461,9 @@ exports[`Divider component tests Vertical Divider 1`] = `
 
 exports[`Divider component tests Vertical Divider with Inset 1`] = `
 <View
+  alignContent="center"
+  appearance="default"
+  insetSize={16}
   style={
     {
       "alignItems": "center",
