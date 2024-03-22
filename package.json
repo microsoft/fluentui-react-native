@@ -63,8 +63,9 @@
     "scripts"
   ],
   "resolutions": {
-    "es5-ext": "0.10.63",
+    "@react-native-picker/picker@^2.2.1": "patch:@react-native-picker/picker@npm%3A2.6.1#./.yarn/patches/@react-native-picker-picker-npm-2.6.1-90663b0c0f.patch",
     "@types/react": "^18.2.0",
+    "es5-ext": "0.10.63",
     "micromatch": "^4.0.0",
     "react-native-svg": "^13.14.0",
     "semver": "^7.5.2",
