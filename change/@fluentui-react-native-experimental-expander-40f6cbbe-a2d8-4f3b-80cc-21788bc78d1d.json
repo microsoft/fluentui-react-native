@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update VS project to support package references",
+  "packageName": "@fluentui-react-native/experimental-expander",
+  "email": "4123478+tido64@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
