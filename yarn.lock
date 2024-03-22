@@ -19459,8 +19459,8 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^3.1.1":
-  version: 3.3.7
-  resolution: "react-native-test-app@npm:3.3.7"
+  version: 3.4.4
+  resolution: "react-native-test-app@npm:3.4.4"
   dependencies:
     "@rnx-kit/react-native-host": ^0.4.5
     ajv: ^8.0.0
@@ -19468,7 +19468,7 @@ __metadata:
     fast-xml-parser: ^4.0.0
     prompts: ^2.4.0
     semver: ^7.3.5
-    uuid: ^8.3.2
+    uuid: ^9.0.0
     yoctocolors: ^2.0.0
   peerDependencies:
     "@callstack/react-native-visionos": 0.73
@@ -19491,7 +19491,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: e9258679ee2942af8828c64d1d2f36a2a173544a117060de9dea76733cb39b7fe7a53c55795f56f2fedb701a5dbb1d6f44f37b7048d8588b889b4fb12b7127cf
+  checksum: a45a75dbc6c6c6a9373325bedeacdd3d0e3d464e814be65298de8ee642dc9e7ba2cb42b01ccd0b076e1e4a2a87bba3c18a57730fcb9b12401ffe9f162dabc7e8
   languageName: node
   linkType: hard
 
@@ -22053,7 +22053,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.3.0, uuid@npm:^8.3.2":
+"uuid@npm:^8.3.0":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
