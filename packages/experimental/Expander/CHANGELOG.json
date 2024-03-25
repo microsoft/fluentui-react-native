@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Mon, 25 Mar 2024 06:51:42 GMT",
+      "version": "0.7.12",
+      "tag": "@fluentui-react-native/experimental-expander_v0.7.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "f12050ff7b4fc971a0d199da83c59974c39fcd48",
+            "comment": "Update VS project to support package references"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 16:26:19 GMT",
       "version": "0.7.10",
       "tag": "@fluentui-react-native/experimental-expander_v0.7.10",

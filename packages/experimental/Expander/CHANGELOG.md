@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Fri, 15 Mar 2024 16:26:19 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Mar 2024 06:51:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.12
+
+Mon, 25 Mar 2024 06:51:42 GMT
+
+### Patches
+
+- Update VS project to support package references (4123478+tido64@users.noreply.github.com)
 
 ## 0.7.10
 
