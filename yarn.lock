@@ -6414,12 +6414,12 @@ __metadata:
   linkType: hard
 
 "@react-native-picker/picker@npm:^2.2.1":
-  version: 2.6.1
-  resolution: "@react-native-picker/picker@npm:2.6.1"
+  version: 2.7.0
+  resolution: "@react-native-picker/picker@npm:2.7.0"
   peerDependencies:
-    react: ">=16"
-    react-native: ">=0.57"
-  checksum: a8c58d5d945350b70fd8b5d66dfe97dd04641277db7c702912d8c41ae4da94cfef8b0b73bfa493adfdee8f089af6e0316872c3ee61a4efc18528e6e25a5452bc
+    react: "*"
+    react-native: "*"
+  checksum: f4e487a12ec0658a07337b8b8b19c9d2f9153679de3bebe057bd1e5be4c8e454be69d7d8e968733f612b00fe722c0a220c7afa7ab68d5482b54b3dc0aced875f
   languageName: node
   linkType: hard
 
