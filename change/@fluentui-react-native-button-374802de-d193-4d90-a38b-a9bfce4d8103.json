@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "check if measuredHeight/Width are falsy before using",
-  "packageName": "@fluentui-react-native/button",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

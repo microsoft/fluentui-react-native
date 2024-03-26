@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 26 Mar 2024 23:16:46 GMT",
+      "version": "0.36.18",
+      "tag": "@fluentui-react-native/button_v0.36.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "cb5221ebd3a1047c615c015815b2f6bc4adb0c2c",
+            "comment": "check if measuredHeight/Width are falsy before using"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 16:26:18 GMT",
       "version": "0.36.16",
       "tag": "@fluentui-react-native/button_v0.36.16",

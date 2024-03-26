@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 15 Mar 2024 16:26:18 GMT and should not be manually modified.
+This log was last generated on Tue, 26 Mar 2024 23:16:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.36.18
+
+Tue, 26 Mar 2024 23:16:46 GMT
+
+### Patches
+
+- check if measuredHeight/Width are falsy before using (krsiler@microsoft.com)
 
 ## 0.36.16
 
