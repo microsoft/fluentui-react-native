@@ -1,15 +1,19 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
+
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import * as React from 'react';
 
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, buildProps } from '@fluentui-react-native/framework';
 
 import type { ExpanderType, ExpanderProps, ExpanderViewProps } from './Expander.types';
 import { expanderName } from './Expander.types';
-
-const ExpanderComponent = ensureNativeComponent('ExpanderView');
+import ExpanderComponent from './ExpanderNativeComponent';
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
