@@ -47,6 +47,7 @@ interface OverflowMenuProps {
 
 function OverflowMenu(props: OverflowMenuProps) {
   const { showMenu, visibleMenuItems, menuTriggerRef, onMenuTriggerLayout } = useOverflowMenu();
+
   if (showMenu) {
     return (
       <Menu>
@@ -65,7 +66,7 @@ function OverflowMenu(props: OverflowMenuProps) {
           <MenuList>
             {visibleMenuItems.map((id) => (
               <MenuItem onClick={() => props.onItemPress(id)} key={id}>
-                {itemLabels[id]}
+                {itemLabels[id] ?? 'Item ' + id}
               </MenuItem>
             ))}
           </MenuList>
@@ -143,6 +144,36 @@ function OverflowDifferentWidthTest() {
   );
 }
 
+function OverflowDynamicAddRemovalTest() {
+  const [ids, setIDs] = React.useState(['1', '2', '3']);
+  const addItem = React.useCallback(
+    () =>
+      setIDs((prev) => {
+        const newItem = (parseInt(prev[prev.length - 1]) + 1).toString();
+        return [...prev, newItem];
+      }),
+    [],
+  );
+  const removeItem = React.useCallback((item: string) => setIDs((prev) => prev.filter((x) => x !== item)), []);
+  return (
+    <View style={overflowTestPageStyles.containerStyle}>
+      <Text>{ids.reduce((prev, curr) => prev + ', ' + curr)}</Text>
+      <Button onClick={addItem}>Add item</Button>
+      <Divider />
+      <Overflow style={{ width: 400, borderWidth: 1, borderStyle: 'solid', borderColor: 'black' }} itemIDs={ids}>
+        {ids.map((id) => {
+          return (
+            <OverflowItem key={id} overflowID={id}>
+              <Button onClick={() => removeItem(id)}>{'Item ' + id}</Button>
+            </OverflowItem>
+          );
+        })}
+        <OverflowMenu onItemPress={removeItem} />
+      </Overflow>
+    </View>
+  );
+}
+
 export const OverflowTest: React.FunctionComponent = () => {
   const description =
     'The `Overflow` and `OverflowItem` components, based off the same Fluent web v9 components of the same name, are low level utilities that enable users to create overflow experiences with any component. These components will detect and hide overflowing elements on screen and manage the overflow state.';
@@ -160,6 +191,10 @@ export const OverflowTest: React.FunctionComponent = () => {
         {
           name: 'Overflow TabList',
           component: OverflowTabTest,
+        },
+        {
+          name: 'Overflow Dynamic Add/Removal of Items',
+          component: OverflowDynamicAddRemovalTest,
         },
         {
           name: 'Overflow Variable Width',
