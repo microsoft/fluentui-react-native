@@ -39,6 +39,12 @@ const overflowTestPageStyles = StyleSheet.create({
   menuTrigger: {
     alignSelf: 'center',
   },
+  dynamicAddRemoval: {
+    width: 400,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+  },
 });
 
 interface OverflowMenuProps {
@@ -157,10 +163,11 @@ function OverflowDynamicAddRemovalTest() {
   const removeItem = React.useCallback((item: string) => setIDs((prev) => prev.filter((x) => x !== item)), []);
   return (
     <View style={overflowTestPageStyles.containerStyle}>
-      <Text>{ids.reduce((prev, curr) => prev + ', ' + curr)}</Text>
+      <Text>Add buttons using the button below. Remove by clicking on individual items in the Overflow container.</Text>
       <Button onClick={addItem}>Add item</Button>
+      <Text>Overflow Items (raw): {ids.reduce((prev, curr) => prev + ', ' + curr)}</Text>
       <Divider />
-      <Overflow style={{ width: 400, borderWidth: 1, borderStyle: 'solid', borderColor: 'black' }} itemIDs={ids}>
+      <Overflow padding={4} style={overflowTestPageStyles.dynamicAddRemoval} itemIDs={ids}>
         {ids.map((id) => {
           return (
             <OverflowItem key={id} overflowID={id}>

@@ -32,7 +32,7 @@ interface LayoutState {
  *
  * Returns state to feed into context provider and props (with an important onLayout callback) to pass to Overflow's containing view. */
 export function useOverflow(props: OverflowProps): OverflowInfo {
-  const { itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback, onReady } = props;
+  const { itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback, onReady, padding } = props;
 
   // The overflow manager records layout info of the container, menu, and items and calculates what is visible and what isn't.
   const overflowManager = React.useRef<OverflowManager>(createOverflowManager()).current;
@@ -151,6 +151,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     if (!layoutState.container) {
       overflowManager.initialize({
         initialContainerSize: containerSize,
+        padding: typeof padding === 'number' ? padding : typeof padding === 'string' ? parseInt(padding) : 0,
         onOverflowUpdate,
         onUpdateItemDimension,
         onUpdateItemVisibility,
