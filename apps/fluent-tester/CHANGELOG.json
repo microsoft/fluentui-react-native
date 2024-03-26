@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 26 Mar 2024 01:03:36 GMT",
+      "version": "0.167.28",
+      "tag": "@fluentui-react-native/tester_v0.167.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "bd0f7c4244934f2820ad7aa0d3dbfd6c0c5fd4d6",
+            "comment": "Remove use of findNodeHandle"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Mar 2024 22:58:12 GMT",
       "version": "0.167.26",
       "tag": "@fluentui-react-native/tester_v0.167.26",

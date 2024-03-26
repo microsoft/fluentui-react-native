@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 20 Mar 2024 22:58:12 GMT and should not be manually modified.
+This log was last generated on Tue, 26 Mar 2024 01:03:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.28
+
+Tue, 26 Mar 2024 01:03:36 GMT
+
+### Patches
+
+- Remove use of findNodeHandle (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.167.26
 
