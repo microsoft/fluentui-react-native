@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 import * as React from 'react';
 import { View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { mergeProps, mergeStyles, stagedComponent, memoize } from '@fluentui-react-native/framework';
 
@@ -9,17 +10,20 @@ import { overflowName } from './Overflow.types';
 import { useOverflow } from './useOverflow';
 import { OverflowContext } from '../OverflowContext';
 
+const defaultStyles: StyleProp<ViewStyle> = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'nowrap',
+};
+
 export const getOverflowStyleProps = memoize(overflowStylePropsWorker);
 function overflowStylePropsWorker(props: OverflowProps, initialOverflowLayoutDone: boolean): Partial<OverflowProps> {
   const { dontHideBeforeReady, style, padding } = props;
   return {
-    style: mergeStyles(style, {
+    style: mergeStyles(defaultStyles, style, {
       opacity: dontHideBeforeReady || initialOverflowLayoutDone ? 1 : 0,
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
       padding: padding,
-    }),
+    } as StyleProp<ViewStyle>),
   };
 }
 
