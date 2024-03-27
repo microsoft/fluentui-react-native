@@ -42,7 +42,7 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
    - C:\repo\fluentui-react-native>`cd apps\win32`
    - C:\repo\fluentui-react-native\apps\win32> `yarn bundle`
 3. Run E2E tests
-   - C:\repo\fluentui-react-native\apps\win32> `yarn e2etest`
+   - C:\repo\fluentui-react-native\apps\E2E> `yarn e2etest:win32`
 
 ## UWP Steps
 
