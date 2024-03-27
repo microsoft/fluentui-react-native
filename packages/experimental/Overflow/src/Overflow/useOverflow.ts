@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { View, LayoutChangeEvent } from 'react-native';
+import type { View, LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 
 import type {
   LayoutSize,
@@ -32,7 +32,7 @@ interface LayoutState {
  *
  * Returns state to feed into context provider and props (with an important onLayout callback) to pass to Overflow's containing view. */
 export function useOverflow(props: OverflowProps): OverflowInfo {
-  const { itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback, onReady, padding } = props;
+  const { dontHideBeforeReady, itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback, onReady, padding, style } = props;
 
   // The overflow manager records layout info of the container, menu, and items and calculates what is visible and what isn't.
   const overflowManager = React.useRef<OverflowManager>(createOverflowManager()).current;
@@ -181,11 +181,21 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     }
   }, [initialLayoutDone, onReady]);
 
+  const overflowStyles = React.useMemo<StyleProp<ViewStyle>>(() => [
+    style,
+    {
+      display: 'flex',
+      flexDirection: 'row',
+      opacity: dontHideBeforeReady || initialLayoutDone ? 1 : 0,
+      padding: padding,
+    }
+  ], [dontHideBeforeReady, initialLayoutDone, padding, style]);
+
   return {
     state: {
       ...overflowState,
       containerSize,
-      dontHideBeforeReady: props.dontHideBeforeReady,
+      dontHideBeforeReady: dontHideBeforeReady,
       initialOverflowLayoutDone: initialLayoutDone,
       overflowMenuRef: overflowMenuRef,
       register: register,
@@ -197,6 +207,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     },
     props: {
       ...props,
+      style: overflowStyles,
       onLayout: onContainerLayout,
     },
   };
