@@ -181,15 +181,18 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     }
   }, [initialLayoutDone, onReady]);
 
-  const overflowStyles = React.useMemo<StyleProp<ViewStyle>>(() => [
-    style,
-    {
-      display: 'flex',
-      flexDirection: 'row',
-      opacity: dontHideBeforeReady || initialLayoutDone ? 1 : 0,
-      padding: padding,
-    }
-  ], [dontHideBeforeReady, initialLayoutDone, padding, style]);
+  const overflowStyles = React.useMemo<StyleProp<ViewStyle>>(
+    () => [
+      style,
+      {
+        display: 'flex',
+        flexDirection: 'row',
+        opacity: dontHideBeforeReady || initialLayoutDone ? 1 : 0,
+        padding: padding,
+      },
+    ],
+    [dontHideBeforeReady, initialLayoutDone, padding, style],
+  );
 
   return {
     state: {
