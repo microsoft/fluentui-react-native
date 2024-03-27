@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 import * as React from 'react';
 import { View } from 'react-native';
+
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 
 import type { OverflowProps } from './Overflow.types';
