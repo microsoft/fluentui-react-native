@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 27 Mar 2024 00:51:04 GMT",
+      "version": "0.167.30",
+      "tag": "@fluentui-react-native/tester_v0.167.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "57c21f5213370f8d7ffe3087c834121689e2afd2",
+            "comment": "Update used versions of packages and yarn dedupe"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Mar 2024 01:03:36 GMT",
       "version": "0.167.28",
       "tag": "@fluentui-react-native/tester_v0.167.28",
