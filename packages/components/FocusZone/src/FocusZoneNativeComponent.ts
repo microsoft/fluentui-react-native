@@ -16,6 +16,7 @@ export interface NativeProps extends ViewProps {
   use2DNavigation?: boolean;
   tabKeyNavigation?: WithDefault<'None' | 'NavigateWrap' | 'NavigateStopAtEnds' | 'Normal', 'None'>;
   disabled?: boolean;
+  isTabNavigation?: boolean;
 }
 
 export default codegenNativeComponent<NativeProps>('RCTFocusZone') as HostComponent<NativeProps>;

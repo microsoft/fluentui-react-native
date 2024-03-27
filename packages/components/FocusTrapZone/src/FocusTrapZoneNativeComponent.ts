@@ -34,6 +34,8 @@ export interface NativeProps extends ViewProps {
    * @default false
    */
   ignoreExternalFocusing?: boolean;
+
+  forceFocusInsideTrap?: boolean;
 }
 
 export default codegenNativeComponent<NativeProps>('RCTFocusTrapZone') as HostComponent<NativeProps>;
