@@ -13,7 +13,6 @@ interface MenuItem {
   title?: string;
   image?: ImageSourcePropType;
   enabled?: boolean;
-  tooltip?: string;
   identifier?: string;
   hasSubmenu?: boolean;
   submenu: MenuItem[];
