@@ -4934,7 +4934,6 @@ __metadata:
   resolution: "@fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView"
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": ^0.72.0
