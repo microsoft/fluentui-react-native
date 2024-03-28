@@ -2883,7 +2883,6 @@ __metadata:
   resolution: "@fluentui-react-native/callout@workspace:packages/components/Callout"
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3008,23 +3007,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/component-cache@*, @fluentui-react-native/component-cache@workspace:*, @fluentui-react-native/component-cache@workspace:packages/framework/component-cache":
-  version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/component-cache@workspace:packages/framework/component-cache"
-  dependencies:
-    "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/scripts": "workspace:*"
-    "@react-native/metro-config": ^0.72.0
-    "@types/jest": ^29.0.0
-    "@types/node": ^10.3.5
-    react: 18.2.0
-    react-native: ^0.72.0
-  peerDependencies:
-    react: 18.2.0
-    react-native: ^0.72.0
-  languageName: unknown
-  linkType: soft
-
 "@fluentui-react-native/composition@*, @fluentui-react-native/composition@workspace:*, @fluentui-react-native/composition@workspace:packages/framework/composition":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/composition@workspace:packages/framework/composition"
@@ -3128,7 +3110,6 @@ __metadata:
     "@fluentui-react-native/button": "*"
     "@fluentui-react-native/callout": "*"
     "@fluentui-react-native/checkbox": "*"
-    "@fluentui-react-native/component-cache": "*"
     "@fluentui-react-native/composition": "*"
     "@fluentui-react-native/contextual-menu": "*"
     "@fluentui-react-native/default-theme": "*"
@@ -3436,7 +3417,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-avatar@workspace:packages/experimental/Avatar"
   dependencies:
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3465,7 +3445,6 @@ __metadata:
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/checkbox": "workspace:*"
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3495,7 +3474,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-expander@workspace:packages/experimental/Expander"
   dependencies:
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3616,7 +3594,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer"
   dependencies:
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3680,7 +3657,6 @@ __metadata:
   resolution: "@fluentui-react-native/focus-trap-zone@workspace:packages/components/FocusTrapZone"
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3710,7 +3686,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/focus-zone@workspace:packages/components/FocusZone"
   dependencies:
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3944,7 +3919,6 @@ __metadata:
   resolution: "@fluentui-react-native/menu-button@workspace:packages/components/MenuButton"
   dependencies:
     "@fluentui-react-native/button": "workspace:*"
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/contextual-menu": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
@@ -4238,7 +4212,6 @@ __metadata:
   resolution: "@fluentui-react-native/radio-group@workspace:packages/components/RadioGroup"
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4383,7 +4356,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/spinner@workspace:packages/experimental/Spinner"
   dependencies:
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -4833,7 +4805,6 @@ __metadata:
   dependencies:
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
-    "@fluentui-react-native/component-cache": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"

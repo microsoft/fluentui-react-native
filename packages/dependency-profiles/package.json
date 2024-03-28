@@ -25,7 +25,6 @@
     "@fluentui-react-native/button": "*",
     "@fluentui-react-native/callout": "*",
     "@fluentui-react-native/checkbox": "*",
-    "@fluentui-react-native/component-cache": "*",
     "@fluentui-react-native/composition": "*",
     "@fluentui-react-native/contextual-menu": "*",
     "@fluentui-react-native/default-theme": "*",
