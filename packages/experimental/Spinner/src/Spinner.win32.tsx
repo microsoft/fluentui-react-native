@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
+
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { ColorValue } from 'react-native';
@@ -9,12 +15,12 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Path, Svg } from 'react-native-svg';
 import type { SvgProps } from 'react-native-svg';
 
-import { RCTNativeAnimatedContainer } from './consts.win32';
 import { stylingSettings } from './Spinner.styling.win32';
 import { spinnerName } from './Spinner.types';
 import type { SpinnerProps, SpinnerType, SpinnerSvgProps } from './Spinner.types.win32';
 import { diameterSizeMap, lineThicknessSizeMap, getDefaultSize } from './SpinnerTokens.win32';
 import { useSpinner } from './useSpinner';
+import RCTNativeAnimatedContainer from './Win32NativeAnimatedContainerNativeComponent';
 
 const getTrackPath = (diameter: number, width: number, color: ColorValue) => {
   const start = {

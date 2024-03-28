@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Use codegenNativeComponent so JS View configs can be generated for all native components",
+  "packageName": "@fluentui-react-native/spinner",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}

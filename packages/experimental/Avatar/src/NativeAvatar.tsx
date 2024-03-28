@@ -1,15 +1,19 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { ImageURISource, ViewProps, ColorValue } from 'react-native';
 import { NativeModules } from 'react-native';
 
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
 
 const avatarName = 'NativeAvatar';
 
-const NativeAvatarView = ensureNativeComponent('FRNAvatarView');
+import NativeAvatarView from './AvatarNativeComponent';
 
 export const Sizes = ['size16', 'size20', 'size24', 'size32', 'size40', 'size56', 'size72'] as const;
 export type Size = (typeof Sizes)[number];

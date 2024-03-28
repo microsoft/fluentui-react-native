@@ -1,11 +1,14 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
+
 /** @jsxRuntime classic */
 import React from 'react';
 
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-
 import type { VibrancyViewProps } from './VibrancyView.types';
-
-const NativeVibrancyView = ensureNativeComponent('FRNVibrancyView');
+import NativeVibrancyView from './VibrancyViewNativeComponent';
 
 export const VibrancyView = (props: VibrancyViewProps) => {
   return <NativeVibrancyView {...props} />;

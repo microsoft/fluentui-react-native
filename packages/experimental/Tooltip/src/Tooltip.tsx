@@ -1,13 +1,17 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
+
 /** @jsxRuntime classic */
 import * as React from 'react';
 
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 
 import type { TooltipProps } from './Tooltip.types';
 import { tooltipName } from './Tooltip.types';
-
-const NativeTooltipView = ensureNativeComponent('RCTTooltip');
+import NativeTooltipView from './TooltipNativeComponent';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the tooltip.

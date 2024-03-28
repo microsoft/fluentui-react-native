@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
+
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import { processColor, View } from 'react-native';
@@ -9,13 +15,13 @@ import { assertNever } from 'assert-never';
 import type { SvgProps } from 'react-native-svg';
 import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg } from 'react-native-svg';
 
-import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { stylingSettings } from './Shimmer.styling.win32';
 import type { ShimmerElementTypes, ShimmerProps, ShimmerCircleElement, ShimmerRectElement } from './Shimmer.types.shared';
 export type { ShimmerCircleElement, ShimmerRectElement };
 import { shimmerName } from './Shimmer.types.shared';
 import type { ClippingMaskProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
+import RCTNativeAnimatedShimmer from './Win32ShimmerNativeComponent';
 
 const clippingMask: React.FunctionComponent<ClippingMaskProps> = (props: ClippingMaskProps) => {
   /**

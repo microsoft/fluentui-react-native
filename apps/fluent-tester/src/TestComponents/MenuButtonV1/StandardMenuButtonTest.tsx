@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
 import * as React from 'react';
 import { Text, View, Switch, Platform } from 'react-native';
 
@@ -63,6 +68,7 @@ export const StandardMenuButton: React.FunctionComponent = () => {
             <View style={columnStyle}>
               <MenuButton
                 content="Standard MenuButton"
+                tooltip="Standard MenuButton tooltip"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}

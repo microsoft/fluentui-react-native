@@ -1,9 +1,14 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
+
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import { Image } from 'react-native';
 import type { ImageResolvedAssetSource } from 'react-native';
 
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import type { IconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/icon';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
@@ -13,6 +18,7 @@ import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
+import NativeMenuButton from './MacOSMenuButtonNativeComponent';
 import type {
   MenuButtonProps,
   MenuButtonSlotProps,
@@ -22,8 +28,6 @@ import type {
   MenuButtonItemProps,
 } from './MenuButton.types';
 import { MenuButtonName } from './MenuButton.types';
-
-const NativeMenuButton = ensureNativeComponent('FRNMenuButton');
 
 // Represents the props available on a native NSMenuItem
 // https://developer.apple.com/documentation/appkit/nsmenuitem

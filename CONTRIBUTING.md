@@ -87,7 +87,7 @@ Through the power of [Native Modules](https://reactnative.dev/docs/native-module
 There are a few caveats to know of adding a native module to a FluentUI React Native component:
 
 - Your component will probably only have one slot. We have not yet explored creating a native component with multiple re-composable slots, and have adopted the pattern of having one "root" slot that simply holds the native component
-- Use `ensureNativeComponent` instead of `requireNativeComponent` to ensure the underlying native component is properly memoized and only imported once.
+- Use `codegenNativeComponent` to ensure that a JS config is provided, which will be required when moving to the new architecture.
 - You will need to decide what is a token and what is a property, and how you want to create your component's API surface and map it to the native view's API.
 - If you want the default values of your component's props / tokens to come from the Native Module, you can use the `constantsToExport` API, and pass it to `slotProps` in your component. You can see an example of this in `experimental-avatar`.
 
