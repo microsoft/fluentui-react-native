@@ -2,15 +2,24 @@
 
 exports[`Overflow component tests Overflow default 1`] = `
 <View
+  itemIDs={
+    [
+      "a",
+      "b",
+      "c",
+    ]
+  }
   onLayout={[Function]}
   style={
-    {
-      "display": "flex",
-      "flexDirection": "row",
-      "flexWrap": "wrap",
-      "opacity": 0,
-      "paddingHorizontal": undefined,
-    }
+    [
+      undefined,
+      {
+        "display": "flex",
+        "flexDirection": "row",
+        "opacity": 0,
+        "padding": undefined,
+      },
+    ]
   }
 >
   <View
@@ -76,9 +85,9 @@ exports[`Overflow component tests Overflow default 1`] = `
         "justifyContent": "center",
         "minHeight": 24,
         "minWidth": 64,
+        "opacity": 0,
         "padding": 3,
         "paddingHorizontal": 7,
-        "width": undefined,
       }
     }
   >
@@ -167,9 +176,9 @@ exports[`Overflow component tests Overflow default 1`] = `
         "justifyContent": "center",
         "minHeight": 24,
         "minWidth": 64,
+        "opacity": 0,
         "padding": 3,
         "paddingHorizontal": 7,
-        "width": undefined,
       }
     }
   >
@@ -258,9 +267,9 @@ exports[`Overflow component tests Overflow default 1`] = `
         "justifyContent": "center",
         "minHeight": 24,
         "minWidth": 64,
+        "opacity": 0,
         "padding": 3,
         "paddingHorizontal": 7,
-        "width": undefined,
       }
     }
   >

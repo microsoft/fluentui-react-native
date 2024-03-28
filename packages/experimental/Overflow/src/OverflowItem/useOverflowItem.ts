@@ -12,8 +12,16 @@ import { useOverflowContext } from '../OverflowContext';
  */
 export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
   const { overflowID, priority, onOverflowItemChange: onOveflowItemChange } = props;
-  const { containerSize, itemVisibility, initialOverflowLayoutDone, disconnect, register, setLayoutState, updateItem } =
-    useOverflowContext();
+  const {
+    containerSize,
+    dontHideBeforeReady,
+    itemVisibility,
+    initialOverflowLayoutDone,
+    disconnect,
+    register,
+    setLayoutState,
+    updateItem,
+  } = useOverflowContext();
 
   const [size, setSize] = React.useState<LayoutSize>();
   const [controlledSize, setControlledSize] = React.useState<LayoutSize | null>(null);
@@ -67,16 +75,26 @@ export function useOverflowItem(props: OverflowItemProps): OverflowItemInfo {
     [props],
   ); // Get item dimensions
 
+  const layoutDone = initialOverflowLayoutDone && !!size;
+
   const styles = React.useMemo<ViewStyle>(() => {
-    const stylesToMerge = [props.style];
+    const stylesToMerge = [];
+    if (props.style) {
+      stylesToMerge.push(props.style);
+    }
     if (controlledSize !== null) {
       stylesToMerge.push({ width: controlledSize.width });
     }
+    if (!dontHideBeforeReady && !layoutDone) {
+      stylesToMerge.push({ opacity: 0 });
+    }
     return mergeStyles(...stylesToMerge);
-  }, [controlledSize, props.style]);
+  }, [controlledSize, dontHideBeforeReady, layoutDone, props.style]);
 
+  // Visibility being set extends past the general itemVisibility controlled by the Overflow state.
+  // If this is the first render of the Overflow item (initial page load / mounting after page load), we need to render to run layout and get size info.
   return {
     props: { ...props, style: styles, onLayout },
-    state: { visible: !initialOverflowLayoutDone || itemVisibility[overflowID] },
+    state: { visible: itemVisibility[overflowID], layoutDone: layoutDone },
   };
 }

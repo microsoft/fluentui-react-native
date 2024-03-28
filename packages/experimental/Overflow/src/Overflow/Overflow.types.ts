@@ -54,6 +54,8 @@ export type OverflowItemChangeHandler = (data: OverflowItemChangePayload) => voi
 export interface OverflowState {
   /** Size of the Overflow Container */
   containerSize?: LayoutSize;
+  /** `dontHideBeforeReady` prop propagated to the child items */
+  dontHideBeforeReady?: boolean;
   /**  Flag set to true when one or more items are hidden by the manager */
   hasOverflow: boolean;
   /**  Flag set to true once the overflow manager runs its first calculation to see which items should initially be visible / hidden */

@@ -15,6 +15,7 @@ export interface OverflowItemProps extends ViewProps {
 
 export interface OverflowItemState {
   visible: boolean;
+  layoutDone: boolean;
 }
 
 export interface OverflowItemInfo {

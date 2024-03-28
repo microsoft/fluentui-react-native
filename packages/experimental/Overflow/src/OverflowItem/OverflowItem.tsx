@@ -16,7 +16,7 @@ function overflowItemPropWorker(props: ViewProps, style: StyleProp<ViewStyle>): 
 export const OverflowItem = stagedComponent<OverflowItemProps>((userProps: OverflowItemProps) => {
   const { props, state } = useOverflowItem(userProps);
   return (finalProps: OverflowItemProps, children: React.ReactNode) => {
-    if (!state.visible) {
+    if (state.layoutDone && !state.visible) {
       return null;
     }
 
@@ -36,7 +36,7 @@ export const OverflowItem = stagedComponent<OverflowItemProps>((userProps: Overf
     }
 
     // Assume that the child can accept ViewProps.
-    const viewStyles = mergeStyles(child.props.style, finalProps.style);
+    const viewStyles = mergeStyles(child.props.style, mergedProps.style);
     const viewProps = getOverflowItemProps(mergedProps, viewStyles);
 
     const clone = React.cloneElement(child, viewProps);
