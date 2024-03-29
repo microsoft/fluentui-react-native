@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { View, LayoutChangeEvent } from 'react-native';
+import type { View, LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 
 import type {
   LayoutSize,
@@ -32,13 +32,14 @@ interface LayoutState {
  *
  * Returns state to feed into context provider and props (with an important onLayout callback) to pass to Overflow's containing view. */
 export function useOverflow(props: OverflowProps): OverflowInfo {
-  const { itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback, onReady } = props;
+  const { dontHideBeforeReady, itemIDs, onLayout, onOverflowUpdate: overflowUpdateCallback, onReady, padding, style } = props;
 
   // The overflow manager records layout info of the container, menu, and items and calculates what is visible and what isn't.
   const overflowManager = React.useRef<OverflowManager>(createOverflowManager()).current;
   const overflowItemUpdateCallbacks = React.useRef<Record<string, OverflowItemChangeHandler>>({}).current;
   const overflowMenuRef = React.useRef<View>(null);
 
+  const [initialLayoutDone, setInitialLayoutDone] = React.useState(false);
   const [containerSize, setContainerSize] = React.useState<LayoutSize | undefined>(undefined);
   const [overflowState, setOverflowState] = React.useState<PartialOverflowState>({
     hasOverflow: false,
@@ -48,7 +49,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
   // overflow manager.
   const [layoutState, setLayoutState] = React.useState<LayoutState>(() => {
     const itemLayoutState = {};
-    for (const id of props.itemIDs) {
+    for (const id of itemIDs) {
       itemLayoutState[id] = false;
     }
     return {
@@ -64,7 +65,15 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     },
     [overflowItemUpdateCallbacks],
   );
-  const disconnect = React.useCallback((id: string) => delete overflowItemUpdateCallbacks[id], [overflowItemUpdateCallbacks]);
+  const disconnect = React.useCallback(
+    (id: string) => {
+      delete overflowItemUpdateCallbacks[id];
+      overflowManager.removeItem(id);
+    },
+    // overflowManager is not needed as a dependency, due to being attached to a ref
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [overflowItemUpdateCallbacks],
+  );
 
   const userSetLayoutState = React.useCallback((data: SetLayoutStateParam) => {
     if (data.type === 'menu') {
@@ -142,6 +151,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     if (!layoutState.container) {
       overflowManager.initialize({
         initialContainerSize: containerSize,
+        padding: typeof padding === 'number' ? padding : typeof padding === 'string' ? parseInt(padding) : 0,
         onOverflowUpdate,
         onUpdateItemDimension,
         onUpdateItemVisibility,
@@ -155,8 +165,15 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerSize]);
 
-  const initialLayoutDone =
-    layoutState.container && layoutState.menu && itemIDs.map((id) => layoutState.items[id]).reduce((prev, curr) => prev && curr);
+  // On initial mount, wait for layout to run for all items / components before showing.
+  // For future items that may be added / removed, this will remain true to reduce flicker.
+  React.useEffect(() => {
+    const isInitialLayoutDone =
+      layoutState.container && layoutState.menu && itemIDs.map((id) => layoutState.items[id]).reduce((prev, curr) => prev && curr);
+    if (!initialLayoutDone && isInitialLayoutDone) {
+      setInitialLayoutDone(true);
+    }
+  }, [layoutState, initialLayoutDone, itemIDs]);
 
   React.useEffect(() => {
     if (initialLayoutDone) {
@@ -164,10 +181,24 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     }
   }, [initialLayoutDone, onReady]);
 
+  const overflowStyles = React.useMemo<StyleProp<ViewStyle>>(
+    () => [
+      style,
+      {
+        display: 'flex',
+        flexDirection: 'row',
+        opacity: dontHideBeforeReady || initialLayoutDone ? 1 : 0,
+        padding: padding,
+      },
+    ],
+    [dontHideBeforeReady, initialLayoutDone, padding, style],
+  );
+
   return {
     state: {
       ...overflowState,
       containerSize,
+      dontHideBeforeReady: dontHideBeforeReady,
       initialOverflowLayoutDone: initialLayoutDone,
       overflowMenuRef: overflowMenuRef,
       register: register,
@@ -179,6 +210,7 @@ export function useOverflow(props: OverflowProps): OverflowInfo {
     },
     props: {
       ...props,
+      style: overflowStyles,
       onLayout: onContainerLayout,
     },
   };
