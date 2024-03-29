@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Fri, 29 Mar 2024 18:07:00 GMT",
+      "version": "0.16.15",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.16.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "commit": "a722aa94799f4afee55baa03a5a754b0d4b2fdce",
+            "comment": "Use codegenNativeComponent so JS View configs can be generated for all native components"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 16:26:19 GMT",
       "version": "0.16.13",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.16.13",

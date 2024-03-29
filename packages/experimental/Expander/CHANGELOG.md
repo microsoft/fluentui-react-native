@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Mon, 25 Mar 2024 06:51:42 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Mar 2024 18:07:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.13
+
+Fri, 29 Mar 2024 18:07:00 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.7.12
 

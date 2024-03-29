@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/spinner
 
-This log was last generated on Fri, 15 Mar 2024 16:26:20 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Mar 2024 18:07:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.15
+
+Fri, 29 Mar 2024 18:07:00 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.8.13
 

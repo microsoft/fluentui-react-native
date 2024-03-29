@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 18 Mar 2024 23:41:59 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Mar 2024 18:07:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.17
+
+Fri, 29 Mar 2024 18:07:00 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.20.16
 
