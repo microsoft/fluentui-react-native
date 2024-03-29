@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 29 Mar 2024 00:57:12 GMT",
+      "version": "0.167.31",
+      "tag": "@fluentui-react-native/tester_v0.167.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c5596acb22cd132870d924fc39dae18f71807aab",
+            "comment": "Add new Overflow example for dynamic addition / removal of items."
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 27 Mar 2024 00:51:04 GMT",
       "version": "0.167.30",
       "tag": "@fluentui-react-native/tester_v0.167.30",

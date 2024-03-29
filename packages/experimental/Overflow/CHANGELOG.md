@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/overflow
 
-This log was last generated on Wed, 20 Mar 2024 22:58:12 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Mar 2024 00:57:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.9
+
+Fri, 29 Mar 2024 00:57:12 GMT
+
+### Patches
+
+- Fix dynamic removal and addition of OverflowItems not causing overflow updates. (winlarry@microsoft.com)
 
 ## 0.2.7
 

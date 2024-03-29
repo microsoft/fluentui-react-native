@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix dynamic removal and addition of OverflowItems not causing overflow updates.",
-  "packageName": "@fluentui-react-native/overflow",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

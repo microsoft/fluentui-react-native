@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 27 Mar 2024 00:51:04 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Mar 2024 00:57:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.167.31
+
+Fri, 29 Mar 2024 00:57:12 GMT
+
+### Patches
+
+- Add new Overflow example for dynamic addition / removal of items. (winlarry@microsoft.com)
 
 ## 0.167.30
 

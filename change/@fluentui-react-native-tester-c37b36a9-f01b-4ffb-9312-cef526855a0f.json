@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add new Overflow example for dynamic addition / removal of items.",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
