@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
-    "@fluentui-react-native/component-cache": "workspace:*",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

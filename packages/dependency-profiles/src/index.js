@@ -214,10 +214,6 @@ module.exports = {
       "name": "@fluentui-react-native/vibrancy-view",
       "version": "0.1.4"
     },
-    "@fluentui-react-native/component-cache": {
-      "name": "@fluentui-react-native/component-cache",
-      "version": "1.6.1"
-    },
     "@fluentui-react-native/composition": {
       "name": "@fluentui-react-native/composition",
       "version": "0.10.2"

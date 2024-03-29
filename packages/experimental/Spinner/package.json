@@ -26,7 +26,6 @@
     "directory": "packages/experimental/Spinner"
   },
   "dependencies": {
-    "@fluentui-react-native/component-cache": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",

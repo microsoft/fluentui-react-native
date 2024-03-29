@@ -30,7 +30,6 @@
     "directory": "packages/experimental/Expander"
   },
   "dependencies": {
-    "@fluentui-react-native/component-cache": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*"
   },
   "devDependencies": {
