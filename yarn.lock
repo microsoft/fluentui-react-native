@@ -18615,8 +18615,8 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^3.4.7":
-  version: 3.5.0
-  resolution: "react-native-test-app@npm:3.5.0"
+  version: 3.5.1
+  resolution: "react-native-test-app@npm:3.5.1"
   dependencies:
     "@rnx-kit/react-native-host": ^0.4.5
     ajv: ^8.0.0
@@ -18647,7 +18647,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 67bc0256f47ab394ccdc6a8d4e566f75505cc7014b697995544510e04233cdf905bab60f0ce7a73f450e6578f2eb79f65a4382a0e5b5706dc1ac2bd84187141b
+  checksum: 50d81875d09c2cde7826250a8621736e2a921c863e7cd76ea6368efca6be8a77ada870230b9ebcb937c560ade29e70e29acda592811a41f6601921d81b351473
   languageName: node
   linkType: hard
 
