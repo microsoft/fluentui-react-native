@@ -6094,11 +6094,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@rnx-kit/align-deps@npm:2.4.0"
+  version: 2.4.1
+  resolution: "@rnx-kit/align-deps@npm:2.4.1"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 4dcb1e810b4592fb903fa3927f033cefd686b6c562b052528cdd6cd0e1b0b82b9f20433de610b4eec9e59cb7d6d9e246da10543ef711f956235096226bdacb86
+  checksum: a5e5a97584424647e8f227d05693964be40ff8dc1976a0dde3b483a031278d22522cf5c1ec4b6c6050952e67552e1afced14a5adfe58782448a3e80c935e7e2b
   languageName: node
   linkType: hard
 
