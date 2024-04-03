@@ -2719,6 +2719,7 @@ __metadata:
     "@fluentui-react-native/stack": "*"
     "@fluentui-react-native/styling-utils": "*"
     "@fluentui-react-native/switch": "*"
+    "@fluentui-react-native/tablist": "*"
     "@fluentui-react-native/tester": "*"
     "@fluentui-react-native/tester-win32": "*"
     "@fluentui-react-native/text": "*"
@@ -2728,6 +2729,7 @@ __metadata:
     "@fluentui-react-native/themed-stylesheet": "*"
     "@fluentui-react-native/theming-utils": "*"
     "@fluentui-react-native/tokens": "*"
+    "@fluentui-react-native/tooltip": "*"
     "@fluentui-react-native/use-slot": "*"
     "@fluentui-react-native/use-slots": "*"
     "@fluentui-react-native/use-styling": "*"
@@ -4040,7 +4042,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@workspace:*, @fluentui-react-native/tablist@workspace:packages/components/TabList":
+"@fluentui-react-native/tablist@*, @fluentui-react-native/tablist@workspace:*, @fluentui-react-native/tablist@workspace:packages/components/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/components/TabList"
   dependencies:
@@ -4373,7 +4375,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tooltip@workspace:*, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
+"@fluentui-react-native/tooltip@*, @fluentui-react-native/tooltip@workspace:*, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip"
   dependencies:
