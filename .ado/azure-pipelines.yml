@@ -154,12 +154,11 @@ jobs:
           xcrun --sdk iphonesimulator --show-sdk-version
         displayName: 'Determine iOS SDK version'
 
-      - script: |
-          set -eox
-          NEW_DEVICE=$(xcrun simctl create 'Test' 'iPhone 15' 'com.apple.CoreSimulator.SimRuntime.iOS-17-2')
-          echo "🤖 Created ${NEW_DEVICE}"
-          xcrun simctl boot ${NEW_DEVICE}
-        displayName: 'Boot Simulator'
+      # - script: |
+      #     NEW_DEVICE=$(xcrun simctl create "Test Phone" "$(ios_simulator)" iOS$(ios_version))
+      #     echo "🤖 Created ${NEW_DEVICE}"
+      #     xcrun simctl boot ${NEW_DEVICE}
+      #   displayName: 'Boot Simulator'
 
       - bash: |
           echo "yarn $(platform)"
@@ -167,7 +166,8 @@ jobs:
         workingDirectory: apps/fluent-tester
         displayName: 'yarn $(platform)'
 
-      - template: templates/e2e-testing-ios.yml
+      # Disable iOS E2E tests as they fail on macOS-13 images
+      # - template: templates/e2e-testing-ios.yml
 
   # Windows bundling and end to end testing
   - job: WindowsPR
