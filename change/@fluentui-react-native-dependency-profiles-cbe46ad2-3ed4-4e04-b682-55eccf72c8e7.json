@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add overflow as a dependency for dep-profile",
+  "packageName": "@fluentui-react-native/dependency-profiles",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
