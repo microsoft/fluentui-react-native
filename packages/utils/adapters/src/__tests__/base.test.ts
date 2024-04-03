@@ -71,10 +71,20 @@ describe('Base filter tests', () => {
     expect(Object.keys(emptyWin32ImageProps).length).toBe(0);
   });
 
+  // EventPhase enum mismatch - https://github.com/microsoft/react-native-windows/pull/12909 should fix
+  type windowsEventPhaseInvalidProperties = 'onKeyDown' | 'onKeyDownCapture' | 'onKeyUp' | 'onKeyUpCapture';
+
+  // Need to unify win32/windows key*Events
+  type windowsHandledKeyInvalidProperties = 'keyDownEvents' | 'keyUpEvents';
+
   test('verify windows types', () => {
-    const windowsAdapterViewProps: Required<IAdapterWindowsViewProps> = {} as Required<IAdapterWindowsViewProps>;
+    const windowsAdapterViewProps: Required<
+      Omit<IAdapterWindowsViewProps, windowsEventPhaseInvalidProperties | windowsHandledKeyInvalidProperties>
+    > = {} as Required<IAdapterWindowsViewProps>;
     // This assignment will fail if we are missing properties on IAdapterWindowsViewProps which are defined by WindowsPlatformViewProps
-    const windowsPlatformViewProps: Required<WindowsPlatformViewProps> = windowsAdapterViewProps;
+    const windowsPlatformViewProps: Required<
+      Omit<WindowsPlatformViewProps, windowsEventPhaseInvalidProperties | windowsHandledKeyInvalidProperties>
+    > = windowsAdapterViewProps;
     expect(Object.keys(windowsPlatformViewProps).length).toBe(0);
 
     // This assignment will fail if there are any extra properties on IAdapterWindowsViewProps which are not defined by WindowsPlatformViewProps

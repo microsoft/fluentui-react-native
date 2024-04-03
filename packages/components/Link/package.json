@@ -41,16 +41,17 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
-    "@react-native/metro-config": "^0.72.0",
+    "@react-native/babel-preset": "^0.73.0",
+    "@react-native/metro-config": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.73.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.72.0",
+    "@office-iss/react-native-win32": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0",
-    "react-native-macos": "^0.72.0",
-    "react-native-windows": "^0.72.0"
+    "react-native": "^0.73.0",
+    "react-native-macos": "^0.73.0",
+    "react-native-windows": "^0.73.0"
   },
   "author": "",
   "license": "MIT",
@@ -61,7 +62,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.72"
+        "react-native@0.73"
       ],
       "capabilities": [
         "core",

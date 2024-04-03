@@ -7,6 +7,7 @@ import { Animated, Easing, View } from 'react-native';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { Path, Svg } from 'react-native-svg';
+import type { SvgProps } from 'react-native-svg';
 
 import { stylingSettings } from './Spinner.styling';
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
@@ -81,7 +82,7 @@ export const Spinner = compose<SpinnerType>({
     const path = getSpinnerPath(diameterSizeMap[spinnerProps.size], lineThicknessSizeMap[spinnerProps.size], spinnerProps.trackColor);
 
     // perspective is needed for animations to work on Android. See https://reactnative.dev/docs/animations#bear-in-mind
-    const animatedSvgProps = {
+    const animatedSvgProps: SvgProps = {
       style: {
         transform: [{ rotateZ: interpolateSpin }, { perspective: 10 }],
       },
