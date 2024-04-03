@@ -2523,7 +2523,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/chip@workspace:*, @fluentui-react-native/chip@workspace:packages/components/Chip":
+"@fluentui-react-native/chip@*, @fluentui-react-native/chip@workspace:*, @fluentui-react-native/chip@workspace:packages/components/Chip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/chip@workspace:packages/components/Chip"
   dependencies:
@@ -2680,9 +2680,11 @@ __metadata:
     "@fluentui-react-native/button": "*"
     "@fluentui-react-native/callout": "*"
     "@fluentui-react-native/checkbox": "*"
+    "@fluentui-react-native/chip": "*"
     "@fluentui-react-native/composition": "*"
     "@fluentui-react-native/contextual-menu": "*"
     "@fluentui-react-native/default-theme": "*"
+    "@fluentui-react-native/divider": "*"
     "@fluentui-react-native/dropdown": "*"
     "@fluentui-react-native/experimental-activity-indicator": "*"
     "@fluentui-react-native/experimental-avatar": "*"
@@ -2713,6 +2715,7 @@ __metadata:
     "@fluentui-react-native/radio-group": "*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/separator": "*"
+    "@fluentui-react-native/spinner": "*"
     "@fluentui-react-native/stack": "*"
     "@fluentui-react-native/styling-utils": "*"
     "@fluentui-react-native/switch": "*"
@@ -2784,7 +2787,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/divider@workspace:*, @fluentui-react-native/divider@workspace:packages/components/Divider":
+"@fluentui-react-native/divider@*, @fluentui-react-native/divider@workspace:*, @fluentui-react-native/divider@workspace:packages/components/Divider":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
   dependencies:
@@ -3923,7 +3926,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/spinner@workspace:*, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
+"@fluentui-react-native/spinner@*, @fluentui-react-native/spinner@workspace:*, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/spinner@workspace:packages/experimental/Spinner"
   dependencies:
