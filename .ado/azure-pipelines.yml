@@ -154,11 +154,11 @@ jobs:
           xcrun --sdk iphonesimulator --show-sdk-version
         displayName: 'Determine iOS SDK version'
 
-      # - script: |
-      #     NEW_DEVICE=$(xcrun simctl create "Test Phone" "$(ios_simulator)" iOS$(ios_version))
-      #     echo "🤖 Created ${NEW_DEVICE}"
-      #     xcrun simctl boot ${NEW_DEVICE}
-      #   displayName: 'Boot Simulator'
+      - script: |
+          NEW_DEVICE=$(xcrun simctl create "Test Phone" "$(ios_simulator)" iOS$(ios_version))
+          echo "🤖 Created ${NEW_DEVICE}"
+          xcrun simctl boot ${NEW_DEVICE}
+        displayName: 'Boot Simulator'
 
       - bash: |
           echo "yarn $(platform)"
