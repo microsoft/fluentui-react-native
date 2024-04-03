@@ -2705,6 +2705,7 @@ __metadata:
     "@fluentui-react-native/menu-button": "*"
     "@fluentui-react-native/merge-props": "*"
     "@fluentui-react-native/notification": "*"
+    "@fluentui-react-native/overflow": "*"
     "@fluentui-react-native/persona": "*"
     "@fluentui-react-native/persona-coin": "*"
     "@fluentui-react-native/popover": "*"
@@ -3621,7 +3622,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/overflow@workspace:*, @fluentui-react-native/overflow@workspace:packages/experimental/Overflow":
+"@fluentui-react-native/overflow@*, @fluentui-react-native/overflow@workspace:*, @fluentui-react-native/overflow@workspace:packages/experimental/Overflow":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/overflow@workspace:packages/experimental/Overflow"
   dependencies:

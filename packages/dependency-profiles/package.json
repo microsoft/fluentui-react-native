@@ -50,6 +50,7 @@
     "@fluentui-react-native/menu-button": "*",
     "@fluentui-react-native/merge-props": "*",
     "@fluentui-react-native/notification": "*",
+    "@fluentui-react-native/overflow": "*",
     "@fluentui-react-native/persona": "*",
     "@fluentui-react-native/persona-coin": "*",
     "@fluentui-react-native/popover": "*",
