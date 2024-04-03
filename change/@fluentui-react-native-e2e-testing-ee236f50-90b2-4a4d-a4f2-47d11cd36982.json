@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[CI] Update to Xcode 15.2",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

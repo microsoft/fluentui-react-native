@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Wed, 20 Mar 2024 22:58:12 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Apr 2024 22:03:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.34.19
+
+Wed, 03 Apr 2024 22:03:28 GMT
+
+### Patches
+
+- [CI] Update to Xcode 15.2 (sanajmi@microsoft.com)
 
 ## 1.34.17
 
