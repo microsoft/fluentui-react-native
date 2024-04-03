@@ -155,6 +155,7 @@ jobs:
         displayName: 'Determine iOS SDK version'
 
       - script: |
+          set -eox
           NEW_DEVICE=$(xcrun simctl create "Test Phone" "$(ios_simulator)" iOS$(ios_version))
           echo "🤖 Created ${NEW_DEVICE}"
           xcrun simctl boot ${NEW_DEVICE}
