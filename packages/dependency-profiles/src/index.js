@@ -4,7 +4,7 @@ module.exports = {
   "0.72": {
     "@fluentui-react-native/e2e-testing": {
       "name": "@fluentui-react-native/e2e-testing",
-      "version": "1.34.18"
+      "version": "1.34.19"
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
