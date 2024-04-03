@@ -2523,7 +2523,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/chip@workspace:*, @fluentui-react-native/chip@workspace:packages/components/Chip":
+"@fluentui-react-native/chip@*, @fluentui-react-native/chip@workspace:*, @fluentui-react-native/chip@workspace:packages/components/Chip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/chip@workspace:packages/components/Chip"
   dependencies:
@@ -2680,9 +2680,11 @@ __metadata:
     "@fluentui-react-native/button": "*"
     "@fluentui-react-native/callout": "*"
     "@fluentui-react-native/checkbox": "*"
+    "@fluentui-react-native/chip": "*"
     "@fluentui-react-native/composition": "*"
     "@fluentui-react-native/contextual-menu": "*"
     "@fluentui-react-native/default-theme": "*"
+    "@fluentui-react-native/divider": "*"
     "@fluentui-react-native/dropdown": "*"
     "@fluentui-react-native/experimental-activity-indicator": "*"
     "@fluentui-react-native/experimental-avatar": "*"
@@ -2705,6 +2707,7 @@ __metadata:
     "@fluentui-react-native/menu-button": "*"
     "@fluentui-react-native/merge-props": "*"
     "@fluentui-react-native/notification": "*"
+    "@fluentui-react-native/overflow": "*"
     "@fluentui-react-native/persona": "*"
     "@fluentui-react-native/persona-coin": "*"
     "@fluentui-react-native/popover": "*"
@@ -2712,9 +2715,11 @@ __metadata:
     "@fluentui-react-native/radio-group": "*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/separator": "*"
+    "@fluentui-react-native/spinner": "*"
     "@fluentui-react-native/stack": "*"
     "@fluentui-react-native/styling-utils": "*"
     "@fluentui-react-native/switch": "*"
+    "@fluentui-react-native/tablist": "*"
     "@fluentui-react-native/tester": "*"
     "@fluentui-react-native/tester-win32": "*"
     "@fluentui-react-native/text": "*"
@@ -2724,6 +2729,7 @@ __metadata:
     "@fluentui-react-native/themed-stylesheet": "*"
     "@fluentui-react-native/theming-utils": "*"
     "@fluentui-react-native/tokens": "*"
+    "@fluentui-react-native/tooltip": "*"
     "@fluentui-react-native/use-slot": "*"
     "@fluentui-react-native/use-slots": "*"
     "@fluentui-react-native/use-styling": "*"
@@ -2783,7 +2789,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui-react-native/divider@workspace:*, @fluentui-react-native/divider@workspace:packages/components/Divider":
+"@fluentui-react-native/divider@*, @fluentui-react-native/divider@workspace:*, @fluentui-react-native/divider@workspace:packages/components/Divider":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
   dependencies:
@@ -3621,7 +3627,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/overflow@workspace:*, @fluentui-react-native/overflow@workspace:packages/experimental/Overflow":
+"@fluentui-react-native/overflow@*, @fluentui-react-native/overflow@workspace:*, @fluentui-react-native/overflow@workspace:packages/experimental/Overflow":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/overflow@workspace:packages/experimental/Overflow"
   dependencies:
@@ -3922,7 +3928,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/spinner@workspace:*, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
+"@fluentui-react-native/spinner@*, @fluentui-react-native/spinner@workspace:*, @fluentui-react-native/spinner@workspace:packages/experimental/Spinner":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/spinner@workspace:packages/experimental/Spinner"
   dependencies:
@@ -4036,7 +4042,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tablist@workspace:*, @fluentui-react-native/tablist@workspace:packages/components/TabList":
+"@fluentui-react-native/tablist@*, @fluentui-react-native/tablist@workspace:*, @fluentui-react-native/tablist@workspace:packages/components/TabList":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/components/TabList"
   dependencies:
@@ -4369,7 +4375,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/tooltip@workspace:*, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
+"@fluentui-react-native/tooltip@*, @fluentui-react-native/tooltip@workspace:*, @fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip"
   dependencies:
