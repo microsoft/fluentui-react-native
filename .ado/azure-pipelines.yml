@@ -115,7 +115,7 @@ jobs:
       vmImage: $(VmImageApple)
     variables:
       platform: 'ios'
-    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     steps:
@@ -156,7 +156,7 @@ jobs:
 
       - script: |
           set -eox
-          NEW_DEVICE=$(xcrun simctl create "Test Phone" "$(ios_simulator)" iOS$(ios_version))
+          NEW_DEVICE=$(xcrun simctl create 'Test' 'iPhone 15' 'com.apple.CoreSimulator.SimRuntime.iOS-17-2')
           echo "🤖 Created ${NEW_DEVICE}"
           xcrun simctl boot ${NEW_DEVICE}
         displayName: 'Boot Simulator'
