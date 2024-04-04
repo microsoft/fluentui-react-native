@@ -45,7 +45,7 @@
     "jest-diff": "^27.0.0",
     "jsdom": "^16.4.0",
     "just-scripts": "^1.8.0",
-    "just-task": "^1.4.2",
+    "just-task": "^1.10.0",
     "metro-config": "^0.80.0",
     "metro-react-native-babel-transformer": "^0.76.5",
     "prettier": "^2.4.1",
