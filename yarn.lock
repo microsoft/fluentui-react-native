@@ -3963,7 +3963,7 @@ __metadata:
     jest-diff: ^27.0.0
     jsdom: ^16.4.0
     just-scripts: ^1.8.0
-    just-task: ^1.10.0
+    just-task: ^1.4.2
     metro-config: ^0.80.0
     metro-react-native-babel-transformer: ^0.76.5
     prettier: ^2.4.1
@@ -15638,7 +15638,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"just-task@npm:>=1.5.0 <2.0.0, just-task@npm:^1.10.0":
+"just-task@npm:>=1.5.0 <2.0.0, just-task@npm:^1.4.2":
   version: 1.10.0
   resolution: "just-task@npm:1.10.0"
   dependencies:
