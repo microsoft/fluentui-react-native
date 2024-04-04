@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
-This log was last generated on Fri, 29 Mar 2024 18:06:59 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Apr 2024 22:55:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.35
+
+Wed, 03 Apr 2024 22:55:12 GMT
+
+### Patches
+
+- Add overflow as a dependency for dep-profile (winlarry@microsoft.com)
 
 ## 0.7.34
 
