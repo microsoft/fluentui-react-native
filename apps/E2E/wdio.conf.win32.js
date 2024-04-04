@@ -45,7 +45,7 @@ exports.config = {
     [
       'appium',
       {
-        logPath: './reports/',
+        logPath: path.resolve(__dirname, 'reports'),
       },
     ],
   ],
