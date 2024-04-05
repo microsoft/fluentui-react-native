@@ -162,7 +162,7 @@ jobs:
 
       - bash: |
           echo "yarn $(platform)"
-          yarn $(platform) --simulator "$(ios_simulator)"
+          yarn $(platform) --simulator "$(ios_simulator)" --no-packager
         workingDirectory: apps/fluent-tester
         displayName: 'yarn $(platform)'
 

@@ -45,9 +45,7 @@ exports.config = {
     [
       'appium',
       {
-        args: {
-          log: './reports/wdio-appium.log',
-        },
+        logPath: './reports/',
       },
     ],
   ],
