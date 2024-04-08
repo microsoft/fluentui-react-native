@@ -213,8 +213,21 @@ export abstract class BasePage {
         );
         break;
       }
+      case 'android': {
+        await browser.waitUntil(
+          async () => {
+            console.log('Scrolling down a bit1');
+            await driver.execute('mobile: scrollGesture', { direction: 'down', left: 50, width: 200, top: 400, height: 400, percent: 0.8, speed: 1000 });
+            return await (await this._pageButton).isDisplayed();
+          },
+          {
+            timeout: this.waitForUiEvent,
+            timeoutMsg: errorMsg,
+          },
+        );
+        break;
+      }
       default:
-      case 'android':
         /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
          * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
          * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */

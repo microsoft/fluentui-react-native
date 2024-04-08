@@ -17,6 +17,8 @@ exports.config = {
       'appium:appPackage': 'com.microsoft.reacttestapp',
       'appium:appActivity': 'MainActivity',
       'appium:automationName': 'uiautomator2',
+      'appium:resetKeyboard': true,
+      'appium:unicodeKeyboard': true,
     },
   ],
 
