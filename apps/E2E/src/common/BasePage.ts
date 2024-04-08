@@ -217,7 +217,7 @@ export abstract class BasePage {
         await browser.waitUntil(
           async () => {
             console.log('Scrolling down a bit1');
-            await driver.execute('mobile: scrollGesture', { direction: 'down', left: 50, width: 200, top: 400, height: 400, percent: 0.8, speed: 1000 });
+            await driver.execute('mobile: scrollGesture', { direction: 'down', left: 50, width: 200, top: 400, height: 400, percent: 0.9, speed: 1000 });
             return await (await this._pageButton).isDisplayed();
           },
           {
