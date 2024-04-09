@@ -6,7 +6,7 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
 import type { ImageURISource, ViewProps, ColorValue } from 'react-native';
-import { NativeModules } from 'react-native';
+import { NativeModules, TurboModuleRegistry } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
@@ -26,7 +26,7 @@ interface ExportedConstants {
   sizes: { [key in Size]: number };
 }
 
-const ExportedNativeConstants: ExportedConstants = NativeModules.FRNAvatarViewManager;
+const ExportedNativeConstants: ExportedConstants = TurboModuleRegistry.get('FRNAvatarConstants') || NativeModules.FRNAvatarViewManager;
 
 export type NativeAvatarTokens = {
   /**
