@@ -221,6 +221,7 @@ export abstract class BasePage {
             let needsScroll = true;
             let pageButton;
             try {
+              console.log('Trying to get page button');
               pageButton = await this._pageButton;
               const buttonLoc = await pageButton.getLocation();
               const buttonSize = await pageButton.getSize();
@@ -232,11 +233,13 @@ export abstract class BasePage {
               console.log(`scrollLoc: ${JSON.stringify(scrollLoc, null, 2)} scrollSize: ${JSON.stringify(scrollSize, null, 2)}`);
               needsScroll = scrollLoc.y + scrollSize.height <= buttonLoc.y + buttonSize.height;
               console.log(`needsScroll: ${needsScroll}`);
-            } catch {
+            } catch (e) {
+              console.log(`catching exception: ${e}`);
               // If the pageButton is not on screen, we will fail to find it, which will throw... continue scrolling until we find it
             }
 
             if (needsScroll) {
+              console.log('executing a scroll');
               await driver.execute('mobile: scrollGesture', {
                 direction: 'down',
                 left: 50,
