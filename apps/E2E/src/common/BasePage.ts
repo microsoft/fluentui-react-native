@@ -220,13 +220,13 @@ export abstract class BasePage {
           async () => {
             let needsScroll = true;
             try {
-              let pageButton = await this._pageButton;
-              let buttonLoc = await pageButton.getLocation();
-              let buttonSize = await pageButton.getSize();
+              const pageButton = await this._pageButton;
+              const buttonLoc = await pageButton.getLocation();
+              const buttonSize = await pageButton.getSize();
 
-              let scroller = await By(TESTPAGE_BUTTONS_SCROLLVIEWER);
-              let scrollLoc = await scroller.getLocation();
-              let scrollSize = await scroller.getSize();
+              const scroller = await By(TESTPAGE_BUTTONS_SCROLLVIEWER);
+              const scrollLoc = await scroller.getLocation();
+              const scrollSize = await scroller.getSize();
               needsScroll = scrollLoc.y + scrollSize.height <= buttonLoc.y + buttonSize.height;
             } catch {
               // If the pageButton is not on screen, we will fail to find it, which will throw... continue scrolling until we find it
