@@ -219,15 +219,19 @@ export abstract class BasePage {
         await browser.waitUntil(
           async () => {
             let needsScroll = true;
+            let pageButton;
             try {
-              const pageButton = await this._pageButton;
+              pageButton = await this._pageButton;
               const buttonLoc = await pageButton.getLocation();
               const buttonSize = await pageButton.getSize();
+              console.log(`buttonLoc: ${JSON.stringify(buttonLoc, null, 2)} buttonSize: ${JSON.stringify(buttonSize, null, 2)}`);
 
               const scroller = await By(TESTPAGE_BUTTONS_SCROLLVIEWER);
               const scrollLoc = await scroller.getLocation();
               const scrollSize = await scroller.getSize();
+              console.log(`scrollLoc: ${JSON.stringify(scrollLoc, null, 2)} scrollSize: ${JSON.stringify(scrollSize, null, 2)}`);
               needsScroll = scrollLoc.y + scrollSize.height <= buttonLoc.y + buttonSize.height;
+              console.log(`needsScroll: ${needsScroll}`);
             } catch {
               // If the pageButton is not on screen, we will fail to find it, which will throw... continue scrolling until we find it
             }
@@ -246,7 +250,7 @@ export abstract class BasePage {
               return false;
             }
 
-            return await (await this._pageButton).isDisplayed();
+            return await pageButton.isDisplayed();
           },
           {
             timeout: this.waitForUiEvent * 3,
