@@ -9625,8 +9625,8 @@ __metadata:
   linkType: hard
 
 "beachball@npm:^2.20.0":
-  version: 2.41.0
-  resolution: "beachball@npm:2.41.0"
+  version: 2.42.0
+  resolution: "beachball@npm:2.42.0"
   dependencies:
     cosmiconfig: ^8.3.6
     execa: ^5.0.0
@@ -9642,7 +9642,7 @@ __metadata:
     yargs-parser: ^21.0.0
   bin:
     beachball: bin/beachball.js
-  checksum: 7f7ed96160ee9f1675ed0318472612720e7b18fa1a72112fc9fd0fd281aa512e0dddc728c58f64880ddad4e821a07c93e9b1901cb4eea3701738afdce8302694
+  checksum: 2b68a391a6f5eff806f015c3eb0b170bf99ddc0f41954480b0f57dbb9350d495e02749d63f61c0e878c4be18aa0977a0a316afd07e2c2dea696187e56687eb32
   languageName: node
   linkType: hard
 
