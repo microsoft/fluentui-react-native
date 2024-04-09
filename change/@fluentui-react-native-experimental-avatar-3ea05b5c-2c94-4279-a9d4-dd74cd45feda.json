@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Allow turbomodule for avatar constants",
-  "packageName": "@fluentui-react-native/experimental-avatar",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
