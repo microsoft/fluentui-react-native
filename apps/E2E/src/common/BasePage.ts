@@ -93,14 +93,13 @@ export abstract class BasePage {
    * Some components' E2E tests check only if the test page loads correctly or not. Others
    * (majority), perform UI manipulation tests on UI components on the test page. In these scenarios, these UI components have their
    * own section on the test page (by default, it's hidden so partners don't see it). This method opens up that testing section.
-  */
+   */
   async enableE2ETesterMode(): Promise<boolean | void> {
     const e2eSwitch = await this._e2eSwitch;
-    await browser.waitUntil(async () => await e2eSwitch.isDisplayed() && await e2eSwitch.isEnabled(),
-    {
+    await browser.waitUntil(async () => (await e2eSwitch.isDisplayed()) && (await e2eSwitch.isEnabled()), {
       timeout: 15000,
-      timeoutMsg: 'The E2E Switch should be enabled and visible before we interact with it'
-    })
+      timeoutMsg: 'The E2E Switch should be enabled and visible before we interact with it',
+    });
 
     switch (this.platform) {
       // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
@@ -139,7 +138,7 @@ export abstract class BasePage {
     const el = await element;
 
     try {
-      await browser.waitUntil(async () => expectedValue === await el.getAttribute(attribute));
+      await browser.waitUntil(async () => expectedValue === (await el.getAttribute(attribute)));
     } catch {
       const actualValue = await el.getAttribute(attribute);
       switch (this.platform) {
@@ -192,7 +191,7 @@ export abstract class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async mobileScrollToComponentButton(): Promise<void> {
-    if (await (await this._pageButton).isDisplayed()) {
+    if (this.platform !== 'android' && (await (await this._pageButton).isDisplayed())) {
       return;
     }
 
@@ -213,15 +212,44 @@ export abstract class BasePage {
         );
         break;
       }
+      // UiScrollable seems to continuously scroll the wrong direction on android in the current appium / appium-uiautomator2-driver version
+      // So Instead we use this rather overly complex method of scrolling the items into view.  On future appium updates we should see if
+      // we can return to using the simpler and probably more reliable UiScrollable method below.
       case 'android': {
         await browser.waitUntil(
           async () => {
-            console.log('Scrolling down a bit1');
-            await driver.execute('mobile: scrollGesture', { direction: 'down', left: 50, width: 200, top: 400, height: 400, percent: 0.9, speed: 1000 });
+            let needsScroll = true;
+            try {
+              let pageButton = await this._pageButton;
+              let buttonLoc = await pageButton.getLocation();
+              let buttonSize = await pageButton.getSize();
+
+              let scroller = await By(TESTPAGE_BUTTONS_SCROLLVIEWER);
+              let scrollLoc = await scroller.getLocation();
+              let scrollSize = await scroller.getSize();
+              needsScroll = scrollLoc.y + scrollSize.height <= buttonLoc.y + buttonSize.height;
+            } catch {
+              // If the pageButton is not on screen, we will fail to find it, which will throw... continue scrolling until we find it
+            }
+
+            if (needsScroll) {
+              await driver.execute('mobile: scrollGesture', {
+                direction: 'down',
+                left: 50,
+                width: 200,
+                top: 400,
+                height: 400,
+                percent: 0.9,
+                speed: 1000,
+              });
+
+              return false;
+            }
+
             return await (await this._pageButton).isDisplayed();
           },
           {
-            timeout: this.waitForUiEvent,
+            timeout: this.waitForUiEvent * 3,
             timeoutMsg: errorMsg,
           },
         );
@@ -248,7 +276,11 @@ export abstract class BasePage {
 
   /** Waits for the tester app to load by checking if the startup page loads. If the app doesn't load before the timeout, it causes the test to fail. */
   async waitForInitialPageToDisplay(): Promise<boolean | void> {
-    return await this.waitForCondition(async () => await (await this._initialPage).isDisplayed(), this.ERRORMESSAGE_APPLOAD, BOOT_APP_TIMEOUT);
+    return await this.waitForCondition(
+      async () => await (await this._initialPage).isDisplayed(),
+      this.ERRORMESSAGE_APPLOAD,
+      BOOT_APP_TIMEOUT,
+    );
   }
 
   /* Scrolls to the specified or primary UI test element until it is displayed. */
@@ -324,7 +356,12 @@ export abstract class BasePage {
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
-  async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number, interval?: number): Promise<boolean | void> {
+  async waitForCondition(
+    condition: () => Promise<boolean>,
+    errorMsg?: string,
+    timeout?: number,
+    interval?: number,
+  ): Promise<boolean | void> {
     return await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
