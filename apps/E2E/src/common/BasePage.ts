@@ -221,7 +221,6 @@ export abstract class BasePage {
             let needsScroll = true;
             let scrollLoc = { x: 8, y: 170 };
             let scrollSize = { width: 1264, height: 574 };
-            let pageButton;
             try {
               console.log('Trying to scroller');
               const scroller = await By(TESTPAGE_BUTTONS_SCROLLVIEWER);
@@ -229,13 +228,16 @@ export abstract class BasePage {
               scrollSize = await scroller.getSize();
               console.log(`scrollLoc: ${JSON.stringify(scrollLoc, null, 2)} scrollSize: ${JSON.stringify(scrollSize, null, 2)}`);
 
-              console.log('Trying to get page button');
-              pageButton = await this._pageButton;
-              const buttonLoc = await pageButton.getLocation();
-              const buttonSize = await pageButton.getSize();
-              console.log(`buttonLoc: ${JSON.stringify(buttonLoc, null, 2)} buttonSize: ${JSON.stringify(buttonSize, null, 2)}`);
+              const pageButton = await this._pageButton;
+              const isPageButtonDisplayed = await pageButton.isDisplayed();
+              if (isPageButtonDisplayed) {
+                // Verify that the button is fully on screen
+                const buttonLoc = await pageButton.getLocation();
+                const buttonSize = await pageButton.getSize();
+                console.log(`buttonLoc: ${JSON.stringify(buttonLoc, null, 2)} buttonSize: ${JSON.stringify(buttonSize, null, 2)}`);
 
-              needsScroll = scrollLoc.y + scrollSize.height <= buttonLoc.y + buttonSize.height;
+                needsScroll = scrollLoc.y + scrollSize.height <= buttonLoc.y + buttonSize.height;
+              }
               console.log(`needsScroll: ${needsScroll}`);
             } catch (e) {
               console.log(`catching exception: ${e}`);
@@ -257,13 +259,10 @@ export abstract class BasePage {
               return false;
             }
 
-            return await pageButton.isDisplayed();
+            return true;
           },
           {
-            // Unfortunately on each pass of detecting if the element is visible now, if the element is not visible
-            // the call to `await this._pageButton` will retry for several seconds before continuing.
-            // If we need to scroll several times this adds up.  So we use quite a long timeout period here.
-            timeout: this.waitForUiEvent * 10,
+            timeout: this.waitForUiEvent,
             timeoutMsg: errorMsg,
           },
         );
