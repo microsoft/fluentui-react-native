@@ -221,31 +221,20 @@ export abstract class BasePage {
             let needsScroll = true;
             let scrollLoc = { x: 8, y: 170 };
             let scrollSize = { width: 1264, height: 574 };
-            try {
-              console.log('Trying to scroller');
-              const scroller = await By(TESTPAGE_BUTTONS_SCROLLVIEWER);
-              scrollLoc = await scroller.getLocation();
-              scrollSize = await scroller.getSize();
-              console.log(`scrollLoc: ${JSON.stringify(scrollLoc, null, 2)} scrollSize: ${JSON.stringify(scrollSize, null, 2)}`);
+            const scroller = await By(TESTPAGE_BUTTONS_SCROLLVIEWER);
+            scrollLoc = await scroller.getLocation();
+            scrollSize = await scroller.getSize();
 
-              const pageButton = await this._pageButton;
-              const isPageButtonDisplayed = await pageButton.isDisplayed();
-              if (isPageButtonDisplayed) {
-                // Verify that the button is fully on screen
-                const buttonLoc = await pageButton.getLocation();
-                const buttonSize = await pageButton.getSize();
-                console.log(`buttonLoc: ${JSON.stringify(buttonLoc, null, 2)} buttonSize: ${JSON.stringify(buttonSize, null, 2)}`);
-
-                needsScroll = scrollLoc.y + scrollSize.height <= buttonLoc.y + buttonSize.height;
-              }
-              console.log(`needsScroll: ${needsScroll}`);
-            } catch (e) {
-              console.log(`catching exception: ${e}`);
-              // If the pageButton is not on screen, we will fail to find it, which will throw... continue scrolling until we find it
+            const pageButton = await this._pageButton;
+            const isPageButtonDisplayed = await pageButton.isDisplayed();
+            if (isPageButtonDisplayed) {
+              // Verify that the button is fully on screen
+              const buttonLoc = await pageButton.getLocation();
+              const buttonSize = await pageButton.getSize();
+              needsScroll = scrollLoc.y + scrollSize.height <= buttonLoc.y + buttonSize.height;
             }
 
             if (needsScroll) {
-              console.log('executing a scroll');
               await driver.execute('mobile: scrollGesture', {
                 direction: 'down',
                 left: scrollLoc.x + scrollSize.width * 0.2,
