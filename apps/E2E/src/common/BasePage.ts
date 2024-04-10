@@ -260,7 +260,10 @@ export abstract class BasePage {
             return await pageButton.isDisplayed();
           },
           {
-            timeout: this.waitForUiEvent * 3,
+            // Unfortunately on each pass of detecting if the element is visible now, if the element is not visible
+            // the call to `await this._pageButton` will retry for several seconds before continuing.
+            // If we need to scroll several times this adds up.  So we use quite a long timeout period here.
+            timeout: this.waitForUiEvent * 10,
             timeoutMsg: errorMsg,
           },
         );
