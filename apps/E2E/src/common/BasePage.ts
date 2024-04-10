@@ -219,12 +219,14 @@ export abstract class BasePage {
         await browser.waitUntil(
           async () => {
             let needsScroll = true;
+            let scrollLoc = { x: 8, y: 170 };
+            let scrollSize = { width: 1264, height: 574 };
             let pageButton;
             try {
               console.log('Trying to scroller');
               const scroller = await By(TESTPAGE_BUTTONS_SCROLLVIEWER);
-              const scrollLoc = await scroller.getLocation();
-              const scrollSize = await scroller.getSize();
+              scrollLoc = await scroller.getLocation();
+              scrollSize = await scroller.getSize();
               console.log(`scrollLoc: ${JSON.stringify(scrollLoc, null, 2)} scrollSize: ${JSON.stringify(scrollSize, null, 2)}`);
 
               console.log('Trying to get page button');
@@ -244,11 +246,11 @@ export abstract class BasePage {
               console.log('executing a scroll');
               await driver.execute('mobile: scrollGesture', {
                 direction: 'down',
-                left: 50,
-                width: 200,
-                top: 400,
-                height: 400,
-                percent: 0.9,
+                left: scrollLoc.x + scrollSize.width * 0.2,
+                width: scrollSize.width - scrollSize.width * 0.4,
+                top: scrollLoc.y + scrollSize.height * 0.2,
+                height: scrollSize.height - scrollSize.height * 0.4,
+                percent: 0.6,
                 speed: 1000,
               });
 
