@@ -26,10 +26,14 @@
       }
     }
   },
+  "visionos": {
+    "reactNativePath": "../node_modules/react-native-macos"
+  },
   "resources": {
     "android": ["dist/res", "dist/index.android.bundle"],
     "ios": ["dist/assets", "dist/index.ios.jsbundle"],
     "macos": ["dist/assets", "dist/index.macos.jsbundle"],
+    "visionos": ["dist/assets", "dist/index.visionos.jsbundle"],
     "windows": ["dist/assets", "dist/index.windows.bundle"]
   }
 }

@@ -17,7 +17,7 @@ import { testerTheme } from './theme/index';
 
 export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (props) => {
   const sizeClass = useHorizontalSizeClass();
-  const isMobile = Platform.OS === 'android' || (Platform.OS === 'ios' && Platform.isPad === false);
+  const isMobile = Platform.OS === 'android' || (Platform.OS === 'ios' && Platform.isPad === false && Platform.isVision == false);
 
   // If on iPad we are presented in a Split View or Slide Over context, show the single pane view.
   const shouldShowSinglePane = isMobile || (!isMobile && sizeClass === 'compact');

@@ -17,6 +17,8 @@ Pod::Spec.new do |s|
   s.dependency 'React'
 
   s.ios.deployment_target = "14.0"
+  s.visionos.deployment_target = "1.0"
   s.ios.source_files      = "ios/*.{swift,h,m}"
+  s.visionos.source_files = "ios/*.{swift,h,m}"
 
 end

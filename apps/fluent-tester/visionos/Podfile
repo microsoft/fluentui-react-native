@@ -1,0 +1,11 @@
+require_relative '../../../node_modules/react-native-test-app/visionos/test_app'
+
+workspace 'FluentTester.xcworkspace'
+
+use_test_app! do |target|
+  target.app do
+    # There is a bug where autolinking isn't working, so specify these manually.
+    pod 'FRNAppearanceAdditions', :path => '../../../packages/experimental/AppearanceAdditions/FRNAppearanceAdditions.podspec'
+    pod 'FRNFontMetrics', :path => '../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec'
+  end
+end
