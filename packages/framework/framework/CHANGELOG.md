@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Fri, 15 Mar 2024 16:26:19 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Thu, 11 Apr 2024 18:08:38 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.13.9
 

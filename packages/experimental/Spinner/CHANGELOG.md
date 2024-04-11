@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/spinner
 
-This log was last generated on Fri, 29 Mar 2024 18:07:00 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Thu, 11 Apr 2024 18:08:39 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.8.15
 

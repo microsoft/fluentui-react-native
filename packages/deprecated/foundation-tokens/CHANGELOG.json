@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:41 GMT",
+      "version": "0.15.0",
+      "tag": "@uifabricshared/foundation-tokens_v0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-tokens",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Mar 2024 16:26:21 GMT",
       "version": "0.14.8",
       "tag": "@uifabricshared/foundation-tokens_v0.14.8",

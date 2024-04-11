@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:40 GMT",
+      "version": "0.13.0",
+      "tag": "@uifabricshared/foundation-composable_v0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 13 Mar 2024 15:54:07 GMT",
       "version": "0.12.5",
       "tag": "@uifabricshared/foundation-composable_v0.12.5",

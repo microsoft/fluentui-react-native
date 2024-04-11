@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/composition",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "description": "Composition factories for building HOCs",
   "repository": {
     "type": "git",

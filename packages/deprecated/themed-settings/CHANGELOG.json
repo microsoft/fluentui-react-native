@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:41 GMT",
+      "version": "0.12.0",
+      "tag": "@uifabricshared/themed-settings_v0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/themed-settings",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:09 GMT",
       "version": "0.11.1",
       "tag": "@uifabricshared/themed-settings_v0.11.1",

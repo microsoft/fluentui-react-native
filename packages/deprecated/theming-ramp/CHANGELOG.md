@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Wed, 13 Mar 2024 15:54:07 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Thu, 11 Apr 2024 18:08:41 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.19.12
 

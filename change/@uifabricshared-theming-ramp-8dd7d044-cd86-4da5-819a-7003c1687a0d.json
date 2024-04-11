@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update to RN 0.73",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

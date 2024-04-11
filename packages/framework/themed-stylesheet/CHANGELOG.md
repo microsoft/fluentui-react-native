@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/themed-stylesheet
 
-This log was last generated on Fri, 01 Mar 2024 20:39:13 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.0
+
+Thu, 11 Apr 2024 18:08:40 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
 
 ## 1.6.1
 

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:40 GMT",
+      "version": "0.15.0",
+      "tag": "@uifabricshared/foundation-settings_v0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-settings",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:08 GMT",
       "version": "0.14.1",
       "tag": "@uifabricshared/foundation-settings_v0.14.1",
