@@ -181,6 +181,13 @@ export type IAdapterWin32ViewProps = ViewProps & {
 
   'aria-multiselectable'?: boolean | undefined;
   'aria-required'?: boolean | undefined;
+  'aria-posinset'?: number | undefined;
+  'aria-setsize'?: number | undefined;
+  'aria-description'?: string | undefined;
+  'aria-level'?: number | undefined;
+  'aria-controls'?: string | undefined;
+  'aria-describedby'?: string | undefined;
+
   accessibilitySetSize?: number;
   accessibilityPositionInSet?: number;
   accessibilityDescription?: string;
@@ -271,6 +278,12 @@ export type IAdapterWin32TextProps = TextProps & {
   accessibilityItemType?: string;
   accessibilityControls?: string | undefined;
   accessibilityDescribedBy?: string | undefined;
+  'aria-posinset'?: number | undefined;
+  'aria-setsize'?: number | undefined;
+  'aria-description'?: string | undefined;
+  'aria-level'?: number | undefined;
+  'aria-controls'?: string | undefined;
+  'aria-describedby'?: string | undefined;
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   onBlur?: (ev: NativeSyntheticEvent<{}>) => void;
@@ -298,4 +311,10 @@ export type IAdapterWin32ImageProps = ImageProps & {
   accessibilityItemType?: string;
   accessibilityControls?: string | undefined;
   accessibilityDescribedBy?: string | undefined;
+  'aria-posinset'?: number | undefined;
+  'aria-setsize'?: number | undefined;
+  'aria-description'?: string | undefined;
+  'aria-level'?: number | undefined;
+  'aria-controls'?: string | undefined;
+  'aria-describedby'?: string | undefined;
 };

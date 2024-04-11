@@ -7,7 +7,7 @@ steps:
       tasks: 'assembleDebug'
       gradleOptions: '-Xmx2g'
       javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
+      jdkVersionOption: '1.17'
       workingDirectory: apps/fluent-tester/android
 
   - script: |

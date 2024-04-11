@@ -1,9 +1,9 @@
 # This template install dependencies, builds, and bundles this repo
 steps:
-  - task: NodeTool@0
-    inputs:
-      versionSource: 'fromFile'
-      versionFilePath: '.node-version'
+  # - task: NodeTool@0
+  #   inputs:
+  #     versionSource: 'fromFile'
+  #     versionFilePath: '.node-version'
 
   - task: NuGetToolInstaller@0
     inputs:

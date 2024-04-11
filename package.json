@@ -23,7 +23,7 @@
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
-    "align-deps": "rnx-align-deps --requirements react-native@0.72",
+    "align-deps": "rnx-align-deps --requirements react-native@0.73",
     "depcheck": "yarn align-deps && lage depcheck",
     "lint": "lage lint",
     "preinstall": "node ./scripts/use-yarn-please.js",
@@ -39,7 +39,9 @@
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
-    "@react-native/metro-config": "^0.72.0",
+    "@react-native/babel-preset": "^0.73.0",
+    "@react-native/metro-babel-transformer": "^0.73.0",
+    "@react-native/metro-config": "^0.73.0",
     "@rnx-kit/align-deps": "^2.2.5",
     "babel-jest": "^24.9.0",
     "beachball": "^2.20.0",
@@ -47,15 +49,14 @@
     "eslint-plugin-import": "^2.27.5",
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
-    "metro-react-native-babel-preset": "^0.76.5",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.73.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.73.0"
   },
   "workspaces": [
     "apps/*",
@@ -67,7 +68,7 @@
     "express": "^4.19.2",
     "@types/react": "^18.2.0",
     "micromatch": "^4.0.0",
-    "react-native-svg": "^13.14.0",
+    "react-native-svg": "^14.0.0",
     "semver": "^7.5.2",
     "xml2js": "^0.5.0",
     "yaml": "^2.2.2"
@@ -79,7 +80,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.72"
+        "react-native@0.73"
       ],
       "capabilities": [
         "babel-preset-react-native",

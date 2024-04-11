@@ -116,6 +116,7 @@ const _textMask: IFilterMask<ITextProps> = {
   onAccessibilityTap: true,
   onLayout: true,
   onLongPress: true,
+  minimumFontScale: true,
   onMagicTap: true,
   onPress: true,
   onPressIn: true,

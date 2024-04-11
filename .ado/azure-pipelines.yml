@@ -162,7 +162,7 @@ jobs:
 
       - bash: |
           echo "yarn $(platform)"
-          yarn $(platform) --simulator "$(ios_simulator)"
+          yarn $(platform) --simulator "$(ios_simulator)" --no-packager
         workingDirectory: apps/fluent-tester
         displayName: 'yarn $(platform)'
 
@@ -175,7 +175,7 @@ jobs:
     pool:
       name: rnw-pool-4
       demands:
-        - ImageOverride -equals rnw-img-vs2022
+        - ImageOverride -equals rnw-img-vs2022-node18
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
