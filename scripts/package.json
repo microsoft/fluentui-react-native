@@ -52,7 +52,7 @@
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "^0.73.0",
-    "react-native-svg": "^14.0.0",
+    "react-native-svg": "^15.0.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",
     "rimraf": "^5.0.1",
