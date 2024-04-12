@@ -467,8 +467,8 @@ exports[`PresenceBadge component tests PresenceBadge props 1`] = `
 >
   <RNSVGSvgView
     align="xMidYMid"
-    bbHeight="20"
-    bbWidth="20"
+    bbHeight={20}
+    bbWidth={20}
     fill="none"
     focusable={false}
     meetOrSlice={0}
