@@ -112,10 +112,10 @@ jobs:
   - job: iOSPR
     displayName: iOS PR
     pool:
-      vmImage: $(VmImageApple)
+      vmImage: macos-13-arm64
     variables:
       platform: 'ios'
-    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     steps:
