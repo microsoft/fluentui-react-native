@@ -8542,9 +8542,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-adb@npm:^12.0.6":
-  version: 12.0.7
-  resolution: "appium-adb@npm:12.0.7"
+"appium-adb@npm:^12.0.8":
+  version: 12.0.8
+  resolution: "appium-adb@npm:12.0.8"
   dependencies:
     "@appium/support": ^4.0.0
     "@devicefarmer/adbkit-apkreader": ^3.2.4
@@ -8557,17 +8557,17 @@ __metadata:
     semver: ^7.0.0
     source-map-support: ^0.x
     teen_process: ^2.0.1
-  checksum: 6563958ce5d03f69a57e35f3471d5ca8ab59f10326e66ac5a0c5277e9bda6b5b2fce4909a3badc51be0992760d9e162b0825ace1c241392ce31f057b07354a4e
+  checksum: 90867d7203613c98528b6ab4f08f41ab9d0de1c8ff479db079d18ed27c3aef18c591614ee5da091aefc5ea4ee3e8fc8cd4c4ad7597dc9e6b7f0f4d05d616fda5
   languageName: node
   linkType: hard
 
-"appium-android-driver@npm:^9.0.4":
-  version: 9.0.4
-  resolution: "appium-android-driver@npm:9.0.4"
+"appium-android-driver@npm:^9.1.0":
+  version: 9.1.1
+  resolution: "appium-android-driver@npm:9.1.1"
   dependencies:
     "@appium/support": ^4.2.0
     "@colors/colors": ^1.6.0
-    appium-adb: ^12.0.6
+    appium-adb: ^12.0.8
     appium-chromedriver: ^5.5.1
     asyncbox: ^3.0.0
     axios: ^1.x
@@ -8584,8 +8584,8 @@ __metadata:
     type-fest: ^4.4.0
     ws: ^8.0.0
   peerDependencies:
-    appium: ^2.0.0-beta.40
-  checksum: c39c6cada0b5ed95b1a3e66bc0b7f02127483e62c694da76e3d80f6728ec1d7dc2176493cca3dea121d035b21291914ece765eedf8ba8fac59b8a088aa181b36
+    appium: ^2.0.0
+  checksum: a8f8e6261c2e0d01dd76341d075faf79b50738446f52fd64b9e44ec7c9a14fc58b5abf0407e7bd4b61c88371d659ba97f0711e64b7aac373ed7d1232725813ff
   languageName: node
   linkType: hard
 
@@ -8701,11 +8701,11 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "appium-uiautomator2-driver@npm:3.0.5"
+  version: 3.1.0
+  resolution: "appium-uiautomator2-driver@npm:3.1.0"
   dependencies:
     appium-adb: ^12.0.0
-    appium-android-driver: ^9.0.4
+    appium-android-driver: ^9.1.0
     appium-chromedriver: ^5.6.28
     appium-uiautomator2-server: ^7.0.1
     asyncbox: ^3.0.0
@@ -8720,7 +8720,7 @@ __metadata:
     type-fest: ^4.4.0
   peerDependencies:
     appium: ^2.4.1
-  checksum: daa13f2a735acd153e4a27bc10e5caee83a54c3cc3ced4e947163e6fab2fd5f417ccae4a883bc1fa7c5088b37378c7de1a119f4fe5f139325c82252324b33d61
+  checksum: 9520ea6fa483daa87c6949bc91b96552da45b07f083cd7dad0135d4ef62d2785e232fe1c07055b0e4762690bd0657f238b8231081ddb1e0568719db521423a15
   languageName: node
   linkType: hard
 
