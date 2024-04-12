@@ -49,7 +49,7 @@
     "@react-native/metro-config": "^0.73.0",
     "react": "18.2.0",
     "react-native": "^0.73.0",
-    "react-native-svg": "^14.0.0",
+    "react-native-svg": "^15.0.0",
     "react-native-svg-transformer": "^1.0.0"
   },
   "peerDependencies": {
@@ -57,7 +57,7 @@
     "react": "18.2.0",
     "react-native": "^0.73.0",
     "react-native-macos": "^0.73.0",
-    "react-native-svg": "^14.0.0",
+    "react-native-svg": "^15.0.0",
     "react-native-windows": "^0.73.0"
   },
   "rnx-kit": {
