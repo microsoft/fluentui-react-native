@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Thu, 11 Apr 2024 18:08:37 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Apr 2024 21:02:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.1
+
+Fri, 12 Apr 2024 21:02:38 GMT
+
+### Patches
+
+- chore: Update react-native-svg to 15.1.0 (sanajmi@microsoft.com)
 
 ## 0.17.0
 

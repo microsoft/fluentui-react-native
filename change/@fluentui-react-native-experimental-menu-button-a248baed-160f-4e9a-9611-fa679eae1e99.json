@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "chore: Update react-native-svg to 15.1.0",
-  "packageName": "@fluentui-react-native/experimental-menu-button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

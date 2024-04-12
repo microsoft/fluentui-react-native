@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Fri, 12 Apr 2024 21:02:38 GMT",
+      "version": "0.10.1",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "055bddda6b613c5c2045cc20a455a94c5a4b53dd",
+            "comment": "chore: Update react-native-svg to 15.1.0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:37 GMT",
       "version": "0.10.0",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.10.0",
