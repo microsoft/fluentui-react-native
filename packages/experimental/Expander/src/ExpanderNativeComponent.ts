@@ -6,17 +6,17 @@
 
 import type { ColorValue, HostComponent, ViewProps } from 'react-native';
 
-import type { DirectEventHandler, Double } from 'react-native/Libraries/Types/CodegenTypes';
+import type { DirectEventHandler, Double, WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 
 export interface NativeProps extends ViewProps {
-  expandDirection?: 'up' | 'down';
+  expandDirection?: WithDefault<'up' | 'down', 'down'>;
   expanded?: boolean;
   enabled?: boolean;
   width?: Double;
   height?: Double;
-  contentHorizontalAlignment?: 'center' | 'left' | 'right' | 'stretch';
-  contentVerticalAlignment?: 'bottom' | 'center' | 'stretch' | 'top';
+  contentHorizontalAlignment?: WithDefault<'center' | 'left' | 'right' | 'stretch', 'stretch'>;
+  contentVerticalAlignment?: WithDefault<'bottom' | 'center' | 'stretch' | 'top', 'top'>;
   headerBackground?: ColorValue;
   headerForeground?: ColorValue;
   headerForegroundPointerOver?: ColorValue;
