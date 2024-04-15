@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Thu, 11 Apr 2024 18:08:41 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Apr 2024 21:31:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.26.1
+
+Mon, 15 Apr 2024 21:31:43 GMT
+
+### Patches
+
+- Ensure build output has the generated view configs (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.26.0
 

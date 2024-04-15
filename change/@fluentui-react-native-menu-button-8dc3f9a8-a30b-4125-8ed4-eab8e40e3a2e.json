@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Ensure build output has the generated view configs",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Thu, 11 Apr 2024 18:08:38 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Apr 2024 21:31:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.1
+
+Mon, 15 Apr 2024 21:31:44 GMT
+
+### Patches
+
+- Ensure build output has the generated view configs (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.17.0
 
