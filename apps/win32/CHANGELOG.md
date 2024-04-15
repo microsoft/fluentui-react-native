@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 12 Apr 2024 21:02:39 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Apr 2024 19:08:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.38.2
+
+Mon, 15 Apr 2024 19:08:10 GMT
+
+### Patches
+
+- Update rex-win32 to a version based on 0.73 (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.38.1
 
