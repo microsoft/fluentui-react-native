@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { TooltipDefault } from './TooltipDefault';
-import { TooltipPosition } from './TooltipPosition';
+// import { TooltipPosition } from './TooltipPosition';
 import { TOOLTIP_TESTPAGE } from '../../../../E2E/src/Tooltip/consts';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
@@ -12,10 +12,11 @@ const tooltipSections: TestSection[] = [
     testID: TOOLTIP_TESTPAGE,
     component: TooltipDefault,
   },
-  {
-    name: 'Target + Positioning',
-    component: TooltipPosition,
-  },
+  // In Progress - Implementation for custom positioning and anchoring is not completed in the native module.
+  // {
+  //   name: 'Target + Positioning',
+  //   component: TooltipPosition,
+  // },
 ];
 
 export const TooltipTest: React.FunctionComponent = () => {
