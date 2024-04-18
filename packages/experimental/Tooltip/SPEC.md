@@ -42,9 +42,13 @@ const tooltip = (
 
 Not yet implemented.
 
+The `Tooltip` component will appear in the specified position relative to the anchor (target). In Win32, the positions are denoted by the DirectionalHint: `topLeftEdge`, `topCenter`, `topRightEdge`, `rightTopEdge`, `rightCenter`, `rightBottomEdge`, `bottomLeftEdge`, `bottomCenter`, `bottomRightEdge`, `leftTopEdge`, `leftCenter`, and `leftBottomEdge`.
+
 ### Target
 
 Not yet implemented.
+
+The `Tooltip` component can reference a target component that will be used as the position anchor.
 
 ## API
 
