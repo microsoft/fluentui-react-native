@@ -8635,8 +8635,8 @@ __metadata:
   linkType: hard
 
 "appium-mac2-driver@npm:^1.12.0":
-  version: 1.15.0
-  resolution: "appium-mac2-driver@npm:1.15.0"
+  version: 1.17.0
+  resolution: "appium-mac2-driver@npm:1.17.0"
   dependencies:
     "@appium/strongbox": "npm:^0.x"
     "@colors/colors": "npm:^1.6.0"
@@ -8650,7 +8650,7 @@ __metadata:
     teen_process: "npm:^2.0.1"
   peerDependencies:
     appium: ^2.4.1
-  checksum: 10c0/b99d7119d8adb884d6aec008fb954c0da10be3d9765593b96db5a77b3324e686079b34a074a4c5888a3a91d3b592661a53e67e91f2cc16068d6b6e26875321c1
+  checksum: 10c0/6f7c451144a66c1b8e0da97c7a2c82f3debc4028c54fb53c0d31eb2b3056360739bf7cb83491cfe7ef27f5860f152ab645949d8c8c3d3da96e42a69d304d7136
   languageName: node
   linkType: hard
 
