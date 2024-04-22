@@ -59,12 +59,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/base-driver@npm:^9.5.4":
-  version: 9.5.4
-  resolution: "@appium/base-driver@npm:9.5.4"
+"@appium/base-driver@npm:^9.6.0":
+  version: 9.6.0
+  resolution: "@appium/base-driver@npm:9.6.0"
   dependencies:
-    "@appium/support": "npm:^4.2.4"
-    "@appium/types": "npm:^0.16.2"
+    "@appium/support": "npm:^4.2.5"
+    "@appium/types": "npm:^0.17.0"
     "@colors/colors": "npm:1.6.0"
     "@types/async-lock": "npm:1.4.2"
     "@types/bluebird": "npm:3.5.42"
@@ -92,25 +92,25 @@ __metadata:
   dependenciesMeta:
     spdy:
       optional: true
-  checksum: 10c0/2c40d41a11ae1cc853a1f318c156c7f3d5a2f72bb48500b7a92985c911683187da87e72db598a0cf40ceaf9ff1fe368c9bb9965009686ccb7277d5d99f21e11b
+  checksum: 10c0/ae82c0daf76215eebaa85ac2f867d396c826af5f102ffae2a34b7194d1dbe43b7413a783647d99c81c6a7b7f77b7b40c55d0ea794d9098dfb29cc3f9c39730eb
   languageName: node
   linkType: hard
 
-"@appium/base-plugin@npm:^2.2.30":
-  version: 2.2.30
-  resolution: "@appium/base-plugin@npm:2.2.30"
+"@appium/base-plugin@npm:^2.2.31":
+  version: 2.2.31
+  resolution: "@appium/base-plugin@npm:2.2.31"
   dependencies:
-    "@appium/base-driver": "npm:^9.5.4"
-    "@appium/support": "npm:^4.2.4"
-  checksum: 10c0/302910086911c2336e5f53c3f64e5df00d88bb978ccc43c36049ec4c8a7506cc413d48f7aecc23f228e5bd1087f5e45a67c27d0388fef433a350300fc87277ef
+    "@appium/base-driver": "npm:^9.6.0"
+    "@appium/support": "npm:^4.2.5"
+  checksum: 10c0/75897a6949993b46c14867bb53746a39dc9cd19083bb491ca9ec0758872e580b7b9942530aef9bfb88586a236ac0086872c76b71834b0293f0b16df9e0075acf
   languageName: node
   linkType: hard
 
-"@appium/docutils@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@appium/docutils@npm:1.0.6"
+"@appium/docutils@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@appium/docutils@npm:1.0.7"
   dependencies:
-    "@appium/support": "npm:^4.2.4"
+    "@appium/support": "npm:^4.2.5"
     "@appium/tsconfig": "npm:^0.3.3"
     "@sliphua/lilconfig-ts-loader": "npm:3.2.2"
     "@types/which": "npm:3.0.3"
@@ -132,7 +132,7 @@ __metadata:
     yargs-parser: "npm:21.1.1"
   bin:
     appium-docs: bin/appium-docs.js
-  checksum: 10c0/8262c0c4d1932951ded4f7b573671aac3f5b09412dd092de8a80475fa5493d5579fb4e3d2c64689b62526dc2bfe6922ec3c5a0b887eaecf97f7f36869f317e69
+  checksum: 10c0/230609001b5e4d4d557d980e253cf55c3f3b681f2552c531210847b0f2fd1f87c41e166df1a9fe8347064d95baf939c86d5f2ec82d4a0c9c04afc24c3404a0c6
   languageName: node
   linkType: hard
 
@@ -222,12 +222,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/support@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "@appium/support@npm:4.2.4"
+"@appium/support@npm:^4.2.5":
+  version: 4.2.5
+  resolution: "@appium/support@npm:4.2.5"
   dependencies:
     "@appium/tsconfig": "npm:^0.3.3"
-    "@appium/types": "npm:^0.16.2"
+    "@appium/types": "npm:^0.17.0"
     "@colors/colors": "npm:1.6.0"
     "@types/archiver": "npm:6.0.2"
     "@types/base64-stream": "npm:1.0.5"
@@ -279,11 +279,11 @@ __metadata:
     type-fest: "npm:4.10.1"
     uuid: "npm:9.0.1"
     which: "npm:4.0.0"
-    yauzl: "npm:3.1.2"
+    yauzl: "npm:3.1.3"
   dependenciesMeta:
     sharp:
       optional: true
-  checksum: 10c0/79d1e2363c38886f79a52dc48c49690c63d9bd47f2b5bd7472e4e1175d95ecc2defbbafef0948ae5025a502cce0101e374983cba11ac200d2889329105c225f7
+  checksum: 10c0/5b52124776e3513a3a335db6092e84978163cdca10effce04e019a5b54321ae1e4ee3d82b824d8e2d2d46e948db5de94857b10a68de22d3924a6e23ddc9650d8
   languageName: node
   linkType: hard
 
@@ -307,6 +307,20 @@ __metadata:
     "@types/ws": "npm:8.5.10"
     type-fest: "npm:4.10.1"
   checksum: 10c0/7e46eb54799eeb22a6f9cfd09422fe56ed51e6f46feffa4b5799a5250b89b51becd54c92c2c09908c65225ace2d9948355e9b98f7550db34eea0c0dfdf2b2d3e
+  languageName: node
+  linkType: hard
+
+"@appium/types@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "@appium/types@npm:0.17.0"
+  dependencies:
+    "@appium/schema": "npm:^0.5.0"
+    "@appium/tsconfig": "npm:^0.3.3"
+    "@types/express": "npm:4.17.21"
+    "@types/npmlog": "npm:7.0.0"
+    "@types/ws": "npm:8.5.10"
+    type-fest: "npm:4.10.1"
+  checksum: 10c0/be113d5aff6c0e8c312a3ec4aeee1266453b2203317b492332925124522050ae50b03f8faddcf840af91f0454aa9057e2fb0c615d150b73065b2b9a641fd1bc4
   languageName: node
   linkType: hard
 
@@ -8796,15 +8810,15 @@ __metadata:
   linkType: hard
 
 "appium@npm:^2.5.1":
-  version: 2.5.3
-  resolution: "appium@npm:2.5.3"
+  version: 2.5.4
+  resolution: "appium@npm:2.5.4"
   dependencies:
-    "@appium/base-driver": "npm:^9.5.4"
-    "@appium/base-plugin": "npm:^2.2.30"
-    "@appium/docutils": "npm:^1.0.6"
+    "@appium/base-driver": "npm:^9.6.0"
+    "@appium/base-plugin": "npm:^2.2.31"
+    "@appium/docutils": "npm:^1.0.7"
     "@appium/schema": "npm:~0.5.0"
-    "@appium/support": "npm:^4.2.4"
-    "@appium/types": "npm:^0.16.2"
+    "@appium/support": "npm:^4.2.5"
+    "@appium/types": "npm:^0.17.0"
     "@sidvind/better-ajv-errors": "npm:2.1.3"
     "@types/argparse": "npm:2.0.16"
     "@types/bluebird": "npm:3.5.42"
@@ -8836,7 +8850,7 @@ __metadata:
     yaml: "npm:2.4.1"
   bin:
     appium: index.js
-  checksum: 10c0/8312557228396cef76641792420cb8d24694eea9e0588d85c2b1edaecb5dfe8a4dd7ed3cbe19d7e1d146b81e6ed54b9ac3d1f2dba4f33d2cd5cea2e3b6251bc1
+  checksum: 10c0/0dc6f6071184c3898dbe721a9dcf2f0b864d747631a38f6c2e3e94e6ea9a01840792c89298c8d2bca4bca18a03c4eb7e7a453d9b8696cbfb871e6801e8e75725
   languageName: node
   linkType: hard
 
@@ -22168,6 +22182,16 @@ __metadata:
     buffer-crc32: "npm:~0.2.3"
     pend: "npm:~1.2.0"
   checksum: 10c0/9d6d29a64b458d45b78701d2ac48927a9c8d51bc1a9a0af296bf29910ed059b4b1cf89aaea7d496ac0e9b696da5a2e0c829f919570b87b71fb3a868b2057862a
+  languageName: node
+  linkType: hard
+
+"yauzl@npm:3.1.3":
+  version: 3.1.3
+  resolution: "yauzl@npm:3.1.3"
+  dependencies:
+    buffer-crc32: "npm:~0.2.3"
+    pend: "npm:~1.2.0"
+  checksum: 10c0/e04a2567860e1337798cd2570d776b4040520b20660e7ec5dfcce24b8be2b134d6a5ae835804a0186b1a58cb8b1741b37eaa6a86f7546b6219b62a265dbaf3fc
   languageName: node
   linkType: hard
 
