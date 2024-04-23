@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Add missing include",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "araje@microsoft.com",
+  "dependentChangeType": "none"
+}
