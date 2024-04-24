@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Wed, 24 Apr 2024 00:03:01 GMT",
+      "version": "0.21.1",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.21.1",
+      "comments": {
+        "none": [
+          {
+            "author": "araje@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "5b9555af39ef5d1a4010352565859cb3acc0e2c9",
+            "comment": "Add missing include"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Apr 2024 21:31:43 GMT",
       "version": "0.21.1",
       "tag": "@fluentui-react-native/experimental-avatar_v0.21.1",
