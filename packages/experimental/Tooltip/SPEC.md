@@ -54,7 +54,7 @@ The `Tooltip` component can reference a target component that will be used as th
 
 ### Slots
 
-The `RadioGroup` component has one slot, or parts. The slots behave as follows:
+The `Tooltip` component has one slot, or parts. The slots behave as follows:
 
 - `root` - The outer container representing the `Tooltip` itself. The NativeTooltipViewManager is passed into this.
 
