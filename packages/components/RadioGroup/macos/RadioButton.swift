@@ -16,7 +16,6 @@ class RadioButton: NSButton {
 	}
 
 	@objc public func sendCallback() {
-		self.window?.makeFirstResponder(self)
 		if (onPress != nil) {
 			onPress!(nil)
 		}
