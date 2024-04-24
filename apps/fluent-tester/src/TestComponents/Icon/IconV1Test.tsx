@@ -18,6 +18,7 @@ const svgUriProps: SvgIconPropsV1 = {
   viewBox: '0 0 1000 1000',
   width: 100,
   height: 100,
+  accessibilityLabel: 'Just another example',
 };
 
 const svgSrcProps: SvgIconPropsV1 = {
@@ -25,6 +26,7 @@ const svgSrcProps: SvgIconPropsV1 = {
   src: TestSvg,
   width: 72,
   height: 72,
+  accessibilityLabel: 'Wheelchair',
 };
 
 export const IconV1Test: React.FunctionComponent = () => {
@@ -32,6 +34,7 @@ export const IconV1Test: React.FunctionComponent = () => {
     () => ({
       color: 'lightgreen',
       ...svgSrcProps,
+      accessibilityLabel: 'Wheelchair',
     }),
     [],
   );
