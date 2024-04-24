@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 15 Apr 2024 21:31:44 GMT and should not be manually modified.
+This log was last generated on Wed, 24 Apr 2024 01:07:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.3
+
+Wed, 24 Apr 2024 01:07:49 GMT
+
+### Patches
+
+- fix radiobutton focus ring moving with every click (7664112+FalseLobster@users.noreply.github.com)
 
 ## 0.21.2
 

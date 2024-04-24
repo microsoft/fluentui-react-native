@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix radiobutton focus ring moving with every click",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "7664112+FalseLobster@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

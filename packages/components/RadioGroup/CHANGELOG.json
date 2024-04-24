@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 24 Apr 2024 01:07:49 GMT",
+      "version": "0.21.3",
+      "tag": "@fluentui-react-native/radio-group_v0.21.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "7664112+FalseLobster@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "884231524aad3a2c37780af638e5a8ab65aa2575",
+            "comment": "fix radiobutton focus ring moving with every click"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Apr 2024 21:31:44 GMT",
       "version": "0.21.2",
       "tag": "@fluentui-react-native/radio-group_v0.21.2",
