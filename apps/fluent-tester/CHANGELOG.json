@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 25 Apr 2024 17:25:56 GMT",
+      "version": "0.168.4",
+      "tag": "@fluentui-react-native/tester_v0.168.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "74788ca2563f33f3e7c9e23b889c480ae34ab2f6",
+            "comment": "added accessiblity labels on icons"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:39 GMT",
       "version": "0.168.1",
       "tag": "@fluentui-react-native/tester_v0.168.1",
