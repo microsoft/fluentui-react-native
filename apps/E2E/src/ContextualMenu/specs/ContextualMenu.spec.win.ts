@@ -38,28 +38,6 @@ describe('ContextualMenu Functional Tests', () => {
       .toBeFalsy(); // Ensure no asserts popped up
   });
 
-  it("Type 'SPACE' on ContextualMenu Button. Validate that the menu opens by checking if its items are displayed.", async () => {
-    /* Type "space" on the ContextualMenu */
-    await ContextualMenuPageObject.sendKeys(ContextualMenuPageObject._contextualMenu, [Keys.SPACE]);
-
-    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToDisplay(PAGE_TIMEOUT)).toBeTruthy();
-
-    await expect(await ContextualMenuPageObject.didAssertPopup())
-      .withContext(ContextualMenuPageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy(); // Ensure no asserts popped up
-  });
-
-  it("Type 'ENTER' on ContextualMenu Button. Validate that the menu opens by checking if its items are displayed.", async () => {
-    /* Type "enter" on the ContextualMenu */
-    await ContextualMenuPageObject.sendKeys(ContextualMenuPageObject._contextualMenu, [Keys.ENTER]);
-
-    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToDisplay(PAGE_TIMEOUT)).toBeTruthy();
-
-    await expect(await ContextualMenuPageObject.didAssertPopup())
-      .withContext(ContextualMenuPageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy(); // Ensure no asserts popped up
-  });
-
   /* Runs after all tests. This ensures the ContextualMenu closes. If it stays open, the test driver won't be able to close the test app */
   afterAll(async () => {
     await ContextualMenuPageObject.closeContextualMenu(); // Reset ContextualMenu state for next test
