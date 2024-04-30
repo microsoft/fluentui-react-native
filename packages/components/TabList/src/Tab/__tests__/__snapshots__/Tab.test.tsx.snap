@@ -81,7 +81,7 @@ exports[`Tab component tests Customized Tab 1`] = `
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
-        "flex": 1,
+        "flex": 0,
         "flexDirection": "row",
         "justifyContent": "center",
         "marginHorizontal": 6,
@@ -100,6 +100,7 @@ exports[`Tab component tests Customized Tab 1`] = `
     >
       <Text
         accessible={false}
+        numberOfLines={1}
         style={
           {
             "color": "red",
@@ -218,7 +219,7 @@ exports[`Tab component tests Tab default props 1`] = `
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
-        "flex": 1,
+        "flex": 0,
         "flexDirection": "row",
         "justifyContent": "center",
         "marginHorizontal": 6,
@@ -237,6 +238,7 @@ exports[`Tab component tests Tab default props 1`] = `
     >
       <Text
         accessible={false}
+        numberOfLines={1}
         style={
           {
             "color": "#424242",
@@ -355,7 +357,7 @@ exports[`Tab component tests Tab disabled 1`] = `
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
-        "flex": 1,
+        "flex": 0,
         "flexDirection": "row",
         "justifyContent": "center",
         "marginHorizontal": 6,
@@ -374,6 +376,7 @@ exports[`Tab component tests Tab disabled 1`] = `
     >
       <Text
         accessible={false}
+        numberOfLines={1}
         style={
           {
             "color": "#bdbdbd",
@@ -492,7 +495,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
-        "flex": 1,
+        "flex": 0,
         "flexDirection": "row",
         "justifyContent": "center",
         "marginHorizontal": 6,
@@ -523,6 +526,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     >
       <Text
         accessible={false}
+        numberOfLines={1}
         style={
           {
             "color": "#424242",
@@ -641,7 +645,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
         "alignItems": "center",
         "alignSelf": "flex-start",
         "display": "flex",
-        "flex": 1,
+        "flex": 0,
         "flexDirection": "row",
         "justifyContent": "center",
         "marginHorizontal": 6,

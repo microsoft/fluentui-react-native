@@ -2,6 +2,66 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:41 GMT",
+      "version": "0.20.0",
+      "tag": "@uifabricshared/theming-react-native_v0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:21 GMT",
+      "version": "0.19.12",
+      "tag": "@uifabricshared/theming-react-native_v0.19.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 Mar 2024 23:09:49 GMT",
+      "version": "0.19.10",
+      "tag": "@uifabricshared/theming-react-native_v0.19.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "27e32411d737885e04f388545b52ef7fc3151faa",
+            "comment": "Update deprecation messages on theme objects"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:09 GMT",
+      "version": "0.19.9",
+      "tag": "@uifabricshared/theming-react-native_v0.19.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Feb 2024 23:27:46 GMT",
       "version": "0.19.8",
       "tag": "@uifabricshared/theming-react-native_v0.19.8",

@@ -30,6 +30,7 @@ export const defaultTabTokens: TokenSettings<TabTokens, Theme> = {
   contentMarginEnd: 2,
   flexDirection: 'column',
   indicatorRadius: 99,
+  numberOfLines: 1,
   small: {
     iconSize: 20,
     iconMargin: 2,

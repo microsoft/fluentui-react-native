@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Apr 2024 19:08:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.38.2
+
+Mon, 15 Apr 2024 19:08:10 GMT
+
+### Patches
+
+- Update rex-win32 to a version based on 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.38.1
+
+Fri, 12 Apr 2024 21:02:39 GMT
+
+### Patches
+
+- chore: Update react-native-svg to 15.1.0 (sanajmi@microsoft.com)
+
+## 0.38.0
+
+Thu, 11 Apr 2024 18:08:39 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.37.51
+
+Fri, 15 Mar 2024 16:26:21 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.37.45
+
+Fri, 01 Mar 2024 20:39:12 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.37.44
+
+Fri, 01 Mar 2024 01:04:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.13
+
+## 0.37.43
+
+Fri, 23 Feb 2024 23:29:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.167.12
 
 ## 0.37.42
 

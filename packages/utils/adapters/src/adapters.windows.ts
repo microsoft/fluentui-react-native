@@ -1,13 +1,10 @@
-import type { TextProps } from 'react-native';
-import type { ImageProps } from 'react-native';
-
-import type { IViewWindowsProps } from 'react-native-windows';
+import type { ImageProps, TextProps, ViewProps } from 'react-native-windows';
 
 import type { IFilterMask } from './filter.types';
 
-// export core interface types from RN
+// export core interface types
 export type ITextProps = TextProps;
-export type IViewProps = IViewWindowsProps;
+export type IViewProps = ViewProps;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
@@ -19,6 +16,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityLabel: true,
   accessibilityLabelledBy: true,
   accessibilityLanguage: true,
+  accessibilityLevel: true,
   accessibilityLiveRegion: true,
   accessibilityPosInSet: true,
   accessibilityRole: true,
@@ -100,9 +98,12 @@ const _viewMask: IFilterMask<IViewProps> = {
   'aria-hidden': true,
   'aria-label': true,
   'aria-labelledby': true,
+  'aria-level': true,
   'aria-live': true,
   'aria-modal': true,
+  'aria-posinset': true,
   'aria-selected': true,
+  'aria-setsize': true,
   'aria-valuemax': true,
   'aria-valuemin': true,
   'aria-valuenow': true,
@@ -117,8 +118,11 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityLabel: true,
   accessibilityLabelledBy: true,
   accessibilityLanguage: true,
+  accessibilityLevel: true,
   accessibilityLiveRegion: true,
+  accessibilityPosInSet: true,
   accessibilityRole: true,
+  accessibilitySetSize: true,
   accessibilityState: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
@@ -163,9 +167,12 @@ const _textMask: IFilterMask<ITextProps> = {
   'aria-hidden': true,
   'aria-label': true,
   'aria-labelledby': true,
+  'aria-level': true,
   'aria-live': true,
   'aria-modal': true,
+  'aria-posinset': true,
   'aria-selected': true,
+  'aria-setsize': true,
   'aria-valuemax': true,
   'aria-valuemin': true,
   'aria-valuenow': true,
@@ -181,8 +188,11 @@ const _imageMask: IFilterMask<IImageProps> = {
   accessibilityLabel: true,
   accessibilityLabelledBy: true,
   accessibilityLanguage: true,
+  accessibilityLevel: true,
   accessibilityLiveRegion: true,
+  accessibilityPosInSet: true,
   accessibilityRole: true,
+  accessibilitySetSize: true,
   accessibilityState: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
@@ -233,9 +243,12 @@ const _imageMask: IFilterMask<IImageProps> = {
   'aria-hidden': true,
   'aria-label': true,
   'aria-labelledby': true,
+  'aria-level': true,
   'aria-live': true,
   'aria-modal': true,
+  'aria-posinset': true,
   'aria-selected': true,
+  'aria-setsize': true,
   'aria-valuemax': true,
   'aria-valuemin': true,
   'aria-valuenow': true,

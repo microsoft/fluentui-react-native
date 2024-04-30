@@ -1,8 +1,32 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Thu, 04 Jan 2024 21:06:26 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Thu, 11 Apr 2024 18:08:41 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.19.12
+
+Wed, 13 Mar 2024 15:54:07 GMT
+
+### Patches
+
+- Add missing react-native peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.19.11
+
+Fri, 01 Mar 2024 20:39:09 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 0.19.10
 

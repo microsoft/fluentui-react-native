@@ -1,10 +1,9 @@
 import type * as React from 'react';
-import type { View } from 'react-native';
+import type { LayoutRectangle, View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
-import type { LayoutRectangle } from '@office-iss/react-native-win32';
 
 import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 

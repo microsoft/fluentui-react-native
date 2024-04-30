@@ -295,7 +295,7 @@ const MenuCustomized: React.FunctionComponent = () => {
         <MenuTrigger>
           <Button>Test</Button>
         </MenuTrigger>
-        <CustomMenuPopover>
+        <CustomMenuPopover directionalHint="rightCenter">
           <CustomMenuList>
             <CustomMenuItem>A MenuItem</CustomMenuItem>
             <CustomMenuItem>A MenuItem</CustomMenuItem>
@@ -384,7 +384,10 @@ const MenuWithGroups: React.FunctionComponent = () => {
               <MenuGroupHeader>Section 2</MenuGroupHeader>
               <MenuItem>A plain MenuItem</MenuItem>
               <MenuItem>A plain MenuItem</MenuItem>
-              <MenuDivider />
+              <MenuItem>A plain MenuItem</MenuItem>
+            </MenuGroup>
+            <MenuDivider />
+            <MenuGroup>
               <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
           </MenuList>

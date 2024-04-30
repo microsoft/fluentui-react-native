@@ -1,12 +1,10 @@
-import type { ImageProps } from 'react-native';
-
-import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
+import type { ImageProps, TextProps, ViewProps } from '@office-iss/react-native-win32';
 
 import type { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = ITextWin32Props;
-export type IViewProps = IViewWin32Props;
+export type ITextProps = TextProps;
+export type IViewProps = ViewProps;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
@@ -107,16 +105,22 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxTiltAngle: false,
   'aria-busy': true,
   'aria-checked': true,
+  'aria-controls': true,
+  'aria-describedby': true,
+  'aria-description': true,
   'aria-disabled': true,
   'aria-expanded': true,
   'aria-hidden': true,
   'aria-label': true,
   'aria-labelledby': true,
+  'aria-level': true,
   'aria-live': true,
   'aria-modal': true,
   'aria-multiselectable': true,
+  'aria-posinset': true,
   'aria-required': true,
   'aria-selected': true,
+  'aria-setsize': true,
   'aria-valuemax': true,
   'aria-valuemin': true,
   'aria-valuenow': true,
@@ -194,14 +198,22 @@ const _textMask: IFilterMask<ITextProps> = {
   tooltip: true,
   'aria-busy': true,
   'aria-checked': true,
+  'aria-controls': true,
+  'aria-describedby': true,
+  'aria-description': true,
   'aria-disabled': true,
   'aria-expanded': true,
   'aria-hidden': true,
   'aria-label': true,
   'aria-labelledby': true,
+  'aria-level': true,
   'aria-live': true,
   'aria-modal': true,
+  'aria-multiselectable': true,
+  'aria-posinset': true,
+  'aria-required': true,
   'aria-selected': true,
+  'aria-setsize': true,
   'aria-valuemax': true,
   'aria-valuemin': true,
   'aria-valuenow': true,
@@ -210,15 +222,24 @@ const _textMask: IFilterMask<ITextProps> = {
 
 const _imageMask: IFilterMask<IImageProps> = {
   children: true,
+  accessibilityAccessKey: true,
   accessibilityActions: true,
+  accessibilityAnnotation: true,
+  accessibilityControls: true,
+  accessibilityDescribedBy: true,
+  accessibilityDescription: true,
   accessibilityElementsHidden: true,
   accessibilityHint: true,
   accessibilityIgnoresInvertColors: true,
+  accessibilityItemType: true,
   accessibilityLabel: true,
   accessibilityLabelledBy: true,
   accessibilityLanguage: true,
+  accessibilityLevel: true,
   accessibilityLiveRegion: true,
+  accessibilityPositionInSet: true,
   accessibilityRole: true,
+  accessibilitySetSize: true,
   accessibilityState: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
@@ -264,14 +285,22 @@ const _imageMask: IFilterMask<IImageProps> = {
   width: true,
   'aria-busy': true,
   'aria-checked': true,
+  'aria-controls': true,
+  'aria-describedby': true,
+  'aria-description': true,
   'aria-disabled': true,
   'aria-expanded': true,
   'aria-hidden': true,
   'aria-label': true,
   'aria-labelledby': true,
+  'aria-level': true,
   'aria-live': true,
   'aria-modal': true,
+  'aria-multiselectable': true,
+  'aria-posinset': true,
+  'aria-required': true,
   'aria-selected': true,
+  'aria-setsize': true,
   'aria-valuemax': true,
   'aria-valuemin': true,
   'aria-valuenow': true,

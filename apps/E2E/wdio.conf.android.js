@@ -17,6 +17,10 @@ exports.config = {
       'appium:appPackage': 'com.microsoft.reacttestapp',
       'appium:appActivity': 'MainActivity',
       'appium:automationName': 'uiautomator2',
+      // These two capabilities disable the normal onscreen keyboard.
+      // The onscreen keyboard has a very complex representation that makes the appium code respond very slow.
+      'appium:resetKeyboard': true,
+      'appium:unicodeKeyboard': true,
     },
   ],
 

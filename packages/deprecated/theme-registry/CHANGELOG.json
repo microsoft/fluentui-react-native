@@ -2,6 +2,51 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:41 GMT",
+      "version": "0.12.0",
+      "tag": "@uifabricshared/theme-registry_v0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 Mar 2024 23:09:49 GMT",
+      "version": "0.11.2",
+      "tag": "@uifabricshared/theme-registry_v0.11.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "27e32411d737885e04f388545b52ef7fc3151faa",
+            "comment": "Update deprecation messages on theme objects"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:08 GMT",
+      "version": "0.11.1",
+      "tag": "@uifabricshared/theme-registry_v0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Nov 2023 02:39:06 GMT",
       "version": "0.11.0",
       "tag": "@uifabricshared/theme-registry_v0.11.0",

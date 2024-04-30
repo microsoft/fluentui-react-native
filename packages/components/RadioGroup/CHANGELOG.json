@@ -2,6 +2,126 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 24 Apr 2024 01:07:49 GMT",
+      "version": "0.21.3",
+      "tag": "@fluentui-react-native/radio-group_v0.21.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "7664112+FalseLobster@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "884231524aad3a2c37780af638e5a8ab65aa2575",
+            "comment": "fix radiobutton focus ring moving with every click"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 15 Apr 2024 21:31:44 GMT",
+      "version": "0.21.2",
+      "tag": "@fluentui-react-native/radio-group_v0.21.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "b2f0ae646a08ddcaf36b18f969a2908b3d8da59f",
+            "comment": "Ensure build output has the generated view configs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Apr 2024 21:02:38 GMT",
+      "version": "0.21.1",
+      "tag": "@fluentui-react-native/radio-group_v0.21.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "055bddda6b613c5c2045cc20a455a94c5a4b53dd",
+            "comment": "chore: Update react-native-svg to 15.1.0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Apr 2024 18:08:39 GMT",
+      "version": "0.21.0",
+      "tag": "@fluentui-react-native/radio-group_v0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 29 Mar 2024 18:07:00 GMT",
+      "version": "0.20.17",
+      "tag": "@fluentui-react-native/radio-group_v0.20.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "a722aa94799f4afee55baa03a5a754b0d4b2fdce",
+            "comment": "Use codegenNativeComponent so JS View configs can be generated for all native components"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 18 Mar 2024 23:41:59 GMT",
+      "version": "0.20.16",
+      "tag": "@fluentui-react-native/radio-group_v0.20.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "2987dfe69a815b118981b62ed49a41ea00705496",
+            "comment": "Remove usages of react-native-win32 from non win32 overrides"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:20 GMT",
+      "version": "0.20.15",
+      "tag": "@fluentui-react-native/radio-group_v0.20.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:12 GMT",
+      "version": "0.20.12",
+      "tag": "@fluentui-react-native/radio-group_v0.20.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Feb 2024 03:22:29 GMT",
       "version": "0.20.11",
       "tag": "@fluentui-react-native/radio-group_v0.20.11",

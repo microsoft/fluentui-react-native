@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Apr 2024 21:31:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.26.1
+
+Mon, 15 Apr 2024 21:31:43 GMT
+
+### Patches
+
+- Ensure build output has the generated view configs (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.26.0
+
+Thu, 11 Apr 2024 18:08:41 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.25.16
+
+Fri, 29 Mar 2024 18:06:59 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.25.14
+
+Fri, 15 Mar 2024 16:26:18 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.25.11
+
+Fri, 01 Mar 2024 20:39:09 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 0.25.10
 

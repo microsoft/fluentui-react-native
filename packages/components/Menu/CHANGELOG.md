@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Apr 2024 21:02:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.14.1
+
+Fri, 12 Apr 2024 21:02:38 GMT
+
+### Patches
+
+- chore: Update react-native-svg to 15.1.0 (sanajmi@microsoft.com)
+
+## 1.14.0
+
+Thu, 11 Apr 2024 18:08:38 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 1.13.0
+
+Tue, 19 Mar 2024 20:00:34 GMT
+
+### Minor changes
+
+- timestamp per instance (gulnazsayed@microsoft.com)
+
+## 1.12.25
+
+Fri, 15 Mar 2024 20:38:11 GMT
+
+### Patches
+
+- set directionalHint on MenuPopover from user props (krsiler@microsoft.com)
+
+## 1.12.24
+
+Fri, 15 Mar 2024 16:26:20 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 1.12.21
+
+Fri, 01 Mar 2024 20:39:11 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 1.12.20
+
+Fri, 01 Mar 2024 01:04:35 GMT
+
+### Patches
+
+- fix menu group accessibility (krsiler@microsoft.com)
 
 ## 1.12.19
 

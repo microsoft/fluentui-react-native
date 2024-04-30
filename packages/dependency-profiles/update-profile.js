@@ -58,6 +58,7 @@ let profiles;
 //
 profiles = {
   [`${major}.${minor}`]: packages,
+  ...require('./src/furn-profile-0.72.js'),
   ...require('./src/furn-profile-0.71.js'),
 };
 

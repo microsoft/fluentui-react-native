@@ -1,8 +1,32 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Thu, 09 Nov 2023 02:39:11 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Thu, 11 Apr 2024 18:08:40 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.12.5
+
+Wed, 13 Mar 2024 15:54:07 GMT
+
+### Patches
+
+- Add missing react-native peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.12.4
+
+Fri, 01 Mar 2024 20:39:08 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 0.12.3
 

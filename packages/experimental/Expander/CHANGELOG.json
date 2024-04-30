@@ -2,6 +2,96 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Mon, 15 Apr 2024 21:31:43 GMT",
+      "version": "0.8.1",
+      "tag": "@fluentui-react-native/experimental-expander_v0.8.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "b2f0ae646a08ddcaf36b18f969a2908b3d8da59f",
+            "comment": "Ensure build output has the generated view configs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Apr 2024 18:08:37 GMT",
+      "version": "0.8.0",
+      "tag": "@fluentui-react-native/experimental-expander_v0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 29 Mar 2024 18:07:00 GMT",
+      "version": "0.7.13",
+      "tag": "@fluentui-react-native/experimental-expander_v0.7.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "a722aa94799f4afee55baa03a5a754b0d4b2fdce",
+            "comment": "Use codegenNativeComponent so JS View configs can be generated for all native components"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Mar 2024 06:51:42 GMT",
+      "version": "0.7.12",
+      "tag": "@fluentui-react-native/experimental-expander_v0.7.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "f12050ff7b4fc971a0d199da83c59974c39fcd48",
+            "comment": "Update VS project to support package references"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:19 GMT",
+      "version": "0.7.10",
+      "tag": "@fluentui-react-native/experimental-expander_v0.7.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:10 GMT",
+      "version": "0.7.9",
+      "tag": "@fluentui-react-native/experimental-expander_v0.7.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Feb 2024 23:27:46 GMT",
       "version": "0.7.8",
       "tag": "@fluentui-react-native/experimental-expander_v0.7.8",

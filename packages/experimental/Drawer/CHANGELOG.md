@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/drawer
 
-This log was last generated on Fri, 23 Feb 2024 03:22:29 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Thu, 11 Apr 2024 18:08:42 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.3.12
+
+Fri, 15 Mar 2024 16:26:19 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.3.10
+
+Fri, 01 Mar 2024 20:39:10 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 0.3.9
 

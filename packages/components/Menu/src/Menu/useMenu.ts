@@ -12,7 +12,6 @@ import { useMenuContext } from '../context/menuContext';
 // a menu when we close it. Adding in a delay to prevent
 // this behavior.
 const delayOpen = 150;
-let lastCloseTimestamp = -1;
 
 export const useMenu = (props: MenuProps): MenuState => {
   const triggerRef = React.useRef();
@@ -61,10 +60,12 @@ const useMenuOpenState = (
 
   const state = isControlled ? open : openInternal;
 
+  const lastCloseTimestampRef = React.useRef<number>(-1);
+
   const setOpen = React.useCallback(
     (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => {
       const openPrev = state;
-      if (!isControlled && (!isOpen || lastCloseTimestamp + delayOpen <= Date.now())) {
+      if (!isControlled && (!isOpen || lastCloseTimestampRef.current + delayOpen <= Date.now())) {
         setOpenInternal(isOpen);
       }
 
@@ -78,7 +79,7 @@ const useMenuOpenState = (
 
       if (!isOpen) {
         setShouldFocusOnContainer(undefined);
-        lastCloseTimestamp = Date.now();
+        lastCloseTimestampRef.current = Date.now();
       }
 
       if (onOpenChange && openPrev !== isOpen) {

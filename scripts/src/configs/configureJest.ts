@@ -18,6 +18,9 @@ export function configureJest(customConfig?: object): object {
       moduleNameMapper: {
         '\\.(scss)$': path.resolve(__dirname, 'jest/jest-style-mock.js'),
         KeyCodes: path.resolve(__dirname, 'jest/jest-mock.js'),
+        // Jest is picking up the hoisted version of lru-cache, which is
+        // incompatible from the version required by semver
+        'lru-cache': require.resolve('lru-cache', {paths:[require.resolve('semver')]}),
       },
       moduleFileExtensions,
       moduleDirectories: nodeModulesToRoot(),

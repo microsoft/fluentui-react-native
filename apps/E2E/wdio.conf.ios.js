@@ -15,8 +15,8 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'iOS',
       // Keep this in sync with the simulator we run in Azure Pipelines, defined in `.ado/variables/vars.yml`
-      'appium:platformVersion': '16.2',
-      'appium:deviceName': 'iPhone 14',
+      'appium:platformVersion': '17.2',
+      'appium:deviceName': 'iPhone 15',
       'appium:automationName': 'XCUITest',
       'appium:bundleId': 'com.microsoft.ReactTestApp',
     },

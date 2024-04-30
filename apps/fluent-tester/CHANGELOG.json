@@ -2,6 +2,222 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 25 Apr 2024 17:25:56 GMT",
+      "version": "0.168.4",
+      "tag": "@fluentui-react-native/tester_v0.168.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "74788ca2563f33f3e7c9e23b889c480ae34ab2f6",
+            "comment": "added accessiblity labels on icons"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Apr 2024 21:02:39 GMT",
+      "version": "0.168.1",
+      "tag": "@fluentui-react-native/tester_v0.168.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "055bddda6b613c5c2045cc20a455a94c5a4b53dd",
+            "comment": "chore: Update react-native-svg to 15.1.0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Apr 2024 18:08:39 GMT",
+      "version": "0.168.0",
+      "tag": "@fluentui-react-native/tester_v0.168.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 29 Mar 2024 18:07:00 GMT",
+      "version": "0.167.32",
+      "tag": "@fluentui-react-native/tester_v0.167.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "a722aa94799f4afee55baa03a5a754b0d4b2fdce",
+            "comment": "Use codegenNativeComponent so JS View configs can be generated for all native components"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 29 Mar 2024 00:57:12 GMT",
+      "version": "0.167.31",
+      "tag": "@fluentui-react-native/tester_v0.167.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c5596acb22cd132870d924fc39dae18f71807aab",
+            "comment": "Add new Overflow example for dynamic addition / removal of items."
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 27 Mar 2024 00:51:04 GMT",
+      "version": "0.167.30",
+      "tag": "@fluentui-react-native/tester_v0.167.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "57c21f5213370f8d7ffe3087c834121689e2afd2",
+            "comment": "Update used versions of packages and yarn dedupe"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Mar 2024 01:03:36 GMT",
+      "version": "0.167.28",
+      "tag": "@fluentui-react-native/tester_v0.167.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "bd0f7c4244934f2820ad7aa0d3dbfd6c0c5fd4d6",
+            "comment": "Remove use of findNodeHandle"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Mar 2024 22:58:12 GMT",
+      "version": "0.167.26",
+      "tag": "@fluentui-react-native/tester_v0.167.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "fc707c2ae9c12047a5cd46f04db72e360c730ee1",
+            "comment": "Add Overflow E2E test section."
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 20:38:11 GMT",
+      "version": "0.167.21",
+      "tag": "@fluentui-react-native/tester_v0.167.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "14b7873d56543f64107bca938746e14fd49248ea",
+            "comment": "set directionalHint on MenuPopover from user props"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:21 GMT",
+      "version": "0.167.20",
+      "tag": "@fluentui-react-native/tester_v0.167.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Mar 2024 22:02:05 GMT",
+      "version": "0.167.19",
+      "tag": "@fluentui-react-native/tester_v0.167.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d61779d527096fc2fa586bafe1abec600b8457f3",
+            "comment": "Add Overflow page"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:12 GMT",
+      "version": "0.167.14",
+      "tag": "@fluentui-react-native/tester_v0.167.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 01:04:36 GMT",
+      "version": "0.167.13",
+      "tag": "@fluentui-react-native/tester_v0.167.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "17974c7b86abaa7769834551ff5743691819c905",
+            "comment": "fix menu group accessibility"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.12.20",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 23:29:38 GMT",
+      "version": "0.167.12",
+      "tag": "@fluentui-react-native/tester_v0.167.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4f859c79645131e21792ae06881d426184368d79",
+            "comment": "change dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Feb 2024 03:22:29 GMT",
       "version": "0.167.11",
       "tag": "@fluentui-react-native/tester_v0.167.11",

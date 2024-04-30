@@ -68,13 +68,16 @@ export const ToggleButton = compose<ToggleButtonType>({
             ),
           )}
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} accessible={false} />}
-          {toggleButton.state.focused && toggleButton.state.shouldUseTwoToneFocusBorder && (
-            <Slots.focusInnerBorder
-              style={getFocusBorderStyle(toggleButton.state.measuredHeight, toggleButton.state.measuredWidth)}
-              accessible={false}
-              focusable={false}
-            />
-          )}
+          {toggleButton.state.focused &&
+            !!toggleButton.state.measuredHeight &&
+            !!toggleButton.state.measuredWidth &&
+            toggleButton.state.shouldUseTwoToneFocusBorder && (
+              <Slots.focusInnerBorder
+                style={getFocusBorderStyle(toggleButton.state.measuredHeight, toggleButton.state.measuredWidth)}
+                accessible={false}
+                focusable={false}
+              />
+            )}
         </Slots.root>
       );
     };
