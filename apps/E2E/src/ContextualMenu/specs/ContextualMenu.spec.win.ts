@@ -1,4 +1,4 @@
-import { PAGE_TIMEOUT, Keys } from '../../common/consts';
+import { PAGE_TIMEOUT } from '../../common/consts';
 import ContextualMenuPageObject from '../pages/ContextualMenuPageObject.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
