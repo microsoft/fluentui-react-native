@@ -26,13 +26,13 @@ export interface NativeColorNames {
 
 export interface OfficeThemingModule extends NativeModule {
   getPalette(palette?: string): OfficePalette | CxxException;
-  getConstants() : {
+  getConstants(): {
     typography: object; // eslint-disable-line @typescript-eslint/ban-types
     fluentTypography: Typography;
     ramps: NativeColorRamps;
     rampNames: NativeColorNames;
     initialHostThemeSetting?: string;
-  }
+  };
 }
 
 export interface IEventEmitter {

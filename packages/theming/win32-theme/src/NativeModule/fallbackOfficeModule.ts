@@ -145,9 +145,9 @@ const whiteColorsPalette: OfficePalette = {
 export function fallbackGetPalette(pal?: string): OfficePalette {
   return pal === 'TaskPane'
     ? {
-      ...whiteColorsPalette,
-      Bkg: 'antiquewhite',
-    }
+        ...whiteColorsPalette,
+        Bkg: 'antiquewhite',
+      }
     : whiteColorsPalette;
 }
 
@@ -169,7 +169,6 @@ export const fallbackOfficeModule: OfficeThemingModule = {
         ClassicGrays: ['FakeGray4', 'Gray5', 'Gray6'],
         Sepias: ['FakeSepia'],
       },
-    }
+    };
   },
-
 } as OfficeThemingModule;
