@@ -26,7 +26,7 @@ interface ExportedConstants {
   sizes: { [key in Size]: number };
 }
 
-const ExportedNativeConstants: ExportedConstants = TurboModuleRegistry.get('FRNAvatarConstants') || NativeModules.FRNAvatarViewManager;
+const ExportedNativeConstants: ExportedConstants = TurboModuleRegistry.get('FRNAvatarConstants')?.getConstants() || NativeModules.FRNAvatarViewManager;
 
 export type NativeAvatarTokens = {
   /**

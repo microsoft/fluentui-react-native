@@ -145,26 +145,31 @@ const whiteColorsPalette: OfficePalette = {
 export function fallbackGetPalette(pal?: string): OfficePalette {
   return pal === 'TaskPane'
     ? {
-        ...whiteColorsPalette,
-        Bkg: 'antiquewhite',
-      }
+      ...whiteColorsPalette,
+      Bkg: 'antiquewhite',
+    }
     : whiteColorsPalette;
 }
 
 export const fallbackOfficeModule: OfficeThemingModule = {
-  ramps: {
-    App: ['#F8F8F8', '#EFF6FC', '#BBDAF3', '#55A4E2', '#359EDD', '#0078d7', '#283E4A', '#030C13'],
-    FluentGrays: ['#FAF9F8', '#797775', '#11100F'],
-    ClassicGrays: ['#FFFFFF', '#737373', '#000000'],
-    Sepias: ['#ECE6DE'],
-  },
   getPalette: fallbackGetPalette,
-  typography: {},
-  fluentTypography: {},
-  rampNames: {
-    App: ['FakeApp1', 'App2', 'App3', 'App4', 'App5', 'App6', 'App7', 'App8'],
-    FluentGrays: ['FakeGray1', 'Gray2', 'Gray3'],
-    ClassicGrays: ['FakeGray4', 'Gray5', 'Gray6'],
-    Sepias: ['FakeSepia'],
+  getConstants() {
+    return {
+      ramps: {
+        App: ['#F8F8F8', '#EFF6FC', '#BBDAF3', '#55A4E2', '#359EDD', '#0078d7', '#283E4A', '#030C13'],
+        FluentGrays: ['#FAF9F8', '#797775', '#11100F'],
+        ClassicGrays: ['#FFFFFF', '#737373', '#000000'],
+        Sepias: ['#ECE6DE'],
+      },
+      typography: {},
+      fluentTypography: {},
+      rampNames: {
+        App: ['FakeApp1', 'App2', 'App3', 'App4', 'App5', 'App6', 'App7', 'App8'],
+        FluentGrays: ['FakeGray1', 'Gray2', 'Gray3'],
+        ClassicGrays: ['FakeGray4', 'Gray5', 'Gray6'],
+        Sepias: ['FakeSepia'],
+      },
+    }
   },
+
 } as OfficeThemingModule;
