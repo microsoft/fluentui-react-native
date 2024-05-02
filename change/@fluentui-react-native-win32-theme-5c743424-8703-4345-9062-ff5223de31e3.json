@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use getConstants() when accessing constants from TurboModules/NativeModules",
-  "packageName": "@fluentui-react-native/win32-theme",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
