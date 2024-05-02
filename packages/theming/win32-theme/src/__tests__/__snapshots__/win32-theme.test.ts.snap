@@ -3501,8 +3501,14 @@ exports[`fallbackGetPalette test TaskPane palette 1`] = `
 
 exports[`fallbackOfficeModule test 1`] = `
 {
-  "fluentTypography": {},
+  "getConstants": [Function],
   "getPalette": [Function],
+}
+`;
+
+exports[`fallbackOfficeModule test 2`] = `
+{
+  "fluentTypography": {},
   "rampNames": {
     "App": [
       "FakeApp1",
@@ -4190,62 +4196,68 @@ exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #d83b01 1`
 exports[`getThemingModule test 1`] = `
 [
   {
-    "fluentTypography": {},
+    "getConstants": [Function],
     "getPalette": [Function],
-    "rampNames": {
-      "App": [
-        "FakeApp1",
-        "App2",
-        "App3",
-        "App4",
-        "App5",
-        "App6",
-        "App7",
-        "App8",
-      ],
-      "ClassicGrays": [
-        "FakeGray4",
-        "Gray5",
-        "Gray6",
-      ],
-      "FluentGrays": [
-        "FakeGray1",
-        "Gray2",
-        "Gray3",
-      ],
-      "Sepias": [
-        "FakeSepia",
-      ],
-    },
-    "ramps": {
-      "App": [
-        "#F8F8F8",
-        "#EFF6FC",
-        "#BBDAF3",
-        "#55A4E2",
-        "#359EDD",
-        "#0078d7",
-        "#283E4A",
-        "#030C13",
-      ],
-      "ClassicGrays": [
-        "#FFFFFF",
-        "#737373",
-        "#000000",
-      ],
-      "FluentGrays": [
-        "#FAF9F8",
-        "#797775",
-        "#11100F",
-      ],
-      "Sepias": [
-        "#ECE6DE",
-      ],
-    },
-    "typography": {},
   },
   undefined,
 ]
+`;
+
+exports[`getThemingModule test 2`] = `
+{
+  "fluentTypography": {},
+  "rampNames": {
+    "App": [
+      "FakeApp1",
+      "App2",
+      "App3",
+      "App4",
+      "App5",
+      "App6",
+      "App7",
+      "App8",
+    ],
+    "ClassicGrays": [
+      "FakeGray4",
+      "Gray5",
+      "Gray6",
+    ],
+    "FluentGrays": [
+      "FakeGray1",
+      "Gray2",
+      "Gray3",
+    ],
+    "Sepias": [
+      "FakeSepia",
+    ],
+  },
+  "ramps": {
+    "App": [
+      "#F8F8F8",
+      "#EFF6FC",
+      "#BBDAF3",
+      "#55A4E2",
+      "#359EDD",
+      "#0078d7",
+      "#283E4A",
+      "#030C13",
+    ],
+    "ClassicGrays": [
+      "#FFFFFF",
+      "#737373",
+      "#000000",
+    ],
+    "FluentGrays": [
+      "#FAF9F8",
+      "#797775",
+      "#11100F",
+    ],
+    "Sepias": [
+      "#ECE6DE",
+    ],
+  },
+  "typography": {},
+}
 `;
 
 exports[`win32Typography test 1`] = `[Function]`;
