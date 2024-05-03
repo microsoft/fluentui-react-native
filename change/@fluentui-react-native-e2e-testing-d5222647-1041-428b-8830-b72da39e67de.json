@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Remove some contextual menu tests. These tests don't add much value - it's more of a test for Button than contextual menu. Improve perf by removing unnecessary/unvaluable tests",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
