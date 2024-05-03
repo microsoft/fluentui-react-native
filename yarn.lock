@@ -6456,12 +6456,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.4.6":
-  version: 0.4.6
-  resolution: "@rnx-kit/react-native-host@npm:0.4.6"
+"@rnx-kit/react-native-host@npm:^0.4.8":
+  version: 0.4.8
+  resolution: "@rnx-kit/react-native-host@npm:0.4.8"
   peerDependencies:
     react-native: ">=0.66"
-  checksum: 10c0/0b69a4ae90df23ce5c39176a35c556c7595686df805c1cd93ef1aecacd47713a085d36c833f0f9856803ea56d6456bad97c9f36dbd0ef081826abf4abfcc657d
+  checksum: 10c0/43bbd652b9c06b5015c79c8240e11dbb00564261ac1441b8ff08b86f07c74701b541ad4b3d30bbeb5ba964bae5fe2baea8459907ef76332128e38fff9facadf7
   languageName: node
   linkType: hard
 
@@ -18635,10 +18635,10 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^3.4.7":
-  version: 3.5.12
-  resolution: "react-native-test-app@npm:3.5.12"
+  version: 3.7.0
+  resolution: "react-native-test-app@npm:3.7.0"
   dependencies:
-    "@rnx-kit/react-native-host": "npm:^0.4.6"
+    "@rnx-kit/react-native-host": "npm:^0.4.8"
     ajv: "npm:^8.0.0"
     cliui: "npm:^8.0.0"
     fast-xml-parser: "npm:^4.0.0"
@@ -18666,7 +18666,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 10c0/8235912d63ac2dfd9a792fc5e224538ffaabfadb959fae2f6137f8cfc5a6ad605737ba5b5f4b73d2f37152d821e25ca9c372268de07411fd0bcbdec811648d6f
+  checksum: 10c0/fc5fe82898a547c73c884e76a25536a1341870feea907d6330e1755194cefe78c7f29a244238bb1f55f1fad5d8034c11108f6372d326d07690dc888f2d7f484a
   languageName: node
   linkType: hard
 
