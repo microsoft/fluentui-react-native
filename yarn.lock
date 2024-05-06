@@ -6260,11 +6260,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.4.3":
-  version: 2.4.4
-  resolution: "@rnx-kit/align-deps@npm:2.4.4"
+  version: 2.4.5
+  resolution: "@rnx-kit/align-deps@npm:2.4.5"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/10f14444d877484cfb5ccfaa0d19f88d3fce77746533bbf5d1e81be9f1d10e4c716f0bac0f7e2db26341a7b4efa338079b35b326493c6e640adeb40f96cbcd33
+  checksum: 10c0/13421e2d15af26a2528cad2da6f5a6a6d3d9be02a45fe4cb5bb491f2d5e27996eccd98f8af080b4266419cf963384c368cbb581c3f64d32f7b41b24e670b13c2
   languageName: node
   linkType: hard
 
