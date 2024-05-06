@@ -13243,50 +13243,50 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob-hasher-darwin-arm64@npm:1.3.0":
-  version: 1.3.0
-  resolution: "glob-hasher-darwin-arm64@npm:1.3.0"
+"glob-hasher-darwin-arm64@npm:1.4.2":
+  version: 1.4.2
+  resolution: "glob-hasher-darwin-arm64@npm:1.4.2"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"glob-hasher-darwin-x64@npm:1.3.0":
-  version: 1.3.0
-  resolution: "glob-hasher-darwin-x64@npm:1.3.0"
+"glob-hasher-darwin-x64@npm:1.4.2":
+  version: 1.4.2
+  resolution: "glob-hasher-darwin-x64@npm:1.4.2"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"glob-hasher-linux-x64-gnu@npm:1.3.0":
-  version: 1.3.0
-  resolution: "glob-hasher-linux-x64-gnu@npm:1.3.0"
+"glob-hasher-linux-x64-gnu@npm:1.4.2":
+  version: 1.4.2
+  resolution: "glob-hasher-linux-x64-gnu@npm:1.4.2"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"glob-hasher-win32-arm64-msvc@npm:1.3.0":
-  version: 1.3.0
-  resolution: "glob-hasher-win32-arm64-msvc@npm:1.3.0"
+"glob-hasher-win32-arm64-msvc@npm:1.4.2":
+  version: 1.4.2
+  resolution: "glob-hasher-win32-arm64-msvc@npm:1.4.2"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"glob-hasher-win32-x64-msvc@npm:1.3.0":
-  version: 1.3.0
-  resolution: "glob-hasher-win32-x64-msvc@npm:1.3.0"
+"glob-hasher-win32-x64-msvc@npm:1.4.2":
+  version: 1.4.2
+  resolution: "glob-hasher-win32-x64-msvc@npm:1.4.2"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"glob-hasher@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "glob-hasher@npm:1.3.0"
+"glob-hasher@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "glob-hasher@npm:1.4.2"
   dependencies:
-    glob-hasher-darwin-arm64: "npm:1.3.0"
-    glob-hasher-darwin-x64: "npm:1.3.0"
-    glob-hasher-linux-x64-gnu: "npm:1.3.0"
-    glob-hasher-win32-arm64-msvc: "npm:1.3.0"
-    glob-hasher-win32-x64-msvc: "npm:1.3.0"
+    glob-hasher-darwin-arm64: "npm:1.4.2"
+    glob-hasher-darwin-x64: "npm:1.4.2"
+    glob-hasher-linux-x64-gnu: "npm:1.4.2"
+    glob-hasher-win32-arm64-msvc: "npm:1.4.2"
+    glob-hasher-win32-x64-msvc: "npm:1.4.2"
   dependenciesMeta:
     glob-hasher-darwin-arm64:
       optional: true
@@ -13298,7 +13298,7 @@ __metadata:
       optional: true
     glob-hasher-win32-x64-msvc:
       optional: true
-  checksum: 10c0/acb2d7990272768ae45eefab7ecabc59db6a3744602121ccbfacb7bcf847425f04d16fe72a02b60cc5c8602b9c48c766efe10c9677b7575ed2e8656f498c1202
+  checksum: 10c0/a600dad933a163484cec5e9743831a2523911076a6b15ebdd6e9dd66a7b2c38388998ca844aa0d886627ed1c436014ab10344bf22f40e2d8b95f15b91065422d
   languageName: node
   linkType: hard
 
@@ -15712,17 +15712,17 @@ __metadata:
   linkType: hard
 
 "lage@npm:^2.0.0":
-  version: 2.7.13
-  resolution: "lage@npm:2.7.13"
+  version: 2.7.15
+  resolution: "lage@npm:2.7.15"
   dependencies:
     fsevents: "npm:~2.3.2"
-    glob-hasher: "npm:^1.3.0"
+    glob-hasher: "npm:^1.4.2"
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     lage: dist/lage.js
-  checksum: 10c0/62def6787c1a4348479d79221a529871024b816d9488bd964b8f1a132382c8ad818057596ece0e016c2d5e8c28ecffcb9312bfc0aa9578d02d4af643d8a6bdd4
+  checksum: 10c0/8654faf84a32f7a69c851036124dc0fac14172a0217adc766ed80c211db2d1f1ea2ffa411ffe21e14540ba457e08f3b5c1f30efedba99b7cb9c43b4461becd26
   languageName: node
   linkType: hard
 
