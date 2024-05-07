@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 07 May 2024 11:30:30 GMT",
+      "version": "0.41.4",
+      "tag": "@fluentui/react-native_v0.41.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui/react-native",
+            "commit": "aedc69f31b66411bd3ebfbd7ef0611f7f6cebc11",
+            "comment": "Mark as side-effects free"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:37 GMT",
       "version": "0.41.1",
       "tag": "@fluentui/react-native_v0.41.1",
