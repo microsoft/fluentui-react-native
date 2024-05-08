@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "added layoutEffect hook",
-  "packageName": "@fluentui-react-native/tooltip",
-  "email": "gulnazsayed@microsoft.com",
-  "dependentChangeType": "patch"
-}
