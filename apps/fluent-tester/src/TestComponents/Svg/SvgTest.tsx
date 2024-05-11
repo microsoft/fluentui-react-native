@@ -60,7 +60,7 @@ const RectTest: React.FunctionComponent = () => {
 
 const CircleTest: React.FunctionComponent = () => {
   return (
-    <Svg width="50" height="50">
+    <Svg width="55" height="50" accessible={true} accessibilityLabel="SVG Test circle" focusable={true} accessibilityRole="image">
       <Circle cx="25" cy="25" r="20" fill="red" stroke="black" />
     </Svg>
   );
@@ -185,6 +185,29 @@ const RemoteSvgTest: React.FunctionComponent = () => {
           uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
         />
       )}
+    </View>
+  );
+};
+
+const TextInlineSVGTest: React.FunctionComponent = () => {
+  const [useColorA, setUseColorA] = React.useState(false);
+  const colorA = 'red';
+  const colorB = 'green';
+
+  return (
+    <View>
+      <Text>
+        Test inline svg
+        <Svg>
+          <Rect x="10" y="10" width="20" height="20" fill={useColorA ? colorA : colorB} stroke="black" />
+        </Svg>
+      </Text>
+      <Switch
+        value={useColorA}
+        onValueChange={(value) => {
+          setUseColorA(value);
+        }}
+      />
     </View>
   );
 };
