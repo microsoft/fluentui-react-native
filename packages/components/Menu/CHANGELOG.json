@@ -2,6 +2,156 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 12 Apr 2024 21:02:38 GMT",
+      "version": "1.14.1",
+      "tag": "@fluentui-react-native/menu_v1.14.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "055bddda6b613c5c2045cc20a455a94c5a4b53dd",
+            "comment": "chore: Update react-native-svg to 15.1.0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Apr 2024 18:08:38 GMT",
+      "version": "1.14.0",
+      "tag": "@fluentui-react-native/menu_v1.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Mar 2024 20:00:34 GMT",
+      "version": "1.13.0",
+      "tag": "@fluentui-react-native/menu_v1.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "9f0f6a0c339e8887cf5cb4c8a0cf3263da56ddbc",
+            "comment": "timestamp per instance"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 20:38:11 GMT",
+      "version": "1.12.25",
+      "tag": "@fluentui-react-native/menu_v1.12.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "14b7873d56543f64107bca938746e14fd49248ea",
+            "comment": "set directionalHint on MenuPopover from user props"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:20 GMT",
+      "version": "1.12.24",
+      "tag": "@fluentui-react-native/menu_v1.12.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:11 GMT",
+      "version": "1.12.21",
+      "tag": "@fluentui-react-native/menu_v1.12.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 01:04:35 GMT",
+      "version": "1.12.20",
+      "tag": "@fluentui-react-native/menu_v1.12.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "17974c7b86abaa7769834551ff5743691819c905",
+            "comment": "fix menu group accessibility"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 03:22:29 GMT",
+      "version": "1.12.19",
+      "tag": "@fluentui-react-native/menu_v1.12.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.16.9",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.26.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.22.9",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.36.12",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Feb 2024 23:27:46 GMT",
       "version": "1.12.18",
       "tag": "@fluentui-react-native/menu_v1.12.18",

@@ -1,7 +1,8 @@
 import React from 'react';
 import { I18nManager, Platform } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 
-import type { LayoutEvent, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
+import type { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabProps, TabTokens } from './Tab.types';
 import type { TabListState } from '../TabList/TabList.types';
@@ -27,7 +28,7 @@ export function useTabAnimation(
   rootProps: PressablePropsExtended,
 ): PressablePropsExtended {
   const { addTabLayout, selectedKey, layout, updateAnimatedIndicatorStyles, vertical } = context;
-  const { tabKey } = props;
+  const { tabKey, onLayout } = props;
 
   // If we're the selected tab, we style the TabListAnimatedIndicator with the correct token value set by the user
   React.useEffect(() => {
@@ -52,7 +53,7 @@ export function useTabAnimation(
    * Afterwards, we save these to feed into the Animated Indicator's layout styles.
    */
   const onTabLayout = React.useCallback(
-    (e: LayoutEvent) => {
+    (e: LayoutChangeEvent) => {
       if (
         (e.nativeEvent.layout &&
           // Following checks are for win32 only, will be removed after addressing scrollview layout bug
@@ -91,8 +92,10 @@ export function useTabAnimation(
           height: indicatorHeight,
         });
       }
+
+      onLayout && onLayout(e);
     },
-    [addTabLayout, layout, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
+    [addTabLayout, layout, onLayout, tabKey, tokens.borderWidth, tokens.indicatorMargin, tokens.indicatorThickness, vertical],
   );
 
   return React.useMemo(() => ({ ...rootProps, onLayout: onTabLayout }), [rootProps, onTabLayout]);

@@ -1,6 +1,8 @@
 import { TaskFunction, logger } from 'just-task';
 import { getPackageInfos, findGitRoot } from 'workspace-tools';
 
+import { checkDependencies } from '../utils/checkDependencies';
+
 export type DependencyType = 'dependencies' | 'devDependencies' | 'peerDependencies';
 
 export interface CheckPublishingOptions {
@@ -37,6 +39,8 @@ export function checkPublishingTask(options: CheckPublishingOptions = {}): TaskF
           });
         }
       });
+
+      checkDependencies();
     } catch (err) {
       done(err instanceof Error ? err : new Error());
     }

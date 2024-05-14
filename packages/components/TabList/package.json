@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tablist",
-  "version": "0.5.15",
+  "version": "0.6.2",
   "description": "A cross-platform TabList component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,29 +26,34 @@
     "directory": "packages/components/TabList"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "0.12.0",
-    "@fluentui-react-native/focus-zone": "^0.16.8",
-    "@fluentui-react-native/framework": "0.13.7",
-    "@fluentui-react-native/icon": "0.20.9",
-    "@fluentui-react-native/interactive-hooks": "^0.25.8",
-    "@fluentui-react-native/text": "^0.22.8",
-    "@fluentui-react-native/theming-utils": "^0.25.6",
-    "@fluentui-react-native/tokens": "^0.22.6",
-    "@fluentui-react-native/use-styling": "^0.12.0",
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/icon": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*",
+    "@fluentui-react-native/theming-utils": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*",
+    "@fluentui-react-native/use-styling": "workspace:*",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@fluentui-react-native/test-tools": "^0.1.1",
-    "@office-iss/react-native-win32": "^0.72.0",
-    "@react-native/metro-config": "^0.72.0",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
+    "@office-iss/react-native-win32": "^0.73.0",
+    "@react-native/babel-preset": "^0.73.0",
+    "@react-native/metro-config": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.73.0"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0"
+    "react-native": "^0.73.0",
+    "react-native-macos": "^0.73.0",
+    "react-native-svg": "^15.0.0",
+    "react-native-windows": "^0.73.0"
   },
   "author": "",
   "license": "MIT",
@@ -59,7 +64,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.72"
+        "react-native@0.73"
       ],
       "capabilities": [
         "core",
@@ -67,6 +72,17 @@
         "core-ios",
         "react"
       ]
+    }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   }
 }

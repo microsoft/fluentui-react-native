@@ -3,7 +3,7 @@ module.exports = {
     ['@babel/preset-env', { targets: { node: 'current' } }],
     '@babel/preset-react',
     '@babel/preset-typescript',
-    ['module:metro-react-native-babel-preset', { runtime: 'classic' }],
+    ['module:@react-native/babel-preset', { runtime: 'classic' }],
   ],
   plugins: [
     ['@babel/plugin-proposal-private-property-in-object', { loose: false }],

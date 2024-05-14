@@ -1,1 +1,0 @@
-export { ensureNativeComponent } from './ensureNativeComponent';

@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 22 Feb 2024 23:27:46 GMT and should not be manually modified.
+This log was last generated on Fri, 03 May 2024 16:48:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.36.0
+
+Fri, 03 May 2024 16:48:26 GMT
+
+### Minor changes
+
+- Remove some contextual menu tests. These tests don't add much value - it's more of a test for Button than contextual menu. Improve perf by removing unnecessary/unvaluable tests (safreibe@microsoft.com)
+
+## 1.35.0
+
+Thu, 11 Apr 2024 18:08:42 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 1.34.19
+
+Wed, 03 Apr 2024 22:03:28 GMT
+
+### Patches
+
+- [CI] Update to Xcode 15.2 (sanajmi@microsoft.com)
+
+## 1.34.17
+
+Wed, 20 Mar 2024 22:58:12 GMT
+
+### Patches
+
+- Add Overflow E2E test spec for win32. (winlarry@microsoft.com)
+
+## 1.34.15
+
+Fri, 15 Mar 2024 16:26:19 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 1.34.12
+
+Fri, 01 Mar 2024 20:39:10 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 1.34.11
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.9
 
 ## 1.34.10
 

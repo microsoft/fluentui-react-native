@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Thu, 22 Feb 2024 23:27:45 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Apr 2024 21:31:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.1
+
+Mon, 15 Apr 2024 21:31:44 GMT
+
+### Patches
+
+- Ensure build output has the generated view configs (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.17.0
+
+Thu, 11 Apr 2024 18:08:38 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.16.15
+
+Fri, 29 Mar 2024 18:07:00 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.16.13
+
+Fri, 15 Mar 2024 16:26:19 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.16.10
+
+Fri, 01 Mar 2024 20:39:11 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.16.9
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
 
 ## 0.16.8
 

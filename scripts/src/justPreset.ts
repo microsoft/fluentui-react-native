@@ -9,6 +9,7 @@ const { clean } = require('./tasks/clean');
 const { copy } = require('./tasks/copy');
 const { jest } = require('./tasks/jest');
 const { ts } = require('./tasks/ts');
+const { codegenNativeComponents } = require('./tasks/codegenNativeComponents')
 const { eslint } = require('./tasks/eslint');
 const { depcheckTask } = require('./tasks/depcheck');
 const { checkForModifiedFiles } = require('./tasks/checkForModifiedFilesTask');
@@ -32,6 +33,7 @@ export function preset() {
   task('clean', clean);
   task('copy', copy);
   task('jest', jest);
+  task('codegenNativeComponents', codegenNativeComponents);
   task('ts:commonjs', ts.commonjs);
   task('ts:esm', ts.esm);
   task('eslint', eslint);
@@ -71,7 +73,7 @@ export function preset() {
     ),
   );
 
-  task('build', series('clean', 'copy', 'ts'));
+  task('build', series('clean', 'copy', 'ts', 'codegenNativeComponents'));
 
   task('depcheck', depcheckTask);
 

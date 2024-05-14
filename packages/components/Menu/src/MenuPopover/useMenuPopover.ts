@@ -31,7 +31,7 @@ export const useMenuPopover = (props: MenuPopoverProps): MenuPopoverState => {
     setOpen(undefined, false /* isOpen */), [setOpen];
   }, [props.onDismiss, setOpen]);
   const dismissBehaviors = isControlled ? controlledDismissBehaviors : undefined;
-  const directionalHint = getDirectionalHint(isSubmenu, I18nManager.isRTL);
+  const directionalHint = props.directionalHint ?? getDirectionalHint(isSubmenu, I18nManager.isRTL);
 
   const setInitialFocus = true;
   const doNotTakePointerCapture = props.doNotTakePointerCapture ?? openOnHover;

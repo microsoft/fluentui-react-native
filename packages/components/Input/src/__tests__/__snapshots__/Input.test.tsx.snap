@@ -67,7 +67,6 @@ exports[`Input component tests Input default 1`] = `
             "textDecorationLine": undefined,
           }
         }
-        value=""
       />
     </View>
   </View>
@@ -142,7 +141,6 @@ exports[`Input component tests Input in error state 1`] = `
             "textDecorationLine": undefined,
           }
         }
-        value=""
       />
     </View>
     <Text
@@ -246,7 +244,6 @@ exports[`Input component tests Input with all optional text 1`] = `
             "textDecorationLine": undefined,
           }
         }
-        value=""
       />
     </View>
     <Text
@@ -370,7 +367,6 @@ exports[`Input component tests Input with icon 1`] = `
               "textDecorationLine": undefined,
             }
           }
-          value=""
         />
       </View>
     </View>
@@ -446,7 +442,6 @@ exports[`Input component tests Input with placeholder 1`] = `
             "textDecorationLine": undefined,
           }
         }
-        value=""
       />
     </View>
   </View>
@@ -521,7 +516,6 @@ exports[`Input component tests Input without accessoryIcon 1`] = `
             "textDecorationLine": undefined,
           }
         }
-        value=""
       />
     </View>
   </View>

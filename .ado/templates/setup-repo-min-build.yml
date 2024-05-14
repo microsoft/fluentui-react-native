@@ -4,3 +4,7 @@ steps:
   - script: |
       yarn build-tools
     displayName: "yarn build-tools"
+
+  - script: |
+      yarn build
+    displayName: "yarn build"

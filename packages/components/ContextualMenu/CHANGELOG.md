@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Thu, 22 Feb 2024 23:27:44 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Apr 2024 21:02:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.1
+
+Fri, 12 Apr 2024 21:02:37 GMT
+
+### Patches
+
+- chore: Update react-native-svg to 15.1.0 (sanajmi@microsoft.com)
+
+## 0.24.0
+
+Thu, 11 Apr 2024 18:08:42 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.23.17
+
+Fri, 15 Mar 2024 16:26:18 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.23.14
+
+Fri, 01 Mar 2024 20:39:10 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.23.13
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.25.10
+- Bump @fluentui-react-native/focus-zone to v0.16.9
+- Bump @fluentui-react-native/icon to v0.20.10
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
+- Bump @fluentui-react-native/text to v0.22.9
+- Bump @fluentui-react-native/pressable to v0.11.9
 
 ## 0.23.12
 

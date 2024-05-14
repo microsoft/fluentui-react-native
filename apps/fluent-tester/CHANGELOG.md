@@ -1,8 +1,161 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 22 Feb 2024 23:27:43 GMT and should not be manually modified.
+This log was last generated on Wed, 08 May 2024 16:21:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.168.7
+
+Wed, 08 May 2024 16:21:26 GMT
+
+### Patches
+
+- added accessibilityDescription to test (gulnazsayed@microsoft.com)
+
+## 0.168.4
+
+Thu, 25 Apr 2024 17:25:56 GMT
+
+### Patches
+
+- added accessiblity labels on icons (gulnazsayed@microsoft.com)
+
+## 0.168.1
+
+Fri, 12 Apr 2024 21:02:39 GMT
+
+### Patches
+
+- chore: Update react-native-svg to 15.1.0 (sanajmi@microsoft.com)
+
+## 0.168.0
+
+Thu, 11 Apr 2024 18:08:39 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.167.32
+
+Fri, 29 Mar 2024 18:07:00 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.167.31
+
+Fri, 29 Mar 2024 00:57:12 GMT
+
+### Patches
+
+- Add new Overflow example for dynamic addition / removal of items. (winlarry@microsoft.com)
+
+## 0.167.30
+
+Wed, 27 Mar 2024 00:51:04 GMT
+
+### Patches
+
+- Update used versions of packages and yarn dedupe (ruaraki@microsoft.com)
+
+## 0.167.28
+
+Tue, 26 Mar 2024 01:03:36 GMT
+
+### Patches
+
+- Remove use of findNodeHandle (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.167.26
+
+Wed, 20 Mar 2024 22:58:12 GMT
+
+### Patches
+
+- Add Overflow E2E test section. (winlarry@microsoft.com)
+
+## 0.167.21
+
+Fri, 15 Mar 2024 20:38:11 GMT
+
+### Patches
+
+- set directionalHint on MenuPopover from user props (krsiler@microsoft.com)
+
+## 0.167.20
+
+Fri, 15 Mar 2024 16:26:21 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.167.19
+
+Thu, 14 Mar 2024 22:02:05 GMT
+
+### Patches
+
+- Add Overflow page (winlarry@microsoft.com)
+
+## 0.167.14
+
+Fri, 01 Mar 2024 20:39:12 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.167.13
+
+Fri, 01 Mar 2024 01:04:36 GMT
+
+### Patches
+
+- fix menu group accessibility (krsiler@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.12.20
+
+## 0.167.12
+
+Fri, 23 Feb 2024 23:29:38 GMT
+
+### Patches
+
+- change dependencies (ruaraki@microsoft.com)
+
+## 0.167.11
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.11.10
+- Bump @fluentui-react-native/badge to v0.8.10
+- Bump @fluentui-react-native/button to v0.36.12
+- Bump @fluentui-react-native/chip to v0.3.10
+- Bump @fluentui-react-native/divider to v0.6.10
+- Bump @fluentui-react-native/drawer to v0.3.9
+- Bump @fluentui-react-native/dropdown to v0.9.13
+- Bump @fluentui-react-native/experimental-checkbox to v0.16.9
+- Bump @fluentui-react-native/experimental-menu-button to v0.9.14
+- Bump @fluentui-react-native/experimental-shadow to v0.5.9
+- Bump @fluentui-react-native/experimental-text to v0.14.9
+- Bump @fluentui-react-native/icon to v0.20.10
+- Bump @fluentui-react-native/input to v0.6.0
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
+- Bump @fluentui-react-native/menu to v1.12.19
+- Bump @fluentui-react-native/notification to v0.24.12
+- Bump @fluentui-react-native/radio-group to v0.20.11
+- Bump @fluentui-react-native/spinner to v0.8.9
+- Bump @fluentui-react-native/stack to v0.9.9
+- Bump @fluentui-react-native/switch to v0.12.9
+- Bump @fluentui-react-native/tablist to v0.5.16
+- Bump @fluentui-react-native/text to v0.22.9
+- Bump @fluentui-react-native/tooltip to v0.2.12
+- Bump @fluentui/react-native to v0.40.4
+- Bump @fluentui-react-native/focus-zone to v0.16.9
 
 ## 0.167.10
 

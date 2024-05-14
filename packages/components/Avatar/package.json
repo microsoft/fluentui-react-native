@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/avatar",
-  "version": "1.11.9",
+  "version": "1.12.1",
   "description": "A cross-platform Avatar component using the Fluent Design System",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -29,28 +29,32 @@
     "directory": "packages/components/Avatar"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.12.0",
-    "@fluentui-react-native/badge": "^0.8.9",
-    "@fluentui-react-native/framework": "0.13.7",
-    "@fluentui-react-native/icon": "^0.20.9",
-    "@fluentui-react-native/theme-tokens": "^0.26.6",
-    "@fluentui-react-native/theming-utils": "^0.25.6",
-    "@fluentui-react-native/tokens": "^0.22.6",
-    "@fluentui-react-native/use-styling": "^0.12.0"
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/badge": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/icon": "workspace:*",
+    "@fluentui-react-native/theme-tokens": "workspace:*",
+    "@fluentui-react-native/theming-utils": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*",
+    "@fluentui-react-native/use-styling": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@office-iss/react-native-win32": "^0.72.0",
-    "@react-native/metro-config": "^0.72.0",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@office-iss/react-native-win32": "^0.73.0",
+    "@react-native/babel-preset": "^0.73.0",
+    "@react-native/metro-config": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0",
-    "react-native-svg": "^13.14.0"
+    "react-native": "^0.73.0",
+    "react-native-svg": "^14.0.0"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.72.0",
-    "react-native-svg": "^13.14.0"
+    "react-native": "^0.73.0",
+    "react-native-macos": "^0.73.0",
+    "react-native-svg": "^15.0.0",
+    "react-native-windows": "^0.73.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -59,7 +63,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.72"
+        "react-native@0.73"
       ],
       "capabilities": [
         "core",
@@ -68,6 +72,17 @@
         "react",
         "svg"
       ]
+    }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   }
 }

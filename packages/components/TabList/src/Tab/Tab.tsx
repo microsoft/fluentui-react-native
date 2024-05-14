@@ -74,7 +74,14 @@ export const Tab = compressible<TabProps, TabTokens>((props: TabProps, useTokens
       }
     });
 
-    const { icon, tabKey, ...mergedProps } = mergeProps(tab.props, final, {
+    // `onLayout` is unused and excluded from the rest of the mergedProps to be passed into the RootSlot.
+    // This is to ensure that the chained layout callback created in useTabAnimation isn't overwritten.
+    const {
+      icon,
+      tabKey,
+      onLayout: _,
+      ...mergedProps
+    } = mergeProps(tab.props, final, {
       accessibilityLabel: tab.props.accessibilityLabel || final.accessibilityLabel || label,
     });
 

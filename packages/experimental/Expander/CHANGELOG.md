@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Thu, 22 Feb 2024 23:27:46 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Apr 2024 21:31:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.1
+
+Mon, 15 Apr 2024 21:31:43 GMT
+
+### Patches
+
+- Ensure build output has the generated view configs (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.8.0
+
+Thu, 11 Apr 2024 18:08:37 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.7.13
+
+Fri, 29 Mar 2024 18:07:00 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.7.12
+
+Mon, 25 Mar 2024 06:51:42 GMT
+
+### Patches
+
+- Update VS project to support package references (4123478+tido64@users.noreply.github.com)
+
+## 0.7.10
+
+Fri, 15 Mar 2024 16:26:19 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.7.9
+
+Fri, 01 Mar 2024 20:39:10 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
 
 ## 0.7.8
 

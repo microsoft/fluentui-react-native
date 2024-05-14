@@ -50,7 +50,7 @@ export function translateOfficeTheme(module: OfficeThemingModule, cache: Palette
 export function createThemingModuleHelper(themingModule?: OfficeThemingModule, emitter?: IEventEmitter): IThemingModuleHelper {
   themingModule || console.error('No NativeModule for Theming found');
   const paletteCache: PaletteCache = {};
-  let _hostTheme = themingModule.initialHostThemeSetting || '';
+  let _hostTheme = themingModule.getConstants().initialHostThemeSetting || '';
   emitter &&
     emitter.addListener('onPlatformDefaultsChanged', (args: PlatformDefaultsChangedArgs) => {
       _hostTheme = (args && args.hostThemeSetting) || _hostTheme;

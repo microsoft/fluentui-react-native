@@ -1,8 +1,83 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Thu, 22 Feb 2024 23:27:43 GMT and should not be manually modified.
+This log was last generated on Wed, 24 Apr 2024 01:07:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.3
+
+Wed, 24 Apr 2024 01:07:49 GMT
+
+### Patches
+
+- fix radiobutton focus ring moving with every click (7664112+FalseLobster@users.noreply.github.com)
+
+## 0.21.2
+
+Mon, 15 Apr 2024 21:31:44 GMT
+
+### Patches
+
+- Ensure build output has the generated view configs (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.21.1
+
+Fri, 12 Apr 2024 21:02:38 GMT
+
+### Patches
+
+- chore: Update react-native-svg to 15.1.0 (sanajmi@microsoft.com)
+
+## 0.21.0
+
+Thu, 11 Apr 2024 18:08:39 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.20.17
+
+Fri, 29 Mar 2024 18:07:00 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.20.16
+
+Mon, 18 Mar 2024 23:41:59 GMT
+
+### Patches
+
+- Remove usages of react-native-win32 from non win32 overrides (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.20.15
+
+Fri, 15 Mar 2024 16:26:20 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.20.12
+
+Fri, 01 Mar 2024 20:39:12 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.20.11
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.16.9
+- Bump @fluentui-react-native/interactive-hooks to v0.26.0
+- Bump @fluentui-react-native/pressable to v0.11.9
+- Bump @fluentui-react-native/text to v0.22.9
 
 ## 0.20.10
 

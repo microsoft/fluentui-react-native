@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet, UIManager, Text, findNodeHandle, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { Separator, Pressable } from '@fluentui/react-native';
 import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
@@ -109,9 +109,8 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
   const ref = React.useRef<View>(null);
 
   React.useEffect(() => {
-    const parent = findNodeHandle(ref.current);
-    if (parent) {
-      UIManager.measure(parent, (_x, _y, width) => {
+    if (ref.current) {
+      ref.current.measure((_x, _y, width) => {
         if (width <= 0) {
           return;
         }

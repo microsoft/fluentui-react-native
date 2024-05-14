@@ -2,6 +2,111 @@
   "name": "@fluentui-react-native/dependency-profiles",
   "entries": [
     {
+      "date": "Fri, 12 Apr 2024 21:02:38 GMT",
+      "version": "0.8.1",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.8.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "055bddda6b613c5c2045cc20a455a94c5a4b53dd",
+            "comment": "chore: Update react-native-svg to 15.1.0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Apr 2024 18:08:42 GMT",
+      "version": "0.8.0",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 Apr 2024 22:55:12 GMT",
+      "version": "0.7.35",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.7.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "914067d668fc01bbf3d463865e81896ee61bb275",
+            "comment": "Add overflow as a dependency for dep-profile"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 29 Mar 2024 18:06:59 GMT",
+      "version": "0.7.34",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.7.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "a722aa94799f4afee55baa03a5a754b0d4b2fdce",
+            "comment": "Remove component-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:18 GMT",
+      "version": "0.7.22",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.7.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:10 GMT",
+      "version": "0.7.15",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.7.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 23:29:38 GMT",
+      "version": "0.7.13",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.7.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "4f859c79645131e21792ae06881d426184368d79",
+            "comment": "change dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Jan 2024 01:26:39 GMT",
       "version": "0.7.0",
       "tag": "@fluentui-react-native/dependency-profiles_v0.7.0",

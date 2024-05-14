@@ -6,11 +6,11 @@ import { paletteFromOfficeColors } from './paletteFromOfficeColors';
 type Colors = { [key: string]: string };
 
 const getRamps = (module: OfficeThemingModule): Colors => {
-  return Object.keys(module.ramps).reduce<Colors>((total: Colors, colorRamp: string) => {
+  return Object.keys(module.getConstants().ramps).reduce<Colors>((total: Colors, colorRamp: string) => {
     return Object.assign(
       total,
-      ...module.rampNames[colorRamp].map((rampValueName: string, index: number) => {
-        return { [rampValueName]: module.ramps[colorRamp][index] };
+      ...module.getConstants().rampNames[colorRamp].map((rampValueName: string, index: number) => {
+        return { [rampValueName]: module.getConstants().ramps[colorRamp][index] };
       }),
     );
   }, {});
@@ -27,7 +27,7 @@ export function createPartialOfficeTheme(module: OfficeThemingModule, themeName?
     colors: {
       ...(palette && paletteFromOfficeColors(palette)),
     },
-    typography: module.fluentTypography,
+    typography: module.getConstants().fluentTypography,
     host: {
       // Office Semantic Colors
       palette: palette || {},

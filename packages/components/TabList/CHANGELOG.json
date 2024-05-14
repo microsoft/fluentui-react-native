@@ -2,6 +2,129 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Fri, 12 Apr 2024 21:02:38 GMT",
+      "version": "0.6.1",
+      "tag": "@fluentui-react-native/tablist_v0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "055bddda6b613c5c2045cc20a455a94c5a4b53dd",
+            "comment": "chore: Update react-native-svg to 15.1.0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Apr 2024 18:08:39 GMT",
+      "version": "0.6.0",
+      "tag": "@fluentui-react-native/tablist_v0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 18 Mar 2024 23:42:00 GMT",
+      "version": "0.5.22",
+      "tag": "@fluentui-react-native/tablist_v0.5.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "2987dfe69a815b118981b62ed49a41ea00705496",
+            "comment": "Remove usages of react-native-win32 from non win32 overrides"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:21 GMT",
+      "version": "0.5.21",
+      "tag": "@fluentui-react-native/tablist_v0.5.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Mar 2024 01:39:46 GMT",
+      "version": "0.5.20",
+      "tag": "@fluentui-react-native/tablist_v0.5.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "b865b8b2c4f21f6bd18b6ceeb7c88cdb72f837d6",
+            "comment": "Fix layout callback chaining, and added new styling token allowing for customization of text's numberOfLines prop."
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:12 GMT",
+      "version": "0.5.17",
+      "tag": "@fluentui-react-native/tablist_v0.5.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 03:22:29 GMT",
+      "version": "0.5.16",
+      "tag": "@fluentui-react-native/tablist_v0.5.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.16.9",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/icon to v0.20.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.26.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tablist",
+            "comment": "Bump @fluentui-react-native/text to v0.22.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Feb 2024 23:27:43 GMT",
       "version": "0.5.15",
       "tag": "@fluentui-react-native/tablist_v0.5.15",

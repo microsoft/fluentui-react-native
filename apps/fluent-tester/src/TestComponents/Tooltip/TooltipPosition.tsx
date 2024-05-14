@@ -9,11 +9,12 @@ export const TooltipPosition: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Tooltip content="Test" positioning="topCenter">
-        <ButtonV1>No Target + TopCenter</ButtonV1>
-      </Tooltip>
+      {/* In Progress - Implementation for custom positioning and anchoring is not completed in the native module. */}
       <Tooltip content="Test" positioning="topCenter" target={topCenterRef}>
         <ButtonV1 componentRef={topCenterRef}>Target + TopCenter</ButtonV1>
+      </Tooltip>
+      <Tooltip content="Test" positioning="topCenter" target={'test'}>
+        <ButtonV1 nativeID={'test'}>Target + TopCenter</ButtonV1>
       </Tooltip>
       {/* Adding more tests as follow-up*/}
     </View>
