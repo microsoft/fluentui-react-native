@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 14 May 2024 23:18:08 GMT",
+      "version": "1.37.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.37.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "6c3f6269e4f7ce70508972ede8b437df897aa615",
+            "comment": "Split focus zone tests into smaller, separate spec files"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 May 2024 16:48:26 GMT",
       "version": "1.36.0",
       "tag": "@fluentui-react-native/e2e-testing_v1.36.0",
