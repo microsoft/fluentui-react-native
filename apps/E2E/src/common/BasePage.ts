@@ -16,8 +16,8 @@ import {
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
 const PLATFORM = process.env['E2ETEST_PLATFORM'] as Platform;
-const NATIVE_TESTING = process.env['NATIVE_TESTING'];
-console.log('\n\n\n\n\n Native testing is ' + NATIVE_TESTING + '\n\n\n\n\n\n');
+// NATIVE_TESTING should be set to true when testing natively. Should be false when testing in the FURN repo
+const NATIVE_TESTING = process.env['NATIVE_TESTING'] == 'true';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 let rootView: WebdriverIO.Element | null = null;
@@ -386,6 +386,9 @@ export abstract class BasePage {
    * Unfortunately, afterEach() is designed for setup/teardown - not for determining if a test should fail or not.
    * */
   async didAssertPopup(): Promise<boolean> {
+    // Natively we have task libs already looking for asserts, we don't need this logic
+    if (NATIVE_TESTING) return false;
+
     /* On Android, we can't get the window handles. Instead, we check if the page is still visible.
      * In case of any error, a full page crash message is displayed and the test page is no longer accessible. */
     if (PLATFORM === 'android') {
