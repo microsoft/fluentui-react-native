@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Split focus zone tests into smaller, separate spec files",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}

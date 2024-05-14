@@ -22,8 +22,7 @@ describe('FocusZone Testing Initialization', () => {
 
 /* FocusZone Functional Testing
  *
- * This test validates that keyboard navigation using both arrow keys and
- * tab key works, even when modifying how the FocusZone functions.
+ * These tests validate Circular Navigation, disabled FZ, and tab with/without default tabbable element.
  *
  * */
 describe('FocusZone Functional Testing', () => {
@@ -31,122 +30,6 @@ describe('FocusZone Functional Testing', () => {
     await FocusZonePageObject.scrollToTestElement();
 
     await FocusZonePageObject.resetTest();
-  });
-
-  it('Navigate bidirectional focuszone using arrow keys. Validate focus switches correctly.', async () => {
-    // move to 2 with right arrow
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_RIGHT]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    // move to 3 with down arrow
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(2), [Keys.ARROW_DOWN]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(3), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    expect(await FocusZonePageObject.didAssertPopup())
-      .withContext(FocusZonePageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
-  });
-
-  it('Navigate horizontal focuszone using arrow keys. Validate focus switches correctly.', async () => {
-    await FocusZonePageObject.configureGridFocusZone('SetDirection', 'horizontal');
-    // move to 2 with right arrow
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_RIGHT]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    // down arrow shouldn't move focus
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(2), [Keys.ARROW_DOWN]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    // left arrow goes back
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(4), [Keys.ARROW_LEFT]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(3), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    expect(await FocusZonePageObject.didAssertPopup())
-      .withContext(FocusZonePageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
-  });
-
-  it('Navigates vertical focuszone using arrow keys. Validate focus switches correctly.', async () => {
-    await FocusZonePageObject.configureGridFocusZone('SetDirection', 'vertical');
-
-    // move to 2 with down arrow
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_DOWN]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    // right arrow shouldn't move focus
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(2), [Keys.ARROW_RIGHT]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    // up arrow goes back
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(4), [Keys.ARROW_UP]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(3), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    expect(await FocusZonePageObject.didAssertPopup())
-      .withContext(FocusZonePageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
-  });
-
-  it('Navigates none-direction focuszone using arrow keys. Validate focus does not switch.', async () => {
-    await FocusZonePageObject.configureGridFocusZone('SetDirection', 'none');
-
-    // none of these key commands should move
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(2), [Keys.ARROW_DOWN]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(2), [Keys.ARROW_UP]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(2), [Keys.ARROW_LEFT]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(2), [Keys.ARROW_RIGHT]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(2), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    expect(await FocusZonePageObject.didAssertPopup())
-      .withContext(FocusZonePageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
-  });
-
-  it('Navigates bi-directional focuszone with 2d navigation. Validate focus switches correctly.', async () => {
-    await FocusZonePageObject.configureGridFocusZone('Set2DNavigation', true);
-
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(1), [Keys.ARROW_DOWN]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(4), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    await FocusZonePageObject.sendKeys(FocusZonePageObject.gridButton(4), [Keys.ARROW_RIGHT]);
-    expect(
-      await FocusZonePageObject.compareAttribute(FocusZonePageObject.gridButton(5), Attribute.IsFocused, AttributeValue.true),
-    ).toBeTruthy();
-
-    expect(await FocusZonePageObject.didAssertPopup())
-      .withContext(FocusZonePageObject.ERRORMESSAGE_ASSERT)
-      .toBeFalsy();
   });
 
   it("Navigates focuszone with circular navigation off. Validate focus between start and end doesn't switch.", async () => {
