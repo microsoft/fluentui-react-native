@@ -23,8 +23,6 @@ describe('ContextualMenu Functional Tests', () => {
   /* Scrolls and waits for the ContextualMenu to be visible on the Test Page */
   beforeEach(async () => {
     await ContextualMenuPageObject.scrollToTestElement(await ContextualMenuPageObject._contextualMenu);
-
-    await ContextualMenuPageObject.closeContextualMenu(); // Reset ContextualMenu state for next test
   });
 
   it('Click on ContextualMenu Button. Validate that the menu opens by checking if its items are displayed.', async () => {
