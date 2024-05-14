@@ -16,11 +16,13 @@ it('win32Typography test', () => {
 
 it('fallbackOfficeModule test', () => {
   expect(fallbackOfficeModule).toMatchSnapshot();
+  expect(fallbackOfficeModule.getConstants()).toMatchSnapshot();
 });
 
 it('getThemingModule test', () => {
   const themingModule = getThemingModule();
   expect(themingModule).toMatchSnapshot();
+  expect(themingModule[0].getConstants()).toMatchSnapshot();
 });
 
 it('createPartialOfficeTheme test', () => {

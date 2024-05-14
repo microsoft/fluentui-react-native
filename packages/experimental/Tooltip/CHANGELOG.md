@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tooltip
 
-This log was last generated on Mon, 15 Apr 2024 21:31:44 GMT and should not be manually modified.
+This log was last generated on Wed, 08 May 2024 16:21:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Wed, 08 May 2024 16:21:26 GMT
+
+### Minor changes
+
+- added layoutEffect hook (gulnazsayed@microsoft.com)
 
 ## 0.3.2
 

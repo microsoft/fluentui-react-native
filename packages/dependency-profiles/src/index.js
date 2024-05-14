@@ -4,15 +4,15 @@ module.exports = {
   "0.73": {
     "@fluentui-react-native/e2e-testing": {
       "name": "@fluentui-react-native/e2e-testing",
-      "version": "1.35.1"
+      "version": "1.36.0"
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.168.4"
+      "version": "0.168.7"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.38.5"
+      "version": "0.38.8"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -144,7 +144,7 @@ module.exports = {
     },
     "@uifabricshared/theming-react-native": {
       "name": "@uifabricshared/theming-react-native",
-      "version": "0.20.0"
+      "version": "0.20.1"
     },
     "@fluentui-react-native/experimental-activity-indicator": {
       "name": "@fluentui-react-native/experimental-activity-indicator",
@@ -156,7 +156,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-avatar": {
       "name": "@fluentui-react-native/experimental-avatar",
-      "version": "0.21.1"
+      "version": "0.21.2"
     },
     "@fluentui-react-native/experimental-checkbox": {
       "name": "@fluentui-react-native/experimental-checkbox",
@@ -208,7 +208,7 @@ module.exports = {
     },
     "@fluentui-react-native/tooltip": {
       "name": "@fluentui-react-native/tooltip",
-      "version": "0.3.2"
+      "version": "0.4.0"
     },
     "@fluentui-react-native/vibrancy-view": {
       "name": "@fluentui-react-native/vibrancy-view",
@@ -264,7 +264,7 @@ module.exports = {
     },
     "@fluentui/react-native": {
       "name": "@fluentui/react-native",
-      "version": "0.41.3"
+      "version": "0.41.4"
     },
     "@fluentui-react-native/android-theme": {
       "name": "@fluentui-react-native/android-theme",
@@ -292,7 +292,7 @@ module.exports = {
     },
     "@fluentui-react-native/win32-theme": {
       "name": "@fluentui-react-native/win32-theme",
-      "version": "0.34.0"
+      "version": "0.34.1"
     },
     "@fluentui-react-native/adapters": {
       "name": "@fluentui-react-native/adapters",

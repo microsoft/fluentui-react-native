@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 11 Apr 2024 18:08:42 GMT and should not be manually modified.
+This log was last generated on Fri, 03 May 2024 16:48:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.36.0
+
+Fri, 03 May 2024 16:48:26 GMT
+
+### Minor changes
+
+- Remove some contextual menu tests. These tests don't add much value - it's more of a test for Button than contextual menu. Improve perf by removing unnecessary/unvaluable tests (safreibe@microsoft.com)
 
 ## 1.35.0
 

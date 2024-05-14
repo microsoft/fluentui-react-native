@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 03 May 2024 16:48:26 GMT",
+      "version": "1.36.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.36.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "4ba62760dfe94d63604ee3f2a2d58ce445c5524e",
+            "comment": "Remove some contextual menu tests. These tests don't add much value - it's more of a test for Button than contextual menu. Improve perf by removing unnecessary/unvaluable tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:42 GMT",
       "version": "1.35.0",
       "tag": "@fluentui-react-native/e2e-testing_v1.35.0",

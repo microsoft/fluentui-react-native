@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 12 Apr 2024 21:02:37 GMT and should not be manually modified.
+This log was last generated on Tue, 07 May 2024 11:30:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.41.4
+
+Tue, 07 May 2024 11:30:30 GMT
+
+### Patches
+
+- Mark as side-effects free (4123478+tido64@users.noreply.github.com)
 
 ## 0.41.1
 

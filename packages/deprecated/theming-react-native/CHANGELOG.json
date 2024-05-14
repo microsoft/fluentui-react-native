@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 02 May 2024 03:33:29 GMT",
+      "version": "0.20.1",
+      "tag": "@uifabricshared/theming-react-native_v0.20.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "adf19a343e46309046f45943751a166e8da77e75",
+            "comment": "Use getConstants() when accessing constants from TurboModules/NativeModules"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:41 GMT",
       "version": "0.20.0",
       "tag": "@uifabricshared/theming-react-native_v0.20.0",

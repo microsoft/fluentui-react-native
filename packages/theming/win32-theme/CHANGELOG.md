@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Thu, 11 Apr 2024 18:08:40 GMT and should not be manually modified.
+This log was last generated on Thu, 02 May 2024 03:33:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.34.1
+
+Thu, 02 May 2024 03:33:29 GMT
+
+### Patches
+
+- Use getConstants() when accessing constants from TurboModules/NativeModules (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.34.0
 
