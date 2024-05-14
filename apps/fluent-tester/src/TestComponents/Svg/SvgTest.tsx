@@ -211,8 +211,8 @@ const RemoteSvgTest: React.FunctionComponent = () => {
           y="50"
           viewBox="0 0 500 500"
           style={styles.svg}
-          width="200"
-          height="200"
+          width="100"
+          height="100"
           uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
           accessible={true}
           accessibilityLabel="SVG Uri Test"
