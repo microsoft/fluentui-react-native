@@ -60,7 +60,7 @@ const RectTest: React.FunctionComponent = () => {
 
 const CircleTest: React.FunctionComponent = () => {
   return (
-    <Svg width="55" height="50" accessible={true} accessibilityLabel="SVG Circle Test" accessibilityRole="image">
+    <Svg width="50" height="50" accessible={true} accessibilityLabel="SVG Circle Test" accessibilityRole="image">
       <Circle cx="25" cy="25" r="20" fill="red" stroke="black" />
     </Svg>
   );
@@ -92,8 +92,16 @@ const PolygonTest: React.FunctionComponent = () => {
 
 const LinearGradientTest: React.FunctionComponent = () => {
   return (
-    <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow" 
-      accessible={true} accessibilityLabel="SVG Linear Gradient Test" accessibilityRole="image">
+    <Svg
+      height="100"
+      width="100"
+      style={{ backgroundColor: 'black' }}
+      viewBox="0 0 10 10"
+      color="yellow"
+      accessible={true}
+      accessibilityLabel="SVG Linear Gradient Test"
+      accessibilityRole="image"
+    >
       <Defs>
         <LinearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
           <Stop offset="0" stopColor="green" stopOpacity="1" />
@@ -107,8 +115,16 @@ const LinearGradientTest: React.FunctionComponent = () => {
 
 const RadialGradientTest: React.FunctionComponent = () => {
   return (
-    <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow"
-      accessible={true} accessibilityLabel="SVG Radial Gradient Test" accessibilityRole="image">
+    <Svg
+      height="100"
+      width="100"
+      style={{ backgroundColor: 'black' }}
+      viewBox="0 0 10 10"
+      color="yellow"
+      accessible={true}
+      accessibilityLabel="SVG Radial Gradient Test"
+      accessibilityRole="image"
+    >
       <Defs>
         <RadialGradient id="grad2">
           <Stop offset="0" stopColor="blue" />
@@ -122,8 +138,15 @@ const RadialGradientTest: React.FunctionComponent = () => {
 
 const RadialGradientTransformTest: React.FunctionComponent = () => {
   return (
-    <Svg width={256} height={256} viewBox="0 0 48 48" fill="none" accessible={true} 
-      accessibilityLabel="SVG Radial Gradient Transform Test" accessibilityRole="image">
+    <Svg
+      width={256}
+      height={256}
+      viewBox="0 0 48 48"
+      fill="none"
+      accessible={true}
+      accessibilityLabel="SVG Radial Gradient Transform Test"
+      accessibilityRole="image"
+    >
       <Rect width={48} height={48} fill="url(#paint0_radial_1533_187044)" />
       <Rect x={10} y={10} width={10} height={10} fill="red" />
       <Defs>
@@ -161,7 +184,9 @@ const RectCircleTest: React.FunctionComponent = () => {
 };
 
 const BundledSvgTest: React.FunctionComponent = () => {
-  return <TestSvg width={200} height={200} color="red" accessible={true} accessibilityLabel="SVG Bundled svg Test" accessibilityRole="image" />;
+  return (
+    <TestSvg width={200} height={200} color="red" accessible={true} accessibilityLabel="SVG Bundled svg Test" accessibilityRole="image" />
+  );
 };
 
 const RemoteSvgTest: React.FunctionComponent = () => {
@@ -176,8 +201,8 @@ const RemoteSvgTest: React.FunctionComponent = () => {
         width="100"
         height="100"
         uri="https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg"
-        accessible={true} 
-        accessibilityLabel="SVG Uri Test" 
+        accessible={true}
+        accessibilityLabel="SVG Uri Test"
         accessibilityRole="image"
       />
       {shouldShowLocalNetwork && (
@@ -189,8 +214,8 @@ const RemoteSvgTest: React.FunctionComponent = () => {
           width="200"
           height="200"
           uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
-          accessible={true} 
-          accessibilityLabel="SVG Uri Test" 
+          accessible={true}
+          accessibilityLabel="SVG Uri Test"
           accessibilityRole="image"
         />
       )}
@@ -249,7 +274,7 @@ const CustomSvgInputTest: React.FunctionComponent = () => {
       </View>
       <Separator />
       {showParse && <Text>{dataText}</Text>}
-      <SvgXml width="256" height="256" xml={svgText} accessible={true} accessibilityLabel="Custom Svg Test" accessibilityRole="image"/>
+      <SvgXml width="256" height="256" xml={svgText} accessible={true} accessibilityLabel="Custom Svg Test" accessibilityRole="image" />
     </View>
   );
 };
