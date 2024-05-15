@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Wed, 15 May 2024 19:42:10 GMT",
+      "version": "1.38.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.38.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "d9d5da9c4b29be18aa47f7b3994f101a83a8023e",
+            "comment": "Add env var for e2e testing"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 May 2024 23:18:08 GMT",
       "version": "1.37.0",
       "tag": "@fluentui-react-native/e2e-testing_v1.37.0",

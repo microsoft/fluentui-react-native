@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 14 May 2024 23:18:08 GMT and should not be manually modified.
+This log was last generated on Wed, 15 May 2024 19:42:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.38.0
+
+Wed, 15 May 2024 19:42:10 GMT
+
+### Minor changes
+
+- Add env var for e2e testing (safreibe@microsoft.com)
 
 ## 1.37.0
 
