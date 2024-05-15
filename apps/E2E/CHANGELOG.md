@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 03 May 2024 16:48:26 GMT and should not be manually modified.
+This log was last generated on Tue, 14 May 2024 23:18:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.37.0
+
+Tue, 14 May 2024 23:18:08 GMT
+
+### Minor changes
+
+- Split focus zone tests into smaller, separate spec files (safreibe@microsoft.com)
 
 ## 1.36.0
 
