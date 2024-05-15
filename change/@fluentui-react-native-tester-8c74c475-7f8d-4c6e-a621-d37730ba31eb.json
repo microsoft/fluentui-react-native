@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Remove unnecessary code in tsconfig",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
