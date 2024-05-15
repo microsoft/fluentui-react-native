@@ -3079,7 +3079,6 @@ __metadata:
     "@wdio/jasmine-framework": "npm:8.35.1"
     "@wdio/json-reporter": "npm:8.32.4"
     "@wdio/local-runner": "npm:8.35.1"
-    "@wdio/logger": "npm:8.28.0"
     "@wdio/spec-reporter": "npm:8.32.4"
     appium: "npm:2.5.1"
     appium-mac2-driver: "npm:^1.12.0"
