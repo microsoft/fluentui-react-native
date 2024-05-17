@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Move platform theming logic from button component into theme",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
