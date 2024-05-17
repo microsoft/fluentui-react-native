@@ -2642,6 +2642,7 @@ __metadata:
   resolution: "@fluentui-react-native/android-theme@workspace:packages/theming/android-theme"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
@@ -2677,6 +2678,7 @@ __metadata:
     "@fluentui-react-native/design-tokens-macos": "npm:^0.53.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
@@ -3027,6 +3029,7 @@ __metadata:
   resolution: "@fluentui-react-native/default-theme@workspace:packages/theming/default-theme"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
@@ -4950,15 +4953,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/win32-theme@workspace:packages/theming/win32-theme"
   dependencies:
+    "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"
+    "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"

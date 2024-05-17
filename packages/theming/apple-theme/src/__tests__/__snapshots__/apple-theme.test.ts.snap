@@ -2,6 +2,9 @@
 
 exports[`createAppleTheme test 1`] = `
 {
+  "backgroundColor": "#ffffff",
+  "borderColor": "#d6d6d6",
+  "color": "#000000",
   "colors": {
     "accentButtonBackground": {
       "dynamic": {
@@ -610,8 +613,71 @@ exports[`createAppleTheme test 1`] = `
       },
     },
   },
+  "disabled": {
+    "backgroundColor": "#ffffff",
+    "borderColor": "#d6d6d6",
+    "color": "#757575",
+    "iconColor": "#616161",
+  },
+  "focused": {
+    "backgroundColor": "#ffffff",
+    "borderColor": "#d6d6d6",
+    "color": "#000000",
+    "icon": "#616161",
+  },
   "host": {
     "appearance": "dynamic",
+  },
+  "hovered": {
+    "backgroundColor": "#ffffff",
+    "borderColor": "#d6d6d6",
+    "color": "#000000",
+    "iconColor": "#616161",
+  },
+  "iconColor": "#000000",
+  "large": {
+    "variant": "subheaderSemibold",
+  },
+  "medium": {
+    "hasContent": {
+      "variant": "bodyStandard",
+    },
+  },
+  "pressed": {
+    "backgroundColor": "#ebebeb",
+    "borderColor": "#d6d6d6",
+    "color": "#000000",
+    "iconColor": "#616161",
+  },
+  "primary": {
+    "backgroundColor": "#0078d4",
+    "borderColor": "#0078d4",
+    "color": "#ffffff",
+    "disabled": {
+      "backgroundColor": "#f0f0f0",
+      "borderColor": "#e0e0e0",
+      "color": "#757575",
+      "iconColor": "#757575",
+    },
+    "focused": {
+      "backgroundColor": "#106ebe",
+      "borderColor": "#000000",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "hovered": {
+      "backgroundColor": "#106ebe",
+      "borderColor": "#106ebe",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
+    "iconColor": "#ffffff",
+    "pressed": {
+      "backgroundColor": "#106ebe",
+      "borderColor": "#106ebe",
+      "color": "#ffffff",
+      "iconColor": "#ffffff",
+    },
   },
   "shadows": {
     "shadow16": {
@@ -783,12 +849,89 @@ exports[`createAppleTheme test 1`] = `
       },
     },
   },
+  "small": {
+    "hasContent": {
+      "variant": "secondaryStandard",
+    },
+  },
   "spacing": {
     "l1": "20px",
     "l2": "24px",
     "m": "16px",
     "s1": "12px",
     "s2": "8px",
+  },
+  "subtle": {
+    "backgroundColor": "transparent",
+    "borderColor": "transparent",
+    "color": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "disabled": {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "color": "#757575",
+      "iconColor": "#757575",
+    },
+    "focused": {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "color": {
+        "dynamic": {
+          "dark": "#1890F1",
+          "highContrastDark": undefined,
+          "highContrastLight": undefined,
+          "light": "#0078D4",
+        },
+      },
+      "icon": {
+        "dynamic": {
+          "dark": "#1890F1",
+          "highContrastDark": undefined,
+          "highContrastLight": undefined,
+          "light": "#0078D4",
+        },
+      },
+    },
+    "hovered": {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "color": {
+        "dynamic": {
+          "dark": "#1890F1",
+          "highContrastDark": undefined,
+          "highContrastLight": undefined,
+          "light": "#0078D4",
+        },
+      },
+      "iconColor": {
+        "dynamic": {
+          "dark": "#1890F1",
+          "highContrastDark": undefined,
+          "highContrastLight": undefined,
+          "light": "#0078D4",
+        },
+      },
+    },
+    "iconColor": {
+      "dynamic": {
+        "dark": "#1890F1",
+        "highContrastDark": undefined,
+        "highContrastLight": undefined,
+        "light": "#0078D4",
+      },
+    },
+    "pressed": {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "color": "#004578",
+      "icon": "#616161",
+    },
   },
   "typography": {
     "families": {

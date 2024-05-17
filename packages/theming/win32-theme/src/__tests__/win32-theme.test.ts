@@ -1,3 +1,11 @@
+import type { ButtonTokens, CompoundButtonTokens } from '@fluentui-react-native/button';
+
+import { defaultButtonColorTokens } from '../components/Button/ButtonColorTokens';
+import { defaultButtonFontTokens } from '../components/Button/ButtonFontTokens';
+import { defaultButtonTokens } from '../components/Button/ButtonTokens';
+import { defaultCompoundButtonColorTokens } from '../components/Button/CompoundButtonColorTokens';
+import { defaultCompoundButtonFontTokens } from '../components/Button/CompoundButtonFontTokens';
+import { defaultCompoundButtonTokens } from '../components/Button/CompoundButtonTokens';
 import { createBrandedThemeWithAlias, getCurrentBrandAliasTokens } from '../createBrandedThemeWithAlias';
 import { createFontAliasTokens } from '../createFontAliasTokens';
 import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from '../createOfficeAliasTokens';
@@ -91,3 +99,25 @@ describe('getCurrentBrandAliasTokens test', () => {
     expect(brandAliasTokens).toMatchSnapshot();
   });
 });
+
+describe('verify types', () => {
+  it('Button types', () => {
+    const officeTheme = createOfficeTheme({ paletteName: 'TaskPane', appearance: 'light' }).theme;
+    const colorTokens: ButtonTokens = defaultButtonColorTokens(officeTheme);
+    expect(colorTokens).toBeTruthy();
+    const fontTokens: ButtonTokens = defaultButtonFontTokens(officeTheme);
+    expect(fontTokens).toBeTruthy();
+    const tokens: ButtonTokens = defaultButtonTokens(officeTheme);
+    expect(tokens).toBeTruthy();
+  });
+
+  it('CompoundButton types', () => {
+    const officeTheme = createOfficeTheme({ paletteName: 'TaskPane', appearance: 'light' }).theme;
+    const compoundColorTokens: CompoundButtonTokens = defaultCompoundButtonColorTokens(officeTheme);
+    expect(compoundColorTokens).toBeTruthy();
+    const compoundButtonFontTokens: CompoundButtonTokens = defaultCompoundButtonFontTokens(officeTheme);
+    expect(compoundButtonFontTokens).toBeTruthy();
+    const compoundButtonTokens: CompoundButtonTokens = defaultCompoundButtonTokens(officeTheme);
+    expect(compoundButtonTokens).toBeTruthy();
+  });
+})
