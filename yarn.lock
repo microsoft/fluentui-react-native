@@ -4406,6 +4406,7 @@ __metadata:
     "@types/jasmine": "npm:5.1.4"
     "@warren-ms/react-native-icons": "npm:^0.0.13"
     "@wdio/cli": "npm:8.35.1"
+    "@wdio/globals": "npm:8.35.1"
     "@wdio/jasmine-framework": "npm:8.35.1"
     flow-bin: "npm:^0.113.0"
     metro-config: "npm:^0.80.0"
