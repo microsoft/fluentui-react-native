@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Wdio to v8",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
