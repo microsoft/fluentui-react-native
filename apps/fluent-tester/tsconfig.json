@@ -8,7 +8,7 @@
       "*": ["*", "*.win32", "./*"],
       "src/*": ["./src/*", "src"]
     },
-    "types": ["../E2E/global", "webdriverio", "@wdio/jasmine-framework", "node", "@types/jasmine"]
+    "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"]
   },
   "include": ["src"]
 }

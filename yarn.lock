@@ -3294,7 +3294,9 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@wdio/appium-service": "npm:8.29.1"
     "@wdio/cli": "npm:8.35.1"
+    "@wdio/globals": "npm:8.35.1"
     "@wdio/jasmine-framework": "npm:8.35.1"
+    "@wdio/json-reporter": "npm:8.32.4"
     "@wdio/local-runner": "npm:8.35.1"
     "@wdio/spec-reporter": "npm:8.32.4"
     appium: "npm:^2.5.1"
@@ -4623,6 +4625,7 @@ __metadata:
     "@types/jasmine": "npm:5.1.4"
     "@warren-ms/react-native-icons": "npm:^0.0.13"
     "@wdio/cli": "npm:8.35.1"
+    "@wdio/globals": "npm:8.35.1"
     "@wdio/jasmine-framework": "npm:8.35.1"
     flow-bin: "npm:^0.113.0"
     metro-config: "npm:^0.80.0"
@@ -8252,6 +8255,16 @@ __metadata:
     expect-webdriverio: "npm:^4.11.2"
     jasmine: "npm:^5.0.0"
   checksum: 10c0/a725aa7f71c27e09d5abf42a25621c3eb986eb346f51b898601b9b3566ee3980fc66f580e8e1ca8d569edece94bed005de562229ca3bf02169feac61c2962206
+  languageName: node
+  linkType: hard
+
+"@wdio/json-reporter@npm:8.32.4":
+  version: 8.32.4
+  resolution: "@wdio/json-reporter@npm:8.32.4"
+  dependencies:
+    "@wdio/reporter": "npm:8.32.4"
+    "@wdio/types": "npm:8.32.4"
+  checksum: 10c0/52f6243dc08c285653837333b623377fd42fbe217af7dcde9f6cba64e26c7d2727e4cc6e610a61632d39276c1e0536e551fea3df340174a4c1a4602acb72acc9
   languageName: node
   linkType: hard
 

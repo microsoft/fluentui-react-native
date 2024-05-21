@@ -107,6 +107,7 @@
     "@rnx-kit/metro-config": "^1.3.1",
     "@types/jasmine": "5.1.4",
     "@wdio/cli": "8.35.1",
+    "@wdio/globals": "8.35.1",
     "@wdio/jasmine-framework": "8.35.1",
     "flow-bin": "^0.113.0",
     "metro-config": "^0.80.0",
