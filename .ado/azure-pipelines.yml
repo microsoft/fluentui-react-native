@@ -99,8 +99,8 @@ jobs:
           script: |
             set -eox pipefail
             ./.ado/scripts/xcodebuild.sh apps/fluent-tester/FluentTester.xcworkspace iphonesimulator ReactTestApp build
-          env:
-            CCACHE_DISABLE: 1
+        env:
+          CCACHE_DISABLE: 1
 
       - template: templates/e2e-testing-macos.yml
 
@@ -142,8 +142,8 @@ jobs:
           script: |
             set -eox pipefail
             ./.ado/scripts/xcodebuild.sh apps/fluent-tester/FluentTester.xcworkspace iphonesimulator ReactTestApp build
-          env:
-            CCACHE_DISABLE: 1
+        env:
+          CCACHE_DISABLE: 1
 
       # Disable iOS E2E tests as they fail on macOS-13 images
       # - template: templates/e2e-testing-ios.yml
