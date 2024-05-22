@@ -113,3 +113,6 @@ apps/*/.vscode/.react/
 !**/.yarn/releases
 !**/.yarn/sdks
 !**/.yarn/versions
+
+# Ccache
+.ccache
