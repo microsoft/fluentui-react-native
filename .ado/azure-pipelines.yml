@@ -90,8 +90,8 @@ jobs:
       - bash: |
           set -eox pipefail
           pod install --verbose
-        workingDirectory: apps/fluent-tester/$(platform)
-        displayName: 'pod install $(platform)'
+        workingDirectory: apps/fluent-tester/macos
+        displayName: 'pod install'
 
       - task: CmdLine@2
         displayName: Build macOS
@@ -128,8 +128,8 @@ jobs:
       - bash: |
           set -eox pipefail
           pod install --verbose
-        workingDirectory: apps/fluent-tester/$(platform)
-        displayName: 'pod install $(platform)'
+        workingDirectory: apps/fluent-tester/ios
+        displayName: 'pod install'
 
       - task: CmdLine@2
         displayName: Build iOS
