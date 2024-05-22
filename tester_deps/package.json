@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "5.1.4",
+    "@types/node": "^10.3.5",
     "@types/react": "^18.2.0",
     "@wdio/appium-service": "8.29.1",
     "@wdio/cli": "8.35.1",
