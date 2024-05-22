@@ -1,6 +1,6 @@
 variables:
   - name: VmImageApple
-    value: macos-13
+    value: macos-latest-internal
   - name: xcode_version
     value: 'Xcode 15.2'
   - name: xcode_path

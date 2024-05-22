@@ -1,0 +1,26 @@
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+
+  - task: CmdLine@2
+    displayName: 'brew bundle'
+    inputs:
+      script: |
+        brew bundle --file .ado/Brewfile
+        cat .ado/Brewfile.lock.json
+
+  # Cocoapods 1.15.0 doesn't work with React Native
+  - task: CmdLine@2
+    displayName: Install Cocoapods 1.15.2 if needed
+    inputs:
+      script: |
+        POD_VERSION=$(pod --version)
+        if [ $POD_VERSION = 1.15.0 ]; then
+          gem install cocoapods -v 1.15.2
+        fi
+
+  - bash: |
+    sudo xcode-select --switch $(xcode_version)
+    displayName: Use $(xcode_friendly_name)
+    failOnStderr: true

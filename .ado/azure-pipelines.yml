@@ -79,43 +79,34 @@ jobs:
 
       - template: templates/setup-repo-min-build.yml
 
-      - template: templates/apple-ensure-valid-cocoapods.yml
+      - template: templates/apple-tools-setup.yml
 
       - script: |
+          set -eox pipefail
           yarn bundle:macos
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle macos'
 
       - bash: |
-          echo "pod install $(platform)"
-          pod install
+          set -eox pipefail
+          pod install --verbose
         workingDirectory: apps/fluent-tester/$(platform)
         displayName: 'pod install $(platform)'
 
-      - bash: |
-          sudo xcode-select --switch '$(xcode_path)'
-        displayName: Switch Xcode version $(xcode_version)
-        failOnStderr: true
-
-      - script: |
-          brew install xcbeautify
-        displayName: 'Install xcbeautify'
-
-      - bash: |
-          echo "yarn $(platform)"
-          yarn $(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)'
+      - task: CmdLine@2
+        displayName: Build macOS
+        inputs:
+          script: |
+            set -eox pipefail
+            ./.ado/scripts/xcodebuild.sh apps/fluent-tester/FluentTester.xcworkspace iphonesimulator ReactTestApp build
 
       - template: templates/e2e-testing-macos.yml
 
   - job: iOSPR
     displayName: iOS PR
     pool:
-      vmImage: macos-13-arm64
-    variables:
-      platform: 'ios'
-    timeoutInMinutes: 120 # how long to run the job before automatically cancelling
+      vmImage: $(VmImageApple)
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     steps:
@@ -124,16 +115,17 @@ jobs:
 
       - template: templates/setup-repo-min-build.yml
 
-      - template: templates/apple-ensure-valid-cocoapods.yml
+      - template: templates/apple-tools-setup.yml
 
       - script: |
+          set -eox pipefail
           yarn bundle:ios
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle ios'
 
       - bash: |
-          echo "pod install $(platform)"
-          pod install
+          set -eoc pipefail
+          pod install --verbose
         workingDirectory: apps/fluent-tester/$(platform)
         displayName: 'pod install $(platform)'
 
@@ -142,29 +134,12 @@ jobs:
         displayName: Switch Xcode version $(xcode_version)
         failOnStderr: true
 
-      - script: |
-          brew install xcbeautify
-        displayName: 'Install xcbeautify'
-
-      - script: |
-          xcrun simctl list
-        displayName: 'List Simulators'
-
-      - script: |
-          xcrun --sdk iphonesimulator --show-sdk-version
-        displayName: 'Determine iOS SDK version'
-
-      # - script: |
-      #     NEW_DEVICE=$(xcrun simctl create "Test Phone" "$(ios_simulator)" iOS$(ios_version))
-      #     echo "🤖 Created ${NEW_DEVICE}"
-      #     xcrun simctl boot ${NEW_DEVICE}
-      #   displayName: 'Boot Simulator'
-
-      - bash: |
-          echo "yarn $(platform)"
-          yarn $(platform) --simulator "$(ios_simulator)" --no-packager
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)'
+      - task: CmdLine@2
+        displayName: Build iOS
+        inputs:
+          script: |
+            set -eox pipefail
+            ./.ado/scripts/xcodebuild.sh apps/fluent-tester/FluentTester.xcworkspace iphonesimulator ReactTestApp build
 
       # Disable iOS E2E tests as they fail on macOS-13 images
       # - template: templates/e2e-testing-ios.yml
