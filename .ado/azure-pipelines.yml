@@ -126,15 +126,10 @@ jobs:
         displayName: 'yarn bundle ios'
 
       - bash: |
-          set -eoc pipefail
+          set -eox pipefail
           pod install --verbose
         workingDirectory: apps/fluent-tester/$(platform)
         displayName: 'pod install $(platform)'
-
-      - bash: |
-          sudo xcode-select --switch '$(xcode_path)'
-        displayName: Switch Xcode version $(xcode_version)
-        failOnStderr: true
 
       - task: CmdLine@2
         displayName: Build iOS
