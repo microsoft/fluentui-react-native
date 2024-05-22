@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 03 May 2024 16:48:26 GMT and should not be manually modified.
+This log was last generated on Tue, 21 May 2024 20:54:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.39.0
+
+Tue, 21 May 2024 20:54:22 GMT
+
+### Minor changes
+
+- Wdio to v8 (safreibe@microsoft.com)
+
+## 1.38.0
+
+Wed, 15 May 2024 19:42:10 GMT
+
+### Minor changes
+
+- Add env var for e2e testing (safreibe@microsoft.com)
+
+## 1.37.0
+
+Tue, 14 May 2024 23:18:08 GMT
+
+### Minor changes
+
+- Split focus zone tests into smaller, separate spec files (safreibe@microsoft.com)
 
 ## 1.36.0
 
