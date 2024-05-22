@@ -136,7 +136,7 @@ jobs:
         inputs:
           script: |
             set -eox pipefail
-            ./.ado/scripts/xcodebuild.sh apps/fluent-tester/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
+            ./.ado/scripts/xcodebuild.sh apps/fluent-tester/ios/FluentTester.xcworkspace macosx ReactTestApp build
         env:
           CCACHE_DISABLE: 1
 
