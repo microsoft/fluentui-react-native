@@ -9547,6 +9547,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"async@npm:^3.2.5":
+  version: 3.2.5
+  resolution: "async@npm:3.2.5"
+  checksum: 10c0/1408287b26c6db67d45cb346e34892cee555b8b59e6c68e6f8c3e495cad5ca13b4f218180e871f3c2ca30df4ab52693b66f2f6ff43644760cab0b2198bda79c1
+  languageName: node
+  linkType: hard
+
 "asyncbox@npm:3.0.0, asyncbox@npm:^3.0.0":
   version: 3.0.0
   resolution: "asyncbox@npm:3.0.0"
@@ -10749,10 +10756,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^10.0.1":
-  version: 10.0.1
-  resolution: "commander@npm:10.0.1"
-  checksum: 10c0/53f33d8927758a911094adadda4b2cbac111a5b377d8706700587650fd8f45b0bbe336de4b5c3fe47fd61f420a3d9bd452b6e0e6e5600a7e74d7bf0174f6efe3
+"commander@npm:^12.1.0":
+  version: 12.1.0
+  resolution: "commander@npm:12.1.0"
+  checksum: 10c0/6e1996680c083b3b897bfc1cfe1c58dfbcd9842fd43e1aaf8a795fbc237f65efcc860a3ef457b318e73f29a4f4a28f6403c3d653d021d960e4632dd45bde54a9
   languageName: node
   linkType: hard
 
@@ -11262,7 +11269,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^3.1.0, debug@npm:^3.2.6, debug@npm:^3.2.7":
+"debug@npm:^3.1.0, debug@npm:^3.2.7":
   version: 3.2.7
   resolution: "debug@npm:3.2.7"
   dependencies:
@@ -14033,7 +14040,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-proxy-agent@npm:^7.0.0, http-proxy-agent@npm:^7.0.2":
+"http-proxy-agent@npm:^7.0.0, http-proxy-agent@npm:^7.0.1, http-proxy-agent@npm:^7.0.2":
   version: 7.0.2
   resolution: "http-proxy-agent@npm:7.0.2"
   dependencies:
@@ -14070,7 +14077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"https-proxy-agent@npm:^7.0.0, https-proxy-agent@npm:^7.0.2, https-proxy-agent@npm:^7.0.4":
+"https-proxy-agent@npm:^7.0.0, https-proxy-agent@npm:^7.0.2, https-proxy-agent@npm:^7.0.3, https-proxy-agent@npm:^7.0.4":
   version: 7.0.4
   resolution: "https-proxy-agent@npm:7.0.4"
   dependencies:
@@ -16031,15 +16038,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"link-check@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "link-check@npm:5.2.0"
+"link-check@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "link-check@npm:5.3.0"
   dependencies:
     is-relative-url: "npm:^4.0.0"
     isemail: "npm:^3.2.0"
     ms: "npm:^2.1.3"
-    needle: "npm:^3.1.0"
-  checksum: 10c0/f1e7c67dbd792232a6fa5e8ab84f6b36344fab9559d59b42c3f2a05adb161740f5fba839836f32bad5c657f9e5c087070e3afc709c5dd1d2a37e45d60304c45f
+    needle: "npm:^3.3.1"
+    proxy-agent: "npm:^6.4.0"
+  checksum: 10c0/2eeec47c9e2efe80b7164a5b2c15e127853baedaf886b73153ddf1b628334193aaf8d40143e0fa7eb213057ebd3af942d60dd5f0356dd5d5aa7d4c0abc7b5cfb
   languageName: node
   linkType: hard
 
@@ -16420,30 +16428,31 @@ __metadata:
   linkType: hard
 
 "markdown-link-check@npm:^3.8.7":
-  version: 3.11.2
-  resolution: "markdown-link-check@npm:3.11.2"
+  version: 3.12.2
+  resolution: "markdown-link-check@npm:3.12.2"
   dependencies:
-    async: "npm:^3.2.4"
-    chalk: "npm:^5.2.0"
-    commander: "npm:^10.0.1"
-    link-check: "npm:^5.2.0"
+    async: "npm:^3.2.5"
+    chalk: "npm:^5.3.0"
+    commander: "npm:^12.1.0"
+    link-check: "npm:^5.3.0"
     lodash: "npm:^4.17.21"
-    markdown-link-extractor: "npm:^3.1.0"
-    needle: "npm:^3.2.0"
+    markdown-link-extractor: "npm:^4.0.2"
+    needle: "npm:^3.3.1"
     progress: "npm:^2.0.3"
+    proxy-agent: "npm:^6.4.0"
   bin:
     markdown-link-check: markdown-link-check
-  checksum: 10c0/5509b0b6b4cfaa665f844762f3b9bf081f817e13a065c99bc23ce71b16991f4029abb1fbbe04ed9d51856a3887373b0b097ddc9da7fea3b77f90a0130f11ce2b
+  checksum: 10c0/c1d4d2f69322d1ed98437db9f37807f982a3dc9aa1203841f40c71ac4e2a733b6c36311aa6f7f3a6fc34d7713e51c0f3704d55bf59fc607b30360ecfb5465d2d
   languageName: node
   linkType: hard
 
-"markdown-link-extractor@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "markdown-link-extractor@npm:3.1.0"
+"markdown-link-extractor@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "markdown-link-extractor@npm:4.0.2"
   dependencies:
     html-link-extractor: "npm:^1.0.5"
-    marked: "npm:^4.1.0"
-  checksum: 10c0/f0ee9d8cfaaa542565cc54c4a69dd370d11f5939570611aec8012dc352f15dda76083df748e46b028629536a19ddfd702919039d66bf47aa470b2adcea1d34a1
+    marked: "npm:^12.0.1"
+  checksum: 10c0/e9433dc3e1bdf26165b3daf644998fc84933efb6f74289b3f7637c4e36411a269f67992769032817c8821248ebf34ed97091fb91340b88fa1ffc50ad63163e16
   languageName: node
   linkType: hard
 
@@ -16463,7 +16472,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^4.0.12, marked@npm:^4.1.0":
+"marked@npm:^12.0.1":
+  version: 12.0.2
+  resolution: "marked@npm:12.0.2"
+  bin:
+    marked: bin/marked.js
+  checksum: 10c0/45ae2e1e3f06b30a5b5f64efc6cde9830c81d1d024fd7668772a3217f1bc0f326e66a6b8970482d9783edf1f581fecac7023a7fa160f2c14dbcc16e064b4eafb
+  languageName: node
+  linkType: hard
+
+"marked@npm:^4.0.12":
   version: 4.3.0
   resolution: "marked@npm:4.3.0"
   bin:
@@ -17290,16 +17308,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"needle@npm:^3.1.0, needle@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "needle@npm:3.2.0"
+"needle@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "needle@npm:3.3.1"
   dependencies:
-    debug: "npm:^3.2.6"
     iconv-lite: "npm:^0.6.3"
     sax: "npm:^1.2.4"
   bin:
     needle: bin/needle
-  checksum: 10c0/36f1ca901f40adcc838462d3c278accc4fdda93213c8835ef22761c35140d7b498c25669f16add72f5d65352dfa9717cc01568462658426604b647a5ade887b3
+  checksum: 10c0/233b9315d47b735867d03e7a018fb665ee6cacf3a83b991b19538019cf42b538a3e85ca745c840b4c5e9a0ffdca76472f941363bf7c166214ae8cbc650fd4d39
   languageName: node
   linkType: hard
 
@@ -18566,6 +18583,22 @@ __metadata:
     proxy-from-env: "npm:^1.1.0"
     socks-proxy-agent: "npm:^8.0.2"
   checksum: 10c0/72532eeae5f038873232905e17272eaecae5e5891b06f0f40cce139a84a4b19f482ab3ce586050fd2c64ca9171c7828ef183eb49c615f0faa359f1213063498a
+  languageName: node
+  linkType: hard
+
+"proxy-agent@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "proxy-agent@npm:6.4.0"
+  dependencies:
+    agent-base: "npm:^7.0.2"
+    debug: "npm:^4.3.4"
+    http-proxy-agent: "npm:^7.0.1"
+    https-proxy-agent: "npm:^7.0.3"
+    lru-cache: "npm:^7.14.1"
+    pac-proxy-agent: "npm:^7.0.1"
+    proxy-from-env: "npm:^1.1.0"
+    socks-proxy-agent: "npm:^8.0.2"
+  checksum: 10c0/0c5b85cacf67eec9d8add025a5e577b2c895672e4187079ec41b0ee2a6dacd90e69a837936cb3ac141dd92b05b50a325b9bfe86ab0dc3b904011aa3bcf406fc0
   languageName: node
   linkType: hard
 
