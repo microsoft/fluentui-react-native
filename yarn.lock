@@ -5054,8 +5054,8 @@ __metadata:
   linkType: hard
 
 "@fortawesome/react-native-fontawesome@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@fortawesome/react-native-fontawesome@npm:0.3.0"
+  version: 0.3.2
+  resolution: "@fortawesome/react-native-fontawesome@npm:0.3.2"
   dependencies:
     humps: "npm:^2.0.1"
     prop-types: "npm:^15.7.2"
@@ -5063,7 +5063,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": ~1 || ~6
     react-native: ">= 0.67"
     react-native-svg: ">= 11.x"
-  checksum: 10c0/ae55212fe5b8a2225d770d3ea0fe5c4a20c4722d361032ee835f3360e7637206d3c9ec93c3ecb8501543d4ace85cceb3135a9960e46dd5a49df6dcb346a9f0f6
+  checksum: 10c0/d256d90781c3813cb4b5ab409ff96dedc818eda1fb02f3645ea4a015fd59b98dc85e5f707e4d44b85020863ac40c4d4f6401e7a7b519618d67be716313e4d80d
   languageName: node
   linkType: hard
 
