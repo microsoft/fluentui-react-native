@@ -913,13 +913,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^10.3.5":
-  version: 10.17.60
-  resolution: "@types/node@npm:10.17.60"
-  checksum: 10c0/0742294912a6e79786cdee9ed77cff6ee8ff007b55d8e21170fc3e5994ad3a8101fea741898091876f8dc32b0a5ae3d64537b7176799e92da56346028d2cbcd2
-  languageName: node
-  linkType: hard
-
 "@types/normalize-package-data@npm:^2.4.0, @types/normalize-package-data@npm:^2.4.1":
   version: 2.4.4
   resolution: "@types/normalize-package-data@npm:2.4.4"
@@ -950,13 +943,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*":
-  version: 15.7.5
-  resolution: "@types/prop-types@npm:15.7.5"
-  checksum: 10c0/648aae41423821c61c83823ae36116c8d0f68258f8b609bdbc257752dcd616438d6343d554262aa9a7edaee5a19aca2e028a74fa2d0f40fffaf2816bc7056857
-  languageName: node
-  linkType: hard
-
 "@types/qs@npm:*":
   version: 6.9.7
   resolution: "@types/qs@npm:6.9.7"
@@ -971,30 +957,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.0":
-  version: 18.2.14
-  resolution: "@types/react@npm:18.2.14"
-  dependencies:
-    "@types/prop-types": "npm:*"
-    "@types/scheduler": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: 10c0/a728a90e242fb41c233729fa46885cc47aca7df2035ed803f83bf0b582dde81143d465ecbf04a056bc6404f0f746f219d7043245ebd99baf83a178bbbb856c76
-  languageName: node
-  linkType: hard
-
 "@types/readdir-glob@npm:*":
   version: 1.1.1
   resolution: "@types/readdir-glob@npm:1.1.1"
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/d96deb0a6a2b7012ee9f9bc1cab56e5c075d4808b705870798d5d637977a2ad922f9c2d851e983d98f3f8c4db0bbd911daa73c2b33ef9c3f29173de1658b90f1
-  languageName: node
-  linkType: hard
-
-"@types/scheduler@npm:*":
-  version: 0.16.2
-  resolution: "@types/scheduler@npm:0.16.2"
-  checksum: 10c0/89a3a922f03609b61c270d534226791edeedcb1b06f0225d5543ac17830254624ef9d8a97ad05418e4ce549dd545bddf1ff28cb90658ff10721ad14556ca68a5
   languageName: node
   linkType: hard
 
@@ -2568,13 +2536,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.2":
-  version: 3.1.1
-  resolution: "csstype@npm:3.1.1"
-  checksum: 10c0/7c8b8c5923049d84132581c13bae6e1faf999746fe3998ba5f3819a8e1cdc7512ace87b7d0a4a69f0f4b8ba11daf835d4f1390af23e09fc4f0baad52c084753a
-  languageName: node
-  linkType: hard
-
 "data-uri-to-buffer@npm:^4.0.0":
   version: 4.0.1
   resolution: "data-uri-to-buffer@npm:4.0.1"
@@ -3521,8 +3482,6 @@ __metadata:
   resolution: "furn-tester-deps@workspace:."
   dependencies:
     "@types/jasmine": "npm:5.1.4"
-    "@types/node": "npm:^10.3.5"
-    "@types/react": "npm:^18.2.0"
     "@wdio/appium-service": "npm:8.29.1"
     "@wdio/cli": "npm:8.35.1"
     "@wdio/globals": "npm:8.35.1"
