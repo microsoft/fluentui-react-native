@@ -299,7 +299,7 @@ export abstract class BasePage {
     const scrollDownKeys = [Keys.PAGE_DOWN];
     await browser.waitUntil(
       async () => {
-        await FocusButton.addValue(scrollDownKeys);
+        await FocusButton.addValue(scrollDownKeys.join());
         scrollDownKeys.push(Keys.PAGE_DOWN);
         return await ComponentToScrollTo.isDisplayed();
       },
@@ -313,7 +313,7 @@ export abstract class BasePage {
     );
 
     // We have this extra scroll here to ensure the whole component is visible.
-    await FocusButton.addValue(scrollDownKeys);
+    await FocusButton.addValue(scrollDownKeys.join());
   }
 
   /* Scrolls to the specified or primary UI test element until it is displayed. */

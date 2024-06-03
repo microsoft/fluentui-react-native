@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Wed, 15 May 2024 19:42:10 GMT and should not be manually modified.
+This log was last generated on Tue, 21 May 2024 20:54:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.39.0
+
+Tue, 21 May 2024 20:54:22 GMT
+
+### Minor changes
+
+- Wdio to v8 (safreibe@microsoft.com)
 
 ## 1.38.0
 
