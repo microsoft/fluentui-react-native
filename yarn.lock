@@ -2641,6 +2641,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/android-theme@workspace:packages/theming/android-theme"
   dependencies:
+    "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
@@ -2673,6 +2674,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme"
   dependencies:
+    "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design-tokens-ios": "npm:^0.53.0"
     "@fluentui-react-native/design-tokens-macos": "npm:^0.53.0"

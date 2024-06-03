@@ -1,4 +1,4 @@
-import type { Theme } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/theme-types';
 
 
 export const defaultButtonFontTokens = (t: Theme) =>

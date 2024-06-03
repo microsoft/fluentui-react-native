@@ -1,5 +1,5 @@
-import type { Theme } from '@fluentui-react-native/framework';
 import { globalTokensWin32 as globalTokens } from '@fluentui-react-native/theme-tokens';
+import type { Theme } from '@fluentui-react-native/theme-types';
 import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
 export const defaultCompoundButtonTokens = (theme: Theme) => ({

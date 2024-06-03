@@ -1,4 +1,4 @@
-import type { Theme } from '@fluentui-react-native/framework';
+import type { Theme } from '@fluentui-react-native/theme-types';
 
 export const defaultFABColorTokens = (t: Theme) => ({
   // Default coloring same as 'primary' or 'accent'

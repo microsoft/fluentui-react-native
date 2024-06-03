@@ -4,9 +4,9 @@ import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { getIsHighContrast, setIsHighContrast } from '../appleHighContrast.macos';
 import { defaultButtonColorTokens } from '../components/Button/ButtonColorTokens';
 import { defaultButtonFontTokens } from '../components/Button/ButtonFontTokens';
-import { defaultFABColorTokens } from '../components/Button/FABColorTokens';
-import { defaultFABTokens } from '../components/Button/FABTokens';
 import { defaultButtonTokens } from '../components/Button/ButtonTokens';
+import { defaultFABColorTokens } from '../components/Button/FABColorTokens.ios';
+import { defaultFABTokens } from '../components/Button/FABTokens.ios';
 import { createAppleTheme } from '../createAppleTheme';
 import { createMacOSColorAliasTokens, createMacOSShadowAliasTokens } from '../createMacOSAliasTokens';
 

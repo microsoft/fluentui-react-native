@@ -1,6 +1,6 @@
 
-import type { Theme } from '@fluentui-react-native/framework';
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
+import type { Theme } from '@fluentui-react-native/theme-types';
 
 import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { defaultButtonFontTokens } from './ButtonFontTokens';

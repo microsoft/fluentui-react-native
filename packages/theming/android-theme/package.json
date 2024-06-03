@@ -39,6 +39,7 @@
     "@fluentui-react-native/theming-utils": "workspace:*"
   },
   "devDependencies": {
+    "@fluentui-react-native/button": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.73.0",

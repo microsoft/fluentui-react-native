@@ -8,6 +8,8 @@ import { defaultButtonTokens } from './ButtonTokens';
 import { defaultCompoundButtonColorTokens } from './CompoundButtonColorTokens';
 import { defaultCompoundButtonFontTokens } from './CompoundButtonFontTokens';
 import { defaultCompoundButtonTokens } from './CompoundButtonTokens';
+import { defaultFABColorTokens } from './FABColorTokens.ios';
+import { defaultFABTokens } from './FABTokens.ios';
 import { defaultToggleButtonColorTokens } from './ToggleButtonColorTokens';
 
 export const defaultButtonTheme = (theme: Theme) =>
@@ -21,6 +23,8 @@ export const defaultButtonTheme = (theme: Theme) =>
       defaultCompoundButtonColorTokens(theme),
       defaultCompoundButtonFontTokens(theme),
       defaultCompoundButtonTokens(theme)),
+
+    FAB: immutableMerge<object>(defaultFABTokens(theme), defaultFABColorTokens(theme)),
 
     ToggleButton:
     immutableMerge<object>(

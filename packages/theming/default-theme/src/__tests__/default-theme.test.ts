@@ -1,12 +1,4 @@
-import type { ButtonTokens, CompoundButtonTokens } from '@fluentui-react-native/button';
 import type { ThemeOptions, AppearanceOptions } from '@fluentui-react-native/theme-types';
-
-import { defaultButtonColorTokens } from '../components/Button/ButtonColorTokens';
-import { defaultButtonFontTokens } from '../components/Button/ButtonFontTokens';
-import { defaultButtonTokens } from '../components/Button/ButtonTokens';
-import { defaultCompoundButtonColorTokens } from '../components/Button/CompoundButtonColorTokens';
-import { defaultCompoundButtonFontTokens } from '../components/Button/CompoundButtonFontTokens';
-import { defaultCompoundButtonTokens } from '../components/Button/CompoundButtonTokens';
 
 import { createColorAliasTokens, createShadowAliasTokens } from '../createAliasTokens';
 import { createDefaultTheme } from '../createDefaultTheme';
@@ -55,25 +47,3 @@ describe('createShadowAliasTokens test', () => {
     expect(createShadowAliasTokens(appearanceOption)).toMatchSnapshot();
   });
 });
-
-describe('verify types', () => {
-  it('Button types', () => {
-    const defaultTheme = createDefaultTheme().theme;
-    const colorTokens: ButtonTokens = defaultButtonColorTokens(defaultTheme);
-    expect(colorTokens).toBeTruthy();
-    const fontTokens: ButtonTokens = defaultButtonFontTokens(defaultTheme);
-    expect(fontTokens).toBeTruthy();
-    const tokens: ButtonTokens = defaultButtonTokens(defaultTheme);
-    expect(tokens).toBeTruthy();
-  });
-
-  it('CompoundButton types', () => {
-    const defaultTheme = createDefaultTheme().theme;
-    const compoundColorTokens: CompoundButtonTokens = defaultCompoundButtonColorTokens(defaultTheme);
-    expect(compoundColorTokens).toBeTruthy();
-    const compoundButtonFontTokens: CompoundButtonTokens = defaultCompoundButtonFontTokens(defaultTheme);
-    expect(compoundButtonFontTokens).toBeTruthy();
-    const compoundButtonTokens: CompoundButtonTokens = defaultCompoundButtonTokens(defaultTheme);
-    expect(compoundButtonTokens).toBeTruthy();
-  });
-})

@@ -44,6 +44,7 @@
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
+    "@fluentui-react-native/button": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.73.0",

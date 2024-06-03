@@ -1,5 +1,5 @@
-import type { Theme } from '@fluentui-react-native/framework';
-import {default as globalTokens} from '@fluentui-react-native/theme-tokens/lib/tokens-global.ios';
+import {globalTokensIOS as globalTokens} from '@fluentui-react-native/theme-tokens';
+import type { Theme } from '@fluentui-react-native/theme-types';
 
 export const defaultFABTokens = (t: Theme) =>
   ({

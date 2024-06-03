@@ -1,5 +1,5 @@
-import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
 import { globalTokensWin32 as globalTokens } from '@fluentui-react-native/theme-tokens';
+import type { FontWeightValue, Theme } from '@fluentui-react-native/theme-types';
 
 export const defaultCompoundButtonFontTokens = (t: Theme) => ({
   medium: {
