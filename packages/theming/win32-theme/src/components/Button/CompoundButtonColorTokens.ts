@@ -46,7 +46,7 @@ export const defaultCompoundButtonColorTokens = (t: Theme) => {
         secondaryContentColor: t.colors.neutralForeground2Pressed,
       },
     },
-  }
+  };
 };
 
 const highContrastColors = {

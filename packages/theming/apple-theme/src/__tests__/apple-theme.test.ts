@@ -87,4 +87,4 @@ describe('verify types', () => {
     const fabTokens: FABTokens = defaultFABTokens(officeTheme);
     expect(fabTokens).toBeTruthy();
   });
-})
+});

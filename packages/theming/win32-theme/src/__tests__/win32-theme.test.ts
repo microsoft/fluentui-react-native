@@ -120,4 +120,4 @@ describe('verify types', () => {
     const compoundButtonTokens: CompoundButtonTokens = defaultCompoundButtonTokens(officeTheme);
     expect(compoundButtonTokens).toBeTruthy();
   });
-})
+});

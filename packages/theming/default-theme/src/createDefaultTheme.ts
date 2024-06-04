@@ -9,21 +9,25 @@ import { defaultButtonTheme } from './components/Button/ButtonTheme';
 import { defaultFluentDarkTheme, defaultFluentHighConstrastTheme, defaultFluentTheme } from './defaultTheme';
 
 export function createDefaultTheme(options: ThemeOptions = {}): ThemeReference {
-  const themeRef = new ThemeReference<Theme, PartialTheme>({} as Theme, () => {
-    const current = getCurrentAppearance(options.appearance, options.defaultAppearance || 'light');
-    switch (current) {
-      case 'light':
-        return defaultFluentTheme;
-      case 'dark':
-        return defaultFluentDarkTheme;
-      case 'darkElevated':
-        return defaultFluentDarkTheme;
-      case 'highContrast':
-        return defaultFluentHighConstrastTheme;
-      default:
-        assertNever(current);
-    }
-  }, defaultButtonTheme);
+  const themeRef = new ThemeReference<Theme, PartialTheme>(
+    {} as Theme,
+    () => {
+      const current = getCurrentAppearance(options.appearance, options.defaultAppearance || 'light');
+      switch (current) {
+        case 'light':
+          return defaultFluentTheme;
+        case 'dark':
+          return defaultFluentDarkTheme;
+        case 'darkElevated':
+          return defaultFluentDarkTheme;
+        case 'highContrast':
+          return defaultFluentHighConstrastTheme;
+        default:
+          assertNever(current);
+      }
+    },
+    defaultButtonTheme,
+  );
 
   if (Appearance && options.appearance === 'dynamic') {
     Appearance.addChangeListener(() => {

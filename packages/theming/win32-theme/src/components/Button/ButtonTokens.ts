@@ -6,8 +6,7 @@ import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
 type ButtonSize = 'small';
 
-export const defaultButtonTokens = (theme: Theme) =>
-({
+export const defaultButtonTokens = (theme: Theme) => ({
   size: 'small' as ButtonSize,
   borderWidth: globalTokens.stroke.width10,
   borderInnerWidth: globalTokens.stroke.width10,
@@ -179,5 +178,5 @@ export const defaultButtonTokens = (theme: Theme) =>
       default:
         return null;
     }
-  }
+  },
 });

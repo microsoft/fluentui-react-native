@@ -1,9 +1,8 @@
 import { globalTokensWin32 as globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { Theme } from '@fluentui-react-native/theme-types';
-import type { FontWeight } from '@fluentui-react-native/theme-types'
+import type { FontWeight } from '@fluentui-react-native/theme-types';
 
-export const defaultButtonFontTokens = (t: Theme) =>
-({
+export const defaultButtonFontTokens = (t: Theme) => ({
   medium: {
     hasContent: {
       fontFamily: t.typography.families.secondary,

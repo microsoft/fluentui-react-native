@@ -7,9 +7,7 @@ import type { CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps
 import { buttonStates, contentStyling } from '../Button.styling';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
-  tokens: [
-    compoundButtonName,
-  ],
+  tokens: [compoundButtonName],
   states: buttonStates,
   slotProps: {
     root: buildProps(

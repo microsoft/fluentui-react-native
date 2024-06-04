@@ -3,8 +3,7 @@ import type { DimensionValue } from 'react-native';
 import { globalTokensAndroid as globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { Theme } from '@fluentui-react-native/theme-types';
 
-export const defaultButtonTokens = (_t: Theme) =>
-({
+export const defaultButtonTokens = (_t: Theme) => ({
   focused: {
     borderWidth: globalTokens.stroke.width20,
     borderInnerWidth: globalTokens.stroke.width10,
@@ -92,5 +91,5 @@ export const defaultButtonTokens = (_t: Theme) =>
       default:
         return 'primary';
     }
-  }
+  },
 });

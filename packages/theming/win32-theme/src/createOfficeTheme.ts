@@ -2,7 +2,7 @@ import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { ThemeReference } from '@fluentui-react-native/theme';
 import type { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
 
-import {defaultButtonTheme} from './components/Button/ButtonTheme';
+import { defaultButtonTheme } from './components/Button/ButtonTheme';
 import { createAliasesFromPalette } from './createAliasesFromPalette';
 import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';
 import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from './createOfficeAliasTokens';

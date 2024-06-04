@@ -10,7 +10,7 @@ import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import type {Theme} from '@fluentui-react-native/theme-types';
+import type { Theme } from '@fluentui-react-native/theme-types';
 
 import { stylingSettings } from './Button.styling';
 import { buttonName } from './Button.types';
@@ -28,7 +28,6 @@ import { useButton } from './useButton';
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
 export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps, theme: Theme): boolean => {
-
   const size = userProps['size'] ?? (theme?.components?.['Button'] as ButtonTokens)?.size ?? 'medium';
   const getPlatformSpecificAppearance = (theme?.components?.['Button'] as ButtonTokens)?.getPlatformSpecificAppearance;
   const appearance = getPlatformSpecificAppearance ? getPlatformSpecificAppearance(userProps['appearance']) : null;

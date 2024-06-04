@@ -55,4 +55,4 @@ describe('verify types', () => {
     const fabColorTokens: FABTokens = defaultFABColorTokens(officeTheme);
     expect(fabColorTokens).toBeTruthy();
   });
-})
+});

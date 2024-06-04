@@ -8,11 +8,15 @@ import { getBaseAppleThemeIOS } from './appleTheme.ios';
 import { defaultButtonTheme } from './components/Button/ButtonTheme';
 
 export function createAppleTheme(): ThemeReference {
-  const appleThemeReference = new ThemeReference<Theme, PartialTheme>({} as Theme, () => {
-    const isLightMode = Appearance.getColorScheme() === 'light';
-    const isElevated = NativeAppearanceAdditions.userInterfaceLevel() === 'elevated';
-    return getBaseAppleThemeIOS(isLightMode, isElevated);
-  }, defaultButtonTheme);
+  const appleThemeReference = new ThemeReference<Theme, PartialTheme>(
+    {} as Theme,
+    () => {
+      const isLightMode = Appearance.getColorScheme() === 'light';
+      const isElevated = NativeAppearanceAdditions.userInterfaceLevel() === 'elevated';
+      return getBaseAppleThemeIOS(isLightMode, isElevated);
+    },
+    defaultButtonTheme,
+  );
 
   Appearance.addChangeListener(() => {
     appleThemeReference.invalidate();

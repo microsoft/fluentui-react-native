@@ -3,8 +3,7 @@ import type { DimensionValue } from 'react-native';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { Theme } from '@fluentui-react-native/theme-types';
 
-export const defaultButtonTokens = (_t: Theme) =>
-({
+export const defaultButtonTokens = (_t: Theme) => ({
   block: {
     width: '100%' as DimensionValue,
   },
@@ -97,5 +96,5 @@ export const defaultButtonTokens = (_t: Theme) =>
       default:
         return null;
     }
-  }
+  },
 });
