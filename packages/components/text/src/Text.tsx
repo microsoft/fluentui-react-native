@@ -23,6 +23,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     align = undefined,
     block,
     color,
+    componentRef,
     font,
     italic,
     numberOfLines,
@@ -146,7 +147,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     delete (mergedProps.style as TextTokens).maximumFontSize;
 
     return (
-      <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
+      <RNText ref={componentRef} ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
         {children}
       </RNText>
     );

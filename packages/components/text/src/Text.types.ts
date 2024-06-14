@@ -1,4 +1,4 @@
-import type { ColorValue, TextStyle } from 'react-native';
+import type { ColorValue, Text, TextStyle } from 'react-native';
 
 import type { ITextProps } from '@fluentui-react-native/adapters';
 import type { FontTokens, FontVariantTokens, IForegroundColorTokens } from '@fluentui-react-native/framework';
@@ -53,6 +53,11 @@ export type TextProps<TBase = ITextProps> = TBase &
      * @defaultValue false
      */
     block?: boolean;
+
+    /**
+     * A RefObject to the Text object. Use this to access the public methods and properties of the component.
+     */
+    componentRef?: React.RefObject<Text>;
 
     /**
      * Applies the font family to the content.
