@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Thu, 11 Apr 2024 18:08:39 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jun 2024 06:59:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.0
+
+Fri, 14 Jun 2024 06:59:07 GMT
+
+### Minor changes
+
+- Add componentRef to TextV1 (patboyd@microsoft.com)
 
 ## 0.23.0
 
