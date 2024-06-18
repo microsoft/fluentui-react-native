@@ -10,7 +10,7 @@ jobs:
   - job: JSPR
     displayName: JS PR
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: "ubuntu-latest"
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -22,26 +22,26 @@ jobs:
 
       - script: |
           yarn checkchange
-        displayName: 'check change'
+        displayName: "check change"
 
       - script: |
           yarn prettier
-        displayName: 'check prettier'
+        displayName: "check prettier"
 
       - script: |
           yarn buildci
-        displayName: 'yarn buildci [test]'
+        displayName: "yarn buildci [test]"
 
       - script: |
           yarn check-for-changed-files
-        displayName: 'verify API and Ensure Changed Files'
+        displayName: "verify API and Ensure Changed Files"
 
   - job: AndroidPR
     displayName: Android PR
     pool:
-      vmImage: 'macos-11'
+      vmImage: "macos-13"
     variables:
-      platform: 'android'
+      platform: "android"
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -56,7 +56,7 @@ jobs:
       - script: |
           yarn bundle:$(platform)
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle $(platform)'
+        displayName: "yarn bundle $(platform)"
 
       # sets-up specifics for android dependency like NDK & emulator
       - template: templates/android-dep-setup.yml
@@ -69,7 +69,7 @@ jobs:
     pool:
       vmImage: $(VmImageApple)
     variables:
-      platform: 'macos'
+      platform: "macos"
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -85,13 +85,13 @@ jobs:
           set -eox pipefail
           yarn bundle:macos
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle macos'
+        displayName: "yarn bundle macos"
 
       - bash: |
           set -eox pipefail
           pod install --verbose
         workingDirectory: apps/fluent-tester/macos
-        displayName: 'pod install'
+        displayName: "pod install"
 
       - task: CmdLine@2
         displayName: Build macOS
@@ -123,13 +123,13 @@ jobs:
           set -eox pipefail
           yarn bundle:ios
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle ios'
+        displayName: "yarn bundle ios"
 
       - bash: |
           set -eox pipefail
           pod install --verbose
         workingDirectory: apps/fluent-tester/ios
-        displayName: 'pod install'
+        displayName: "pod install"
 
       - task: CmdLine@2
         displayName: Build iOS
@@ -170,7 +170,7 @@ jobs:
   - job: Win32PR
     displayName: Win32 PR
     pool:
-      vmImage: 'windows-2019'
+      vmImage: "windows-2019"
     timeoutInMinutes: 60
     cancelTimeoutInMinutes: 5
 
@@ -199,4 +199,4 @@ jobs:
 
       - script: |
           find . -name \*.md -not -name CHANGELOG.md -not -path '*/\node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c `pwd`/.ado/markdown-link-check-config.json
-        displayName: 'testing links'
+        displayName: "testing links"
