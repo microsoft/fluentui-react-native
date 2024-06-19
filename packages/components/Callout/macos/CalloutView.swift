@@ -6,12 +6,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
 		didSet {
-			let targetView = bridge?.uiManager.view(forReactTag: target)
-			if (targetView == nil && target != nil) {
-				preconditionFailure("Invalid target")
-			}
-			anchorView = targetView
-			updateCalloutFrameToAnchor()
+            updateCalloutFrameToAnchor()
 		}
 	}
 
@@ -172,14 +167,164 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		isCalloutWindowShown = false
 	}
 
+    private func getLengthOfTextShadowNode(shadowView: RCTShadowView) -> Int {
+        if let rawTextView = shadowView as? RCTRawTextShadowView {
+            if let rawTextLength = rawTextView.text?.count {
+                return rawTextLength
+            }
+
+            return 0
+        }
+
+        var sumTextLength = 0
+        if let baseTextView = shadowView as? RCTBaseTextShadowView {
+            baseTextView.reactSubviews().forEach { subview in
+                sumTextLength += getLengthOfTextShadowNode(shadowView: subview)
+            }
+        }
+
+        return sumTextLength
+    }
+
+    private func getStartGlyphRangeForTag(tag: NSNumber, subviews: [RCTShadowView], startGlyphRange: inout Int) -> Bool {
+        var foundSubviewTag = false
+        subviews.forEach { subview in
+            if (foundSubviewTag || subview.reactTag == tag) {
+                foundSubviewTag = true
+                return
+            }
+
+            if let textSubview = subview as? RCTRawTextShadowView {
+                if let rawStringLength = textSubview.text?.count {
+                    startGlyphRange += rawStringLength
+                }
+            } else {
+                foundSubviewTag = getStartGlyphRangeForTag(tag: tag, subviews: subview.reactSubviews(), startGlyphRange: &startGlyphRange)
+            }
+        }
+
+        return foundSubviewTag
+    }
+
+    private func getBoundsForSubShadowOfLeafShadow(subshadow: RCTShadowView, leafshadow: RCTShadowView) -> NSRect? {
+        guard leafshadow.isYogaLeafNode() && subshadow.viewIsDescendant(of: leafshadow) else {
+            preconditionFailure("leafshadow is not a leaf node or subshadow not a descendant of the leafshadow")
+        }
+
+        guard let uiManager = bridge?.uiManager else {
+            return nil
+        }
+
+        // Do not proceed if the leaf shadow is not a root text shadow view, which we're specializing for here
+        guard let textShadowView = leafshadow as? RCTTextShadowView else {
+            return nil
+        }
+
+        var startGlyphRange = 0
+        if (!getStartGlyphRangeForTag(tag: subshadow.reactTag, subviews: textShadowView.reactSubviews(), startGlyphRange: &startGlyphRange)) {
+            // Did not find our reactTag
+            return nil
+        }
+
+
+        // Get the NSView corresponding to the yoga leaf view
+        guard let leafview = uiManager.view(forReactTag: leafshadow.reactTag) else {
+            return nil
+        }
+
+        // This concern is currently specialized to NSTextViews; in theory it could be expanded to other
+        // types of shadow nodes that are subviews of yoga leaf nodes e.g. react-native-svg
+        guard let textView = leafview as? RCTTextView else {
+            return nil
+        }
+
+        return textView.getRectForGlyphRange(NSRange(location: startGlyphRange, length: getLengthOfTextShadowNode(shadowView: subshadow)))
+    }
+
+    private func getBoundsForShadowView(shadow: RCTShadowView?) -> NSRect? {
+        guard let uiManager = bridge?.uiManager else {
+            return nil
+        }
+
+        guard let shadowView = shadow else {
+            return nil
+        }
+
+        var shadowParentIter = shadow
+        while let shadowViewIter = shadowParentIter {
+            if (shadowViewIter.isYogaLeafNode()) {
+                return getBoundsForSubShadowOfLeafShadow(subshadow: shadowView, leafshadow: shadowViewIter)
+            }
+            shadowParentIter = shadowViewIter.superview
+        }
+
+        return nil
+    }
+
+    private func getLeafViewForShadowView(shadowView: RCTShadowView?) -> NSView? {
+        guard let reactBridge = bridge else {
+            return nil
+        }
+        var shadowParentIter = shadowView
+        while let shadowViewIter = shadowParentIter {
+            if (shadowViewIter.isYogaLeafNode()) {
+                return reactBridge.uiManager.view(forReactTag: shadowViewIter.reactTag)
+            }
+            shadowParentIter = shadowViewIter.superview
+        }
+
+        return nil
+    }
+
+    // Return the anchor rect for the target prop if available
+    private func getAnchorRectForTarget() -> NSRect? {
+        guard let reactTag = target else {
+            return nil
+        }
+
+        guard let reactBridge = bridge else {
+            return nil
+        }
+
+        let zeroRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+        let targetView = reactBridge.uiManager.view(forReactTag: reactTag)
+
+        // If the targetView is backed by an NSView and has a representative rect, return it as the anchor rect for the target
+        if let targetViewBounds = targetView?.bounds, !targetViewBounds.equalTo(zeroRect) {
+            return calculateAnchorViewScreenRect(anchorView: targetView, anchorBounds: targetViewBounds)
+        }
+
+        // If the targetView could not be found or was not a representative rect, it may be a child of a yoga leaf node e.g. virtualized text
+        guard let shadowTargetView = reactBridge.uiManager.shadowView(forReactTag: target) else {
+            return nil
+        }
+
+        if let targetViewBounds = getBoundsForShadowView(shadow: shadowTargetView), !targetViewBounds.equalTo(zeroRect) {
+            return calculateAnchorViewScreenRect(anchorView: getLeafViewForShadowView(shadowView: shadowTargetView), anchorBounds: targetViewBounds)
+        }
+
+        return nil
+    }
+
+    private func getAnchorScreenRect() -> NSRect? {
+        // First attempt to resolve a provided target property
+        if let validTarget = target {
+            return getAnchorRectForTarget();
+        } else {
+            return calculateAnchorRectScreenRect();
+        }
+    }
+
 	/// Sets the frame of the Callout Window (in screen coordinates to be off of the Anchor on the preferred edge
 	private func updateCalloutFrameToAnchor() {
 		guard window != nil else {
 			return
 		}
 
-		// Prefer anchorView over anchorRect if available
-		let anchorScreenRect = anchorView != nil ? calculateAnchorViewScreenRect() : calculateAnchorRectScreenRect()
+        guard let anchorScreenRect = getAnchorScreenRect() else {
+            return
+        }
+
 		let calloutScreenRect = bestCalloutRect(relativeTo: anchorScreenRect)
 
 		// Because we immediately update the rect as props come in, there's a possibility that we have neither
@@ -221,7 +366,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	/// Calculates the NSRect of the anchorView in the coordinate space of the current screen
-	private func calculateAnchorViewScreenRect() -> NSRect {
+    private func calculateAnchorViewScreenRect(anchorView: NSView?, anchorBounds: NSRect) -> NSRect {
 		guard let anchorView = anchorView else {
 			preconditionFailure("No anchor view provided to position the Callout")
 		}
@@ -230,7 +375,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			preconditionFailure("No window found")
 		}
 
-		let anchorBoundsInWindow = anchorView.convert(anchorView.bounds, to: nil)
+		let anchorBoundsInWindow = anchorView.convert(anchorBounds, to: nil)
 		let anchorFrameInScreenCoordinates = window.convertToScreen(anchorBoundsInWindow)
 
 		return anchorFrameInScreenCoordinates
@@ -363,7 +508,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: Private variables
 
 	/// The view the Callout is presented from.
-	private var anchorView: NSView?
+	private var anchorReactTag: NSNumber?
 
 	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
 	/// view hierarchy, ensuring our React Views are not placed in the main window.
