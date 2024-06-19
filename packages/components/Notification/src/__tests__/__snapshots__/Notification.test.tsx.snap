@@ -150,6 +150,7 @@ exports[`Notification component tests Notification default 1`] = `
           "marginStart": 16,
           "minHeight": 40,
           "minWidth": 0,
+          "overflow": "hidden",
           "padding": 0,
           "paddingHorizontal": 0,
         }
