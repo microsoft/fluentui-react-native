@@ -49,6 +49,7 @@ exports[`Button component tests Button circular 1`] = `
       "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 12,
       "width": undefined,
     }
@@ -125,6 +126,7 @@ exports[`Button component tests Button composed 1`] = `
       "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 12,
       "width": undefined,
     }
@@ -204,6 +206,7 @@ exports[`Button component tests Button customized 1`] = `
       "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 12,
       "width": undefined,
     }
@@ -280,6 +283,7 @@ exports[`Button component tests Button default 1`] = `
       "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 12,
       "width": undefined,
     }
@@ -356,6 +360,7 @@ exports[`Button component tests Button disabled 1`] = `
       "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 12,
       "width": undefined,
     }
@@ -433,6 +438,7 @@ exports[`Button component tests Button large 1`] = `
       "justifyContent": "center",
       "minHeight": 52,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 16,
       "width": undefined,
     }
@@ -510,6 +516,7 @@ exports[`Button component tests Button primary 1`] = `
       "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 12,
       "width": undefined,
     }
@@ -587,6 +594,7 @@ exports[`Button component tests Button small 1`] = `
       "justifyContent": "center",
       "minHeight": 28,
       "minWidth": 64,
+      "overflow": "hidden",
       "paddingHorizontal": 6,
       "width": undefined,
     }
@@ -664,6 +672,7 @@ exports[`Button component tests Button square 1`] = `
       "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 12,
       "width": undefined,
     }
@@ -741,6 +750,7 @@ exports[`Button component tests Button subtle 1`] = `
       "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 96,
+      "overflow": "hidden",
       "paddingHorizontal": 12,
       "width": undefined,
     }

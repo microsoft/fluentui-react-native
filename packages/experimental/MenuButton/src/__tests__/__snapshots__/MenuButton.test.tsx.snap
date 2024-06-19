@@ -64,6 +64,7 @@ exports[`ContextualMenu default 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
