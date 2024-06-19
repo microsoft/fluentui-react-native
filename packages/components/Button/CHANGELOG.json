@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 19 Jun 2024 18:09:30 GMT",
+      "version": "0.37.3",
+      "tag": "@fluentui-react-native/button_v0.37.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "8a695ac7cdbbd4b9010feb23577825be22d86965",
+            "comment": "fix(Apple): Render vector borders on Button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:37 GMT",
       "version": "0.37.1",
       "tag": "@fluentui-react-native/button_v0.37.1",

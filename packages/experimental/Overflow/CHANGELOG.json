@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/overflow",
   "entries": [
     {
+      "date": "Wed, 19 Jun 2024 18:09:31 GMT",
+      "version": "0.3.4",
+      "tag": "@fluentui-react-native/overflow_v0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/overflow",
+            "commit": "8a695ac7cdbbd4b9010feb23577825be22d86965",
+            "comment": "fix(Apple): Render vector borders on Button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:38 GMT",
       "version": "0.3.0",
       "tag": "@fluentui-react-native/overflow_v0.3.0",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 12 Apr 2024 21:02:38 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Jun 2024 18:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.14.4
+
+Wed, 19 Jun 2024 18:09:31 GMT
+
+### Patches
+
+- fix(Apple): Render vector borders on Button (sanajmi@microsoft.com)
 
 ## 1.14.1
 

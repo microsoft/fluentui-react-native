@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 19 Jun 2024 18:09:31 GMT",
+      "version": "1.14.4",
+      "tag": "@fluentui-react-native/menu_v1.14.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "8a695ac7cdbbd4b9010feb23577825be22d86965",
+            "comment": "fix(Apple): Render vector borders on Button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:38 GMT",
       "version": "1.14.1",
       "tag": "@fluentui-react-native/menu_v1.14.1",

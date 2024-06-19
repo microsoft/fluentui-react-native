@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/overflow
 
-This log was last generated on Thu, 11 Apr 2024 18:08:38 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Jun 2024 18:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.4
+
+Wed, 19 Jun 2024 18:09:31 GMT
+
+### Patches
+
+- fix(Apple): Render vector borders on Button (sanajmi@microsoft.com)
 
 ## 0.3.0
 

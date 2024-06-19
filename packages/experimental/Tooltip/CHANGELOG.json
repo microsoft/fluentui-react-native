@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tooltip",
   "entries": [
     {
+      "date": "Wed, 19 Jun 2024 18:09:31 GMT",
+      "version": "0.4.2",
+      "tag": "@fluentui-react-native/tooltip_v0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "8a695ac7cdbbd4b9010feb23577825be22d86965",
+            "comment": "fix(Apple): Render vector borders on Button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 08 May 2024 16:21:26 GMT",
       "version": "0.4.0",
       "tag": "@fluentui-react-native/tooltip_v0.4.0",

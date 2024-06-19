@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 12 Apr 2024 21:02:37 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Jun 2024 18:09:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.37.3
+
+Wed, 19 Jun 2024 18:09:30 GMT
+
+### Patches
+
+- fix(Apple): Render vector borders on Button (sanajmi@microsoft.com)
 
 ## 0.37.1
 
