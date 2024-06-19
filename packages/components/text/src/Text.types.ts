@@ -1,4 +1,4 @@
-import type { ColorValue, TextStyle } from 'react-native';
+import type { ColorValue, Text, TextStyle } from 'react-native';
 
 import type { ITextProps } from '@fluentui-react-native/adapters';
 import type { FontTokens, FontVariantTokens, IForegroundColorTokens } from '@fluentui-react-native/framework';
@@ -12,12 +12,11 @@ export const textName = 'Text';
 export type TextTokens = Omit<FontTokens, 'fontFamily'> &
   IForegroundColorTokens &
   Omit<TextStyle, 'fontSize' | 'fontWeight' | 'color'> & {
-    // GH #2268: Remove these once RN Core properly supports Dynamic Type scaling
     /**
      * (iOS only) The Dynamic Type ramp that a Text element should follow as the user changes their
      * preferred content size.
      */
-    dynamicTypeRamp?: string;
+    dynamicTypeRamp?: TextProps['dynamicTypeRamp'];
 
     /**
      * (iOS only) The maximum font size that a Text element will grow to as the user changes their
@@ -54,6 +53,11 @@ export type TextProps<TBase = ITextProps> = TBase &
      * @defaultValue false
      */
     block?: boolean;
+
+    /**
+     * A RefObject to the Text object. Use this to access the public methods and properties of the component.
+     */
+    componentRef?: React.RefObject<Text>;
 
     /**
      * Applies the font family to the content.

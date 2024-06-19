@@ -75,7 +75,7 @@ const Icons: React.FunctionComponent = () => {
             // TODO: Causes TypeError: Network request failed on Android
             shouldShowDataUri ? <Icon svgSource={svgD20DataUriProps} width={100} height={100} color="#7a7" /> : null
           }
-          <Icon svgSource={svgUriProps} width={100} height={100} color="red" />
+          <Icon svgSource={svgUriProps} width={100} height={100} color="red" accessibilityLabel="Just another example" />
           {Platform.OS === ('win32' as any) && (
             <Icon svgSource={svgProps} width={100} height={100} color={PlatformColor('WindowText')} accessibilityLabel="Wheelchair" />
           )}
@@ -84,8 +84,8 @@ const Icons: React.FunctionComponent = () => {
       {showRasterIcons ? (
         <View>
           <Text>Raster icons</Text>
-          <Icon rasterImageSource={rasterRainbowSpectrumProps} width={100} height={100} color="green" />
-          <Icon rasterImageSource={rasterChessProps} width={100} height={100} color="blue" />
+          <Icon rasterImageSource={rasterRainbowSpectrumProps} width={100} height={100} color="green" accessibilityLabel="Atom" />
+          <Icon rasterImageSource={rasterChessProps} width={100} height={100} color="blue" accessibilityLabel="Chess pieces" />
         </View>
       ) : null}
     </View>
@@ -123,11 +123,11 @@ const e2eSections: TestSection[] = [
 
 export const IconTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description = 'Icons are styled images that can be fonts, svgs, or bitmaps';

@@ -119,11 +119,11 @@ const themeSections: TestSection[] = [
 
 export const ThemeTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    win32Status: 'Production',
+    uwpStatus: 'Beta',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description =

@@ -148,11 +148,11 @@ const mobileDividerSections: TestSection[] = [
 
 export const DividerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
-    macosStatus: 'Backlog',
-    androidStatus: 'Experimental',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description = 'A Divider is a visual separator that can contain content (text or an icon). Dividers can be horizontal or vertical';

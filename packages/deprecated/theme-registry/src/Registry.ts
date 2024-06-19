@@ -178,7 +178,8 @@ interface IEntries {
 }
 
 /**
- * @deprecated
+ * @deprecated Use ThemeReference from @fluentui-react-native/theme instead.
+ * See https://github.com/microsoft/fluentui-react-native/blob/main/docs/pages/Guides/UpdateThemeProvider.md for details
  */
 export function createThemeRegistry<T extends object, TPartial extends object>(
   initial: T,

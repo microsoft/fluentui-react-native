@@ -1,7 +1,8 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.37.27",
+  "version": "0.41.6",
   "description": "A react-native component library that implements the Fluent Design System.",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:microsoft/fluentui-react-native.git",
@@ -9,10 +10,6 @@
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
-  },
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
@@ -28,43 +25,59 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/button": "0.35.6",
-    "@fluentui-react-native/callout": "0.24.15",
-    "@fluentui-react-native/checkbox": "0.21.3",
-    "@fluentui-react-native/contextual-menu": "0.22.18",
-    "@fluentui-react-native/focus-trap-zone": "0.10.10",
-    "@fluentui-react-native/focus-zone": "0.12.10",
-    "@fluentui-react-native/interactive-hooks": "0.24.8",
-    "@fluentui-react-native/link": "0.20.3",
-    "@fluentui-react-native/menu-button": "0.11.24",
-    "@fluentui-react-native/persona": "0.14.8",
-    "@fluentui-react-native/persona-coin": "0.13.8",
-    "@fluentui-react-native/pressable": "0.10.9",
-    "@fluentui-react-native/radio-group": "0.19.3",
-    "@fluentui-react-native/separator": "0.16.6",
-    "@fluentui-react-native/tabs": "0.13.12",
-    "@fluentui-react-native/text": "0.21.10"
-  },
-  "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "react": "18.2.0",
-    "react-native": "^0.71.0"
+    "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/callout": "workspace:*",
+    "@fluentui-react-native/checkbox": "workspace:*",
+    "@fluentui-react-native/contextual-menu": "workspace:*",
+    "@fluentui-react-native/focus-trap-zone": "workspace:*",
+    "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/link": "workspace:*",
+    "@fluentui-react-native/menu-button": "workspace:*",
+    "@fluentui-react-native/persona": "workspace:*",
+    "@fluentui-react-native/persona-coin": "workspace:*",
+    "@fluentui-react-native/pressable": "workspace:*",
+    "@fluentui-react-native/radio-group": "workspace:*",
+    "@fluentui-react-native/separator": "workspace:*",
+    "@fluentui-react-native/tablist": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.71.0"
+    "react-native": "^0.73.0",
+    "react-native-macos": "^0.73.0",
+    "react-native-svg": "^15.0.0",
+    "react-native-windows": "^0.73.0"
   },
-  "author": "",
-  "license": "MIT",
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native/babel-preset": "^0.73.0",
+    "@react-native/metro-config": "^0.73.0",
+    "react": "18.2.0",
+    "react-native": "^0.73.0"
+  },
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
-      "presets": [
-        "microsoft/react-native"
-      ],
       "requirements": [
-        "react-native@0.71"
+        "react-native@0.73"
       ],
       "capabilities": [
         "core",
@@ -73,5 +86,6 @@
         "react"
       ]
     }
-  }
+  },
+  "sideEffects": false
 }

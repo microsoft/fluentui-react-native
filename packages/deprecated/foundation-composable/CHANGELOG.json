@@ -2,6 +2,72 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:40 GMT",
+      "version": "0.13.0",
+      "tag": "@uifabricshared/foundation-composable_v0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Mar 2024 15:54:07 GMT",
+      "version": "0.12.5",
+      "tag": "@uifabricshared/foundation-composable_v0.12.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "61f5a09163d57858fae85be8c9a0687fd7fad3df",
+            "comment": "Add missing react-native peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:08 GMT",
+      "version": "0.12.4",
+      "tag": "@uifabricshared/foundation-composable_v0.12.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Nov 2023 02:39:11 GMT",
+      "version": "0.12.3",
+      "tag": "@uifabricshared/foundation-composable_v0.12.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-composable",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.8.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-composable",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.14.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Aug 2023 22:02:15 GMT",
       "version": "0.12.2",
       "tag": "@uifabricshared/foundation-composable_v0.12.2",

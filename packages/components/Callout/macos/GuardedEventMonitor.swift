@@ -1,4 +1,4 @@
-
+import AppKit
 
 /// NSEvent localMonitors are an _old_ API that requires you to do some  memory management yourself.
 /// You _must_ call `removeMonitor`exactly once per monitor created from. This helper class enforces

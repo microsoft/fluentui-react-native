@@ -4,42 +4,35 @@ parameters:
     type: boolean
     default: false
 
-steps:
-  - checkout: self
-    persistCredentials: true
+jobs:
+  - job: Win32TestingDependenciesNuGetPublish
+    displayName: Win32 Automated Testing Dependencies NuGet Publish
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+    ${{ if not(parameters.skipNugetPublish) }}:
+      templateContext:
+        outputs:
+          - output: nuget
+            packagesToPush: '$(Build.ArtifactStagingDirectory)/WebDriverIO.Appium.Deps.nupkg'
+            packageParentPath: '$(Build.ArtifactStagingDirectory)'
+            publishVstsFeed: Office # Required when pushing to internal feed.
+            nuGetFeedType: internal # Change to external when publishing to external feed
+            publishPackageMetadata: true # Optional
+    steps:
+      - checkout: self
+        persistCredentials: true
 
-  - template: setup-repo.yml
+      - template: setup-repo.yml
 
-  - script: |
-      yarn
-    workingDirectory: tester_deps/
-    displayName: 'yarn install'
+      - script: |
+          yarn
+        workingDirectory: tester_deps/
+        displayName: 'yarn install'
 
-  # Pack the NuGet package
-  - task: CmdLine@1
-    displayName: 'Create NuGet package for tester_deps.'
-    inputs:
-      filename: nuget
-      arguments: 'pack Microsoft.FluentUI.WebDriverIO.Appium.Deps.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
-      workingFolder: 'tester_deps/nuget'
-
-  - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
-    displayName: 📒 Generate Manifest Tester Dependencies
-    inputs:
-      BuildDropPath: $(System.DefaultWorkingDirectory)
-
-  - task: PublishPipelineArtifact@1
-    displayName: 📒 Publish Tester Dependencies
-    inputs:
-      artifactName: SBom-TesterDeps-$(System.JobAttempt)
-      targetPath: $(System.DefaultWorkingDirectory)/_manifest
-
-  - task: ComponentGovernanceComponentDetection@0
-
-  # Push the NuGet package
-  - task: NuGetCommand@2
-    displayName: 'NuGet push WebDriverIO/Appium dependencies'
-    inputs:
-      command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.WebDriverIO.Appium.Deps.nupkg'
-      publishVstsFeed: Office
+      # Pack the NuGet package
+      - task: CmdLine@1
+        displayName: 'Create NuGet package for tester_deps.'
+        inputs:
+          filename: nuget
+          arguments: 'pack WebDriverIO.Appium.Deps.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+          workingFolder: 'tester_deps/nuget'

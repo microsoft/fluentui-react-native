@@ -63,7 +63,7 @@ exports[`Shimmer component tests Shimmer default 1`] = `
         }
         gradientUnits={0}
         name="gradient"
-        x1="-2"
+        x1={-2}
         x2="-1"
         y1="0%"
         y2="0%"
@@ -84,12 +84,12 @@ exports[`Shimmer component tests Shimmer default 1`] = `
               "type": 0,
             }
           }
-          height="20"
-          rx="3"
-          ry="3"
-          width="100"
-          x="90"
-          y="70"
+          height={20}
+          rx={3}
+          ry={3}
+          width={100}
+          x={90}
+          y={70}
         />
         <RNSVGRect
           fill={
@@ -98,12 +98,12 @@ exports[`Shimmer component tests Shimmer default 1`] = `
               "type": 0,
             }
           }
-          height="20"
-          rx="3"
-          ry="3"
-          width="150"
-          x="90"
-          y="42"
+          height={20}
+          rx={3}
+          ry={3}
+          width={150}
+          x={90}
+          y={42}
         />
         <RNSVGRect
           fill={
@@ -112,12 +112,12 @@ exports[`Shimmer component tests Shimmer default 1`] = `
               "type": 0,
             }
           }
-          height="20"
-          rx="3"
-          ry="3"
-          width="200"
-          x="90"
-          y="15"
+          height={20}
+          rx={3}
+          ry={3}
+          width={200}
+          x={90}
+          y={15}
         />
       </RNSVGClipPath>
     </RNSVGDefs>
@@ -129,6 +129,24 @@ exports[`Shimmer component tests Shimmer default 1`] = `
         }
       }
     >
+      <RNSVGRect
+        fill={
+          {
+            "payload": 0,
+            "type": 0,
+          }
+        }
+        height="100%"
+        propList={
+          [
+            "fill",
+          ]
+        }
+        rx={0}
+        width="100%"
+        x="0"
+        y="0"
+      />
       <RNSVGRect
         clipPath="shimmerView"
         fill={
@@ -143,6 +161,7 @@ exports[`Shimmer component tests Shimmer default 1`] = `
             "fill",
           ]
         }
+        rx={0}
         width="100%"
         x="0"
         y="0"
@@ -157,8 +176,8 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
   accessibilityRole="progressbar"
   accessible={true}
   angle={45}
-  bbHeight="100"
-  bbWidth="300"
+  bbHeight={100}
+  bbWidth={300}
   delay={0}
   duration={1000}
   focusable={false}
@@ -217,7 +236,7 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
         }
         gradientUnits={0}
         name="gradient"
-        x1="-2"
+        x1={-2}
         x2="-1"
         y1="0%"
         y2="0%"
@@ -238,12 +257,12 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
               "type": 0,
             }
           }
-          height="20"
-          rx="3"
-          ry="3"
-          width="100"
-          x="90"
-          y="70"
+          height={20}
+          rx={3}
+          ry={3}
+          width={100}
+          x={90}
+          y={70}
         />
         <RNSVGRect
           fill={
@@ -252,12 +271,12 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
               "type": 0,
             }
           }
-          height="20"
-          rx="3"
-          ry="3"
-          width="150"
-          x="90"
-          y="42"
+          height={20}
+          rx={3}
+          ry={3}
+          width={150}
+          x={90}
+          y={42}
         />
         <RNSVGRect
           fill={
@@ -266,12 +285,12 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
               "type": 0,
             }
           }
-          height="20"
-          rx="3"
-          ry="3"
-          width="200"
-          x="90"
-          y="15"
+          height={20}
+          rx={3}
+          ry={3}
+          width={200}
+          x={90}
+          y={15}
         />
       </RNSVGClipPath>
     </RNSVGDefs>
@@ -284,6 +303,24 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
       }
     >
       <RNSVGRect
+        fill={
+          {
+            "payload": 0,
+            "type": 0,
+          }
+        }
+        height={100}
+        propList={
+          [
+            "fill",
+          ]
+        }
+        rx={0}
+        width={300}
+        x="0"
+        y="0"
+      />
+      <RNSVGRect
         clipPath="shimmerView"
         fill={
           {
@@ -291,13 +328,14 @@ exports[`Shimmer component tests Shimmer with style prop 1`] = `
             "type": 1,
           }
         }
-        height="100"
+        height={100}
         propList={
           [
             "fill",
           ]
         }
-        width="300"
+        rx={0}
+        width={300}
         x="0"
         y="0"
       />

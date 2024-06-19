@@ -2,6 +2,435 @@
   "name": "@fluentui-react-native/default-theme",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:42 GMT",
+      "version": "0.26.0",
+      "tag": "@fluentui-react-native/default-theme_v0.26.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:18 GMT",
+      "version": "0.25.4",
+      "tag": "@fluentui-react-native/default-theme_v0.25.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:10 GMT",
+      "version": "0.25.3",
+      "tag": "@fluentui-react-native/default-theme_v0.25.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Feb 2024 23:27:44 GMT",
+      "version": "0.25.2",
+      "tag": "@fluentui-react-native/default-theme_v0.25.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "dbd7aadff1ba8c61fd5d8aedde8b079c650e37fa",
+            "comment": "Rework package json version notation"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.25.6",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.25.1",
+      "tag": "@fluentui-react-native/default-theme_v0.25.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.6",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jan 2024 21:06:26 GMT",
+      "version": "0.25.0",
+      "tag": "@fluentui-react-native/default-theme_v0.25.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "da4796b2c84a4a9b31efe47799620536f10b4189",
+            "comment": " Remove unused colors"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.38.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.25.5",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jan 2024 01:35:42 GMT",
+      "version": "0.24.0",
+      "tag": "@fluentui-react-native/default-theme_v0.24.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "e25536d6792b3c9d949028cdb134c766d3520f15",
+            "comment": "Delete unused colors"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.37.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.25.4",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 Jan 2024 00:15:20 GMT",
+      "version": "0.23.0",
+      "tag": "@fluentui-react-native/default-theme_v0.23.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "1086a5587347deb56006bc4db9a73643963a0478",
+            "comment": "Remove unused colors"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.3",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.3",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.36.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.25.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Dec 2023 01:31:00 GMT",
+      "version": "0.22.0",
+      "tag": "@fluentui-react-native/default-theme_v0.22.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "bd888e9c94a3c34915240dc2aa60c769bbb3204f",
+            "comment": "Remove unused colors"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.35.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.25.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Dec 2023 20:20:38 GMT",
+      "version": "0.21.1",
+      "tag": "@fluentui-react-native/default-theme_v0.21.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "a0a8448464bc717d8e0d8354822aeb8ecdb36c4d",
+            "comment": "Clean up common code"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Dec 2023 00:05:24 GMT",
+      "version": "0.21.0",
+      "tag": "@fluentui-react-native/default-theme_v0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "4da5194b2ce7e8729785d415bb551bef3c99d248",
+            "comment": "Delete unused colors"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.34.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.25.1",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Nov 2023 02:39:07 GMT",
+      "version": "0.20.0",
+      "tag": "@fluentui-react-native/default-theme_v0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.10.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.26.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.33.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.25.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 07 Nov 2023 20:20:32 GMT",
+      "version": "0.19.11",
+      "tag": "@fluentui-react-native/default-theme_v0.19.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "252935c886c6ffba5fd30593e63cbce4f61f7a90",
+            "comment": "Manually bump packages stuck in the pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.9.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.25.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.32.3",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.24.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Oct 2023 21:26:06 GMT",
+      "version": "0.19.9",
+      "tag": "@fluentui-react-native/default-theme_v0.19.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.9.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.25.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.32.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.24.5",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Oct 2023 20:50:34 GMT",
+      "version": "0.19.8",
+      "tag": "@fluentui-react-native/default-theme_v0.19.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "56889386+gremlin529@users.noreply.github.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "5408495c4d3e698140fab6f9a5cad69bafced90e",
+            "comment": "update snapshots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Aug 2023 22:56:32 GMT",
       "version": "0.19.7",
       "tag": "@fluentui-react-native/default-theme_v0.19.7",

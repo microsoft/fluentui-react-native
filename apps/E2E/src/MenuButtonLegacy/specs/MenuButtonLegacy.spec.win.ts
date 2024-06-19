@@ -14,7 +14,9 @@ describe('MenuButton Legacy Testing Initialization', () => {
     /* Expand E2E section */
     expect(await MenuButtonLegacyPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await MenuButtonLegacyPageObject.didAssertPopup())
+      .withContext(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });
 
@@ -71,7 +73,9 @@ describe('MenuButton Legacy Functional Testing', () => {
       await MenuButtonLegacyPageObject.waitForMenuItemToDisplay('Clicked MenuButton, but menu items failed to display before timeout.'),
     ).toBeTruthy();
 
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await MenuButtonLegacyPageObject.didAssertPopup())
+      .withContext(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   it('Type "SPACE" on first MenuButton. Validate that its list of Menu Items display.', async () => {
@@ -84,7 +88,9 @@ describe('MenuButton Legacy Functional Testing', () => {
       ),
     ).toBeTruthy();
 
-    await expect(await MenuButtonLegacyPageObject.didAssertPopup()).toBeFalsy(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await MenuButtonLegacyPageObject.didAssertPopup())
+      .withContext(MenuButtonLegacyPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 
   /* Runs after all tests. This ensures the MenuButton closes. If it stays open, the test driver won't be able to close the test app */

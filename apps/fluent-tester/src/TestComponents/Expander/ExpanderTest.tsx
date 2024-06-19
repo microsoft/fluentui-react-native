@@ -119,7 +119,7 @@ const expanderSections: TestSection[] = [
 export const ExpanderTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
-    uwpStatus: 'Beta',
+    uwpStatus: 'Experimental',
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',
     androidStatus: 'Backlog',

@@ -102,6 +102,7 @@ exports.config = {
   beforeSession: (/* config, capabilities, specs */) => {
     fs.mkdirSync('./errorShots', { recursive: true });
     process.env['E2ETEST_PLATFORM'] = 'win32';
+    process.env['NATIVE_TESTING'] = false;
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -147,7 +148,7 @@ exports.config = {
    */
   afterTest: async (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
-    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration/600).toFixed(2)}s". \n`);
+    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration / 600).toFixed(2)}s". \n`);
 
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.

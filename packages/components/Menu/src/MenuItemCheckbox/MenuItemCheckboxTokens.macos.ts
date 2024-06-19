@@ -7,12 +7,12 @@ import type { MenuItemCheckboxTokens } from './MenuItemCheckbox.types';
 export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens, Theme> = (t: Theme): MenuItemCheckboxTokens => ({
   backgroundColor: t.colors.transparentBackground,
   borderRadius: 5,
-  checkmarkPadding: globalTokens.sizeNone,
+  checkmarkPadding: globalTokens.size20,
   checkmarkSize: 16,
   checkmarkVisibility: 0,
   color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
-  fontSize: globalTokens.font.size300,
+  fontSize: 13, // aligning with NSMenu font size
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.size40,
   iconColor: t.colors.neutralForeground2,
@@ -21,19 +21,19 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
   paddingVertical: 3,
   focused: {
     backgroundColor: t.colors.brandBackground,
-    color: t.colors.brandedContent,
-    iconColor: t.colors.brandedContent,
+    color: t.colors.neutralForegroundOnBrand,
+    iconColor: t.colors.neutralForegroundOnBrand,
     checked: {
-      checkmarkColor: t.colors.neutralForeground2Hover,
+      checkmarkColor: t.colors.neutralForegroundOnBrand,
       checkmarkVisibility: 1,
     },
   },
   pressed: {
     backgroundColor: t.colors.brandBackgroundPressed,
-    color: t.colors.brandedPressedContent,
-    iconColor: t.colors.brandedPressedContent,
+    color: t.colors.neutralForegroundOnBrandPressed,
+    iconColor: t.colors.neutralForegroundOnBrandPressed,
     checked: {
-      checkmarkColor: t.colors.brandedPressedContent,
+      checkmarkColor: t.colors.neutralForegroundOnBrandPressed,
       checkmarkVisibility: 1,
     },
   },

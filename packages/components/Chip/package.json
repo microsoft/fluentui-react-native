@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/chip",
-  "version": "0.2.4",
+  "version": "0.4.2",
   "description": "A cross-platform Chip component using the Fluent Design System. A chip is a compact representations of entities (most commonly, people) that can be typed in, deleted or dragged easily.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -24,28 +24,33 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.11.3",
-    "@fluentui-react-native/framework": ">=0.11.6 <1.0.0",
-    "@fluentui-react-native/icon": "^0.19.11",
-    "@fluentui-react-native/interactive-hooks": ">=0.24.8 <1.0.0",
-    "@fluentui-react-native/text": ">=0.21.10 <1.0.0",
-    "@fluentui-react-native/theme-tokens": "^0.25.1",
-    "@fluentui-react-native/tokens": "^0.21.3",
-    "@fluentui-react-native/use-styling": "^0.11.1"
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/icon": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*",
+    "@fluentui-react-native/theme-tokens": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*",
+    "@fluentui-react-native/use-styling": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@office-iss/react-native-win32": "^0.71.0",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
+    "@office-iss/react-native-win32": "^0.73.0",
+    "@react-native/babel-preset": "^0.73.0",
+    "@react-native/metro-config": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.71.0",
-    "react-native-svg": "^13.9.0"
+    "react-native": "^0.73.0",
+    "react-native-svg": "^14.0.0"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.71.0",
-    "react-native-svg": "^13.9.0"
+    "react-native": "^0.73.0",
+    "react-native-macos": "^0.73.0",
+    "react-native-svg": "^15.0.0",
+    "react-native-windows": "^0.73.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -54,7 +59,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.71"
+        "react-native@0.73"
       ],
       "capabilities": [
         "core",
@@ -63,6 +68,17 @@
         "react",
         "svg"
       ]
+    }
+  },
+  "peerDependenciesMeta": {
+    "@office-iss/react-native-win32": {
+      "optional": true
+    },
+    "react-native-macos": {
+      "optional": true
+    },
+    "react-native-windows": {
+      "optional": true
     }
   }
 }

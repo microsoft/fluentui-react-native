@@ -1,8 +1,108 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.0
+
+Thu, 11 Apr 2024 18:08:41 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.14.8
+
+Fri, 15 Mar 2024 16:26:21 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.14.7
+
+Fri, 01 Mar 2024 20:39:08 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.14.6
+
+Thu, 22 Feb 2024 23:27:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.22.6
+
+## 0.14.5
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.22.5
+
+## 0.14.4
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.22.4
+
+## 0.14.3
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.22.3
+
+## 0.14.2
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.22.2
+
+## 0.14.1
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.22.1
+
+## 0.14.0
+
+Thu, 09 Nov 2023 02:39:06 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/merge-props to v0.8.0
+- Bump @fluentui-react-native/tokens to v0.22.0
+- Bump @uifabricshared/foundation-settings to v0.14.0
+
+## 0.13.9
+
+Tue, 07 Nov 2023 20:20:36 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.21.6
+
+## 0.13.7
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.21.4
 
 ## 0.13.6
 

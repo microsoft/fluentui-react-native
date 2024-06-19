@@ -2,7 +2,7 @@ pr:
   - main
 
 variables:
-  CI: true
+  - template: variables/vars.yml
 
 jobs:
   # Dedicated task to build JS code, including jest tests, snapshot testing, and linting, because these things can be super
@@ -30,7 +30,7 @@ jobs:
 
       - script: |
           yarn buildci
-        displayName: 'yarn buildci'
+        displayName: 'yarn buildci [test]'
 
       - script: |
           yarn check-for-changed-files
@@ -67,8 +67,7 @@ jobs:
   - job: macOSPR
     displayName: macOS PR
     pool:
-      vmImage: 'internal-macos12'
-      demands: ['xcode', 'sh', 'npm']
+      vmImage: $(VmImageApple)
     variables:
       platform: 'macos'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -78,45 +77,37 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
-      - script: |
-          sudo gem install cocoapods
-        displayName: 'Install Cocoapods Environment'
       - template: templates/setup-repo-min-build.yml
 
+      - template: templates/apple-tools-setup.yml
+
       - script: |
+          set -eox pipefail
           yarn bundle:macos
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle macos'
 
-      # Select proper Xcode version
-      - template: templates/apple-xcode-select.yml
-
       - bash: |
-          echo "pod install $(platform)"
-          pod install
-        workingDirectory: apps/fluent-tester/$(platform)
-        displayName: 'pod install $(platform)'
+          set -eox pipefail
+          pod install --verbose
+        workingDirectory: apps/fluent-tester/macos
+        displayName: 'pod install'
 
-      - bash: |
-          echo "yarn $(platform)"
-          yarn $(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)'
+      - task: CmdLine@2
+        displayName: Build macOS
+        inputs:
+          script: |
+            set -eox pipefail
+            ./.ado/scripts/xcodebuild.sh apps/fluent-tester/macos/FluentTester.xcworkspace macosx ReactTestApp build
+        env:
+          CCACHE_DISABLE: 1
 
       - template: templates/e2e-testing-macos.yml
 
   - job: iOSPR
     displayName: iOS PR
     pool:
-      vmImage: 'internal-macos12'
-      demands: ['xcode', 'sh', 'npm']
-    variables:
-      platform: 'ios'
+      vmImage: $(VmImageApple)
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -124,44 +115,33 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
-      - script: |
-          sudo gem install cocoapods
-        displayName: 'Install Cocoapods Environment'
       - template: templates/setup-repo-min-build.yml
 
+      - template: templates/apple-tools-setup.yml
+
       - script: |
+          set -eox pipefail
           yarn bundle:ios
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle ios'
 
-      # Select proper Xcode version
-      - template: templates/apple-xcode-select.yml
-
       - bash: |
-          echo "pod install $(platform)"
-          pod install
-        workingDirectory: apps/fluent-tester/$(platform)
-        displayName: 'pod install $(platform)'
+          set -eox pipefail
+          pod install --verbose
+        workingDirectory: apps/fluent-tester/ios
+        displayName: 'pod install'
 
-      - bash: |
-          echo "Pre boot simulator"
-          UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-16-2)
-          xcrun simctl boot $UDID
-        workingDirectory: apps/fluent-tester
-        displayName: 'Boot simulator'
+      - task: CmdLine@2
+        displayName: Build iOS
+        inputs:
+          script: |
+            set -eox pipefail
+            ./.ado/scripts/xcodebuild.sh apps/fluent-tester/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
+        env:
+          CCACHE_DISABLE: 1
 
-      - bash: |
-          echo "yarn $(platform)"
-          yarn $(platform) --simulator "iPhone 14"
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)x'
-
-      - template: templates/e2e-testing-ios.yml
+      # Disable iOS E2E tests as they fail on macOS-13 images
+      # - template: templates/e2e-testing-ios.yml
 
   # Windows bundling and end to end testing
   - job: WindowsPR
@@ -169,7 +149,7 @@ jobs:
     pool:
       name: rnw-pool-4
       demands:
-        - ImageOverride -equals rnw-img-vs2022
+        - ImageOverride -equals rnw-img-vs2022-node18
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 

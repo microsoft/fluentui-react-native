@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>WebDriverIO.Appium.Deps</id>
+    <version>1.0.0</version>
+    <title>WebDriverIO and Appium Dependencies</title>
+    <authors>Microsoft Office CXE</authors>
+    <projectUrl>https://github.com/microsoft/fluentui-react-native.git</projectUrl>
+    <description>This package contains the dependencies to run Automated Testing with WebDriverIO and Appium.</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <repository type="git"
+      url="https://github.com/microsoft/fluentui-react-native.git"
+      commit="$CommitId$" />
+  </metadata>
+  <files>
+    <file
+      src="..\node_modules\**"
+      exclude="..\node_modules\appium-windows-driver\node_modules\teen_process\node_modules\@babel\runtime\helpers\esm\classCheckPrivateStaticFieldDescriptor.js;..\node_modules\@appium\docutils\node_modules\typedoc-plugin-markdown\node_modules\handlebars\dist\amd\handlebars\compiler\javascript-compiler.js;..\node_modules\@appium\docutils\node_modules\typedoc-plugin-markdown\node_modules\handlebars\dist\amd\handlebars\helpers\block-helper-missing.js"
+      target="node_modules"
+    />
+  </files>
+</package>

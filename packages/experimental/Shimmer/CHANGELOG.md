@@ -1,8 +1,199 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Apr 2024 21:31:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.2
+
+Mon, 15 Apr 2024 21:31:43 GMT
+
+### Patches
+
+- Ensure build output has the generated view configs (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.13.1
+
+Fri, 12 Apr 2024 21:02:38 GMT
+
+### Patches
+
+- chore: Update react-native-svg to 15.1.0 (sanajmi@microsoft.com)
+
+## 0.13.0
+
+Thu, 11 Apr 2024 18:08:38 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.12.15
+
+Fri, 29 Mar 2024 18:07:00 GMT
+
+### Patches
+
+- Use codegenNativeComponent so JS View configs can be generated for all native components (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.12.13
+
+Fri, 15 Mar 2024 16:26:19 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.12.12
+
+Thu, 14 Mar 2024 03:17:22 GMT
+
+### Patches
+
+- Add assert-never as a dependency (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.12.11
+
+Fri, 01 Mar 2024 20:39:11 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.12.10
+
+Thu, 22 Feb 2024 23:27:45 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.13.7
+- Bump @fluentui-react-native/theming-utils to v0.25.6
+- Bump @fluentui-react-native/tokens to v0.22.6
+
+## 0.12.9
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.6
+
+## 0.12.8
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.5
+- Bump @fluentui-react-native/theming-utils to v0.25.5
+- Bump @fluentui-react-native/tokens to v0.22.5
+
+## 0.12.7
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.4
+- Bump @fluentui-react-native/theming-utils to v0.25.4
+- Bump @fluentui-react-native/tokens to v0.22.4
+
+## 0.12.6
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.3
+- Bump @fluentui-react-native/theming-utils to v0.25.3
+- Bump @fluentui-react-native/tokens to v0.22.3
+
+## 0.12.5
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.2
+- Bump @fluentui-react-native/theming-utils to v0.25.2
+- Bump @fluentui-react-native/tokens to v0.22.2
+
+## 0.12.4
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.1
+
+## 0.12.3
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.0
+- Bump @fluentui-react-native/theming-utils to v0.25.1
+- Bump @fluentui-react-native/tokens to v0.22.1
+
+## 0.12.2
+
+Tue, 19 Dec 2023 21:03:38 GMT
+
+### Patches
+
+- Fix shimmer test (ruaraki@microsoft.com)
+
+## 0.12.1
+
+Fri, 15 Dec 2023 19:01:28 GMT
+
+### Patches
+
+- Make Shimmer respect backgroundColor and containerBorderRadius (adgleitm@microsoft.com)
+
+## 0.12.0
+
+Thu, 09 Nov 2023 02:39:09 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/component-cache to v1.6.0
+- Bump @fluentui-react-native/framework to v0.12.0
+- Bump @fluentui-react-native/theming-utils to v0.25.0
+- Bump @fluentui-react-native/tokens to v0.22.0
+- Bump @fluentui-react-native/use-styling to v0.12.0
+
+## 0.11.6
+
+Tue, 07 Nov 2023 20:20:33 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.11.10
+- Bump @fluentui-react-native/theming-utils to v0.24.7
+- Bump @fluentui-react-native/tokens to v0.21.6
+
+## 0.11.4
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.8
+- Bump @fluentui-react-native/theming-utils to v0.24.5
+- Bump @fluentui-react-native/tokens to v0.21.4
+
+## 0.11.3
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.7
 
 ## 0.11.2
 

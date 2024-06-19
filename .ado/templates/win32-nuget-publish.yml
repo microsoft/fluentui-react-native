@@ -4,63 +4,47 @@ parameters:
     type: boolean
     default: false
 
-steps:
-  - checkout: self
-    persistCredentials: true
+jobs:
+  - job: Win32NuGetPublish
+    displayName: Win32 FluentTester NuGet Publish
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+    ${{ if not(parameters.skipNugetPublish) }}:
+      templateContext:
+        outputs:
+          - output: nuget
+            packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg;$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.E2E.Testing.Data.nupkg'
+            packageParentPath: '$(Build.ArtifactStagingDirectory)'
+            publishVstsFeed: Office # Required when pushing to internal feed.
+            nuGetFeedType: internal # Change to external when publishing to external feed
+            publishPackageMetadata: true # Optional
+    steps:
+      - checkout: self
+        persistCredentials: true
 
-  - template: setup-repo-min-build.yml
+      - template: setup-repo-min-build.yml
 
-  - script: |
-      yarn buildci
-    displayName: 'Building the repo'
+      - script: |
+          yarn buildci
+        displayName: 'Building the repo [test]'
 
-  - script: |
-      yarn bundle
-    workingDirectory: apps/win32
-    displayName: 'Bundling FluentTester Win32 app'
+      - script: |
+          yarn bundle
+        workingDirectory: apps/win32
+        displayName: 'Bundling FluentTester Win32 app'
 
-  # Pack the NuGet package
-  - task: CmdLine@1
-    displayName: 'Create NuGet package for FluentTester Win32 bundle.'
-    inputs:
-      filename: nuget
-      arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
-      workingFolder: 'apps/win32/nuget'
+      # Pack the NuGet package
+      - task: CmdLine@1
+        displayName: 'Create NuGet package for FluentTester Win32 bundle.'
+        inputs:
+          filename: nuget
+          arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+          workingFolder: 'apps/win32/nuget'
 
-  # Pack the NuGet package
-  - task: CmdLine@1
-    displayName: 'Create NuGet package for E2E testing directory'
-    inputs:
-      filename: nuget
-      arguments: 'pack Microsoft.FluentUI.E2E.Testing.Data.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
-      workingFolder: 'apps/E2E/nuget'
-
-  - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
-    displayName: 📒 Generate Manifest FluentTester
-    inputs:
-      BuildDropPath: $(System.DefaultWorkingDirectory)
-
-  - task: PublishPipelineArtifact@1
-    displayName: 📒 Publish Manifest FluentTester
-    inputs:
-      artifactName: SBom-FluentTester-$(System.JobAttempt)
-      targetPath: $(System.DefaultWorkingDirectory)/_manifest
-
-  - task: ComponentGovernanceComponentDetection@0
-
-  # Push the NuGet package
-  - task: NuGetCommand@2
-    displayName: 'NuGet push'
-    condition: not(${{ parameters.skipNugetPublish }})
-    inputs:
-      command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg'
-      publishVstsFeed: Office
-
-  # Push the NuGet package
-  - task: NuGetCommand@2
-    displayName: 'NuGet push E2E testing package'
-    inputs:
-      command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.E2E.Testing.Data.nupkg'
-      publishVstsFeed: Office
+      # Pack the NuGet package
+      - task: CmdLine@1
+        displayName: 'Create NuGet package for E2E testing directory'
+        inputs:
+          filename: nuget
+          arguments: 'pack Microsoft.FluentUI.E2E.Testing.Data.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+          workingFolder: 'apps/E2E/nuget'

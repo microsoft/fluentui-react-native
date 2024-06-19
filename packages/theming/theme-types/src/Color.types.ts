@@ -32,11 +32,11 @@ export interface FabricWebPalette {
   themeDark: ColorValue;
 
   // ROLE: Themed background
-  // inputBackgroundCheckedHovered, primaryButtonBackgroundHovered
+  // primaryButtonBackgroundHovered
   themeDarkAlt: ColorValue;
 
   // ROLE: Themed background, border, text
-  // inputBackgroundChecked, inputFocusBorderAlt, primaryButtonBackground, menuIcon, menuHeader, link
+  // inputFocusBorderAlt, primaryButtonBackground, menuIcon, link
   themePrimary: ColorValue;
 
   // unused
@@ -55,25 +55,25 @@ export interface FabricWebPalette {
   themeLighterAlt: ColorValue;
 
   // ROLE: Text, should not be called black
-  // bodyTextChecked, buttonTextCheckedHovered
+  // bodyTextChecked
   black: ColorValue;
 
   // unused
   blackTranslucent40: ColorValue;
 
   // ROLE: text
-  // inputTextHovered, buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered, actionLinkHovered
+  // buttonTextHovered, buttonTextChecked, buttonTextPressed, menuItemTextHovered
   neutralDark: ColorValue;
 
   // ROLE: text, border
-  // bodyText, inputBorderHovered, inputText, buttonText, menuItemText, listText, actionLink
+  // bodyText, inputText, buttonText, menuItemText, actionLink
   neutralPrimary: ColorValue;
 
   // unused
   neutralPrimaryAlt: ColorValue;
 
   // ROLE: text, border
-  // bodySubtext, focusBorder, smallInputBorder, inputPlaceholderText
+  // bodySubtext, focusBorder, inputPlaceholderText
   neutralSecondary: ColorValue;
 
   // ROLE: border
@@ -81,33 +81,32 @@ export interface FabricWebPalette {
   neutralSecondaryAlt: ColorValue;
 
   // ROLE: text, border
-  // disabledText, disabledBodyText, variantBorderHovered, inputBorder, buttonTextDisabled
+  // disabledText, disabledBodyText, inputBorder, buttonTextDisabled
   neutralTertiary: ColorValue;
 
   // ROLE: text, background, border
-  // disabledBodySubtext, buttonBackgroundChecked, menuDivider
+  // buttonBackgroundChecked, menuDivider
   neutralTertiaryAlt: ColorValue;
 
   // ROLE: text
-  // disabledSubtext, primaryButtonTextDisabled
+  // primaryButtonTextDisabled
   neutralQuaternary: ColorValue;
 
   // ROLE: background
-  // listItemBackgroundCheckedHovered
   neutralQuaternaryAlt: ColorValue;
 
   // ROLE: background, border
-  // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered, buttonBackgroundCheckedHovered
-  // buttonBackgroundPressed, menuItemBackgroundPressed, listItemBackgroundChecked, listHeaderBackgroundPressed
+  // bodyFrameDivider, bodyDivider, variantBorder, buttonBackgroundHovered
+  // buttonBackgroundPressed, menuItemBackgroundPressed, listHeaderBackgroundPressed
   neutralLight: ColorValue;
 
   // ROLE: background, border (though really to blend with bgs)
   // disabledBackground, buttonBackground, buttonBackgroundDisabled, buttonBorderDisabled, primaryButtonBackgroundDisabled
-  // menuItemBackgroundHovered, listItemBackgroundHovered, listHeaderBackgroundHovered
+  // menuItemBackgroundHovered, listHeaderBackgroundHovered
   neutralLighter: ColorValue;
 
   // ROLE: background
-  // bodyStandoutBackground, defaultStateBackground
+  // bodyStandoutBackground
   neutralLighterAlt: ColorValue;
 
   // ROLE: background
@@ -115,8 +114,8 @@ export interface FabricWebPalette {
   accent: ColorValue;
 
   // ROLE: background, theme/accent text
-  // bodyBackground, bodyFrameBackground, inputBackground, inputForegroundChecked, primaryButtonText, primaryButtonTextHovered
-  // primaryButtonTextPressed, accentButtonText, menuBackground, listBackground
+  // bodyBackground, bodyFrameBackground, inputBackground, primaryButtonText, primaryButtonTextHovered
+  // primaryButtonTextPressed, menuBackground
   white: ColorValue;
 
   // red color
@@ -139,8 +138,6 @@ export interface PaletteTextColors {
   subText: ColorValue;
   /** Neutral colored links and links for action buttons. */
   actionLink: ColorValue;
-  /** Hover state for neutral colored links and links for action buttons. */
-  actionLinkHovered: ColorValue;
 
   /** The color of a link. */
   link: ColorValue;
@@ -152,21 +149,13 @@ export interface PaletteTextColors {
   disabledText: ColorValue;
   /** The default color for disabled text on the default background (bodyBackground). */
   disabledBodyText: ColorValue;
-  /** Disabled de-emphasized text, for use on disabledBackground. */
-  disabledSubtext: ColorValue;
-  /** Disabled de-emphasized text, for use on the default background (bodyBackground). */
-  disabledBodySubtext: ColorValue;
 
   //// Invariants - slots that rarely change color theme-to-theme because the color has meaning
 
   /** The default color of error text, used on bodyBackground. */
   errorText: ColorValue;
-  /** The color of text on errorBackground, warningBackground, blockingBackground, or successBackground. */
-  warningText: ColorValue;
   /** The color of input text. */
   inputText: ColorValue;
-  /** The color of input text on hover. */
-  inputTextHovered: ColorValue;
   /** The color of placeholder text. */
   inputPlaceholderText: ColorValue;
 
@@ -178,8 +167,6 @@ export interface PaletteTextColors {
   buttonTextHovered: ColorValue;
   /** Color of text in a checked standard button */
   buttonTextChecked: ColorValue;
-  /** Color of text in a checked and hovered standard button */
-  buttonTextCheckedHovered: ColorValue;
   /** Color of text in a pressed standard button; i.e. currently being clicked by mouse */
   buttonTextPressed: ColorValue;
   /** Color of text in a disabled standard button */
@@ -193,14 +180,6 @@ export interface PaletteTextColors {
   primaryButtonTextPressed: ColorValue;
   /** Color of text in a disabled primary button */
   primaryButtonTextDisabled: ColorValue;
-
-  /** Color of text for accent button (kicker) */
-  accentButtonText: ColorValue;
-
-  //// Lists
-
-  /** The default text color for list item titles and text in column fields. */
-  listText: ColorValue;
 }
 
 /**
@@ -226,40 +205,13 @@ export interface PaletteBackgroundColors {
   focusBorder: ColorValue;
   /** The color of the border that provides contrast between an element, such as a card, and an emphasized background. */
   variantBorder: ColorValue;
-  /** Hover color of border that provides contrast between an element, such as a card, and an emphasized background. */
-  variantBorderHovered: ColorValue;
-  /** Background color for default/empty state elements; default icons, placeholder graphics, empty seats, etc. */
-  defaultStateBackground: ColorValue;
-
-  //// Invariants - slots that rarely change color theme-to-theme because the color has meaning
-
-  /** The background for errors, if necessary, or highlighting the section of the page where the error is present. */
-  errorBackground: ColorValue;
-  /** Background for blocking issues, which is more severe than a warning, but not as bad as an error. */
-  blockingBackground: ColorValue;
-  /** Background for warning messages. */
-  warningBackground: ColorValue;
-  /** Foreground color for warning highlights */
-  warningHighlight: ColorValue;
-  /** Background for success */
-  successBackground: ColorValue;
 
   //// Input controls slots (text fields, checkboxes, radios...)
 
   /** The border of a large input control in its resting, state; e.g. the box of dropdown. */
   inputBorder: ColorValue;
-  /** The border of a small input control in its resting unchecked state; e.g. the box of an unchecked checkbox. */
-  smallInputBorder: ColorValue;
-  /** The border color of a large hovered input control, such as textbox. */
-  inputBorderHovered: ColorValue;
   /** The background color of an input, e.g. textbox background. */
   inputBackground: ColorValue;
-  /** The background of a checked control; e.g. checked radio button's dot, checked toggle's background. */
-  inputBackgroundChecked: ColorValue;
-  /** The background of a checked and hovered control; e.g. checked checkbox's background color on hover. */
-  inputBackgroundCheckedHovered: ColorValue;
-  /** The foreground of a checked control; e.g. checked checkbox's checkmark color, checked toggle's thumb color */
-  inputForegroundChecked: ColorValue;
   /** The alternate focus border color for elements that already have a border; e.g. text field borders on focus. */
   inputFocusBorderAlt: ColorValue;
 
@@ -271,8 +223,6 @@ export interface PaletteBackgroundColors {
   buttonBackgroundChecked: ColorValue;
   /** Background of a hovered standard button */
   buttonBackgroundHovered: ColorValue;
-  /** Background of a checked and hovered standard button; e.g. bold/italicize/underline text button in toolbar */
-  buttonBackgroundCheckedHovered: ColorValue;
   /** Background of a disabled standard button */
   buttonBackgroundDisabled: ColorValue;
   /** Background of a pressed standard button; i.e. currently being clicked by mouse */
@@ -306,8 +256,6 @@ export interface PaletteBackgroundColors {
   menuDivider: ColorValue;
   /** The default colors of icons in menus. */
   menuIcon: ColorValue;
-  /** The headers in menus that denote title of a section. */
-  menuHeader: ColorValue;
   /** The background of a hovered menu item. */
   menuItemBackgroundHovered: ColorValue;
   /** The background of a pressed menu item. */
@@ -319,16 +267,6 @@ export interface PaletteBackgroundColors {
 
   //// Lists
 
-  /** The background color for the entire list. */
-  listBackground: ColorValue;
-  /** The default text color for list item titles and text in column fields. */
-  listText: ColorValue;
-  /** The background color of a hovered list item. */
-  listItemBackgroundHovered: ColorValue;
-  /** The background color of a checked list item. */
-  listItemBackgroundChecked: ColorValue;
-  /** The background color of a checked and hovered list item. */
-  listItemBackgroundCheckedHovered: ColorValue;
   /** The background color for a hovered list header. */
   listHeaderBackgroundHovered: ColorValue;
   /** The background color for a pressed list header. */
@@ -386,40 +324,25 @@ export interface ControlColorTokens {
   ghostDisabledContent: ColorValue;
   ghostDisabledIcon: ColorValue;
 
+  /* Deprecated */
   brandedBackground: ColorValue;
-  brandedBorder: ColorValue;
-  brandedContent: ColorValue;
-  brandedIcon: ColorValue;
 
-  brandedHoveredBackground: ColorValue;
-  brandedHoveredBorder: ColorValue;
-  brandedHoveredContent: ColorValue;
-  brandedHoveredIcon: ColorValue;
-
-  brandedFocusedBackground: ColorValue;
-  brandedFocusedBorder: ColorValue;
-  brandedFocusedContent: ColorValue;
-  brandedFocusedIcon: ColorValue;
-
-  brandedPressedBackground: ColorValue;
-  brandedPressedBorder: ColorValue;
-  brandedPressedContent: ColorValue;
-  brandedPressedIcon: ColorValue;
-
-  brandedDisabledBackground: ColorValue;
+  /* Deprecated */
   brandedDisabledBorder: ColorValue;
-  brandedDisabledContent: ColorValue;
-  brandedDisabledIcon: ColorValue;
+
+  /* Deprecated */
+  brandedSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedFocusedSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedHoveredSecondaryContent: ColorValue;
+  /* Deprecated */
+  brandedPressedSecondaryContent: ColorValue;
 
   defaultCheckedBackground: ColorValue;
   defaultCheckedContent: ColorValue;
   defaultCheckedHoveredBackground: ColorValue;
   defaultCheckedHoveredContent: ColorValue;
-
-  brandedCheckedBackground: ColorValue;
-  brandedCheckedContent: ColorValue;
-  brandedCheckedHoveredBackground: ColorValue;
-  brandedCheckedHoveredContent: ColorValue;
 
   ghostCheckedBackground: ColorValue;
   ghostCheckedContent: ColorValue;
@@ -432,12 +355,6 @@ export interface ControlColorTokens {
   ghostHoveredSecondaryContent: ColorValue;
   ghostPressedSecondaryContent: ColorValue;
 
-  brandedSecondaryContent: ColorValue;
-  brandedFocusedSecondaryContent: ColorValue;
-  brandedHoveredSecondaryContent: ColorValue;
-  brandedPressedSecondaryContent: ColorValue;
-
-  defaultDisabledSecondaryContent: ColorValue;
   defaultHoveredSecondaryContent: ColorValue;
   defaultPressedSecondaryContent: ColorValue;
 

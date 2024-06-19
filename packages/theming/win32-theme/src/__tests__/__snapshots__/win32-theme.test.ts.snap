@@ -2442,11 +2442,8 @@ exports[`createOfficeTheme test 1`] = `
 {
   "colors": {
     "accentButtonBackground": "#D83B01",
-    "accentButtonText": "#FFFFFF",
     "actionLink": "#262626",
-    "actionLinkHovered": "#EA6115",
     "background": "antiquewhite",
-    "blockingBackground": "antiquewhite",
     "bodyDivider": "#E6E6E6",
     "bodyFrameBackground": "antiquewhite",
     "bodyFrameDivider": "#E6E6E6",
@@ -2468,36 +2465,13 @@ exports[`createOfficeTheme test 1`] = `
     "brandStroke1": "#D83B01",
     "brandStroke2": "#d2e0f4",
     "brandedBackground": "#D83B01",
-    "brandedBorder": "#A22C01",
-    "brandedCheckedBackground": "#c8c6c4",
-    "brandedCheckedContent": "#201f1e",
-    "brandedCheckedHoveredBackground": "#edebe9",
-    "brandedCheckedHoveredContent": "#201f1e",
-    "brandedContent": "#FFFFFF",
-    "brandedDisabledBackground": "#E6E6E6",
     "brandedDisabledBorder": "#D2D2D2",
-    "brandedDisabledContent": "#B1B1B1",
-    "brandedDisabledIcon": "#B1B1B1",
-    "brandedFocusedBackground": "#F29F71",
-    "brandedFocusedBorder": "#A22C01",
-    "brandedFocusedContent": "#FFFFFF",
-    "brandedFocusedIcon": "#FFFFFF",
     "brandedFocusedSecondaryContent": "#faf9f8",
-    "brandedHoveredBackground": "#F29F71",
-    "brandedHoveredBorder": "#D83B01",
-    "brandedHoveredContent": "#FFFFFF",
-    "brandedHoveredIcon": "#FFFFFF",
     "brandedHoveredSecondaryContent": "#faf9f8",
-    "brandedIcon": "#FFFFFF",
-    "brandedPressedBackground": "#A22C01",
-    "brandedPressedBorder": "#A22C01",
-    "brandedPressedContent": "#FFFFFF",
-    "brandedPressedIcon": "#FFFFFF",
     "brandedPressedSecondaryContent": "#faf9f8",
     "brandedSecondaryContent": "#faf9f8",
     "buttonBackground": "#E6E6E6",
     "buttonBackgroundChecked": "#E6E6E6",
-    "buttonBackgroundCheckedHovered": "#E6E6E6",
     "buttonBackgroundDisabled": "#E6E6E6",
     "buttonBackgroundHovered": "#FFF7F0",
     "buttonBackgroundPressed": "#FBDFD0",
@@ -2506,7 +2480,6 @@ exports[`createOfficeTheme test 1`] = `
     "buttonBorderFocused": "#FBDFD0",
     "buttonText": "#262626",
     "buttonTextChecked": "#262626",
-    "buttonTextCheckedHovered": "#262626",
     "buttonTextDisabled": "#B1B1B1",
     "buttonTextHovered": "#262626",
     "buttonTextPressed": "#262626",
@@ -2544,7 +2517,6 @@ exports[`createOfficeTheme test 1`] = `
     "defaultDisabledBorder": "#D2D2D2",
     "defaultDisabledContent": "#B1B1B1",
     "defaultDisabledIcon": "#B1B1B1",
-    "defaultDisabledSecondaryContent": "#a19f9d",
     "defaultFocusedBackground": "#FFF7F0",
     "defaultFocusedBorder": "#FBDFD0",
     "defaultFocusedContent": "#262626",
@@ -2560,13 +2532,9 @@ exports[`createOfficeTheme test 1`] = `
     "defaultPressedContent": "#262626",
     "defaultPressedIcon": "#262626",
     "defaultPressedSecondaryContent": "#a19f9d",
-    "defaultStateBackground": "antiquewhite",
     "disabledBackground": "#F3F3F3",
-    "disabledBodySubtext": "#B1B1B1",
     "disabledBodyText": "#B1B1B1",
-    "disabledSubtext": "#B1B1B1",
     "disabledText": "#B1B1B1",
-    "errorBackground": "antiquewhite",
     "errorText": "#A50000",
     "focusBorder": "#969696",
     "ghostBackground": "antiquewhite",
@@ -2599,28 +2567,17 @@ exports[`createOfficeTheme test 1`] = `
     "ghostPressedSecondaryContent": "#666666",
     "ghostSecondaryContent": "#666666",
     "inputBackground": "#FFFFFF",
-    "inputBackgroundChecked": "#FFFFFF",
-    "inputBackgroundCheckedHovered": "#FFFFFF",
     "inputBorder": "#C6C6C6",
-    "inputBorderHovered": "#969696",
     "inputFocusBorderAlt": "#969696",
-    "inputForegroundChecked": "#262626",
     "inputPlaceholderText": "#666666",
     "inputText": "#262626",
-    "inputTextHovered": "#262626",
     "link": "#D83B01",
     "linkHovered": "#A22C01",
     "linkPressed": "#6C1E01",
-    "listBackground": "antiquewhite",
     "listHeaderBackgroundHovered": "#D2D2D2",
     "listHeaderBackgroundPressed": "#B1B1B1",
-    "listItemBackgroundChecked": "#C6C6C6",
-    "listItemBackgroundCheckedHovered": "#C6C6C6",
-    "listItemBackgroundHovered": "#D2D2D2",
-    "listText": "#262626",
     "menuBackground": "antiquewhite",
     "menuDivider": "#E6E6E6",
-    "menuHeader": "#262626",
     "menuIcon": "#262626",
     "menuItemBackgroundHovered": "#D2D2D2",
     "menuItemBackgroundPressed": "#B1B1B1",
@@ -2721,7 +2678,6 @@ exports[`createOfficeTheme test 1`] = `
     "severeForeground1": "#c43501",
     "severeForeground2": "#7a2101",
     "severeForeground3": "#da3b01",
-    "smallInputBorder": "#C6C6C6",
     "strokeFocus1": "#ffffff",
     "strokeFocus2": "#969696",
     "subText": "#666666",
@@ -2729,7 +2685,6 @@ exports[`createOfficeTheme test 1`] = `
     "subtleBackgroundHover": "#f5f5f5",
     "subtleBackgroundPressed": "#e0e0e0",
     "subtleBackgroundSelected": "#ebebeb",
-    "successBackground": "#D83B01",
     "successBackground1": "#f1faf1",
     "successBackground2": "#9fd89f",
     "successBackground3": "#107c10",
@@ -2748,8 +2703,6 @@ exports[`createOfficeTheme test 1`] = `
     "transparentStrokeDisabled": "#00000000",
     "transparentStrokeInteractive": "#00000000",
     "variantBorder": "#000000",
-    "variantBorderHovered": "#000000",
-    "warningBackground": "antiquewhite",
     "warningBackground1": "#fffef5",
     "warningBackground2": "#fef7b2",
     "warningBackground3": "#fde300",
@@ -2760,8 +2713,6 @@ exports[`createOfficeTheme test 1`] = `
     "warningForeground2": "#817400",
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
-    "warningHighlight": "#A50000",
-    "warningText": "#262626",
   },
   "host": {
     "appearance": "light",
@@ -3155,6 +3106,11 @@ exports[`createOfficeTheme test 1`] = `
         "size": 10,
         "weight": "400",
       },
+      "caption1Strong": {
+        "face": "primary",
+        "size": "caption",
+        "weight": "semiBold",
+      },
       "captionStandard": {
         "face": "primary",
         "size": "caption",
@@ -3545,8 +3501,14 @@ exports[`fallbackGetPalette test TaskPane palette 1`] = `
 
 exports[`fallbackOfficeModule test 1`] = `
 {
-  "fluentTypography": {},
+  "getConstants": [Function],
   "getPalette": [Function],
+}
+`;
+
+exports[`fallbackOfficeModule test 2`] = `
+{
+  "fluentTypography": {},
   "rampNames": {
     "App": [
       "FakeApp1",
@@ -4234,62 +4196,68 @@ exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #d83b01 1`
 exports[`getThemingModule test 1`] = `
 [
   {
-    "fluentTypography": {},
+    "getConstants": [Function],
     "getPalette": [Function],
-    "rampNames": {
-      "App": [
-        "FakeApp1",
-        "App2",
-        "App3",
-        "App4",
-        "App5",
-        "App6",
-        "App7",
-        "App8",
-      ],
-      "ClassicGrays": [
-        "FakeGray4",
-        "Gray5",
-        "Gray6",
-      ],
-      "FluentGrays": [
-        "FakeGray1",
-        "Gray2",
-        "Gray3",
-      ],
-      "Sepias": [
-        "FakeSepia",
-      ],
-    },
-    "ramps": {
-      "App": [
-        "#F8F8F8",
-        "#EFF6FC",
-        "#BBDAF3",
-        "#55A4E2",
-        "#359EDD",
-        "#0078d7",
-        "#283E4A",
-        "#030C13",
-      ],
-      "ClassicGrays": [
-        "#FFFFFF",
-        "#737373",
-        "#000000",
-      ],
-      "FluentGrays": [
-        "#FAF9F8",
-        "#797775",
-        "#11100F",
-      ],
-      "Sepias": [
-        "#ECE6DE",
-      ],
-    },
-    "typography": {},
   },
   undefined,
 ]
+`;
+
+exports[`getThemingModule test 2`] = `
+{
+  "fluentTypography": {},
+  "rampNames": {
+    "App": [
+      "FakeApp1",
+      "App2",
+      "App3",
+      "App4",
+      "App5",
+      "App6",
+      "App7",
+      "App8",
+    ],
+    "ClassicGrays": [
+      "FakeGray4",
+      "Gray5",
+      "Gray6",
+    ],
+    "FluentGrays": [
+      "FakeGray1",
+      "Gray2",
+      "Gray3",
+    ],
+    "Sepias": [
+      "FakeSepia",
+    ],
+  },
+  "ramps": {
+    "App": [
+      "#F8F8F8",
+      "#EFF6FC",
+      "#BBDAF3",
+      "#55A4E2",
+      "#359EDD",
+      "#0078d7",
+      "#283E4A",
+      "#030C13",
+    ],
+    "ClassicGrays": [
+      "#FFFFFF",
+      "#737373",
+      "#000000",
+    ],
+    "FluentGrays": [
+      "#FAF9F8",
+      "#797775",
+      "#11100F",
+    ],
+    "Sepias": [
+      "#ECE6DE",
+    ],
+  },
+  "typography": {},
+}
 `;
 
 exports[`win32Typography test 1`] = `[Function]`;

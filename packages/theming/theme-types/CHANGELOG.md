@@ -1,8 +1,89 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Mon, 05 Jun 2023 19:26:25 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.39.0
+
+Thu, 11 Apr 2024 18:08:40 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.38.1
+
+Fri, 01 Mar 2024 20:39:13 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.38.0
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Minor changes
+
+-  Remove unused colors (ruaraki@microsoft.com)
+
+## 0.37.0
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Minor changes
+
+- Delete unused colors (ruaraki@microsoft.com)
+
+## 0.36.0
+
+Wed, 03 Jan 2024 00:15:19 GMT
+
+### Minor changes
+
+- Remove unused colors (ruaraki@microsoft.com)
+
+## 0.35.0
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Minor changes
+
+- Remove unused colors (ruaraki@microsoft.com)
+
+## 0.34.0
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Minor changes
+
+- Delete unused colors (ruaraki@microsoft.com)
+
+## 0.33.0
+
+Thu, 09 Nov 2023 02:39:11 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.32.3
+
+Tue, 07 Nov 2023 20:20:35 GMT
+
+### Patches
+
+- Use RN-based dynamic type (adgleitm@microsoft.com)
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+
+## 0.32.1
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- remove deprecated alias tokens from v1 components (email not defined)
 
 ## 0.32.0
 

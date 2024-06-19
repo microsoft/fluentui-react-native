@@ -21,10 +21,10 @@ const personaCoinSections: TestSection[] = [
 export const PersonaCoinTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Deprecated',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    uwpStatus: 'Deprecated',
+    iosStatus: 'Deprecated',
+    macosStatus: 'Deprecated',
+    androidStatus: 'Deprecated',
   };
 
   const description = "PersonaCoins are used for rendering an individual's avatar. PersonaCoin renders the circular image component.";

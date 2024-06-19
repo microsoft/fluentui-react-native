@@ -1,8 +1,159 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Thu, 11 Apr 2024 18:08:38 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.5.13
+
+Fri, 15 Mar 2024 16:26:19 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.5.10
+
+Fri, 01 Mar 2024 20:39:11 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.5.9
+
+Fri, 23 Feb 2024 03:22:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.11.9
+
+## 0.5.8
+
+Thu, 22 Feb 2024 23:27:45 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.13.7
+- Bump @fluentui-react-native/pressable to v0.11.8
+
+## 0.5.7
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.6
+- Bump @fluentui-react-native/pressable to v0.11.7
+
+## 0.5.6
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.5
+- Bump @fluentui-react-native/pressable to v0.11.6
+- Bump @fluentui-react-native/theme-types to v0.38.0
+
+## 0.5.5
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.4
+- Bump @fluentui-react-native/pressable to v0.11.5
+- Bump @fluentui-react-native/theme-types to v0.37.0
+
+## 0.5.4
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.3
+- Bump @fluentui-react-native/pressable to v0.11.4
+- Bump @fluentui-react-native/theme-types to v0.36.0
+
+## 0.5.3
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.2
+- Bump @fluentui-react-native/pressable to v0.11.3
+- Bump @fluentui-react-native/theme-types to v0.35.0
+
+## 0.5.2
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.1
+- Bump @fluentui-react-native/pressable to v0.11.2
+
+## 0.5.1
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.13.0
+- Bump @fluentui-react-native/pressable to v0.11.1
+- Bump @fluentui-react-native/theme-types to v0.34.0
+
+## 0.5.0
+
+Thu, 09 Nov 2023 02:39:09 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.12.0
+- Bump @fluentui-react-native/pressable to v0.11.0
+- Bump @fluentui-react-native/theme-types to v0.33.0
+
+## 0.4.12
+
+Tue, 07 Nov 2023 20:20:33 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.11.10
+- Bump @fluentui-react-native/pressable to v0.10.13
+- Bump @fluentui-react-native/theme-types to v0.32.3
+
+## 0.4.10
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.8
+- Bump @fluentui-react-native/pressable to v0.10.11
+- Bump @fluentui-react-native/theme-types to v0.32.1
+
+## 0.4.9
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.11.7
+- Bump @fluentui-react-native/pressable to v0.10.10
 
 ## 0.4.8
 

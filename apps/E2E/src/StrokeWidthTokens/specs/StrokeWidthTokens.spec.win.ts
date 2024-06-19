@@ -9,6 +9,8 @@ describe('Stroke Width Token Testing Initialization', () => {
   it('Click and navigate to Stroke Width Tokens test page', async () => {
     expect(await StrokeWidthTokensPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await StrokeWidthTokensPageObject.didAssertPopup()).toBeFalsy(StrokeWidthTokensPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await StrokeWidthTokensPageObject.didAssertPopup())
+      .withContext(StrokeWidthTokensPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

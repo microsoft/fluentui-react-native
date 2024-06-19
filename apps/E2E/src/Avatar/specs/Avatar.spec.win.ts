@@ -15,7 +15,9 @@ describe('Avatar Testing Initialization', () => {
     /* Expand E2E section */
     expect(await AvatarPageObject.enableE2ETesterMode()).toBeTrue();
 
-    await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await AvatarPageObject.didAssertPopup())
+      .withContext(AvatarPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy();
   });
 });
 

@@ -6,6 +6,7 @@ import { Animated, Easing, View } from 'react-native';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Svg, Path } from 'react-native-svg';
+import type { SvgProps } from 'react-native-svg';
 
 import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './ActivityIndicator.styling';
 import type { ActivityIndicatorProps, FluentActivityIndicatorType } from './ActivityIndicator.types';
@@ -100,7 +101,7 @@ export const ActivityIndicator = compose<FluentActivityIndicatorType>({
     );
 
     // perspective is needed for animations to work on Android. See https://reactnative.dev/docs/animations#bear-in-mind
-    const animatedSvgProps = {
+    const animatedSvgProps: SvgProps = {
       style: {
         transform: [{ rotateZ: interpolateSpin }, { perspective: 10 }],
       },

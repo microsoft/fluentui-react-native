@@ -1,8 +1,165 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.15.0
+
+Thu, 11 Apr 2024 18:08:40 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 1.14.24
+
+Fri, 15 Mar 2024 16:26:21 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 1.14.23
+
+Wed, 13 Mar 2024 15:54:07 GMT
+
+### Patches
+
+- Add missing react-native peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 1.14.22
+
+Fri, 01 Mar 2024 20:39:08 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 1.14.21
+
+Thu, 22 Feb 2024 23:27:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.25.2
+- Bump @uifabricshared/foundation-tokens to v0.14.6
+
+## 1.14.20
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.25.1
+
+## 1.14.19
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.25.0
+- Bump @fluentui-react-native/theme-types to v0.38.0
+- Bump @uifabricshared/foundation-tokens to v0.14.5
+- Bump @uifabricshared/theming-ramp to v0.19.10
+
+## 1.14.18
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.24.0
+- Bump @fluentui-react-native/theme-types to v0.37.0
+- Bump @uifabricshared/foundation-tokens to v0.14.4
+- Bump @uifabricshared/theming-ramp to v0.19.9
+
+## 1.14.17
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.23.0
+- Bump @fluentui-react-native/theme-types to v0.36.0
+- Bump @uifabricshared/foundation-tokens to v0.14.3
+- Bump @uifabricshared/theming-ramp to v0.19.8
+
+## 1.14.16
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.22.0
+- Bump @fluentui-react-native/theme-types to v0.35.0
+- Bump @uifabricshared/foundation-tokens to v0.14.2
+- Bump @uifabricshared/theming-ramp to v0.19.7
+
+## 1.14.15
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.21.1
+
+## 1.14.14
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.21.0
+- Bump @fluentui-react-native/theme-types to v0.34.0
+- Bump @uifabricshared/foundation-tokens to v0.14.1
+- Bump @uifabricshared/theming-ramp to v0.19.6
+
+## 1.14.13
+
+Thu, 09 Nov 2023 02:39:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.20.0
+- Bump @fluentui-react-native/theme-types to v0.33.0
+- Bump @uifabricshared/foundation-composable to v0.12.3
+- Bump @uifabricshared/foundation-settings to v0.14.0
+- Bump @uifabricshared/foundation-tokens to v0.14.0
+- Bump @uifabricshared/themed-settings to v0.11.0
+- Bump @uifabricshared/theming-ramp to v0.19.5
+
+## 1.14.12
+
+Tue, 07 Nov 2023 20:20:36 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.19.11
+- Bump @fluentui-react-native/theme-types to v0.32.3
+- Bump @uifabricshared/foundation-tokens to v0.13.9
+- Bump @uifabricshared/theming-ramp to v0.19.4
+
+## 1.14.10
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.9
+- Bump @fluentui-react-native/theme-types to v0.32.1
+- Bump @uifabricshared/foundation-tokens to v0.13.7
+- Bump @uifabricshared/theming-ramp to v0.19.2
+
+## 1.14.9
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.8
 
 ## 1.14.8
 

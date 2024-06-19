@@ -20,6 +20,7 @@ import { Switch } from '@fluentui-react-native/switch';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { E2EMenuTest } from './E2EMenuTest';
+import { MenuComponentOutsideMenuList } from './MenuComponentOutsideMenuList';
 import { MenuIcons } from './MenuIcons';
 import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
@@ -294,7 +295,7 @@ const MenuCustomized: React.FunctionComponent = () => {
         <MenuTrigger>
           <Button>Test</Button>
         </MenuTrigger>
-        <CustomMenuPopover>
+        <CustomMenuPopover directionalHint="rightCenter">
           <CustomMenuList>
             <CustomMenuItem>A MenuItem</CustomMenuItem>
             <CustomMenuItem>A MenuItem</CustomMenuItem>
@@ -377,9 +378,16 @@ const MenuWithGroups: React.FunctionComponent = () => {
             <MenuGroup>
               <MenuGroupHeader>Section 1</MenuGroupHeader>
               <MenuItem>A plain MenuItem</MenuItem>
+              <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
             <MenuGroup>
               <MenuGroupHeader>Section 2</MenuGroupHeader>
+              <MenuItem>A plain MenuItem</MenuItem>
+              <MenuItem>A plain MenuItem</MenuItem>
+              <MenuItem>A plain MenuItem</MenuItem>
+            </MenuGroup>
+            <MenuDivider />
+            <MenuGroup>
               <MenuItem>A plain MenuItem</MenuItem>
             </MenuGroup>
           </MenuList>
@@ -525,6 +533,13 @@ const menuSections: TestSection[] = [
     name: 'Menu with groups',
     component: MenuWithGroups,
   },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'MenuList component outside menu list test',
+      component: MenuComponentOutsideMenuList,
+    },
+  }),
 ];
 
 const e2eSections: TestSection[] = [
@@ -536,10 +551,10 @@ const e2eSections: TestSection[] = [
 
 export const MenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Beta',
+    macosStatus: 'Production',
     androidStatus: 'Experimental',
   };
 

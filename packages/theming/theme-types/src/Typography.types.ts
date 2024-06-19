@@ -1,4 +1,4 @@
-import type { TextStyle } from 'react-native';
+import type { TextProps, TextStyle } from 'react-native';
 
 /**
  * A font family designation, made up of one or more font names or groupings
@@ -107,7 +107,7 @@ export type FontLetterSpacing = number;
 /**
  * On iOS, the Dynamic Type ramp that this variant should conform to.
  */
-export type FontDynamicTypeRamp = string; // GH #2268: Import type from RN directly
+export type FontDynamicTypeRamp = TextProps['dynamicTypeRamp'];
 
 /**
  * A font variant value.
