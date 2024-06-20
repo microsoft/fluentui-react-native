@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Improve test page for CalloutTest for cross-plat text run anchor testing",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ppatboyd@outlook.com",
+  "dependentChangeType": "patch"
+}

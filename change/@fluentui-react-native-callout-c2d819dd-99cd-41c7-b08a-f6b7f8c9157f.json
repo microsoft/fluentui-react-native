@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "CalloutView native changes for MacOS support of anchoring Callouts to nested text runs",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "ppatboyd@outlook.com",
+  "dependentChangeType": "patch"
+}
