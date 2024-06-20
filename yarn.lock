@@ -4376,6 +4376,7 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
+    "@fluentui-react-native/theming-utils": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.73.0"
