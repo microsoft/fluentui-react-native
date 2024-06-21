@@ -7,7 +7,6 @@ import { menuPopoverName } from './MenuPopover.types';
 
 export const useMenuPopoverTokens = buildUseTokens<MenuPopoverTokens>(
   (t: Theme) => ({
-    overflow: 'hidden',
     borderWidth: 1,
     borderRadius: 5,
     borderColor: isHighContrast()
