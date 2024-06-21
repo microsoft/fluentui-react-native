@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { KeyboardMetrics } from 'react-native';
+import type { KeyboardMetrics, Text as RNText } from 'react-native';
 import { View, Switch, ScrollView, Platform } from 'react-native';
 
 import { Button, Callout, Separator, Pressable, StealthButton, TextV1 as Text } from '@fluentui/react-native';
@@ -61,9 +61,9 @@ const StandardCallout: React.FunctionComponent = () => {
     [calloutDismissBehaviors],
   );
 
-  const textRef = React.useRef<Text>(null);
-  const textRefInner1 = React.useRef<Text>(null);
-  const textRefInner2 = React.useRef<Text>(null);
+  const textRef = React.useRef<RNText>(null);
+  const textRefInner1 = React.useRef<RNText>(null);
+  const textRefInner2 = React.useRef<RNText>(null);
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
   const greenTargetRef = React.useRef<View>(null);
@@ -71,7 +71,7 @@ const StandardCallout: React.FunctionComponent = () => {
   const decoyBtn2Ref = React.useRef<IFocusable>(null);
 	const [anchorRefIndex, setAnchorRefIndex] = React.useState(0);
 	const anchorRefCycle = [redTargetRef, greenTargetRef, blueTargetRef, textRef, textRefInner1, textRefInner2];
-  const [anchorRef, setAnchorRef] = React.useState<React.RefObject<View> | React.RefObject<Text> | string | undefined>(anchorRefCycle[0]);
+  const [anchorRef, setAnchorRef] = React.useState<React.RefObject<View> | React.RefObject<RNText> | string | undefined>(anchorRefCycle[0]);
   const [hoveredTargetsCount, setHoveredTargetsCount] = React.useState(0);
   const [displayCountHoveredTargets, setDisplayCountHoveredTargets] = React.useState(0);
 
