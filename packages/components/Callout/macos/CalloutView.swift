@@ -46,7 +46,7 @@ func getStartCharRangeForTag(reactTag: NSNumber, shadowView: RCTShadowView) -> (
 	} else {
 		// Otherwise our target view may be a subview; sum the character range for each subview subtree
 		// before and including the subview that contains our target view
-		var startCharRange = 0	
+		var startCharRange = 0
 		for subview in shadowView.reactSubviews() {
 			let subviewSearch = getStartCharRangeForTag(reactTag:reactTag, shadowView: subview)
 			startCharRange += subviewSearch.startCharRange
@@ -54,10 +54,10 @@ func getStartCharRangeForTag(reactTag: NSNumber, shadowView: RCTShadowView) -> (
 				return (found: subviewSearch.found, startCharRange: startCharRange)
 			}
 		}
-	
+
 		return (found: false, startCharRange: startCharRange)
 	}
-	
+
 	return (found: false, startCharRange: 0)
 }
 
@@ -226,13 +226,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		isCalloutWindowShown = false
 	}
-
-	/// Return the boundingRect for a shadowView that is a subview of a Yoga leaf node
-	/// The boundingRect is returned relative to the Yoga leaf node
-	private func getBoundsForSubShadowOfLeafShadow(subShadowView: RCTShadowView, leafShadowView: RCTShadowView) -> NSRect? {
+	
+	// Return the TextView and TextShadowView of a Leaf node ShadowView for specialized nested TextView anchoring
+	private func getTextViewsForLeafShadow(leafShadowView: RCTShadowView) -> (textView: RCTTextView, textShadowView: RCTTextShadowView)? {
 		// Do not proceed if the preconditions of this function are not met
-		guard leafShadowView.isYogaLeafNode() && subShadowView.viewIsDescendant(of: leafShadowView) else {
-				preconditionFailure("leafshadow is not a leaf TextView or subshadow not a descendant of the leafshadow")
+		guard leafShadowView.isYogaLeafNode() else {
+				preconditionFailure("leafshadow is not a leaf node")
 		}
 
 		// Do not proceed if we don't have a UI Manager; we won't be able to determine the bounding rect
@@ -254,6 +253,22 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		// Do not proceed if somehow the leafView is not an RCTTextView
 		guard let textView = leafView as? RCTTextView else {
 				preconditionFailure("it should not be possible for the RCTTextShadowView to not be represented by an RCTTextView")
+		}
+		
+		return (textView, textShadowView)
+	}
+
+	/// Return the boundingRect for a shadowView that is a subview of a Yoga leaf node
+	/// The boundingRect is returned relative to the Yoga leaf node
+	private func getBoundsForSubShadowOfLeafShadow(subShadowView: RCTShadowView, leafShadowView: RCTShadowView) -> NSRect? {
+		// Do not proceed if the preconditions of this function are not met
+		guard subShadowView.viewIsDescendant(of: leafShadowView) else {
+				preconditionFailure("subShadowView is not a descendant of the leaf node ShadowView")
+		}
+		
+		// Get the TextView and TextShadowView we need to calculate the bounds of the subview
+		guard let (textView, textShadowView) = getTextViewsForLeafShadow(leafShadowView: leafShadowView) else {
+			return nil
 		}
 
 		// Search for our target tag and get its startCharRange index in the overall Text view
@@ -279,19 +294,20 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 			return nil
 	}
-
-	// Return the anchor rect for the target prop if available
+	
+	/// Return the anchor rect for the target prop if available
 	private func getAnchorRectForTarget() -> NSRect? {
-			guard let reactTag = target, let reactBridge = bridge else {
+		guard let reactTag = target, let reactBridge = bridge else {
 				return nil
 		}
 
 		let zeroRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-		let targetView = reactBridge.uiManager.view(forReactTag: reactTag)
-
+		
 		// If the targetView is backed by an NSView and has a representative rect, return it as the anchor rect for the target
-		if let targetViewBounds = targetView?.bounds, !targetViewBounds.equalTo(zeroRect) {
-				return calculateAnchorViewScreenRect(anchorView: targetView, anchorBounds: targetViewBounds)
+		if let targetView = reactBridge.uiManager.view(forReactTag: reactTag) {
+			if !targetView.bounds.equalTo(zeroRect) {
+					return calculateAnchorViewScreenRect(anchorView: targetView, anchorBounds: targetView.bounds)
+			}
 		}
 
 		// If the targetView could not be found or was not a representative rect, it may be a child of a yoga leaf node e.g. virtualized text
@@ -323,7 +339,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		return nil
 	}
 
-	/// Get the AnchorScreenRect to use for Callout anchoring, prioritizing the target prop is prioritized over th anchorRect prop
+	/// Get the AnchorScreenRect to use for Callout anchoring, prioritizing the target prop over the anchorRect prop
 	private func getAnchorScreenRect() -> NSRect? {
 		if target != nil {
 				return getAnchorRectForTarget();
@@ -383,11 +399,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	/// Calculates the NSRect of the anchorView in the coordinate space of the current screen
-	private func calculateAnchorViewScreenRect(anchorView: NSView?, anchorBounds: NSRect) -> NSRect {
-		guard let anchorView = anchorView else {
-			preconditionFailure("No anchor view provided to position the Callout")
-		}
-
+	private func calculateAnchorViewScreenRect(anchorView: NSView, anchorBounds: NSRect) -> NSRect {
 		guard let window = window  else {
 			preconditionFailure("No window found")
 		}
