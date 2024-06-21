@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix(menu): Add High Contrast border on macOS",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

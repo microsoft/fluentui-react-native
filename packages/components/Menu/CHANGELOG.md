@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 19 Jun 2024 18:09:31 GMT and should not be manually modified.
+This log was last generated on Fri, 21 Jun 2024 22:15:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.14.5
+
+Fri, 21 Jun 2024 22:15:10 GMT
+
+### Patches
+
+- fix(menu): Add High Contrast border on macOS (sanajmi@microsoft.com)
 
 ## 1.14.4
 
