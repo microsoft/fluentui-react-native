@@ -69,8 +69,8 @@ const StandardCallout: React.FunctionComponent = () => {
   const greenTargetRef = React.useRef<View>(null);
   const decoyBtn1Ref = React.useRef<IFocusable>(null);
   const decoyBtn2Ref = React.useRef<IFocusable>(null);
-	const [anchorRefIndex, setAnchorRefIndex] = React.useState(0);
-	const anchorRefCycle = [redTargetRef, greenTargetRef, blueTargetRef, textRef, textRefInner1, textRefInner2];
+  const [anchorRefIndex, setAnchorRefIndex] = React.useState(0);
+  const anchorRefCycle = [redTargetRef, greenTargetRef, blueTargetRef, textRef, textRefInner1, textRefInner2];
   const [anchorRef, setAnchorRef] = React.useState<React.RefObject<View> | React.RefObject<RNText> | string | undefined>(anchorRefCycle[0]);
   const [hoveredTargetsCount, setHoveredTargetsCount] = React.useState(0);
   const [displayCountHoveredTargets, setDisplayCountHoveredTargets] = React.useState(0);
@@ -149,7 +149,7 @@ const StandardCallout: React.FunctionComponent = () => {
   const toggleCalloutRef = React.useCallback(() => {
     // Cycle the target ref between the RGB target views
     setAnchorRefIndex((anchorRefIndex + 1) % anchorRefCycle.length);
-		setAnchorRef(anchorRefCycle[anchorRefIndex]);
+    setAnchorRef(anchorRefCycle[anchorRefIndex]);
   }, [anchorRef, anchorRefIndex]);
 
   const switchTargetRefOrRect = React.useCallback(() => {
@@ -343,14 +343,18 @@ const StandardCallout: React.FunctionComponent = () => {
               {anchorRefsInfo.isCurrentAnchor[2] && <Text style={{ color: 'white' }}>{anchorRefsInfo.hoverCount}</Text>}
             </View>
           </Pressable>
-					<Text componentRef={textRef}>
-						{'Complex'}
+          <Text componentRef={textRef}>
+            {'Complex'}
             <Text>
-            	{' text tree'}
-            <Text style={{fontSize: 16}} componentRef={textRefInner1}>{' [twiceNested]'}</Text>
-            	{' with multiple nested text runs'}
+              {' text tree'}
+              <Text style={{ fontSize: 16 }} componentRef={textRefInner1}>
+                {' [twiceNested]'}
+              </Text>
+              {' with multiple nested text runs'}
             </Text>
-            <Text style={{fontSize: 20}} componentRef={textRefInner2}>{' [onceNested]'}</Text>
+            <Text style={{ fontSize: 20 }} componentRef={textRefInner2}>
+              {' [onceNested]'}
+            </Text>
             {' and subtext runs'}
           </Text>
         </View>
