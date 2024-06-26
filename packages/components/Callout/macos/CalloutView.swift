@@ -226,9 +226,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		isCalloutWindowShown = false
 	}
-	
-	// Return the TextView and TextShadowView of a Leaf node ShadowView for specialized nested TextView anchoring
-	private func getTextViewsForLeafShadow(leafShadowView: RCTShadowView) -> (textView: RCTTextView, textShadowView: RCTTextShadowView)? {
+
+	/// Return the TextView and TextShadowView of a Leaf node ShadowView for specialized nested TextView anchoring
+	private func getTextViews(leafShadowView: RCTShadowView) -> (textView: RCTTextView, textShadowView: RCTTextShadowView)? {
 		// Do not proceed if the preconditions of this function are not met
 		guard leafShadowView.isYogaLeafNode() else {
 				preconditionFailure("leafshadow is not a leaf node")
@@ -260,7 +260,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 
 		// Get the TextView and TextShadowView we need to calculate the bounds of the subview
-		guard let (textView, textShadowView) = getTextViewsForLeafShadow(leafShadowView: leafShadowView) else {
+		guard let (textView, textShadowView) = getTextViews(leafShadowView: leafShadowView) else {
 			return nil
 		}
 
@@ -294,12 +294,10 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				return nil
 		}
 
-		let zeroRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-		
 		// If the targetView is backed by an NSView and has a representative rect, return it as the anchor rect for the target
 		if let targetView = reactBridge.uiManager.view(forReactTag: reactTag) {
-			if !targetView.bounds.equalTo(zeroRect) {
-					return calculateAnchorViewScreenRect(anchorView: targetView, anchorBounds: targetView.bounds)
+			if !targetView.bounds.equalTo(CGRect.zero) {
+					return calculateAnchorViewScreenRect(anchorView: targetView)
 			}
 		}
 
@@ -324,8 +322,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 
 		// If we could find the bounding rect of our target view and it's a representative rect, return it as the anchor rect for the target
-		if !targetViewBounds.equalTo(zeroRect) {
-				return calculateAnchorViewScreenRect(anchorView: leafNSView, anchorBounds: targetViewBounds)
+		if !targetViewBounds.equalTo(CGRect.zero) {
+				return calculateAnchorViewScreenRect(anchorView: leafNSView, subviewAnchorBounds: targetViewBounds)
 		}
 
 		// Unfortunately our efforts could not determine a valid anchor rect for our target prop
@@ -392,12 +390,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	/// Calculates the NSRect of the anchorView in the coordinate space of the current screen
-	private func calculateAnchorViewScreenRect(anchorView: NSView, anchorBounds: NSRect) -> NSRect {
+	private func calculateAnchorViewScreenRect(anchorView: NSView, subviewAnchorBounds: NSRect? = nil) -> NSRect {
 		guard let window = window else {
 			preconditionFailure("No window found")
 		}
 
-		let anchorBoundsInWindow = anchorView.convert(anchorBounds, to: nil)
+		let anchorBoundsInWindow = anchorView.convert(subviewAnchorBounds ?? anchorView.bounds, to: nil)
 		let anchorFrameInScreenCoordinates = window.convertToScreen(anchorBoundsInWindow)
 
 		return anchorFrameInScreenCoordinates
@@ -526,17 +524,14 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
-	// The app's main menu bar is active while callout is shown, dismiss.
+	/// The app's main menu bar is active while callout is shown, dismiss.
 	@objc private func menuDidBeginTracking() {
 		self.dismissCallout()
 	}
 
 	// MARK: Private variables
 
-	/// The view the Callout is presented from.
-	private var anchorReactTag: NSNumber?
-
-	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
+	/// The view we forward Callout's Children to. It's hosted within the CalloutWindow's
 	/// view hierarchy, ensuring our React Views are not placed in the main window.
 	private lazy var proxyView: NSView = {
 		let visualEffectView = FlippedVisualEffectView()
