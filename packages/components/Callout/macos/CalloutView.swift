@@ -234,28 +234,21 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				preconditionFailure("leafshadow is not a leaf node")
 		}
 
-		// Do not proceed if we don't have a UI Manager; we won't be able to determine the bounding rect
-		guard let uiManager = bridge?.uiManager else {
-				return nil
-		}
-
 		// Do not proceed if the leaf shadow is not a root text shadow view, which we're specializing for right now
 		// In the future this could be generalized for other complex yoga leaf nodes with subviews, such as react-native-svg
 		guard let textShadowView = leafShadowView as? RCTTextShadowView else {
 				return nil
 		}
-
-		// Do not proceed if we don't have the NSView corresponding to the yoga leaf view
-		guard let leafView = uiManager.view(forReactTag: leafShadowView.reactTag) else {
+		
+		// Do not proceed if we:
+		//   - don't have a UI Manager
+		//   - don't have the NSView corresponding to the yoga leaf view
+		//   - the leafView is somehow not an RCTTextView (should not be possible for an RCTTextShadowView)
+		guard let leafTextView = bridge?.uiManager?.view(forReactTag: leafShadowView.reactTag) as? RCTTextView else {
 				return nil
 		}
 
-		// Do not proceed if somehow the leafView is not an RCTTextView
-		guard let textView = leafView as? RCTTextView else {
-				preconditionFailure("it should not be possible for the RCTTextShadowView to not be represented by an RCTTextView")
-		}
-		
-		return (textView, textShadowView)
+		return (leafTextView, textShadowView)
 	}
 
 	/// Return the boundingRect for a shadowView that is a subview of a Yoga leaf node
