@@ -121,7 +121,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	override func updateLayer() {
 		if let layer = calloutWindow.contentView?.layer {
-			layer.borderColor =  borderColor.cgColor
+			layer.borderColor = borderColor.cgColor
 			layer.borderWidth = borderWidth
 			layer.backgroundColor = backgroundColor.cgColor
 			layer.cornerRadius = borderRadius
@@ -159,7 +159,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		updateCalloutFrameToAnchor()
 		calloutWindow.orderFront(self)
 		if (setInitialFocus) {
-		    calloutWindow.makeKey()
+			calloutWindow.makeKey()
 		}
 
 		// Dismiss the Callout if the window is no longer active.
@@ -265,7 +265,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard subShadowView.viewIsDescendant(of: leafShadowView) else {
 				preconditionFailure("subShadowView is not a descendant of the leaf node ShadowView")
 		}
-		
+
 		// Get the TextView and TextShadowView we need to calculate the bounds of the subview
 		guard let (textView, textShadowView) = getTextViewsForLeafShadow(leafShadowView: leafShadowView) else {
 			return nil
@@ -294,7 +294,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 			return nil
 	}
-	
+
 	/// Return the anchor rect for the target prop if available
 	private func getAnchorRectForTarget() -> NSRect? {
 		guard let reactTag = target, let reactBridge = bridge else {
@@ -354,9 +354,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			return
 		}
 
-        guard let anchorScreenRect = getAnchorScreenRect() else {
-            return
-        }
+		guard let anchorScreenRect = getAnchorScreenRect() else {
+			return
+		}
 
 		let calloutScreenRect = bestCalloutRect(relativeTo: anchorScreenRect)
 
@@ -372,7 +372,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	/// Calculates the NSRect of the Anchor Rect in screen coordinates
 	private func calculateAnchorRectScreenRect() -> NSRect {
-		guard let window = window  else {
+		guard let window = window else {
 			preconditionFailure("No window found")
 		}
 
@@ -400,7 +400,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	/// Calculates the NSRect of the anchorView in the coordinate space of the current screen
 	private func calculateAnchorViewScreenRect(anchorView: NSView, anchorBounds: NSRect) -> NSRect {
-		guard let window = window  else {
+		guard let window = window else {
 			preconditionFailure("No window found")
 		}
 
