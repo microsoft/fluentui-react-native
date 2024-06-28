@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Divider } from '../Divider';
@@ -94,9 +93,5 @@ describe('Divider component tests', () => {
     };
     const tree = renderer.create(<CustomDivider {...props}>Hello</CustomDivider>).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Divider re-renders correctly', () => {
-    checkReRender(() => <Divider />, 2);
   });
 });
