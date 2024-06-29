@@ -35,6 +35,7 @@
     "@fluentui-react-native/design-tokens-ios": "^0.53.0",
     "@fluentui-react-native/design-tokens-macos": "^0.53.0",
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
+    "@fluentui-react-native/immutable-merge": "workspace:*",
     "@fluentui-react-native/memo-cache": "workspace:*",
     "@fluentui-react-native/theme": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
@@ -43,6 +44,7 @@
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
+    "@fluentui-react-native/button": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.73.0",
