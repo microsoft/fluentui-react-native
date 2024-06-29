@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix typo in `DirectionalHint` type",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
