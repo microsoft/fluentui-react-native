@@ -23,7 +23,6 @@ let themingModule: OfficeThemingModule = undefined;
 let themingModuleConstants: ReturnType<OfficeThemingModule['getConstants']> = undefined;
 let themingModuleEmitter: NativeEventEmitter = undefined;
 export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | undefined] {
-
   if (!themingModule) {
     const module = TurboModuleRegistry.get<OfficeThemingModule>('Theming');
     // if the native module exists return the module + an emitter for it
@@ -42,7 +41,7 @@ export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | u
       if (disableGetPalette()) {
         themingModule = { ...module, getPalette: fallbackGetPalette, getConstants: themeGetConstants };
       } else {
-        themingModule = {...module, getConstants: themeGetConstants };
+        themingModule = { ...module, getConstants: themeGetConstants };
       }
       themingModuleEmitter = new NativeEventEmitter(module);
     } else {
