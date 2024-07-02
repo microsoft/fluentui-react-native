@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Tue, 02 Jul 2024 21:36:35 GMT",
+      "version": "0.34.2",
+      "tag": "@fluentui-react-native/win32-theme_v0.34.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "9e5c6cb490f30dcbd865c8db613a11904ff42a4b",
+            "comment": "Cache results of theme module getConstants"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 May 2024 03:33:29 GMT",
       "version": "0.34.1",
       "tag": "@fluentui-react-native/win32-theme_v0.34.1",
