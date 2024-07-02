@@ -15,22 +15,41 @@ function disableGetPalette(): boolean {
   return disabled;
 }
 
+function themeGetConstants(): ReturnType<OfficeThemingModule['getConstants']> {
+  return themingModuleConstants;
+}
+
+let themingModule: OfficeThemingModule = undefined;
+let themingModuleConstants: ReturnType<OfficeThemingModule['getConstants']> = undefined;
+let themingModuleEmitter: NativeEventEmitter = undefined;
 export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | undefined] {
-  const module = TurboModuleRegistry.get<OfficeThemingModule>('Theming');
-  // if the native module exists return the module + an emitter for it
-  if (module) {
-    if (!isInstantiated) {
-      // We need to store the host theme so that when themes are created
-      // they can use this information.
-      setCurrentHostThemeSetting(module.getConstants().initialHostThemeSetting);
-      isInstantiated = true;
+  if (!themingModule) {
+    const module = TurboModuleRegistry.get<OfficeThemingModule>('Theming');
+    // if the native module exists return the module + an emitter for it
+    if (module) {
+      if (!isInstantiated) {
+        // We need to store the host theme so that when themes are created
+        // they can use this information.
+        setCurrentHostThemeSetting(module.getConstants().initialHostThemeSetting);
+        isInstantiated = true;
+      }
+
+      // Cache the result of getConstants to avoid continuous Native->JS marshalling
+      themingModuleConstants = module.getConstants();
+
+      // mock getPalette if it should be disabled
+      if (disableGetPalette()) {
+        themingModule = { ...module, getPalette: fallbackGetPalette, getConstants: themeGetConstants };
+      } else {
+        themingModule = { ...module, getConstants: themeGetConstants };
+      }
+      themingModuleEmitter = new NativeEventEmitter(module);
+    } else {
+      themingModule = fallbackOfficeModule;
     }
-    // mock getPalette if it should be disabled, otherwise return the module directly
-    return [disableGetPalette() ? { ...module, getPalette: fallbackGetPalette } : module, new NativeEventEmitter(module)];
   }
 
-  // otherwise use the fallback module
-  return [fallbackOfficeModule, undefined];
+  return [themingModule, themingModuleEmitter];
 }
 
 let isInstantiated = false;
