@@ -9,3 +9,4 @@ export type {
   ShimmerTokens,
   ShimmerType,
 } from './Shimmer.types';
+export { shimmerDefaultAngle, shimmerDefaultDelay, shimmerDefaultDuration } from './consts';
