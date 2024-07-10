@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Export shimmer consts",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
