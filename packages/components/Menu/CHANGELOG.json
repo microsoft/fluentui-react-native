@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 10 Jul 2024 19:11:52 GMT",
+      "version": "1.14.6",
+      "tag": "@fluentui-react-native/menu_v1.14.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "bb69bedb063bc6a3f8d8e4985d3c2674b1dd4451",
+            "comment": "Export menu delay"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 21 Jun 2024 22:15:10 GMT",
       "version": "1.14.5",
       "tag": "@fluentui-react-native/menu_v1.14.5",
