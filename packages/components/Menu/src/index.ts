@@ -42,4 +42,4 @@ export type { MenuGroupProps, MenuGroupSlotProps, MenuGroupTokens, MenuGroupType
 export { MenuGroup, menuGroupName } from './MenuGroup';
 export type { MenuGroupHeaderProps, MenuGroupHeaderSlotProps, MenuGroupHeaderTokens, MenuGroupHeaderType } from './MenuGroupHeader';
 export { MenuGroupHeader, menuGroupHeaderName } from './MenuGroupHeader';
-export { hoverDelayDefault } from './consts';
+export { hoverDelayDefault as menuHoverDelay } from './consts';
