@@ -1,14 +1,15 @@
 import type { Theme } from '@fluentui-react-native/framework';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
+import { shimmerDefaultAngle, shimmerDefaultDelay, shimmerDefaultDuration } from './consts';
 import type { ShimmerTokens } from './Shimmer.types';
 
 export const defaultShimmerTokens: TokenSettings<ShimmerTokens, Theme> = (theme: Theme) =>
   ({
-    angle: 0,
+    angle: shimmerDefaultAngle,
     backgroundColor: theme.colors.background,
-    delay: 500,
-    duration: 2000,
+    delay: shimmerDefaultDelay,
+    duration: shimmerDefaultDuration,
     shimmerColor: theme.colors.bodyFrameDivider,
     shimmerColorOpacity: 1,
     shimmerWaveColor: '#E1E1E1',
