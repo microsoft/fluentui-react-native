@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Tue, 02 Jul 2024 21:36:35 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Jul 2024 17:42:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.34.3
+
+Fri, 12 Jul 2024 17:42:47 GMT
+
+### Patches
+
+- Fix missing getPalette method when using turbomodule (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.34.2
 

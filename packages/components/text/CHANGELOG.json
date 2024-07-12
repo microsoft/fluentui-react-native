@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Fri, 12 Jul 2024 17:42:47 GMT",
+      "version": "0.24.1",
+      "tag": "@fluentui-react-native/text_v0.24.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "0daee5ec2a9019bcb7d5820f161ba366bf870ec1",
+            "comment": "Add support for variants on windows"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jun 2024 06:59:07 GMT",
       "version": "0.24.0",
       "tag": "@fluentui-react-native/text_v0.24.0",

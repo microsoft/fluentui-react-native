@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Fri, 12 Jul 2024 17:42:47 GMT",
+      "version": "0.34.3",
+      "tag": "@fluentui-react-native/win32-theme_v0.34.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "0daee5ec2a9019bcb7d5820f161ba366bf870ec1",
+            "comment": "Fix missing getPalette method when using turbomodule"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 02 Jul 2024 21:36:35 GMT",
       "version": "0.34.2",
       "tag": "@fluentui-react-native/win32-theme_v0.34.2",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 21 May 2024 20:54:23 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Jul 2024 17:42:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.169.7
+
+Fri, 12 Jul 2024 17:42:46 GMT
+
+### Patches
+
+- Add support for text variants and LinkV1 on windows (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.169.0
 
