@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Variant property is being applied inside the viewstyle, instead of a property",
+  "packageName": "@fluentui-react-native/link",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}

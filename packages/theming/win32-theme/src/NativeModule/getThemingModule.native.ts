@@ -41,7 +41,7 @@ export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | u
       if (disableGetPalette()) {
         themingModule = { ...module, getPalette: fallbackGetPalette, getConstants: themeGetConstants };
       } else {
-        themingModule = { ...module, getConstants: themeGetConstants };
+        themingModule = { ...module, getPalette: module.getPalette, getConstants: themeGetConstants };
       }
       themingModuleEmitter = new NativeEventEmitter(module);
     } else {
