@@ -4,6 +4,7 @@ import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
 import { ButtonV1 as Button, ToggleButton } from '@fluentui/react-native';
 import { Separator } from '@fluentui/react-native';
+import { TextV1 } from '@fluentui-react-native/text';
 import {
   Circle,
   Defs,
@@ -55,6 +56,28 @@ const RectTest: React.FunctionComponent = () => {
         <Rect x="10" y="10" width="20" height="20" fill={useColorA ? colorA : colorB} stroke="black" />
       </Svg>
     </React.Fragment>
+  );
+};
+
+const RichTextInlineSvgTest: React.FunctionComponent = () => {
+  const [isGreen, setIsGreen] = React.useState(true);
+
+  const toggleRectFill = () => {
+    setIsGreen(!isGreen);
+  };
+
+  return (
+    <>
+      <TextV1 style={{ textTransform: 'uppercase' }} font="base" weight="medium" truncate>
+        Left
+        <Svg width="50" height="50" viewBox="0 0 50 50">
+          <Rect width="50" height="50" fill="red" />
+          <Rect x="20" width="20" height="20" fill={isGreen ? 'green' : 'blue'} />
+        </Svg>
+        Right
+      </TextV1>
+      <Button onClick={toggleRectFill}>{isGreen ? 'Change to Blue' : 'Change to Green'}</Button>
+    </>
   );
 };
 
@@ -292,6 +315,10 @@ const svgSections: TestSection[] = [
   {
     name: 'Circle',
     component: CircleTest,
+  },
+  {
+    name: 'RichTextInlineSvg',
+    component: RichTextInlineSvgTest,
   },
   {
     name: 'Line',
