@@ -59,6 +59,8 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
    * @default default
    */
   appearance?: LinkAppearance;
+
+  children?: string;
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
