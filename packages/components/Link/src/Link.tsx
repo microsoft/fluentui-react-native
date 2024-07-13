@@ -35,7 +35,7 @@ export const Link = compose<LinkType>({
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => linkLookup(layer, link.state, userProps));
     // now return the handler for finishing render
-    return (final: LinkProps, children: string) => {
+    return (final: LinkProps, ...children: React.ReactNode[]) => {
       // the event fires twice due to native's implementation of inline link
       const { inline, ...mergedProps } = mergeProps(link.props, final);
 
