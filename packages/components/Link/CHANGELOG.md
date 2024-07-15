@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Fri, 12 Jul 2024 17:42:46 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Jul 2024 20:20:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.0
+
+Mon, 15 Jul 2024 20:20:33 GMT
+
+### Minor changes
+
+- Enable inline link support for win32 (ruaraki@microsoft.com)
 
 ## 0.22.2
 

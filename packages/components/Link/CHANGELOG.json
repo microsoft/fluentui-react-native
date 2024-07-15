@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Mon, 15 Jul 2024 20:20:33 GMT",
+      "version": "0.23.0",
+      "tag": "@fluentui-react-native/link_v0.23.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/link",
+            "commit": "c429c9c9dfb1a55e27290ff50d7318e5f36cd43f",
+            "comment": "Enable inline link support for win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Jul 2024 17:42:46 GMT",
       "version": "0.22.2",
       "tag": "@fluentui-react-native/link_v0.22.2",
