@@ -90,7 +90,6 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
   enableFocusRing?: boolean;
   /**
    * Whether the link is inline with text
-   * Note: Not supported for win32
    * @default false
    */
   inline?: boolean;
