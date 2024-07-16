@@ -6700,7 +6700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-android@npm:12.3.6, @react-native-community/cli-platform-android@npm:^12.1.1":
+"@react-native-community/cli-platform-android@npm:12.3.6":
   version: 12.3.6
   resolution: "@react-native-community/cli-platform-android@npm:12.3.6"
   dependencies:
@@ -6714,7 +6714,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-android@npm:12.3.7":
+"@react-native-community/cli-platform-android@npm:12.3.7, @react-native-community/cli-platform-android@npm:^12.1.1":
   version: 12.3.7
   resolution: "@react-native-community/cli-platform-android@npm:12.3.7"
   dependencies:
