@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Tue, 16 Jul 2024 16:36:06 GMT",
+      "version": "0.24.1",
+      "tag": "@fluentui-react-native/text_v0.24.1",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "6c33ce955f280322bf0b6690a896003bafe61db7",
+            "comment": "Rename Text folder"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Jul 2024 17:42:47 GMT",
       "version": "0.24.1",
       "tag": "@fluentui-react-native/text_v0.24.1",
