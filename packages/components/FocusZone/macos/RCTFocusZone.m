@@ -186,6 +186,15 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return NO;
 }
 
+/// Prevent order change
+- (NSArray *)accessibilityChildrenInNavigationOrder {
+	if ([self navigationOrderInRenderOrder]) {
+		return [self accessibilityChildren];
+	}
+	
+	return [super accessibilityChildrenInNavigationOrder];
+}
+
 /// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
 - (BOOL)acceptsFirstResponder
 {

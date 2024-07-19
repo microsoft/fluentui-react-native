@@ -1,4 +1,5 @@
 import type * as React from 'react';
+import type { ViewProps } from 'react-native';
 
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
@@ -7,7 +8,7 @@ export const focusZoneName = 'FocusZone';
 
 export interface FocusZoneState {}
 
-export type FocusZoneProps = React.PropsWithChildren<{
+export type FocusZoneProps = ViewProps & {
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
@@ -41,7 +42,25 @@ export type FocusZoneProps = React.PropsWithChildren<{
    * Callback called when “focus” event triggered in FocusZone
    */
   onFocus?: (e?: any) => void;
-}>;
+
+  /**
+   * @platform macos
+   * By default, the Apple KeyView loop is calculated based on the UI tree hierarchy, accessibility properties,
+   * custom element overrides of navigation order, and positions in layout.
+   *
+   * Normally this produces the appropriate accessible experience for users, but occasionally we may need to
+   * clarify the intended order of navigation.  The navigationOrderInRenderOrder prop will have the FocusZone
+   * establish the navigation order of its children according to their order in the UI tree
+   * (i.e. as returned by accessibilityChildren).
+   *
+   * Note that to participate in the KeyView loop calculation, the FocusZone itself must be part of the
+   * accessibility tree (i.e. 'accessible') with an appropriate role, e.g. 'group'.
+   *
+   * Extra note: This property is unlikely to perform well if changed from its initial value due to finer details
+   * of the MacOS KeyView loop mechanics.
+   */
+  navigationOrderInRenderOrder?: boolean;
+};
 
 export interface NativeProps extends Omit<FocusZoneProps, 'isCircularNavigation'> {
   navigateAtEnd?: NavigateAtEnd;
