@@ -34,6 +34,7 @@ RCT_CUSTOM_VIEW_PROPERTY(focusZoneDirection, NSString, RCTFocusZone)
 }
 
 RCT_EXPORT_VIEW_PROPERTY(navigateAtEnd, NSString)
+RCT_EXPORT_VIEW_PROPERTY(tabKeyNavigation, NSString)
 
 RCT_CUSTOM_VIEW_PROPERTY(defaultTabbableElement, NSNumber, RCTFocusZone)
 {
