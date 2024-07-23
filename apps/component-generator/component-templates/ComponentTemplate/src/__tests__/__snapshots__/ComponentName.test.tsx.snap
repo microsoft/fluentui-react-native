@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ComponentName component tests ComponentName default 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#0f6cbd",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      {
+        "color": "#0f6cbd",
+        "fontFamily": "Segoe UI",
+        "fontSize": 13,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    Default text
+  </Text>
+  Your component
+</View>
+`;

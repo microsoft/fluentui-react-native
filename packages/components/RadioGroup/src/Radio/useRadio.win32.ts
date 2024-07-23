@@ -66,15 +66,18 @@ export const useRadio = (props: RadioProps): RadioInfo => {
   React.useEffect(() => {
     radioGroupContext.addRadioValue(value);
 
-    if (!isDisabled) {
-      radioGroupContext.addRadioEnabledValue(value);
-    }
-
     return () => {
       radioGroupContext.removeRadioValue(value);
-      radioGroupContext.removeRadioEnabledValue(value);
     };
   }, []);
+
+  React.useEffect(() => {
+    if (isDisabled) {
+      radioGroupContext.removeRadioEnabledValue(value);
+    } else {
+      radioGroupContext.addRadioEnabledValue(value);
+    }
+  }, [isDisabled]);
 
   const isRTL = I18nManager.isRTL;
 

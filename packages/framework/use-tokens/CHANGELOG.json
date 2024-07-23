@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/use-tokens",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:40 GMT",
+      "version": "0.6.0",
+      "tag": "@fluentui-react-native/use-tokens_v0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/use-tokens",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:08 GMT",
+      "version": "0.5.1",
+      "tag": "@fluentui-react-native/use-tokens_v0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/use-tokens",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Nov 2023 02:39:06 GMT",
+      "version": "0.5.0",
+      "tag": "@fluentui-react-native/use-tokens_v0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/use-tokens",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-tokens",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.8.0",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Aug 2023 22:02:15 GMT",
       "version": "0.4.2",
       "tag": "@fluentui-react-native/use-tokens_v0.4.2",

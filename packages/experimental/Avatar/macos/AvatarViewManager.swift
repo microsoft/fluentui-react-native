@@ -1,5 +1,9 @@
+import AppKit
 import Foundation
 import FluentUI
+#if USE_REACT_AS_MODULE
+import React
+#endif
 
 @objc(FRNAvatarViewManager)
 class AvatarViewManager: RCTViewManager {

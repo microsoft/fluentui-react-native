@@ -18,7 +18,7 @@ export const tokens: TokenSettings<TTokens, Theme> = (t: Theme) =>
     color: t.colors.neutralStrokeAccessible,
   } as TTokens);
 
-export const Foo = compose<TabItemType>({
+export const Foo = compose<FooType>({
   displayName: fooName,
   tokens: tokens,
   slots: {
@@ -50,7 +50,7 @@ export const Foo = compose<TabItemType>({
 export default Foo;
 ```
 
-Our [Tab control](../../../../packages/experimental/Tabs/src/TabsItemTokens.ts) uses this system to integrate alias tokens.
+Our [Radio control](../../../../packages/components/RadioGroup/src/Radio/RadioTokens.ts) uses this system to integrate alias tokens.
 
 ## Using useTokens hook
 

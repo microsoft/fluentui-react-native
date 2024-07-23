@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
-This log was last generated on Thu, 28 Sep 2023 03:54:05 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.0
+
+Thu, 11 Apr 2024 18:08:37 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.10.1
+
+Fri, 01 Mar 2024 20:39:10 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.10.0
+
+Thu, 09 Nov 2023 02:39:08 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.9.1
 

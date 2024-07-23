@@ -1,7 +1,6 @@
 export type {
   AliasColorTokens,
   Color,
-  ControlColorTokens,
   FabricWebPalette,
   Palette,
   PaletteBackgroundColors,
@@ -12,6 +11,7 @@ export type {
 export type { ShadowValue, ShadowToken, BaseShadowAliasTokens, ThemeShadowDefinition, PartialShadowDefinition } from './Shadow.types';
 export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from './Theme.types';
 export type {
+  FontDynamicTypeRamp,
   FontFamilies,
   FontFamily,
   FontFamilyValue,

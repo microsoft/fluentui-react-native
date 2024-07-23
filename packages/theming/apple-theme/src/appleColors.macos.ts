@@ -281,45 +281,27 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     disabledBackground: fluentUIApple.gray100,
     disabledText: applePlatform.tertiaryLabelColor,
     disabledBodyText: applePlatform.tertiaryLabelColor,
-    disabledSubtext: applePlatform.quaternaryLabelColor,
-    disabledBodySubtext: applePlatform.quaternaryLabelColor,
 
     focusBorder: 'transparent',
     variantBorder: applePlatform.separatorColor,
-    variantBorderHovered: applePlatform.separatorColor,
-    defaultStateBackground: applePlatform.controlBackgroundColor,
     errorText: fluentUIApple.dangerPrimary,
-    warningText: fluentUIApple.warningPrimary,
-    errorBackground: fluentUIApple.dangerTint10,
-    blockingBackground: fluentUIApple.dangerTint10,
-    warningBackground: fluentUIApple.warningPrimary,
-    warningHighlight: fluentUIApple.warningTint10,
-    successBackground: fluentUIApple.successTint10,
 
     inputBorder: applePlatform.separatorColor,
-    inputBorderHovered: applePlatform.separatorColor,
     inputBackground: applePlatform.textBackgroundColor,
-    inputBackgroundChecked: applePlatform.textBackgroundColor,
-    inputBackgroundCheckedHovered: applePlatform.textBackgroundColor,
-    inputForegroundChecked: fluentUIApple.communicationBlue,
     inputFocusBorderAlt: applePlatform.keyboardFocusIndicatorColor,
-    smallInputBorder: applePlatform.separatorColor,
     inputText: applePlatform.textColor,
-    inputTextHovered: applePlatform.textColor,
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
     // Set the default button tokens to match the Acrylic Button style
     buttonBackground: macOSAliasColorTokens.neutralBackground1,
     buttonBackgroundChecked: macOSAliasColorTokens.neutralBackground3,
     buttonBackgroundHovered: macOSAliasColorTokens.neutralBackground3,
-    buttonBackgroundCheckedHovered: macOSAliasColorTokens.neutralBackground3,
     buttonBackgroundPressed: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralBackground3, 'pressed'),
     buttonBackgroundDisabled: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralBackground3, 'disabled'),
     buttonBorder: macOSAliasColorTokens.transparentStroke,
     buttonText: macOSAliasColorTokens.neutralForeground3,
     buttonTextHovered: macOSAliasColorTokens.neutralForeground3,
     buttonTextChecked: macOSAliasColorTokens.neutralForeground3,
-    buttonTextCheckedHovered: macOSAliasColorTokens.neutralForeground3,
     buttonTextPressed: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralForeground3, 'pressed'),
     buttonTextDisabled: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralForeground3, 'disabled'),
 
@@ -338,28 +320,19 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     primaryButtonTextDisabled: macOSAliasColorTokens.brandForeground1Disabled,
 
     accentButtonBackground: fluentUIApple.communicationBlue,
-    accentButtonText: macOSAliasColorTokens.neutralForegroundInverted,
 
     menuBackground: 'transparent',
     menuDivider: applePlatform.separatorColor,
     menuIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
-    menuHeader: applePlatform.headerTextColor,
     menuItemBackgroundHovered: applePlatform.controlAccentColor,
     menuItemBackgroundPressed: ColorWithSystemEffectMacOS(applePlatform.controlAccentColor, 'pressed'),
     menuItemText: applePlatform.labelColor,
     menuItemTextHovered: 'white',
 
-    listBackground: 'transparent',
-    listText: applePlatform.labelColor,
-    listItemBackgroundHovered: 'transparent',
-    listItemBackgroundChecked: 'transparent',
-    listItemBackgroundCheckedHovered: 'transparent',
-
     listHeaderBackgroundHovered: applePlatform.headerTextColor,
     listHeaderBackgroundPressed: applePlatform.headerTextColor,
 
     actionLink: applePlatform.linkColor,
-    actionLinkHovered: applePlatform.linkColor,
     link: applePlatform.linkColor,
     linkHovered: applePlatform.linkColor,
     linkPressed: applePlatform.selectedControlColor,
@@ -418,39 +391,13 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     ghostDisabledIcon: macOSAliasColorTokens.brandForeground1Disabled,
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
-    brandedBorder: macOSAliasColorTokens.transparentStroke,
-    brandedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedIcon: macOSAliasColorTokens.neutralForegroundInverted,
 
-    brandedHoveredBackground: macOSAliasColorTokens.brandBackgroundHover,
-    brandedHoveredBorder: 'transparent',
-    brandedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedHoveredIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedFocusedBackground: fluentUIApple.communicationBlue,
-    brandedFocusedBorder: 'transparent',
-    brandedFocusedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedFocusedIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedPressedBackground: macOSAliasColorTokens.brandBackgroundPressed, //ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
-    brandedPressedBorder: 'transparent',
-    brandedPressedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedPressedIcon: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedDisabledBackground: macOSAliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
-    brandedDisabledContent: macOSAliasColorTokens.brandForeground1Disabled,
-    brandedDisabledIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultCheckedBackground: fluentUIApple.communicationBlue,
     defaultCheckedContent: macOSAliasColorTokens.neutralForegroundInverted,
     defaultCheckedHoveredBackground: fluentUIApple.communicationBlue,
     defaultCheckedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
-
-    brandedCheckedBackground: fluentUIApple.communicationBlue,
-    brandedCheckedContent: macOSAliasColorTokens.neutralForegroundInverted,
-    brandedCheckedHoveredBackground: fluentUIApple.communicationBlue,
-    brandedCheckedHoveredContent: macOSAliasColorTokens.neutralForegroundInverted,
 
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: fluentUIApple.communicationBlue,
@@ -468,7 +415,6 @@ export function fallbackApplePalette(mode: AppearanceOptions): ThemeColorDefinit
     brandedHoveredSecondaryContent: macOSAliasColorTokens.neutralForegroundInverted,
     brandedPressedSecondaryContent: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralForegroundInverted, 'pressed'),
 
-    defaultDisabledSecondaryContent: macOSAliasColorTokens.brandForeground1Disabled,
     defaultHoveredSecondaryContent: macOSAliasColorTokens.neutralForeground3,
     defaultPressedSecondaryContent: macOSAliasColorTokens.neutralForegroundInverted,
 

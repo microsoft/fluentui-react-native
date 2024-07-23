@@ -9,6 +9,8 @@ describe('MenuButton Legacy Testing Initialization', () => {
   it('Click and navigate to MenuButton Legacy test page', async () => {
     expect(await MenuButtonLegacyPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await MenuButtonLegacyPageObject.isPageLoaded()).toBeTruthy(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await MenuButtonLegacyPageObject.isPageLoaded())
+      .withContext(MenuButtonLegacyPageObject.ERRORMESSAGE_PAGELOAD)
+      .toBeTruthy();
   });
 });

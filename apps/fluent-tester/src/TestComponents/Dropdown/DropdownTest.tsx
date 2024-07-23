@@ -29,10 +29,10 @@ const menuSections: TestSection[] = [
 
 export const DropdownTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Backlog',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Experimental',
+    macosStatus: 'Backlog',
     androidStatus: 'Backlog',
   };
 

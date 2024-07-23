@@ -1,8 +1,158 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Tue, 29 Aug 2023 22:56:32 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Apr 2024 18:08:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Thu, 11 Apr 2024 18:08:38 GMT
+
+### Minor changes
+
+- Update to RN 0.73 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.13.9
+
+Fri, 15 Mar 2024 16:26:19 GMT
+
+### Patches
+
+- Add many missing peerDependencies (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.13.8
+
+Fri, 01 Mar 2024 20:39:11 GMT
+
+### Patches
+
+- Use workspace for version of local package (ruaraki@microsoft.com)
+
+## 0.13.7
+
+Thu, 22 Feb 2024 23:27:45 GMT
+
+### Patches
+
+- Rework package json version notation (rofang@microsoft.com)
+- Bump @fluentui-react-native/composition to v0.10.1
+- Bump @fluentui-react-native/default-theme to v0.25.2
+- Bump @fluentui-react-native/tokens to v0.22.6
+- Bump @fluentui-react-native/use-slot to v0.5.1
+- Bump @fluentui-react-native/use-slots to v0.9.1
+
+## 0.13.6
+
+Mon, 22 Jan 2024 22:09:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.25.1
+
+## 0.13.5
+
+Thu, 04 Jan 2024 21:06:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.25.0
+- Bump @fluentui-react-native/theme-types to v0.38.0
+- Bump @fluentui-react-native/tokens to v0.22.5
+
+## 0.13.4
+
+Thu, 04 Jan 2024 01:35:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.24.0
+- Bump @fluentui-react-native/theme-types to v0.37.0
+- Bump @fluentui-react-native/tokens to v0.22.4
+
+## 0.13.3
+
+Wed, 03 Jan 2024 00:15:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.23.0
+- Bump @fluentui-react-native/theme-types to v0.36.0
+- Bump @fluentui-react-native/tokens to v0.22.3
+
+## 0.13.2
+
+Thu, 21 Dec 2023 01:31:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.22.0
+- Bump @fluentui-react-native/theme-types to v0.35.0
+- Bump @fluentui-react-native/tokens to v0.22.2
+
+## 0.13.1
+
+Wed, 20 Dec 2023 20:20:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.21.1
+
+## 0.13.0
+
+Wed, 20 Dec 2023 00:05:24 GMT
+
+### Minor changes
+
+- Delete unused colors (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.21.0
+- Bump @fluentui-react-native/theme-types to v0.34.0
+- Bump @fluentui-react-native/tokens to v0.22.1
+
+## 0.12.0
+
+Thu, 09 Nov 2023 02:39:09 GMT
+
+### Minor changes
+
+- Update to react-native 0.72 (30809111+acoates-ms@users.noreply.github.com)
+- Bump @fluentui-react-native/composition to v0.10.0
+- Bump @fluentui-react-native/default-theme to v0.20.0
+- Bump @fluentui-react-native/merge-props to v0.8.0
+- Bump @fluentui-react-native/theme-types to v0.33.0
+- Bump @fluentui-react-native/tokens to v0.22.0
+- Bump @fluentui-react-native/use-slot to v0.5.0
+- Bump @fluentui-react-native/use-slots to v0.9.0
+- Bump @fluentui-react-native/use-styling to v0.12.0
+- Bump @fluentui-react-native/use-tokens to v0.5.0
+
+## 0.11.10
+
+Tue, 07 Nov 2023 20:20:34 GMT
+
+### Patches
+
+- Manually bump packages stuck in the pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.19.11
+- Bump @fluentui-react-native/theme-types to v0.32.3
+- Bump @fluentui-react-native/tokens to v0.21.6
+
+## 0.11.8
+
+Mon, 30 Oct 2023 21:26:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.9
+- Bump @fluentui-react-native/theme-types to v0.32.1
+- Bump @fluentui-react-native/tokens to v0.21.4
+
+## 0.11.7
+
+Wed, 25 Oct 2023 20:50:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.19.8
 
 ## 0.11.6
 

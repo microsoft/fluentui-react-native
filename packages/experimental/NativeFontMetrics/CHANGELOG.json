@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/experimental-native-font-metrics",
   "entries": [
     {
+      "date": "Thu, 11 Apr 2024 18:08:38 GMT",
+      "version": "0.6.0",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:10 GMT",
+      "version": "0.5.1",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 24 Jan 2024 23:08:27 GMT",
+      "version": "0.5.0",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.5.0",
+      "comments": {
+        "none": [
+          {
+            "author": "araje@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "84a30d159490fb1034c18fb1ba7accfcd1d47a9c",
+            "comment": "Add explicit module imports"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Nov 2023 02:39:08 GMT",
+      "version": "0.5.0",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "4a6a9cd63396c6e8fc6ffbfec7137652928e40ef",
+            "comment": "Update to react-native 0.72"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Jun 2023 15:29:07 GMT",
       "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.4.1",
       "version": "0.4.1",

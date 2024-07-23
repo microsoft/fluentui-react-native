@@ -1,7 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 
-import type { FocusZoneDirection } from '@fluentui/react-native';
+import type { FocusZoneDirection, FocusZoneTabNavigation, IFocusable } from '@fluentui/react-native';
 import { FocusZone, MenuButton, Text } from '@fluentui/react-native';
 import type { ButtonProps } from '@fluentui-react-native/button';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
@@ -25,6 +25,14 @@ import { commonTestStyles } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
 export const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
+export const FocusZoneTabNavigations: FocusZoneTabNavigation[] = ['None', 'NavigateWrap', 'NavigateStopAtEnds', 'Normal'];
+
+// Buttons by default focus on click on Win32, but they don't on the Mac, so place focus explicitly for convenience
+function useFocusOnClickForMac(): Partial<ButtonProps> {
+  const componentRef = React.useRef<IFocusable>();
+  const onClick = React.useCallback(() => componentRef.current?.focus(), [componentRef]);
+  return Platform.OS === 'macos' ? { componentRef, onClick } : {};
+}
 
 type FocusZoneListWrapperProps = React.PropsWithChildren<{
   beforeID?: string;
@@ -36,12 +44,14 @@ export const FocusZoneListWrapper: React.FunctionComponent<FocusZoneListWrapperP
     <>
       <Button
         {...buttonProps}
+        {...useFocusOnClickForMac()}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(beforeID)}
       />
       {children}
       <Button
         {...buttonProps}
+        {...useFocusOnClickForMac()}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(afterID)}
       />

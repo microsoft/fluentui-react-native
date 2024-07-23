@@ -1,9 +1,9 @@
 import type * as React from 'react';
+import type { ViewProps } from 'react-native';
 
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { ITextProps } from '@fluentui-react-native/text';
 import type { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const radioGroupName = 'RadioGroup';
@@ -28,6 +28,37 @@ export interface IRadioGroupContext {
    * Array of radio button keys in the group
    */
   buttonKeys?: string[];
+
+  /**
+   * Populate the buttonKeys array (all RadioButton keys) at mount and un-mount
+   */
+  addRadioButtonKey?: (value: string) => void;
+  removeRadioButtonKey?: (value: string) => void;
+
+  /**
+   * Array of enabled Radio keys in the RadioGroup
+   * @platform win32
+   */
+  enabledButtonKeys?: string[];
+
+  /**
+   * Populate the enabledButtonKeys array (only enabled/valid RadioButton keys) at mount and un-mount
+   * @platform win32
+   */
+  addRadioButtonEnabledKey?: (value: string) => void;
+  removeRadioButtonEnabledKey?: (value: string) => void;
+
+  /**
+   * Updates invoked to signal that arrow key has been pressed and focus needs to be set
+   * @platform win32
+   */
+  updateInvoked?: (check: boolean) => void;
+
+  /**
+   * Signals whether arrow key has been pressed
+   * @platform win32
+   */
+  invoked?: boolean;
 }
 
 export interface IRadioGroupState {
@@ -74,7 +105,7 @@ export type IRadioGroupProps = React.PropsWithChildren<{
 export interface IRadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 
 export interface IRadioGroupSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<ViewProps>;
   label: ITextProps;
   container: FocusZoneProps;
 }

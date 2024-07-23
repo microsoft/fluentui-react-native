@@ -9,6 +9,8 @@ describe('Svg Testing Initialization', () => {
   it('Click and navigate to Svg test page', async () => {
     expect(await SvgPageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await SvgPageObject.didAssertPopup()).toBeFalsy(SvgPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await SvgPageObject.didAssertPopup())
+      .withContext(SvgPageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

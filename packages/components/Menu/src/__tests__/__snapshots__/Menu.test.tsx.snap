@@ -1,5 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Menu component tests Menu alwaysShowToolTip 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "Expand",
+      },
+      {
+        "name": "Collapse",
+      },
+    ]
+  }
+  accessibilityLabel="Button"
+  accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": false,
+      "multiselectable": undefined,
+      "required": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  alwaysShowToolTip={true}
+  enableFocusRing={true}
+  focusable={true}
+  keyUpEvents={
+    [
+      {
+        "key": " ",
+      },
+      {
+        "key": "Enter",
+      },
+    ]
+  }
+  onAccessibilityAction={[Function]}
+  onAccessibilityTap={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onLayout={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 24,
+      "minWidth": 64,
+      "overflow": "hidden",
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
+    }
+  }
+  tooltip="A Tooltip"
+>
+  <Text
+    accessible={false}
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    style={
+      {
+        "color": "#242424",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 1,
+        "marginEnd": -2,
+        "marginStart": 0,
+        "marginTop": -1,
+      }
+    }
+  >
+    Button
+  </Text>
+</View>
+`;
+
 exports[`Menu component tests Menu default 1`] = `
 <View
   accessibilityActions={
@@ -75,6 +183,7 @@ exports[`Menu component tests Menu default 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
@@ -180,6 +289,7 @@ exports[`Menu component tests Menu defaultOpen 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
@@ -285,6 +395,7 @@ exports[`Menu component tests Menu open 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
@@ -390,6 +501,7 @@ exports[`Menu component tests Menu open checkbox and divider 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
@@ -495,6 +607,7 @@ exports[`Menu component tests Menu open checkbox checked 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
@@ -600,6 +713,7 @@ exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
@@ -705,6 +819,7 @@ exports[`Menu component tests Menu open radio 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
@@ -810,6 +925,7 @@ exports[`Menu component tests Menu submenu 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,
@@ -915,6 +1031,7 @@ exports[`Menu open menu group and menu header 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 64,
+      "overflow": "hidden",
       "padding": 3,
       "paddingHorizontal": 7,
       "width": undefined,

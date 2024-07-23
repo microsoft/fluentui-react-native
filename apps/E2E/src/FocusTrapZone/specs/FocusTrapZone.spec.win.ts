@@ -10,6 +10,8 @@ describe('FocusTrapZone Testing Initialization', () => {
     /* Click on component button to navigate to test page */
     expect(await FocusTrapZonePageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await FocusTrapZonePageObject.didAssertPopup()).toBeFalsy(FocusTrapZonePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await FocusTrapZonePageObject.didAssertPopup())
+      .withContext(FocusTrapZonePageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

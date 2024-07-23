@@ -21,6 +21,8 @@ export type { onKeySelectCallback } from './useSelectedKey.hooks';
 export { useAsToggle } from './useAsToggle';
 export type { OnChangeCallback, OnToggleCallback } from './useAsToggle';
 export { useAsToggleWithEvent } from './useAsToggleWithEvent';
+export type { ValueChangeCallback } from './useControllableValue';
+export { useControllableValue } from './useControllableValue';
 export type { OnChangeWithEventCallback, OnToggleWithEventCallback } from './useAsToggleWithEvent';
 export type {
   PressabilityConfig,

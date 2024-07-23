@@ -9,6 +9,8 @@ describe('Pressable Testing Initialization', () => {
   it('Click and navigate to Pressable test page', async () => {
     expect(await PressablePageObject.navigateToPageAndLoadTests()).toBeTrue();
 
-    await expect(await PressablePageObject.didAssertPopup()).toBeFalsy(PressablePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await PressablePageObject.didAssertPopup())
+      .withContext(PressablePageObject.ERRORMESSAGE_ASSERT)
+      .toBeFalsy(); // Ensure no asserts popped up
   });
 });

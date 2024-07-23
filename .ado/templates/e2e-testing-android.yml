@@ -7,7 +7,7 @@ steps:
       tasks: 'assembleDebug'
       gradleOptions: '-Xmx2g'
       javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
+      jdkVersionOption: '1.17'
       workingDirectory: apps/fluent-tester/android
 
   - script: |
@@ -28,15 +28,9 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
-      yarn appium driver install uiautomator2
-    workingDirectory: apps/E2E
-    displayName: 'Install appium driver'
-    condition: succeeded()
-
-  - script: |
       yarn e2etest:android
     workingDirectory: apps/E2E
-    displayName: 'run E2E Android tests'
+    displayName: 'run E2E Android tests [test]'
     condition: succeeded()
 
   - template: e2e-publish-artifacts.yml

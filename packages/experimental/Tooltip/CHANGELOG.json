@@ -1,0 +1,413 @@
+{
+  "name": "@fluentui-react-native/tooltip",
+  "entries": [
+    {
+      "date": "Wed, 19 Jun 2024 18:09:31 GMT",
+      "version": "0.4.2",
+      "tag": "@fluentui-react-native/tooltip_v0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "8a695ac7cdbbd4b9010feb23577825be22d86965",
+            "comment": "fix(Apple): Render vector borders on Button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 08 May 2024 16:21:26 GMT",
+      "version": "0.4.0",
+      "tag": "@fluentui-react-native/tooltip_v0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "16a8753cb5e4e15b7baa1182e60ef3e6c7cd8d4e",
+            "comment": "added layoutEffect hook"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 15 Apr 2024 21:31:44 GMT",
+      "version": "0.3.2",
+      "tag": "@fluentui-react-native/tooltip_v0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "b2f0ae646a08ddcaf36b18f969a2908b3d8da59f",
+            "comment": "Ensure build output has the generated view configs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Apr 2024 18:08:40 GMT",
+      "version": "0.3.0",
+      "tag": "@fluentui-react-native/tooltip_v0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "6164473627c321b03d301376c48227f4abd8e947",
+            "comment": "Update to RN 0.73"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 29 Mar 2024 18:07:00 GMT",
+      "version": "0.2.19",
+      "tag": "@fluentui-react-native/tooltip_v0.2.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "a722aa94799f4afee55baa03a5a754b0d4b2fdce",
+            "comment": "Use codegenNativeComponent so JS View configs can be generated for all native components"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Mar 2024 16:26:21 GMT",
+      "version": "0.2.16",
+      "tag": "@fluentui-react-native/tooltip_v0.2.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "194bbd615495b39bef4bdf29abdf2204f3163311",
+            "comment": "Add many missing peerDependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Mar 2024 20:39:08 GMT",
+      "version": "0.2.13",
+      "tag": "@fluentui-react-native/tooltip_v0.2.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "17c82b22513a177eaaee6941e5d4bbc2d2654030",
+            "comment": "Use workspace for version of local package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Feb 2024 03:22:29 GMT",
+      "version": "0.2.12",
+      "tag": "@fluentui-react-native/tooltip_v0.2.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.10",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.12",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Feb 2024 23:27:43 GMT",
+      "version": "0.2.11",
+      "tag": "@fluentui-react-native/tooltip_v0.2.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "rofang@microsoft.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "dbd7aadff1ba8c61fd5d8aedde8b079c650e37fa",
+            "comment": "Rework package json version notation"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.9",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.11",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 01 Feb 2024 20:54:31 GMT",
+      "version": "0.2.10",
+      "tag": "@fluentui-react-native/tooltip_v0.2.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 22 Jan 2024 22:09:17 GMT",
+      "version": "0.2.9",
+      "tag": "@fluentui-react-native/tooltip_v0.2.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.7",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.10",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jan 2024 21:06:26 GMT",
+      "version": "0.2.8",
+      "tag": "@fluentui-react-native/tooltip_v0.2.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.6",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.9",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jan 2024 01:35:42 GMT",
+      "version": "0.2.7",
+      "tag": "@fluentui-react-native/tooltip_v0.2.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.5",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.8",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 Jan 2024 00:15:20 GMT",
+      "version": "0.2.6",
+      "tag": "@fluentui-react-native/tooltip_v0.2.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.4",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.3",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.7",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Dec 2023 01:31:00 GMT",
+      "version": "0.2.5",
+      "tag": "@fluentui-react-native/tooltip_v0.2.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.3",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.6",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Dec 2023 20:20:38 GMT",
+      "version": "0.2.4",
+      "tag": "@fluentui-react-native/tooltip_v0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.5",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Dec 2023 00:05:24 GMT",
+      "version": "0.2.3",
+      "tag": "@fluentui-react-native/tooltip_v0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/callout to v0.25.1",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/framework to v0.13.0",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.4",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Dec 2023 20:00:03 GMT",
+      "version": "0.2.2",
+      "tag": "@fluentui-react-native/tooltip_v0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.3",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 06 Dec 2023 22:21:57 GMT",
+      "version": "0.2.1",
+      "tag": "@fluentui-react-native/tooltip_v0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tooltip",
+            "comment": "Bump @fluentui-react-native/button to v0.36.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 30 Nov 2023 21:40:36 GMT",
+      "version": "0.2.0",
+      "tag": "@fluentui-react-native/tooltip_v0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tooltip",
+            "commit": "b5a9fdefb58572ac6976e682563a190cb8a644b7",
+            "comment": "adding new package"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, FocusZoneDirection) {
 @property(nonatomic) BOOL navigationOrderInRenderOrder;
 @property(nonatomic) FocusZoneDirection focusZoneDirection;
 @property(nonatomic) NSString *navigateAtEnd;
+@property(nonatomic) NSString *tabKeyNavigation;
 @property(nonatomic) NSView *defaultResponder;
 
 @end

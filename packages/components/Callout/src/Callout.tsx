@@ -1,7 +1,13 @@
+/**
+ * Copyright (c) Microsoft Corporation.
+ * Licensed under the MIT License.
+ * @format
+ */
+
 import * as React from 'react';
 import { findNodeHandle, Platform } from 'react-native';
+import type { HostComponent } from 'react-native';
 
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -11,10 +17,14 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { settings } from './Callout.settings';
 import type { ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
 import { calloutName } from './Callout.types';
+import type { NativeProps as CalloutNativeProps } from './CalloutNativeComponent';
+import CalloutNativeComponent from './CalloutNativeComponent';
+import type { NativeProps as MacOSCalloutNativeProps } from './MacOSCalloutNativeComponent';
+import MacOSCalloutNativeComponent from './MacOSCalloutNativeComponent';
 
-const NativeCalloutView = Platform.select({
-  macos: ensureNativeComponent('FRNCallout'),
-  default: ensureNativeComponent('RCTCallout'), // win32
+const NativeCalloutView = Platform.select<HostComponent<MacOSCalloutNativeProps> | HostComponent<CalloutNativeProps>>({
+  macos: MacOSCalloutNativeComponent,
+  default: CalloutNativeComponent, // win32
 });
 
 export const Callout = compose<ICalloutType>({

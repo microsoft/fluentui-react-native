@@ -1,0 +1,7 @@
+variables:
+  - name: VmImageApple
+    value: macos-latest-internal
+  - name: xcode_friendly_name
+    value: 'Xcode 15.2'
+  - name: xcode_version
+    value: '/Applications/Xcode_15.2.app'

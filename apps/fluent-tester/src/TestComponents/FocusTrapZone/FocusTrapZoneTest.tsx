@@ -1,45 +1,57 @@
 import * as React from 'react';
-import type { TouchableHighlightProps, ViewProps } from 'react-native';
+import type { TouchableHighlightProps } from 'react-native';
 import { TouchableHighlight, View } from 'react-native';
 
-import type { IFocusTrapZoneProps } from '@fluentui/react-native';
 import { FocusTrapZone, Text } from '@fluentui/react-native';
+import type { Theme } from '@fluentui-react-native/framework';
 import type { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
 import { useFocusState } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
+import { useTheme } from '@fluentui-react-native/theme-types';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 import { FOCUSTRAPZONE_TESTPAGE } from '../../../../E2E/src/FocusTrapZone/consts';
 import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 
-const trapZoneStyle: IFocusTrapZoneProps['style'] = {
-  padding: 10,
-  borderWidth: 2,
-  borderColor: '#ababab',
-  borderStyle: 'dashed',
-};
-
-const activeTrapZoneStyle: IFocusTrapZoneProps['style'] = {
-  padding: 10,
-  borderColor: '#ababab',
-  borderWidth: 2,
-  borderStyle: 'solid',
-};
-
-const componentTwiddlerStyle: ViewProps['style'] = {
-  borderWidth: 1,
-  padding: 8,
-  margin: 4,
-  borderColor: '#ababab',
-  borderStyle: 'solid',
-};
-
-const focusedComponentTwiddlerStyle: ViewProps['style'] = {
-  ...componentTwiddlerStyle,
-  borderColor: 'black',
-  backgroundColor: 'lightblue',
-};
+const getThemedStyles = themedStyleSheet((t: Theme) => {
+  return {
+    trapZoneStyle: {
+      padding: 10,
+      borderWidth: 2,
+      borderColor: t.colors.neutralStroke1,
+      borderStyle: 'dashed',
+    },
+    activeTrapZoneStyle: {
+      padding: 10,
+      borderColor: t.colors.neutralStroke1,
+      borderWidth: 2,
+      borderStyle: 'solid',
+    },
+    componentTwiddlerStyle: {
+      borderWidth: 1,
+      padding: 8,
+      margin: 4,
+      borderColor: t.colors.neutralStroke1,
+      borderStyle: 'solid',
+    },
+    focusedComponentTwiddlerStyle: {
+      borderWidth: 1,
+      padding: 8,
+      margin: 4,
+      borderStyle: 'solid',
+      borderColor: t.colors.strokeFocus2,
+      backgroundColor: t.colors.neutralBackground1Hover,
+    },
+    componentTwiddlerText: {
+      color: t.colors.neutralForeground1,
+    },
+    focusedComponentTwiddlerText: {
+      color: t.colors.neutralForeground1Hover,
+    },
+  };
+});
 
 interface IComponentTwiddlerProps {
   label?: string;
@@ -48,17 +60,28 @@ interface IComponentTwiddlerProps {
 
 export const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (props: IComponentTwiddlerProps) => {
   const [focusProps, focusState] = useFocusState({});
+  const theme = useTheme();
+  const themedStyles = getThemedStyles(theme);
 
   return (
     <TouchableHighlight {...{ focusable: false }} onPress={props.onPress}>
-      <View focusable={true} {...(focusProps as any)} style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}>
-        <Text>{props.label}</Text>
+      <View
+        focusable={true}
+        {...(focusProps as any)}
+        style={focusState.focused ? themedStyles.focusedComponentTwiddlerStyle : themedStyles.componentTwiddlerStyle}
+      >
+        <Text style={focusState.focused ? themedStyles.focusedComponentTwiddlerText : themedStyles.componentTwiddlerText}>
+          {props.label}
+        </Text>
       </View>
     </TouchableHighlight>
   );
 };
 
 const BasicFocusTrapZone: React.FunctionComponent = () => {
+  const theme = useTheme();
+  const themedStyles = getThemedStyles(theme);
+
   const [state, setState] = React.useState({
     useTrapZone: false,
     renderTrapZone: true,
@@ -121,7 +144,7 @@ const BasicFocusTrapZone: React.FunctionComponent = () => {
             ignoreExternalFocusing={state.ignoreExternalFocusing}
             focusPreviouslyFocusedInnerElement={state.focusPreviouslyFocusedInnerElement}
             disabled={!state.useTrapZone}
-            style={state.useTrapZone ? activeTrapZoneStyle : trapZoneStyle}
+            style={state.useTrapZone ? themedStyles.activeTrapZoneStyle : themedStyles.trapZoneStyle}
           >
             <Text>{state.useTrapZone ? 'Trap Active' : 'Trap Active'}</Text>
             <ComponentTwiddler label="trapped" />

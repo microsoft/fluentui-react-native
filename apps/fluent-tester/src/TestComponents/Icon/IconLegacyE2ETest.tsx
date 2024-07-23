@@ -27,7 +27,7 @@ export const E2ETestingIcon: React.FunctionComponent = () => {
             color="green"
             accessibilityLabel={ICON_ACCESSIBILITY_LABEL}
           />
-          <Icon rasterImageSource={rasterChessProps} width={100} height={100} color="blue" />
+          <Icon rasterImageSource={rasterChessProps} width={100} height={100} color="blue" accessibilityLabel="Chess pieces" />
         </View>
       ) : null}
     </View>

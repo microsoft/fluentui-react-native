@@ -1,4 +1,4 @@
-import type { ViewStyle, ColorValue } from 'react-native';
+import type { ViewStyle, ColorValue, AnimatableNumericValue } from 'react-native';
 
 import type { Theme } from '@fluentui-react-native/theme-types';
 
@@ -9,7 +9,7 @@ import { tokenBuilder } from './tokenBuilder';
 export interface IBorderTokens {
   borderColor?: ColorValue;
   borderWidth?: number;
-  borderRadius?: number;
+  borderRadius?: AnimatableNumericValue;
   borderStyle?: ViewStyle['borderStyle'];
 }
 

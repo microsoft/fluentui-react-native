@@ -14,9 +14,9 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'iOS',
-      // Keep this in sync with the simulator we run in Azure Pipelines
-      'appium:platformVersion': '16.2',
-      'appium:deviceName': 'iPhone 14',
+      // Keep this in sync with the simulator we run in Azure Pipelines, defined in `.ado/variables/vars.yml`
+      'appium:platformVersion': '17.2',
+      'appium:deviceName': 'iPhone 15',
       'appium:automationName': 'XCUITest',
       'appium:bundleId': 'com.microsoft.ReactTestApp',
     },
@@ -140,7 +140,7 @@ exports.config = {
    */
   afterTest: (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
-    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration/600).toFixed(2)}s". \n`);
+    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration / 600).toFixed(2)}s". \n`);
 
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.

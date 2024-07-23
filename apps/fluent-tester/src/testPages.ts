@@ -25,6 +25,7 @@ import { MenuButtonLegacyTest } from './TestComponents/MenuButtonLegacy';
 import { MenuButtonV1Test } from './TestComponents/MenuButtonV1';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
+import { OverflowTest } from './TestComponents/Overflow/OverflowTest';
 import { PersonaTest } from './TestComponents/Persona';
 import { PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { PressableTest } from './TestComponents/Pressable';
@@ -39,11 +40,10 @@ import { StrokeWidthTest } from './TestComponents/StrokeWidth';
 import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
 import { TabListTest } from './TestComponents/TabList/TabListTest';
-import { TabsLegacyTest } from './TestComponents/TabsLegacy';
-import { TabsV1Test } from './TestComponents/TabsV1';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
+import { TooltipTest } from './TestComponents/Tooltip';
 import { VibrancyViewTest } from './TestComponents/VibrancyView';
 import * as Constants from '../../E2E/src/index.consts';
 
@@ -185,7 +185,7 @@ export const tests: TestDescription[] = [
     name: 'Link V1',
     component: LinkV1Test,
     testPageButton: Constants.HOMEPAGE_LINKV1_BUTTON,
-    platforms: ['win32', 'android'],
+    platforms: ['win32', 'android', 'windows'],
   },
   {
     name: 'Menu',
@@ -210,6 +210,12 @@ export const tests: TestDescription[] = [
     component: NotificationTest,
     testPageButton: HOMEPAGE_NOTIFICATION_BUTTON,
     platforms: ['android', 'ios'],
+  },
+  {
+    name: 'Overflow',
+    component: OverflowTest,
+    testPageButton: Constants.HOMEPAGE_OVERFLOW_BUTTON,
+    platforms: ['win32', 'macos'],
   },
   {
     name: 'Persona',
@@ -299,18 +305,6 @@ export const tests: TestDescription[] = [
     name: 'TabList',
     component: TabListTest,
     testPageButton: Constants.HOMEPAGE_TABLIST_BUTTON,
-    platforms: ['win32', 'windows'],
-  },
-  {
-    name: 'Tabs Legacy',
-    component: TabsLegacyTest,
-    testPageButton: Constants.HOMEPAGE_TABS_BUTTON,
-    platforms: ['macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Tabs V1',
-    component: TabsV1Test,
-    testPageButton: Constants.HOMEPAGE_TABSV1_BUTTON,
     platforms: ['macos', 'win32', 'windows'],
   },
   {
@@ -330,6 +324,12 @@ export const tests: TestDescription[] = [
     component: ThemeTest,
     testPageButton: Constants.HOMEPAGE_THEME_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Tooltip',
+    component: TooltipTest,
+    testPageButton: Constants.HOMEPAGE_TOOLTIP_BUTTON,
+    platforms: ['win32'],
   },
   {
     name: 'Vibrancy View',

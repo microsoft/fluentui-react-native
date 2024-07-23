@@ -1,4 +1,4 @@
-import type { TextStyle } from 'react-native';
+import type { TextProps, TextStyle } from 'react-native';
 
 import type { ITextProps } from '@fluentui-react-native/adapters';
 import type { Theme, Typography } from '@fluentui-react-native/theme-types';
@@ -17,8 +17,8 @@ export interface FontStyleTokens {
   fontLineHeight?: TextStyle['lineHeight'];
   fontLetterSpacing?: TextStyle['letterSpacing'];
   fontStyle?: TextStyle['fontStyle'];
-  // Props below are used on iOS only. GH #2268: Import these from RN directly
-  fontDynamicTypeRamp?: string;
+  // Props below are used on iOS only
+  fontDynamicTypeRamp?: TextProps['dynamicTypeRamp'];
   fontMaximumSize?: number;
 }
 

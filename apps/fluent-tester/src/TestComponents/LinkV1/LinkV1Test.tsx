@@ -182,11 +182,11 @@ const e2eSections: TestSection[] = [
 
 export const LinkV1Test: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    win32Status: 'Production',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Production',
+    macosStatus: 'Production',
+    androidStatus: 'Production',
   };
 
   const description =

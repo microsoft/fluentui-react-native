@@ -82,19 +82,6 @@ export const useLink = (props: LinkProps): LinkInfo => {
 
   const linkTooltip = tooltip ?? url ?? undefined;
 
-  let inline = props.inline;
-  const supportsInlineLinks = Platform.OS !== ('win32' as any);
-  if (inline && !supportsInlineLinks) {
-    if (__DEV__) {
-      throw new Error('Inline Links are not supported on ' + Platform.OS + '. Component will fail to render.');
-    }
-
-    // Force Links to not be inline on win32.
-    // This will cause errors to be thrown in RN code if the Link is placed inline with Text,
-    // since Views are not allows to be children of Text components.
-    inline = false;
-  }
-
   return {
     props: {
       ...rest,
@@ -110,7 +97,6 @@ export const useLink = (props: LinkProps): LinkInfo => {
       cursor: isDisabled ? 'not-allowed' : 'pointer',
       ref: useViewCommandFocus(componentRef),
       tooltip: linkTooltip,
-      inline,
     },
     state: newState,
   };

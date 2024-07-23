@@ -28,6 +28,8 @@ export const Shimmer = compose<ShimmerType>({
     const memoizedShimmerData = useMemo(
       () => ({
         angle: props.angle ? props.angle : tokens['angle'],
+        backgroundColor: props?.style?.['backgroundColor'] ? props?.style['backgroundColor'] : tokens['backgroundColor'] ?? 'transparent',
+        containerBorderRadius: props?.style?.['borderRadius'] ? props?.style['borderRadius'] : 0,
         containerWidth: props?.style?.['width'] ? props?.style['width'] : '100%',
         containerHeight: props?.style?.['height'] ? props?.style['height'] : '100%',
         delay: props.delay ? props.delay : tokens['delay'],
@@ -39,6 +41,7 @@ export const Shimmer = compose<ShimmerType>({
       }),
       [
         props.angle,
+        props.backgroundColor,
         props.delay,
         props.duration,
         props.shimmerColor,
@@ -125,7 +128,16 @@ export const Shimmer = compose<ShimmerType>({
               y="0"
               width={memoizedShimmerData.containerWidth}
               height={memoizedShimmerData.containerHeight}
+              fill={memoizedShimmerData.backgroundColor}
+              rx={memoizedShimmerData.containerBorderRadius}
+            />
+            <Rect
+              x="0"
+              y="0"
+              width={memoizedShimmerData.containerWidth}
+              height={memoizedShimmerData.containerHeight}
               fill="url(#gradient)"
+              rx={memoizedShimmerData.containerBorderRadius}
               clipPath="url(#shimmerView)"
             />
           </G>

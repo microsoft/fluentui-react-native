@@ -47,8 +47,8 @@ exports[`Avatar component tests Avatar badge 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight="16"
-      bbWidth="16"
+      bbHeight={16}
+      bbWidth={16}
       color="#616161"
       focusable={false}
       height={16}
@@ -123,8 +123,8 @@ exports[`Avatar component tests Avatar badge 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight="6"
-      bbWidth="6"
+      bbHeight={6}
+      bbWidth={6}
       fill="none"
       focusable={false}
       meetOrSlice={0}
@@ -225,8 +225,8 @@ exports[`Avatar component tests Avatar circular 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight="16"
-      bbWidth="16"
+      bbHeight={16}
+      bbWidth={16}
       color="#616161"
       focusable={false}
       height={16}
@@ -323,8 +323,8 @@ exports[`Avatar component tests Avatar default 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight="16"
-      bbWidth="16"
+      bbHeight={16}
+      bbWidth={16}
       color="#616161"
       focusable={false}
       height={16}
@@ -441,8 +441,8 @@ exports[`Avatar component tests Avatar ring 1`] = `
     >
       <RNSVGSvgView
         align="xMidYMid"
-        bbHeight="16"
-        bbWidth="16"
+        bbHeight={16}
+        bbWidth={16}
         color="#616161"
         focusable={false}
         height={16}
@@ -540,8 +540,8 @@ exports[`Avatar component tests Avatar square 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight="16"
-      bbWidth="16"
+      bbHeight={16}
+      bbWidth={16}
       color="#616161"
       focusable={false}
       height={16}

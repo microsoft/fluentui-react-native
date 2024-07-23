@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { ButtonV1 } from '@fluentui-react-native/button';
-import { Text } from '@fluentui-react-native/experimental-text';
 import { Separator } from '@fluentui-react-native/separator';
 import { Stack } from '@fluentui-react-native/stack';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { SEPARATOR_TESTPAGE } from '../../../../E2E/src/Separator/consts';
 import { stackStyle, separatorStackStyle } from '../Common/styles';
@@ -41,11 +41,11 @@ const separatorSections: TestSection[] = [
 
 export const SeparatorTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Beta',
-    androidStatus: 'Experimental',
+    win32Status: 'Deprecated',
+    uwpStatus: 'Deprecated',
+    iosStatus: 'Deprecated',
+    macosStatus: 'Deprecated',
+    androidStatus: 'Deprecated',
   };
 
   const description =
