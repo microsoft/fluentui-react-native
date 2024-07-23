@@ -186,12 +186,14 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return NO;
 }
 
-/// Prevent order change
+/// FocusZone bases its return to accessibilityChildrenInNavigationOrder on the navigationOrderInRenderOrder property.
+/// If navigationOrderInRenderOrder is set to YES, the accessible children are returned in the same order as returned by [(NSView) accessibilityChildren].
+/// If navigationOrderInRenderOrder is set to NO, the accessible children are returned in the order determined by [(NSView) accessibilityChildrenInNavigationOrder].
 - (NSArray *)accessibilityChildrenInNavigationOrder {
 	if ([self navigationOrderInRenderOrder]) {
 		return [self accessibilityChildren];
 	}
-	
+
 	return [super accessibilityChildrenInNavigationOrder];
 }
 
