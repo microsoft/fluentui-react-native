@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Implementation of FocusZone navigationOrderInRenderOrder for MacOS",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}
