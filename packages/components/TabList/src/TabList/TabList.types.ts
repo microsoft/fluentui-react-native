@@ -3,9 +3,9 @@ import type { LayoutRectangle, View } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import type { SyntheticFocusManagerState, ISyntheticFocusManager } from '@fluentui-react-native/synthetic-focus-manager';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
 
-import type { SyntheticFocusManagerState, ISyntheticFocusManager } from '../SyntheticFocusManager/SyntheticFocusManager.types';
 import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 export const tabListName = 'TabList';

@@ -4,9 +4,9 @@ import type { View, AccessibilityState, LayoutRectangle } from 'react-native';
 import { memoize, mergeStyles } from '@fluentui-react-native/framework';
 import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { useSyntheticFocusState } from '@fluentui-react-native/synthetic-focus-manager';
 
 import type { TabListInfo, TabListProps } from './TabList.types';
-import { useSyntheticFocusState } from '../SyntheticFocusManager/useSyntheticFocus';
 import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 /**

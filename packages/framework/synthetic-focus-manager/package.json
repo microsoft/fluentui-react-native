@@ -1,0 +1,65 @@
+{
+  "name": "@fluentui-react-native/synthetic-focus-manager",
+  "version": "0.1.0",
+  "description": "Experimental class for managing faked focus",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/synthetic-focus-manager"
+  },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "test": "fluentui-scripts jest",
+    "lint": "fluentui-scripts eslint",
+    "start": "fluentui-scripts dev",
+    "start-test": "fluentui-scripts jest-watch",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native/metro-config": "^0.72.0",
+    "@types/jest": "^29.0.0",
+    "react": "18.2.0",
+    "react-native": "^0.72.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "^0.72.0"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": [
+        "react-native@0.72"
+      ],
+      "capabilities": [
+        "core",
+        "core-android",
+        "core-ios"
+      ]
+    }
+  }
+}

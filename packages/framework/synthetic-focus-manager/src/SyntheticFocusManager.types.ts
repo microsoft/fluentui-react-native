@@ -8,8 +8,9 @@ export interface SyntheticFocusManagerOptions {
 }
 
 export interface SyntheticFocusManagerItem extends PressableFocusProps {
-  key: string;
   ref: React.RefObject<IFocusable>;
+  focusable?: boolean;
+  order?: number;
 }
 
 export interface SyntheticFocusManagerListeners {
@@ -23,6 +24,7 @@ export interface ISyntheticFocusManager {
   active: boolean;
 
   register: (item: SyntheticFocusManagerItem) => void;
+  update: (ref: React.RefObject<IFocusable>, updates: Partial<SyntheticFocusManagerItem>) => void;
   unregister: (ref: React.RefObject<IFocusable>) => void;
   next: () => void;
   prev: () => void;

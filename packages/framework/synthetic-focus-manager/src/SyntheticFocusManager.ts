@@ -20,6 +20,7 @@ function getFakeEvent(ref: FocusableRef): FocusEvent | BlurEvent {
 
 export class SyntheticFocusManager implements ISyntheticFocusManager {
   private items: SyntheticFocusManagerItem[];
+  private itemMap: Map<FocusableRef, SyntheticFocusManagerItem>;
   private listenerMap: Map<React.RefObject<any>, SyntheticFocusManagerListeners>;
   private currentIndex: number;
   private isEnabled: boolean;
@@ -36,6 +37,7 @@ export class SyntheticFocusManager implements ISyntheticFocusManager {
 
   constructor(options?: SyntheticFocusManagerOptions) {
     this.items = [];
+    this.itemMap = new Map();
     this.listenerMap = new Map();
     this.currentIndex = 0;
     this.isEnabled = false;
@@ -44,12 +46,17 @@ export class SyntheticFocusManager implements ISyntheticFocusManager {
   }
 
   register(item: SyntheticFocusManagerItem) {
-    console.log('Registering', item);
     this.items.push(item);
+    this.itemMap.set(item.ref, item);
 
     if (this.defaultTabbableElement && this.defaultTabbableElement === item.ref) {
       this.currentIndex = this.items.length - 1;
     }
+  }
+
+  update(ref: FocusableRef, updates: Partial<SyntheticFocusManagerItem>) {
+    const item = this.itemMap.get(ref);
+    Object.assign(item, updates);
   }
 
   unregister(ref: FocusableRef) {
@@ -63,6 +70,7 @@ export class SyntheticFocusManager implements ISyntheticFocusManager {
     }
 
     this.items.splice(indexToRemove, 1);
+    this.itemMap.delete(ref);
   }
 
   next() {
