@@ -5,6 +5,7 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import type { LayoutTokens } from '@fluentui-react-native/tokens';
 
+import type { SyntheticFocusManagerState, ISyntheticFocusManager } from '../SyntheticFocusManager/SyntheticFocusManager.types';
 import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 export const tabListName = 'TabList';
@@ -91,6 +92,8 @@ export interface TabListState {
    */
   size: TabListSize;
 
+  syntheticFocusManagerState?: SyntheticFocusManagerState;
+
   /**
    * Array of Tab values in the group
    */
@@ -165,6 +168,8 @@ export interface TabListProps extends Pick<FocusZoneProps, 'isCircularNavigation
    * Flag to change the size of the tabs.
    */
   size?: TabListSize;
+
+  syntheticFocusManager?: ISyntheticFocusManager;
 
   testID?: string;
 

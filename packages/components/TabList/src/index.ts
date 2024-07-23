@@ -5,3 +5,4 @@ export { tabListName } from './TabList/TabList.types';
 export type { TabListInfo, TabListProps, TabListSlotProps, TabListState, TabListTokens, TabListType } from './TabList/TabList.types';
 export { TabList } from './TabList/TabList';
 export { TabListContext } from './TabList/TabListContext';
+export { SyntheticFocusManager } from './SyntheticFocusManager/SyntheticFocusManager';

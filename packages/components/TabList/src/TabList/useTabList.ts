@@ -6,6 +6,7 @@ import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 import type { TabListInfo, TabListProps } from './TabList.types';
+import { useSyntheticFocusState } from '../SyntheticFocusManager/useSyntheticFocus';
 import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
 
 /**
@@ -28,6 +29,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     onTabSelect,
     selectedKey,
     size = 'medium',
+    syntheticFocusManager,
     vertical = false,
   } = props;
 
@@ -44,6 +46,18 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   const tabRefMap = React.useRef<{ [key: string]: React.RefObject<View> }>({}).current;
   const disabledStateMap = React.useRef<{ [key: string]: boolean }>({}).current;
 
+  const refMapContains = React.useCallback(
+    (ref: React.RefObject<View>): boolean => {
+      for (const k in tabRefMap) {
+        if (tabRefMap[k] === ref) {
+          console.log('found ref for tab key', k);
+          return true;
+        }
+      }
+      return false;
+    },
+    [tabRefMap],
+  );
   const updateTabRef = React.useCallback((key: string, ref: React.RefObject<View>) => (tabRefMap[key] = ref), [tabRefMap]);
   const updateDisabledTabs = React.useCallback(
     (key: string, isDisabled: boolean) => {
@@ -127,6 +141,23 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelectedTabDisabled]);
 
+  const syntheticFocusListeners = React.useMemo(() => {
+    if (syntheticFocusManager) {
+      return {
+        onFocusManagerEnable: () => {
+          syntheticFocusManager.focus(focusedTabRef);
+        },
+        onFocusManagerDisable: () => {
+          if (syntheticFocusManager.current && refMapContains(syntheticFocusManager.current.ref)) {
+            setFocusedTabRef(syntheticFocusManager.current.ref);
+          }
+        },
+      };
+    }
+    return undefined;
+  }, [focusedTabRef, refMapContains, syntheticFocusManager]);
+  const syntheticFocusManagerState = useSyntheticFocusState(componentRef, syntheticFocusManager, syntheticFocusListeners);
+
   return {
     props: {
       ...props,
@@ -159,6 +190,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       setFocusedTabRef: setFocusedTabRef,
       setInvoked: setInvoked,
       size: size,
+      syntheticFocusManagerState: syntheticFocusManagerState,
       tabKeys: tabKeys,
       vertical: vertical,
       updateAnimatedIndicatorStyles: updateStyles,

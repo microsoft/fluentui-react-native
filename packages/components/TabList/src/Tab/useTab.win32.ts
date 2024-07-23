@@ -41,6 +41,7 @@ export const useTab = (props: TabProps): TabInfo => {
     setInvoked,
     setFocusedTabRef,
     selectedKey,
+    syntheticFocusManagerState,
     tabKeys,
     vertical,
     updateDisabledTabs,
@@ -116,6 +117,21 @@ export const useTab = (props: TabProps): TabInfo => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invoked, setInvoked]);
 
+  React.useEffect(() => {
+    if (syntheticFocusManagerState) {
+      syntheticFocusManagerState.focusManager.register({
+        key: tabKey,
+        ref: componentRef,
+        onFocus: props.onFocus,
+        onBlur: props.onBlur,
+      });
+    }
+    return () => syntheticFocusManagerState?.focusManager.unregister(componentRef);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [syntheticFocusManagerState.focusManager]);
+
+  const focused = syntheticFocusManagerState.active ? syntheticFocusManagerState.focusedRef === componentRef : pressable.state.focused;
+
   // Used when creating accessibility properties in mergeSettings below.
   const onAccessibilityActionProp = React.useCallback(
     (event: AccessibilityActionEvent) => {
@@ -156,6 +172,7 @@ export const useTab = (props: TabProps): TabInfo => {
     },
     state: {
       ...pressable.state,
+      focused,
       selected: tabKey === selectedKey,
     },
   };
