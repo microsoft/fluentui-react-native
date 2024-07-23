@@ -11,6 +11,7 @@ export interface SyntheticFocusManagerItem extends PressableFocusProps {
   ref: React.RefObject<IFocusable>;
   focusable?: boolean;
   order?: number;
+  key?: string;
 }
 
 export interface SyntheticFocusManagerListeners {

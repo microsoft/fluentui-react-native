@@ -121,6 +121,7 @@ export const useTab = (props: TabProps): TabInfo => {
     if (syntheticFocusManagerState) {
       syntheticFocusManagerState.focusManager.register({
         ref: componentRef,
+        key: tabKey,
         onFocus: props.onFocus,
         onBlur: props.onBlur,
       });
