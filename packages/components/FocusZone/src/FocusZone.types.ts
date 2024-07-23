@@ -1,5 +1,4 @@
 import type * as React from 'react';
-import type { ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
