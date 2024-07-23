@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Minor tweaks for Mac behavior",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "nakambo@microsoft.com",
-  "dependentChangeType": "patch"
-}

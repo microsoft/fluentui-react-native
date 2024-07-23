@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 23 Jul 2024 16:56:54 GMT",
+      "version": "0.170.1",
+      "tag": "@fluentui-react-native/tester_v0.170.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ddf90fafdfaccd6318bb66f1d114f632bc5eb485",
+            "comment": "Minor tweaks for Mac behavior"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Jul 2024 20:20:33 GMT",
       "version": "0.170.0",
       "tag": "@fluentui-react-native/tester_v0.170.0",

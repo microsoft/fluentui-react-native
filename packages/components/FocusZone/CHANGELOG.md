@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Mon, 15 Apr 2024 21:31:44 GMT and should not be manually modified.
+This log was last generated on Tue, 23 Jul 2024 16:56:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.0
+
+Tue, 23 Jul 2024 16:56:54 GMT
+
+### Minor changes
+
+- Implement Focus Zone circular navigation and tab key behaviors for macOS (nakambo@microsoft.com)
 
 ## 0.17.1
 
