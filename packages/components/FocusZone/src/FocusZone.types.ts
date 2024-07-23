@@ -39,7 +39,6 @@ export type FocusZoneProps = React.PropsWithChildren<{
   use2DNavigation?: boolean;
 
   /**
-   * @platform win32
    * By default, pressing Tab within a FocusZone moves focus out of the FocusZone.
    * This prop allows you to change that behavior.
    *
