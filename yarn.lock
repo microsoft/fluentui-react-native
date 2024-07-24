@@ -4128,6 +4128,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/focus-zone@workspace:packages/components/FocusZone"
   dependencies:
+    "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
