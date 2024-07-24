@@ -9,6 +9,12 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(disabled, BOOL)
 
+RCT_CUSTOM_VIEW_PROPERTY(navigationOrderInRenderOrder, BOOL, RCTFocusZone)
+{
+	[view setNavigationOrderInRenderOrder:[json boolValue]];
+	[[view window] recalculateKeyViewLoop];
+}
+
 RCT_CUSTOM_VIEW_PROPERTY(focusZoneDirection, NSString, RCTFocusZone)
 {
 	if ([json isEqualToString:@"bidirectional"])

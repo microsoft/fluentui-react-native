@@ -26,6 +26,7 @@
     "directory": "packages/components/FocusZone"
   },
   "dependencies": {
+    "@fluentui-react-native/adapters": "workspace:*",
     "@fluentui-react-native/interactive-hooks": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",
     "@uifabricshared/foundation-settings": "workspace:*"
