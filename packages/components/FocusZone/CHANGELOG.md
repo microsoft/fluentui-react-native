@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Tue, 23 Jul 2024 16:56:54 GMT and should not be manually modified.
+This log was last generated on Wed, 24 Jul 2024 16:32:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.0
+
+Wed, 24 Jul 2024 16:32:59 GMT
+
+### Minor changes
+
+- Implementation of FocusZone navigationOrderInRenderOrder for MacOS (patboyd@microsoft.com)
 
 ## 0.18.0
 
