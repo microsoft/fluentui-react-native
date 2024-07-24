@@ -156,7 +156,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     }
     return undefined;
   }, [focusedTabRef, refMapContains, syntheticFocusManager]);
-  const syntheticFocusManagerState = useSyntheticFocusState(componentRef, syntheticFocusManager, syntheticFocusListeners);
+  const syntheticFocusState = useSyntheticFocusState(componentRef, syntheticFocusManager, syntheticFocusListeners);
 
   return {
     props: {
@@ -190,7 +190,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       setFocusedTabRef: setFocusedTabRef,
       setInvoked: setInvoked,
       size: size,
-      syntheticFocusManagerState: syntheticFocusManagerState,
+      syntheticFocusState: syntheticFocusState,
       tabKeys: tabKeys,
       vertical: vertical,
       updateAnimatedIndicatorStyles: updateStyles,

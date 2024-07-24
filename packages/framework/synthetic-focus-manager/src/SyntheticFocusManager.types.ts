@@ -37,7 +37,7 @@ export interface ISyntheticFocusManager {
   removeListeners: (ref: React.RefObject<any>) => void;
 }
 
-export interface SyntheticFocusManagerState {
+export interface SyntheticFocusState {
   active: boolean;
   focusManager: ISyntheticFocusManager;
   focusedRef?: React.RefObject<IFocusable>;

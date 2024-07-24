@@ -4,6 +4,7 @@ import type { AccessibilityActionEvent, AccessibilityState } from 'react-native'
 import { memoize } from '@fluentui-react-native/framework';
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { usePressableState, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useSyntheticFocus } from '@fluentui-react-native/synthetic-focus-manager';
 
 import type { TabProps, TabInfo } from './Tab.types';
 import { TabListContext } from '../TabList/TabListContext';
@@ -41,7 +42,7 @@ export const useTab = (props: TabProps): TabInfo => {
     setInvoked,
     setFocusedTabRef,
     selectedKey,
-    syntheticFocusManagerState,
+    syntheticFocusState,
     tabKeys,
     vertical,
     updateDisabledTabs,
@@ -117,20 +118,17 @@ export const useTab = (props: TabProps): TabInfo => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invoked, setInvoked]);
 
-  React.useEffect(() => {
-    if (syntheticFocusManagerState) {
-      syntheticFocusManagerState.focusManager.register({
-        ref: componentRef,
-        key: tabKey,
-        onFocus: props.onFocus,
-        onBlur: props.onBlur,
-      });
-    }
-    return () => syntheticFocusManagerState?.focusManager.unregister(componentRef);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [syntheticFocusManagerState.focusManager]);
+  const hasSyntheticFocus = useSyntheticFocus(
+    {
+      ref: componentRef,
+      key: tabKey,
+      onFocus: props.onFocus,
+      onBlur: props.onBlur,
+    },
+    syntheticFocusState,
+  );
 
-  const focused = syntheticFocusManagerState.active ? syntheticFocusManagerState.focusedRef === componentRef : pressable.state.focused;
+  const focused = syntheticFocusState.active ? hasSyntheticFocus : pressable.state.focused;
 
   // Used when creating accessibility properties in mergeSettings below.
   const onAccessibilityActionProp = React.useCallback(

@@ -3257,6 +3257,7 @@ __metadata:
     "@fluentui-react-native/pressable": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/styling-utils": "workspace:*"
+    "@fluentui-react-native/synthetic-focus-manager": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -4412,6 +4413,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/synthetic-focus-manager": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -4933,7 +4935,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/synthetic-focus-manager@workspace:packages/framework/synthetic-focus-manager":
+"@fluentui-react-native/synthetic-focus-manager@workspace:*, @fluentui-react-native/synthetic-focus-manager@workspace:packages/framework/synthetic-focus-manager":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/synthetic-focus-manager@workspace:packages/framework/synthetic-focus-manager"
   dependencies:
@@ -4962,6 +4964,7 @@ __metadata:
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@fluentui-react-native/synthetic-focus-manager": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/text": "workspace:*"
     "@fluentui-react-native/theming-utils": "workspace:*"

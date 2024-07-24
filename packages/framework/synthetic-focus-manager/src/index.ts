@@ -4,6 +4,6 @@ export type {
   SyntheticFocusManagerItem,
   SyntheticFocusManagerListeners,
   ISyntheticFocusManager,
-  SyntheticFocusManagerState,
+  SyntheticFocusState,
 } from './SyntheticFocusManager.types';
-export { useSyntheticFocusState } from './useSyntheticFocusState';
+export { useSyntheticFocus, useSyntheticFocusState } from './useSyntheticFocus';

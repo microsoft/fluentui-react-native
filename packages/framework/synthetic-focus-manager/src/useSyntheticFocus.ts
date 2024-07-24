@@ -2,13 +2,18 @@ import * as React from 'react';
 
 import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 
-import type { ISyntheticFocusManager, SyntheticFocusManagerListeners, SyntheticFocusManagerState } from './SyntheticFocusManager.types';
+import type {
+  ISyntheticFocusManager,
+  SyntheticFocusManagerItem,
+  SyntheticFocusManagerListeners,
+  SyntheticFocusState,
+} from './SyntheticFocusManager.types';
 
 export const useSyntheticFocusState = (
   ref: React.RefObject<any>,
   focusManager?: ISyntheticFocusManager,
   listeners?: SyntheticFocusManagerListeners,
-): SyntheticFocusManagerState | undefined => {
+): SyntheticFocusState | undefined => {
   const [active, setActive] = React.useState<boolean>(false);
   const [focusedRef, setFocusedRef] = React.useState<React.RefObject<IFocusable> | undefined>(undefined);
 
@@ -43,4 +48,18 @@ export const useSyntheticFocusState = (
         : undefined,
     [active, focusManager, focusedRef],
   );
+};
+
+export const useSyntheticFocus = (item: SyntheticFocusManagerItem, state?: SyntheticFocusState): boolean => {
+  const ref = item.ref;
+
+  React.useEffect(() => {
+    if (state) {
+      state.focusManager.register(item);
+    }
+    return () => state && state.focusManager.unregister(ref);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
+
+  return state && state.active && state.focusedRef === ref;
 };
