@@ -181,6 +181,32 @@ const NestedFocusZone: React.FunctionComponent = () => {
   );
 };
 
+const FocusZoneGrid: React.FunctionComponent = () => {
+  const [isCircularNavigation, setCircularNavigation] = React.useState(true);
+  const [tabNavigation, setTabNavigation] = React.useState<FocusZoneTabNavigation>('None');
+  const onCircularNavigationChange = React.useCallback((_, isChecked: boolean) => setCircularNavigation(isChecked), []);
+
+  return (
+    <FocusZoneListWrapper>
+      <>
+        <Text>FocusZone Grid</Text>
+        <Checkbox label="Circular Navigation" checked={isCircularNavigation} onChange={onCircularNavigationChange} />
+        <MenuButton
+          content={`Tab key navigation: ${tabNavigation}`}
+          menuItems={FocusZoneTabNavigations.map((dir) => ({
+            itemKey: dir,
+            text: dir,
+          }))}
+          onItemClick={(dir) => setTabNavigation(dir as FocusZoneTabNavigation)}
+        />
+        <FocusZone isCircularNavigation tabKeyNavigation={tabNavigation}>
+          <GridOfButtons gridWidth={3} gridHeight={3} />
+        </FocusZone>
+      </>
+    </FocusZoneListWrapper>
+  );
+};
+
 const focusZoneSections: TestSection[] = [
   {
     name: 'Common FocusZone Usage',
@@ -214,6 +240,10 @@ const focusZoneSections: TestSection[] = [
   {
     name: 'Nested FocusZone',
     component: NestedFocusZone,
+  },
+  {
+    name: 'FocusZone Grid',
+    component: FocusZoneGrid,
   },
 ];
 
