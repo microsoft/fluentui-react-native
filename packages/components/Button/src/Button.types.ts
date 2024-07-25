@@ -4,7 +4,6 @@ import type { ViewStyle, ColorValue } from 'react-native';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
-import type { SyntheticFocusManager } from '@fluentui-react-native/synthetic-focus-manager';
 import type { TextProps } from '@fluentui-react-native/text';
 import type { ShadowToken } from '@fluentui-react-native/theme-types';
 import type { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
@@ -165,8 +164,6 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default false
    */
   loading?: boolean;
-
-  syntheticFocusManager?: SyntheticFocusManager;
 }
 
 interface ButtonState extends PressableState {

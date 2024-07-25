@@ -34,7 +34,6 @@
     "@fluentui-react-native/interactive-hooks": "workspace:*",
     "@fluentui-react-native/pressable": "workspace:*",
     "@fluentui-react-native/styling-utils": "workspace:*",
-    "@fluentui-react-native/synthetic-focus-manager": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/theme-types": "workspace:*",

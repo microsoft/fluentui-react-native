@@ -5,7 +5,6 @@ import { I18nManager, Platform } from 'react-native';
 import { memoize } from '@fluentui-react-native/framework';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { isKeyPressEvent, usePressableState, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { useSyntheticFocus } from '@fluentui-react-native/synthetic-focus-manager';
 
 import type { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { useMenuContext } from '../context/menuContext';
@@ -20,7 +19,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { accessible, onClick, accessibilityState, componentRef = defaultComponentRef, disabled = false, persistOnClick, ...rest } = props;
-  const { isSubmenu, persistOnItemClick, setOpen, syntheticFocusState } = useMenuContext();
+  const { isSubmenu, persistOnItemClick, setOpen } = useMenuContext();
   const { hasCheckmarks, hasIcons, hasTooltips, onArrowClose } = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
   const shouldPersist = persistOnClick ?? persistOnItemClick;
@@ -90,15 +89,6 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // Track the ref and disabled props on this menu item so the MenuList can handle Home and End keypresses.
   useMenuItemTracking(componentRef, disabled);
 
-  const hasSyntheticFocus = useSyntheticFocus(
-    {
-      ref: componentRef,
-      onFocus: onFocus,
-      onBlur: props.onBlur,
-    },
-    syntheticFocusState,
-  );
-
   return {
     props: {
       ...pressable.props,
@@ -128,7 +118,6 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
     },
     state: {
       ...pressable.state,
-      focused: syntheticFocusState?.active ? hasSyntheticFocus : pressable.state.focused,
       hasSubmenu,
       hasIcons,
       hasCheckmarks,

@@ -3,7 +3,6 @@ import { Platform } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { isMouseEvent } from '@fluentui-react-native/interactive-hooks';
-import { useSyntheticFocusState } from '@fluentui-react-native/synthetic-focus-manager';
 
 import type { MenuProps, MenuState } from './Menu.types';
 import { useMenuContext } from '../context/menuContext';
@@ -34,8 +33,6 @@ export const useMenu = (props: MenuProps): MenuState => {
   // the parent menu will close when the timeout passes.
   const parentPopoverHoverOutTimer = isSubmenu ? context.popoverHoverOutTimer : undefined;
 
-  const syntheticFocusState = useSyntheticFocusState(triggerRef, props.syntheticFocusManager);
-
   return {
     openOnHover,
     ...props,
@@ -48,7 +45,6 @@ export const useMenu = (props: MenuProps): MenuState => {
     isSubmenu,
     isControlled: isOpenControlled,
     parentPopoverHoverOutTimer,
-    syntheticFocusState,
   };
 };
 

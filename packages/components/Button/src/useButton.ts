@@ -4,7 +4,6 @@ import type { LayoutChangeEvent } from 'react-native';
 
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { useSyntheticFocusState, useSyntheticFocus } from '@fluentui-react-native/synthetic-focus-manager';
 import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
 import type { ButtonProps, ButtonInfo } from './Button.types';
@@ -30,7 +29,6 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     loading,
     enableFocusRing,
     focusable,
-    syntheticFocusManager,
     ...rest
   } = props;
 
@@ -95,18 +93,6 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     [onLayout, setBaseHeight, setBaseWidth, shouldUseTwoToneFocusBorder],
   );
 
-  const syntheticFocusState = useSyntheticFocusState(componentRef, syntheticFocusManager);
-  const hasSyntheticFocus = useSyntheticFocus(
-    {
-      ref: componentRef,
-      onFocus: props.onFocus,
-      onBlur: props.onBlur,
-    },
-    syntheticFocusState,
-  );
-
-  console.log(syntheticFocusState?.focusedRef === componentRef);
-
   return {
     props: {
       ...onKeyProps,
@@ -131,7 +117,6 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     },
     state: {
       ...pressable.state,
-      focused: syntheticFocusState?.active ? hasSyntheticFocus : pressable.state.focused,
       pressed: pressable.state.pressed,
       measuredWidth: baseWidth,
       measuredHeight: baseHeight,

@@ -2,7 +2,6 @@ import type React from 'react';
 import type { Animated, LayoutChangeEvent, View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import type { SyntheticFocusManager, SyntheticFocusState } from '@fluentui-react-native/synthetic-focus-manager';
 
 import type { MenuListProps } from '../MenuList/MenuList.types';
 
@@ -40,8 +39,6 @@ export interface MenuProps extends MenuListProps {
    * Do not dismiss the menu when a menu item is clicked
    */
   persistOnItemClick?: boolean;
-
-  syntheticFocusManager?: SyntheticFocusManager;
 }
 
 export type MenuSizeType = {
@@ -68,7 +65,6 @@ export interface MenuState extends MenuProps {
   animationStarted?: boolean;
   menuSize?: MenuSizeType;
   testID?: string;
-  syntheticFocusState?: SyntheticFocusState;
 }
 
 export enum AndroidMenuStates {
