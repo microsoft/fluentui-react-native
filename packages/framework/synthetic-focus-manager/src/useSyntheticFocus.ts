@@ -51,15 +51,16 @@ export const useSyntheticFocusState = (
 };
 
 export const useSyntheticFocus = (item: SyntheticFocusManagerItem, state?: SyntheticFocusState): boolean => {
+  const focusManager = state?.focusManager;
   const ref = item.ref;
 
   React.useEffect(() => {
-    if (state) {
-      state.focusManager.register(item);
+    if (focusManager) {
+      focusManager.register(item);
     }
-    return () => state && state.focusManager.unregister(ref);
+    return () => focusManager && focusManager.unregister(ref);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+  }, [focusManager]);
 
   return state && state.active && state.focusedRef === ref;
 };

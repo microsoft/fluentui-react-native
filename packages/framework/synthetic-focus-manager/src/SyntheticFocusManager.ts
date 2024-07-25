@@ -74,28 +74,34 @@ export class SyntheticFocusManager implements ISyntheticFocusManager {
   }
 
   next() {
-    this.current.onBlur?.(getFakeEvent(this.current.ref));
+    this.current?.onBlur?.(getFakeEvent(this.current?.ref));
     const nextIndex = this.currentIndex + 1;
     if (this.isCircularNavigation) {
       this.currentIndex = nextIndex % this.items.length;
     } else {
-      this.currentIndex = Math.min(this.items.length - 1, nextIndex);
+      if (nextIndex === this.items.length) {
+        return;
+      }
+      this.currentIndex = nextIndex;
     }
-    this.current.onFocus?.(getFakeEvent(this.current.ref));
+    this.current?.onFocus?.(getFakeEvent(this.current?.ref));
     this.listenerMap.forEach((listeners) => {
       listeners.onFocusChange?.(this.current);
     });
   }
 
   prev() {
-    this.current.onBlur?.(getFakeEvent(this.current.ref));
+    this.current?.onBlur?.(getFakeEvent(this.current?.ref));
     const prevIndex = this.currentIndex - 1;
     if (this.isCircularNavigation) {
       this.currentIndex = prevIndex < 0 ? this.items.length - 1 : prevIndex;
     } else {
-      this.currentIndex = Math.max(0, this.currentIndex - 1);
+      if (prevIndex < 0) {
+        return;
+      }
+      this.currentIndex = prevIndex;
     }
-    this.current.onFocus?.(getFakeEvent(this.current.ref));
+    this.current?.onFocus?.(getFakeEvent(this.current?.ref));
     this.listenerMap.forEach((listeners) => {
       listeners.onFocusChange?.(this.current);
     });
@@ -111,14 +117,14 @@ export class SyntheticFocusManager implements ISyntheticFocusManager {
     }
 
     this.currentIndex = indexToFocus;
-    this.current.onFocus?.(getFakeEvent(this.current.ref));
+    this.current?.onFocus?.(getFakeEvent(this.current?.ref));
     this.listenerMap.forEach((listeners) => {
       listeners.onFocusChange?.(this.current);
     });
   }
 
   blur() {
-    this.current.onBlur?.(getFakeEvent(this.current.ref));
+    this.current?.onBlur?.(getFakeEvent(this.current?.ref));
     this.currentIndex = -1;
     this.listenerMap.forEach((listeners) => {
       listeners.onFocusChange?.();
