@@ -39,6 +39,7 @@ import { SpinnerTest } from './TestComponents/Spinner';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
 import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
+import { SyntheticFocusManagerTest } from './TestComponents/SyntheticFocusManager';
 import { TabListTest } from './TestComponents/TabList/TabListTest';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
 import { TextV1Test } from './TestComponents/TextV1';
@@ -300,6 +301,12 @@ export const tests: TestDescription[] = [
     component: SwitchTest,
     testPageButton: Constants.HOMEPAGE_SWITCH_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
+  },
+  {
+    name: 'Synthetic Focus Manager',
+    component: SyntheticFocusManagerTest,
+    testPageButton: '',
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'TabList',

@@ -69,6 +69,7 @@
     "@fluentui-react-native/spinner": "workspace:*",
     "@fluentui-react-native/stack": "workspace:*",
     "@fluentui-react-native/switch": "workspace:*",
+    "@fluentui-react-native/synthetic-focus-manager": "workspace:*",
     "@fluentui-react-native/tablist": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@fluentui-react-native/theme": "workspace:*",

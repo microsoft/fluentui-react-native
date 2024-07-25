@@ -50,7 +50,6 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     (ref: React.RefObject<View>): boolean => {
       for (const k in tabRefMap) {
         if (tabRefMap[k] === ref) {
-          console.log('found ref for tab key', k);
           return true;
         }
       }
