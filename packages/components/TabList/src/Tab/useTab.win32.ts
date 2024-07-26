@@ -128,7 +128,7 @@ export const useTab = (props: TabProps): TabInfo => {
     syntheticFocusState,
   );
 
-  const focused = syntheticFocusState.active ? hasSyntheticFocus : pressable.state.focused;
+  const focused = syntheticFocusState?.active ? hasSyntheticFocus : pressable.state.focused;
 
   // Used when creating accessibility properties in mergeSettings below.
   const onAccessibilityActionProp = React.useCallback(
