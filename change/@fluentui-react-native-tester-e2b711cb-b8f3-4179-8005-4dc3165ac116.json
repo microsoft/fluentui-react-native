@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add test page for synthetic focus manager",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

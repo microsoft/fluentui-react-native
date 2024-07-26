@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add synthetic focus manager class",
+  "packageName": "@fluentui-react-native/synthetic-focus-manager",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add support for synthetic focus manager",
+  "packageName": "@fluentui-react-native/tablist",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
