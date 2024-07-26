@@ -9,6 +9,11 @@ import type {
   SyntheticFocusState,
 } from './SyntheticFocusManager.types';
 
+/**
+ * Given a focus manager, this hook attaches important listeners to the manager.
+ *
+ * @returns `SyntheticFocusState` stating whether the manager is active and what element is currently focused by the manager
+ */
 export const useSyntheticFocusState = (
   ref: React.RefObject<any>,
   focusManager?: ISyntheticFocusManager,
@@ -50,6 +55,11 @@ export const useSyntheticFocusState = (
   );
 };
 
+/**
+ * Given a `SyntheticFocusState`, this hook should be called by an element that wants to render synthetic focus.
+ *
+ * @returns boolean flag of whether "fake" focus is active for this element
+ */
 export const useSyntheticFocus = (item: SyntheticFocusManagerItem, state?: SyntheticFocusState): boolean => {
   const focusManager = state?.focusManager;
   const ref = item.ref;
