@@ -538,10 +538,10 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 	BOOL forward = action != FocusZoneActionShiftTab;
 	NSView *firstResponder = GetFirstResponder([self window]);
-	NSView *nextViewToFocus = action == forward ? [firstResponder nextValidKeyView] : [firstResponder previousValidKeyView];
+	NSView *nextViewToFocus = forward ? [firstResponder nextValidKeyView] : [firstResponder previousValidKeyView];
 
 	if (nextViewToFocus == self)
-		nextViewToFocus = action == forward ? [nextViewToFocus nextValidKeyView] : [nextViewToFocus previousValidKeyView];;
+		nextViewToFocus = forward ? [nextViewToFocus nextValidKeyView] : [nextViewToFocus previousValidKeyView];;
 
 	if ([@"Normal" isEqual:tabKeyNavigation] || [nextViewToFocus isDescendantOf:self])
 		return nextViewToFocus;
