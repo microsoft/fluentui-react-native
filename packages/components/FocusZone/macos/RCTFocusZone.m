@@ -482,8 +482,6 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 {
 	NSView *nextViewToFocus;
 
-	[[self window] recalculateKeyViewLoop];
-
 	// Find the first view outside the FocusZone (or any parent FocusZones) to place focus
 	RCTFocusZone *focusZoneAncestor = GetFocusZoneAncestor(self);
 
@@ -527,6 +525,41 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return nextViewToFocus;
 }
 
+- (NSView *)nextViewToFocusForTab:(FocusZoneAction)action
+{
+	[[self window] recalculateKeyViewLoop];
+
+	NSString *tabKeyNavigation = [self tabKeyNavigation];
+	if (![@"NavigateWrap" isEqual:tabKeyNavigation] && ![@"NavigateStopAtEnds" isEqual:tabKeyNavigation]
+		&& ![@"Normal" isEqual:tabKeyNavigation])
+	{
+		return [self nextViewToFocusOutsideZone:action];
+	}
+
+	BOOL forward = action != FocusZoneActionShiftTab;
+	NSView *firstResponder = GetFirstResponder([self window]);
+	NSView *nextViewToFocus = action == forward ? [firstResponder nextValidKeyView] : [firstResponder previousValidKeyView];
+
+	if (nextViewToFocus == self)
+		nextViewToFocus = action == forward ? [nextViewToFocus nextValidKeyView] : [nextViewToFocus previousValidKeyView];;
+
+	if ([@"Normal" isEqual:tabKeyNavigation] || [nextViewToFocus isDescendantOf:self])
+		return nextViewToFocus;
+
+	if ([@"NavigateStopAtEnds" isEqual:tabKeyNavigation])
+		return nil;
+
+	// wrap around -- find first (tab) or last (shift+tab)
+	NSView *aView = firstResponder;
+	while (aView != self && [aView isDescendantOf:self])
+	{
+		nextViewToFocus = aView;
+		aView = forward ? [aView previousValidKeyView] : [aView nextValidKeyView];
+	}
+
+	return nextViewToFocus != firstResponder ? nextViewToFocus : nil;
+}
+
 - (BOOL)isFlipped
 {
 	return YES;
@@ -537,11 +570,6 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	FocusZoneAction action = GetActionForEvent(event);
 	FocusZoneDirection focusZoneDirection = [self focusZoneDirection];
 	NSString *navigateAtEnd = [self navigateAtEnd];
-	NSString *tabKeyNavigation = [self tabKeyNavigation];
-
-	BOOL tabAllowed = [@"NavigateWrap" isEqual:tabKeyNavigation]
-		|| [@"NavigateStopAtEnds" isEqual:tabKeyNavigation]
-		|| [@"Normal" isEqual:tabKeyNavigation];
 
 	BOOL passthrough = NO;
 	NSView *viewToFocus = nil;
@@ -553,25 +581,13 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	{
 		passthrough = YES;
 	}
-	else if (!tabAllowed && (action == FocusZoneActionTab || action == FocusZoneActionShiftTab))
+	else if (action == FocusZoneActionTab || action == FocusZoneActionShiftTab)
 	{
-		viewToFocus = [self nextViewToFocusOutsideZone:action];
+		viewToFocus = [self nextViewToFocusForTab:action];
 	}
 	else
 	{
-		FocusZoneAction directionalAction = action == FocusZoneActionTab ? FocusZoneActionDownArrow
-			: (action == FocusZoneActionShiftTab ? FocusZoneActionUpArrow : action);
-
-		BOOL allowCircular = [@"NavigateWrap" isEqual:action == FocusZoneActionTab || action == FocusZoneActionShiftTab
-			? tabKeyNavigation : navigateAtEnd];
-
-		viewToFocus = [self nextViewToFocusWithFallback:directionalAction considerCircular:allowCircular];
-
-		if (viewToFocus == nil && action != directionalAction && [@"Normal" isEqual:tabKeyNavigation]) // tab, shift+tab
-		{
-			// didn't find a view IN the zone -- look outside
-			viewToFocus = [self nextViewToFocusOutsideZone:action];
-		}
+		viewToFocus = [self nextViewToFocusWithFallback:action considerCircular:[@"NavigateWrap" isEqual:navigateAtEnd]];
 	}
 
 	if (viewToFocus != nil)

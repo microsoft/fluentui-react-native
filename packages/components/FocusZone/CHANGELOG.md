@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Wed, 24 Jul 2024 16:32:59 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Jul 2024 16:00:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.1
+
+Fri, 26 Jul 2024 16:00:07 GMT
+
+### Patches
+
+- [Mac] [Focus Zone] Tweak tab\shift behavior (nakambo@microsoft.com)
 
 ## 0.19.0
 
