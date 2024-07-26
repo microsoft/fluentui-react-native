@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add FocusZone Grid test case",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "nakambo@microsoft.com",
-  "dependentChangeType": "patch"
-}

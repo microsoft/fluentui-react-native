@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 26 Jul 2024 16:00:07 GMT",
+      "version": "0.170.3",
+      "tag": "@fluentui-react-native/tester_v0.170.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "434c367e8cac7d3ef78f4827dab146748f3636d6",
+            "comment": "Add FocusZone Grid test case"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 23 Jul 2024 16:56:54 GMT",
       "version": "0.170.1",
       "tag": "@fluentui-react-native/tester_v0.170.1",
