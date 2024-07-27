@@ -538,10 +538,10 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 	BOOL forward = action != FocusZoneActionShiftTab;
 	NSView *firstResponder = GetFirstResponder([self window]);
-	NSView *nextViewToFocus = action == forward ? [firstResponder nextValidKeyView] : [firstResponder previousValidKeyView];
+	NSView *nextViewToFocus = forward ? [firstResponder nextValidKeyView] : [firstResponder previousValidKeyView];
 
 	if (nextViewToFocus == self)
-		nextViewToFocus = action == forward ? [nextViewToFocus nextValidKeyView] : [nextViewToFocus previousValidKeyView];;
+		nextViewToFocus = forward ? [nextViewToFocus nextValidKeyView] : [nextViewToFocus previousValidKeyView];;
 
 	if ([@"Normal" isEqual:tabKeyNavigation] || [nextViewToFocus isDescendantOf:self])
 		return nextViewToFocus;
@@ -573,17 +573,21 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 	BOOL passthrough = NO;
 	NSView *viewToFocus = nil;
-	if ([self disabled] || action == FocusZoneActionNone
-		|| (focusZoneDirection == FocusZoneDirectionVertical
-			&& (action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow))
-		|| (focusZoneDirection == FocusZoneDirectionHorizontal
-			&& (action == FocusZoneActionUpArrow || action == FocusZoneActionDownArrow)))
+	if ([self disabled] || action == FocusZoneActionNone)
 	{
 		passthrough = YES;
 	}
 	else if (action == FocusZoneActionTab || action == FocusZoneActionShiftTab)
 	{
 		viewToFocus = [self nextViewToFocusForTab:action];
+	}
+	else if ((focusZoneDirection == FocusZoneDirectionVertical
+			&& (action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow))
+		|| (focusZoneDirection == FocusZoneDirectionHorizontal
+			&& (action == FocusZoneActionUpArrow || action == FocusZoneActionDownArrow))
+		|| (focusZoneDirection == FocusZoneDirectionNone))
+	{
+		passthrough = YES;
 	}
 	else
 	{
