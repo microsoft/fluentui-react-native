@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Fri, 26 Jul 2024 16:00:07 GMT and should not be manually modified.
+This log was last generated on Sat, 27 Jul 2024 06:54:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.2
+
+Sat, 27 Jul 2024 06:54:11 GMT
+
+### Patches
+
+- [Mac] [Focus Zone] Restore broken direction = none functionality (nakambo@microsoft.com)
 
 ## 0.19.1
 

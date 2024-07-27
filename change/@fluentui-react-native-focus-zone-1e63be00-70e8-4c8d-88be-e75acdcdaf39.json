@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[Mac] [Focus Zone] Restore broken direction = none functionality",
-  "packageName": "@fluentui-react-native/focus-zone",
-  "email": "nakambo@microsoft.com",
-  "dependentChangeType": "patch"
-}
