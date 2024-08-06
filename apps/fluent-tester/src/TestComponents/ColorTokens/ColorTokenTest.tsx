@@ -1,16 +1,13 @@
 import * as React from 'react';
-import type { ViewStyle, ColorValue } from 'react-native';
+import type { ColorValue } from 'react-native';
 import { View, StyleSheet, Platform } from 'react-native';
 
 import { Text, ToggleButton } from '@fluentui/react-native';
-import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
-import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';
 
@@ -56,11 +53,6 @@ const styles = StyleSheet.create({
   colorDescriptionNamePadding: { paddingRight: 5 },
 });
 
-const getSwatchColorStyle = (colorName: string, colorValue: ColorValue): ViewStyle => {
-  styles[colorName] = styles[colorName] || { backgroundColor: colorValue };
-  return styles[colorName];
-};
-
 type ColorTokenProps = { colorValue: ColorValue; colorName: string };
 const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps) => {
   if (p.colorValue === undefined) {
@@ -71,7 +63,7 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
   return (
     <View style={styles.swatchItem}>
       <View
-        style={[getSwatchColorStyle(p.colorName, p.colorValue), themedStyles.swatch]}
+        style={[{ backgroundColor: p.colorValue }, themedStyles.swatch]}
         /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(COLORTOKENS_TEST_COMPONENT)}
       />
@@ -92,17 +84,7 @@ const getSwatch = (item) => {
 
 const AliasColorTokensSwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
-
-  const isOfficeTheme =
-    theme.name === 'White' ||
-    theme.name === 'Colorful' ||
-    theme.name === 'DarkGray' ||
-    theme.name === 'Black' ||
-    theme.name === 'HighContrast';
-
-  const aliasColorTokens = isOfficeTheme
-    ? createOfficeAliasTokens(theme.name)
-    : createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
+  const aliasColorTokens = theme.colors;
 
   const aggregator = React.useCallback(
     (colorName: string) => {
