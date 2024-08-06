@@ -31,7 +31,7 @@ export interface NativeProps extends ViewProps {
     | 'rightTopEdge'
     | 'rightCenter'
     | 'rightBottomEdge'
-    | 'bottonLeftEdge'
+    | 'bottomLeftEdge'
     | 'bottomAutoEdge'
     | 'bottomCenter'
     | 'bottomRightEdge',
