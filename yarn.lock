@@ -7241,17 +7241,17 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "@rnx-kit/align-deps@npm:2.5.0"
+  version: 2.5.1
+  resolution: "@rnx-kit/align-deps@npm:2.5.1"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/b85a0a441f35fe0b29a56b18dda097f68f9e388f8120a93fcfe5f63fa1b1586866f7e243598a91d5f04ada0c9870543771f377509a339a6e21272571106b2ffe
+  checksum: 10c0/4a48540005a999541e73e9e987ebb8bfea6cb4ffaa4022ec43ceef1d3f18ca4301774d5143801f5b65ee2152baabfbc7f57a148e64812a6f099432bc91c180c4
   languageName: node
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.28
-  resolution: "@rnx-kit/cli@npm:0.16.28"
+  version: 0.16.29
+  resolution: "@rnx-kit/cli@npm:0.16.29"
   dependencies:
     "@rnx-kit/align-deps": "npm:^2.5.0"
     "@rnx-kit/config": "npm:^0.6.6"
@@ -7279,7 +7279,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10c0/942fd17953af1bce0f92ade8ed63a88ccdfc8c1e54f76ea83feabef8e22fe529d4f4fe0799698800563b13491469d6a6915b496744b712c86c4286c75991168c
+  checksum: 10c0/c443e8cd1273b0845924000ef6ce4d1401c39a8c1d13c1b3ce9834a2745269b172e9b7e9ab8f94e63ad036c6e4c95e1453fa6bdab6c9f2c621c04f43c8fdd815
   languageName: node
   linkType: hard
 
