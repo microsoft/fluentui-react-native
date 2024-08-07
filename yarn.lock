@@ -245,7 +245,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/support@npm:^5.1.2":
+"@appium/support@npm:^5.0.3, @appium/support@npm:^5.1.2":
   version: 5.1.2
   resolution: "@appium/support@npm:5.1.2"
   dependencies:
@@ -9896,7 +9896,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-ios-simulator@npm:^6.0.0, appium-ios-simulator@npm:^6.1.2":
+"appium-ios-simulator@npm:^6.0.0":
   version: 6.1.2
   resolution: "appium-ios-simulator@npm:6.1.2"
   dependencies:
@@ -9912,6 +9912,25 @@ __metadata:
     source-map-support: "npm:^0.x"
     teen_process: "npm:^2.0.0"
   checksum: 10c0/8d45a26d00d37d869508d8c552112abce093bddbb3c186c7628677071fe282d50d795e07cc4bff72f23bb0f18f67166c2b6cbc077ae441e04ebafb0538e2b1c2
+  languageName: node
+  linkType: hard
+
+"appium-ios-simulator@npm:^6.1.7":
+  version: 6.1.11
+  resolution: "appium-ios-simulator@npm:6.1.11"
+  dependencies:
+    "@appium/support": "npm:^5.0.3"
+    "@xmldom/xmldom": "npm:^0.x"
+    appium-xcode: "npm:^5.0.0"
+    async-lock: "npm:^1.0.0"
+    asyncbox: "npm:^3.0.0"
+    bluebird: "npm:^3.5.1"
+    lodash: "npm:^4.2.1"
+    node-simctl: "npm:^7.4.1"
+    semver: "npm:^7.0.0"
+    source-map-support: "npm:^0.x"
+    teen_process: "npm:^2.0.0"
+  checksum: 10c0/fb22c61579a24111eea01a9e986f4674cd9e11462410e462ef34cb3a4dcd09221672e1aa0128fa2499130329cc7f828fe33bcb6d984903334f92ba280a314825
   languageName: node
   linkType: hard
 
@@ -9935,22 +9954,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-remote-debugger@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "appium-remote-debugger@npm:11.1.0"
+"appium-remote-debugger@npm:^12.0.1":
+  version: 12.0.1
+  resolution: "appium-remote-debugger@npm:12.0.1"
   dependencies:
     "@appium/base-driver": "npm:^9.0.0"
-    "@appium/support": "npm:^4.0.0"
+    "@appium/support": "npm:^5.0.3"
     appium-ios-device: "npm:^2.0.0"
-    async-lock: "npm:^1.2.2"
     asyncbox: "npm:^3.0.0"
     bluebird: "npm:^3.4.7"
-    fancy-log: "npm:^2.0.0"
     glob: "npm:^10.3.3"
     lodash: "npm:^4.17.11"
     source-map-support: "npm:^0.x"
     teen_process: "npm:^2.0.0"
-  checksum: 10c0/37cb6f177da52ccf632e68560fefe97d5b89c6c11c31da489507b7271112d58e6a6b3724dcff7936f67c5b09129d9d312db5f440ab15f3622825e3ac3e66e580
+  checksum: 10c0/df3a11458ebbbfa4ba7496c9b29a3840db69f36d3d80f5e899bfed620fe12f4bc2dcdee99b318758ff2c7fe2987bf6636582d071b6683cc622d5a475f3c9c9e1
   languageName: node
   linkType: hard
 
@@ -9985,13 +10002,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-webdriveragent@npm:^8.5.0":
-  version: 8.5.2
-  resolution: "appium-webdriveragent@npm:8.5.2"
+"appium-webdriveragent@npm:^8.7.8":
+  version: 8.9.0
+  resolution: "appium-webdriveragent@npm:8.9.0"
   dependencies:
     "@appium/base-driver": "npm:^9.0.0"
     "@appium/strongbox": "npm:^0.x"
-    "@appium/support": "npm:^4.0.0"
+    "@appium/support": "npm:^5.0.3"
     appium-ios-device: "npm:^2.5.0"
     appium-ios-simulator: "npm:^6.0.0"
     async-lock: "npm:^1.0.0"
@@ -10000,8 +10017,8 @@ __metadata:
     bluebird: "npm:^3.5.5"
     lodash: "npm:^4.17.11"
     source-map-support: "npm:^0.x"
-    teen_process: "npm:^2.0.0"
-  checksum: 10c0/fd314a01bfe6ab985eb8393639d18382cb63910b40be24fa1a89d802a06cc238460e9391656ae7f1fa6bb692a0b138337cac922933dd62f6575625ecb063a646
+    teen_process: "npm:^2.2.0"
+  checksum: 10c0/b0ba3a6f15b3606faaf7f11ee56029e8176a054a2ee6653e48716dc198722b78bf4911300164d4e9da5434751bca2d888ef5cc5faf4cfb8a0f35e682e981ea4b
   languageName: node
   linkType: hard
 
@@ -10043,21 +10060,20 @@ __metadata:
   linkType: hard
 
 "appium-xcuitest-driver@npm:^7.9.1":
-  version: 7.14.0
-  resolution: "appium-xcuitest-driver@npm:7.14.0"
+  version: 7.24.12
+  resolution: "appium-xcuitest-driver@npm:7.24.12"
   dependencies:
     "@colors/colors": "npm:^1.6.0"
     appium-idb: "npm:^1.6.13"
     appium-ios-device: "npm:^2.5.4"
-    appium-ios-simulator: "npm:^6.1.2"
-    appium-remote-debugger: "npm:^11.1.0"
-    appium-webdriveragent: "npm:^8.5.0"
+    appium-ios-simulator: "npm:^6.1.7"
+    appium-remote-debugger: "npm:^12.0.1"
+    appium-webdriveragent: "npm:^8.7.8"
     appium-xcode: "npm:^5.1.4"
     async-lock: "npm:^1.4.0"
     asyncbox: "npm:^3.0.0"
     bluebird: "npm:^3.7.2"
     css-selector-parser: "npm:^3.0.0"
-    fancy-log: "npm:^2.0.0"
     js2xmlparser2: "npm:^0.x"
     lodash: "npm:^4.17.21"
     lru-cache: "npm:^10.0.0"
@@ -10067,11 +10083,11 @@ __metadata:
     portscanner: "npm:^2.2.0"
     semver: "npm:^7.5.4"
     source-map-support: "npm:^0.x"
-    teen_process: "npm:^2.0.60"
+    teen_process: "npm:^2.2.0"
     ws: "npm:^8.13.0"
   peerDependencies:
     appium: ^2.5.4
-  checksum: 10c0/311588e4280494bc218d731ea5b12ac648efc4c7fc9360a2c95c8052d4418f65859f02700a7070cb7d5de1b19dd0facfccd5b5667044cdba3ae0d0fb058f8c63
+  checksum: 10c0/df54041145ca8f62fd4465b2eade0267a069dd739771cfe81eb0b8816a57780d0e525513b9dfd25cd4308f23868874128ac245db49d7583684fe962165bf38ca
   languageName: node
   linkType: hard
 
@@ -10543,7 +10559,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async-lock@npm:1.4.1, async-lock@npm:^1.0.0, async-lock@npm:^1.2.2, async-lock@npm:^1.4.0":
+"async-lock@npm:1.4.1, async-lock@npm:^1.0.0, async-lock@npm:^1.4.0":
   version: 1.4.1
   resolution: "async-lock@npm:1.4.1"
   checksum: 10c0/f696991c7d894af1dc91abc81cc4f14b3785190a35afb1646d8ab91138238d55cabd83bfdd56c42663a008d72b3dc39493ff83797e550effc577d1ccbde254af
@@ -22364,7 +22380,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"teen_process@npm:2.1.1, teen_process@npm:^2.0.0, teen_process@npm:^2.0.1, teen_process@npm:^2.0.60":
+"teen_process@npm:2.1.1, teen_process@npm:^2.0.0, teen_process@npm:^2.0.1":
   version: 2.1.1
   resolution: "teen_process@npm:2.1.1"
   dependencies:
@@ -22376,7 +22392,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"teen_process@npm:2.2.0":
+"teen_process@npm:2.2.0, teen_process@npm:^2.2.0":
   version: 2.2.0
   resolution: "teen_process@npm:2.2.0"
   dependencies:
