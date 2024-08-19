@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Mon, 15 Apr 2024 21:31:43 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Jul 2024 16:16:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.3
+
+Wed, 10 Jul 2024 16:16:42 GMT
+
+### Patches
+
+- Export shimmer consts (ruaraki@microsoft.com)
 
 ## 0.13.2
 

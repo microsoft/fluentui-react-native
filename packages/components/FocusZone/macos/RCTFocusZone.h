@@ -13,8 +13,10 @@ typedef NS_ENUM(NSInteger, FocusZoneDirection) {
 @interface RCTFocusZone : RCTView
 
 @property(nonatomic) BOOL disabled;
+@property(nonatomic) BOOL navigationOrderInRenderOrder;
 @property(nonatomic) FocusZoneDirection focusZoneDirection;
 @property(nonatomic) NSString *navigateAtEnd;
+@property(nonatomic) NSString *tabKeyNavigation;
 @property(nonatomic) NSView *defaultResponder;
 
 @end

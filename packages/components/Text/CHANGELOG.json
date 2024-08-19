@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Tue, 16 Jul 2024 16:36:06 GMT",
+      "version": "0.24.1",
+      "tag": "@fluentui-react-native/text_v0.24.1",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "6c33ce955f280322bf0b6690a896003bafe61db7",
+            "comment": "Rename Text folder"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Jul 2024 17:42:47 GMT",
+      "version": "0.24.1",
+      "tag": "@fluentui-react-native/text_v0.24.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "0daee5ec2a9019bcb7d5820f161ba366bf870ec1",
+            "comment": "Add support for variants on windows"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jun 2024 06:59:07 GMT",
+      "version": "0.24.0",
+      "tag": "@fluentui-react-native/text_v0.24.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "d80485828a125ba05ba923295aeac73270d60c93",
+            "comment": "Add componentRef to TextV1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:39 GMT",
       "version": "0.23.0",
       "tag": "@fluentui-react-native/text_v0.23.0",

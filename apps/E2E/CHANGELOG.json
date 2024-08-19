@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Tue, 21 May 2024 20:54:22 GMT",
+      "version": "1.39.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.39.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "98eec6ce3d5c3aa96f68e4b17eceee48c371b0cd",
+            "comment": "Wdio to v8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 May 2024 19:42:10 GMT",
+      "version": "1.38.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.38.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "d9d5da9c4b29be18aa47f7b3994f101a83a8023e",
+            "comment": "Add env var for e2e testing"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 May 2024 23:18:08 GMT",
+      "version": "1.37.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.37.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "6c3f6269e4f7ce70508972ede8b437df897aa615",
+            "comment": "Split focus zone tests into smaller, separate spec files"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 May 2024 16:48:26 GMT",
       "version": "1.36.0",
       "tag": "@fluentui-react-native/e2e-testing_v1.36.0",

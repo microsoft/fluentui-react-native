@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Sat, 27 Jul 2024 06:54:11 GMT",
+      "version": "0.19.2",
+      "tag": "@fluentui-react-native/focus-zone_v0.19.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "ee36c6f2003fa16ebfca7394ab86ea754d4c37ee",
+            "comment": "[Mac] [Focus Zone] Restore broken direction = none functionality"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 26 Jul 2024 16:00:07 GMT",
+      "version": "0.19.1",
+      "tag": "@fluentui-react-native/focus-zone_v0.19.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "434c367e8cac7d3ef78f4827dab146748f3636d6",
+            "comment": "[Mac] [Focus Zone] Tweak tab\\shift behavior"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 24 Jul 2024 16:32:59 GMT",
+      "version": "0.19.0",
+      "tag": "@fluentui-react-native/focus-zone_v0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "94f1248b7cc169c26b9c685704965a275be6e5d8",
+            "comment": "Implementation of FocusZone navigationOrderInRenderOrder for MacOS"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 23 Jul 2024 16:56:54 GMT",
+      "version": "0.18.0",
+      "tag": "@fluentui-react-native/focus-zone_v0.18.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "ddf90fafdfaccd6318bb66f1d114f632bc5eb485",
+            "comment": "Implement Focus Zone circular navigation and tab key behaviors for macOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Apr 2024 21:31:44 GMT",
       "version": "0.17.1",
       "tag": "@fluentui-react-native/focus-zone_v0.17.1",

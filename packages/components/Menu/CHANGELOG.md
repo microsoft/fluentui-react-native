@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 12 Apr 2024 21:02:38 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Jul 2024 19:11:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.14.6
+
+Wed, 10 Jul 2024 19:11:52 GMT
+
+### Patches
+
+- Export menu delay (ruaraki@microsoft.com)
+
+## 1.14.5
+
+Fri, 21 Jun 2024 22:15:10 GMT
+
+### Patches
+
+- fix(menu): Add High Contrast border on macOS (sanajmi@microsoft.com)
+
+## 1.14.4
+
+Wed, 19 Jun 2024 18:09:31 GMT
+
+### Patches
+
+- fix(Apple): Render vector borders on Button (sanajmi@microsoft.com)
 
 ## 1.14.1
 

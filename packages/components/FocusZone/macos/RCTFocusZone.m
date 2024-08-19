@@ -186,6 +186,17 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return NO;
 }
 
+/// FocusZone bases its return to accessibilityChildrenInNavigationOrder on the navigationOrderInRenderOrder property.
+/// If navigationOrderInRenderOrder is set to YES, the accessible children are returned in the same order as returned by [(NSView) accessibilityChildren].
+/// If navigationOrderInRenderOrder is set to NO, the accessible children are returned in the order determined by [(NSView) accessibilityChildrenInNavigationOrder].
+- (NSArray *)accessibilityChildrenInNavigationOrder {
+	if ([self navigationOrderInRenderOrder]) {
+		return [self accessibilityChildren];
+	}
+
+	return [super accessibilityChildrenInNavigationOrder];
+}
+
 /// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
 - (BOOL)acceptsFirstResponder
 {
@@ -308,6 +319,73 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return [self nextViewToFocusForCondition:block];
 }
 
+- (NSView *)nextViewToFocusForCircularAction:(FocusZoneAction)action
+{
+	BOOL isAdvance = IsAdvanceWithinZoneAction(action);
+	BOOL isHorizontal = IsHorizontalNavigationWithinZoneAction(action);
+
+	NSView *firstResponder = GetFirstResponder([self window]);
+	NSRect firstResponderRect = [firstResponder convertRect:[firstResponder bounds] toView:self];
+	NSPoint anchorPoint = isHorizontal
+		? NSMakePoint(isAdvance ? 0 : [self bounds].size.width, NSMidY(firstResponderRect))
+		: NSMakePoint(NSMidX(firstResponderRect), isAdvance ? 0 : [self bounds].size.height);
+
+	__block CGFloat closestDistance = CGFLOAT_MAX;
+
+	IsViewLeadingCandidateForNextFocus block = ^BOOL(NSView *candidateView)
+	{
+		BOOL isLeadingCandidate = NO;
+		BOOL skip = NO;
+		NSRect candidateRect = [candidateView convertRect:[candidateView bounds] toView:self];
+		BOOL subviewRelationExists = [candidateView isDescendantOf:firstResponder] || [firstResponder isDescendantOf:candidateView];
+
+		if (isHorizontal)
+		{
+			if (subviewRelationExists)
+			{
+				skip = (isAdvance && NSMinX(candidateRect) > NSMinX(firstResponderRect))
+					|| (!isAdvance && NSMaxX(candidateRect) < NSMaxX(firstResponderRect));
+			}
+			else
+			{
+				skip = (isAdvance && NSMidX(candidateRect) > NSMidX(firstResponderRect))
+					|| (!isAdvance && NSMidX(candidateRect) < NSMidX(firstResponderRect));
+			}
+		}
+		else
+		{
+			if (subviewRelationExists)
+			{
+				skip = (isAdvance && NSMinY(candidateRect) > NSMinY(firstResponderRect))
+					|| (!isAdvance && NSMaxY(candidateRect) < NSMaxY(firstResponderRect));
+			}
+			else
+			{
+				skip = (isAdvance && NSMidY(candidateRect) > NSMidY(firstResponderRect))
+					|| (!isAdvance && NSMidY(candidateRect) < NSMidY(firstResponderRect));
+			}
+		}
+
+		if (!skip)
+		{
+			NSPoint candidatePoint = isHorizontal
+				? NSMakePoint(isAdvance ? NSMinX(candidateRect) : NSMaxX(candidateRect), NSMidY(candidateRect))
+				: NSMakePoint(NSMidX(candidateRect), isAdvance ? NSMinY(candidateRect) : NSMaxY(candidateRect));
+
+			CGFloat distance = GetDistanceBetweenPoints(anchorPoint, candidatePoint);
+			if (closestDistance > distance)
+			{
+				closestDistance = distance;
+				isLeadingCandidate = YES;
+			}
+		}
+
+		return isLeadingCandidate;
+	};
+
+	return [self nextViewToFocusForCondition:block];
+}
+
 - (NSView *)nextViewToFocusForHorizontalNavigation:(FocusZoneAction)action
 {
 	BOOL isAdvance = IsAdvanceWithinZoneAction(action);
@@ -347,9 +425,8 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return [self nextViewToFocusForCondition:block];
 }
 
-- (NSView *)nextViewToFocusWithFallback:(FocusZoneAction)action
+- (NSView *)nextViewToFocusWithFallback:(FocusZoneAction)action considerCircular:(BOOL)shouldTryCircular
 {
-
 	// Special case if we're currently focused on self
 	NSView *firstResponder = GetFirstResponder([self window]);
 	if (self == firstResponder)
@@ -364,18 +441,37 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		}
 	}
 
+	BOOL isHorizontal = IsHorizontalNavigationWithinZoneAction(action);
+	BOOL isAdvance = IsAdvanceWithinZoneAction(action);
 	NSView *nextViewToFocus = [self nextViewToFocusForAction:action];
 
 	if (nextViewToFocus == nil)
 	{
-		if (IsHorizontalNavigationWithinZoneAction(action))
+		if (isHorizontal)
 		{
 			nextViewToFocus = [self nextViewToFocusForHorizontalNavigation:action];
 		}
 		else
 		{
-			FocusZoneAction horizontalAction = IsAdvanceWithinZoneAction(action) ? FocusZoneActionRightArrow : FocusZoneActionLeftArrow;
-			nextViewToFocus = [self nextViewToFocusWithFallback:horizontalAction];
+			FocusZoneAction horizontalAction = isAdvance ? FocusZoneActionRightArrow : FocusZoneActionLeftArrow;
+			nextViewToFocus = [self nextViewToFocusWithFallback:horizontalAction considerCircular:NO];
+		}
+	}
+
+	if (nextViewToFocus == nil && shouldTryCircular)
+	{
+		nextViewToFocus = [self nextViewToFocusForCircularAction:action];
+
+		if (nextViewToFocus == firstResponder)
+		{
+			nextViewToFocus = isHorizontal ?
+				[self nextViewToFocusForCircularAction:isAdvance ? FocusZoneActionDownArrow : FocusZoneActionUpArrow] :
+				[self nextViewToFocusForCircularAction:isAdvance ? FocusZoneActionRightArrow : FocusZoneActionLeftArrow];
+		}
+
+		if (nextViewToFocus == firstResponder)
+		{
+			nextViewToFocus = nil;
 		}
 	}
 
@@ -385,8 +481,6 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 - (NSView *)nextViewToFocusOutsideZone:(FocusZoneAction)action
 {
 	NSView *nextViewToFocus;
-
-	[[self window] recalculateKeyViewLoop];
 
 	// Find the first view outside the FocusZone (or any parent FocusZones) to place focus
 	RCTFocusZone *focusZoneAncestor = GetFocusZoneAncestor(self);
@@ -431,6 +525,41 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return nextViewToFocus;
 }
 
+- (NSView *)nextViewToFocusForTab:(FocusZoneAction)action
+{
+	[[self window] recalculateKeyViewLoop];
+
+	NSString *tabKeyNavigation = [self tabKeyNavigation];
+	if (![@"NavigateWrap" isEqual:tabKeyNavigation] && ![@"NavigateStopAtEnds" isEqual:tabKeyNavigation]
+		&& ![@"Normal" isEqual:tabKeyNavigation])
+	{
+		return [self nextViewToFocusOutsideZone:action];
+	}
+
+	BOOL forward = action != FocusZoneActionShiftTab;
+	NSView *firstResponder = GetFirstResponder([self window]);
+	NSView *nextViewToFocus = forward ? [firstResponder nextValidKeyView] : [firstResponder previousValidKeyView];
+
+	if (nextViewToFocus == self)
+		nextViewToFocus = forward ? [nextViewToFocus nextValidKeyView] : [nextViewToFocus previousValidKeyView];;
+
+	if ([@"Normal" isEqual:tabKeyNavigation] || [nextViewToFocus isDescendantOf:self])
+		return nextViewToFocus;
+
+	if ([@"NavigateStopAtEnds" isEqual:tabKeyNavigation])
+		return nil;
+
+	// wrap around -- find first (tab) or last (shift+tab)
+	NSView *aView = firstResponder;
+	while (aView != self && [aView isDescendantOf:self])
+	{
+		nextViewToFocus = aView;
+		aView = forward ? [aView previousValidKeyView] : [aView nextValidKeyView];
+	}
+
+	return nextViewToFocus != firstResponder ? nextViewToFocus : nil;
+}
+
 - (BOOL)isFlipped
 {
 	return YES;
@@ -440,17 +569,17 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 {
 	FocusZoneAction action = GetActionForEvent(event);
 	FocusZoneDirection focusZoneDirection = [self focusZoneDirection];
+	NSString *navigateAtEnd = [self navigateAtEnd];
 
 	BOOL passthrough = NO;
 	NSView *viewToFocus = nil;
-
 	if ([self disabled] || action == FocusZoneActionNone)
 	{
 		passthrough = YES;
 	}
 	else if (action == FocusZoneActionTab || action == FocusZoneActionShiftTab)
 	{
-		viewToFocus = [self nextViewToFocusOutsideZone:action];
+		viewToFocus = [self nextViewToFocusForTab:action];
 	}
 	else if ((focusZoneDirection == FocusZoneDirectionVertical
 			&& (action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow))
@@ -462,7 +591,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	}
 	else
 	{
-		viewToFocus = [self nextViewToFocusWithFallback:action];
+		viewToFocus = [self nextViewToFocusWithFallback:action considerCircular:[@"NavigateWrap" isEqual:navigateAtEnd]];
 	}
 
 	if (viewToFocus != nil)
@@ -476,16 +605,6 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		// I.E: FocusZone don't handle this specific key
 		[super keyDown:event];
 	}
-}
-
-- (void)setNavigateAtEnd:(NSString *)value
-{
-	// do nothing
-}
-
-- (NSString *)navigateAtEnd
-{
-	return @"NavigateStopAtEnds";
 }
 
 @end

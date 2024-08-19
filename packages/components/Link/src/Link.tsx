@@ -1,6 +1,5 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
-import * as React from 'react';
 import { Platform, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';

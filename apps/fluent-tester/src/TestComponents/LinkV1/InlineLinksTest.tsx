@@ -24,7 +24,7 @@ export const InlineLinks: React.FunctionComponent = () => {
         <Link inline onPress={doPress} disabled focusable>
           link
         </Link>{' '}
-        is disabled but focusable.
+        is disabled and not focusable.
       </Text>
       <Text>
         Follow this{' '}

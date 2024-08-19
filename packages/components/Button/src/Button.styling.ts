@@ -58,6 +58,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
           display: 'flex',
+          overflow: 'hidden',
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',

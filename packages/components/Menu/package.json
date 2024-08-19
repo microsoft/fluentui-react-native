@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/menu",
-  "version": "1.14.2",
+  "version": "1.14.11",
   "description": "A cross-platform Menu component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -34,6 +34,7 @@
     "@fluentui-react-native/interactive-hooks": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
+    "@fluentui-react-native/theming-utils": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
     "@fluentui-react-native/use-styling": "workspace:*",
     "tslib": "^2.3.1"

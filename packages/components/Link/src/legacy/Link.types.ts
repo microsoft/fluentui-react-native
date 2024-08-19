@@ -1,6 +1,6 @@
 import type * as React from 'react';
-import type { ViewProps } from 'react-native';
 
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps } from '@fluentui-react-native/text';
 import type { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
@@ -59,7 +59,7 @@ export interface ILinkProps extends IWithLinkOptions<ITextProps> {
 }
 
 export type ILinkSlotProps = {
-  root: React.PropsWithRef<ViewProps>;
+  root: React.PropsWithRef<IViewProps>;
   content: ITextProps;
 };
 

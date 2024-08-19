@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 26 Jul 2024 16:00:07 GMT",
+      "version": "0.170.3",
+      "tag": "@fluentui-react-native/tester_v0.170.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "434c367e8cac7d3ef78f4827dab146748f3636d6",
+            "comment": "Add FocusZone Grid test case"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 23 Jul 2024 16:56:54 GMT",
+      "version": "0.170.1",
+      "tag": "@fluentui-react-native/tester_v0.170.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ddf90fafdfaccd6318bb66f1d114f632bc5eb485",
+            "comment": "Minor tweaks for Mac behavior"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 15 Jul 2024 20:20:33 GMT",
+      "version": "0.170.0",
+      "tag": "@fluentui-react-native/tester_v0.170.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c429c9c9dfb1a55e27290ff50d7318e5f36cd43f",
+            "comment": "Enable inline link support for win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Jul 2024 17:42:46 GMT",
+      "version": "0.169.7",
+      "tag": "@fluentui-react-native/tester_v0.169.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0daee5ec2a9019bcb7d5820f161ba366bf870ec1",
+            "comment": "Add support for text variants and LinkV1 on windows"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 May 2024 20:54:23 GMT",
+      "version": "0.169.0",
+      "tag": "@fluentui-react-native/tester_v0.169.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "98eec6ce3d5c3aa96f68e4b17eceee48c371b0cd",
+            "comment": "Remove unnecessary code in tsconfig"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 08 May 2024 16:21:26 GMT",
       "version": "0.168.7",
       "tag": "@fluentui-react-native/tester_v0.168.7",

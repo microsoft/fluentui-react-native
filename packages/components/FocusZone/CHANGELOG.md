@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Mon, 15 Apr 2024 21:31:44 GMT and should not be manually modified.
+This log was last generated on Sat, 27 Jul 2024 06:54:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.2
+
+Sat, 27 Jul 2024 06:54:11 GMT
+
+### Patches
+
+- [Mac] [Focus Zone] Restore broken direction = none functionality (nakambo@microsoft.com)
+
+## 0.19.1
+
+Fri, 26 Jul 2024 16:00:07 GMT
+
+### Patches
+
+- [Mac] [Focus Zone] Tweak tab\shift behavior (nakambo@microsoft.com)
+
+## 0.19.0
+
+Wed, 24 Jul 2024 16:32:59 GMT
+
+### Minor changes
+
+- Implementation of FocusZone navigationOrderInRenderOrder for MacOS (patboyd@microsoft.com)
+
+## 0.18.0
+
+Tue, 23 Jul 2024 16:56:54 GMT
+
+### Minor changes
+
+- Implement Focus Zone circular navigation and tab key behaviors for macOS (nakambo@microsoft.com)
 
 ## 0.17.1
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Wed, 10 Jul 2024 16:16:42 GMT",
+      "version": "0.13.3",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.13.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "5aee9ae9aa62ffbbccf5b112802f7dbae9784d8a",
+            "comment": "Export shimmer consts"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Apr 2024 21:31:43 GMT",
       "version": "0.13.2",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.13.2",

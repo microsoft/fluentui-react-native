@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tooltip
 
-This log was last generated on Wed, 08 May 2024 16:21:26 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Jun 2024 18:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.2
+
+Wed, 19 Jun 2024 18:09:31 GMT
+
+### Patches
+
+- fix(Apple): Render vector borders on Button (sanajmi@microsoft.com)
 
 ## 0.4.0
 

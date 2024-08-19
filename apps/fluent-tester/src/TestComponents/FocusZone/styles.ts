@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
@@ -47,14 +47,16 @@ export const focusZoneTestStyles = StyleSheet.create({
   smallBoxStyle: {
     width: 20,
     height: 20,
-    backgroundColor: 'lightgrey',
     margin: 5,
+    // something is wrong with setting the background color on this style on the Mac, and until we fix that, let's not do this
+    ...Platform.select({ macos: { borderWidth: 1 }, default: { backgroundColor: 'lightgrey' } }),
   },
   wideBoxStyle: {
     width: 150,
     height: 20,
-    backgroundColor: 'lightgrey',
     margin: 5,
+    // something is wrong with setting the background color on this style on the Mac, and until we fix that, let's not do this
+    ...Platform.select({ macos: { borderWidth: 1 }, default: { backgroundColor: 'lightgrey' } }),
   },
 });
 
