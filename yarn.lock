@@ -6779,12 +6779,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.4.9":
-  version: 0.4.9
-  resolution: "@rnx-kit/react-native-host@npm:0.4.9"
+"@rnx-kit/react-native-host@npm:^0.4.12":
+  version: 0.4.12
+  resolution: "@rnx-kit/react-native-host@npm:0.4.12"
   peerDependencies:
     react-native: ">=0.66"
-  checksum: 10c0/ae9d749aded8fd0697ab59f440ab994b2591131397132d20f69960971f38183e27cd851f5c6da29e50bd773115de2ebdd5c41bc89673e78ac5b3dc6f4707954c
+  checksum: 10c0/ce9ff3e4568c36f489ce94c8ba4dc21d9ea68df0f872286be62d9f16e2324b792c77006f1258e7000bd8f1fad264ff7d76cd306115c3b7046f36fa5679159199
   languageName: node
   linkType: hard
 
@@ -19059,23 +19059,23 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^3.4.7":
-  version: 3.8.7
-  resolution: "react-native-test-app@npm:3.8.7"
+  version: 3.9.5
+  resolution: "react-native-test-app@npm:3.9.5"
   dependencies:
-    "@rnx-kit/react-native-host": "npm:^0.4.9"
+    "@rnx-kit/react-native-host": "npm:^0.4.12"
     ajv: "npm:^8.0.0"
     cliui: "npm:^8.0.0"
     fast-xml-parser: "npm:^4.0.0"
     prompts: "npm:^2.4.0"
     semver: "npm:^7.3.5"
-    uuid: "npm:^9.0.0"
+    uuid: "npm:^10.0.0"
   peerDependencies:
-    "@callstack/react-native-visionos": 0.73 - 0.74
+    "@callstack/react-native-visionos": 0.73 - 0.75
     "@expo/config-plugins": ">=5.0"
-    react: 17.0.1 - 18.3
-    react-native: 0.66 - 0.74 || >=0.75.0-0 <0.75.0
-    react-native-macos: ^0.0.0-0 || 0.66 || 0.68 || 0.71 - 0.73
-    react-native-windows: ^0.0.0-0 || 0.66 - 0.74
+    react: 17.0.1 - 19.0
+    react-native: 0.66 - 0.75 || >=0.76.0-0 <0.76.0
+    react-native-macos: ^0.0.0-0 || 0.66 || 0.68 || 0.71 - 0.74
+    react-native-windows: ^0.0.0-0 || 0.66 - 0.75
   peerDependenciesMeta:
     "@callstack/react-native-visionos":
       optional: true
@@ -19090,7 +19090,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 10c0/4ee36ca5ca62c19c18a5518924a6ac48ea5eb204abecc4260f88ffbd675958c57007622b5c92345e147634774536a6056ecf0d5c52cbded5a4f5ed257694f6eb
+  checksum: 10c0/f99b28393deb6c75a73a4250d6d34c6fe86aa3a4f1ad64b46076d542193603e50bfa2f69e48b5f4d1e2d3d222c8eb82e42ee9c4136eec2050220bc19d54b8824
   languageName: node
   linkType: hard
 
@@ -21844,7 +21844,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:10.0.0":
+"uuid@npm:10.0.0, uuid@npm:^10.0.0":
   version: 10.0.0
   resolution: "uuid@npm:10.0.0"
   bin:
