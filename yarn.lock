@@ -2196,156 +2196,170 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/android-arm64@npm:0.19.2"
+"@esbuild/aix-ppc64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/aix-ppc64@npm:0.23.1"
+  conditions: os=aix & cpu=ppc64
+  languageName: node
+  linkType: hard
+
+"@esbuild/android-arm64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/android-arm64@npm:0.23.1"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/android-arm@npm:0.19.2"
+"@esbuild/android-arm@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/android-arm@npm:0.23.1"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
 
-"@esbuild/android-x64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/android-x64@npm:0.19.2"
+"@esbuild/android-x64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/android-x64@npm:0.23.1"
   conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-arm64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/darwin-arm64@npm:0.19.2"
+"@esbuild/darwin-arm64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/darwin-arm64@npm:0.23.1"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-x64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/darwin-x64@npm:0.19.2"
+"@esbuild/darwin-x64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/darwin-x64@npm:0.23.1"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-arm64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/freebsd-arm64@npm:0.19.2"
+"@esbuild/freebsd-arm64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/freebsd-arm64@npm:0.23.1"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-x64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/freebsd-x64@npm:0.19.2"
+"@esbuild/freebsd-x64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/freebsd-x64@npm:0.23.1"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-arm64@npm:0.19.2"
+"@esbuild/linux-arm64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-arm64@npm:0.23.1"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-arm@npm:0.19.2"
+"@esbuild/linux-arm@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-arm@npm:0.23.1"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ia32@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-ia32@npm:0.19.2"
+"@esbuild/linux-ia32@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-ia32@npm:0.23.1"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"@esbuild/linux-loong64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-loong64@npm:0.19.2"
+"@esbuild/linux-loong64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-loong64@npm:0.23.1"
   conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-mips64el@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-mips64el@npm:0.19.2"
+"@esbuild/linux-mips64el@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-mips64el@npm:0.23.1"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ppc64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-ppc64@npm:0.19.2"
+"@esbuild/linux-ppc64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-ppc64@npm:0.23.1"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-riscv64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-riscv64@npm:0.19.2"
+"@esbuild/linux-riscv64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-riscv64@npm:0.23.1"
   conditions: os=linux & cpu=riscv64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-s390x@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-s390x@npm:0.19.2"
+"@esbuild/linux-s390x@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-s390x@npm:0.23.1"
   conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
 
-"@esbuild/linux-x64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/linux-x64@npm:0.19.2"
+"@esbuild/linux-x64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/linux-x64@npm:0.23.1"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/netbsd-x64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/netbsd-x64@npm:0.19.2"
+"@esbuild/netbsd-x64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/netbsd-x64@npm:0.23.1"
   conditions: os=netbsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/openbsd-x64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/openbsd-x64@npm:0.19.2"
+"@esbuild/openbsd-arm64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/openbsd-arm64@npm:0.23.1"
+  conditions: os=openbsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@esbuild/openbsd-x64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/openbsd-x64@npm:0.23.1"
   conditions: os=openbsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/sunos-x64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/sunos-x64@npm:0.19.2"
+"@esbuild/sunos-x64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/sunos-x64@npm:0.23.1"
   conditions: os=sunos & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/win32-arm64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/win32-arm64@npm:0.19.2"
+"@esbuild/win32-arm64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/win32-arm64@npm:0.23.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/win32-ia32@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/win32-ia32@npm:0.19.2"
+"@esbuild/win32-ia32@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/win32-ia32@npm:0.23.1"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@esbuild/win32-x64@npm:0.19.2":
-  version: 0.19.2
-  resolution: "@esbuild/win32-x64@npm:0.19.2"
+"@esbuild/win32-x64@npm:0.23.1":
+  version: 0.23.1
+  resolution: "@esbuild/win32-x64@npm:0.23.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -6285,14 +6299,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-windows/cli@npm:0.73.2":
-  version: 0.73.2
-  resolution: "@react-native-windows/cli@npm:0.73.2"
+"@react-native-windows/cli@npm:0.73.6":
+  version: 0.73.6
+  resolution: "@react-native-windows/cli@npm:0.73.6"
   dependencies:
-    "@react-native-windows/codegen": "npm:0.73.0"
-    "@react-native-windows/fs": "npm:0.73.0"
-    "@react-native-windows/package-utils": "npm:0.73.0"
-    "@react-native-windows/telemetry": "npm:0.73.1"
+    "@react-native-windows/codegen": "npm:0.73.2"
+    "@react-native-windows/fs": "npm:0.73.1"
+    "@react-native-windows/package-utils": "npm:0.73.1"
+    "@react-native-windows/telemetry": "npm:0.73.2"
     "@xmldom/xmldom": "npm:^0.7.7"
     chalk: "npm:^4.1.0"
     cli-spinners: "npm:^2.2.0"
@@ -6312,17 +6326,17 @@ __metadata:
     xpath: "npm:^0.0.27"
   peerDependencies:
     react-native: "*"
-  checksum: 10c0/52d68ba8664ac5a39609c9c7a71d4d33204eb01dac8f910a1181ad9764389e06d61510958d39c633e6a57416e7aa74f2bf7a4295f35450b866fc9942acb5991a
+  checksum: 10c0/e9cab2b6159967e77ee034eb0dd00655f5f8ff6d5b9db8136c4421852c02ba6a5b912da116a46048caf01a8050397d954882586bb584a3e8b3daebc7493e6cc0
   languageName: node
   linkType: hard
 
-"@react-native-windows/codegen@npm:0.73.0":
-  version: 0.73.0
-  resolution: "@react-native-windows/codegen@npm:0.73.0"
+"@react-native-windows/codegen@npm:0.73.2":
+  version: 0.73.2
+  resolution: "@react-native-windows/codegen@npm:0.73.2"
   dependencies:
-    "@react-native-windows/fs": "npm:0.73.0"
+    "@react-native-windows/fs": "npm:0.73.1"
     chalk: "npm:^4.1.0"
-    globby: "npm:^11.0.4"
+    globby: "npm:^11.1.0"
     mustache: "npm:^4.0.1"
     source-map-support: "npm:^0.5.19"
     yargs: "npm:^16.2.0"
@@ -6330,46 +6344,46 @@ __metadata:
     react-native: "*"
   bin:
     react-native-windows-codegen: bin.js
-  checksum: 10c0/c51ebc43c932123a8680eda13dbacc2a4bc7832b50db38518256a614111abe33bd7e72905bf446a3d10b9db0588a19e69b656bd8b002f9f18f55e47408aa9693
+  checksum: 10c0/314dd2a938aef3dcbb10f31d582ce21df5950016ac3b8bc869bed0a17160c47b48777390da1e6a947065663ddf521800d2d88b38a3ef1c19242d7b5ca14e90a8
   languageName: node
   linkType: hard
 
-"@react-native-windows/find-repo-root@npm:0.73.0":
-  version: 0.73.0
-  resolution: "@react-native-windows/find-repo-root@npm:0.73.0"
+"@react-native-windows/find-repo-root@npm:0.73.1":
+  version: 0.73.1
+  resolution: "@react-native-windows/find-repo-root@npm:0.73.1"
   dependencies:
-    "@react-native-windows/fs": "npm:0.73.0"
+    "@react-native-windows/fs": "npm:0.73.1"
     find-up: "npm:^4.1.0"
-  checksum: 10c0/ab65f0e0b43404f6ad0fa8d7612568b9f35af3e25470293ce6e1fc1950c69980c491aafd1a7458afff81892d1c5b85f8c9bd82ec91d238f05c1d3fc028416260
+  checksum: 10c0/5e9874fe327b7f246c14bc88b4ff65b6b41b3a7a4eb7bb51c2941957a63731b75b878b509780b80445e00c710aa7530c056de8de96b164ec16992dd0e7ca896c
   languageName: node
   linkType: hard
 
-"@react-native-windows/fs@npm:0.73.0":
-  version: 0.73.0
-  resolution: "@react-native-windows/fs@npm:0.73.0"
+"@react-native-windows/fs@npm:0.73.1":
+  version: 0.73.1
+  resolution: "@react-native-windows/fs@npm:0.73.1"
   dependencies:
     graceful-fs: "npm:^4.2.8"
-  checksum: 10c0/4dfc78db180ed9055f146e021e6645f1398ef5b50b34d040244abb8cf96aa1ff433d3ba704e80ab20852c6641dc3eec460b21b8be7751406c94aaf359989c157
+  checksum: 10c0/905e58f0b6b984eebe67c16627d566eac30fd8cc1ef1c9b265bcb68f4bc3d64ad259f0b1938937869460b99ad8f34245709a4357b8026da470c63a3b6252e1b8
   languageName: node
   linkType: hard
 
-"@react-native-windows/package-utils@npm:0.73.0":
-  version: 0.73.0
-  resolution: "@react-native-windows/package-utils@npm:0.73.0"
+"@react-native-windows/package-utils@npm:0.73.1":
+  version: 0.73.1
+  resolution: "@react-native-windows/package-utils@npm:0.73.1"
   dependencies:
-    "@react-native-windows/find-repo-root": "npm:0.73.0"
-    "@react-native-windows/fs": "npm:0.73.0"
+    "@react-native-windows/find-repo-root": "npm:0.73.1"
+    "@react-native-windows/fs": "npm:0.73.1"
     get-monorepo-packages: "npm:^1.2.0"
     lodash: "npm:^4.17.15"
-  checksum: 10c0/9137fbb08c4e786d74ec36e37f588d9c19d4598987cb953ade1bf4c52f56a509aec9e40f9975c1684787ef874acc085d313281454cd0dc7091570355ef49516d
+  checksum: 10c0/51597b087f5d88d22a4808d66be129630aa922680fc836f93085fcb1e5e6b4af116022bf972af70e751f2fefea660dd058a098b8f65a50249f36fdb5b8b62f3d
   languageName: node
   linkType: hard
 
-"@react-native-windows/telemetry@npm:0.73.1":
-  version: 0.73.1
-  resolution: "@react-native-windows/telemetry@npm:0.73.1"
+"@react-native-windows/telemetry@npm:0.73.2":
+  version: 0.73.2
+  resolution: "@react-native-windows/telemetry@npm:0.73.2"
   dependencies:
-    "@react-native-windows/fs": "npm:0.73.0"
+    "@react-native-windows/fs": "npm:0.73.1"
     "@xmldom/xmldom": "npm:^0.7.7"
     applicationinsights: "npm:2.7.3"
     ci-info: "npm:^3.2.0"
@@ -6377,7 +6391,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     os-locale: "npm:^5.0.0"
     xpath: "npm:^0.0.27"
-  checksum: 10c0/626049f7aa834bad433b0579a9d5815c2242654062d380fdb7bc8009df21e2b4ee4634ca1a60b286ae740570542b52ced50eeb01e6e73691a2b1f176e8c92e08
+  checksum: 10c0/de3e48e41e085f003245b4a7e857241d08b8e7ce3b5f81dcf189c59c6a158e2e517eb61e9ed3738f66eb375206e8fc89c54e83e47278923aa9088f04d294b826
   languageName: node
   linkType: hard
 
@@ -6590,17 +6604,17 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.5.0":
-  version: 2.5.1
-  resolution: "@rnx-kit/align-deps@npm:2.5.1"
+  version: 2.5.2
+  resolution: "@rnx-kit/align-deps@npm:2.5.2"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/4a48540005a999541e73e9e987ebb8bfea6cb4ffaa4022ec43ceef1d3f18ca4301774d5143801f5b65ee2152baabfbc7f57a148e64812a6f099432bc91c180c4
+  checksum: 10c0/6b60371da24842ce664c2d74d5d138c4532730132765323e5578f9884396b357dcf0b8daf37ba046a300c8d128df1225eecfbe28c8ecddc4350f51e552b88923
   languageName: node
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.16.2":
-  version: 0.16.29
-  resolution: "@rnx-kit/cli@npm:0.16.29"
+  version: 0.16.30
+  resolution: "@rnx-kit/cli@npm:0.16.30"
   dependencies:
     "@rnx-kit/align-deps": "npm:^2.5.0"
     "@rnx-kit/config": "npm:^0.6.6"
@@ -6609,12 +6623,12 @@ __metadata:
     "@rnx-kit/metro-plugin-duplicates-checker": "npm:^2.1.1"
     "@rnx-kit/metro-plugin-typescript": "npm:^0.4.4"
     "@rnx-kit/metro-serializer": "npm:^1.0.14"
-    "@rnx-kit/metro-serializer-esbuild": "npm:^0.1.31"
+    "@rnx-kit/metro-serializer-esbuild": "npm:^0.1.36"
     "@rnx-kit/metro-service": "npm:^3.1.6"
     "@rnx-kit/third-party-notices": "npm:^1.3.4"
     "@rnx-kit/tools-language": "npm:^2.0.0"
     "@rnx-kit/tools-node": "npm:^2.1.1"
-    "@rnx-kit/tools-react-native": "npm:^1.3.5"
+    "@rnx-kit/tools-react-native": "npm:^1.4.0"
     fs-extra: "npm:^10.0.0"
     node-fetch: "npm:^2.6.7"
     ora: "npm:^5.4.1"
@@ -6628,7 +6642,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10c0/c443e8cd1273b0845924000ef6ce4d1401c39a8c1d13c1b3ce9834a2745269b172e9b7e9ab8f94e63ad036c6e4c95e1453fa6bdab6c9f2c621c04f43c8fdd815
+  checksum: 10c0/f71d033676f6b2b552db5f6a27da2ef4501b061335f4bda19e19a36e9663e3d031af06c805bc36d4f30482f9249ce63a2515781d8bd814c1f858721284054077
   languageName: node
   linkType: hard
 
@@ -6683,12 +6697,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/metro-config@npm:^1.3.1":
-  version: 1.3.15
-  resolution: "@rnx-kit/metro-config@npm:1.3.15"
+  version: 1.3.17
+  resolution: "@rnx-kit/metro-config@npm:1.3.17"
   dependencies:
-    "@rnx-kit/console": "npm:^1.0.0"
     "@rnx-kit/tools-node": "npm:^2.0.0"
-    "@rnx-kit/tools-react-native": "npm:^1.3.4"
+    "@rnx-kit/tools-react-native": "npm:^1.4.1"
     "@rnx-kit/tools-workspaces": "npm:^0.1.3"
   peerDependencies:
     "@react-native/metro-config": "*"
@@ -6697,7 +6710,7 @@ __metadata:
   peerDependenciesMeta:
     "@react-native/metro-config":
       optional: true
-  checksum: 10c0/484a3c5164e0a55eb9f21a2001dbc5eb8f277513e4d0af6bb492f32dd2eaf930105ab0eff4d90d087d2f84e0d01f67307d567f40732808879df3d32f23ae89ce
+  checksum: 10c0/0b11bbbe57f13cbe320bc7e2be4c5ad5fb332eb7d2086a0caa977a9e694a17fc3b29085192861d540cbeed4a37299e6de4fed05d550153eff18b54375b68c622
   languageName: node
   linkType: hard
 
@@ -6738,18 +6751,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-serializer-esbuild@npm:^0.1.31":
-  version: 0.1.31
-  resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.1.31"
+"@rnx-kit/metro-serializer-esbuild@npm:^0.1.36":
+  version: 0.1.38
+  resolution: "@rnx-kit/metro-serializer-esbuild@npm:0.1.38"
   dependencies:
     "@rnx-kit/console": "npm:^1.0.11"
     "@rnx-kit/tools-node": "npm:^2.0.0"
-    "@rnx-kit/tools-react-native": "npm:^1.3.4"
-    esbuild: "npm:^0.19.0"
+    "@rnx-kit/tools-react-native": "npm:^1.4.1"
+    esbuild: "npm:^0.23.0"
     esbuild-plugin-lodash: "npm:^1.2.0"
     fast-glob: "npm:^3.2.7"
-    semver: "npm:^7.0.0"
-  checksum: 10c0/30eee16e134ec599108e58c5a231cd531d97afb2c39eb58a71b2d8a61e863df1ee93facdc673cdee2a99dfd606b4f09a819f01bea0bd2c9dd44ce57b33163cca
+  checksum: 10c0/f8d54ae1ecf44f58aee44869fa6494005ea65e6623f3ce4892c163383093986c8b48c0b92c4fde074002b0fd374aafbd480c32b4445770768054fe0aa11116ae
   languageName: node
   linkType: hard
 
@@ -6823,12 +6835,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/tools-react-native@npm:^1.3.2, @rnx-kit/tools-react-native@npm:^1.3.4, @rnx-kit/tools-react-native@npm:^1.3.5":
+"@rnx-kit/tools-react-native@npm:^1.3.2, @rnx-kit/tools-react-native@npm:^1.3.4":
   version: 1.3.5
   resolution: "@rnx-kit/tools-react-native@npm:1.3.5"
   dependencies:
     "@rnx-kit/tools-node": "npm:^2.0.1"
   checksum: 10c0/c5a13c63ab507f63d60ac8d19d10a166db4e79b02a6e7a384f2b506725cc53c7c82a9172b0f1804b6ddb52392160ecba19df1f2dc4e88d9744ae45345377aaab
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-react-native@npm:^1.4.0, @rnx-kit/tools-react-native@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@rnx-kit/tools-react-native@npm:1.4.1"
+  dependencies:
+    "@rnx-kit/tools-node": "npm:^2.0.1"
+  checksum: 10c0/3a02e1c0c4733e22d362922b133f0530baa6483a58896906670afd8591698c5e935be2324e27e85dd086fc624226e63aaa6cd8808ccdafbf6b171fb31f81e9a0
   languageName: node
   linkType: hard
 
@@ -12338,33 +12359,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.19.0":
-  version: 0.19.2
-  resolution: "esbuild@npm:0.19.2"
+"esbuild@npm:^0.23.0":
+  version: 0.23.1
+  resolution: "esbuild@npm:0.23.1"
   dependencies:
-    "@esbuild/android-arm": "npm:0.19.2"
-    "@esbuild/android-arm64": "npm:0.19.2"
-    "@esbuild/android-x64": "npm:0.19.2"
-    "@esbuild/darwin-arm64": "npm:0.19.2"
-    "@esbuild/darwin-x64": "npm:0.19.2"
-    "@esbuild/freebsd-arm64": "npm:0.19.2"
-    "@esbuild/freebsd-x64": "npm:0.19.2"
-    "@esbuild/linux-arm": "npm:0.19.2"
-    "@esbuild/linux-arm64": "npm:0.19.2"
-    "@esbuild/linux-ia32": "npm:0.19.2"
-    "@esbuild/linux-loong64": "npm:0.19.2"
-    "@esbuild/linux-mips64el": "npm:0.19.2"
-    "@esbuild/linux-ppc64": "npm:0.19.2"
-    "@esbuild/linux-riscv64": "npm:0.19.2"
-    "@esbuild/linux-s390x": "npm:0.19.2"
-    "@esbuild/linux-x64": "npm:0.19.2"
-    "@esbuild/netbsd-x64": "npm:0.19.2"
-    "@esbuild/openbsd-x64": "npm:0.19.2"
-    "@esbuild/sunos-x64": "npm:0.19.2"
-    "@esbuild/win32-arm64": "npm:0.19.2"
-    "@esbuild/win32-ia32": "npm:0.19.2"
-    "@esbuild/win32-x64": "npm:0.19.2"
+    "@esbuild/aix-ppc64": "npm:0.23.1"
+    "@esbuild/android-arm": "npm:0.23.1"
+    "@esbuild/android-arm64": "npm:0.23.1"
+    "@esbuild/android-x64": "npm:0.23.1"
+    "@esbuild/darwin-arm64": "npm:0.23.1"
+    "@esbuild/darwin-x64": "npm:0.23.1"
+    "@esbuild/freebsd-arm64": "npm:0.23.1"
+    "@esbuild/freebsd-x64": "npm:0.23.1"
+    "@esbuild/linux-arm": "npm:0.23.1"
+    "@esbuild/linux-arm64": "npm:0.23.1"
+    "@esbuild/linux-ia32": "npm:0.23.1"
+    "@esbuild/linux-loong64": "npm:0.23.1"
+    "@esbuild/linux-mips64el": "npm:0.23.1"
+    "@esbuild/linux-ppc64": "npm:0.23.1"
+    "@esbuild/linux-riscv64": "npm:0.23.1"
+    "@esbuild/linux-s390x": "npm:0.23.1"
+    "@esbuild/linux-x64": "npm:0.23.1"
+    "@esbuild/netbsd-x64": "npm:0.23.1"
+    "@esbuild/openbsd-arm64": "npm:0.23.1"
+    "@esbuild/openbsd-x64": "npm:0.23.1"
+    "@esbuild/sunos-x64": "npm:0.23.1"
+    "@esbuild/win32-arm64": "npm:0.23.1"
+    "@esbuild/win32-ia32": "npm:0.23.1"
+    "@esbuild/win32-x64": "npm:0.23.1"
   dependenciesMeta:
+    "@esbuild/aix-ppc64":
+      optional: true
     "@esbuild/android-arm":
       optional: true
     "@esbuild/android-arm64":
@@ -12399,6 +12424,8 @@ __metadata:
       optional: true
     "@esbuild/netbsd-x64":
       optional: true
+    "@esbuild/openbsd-arm64":
+      optional: true
     "@esbuild/openbsd-x64":
       optional: true
     "@esbuild/sunos-x64":
@@ -12411,7 +12438,7 @@ __metadata:
       optional: true
   bin:
     esbuild: bin/esbuild
-  checksum: 10c0/a4764df0bbae6113a64d7324bae56a75d3364ebb0125f3589415c57d15325f6b05e783d6a767ceec10a3d5127ab16225f2cd6f239b1ecbc121821fe6207e2221
+  checksum: 10c0/08c2ed1105cc3c5e3a24a771e35532fe6089dd24a39c10097899072cef4a99f20860e41e9294e000d86380f353b04d8c50af482483d7f69f5208481cce61eec7
   languageName: node
   linkType: hard
 
@@ -13900,7 +13927,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^11.0.0, globby@npm:^11.0.4, globby@npm:^11.1.0":
+"globby@npm:^11.0.0, globby@npm:^11.1.0":
   version: 11.1.0
   resolution: "globby@npm:11.1.0"
   dependencies:
@@ -19267,15 +19294,15 @@ __metadata:
   linkType: hard
 
 "react-native-windows@npm:^0.73.0":
-  version: 0.73.11
-  resolution: "react-native-windows@npm:0.73.11"
+  version: 0.73.20
+  resolution: "react-native-windows@npm:0.73.20"
   dependencies:
     "@babel/runtime": "npm:^7.0.0"
     "@jest/create-cache-key-function": "npm:^29.6.3"
     "@react-native-community/cli": "npm:12.3.6"
     "@react-native-community/cli-platform-android": "npm:12.3.6"
     "@react-native-community/cli-platform-ios": "npm:12.3.6"
-    "@react-native-windows/cli": "npm:0.73.2"
+    "@react-native-windows/cli": "npm:0.73.6"
     "@react-native/assets-registry": "npm:0.73.1"
     "@react-native/codegen": "npm:0.73.3"
     "@react-native/community-cli-plugin": "npm:0.73.17"
@@ -19314,7 +19341,7 @@ __metadata:
   peerDependencies:
     react: 18.2.0
     react-native: ^0.73.0
-  checksum: 10c0/e7b045bcfde2929a9a76e381e3703790b74d61bde32ea07c49156246d455889e13c66ab288c80f5d66ad43940d35ee68527c378dec1a3e5a3db3882943739dd5
+  checksum: 10c0/8728723b6b5c7464d12e187f86ae5b3fad245abf2edece2df76ea46142a668cfff7d6b2c2dffd92de7f2932df846ff78581435c93b7fc01fcfdb396229361dd6
   languageName: node
   linkType: hard
 
