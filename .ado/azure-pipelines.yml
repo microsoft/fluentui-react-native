@@ -138,8 +138,7 @@ jobs:
         env:
           CCACHE_DISABLE: 1
 
-      # Disable iOS E2E tests as they fail on macOS-13 images
-      # - template: templates/e2e-testing-ios.yml
+      - template: templates/e2e-testing-ios.yml
 
   # Windows bundling and end to end testing
   - job: WindowsPR
