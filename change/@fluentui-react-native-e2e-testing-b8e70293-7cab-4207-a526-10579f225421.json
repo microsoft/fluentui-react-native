@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Bumping all wdio packages",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

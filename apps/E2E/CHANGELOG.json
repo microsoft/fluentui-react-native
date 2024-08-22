@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 22 Aug 2024 19:53:16 GMT",
+      "version": "1.40.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.40.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "54114116f7d8cd86fbf2640eb0e6af8922ee903e",
+            "comment": "Bumping all wdio packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 May 2024 20:54:22 GMT",
       "version": "1.39.0",
       "tag": "@fluentui-react-native/e2e-testing_v1.39.0",
