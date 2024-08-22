@@ -1,8 +1,8 @@
 import * as React from 'react';
-import type { KeyboardMetrics } from 'react-native';
-import { Text, View, Switch, ScrollView, Platform } from 'react-native';
+import type { KeyboardMetrics, Text as RNText } from 'react-native';
+import { View, Switch, ScrollView, Platform } from 'react-native';
 
-import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
+import { Button, Callout, Separator, Pressable, StealthButton, TextV1 as Text } from '@fluentui/react-native';
 import type { IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
@@ -15,13 +15,13 @@ import { Test } from '../Test';
 const StandardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
   const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
-  const [openCalloutOnHoverAnchor, setOpenCalloutOnHoverAnchor] = React.useState(true);
+  const [openCalloutOnHoverAnchor, setOpenCalloutOnHoverAnchor] = React.useState(false);
   const [calloutHovered, setCalloutHovered] = React.useState(false);
 
   const [shouldSetInitialFocus, setShouldSetInitialFocus] = React.useState(true);
   const onInitialFocusChange = React.useCallback((value: boolean) => setShouldSetInitialFocus(value), []);
 
-  const [customRestoreFocus, setCustomRestoreFocus] = React.useState(false);
+  const [customRestoreFocus, setCustomRestoreFocus] = React.useState(true);
   const onRestoreFocusChange = React.useCallback((value) => setCustomRestoreFocus(value), []);
 
   const [isBeakVisible, setIsBeakVisible] = React.useState(false);
@@ -61,12 +61,17 @@ const StandardCallout: React.FunctionComponent = () => {
     [calloutDismissBehaviors],
   );
 
+  const textRef = React.useRef<RNText>(null);
+  const textRefInner1 = React.useRef<RNText>(null);
+  const textRefInner2 = React.useRef<RNText>(null);
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
   const greenTargetRef = React.useRef<View>(null);
   const decoyBtn1Ref = React.useRef<IFocusable>(null);
   const decoyBtn2Ref = React.useRef<IFocusable>(null);
-  const [anchorRef, setAnchorRef] = React.useState<React.RefObject<View> | undefined>(redTargetRef);
+  const [anchorRefIndex, setAnchorRefIndex] = React.useState(0);
+  const anchorRefCycle = [redTargetRef, greenTargetRef, blueTargetRef, textRef, textRefInner1, textRefInner2];
+  const [anchorRef, setAnchorRef] = React.useState<React.RefObject<View> | React.RefObject<RNText> | string | undefined>(anchorRefCycle[0]);
   const [hoveredTargetsCount, setHoveredTargetsCount] = React.useState(0);
   const [displayCountHoveredTargets, setDisplayCountHoveredTargets] = React.useState(0);
 
@@ -143,8 +148,9 @@ const StandardCallout: React.FunctionComponent = () => {
 
   const toggleCalloutRef = React.useCallback(() => {
     // Cycle the target ref between the RGB target views
-    setAnchorRef(anchorRef === redTargetRef ? greenTargetRef : anchorRef === greenTargetRef ? blueTargetRef : redTargetRef);
-  }, [anchorRef]);
+    setAnchorRefIndex((anchorRefIndex + 1) % anchorRefCycle.length);
+    setAnchorRef(anchorRefCycle[anchorRefIndex]);
+  }, [anchorRef, anchorRefIndex]);
 
   const switchTargetRefOrRect = React.useCallback(() => {
     // Switch between RGB views or a fixed anchor
@@ -312,7 +318,7 @@ const StandardCallout: React.FunctionComponent = () => {
 
         <Separator vertical />
 
-        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+        <View style={{ flexDirection: 'column', paddingHorizontal: 5, maxWidth: 250 }}>
           <Pressable
             onHoverIn={() => updateCalloutTargetsHoverState(true, redTargetRef)}
             onHoverOut={() => updateCalloutTargetsHoverState(false, redTargetRef)}
@@ -337,6 +343,20 @@ const StandardCallout: React.FunctionComponent = () => {
               {anchorRefsInfo.isCurrentAnchor[2] && <Text style={{ color: 'white' }}>{anchorRefsInfo.hoverCount}</Text>}
             </View>
           </Pressable>
+          <Text componentRef={textRef}>
+            {'Complex'}
+            <Text>
+              {' text tree'}
+              <Text style={{ fontSize: 16 }} componentRef={textRefInner1}>
+                {' [twiceNested]'}
+              </Text>
+              {' with multiple nested text runs'}
+            </Text>
+            <Text style={{ fontSize: 20 }} componentRef={textRefInner2}>
+              {' [onceNested]'}
+            </Text>
+            {' and subtext runs'}
+          </Text>
         </View>
       </View>
 
@@ -468,11 +488,11 @@ const e2eSections: TestSection[] = [
 
 export const CalloutTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Production',
+    win32Status: 'Beta',
     uwpStatus: 'Backlog',
-    iosStatus: 'N/A',
-    macosStatus: 'Production',
-    androidStatus: 'N/A',
+    iosStatus: 'Backlog',
+    macosStatus: 'Beta',
+    androidStatus: 'Backlog',
   };
 
   const description = 'A callout is an anchored tip that can be used to teach people or guide them through the app without blocking them.';

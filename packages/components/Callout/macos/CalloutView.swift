@@ -1,19 +1,71 @@
 import AppKit
 import Foundation
-#if USE_REACT_AS_MODULE
 import React
-#endif // USE_REACT_AS_MODULE
+
+/// Return the text length of a provided RCTShadowView
+func getLengthOfTextShadowNode(shadowView: RCTShadowView) -> Int {
+	// If it's a RawTextShadowView, the length is simply its text length
+	if let rawTextView = shadowView as? RCTRawTextShadowView {
+		if let rawTextLength = rawTextView.text?.count {
+			return rawTextLength
+		}
+
+		return 0
+	}
+
+	// If it's a BaseTextShadowView, it may have multiple nested texts that
+	// should be summed together
+	var sumTextLength = 0
+	if let baseTextView = shadowView as? RCTBaseTextShadowView {
+			baseTextView.reactSubviews().forEach { subview in
+					sumTextLength += getLengthOfTextShadowNode(shadowView: subview)
+			}
+	}
+
+	return sumTextLength
+}
+
+/// Search for the provided reactTag in the provided ShadowView's subtree
+/// When successfully found, returns:
+///   found: true
+///   startCharRange: number of characters in the text string before the reactTag subrange
+///
+/// When not found, returns:
+///   found: false
+///   startCharRange: 0
+func getStartCharRangeForTag(reactTag: NSNumber, shadowView: RCTShadowView) -> (found: Bool, startCharRange: Int) {
+	if shadowView.reactTag == reactTag {
+		// If this shadowView is our target, we're done; return that we found it
+		return (found: true, startCharRange: 0)
+	} else if let rawTextShadowView = shadowView as? RCTRawTextShadowView {
+		// If this shadowView is a rawText view, it has no subviews; return the length of the text to be added
+		// to the startCharRange index
+		if let rawTextLength = rawTextShadowView.text?.count {
+			return (found: false, startCharRange: rawTextLength)
+		}
+	} else {
+		// Otherwise our target view may be a subview; sum the character range for each subview subtree
+		// before and including the subview that contains our target view
+		var startCharRange = 0
+		for subview in shadowView.reactSubviews() {
+			let subviewSearch = getStartCharRangeForTag(reactTag:reactTag, shadowView: subview)
+			startCharRange += subviewSearch.startCharRange
+			if (subviewSearch.found) {
+				return (found: subviewSearch.found, startCharRange: startCharRange)
+			}
+		}
+
+		return (found: false, startCharRange: startCharRange)
+	}
+
+	return (found: false, startCharRange: 0)
+}
 
 @objc(FRNCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
 		didSet {
-			let targetView = bridge?.uiManager.view(forReactTag: target)
-			if (targetView == nil && target != nil) {
-				preconditionFailure("Invalid target")
-			}
-			anchorView = targetView
 			updateCalloutFrameToAnchor()
 		}
 	}
@@ -69,7 +121,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	override func updateLayer() {
 		if let layer = calloutWindow.contentView?.layer {
-			layer.borderColor =  borderColor.cgColor
+			layer.borderColor = borderColor.cgColor
 			layer.borderWidth = borderWidth
 			layer.backgroundColor = backgroundColor.cgColor
 			layer.cornerRadius = borderRadius
@@ -107,7 +159,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		updateCalloutFrameToAnchor()
 		calloutWindow.orderFront(self)
 		if (setInitialFocus) {
-		    calloutWindow.makeKey()
+			calloutWindow.makeKey()
 		}
 
 		// Dismiss the Callout if the window is no longer active.
@@ -175,14 +227,128 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		isCalloutWindowShown = false
 	}
 
+	/// Return the TextView and TextShadowView of a Leaf node ShadowView for specialized nested TextView anchoring
+	private func getTextViews(leafShadowView: RCTShadowView) -> (textView: RCTTextView, textShadowView: RCTTextShadowView)? {
+		// Do not proceed if the preconditions of this function are not met
+		guard leafShadowView.isYogaLeafNode() else {
+				preconditionFailure("leafshadow is not a leaf node")
+		}
+
+		// Do not proceed if the leaf shadow is not a root text shadow view, which we're specializing for right now
+		// In the future this could be generalized for other complex yoga leaf nodes with subviews, such as react-native-svg
+		guard let textShadowView = leafShadowView as? RCTTextShadowView else {
+				return nil
+		}
+		
+		// Do not proceed if we:
+		//   - don't have a UI Manager
+		//   - don't have the NSView corresponding to the yoga leaf view
+		//   - the leafView is somehow not an RCTTextView (should not be possible for an RCTTextShadowView)
+		guard let leafTextView = bridge?.uiManager?.view(forReactTag: leafShadowView.reactTag) as? RCTTextView else {
+				return nil
+		}
+
+		return (leafTextView, textShadowView)
+	}
+
+	/// Return the boundingRect for a shadowView that is a subview of a Yoga leaf node
+	/// The boundingRect is returned relative to the Yoga leaf node
+	private func getBoundsForSubShadowOfLeafShadow(subShadowView: RCTShadowView, leafShadowView: RCTShadowView) -> NSRect? {
+		// Do not proceed if the preconditions of this function are not met
+		guard subShadowView.viewIsDescendant(of: leafShadowView) else {
+				preconditionFailure("subShadowView is not a descendant of the leaf node ShadowView")
+		}
+
+		// Get the TextView and TextShadowView we need to calculate the bounds of the subview
+		guard let (textView, textShadowView) = getTextViews(leafShadowView: leafShadowView) else {
+			return nil
+		}
+
+		// Search for our target tag and get its startCharRange index in the overall Text view
+		let startCharRangeSearch = getStartCharRangeForTag(reactTag: subShadowView.reactTag, shadowView: textShadowView)
+		if (!startCharRangeSearch.found) {
+				// Did not find our reactTag
+				return nil
+		}
+
+		// Having found our target, return the bounding rect for its corresponding character range
+		return textView.getRectForCharRange(NSRange(location: startCharRangeSearch.startCharRange, length: getLengthOfTextShadowNode(shadowView: subShadowView)))
+	}
+
+	/// Get the leaf shadow view corresponding to a leaf Yoga node for the provided ShadowView
+	private func getLeafShadowViewForShadowView(shadowView: RCTShadowView?) -> RCTShadowView? {
+			var shadowParentIter = shadowView
+			while let shadowViewIter = shadowParentIter {
+					if (shadowViewIter.isYogaLeafNode()) {
+							return shadowViewIter
+					}
+					shadowParentIter = shadowViewIter.superview
+			}
+
+			return nil
+	}
+
+	/// Return the anchor rect for the target prop if available
+	private func getAnchorRectForTarget() -> NSRect? {
+		guard let reactTag = target, let reactBridge = bridge else {
+				return nil
+		}
+
+		// If the targetView is backed by an NSView and has a representative rect, return it as the anchor rect for the target
+		if let targetView = reactBridge.uiManager.view(forReactTag: reactTag) {
+			if !targetView.bounds.equalTo(CGRect.zero) {
+					return calculateAnchorViewScreenRect(anchorView: targetView)
+			}
+		}
+
+		// If the targetView could not be found or was not a representative rect, it may be a child of a yoga leaf node e.g. virtualized text
+		guard let targetShadowView = reactBridge.uiManager.shadowView(forReactTag: target) else {
+				return nil
+		}
+
+		// Find the leaf ShadowView of our targetView
+		guard let leafShadowView = getLeafShadowViewForShadowView(shadowView: targetShadowView) else {
+			return nil
+		}
+
+		// Ensure we have a real NSView for our leaf ShadowView
+		guard let leafNSView = reactBridge.uiManager.view(forReactTag: leafShadowView.reactTag) else {
+			return nil
+		}
+
+		// Find the bounding rect of our targetView relative to the leafShadowView
+		guard let targetViewBounds = getBoundsForSubShadowOfLeafShadow(subShadowView: targetShadowView, leafShadowView: leafShadowView) else {
+			return nil
+		}
+
+		// If we could find the bounding rect of our target view and it's a representative rect, return it as the anchor rect for the target
+		if !targetViewBounds.equalTo(CGRect.zero) {
+				return calculateAnchorViewScreenRect(anchorView: leafNSView, subviewAnchorBounds: targetViewBounds)
+		}
+
+		// Unfortunately our efforts could not determine a valid anchor rect for our target prop
+		return nil
+	}
+
+	/// Get the AnchorScreenRect to use for Callout anchoring, prioritizing the target prop over the anchorRect prop
+	private func getAnchorScreenRect() -> NSRect? {
+		if target != nil {
+				return getAnchorRectForTarget();
+		} else {
+				return calculateAnchorRectScreenRect();
+		}
+	}
+
 	/// Sets the frame of the Callout Window (in screen coordinates to be off of the Anchor on the preferred edge
 	private func updateCalloutFrameToAnchor() {
 		guard window != nil else {
 			return
 		}
 
-		// Prefer anchorView over anchorRect if available
-		let anchorScreenRect = anchorView != nil ? calculateAnchorViewScreenRect() : calculateAnchorRectScreenRect()
+		guard let anchorScreenRect = getAnchorScreenRect() else {
+			return
+		}
+
 		let calloutScreenRect = bestCalloutRect(relativeTo: anchorScreenRect)
 
 		// Because we immediately update the rect as props come in, there's a possibility that we have neither
@@ -197,7 +363,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	/// Calculates the NSRect of the Anchor Rect in screen coordinates
 	private func calculateAnchorRectScreenRect() -> NSRect {
-		guard let window = window  else {
+		guard let window = window else {
 			preconditionFailure("No window found")
 		}
 
@@ -224,16 +390,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	/// Calculates the NSRect of the anchorView in the coordinate space of the current screen
-	private func calculateAnchorViewScreenRect() -> NSRect {
-		guard let anchorView = anchorView else {
-			preconditionFailure("No anchor view provided to position the Callout")
-		}
-
-		guard let window = window  else {
+	private func calculateAnchorViewScreenRect(anchorView: NSView, subviewAnchorBounds: NSRect? = nil) -> NSRect {
+		guard let window = window else {
 			preconditionFailure("No window found")
 		}
 
-		let anchorBoundsInWindow = anchorView.convert(anchorView.bounds, to: nil)
+		let anchorBoundsInWindow = anchorView.convert(subviewAnchorBounds ?? anchorView.bounds, to: nil)
 		let anchorFrameInScreenCoordinates = window.convertToScreen(anchorBoundsInWindow)
 
 		return anchorFrameInScreenCoordinates
@@ -362,17 +524,14 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
-	// The app's main menu bar is active while callout is shown, dismiss.
+	/// The app's main menu bar is active while callout is shown, dismiss.
 	@objc private func menuDidBeginTracking() {
 		self.dismissCallout()
 	}
 
 	// MARK: Private variables
 
-	/// The view the Callout is presented from.
-	private var anchorView: NSView?
-
-	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
+	/// The view we forward Callout's Children to. It's hosted within the CalloutWindow's
 	/// view hierarchy, ensuring our React Views are not placed in the main window.
 	private lazy var proxyView: NSView = {
 		let visualEffectView = FlippedVisualEffectView()
