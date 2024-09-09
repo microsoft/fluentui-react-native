@@ -137,7 +137,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...extra,
       ...maxFontSizeScaleAdjustment,
       onPress,
-      numberOfLines: numberOfLines ?? (truncate || !wrap) ? 1 : 0,
+      numberOfLines: numberOfLines ?? (truncate || !wrap ? 1 : 0),
       style: mergeStyles(tokenStyle, props.style, extra?.style),
     };
 
