@@ -6720,11 +6720,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.5.0":
-  version: 2.5.2
-  resolution: "@rnx-kit/align-deps@npm:2.5.2"
+  version: 2.5.4
+  resolution: "@rnx-kit/align-deps@npm:2.5.4"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/6b60371da24842ce664c2d74d5d138c4532730132765323e5578f9884396b357dcf0b8daf37ba046a300c8d128df1225eecfbe28c8ecddc4350f51e552b88923
+  checksum: 10c0/600097bb25b7a2d470f8ed4f9ade22b76ece6c7069c10c7b00b06f33b62d68975dab5e2ab27d0e1311a7ad516fe57c8cd3b0eb6b97ee172f49228627f351b631
   languageName: node
   linkType: hard
 
