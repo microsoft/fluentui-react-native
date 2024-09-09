@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Fri, 12 Jul 2024 17:42:47 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Sep 2024 16:52:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.2
+
+Mon, 09 Sep 2024 16:52:17 GMT
+
+### Patches
+
+- Fix bug (ruaraki@microsoft.com)
 
 ## 0.24.1
 
