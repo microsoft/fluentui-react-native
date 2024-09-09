@@ -397,8 +397,9 @@ const StandardCallout: React.FunctionComponent = () => {
             ) : (
               //else
               <View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
-                <Button content="click to change anchor" onClick={toggleCalloutRef} />
-                <Button content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
+                <Button onClick={toggleCalloutRef}>{'click to change anchor'}</Button>
+                <Button onClick={switchTargetRefOrRect}>{'click to switch between anchor and rect'}</Button>
+                <Button onClick={onShiftFocusToPage}>{'Click to invoke focus()'}</Button>
               </View>
             )}
           </Pressable>
