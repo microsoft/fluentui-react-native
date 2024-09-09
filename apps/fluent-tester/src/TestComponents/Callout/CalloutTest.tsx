@@ -62,6 +62,7 @@ const StandardCallout: React.FunctionComponent = () => {
   );
 
   const calloutRef = React.useRef<IFocusable>(null);
+  const calloutButtonRef = React.useRef<IFocusable>(null);
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
   const greenTargetRef = React.useRef<View>(null);
@@ -169,8 +170,13 @@ const StandardCallout: React.FunctionComponent = () => {
   }, []);
 
   const onShiftFocusToCallout = React.useCallback(() => {
+    console.warn('trying to focus the Callout: ' + calloutRef.current);
     calloutRef?.current?.focus?.();
   }, [calloutRef]);
+  const onShiftFocusToCalloutButton = React.useCallback(() => {
+    console.warn('trying to focus the Callout BUTTON: ' + calloutRef.current);
+    calloutButtonRef?.current?.focus?.();
+  }, [calloutButtonRef]);
   const onShiftFocusToPage = React.useCallback(() => {
     decoyBtn1Ref?.current?.focus?.();
   }, [decoyBtn1Ref]);
@@ -351,7 +357,9 @@ const StandardCallout: React.FunctionComponent = () => {
         <Button componentRef={decoyBtn1Ref} onClick={onShiftFocusToCallout}>
           {'Custom reFocus w/ focus in Callout'}
         </Button>
-        <Button componentRef={decoyBtn2Ref}>{'Custom reFocus w/o focus in Callout'}</Button>
+        <Button componentRef={decoyBtn2Ref} onClick={onShiftFocusToCalloutButton}>
+          {'Custom reFocus w/o focus in Callout'}
+        </Button>
       </View>
 
       {showStandardCallout && (
@@ -399,7 +407,9 @@ const StandardCallout: React.FunctionComponent = () => {
               <View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
                 <Button onClick={toggleCalloutRef}>{'click to change anchor'}</Button>
                 <Button onClick={switchTargetRefOrRect}>{'click to switch between anchor and rect'}</Button>
-                <Button onClick={onShiftFocusToPage}>{'Click to invoke focus()'}</Button>
+                <Button componentRef={calloutButtonRef} onClick={onShiftFocusToPage}>
+                  {'Click to invoke focus()'}
+                </Button>
               </View>
             )}
           </Pressable>
