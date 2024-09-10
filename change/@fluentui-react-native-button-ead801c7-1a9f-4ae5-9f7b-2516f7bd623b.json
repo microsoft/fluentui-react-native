@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Bringing windows platform more in line with more complete win32 impl",
+  "packageName": "@fluentui-react-native/button",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
