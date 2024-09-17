@@ -36,6 +36,28 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 
 @interface RCT_EXTERN_MODULE(FRNCalloutManager, RCTViewManager)
 
+RCT_EXPORT_METHOD(focus : (nonnull NSNumber *)viewTag)
+{
+	[self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTUIView *> *viewRegistry) {
+	RCTUIView *view = viewRegistry[viewTag];
+
+	if ([view isKindOfClass:[FRNCalloutView class]]) {
+		[(FRNCalloutView *)view focus];
+	}
+	}];
+}
+
+RCT_EXPORT_METHOD(blur : (nonnull NSNumber *)viewTag)
+{
+	[self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTUIView *> *viewRegistry) {
+	RCTUIView *view = viewRegistry[viewTag];
+
+	if ([view isKindOfClass:[FRNCalloutView class]]) {
+		[(FRNCalloutView *)view blur];
+	}
+	}];
+}
+
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 
 RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)

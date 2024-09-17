@@ -35,6 +35,14 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	@objc public var onShow: RCTDirectEventBlock?
 
 	@objc public var onDismiss: RCTDirectEventBlock?
+	
+	@objc public func focus() {
+		calloutWindow.makeKey()
+	}
+	
+	@objc public func blur() {
+		calloutWindow.resignKey()
+	}
 
 	public weak var bridge: RCTBridge?
 
