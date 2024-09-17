@@ -8,7 +8,6 @@ import * as React from 'react';
 import { findNodeHandle, Platform } from 'react-native';
 import type { HostComponent } from 'react-native';
 
-import { setAndForwardRef } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
@@ -17,40 +16,38 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { settings } from './Callout.settings';
 import type { ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
 import { calloutName } from './Callout.types';
-import type { CalloutNativeCommands } from './CalloutNativeCommands.types';
 import type { NativeProps as CalloutNativeProps } from './CalloutNativeComponent';
 import CalloutNativeComponent from './CalloutNativeComponent';
-import type { NativeProps as MacOSCalloutNativeProps } from './MacOSCalloutNativeComponent';
-import MacOSCalloutNativeComponent from './MacOSCalloutNativeComponent';
+import type { NativeProps as FRNCalloutNativeProps } from './MacOSCalloutNativeComponent';
+import FRNCalloutNativeComponent from './MacOSCalloutNativeComponent';
+import { Commands } from './MacOSCalloutNativeComponent';
 
-const NativeCalloutView = Platform.select<HostComponent<MacOSCalloutNativeProps> | HostComponent<CalloutNativeProps>>({
-  macos: MacOSCalloutNativeComponent,
+const NativeCalloutView = Platform.select<HostComponent<FRNCalloutNativeProps> | HostComponent<CalloutNativeProps>>({
+  macos: FRNCalloutNativeComponent,
   default: CalloutNativeComponent, // win32
 });
-
-export function useWindowCommandFocus(
-  forwardedRef: React.Ref<CalloutNativeCommands> | undefined,
-  // initialValue?: React.Component
-): (ref: React.ElementRef<any>) => void {
-  /**
-   * Set up the forwarding ref to enable adding the focusWindow method.
-   */
-  const focusWindowRef = React.useRef<any>();
-
-  const _setNativeRef = setAndForwardRef({
-    getForwardedRef: () => forwardedRef,
-    setLocalRef: (localRef: any) => {
-      focusWindowRef.current = localRef;
-    },
-  });
-  return _setNativeRef;
-}
 
 export const Callout = compose<ICalloutType>({
   displayName: calloutName,
   usePrepareProps: (props: ICalloutProps, useStyling: IUseComposeStyling<ICalloutType>) => {
     const { componentRef, target, ...rest } = props;
-    const calloutRef = useWindowCommandFocus(componentRef);
+    React.useImperativeHandle(
+      componentRef,
+      () => ({
+        blurWindow() {
+          if (componentRef.current != null) {
+            Commands.blurWindow(nativeComponentRef.current);
+          }
+        },
+        focusWindow() {
+          if (componentRef.current != null) {
+            Commands.focusWindow(nativeComponentRef.current);
+          }
+        },
+      }),
+      [componentRef],
+    );
+    const nativeComponentRef = React.useRef<React.ElementRef<typeof NativeCalloutView> | null>(null);
     const [nativeTarget, setNativeTarget] = React.useState<number | string | null>(null);
 
     React.useLayoutEffect(() => {
@@ -68,7 +65,7 @@ export const Callout = compose<ICalloutType>({
 
     const slotProps = mergeSettings<ICalloutSlotProps>(useStyling(props), {
       root: {
-        ref: calloutRef,
+        ref: nativeComponentRef,
         ...(nativeTarget && { target: nativeTarget }),
         ...rest,
       },
