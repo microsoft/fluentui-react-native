@@ -5,7 +5,7 @@ import React
 #endif // USE_REACT_AS_MODULE
 
 @objc(FRNCalloutView)
-public class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
+open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
 		didSet {
@@ -25,6 +25,12 @@ public class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	@objc public var directionalHint: NSRectEdge = .maxY {
+		didSet {
+			updateCalloutFrameToAnchor()
+		}
+	}
+	
+	@objc public var patPropSpecialCheck: NSNumber? {
 		didSet {
 			updateCalloutFrameToAnchor()
 		}
@@ -50,7 +56,7 @@ public class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		super.init(frame: .zero)
 	}
 
-	required init?(coder: NSCoder) {
+	public required init?(coder: NSCoder) {
 		preconditionFailure()
 	}
 

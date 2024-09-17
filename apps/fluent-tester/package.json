@@ -42,6 +42,7 @@
     "@fluentui-react-native/avatar": "workspace:*",
     "@fluentui-react-native/badge": "workspace:*",
     "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/chip": "workspace:*",
     "@fluentui-react-native/default-theme": "workspace:*",
     "@fluentui-react-native/divider": "workspace:*",

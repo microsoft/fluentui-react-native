@@ -79,5 +79,10 @@
     "react-native-windows": {
       "optional": true
     }
+  },
+  "codegenConfig": {
+    "name": "RCTCalloutSpec",
+    "type": "components",
+    "jsSrcsDir": "lib"
   }
 }
