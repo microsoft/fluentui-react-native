@@ -10,7 +10,6 @@ import type { WithDefault, DirectEventHandler, Double, Int32 } from 'react-nativ
 import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 
-import type { CalloutNativeCommands } from './CalloutNativeCommands.types';
 import type { UnsafeMixed } from './codegenTypes';
 // Should be:
 // import type {UnsafeMixed} from 'react-native/Libraries/Types/CodegenTypes';
@@ -59,8 +58,14 @@ export interface NativeProps extends ViewProps {
   onShow?: DirectEventHandler<{ target: Int32 }>;
 }
 
+export type CalloutComponentType = HostComponent<NativeProps>;
+export interface CalloutNativeCommands {
+  focusWindow: (viewRef: React.ElementRef<CalloutComponentType>) => void;
+  blurWindow: (viewRef: React.ElementRef<CalloutComponentType>) => void;
+}
+
 export const Commands: CalloutNativeCommands = codegenNativeCommands<CalloutNativeCommands>({
   supportedCommands: ['blurWindow', 'focusWindow'],
 });
 
-export default codegenNativeComponent<NativeProps>('RCTCallout') as HostComponent<NativeProps>;
+export default codegenNativeComponent<NativeProps>('RCTCallout') as CalloutComponentType;
