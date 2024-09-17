@@ -1,5 +1,6 @@
 export { calloutName } from './Callout.types';
 export type {
+  CalloutNativeMethods,
   DirectionalHint,
   DismissBehaviors,
   ICalloutProps,

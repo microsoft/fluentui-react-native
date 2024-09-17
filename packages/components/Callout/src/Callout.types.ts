@@ -1,8 +1,7 @@
 import type * as React from 'react';
-import type { KeyboardMetrics, ViewStyle } from 'react-native';
+import type { KeyboardMetrics, NativeMethods, ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import type { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import type { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 export const calloutName = 'Callout';
@@ -36,6 +35,26 @@ export interface RestoreFocusEvent {
      */
     containsFocus: boolean;
   };
+}
+
+/**
+ * Omit the View-based focus functions from the Callout
+ */
+export interface OmittedViewFocusable {
+  focus(): void;
+  blur(): void;
+}
+
+export interface CalloutNativeMethods extends Omit<NativeMethods, keyof OmittedViewFocusable> {
+  /**
+   * Requests the Callout window to become the active/key/foreground window.
+   */
+  focusWindow(): void;
+
+  /**
+   * The opposite of `focusWindow()`, giving up "window focus" and allowing the appropriately-related window to become the active/key window.
+   */
+  blurWindow(): void;
 }
 
 interface OmittedBorderTokens {
@@ -113,7 +132,7 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
-  componentRef?: React.RefObject<IFocusable>;
+  componentRef?: React.RefObject<CalloutNativeMethods>;
 
   /**
    * Defines event redirection behaviors for pointer events relative to the Callout control.
