@@ -2634,7 +2634,6 @@ __metadata:
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.73.0"
@@ -4448,9 +4447,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/text@npm:*, @fluentui-react-native/text@workspace:*, @fluentui-react-native/text@workspace:packages/components/Text":
+"@fluentui-react-native/text@npm:*, @fluentui-react-native/text@workspace:*, @fluentui-react-native/text@workspace:packages/components/text":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/text@workspace:packages/components/Text"
+  resolution: "@fluentui-react-native/text@workspace:packages/components/text"
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
