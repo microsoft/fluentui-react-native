@@ -4,6 +4,7 @@ import type { KeyboardMetrics, NativeMethods, ViewStyle } from 'react-native';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
+import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 export const calloutName = 'Callout';
 
 /**
@@ -45,17 +46,14 @@ export interface OmittedViewFocusable {
   blur(): void;
 }
 
-export interface CalloutNativeMethods extends Omit<NativeMethods, keyof OmittedViewFocusable> {
-  /**
-   * Requests the Callout window to become the active/key/foreground window.
-   */
-  focusWindow(): void;
-
-  /**
-   * The opposite of `focusWindow()`, giving up "window focus" and allowing the appropriately-related window to become the active/key window.
-   */
-  blurWindow(): void;
+export interface CalloutNativeCommands extends Omit<NativeMethods, keyof OmittedViewFocusable> {
+  focusWindow: () => void;
+  blurWindow: () => void;
 }
+
+export const Commands: CalloutNativeCommands = codegenNativeCommands<CalloutNativeCommands>({
+  supportedCommands: ['blurWindow', 'focusWindow'],
+});
 
 interface OmittedBorderTokens {
   borderStyle?: ViewStyle['borderStyle'];
@@ -132,7 +130,7 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
-  componentRef?: React.RefObject<CalloutNativeMethods>;
+  componentRef?: React.RefObject<CalloutNativeCommands>;
 
   /**
    * Defines event redirection behaviors for pointer events relative to the Callout control.

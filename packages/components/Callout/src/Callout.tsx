@@ -15,7 +15,7 @@ import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 import { settings } from './Callout.settings';
-import type { CalloutNativeMethods, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
+import type { CalloutNativeCommands, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
 import { calloutName } from './Callout.types';
 import type { NativeProps as CalloutNativeProps } from './CalloutNativeComponent';
 import CalloutNativeComponent from './CalloutNativeComponent';
@@ -28,18 +28,18 @@ const NativeCalloutView = Platform.select<HostComponent<MacOSCalloutNativeProps>
 });
 
 export function useWindowCommandFocus(
-  forwardedRef: React.Ref<CalloutNativeMethods | null> | undefined,
+  forwardedRef: React.Ref<CalloutNativeCommands> | undefined,
   // initialValue?: React.Component
 ): (ref: React.ElementRef<any>) => void {
   /**
-   * Set up the forwarding ref to enable adding the focus method.
+   * Set up the forwarding ref to enable adding the focusWindow method.
    */
-  const focusRef = React.useRef<any>();
+  const focusWindowRef = React.useRef<any>();
 
   const _setNativeRef = setAndForwardRef({
     getForwardedRef: () => forwardedRef,
     setLocalRef: (localRef: any) => {
-      focusRef.current = localRef;
+      focusWindowRef.current = localRef;
     },
   });
   return _setNativeRef;

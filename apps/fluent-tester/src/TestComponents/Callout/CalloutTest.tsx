@@ -3,7 +3,7 @@ import type { KeyboardMetrics } from 'react-native';
 import { Text, View, Switch, ScrollView, Platform } from 'react-native';
 
 import { ButtonV1 as Button, Callout, Separator, Pressable } from '@fluentui/react-native';
-import type { CalloutNativeMethods, IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
+import type { CalloutNativeCommands, IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
@@ -61,7 +61,7 @@ const StandardCallout: React.FunctionComponent = () => {
     [calloutDismissBehaviors],
   );
 
-  const calloutRef = React.useRef<CalloutNativeMethods>(null);
+  const calloutRef = React.useRef<CalloutNativeCommands>(null);
   const calloutButtonRef = React.useRef<IFocusable>(null);
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
@@ -170,16 +170,16 @@ const StandardCallout: React.FunctionComponent = () => {
   }, []);
 
   const onShiftFocusToCallout = React.useCallback(() => {
-    console.warn('trying to focus the Callout: ' + calloutRef.current);
-    calloutRef?.current?.focusWindow?.();
+    console.warn('trying to focusWindow the Callout: ' + calloutRef.current);
+    calloutRef?.current.focusWindow();
   }, [calloutRef]);
   const onShiftFocusToCalloutButton = React.useCallback(() => {
     console.warn('trying to focus the Callout BUTTON: ' + calloutButtonRef.current);
     calloutButtonRef?.current?.focus?.();
   }, [calloutButtonRef]);
   const onShiftFocusToPage = React.useCallback(() => {
-    console.warn('trying to blur the Callout: ' + calloutRef.current);
-    calloutRef?.current?.blurWindow?.();
+    console.warn('trying to blurWindow the Callout: ' + calloutRef.current);
+    calloutRef?.current.blurWindow();
   }, [calloutRef]);
   const onRestoreFocusStandardCallout = React.useCallback(
     (restoreFocusEvent: RestoreFocusEvent) => {
