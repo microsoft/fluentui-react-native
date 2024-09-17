@@ -40,26 +40,24 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 
 RCT_EXPORT_METHOD(focusWindow : (nonnull NSNumber *)viewTag)
 {
-	[self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTUIView *> *viewRegistry) {
-#pragma unused(uiManager)
-		RCTUIView *view = viewRegistry[viewTag];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSView *view = [self.bridge.uiManager viewForReactTag:viewTag];
 
 		if ([view isKindOfClass:[FRNCalloutView class]]) {
 			[(FRNCalloutView *)view focusWindow];
 		}
-	}];
+	});
 }
 
 RCT_EXPORT_METHOD(blurWindow : (nonnull NSNumber *)viewTag)
 {
-	[self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTUIView *> *viewRegistry) {
-#pragma unused(uiManager)
-		RCTUIView *view = viewRegistry[viewTag];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSView *view = [self.bridge.uiManager viewForReactTag:viewTag];
 
 		if ([view isKindOfClass:[FRNCalloutView class]]) {
 			[(FRNCalloutView *)view blurWindow];
 		}
-	}];
+	});
 }
 
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)

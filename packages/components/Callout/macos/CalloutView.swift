@@ -41,7 +41,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 	
 	@objc public func blurWindow() {
-		calloutWindow.resignKey()
+		calloutWindow.parent?.makeKey()
 	}
 
 	public weak var bridge: RCTBridge?
