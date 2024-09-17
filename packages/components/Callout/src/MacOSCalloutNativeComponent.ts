@@ -7,7 +7,10 @@
 import type { HostComponent, ViewProps } from 'react-native';
 
 import type { DirectEventHandler, Double, Int32, WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
+import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+
+import type { CalloutNativeCommands } from './CalloutNativeCommands.types';
 
 type AnchorRect = {
   screenX: Double;
@@ -51,5 +54,9 @@ export interface NativeProps extends ViewProps {
   onDismiss?: DirectEventHandler<{ target: Int32 }>;
   onShow?: DirectEventHandler<{ target: Int32 }>;
 }
+
+export const Commands: CalloutNativeCommands = codegenNativeCommands<CalloutNativeCommands>({
+  supportedCommands: ['blurWindow', 'focusWindow'],
+});
 
 export default codegenNativeComponent<NativeProps>('FRNCallout') as HostComponent<NativeProps>;

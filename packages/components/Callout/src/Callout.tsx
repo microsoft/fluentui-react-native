@@ -15,8 +15,9 @@ import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 import { settings } from './Callout.settings';
-import type { CalloutNativeCommands, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
+import type { ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
 import { calloutName } from './Callout.types';
+import type { CalloutNativeCommands } from './CalloutNativeCommands.types';
 import type { NativeProps as CalloutNativeProps } from './CalloutNativeComponent';
 import CalloutNativeComponent from './CalloutNativeComponent';
 import type { NativeProps as MacOSCalloutNativeProps } from './MacOSCalloutNativeComponent';

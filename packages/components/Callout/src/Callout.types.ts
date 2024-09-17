@@ -1,10 +1,11 @@
 import type * as React from 'react';
-import type { KeyboardMetrics, NativeMethods, ViewStyle } from 'react-native';
+import type { KeyboardMetrics, ViewStyle } from 'react-native';
 
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
-import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
+
+import type { CalloutNativeCommands } from './CalloutNativeCommands.types';
 export const calloutName = 'Callout';
 
 /**
@@ -37,23 +38,6 @@ export interface RestoreFocusEvent {
     containsFocus: boolean;
   };
 }
-
-/**
- * Omit the View-based focus functions from the Callout
- */
-export interface OmittedViewFocusable {
-  focus(): void;
-  blur(): void;
-}
-
-export interface CalloutNativeCommands extends Omit<NativeMethods, keyof OmittedViewFocusable> {
-  focusWindow: () => void;
-  blurWindow: () => void;
-}
-
-export const Commands: CalloutNativeCommands = codegenNativeCommands<CalloutNativeCommands>({
-  supportedCommands: ['blurWindow', 'focusWindow'],
-});
 
 interface OmittedBorderTokens {
   borderStyle?: ViewStyle['borderStyle'];
