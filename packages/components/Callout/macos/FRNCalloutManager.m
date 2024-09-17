@@ -62,8 +62,6 @@ RCT_EXPORT_METHOD(blurWindow : (nonnull NSNumber *)viewTag)
 
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 
-RCT_EXPORT_VIEW_PROPERTY(patPropSpecialCheck, NSNumber)
-
 RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
 
 RCT_EXPORT_VIEW_PROPERTY(directionalHint, NSRectEdge)

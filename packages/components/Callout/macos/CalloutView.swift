@@ -29,12 +29,6 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			updateCalloutFrameToAnchor()
 		}
 	}
-	
-	@objc public var patPropSpecialCheck: NSNumber? {
-		didSet {
-			updateCalloutFrameToAnchor()
-		}
-	}
 
 	@objc public var setInitialFocus: Bool = false
 
