@@ -5,7 +5,7 @@ import React
 #endif // USE_REACT_AS_MODULE
 
 @objc(FRNCalloutView)
-class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
+public class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
 		didSet {
@@ -36,11 +36,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var onDismiss: RCTDirectEventBlock?
 	
-	@objc public func focus() {
+	@objc public func focusWindow() {
 		calloutWindow.makeKey()
 	}
 	
-	@objc public func blur() {
+	@objc public func blurWindow() {
 		calloutWindow.resignKey()
 	}
 
@@ -66,7 +66,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			object: nil)
 	}
 
-	override func viewDidMoveToWindow() {
+	public override func viewDidMoveToWindow() {
 		super.viewDidMoveToWindow()
 		if (window != nil) {
 			showCallout()
@@ -75,7 +75,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
-	override func updateLayer() {
+	public override func updateLayer() {
 		if let layer = calloutWindow.contentView?.layer {
 			layer.borderColor =  borderColor.cgColor
 			layer.borderWidth = borderWidth
@@ -86,15 +86,15 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	// MARK: RCTComponent Overrides
 
-	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
+	public override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
 		proxyView.insertReactSubview(subview, at: atIndex)
 	}
 
-	override func didUpdateReactSubviews() {
+	public override func didUpdateReactSubviews() {
 		proxyView.didUpdateReactSubviews()
 	}
 
-	override func reactSetFrame(_ frame: CGRect) {
+	public override func reactSetFrame(_ frame: CGRect) {
 		proxyView.reactSetFrame(frame)
 		updateCalloutFrameToAnchor()
 	}
