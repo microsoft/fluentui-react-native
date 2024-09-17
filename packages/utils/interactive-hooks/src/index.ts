@@ -1,6 +1,5 @@
 export { isAccessibilityActionEvent, isGestureResponderEvent, isKeyPressEvent, isMouseEvent } from './events.types';
 export type { InteractionEvent } from './events.types';
-export { setAndForwardRef } from './setAndForwardRef';
 export type {
   IFocusState,
   IHoverState,

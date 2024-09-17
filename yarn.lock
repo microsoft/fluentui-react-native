@@ -4448,9 +4448,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/text@npm:*, @fluentui-react-native/text@workspace:*, @fluentui-react-native/text@workspace:packages/components/text":
+"@fluentui-react-native/text@npm:*, @fluentui-react-native/text@workspace:*, @fluentui-react-native/text@workspace:packages/components/Text":
   version: 0.0.0-use.local
-  resolution: "@fluentui-react-native/text@workspace:packages/components/text"
+  resolution: "@fluentui-react-native/text@workspace:packages/components/Text"
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
