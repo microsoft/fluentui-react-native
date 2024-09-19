@@ -60,8 +60,12 @@ const RectTest: React.FunctionComponent = () => {
 };
 
 const RichTextInlineSvgTest: React.FunctionComponent = () => {
+  const [showInline, setShowInline] = React.useState(false);
   const [isGreen, setIsGreen] = React.useState(true);
 
+  const toggleShowInline = () => {
+    setShowInline(!showInline);
+  };
   const toggleRectFill = () => {
     setIsGreen(!isGreen);
   };
@@ -69,13 +73,18 @@ const RichTextInlineSvgTest: React.FunctionComponent = () => {
   return (
     <>
       <TextV1 style={{ textTransform: 'uppercase' }} font="base" weight="medium" truncate>
-        Left
-        <Svg width="50" height="50" viewBox="0 0 50 50">
-          <Rect width="50" height="50" fill="red" />
-          <Rect x="20" width="20" height="20" fill={isGreen ? 'green' : 'blue'} />
-        </Svg>
-        Right
+        Left [
+        {showInline ? (
+          <Svg width="50" height="50" viewBox="0 0 50 50">
+            <Rect width="50" height="50" fill="red" />
+            <Rect x="20" width="20" height="20" fill={isGreen ? 'green' : 'blue'} />
+          </Svg>
+        ) : (
+          'Svg will go here'
+        )}
+        ] Right
       </TextV1>
+      <Button onClick={toggleShowInline}>{showInline ? 'Remove inline svg' : 'Insert inline svg'}</Button>
       <Button onClick={toggleRectFill}>{isGreen ? 'Change to Blue' : 'Change to Green'}</Button>
     </>
   );
