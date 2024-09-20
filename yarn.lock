@@ -6796,8 +6796,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/jest-preset@npm:^0.1.14":
-  version: 0.1.17
-  resolution: "@rnx-kit/jest-preset@npm:0.1.17"
+  version: 0.1.18
+  resolution: "@rnx-kit/jest-preset@npm:0.1.18"
   dependencies:
     "@babel/core": "npm:^7.0.0"
     "@babel/preset-env": "npm:^7.0.0"
@@ -6808,7 +6808,7 @@ __metadata:
   peerDependenciesMeta:
     react-native:
       optional: true
-  checksum: 10c0/ecb155458759e51ee88981b564a162a54f15e34e63e6057446812ae61f26325bd43f4e2c023938c0146079ce860b037f00eca4c391f7d545269d6b5f5f176b70
+  checksum: 10c0/4469382e777a747b6f0e3270f79e42d318d5e71041779898ad92a857c432154f172d91c6fe9d690399ebd2fb9c9a3b32bda2a3613e8290876e6f692caf2e5f39
   languageName: node
   linkType: hard
 
