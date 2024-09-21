@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     color: 'purple',
   },
+  textInlineSvg: {
+    textTransform: 'uppercase',
+  },
 });
 
 const RectTest: React.FunctionComponent = () => {
@@ -63,16 +66,16 @@ const RichTextInlineSvgTest: React.FunctionComponent = () => {
   const [showInline, setShowInline] = React.useState(false);
   const [isGreen, setIsGreen] = React.useState(true);
 
-  const toggleShowInline = () => {
+  const toggleShowInline = React.useCallback(() => {
     setShowInline(!showInline);
-  };
-  const toggleRectFill = () => {
+  }, [showInline]);
+  const toggleRectFill = React.useCallback(() => {
     setIsGreen(!isGreen);
-  };
+  }, [isGreen]);
 
   return (
     <>
-      <TextV1 style={{ textTransform: 'uppercase' }} font="base" weight="medium" truncate>
+      <TextV1 style={styles.textInlineSvg} font="base" weight="medium" truncate>
         Left [
         {showInline ? (
           <Svg width="50" height="50" viewBox="0 0 50 50">
