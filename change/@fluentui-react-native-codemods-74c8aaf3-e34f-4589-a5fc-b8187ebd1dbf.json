@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Updating jscodeshift",
-  "packageName": "@fluentui-react-native/codemods",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/codemods
 
-This log was last generated on Fri, 15 Mar 2024 16:26:18 GMT and should not be manually modified.
+<!-- This log was last generated on Mon, 23 Sep 2024 18:26:22 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.5.13
+
+Mon, 23 Sep 2024 18:26:22 GMT
+
+### Patches
+
+- Updating jscodeshift (ruaraki@microsoft.com)
 
 ## 0.5.11
 
