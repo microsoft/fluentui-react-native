@@ -1,0 +1,71 @@
+{
+  "properties": {
+    "helpUri": "https://eng.ms/docs/microsoft-security/security/azure-security/cloudai-security-fundamentals-engineering/security-integration/guardian-wiki/microsoft-guardian/general/baselines"
+  },
+  "version": "1.0.0",
+  "baselines": {
+    "guardian-baseline": {
+      "name": "guardian-baseline",
+      "createdDate": "2024-09-20 01:09:21Z",
+      "lastUpdatedDate": "2024-09-20 01:09:21Z"
+    }
+  },
+  "results": {
+    "f05a48037a1f9af37df202cd56175db891fb7ec8117b36d7b90b45b43752d836": {
+      "signature": "f05a48037a1f9af37df202cd56175db891fb7ec8117b36d7b90b45b43752d836",
+      "alternativeSignatures": [],
+      "target": "node_modules/react-native/template/android/app/debug.keystore",
+      "line": 1,
+      "memberOf": [
+        "guardian-baseline"
+      ],
+      "tool": "credscan",
+      "ruleId": "CSCAN-GENERAL0020",
+      "createdDate": "2024-09-20 01:09:21Z",
+      "expirationDate": "2025-03-09 01:21:01Z",
+      "justification": "This error is baselined with an expiration date of 180 days from 2024-09-20 01:21:01Z"
+    },
+    "71121bfe590384da9d17c77e3b9eb30a009e32c6ca9af4c615e1dbce2aa9d6de": {
+      "signature": "71121bfe590384da9d17c77e3b9eb30a009e32c6ca9af4c615e1dbce2aa9d6de",
+      "alternativeSignatures": [],
+      "target": "node_modules/react-native-macos/template/android/app/debug.keystore",
+      "line": 1,
+      "memberOf": [
+        "guardian-baseline"
+      ],
+      "tool": "credscan",
+      "ruleId": "CSCAN-GENERAL0020",
+      "createdDate": "2024-09-20 01:09:21Z",
+      "expirationDate": "2025-03-09 01:21:01Z",
+      "justification": "This error is baselined with an expiration date of 180 days from 2024-09-20 01:21:01Z"
+    },
+    "09027f9ee4e957c99ff599cb4ec33466533d4ed3297483b73cf5bde0ca50eaaa": {
+      "signature": "09027f9ee4e957c99ff599cb4ec33466533d4ed3297483b73cf5bde0ca50eaaa",
+      "alternativeSignatures": [],
+      "target": "apps/E2E/node_modules/react-native/template/android/app/debug.keystore",
+      "line": 1,
+      "memberOf": [
+        "guardian-baseline"
+      ],
+      "tool": "credscan",
+      "ruleId": "CSCAN-GENERAL0020",
+      "createdDate": "2024-09-20 01:09:21Z",
+      "expirationDate": "2025-03-09 01:21:01Z",
+      "justification": "This error is baselined with an expiration date of 180 days from 2024-09-20 01:21:01Z"
+    },
+    "92733f5e53e0b67de69558c281ba28a8ea8c723f55b43425562e6b0eea273de5": {
+      "signature": "92733f5e53e0b67de69558c281ba28a8ea8c723f55b43425562e6b0eea273de5",
+      "alternativeSignatures": [],
+      "target": "apps/E2E/node_modules/react-native-macos/template/android/app/debug.keystore",
+      "line": 1,
+      "memberOf": [
+        "guardian-baseline"
+      ],
+      "tool": "credscan",
+      "ruleId": "CSCAN-GENERAL0020",
+      "createdDate": "2024-09-20 01:09:21Z",
+      "expirationDate": "2025-03-09 01:21:01Z",
+      "justification": "This error is baselined with an expiration date of 180 days from 2024-09-20 01:21:01Z"
+    }
+  }
+}
