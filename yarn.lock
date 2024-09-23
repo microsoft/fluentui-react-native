@@ -6530,11 +6530,11 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/align-deps@npm:^2.2.5, @rnx-kit/align-deps@npm:^2.5.0":
-  version: 2.5.4
-  resolution: "@rnx-kit/align-deps@npm:2.5.4"
+  version: 2.5.5
+  resolution: "@rnx-kit/align-deps@npm:2.5.5"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/600097bb25b7a2d470f8ed4f9ade22b76ece6c7069c10c7b00b06f33b62d68975dab5e2ab27d0e1311a7ad516fe57c8cd3b0eb6b97ee172f49228627f351b631
+  checksum: 10c0/3a0d2be01beb04f17dcc64e7ea1e73f1c22396c63d8f068d245e5a27535bedbaa424f9c345e100bc10475d936bbbadddc965b742487e3e155edcc0cb2651e2e8
   languageName: node
   linkType: hard
 
