@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 24 Sep 2024 20:45:59 GMT",
+      "version": "0.170.7",
+      "tag": "@fluentui-react-native/tester_v0.170.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0c0b25a2e98122f938e3bdfada36286aca8ab287",
+            "comment": "Fix build"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Sep 2024 02:12:18 GMT",
       "version": "0.170.6",
       "tag": "@fluentui-react-native/tester_v0.170.6",

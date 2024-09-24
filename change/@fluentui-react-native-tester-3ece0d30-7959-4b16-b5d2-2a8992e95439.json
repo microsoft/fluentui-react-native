@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix build",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
