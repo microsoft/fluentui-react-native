@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 24 Sep 2024 02:12:18 GMT",
+      "version": "0.170.6",
+      "tag": "@fluentui-react-native/tester_v0.170.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "warleu@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "00e9dd62d20de66550d40e5f759304afb8b70566",
+            "comment": "Screenreader compatability for svg icon package test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Jul 2024 16:00:07 GMT",
       "version": "0.170.3",
       "tag": "@fluentui-react-native/tester_v0.170.3",

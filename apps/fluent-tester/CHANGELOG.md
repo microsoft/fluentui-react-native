@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 26 Jul 2024 16:00:07 GMT and should not be manually modified.
+<!-- This log was last generated on Tue, 24 Sep 2024 02:12:18 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.6
+
+Tue, 24 Sep 2024 02:12:18 GMT
+
+### Patches
+
+- Screenreader compatability for svg icon package test (warleu@microsoft.com)
 
 ## 0.170.3
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Screenreader compatability for svg icon package test",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "warleu@microsoft.com",
-  "dependentChangeType": "patch"
-}
