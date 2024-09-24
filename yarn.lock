@@ -6724,12 +6724,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.4.12":
-  version: 0.4.12
-  resolution: "@rnx-kit/react-native-host@npm:0.4.12"
+"@rnx-kit/react-native-host@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@rnx-kit/react-native-host@npm:0.5.0"
   peerDependencies:
     react-native: ">=0.66"
-  checksum: 10c0/ce9ff3e4568c36f489ce94c8ba4dc21d9ea68df0f872286be62d9f16e2324b792c77006f1258e7000bd8f1fad264ff7d76cd306115c3b7046f36fa5679159199
+  checksum: 10c0/9dd55a8a02f7b8e0f7210387f10d8462f02bfb55225e911a98fefcdc43421ab6e5a07396ad88a3db5c8ed838cf7c97e4c8bf1ff392cb97500a029b465caadae2
   languageName: node
   linkType: hard
 
@@ -18860,10 +18860,10 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^3.4.7":
-  version: 3.9.6
-  resolution: "react-native-test-app@npm:3.9.6"
+  version: 3.10.8
+  resolution: "react-native-test-app@npm:3.10.8"
   dependencies:
-    "@rnx-kit/react-native-host": "npm:^0.4.12"
+    "@rnx-kit/react-native-host": "npm:^0.5.0"
     ajv: "npm:^8.0.0"
     cliui: "npm:^8.0.0"
     fast-xml-parser: "npm:^4.0.0"
@@ -18875,7 +18875,7 @@ __metadata:
     "@expo/config-plugins": ">=5.0"
     react: 17.0.1 - 19.0
     react-native: 0.66 - 0.75 || >=0.76.0-0 <0.76.0
-    react-native-macos: ^0.0.0-0 || 0.66 || 0.68 || 0.71 - 0.74
+    react-native-macos: ^0.0.0-0 || 0.66 || 0.68 || 0.71 - 0.75
     react-native-windows: ^0.0.0-0 || 0.66 - 0.75
   peerDependenciesMeta:
     "@callstack/react-native-visionos":
@@ -18891,7 +18891,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 10c0/8869abe086539dbb8e8cae1e0cced80ff5aded79149872849558c24d43f3ab3d80d7d717cb300012689f418a82314dc7e696137c2b7b934d03ae0e8ae87a2d5f
+  checksum: 10c0/1f60d8fbcb643bb53b5ac7f78d2136e16ddb6f0dccee3c82d4daa5a4f5e78e61c6a712298e5ce78ad87506e7b9edecf0a0955b96dad3f58f53b8b04853f8a1ea
   languageName: node
   linkType: hard
 
