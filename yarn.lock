@@ -208,7 +208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@appium/support@npm:^5.0.3, @appium/support@npm:^5.1.3, @appium/support@npm:^5.1.4":
+"@appium/support@npm:^5.0.3, @appium/support@npm:^5.1.1, @appium/support@npm:^5.1.3, @appium/support@npm:^5.1.4":
   version: 5.1.4
   resolution: "@appium/support@npm:5.1.4"
   dependencies:
@@ -8927,14 +8927,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"appium-android-driver@npm:^9.8.3":
-  version: 9.8.3
-  resolution: "appium-android-driver@npm:9.8.3"
+"appium-android-driver@npm:^9.11.0":
+  version: 9.12.0
+  resolution: "appium-android-driver@npm:9.12.0"
   dependencies:
     "@appium/support": "npm:^5.0.3"
     "@colors/colors": "npm:^1.6.0"
     appium-adb: "npm:^12.5.2"
-    appium-chromedriver: "npm:^5.5.1"
+    appium-chromedriver: "npm:^6.0.1"
     asyncbox: "npm:^3.0.0"
     axios: "npm:^1.x"
     bluebird: "npm:^3.4.7"
@@ -8951,29 +8951,28 @@ __metadata:
     ws: "npm:^8.0.0"
   peerDependencies:
     appium: ^2.0.0
-  checksum: 10c0/316f6d4be3e48ff42810678832ef8ab94d6c529dcbed114e28d058616283e1d064c98494ef7f00a8fcd078aa9f12f3d74007154274d009838cbbb099071c9d25
+  checksum: 10c0/a99d9f21c0fd3ab30417d8e5f5cb04da1ec535aaba679be9876f868fd98d6aba9f5d95f0bde8516aaa32f50baa6bbdaf6deed87919b27b48d281c84250c2a043
   languageName: node
   linkType: hard
 
-"appium-chromedriver@npm:^5.5.1, appium-chromedriver@npm:^5.6.28":
-  version: 5.6.29
-  resolution: "appium-chromedriver@npm:5.6.29"
+"appium-chromedriver@npm:^6.0.1":
+  version: 6.0.2
+  resolution: "appium-chromedriver@npm:6.0.2"
   dependencies:
     "@appium/base-driver": "npm:^9.1.0"
-    "@appium/support": "npm:^4.0.0"
+    "@appium/support": "npm:^5.1.1"
     "@xmldom/xmldom": "npm:^0.x"
     appium-adb: "npm:^12.0.0"
     asyncbox: "npm:^3.0.0"
     axios: "npm:^1.6.5"
     bluebird: "npm:^3.5.1"
     compare-versions: "npm:^6.0.0"
-    fancy-log: "npm:^2.0.0"
     lodash: "npm:^4.17.4"
     semver: "npm:^7.0.0"
     source-map-support: "npm:^0.x"
-    teen_process: "npm:^2.0.0"
+    teen_process: "npm:^2.2.0"
     xpath: "npm:^0.x"
-  checksum: 10c0/5d2440a747c996198ce59d176f20b1d2286eeff465c39bd1e05a61f9aceb60e14d1095c7f92f7c2f6757843b9d19c0c7440a14f986051a7dd9b4f3bffce51ccc
+  checksum: 10c0/8e742d422c3c49e805a8d635d4161f7cbdf72fc4829436c4eefd6e4fea5ce19419a1a62c7931d4bc7aa770560eb25b50404622dcb4cb7b811bb4f9f2ebedb9db
   languageName: node
   linkType: hard
 
@@ -9066,13 +9065,12 @@ __metadata:
   linkType: hard
 
 "appium-uiautomator2-driver@npm:^3.0.5":
-  version: 3.7.7
-  resolution: "appium-uiautomator2-driver@npm:3.7.7"
+  version: 3.8.0
+  resolution: "appium-uiautomator2-driver@npm:3.8.0"
   dependencies:
     appium-adb: "npm:^12.5.2"
-    appium-android-driver: "npm:^9.8.3"
-    appium-chromedriver: "npm:^5.6.28"
-    appium-uiautomator2-server: "npm:^7.0.14"
+    appium-android-driver: "npm:^9.11.0"
+    appium-uiautomator2-server: "npm:^7.0.24"
     asyncbox: "npm:^3.0.0"
     axios: "npm:^1.6.5"
     bluebird: "npm:^3.5.1"
@@ -9085,14 +9083,14 @@ __metadata:
     type-fest: "npm:^4.4.0"
   peerDependencies:
     appium: ^2.4.1
-  checksum: 10c0/da2bcd1e07f2a99657b56a68e71d18e6f9872d21ff311738c353242a9e03095efe32879ff4d0b36c858630c20dc6d9b6b65a0994e2c6ce98cc18736b784c68e0
+  checksum: 10c0/d2cb1286d8f5ef3c115062ed0f10aa316c13fc0a74b74e409b434f6f4a2573d26bfeb265b8c83494c5ba60eafc5111fd3bd41803741d9b254127f8eb9017835a
   languageName: node
   linkType: hard
 
-"appium-uiautomator2-server@npm:^7.0.14":
-  version: 7.0.23
-  resolution: "appium-uiautomator2-server@npm:7.0.23"
-  checksum: 10c0/0089e5b59904e53c6e7636067bca716904cde95a1547164f30f281790fceef2c7b9ccb7a95cbfa140f9af338f59d543cf77a3cb2852ad090adc0568b096a057d
+"appium-uiautomator2-server@npm:^7.0.24":
+  version: 7.0.27
+  resolution: "appium-uiautomator2-server@npm:7.0.27"
+  checksum: 10c0/44f839d62e3dec522990ffb4a6e6da8fa32f7c52907f4259196d98838642f0384446da77bd734d37043310caa5853600e85cad4775c9195414a20f7acdf50054
   languageName: node
   linkType: hard
 
@@ -12772,15 +12770,6 @@ __metadata:
   bin:
     extract-zip: cli.js
   checksum: 10c0/9afbd46854aa15a857ae0341a63a92743a7b89c8779102c3b4ffc207516b2019337353962309f85c66ee3d9092202a83cdc26dbf449a11981272038443974aee
-  languageName: node
-  linkType: hard
-
-"fancy-log@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "fancy-log@npm:2.0.0"
-  dependencies:
-    color-support: "npm:^1.1.3"
-  checksum: 10c0/a6e116f3346756a7363eea343b551c1375d2cd2afc2a92d224feb78589b6b3cff85db9dc5d5df89792a0f7c1e17f731f52cb3d2807302f0516422be6269b95a8
   languageName: node
   linkType: hard
 
