@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update just-scripts, jsdom. Align wdio versions across repo",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
