@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Tue, 24 Sep 2024 20:45:59 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 26 Sep 2024 20:45:54 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.8
+
+Thu, 26 Sep 2024 20:45:54 GMT
+
+### Patches
+
+- Update just-scripts, jsdom. Align wdio versions across repo (ruaraki@microsoft.com)
 
 ## 0.170.7
 

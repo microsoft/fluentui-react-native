@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 26 Sep 2024 20:45:54 GMT",
+      "version": "0.170.8",
+      "tag": "@fluentui-react-native/tester_v0.170.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "3e520915dd55627f04cfd9cd0356b21ac1e6b256",
+            "comment": "Update just-scripts, jsdom. Align wdio versions across repo"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Sep 2024 20:45:59 GMT",
       "version": "0.170.7",
       "tag": "@fluentui-react-native/tester_v0.170.7",
