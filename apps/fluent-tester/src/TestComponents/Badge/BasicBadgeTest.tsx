@@ -16,9 +16,9 @@ import { Badge, BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from '@
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
 
-import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import { svgProps, iconProps } from '../Common/iconExamples';
 import { StyledPicker } from '../Common/StyledPicker';
+import { satyaPhotoUrl } from '../PersonaCoin/styles';
 
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];

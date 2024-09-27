@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/codemods",
-  "version": "0.5.12",
+  "version": "0.5.13",
   "description": "Transform files to make refactoring FURN code easier",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -27,7 +27,7 @@
     "directory": "packages/codemods"
   },
   "dependencies": {
-    "jscodeshift": "^0.13.1",
+    "jscodeshift": "^17.0.0",
     "yargs": "^17.0.0"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
-    "@types/jscodeshift": "^0.11.5"
+    "@types/jscodeshift": "^0.11.11"
   },
   "depcheck": {
     "ignoreMatches": [

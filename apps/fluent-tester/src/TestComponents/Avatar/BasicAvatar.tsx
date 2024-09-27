@@ -8,10 +8,10 @@ import { AvatarSizes, AvatarColors, Avatar } from '@fluentui-react-native/avatar
 import type { PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
 
-import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { svgProps } from '../Common/iconExamples';
 import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { satyaPhotoUrl, undefinedText } from '../PersonaCoin/styles';
 
 type WithUndefined<T> = T | typeof undefinedText;
 

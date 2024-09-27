@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 26 Sep 2024 20:45:54 GMT",
+      "version": "0.170.8",
+      "tag": "@fluentui-react-native/tester_v0.170.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "3e520915dd55627f04cfd9cd0356b21ac1e6b256",
+            "comment": "Update just-scripts, jsdom. Align wdio versions across repo"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Sep 2024 20:45:59 GMT",
+      "version": "0.170.7",
+      "tag": "@fluentui-react-native/tester_v0.170.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0c0b25a2e98122f938e3bdfada36286aca8ab287",
+            "comment": "Fix build"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Sep 2024 02:12:18 GMT",
+      "version": "0.170.6",
+      "tag": "@fluentui-react-native/tester_v0.170.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "warleu@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "00e9dd62d20de66550d40e5f759304afb8b70566",
+            "comment": "Screenreader compatability for svg icon package test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Jul 2024 16:00:07 GMT",
       "version": "0.170.3",
       "tag": "@fluentui-react-native/tester_v0.170.3",
