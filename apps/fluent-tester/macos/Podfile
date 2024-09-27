@@ -10,7 +10,6 @@ use_test_app! do |target|
 
     # There is a bug where autolinking isn't working, do specify these manually.
     pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
-    pod 'FRNCallout', :path => '../../../packages/components/Callout/FRNCallout.podspec'
     pod 'FRNCheckbox', :path => '../../../packages/experimental/Checkbox/FRNCheckbox.podspec'
     pod 'FRNMenuButton', :path => '../../../packages/components/MenuButton/FRNMenuButton.podspec'
     pod 'FRNRadioButton', :path => '../../../packages/components/RadioGroup/FRNRadioButton.podspec'

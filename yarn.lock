@@ -2486,7 +2486,6 @@ __metadata:
   dependencies:
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.73.0"

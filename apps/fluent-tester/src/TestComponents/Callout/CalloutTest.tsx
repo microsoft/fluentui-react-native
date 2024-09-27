@@ -2,8 +2,8 @@ import * as React from 'react';
 import type { KeyboardMetrics } from 'react-native';
 import { Text, View, Switch, ScrollView, Platform } from 'react-native';
 
-import { Button, Callout, Separator, Pressable, StealthButton } from '@fluentui/react-native';
-import type { IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
+import { ButtonV1 as Button, Callout, Separator, Pressable } from '@fluentui/react-native';
+import type { CalloutNativeCommands, IFocusable, RestoreFocusEvent, DismissBehaviors, ICalloutProps } from '@fluentui/react-native';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
@@ -61,6 +61,8 @@ const StandardCallout: React.FunctionComponent = () => {
     [calloutDismissBehaviors],
   );
 
+  const calloutRef = React.useRef<CalloutNativeCommands>(null);
+  const calloutButtonRef = React.useRef<IFocusable>(null);
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
   const greenTargetRef = React.useRef<View>(null);
@@ -167,6 +169,15 @@ const StandardCallout: React.FunctionComponent = () => {
     setShowStandardCallout(false);
   }, []);
 
+  const onShiftFocusToCallout = React.useCallback(() => {
+    calloutRef?.current.focusWindow();
+  }, [calloutRef]);
+  const onShiftFocusToCalloutButton = React.useCallback(() => {
+    calloutButtonRef?.current?.focus?.();
+  }, [calloutButtonRef]);
+  const onShiftFocusToPage = React.useCallback(() => {
+    calloutRef?.current.blurWindow();
+  }, [calloutRef]);
   const onRestoreFocusStandardCallout = React.useCallback(
     (restoreFocusEvent: RestoreFocusEvent) => {
       if (restoreFocusEvent?.nativeEvent?.containsFocus) {
@@ -299,11 +310,9 @@ const StandardCallout: React.FunctionComponent = () => {
         <Separator vertical />
 
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <Button
-            content={(openCalloutOnHoverAnchor ? 'Hover Color Anchor ' : 'Press Here ') + 'for Callout'}
-            onClick={toggleShowStandardCallout}
-            disabled={openCalloutOnHoverAnchor}
-          />
+          <Button onClick={toggleShowStandardCallout} disabled={openCalloutOnHoverAnchor}>
+            {(openCalloutOnHoverAnchor ? 'Hover Color Anchor ' : 'Press Here ') + 'for Callout'}
+          </Button>
           <Text>
             <Text>Visibility: </Text>
             {isStandardCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
@@ -343,12 +352,17 @@ const StandardCallout: React.FunctionComponent = () => {
       <Separator />
 
       <View style={{ paddingVertical: 5 }}>
-        <Button componentRef={decoyBtn1Ref} content="Custom reFocus w/ focus in Callout" />
-        <Button componentRef={decoyBtn2Ref} content="Custom reFocus w/o focus in Callout" />
+        <Button componentRef={decoyBtn1Ref} onClick={onShiftFocusToCallout}>
+          {'Custom reFocus w/ focus in Callout'}
+        </Button>
+        <Button componentRef={decoyBtn2Ref} onClick={onShiftFocusToCalloutButton}>
+          {'Custom reFocus w/o focus in Callout'}
+        </Button>
       </View>
 
       {showStandardCallout && (
         <Callout
+          componentRef={calloutRef}
           {...{
             doNotTakePointerCapture: openCalloutOnHoverAnchor ?? undefined,
             ...calloutTargetOrAnchor,
@@ -369,20 +383,32 @@ const StandardCallout: React.FunctionComponent = () => {
             {showScrollViewCallout ? (
               <View style={fluentTesterStyles.scrollViewContainer}>
                 <ScrollView contentContainerStyle={fluentTesterStyles.scrollViewStyle} showsVerticalScrollIndicator={true}>
-                  <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
-                  <StealthButton content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
-                  <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
-                  <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
+                  <Button onClick={toggleCalloutRef}>{'click to change anchor'}</Button>
+                  <Button onClick={switchTargetRefOrRect}>{'click to switch between anchor and rect'}</Button>
+                  <Button style={fluentTesterStyles.testListItem} onClick={addButton}>
+                    {'Click to add a button'}
+                  </Button>
+                  <Button style={fluentTesterStyles.testListItem} onClick={removeButton}>
+                    {'Click to remove a button'}
+                  </Button>
                   {scrollviewContents.map((value) => {
-                    return <StealthButton key={value} content="Button" style={fluentTesterStyles.testListItem} />;
+                    return (
+                      <Button key={value} style={fluentTesterStyles.testListItem}>
+                        {'Button'}
+                      </Button>
+                    );
                   })}
                 </ScrollView>
               </View>
             ) : (
               //else
               <View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
-                <Button content="click to change anchor" onClick={toggleCalloutRef} />
-                <Button content="click to switch between anchor and rect" onClick={switchTargetRefOrRect} />
+                <Button onClick={toggleCalloutRef}>{'click to change anchor'}</Button>
+                <Button onClick={onShiftFocusToCalloutButton}>{'focus last button'}</Button>
+                <Button onClick={switchTargetRefOrRect}>{'click to switch between anchor and rect'}</Button>
+                <Button componentRef={calloutButtonRef} onClick={onShiftFocusToPage}>
+                  {'Click to invoke blur()'}
+                </Button>
               </View>
             )}
           </Pressable>
@@ -422,7 +448,7 @@ const CustomCallout: React.FunctionComponent = () => {
   return (
     <View>
       <View style={{ flexDirection: 'column', paddingVertical: 5 }}>
-        <Button content="Press for Callout" onClick={toggleShowCustomizedCallout} />
+        <Button onClick={toggleShowCustomizedCallout}>{'Press for Callout'}</Button>
         <Text selectable={true}>
           <Text>Visibility: </Text>
           {isCustomizedCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}

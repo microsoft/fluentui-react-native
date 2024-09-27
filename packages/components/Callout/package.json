@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
-    "@fluentui-react-native/interactive-hooks": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",
     "@uifabricshared/foundation-compose": "workspace:*",
@@ -79,5 +78,10 @@
     "react-native-windows": {
       "optional": true
     }
+  },
+  "codegenConfig": {
+    "name": "FRNCalloutSpec",
+    "type": "components",
+    "jsSrcsDir": "lib"
   }
 }

@@ -50,6 +50,7 @@ export type {
 
 export { Callout, calloutName } from '@fluentui-react-native/callout';
 export type {
+  CalloutNativeCommands,
   DirectionalHint,
   DismissBehaviors,
   ICalloutProps,
