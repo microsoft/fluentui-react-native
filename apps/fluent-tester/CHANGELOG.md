@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Thu, 26 Sep 2024 20:45:54 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 27 Sep 2024 05:53:19 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.9
+
+Fri, 27 Sep 2024 05:53:19 GMT
+
+### Patches
+
+- Callout test page additions to test new focusWindow/blurWindow APIs on MacOS (ppatboyd@outlook.com)
 
 ## 0.170.8
 

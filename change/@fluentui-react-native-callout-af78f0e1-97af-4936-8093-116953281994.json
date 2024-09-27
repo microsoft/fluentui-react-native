@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add focusWindow and blurWindow command APIs to the Callout componentRef interface",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "ppatboyd@outlook.com",
-  "dependentChangeType": "patch"
-}

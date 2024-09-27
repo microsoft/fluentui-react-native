@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 27 Sep 2024 05:53:19 GMT",
+      "version": "0.170.9",
+      "tag": "@fluentui-react-native/tester_v0.170.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ppatboyd@outlook.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7d1fa1e8c9aab65745ceb4e19efda75fd06e33bb",
+            "comment": "Callout test page additions to test new focusWindow/blurWindow APIs on MacOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Sep 2024 20:45:54 GMT",
       "version": "0.170.8",
       "tag": "@fluentui-react-native/tester_v0.170.8",

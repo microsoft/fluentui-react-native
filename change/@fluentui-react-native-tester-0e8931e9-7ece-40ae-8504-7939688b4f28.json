@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Callout test page additions to test new focusWindow/blurWindow APIs on MacOS",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ppatboyd@outlook.com",
-  "dependentChangeType": "patch"
-}
