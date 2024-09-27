@@ -11,8 +11,8 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.js": "${capture}.js.map, ${capture}.d.ts, ${capture}.d.ts.map",
-    "*.ts": "${capture}.android.tsx, ${capture}.ios.tsx, ${capture}.macos.tsx, ${capture}.windows.tsx, ${capture}.win32.tsx, ${capture}.android.ts, ${capture}.ios.ts, ${capture}.macos.ts, ${capture}.windows.ts, ${capture}.win32.ts",
-    "*.tsx": "${capture}.android.tsx, ${capture}.ios.tsx, ${capture}.macos.tsx, ${capture}.windows.tsx, ${capture}.win32.tsx, ${capture}.android.ts, ${capture}.ios.ts, ${capture}.macos.ts, ${capture}.windows.ts, ${capture}.win32.ts"
+    "*.ts": "${capture}.android.tsx, ${capture}.ios.tsx, ${capture}.macos.tsx, ${capture}.windows.tsx, ${capture}.win32.tsx, ${capture}.officewin.tsx, ${capture}.android.ts, ${capture}.ios.ts, ${capture}.macos.ts, ${capture}.windows.ts, ${capture}.win32.ts, ${capture}.officewin.ts",
+    "*.tsx": "${capture}.android.tsx, ${capture}.ios.tsx, ${capture}.macos.tsx, ${capture}.windows.tsx, ${capture}.win32.tsx, ${capture}.officewin.tsx, ${capture}.android.ts, ${capture}.ios.ts, ${capture}.macos.ts, ${capture}.windows.ts, ${capture}.win32.ts, ${capture}.officewin.ts"
   },
 
   "files.trimTrailingWhitespace": true,

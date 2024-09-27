@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { ViewStyle, ColorValue } from 'react-native';
 import { View, StyleSheet } from 'react-native';
 
-import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
+import { ButtonV1 as Button, Text } from '@fluentui/react-native';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
@@ -52,11 +52,19 @@ const Panel: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
   return (
     <View style={styles.panel}>
-      <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
-      <Button onClick={onClick} content="Default Button" disabled={disabled} />
-      <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
+      <Button appearance="primary" onClick={onClick} disabled={disabled}>
+        Primary Button
+      </Button>
+      <Button onClick={onClick} disabled={disabled}>
+        Default Button
+      </Button>
+      <Button appearance="subtle" onClick={onClick} disabled={disabled}>
+        Steath Button
+      </Button>
       <Text>This is a text element</Text>
-      <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
+      <Button onClick={onClick} disabled={disabled}>
+        This button has longer text
+      </Button>
     </View>
   );
 };

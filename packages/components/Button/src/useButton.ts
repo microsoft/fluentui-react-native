@@ -13,7 +13,7 @@ import type { ButtonProps, ButtonInfo } from './Button.types';
 // like the button firing after you tab to it white Enter is pressed
 // and then releasing Enter, or the Menu reopening since it closes
 // onKeyDown while the Button operates onKeyUp.
-const shouldOnlyFireIfPressed = Platform.OS === ('win32' as any);
+const shouldOnlyFireIfPressed = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
 let isProcessingKeyboardInvocation = false;
 
 export const useButton = (props: ButtonProps): ButtonInfo => {
@@ -76,7 +76,8 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 
   const theme = useFluentTheme();
-  const shouldUseTwoToneFocusBorder = Platform.OS === ('win32' as any) && props.appearance === 'primary' && !isHighContrast(theme);
+  const shouldUseTwoToneFocusBorder =
+    (Platform.OS === ('win32' as any) || Platform.OS === 'windows') && props.appearance === 'primary' && !isHighContrast(theme);
   const [baseHeight, setBaseHeight] = React.useState<number | undefined>(undefined);
   const [baseWidth, setBaseWidth] = React.useState<number | undefined>(undefined);
   const onLayoutInner = React.useCallback(
@@ -96,7 +97,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
   return {
     props: {
       ...onKeyProps,
-      ...(Platform.OS === ('win32' as any) && { onKeyDown: onKeyDown }),
+      ...((Platform.OS === ('win32' as any) || Platform.OS === 'windows') && { onKeyDown: onKeyDown }),
       ...pressable.props, // allow user key events to override those set by us
       /**
        * https://github.com/facebook/react-native/issues/34986

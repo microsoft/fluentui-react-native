@@ -24,7 +24,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     content: Text,
     secondaryContent: Text,
     contentContainer: View,
-    focusInnerBorder: Platform.OS === ('win32' as any) && View,
+    focusInnerBorder: (Platform.OS === ('win32' as any) || Platform.OS === 'windows') && View,
   },
   useRender: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);

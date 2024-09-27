@@ -10,9 +10,10 @@ import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
-import { stylingSettings, getDefaultSize, getPlatformSpecificAppearance } from './Button.styling';
+import { stylingSettings } from './Button.styling';
 import { buttonName } from './Button.types';
 import type { ButtonType, ButtonProps } from './Button.types';
+import { getDefaultSize, getPlatformSpecificAppearance } from './ButtonPlatform';
 import { extractOuterStylePropsAndroid } from './ExtractStyle.android';
 import { useButton } from './useButton';
 
@@ -46,7 +47,7 @@ export const Button = compose<ButtonType>({
   slots: {
     root: Pressable,
     rippleContainer: Platform.OS === 'android' && View,
-    focusInnerBorder: Platform.OS === ('win32' as any) && View,
+    focusInnerBorder: (Platform.OS === ('win32' as any) || Platform.OS === 'windows') && View,
     icon: Icon,
     content: Text,
   },
