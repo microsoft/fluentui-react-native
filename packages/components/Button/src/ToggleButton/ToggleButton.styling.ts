@@ -4,14 +4,10 @@ import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/t
 
 import { toggleButtonName } from './ToggleButton.types';
 import type { ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
-import { defaultToggleButtonColorTokens } from './ToggleButtonColorTokens';
 import { buttonStates, contentStyling } from '../Button.styling';
-import { defaultButtonColorTokens } from '../ButtonColorTokens';
-import { defaultButtonFontTokens } from '../ButtonFontTokens';
-import { defaultButtonTokens } from '../ButtonTokens';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
-  tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, defaultToggleButtonColorTokens, toggleButtonName],
+  tokens: [toggleButtonName],
   states: ['checked', ...buttonStates],
   slotProps: {
     root: buildProps(
