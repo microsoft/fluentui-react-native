@@ -7861,8 +7861,8 @@ __metadata:
   linkType: hard
 
 "@wdio/appium-service@npm:^8.40.0":
-  version: 8.40.4
-  resolution: "@wdio/appium-service@npm:8.40.4"
+  version: 8.40.5
+  resolution: "@wdio/appium-service@npm:8.40.5"
   dependencies:
     "@wdio/config": "npm:8.40.3"
     "@wdio/logger": "npm:8.38.0"
@@ -7872,8 +7872,8 @@ __metadata:
     import-meta-resolve: "npm:^4.0.0"
     param-case: "npm:^4.0.0"
     tree-kill: "npm:^1.2.2"
-    webdriverio: "npm:8.40.3"
-  checksum: 10c0/0612e4924809f89d76105bb46df20155c17099983e1c0ee57c6d4269a26dc0795b0b9d396bbd1c6bbf1cd6e491e792f49cca1ad31540861df6cca4b152ea96bc
+    webdriverio: "npm:8.40.5"
+  checksum: 10c0/13667487d5167927a207b24bf8c575070ef693ab1737eda4935393332c0fe5a5d3e6049bef85af8ab80213b7104fd0928b12ae9d557267688f0184a4a3e00deb
   languageName: node
   linkType: hard
 
