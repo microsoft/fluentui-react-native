@@ -52,7 +52,8 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.neutralForegroundDisabled,
       },
       hovered: {
-        // Update to brandBackgroundHover, once the alias token matches brandBackground
+        // Github #X: brandBackgroundHover should match brandBackground, but does not.
+        // Update backgroundColor and borderColor here when fixed in design token package.
         backgroundColor: t.colors.brandBackground,
         color: t.colors.neutralForegroundOnBrandHover,
         borderColor: t.colors.brandBackground,
