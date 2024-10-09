@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "fix(macOS Button): Use Fluent 2 alias tokens",
+  "packageName": "@fluentui-react-native/button",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}

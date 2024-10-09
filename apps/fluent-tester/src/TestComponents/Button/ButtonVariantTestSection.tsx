@@ -23,6 +23,9 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <Button appearance="subtle" style={commonTestStyles.vmargin}>
         Subtle
       </Button>
+      <Button disabled appearance="subtle" style={commonTestStyles.vmargin}>
+        Subtle Disabled
+      </Button>
       <Button loading>Loading Button</Button>
       <Button block style={commonTestStyles.vmargin}>
         Block

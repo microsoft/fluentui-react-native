@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import type { IStackProps } from '@fluentui-react-native/stack';
 
@@ -118,6 +118,10 @@ export const fluentTesterStyles = StyleSheet.create({
   testListItem: {
     width: '100%',
     borderRadius: 0,
+    ...(Platform.OS === 'macos' && {
+      borderColor: 'transparent',
+      borderRadius: 5,
+    }),
     justifyContent: 'flex-start',
   },
   testListSeparator: { marginHorizontal: 8 },
