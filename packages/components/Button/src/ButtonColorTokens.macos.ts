@@ -3,12 +3,10 @@ import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
 
-// Github #X: We should be using the `hover` tokens for the hover states, but they currently set a
-// different color from rest. macOS by default doesn't have many hover states on it's controls. Address
-// this discrepancy in the token packages, and then update these definitions as appropriate.
-
-// Github #X2: The macOS brand ramps from the token package use blue from Fluent V1, instead of communication blue.
-// Update the packages to use the newly defined Fluent 2 brand ramp.
+// https://github.com/microsoft/fluentui-react-native/issues/3782
+// The macOS brand ramps from the token package use blue from Fluent V1,
+// instead of communication blue. Update the packages to use the newly
+// defined Fluent 2 brand ramp.
 
 export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
@@ -52,8 +50,9 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.neutralForegroundDisabled,
       },
       hovered: {
-        // Github #X: brandBackgroundHover should match brandBackground, but does not.
-        // Update backgroundColor and borderColor here when fixed in design token package.
+        // https://github.com/microsoft/fluentui-react-native/issues/3780
+        // brandBackgroundHover should match brandBackground, but does not. Update
+        // `backgroundColor` and `borderColor` here when fixed in design token package.
         backgroundColor: t.colors.brandBackground,
         color: t.colors.neutralForegroundOnBrandHover,
         borderColor: t.colors.brandBackground,
@@ -72,6 +71,11 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.neutralForegroundOnBrand,
       },
     },
+    // https://github.com/microsoft/fluentui-react-native/issues/3781
+    // Subtle Button should match Titlebar buttons on macOS, which
+    // in high contrast keep a border around them. To do so, the alias tokens
+    // `subtleBackgroundHover` and `subtleBackgroundPressed` need their high contrast
+    // variants updated to be closer to what `transparentStroke` does.
     subtle: {
       backgroundColor: t.colors.subtleBackground,
       color: t.colors.brandForeground1,
