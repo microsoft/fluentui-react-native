@@ -189,7 +189,6 @@
         "react-test-renderer",
         "svg",
         "test-app",
-        "metro-react-native-babel-transformer",
         "metro-react-native-babel-transformer"
       ]
     }
