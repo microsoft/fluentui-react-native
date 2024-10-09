@@ -31,14 +31,14 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.74.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.74.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -47,9 +47,10 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.73"
+        "react-native@0.74"
       ],
       "capabilities": [
+        "babel-preset-react-native",
         "core",
         "core-android",
         "core-ios",
