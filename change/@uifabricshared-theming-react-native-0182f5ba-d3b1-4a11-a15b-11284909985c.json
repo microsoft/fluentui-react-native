@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "chore: Update to React Native 0.74",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
