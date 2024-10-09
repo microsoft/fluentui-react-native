@@ -20,13 +20,17 @@
   },
   "peerDependencies": {
     "just-scripts": "^2.3.2",
-    "react": "18.2.0"
+    "react": "18.2.0",
+    "react-dom": "^18.2.0",
+    "react-native": "^0.74.0",
+    "react-native-svg": "^15.4.0"
   },
   "devDependencies": {
-    "@react-native-community/cli": "^12.1.1",
-    "@react-native-community/cli-platform-android": "^12.1.1",
-    "@react-native-community/cli-platform-ios": "^12.1.1",
-    "@react-native/metro-babel-transformer": "^0.73.0",
+    "@react-native-community/cli": "^13.6.4",
+    "@react-native-community/cli-platform-android": "^13.6.4",
+    "@react-native-community/cli-platform-ios": "^13.6.4",
+    "@react-native/metro-babel-transformer": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/jest-preset": "^0.1.14",
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
@@ -42,13 +46,13 @@
     "jsdom": "^25.0.0",
     "just-scripts": "^2.3.2",
     "just-task": "^1.4.2",
-    "metro-config": "^0.80.0",
+    "metro-config": "^0.80.3",
     "metro-react-native-babel-transformer": "^0.76.5",
     "prettier": "^2.4.1",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-svg": "^15.0.0",
+    "react-native": "^0.74.0",
+    "react-native-svg": "^15.4.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",
     "rimraf": "^5.0.1",
@@ -75,14 +79,17 @@
         "./align-deps-preset.js"
       ],
       "requirements": [
-        "react-native@0.73"
+        "react-native@0.74"
       ],
       "capabilities": [
         "community/cli",
+        "core",
         "jest",
         "metro-config",
         "metro-react-native-babel-transformer",
-        "react-test-renderer"
+        "react-test-renderer",
+        "react-dom",
+        "svg"
       ]
     }
   }

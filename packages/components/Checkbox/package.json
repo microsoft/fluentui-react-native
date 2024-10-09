@@ -50,13 +50,15 @@
     "@react-native/metro-config": "^0.73.0",
     "react": "18.2.0",
     "react-native": "^0.73.0",
-    "react-native-svg": "^14.0.0"
+    "react-native-macos": "^0.74.0",
+    "react-native-svg": "^15.0.0",
+    "react-native-windows": "^0.73.0"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.73.0",
     "react": "18.2.0",
     "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0",
+    "react-native-macos": "^0.74.0",
     "react-native-svg": "^15.0.0",
     "react-native-windows": "^0.73.0"
   },
@@ -73,9 +75,12 @@
         "react-native@0.73"
       ],
       "capabilities": [
+        "babel-preset-react-native",
         "core",
         "core-android",
         "core-ios",
+        "core-macos",
+        "core-windows",
         "react",
         "svg"
       ]

@@ -45,10 +45,10 @@
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.73.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0",
-    "react-native-svg": "^15.0.0",
-    "react-native-windows": "^0.73.0"
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-svg": "^15.4.0",
+    "react-native-windows": "^0.74.0"
   },
   "peerDependenciesMeta": {
     "@office-iss/react-native-win32": {
@@ -64,10 +64,13 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-svg": "^15.4.0",
+    "react-native-windows": "^0.74.0"
   },
   "onPublish": {
     "main": "lib-commonjs/index.js",
@@ -77,13 +80,17 @@
     "kitType": "library",
     "alignDeps": {
       "requirements": [
-        "react-native@0.73"
+        "react-native@0.74"
       ],
       "capabilities": [
+        "babel-preset-react-native",
         "core",
         "core-android",
         "core-ios",
-        "react"
+        "core-macos",
+        "core-windows",
+        "react",
+        "svg"
       ]
     }
   },
