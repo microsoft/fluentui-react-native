@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "chore: Update to React Native 0.74",
+  "packageName": "@fluentui-react-native/divider",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
