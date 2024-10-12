@@ -66,6 +66,11 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   borderInnerWidth?: number;
   borderInnerRadius?: number;
   borderInnerStyle?: ViewStyle['borderStyle'];
+
+  /**
+   * The default size of the button
+   */
+  size?: ButtonSize;
 }
 
 export interface ButtonTokens extends ButtonCoreTokens {
@@ -89,6 +94,11 @@ export interface ButtonTokens extends ButtonCoreTokens {
   circular?: ButtonTokens;
   square?: ButtonTokens;
   hasIconAfter?: ButtonTokens;
+
+  /**
+   * Returns the default appearance type, and can remap ButtonAppearances to other Appearances for this theme
+   */
+  getPlatformSpecificAppearance?: (appearance: ButtonAppearance) => ButtonAppearance;
 }
 
 export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'> {

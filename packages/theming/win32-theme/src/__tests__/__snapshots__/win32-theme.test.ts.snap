@@ -2714,6 +2714,265 @@ exports[`createOfficeTheme test 1`] = `
     "warningForeground3": "#fde300",
     "warningForegroundInverted": "#fef7b2",
   },
+  "components": {
+    "Button": {
+      "backgroundColor": "antiquewhite",
+      "block": {
+        "width": "100%",
+      },
+      "borderColor": "#969696",
+      "borderInnerWidth": 1,
+      "borderWidth": 1,
+      "circular": {
+        "borderInnerRadius": 9998,
+        "borderRadius": 9999,
+      },
+      "color": "#262626",
+      "disabled": {
+        "backgroundColor": "#E6E6E6",
+        "borderColor": "#D2D2D2",
+        "color": "#B1B1B1",
+        "iconColor": "#B1B1B1",
+      },
+      "focused": {
+        "backgroundColor": "#D2D2D2",
+        "borderColor": "#00000000",
+        "color": "#262626",
+        "iconColor": "#262626",
+      },
+      "hovered": {
+        "backgroundColor": "#D2D2D2",
+        "borderColor": "#969696",
+        "color": "#262626",
+        "iconColor": "#262626",
+      },
+      "iconColor": "#262626",
+      "large": {
+        "focused": {
+          "borderWidth": 0,
+          "padding": 10,
+        },
+        "hasContent": {
+          "focused": {
+            "padding": 8,
+            "paddingHorizontal": 16,
+          },
+          "fontFamily": "Segoe UI Semibold",
+          "fontSize": 16,
+          "fontWeight": "600",
+          "hasIconAfter": {
+            "spacingIconContentAfter": 6,
+          },
+          "hasIconBefore": {
+            "spacingIconContentBefore": 6,
+          },
+          "minHeight": 40,
+          "minWidth": 96,
+          "padding": 7,
+          "paddingHorizontal": 15,
+          "primary": {
+            "focused": {
+              "padding": 6,
+              "paddingHorizontal": 14,
+            },
+            "square": {
+              "focused": {
+                "padding": 7,
+                "paddingHorizontal": 15,
+              },
+            },
+          },
+        },
+        "iconSize": 20,
+        "padding": 9,
+        "primary": {
+          "focused": {
+            "borderWidth": 2,
+            "padding": 8,
+          },
+          "square": {
+            "focused": {
+              "borderWidth": 1,
+              "padding": 9,
+            },
+          },
+        },
+      },
+      "medium": {
+        "focused": {
+          "borderWidth": 0,
+          "padding": 8,
+        },
+        "hasContent": {
+          "focused": {
+            "padding": 6,
+            "paddingHorizontal": 12,
+          },
+          "fontFamily": "Segoe UI Semibold",
+          "fontSize": 14,
+          "fontWeight": "600",
+          "hasIconAfter": {
+            "spacingIconContentAfter": 8,
+          },
+          "hasIconBefore": {
+            "spacingIconContentBefore": 8,
+          },
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
+          "primary": {
+            "focused": {
+              "padding": 4,
+              "paddingHorizontal": 10,
+            },
+            "square": {
+              "focused": {
+                "padding": 5,
+                "paddingHorizontal": 11,
+              },
+            },
+          },
+        },
+        "iconSize": 16,
+        "padding": 7,
+        "primary": {
+          "focused": {
+            "borderWidth": 2,
+            "padding": 6,
+          },
+          "square": {
+            "focused": {
+              "borderWidth": 1,
+              "padding": 7,
+            },
+          },
+        },
+      },
+      "pressed": {
+        "backgroundColor": "#B1B1B1",
+        "borderColor": "#969696",
+        "color": "#262626",
+        "iconColor": "#262626",
+      },
+      "primary": {
+        "backgroundColor": "#D83B01",
+        "borderColor": "#D83B01",
+        "color": "#FFFFFF",
+        "disabled": {
+          "backgroundColor": "#E6E6E6",
+          "borderColor": "#D2D2D2",
+          "color": "#B1B1B1",
+          "iconColor": "#B1B1B1",
+        },
+        "focused": {
+          "backgroundColor": "#F29F71",
+          "borderColor": "#969696",
+          "borderInnerColor": "#ffffff",
+          "color": "#FFFFFF",
+          "iconColor": "#FFFFFF",
+        },
+        "hovered": {
+          "backgroundColor": "#F29F71",
+          "borderColor": "#F29F71",
+          "color": "#FFFFFF",
+          "iconColor": "#FFFFFF",
+        },
+        "iconColor": "#FFFFFF",
+        "pressed": {
+          "backgroundColor": "#A22C01",
+          "borderColor": "#A22C01",
+          "color": "#FFFFFF",
+          "iconColor": "#FFFFFF",
+        },
+      },
+      "rounded": {
+        "borderInnerRadius": 3,
+        "borderRadius": 4,
+      },
+      "size": "small",
+      "small": {
+        "focused": {
+          "borderWidth": 0,
+          "padding": 4,
+        },
+        "hasContent": {
+          "focused": {
+            "paddingHorizontal": 8,
+          },
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "hasIconAfter": {
+            "spacingIconContentAfter": 4,
+          },
+          "hasIconBefore": {
+            "spacingIconContentBefore": 4,
+          },
+          "minHeight": 24,
+          "minWidth": 64,
+          "paddingHorizontal": 7,
+          "primary": {
+            "focused": {
+              "paddingHorizontal": 6,
+            },
+            "square": {
+              "focused": {
+                "paddingHorizontal": 7,
+              },
+            },
+          },
+        },
+        "iconSize": 16,
+        "padding": 3,
+        "primary": {
+          "focused": {
+            "borderWidth": 2,
+            "padding": 2,
+          },
+          "square": {
+            "focused": {
+              "borderWidth": 1,
+              "padding": 3,
+            },
+          },
+        },
+      },
+      "square": {
+        "borderInnerRadius": 0,
+        "borderRadius": 0,
+      },
+      "subtle": {
+        "backgroundColor": "#00000000",
+        "borderColor": "#00000000",
+        "color": "#262626",
+        "disabled": {
+          "backgroundColor": "#00000000",
+          "borderColor": "#00000000",
+          "color": "#B1B1B1",
+          "iconColor": "#B1B1B1",
+        },
+        "focused": {
+          "backgroundColor": "#f5f5f5",
+          "borderColor": "#00000000",
+          "color": "#262626",
+          "iconColor": "#262626",
+        },
+        "hovered": {
+          "backgroundColor": "#f5f5f5",
+          "borderColor": "#f5f5f5",
+          "color": "#262626",
+          "iconColor": "#262626",
+        },
+        "iconColor": "#262626",
+        "pressed": {
+          "backgroundColor": "#e0e0e0",
+          "borderColor": "#e0e0e0",
+          "color": "#262626",
+          "iconColor": "#262626",
+        },
+      },
+    },
+  },
   "host": {
     "appearance": "light",
     "colors": {

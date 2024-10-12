@@ -7,13 +7,11 @@ import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-
 
 import { fabName } from './FAB.types';
 import type { FABProps, FABSlotProps, FABTokens } from './FAB.types';
-import { defaultFABColorTokens } from './FABColorTokens';
-import { defaultFABTokens } from './FABTokens';
 
 export const FABStates: (keyof FABTokens)[] = ['focused', 'pressed', 'subtle', 'disabled', 'large', 'small', 'hasContent'];
 
 export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABTokens> = {
-  tokens: [defaultFABTokens, defaultFABColorTokens, fabName],
+  tokens: [fabName],
   states: FABStates,
   slotProps: {
     ...(Platform.OS === 'android' && {

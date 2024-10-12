@@ -5,7 +5,7 @@ import { Platform, Pressable, View } from 'react-native';
 
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, useFluentTheme, withSlots } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
@@ -29,9 +29,10 @@ export const CompoundButton = compose<CompoundButtonType>({
   useRender: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
+    const theme = useFluentTheme();
 
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps, theme));
 
     // now return the handler for finishing render
     return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {

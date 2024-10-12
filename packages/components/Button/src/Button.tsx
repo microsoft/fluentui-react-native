@@ -6,13 +6,15 @@ import { Platform, Pressable, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, memoize, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { useFluentTheme } from '@fluentui-react-native/framework';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+import type { Theme } from '@fluentui-react-native/theme-types';
 
-import { stylingSettings, getDefaultSize, getPlatformSpecificAppearance } from './Button.styling';
+import { stylingSettings } from './Button.styling';
 import { buttonName } from './Button.types';
-import type { ButtonType, ButtonProps } from './Button.types';
+import type { ButtonType, ButtonProps, ButtonTokens } from './Button.types';
 import { extractOuterStylePropsAndroid } from './ExtractStyle.android';
 import { useButton } from './useButton';
 
@@ -22,15 +24,18 @@ import { useButton } from './useButton';
  * @param layer The name of the state that is being checked for
  * @param state The current state of the button
  * @param userProps The props that were passed into the button
+ * @param theme The theme
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
-export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps): boolean => {
+export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps, theme: Theme): boolean => {
+  const size = userProps['size'] ?? (theme?.components?.['Button'] as ButtonTokens)?.size ?? 'medium';
+  const getPlatformSpecificAppearance = (theme?.components?.['Button'] as ButtonTokens)?.getPlatformSpecificAppearance;
+  const appearance = getPlatformSpecificAppearance ? getPlatformSpecificAppearance(userProps['appearance']) : null;
   return (
     state[layer] ||
     userProps[layer] ||
-    layer === getPlatformSpecificAppearance(userProps['appearance']) ||
-    layer === userProps['size'] ||
-    (!userProps['size'] && layer === getDefaultSize()) ||
+    layer === appearance ||
+    layer === size ||
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'rounded') ||
     (layer === 'hovered' && state[layer] && !userProps.loading) ||
@@ -52,10 +57,11 @@ export const Button = compose<ButtonType>({
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
+    const theme = useFluentTheme();
 
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps, theme));
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {

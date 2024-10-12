@@ -1,6 +1,12 @@
+import type { ButtonTokens, FABTokens } from '@fluentui-react-native/button';
 import type { AppearanceOptions } from '@fluentui-react-native/theme-types';
 
 import { getIsHighContrast, setIsHighContrast } from '../appleHighContrast.macos';
+import { defaultButtonColorTokens } from '../components/Button/ButtonColorTokens';
+import { defaultButtonFontTokens } from '../components/Button/ButtonFontTokens';
+import { defaultButtonTokens } from '../components/Button/ButtonTokens';
+import { defaultFABColorTokens } from '../components/Button/FABColorTokens.ios';
+import { defaultFABTokens } from '../components/Button/FABTokens.ios';
 import { createAppleTheme } from '../createAppleTheme';
 import { createMacOSColorAliasTokens, createMacOSShadowAliasTokens } from '../createMacOSAliasTokens';
 
@@ -65,3 +71,20 @@ it.concurrent.each(macOSAliasTokensTable)(
     }
   },
 );
+
+describe('verify types', () => {
+  it('Button types', () => {
+    const officeTheme = createAppleTheme().theme;
+    const colorTokens: ButtonTokens = defaultButtonColorTokens(officeTheme);
+    expect(colorTokens).toBeTruthy();
+    const fontTokens: ButtonTokens = defaultButtonFontTokens(officeTheme);
+    expect(fontTokens).toBeTruthy();
+    const tokens: ButtonTokens = defaultButtonTokens(officeTheme);
+    expect(tokens).toBeTruthy();
+
+    const fabColorTokens: FABTokens = defaultFABColorTokens(officeTheme);
+    expect(fabColorTokens).toBeTruthy();
+    const fabTokens: FABTokens = defaultFABTokens(officeTheme);
+    expect(fabTokens).toBeTruthy();
+  });
+});
