@@ -22,7 +22,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     root: Pressable,
     icon: Icon,
     content: Text,
-    focusInnerBorder: Platform.OS === ('win32' as any) && View,
+    focusInnerBorder: (Platform.OS === ('win32' as any) || Platform.OS === 'windows') && View,
   },
   useRender: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
     const iconProps = createIconProps(userProps.icon);

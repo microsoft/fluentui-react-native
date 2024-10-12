@@ -1,5 +1,4 @@
 import type { ColorValue } from 'react-native';
-import { Platform } from 'react-native';
 
 import type { Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
@@ -8,9 +7,10 @@ import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/t
 import type { FontTokens } from '@fluentui-react-native/tokens';
 
 import { buttonName } from './Button.types';
-import type { ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize, ButtonAppearance } from './Button.types';
+import type { ButtonTokens, ButtonSlotProps, ButtonProps } from './Button.types';
 import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { defaultButtonFontTokens } from './ButtonFontTokens';
+import { buttonPlatformSlotProps } from './ButtonPlatform';
 import { defaultButtonTokens } from './ButtonTokens';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
@@ -37,23 +37,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
-    ...(Platform.OS === 'android' && {
-      rippleContainer: buildProps(
-        (tokens: ButtonTokens) => {
-          return {
-            style: {
-              flexDirection: 'row',
-              alignSelf: 'baseline',
-              borderColor: tokens.borderInnerColor,
-              borderWidth: tokens.borderInnerWidth,
-              borderRadius: tokens.borderRadius,
-              overflow: 'hidden',
-            },
-          };
-        },
-        ['borderRadius'],
-      ),
-    }),
+    ...buttonPlatformSlotProps,
     root: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
@@ -104,38 +88,6 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       ['borderInnerWidth', 'borderInnerColor', 'borderInnerRadius'],
     ),
   },
-};
-
-export const getDefaultSize = (): ButtonSize => {
-  if (Platform.OS === 'windows') {
-    return 'medium';
-  } else if ((Platform.OS as any) === 'win32') {
-    return 'small';
-  }
-
-  return 'medium';
-};
-
-export const getPlatformSpecificAppearance = (appearance: ButtonAppearance): ButtonAppearance => {
-  // Mobile platforms do not have seperate styling when no appearance is passed.
-  const hasDifferentDefaultAppearance = !(Platform.OS === 'android' || Platform.OS === 'ios');
-
-  switch (appearance) {
-    case 'accent': // Included to cover Mobile platform naming guidelines, maps to 'primary'.
-      return 'primary';
-
-    case 'primary':
-    case 'subtle':
-    case 'outline': // 'Outline' exists only for Mobile platforms, default picked on other platforms.
-      return appearance;
-
-    default:
-      if (hasDifferentDefaultAppearance) {
-        return null;
-      } else {
-        return 'primary';
-      }
-  }
 };
 
 export const contentStyling = (tokens: ButtonTokens, theme: Theme, contentColor: ColorValue, fontStylesTokens: FontTokens) => {
