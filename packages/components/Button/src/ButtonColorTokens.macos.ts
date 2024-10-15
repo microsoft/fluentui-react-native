@@ -3,6 +3,8 @@ import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
 
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
+
 // https://github.com/microsoft/fluentui-react-native/issues/3782
 // The macOS brand ramps from the token package use blue from Fluent V1,
 // instead of communication blue. Update the packages to use the newly
@@ -72,10 +74,10 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       },
     },
     // https://github.com/microsoft/fluentui-react-native/issues/3781
-    // Subtle Button should match Titlebar buttons on macOS, which
-    // in high contrast keep a border around them. To do so, the alias tokens
-    // `subtleBackgroundHover` and `subtleBackgroundPressed` need their high contrast
-    // variants updated to be closer to what `transparentStroke` does.
+    // Subtle Button should match Titlebar buttons on macOS, which:
+    // - Have a hover state (unlike most buttons in macOS)...
+    // - Except in High Contrast, where instead they have a border around them
+    // While the alias tokens aren't updated, manually check for High Contrast.
     subtle: {
       backgroundColor: t.colors.subtleBackground,
       color: t.colors.brandForeground1,
@@ -88,15 +90,15 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.brandForeground1Disabled,
       },
       hovered: {
-        backgroundColor: t.colors.subtleBackgroundHover,
-        color: t.colors.brandForeground1Hover,
-        borderColor: t.colors.subtleBackgroundHover,
-        iconColor: t.colors.brandForeground1Hover,
+        backgroundColor: isHighContrast(t) ? t.colors.subtleBackground : t.colors.subtleBackgroundHover,
+        color: isHighContrast(t) ? t.colors.brandForeground1 : t.colors.brandForeground1Hover,
+        borderColor: t.colors.transparentStroke,
+        iconColor: isHighContrast(t) ? t.colors.brandForeground1 : t.colors.brandForeground1Hover,
       },
       pressed: {
         backgroundColor: t.colors.subtleBackgroundPressed,
         color: t.colors.brandForeground1Pressed,
-        borderColor: t.colors.subtleBackgroundPressed,
+        borderColor: t.colors.transparentStroke,
         iconColor: t.colors.brandForeground1Pressed,
       },
       focused: {
