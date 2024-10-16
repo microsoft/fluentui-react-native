@@ -10,6 +10,14 @@ steps:
       jdkVersionOption: '1.17'
       workingDirectory: apps/fluent-tester/android
 
+  - task: Gradle@3
+    inputs:
+      workingDirectory: apps/fluent-tester/android
+      gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
+      gradleOptions: '-Xmx3072m'
+      publishJUnitResults: false
+      tasks: 'assembleDebug'
+
   - script: |
       adb install app-debug.apk
     workingDirectory: apps/fluent-tester/android/app/build/outputs/apk/debug

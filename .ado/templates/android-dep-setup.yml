@@ -7,48 +7,20 @@ steps:
         #!/usr/bin/env bash
         set -eox pipefail
 
-        # Workaround for Error in step below
-        export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
-
         # Install AVD files
-        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;default;x86_64'
+        echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install 'system-images;android-30;google_apis;x86'
 
         # Create emulator
-        echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n android_emulator -d 34 --package 'system-images;android-27;default;x86_64'
+        echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n android_emulator -k 'system-images;android-30;google_apis;x86' --force
 
-         # list emulator
-        echo "Available emulator"
         $ANDROID_HOME/emulator/emulator -list-avds
-
-        if false; then
-        emulator_config=~/.android/avd/android_emulator.avd/config.ini
-          # The following is to support empty OR populated config.ini files,
-          # the state of which is dependant on the version of the emulator used (which we don't control),
-          # Replace existing config (NOTE we're on macOS so sed works differently!)
-        sed -i .bak 's/hw.lcd.density=.*/hw.lcd.density=420/' "$emulator_config"
-        sed -i .bak 's/hw.lcd.height=.*/hw.lcd.height=1920/' "$emulator_config"
-        sed -i .bak 's/hw.lcd.width=.*/hw.lcd.width=1080/' "$emulator_config"
-          # Or, add new config
-        if ! grep -q "hw.lcd.density" "$emulator_config"; then
-          echo "hw.lcd.density=420" >> "$emulator_config"
-        fi
-        if ! grep -q "hw.lcd.height" "$emulator_config"; then
-          echo "hw.lcd.height=1920" >> "$emulator_config"
-        fi
-        if ! grep -q "hw.lcd.width" "$emulator_config"; then
-          echo "hw.lcd.width=1080" >> "$emulator_config"
-        fi
-        echo "Emulator settings ($emulator_config)"
-        cat "$emulator_config"
-        fi
 
         echo "Starting emulator"
 
         # Start emulator in background
-        nohup $ANDROID_HOME/emulator/emulator -avd android_emulator -no-snapshot -no-audio -gpu host -no-boot-anim -qemu -m 2048 > /dev/null 2>&1 &
+        nohup $ANDROID_HOME/emulator/emulator -avd android_emulator -no-snapshot -no-window -no-audio -no-boot-anim -accel off > /dev/null 2>&1 &
         $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
 
-        #list online device/emulator
         $ANDROID_HOME/platform-tools/adb devices
 
         echo "Emulator started"
