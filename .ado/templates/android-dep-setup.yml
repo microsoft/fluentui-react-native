@@ -5,7 +5,10 @@ steps:
       targetType: 'inline'
       script: |
         #!/usr/bin/env bash
-        set -ex
+        set -eox pipefail
+
+        # Workaround for Error in step below
+        export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 
         # Install AVD files
         echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;default;x86_64'
