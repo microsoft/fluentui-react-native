@@ -1,9 +1,9 @@
 import type { Theme } from '@fluentui-react-native/framework';
+import { isHighContrast } from '@fluentui-react-native/theming-utils';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
 
-import { isHighContrast } from '@fluentui-react-native/theming-utils';
 
 // https://github.com/microsoft/fluentui-react-native/issues/3782
 // The macOS brand ramps from the token package use blue from Fluent V1,
