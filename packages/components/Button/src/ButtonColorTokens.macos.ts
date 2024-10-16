@@ -4,7 +4,6 @@ import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
 
-
 // https://github.com/microsoft/fluentui-react-native/issues/3782
 // The macOS brand ramps from the token package use blue from Fluent V1,
 // instead of communication blue. Update the packages to use the newly
