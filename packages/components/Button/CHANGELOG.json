@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Thu, 17 Oct 2024 23:38:00 GMT",
+      "version": "0.38.0",
+      "tag": "@fluentui-react-native/button_v0.38.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "71494149a1dc95ac2c2d34b211abdd5ce0856df8",
+            "comment": "fix(macOS Button): Use Fluent 2 alias tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Jun 2024 18:09:30 GMT",
       "version": "0.37.3",
       "tag": "@fluentui-react-native/button_v0.37.3",

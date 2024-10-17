@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixup Sidebar tabs in High Contrast",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

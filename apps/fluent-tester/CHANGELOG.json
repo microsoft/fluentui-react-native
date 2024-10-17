@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 17 Oct 2024 23:38:00 GMT",
+      "version": "0.170.10",
+      "tag": "@fluentui-react-native/tester_v0.170.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "71494149a1dc95ac2c2d34b211abdd5ce0856df8",
+            "comment": "Fixup Sidebar tabs in High Contrast"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 27 Sep 2024 05:53:19 GMT",
       "version": "0.170.9",
       "tag": "@fluentui-react-native/tester_v0.170.9",
