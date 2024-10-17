@@ -1,6 +1,6 @@
 steps:
   # Building APK also requires bundling, this is currently already being done as part of main Android PR task.
-  - task: Gradle@2
+  - task: Gradle@3
     displayName: 'gradlew build apk'
     inputs:
       gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
