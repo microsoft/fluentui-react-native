@@ -59,8 +59,7 @@ jobs:
         displayName: 'yarn bundle $(platform)'
 
       # builds a debug apk and runs E2E tests on it
-      # Disable as Android E2E tests are failing
-      # - template: templates/e2e-testing-android.yml
+      - template: templates/e2e-testing-android.yml
 
   - job: macOSPR
     displayName: macOS PR
