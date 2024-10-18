@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "fix(macOS Button): Set default size to small",
-  "packageName": "@fluentui-react-native/button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

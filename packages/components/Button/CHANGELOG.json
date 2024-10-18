@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Fri, 18 Oct 2024 04:06:01 GMT",
+      "version": "0.39.0",
+      "tag": "@fluentui-react-native/button_v0.39.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "06f5bbda41c2389622a8055f9863b8b6beab3bb2",
+            "comment": "fix(macOS Button): Set default size to small"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 17 Oct 2024 23:38:00 GMT",
       "version": "0.38.0",
       "tag": "@fluentui-react-native/button_v0.38.0",

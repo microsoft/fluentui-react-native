@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-<!-- This log was last generated on Thu, 17 Oct 2024 23:38:00 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 18 Oct 2024 04:06:01 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.39.0
+
+Fri, 18 Oct 2024 04:06:01 GMT
+
+### Minor changes
+
+- fix(macOS Button): Set default size to small (sanajmi@microsoft.com)
 
 ## 0.38.0
 
