@@ -1,4 +1,7 @@
 steps:
+  # sets-up specifics for android dependency like NDK & emulator
+  - template: templates/android-dep-setup.yml
+
   # Building APK also requires bundling, this is currently already being done as part of main Android PR task.
   - task: Gradle@3
     displayName: 'gradlew build apk'
