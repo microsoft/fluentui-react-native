@@ -32,7 +32,7 @@ yarn run-win32
 
 ## Debug `FluentUI Tester` app with direct debugging
 
-Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/download) for direct debugging.
+Note: we recommend using Visual Studio Code for direct debugging.
 
 1. Follow steps #1-3 above.
 2. Build the FluentUI Tester bundle with dev option. This will ensure source map is included in the bundle.
@@ -55,7 +55,7 @@ yarn run-win32
 
 ![Image of Visual Studio Code debug pane](./../../assets/fluent_tester_vscode_debug.png)
 
-6. At this time, VS Code will attach to the JS runtime and you can start debugging. For more information on debugging in VS Code, please see [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging).
+6. At this time, VS Code will attach to the JS runtime and you can start debugging
 
 ## Dependencies
 
