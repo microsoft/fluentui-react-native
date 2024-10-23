@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix typo in `DirectionalHint` type",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
