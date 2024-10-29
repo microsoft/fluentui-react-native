@@ -6,7 +6,7 @@ This guide assumes you:
 
 - Have read through the [React Native Docs](https://reactnative.dev/docs/getting-started). In particular:
   - Understand classes vs function components (we use the latter) and [hooks](https://reactjs.org/docs/hooks-intro.html). Here's a good [video](https://www.youtube.com/watch?v=dpw9EHDh2bM) that explains function components and hooks for traditional OOP developers.
-  - Understand [Native Modules](https://reactnative.dev/docs/native-modules-ios).
+  - Understand [Native Modules](https://reactnative.dev/docs/0.74/native-modules-intro).
 - Have a local fork of FluentUI React Native and have run the test app.
 
 ## Understanding the Repository Structure
@@ -82,7 +82,7 @@ Reach out to Samuel Freiberg with any questions related to E2E testing.
 
 ## Adding native code to your new component
 
-Through the power of [Native Modules](https://reactnative.dev/docs/native-modules-intro), we are able to create components that are comprised of native platform code, rather than JS. This is particularly useful if you want platform specific behavior, or if you want a component that feels much more aligned to it's specific platform. The downside is you must implement the Native module for every platform you wish to support. It's worth investigating whether you truly need a native module, or if a more cross platform JS implementation is the better approach.
+Through the power of [Native Modules](https://reactnative.dev/docs/0.74/native-modules-intro), we are able to create components that are comprised of native platform code, rather than JS. This is particularly useful if you want platform specific behavior, or if you want a component that feels much more aligned to it's specific platform. The downside is you must implement the Native module for every platform you wish to support. It's worth investigating whether you truly need a native module, or if a more cross platform JS implementation is the better approach.
 
 There are a few caveats to know of adding a native module to a FluentUI React Native component:
 
