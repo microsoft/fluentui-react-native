@@ -43,6 +43,9 @@ export const Link = compose<LinkType>({
       // This is a workaround for the issue. Once those issues are resolved, supportsA11yTextInText can be removed.
       const supportsA11yTextInText = Platform.OS !== 'android';
 
+      // MacOS Text component doesn't handle interaction events like hover etc.
+      // which are needed to style links correctly. Since macOS can handle
+      // Views in Text, we use that to handle interactions instead.
       const supportsInteractionOnText = Platform.OS !== 'macos';
 
       return supportsA11yTextInText && supportsInteractionOnText && (inline || mergedProps.selectable) ? (
