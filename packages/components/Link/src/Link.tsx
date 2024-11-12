@@ -43,7 +43,9 @@ export const Link = compose<LinkType>({
       // This is a workaround for the issue. Once those issues are resolved, supportsA11yTextInText can be removed.
       const supportsA11yTextInText = Platform.OS !== 'android';
 
-      return supportsA11yTextInText && (inline || mergedProps.selectable) ? (
+      const supportsInteractionOnText = Platform.OS !== 'macos';
+
+      return supportsA11yTextInText && supportsInteractionOnText && (inline || mergedProps.selectable) ? (
         <Slots.content {...mergedProps}>{children}</Slots.content>
       ) : (
         <Slots.root {...mergedProps}>
