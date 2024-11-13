@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Port logic for inline link for macOS",
-  "packageName": "@fluentui-react-native/link",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

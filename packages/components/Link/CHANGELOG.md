@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Mon, 15 Jul 2024 20:20:33 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 13 Nov 2024 19:00:29 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.23.2
+
+Wed, 13 Nov 2024 19:00:29 GMT
+
+### Patches
+
+- Port logic for inline link for macOS (ruaraki@microsoft.com)
 
 ## 0.23.0
 
