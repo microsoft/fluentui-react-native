@@ -8,7 +8,6 @@ steps:
     inputs:
       script: |
         brew bundle --file .ado/Brewfile
-        cat .ado/Brewfile.lock.json
 
   # Cocoapods 1.15.0 doesn't work with React Native
   - task: CmdLine@2
