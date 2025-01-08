@@ -21,10 +21,11 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
     layer === userProps['appearance'] ||
     (!userProps['appearance'] && layer === 'filled') ||
     layer === userProps['size'] ||
-    (!userProps['size'] && layer === 'large') ||
+    (!userProps['size'] && layer === 'medium') ||
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['badgeColor'] ||
+    (!userProps['badgeColor'] && layer === 'brand') ||
     (I18nManager.isRTL && layer === 'rtl')
   );
 };
