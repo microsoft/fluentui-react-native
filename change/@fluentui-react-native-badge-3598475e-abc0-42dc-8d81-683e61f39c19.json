@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Apply filled as default appearance of badge",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
