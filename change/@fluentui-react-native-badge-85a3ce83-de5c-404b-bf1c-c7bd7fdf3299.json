@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Changing size default and fixing appearance default for Badge",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
