@@ -21,7 +21,6 @@ export const OtherCheckbox: React.FunctionComponent = () => {
   }, []);
 
   const onChange = React.useCallback((_e, checked: boolean) => {
-    console.log(checked);
     setisChecked(checked);
   }, []);
 
