@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import type { InteractionEvent } from '.';
+import type { InteractionEvent } from './events.types';
+import { useControllableValue } from './useControllableValue';
 
 export type OnToggleWithEventCallback = (e: InteractionEvent, value?: boolean) => void;
 export type OnChangeWithEventCallback = (e: InteractionEvent) => void;
@@ -21,14 +22,14 @@ export function useAsToggleWithEvent(
   checked?: boolean,
   userCallback?: OnToggleWithEventCallback,
 ): [boolean, OnChangeWithEventCallback] {
-  const [isChecked, setChecked] = React.useState(defaultChecked ?? checked);
+  const [isChecked, setChecked] = useControllableValue(checked, defaultChecked);
 
   const onChange = React.useCallback(
     (e: any) => {
       userCallback && userCallback(e, !isChecked);
       setChecked(!isChecked);
     },
-    [isChecked, setChecked],
+    [isChecked, setChecked, userCallback],
   );
 
   return [checked ?? isChecked, onChange];
