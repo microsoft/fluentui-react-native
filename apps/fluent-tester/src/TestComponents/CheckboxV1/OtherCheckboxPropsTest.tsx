@@ -1,5 +1,6 @@
 import React from 'react';
-import { Platform, Pressable, View, type ViewStyle } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';

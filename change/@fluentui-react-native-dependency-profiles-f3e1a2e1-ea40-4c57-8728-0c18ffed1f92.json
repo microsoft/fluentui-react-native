@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Fix publish pipeline while we're at it...",
+  "packageName": "@fluentui-react-native/dependency-profiles",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}
