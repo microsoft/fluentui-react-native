@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Thu, 17 Oct 2024 23:38:00 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 16 Jan 2025 19:12:09 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.15
+
+Thu, 16 Jan 2025 19:12:09 GMT
+
+### Patches
+
+- Split up checkbox tests into their own files (ruaraki@microsoft.com)
+- Update type import (ruaraki@microsoft.com)
+- Add new Checkbox test (ruaraki@microsoft.com)
 
 ## 0.170.10
 

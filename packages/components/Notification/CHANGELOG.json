@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Thu, 16 Jan 2025 19:12:10 GMT",
+      "version": "0.25.9",
+      "tag": "@fluentui-react-native/notification_v0.25.9",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Jun 2024 18:09:31 GMT",
       "version": "0.25.3",
       "tag": "@fluentui-react-native/notification_v0.25.3",

@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Thu, 16 Jan 2025 19:12:11 GMT",
+      "version": "0.6.12",
+      "tag": "@fluentui-react-native/tablist_v0.6.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "4490805f47dae159bef16299054081dcafcc86ea",
+            "comment": "Make tablist test not async so that it runs faster"
+          }
+        ],
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "0a748a0946bed101d8029dea54f76a396aef3483",
+            "comment": "Publish fix"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:38 GMT",
       "version": "0.6.1",
       "tag": "@fluentui-react-native/tablist_v0.6.1",

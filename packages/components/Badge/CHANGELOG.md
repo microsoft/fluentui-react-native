@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Fri, 12 Apr 2024 21:02:37 GMT and should not be manually modified.
+<!-- This log was last generated on Thu, 16 Jan 2025 19:12:11 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.11.0
+
+Thu, 16 Jan 2025 19:12:11 GMT
+
+### Minor changes
+
+- Changing size default and fixing appearance default for Badge (ruaraki@microsoft.com)
 
 ## 0.9.1
 

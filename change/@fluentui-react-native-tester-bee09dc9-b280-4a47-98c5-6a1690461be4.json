@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Split up checkbox tests into their own files",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

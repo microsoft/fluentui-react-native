@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 16 Jan 2025 19:12:09 GMT",
+      "version": "0.170.15",
+      "tag": "@fluentui-react-native/tester_v0.170.15",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0a748a0946bed101d8029dea54f76a396aef3483",
+            "comment": "Publish fix"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ],
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7bec589aaee765ed16936d341d49dc232d7ade79",
+            "comment": "Split up checkbox tests into their own files"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "29ee1d5cec16eb936456ead051580c3f006729a1",
+            "comment": "Update type import"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b91697e0452c20d328f917c6f76a1b9c6383fe0b",
+            "comment": "Add new Checkbox test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 17 Oct 2024 23:38:00 GMT",
       "version": "0.170.10",
       "tag": "@fluentui-react-native/tester_v0.170.10",

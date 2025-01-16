@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Make tablist test not async so that it runs faster",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

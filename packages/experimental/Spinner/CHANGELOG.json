@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/spinner",
   "entries": [
     {
+      "date": "Thu, 16 Jan 2025 19:12:11 GMT",
+      "version": "0.9.7",
+      "tag": "@fluentui-react-native/spinner_v0.9.7",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/spinner",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Apr 2024 21:31:44 GMT",
       "version": "0.9.2",
       "tag": "@fluentui-react-native/spinner_v0.9.2",

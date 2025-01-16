@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Thu, 16 Jan 2025 19:12:11 GMT",
+      "version": "0.10.5",
+      "tag": "@fluentui-react-native/stack_v0.10.5",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/stack",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:39 GMT",
       "version": "0.10.0",
       "tag": "@fluentui-react-native/stack_v0.10.0",

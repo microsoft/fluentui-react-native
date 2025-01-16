@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Bump packages",
-  "packageName": "@fluentui-react-native/input",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

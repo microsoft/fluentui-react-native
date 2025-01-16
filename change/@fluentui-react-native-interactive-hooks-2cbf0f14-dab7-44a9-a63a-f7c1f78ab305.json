@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix controlled toggling",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
