@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Bump packages",
+  "packageName": "@fluentui-react-native/drawer",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}
