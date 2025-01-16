@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Bump packages",
+  "packageName": "@fluentui-react-native/experimental-menu-button",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}
