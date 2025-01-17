@@ -8587,12 +8587,12 @@ __metadata:
   linkType: hard
 
 "@wdio/json-reporter@npm:^8.40.0":
-  version: 8.40.3
-  resolution: "@wdio/json-reporter@npm:8.40.3"
+  version: 8.41.0
+  resolution: "@wdio/json-reporter@npm:8.41.0"
   dependencies:
-    "@wdio/reporter": "npm:8.40.3"
-    "@wdio/types": "npm:8.40.3"
-  checksum: 10c0/823f14334225e94ae6da881083d2d04c17d574bdada581293b3616fb9beabf0733f72109f14ad675507fc872e749554b1c8407bde78c9b6b59e736e55ceaa500
+    "@wdio/reporter": "npm:8.41.0"
+    "@wdio/types": "npm:8.41.0"
+  checksum: 10c0/867ffe117f74970644ce5cc3dbb75a9e959a132113ccf9d1206f73d3010231ceec46067a8e6f473afe68471a554faa0c8b7d916971898754525189aad6fe52af
   languageName: node
   linkType: hard
 
@@ -8650,6 +8650,19 @@ __metadata:
     diff: "npm:^5.0.0"
     object-inspect: "npm:^1.12.0"
   checksum: 10c0/1cc673173852b174d5339168f3a930991fc44b9bb02aec68d16aec1f7905ea2aaa6fe9ee19c6ddec39075ff0e1139eb9270bfce9473f5a711a73b39f91ea8ec5
+  languageName: node
+  linkType: hard
+
+"@wdio/reporter@npm:8.41.0":
+  version: 8.41.0
+  resolution: "@wdio/reporter@npm:8.41.0"
+  dependencies:
+    "@types/node": "npm:^22.2.0"
+    "@wdio/logger": "npm:8.38.0"
+    "@wdio/types": "npm:8.41.0"
+    diff: "npm:^7.0.0"
+    object-inspect: "npm:^1.12.0"
+  checksum: 10c0/a8158fd0508b8018d35958825193c8e4b835b8c179a9bb20dc7869346bc6cdd50804917efef8632e0563fc6dca37a2f1915a86baa93b7f1cb5ee4efd0ad193b4
   languageName: node
   linkType: hard
 
@@ -11738,7 +11751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff@npm:7.0.0":
+"diff@npm:7.0.0, diff@npm:^7.0.0":
   version: 7.0.0
   resolution: "diff@npm:7.0.0"
   checksum: 10c0/251fd15f85ffdf814cfc35a728d526b8d2ad3de338dcbd011ac6e57c461417090766b28995f8ff733135b5fbc3699c392db1d5e27711ac4e00244768cd1d577b
