@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { type View, type AccessibilityState, type LayoutRectangle, Platform } from 'react-native';
+import { Platform } from 'react-native';
+import type { View, AccessibilityState, LayoutRectangle } from 'react-native';
 
 import { memoize, mergeStyles } from '@fluentui-react-native/framework';
 import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
@@ -81,17 +82,13 @@ export const useTabList = (props: TabListProps): TabListInfo => {
 
       const currentIndex = tabKeys.indexOf(selectedTabKey);
 
-      if (currentIndex === -1 && __DEV__) {
-        console.error(`Selected tab key does not exist in tab key array. Tab Key: ${selectedTabKey}. Keys: ${tabKeys}`);
-      }
-
       // We want to only switch selection to non-disabled tabs. This skips over disabled ones.
       const direction = increment > 0 ? 1 : -1;
-      increment = increment / direction; // abs
+      const magnitude = increment * direction;
       let newTabKey: string;
       let retries = 0;
       while (retries < tabKeys.length) {
-        let newIndex = (currentIndex + direction * (increment + retries)) % tabKeys.length;
+        let newIndex = (currentIndex + direction * (magnitude + retries)) % tabKeys.length;
 
         if (newIndex < 0) {
           newIndex = tabKeys.length + newIndex;
