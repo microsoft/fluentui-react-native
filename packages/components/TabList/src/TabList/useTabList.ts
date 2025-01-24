@@ -74,21 +74,17 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     [setTabKeys],
   );
 
-  const incrementTabKey = React.useCallback(
-    (increment: number) => {
-      if (increment === 0) {
-        return;
-      }
-
+  const incrementSelectedTab = React.useCallback(
+    (goBackward: boolean) => {
       const currentIndex = tabKeys.indexOf(selectedTabKey);
 
-      // We want to only switch selection to non-disabled tabs. This skips over disabled ones.
-      const direction = increment > 0 ? 1 : -1;
-      const magnitude = increment * direction;
+      const direction = goBackward ? -1 : 1;
+      let increment = 1;
       let newTabKey: string;
-      let retries = 0;
-      while (retries < tabKeys.length) {
-        let newIndex = (currentIndex + direction * (magnitude + retries)) % tabKeys.length;
+
+      // We want to only switch selection to non-disabled tabs. This loop allows us to skip over disabled ones.
+      while (increment <= tabKeys.length) {
+        let newIndex = (currentIndex + direction * increment) % tabKeys.length;
 
         if (newIndex < 0) {
           newIndex = tabKeys.length + newIndex;
@@ -97,14 +93,14 @@ export const useTabList = (props: TabListProps): TabListInfo => {
         newTabKey = tabKeys[newIndex];
 
         if (disabledStateMap[newTabKey]) {
-          retries += 1;
+          increment += 1;
         } else {
           break;
         }
       }
 
       // Unable to find a non-disabled next tab, early return
-      if (retries === tabKeys.length) {
+      if (increment > tabKeys.length) {
         return;
       }
 
@@ -172,13 +168,13 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   const onRootKeyDown = React.useCallback(
     (e: IKeyboardEvent) => {
       if (e.nativeEvent.key === 'Tab' && e.nativeEvent.ctrlKey) {
-        incrementTabKey(e.nativeEvent.shiftKey ? -1 : 1);
+        incrementSelectedTab(e.nativeEvent.shiftKey);
         setInvoked(true); // on win32, set focus on the new tab without triggering narration twice
       }
 
       props.onKeyDown?.(e);
     },
-    [incrementTabKey, props],
+    [incrementSelectedTab, props],
   );
 
   return {
