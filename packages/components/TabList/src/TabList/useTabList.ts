@@ -167,7 +167,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
   // win32 only prop used to implemement CTRL + TAB shortcut native to windows tab components
   const onRootKeyDown = React.useCallback(
     (e: IKeyboardEvent) => {
-      if (e.nativeEvent.key === 'Tab' && e.nativeEvent.ctrlKey) {
+      if ((Platform.OS as string) === 'win32' && e.nativeEvent.key === 'Tab' && e.nativeEvent.ctrlKey) {
         incrementSelectedTab(e.nativeEvent.shiftKey);
         setInvoked(true); // on win32, set focus on the new tab without triggering narration twice
       }
@@ -187,7 +187,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       componentRef: componentRef,
       defaultTabbableElement: focusedTabRef,
       isCircularNavigation: isCircularNavigation ?? false,
-      onKeyDown: (Platform.OS as string) === 'win32' ? onRootKeyDown : undefined,
+      onKeyDown: onRootKeyDown,
       onLayout: onTabListLayout,
       size: size,
       vertical: vertical,
