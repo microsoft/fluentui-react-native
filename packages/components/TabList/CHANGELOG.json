@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Sat, 25 Jan 2025 01:12:27 GMT",
+      "version": "0.7.0",
+      "tag": "@fluentui-react-native/tablist_v0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "2c1345c7d0c3bdea816aeedfb5570e8fa3105623",
+            "comment": "Add native \"Ctrl + Tab\" keyboard shortcut for TabList component."
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jan 2025 19:12:11 GMT",
       "version": "0.6.12",
       "tag": "@fluentui-react-native/tablist_v0.6.12",
