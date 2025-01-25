@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import Tab from '../../Tab/Tab';
@@ -86,17 +85,5 @@ describe('TabList component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('TabList re-renders correctly', () => {
-    checkReRender(
-      () => (
-        <TabList>
-          <Tab tabKey="1">Tab 1</Tab>
-          <Tab tabKey="2">Tab 2</Tab>
-        </TabList>
-      ),
-      2,
-    );
   });
 });

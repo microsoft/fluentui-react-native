@@ -15,6 +15,7 @@ exports[`TabList component tests TabList appearance 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="medium"
   style={
@@ -463,6 +464,7 @@ exports[`TabList component tests TabList default props 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="medium"
   style={
@@ -911,6 +913,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="medium"
   style={
@@ -1359,6 +1362,7 @@ exports[`TabList component tests TabList orientation 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="medium"
   style={
@@ -1804,6 +1808,7 @@ exports[`TabList component tests TabList selected key 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   selectedKey="1"
   size="medium"
@@ -2253,6 +2258,7 @@ exports[`TabList component tests TabList size 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="large"
   style={
