@@ -13,6 +13,8 @@
     "directory": "tester_deps"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "just-scripts": "^2.3.2",
     "@types/jasmine": "5.1.4",
     "@wdio/appium-service": "^8.40.0",
     "@wdio/cli": "^8.40.0",
@@ -23,7 +25,6 @@
     "@wdio/spec-reporter": "^8.40.0",
     "appium": "^2.11.2",
     "appium-windows-driver": "^2.12.18",
-    "ts-node": "^10.7.0",
     "typescript": "^4.9.4",
     "webdriverio": "^8.40.0"
   },

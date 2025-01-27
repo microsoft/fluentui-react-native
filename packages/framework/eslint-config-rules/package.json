@@ -10,9 +10,11 @@
   "main": "./eslintrc.js",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.8.0",
     "@rnx-kit/eslint-plugin": "^0.4.0",
     "eslint": "^8.0.0",
-    "eslint-plugin-jest": "^25.0.0"
+    "eslint-plugin-jest": "^25.0.0",
+    "just-scripts": "^2.3.2"
   },
   "beachball": {
     "shouldPublish": false,

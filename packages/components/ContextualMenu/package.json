@@ -41,12 +41,14 @@
     "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/pressable": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.73.0",
     "@react-native/babel-preset": "^0.73.0",
     "@react-native/metro-config": "^0.73.0",
+    "just-scripts": "^2.3.2",
     "react": "18.2.0",
     "react-native": "^0.73.0",
     "react-native-svg": "^15.0.0",

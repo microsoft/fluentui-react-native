@@ -2591,19 +2591,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cfaester/enzyme-adapter-react-18@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@cfaester/enzyme-adapter-react-18@npm:0.8.0"
+  dependencies:
+    enzyme-shallow-equal: "npm:^1.0.0"
+    function.prototype.name: "npm:^1.1.6"
+    has: "npm:^1.0.4"
+    react-is: "npm:^18.2.0"
+    react-shallow-renderer: "npm:^16.15.0"
+  peerDependencies:
+    enzyme: ^3.11.0
+    react: ">=18"
+    react-dom: ">=18"
+  checksum: 10c0/06b2c8d741cfb36179fbc15b7403a56c95f0ff2c884556a9f6858594e5a11f70bf4e100b07ef78049435da6614a7e016558938674d9abe3fb2db776e9e7430a6
+  languageName: node
+  linkType: hard
+
 "@colors/colors@npm:1.6.0, @colors/colors@npm:^1.6.0":
   version: 1.6.0
   resolution: "@colors/colors@npm:1.6.0"
   checksum: 10c0/9328a0778a5b0db243af54455b79a69e3fb21122d6c15ef9e9fcc94881d8d17352d8b2b2590f9bdd46fac5c2d6c1636dcfc14358a20c70e22daf89e1a759b629
-  languageName: node
-  linkType: hard
-
-"@cspotcode/source-map-support@npm:^0.8.0":
-  version: 0.8.1
-  resolution: "@cspotcode/source-map-support@npm:0.8.1"
-  dependencies:
-    "@jridgewell/trace-mapping": "npm:0.3.9"
-  checksum: 10c0/05c5368c13b662ee4c122c7bfbe5dc0b613416672a829f3e78bc49a357a197e0218d6e74e7c66cfcd04e15a179acab080bd3c69658c9fbefd0e1ccd950a07fc6
   languageName: node
   linkType: hard
 
@@ -2848,11 +2856,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/adapters@workspace:packages/utils/adapters"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/jest": "npm:^29.0.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-macos: "npm:^0.73.0"
@@ -2877,6 +2887,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/android-theme@workspace:packages/theming/android-theme"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -2886,6 +2897,7 @@ __metadata:
     "@fluentui-react-native/theming-utils": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -2908,6 +2920,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/apple-theme@workspace:packages/theming/apple-theme"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design-tokens-ios": "npm:^0.53.0"
     "@fluentui-react-native/design-tokens-macos": "npm:^0.53.0"
@@ -2923,6 +2936,7 @@ __metadata:
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/react": "npm:^18.2.0"
     assert-never: "npm:^1.2.1"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-macos: "npm:^0.73.0"
@@ -2946,6 +2960,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/avatar@workspace:packages/components/Avatar"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/badge": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -2959,6 +2974,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -2983,6 +2999,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/badge@workspace:packages/components/Badge"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/experimental-shadow": "workspace:*"
@@ -2999,6 +3016,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -3023,6 +3041,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/button@workspace:packages/components/Button"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/experimental-activity-indicator": "workspace:*"
@@ -3046,6 +3065,7 @@ __metadata:
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -3070,6 +3090,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/callout@workspace:packages/components/Callout"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3080,6 +3101,7 @@ __metadata:
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3102,6 +3124,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/checkbox@workspace:packages/components/Checkbox"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -3121,6 +3144,7 @@ __metadata:
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -3146,6 +3170,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/chip@workspace:packages/components/Chip"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -3160,6 +3185,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -3191,6 +3217,7 @@ __metadata:
     "@fluentui-react-native/test-tools": "workspace:*"
     "@types/jscodeshift": "npm:^0.11.11"
     jscodeshift: "npm:^17.0.0"
+    just-scripts: "npm:^2.3.2"
     yargs: "npm:^17.0.0"
   bin:
     transform: ./transform.js
@@ -3201,6 +3228,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/composition@workspace:packages/framework/composition"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slot": "workspace:*"
@@ -3208,6 +3236,7 @@ __metadata:
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3220,6 +3249,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/contextual-menu@workspace:packages/components/ContextualMenu"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -3236,6 +3266,7 @@ __metadata:
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^15.0.0"
@@ -3261,6 +3292,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/default-theme@workspace:packages/theming/default-theme"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3273,6 +3305,7 @@ __metadata:
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/react": "npm:^18.2.0"
     assert-never: "npm:^1.2.1"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3295,6 +3328,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/dependency-profiles@workspace:packages/dependency-profiles"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "npm:*"
     "@fluentui-react-native/android-theme": "npm:*"
     "@fluentui-react-native/apple-theme": "npm:*"
@@ -3368,6 +3402,7 @@ __metadata:
     "@uifabricshared/themed-settings": "npm:*"
     "@uifabricshared/theming-ramp": "npm:*"
     "@uifabricshared/theming-react-native": "npm:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-macos: "npm:^0.73.0"
@@ -3416,6 +3451,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
@@ -3427,6 +3463,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3450,6 +3487,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/drawer@workspace:packages/experimental/Drawer"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
@@ -3458,6 +3496,7 @@ __metadata:
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3480,6 +3519,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/dropdown@workspace:packages/experimental/Dropdown"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
@@ -3492,6 +3532,7 @@ __metadata:
     "@fluentui-react-native/theme-tokens": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -3539,13 +3580,13 @@ __metadata:
     appium-uiautomator2-driver: "npm:^3.0.5"
     appium-windows-driver: "npm:^2.12.18"
     appium-xcuitest-driver: "npm:^7.9.1"
+    just-scripts: "npm:^2.3.2"
     metro-config: "npm:^0.80.0"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-macos: "npm:^0.73.0"
     react-native-windows: "npm:^0.73.0"
     rimraf: "npm:^5.0.1"
-    ts-node: "npm:^10.7.0"
     typescript: "npm:4.9.4"
     webdriverio: "npm:^8.40.0"
   languageName: unknown
@@ -3555,9 +3596,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/eslint-config-rules@workspace:packages/framework/eslint-config-rules"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@rnx-kit/eslint-plugin": "npm:^0.4.0"
     eslint: "npm:^8.0.0"
     eslint-plugin-jest: "npm:^25.0.0"
+    just-scripts: "npm:^2.3.2"
   languageName: unknown
   linkType: soft
 
@@ -3565,12 +3608,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-activity-indicator@workspace:packages/experimental/ActivityIndicator"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     assert-never: "npm:^1.2.1"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -3595,15 +3640,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-appearance-additions@workspace:packages/experimental/AppearanceAdditions"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/use-subscription": "npm:1.0.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
-    use-subscription: "npm:>=1.0.0 <1.6.0"
+    use-subscription: "npm:^1.0.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0
     react: 18.2.0
@@ -3624,11 +3671,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-avatar@workspace:packages/experimental/Avatar"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3651,6 +3700,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-checkbox@workspace:packages/experimental/Checkbox"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/checkbox": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -3659,6 +3709,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -3683,11 +3734,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-expander@workspace:packages/experimental/Expander"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-windows: "npm:^0.73.0"
@@ -3711,6 +3764,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-menu-button@workspace:packages/experimental/MenuButton"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/contextual-menu": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -3720,6 +3774,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -3744,10 +3799,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-native-date-picker@workspace:packages/experimental/NativeDatePicker"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3760,14 +3817,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-native-font-metrics@workspace:packages/experimental/NativeFontMetrics"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/use-subscription": "npm:1.0.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
-    use-subscription: "npm:>=1.0.0 <1.6.0"
+    use-subscription: "npm:^1.0.0"
   peerDependencies:
     react: 18.2.0
     react-native: ^0.73.0
@@ -3778,6 +3837,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-shadow@workspace:packages/experimental/Shadow"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/pressable": "workspace:*"
@@ -3786,6 +3846,7 @@ __metadata:
     "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3808,6 +3869,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-shimmer@workspace:packages/experimental/Shimmer"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -3817,6 +3879,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     assert-never: "npm:^1.2.1"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -3841,6 +3904,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/experimental-stack@workspace:packages/experimental/Stack"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -3849,6 +3913,7 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -3872,6 +3937,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/focus-trap-zone@workspace:packages/components/FocusTrapZone"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
@@ -3881,6 +3947,7 @@ __metadata:
     "@react-native/metro-config": "npm:^0.73.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3903,6 +3970,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/focus-zone@workspace:packages/components/FocusZone"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
@@ -3912,6 +3980,7 @@ __metadata:
     "@react-native/metro-config": "npm:^0.73.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -3934,6 +4003,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/framework@workspace:packages/framework/framework"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/composition": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -3950,6 +4020,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/react": "npm:^18.2.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -3973,6 +4044,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/icon@workspace:packages/components/Icon"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -3982,6 +4054,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -4006,11 +4079,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^10.3.5"
-    tslib: "npm:^2.3.1"
+    just-scripts: "npm:^2.3.2"
   languageName: unknown
   linkType: soft
 
@@ -4018,6 +4092,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/input@workspace:packages/components/Input"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
@@ -4031,6 +4106,7 @@ __metadata:
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -4055,6 +4131,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/interactive-hooks@workspace:packages/utils/interactive-hooks"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4068,6 +4145,7 @@ __metadata:
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:^18.2.0"
     invariant: "npm:^2.2.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-macos: "npm:^0.73.0"
@@ -4093,6 +4171,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/link@workspace:packages/components/Link"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4107,6 +4186,7 @@ __metadata:
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -4130,10 +4210,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^10.3.5"
+    just-scripts: "npm:^2.3.2"
     tslib: "npm:^2.3.1"
   languageName: unknown
   linkType: soft
@@ -4142,6 +4224,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu-button@workspace:packages/components/MenuButton"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/contextual-menu": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -4154,6 +4237,7 @@ __metadata:
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -4178,6 +4262,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/menu@workspace:packages/components/Menu"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
@@ -4196,6 +4281,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -4221,6 +4307,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/merge-props@workspace:packages/framework/merge-props"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
@@ -4228,6 +4315,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/jest": "npm:^29.0.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -4241,6 +4329,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/notification@workspace:packages/components/Notification"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -4260,6 +4349,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -4284,6 +4374,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/overflow@workspace:packages/experimental/Overflow"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4293,6 +4384,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -4317,6 +4409,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/persona-coin@workspace:packages/components/PersonaCoin"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4330,6 +4423,7 @@ __metadata:
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4352,6 +4446,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/persona@workspace:packages/components/Persona"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4364,6 +4459,7 @@ __metadata:
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4386,12 +4482,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/popover@workspace:packages/experimental/Popover"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -4415,6 +4513,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/pressable@workspace:packages/components/Pressable"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
@@ -4423,6 +4522,7 @@ __metadata:
     "@react-native/metro-config": "npm:^0.73.0"
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4445,6 +4545,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/radio-group@workspace:packages/components/RadioGroup"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
@@ -4463,6 +4564,7 @@ __metadata:
     "@uifabricshared/foundation-composable": "workspace:*"
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -4501,14 +4603,13 @@ __metadata:
     beachball: "npm:^2.20.0"
     eslint: "npm:^8.0.0"
     eslint-plugin-import: "npm:^2.27.5"
+    just-scripts: "npm:^2.3.2"
     lage: "npm:^2.0.0"
     markdown-link-check: "npm:^3.8.7"
     react: "npm:18.2.0"
-    react-dom: "npm:^18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
     react: 18.2.0
-    react-dom: ^18.2.0
     react-native: ^0.73.0
   languageName: unknown
   linkType: soft
@@ -4517,6 +4618,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/scripts@workspace:scripts"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
+    "@cfaester/enzyme-adapter-react-18": "npm:0.8.0"
     "@react-native-community/cli": "npm:^12.1.1"
     "@react-native-community/cli-platform-android": "npm:^12.1.1"
     "@react-native-community/cli-platform-ios": "npm:^12.1.1"
@@ -4529,7 +4632,6 @@ __metadata:
     "@types/node": "npm:^12.11.2"
     "@types/react-test-renderer": "npm:16.9.0"
     "@uifabric/prettier-rules": "npm:^7.0.3"
-    "@wojtekmaj/enzyme-adapter-react-17": "npm:^0.6.5"
     depcheck: "npm:^1.0.0"
     enzyme: "npm:^3.11.0"
     enzyme-to-json: "npm:^3.5.0"
@@ -4544,7 +4646,7 @@ __metadata:
     metro-react-native-babel-transformer: "npm:^0.76.5"
     prettier: "npm:^2.4.1"
     react: "npm:18.2.0"
-    react-dom: "npm:^18.2.0"
+    react-dom: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^15.0.0"
     react-native-svg-transformer: "npm:^1.0.0"
@@ -4564,6 +4666,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/separator@workspace:packages/components/Separator"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -4572,6 +4675,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4594,6 +4698,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/spinner@workspace:packages/experimental/Spinner"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -4602,6 +4707,7 @@ __metadata:
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -4626,6 +4732,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/stack@workspace:packages/components/Stack"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4638,6 +4745,7 @@ __metadata:
     "@uifabricshared/foundation-compose": "workspace:*"
     "@uifabricshared/foundation-settings": "workspace:*"
     "@uifabricshared/foundation-tokens": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4660,10 +4768,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/styling-utils@workspace:packages/utils/styling"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4676,6 +4786,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/switch@workspace:packages/components/Switch"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4689,6 +4800,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -4712,6 +4824,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tablist@workspace:packages/components/TabList"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
@@ -4727,6 +4840,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -4751,10 +4865,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/test-tools@workspace:packages/utils/test-tools"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@types/react": "npm:^18.2.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4767,6 +4883,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tester-win32@workspace:apps/win32"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tester": "workspace:*"
@@ -4778,6 +4895,7 @@ __metadata:
     "@rnx-kit/cli": "npm:^0.16.2"
     "@rnx-kit/metro-config": "npm:^1.3.1"
     "@types/react": "npm:^18.2.0"
+    just-scripts: "npm:^2.3.2"
     metro-config: "npm:^0.80.0"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
@@ -4785,7 +4903,6 @@ __metadata:
     react-native-svg-transformer: "npm:^1.0.0"
     react-test-renderer: "npm:18.2.0"
     rimraf: "npm:^5.0.1"
-    ts-node: "npm:^10.7.0"
     tslib: "npm:^2.3.1"
     typescript: "npm:4.9.4"
   peerDependencies:
@@ -4865,6 +4982,7 @@ __metadata:
     "@wdio/globals": "npm:^8.40.0"
     "@wdio/jasmine-framework": "npm:^8.40.0"
     flow-bin: "npm:^0.113.0"
+    just-scripts: "npm:^2.3.2"
     metro-config: "npm:^0.80.0"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
@@ -4888,6 +5006,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/text@workspace:packages/components/Text"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
@@ -4899,6 +5018,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@uifabricshared/foundation-compose": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -4922,6 +5042,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theme-tokens@workspace:packages/theming/theme-tokens"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/design-tokens-android": "npm:^0.53.0"
     "@fluentui-react-native/design-tokens-ios": "npm:^0.53.0"
     "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
@@ -4932,6 +5053,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     assert-never: "npm:^1.2.1"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4944,11 +5066,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theme-types@workspace:packages/theming/theme-types"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/react": "npm:^18.2.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4961,12 +5085,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theme@workspace:packages/framework/theme"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4979,11 +5105,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/themed-stylesheet@workspace:packages/framework/themed-stylesheet"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -4996,6 +5124,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/theming-utils@workspace:packages/theming/theming-utils"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
     "@fluentui-react-native/design-tokens-windows": "npm:^0.53.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -5004,6 +5133,7 @@ __metadata:
     "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-windows: "npm:^0.73.0"
@@ -5027,12 +5157,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tokens@workspace:packages/utils/tokens"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -5056,6 +5188,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/tooltip@workspace:packages/experimental/Tooltip"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -5065,6 +5198,7 @@ __metadata:
     "@office-iss/react-native-win32": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-svg: "npm:^14.0.0"
@@ -5089,10 +5223,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-slot@workspace:packages/framework/use-slot"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/merge-props": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -5106,11 +5242,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-slots@workspace:packages/framework/use-slots"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/merge-props": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slot": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -5123,12 +5261,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-styling@workspace:packages/framework/use-styling"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-tokens": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/jest": "npm:^29.0.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -5142,6 +5282,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/use-tokens@workspace:packages/framework/use-tokens"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/merge-props": "workspace:*"
@@ -5149,6 +5290,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/jest": "npm:^29.0.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -5162,11 +5304,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/vibrancy-view@workspace:packages/experimental/VibrancyView"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -5190,6 +5334,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/win32-theme@workspace:packages/theming/win32-theme"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
@@ -5203,6 +5348,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/react": "npm:^18.2.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     tslib: "npm:^2.3.1"
@@ -5226,6 +5372,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fluentui/react-native@workspace:packages/libraries/core"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/button": "workspace:*"
     "@fluentui-react-native/callout": "workspace:*"
     "@fluentui-react-native/checkbox": "workspace:*"
@@ -5246,8 +5393,10 @@ __metadata:
     "@fluentui-react-native/text": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
+    react-native-svg: "npm:^15.0.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0
     react: 18.2.0
@@ -5849,7 +5998,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/resolve-uri@npm:^3.0.3, @jridgewell/resolve-uri@npm:^3.1.0":
+"@jridgewell/resolve-uri@npm:^3.1.0":
   version: 3.1.2
   resolution: "@jridgewell/resolve-uri@npm:3.1.2"
   checksum: 10c0/d502e6fb516b35032331406d4e962c21fe77cdf1cbdb49c6142bcbd9e30507094b18972778a6e27cbad756209cfe34b1a27729e6fa08a2eb92b33943f680cf1e
@@ -5877,16 +6026,6 @@ __metadata:
   version: 1.5.0
   resolution: "@jridgewell/sourcemap-codec@npm:1.5.0"
   checksum: 10c0/2eb864f276eb1096c3c11da3e9bb518f6d9fc0023c78344cdc037abadc725172c70314bdb360f2d4b7bffec7f5d657ce006816bc5d4ecb35e61b66132db00c18
-  languageName: node
-  linkType: hard
-
-"@jridgewell/trace-mapping@npm:0.3.9":
-  version: 0.3.9
-  resolution: "@jridgewell/trace-mapping@npm:0.3.9"
-  dependencies:
-    "@jridgewell/resolve-uri": "npm:^3.0.3"
-    "@jridgewell/sourcemap-codec": "npm:^1.4.10"
-  checksum: 10c0/fa425b606d7c7ee5bfa6a31a7b050dd5814b4082f318e0e4190f991902181b4330f43f4805db1dd4f2433fd0ed9cc7a7b9c2683f1deeab1df1b0a98b1e24055b
   languageName: node
   linkType: hard
 
@@ -7354,38 +7493,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node10@npm:^1.0.7":
-  version: 1.0.11
-  resolution: "@tsconfig/node10@npm:1.0.11"
-  checksum: 10c0/28a0710e5d039e0de484bdf85fee883bfd3f6a8980601f4d44066b0a6bcd821d31c4e231d1117731c4e24268bd4cf2a788a6787c12fc7f8d11014c07d582783c
-  languageName: node
-  linkType: hard
-
-"@tsconfig/node12@npm:^1.0.7":
-  version: 1.0.11
-  resolution: "@tsconfig/node12@npm:1.0.11"
-  checksum: 10c0/dddca2b553e2bee1308a056705103fc8304e42bb2d2cbd797b84403a223b25c78f2c683ec3e24a095e82cd435387c877239bffcb15a590ba817cd3f6b9a99fd9
-  languageName: node
-  linkType: hard
-
 "@tsconfig/node14@npm:14.1.2":
   version: 14.1.2
   resolution: "@tsconfig/node14@npm:14.1.2"
   checksum: 10c0/61235f8f85ac56cd9cab58f8e6eedbe13d2454188b5987ddf499827a8683283983f564d48db904a650c5ce087d5dc827a891900edbf6d7a7e38aacda4194578a
-  languageName: node
-  linkType: hard
-
-"@tsconfig/node14@npm:^1.0.0":
-  version: 1.0.3
-  resolution: "@tsconfig/node14@npm:1.0.3"
-  checksum: 10c0/67c1316d065fdaa32525bc9449ff82c197c4c19092b9663b23213c8cbbf8d88b6ed6a17898e0cbc2711950fbfaf40388938c1c748a2ee89f7234fc9e7fe2bf44
-  languageName: node
-  linkType: hard
-
-"@tsconfig/node16@npm:^1.0.2":
-  version: 1.0.4
-  resolution: "@tsconfig/node16@npm:1.0.4"
-  checksum: 10c0/05f8f2734e266fb1839eb1d57290df1664fe2aa3b0fdd685a9035806daa635f7519bf6d5d9b33f6e69dd545b8c46bd6e2b5c79acb2b1f146e885f7f11a42a5bb
   languageName: node
   linkType: hard
 
@@ -8138,12 +8249,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-composable@workspace:packages/deprecated/foundation-composable"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/merge-props": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:^18.2.0"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
   peerDependencies:
     react: 18.2.0
@@ -8155,6 +8268,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-compose@workspace:packages/deprecated/foundation-compose"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/immutable-merge": "workspace:*"
@@ -8166,7 +8280,9 @@ __metadata:
     "@uifabricshared/foundation-tokens": "workspace:*"
     "@uifabricshared/themed-settings": "workspace:*"
     "@uifabricshared/theming-ramp": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
+    react-native: "npm:^0.73.0"
   peerDependencies:
     "@office-iss/react-native-win32": ^0.73.0
     react: 18.2.0
@@ -8187,6 +8303,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-settings@workspace:packages/deprecated/foundation-settings"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/merge-props": "workspace:*"
@@ -8194,6 +8311,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/jest": "npm:^29.0.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -8206,6 +8324,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/merge-props": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -8215,6 +8334,7 @@ __metadata:
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:^18.2.0"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -8237,12 +8357,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/theme-registry@workspace:packages/deprecated/theme-registry"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
     "@types/jest": "npm:^29.0.0"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -8255,6 +8377,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/themed-settings@workspace:packages/deprecated/themed-settings"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/memo-cache": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -8263,6 +8386,7 @@ __metadata:
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^10.3.5"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
   peerDependencies:
@@ -8275,6 +8399,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/theming-ramp@workspace:packages/deprecated/theming-ramp"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/immutable-merge": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -8283,6 +8408,7 @@ __metadata:
     "@types/jest": "npm:^29.0.0"
     "@types/react": "npm:^18.2.0"
     "@uifabricshared/foundation-settings": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
   peerDependencies:
     react: 18.2.0
@@ -8294,6 +8420,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uifabricshared/theming-react-native@workspace:packages/deprecated/theming-react-native"
   dependencies:
+    "@babel/core": "npm:^7.8.0"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
@@ -8304,6 +8431,7 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     "@uifabricshared/theme-registry": "workspace:*"
     "@uifabricshared/theming-ramp": "workspace:*"
+    just-scripts: "npm:^2.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     typescript: "npm:4.9.4"
@@ -8775,38 +8903,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wojtekmaj/enzyme-adapter-react-17@npm:^0.6.5":
-  version: 0.6.7
-  resolution: "@wojtekmaj/enzyme-adapter-react-17@npm:0.6.7"
-  dependencies:
-    "@wojtekmaj/enzyme-adapter-utils": "npm:^0.1.4"
-    enzyme-shallow-equal: "npm:^1.0.0"
-    has: "npm:^1.0.0"
-    prop-types: "npm:^15.7.0"
-    react-is: "npm:^17.0.0"
-    react-test-renderer: "npm:^17.0.0"
-  peerDependencies:
-    enzyme: ^3.0.0
-    react: ^17.0.0-0
-    react-dom: ^17.0.0-0
-  checksum: 10c0/f05493ee9aee235781a7f7447c21f580629dc86662af3167c2131b869aa138aaeafeeb41d2e6fe6616c68eed49a416baba2ef23aa40e9b781bce0d3a64d35be1
-  languageName: node
-  linkType: hard
-
-"@wojtekmaj/enzyme-adapter-utils@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "@wojtekmaj/enzyme-adapter-utils@npm:0.1.4"
-  dependencies:
-    function.prototype.name: "npm:^1.1.0"
-    has: "npm:^1.0.0"
-    object.fromentries: "npm:^2.0.0"
-    prop-types: "npm:^15.7.0"
-  peerDependencies:
-    react: ^17.0.0-0
-  checksum: 10c0/3d192b914e296fab89b35b9c0b7f0ba3181dbfa71181a5748c232de4e4089e41bb6048e71c6708921c83001530a91e4e124860a2d5f1f2cdd875c59555ce7f34
-  languageName: node
-  linkType: hard
-
 "@xmldom/xmldom@npm:^0.7.7":
   version: 0.7.9
   resolution: "@xmldom/xmldom@npm:0.7.9"
@@ -8879,14 +8975,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn-walk@npm:^8.1.1":
-  version: 8.3.2
-  resolution: "acorn-walk@npm:8.3.2"
-  checksum: 10c0/7e2a8dad5480df7f872569b9dccff2f3da7e65f5353686b1d6032ab9f4ddf6e3a2cb83a9b52cf50b1497fd522154dda92f0abf7153290cc79cd14721ff121e52
-  languageName: node
-  linkType: hard
-
-"acorn@npm:^8.4.1, acorn@npm:^8.5.0, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
+"acorn@npm:^8.5.0, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
   version: 8.11.3
   resolution: "acorn@npm:8.11.3"
   bin:
@@ -13405,7 +13494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"function.prototype.name@npm:^1.1.0, function.prototype.name@npm:^1.1.2, function.prototype.name@npm:^1.1.6":
+"function.prototype.name@npm:^1.1.2, function.prototype.name@npm:^1.1.6":
   version: 1.1.6
   resolution: "function.prototype.name@npm:1.1.6"
   dependencies:
@@ -13948,12 +14037,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"has@npm:^1.0.0, has@npm:^1.0.3":
+"has@npm:^1.0.3":
   version: 1.0.3
   resolution: "has@npm:1.0.3"
   dependencies:
     function-bind: "npm:^1.1.1"
   checksum: 10c0/e1da0d2bd109f116b632f27782cf23182b42f14972ca9540e4c5aa7e52647407a0a4a76937334fddcb56befe94a3494825ec22b19b51f5e5507c3153fd1a5e1b
+  languageName: node
+  linkType: hard
+
+"has@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "has@npm:1.0.4"
+  checksum: 10c0/82c1220573dc1f0a014a5d6189ae52a1f820f99dfdc00323c3a725b5002dcb7f04e44f460fea7af068474b2dd7c88cbe1846925c84017be9e31e1708936d305b
   languageName: node
   linkType: hard
 
@@ -17657,7 +17753,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object.fromentries@npm:^2.0.0, object.fromentries@npm:^2.0.6, object.fromentries@npm:^2.0.8":
+"object.fromentries@npm:^2.0.6, object.fromentries@npm:^2.0.8":
   version: 2.0.8
   resolution: "object.fromentries@npm:2.0.8"
   dependencies:
@@ -18500,7 +18596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.0, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -18727,15 +18823,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0":
-  version: 18.3.1
-  resolution: "react-dom@npm:18.3.1"
+"react-dom@npm:18.2.0":
+  version: 18.2.0
+  resolution: "react-dom@npm:18.2.0"
   dependencies:
     loose-envify: "npm:^1.1.0"
-    scheduler: "npm:^0.23.2"
+    scheduler: "npm:^0.23.0"
   peerDependencies:
-    react: ^18.3.1
-  checksum: 10c0/a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
+    react: ^18.2.0
+  checksum: 10c0/66dfc5f93e13d0674e78ef41f92ed21dfb80f9c4ac4ac25a4b51046d41d4d2186abc915b897f69d3d0ebbffe6184e7c5876f2af26bfa956f179225d921be713a
   languageName: node
   linkType: hard
 
@@ -18753,7 +18849,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^17.0.0, react-is@npm:^17.0.1, react-is@npm:^17.0.2":
+"react-is@npm:^17.0.1":
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10c0/2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
@@ -18990,7 +19086,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-shallow-renderer@npm:^16.13.1, react-shallow-renderer@npm:^16.15.0":
+"react-shallow-renderer@npm:^16.15.0":
   version: 16.15.0
   resolution: "react-shallow-renderer@npm:16.15.0"
   dependencies:
@@ -19012,20 +19108,6 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 10c0/53dfada1da1e8dd0498a5601e9eea3dc6ca23c6c2694d1cab9712faea869c11e4ce1c9a618d674cb668a668b41fb6bcf9a7b0a078cd853b1922f002fa22f42c8
-  languageName: node
-  linkType: hard
-
-"react-test-renderer@npm:^17.0.0":
-  version: 17.0.2
-  resolution: "react-test-renderer@npm:17.0.2"
-  dependencies:
-    object-assign: "npm:^4.1.1"
-    react-is: "npm:^17.0.2"
-    react-shallow-renderer: "npm:^16.13.1"
-    scheduler: "npm:^0.20.2"
-  peerDependencies:
-    react: 17.0.2
-  checksum: 10c0/a4ea1e745a87bb9015540d96a3077b614bf88e306a0edd639f8fb849a393fa5104e84eca4349bc4b026f2f0b115a4172d58950d7076316115795266557659276
   languageName: node
   linkType: hard
 
@@ -19736,17 +19818,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.20.2":
-  version: 0.20.2
-  resolution: "scheduler@npm:0.20.2"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-    object-assign: "npm:^4.1.1"
-  checksum: 10c0/b0982e4b0f34f4ffa4f2f486161c0fd9ce9b88680b045dccbf250eb1aa4fd27413570645455187a83535e2370f5c667a251045547765408492bd883cbe95fcdb
-  languageName: node
-  linkType: hard
-
-"scheduler@npm:^0.23.0, scheduler@npm:^0.23.2":
+"scheduler@npm:^0.23.0":
   version: 0.23.2
   resolution: "scheduler@npm:0.23.2"
   dependencies:
@@ -20982,44 +21054,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.7.0":
-  version: 10.9.2
-  resolution: "ts-node@npm:10.9.2"
-  dependencies:
-    "@cspotcode/source-map-support": "npm:^0.8.0"
-    "@tsconfig/node10": "npm:^1.0.7"
-    "@tsconfig/node12": "npm:^1.0.7"
-    "@tsconfig/node14": "npm:^1.0.0"
-    "@tsconfig/node16": "npm:^1.0.2"
-    acorn: "npm:^8.4.1"
-    acorn-walk: "npm:^8.1.1"
-    arg: "npm:^4.1.0"
-    create-require: "npm:^1.1.0"
-    diff: "npm:^4.0.1"
-    make-error: "npm:^1.1.1"
-    v8-compile-cache-lib: "npm:^3.0.1"
-    yn: "npm:3.1.1"
-  peerDependencies:
-    "@swc/core": ">=1.2.50"
-    "@swc/wasm": ">=1.2.50"
-    "@types/node": "*"
-    typescript: ">=2.7"
-  peerDependenciesMeta:
-    "@swc/core":
-      optional: true
-    "@swc/wasm":
-      optional: true
-  bin:
-    ts-node: dist/bin.js
-    ts-node-cwd: dist/bin-cwd.js
-    ts-node-esm: dist/bin-esm.js
-    ts-node-script: dist/bin-script.js
-    ts-node-transpile-only: dist/bin-transpile.js
-    ts-script: dist/bin-script-deprecated.js
-  checksum: 10c0/5f29938489f96982a25ba650b64218e83a3357d76f7bede80195c65ab44ad279c8357264639b7abdd5d7e75fc269a83daa0e9c62fd8637a3def67254ecc9ddc2
-  languageName: node
-  linkType: hard
-
 "ts-node@npm:^9":
   version: 9.1.1
   resolution: "ts-node@npm:9.1.1"
@@ -21439,14 +21473,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-subscription@npm:>=1.0.0 <1.6.0":
-  version: 1.5.1
-  resolution: "use-subscription@npm:1.5.1"
+"use-subscription@npm:^1.0.0":
+  version: 1.10.0
+  resolution: "use-subscription@npm:1.10.0"
   dependencies:
-    object-assign: "npm:^4.1.1"
+    use-sync-external-store: "npm:^1.4.0"
   peerDependencies:
-    react: ^16.8.0 || ^17.0.0
-  checksum: 10c0/0de6185cd5890a0640cd08b616f9de7875c41d51e6570894eb2bb83fa48c6137eaa56c360edb8fb9f7f253b9705e103bca52fbcd9f86b03d07c6467d282758fc
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/2c1138dd57a472372ab9667199cc83948105ad20a9d6f4a5b3fab422fac63e11a790f4c90fe78f97dce860b0b9d67b3ae3e46071c79d91b21ed8d16d9bcbc644
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "use-sync-external-store@npm:1.4.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/ec011a5055962c0f6b509d6e78c0b143f8cd069890ae370528753053c55e3b360d3648e76cfaa854faa7a59eb08d6c5fb1015e60ffde9046d32f5b2a295acea5
   languageName: node
   linkType: hard
 
@@ -21521,13 +21564,6 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10c0/1607dd32ac7fc22f2d8f77051e6a64845c9bce5cd3dd8aa0070c074ec73e666a1f63c7b4e0f4bf2bc8b9d59dc85a15e17807446d9d2b17c8485fbc2147b27f9b
-  languageName: node
-  linkType: hard
-
-"v8-compile-cache-lib@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "v8-compile-cache-lib@npm:3.0.1"
-  checksum: 10c0/bdc36fb8095d3b41df197f5fb6f11e3a26adf4059df3213e3baa93810d8f0cc76f9a74aaefc18b73e91fe7e19154ed6f134eda6fded2e0f1c8d2272ed2d2d391
   languageName: node
   linkType: hard
 

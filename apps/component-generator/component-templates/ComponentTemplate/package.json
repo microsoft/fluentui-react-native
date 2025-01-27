@@ -24,6 +24,8 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "just-scripts": "^2.3.2",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",

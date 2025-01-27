@@ -36,7 +36,8 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
-    "@types/jscodeshift": "^0.11.11"
+    "@types/jscodeshift": "^0.11.11",
+    "just-scripts": "^2.3.2"
   },
   "depcheck": {
     "ignoreMatches": [
