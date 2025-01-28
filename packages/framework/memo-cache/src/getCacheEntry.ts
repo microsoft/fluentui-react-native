@@ -22,7 +22,7 @@ export type CacheEntry<T, TGet = any> = {
  * @param key - which key of that entry to ensure the value for
  */
 function ensureAndReturn(entry: CacheEntry<any>, key: keyof CacheEntry<any>): CacheEntry<any> | { [key: string]: CacheEntry<any> } {
-  if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+  if ((key as string) === '__proto__' || (key as string) === 'constructor' || (key as string) === 'prototype') {
     throw new Error('Invalid key');
   }
   return (entry[key] = entry[key] || {});
