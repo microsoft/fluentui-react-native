@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Manually bump packages",
+  "packageName": "@fluentui/react-native",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}
