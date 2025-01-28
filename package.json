@@ -9,7 +9,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/ui-fabric-react-native.git"
+    "url": "https://github.com/microsoft/fluentui-react-native"
   },
   "scripts": {
     "build": "lage build",
