@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tablist
 
-<!-- This log was last generated on Thu, 16 Jan 2025 19:12:11 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 28 Jan 2025 23:24:31 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.7.0
+
+Tue, 28 Jan 2025 23:24:31 GMT
+
+### Minor changes
+
+- Add native "Ctrl + Tab" keyboard shortcut for TabList component. (winlarry@microsoft.com)
 
 ## 0.6.12
 

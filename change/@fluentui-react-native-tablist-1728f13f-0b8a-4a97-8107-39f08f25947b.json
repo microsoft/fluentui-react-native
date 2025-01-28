@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add native \"Ctrl + Tab\" keyboard shortcut for TabList component.",
-  "packageName": "@fluentui-react-native/tablist",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
