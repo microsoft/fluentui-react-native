@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "remove enzyme tests",
+  "packageName": "@fluentui-react-native/divider",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
