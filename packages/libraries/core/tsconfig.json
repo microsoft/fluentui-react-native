@@ -7,7 +7,7 @@
     "declaration": true,
     "sourceMap": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
+
     "strictNullChecks": true,
     "noImplicitAny": true,
     "noEmitOnError": true,

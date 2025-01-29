@@ -1,9 +1,3 @@
 {
-  "extends": "@fluentui-react-native/scripts/tsconfig.json",
-  "compilerOptions": {
-    "importHelpers": true,
-    "outDir": "lib",
-    "resolveJsonModule": true
-  },
-  "include": ["src"]
+  "extends": "@fluentui-react-native/scripts/tsconfig.json"
 }

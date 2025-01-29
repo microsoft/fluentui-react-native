@@ -2,11 +2,11 @@
   "extends": "@fluentui-react-native/scripts/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "importHelpers": true,
+
     "paths": {
       "*": ["*", "*.win32"],
       "src/*": ["./src/*"]
-    },
+    }
   },
   "include": ["src"]
 }

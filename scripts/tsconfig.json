@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
+    "outDir": "lib",
     "target": "es2015",
     "types": ["node", "jest"],
     "module": "CommonJS",
@@ -21,7 +21,8 @@
     "skipDefaultLibCheck": true,
     "sourceMap": true,
     "jsx": "react",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "importHelpers": true
   },
   "baseUrl": ".",
   "paths": {

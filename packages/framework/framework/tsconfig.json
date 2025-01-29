@@ -7,7 +7,6 @@
     "target": "es5",
     "sourceMap": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
     "noEmitOnError": true,
@@ -15,8 +14,6 @@
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "strict": true,
-    "suppressImplicitAnyIndexErrors": true,
     "lib": ["es6"]
-  },
-  "include": ["src"]
+  }
 }

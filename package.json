@@ -16,7 +16,6 @@
     "build-tools": "lage build-tools",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
-    "clean-all": "node ./scripts/clean-all.js",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle": "lage bundle",
     "clean": "lage clean",
