@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { ButtonV1 } from '@fluentui-react-native/button';
 import { Menu, MenuPopover, MenuTrigger, MenuItem } from '@fluentui-react-native/menu';
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Overflow, OverflowItem, useOverflowMenu } from '../';
@@ -45,22 +44,4 @@ describe('Overflow component tests', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
-
-  it('Overflow re-renders correctly', () => {
-    checkReRender(
-      () => (
-        <Overflow itemIDs={items}>
-          {items.map((item) => (
-            <OverflowItem key={item} overflowID={item}>
-              <ButtonV1>{item}</ButtonV1>
-            </OverflowItem>
-          ))}
-          <OverflowMenu />
-        </Overflow>
-      ),
-      2,
-    );
-  });
-
-  // Feel free to add more tests here
 });

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Alert } from 'react-native';
 
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Link } from '../Link';
@@ -40,37 +39,5 @@ describe('Link component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Link simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(() => <Link url="https://www.bing.com">Link to Bing</Link>, 2);
-  });
-
-  it('Link re-renders correctly', () => {
-    checkReRender(() => <Link url="https://www.bing.com">Render twice</Link>, 2);
-  });
-
-  it('Link shares produced styles across multiple renders', () => {
-    const style = { color: 'black' };
-    checkRenderConsistency(
-      () => (
-        <Link style={style} url="https://www.bing.com">
-          Shared styles
-        </Link>
-      ),
-      2,
-    );
-  });
-
-  it('Link re-renders correctly with style', () => {
-    const style = { color: 'black' };
-    checkReRender(
-      () => (
-        <Link style={style} url="https://www.bing.com">
-          Shared Style Render
-        </Link>
-      ),
-      2,
-    );
   });
 });

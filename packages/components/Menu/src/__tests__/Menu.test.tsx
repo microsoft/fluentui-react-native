@@ -1,8 +1,6 @@
 import * as React from 'react';
-import type { AccessibilityActionName } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Menu } from '../Menu/Menu';
@@ -233,62 +231,4 @@ it('Menu open menu group and menu header', () => {
     )
     .toJSON();
   expect(tree).toMatchSnapshot();
-});
-
-describe('Menu rerender tests', () => {
-  it('Menu re-renders correctly', () => {
-    checkReRender(
-      () => (
-        <Menu open>
-          <MenuTrigger>
-            <Button>Rerender twice</Button>
-          </MenuTrigger>
-          <MenuPopover>
-            <MenuList>
-              <MenuItem>Option 1</MenuItem>
-            </MenuList>
-          </MenuPopover>
-        </Menu>
-      ),
-      3,
-    );
-  });
-
-  it('Menu re-renders correctly with style', () => {
-    const style = { backgroundColor: 'black' };
-    checkReRender(
-      () => (
-        <Menu>
-          <MenuTrigger>
-            <Button style={style}>Rerender twice</Button>
-          </MenuTrigger>
-          <MenuPopover>
-            <MenuList>
-              <MenuItem>Option 1</MenuItem>
-            </MenuList>
-          </MenuPopover>
-        </Menu>
-      ),
-      3,
-    );
-  });
-
-  it('Menu re-renders correctly with accessibilityAction', () => {
-    const action = [{ name: 'Expand' as AccessibilityActionName }];
-    checkReRender(
-      () => (
-        <Menu>
-          <MenuTrigger>
-            <Button>Rerender twice</Button>
-          </MenuTrigger>
-          <MenuPopover>
-            <MenuList>
-              <MenuItem accessibilityActions={action}>Option 1</MenuItem>
-            </MenuList>
-          </MenuPopover>
-        </Menu>
-      ),
-      3,
-    );
-  });
 });

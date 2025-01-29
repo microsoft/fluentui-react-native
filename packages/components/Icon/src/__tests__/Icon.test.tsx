@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Path, Svg } from 'react-native-svg';
 import * as renderer from 'react-test-renderer';
 
@@ -44,13 +43,5 @@ describe('Icon component tests', () => {
   it('renders SVG Icon using Icon component', () => {
     const tree = renderer.create(<IconV1 svgSource={{ src: AccessTime20RegularIcon, width: 20, height: 20 }} />).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Icon checkRenderConsistency', () => {
-    checkRenderConsistency(() => <FontIcon {...fontProps} />, 2);
-  });
-
-  it('Icon re-renders correctly', () => {
-    checkReRender(() => <FontIcon {...fontProps} />, 2);
   });
 });

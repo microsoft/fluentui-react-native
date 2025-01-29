@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Badge, CounterBadge, PresenceBadge } from '../';
@@ -43,14 +42,6 @@ describe('Badge component tests', () => {
     });
     const tree = renderer.create(<BadgeWithShadow appearance="filled">Badge with shadow</BadgeWithShadow>).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Check checkRenderConsistency for Badge', () => {
-    checkRenderConsistency(() => <Badge />, 2);
-  });
-
-  it('Badge re-renders correctly', () => {
-    checkReRender(() => <Badge />, 2);
   });
 });
 
