@@ -29,14 +29,16 @@
     "directory": "packages/experimental/NativeFontMetrics"
   },
   "dependencies": {
-    "use-subscription": ">=1.0.0 <1.6.0"
+    "use-subscription": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.73.0",
     "@react-native/metro-config": "^0.73.0",
     "@types/use-subscription": "1.0.0",
+    "just-scripts": "^2.3.2",
     "react": "18.2.0",
     "react-native": "^0.73.0"
   },

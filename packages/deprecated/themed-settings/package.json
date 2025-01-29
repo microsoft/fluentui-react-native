@@ -34,6 +34,7 @@
     "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/memo-cache": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
@@ -41,6 +42,7 @@
     "@react-native/metro-config": "^0.73.0",
     "@types/jest": "^29.0.0",
     "@types/node": "^10.3.5",
+    "just-scripts": "^2.3.2",
     "react": "18.2.0",
     "react-native": "^0.73.0"
   },

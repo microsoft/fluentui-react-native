@@ -1,33 +1,25 @@
-// @ts-check
-import * as glob from 'glob';
+import { glob, fs } from 'node:fs';
+import path from 'path';
 
-const fs = require('fs');
-const path = require('path');
+import babel from '@babel/core';
 
 exports.codegenNativeComponents = () => {
-  const babel = require("@babel/core");
-  const matches = glob.sync("src/**/*NativeComponent.ts");
-
-  matches.forEach(matchedPath => {
+  glob('src/**/*NativeComponent.ts', (err, matches) => {
     const relativePath = path.relative(path.resolve(process.cwd(), 'src'), matchedPath);
     const code = fs.readFileSync(matchedPath).toString();
     const filename = path.resolve(process.cwd(), matchedPath);
 
-    const res = babel.transformSync(code,
-      {
-        ast: false,
-        filename,
-        cwd: process.cwd(),
-        sourceRoot: process.cwd(),
-        root: process.cwd(),
-        babelrc: true
-      });
+    const res = babel.transformSync(code, {
+      ast: false,
+      filename,
+      cwd: process.cwd(),
+      sourceRoot: process.cwd(),
+      root: process.cwd(),
+      babelrc: true,
+    });
 
     const relativeOutputPath = relativePath.replace(/\.ts$/, '.js');
 
     fs.writeFileSync(path.resolve(process.cwd(), 'lib', relativeOutputPath), res?.code);
   });
-
-
-
 };

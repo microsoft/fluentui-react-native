@@ -17,6 +17,7 @@
     "update-profile": "node update-profile.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.0",
     "@fluentui-react-native/adapters": "*",
     "@fluentui-react-native/android-theme": "*",
     "@fluentui-react-native/apple-theme": "*",
@@ -90,6 +91,7 @@
     "@uifabricshared/themed-settings": "*",
     "@uifabricshared/theming-ramp": "*",
     "@uifabricshared/theming-react-native": "*",
+    "just-scripts": "^2.3.2",
     "react": "18.2.0",
     "react-native": "^0.73.0",
     "react-native-macos": "^0.73.0",
