@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:54 GMT",
+      "version": "0.170.18",
+      "tag": "@fluentui-react-native/tester_v0.170.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d9ebc6372dd4add1f995c336436b6cd31395bdb3",
+            "comment": "Add TextInput inside FocusZone case"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 17:33:31 GMT",
       "version": "0.170.16",
       "tag": "@fluentui-react-native/tester_v0.170.16",

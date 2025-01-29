@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:53 GMT",
+      "version": "1.14.19",
+      "tag": "@fluentui-react-native/menu_v1.14.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "remove enzyme tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jan 2025 19:12:10 GMT",
       "version": "1.14.17",
       "tag": "@fluentui-react-native/menu_v1.14.17",

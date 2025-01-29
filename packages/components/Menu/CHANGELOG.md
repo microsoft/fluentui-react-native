@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 10 Jul 2024 19:11:52 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:53 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.14.19
+
+Wed, 29 Jan 2025 23:43:53 GMT
+
+### Patches
+
+- remove enzyme tests (sanajmi@microsoft.com)
 
 ## 1.14.6
 

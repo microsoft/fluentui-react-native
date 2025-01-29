@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/codemods",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:54 GMT",
+      "version": "0.5.14",
+      "tag": "@fluentui-react-native/codemods_v0.5.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/codemods",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 23 Sep 2024 18:26:22 GMT",
       "version": "0.5.13",
       "tag": "@fluentui-react-native/codemods_v0.5.13",

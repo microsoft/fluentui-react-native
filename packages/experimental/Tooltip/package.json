@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tooltip",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "description": "A cross-platform Tooltip component for React Native.",
   "main": "src/index.ts",
   "module": "src/index.ts",

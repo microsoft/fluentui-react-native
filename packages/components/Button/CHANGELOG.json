@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:54 GMT",
+      "version": "0.39.4",
+      "tag": "@fluentui-react-native/button_v0.39.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "remove enzyme tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jan 2025 19:12:11 GMT",
       "version": "0.39.2",
       "tag": "@fluentui-react-native/button_v0.39.2",

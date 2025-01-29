@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:55 GMT",
+      "version": "0.10.17",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.10.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jan 2025 19:12:12 GMT",
       "version": "0.10.15",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.10.15",

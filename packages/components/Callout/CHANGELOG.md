@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-<!-- This log was last generated on Fri, 27 Sep 2024 05:53:19 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:54 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.27.2
+
+Wed, 29 Jan 2025 23:43:54 GMT
+
+### Patches
+
+- fix tsconfig for jest types (sanajmi@microsoft.com)
 
 ## 0.27.0
 

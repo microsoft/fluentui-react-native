@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-tokens
 
-This log was last generated on Thu, 11 Apr 2024 18:08:40 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:52 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.6.2
+
+Wed, 29 Jan 2025 23:43:52 GMT
+
+### Patches
+
+- remove enzyme tests (sanajmi@microsoft.com)
 
 ## 0.6.0
 

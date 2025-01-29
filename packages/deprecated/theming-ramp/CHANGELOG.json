@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:53 GMT",
+      "version": "0.20.2",
+      "tag": "@uifabricshared/theming-ramp_v0.20.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:41 GMT",
       "version": "0.20.0",
       "tag": "@uifabricshared/theming-ramp_v0.20.0",

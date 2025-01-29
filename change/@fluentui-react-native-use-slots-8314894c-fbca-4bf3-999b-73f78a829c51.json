@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "remove enzyme tests",
-  "packageName": "@fluentui-react-native/use-slots",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
