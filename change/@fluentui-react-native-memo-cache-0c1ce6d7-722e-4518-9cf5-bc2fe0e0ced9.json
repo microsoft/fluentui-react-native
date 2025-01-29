@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Potential fix for code scanning alert no. 3: Prototype-polluting assignment",
-  "packageName": "@fluentui-react-native/memo-cache",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

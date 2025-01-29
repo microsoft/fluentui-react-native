@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",

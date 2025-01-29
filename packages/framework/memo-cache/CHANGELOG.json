@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 18:42:24 GMT",
+      "version": "1.3.3",
+      "tag": "@fluentui-react-native/memo-cache_v1.3.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "86ea35573022bbbf120e16d4999b799a1a5938ac",
+            "comment": "Potential fix for code scanning alert no. 3: Prototype-polluting assignment"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:11 GMT",
       "version": "1.3.2",
       "tag": "@fluentui-react-native/memo-cache_v1.3.2",
