@@ -2,8 +2,9 @@ import * as React from 'react';
 import type { TextProps, ColorValue } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+// TODO: Without this import, we are somehow getting the global `expect` function from Jasmine instead of Jest.
+import { expect } from '@jest/globals';
+import * as renderer from 'react-test-renderer';
 
 import { buildProps } from './buildProps';
 import type { ThemeHelper, UseStylingOptions } from './buildUseStyling';
@@ -45,13 +46,6 @@ const baseTheme: Theme = {
 };
 
 const current = { theme: baseTheme };
-
-/**
- * this wrapper solves the (so-far) inexplicable type errors from the matchers in typescript
- */
-function snapshotTestTree(tree: any) {
-  (expect(toJson(tree)) as any).toMatchSnapshot();
-}
 
 /**
  * Because the buildUseStyling utility is not opinionated about theming, the theming is injected via
@@ -137,8 +131,8 @@ describe('useStyling samples', () => {
 
   /** first render the component with no updates */
   it('Sample1Text rendering with no overrides', () => {
-    const tree = mount(<Sample1Text>Sample1a</Sample1Text>);
-    snapshotTestTree(tree);
+    const tree = renderer.create(<Sample1Text>Sample1a</Sample1Text>).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   /** now re-theme the component via the components in the theme */
@@ -151,8 +145,8 @@ describe('useStyling samples', () => {
         },
       },
     });
-    const tree = mount(<Sample1Text>Sample1b</Sample1Text>);
-    snapshotTestTree(tree);
+    const tree = renderer.create(<Sample1Text>Sample1b</Sample1Text>).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   /**
@@ -218,13 +212,15 @@ describe('useStyling samples', () => {
   /** rendering the Sample2 component with the base theme */
   it('Sample2Text rendering with defaults and a color override', () => {
     themeHelper.setActive();
-    const tree = mount(
-      <View>
-        <Sample2Text>Sample2 with defaults</Sample2Text>
-        <Sample2Text color="green">Sample2 with color override via prop</Sample2Text>
-      </View>,
-    );
-    snapshotTestTree(tree);
+    const tree = renderer
+      .create(
+        <View>
+          <Sample2Text>Sample2 with defaults</Sample2Text>
+          <Sample2Text color="green">Sample2 with color override via prop</Sample2Text>
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   /** now re-theme the component via the components in the theme */
@@ -241,12 +237,14 @@ describe('useStyling samples', () => {
         },
       },
     });
-    const tree = mount(
-      <View>
-        <Sample2Text>Sample2 with theme overrides set</Sample2Text>
-        <Sample2Text color="purple">Sample2 with theme and color prop override</Sample2Text>
-      </View>,
-    );
-    snapshotTestTree(tree);
+    const tree = renderer
+      .create(
+        <View>
+          <Sample2Text>Sample2 with theme overrides set</Sample2Text>
+          <Sample2Text color="purple">Sample2 with theme and color prop override</Sample2Text>
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

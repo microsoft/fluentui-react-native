@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { validateHookValueNotChanged } from '@fluentui-react-native/test-tools';
-import { mount } from 'enzyme';
+import * as renderer from 'react-test-renderer';
 
 import { useControllableValue } from '../useControllableValue';
 
@@ -13,16 +13,16 @@ describe('useControllableValue', () => {
       return <React.Fragment />;
     };
 
-    const wrapper1 = mount(<TestComponent value={true} />);
+    const wrapper1 = renderer.create(<TestComponent value={true} />);
     expect(resultValue!).toBe(true);
 
-    wrapper1.setProps({ value: false });
+    wrapper1.update(<TestComponent value={false} />);
     expect(resultValue!).toBe(false);
 
-    const wrapper2 = mount(<TestComponent value={false} defaultValue={true} />);
+    const wrapper2 = renderer.create(<TestComponent value={false} defaultValue={true} />);
     expect(resultValue!).toBe(false);
 
-    wrapper2.setProps({ value: true });
+    wrapper2.update(<TestComponent value={true} defaultValue={true} />);
     expect(resultValue!).toBe(true);
   });
 
@@ -33,7 +33,7 @@ describe('useControllableValue', () => {
       return <React.Fragment />;
     };
 
-    mount(<TestComponent defaultValue={true} />);
+    renderer.create(<TestComponent defaultValue={true} />);
     expect(resultValue!).toBe(true);
   });
 
@@ -44,10 +44,10 @@ describe('useControllableValue', () => {
       return <React.Fragment />;
     };
 
-    const wrapper = mount(<TestComponent defaultValue={true} />);
+    const wrapper = renderer.create(<TestComponent defaultValue={true} />);
     expect(resultValue!).toBe(true);
 
-    wrapper.setProps({ defaultValue: false });
+    wrapper.update(<TestComponent defaultValue={false} />);
     expect(resultValue!).toBe(true);
   });
 
