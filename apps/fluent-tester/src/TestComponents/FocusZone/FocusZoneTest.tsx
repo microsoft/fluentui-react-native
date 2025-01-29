@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView, Pressable } from 'react-native';
+import { View, ScrollView, Pressable, TextInput } from 'react-native';
 
 import type { FocusZoneDirection, FocusZoneTabNavigation } from '@fluentui/react-native';
 import { FocusZone, MenuButton, Text, useOnPressWithFocus } from '@fluentui/react-native';
@@ -207,6 +207,27 @@ const FocusZoneGrid: React.FunctionComponent = () => {
   );
 };
 
+const FocusZoneTextInput: React.FunctionComponent = () => {
+  const textInputRef = React.useRef<TextInput>();
+  const onFocus = React.useCallback(() => {
+    textInputRef.current?.focus();
+  }, []);
+  const onBlur = React.useCallback(() => {
+    textInputRef.current?.blur();
+  }, []);
+  return (
+    <FocusZoneListWrapper>
+      <>
+        <Text>FocusZone Grid</Text>
+        <FocusZone>
+          <TextInput ref={textInputRef} onFocus={onFocus} onBlur={onBlur} multiline={true} />
+        </FocusZone>
+      </>
+    </FocusZoneListWrapper>
+  );
+};
+
+
 const focusZoneSections: TestSection[] = [
   {
     name: 'Common FocusZone Usage',
@@ -244,6 +265,10 @@ const focusZoneSections: TestSection[] = [
   {
     name: 'FocusZone Grid',
     component: FocusZoneGrid,
+  },
+  {
+    name: 'FocusZone with TextInput',
+    component: FocusZoneTextInput,
   },
 ];
 
