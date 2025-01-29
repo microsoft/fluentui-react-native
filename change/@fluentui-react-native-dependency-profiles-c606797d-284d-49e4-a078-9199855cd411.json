@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Manually bump packages",
-  "packageName": "@fluentui-react-native/dependency-profiles",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}
