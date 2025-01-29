@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix TextInput focus when inside a FocusZone",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "nakambo@microsoft.com",
+  "dependentChangeType": "patch"
+}
