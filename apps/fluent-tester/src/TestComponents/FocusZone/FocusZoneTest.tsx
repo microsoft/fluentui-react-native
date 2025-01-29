@@ -220,7 +220,6 @@ const FocusZoneTextInput: React.FunctionComponent = () => {
   );
 };
 
-
 const focusZoneSections: TestSection[] = [
   {
     name: 'Common FocusZone Usage',
