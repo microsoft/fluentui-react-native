@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.170.15"
+      "version": "0.170.16"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.38.32"
+      "version": "0.38.33"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -66,25 +66,25 @@ module.exports = {
       "name": "@fluentui-react-native/link",
       "version": "0.23.4"
     },
-    "@fluentui-react-native/menu": {
-      "name": "@fluentui-react-native/menu",
-      "version": "1.14.17"
-    },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
       "version": "0.13.15"
+    },
+    "@fluentui-react-native/menu": {
+      "name": "@fluentui-react-native/menu",
+      "version": "1.14.17"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
       "version": "0.25.9"
     },
-    "@fluentui-react-native/persona": {
-      "name": "@fluentui-react-native/persona",
-      "version": "0.16.0"
-    },
     "@fluentui-react-native/persona-coin": {
       "name": "@fluentui-react-native/persona-coin",
       "version": "0.15.0"
+    },
+    "@fluentui-react-native/persona": {
+      "name": "@fluentui-react-native/persona",
+      "version": "0.16.0"
     },
     "@fluentui-react-native/pressable": {
       "name": "@fluentui-react-native/pressable",
@@ -108,7 +108,7 @@ module.exports = {
     },
     "@fluentui-react-native/tablist": {
       "name": "@fluentui-react-native/tablist",
-      "version": "0.6.12"
+      "version": "0.7.0"
     },
     "@fluentui-react-native/text": {
       "name": "@fluentui-react-native/text",
@@ -264,7 +264,7 @@ module.exports = {
     },
     "@fluentui/react-native": {
       "name": "@fluentui/react-native",
-      "version": "0.42.6"
+      "version": "0.42.7"
     },
     "@fluentui-react-native/android-theme": {
       "name": "@fluentui-react-native/android-theme",
