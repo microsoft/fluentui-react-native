@@ -5,8 +5,7 @@ import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
 
 import { mergeStyles } from '@fluentui-react-native/merge-props';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import * as renderer from 'react-test-renderer';
 
 import type { NativeReactType } from './renderSlot';
 import { stagedComponent } from './stagedComponent';
@@ -77,43 +76,40 @@ const HeaderCaptionText1 = (props: React.PropsWithChildren<TextProps>) => {
 // Control authored by plugging the root
 const HeaderCaptionText2 = (props: React.PropsWithChildren<TextProps>) => HeaderText({ ...props, inner: CaptionText });
 
-/**
- * this wrapper solves the (so-far) inexplicable type errors from the matchers in typescript
- */
-function snapshotTestTree(tree: any) {
-  (expect(toJson(tree)) as any).toMatchSnapshot();
-}
-
 // some styles to use in tests
 const styleWithColor: TextProps['style'] = { color: 'blue' };
 
 describe('useSlot tests', () => {
   /** first render the component with no updates */
   it('Two base text elements rendering, with and without styles', () => {
-    const tree = mount(
-      <View>
-        <PluggableText>No Style</PluggableText>
-        <PluggableText style={styleWithColor}>With Style</PluggableText>
-      </View>,
-    );
-    snapshotTestTree(tree);
+    const tree = renderer
+      .create(
+        <View>
+          <PluggableText>No Style</PluggableText>
+          <PluggableText style={styleWithColor}>With Style</PluggableText>
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   it('Header and caption text render as expected', () => {
-    const tree = mount(
-      <View>
-        <HeaderText>Header text</HeaderText>
-        <CaptionText>Caption text</CaptionText>
-      </View>,
-    );
-    snapshotTestTree(tree);
+    const tree = renderer
+      .create(
+        <View>
+          <HeaderText>Header text</HeaderText>
+          <CaptionText>Caption text</CaptionText>
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   it('Multi-level text elements are equivalent', () => {
-    const tree1 = mount(<HeaderCaptionText1>HeaderCaptionText</HeaderCaptionText1>);
-    snapshotTestTree(tree1);
-    const tree2 = mount(<HeaderCaptionText2>HeaderCaptionText</HeaderCaptionText2>);
-    snapshotTestTree(tree2);
-    expect(toJson(tree1['HeaderCaptionText1'])).toEqual(toJson(tree2['HeaderCaptionText2']));
+    const tree1 = renderer.create(<HeaderCaptionText1>HeaderCaptionText</HeaderCaptionText1>).toJSON();
+    expect(tree1).toMatchSnapshot();
+    const tree2 = renderer.create(<HeaderCaptionText2>HeaderCaptionText</HeaderCaptionText2>).toJSON();
+    expect(tree2).toMatchSnapshot();
+    expect(tree1['HeaderCaptionText1']).toEqual(tree2['HeaderCaptionText2']);
   });
 });

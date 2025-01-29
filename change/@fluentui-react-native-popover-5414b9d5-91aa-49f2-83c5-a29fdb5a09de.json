@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix tsconfig for jest types",
+  "packageName": "@fluentui-react-native/popover",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}

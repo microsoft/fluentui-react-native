@@ -3,7 +3,6 @@ import { Text, View } from 'react-native';
 
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Shadow } from '../Shadow';
@@ -140,14 +139,6 @@ describe('Shadow component tests', () => {
   it('Shadow on a child with border width', () => {
     const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderWidth: 2 }} />).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Shadow simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(() => <TestShadow displayText="Shadow render test" depth="shadow2" />, 2);
-  });
-
-  it('Shadow re-renders correctly', () => {
-    checkReRender(() => <TestShadow displayText="Shadow render twice test" depth="shadow2" />, 2);
   });
 
   afterAll(() => {

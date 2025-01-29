@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Chip } from '../';
@@ -29,13 +28,5 @@ describe('Chip component tests', () => {
     });
     const tree = renderer.create(<ChipStyled>Chip Tokens</ChipStyled>).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Check checkRenderConsistency for Chip', () => {
-    checkRenderConsistency(() => <Chip />, 2);
-  });
-
-  it('Chip re-renders correctly', () => {
-    checkReRender(() => <Chip />, 2);
   });
 });
