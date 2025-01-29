@@ -2,8 +2,6 @@ import * as React from 'react';
 import type { TextProps, ColorValue } from 'react-native';
 import { Text, View } from 'react-native';
 
-// TODO: Without this import, we are somehow getting the global `expect` function from Jasmine instead of Jest.
-import { expect } from '@jest/globals';
 import * as renderer from 'react-test-renderer';
 
 import { buildProps } from './buildProps';

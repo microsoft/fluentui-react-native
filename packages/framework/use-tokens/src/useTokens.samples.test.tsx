@@ -4,8 +4,6 @@ import { Text, View } from 'react-native';
 
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 import { mergeStyles } from '@fluentui-react-native/merge-props';
-// TODO: Without this import, we are somehow getting the global `expect` function from Jasmine instead of Jest.
-import { expect } from '@jest/globals';
 import * as renderer from 'react-test-renderer';
 
 import { buildUseTokens } from './buildUseTokens';
