@@ -20,12 +20,10 @@ export function configureJest(customConfig?: object): object {
         KeyCodes: path.resolve(__dirname, 'jest/jest-mock.js'),
         // Jest is picking up the hoisted version of lru-cache, which is
         // incompatible from the version required by semver
-        'lru-cache': require.resolve('lru-cache', {paths:[require.resolve('semver')]}),
+        'lru-cache': require.resolve('lru-cache', { paths: [require.resolve('semver')] }),
       },
       moduleFileExtensions,
       moduleDirectories: nodeModulesToRoot(),
-
-      snapshotSerializers: ['enzyme-to-json/serializer'],
 
       // use babel-jest to transform files including typescript
       transform: {
@@ -49,7 +47,6 @@ export function configureReactNativeJest(platform?: PlatformValue, customConfig?
   return jestPreset(ensurePlatform(platform, 'ios'), {
     roots: ['<rootDir>/src'],
     verbose: false,
-    setupFilesAfterEnv: [path.join(__dirname, 'jest', 'setupEnzyme.js')],
     ...customConfig,
   });
 }
