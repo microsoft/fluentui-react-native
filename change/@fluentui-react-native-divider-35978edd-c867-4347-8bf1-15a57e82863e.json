@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Simplify TypeScript configuration files",
+  "packageName": "@fluentui-react-native/divider",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
