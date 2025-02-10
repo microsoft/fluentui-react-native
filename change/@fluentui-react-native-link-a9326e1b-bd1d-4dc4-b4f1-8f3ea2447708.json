@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove text from Link a11y tree and add a11yLabel",
+  "packageName": "@fluentui-react-native/link",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
