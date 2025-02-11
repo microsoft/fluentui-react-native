@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 11 Feb 2025 00:34:01 GMT",
+      "version": "0.170.19",
+      "tag": "@fluentui-react-native/tester_v0.170.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2f291a437327357bfd242c5e2bce5d9b4b5ec988",
+            "comment": "add LinkV1 to macOS test pages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 23:43:54 GMT",
       "version": "0.170.18",
       "tag": "@fluentui-react-native/tester_v0.170.18",

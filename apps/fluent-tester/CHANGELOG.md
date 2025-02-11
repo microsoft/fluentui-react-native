@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:54 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 11 Feb 2025 00:34:01 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.19
+
+Tue, 11 Feb 2025 00:34:01 GMT
+
+### Patches
+
+- add LinkV1 to macOS test pages (krsiler@microsoft.com)
 
 ## 0.170.18
 
