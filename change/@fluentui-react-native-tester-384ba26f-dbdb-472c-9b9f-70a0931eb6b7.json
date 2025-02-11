@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add LinkV1 to macOS test pages",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
