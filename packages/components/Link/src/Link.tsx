@@ -49,15 +49,9 @@ export const Link = compose<LinkType>({
       // Views in Text, we use that to handle interactions instead.
       const supportsInteractionOnText = Platform.OS !== 'macos';
 
-      // Find the first child that's a string and save it to set as the link's
+      // Find the first child that's a string (if it exists) and save it to set as the link's
       // accessibilityLabel if one isn't defined.
-      let linkA11yLabel = '';
-
-      const textChild = React.Children.toArray(children).find((child) => typeof child === 'string');
-
-      if (textChild != undefined) {
-        linkA11yLabel = textChild.toString();
-      }
+      const linkA11yLabel = React.Children.toArray(children).find((child) => typeof child === 'string');
 
       return supportsA11yTextInText && supportsInteractionOnText && (inline || mergedProps.selectable) ? (
         <Slots.content {...mergedProps}>{children}</Slots.content>

@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Check if we find a string as a child before calling .toString()",
+  "comment": "Simplify code to find child string of LinkV1",
   "packageName": "@fluentui-react-native/link",
   "email": "krsiler@microsoft.com",
   "dependentChangeType": "patch"
