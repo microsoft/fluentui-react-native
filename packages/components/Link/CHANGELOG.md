@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-<!-- This log was last generated on Tue, 11 Feb 2025 00:34:01 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 20 Feb 2025 23:25:58 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.23.8
+
+Thu, 20 Feb 2025 23:25:58 GMT
+
+### Patches
+
+- Simplify code to find child string of LinkV1 (krsiler@microsoft.com)
 
 ## 0.23.7
 

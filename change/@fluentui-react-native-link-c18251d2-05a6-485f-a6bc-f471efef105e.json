@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Simplify code to find child string of LinkV1",
-  "packageName": "@fluentui-react-native/link",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
