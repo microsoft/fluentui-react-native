@@ -37,7 +37,6 @@ MenuStack.displayName = 'MenuStack';
 const shouldHaveFocusZone = ['macos', 'win32'].includes(Platform.OS as string);
 const focusLandsOnContainer = Platform.OS === 'macos';
 const hasCircularNavigation = Platform.OS === ('win32' as any);
-const hasTabNavigation = Platform.OS === ('win32' as any);
 
 export const menuListLookup = (layer: string, state: MenuListState, userProps: MenuListProps): boolean => {
   return state[layer] || userProps[layer] || layer === 'hasMaxHeight';
@@ -83,6 +82,13 @@ export const MenuList = compose<MenuListType>({
 
       const shouldHaveScrollView = Platform.OS === 'macos' || menuList.hasMaxHeight || menuList.hasMaxWidth;
       const ScrollViewWrapper = shouldHaveScrollView ? Slots.scrollView : React.Fragment;
+
+      const hasMenuGroupChild = React.Children.toArray(children).some(
+        (child) => child && (child as any).type && (child as any).type.displayName === 'MenuGroup',
+      );
+
+      // On win32, tab should only navigate between menu groups.
+      const hasTabNavigation = Platform.OS === ('win32' as any) && hasMenuGroupChild;
 
       const content = (
         <Slots.root>
