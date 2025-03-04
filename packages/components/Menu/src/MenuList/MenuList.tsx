@@ -87,7 +87,7 @@ export const MenuList = compose<MenuListType>({
         (child) => child && (child as any).type && (child as any).type.displayName === 'MenuGroup',
       );
 
-      // On win32, tab should only navigate between menu groups.
+      // On win32, tab navigation should only be enabled when we have menu groups.
       const hasTabNavigation = Platform.OS === ('win32' as any) && hasMenuGroupChild;
 
       const content = (
