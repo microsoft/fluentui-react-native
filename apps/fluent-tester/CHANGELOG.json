@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 05 Mar 2025 01:28:08 GMT",
+      "version": "0.170.21",
+      "tag": "@fluentui-react-native/tester_v0.170.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b3acd4efa76845d95d231882c907ecda91d10dd1",
+            "comment": "update E2E test for win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Feb 2025 00:34:01 GMT",
       "version": "0.170.19",
       "tag": "@fluentui-react-native/tester_v0.170.19",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 05 Mar 2025 01:28:08 GMT",
+      "version": "1.14.20",
+      "tag": "@fluentui-react-native/menu_v1.14.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "b3acd4efa76845d95d231882c907ecda91d10dd1",
+            "comment": "Fix Menu tab navigation on win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 23:43:53 GMT",
       "version": "1.14.19",
       "tag": "@fluentui-react-native/menu_v1.14.19",

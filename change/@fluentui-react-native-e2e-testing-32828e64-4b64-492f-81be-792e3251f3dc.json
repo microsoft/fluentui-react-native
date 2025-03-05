@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update E2E test for win32",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

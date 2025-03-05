@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Tue, 11 Feb 2025 00:34:01 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 05 Mar 2025 01:28:08 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.21
+
+Wed, 05 Mar 2025 01:28:08 GMT
+
+### Patches
+
+- update E2E test for win32 (krsiler@microsoft.com)
 
 ## 0.170.19
 

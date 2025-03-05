@@ -4,15 +4,15 @@ module.exports = {
   "0.73": {
     "@fluentui-react-native/e2e-testing": {
       "name": "@fluentui-react-native/e2e-testing",
-      "version": "1.40.4"
+      "version": "1.40.5"
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.170.20"
+      "version": "0.170.21"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.38.37"
+      "version": "0.38.38"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -68,7 +68,7 @@ module.exports = {
     },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
-      "version": "1.14.19"
+      "version": "1.14.20"
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
@@ -188,7 +188,7 @@ module.exports = {
     },
     "@fluentui-react-native/overflow": {
       "name": "@fluentui-react-native/overflow",
-      "version": "0.3.19"
+      "version": "0.3.20"
     },
     "@fluentui-react-native/popover": {
       "name": "@fluentui-react-native/popover",

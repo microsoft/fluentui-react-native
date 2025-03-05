@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 22 Aug 2024 19:53:16 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 05 Mar 2025 01:28:08 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.40.5
+
+Wed, 05 Mar 2025 01:28:08 GMT
+
+### Patches
+
+- update E2E test for win32 (krsiler@microsoft.com)
 
 ## 1.40.0
 
