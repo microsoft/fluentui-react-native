@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger } from '@fluentui-react-native/menu';
+import { Menu, MenuDivider, MenuGroup, MenuItem, MenuList, MenuPopover, MenuTrigger } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
@@ -76,36 +76,41 @@ export const E2EMenuTest: React.FunctionComponent = () => {
             {...testProps(MENUPOPOVER_TEST_COMPONENT)}
           >
             <MenuList>
-              <MenuItem
-                onClick={onItemClick}
-                accessibilityLabel={MENUITEM_ACCESSIBILITY_LABEL}
-                persistOnClick
-                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-                {...testProps(MENUITEM_TEST_COMPONENT)}
-              >
-                A plain MenuItem
-              </MenuItem>
-              <MenuItem
-                onClick={onItemClick}
-                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-                {...testProps(MENUITEM_DISABLED_COMPONENT)}
-                disabled
-                persistOnClick
-              >
-                A second disabled plain MenuItem
-              </MenuItem>
-              <MenuItem
-                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-                {...testProps(MENUITEM_NO_A11Y_LABEL_COMPONENT)}
-              >
-                {MENUITEM_TEST_LABEL}
-              </MenuItem>
-              <MenuItem
-                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
-                {...testProps(MENUITEM_FOURTH_COMPONENT)}
-              >
-                A fourth plain MenuItem
-              </MenuItem>
+              <MenuGroup>
+                <MenuItem
+                  onClick={onItemClick}
+                  accessibilityLabel={MENUITEM_ACCESSIBILITY_LABEL}
+                  persistOnClick
+                  /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                  {...testProps(MENUITEM_TEST_COMPONENT)}
+                >
+                  A plain MenuItem
+                </MenuItem>
+                <MenuItem
+                  onClick={onItemClick}
+                  /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                  {...testProps(MENUITEM_DISABLED_COMPONENT)}
+                  disabled
+                  persistOnClick
+                >
+                  A second disabled plain MenuItem
+                </MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup>
+                <MenuItem
+                  /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                  {...testProps(MENUITEM_NO_A11Y_LABEL_COMPONENT)}
+                >
+                  {MENUITEM_TEST_LABEL}
+                </MenuItem>
+                <MenuItem
+                  /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                  {...testProps(MENUITEM_FOURTH_COMPONENT)}
+                >
+                  A fourth plain MenuItem
+                </MenuItem>
+              </MenuGroup>
             </MenuList>
           </MenuPopover>
         </Menu>
