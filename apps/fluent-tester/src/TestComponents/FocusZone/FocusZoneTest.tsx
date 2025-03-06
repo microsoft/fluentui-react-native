@@ -220,7 +220,54 @@ const FocusZoneTextInput: React.FunctionComponent = () => {
   );
 };
 
+export const FirstFocusTest = () => {
+  const outerNormalRef = React.useRef(null);
+  const innerNormalRef = React.useRef(null);
+  const innerDirectRef = React.useRef(null);
+  const innerFZRef = React.useRef(null);
+  const outerNativeID = 'nativeIDToOuterButton';
+  const innerNativeID = 'nativeIDToInnerButton';
+  const innerDirectNativeID = 'nativeIDDirectToInnerButton';
+  const [outerFocusZoneTabbableElement, setOuterFocusZoneTabbableElement] = React.useState<React.RefObject<View> | string>();
+  const [innerFocusZoneTabbableElement, setInnerFocusZoneTabbableElement] = React.useState<React.RefObject<View> | string>();
+
+  return (
+    <FocusZone defaultTabbableElement={outerFocusZoneTabbableElement} tabKeyNavigation="Normal">
+      <View>
+        <Button onClick={() => setOuterFocusZoneTabbableElement(undefined)}>clear OuterFocusZone</Button>
+        <Button componentRef={outerNormalRef} onClick={() => setOuterFocusZoneTabbableElement(outerNormalRef)}>
+          Test ref
+        </Button>
+        <Button nativeID={outerNativeID} onClick={() => setOuterFocusZoneTabbableElement(outerNativeID)}>
+          Test nativeId
+        </Button>
+      </View>
+      <FocusZone componentRef={innerFZRef} defaultTabbableElement={innerFocusZoneTabbableElement}>
+        <Button onClick={() => setInnerFocusZoneTabbableElement(undefined)}>clear InnerFocusZone</Button>
+        <Button componentRef={innerDirectRef} onClick={() => setOuterFocusZoneTabbableElement(innerDirectRef)}>
+          Test nested (direct ref)
+        </Button>
+        <Button nativeID={innerDirectNativeID} onClick={() => setOuterFocusZoneTabbableElement(innerDirectNativeID)}>
+          Test nested (direct nativeID)
+        </Button>
+        <Button componentRef={innerNormalRef} onClick={() => setInnerFocusZoneTabbableElement(innerNormalRef)}>
+          Test inner zone (ref)
+        </Button>
+        <Button nativeID={innerNativeID} onClick={() => setInnerFocusZoneTabbableElement(innerNativeID)}>
+          Test inner zone (nativeID)
+        </Button>
+        <Button onClick={() => setOuterFocusZoneTabbableElement(innerFZRef)}>Test nested (transitive)</Button>
+      </FocusZone>
+    </FocusZone>
+  );
+};
+
 const focusZoneSections: TestSection[] = [
+  {
+    name: 'First Focus FocusZone Usage',
+    component: FirstFocusTest,
+    testID: FOCUSZONE_TESTPAGE,
+  },
   {
     name: 'Common FocusZone Usage',
     component: CommonUsageFocusZone,

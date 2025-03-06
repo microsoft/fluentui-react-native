@@ -17,7 +17,7 @@ export type FocusZoneProps = IViewProps & {
   /**
    * Optionally defines the initial tabbable element inside the FocusZone
    */
-  defaultTabbableElement?: React.RefObject<React.Component>;
+  defaultTabbableElement?: React.RefObject<React.Component> | string;
 
   /**
    ** Defines which arrows to react to
