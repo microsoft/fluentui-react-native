@@ -23,12 +23,14 @@ export const FocusZone = composable<FocusZoneType>({
 
     const ftzRef = useViewCommandFocus(componentRef);
 
-    const [targetNativeTag, setTargetNativeTag] = React.useState<number>(undefined);
+    const [targetFirstFocus, setTargetFirstFocus] = React.useState<number | string>(undefined);
     React.useLayoutEffect(() => {
-      if (defaultTabbableElement?.current) {
-        setTargetNativeTag(findNodeHandle(defaultTabbableElement.current));
+      if (typeof defaultTabbableElement === 'string') {
+        setTargetFirstFocus(defaultTabbableElement);
+      } else if (defaultTabbableElement?.current) {
+        setTargetFirstFocus(findNodeHandle(defaultTabbableElement.current));
       } else {
-        setTargetNativeTag(undefined);
+        setTargetFirstFocus(undefined);
       }
     }, [defaultTabbableElement]);
 
@@ -37,7 +39,7 @@ export const FocusZone = composable<FocusZoneType>({
         root: {
           navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds', // let rest override
           ...rest,
-          defaultTabbableElement: targetNativeTag,
+          defaultTabbableElement: targetFirstFocus,
           ref: ftzRef,
         },
       }),

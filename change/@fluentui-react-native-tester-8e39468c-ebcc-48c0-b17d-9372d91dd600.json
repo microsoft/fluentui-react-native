@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Expand defaultTabbableElement to accept a string corresponding a child element's nativeID",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}
