@@ -6,12 +6,16 @@
 
 import type { HostComponent, ViewProps } from 'react-native';
 
-import type { Int32, WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
+import type { WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+
+import type { UnsafeMixed } from './codegenTypes';
+// Should be:
+// import type { UnsafeObject } from 'react-native/Libraries/Types/CodegenTypes';
 
 export interface NativeProps extends ViewProps {
   navigateAtEnd?: WithDefault<'NavigateStopAtEnds' | 'NavigateWrap' | 'NavigateContinue', 'NavigateStopAtEnds'>;
-  defaultTabbableElement?: Int32;
+  defaultTabbableElement?: UnsafeMixed;
   focusZoneDirection?: WithDefault<'bidirectional' | 'vertical' | 'horizontal' | 'none', 'bidirectional'>;
   use2DNavigation?: boolean;
   tabKeyNavigation?: WithDefault<'None' | 'NavigateWrap' | 'NavigateStopAtEnds' | 'Normal', 'None'>;
