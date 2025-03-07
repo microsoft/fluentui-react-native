@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Fri, 07 Mar 2025 17:23:29 GMT",
+      "version": "0.20.0",
+      "tag": "@fluentui-react-native/focus-zone_v0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "d36c36db62e5de96b30d2ce42b599c1210522099",
+            "comment": "Expand defaultTabbableElement to accept a string corresponding a child element's nativeID"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 23:43:55 GMT",
       "version": "0.19.6",
       "tag": "@fluentui-react-native/focus-zone_v0.19.6",

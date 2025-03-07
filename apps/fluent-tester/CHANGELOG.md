@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Wed, 05 Mar 2025 01:28:08 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 07 Mar 2025 17:23:29 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.22
+
+Fri, 07 Mar 2025 17:23:29 GMT
+
+### Patches
+
+- Expand defaultTabbableElement to accept a string corresponding a child element's nativeID (patboyd@microsoft.com)
 
 ## 0.170.21
 

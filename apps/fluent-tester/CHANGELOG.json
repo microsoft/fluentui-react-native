@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 07 Mar 2025 17:23:29 GMT",
+      "version": "0.170.22",
+      "tag": "@fluentui-react-native/tester_v0.170.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d36c36db62e5de96b30d2ce42b599c1210522099",
+            "comment": "Expand defaultTabbableElement to accept a string corresponding a child element's nativeID"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Mar 2025 01:28:08 GMT",
       "version": "0.170.21",
       "tag": "@fluentui-react-native/tester_v0.170.21",

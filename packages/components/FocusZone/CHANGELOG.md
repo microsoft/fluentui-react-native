@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:55 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 07 Mar 2025 17:23:29 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.20.0
+
+Fri, 07 Mar 2025 17:23:29 GMT
+
+### Minor changes
+
+- Expand defaultTabbableElement to accept a string corresponding a child element's nativeID (patboyd@microsoft.com)
 
 ## 0.19.6
 
