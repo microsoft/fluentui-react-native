@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add static typing to the FocusZoneNativeComponent defaultTabbableElement type for fabric usage of the id/nativeID string type",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}
