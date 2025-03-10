@@ -27,7 +27,7 @@
     "@react-native-community/cli-platform-android": "^12.1.1",
     "@react-native-community/cli-platform-ios": "^12.1.1",
     "@react-native/metro-babel-transformer": "^0.73.0",
-    "@rnx-kit/jest-preset": "^0.1.14",
+    "@rnx-kit/jest-preset": "^0.2.0",
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
     "@types/jest": "^29.0.0",
