@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Mon, 10 Mar 2025 20:26:46 GMT",
+      "version": "0.38.43",
+      "tag": "@fluentui-react-native/tester-win32_v0.38.43",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "7a39e34892d31edfc1a3c9386e354f840539348a",
+            "comment": "Updating some rnx=kit packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 17:33:31 GMT",
       "version": "0.38.33",
       "tag": "@fluentui-react-native/tester-win32_v0.38.33",

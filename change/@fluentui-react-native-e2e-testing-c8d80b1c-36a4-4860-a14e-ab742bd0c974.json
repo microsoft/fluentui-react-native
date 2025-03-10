@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Updating some rnx=kit packages",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

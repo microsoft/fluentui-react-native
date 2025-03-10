@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Mon, 10 Mar 2025 16:20:48 GMT and should not be manually modified. -->
+<!-- This log was last generated on Mon, 10 Mar 2025 20:26:46 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.26
+
+Mon, 10 Mar 2025 20:26:46 GMT
+
+### Patches
+
+- Updating some rnx=kit packages (ruaraki@microsoft.com)
 
 ## 0.170.23
 
