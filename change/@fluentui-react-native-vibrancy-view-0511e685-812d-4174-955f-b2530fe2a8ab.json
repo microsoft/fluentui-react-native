@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "fix(VibrancyView): remove hit test override",
-  "packageName": "@fluentui-react-native/vibrancy-view",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

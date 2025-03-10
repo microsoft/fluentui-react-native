@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.170.23"
+      "version": "0.170.24"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.38.40"
+      "version": "0.38.41"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -212,7 +212,7 @@ module.exports = {
     },
     "@fluentui-react-native/vibrancy-view": {
       "name": "@fluentui-react-native/vibrancy-view",
-      "version": "0.2.2"
+      "version": "0.3.0"
     },
     "@fluentui-react-native/composition": {
       "name": "@fluentui-react-native/composition",
