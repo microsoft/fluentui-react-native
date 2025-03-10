@@ -64,7 +64,7 @@
     "scripts"
   ],
   "resolutions": {
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "es5-ext": "0.10.63",
     "express": "^4.19.2",
     "@types/react": "^18.2.0",

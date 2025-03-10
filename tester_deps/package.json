@@ -29,7 +29,7 @@
   },
   "resolutions": {
     "@appium/types": "0.9.1",
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "express": "^4.19.2",
     "semver": "^7.5.2",
     "ws": "^8.17.1",
