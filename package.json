@@ -64,6 +64,7 @@
     "scripts"
   ],
   "resolutions": {
+    "@office-iss/react-native-win32": "patch:@office-iss/react-native-win32@npm%3A0.73.6#~/.yarn/patches/@office-iss-react-native-win32-npm-0.73.6-c1424dfcf6.patch",
     "axios": "^1.7.4",
     "es5-ext": "0.10.63",
     "express": "^4.19.2",

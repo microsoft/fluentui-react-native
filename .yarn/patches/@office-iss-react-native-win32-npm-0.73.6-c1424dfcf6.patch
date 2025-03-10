@@ -1,0 +1,26 @@
+diff --git a/Libraries/Components/View/ViewPropTypes.d.ts b/Libraries/Components/View/ViewPropTypes.d.ts
+index be61e9e59a514bf602b3c1d4efb8ac3cb32427e7..b482a328c704d44d46d17d86ad5c167e3e2ec1e8 100644
+--- a/Libraries/Components/View/ViewPropTypes.d.ts
++++ b/Libraries/Components/View/ViewPropTypes.d.ts
+@@ -316,7 +316,7 @@ export interface ViewProps
+    * the Z-index of sibling views always takes precedence if a touch
+    * hits two overlapping views.
+    */
+-  hitSlop?: Insets | undefined;
++  hitSlop?: null | Insets | number | undefined;
+ 
+   /**
+    * Used to reference react managed views from native code.
+diff --git a/src/Libraries/Components/View/ViewPropTypes.d.ts b/src/Libraries/Components/View/ViewPropTypes.d.ts
+index be61e9e59a514bf602b3c1d4efb8ac3cb32427e7..b482a328c704d44d46d17d86ad5c167e3e2ec1e8 100644
+--- a/src/Libraries/Components/View/ViewPropTypes.d.ts
++++ b/src/Libraries/Components/View/ViewPropTypes.d.ts
+@@ -316,7 +316,7 @@ export interface ViewProps
+    * the Z-index of sibling views always takes precedence if a touch
+    * hits two overlapping views.
+    */
+-  hitSlop?: Insets | undefined;
++  hitSlop?: null | Insets | number | undefined;
+ 
+   /**
+    * Used to reference react managed views from native code.
