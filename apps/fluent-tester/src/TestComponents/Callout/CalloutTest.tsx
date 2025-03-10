@@ -4,8 +4,8 @@ import { Text, View, Switch, ScrollView, Platform } from 'react-native';
 
 import { ButtonV1 as Button, Separator, Pressable } from '@fluentui/react-native';
 import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
-import type { CalloutNativeCommands, ICalloutProps } from '@fluentui/react-native/callout';
-import { Callout } from '@fluentui/react-native/callout';
+import type { CalloutNativeCommands, ICalloutProps } from '@fluentui-react-native/callout';
+import { Callout } from '@fluentui-react-native/callout';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
