@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: Add Callout as a dependency to Fluent Tester",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
