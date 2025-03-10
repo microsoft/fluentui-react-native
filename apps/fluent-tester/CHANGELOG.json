@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 10 Mar 2025 16:20:48 GMT",
+      "version": "0.170.23",
+      "tag": "@fluentui-react-native/tester_v0.170.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f02d26d9a2a449d52aaf734038fd7be31e88f277",
+            "comment": "fix: Add Callout as a dependency to Fluent Tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Mar 2025 17:23:29 GMT",
       "version": "0.170.22",
       "tag": "@fluentui-react-native/tester_v0.170.22",

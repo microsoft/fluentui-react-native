@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Fri, 07 Mar 2025 17:23:29 GMT and should not be manually modified. -->
+<!-- This log was last generated on Mon, 10 Mar 2025 16:20:48 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.23
+
+Mon, 10 Mar 2025 16:20:48 GMT
+
+### Patches
+
+- fix: Add Callout as a dependency to Fluent Tester (sanajmi@microsoft.com)
 
 ## 0.170.22
 
