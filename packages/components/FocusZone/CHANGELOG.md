@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-<!-- This log was last generated on Fri, 07 Mar 2025 17:23:29 GMT and should not be manually modified. -->
+<!-- This log was last generated on Mon, 10 Mar 2025 18:14:09 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.21.0
+
+Mon, 10 Mar 2025 18:14:09 GMT
+
+### Minor changes
+
+- Add static typing to the FocusZoneNativeComponent defaultTabbableElement type for fabric usage of the id/nativeID string type (patboyd@microsoft.com)
 
 ## 0.20.0
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Mon, 10 Mar 2025 18:14:09 GMT",
+      "version": "0.21.0",
+      "tag": "@fluentui-react-native/focus-zone_v0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "525b7ad0cf989c4d9a9db2efd70ade0431a48f7b",
+            "comment": "Add static typing to the FocusZoneNativeComponent defaultTabbableElement type for fabric usage of the id/nativeID string type"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Mar 2025 17:23:29 GMT",
       "version": "0.20.0",
       "tag": "@fluentui-react-native/focus-zone_v0.20.0",
