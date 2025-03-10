@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Updating some rnx=kit packages",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
