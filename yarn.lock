@@ -7106,8 +7106,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.18.0":
-  version: 0.18.6
-  resolution: "@rnx-kit/cli@npm:0.18.6"
+  version: 0.18.7
+  resolution: "@rnx-kit/cli@npm:0.18.7"
   dependencies:
     "@rnx-kit/align-deps": "npm:^3.0.1"
     "@rnx-kit/config": "npm:^0.7.0"
@@ -7137,7 +7137,7 @@ __metadata:
       optional: true
   bin:
     rnx-cli: bin/rnx-cli.cjs
-  checksum: 10c0/ec16d8458ddd5498c37f5c04b1122d82c0567ddd8d44abf015dfb066f9aa315f05c3693c2ca5872e3a35da9058cb3d810ae3eccc8529bf399940007eb0d19f58
+  checksum: 10c0/2c6ca501489537dd54792547733f7b0c32c2730c0d341d429605a2547793c64a3bdfc859a0671ee48034ddba5a1d1fd0d21c1c4980e00ef449f14abc05dc215f
   languageName: node
   linkType: hard
 
