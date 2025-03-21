@@ -28,7 +28,7 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 	@"rightTopEdge": @(NSRectEdgeMaxX),
 	@"rightCenter": @(NSRectEdgeMaxX),
 	@"rightBottomEdge": @(NSRectEdgeMaxX),
-	@"bottonLeftEdge": @(NSRectEdgeMinY),
+	@"bottomLeftEdge": @(NSRectEdgeMinY),
 	@"bottomAutoEdge": @(NSRectEdgeMinY),
 	@"bottomCenter": @(NSRectEdgeMinY),
 	@"bottomRightEdge": @(NSRectEdgeMinY),
