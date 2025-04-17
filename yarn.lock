@@ -7096,20 +7096,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/align-deps@npm:^3.0.1":
-  version: 3.0.4
-  resolution: "@rnx-kit/align-deps@npm:3.0.4"
+"@rnx-kit/align-deps@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@rnx-kit/align-deps@npm:3.0.5"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/74ed4a54ec384fa569c7f1dc096c0f5eb3a19d16aeb040b546e19c3665d19afe15fd22704bf7388febe49b92b52cff16a1a7925b4d7f3b2e21c3c921945de941
+  checksum: 10c0/e1bb9e64303315257c471037669640acf5da2c26398b75374472818dfb99e43854769cd7275262cbab25cb03d9983c0d3000a427e9608294a1a8f19aa87ccb06
   languageName: node
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.18.0":
-  version: 0.18.6
-  resolution: "@rnx-kit/cli@npm:0.18.6"
+  version: 0.18.8
+  resolution: "@rnx-kit/cli@npm:0.18.8"
   dependencies:
-    "@rnx-kit/align-deps": "npm:^3.0.1"
+    "@rnx-kit/align-deps": "npm:^3.0.5"
     "@rnx-kit/config": "npm:^0.7.0"
     "@rnx-kit/console": "npm:^2.0.0"
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector": "npm:^2.0.0"
@@ -7137,7 +7137,7 @@ __metadata:
       optional: true
   bin:
     rnx-cli: bin/rnx-cli.cjs
-  checksum: 10c0/ec16d8458ddd5498c37f5c04b1122d82c0567ddd8d44abf015dfb066f9aa315f05c3693c2ca5872e3a35da9058cb3d810ae3eccc8529bf399940007eb0d19f58
+  checksum: 10c0/bf83076afe9ca8ae7bad47b4c04a171c92a1c67bfb2c25f5a12ee087ecdbd947bbcd27bd7b0827a9d02e0e8c276dfbec6550d30b49e7ad688c6382c6c77c5e47
   languageName: node
   linkType: hard
 
