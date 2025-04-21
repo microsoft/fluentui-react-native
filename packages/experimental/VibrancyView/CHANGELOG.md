@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/vibrancy-view
 
-This log was last generated on Mon, 15 Apr 2024 21:31:44 GMT and should not be manually modified.
+<!-- This log was last generated on Mon, 10 Mar 2025 17:22:21 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.3.0
+
+Mon, 10 Mar 2025 17:22:21 GMT
+
+### Minor changes
+
+- fix(VibrancyView): remove hit test override (sanajmi@microsoft.com)
+
+## 0.2.2
+
+Wed, 29 Jan 2025 23:43:52 GMT
+
+### Patches
+
+- fix tsconfig for jest types (sanajmi@microsoft.com)
 
 ## 0.2.1
 

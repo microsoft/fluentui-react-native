@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:55 GMT",
+      "version": "0.21.4",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.21.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 May 2024 03:33:29 GMT",
       "version": "0.21.2",
       "tag": "@fluentui-react-native/experimental-avatar_v0.21.2",

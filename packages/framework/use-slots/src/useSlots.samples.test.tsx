@@ -4,8 +4,7 @@ import type { CSSProperties } from 'react';
 
 import { mergeProps } from '@fluentui-react-native/merge-props';
 import { withSlots, stagedComponent } from '@fluentui-react-native/use-slot';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import * as renderer from 'react-test-renderer';
 
 import { buildUseSlots } from './buildUseSlots';
 
@@ -73,23 +72,21 @@ describe('useSlots sample code test suite', () => {
   });
   BoldTextStaged.displayName = 'BoldTextStaged';
 
-  /**
-   * The demos of the code use enzyme with JSDom to show the full tree. This has the side effect of doubling up primitive elements in the output
-   * JSON. This is an issue with rendering react-native with enzyme but in real usage the nodes only render once.
-   */
   it('renders sample 1 - the two types of basic bold text components', () => {
     const styleToMerge: TextStyle = { color: 'black' };
 
     /**
      * First render the staged component. This invokes the wrapper that was built by the stagedComponent function
      */
-    const wrapper = mount(
-      <div>
-        <BoldTextStaged style={styleToMerge}>Staged component at one level</BoldTextStaged>
-        <BoldTextStandard style={styleToMerge}>Standard component of a single level</BoldTextStandard>
-      </div>,
-    );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const wrapper = renderer
+      .create(
+        <div>
+          <BoldTextStaged style={styleToMerge}>Staged component at one level</BoldTextStaged>
+          <BoldTextStandard style={styleToMerge}>Standard component of a single level</BoldTextStandard>
+        </div>,
+      )
+      .toJSON();
+    expect(wrapper).toMatchSnapshot();
   });
 
   /**
@@ -159,13 +156,15 @@ describe('useSlots sample code test suite', () => {
     /**
      * First render the staged component. This invokes the wrapper that was built by the stagedComponent function
      */
-    const wrapper = mount(
-      <div>
-        <HeaderStaged style={styleToMerge}>Staged component with two levels</HeaderStaged>
-        <HeaderStandard style={styleToMerge}>Standard component with two levels</HeaderStandard>
-      </div>,
-    );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const wrapper = renderer
+      .create(
+        <div>
+          <HeaderStaged style={styleToMerge}>Staged component with two levels</HeaderStaged>
+          <HeaderStandard style={styleToMerge}>Standard component with two levels</HeaderStandard>
+        </div>,
+      )
+      .toJSON();
+    expect(wrapper).toMatchSnapshot();
   });
 
   /**
@@ -250,9 +249,6 @@ describe('useSlots sample code test suite', () => {
   });
   CaptionedHeaderStaged.displayName = 'CaptionedHeaderStaged';
 
-  /**
-   * Render to enzyme snapshots
-   */
   it('renders sample 3 - the two types of higher order header components', () => {
     const styleToMerge: ViewStyle = { backgroundColor: 'gray', borderColor: 'purple', borderWidth: 1 };
 
@@ -260,27 +256,29 @@ describe('useSlots sample code test suite', () => {
      * Render the two sets of components. Note in the snapshots how the render tree layers for the standard approach are starting
      * to add up.
      */
-    const wrapper = mount(
-      <div>
-        <span>--- SIMPLE USAGE COMPARISON ---</span>
-        <CaptionedHeaderStandard style={styleToMerge}>Standard HOC</CaptionedHeaderStandard>
-        <CaptionedHeaderStaged style={styleToMerge}>Staged HOC</CaptionedHeaderStaged>
-        <span>--- COMPARISON WITH CAPTIONS ---</span>
-        <CaptionedHeaderStandard style={styleToMerge} captionText="Caption text">
-          Standard HOC with Caption
-        </CaptionedHeaderStandard>
-        <CaptionedHeaderStaged style={styleToMerge} captionText="Caption text">
-          Staged HOC with Caption
-        </CaptionedHeaderStaged>
-        <span>--- COMPARISON WITH CAPTIONS AND CUSTOMIZATIONS ---</span>
-        <CaptionedHeaderStandard style={styleToMerge} captionText="Caption text" captionColor="yellow" headerColor="red">
-          Standard HOC with caption and customizations
-        </CaptionedHeaderStandard>
-        <CaptionedHeaderStaged style={styleToMerge} captionText="Caption text" captionColor="yellow" headerColor="red">
-          Staged HOC with caption and customizations
-        </CaptionedHeaderStaged>
-      </div>,
-    );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const wrapper = renderer
+      .create(
+        <div>
+          <span>--- SIMPLE USAGE COMPARISON ---</span>
+          <CaptionedHeaderStandard style={styleToMerge}>Standard HOC</CaptionedHeaderStandard>
+          <CaptionedHeaderStaged style={styleToMerge}>Staged HOC</CaptionedHeaderStaged>
+          <span>--- COMPARISON WITH CAPTIONS ---</span>
+          <CaptionedHeaderStandard style={styleToMerge} captionText="Caption text">
+            Standard HOC with Caption
+          </CaptionedHeaderStandard>
+          <CaptionedHeaderStaged style={styleToMerge} captionText="Caption text">
+            Staged HOC with Caption
+          </CaptionedHeaderStaged>
+          <span>--- COMPARISON WITH CAPTIONS AND CUSTOMIZATIONS ---</span>
+          <CaptionedHeaderStandard style={styleToMerge} captionText="Caption text" captionColor="yellow" headerColor="red">
+            Standard HOC with caption and customizations
+          </CaptionedHeaderStandard>
+          <CaptionedHeaderStaged style={styleToMerge} captionText="Caption text" captionColor="yellow" headerColor="red">
+            Staged HOC with caption and customizations
+          </CaptionedHeaderStaged>
+        </div>,
+      )
+      .toJSON();
+    expect(wrapper).toMatchSnapshot();
   });
 });

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Thu, 11 Apr 2024 18:08:38 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:55 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.14.2
+
+Wed, 29 Jan 2025 23:43:55 GMT
+
+### Patches
+
+- remove enzyme tests (sanajmi@microsoft.com)
 
 ## 0.14.0
 

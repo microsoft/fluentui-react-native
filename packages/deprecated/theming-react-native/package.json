@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-react-native",
-  "version": "0.20.3",
+  "version": "0.20.5",
   "description": "A library of functions which produce React Native styles from a Theme",
   "main": "src/index.ts",
   "module": "src/index.ts",

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import Tab from '../../Tab/Tab';
@@ -21,11 +20,9 @@ describe('TabList component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-    // Each test needs this, again having to do with tests failing during the second render.
-    await renderer.act(async () => null);
   });
 
-  it('TabList selected key', async () => {
+  it('TabList selected key', () => {
     const tree = renderer
       .create(
         <TabList selectedKey="1">
@@ -36,10 +33,9 @@ describe('TabList component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
   });
 
-  it('TabList disabled list', async () => {
+  it('TabList disabled list', () => {
     const tree = renderer
       .create(
         <TabList disabled>
@@ -50,10 +46,9 @@ describe('TabList component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
   });
 
-  it('TabList appearance', async () => {
+  it('TabList appearance', () => {
     const tree = renderer
       .create(
         <TabList appearance="subtle">
@@ -64,10 +59,9 @@ describe('TabList component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
   });
 
-  it('TabList size', async () => {
+  it('TabList size', () => {
     const tree = renderer
       .create(
         <TabList size="large">
@@ -78,10 +72,9 @@ describe('TabList component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
   });
 
-  it('TabList orientation', async () => {
+  it('TabList orientation', () => {
     const tree = renderer
       .create(
         <TabList vertical>
@@ -92,20 +85,5 @@ describe('TabList component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
-  });
-
-  it('TabList re-renders correctly', async () => {
-    checkReRender(
-      () => (
-        <TabList>
-          <Tab tabKey="1">Tab 1</Tab>
-          <Tab tabKey="2">Tab 2</Tab>
-          <Tab tabKey="3">Tab 3</Tab>
-        </TabList>
-      ),
-      2,
-    );
-    await renderer.act(async () => null);
   });
 });

@@ -1,9 +1,7 @@
 import * as React from 'react';
-import type { AccessibilityActionName } from 'react-native';
 import { Text, View } from 'react-native';
 
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Svg } from 'react-native-svg';
 import * as renderer from 'react-test-renderer';
 
@@ -79,28 +77,5 @@ describe('Checkbox component tests', () => {
     });
     const tree = renderer.create(<ComposedCheckbox label="Composed Button with RNText" />).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Checkbox simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(() => <Checkbox>Default button</Checkbox>, 2);
-  });
-
-  it('Checkbox re-renders correctly', () => {
-    checkReRender(() => <Checkbox>Render twice</Checkbox>, 2);
-  });
-
-  it('Checkbox shares produced styles across multiple renders', () => {
-    const style = { backgroundColor: 'black' };
-    checkRenderConsistency(() => <Checkbox style={style}>Shared styles</Checkbox>, 2);
-  });
-
-  it('Checkbox re-renders correctly with style', () => {
-    const style = { borderColor: 'blue' };
-    checkReRender(() => <Checkbox style={style}>Shared Style Render</Checkbox>, 2);
-  });
-
-  it('Checkbox re-renders correctly with accessibilityAction', () => {
-    const action = [{ name: 'Expand' as AccessibilityActionName }];
-    checkReRender(() => <Checkbox accessibilityActions={action}>Shared Style Render</Checkbox>, 2);
   });
 });

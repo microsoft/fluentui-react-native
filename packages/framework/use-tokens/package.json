@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-tokens",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "Utilities and hook function for getting themed tokens for a component",
   "repository": {
     "type": "git",

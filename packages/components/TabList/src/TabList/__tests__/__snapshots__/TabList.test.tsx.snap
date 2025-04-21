@@ -15,6 +15,7 @@ exports[`TabList component tests TabList appearance 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="medium"
   style={
@@ -47,9 +48,9 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={1}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -182,9 +183,9 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={2}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -317,9 +318,9 @@ exports[`TabList component tests TabList appearance 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={3}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -463,6 +464,7 @@ exports[`TabList component tests TabList default props 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="medium"
   style={
@@ -911,6 +913,7 @@ exports[`TabList component tests TabList disabled list 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="medium"
   style={
@@ -1359,6 +1362,7 @@ exports[`TabList component tests TabList orientation 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="medium"
   style={
@@ -1391,9 +1395,9 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={1}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -1525,9 +1529,9 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={2}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -1659,9 +1663,9 @@ exports[`TabList component tests TabList orientation 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={3}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -1804,6 +1808,7 @@ exports[`TabList component tests TabList selected key 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   selectedKey="1"
   size="medium"
@@ -1837,9 +1842,9 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 1"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={1}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -1972,9 +1977,9 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 2"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={2}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -2107,9 +2112,9 @@ exports[`TabList component tests TabList selected key 1`] = `
           ]
         }
         accessibilityLabel="Tab 3"
-        accessibilityPositionInSet={0}
+        accessibilityPositionInSet={3}
         accessibilityRole="tab"
-        accessibilitySetSize={0}
+        accessibilitySetSize={3}
         accessibilityState={
           {
             "busy": undefined,
@@ -2253,6 +2258,7 @@ exports[`TabList component tests TabList size 1`] = `
       "current": null,
     }
   }
+  onKeyDown={[Function]}
   onLayout={[Function]}
   size="large"
   style={

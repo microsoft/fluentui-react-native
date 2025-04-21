@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/input
 
-This log was last generated on Fri, 12 Apr 2024 21:02:38 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:53 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.7.8
+
+Wed, 29 Jan 2025 23:43:53 GMT
+
+### Patches
+
+- remove enzyme tests (sanajmi@microsoft.com)
 
 ## 0.7.1
 

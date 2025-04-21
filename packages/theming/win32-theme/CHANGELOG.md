@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Fri, 12 Jul 2024 17:42:47 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:52 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.34.5
+
+Wed, 29 Jan 2025 23:43:52 GMT
+
+### Patches
+
+- fix tsconfig for jest types (sanajmi@microsoft.com)
 
 ## 0.34.3
 

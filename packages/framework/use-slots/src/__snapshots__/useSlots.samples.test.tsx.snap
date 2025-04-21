@@ -2,94 +2,53 @@
 
 exports[`useSlots sample code test suite renders sample 1 - the two types of basic bold text components 1`] = `
 <div>
-  <BoldTextStaged
+  <span
     style={
       {
         "color": "black",
+        "fontWeight": 900,
       }
     }
   >
-    <span
-      style={
-        {
-          "color": "black",
-          "fontWeight": 900,
-        }
-      }
-    >
-      Staged component at one level
-    </span>
-  </BoldTextStaged>
-  <BoldTextStandard
+    Staged component at one level
+  </span>
+  <span
     style={
       {
         "color": "black",
+        "fontWeight": 900,
       }
     }
   >
-    <span
-      style={
-        {
-          "color": "black",
-          "fontWeight": 900,
-        }
-      }
-    >
-      Standard component of a single level
-    </span>
-  </BoldTextStandard>
+    Standard component of a single level
+  </span>
 </div>
 `;
 
 exports[`useSlots sample code test suite renders sample 2 = the two types of two level header components 1`] = `
 <div>
-  <HeaderStaged
+  <span
     style={
       {
         "color": "black",
+        "fontSize": 20,
+        "fontWeight": 900,
       }
     }
   >
-    <span
-      style={
-        {
-          "color": "black",
-          "fontSize": 20,
-          "fontWeight": 900,
-        }
-      }
-    >
-      Staged component with two levels
-    </span>
-  </HeaderStaged>
-  <HeaderStandard
+    Staged component with two levels
+  </span>
+  <span
     style={
       {
         "color": "black",
+        "fontSize": 20,
+        "fontWeight": 900,
       }
     }
   >
-    <BoldTextStandard
-      style={
-        {
-          "color": "black",
-          "fontSize": 20,
-        }
-      }
-    >
-      <span
-        style={
-          {
-            "color": "black",
-            "fontSize": 20,
-            "fontWeight": 900,
-          }
-        }
-      >
-        Standard component with two levels
-      </span>
-    </BoldTextStandard>
-  </HeaderStandard>
+    Standard component with two levels
+  </span>
 </div>
 `;
 
@@ -98,298 +57,183 @@ exports[`useSlots sample code test suite renders sample 3 - the two types of hig
   <span>
     --- SIMPLE USAGE COMPARISON ---
   </span>
-  <CaptionedHeaderStandard';
+  <div
     style={
       {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "column",
       }
     }
   >
-    <div
+    <span
       style={
         {
-          "backgroundColor": "gray",
-          "borderColor": "purple",
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "column",
+          "fontSize": 20,
+          "fontWeight": 900,
         }
       }
     >
-      <HeaderStandard>
-        <BoldTextStandard
-          style={
-            {
-              "fontSize": 20,
-            }
-          }
-        >
-          <span
-            style={
-              {
-                "fontSize": 20,
-                "fontWeight": 900,
-              }
-            }
-          >
-            Standard HOC
-          </span>
-        </BoldTextStandard>
-      </HeaderStandard>
-    </div>
-  </CaptionedHeaderStandard';>
-  <CaptionedHeaderStaged
+      Standard HOC
+    </span>
+  </div>
+  <div
     style={
       {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "column",
       }
     }
   >
-    <div
+    <span
       style={
         {
-          "backgroundColor": "gray",
-          "borderColor": "purple",
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "column",
+          "fontSize": 20,
+          "fontWeight": 900,
         }
       }
     >
-      <span
-        style={
-          {
-            "fontSize": 20,
-            "fontWeight": 900,
-          }
-        }
-      >
-        Staged HOC
-      </span>
-    </div>
-  </CaptionedHeaderStaged>
+      Staged HOC
+    </span>
+  </div>
   <span>
     --- COMPARISON WITH CAPTIONS ---
   </span>
-  <CaptionedHeaderStandard';
-    captionText="Caption text"
+  <div
     style={
       {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "column",
       }
     }
   >
-    <div
+    <span
       style={
         {
-          "backgroundColor": "gray",
-          "borderColor": "purple",
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "column",
+          "fontSize": 20,
+          "fontWeight": 900,
         }
       }
     >
-      <HeaderStandard>
-        <BoldTextStandard
-          style={
-            {
-              "fontSize": 20,
-            }
-          }
-        >
-          <span
-            style={
-              {
-                "fontSize": 20,
-                "fontWeight": 900,
-              }
-            }
-          >
-            Standard HOC with Caption
-          </span>
-        </BoldTextStandard>
-      </HeaderStandard>
-      <BoldTextStandard>
-        <span
-          style={
-            {
-              "fontWeight": 900,
-            }
-          }
-        >
-          Caption text
-        </span>
-      </BoldTextStandard>
-    </div>
-  </CaptionedHeaderStandard';>
-  <CaptionedHeaderStaged
-    captionText="Caption text"
+      Standard HOC with Caption
+    </span>
+    <span
+      style={
+        {
+          "fontWeight": 900,
+        }
+      }
+    >
+      Caption text
+    </span>
+  </div>
+  <div
     style={
       {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "column",
       }
     }
   >
-    <div
+    <span
       style={
         {
-          "backgroundColor": "gray",
-          "borderColor": "purple",
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "column",
+          "fontSize": 20,
+          "fontWeight": 900,
         }
       }
     >
-      <span
-        style={
-          {
-            "fontSize": 20,
-            "fontWeight": 900,
-          }
+      Staged HOC with Caption
+    </span>
+    <span
+      style={
+        {
+          "fontWeight": 900,
         }
-      >
-        Staged HOC with Caption
-      </span>
-      <span
-        style={
-          {
-            "fontWeight": 900,
-          }
-        }
-      >
-        Caption text
-      </span>
-    </div>
-  </CaptionedHeaderStaged>
+      }
+    >
+      Caption text
+    </span>
+  </div>
   <span>
     --- COMPARISON WITH CAPTIONS AND CUSTOMIZATIONS ---
   </span>
-  <CaptionedHeaderStandard';
-    captionColor="yellow"
-    captionText="Caption text"
-    headerColor="red"
+  <div
     style={
       {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "column",
       }
     }
   >
-    <div
+    <span
       style={
         {
-          "backgroundColor": "gray",
-          "borderColor": "purple",
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "column",
+          "color": "red",
+          "fontSize": 20,
+          "fontWeight": 900,
         }
       }
     >
-      <HeaderStandard
-        style={
-          {
-            "color": "red",
-          }
+      Standard HOC with caption and customizations
+    </span>
+    <span
+      style={
+        {
+          "color": "yellow",
+          "fontWeight": 900,
         }
-      >
-        <BoldTextStandard
-          style={
-            {
-              "color": "red",
-              "fontSize": 20,
-            }
-          }
-        >
-          <span
-            style={
-              {
-                "color": "red",
-                "fontSize": 20,
-                "fontWeight": 900,
-              }
-            }
-          >
-            Standard HOC with caption and customizations
-          </span>
-        </BoldTextStandard>
-      </HeaderStandard>
-      <BoldTextStandard
-        style={
-          {
-            "color": "yellow",
-          }
-        }
-      >
-        <span
-          style={
-            {
-              "color": "yellow",
-              "fontWeight": 900,
-            }
-          }
-        >
-          Caption text
-        </span>
-      </BoldTextStandard>
-    </div>
-  </CaptionedHeaderStandard';>
-  <CaptionedHeaderStaged
-    captionColor="yellow"
-    captionText="Caption text"
-    headerColor="red"
+      }
+    >
+      Caption text
+    </span>
+  </div>
+  <div
     style={
       {
         "backgroundColor": "gray",
         "borderColor": "purple",
         "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "column",
       }
     }
   >
-    <div
+    <span
       style={
         {
-          "backgroundColor": "gray",
-          "borderColor": "purple",
-          "borderWidth": 1,
-          "display": "flex",
-          "flexDirection": "column",
+          "color": "red",
+          "fontSize": 20,
+          "fontWeight": 900,
         }
       }
     >
-      <span
-        style={
-          {
-            "color": "red",
-            "fontSize": 20,
-            "fontWeight": 900,
-          }
+      Staged HOC with caption and customizations
+    </span>
+    <span
+      style={
+        {
+          "color": "yellow",
+          "fontWeight": 900,
         }
-      >
-        Staged HOC with caption and customizations
-      </span>
-      <span
-        style={
-          {
-            "color": "yellow",
-            "fontWeight": 900,
-          }
-        }
-      >
-        Caption text
-      </span>
-    </div>
-  </CaptionedHeaderStaged>
+      }
+    >
+      Caption text
+    </span>
+  </div>
 </div>
 `;

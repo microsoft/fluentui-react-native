@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Wed, 19 Jun 2024 18:09:30 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:54 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.39.4
+
+Wed, 29 Jan 2025 23:43:54 GMT
+
+### Patches
+
+- remove enzyme tests (sanajmi@microsoft.com)
+
+## 0.39.0
+
+Fri, 18 Oct 2024 04:06:01 GMT
+
+### Minor changes
+
+- fix(macOS Button): Set default size to small (sanajmi@microsoft.com)
+
+## 0.38.0
+
+Thu, 17 Oct 2024 23:38:00 GMT
+
+### Minor changes
+
+- fix(macOS Button): Use Fluent 2 alias tokens (sanajmi@microsoft.com)
 
 ## 0.37.3
 

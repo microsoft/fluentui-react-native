@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Radio } from '../../Radio/Radio';
@@ -84,16 +83,6 @@ describe('RadioGroup component tests', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-    await renderer.act(async () => null);
-  });
-
-  it('RadioGroup simple rendering does not invalidate styling', async () => {
-    checkRenderConsistency(() => <RadioGroup>Default RadioGroup</RadioGroup>, 2);
-    await renderer.act(async () => null);
-  });
-
-  it('RadioGroup re-renders correctly', async () => {
-    checkReRender(() => <RadioGroup>Render twice</RadioGroup>, 2);
     await renderer.act(async () => null);
   });
 });

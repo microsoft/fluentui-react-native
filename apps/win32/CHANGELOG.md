@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Mon, 15 Apr 2024 19:08:10 GMT and should not be manually modified.
+<!-- This log was last generated on Mon, 10 Mar 2025 20:26:46 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.38.43
+
+Mon, 10 Mar 2025 20:26:46 GMT
+
+### Patches
+
+- Updating some rnx=kit packages (ruaraki@microsoft.com)
+
+## 0.38.26
+
+Fri, 27 Sep 2024 05:53:19 GMT
+
+### Patches
+
+- Callout test page additions to test new focusWindow/blurWindow APIs (ppatboyd@outlook.com)
 
 ## 0.38.2
 

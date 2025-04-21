@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 05 Mar 2025 01:28:08 GMT",
+      "version": "1.14.20",
+      "tag": "@fluentui-react-native/menu_v1.14.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "b3acd4efa76845d95d231882c907ecda91d10dd1",
+            "comment": "Fix Menu tab navigation on win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 23:43:53 GMT",
+      "version": "1.14.19",
+      "tag": "@fluentui-react-native/menu_v1.14.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "remove enzyme tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:10 GMT",
+      "version": "1.14.17",
+      "tag": "@fluentui-react-native/menu_v1.14.17",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Jul 2024 19:11:52 GMT",
       "version": "1.14.6",
       "tag": "@fluentui-react-native/menu_v1.14.6",

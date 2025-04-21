@@ -1,10 +1,10 @@
 {
+  "extends": "@fluentui-react-native/scripts/tsconfig.json",
   "compilerOptions": {
+    "outDir": "lib",
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "target": "es5",
-    "jsx": "react",
-    "outDir": "lib",
-    "declaration": true,
     "sourceMap": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -16,8 +16,7 @@
     "noUnusedLocals": true,
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
-    "lib": ["es6"],
-    "types": ["node", "jest"]
+    "lib": ["es6"]
   },
   "include": ["src"]
 }

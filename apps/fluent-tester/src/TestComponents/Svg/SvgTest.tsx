@@ -4,6 +4,7 @@ import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
 import { ButtonV1 as Button, ToggleButton } from '@fluentui/react-native';
 import { Separator } from '@fluentui/react-native';
+import { TextV1 } from '@fluentui-react-native/text';
 import {
   Circle,
   Defs,
@@ -32,6 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     color: 'purple',
   },
+  textInlineSvg: {
+    textTransform: 'uppercase',
+  },
 });
 
 const RectTest: React.FunctionComponent = () => {
@@ -58,9 +62,40 @@ const RectTest: React.FunctionComponent = () => {
   );
 };
 
+const RichTextInlineSvgTest: React.FunctionComponent = () => {
+  const [showInline, setShowInline] = React.useState(false);
+  const [isGreen, setIsGreen] = React.useState(true);
+
+  const toggleShowInline = React.useCallback(() => {
+    setShowInline(!showInline);
+  }, [showInline]);
+  const toggleRectFill = React.useCallback(() => {
+    setIsGreen(!isGreen);
+  }, [isGreen]);
+
+  return (
+    <>
+      <TextV1 style={styles.textInlineSvg} font="base" weight="medium" truncate>
+        Left [
+        {showInline ? (
+          <Svg width="50" height="50" viewBox="0 0 50 50">
+            <Rect width="50" height="50" fill="red" />
+            <Rect x="20" width="20" height="20" fill={isGreen ? 'green' : 'blue'} />
+          </Svg>
+        ) : (
+          'Svg will go here'
+        )}
+        ] Right
+      </TextV1>
+      <Button onClick={toggleShowInline}>{showInline ? 'Remove inline svg' : 'Insert inline svg'}</Button>
+      <Button onClick={toggleRectFill}>{isGreen ? 'Change to Blue' : 'Change to Green'}</Button>
+    </>
+  );
+};
+
 const CircleTest: React.FunctionComponent = () => {
   return (
-    <Svg width="50" height="50">
+    <Svg width="50" height="50" accessible={true} accessibilityLabel="SVG Circle Test" accessibilityRole="image">
       <Circle cx="25" cy="25" r="20" fill="red" stroke="black" />
     </Svg>
   );
@@ -68,7 +103,7 @@ const CircleTest: React.FunctionComponent = () => {
 
 const LineTest: React.FunctionComponent = () => {
   return (
-    <Svg width="50" height="50">
+    <Svg width="50" height="50" accessible={true} accessibilityLabel="SVG Line Test" accessibilityRole="image">
       <Line x1="10" y1="10" x2="20" y2="20" fill="red" stroke="black" />
     </Svg>
   );
@@ -76,7 +111,7 @@ const LineTest: React.FunctionComponent = () => {
 
 const PathTest: React.FunctionComponent = () => {
   return (
-    <Svg width="100" height="100">
+    <Svg width="100" height="100" accessible={true} accessibilityLabel="SVG Path Test" accessibilityRole="image">
       <Path d="M 0 0 A 10 10 0 0,1 0 100" fill="magenta" stroke="purple" id="path" />
     </Svg>
   );
@@ -84,7 +119,7 @@ const PathTest: React.FunctionComponent = () => {
 
 const PolygonTest: React.FunctionComponent = () => {
   return (
-    <Svg height="100" width="100">
+    <Svg height="100" width="100" accessible={true} accessibilityLabel="SVG Polygon Test" accessibilityRole="image">
       <Polygon points="40,5 70,80 25,95" fill="lime" stroke="purple" strokeWidth="1" />
     </Svg>
   );
@@ -92,7 +127,16 @@ const PolygonTest: React.FunctionComponent = () => {
 
 const LinearGradientTest: React.FunctionComponent = () => {
   return (
-    <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow">
+    <Svg
+      height="100"
+      width="100"
+      style={{ backgroundColor: 'black' }}
+      viewBox="0 0 10 10"
+      color="yellow"
+      accessible={true}
+      accessibilityLabel="SVG Linear Gradient Test"
+      accessibilityRole="image"
+    >
       <Defs>
         <LinearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
           <Stop offset="0" stopColor="green" stopOpacity="1" />
@@ -106,7 +150,16 @@ const LinearGradientTest: React.FunctionComponent = () => {
 
 const RadialGradientTest: React.FunctionComponent = () => {
   return (
-    <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow">
+    <Svg
+      height="100"
+      width="100"
+      style={{ backgroundColor: 'black' }}
+      viewBox="0 0 10 10"
+      color="yellow"
+      accessible={true}
+      accessibilityLabel="SVG Radial Gradient Test"
+      accessibilityRole="image"
+    >
       <Defs>
         <RadialGradient id="grad2">
           <Stop offset="0" stopColor="blue" />
@@ -120,7 +173,15 @@ const RadialGradientTest: React.FunctionComponent = () => {
 
 const RadialGradientTransformTest: React.FunctionComponent = () => {
   return (
-    <Svg width={256} height={256} viewBox="0 0 48 48" fill="none">
+    <Svg
+      width={256}
+      height={256}
+      viewBox="0 0 48 48"
+      fill="none"
+      accessible={true}
+      accessibilityLabel="SVG Radial Gradient Transform Test"
+      accessibilityRole="image"
+    >
       <Rect width={48} height={48} fill="url(#paint0_radial_1533_187044)" />
       <Rect x={10} y={10} width={10} height={10} fill="red" />
       <Defs>
@@ -142,7 +203,7 @@ const RadialGradientTransformTest: React.FunctionComponent = () => {
 
 const RectCircleTest: React.FunctionComponent = () => {
   return (
-    <Svg height="200" width="200">
+    <Svg height="200" width="200" accessible={true} accessibilityLabel="SVG Rect and Circle Test" accessibilityRole="image">
       <Defs>
         <G id="shape">
           <G>
@@ -158,7 +219,9 @@ const RectCircleTest: React.FunctionComponent = () => {
 };
 
 const BundledSvgTest: React.FunctionComponent = () => {
-  return <TestSvg width={200} height={200} color="red" />;
+  return (
+    <TestSvg width={200} height={200} color="red" accessible={true} accessibilityLabel="SVG Bundled svg Test" accessibilityRole="image" />
+  );
 };
 
 const RemoteSvgTest: React.FunctionComponent = () => {
@@ -169,10 +232,13 @@ const RemoteSvgTest: React.FunctionComponent = () => {
     <View>
       <SvgUri
         style={styles.svg}
-        viewBox="0 0 200 200"
+        viewBox="0 0 600 600"
         width="100"
         height="100"
         uri="https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg"
+        accessible={true}
+        accessibilityLabel="SVG Uri Test"
+        accessibilityRole="image"
       />
       {shouldShowLocalNetwork && (
         <SvgUri
@@ -183,6 +249,9 @@ const RemoteSvgTest: React.FunctionComponent = () => {
           width="100"
           height="100"
           uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
+          accessible={true}
+          accessibilityLabel="SVG Uri Test"
+          accessibilityRole="image"
         />
       )}
     </View>
@@ -240,7 +309,7 @@ const CustomSvgInputTest: React.FunctionComponent = () => {
       </View>
       <Separator />
       {showParse && <Text>{dataText}</Text>}
-      <SvgXml width="256" height="256" xml={svgText} />
+      <SvgXml width="256" height="256" xml={svgText} accessible={true} accessibilityLabel="Custom Svg Test" accessibilityRole="image" />
     </View>
   );
 };
@@ -258,6 +327,10 @@ const svgSections: TestSection[] = [
   {
     name: 'Circle',
     component: CircleTest,
+  },
+  {
+    name: 'RichTextInlineSvg',
+    component: RichTextInlineSvgTest,
   },
   {
     name: 'Line',

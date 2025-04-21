@@ -4,8 +4,7 @@ import { Text, View } from 'react-native';
 
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 import { mergeStyles } from '@fluentui-react-native/merge-props';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import * as renderer from 'react-test-renderer';
 
 import { buildUseTokens } from './buildUseTokens';
 
@@ -51,13 +50,6 @@ const useTheme = () => current.theme;
 const setActiveTheme = (theme?: Partial<Theme>) => {
   current.theme = (theme && immutableMerge<Theme>(baseTheme, theme as Theme)) || baseTheme;
 };
-
-/**
- * this wrapper solves the (so-far) inexplicable type errors from the matchers in typescript
- */
-function snapshotTestTree(tree: any) {
-  (expect(toJson(tree)) as any).toMatchSnapshot();
-}
 
 /**
  * Helper function used to look up a component in the theme. Having this injected allows this module to not be dependent on the shape of
@@ -139,8 +131,8 @@ describe('useTokens samples', () => {
 
   /** first render the component with no updates */
   it('Sample1Text rendering with no overrides', () => {
-    const tree = mount(<SampleText1>Sample1a</SampleText1>);
-    snapshotTestTree(tree);
+    const tree = renderer.create(<SampleText1>Sample1a</SampleText1>).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   /** now re-theme the component via the components in the theme */
@@ -153,8 +145,8 @@ describe('useTokens samples', () => {
         },
       },
     });
-    const tree = mount(<SampleText1>Sample1b</SampleText1>);
-    snapshotTestTree(tree);
+    const tree = renderer.create(<SampleText1>Sample1b</SampleText1>).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   /**
@@ -192,13 +184,15 @@ describe('useTokens samples', () => {
 
   /** rendering the Sample2 component with the base theme */
   it('Sample2Text rendering with defaults and a color override', () => {
-    const tree = mount(
-      <View>
-        <SampleText2>Sample2 with defaults</SampleText2>
-        <SampleText2 color="green">Sample2 with color override via prop</SampleText2>
-      </View>,
-    );
-    snapshotTestTree(tree);
+    const tree = renderer
+      .create(
+        <View>
+          <SampleText2>Sample2 with defaults</SampleText2>
+          <SampleText2 color="green">Sample2 with color override via prop</SampleText2>
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   /** now re-theme the component via the components in the theme */
@@ -211,12 +205,14 @@ describe('useTokens samples', () => {
         },
       },
     });
-    const tree = mount(
-      <View>
-        <SampleText2>Sample2 with theme overrides set</SampleText2>
-        <SampleText2 color="purple">Sample2 with theme and color prop override</SampleText2>
-      </View>,
-    );
-    snapshotTestTree(tree);
+    const tree = renderer
+      .create(
+        <View>
+          <SampleText2>Sample2 with theme overrides set</SampleText2>
+          <SampleText2 color="purple">Sample2 with theme and color prop override</SampleText2>
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

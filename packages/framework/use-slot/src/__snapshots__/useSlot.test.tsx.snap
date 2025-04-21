@@ -2,140 +2,70 @@
 
 exports[`useSlot tests Header and caption text render as expected 1`] = `
 <View>
-  <View>
-    <component>
-      <Text
-        style={
-          {
-            "fontSize": 24,
-            "fontWeight": "bold",
-          }
-        }
-      >
-        <Text
-          style={
-            {
-              "fontSize": 24,
-              "fontWeight": "bold",
-            }
-          }
-        >
-          Header text
-        </Text>
-      </Text>
-    </component>
-    <component>
-      <Text
-        style={
-          {
-            "fontFamily": "Arial",
-            "fontWeight": "200",
-          }
-        }
-      >
-        <Text
-          style={
-            {
-              "fontFamily": "Arial",
-              "fontWeight": "200",
-            }
-          }
-        >
-          Caption text
-        </Text>
-      </Text>
-    </component>
-  </View>
+  <Text
+    style={
+      {
+        "fontSize": 24,
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Header text
+  </Text>
+  <Text
+    style={
+      {
+        "fontFamily": "Arial",
+        "fontWeight": "200",
+      }
+    }
+  >
+    Caption text
+  </Text>
 </View>
 `;
 
 exports[`useSlot tests Multi-level text elements are equivalent 1`] = `
-<HeaderCaptionText1>
-  <Text
-    style={
-      {
-        "fontFamily": "Arial",
-        "fontSize": 24,
-        "fontWeight": "bold",
-      }
+<Text
+  style={
+    {
+      "fontFamily": "Arial",
+      "fontSize": 24,
+      "fontWeight": "bold",
     }
-  >
-    <Text
-      style={
-        {
-          "fontFamily": "Arial",
-          "fontSize": 24,
-          "fontWeight": "bold",
-        }
-      }
-    >
-      HeaderCaptionText
-    </Text>
-  </Text>
-</HeaderCaptionText1>
+  }
+>
+  HeaderCaptionText
+</Text>
 `;
 
 exports[`useSlot tests Multi-level text elements are equivalent 2`] = `
-<HeaderCaptionText2>
-  <Text
-    style={
-      {
-        "fontFamily": "Arial",
-        "fontSize": 24,
-        "fontWeight": "bold",
-      }
+<Text
+  style={
+    {
+      "fontFamily": "Arial",
+      "fontSize": 24,
+      "fontWeight": "bold",
     }
-  >
-    <Text
-      style={
-        {
-          "fontFamily": "Arial",
-          "fontSize": 24,
-          "fontWeight": "bold",
-        }
-      }
-    >
-      HeaderCaptionText
-    </Text>
-  </Text>
-</HeaderCaptionText2>
+  }
+>
+  HeaderCaptionText
+</Text>
 `;
 
 exports[`useSlot tests Two base text elements rendering, with and without styles 1`] = `
 <View>
-  <View>
-    <PluggableText>
-      <Text>
-        <Text>
-          No Style
-        </Text>
-      </Text>
-    </PluggableText>
-    <PluggableText
-      style={
-        {
-          "color": "blue",
-        }
+  <Text>
+    No Style
+  </Text>
+  <Text
+    style={
+      {
+        "color": "blue",
       }
-    >
-      <Text
-        style={
-          {
-            "color": "blue",
-          }
-        }
-      >
-        <Text
-          style={
-            {
-              "color": "blue",
-            }
-          }
-        >
-          With Style
-        </Text>
-      </Text>
-    </PluggableText>
-  </View>
+    }
+  >
+    With Style
+  </Text>
 </View>
 `;

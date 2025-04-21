@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/chip
 
-This log was last generated on Fri, 12 Apr 2024 21:02:37 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:54 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.4.8
+
+Wed, 29 Jan 2025 23:43:54 GMT
+
+### Patches
+
+- remove enzyme tests (sanajmi@microsoft.com)
 
 ## 0.4.1
 

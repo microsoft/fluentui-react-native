@@ -2,6 +2,80 @@
   "name": "@fluentui-react-native/tablist",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:54 GMT",
+      "version": "0.7.2",
+      "tag": "@fluentui-react-native/tablist_v0.7.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "remove enzyme tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 17:33:31 GMT",
+      "version": "0.7.0",
+      "tag": "@fluentui-react-native/tablist_v0.7.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "2181d9814da59b9c5593d5bd7be8c6e93afbdacb",
+            "comment": "Manually bump packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Jan 2025 23:24:31 GMT",
+      "version": "0.7.0",
+      "tag": "@fluentui-react-native/tablist_v0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "2c1345c7d0c3bdea816aeedfb5570e8fa3105623",
+            "comment": "Add native \"Ctrl + Tab\" keyboard shortcut for TabList component."
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:11 GMT",
+      "version": "0.6.12",
+      "tag": "@fluentui-react-native/tablist_v0.6.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "4490805f47dae159bef16299054081dcafcc86ea",
+            "comment": "Make tablist test not async so that it runs faster"
+          }
+        ],
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "0a748a0946bed101d8029dea54f76a396aef3483",
+            "comment": "Publish fix"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tablist",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:38 GMT",
       "version": "0.6.1",
       "tag": "@fluentui-react-native/tablist_v0.6.1",

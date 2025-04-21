@@ -1,6 +1,9 @@
 steps:
+  # sets-up specifics for android dependency like NDK & emulator
+  - template: templates/android-dep-setup.yml
+
   # Building APK also requires bundling, this is currently already being done as part of main Android PR task.
-  - task: Gradle@2
+  - task: Gradle@3
     displayName: 'gradlew build apk'
     inputs:
       gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
@@ -9,6 +12,14 @@ steps:
       javaHomeOption: 'JDKVersion'
       jdkVersionOption: '1.17'
       workingDirectory: apps/fluent-tester/android
+
+  - task: Gradle@3
+    inputs:
+      workingDirectory: apps/fluent-tester/android
+      gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
+      gradleOptions: '-Xmx3072m'
+      publishJUnitResults: false
+      tasks: 'assembleDebug'
 
   - script: |
       adb install app-debug.apk

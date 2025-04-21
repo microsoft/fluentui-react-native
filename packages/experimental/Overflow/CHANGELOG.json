@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/overflow",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:53 GMT",
+      "version": "0.3.19",
+      "tag": "@fluentui-react-native/overflow_v0.3.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/overflow",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "remove enzyme tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:10 GMT",
+      "version": "0.3.17",
+      "tag": "@fluentui-react-native/overflow_v0.3.17",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/overflow",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Jun 2024 18:09:31 GMT",
       "version": "0.3.4",
       "tag": "@fluentui-react-native/overflow_v0.3.4",

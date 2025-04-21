@@ -1,8 +1,106 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 26 Jul 2024 16:00:07 GMT and should not be manually modified.
+<!-- This log was last generated on Mon, 10 Mar 2025 20:26:46 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.26
+
+Mon, 10 Mar 2025 20:26:46 GMT
+
+### Patches
+
+- Updating some rnx=kit packages (ruaraki@microsoft.com)
+
+## 0.170.23
+
+Mon, 10 Mar 2025 16:20:48 GMT
+
+### Patches
+
+- fix: Add Callout as a dependency to Fluent Tester (sanajmi@microsoft.com)
+
+## 0.170.22
+
+Fri, 07 Mar 2025 17:23:29 GMT
+
+### Patches
+
+- Expand defaultTabbableElement to accept a string corresponding a child element's nativeID (patboyd@microsoft.com)
+
+## 0.170.21
+
+Wed, 05 Mar 2025 01:28:08 GMT
+
+### Patches
+
+- update E2E test for win32 (krsiler@microsoft.com)
+
+## 0.170.19
+
+Tue, 11 Feb 2025 00:34:01 GMT
+
+### Patches
+
+- add LinkV1 to macOS test pages (krsiler@microsoft.com)
+
+## 0.170.18
+
+Wed, 29 Jan 2025 23:43:54 GMT
+
+### Patches
+
+- Add TextInput inside FocusZone case (nakambo@microsoft.com)
+
+## 0.170.15
+
+Thu, 16 Jan 2025 19:12:09 GMT
+
+### Patches
+
+- Split up checkbox tests into their own files (ruaraki@microsoft.com)
+- Update type import (ruaraki@microsoft.com)
+- Add new Checkbox test (ruaraki@microsoft.com)
+
+## 0.170.10
+
+Thu, 17 Oct 2024 23:38:00 GMT
+
+### Patches
+
+- Fixup Sidebar tabs in High Contrast (sanajmi@microsoft.com)
+
+## 0.170.9
+
+Fri, 27 Sep 2024 05:53:19 GMT
+
+### Patches
+
+- Callout test page additions to test new focusWindow/blurWindow APIs on MacOS (ppatboyd@outlook.com)
+
+## 0.170.8
+
+Thu, 26 Sep 2024 20:45:54 GMT
+
+### Patches
+
+- Update just-scripts, jsdom. Align wdio versions across repo (ruaraki@microsoft.com)
+
+## 0.170.7
+
+Tue, 24 Sep 2024 20:45:59 GMT
+
+### Patches
+
+- Fix build (ruaraki@microsoft.com)
+
+## 0.170.6
+
+Tue, 24 Sep 2024 02:12:18 GMT
+
+### Patches
+
+- Screenreader compatability for svg icon package test (warleu@microsoft.com)
 
 ## 0.170.3
 

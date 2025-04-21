@@ -1,14 +1,13 @@
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '18.x'
+      versionSpec: '22.x'
 
   - task: CmdLine@2
     displayName: 'brew bundle'
     inputs:
       script: |
         brew bundle --file .ado/Brewfile
-        cat .ado/Brewfile.lock.json
 
   # Cocoapods 1.15.0 doesn't work with React Native
   - task: CmdLine@2

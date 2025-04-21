@@ -18,7 +18,7 @@ If you have an existing React Native project, it's easy to begin using FluentUI 
 ### Prerequisites
 
 - [Standard React Native dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies#manual-setup)
-- [Node.js](https://nodejs.org/en/download/)
+- [Node.js](https://nodejs.org/en/download/package-manager)
 - [Setting up your React Native Development Environment](https://reactnative.dev/docs/environment-setup)
 
 ### Create New React Native project (if needed)
@@ -124,7 +124,7 @@ Note: If your repo is located on either your Desktop or Documents folder, you ma
 
 This repo is set up to run [Prettier](https://prettier.io/). To run Prettier in fix mode on the repo, run `yarn prettier-fix` at the root of the Repo.
 
-If you are using [VSCode](https://code.visualstudio.com/) as your editor, you can configure it to run Prettier on save. Prettier is a recommended extension for the repo. You can configure it to run by:
+If you are using [Visual Studio Code as your editor, you can configure it to run Prettier on save. Prettier is a recommended extension for the repo. You can configure it to run by:
 
 1. Installing the Prettier extension for VSCode
 2. Going to Settings > Text Editor > Formatting > Check Format On Save

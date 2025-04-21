@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { validateHookValueNotChanged } from '@fluentui-react-native/test-tools';
-import { mount } from 'enzyme';
+import * as renderer from 'react-test-renderer';
 
 import { useConst } from '../useConst';
 
@@ -18,12 +18,12 @@ describe('useConst', () => {
       return <React.Fragment>{value}</React.Fragment>;
     };
 
-    const wrapper = mount(<TestComponent />);
-    const firstValue = wrapper.text();
+    const wrapper = renderer.create(<TestComponent />);
+    const firstValue = wrapper.toJSON();
     // Re-render the component
-    wrapper.update();
+    wrapper.update(<TestComponent />);
     // Text should be the same
-    expect(wrapper.text()).toBe(firstValue);
+    expect(wrapper.toJSON()).toBe(firstValue);
     // Function shouldn't have been called again
     expect(initializer).toHaveBeenCalledTimes(1);
   });
@@ -36,9 +36,9 @@ describe('useConst', () => {
       return <React.Fragment>{value}</React.Fragment>;
     };
 
-    const wrapper = mount(<TestComponent />);
+    const wrapper = renderer.create(<TestComponent />);
     // Re-render the component
-    wrapper.update();
+    wrapper.update(<TestComponent />);
     // Function shouldn't have been called again
     expect(initializer).toHaveBeenCalledTimes(1);
   });

@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:53 GMT",
+      "version": "0.13.7",
+      "tag": "@fluentui-react-native/switch_v0.13.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "remove enzyme tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:11 GMT",
+      "version": "0.13.5",
+      "tag": "@fluentui-react-native/switch_v0.13.5",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:39 GMT",
       "version": "0.13.0",
       "tag": "@fluentui-react-native/switch_v0.13.0",

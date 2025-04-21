@@ -9,7 +9,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/ui-fabric-react-native.git"
+    "url": "https://github.com/microsoft/fluentui-react-native.git"
   },
   "scripts": {
     "build": "lage build",
@@ -43,7 +43,7 @@
     "@react-native/metro-babel-transformer": "^0.73.0",
     "@react-native/metro-config": "^0.73.0",
     "@rnx-kit/align-deps": "^2.2.5",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "^29.7.0",
     "beachball": "^2.20.0",
     "eslint": "^8.0.0",
     "eslint-plugin-import": "^2.27.5",
@@ -64,13 +64,14 @@
     "scripts"
   ],
   "resolutions": {
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "es5-ext": "0.10.63",
     "express": "^4.19.2",
     "@types/react": "^18.2.0",
     "micromatch": "^4.0.0",
     "react-native-svg": "^15.0.0",
     "semver": "^7.5.2",
+    "tar-fs": "^3.0.8",
     "ws": "^8.17.1",
     "xml2js": "^0.5.0",
     "yaml": "^2.2.2"
@@ -91,5 +92,5 @@
       ]
     }
   },
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.6.0"
 }

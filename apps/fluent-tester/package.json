@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.170.4",
+  "version": "0.170.26",
   "description": "A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -42,6 +42,7 @@
     "@fluentui-react-native/avatar": "workspace:*",
     "@fluentui-react-native/badge": "workspace:*",
     "@fluentui-react-native/button": "workspace:*",
+    "@fluentui-react-native/callout": "workspace:*",
     "@fluentui-react-native/chip": "workspace:*",
     "@fluentui-react-native/default-theme": "workspace:*",
     "@fluentui-react-native/divider": "workspace:*",
@@ -103,18 +104,18 @@
     "@react-native/babel-preset": "^0.73.0",
     "@react-native/metro-babel-transformer": "^0.73.0",
     "@react-native/metro-config": "^0.73.0",
-    "@rnx-kit/cli": "^0.16.2",
-    "@rnx-kit/metro-config": "^1.3.1",
+    "@rnx-kit/cli": "^0.18.0",
+    "@rnx-kit/metro-config": "^2.0.0",
     "@types/jasmine": "5.1.4",
-    "@wdio/cli": "8.35.1",
-    "@wdio/globals": "8.35.1",
-    "@wdio/jasmine-framework": "8.35.1",
+    "@wdio/cli": "^8.40.0",
+    "@wdio/globals": "^8.40.0",
+    "@wdio/jasmine-framework": "^8.40.0",
     "flow-bin": "^0.113.0",
     "metro-config": "^0.80.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^3.4.7",
     "react-test-renderer": "18.2.0",
-    "webdriverio": "8.35.1"
+    "webdriverio": "^8.40.0"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.73.0"

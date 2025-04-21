@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Wed, 29 Jan 2025 23:43:55 GMT",
+      "version": "0.25.2",
+      "tag": "@fluentui-react-native/android-theme_v0.25.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/android-theme",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:41 GMT",
       "version": "0.25.0",
       "tag": "@fluentui-react-native/android-theme_v0.25.0",

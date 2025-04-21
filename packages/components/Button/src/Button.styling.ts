@@ -111,8 +111,9 @@ export const getDefaultSize = (): ButtonSize => {
     return 'medium';
   } else if ((Platform.OS as any) === 'win32') {
     return 'small';
+  } else if (Platform.OS === 'macos') {
+    return 'small';
   }
-
   return 'medium';
 };
 
