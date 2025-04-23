@@ -9982,9 +9982,9 @@ __metadata:
   linkType: hard
 
 "assert-never@npm:^1.2.1":
-  version: 1.3.0
-  resolution: "assert-never@npm:1.3.0"
-  checksum: 10c0/5dbd4fb93bca5c5639c04b5216feebe00e44005b2967e35490cb3154b0ffa48637f796fdb48141b40ffd5b32bd669eb675ba876e112f269fc4bf5a70e70374a8
+  version: 1.4.0
+  resolution: "assert-never@npm:1.4.0"
+  checksum: 10c0/494db08b89fb43d6231c9b4c48da22824f1912d88992bf0268e43b3dad0f64bd56d380addbb997d2dea7d859421d5e2904e8bd01243794f2bb5bfbc8d32d1fc6
   languageName: node
   linkType: hard
 
