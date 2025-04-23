@@ -1,4 +1,15 @@
-import type { TextProps, ViewProps, ImageProps, HostComponent, NativeSyntheticEvent } from 'react-native';
+import type {
+  TextProps,
+  ViewProps,
+  ImageProps,
+  HostComponent,
+  NativeSyntheticEvent,
+  Animated,
+  StyleProp,
+  ImageStyle,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
@@ -109,6 +120,83 @@ export interface KeyEvent extends NativeSyntheticEvent<NativeKeyEvent> {}
 export type DraggedType = 'fileUrl';
 export type DraggedTypesType = DraggedType | DraggedType[];
 
+type AnimatableNumericValue = number | Animated.AnimatedNode;
+type AnimatableStringValue = string | Animated.AnimatedNode;
+interface PerpectiveTransform {
+  perspective: AnimatableNumericValue;
+}
+
+interface RotateTransform {
+  rotate: AnimatableStringValue;
+}
+
+interface RotateXTransform {
+  rotateX: AnimatableStringValue;
+}
+
+interface RotateYTransform {
+  rotateY: AnimatableStringValue;
+}
+
+interface RotateZTransform {
+  rotateZ: AnimatableStringValue;
+}
+
+interface ScaleTransform {
+  scale: AnimatableNumericValue;
+}
+
+interface ScaleXTransform {
+  scaleX: AnimatableNumericValue;
+}
+
+interface ScaleYTransform {
+  scaleY: AnimatableNumericValue;
+}
+
+interface TranslateXTransform {
+  translateX: AnimatableNumericValue;
+}
+
+interface TranslateYTransform {
+  translateY: AnimatableNumericValue;
+}
+
+interface SkewXTransform {
+  skewX: AnimatableStringValue;
+}
+
+interface SkewYTransform {
+  skewY: AnimatableStringValue;
+}
+
+interface MatrixTransform {
+  matrix: AnimatableNumericValue[];
+}
+
+type MaximumOneOf<T, K extends keyof T = keyof T> = K extends keyof T ? { [P in K]: T[K] } & { [P in Exclude<keyof T, K>]?: never } : never;
+
+type MutableTransformStyle<T> = T & {
+  transform?:
+    | MaximumOneOf<
+        PerpectiveTransform &
+          RotateTransform &
+          RotateXTransform &
+          RotateYTransform &
+          RotateZTransform &
+          ScaleTransform &
+          ScaleXTransform &
+          ScaleYTransform &
+          TranslateXTransform &
+          TranslateYTransform &
+          SkewXTransform &
+          SkewYTransform &
+          MatrixTransform
+      >[]
+    | string
+    | undefined;
+};
+
 export type IAdapterMacOSViewProps = ViewProps & {
   acceptsFirstMouse?: boolean | undefined;
   allowsVibrancy?: boolean | undefined;
@@ -124,8 +212,13 @@ export type IAdapterMacOSViewProps = ViewProps & {
   validKeysDown?: string[] | undefined;
   validKeysUp?: string[] | undefined;
   draggedTypes?: DraggedTypesType | undefined;
+
+  style?: StyleProp<MutableTransformStyle<ViewStyle>> | undefined;
 };
-export type IAdapterMacOSTextProps = TextProps;
+export type IAdapterMacOSTextProps = Omit<TextProps, 'style'> & {
+  style?: StyleProp<MutableTransformStyle<TextStyle>> | undefined;
+};
 export type IAdapterMacOSImageProps = ImageProps & {
   tooltip?: string;
+  style?: StyleProp<MutableTransformStyle<ImageStyle>> | undefined;
 };

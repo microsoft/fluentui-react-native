@@ -1,4 +1,14 @@
-import type { TextProps, ViewProps, ImageProps, NativeSyntheticEvent, HostComponent } from 'react-native';
+import type {
+  TextProps,
+  ViewProps,
+  ImageProps,
+  NativeSyntheticEvent,
+  HostComponent,
+  StyleProp,
+  TextStyle,
+  Animated,
+  ImageStyle,
+} from 'react-native';
 
 export interface INativeKeyboardEvent {
   altKey: boolean;
@@ -258,7 +268,84 @@ export type TextWin32TextStyle =
   | 'ExtraLargeStandard'
   | 'HugeStandard';
 
-export type IAdapterWin32TextProps = TextProps & {
+type AnimatableNumericValue = number | Animated.AnimatedNode;
+type AnimatableStringValue = string | Animated.AnimatedNode;
+interface PerpectiveTransform {
+  perspective: AnimatableNumericValue;
+}
+
+interface RotateTransform {
+  rotate: AnimatableStringValue;
+}
+
+interface RotateXTransform {
+  rotateX: AnimatableStringValue;
+}
+
+interface RotateYTransform {
+  rotateY: AnimatableStringValue;
+}
+
+interface RotateZTransform {
+  rotateZ: AnimatableStringValue;
+}
+
+interface ScaleTransform {
+  scale: AnimatableNumericValue;
+}
+
+interface ScaleXTransform {
+  scaleX: AnimatableNumericValue;
+}
+
+interface ScaleYTransform {
+  scaleY: AnimatableNumericValue;
+}
+
+interface TranslateXTransform {
+  translateX: AnimatableNumericValue;
+}
+
+interface TranslateYTransform {
+  translateY: AnimatableNumericValue;
+}
+
+interface SkewXTransform {
+  skewX: AnimatableStringValue;
+}
+
+interface SkewYTransform {
+  skewY: AnimatableStringValue;
+}
+
+interface MatrixTransform {
+  matrix: AnimatableNumericValue[];
+}
+
+type MaximumOneOf<T, K extends keyof T = keyof T> = K extends keyof T ? { [P in K]: T[K] } & { [P in Exclude<keyof T, K>]?: never } : never;
+
+type MutableTransformStyle<T> = Omit<T, 'transform'> & {
+  transform?:
+    | MaximumOneOf<
+        PerpectiveTransform &
+          RotateTransform &
+          RotateXTransform &
+          RotateYTransform &
+          RotateZTransform &
+          ScaleTransform &
+          ScaleXTransform &
+          ScaleYTransform &
+          TranslateXTransform &
+          TranslateYTransform &
+          SkewXTransform &
+          SkewYTransform &
+          MatrixTransform
+      >[]
+    | string
+    | undefined;
+};
+
+export type IAdapterWin32TextProps = Omit<TextProps, 'style'> & {
   onKeyDown?: (args: IKeyboardEvent) => void;
   onKeyDownCapture?: (args: IKeyboardEvent) => void;
   onKeyUp?: (args: IKeyboardEvent) => void;
@@ -297,6 +384,8 @@ export type IAdapterWin32TextProps = TextProps & {
   focusable?: boolean;
   textStyle?: TextWin32TextStyle;
   tooltip?: string;
+
+  style?: StyleProp<MutableTransformStyle<TextStyle>> | undefined;
 };
 
 export type IAdapterWin32ImageProps = ImageProps & {
@@ -317,4 +406,6 @@ export type IAdapterWin32ImageProps = ImageProps & {
   'aria-level'?: number | undefined;
   'aria-controls'?: string | undefined;
   'aria-describedby'?: string | undefined;
+
+  style?: StyleProp<MutableTransformStyle<ImageStyle>> | undefined;
 };

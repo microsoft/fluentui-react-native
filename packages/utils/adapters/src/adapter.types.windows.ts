@@ -1,4 +1,4 @@
-import type { TextProps, ViewProps, ImageProps, NativeSyntheticEvent } from 'react-native';
+import type { TextProps, ViewProps, ImageProps, NativeSyntheticEvent, Animated } from 'react-native';
 
 export interface INativeKeyboardEvent {
   altKey: boolean;
@@ -94,6 +94,83 @@ export type AccessibilityAnnotationInfo = Readonly<{
   target?: string;
 }>;
 
+type AnimatableNumericValue = number | Animated.AnimatedNode;
+type AnimatableStringValue = string | Animated.AnimatedNode;
+interface PerpectiveTransform {
+  perspective: AnimatableNumericValue;
+}
+
+interface RotateTransform {
+  rotate: AnimatableStringValue;
+}
+
+interface RotateXTransform {
+  rotateX: AnimatableStringValue;
+}
+
+interface RotateYTransform {
+  rotateY: AnimatableStringValue;
+}
+
+interface RotateZTransform {
+  rotateZ: AnimatableStringValue;
+}
+
+interface ScaleTransform {
+  scale: AnimatableNumericValue;
+}
+
+interface ScaleXTransform {
+  scaleX: AnimatableNumericValue;
+}
+
+interface ScaleYTransform {
+  scaleY: AnimatableNumericValue;
+}
+
+interface TranslateXTransform {
+  translateX: AnimatableNumericValue;
+}
+
+interface TranslateYTransform {
+  translateY: AnimatableNumericValue;
+}
+
+interface SkewXTransform {
+  skewX: AnimatableStringValue;
+}
+
+interface SkewYTransform {
+  skewY: AnimatableStringValue;
+}
+
+interface MatrixTransform {
+  matrix: AnimatableNumericValue[];
+}
+
+type MaximumOneOf<T, K extends keyof T = keyof T> = K extends keyof T ? { [P in K]: T[K] } & { [P in Exclude<keyof T, K>]?: never } : never;
+
+type MutableTransformStyle<T> = T & {
+  transform?:
+    | MaximumOneOf<
+        PerpectiveTransform &
+          RotateTransform &
+          RotateXTransform &
+          RotateYTransform &
+          RotateZTransform &
+          ScaleTransform &
+          ScaleXTransform &
+          ScaleYTransform &
+          TranslateXTransform &
+          TranslateYTransform &
+          SkewXTransform &
+          SkewYTransform &
+          MatrixTransform
+      >[]
+    | string
+    | undefined;
+};
+
 export type IAdapterWindowsViewProps = ViewProps & {
   onKeyDown?: (args: IKeyboardEvent) => void;
   onKeyDownCapture?: (args: IKeyboardEvent) => void;
@@ -160,6 +237,8 @@ export type IAdapterWindowsViewProps = ViewProps & {
     | 'timer'
     | 'list'
     | 'toolbar';
+
+  style?: MutableTransformStyle<ViewProps['style']>;
 };
 
 /**
@@ -179,13 +258,15 @@ export type TextWindowsTextStyle =
   | 'ExtraLargeStandard'
   | 'HugeStandard';
 
-export type IAdapterWindowsTextProps = TextProps & {
+export type IAdapterWindowsTextProps = Omit<TextProps, 'style'> & {
   accessibilitySetSize?: number;
   accessibilityPosInSet?: number;
   accessibilityLevel?: number;
   'aria-posinset'?: number | undefined;
   'aria-setsize'?: number | undefined;
   'aria-level'?: number | undefined;
+
+  style?: MutableTransformStyle<TextProps['style']>;
 };
 
 export type IAdapterWindowsImageProps = ImageProps & {
@@ -195,4 +276,6 @@ export type IAdapterWindowsImageProps = ImageProps & {
   'aria-posinset'?: number | undefined;
   'aria-setsize'?: number | undefined;
   'aria-level'?: number | undefined;
+
+  style?: MutableTransformStyle<ImageProps['style']>;
 };
