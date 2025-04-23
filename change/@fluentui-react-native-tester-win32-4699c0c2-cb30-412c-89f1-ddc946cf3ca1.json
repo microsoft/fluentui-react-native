@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Bump rex as a test of publishing",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
