@@ -16098,27 +16098,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"just-scripts-utils@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "just-scripts-utils@npm:2.0.1"
+"just-scripts-utils@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "just-scripts-utils@npm:2.1.0"
   dependencies:
     fs-extra: "npm:^11.0.0"
-    just-task-logger: "npm:>=1.2.1 <2.0.0"
+    just-task-logger: "npm:>=1.3.0 <2.0.0"
     semver: "npm:^7.0.0"
-  checksum: 10c0/2db03efdabf2317cb8b35199a4b058bd678760886829517a117494135983de16a49d04f9bebbd6b803fa22e6c6595db182bd2eafc9ae4c5699a9994d96e1e718
+  checksum: 10c0/1410d1ef84fcb9f2df2c217ece881b7130f8df377b0bf765febf81745cbb9741d956dbfe028bfe81b089fe44c7858164b3575f30f5652fab00345388e54e08e8
   languageName: node
   linkType: hard
 
 "just-scripts@npm:^2.3.2":
-  version: 2.3.2
-  resolution: "just-scripts@npm:2.3.2"
+  version: 2.4.0
+  resolution: "just-scripts@npm:2.4.0"
   dependencies:
     chalk: "npm:^4.0.0"
     diff-match-patch: "npm:1.0.5"
     fs-extra: "npm:^11.0.0"
     glob: "npm:^7.1.3"
-    just-scripts-utils: "npm:^2.0.1"
-    just-task: "npm:>=1.10.0 <2.0.0"
+    just-scripts-utils: "npm:^2.1.0"
+    just-task: "npm:>=1.12.0 <2.0.0"
     prompts: "npm:^2.4.0"
     run-parallel-limit: "npm:^1.0.6"
     semver: "npm:^7.0.0"
@@ -16126,7 +16126,7 @@ __metadata:
     webpack-merge: "npm:^5.7.3"
   bin:
     just-scripts: bin/just-scripts.js
-  checksum: 10c0/581b9ba5d08bfcdc92a0a1c465df74c96a086a09b7e1ca813235a49305f733de818bc69b505c4b0aa642e5cf18357b95d4e1d3d158e72e9e5594e94268fd2024
+  checksum: 10c0/432ccc4b6dcc6c8d288d0585d89f3e335c7b45a46cf63d95a441ab3c1e7cdf0ab3235e4444d2e51a40cfdf15fd8855266032f8e010f181eec2c332941da435ac
   languageName: node
   linkType: hard
 
@@ -16140,7 +16140,40 @@ __metadata:
   languageName: node
   linkType: hard
 
-"just-task@npm:>=1.10.0 <2.0.0, just-task@npm:^1.4.2":
+"just-task-logger@npm:>=1.3.0 <2.0.0":
+  version: 1.3.0
+  resolution: "just-task-logger@npm:1.3.0"
+  dependencies:
+    chalk: "npm:^4.0.0"
+    yargs-parser: "npm:^20.2.3"
+  checksum: 10c0/ac08cf54dd837f6c8e6db28f6ea3c474540c0520501e08ebb7ee6006960257efa0bf12d95f5e85e599a4b34ce09823d4387c09ef8dca92f2df3a578d7ae3d139
+  languageName: node
+  linkType: hard
+
+"just-task@npm:>=1.12.0 <2.0.0":
+  version: 1.12.0
+  resolution: "just-task@npm:1.12.0"
+  dependencies:
+    "@rushstack/package-deps-hash": "npm:^4.0.0"
+    "@types/chokidar": "npm:^2.1.3"
+    "@types/undertaker": "npm:^1.2.8"
+    "@types/yargs-parser": "npm:^20.2.2"
+    bach: "npm:^2.0.0"
+    chalk: "npm:^4.0.0"
+    chokidar: "npm:^3.5.2"
+    fs-extra: "npm:^11.0.0"
+    just-task-logger: "npm:>=1.3.0 <2.0.0"
+    resolve: "npm:^1.19.0"
+    undertaker: "npm:^2.0.0"
+    undertaker-registry: "npm:^2.0.0"
+    yargs-parser: "npm:^20.2.3"
+  bin:
+    just: bin/just.js
+  checksum: 10c0/e5754596108aa8d07369dd296478d625378268d98513b8075e891676ded8c27183eb6581f082e50f29a49a6cd4bb5b99d9f8f827a0e8c021f369f5bbf3196212
+  languageName: node
+  linkType: hard
+
+"just-task@npm:^1.4.2":
   version: 1.10.0
   resolution: "just-task@npm:1.10.0"
   dependencies:
