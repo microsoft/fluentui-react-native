@@ -34,7 +34,7 @@
     "test-links": "markdown-link-check"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.0",
+    "@babel/core": "^7.20.0",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",

@@ -35,6 +35,7 @@
     "@fluentui-react-native/theme-types": "workspace:*"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.0",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@react-native/babel-preset": "^0.73.0",
