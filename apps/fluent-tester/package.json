@@ -96,8 +96,8 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.0",
-    "@babel/runtime": "^7.8.0",
+    "@babel/core": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",

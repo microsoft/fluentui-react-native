@@ -37,6 +37,7 @@
     "@uifabricshared/theming-ramp": "workspace:*"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.73.0",

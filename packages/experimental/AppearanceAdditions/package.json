@@ -33,6 +33,7 @@
     "use-subscription": ">=1.0.0 <1.6.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
