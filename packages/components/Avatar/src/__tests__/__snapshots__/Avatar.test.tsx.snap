@@ -68,7 +68,6 @@ exports[`Avatar component tests Avatar badge 1`] = `
           },
         ]
       }
-      tintColor="#616161"
       vbHeight={20}
       vbWidth={20}
       width={16}
@@ -149,11 +148,11 @@ exports[`Avatar component tests Avatar badge 1`] = `
           },
         ]
       }
-      tintColor="#13a10e"
       vbHeight={16}
       vbWidth={16}
     >
       <RNSVGGroup
+        color="#13a10e"
         fill={null}
         propList={
           [
@@ -246,7 +245,6 @@ exports[`Avatar component tests Avatar circular 1`] = `
           },
         ]
       }
-      tintColor="#616161"
       vbHeight={20}
       vbWidth={20}
       width={16}
@@ -344,7 +342,6 @@ exports[`Avatar component tests Avatar default 1`] = `
           },
         ]
       }
-      tintColor="#616161"
       vbHeight={20}
       vbWidth={20}
       width={16}
@@ -462,7 +459,6 @@ exports[`Avatar component tests Avatar ring 1`] = `
             },
           ]
         }
-        tintColor="#616161"
         vbHeight={20}
         vbWidth={20}
         width={16}
@@ -561,7 +557,6 @@ exports[`Avatar component tests Avatar square 1`] = `
           },
         ]
       }
-      tintColor="#616161"
       vbHeight={20}
       vbWidth={20}
       width={16}

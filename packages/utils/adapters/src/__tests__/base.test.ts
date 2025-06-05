@@ -43,7 +43,7 @@ describe('Base filter tests', () => {
   });
 
   test('verify win32 types', () => {
-    const win32AdapterViewProps: Required<IAdapterWin32ViewProps> = {} as Required<IAdapterWin32ViewProps>;
+    const win32AdapterViewProps = {} as Required<IAdapterWin32ViewProps>;
     // This assignment will fail if we are missing properties on IAdapterWin32ViewProps which are defined by Win32PlatformViewProps
     const win32PlatformViewProps: Required<Win32PlatformViewProps> = win32AdapterViewProps;
     expect(Object.keys(win32PlatformViewProps).length).toBe(0);
@@ -52,7 +52,7 @@ describe('Base filter tests', () => {
     const emptyWin32ViewProps: Omit<Required<IAdapterWin32ViewProps>, keyof Win32PlatformViewProps> = {};
     expect(Object.keys(emptyWin32ViewProps).length).toBe(0);
 
-    const win32AdapterTextProps: Required<IAdapterWin32TextProps> = {} as Required<IAdapterWin32TextProps>;
+    const win32AdapterTextProps = {} as Required<IAdapterWin32TextProps>;
     // This assignment will fail if we are missing properties on IAdapterWin32TextProps which are defined by Win32PlatformTextProps
     const win32PlatformTextProps: Required<Win32PlatformTextProps> = win32AdapterTextProps;
     expect(Object.keys(win32PlatformTextProps).length).toBe(0);
@@ -61,7 +61,7 @@ describe('Base filter tests', () => {
     const emptyWin32TextProps: Omit<Required<IAdapterWin32TextProps>, keyof Win32PlatformTextProps> = {};
     expect(Object.keys(emptyWin32TextProps).length).toBe(0);
 
-    const win32AdapterImageProps: Required<IAdapterWin32ImageProps> = {} as Required<IAdapterWin32ImageProps>;
+    const win32AdapterImageProps = {} as Required<IAdapterWin32ImageProps>;
     // This assignment will fail if we are missing properties on IAdapterWin32ImageProps which are defined by Win32PlatformImageProps
     const win32PlatformImageProps: Required<Win32PlatformImageProps> = win32AdapterImageProps;
     expect(Object.keys(win32PlatformImageProps).length).toBe(0);
@@ -78,9 +78,7 @@ describe('Base filter tests', () => {
   type windowsHandledKeyInvalidProperties = 'keyDownEvents' | 'keyUpEvents';
 
   test('verify windows types', () => {
-    const windowsAdapterViewProps: Required<
-      Omit<IAdapterWindowsViewProps, windowsEventPhaseInvalidProperties | windowsHandledKeyInvalidProperties>
-    > = {} as Required<IAdapterWindowsViewProps>;
+    const windowsAdapterViewProps = {} as Required<IAdapterWindowsViewProps>;
     // This assignment will fail if we are missing properties on IAdapterWindowsViewProps which are defined by WindowsPlatformViewProps
     const windowsPlatformViewProps: Required<
       Omit<WindowsPlatformViewProps, windowsEventPhaseInvalidProperties | windowsHandledKeyInvalidProperties>
@@ -91,7 +89,7 @@ describe('Base filter tests', () => {
     const emptyWindowsViewProps: Omit<Required<IAdapterWindowsViewProps>, keyof WindowsPlatformViewProps> = {};
     expect(Object.keys(emptyWindowsViewProps).length).toBe(0);
 
-    const windowsAdapterTextProps: Required<IAdapterWindowsTextProps> = {} as Required<IAdapterWindowsTextProps>;
+    const windowsAdapterTextProps = {} as Required<IAdapterWindowsTextProps>;
     // This assignment will fail if we are missing properties on IAdapterWindowsTextProps which are defined by WindowsPlatformTextProps
     const windowsPlatformTextProps: Required<WindowsPlatformTextProps> = windowsAdapterTextProps;
     expect(Object.keys(windowsPlatformTextProps).length).toBe(0);
@@ -100,7 +98,7 @@ describe('Base filter tests', () => {
     const emptyWindowsTextProps: Omit<Required<IAdapterWindowsTextProps>, keyof WindowsPlatformTextProps> = {};
     expect(Object.keys(emptyWindowsTextProps).length).toBe(0);
 
-    const windowsAdapterImageProps: Required<IAdapterWindowsImageProps> = {} as Required<IAdapterWindowsImageProps>;
+    const windowsAdapterImageProps = {} as Required<IAdapterWindowsImageProps>;
     // This assignment will fail if we are missing properties on IAdapterWindowsImageProps which are defined by WindowsPlatformImageProps
     const windowsPlatformImageProps: Required<WindowsPlatformImageProps> = windowsAdapterImageProps;
     expect(Object.keys(windowsPlatformImageProps).length).toBe(0);
@@ -111,7 +109,7 @@ describe('Base filter tests', () => {
   });
 
   test('verify macOS types', () => {
-    const macOSAdapterViewProps: Required<IAdapterMacOSViewProps> = {} as Required<IAdapterMacOSViewProps>;
+    const macOSAdapterViewProps = {} as Required<IAdapterMacOSViewProps>;
     // This assignment will fail if we are missing properties on IAdapterMacOSViewProps which are defined by MacOSPlatformViewProps
     const macOSPlatformViewProps: Required<MacOSPlatformViewProps> = macOSAdapterViewProps;
     expect(Object.keys(macOSPlatformViewProps).length).toBe(0);
@@ -120,7 +118,7 @@ describe('Base filter tests', () => {
     const emptyMacOSViewProps: Omit<Required<IAdapterMacOSViewProps>, keyof MacOSPlatformViewProps> = {};
     expect(Object.keys(emptyMacOSViewProps).length).toBe(0);
 
-    const macOSAdapterTextProps: Required<IAdapterMacOSTextProps> = {} as Required<IAdapterMacOSTextProps>;
+    const macOSAdapterTextProps = {} as Required<IAdapterMacOSTextProps>;
     // This assignment will fail if we are missing properties on IAdapterMacOSTextProps which are defined by MacOSPlatformTextProps
     const macOSPlatformTextProps: Required<MacOSPlatformTextProps> = macOSAdapterTextProps;
     expect(Object.keys(macOSPlatformTextProps).length).toBe(0);
@@ -129,7 +127,7 @@ describe('Base filter tests', () => {
     const emptyMacOSTextProps: Omit<Required<IAdapterMacOSTextProps>, keyof MacOSPlatformTextProps> = {};
     expect(Object.keys(emptyMacOSTextProps).length).toBe(0);
 
-    const macOSAdapterImageProps: Required<IAdapterMacOSImageProps> = {} as Required<IAdapterMacOSImageProps>;
+    const macOSAdapterImageProps = {} as Required<IAdapterMacOSImageProps>;
     // This assignment will fail if we are missing properties on IAdapterMacOSImageProps which are defined by MacOSPlatformImageProps
     const macOSPlatformImageProps: Required<MacOSPlatformImageProps> = macOSAdapterImageProps;
     expect(Object.keys(macOSPlatformImageProps).length).toBe(0);

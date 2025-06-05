@@ -35,6 +35,14 @@ exports[`Radio component tests Radio default 1`] = `
   enableFocusRing={true}
   focusable={true}
   labelPosition="after"
+  nativeBackgroundAndroid={
+    {
+      "borderless": false,
+      "color": -2829100,
+      "rippleRadius": undefined,
+      "type": "RippleAndroid",
+    }
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -77,6 +85,14 @@ exports[`Radio component tests Radio default 1`] = `
     accessible={false}
     collapsable={false}
     focusable={false}
+    nativeBackgroundAndroid={
+      {
+        "borderless": true,
+        "color": -2829100,
+        "rippleRadius": 16,
+        "type": "RippleAndroid",
+      }
+    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -183,6 +199,14 @@ exports[`Radio component tests Radio disabled 1`] = `
   enableFocusRing={true}
   focusable={false}
   labelPosition="after"
+  nativeBackgroundAndroid={
+    {
+      "borderless": false,
+      "color": -2829100,
+      "rippleRadius": undefined,
+      "type": "RippleAndroid",
+    }
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -225,6 +249,14 @@ exports[`Radio component tests Radio disabled 1`] = `
     accessible={false}
     collapsable={false}
     focusable={false}
+    nativeBackgroundAndroid={
+      {
+        "borderless": true,
+        "color": -2829100,
+        "rippleRadius": 16,
+        "type": "RippleAndroid",
+      }
+    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
