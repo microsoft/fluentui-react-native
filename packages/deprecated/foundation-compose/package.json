@@ -44,15 +44,16 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@types/react": "~18.2.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.74.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.73.0",
+    "@office-iss/react-native-win32": "^0.74.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0",
-    "react-native-windows": "^0.73.0"
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-windows": "^0.74.0"
   },
   "depcheck": {
     "ignoreMatches": [

@@ -2,10 +2,9 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { Text } from '@fluentui/react-native';
-import { ButtonV1 as Button } from '@fluentui/react-native';
+import { ButtonV1 as Button, Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
+import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 import {
   BUTTON_TEST_COMPONENT,
@@ -22,6 +21,24 @@ import {
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 
+function keyEvent(key: string) {
+  return {
+    key,
+    capsLockKey: false,
+    shiftKey: false,
+    ctrlKey: false,
+    altKey: false,
+    metaKey: false,
+    numericPadKey: false,
+    helpKey: false,
+    functionKey: false,
+    ArrowLeft: false,
+    ArrowRight: false,
+    ArrowUp: false,
+    ArrowDown: false,
+  };
+}
+
 export const E2EButtonTest: React.FunctionComponent = () => {
   const [buttonPressed, setButtonPressed] = React.useState(false);
   const [keyDetected, setKeyDetected] = React.useState('');
@@ -31,16 +48,16 @@ export const E2EButtonTest: React.FunctionComponent = () => {
     setKeyDetected('');
   }, [buttonPressed]);
 
-  const keyPressProps: Omit<IViewWin32Props, 'accessibilityRole' | 'role' | 'onBlur' | 'onFocus' | 'onMouseLeave' | 'onMouseEnter'> = {
-    keyDownEvents: [{ key: 'a' }],
-    onKeyDown: (args) => {
+  const keyPressProps = {
+    keyDownEvents: [keyEvent('a')],
+    onKeyDown: (args: IKeyboardEvent) => {
       if (args.nativeEvent.key === 'a') {
         setKeyDetected('a (down)');
         args.stopPropagation();
       }
     },
-    keyUpEvents: [{ key: 'b' }],
-    onKeyUp: (args) => {
+    keyUpEvents: [keyEvent('b')],
+    onKeyUp: (args: IKeyboardEvent) => {
       if (args.nativeEvent.key === 'b') {
         setKeyDetected('b (up)');
         args.stopPropagation();
