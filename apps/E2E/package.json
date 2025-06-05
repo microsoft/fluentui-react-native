@@ -38,6 +38,7 @@
     "@react-native/metro-config": "^0.73.0",
     "@rnx-kit/metro-config": "^2.0.0",
     "@types/jasmine": "5.1.4",
+    "@types/node": "^22.2.0",
     "@types/react": "^18.2.0",
     "@wdio/appium-service": "^8.40.0",
     "@wdio/cli": "^8.40.0",
