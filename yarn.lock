@@ -4746,7 +4746,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.73.0"
     "@react-native/metro-babel-transformer": "npm:^0.73.0"
     "@react-native/metro-config": "npm:^0.73.0"
-    "@rnx-kit/align-deps": "npm:^2.2.5"
+    "@rnx-kit/align-deps": "npm:^3.0.0"
     babel-jest: "npm:^29.7.0"
     beachball: "npm:^2.20.0"
     eslint: "npm:^8.0.0"
@@ -7087,21 +7087,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/align-deps@npm:^2.2.5":
-  version: 2.5.5
-  resolution: "@rnx-kit/align-deps@npm:2.5.5"
+"@rnx-kit/align-deps@npm:^3.0.0, @rnx-kit/align-deps@npm:^3.0.5":
+  version: 3.0.6
+  resolution: "@rnx-kit/align-deps@npm:3.0.6"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/3a0d2be01beb04f17dcc64e7ea1e73f1c22396c63d8f068d245e5a27535bedbaa424f9c345e100bc10475d936bbbadddc965b742487e3e155edcc0cb2651e2e8
-  languageName: node
-  linkType: hard
-
-"@rnx-kit/align-deps@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "@rnx-kit/align-deps@npm:3.0.5"
-  bin:
-    rnx-align-deps: lib/index.js
-  checksum: 10c0/e1bb9e64303315257c471037669640acf5da2c26398b75374472818dfb99e43854769cd7275262cbab25cb03d9983c0d3000a427e9608294a1a8f19aa87ccb06
+  checksum: 10c0/5c64ff8b69cc8e4ea49a5aa291d761efd82a697b5590eebc7e645318abbe80fcde48802c52dff0132be62f58e8bf6edd5c109b5f3d7693541fc820a9d5887313
   languageName: node
   linkType: hard
 
