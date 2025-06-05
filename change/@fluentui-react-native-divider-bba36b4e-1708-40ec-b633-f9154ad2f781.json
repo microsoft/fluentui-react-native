@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Enable passing view props into the Divider",
+  "packageName": "@fluentui-react-native/divider",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
