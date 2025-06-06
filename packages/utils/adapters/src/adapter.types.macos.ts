@@ -110,22 +110,33 @@ export type DraggedType = 'fileUrl';
 export type DraggedTypesType = DraggedType | DraggedType[];
 
 export type IAdapterMacOSViewProps = ViewProps & {
-  acceptsFirstMouse?: boolean | undefined;
-  allowsVibrancy?: boolean | undefined;
-  mouseDownCanMoveWindow?: boolean | undefined;
-  enableFocusRing?: boolean | undefined;
-  onMouseEnter?: ((event: MouseEvent) => void) | undefined;
-  onMouseLeave?: ((event: MouseEvent) => void) | undefined;
-  onDragEnter?: ((event: MouseEvent) => void) | undefined;
-  onDragLeave?: ((event: MouseEvent) => void) | undefined;
-  onDrop?: ((event: MouseEvent) => void) | undefined;
-  onKeyDown?: ((event: KeyEvent) => void) | undefined;
-  onKeyUp?: ((event: KeyEvent) => void) | undefined;
-  validKeysDown?: string[] | undefined;
-  validKeysUp?: string[] | undefined;
-  draggedTypes?: DraggedTypesType | undefined;
+  acceptsFirstMouse?: boolean;
+  allowsVibrancy?: boolean;
+  draggedTypes?: DraggedTypesType;
+  enableFocusRing?: boolean;
+  keyDownEvents?: NativeKeyEvent[];
+  keyUpEvents?: NativeKeyEvent[];
+  mouseDownCanMoveWindow?: boolean;
+  onDragEnter?: (event: MouseEvent) => void;
+  onDragLeave?: (event: MouseEvent) => void;
+  onDrop?: (event: MouseEvent) => void;
+  onKeyDown?: (event: KeyEvent) => void;
+  onKeyUp?: (event: KeyEvent) => void;
+  onMouseEnter?: (event: MouseEvent) => void;
+  onMouseLeave?: (event: MouseEvent) => void;
+  passthroughAllKeyEvents?: boolean;
+  validKeysDown?: string[];
+  validKeysUp?: string[];
 };
-export type IAdapterMacOSTextProps = TextProps;
+
+export type IAdapterMacOSTextProps = TextProps & {
+  enableFocusRing?: boolean;
+  focusable?: boolean;
+  onMouseEnter?: (event: MouseEvent) => void;
+  onMouseLeave?: (event: MouseEvent) => void;
+  tooltip?: string;
+};
+
 export type IAdapterMacOSImageProps = ImageProps & {
   tooltip?: string;
 };

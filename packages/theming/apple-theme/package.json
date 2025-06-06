@@ -46,19 +46,19 @@
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "@types/react": "^18.2.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0"
+    "react-native": "^0.74.0",
+    "react-native-macos": "patch:react-native-macos@npm%3A0.74.30#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.73.0",
+    "@office-iss/react-native-win32": "^0.74.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0",
-    "react-native-windows": "^0.73.0"
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-windows": "^0.74.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -67,7 +67,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.73"
+        "react-native@0.74"
       ],
       "capabilities": [
         "core",

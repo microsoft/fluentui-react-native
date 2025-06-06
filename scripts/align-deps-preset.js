@@ -1,4 +1,11 @@
 module.exports = {
+  0.74: {
+    "react-dom": {
+      name: "react-dom",
+      version: "~18.2.0",
+      capabilities: ["react"],
+    },
+  },
   0.68: {
     jest: {
       name: 'jest',
