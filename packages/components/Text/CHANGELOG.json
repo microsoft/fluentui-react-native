@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:48 GMT",
+      "version": "0.24.6",
+      "tag": "@fluentui-react-native/text_v0.24.6",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 23:43:54 GMT",
       "version": "0.24.6",
       "tag": "@fluentui-react-native/text_v0.24.6",

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:43 GMT",
+      "version": "0.20.5",
+      "tag": "@uifabricshared/theming-react-native_v0.20.5",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 May 2024 03:33:29 GMT",
       "version": "0.20.1",
       "tag": "@uifabricshared/theming-react-native_v0.20.1",

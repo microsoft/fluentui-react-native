@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:35:01 GMT",
+      "version": "0.11.2",
+      "tag": "@fluentui-react-native/badge_v0.11.2",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 23:43:56 GMT",
       "version": "0.11.2",
       "tag": "@fluentui-react-native/badge_v0.11.2",

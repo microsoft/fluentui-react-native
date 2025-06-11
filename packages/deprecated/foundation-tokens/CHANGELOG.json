@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:44 GMT",
+      "version": "0.15.2",
+      "tag": "@uifabricshared/foundation-tokens_v0.15.2",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-tokens",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:41 GMT",
       "version": "0.15.0",
       "tag": "@uifabricshared/foundation-tokens_v0.15.0",

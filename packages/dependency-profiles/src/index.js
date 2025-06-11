@@ -12,7 +12,7 @@ module.exports = {
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.38.43"
+      "version": "0.38.45"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -66,25 +66,25 @@ module.exports = {
       "name": "@fluentui-react-native/link",
       "version": "0.23.8"
     },
-    "@fluentui-react-native/menu": {
-      "name": "@fluentui-react-native/menu",
-      "version": "1.14.22"
-    },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
       "version": "0.13.19"
+    },
+    "@fluentui-react-native/menu": {
+      "name": "@fluentui-react-native/menu",
+      "version": "1.14.22"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
       "version": "0.25.11"
     },
-    "@fluentui-react-native/persona": {
-      "name": "@fluentui-react-native/persona",
-      "version": "0.16.2"
-    },
     "@fluentui-react-native/persona-coin": {
       "name": "@fluentui-react-native/persona-coin",
       "version": "0.15.2"
+    },
+    "@fluentui-react-native/persona": {
+      "name": "@fluentui-react-native/persona",
+      "version": "0.16.2"
     },
     "@fluentui-react-native/pressable": {
       "name": "@fluentui-react-native/pressable",
