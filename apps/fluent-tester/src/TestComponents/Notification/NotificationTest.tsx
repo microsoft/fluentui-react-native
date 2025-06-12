@@ -119,7 +119,7 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const height = React.useRef(new Animated.Value(0)).current;
 
-  const show = () => {
+  const show = React.useCallback(() => {
     setHidden(false);
     Animated.sequence([
       Animated.spring(height, {
@@ -138,9 +138,9 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
       setHidden(true);
       setVisible(false);
     });
-  };
+  }, [height]);
 
-  const hide = () => {
+  const hide = React.useCallback(() => {
     Animated.timing(height, {
       toValue: 0,
       duration: HIDE_DURATION,
@@ -148,7 +148,7 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
     }).start(() => {
       setHidden(true);
     });
-  };
+  }, [height]);
 
   React.useLayoutEffect(() => {
     if (visible) {
@@ -156,7 +156,7 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
     } else {
       hide();
     }
-  }, [visible, height]);
+  }, [visible, show, hide]);
 
   const animatedViewProps = {
     transform: [{ translateY: height }],

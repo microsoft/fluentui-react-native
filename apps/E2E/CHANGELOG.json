@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:58 GMT",
+      "version": "1.40.8",
+      "tag": "@fluentui-react-native/e2e-testing_v1.40.8",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "ff2088a94a1b13d0d8dddea54537f7da3dc96e58",
+            "comment": "Added missing `@types/node`"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Mar 2025 20:26:46 GMT",
+      "version": "1.40.8",
+      "tag": "@fluentui-react-native/e2e-testing_v1.40.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "7a39e34892d31edfc1a3c9386e354f840539348a",
+            "comment": "Updating some rnx=kit packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Mar 2025 01:28:08 GMT",
+      "version": "1.40.5",
+      "tag": "@fluentui-react-native/e2e-testing_v1.40.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "b3acd4efa76845d95d231882c907ecda91d10dd1",
+            "comment": "update E2E test for win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:12 GMT",
+      "version": "1.40.2",
+      "tag": "@fluentui-react-native/e2e-testing_v1.40.2",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Aug 2024 19:53:16 GMT",
       "version": "1.40.0",
       "tag": "@fluentui-react-native/e2e-testing_v1.40.0",

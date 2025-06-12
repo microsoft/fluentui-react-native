@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import Tab from '../Tab';
@@ -68,16 +67,5 @@ describe('Tab component tests', () => {
     });
     const tree = renderer.create(<CustomTab tabKey="1">Tab 1</CustomTab>);
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Tab re-renders correctly', () => {
-    checkReRender(
-      () => (
-        <Tab tabKey="1" accessibilityPositionInSet={1}>
-          Tab 1
-        </Tab>
-      ),
-      2,
-    );
   });
 });

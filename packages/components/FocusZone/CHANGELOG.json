@@ -2,6 +2,87 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:54 GMT",
+      "version": "0.21.0",
+      "tag": "@fluentui-react-native/focus-zone_v0.21.0",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Mar 2025 18:14:09 GMT",
+      "version": "0.21.0",
+      "tag": "@fluentui-react-native/focus-zone_v0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "525b7ad0cf989c4d9a9db2efd70ade0431a48f7b",
+            "comment": "Add static typing to the FocusZoneNativeComponent defaultTabbableElement type for fabric usage of the id/nativeID string type"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Mar 2025 17:23:29 GMT",
+      "version": "0.20.0",
+      "tag": "@fluentui-react-native/focus-zone_v0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "d36c36db62e5de96b30d2ce42b599c1210522099",
+            "comment": "Expand defaultTabbableElement to accept a string corresponding a child element's nativeID"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 23:43:55 GMT",
+      "version": "0.19.6",
+      "tag": "@fluentui-react-native/focus-zone_v0.19.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          },
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "d9ebc6372dd4add1f995c336436b6cd31395bdb3",
+            "comment": "Fix TextInput focus when inside a FocusZone"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:12 GMT",
+      "version": "0.19.4",
+      "tag": "@fluentui-react-native/focus-zone_v0.19.4",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 27 Jul 2024 06:54:11 GMT",
       "version": "0.19.2",
       "tag": "@fluentui-react-native/focus-zone_v0.19.2",

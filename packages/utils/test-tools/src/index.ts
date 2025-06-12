@@ -1,3 +1,2 @@
-export { checkReRender, checkRenderConsistency, compareTrees, snapshotPropTree, validateHookValueNotChanged } from './enzymeTests';
-export type { JSXProducer, PropTreeFilter, PropTreeSnapshot } from './enzymeTests';
+export { validateHookValueNotChanged } from './baseTests';
 export { mockTheme } from './mockTheme';

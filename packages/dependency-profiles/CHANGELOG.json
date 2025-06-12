@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/dependency-profiles",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:43 GMT",
+      "version": "0.8.45",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.8.45",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "f605776d18ad0c65cd19fbc710506f82a583b3fd",
+            "comment": "Manually update version of packages to match npm"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "1fbb7a48fa899c3eeebd32c348d60a1afbf714ed",
+            "comment": "Made profile updater more dynamic"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 17:33:31 GMT",
+      "version": "0.8.33",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.8.33",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "2181d9814da59b9c5593d5bd7be8c6e93afbdacb",
+            "comment": "Manually bump packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:12 GMT",
+      "version": "0.8.32",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.8.32",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "29ee1d5cec16eb936456ead051580c3f006729a1",
+            "comment": "Fix publish pipeline while we're at it..."
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:38 GMT",
       "version": "0.8.1",
       "tag": "@fluentui-react-native/dependency-profiles_v0.8.1",

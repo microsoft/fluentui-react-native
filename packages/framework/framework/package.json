@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/framework",
-  "version": "0.14.0",
+  "version": "0.14.2",
   "description": "Component framework used by fluentui react native controls",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -42,20 +42,21 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "@types/react": "^18.2.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.74.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.73.0",
+    "@office-iss/react-native-win32": "^0.74.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0",
-    "react-native-windows": "^0.73.0"
+    "react-native": "^0.73.0 || ^0.74.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0"
   },
   "author": "",
   "license": "MIT",
@@ -65,9 +66,14 @@
       "presets": [
         "microsoft/react-native"
       ],
-      "requirements": [
-        "react-native@0.73"
-      ],
+      "requirements": {
+        "development": [
+          "react-native@0.74"
+        ],
+        "production": [
+          "react-native@0.73 || 0.74"
+        ]
+      },
       "capabilities": [
         "core",
         "core-android",

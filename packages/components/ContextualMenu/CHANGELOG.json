@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:35:00 GMT",
+      "version": "0.24.16",
+      "tag": "@fluentui-react-native/contextual-menu_v0.24.16",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 23:43:54 GMT",
+      "version": "0.24.14",
+      "tag": "@fluentui-react-native/contextual-menu_v0.24.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:12 GMT",
+      "version": "0.24.12",
+      "tag": "@fluentui-react-native/contextual-menu_v0.24.12",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:37 GMT",
       "version": "0.24.1",
       "tag": "@fluentui-react-native/contextual-menu_v0.24.1",

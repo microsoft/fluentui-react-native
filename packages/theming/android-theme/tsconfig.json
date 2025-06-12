@@ -2,8 +2,7 @@
   "extends": "@fluentui-react-native/scripts/tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
-    "resolveJsonModule": true,
-    "types": ["node", "jest"]
+    "resolveJsonModule": true
   },
   "include": ["src"]
 }

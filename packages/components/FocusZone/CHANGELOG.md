@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Sat, 27 Jul 2024 06:54:11 GMT and should not be manually modified.
+<!-- This log was last generated on Mon, 10 Mar 2025 18:14:09 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.21.0
+
+Mon, 10 Mar 2025 18:14:09 GMT
+
+### Minor changes
+
+- Add static typing to the FocusZoneNativeComponent defaultTabbableElement type for fabric usage of the id/nativeID string type (patboyd@microsoft.com)
+
+## 0.20.0
+
+Fri, 07 Mar 2025 17:23:29 GMT
+
+### Minor changes
+
+- Expand defaultTabbableElement to accept a string corresponding a child element's nativeID (patboyd@microsoft.com)
+
+## 0.19.6
+
+Wed, 29 Jan 2025 23:43:55 GMT
+
+### Patches
+
+- fix tsconfig for jest types (sanajmi@microsoft.com)
+- Fix TextInput focus when inside a FocusZone (nakambo@microsoft.com)
 
 ## 0.19.2
 

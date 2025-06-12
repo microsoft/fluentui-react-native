@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:54 GMT",
+      "version": "0.13.19",
+      "tag": "@fluentui-react-native/menu-button_v0.13.19",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/menu-button",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 23:43:53 GMT",
+      "version": "0.13.17",
+      "tag": "@fluentui-react-native/menu-button_v0.13.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu-button",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:10 GMT",
+      "version": "0.13.15",
+      "tag": "@fluentui-react-native/menu-button_v0.13.15",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu-button",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Jun 2024 18:09:31 GMT",
       "version": "0.13.4",
       "tag": "@fluentui-react-native/menu-button_v0.13.4",

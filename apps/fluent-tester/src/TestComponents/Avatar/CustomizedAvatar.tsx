@@ -6,9 +6,9 @@ import type { AvatarSize } from '@fluentui-react-native/avatar';
 import { Avatar } from '@fluentui-react-native/avatar';
 import type { FontWeight } from '@fluentui-react-native/theme-types';
 
-import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { svgProps } from '../Common/iconExamples';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { steveBallmerPhotoUrl } from '../PersonaCoin/styles';
 
 const styles = StyleSheet.create({
   avatarTestCaseContainer: { marginLeft: 20 },

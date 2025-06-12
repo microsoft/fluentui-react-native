@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:35:00 GMT",
+      "version": "0.39.4",
+      "tag": "@fluentui-react-native/button_v0.39.4",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 23:43:54 GMT",
+      "version": "0.39.4",
+      "tag": "@fluentui-react-native/button_v0.39.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "remove enzyme tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:11 GMT",
+      "version": "0.39.2",
+      "tag": "@fluentui-react-native/button_v0.39.2",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Oct 2024 04:06:01 GMT",
+      "version": "0.39.0",
+      "tag": "@fluentui-react-native/button_v0.39.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "06f5bbda41c2389622a8055f9863b8b6beab3bb2",
+            "comment": "fix(macOS Button): Set default size to small"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Oct 2024 23:38:00 GMT",
+      "version": "0.38.0",
+      "tag": "@fluentui-react-native/button_v0.38.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "71494149a1dc95ac2c2d34b211abdd5ce0856df8",
+            "comment": "fix(macOS Button): Use Fluent 2 alias tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Jun 2024 18:09:30 GMT",
       "version": "0.37.3",
       "tag": "@fluentui-react-native/button_v0.37.3",

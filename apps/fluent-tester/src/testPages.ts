@@ -185,7 +185,7 @@ export const tests: TestDescription[] = [
     name: 'Link V1',
     component: LinkV1Test,
     testPageButton: Constants.HOMEPAGE_LINKV1_BUTTON,
-    platforms: ['win32', 'android', 'windows'],
+    platforms: ['macos', 'win32', 'android', 'windows'],
   },
   {
     name: 'Menu',

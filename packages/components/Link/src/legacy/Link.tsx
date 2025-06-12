@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Linking, View } from 'react-native';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { ITextProps } from '@fluentui-react-native/adapters';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { Text } from '@fluentui-react-native/text';
 import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
@@ -17,9 +17,9 @@ import { settings } from './Link.settings';
 import type { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, ILinkType } from './Link.types';
 import { linkName } from './Link.types';
 
-export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
+export type ILinkHooks = [IWithLinkOptions<ITextProps>, ILinkState];
 
-export function useAsLink(userProps: IWithLinkOptions<IViewProps>, ref: React.RefObject<any>): ILinkHooks {
+export function useAsLink(userProps: IWithLinkOptions<ITextProps>, ref: React.RefObject<any>): ILinkHooks {
   const { url, onPress, ...rest } = userProps;
 
   const [linkState, setLinkState] = React.useState({ visited: false });

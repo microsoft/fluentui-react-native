@@ -14,24 +14,24 @@
   },
   "devDependencies": {
     "@types/jasmine": "5.1.4",
-    "@wdio/appium-service": "^8.40.0",
-    "@wdio/cli": "^8.40.0",
-    "@wdio/globals": "^8.40.0",
-    "@wdio/jasmine-framework": "^8.40.0",
-    "@wdio/json-reporter": "^8.40.0",
-    "@wdio/local-runner": "^8.40.0",
-    "@wdio/spec-reporter": "^8.40.0",
+    "@wdio/appium-service": "^9.12.6",
+    "@wdio/cli": "^9.12.6",
+    "@wdio/globals": "^9.12.6",
+    "@wdio/jasmine-framework": "^9.12.6",
+    "@wdio/json-reporter": "^9.12.6",
+    "@wdio/local-runner": "^9.12.6",
+    "@wdio/spec-reporter": "^9.12.6",
     "appium": "^2.11.2",
     "appium-windows-driver": "^2.12.18",
-    "ts-node": "^10.7.0",
     "typescript": "^4.9.4",
-    "webdriverio": "^8.40.0"
+    "webdriverio": "^9.12.6"
   },
   "resolutions": {
     "@appium/types": "0.9.1",
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "express": "^4.19.2",
     "semver": "^7.5.2",
+    "tar-fs": "^3.0.9",
     "ws": "^8.17.1",
     "xml2js": "^0.5.0",
     "yaml": "^2.2.2"
@@ -39,6 +39,7 @@
   "resolutions.justifications": {
     "axios": "Patching security issue",
     "express": "Patching security issue",
+    "tar-fs": "Patching security issue",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/parse-glob/glob-base/glob-parent": "There is a security risk associated with this package version (it's a very outdated packaged, 2.0.0). Therefore, we are forcing an upgrade to the patched version.",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/braces": " There is a security risk associated with this package version (it's a very outdated packaged, 1.8.2). Therefore, we are forcing an upgrade to the patched version.",
     "ws": "Patching security issue"

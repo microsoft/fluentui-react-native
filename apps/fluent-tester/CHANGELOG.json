@@ -2,6 +2,242 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:50 GMT",
+      "version": "0.170.26",
+      "tag": "@fluentui-react-native/tester_v0.170.26",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Mar 2025 20:26:46 GMT",
+      "version": "0.170.26",
+      "tag": "@fluentui-react-native/tester_v0.170.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7a39e34892d31edfc1a3c9386e354f840539348a",
+            "comment": "Updating some rnx=kit packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Mar 2025 16:20:48 GMT",
+      "version": "0.170.23",
+      "tag": "@fluentui-react-native/tester_v0.170.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f02d26d9a2a449d52aaf734038fd7be31e88f277",
+            "comment": "fix: Add Callout as a dependency to Fluent Tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Mar 2025 17:23:29 GMT",
+      "version": "0.170.22",
+      "tag": "@fluentui-react-native/tester_v0.170.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d36c36db62e5de96b30d2ce42b599c1210522099",
+            "comment": "Expand defaultTabbableElement to accept a string corresponding a child element's nativeID"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Mar 2025 01:28:08 GMT",
+      "version": "0.170.21",
+      "tag": "@fluentui-react-native/tester_v0.170.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b3acd4efa76845d95d231882c907ecda91d10dd1",
+            "comment": "update E2E test for win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Feb 2025 00:34:01 GMT",
+      "version": "0.170.19",
+      "tag": "@fluentui-react-native/tester_v0.170.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2f291a437327357bfd242c5e2bce5d9b4b5ec988",
+            "comment": "add LinkV1 to macOS test pages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 23:43:54 GMT",
+      "version": "0.170.18",
+      "tag": "@fluentui-react-native/tester_v0.170.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "nakambo@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d9ebc6372dd4add1f995c336436b6cd31395bdb3",
+            "comment": "Add TextInput inside FocusZone case"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 17:33:31 GMT",
+      "version": "0.170.16",
+      "tag": "@fluentui-react-native/tester_v0.170.16",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2181d9814da59b9c5593d5bd7be8c6e93afbdacb",
+            "comment": "Manually bump packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:09 GMT",
+      "version": "0.170.15",
+      "tag": "@fluentui-react-native/tester_v0.170.15",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0a748a0946bed101d8029dea54f76a396aef3483",
+            "comment": "Publish fix"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ],
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7bec589aaee765ed16936d341d49dc232d7ade79",
+            "comment": "Split up checkbox tests into their own files"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "29ee1d5cec16eb936456ead051580c3f006729a1",
+            "comment": "Update type import"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b91697e0452c20d328f917c6f76a1b9c6383fe0b",
+            "comment": "Add new Checkbox test"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Oct 2024 23:38:00 GMT",
+      "version": "0.170.10",
+      "tag": "@fluentui-react-native/tester_v0.170.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "71494149a1dc95ac2c2d34b211abdd5ce0856df8",
+            "comment": "Fixup Sidebar tabs in High Contrast"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Sep 2024 05:53:19 GMT",
+      "version": "0.170.9",
+      "tag": "@fluentui-react-native/tester_v0.170.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ppatboyd@outlook.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7d1fa1e8c9aab65745ceb4e19efda75fd06e33bb",
+            "comment": "Callout test page additions to test new focusWindow/blurWindow APIs on MacOS"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Sep 2024 20:45:54 GMT",
+      "version": "0.170.8",
+      "tag": "@fluentui-react-native/tester_v0.170.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "3e520915dd55627f04cfd9cd0356b21ac1e6b256",
+            "comment": "Update just-scripts, jsdom. Align wdio versions across repo"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Sep 2024 20:45:59 GMT",
+      "version": "0.170.7",
+      "tag": "@fluentui-react-native/tester_v0.170.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0c0b25a2e98122f938e3bdfada36286aca8ab287",
+            "comment": "Fix build"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Sep 2024 02:12:18 GMT",
+      "version": "0.170.6",
+      "tag": "@fluentui-react-native/tester_v0.170.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "warleu@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "00e9dd62d20de66550d40e5f759304afb8b70566",
+            "comment": "Screenreader compatability for svg icon package test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Jul 2024 16:00:07 GMT",
       "version": "0.170.3",
       "tag": "@fluentui-react-native/tester_v0.170.3",

@@ -1,5 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
+import React from 'react';
 import { Platform, View } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -43,11 +44,22 @@ export const Link = compose<LinkType>({
       // This is a workaround for the issue. Once those issues are resolved, supportsA11yTextInText can be removed.
       const supportsA11yTextInText = Platform.OS !== 'android';
 
-      return supportsA11yTextInText && (inline || mergedProps.selectable) ? (
+      // MacOS Text component doesn't handle interaction events like hover etc.
+      // which are needed to style links correctly. Since macOS can handle
+      // Views in Text, we use that to handle interactions instead.
+      const supportsInteractionOnText = Platform.OS !== 'macos';
+
+      // Find the first child that's a string (if it exists) and save it to set as the link's
+      // accessibilityLabel if one isn't defined.
+      const linkA11yLabel = React.Children.toArray(children).find((child) => typeof child === 'string');
+
+      return supportsA11yTextInText && supportsInteractionOnText && (inline || mergedProps.selectable) ? (
         <Slots.content {...mergedProps}>{children}</Slots.content>
       ) : (
-        <Slots.root {...mergedProps}>
-          <Slots.content focusable={false}>{children}</Slots.content>
+        <Slots.root {...mergedProps} accessibilityLabel={mergedProps.accessibilityLabel ?? linkA11yLabel}>
+          <Slots.content focusable={false} accessible={false}>
+            {children}
+          </Slots.content>
         </Slots.root>
       );
     };

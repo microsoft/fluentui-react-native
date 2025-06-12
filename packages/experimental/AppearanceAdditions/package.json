@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-appearance-additions",
-  "version": "0.7.0",
+  "version": "0.7.2",
   "description": "A module to expose callbacks for additional traitCollection changes.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -33,21 +33,22 @@
     "use-subscription": ">=1.0.0 <1.6.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "@types/use-subscription": "1.0.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.74.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.73.0",
+    "@office-iss/react-native-win32": "^0.74.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0",
-    "react-native-windows": "^0.73.0"
+    "react-native": "^0.73.0 || ^0.74.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -55,9 +56,14 @@
       "presets": [
         "microsoft/react-native"
       ],
-      "requirements": [
-        "react-native@0.73"
-      ],
+      "requirements": {
+        "development": [
+          "react-native@0.74"
+        ],
+        "production": [
+          "react-native@0.73 || 0.74"
+        ]
+      },
       "capabilities": [
         "core",
         "core-ios",

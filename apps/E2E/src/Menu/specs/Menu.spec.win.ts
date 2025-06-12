@@ -160,15 +160,15 @@ describe('Menu Functional Testing', () => {
       .toBeFalsy();
   });
 
-  it('Press "Tab" to navigate between MenuItems. Validate that focus switches correctly between MenuItems.', async () => {
+  it('Press "Tab" to navigate between MenuGroups. Validate that focus switches correctly between MenuGroups.', async () => {
     await MenuPageObject.openMenu();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Third'), [Keys.TAB]);
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('First'), [Keys.TAB]);
     expect(
-      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('Fourth'), Attribute.IsFocused, AttributeValue.true),
+      await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('Third'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();
 
-    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Fourth'), [Keys.TAB]);
+    await MenuPageObject.sendKeys(MenuPageObject.getMenuItem('Third'), [Keys.TAB]);
     expect(
       await MenuPageObject.compareAttribute(MenuPageObject.getMenuItem('First'), Attribute.IsFocused, AttributeValue.true),
     ).toBeTruthy();

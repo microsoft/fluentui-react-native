@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/memo-cache
 
-This log was last generated on Fri, 01 Mar 2024 20:39:11 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 18:42:24 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.3.3
+
+Wed, 29 Jan 2025 18:42:24 GMT
+
+### Patches
+
+- Potential fix for code scanning alert no. 3: Prototype-polluting assignment (ruaraki@microsoft.com)
 
 ## 1.3.2
 

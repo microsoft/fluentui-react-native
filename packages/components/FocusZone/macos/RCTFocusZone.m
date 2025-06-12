@@ -1,4 +1,5 @@
 #import "KeyCodes.h"
+#import <React/RCTBaseTextInputView.h>
 #import "RCTFocusZone.h"
 #import "RCTi18nUtil.h"
 
@@ -61,7 +62,14 @@ static NSView *GetFirstFocusableViewWithin(NSView *parentView)
 
 	for (NSView *view in [parentView subviews]) {
 		if ([view acceptsFirstResponder]) {
-			return view;
+			if ([view isKindOfClass:[RCTBaseTextInputView class]]) {
+				RCTUIView *backedTextInputView = [(RCTBaseTextInputView *)view backedTextInputView];
+				if ([backedTextInputView acceptsFirstResponder]) {
+					return backedTextInputView;
+				}
+			} else {
+				return view;
+			}
 		}
 
 		NSView *match = GetFirstFocusableViewWithin(view);

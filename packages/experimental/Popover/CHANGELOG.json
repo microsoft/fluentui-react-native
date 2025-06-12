@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/popover",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:51 GMT",
+      "version": "0.4.2",
+      "tag": "@fluentui-react-native/popover_v0.4.2",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/popover",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 23:43:53 GMT",
+      "version": "0.4.2",
+      "tag": "@fluentui-react-native/popover_v0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/popover",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "fix tsconfig for jest types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:39 GMT",
       "version": "0.4.0",
       "tag": "@fluentui-react-native/popover_v0.4.0",

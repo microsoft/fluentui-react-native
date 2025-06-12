@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-slot",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "Hook function to use a component as a pluggable slot",
   "repository": {
     "type": "git",
@@ -35,15 +35,16 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.0",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.74.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.73.0 || ^0.74.0"
   },
   "rnx-kit": {
     "kitType": "library",
@@ -51,9 +52,14 @@
       "presets": [
         "microsoft/react-native"
       ],
-      "requirements": [
-        "react-native@0.73"
-      ],
+      "requirements": {
+        "development": [
+          "react-native@0.74"
+        ],
+        "production": [
+          "react-native@0.73 || 0.74"
+        ]
+      },
       "capabilities": [
         "core",
         "core-android",

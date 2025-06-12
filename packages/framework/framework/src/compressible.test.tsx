@@ -8,8 +8,7 @@ import { mergeStyles } from '@fluentui-react-native/merge-props';
 import type { Theme } from '@fluentui-react-native/theme-types';
 import { useSlot, withSlots } from '@fluentui-react-native/use-slot';
 import { applyTokenLayers } from '@fluentui-react-native/use-tokens';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import * as renderer from 'react-test-renderer';
 
 import { compressible } from './compressible';
 import { buildUseTokens } from './useTokens';
@@ -103,32 +102,28 @@ const Label = compressible<LabelProps, LabelTokens>((props: LabelProps, useToken
   };
 }, useLabelTokens);
 
-/**
- * this wrapper solves the (so-far) inexplicable type errors from the matchers in typescript
- */
-function snapshotTestTree(tree: any) {
-  (expect(toJson(tree)) as any).toMatchSnapshot();
-}
-
 describe('compressible tests', () => {
-  /** first render the component with no updates */
   it('Two labels, one with caption and one without', () => {
-    const tree = mount(
-      <View>
-        <Label headerText="Header1" />
-        <Label headerText="Header2" captionText="Caption2" />
-      </View>,
-    );
-    snapshotTestTree(tree);
+    const tree = renderer
+      .create(
+        <View>
+          <Label headerText="Header1" />
+          <Label headerText="Header2" captionText="Caption2" />
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   it('Two labels, one plugging in SuperHeader instead', () => {
-    const tree = mount(
-      <View>
-        <Label headerText="Super Header" headerSlot={SuperHeader} captionText="Normal caption" />
-        <Label headerText="Normal Header" captionText="Another normal caption" />
-      </View>,
-    );
-    snapshotTestTree(tree);
+    const tree = renderer
+      .create(
+        <View>
+          <Label headerText="Super Header" headerSlot={SuperHeader} captionText="Normal caption" />
+          <Label headerText="Normal Header" captionText="Another normal caption" />
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

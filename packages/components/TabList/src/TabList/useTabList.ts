@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 import type { View, AccessibilityState, LayoutRectangle } from 'react-native';
 
 import { memoize, mergeStyles } from '@fluentui-react-native/framework';
 import type { LayoutEvent } from '@fluentui-react-native/interactive-hooks';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 import type { TabListInfo, TabListProps } from './TabList.types';
 import type { AnimatedIndicatorStyles } from '../TabListAnimatedIndicator/TabListAnimatedIndicator.types';
@@ -72,6 +74,41 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     [setTabKeys],
   );
 
+  const incrementSelectedTab = React.useCallback(
+    (goBackward: boolean) => {
+      const currentIndex = tabKeys.indexOf(selectedTabKey);
+
+      const direction = goBackward ? -1 : 1;
+      let increment = 1;
+      let newTabKey: string;
+
+      // We want to only switch selection to non-disabled tabs. This loop allows us to skip over disabled ones.
+      while (increment <= tabKeys.length) {
+        let newIndex = (currentIndex + direction * increment) % tabKeys.length;
+
+        if (newIndex < 0) {
+          newIndex = tabKeys.length + newIndex;
+        }
+
+        newTabKey = tabKeys[newIndex];
+
+        if (disabledStateMap[newTabKey]) {
+          increment += 1;
+        } else {
+          break;
+        }
+      }
+
+      // Unable to find a non-disabled next tab, early return
+      if (increment > tabKeys.length) {
+        return;
+      }
+
+      data.onKeySelect(newTabKey);
+    },
+    [data, disabledStateMap, selectedTabKey, tabKeys],
+  );
+
   // State variables and functions for saving layout info and other styling information to style the animated indicator.
   const [listLayoutMap, setListLayoutMap] = React.useState<{ [key: string]: LayoutRectangle }>({});
   const [tabListLayout, setTabListLayout] = React.useState<LayoutRectangle>();
@@ -127,6 +164,19 @@ export const useTabList = (props: TabListProps): TabListInfo => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelectedTabDisabled]);
 
+  // win32 only prop used to implemement CTRL + TAB shortcut native to windows tab components
+  const onRootKeyDown = React.useCallback(
+    (e: IKeyboardEvent) => {
+      if ((Platform.OS as string) === 'win32' && e.nativeEvent.key === 'Tab' && e.nativeEvent.ctrlKey) {
+        incrementSelectedTab(e.nativeEvent.shiftKey);
+        setInvoked(true); // on win32, set focus on the new tab without triggering narration twice
+      }
+
+      props.onKeyDown?.(e);
+    },
+    [incrementSelectedTab, props],
+  );
+
   return {
     props: {
       ...props,
@@ -137,6 +187,7 @@ export const useTabList = (props: TabListProps): TabListInfo => {
       componentRef: componentRef,
       defaultTabbableElement: focusedTabRef,
       isCircularNavigation: isCircularNavigation ?? false,
+      onKeyDown: onRootKeyDown,
       onLayout: onTabListLayout,
       size: size,
       vertical: vertical,

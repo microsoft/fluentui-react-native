@@ -16,8 +16,7 @@
     "noUnusedLocals": true,
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
-    "lib": ["es6"],
-    "types": ["node", "jest"]
+    "lib": ["es6"]
   },
   "include": ["src"]
 }

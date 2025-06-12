@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { Input } from '../Input';
@@ -41,17 +40,5 @@ describe('Input component tests', () => {
   it('Input in error state', () => {
     const tree = renderer.create(<Input error="Error" />).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('Input simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(() => <Input />, 2);
-  });
-
-  it('Input re-renders correctly', () => {
-    checkReRender(() => <Input />, 2);
-  });
-
-  it('Input with placeholder', () => {
-    checkReRender(() => <Input placeholder="Test" accessoryIcon={null} />, 2);
   });
 });

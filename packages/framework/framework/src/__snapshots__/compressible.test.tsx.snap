@@ -3,192 +3,92 @@
 exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] = `
 <View>
   <View>
-    <component
-      captionText="Normal caption"
-      headerSlot={[Function]}
-      headerText="Super Header"
+    <Text
+      style={
+        {
+          "color": "purple",
+          "fontSize": 24,
+          "fontWeight": "700",
+        }
+      }
     >
-      <View>
-        <View>
-          <Text
-            style={
-              {
-                "color": "purple",
-                "fontSize": 24,
-                "fontWeight": "700",
-              }
-            }
-          >
-            <Text
-              style={
-                {
-                  "color": "purple",
-                  "fontSize": 24,
-                  "fontWeight": "700",
-                }
-              }
-            >
-              Super Header
-            </Text>
-          </Text>
-          <Text
-            style={
-              {
-                "color": "gray",
-                "fontSize": 12,
-                "fontWeight": "300",
-              }
-            }
-          >
-            <Text
-              style={
-                {
-                  "color": "gray",
-                  "fontSize": 12,
-                  "fontWeight": "300",
-                }
-              }
-            >
-              Normal caption
-            </Text>
-          </Text>
-        </View>
-      </View>
-    </component>
-    <component
-      captionText="Another normal caption"
-      headerText="Normal Header"
+      Super Header
+    </Text>
+    <Text
+      style={
+        {
+          "color": "gray",
+          "fontSize": 12,
+          "fontWeight": "300",
+        }
+      }
     >
-      <View>
-        <View>
-          <Text
-            style={
-              {
-                "color": "blue",
-                "fontSize": 16,
-                "fontWeight": "700",
-              }
-            }
-          >
-            <Text
-              style={
-                {
-                  "color": "blue",
-                  "fontSize": 16,
-                  "fontWeight": "700",
-                }
-              }
-            >
-              Normal Header
-            </Text>
-          </Text>
-          <Text
-            style={
-              {
-                "color": "gray",
-                "fontSize": 12,
-                "fontWeight": "300",
-              }
-            }
-          >
-            <Text
-              style={
-                {
-                  "color": "gray",
-                  "fontSize": 12,
-                  "fontWeight": "300",
-                }
-              }
-            >
-              Another normal caption
-            </Text>
-          </Text>
-        </View>
-      </View>
-    </component>
+      Normal caption
+    </Text>
+  </View>
+  <View>
+    <Text
+      style={
+        {
+          "color": "blue",
+          "fontSize": 16,
+          "fontWeight": "700",
+        }
+      }
+    >
+      Normal Header
+    </Text>
+    <Text
+      style={
+        {
+          "color": "gray",
+          "fontSize": 12,
+          "fontWeight": "300",
+        }
+      }
+    >
+      Another normal caption
+    </Text>
   </View>
 </View>
 `;
 
 exports[`compressible tests Two labels, one with caption and one without 1`] = `
 <View>
+  <Text
+    style={
+      {
+        "color": "blue",
+        "fontSize": 16,
+        "fontWeight": "700",
+      }
+    }
+  >
+    Header1
+  </Text>
   <View>
-    <component
-      headerText="Header1"
-    >
-      <Text
-        style={
-          {
-            "color": "blue",
-            "fontSize": 16,
-            "fontWeight": "700",
-          }
+    <Text
+      style={
+        {
+          "color": "blue",
+          "fontSize": 16,
+          "fontWeight": "700",
         }
-      >
-        <Text
-          style={
-            {
-              "color": "blue",
-              "fontSize": 16,
-              "fontWeight": "700",
-            }
-          }
-        >
-          Header1
-        </Text>
-      </Text>
-    </component>
-    <component
-      captionText="Caption2"
-      headerText="Header2"
+      }
     >
-      <View>
-        <View>
-          <Text
-            style={
-              {
-                "color": "blue",
-                "fontSize": 16,
-                "fontWeight": "700",
-              }
-            }
-          >
-            <Text
-              style={
-                {
-                  "color": "blue",
-                  "fontSize": 16,
-                  "fontWeight": "700",
-                }
-              }
-            >
-              Header2
-            </Text>
-          </Text>
-          <Text
-            style={
-              {
-                "color": "gray",
-                "fontSize": 12,
-                "fontWeight": "300",
-              }
-            }
-          >
-            <Text
-              style={
-                {
-                  "color": "gray",
-                  "fontSize": 12,
-                  "fontWeight": "300",
-                }
-              }
-            >
-              Caption2
-            </Text>
-          </Text>
-        </View>
-      </View>
-    </component>
+      Header2
+    </Text>
+    <Text
+      style={
+        {
+          "color": "gray",
+          "fontSize": 12,
+          "fontWeight": "300",
+        }
+      }
+    >
+      Caption2
+    </Text>
   </View>
 </View>
 `;

@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:52 GMT",
+      "version": "0.21.16",
+      "tag": "@fluentui-react-native/radio-group_v0.21.16",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 23:43:53 GMT",
+      "version": "0.21.14",
+      "tag": "@fluentui-react-native/radio-group_v0.21.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "5ca24ac45054439768404d117213a2ae4767235d",
+            "comment": "remove enzyme tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:11 GMT",
+      "version": "0.21.12",
+      "tag": "@fluentui-react-native/radio-group_v0.21.12",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 24 Apr 2024 01:07:49 GMT",
       "version": "0.21.3",
       "tag": "@fluentui-react-native/radio-group_v0.21.3",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Fri, 12 Apr 2024 21:02:37 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 29 Jan 2025 23:43:55 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.12.8
+
+Wed, 29 Jan 2025 23:43:55 GMT
+
+### Patches
+
+- fix tsconfig for jest types (sanajmi@microsoft.com)
 
 ## 1.12.1
 

@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Mon, 15 Jul 2024 20:20:33 GMT and should not be manually modified.
+<!-- This log was last generated on Thu, 20 Feb 2025 23:25:58 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.23.8
+
+Thu, 20 Feb 2025 23:25:58 GMT
+
+### Patches
+
+- Simplify code to find child string of LinkV1 (krsiler@microsoft.com)
+
+## 0.23.7
+
+Tue, 11 Feb 2025 00:34:01 GMT
+
+### Patches
+
+- Remove text from Link a11y tree and add a11yLabel (krsiler@microsoft.com)
+
+## 0.23.6
+
+Wed, 29 Jan 2025 23:43:53 GMT
+
+### Patches
+
+- remove enzyme tests (sanajmi@microsoft.com)
+
+## 0.23.2
+
+Wed, 13 Nov 2024 19:00:29 GMT
+
+### Patches
+
+- Port logic for inline link for macOS (ruaraki@microsoft.com)
 
 ## 0.23.0
 

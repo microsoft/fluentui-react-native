@@ -2,6 +2,122 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:43 GMT",
+      "version": "0.38.45",
+      "tag": "@fluentui-react-native/tester-win32_v0.38.45",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "f605776d18ad0c65cd19fbc710506f82a583b3fd",
+            "comment": "Manually update version of packages to match npm"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "ff2088a94a1b13d0d8dddea54537f7da3dc96e58",
+            "comment": "Removed unused `ts-node` dependency"
+          }
+        ],
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "bca01fc0abe5d0e87139da54c919807629f4e6ae",
+            "comment": "Bump rex as a test of publishing"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Mar 2025 20:26:46 GMT",
+      "version": "0.38.43",
+      "tag": "@fluentui-react-native/tester-win32_v0.38.43",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "7a39e34892d31edfc1a3c9386e354f840539348a",
+            "comment": "Updating some rnx=kit packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jan 2025 17:33:31 GMT",
+      "version": "0.38.33",
+      "tag": "@fluentui-react-native/tester-win32_v0.38.33",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "2181d9814da59b9c5593d5bd7be8c6e93afbdacb",
+            "comment": "Manually bump packages"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jan 2025 19:12:10 GMT",
+      "version": "0.38.32",
+      "tag": "@fluentui-react-native/tester-win32_v0.38.32",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "a87220d3258b089f416d32e6a45dc26f0427ea2f",
+            "comment": "Bump packages"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "0a748a0946bed101d8029dea54f76a396aef3483",
+            "comment": "Publish fix"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Oct 2024 06:44:24 GMT",
+      "version": "0.38.28",
+      "tag": "@fluentui-react-native/tester-win32_v0.38.28",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "c4a121acd36f0a18fbd931ed8092ede7a7ce9094",
+            "comment": "Fix repo links check"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Sep 2024 05:53:19 GMT",
+      "version": "0.38.26",
+      "tag": "@fluentui-react-native/tester-win32_v0.38.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "ppatboyd@outlook.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "7d1fa1e8c9aab65745ceb4e19efda75fd06e33bb",
+            "comment": "Callout test page additions to test new focusWindow/blurWindow APIs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Apr 2024 19:08:10 GMT",
       "version": "0.38.2",
       "tag": "@fluentui-react-native/tester-win32_v0.38.2",

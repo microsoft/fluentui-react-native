@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Pressable } from 'react-native';
 
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
 import { useKeyProps } from '../useKeyProps';
@@ -36,21 +35,4 @@ it('useKeyProps called twice', () => {
 
   const tree = renderer.create(<TestComponent />).toJSON();
   expect(tree).toMatchSnapshot();
-});
-
-it('Pressable with useKeyProps simple rendering does not invalidate styling', () => {
-  const TestComponent = () => {
-    const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
-    return <PressableWithDesktopProps {...keyboardProps} />;
-  };
-
-  checkRenderConsistency(() => <TestComponent />, 2);
-});
-
-it('Pressable with useKeyProps re-renders correctly', () => {
-  const TestComponent = () => {
-    const keyboardProps = useKeyProps(dummyFunction, ' ', 'Enter');
-    return <PressableWithDesktopProps {...keyboardProps} />;
-  };
-  checkReRender(() => <TestComponent />, 2);
 });

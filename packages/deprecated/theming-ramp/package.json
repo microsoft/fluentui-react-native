@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-ramp",
-  "version": "0.20.0",
+  "version": "0.20.2",
   "description": "Theming Library",
   "repository": {
     "type": "git",
@@ -39,12 +39,33 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
+    "@react-native/metro-config": "^0.74.0",
     "@types/jest": "^29.0.0",
     "@types/react": "^18.2.0",
-    "react": "18.2.0"
+    "react": "18.2.0",
+    "react-native": "^0.74.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.73.0 || ^0.74.0"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": {
+        "development": [
+          "react-native@0.74"
+        ],
+        "production": [
+          "react-native@0.73 || 0.74"
+        ]
+      },
+      "capabilities": [
+        "core"
+      ]
+    }
   }
 }
