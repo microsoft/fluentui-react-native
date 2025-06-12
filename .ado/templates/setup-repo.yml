@@ -5,6 +5,11 @@ steps:
       versionSpec: '5.6.0'
     displayName: 'Install Nuget'
 
+  - task: UseNode@1
+    inputs:
+      versionSpec: '22.x'
+    displayName: 'Use Node.js 22.x'
+
   - script: |
       yarn
     displayName: 'yarn install'
