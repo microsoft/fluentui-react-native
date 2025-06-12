@@ -68,6 +68,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   renderToHardwareTextureAndroid: true,
   role: true,
   style: true,
+  tabIndex: true,
   testID: true,
   'aria-busy': true,
   'aria-checked': true,

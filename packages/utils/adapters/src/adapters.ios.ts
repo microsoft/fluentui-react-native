@@ -28,6 +28,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   importantForAccessibility: true,
   isTVSelectable: true,
   nativeID: true,
+  needsOffscreenAlphaCompositing: true,
   onAccessibilityAction: true,
   onAccessibilityEscape: true,
   onAccessibilityTap: true,

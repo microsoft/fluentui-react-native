@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-<!-- This log was last generated on Mon, 10 Mar 2025 20:26:46 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 11 Jun 2025 19:34:43 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.38.45
+
+Wed, 11 Jun 2025 19:34:43 GMT
+
+### Patches
+
+- Bump rex as a test of publishing (ruaraki@microsoft.com)
 
 ## 0.38.43
 

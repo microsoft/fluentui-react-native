@@ -2,6 +2,41 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:43 GMT",
+      "version": "0.38.45",
+      "tag": "@fluentui-react-native/tester-win32_v0.38.45",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "f605776d18ad0c65cd19fbc710506f82a583b3fd",
+            "comment": "Manually update version of packages to match npm"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "ff2088a94a1b13d0d8dddea54537f7da3dc96e58",
+            "comment": "Removed unused `ts-node` dependency"
+          }
+        ],
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "bca01fc0abe5d0e87139da54c919807629f4e6ae",
+            "comment": "Bump rex as a test of publishing"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 10 Mar 2025 20:26:46 GMT",
       "version": "0.38.43",
       "tag": "@fluentui-react-native/tester-win32_v0.38.43",

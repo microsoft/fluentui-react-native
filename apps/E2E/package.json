@@ -23,9 +23,9 @@
   ],
   "dependencies": {
     "react": "18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0",
-    "react-native-windows": "^0.73.0"
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-windows": "^0.74.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
@@ -33,9 +33,9 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-babel-transformer": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-babel-transformer": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/metro-config": "^2.0.0",
     "@types/jasmine": "5.1.4",
     "@types/node": "^22.2.0",
@@ -52,7 +52,7 @@
     "appium-uiautomator2-driver": "^3.0.5",
     "appium-windows-driver": "^2.12.18",
     "appium-xcuitest-driver": "^7.9.1",
-    "metro-config": "^0.80.0",
+    "metro-config": "^0.80.3",
     "rimraf": "^5.0.1",
     "ts-node": "^10.7.0",
     "typescript": "4.9.4",
@@ -68,7 +68,7 @@
         "microsoft/react-native"
       ],
       "requirements": [
-        "react-native@0.73"
+        "react-native@0.74"
       ],
       "capabilities": [
         "core",

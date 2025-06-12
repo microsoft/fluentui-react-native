@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:58 GMT",
+      "version": "0.10.13",
+      "tag": "@fluentui-react-native/dropdown_v0.10.13",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jan 2025 19:12:12 GMT",
       "version": "0.10.11",
       "tag": "@fluentui-react-native/dropdown_v0.10.11",

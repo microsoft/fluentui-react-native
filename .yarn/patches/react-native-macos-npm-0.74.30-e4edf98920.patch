@@ -1,0 +1,12 @@
+diff --git a/Libraries/Text/Text.d.ts b/Libraries/Text/Text.d.ts
+index db7aea477d51e1105cc5795dd5547a4ab3e052c2..ca69c7d49712449891cbe80f37c4c1ef7763668a 100644
+--- a/Libraries/Text/Text.d.ts
++++ b/Libraries/Text/Text.d.ts
+@@ -16,6 +16,7 @@ import {TextStyle} from '../StyleSheet/StyleSheetTypes';
+ import {
+   GestureResponderEvent,
+   LayoutChangeEvent,
++  MouseEvent,
+   NativeSyntheticEvent,
+   TextLayoutEventData,
+ } from '../Types/CoreEventTypes';

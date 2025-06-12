@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-activity-indicator",
   "entries": [
     {
+      "date": "Wed, 11 Jun 2025 19:34:57 GMT",
+      "version": "0.10.3",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.10.3",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "commit": "2342b87a20e5a584bd2073c8c5a266f0aa48c8bb",
+            "comment": "Added missing dev dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Apr 2024 21:02:38 GMT",
       "version": "0.10.1",
       "tag": "@fluentui-react-native/experimental-activity-indicator_v0.10.1",
