@@ -33,8 +33,6 @@ const theme = new ThemeReference(createDefaultTheme(),
 </ThemeProvider>
 ```
 
-A good example of a custom theme from our repo is [the Caterpillar theme in the Tester App](../../../apps/fluent-tester/src/theme/applyTheme.ts).
-
 ### `ThemeReference` from scratch
 
 You can create your own `ThemeReference` and pass it into the `ThemeProvider`. To create a `ThemeReference` you'll need to create a new instance of `ThemeReference`. You can find the type definition [here](../../../packages/framework/theme/src/themeReference.ts).
