@@ -115,7 +115,6 @@ exports[`ContextualMenu default 1`] = `
         },
       ]
     }
-    tintColor="#616161"
     vbHeight={6}
     vbWidth={11}
     width={12}

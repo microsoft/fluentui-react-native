@@ -87,12 +87,13 @@
     "@react-native-community/slider": "^4.2.0",
     "@react-native-menu/menu": "^0.7.3",
     "@react-native-picker/picker": "^2.7.0",
+    "@types/react": "~18.2.0",
     "@warren-ms/react-native-icons": "^0.0.13",
     "react": "18.2.0",
-    "react-native": "^0.73.0",
-    "react-native-macos": "^0.73.0",
-    "react-native-svg": "^15.0.0",
-    "react-native-windows": "^0.73.0",
+    "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
+    "react-native-svg": "^15.4.0",
+    "react-native-windows": "^0.74.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
@@ -101,9 +102,9 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-babel-transformer": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-babel-transformer": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/cli": "^0.18.0",
     "@rnx-kit/metro-config": "^2.0.0",
     "@types/jasmine": "5.1.4",
@@ -111,14 +112,14 @@
     "@wdio/globals": "^8.40.0",
     "@wdio/jasmine-framework": "^8.40.0",
     "flow-bin": "^0.113.0",
-    "metro-config": "^0.80.0",
+    "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^3.4.7",
+    "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
     "webdriverio": "^8.40.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.73.0"
+    "@office-iss/react-native-win32": "^0.74.0"
   },
   "jest": {
     "preset": "react-native"
@@ -177,7 +178,7 @@
         "@fluentui-react-native/scripts/align-deps-preset.js"
       ],
       "requirements": [
-        "react-native@0.73"
+        "react-native@0.74"
       ],
       "capabilities": [
         "core-android",

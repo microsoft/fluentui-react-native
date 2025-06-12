@@ -23,7 +23,7 @@
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
-    "align-deps": "rnx-align-deps --requirements react-native@0.73",
+    "align-deps": "rnx-align-deps --requirements react-native@0.74",
     "depcheck": "yarn align-deps && lage depcheck",
     "lint": "lage lint",
     "preinstall": "node ./scripts/use-yarn-please.js",
@@ -39,9 +39,9 @@
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
-    "@react-native/babel-preset": "^0.73.0",
-    "@react-native/metro-babel-transformer": "^0.73.0",
-    "@react-native/metro-config": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-babel-transformer": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/align-deps": "^3.0.0",
     "babel-jest": "^29.7.0",
     "beachball": "^2.20.0",
@@ -51,12 +51,12 @@
     "markdown-link-check": "^3.8.7",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.74.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.0"
+    "react-native": "^0.73.0 || ^0.74.0"
   },
   "workspaces": [
     "apps/*",
@@ -64,16 +64,13 @@
     "scripts"
   ],
   "resolutions": {
-    "axios": "^1.8.2",
-    "es5-ext": "0.10.63",
-    "express": "^4.19.2",
     "@types/react": "^18.2.0",
-    "micromatch": "^4.0.0",
-    "react-native-svg": "^15.0.0",
+    "@warren-ms/react-native-icons/react-native-svg": "^15.4.0",
+    "axios": "^1.8.2",
+    "react-native-macos": "patch:react-native-macos@npm%3A0.74.30#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch",
     "semver": "^7.5.2",
     "tar-fs": "^3.0.9",
     "ws": "^8.17.1",
-    "xml2js": "^0.5.0",
     "yaml": "^2.2.2"
   },
   "rnx-kit": {
@@ -82,9 +79,14 @@
       "presets": [
         "microsoft/react-native"
       ],
-      "requirements": [
-        "react-native@0.73"
-      ],
+      "requirements": {
+        "development": [
+          "react-native@0.74"
+        ],
+        "production": [
+          "react-native@0.73 || 0.74"
+        ]
+      },
       "capabilities": [
         "babel-preset-react-native",
         "core",
