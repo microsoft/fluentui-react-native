@@ -27,6 +27,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     const defaultComponentRef = React.useRef(null);
     const {
       disabled,
+      expanded,
       itemKey,
       icon,
       text,
@@ -114,6 +115,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       disabled: userProps.disabled,
       content: !!text,
       icon: !!icon,
+      expanded: !!expanded,
     };
 
     const showSubmenuOnKeyDown = React.useCallback(
@@ -145,9 +147,26 @@ export const SubmenuItem = compose<SubmenuItemType>({
      * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
      */
     const onKeyDownProps = useKeyDownProps(showSubmenuOnKeyDown, ' ', 'Enter', 'ArrowLeft', 'ArrowRight');
-    const onAccTap = onAccessibilityTap ?? onItemPress;
+    const onAccTap = onAccessibilityTap ?? onItemPress; // grab the styling information, referencing the state as well as the props
 
-    // grab the styling information, referencing the state as well as the props
+    // Default accessibility actions to help screen readers announce expanded/collapsed state
+    const defaultAccessibilityActions = React.useMemo(
+      () => [
+        { name: 'Expand', label: 'Expand submenu' },
+        { name: 'Collapse', label: 'Collapse submenu' },
+      ],
+      [],
+    );
+
+    // Merge user accessibility actions with defaults
+    const finalAccessibilityActions = React.useMemo(() => {
+      const userActions = userProps.accessibilityActions;
+      if (userActions && userActions.length > 0) {
+        return [...defaultAccessibilityActions, ...userActions];
+      }
+      return defaultAccessibilityActions;
+    }, [userProps.accessibilityActions, defaultAccessibilityActions]);
+
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
     const slotProps = mergeSettings<SubmenuItemSlotProps>(styleProps, {
@@ -155,15 +174,16 @@ export const SubmenuItem = compose<SubmenuItemType>({
         ref: cmRef,
         ...pressablePropsModified,
         ...onKeyDownProps,
+        ...rest,
         accessible: true,
         accessibilityLabel: accessibilityLabel,
         accessibilityRole: 'menuitem',
-        accessibilityState: { disabled: state.disabled ?? false, selected: state.selected },
+        accessibilityState: { disabled: state.disabled ?? false, expanded: expanded ?? false, selected: state.selected },
         accessibilityValue: { text: itemKey },
+        accessibilityActions: finalAccessibilityActions,
         disabled,
         focusable: !disabled,
         onAccessibilityTap: onAccTap,
-        ...rest,
       },
       content: {
         accessible: false,
