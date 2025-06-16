@@ -147,7 +147,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
      * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
      */
     const onKeyDownProps = useKeyDownProps(showSubmenuOnKeyDown, ' ', 'Enter', 'ArrowLeft', 'ArrowRight');
-    const onAccTap = onAccessibilityTap ?? onItemPress; // grab the styling information, referencing the state as well as the props
+    const onAccTap = onAccessibilityTap ?? onItemPress;
 
     // Default accessibility actions to help screen readers announce expanded/collapsed state
     const defaultAccessibilityActions = React.useMemo(
