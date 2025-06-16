@@ -20,7 +20,7 @@ const PLATFORM = process.env['E2ETEST_PLATFORM'] as Platform;
 const NATIVE_TESTING = process.env['NATIVE_TESTING'] == 'true';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
-let rootView: WebdriverIO.Element | null = null;
+let rootView: WebdriverIO.Element | ChainablePromiseElement | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
@@ -37,7 +37,7 @@ async function QueryWithChaining(identifier) {
     rootView = await $('~' + ROOT_VIEW);
   }
   const selector = '~' + identifier;
-  let queryResult: WebdriverIO.Element;
+  let queryResult: WebdriverIO.Element | ChainablePromiseElement;
   queryResult = await rootView.$(selector);
   if (queryResult.error) {
     // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
@@ -133,7 +133,7 @@ export abstract class BasePage {
    * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
    * the expected and actual values don't match. This should be called for attribute tests in specs. */
   async compareAttribute(
-    element: Promise<WebdriverIO.Element>,
+    element: WebdriverIO.Element | ChainablePromiseElement,
     attribute: Attribute | AndroidAttribute,
     expectedValue: any,
   ): Promise<boolean> {
