@@ -115,7 +115,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
       disabled: userProps.disabled,
       content: !!text,
       icon: !!icon,
-      expanded: !!expanded,
     };
 
     const showSubmenuOnKeyDown = React.useCallback(

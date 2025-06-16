@@ -18,12 +18,7 @@ export interface SubmenuItemProps extends ContextualMenuItemProps {
   expanded?: boolean;
 }
 
-export interface SubmenuItemState extends ContextualMenuItemState {
-  /**
-   * Whether the submenu is currently expanded/visible
-   */
-  expanded?: boolean;
-}
+export type SubmenuItemState = ContextualMenuItemState;
 
 export interface SubmenuItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
