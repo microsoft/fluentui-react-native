@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Bump our version of use-subscription",
+  "packageName": "@fluentui-react-native/experimental-appearance-additions",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
