@@ -9,18 +9,20 @@ exports.config = {
   /* UWP controls are a subset of the Win32 controls. Only some work on our UWP test app,
   so we must specify which ones we want to test here. */
   specs: [
-    'src/ActivityIndicator/specs/*.win.ts',
-    'src/ButtonLegacy/specs/*.win.ts',
-    'src/CheckboxLegacy/specs/*.win.ts', // See spec file for more information
-    'src/LinkLegacy/specs/*.win.ts',
-    'src/PersonaCoin/specs/*.win.ts',
-    'src/Pressable/specs/*.win.ts',
-    'src/Separator/specs/*.win.ts',
-    'src/TabsLegacy/specs/*.windows.ts', // See spec file for more information
-    'src/TextLegacy/specs/*.win.ts',
-    'src/TextV1/specs/*.win.ts',
-    'src/Theme/specs/*.win.ts',
-    'src/Tokens/specs/*.win.ts',
+    [
+      'src/ActivityIndicator/specs/*.win.ts',
+      'src/ButtonLegacy/specs/*.win.ts',
+      'src/CheckboxLegacy/specs/*.win.ts', // See spec file for more information
+      'src/LinkLegacy/specs/*.win.ts',
+      'src/PersonaCoin/specs/*.win.ts',
+      'src/Pressable/specs/*.win.ts',
+      'src/Separator/specs/*.win.ts',
+      'src/TabsLegacy/specs/*.windows.ts', // See spec file for more information
+      'src/TextLegacy/specs/*.win.ts',
+      'src/TextV1/specs/*.win.ts',
+      'src/Theme/specs/*.win.ts',
+      'src/Tokens/specs/*.win.ts',
+    ],
   ],
   exclude: [
     /* 'path/to/excluded/files' */
@@ -160,7 +162,7 @@ exports.config = {
    */
   afterTest: (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
-    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration/600).toFixed(2)}s". \n`);
+    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration / 600).toFixed(2)}s". \n`);
 
     // if test passed, ignore, else take and save screenshot.
     if (results.passed) {

@@ -6,7 +6,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['src/**/specs/*.macos.ts'],
+  specs: [['src/**/specs/*.macos.ts']],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -156,7 +156,7 @@ exports.config = {
    */
   afterTest: (test, context, results) => {
     const resultString = results.passed ? 'Passed' : 'Failed';
-    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration/600).toFixed(2)}s". \n`);
+    console.log(`\nTest Case: "${test.description}".\nResult: "${resultString}".\nDuration: "${(results.duration / 600).toFixed(2)}s". \n`);
 
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
