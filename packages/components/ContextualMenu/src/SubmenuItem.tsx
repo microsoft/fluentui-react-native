@@ -149,13 +149,16 @@ export const SubmenuItem = compose<SubmenuItemType>({
     const onAccTap = onAccessibilityTap ?? onItemPress;
 
     // Default accessibility actions to help screen readers announce expanded/collapsed state
-    const defaultAccessibilityActions = React.useMemo(
-      () => [
-        { name: 'Expand', label: 'Expand submenu' },
-        { name: 'Collapse', label: 'Collapse submenu' },
-      ],
-      [],
-    );
+    // Only provide on win32 to follow platform-specific accessibility patterns
+    const defaultAccessibilityActions = React.useMemo(() => {
+      if (Platform.OS === ('win32' as any)) {
+        return [
+          { name: 'Expand', label: 'Expand submenu' },
+          { name: 'Collapse', label: 'Collapse submenu' },
+        ];
+      }
+      return [];
+    }, []);
 
     // Merge user accessibility actions with defaults
     const finalAccessibilityActions = React.useMemo(() => {
