@@ -219,6 +219,7 @@ const NestedContextualMenu: React.FunctionComponent = () => {
             itemKey="4"
             onHoverIn={toggleShowSubmenu}
             componentRef={stdMenuItemRef}
+            expanded={showSubmenu}
           />
           {showSubmenu && (
             <Submenu target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
@@ -446,6 +447,7 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
             itemKey="3"
             onHoverIn={toggleShowSubmenu}
             componentRef={stdMenuItemRef}
+            expanded={showSubmenu}
           />
           {showSubmenu && (
             <Submenu

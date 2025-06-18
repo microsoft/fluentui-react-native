@@ -11,7 +11,12 @@ export const submenuItemName = 'SubmenuItem';
 export interface SubmenuItemTokens extends ContextualMenuItemTokens {
   chevronColor?: string;
 }
-export type SubmenuItemProps = ContextualMenuItemProps;
+export interface SubmenuItemProps extends ContextualMenuItemProps {
+  /**
+   * Whether the submenu is currently expanded/visible
+   */
+  expanded?: boolean;
+}
 
 export type SubmenuItemState = ContextualMenuItemState;
 
