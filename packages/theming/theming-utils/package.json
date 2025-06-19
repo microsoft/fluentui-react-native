@@ -40,6 +40,7 @@
     "@types/react": "~18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
+    "react-native-macos": "^0.74.0",
     "react-native-windows": "^0.74.0"
   },
   "peerDependencies": {
@@ -66,9 +67,11 @@
         ]
       },
       "capabilities": [
+        "babel-preset-react-native",
         "core",
         "core-android",
         "core-ios",
+        "core-macos",
         "core-windows",
         "react"
       ]

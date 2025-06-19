@@ -1,22 +1,26 @@
 module.exports = {
+  0.73: {
+    'core-win32': {
+      name: '@office-iss/react-native-win32',
+      version: '^0.73.0',
+      capabilities: ['core'],
+    },
+    'react-dom': {
+      name: 'react-dom',
+      version: '~18.2.0',
+      capabilities: ['react'],
+    },
+  },
   0.74: {
-    "react-dom": {
-      name: "react-dom",
-      version: "~18.2.0",
-      capabilities: ["react"],
+    'core-win32': {
+      name: '@office-iss/react-native-win32',
+      version: '^0.74.0',
+      capabilities: ['core'],
+    },
+    'react-dom': {
+      name: 'react-dom',
+      version: '~18.2.0',
+      capabilities: ['react'],
     },
   },
-  0.68: {
-    jest: {
-      name: 'jest',
-      version: '^27.0.0',
-      devOnly: true,
-    },
-    'test-app': {
-      name: 'react-native-test-app',
-      version: '^2.0.2',
-      devOnly: true,
-    },
-  },
-  0.71: {},
 };

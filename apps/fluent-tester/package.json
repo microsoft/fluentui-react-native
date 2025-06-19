@@ -84,6 +84,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
+    "@office-iss/react-native-win32": "^0.74.0",
     "@react-native-community/slider": "^4.2.0",
     "@react-native-menu/menu": "^0.7.3",
     "@react-native-picker/picker": "^2.7.0",
@@ -117,9 +118,6 @@
     "react-native-test-app": "^3.9.2",
     "react-test-renderer": "18.2.0",
     "webdriverio": "^8.40.0"
-  },
-  "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0"
   },
   "jest": {
     "preset": "react-native"
@@ -181,12 +179,14 @@
         "react-native@0.74"
       ],
       "capabilities": [
+        "babel-preset-react-native",
         "core-android",
         "core-ios",
         "core-macos",
+        "core-win32",
         "core-windows",
-        "babel-preset-react-native",
         "metro-config",
+        "metro-react-native-babel-transformer",
         "react",
         "react-test-renderer",
         "svg",

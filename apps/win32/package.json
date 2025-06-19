@@ -98,6 +98,7 @@
         "babel-preset-react-native",
         "core",
         "metro-config",
+        "metro-react-native-babel-transformer",
         "react",
         "react-test-renderer",
         "svg"
