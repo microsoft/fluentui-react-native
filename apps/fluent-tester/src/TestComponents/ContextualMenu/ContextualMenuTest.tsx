@@ -295,6 +295,9 @@ const IconContextualMenu: React.FunctionComponent = () => {
             style={{ borderWidth: 0 }}
             icon={{ svgSource: svgProps, width: 12, height: 12 }}
             onClick={toggleShowContextualMenu}
+            accessibilityLabel="Icon"
+            accessibilityRole="button"
+            accessibilityState={{ expanded: isContextualMenuVisible }}
           />
         </View>
       </View>
