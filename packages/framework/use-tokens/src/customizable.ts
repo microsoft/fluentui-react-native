@@ -6,7 +6,10 @@ import type { TokenSettings, UseTokens } from './buildUseTokens';
  * A component implementation, with a use tokens hook passed in. Implementing it this way allows the useTokens hook to be
  * modified by the customization handler
  */
-export type InjectableComponent<TProps, TTokens, TTheme> = (props: TProps, useTokens: UseTokens<TTokens, TTheme>) => JSX.Element | null;
+export type InjectableComponent<TProps, TTokens, TTheme> = (
+  props: TProps,
+  useTokens: UseTokens<TTokens, TTheme>,
+) => React.ReactElement | null;
 
 /**
  * A component with an attached customize function, used to create alternatively styled versions of the component
@@ -18,7 +21,7 @@ export type CustomizableComponent<TProps, TTokens, TTheme> = React.FunctionCompo
 /**
  * Function helper for easily creating a customizable component based on the useTokens hook
  *
- * @param injectable - a function component implementation, written in (props, useTokens) => JSX.Element form
+ * @param injectable - a function component implementation, written in (props, useTokens) => React.ReactElement form
  * @param useTokens - a hook function, generally built via buildUseTokens, used to retrieve design tokens for the component
  *
  * @returns - a function component that has a static function called customize attached. Customize will return a

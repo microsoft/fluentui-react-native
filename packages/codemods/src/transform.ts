@@ -28,7 +28,7 @@ export const yargsParse = (args: string[]): argsType => {
       choices: ['button-v0-to-v1', 'deprecate-exports'],
     })
     .demandOption(['path', 'transform'])
-    .parseSync(args);
+    .parse(args);
 };
 
 export const transform = (args: argsType) => {

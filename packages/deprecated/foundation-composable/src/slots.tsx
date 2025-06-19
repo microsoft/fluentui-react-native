@@ -3,6 +3,10 @@ import * as React from 'react';
 import type { ISlotFn } from './Composable.slots';
 import type { INativeSlotType } from './Composable.types';
 
+function isComposableFunctionComponent<TProps>(slot: INativeSlotType | ISlotFn<TProps>): slot is ISlotFn<TProps> {
+  return typeof slot === 'function' && (slot as ISlotFn<TProps>)._canCompose;
+}
+
 /**
  * Renders a slot
  *
@@ -11,8 +15,8 @@ import type { INativeSlotType } from './Composable.types';
  * @param children - the children to pass down to the slot
  */
 export function renderSlot<TProps>(slot: INativeSlotType | ISlotFn<TProps>, extraProps: TProps, ...children: React.ReactNode[]) {
-  return typeof slot === 'function' && (slot as ISlotFn<TProps>)._canCompose
-    ? (slot as ISlotFn<TProps>)(extraProps, ...children)
+  return isComposableFunctionComponent(slot)
+    ? slot(extraProps, ...children)
     : React.createElement(slot, extraProps, ...children);
 }
 

@@ -5,7 +5,11 @@ import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPr
 import { mergeSettings, ISlotProps } from '@uifabricshared/foundation-settings';
 import { mergeProps } from '@fluentui-react-native/merge-props';
 
-export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
+interface LegacyFunctionComponent<P = unknown> extends React.FunctionComponent<P> {
+  (props: P, ...children: React.ReactNode[]): React.ReactElement<any, any> | null;
+}
+
+export type ISlotFn<TProps> = LegacyFunctionComponent<TProps> & {
   _canCompose?: boolean;
 };
 

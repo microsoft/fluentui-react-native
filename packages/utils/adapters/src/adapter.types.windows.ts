@@ -94,73 +94,80 @@ export type AccessibilityAnnotationInfo = Readonly<{
   target?: string;
 }>;
 
-export type IAdapterWindowsViewProps = ViewProps & {
-  onKeyDown?: (args: IKeyboardEvent) => void;
-  onKeyDownCapture?: (args: IKeyboardEvent) => void;
-  onKeyUp?: (args: IKeyboardEvent) => void;
-  onKeyUpCapture?: (args: IKeyboardEvent) => void;
-
-  keyDownEvents?: IHandledKeyboardEvent[];
-  keyUpEvents?: IHandledKeyboardEvent[];
-
-  onMouseLeave?: (event: MouseEvent) => void;
-  onMouseEnter?: (event: MouseEvent) => void;
-
-  tooltip?: string;
-  tabIndex?: number;
-  enableFocusRing?: boolean;
-  focusable?: boolean;
-
-  'aria-posinset'?: number | undefined;
-  'aria-setsize'?: number | undefined;
-  'aria-level'?: number | undefined;
-
-  accessibilitySetSize?: number;
-  accessibilityPosInSet?: number;
-  accessibilityLevel?: number;
-
-  accessibilityRole?:
-    | 'none'
-    | 'alertdialog' // Windows
-    | 'application' // Windows
-    | 'dialog' // Windows
-    | 'group' // Windows
-    | 'listitem' // Windows
-    | 'presentation' // Windows
-    | 'tabpanel' // Windows
-    | 'textbox' // Windows
-    | 'tree' // Windows
-    | 'treeitem' // Windows
-    | 'button'
-    | 'togglebutton'
-    | 'link'
-    | 'search'
-    | 'image'
-    | 'keyboardkey'
-    | 'text'
-    | 'adjustable'
-    | 'imagebutton'
-    | 'header'
-    | 'summary'
-    | 'alert'
-    | 'checkbox'
-    | 'combobox'
-    | 'menu'
-    | 'menubar'
-    | 'menuitem'
-    | 'progressbar'
-    | 'radio'
-    | 'radiogroup'
-    | 'scrollbar'
-    | 'spinbutton'
-    | 'switch'
-    | 'tab'
-    | 'tabbar'
-    | 'tablist'
-    | 'timer'
-    | 'list'
-    | 'toolbar';
+type WindowsAccessibilityProps = {
+  accessibilityAccessKey?: string;
+  accessibilityAnnotation?: AccessibilityAnnotationInfo;
+  accessibilityItemType?: string;
 };
+
+export type IAdapterWindowsViewProps = ViewProps &
+  WindowsAccessibilityProps & {
+    onKeyDown?: (args: IKeyboardEvent) => void;
+    onKeyDownCapture?: (args: IKeyboardEvent) => void;
+    onKeyUp?: (args: IKeyboardEvent) => void;
+    onKeyUpCapture?: (args: IKeyboardEvent) => void;
+
+    keyDownEvents?: IHandledKeyboardEvent[];
+    keyUpEvents?: IHandledKeyboardEvent[];
+
+    onMouseLeave?: (event: MouseEvent) => void;
+    onMouseEnter?: (event: MouseEvent) => void;
+
+    tooltip?: string;
+    tabIndex?: number;
+    enableFocusRing?: boolean;
+    focusable?: boolean;
+
+    'aria-posinset'?: number | undefined;
+    'aria-setsize'?: number | undefined;
+    'aria-level'?: number | undefined;
+
+    accessibilitySetSize?: number;
+    accessibilityPosInSet?: number;
+    accessibilityLevel?: number;
+
+    accessibilityRole?:
+      | 'none'
+      | 'alertdialog' // Windows
+      | 'application' // Windows
+      | 'dialog' // Windows
+      | 'group' // Windows
+      | 'listitem' // Windows
+      | 'presentation' // Windows
+      | 'tabpanel' // Windows
+      | 'textbox' // Windows
+      | 'tree' // Windows
+      | 'treeitem' // Windows
+      | 'button'
+      | 'togglebutton'
+      | 'link'
+      | 'search'
+      | 'image'
+      | 'keyboardkey'
+      | 'text'
+      | 'adjustable'
+      | 'imagebutton'
+      | 'header'
+      | 'summary'
+      | 'alert'
+      | 'checkbox'
+      | 'combobox'
+      | 'menu'
+      | 'menubar'
+      | 'menuitem'
+      | 'progressbar'
+      | 'radio'
+      | 'radiogroup'
+      | 'scrollbar'
+      | 'spinbutton'
+      | 'switch'
+      | 'tab'
+      | 'tabbar'
+      | 'tablist'
+      | 'timer'
+      | 'list'
+      | 'toolbar';
+  };
 
 /**
  * Role-based text style names.
@@ -179,20 +186,24 @@ export type TextWindowsTextStyle =
   | 'ExtraLargeStandard'
   | 'HugeStandard';
 
-export type IAdapterWindowsTextProps = TextProps & {
-  accessibilitySetSize?: number;
-  accessibilityPosInSet?: number;
-  accessibilityLevel?: number;
-  'aria-posinset'?: number | undefined;
-  'aria-setsize'?: number | undefined;
-  'aria-level'?: number | undefined;
-};
+export type IAdapterWindowsTextProps = TextProps &
+  WindowsAccessibilityProps & {
+    accessibilityLevel?: number;
+    accessibilityPosInSet?: number;
+    accessibilitySetSize?: number;
+    'aria-posinset'?: number;
+    'aria-setsize'?: number;
+    'aria-level'?: number;
+    pressRetentionOffset?: { top: number; left: number; bottom: number; right: number };
+    tooltip?: string | undefined;
+  };
 
-export type IAdapterWindowsImageProps = ImageProps & {
-  accessibilitySetSize?: number;
-  accessibilityPosInSet?: number;
-  accessibilityLevel?: number;
-  'aria-posinset'?: number | undefined;
-  'aria-setsize'?: number | undefined;
-  'aria-level'?: number | undefined;
-};
+export type IAdapterWindowsImageProps = ImageProps &
+  WindowsAccessibilityProps & {
+    accessibilitySetSize?: number;
+    accessibilityPosInSet?: number;
+    accessibilityLevel?: number;
+    'aria-posinset'?: number | undefined;
+    'aria-setsize'?: number | undefined;
+    'aria-level'?: number | undefined;
+  };

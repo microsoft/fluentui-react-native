@@ -37,34 +37,39 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
-    "@types/react": "~18.2.0",
+    "@office-iss/react-native-win32": "^0.78.0",
+    "@react-native-community/cli": "^15.0.1",
+    "@react-native-community/cli-platform-android": "^15.0.1",
+    "@react-native-community/cli-platform-ios": "^15.0.1",
+    "@react-native/babel-preset": "^0.78.0",
+    "@react-native/metro-config": "^0.78.0",
+    "@types/react": "~19.0.0",
     "@types/use-subscription": "^1.0.0",
-    "react": "18.2.0",
-    "react-native": "^0.74.0",
-    "react-native-macos": "^0.74.0",
-    "react-native-windows": "^0.74.0"
+    "react": "19.0.0",
+    "react-native": "^0.78.0",
+    "react-native-macos": "^0.78.0",
+    "react-native-windows": "^0.78.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.74.0",
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0",
-    "react-native-macos": "^0.73.0 || ^0.74.0",
-    "react-native-windows": "^0.73.0 || ^0.74.0"
+    "@office-iss/react-native-win32": "^0.73.0 || ^0.74.0 || ^0.75.0 || ^0.76.0 || ^0.77.0 || ^0.78.0",
+    "react": "18.2.0 || ^18.2.0 || 18.3.1 || 19.0.0",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.75.0 || ^0.76.0 || ^0.77.0 || ^0.78.0",
+    "react-native-macos": "^0.73.0 || ^0.74.0 || ^0.75.0 || ^0.76.0 || ^0.77.0 || ^0.78.0",
+    "react-native-windows": "^0.73.0 || ^0.74.0 || ^0.75.0 || ^0.76.0 || ^0.77.0 || ^0.78.0"
   },
   "rnx-kit": {
     "kitType": "library",
     "alignDeps": {
       "presets": [
+        "@fluentui-react-native/scripts/align-deps-preset.js",
         "microsoft/react-native"
       ],
       "requirements": {
         "development": [
-          "react-native@0.74"
+          "react-native@0.78"
         ],
         "production": [
-          "react-native@0.73 || 0.74"
+          "react-native@0.73 || 0.74 || 0.75 || 0.76 || 0.77 || 0.78"
         ]
       },
       "capabilities": [
@@ -72,6 +77,7 @@
         "core",
         "core-ios",
         "core-macos",
+        "core-win32",
         "core-windows",
         "react"
       ]

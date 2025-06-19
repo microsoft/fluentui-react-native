@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import * as React from 'react';
-import {
+import type {
   IComposable,
   IPropFilter,
   INativeSlotType,
@@ -24,7 +24,7 @@ export function atomicRender<TProps extends object, TState = object>(
   Slots: ISlots<ISlotProps<TProps>>,
   _renderData: IRenderData<ISlotProps<TProps>, TState>,
   ...children: React.ReactNode[]
-): JSX.Element | null {
+): React.ReactElement | null {
   return renderSlot(Slots.root, undefined, ...children);
 }
 

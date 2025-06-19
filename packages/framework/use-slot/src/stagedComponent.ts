@@ -4,7 +4,7 @@ import * as React from 'react';
  * The final rendering of the props in a staged render. This is the function component signature that matches that of
  * React.createElement, children (if present) will be part of the variable args at the end.
  */
-export type FinalRender<TProps> = (props: TProps, ...children: React.ReactNode[]) => JSX.Element | null;
+export type FinalRender<TProps> = (props: TProps, ...children: React.ReactNode[]) => React.ReactElement | null;
 
 /**
  * This is a pattern of rendering where a functional component can be executed in two stages rather than in a single pass.

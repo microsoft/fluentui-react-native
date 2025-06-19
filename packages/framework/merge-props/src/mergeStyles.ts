@@ -32,8 +32,7 @@ export function mergeAndFlattenStyles(...styles: StyleProp<object>[]): object | 
 
 const _styleCache = getMemoCache();
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function mergeStyles(...styles: StyleProp<object>[]): object | undefined {
+export function mergeStyles(...styles: StyleProp<unknown>[]): object | undefined {
   // filter the style set to just objects (which might be arrays or plain style objects)
   // eslint-disable-next-line @typescript-eslint/ban-types
   const inputs = styles.filter((s) => typeof s === 'object') as object[];

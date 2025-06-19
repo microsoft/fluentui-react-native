@@ -1,4 +1,4 @@
-import type { TextProps, ViewProps, ImageProps, HostComponent, NativeSyntheticEvent } from 'react-native';
+import type { HostInstance, ImageProps, NativeSyntheticEvent, TextProps, ViewProps } from 'react-native';
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
@@ -73,7 +73,7 @@ export interface NativeMouseEvent extends NativeUIEvent {
   /**
    * The secondary target for the event, if there is one.
    */
-  readonly relatedTarget: null | number | React.ElementRef<HostComponent<unknown>>;
+  readonly relatedTarget: null | number | HostInstance;
   // offset is proposed: https://drafts.csswg.org/cssom-view/#extensions-to-the-mouseevent-interface
   /**
    * The X coordinate of the mouse pointer between that event and the padding edge of the target node
@@ -124,8 +124,14 @@ export type IAdapterMacOSViewProps = ViewProps & {
   onKeyUp?: (event: KeyEvent) => void;
   onMouseEnter?: (event: MouseEvent) => void;
   onMouseLeave?: (event: MouseEvent) => void;
+
+  /** @deprecated Removed in 0.77 */
   passthroughAllKeyEvents?: boolean;
+
+  /** @deprecated Removed in 0.77 */
   validKeysDown?: string[];
+
+  /** @deprecated Removed in 0.77 */
   validKeysUp?: string[];
 };
 

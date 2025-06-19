@@ -88,7 +88,7 @@ export interface IComposable<TProps, TSlotProps, TState> {
    * @param renderData - IRenderData returned from usePrepareProps
    * @param children - The react children property in the form passed into React.createElement
    */
-  render: (Slots: ISlots<TSlotProps>, renderData: IRenderData<TSlotProps, TState>, ...children: React.ReactNode[]) => JSX.Element | null;
+  render: (Slots: ISlots<TSlotProps>, renderData: IRenderData<TSlotProps, TState>, ...children: React.ReactNode[]) => React.ReactElement | null;
 
   /**
    * The slot definitions for this component.  If this only has one sub-component this will only have a root entry.  Using
