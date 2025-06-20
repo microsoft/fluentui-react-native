@@ -1,4 +1,4 @@
-import type { TextProps, ViewProps, ImageProps, NativeSyntheticEvent, HostComponent } from 'react-native';
+import type { HostInstance, ImageProps, NativeSyntheticEvent, TextProps, ViewProps } from 'react-native';
 
 export interface INativeKeyboardEvent {
   altKey: boolean;
@@ -7,6 +7,7 @@ export interface INativeKeyboardEvent {
   shiftKey: boolean;
   key: string;
 }
+
 export type IKeyboardEvent = NativeSyntheticEvent<INativeKeyboardEvent>;
 
 type PartiallyRequired<T, Keys extends keyof T = keyof T> = Pick<Partial<T>, Exclude<keyof T, Keys>> & Pick<T, Keys>;
@@ -88,7 +89,7 @@ export interface NativeMouseEvent extends NativeUIEvent {
   /**
    * The secondary target for the event, if there is one.
    */
-  readonly relatedTarget: null | number | React.ElementRef<HostComponent<unknown>>;
+  readonly relatedTarget: null | number | HostInstance;
   // offset is proposed: https://drafts.csswg.org/cssom-view/#extensions-to-the-mouseevent-interface
   /**
    * The X coordinate of the mouse pointer between that event and the padding edge of the target node

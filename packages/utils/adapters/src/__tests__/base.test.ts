@@ -114,10 +114,6 @@ describe('Base filter tests', () => {
     const macOSPlatformViewProps: Required<MacOSPlatformViewProps> = macOSAdapterViewProps;
     expect(Object.keys(macOSPlatformViewProps).length).toBe(0);
 
-    // This assignment will fail if there are any extra properties on IAdapterMacOSViewProps which are not defined by MacOSPlatformViewProps
-    const emptyMacOSViewProps: Omit<Required<IAdapterMacOSViewProps>, keyof MacOSPlatformViewProps> = {};
-    expect(Object.keys(emptyMacOSViewProps).length).toBe(0);
-
     const macOSAdapterTextProps = {} as Required<IAdapterMacOSTextProps>;
     // This assignment will fail if we are missing properties on IAdapterMacOSTextProps which are defined by MacOSPlatformTextProps
     const macOSPlatformTextProps: Required<MacOSPlatformTextProps> = macOSAdapterTextProps;

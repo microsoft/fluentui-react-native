@@ -20,7 +20,7 @@
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
-    "align-deps": "rnx-align-deps --no-unmanaged --requirements react-native@0.74",
+    "align-deps": "rnx-align-deps --no-unmanaged --requirements react-native@0.78",
     "depcheck": "yarn align-deps && lage depcheck",
     "lint": "lage lint",
     "preinstall": "node ./scripts/use-yarn-please.js",
@@ -36,9 +36,12 @@
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-babel-transformer": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
+    "@react-native-community/cli": "^15.0.1",
+    "@react-native-community/cli-platform-android": "^15.0.1",
+    "@react-native-community/cli-platform-ios": "^15.0.1",
+    "@react-native/babel-preset": "^0.78.0",
+    "@react-native/metro-babel-transformer": "^0.78.0",
+    "@react-native/metro-config": "^0.78.0",
     "@rnx-kit/align-deps": "^3.0.0",
     "babel-jest": "^29.7.0",
     "beachball": "^2.20.0",
@@ -46,14 +49,14 @@
     "eslint-plugin-import": "^2.27.5",
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
-    "react": "18.2.0",
-    "react-dom": "^18.2.0",
-    "react-native": "^0.74.0"
+    "react": "19.0.0",
+    "react-dom": "~19.0.0",
+    "react-native": "^0.78.0"
   },
   "peerDependencies": {
-    "react": "18.2.0",
-    "react-dom": "^18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0"
+    "react": "18.2.0 || ^18.2.0 || 18.3.1 || 19.0.0",
+    "react-dom": "^18.2.0 || ^18.3.1 || ^19.0.0",
+    "react-native": "^0.73.0 || ^0.74.0 || ^0.75.0 || ^0.76.0 || ^0.77.0 || ^0.78.0"
   },
   "workspaces": [
     "apps/*",
@@ -61,10 +64,10 @@
     "scripts"
   ],
   "resolutions": {
-    "@types/react": "^18.2.0",
+    "@types/react": "~19.0.0",
     "@warren-ms/react-native-icons/react-native-svg": "^15.4.0",
     "axios": "^1.8.2",
-    "react-native-macos": "patch:react-native-macos@npm%3A0.74.30#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch",
+    "react-native-macos": "patch:react-native-macos@npm%3A0.78.3#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch",
     "semver": "^7.5.2",
     "tar-fs": "^3.0.9",
     "ws": "^8.17.1",
@@ -74,14 +77,15 @@
     "kitType": "library",
     "alignDeps": {
       "presets": [
+        "@fluentui-react-native/scripts/align-deps-preset.js",
         "microsoft/react-native"
       ],
       "requirements": {
         "development": [
-          "react-native@0.74"
+          "react-native@0.78"
         ],
         "production": [
-          "react-native@0.73 || 0.74"
+          "react-native@0.73 || 0.74 || 0.75 || 0.76 || 0.77 || 0.78"
         ]
       },
       "capabilities": [
