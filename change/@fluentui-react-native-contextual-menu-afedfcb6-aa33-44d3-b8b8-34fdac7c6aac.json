@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix narrator bug",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "gulnazsayed@microsoft.com",
+  "dependentChangeType": "patch"
+}

@@ -71,12 +71,13 @@
         "react-native@0.74"
       ],
       "capabilities": [
+        "babel-preset-react-native",
         "core",
         "core-macos",
         "core-windows",
-        "react",
         "metro-config",
-        "babel-preset-react-native"
+        "metro-react-native-babel-transformer",
+        "react"
       ]
     }
   }

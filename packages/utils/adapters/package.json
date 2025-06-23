@@ -62,6 +62,7 @@
         ]
       },
       "capabilities": [
+        "babel-preset-react-native",
         "core",
         "core-android",
         "core-ios",
