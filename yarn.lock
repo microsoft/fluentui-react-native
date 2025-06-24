@@ -4114,6 +4114,7 @@ __metadata:
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
     "@rnx-kit/align-deps": "npm:^3.0.0"
+    "@rnx-kit/lint-lockfile": "npm:^0.1.0"
     babel-jest: "npm:^29.7.0"
     beachball: "npm:^2.20.0"
     eslint: "npm:^8.0.0"
@@ -6613,6 +6614,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rnx-kit/config@npm:^0.7.4":
+  version: 0.7.4
+  resolution: "@rnx-kit/config@npm:0.7.4"
+  dependencies:
+    "@rnx-kit/console": "npm:^2.0.0"
+    "@rnx-kit/tools-node": "npm:^3.0.0"
+    "@rnx-kit/tools-packages": "npm:^0.1.0"
+    lodash.merge: "npm:^4.6.2"
+    semver: "npm:^7.0.0"
+  checksum: 10c0/f237eacf8082eb5068d88a4b8302c115014edc0131475e756e52052426421f0799caa82208e7691b2e1673b859422bd9f5f8a9a192841f0e19c16ab7de090dd5
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/console@npm:^2.0.0":
   version: 2.0.0
   resolution: "@rnx-kit/console@npm:2.0.0"
@@ -6650,6 +6664,19 @@ __metadata:
     react-native:
       optional: true
   checksum: 10c0/2d5c71423e90f1361a826f56bc5ec1ec4a6e4bf7937adaebd24917842c79e1e1a71759149479a7ca22959eff671b2604d05b54223858cc7e2e38f2d564a22c7f
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/lint-lockfile@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@rnx-kit/lint-lockfile@npm:0.1.0"
+  dependencies:
+    "@rnx-kit/config": "npm:^0.7.4"
+    "@rnx-kit/tools-workspaces": "npm:^0.2.3"
+    js-yaml: "npm:^4.1.0"
+  bin:
+    lint-lockfile: lib/cli.js
+  checksum: 10c0/534491cdf8c058a63862fd5e38209eee5a5ed8fe725a5e6d085076ed1b8a1b4f8ed08578b9174044c53f1ddebb197624d0b767c744b7565f36b6d3cfb13b0668
   languageName: node
   linkType: hard
 
@@ -6846,6 +6873,19 @@ __metadata:
     read-yaml-file: "npm:^2.1.0"
     strip-json-comments: "npm:^3.1.1"
   checksum: 10c0/3a0f258d8be28818c7b6c7b5c490c7aa20a1181e7499b1ccce23e3043f41a767e9f1a5eefe5f696de11eaf3ad84777587059c78169694e85aeda9f97882e5ae6
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-workspaces@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@rnx-kit/tools-workspaces@npm:0.2.3"
+  dependencies:
+    fast-glob: "npm:^3.2.7"
+    find-up: "npm:^5.0.0"
+    micromatch: "npm:^4.0.0"
+    read-yaml-file: "npm:^2.1.0"
+    strip-json-comments: "npm:^3.1.1"
+  checksum: 10c0/b9528f560092c8ba8eeafb818cef2363ba99ffd7b3f0e3738cfe0316b35211ab7b6aa08d9eb3ef555c02b6048c591adafdca2934e674066256c06860cb1cf668
   languageName: node
   linkType: hard
 
