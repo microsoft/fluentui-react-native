@@ -32,7 +32,7 @@ jobs:
           yarn align-deps
         displayName: 'run align-deps'
 
-        - script: |
+      - script: |
           yarn lint-lockfile
         displayName: 'run lint-lockfile'
 
