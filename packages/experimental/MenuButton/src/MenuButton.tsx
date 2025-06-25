@@ -50,22 +50,25 @@ export const MenuButton = compose<MenuButtonType>({
       return [];
     }, []);
 
-    const onAccessibilityAction = useCallback((event) => {
-      if (Platform.OS === ('win32' as any)) {
-        switch (event.nativeEvent.actionName) {
-          case 'Expand':
-            if (!showContextualMenu) {
-              setShowContextualMenu(true);
-            }
-            break;
-          case 'Collapse':
-            if (showContextualMenu) {
-              setShowContextualMenu(false);
-            }
-            break;
+    const onAccessibilityAction = useCallback(
+      (event) => {
+        if (Platform.OS === ('win32' as any)) {
+          switch (event.nativeEvent.actionName) {
+            case 'Expand':
+              if (!showContextualMenu) {
+                setShowContextualMenu(true);
+              }
+              break;
+            case 'Collapse':
+              if (showContextualMenu) {
+                setShowContextualMenu(false);
+              }
+              break;
+          }
         }
-      }
-    }, [showContextualMenu]);
+      },
+      [showContextualMenu],
+    );
 
     const buttonProps = {
       disabled,
