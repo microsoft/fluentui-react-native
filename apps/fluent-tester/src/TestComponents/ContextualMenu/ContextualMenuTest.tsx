@@ -296,6 +296,8 @@ const IconContextualMenu: React.FunctionComponent = () => {
             style={{ borderWidth: 0 }}
             icon={{ svgSource: svgProps, width: 12, height: 12 }}
             onClick={toggleShowContextualMenu}
+            accessibilityLabel="Wheelchair icon button"
+            tooltip="Toggle menu"
           />
         </View>
       </View>
