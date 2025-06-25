@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx withSlots */
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useMemo } from 'react';
+import { Platform } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import type { UseSlots } from '@fluentui-react-native/framework';
@@ -37,6 +38,35 @@ export const MenuButton = compose<MenuButtonType>({
       setShowContextualMenu(!showContextualMenu);
     }, [showContextualMenu, setShowContextualMenu]);
 
+    // Default accessibility actions to help screen readers announce expanded/collapsed state
+    // Only provide on win32 to follow platform-specific accessibility patterns
+    const defaultAccessibilityActions = useMemo(() => {
+      if (Platform.OS === ('win32' as any)) {
+        return [
+          { name: 'Expand', label: 'Expand menu' },
+          { name: 'Collapse', label: 'Collapse menu' },
+        ];
+      }
+      return [];
+    }, []);
+
+    const onAccessibilityAction = useCallback((event) => {
+      if (Platform.OS === ('win32' as any)) {
+        switch (event.nativeEvent.actionName) {
+          case 'Expand':
+            if (!showContextualMenu) {
+              setShowContextualMenu(true);
+            }
+            break;
+          case 'Collapse':
+            if (showContextualMenu) {
+              setShowContextualMenu(false);
+            }
+            break;
+        }
+      }
+    }, [showContextualMenu]);
+
     const buttonProps = {
       disabled,
       appearance,
@@ -45,6 +75,9 @@ export const MenuButton = compose<MenuButtonType>({
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
       iconOnly: content ? false : true,
+      accessibilityState: { expanded: showContextualMenu },
+      accessibilityActions: defaultAccessibilityActions,
+      onAccessibilityAction,
       ...rest,
     };
 
