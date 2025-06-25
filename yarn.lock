@@ -4121,11 +4121,9 @@ __metadata:
     lage: "npm:^2.0.0"
     markdown-link-check: "npm:^3.8.7"
     react: "npm:18.2.0"
-    react-dom: "npm:^18.2.0"
     react-native: "npm:^0.74.0"
   peerDependencies:
     react: 18.2.0
-    react-dom: ^18.2.0
     react-native: ^0.73.0 || ^0.74.0
   languageName: unknown
   linkType: soft
@@ -4158,7 +4156,6 @@ __metadata:
     metro-react-native-babel-transformer: "npm:^0.76.5"
     prettier: "npm:^2.4.1"
     react: "npm:18.2.0"
-    react-dom: "npm:~18.2.0"
     react-native: "npm:^0.74.0"
     react-native-svg: "npm:^15.4.0"
     react-native-svg-transformer: "npm:^1.0.0"
@@ -4169,7 +4166,6 @@ __metadata:
   peerDependencies:
     just-scripts: ^2.3.2
     react: 18.2.0
-    react-dom: ~18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-svg: ^15.0.0 || ^15.4.0
   bin:
@@ -18617,18 +18613,6 @@ __metadata:
     shell-quote: "npm:^1.6.1"
     ws: "npm:^7"
   checksum: 10c0/7165544ca5890af62e875eeda3f915e054dc734ad74f77d6490de32ba4fef6c1d30647bbb0643f769dd988913e0edc2bf2b1d6c2679e910150929a6312479cf3
-  languageName: node
-  linkType: hard
-
-"react-dom@npm:^18.2.0, react-dom@npm:~18.2.0":
-  version: 18.2.0
-  resolution: "react-dom@npm:18.2.0"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-    scheduler: "npm:^0.23.0"
-  peerDependencies:
-    react: ^18.2.0
-  checksum: 10c0/66dfc5f93e13d0674e78ef41f92ed21dfb80f9c4ac4ac25a4b51046d41d4d2186abc915b897f69d3d0ebbffe6184e7c5876f2af26bfa956f179225d921be713a
   languageName: node
   linkType: hard
 
