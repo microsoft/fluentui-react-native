@@ -271,11 +271,7 @@ const IconContextualMenu: React.FunctionComponent = () => {
 
   const onAccessibilityAction = React.useCallback(
     (event) => {
-      if (
-        event.nativeEvent.actionName === 'activate' ||
-        event.nativeEvent.actionName === 'expand' ||
-        event.nativeEvent.actionName === 'collapse'
-      ) {
+      if (event.nativeEvent.actionName === 'expand' || event.nativeEvent.actionName === 'collapse') {
         toggleShowContextualMenu();
       }
     },
@@ -313,7 +309,6 @@ const IconContextualMenu: React.FunctionComponent = () => {
             accessibilityRole="button"
             accessibilityState={{ expanded: isContextualMenuVisible }}
             accessibilityActions={[
-              { name: 'activate', label: isContextualMenuVisible ? 'Collapse menu' : 'Expand menu' },
               { name: isContextualMenuVisible ? 'Collapse' : 'Expand', label: isContextualMenuVisible ? 'Collapse menu' : 'Expand menu' },
             ]}
             onAccessibilityAction={onAccessibilityAction}
