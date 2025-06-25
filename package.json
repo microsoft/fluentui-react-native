@@ -1,12 +1,9 @@
 {
-  "name": "@fluentui-react-native/repo",
-  "version": "1.22.19",
   "private": true,
-  "description": "",
-  "keywords": [],
+  "name": "@fluentui-react-native/root",
+  "version": "0.0.0-dev",
   "license": "MIT",
   "author": "Jason Morse <jasonmo@microsoft.com>",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git"
@@ -23,7 +20,7 @@
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
-    "align-deps": "rnx-align-deps --requirements react-native@0.74",
+    "align-deps": "rnx-align-deps --no-unmanaged --requirements react-native@0.74",
     "depcheck": "yarn align-deps && lage depcheck",
     "lint": "lage lint",
     "preinstall": "node ./scripts/use-yarn-please.js",
@@ -90,6 +87,7 @@
       "capabilities": [
         "babel-preset-react-native",
         "core",
+        "metro-react-native-babel-transformer",
         "react-dom"
       ]
     }
