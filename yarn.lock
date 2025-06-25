@@ -6537,12 +6537,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/align-deps@npm:^3.0.0, @rnx-kit/align-deps@npm:^3.0.5":
-  version: 3.0.7
-  resolution: "@rnx-kit/align-deps@npm:3.0.7"
+"@rnx-kit/align-deps@npm:^3.0.0, @rnx-kit/align-deps@npm:^3.0.6":
+  version: 3.0.8
+  resolution: "@rnx-kit/align-deps@npm:3.0.8"
   bin:
     rnx-align-deps: lib/index.js
-  checksum: 10c0/cb19d1116b83bd7b72553bd812b53eda9f76861b5086fe6033c8e441586f2ee5613d19c314641096f6d7cc89679654fdbb758a2640e10d1499dc5b672fb004a3
+  checksum: 10c0/88cd853eb96b4a9121af6870a1a166b93bd34c72581b7b539fba59858305965cf70253e5408097f80a48d6f1f4ff2cab07af3953566d9aa0d1ac873ccf5eded4
   languageName: node
   linkType: hard
 
@@ -6561,10 +6561,10 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/cli@npm:^0.18.0":
-  version: 0.18.8
-  resolution: "@rnx-kit/cli@npm:0.18.8"
+  version: 0.18.9
+  resolution: "@rnx-kit/cli@npm:0.18.9"
   dependencies:
-    "@rnx-kit/align-deps": "npm:^3.0.5"
+    "@rnx-kit/align-deps": "npm:^3.0.6"
     "@rnx-kit/config": "npm:^0.7.0"
     "@rnx-kit/console": "npm:^2.0.0"
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector": "npm:^2.0.0"
@@ -6592,7 +6592,7 @@ __metadata:
       optional: true
   bin:
     rnx-cli: bin/rnx-cli.cjs
-  checksum: 10c0/bf83076afe9ca8ae7bad47b4c04a171c92a1c67bfb2c25f5a12ee087ecdbd947bbcd27bd7b0827a9d02e0e8c276dfbec6550d30b49e7ad688c6382c6c77c5e47
+  checksum: 10c0/8014a7bba73dbacfa00c5b320699625ead4e7d637b9c817344e4a4a98b35767f6a55a34992098c8c64cf12d2c5164c8ceb5842fd52d7e76a7731b9fb9c0163eb
   languageName: node
   linkType: hard
 
@@ -6650,8 +6650,8 @@ __metadata:
   linkType: hard
 
 "@rnx-kit/metro-config@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "@rnx-kit/metro-config@npm:2.0.1"
+  version: 2.1.0
+  resolution: "@rnx-kit/metro-config@npm:2.1.0"
   dependencies:
     "@rnx-kit/tools-node": "npm:^3.0.0"
     "@rnx-kit/tools-react-native": "npm:^2.0.0"
@@ -6663,7 +6663,7 @@ __metadata:
   peerDependenciesMeta:
     "@react-native/metro-config":
       optional: true
-  checksum: 10c0/fb90bdcec980595898a7c675dd83c81a91f08bdfea06ed1e9f8583fa69b719b089527bc0595406d65e3c70fd46c5acfbafd373183cd91e0c68cb7c81427b8d11
+  checksum: 10c0/718fac5ab96c7c8a96798e8cba241971a126b45bdd9b8f7513dbcd928e23fcb1fe646aaccdc02e74519bff4f6fddb27312e0cc649df7c69edba0d2271a0c2eb5
   languageName: node
   linkType: hard
 
