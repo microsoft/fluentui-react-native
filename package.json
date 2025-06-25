@@ -47,12 +47,10 @@
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
     "react": "18.2.0",
-    "react-dom": "^18.2.0",
     "react-native": "^0.74.0"
   },
   "peerDependencies": {
     "react": "18.2.0",
-    "react-dom": "^18.2.0",
     "react-native": "^0.73.0 || ^0.74.0"
   },
   "workspaces": [
@@ -87,8 +85,7 @@
       "capabilities": [
         "babel-preset-react-native",
         "core",
-        "metro-react-native-babel-transformer",
-        "react-dom"
+        "metro-react-native-babel-transformer"
       ]
     }
   },
