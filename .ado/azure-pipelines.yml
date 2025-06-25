@@ -29,6 +29,14 @@ jobs:
         displayName: 'check prettier'
 
       - script: |
+          yarn align-deps
+        displayName: 'run align-deps'
+
+      - script: |
+          yarn lint-lockfile
+        displayName: 'run lint-lockfile'
+
+      - script: |
           yarn buildci
         displayName: 'yarn buildci [test]'
 

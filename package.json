@@ -21,7 +21,7 @@
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
     "align-deps": "rnx-align-deps --no-unmanaged --requirements react-native@0.74",
-    "depcheck": "yarn align-deps && lage depcheck",
+    "depcheck": "lage depcheck",
     "lint": "lage lint",
     "preinstall": "node ./scripts/use-yarn-please.js",
     "prettier": "lage prettier",
@@ -40,6 +40,7 @@
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/align-deps": "^3.0.0",
+    "@rnx-kit/lint-lockfile": "^0.1.0",
     "babel-jest": "^29.7.0",
     "beachball": "^2.20.0",
     "eslint": "^8.0.0",
@@ -74,6 +75,16 @@
       "presets": [
         "microsoft/react-native"
       ],
+      "lint": {
+        "lockfile": {
+          "noDuplicates": {
+            "packages": [
+              "#react-native",
+              "@babel/core"
+            ]
+          }
+        }
+      },
       "requirements": {
         "development": [
           "react-native@0.74"
