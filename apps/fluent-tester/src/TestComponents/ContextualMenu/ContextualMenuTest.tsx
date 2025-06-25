@@ -269,6 +269,19 @@ const IconContextualMenu: React.FunctionComponent = () => {
     setIsContextualMenuVisible(false);
   }, [setShowContextualMenu]);
 
+  const onAccessibilityAction = React.useCallback(
+    (event) => {
+      if (
+        event.nativeEvent.actionName === 'activate' ||
+        event.nativeEvent.actionName === 'expand' ||
+        event.nativeEvent.actionName === 'collapse'
+      ) {
+        toggleShowContextualMenu();
+      }
+    },
+    [toggleShowContextualMenu],
+  );
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -296,9 +309,15 @@ const IconContextualMenu: React.FunctionComponent = () => {
             style={{ borderWidth: 0 }}
             icon={{ svgSource: svgProps, width: 12, height: 12 }}
             onClick={toggleShowContextualMenu}
-            accessibilityLabel="Icon"
+            accessibilityLabel="Wheelchair icon button"
             accessibilityRole="button"
             accessibilityState={{ expanded: isContextualMenuVisible }}
+            accessibilityActions={[
+              { name: 'activate', label: isContextualMenuVisible ? 'Collapse menu' : 'Expand menu' },
+              { name: isContextualMenuVisible ? 'Collapse' : 'Expand', label: isContextualMenuVisible ? 'Collapse menu' : 'Expand menu' },
+            ]}
+            onAccessibilityAction={onAccessibilityAction}
+            tooltip="Toggle menu"
           />
         </View>
       </View>
