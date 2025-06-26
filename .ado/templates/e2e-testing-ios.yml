@@ -12,6 +12,10 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
+      open -a "simulator"
+    displayName: Open Simulator
+
+  - script: |
       yarn e2etest:ios
     workingDirectory: apps/E2E
     displayName: 'run E2E iOS tests [test]'
