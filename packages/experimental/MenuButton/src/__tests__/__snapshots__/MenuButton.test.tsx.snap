@@ -2,6 +2,18 @@
 
 exports[`ContextualMenu default 1`] = `
 <View
+  accessibilityActions={
+    [
+      {
+        "label": "Expand menu",
+        "name": "Expand",
+      },
+      {
+        "label": "Collapse menu",
+        "name": "Collapse",
+      },
+    ]
+  }
   accessibilityLabel="Press for Nested MenuButton"
   accessibilityRole="button"
   accessibilityState={
@@ -9,7 +21,7 @@ exports[`ContextualMenu default 1`] = `
       "busy": undefined,
       "checked": undefined,
       "disabled": false,
-      "expanded": undefined,
+      "expanded": false,
       "multiselectable": undefined,
       "required": undefined,
       "selected": undefined,
@@ -36,6 +48,7 @@ exports[`ContextualMenu default 1`] = `
       },
     ]
   }
+  onAccessibilityAction={[Function]}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
