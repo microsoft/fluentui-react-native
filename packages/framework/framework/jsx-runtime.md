@@ -16,7 +16,7 @@ This module provides a modern JSX runtime implementation for React 17+ that auto
 Add this comment at the top of your TypeScript/JSX files:
 
 ```tsx
-/** @jsxImportSource @fluentui-react-native/use-slot */
+/** @jsxImportSource @fluentui-react-native/framework */
 
 import React from 'react';
 import type { SlotFn } from '@fluentui-react-native/use-slot';
@@ -83,7 +83,7 @@ import { withSlots } from '@fluentui-react-native/use-slot';
 ### After (with jsx-runtime):
 
 ```tsx
-/** @jsxImportSource @fluentui-react-native/use-slot */
+/** @jsxImportSource @fluentui-react-native/framework */
 
 // ... same component code, no other changes needed
 ```

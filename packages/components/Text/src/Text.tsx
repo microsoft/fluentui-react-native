@@ -1,4 +1,4 @@
-/** @jsxImportSource @fluentui-react-native/use-slot */
+/** @jsxImportSource @fluentui-react-native/framework */
 import React from 'react';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
 

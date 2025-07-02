@@ -22,7 +22,7 @@ import type { NativeReactType, SlotFn } from '@fluentui-react-native/use-slot';
  *
  * For per-file usage, add this comment at the top of your file:
  * ```tsx
- * /** @jsxImportSource @fluentui-react-native/use-slot *\/
+ * /** @jsxImportSource @fluentui-react-native/framework *\/
  * ```
  */
 

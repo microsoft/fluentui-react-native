@@ -10,7 +10,7 @@ This is the FluentUI React Native repository, a cross-platform component library
 
 - Use the modern JSX transform: `"jsx": "react-jsx"`
 - Module resolution: `"moduleResolution": "node16"`
-- For new components using slots, use `/** @jsxImportSource @fluentui-react-native/use-slot */` instead of the legacy `/** @jsx withSlots */` pragma
+- For new components using slots, use `/** @jsxImportSource @fluentui-react-native/framework */` instead of the legacy `/** @jsx withSlots */` pragma
 
 ### Component Architecture
 
@@ -47,7 +47,7 @@ packages/
 #### For Slot-Based Components:
 
 ```tsx
-/** @jsxImportSource @fluentui-react-native/use-slot */
+/** @jsxImportSource @fluentui-react-native/framework */
 import * as React from 'react';
 import { compose } from '@fluentui-react-native/framework';
 
@@ -72,7 +72,7 @@ export const MyComponent = compose<MyComponentType>({
 #### For Legacy Components:
 
 - When migrating from `@jsx withSlots`, remove both the pragma and the `withSlots` import
-- Replace with `@jsxImportSource @fluentui-react-native/use-slot`
+- Replace with `@jsxImportSource @fluentui-react-native/framework`
 - Keep the same component structure but remove explicit JSX factory references
 
 ### Testing

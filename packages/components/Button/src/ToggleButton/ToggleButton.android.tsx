@@ -1,4 +1,4 @@
-/** @jsxImportSource @fluentui-react-native/use-slot */
+/** @jsxImportSource @fluentui-react-native/framework */
 import { View } from 'react-native';
 
 import { compose } from '@fluentui-react-native/framework';

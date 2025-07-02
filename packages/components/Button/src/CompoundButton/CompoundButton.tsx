@@ -1,4 +1,4 @@
-/** @jsxImportSource @fluentui-react-native/use-slot */
+/** @jsxImportSource @fluentui-react-native/framework */
 import * as React from 'react';
 import { Platform, Pressable, View } from 'react-native';
 
