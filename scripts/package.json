@@ -4,7 +4,7 @@
   "private": true,
   "main": "./lib/index.js",
   "bin": {
-    "fluentui-scripts": "./just-scripts.js"
+    "fluentui-scripts": "./bin/just-scripts.js"
   },
   "scripts": {
     "build-tools": "just-scripts build",
