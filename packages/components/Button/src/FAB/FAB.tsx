@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+/** @jsxImportSource @fluentui-react-native/use-slot */
 import type * as React from 'react';
 import { Pressable } from 'react-native';
 
