@@ -29,7 +29,6 @@
     "directory": "packages/components/Divider"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "workspace:*",
     "@fluentui-react-native/framework": "workspace:*",
     "@fluentui-react-native/icon": "workspace:*",
     "@fluentui-react-native/text": "workspace:*",
