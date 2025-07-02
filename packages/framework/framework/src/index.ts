@@ -96,4 +96,4 @@ export type { HasLayer, TokensThatAreAlsoProps, UseStyling } from './useStyling'
 export { buildProps, buildUseStyling } from './useStyling';
 export type { BuildProps, TokenSettings, TokensFromTheme, UseStylingOptions } from './useStyling';
 export { applyPropsToTokens, applyTokenLayers, buildUseTokens, customizable, patchTokens } from './useTokens';
-export type { UseTokens } from './useTokens';
+export type { UseTokens, CustomizableComponent } from './useTokens';
