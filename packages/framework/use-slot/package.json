@@ -10,9 +10,33 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./jsx-runtime": {
+      "import": "./lib/jsx-runtime.js",
+      "require": "./lib-commonjs/jsx-runtime.js",
+      "types": "./lib/jsx-runtime.d.ts"
+    }
+  },
   "onPublish": {
     "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
+    "module": "lib/index.js",
+    "exports": {
+      ".": {
+        "import": "./lib/index.js",
+        "require": "./lib-commonjs/index.js",
+        "types": "./lib/index.d.ts"
+      },
+      "./jsx-runtime": {
+        "import": "./lib/jsx-runtime.js",
+        "require": "./lib-commonjs/jsx-runtime.js",
+        "types": "./lib/jsx-runtime.d.ts"
+      }
+    }
   },
   "scripts": {
     "build": "fluentui-scripts build",
