@@ -1,0 +1,83 @@
+{
+  "name": "@fluentui-react-native/jsx-runtime",
+  "version": "0.1.0",
+  "description": "Hook function to use a component as a pluggable slot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/use-slot"
+  },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./jsx-runtime": {
+      "import": "./lib/jsx-runtime.js",
+      "require": "./lib-commonjs/jsx-runtime.js",
+      "types": "./lib/jsx-runtime.d.ts"
+    }
+  },
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "start": "fluentui-scripts dev",
+    "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fluentui-react-native/use-slot": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native/babel-preset": "^0.74.0",
+    "@react-native/metro-config": "^0.74.0",
+    "react": "18.2.0",
+    "react-native": "^0.74.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "^0.73.0 || ^0.74.0"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "alignDeps": {
+      "presets": [
+        "microsoft/react-native"
+      ],
+      "requirements": {
+        "development": [
+          "react-native@0.74"
+        ],
+        "production": [
+          "react-native@0.73 || 0.74"
+        ]
+      },
+      "capabilities": [
+        "babel-preset-react-native",
+        "core",
+        "core-android",
+        "core-ios",
+        "react"
+      ]
+    }
+  }
+}

@@ -12,6 +12,7 @@ import * as renderer from 'react-test-renderer';
 import { compressible } from './compressible';
 import { buildUseTokens } from './useTokens';
 import type { UseTokens } from './useTokens';
+import { jsx, jsxs } from './jsx-runtime';
 
 type Variant = 'normal' | 'header' | 'caption';
 interface VariantTextTokens {

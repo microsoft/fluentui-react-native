@@ -1,4 +1,4 @@
-# JSX Runtime for Slots
+# @fluentui-react-native/jsx-runtime
 
 This module provides a modern JSX runtime implementation for React 17+ that automatically handles slot rendering without the need for the `withSlots` pragma.
 
