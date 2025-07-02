@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { NativeReactType, SlotFn } from './renderSlot';
+import type { NativeReactType, SlotFn } from '@fluentui-react-native/use-slot';
 
 /**
  * JSX runtime implementation for React 17+ that provides automatic slot rendering.

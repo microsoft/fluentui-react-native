@@ -21,6 +21,7 @@
     "prefer-rest-params": "off",
     "no-useless-escape": "off",
     "require-atomic-updates": "off",
+    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/no-explicit-any": "off",

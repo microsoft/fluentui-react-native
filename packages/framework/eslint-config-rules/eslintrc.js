@@ -18,6 +18,7 @@ module.exports = {
     'no-prototype-builtins': 'off',
     'no-undef': 'off',
     'react/display-name': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
   overrides: [
     {

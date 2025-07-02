@@ -48,7 +48,7 @@ The helper will return a `React.FunctionComponent` that will forward props (with
 
 ## `useSlot`
 
-NOTE: fluentui-react-native now has an implementation based on the modern jsx runtime. For more notes refer to [jsx-runtime.md](./jsx-runtime.md).
+NOTE: fluentui-react-native now has an implementation based on the modern jsx runtime. For more notes refer to [jsx-runtime.md](../framework/jsx-runtime.md).
 
 Consuming these by hand are a bit tedious. To aid in this the `useSlot` hook function is provided. Besides enabling automatic tree compression (for component types that support it), this also allows components to be authored as pluggable bits in the render tree. Usage looks something like:
 

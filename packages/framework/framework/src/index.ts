@@ -32,8 +32,8 @@ export type {
   TokenBuilder,
 } from '@fluentui-react-native/tokens';
 
-export { renderSlot, stagedComponent, useSlot, withSlots, jsx, jsxs, Fragment } from '@fluentui-react-native/use-slot';
-export type { ComposableFunction, FinalRender, NativeReactType, SlotFn, StagedRender, JSXProps } from '@fluentui-react-native/use-slot';
+export { renderSlot, stagedComponent, useSlot, withSlots } from '@fluentui-react-native/use-slot';
+export type { ComposableFunction, FinalRender, NativeReactType, SlotFn, StagedRender } from '@fluentui-react-native/use-slot';
 
 // Note: jsx, jsxs, Fragment exports are available from '@fluentui-react-native/use-slot/jsx-runtime'
 // for use with modern JSX transform. See jsx-runtime.md for usage instructions.
@@ -100,3 +100,5 @@ export { buildProps, buildUseStyling } from './useStyling';
 export type { BuildProps, TokenSettings, TokensFromTheme, UseStylingOptions } from './useStyling';
 export { applyPropsToTokens, applyTokenLayers, buildUseTokens, customizable, patchTokens } from './useTokens';
 export type { UseTokens, CustomizableComponent } from './useTokens';
+export { jsx, jsxs, Fragment } from './jsx-runtime';
+export type { JSXProps } from './jsx-runtime';
