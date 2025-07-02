@@ -2,14 +2,17 @@
   "name": "@fluentui-react-native/vibrancy-view",
   "version": "0.3.0",
   "description": "A native wrapper for NSVisualEffectView on macOS",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
   "homepage": "https://github.com/microsoft/fluentui-react-native",
   "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
-  },
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./lib",
-    "target": "es2015",
+    "target": "es2022",
     "types": ["node", "jest"],
     "module": "node16",
     "moduleResolution": "node16",
