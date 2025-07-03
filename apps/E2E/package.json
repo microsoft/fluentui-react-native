@@ -3,6 +3,16 @@
   "version": "1.40.8",
   "description": "Package containing E2E testing specs",
   "license": "MIT",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "lint": "fluentui-scripts eslint",

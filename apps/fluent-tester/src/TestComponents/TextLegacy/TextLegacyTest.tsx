@@ -1,10 +1,11 @@
 import * as React from 'react';
 
+import { TEXT_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { StandardUsage } from './StandardUsage';
 import { TextLegacyE2ETest } from './TextLegacyE2ETest';
-import { TEXT_TESTPAGE } from '../../../../E2E/src/index.consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 

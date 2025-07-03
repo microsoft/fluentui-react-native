@@ -2,14 +2,14 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
-
 import {
   DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL,
   DEPRECATED_TEXT_FIRST_COMPONENT,
   DEPRECATED_TEXT_SECOND_COMPONENT,
   DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT,
-} from '../../../../E2E/src/TextLegacy/consts';
+} from '@fluentui-react-native/e2e-testing';
+import { Stack } from '@fluentui-react-native/stack';
+
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 

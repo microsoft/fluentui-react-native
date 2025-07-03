@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui/react-native';
+import { MENU_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { MenuProps } from '@fluentui-react-native/menu';
 import {
   Menu,
@@ -26,7 +27,6 @@ import { MenuTriggerChildRef } from './MenuRefs';
 import { MenuScrollView } from './MenuScrollView';
 import { MenuTooltips } from './MenuTooltips';
 import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
-import { MENU_TESTPAGE } from '../../../../E2E/src/Menu/consts';
 import { stackStyle } from '../Common/styles';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';

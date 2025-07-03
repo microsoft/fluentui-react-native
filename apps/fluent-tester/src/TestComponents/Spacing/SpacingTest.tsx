@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
+import { SPACING_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { Stack } from '@fluentui-react-native/stack';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
-import { SPACING_TESTPAGE } from '../../../../E2E/src/Spacing/consts';
 import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
+import { RADIOGROUPV1_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
 import { DefaultRadioGroup } from './DefaultRadioGroup';
 import { DisabledRadioGroup } from './DisabledRadioGroup';
@@ -8,7 +10,6 @@ import { HorizontalRadioGroup } from './HorizontalRadioGroup';
 import { RadioGroupV1E2ETest } from './RadioGroupV1E2ETest';
 import { RequiredRadioGroup } from './RequiredRadioGroup';
 import { SubtextRadioGroup } from './SubtextRadioGroup';
-import { RADIOGROUPV1_TESTPAGE } from '../../../../E2E/src/RadioGroupV1/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 

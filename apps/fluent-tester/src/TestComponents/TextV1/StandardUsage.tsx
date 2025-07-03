@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
+import { HOMEPAGE_TEXTV1_BUTTON } from '@fluentui-react-native/e2e-testing';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
-import { HOMEPAGE_TEXTV1_BUTTON } from '../../../../E2E/src/TextV1/consts';
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 

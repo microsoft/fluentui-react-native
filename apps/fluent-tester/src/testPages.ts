@@ -1,3 +1,5 @@
+import * as Constants from '@fluentui-react-native/e2e-testing';
+
 import type { TestDescription } from './TestComponents';
 import { ActivityIndicatorTest } from './TestComponents/ActivityIndicator';
 import { AvatarTest, NativeAvatarTest } from './TestComponents/Avatar';
@@ -23,8 +25,8 @@ import { LinkV1Test } from './TestComponents/LinkV1';
 import { MenuTest } from './TestComponents/Menu';
 import { MenuButtonLegacyTest } from './TestComponents/MenuButtonLegacy';
 import { MenuButtonV1Test } from './TestComponents/MenuButtonV1';
-import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
-import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
+import { HOMEPAGE_NATIVEDATEPICKER_BUTTON, NativeDatePickerTest } from './TestComponents/NativeDatePicker';
+import { HOMEPAGE_NOTIFICATION_BUTTON, NotificationTest } from './TestComponents/Notification';
 import { OverflowTest } from './TestComponents/Overflow/OverflowTest';
 import { PersonaTest } from './TestComponents/Persona';
 import { PersonaCoinTest } from './TestComponents/PersonaCoin';
@@ -37,7 +39,7 @@ import { ShimmerTest } from './TestComponents/Shimmer';
 import { SpacingTokensTest } from './TestComponents/Spacing';
 import { SpinnerTest } from './TestComponents/Spinner';
 import { StrokeWidthTest } from './TestComponents/StrokeWidth';
-import { SvgTest, RNSVGIconsTest } from './TestComponents/Svg';
+import { RNSVGIconsTest, SvgTest } from './TestComponents/Svg';
 import { SwitchTest } from './TestComponents/Switch';
 import { TabListTest } from './TestComponents/TabList/TabListTest';
 import { TextLegacyTest } from './TestComponents/TextLegacy';
@@ -45,7 +47,6 @@ import { TextV1Test } from './TestComponents/TextV1';
 import { ThemeTest } from './TestComponents/Theme';
 import { TooltipTest } from './TestComponents/Tooltip';
 import { VibrancyViewTest } from './TestComponents/VibrancyView';
-import * as Constants from '../../E2E/src/index.consts';
 
 export const tests: TestDescription[] = [
   {
