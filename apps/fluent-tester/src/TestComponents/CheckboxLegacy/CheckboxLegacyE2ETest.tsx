@@ -2,15 +2,15 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { Checkbox, Text } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
-
 import {
   CHECKBOX_TEST_COMPONENT,
   CHECKBOX_ON_PRESS,
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   CHECKBOX_TEST_COMPONENT_LABEL,
   CHECKBOX_ACCESSIBILITY_LABEL,
-} from '../../../../E2E/src/CheckboxLegacy/consts';
+} from '@fluentui-react-native/e2e-testing';
+import { Stack } from '@fluentui-react-native/stack';
+
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 

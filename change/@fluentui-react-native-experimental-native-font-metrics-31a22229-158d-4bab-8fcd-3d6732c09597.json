@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "update builds to use node16 settings and modern export maps",
+  "packageName": "@fluentui-react-native/experimental-native-font-metrics",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

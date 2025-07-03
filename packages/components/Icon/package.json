@@ -2,13 +2,16 @@
   "name": "@fluentui-react-native/icon",
   "version": "0.21.8",
   "description": "A cross-platform Icon component",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
   },
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "depcheck": "fluentui-scripts depcheck",

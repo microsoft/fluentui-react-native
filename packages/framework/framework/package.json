@@ -2,13 +2,16 @@
   "name": "@fluentui-react-native/framework",
   "version": "0.14.2",
   "description": "Component framework used by fluentui react native controls",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
-  },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",

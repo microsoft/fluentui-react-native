@@ -4,11 +4,11 @@ import { Platform } from 'react-native';
 
 import type { LinkTokens } from '@fluentui/react-native';
 import { LinkV1 as Link } from '@fluentui/react-native';
+import { LINKV1_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { Stack } from '@fluentui-react-native/stack';
 
 import { E2ELinkV1Test } from './E2ELinkV1Test';
 import { InlineLinks } from './InlineLinksTest';
-import { LINKV1_TESTPAGE } from '../../../../E2E/src/LinkV1/consts';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';

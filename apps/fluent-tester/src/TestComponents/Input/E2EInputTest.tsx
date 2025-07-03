@@ -1,10 +1,5 @@
 import * as React from 'react';
 
-import type { IconProps } from '@fluentui-react-native/icon';
-import { Input } from '@fluentui-react-native/input';
-import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui-react-native/text';
-
 import {
   INPUT_TEST_COMPONENT,
   INPUT_TEXT,
@@ -12,7 +7,12 @@ import {
   INPUT_ERROR_STRING,
   INPUT_ONCLICK_STRING,
   INPUT_START_STRING,
-} from '../../../../E2E/src/Input/consts';
+} from '@fluentui-react-native/e2e-testing';
+import type { IconProps } from '@fluentui-react-native/icon';
+import { Input } from '@fluentui-react-native/input';
+import { Stack } from '@fluentui-react-native/stack';
+import { Text } from '@fluentui-react-native/text';
+
 import FilledSvg from '../../../assets/filledIcon.svg';
 import OutlineSvg from '../../../assets/outlineIcon.svg';
 import { stackStyle } from '../Common/styles';

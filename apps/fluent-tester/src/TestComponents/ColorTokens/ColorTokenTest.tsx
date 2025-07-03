@@ -4,6 +4,7 @@ import { View, StyleSheet, Platform } from 'react-native';
 
 import { Text, ToggleButton } from '@fluentui/react-native';
 import { createAliasTokens } from '@fluentui-react-native/default-theme';
+import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import type { Theme } from '@fluentui-react-native/theme-types';
@@ -14,7 +15,6 @@ import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';
 
-import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '../../../../E2E/src/ColorTokens/consts';
 import { commonTestStyles } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 import type { TestSection, PlatformStatus } from '../Test';
