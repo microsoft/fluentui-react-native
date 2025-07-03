@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { Stack } from '@fluentui-react-native/stack';
-import { TabList, Tab } from '@fluentui-react-native/tablist';
-import { TextV1 as Text } from '@fluentui-react-native/text';
-
 import {
   TABLIST_TEST_COMPONENT,
   TABLIST_ACCESSIBILITY_LABEL,
@@ -20,7 +16,11 @@ import {
   SECOND_TAB_KEY,
   THIRD_TAB_KEY,
   SECOND_TAB_LABEL,
-} from '../../../../E2E/src/index.consts';
+} from '@fluentui-react-native/e2e-testing';
+import { Stack } from '@fluentui-react-native/stack';
+import { TabList, Tab } from '@fluentui-react-native/tablist';
+import { TextV1 as Text } from '@fluentui-react-native/text';
+
 import { stackStyle } from '../Common/styles';
 import { testProps } from '../Common/TestProps';
 

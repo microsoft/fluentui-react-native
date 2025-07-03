@@ -2,13 +2,16 @@
   "name": "@fluentui-react-native/experimental-shadow",
   "version": "0.6.4",
   "description": "A cross-platform Shadow component using the Fluent Design System",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
   },
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",

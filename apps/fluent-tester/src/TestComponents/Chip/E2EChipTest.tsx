@@ -2,15 +2,15 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { Chip } from '@fluentui-react-native/chip';
-import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { Text } from '@fluentui-react-native/text';
-
 import {
   CHIP_CALLBACK_TEXT_END_STATE,
   CHIP_CALLBACK_TEXT_START_STATE,
   CHIP_TEST_COMPONENT,
   CHIP_TEXT,
-} from '../../../../E2E/src/Chip/consts';
+} from '@fluentui-react-native/e2e-testing';
+import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { Text } from '@fluentui-react-native/text';
+
 import { testProps } from '../Common/TestProps';
 
 export const E2EChipTest: React.FunctionComponent = () => {

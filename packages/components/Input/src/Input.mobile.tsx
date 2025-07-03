@@ -7,7 +7,7 @@ import type { UseSlots } from '@fluentui-react-native/framework';
 import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { createIconProps } from '@fluentui-react-native/icon';
 import { Icon } from '@fluentui-react-native/icon';
-import type { FocusState } from '@fluentui-react-native/interactive-hooks/lib/usePressableState.types';
+import type { FocusState } from '@fluentui-react-native/interactive-hooks';
 import { Text } from '@fluentui-react-native/text';
 
 import { stylingSettings } from './Input.styling';

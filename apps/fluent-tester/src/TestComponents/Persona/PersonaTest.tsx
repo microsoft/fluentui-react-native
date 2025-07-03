@@ -1,8 +1,9 @@
 import * as React from 'react';
 
+import { PERSONA_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+
 import { CustomizeUsage } from './CustomizeUsage';
 import { StandardUsage } from './StandardUsage';
-import { PERSONA_TESTPAGE } from '../../../../E2E/src/Persona/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 

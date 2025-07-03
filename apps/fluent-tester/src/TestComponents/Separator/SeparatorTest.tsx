@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { ButtonV1 } from '@fluentui-react-native/button';
+import { SEPARATOR_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { Separator } from '@fluentui-react-native/separator';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
-import { SEPARATOR_TESTPAGE } from '../../../../E2E/src/Separator/consts';
 import { stackStyle, separatorStackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';

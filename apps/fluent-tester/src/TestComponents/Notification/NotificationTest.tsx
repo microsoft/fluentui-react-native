@@ -7,7 +7,7 @@ import type { NotificationVariant } from '@fluentui-react-native/notification';
 import { Notification, NotificationVariants } from '@fluentui-react-native/notification';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
-import PlayButton from './assets/play_button.svg';
+import PlayButton from '../../../assets/play_button.svg';
 import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

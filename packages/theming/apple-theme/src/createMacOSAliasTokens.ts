@@ -1,6 +1,6 @@
 import { memoize } from '@fluentui-react-native/memo-cache';
 import type { AliasColorTokens, AppearanceOptions } from '@fluentui-react-native/theme-types';
-import type { ThemeShadowDefinition } from '@fluentui-react-native/theme-types/lib/Shadow.types';
+import type { ThemeShadowDefinition } from '@fluentui-react-native/theme-types';
 import { mapPipelineToTheme, mapPipelineToShadow } from '@fluentui-react-native/theming-utils';
 
 import { getMacOSAliasTokens, getMacOSShadowTokens } from './getMacOSTokens';

@@ -3028,7 +3028,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/e2e-testing@workspace:apps/E2E":
+"@fluentui-react-native/e2e-testing@workspace:*, @fluentui-react-native/e2e-testing@workspace:apps/E2E":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/e2e-testing@workspace:apps/E2E"
   dependencies:
@@ -4450,6 +4450,7 @@ __metadata:
     "@fluentui-react-native/divider": "workspace:*"
     "@fluentui-react-native/drawer": "workspace:*"
     "@fluentui-react-native/dropdown": "workspace:*"
+    "@fluentui-react-native/e2e-testing": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/experimental-activity-indicator": "workspace:*"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"

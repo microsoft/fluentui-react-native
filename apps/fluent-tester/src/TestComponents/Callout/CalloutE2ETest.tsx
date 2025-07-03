@@ -4,9 +4,9 @@ import { View } from 'react-native';
 
 import type { DismissBehaviors } from '@fluentui/react-native';
 import { ButtonV1 as Button, Callout, Text } from '@fluentui/react-native';
+import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL, CALLOUT_TEST_COMPONENT } from '@fluentui-react-native/e2e-testing';
 import { Switch } from '@fluentui-react-native/switch';
 
-import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL, CALLOUT_TEST_COMPONENT } from '../../../../E2E/src/Callout/consts';
 import { testProps } from '../Common/TestProps';
 
 export const E2ECalloutTest: React.FunctionComponent = () => {

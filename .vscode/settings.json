@@ -4,6 +4,9 @@
   "editor.trimAutoWhitespace": true,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
 
   "eslint.enable": true,
   "eslint.workingDirectories": [{ "mode": "auto" }], // infer working directory based on .eslintrc/package.json location
