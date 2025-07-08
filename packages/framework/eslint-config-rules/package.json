@@ -7,12 +7,19 @@
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework/eslint-config-rules"
   },
-  "main": "./eslintrc.js",
+  "main": "./eslint.config.js",
+  "exports": {
+    ".": "./eslint.config.js",
+    "./eslint.config.js": "./eslint.config.js"
+  },
   "license": "MIT",
+  "dependencies": {
+    "@microsoft/eslint-plugin-sdl": "^1.1.0",
+    "@rnx-kit/eslint-plugin": "^0.4.0"
+  },
   "devDependencies": {
-    "@rnx-kit/eslint-plugin": "^0.4.0",
-    "eslint": "^8.0.0",
-    "eslint-plugin-jest": "^25.0.0"
+    "@types/eslint": "^9.0.0",
+    "eslint": "^9.0.0"
   },
   "beachball": {
     "shouldPublish": false,
