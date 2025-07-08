@@ -43,7 +43,7 @@
     "@rnx-kit/lint-lockfile": "^0.1.0",
     "babel-jest": "^29.7.0",
     "beachball": "^2.20.0",
-    "eslint": "^8.0.0",
+    "eslint": "^9.0.0",
     "eslint-plugin-import": "^2.27.5",
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
