@@ -5,12 +5,15 @@
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
   "homepage": "https://github.com/microsoft/fluentui-react-native",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
   },
   "scripts": {
     "android": "react-native run-android",
@@ -48,6 +51,7 @@
     "@fluentui-react-native/divider": "workspace:*",
     "@fluentui-react-native/drawer": "workspace:*",
     "@fluentui-react-native/dropdown": "workspace:*",
+    "@fluentui-react-native/e2e-testing": "workspace:*",
     "@fluentui-react-native/experimental-activity-indicator": "workspace:*",
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
     "@fluentui-react-native/experimental-avatar": "workspace:*",

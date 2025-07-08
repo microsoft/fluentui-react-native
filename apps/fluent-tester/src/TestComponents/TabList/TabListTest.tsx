@@ -3,12 +3,12 @@ import { View } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Divider } from '@fluentui-react-native/divider';
+import { TABLIST_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { Menu, MenuTrigger, MenuList, MenuItem, MenuPopover } from '@fluentui-react-native/menu';
 import { TabList, Tab } from '@fluentui-react-native/tablist';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { TabListE2ETest } from './TabListE2ETest';
-import { TABLIST_TESTPAGE } from '../../../../E2E/src/index.consts';
 import { svgProps, fontProps } from '../Common/iconExamples';
 import { stackStyle } from '../Common/styles';
 import type { PlatformStatus, TestSection } from '../Test';

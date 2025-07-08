@@ -3,6 +3,8 @@ import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, 
 
 import { Separator, TextV1 as Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVIEWER } from '@fluentui-react-native/e2e-testing';
+import { ROOT_VIEW } from '@fluentui-react-native/e2e-testing';
 import type { Theme } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
@@ -11,8 +13,6 @@ import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles
 import { testProps } from './TestComponents/Common/TestProps';
 import { tests } from './testPages';
 import { ThemePickers } from './theme/ThemePickers';
-import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVIEWER } from '../../E2E/src/common/consts';
-import { ROOT_VIEW } from '../../E2E/src/common/consts';
 
 // uncomment the below lines to enable message spy
 /**

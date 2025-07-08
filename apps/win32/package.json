@@ -1,12 +1,15 @@
 {
   "name": "@fluentui-react-native/tester-win32",
   "version": "0.38.45",
-  "main": "src/index.tsx",
-  "module": "src/index.tsx",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.jsx",
-    "module": "lib/index.jsx"
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
   },
   "scripts": {
     "build": "fluentui-scripts build",

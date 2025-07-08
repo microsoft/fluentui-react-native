@@ -3,7 +3,7 @@ export type { IBorderTokens } from './border-tokens';
 export { backgroundColorTokens, colorTokens, foregroundColorTokens, getPaletteFromTheme } from './color-tokens';
 export type { IBackgroundColorTokens, IColorTokens, IForegroundColorTokens } from './color-tokens';
 export { fontStyles, textTokens } from './text-tokens';
-export type { FontStyleTokens, FontTokens, FontVariantTokens } from './text-tokens';
+export type { FontDecorationTokens, FontStyleTokens, FontTokens, FontVariantTokens } from './text-tokens';
 export { layoutStyles, layoutTokens } from './layout-tokens';
 export type { LayoutTokens } from './layout-tokens';
 export { shadowStyles, shadowTokens } from './shadow-tokens';

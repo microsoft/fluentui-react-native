@@ -3,11 +3,11 @@ import type { GestureResponderEvent, ViewProps, ViewStyle } from 'react-native';
 import { Alert, StyleSheet, View, Text } from 'react-native';
 
 import { Pressable } from '@fluentui/react-native';
+import { PRESSABLE_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { useFocusState, useHoverState, usePressState } from '@fluentui-react-native/interactive-hooks';
 import type { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
 
-import { PRESSABLE_TESTPAGE } from '../../../../E2E/src/Pressable/consts';
 import { Square } from '../Common/Square';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';

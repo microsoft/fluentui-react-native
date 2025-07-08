@@ -4,6 +4,7 @@ import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
 import { ButtonV1 as Button, ToggleButton } from '@fluentui/react-native';
 import { Separator } from '@fluentui/react-native';
+import { SVG_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { TextV1 } from '@fluentui-react-native/text';
 import {
   Circle,
@@ -23,8 +24,7 @@ import {
   parse,
 } from 'react-native-svg';
 
-import TestSvg from './Assets/accessible-icon-brands.svg';
-import { SVG_TESTPAGE } from '../../../../E2E/src/Svg/consts';
+import TestSvg from '../../../assets/accessible-icon-brands.svg';
 import { Test } from '../Test';
 import type { TestSection, PlatformStatus } from '../Test';
 

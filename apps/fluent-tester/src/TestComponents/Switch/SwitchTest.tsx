@@ -3,12 +3,12 @@ import { View, StyleSheet } from 'react-native';
 import { Platform } from 'react-native';
 
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { SWITCH_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { Switch } from '@fluentui-react-native/switch';
 
 import { CustomizedSwitch } from './CustomizedSwitch';
 import { E2ESwitchTest } from './E2ESwitchTest';
-import { SWITCH_TESTPAGE } from '../../../../E2E/src/Switch/consts';
 import { commonTestStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';

@@ -3,11 +3,11 @@ import { Alert, StyleSheet, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import { ButtonV1 as Button, Text } from '@fluentui/react-native';
+import { VIBRANCYVIEW_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { Stack } from '@fluentui-react-native/stack';
 import type { Material, BlendingMode, State } from '@fluentui-react-native/vibrancy-view';
 import { VibrancyView } from '@fluentui-react-native/vibrancy-view';
 
-import { VIBRANCYVIEW_TESTPAGE } from '../../../../E2E/src/VibrancyView/consts';
 import { MenuPicker } from '../Common/MenuPicker';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

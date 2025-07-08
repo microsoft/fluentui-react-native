@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
 import { Divider } from '@fluentui-react-native/divider';
+import { DIVIDER_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { Stack } from '@fluentui-react-native/stack';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 
 import { CustomisedMobileDividers, MobileDividers } from './MobileDividerTest';
-import { DIVIDER_TESTPAGE } from '../../../../E2E/src/Divider/consts';
 import TestSvg from '../../../assets/test.svg';
 import { commonTestStyles } from '../Common/styles';
 import { Test } from '../Test';

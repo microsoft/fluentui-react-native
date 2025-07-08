@@ -2,16 +2,16 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 
 import type { ContextualMenuProps } from '@fluentui/react-native';
-import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
-
-import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
-import { menuItems } from './testData';
 import {
   MENUBUTTONV1_TEST_COMPONENT,
   MENUBUTTONV1_ACCESSIBILITY_LABEL,
   MENUBUTTONV1_NO_A11Y_LABEL_COMPONENT,
   MENUBUTTONV1_TEST_COMPONENT_LABEL,
-} from '../../../../E2E/src/MenuButtonV1/consts';
+} from '@fluentui-react-native/e2e-testing';
+import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
+
+import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonV1TestStyles';
+import { menuItems } from './testData';
 import { testProps } from '../Common/TestProps';
 
 export const MenuButtonV1E2ETest: React.FunctionComponent = () => {

@@ -1,8 +1,9 @@
 import * as React from 'react';
 
+import { INPUT_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+
 import { E2EInputTest } from './E2EInputTest';
 import { InputDefault } from './InputDefault';
-import { INPUT_TESTPAGE } from '../../../../E2E/src/Input/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 

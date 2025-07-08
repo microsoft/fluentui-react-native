@@ -3,10 +3,10 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { Text } from '@fluentui/react-native';
+import { ICON_ACCESSIBILITY_LABEL } from '@fluentui-react-native/e2e-testing';
 import { Icon } from '@fluentui-react-native/icon';
 import type { RasterImageIconProps } from '@fluentui-react-native/icon';
 
-import { ICON_ACCESSIBILITY_LABEL } from '../../../../E2E/src/IconLegacy/consts';
 import { testImage } from '../Common/iconExamples';
 
 export const E2ETestingIcon: React.FunctionComponent = () => {

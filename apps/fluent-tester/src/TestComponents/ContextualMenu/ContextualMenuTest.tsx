@@ -12,9 +12,9 @@ import {
   Separator,
   Checkbox,
 } from '@fluentui/react-native';
+import { CONTEXTUALMENU_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
-import { CONTEXTUALMENU_TESTPAGE } from '../../../../E2E/src/ContextualMenu/consts';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';

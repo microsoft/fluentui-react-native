@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
+import { AVATAR_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+
+import type { PlatformStatus, TestSection } from '../Test';
+import { Test } from '../Test';
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';
 import { E2EAvatarTest } from './E2EAvatarTest';
-import { AVATAR_TESTPAGE } from '../../../../E2E/src/Avatar/consts';
-import type { TestSection, PlatformStatus } from '../Test';
-import { Test } from '../Test';
 
 const avatarSections: TestSection[] = [
   {

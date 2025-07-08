@@ -7,8 +7,8 @@
     "url": "https://github.com/microsoft/fluentui-react-native",
     "directory": "packages/framework/use-slot"
   },
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "exports": {
     ".": {
@@ -16,10 +16,6 @@
       "require": "./lib-commonjs/index.js",
       "types": "./lib/index.d.ts"
     }
-  },
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
   },
   "scripts": {
     "build": "fluentui-scripts build",

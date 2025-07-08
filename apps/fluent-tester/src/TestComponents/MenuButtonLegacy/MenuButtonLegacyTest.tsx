@@ -1,10 +1,11 @@
 import * as React from 'react';
 
+import { MENU_BUTTON_TESTPAGE } from '@fluentui-react-native/e2e-testing';
+
 import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
 import { MenuButtonLegacyE2ETest } from './MenuButtonLegacyE2ETest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
 import { StandardMenuButton } from './StandardMenuButtonTest';
-import { MENU_BUTTON_TESTPAGE } from '../../../../E2E/src/MenuButtonLegacy/consts';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';
 

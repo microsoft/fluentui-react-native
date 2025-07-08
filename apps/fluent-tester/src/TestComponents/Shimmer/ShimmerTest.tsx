@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
+import { SHIMMER_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import { Shimmer } from '@fluentui-react-native/experimental-shimmer';
 import { Stack } from '@fluentui-react-native/stack';
 
 import { E2ETestingShimmer } from './ShimmerE2ETest';
 import { shimmerBorderRadiusTests, shimmerRectsAndRect, shimmerRectsAndCircle } from './ShimmerTestElementSets';
-import { SHIMMER_TESTPAGE } from '../../../../E2E/src/Shimmer/consts';
 import { stackStyle } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';
 import { Test } from '../Test';

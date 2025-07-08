@@ -2,12 +2,15 @@
   "name": "@uifabricshared/theming-react-native",
   "version": "0.20.5",
   "description": "A library of functions which produce React Native styles from a Theme",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
   },
   "scripts": {
     "build": "fluentui-scripts build",

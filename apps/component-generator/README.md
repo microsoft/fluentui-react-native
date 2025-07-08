@@ -16,18 +16,9 @@ It's used to automate process of component creation.
    - `component-name` should be all lowercase.
 2. Change your newly generated component.
 3. Check dependencies in componentName's package.json (may be out of date), and remove `"private": true` from the package.json
-4. Add to the package.json after "typings":
-
-```json
-"onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
-  },
-```
-
-5. Delete package-lock.json in root dir (see todo item 9 below)
-6. Delete dependencies: {"gulp": "^4.0.2", "gulp-rename": "^2.0.0”} in root dir’s package.json
-7. Add "@fluentui-react-native/componentName”: "0.1.0", to apps/fluent-tester/package.json (make sure the version matches the version in ComponentName/package.json)
+4. Delete package-lock.json in root dir (see todo item 9 below)
+5. Delete dependencies: {"gulp": "^4.0.2", "gulp-rename": "^2.0.0”} in root dir’s package.json
+6. Add "@fluentui-react-native/componentName”: "0.1.0", to apps/fluent-tester/package.json (make sure the version matches the version in ComponentName/package.json)
 
 ## TODO:
 

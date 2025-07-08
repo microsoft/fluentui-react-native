@@ -2,12 +2,15 @@
   "name": "@fluentui-react-native/button",
   "version": "0.39.4",
   "description": "A cross-platform Button component using the Fluent Design System",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
   },
   "scripts": {
     "build": "fluentui-scripts build",

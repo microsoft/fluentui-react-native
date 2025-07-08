@@ -7,13 +7,16 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/theming/theming-utils"
   },
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js",
+      "types": "./lib/index.d.ts"
+    }
   },
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",

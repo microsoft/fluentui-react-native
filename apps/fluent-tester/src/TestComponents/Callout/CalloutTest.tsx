@@ -6,9 +6,9 @@ import { ButtonV1 as Button, Separator, Pressable } from '@fluentui/react-native
 import type { IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
 import type { CalloutNativeCommands, ICalloutProps } from '@fluentui-react-native/callout';
 import { Callout } from '@fluentui-react-native/callout';
+import { CALLOUT_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 
 import { E2ECalloutTest } from './CalloutE2ETest';
-import { CALLOUT_TESTPAGE } from '../../../../E2E/src/Callout/consts';
 import { MenuPicker } from '../Common/MenuPicker';
 import { fluentTesterStyles } from '../Common/styles';
 import type { TestSection, PlatformStatus } from '../Test';

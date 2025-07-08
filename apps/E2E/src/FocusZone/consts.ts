@@ -1,6 +1,7 @@
 import type { FocusZoneDirection } from '@fluentui-react-native/focus-zone';
 
 import type { GridButton } from './pages/FocusZonePageObject';
+export type { GridButton as GridButtonIndex } from './pages/FocusZonePageObject';
 
 export const HOMEPAGE_FOCUSZONE_BUTTON = 'Homepage_FocusZone_Button';
 export const FOCUSZONE_TESTPAGE = 'FocusZone_TestPage';

@@ -11,7 +11,7 @@ export type {
   IWithPressableOptions,
 } from './useAsPressable.types';
 export { useAsPressable, useFocusState, useHoverState, usePressState } from './useAsPressable';
-export type { PressablePropsExtended, PressableState } from './usePressableState.types';
+export type { PressablePropsExtended, PressableState, FocusState } from './usePressableState.types';
 export { usePressableState } from './usePressableState';
 export { usePressability } from './usePressability';
 export { useViewCommandFocus } from './useViewCommandFocus';
