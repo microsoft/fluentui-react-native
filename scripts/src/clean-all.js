@@ -6,19 +6,25 @@ const path = require('path');
 const os = require('os');
 // This script MUST NOT have any deps aside from Node built-ins, because it deletes all node_modules!
 
-/** @returns {Promise<string>} */
+/**
+ * @param {string} question - The question to prompt the user with
+ * @returns {Promise<string>}
+ * */
 function prompt(question) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     process.stdin.resume();
     process.stdout.write(question);
 
-    process.stdin.once('data', data => {
+    process.stdin.once('data', (data) => {
       resolve(data.toString().trim());
       process.stdin.pause();
     });
   });
 }
 
+/**
+ * @param {string} itemPath - The path to the item to check
+ */
 function deleteIfSymlink(itemPath) {
   itemPath = path.resolve(itemPath);
   try {
@@ -32,6 +38,11 @@ function deleteIfSymlink(itemPath) {
   }
 }
 
+/**
+ * Deletes symlinks in the specified node_modules directory.
+ * @param {string} nodeModulesPath - The path to the node_modules directory
+ * @returns {void}
+ */
 function deleteNodeModulesSymlinks(nodeModulesPath) {
   if (!fs.existsSync(nodeModulesPath)) {
     return;
@@ -42,13 +53,18 @@ function deleteNodeModulesSymlinks(nodeModulesPath) {
     const modulePath = path.join(nodeModulesPath, mod);
     if (mod[0] === '@' && !/[/\\]/.test(mod)) {
       // Add any scoped modules to the list of things to check
-      modules.push(...fs.readdirSync(modulePath).map(m => path.join(mod, m)));
+      modules.push(...fs.readdirSync(modulePath).map((m) => path.join(mod, m)));
     } else {
       deleteIfSymlink(modulePath);
     }
   }
 }
 
+/**
+ * Deletes symlinks in the specified parent folder.
+ * @param {string} parentFolder - The path to the parent folder
+ * @returns {void}
+ */
 function deleteSymlinks(parentFolder) {
   const parentPath = path.join(process.cwd(), parentFolder);
   if (!fs.existsSync(parentPath)) {
@@ -66,16 +82,13 @@ async function run() {
     process.exit(1);
   }
 
-  const gitStatus = child_process
-    .execSync('git status --porcelain')
-    .toString()
-    .trim();
+  const gitStatus = child_process.execSync('git status --porcelain').toString().trim();
 
   if (!process.argv.includes('-y')) {
     console.log('WARNING: This command will PERMANENTLY DELETE all untracked files (such as build output and node_modules).');
     if (gitStatus) {
       console.log('It will also revert uncommitted changes to the following files:');
-      const lines = gitStatus.split(/\r?\n/g).map(line => '  ' + line);
+      const lines = gitStatus.split(/\r?\n/g).map((line) => '  ' + line);
       console.log(lines.slice(0, 20).join(os.EOL));
       if (lines.length > 20) {
         console.log(`  ...and ${lines.length - 20} more`);
@@ -102,7 +115,7 @@ async function run() {
   console.log('Done!');
 }
 
-run().catch(ex => {
+run().catch((ex) => {
   console.error('Caught error:');
   console.error(ex);
   process.exit(1);

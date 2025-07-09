@@ -47,21 +47,6 @@
       "outFiles": []
     },
     {
-      "name": "Debug metro bundling task",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceRoot}/scripts/debug-metro-pack.js",
-      "cwd": "${workspaceFolder}/packages/libraries/core",
-      "args": ["rnTester"],
-      "runtimeArgs": ["--nolazy"],
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "console": "integratedTerminal",
-      "sourceMaps": true,
-      "outFiles": []
-    },
-    {
       "name": "Debug Fabric Tester",
       "type": "node",
       "request": "attach",
