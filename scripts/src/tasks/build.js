@@ -43,6 +43,10 @@ function getBuildTargets(cwd = process.cwd()) {
     const moduleBase = getModuleString(options.module);
     const jsxRuntime = options.jsx === JsxEmit.ReactJSX || options.jsx === JsxEmit.ReactJSXDev;
 
+    /**
+     * @param {string} srcTarget
+     * @param {string} module
+     */
     function addTarget(srcTarget, module) {
       targets.push({
         module,
@@ -53,15 +57,15 @@ function getBuildTargets(cwd = process.cwd()) {
     }
 
     // now look for a cjs target
-    const cjsPath = manifest.main || manifest.exports?.['.'].require;
-    if (cjsPath) {
+    const cjsPath = manifest.main;
+    if (cjsPath && typeof cjsPath === 'string') {
       const module = moduleBase && moduleBase !== 'esnext' ? moduleBase : 'node16';
       addTarget(cjsPath, module);
     }
 
     // look for an esm target
-    const esmPath = manifest.module || manifest.exports?.['.'].import;
-    if (esmPath) {
+    const esmPath = manifest.module;
+    if (esmPath && typeof esmPath === 'string') {
       addTarget(esmPath, 'esnext');
     }
   }

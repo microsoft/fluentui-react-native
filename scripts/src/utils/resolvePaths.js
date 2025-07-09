@@ -2,7 +2,12 @@ import findUp from 'find-up';
 import fs from 'fs';
 import path from 'path';
 
-export function nodeModulesToRoot(): string[] {
+/**
+ * Find all node_modules directories up to the project root
+ * @returns {string[]} - An array of paths to node_modules directories found in the project root.
+ */
+export function nodeModulesToRoot() {
+  /** @type {string[]} */
   const results = [];
   findUp.sync((directory) => {
     const nodeModulesPath = path.join(directory, 'node_modules');

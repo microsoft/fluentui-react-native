@@ -1,10 +1,17 @@
-import { TaskFunction, logger } from 'just-task';
+// @ts-check
 
-export function checkForModifiedFiles(): TaskFunction {
-  return function (done: (error?: Error) => void) {
+import { logger } from 'just-task';
+
+/**
+ *
+ * @returns {(import('just-task').TaskFunction)}
+ */
+export function checkForModifiedFiles() {
+  return function (done) {
     try {
       const EOL = require('os').EOL;
       const execSync = require('child_process').execSync;
+      /** @type {(value: string) => boolean} */
       const notEmpty = (value) => value.trim() !== '';
 
       const gitStatusOutput = execSync('git status -s --untracked-files=no').toString('utf8');

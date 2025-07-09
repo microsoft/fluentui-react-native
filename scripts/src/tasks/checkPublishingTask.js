@@ -1,26 +1,25 @@
-import { TaskFunction, logger } from 'just-task';
+// @ts-check
+
+import { logger } from 'just-task';
 import { getPackageInfos, findGitRoot } from 'workspace-tools';
 
 import { checkDependencies } from '../utils/checkDependencies';
 
-export type DependencyType = 'dependencies' | 'devDependencies' | 'peerDependencies';
-
-export interface CheckPublishingOptions {
-  /**
-   * An array of fields to check for private internal dependencies, by default this is just dependencies
-   */
-  dependencyTypes?: DependencyType[];
-}
+/**
+ * @typedef {'dependencies' | 'devDependencies' | 'peerDependencies'} DependencyType
+ * @typedef {{ dependencyTypes?: DependencyType[] }} CheckPublishingOptions
+ */
 
 /**
  * Task to check the matrix of packages for publishing errors. In particular this checks for published packages that
  * have a dependency on a private package
  *
- * @param options - options for configuring the task
+ * @param {CheckPublishingOptions} [options={}] - options for configuring the task
+ * @return {import('just-task').TaskFunction} - the task function
  */
-export function checkPublishingTask(options: CheckPublishingOptions = {}): TaskFunction {
+export function checkPublishingTask(options = {}) {
   const dependencyTypes = options.dependencyTypes || ['dependencies'];
-  return function (done: (error?: Error) => void) {
+  return function (done) {
     const packageInfos = getPackageInfos(findGitRoot(process.cwd()));
     logger.info('Starting scan for publishing errors');
     try {

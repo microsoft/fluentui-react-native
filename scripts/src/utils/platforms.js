@@ -1,10 +1,16 @@
-export type AllPlatforms = 'win32' | 'ios' | 'android' | 'windows' | 'macos';
-export type PlatformValue = AllPlatforms | 'default';
+// @ts-check
+
+/**
+ * @typedef {'win32' | 'ios' | 'android' | 'windows' | 'macos' } AllPlatforms
+ * @typedef {'default' | AllPlatforms} PlatformValue
+ * @typedef {Record<PlatformValue, string>} RnVersions
+ */
 
 const _defaultPlatform = 'default';
 const _defaultVersion = 'react-native';
 
-const _rnVersions: { [key in PlatformValue]: string } = {
+/** @type {Record<PlatformValue, string>} */
+const _rnVersions = {
   default: _defaultVersion,
   android: _defaultVersion,
   ios: _defaultVersion,
@@ -13,24 +19,37 @@ const _rnVersions: { [key in PlatformValue]: string } = {
   windows: 'react-native-windows',
 };
 
-export function findPlatformFromArgv(toSet?: PlatformValue): PlatformValue | undefined {
-  for (let index = 0; index < process.argv.length; index++) {
-    if (process.argv[index] === '--platform') {
-      if (toSet) {
-        process.argv[index + 1] = toSet;
-      }
-      const platformArg = process.argv[index + 1];
-      return platformArg && _rnVersions[platformArg] ? (platformArg as PlatformValue) : undefined;
+/**
+ * Find the platform from the command line arguments.
+ * @param {PlatformValue} [toSet] - Optional platform value to override the args.
+ * @returns {PlatformValue | undefined} - The found platform or undefined.
+ */
+export function findPlatformFromArgv(toSet) {
+  const platformValueIndex = process.argv.indexOf('--platform') + 1;
+  if (platformValueIndex > 0 && platformValueIndex < process.argv.length) {
+    if (toSet) {
+      process.argv[platformValueIndex] = toSet;
+    }
+    const platformArg = process.argv[platformValueIndex];
+    if (platformArg && Object.prototype.hasOwnProperty.call(_rnVersions, platformArg)) {
+      const typedValue = /** @type {PlatformValue} */ (platformArg);
+      return typedValue;
     }
   }
   return undefined;
 }
 
-export function findPlatform(): PlatformValue {
+export function findPlatform() {
   return findPlatformFromArgv() || _defaultPlatform;
 }
 
-export function ensurePlatform(platform?: PlatformValue, defaultOverride?: PlatformValue): PlatformValue {
+/**
+ * Ensure the platform is set from the command line arguments or defaults.
+ * @param {PlatformValue} [platform]
+ * @param {PlatformValue} [defaultOverride]
+ * @returns {PlatformValue}
+ */
+export function ensurePlatform(platform, defaultOverride) {
   const found = findPlatformFromArgv(platform);
   platform = found || platform;
   if (platform && !found) {

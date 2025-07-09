@@ -4267,6 +4267,7 @@ __metadata:
     markdown-link-check: "npm:^3.8.7"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
+    typescript: "npm:^4.9.4"
   peerDependencies:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
@@ -4286,7 +4287,7 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:^13.6.4"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/jest-preset": "npm:^0.2.0"
+    "@rnx-kit/jest-preset": "npm:^0.2.1"
     "@rnx-kit/tools-packages": "npm:^0.1.1"
     "@rnx-kit/tools-typescript": "npm:^0.1.1"
     "@rnx-kit/tsconfig": "npm:^2.1.1"
@@ -4314,7 +4315,7 @@ __metadata:
     react-native-svg-transformer: "npm:^1.0.0"
     react-test-renderer: "npm:18.2.0"
     rimraf: "npm:^5.0.1"
-    typescript: "npm:4.9.4"
+    typescript: "npm:^5.8.0"
     workspace-tools: "npm:^0.26.3"
   peerDependencies:
     react: 18.2.0
@@ -6837,7 +6838,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/jest-preset@npm:^0.2.0":
+"@rnx-kit/jest-preset@npm:^0.2.1":
   version: 0.2.1
   resolution: "@rnx-kit/jest-preset@npm:0.2.1"
   dependencies:
@@ -22202,6 +22203,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^4.9.4":
+  version: 4.9.5
+  resolution: "typescript@npm:4.9.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/5f6cad2e728a8a063521328e612d7876e12f0d8a8390d3b3aaa452a6a65e24e9ac8ea22beb72a924fd96ea0a49ea63bb4e251fb922b12eedfb7f7a26475e5c56
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^5.8.0":
+  version: 5.8.3
+  resolution: "typescript@npm:5.8.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/5f8bb01196e542e64d44db3d16ee0e4063ce4f3e3966df6005f2588e86d91c03e1fb131c2581baf0fb65ee79669eea6e161cd448178986587e9f6844446dbb48
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@npm%3A4.9.4#optional!builtin<compat/typescript>":
   version: 4.9.4
   resolution: "typescript@patch:typescript@npm%3A4.9.4#optional!builtin<compat/typescript>::version=4.9.4&hash=289587"
@@ -22219,6 +22240,26 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/f3b8082c9d1d1629a215245c9087df56cb784f9fb6f27b5d55577a20e68afe2a889c040aacff6d27e35be165ecf9dca66e694c42eb9a50b3b2c451b36b5675cb
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^4.9.4#optional!builtin<compat/typescript>":
+  version: 4.9.5
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/e3333f887c6829dfe0ab6c1dbe0dd1e3e2aeb56c66460cb85c5440c566f900c833d370ca34eb47558c0c69e78ced4bfe09b8f4f98b6de7afed9b84b8d1dd06a1
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.8.0#optional!builtin<compat/typescript>":
+  version: 5.8.3
+  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/39117e346ff8ebd87ae1510b3a77d5d92dae5a89bde588c747d25da5c146603a99c8ee588c7ef80faaf123d89ed46f6dbd918d534d641083177d5fac38b8a1cb
   languageName: node
   linkType: hard
 

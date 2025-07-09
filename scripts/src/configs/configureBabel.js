@@ -6,7 +6,7 @@
  * @returns {import('@babel/core').TransformOptions} - The complete Babel configuration object.
  */
 module.exports.configureBabel = function (/** @type {BabelConfigOptions} */ options = {}, mixin = {}) {
-  const { esmodule, estarget, jsxRuntime } = options;
+  const { esmodule, jsxRuntime } = options;
   return {
     presets: [
       [

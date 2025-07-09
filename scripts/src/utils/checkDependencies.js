@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * Quick and dirty script to ensure we have got our nested peerDependencies correct
  *
@@ -28,17 +30,18 @@ export function checkDependencies() {
     }
 
     for (const pkgName in infos) {
-
       const deps = { ...infos[pkgName].dependencies, ...infos[pkgName].peerDependencies };
 
-      const missingPeerDeps: { name: string, version: string }[] = [];
-      const missingPeerDepsMeta: string[] = [];
+      /** @type {{ name: string, version: string }[]} */
+      const missingPeerDeps = [];
+      /** @type {string[]} */
+      const missingPeerDepsMeta = [];
 
       for (const dep in deps) {
         if (infos[dep]) {
           for (const peerDep in infos[dep].peerDependencies) {
             if (!deps[peerDep]) {
-              if (!missingPeerDeps.some(missingDep => missingDep.name === peerDep)) {
+              if (!missingPeerDeps.some((missingDep) => missingDep.name === peerDep)) {
                 missingPeerDeps.push({ name: peerDep, version: infos[dep].peerDependencies[peerDep] });
                 if (optionalPeers.includes(peerDep)) {
                   missingPeerDepsMeta.push(peerDep);
@@ -76,7 +79,7 @@ export function checkDependencies() {
 
         for (const missingMeta of missingPeerDepsMeta) {
           infos[pkgName].pkgJson.peerDependenciesMeta[missingMeta] = {
-            'optional': true
+            optional: true,
           };
         }
         requireWriteFile = true;

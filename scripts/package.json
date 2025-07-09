@@ -7,7 +7,7 @@
     "fluentui-scripts": "./just-scripts.js"
   },
   "scripts": {
-    "build-tools": "tsc",
+    "build": "tsc",
     "bundlesize": "bundlesize --debug",
     "depcheck": "just-scripts depcheck",
     "prettier": "node ./just-scripts.js prettier",
@@ -28,7 +28,7 @@
     "@react-native-community/cli-platform-ios": "^13.6.4",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
-    "@rnx-kit/jest-preset": "^0.2.0",
+    "@rnx-kit/jest-preset": "^0.2.1",
     "@rnx-kit/tools-packages": "^0.1.1",
     "@rnx-kit/tools-typescript": "^0.1.1",
     "@rnx-kit/tsconfig": "^2.1.1",
@@ -56,7 +56,7 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",
     "rimraf": "^5.0.1",
-    "typescript": "4.9.4",
+    "typescript": "^5.8.0",
     "workspace-tools": "^0.26.3"
   },
   "bundlesize": [

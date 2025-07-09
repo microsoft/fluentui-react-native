@@ -22,12 +22,14 @@ function getPackageManifest(folder) {
 const scriptFolder = path.dirname(fileURLToPath(import.meta.url));
 const scriptManifest = getPackageManifest(scriptFolder);
 const rootManifest = getPackageManifest(path.dirname(scriptFolder));
-// all merged versions from the root and script manifests, scripts having precedence
+// all merged versions from the root and script manifests
+// have the root manifest take precedence over the script manifest, this allows the script folder to ingest newer
+// tooling without updating all projects in the repo
 const baseVersions = {
-  ...rootManifest?.devDependencies,
-  ...rootManifest?.dependencies,
   ...scriptManifest?.devDependencies,
   ...scriptManifest?.dependencies,
+  ...rootManifest?.devDependencies,
+  ...rootManifest?.dependencies,
 };
 
 /**

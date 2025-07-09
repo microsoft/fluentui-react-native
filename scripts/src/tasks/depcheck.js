@@ -1,8 +1,16 @@
+// @ts-check
+
+/**
+ * Merges two objects at one level.
+ * @param {Record<string, unknown>} a
+ * @param {Record<string, unknown>} b
+ * @returns {Record<string, unknown>}
+ */
 function mergeOneLevel(a, b = {}) {
   const result = { ...a, ...b };
   Object.keys(a).forEach((key) => {
     if (Array.isArray(b[key]) && Array.isArray(a[key])) {
-      result[key] = [].concat(a[key], b[key]);
+      result[key] = [...a[key], ...b[key]];
     }
   });
   return result;
@@ -13,6 +21,10 @@ function scriptsDevDeps() {
   return Object.keys(config.devDependencies);
 }
 
+/**
+ * Task to check for unused dependencies in the project using depcheck.
+ * @returns {import('just-scripts').TaskFunction}
+ */
 function depcheckTask() {
   return function (done) {
     const { logger } = require('just-scripts');
