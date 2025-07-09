@@ -2,6 +2,35 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 09 Jul 2025 21:40:49 GMT",
+      "version": "0.20.3",
+      "tag": "@uifabricshared/theming-ramp_v0.20.3",
+      "comments": {
+        "none": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          }
+        ],
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "update builds to use node16 settings and modern export maps"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 23:43:53 GMT",
       "version": "0.20.2",
       "tag": "@uifabricshared/theming-ramp_v0.20.2",

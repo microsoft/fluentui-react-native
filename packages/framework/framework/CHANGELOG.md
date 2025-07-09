@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/framework
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:55 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 09 Jul 2025 21:40:58 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.14.3
+
+Wed, 09 Jul 2025 21:40:58 GMT
+
+### Patches
+
+- export missing type from framework to fix build error in Popover (jasonmo@microsoft.com)
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.14.2
 

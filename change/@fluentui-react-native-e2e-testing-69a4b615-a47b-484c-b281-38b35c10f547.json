@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "rework e2e and fluent-tester to avoid direct references across packages",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

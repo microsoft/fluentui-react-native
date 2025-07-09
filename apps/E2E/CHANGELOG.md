@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-<!-- This log was last generated on Mon, 10 Mar 2025 20:26:46 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 09 Jul 2025 21:41:01 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.41.0
+
+Wed, 09 Jul 2025 21:41:01 GMT
+
+### Minor changes
+
+- rework e2e and fluent-tester to avoid direct references across packages (jasonmo@microsoft.com)
+- updated wdio versions and fixed tests (gulnazsayed@microsoft.com)
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 1.40.8
 

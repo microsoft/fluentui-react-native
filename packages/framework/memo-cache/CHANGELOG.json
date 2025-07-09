@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Wed, 09 Jul 2025 21:40:56 GMT",
+      "version": "1.3.4",
+      "tag": "@fluentui-react-native/memo-cache_v1.3.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "update builds to use node16 settings and modern export maps"
+          }
+        ],
+        "none": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 18:42:24 GMT",
       "version": "1.3.3",
       "tag": "@fluentui-react-native/memo-cache_v1.3.3",

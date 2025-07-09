@@ -2,6 +2,35 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Wed, 09 Jul 2025 21:40:50 GMT",
+      "version": "0.13.2",
+      "tag": "@uifabricshared/foundation-composable_v0.13.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "update builds to use node16 settings and modern export maps"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ],
+        "none": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Apr 2024 18:08:40 GMT",
       "version": "0.13.0",
       "tag": "@uifabricshared/foundation-composable_v0.13.0",

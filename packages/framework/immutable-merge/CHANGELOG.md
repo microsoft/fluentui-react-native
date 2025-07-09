@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
-This log was last generated on Fri, 01 Mar 2024 20:39:11 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 09 Jul 2025 21:40:55 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.2.3
+
+Wed, 09 Jul 2025 21:40:55 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 1.2.2
 

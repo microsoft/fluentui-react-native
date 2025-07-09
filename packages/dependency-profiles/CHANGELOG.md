@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
-This log was last generated on Fri, 12 Apr 2024 21:02:38 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 09 Jul 2025 21:41:17 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.8.46
+
+Wed, 09 Jul 2025 21:41:17 GMT
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.8.1
 

@@ -1,8 +1,17 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Thu, 11 Apr 2024 18:08:40 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 09 Jul 2025 21:40:50 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.15.2
+
+Wed, 09 Jul 2025 21:40:50 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.15.0
 

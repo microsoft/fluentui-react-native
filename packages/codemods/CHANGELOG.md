@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/codemods
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:54 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 09 Jul 2025 21:41:00 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.5.15
+
+Wed, 09 Jul 2025 21:41:00 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 0.5.14
 

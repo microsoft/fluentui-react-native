@@ -1,8 +1,17 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Thu, 02 May 2024 03:33:29 GMT and should not be manually modified.
+<!-- This log was last generated on Wed, 09 Jul 2025 21:40:49 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.20.6
+
+Wed, 09 Jul 2025 21:40:49 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.20.1
 

@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/tester
 
-<!-- This log was last generated on Mon, 10 Mar 2025 20:26:46 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 09 Jul 2025 21:40:53 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.170.27
+
+Wed, 09 Jul 2025 21:40:53 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- added accessibility to icon button (gulnazsayed@microsoft.com)
+- remove caterpillar theme (gulnazsayed@microsoft.com)
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
+- fix narrator bug (gulnazsayed@microsoft.com)
 
 ## 0.170.26
 
