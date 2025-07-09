@@ -5,13 +5,13 @@ const { task, series, parallel, condition, option, argv, addResolvePath, prettie
 const path = require('path');
 const fs = require('fs');
 
-const { clean } = require('./tasks/clean.js');
-const { copy } = require('./tasks/copy.js');
-const { jest } = require('./tasks/jest.js');
-const { build } = require('./tasks/build.js');
-const { eslint } = require('./tasks/eslint.js');
-const { depcheckTask } = require('./tasks/depcheck.js');
-const { checkForModifiedFiles } = require('./tasks/checkForModifiedFilesTask.js');
+const { clean } = require('../src/tasks/clean.js');
+const { copy } = require('../src/tasks/copy.js');
+const { jest } = require('../src/tasks/jest.js');
+const { build } = require('../src/tasks/build.js');
+const { eslint } = require('../src/tasks/eslint.js');
+const { depcheckTask } = require('../src/tasks/depcheck.js');
+const { checkForModifiedFiles } = require('../src/tasks/checkForModifiedFilesTask.js');
 const { findGitRoot } = require('workspace-tools');
 
 export function preset() {
