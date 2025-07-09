@@ -1,7 +1,7 @@
 // @ts-check
 
-import { spawn } from 'child_process';
-import * as os from 'os';
+const { spawn } = require('child_process');
+const os = require('os');
 
 const BASE_COMMAND = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
 const USE_SHELL = os.platform() === 'win32' && (BASE_COMMAND.endsWith('.bat') || BASE_COMMAND.endsWith('.cmd'));
@@ -13,6 +13,7 @@ const USE_SHELL = os.platform() === 'win32' && (BASE_COMMAND.endsWith('.bat') ||
  */
 export async function runScript(command, ...args) {
   const spawnArgs = [command, ...args];
+
   return new Promise((resolve) => {
     spawn(BASE_COMMAND, spawnArgs, {
       shell: USE_SHELL,

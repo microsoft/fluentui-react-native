@@ -18,19 +18,22 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "scripts"
   },
-  "peerDependencies": {
-    "just-scripts": "^2.3.2",
-    "react": "18.2.0",
-    "react-native": "^0.73.0 || ^0.74.0",
-    "react-native-svg": "^15.0.0 || ^15.4.0"
+  "dependencies": {
+    "glob": "^10.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-private-methods": "^7.27.1",
     "@react-native-community/cli": "^13.6.4",
     "@react-native-community/cli-platform-android": "^13.6.4",
     "@react-native-community/cli-platform-ios": "^13.6.4",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/jest-preset": "^0.2.0",
+    "@rnx-kit/tools-packages": "^0.1.1",
+    "@rnx-kit/tools-typescript": "^0.1.1",
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
     "@types/jest": "^29.0.0",
