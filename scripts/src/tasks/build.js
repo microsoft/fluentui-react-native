@@ -84,6 +84,10 @@ async function buildTarget(target, cwd) {
     codegenNativeComponents(target, cwd);
   }
 
+  if (result !== 0) {
+    console.error(`Build failed for target: ${cwd}:${outDir}`);
+  }
+
   return result;
 }
 
@@ -104,12 +108,12 @@ function build() {
     }
 
     const buildPromises = targets.map((target) => buildTarget(target, cwd));
-    await Promise.all(buildPromises);
-    const success = buildPromises.every(async (result) => (await result) === 0);
-    if (success) {
-      console.log('Build completed successfully.');
-    } else {
-      console.error('Build failed with errors.');
+    const results = await Promise.all(buildPromises);
+    for (const result of results) {
+      if (result !== 0) {
+        done(new Error(`Build failed with exit code: ${result}`));
+        return;
+      }
     }
     done();
   };
