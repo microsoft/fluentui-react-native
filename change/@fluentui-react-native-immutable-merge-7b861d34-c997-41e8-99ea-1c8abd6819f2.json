@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "run `yarn bump-versions`",
+  "packageName": "@fluentui-react-native/immutable-merge",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "none"
+}

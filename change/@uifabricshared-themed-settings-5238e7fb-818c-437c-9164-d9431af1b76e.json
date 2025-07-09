@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "run `yarn bump-versions`",
+  "packageName": "@uifabricshared/themed-settings",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "none"
+}
