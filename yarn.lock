@@ -4287,6 +4287,7 @@ __metadata:
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
     "@rnx-kit/jest-preset": "npm:^0.2.0"
+    "@rnx-kit/tools-packages": "npm:^0.1.1"
     "@rnx-kit/tools-typescript": "npm:^0.1.1"
     "@types/es6-collections": "npm:^0.5.29"
     "@types/es6-promise": "npm:0.0.32"
