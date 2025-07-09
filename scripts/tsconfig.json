@@ -1,31 +1,9 @@
 {
+  "extends": "@rnx-kit/tsconfig/tsconfig.node.json",
   "compilerOptions": {
-    "outDir": "./lib",
-    "target": "es2022",
-    "types": ["node", "jest"],
-    "module": "node16",
-    "moduleResolution": "node16",
-    "declaration": true,
-    "declarationMap": true,
-    "strict": true,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "sourceMap": true,
-    "jsx": "react",
-    "resolveJsonModule": true
-  },
-  "baseUrl": ".",
-  "paths": {
-    "*": ["src/*"]
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true
   },
   "include": ["src"]
 }
