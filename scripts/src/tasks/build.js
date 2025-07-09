@@ -1,6 +1,6 @@
 // @ts-check
 
-const { findNativeComponents, codegenNativeComponents } = require('../utils/codegenNativeComponents');
+const { findNativeComponents, codegenNativeComponents } = require('../utils/codegenNativeComponents.js');
 const path = require('path');
 const fs = require('fs');
 const { runScript } = require('../utils/runScript.js');

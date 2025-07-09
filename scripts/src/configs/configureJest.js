@@ -4,9 +4,9 @@
 import jestPreset from '@rnx-kit/jest-preset';
 import path from 'path';
 import { getPackageInfos } from 'workspace-tools';
-import { mergeConfigs } from './mergeConfigs';
-import { ensurePlatform } from '../utils/platforms';
-import { nodeModulesToRoot } from '../utils/resolvePaths';
+import { mergeConfigs } from './mergeConfigs.js';
+import { ensurePlatform } from '../utils/platforms.js';
+import { nodeModulesToRoot } from '../utils/resolvePaths.js';
 
 /**
  * @typedef {import('jest').Config} JestConfig

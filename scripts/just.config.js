@@ -8,12 +8,12 @@ const srcPath = path.join(process.cwd(), 'src');
 const libPath = path.join(process.cwd(), 'lib');
 
 const checkPublishing = () => {
-  const { checkPublishingTask } = require('./lib/tasks/checkPublishingTask');
+  const { checkPublishingTask } = require('./src/tasks/checkPublishingTask.js');
   return checkPublishingTask();
 };
 
 const checkForModifiedFiles = () => {
-  const { checkForModifiedFiles } = require('./lib/tasks/checkForModifiedFilesTask');
+  const { checkForModifiedFiles } = require('./src/tasks/checkForModifiedFilesTask.js');
   return checkForModifiedFiles();
 };
 

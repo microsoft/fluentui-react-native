@@ -3,7 +3,7 @@
 import { logger } from 'just-task';
 import { getPackageInfos, findGitRoot } from 'workspace-tools';
 
-import { checkDependencies } from '../utils/checkDependencies';
+import { checkDependencies } from '../utils/checkDependencies.js';
 
 /**
  * @typedef {'dependencies' | 'devDependencies' | 'peerDependencies'} DependencyType

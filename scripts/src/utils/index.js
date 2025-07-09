@@ -1,2 +1,2 @@
-export * from './platforms';
-export * from './resolvePaths';
+export * from './platforms.js';
+export * from './resolvePaths.js';
