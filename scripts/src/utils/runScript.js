@@ -1,10 +1,6 @@
 // @ts-check
 
 const { spawn } = require('child_process');
-const os = require('os');
-
-const BASE_COMMAND = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
-const USE_SHELL = os.platform() === 'win32' && (BASE_COMMAND.endsWith('.bat') || BASE_COMMAND.endsWith('.cmd'));
 
 /**
  * @param {string} command
@@ -15,8 +11,7 @@ export async function runScript(command, ...args) {
   const spawnArgs = [command, ...args];
 
   return new Promise((resolve) => {
-    spawn(BASE_COMMAND, spawnArgs, {
-      shell: USE_SHELL,
+    spawn(process.execPath, spawnArgs, {
       cwd: process.cwd(),
       stdio: 'inherit',
     }).on('close', (code) => {
