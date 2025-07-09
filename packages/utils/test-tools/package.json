@@ -3,8 +3,14 @@
   "version": "0.1.1",
   "description": "Tools and mocks for testing components using jest",
   "main": "lib-commonjs/index.js",
-  "module": "src/index.ts",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib-commonjs/index.js"
+    }
+  },
   "private": true,
   "scripts": {
     "build": "fluentui-scripts build",

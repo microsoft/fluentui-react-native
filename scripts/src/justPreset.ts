@@ -8,8 +8,7 @@ const fs = require('fs');
 const { clean } = require('./tasks/clean');
 const { copy } = require('./tasks/copy');
 const { jest } = require('./tasks/jest');
-const { ts } = require('./tasks/ts');
-const { codegenNativeComponents } = require('./tasks/codegenNativeComponents')
+const { build } = require('./tasks/build');
 const { eslint } = require('./tasks/eslint');
 const { depcheckTask } = require('./tasks/depcheck');
 const { checkForModifiedFiles } = require('./tasks/checkForModifiedFilesTask');
@@ -33,25 +32,14 @@ export function preset() {
   task('clean', clean);
   task('copy', copy);
   task('jest', jest);
-  task('codegenNativeComponents', codegenNativeComponents);
-  task('ts:commonjs', ts.commonjs);
-  task('ts:esm', ts.esm);
+  task('ts', build);
   task('eslint', eslint);
-  task('ts:commonjs-only', ts.commonjsOnly);
   task('prettier', () =>
     argv().fix
       ? prettierTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') })
       : prettierCheckTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') }),
   );
   task('checkForModifiedFiles', checkForModifiedFiles);
-  task('tsall', parallel('ts:commonjs', 'ts:esm'));
-  task(
-    'ts',
-    series(
-      condition('ts:commonjs-only', () => !!argv().commonjs),
-      condition('tsall', () => !argv().commonjs),
-    ),
-  );
 
   task(
     'validate',
@@ -61,19 +49,7 @@ export function preset() {
     ),
   );
 
-  task(
-    'build:node-lib',
-    series(
-      'clean',
-      'copy',
-      series(
-        condition('validate', () => !argv().min),
-        'ts:commonjs-only',
-      ),
-    ),
-  );
-
-  task('build', series('clean', 'copy', 'ts', 'codegenNativeComponents'));
+  task('build', series('clean', 'copy', 'ts'));
 
   task('depcheck', depcheckTask);
 
