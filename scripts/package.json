@@ -95,5 +95,10 @@
         "svg"
       ]
     }
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "^0.73.0 || ^0.74.0",
+    "react-native-svg": "^15.0.0 || ^15.4.0"
   }
 }
