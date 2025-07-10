@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "export missing type from framework to fix build error in Popover",
-  "packageName": "@fluentui-react-native/framework",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}
