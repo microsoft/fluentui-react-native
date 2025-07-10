@@ -10,9 +10,9 @@
   "scripts": {
     "build": "tsc",
     "bundlesize": "bundlesize --debug",
-    "depcheck": "just-scripts depcheck",
-    "prettier": "node ./just-scripts.js prettier",
-    "prettier-fix": "node ./just-scripts.js prettier --fix true"
+    "depcheck": "node ./cli.cjs check-publishing",
+    "prettier": "node ./cli.cjs prettier",
+    "prettier-fix": "node ./cli.cjs prettier --fix true"
   },
   "repository": {
     "type": "git",

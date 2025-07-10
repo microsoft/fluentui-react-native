@@ -14,11 +14,10 @@ import { checkDependencies } from '../utils/checkDependencies.js';
  * Task to check the matrix of packages for publishing errors. In particular this checks for published packages that
  * have a dependency on a private package
  *
- * @param {CheckPublishingOptions} [options={}] - options for configuring the task
  * @return {import('just-task').TaskFunction} - the task function
  */
-export function checkPublishingTask(options = {}) {
-  const dependencyTypes = options.dependencyTypes || ['dependencies'];
+export function checkPublishingTask() {
+  const dependencyTypes = ['dependencies'];
   return function (done) {
     const packageInfos = getPackageInfos(findGitRoot(process.cwd()));
     logger.info('Starting scan for publishing errors');

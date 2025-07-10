@@ -12,6 +12,7 @@ import { build } from '../src/tasks/build.js';
 import { eslint } from '../src/tasks/eslint.js';
 import { depcheckTask } from '../src/tasks/depcheck.js';
 import { checkForModifiedFiles } from '../src/tasks/checkForModifiedFilesTask.js';
+import { checkPublishingTask } from '../src/tasks/checkPublishingTask.js';
 import { findGitRoot } from 'workspace-tools';
 import { fileURLToPath } from 'url';
 
@@ -40,6 +41,7 @@ task('prettier', () =>
     : prettierCheckTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') }),
 );
 task('checkForModifiedFiles', checkForModifiedFiles);
+task('check-publishing', checkPublishingTask);
 
 task(
   'validate',

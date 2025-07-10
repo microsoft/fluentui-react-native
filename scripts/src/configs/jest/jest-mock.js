@@ -97,5 +97,5 @@ export const KeyCodes = {
   openBracket: 219,
   backSlash: 220,
   closeBracket: 221,
-  singleQuote: 222
+  singleQuote: 222,
 };
