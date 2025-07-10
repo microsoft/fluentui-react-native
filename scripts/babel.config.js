@@ -1,2 +1,2 @@
-const { configureBabel } = require('./src/configs/configureBabel.js');
-module.exports = configureBabel();
+import { configureBabel } from './src/configs/configureBabel.js';
+export default configureBabel();

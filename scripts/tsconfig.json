@@ -6,5 +6,5 @@
     "noEmit": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "configs"]
+  "include": ["."]
 }

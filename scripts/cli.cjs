@@ -2,4 +2,6 @@
 const path = require('path');
 const configPath = path.join(__dirname, './configs/just.config.js');
 process.argv.push('--config', configPath);
+
+// @ts-ignore - declaration file is not needed to invoke the just cli
 require('just-scripts/bin/just-scripts');

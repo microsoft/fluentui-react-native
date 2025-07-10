@@ -6,12 +6,14 @@ import { fileURLToPath } from 'url';
 
 /**
  * @typedef {() => boolean} ConditionalCheck
+ * @typedef {Record<string, string>} DependencySet
+ * @typedef {{scripts?: Record<string, string>, dependencies?: DependencySet, devDependencies?: DependencySet}} PkgManifest
  */
 
 /**
  * Get the package.json manifest for a given folder.
  * @param {string} folder
- * @returns {import('@rnx-kit/tools-packages').PackageInfo['manifest']}
+ * @returns {PkgManifest}
  */
 function getPackageManifest(folder) {
   const manifestPath = path.join(folder, 'package.json');
@@ -35,12 +37,12 @@ const baseVersions = {
 /**
  * Conditionally add a dependency to the given dependencies object if it is not already present
  * @param {string[]} depsToAdd
- * @param {import('@rnx-kit/tools-packages').PackageInfo['manifest']} manifest
+ * @param {PkgManifest} manifest
  * @param {ConditionalCheck | boolean | undefined} condition
  * @returns {Record<string, string>}
  */
 function conditionallyAdd(depsToAdd, manifest, condition) {
-  /** @type {Record<string, string>} */
+  /** @type {DependencySet} */
   const newDeps = {};
   if (!condition || (typeof condition === 'function' ? condition() : condition)) {
     for (const dep of depsToAdd) {
@@ -58,17 +60,20 @@ function conditionallyAdd(depsToAdd, manifest, condition) {
   return newDeps;
 }
 
+/**
+ * @param {PkgManifest} manifest
+ * @returns {boolean} true if prettier is already in the manifest or if a prettier script is defined
+ */
 function addPrettier(manifest) {
-  return manifest && manifest.scripts && (manifest.scripts.prettier || manifest.scripts['prettier-fix']);
+  return Boolean(manifest && manifest.scripts && (manifest.scripts.prettier || manifest.scripts['prettier-fix']));
 }
 
 /**
  * Get the dynamic dependencies for the given package given the package root directory and its manifest.
- * @param {{cwd: string, manifest: import('@rnx-kit/tools-packages').PackageInfo['manifest']}} param0
+ * @param {{cwd: string, manifest: PkgManifest}} param0
  * @returns { { dependencies: Record<string, string> } }
  */
 export default function ({ cwd, manifest }) {
-  const dependenciesToAdd = {};
   const enableLinting = Boolean(manifest.scripts && manifest.scripts.lint);
 
   return {
