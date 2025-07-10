@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Run bump-versions",
+  "packageName": "@fluentui-react-native/separator",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
