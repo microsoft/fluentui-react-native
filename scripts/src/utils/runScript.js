@@ -1,7 +1,8 @@
 // @ts-check
 
-const { spawn } = require('child_process');
-const path = require('path');
+import { spawn } from 'child_process';
+import path from 'path';
+import Module from 'module';
 
 /** @type {Record<string, string>} */
 const cmdToModule = {
@@ -14,6 +15,7 @@ const cmdToModule = {
  * @returns {string}
  */
 function getBinPath(command) {
+  const require = Module.createRequire(process.cwd());
   const cmdModule = cmdToModule[command] ?? command;
   const pkgJsonPath = require.resolve(`${cmdModule}/package.json`, {
     paths: [process.cwd()],
@@ -21,7 +23,8 @@ function getBinPath(command) {
   if (!pkgJsonPath) {
     throw new Error(`Could not find package.json for command: ${command}`);
   }
-  const pkgBinPath = require(pkgJsonPath).bin?.[command];
+  const pkgJson = require(pkgJsonPath);
+  const pkgBinPath = pkgJson.bin && pkgJson.bin[command];
   if (!pkgBinPath) {
     throw new Error(`Command "${command}" not found in package.json of ${cmdModule}`);
   }
@@ -34,7 +37,7 @@ function getBinPath(command) {
  * @returns {Promise<number>}
  */
 export async function runScript(command, ...args) {
-  const spawnArgs = [getBinPath(command), ...args];
+  const spawnArgs = [await getBinPath(command), ...args];
 
   return new Promise((resolve) => {
     spawn(process.execPath, spawnArgs, {

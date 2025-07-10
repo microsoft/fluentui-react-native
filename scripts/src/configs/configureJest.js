@@ -57,7 +57,7 @@ export function configureJest(customConfig) {
 
 /**
  *
- * @param {import('../utils/platforms').PlatformValue} [platform]
+ * @param {import('../utils/platforms.js').PlatformValue} [platform]
  * @param {JestConfig} [customConfig]
  * @returns {JestConfig}
  */

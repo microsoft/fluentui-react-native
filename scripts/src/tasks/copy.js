@@ -1,8 +1,8 @@
 // @ts-check
 
-const fs = require('fs');
-const path = require('path');
-const { series, resolveCwd, copyTask } = require('just-scripts');
+import fs from 'fs';
+import path from 'path';
+import { series, resolveCwd, copyTask } from 'just-scripts';
 
 /**
  * Expands the source path for a given pattern.
@@ -38,7 +38,7 @@ function expandSourcePath(pattern) {
   return null;
 }
 
-exports.copy = () => {
+export const copy = () => {
   let tasks = [];
   let configPath = path.resolve(process.cwd(), 'config/pre-copy.json');
 

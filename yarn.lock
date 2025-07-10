@@ -4322,7 +4322,7 @@ __metadata:
     react-native: ^0.73.0 || ^0.74.0
     react-native-svg: ^15.0.0 || ^15.4.0
   bin:
-    fluentui-scripts: ./just-scripts.js
+    fluentui-scripts: ./cli.cjs
   languageName: unknown
   linkType: soft
 

@@ -1,12 +1,12 @@
 // @ts-check
 
-const { findNativeComponents, codegenNativeComponents } = require('../utils/codegenNativeComponents.js');
-const path = require('path');
-const fs = require('fs');
-const { runScript } = require('../utils/runScript.js');
-const { readTypeScriptConfig } = require('@rnx-kit/tools-typescript');
-const { getPackageInfoFromPath } = require('@rnx-kit/tools-packages');
-const { JsxEmit, ModuleKind } = require('typescript');
+import { findNativeComponents, codegenNativeComponents } from '../utils/codegenNativeComponents.js';
+import path from 'path';
+import fs from 'fs';
+import { runScript } from '../utils/runScript.js';
+import { readTypeScriptConfig } from '@rnx-kit/tools-typescript';
+import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';
+import { JsxEmit, ModuleKind } from 'typescript';
 
 /**
  * Get the module string for a given module kind.
@@ -27,10 +27,10 @@ function getModuleString(moduleKind) {
 /**
  * Get the build targets for the project.
  * @param {string} cwd - The current working directory to search in.
- * @returns {import('../utils/codegenNativeComponents').BuildTarget[]} - The build targets found.
+ * @returns {import('../utils/codegenNativeComponents.js').BuildTarget[]} - The build targets found.
  */
 function getBuildTargets(cwd = process.cwd()) {
-  /** @type {import('../utils/codegenNativeComponents').BuildTarget[]} */
+  /** @type {import('../utils/codegenNativeComponents.js').BuildTarget[]} */
   const targets = [];
   const pkgInfo = getPackageInfoFromPath(cwd);
 
@@ -75,7 +75,7 @@ function getBuildTargets(cwd = process.cwd()) {
 
 /**
  * Execute the build for a given target
- * @param {import('../utils/codegenNativeComponents').BuildTarget} target - The build target to execute.
+ * @param {import('../utils/codegenNativeComponents.js').BuildTarget} target - The build target to execute.
  * @param {string} cwd - The current working directory.
  * @returns {Promise<number>} - The exit code of the build process.
  */
@@ -101,7 +101,7 @@ async function buildTarget(target, cwd) {
  *
  * @returns {import('just-scripts').TaskFunction}
  */
-function build() {
+export function build() {
   return async function (done) {
     const cwd = process.cwd();
     const targets = getBuildTargets(cwd);
@@ -122,5 +122,3 @@ function build() {
     done();
   };
 }
-
-module.exports.build = build;

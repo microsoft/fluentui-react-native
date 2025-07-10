@@ -1,57 +1,56 @@
 // @ts-check
 
-const { task, series, parallel, condition, option, argv, addResolvePath, prettierCheckTask, prettierTask } = require('just-scripts');
+import { task, series, parallel, condition, option, argv, addResolvePath, prettierCheckTask, prettierTask } from 'just-scripts';
 
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 
-const { clean } = require('../src/tasks/clean.js');
-const { copy } = require('../src/tasks/copy.js');
-const { jest } = require('../src/tasks/jest.js');
-const { build } = require('../src/tasks/build.js');
-const { eslint } = require('../src/tasks/eslint.js');
-const { depcheckTask } = require('../src/tasks/depcheck.js');
-const { checkForModifiedFiles } = require('../src/tasks/checkForModifiedFilesTask.js');
-const { findGitRoot } = require('workspace-tools');
+import { clean } from '../src/tasks/clean.js';
+import { copy } from '../src/tasks/copy.js';
+import { jest } from '../src/tasks/jest.js';
+import { build } from '../src/tasks/build.js';
+import { eslint } from '../src/tasks/eslint.js';
+import { depcheckTask } from '../src/tasks/depcheck.js';
+import { checkForModifiedFiles } from '../src/tasks/checkForModifiedFilesTask.js';
+import { findGitRoot } from 'workspace-tools';
+import { fileURLToPath } from 'url';
 
-export function preset() {
-  // this add s a resolve path for the build tooling deps like TS from the scripts folder
-  addResolvePath(__dirname);
+// this adds a resolve path for the build tooling deps like TS from the scripts folder
+addResolvePath(fileURLToPath(import.meta.url));
 
-  option('production');
+option('production');
 
-  // Adds an alias for 'npm-install-mode' for backwards compatibility
-  option('min', { alias: 'npm-install-mode' });
+// Adds an alias for 'npm-install-mode' for backwards compatibility
+option('min', { alias: 'npm-install-mode' });
 
-  // Build only commonjs (not other TS variants) but still run other tasks
-  option('commonjs');
+// Build only commonjs (not other TS variants) but still run other tasks
+option('commonjs');
 
-  // for options that have a check/fix switch this puts them into fix mode
-  option('fix');
+// for options that have a check/fix switch this puts them into fix mode
+option('fix');
 
-  task('clean', clean);
-  task('copy', copy);
-  task('jest', jest);
-  task('ts', build);
-  task('eslint', eslint);
-  task('prettier', () =>
-    argv().fix
-      ? prettierTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') })
-      : prettierCheckTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') }),
-  );
-  task('checkForModifiedFiles', checkForModifiedFiles);
+task('clean', clean);
+task('copy', copy);
+task('jest', jest);
+task('ts', build);
+task('eslint', eslint);
+task('prettier', () =>
+  argv().fix
+    ? prettierTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') })
+    : prettierCheckTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') }),
+);
+task('checkForModifiedFiles', checkForModifiedFiles);
 
-  task(
-    'validate',
-    parallel(
-      'eslint',
-      condition('jest', () => fs.existsSync(path.join(process.cwd(), 'jest.config.js'))),
-    ),
-  );
+task(
+  'validate',
+  parallel(
+    'eslint',
+    condition('jest', () => fs.existsSync(path.join(process.cwd(), 'jest.config.js'))),
+  ),
+);
 
-  task('build', series('clean', 'copy', 'ts'));
+task('build', series('clean', 'copy', 'ts'));
 
-  task('depcheck', depcheckTask);
+task('depcheck', depcheckTask);
 
-  task('no-op', () => {});
-}
+task('no-op', () => {});

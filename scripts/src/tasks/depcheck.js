@@ -1,5 +1,10 @@
 // @ts-check
 
+import { logger } from 'just-scripts';
+import depcheck from 'depcheck';
+import path from 'path';
+import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';
+
 /**
  * Merges two objects at one level.
  * @param {Record<string, unknown>} a
@@ -17,20 +22,18 @@ function mergeOneLevel(a, b = {}) {
 }
 
 function scriptsDevDeps() {
-  const config = require('@fluentui-react-native/scripts/package.json');
-  return Object.keys(config.devDependencies);
+  const config = getPackageInfoFromPath(path.join(__dirname, '../..')).manifest;
+  return Object.keys(config.devDependencies || {});
 }
 
 /**
  * Task to check for unused dependencies in the project using depcheck.
  * @returns {import('just-scripts').TaskFunction}
  */
-function depcheckTask() {
+export function depcheckTask() {
   return function (done) {
-    const { logger } = require('just-scripts');
-    const depcheck = require('depcheck');
-    const path = require('path');
-    const config = require(path.join(process.cwd(), 'package.json'));
+    const config = getPackageInfoFromPath(process.cwd()).manifest;
+    const depcheckOptions = typeof config.depcheck === 'object' && !Array.isArray(config.depcheck) ? config.depcheck : {};
     const options = mergeOneLevel(
       {
         ignorePatterns: ['*eslint*', '/lib/*', '/lib-commonjs/*'],
@@ -43,7 +46,7 @@ function depcheckTask() {
         ],
         specials: [depcheck.special.eslint, depcheck.special.jest],
       },
-      config.depcheck,
+      depcheckOptions,
     );
 
     return depcheck(process.cwd(), options, (result) => {
@@ -77,5 +80,3 @@ function depcheckTask() {
     });
   };
 }
-
-module.exports.depcheckTask = depcheckTask;

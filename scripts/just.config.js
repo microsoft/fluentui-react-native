@@ -1,8 +1,8 @@
 // @ts-check
 
-const { task, series, parallel, option, argv, tscTask, cleanTask, eslintTask, prettierTask, prettierCheckTask } = require('just-scripts');
+import { task, series, parallel, option, argv, tscTask, cleanTask, eslintTask, prettierTask, prettierCheckTask } from 'just-scripts';
 
-const path = require('path');
+import path from 'path';
 
 const srcPath = path.join(process.cwd(), 'src');
 const libPath = path.join(process.cwd(), 'lib');

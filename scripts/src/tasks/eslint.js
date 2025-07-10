@@ -1,7 +1,7 @@
 // @ts-check
 
-const { argv, eslintTask } = require('just-scripts');
-exports.eslint = eslintTask({
+import { argv, eslintTask } from 'just-scripts';
+export const eslint = eslintTask({
   files: ['src/'],
   ...argv(),
 });

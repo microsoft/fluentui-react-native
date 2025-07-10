@@ -1,21 +1,21 @@
 // @ts-check
 
-const { jestTask, argv } = require('just-scripts');
-const path = require('path');
+import { jestTask, argv } from 'just-scripts';
+import path from 'path';
 
-exports.jest = () =>
+export const jest = () =>
   jestTask({
     ...(process.env.TF_BUILD && { runInBand: true }),
     ...(argv().u || argv().updateSnapshot ? { updateSnapshot: true } : undefined),
   });
 
-exports.jestDom = () =>
+export const jestDom = () =>
   jestTask({
     runInBand: true,
     config: path.join(process.cwd(), 'jest.dom.config.js'),
   });
 
-exports.jestWatch = () => {
+export const jestWatch = () => {
   const args = argv();
   return jestTask({
     ...(process.env.TF_BUILD && { runInBand: true }),

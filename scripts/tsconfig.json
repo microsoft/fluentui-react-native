@@ -3,7 +3,8 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "noEmit": true
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "configs/justPreset.js"]
+  "include": ["src", "configs"]
 }
