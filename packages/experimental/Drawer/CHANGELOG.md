@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/drawer
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:55 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 19:20:26 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.4.5
+
+Thu, 10 Jul 2025 19:20:26 GMT
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.4.4
 

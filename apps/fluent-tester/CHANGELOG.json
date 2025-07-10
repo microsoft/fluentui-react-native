@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 19:20:17 GMT",
+      "version": "0.170.27",
+      "tag": "@fluentui-react-native/tester_v0.170.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Jun 2025 19:34:50 GMT",
       "version": "0.170.26",
       "tag": "@fluentui-react-native/tester_v0.170.26",

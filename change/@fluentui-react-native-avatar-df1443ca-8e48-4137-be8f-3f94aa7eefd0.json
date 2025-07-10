@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Run bump-versions",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}

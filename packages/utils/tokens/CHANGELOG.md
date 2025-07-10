@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Thu, 11 Apr 2024 18:08:40 GMT and should not be manually modified.
+<!-- This log was last generated on Thu, 10 Jul 2025 19:20:15 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.23.2
+
+Thu, 10 Jul 2025 19:20:15 GMT
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.23.0
 

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-checkbox",
-  "version": "0.17.9",
+  "version": "0.17.10",
   "description": "A cross-platform Checkbox component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

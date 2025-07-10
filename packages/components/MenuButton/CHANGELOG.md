@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu-button
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:53 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 19:20:21 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.13.20
+
+Thu, 10 Jul 2025 19:20:21 GMT
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.13.17
 
