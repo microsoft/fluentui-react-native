@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 19:20:12 GMT",
+      "version": "0.12.1",
+      "tag": "@uifabricshared/theme-registry_v0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Jun 2025 19:34:44 GMT",
       "version": "0.12.0",
       "tag": "@uifabricshared/theme-registry_v0.12.0",

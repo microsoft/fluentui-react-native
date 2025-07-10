@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 19:20:11 GMT",
+      "version": "0.20.6",
+      "tag": "@uifabricshared/theming-react-native_v0.20.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Jun 2025 19:34:43 GMT",
       "version": "0.20.5",
       "tag": "@uifabricshared/theming-react-native_v0.20.5",

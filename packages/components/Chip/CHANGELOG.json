@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/chip",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 19:20:28 GMT",
+      "version": "0.4.9",
+      "tag": "@fluentui-react-native/chip_v0.4.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/chip",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Jun 2025 19:34:59 GMT",
       "version": "0.4.8",
       "tag": "@fluentui-react-native/chip_v0.4.8",

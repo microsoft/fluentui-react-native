@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:54 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 19:20:16 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.11.2
+
+Thu, 10 Jul 2025 19:20:16 GMT
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.11.1
 
