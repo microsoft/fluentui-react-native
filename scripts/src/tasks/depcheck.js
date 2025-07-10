@@ -2,8 +2,7 @@
 
 import { logger } from 'just-scripts';
 import depcheck from 'depcheck';
-import path from 'path';
-import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';
+import { getProjectRoot, getScriptProjectRoot } from '../utils/projectRoot.js';
 
 /**
  * Merges two objects at one level.
@@ -22,8 +21,7 @@ function mergeOneLevel(a, b = {}) {
 }
 
 function scriptsDevDeps() {
-  const config = getPackageInfoFromPath(path.join(__dirname, '../..')).manifest;
-  return Object.keys(config.devDependencies || {});
+  return Object.keys(getScriptProjectRoot().manifest.devDependencies || {});
 }
 
 /**
@@ -32,7 +30,7 @@ function scriptsDevDeps() {
  */
 export function depcheckTask() {
   return function (done) {
-    const config = getPackageInfoFromPath(process.cwd()).manifest;
+    const config = getProjectRoot().manifest;
     const depcheckOptions = typeof config.depcheck === 'object' && !Array.isArray(config.depcheck) ? config.depcheck : {};
     const options = mergeOneLevel(
       {

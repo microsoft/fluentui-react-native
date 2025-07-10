@@ -55,4 +55,5 @@ task('build', series('clean', 'copy', 'ts'));
 
 task('depcheck', depcheckTask);
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 task('no-op', () => {});

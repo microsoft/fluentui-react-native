@@ -1,8 +1,8 @@
 // @ts-check
 
-// @ts-ignore
+// @ts-expect-error - declaration file is not needed for this config
 import * as upstreamTransformer from 'metro-react-native-babel-transformer';
-// @ts-ignore
+// @ts-expect-error - declaration file is not needed for this config
 import * as svgTransformer from 'react-native-svg-transformer';
 
 /**

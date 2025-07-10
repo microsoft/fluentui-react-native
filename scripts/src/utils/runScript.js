@@ -2,7 +2,7 @@
 
 import { spawn } from 'child_process';
 import path from 'path';
-import Module from 'module';
+import { getProjectRoot } from './projectRoot.js';
 
 /** @type {Record<string, string>} */
 const cmdToModule = {
@@ -15,7 +15,7 @@ const cmdToModule = {
  * @returns {string}
  */
 function getBinPath(command) {
-  const require = Module.createRequire(process.cwd());
+  const require = getProjectRoot().require;
   const cmdModule = cmdToModule[command] ?? command;
   const pkgJsonPath = require.resolve(`${cmdModule}/package.json`, {
     paths: [process.cwd()],

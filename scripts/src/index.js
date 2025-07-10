@@ -1,4 +1,4 @@
 // @ts-check
 
-export * from './configs/index.js';
-export * from './utils/index.js';
+export { configureBabel } from './configs/configureBabel.js';
+export { configureJest } from './configs/configureJest.js';

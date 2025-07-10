@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'url';
+
 const path = require('path');
 const { spawnSync } = require('child_process');
 const npmPath = process.env.npm_execpath;
@@ -49,7 +51,7 @@ function checkRepositoryLocation() {
   }
 
   const nodePath = path.parse(process.execPath);
-  const repositoryPath = path.parse(__dirname);
+  const repositoryPath = path.parse(path.dirname(fileURLToPath(import.meta.url)));
 
   if (nodePath.root !== repositoryPath.root) {
     console.warn(

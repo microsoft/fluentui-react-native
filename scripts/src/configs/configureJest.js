@@ -1,12 +1,13 @@
 // @ts-check
 
-// @ts-ignore-line the preset doesn't contain typing information
+// @ts-expect-error the preset doesn't contain typing information
 import jestPreset from '@rnx-kit/jest-preset';
 import path from 'path';
 import { getPackageInfos } from 'workspace-tools';
 import { mergeConfigs } from './mergeConfigs.js';
 import { ensurePlatform } from '../utils/platforms.js';
 import { nodeModulesToRoot } from '../utils/resolvePaths.js';
+import { getScriptProjectRoot } from '../utils/projectRoot.js';
 
 /**
  * @typedef {import('jest').Config} JestConfig
@@ -20,6 +21,7 @@ const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
  */
 export function configureJest(customConfig) {
   const pkgInfo = getPackageInfos(process.cwd());
+  const scriptDir = getScriptProjectRoot().root;
 
   /** @type {JestConfig} */
   const baseConfig = {
@@ -28,8 +30,7 @@ export function configureJest(customConfig) {
 
     // map specific modules to the appropriate mocks
     moduleNameMapper: {
-      '\\.(scss)$': path.resolve(__dirname, 'jest/jest-style-mock.js'),
-      KeyCodes: path.resolve(__dirname, 'jest/jest-mock.js'),
+      KeyCodes: path.resolve(scriptDir, './src/configs/jest/jest-mock.js'),
       // Jest is picking up the hoisted version of lru-cache, which is
       // incompatible from the version required by semver
       'lru-cache': require.resolve('lru-cache', { paths: [require.resolve('semver')] }),
