@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "update scripts package to be fully js, use esm, and validate fully",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "none"
+}
