@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:23 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 20:35:46 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.6.2
+
+Thu, 10 Jul 2025 20:35:46 GMT
+
+### Patches
+
+- Bump our version of use-subscription (ruaraki@microsoft.com)
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 0.6.1
 

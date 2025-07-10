@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run bump-versions",
-  "packageName": "@uifabricshared/foundation-settings",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

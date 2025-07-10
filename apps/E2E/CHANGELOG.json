@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 20:35:47 GMT",
+      "version": "1.41.0",
+      "tag": "@fluentui-react-native/e2e-testing_v1.41.0",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "79bb06f6bbfd0a36f9d2ef371f4857be9660f027",
+            "comment": "Fixed `align-deps` warnings"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "a245202877ef7f2be9ab5f0e1356b2270957e693",
+            "comment": "Run bump-versions"
+          }
+        ],
+        "minor": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "rework e2e and fluent-tester to avoid direct references across packages"
+          },
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "70eb7468c21b57c69ddc6a6d206325cfb128038f",
+            "comment": "updated wdio versions and fixed tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 10 Jul 2025 19:20:25 GMT",
       "version": "1.40.9",
       "tag": "@fluentui-react-native/e2e-testing_v1.40.9",

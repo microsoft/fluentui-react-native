@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "expand collapse",
-  "packageName": "@fluentui-react-native/experimental-menu-button",
-  "email": "gulnazsayed@microsoft.com",
-  "dependentChangeType": "patch"
-}

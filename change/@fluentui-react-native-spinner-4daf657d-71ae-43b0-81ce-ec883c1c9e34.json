@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run bump-versions",
-  "packageName": "@fluentui-react-native/spinner",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

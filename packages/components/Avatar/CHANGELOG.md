@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:28 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 20:35:51 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.12.10
+
+Thu, 10 Jul 2025 20:35:51 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 1.12.9
 

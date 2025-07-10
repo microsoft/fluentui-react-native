@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run bump-versions",
-  "packageName": "@fluentui-react-native/experimental-appearance-additions",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

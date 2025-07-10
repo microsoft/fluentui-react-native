@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:23 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 20:35:42 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.13.7
+
+Thu, 10 Jul 2025 20:35:42 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 0.13.6
 

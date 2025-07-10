@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/immutable-merge",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 20:35:44 GMT",
+      "version": "1.2.3",
+      "tag": "@fluentui-react-native/immutable-merge_v1.2.3",
+      "comments": {
+        "none": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/immutable-merge",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          }
+        ],
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/immutable-merge",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "update builds to use node16 settings and modern export maps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Mar 2024 20:39:11 GMT",
       "version": "1.2.2",
       "tag": "@fluentui-react-native/immutable-merge_v1.2.2",

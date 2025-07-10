@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/popover
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:19 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 20:35:39 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.4.4
+
+Thu, 10 Jul 2025 20:35:39 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 0.4.3
 

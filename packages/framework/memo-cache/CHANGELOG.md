@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/memo-cache
 
-<!-- This log was last generated on Wed, 29 Jan 2025 18:42:24 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 20:35:41 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.3.4
+
+Thu, 10 Jul 2025 20:35:41 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 1.3.3
 

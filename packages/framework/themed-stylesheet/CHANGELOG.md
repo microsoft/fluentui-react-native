@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/themed-stylesheet
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:15 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 20:35:36 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.7.3
+
+Thu, 10 Jul 2025 20:35:36 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 1.7.2
 

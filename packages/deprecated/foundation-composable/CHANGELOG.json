@@ -2,6 +2,35 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 20:35:30 GMT",
+      "version": "0.13.3",
+      "tag": "@uifabricshared/foundation-composable_v0.13.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "update builds to use node16 settings and modern export maps"
+          }
+        ],
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "a245202877ef7f2be9ab5f0e1356b2270957e693",
+            "comment": "Run bump-versions"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 10 Jul 2025 19:20:12 GMT",
       "version": "0.13.2",
       "tag": "@uifabricshared/foundation-composable_v0.13.2",
