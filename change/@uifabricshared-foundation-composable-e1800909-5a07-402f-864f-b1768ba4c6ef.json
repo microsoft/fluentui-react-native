@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "fix: run `beachball sync` to sync package versions with NPM",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "none"
+}
