@@ -1,4 +1,3 @@
- 
 import React, { useCallback } from 'react';
 import { StyleSheet, View, ToastAndroid } from 'react-native';
 

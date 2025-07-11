@@ -1,4 +1,3 @@
- 
 import React from 'react';
 import { View, Platform, Text } from 'react-native';
 
