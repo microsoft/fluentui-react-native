@@ -5,7 +5,7 @@ import type { RadioGroupState } from './RadioGroup.types';
 /**
  * Context shared between RadioGroup and its children Radio components
  */
-export interface RadioGroupContextValue extends RadioGroupState {}
+export type RadioGroupContextValue = RadioGroupState;
 
 export const RadioGroupContext = React.createContext<RadioGroupContextValue>({
   value: null,

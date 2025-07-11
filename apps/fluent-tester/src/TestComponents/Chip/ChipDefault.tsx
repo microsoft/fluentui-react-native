@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+ 
 import React, { useCallback } from 'react';
 import { StyleSheet, View, ToastAndroid } from 'react-native';
 

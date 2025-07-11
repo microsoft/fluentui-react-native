@@ -118,7 +118,7 @@ export const useMenu = (props: MenuProps): MenuState => {
     if (props.open) {
       show();
     }
-  }, [props.open]);
+  }, [props.open, show]);
 
   /**
    * onMenuLayout handles the start of the Animation when anchor is clicked
@@ -157,7 +157,8 @@ export const useMenu = (props: MenuProps): MenuState => {
     setOpen(e, false, false);
   };
 
-  // Adjust position of menu
+  // Adjust position of menu - TODO: fix this warning removal, potentially adds extra re-renders
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const transforms = [];
 
   useMemo(() => {

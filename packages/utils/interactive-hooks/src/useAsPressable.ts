@@ -11,6 +11,9 @@ import type {
 } from './useAsPressable.types';
 import { usePressability } from './usePressability';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type ObjectBase = {};
+
 /**
  * hover specific state and callback helper
  */
@@ -100,8 +103,7 @@ function usePressHelper(props: PressablePressProps): [PressablePressProps, IPres
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function useFocusState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IFocusState] {
+export function useFocusState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IFocusState] {
   const [focusProps, focusState] = useFocusHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...focusProps }) }, focusState];
 }
@@ -111,8 +113,7 @@ export function useFocusState<T extends object>(props: IWithPressableOptions<T>)
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function usePressState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IPressState] {
+export function usePressState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IPressState] {
   const [pressProps, pressState] = usePressHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...pressProps }) }, pressState];
 }
@@ -122,8 +123,7 @@ export function usePressState<T extends object>(props: IWithPressableOptions<T>)
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function useHoverState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IHoverState] {
+export function useHoverState<T extends ObjectBase>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IHoverState] {
   const [hoverProps, hoverState] = useHoverHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...hoverProps }) }, hoverState];
 }
@@ -135,8 +135,7 @@ export function useHoverState<T extends object>(props: IWithPressableOptions<T>)
  * The useAsPressable hook adds a simple state change function for listening to hover, press, and focus events on the base pressability implementation
  * @param props - input props for the component, mixed in with pressable and pressability options
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function useAsPressable<T extends object>(props: IWithPressableOptions<T>): IPressableHooks<T> {
+export function useAsPressable<T extends ObjectBase>(props: IWithPressableOptions<T>): IPressableHooks<T> {
   const [hoverProps, hoverState] = useHoverHelper(props);
   const [focusProps, focusState] = useFocusHelper(props);
   const [pressProps, pressState] = usePressHelper(props);

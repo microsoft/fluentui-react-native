@@ -24,7 +24,7 @@ export interface Theme {
   colors: ThemeColorDefinition;
   typography: Typography;
   components: {
-    [key: string]: object; // eslint-disable-line @typescript-eslint/ban-types
+    [key: string]: Record<string, unknown>;
   };
   shadows: ThemeShadowDefinition;
   readonly spacing: Spacing;

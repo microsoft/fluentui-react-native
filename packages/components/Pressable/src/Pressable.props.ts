@@ -4,8 +4,10 @@ import type { ViewStyle, StyleProp } from 'react-native';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { IWithPressableOptions, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IPressableProps<TBase extends object = IViewProps> = IWithPressableOptions<TBase> & {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type ObjectBase = {};
+
+export type IPressableProps<TBase extends ObjectBase = IViewProps> = IWithPressableOptions<TBase> & {
   children?: IRenderChild<IPressableState>;
 
   // Typescript will not allow an extension of the IView* interface
@@ -41,8 +43,7 @@ export type IRenderChild<T> = IChildAsFunction<T> | React.ReactNode;
  */
 export type IRenderStyle<T, S> = (state: T) => StyleProp<S>;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IPressableType<TBase extends object = IViewProps> = {
+export type IPressableType<TBase extends ObjectBase = IViewProps> = {
   props: IPressableProps<TBase>;
   slotProps: {
     root: TBase;

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+type FunctionToValue<T> = () => T;
+
 /**
  * Hook to initialize and return a constant value. Unlike `React.useMemo`, this is guaranteed to
  * always return the same value (and if the initializer is a function, only call it once).
@@ -11,7 +13,7 @@ import * as React from 'react';
  * only the value/function passed in the first time this is called is respected.
  * @returns The value. The identity of this value will always be the same.
  */
-export function useConst<T>(initialValue: T | (() => T)): T {
+export function useConst<T>(initialValue: T | FunctionToValue<T>): T {
   // Use useRef to store the value because it's the least expensive built-in hook that works here
   // (we could also use `const [value] = React.useState(initialValue)` but that's more expensive
   // internally due to reducer handling which we don't need)
@@ -20,8 +22,7 @@ export function useConst<T>(initialValue: T | (() => T)): T {
     // Box the value in an object so we can tell if it's initialized even if the initializer
     // returns/is undefined
     ref.current = {
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      value: typeof initialValue === 'function' ? (initialValue as Function)() : initialValue,
+      value: typeof initialValue === 'function' ? (initialValue as FunctionToValue<T>)() : initialValue,
     };
   }
   return ref.current.value;

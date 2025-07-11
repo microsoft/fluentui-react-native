@@ -2,9 +2,10 @@ import type { PressablePropsExtended, PressableState } from '@fluentui-react-nat
 
 export const dropdownName = 'Dropdown';
 
-export interface DropdownTokens {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export type DropdownTokens = {};
 
-export interface DropdownProps extends PressablePropsExtended {}
+export type DropdownProps = PressablePropsExtended;
 
 export type DropdownState = PressableState;
 

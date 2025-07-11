@@ -82,6 +82,9 @@ function getBuildTargets(cwd = process.cwd()) {
 async function buildTarget(target, cwd) {
   const { module, outDir, nativeComponents } = target;
   const extraArgs = ['--outDir', outDir, '--module', module];
+  if (module === 'esnext') {
+    extraArgs.push('--moduleResolution', 'node');
+  }
   const result = await runScript('tsc', ...extraArgs);
 
   if (result === 0 && nativeComponents && nativeComponents.length > 0) {

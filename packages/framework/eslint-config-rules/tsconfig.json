@@ -1,0 +1,8 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": ["eslint.config.js"]
+}

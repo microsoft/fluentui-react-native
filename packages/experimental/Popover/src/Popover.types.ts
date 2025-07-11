@@ -1,18 +1,20 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export const popoverName = 'Popover';
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type EmptyInterface = {};
 
-export interface PopoverTokens {}
+export type PopoverTokens = EmptyInterface;
 
-export interface PopoverProps extends Omit<IViewProps, 'onPress'> {}
+export type PopoverProps = Omit<IViewProps, 'onPress'>;
 
-export interface PopoverState {}
+export type PopoverState = EmptyInterface;
 
-export interface PopoverSlotProps {}
+export type PopoverSlotProps = EmptyInterface;
 
-export interface PopoverType {
+export type PopoverType = {
   props: PopoverProps;
   tokens: PopoverTokens;
   slotProps: PopoverSlotProps;
   state: PopoverState;
-}
+};
