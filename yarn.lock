@@ -3219,6 +3219,7 @@ __metadata:
     "@rnx-kit/eslint-plugin": "npm:^0.8.6"
     "@types/eslint": "npm:^9.0.0"
     eslint: "npm:^9.0.0"
+    typescript-eslint: "npm:^8.36.0"
   languageName: unknown
   linkType: soft
 
@@ -22175,7 +22176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:^8.0.0":
+"typescript-eslint@npm:^8.0.0, typescript-eslint@npm:^8.36.0":
   version: 8.36.0
   resolution: "typescript-eslint@npm:8.36.0"
   dependencies:
