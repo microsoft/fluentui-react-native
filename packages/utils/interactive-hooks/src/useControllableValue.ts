@@ -7,6 +7,8 @@ export type ValueChangeCallback<TElement, TValue, TEvent extends React.Synthetic
   newValue: TValue | undefined,
 ) => void;
 
+type ConvertToValue<TValue> = (current: unknown) => TValue;
+
 /**
  * Hook to manage a value that could be either controlled or uncontrolled, such as a checked state or
  * text box string.
@@ -53,8 +55,7 @@ export function useControllableValue<TValue, TElement, TEvent extends React.Synt
   const setValueOrCallOnChange = useConst(() => (update: React.SetStateAction<TValue | undefined>, ev?: TEvent) => {
     // Assuming here that TValue is not a function, because a controllable value will typically
     // be something a user can enter as input
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const newValue = typeof update === 'function' ? (update as Function)(valueRef.current) : update;
+    const newValue = typeof update === 'function' ? (update as ConvertToValue<TValue>)(valueRef.current) : update;
 
     if (onChangeRef.current) {
       onChangeRef.current(ev!, newValue);

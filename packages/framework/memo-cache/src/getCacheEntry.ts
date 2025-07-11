@@ -12,7 +12,6 @@ export type CacheEntry<T, TGet = any> = {
   str?: { [key: string]: CacheEntry<TGet> };
 
   /** object types are keyed in a weak map on object identity */
-  // eslint-disable-next-line @typescript-eslint/ban-types
   obj?: WeakMap<object, TGet>;
 };
 
@@ -43,7 +42,6 @@ function jumpToCacheEntry(entry: CacheEntry<any>, val: any): CacheEntry<any> {
   }
   if (typeof val === 'object' || typeof val === 'function') {
     // objects and functions will be treated as key values in a WeakMap
-    // eslint-disable-next-line @typescript-eslint/ban-types
     const byObj = (entry.obj = entry.obj || new WeakMap<object, CacheEntry<any>>());
     return byObj.get(val) || byObj.set(val, {}).get(val);
   }

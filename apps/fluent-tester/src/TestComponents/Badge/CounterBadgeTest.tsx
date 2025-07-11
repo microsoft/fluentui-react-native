@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import { View, Platform, Text } from 'react-native';
 

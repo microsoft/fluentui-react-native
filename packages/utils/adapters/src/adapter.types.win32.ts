@@ -100,7 +100,10 @@ export interface NativeMouseEvent extends NativeUIEvent {
   readonly offsetY: number;
 }
 
-export interface MouseEvent extends NativeSyntheticEvent<NativeMouseEvent> {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type ObjectBase = {};
+
+export type MouseEvent = NativeSyntheticEvent<NativeMouseEvent>;
 
 export type Cursor =
   | 'auto'
@@ -167,14 +170,10 @@ export type IAdapterWin32ViewProps = ViewProps & {
   tooltip?: string;
   tabIndex?: number;
   enableFocusRing?: boolean;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onBlur?: (ev: NativeSyntheticEvent<{}>) => void;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onBlurCapture?: (ev: NativeSyntheticEvent<{}>) => void;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onFocus?: (ev: NativeSyntheticEvent<{}>) => void;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onFocusCapture?: (ev: NativeSyntheticEvent<{}>) => void;
+  onBlur?: (ev: NativeSyntheticEvent<ObjectBase>) => void;
+  onBlurCapture?: (ev: NativeSyntheticEvent<ObjectBase>) => void;
+  onFocus?: (ev: NativeSyntheticEvent<ObjectBase>) => void;
+  onFocusCapture?: (ev: NativeSyntheticEvent<ObjectBase>) => void;
   cursor?: Cursor;
   animationClass?: string;
   focusable?: boolean;
@@ -285,14 +284,10 @@ export type IAdapterWin32TextProps = TextProps & {
   'aria-controls'?: string | undefined;
   'aria-describedby'?: string | undefined;
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onBlur?: (ev: NativeSyntheticEvent<{}>) => void;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onBlurCapture?: (ev: NativeSyntheticEvent<{}>) => void;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onFocus?: (ev: NativeSyntheticEvent<{}>) => void;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onFocusCapture?: (ev: NativeSyntheticEvent<{}>) => void;
+  onBlur?: (ev: NativeSyntheticEvent<ObjectBase>) => void;
+  onBlurCapture?: (ev: NativeSyntheticEvent<ObjectBase>) => void;
+  onFocus?: (ev: NativeSyntheticEvent<ObjectBase>) => void;
+  onFocusCapture?: (ev: NativeSyntheticEvent<ObjectBase>) => void;
 
   focusable?: boolean;
   textStyle?: TextWin32TextStyle;

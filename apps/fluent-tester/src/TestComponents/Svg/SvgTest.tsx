@@ -225,9 +225,6 @@ const BundledSvgTest: React.FunctionComponent = () => {
 };
 
 const RemoteSvgTest: React.FunctionComponent = () => {
-  // GH#1596: Temporarily stop testing this case until it can be either more robust or removed
-  const shouldShowLocalNetwork = false;
-
   return (
     <View>
       <SvgUri
@@ -240,20 +237,6 @@ const RemoteSvgTest: React.FunctionComponent = () => {
         accessibilityLabel="SVG Uri Test"
         accessibilityRole="image"
       />
-      {shouldShowLocalNetwork && (
-        <SvgUri
-          x="50"
-          y="50"
-          viewBox="0 0 500 500"
-          style={styles.svg}
-          width="100"
-          height="100"
-          uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
-          accessible={true}
-          accessibilityLabel="SVG Uri Test"
-          accessibilityRole="image"
-        />
-      )}
     </View>
   );
 };

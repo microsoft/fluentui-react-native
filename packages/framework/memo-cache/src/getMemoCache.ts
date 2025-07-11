@@ -31,7 +31,6 @@ function getMemoValueWorker<T, TGet = any>(entry: CacheEntry<any>, factory: T | 
  * @param globalKey - optional object reference to use as a key for this cache.  If specified it can be used
  * to retrieve the same cache from the global call.  If not specified the returned cache will be completely isolated.
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
 export function getMemoCache<T = any>(globalKey?: object): GetMemoValue<T> {
   const entry = globalKey ? getCacheEntry(_baseEntry, [globalKey]) : {};
   return (fact: T | ValueFactory<T>, args: any[]) => getMemoValueWorker<T>(entry, fact, args);

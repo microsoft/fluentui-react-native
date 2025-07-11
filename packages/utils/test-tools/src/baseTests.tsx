@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import * as renderer from 'react-test-renderer';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function validateHookValueNotChanged<TValues extends NonNullable<any>[]>(
   testDescription: string,
   useHook: () => TValues,
@@ -33,7 +32,7 @@ export function validateHookValueNotChanged<TValues extends NonNullable<any>[]>(
     for (let i = 0; i < latestValues!.length; i++) {
       try {
         expect(latestValues![i]).toBe(firstValues![i]);
-      } catch (err) {
+      } catch {
         // Make a more informative error message
         const valueText = latestValues![i].toString();
         expect('').toBe(`Identity of value at index ${i} has changed. This might help identify it:\n${valueText}`);

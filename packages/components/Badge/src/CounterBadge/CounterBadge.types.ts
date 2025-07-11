@@ -63,7 +63,7 @@ export interface CounterBadgeTokens extends BadgeTokens {
   list?: CounterBadgeTokens; // Android only
 }
 
-export interface CounterBadgeSlotProps extends BadgeSlotProps {}
+export type CounterBadgeSlotProps = BadgeSlotProps;
 
 export interface CounterBadgeState {
   showBadge?: boolean;

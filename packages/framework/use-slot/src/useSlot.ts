@@ -54,8 +54,9 @@ export function useSlot<TProps>(
       }
 
       // now if result was a function then call it directly, if not go through the standard React.createElement process
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      return typeof result === 'function' ? (result as Function)(props, ...children) : React.createElement(component, props, ...children);
+      return typeof result === 'function'
+        ? (result as React.FunctionComponent)(props, ...children)
+        : React.createElement(component, props, ...children);
     };
     // mark the slotFn so that withSlots knows to handle it differently
     slotFn._canCompose = true;

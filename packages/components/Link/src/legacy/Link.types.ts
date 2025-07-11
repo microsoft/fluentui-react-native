@@ -6,6 +6,9 @@ import type { ITextProps } from '@fluentui-react-native/text';
 import type { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import type { IRenderData } from '@uifabricshared/foundation-composable';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type ObjectBase = {};
+
 export const linkName = 'RNFLink';
 
 /**
@@ -43,8 +46,7 @@ export interface ILinkOptions {
   url?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IWithLinkOptions<T extends object> = ILinkOptions & IWithPressableOptions<T>;
+export type IWithLinkOptions<T extends ObjectBase> = ILinkOptions & IWithPressableOptions<T>;
 
 export interface ILinkProps extends IWithLinkOptions<ITextProps> {
   /**

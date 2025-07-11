@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Platform, PlatformColor, View } from 'react-native';
 

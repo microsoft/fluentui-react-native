@@ -17,7 +17,6 @@ export const Menu = stagedComponent((props: MenuProps) => {
 
     if (__DEV__) {
       if (childrenArray.length !== 2) {
-        // eslint-disable-next-line no-console
         console.warn('Menu must contain two children');
       }
     }

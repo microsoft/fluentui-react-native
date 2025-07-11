@@ -84,7 +84,7 @@ export interface NativeMouseEvent extends NativeUIEvent {
    */
   readonly offsetY: number;
 }
-export interface MouseEvent extends NativeSyntheticEvent<NativeMouseEvent> {}
+export type MouseEvent = NativeSyntheticEvent<NativeMouseEvent>;
 
 // [macOS
 export interface NativeKeyEvent {
@@ -105,7 +105,7 @@ export interface NativeKeyEvent {
   key: string;
 }
 
-export interface KeyEvent extends NativeSyntheticEvent<NativeKeyEvent> {}
+export type KeyEvent = NativeSyntheticEvent<NativeKeyEvent>;
 export type DraggedType = 'fileUrl';
 export type DraggedTypesType = DraggedType | DraggedType[];
 
