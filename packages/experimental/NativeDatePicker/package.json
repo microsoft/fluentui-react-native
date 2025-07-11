@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-native-date-picker",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "A Native date picker component using the Fluent Design System.  Currently only implemented on iOS.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
