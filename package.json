@@ -27,6 +27,7 @@
     "prettier": "lage prettier",
     "prettier-fix": "lage prettier-fix",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"  --verbose",
+    "sync-npm-versions": "node ./scripts/sync-npm-versions.js",
     "test": "lage test",
     "test-links": "markdown-link-check"
   },
