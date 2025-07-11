@@ -1,4 +1,3 @@
- 
 import type { MenuButtonItemProps } from '@fluentui/react-native';
 import { MENU_ITEM_1_COMPONENT } from '@fluentui-react-native/e2e-testing';
 

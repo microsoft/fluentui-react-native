@@ -1,4 +1,3 @@
- 
 import type { MenuButtonItemProps } from '@fluentui/react-native';
 
 import { testImage, svgProps } from '../Common/iconExamples';

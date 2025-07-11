@@ -1,4 +1,3 @@
- 
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 
@@ -14,8 +13,6 @@ const CustomizedIconButton = Button.customize({
 });
 
 export const ButtonIconTest_deprecated: React.FunctionComponent = () => {
-   
-
   // SVG-based icons are not available on all platforms yet
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
