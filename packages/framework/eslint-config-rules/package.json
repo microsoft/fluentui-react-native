@@ -15,7 +15,8 @@
   "license": "MIT",
   "dependencies": {
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
-    "@rnx-kit/eslint-plugin": "^0.8.6"
+    "@rnx-kit/eslint-plugin": "^0.8.6",
+    "typescript-eslint": "^8.36.0"
   },
   "devDependencies": {
     "@types/eslint": "^9.0.0",
