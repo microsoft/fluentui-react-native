@@ -28,8 +28,10 @@ declare global {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-function _mixinStyle(style: StyleProp<object> | undefined, mixin: object): StyleProp<object> {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type ObjectBase = {};
+
+function _mixinStyle(style: StyleProp<ObjectBase> | undefined, mixin: ObjectBase): StyleProp<ObjectBase> {
   return style ? [style, mixin] : mixin;
 }
 
@@ -44,7 +46,7 @@ const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ..
     // @ts-ignore - TODO, fix typing error
     children = React.Children.map(children, (child: React.ReactChild, index: number) => {
       if (React.isValidElement(child) && index > 0) {
-        const childProps = child.props as object;
+        const childProps = child.props as ObjectBase;
         const extraProps = { style: _mixinStyle(childProps[_styleKey], extraStyle) };
         return React.cloneElement(child, {
           ...childProps,
@@ -89,4 +91,5 @@ export const Stack = compose<IStackType>({
   },
 });
 
+// eslint-disable-next-line no-restricted-exports
 export default Stack;

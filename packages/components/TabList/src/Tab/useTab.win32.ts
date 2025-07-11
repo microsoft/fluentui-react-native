@@ -147,7 +147,7 @@ export const useTab = (props: TabProps): TabInfo => {
       accessibilityState: getAccessibilityState(isDisabled, selectedKey === tabKey, accessibilityState),
       accessibilitySetSize: accessibilitySetSize ?? tabKeys.length,
       disabled: isDisabled,
-      focusable: !isDisabled ?? true,
+      focusable: !isDisabled,
       icon: icon,
       onAccessibilityAction: onAccessibilityActionProp,
       ref: useViewCommandFocus(componentRef),

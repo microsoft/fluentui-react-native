@@ -248,6 +248,7 @@ const RemoteSvgTest: React.FunctionComponent = () => {
           style={styles.svg}
           width="100"
           height="100"
+          // eslint-disable-next-line @microsoft/sdl/no-insecure-url
           uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
           accessible={true}
           accessibilityLabel="SVG Uri Test"

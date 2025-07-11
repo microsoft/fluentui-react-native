@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+ 
 import React, { useCallback, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 

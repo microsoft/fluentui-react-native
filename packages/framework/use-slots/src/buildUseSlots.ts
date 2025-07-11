@@ -3,6 +3,11 @@ import { useSlot } from '@fluentui-react-native/use-slot';
 
 // type AsObject<T> = T extends object ? T : never
 
+/**
+ * Signature for the use styling hook
+ */
+type UseStyling<TSlotProps> = (...props: unknown[]) => TSlotProps;
+
 export type Slots<TSlotProps> = { [K in keyof TSlotProps]: SlotFn<TSlotProps[K]> };
 
 export type UseSlotOptions<TSlotProps> = {
@@ -19,8 +24,8 @@ export function buildUseSlots<TSlotProps>(options: UseSlotOptions<TSlotProps>): 
   const { slots, filters = {}, useStyling } = options;
   return (...args: any[]) => {
     // get the baseline slot props to render with the slots
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const slotProps: TSlotProps = typeof useStyling === 'function' ? (useStyling as Function)(...args) : ((useStyling || {}) as TSlotProps);
+    const slotProps: TSlotProps =
+      typeof useStyling === 'function' ? (useStyling as UseStyling<TSlotProps>)(...args) : ((useStyling || {}) as TSlotProps);
 
     // build up a set of slots closures and store them in props
     const builtSlots: Slots<TSlotProps> = {} as Slots<TSlotProps>;

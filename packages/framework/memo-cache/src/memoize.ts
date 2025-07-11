@@ -4,7 +4,7 @@ import { getMemoCache } from './getMemoCache';
  * This wraps a function to memoize the results using the standard javascript memoization pattern
  * @param fn - function to memoize
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function memoize<T extends Function>(fn: T): T {
   // create a unique cache that will be captured in the closure
   const cache = getMemoCache<any>();

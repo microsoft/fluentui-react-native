@@ -1,5 +1,5 @@
 import type { MergeOptions } from '@fluentui-react-native/immutable-merge';
-import { immutableMergeCore } from '@fluentui-react-native/immutable-merge';
+import { immutableMergeCore, filterToObjects } from '@fluentui-react-native/immutable-merge';
 
 import { mergeStyles } from './mergeStyles';
 
@@ -11,16 +11,10 @@ const mergePropsOptions: MergeOptions = {
   style: mergeStyles,
 };
 
-/** take an any array and turn it into an array of objects */
-// eslint-disable-next-line @typescript-eslint/ban-types
-function filterAsObject(targets: any[]): object[] {
-  return targets.filter((t) => typeof t === 'object');
-}
-
 /**
  * Merge props together, flattening and merging styles as appropriate
  * @param props - props to merge together
  */
 export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
-  return immutableMergeCore(mergePropsOptions, ...filterAsObject(props)) as unknown as TProps;
+  return immutableMergeCore(mergePropsOptions, ...filterToObjects<TProps>(props));
 }

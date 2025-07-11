@@ -3,8 +3,9 @@ import type { IPressableHooks } from '@fluentui-react-native/interactive-hooks';
 
 export const listboxName = 'Listbox';
 
-export interface ListboxTokens {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export type ListboxTokens = {};
 
 export type ListboxProps = ICalloutProps;
 
-export interface ListboxState extends IPressableHooks<ListboxProps & React.ComponentPropsWithRef<any>> {}
+export type ListboxState = IPressableHooks<ListboxProps & React.ComponentPropsWithRef<any>>;

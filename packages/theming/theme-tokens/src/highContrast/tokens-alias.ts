@@ -10,6 +10,7 @@ function processAliasTokens(aliasTokens: any) {
       const entry = aliasTokens[key][innerKey];
       if (typeof entry === 'string' && entry.includes('PlatformColor')) {
         const color = 'SystemColor' + entry.substring(14, entry.length - 1) + 'Color';
+        // eslint-disable-next-line @react-native/platform-colors
         aliasTokens[key][innerKey] = PlatformColor(color);
       }
     }

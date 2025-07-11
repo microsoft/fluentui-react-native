@@ -31,7 +31,7 @@ export interface ToggleButtonInfo extends ButtonInfo {
   };
 }
 
-export interface ToggleButtonSlotProps extends ButtonSlotProps {}
+export type ToggleButtonSlotProps = ButtonSlotProps;
 
 export interface ToggleButtonType {
   props: ToggleButtonProps;

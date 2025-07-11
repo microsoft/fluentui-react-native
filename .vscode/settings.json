@@ -9,7 +9,7 @@
   },
 
   "eslint.enable": true,
-  "eslint.workingDirectories": [{ "mode": "auto" }], // infer working directory based on .eslintrc/package.json location
+  "eslint.workingDirectories": [{ "pattern": "./packages/framework/eslint-config-rules" }], // use the common eslint config file
 
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {

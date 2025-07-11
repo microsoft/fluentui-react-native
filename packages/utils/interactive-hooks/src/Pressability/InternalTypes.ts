@@ -4,6 +4,9 @@
 
 import type * as React from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type ObjectBase = {};
+
 export type Rect = Readonly<{
   bottom?: number;
   left?: number;
@@ -41,8 +44,7 @@ export interface ComponentMethods<Props> {
 /**
  * temporary port of changes that are in flight for the react and react-native types definition
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type AbstractComponent<Config extends {}, Instance = unknown> =
+export type AbstractComponent<Config extends ObjectBase, Instance = unknown> =
   // Either a function component that has a specific return type:
   | (React.FunctionComponent<Config> & ((props: React.PropsWithChildren<Config>, context?: any) => Instance))
   // ...or a class component that has the required Component methods and the Instance methods
@@ -61,8 +63,7 @@ export type NativeMethods = {
     onSuccess: MeasureLayoutOnSuccessCallback,
     onFail?: () => void,
   ): void;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  setNativeProps(nativeProps: object): void;
+  setNativeProps(nativeProps: ObjectBase): void;
 };
 
 export type HostComponent<T> = AbstractComponent<T, Readonly<NativeMethods>>;

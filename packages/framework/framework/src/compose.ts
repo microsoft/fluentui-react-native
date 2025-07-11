@@ -1,6 +1,7 @@
 import type { ComposeFactoryOptions, ComposeFactoryComponent, UseStyledSlots } from '@fluentui-react-native/composition';
 import { composeFactory } from '@fluentui-react-native/composition';
 import type { Theme } from '@fluentui-react-native/theme-types';
+import type { ObjectBase } from '@fluentui-react-native/immutable-merge';
 
 import { themeHelper } from './themeHelper';
 
@@ -8,8 +9,7 @@ import { themeHelper } from './themeHelper';
  * This is an object used purely for configuring the typings on composable.  It is not necessary to define
  * the type via the IComposableType interface, this is simply the format used to extract the type info.
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export interface ComposeType<TProps, TSlotProps, TTokens, TStatics = object> {
+export interface ComposeType<TProps, TSlotProps, TTokens, TStatics = ObjectBase> {
   props: TProps;
   slotProps: TSlotProps;
   tokens: TTokens;
@@ -21,21 +21,17 @@ type PropsFragment<TProps> = { props: TProps };
 type SlotPropsFragment<TSlotProps> = { slotProps: TSlotProps };
 type TokensFragment<TTokens> = { tokens: TTokens };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type StaticsFragment<TStatics extends object> = { statics: TStatics };
+type StaticsFragment<TStatics extends ObjectBase> = { statics: TStatics };
 
 /** Extraction types that get the various interface types from IComposableType */
 export type ExtractProps<T> = T extends PropsFragment<infer U> ? U : never;
 export type ExtractSlotProps<T> = T extends SlotPropsFragment<infer U> ? U : never;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type ExtractTokens<T> = T extends TokensFragment<infer U> ? U : object;
+export type ExtractTokens<T> = T extends TokensFragment<infer U> ? U : ObjectBase;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type ExtractStatics<T> = T extends StaticsFragment<infer U> ? U : object;
+export type ExtractStatics<T> = T extends StaticsFragment<infer U> ? U : ObjectBase;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type ComposeOptions<TProps, TSlotProps, TTokens, TStatics extends object> = ComposeFactoryOptions<
+export type ComposeOptions<TProps, TSlotProps, TTokens, TStatics extends ObjectBase> = ComposeFactoryOptions<
   TProps,
   TSlotProps,
   TTokens,
@@ -43,8 +39,7 @@ export type ComposeOptions<TProps, TSlotProps, TTokens, TStatics extends object>
   TStatics
 >;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type ComposableComponent<TProps, TSlotProps, TTokens, TStatics extends object> = ComposeFactoryComponent<
+export type ComposableComponent<TProps, TSlotProps, TTokens, TStatics extends ObjectBase> = ComposeFactoryComponent<
   TProps,
   TSlotProps,
   TTokens,

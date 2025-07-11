@@ -6,7 +6,9 @@ import type { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const focusZoneName = 'FocusZone';
 
-export interface FocusZoneState {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+type EmptyInterface = {};
+export type FocusZoneState = EmptyInterface;
 
 export type FocusZoneProps = IViewProps & {
   /**
@@ -105,7 +107,7 @@ export type FocusZoneTabNavigation =
   | 'NavigateStopAtEnds' /* Navigate the FZ with Tab. Stop navigation at ends */
   | 'Normal'; /* Navigate the FZ with Tab. Don't trap focus, tabbing at ends moves you out */
 
-export interface FocusZoneTokens {}
+export type FocusZoneTokens = EmptyInterface;
 
 export interface FocusZoneSlotProps {
   root: NativeProps;

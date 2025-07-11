@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+ 
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 

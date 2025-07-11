@@ -42,7 +42,7 @@ export interface NativeMouseEvent {
   altKey: boolean;
 }
 
-export interface MouseEvent extends NativeSyntheticEvent<NativeMouseEvent> {}
+export type MouseEvent = NativeSyntheticEvent<NativeMouseEvent>;
 
 export type Cursor =
   | 'auto'
