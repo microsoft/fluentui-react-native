@@ -8,7 +8,7 @@ import fs from 'fs';
  * @typedef {string | ExportSet} ExportEntry
  * @typedef {{'.': ExportEntry, [key: string]: ExportEntry}} Exports
  *
- * @typedef {{name: string, version: string, private?: boolean, bin?: Record<string, string>, scripts?: Record<string, string>}} PkgManifestBase
+ * @typedef {{name: string, version: string, private?: boolean, bin?: string | Record<string, string>, scripts?: Record<string, string>}} PkgManifestBase
  * @typedef {{main?: string, module?: string, types?: string, type?: string, exports?: Exports}} PkgModuleInfo
  * @typedef {{dependencies?: Record<string, string>, devDependencies?: Record<string, string>, peerDependencies?: Record<string, string>}} PkgDependencyInfo
  * @typedef {string | boolean | string[] | Record<string, unknown> | undefined} PkgCustomField
@@ -85,5 +85,31 @@ export class ProjectRoot {
   /** @returns {NodeRequire} - built on demand and cached require function */
   get require() {
     return (this.cachedRequire ??= Module.createRequire(this.root));
+  }
+
+  /**
+   * Open a module relative to this project root
+   * @param {string} moduleName - name of the module to require
+   * @return {ProjectRoot} - a project root opened at the root of the given module
+   */
+  openModule(moduleName) {
+    const pkgJsonPath = this.require.resolve(`${moduleName}/package.json`, { paths: [this.root] });
+    return getProjectRoot(path.dirname(pkgJsonPath));
+  }
+
+  /**
+   * Get the path to a bin entry for a js package.
+   * @param {string} command
+   * @returns {string | undefined}
+   */
+  getBinPath(command) {
+    const bin = this.manifest.bin;
+    if (bin) {
+      const binRelative = typeof bin === 'string' ? bin : bin[command];
+      if (binRelative) {
+        return normalizePath(path.join(this.root, binRelative));
+      }
+    }
+    return undefined;
   }
 }

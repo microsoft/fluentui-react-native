@@ -1,26 +1,26 @@
 // @ts-check
 
-import { jestTask, argv } from 'just-scripts';
-import path from 'path';
+import { argv } from 'just-scripts';
+import { runScript } from '../utils/runScript.js';
 
-export const jest = () =>
-  jestTask({
-    ...(process.env.TF_BUILD && { runInBand: true }),
-    ...(argv().u || argv().updateSnapshot ? { updateSnapshot: true } : undefined),
-  });
+/**
+ * @returns {import('just-scripts').TaskFunction}
+ */
+export function jest() {
+  return async (done) => {
+    const args = ['--passWithNoTests'];
+    if (process.env.TF_BUILD) {
+      args.push('--runInBand');
+    }
+    if (argv().u || argv().updateSnapshot) {
+      args.push('--updateSnapshot');
+    }
 
-export const jestDom = () =>
-  jestTask({
-    runInBand: true,
-    config: path.join(process.cwd(), 'jest.dom.config.js'),
-  });
-
-export const jestWatch = () => {
-  const args = argv();
-  return jestTask({
-    ...(process.env.TF_BUILD && { runInBand: true }),
-    ...(args.u || args.updateSnapshot ? { updateSnapshot: true } : undefined),
-    watch: true,
-    _: ['-i', ...(args._ || []).filter((arg) => arg !== 'jest-watch').map((arg) => arg.toString())],
-  });
-};
+    const result = await runScript('jest', 'src/', ...args);
+    if (result !== 0) {
+      done(new Error(`Jest failed with exit code ${result}`));
+    } else {
+      done();
+    }
+  };
+}

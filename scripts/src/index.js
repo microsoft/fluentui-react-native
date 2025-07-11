@@ -1,4 +1,4 @@
 // @ts-check
 
 export { configureBabel } from './configs/configureBabel.js';
-export { configureJest } from './configs/configureJest.js';
+export { configureJest, configureReactNativeJest } from './configs/configureJest.js';

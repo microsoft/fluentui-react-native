@@ -205,7 +205,6 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
 
         // delete undefined keys from the object, otherwise there is no easy way to delete keys
         if (!processSingle && result[key] === undefined) {
-          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
           delete result[key];
         }
       }
