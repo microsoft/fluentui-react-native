@@ -151,7 +151,7 @@ function assignToNewObject<T extends ObjectBase>(...objs: T[]): T {
 }
 
 /**
- * Filter a set of unknown values to only include those that extend ObjectBase, this actually
+ * Filter a set of unknown values to only include those that extend ObjectBase
  * @param values - array of values to filter
  * @returns the filtered set of values
  */
@@ -205,7 +205,6 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
 
         // delete undefined keys from the object, otherwise there is no easy way to delete keys
         if (!processSingle && result[key] === undefined) {
-          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
           delete result[key];
         }
       }
