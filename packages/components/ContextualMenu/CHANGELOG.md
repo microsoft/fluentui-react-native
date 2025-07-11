@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:27 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 11 Jul 2025 19:56:31 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.24.19
+
+Fri, 11 Jul 2025 19:56:31 GMT
+
+### Patches
+
+- fix narrator bug (gulnazsayed@microsoft.com)
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 0.24.17
 

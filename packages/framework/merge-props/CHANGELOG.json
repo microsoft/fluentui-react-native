@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/merge-props",
   "entries": [
     {
+      "date": "Fri, 11 Jul 2025 19:56:21 GMT",
+      "version": "0.9.4",
+      "tag": "@fluentui-react-native/merge-props_v0.9.4",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/merge-props",
+            "commit": "a245202877ef7f2be9ab5f0e1356b2270957e693",
+            "comment": "Run bump-versions"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/merge-props",
+            "commit": "405ca368dc3f2963bfc252a1952b1e14ff503499",
+            "comment": "fix: run `beachball sync` to sync package versions with NPM"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/merge-props",
+            "commit": "79bb06f6bbfd0a36f9d2ef371f4857be9660f027",
+            "comment": "Fixed `align-deps` warnings"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/merge-props",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          }
+        ],
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/merge-props",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "update builds to use node16 settings and modern export maps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 10 Jul 2025 19:20:20 GMT",
       "version": "0.9.2",
       "tag": "@fluentui-react-native/merge-props_v0.9.2",

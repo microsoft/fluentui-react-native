@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:11 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 11 Jul 2025 19:56:07 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.20.8
+
+Fri, 11 Jul 2025 19:56:07 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 0.20.6
 

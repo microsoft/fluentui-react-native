@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:10 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 11 Jul 2025 19:56:20 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.14.25
+
+Fri, 11 Jul 2025 19:56:20 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 1.14.23
 

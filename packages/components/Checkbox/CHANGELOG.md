@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:28 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 11 Jul 2025 19:56:34 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.23.11
+
+Fri, 11 Jul 2025 19:56:34 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 0.23.9
 

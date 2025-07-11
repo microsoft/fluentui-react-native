@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/text
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:16 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 11 Jul 2025 19:56:14 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.24.9
+
+Fri, 11 Jul 2025 19:56:14 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
 
 ## 0.24.7
 

@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run bump-versions",
-  "packageName": "@fluentui-react-native/vibrancy-view",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

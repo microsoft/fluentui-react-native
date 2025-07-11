@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:25 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 11 Jul 2025 19:56:30 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.7.5
+
+Fri, 11 Jul 2025 19:56:30 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- Bump our version of use-subscription (ruaraki@microsoft.com)
 
 ## 0.7.3
 
