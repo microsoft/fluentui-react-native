@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "bundlesize": "bundlesize --debug",
-    "depcheck": "node ./cli.cjs check-publishing",
+    "depcheck": "node ./src/cli.cjs check-publishing",
     "lint": "eslint",
     "prettier": "prettier",
     "prettier-fix": "prettier --fix true"
@@ -42,6 +42,8 @@
     "@types/jest": "^29.0.0",
     "@types/node": "^12.11.2",
     "@types/react-test-renderer": "16.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.36.0",
+    "@typescript-eslint/parser": "^8.36.0",
     "@uifabric/prettier-rules": "^7.0.3",
     "depcheck": "^1.0.0",
     "eslint": "^9.0.0",

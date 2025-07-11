@@ -4299,6 +4299,8 @@ __metadata:
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^12.11.2"
     "@types/react-test-renderer": "npm:16.9.0"
+    "@typescript-eslint/eslint-plugin": "npm:^8.36.0"
+    "@typescript-eslint/parser": "npm:^8.36.0"
     "@uifabric/prettier-rules": "npm:^7.0.3"
     depcheck: "npm:^1.0.0"
     eslint: "npm:^9.0.0"
@@ -8145,7 +8147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.36.0":
+"@typescript-eslint/eslint-plugin@npm:8.36.0, @typescript-eslint/eslint-plugin@npm:^8.36.0":
   version: 8.36.0
   resolution: "@typescript-eslint/eslint-plugin@npm:8.36.0"
   dependencies:
@@ -8166,7 +8168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.36.0":
+"@typescript-eslint/parser@npm:8.36.0, @typescript-eslint/parser@npm:^8.36.0":
   version: 8.36.0
   resolution: "@typescript-eslint/parser@npm:8.36.0"
   dependencies:

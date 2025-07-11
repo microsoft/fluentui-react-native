@@ -1,7 +1,8 @@
 import { fileURLToPath } from 'url';
 
-const path = require('path');
-const { spawnSync } = require('child_process');
+import path from 'path';
+import { spawnSync } from 'child_process';
+
 const npmPath = process.env.npm_execpath;
 
 const Strings = {

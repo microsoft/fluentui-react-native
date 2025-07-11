@@ -6,14 +6,12 @@ import { fileURLToPath } from 'url';
 
 /**
  * @typedef {() => boolean} ConditionalCheck
- * @typedef {Record<string, string>} DependencySet
- * @typedef {{scripts?: Record<string, string>, dependencies?: DependencySet, devDependencies?: DependencySet}} PkgManifest
  */
 
 /**
  * Get the package.json manifest for a given folder.
  * @param {string} folder
- * @returns {PkgManifest}
+ * @returns {import('./src/utils/projectRoot.js').PackageManifest}
  */
 function getPackageManifest(folder) {
   const manifestPath = path.join(folder, 'package.json');
@@ -37,12 +35,12 @@ const baseVersions = {
 /**
  * Conditionally add a dependency to the given dependencies object if it is not already present
  * @param {string[]} depsToAdd
- * @param {PkgManifest} manifest
+ * @param {import('./src/utils/projectRoot.js').PackageManifest} manifest
  * @param {ConditionalCheck | boolean | undefined} condition
  * @returns {Record<string, string>}
  */
 function conditionallyAdd(depsToAdd, manifest, condition) {
-  /** @type {DependencySet} */
+  /** @type {Record<string, string>} */
   const newDeps = {};
   if (!condition || (typeof condition === 'function' ? condition() : condition)) {
     for (const dep of depsToAdd) {
@@ -61,7 +59,7 @@ function conditionallyAdd(depsToAdd, manifest, condition) {
 }
 
 /**
- * @param {PkgManifest} manifest
+ * @param {import('./src/utils/projectRoot.js').PackageManifest} manifest - The package manifest.
  * @returns {boolean} true if prettier is already in the manifest or if a prettier script is defined
  */
 function addPrettier(manifest) {
@@ -69,8 +67,18 @@ function addPrettier(manifest) {
 }
 
 /**
+ * Check if Jest is already in the manifest or if a Jest script is defined.
+ * @param {string} cwd - The current working directory.
+ * @param {import('./src/utils/projectRoot.js').PackageManifest} manifest - The package manifest.
+ * @returns {boolean} - True if Jest should be added, false otherwise.
+ */
+function addJest(cwd, manifest) {
+  return Boolean(manifest.scripts?.test && fs.existsSync(path.join(cwd, 'jest.config.js')));
+}
+
+/**
  * Get the dynamic dependencies for the given package given the package root directory and its manifest.
- * @param {{cwd: string, manifest: PkgManifest}} param0
+ * @param {{cwd: string, manifest: import('./src/utils/projectRoot.js').PackageManifest}} param0
  * @returns { { dependencies: Record<string, string> } }
  */
 export default function ({ cwd, manifest }) {
@@ -81,6 +89,7 @@ export default function ({ cwd, manifest }) {
       ...conditionallyAdd(['typescript'], manifest, () => fs.existsSync(path.join(cwd, 'tsconfig.json'))),
       ...conditionallyAdd(['eslint'], manifest, enableLinting),
       ...conditionallyAdd(['prettier'], manifest, () => addPrettier(manifest)),
+      ...conditionallyAdd(['jest'], manifest, () => addJest(cwd, manifest)),
     },
   };
 }

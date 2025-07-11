@@ -1,7 +1,7 @@
 import Module from 'module';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';
+import fs from 'fs';
 
 /**
  * @typedef {{default?: string, types?: string, import?: string, require?: string}} ExportSet
@@ -16,18 +16,30 @@ import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';
  * @typedef {PkgManifestBase & PkgModuleInfo & PkgDependencyInfo & Record<string, PkgCustomField>} PackageManifest
  */
 
-const scriptPath = path.resolve(path.join('../..', path.dirname(fileURLToPath(import.meta.url))));
+const scriptPath = normalizePath(path.join(path.dirname(fileURLToPath(import.meta.url)), '../..'));
 const rootPath = path.dirname(scriptPath);
 
 /** @type {Record<string, ProjectRoot>} */
 const rootCache = {};
 
 /**
+ * Normalize a file path by replacing backslashes with forward slashes.
+ * @param {string} p - The file path to normalize.
+ * @returns {string} - The normalized file path.
+ */
+export function normalizePath(p) {
+  return path.normalize(p).replaceAll('\\', '/');
+}
+
+/**
+ * Returns a project root for the given path. This will load from a cache if available, and will throw if a package.json
+ * cannot be found at the given path.
  * @param {string} [rootPath=process.cwd()]
  * @returns {ProjectRoot}
  */
 export function getProjectRoot(rootPath = process.cwd()) {
-  return (rootCache[rootPath] ??= new ProjectRoot(rootPath));
+  const normalized = normalizePath(rootPath);
+  return (rootCache[normalized] ??= new ProjectRoot(normalized));
 }
 
 /**
@@ -44,9 +56,16 @@ export function getRepoProjectRoot() {
   return getProjectRoot(rootPath);
 }
 
+/**
+ * Utilities for looking up information about a given package. This helps loading things like package.json multiple times
+ * in a single process and centralizes some functionality.
+ */
 export class ProjectRoot {
-  /** @type {import('@rnx-kit/tools-packages').PackageInfo} */
-  pkgInfo;
+  /** @type {string} */
+  root;
+
+  /** @type {PackageManifest} */
+  manifest;
 
   /** @type {NodeRequire | undefined} */
   cachedRequire = undefined;
@@ -55,21 +74,16 @@ export class ProjectRoot {
    * @param {string} rootPath - root path of the project
    */
   constructor(rootPath) {
-    this.pkgInfo = getPackageInfoFromPath(rootPath);
+    const pkgJsonPath = path.join(rootPath, 'package.json');
+    if (!fs.existsSync(pkgJsonPath)) {
+      throw new Error(`No package.json found at ${pkgJsonPath}`);
+    }
+    this.manifest = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8'));
+    this.root = rootPath;
   }
 
   /** @returns {NodeRequire} - built on demand and cached require function */
   get require() {
-    return (this.cachedRequire ??= Module.createRequire(this.pkgInfo.root));
-  }
-
-  /** @returns {string} - the root path of the project */
-  get root() {
-    return this.pkgInfo.root;
-  }
-
-  /** @returns {PackageManifest} - the package manifest */
-  get manifest() {
-    return this.pkgInfo.manifest;
+    return (this.cachedRequire ??= Module.createRequire(this.root));
   }
 }
