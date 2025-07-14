@@ -4572,8 +4572,9 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/cli": "npm:^0.18.0"
-    "@rnx-kit/metro-config": "npm:^2.0.0"
+    "@rnx-kit/cli": "npm:^0.18.9"
+    "@rnx-kit/metro-config": "npm:^2.1.0"
+    "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
     "@types/react": "npm:^18.2.0"
     metro-config: "npm:^0.80.3"
     react: "npm:18.2.0"
@@ -6775,7 +6776,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/cli@npm:^0.18.0, @rnx-kit/cli@npm:^0.18.9":
+"@rnx-kit/cli@npm:^0.18.9":
   version: 0.18.9
   resolution: "@rnx-kit/cli@npm:0.18.9"
   dependencies:
