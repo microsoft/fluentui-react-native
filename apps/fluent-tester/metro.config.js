@@ -7,12 +7,11 @@
 
 const path = require('path');
 const { exclusionList, makeMetroConfig, resolveUniqueModule } = require('@rnx-kit/metro-config');
+const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
 
 const [reactIs, reactIsExcludePattern] = resolveUniqueModule('react-is');
 
 const blockList = exclusionList([
-  /node_modules\/.*\/node_modules\/react-native\/.*/,
-
   // This stops "react-native run-windows" from causing the metro server to
   // crash if its already running
   new RegExp(`${path.join(__dirname, 'windows').replace(/[/\\]+/g, '/')}.*`),
@@ -42,6 +41,7 @@ let config = makeMetroConfig({
     extraNodeModules: {
       'react-is': reactIs,
     },
+    resolveRequest: MetroSymlinksResolver(),
   },
   transformer: {
     // This transformer selects between the regular transformer and svg transformer depending on the file type
