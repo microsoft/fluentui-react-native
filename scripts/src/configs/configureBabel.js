@@ -6,7 +6,7 @@
  * @returns {import('@babel/core').TransformOptions} - The complete Babel configuration object.
  */
 export function configureBabel(/** @type {BabelConfigOptions} */ options = {}, mixin = {}) {
-  const { esmodule, jsxRuntime } = options;
+  const { esmodule } = options;
   return {
     presets: [
       [
@@ -18,7 +18,7 @@ export function configureBabel(/** @type {BabelConfigOptions} */ options = {}, m
       ],
       '@babel/preset-react',
       '@babel/preset-typescript',
-      ['module:@react-native/babel-preset', { runtime: jsxRuntime ? 'automatic' : 'classic' }],
+      ['module:@react-native/babel-preset', { runtime: 'automatic' }],
     ],
     plugins: [
       ['@babel/plugin-proposal-private-property-in-object', { loose: false }],

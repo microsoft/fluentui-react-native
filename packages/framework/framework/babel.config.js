@@ -1,4 +1,1 @@
-module.exports = {
-  presets: [['module:@react-native/babel-preset', { runtime: 'classic' }]],
-  babelrcRoots: ['experiments/*'],
-};
+module.exports = require('@fluentui-react-native/scripts/configs/babel.config');

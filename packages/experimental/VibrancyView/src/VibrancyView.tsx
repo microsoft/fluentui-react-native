@@ -4,7 +4,6 @@
  * @format
  */
 
-/** @jsxRuntime classic */
 import React from 'react';
 
 import type { VibrancyViewProps } from './VibrancyView.types';
