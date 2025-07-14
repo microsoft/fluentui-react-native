@@ -4572,8 +4572,9 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/cli": "npm:^0.18.0"
-    "@rnx-kit/metro-config": "npm:^2.0.0"
+    "@rnx-kit/cli": "npm:^0.18.9"
+    "@rnx-kit/metro-config": "npm:^2.1.0"
+    "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
     "@types/react": "npm:^18.2.0"
     metro-config: "npm:^0.80.3"
     react: "npm:18.2.0"
@@ -4656,8 +4657,9 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/cli": "npm:^0.18.0"
-    "@rnx-kit/metro-config": "npm:^2.0.0"
+    "@rnx-kit/cli": "npm:^0.18.9"
+    "@rnx-kit/metro-config": "npm:^2.1.0"
+    "@rnx-kit/metro-resolver-symlinks": "npm:^0.2.5"
     "@types/jasmine": "npm:5.1.4"
     "@types/react": "npm:~18.2.0"
     "@warren-ms/react-native-icons": "npm:^0.0.13"
@@ -6774,7 +6776,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/cli@npm:^0.18.0":
+"@rnx-kit/cli@npm:^0.18.9":
   version: 0.18.9
   resolution: "@rnx-kit/cli@npm:0.18.9"
   dependencies:
@@ -6876,7 +6878,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/metro-config@npm:^2.0.0":
+"@rnx-kit/metro-config@npm:^2.0.0, @rnx-kit/metro-config@npm:^2.1.0":
   version: 2.1.0
   resolution: "@rnx-kit/metro-config@npm:2.1.0"
   dependencies:
@@ -6927,6 +6929,23 @@ __metadata:
     "@rnx-kit/typescript-service": "npm:^2.0.0"
     typescript: "npm:>=4.7.0"
   checksum: 10c0/ef18ad41815115a47428e5cbbbfbf5fe2ef52ac8fef7c8ccf3a48706ec51b8735a91d7c924ef1314fc1ea7f8eb98f76adaf1907940c5c4be9a1ccc4c3f5dbdd0
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/metro-resolver-symlinks@npm:^0.2.5":
+  version: 0.2.5
+  resolution: "@rnx-kit/metro-resolver-symlinks@npm:0.2.5"
+  dependencies:
+    "@rnx-kit/console": "npm:^2.0.0"
+    "@rnx-kit/tools-node": "npm:^3.0.0"
+    "@rnx-kit/tools-react-native": "npm:^2.2.0"
+    enhanced-resolve: "npm:^5.8.3"
+  peerDependencies:
+    oxc-resolver: ^9.0.0
+  peerDependenciesMeta:
+    oxc-resolver:
+      optional: true
+  checksum: 10c0/ab2a7d2e5a8278ba83575afc466eb9ab1fc90aa9845d5a1dcabf693cac85ce555f4ff162740fcf73cc7d553cd0060237f9cb323feced5adf4b5d266bf415479f
   languageName: node
   linkType: hard
 
@@ -7059,6 +7078,15 @@ __metadata:
   dependencies:
     "@rnx-kit/tools-node": "npm:^3.0.0"
   checksum: 10c0/ac7bcaaf870463fe51cbd3f2aac631c41c085e00dd1809706ad33f498f1feba31cde611662d5ec55bd25b48ac367c8e5c4eead8749b6e6989b380b4cb6b9a161
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tools-react-native@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@rnx-kit/tools-react-native@npm:2.2.0"
+  dependencies:
+    "@rnx-kit/tools-node": "npm:^3.0.0"
+  checksum: 10c0/631eecefda6b2b53eccdd18656f24a5426625522b80e956504d2b37acbcdc1e98eddc692aec0833536e6fd1b285c4a5d75e27f23a16fdcb099fabae46013740d
   languageName: node
   linkType: hard
 

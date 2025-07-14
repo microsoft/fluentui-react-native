@@ -6,6 +6,7 @@
  */
 // @ts-check
 const { makeMetroConfig } = require('@rnx-kit/metro-config');
+const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
 const { getDefaultConfig } = require('metro-config');
 
 module.exports = async () => {
@@ -17,6 +18,7 @@ module.exports = async () => {
     resolver: {
       assetExts: [...assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
+      resolveRequest: MetroSymlinksResolver(),
     },
     transformer: {
       // This transformer selects between the regular transformer and svg transformer depending on the file type
