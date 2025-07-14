@@ -6,5 +6,6 @@
     "noEmit": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["."]
+  "include": ["."],
+  "exclude": ["./lib"]
 }
