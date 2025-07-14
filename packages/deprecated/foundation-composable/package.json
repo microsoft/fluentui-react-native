@@ -7,8 +7,9 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/deprecated/foundation-composable"
   },
-  "module": "lib-commonjs/index.js",
-  "main": "lib/index.js",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "react-native": "src/index.ts",
   "typings": "lib/index.d.ts",
   "exports": {
     ".": {
