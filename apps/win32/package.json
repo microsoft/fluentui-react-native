@@ -3,6 +3,7 @@
   "version": "0.38.47",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
+  "react-native": "src/index.ts",
   "typings": "lib/index.d.ts",
   "exports": {
     ".": {

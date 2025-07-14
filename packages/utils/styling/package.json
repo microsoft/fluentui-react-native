@@ -4,6 +4,7 @@
   "description": "Utility functions for styling components in FURN",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
+  "react-native": "src/index.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",

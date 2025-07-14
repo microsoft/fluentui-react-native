@@ -4,6 +4,7 @@
   "description": "A cross-platform Divider component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
+  "react-native": "src/index.ts",
   "typings": "lib/index.d.ts",
   "exports": {
     ".": {

@@ -5,6 +5,7 @@
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "react-native": "src/index.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",

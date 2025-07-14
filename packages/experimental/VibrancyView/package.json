@@ -4,6 +4,7 @@
   "description": "A native wrapper for NSVisualEffectView on macOS",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
+  "react-native": "src/index.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",
