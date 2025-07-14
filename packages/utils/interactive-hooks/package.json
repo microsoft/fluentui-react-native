@@ -4,6 +4,7 @@
   "description": "Hooks for adding focus, hover, and press semantics to view based components",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
+  "react-native": "src/index.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",
