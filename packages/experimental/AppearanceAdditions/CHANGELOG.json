@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-appearance-additions",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 19:20:25 GMT",
+      "version": "0.7.3",
+      "tag": "@fluentui-react-native/experimental-appearance-additions_v0.7.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-appearance-additions",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Jun 2025 19:34:57 GMT",
       "version": "0.7.2",
       "tag": "@fluentui-react-native/experimental-appearance-additions_v0.7.2",

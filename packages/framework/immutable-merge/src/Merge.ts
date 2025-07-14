@@ -151,7 +151,7 @@ function assignToNewObject<T extends ObjectBase>(...objs: T[]): T {
 }
 
 /**
- * Filter a set of unknown values to only include those that extend ObjectBase, this actually
+ * Filter a set of unknown values to only include those that extend ObjectBase
  * @param values - array of values to filter
  * @returns the filtered set of values
  */

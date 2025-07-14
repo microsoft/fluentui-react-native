@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/chip",
-  "version": "0.4.8",
+  "version": "0.4.10",
   "description": "A cross-platform Chip component using the Fluent Design System. A chip is a compact representations of entities (most commonly, people) that can be typed in, deleted or dragged easily.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",

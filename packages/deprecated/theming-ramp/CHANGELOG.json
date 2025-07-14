@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 19:20:11 GMT",
+      "version": "0.20.3",
+      "tag": "@uifabricshared/theming-ramp_v0.20.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 23:43:53 GMT",
       "version": "0.20.2",
       "tag": "@uifabricshared/theming-ramp_v0.20.2",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:53 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 19:20:22 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.21.9
+
+Thu, 10 Jul 2025 19:20:22 GMT
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.21.8
 

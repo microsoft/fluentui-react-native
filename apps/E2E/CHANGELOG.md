@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-<!-- This log was last generated on Mon, 10 Mar 2025 20:26:46 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 19:20:25 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.40.9
+
+Thu, 10 Jul 2025 19:20:25 GMT
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 1.40.8
 

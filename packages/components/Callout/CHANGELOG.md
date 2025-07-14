@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-<!-- This log was last generated on Wed, 29 Jan 2025 23:43:54 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 10 Jul 2025 19:20:27 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.27.3
+
+Thu, 10 Jul 2025 19:20:27 GMT
+
+### Patches
+
+- Add support for React Native 0.74 (4123478+tido64@users.noreply.github.com)
 
 ## 0.27.2
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Thu, 10 Jul 2025 19:20:22 GMT",
+      "version": "0.14.3",
+      "tag": "@fluentui-react-native/framework_v0.14.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/framework",
+            "commit": "24b9abab3370f008afd2dbb304751fc9af6bec4a",
+            "comment": "Add support for React Native 0.74"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Jun 2025 19:34:55 GMT",
       "version": "0.14.2",
       "tag": "@fluentui-react-native/framework_v0.14.2",

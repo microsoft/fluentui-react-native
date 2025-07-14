@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/vibrancy-view",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "A native wrapper for NSVisualEffectView on macOS",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
