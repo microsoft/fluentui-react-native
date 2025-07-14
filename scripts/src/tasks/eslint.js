@@ -1,12 +1,12 @@
 // @ts-check
 
-const { argv } = require('just-scripts');
-const { runScript } = require('../utils/runScript.js');
+import { argv } from 'just-scripts';
+import { runScript } from '../utils/runScript.js';
 
 /**
  * @returns {import('just-scripts').TaskFunction}
  */
-module.exports.eslint = () => {
+export const eslint = () => {
   return async (done) => {
     const args = argv().fix ? ['--fix'] : [];
     const result = await runScript('eslint', 'src/', ...args);

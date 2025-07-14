@@ -1,9 +1,14 @@
 // @ts-check
 
-const fs = require('fs');
-const path = require('path');
-const { series, resolveCwd, copyTask } = require('just-scripts');
+import fs from 'fs';
+import path from 'path';
+import { series, resolveCwd, copyTask } from 'just-scripts';
 
+/**
+ * Expands the source path for a given pattern.
+ * @param {string} pattern - The pattern to expand.
+ * @returns {string | null} - The expanded source path or null if the pattern is invalid.
+ */
 function expandSourcePath(pattern) {
   if (!pattern) {
     return null;
@@ -30,9 +35,10 @@ function expandSourcePath(pattern) {
   } catch (e) {
     console.error(e);
   }
+  return null;
 }
 
-exports.copy = () => {
+export const copy = () => {
   let tasks = [];
   let configPath = path.resolve(process.cwd(), 'config/pre-copy.json');
 
@@ -44,9 +50,15 @@ exports.copy = () => {
 
   if (config && config.copyTo) {
     for (let destination in config.copyTo) {
+      /** @type {string[]} */
       const sources = config.copyTo[destination];
       destination = path.resolve(process.cwd(), destination);
-      tasks.push(copyTask(sources.map(src => expandSourcePath(src)), destination));
+      tasks.push(
+        copyTask(
+          sources.map((src) => expandSourcePath(src)).filter((src) => src !== null),
+          destination,
+        ),
+      );
     }
   }
 

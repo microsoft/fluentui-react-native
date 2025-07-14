@@ -84,7 +84,7 @@
     "kitType": "library",
     "alignDeps": {
       "presets": [
-        "@fluentui-react-native/scripts/align-deps-preset.js",
+        "@fluentui-react-native/scripts/configs/align-deps-preset.cjs",
         "microsoft/react-native"
       ],
       "requirements": {

@@ -10,10 +10,9 @@
   },
   "scripts": {
     "build": "lage build",
-    "build-tools": "lage build-tools",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
-    "clean-all": "node ./scripts/clean-all.js",
+    "clean-all": "node ./scripts/src/preinstall/clean-all.js",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle": "lage bundle",
     "clean": "lage clean",
@@ -23,7 +22,7 @@
     "align-deps": "rnx-align-deps --no-unmanaged --requirements react-native@0.74",
     "depcheck": "lage depcheck",
     "lint": "lage lint",
-    "preinstall": "node ./scripts/use-yarn-please.js",
+    "preinstall": "node ./scripts/src/preinstall/use-yarn-please.js",
     "prettier": "lage prettier",
     "prettier-fix": "lage prettier-fix",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"  --verbose",
@@ -48,7 +47,8 @@
     "lage": "^2.0.0",
     "markdown-link-check": "^3.8.7",
     "react": "18.2.0",
-    "react-native": "^0.74.0"
+    "react-native": "^0.74.0",
+    "typescript": "^4.9.4"
   },
   "peerDependencies": {
     "react": "18.2.0",

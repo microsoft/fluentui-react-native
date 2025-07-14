@@ -43,6 +43,7 @@ export type {
   BuiltinRecursionHandlers,
   CustomRecursionHandler,
   MergeOptions,
+  ObjectBase,
   RecursionHandler,
   RecursionOption,
 } from '@fluentui-react-native/immutable-merge';

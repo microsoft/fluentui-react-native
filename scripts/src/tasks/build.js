@@ -1,12 +1,12 @@
 // @ts-check
 
-const { findNativeComponents, codegenNativeComponents } = require('../utils/codegenNativeComponents');
-const path = require('path');
-const fs = require('fs');
-const { runScript } = require('../utils/runScript.js');
-const { readTypeScriptConfig } = require('@rnx-kit/tools-typescript');
-const { getPackageInfoFromPath } = require('@rnx-kit/tools-packages');
-const { JsxEmit, ModuleKind } = require('typescript');
+import { findNativeComponents, codegenNativeComponents } from '../utils/codegenNativeComponents.js';
+import path from 'path';
+import fs from 'fs';
+import { runScript } from '../utils/runScript.js';
+import { readTypeScriptConfig } from '@rnx-kit/tools-typescript';
+import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';
+import { JsxEmit, ModuleKind } from 'typescript';
 
 /**
  * Get the module string for a given module kind.
@@ -27,10 +27,10 @@ function getModuleString(moduleKind) {
 /**
  * Get the build targets for the project.
  * @param {string} cwd - The current working directory to search in.
- * @returns {import('../utils/codegenNativeComponents').BuildTarget[]} - The build targets found.
+ * @returns {import('../utils/codegenNativeComponents.js').BuildTarget[]} - The build targets found.
  */
 function getBuildTargets(cwd = process.cwd()) {
-  /** @type {import('../utils/codegenNativeComponents').BuildTarget[]} */
+  /** @type {import('../utils/codegenNativeComponents.js').BuildTarget[]} */
   const targets = [];
   const pkgInfo = getPackageInfoFromPath(cwd);
 
@@ -43,6 +43,10 @@ function getBuildTargets(cwd = process.cwd()) {
     const moduleBase = getModuleString(options.module);
     const jsxRuntime = options.jsx === JsxEmit.ReactJSX || options.jsx === JsxEmit.ReactJSXDev;
 
+    /**
+     * @param {string} srcTarget
+     * @param {string} module
+     */
     function addTarget(srcTarget, module) {
       targets.push({
         module,
@@ -53,15 +57,15 @@ function getBuildTargets(cwd = process.cwd()) {
     }
 
     // now look for a cjs target
-    const cjsPath = manifest.main || manifest.exports?.['.'].require;
-    if (cjsPath) {
+    const cjsPath = manifest.main;
+    if (cjsPath && typeof cjsPath === 'string') {
       const module = moduleBase && moduleBase !== 'esnext' ? moduleBase : 'node16';
       addTarget(cjsPath, module);
     }
 
     // look for an esm target
-    const esmPath = manifest.module || manifest.exports?.['.'].import;
-    if (esmPath) {
+    const esmPath = manifest.module;
+    if (esmPath && typeof esmPath === 'string') {
       addTarget(esmPath, 'esnext');
     }
   }
@@ -71,7 +75,7 @@ function getBuildTargets(cwd = process.cwd()) {
 
 /**
  * Execute the build for a given target
- * @param {import('../utils/codegenNativeComponents').BuildTarget} target - The build target to execute.
+ * @param {import('../utils/codegenNativeComponents.js').BuildTarget} target - The build target to execute.
  * @param {string} cwd - The current working directory.
  * @returns {Promise<number>} - The exit code of the build process.
  */
@@ -100,7 +104,7 @@ async function buildTarget(target, cwd) {
  *
  * @returns {import('just-scripts').TaskFunction}
  */
-function build() {
+export function build() {
   return async function (done) {
     const cwd = process.cwd();
     const targets = getBuildTargets(cwd);
@@ -121,5 +125,3 @@ function build() {
     done();
   };
 }
-
-module.exports.build = build;

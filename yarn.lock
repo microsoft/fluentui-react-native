@@ -2424,7 +2424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.30.1":
+"@eslint/js@npm:9.30.1, @eslint/js@npm:^9.0.0":
   version: 9.30.1
   resolution: "@eslint/js@npm:9.30.1"
   checksum: 10c0/17fc382a0deafdb1cadac1269d9c2f2464f025bde6e4d12fc4f4775eb9886b41340d4650b72e85a53423644fdc89bf59c987a852f27379ad25feecf2c5bbc1c9
@@ -4268,6 +4268,7 @@ __metadata:
     markdown-link-check: "npm:^3.8.7"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
+    typescript: "npm:^4.9.4"
   peerDependencies:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
@@ -4282,21 +4283,28 @@ __metadata:
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/plugin-proposal-private-property-in-object": "npm:^7.21.11"
     "@babel/plugin-transform-private-methods": "npm:^7.27.1"
+    "@eslint/js": "npm:^9.0.0"
+    "@microsoft/eslint-plugin-sdl": "npm:^1.1.0"
     "@react-native-community/cli": "npm:^13.6.4"
     "@react-native-community/cli-platform-android": "npm:^13.6.4"
     "@react-native-community/cli-platform-ios": "npm:^13.6.4"
     "@react-native/metro-babel-transformer": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
-    "@rnx-kit/jest-preset": "npm:^0.2.0"
+    "@rnx-kit/eslint-plugin": "npm:^0.8.6"
+    "@rnx-kit/jest-preset": "npm:^0.2.1"
     "@rnx-kit/tools-packages": "npm:^0.1.1"
     "@rnx-kit/tools-typescript": "npm:^0.1.1"
+    "@rnx-kit/tsconfig": "npm:^2.1.1"
     "@types/es6-collections": "npm:^0.5.29"
     "@types/es6-promise": "npm:0.0.32"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^12.11.2"
     "@types/react-test-renderer": "npm:16.9.0"
+    "@typescript-eslint/eslint-plugin": "npm:^8.36.0"
+    "@typescript-eslint/parser": "npm:^8.36.0"
     "@uifabric/prettier-rules": "npm:^7.0.3"
     depcheck: "npm:^1.0.0"
+    eslint: "npm:^9.0.0"
     find-up: "npm:^5.0.0"
     fs-extra: "npm:^7.0.1"
     glob: "npm:^10.0.0"
@@ -4314,14 +4322,14 @@ __metadata:
     react-native-svg-transformer: "npm:^1.0.0"
     react-test-renderer: "npm:18.2.0"
     rimraf: "npm:^5.0.1"
-    typescript: "npm:4.9.4"
+    typescript: "npm:^5.8.0"
     workspace-tools: "npm:^0.26.3"
   peerDependencies:
     react: 18.2.0
     react-native: ^0.73.0 || ^0.74.0
     react-native-svg: ^15.0.0 || ^15.4.0
   bin:
-    fluentui-scripts: ./just-scripts.js
+    fluentui-scripts: ./src/cli.cjs
   languageName: unknown
   linkType: soft
 
@@ -6837,7 +6845,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/jest-preset@npm:^0.2.0":
+"@rnx-kit/jest-preset@npm:^0.2.1":
   version: 0.2.1
   resolution: "@rnx-kit/jest-preset@npm:0.2.1"
   dependencies:
@@ -7087,6 +7095,13 @@ __metadata:
     read-yaml-file: "npm:^2.1.0"
     strip-json-comments: "npm:^3.1.1"
   checksum: 10c0/b9528f560092c8ba8eeafb818cef2363ba99ffd7b3f0e3738cfe0316b35211ab7b6aa08d9eb3ef555c02b6048c591adafdca2934e674066256c06860cb1cf668
+  languageName: node
+  linkType: hard
+
+"@rnx-kit/tsconfig@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@rnx-kit/tsconfig@npm:2.1.1"
+  checksum: 10c0/53aed185abd644250d95c732e44ecb66bcdf3005cc6eb854ba217346fa29cf0ea892bbd391e15050a5b553fe7dc983130add30c9aa30b1f66a0ca498d3409d94
   languageName: node
   linkType: hard
 
@@ -8133,7 +8148,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.36.0":
+"@typescript-eslint/eslint-plugin@npm:8.36.0, @typescript-eslint/eslint-plugin@npm:^8.36.0":
   version: 8.36.0
   resolution: "@typescript-eslint/eslint-plugin@npm:8.36.0"
   dependencies:
@@ -8154,7 +8169,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.36.0":
+"@typescript-eslint/parser@npm:8.36.0, @typescript-eslint/parser@npm:^8.36.0":
   version: 8.36.0
   resolution: "@typescript-eslint/parser@npm:8.36.0"
   dependencies:
@@ -22195,6 +22210,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^4.9.4":
+  version: 4.9.5
+  resolution: "typescript@npm:4.9.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/5f6cad2e728a8a063521328e612d7876e12f0d8a8390d3b3aaa452a6a65e24e9ac8ea22beb72a924fd96ea0a49ea63bb4e251fb922b12eedfb7f7a26475e5c56
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^5.8.0":
+  version: 5.8.3
+  resolution: "typescript@npm:5.8.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/5f8bb01196e542e64d44db3d16ee0e4063ce4f3e3966df6005f2588e86d91c03e1fb131c2581baf0fb65ee79669eea6e161cd448178986587e9f6844446dbb48
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@npm%3A4.9.4#optional!builtin<compat/typescript>":
   version: 4.9.4
   resolution: "typescript@patch:typescript@npm%3A4.9.4#optional!builtin<compat/typescript>::version=4.9.4&hash=289587"
@@ -22212,6 +22247,26 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/f3b8082c9d1d1629a215245c9087df56cb784f9fb6f27b5d55577a20e68afe2a889c040aacff6d27e35be165ecf9dca66e694c42eb9a50b3b2c451b36b5675cb
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^4.9.4#optional!builtin<compat/typescript>":
+  version: 4.9.5
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/e3333f887c6829dfe0ab6c1dbe0dd1e3e2aeb56c66460cb85c5440c566f900c833d370ca34eb47558c0c69e78ced4bfe09b8f4f98b6de7afed9b84b8d1dd06a1
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.8.0#optional!builtin<compat/typescript>":
+  version: 5.8.3
+  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/39117e346ff8ebd87ae1510b3a77d5d92dae5a89bde588c747d25da5c146603a99c8ee588c7ef80faaf123d89ed46f6dbd918d534d641083177d5fac38b8a1cb
   languageName: node
   linkType: hard
 

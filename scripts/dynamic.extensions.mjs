@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 /**
  * Get the package.json manifest for a given folder.
  * @param {string} folder
- * @returns {import('@rnx-kit/tools-packages').PackageInfo['manifest']}
+ * @returns {import('./src/utils/projectRoot.js').PackageManifest}
  */
 function getPackageManifest(folder) {
   const manifestPath = path.join(folder, 'package.json');
@@ -22,18 +22,20 @@ function getPackageManifest(folder) {
 const scriptFolder = path.dirname(fileURLToPath(import.meta.url));
 const scriptManifest = getPackageManifest(scriptFolder);
 const rootManifest = getPackageManifest(path.dirname(scriptFolder));
-// all merged versions from the root and script manifests, scripts having precedence
+// all merged versions from the root and script manifests
+// have the root manifest take precedence over the script manifest, this allows the script folder to ingest newer
+// tooling without updating all projects in the repo
 const baseVersions = {
-  ...rootManifest?.devDependencies,
-  ...rootManifest?.dependencies,
   ...scriptManifest?.devDependencies,
   ...scriptManifest?.dependencies,
+  ...rootManifest?.devDependencies,
+  ...rootManifest?.dependencies,
 };
 
 /**
  * Conditionally add a dependency to the given dependencies object if it is not already present
  * @param {string[]} depsToAdd
- * @param {import('@rnx-kit/tools-packages').PackageInfo['manifest']} manifest
+ * @param {import('./src/utils/projectRoot.js').PackageManifest} manifest
  * @param {ConditionalCheck | boolean | undefined} condition
  * @returns {Record<string, string>}
  */
@@ -56,17 +58,30 @@ function conditionallyAdd(depsToAdd, manifest, condition) {
   return newDeps;
 }
 
+/**
+ * @param {import('./src/utils/projectRoot.js').PackageManifest} manifest - The package manifest.
+ * @returns {boolean} true if prettier is already in the manifest or if a prettier script is defined
+ */
 function addPrettier(manifest) {
-  return manifest && manifest.scripts && (manifest.scripts.prettier || manifest.scripts['prettier-fix']);
+  return Boolean(manifest && manifest.scripts && (manifest.scripts.prettier || manifest.scripts['prettier-fix']));
+}
+
+/**
+ * Check if Jest is already in the manifest or if a Jest script is defined.
+ * @param {string} cwd - The current working directory.
+ * @param {import('./src/utils/projectRoot.js').PackageManifest} manifest - The package manifest.
+ * @returns {boolean} - True if Jest should be added, false otherwise.
+ */
+function addJest(cwd, manifest) {
+  return Boolean(manifest.scripts?.test && fs.existsSync(path.join(cwd, 'jest.config.js')));
 }
 
 /**
  * Get the dynamic dependencies for the given package given the package root directory and its manifest.
- * @param {{cwd: string, manifest: import('@rnx-kit/tools-packages').PackageInfo['manifest']}} param0
+ * @param {{cwd: string, manifest: import('./src/utils/projectRoot.js').PackageManifest}} param0
  * @returns { { dependencies: Record<string, string> } }
  */
 export default function ({ cwd, manifest }) {
-  const dependenciesToAdd = {};
   const enableLinting = Boolean(manifest.scripts && manifest.scripts.lint);
 
   return {
@@ -74,6 +89,7 @@ export default function ({ cwd, manifest }) {
       ...conditionallyAdd(['typescript'], manifest, () => fs.existsSync(path.join(cwd, 'tsconfig.json'))),
       ...conditionallyAdd(['eslint'], manifest, enableLinting),
       ...conditionallyAdd(['prettier'], manifest, () => addPrettier(manifest)),
+      ...conditionallyAdd(['jest'], manifest, () => addJest(cwd, manifest)),
     },
   };
 }

@@ -25,7 +25,7 @@ export const ButtonFocusTest_deprecated: React.FunctionComponent = () => {
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
   return (
-    (<Stack>
+    <Stack>
       <Button componentRef={buttonRef} accessibilityLabel="overridden button name">{state.focused ? 'Focused' : 'Not Focused'}</Button>
       <Button onClick={onFocus} tooltip="button tooltip">Click to focus</Button>
       <Button onClick={onFocus} tooltip="disabled button" disabled>Disabled Button</Button>
@@ -33,6 +33,6 @@ export const ButtonFocusTest_deprecated: React.FunctionComponent = () => {
       <Button onClick={onFocus} appearance='subtle'>Stealth Button</Button>
       <Button icon={testImage} tooltip="button tooltip" iconPosition='before'>Button with png Icon</Button>
       <Button icon={iconProps} tooltip="button tooltip" iconPosition='after'>Button with Right Icon</Button>
-    </Stack>)
+    </Stack>
   );
 };

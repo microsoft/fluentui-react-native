@@ -2,9 +2,5 @@ steps:
   - template: setup-repo.yml
 
   - script: |
-      yarn build-tools
-    displayName: "yarn build-tools"
-
-  - script: |
       yarn build
-    displayName: "yarn build"
+    displayName: 'yarn build'

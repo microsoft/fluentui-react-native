@@ -1,10 +1,11 @@
 // @ts-check
-const glob = require('glob');
+import * as glob from 'glob';
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-const { configureBabel } = require('../configs/configureBabel');
+import { configureBabel } from '../configs/configureBabel.js';
+import babel from '@babel/core';
 
 /**
  * @typedef {{ module: string, outDir: string, jsxRuntime?: boolean, nativeComponents?: string[] }} BuildTarget
@@ -15,7 +16,7 @@ const { configureBabel } = require('../configs/configureBabel');
  * @param {string} [cwd=process.cwd()] - The current working directory to search in.
  * @returns {string[] | undefined}
  */
-function findNativeComponents(cwd = process.cwd()) {
+export function findNativeComponents(cwd = process.cwd()) {
   const results = glob.sync('src/**/*NativeComponent.ts', { cwd });
   return results.length > 0 ? results : undefined;
 }
@@ -25,10 +26,9 @@ function findNativeComponents(cwd = process.cwd()) {
  * @param {BuildTarget} target
  * @param {string} [cwd=process.cwd()] - The current working directory.
  */
-function codegenNativeComponents(target, cwd = process.cwd()) {
+export function codegenNativeComponents(target, cwd = process.cwd()) {
   const { module, outDir, nativeComponents, jsxRuntime } = target;
   if (nativeComponents && nativeComponents.length > 0) {
-    const babel = require('@babel/core');
     const configOptions = { esmodule: module === 'esnext', jsxRuntime };
     const optionsBase = configureBabel(configOptions, {
       ast: false,
@@ -55,6 +55,3 @@ function codegenNativeComponents(target, cwd = process.cwd()) {
     }
   }
 }
-
-module.exports.codegenNativeComponents = codegenNativeComponents;
-module.exports.findNativeComponents = findNativeComponents;
