@@ -10,7 +10,6 @@
   },
   "scripts": {
     "build": "lage build",
-    "build-tools": "lage build-tools",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
     "clean-all": "node ./scripts/src/preinstall/clean-all.js",
