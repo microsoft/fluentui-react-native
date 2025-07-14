@@ -1,6 +1,8 @@
 // @ts-check
 
 import { logger } from 'just-task';
+import os from 'os';
+import { execSync } from 'child_process';
 
 /**
  *
@@ -9,13 +11,11 @@ import { logger } from 'just-task';
 export function checkForModifiedFiles() {
   return function (done) {
     try {
-      const EOL = require('os').EOL;
-      const execSync = require('child_process').execSync;
       /** @type {(value: string) => boolean} */
       const notEmpty = (value) => value.trim() !== '';
 
       const gitStatusOutput = execSync('git status -s --untracked-files=no').toString('utf8');
-      const hasChangedFiles = gitStatusOutput.split(EOL).filter(notEmpty).length > 0;
+      const hasChangedFiles = gitStatusOutput.split(os.EOL).filter(notEmpty).length > 0;
 
       if (hasChangedFiles) {
         logger.error('This build has files that are tracked by git that resulted in changed files.');

@@ -5,7 +5,7 @@ module.exports = {
     buildci: ['build', 'test', 'depcheck'],
     bundle: ['build'],
     clean: [],
-    depcheck: ['align-deps'],
+    depcheck: [],
     lint: [],
     prettier: [],
     ['prettier-fix']: [],
