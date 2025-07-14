@@ -1,5 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
 import React from 'react';
 import { View } from 'react-native';
 
@@ -7,7 +5,7 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import type { ICalloutProps } from '@fluentui-react-native/callout';
 import { Callout } from '@fluentui-react-native/callout';
 import type { UseTokens } from '@fluentui-react-native/framework';
-import { buildUseTokens, compressible, useSlot, withSlots } from '@fluentui-react-native/framework';
+import { buildUseTokens, compressible, useSlot } from '@fluentui-react-native/framework';
 
 import type { ListboxProps, ListboxTokens } from './Listbox.types';
 import { listboxName } from './Listbox.types';

@@ -1,5 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
@@ -7,7 +5,6 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -91,5 +88,4 @@ export const Stack = compose<IStackType>({
   },
 });
 
-// eslint-disable-next-line no-restricted-exports
 export default Stack;

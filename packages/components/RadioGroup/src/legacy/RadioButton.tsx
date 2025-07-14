@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
-'use strict';
 import * as React from 'react';
 import { View } from 'react-native';
 
@@ -9,7 +6,6 @@ import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluen
 import { Text } from '@fluentui-react-native/text';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import type { ISlots } from '@uifabricshared/foundation-composable';
-import { withSlots } from '@uifabricshared/foundation-composable';
 import type { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';

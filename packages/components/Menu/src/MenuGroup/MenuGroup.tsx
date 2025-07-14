@@ -1,10 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
 import React from 'react';
 import { Platform, View } from 'react-native';
 
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import type { UseSlots } from '@fluentui-react-native/framework';
 
 import type { MenuGroupProps, MenuGroupType } from './MenuGroup.types';

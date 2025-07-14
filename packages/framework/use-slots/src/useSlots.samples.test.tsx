@@ -1,9 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+import * as React from 'react';
 import type { CSSProperties } from 'react';
 
 import { mergeProps } from '@fluentui-react-native/merge-props';
-import { withSlots, stagedComponent } from '@fluentui-react-native/use-slot';
+import { stagedComponent } from '@fluentui-react-native/use-slot';
 import * as renderer from 'react-test-renderer';
 
 import { buildUseSlots } from './buildUseSlots';

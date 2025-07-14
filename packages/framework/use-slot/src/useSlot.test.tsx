@@ -1,5 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
 import * as React from 'react';
 import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
@@ -10,7 +8,6 @@ import * as renderer from 'react-test-renderer';
 import type { NativeReactType } from './renderSlot';
 import { stagedComponent } from './stagedComponent';
 import { useSlot } from './useSlot';
-import { withSlots } from './withSlots';
 
 type PluggableTextProps = React.PropsWithChildren<TextProps> & { inner?: NativeReactType | React.FunctionComponent<TextProps> };
 

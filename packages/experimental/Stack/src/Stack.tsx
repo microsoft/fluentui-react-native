@@ -1,12 +1,10 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, withSlots, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
+import { compose, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 
 import { stylingSettings } from './Stack.styling';
 import { stackName } from './Stack.types';

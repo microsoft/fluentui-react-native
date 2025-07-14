@@ -1,10 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
 import * as React from 'react';
 import { Pressable, Platform } from 'react-native';
 
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Svg, Path } from 'react-native-svg';
 
