@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+import * as React from 'react';
 import type { UseTokens } from '@fluentui-react-native/framework';
 import { compressible, buildUseTokens } from '@fluentui-react-native/framework';
 

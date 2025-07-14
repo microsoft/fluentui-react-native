@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx withSlots */
+import * as React from 'react';
 import { CheckboxV1 } from '@fluentui-react-native/checkbox';
 
 if (__DEV__) {
