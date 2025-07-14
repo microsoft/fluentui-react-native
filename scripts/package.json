@@ -12,8 +12,8 @@
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.cjs check-publishing",
     "lint": "eslint",
-    "prettier": "prettier",
-    "prettier-fix": "prettier --fix true"
+    "prettier": "node ./src/cli.cjs prettier",
+    "prettier-fix": "node ./src/cli.cjs prettier --fix true"
   },
   "repository": {
     "type": "git",
