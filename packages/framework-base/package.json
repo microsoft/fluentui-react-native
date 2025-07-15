@@ -1,11 +1,11 @@
 {
-  "name": "@fluentui-react-native/immutable-merge",
-  "version": "1.2.3",
-  "description": "Immutable merge routines for deep customizable merging",
+  "name": "@fluentui-react-native/framework-base",
+  "version": "1.0.0",
+  "description": "Base types and utilities fluentui-react-native frameworks, both old and new",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
-    "directory": "packages/framework/immutable-merge"
+    "directory": "packages/framework-base"
   },
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
@@ -14,7 +14,20 @@
     ".": {
       "import": "./lib/index.js",
       "require": "./lib-commonjs/index.js",
-      "types": "./lib/index.d.ts"
+      "types": "./lib/index.d.ts",
+      "react-native": "./src/index.ts"
+    },
+    "./immutable-merge": {
+      "import": "./immutable-merge/lib/Merge.js",
+      "require": "./immutable-merge/lib-commonjs/Merge.js",
+      "types": "./immutable-merge/lib/Merge.d.ts",
+      "react-native": "./immutable-merge/src/Merge.ts"
+    },
+    "./memo-cache": {
+      "import": "./memo-cache/lib/index.js",
+      "require": "./memo-cache/lib-commonjs/index.js",
+      "types": "./memo-cache/lib/index.d.ts",
+      "react-native": "./memo-cache/src/index.ts"
     }
   },
   "typings": "lib/index.d.ts",
@@ -34,9 +47,6 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@fluentui-react-native/framework-base": "workspace:*"
-  },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",

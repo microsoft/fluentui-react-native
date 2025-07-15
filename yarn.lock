@@ -3638,6 +3638,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/framework-base@workspace:*, @fluentui-react-native/framework-base@workspace:packages/framework-base":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/framework-base@workspace:packages/framework-base"
+  dependencies:
+    "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@types/jest": "npm:^29.0.0"
+    "@types/node": "npm:^10.3.5"
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/framework@npm:*, @fluentui-react-native/framework@workspace:*, @fluentui-react-native/framework@workspace:packages/framework/framework":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/framework@workspace:packages/framework/framework"
@@ -3722,10 +3733,10 @@ __metadata:
   resolution: "@fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^10.3.5"
-    tslib: "npm:^2.3.1"
   languageName: unknown
   linkType: soft
 
@@ -3855,6 +3866,7 @@ __metadata:
   resolution: "@fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^10.3.5"
