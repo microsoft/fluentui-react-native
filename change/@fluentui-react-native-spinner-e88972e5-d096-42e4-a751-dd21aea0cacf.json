@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling",
-  "packageName": "@fluentui-react-native/spinner",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

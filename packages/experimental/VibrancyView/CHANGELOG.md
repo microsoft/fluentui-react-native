@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/vibrancy-view
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:13 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 15 Jul 2025 23:26:51 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.3.4
+
+Tue, 15 Jul 2025 23:26:51 GMT
+
+### Patches
+
+- fix: run beachball sync (sanajmi@microsoft.com)
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling (jasonmo@microsoft.com)
 
 ## 0.3.1
 

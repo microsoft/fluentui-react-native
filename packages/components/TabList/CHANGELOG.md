@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/tablist
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:17 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 15 Jul 2025 23:26:58 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.7.8
+
+Tue, 15 Jul 2025 23:26:58 GMT
+
+### Patches
+
+- add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling (jasonmo@microsoft.com)
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- fix: run beachball sync (sanajmi@microsoft.com)
+- fix repo linting with new configs and version, fixing linting errors as well (jasonmo@microsoft.com)
 
 ## 0.7.5
 

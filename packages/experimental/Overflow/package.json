@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/overflow",
-  "version": "0.3.25",
+  "version": "0.3.26",
   "description": "A cross-platform Overflow component for React Native.",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

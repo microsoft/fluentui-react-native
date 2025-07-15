@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/themed-stylesheet",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Helper for using react-native StyleSheets with themes",
   "repository": {
     "type": "git",

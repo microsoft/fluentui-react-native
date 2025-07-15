@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/spinner",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "description": "A cross-platform Fluent spinner component",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

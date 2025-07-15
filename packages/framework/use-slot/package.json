@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-slot",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "Hook function to use a component as a pluggable slot",
   "repository": {
     "type": "git",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: run beachball sync",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

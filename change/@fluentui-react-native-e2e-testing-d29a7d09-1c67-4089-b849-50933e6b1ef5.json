@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "updated wdio versions and fixed tests",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "gulnazsayed@microsoft.com",
-  "dependentChangeType": "patch"
-}

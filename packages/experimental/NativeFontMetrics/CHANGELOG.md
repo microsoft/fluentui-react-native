@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:23 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 15 Jul 2025 23:27:15 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.6.4
+
+Tue, 15 Jul 2025 23:27:15 GMT
+
+### Patches
+
+- Bump our version of use-subscription (ruaraki@microsoft.com)
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- fix: run beachball sync (sanajmi@microsoft.com)
+- add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling (jasonmo@microsoft.com)
 
 ## 0.6.1
 

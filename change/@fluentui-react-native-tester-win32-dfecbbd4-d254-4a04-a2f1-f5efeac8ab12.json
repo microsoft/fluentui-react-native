@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "speed up bundling and reduce bundling errors",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

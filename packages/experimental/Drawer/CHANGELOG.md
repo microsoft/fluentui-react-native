@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/drawer
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:26 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 15 Jul 2025 23:27:21 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.4.8
+
+Tue, 15 Jul 2025 23:27:21 GMT
+
+### Patches
+
+- add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling (jasonmo@microsoft.com)
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- fix: run beachball sync (sanajmi@microsoft.com)
 
 ## 0.4.5
 

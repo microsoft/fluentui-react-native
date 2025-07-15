@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
-This log was last generated on Fri, 01 Mar 2024 20:39:11 GMT and should not be manually modified.
+<!-- This log was last generated on Tue, 15 Jul 2025 23:27:12 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.2.5
+
+Tue, 15 Jul 2025 23:27:12 GMT
+
+### Patches
+
+- fix: run beachball sync (sanajmi@microsoft.com)
+- fix repo linting with new configs and version, fixing linting errors as well (jasonmo@microsoft.com)
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling (jasonmo@microsoft.com)
 
 ## 1.2.2
 

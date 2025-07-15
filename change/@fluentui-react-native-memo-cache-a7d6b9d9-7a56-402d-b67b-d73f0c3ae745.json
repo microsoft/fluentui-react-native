@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix repo linting with new configs and version, fixing linting errors as well",
-  "packageName": "@fluentui-react-native/memo-cache",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}
