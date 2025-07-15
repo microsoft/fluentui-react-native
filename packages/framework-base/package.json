@@ -28,6 +28,12 @@
       "require": "./memo-cache/lib-commonjs/index.js",
       "types": "./memo-cache/lib/index.d.ts",
       "react-native": "./memo-cache/src/index.ts"
+    },
+    "./merge-props": {
+      "import": "./merge-props/lib/index.js",
+      "require": "./merge-props/lib-commonjs/index.js",
+      "types": "./merge-props/lib/index.d.ts",
+      "react-native": "./merge-props/src/index.ts"
     }
   },
   "typings": "lib/index.d.ts",

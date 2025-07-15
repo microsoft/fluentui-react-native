@@ -10,7 +10,7 @@ import {
   IExtractState,
 } from '@uifabricshared/foundation-composable';
 import { initializeStyling, getOptionsFromObj } from './useStyling';
-import { immutableMerge } from '@fluentui-react-native/immutable-merge';
+import { immutableMerge } from '@fluentui-react-native/framework-base';
 import { ISlotProps } from '@uifabricshared/foundation-settings';
 
 /**
