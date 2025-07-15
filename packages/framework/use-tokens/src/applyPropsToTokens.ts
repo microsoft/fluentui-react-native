@@ -1,4 +1,4 @@
-import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/framework-base/memo-cache';
 
 export function applyPropsToTokens<TProps, TTokens>(
   props: TProps,

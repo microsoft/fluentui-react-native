@@ -35,12 +35,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@fluentui-react-native/memo-cache": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",

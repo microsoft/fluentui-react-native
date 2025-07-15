@@ -1,4 +1,4 @@
-import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/framework-base';
 import type { ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
 
 import type { ITokenPropInfo } from './Token.internal';

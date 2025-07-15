@@ -1,4 +1,4 @@
-import { getMemoCache } from '@fluentui-react-native/memo-cache';
+import { getMemoCache } from '@fluentui-react-native/framework-base/memo-cache';
 
 import { applyPropsToTokens } from './applyPropsToTokens';
 

@@ -1,4 +1,4 @@
-import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/framework-base/memo-cache';
 import type { HasLayer, TokenSettings } from '@fluentui-react-native/use-tokens';
 import { applyPropsToTokens, applyTokenLayers, buildUseTokens } from '@fluentui-react-native/use-tokens';
 

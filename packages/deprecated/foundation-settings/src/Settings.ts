@@ -2,7 +2,7 @@
 
 import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
-import { mergeProps } from '@fluentui-react-native/merge-props';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 
 /**
  * an individual settings block is a set of slotProps, with an additional collection of tokens.
@@ -73,7 +73,6 @@ export function resolveSettingsOverrides(target: IComponentSettings, overrideLoo
  * @param target - settings block to strip the settings specific information from
  */
 export function slotPropsFromSettings(target: IComponentSettings): ISlotProps {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { _overrides, _precedence, ...slotProps } = target;
   return slotProps as ISlotProps;
 }

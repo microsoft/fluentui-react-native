@@ -35,8 +35,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/foundation-base": "workspace:*",
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/foundation-base": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

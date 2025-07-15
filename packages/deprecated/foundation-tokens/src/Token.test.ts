@@ -1,4 +1,4 @@
-import { getMemoCache } from '@fluentui-react-native/memo-cache';
+import { getMemoCache } from '@fluentui-react-native/framework-base';
 
 import type { IButtonSettings } from './MockButton';
 import { MockButton } from './MockButton';
