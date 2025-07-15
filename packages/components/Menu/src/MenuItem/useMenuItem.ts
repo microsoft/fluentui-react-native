@@ -15,8 +15,6 @@ import { useMenuItemTracking } from '../MenuList/useMenuList';
 export const triggerKeys = [' ', 'Enter'];
 export const submenuTriggerKeys = ['ArrowLeft', 'ArrowRight', ...triggerKeys];
 
-const preventDuplicateKeyDownHandling = Platform.OS === 'macos';
-
 export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
@@ -41,11 +39,10 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
         componentRef?.current?.blur();
         onClick?.(e);
 
-        // For macOS, the pressable keyDown handler also calls onPress() for 'Enter' / 'Space' keys. This means that
-        // this invoke() callback is called twice on the platform. preventDefault() makes it so that its handled once.
-        if (preventDuplicateKeyDownHandling) {
-          e.preventDefault();
-        }
+        // For RN, ENTER / SPACE keypresses are handled by both the `onKey` event handlers and `onPress` handler. Because we
+        // pass this callback into both `onKeyDown` and `onPress` props, we need to mark the event as handled for ENTER / SPACE
+        // key presses so that we don't have duplicate `onClick` calls.
+        e.preventDefault();
       }
 
       if (!hasSubmenu && !isArrowKey && !shouldPersist) {
