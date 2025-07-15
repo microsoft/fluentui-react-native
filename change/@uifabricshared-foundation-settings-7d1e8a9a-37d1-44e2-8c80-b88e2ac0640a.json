@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: run beachball sync",
+  "packageName": "@uifabricshared/foundation-settings",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
