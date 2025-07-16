@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update builds to use node16 settings and modern export maps",
-  "packageName": "@uifabricshared/theme-registry",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

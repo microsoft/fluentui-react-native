@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:25 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 15 Jul 2025 23:27:22 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.43.0
+
+Tue, 15 Jul 2025 23:27:22 GMT
+
+### Minor changes
+
+- rework e2e and fluent-tester to avoid direct references across packages (jasonmo@microsoft.com)
+- updated wdio versions and fixed tests (gulnazsayed@microsoft.com)
+
+### Patches
+
+- add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling (jasonmo@microsoft.com)
+- fix repo linting with new configs and version, fixing linting errors as well (jasonmo@microsoft.com)
+- fix: run beachball sync (sanajmi@microsoft.com)
 
 ## 1.40.9
 

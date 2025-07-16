@@ -2,6 +2,59 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Tue, 15 Jul 2025 23:27:08 GMT",
+      "version": "1.3.6",
+      "tag": "@fluentui-react-native/memo-cache_v1.3.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "6b4d59227b1e9bbbf25cc93a3502015f663b363e",
+            "comment": "add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "update builds to use node16 settings and modern export maps"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "3d36cc95620fdb938221cbe2c5ce002264108a50",
+            "comment": "fix repo linting with new configs and version, fixing linting errors as well"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "9cbe229ec7f6363d229dcaef506921b8d9f47d7d",
+            "comment": "fix: run beachball sync"
+          }
+        ],
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "405ca368dc3f2963bfc252a1952b1e14ff503499",
+            "comment": "fix: run `beachball sync` to sync package versions with NPM"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "3e168e4363d1821818f219819d29532eace8d979",
+            "comment": "update scripts package to be fully js, use esm, and validate fully"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jan 2025 18:42:24 GMT",
       "version": "1.3.3",
       "tag": "@fluentui-react-native/memo-cache_v1.3.3",

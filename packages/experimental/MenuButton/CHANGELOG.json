@@ -2,6 +2,71 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Tue, 15 Jul 2025 23:27:18 GMT",
+      "version": "0.10.23",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.10.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "479b93cea460a26df70c55b5d3335927ed374713",
+            "comment": "update builds to use node16 settings and modern export maps"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "9cbe229ec7f6363d229dcaef506921b8d9f47d7d",
+            "comment": "fix: run beachball sync"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "6b4d59227b1e9bbbf25cc93a3502015f663b363e",
+            "comment": "add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling"
+          },
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "97af68555017800c9ae7e4974400f3893a84efe1",
+            "comment": "expand collapse"
+          }
+        ],
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "405ca368dc3f2963bfc252a1952b1e14ff503499",
+            "comment": "fix: run `beachball sync` to sync package versions with NPM"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "3e168e4363d1821818f219819d29532eace8d979",
+            "comment": "update scripts package to be fully js, use esm, and validate fully"
+          },
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "54087dca787180bbf34630470cd0d06e88366b30",
+            "comment": "update eslint to 9.x and use new flat config format with security rules"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "a245202877ef7f2be9ab5f0e1356b2270957e693",
+            "comment": "Run bump-versions"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "79bb06f6bbfd0a36f9d2ef371f4857be9660f027",
+            "comment": "Fixed `align-deps` warnings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 10 Jul 2025 19:20:24 GMT",
       "version": "0.10.20",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.10.20",

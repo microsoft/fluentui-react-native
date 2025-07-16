@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "update eslint to 9.x and use new flat config format with security rules",
-  "packageName": "@fluentui-react-native/tokens",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none"
-}

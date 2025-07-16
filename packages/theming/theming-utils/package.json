@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theming-utils",
-  "version": "0.26.3",
+  "version": "0.26.5",
   "description": "Utils for dealing with theming",
   "repository": {
     "type": "git",

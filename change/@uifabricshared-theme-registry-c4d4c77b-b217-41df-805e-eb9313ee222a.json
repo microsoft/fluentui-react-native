@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run bump-versions",
-  "packageName": "@uifabricshared/theme-registry",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

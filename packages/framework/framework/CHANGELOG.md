@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/framework
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:22 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 15 Jul 2025 23:27:11 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.14.6
+
+Tue, 15 Jul 2025 23:27:11 GMT
+
+### Patches
+
+- update builds to use node16 settings and modern export maps (jasonmo@microsoft.com)
+- fix: run beachball sync (sanajmi@microsoft.com)
+- fix repo linting with new configs and version, fixing linting errors as well (jasonmo@microsoft.com)
+- export missing type from framework to fix build error in Popover (jasonmo@microsoft.com)
+- add react-native entrypoints that ensure metro targets TS files rather than JS files for bundling (jasonmo@microsoft.com)
 
 ## 0.14.3
 

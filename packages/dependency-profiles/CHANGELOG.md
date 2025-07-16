@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dependency-profiles
 
-<!-- This log was last generated on Thu, 10 Jul 2025 19:20:27 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 15 Jul 2025 23:27:24 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.8.49
+
+Tue, 15 Jul 2025 23:27:24 GMT
+
+### Patches
+
+- fix: run beachball sync (sanajmi@microsoft.com)
 
 ## 0.8.46
 

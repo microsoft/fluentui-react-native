@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "fix: run `beachball sync` to sync package versions with NPM",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "none"
-}
