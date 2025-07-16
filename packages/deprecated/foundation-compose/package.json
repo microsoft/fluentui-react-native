@@ -36,8 +36,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/default-theme": "workspace:*",
-    "@fluentui-react-native/immutable-merge": "workspace:*",
-    "@fluentui-react-native/memo-cache": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/theme-types": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",
     "@uifabricshared/foundation-settings": "workspace:*",

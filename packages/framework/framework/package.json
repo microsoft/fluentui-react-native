@@ -34,9 +34,7 @@
   "dependencies": {
     "@fluentui-react-native/composition": "workspace:*",
     "@fluentui-react-native/default-theme": "workspace:*",
-    "@fluentui-react-native/immutable-merge": "workspace:*",
-    "@fluentui-react-native/memo-cache": "workspace:*",
-    "@fluentui-react-native/merge-props": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/theme-types": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
     "@fluentui-react-native/use-slot": "workspace:*",

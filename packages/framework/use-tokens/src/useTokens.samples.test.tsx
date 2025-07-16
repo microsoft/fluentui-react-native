@@ -2,8 +2,8 @@ import * as React from 'react';
 import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { immutableMerge } from '@fluentui-react-native/immutable-merge';
-import { mergeStyles } from '@fluentui-react-native/merge-props';
+import { immutableMerge } from '@fluentui-react-native/framework-base';
+import { mergeStyles } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
 
 import { buildUseTokens } from './buildUseTokens';

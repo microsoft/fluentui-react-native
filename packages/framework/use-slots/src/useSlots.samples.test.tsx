@@ -2,7 +2,7 @@
 /** @jsx withSlots */
 import type { CSSProperties } from 'react';
 
-import { mergeProps } from '@fluentui-react-native/merge-props';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 import { withSlots, stagedComponent } from '@fluentui-react-native/use-slot';
 import * as renderer from 'react-test-renderer';
 

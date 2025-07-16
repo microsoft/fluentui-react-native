@@ -1,5 +1,5 @@
-import { immutableMerge } from '@fluentui-react-native/immutable-merge';
-import { getMemoCache } from '@fluentui-react-native/memo-cache';
+import { immutableMerge } from '../immutable-merge/Merge';
+import { getMemoCache } from '../memo-cache/getMemoCache';
 
 import type { StyleProp } from './mergeStyles.types';
 

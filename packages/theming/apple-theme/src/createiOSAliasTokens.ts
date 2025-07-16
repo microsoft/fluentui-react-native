@@ -1,4 +1,4 @@
-import { memoize } from '@fluentui-react-native/memo-cache';
+import { memoize } from '@fluentui-react-native/framework-base';
 import { getAliasTokens, getShadowTokens } from '@fluentui-react-native/theme-tokens';
 import type { AliasColorTokens, AppearanceOptions } from '@fluentui-react-native/theme-types';
 import type { ThemeShadowDefinition } from '@fluentui-react-native/theme-types';

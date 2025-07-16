@@ -1,3 +1,2 @@
-export type { StyleProp } from './mergeStyles.types';
-export { mergeStyles } from './mergeStyles';
-export { mergeProps } from './mergeProps';
+export type { StyleProp } from '@fluentui-react-native/framework-base';
+export { mergeStyles, mergeProps } from '@fluentui-react-native/framework-base';

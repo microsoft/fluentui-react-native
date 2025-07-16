@@ -1,8 +1,8 @@
-export type { GetMemoValue } from '@fluentui-react-native/memo-cache';
-export { getMemoCache, memoize } from '@fluentui-react-native/memo-cache';
+export type { GetMemoValue } from '@fluentui-react-native/framework-base';
+export { getMemoCache, memoize } from '@fluentui-react-native/framework-base';
 
-export type { StyleProp } from '@fluentui-react-native/merge-props';
-export { mergeProps, mergeStyles } from '@fluentui-react-native/merge-props';
+export type { StyleProp } from '@fluentui-react-native/framework-base';
+export { mergeProps, mergeStyles } from '@fluentui-react-native/framework-base';
 
 export {
   backgroundColorTokens,
@@ -38,7 +38,7 @@ export type { ComposableFunction, FinalRender, NativeReactType, SlotFn, StagedRe
 export { buildUseSlots } from '@fluentui-react-native/use-slots';
 export type { GetSlotProps, Slots, UseSlotOptions, UseSlotsBase } from '@fluentui-react-native/use-slots';
 
-export { immutableMerge, immutableMergeCore, processImmutable } from '@fluentui-react-native/immutable-merge';
+export { immutableMerge, immutableMergeCore, processImmutable } from '@fluentui-react-native/framework-base';
 export type {
   BuiltinRecursionHandlers,
   CustomRecursionHandler,
@@ -46,7 +46,7 @@ export type {
   ObjectBase,
   RecursionHandler,
   RecursionOption,
-} from '@fluentui-react-native/immutable-merge';
+} from '@fluentui-react-native/framework-base';
 
 export { ThemeContext, useTheme } from '@fluentui-react-native/theme-types';
 export type {

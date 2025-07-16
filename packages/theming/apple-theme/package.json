@@ -39,7 +39,7 @@
     "@fluentui-react-native/design-tokens-ios": "^0.53.0",
     "@fluentui-react-native/design-tokens-macos": "^0.53.0",
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*",
-    "@fluentui-react-native/memo-cache": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/theme": "workspace:*",
     "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/theme-types": "workspace:*",

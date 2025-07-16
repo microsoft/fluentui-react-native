@@ -1,4 +1,4 @@
-import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/framework-base';
 
 /**
  * Take a set of tokens (and a memo-cache) and apply changes to those tokens from an additional set of tokens. Only keys which are

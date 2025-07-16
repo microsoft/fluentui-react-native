@@ -1,5 +1,5 @@
-import type { MergeOptions } from '@fluentui-react-native/immutable-merge';
-import { immutableMergeCore } from '@fluentui-react-native/immutable-merge';
+import type { MergeOptions } from '@fluentui-react-native/framework-base';
+import { immutableMergeCore } from '@fluentui-react-native/framework-base';
 import type { ComposableFunction } from '@fluentui-react-native/use-slot';
 import { stagedComponent } from '@fluentui-react-native/use-slot';
 import type { UseSlotOptions, Slots } from '@fluentui-react-native/use-slots';

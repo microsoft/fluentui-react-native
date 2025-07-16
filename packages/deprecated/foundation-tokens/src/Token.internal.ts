@@ -1,4 +1,4 @@
-import type { GetMemoValue } from '@fluentui-react-native/memo-cache';
+import type { GetMemoValue } from '@fluentui-react-native/framework-base';
 
 export interface ITokenPropInfo<TTokens> {
   /** token props, aggregated from settings and user props */

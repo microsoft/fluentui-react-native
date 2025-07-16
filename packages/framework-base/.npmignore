@@ -1,0 +1,11 @@
+node_modules
+.gitignore
+.gitattributes
+.editorconfig
+config.js
+jest.config.js
+.eslintrc.js
+.eslintignore
+tsconfig.json
+jsconfig.json
+*.build.log

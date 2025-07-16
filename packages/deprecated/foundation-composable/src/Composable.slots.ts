@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
 import { mergeSettings, ISlotProps } from '@uifabricshared/foundation-settings';
-import { mergeProps } from '@fluentui-react-native/merge-props';
+import { mergeProps } from '@fluentui-react-native/framework-base';
 
 export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
   _canCompose?: boolean;

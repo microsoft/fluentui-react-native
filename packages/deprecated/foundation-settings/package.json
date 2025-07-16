@@ -35,8 +35,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/immutable-merge": "workspace:*",
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
