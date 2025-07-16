@@ -1,3 +1,6 @@
+import { enhancedTypeof } from '../typeUtilities';
+import type { ObjectBase } from '../types';
+
 /**
  * The basic options for recursion at a given level.  Two types for two behaviors:
  *
@@ -29,19 +32,6 @@ export type BuiltinRecursionHandlers = 'appendArray';
 export type RecursionHandler = BuiltinRecursionHandlers | CustomRecursionHandler;
 
 /**
- * Base object type for merges, avoids using object since that is too broad. In particular things like null and arrays
- * are not valid object types for the purposes of this library.
- */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export type ObjectBase = {};
-
-/**
- *
- */
-export type TypeofResult = 'undefined' | 'object' | 'boolean' | 'number' | 'string' | 'symbol' | 'bigint' | 'function';
-export type ExpandedTypeof = TypeofResult | 'array' | 'null';
-
-/**
  * configuration object for the merge, key names are matched with a few exceptions:
  * - object: matches non-array object types
  * - array: matches array types
@@ -70,25 +60,6 @@ function normalizeOptions(options: RecursionOption | MergeOptions): [MergeOption
     : typeof options === 'number'
     ? [{ object: options >= 0 ? options : true }, options !== 0]
     : [options, true];
-}
-
-/**
- * Provide a more sensible type result that expands upon the built in typeof operator
- * In particular this will differentiate arrays and nulls from standard objects
- * @param val - value to check type
- */
-function getEntityType(val: unknown): ExpandedTypeof {
-  switch (typeof val) {
-    case 'object':
-      if (val === null) {
-        return 'null';
-      } else if (Array.isArray(val)) {
-        return 'array';
-      }
-      return 'object';
-    default:
-      return typeof val as TypeofResult;
-  }
 }
 
 /** resolve custom handlers if they are applicable */
@@ -156,7 +127,7 @@ function assignToNewObject<T extends ObjectBase>(...objs: T[]): T {
  * @returns the filtered set of values
  */
 export function filterToObjects<T extends ObjectBase = ObjectBase>(values: unknown[]): T[] {
-  return values.filter((v) => v && getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0) as T[];
+  return values.filter((v) => v && enhancedTypeof(v) === 'object' && Object.getOwnPropertyNames(v).length > 0) as T[];
 }
 
 /**
@@ -188,7 +159,7 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
         // only process if there is potential work to do
         if (mightRecurse) {
           const originalVal = processSet[key];
-          const entityType = getEntityType(originalVal);
+          const entityType = enhancedTypeof(originalVal);
           const handler = getHandlerForPropertyOfType(options, key, entityType);
           if (handler !== undefined) {
             const values = setToMerge.map((set) => set[key]).filter((v) => v !== undefined);

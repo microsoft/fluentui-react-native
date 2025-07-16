@@ -4,7 +4,6 @@ export type {
   BuiltinRecursionHandlers,
   CustomRecursionHandler,
   MergeOptions,
-  ObjectBase,
   RecursionHandler,
   RecursionOption,
 } from './immutable-merge/Merge';
@@ -18,3 +17,6 @@ export { memoize } from './memo-cache/memoize';
 export type { StyleProp } from './merge-props/mergeStyles.types';
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
+
+export type { ObjectBase, TypeofResult, EnhancedTypeof } from './types';
+export { enhancedTypeof } from './typeUtilities';

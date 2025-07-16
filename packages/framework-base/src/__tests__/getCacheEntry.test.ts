@@ -1,5 +1,5 @@
-import type { CacheEntry } from './getCacheEntry';
-import { getCacheEntry } from './getCacheEntry';
+import type { CacheEntry } from '../memo-cache/getCacheEntry';
+import { getCacheEntry } from '../memo-cache/getCacheEntry';
 
 interface TestObj {
   id: number;
