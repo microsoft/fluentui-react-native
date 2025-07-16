@@ -1,4 +1,4 @@
-import { memoize } from '@fluentui-react-native/memo-cache';
+import { memoize } from '@fluentui-react-native/framework-base/memo-cache';
 import type { Spacing, Theme, AppearanceOptions } from '@fluentui-react-native/theme-types';
 
 import { fallbackApplePalette } from './appleColors.macos';

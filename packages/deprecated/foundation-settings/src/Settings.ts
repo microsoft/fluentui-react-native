@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/immutable-merge';
+import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/framework-base/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
 import { mergeProps } from '@fluentui-react-native/framework-base';
 

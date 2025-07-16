@@ -31,8 +31,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "workspace:*",
-    "@fluentui-react-native/framework": "workspace:*",
-    "@fluentui-react-native/memo-cache": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "invariant": "^2.2.0",
     "tslib": "^2.3.1"
   },

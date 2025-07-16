@@ -2485,7 +2485,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -2524,7 +2524,7 @@ __metadata:
     "@fluentui-react-native/design-tokens-macos": "npm:^0.53.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -2839,7 +2839,7 @@ __metadata:
   resolution: "@fluentui-react-native/composition@workspace:packages/framework/composition"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slot": "workspace:*"
     "@fluentui-react-native/use-slots": "workspace:*"
@@ -2905,7 +2905,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -3657,9 +3657,7 @@ __metadata:
     "@fluentui-react-native/composition": "workspace:*"
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
@@ -3728,7 +3726,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/immutable-merge@npm:*, @fluentui-react-native/immutable-merge@workspace:*, @fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge":
+"@fluentui-react-native/immutable-merge@npm:*, @fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/immutable-merge@workspace:packages/framework/immutable-merge"
   dependencies:
@@ -3788,8 +3786,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/adapters": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/framework": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -3861,7 +3858,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/memo-cache@npm:*, @fluentui-react-native/memo-cache@workspace:*, @fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache":
+"@fluentui-react-native/memo-cache@npm:*, @fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/memo-cache@workspace:packages/framework/memo-cache"
   dependencies:
@@ -3961,14 +3958,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fluentui-react-native/merge-props@npm:*, @fluentui-react-native/merge-props@workspace:*, @fluentui-react-native/merge-props@workspace:packages/framework/merge-props":
+"@fluentui-react-native/merge-props@npm:*, @fluentui-react-native/merge-props@workspace:packages/framework/merge-props":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/merge-props@workspace:packages/framework/merge-props"
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -4635,11 +4631,11 @@ __metadata:
     "@fluentui-react-native/experimental-shimmer": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/framework": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/icon": "workspace:*"
     "@fluentui-react-native/input": "workspace:*"
     "@fluentui-react-native/interactive-hooks": "workspace:*"
     "@fluentui-react-native/menu": "workspace:*"
-    "@fluentui-react-native/merge-props": "workspace:*"
     "@fluentui-react-native/notification": "workspace:*"
     "@fluentui-react-native/overflow": "workspace:*"
     "@fluentui-react-native/radio-group": "workspace:*"
@@ -4780,7 +4776,7 @@ __metadata:
   resolution: "@fluentui-react-native/theme@workspace:packages/framework/theme"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
@@ -4800,7 +4796,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -4922,7 +4918,7 @@ __metadata:
   resolution: "@fluentui-react-native/use-slot@workspace:packages/framework/use-slot"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -4940,7 +4936,7 @@ __metadata:
   resolution: "@fluentui-react-native/use-slots@workspace:packages/framework/use-slots"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slot": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -4958,7 +4954,7 @@ __metadata:
   resolution: "@fluentui-react-native/use-styling@workspace:packages/framework/use-styling"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-tokens": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -4978,9 +4974,7 @@ __metadata:
   resolution: "@fluentui-react-native/use-tokens@workspace:packages/framework/use-tokens"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -5034,7 +5028,7 @@ __metadata:
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme": "workspace:*"
     "@fluentui-react-native/theme-tokens": "workspace:*"
@@ -8336,7 +8330,7 @@ __metadata:
   resolution: "@uifabricshared/foundation-composable@workspace:packages/deprecated/foundation-composable"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
@@ -8356,8 +8350,7 @@ __metadata:
   dependencies:
     "@fluentui-react-native/default-theme": "workspace:*"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.74.0"
@@ -8394,8 +8387,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -8413,8 +8405,7 @@ __metadata:
   resolution: "@uifabricshared/foundation-tokens@workspace:packages/deprecated/foundation-tokens"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@fluentui-react-native/memo-cache": "workspace:*"
-    "@fluentui-react-native/merge-props": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tokens": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
@@ -8448,7 +8439,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -8467,7 +8458,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/memo-cache": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
@@ -8487,7 +8478,7 @@ __metadata:
   resolution: "@uifabricshared/theming-ramp@workspace:packages/deprecated/theming-ramp"
   dependencies:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
-    "@fluentui-react-native/immutable-merge": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/test-tools": "workspace:*"
     "@fluentui-react-native/theme-types": "workspace:*"

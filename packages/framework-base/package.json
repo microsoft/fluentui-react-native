@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/framework-base",
-  "version": "1.0.0",
-  "description": "Base types and utilities fluentui-react-native frameworks, both old and new",
+  "version": "0.1.0",
+  "description": "Base types and utilities fluentui-react-native frameworks",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native",
@@ -9,6 +9,7 @@
   },
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "react-native": "src/index.ts",
   "exports": {
     ".": {
@@ -18,25 +19,24 @@
       "react-native": "./src/index.ts"
     },
     "./immutable-merge": {
-      "import": "./immutable-merge/lib/Merge.js",
-      "require": "./immutable-merge/lib-commonjs/Merge.js",
-      "types": "./immutable-merge/lib/Merge.d.ts",
-      "react-native": "./immutable-merge/src/Merge.ts"
+      "import": "./lib/immutable-merge/Merge.js",
+      "require": "./lib-commonjs/immutable-merge/Merge.js",
+      "types": "./lib/immutable-merge/Merge.d.ts",
+      "react-native": "./src/immutable-merge/Merge.ts"
     },
     "./memo-cache": {
-      "import": "./memo-cache/lib/index.js",
-      "require": "./memo-cache/lib-commonjs/index.js",
-      "types": "./memo-cache/lib/index.d.ts",
-      "react-native": "./memo-cache/src/index.ts"
+      "import": "./lib/memo-cache/index.js",
+      "require": "./lib-commonjs/memo-cache/index.js",
+      "types": "./lib/memo-cache/index.d.ts",
+      "react-native": "./src/memo-cache/index.ts"
     },
     "./merge-props": {
-      "import": "./merge-props/lib/index.js",
-      "require": "./merge-props/lib-commonjs/index.js",
-      "types": "./merge-props/lib/index.d.ts",
-      "react-native": "./merge-props/src/index.ts"
+      "import": "./lib/merge-props/index.js",
+      "require": "./lib-commonjs/merge-props/index.js",
+      "types": "./lib/merge-props/lib/index.d.ts",
+      "react-native": "./src/merge-props/index.ts"
     }
   },
-  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
