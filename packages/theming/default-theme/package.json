@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/default-theme",
-  "version": "0.26.6",
+  "version": "0.26.7",
   "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",

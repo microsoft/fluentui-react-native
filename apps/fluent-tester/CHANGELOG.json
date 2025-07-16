@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 16 Jul 2025 20:06:46 GMT",
+      "version": "0.170.31",
+      "tag": "@fluentui-react-native/tester_v0.170.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "6ed0a256caf94e287c6a9120ec5d0458bd5c7bfc",
+            "comment": "create common framework-base package to share common utiltities more broadly"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:26:58 GMT",
       "version": "0.170.30",
       "tag": "@fluentui-react-native/tester_v0.170.30",

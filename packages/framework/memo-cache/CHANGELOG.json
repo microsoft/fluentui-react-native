@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Wed, 16 Jul 2025 20:06:46 GMT",
+      "version": "1.3.7",
+      "tag": "@fluentui-react-native/memo-cache_v1.3.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "6ed0a256caf94e287c6a9120ec5d0458bd5c7bfc",
+            "comment": "create common framework-base package to share common utiltities more broadly"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:08 GMT",
       "version": "1.3.6",
       "tag": "@fluentui-react-native/memo-cache_v1.3.6",
