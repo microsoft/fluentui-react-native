@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "create common framework-base package to share common utiltities more broadly",
+  "packageName": "@fluentui-react-native/immutable-merge",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
