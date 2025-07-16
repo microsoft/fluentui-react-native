@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { TextProps } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { mergeStyles } from '@fluentui-react-native/framework-base/merge-props';
+import { mergeStyles } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
 
 import type { NativeReactType } from './renderSlot';

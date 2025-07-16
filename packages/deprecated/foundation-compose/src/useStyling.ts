@@ -8,7 +8,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
-import { getMemoCache, GetMemoValue } from '@fluentui-react-native/framework-base/memo-cache';
+import { getMemoCache, GetMemoValue } from '@fluentui-react-native/framework-base';
 
 /* tslint:disable-next-line no-any */
 export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined {

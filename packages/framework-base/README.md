@@ -8,7 +8,8 @@ Several previously standalone packages have had their implementations moved into
 - `@fluentui-react-native/memo-cache`
 - `@fluentui-react-native/merge-props`
 
-The functionality in these packages can be imported either by the base entry point for the package, or by using dedicated exports. The previous packages will continue to exist for the time being but are now just references to their individual exports.
+The functionality in these packages can be imported either by the base entry point for the package, or by using dedicated exports. The previous packages will continue to exist for the time being but are now just references to their individual exports. Note that export maps require special handling for metro bundling (with the exception of the jsx-runtime export) so the export maps are primarily for use
+in JS/web projects.
 
 ## Type Helpers
 

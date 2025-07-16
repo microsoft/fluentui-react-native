@@ -1,4 +1,4 @@
-import { memoize } from '@fluentui-react-native/framework-base/memo-cache';
+import { memoize } from '@fluentui-react-native/framework-base';
 import type { Spacing, Theme } from '@fluentui-react-native/theme-types';
 
 import { androidShadows } from './androidShadows';
