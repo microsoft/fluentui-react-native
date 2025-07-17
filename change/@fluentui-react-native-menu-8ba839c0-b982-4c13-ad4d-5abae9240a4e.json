@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Mark `onInvoke` event as handled for enter / space press to prevent duplicate call",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
