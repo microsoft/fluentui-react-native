@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-<!-- This log was last generated on Tue, 15 Jul 2025 23:27:06 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 17 Jul 2025 20:54:32 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.14.28
+
+Thu, 17 Jul 2025 20:54:32 GMT
+
+### Patches
+
+- Mark `onInvoke` event as handled for enter / space press to prevent duplicate call (winlarry@microsoft.com)
 
 ## 1.14.26
 
