@@ -33,7 +33,7 @@ const props1: Props = { dos: 'two', quatro: 'four', cinco: false, foo: 'foo', ba
 describe('applyPropsToTokens tests', () => {
   test('props get copied', () => {
     const cache = getMemoCache();
-    const [tokens] = applyPropsToTokens(props1, themeTokens, cache, tokenProps);
+    const [tokens] = applyPropsToTokens<Props, Tokens>(props1, themeTokens, cache, tokenProps);
     expect(tokens).not.toBe(themeTokens);
     for (const key of tokenProps) {
       expect(tokens[key]).toEqual(props1[key]);
@@ -42,7 +42,7 @@ describe('applyPropsToTokens tests', () => {
 
   test('no copied props does not change tokens', () => {
     const cache = getMemoCache();
-    const [tokens] = applyPropsToTokens({}, themeTokens, cache, tokenProps);
+    const [tokens] = applyPropsToTokens<Props, Tokens>({}, themeTokens, cache, tokenProps);
     expect(tokens).toBe(themeTokens);
   });
 });

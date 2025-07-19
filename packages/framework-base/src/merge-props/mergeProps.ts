@@ -7,7 +7,7 @@ import { mergeStyles } from './mergeStyles';
  * Props will not deeply merge with the exception of a style property.  Also className needs to be handled specially.
  */
 const mergePropsOptions: MergeOptions = {
-  className: (...names: any[]) => names.filter((v) => v && typeof v === 'string').join(' '),
+  className: (...names: unknown[]) => names.filter((v) => v && typeof v === 'string').join(' '),
   style: mergeStyles,
 };
 
@@ -16,5 +16,5 @@ const mergePropsOptions: MergeOptions = {
  * @param props - props to merge together
  */
 export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
-  return immutableMergeCore(mergePropsOptions, ...filterToObjects<TProps>(props));
+  return immutableMergeCore<TProps>(mergePropsOptions, ...(filterToObjects(props) as TProps[]));
 }

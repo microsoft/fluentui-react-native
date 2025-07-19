@@ -3,14 +3,14 @@ import { Image, Platform, View } from 'react-native';
 import type { ImageStyle, TextStyle } from 'react-native';
 
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
-import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
+import { stagedComponent, mergeProps, getMemoCache, getTypedMemoCache } from '@fluentui-react-native/framework';
 import { Text } from '@fluentui-react-native/text';
 import type { SvgProps } from 'react-native-svg';
 import { SvgUri } from 'react-native-svg';
 
 import type { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
 
-const rasterImageStyleCache = getMemoCache<ImageStyle>();
+const rasterImageStyleCache = getTypedMemoCache<ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
   const { width, height, color } = iconProps;

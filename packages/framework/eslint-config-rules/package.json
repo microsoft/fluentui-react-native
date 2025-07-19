@@ -10,7 +10,8 @@
   "main": "./eslint.config.js",
   "exports": {
     ".": "./eslint.config.js",
-    "./eslint.config.js": "./eslint.config.js"
+    "./eslint.config.js": "./eslint.config.js",
+    "./eslint.strict.config.js": "./eslint.strict.config.js"
   },
   "license": "MIT",
   "dependencies": {

@@ -1,4 +1,4 @@
-import type { GetMemoValue } from '@fluentui-react-native/framework-base';
+import type { GenericMemoValue } from '@fluentui-react-native/framework-base';
 import { mergeProps } from '@fluentui-react-native/framework-base';
 import type { ISlotProps } from '@uifabricshared/foundation-settings';
 
@@ -82,7 +82,7 @@ function _getCachedPropsForSlot<TProps, TTokens, TTheme>(
   tokenProps: ITokenPropInfo<TTokens>,
   theme: TTheme,
   slotName: string,
-  getMemoValue: GetMemoValue<TProps>,
+  getMemoValue: GenericMemoValue,
   keys: string[],
   mappings: ITokensForSlot<TProps, TTokens, TTheme>,
   finalizer?: IStyleFinalizer<TProps>,
@@ -160,7 +160,7 @@ export function buildComponentTokens<TSlotProps extends ISlotProps, TTokens, TTh
       tokenProps: ITokenPropInfo<TTokens>,
       theme: TTheme,
       slotName: string,
-      getValue: GetMemoValue<IPropsForSlot>,
+      getValue: GenericMemoValue,
     ) => {
       const keys = Object.getOwnPropertyNames(slotKeys);
       return _getCachedPropsForSlot<IPropsForSlot, TTokens, TTheme>(props, tokenProps, theme, slotName, getValue, keys, mappings);

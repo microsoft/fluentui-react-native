@@ -51,7 +51,7 @@ const VariantText = compressible<VariantTextProps, VariantTextTokens>(
     // split the props, defaulting the variant type to the default type from the tokens
     const { variant = tokens.defaultType, style, ...rest } = props;
     // now apply the alternate layer tokens as appropriate
-    [tokens, cache] = applyTokenLayers(tokens, ['normal', 'header', 'caption'], cache, (layer) => layer === variant);
+    [tokens, cache] = applyTokenLayers<VariantTextTokens>(tokens, ['normal', 'header', 'caption'], cache, (layer) => layer === variant);
     // merge styles together with what is passed in
     const mergedStyle = mergeStyles({ color: tokens.color, fontSize: tokens.fontSize, fontWeight: tokens.fontWeight }, style);
     // now get the slot

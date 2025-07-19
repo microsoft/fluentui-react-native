@@ -3646,6 +3646,7 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
     "@types/node": "npm:^10.3.5"
+    react: "npm:18.2.0"
   languageName: unknown
   linkType: soft
 

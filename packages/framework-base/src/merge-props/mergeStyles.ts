@@ -1,7 +1,9 @@
 import { immutableMerge } from '../immutable-merge/Merge';
 import { getMemoCache } from '../memo-cache/getMemoCache';
+import type { ObjectBase } from '../types';
 
 import type { StyleProp } from './mergeStyles.types';
+import { isNonEmptyType, isType } from '../typeUtilities';
 
 /**
  * Take a react-native style, which may be a recursive array, and return as a flattened
@@ -9,7 +11,7 @@ import type { StyleProp } from './mergeStyles.types';
  *
  * @param style - StyleProp<TStyle> to flatten, this can be a TStyle or an array
  */
-export function flattenStyle(style: StyleProp<object>): object {
+export function flattenStyle(style: StyleProp<ObjectBase>): Record<string, unknown> {
   return Array.isArray(style) ? immutableMerge(...style.map((v) => flattenStyle(v))) : style || {};
 }
 
@@ -18,10 +20,10 @@ export function flattenStyle(style: StyleProp<object>): object {
  *
  * @param styles - array of styles to merge together.  The styles will be flattened as part of the process
  */
-export function mergeAndFlattenStyles(...styles: StyleProp<object>[]): object | undefined {
+export function mergeAndFlattenStyles(...styles: StyleProp<ObjectBase>[]): Record<string, unknown> | undefined {
   // baseline merge and flatten the objects
   return immutableMerge(
-    ...styles.map((styleProp: StyleProp<object>) => {
+    ...styles.map((styleProp: StyleProp<ObjectBase>) => {
       return flattenStyle(styleProp);
     }),
   );
@@ -29,9 +31,9 @@ export function mergeAndFlattenStyles(...styles: StyleProp<object>[]): object | 
 
 const _styleCache = getMemoCache();
 
-export function mergeStyles(...styles: StyleProp<object>[]): object | undefined {
+export function mergeStyles(...styles: StyleProp<ObjectBase>[]): Record<string, unknown> | undefined {
   // filter the style set to just objects (which might be arrays or plain style objects)
-  const inputs = styles.filter((s) => typeof s === 'object') as object[];
+  const inputs = styles.filter((s) => isNonEmptyType(s, ['object', 'array'])).map((s) => (isType(s, 'array') ? flattenStyle(s) : s));
 
   // now memo the results if there is more than one element or if the one element is an array
   return inputs.length > 1 || (inputs.length === 1 && Array.isArray(inputs[0]))

@@ -9,8 +9,8 @@ export type {
 } from './immutable-merge/Merge';
 
 // memo-cache exports
-export type { GetMemoValue } from './memo-cache/getMemoCache';
-export { getMemoCache } from './memo-cache/getMemoCache';
+export type { AnyGetMemoValue, GenericMemoValue, GetMemoValue, MemoResult, TypedMemoResult } from './memo-cache/getMemoCache';
+export { asGenericMemoCache, asTypedMemoCache, getMemoCache, getTypedMemoCache } from './memo-cache/getMemoCache';
 export { memoize } from './memo-cache/memoize';
 
 // merge-props exports
@@ -18,5 +18,21 @@ export type { StyleProp } from './merge-props/mergeStyles.types';
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
 
-export type { ObjectBase, TypeofResult, EnhancedTypeof } from './types';
+export type {
+  AnyFunction,
+  EnhancedTypeof,
+  NativeReactElement,
+  ObjectBase,
+  PropsBase,
+  PropsNoChildrenBase,
+  PropsWithChildrenBase,
+  TypeofResult,
+  UnknownObject,
+} from './types';
 export { enhancedTypeof } from './typeUtilities';
+
+// transformer exports
+export { createTransformableComponent, useAsTransformableComponent, withSlots } from './transformableComponents';
+
+// jsx-runtime exports
+export { jsx, jsxs, Fragment } from './jsx-runtime';

@@ -1,11 +1,7 @@
-import type { CacheEntry } from '../memo-cache/getCacheEntry';
-import { getCacheEntry } from '../memo-cache/getCacheEntry';
+import type { CacheEntry } from './getCacheEntry';
+import { getCacheEntry } from './getCacheEntry';
 
-interface TestObj {
-  id: number;
-}
-
-type TestEntry = CacheEntry<TestObj>;
+type TestEntry = CacheEntry;
 
 function compareResults(base: TestEntry, args: any[], argsNoMatch?: any[]): void {
   const e1 = getCacheEntry(base, args);

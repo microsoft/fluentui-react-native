@@ -8,7 +8,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
-import { getMemoCache, GetMemoValue } from '@fluentui-react-native/framework-base';
+import { getMemoCache, GenericMemoValue } from '@fluentui-react-native/framework-base';
 
 /* tslint:disable-next-line no-any */
 export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined {
@@ -38,7 +38,7 @@ function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends obj
 function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends object>(
   props: TProps,
   options: IStylingSettings<TSlotProps, TTokens>,
-  instanceMemoCache: GetMemoValue<TSlotProps, TSlotProps>,
+  instanceMemoCache: GenericMemoValue,
   lookupOverride?: IOverrideLookup,
 ): IWithTokens<TSlotProps, TTokens> {
   // get the theme value from the context (or the default theme if it is not set)
@@ -50,20 +50,14 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
   const { settings, getMemoValue } = getThemedSettings<ILocalSettings, ITheme>(
     options.settings,
     theme,
-    instanceMemoCache as GetMemoValue<any>,
+    instanceMemoCache,
     lookupOverride,
     _getSettingsFromTheme as any,
   );
 
   // finish by processing the tokens and turning IComponentSettings into ISlotProps (this removes things like _overrides)
   return returnAsSlotProps(
-    processTokens<TSlotProps, TTokens, ITheme>(
-      props as unknown as TTokens,
-      theme,
-      settings as any,
-      options.resolvedTokens,
-      getMemoValue as GetMemoValue<any>,
-    ),
+    processTokens<TSlotProps, TTokens, ITheme>(props as unknown as TTokens, theme, settings as any, options.resolvedTokens, getMemoValue),
   ) as IWithTokens<TSlotProps, TTokens>;
 }
 
@@ -86,7 +80,7 @@ export function initializeStyling<
   options.resolvedTokens = buildComponentTokens<TSlotProps, TTokens, ITheme>(styles, _getHasToken(slots));
 
   // memo cache root for this component, keyed on options
-  const getMemoValue = getMemoCache<TSlotProps>(options);
+  const getMemoValue = getMemoCache(options);
 
   // create a useStyling implementation for this component type (per type, not per instance)
   return (props: TProps, lookupOverride?: IOverrideLookup) => {

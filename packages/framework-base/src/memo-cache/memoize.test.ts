@@ -1,4 +1,4 @@
-import { memoize } from '../memo-cache/memoize';
+import { memoize } from './memoize';
 
 let _globalCalls = 0;
 

@@ -1,5 +1,5 @@
-import { enhancedTypeof } from '../typeUtilities';
-import type { ObjectBase } from '../types';
+import { enhancedTypeof, isNonEmptyType } from '../typeUtilities';
+import type { AnyFunction } from '../types';
 
 /**
  * The basic options for recursion at a given level.  Two types for two behaviors:
@@ -18,7 +18,7 @@ export type RecursionOption = boolean | number;
 /**
  * a function that can be set to merge arguments
  */
-export type CustomRecursionHandler = (...vals: any[]) => any;
+export type CustomRecursionHandler = AnyFunction<unknown>;
 
 /**
  * built in handler functions that can be applied for a given key
@@ -45,7 +45,7 @@ export interface MergeOptions {
  * built in handlers for the module
  */
 const _builtinHandlers: { [K in BuiltinRecursionHandlers]: CustomRecursionHandler } = {
-  appendArray: (...objs: any[]) => {
+  appendArray: (...objs: unknown[]) => {
     return [].concat(...objs);
   },
 };
@@ -117,7 +117,7 @@ function getHandlerForPropertyOfType(
  * @param objs - array of objects to merge
  * @returns the result of object assign on the objects, typed to T
  */
-function assignToNewObject<T extends ObjectBase>(...objs: T[]): T {
+function assignToNewObject(...objs: unknown[]): Record<string, unknown> {
   return Object.assign({}, ...objs);
 }
 
@@ -126,8 +126,8 @@ function assignToNewObject<T extends ObjectBase>(...objs: T[]): T {
  * @param values - array of values to filter
  * @returns the filtered set of values
  */
-export function filterToObjects<T extends ObjectBase = ObjectBase>(values: unknown[]): T[] {
-  return values.filter((v) => v && enhancedTypeof(v) === 'object' && Object.getOwnPropertyNames(v).length > 0) as T[];
+export function filterToObjects(values: unknown[]): Record<string, unknown>[] {
+  return values.filter((v) => isNonEmptyType(v, 'object')) as Record<string, unknown>[];
 }
 
 /**
@@ -143,8 +143,8 @@ export function filterToObjects<T extends ObjectBase = ObjectBase>(values: unkno
  * is true the routine will progress through all branches of the hierarchy.  Useful if using a processor function that needs to be run.
  * @param objs - an array of objects to merge together
  */
-function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: T[]): T {
-  const setToMerge = filterToObjects<T>(objs);
+function immutableMergeWorker(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: unknown[]): unknown {
+  const setToMerge = filterToObjects(objs);
   const [options, mightRecurse] = normalizeOptions(mergeOptions);
   const processSingle = singleMode && setToMerge.length === 1;
 
@@ -155,7 +155,7 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
     const processSet = result || setToMerge[0];
 
     for (const key in processSet) {
-      if (processSet.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(processSet, key)) {
         // only process if there is potential work to do
         if (mightRecurse) {
           const originalVal = processSet[key];
@@ -164,9 +164,7 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
           if (handler !== undefined) {
             const values = setToMerge.map((set) => set[key]).filter((v) => v !== undefined);
             const updatedVal =
-              typeof handler === 'function'
-                ? handler(...values)
-                : immutableMergeWorker<ObjectBase>(handler, singleMode, ...filterToObjects(values));
+              typeof handler === 'function' ? handler(...values) : immutableMergeWorker(handler, singleMode, ...filterToObjects(values));
             if (updatedVal !== originalVal) {
               result = result || assignToNewObject(...setToMerge);
               result[key] = updatedVal;
@@ -176,6 +174,8 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
 
         // delete undefined keys from the object, otherwise there is no easy way to delete keys
         if (!processSingle && result[key] === undefined) {
+          // TODO: we should remove this, dynamic delete is bad for performance
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
           delete result[key];
         }
       }
@@ -193,8 +193,8 @@ function immutableMergeWorker<T extends ObjectBase>(mergeOptions: RecursionOptio
  *
  * @param objs - variable input array of typed objects to merge
  */
-export function immutableMerge<T extends ObjectBase>(...objs: (T | undefined)[]): T | undefined {
-  return immutableMergeWorker(true, false, ...objs);
+export function immutableMerge<T>(...objs: (T | undefined)[]): T | undefined {
+  return immutableMergeWorker(true, false, ...objs) as T | undefined;
 }
 
 /**
@@ -203,11 +203,8 @@ export function immutableMerge<T extends ObjectBase>(...objs: (T | undefined)[])
  * @param options - configuration options for the merge, this dictates what keys will be handled in what way
  * @param objs - set of objects to merge together
  */
-export function immutableMergeCore<T extends ObjectBase>(
-  options: RecursionOption | MergeOptions,
-  ...objs: (T | undefined)[]
-): T | undefined {
-  return immutableMergeWorker(options, false, ...objs);
+export function immutableMergeCore<T>(options: RecursionOption | MergeOptions, ...objs: (T | undefined)[]): T | undefined {
+  return immutableMergeWorker(options, false, ...objs) as T | undefined;
 }
 
 /**
@@ -221,6 +218,6 @@ export function immutableMergeCore<T extends ObjectBase>(
  * @param processors - set of processor functions for handling keys
  * @param objs - one or more objects to process.  If multiple objects are passed they will be merged
  */
-export function processImmutable<T extends ObjectBase>(options: MergeOptions, ...objs: (T | undefined)[]): T | undefined {
-  return immutableMergeWorker(options, true, ...objs);
+export function processImmutable<T>(options: MergeOptions, ...objs: (T | undefined)[]): T | undefined {
+  return immutableMergeWorker(options, true, ...objs) as T | undefined;
 }

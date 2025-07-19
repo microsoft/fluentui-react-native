@@ -1,2 +1,2 @@
-export type { GetMemoValue } from '@fluentui-react-native/framework-base';
-export { getMemoCache, memoize } from '@fluentui-react-native/framework-base';
+export type { AnyGetMemoValue, GenericMemoValue, GetMemoValue, MemoResult, TypedMemoResult } from '@fluentui-react-native/framework-base';
+export { asGenericMemoCache, asTypedMemoCache, getMemoCache, getTypedMemoCache, memoize } from '@fluentui-react-native/framework-base';

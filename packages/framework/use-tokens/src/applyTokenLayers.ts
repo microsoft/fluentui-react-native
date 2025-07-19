@@ -1,5 +1,5 @@
 import { immutableMerge } from '@fluentui-react-native/framework-base';
-import type { GetMemoValue } from '@fluentui-react-native/framework-base';
+import type { GetMemoValue, TypedMemoResult } from '@fluentui-react-native/framework-base';
 
 /**
  * alternatively look them up with a passed in function
@@ -20,7 +20,7 @@ export function applyTokenLayers<TTokens>(
   states: string[],
   subCache: GetMemoValue<TTokens>,
   hasLayer: HasLayer,
-): [TTokens, GetMemoValue<TTokens>] {
+): TypedMemoResult<TTokens> {
   type TokensAndCache = { tokens: TTokens; subCache: GetMemoValue<TTokens> };
   let final: TokensAndCache = { tokens, subCache };
   if (states && states.length > 0) {

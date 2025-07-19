@@ -1,4 +1,4 @@
-import type { GetMemoValue } from '@fluentui-react-native/framework-base';
+import type { AnyGetMemoValue } from '@fluentui-react-native/framework-base';
 import type { ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
 
 import type { ITokenPropInfo } from './Token.internal';
@@ -42,7 +42,7 @@ export function processTokens<TSlotProps extends ISlotProps, TTokens extends obj
   theme: TTheme,
   slotProps: IComponentSettings<TSlotProps & { tokens?: TTokens }>,
   tokenInfo: IComponentTokens<TSlotProps, TTokens, TTheme>,
-  cache: GetMemoValue<TSlotProps>,
+  cache: AnyGetMemoValue<TTokens>,
 ): ISlotProps {
   // merge in tokens and build up the cache key which are the tokens overridden by the user
   slotProps = slotProps || {};
