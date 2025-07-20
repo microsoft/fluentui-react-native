@@ -10,7 +10,7 @@ export const settings: IComposeSettings<ICalloutType> = [
       borderColor: 'transparent',
       borderWidth: 0,
       borderRadius: 5,
-      directionalHint: 'bottonLeftEdge',
+      directionalHint: 'bottomLeftEdge',
     },
     root: {
       style: {
