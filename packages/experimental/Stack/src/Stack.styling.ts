@@ -1,7 +1,7 @@
 import type { ViewStyle, ViewProps } from 'react-native';
 
 import type { Theme } from '@fluentui-react-native/framework';
-import type { UseStylingOptions, GenericMemoValue } from '@fluentui-react-native/framework';
+import type { UseStylingOptions, GetMemoValue } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/framework';
 import { borderStyles } from '@fluentui-react-native/tokens';
 
@@ -44,7 +44,7 @@ const tokensThatAreAlsoProps: (keyof StackTokenProps)[] = [
 
 const nowrapProps: ViewProps = {};
 
-const buildInnerProps = (tokenProps: StackTokens, theme: Theme, cache: GenericMemoValue) => {
+const buildInnerProps = (tokenProps: StackTokens, theme: Theme, cache: GetMemoValue) => {
   // if wrapping is disabled just return a fixed empty object without doing any additional work
   if (!tokenProps.wrap) {
     return nowrapProps;

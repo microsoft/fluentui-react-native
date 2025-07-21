@@ -8,7 +8,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
-import { getMemoCache, GenericMemoValue } from '@fluentui-react-native/framework-base';
+import { getMemoCache, GetMemoValue } from '@fluentui-react-native/framework-base';
 
 /* tslint:disable-next-line no-any */
 export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined {
@@ -38,7 +38,7 @@ function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends obj
 function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends object>(
   props: TProps,
   options: IStylingSettings<TSlotProps, TTokens>,
-  instanceMemoCache: GenericMemoValue,
+  instanceMemoCache: GetMemoValue,
   lookupOverride?: IOverrideLookup,
 ): IWithTokens<TSlotProps, TTokens> {
   // get the theme value from the context (or the default theme if it is not set)

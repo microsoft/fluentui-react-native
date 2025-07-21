@@ -1,9 +1,9 @@
-import type { GetMemoValue, TypedMemoResult } from '@fluentui-react-native/framework-base';
+import type { GetTypedMemoValue, TypedMemoResult } from '@fluentui-react-native/framework-base';
 
 export function applyPropsToTokens<TProps, TTokens>(
   props: TProps,
   tokens: TTokens,
-  cache: GetMemoValue<TTokens>,
+  cache: GetTypedMemoValue<TTokens>,
   keys: (keyof TTokens)[],
 ): TypedMemoResult<TTokens> {
   for (const key of keys) {

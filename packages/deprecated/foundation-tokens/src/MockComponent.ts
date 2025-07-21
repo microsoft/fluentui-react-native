@@ -1,4 +1,4 @@
-import type { GenericMemoValue, StyleProp } from '@fluentui-react-native/framework-base';
+import type { GetMemoValue, StyleProp } from '@fluentui-react-native/framework-base';
 import type { ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
@@ -17,7 +17,7 @@ export type IMockComponentFn<TProps, TSlotProps extends ISlotProps, TTokens> = (
   props: TProps,
   settings: IComponentSettings<TSlotProps> & { tokens?: TTokens },
   theme: IMockTheme,
-  cache: GenericMemoValue,
+  cache: GetMemoValue,
   recurse?: boolean,
 ) => TSlotProps | TProps;
 
@@ -36,7 +36,7 @@ export function stockFakeComponent(
   props: IMockBaseProps,
   _settings: ISlotProps,
   _theme: IMockTheme,
-  _cache: GenericMemoValue,
+  _cache: GetMemoValue,
   _recurse: boolean,
 ): IMockBaseProps {
   return props;
@@ -56,13 +56,7 @@ export function mockCreate<TProps extends object, TSlotProps extends ISlotProps,
     options.styles,
     hasTokens,
   );
-  const fn = (
-    props: TProps,
-    settings: TSlotProps & { tokens?: TTokens },
-    theme: IMockTheme,
-    cache: GenericMemoValue,
-    recurse?: boolean,
-  ) => {
+  const fn = (props: TProps, settings: TSlotProps & { tokens?: TTokens }, theme: IMockTheme, cache: GetMemoValue, recurse?: boolean) => {
     let newSettings = processTokens(props as any, theme, settings as any, resolvedTokens, cache);
     if (recurse) {
       Object.keys(slots).forEach((slotName: string) => {

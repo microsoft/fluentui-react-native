@@ -9,7 +9,7 @@ export type {
 } from './immutable-merge/Merge';
 
 // memo-cache exports
-export type { AnyGetMemoValue, GenericMemoValue, GetMemoValue, MemoResult, TypedMemoResult } from './memo-cache/getMemoCache';
+export type { AnyGetMemoValue, GetMemoValue, GetTypedMemoValue, MemoResult, TypedMemoResult } from './memo-cache/getMemoCache';
 export { asGenericMemoCache, asTypedMemoCache, getMemoCache, getTypedMemoCache } from './memo-cache/getMemoCache';
 export { memoize } from './memo-cache/memoize';
 

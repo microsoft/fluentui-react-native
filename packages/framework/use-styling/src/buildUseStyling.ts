@@ -1,4 +1,4 @@
-import type { GenericMemoValue } from '@fluentui-react-native/framework-base';
+import type { GetMemoValue } from '@fluentui-react-native/framework-base';
 import type { HasLayer, TokenSettings } from '@fluentui-react-native/use-tokens';
 import { applyPropsToTokens, applyTokenLayers, buildUseTokens } from '@fluentui-react-native/use-tokens';
 
@@ -64,7 +64,7 @@ function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
   styles: BuildSlotProps<TSlotProps, TTokens, TTheme>,
   tokens: TTokens,
   theme: TTheme,
-  cache: GenericMemoValue,
+  cache: GetMemoValue,
 ): TSlotProps {
   const slotProps = {};
   Object.keys(styles).forEach((key) => {
@@ -110,6 +110,6 @@ export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
     }
 
     // finally produce slotProps from calling the style functions on each entry
-    return resolveToSlotProps(styles, mergedTokens, theme, cache as GenericMemoValue);
+    return resolveToSlotProps(styles, mergedTokens, theme, cache as GetMemoValue);
   };
 }
