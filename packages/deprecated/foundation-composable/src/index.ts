@@ -22,4 +22,4 @@ export type {
   RequireObject,
 } from './Composable.types';
 export { atomic, atomicRender, atomicUsePrepareProps, composable } from './Composable';
-export { renderSlot, withSlots } from './slots';
+export { renderSlot, withSlots } from '@fluentui-react-native/framework-base';
