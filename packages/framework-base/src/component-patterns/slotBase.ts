@@ -29,7 +29,7 @@ export type SlotFn<TProps> = React.FunctionComponent<TProps> & {
  * The standard element type inputs for react and react-native. This might be View or Button, or it might be 'div' in web. Effectively
  * it is what react accepts for React.createElement
  */
-export type NativeReactType = React.ElementType<any> | string;
+export type NativeReactType = React.ElementType | string;
 
 export function renderSlot2<TProps>(slot: NativeReactType | SlotFn<TProps>, extraProps: TProps, ...children: React.ReactNode[]) {
   return typeof slot === 'function' && (slot as SlotFn<TProps>)._canCompose

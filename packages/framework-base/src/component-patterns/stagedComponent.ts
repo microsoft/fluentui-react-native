@@ -23,7 +23,7 @@ export type FinalRender<TProps> = (props: TProps, ...children: React.ReactNode[]
  *   };
  * }
  */
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type StagedRender<TProps> = (props: TProps, ...args: any[]) => FinalRender<TProps>;
 
 /**

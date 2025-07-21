@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
 import type { PropsBase } from './types';
@@ -34,6 +33,7 @@ function getTransformedTargets(type: CreateElementType, props: unknown) {
   return {};
 }
 
+/**
 export function createTransformableComponent<TProps>(
   Base: React.ComponentType<PropsBase>,
   transformProps: TransformProps<PropsBase>,
@@ -55,6 +55,7 @@ export function useAsTransformableComponent<TProps>(
     return createTransformableComponent(Base, transformProps);
   }, [Base, transformProps]);
 }
+*/
 
 /**
  * This helper function can be used with the @jsx pragma to allow prop adjustment before creating elements.
