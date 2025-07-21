@@ -31,8 +31,14 @@ export type {
 } from './types';
 export { enhancedTypeof } from './typeUtilities';
 
+// component pattern exports
+export { renderSlot } from './component-patterns/renderSlot';
+export type { SlotFn, NativeReactType } from './component-patterns/renderSlot';
+export { withSlots } from './component-patterns/withSlots';
+export { stagedComponent } from './component-patterns/stagedComponent';
+export type { FinalRender, StagedRender, ComposableFunction } from './component-patterns/stagedComponent';
+
 // transformer exports
-export { createTransformableComponent, useAsTransformableComponent, withSlots } from './transformableComponents';
 
 // jsx-runtime exports
 export { jsx, jsxs, Fragment } from './jsx-runtime';

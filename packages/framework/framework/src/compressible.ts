@@ -1,6 +1,6 @@
 import type { Theme } from '@fluentui-react-native/theme-types';
-import type { StagedRender } from '@fluentui-react-native/use-slot';
-import { stagedComponent } from '@fluentui-react-native/use-slot';
+import type { StagedRender } from '@fluentui-react-native/framework-base';
+import { stagedComponent } from '@fluentui-react-native/framework-base';
 import type { CustomizableComponent } from '@fluentui-react-native/use-tokens';
 
 import type { TokenSettings } from './useStyling';
