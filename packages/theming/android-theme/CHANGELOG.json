@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Wed, 16 Jul 2025 20:06:45 GMT",
+      "version": "0.25.7",
+      "tag": "@fluentui-react-native/android-theme_v0.25.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/android-theme",
+            "commit": "6ed0a256caf94e287c6a9120ec5d0458bd5c7bfc",
+            "comment": "create common framework-base package to share common utiltities more broadly"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:29 GMT",
       "version": "0.25.6",
       "tag": "@fluentui-react-native/android-theme_v0.25.6",

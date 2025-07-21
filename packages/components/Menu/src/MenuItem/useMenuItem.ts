@@ -38,6 +38,11 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
       if (!disabled && (!isArrowKey || isArrowOpen)) {
         componentRef?.current?.blur();
         onClick?.(e);
+
+        // For RN, ENTER / SPACE keypresses are handled by both the `onKey` event handlers and `onPress` handler. Because we
+        // pass this callback into both `onKeyDown` and `onPress` props, we need to mark the event as handled for ENTER / SPACE
+        // key presses so that we don't have duplicate `onClick` calls.
+        e.preventDefault();
       }
 
       if (!hasSubmenu && !isArrowKey && !shouldPersist) {

@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
-<!-- This log was last generated on Tue, 15 Jul 2025 23:26:49 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 16 Jul 2025 20:06:45 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.15.7
+
+Wed, 16 Jul 2025 20:06:45 GMT
+
+### Patches
+
+- create common framework-base package to share common utiltities more broadly (jasonmo@microsoft.com)
 
 ## 1.15.6
 

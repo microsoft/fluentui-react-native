@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Thu, 17 Jul 2025 20:54:32 GMT",
+      "version": "1.14.28",
+      "tag": "@fluentui-react-native/menu_v1.14.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "93700bb6111180d394785e415d6f1c32fc33386d",
+            "comment": "Mark `onInvoke` event as handled for enter / space press to prevent duplicate call"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:06 GMT",
       "version": "1.14.26",
       "tag": "@fluentui-react-native/menu_v1.14.26",

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Wed, 16 Jul 2025 20:06:45 GMT",
+      "version": "0.12.5",
+      "tag": "@uifabricshared/theme-registry_v0.12.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "6ed0a256caf94e287c6a9120ec5d0458bd5c7bfc",
+            "comment": "create common framework-base package to share common utiltities more broadly"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:26:47 GMT",
       "version": "0.12.4",
       "tag": "@uifabricshared/theme-registry_v0.12.4",

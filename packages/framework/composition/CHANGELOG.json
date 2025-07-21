@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Wed, 16 Jul 2025 20:06:45 GMT",
+      "version": "0.11.7",
+      "tag": "@fluentui-react-native/composition_v0.11.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "6ed0a256caf94e287c6a9120ec5d0458bd5c7bfc",
+            "comment": "create common framework-base package to share common utiltities more broadly"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jul 2025 23:27:26 GMT",
       "version": "0.11.6",
       "tag": "@fluentui-react-native/composition_v0.11.6",
