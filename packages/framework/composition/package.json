@@ -36,15 +36,12 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/use-slot": "workspace:*",
     "@fluentui-react-native/use-slots": "workspace:*",
     "@fluentui-react-native/use-styling": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
-    "@react-native/metro-config": "^0.74.0",
     "react": "18.2.0",
     "react-native": "^0.74.0"
   },
