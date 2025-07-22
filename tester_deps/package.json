@@ -27,9 +27,8 @@
     "webdriverio": "^9.12.6"
   },
   "resolutions": {
-    "@appium/types": "0.9.1",
     "axios": "^1.8.2",
-    "express": "^4.19.2",
+    "form-data": "^4.0.4",
     "semver": "^7.5.2",
     "tar-fs": "^3.0.9",
     "ws": "^8.17.1",
@@ -38,7 +37,7 @@
   },
   "resolutions.justifications": {
     "axios": "Patching security issue",
-    "express": "Patching security issue",
+    "form-data": "Patching security issue",
     "tar-fs": "Patching security issue",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/parse-glob/glob-base/glob-parent": "There is a security risk associated with this package version (it's a very outdated packaged, 2.0.0). Therefore, we are forcing an upgrade to the patched version.",
     "wdio-json-reporter/jest-matchers/jest-message-util/micromatch/braces": " There is a security risk associated with this package version (it's a very outdated packaged, 1.8.2). Therefore, we are forcing an upgrade to the patched version.",

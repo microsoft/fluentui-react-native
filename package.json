@@ -63,6 +63,7 @@
     "@types/react": "^18.2.0",
     "@warren-ms/react-native-icons/react-native-svg": "^15.4.0",
     "axios": "^1.8.2",
+    "form-data": "^4.0.4",
     "react-native-macos": "patch:react-native-macos@npm%3A0.74.30#~/.yarn/patches/react-native-macos-npm-0.74.30-e4edf98920.patch",
     "semver": "^7.5.2",
     "tar-fs": "^3.0.9",
