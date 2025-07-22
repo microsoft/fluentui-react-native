@@ -1,6 +1,5 @@
-export { renderSlot } from './renderSlot';
-export type { NativeReactType, SlotFn } from './renderSlot';
-export { stagedComponent } from './stagedComponent';
-export type { ComposableFunction, FinalRender, StagedRender } from './stagedComponent';
 export { useSlot } from './useSlot';
-export { withSlots } from './withSlots';
+
+// re-export functions and types from framework-base that used to be here to not break existing imports
+export { renderSlot, stagedComponent, withSlots } from '@fluentui-react-native/framework-base';
+export type { ComposableFunction, FinalRender, NativeReactType, SlotFn, StagedRender } from '@fluentui-react-native/framework-base';

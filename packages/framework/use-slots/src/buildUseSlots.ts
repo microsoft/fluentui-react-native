@@ -1,4 +1,4 @@
-import type { ComposableFunction, SlotFn, NativeReactType } from '@fluentui-react-native/use-slot';
+import type { ComposableFunction, SlotFn, NativeReactType } from '@fluentui-react-native/framework-base';
 import { useSlot } from '@fluentui-react-native/use-slot';
 
 // type AsObject<T> = T extends object ? T : never

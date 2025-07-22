@@ -36,7 +36,6 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/use-slot": "workspace:*",
     "@fluentui-react-native/use-slots": "workspace:*",
     "@fluentui-react-native/use-styling": "workspace:*"
   },
