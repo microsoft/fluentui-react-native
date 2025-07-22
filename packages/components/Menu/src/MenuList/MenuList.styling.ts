@@ -19,12 +19,22 @@ export const stylingSettings: UseStylingOptions<MenuListProps, MenuListSlotProps
         style: {
           backgroundColor: tokens.backgroundColor,
           display: 'flex',
+          gap: tokens.gap,
           ...layoutStyles.from(tokens, theme),
           ...(Platform.OS === 'android' && { borderRadius: tokens.borderRadius }),
         },
-        gap: tokens.gap,
       }),
-      ['backgroundColor', 'gap', ...layoutStyles.keys],
+      ['backgroundColor', 'borderRadius', 'gap', ...layoutStyles.keys],
+    ),
+    focusZone: buildProps(
+      (tokens: MenuListTokens) => ({
+        style: {
+          display: 'flex',
+          flexDirection: 'column',
+          gap: tokens.gap,
+        },
+      }),
+      ['gap'],
     ),
   },
 };
