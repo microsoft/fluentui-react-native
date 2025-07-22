@@ -2843,6 +2843,8 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/use-slots": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
+    "@react-native/babel-preset": "npm:^0.74.0"
+    "@react-native/metro-config": "npm:^0.74.0"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
   peerDependencies:
