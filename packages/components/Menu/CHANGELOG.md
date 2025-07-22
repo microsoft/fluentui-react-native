@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-<!-- This log was last generated on Thu, 17 Jul 2025 20:54:32 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 22 Jul 2025 22:15:16 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.14.30
+
+Tue, 22 Jul 2025 22:15:16 GMT
+
+### Patches
+
+- Fix gap tokens on MenuList (ruaraki@microsoft.com)
 
 ## 1.14.28
 

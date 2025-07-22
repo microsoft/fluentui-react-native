@@ -8,11 +8,11 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.170.33"
+      "version": "0.170.34"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.38.52"
+      "version": "0.38.53"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -68,7 +68,7 @@ module.exports = {
     },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
-      "version": "1.14.29"
+      "version": "1.14.30"
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
@@ -188,7 +188,7 @@ module.exports = {
     },
     "@fluentui-react-native/overflow": {
       "name": "@fluentui-react-native/overflow",
-      "version": "0.3.29"
+      "version": "0.3.30"
     },
     "@fluentui-react-native/popover": {
       "name": "@fluentui-react-native/popover",
