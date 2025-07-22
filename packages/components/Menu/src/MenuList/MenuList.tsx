@@ -3,10 +3,9 @@
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import type { UseSlots } from '@fluentui-react-native/framework';
-import { compose, mergeProps, stagedComponent, withSlots } from '@fluentui-react-native/framework';
+import { compose, withSlots } from '@fluentui-react-native/framework';
 
 import { stylingSettings } from './MenuList.styling';
 import type { MenuListProps, MenuListState, MenuListType } from './MenuList.types';
@@ -14,25 +13,6 @@ import { menuListName } from './MenuList.types';
 import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { MenuListProvider } from '../context/menuListContext';
-
-const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
-  const { gap, ...rest } = props;
-  return (final: React.PropsWithRef<IViewProps> & { gap?: number }, children: React.ReactNode) => {
-    if (gap && gap > 0 && children) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore - GH:1684, fix typing error
-      children = React.Children.map(children, (child: React.ReactChild, index: number) => {
-        if (React.isValidElement(child) && index > 0) {
-          return React.cloneElement(child, mergeProps(child.props, { style: { marginTop: gap } }));
-        }
-        return child;
-      });
-    }
-
-    return <View {...mergeProps(rest, final)}>{children}</View>;
-  };
-});
-MenuStack.displayName = 'MenuStack';
 
 const shouldHaveFocusZone = ['macos', 'win32'].includes(Platform.OS as string);
 const focusLandsOnContainer = Platform.OS === 'macos';
@@ -46,9 +26,9 @@ export const MenuList = compose<MenuListType>({
   displayName: menuListName,
   ...stylingSettings,
   slots: {
-    root: MenuStack,
+    root: View,
     scrollView: ScrollView,
-    focusZone: shouldHaveFocusZone ? FocusZone : React.Fragment,
+    focusZone: shouldHaveFocusZone ? FocusZone : View,
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);

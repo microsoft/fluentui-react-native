@@ -15,16 +15,29 @@ export const stylingSettings: UseStylingOptions<MenuListProps, MenuListSlotProps
   states: menuListStates,
   slotProps: {
     root: buildProps(
-      (tokens: MenuListTokens, theme: Theme) => ({
+      (tokens: MenuListTokens, theme: Theme) => {
+        console.log(tokens);
+        return {
+          style: {
+            backgroundColor: tokens.backgroundColor,
+            display: 'flex',
+            gap: tokens.gap,
+            ...layoutStyles.from(tokens, theme),
+            ...(Platform.OS === 'android' && { borderRadius: tokens.borderRadius }),
+          },
+        };
+      },
+      ['backgroundColor', 'borderRadius', 'gap', ...layoutStyles.keys],
+    ),
+    focusZone: buildProps(
+      (tokens: MenuListTokens) => ({
         style: {
-          backgroundColor: tokens.backgroundColor,
           display: 'flex',
-          ...layoutStyles.from(tokens, theme),
-          ...(Platform.OS === 'android' && { borderRadius: tokens.borderRadius }),
+          flexDirection: 'column',
+          gap: tokens.gap,
         },
-        gap: tokens.gap,
       }),
-      ['backgroundColor', 'gap', ...layoutStyles.keys],
+      ['gap'],
     ),
   },
 };
