@@ -1,4 +1,4 @@
-import { getMemoCache } from './getMemoCache';
+import { getMemoCache, getTypedMemoCache } from './getMemoCache';
 
 interface TestObj {
   id: number;
@@ -38,7 +38,7 @@ describe('getMemoCache unit tests', () => {
   });
 
   test('memoValue executes function', () => {
-    const memoValue = getMemoCache();
+    const memoValue = getTypedMemoCache<TestObj>();
     const fn = getObjFactory();
     const v1 = fn();
     const [v2] = memoValue(fn, ['bar', 'baz']);

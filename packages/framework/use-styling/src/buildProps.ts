@@ -18,7 +18,7 @@ export type TokensThatAreAlsoProps<TTokens> = (keyof TTokens)[] | 'all' | 'none'
  * The provided
  * cache will be scoped to the theme, slot, and tokens that are coming out of the theme.
  */
-export type BuildPropsBase<TProps, TTokens, TTheme> = (tokens: TTokens, theme: TTheme, cache: GetMemoValue<any>) => Partial<TProps>;
+export type BuildPropsBase<TProps, TTokens, TTheme> = (tokens: TTokens, theme: TTheme, cache: GetMemoValue) => Partial<TProps>;
 
 /**
  * A refine function allows style functions to be updated based on tokens that are also props. Only those tokens that are also
@@ -46,7 +46,7 @@ function cacheStyleClosure<TProps, TTokens, TTheme>(
   fn: (tokens: TTokens, theme: TTheme) => TProps,
   keys?: (keyof TTokens)[],
 ): RefinableBuildPropsBase<TProps, TTokens, TTheme> {
-  return (tokens: TTokens, theme: TTheme, cache: GetMemoValue<TProps>) =>
+  return (tokens: TTokens, theme: TTheme, cache: GetMemoValue) =>
     cache(
       () => fn(tokens, theme),
       (keys || []).map((key) => tokens[key]),

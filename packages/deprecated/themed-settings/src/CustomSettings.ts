@@ -42,10 +42,10 @@ export function mergeBaseSettings<TSettings extends IComponentSettings, TTheme>(
 export function getThemedSettings<TSettings extends IComponentSettings, TTheme>(
   customSettings: ISettingsEntry<TSettings, TTheme>[],
   theme: TTheme,
-  memoValue: GetMemoValue<TSettings, TSettings>,
+  memoValue: GetMemoValue,
   hasOverride?: IOverrideLookup,
   getFromTheme?: IGetSettingsFromTheme<TSettings, TTheme>,
-): { settings: TSettings | undefined; getMemoValue: GetMemoValue<TSettings, TSettings> } {
+): { settings: TSettings | undefined; getMemoValue: GetMemoValue } {
   // resolve the settings for this component, keyed on the theme
   let [settings, getMemoValue] = memoValue(() => mergeBaseSettings(customSettings, theme, getFromTheme), [theme]);
 

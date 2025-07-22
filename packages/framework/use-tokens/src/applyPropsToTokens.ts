@@ -1,11 +1,11 @@
-import type { GetMemoValue } from '@fluentui-react-native/framework-base';
+import type { GetTypedMemoValue } from '@fluentui-react-native/framework-base';
 
 export function applyPropsToTokens<TProps, TTokens>(
   props: TProps,
   tokens: TTokens,
-  cache: GetMemoValue<TTokens>,
+  cache: GetTypedMemoValue<TTokens>,
   keys: (keyof TTokens)[],
-): [TTokens, GetMemoValue<TTokens>] {
+): [TTokens, GetTypedMemoValue<TTokens>] {
   for (const key of keys) {
     const sourceValue = props[key as string];
     const setValue = sourceValue === tokens[key] ? undefined : sourceValue;

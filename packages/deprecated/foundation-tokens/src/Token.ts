@@ -42,7 +42,7 @@ export function processTokens<TSlotProps extends ISlotProps, TTokens extends obj
   theme: TTheme,
   slotProps: IComponentSettings<TSlotProps & { tokens?: TTokens }>,
   tokenInfo: IComponentTokens<TSlotProps, TTokens, TTheme>,
-  cache: GetMemoValue<TSlotProps>,
+  cache: GetMemoValue,
 ): ISlotProps {
   // merge in tokens and build up the cache key which are the tokens overridden by the user
   slotProps = slotProps || {};

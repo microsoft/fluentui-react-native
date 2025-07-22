@@ -16,7 +16,7 @@ export type IGetCachedPropsForSlot<TProps, TTokens, TTheme> = (
   tokenProps: ITokenPropInfo<TTokens>,
   theme: TTheme,
   slotName: string,
-  getMemoValue: GetMemoValue<TProps>,
+  getMemoValue: GetMemoValue,
 ) => TProps;
 
 export type ICachedPropHandlers<TSlotProps extends object, TTokens, TTheme> = {
