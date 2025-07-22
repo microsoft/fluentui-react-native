@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "centralize jsx rendering functionality in framework-base",
+  "packageName": "@fluentui-react-native/use-slots",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
