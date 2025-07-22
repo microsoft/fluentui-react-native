@@ -59,6 +59,9 @@
     "packages/**",
     "scripts"
   ],
+  "engines": {
+    "node": ">=22.12"
+  },
   "resolutions": {
     "@types/react": "^18.2.0",
     "@warren-ms/react-native-icons/react-native-svg": "^15.4.0",
