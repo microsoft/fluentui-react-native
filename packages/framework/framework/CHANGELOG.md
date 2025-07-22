@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/framework
 
-<!-- This log was last generated on Wed, 16 Jul 2025 20:06:45 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 22 Jul 2025 19:06:23 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.14.8
+
+Tue, 22 Jul 2025 19:06:23 GMT
+
+### Patches
+
+- centralize jsx rendering functionality in framework-base (jasonmo@microsoft.com)
 
 ## 0.14.7
 

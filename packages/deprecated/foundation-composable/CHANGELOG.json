@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Tue, 22 Jul 2025 19:06:24 GMT",
+      "version": "0.13.7",
+      "tag": "@uifabricshared/foundation-composable_v0.13.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/foundation-composable",
+            "commit": "21e536f6875cb6fb9c33b439f0eafe1d4debc7a4",
+            "comment": "centralize jsx rendering functionality in framework-base"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jul 2025 20:06:45 GMT",
       "version": "0.13.6",
       "tag": "@uifabricshared/foundation-composable_v0.13.6",
