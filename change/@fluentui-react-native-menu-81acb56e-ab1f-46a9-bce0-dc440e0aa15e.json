@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix gap tokens on MenuList",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
