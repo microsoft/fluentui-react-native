@@ -2841,7 +2841,6 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@fluentui-react-native/use-slot": "workspace:*"
     "@fluentui-react-native/use-slots": "workspace:*"
     "@fluentui-react-native/use-styling": "workspace:*"
     "@react-native/babel-preset": "npm:^0.74.0"

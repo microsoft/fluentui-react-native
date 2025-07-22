@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-slots",
-  "version": "0.10.7",
+  "version": "0.10.8",
   "description": "Hook function to return styled slots",
   "repository": {
     "type": "git",
@@ -35,11 +35,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/use-slot": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",

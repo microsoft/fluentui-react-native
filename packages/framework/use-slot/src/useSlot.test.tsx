@@ -7,10 +7,10 @@ import { Text, View } from 'react-native';
 import { mergeStyles } from '@fluentui-react-native/framework-base';
 import * as renderer from 'react-test-renderer';
 
-import type { NativeReactType } from './renderSlot';
-import { stagedComponent } from './stagedComponent';
+import type { NativeReactType } from '@fluentui-react-native/framework-base';
+import { stagedComponent } from '@fluentui-react-native/framework-base';
 import { useSlot } from './useSlot';
-import { withSlots } from './withSlots';
+import { withSlots } from '@fluentui-react-native/framework-base';
 
 type PluggableTextProps = React.PropsWithChildren<TextProps> & { inner?: NativeReactType | React.FunctionComponent<TextProps> };
 

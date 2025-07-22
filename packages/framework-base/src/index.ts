@@ -18,3 +18,10 @@ export { memoize } from './memo-cache/memoize';
 export type { StyleProp } from './merge-props/mergeStyles.types';
 export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
+
+// component pattern exports
+export { renderSlot } from './component-patterns/renderSlot';
+export type { SlotFn, NativeReactType } from './component-patterns/renderSlot';
+export { withSlots } from './component-patterns/withSlots';
+export { stagedComponent } from './component-patterns/stagedComponent';
+export type { FinalRender, StagedRender, ComposableFunction } from './component-patterns/stagedComponent';

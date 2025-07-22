@@ -17,7 +17,7 @@ import {
   ISlotWithFilter,
 } from './Composable.types';
 import { useCompoundPrepare } from './Composable.slots';
-import { renderSlot } from './slots';
+import { renderSlot } from '@fluentui-react-native/framework-base';
 import { ISlotProps, mergeSettings } from '@uifabricshared/foundation-settings';
 
 export function atomicRender<TProps extends object, TState = object>(
