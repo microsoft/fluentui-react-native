@@ -1,5 +1,5 @@
 import { immutableMerge } from '@fluentui-react-native/framework-base';
-import type { GetMemoValue } from '@fluentui-react-native/framework-base';
+import type { GetTypedMemoValue } from '@fluentui-react-native/framework-base';
 
 /**
  * alternatively look them up with a passed in function
@@ -18,10 +18,10 @@ export type HasLayer = (name: string) => boolean;
 export function applyTokenLayers<TTokens>(
   tokens: TTokens,
   states: string[],
-  subCache: GetMemoValue<TTokens>,
+  subCache: GetTypedMemoValue<TTokens>,
   hasLayer: HasLayer,
-): [TTokens, GetMemoValue<TTokens>] {
-  type TokensAndCache = { tokens: TTokens; subCache: GetMemoValue<TTokens> };
+): [TTokens, GetTypedMemoValue<TTokens>] {
+  type TokensAndCache = { tokens: TTokens; subCache: GetTypedMemoValue<TTokens> };
   let final: TokensAndCache = { tokens, subCache };
   if (states && states.length > 0) {
     // now walk the overrides that are set, merging in props, caching results, and getting a new sub cache

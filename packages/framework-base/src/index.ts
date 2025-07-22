@@ -10,8 +10,8 @@ export type {
 } from './immutable-merge/Merge';
 
 // memo-cache exports
-export type { GetMemoValue } from './memo-cache/getMemoCache';
-export { getMemoCache } from './memo-cache/getMemoCache';
+export type { GetMemoValue, GetTypedMemoValue } from './memo-cache/getMemoCache';
+export { getMemoCache, getTypedMemoCache } from './memo-cache/getMemoCache';
 export { memoize } from './memo-cache/memoize';
 
 // merge-props exports

@@ -7,9 +7,9 @@ import { getMemoCache } from './getMemoCache';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function memoize<T extends Function>(fn: T): T {
   // create a unique cache that will be captured in the closure
-  const cache = getMemoCache<any>();
+  const cache = getMemoCache();
   // create the closure which wraps the calling function
-  const closure = (...args: any[]) => {
+  const closure = (...args: unknown[]) => {
     return cache(() => fn(...(args || [])), args)[0];
   };
   // now return that closure strongly typed as the function.

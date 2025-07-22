@@ -1,5 +1,5 @@
-export type { GetMemoValue } from '@fluentui-react-native/framework-base';
-export { getMemoCache, memoize } from '@fluentui-react-native/framework-base';
+export type { GetMemoValue, GetTypedMemoValue } from '@fluentui-react-native/framework-base';
+export { getMemoCache, getTypedMemoCache, memoize } from '@fluentui-react-native/framework-base';
 
 export type { StyleProp } from '@fluentui-react-native/framework-base';
 export { mergeProps, mergeStyles } from '@fluentui-react-native/framework-base';

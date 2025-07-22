@@ -1,4 +1,4 @@
-import type { GetMemoValue } from '@fluentui-react-native/framework-base';
+import type { GetTypedMemoValue } from '@fluentui-react-native/framework-base';
 
 /**
  * Take a set of tokens (and a memo-cache) and apply changes to those tokens from an additional set of tokens. Only keys which are
@@ -11,9 +11,9 @@ import type { GetMemoValue } from '@fluentui-react-native/framework-base';
  */
 export function patchTokens<TTokens>(
   tokens: TTokens,
-  cache: GetMemoValue<TTokens>,
+  cache: GetTypedMemoValue<TTokens>,
   patchValues: TTokens,
-): [TTokens, GetMemoValue<TTokens>] {
+): [TTokens, GetTypedMemoValue<TTokens>] {
   // reduce the patch values to the set of keys that are defined, and sort them to ensure consistent ordering
   const keys = Object.keys(patchValues)
     .filter((v) => patchValues[v] !== undefined)

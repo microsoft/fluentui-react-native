@@ -16,21 +16,6 @@
       "import": "./lib/index.js",
       "require": "./lib-commonjs/index.js",
       "types": "./lib/index.d.ts"
-    },
-    "./immutable-merge": {
-      "import": "./lib/immutable-merge/Merge.js",
-      "require": "./lib-commonjs/immutable-merge/Merge.js",
-      "types": "./lib/immutable-merge/Merge.d.ts"
-    },
-    "./memo-cache": {
-      "import": "./lib/memo-cache/index.js",
-      "require": "./lib-commonjs/memo-cache/index.js",
-      "types": "./lib/memo-cache/index.d.ts"
-    },
-    "./merge-props": {
-      "import": "./lib/merge-props/index.js",
-      "require": "./lib-commonjs/merge-props/index.js",
-      "types": "./lib/merge-props/lib/index.d.ts"
     }
   },
   "scripts": {

@@ -1,13 +1,13 @@
 import type { ViewStyle, ViewProps } from 'react-native';
 
 import type { UseStylingOptions } from '@fluentui-react-native/framework';
-import { getMemoCache } from '@fluentui-react-native/framework';
+import { getTypedMemoCache } from '@fluentui-react-native/framework';
 
 import { stackItemName } from './StackItem.types';
 import type { StackItemTokens, StackItemProps, StackItemSlotProps } from './StackItem.types';
 
 // styles are keyed on token values and are independent of themes or variants so just use a common cache
-const localCache = getMemoCache<ViewProps>();
+const localCache = getTypedMemoCache<ViewProps>();
 
 const alignMap: { [key: string]: ViewStyle['alignSelf'] } = {
   start: 'flex-start',

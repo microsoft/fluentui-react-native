@@ -44,7 +44,7 @@ const tokensThatAreAlsoProps: (keyof StackTokenProps)[] = [
 
 const nowrapProps: ViewProps = {};
 
-const buildInnerProps = (tokenProps: StackTokens, theme: Theme, cache: GetMemoValue<ViewProps>) => {
+const buildInnerProps = (tokenProps: StackTokens, theme: Theme, cache: GetMemoValue) => {
   // if wrapping is disabled just return a fixed empty object without doing any additional work
   if (!tokenProps.wrap) {
     return nowrapProps;
@@ -54,7 +54,7 @@ const buildInnerProps = (tokenProps: StackTokens, theme: Theme, cache: GetMemoVa
   const { horizontal, horizontalAlign, verticalAlign, padding } = tokenProps;
   return !tokenProps.wrap
     ? nowrapProps
-    : cache(() => {
+    : cache<ViewProps>(() => {
         const childrenGap = tokenProps.childrenGap || tokenProps.gap;
         const { rowGap, columnGap } = parseGap(childrenGap, theme);
 

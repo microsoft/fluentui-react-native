@@ -1,4 +1,4 @@
-import { getMemoCache } from '@fluentui-react-native/framework-base';
+import { getTypedMemoCache } from '@fluentui-react-native/framework-base';
 
 import { applyPropsToTokens } from './applyPropsToTokens';
 
@@ -32,7 +32,7 @@ const props1: Props = { dos: 'two', quatro: 'four', cinco: false, foo: 'foo', ba
 
 describe('applyPropsToTokens tests', () => {
   test('props get copied', () => {
-    const cache = getMemoCache();
+    const cache = getTypedMemoCache<Tokens>();
     const [tokens] = applyPropsToTokens(props1, themeTokens, cache, tokenProps);
     expect(tokens).not.toBe(themeTokens);
     for (const key of tokenProps) {
@@ -41,7 +41,7 @@ describe('applyPropsToTokens tests', () => {
   });
 
   test('no copied props does not change tokens', () => {
-    const cache = getMemoCache();
+    const cache = getTypedMemoCache<Tokens>();
     const [tokens] = applyPropsToTokens({}, themeTokens, cache, tokenProps);
     expect(tokens).toBe(themeTokens);
   });

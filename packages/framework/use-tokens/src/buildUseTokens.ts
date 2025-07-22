@@ -1,5 +1,5 @@
 import { immutableMerge } from '@fluentui-react-native/framework-base';
-import type { GetMemoValue } from '@fluentui-react-native/framework-base';
+import type { GetTypedMemoValue } from '@fluentui-react-native/framework-base';
 import { getMemoCache } from '@fluentui-react-native/framework-base';
 
 /** A function to generate tokens based on a theme */
@@ -18,7 +18,7 @@ export type TokenSettings<TTokens, TTheme> = string | TTokens | TokensFromTheme<
  * as well as a sub-cache, specific to this particular theme, that can be used for caching various styles
  * or values that are theme specific
  */
-export type UseTokensCore<TTokens, TTheme> = (theme: TTheme) => [TTokens, GetMemoValue<TTokens>];
+export type UseTokensCore<TTokens, TTheme> = (theme: TTheme) => [TTokens, GetTypedMemoValue<TTokens>];
 
 /**
  * The full signature also includes a customize function that returns an updated version of useTokens
@@ -50,14 +50,14 @@ function mapToTokens<TTokens, TTheme>(
   tokenEntry: TTokens | string | TokensFromTheme<TTokens, TTheme>,
   theme: TTheme,
   getComponentInfo: GetComponentInfo<TTokens, TTheme> | undefined,
-): object {
+): TTokens {
   if (typeof tokenEntry === 'string') {
     tokenEntry = (getComponentInfo && (getComponentInfo(theme, tokenEntry) as TTokens)) || ({} as TTokens);
   }
   if (typeof tokenEntry === 'function') {
     tokenEntry = (tokenEntry as TokensFromTheme<TTokens, TTheme>)(theme);
   }
-  return tokenEntry as unknown as object;
+  return tokenEntry;
 }
 
 /**
@@ -77,7 +77,7 @@ export function buildUseTokens<TTokens, TTheme>(
   // theme functions. This turns the tokens into an array of token objects that then get merged together
   const useTokensCore = (theme: TTheme) => {
     // get the base styles all merged together, these will only depend on internal tokens and theme
-    return cache(() => immutableMerge(...tokens.map((value) => mapToTokens(value, theme, getComponentInfo))), [theme]);
+    return cache(() => immutableMerge<TTokens>(...tokens.map((value) => mapToTokens(value, theme, getComponentInfo))), [theme]);
   };
 
   // attach a customize function to generate a new use
