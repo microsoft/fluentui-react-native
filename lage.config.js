@@ -1,14 +1,36 @@
 module.exports = {
   npmClient: 'yarn',
   pipeline: {
-    build: ['^build'],
-    buildci: ['build', 'test', 'depcheck'],
-    bundle: ['build'],
-    clean: [],
-    depcheck: [],
-    lint: [],
-    prettier: [],
+    build: {
+      dependsOn: ['^build'],
+      inputs: ['*', 'src/**/*', 'assets/**/*'],
+      outputs: ['lib/**/*', 'lib-commonjs/**/*'],
+    },
+    buildci: ['build', 'test', 'lint', 'depcheck'],
+    bundle: {
+      inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
+      outputs: ['dist/**/*'],
+    },
+    clean: {
+      cache: false,
+    },
+    depcheck: {
+      inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
+      outputs: [],
+    },
+    lint: {
+      inputs: ['*', 'src/**/*'],
+      outputs: [],
+    },
+    prettier: {
+      inputs: ['*', 'src/**/*'],
+      outputs: [],
+    },
     ['prettier-fix']: [],
-    test: ['build', 'lint'],
+    test: {
+      dependsOn: ['build'],
+      inputs: [],
+      outputs: [],
+    },
   },
 };

@@ -3561,7 +3561,7 @@ __metadata:
     "@fluentui-react-native/eslint-config-rules": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
-    "@types/node": "npm:^10.3.5"
+    "@types/node": "npm:^22.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3650,7 +3650,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
-    "@types/node": "npm:^10.3.5"
+    "@types/node": "npm:^22.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3782,7 +3782,7 @@ __metadata:
     "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@types/jest": "npm:^29.0.0"
-    "@types/node": "npm:^10.3.5"
+    "@types/node": "npm:^22.0.0"
     tslib: "npm:^2.3.1"
   languageName: unknown
   linkType: soft
@@ -7693,19 +7693,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^22.2.0, @types/node@npm:^22.5.5":
-  version: 22.15.30
-  resolution: "@types/node@npm:22.15.30"
+"@types/node@npm:*, @types/node@npm:^22.0.0, @types/node@npm:^22.2.0, @types/node@npm:^22.5.5":
+  version: 22.16.5
+  resolution: "@types/node@npm:22.16.5"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/ca330ac0e7fd502686d6df115fcc606aba46fd334220f749bbba2f639accdadcb23f7900603ceccdc8240be736739cad5c0b87c0fa92c9255a4dff245f07d664
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^10.3.5":
-  version: 10.17.60
-  resolution: "@types/node@npm:10.17.60"
-  checksum: 10c0/0742294912a6e79786cdee9ed77cff6ee8ff007b55d8e21170fc3e5994ad3a8101fea741898091876f8dc32b0a5ae3d64537b7176799e92da56346028d2cbcd2
+  checksum: 10c0/93a245e96a01f4a6aa38475000070292a9299e17b95bc1fc8180c652fb3a62f9b3b9ec0b78f9fc6a78b9274d3dfce456e80c7bb68b5357c8f7dbf581df4408c1
   languageName: node
   linkType: hard
 
@@ -7724,15 +7717,6 @@ __metadata:
   dependencies:
     undici-types: "npm:~6.21.0"
   checksum: 10c0/11979f5c4c626555351352fe1b30846700ca018747272a7ff425f883f102805b7f07737d5b7fa3c6deb0ddaeb94e367bb9a633a3d1e1d5c517de9a6283c6f21c
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^22.0.0":
-  version: 22.16.5
-  resolution: "@types/node@npm:22.16.5"
-  dependencies:
-    undici-types: "npm:~6.21.0"
-  checksum: 10c0/93a245e96a01f4a6aa38475000070292a9299e17b95bc1fc8180c652fb3a62f9b3b9ec0b78f9fc6a78b9274d3dfce456e80c7bb68b5357c8f7dbf581df4408c1
   languageName: node
   linkType: hard
 
@@ -8270,7 +8254,7 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.74.0"
     "@react-native/metro-config": "npm:^0.74.0"
     "@types/jest": "npm:^29.0.0"
-    "@types/node": "npm:^10.3.5"
+    "@types/node": "npm:^22.0.0"
     "@uifabricshared/foundation-settings": "workspace:*"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
