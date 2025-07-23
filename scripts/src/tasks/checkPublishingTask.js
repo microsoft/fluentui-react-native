@@ -1,6 +1,6 @@
 // @ts-check
 
-import { logger } from 'just-task';
+import { Command } from 'clipanion';
 import { getPackageInfos, findGitRoot } from 'workspace-tools';
 
 import { checkDependencies } from '../utils/checkDependencies.js';
@@ -10,28 +10,32 @@ import { checkDependencies } from '../utils/checkDependencies.js';
  * @typedef {{ dependencyTypes?: DependencyType[] }} CheckPublishingOptions
  */
 
-/**
- * Task to check the matrix of packages for publishing errors. In particular this checks for published packages that
- * have a dependency on a private package
- *
- * @return {import('just-task').TaskFunction} - the task function
- */
-export function checkPublishingTask() {
-  const dependencyTypes = ['dependencies'];
-  return function (done) {
+export class CheckPublishingCommand extends Command {
+  /** @override */
+  static paths = [['check-publishing']];
+
+  /** @override */
+  static usage = Command.Usage({
+    description: 'Check the matrix of packages for publishing errors',
+    details: 'This command checks for published packages that have a dependency on a private package.',
+    examples: [['Check for publishing errors', '$0 check-publishing']],
+  });
+
+  async execute() {
+    const dependencyTypes = ['dependencies'];
     const packageInfos = getPackageInfos(findGitRoot(process.cwd()));
-    logger.info('Starting scan for publishing errors');
+    console.info('Starting scan for publishing errors');
     try {
       Object.keys(packageInfos).forEach((pkg) => {
         if (!packageInfos[pkg].private) {
-          logger.verbose(`Scanning published package ${pkg} for private dependenies`);
+          console.log(`Scanning published package ${pkg} for private dependencies`);
           dependencyTypes.forEach((dependencyType) => {
             const deps = packageInfos[pkg][dependencyType];
             Object.keys(deps || {}).forEach((dep) => {
               if (packageInfos[dep] && packageInfos[dep].private) {
                 const errorMsg = `${pkg} has a ${dependencyType} on private package ${dep}`;
-                logger.error(errorMsg);
-                throw errorMsg;
+                console.error(errorMsg);
+                throw new Error(errorMsg);
               }
             });
           });
@@ -39,10 +43,11 @@ export function checkPublishingTask() {
       });
 
       checkDependencies();
+
+      console.info('No publishing errors found');
+      return 0;
     } catch (err) {
-      done(err instanceof Error ? err : new Error());
+      throw err instanceof Error ? err : new Error('Check publishing failed');
     }
-    logger.info('No publishing errors found');
-    done();
-  };
+  }
 }

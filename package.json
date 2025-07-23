@@ -17,7 +17,7 @@
     "bundle": "lage bundle",
     "clean": "lage clean",
     "change": "beachball change",
-    "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
+    "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-changes",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
     "align-deps": "rnx-align-deps --no-unmanaged --requirements react-native@0.74",
     "depcheck": "lage depcheck",

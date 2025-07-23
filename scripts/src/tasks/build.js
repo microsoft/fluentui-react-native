@@ -1,5 +1,6 @@
 // @ts-check
 
+import { Command } from 'clipanion';
 import { findNativeComponents, codegenNativeComponents } from '../utils/codegenNativeComponents.js';
 import path from 'path';
 import fs from 'fs';
@@ -7,6 +8,39 @@ import { runScript } from '../utils/runScript.js';
 import { readTypeScriptConfig } from '@rnx-kit/tools-typescript';
 import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';
 import { JsxEmit, ModuleKind } from 'typescript';
+import { cleanFolder } from './clean.js';
+
+export class BuildCommand extends Command {
+  /** @override */
+  static paths = [['build']];
+
+  /** @override */
+  static usage = Command.Usage({
+    description: 'Builds the current package using TypeScript compiler',
+    details: 'This command builds the current package based on the tsconfig.json and package.json configuration.',
+    examples: [['Build the current package', '$0 build']],
+  });
+
+  async execute() {
+    const cwd = process.cwd();
+    const targets = getBuildTargets(cwd);
+    if (targets.length === 0) {
+      console.log('No build targets found. Skipping build.');
+      return 0;
+    }
+
+    // Clean the output directories before building
+    cleanFolder();
+    const buildPromises = targets.map((target) => buildTarget(target, cwd));
+    const results = await Promise.all(buildPromises);
+    for (const result of results) {
+      if (result !== 0) {
+        throw new Error(`Build failed with exit code: ${result}`);
+      }
+    }
+    return 0;
+  }
+}
 
 /**
  * Get the module string for a given module kind.
@@ -93,32 +127,4 @@ async function buildTarget(target, cwd) {
   }
 
   return result;
-}
-
-/**
- * Task to check the matrix of packages for publishing errors. In particular this checks for published packages that
- * have a dependency on a private package
- *
- * @returns {import('just-scripts').TaskFunction}
- */
-export function build() {
-  return async function (done) {
-    const cwd = process.cwd();
-    const targets = getBuildTargets(cwd);
-    if (targets.length === 0) {
-      console.log('No build targets found. Skipping build.');
-      done();
-      return;
-    }
-
-    const buildPromises = targets.map((target) => buildTarget(target, cwd));
-    const results = await Promise.all(buildPromises);
-    for (const result of results) {
-      if (result !== 0) {
-        done(new Error(`Build failed with exit code: ${result}`));
-        return;
-      }
-    }
-    done();
-  };
 }

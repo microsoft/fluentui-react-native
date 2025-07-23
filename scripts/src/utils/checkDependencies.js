@@ -8,7 +8,6 @@
  */
 
 import { readFileSync, writeFileSync } from 'fs';
-import { logger } from 'just-task';
 
 import { findGitRoot, getPackageInfos } from 'workspace-tools';
 
@@ -97,7 +96,7 @@ export function checkDependencies() {
 
   if (everWrote) {
     const errorMsg = `Required package dependencies updated.`;
-    logger.error(errorMsg);
+    console.error(errorMsg);
     throw errorMsg;
   }
 }

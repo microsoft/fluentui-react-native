@@ -1,6 +1,6 @@
 // @ts-check
 
-import { logger } from 'just-scripts';
+import { Command } from 'clipanion';
 import depcheck from 'depcheck';
 import { getProjectRoot, getScriptProjectRoot } from '../utils/projectRoot.js';
 
@@ -24,12 +24,18 @@ function scriptsDevDeps() {
   return Object.keys(getScriptProjectRoot().manifest.devDependencies || {});
 }
 
-/**
- * Task to check for unused dependencies in the project using depcheck.
- * @returns {import('just-scripts').TaskFunction}
- */
-export function depcheckTask() {
-  return function (done) {
+export class DepcheckCommand extends Command {
+  /** @override */
+  static paths = [['depcheck']];
+
+  /** @override */
+  static usage = Command.Usage({
+    description: 'Check for unused dependencies in the project using depcheck',
+    details: 'This command analyzes the project to find unused dependencies and missing dependencies.',
+    examples: [['Check dependencies in the current package', '$0 depcheck']],
+  });
+
+  async execute() {
     const config = getProjectRoot().manifest;
     const depcheckOptions = typeof config.depcheck === 'object' && !Array.isArray(config.depcheck) ? config.depcheck : {};
     const options = mergeOneLevel(
@@ -47,34 +53,38 @@ export function depcheckTask() {
       depcheckOptions,
     );
 
-    return depcheck(process.cwd(), options, (result) => {
-      try {
-        if (result.devDependencies.length > 0) {
-          logger.warn('Unused devDependencies');
-          result.devDependencies.forEach((dependency) => {
-            logger.warn(`-- ${dependency}`);
-          });
-        }
-        if (result.dependencies.length > 0 || Object.keys(result.missing).length > 0) {
-          if (result.dependencies.length > 0) {
-            logger.error('Unused dependencies');
-            result.dependencies.forEach((dependency) => {
-              logger.error(`-- ${dependency}`);
+    return new Promise((resolve, reject) => {
+      depcheck(process.cwd(), options, (result) => {
+        try {
+          if (result.devDependencies.length > 0) {
+            console.warn('Unused devDependencies');
+            result.devDependencies.forEach((dependency) => {
+              console.warn(`-- ${dependency}`);
             });
           }
+          if (result.dependencies.length > 0 || Object.keys(result.missing).length > 0) {
+            if (result.dependencies.length > 0) {
+              console.error('Unused dependencies');
+              result.dependencies.forEach((dependency) => {
+                console.error(`-- ${dependency}`);
+              });
+            }
 
-          Object.keys(result.missing).forEach((dependency) => {
-            logger.error(`Missing dependency on ${dependency}`);
-            result.missing[dependency].forEach((file) => {
-              logger.error(`-- ${file}`);
+            Object.keys(result.missing).forEach((dependency) => {
+              console.error(`Missing dependency on ${dependency}`);
+              result.missing[dependency].forEach((file) => {
+                console.error(`-- ${file}`);
+              });
             });
-          });
 
-          throw 'Dependency checking failed';
+            reject(new Error('Dependency checking failed'));
+            return;
+          }
+          resolve(0);
+        } catch (error) {
+          reject(error);
         }
-      } catch (error) {
-        done(error);
-      }
+      });
     });
-  };
+  }
 }
