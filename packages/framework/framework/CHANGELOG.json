@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Wed, 23 Jul 2025 00:22:13 GMT",
+      "version": "0.14.9",
+      "tag": "@fluentui-react-native/framework_v0.14.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/framework",
+            "commit": "dd4d507b4ebca7f13757f54cb36f762a3a50d9cc",
+            "comment": "fix types in memo-cache as well as a codescan security issue"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Jul 2025 19:06:23 GMT",
       "version": "0.14.8",
       "tag": "@fluentui-react-native/framework_v0.14.8",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix types in memo-cache as well as a codescan security issue",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

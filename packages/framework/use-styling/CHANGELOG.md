@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-styling
 
-<!-- This log was last generated on Wed, 16 Jul 2025 20:06:46 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 23 Jul 2025 00:22:13 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.13.9
+
+Wed, 23 Jul 2025 00:22:13 GMT
+
+### Patches
+
+- fix types in memo-cache as well as a codescan security issue (jasonmo@microsoft.com)
 
 ## 0.13.7
 

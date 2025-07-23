@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Wed, 23 Jul 2025 00:22:13 GMT",
+      "version": "1.3.9",
+      "tag": "@fluentui-react-native/memo-cache_v1.3.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "dd4d507b4ebca7f13757f54cb36f762a3a50d9cc",
+            "comment": "fix types in memo-cache as well as a codescan security issue"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jul 2025 20:06:46 GMT",
       "version": "1.3.7",
       "tag": "@fluentui-react-native/memo-cache_v1.3.7",

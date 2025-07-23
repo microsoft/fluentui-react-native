@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Wed, 23 Jul 2025 00:22:14 GMT",
+      "version": "1.15.9",
+      "tag": "@uifabricshared/foundation-compose_v1.15.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/foundation-compose",
+            "commit": "dd4d507b4ebca7f13757f54cb36f762a3a50d9cc",
+            "comment": "fix types in memo-cache as well as a codescan security issue"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jul 2025 20:06:45 GMT",
       "version": "1.15.7",
       "tag": "@uifabricshared/foundation-compose_v1.15.7",

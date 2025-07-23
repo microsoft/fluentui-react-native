@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/notification",
-  "version": "0.25.17",
+  "version": "0.25.18",
   "description": "add component-description",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

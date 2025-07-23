@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-tokens",
   "entries": [
     {
+      "date": "Wed, 23 Jul 2025 00:22:14 GMT",
+      "version": "0.6.9",
+      "tag": "@fluentui-react-native/use-tokens_v0.6.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/use-tokens",
+            "commit": "dd4d507b4ebca7f13757f54cb36f762a3a50d9cc",
+            "comment": "fix types in memo-cache as well as a codescan security issue"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jul 2025 20:06:44 GMT",
       "version": "0.6.7",
       "tag": "@fluentui-react-native/use-tokens_v0.6.7",

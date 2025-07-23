@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/persona",
-  "version": "0.16.8",
+  "version": "0.16.9",
   "description": "A cross-platform Persona component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-slots",
-  "version": "0.10.8",
+  "version": "0.10.9",
   "description": "Hook function to return styled slots",
   "repository": {
     "type": "git",

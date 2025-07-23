@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-<!-- This log was last generated on Tue, 15 Jul 2025 23:27:11 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 23 Jul 2025 00:22:13 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.21.15
+
+Wed, 23 Jul 2025 00:22:13 GMT
+
+### Patches
+
+- fix types in memo-cache as well as a codescan security issue (jasonmo@microsoft.com)
 
 ## 0.21.12
 
