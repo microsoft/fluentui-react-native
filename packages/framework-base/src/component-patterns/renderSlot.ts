@@ -1,17 +1,6 @@
 import * as React from 'react';
-
-/**
- * Component slots have a marker which allows the slot render handler to know which ones are safe to call as a function.
- */
-export type SlotFn<TProps> = React.FunctionComponent<TProps> & {
-  _canCompose?: boolean;
-};
-
-/**
- * The standard element type inputs for react and react-native. This might be View or Button, or it might be 'div' in web. Effectively
- * it is what react accepts for React.createElement
- */
-export type NativeReactType = React.ElementType<any> | string;
+import { getClassicCustomRender } from './render';
+import type { RenderResult, RenderType } from './render.types';
 
 /**
  * Renders a slot
@@ -20,8 +9,7 @@ export type NativeReactType = React.ElementType<any> | string;
  * @param extraProps - additional props to mixin
  * @param children - the children to pass down to the slot
  */
-export function renderSlot<TProps>(slot: NativeReactType | SlotFn<TProps>, extraProps: TProps, ...children: React.ReactNode[]) {
-  return typeof slot === 'function' && (slot as SlotFn<TProps>)._canCompose
-    ? (slot as SlotFn<TProps>)(extraProps, ...children)
-    : React.createElement(slot, extraProps, ...children);
+export function renderSlot(slot: RenderType, extraProps: unknown, ...children: React.ReactNode[]): RenderResult {
+  const customRender = getClassicCustomRender(slot, extraProps, children);
+  return customRender ? customRender() : React.createElement(slot, extraProps, ...children);
 }
