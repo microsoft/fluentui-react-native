@@ -20,7 +20,7 @@ export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
 
 // component pattern exports
-export { renderSlot } from './component-patterns/renderSlot';
+export { renderForClassicRuntime, renderForJsxRuntime, renderSlot } from './component-patterns/render';
 export type {
   DirectComponent,
   DirectComponentFunction,

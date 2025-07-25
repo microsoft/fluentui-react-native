@@ -107,6 +107,7 @@ export type ComposableFunction<TProps> = React.FunctionComponent<TProps> & { _st
  * @internal only used in this package, should not be exported
  */
 export type AnyCustomType<TProps> =
+  | React.FunctionComponent<TProps>
   | DirectComponent<TProps>
   | StagedComponent<TProps>
   | ComposableFunction<TProps>
