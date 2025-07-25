@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/themed-settings
 
-<!-- This log was last generated on Wed, 23 Jul 2025 00:22:14 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 25 Jul 2025 21:36:34 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.12.9
+
+Fri, 25 Jul 2025 21:36:34 GMT
+
+### Patches
+
+- tune lage.config and fix @types/node version (jasonmo@microsoft.com)
 
 ## 0.12.8
 

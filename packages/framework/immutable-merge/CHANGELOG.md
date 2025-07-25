@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
-<!-- This log was last generated on Wed, 16 Jul 2025 20:06:45 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 25 Jul 2025 21:36:33 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.2.9
+
+Fri, 25 Jul 2025 21:36:33 GMT
+
+### Patches
+
+- tune lage.config and fix @types/node version (jasonmo@microsoft.com)
 
 ## 1.2.6
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/framework-base
 
-<!-- This log was last generated on Wed, 23 Jul 2025 00:22:13 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 25 Jul 2025 21:36:33 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.1.4
+
+Fri, 25 Jul 2025 21:36:33 GMT
+
+### Patches
+
+- tune lage.config and fix @types/node version (jasonmo@microsoft.com)
 
 ## 0.1.3
 
