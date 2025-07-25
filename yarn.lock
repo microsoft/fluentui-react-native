@@ -4190,6 +4190,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.27.5"
     lage: "npm:^2.0.0"
     markdown-link-check: "npm:^3.8.7"
+    prettier: "npm:^2.4.1"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.0"
     typescript: "npm:^4.9.4"

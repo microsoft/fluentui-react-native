@@ -30,7 +30,7 @@ function getBinPath(command) {
 export async function runScript(command, ...args) {
   const binPath = getBinPath(command);
   const verb = binPath ? process.execPath : yarnVerb;
-  const spawnArgs = binPath ? [binPath, ...args] : ['exec', ...args];
+  const spawnArgs = binPath ? [binPath, ...args] : ['exec', command, ...args];
 
   return new Promise((resolve) => {
     spawn(verb, spawnArgs, {

@@ -23,11 +23,9 @@ export class PrettierCommand extends Command {
     return await runScript(
       'prettier',
       fixOrCheck,
-      '--logLevel',
-      'error',
-      '**/*.{js,json,jsx,md,mjs,ts,tsx,yml}',
+      'src/**/*.{js,json,jsx,md,mjs,ts,tsx,yml}',
       '!{CODE_OF_CONDUCT,SECURITY}.md',
-      '!**/{__fixtures__,lib}/**',
+      '!**/{__fixtures__,__testfixtures__,lib-commonjs,dist}/**',
       '!**/CHANGELOG.*',
     );
   }
