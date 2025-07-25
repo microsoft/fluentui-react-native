@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "tune lage.config and fix @types/node version",
+  "packageName": "@uifabricshared/themed-settings",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

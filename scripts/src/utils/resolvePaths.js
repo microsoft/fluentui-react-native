@@ -1,6 +1,6 @@
 import findUp from 'find-up';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 /**
  * Find all node_modules directories up to the project root

@@ -1,33 +1,32 @@
 // @ts-check
-
-import { argv, logger } from 'just-scripts';
+import { Command, Option } from 'clipanion';
 import { runScript } from '../utils/runScript.js';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
-/**
- * @returns {import('just-scripts').TaskFunction}
- */
-export function jest() {
-  return async (done) => {
+export class JestCommand extends Command {
+  /** @override */
+  static paths = [['jest']];
+
+  /** @override */
+  static usage = Command.Usage({
+    description: 'Tests the current package using jest',
+    details: 'This command tests the current package.',
+    examples: [['Test the current package', '$0 jest']],
+  });
+
+  args = Option.Proxy();
+
+  async execute() {
     if (!fs.existsSync(path.join(process.cwd(), './jest.config.js'))) {
-      logger.warn('No jest configuration found, skipping jest.');
-      done();
+      console.warn('No jest configuration found, skipping jest.');
       return;
     }
     const args = ['--passWithNoTests'];
     if (process.env.TF_BUILD) {
       args.push('--runInBand');
     }
-    if (argv().u || argv().updateSnapshot) {
-      args.push('--updateSnapshot');
-    }
 
-    const result = await runScript('jest', 'src/', ...args);
-    if (result !== 0) {
-      done(new Error(`Jest failed with exit code ${result}`));
-    } else {
-      done();
-    }
-  };
+    return await runScript('jest', 'src/', ...args, ...this.args);
+  }
 }

@@ -1,8 +1,8 @@
 // @ts-check
 
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
 import { getProjectRoot } from './projectRoot.js';
-import os from 'os';
+import os from 'node:os';
 
 const yarnVerb = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
 
@@ -30,7 +30,7 @@ function getBinPath(command) {
 export async function runScript(command, ...args) {
   const binPath = getBinPath(command);
   const verb = binPath ? process.execPath : yarnVerb;
-  const spawnArgs = binPath ? [binPath, ...args] : ['exec', ...args];
+  const spawnArgs = binPath ? [binPath, ...args] : ['exec', command, ...args];
 
   return new Promise((resolve) => {
     spawn(verb, spawnArgs, {

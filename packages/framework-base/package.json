@@ -38,6 +38,6 @@
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
-    "@types/node": "^10.3.5"
+    "@types/node": "^22.0.0"
   }
 }

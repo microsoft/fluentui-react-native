@@ -7,8 +7,7 @@
  * Also, peerDependencies for additional platforms should be marked as optional peerDependencies
  */
 
-import { readFileSync, writeFileSync } from 'fs';
-import { logger } from 'just-task';
+import { readFileSync, writeFileSync } from 'node:fs';
 
 import { findGitRoot, getPackageInfos } from 'workspace-tools';
 
@@ -97,7 +96,7 @@ export function checkDependencies() {
 
   if (everWrote) {
     const errorMsg = `Required package dependencies updated.`;
-    logger.error(errorMsg);
+    console.error(errorMsg);
     throw errorMsg;
   }
 }
