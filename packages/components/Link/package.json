@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/link",
-  "version": "0.23.15",
+  "version": "0.23.16",
   "description": "A cross-platform Link component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

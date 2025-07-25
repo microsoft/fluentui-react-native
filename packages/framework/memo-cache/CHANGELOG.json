@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Fri, 25 Jul 2025 21:36:33 GMT",
+      "version": "1.3.10",
+      "tag": "@fluentui-react-native/memo-cache_v1.3.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "d541dadbec1c9a1750ca45509aa41df3f8a04349",
+            "comment": "tune lage.config and fix @types/node version"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Jul 2025 00:22:13 GMT",
       "version": "1.3.9",
       "tag": "@fluentui-react-native/memo-cache_v1.3.9",

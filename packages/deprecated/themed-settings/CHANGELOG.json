@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Fri, 25 Jul 2025 21:36:34 GMT",
+      "version": "0.12.9",
+      "tag": "@uifabricshared/themed-settings_v0.12.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@uifabricshared/themed-settings",
+            "commit": "d541dadbec1c9a1750ca45509aa41df3f8a04349",
+            "comment": "tune lage.config and fix @types/node version"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Jul 2025 00:22:14 GMT",
       "version": "0.12.8",
       "tag": "@uifabricshared/themed-settings_v0.12.8",
