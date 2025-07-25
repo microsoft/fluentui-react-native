@@ -1,8 +1,8 @@
 // @ts-check
 import { Command, Option } from 'clipanion';
 import { runScript } from '../utils/runScript.js';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export class JestCommand extends Command {
   /** @override */

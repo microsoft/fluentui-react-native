@@ -1,7 +1,7 @@
-import Module from 'module';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import fs from 'fs';
+import Module from 'node:module';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import fs from 'node:fs';
 
 /**
  * @typedef {{default?: string, types?: string, import?: string, require?: string}} ExportSet

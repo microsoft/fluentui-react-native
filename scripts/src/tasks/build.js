@@ -2,8 +2,8 @@
 
 import { Command } from 'clipanion';
 import { findNativeComponents, codegenNativeComponents } from '../utils/codegenNativeComponents.js';
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
 import { runScript } from '../utils/runScript.js';
 import { readTypeScriptConfig } from '@rnx-kit/tools-typescript';
 import { getPackageInfoFromPath } from '@rnx-kit/tools-packages';

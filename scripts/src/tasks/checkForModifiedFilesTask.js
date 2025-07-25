@@ -1,8 +1,8 @@
 // @ts-check
 
 import { Command } from 'clipanion';
-import os from 'os';
-import { execSync } from 'child_process';
+import os from 'node:os';
+import { execSync } from 'node:child_process';
 
 export class CheckChangesCommand extends Command {
   /** @override */

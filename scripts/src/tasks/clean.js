@@ -1,8 +1,8 @@
 // @ts-check
 
 import { Command } from 'clipanion';
-import * as fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export class CleanCommand extends Command {
   /** @override */

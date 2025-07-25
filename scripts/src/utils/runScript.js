@@ -1,8 +1,8 @@
 // @ts-check
 
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
 import { getProjectRoot } from './projectRoot.js';
-import os from 'os';
+import os from 'node:os';
 
 const yarnVerb = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
 

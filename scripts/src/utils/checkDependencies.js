@@ -7,7 +7,7 @@
  * Also, peerDependencies for additional platforms should be marked as optional peerDependencies
  */
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 
 import { findGitRoot, getPackageInfos } from 'workspace-tools';
 
