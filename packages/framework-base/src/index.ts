@@ -20,8 +20,21 @@ export { mergeStyles } from './merge-props/mergeStyles';
 export { mergeProps } from './merge-props/mergeProps';
 
 // component pattern exports
-export { renderSlot } from './component-patterns/renderSlot';
-export type { SlotFn, NativeReactType } from './component-patterns/renderSlot';
+export { renderForClassicRuntime, renderForJsxRuntime, renderSlot } from './component-patterns/render';
+export type {
+  DirectComponent,
+  DirectComponentFunction,
+  LegacyDirectComponent,
+  StagedComponent,
+  StagedRender,
+  TwoStageRender,
+  RenderType,
+  RenderResult,
+  ComposableFunction,
+  FinalRender,
+  SlotFn,
+  NativeReactType,
+} from './component-patterns/render.types';
 export { withSlots } from './component-patterns/withSlots';
-export { stagedComponent } from './component-patterns/stagedComponent';
-export type { FinalRender, StagedRender, ComposableFunction } from './component-patterns/stagedComponent';
+export { stagedComponent, twoStageComponent } from './component-patterns/stagedComponent';
+export { jsx, jsxs } from './jsx-runtime';

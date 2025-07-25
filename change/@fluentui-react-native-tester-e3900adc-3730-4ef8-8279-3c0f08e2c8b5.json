@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "rework jsx helpers for both new and old runtimes",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
