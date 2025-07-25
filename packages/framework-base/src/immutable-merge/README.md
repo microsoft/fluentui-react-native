@@ -174,11 +174,11 @@ complexObject = processImmutable(
   {
     object: {
       object: {
-        style: myStyleProcessor
-      }
-    }
+        style: myStyleProcessor,
+      },
+    },
   },
-  complexObject
+  complexObject,
 );
 ```
 

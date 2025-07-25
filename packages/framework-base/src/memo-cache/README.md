@@ -128,7 +128,7 @@ export const MyComponent = (props: IMyComponentProps) => {
     const colors = theme.colors;
     return {
       backgroundColor: colors.neutralBackground,
-      color: colors.neutralForeground
+      color: colors.neutralForeground,
       // more stuff from theme
     };
   }, [theme]);
