@@ -1,6 +1,6 @@
 # `fluentui-react-native` - Common component patterns
 
-These are the base component patterns shared across the deprecated framework, and the newer framework. This also includes the custom JSX handlers required to render them properly.
+These are the base component patterns shared across the deprecated or v0 framework (found under packages/deprecated), and the newer framework (found under packages/framework). This also includes the custom JSX handlers required to render them properly.
 
 There are two main patterns exposed here: direct rendering and staged rendering.
 
@@ -22,8 +22,8 @@ When this is rendered, there is an entry for `MyNewText` which contains a `MyTex
 
 There are two types of implementations in this folder:
 
-- `DirectComponent` - a functional component that marks itself as direct with a `_callDirect: true` attached static. This will then be called as a normal function component, with children included as part of props.
-- `LegacyDirectComponent` - the pattern currently used in this library that should be moved away from. In this case `_canCompose: true` is set as an attached static, and the function component will be called with children split from props.
+- `DirectComponent` - a functional component that marks itself as direct with a `_callDirect: true` attached property. This will then be called as a normal function component, with children included as part of props.
+- `LegacyDirectComponent` - the pattern currently used in this library that should be moved away from. In this case `_canCompose: true` is set as an attached property, and the function component will be called with children split from props.
 
 The internal logic of the JSX rendering helpers will handle both patterns. In the case of the newer `DirectComponent` pattern, the component will still work, even without any jsx hooks, whereas the `LegacyDirectComponent` pattern will have a somewhat undefined behavior with regards to children.
 
@@ -36,4 +36,4 @@ As above there is a newer and older version of the pattern.
 - `StagedComponent` - the newer version of the pattern, where the returned component function expects children as part of props.
 - `StagedRender` - the older version, where children are split out and JSX hooks are required to render correctly.
 
-Note that while the newer patterns work without any JSX hooks, the hooks will enable the layer removal.
+Note that while the newer patterns work without any JSX hooks, the hooks will enable the element flattening.
