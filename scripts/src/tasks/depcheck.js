@@ -67,13 +67,7 @@ export class DepcheckCommand extends Command {
   reporter = getReporter();
 
   projectRoot = getProjectRoot();
-  ignored = new Set([
-    //  '@fluentui-react-native/scripts',
-    //  '@fluentui-react-native/eslint-config-rules',
-    //  'tslib',
-    //  '@react-native/metro-config',
-    ...injectedDevDeps(this.projectRoot),
-  ]);
+  ignored = new Set(injectedDevDeps(this.projectRoot));
 
   /** @type {Issue[]} */
   issues = [];
