@@ -36,8 +36,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/framework-base": "workspace:*",
-    "@fluentui-react-native/use-tokens": "workspace:*",
-    "tslib": "^2.3.1"
+    "@fluentui-react-native/use-tokens": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -46,8 +45,11 @@
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
     "@types/jest": "^29.0.0",
+    "@types/react": "18.2.0",
+    "@types/react-test-renderer": "^18.2.0",
     "react": "18.2.0",
-    "react-native": "^0.74.0"
+    "react-native": "^0.74.0",
+    "react-test-renderer": "18.2.0"
   },
   "rnx-kit": {
     "kitType": "library",

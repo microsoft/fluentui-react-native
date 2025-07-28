@@ -37,8 +37,7 @@
     "@fluentui-react-native/tester": "workspace:*",
     "react": "18.2.0",
     "react-native": "^0.74.0",
-    "react-native-svg": "^15.4.0",
-    "tslib": "^2.3.1"
+    "react-native-svg": "^15.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -53,6 +52,7 @@
     "@rnx-kit/metro-config": "^2.1.0",
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
     "@types/react": "^18.2.0",
+    "@types/react-test-renderer": "^18.2.0",
     "metro-config": "^0.80.3",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",

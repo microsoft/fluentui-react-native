@@ -37,6 +37,7 @@
   "dependencies": {
     "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
+    "@types/node": "^22.0.0",
     "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
