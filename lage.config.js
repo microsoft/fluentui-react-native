@@ -6,7 +6,7 @@ module.exports = {
       inputs: ['*', 'src/**/*', 'assets/**/*'],
       outputs: ['lib/**/*', 'lib-commonjs/**/*'],
     },
-    buildci: ['build', 'test', 'lint', 'depcheck'],
+    buildci: ['build', 'test', 'lint', 'depcheck', 'check-publishing'],
     bundle: {
       inputs: ['**/*', '!node_modules/**/*', '!dist/**/*', '!lib/**/*', '!lib-commonjs/**/*'],
       outputs: ['dist/**/*'],
