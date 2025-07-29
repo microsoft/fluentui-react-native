@@ -11,7 +11,7 @@
     "build": "node ./src/cli.mjs build",
     "bundlesize": "bundlesize --debug",
     "depcheck": "node ./src/cli.mjs depcheck",
-    "lint": "eslint",
+    "lint": "node ./src/cli.mjs lint",
     "prettier": "node ./src/cli.mjs prettier",
     "prettier-fix": "node ./src/cli.mjs prettier --fix true"
   },
@@ -46,6 +46,7 @@
     "react-native-svg": "^15.4.0",
     "react-native-svg-transformer": "^1.0.0",
     "typescript": "^5.8.0",
+    "typescript-eslint": "^8.0.0",
     "workspace-tools": "^0.26.3"
   },
   "bundlesize": [
