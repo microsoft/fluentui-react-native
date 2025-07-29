@@ -88,6 +88,7 @@
         "core-macos",
         "core-windows",
         "react",
+        "react-test-renderer",
         "svg"
       ]
     }

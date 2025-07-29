@@ -40,6 +40,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@types/react": "^18.2.0",
     "react": "18.2.0"
   },
   "devDependencies": {
@@ -47,7 +48,6 @@
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
     "@types/node": "^22.0.0",
-    "@types/react": "^18.2.0",
     "react-native": "^0.74.0"
   }
 }

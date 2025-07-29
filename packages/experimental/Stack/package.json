@@ -48,7 +48,7 @@
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
     "react-native-windows": "^0.74.0",
-    "react-test-renderer": "^18.2.0",
+    "react-test-renderer": "18.2.0",
     "tslib": "^2.3.1"
   },
   "peerDependencies": {
@@ -81,7 +81,8 @@
         "core-ios",
         "core-macos",
         "core-windows",
-        "react"
+        "react",
+        "react-test-renderer"
       ]
     }
   },

@@ -73,7 +73,8 @@
         "babel-preset-react-native",
         "core",
         "core-android",
-        "core-ios"
+        "core-ios",
+        "react-test-renderer"
       ]
     }
   }

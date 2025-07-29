@@ -73,7 +73,8 @@
         "core",
         "core-android",
         "core-ios",
-        "react"
+        "react",
+        "react-test-renderer"
       ]
     }
   }

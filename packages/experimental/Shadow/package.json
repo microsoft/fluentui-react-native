@@ -79,7 +79,8 @@
         "core-ios",
         "core-macos",
         "core-windows",
-        "react"
+        "react",
+        "react-test-renderer"
       ]
     }
   },

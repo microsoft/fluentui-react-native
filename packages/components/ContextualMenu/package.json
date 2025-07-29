@@ -42,8 +42,7 @@
     "@fluentui-react-native/tokens": "workspace:*",
     "@uifabricshared/foundation-composable": "workspace:*",
     "@uifabricshared/foundation-compose": "workspace:*",
-    "@uifabricshared/foundation-settings": "workspace:*",
-    "metro-config": "^0.80.3"
+    "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -55,6 +54,7 @@
     "@react-native/metro-config": "^0.74.0",
     "@types/react": "~18.2.0",
     "@types/react-test-renderer": "^18.2.0",
+    "metro-config": "^0.80.3",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
@@ -93,7 +93,9 @@
         "core-macos",
         "core-windows",
         "react",
-        "svg"
+        "svg",
+        "metro-config",
+        "react-test-renderer"
       ]
     }
   },
