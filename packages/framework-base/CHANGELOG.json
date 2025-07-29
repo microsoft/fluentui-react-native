@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework-base",
   "entries": [
     {
+      "date": "Tue, 29 Jul 2025 06:35:19 GMT",
+      "version": "0.2.0",
+      "tag": "@fluentui-react-native/framework-base_v0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/framework-base",
+            "commit": "78329a2222622ac8d90345d3aa908355e70f5d1a",
+            "comment": "implement both new and old render patterns for classic and jsx-runtimes"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jul 2025 21:36:33 GMT",
       "version": "0.1.4",
       "tag": "@fluentui-react-native/framework-base_v0.1.4",

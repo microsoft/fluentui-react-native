@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/android-theme",
-  "version": "0.25.10",
+  "version": "0.25.11",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Android",
   "repository": {
     "type": "git",

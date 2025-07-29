@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 29 Jul 2025 06:35:19 GMT",
+      "version": "0.170.37",
+      "tag": "@fluentui-react-native/tester_v0.170.37",
+      "comments": {
+        "patch": [
+          {
+            "author": "jasonmo@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "78329a2222622ac8d90345d3aa908355e70f5d1a",
+            "comment": "rework jsx helpers for both new and old runtimes"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jul 2025 20:06:46 GMT",
       "version": "0.170.31",
       "tag": "@fluentui-react-native/tester_v0.170.31",

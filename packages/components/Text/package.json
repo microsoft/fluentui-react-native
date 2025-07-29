@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/text",
-  "version": "0.24.14",
+  "version": "0.24.15",
   "description": "A cross-platform Text component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

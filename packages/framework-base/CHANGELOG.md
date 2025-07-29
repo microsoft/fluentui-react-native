@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/framework-base
 
-<!-- This log was last generated on Fri, 25 Jul 2025 21:36:33 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 29 Jul 2025 06:35:19 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 0.2.0
+
+Tue, 29 Jul 2025 06:35:19 GMT
+
+### Minor changes
+
+- implement both new and old render patterns for classic and jsx-runtimes (jasonmo@microsoft.com)
 
 ## 0.1.4
 
