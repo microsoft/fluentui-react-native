@@ -43,6 +43,7 @@ export const devToolVersions = {
   'metro-config': '^0.80.3',
   'metro-react-native-babel-transformer': '^0.76.5',
   prettier: '^2.4.1',
+  react: '18.2.0',
   'react-test-renderer': '18.2.0',
   rimraf: '^5.0.1',
   typescript: '^4.9.4',

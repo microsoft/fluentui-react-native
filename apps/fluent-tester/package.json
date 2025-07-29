@@ -90,7 +90,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@office-iss/react-native-win32": "^0.74.0",
-    "@react-native-community/slider": "^4.2.0",
+    "@react-native-community/slider": "^4.5.7",
     "@react-native-menu/menu": "^0.7.3",
     "@react-native-picker/picker": "^2.7.0",
     "@types/node": "^22.0.0",

@@ -20,11 +20,6 @@ export function configureBabel(/** @type {BabelConfigOptions} */ options = {}, m
       '@babel/preset-typescript',
       ['module:@react-native/babel-preset', { runtime: jsxRuntime ? 'automatic' : 'classic' }],
     ],
-    plugins: [
-      ['@babel/plugin-proposal-private-property-in-object', { loose: false }],
-      ['@babel/plugin-proposal-class-properties', { loose: false }],
-      ['@babel/plugin-transform-private-methods', { loose: false }],
-    ],
     ...mixin,
   };
 }

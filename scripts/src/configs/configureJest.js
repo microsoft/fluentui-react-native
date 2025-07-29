@@ -1,6 +1,6 @@
 // @ts-check
 
-// @ts-expect-error the preset doesn't contain typing information
+// @ts-expect-error no types available for jest-preset
 import jestPreset from '@rnx-kit/jest-preset';
 import { ensurePlatform } from '../utils/platforms.js';
 
