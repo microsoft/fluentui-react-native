@@ -3,10 +3,10 @@ PODS:
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.74.30)
   - fmt (9.1.0)
-  - FRNAvatar (0.21.4):
+  - FRNAvatar (0.21.11):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNCallout (0.27.2):
+  - FRNCallout (0.27.9):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2024.01.01.00)
@@ -28,13 +28,13 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - FRNCheckbox (0.17.9):
+  - FRNCheckbox (0.17.16):
     - React
-  - FRNMenuButton (0.13.19):
+  - FRNMenuButton (0.13.26):
     - React
-  - FRNRadioButton (0.21.16):
+  - FRNRadioButton (0.21.23):
     - React
-  - FRNVibrancyView (0.3.0):
+  - FRNVibrancyView (0.3.4):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.13.1):
@@ -123,7 +123,7 @@ PODS:
     - fmt (= 9.1.0)
     - glog
   - RCTDeprecation (0.74.30)
-  - RCTFocusZone (0.21.0):
+  - RCTFocusZone (0.21.7):
     - React
   - RCTRequired (0.74.30)
   - RCTTypeSafety (0.74.30):
@@ -1262,11 +1262,11 @@ DEPENDENCIES:
   - FBLazyVector (from `../../../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - fmt (from `../../../node_modules/react-native-macos/third-party-podspecs/fmt.podspec`)
   - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
-  - "FRNCallout (from `../../../node_modules/@fluentui-react-native/callout`)"
+  - "FRNCallout (from `../node_modules/@fluentui-react-native/callout`)"
   - FRNCheckbox (from `../../../packages/experimental/Checkbox/FRNCheckbox.podspec`)
   - FRNMenuButton (from `../../../packages/components/MenuButton/FRNMenuButton.podspec`)
   - FRNRadioButton (from `../../../packages/components/RadioGroup/FRNRadioButton.podspec`)
-  - "FRNVibrancyView (from `../../../node_modules/@fluentui-react-native/vibrancy-view`)"
+  - "FRNVibrancyView (from `../node_modules/@fluentui-react-native/vibrancy-view`)"
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
@@ -1341,7 +1341,7 @@ EXTERNAL SOURCES:
   FRNAvatar:
     :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
   FRNCallout:
-    :path: "../../../node_modules/@fluentui-react-native/callout"
+    :path: "../node_modules/@fluentui-react-native/callout"
   FRNCheckbox:
     :path: "../../../packages/experimental/Checkbox/FRNCheckbox.podspec"
   FRNMenuButton:
@@ -1349,7 +1349,7 @@ EXTERNAL SOURCES:
   FRNRadioButton:
     :path: "../../../packages/components/RadioGroup/FRNRadioButton.podspec"
   FRNVibrancyView:
-    :path: "../../../node_modules/@fluentui-react-native/vibrancy-view"
+    :path: "../node_modules/@fluentui-react-native/vibrancy-view"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -1466,17 +1466,17 @@ SPEC CHECKSUMS:
   DoubleConversion: 5b92c4507c560bb62e7aa1acdf2785ea3ff08b3b
   FBLazyVector: 0aa0591844f7fe4736f3aba70d30232edbd21eb5
   fmt: 03574da4b7ba40de39da59677ca66610ce8c4a02
-  FRNAvatar: ec4d219c71bfd3d74306a1fcf94f71393b63359f
-  FRNCallout: 1989375a3f3f704d7f85a560d979c222a5d2dc5c
-  FRNCheckbox: 80e3700277629ce802b1f07123e564f954d0e9b1
-  FRNMenuButton: 43dd93252a1a6a0a3f4546b6d8021c2a572bf586
-  FRNRadioButton: 8260e87a2df63c5a67ba23ce87dc8234ef137643
-  FRNVibrancyView: 975f7e8ea14999015c3224743057418574833afa
+  FRNAvatar: 1eccbe629f3034e2caa11f62e16db120ac3c7836
+  FRNCallout: 3eca65ff4ee29de3881a8402842b230626024ff6
+  FRNCheckbox: 1d87e81b71e6706b6e94e69ab6923e50755c4a29
+  FRNMenuButton: d87749093d3418d9c9377144f9e17e09af707335
+  FRNRadioButton: 8b6c2d6c2d5c513ce493568ac0597d114359cb57
+  FRNVibrancyView: 0fb5d289c2a4b934596fb26d81166151d66fa28c
   glog: ba31c1afa7dcf1915a109861bccdb4421be6175b
   MicrosoftFluentUI: dde98d8ed3fc306d9ddd0a6f0bc0c1f24fe5275e
   RCT-Folly: f47da9a444aae485a0528b3bccf0336156009d60
   RCTDeprecation: 6c1d8fdaf3e34933c33a56531bd984bc2d22ef9e
-  RCTFocusZone: 50bf108af173c92cb8c4a776c17c37d010db31bc
+  RCTFocusZone: 999b4c2acb2193fd189f9ef6d1e970c2a6676250
   RCTRequired: 5266165e3b6c7ca1554c5a75fb4c1ebe1bc60b53
   RCTTypeSafety: ced894df76a17b8f7331d24e2efa862a7a616e89
   React: 620dbf1e10232c8517a8b89d0def5b29e04ad24e
