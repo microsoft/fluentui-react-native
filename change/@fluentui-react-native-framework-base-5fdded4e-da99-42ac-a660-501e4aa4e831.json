@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "implement both new and old render patterns for classic and jsx-runtimes",
-  "packageName": "@fluentui-react-native/framework-base",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

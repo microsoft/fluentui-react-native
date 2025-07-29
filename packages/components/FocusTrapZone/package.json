@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/focus-trap-zone",
-  "version": "0.12.13",
+  "version": "0.12.14",
   "description": "A cross-platform FocusTrapZone component using the Fluent Design System",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",

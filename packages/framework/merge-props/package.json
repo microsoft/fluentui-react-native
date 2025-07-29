@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/merge-props",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "description": "Utility for merging props with styles and caching style combinations",
   "repository": {
     "type": "git",
