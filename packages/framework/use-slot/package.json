@@ -38,10 +38,9 @@
     "@fluentui-react-native/framework-base": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
-    "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
     "@types/react": "18.2.0",
     "@types/react-test-renderer": "^18.2.0",
@@ -68,7 +67,6 @@
         ]
       },
       "capabilities": [
-        "babel-preset-react-native",
         "core",
         "core-android",
         "core-ios",

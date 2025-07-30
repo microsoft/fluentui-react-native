@@ -36,6 +36,7 @@
     "@fluentui-react-native/framework-base": "workspace:*"
   },
   "devDependencies": {
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",

@@ -262,5 +262,13 @@ function injectedDevDeps(projectRoot) {
  * @returns {boolean}
  */
 function isTestFile(fileName) {
-  return micromatch.isMatch(fileName, ['**/*.test.*', '**/*.spec.*', '**/__tests__/**', '**/__testfixtures__/**']);
+  return micromatch.isMatch(fileName, [
+    '**/*.test.*',
+    '**/*.spec.*',
+    '**/__tests__/**',
+    '**/__testfixtures__/**',
+    '**/babel.config.*',
+    '**/jest.config.*',
+    '**/eslint.config.*',
+  ]);
 }

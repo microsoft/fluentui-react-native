@@ -27,9 +27,13 @@ export function configureJest(customConfig) {
  * @returns {JestConfig}
  */
 export function configureReactNativeJest(platform, customConfig) {
-  return jestPreset(ensurePlatform(platform, 'ios'), {
+  const config = jestPreset(ensurePlatform(platform, 'ios'), {
     roots: ['<rootDir>/src'],
     verbose: false,
     ...customConfig,
   });
+  config.transformIgnorePatterns = [
+    '/node_modules/.store/(?!((jest-)?react-native(-macos)?|@react-native(-community)?|@office-iss-react-native-win32|@?react-native-windows))',
+  ];
+  return config;
 }
