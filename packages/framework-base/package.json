@@ -46,9 +46,9 @@
   "devDependencies": {
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@types/jest": "^29.0.0",
-    "@types/node": "^22.0.0",
-    "react-native": "^0.74.0"
+    "@types/node": "^22.0.0"
   }
 }

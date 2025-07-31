@@ -1,0 +1,37 @@
+{
+  "name": "@fluentui-react-native/jest-config",
+  "private": true,
+  "version": "0.1.1",
+  "description": "Jest configuration for UI Fabric React Native",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/jest-config"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "depcheck": "fluentui-scripts depcheck",
+    "lint": "fluentui-scripts eslint"
+  },
+  "dependencies": {
+    "@rnx-kit/jest-preset": "^0.2.1",
+    "jest": "^29.0.0"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "typescript": "^5.8.0"
+  },
+  "beachball": {
+    "shouldPublish": false,
+    "disallowedChangeTypes": [
+      "major"
+    ]
+  }
+}

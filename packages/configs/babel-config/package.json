@@ -11,10 +11,8 @@
   "main": "./babel.config.js",
   "exports": {
     ".": "./babel.config.js",
-    "./babel.config.js": "./babel.config.js"
-  },
-  "scripts": {
-    "lint": "eslint . --ext .js"
+    "./babel.config.js": "./babel.config.js",
+    "./babel.react.config.js": "./babel.react.config.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -28,11 +26,6 @@
     "@babel/runtime": "^7.22.0",
     "@react-native/babel-preset": "^0.74.0",
     "@rnx-kit/babel-preset-metro-react-native": "2.0.0"
-  },
-  "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "workspace:*",
-    "@types/eslint": "^9.0.0",
-    "eslint": "^9.0.0"
   },
   "beachball": {
     "shouldPublish": false,

@@ -59,6 +59,7 @@ const devToolVersions = {
 const workspaceToolVersions = {
   '@fluentui-react-native/babel-config': 'workspace:*',
   '@fluentui-react-native/eslint-config-rules': 'workspace:*',
+  '@fluentui-react-native/jest-config': 'workspace:*',
   '@fluentui-react-native/scripts': 'workspace:*',
 };
 

@@ -39,6 +39,7 @@
     "@fluentui-react-native/design-tokens-win32": "^0.53.0",
     "@fluentui-react-native/design-tokens-windows": "^0.53.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",

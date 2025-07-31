@@ -27,7 +27,7 @@ function ensureUniqueModule(moduleName, excludeList, nodeModules) {
 }
 
 // build up the added excludes and extraNodeModules
-['react-is', 'invariant', '@babel/runtime', 'base64-js'].forEach((moduleName) => ensureUniqueModule(moduleName));
+['react-native-svg'].forEach((moduleName) => ensureUniqueModule(moduleName));
 
 const blockList = exclusionList([
   // This stops "react-native run-windows" from causing the metro server to

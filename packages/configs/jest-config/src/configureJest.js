@@ -2,7 +2,7 @@
 
 // @ts-expect-error no types available for jest-preset
 import jestPreset from '@rnx-kit/jest-preset';
-import { ensurePlatform } from '../utils/platforms.js';
+import { ensurePlatform } from './platforms.js';
 
 /**
  * @typedef {import('jest').Config} JestConfig
@@ -22,7 +22,7 @@ export function configureJest(customConfig) {
 
 /**
  *
- * @param {import('../utils/platforms.js').PlatformValue} [platform]
+ * @param {import('./platforms.js').PlatformValue} [platform]
  * @param {JestConfig} [customConfig]
  * @returns {JestConfig}
  */

@@ -1,7 +1,8 @@
-import type { ColorValue } from 'react-native';
-
 import { flattenStyle, mergeAndFlattenStyles, mergeStyles } from './mergeStyles';
 import type { StyleProp } from './mergeStyles.types';
+
+type OpaqueColorValue = symbol & { __TYPE__: 'Color' };
+type ColorValue = string | OpaqueColorValue;
 
 interface IFakeStyle {
   backgroundColor?: ColorValue;
