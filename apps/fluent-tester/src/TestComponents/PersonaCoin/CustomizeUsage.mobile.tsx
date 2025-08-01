@@ -1,13 +1,16 @@
-import * as React from 'react';
+import React from 'react';
 import { Switch, View, Text, TextInput, StyleSheet } from 'react-native';
 
 import { PersonaCoin } from '@fluentui/react-native';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import Slider from '@react-native-community/slider';
+import type { SliderProps } from '@react-native-community/slider';
 
 import type { undefinedText } from './styles';
 import { steveBallmerPhotoUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+
+const NativeSlider = Slider as unknown as React.ComponentType<SliderProps>;
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -19,7 +22,7 @@ const StyledSlider = (props) => {
   return (
     <View style={{ flexDirection: 'row' }}>
       <Text style={{ flex: 0.5, color: theme.colors.inputText }}>{title}</Text>
-      <Slider step={step || 1} minimumValue={min} maximumValue={max} value={initial} style={styles.slider} onValueChange={onChange} />
+      <NativeSlider step={step || 1} minimumValue={min} maximumValue={max} value={initial} style={styles.slider} onValueChange={onChange} />
       <Text style={{ flex: 0.2, color: theme.colors.inputText }}>{current}</Text>
     </View>
   );

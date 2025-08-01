@@ -12,14 +12,18 @@
     ".": "./eslint.config.js",
     "./eslint.config.js": "./eslint.config.js"
   },
+  "scripts": {
+    "build": "fluentui-scripts build"
+  },
   "license": "MIT",
   "dependencies": {
     "@microsoft/eslint-plugin-sdl": "^1.1.0",
-    "@rnx-kit/eslint-plugin": "^0.8.6",
-    "typescript-eslint": "^8.36.0"
+    "@rnx-kit/eslint-plugin": "^0.8.6"
   },
   "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*",
     "@types/eslint": "^9.0.0",
+    "@types/node": "^22.0.0",
     "eslint": "^9.0.0"
   },
   "beachball": {

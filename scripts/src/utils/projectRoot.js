@@ -88,6 +88,41 @@ export class ProjectRoot {
   }
 
   /**
+   * Adds dependencies to the project manifest.
+   * @param {Record<string, string>} depsToAdd
+   * @param {'dependencies' | 'devDependencies'} depType
+   */
+  addDependencies(depsToAdd, depType = 'dependencies') {
+    // add the dependencies to the manifest, outputting the dependencies in sorted order
+    const existingDeps = (this.manifest[depType] ??= {});
+    const newDeps = { ...existingDeps, ...depsToAdd };
+    const depKeys = Object.keys(newDeps).sort((a, b) => a.localeCompare(b));
+    this.manifest[depType] = Object.fromEntries(depKeys.map((key) => [key, newDeps[key]]));
+  }
+
+  /**
+   * Removes dependencies from the project manifest.
+   * @param {string[]} depsToRemove
+   * @param {'dependencies' | 'devDependencies'} depType
+   */
+  removeDependencies(depsToRemove, depType = 'dependencies') {
+    // remove the dependencies from the manifest
+    if (this.manifest[depType]) {
+      for (const dep of depsToRemove) {
+        if (this.manifest[depType][dep]) {
+          delete this.manifest[depType][dep];
+        }
+      }
+    }
+  }
+
+  writeManifest() {
+    // write the manifest to disk
+    const pkgJsonPath = path.join(this.root, 'package.json');
+    fs.writeFileSync(pkgJsonPath, JSON.stringify(this.manifest, null, 2) + '\n', 'utf-8');
+  }
+
+  /**
    * Open a module relative to this project root
    * @param {string} moduleName - name of the module to require
    * @return {ProjectRoot} - a project root opened at the root of the given module

@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "move repo to pnpm, create babel and jest config packages, fix dependencies",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}

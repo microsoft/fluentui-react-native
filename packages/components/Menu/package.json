@@ -40,24 +40,28 @@
     "@fluentui-react-native/theme-tokens": "workspace:*",
     "@fluentui-react-native/theming-utils": "workspace:*",
     "@fluentui-react-native/tokens": "workspace:*",
-    "@fluentui-react-native/use-styling": "workspace:*",
-    "tslib": "^2.3.1"
+    "@fluentui-react-native/use-styling": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/button": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@fluentui-react-native/test-tools": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
+    "@types/node": "^22.0.0",
     "@types/react": "~18.2.0",
+    "@types/react-test-renderer": "^18.2.0",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
     "react-native-svg": "^15.4.0",
-    "react-native-windows": "^0.74.0"
+    "react-native-windows": "^0.74.0",
+    "react-test-renderer": "18.2.0"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.74.0",
@@ -92,7 +96,8 @@
         "core-macos",
         "core-windows",
         "react",
-        "svg"
+        "svg",
+        "react-test-renderer"
       ]
     }
   },

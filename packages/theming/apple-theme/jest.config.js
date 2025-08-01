@@ -1,2 +1,2 @@
-const { configureReactNativeJest } = require('@fluentui-react-native/scripts');
+const { configureReactNativeJest } = require('@fluentui-react-native/jest-config');
 module.exports = configureReactNativeJest('macos');

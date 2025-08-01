@@ -1,16 +1,15 @@
 const rnx = require('@rnx-kit/eslint-plugin');
 const sdl = require('@microsoft/eslint-plugin-sdl');
-const tsLint = require('typescript-eslint');
 
 module.exports = [
   ...sdl.configs.common,
-  ...tsLint.configs.strict,
   ...rnx.configs.strict,
   // Base configuration for all files
   {
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.json', 'apps/*/tsconfig.json', 'packages/*/*/tsconfig.json'],
+        projectService: true,
+        tsconfigRootDir: process.cwd(),
       },
     },
     rules: {

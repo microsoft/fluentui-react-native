@@ -90,24 +90,29 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@office-iss/react-native-win32": "^0.74.0",
-    "@react-native-community/slider": "^4.2.0",
+    "@react-native-community/slider": "^4.5.7",
     "@react-native-menu/menu": "^0.7.3",
     "@react-native-picker/picker": "^2.7.0",
+    "@types/node": "^22.0.0",
     "@types/react": "~18.2.0",
     "@warren-ms/react-native-icons": "^0.0.13",
     "react": "18.2.0",
     "react-native": "^0.74.0",
     "react-native-macos": "^0.74.0",
     "react-native-svg": "^15.4.0",
-    "react-native-windows": "^0.74.0",
-    "tslib": "^2.3.1"
+    "react-native-windows": "^0.74.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/runtime": "^7.20.0",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/experimental-native-font-metrics": "workspace:*",
     "@fluentui-react-native/focus-zone": "workspace:*",
+    "@fluentui-react-native/menu-button": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@react-native-community/cli": "^13.6.4",
+    "@react-native-community/cli-platform-android": "^13.6.4",
+    "@react-native-community/cli-platform-ios": "^13.6.4",
     "@react-native/babel-preset": "^0.74.0",
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
@@ -115,6 +120,7 @@
     "@rnx-kit/metro-config": "^2.1.0",
     "@rnx-kit/metro-resolver-symlinks": "^0.2.5",
     "@types/jasmine": "5.1.4",
+    "@types/react-test-renderer": "^18.2.0",
     "@wdio/cli": "^8.40.0",
     "@wdio/globals": "^8.40.0",
     "@wdio/jasmine-framework": "^8.40.0",
@@ -196,7 +202,8 @@
         "react",
         "react-test-renderer",
         "svg",
-        "test-app"
+        "test-app",
+        "community/cli"
       ]
     }
   },

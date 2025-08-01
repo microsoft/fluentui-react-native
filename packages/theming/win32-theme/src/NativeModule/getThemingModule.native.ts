@@ -10,7 +10,7 @@ import type { OfficeThemingModule } from './officeThemingModule';
  */
 
 function disableGetPalette(): boolean {
-  const disabled = __DEV__ && navigator && navigator.userAgent !== undefined;
+  const disabled = __DEV__ && typeof globalThis.navigator !== 'undefined' && globalThis.navigator.userAgent !== undefined;
   disabled && console.warn(console.warn('Web Debugging forces Theming Native Module to fallback to fake color values.'));
   return disabled;
 }

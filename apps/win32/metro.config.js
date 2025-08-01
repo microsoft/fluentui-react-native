@@ -5,9 +5,20 @@
  * @format
  */
 // @ts-check
-const { makeMetroConfig } = require('@rnx-kit/metro-config');
+const { exclusionList, makeMetroConfig, resolveUniqueModule } = require('@rnx-kit/metro-config');
 const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
 const { getDefaultConfig } = require('metro-config');
+
+const excludeMixins = [];
+const extraNodeModules = {};
+function ensureUniqueModule(moduleName, excludeList, nodeModules) {
+  const [nmEntry, excludePattern] = resolveUniqueModule(moduleName);
+  excludeMixins.push(excludePattern);
+  extraNodeModules[moduleName] = nmEntry;
+}
+
+// build up the added excludes and extraNodeModules
+['react-native-svg'].forEach((moduleName) => ensureUniqueModule(moduleName));
 
 module.exports = async () => {
   const {
@@ -17,6 +28,10 @@ module.exports = async () => {
   return makeMetroConfig({
     resolver: {
       assetExts: [...assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
+      blockList: exclusionList(excludeMixins),
+      extraNodeModules: {
+        ...extraNodeModules,
+      },
       sourceExts: [...sourceExts, 'svg'],
       resolveRequest: MetroSymlinksResolver(),
     },

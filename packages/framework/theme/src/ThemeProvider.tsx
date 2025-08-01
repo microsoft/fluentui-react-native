@@ -11,7 +11,7 @@ export interface ThemeProviderProps extends React.PropsWithChildren<Record<strin
   theme: ThemeReference;
 }
 
-export const ThemeProvider: React.FunctionComponent<ThemeProviderProps> = (props: ThemeProviderProps) => {
+export const ThemeProvider: React.FunctionComponent<ThemeProviderProps> = (props: React.PropsWithChildren<ThemeProviderProps>) => {
   const { theme: themeRef, children } = props;
   const [theme, setThemeState] = React.useState(() => themeRef.theme);
 

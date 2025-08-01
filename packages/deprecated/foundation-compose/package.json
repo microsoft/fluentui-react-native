@@ -45,6 +45,7 @@
     "@uifabricshared/theming-ramp": "workspace:*"
   },
   "devDependencies": {
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.74.0",

@@ -31,11 +31,11 @@
     "directory": "packages/experimental/VibrancyView"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "workspace:*",
-    "tslib": "^2.3.1"
+    "@fluentui-react-native/adapters": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@react-native/babel-preset": "^0.74.0",
