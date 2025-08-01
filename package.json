@@ -43,7 +43,6 @@
     "@react-native/metro-babel-transformer": "^0.74.0",
     "@react-native/metro-config": "^0.74.0",
     "@rnx-kit/align-deps": "^3.0.0",
-    "@rnx-kit/babel-preset-metro-react-native": "^2.0.0",
     "@rnx-kit/lint-lockfile": "^0.1.0",
     "babel-jest": "^29.7.0",
     "beachball": "^2.20.0",

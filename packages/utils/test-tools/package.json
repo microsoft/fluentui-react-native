@@ -29,14 +29,14 @@
     "directory": "packages/utils/test-tools"
   },
   "dependencies": {
-    "@fluentui-react-native/theme-types": "workspace:*",
-    "@types/jest": "^29.0.0"
+    "@fluentui-react-native/theme-types": "workspace:*"
   },
   "devDependencies": {
     "@fluentui-react-native/babel-config": "workspace:*",
     "@fluentui-react-native/eslint-config-rules": "workspace:*",
     "@fluentui-react-native/jest-config": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
+    "@types/jest": "^29.0.0",
     "@types/react": "^18.2.0",
     "@types/react-test-renderer": "^18.2.0",
     "react": "18.2.0",

@@ -10,7 +10,6 @@ module.exports = {
     '@babel/preset-react',
     ['@babel/preset-typescript', { allowSyntheticDefaultImports: true }],
     ['module:@react-native/babel-preset', { runtime: 'automatic' }],
-    ['@rnx-kit/babel-preset-metro-react-native', { useTransformReactJSXExperimental: true }],
   ],
   overrides: [
     {
