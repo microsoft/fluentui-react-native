@@ -4748,6 +4748,8 @@ __metadata:
     "@fortawesome/react-native-fontawesome": "npm:^0.3.0"
     "@office-iss/react-native-win32": "npm:^0.74.0"
     "@react-native-community/cli": "npm:^13.6.4"
+    "@react-native-community/cli-platform-android": "npm:^13.6.4"
+    "@react-native-community/cli-platform-ios": "npm:^13.6.4"
     "@react-native-community/slider": "npm:^4.5.7"
     "@react-native-menu/menu": "npm:^0.7.3"
     "@react-native-picker/picker": "npm:^2.7.0"
@@ -6394,7 +6396,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-android@npm:13.6.9":
+"@react-native-community/cli-platform-android@npm:13.6.9, @react-native-community/cli-platform-android@npm:^13.6.4":
   version: 13.6.9
   resolution: "@react-native-community/cli-platform-android@npm:13.6.9"
   dependencies:
@@ -6422,7 +6424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-ios@npm:13.6.9":
+"@react-native-community/cli-platform-ios@npm:13.6.9, @react-native-community/cli-platform-ios@npm:^13.6.4":
   version: 13.6.9
   resolution: "@react-native-community/cli-platform-ios@npm:13.6.9"
   dependencies:
